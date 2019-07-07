@@ -1,3 +1,5 @@
+.. _2017_risk_models:
+
 ====================
 Risk Exposure Models
 ====================

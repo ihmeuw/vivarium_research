@@ -1,3 +1,5 @@
+.. _2017_risk_effect_models:
+
 ================================
 Risk Outcome Relationship Models
 ================================

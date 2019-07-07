@@ -1,4 +1,4 @@
-.. _models_risk:
+.. _models_risk_effect:
 
 =====================
 Modeling Risk Effects
