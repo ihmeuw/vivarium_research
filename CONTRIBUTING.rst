@@ -86,4 +86,4 @@ People should respond with either approval, changes, or comments.  You should
 respond to all the feedback and make updates to your pull request if necessary
 and re-request reviews. Once everyone has responded and is happy (or has, at
 least, marked your PR as approved), you can click the ``Merge Pull Request``
-button and add your docs to the master branch.  
+button and add your docs to the master branch.
