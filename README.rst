@@ -14,4 +14,4 @@ The hosted documentation can be found
 
 .. contents::
 
-.. include:: ./CONTRIBUTING.rst
+.. include:: CONTRIBUTING.rst
