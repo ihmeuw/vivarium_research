@@ -14,9 +14,8 @@ The hosted documentation can be found
 
 .. contents::
 
-============
 Contributing
-============
+------------
 
 If you want to add or modify documentation, you'll first need to clone and
 install this repository.  As always, you should do this in a clean environment.
@@ -30,10 +29,10 @@ install this repository.  As always, you should do this in a clean environment.
    (vivarium_research) $> pip install -r requirements.txt
 
 Updating the Documentation
---------------------------
+++++++++++++++++++++++++++
 
 Make a new git branch
-+++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^
 
 The first step to modifying the documentation is to checkout a new branch
 with ``git``::
@@ -46,7 +45,7 @@ be descriptive.  For example, if you're adding new documentation about an
 ischemic heart disease model, you might call your branch ``ihd-model``.
 
 Modify the documentation
-++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 To make updates to the documentation, you should add or modify the
 ``.rst`` files in the ``docs/source/`` directory.  Our documentation is written
@@ -66,7 +65,7 @@ rendered in html.  You can open the file `docs/build/html/index.html` in your
 browser to view your changes.
 
 Push your changes
-+++++++++++++++++
+^^^^^^^^^^^^^^^^^
 
 Once you're satisfied, you should push your changes to the remote repository
 (the one on GitHub).  Make sure you're in the main `vivairum_research`
@@ -87,7 +86,7 @@ have to tell ``git`` which branch to push to.  Instead of just running
 Don't worry if you forget.  ``git`` will remind you.
 
 Submit a pull request for review
-++++++++++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The last part of the process is to submit a pull request.  You do this on
 GitHub itself.  Open up the
