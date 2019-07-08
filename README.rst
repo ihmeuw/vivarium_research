@@ -37,7 +37,6 @@ Make a new git branch
 The first step to modifying the documentation is to checkout a new branch
 with ``git``::
 
-::
    (vivarium_research) $> git checkout -b YOUR-BRANCH-NAME
 
 The ``YOUR-BRANCH-NAME`` is the name of your branch, and you should try to
