@@ -49,7 +49,7 @@ Modify the documentation
 To make updates to the documentation, you should add or modify the
 ``.rst`` files in the ``docs/source/`` directory.  Our documentation is written
 using `reStructuredText <http://docutils.sourceforge.net/docs/user/rst/quickref.html>`_
-and `sphinx <http://www.sphinx-doc.org/en/master/contents.html>`.  Keep those
+and `sphinx <http://www.sphinx-doc.org/en/master/contents.html>`_.  Keep those
 links handy for reference.
 
 Once you've made your modifications, you can build them to see how they look.
