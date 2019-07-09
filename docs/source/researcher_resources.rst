@@ -49,7 +49,8 @@ Vivarium Inputs contains the tools needed to create data artifacts from GBD
 data. The data artifact is an important notion, you can think of it as all of
 the data needed to run a simulation, packaged into one file. This package
 contains useful functions for pulling raw GBD data as well as generating data as
-it is used in a simulation, which are vitally important for vetting.
+it is used in a simulation, which are vitally important for vetting. There is a
+helpful tutorial here for pulling data using these functions, too.
 
 - `Repository <https://github.com/ihmeuw/vivarium_inputs>`_
 - `Documentation <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/>`_
