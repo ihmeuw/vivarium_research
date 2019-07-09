@@ -7,3 +7,6 @@ Vivarium Research Documentation!
    :caption: Contents:
 
    researcher_resources
+   models/index
+   modeling_process/index
+
