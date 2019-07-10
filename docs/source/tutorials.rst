@@ -16,6 +16,5 @@ important pieces of documentation to know about.
 - `Exploring a simulation in an interactive setting <https://vivarium.readthedocs.io/projects/vivarium/en/latest/tutorials/exploration.html#exploring-a-simulation-in-an-interactive-setting>`_
 - `Creating and altering a data artifact <https://vivarium-public-health.readthedocs.io/en/latest/tutorials/artifact.html#artifact>`_
 - `Pulling data using Vivarium Inputs <https://vivarium-inputs.readthedocs.io/en/latest/tutorials/pulling_data.html>`_
-- `The Vivarium Inputs data-pulling function API <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/api_reference/interface.html>`_
 - `YAML basics <https://vivarium-cluster-tools.readthedocs.io/en/latest/yaml_basics.html>`_
 - `The branches file <https://vivarium-cluster-tools.readthedocs.io/en/latest/branch.html>`_
