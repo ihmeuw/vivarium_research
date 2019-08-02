@@ -15,6 +15,8 @@ The structure of a cause model
 - **Cause entities:** Searching the GBD cause_id associated with the cause. Find out
   affected outcomes by this cause (either mortality, disability, or both). Start thinking 
   about the restrictions such as certain ages or sexes applied to this cause.
+  (useful package: `gbd_mapping <https://vivarium.readthedocs.io/projects/gbd-mapping/
+  en/latest/gbd_mapping.html>`_)
 - **Modeling Strategy:** To address proper methods that used to model causes we interested.
   This decision will be driven by data availability and disease epidemiology. It's 
   recommended to document any cause with PAF of one relationship with modeled risks 
@@ -23,7 +25,7 @@ The structure of a cause model
   disease due to diabetes.
 - **Data Sources:** This section is to find out what data sources are used to inform your
   cause model and only important to fill out if you deviate from our standard data sources
-  (which will be returned from vivarium_inputs tools).
+  (which will be returned from ``vivarium_inputs`` tools).
 - **Component:** This section is primarily necessary for non standard components, and you
   should be able to answer following questions throughout the filling process.
     1. What components are used to implement the cause model?
@@ -61,8 +63,9 @@ Common data sources for cause models
 
 .. note::
 
-   Currently there are GBD shared function tools that return you draw-level values;
-   alternatively, you can also pull data by using ``vivarium_inputs`` tools.
+   Currently there are `GBD shared functions <https://hub.ihme.washington.edu/display/GBD2019/GBD+2019+Shared+Functions>`_ such as ``get_draw`` that return you draw-level
+   values; alternatively, you can also pull data by using `vivarium_inputs
+   <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/tutorials/pulling_data.html>`_.
 
 Available Tools
 
@@ -75,9 +78,9 @@ Available Tools
 | get_draw("epi")  | with rare exceptions, Prevalence, Incidence, EMR, and |
 |                  | WCMR values are non-final and should not be used      |  
 +------------------+-------------------------------------------------------+
-| get_raw_data()   | modelable entity, measure, and lcoation               |
+| get_raw_data()   | modelable entity, measure, and location               |
 +------------------+-------------------------------------------------------+
-| get_measure()    | modelable entity, measure, and lcoation               |
+| get_measure()    | modelable entity, measure, and location               |
 +------------------+-------------------------------------------------------+
 
 Cause Measures
