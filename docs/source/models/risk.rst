@@ -105,8 +105,28 @@ The structure of a risk exposure model
 	  pairs, please check ``J:/Project/simulation_science/archive/pafs_of_one.xlsx``
 	- **Restrictions:** Does this risk apply only to certain ages or sexes?
 	  Any other restrictions?
+- Components
+	- What components are used to implement the risk and risk effects?
+	- How do you include them in the simulation?
+	- What columns do they create in the population table?  What do the columns mean?
+	- What value pipelines do they create? What do the values coming out of the 
+	  pipelines mean?
+- Parameters
+	- List all available parameters in the format:
+		- parameter_name
+		- parameter_description
+		- parameter_value
 - Data Sources
-	- 
+	- exposure - ``get_draws(source="exposure")``
+	- exposure standard deviation (continuous modeled risks) - 
+	  ``get_draws(source="exposure_sd")``
+	- exposure distribution weights (ensemble modeled risks) - 
+	  ``get_measure(measure="exposure_distribution_weights")``
+	- relative risk - ``get_draws(sources="rr")``
+	- population attributable fraction - ``get_draws(source="burdenator")``
+	- mediation factors - ``get_measure(measure="mediation_factors")``
+	- TMREL - ``gbd_mapping.risk_factors.NAME.tmred``
+	- Scale factor - ``gbd_mapping.risk_factors.NAME.relative_risk_scalar``
 
 
 Common risk exposure models
@@ -120,24 +140,6 @@ Categorical exposure models
 
 Hybrid exposure models
 ++++++++++++++++++++++
-
-Common data sources for risk exposure models
---------------------------------------------
-
-Exposure
-++++++++
-
-Exposure standard deviation
-+++++++++++++++++++++++++++
-
-Exposure distribution weights
-+++++++++++++++++++++++++++++
-
-TMREL/TMRED
-+++++++++++
-
-Scale factor
-++++++++++++
 
 Non-standard data sources for risk exposure models
 --------------------------------------------------
