@@ -7,24 +7,24 @@ Modeling Causes
 .. note::
 
    Vivarium has the infrastructure to model causes at any level in the GBD hierarchy.
-   However, it is recommended to model GBD causes at the most detailed level to avoid 
-   problems with missingness in the GBD cause hierarchy.
+   However, if we model a cause at the most detailed level, there is a better chance 
+   of all necessary data being available in GBD. For example, cause "CKD due to Diabetes" has a relative risk for SBP, but less detailed cause "CKD" does not have a relative 
+   risk for SBP (and we need to derive this RR from the PAF to use this less-detailed 
+   cause and this risk factor together in our hypertension treatment model). 
 
 The structure of a cause model
 ------------------------------
 
 **Cause entities:** Searching the GBD cause_id associated with the cause. Find out
-affected outcomes by this cause (either mortality, disability, or both). Start thinking 
+affected outcomes by this cause (either mortality, disability, or both). Start thinking
 about the restrictions such as certain ages or sexes applied to this cause.
 (useful package: `gbd_mapping <https://vivarium.readthedocs.io/projects/gbd-mapping/
 en/latest/gbd_mapping.html>`_)
 
-**Modeling Strategy:** To address proper methods that used to model causes we interested.
-This decision will be driven by data availability and disease epidemiology. It's 
-recommended to document any cause with PAF of one relationship with modeled risks 
-independently. Also, paying attention to situations where you might have multiple causes 
-in the model with overlapping definitions. For example, diabetes and chronic kidney 
-disease due to diabetes.
+**Modeling Strategy:** To address proper methods that used to model causes in which
+we are interested. This decision will be driven by data availability and disease epidemiology. Document any cause with PAF of one relationship with modeled risks independently. Also, paying attention to situations where you might have multiple 
+causes in the model with overlapping definitions. For example, diabetes and chronic 
+kidney disease due to diabetes.
 
 **Data Sources:** This section is to find out what data sources are used to inform your
 cause model and only important to fill out if you deviate from our standard data sources

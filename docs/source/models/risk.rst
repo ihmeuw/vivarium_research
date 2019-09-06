@@ -37,6 +37,16 @@ Input:
 Output:
 	- Attributabe burden by age, sex, year and location
 
+How do we select risk-outcome pairs?
+------------------------------------
+- The likely importance of a risk factor to disease burden and/or policy.
+- Availability of sufficient data and methods to estimate risk factor exposure.
+- Evidence from epidemiological studies supporting a causal relationship between 
+  risk factor exposure and the outcome and available data to estimate effect 
+  sizes per unit of exposure.
+- Evidence that these effects can be generalized to a general population.
+
+
 Risk factor hierarchy:
 -------------------
 - Environmental/occupational risks

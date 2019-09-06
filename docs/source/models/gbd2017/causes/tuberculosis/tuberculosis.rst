@@ -32,7 +32,7 @@ TB, HIV/AIDS - Multidrug-resistant TB, and HIV/AIDS - Extensively drug-resistant
 
 TB Progression
 --------------
-Active TB disease developed within 2 years called fast progression, Individuals
+Active TB disease developed within 2 years is called fast progression, Individuals
 who do not have rapid progression are classified as having slow-progressing latent
 tuberculosis infection. With latent infection, individuals experience no adverse
 health effects and will not transmit Mycobacterium tuberculosis, but they face
@@ -51,12 +51,10 @@ Initialization
 	- Prev.LTBI: prevalence of latent TB infection
 Transition
 	- Lambda: force of infection for Mycobacterium tuberculosis
-	- P: probability of immediate progression to Active TB, for individuals in
-	  Susceptible who are infected with M tuberculosis
-	- Incidence Active TB: drives transition between Susceptible and Active TB
 	- Conversion: transition probability from LTBI to Active TB
 	- Remisson LTBI: measuring the "flow" of LTBI to Recovered
 	- Remisson Active Tb: measuring the "flow" of Active TB to Recovered
+	- Excess Mortality: Excess mortality of Active TB used to calculate TB related deaths
 
 Common data sources
 -------------------
