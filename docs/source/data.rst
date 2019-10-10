@@ -4,6 +4,10 @@
 Understanding GBD Data
 ======================
 
+.. note::
+   
+   Some of these links require access to the IHME VPN for access.
+   
 Currently, Vivarium utilizes GBD 2017 data. Understanding what data is available
 from this round and what modeling process produced it is a difficult task. The
 interface in Vivarium Inputs provides a function for pulling GBD 2017 data,
