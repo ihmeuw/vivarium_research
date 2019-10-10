@@ -20,6 +20,7 @@ tuberculosis infection (LTBI) does fit into this chapter, but just barely.
 .. contents:
    :local:
 
+
 What is a "cause"?
 ------------------
 
@@ -31,23 +32,27 @@ loss, too.
 
 .. image:: death_certificate.png
 
+
 Learning objectives
 -------------------
 
 After reading this chapter, learners should be able to:
 
-#. Develop an understanding of how GBD, literature, and experts think about
+1. Develop an understanding of how GBD, literature, and experts think about
    a cause.
-#. Build internally consistent models which are sufficiently complex given
+2. Build internally consistent models which are sufficiently complex given
    larger modeling goals.
-   #. Models that are as simple as possible, but no simpler.
-   #. Models that agree with withheld data.
-   #. Models that captures the outcomes of interest. (Which is really the same
-      as “but no simpler” in (i))
-#. Document the models in a way software engineers can build and validate it,
+
+   a. Models that are as simple as possible, but no simpler.
+   b. Models that agree with withheld data.
+   c. Models that captures the outcomes of interest. (Which is really the same
+      as “but no simpler” in (a))
+
+3. Document the models in a way software engineers can build and validate it,
    and document their understanding comprehensively for future researchers
    (including their future selves) who are faced with related modeling
    challenges.
+
 
 What is a cause model?
 ----------------------
@@ -57,6 +62,7 @@ purposes of simulation modeling.  It is always an idealization of the messy
 complexity of reality, and is designed to be acceptable to outside experts on
 the cause, as well as be parsimonious with the data available from the GBD that
 might inform the model.
+
 
 How is a cause model incorporated into a larger model?
 ------------------------------------------------------
@@ -69,8 +75,10 @@ common to have one or more risk factor models layered in to affect the
 incidence rates in the cause model, and then have an intervention model shift
 the risk exposure levels defined by the risk factor model.
 
+
 Focus on goal 3:
 ----------------
+
 
 Why do we want a document that describes each cause model?
 ----------------------------------------------------------
@@ -91,17 +99,18 @@ What does a model document look like?
 
 * Title which is descriptive
 * Cause model diagram
-  * Set of states that are “mutually exclusive and collectively exhaustive”---a
+
+  - Set of states that are “mutually exclusive and collectively exhaustive”---a
     single agent is in exactly one of these states at any point in time
-  * Set of transitions between states
+  - Set of transitions between states
+
 * Definition of model and states
-  * Restrictions: who does this apply to?
+* Restrictions: who does this apply to?
 * How to initialize the states? (prevalence data)
 * Definition of transitions in terms of states they connect
 * Transition criteria (rates, durations, deterministic, etc.)
-* How does this model connect to other models
-  * What outcomes this disease influences? (e.g. disability, mortality, or
-    incidence)
+* How does this model connect to other models.  That is, what outcomes this
+  disease influences? (e.g. disability, mortality, or incidence)
 * What data informs those connections?
 * “Theory of disease” meaning is this a “susceptible-infected” model (SI), is
   a recurrent MI model, etc?  This prose should match and complement the cause
