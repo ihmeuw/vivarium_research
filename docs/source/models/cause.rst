@@ -5,26 +5,32 @@ Modeling Causes
 ===============
 
 What is included in this chapter: models of causes that are represented as
-finite state Markov chain (this chapter will also explain what a finite state
+finite-state Markov chains (this chapter will also explain what a finite state
 Markov chain is!)
 
 There are models of things that you might consider causes which are outside of
 the scope of this chapter, because they do not fit into the Markov approach.
-This chapter does not include “PAF of 1” causes, like protein-energy
-malnutrition (PEM).  It also does not include things that are sometimes
-considered a disease but are deemed “risk factors” by GBD, such as obesity.
-Unsafe water would not fit into the cause model paradigm either---it is a cause
-of diarrheal disease, but it is a risk factor in the GBD taxonomy.  Latent
-tuberculosis infection (LTBI) does fit into this chapter, but just barely.
+This chapter does not include :ref:`PAF of 1 <models_risk_attributable_cause>`
+causes, like
+:ref:`protein-energy malnutrition <2017_cause_pem>`. It also does not include
+things that are sometimes considered diseases but are deemed
+:ref:`risk factors <models_risk>` by the :term:`Global Burden of Disease`
+(GBD), such as :ref:`obesity <2017_risk_bmi_adults>`.
+:ref:`Unsafe water <2017_risk_unsafe_water>` would not fit into the cause model
+paradigm either---it is a cause of
+:ref:`diarrheal disease <2017_cause_diarrhea>`, but it is a risk factor in the
+GBD taxonomy.  :ref:`Latent tuberculosis <2017_cause_latent_tb>` infection
+(LTBI) does fit into this chapter, but just barely.
 
-.. contents:
+
+.. contents::
    :local:
 
 
 What is a "cause"?
 ------------------
 
-Short answer: disease
+Short answer: a disease.
 
 More nuance: “cause of death” as might be included as the bottom line of the
 top half of a death certificate. And also analogous causes of nonfatal health
@@ -32,26 +38,37 @@ loss, too.
 
 .. image:: death_certificate.png
 
+.. todo::
+
+   Link to GBD hierarchies for production of YLLs and YLDs.  Add discussion
+   of the discrepency between our cause models (unified dynamic models of
+   prevalence, incidence, mortality & morbidity) and GBD models (separate
+   statistical models of mortality & morbidity only, with intermediate (e.g.
+   dismod) unified models). Note where this might cause modeling issues!
+
+   Might be better as a separate section.
+
 
 Learning objectives
 -------------------
 
 After reading this chapter, learners should be able to:
 
-1. Develop an understanding of how GBD, literature, and experts think about
+1. Develop an understanding of how the GBD, literature, and experts think about
    a cause.
-2. Build internally consistent models which are sufficiently complex given
-   larger modeling goals.
+2. Build :term:`internally consistent <Internally Consistent Model>` cause
+   models which are :term:`sufficiently complex <Sufficiently Complex Model>`
+   given larger modeling goals.
 
    a. Models that are as simple as possible, but no simpler.
    b. Models that agree with withheld data.
    c. Models that captures the outcomes of interest. (Which is really the same
       as “but no simpler” in (a))
 
-3. Document the models in a way software engineers can build and validate it,
-   and document their understanding comprehensively for future researchers
-   (including their future selves) who are faced with related modeling
-   challenges.
+3. Document the models in a way software engineers can build and
+   :term:`verify <Verification>` it, and document their understanding
+   comprehensively for future researchers (including their future selves) who
+   are faced with related modeling challenges.
 
 
 What is a cause model?
@@ -68,16 +85,13 @@ How is a cause model incorporated into a larger model?
 ------------------------------------------------------
 
 Our modular structure is designed to layer cause models into the
-entity-component system that has a demographic model.  Sometimes an
-intervention model will be layered in on top of this and directly change
-transition rates in one or more cause models.  But to date, it has been more
-common to have one or more risk factor models layered in to affect the
-incidence rates in the cause model, and then have an intervention model shift
-the risk exposure levels defined by the risk factor model.
-
-
-Focus on goal 3:
-----------------
+:term:`entity component system <Entity Component System>` that has a
+demographic model.  Sometimes an intervention model will be layered in on top
+of this and directly change transition rates in one or more cause models.  But
+to date, it has been more common to have one or more risk factor models layered
+in to affect the incidence rates in the cause model, and then have an
+intervention model shift the risk exposure levels defined by the risk factor
+model.
 
 
 Why do we want a document that describes each cause model?
@@ -96,6 +110,14 @@ Why do we want a document that describes each cause model?
 
 What does a model document look like?
 -------------------------------------
+
+.. todo:
+
+   replace this section with a template or just links to examples + discussion
+   of the sections. Likely need a whole section on cause model diagrams with
+   a concrete description of how we represent different kinds of states
+   and transitions. A common diagram language will make communication a
+   million times easier.
 
 * Title which is descriptive
 * Cause model diagram
