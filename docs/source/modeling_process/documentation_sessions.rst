@@ -57,11 +57,13 @@ A silly but hopefully helpful example
 1. **Topic Kickoff** - James gives and overview of building cause models.
 2. **Sub-topic Assignment** - Collectively, the team identifies the sub-topics
    and we assign them to research team members:
+   
    - Cause Modeling Overview: Abie
    - Modeling with State Machines: James
    - Disease states, transitions, and their data sources: Ali
    - Disease effects/impacts and their data sources: Yaqi
    - Cause Model validation: Yongquan
+   
 3. **Sub-topic Preparation** - Everyone spends 3-6 hours over the next two
    weeks producing presentations, meeting during office hours/coworking to
    discuss thorny issues and resolve questions.
