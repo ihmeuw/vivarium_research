@@ -13,9 +13,9 @@ Glossary
 
    Entity Component System
       One of the key software patterns used by ``vivarium`` to facilitate
-      the modular design of simulation models. In our modeling the entities are
-      people and the component represent different attributes of those people
-      and so the software is organized around components representing
+      the modular design of simulation models. In our modeling, the entities are
+      people and the component represent different attributes of those people.
+      The software is organized around components representing
       attributes rather than components representing people.
       [`Wikipedia article <https://en.wikipedia.org/wiki/Entity_component_system>`_]
 
