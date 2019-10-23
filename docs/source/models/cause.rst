@@ -265,7 +265,7 @@ Depending on the specific cause model at hand, the prefered data source may vary
 and instantaneous incidence (or hazard) rates. The table below discusses some considerations that may influence 
 which data source is preferable. In general...
 
-**Annual incidence rates are preferable when:**
+**Annual rates are preferable when:**
 
 - The assumption of uniform and constant distribution of new cases is **valid**
 
@@ -278,7 +278,7 @@ which data source is preferable. In general...
 - The assumption of uniform and constant distribution of new cases is **invalid**, but the assumption will not 
 impact model results in a meaningful way
 
-**Instantaneous incidence (hazard) rates are preferable when:**
+**Instantaneous (hazard) rates are preferable when:**
 
 - There is not a uniform or constant distribution of new cases over an annual timeframe
 
