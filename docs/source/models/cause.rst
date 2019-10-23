@@ -102,14 +102,14 @@ Birth Prevalence
 Birth prevalence is defined as the **proportion of live births in a given population that possess a given 
 condition or trait at birth.**
  
-	For example, the birth prevalence for cleft lip in the United States in 2006 was 10.63 per 10,000 live 
-	births, or 0.163%.
+	For example, the birth prevalence for cleft lip in the United States in 2006 was 10.6 per 10,000 live 
+	births, or 0.106%.
 
 Birth prevalence data can be used to **initialize neonatal cause model states** and represent the **probability that a 
 simulant who is born during the simulation will be born into a given neonatal cause model state.** 
 
 	For example, the probability that a simulant born during a simulation of cleft lip in the United States 
-	in 2006 is 0.00163, or 0.163%.
+	in 2006 is 0.00106, or 0.106%.
 
 Incidence Rates
 +++++++++++++++
