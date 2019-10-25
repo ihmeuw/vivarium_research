@@ -50,32 +50,35 @@ Once a cause model structure is specified, data is needed to inform its states a
 3. The disability weight for each state in the cause model
 4. The probability that a simulant in a given cause model state will die in a given timestep
 
-There are several common data sources that can be used for these needs, which are outlined in the table below and discussed in more detail afterward.
+There are several common data sources that can be used for these needs, which are outlined in the table below 
+and discussed in more detail afterward. `Non-standard data sources`_ are discussed later on this page.
 
-+--------------+--------------------------------+--------------------+
-|Measure       |Definition                      |Uses                |
-+==============+================================+====================+
-|Prevalence    |Proportion of population        |Initialize cause    |
-|              |with a given condition          |model states        |
-+--------------+--------------------------------+--------------------+
-|Birth         |Proportion of all live births   |Initialize neonatal |
-|Prevalence    |born with a given condition     |cause model states  |
-+--------------+--------------------------------+--------------------+
-|Incidence     |Number of new cases of a given  |Estimate transition |
-|              |condition per person-year       |rates               |
-+--------------+--------------------------------+--------------------+
-|Remission     |Number of recovered cases from a|Estimate transition |
-|              |given condition per person-year |rates               |
-+--------------+--------------------------------+--------------------+
-|Disability    |INSERT DEFINITION (Yaqi?)       |INSERT USES (Yaqi?) |
-|Weights       |                                |                    |
-+--------------+--------------------------------+--------------------+
-|Cause-Specific|INSERT DEFINITION (Yaqi?)       |INSERT USES (Yaqi?) |
-|Mortality     |                                |                    |
-+--------------+--------------------------------+--------------------+
-|Excess        |INSERT DEFINITION (Yaqi?)       |INSERT USES (Yaqi?) |
-|Mortality     |                                |                    |
-+--------------+--------------------------------+--------------------+
++----------------------------+--------------------------------+--------------------+
+|Measure                     |Definition                      |Uses                |
++============================+================================+====================+
+|Prevalence_                 |Proportion of population        |Initialize cause    |
+|                            |with a given condition          |model states        |
++----------------------------+--------------------------------+--------------------+
+|`Birth Prevalence`_         |Proportion of all live births   |Initialize neonatal |
+|                            |born with a given condition     |cause model states  |
++----------------------------+--------------------------------+--------------------+
+|Incidence_                  |Number of new cases of a given  |Estimate transition |
+|                            |condition per person-year       |rates               |
++----------------------------+--------------------------------+--------------------+
+|Remission_                  |Number of recovered cases from a|Estimate transition |
+|                            |given condition per person-year |rates               |
++----------------------------+--------------------------------+--------------------+
+|`Disability Weights`_       |INSERT DEFINITION (Yaqi?)       |INSERT USES (Yaqi?) |
+|                            |                                |                    |
++----------------------------+--------------------------------+--------------------+
+|`Cause-Specific Mortality`_ |INSERT DEFINITION (Yaqi?)       |INSERT USES (Yaqi?) |
+|                            |                                |                    |
++----------------------------+--------------------------------+--------------------+
+|`Excess Mortality`_         |INSERT DEFINITION (Yaqi?)       |INSERT USES (Yaqi?) |
+|                            |                                |                    |
++----------------------------+--------------------------------+--------------------+
+
+.. _Prevalence:
 
 Prevalence
 ++++++++++
@@ -96,6 +99,8 @@ will begin the simulation in a given state.**
 	For example, the probability that a simulant in a model of obesity in the United States beginning in 
 	2016 will begin the simulation as obese is 0.4 or 40%.
 
+.. _`Birth Prevalence`:
+
 Birth Prevalence
 ++++++++++++++++
 
@@ -111,8 +116,10 @@ simulant who is born during the simulation will be born into a given neonatal ca
 	For example, the probability that a simulant born during a simulation of cleft lip in the United States 
 	in 2006 is 0.00106, or 0.106%.
 
-Incidence Rates
-+++++++++++++++
+.. _Incidence:
+
+Incidence
++++++++++
 
 Incidence rates are defined as the **number of new cases of a condition that occur per person-year of the at-risk 
 population (individuals without condition).** 
@@ -131,6 +138,8 @@ will transition from a susceptible state to an infected state within a given tim
 
 	For example, with a timestep of one year, the probability that a simulant will transition from a 
 	susceptible (without MS) cause model state to an infected (with MS) cause model state is 2.8*10^(-5).
+
+.. _above:
 
 **A Few Considerations for Incidence Data Sources:**
 
@@ -153,11 +162,13 @@ Further, it is important to consider that cause models are *state*-specific and 
 	transition rates from susceptible to mild disease or to severe disease. In these cases, incidence rates 
 	specific to mild and severe disease are needed to inform the specific transitions present in the cause model.
 
-Lastly, see the section on hazard rates in non-standard data sources below to determine when hazard rates may be 
+Lastly, see the section on `hazard rates`_ in non-standard data sources below to determine when hazard rates may be 
 preferrable to annual incidence rates as a data source for cause model transition rates.
 
-Remission Rates
-+++++++++++++++
+.. _Remission:
+
+Remission
+++++++++++
 
 Remission rates are defined as the **number of newly recovered cases from a condition that occur per person-year 
 of the population with the condition.**
@@ -176,23 +187,31 @@ simulant in an infected (with condition) state will transition to a non-infected
 
 .. NOTE::
 
-	The considerations discussed in the incidence section above apply to remission rates as well. See above 
+	The considerations discussed in the incidence section above apply to remission rates as well. See above_ 
 	for details.
+
+.. _`Disability Weights`:
 
 Disability Weights
 ++++++++++++++++++
 
 (TO-DO)
 
+.. _`Cause-Specific Mortality`:
+
 Cause-Specific Mortality
 ++++++++++++++++++++++++
 
 (TO-DO)
 
+.. _`Excess Mortality`:
+
 Excess Mortality
 ++++++++++++++++
 
 (TO-DO)
+
+.. _`Non-standard data sources`:
 
 Non-Standard Data Sources for Cause Models
 ------------------------------------------
@@ -220,6 +239,8 @@ to be placed on cause model states. Examples of possible restrictions include:
 - Sex restrictions (e.g. only female simulants may enter this state) 
 - Restrictions related to states in other cause models (e.g. only simulants who are susceptible to condition X may enter this state) 
 - Etc.
+
+.. _`hazard rates`:
 
 Hazard Rates 
 ++++++++++++
