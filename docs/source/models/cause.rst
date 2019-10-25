@@ -21,16 +21,24 @@ tuberculosis infection (LTBI) does fit into this chapter, but just barely.
    :local:
 
 
-What is a "cause"?
+What is a "cause" and what is a cause model?
 ------------------
 
-Short answer: disease
+When we say "cause" in simulation modeling with `vivarium`, we often mean a disease.
 
-More nuance: “cause of death” as might be included as the bottom line of the
-top half of a death certificate. And also analogous causes of nonfatal health
+There is a reson for this potentially confusing terminology: a “cause of death”, as
+might be included as the bottom line of the 
+top half of a death certificate, is often a disease but sometimes an injury.
+And we extend this to also refer to causes of nonfatal health
 loss, too.
 
 .. image:: death_certificate.png
+
+A cause model is a simplification of a cause of death or disease for the
+purposes of simulation modeling.  It is always an idealization of the messy
+complexity of reality, and is designed to be acceptable to outside experts on
+the cause, as well as be parsimonious with the data available from the GBD that
+might inform the model.
 
 
 Learning objectives
@@ -52,16 +60,6 @@ After reading this chapter, learners should be able to:
    and document their understanding comprehensively for future researchers
    (including their future selves) who are faced with related modeling
    challenges.
-
-
-What is a cause model?
-----------------------
-
-A cause model is a simplification of a cause of death or disease for the
-purposes of simulation modeling.  It is always an idealization of the messy
-complexity of reality, and is designed to be acceptable to outside experts on
-the cause, as well as be parsimonious with the data available from the GBD that
-might inform the model.
 
 
 How is a cause model incorporated into a larger model?
