@@ -40,6 +40,7 @@ complexity of reality, and is designed to be acceptable to outside experts on
 the cause, as well as be parsimonious with the data available from the GBD that
 might inform the model.
 
+[[To come, a link to the fatal and nonfatal GBD cause data material that Chris has developed]]
 
 Learning objectives
 -------------------
