@@ -98,6 +98,14 @@ preterm birth.
 An example of a condition appropriate for a neonatal cause model with potential recovery from the condition 
 state is cleft palate (which may be treated later in life).
 
+Non-Standard Cause Models
++++++++++++++++++++++++++
+
+There are instances where a particular cause may not fit well into one of the common cause model structures discussed above. Examples of situations that may require custom cause model structures are listed below:
+
+- Cause models with severity splits
+- Joint cause models (multiple closely related causes represented in a single cause model)
+- Other scenarios required by the specifics of a given cause1
 
 Common data sources for cause models
 ------------------------------------
