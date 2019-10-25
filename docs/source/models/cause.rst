@@ -23,23 +23,25 @@ Common cause models
 
    Add in visual representations of cause models (link .pngs)
 
-+--------+--------------------------------+---------------------------------------------------------------------+
-|Model   |States                          |Description                                                          |
-+========+================================+=====================================================================+
-|SI      |Susceptible-Infected            |Simulants never recover from infected (with condition) state         |
-|        |                                |                                                                     |
-+--------+--------------------------------+---------------------------------------------------------------------+
-|SIS     |Susceptible-Infected-Susceptible|Simulants can recover from infected (with condition) state and can   |
-|        |                                |become infected again after recovery                                 |
-|        |                                |                                                                     |
-+--------+--------------------------------+---------------------------------------------------------------------+
-|SIR     |Susceptible-Infected-Recovered  |Simulants can recover from infected (with condition) state and cannot| 
-|        |                                |become infected again after recovery                                 |
-|        |                                |                                                                     |
-+--------+--------------------------------+---------------------------------------------------------------------+
-|Neonatal|With and without condition      |Simulants are born either with or without condition                  |
-|        |                                |                                                                     |
-+--------+--------------------------------+---------------------------------------------------------------------+
++---------+--------------------------------+---------------------------------------------------------------------+
+|Model    |States                          |Description                                                          |
++=========+================================+=====================================================================+
+|SI_      |Susceptible-Infected            |Simulants never recover from infected (with condition) state         |
+|         |                                |                                                                     |
++---------+--------------------------------+---------------------------------------------------------------------+
+|SIS_     |Susceptible-Infected-Susceptible|Simulants can recover from infected (with condition) state and can   |
+|         |                                |become infected again after recovery                                 |
+|         |                                |                                                                     |
++---------+--------------------------------+---------------------------------------------------------------------+
+|SIR_     |Susceptible-Infected-Recovered  |Simulants can recover from infected (with condition) state and cannot| 
+|         |                                |become infected again after recovery                                 |
+|         |                                |                                                                     |
++---------+--------------------------------+---------------------------------------------------------------------+
+|Neonatal_|With and without condition      |Simulants are born either with or without condition                  |
+|         |                                |                                                                     |
++---------+--------------------------------+---------------------------------------------------------------------+
+
+.. _SI:
 
 SI
 ++
@@ -50,6 +52,8 @@ will remain for the remainder of the simulation.
 This cause model structure is appropriate for chronic conditions from which individuals can never recover.
 
 Examples of conditions appropriate for SI cause models include Alzheimer’s disease and other dementias.
+
+.. _SIS:
 
 SIS
 +++
@@ -63,6 +67,7 @@ their lifetimes.
 
 Examples of conditions appropriate for SIS cause models include diarrheal diseases.
 
+.. _SIR:
 
 SIR
 +++
@@ -75,6 +80,8 @@ This cause model structure is appropriate for conditions for which individuals c
 do not stay in the with condition state forever.
 
 An example of a condition appropriate for SIR cause models is measles.
+
+.. _Neonatal:
 
 Neonatal
 ++++++++
