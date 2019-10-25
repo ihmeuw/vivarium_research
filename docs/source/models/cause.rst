@@ -105,7 +105,7 @@ There are instances where a particular cause may not fit well into one of the co
 
 - Cause models with severity splits
 - Joint cause models (multiple closely related causes represented in a single cause model)
-- Other scenarios required by the specifics of a given cause1
+- Other scenarios required by the specifics of a given cause
 
 Common data sources for cause models
 ------------------------------------
