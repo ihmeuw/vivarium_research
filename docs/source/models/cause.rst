@@ -67,14 +67,14 @@ Examples of conditions appropriate for SIS cause models include diarrheal diseas
 SIR
 +++
 
-In this cause model structure, simulants in the susceptible state can transition to the infect state and 
+In this cause model structure, simulants in the susceptible state can transition to the infected state and 
 simulants in the infected state can transition to a recovered state where they will remain for the remainder
 of the simulation. Notably, the cause model allows individuals to become infected only once in a simulation.
 
 This cause model structure is appropriate for conditions for which individuals can only have a single case, but 
 do not stay in the with condition state forever.
 
-An example of a condition appropriate for SIR cause models is measels.
+An example of a condition appropriate for SIR cause models is measles.
 
 Neonatal
 ++++++++
