@@ -74,9 +74,13 @@ common to have one or more risk factor models layered in to affect the
 incidence rates in the cause model, and then have an intervention model shift
 the risk exposure levels defined by the risk factor model.
 
+It can be useful to consider two separate ways that a cause models fits into
+a larger model: (1) how does a cause model affect other parts of the model?
+and (2) how is a cause model affected by other parts of the model?
+
+[[More details on this to come]]
 
 Focus on goal 3:
-----------------
 
 
 Why do we want a document that describes each cause model?
@@ -85,7 +89,7 @@ Why do we want a document that describes each cause model?
 * Because a lot of work goes into gaining understanding and developing an
   appropriately complex model, and we don’t want to repeat that work.
 * Because we (researchers) need to communicate clearly and precisely with
-  software engineers and data scientists about what the model must do and what
+  software engineers, data scientists, and each other about what the model must do and what
   data must inform it.
 * Because we will need to communicate to an outside audience, including
   critics, how we generated substantive results of interest, and that will
@@ -116,6 +120,8 @@ What does a model document look like?
   model diagram.
 * Validation criteria
 * Assumptions about the model
+
+[[to be updated based on experience from LTBI cause model document, and generalization thereof]]
 
 Common cause models
 -------------------
