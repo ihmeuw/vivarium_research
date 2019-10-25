@@ -121,11 +121,12 @@ simulant who is born during the simulation will be born into a given neonatal ca
 Incidence
 +++++++++
 
-Incidence rates are defined as the **number of new cases of a condition that occur per person-year of the at-risk 
-population (individuals without condition).** 
+Incidence rates are defined as the **number of new cases of a condition that occur per person-year of the 
+at-risk population (individuals without condition).** Specifically, the at-risk population can be represented as 
+`1 - condition prevalence`.
 
 	For example, the incidence of multiple sclerosis (MS) in the United States is 2.8 per 100,000 
-	person-years. 
+	person-years of the at-risk population. 
 
 	This suggests that if we followed 100,000 individuals without MS for 1 year each (100,000 people * 
 	1 year = 100,000 person-years), we would expect 2.8 of these individuals to develop MS within this timeframe. 
@@ -136,21 +137,38 @@ population (individuals without condition).**
 Incidence can be used to **estimate cause model transition rates** and can represent the **probability that a simulant 
 will transition from a susceptible state to an infected state within a given timestep.** 
 
-	For example, with a timestep of one year, the probability that a simulant will transition from a 
-	susceptible (without MS) cause model state to an infected (with MS) cause model state is 2.8*10^(-5).
+	For example, with a timestep of one year and using incidence as the transition rate data source, the 
+	probability that a simulant will transition from a susceptible (without MS) cause model state to an 
+	infected (with MS) cause model state is 2.8*10^(-5).
 
 .. _above:
 
 **A Few Considerations for Incidence Data Sources:**
 
 As mentioned above, the denominator for incidence is person-years of the *at-risk* population, or the population 
-*without* condition (``1 - condition prevalence``). However, in certain scenarios, this may not always be the case.
+*without* condition (``1 - condition prevalence``). However, in certain scenarios, this may not always be the 
+case. 
 
-	When the prevalence of a condition is *small*, ``1 - prevalence`` will *approximately* equal ``1``. In 
-	these cases, incidence may be calculated as the number of new cases per person-years in the *entire* 
-	population as an approximation of a number of new cases per person-years in the *at-risk* population. 
-	This approximation will likely not have a large impact when condition prevalence is low, although the 
-	use and impact of this approximation in incidence data sources used for cause models should be considered.
+	In situations when the general population is represented in the denominator rather than the at risk population...
+
+		
+		If the prevalence of a condition is *small*, ``1 - prevalence`` ~ ``1``. In these cases, incidence 
+		calculated as the number of new cases per person-years in the *entire* population will be 
+		*approximately* equal to the number of new cases per person-years in the *at-risk* population. 
+		Therefore, the approximation will be fairly accurate and likely not have a large impact on the 
+		model transition rates.
+
+		If the prevalence of a condition is *large*, ``(1 - prevalence)`` < ``1``. In these cases, the 
+		approximation will be more inaccurate and may bias the model transition rates. 
+
+	Therefore, it is important to understand how incidence data sources used for cause models are measured 
+	and whether the population in the denominator represents the at risk population or the general 
+	population. If the population in the denominator represents the general population, the impact on the 
+	model and potential solutions to limit bias should be considered.
+
+		A potential solution may be to represent the transition rate with the following:
+
+		``incidence rate`` * ``population size`` / ``(1 - prevalence)``
 
 Further, it is important to consider that cause models are *state*-specific and not necessarily 
 *disease*-specific. What does this mean?
