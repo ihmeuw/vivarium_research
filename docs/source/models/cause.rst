@@ -27,16 +27,24 @@ GBD taxonomy.  :ref:`Latent tuberculosis <2017_cause_latent_tb>` infection
    :local:
 
 
-What is a "cause"?
+What is a "cause" and what is a cause model?
 ------------------
 
-Short answer: a disease.
+When we say "cause" in simulation modeling with `vivarium`, we often mean a disease.
 
-More nuance: “cause of death” as might be included as the bottom line of the
-top half of a death certificate. And also analogous causes of nonfatal health
+There is a reson for this potentially confusing terminology: a “cause of death”, as
+might be included as the bottom line of the 
+top half of a death certificate, is often a disease but sometimes an injury.
+And we extend this to also refer to causes of nonfatal health
 loss, too.
 
 .. image:: death_certificate.png
+
+A cause model is a simplification of a cause of death or disease for the
+purposes of simulation modeling.  It is always an idealization of the messy
+complexity of reality, and is designed to be acceptable to outside experts on
+the cause, as well as be parsimonious with the data available from the GBD that
+might inform the model.
 
 .. todo::
 
@@ -71,16 +79,6 @@ After reading this chapter, learners should be able to:
    are faced with related modeling challenges.
 
 
-What is a cause model?
-----------------------
-
-A cause model is a simplification of a cause of death or disease for the
-purposes of simulation modeling.  It is always an idealization of the messy
-complexity of reality, and is designed to be acceptable to outside experts on
-the cause, as well as be parsimonious with the data available from the GBD that
-might inform the model.
-
-
 How is a cause model incorporated into a larger model?
 ------------------------------------------------------
 
@@ -93,6 +91,12 @@ in to affect the incidence rates in the cause model, and then have an
 intervention model shift the risk exposure levels defined by the risk factor
 model.
 
+It can be useful to consider two separate ways that a cause models fits into
+a larger model: (1) how does a cause model affect other parts of the model?
+and (2) how is a cause model affected by other parts of the model?
+
+[[More details on this to come]]
+
 
 Why do we want a document that describes each cause model?
 ----------------------------------------------------------
@@ -100,8 +104,8 @@ Why do we want a document that describes each cause model?
 * Because a lot of work goes into gaining understanding and developing an
   appropriately complex model, and we don’t want to repeat that work.
 * Because we (researchers) need to communicate clearly and precisely with
-  software engineers and data scientists about what the model must do and what
-  data must inform it.
+  software engineers, data scientists, and each other about what the model 
+  must do and what data must inform it.
 * Because we will need to communicate to an outside audience, including
   critics, how we generated substantive results of interest, and that will
   include readers who want to know exactly how we modeled the diseases included
@@ -139,6 +143,8 @@ What does a model document look like?
   model diagram.
 * Validation criteria
 * Assumptions about the model
+
+[[to be updated based on experience from LTBI cause model document, and generalization thereof]]
 
 Common cause models
 -------------------
