@@ -48,3 +48,4 @@ To get started adding new documentation, check out our
    tutorials
    models/index
    contributing
+   glossary
