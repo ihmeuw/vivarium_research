@@ -2,11 +2,11 @@
 Vivarium Research Documentation
 ===============================
 
-Mode impact 
+Model impact 
 -------------
 
 1. **What is model impact**
- Mode impact is about how causes affect mortality/disability
+ Model impact is about how causes affect mortality/disability
 2. **Mortality**
 
  image:: hazard_ratio.png
@@ -37,6 +37,11 @@ Mode impact
     :math:`\lambda_{i} = ACMR - \sum_{diseases}CSMR_{c} + \sum_{diseases}EMR_{c}(disease\_status_{c})`
    what did the person die of
     :math:`P_{c} = \frac{EMR_{c}}{CDMR + \sum_{diseases}EMR_{c}(disease\_status_{c})}`
+	
+   Note: 
+        - All cause mortality rate (ACMR)
+        - Cause specific mortality rate (CSMR)
+        - Excess mortality rate (EMR)
 
 3. **Disability** 
 
@@ -46,8 +51,8 @@ Mode impact
 
        :math:`Disability\_weight_{c}`: proportion of health lost due to condition c
         
-       :math:`(1 - Disability\_weight_{c})`: proportion of life lived in spite of condition c
+       :math:`(1 - Disability\_weight_{c})`: proportion of health remaining when living with condition c
        
-       :math:`\prod_{c\in causes}(1 - Disability\_weight_{c})`: proportion of life lived despite all causes
+       :math:`\prod_{c\in causes}(1 - Disability\_weight_{c})`: proportion of health remaining when living with all causes
 
        :math:`1 - \prod_{c\in causes}(1 - Disability\_weight_{c})`: proportion of health lost due to causes
