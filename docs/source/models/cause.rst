@@ -16,7 +16,7 @@ What is a cause?
 The structure of a cause model
 ------------------------------
 
-Model impact 
+Cause model impact 
 -------------
 
 1. **What is model impact**
