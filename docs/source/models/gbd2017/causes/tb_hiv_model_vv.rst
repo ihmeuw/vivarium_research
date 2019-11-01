@@ -14,9 +14,9 @@ External
 	  assessments where possible
 Internal
 	- Calibrate simulation baseline against GBD 2017 results
-		- Sim outputs mean should perfectly match GBD results
-		- Sim outputs uncertainty should wider than GBD results
-			- Stochastic + individual heterogeneity
+		- Sim outputs mean should perfectly match GBD results.
+		- Sim outputs uncertainty should be wider than GBD results,
+		  because both stochastic and parametric uncertainty are included.
 
 logic
 -----
@@ -26,8 +26,8 @@ logic
 	- DALYs = YLLs + YLDs
 - By location-/age-/sex-
 - Start from count space
-- We expect that active TB cases < LTBI cases when LTBI prevalence
-  as denominator
+- We expect that total active TB cases less than LTBI cases for sim output
+  of event count
 
 Cause hierarchy
 ---------------
@@ -78,10 +78,9 @@ Minimal model verification
 Model verification workflow
 ---------------------------
 1. Minimal model - [1]
-2. [1] + household contacts - [2]
-3. Full model - [3] (depends on project timeline)
-	- [2] + baseline treatment + intervention + drug susceptibility
-	- [2] + drug susceptibility + baseline treatment + intervention
+2. [1] + risk factor (household TB contacts) - [2]
+3. [2] + baseline treatment - [3]
+4. [3] + intervention
 
 
 
