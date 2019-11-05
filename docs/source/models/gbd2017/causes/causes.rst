@@ -23,11 +23,12 @@ causes of death or disease are mutually exclusive and collectively exhaustive.
 
     - ... down to the most detailed level
 
-Some causes are only associated with non-fatal outcomes, such as lower back pain.
-
 Measures for causes include:  
 Deaths, incidence, prevalence, YLDs, YLLs, and DALYs
-	
+
+And metrics for causes include:  
+Counts, rates, and fractions
+
 Modeling causes of death
 ------------------------
 
@@ -36,7 +37,7 @@ Modeling causes of death
 
 **Modeling approach** 
 
-Most causes use a centrally-maintained Bayesian ensemble model (CODEm)
+Most causes are estimated using a centrally-maintained Bayesian ensemble modeling tool (CODEm)
 
 - Bayesian: estimates based on probabilities
 - Ensemble: combines many unique submodels into a final model
