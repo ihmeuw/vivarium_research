@@ -149,11 +149,6 @@ What does a model document look like?
 Common Cause Models
 -------------------
 
-.. todo::
-
-   Add in visual representations of cause models (link .pngs)
-
-
 Common cause model structures are described in the table and dicussed in further detail below. `Non-Standard Cause Models`_ are covered afterward.
 
 +---------+--------------------------------+---------------------------------------------------------------------+
@@ -179,6 +174,8 @@ Common cause model structures are described in the table and dicussed in further
 SI
 ++
 
+.. image:: SI.png
+
 In this cause model structure, simulants in the susceptible state can transition to the infected state, where they 
 will remain for the remainder of the simulation. 
 
@@ -190,6 +187,8 @@ Examples of conditions appropriate for SI cause models include Alzheimer’s dis
 
 SIS
 +++
+
+.. image:: SIS.png
 
 In this cause model structure, simulants in the susceptible state can transition to the infected state and 
 simulants in the infected state can transition to the susceptible state. Notably, this cause model allows for
@@ -204,6 +203,8 @@ Examples of conditions appropriate for SIS cause models include diarrheal diseas
 
 SIR
 +++
+
+.. image:: SIR.png
 
 In this cause model structure, simulants in the susceptible state can transition to the infected state and 
 simulants in the infected state can transition to a recovered state where they will remain for the remainder
@@ -228,8 +229,12 @@ This cause model structure is appropriate for conditions that are present at bir
 An example of a condition appropriate for a neonatal cause model without recovery from the condition state is 
 preterm birth.
 
+.. image:: Neonatal_no_recover.png
+
 An example of a condition appropriate for a neonatal cause model with potential recovery from the condition 
 state is cleft palate (which may be treated later in life).
+
+.. image:: Neonatal_recover.png
 
 .. _`Non-Standard Cause Models`:
 
