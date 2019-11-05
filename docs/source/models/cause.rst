@@ -202,20 +202,15 @@ and discussed in more detail afterward. `Non-standard data sources`_ are discuss
 |                            |experienced due to disability   |attributed to       |
 |                            |associated with condition       |cause model states  |
 +----------------------------+--------------------------------+--------------------+
-|`Cause-Specific Mortality`_ |Number of deaths due to a given |
-|                            |cause per person-year in the    |
-|                            |total population                |
+|`Cause-Specific Mortality`_ |                                |                    |
 +----------------------------+--------------------------------+--------------------+
-|`Excess Mortality`_         |Number of deaths due to a given |
-|                            |cause per person-year in the    |
-|                            |population with the condition   |
-
+|`Excess Mortality`_         |                                |                    |
 +----------------------------+--------------------------------+--------------------+
 
 .. _Prevalence:
 
 Prevalence
-+++++++++
+++++++++++
 
 Prevalence is defined as the **proportion of a given population that possesses a given condition or trait** at a 
 given timepoint.
