@@ -1,0 +1,15 @@
+Label,Source,Sink,Unit,Calculation,Note
+1,"S_TB, S_HIV","LTBI, S_HIV",rate,LTBI incidence (i_954),dismod_mr (0.01 stand-in value)
+2,"S_TB, S_HIV","S_TB, C_HIV",rate,i_300,
+3,"LTBI, S_HIV","R, S_HIV",NA,LTBI remission,treatment algorithm (0.0 stand-in)
+4,"LTBI, S_HIV","AcTB, S_HIV",rate,(i_934 + i_946 + i_947) / (prev_954 * (1 - prev_300)),
+5,"LTBI, S_HIV","LTBI, C_HIV",rate,i_300,
+6,"R, S_HIV","S_TB, S_HIV",duration,,duration of protection conferred by LTBI treatment
+7,"R, S_HIV","R, C_HIV",rate,i_300,
+8,"R, C_HIV","S_TB, C_HIV",duration,,duration of protection conferred by LTBI treatment
+9,"S_TB, C_HIV","LTBI, C_HIV",rate,LTBI incidence,dismod_mr (0.01 stand-in value)
+10,"LTBI, C_HIV","R, C_HIV",NA,LTBI remission,treatment algorithm (0.0 stand-in)
+11,"LTBI, C_HIV","AcTB, C_HIV",rate,(i_948 + i_949 + i_950) / (prev_954 * prev_300),
+12,"AcTB, C_HIV","S_TB, C_HIV",rate,All-form active TB remission,dismod id 9422 stand-in
+13,"AcTB, S_HIV","AcTB, C_HIV",rate,i_300,
+14,"AcTB, S_HIV","S_TB, S_HIV",rate,All-form active TB remission,dismod id 9422 stand-in
