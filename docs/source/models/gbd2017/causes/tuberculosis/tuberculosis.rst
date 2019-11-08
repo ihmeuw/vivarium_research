@@ -41,8 +41,10 @@ an ongoing risk of developing active tuberculosis through reactivation.
 What is TB/HIV model?
 ---------------------
 It's a complex joint model that includes both tuberculosis and HIV/AIDS in the model.
-We model TB and HIV together since GBD 2017 TB model only involves HIV negative TB portion
-and we intend to model the impact of HIV on TB as well.  
+We model TB and HIV together since GBD has also studied the impact of HIV on TB as well.
+Note that we have excluded the active TB drug resistance for our model and GBD predicted
+the proportion of new TB cases with MDR-TB or XDR-TB by ST-GPR.
+(GBD appendix: 03_Hmwe_TB_Nonfatal2017_resub)  
 
 GBD hierarchy
 -------------
@@ -50,6 +52,8 @@ GBD hierarchy
 
 - {Anemia} = [no_anemia, mild_anemia, moderate_anemia, severe_anemia]
 - {HIV/AIDS} = [early_hiv, symptomatic_hiv, hiv_aids_with_art, aids]
+The causes in the GBD at any level of hierarchy are mutually exclusive
+and collectively exhaustive. 
 
 Cause model diagram
 ------------------------
@@ -57,16 +61,29 @@ Cause model diagram
 
 Data sources
 ------------
-.. csv-table:: *State Measures*
+.. csv-table:: **State Measures**
    :file: state_inputs.csv
    :header-rows: 1
 
-.. csv-table:: *Transitions*
+.. csv-table:: **Transitions**
    :file: transitions.csv
    :header-rows: 1
 
-The most recent model inputs documentation lives at
-`J:/Project/simulation_science/latent_tuberculosis_infection/report/model_inputs_researcher_ltbi.docx`
+Modeling strategy for non-standard data sources
+-----------------------------------------------
+LTBI incidence calculation
+ - We ran dismod_mr 1.1.0 and used LTBI prevalence, excess MR (equivalent to 
+   AcTB incidence / LTBI prevalence), remission (zero), and all causes CSMR as 
+   inputs to back calculate the LTBI incidence data that are not exist in GBD. 
+   Then we load the location-/age-/sex-/year-/draw- specific LTBI incidence 
+   estimates into the artifact. (Note that the age range for estimated LTBI
+   incidence is 0 to 100 and age interval equal to one.)
+TB remission
+ - The current model applied all-form active TB remission (dismod_id=9422)
+   to inform the transition flow from HIV positive active TB and HIV negative
+   active TB back to susceptible. The future plan is to disaggregate the all-form
+   active TB remission by HIV status based on TB duration data. (WHO)
+
 
 ========================================
 TB/HIV model validation and verification
@@ -121,15 +138,27 @@ Apply the formula to other measures (e.g. DALYs)
 
 Steps of model verification
 ---------------------------
-- Step 1 (do it before and after simulation runs)
-	- CSMR_297 + CSMR_298 = Sum(Prev_s * ExcessMR_s)
-	- ylds_297 + ylds_298 = Sum(Prev_i * dw_i)
-	- Prev ~ Incidence / (Remission + Excess MR)
-	- Plot data
-- Step 2 (do it after simulation runs)
-	- Constrained verification
-		- e.g. compare (disease counts / person time) to incidence in GBD
-	- Unconstrained verification
-		- CSMR
-		- YLLs
-		- YLDs
+1. Set hypothesis
+	- The sum of the prevalences of all model states should equal
+	  to the GBD TB prevalence plus HIV prevalence. (Pre_297 + Prev_298
+	  = Sum(Prev_s))
+	- The sum of the cause-specific mortality of all model states
+	  should equal to the GBD TB CSMR plus HIV CSMR. (CSMR_297 + 
+	  CSMR_298 = Sum(Prev_s * ExcessMR_s))
+	- The prevalence weighted sum of the disability weight of all model states
+	  should equal to the GBD TB YLDs plus HIV YLDs. (ylds_297 + ylds_298 
+	  = Sum(Prev_s * dw_s))
+2. Check for proposed hypothesis (e.g. prevalence for the whole model)
+	- **Data:** Once the model input data is produced and put in the artifact,
+	  produce a graph of the sum of the input data prevalences and compare
+	  it to the GBD data not in the model.
+	- **Sim initialization:** Initialize a simulation using the model input data
+	  and count the disease event to make sure it matches with GBD data 
+	  not in the model.
+	- **Historical calibration:** Run a simulation from 2012 to 2017 and count
+	  the disease event at the end of the sim to make sure it matches with
+	  GBD data not in the model.
+	- **Baseline verification:** Run a simulation from 2020 to 2025 and count
+	  the disease event at the end of the sim to make sure the baseline
+	  model outcomes match with GBD 2017 results.
+
