@@ -169,58 +169,106 @@ SIR
 Neonatal
 ++++++++
 
-Common data sources for cause models
+Data Sources for Cause Models
 ------------------------------------
 
 .. todo::
 
-   Update mortality-related data sources within existing format.
+   #. Update mortality-related data sources within existing format (yaqi).
+   #. Restructure as initialization/transition/mortality/morbidity (combine
+      standard/non-standard)
+   #. Move hazard rate stuff to separate survival analysis file
+   #. Add info about population level data --> individual level data at 
+      beginning (see James' comment)
+   #. Update uses column in table to be more desciptive 
+   #. Change obesity example to a GBD cause example
+   #. Clarify prevalence vs. birth prevenalence initialization
+   #. add example of specific age groups to incidence person time description
+   #. Include formulas discussed in office hours for incidence/hazards and 
+      then link out to surv. analysis page
+   #. At-risk approximation not necessarily ok for long simulations... change 
+      this. Also change "may" to "definitely will"
+   #. Change remission example to diarrheal disease
+   #. Describe the relationship that duration and transition rates can play 
+      when there are multiple ways out of a state (LTBI)
+   #. Note restrictions are in every model
 
 Once a cause model structure is specified, data is needed to inform its states
 and transitions. For our purposes, cause models generally have the following
 data needs:
 
-#. The probability that a simulant will start the simulation in a given state
-   within the cause model.
-#. The probability that a simulant will transition to a new state within the
-   cause model in a given time-step.
-#. The disability weight for each state in the cause model
-#. The probability that a simulant in a given cause model state will die in a
-   given time-step.
+#. `Cause Model Initialization`_
+    - The probability that a simulant will start the simulation in a given 
+      state within the cause model.
+#. `Cause Model Transitions`_
+    - The probability that a simulant will transition to a new state within 
+      the cause model in a given time-step.
+#. `Mortality Impacts`_
+    - The probability that a simulant in a certain cause model state will die
+      in a given time-step.
+#. `Morbidity Impacts`_
+    - The amount of disability a simulant experiences in a certain cause 
+      model state
+
+Additionally, **any restrictions for cause models need to be specified.** For 
+instance, some causes (e.g. ovarian cancer) are sex-specific and some causes 
+are age-specific (e.g. Alzheimer's disease). **Restrictions on any and all 
+cause-model states, transitions, and mortality/morbidity impacts must be 
+specified.**
 
 There are several common data sources that can be used for these needs, which
 are outlined in the table below and discussed in more detail afterward.
-`Non-standard data sources`_ are discussed later on this page.
 
 .. list-table:: Data Definitions
-   :widths: 20 30 30
+   :widths: 20 30 30 30
    :header-rows: 1
 
    * - Measure
      - Definition
-     - Uses
+     - Model Application
+     - Specific Use
    * - `Prevalence`_
-     - Proportion of population with a given condition.
-     - Initialize cause model states.
+     - Proportion of population with a given condition
+     - Initialization
+     - Represents the probability a simulant will begin the simulation in a with-condition cause model state
    * - `Birth Prevalence`_
      - Proportion of all live births born with a given condition.
-     - Initialize neonatal cause model states.
+     - Initialization
+     - Represents the probability a simulant born during the simulation will be born into a with-condition cause model state
    * - `Incidence`_
-     - Number of new cases of a given condition per person-year.
-     - Estimate transition rates.
+     - Number of new cases of a given condition per person-year of the at-risk population
+     - Transition rates
+     - Once scaled to simulation time-step, represents the probability a simulant will transition from infected to recovered
    * - `Remission`_
-     - Number of recovered cases from a given condition per person-year.
-     - Estimate transition rates.
+     - Number of recovered cases from a given condition per person-year of the population with the condition
+     - Transition rates
+     - Once scaled to simulation time-step, represents the probability a simulant will transition from infected to recovered
+   * - `Duration`_
+     - Length of time a condition lasts
+     - Transition rates
+     - Amount of time a simulant remains in a given state
+   * - Restrictions
+     - List of groups that are not included in a cause
+     - General
+     - List of population groups cause model does not apply to
    * - `Disability Weights`_
      - Proportion of full health not experienced due to disability associated
        with a given condition.
-     - Measure disability attributed to cause model states.
+     - Morbidity impacts
+     - Measure disability attributed to cause model states
    * - `Cause-specific Mortality`_
+     -
      -
      -
    * - `Excess Mortality`_
      -
      -
+     -
+
+.. _`Cause Model Initialization`:
+
+Cause Model Initialization
+--------------------------
 
 Prevalence
 ++++++++++
@@ -262,16 +310,32 @@ the simulation will be born into a given neonatal cause model state.**
   For example, the probability that a simulant born during a simulation of
   cleft lip in the United States in 2006 is 0.00106, or 0.106%.
 
+.. _`Cause Model Transitions`:
+
+Cause Model Transitions
+-----------------------
+
 Incidence
 +++++++++
 
 Incidence rates are defined as the **number of new cases of a condition that
 occur per person-year of the at-risk population (individuals without
-condition).** Specifically, the at-risk population can be represented as
-`1 - condition prevalence`.
+condition).** Specifically, the at-risk population at a given time can be 
+represented as `1 - condition prevalence at that time`.
 
   For example, the incidence of multiple sclerosis (MS) in the United States
-  is 2.8 per 100,000 person-years of the at-risk population.
+  is 2.8 per 100,000 person-years of the at-risk population. The exact 
+  interpretation of this measure can be a little tricky. Let's consider a few 
+  examples.
+
+      First, consider a hypothetical population of 100,000 individuals who never die. Assuming that no one in this hypothetical population has MS at the beginning of the year, if we followed each individual in this population for a full year (100,000 people * 1 year = 100,000 person-years), we would expect 2.8 individuals to develop MS within this timeframe. 
+
+  However, the above example does not consider the important impact of mortality within a population. 
+
+      So, let's imagine that we intend to follow 10 individuals for one year. Now let's imagine that two of the individuals die six months into our observation window. The other eight individuals remain alive and we follow each of them for the full year period. In this case, even though we intended to observe 10 person-years, we only observed 9 person-years! This is because the two individuals who died contributed only 0.5 person-years each to our observaton period.
+
+      Now, with this in mind, let's revist our previous example. We intend to follow a cohort of 100,000 individuals for one year each. However, several of these individuals die within that year and we end up observing a total of 90,000 person-years. Therefore, we would expect 2.52 individuals in this cohort to develop MS within this timeframe (2.8 cases / 100,000 py * 90,000 py).
+
 
   This suggests that if we followed 100,000 individuals without MS for 1
   year each (100,000 people * 1 year = 100,000 person-years), we would expect
@@ -369,20 +433,10 @@ state will transition to a non-infected (without condition) state.
   The considerations discussed in the incidence section above apply to
   remission rates as well. See above_ for details.
 
-Disability Weights
-++++++++++++++++++
+.. _`Duration`:
 
-Cause-Specific Mortality
-++++++++++++++++++++++++
-
-Excess Mortality
-++++++++++++++++
-
-Non-Standard Data Sources
--------------------------
-
-Duration
-++++++++
+Duration-Based Transitions
+++++++++++++++++++++++++++
 
 In certain situations, there may be restrictions on the amount of time a
 simulant may occupy a given cause model state. In these cases, it is important
@@ -396,99 +450,21 @@ phase before transitioning into the chronic phase.
   from susceptible to a myocardial infarction state, where they remain for
   28 days, before they transition to a ischemic heart disease state.
 
-Restrictions
-++++++++++++
+.. _`Mortality Impacts`:
 
-In addition to time-related restrictions discussed above, certain situations
-may require additional restrictions to be placed on cause model states.
-Examples of possible restrictions include:
+Mortality Impacts
+-----------------
 
-- Age range restrictions (e.g. only simulants under 5 years old may
-  enter this state)
-- Sex restrictions (e.g. only female simulants may enter this state)
-- Restrictions related to states in other cause models (e.g. only simulants
-  who are susceptible to condition X may enter this state)
-- Etc.
+Cause-Specific Mortality
+++++++++++++++++++++++++
 
-Hazard Rates
-++++++++++++
+Excess Mortality
+++++++++++++++++
 
-A "hazard" is a term commonly used in epidemiology survival analysis. For our
-purposes, we can think of a hazard rate as an *instantaneous* version of
-incidence, remission, or mortality rates as opposed to the annual versions
-of these rates that we've previously discussed.
+.. _`Morbidity Impacts`:
 
-  **Annual rates** tell us how many new cases occur per person-year, or in
-  other words, per person over a time *frame* of one year. For instance,
+Morbidity Impacts
+-----------------
 
-    The annual (hypothetical) incidence of influenza was 0.15 cases per
-    person-year.
-
-    The annual (hypothetical) cancer mortality rate was 0.2 cases per
-    person-year.
-
-  **Instantaneous (or hazard) rates**, tell us the how many new cases occur at
-  a specific *time-point*. For instance,
-
-    The (hypothetical) hazard rate of influenza incidence was 0.001 on July
-    1st and 0.3 on December 1st.
-
-    The hazard rate of (hypothetical) cancer mortality is 0.4 in the first
-    year after diagnosis, 0.3 in the second year of diagnosis, 0.2 in the
-    third year after diagnosis, and so-on.
-
-As illustrated through these examples, the hazard rate allows us to consider
-differing incidence rates at different time points relative to a specific
-contextualizing event.
-
-In the example of hazard rates for cancer mortality, we see that an individual
-is more likely to die from cancer in the first year following diagnosis than
-the third year. Importantly, this can be interpreted as an individual who has
-lived three years after diagnosis is less likely to die from breast cancer
-than an individual who has so far only survived one year after diagnosis.
-
-However, in the example of the annual cancer mortality rate, we have a single
-measure which we are forced to assume is constant and uniformly distributed
-over the time frame we apply it to. This assumption would suggest that an
-individual with breast cancer always has the same probability of breast cancer
-mortality following diagnosis, regardless of how much time has passed since
-diagnosis. The assumption also suggests that an individual has the same
-probability of influenza infection on every day of the year.
-
-**What does this mean for choosing the best cause model data source?**
-
-Depending on the specific cause model at hand, the prefered data source may
-vary between annual incidence rates and instantaneous incidence (or hazard)
-rates. The table below discusses some considerations that may influence
-which data source is preferable. In general...
-
-**Annual rates are preferable when:**
-
-- The assumption of uniform and constant distribution of new cases is **valid**
-
-      or
-
-- The assumption of uniform and constant distribution of new cases is
-  **invalid**, but there is insufficient data to utilize an instantaneous
-  hazard rate (note this as a model limitation and consider other ways to
-  address it)
-
-      or
-
-- The assumption of uniform and constant distribution of new cases is
-  **invalid**, but the assumption will not impact model results in a
-  meaningful way
-
-**Instantaneous (hazard) rates are preferable when:**
-
-- There is not a uniform or constant distribution of new cases over an
-  annual time-frame
-
-      and
-
-- There is sufficient data to inform incidence on a time-frame more specific
-  than annual
-
-      and
-
-- Using a hazard rate adds value to the model
+Disability Weights
+++++++++++++++++++
