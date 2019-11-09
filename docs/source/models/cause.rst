@@ -175,17 +175,12 @@ Data Sources for Cause Models
 .. todo::
 
    #. Update mortality-related data sources within existing format (yaqi).
-   #. Change obesity example to a GBD cause example
-   #. Clarify prevalence vs. birth prevenalence initialization
-   #. add example of specific age groups to incidence person time description
-   #. Include formulas discussed in office hours for incidence/hazards and 
-      then link out to surv. analysis page
-   #. At-risk approximation not necessarily ok for long simulations... change 
-      this. Also change "may" to "definitely will"
-   #. Change remission example to diarrheal disease
    #. Describe the relationship that duration and transition rates can play 
       when there are multiple ways out of a state (LTBI)
-   #. Figure out how to deal with restrictions section
+   #. Update transition rate section to reflect feedback
+   #. Include formulas discussed in office hours for incidence/hazards and 
+      then link out to surv. analysis page
+   #. Change remission example to diarrheal disease
 
 Once a cause model structure is specified, data is needed to inform its states
 and transitions. For our purposes, cause models generally have the following
@@ -203,7 +198,7 @@ data needs:
 #. `Morbidity Impacts`_
     - The amount of disability a simulant experiences in a certain cause 
       model state
-#. Restictions
+#. `Restictions`_
     - Population groups for which a cause model does not apply
 
 Our cause models use approximately instantaneous, individual-based 
@@ -254,7 +249,7 @@ and discussed in more detail afterward.
      - Length of time a condition lasts
      - Transition rates
      - Amount of time a simulant remains in a given state
-   * - Restrictions
+   * - `Restrictions`_
      - List of groups that are not included in a cause
      - General
      - List of population groups for which the cause model does not apply
@@ -283,8 +278,8 @@ Prevalence
 Prevalence is defined as the **proportion of a given population that possesses
 a given condition or trait** at a given time-point.
 
-  For example, the prevalence of obesity in the United States was
-  approximately 40% in 2016.
+  For example, the prevalence of diabetes mellitus in the United States was
+  approximately 6.5% in 2017.
 
 When a *time-frame* (such as 2016, i.e. 1/1/16 to 12/31/16) instead of a
 *time-point* (such as 1/1/16) is reported, it is commonly assumed that the
@@ -297,9 +292,21 @@ Prevalence data can be used to **initialize cause model states** and
 represents the **probability that a simulant will begin the simulation in a
 given state.**
 
-  For example, the probability that a simulant in a model of obesity in the
-  United States beginning in 2016 will begin the simulation as obese is 0.4 or
-  40%.
+  For example, the probability that a simulant in a model of diabetes 
+  mellitus in the United States beginning in 2017 will begin the simulation 
+  with diabetes is 0.065, or 6.5%. 
+
+Notably, prevalence is used to initialize cause model states in the following 
+scenarios:
+
+- A simulant enters the simulation at the start of the simulation
+- A simulant enters the simulation due to immigration to the simulated 
+  location
+- A simulant enters the simulation by *aging* into the simulation
+
+Prevalence is **not** used to initialize cause model states when a simulant 
+is *born* into a simulation. See the below section on birth prevalence for 
+how cause model states are initialized in this scenario.
 
 Birth Prevalence
 ++++++++++++++++
@@ -370,20 +377,10 @@ As mentioned above, the denominator for incidence is person-years of the
 prevalence``). However, in certain scenarios, this may not always be the
 case.
 
-  In situations when the general population is represented in the denominator
-  rather than the at risk population...
-
-
-    If the prevalence of a condition is *small*, ``1 - prevalence`` ~ ``1``.
-    In these cases, incidence calculated as the number of new cases per
-    person-years in the *entire* population will be *approximately* equal to
-    the number of new cases per person-years in the *at-risk* population.
-    Therefore, the approximation will be fairly accurate and likely not have a
-    large impact on the model transition rates.
-
-    If the prevalence of a condition is *large*, ``(1 - prevalence)`` < ``1``.
-    In these cases, the approximation will be more inaccurate and may bias the
-    model transition rates.
+  Incidence rates that use person-time of the *overall* population as the 
+  denomination rather than the *at-risk* population are **biased** data 
+  sources for cause model transitions rates, *especially* if the prevalence 
+  of the condition is large.
 
   Therefore, it is important to understand how incidence data sources used for
   cause models are measured and whether the population in the denominator
@@ -475,3 +472,13 @@ Morbidity Impacts
 
 Disability Weights
 ++++++++++++++++++
+
+.. _`Restrictions`:
+
+Restrictions
+------------
+
+Some causes (e.g. ovarian cancer) are sex-specific and some causes 
+are age-specific (e.g. Alzheimer's disease). **Restrictions on any and all 
+cause-model states, transitions, and mortality/morbidity impacts must be 
+specified.**
