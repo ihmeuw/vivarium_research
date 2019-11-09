@@ -175,12 +175,6 @@ Data Sources for Cause Models
 .. todo::
 
    #. Update mortality-related data sources within existing format (yaqi).
-   #. Restructure as initialization/transition/mortality/morbidity (combine
-      standard/non-standard)
-   #. Move hazard rate stuff to separate survival analysis file
-   #. Add info about population level data --> individual level data at 
-      beginning (see James' comment)
-   #. Update uses column in table to be more desciptive 
    #. Change obesity example to a GBD cause example
    #. Clarify prevalence vs. birth prevenalence initialization
    #. add example of specific age groups to incidence person time description
@@ -191,7 +185,7 @@ Data Sources for Cause Models
    #. Change remission example to diarrheal disease
    #. Describe the relationship that duration and transition rates can play 
       when there are multiple ways out of a state (LTBI)
-   #. Note restrictions are in every model
+   #. Figure out how to deal with restrictions section
 
 Once a cause model structure is specified, data is needed to inform its states
 and transitions. For our purposes, cause models generally have the following
@@ -209,15 +203,28 @@ data needs:
 #. `Morbidity Impacts`_
     - The amount of disability a simulant experiences in a certain cause 
       model state
+#. Restictions
+    - Population groups for which a cause model does not apply
 
-Additionally, **any restrictions for cause models need to be specified.** For 
-instance, some causes (e.g. ovarian cancer) are sex-specific and some causes 
-are age-specific (e.g. Alzheimer's disease). **Restrictions on any and all 
-cause-model states, transitions, and mortality/morbidity impacts must be 
-specified.**
+Our cause models use approximately instantaneous, individual-based 
+probabilities to make decisions about how an individual simulant moves about 
+a cause model. Because we cannot possibly predict the exact moment a specific 
+individual will get sick or die, we use population-level estimates as our 
+best-guess predictors for individual-level estimates. 
 
-There are several common data sources that can be used for these needs, which
-are outlined in the table below and discussed in more detail afterward.
+  For instance, we don't know if Jane Doe will die in the next year, however, 
+  we can use information on the overall rate of death in Jane Doe's 
+  population to make a guess on the probability that Jane Doe will die in the 
+  next year.
+
+  We can increase the quality of this guess by adding detail to the model we 
+  use to make our guesses. For instance, if we know Jane Doe has HIV, we can 
+  use the rate of death among individuals with HIV to make a better guess at 
+  the probability Jane Doe will die in the next year.
+
+There are several common population-level data sources that are used to 
+inform our cause models. These data sources are outlined in the table below 
+and discussed in more detail afterward.
 
 .. list-table:: Data Definitions
    :widths: 20 30 30 30
@@ -250,7 +257,7 @@ are outlined in the table below and discussed in more detail afterward.
    * - Restrictions
      - List of groups that are not included in a cause
      - General
-     - List of population groups cause model does not apply to
+     - List of population groups for which the cause model does not apply
    * - `Disability Weights`_
      - Proportion of full health not experienced due to disability associated
        with a given condition.
