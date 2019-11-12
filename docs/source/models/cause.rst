@@ -168,27 +168,25 @@ data needs:
 
 `Cause Model Initialization`_
 
-  The probability that a simulant will start the simulation in a given
-  state within the cause model.
+  Which cause model state will a simulant begin the simulation in?
 
 `Cause Model Transitions`_
 
-  The probability that a simulant will transition to a new state within
-  the cause model in a given time-step.
+  How and when does a simulant move between cause model states?
 
 `Mortality Impacts`_
 
-  The probability that a simulant in a certain cause model state will die
-  in a given time-step.
+  How and when does a simulant die and how does this differ depending on the 
+  specific cause model state that the simulant occupies?
 
 `Morbidity Impacts`_
 
-  The amount of disability a simulant experiences in a certain cause model
-  state.
+  How does a simulant experience morbidity and how does this differ depending on the specific cause model state that the simulant occupies?
 
 `Restrictions`_
 
-  Population groups for which a cause model does not apply.
+  For which population groups (e.g. age and sex groups) is this cause model 
+  not valid?
 
 Our cause models use approximately instantaneous, individual-based
 probabilities to make decisions about how an individual simulant moves about
