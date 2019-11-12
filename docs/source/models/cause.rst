@@ -146,54 +146,101 @@ What does a model document look like?
 
 [[to be updated based on experience from LTBI cause model document, and generalization thereof]]
 
-Common cause models
--------------------
+
+Data Sources for Cause Models
+-----------------------------
 
 .. todo::
 
-   Format as table with model type, description.
-   Fill in descriptions.
+   #. Update mortality-related data sources within existing format (yaqi).
+   #. Describe the relationship that duration and transition rates can play 
+      when there are multiple ways out of a state (LTBI)
+   #. Update transition rate section to reflect feedback
+   #. Include formulas discussed in office hours for incidence/hazards and 
+      then link out to surv. analysis page
+   #. Change remission example to diarrheal disease
 
-SI
-++
+Once a cause model structure is specified, data is needed to inform its states
+and transitions. For our purposes, cause models generally have the following
+data needs:
 
-SIS
-+++
+#. `Cause Model Initialization`_
+    - The probability that a simulant will start the simulation in a given 
+      state within the cause model.
+#. `Cause Model Transitions`_
+    - The probability that a simulant will transition to a new state within 
+      the cause model in a given time-step.
+#. `Mortality Impacts`_
+    - The probability that a simulant in a certain cause model state will die
+      in a given time-step.
+#. `Morbidity Impacts`_
+    - The amount of disability a simulant experiences in a certain cause 
+      model state
+#. `Restrictions`_
+    - Population groups for which a cause model does not apply
 
-SIR
-+++
+Our cause models use approximately instantaneous, individual-based 
+probabilities to make decisions about how an individual simulant moves about 
+a cause model. Because we cannot possibly predict the exact moment a specific 
+individual will get sick or die, we use population-level estimates as our 
+best-guess predictors for individual-level estimates. 
 
-Neonatal
-++++++++
+  For instance, we don't know if Jane Doe will die in the next year, however, 
+  we can use information on the overall rate of death in Jane Doe's 
+  population to make a guess on the probability that Jane Doe will die in the 
+  next year.
 
-Common data sources for cause models
-------------------------------------
+  We can increase the quality of this guess by adding detail to the model we 
+  use to make our guesses. For instance, if we know Jane Doe has HIV, we can 
+  use the rate of death among individuals with HIV to make a better guess at 
+  the probability Jane Doe will die in the next year.
 
-.. todo::
+There are several common population-level data sources that are used to 
+inform our cause models. These data sources are outlined in the table below 
+and discussed in more detail afterward.
 
-   Format as table with measure, measure definition, data sources and
-   their uses.
+.. list-table:: Data Definitions
+   :widths: 20 30 30 30
+   :header-rows: 1
 
-Incidence
-+++++++++
-
-Birth prevalence
-++++++++++++++++
-
-Remission
-+++++++++
-
-Prevalence
-++++++++++
-
-Cause-specific mortality
-++++++++++++++++++++++++
-
-Excess mortality
-++++++++++++++++
-
-Disability weight
-+++++++++++++++++
-
-Non-standard data sources for cause models
-------------------------------------------
+   * - Measure
+     - Definition
+     - Model Application
+     - Specific Use
+   * - `Prevalence`_
+     - Proportion of population with a given condition
+     - Initialization
+     - Represents the probability a simulant will begin the simulation in a with-condition cause model state
+   * - `Birth Prevalence`_
+     - Proportion of all live births born with a given condition.
+     - Initialization
+     - Represents the probability a simulant born during the simulation will be born into a with-condition cause model state
+   * - `Incidence`_
+     - Number of new cases of a given condition per person-year of the at-risk population
+     - Transition rates
+     - Once scaled to simulation time-step, represents the probability a simulant will transition from infected to recovered
+   * - `Remission`_
+     - Number of recovered cases from a given condition per person-year of the population with the condition
+     - Transition rates
+     - Once scaled to simulation time-step, represents the probability a simulant will transition from infected to recovered
+   * - `Duration`_
+     - Length of time a condition lasts
+     - Transition rates
+     - Amount of time a simulant remains in a given state
+   * - `Restrictions`_
+     - List of groups that are not included in a cause
+     - General
+     - List of population groups for which the cause model does not apply
+   * - `Disability Weights`_
+     - Proportion of full health not experienced due to disability associated
+       with a given condition.
+     - Morbidity impacts
+     - Measure disability attributed to cause model states
+   * - `Cause-specific Mortality`_
+     -
+     -
+     -
+   * - `Excess Mortality`_
+     -
+     -
+     -
