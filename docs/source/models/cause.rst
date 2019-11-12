@@ -260,8 +260,55 @@ Cause Model Initialization
 Prevalence
 ++++++++++
 
+Prevalence is defined as the **proportion of a given population that possesses
+a given condition or trait** at a given time-point.
+
+  For example, the prevalence of diabetes mellitus in the United States was
+  approximately 6.5% in 2017.
+
+When a *time-frame* (such as 2016, i.e. 1/1/16 to 12/31/16) instead of a
+*time-point* (such as 1/1/16) is reported, it is commonly assumed that the
+reported prevalence represents the prevalence of the *midpoint* of
+that time-frame (7/1/16 is the midpoint for the time frame of all of 2016).
+However, this may not always be the case and it should be considered when
+relevant.
+
+Prevalence data can be used to **initialize cause model states** and
+represents the **probability that a simulant will begin the simulation in a
+given state.**
+
+  For example, the probability that a simulant in a model of diabetes 
+  mellitus in the United States beginning in 2017 will begin the simulation 
+  with diabetes is 0.065, or 6.5%. 
+
+Notably, prevalence is used to initialize cause model states in the following 
+scenarios:
+
+- A simulant enters the simulation at the start of the simulation
+- A simulant enters the simulation due to immigration to the simulated 
+  location
+- A simulant enters the simulation by *aging* into the simulation
+
+Prevalence is **not** used to initialize cause model states when a simulant 
+is *born* into a simulation. See the below section on birth prevalence for 
+how cause model states are initialized in this scenario.
+
 Birth Prevalence
 ++++++++++++++++
+
+Birth prevalence is defined as the **proportion of live births in a given
+population that possess a given condition or trait at birth.**
+
+  For example, the birth prevalence for cleft lip in the United States in 2006
+  was 10.6 per 10,000 live births, or 0.106%.
+
+Birth prevalence data can be used to **initialize neonatal cause model
+states** and represent the **probability that a simulant who is born during
+the simulation will be born into a given neonatal cause model state.**
+
+  For example, the probability that a simulant born during a simulation of
+  cleft lip in the United States in 2006 is 0.00106, or 0.106%.
+
 
 Cause Model Transitions
 -----------------------
