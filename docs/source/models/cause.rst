@@ -28,28 +28,28 @@ GBD taxonomy.  :ref:`Latent tuberculosis <2017_cause_latent_tb>` infection
 
 
 What is a "cause" and what is a cause model?
-------------------
+--------------------------------------------
 
-When we say "cause" in simulation modeling with `vivarium`, we often mean a disease.
+When we say "cause" in simulation modeling with `vivarium`, we often mean a
+disease.
 
-There is a reson for this potentially confusing terminology: a “cause of death”, as
-might be included as the bottom line of the 
+There is a reason for this potentially confusing terminology: a “cause of
+death”, as might be included as the bottom line of the
 top half of a death certificate, is often a disease but sometimes an injury.
-And we extend this to also refer to causes of nonfatal health
-loss, too.
+And we extend this to also refer to causes of nonfatal health loss, too.
 
 .. image:: death_certificate.png
 
 A cause model is a simplification of a cause of death or disease for the
 purposes of simulation modeling.  It is always an idealization of the messy
 complexity of reality, and is designed to be acceptable to outside experts on
-the cause, as well as be parsimonious with the data available from the GBD that
-might inform the model.
+the cause, as well as be parsimonious with the data available from the GBD
+that might inform the model.
 
 .. todo::
 
    Link to GBD hierarchies for production of YLLs and YLDs.  Add discussion
-   of the discrepency between our cause models (unified dynamic models of
+   of the discrepancy between our cause models (unified dynamic models of
    prevalence, incidence, mortality & morbidity) and GBD models (separate
    statistical models of mortality & morbidity only, with intermediate (e.g.
    dismod) unified models). Note where this might cause modeling issues!
@@ -62,8 +62,8 @@ Learning objectives
 
 After reading this chapter, learners should be able to:
 
-1. Develop an understanding of how the GBD, literature, and experts think about
-   a cause.
+1. Develop an understanding of how the GBD, literature, and experts think
+   about a cause.
 2. Build :term:`internally consistent <Internally Consistent Model>` cause
    models which are :term:`sufficiently complex <Sufficiently Complex Model>`
    given larger modeling goals.
@@ -104,12 +104,12 @@ Why do we want a document that describes each cause model?
 * Because a lot of work goes into gaining understanding and developing an
   appropriately complex model, and we don’t want to repeat that work.
 * Because we (researchers) need to communicate clearly and precisely with
-  software engineers, data scientists, and each other about what the model 
+  software engineers, data scientists, and each other about what the model
   must do and what data must inform it.
 * Because we will need to communicate to an outside audience, including
   critics, how we generated substantive results of interest, and that will
-  include readers who want to know exactly how we modeled the diseases included
-  in our work.
+  include readers who want to know exactly how we modeled the diseases
+  included in our work.
 
 
 What does a model document look like?
@@ -126,14 +126,15 @@ What does a model document look like?
 * Title which is descriptive
 * Cause model diagram
 
-  - Set of states that are “mutually exclusive and collectively exhaustive”---a
-    single agent is in exactly one of these states at any point in time
-  - Set of transitions between states
+  - Set of states that are “mutually exclusive and collectively
+    exhaustive”---a single agent is in exactly one of these states at any
+    point in time.
+  - Set of transitions between states.
 
-* Definition of model and states
+* Definition of model and states.
 * Restrictions: who does this apply to?
 * How to initialize the states? (prevalence data)
-* Definition of transitions in terms of states they connect
+* Definition of transitions in terms of states they connect.
 * Transition criteria (rates, durations, deterministic, etc.)
 * How does this model connect to other models.  That is, what outcomes this
   disease influences? (e.g. disability, mortality, or incidence)
@@ -144,7 +145,8 @@ What does a model document look like?
 * Validation criteria
 * Assumptions about the model
 
-[[to be updated based on experience from LTBI cause model document, and generalization thereof]]
+[[to be updated based on experience from LTBI cause model document, and
+generalization thereof]]
 
 
 Data Sources for Cause Models
@@ -153,10 +155,10 @@ Data Sources for Cause Models
 .. todo::
 
    #. Update mortality-related data sources within existing format (yaqi).
-   #. Describe the relationship that duration and transition rates can play 
+   #. Describe the relationship that duration and transition rates can play
       when there are multiple ways out of a state (LTBI)
    #. Update transition rate section to reflect feedback
-   #. Include formulas discussed in office hours for incidence/hazards and 
+   #. Include formulas discussed in office hours for incidence/hazards and
       then link out to surv. analysis page
    #. Change remission example to diarrheal disease
 
@@ -165,17 +167,17 @@ and transitions. For our purposes, cause models generally have the following
 data needs:
 
 `Cause Model Initialization`_
-  
-  The probability that a simulant will start the simulation in a given 
+
+  The probability that a simulant will start the simulation in a given
   state within the cause model.
 
 `Cause Model Transitions`_
 
-  The probability that a simulant will transition to a new state within 
+  The probability that a simulant will transition to a new state within
   the cause model in a given time-step.
 
 `Mortality Impacts`_
-  
+
   The probability that a simulant in a certain cause model state will die
   in a given time-step.
 
@@ -188,24 +190,24 @@ data needs:
 
   Population groups for which a cause model does not apply.
 
-Our cause models use approximately instantaneous, individual-based 
-probabilities to make decisions about how an individual simulant moves about 
-a cause model. Because we cannot possibly predict the exact moment a specific 
-individual will get sick or die, we use population-level estimates as our 
-best-guess predictors for individual-level estimates. 
+Our cause models use approximately instantaneous, individual-based
+probabilities to make decisions about how an individual simulant moves about
+a cause model. Because we cannot possibly predict the exact moment a specific
+individual will get sick or die, we use population-level estimates as our
+best-guess predictors for individual-level estimates.
 
-  For instance, we don't know if Jane Doe will die in the next year, however, 
-  we can use information on the overall rate of death in Jane Doe's 
-  population to make a guess on the probability that Jane Doe will die in the 
+  For instance, we don't know if Jane Doe will die in the next year, however,
+  we can use information on the overall rate of death in Jane Doe's
+  population to make a guess on the probability that Jane Doe will die in the
   next year.
 
-  We can increase the quality of this guess by adding detail to the model we 
-  use to make our guesses. For instance, if we know Jane Doe has HIV, we can 
-  use the rate of death among individuals with HIV to make a better guess at 
+  We can increase the quality of this guess by adding detail to the model we
+  use to make our guesses. For instance, if we know Jane Doe has HIV, we can
+  use the rate of death among individuals with HIV to make a better guess at
   the probability Jane Doe will die in the next year.
 
-There are several common population-level data sources that are used to 
-inform our cause models. These data sources are outlined in the table below 
+There are several common population-level data sources that are used to
+inform our cause models. These data sources are outlined in the table below
 and discussed in more detail afterward.
 
 .. list-table:: Data Definitions
@@ -219,19 +221,25 @@ and discussed in more detail afterward.
    * - `Prevalence`_
      - Proportion of population with a given condition
      - Initialization
-     - Represents the probability a simulant will begin the simulation in a with-condition cause model state
+     - Represents the probability a simulant will begin the simulation in a
+       with-condition cause model state.
    * - `Birth Prevalence`_
      - Proportion of all live births born with a given condition.
      - Initialization
-     - Represents the probability a simulant born during the simulation will be born into a with-condition cause model state
+     - Represents the probability a simulant born during the simulation will
+       be born into a with-condition cause model state.
    * - `Incidence`_
-     - Number of new cases of a given condition per person-year of the at-risk population
+     - Number of new cases of a given condition per person-year of the at-risk
+       population
      - Transition rates
-     - Once scaled to simulation time-step, represents the probability a simulant will transition from infected to recovered
+     - Once scaled to simulation time-step, represents the probability a
+       simulant will transition from infected to recovered.
    * - `Remission`_
-     - Number of recovered cases from a given condition per person-year of the population with the condition
+     - Number of recovered cases from a given condition per person-year of the
+       population with the condition
      - Transition rates
-     - Once scaled to simulation time-step, represents the probability a simulant will transition from infected to recovered
+     - Once scaled to simulation time-step, represents the probability a
+       simulant will transition from infected to recovered
    * - `Duration`_
      - Length of time a condition lasts
      - Transition rates
@@ -239,12 +247,12 @@ and discussed in more detail afterward.
    * - `Restrictions`_
      - List of groups that are not included in a cause
      - General
-     - List of population groups for which the cause model does not apply
+     - List of population groups for which the cause model does not apply.
    * - `Disability Weights`_
      - Proportion of full health not experienced due to disability associated
        with a given condition.
      - Morbidity impacts
-     - Measure disability attributed to cause model states
+     - Measure disability attributed to cause model states.
    * - `Cause-specific Mortality`_
      -
      -
@@ -272,8 +280,8 @@ Incidence
 Remission
 ++++++++++
 
-Duration-Based Transitions
-++++++++++++++++++++++++++
+Duration
+++++++++
 
 Mortality Impacts
 -----------------
