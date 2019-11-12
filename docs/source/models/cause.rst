@@ -164,20 +164,29 @@ Once a cause model structure is specified, data is needed to inform its states
 and transitions. For our purposes, cause models generally have the following
 data needs:
 
-#. `Cause Model Initialization`_
-    - The probability that a simulant will start the simulation in a given 
-      state within the cause model.
-#. `Cause Model Transitions`_
-    - The probability that a simulant will transition to a new state within 
-      the cause model in a given time-step.
-#. `Mortality Impacts`_
-    - The probability that a simulant in a certain cause model state will die
-      in a given time-step.
-#. `Morbidity Impacts`_
-    - The amount of disability a simulant experiences in a certain cause 
-      model state
-#. `Restrictions`_
-    - Population groups for which a cause model does not apply
+`Cause Model Initialization`_
+  
+  The probability that a simulant will start the simulation in a given 
+  state within the cause model.
+
+`Cause Model Transitions`_
+
+  The probability that a simulant will transition to a new state within 
+  the cause model in a given time-step.
+
+`Mortality Impacts`_
+  
+  The probability that a simulant in a certain cause model state will die
+  in a given time-step.
+
+`Morbidity Impacts`_
+
+  The amount of disability a simulant experiences in a certain cause model
+  state.
+
+`Restrictions`_
+
+  Population groups for which a cause model does not apply.
 
 Our cause models use approximately instantaneous, individual-based 
 probabilities to make decisions about how an individual simulant moves about 
@@ -244,3 +253,42 @@ and discussed in more detail afterward.
      -
      -
      -
+
+Cause Model Initialization
+--------------------------
+
+Prevalence
+++++++++++
+
+Birth Prevalence
+++++++++++++++++
+
+Cause Model Transitions
+-----------------------
+
+Incidence
++++++++++
+
+Remission
+++++++++++
+
+Duration-Based Transitions
+++++++++++++++++++++++++++
+
+Mortality Impacts
+-----------------
+
+Cause-Specific Mortality
+++++++++++++++++++++++++
+
+Excess Mortality
+++++++++++++++++
+
+Morbidity Impacts
+-----------------
+
+Disability Weights
+++++++++++++++++++
+
+Restrictions
+------------
