@@ -4,10 +4,10 @@
 Measles
 ==================
 
-Disease Information
+Disease Description
 ===================
 
-Measles is a highly contagious, serious disease caused by a virus.
+Measles_ is a highly contagious, serious disease caused by the `measles virus`_.
 Before the introduction of measles vaccine in 1963 and widespread vaccination,
 major epidemics occurred approximately every 2–3 years and measles caused an
 estimated 2.6 million deaths each year.
@@ -31,22 +31,30 @@ Symptoms include cough, runny nose, fever, conjunctivitis, and red,
 blotchy skin. For measles, ICD 10 codes are B05-B05.9, Z24.4,
 and ICD 9 codes are 055-055.9, 484.0, V04.2, V73.2. [GBD-2017-YLD-Capstone-Appendix-1]_
 
-.. [WHO] Measles Fact Sheet. World Health Organization. May 9, 2019. Accessed Nov 13, 2019. https://www.who.int/news-room/fact-sheets/detail/measles
+References
+----------
 
-.. [GBD-2017-YLD-Capstone-Appendix-1] Supplement to: GBD 2017 Disease and Injury Incidence and Prevalence Collaborators.
+.. [WHO] Measles Fact Sheet. World Health Organization, 9 May 2019. Accessed 13 Nov 2019.
+   https://www.who.int/news-room/fact-sheets/detail/measles
+
+.. [GBD-2017-YLD-Capstone-Appendix-1]
+   Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence Collaborators.
    Global, regional, and national incidence, prevalence, and years lived with disability for
    354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic
-   analysis for the Global Burden of Disease Study 2017. Lancet 2018; 392: 1789–858 (pp. 246-7)
+   analysis for the Global Burden of Disease Study 2017. Lancet 2018; 392: 1789–858
+   <DOI for YLD Capstone_>`_ (pp. 246-7)
 
-`YLD appendix on Lancet.com`_
+   (Direct links to the YLD Appendix are hosted on Lancet.com_ and ScienceDirect_)
 
-`YLD appendix on Science Direct`_
+.. _Lancet.com: `YLD appendix on Lancet.com`_
+.. _ScienceDirect: `YLD appendix on ScienceDirect`_
 
-`DOI for YLD Capstone`_
-
+.. _measles: https://en.wikipedia.org/wiki/Measles
+.. _measles virus: https://en.wikipedia.org/wiki/Measles_morbillivirus
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
-..  _YLD appendix on Science Direct: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
+.. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
 .. _DOI for YLD Capstone: https://doi.org/10.1016/S0140-6736(18)32279-7
+
 
 Modeling Measles in GBD 2017
 ============================
