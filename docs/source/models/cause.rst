@@ -176,16 +176,17 @@ data needs:
 
 `Mortality Impacts`_
 
-  How and when does a simulant die and how does this differ depending on the 
+  How and when does a simulant die and how does this differ depending on the
   specific cause model state that the simulant occupies?
 
 `Morbidity Impacts`_
 
-  How does a simulant experience morbidity and how does this differ depending on the specific cause model state that the simulant occupies?
+  How does a simulant experience morbidity and how does this differ depending
+  on the specific cause model state that the simulant occupies?
 
 `Restrictions`_
 
-  For which population groups (e.g. age and sex groups) is this cause model 
+  For which population groups (e.g. age and sex groups) is this cause model
   not valid?
 
 Our cause models use approximately instantaneous, individual-based
@@ -261,40 +262,40 @@ and discussed in more detail afterward.
      -
 
 Cause Model Initialization
---------------------------
+++++++++++++++++++++++++++
 
 Prevalence
-++++++++++
+^^^^^^^^^^
 
 Birth Prevalence
-++++++++++++++++
+^^^^^^^^^^^^^^^^
 
 Cause Model Transitions
------------------------
++++++++++++++++++++++++
 
 Incidence
-+++++++++
+^^^^^^^^^
 
 Remission
-++++++++++
+^^^^^^^^^
 
 Duration
-++++++++
+^^^^^^^^
 
 Mortality Impacts
------------------
++++++++++++++++++
 
 Cause-Specific Mortality
-++++++++++++++++++++++++
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Excess Mortality
-++++++++++++++++
+^^^^^^^^^^^^^^^^
 
 Morbidity Impacts
------------------
++++++++++++++++++
 
 Disability Weights
-++++++++++++++++++
+^^^^^^^^^^^^^^^^^^
 
 Restrictions
-------------
+++++++++++++
