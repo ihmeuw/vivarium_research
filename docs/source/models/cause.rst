@@ -218,40 +218,42 @@ and discussed in more detail afterward.
      - Model Application
      - Specific Use
    * - `Prevalence`_
-     - Proportion of population with a given condition
+     - Proportion of population with a given condition.
      - Initialization
-     - Represents the probability a simulant will begin the simulation in a
-       with-condition cause model state.
+     - Represents the probability that a simulant will begin the simulation
+       in a with-condition cause model state.
    * - `Birth Prevalence`_
      - Proportion of all live births born with a given condition.
      - Initialization
-     - Represents the probability a simulant born during the simulation will
-       be born into a with-condition cause model state.
+     - Represents the probability that a simulant born during the simulation
+       will be born into a with-condition cause model state.
    * - `Incidence`_
      - Number of new cases of a given condition per person-year of the at-risk
-       population
+       population.
      - Transition rates
      - Once scaled to simulation time-step, represents the probability a
        simulant will transition from infected to recovered.
    * - `Remission`_
      - Number of recovered cases from a given condition per person-year of the
-       population with the condition
+       population with the condition.
      - Transition rates
      - Once scaled to simulation time-step, represents the probability a
-       simulant will transition from infected to recovered
+       simulant will recover from the with-condition state.
    * - `Duration`_
-     - Length of time a condition lasts
+     - Length of time a condition lasts.
      - Transition rates
-     - Amount of time a simulant remains in a given state
+     - Amount of time a simulant remains in a given state.
    * - `Restrictions`_
-     - List of groups that are not included in a cause
+     - List of groups that are not included in a cause.
      - General
-     - List of population groups for which the cause model does not apply.
+     - List of population groups for which the cause model does and
+       does not apply.
    * - `Disability Weights`_
      - Proportion of full health not experienced due to disability associated
        with a given condition.
      - Morbidity impacts
-     - Measure disability attributed to cause model states.
+     - Rate at which an individual accrues years lived with disability due to
+       the state in the cause model.
    * - `Cause-specific Mortality`_
      -
      -
