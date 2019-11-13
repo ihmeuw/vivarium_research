@@ -159,7 +159,7 @@ Data Sources for Cause Models
       when there are multiple ways out of a state (LTBI)
    #. Update transition rate section to reflect feedback
    #. Include formulas discussed in office hours for incidence/hazards and
-      then link out to surv. analysis page
+      then link out to survey. analysis page
    #. Change remission example to diarrheal disease
 
 Once a cause model structure is specified, data is needed to inform its states
