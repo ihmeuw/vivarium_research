@@ -10,10 +10,10 @@ Disease Description
 Measles_ is a highly contagious, serious disease caused by the measles virus
 (*Measles morbillivirus*). Symptoms usually develop 10-12 days after exposure
 to the virus, and last 7-10 days. Symptoms include fever, cough, runny nose,
-conjunctivitis, and a red, flat or blotchy skin rash that develops on average
+conjunctivitis, and a red, flat, blotchy skin rash that develops on average
 14 days after exposure to the virus (range, 7-21 days) and lasts 5-6 days.
 Recovery from measles results in lifelong immunity.
-[WHO]_, [CDC]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_.
+[WHO]_, [CDC]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
 
 Most measles-related deaths are caused by complications associated with the
 disease. The most serious complications include blindness, encephalitis,
@@ -34,7 +34,7 @@ measles caused an estimated 2.6 million deaths each year. Despite the
 availability of a vaccine, approximately 110,000 people died from measles in
 2017, mostly children under the age of 5 years. However, due to accelerated
 immunization activities, global measles deaths have decreased 80% during the
-period 2000–2017, from an estimated 545 000 to  110 000, and measles
+period 2000–2017, from an estimated 545,000 to  110,000, and measles
 vaccination prevented an estimated  21.1 million deaths during
 2000–2017 [WHO]_.
 
