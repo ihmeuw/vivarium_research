@@ -13,8 +13,10 @@ Symptoms usually develop 10-12 days after exposure to the virus,
 and last 7-10 days.
 Symptoms include fever, cough, runny nose, conjunctivitis, and
 a red, flat or blotchy skin rash that develops on average 14 days after
-exposure to the virus (within a range of 7 to 18 days) and
-lasts 5-6 days [WHO]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_.
+exposure to the virus (range, 7-21 days) and
+lasts 5-6 days.
+Recovery from measles results in lifelong immunity.
+[WHO]_, [CDC]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_.
 
 Most measles-related deaths are caused by complications associated
 with the disease.
@@ -28,18 +30,20 @@ Measles is spread by coughing and sneezing, close personal contact, or direct
 contact with infected nasal or throat secretions.
 The virus remains active and contagious in the air or on infected surfaces
 for up to 2 hours. It can be transmitted by an infected person from
-4 days prior to the onset of the rash to 4 days after the rash erupts [WHO]_.
+4 days prior to the onset of the rash to 4 days after the rash erupts
+[WHO]_, [CDC]_, [Wikipedia]_.
 
 Before the introduction of a measles vaccine in 1963 and widespread vaccination,
 major epidemics occurred approximately every 2–3 years, and measles caused an
 estimated 2.6 million deaths each year.
-Despite the availibility of an effective vaccine,
+Despite the availibility of a vaccine,
 approximately  110 000 people died from measles in 2017, mostly children
 under the age of 5 years.
-Accelerated immunization activities have had a major impact on
-reducing measles deaths. During 2000–2017, measles vaccination prevented
-an estimated  21.1 million deaths. Global measles deaths have decreased
-by  80% from an estimated  545 000 in 2000 to  110 000 in 2017 [WHO]_.
+However, due to accelerated immunization activities,
+global measles deaths have decreased 80% during the period 2000–2017,
+from an estimated 545 000 to  110 000,
+and measles vaccination prevented an estimated  21.1 million deaths
+during 2000–2017 [WHO]_.
 
 The `ICD 10`_ codes for measles are B05-B05.9, Z24.4,
 and ICD 9 codes are 055-055.9, 484.0, V04.2, V73.2
@@ -78,10 +82,19 @@ Validation Criteria
 References
 ==========
 
-.. [WHO] Measles Fact Sheet. World Health Organization, 9 May 2019. Accessed 13 Nov 2019.
+.. [WHO] Measles Fact Sheet. World Health Organization, 9 May 2019.
+   Retrieved 13 Nov 2019.
    https://www.who.int/news-room/fact-sheets/detail/measles
 
-.. [Wikipedia] Measles. From Wikipedia, the Free Encyclopedia. Accessed 13 Nov 2019.
+.. [CDC] Chapter 13: Measles.
+   *Epidemiology and Prevention of Vaccine-Preventable Diseases
+   (The Pink Book, 13th Edition)*.
+   Centers for Disease Control and Prevention, 2015.
+   Retrieved 13 Nov 2019.
+   https://www.cdc.gov/vaccines/pubs/pinkbook/meas.html
+
+.. [Wikipedia] Measles. From Wikipedia, the Free Encyclopedia.
+   Retrieved 13 Nov 2019.
    https://en.wikipedia.org/wiki/Measles
 
 .. [GBD-2017-YLD-Capstone-Appendix-1]
