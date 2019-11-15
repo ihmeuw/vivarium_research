@@ -275,14 +275,30 @@ Birth Prevalence
 Cause Model Transitions
 +++++++++++++++++++++++
 
-Incidence
-^^^^^^^^^
+.. todo:
 
-Remission
-^^^^^^^^^
+	- Add progression transitions, deterministic transitions, and severity splits to summary table above? (should this be the case? or should these only be discusse din the transition section? I am thinking the latter)
+	- Add blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next PR)
+	- Detail incidence, remisison, and duration-based transition sections (to come in next PR)
+	- Detail progression transitions, deterministic transitions, and severity splits (to come later)
 
-Duration
-^^^^^^^^
+Incidence Rates
+^^^^^^^^^^^^^^^
+
+Remission Rates
+^^^^^^^^^^^^^^^
+
+Duration-Based Transitions
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deterministic or Triggered Transitions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Progression Transitions
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Severity Splits
+^^^^^^^^^^^^^^^
 
 Mortality Impacts
 +++++++++++++++++
