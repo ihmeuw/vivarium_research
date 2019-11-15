@@ -282,8 +282,29 @@ Cause Model Transitions
 	- Detail incidence, remisison, and duration-based transition sections (to come in next PR)
 	- Detail progression transitions, deterministic transitions, and severity splits (to come later)
 
+Vivarium uses probabilities to make decisions about how and when simulants move between cause model states. 
+
 Incidence Rates
 ^^^^^^^^^^^^^^^
+
+Generally, incidence is a measure of new cases of a given condition that occur in a given time frame. The count of new cases of the condition of interest will always be the numerator of incidence measures. The denominator of incidence measures is somewhat more complex and is critical to ensuring an accurate data source to inform cause model transition rates.
+
+Incidence rates that are estimated by the Global Burden of Disease study are measures of *cumulative incidence.* Cumulative incidence is a defined as the following: 
+
+	- insert formatted equation for:
+
+		- new cases of condition / person-time of at risk population
+
+**Person-time:** person-time is a measure of the number of individuals multiplied by the amount of time they individually occupy the population of interest.
+
+	For example, if one individual is in our population of interest for two years, they contribute two person-years. If another individual is in our population of interest for 6 months, they contribute 0.5 person-years. Together, these individuals contribute a total of 2.5 person-years.
+
+**At-risk population:** the at-risk population is defined as the population that *does not* have the condition of interest; in other words, the susceptible population that is at risk of developing the condition. Notably, this population will change overtime with the following scenarios:
+
+	- Members of the at-risk population develop of the condition and are no longer susceptible
+	- Members of the at-risk population die and are no longer susceptible 
+	- Individuals are born or age into the at-risk population and become susceptible
+	- Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
 
 Remission Rates
 ^^^^^^^^^^^^^^^
