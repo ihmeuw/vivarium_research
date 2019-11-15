@@ -8,12 +8,13 @@ Disease Description
 -------------------
 
 Measles_ is a highly contagious, serious disease caused by the measles virus
-(*Measles morbillivirus*). Symptoms usually develop 10-12 days after exposure
-to the virus, and last 7-10 days. Symptoms include fever, cough, runny nose,
-conjunctivitis, and a red, flat, blotchy skin rash that develops on average
-14 days after exposure to the virus (range, 7-21 days) and lasts 5-6 days.
-Recovery from measles results in lifelong immunity.
-[WHO]_, [CDC]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
+(*Measles morbillivirus*). Symptoms usually develop 10-12 days after exposure to
+the virus, and last 7-10 days. Symptoms include fever, cough, runny nose,
+conjunctivitis, characteristic white spots inside the cheek (called Koplik's
+spots), and a red, flat, blotchy skin rash that develops on average 14 days
+after exposure to the virus (range, 7-21 days) and lasts 5-6 days. Recovery from
+measles results in lifelong immunity. [WHO]_, [CDC]_, [Wikipedia]_,
+[GBD-2017-YLD-Capstone-Appendix-1]_
 
 Most measles-related deaths are caused by complications associated with the
 disease. The most serious complications include blindness, encephalitis,
@@ -44,21 +45,55 @@ The `ICD 10`_ codes for measles are B05-B05.9, Z24.4, and ICD 9 codes are
 .. _measles: https://en.wikipedia.org/wiki/Measles
 .. _ICD 10: https://en.wikipedia.org/wiki/ICD-10
 
+
+
 Modeling Measles in GBD 2017
 ----------------------------
 
 .. todo::
 
    Add relevant detail about measles modeling process from
-   [GBD-2017-YLD-Capstone-Appendix-1]_ and from the CoD Appendix.
+   [GBD-2017-YLD-Capstone-Appendix-1]_ and from the CoD Appendix. Note that each
+   country's vaccine coverage went into the estimation of measles incidence
+   rates, which are then multiplied by an average disease duration of 10 days to
+   compute prevalence.
+
+   Describe enough of the data sources and modeling process to verify that even
+   though  measles can lead to diarrhea or other causes that we include in our
+   Vivarium models, we won't be double counting mortality and morbidity from
+   these causes. For example, a death caused by diarrheal dehydration due to
+   measles should be counted in the GBD as a death due to measles, not as a
+   death due to diarrheal diseases.
+
+   The relationship with vitamin A deficiency may also be important for our
+   models.
 
 Cause Model Diagram
 -------------------
 
 .. todo::
 
-   Add Vivarium cause model diagram.
+   Add Vivarium cause model diagram. It will be a simple SIR (Susceptible,
+   Infected, Recovered) model, using country-specific measles incidence rates.
 
+Model Assumptions and Limitations
+---------------------------------
+
+.. todo::
+
+   Describe assumptions and limitations of the model. For example:
+
+   1. The simple measles model described here does not explicitly incorporate
+   vaccine coverage or efficacy, hence cannot be used to model the impact of a vaccination
+   campaign.
+
+   2. This model uses country-level data, and cannot be used to model local
+   measles outbreaks due to lack of vaccination in small communities.
+
+
+   Rather, this model is designed to be used to estimate DALYs due to measles
+   that are averted due to a country-level intervention (e.g. food fortification
+   or supplementation) that can reduce measles incidence as a downstream effect.
 
 Data Descriptions
 -----------------
