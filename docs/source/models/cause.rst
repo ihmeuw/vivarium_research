@@ -278,7 +278,7 @@ Cause Model Transitions
 .. todo:
 
 	- Add progression transitions, deterministic transitions, and severity splits to summary table above? (should this be the case? or should these only be discusse din the transition section? I am thinking the latter)
-	- Add blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next PR)
+	- Add/enhance blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next PR)
 	- Detail incidence, remisison, and duration-based transition sections (to come in next PR)
 	- Detail progression transitions, deterministic transitions, and severity splits (to come later)
 
@@ -291,7 +291,7 @@ Generally, incidence is a measure of new cases of a given condition that occur i
 
 Incidence rates that are estimated by the Global Burden of Disease study are measures of *cumulative incidence.* Cumulative incidence is a defined as the following: 
 
-	- insert formatted equation for:
+	- to-do: insert formatted equation for...
 
 		- new cases of condition / person-time of at risk population
 
@@ -305,6 +305,18 @@ Incidence rates that are estimated by the Global Burden of Disease study are mea
 	- Members of the at-risk population die and are no longer susceptible 
 	- Individuals are born or age into the at-risk population and become susceptible
 	- Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
+
+Because the denominator for cumulative incidence is person-time in the at-risk population, it can be used to represent the probability of a new case of a condition occuring in an individual without the condition in a given time frame. Therefore, it can be used to represent the probability that a simulant will transition from a susceptible to infected cause model state in a given timestep.
+
+	For instance, as reported by the GBD, the global incidence of injuries in 2017 was approximately 6,800 cases per 100,000 person-years, or 0.068 cases per person-year.
+
+	Consider a cause model with a susceptible (not injured) state and an infected (injured) state with a simulation timestep of 1 year. In this case, the probability that a simulant will transition from the susceptible to infected state within a single timestep (i.e. the transition probability) would be represented as 0.068.
+
+	Notably, in order to represent the transition probability for a single simulant within a single timestep, the cumulative incidence value needs to be scaled so that the person-time denominator is equal to the simulation timestep. Therefore, if the timestep of the cause model considered above were six months instead of one year, the transition probability would be 0.34 (0.34 casese per 0.5 person-years). 
+
+There are several key assumptions and limitations of this approach, disscussed below.
+
+	to-do: add assumptions and limitations
 
 Remission Rates
 ^^^^^^^^^^^^^^^
