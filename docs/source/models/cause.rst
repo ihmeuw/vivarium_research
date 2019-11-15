@@ -63,10 +63,10 @@ Learning objectives
 After reading this chapter, learners should be able to:
 
 1. Develop an understanding of how the GBD, literature, and experts think
-   about a cause.
+   about a cause. [[to come]]
 2. Build :term:`internally consistent <Internally Consistent Model>` cause
    models which are :term:`sufficiently complex <Sufficiently Complex Model>`
-   given larger modeling goals.
+   given larger modeling goals. [[to come]]
 
    a. Models that are as simple as possible, but no simpler.
    b. Models that agree with withheld data.
