@@ -103,3 +103,49 @@ I Drive: I:/RTs_and_Projects/GBD/Publications/Capstone Lancet Papers 2018/Cause 
 The Appendix for the GBD 2017 Cause of Death manuscript is also available and Open Access at the Lancet website 
 `GBD COD Capstone
 <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)32203-7/fulltext#seccestitle540>`_
+
+
+Modeling non-fatal outcomes (Outline)
+---------------------------
+
+- Figure of process
+.. image:: gbd_nonfatal_flowchart_sim_team.jpg
+   :width: 600
+
+**Modeling approach** 
+
+- Modeling tools like DisMod, ST-GPR
+
+- Connection between fatal/non-fatal models
+
+- Where to find more information on causes (like flowcharts, write-ups)
+
+- Input and output measures (prevalence, incidence, remission, YLDs)
+
+	- Counts, rates, percentages
+
+**Input data**
+
+- Types of data used in non-fatal modeling
+
+- How to get input data for GBD non-fatal models
+
+- Key term definitions  
+
+	- Crosswalks
+	- modelable_entity_id
+	- Bundles
+	
+**Epi Computation and COMO**
+
+- What is Comorbidity adjustment (COMO)
+
+- Other processes like years lived with disability calculation
+
+**Getting results**
+
+- Where can draws be pulled
+
+	- How draws from DisMod / COMO differ
+
+- Where data can be found
