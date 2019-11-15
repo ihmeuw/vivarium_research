@@ -6,7 +6,7 @@ Cause Models in GBD
 
 What is a cause?
 ----------------
-A cause in the GBD is something that is responsible for death, disease, or disability. 
+A cause in the GBD is something that is responsible for death, disease, injury or disability. 
 Some examples could be infectious diseases like malaria or diarrhea. 
 They could also be chronic diseases like diabetes or cancer. The could be things
 that people are born with like congenital disorders or happen during childbirth like maternal hemorrhage.
@@ -94,3 +94,12 @@ specific reason, draws from CoDCorrect should be used to estimate cause-specific
 	- get_draws() can return CODEm and custom COD model results (source = "codem")
 	- This might not be the best place to pull results because they haven't gone through CoDCorrect yet.
 
+**Getting more information**
+
+The documentation for GBD causes (write-ups) are typically separate Word documents by cause that become the Appendices
+for the study publication. If you have access to the shared drives at IHME, you can find the documentation on the
+I Drive: I:/RTs_and_Projects/GBD/Publications/Capstone Lancet Papers 2018/Cause Write-Ups/COD/Resubmission/4_final/
+
+The Appendix for the GBD 2017 Cause of Death manuscript is also available and Open Access at the Lancet website 
+`GBD COD Capstone
+<https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)32203-7/fulltext#seccestitle540>`_
