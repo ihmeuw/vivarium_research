@@ -19,7 +19,7 @@ Modeling Diarrheal Diseases in GBD 2017
 
 .. todo::
 
-   Add relevant detail about measles modeling process from
+   Add relevant detail about diarrheal diseases modeling process from
    [GBD-2017-YLD-Capstone-Appendix-1]_ and from the CoD Appendix.
 
 Cause Model Diagram
@@ -61,7 +61,7 @@ References
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
-   and territories,    Disease Study 2017. Lancet 2018; 392: 178   (pp. 246-7)
+   and territories,    Disease Study 2017. Lancet 2018; 392: 178   (pp. 88-94)
 
    (Direct links to the YLD Appendix hosted on Lancet.com_ and ScienceDirect_)
 
