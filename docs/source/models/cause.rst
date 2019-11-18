@@ -302,7 +302,7 @@ Incidence rates that are estimated by the Global Burden of Disease study are mea
 
 **At-risk population:** the at-risk population is defined as the population that *does not* have the condition of interest; in other words, the susceptible population that is at risk of developing the condition. Notably, the number of individuals in this population will change overtime as the following events occur:
 
-	- Members of the at-risk population develop of the condition and are no longer susceptible
+	- Members of the at-risk population develop the condition and are no longer susceptible
 	- Members of the at-risk population die and are no longer susceptible 
 	- Individuals are born or age into the at-risk population and become susceptible
 	- Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
