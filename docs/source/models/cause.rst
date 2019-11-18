@@ -315,7 +315,7 @@ Because the denominator for cumulative incidence is person-time in the at-risk p
 
 	Consider a cause model with a susceptible (not injured) state and an infected (injured) state with a simulation timestep of 1 year. In this case, the probability that a simulant will transition from the susceptible to infected state within a single timestep (i.e. the transition probability) would be represented as 0.068.
 
-	Notably, in order to represent the transition probability for a single simulant within a single timestep, the cumulative incidence value needs to be scaled so that the person-time denominator is equal to the simulation timestep. Therefore, if the timestep of the cause model considered above were six months instead of one year, the transition probability would be 0.34 (0.34 cases per 0.5 person-years). 
+	Notably, in order to represent the transition probability for a single simulant within a single timestep, the cumulative incidence value needs to be scaled so that the person-time denominator is equal to the simulation timestep. Therefore, if the timestep of the cause model considered above were six months instead of one year, the transition probability would be 0.034 (0.034 cases per 0.5 person-years). 
 
 There are several key assumptions and limitations of this approach, disscussed below.
 
