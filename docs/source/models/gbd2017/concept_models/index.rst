@@ -8,5 +8,5 @@ Simulation Concept Models
    :maxdepth: 2
    :glob:
 
-   */*
+   */index
    *
