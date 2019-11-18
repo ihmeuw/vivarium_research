@@ -53,6 +53,12 @@ The `ICD 10`_ codes for measles are B05-B05.9, Z24.4, and ICD 9 codes are
    - https://www.who.int/immunization/newsroom/measles-data-2019/en/
 
 
+   Also perhaps note this recent New York Times article (Oct 31, 2019):
+
+     `Measles Makes Your Immune System’s Memory Forget Defenses Against Other Illnesses <https://www.nytimes.com/2019/10/31/health/measles-vaccine-immune-system.html?action=click&amp;module=News&amp;pgtype=Homepage>`_:
+     New research shows the virus can have devastating effects on the immune system that persist much longer than the illness itself.
+
+
 Modeling Measles in GBD 2017
 ----------------------------
 
@@ -74,6 +80,8 @@ Modeling Measles in GBD 2017
 
    The relationship with vitamin A deficiency may also be important for our
    models.
+
+   Make sure to check on measles sequelae as well. Our models so far have not paid much attention to the nonfatal side, but it looks like some of the complications can persist well after someone recovers from measles, so maybe that's important to think about.
 
 Cause Model Diagram
 -------------------
@@ -127,8 +135,8 @@ References
    https://www.who.int/news-room/fact-sheets/detail/measles
 
 .. [CDC] Chapter 13: Measles.
-   *Epidemiology and Prevention of Vaccine-Preventable Diseases
-   (The Pink Book, 13th Edition)*.
+   :title:`Epidemiology and Prevention of Vaccine-Preventable Diseases
+   (The Pink Book, 13th Edition)`.
    Centers for Disease Control and Prevention, 2015.
    Retrieved 13 Nov 2019.
    https://www.cdc.gov/vaccines/pubs/pinkbook/meas.html
