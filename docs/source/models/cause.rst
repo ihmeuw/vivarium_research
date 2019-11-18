@@ -289,7 +289,7 @@ Incidence Rates
 
 Generally, incidence is a measure of new cases of a given condition that occur in a given timeframe and population. The count value of new cases of the condition of interest will always be the numerator of incidence measures. The denominator of incidence measures is somewhat more complex and is critical to ensuring an accurate data source to inform cause model transition rates.
 
-Incidence rates that are estimated by the Global Burden of Disease study are measures of *cumulative incidence.* Cumulative incidence is a defined using the following concepts: 
+Incidence rates that are estimated by the Global Burden of Disease study are measures of *cumulative incidence.* Cumulative incidence is defined using the following concepts: 
 
 .. todo: 
 
