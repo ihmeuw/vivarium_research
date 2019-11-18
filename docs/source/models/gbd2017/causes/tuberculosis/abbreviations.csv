@@ -1,0 +1,20 @@
+Label,Definition
+S,susceptible
+C,with condition
+P,Protected
+TB,tuberculosis
+LTBI,latent tuberculosis infection
+AcTB,active tuberculosis
+DS-TB,Drug-susceptible TB
+MDR-TB,Multidrug-resistant TB
+XDR-TB,Extensively drug-resistant TB
+HIV,human immunodeficiency virus
+HIV+ DS-TB,HIV/AIDS - Drug-susceptible TB
+HIV+ MDR-TB,HIV/AIDS - Multidrug-resistant TB
+HIV+ XDR-TB,HIV/AIDS - Extensively drug-resistant TB
+prev,prevalence
+i,incidence
+csmr,cause-specific mortality
+emr,excess mortality
+dw,disability weight
+{measure}_{gbd_id},e.g. prev_954 = prevalence of LTBI

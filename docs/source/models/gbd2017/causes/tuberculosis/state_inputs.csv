@@ -1,9 +1,9 @@
 State,Definition,Initialization,prevalence,prev_source,excess_mortality,emr_source,disability_weight,dw_source,Notes
-"S_TB, S_HIV",not TB or HIV infected,Yes,1 - everything (sum of all other states prev.),como,0,NA,0,NA,
+"S_TB, S_HIV",Not TB or HIV infected,Yes,1 - everything (sum of all other states prev.),como,0,NA,0,NA,
 "LTBI, S_HIV","LTBI, not HIV infected",Yes,prev_954 * (1 - prev_300),como,0,NA,0,NA,
 "AcTB, S_HIV","HIV negative active TB = SUM(DS-TB, MDR-TB, XDR-TB)",Yes,prev_934 + prev_946 + prev_947,como,(csmr_934 + csmr_946 + csmr_947) / (prev_934 + prev_946 + prev_947),codcorrect,SUM(prev_s * dw_s) / SUM(prev),03_Hmwe_TB_Nonfatal2017_resub,
-"R, S_HIV","recovered from LTBI treatment, not HIV infected",Yes,0,NA,0,NA,0,NA,
-"R, C_HIV","recovered from LTBI treatment, HIV infected",Yes,0,NA,emr_300 = csmr_300 / prev_300,codcorrect,SUM(prev_s * dw_s) / SUM(prev),,
-"S_TB, C_HIV","not TB infected, HIV infected",Yes,(1 - prev_954) * prev_300,como,emr_300 = csmr_300 / prev_300,codcorrect,SUM(prev_s * dw_s) / SUM(prev),,
+"P, S_HIV","Protected through LTBI treatment, not HIV infected",Yes,0,NA,0,NA,0,NA,
+"P, C_HIV","Protected through LTBI treatment, HIV infected",Yes,0,NA,emr_300 = csmr_300 / prev_300,codcorrect,SUM(prev_s * dw_s) / SUM(prev),,
+"S_TB, C_HIV","Not TB infected, HIV infected",Yes,(1 - prev_954) * prev_300,como,emr_300 = csmr_300 / prev_300,codcorrect,SUM(prev_s * dw_s) / SUM(prev),,
 "LTBI, C_HIV","LTBI, HIV infected",Yes,prev_954 * prev_300,como,emr_300 = csmr_300 / prev_300,codcorrect,SUM(prev_s * dw_s) / SUM(prev),,
 "AcTB, C_HIV","HIV positive active TB = SUM(HIV+ DS-TB, HIV+ MDR-TB, HIV+ XDR-TB)",Yes,prev_948 + prev_949 + prev_950,como,(csmr_948 + csmr_949 + csmr_950) / (prev_948 + prev_949 + prev_950),codcorrect,SUM(prev_s * dw_s) / SUM(prev),03_Hmwe_TB_Nonfatal2017_resub,

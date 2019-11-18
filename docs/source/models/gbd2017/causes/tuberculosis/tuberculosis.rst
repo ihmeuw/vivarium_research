@@ -48,6 +48,10 @@ the proportion of new TB cases with MDR-TB or XDR-TB by ST-GPR.
 
 GBD hierarchy
 -------------
+.. csv-table:: **Hierarchy**
+   :file: cause_hierarchy.csv
+   :header-rows: 1
+
 .. image:: cause_hierarchy.svg
 
 - {Anemia} = [no_anemia, mild_anemia, moderate_anemia, severe_anemia]
@@ -61,6 +65,10 @@ Cause model diagram
 
 Data sources
 ------------
+.. csv-table:: **Abbreviations**
+   :file: abbreviations.csv
+   :header-rows: 1
+
 .. csv-table:: **State Measures**
    :file: state_inputs.csv
    :header-rows: 1
@@ -84,10 +92,8 @@ TB remission
    active TB back to susceptible. The future plan is to disaggregate the all-form
    active TB remission by HIV status based on TB duration data. (WHO)
 
-
-========================================
 TB/HIV model validation and verification
-========================================
+----------------------------------------
 
 Obejective
 ----------
