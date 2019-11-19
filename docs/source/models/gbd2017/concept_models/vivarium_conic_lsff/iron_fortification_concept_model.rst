@@ -57,3 +57,48 @@ Detail of iron fortification without LBW components
 .. todo::
 
    Add Coverage Gap Component. Add specific neonatal causes.
+
+
+Demographics
+------------
+
+Population
+++++++++++
+
+One of: Prospective, Retrospective, Both
+  Prospective
+
+Earliest likely start year, earliest likely end year (approximate)
+  2020 - 2024
+
+Smallest simulation time step (approximate)
+  1 day to capture short timeframe of neonatal causes and diarrheal diseases. If
+  omitting the LBWSG component, time step could be longer, e.g. 1 week.
+
+Locations of Interest (the most likely 1-5 countries to be modeled, or if you need custom locations)
+  Nigeria, India, Ethiopia
+
+Size of largest starting population (approximate)
+  100,000
+
+Youngest start-age & oldest end-age
+  0 - 5 years old
+
+Exit age (at what age to stop tracking simulants)
+  5 years
+
+
+Fertility
++++++++++
+
+Fertility (one of: None, Deterministic, Crude Birth Rate, Age-Specific Fertility)
+  Crude Birth Rate
+
+Other
++++++
+
+Extenuating Circumstances (shocks, etc.) (if applicable)
+  None
+
+Other population Restrictions (if applicable)
+  None
