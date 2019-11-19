@@ -297,17 +297,16 @@ Generally, incidence is a measure of new cases of a given condition that occur
 in a given timeframe and population. The count value of new cases of the 
 condition of interest will always be the numerator of incidence measures. The 
 denominator of incidence measures is somewhat more complex and is critical to 
-ensuring an accurate data source to inform cause model transition rates.
+ensuring an accurate data source to inform cause model transition rates. 
 
-Incidence rates that are estimated by the Global Burden of Disease study are 
-measures of *cumulative incidence.* Cumulative incidence is defined using the 
-following concepts: 
+**Cumulative incidence** is a specific type of incidence measure that can be 
+used to represent cause model transition probabilities. Cumulative incidence 
+is defined using the following concepts: 
 
 .. todo: 
 
 	insert formatted equation for: new cases of condition / person-time of at 
   risk population
-
 
 **Person-time:** person-time is a measure of the number of individuals 
 multiplied by the amount of time they individually occupy the population of 
@@ -332,14 +331,6 @@ following events occur:
 	- Individuals with the condition recover from the condition and re-enter the 
   at-risk population as susceptible (in the case of conditions with remission)
 
-Cumulative incidence contrasts with other measures of incidence that may have 
-different denominators. For instance, incidence rate may refer to new cases of 
-a given condition that occur in a specified timeframe (e.g. 10 cases per year) 
-or may refer to new cases per person-time of the general population rather 
-than the at-risk population. Incidence measures other than cumulative with 
-person-time of the at-risk population as the denominator are not appropriate 
-for incidence data sources for cause model transition probabilities.
-
 Because the denominator for cumulative incidence is person-time in the at-risk 
 population, it can represent the probability of a new case of the condition 
 occuring in an individual without the condition in a given time frame. 
@@ -347,11 +338,12 @@ Therefore, it can be used to represent the probability that a simulant will
 transition from a susceptible to infected cause model state in a given 
 timestep.
 
-	For instance, as reported by the GBD, the global incidence of injuries in 
-  2017 was approximately 6,800 cases per 100,000 person-years, or 0.068 cases 
-  per person-year.
+	For instance, consider an example in which the global cumulative incidence 
+  of injuries in 2017 was 6,800 cases per 100,000 person-years, or 0.068 cases
+  per person-year. In this example, 6,800 new injuries occurred among 100,000 
+  person-years of observation among the non-injured population.
 
-	Consider a cause model with a susceptible (not injured) state and an 
+	Now, consider a cause model with a susceptible (not injured) state and an 
   infected (injured) state with a simulation timestep of 1 year. In this case, 
   the probability that a simulant will transition from the susceptible to 
   infected state within a single timestep (i.e. the transition probability) 
@@ -363,6 +355,25 @@ timestep.
   timestep. Therefore, if the timestep of the cause model considered above 
   were six months instead of one year, the transition probability would be 
   0.034 (0.034 cases per 0.5 person-years). 
+
+Cumulative incidence contrasts with other measures of incidence that may have 
+different denominators. For instance, incidence rate may refer to new cases of 
+a given condition that occur in a specified timeframe (e.g. 10 cases per year) 
+or may refer to new cases per person-time of the general population rather 
+than the at-risk population. Incidence measures other than cumulative with 
+person-time of the at-risk population as the denominator are not appropriate 
+for incidence data sources for cause model transition probabilities.
+
+.. warning:
+
+  GBD does not estimate cumulative incidence, but rather a true incidence rate 
+  of new cases per person-time of the total population. Incidence measures 
+  retrieved directly from GBD results will therefore not be accurate 
+  representations of transition probabilities. 
+
+  Vivarium automatically calculates cumulative incidence rates from GBD 
+  estimates of true incidence rates for use as cause model transition rate 
+  data source.
 
 There are several key assumptions and limitations of this approach, disscussed 
 below.
