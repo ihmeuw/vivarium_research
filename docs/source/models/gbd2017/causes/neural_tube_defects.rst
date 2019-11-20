@@ -27,13 +27,13 @@ do not consider surgical intervention for either condition as remission.
 Spina bifida corresponds to the ICD-10_ codes Q05.0, Q05.4,Q05.6, Q05.7, Q05.8,
 and Q05.9. Encephalocele corresponds to the ICD-10 codes Q01.2, Q01.8, and
 Q01.9. Anencephaly corresponds to the ICD-10 codes Q00.0 and Q00.2.
-[GBD-2017-YLD-Capstone-Appendix-1]_
+[GBD-2017-YLD-Capstone-Appendix-1-Neural-Tube-Defects]_
 
 .. _ICD-10: https://en.wikipedia.org/wiki/ICD-10
 
 .. todo::
 
-   Add more information and references.
+   Add more information and references. In particular, find data about global prevalence and relation to folic acid during pregnancy.
 
 Modeling Neural Tube Defects in GBD 2017
 ----------------------------------------
@@ -59,21 +59,41 @@ stillbirths.
 Modeling Strategy for Neural Tube Defects
 +++++++++++++++++++++++++++++++++++++++++
 
-In GBD 2017, spina bifida, encephalocele, and anencephaly are each modelled
+In GBD 2017, spina bifida, encephalocele, and anencephaly are each modeled
 separately and then fit to a total model of all neural tube defects.
 
 .. todo::
 
    Add relevant detail about NTD modeling process from
-   [GBD-2017-YLD-Capstone-Appendix-1]_ and from the `CoD Capstone
+   [GBD-2017-YLD-Capstone-Appendix-1-Neural-Tube-Defects]_ and from the `CoD Capstone
    <http://dx.doi.org/10.1016/S0140-6736(18)32203-7>`_ Appendix.
 
 Cause Model Diagram
 -------------------
 
+There are two possible states for this cause, "with-condition" and
+"without-condition":
+
+.. image:: neural_tube_defects_cause_model_diagram.svg
+
+There is no transition between the states; each person is born into one state or
+the other and permanently stays in that state. Thus, incidence and remission
+rates are zero.
+
+GBD 2017 estimates the prevalence of neural tube defects for every year, sex,
+age, and location combination. These prevalence values can be used to initialize
+the model with the correct fraction of people in each of the two model states.
+
+People born into the simulation should enter the "with-condition" state
+according to the birth prevalence of neural tube defects; if this data is
+unavailable, we can estimate the birth prevalence using the prevalence and
+mortality rates in the early neonatal age group.
+
 .. todo::
 
-   Add Vivarium cause model diagram.
+    Look into data sources. In particular, is birth prevalence data available,
+    or do we need to estimate it using prevalence among the early neonatal age
+    group?
 
 Model Assumptions and Limitations
 ---------------------------------
@@ -104,13 +124,13 @@ Validation Criteria
 References
 ----------
 
-.. [GBD-2017-YLD-Capstone-Appendix-1]
+.. [GBD-2017-YLD-Capstone-Appendix-1-Neural-Tube-Defects]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
    and territories, 1990–2017: a systematic analysis for the Global Burden of
    Disease Study 2017. Lancet 2018; 392: 1789–858 <DOI for YLD Capstone_>`_
-   (pp. 246-7)
+   (pp. 658-694)
 
    (Direct links to the YLD Appendix hosted on `Lancet.com <YLD appendix on Lancet.com_>`_ and `ScienceDirect <YLD appendix on ScienceDirect_>`_)
 
