@@ -155,11 +155,9 @@ Data Sources for Cause Models
 .. todo::
 
    #. Update mortality-related data sources within existing format (yaqi).
-   #. Describe the relationship that duration and transition rates can play
-      when there are multiple ways out of a state (LTBI)
+   #. Describe the relationship that duration and transition rates can play when there are multiple ways out of a state (LTBI)
    #. Update transition rate section to reflect feedback
-   #. Include formulas discussed in office hours for incidence/hazards and
-      then link out to survey. analysis page
+   #. Include formulas discussed in office hours for incidence/hazards and then link out to survey. analysis page
    #. Change remission example to diarrheal disease
 
 Once a cause model structure is specified, data is needed to inform its states
@@ -227,13 +225,13 @@ and discussed in more detail afterward.
      - Initialization
      - Represents the probability that a simulant born during the simulation
        will be born into a with-condition cause model state.
-   * - `Incidence`_
+   * - `Incidence Rates`_
      - Number of new cases of a given condition per person-year of the at-risk
        population.
      - Transition rates
      - Once scaled to simulation time-step, represents the probability a
        simulant will transition from infected to recovered.
-   * - `Remission`_
+   * - `Remission Rates`_
      - Number of recovered cases from a given condition per person-year of the
        population with the condition.
      - Transition rates
@@ -242,7 +240,15 @@ and discussed in more detail afterward.
    * - `Duration`_
      - Length of time a condition lasts.
      - Transition rates
-     - Amount of time a simulant remains in a given state.
+     - Amount of time a simulant remains in a given state
+   * - `Progression`_
+     -
+     - Transition rates
+     -
+   * - `Severity Splits`_
+     -
+     - Transition Rates
+     -
    * - `Restrictions`_
      - List of groups that are not included in a cause.
      - General
@@ -275,17 +281,12 @@ Birth Prevalence
 Cause Model Transitions
 +++++++++++++++++++++++
 
-.. todo:
+.. todo::
 
-	- Add progression transitions, deterministic transitions, and severity 
-  splits to summary table above? (should this be the case? or should these 
-  only be discusse din the transition section? I am thinking the latter)
-	- Enhance blurb to beginning of cause model transition section about how we 
-  use probabilies to inform cause model transitions (to come in next commits)
-	- Detail incidence, remisison, and duration-based transition sections (to 
-  come in next commits)
-	- Detail progression transitions, deterministic transitions, and severity 
-  splits (to come in future PRs)
+	#. Add progression transitions, deterministic transitions, and severity splits to summary table above? (should this be the case? or should these only be discusse din the transition section? I am thinking the latter)
+	#. Enhance blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next commits)
+	#. Detail incidence, remisison, and duration-based transition sections (to come in next commits)
+	#. Detail progression transitions, deterministic transitions, and severity splits (to come in future PRs)
 
 Vivarium uses probabilities to make decisions about how and when simulants 
 move between cause model states. 
@@ -303,30 +304,31 @@ ensuring an accurate data source to inform cause model transition rates.
 used to represent cause model transition probabilities. Cumulative incidence 
 is defined using the following concepts: 
 
-.. todo: 
+.. math::
 
-	insert formatted equation for: new cases of condition / person-time of at 
-  risk population
+  CumulativeIncidence = \frac{n_{incident cases}}{persontime_{atrisk}}
 
-**Person-time:** person-time is a measure of the number of individuals 
-multiplied by the amount of time they individually occupy the population of 
-interest.
+.    
 
-	For example, if one individual is in our population of interest for two 
-  years, they contribute two person-years. If another individual is in our 
-  population of interest for 6 months, they contribute 0.5 person-years. 
-  Together, these individuals contribute a total of 2.5 person-years.
+	**Person-time:** person-time is a measure of the number of individuals 
+	multiplied by the amount of time they individually occupy the population 
+	of interest.
 
-**At-risk population:** the at-risk population is defined as the population 
-that *does not* have the condition of interest; in other words, the 
-susceptible population that is at risk of developing the condition. Notably, 
-the number of individuals in this population will change overtime as the 
-following events occur:
+		For example, if one individual is in our population of interest for two 
+		years, they contribute two person-years. If another individual is in our 
+		population of interest for 6 months, they contribute 0.5 person-years.
+		Together, these individuals contribute a total of 2.5 person-years.
 
-	- Members of the at-risk population develop the condition and are no longer susceptible
-	- Members of the at-risk population die and are no longer susceptible 
-	- Individuals are born or age into the at-risk population and become susceptible
-	- Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
+	**At-risk population:** the at-risk population is defined as the 
+	population that *does not* have the condition of interest; in other words, 
+	the susceptible population that is at risk of developing the condition. 
+	Notably, the number of individuals in this population will change overtime 
+	as the following events occur:
+
+	   - Members of the at-risk population develop the condition and are no longer susceptible
+	   - Members of the at-risk population die and are no longer susceptible 
+	   - Individuals are born or age into the at-risk population and become susceptible
+	   - Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
 
 Because the denominator for cumulative incidence is person-time in the at-risk 
 population, it can represent the probability of a new case of the condition 
@@ -335,18 +337,18 @@ Therefore, it can be used to represent the probability that a simulant will
 transition from a susceptible to infected cause model state in a given 
 timestep.
 
-	For instance, consider an example in which the global cumulative incidence 
+  For instance, consider an example in which the global cumulative incidence
   of injuries in 2017 was 6,800 cases per 100,000 person-years, or 0.068 cases
   per person-year. In this example, 6,800 new injuries occurred among 100,000 
   person-years of observation among the non-injured population.
 
-	Now, consider a cause model with a susceptible (not injured) state and an 
+  Now, consider a cause model with a susceptible (not injured) state and an 
   infected (injured) state with a simulation timestep of 1 year. In this case, 
   the probability that a simulant will transition from the susceptible to 
   infected state within a single timestep (i.e. the transition probability) 
   would be represented as 0.068.
 
-	Notably, in order to represent the transition probability for a single 
+  Notably, in order to represent the transition probability for a single 
   simulant within a single timestep, the cumulative incidence value needs to 
   be scaled so that the person-time denominator is equal to the simulation 
   timestep. Therefore, if the timestep of the cause model considered above 
@@ -361,7 +363,7 @@ than the at-risk population. Incidence measures other than cumulative with
 person-time of the at-risk population as the denominator are not appropriate 
 for incidence data sources for cause model transition probabilities.
 
-.. warning:
+.. warning::
 
   GBD does not estimate cumulative incidence, but rather a true incidence rate 
   of new cases per person-time of the total population. Incidence measures 
@@ -375,13 +377,14 @@ for incidence data sources for cause model transition probabilities.
 There are several key assumptions and limitations of this approach, disscussed 
 below.
 
-.. todo:
+.. todo::
 
-	  Add discuission about assumption that transition probability is constant 
+    Add discuission about assumption that transition probability is constant 
     over time frame and link to hazard rates page for when this might be an 
     issue)
 
-    Add descriptions of additional assumptions/limitations
+    Add discussion about how cause model transition probabilities are state-specific and not necessarily cause-specific. Cannot use cumulative incidence of disease to represent the transition probability from susceptible to moderate disease directly, for example.
+    
 
 Remission Rates
 ^^^^^^^^^^^^^^^
