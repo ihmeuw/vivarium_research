@@ -323,13 +323,10 @@ susceptible population that is at risk of developing the condition. Notably,
 the number of individuals in this population will change overtime as the 
 following events occur:
 
-	- Members of the at-risk population develop the condition and are no longer 
-  susceptible
+	- Members of the at-risk population develop the condition and are no longer susceptible
 	- Members of the at-risk population die and are no longer susceptible 
-	- Individuals are born or age into the at-risk population and become 
-  susceptible
-	- Individuals with the condition recover from the condition and re-enter the 
-  at-risk population as susceptible (in the case of conditions with remission)
+	- Individuals are born or age into the at-risk population and become susceptible
+	- Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
 
 Because the denominator for cumulative incidence is person-time in the at-risk 
 population, it can represent the probability of a new case of the condition 
@@ -380,7 +377,11 @@ below.
 
 .. todo:
 
-	Add description of key assumptions and limitations
+	  Add discuission about assumption that transition probability is constant 
+    over time frame and link to hazard rates page for when this might be an 
+    issue)
+
+    Add descriptions of additional assumptions/limitations
 
 Remission Rates
 ^^^^^^^^^^^^^^^
