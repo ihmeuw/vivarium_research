@@ -58,7 +58,7 @@ Haemolytic disease and other *neonatal jaundice*
 *Other neonatal* disorders
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-PAF-of-1 Cause-Risk Pairs
+PAF-of-1 Cause/Risk Pairs
 +++++++++++++++++++++++++
 
 Vitamin A Deficiency / Vitamin A Deficiency
@@ -72,6 +72,9 @@ Additional GBD Risks
 
 Low Birth Weight and Short Gestation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Risk-Cause Relationships
+++++++++++++++++++++++++
 
 Coverage Gap Framework
 ++++++++++++++++++++++
