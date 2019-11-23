@@ -154,7 +154,6 @@ Data Sources for Cause Models
 
 .. todo::
 
-   #. Update mortality-related data sources within existing format (yaqi).
    #. Describe the relationship that duration and transition rates can play
       when there are multiple ways out of a state (LTBI)
    #. Update transition rate section to reflect feedback
@@ -255,13 +254,13 @@ and discussed in more detail afterward.
      - Rate at which an individual accrues years lived with disability due to
        the state in the cause model.
    * - `Cause-specific Mortality`_
-     -
-     -
-     -
+     - Mortality rate from a specified cause for a population
+     - Mortality Impacts
+     - Measure of the frequency of occurrence of death in a defined population from a specified cause
    * - `Excess Mortality`_
-     -
-     -
-     -
+     - A temporary increase in the mortality rate (number of deaths) in a given population
+     - Mortality Impacts
+     - Estimate of the excess risk of death for an individual in the total population imposed by the disease studied
 
 Cause Model Initialization
 ++++++++++++++++++++++++++
@@ -337,14 +336,38 @@ Mortality Impacts
 Cause-Specific Mortality
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+The cause-specific mortality rate is the mortality rate from a specified cause for a population. 
+The numerator is the number of deaths attributed to a specific cause. The denominator remains the 
+size of the population. In GBD, cause-specific estimates by country, year, age, sex.
+
+  For example, 112 measles deaths in country A during calendar year 2016. 1010,623 estimated 2016 mid-year 
+  population. 11.08 measles deaths per 100,000 population (person-years at risk) during calendar year 
+  2016 in country A. 
+
 Excess Mortality
 ^^^^^^^^^^^^^^^^
+
+The excess mortality is obtained by subtracting the expected mortality from the observed mortality.
+The excess mortality can be interpreted as the mortality directly or indirectly related to the disease of 
+interest, if one excludes all other causes of death. It is the extra number of deaths observed, beyond that 
+expected, per person-years.   
+
+  For instance, an excess mortality rate of 40 deaths per 100 person-years means that there are 40 additional 
+  deaths per 100 person-years in excess of those expected. These deaths are supposed to be related to the disease 
+  of interest.
 
 Morbidity Impacts
 +++++++++++++++++
 
 Disability Weights
 ^^^^^^^^^^^^^^^^^^
+
+A disability weight is a weight factor that reflects the severity of the disease on a scale from 0 (perfect health) to 1 
+(equivalent to death). Years Lost due to Disability (YLD) are calculated by multiplying the incident cases by duration and 
+disability weight for the condition. 
+
+ :math:`Disability\_weight_{c}`: proportion of health lost due to condition c
+ :math:`(1 - Disability\_weight_{c})`: proportion of health remaining when living with condition c
 
 Restrictions
 ++++++++++++
