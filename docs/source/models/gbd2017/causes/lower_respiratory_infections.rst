@@ -16,13 +16,13 @@ syncytial virus(*RCV*). Pneumococcal pneumonia is the largest cause of LRI
 mortality.[Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
 
 
-
 Modeling LRI in GBD 2017
-----------------------------
+------------------------
 
 
 Cause Model Diagram
 -------------------
+
 .. image:: lri_disease_model.svg
 
 Model Assumptions and Limitations
@@ -61,7 +61,8 @@ References
    Disease Study 2017. Lancet 2018; 392: 1789–858 <DOI for YLD Capstone_>`_
    (pp. 246-7)
 
-   (Direct links to the YLD Appendix hosted on `Lancet.com <YLD appendix on Lancet.com_>`_ and `ScienceDirect <YLD appendix on ScienceDirect_>`_)
+   (Direct links to the YLD Appendix hosted on `Lancet.com <YLD appendix on Lancet.com_>`_ 
+   and `ScienceDirect <YLD appendix on ScienceDirect_>`_)
 
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
 .. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
