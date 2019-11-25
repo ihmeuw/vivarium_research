@@ -6,6 +6,7 @@ Lower Respiratory Infections
 
 Disease Description
 -------------------
+
 Lower respiratory infections(*LRI*), principally clinician-diagnosed pneumonia
 and bronchiolitis, is a major global killer of both children and adults. Symptoms
 include shortness of breath, weakness, fever, coughing and fatigue. It is mainly
