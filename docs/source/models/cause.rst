@@ -313,7 +313,7 @@ measures are defined using the following key concepts:
   referred to as the at-risk population, is defined as the population that *
   does not* have the condition of interest; in other words, the susceptible 
   population that is at risk of developing the condition. Notably, the number 
-  of individuals in this population will change overtime as the following 
+  of individuals in this population will change over time as the following 
   events occur:
 
      - Members of the at-risk population develop the condition and are no longer susceptible
