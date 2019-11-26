@@ -152,14 +152,6 @@ generalization thereof]]
 Data Sources for Cause Models
 -----------------------------
 
-.. todo::
-
-   #. Update mortality-related data sources within existing format (yaqi).
-   #. Describe the relationship that duration and transition rates can play when there are multiple ways out of a state (LTBI)
-   #. Update transition rate section to reflect feedback
-   #. Include formulas discussed in office hours for incidence/hazards and then link out to survey. analysis page
-   #. Change remission example to diarrheal disease
-
 Once a cause model structure is specified, data is needed to inform its states
 and transitions. For our purposes, cause models generally have the following
 data needs:
@@ -283,10 +275,11 @@ Cause Model Transitions
 
 .. todo::
 
-	#. Add progression transitions, deterministic transitions, and severity splits to summary table above? (should this be the case? or should these only be discusse din the transition section? I am thinking the latter)
-	#. Enhance blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next commits)
-	#. Detail incidence, remisison, and duration-based transition sections (to come in next commits)
-	#. Detail progression transitions, deterministic transitions, and severity splits (to come in future PRs)
+	Enhance blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next commits)
+  
+  Limitations/assumptions of incidence rates section
+	
+  Detail remaining transition rate data sources (remission, duration, severity splits, deterministic)
 
 Vivarium uses probabilities to make decisions about how and when simulants 
 move between cause model states. 
@@ -295,52 +288,77 @@ Incidence Rates
 ^^^^^^^^^^^^^^^
 
 Generally, incidence is a measure of new cases of a given condition that occur 
-in a given timeframe and population. The count value of new cases of the 
+in a specified timeframe and population. The count value of new cases of the 
 condition of interest will always be the numerator of incidence measures. The 
 denominator of incidence measures is somewhat more complex and is critical to 
 ensuring an accurate data source to inform cause model transition rates. 
 
-**Cumulative incidence** is a specific type of incidence measure that can be 
-used to represent cause model transition probabilities. Cumulative incidence 
-is defined using the following concepts: 
+Two incidence measures relevant to cause model transition rate data sources 
+using GBD results are discussed in this section, including measures we refer 
+to as **incidence in the total population** (as estimated by the GBD study) 
+and **incidence in the susceptible** (or *at-risk*) **population.** These 
+measures are defined using the following key concepts:
+
+  **Person-time:** person-time is a measure of the number of individuals 
+  multiplied by the amount of time they individually occupy the population 
+  of interest. Notably, the population of interest varies depending on context 
+  and can be defined by age group, sex, location, time, disease status, etc.
+
+    For example, if one individual is occupies the population of interest for 
+    two years, they contribute two person-years. If another individual is in 
+    our population of interest for 6 months, they contribute 0.5 person-years.
+    Together, these two individuals contribute a total of 2.5 person-years.
+
+  **Susceptible or At-Risk Population:** the susceptible population, also 
+  referred to as the at-risk population, is defined as the population that *
+  does not* have the condition of interest; in other words, the susceptible 
+  population that is at risk of developing the condition. Notably, the number 
+  of individuals in this population will change overtime as the following 
+  events occur:
+
+     - Members of the at-risk population develop the condition and are no longer susceptible
+     - Members of the at-risk population die and are no longer susceptible 
+     - Individuals are born or age into the at-risk population and become susceptible
+     - Individuals age out of the at-risk population and are no longer susceptible
+     - Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
+
+**Total Population Incidence Rate** is estimated by the Global Burden of 
+Disease Study by estimating the number of incident cases that occur in one 
+year and scaling this value per 100,000 individuals of a specified population.
 
 .. math::
 
-  CumulativeIncidence = \frac{n_{incident cases}}{persontime_{atrisk}}
+  \frac{n_{Incident Cases}}{PersonTime_{Total Population}}
 
-.    
+Because the denominator of this measure is not specific to a particular cause 
+model state, it is **not** an appropriate data source for cause model 
+transition rates between states. 
 
-	**Person-time:** person-time is a measure of the number of individuals 
-	multiplied by the amount of time they individually occupy the population 
-	of interest.
+.. note:: 
 
-		For example, if one individual is in our population of interest for two 
-		years, they contribute two person-years. If another individual is in our 
-		population of interest for 6 months, they contribute 0.5 person-years.
-		Together, these individuals contribute a total of 2.5 person-years.
+  GBD estimates of total population incidence rate require transformation 
+  prior to use as a cause model transition probability data source (see below 
+  for more detail).
 
-	**At-risk population:** the at-risk population is defined as the 
-	population that *does not* have the condition of interest; in other words, 
-	the susceptible population that is at risk of developing the condition. 
-	Notably, the number of individuals in this population will change overtime 
-	as the following events occur:
+**Susceptible/At-Risk Population Incidence Rate** as discussed here is also 
+referred to as incidence density rate, person-time incidence rate, and in some 
+cases may simply be referred to as the incidence rate. It is defined as:
 
-	   - Members of the at-risk population develop the condition and are no longer susceptible
-	   - Members of the at-risk population die and are no longer susceptible 
-	   - Individuals are born or age into the at-risk population and become susceptible
-	   - Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
+.. math::
 
-Because the denominator for cumulative incidence is person-time in the at-risk 
-population, it can represent the probability of a new case of the condition 
-occuring in an individual without the condition in a given time frame. 
-Therefore, it can be used to represent the probability that a simulant will 
-transition from a susceptible to infected cause model state in a given 
-timestep.
+  \frac{n_{Incident Cases}}{PersonTime_{Susceptible Population}}
 
-  For instance, consider an example in which the global cumulative incidence
-  of injuries in 2017 was 6,800 cases per 100,000 person-years, or 0.068 cases
-  per person-year. In this example, 6,800 new injuries occurred among 100,000 
-  person-years of observation among the non-injured population.
+Because the denominator for the susceptible population incidence rate is 
+person-time in the at-risk population, it can represent the probability of a 
+new case of the condition occuring in an individual without the condition in a 
+given time frame. Therefore, it can be used to represent the probability that 
+a simulant will transition from a susceptible to infected cause model state in 
+a given timestep.
+
+  For instance, consider an example in which the global susceptible population 
+  incidence rate of injuries in 2017 was 6,800 cases per 100,000 person-years, 
+  or 0.068 cases per person-year. In this example, 6,800 new injuries occurred 
+  among 100,000 person-years of observation among the non-injured population.
 
   Now, consider a cause model with a susceptible (not injured) state and an 
   infected (injured) state with a simulation timestep of 1 year. In this case, 
@@ -355,35 +373,39 @@ timestep.
   were six months instead of one year, the transition probability would be 
   0.034 (0.034 cases per 0.5 person-years). 
 
-Cumulative incidence contrasts with other measures of incidence that may have 
-different denominators. For instance, incidence rate may refer to new cases of 
-a given condition that occur in a specified timeframe (e.g. 10 cases per year) 
-or may refer to new cases per person-time of the general population rather 
-than the at-risk population. Incidence measures other than cumulative with 
-person-time of the at-risk population as the denominator are not appropriate 
-for incidence data sources for cause model transition probabilities.
+.. note::
 
-.. warning::
+  Because GBD estimates total population incidence rates, Vivarium 
+  automatically transforms GBD results into susceptible population incidence 
+  rates that can be used as an appropriate data source for cause model 
+  transition probabilities. 
 
-  GBD does not estimate cumulative incidence, but rather a true incidence rate 
-  of new cases per person-time of the total population. Incidence measures 
-  retrieved directly from GBD results will therefore not be accurate 
-  representations of transition probabilities. 
+  This transformation from total population incidence rate to an approximation 
+  of the susceptible populatoin incidence rate is performed with the following 
+  calculation:
 
-  Vivarium automatically calculates cumulative incidence rates from GBD 
-  estimates of true incidence rates for use as cause model transition rate 
-  data source.
+  .. math::
 
-There are several key assumptions and limitations of this approach, disscussed 
+    \frac{TotalPopulationIncidenceRate}{(1-ConditionPrevalence)}
+
+There are several key assumptions and limitations to the approach of using GBD 
+incidence rates as data sources for cause model transition rates, disscussed 
 below.
 
 .. todo::
 
+    Add discussion of transformation of GBD estimates of total population to 
+    susceptible population incidence rates
+
     Add discuission about assumption that transition probability is constant 
     over time frame and link to hazard rates page for when this might be an 
-    issue)
+    issue. Include formulas about how we are approximating hazard rate. 
 
-    Add discussion about how cause model transition probabilities are state-specific and not necessarily cause-specific. Cannot use cumulative incidence of disease to represent the transition probability from susceptible to moderate disease directly, for example.
+    Add discussion about how cause model transition probabilities are 
+    state-specific and not necessarily cause-specific. Cannot use cumulative 
+    incidence of disease to represent the transition probability from 
+    susceptible to moderate disease directly, for example. (maybe use LTBI as 
+    an example here)
     
 
 Remission Rates
