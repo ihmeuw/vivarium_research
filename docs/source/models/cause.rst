@@ -328,7 +328,7 @@ year and scaling this value per 100,000 individuals of a specified population.
 
 .. math::
 
-  \frac{n_{Incident Cases}}{PersonTime_{Total Population}}
+  \frac{n_\text{incident cases}}{\text{person-time}_\text{total population}}
 
 Because the denominator of this measure is not specific to a particular cause 
 model state, it is **not** an appropriate data source for cause model 
@@ -346,7 +346,7 @@ cases may simply be referred to as the incidence rate. It is defined as:
 
 .. math::
 
-  \frac{n_{Incident Cases}}{PersonTime_{Susceptible Population}}
+  \frac{n_\text{incident cases}}{\text{person-time}_\text{susceptible population}}
 
 Because the denominator for the susceptible population incidence rate is 
 person-time in the at-risk population, it can represent the probability of a 
@@ -386,7 +386,7 @@ a given timestep.
 
   .. math::
 
-    \frac{TotalPopulationIncidenceRate}{(1-ConditionPrevalence)}
+    \frac{\text{Total Population Incidence Rate}}{(1-\text{Condition Prevalence})}
 
 There are several key assumptions and limitations to the approach of using GBD 
 incidence rates as data sources for cause model transition rates, disscussed 
