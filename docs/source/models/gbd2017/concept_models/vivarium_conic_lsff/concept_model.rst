@@ -23,29 +23,7 @@ Scope of Modeling
 Concept Model Diagram
 ---------------------
 
-The following four diagrams are placeholders; they will be combined into a
-single model encompassing all three interventions.
-
-Vitamin A Fortification
-+++++++++++++++++++++++
-
-.. image:: vitamin_a_diagram.svg
-
-Iron Fortification
-++++++++++++++++++
-
-.. image:: iron_neonatal_diagram.svg
-
-.. image:: iron_detail_diagram.svg
-
-Folic Acid Fortification
-++++++++++++++++++++++++
-
-.. image:: folic_acid_diagram.svg
-
-.. todo::
-
-   Add Coverage Gap layer. Add specific neonatal causes. Combine diagrams.
+.. image:: lsff_concept_model_diagram.svg
 
 Model Components
 ----------------
@@ -53,14 +31,50 @@ Model Components
 Demographics
 ++++++++++++
 
-GBD Risks and Causes
-++++++++++++++++++++
+GBD Causes
+++++++++++
 
 :ref:`Measles <2017_cause_measles>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 :ref:`Diarrheal Diseases <2017_cause_diarrhea>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:ref:`Neural Tube Defects <2017_cause_neural_tube_defects>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Lower Respiratory Infections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Neonatal encephalopathy* due to birth asphyxia and birth trauma
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Neonatal sepsis* and other neonatal infections
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Haemolytic disease and other *neonatal jaundice*
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Other neonatal* disorders
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+PAF-of-1 Cause/Risk Pairs
++++++++++++++++++++++++++
+
+Vitamin A Deficiency / Vitamin A Deficiency
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Dietary Iron Deficiency / Iron Deficiency
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Additional GBD Risks
+++++++++++++++++++++
+
+Low Birth Weight and Short Gestation
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Risk-Cause Relationships
+++++++++++++++++++++++++
 
 Coverage Gap Framework
 ++++++++++++++++++++++
