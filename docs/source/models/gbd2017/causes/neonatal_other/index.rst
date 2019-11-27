@@ -1,14 +1,14 @@
 .. _2017_cause_neonatal_other:
 
 ========================
-Other neonatal disorders
+Other Neonatal Disorders
 ========================
 
-Modeling other neonatal disorders in GBD 2017
+Modeling Other Neonatal Disorders in GBD 2017
 ---------------------------------------------
 
-Beginning of CoD Appendix
-+++++++++++++++++++++++++
+Beginning of "Neonatal Disorders" in CoD Appendix
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Mortality for five causes are modeled within “neonatal disorders”: preterm birth
 complications, neonatal encephalopathy and birth trauma, neonatal sepsis and
@@ -16,8 +16,8 @@ other infections, hemolytic disease and neonatal jaundice, and other neonatal
 disorders. An overall neonatal disorders “parent” envelope is also estimated, to
 which all neonatal causes are squeezed.
 
-Complete content of YLD Appendix
-++++++++++++++++++++++++++++++++
+Complete content of "Other neonatal disorders" in YLD Appendix
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In addition to the neonatal disorders described above, there are many diverse
 types of neonatal disorders with a range of severities and associated sequelae.
