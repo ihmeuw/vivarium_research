@@ -43,20 +43,20 @@ GBD Causes
 :ref:`Neural Tube Defects <2017_cause_neural_tube_defects>`
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Lower Respiratory Infections
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Lower Respiratory Infections <2017_cause_lower_respiratory_infections>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Neonatal encephalopathy* due to birth asphyxia and birth trauma
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Neonatal Encephalopathy <2017_cause_neonatal_encephalopathy>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Neonatal sepsis* and other neonatal infections
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Neonatal Sepsis <2017_cause_neonatal_sepsis>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Haemolytic disease and other *neonatal jaundice*
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Neonatal Jaundice <2017_cause_neonatal_jaundice>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Other neonatal* disorders
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Other neonatal disorders <2017_cause_neonatal_other>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 PAF-of-1 Cause/Risk Pairs
 +++++++++++++++++++++++++
@@ -73,8 +73,8 @@ Additional GBD Risks
 Low Birth Weight and Short Gestation
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Risk-Cause Relationships
-++++++++++++++++++++++++
+Risk-Outcome Relationships
+++++++++++++++++++++++++++
 
 Coverage Gap Framework
 ++++++++++++++++++++++
