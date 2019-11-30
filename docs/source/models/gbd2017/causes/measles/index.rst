@@ -83,6 +83,31 @@ Modeling Measles in GBD 2017
 
    Make sure to check on measles sequelae as well. Our models so far have not paid much attention to the nonfatal side, but it looks like some of the complications can persist well after someone recovers from measles, so maybe that's important to think about.
 
+GBD Hierarchy
+-------------
+
+**Hierarchy table:**
+
++----------------------------------+------------+-----------+
+| **Cause**                        | **GBD ID** | **Level** |
++----------------------------------+------------+-----------+
+| All causes                       | 294        | 0         |
++----------------------------------+------------+-----------+
+| Communicable, maternal, neonatal | 295        | 1         |
+| and nutritional diseases         |            |           | 
++----------------------------------+------------+-----------+
+| Other infectious diseases        | 961        | 0         |
++----------------------------------+------------+-----------+
+| Measles                          | 341        | 3         |
++----------------------------------+------------+-----------+
+
+- {Measles} = [Moderate Measles, Severe Measles]
+
+**Hierarchy Diagram:**
+
+.. image:: measles_gbd_hierarchy.svg
+   :alt: Measles GBD hierarchy diagram
+	
 Cause Model Diagram
 -------------------
 
