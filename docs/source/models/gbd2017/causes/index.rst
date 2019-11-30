@@ -9,3 +9,4 @@ Cause Models
    :glob:
 
    *
+   */index
