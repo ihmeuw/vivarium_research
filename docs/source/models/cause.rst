@@ -349,7 +349,7 @@ cases may simply be referred to as the incidence rate. It is defined as:
   \frac{n_\text{incident cases}}{\text{person-time}_\text{susceptible population}}
 
 Because the denominator for the susceptible population incidence rate is 
-person-time in the at-risk population, it can represent the probability of a 
+person-time in the at-risk population, this incidence rate can be used to compute the probability of a 
 new case of the condition occuring in an individual without the condition in a 
 given time frame. Therefore, it can be used to represent the probability that 
 a simulant will transition from a susceptible to infected cause model state in 
