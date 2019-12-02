@@ -289,20 +289,11 @@ scenarios:
 	simulant is *born* into a simulation. See the below section on birth 
 	prevalence for how cause model states are initialized in this scenario.
 
-While GBD results are estimates of *point* prevalence at the year midpoint, 
-cause model initialization occurs continuously throughtout a full simulation 
-year. The following are two possible assumptions on how the GBD point 
-prevalence estimate might apply across the full simulation year that it 
-represents.
-
-- Point prevalence estimate is constant across the full year. This is likely 
-  appropriate in cases where prevalence is relatively constant over time. 
-
-- Prevalence estimates across several years follow a smooth line between 
-  annual midpoint point prevalence estimates. This approach would require 
-  fitting a curve across existing point prevalence estimates and may be 
-  appropriate when prevalence of a given condition is steeply increasing or 
-  decreasing over time.
+GBD results of cause prevalence are estimates of *point* prevalence at the year 
+midpoint. Notably, Vivarium assumes that the prevalence of a given cause is 
+*constant* across the entire year that it represents. This is likely an
+appropriate assumption in cases where prevalence is relatively constant over
+time and over age groups, although it may be limited in cases where it is not. 
 
 Birth Prevalence
 ^^^^^^^^^^^^^^^^
