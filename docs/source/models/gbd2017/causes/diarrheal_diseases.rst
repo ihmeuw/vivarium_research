@@ -7,27 +7,57 @@ Diarrheal Diseases
 Disease Description
 -------------------
 
+We follow GBD 2017 and "defined diarrhoeal disease episodes as three
+or more loose stools in a 24-hour period." (p. 88 of
+[GBD-2017-YLD-Capstone-Appendix-1]_).
+
 .. todo::
 
-   Adapt material from GBD capstone and other sources, e.g. [WHO]_,
+   Adapt additional material from GBD capstone and other sources, e.g. [WHO]_,
    [CDC]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
-
-The relevant ICD codes are...
 
 Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
 
+According to the [GBD-2017-YLD-Capstone-Appendix-1]_, "There are no
+major modelling updates from GBD 2016," (p. 93) and "self-reported
+prevalence is the reference category" (p. 88).
+
+.. todo::
+
+   Add more context for people who are not familiar.
+
+Regarding the duration of a bout of diarrhea, "the mean duration was
+the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a
+paper referenced there) Since this assumption gets into the DisMod
+model, we will use the remission rate that comes from DisMod.
+
+
+The GBD 2017 adjusted for seasonal variation in diarrheal disease, but
+we have not attempted to include this variation in Vivarium yet. (p. 89)
+
+There is substantial additional effort in GBD to divide diarrhea
+burden into the aetiologies of diarrhea, but we have not included
+aetiologies in this simple model.  The non-fatal model is severity
+split based. In our model, every individual will have the average
+severity for their age/sex/location/year.
+
+
 .. todo::
 
    Add relevant detail about diarrheal diseases modeling process from
-   [GBD-2017-YLD-Capstone-Appendix-1]_ and from the CoD Appendix.
+   the CoD Appendix.
 
 Cause Model Diagram
 -------------------
 
-.. todo::
+.. image:: DD_cause_model.svg
 
-   Add Vivarium cause model diagram.
+
+S: _S_usceptible to diarrheal diseases
+
+I: _I_nfected and currently experiencing a diarrheal disease bout
+
 
 Data Descriptions
 -----------------
