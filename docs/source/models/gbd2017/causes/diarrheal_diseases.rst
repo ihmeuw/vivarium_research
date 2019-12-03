@@ -23,6 +23,10 @@ According to the [GBD-2017-YLD-Capstone-Appendix-1]_, "There are no
 major modelling updates from GBD 2016," (p. 93) and "self-reported
 prevalence is the reference category" (p. 88).
 
+.. todo::
+
+   Add more context regarding GBD 2016 model.
+
 Regarding the duration of a bout of diarrhea, "the mean duration was
 the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a paper referenced there).
 For GBD 2017, the remission period was modeled as 5 days.
@@ -75,6 +79,22 @@ Data Descriptions
 
 prev_302 = get_draws("cause_id", 302, source = "como", measure_id = 5, gbd_round_id = 5)
 
+.. csv-table:: Transitions
+   :header: Transition,Rate (per person-year),Source
+   :widths: 10, 20, 10
+   :stub-columns: 0
+
+   I -> S,rem_302,epi
+   S -> I,inc_302*(1-prev_302)*pop,como
+
+rem_302 = get_model_results(gbd_team='epi', gbd_id=1181, gbd_round_id=5, measure_id = 7)
+inc_hazard_302 = get_draws("cause_id", 302, source = "como", measure_id = 6, gbd_round_id = 5)
+
+.. todo::
+
+   Figure out what units remission is in
+
+
 .. csv-table:: Excess Mortality Rate
    :header: State,EMR,source
    :widths: 5, 10, 10
@@ -103,16 +123,6 @@ etiology.
 .. todo::
 
 	Look into what severity splits were actually used.
-
-.. csv-table:: Remission
-   :header: State,Remission,Source
-   :widths: 10, 20, 10
-   :stub-columns: 0
-
-   I,rem_320,epi
-   S,NA,NA
-
-rem_302 = get_model_results(gbd_team='epi', gbd_id=1181, gbd_round_id=5, measure_id = 7)
 
 
 .. todo::
