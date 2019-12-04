@@ -80,19 +80,16 @@ Data Descriptions
 prev_302 = get_draws("cause_id", 302, source = "como", measure_id = 5, gbd_round_id = 5)
 
 .. csv-table:: Transitions
-   :header: Transition,Rate (per person-year),Source
-   :widths: 10, 20, 10
+   :header: Transition,Rate (per person-year),Source, Note
+   :widths: 10, 20, 10, 30
    :stub-columns: 0
 
-   I -> S,rem_302,epi
-   S -> I,inc_302*(1-prev_302)*pop,como
+   I -> S,rem_302,epi,Already a rate within with-condition population
+   S -> I,inc_302/(1-prev_302),como,We transform incidence to be a rate within the susceptible population.
 
-rem_302 = get_model_results(gbd_team='epi', gbd_id=1181, gbd_round_id=5, measure_id = 7)
 inc_hazard_302 = get_draws("cause_id", 302, source = "como", measure_id = 6, gbd_round_id = 5)
+rem_302 = get_model_results(gbd_team='epi', gbd_id=1181, gbd_round_id=5, measure_id = 7)
 
-.. todo::
-
-   Figure out what units remission is in
 
 
 .. csv-table:: Excess Mortality Rate
