@@ -146,28 +146,28 @@ What does a model document look like?
 
 [[to be updated based on experience from LTBI cause model document, and generalization thereof]]
 
-Common Cause Models
--------------------
+Basic Cause Model Structures
+----------------------------
 
-Common cause model structures are described in the table and dicussed in further detail below. `Non-Standard Cause Models`_ are covered afterward.
+Common basic cause model structures are described in the table and dicussed in 
+further detail below. `Non-Standard Cause Models`_ are covered afterward.
 
-+---------+--------------------------------+---------------------------------------------------------------------+
-|Model    |States                          |Description                                                          |
-+=========+================================+=====================================================================+
-|SI_      |Susceptible-Infected            |Simulants never recover from infected (with condition) state         |
-|         |                                |                                                                     |
-+---------+--------------------------------+---------------------------------------------------------------------+
-|SIS_     |Susceptible-Infected-Susceptible|Simulants can recover from infected (with condition) state and can   |
-|         |                                |become infected again after recovery                                 |
-|         |                                |                                                                     |
-+---------+--------------------------------+---------------------------------------------------------------------+
-|SIR_     |Susceptible-Infected-Recovered  |Simulants can recover from infected (with condition) state and cannot| 
-|         |                                |become infected again after recovery                                 |
-|         |                                |                                                                     |
-+---------+--------------------------------+---------------------------------------------------------------------+
-|Neonatal_|With and without condition      |Simulants are born either with or without condition                  |
-|         |                                |                                                                     |
-+---------+--------------------------------+---------------------------------------------------------------------+
+.. list-table:: Basic Cause Model Structures
+	:widths: 20 20 20
+	:header-rows: 1
+
+	* - Model
+	  - States
+	  - Description
+	* - SI
+	  - Susceptible-Infected
+	  - Simulants never recover from the infected (with condition) state
+	* - SIS
+	  - Susceiptible-Infected-Susceptible
+	  - Simulants can recover from the infected (with condition) state and can become infected again after recovery
+	* - SIR
+	  - Susceptible-Infected-Recovered
+	  - Simulants can recover from the infected (with condition) state and cannot become infected after recovery
 
 .. _SI:
 
@@ -176,12 +176,15 @@ SI
 
 .. image:: SI.png
 
-In this cause model structure, simulants in the susceptible state can transition to the infected state, where they 
-will remain for the remainder of the simulation. 
+In this cause model structure, simulants in the susceptible state can 
+transition to the infected state, where they will remain for the remainder of 
+the simulation. 
 
-This cause model structure is appropriate for chronic conditions from which individuals can never recover.
+This cause model structure is appropriate for chronic conditions from which 
+individuals can never recover.
 
-Examples of conditions appropriate for SI cause models include Alzheimer’s disease and other dementias.
+Examples of conditions appropriate for SI cause models include Alzheimer’s 
+disease and other dementias.
 
 .. _SIS:
 
@@ -190,14 +193,16 @@ SIS
 
 .. image:: SIS.png
 
-In this cause model structure, simulants in the susceptible state can transition to the infected state and 
-simulants in the infected state can transition to the susceptible state. Notably, this cause model allows for
+In this cause model structure, simulants in the susceptible state can 
+transition to the infected state and simulants in the infected state can 
+transition to the susceptible state. Notably, this cause model allows for
 simulants to enter the infected state more than once in a simulation. 
 
-This cause model structure is appropriate for conditions for which individuals can have multiple cases over 
-their lifetimes.
+This cause model structure is appropriate for conditions for which individuals 
+can have multiple cases over their lifetimes.
 
-Examples of conditions appropriate for SIS cause models include diarrheal diseases.
+Examples of conditions appropriate for SIS cause models include diarrheal 
+diseases.
 
 .. _SIR:
 
@@ -206,11 +211,14 @@ SIR
 
 .. image:: SIR.png
 
-In this cause model structure, simulants in the susceptible state can transition to the infected state and 
-simulants in the infected state can transition to a recovered state where they will remain for the remainder
-of the simulation. Notably, the cause model allows individuals to become infected only once in a simulation.
+In this cause model structure, simulants in the susceptible state can 
+transition to the infected state and simulants in the infected state can 
+transition to a recovered state where they will remain for the remainder
+of the simulation. Notably, the cause model allows individuals to become 
+infected only once in a simulation.
 
-This cause model structure is appropriate for conditions for which individuals can only have a single case, but 
+This cause model structure is appropriate for conditions for which individuals 
+can only have a single case, but 
 do not stay in the with condition state forever.
 
 An example of a condition appropriate for SIR cause models is measles.
@@ -220,19 +228,22 @@ An example of a condition appropriate for SIR cause models is measles.
 Neonatal
 ++++++++
 
-In this cause model structure, simulants who are born during the simulation can be born either with condition 
-or without condition. Whether or not simulants born with condition may recover from the with condition state 
+In this cause model structure, simulants who are born during the simulation 
+can be born either with condition or without condition. Whether or not 
+simulants born with condition may recover from the with condition state 
 depends on the cause at hand.
 
-This cause model structure is appropriate for conditions that are present at birth.
+This cause model structure is appropriate for conditions that are present at 
+birth.
 
-An example of a condition appropriate for a neonatal cause model without recovery from the condition state is 
-preterm birth.
+An example of a condition appropriate for a neonatal cause model without 
+recovery from the condition state is preterm birth.
 
 .. image:: Neonatal_no_recover.png
 
-An example of a condition appropriate for a neonatal cause model with potential recovery from the condition 
-state is cleft palate (which may be treated later in life).
+An example of a condition appropriate for a neonatal cause model with
+potential recovery from the condition state is cleft palate (which may be 
+treated later in life).
 
 .. image:: Neonatal_recover.png
 
@@ -241,7 +252,9 @@ state is cleft palate (which may be treated later in life).
 Non-Standard Cause Models
 +++++++++++++++++++++++++
 
-There are instances where a particular cause may not fit well into one of the common cause model structures discussed above. Examples of situations that may require custom cause model structures are listed below:
+There are instances where a particular cause may not fit well into one of the 
+common cause model structures discussed above. Examples of situations that may 
+require custom cause model structures are listed below:
 
 - Cause models with severity splits
 - Joint cause models (multiple closely related causes represented in a single cause model)
