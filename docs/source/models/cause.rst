@@ -316,11 +316,15 @@ measures are defined using the following key concepts:
   of individuals in this population will change over time as the following 
   events occur:
 
-     - Members of the at-risk population develop the condition and are no longer susceptible
+     - Members of the at-risk population develop the condition and are no 
+       longer susceptible
      - Members of the at-risk population die and are no longer susceptible 
-     - Individuals are born or age into the at-risk population and become susceptible
+     - Individuals are born or age into the at-risk population and become 
+       susceptible
      - Individuals age out of the at-risk population and are no longer susceptible
-     - Individuals with the condition recover from the condition and re-enter the at-risk population as susceptible (in the case of conditions with remission)
+     - Individuals with the condition recover from the condition and re-enter 
+       the at-risk population as susceptible (in the case of conditions with 
+       remission)
 
 **Total Population Incidence Rate** is estimated by the Global Burden of 
 Disease Study by estimating the number of incident cases that occur in one 
@@ -349,11 +353,11 @@ cases may simply be referred to as the incidence rate. It is defined as:
   \frac{n_\text{incident cases}}{\text{person-time}_\text{susceptible population}}
 
 Because the denominator for the susceptible population incidence rate is 
-person-time in the at-risk population, this incidence rate can be used to compute the probability of a 
-new case of the condition occuring in an individual without the condition in a 
-given time frame. Therefore, it can be used to compute the probability that 
-a simulant will transition from a susceptible to infected cause model state in 
-a given timestep.
+person-time in the at-risk population, this incidence rate can be used to 
+compute the probability of a new case of the condition occuring in an individual 
+without the condition in a given time frame. Therefore, it can be used to compute 
+the probability that a simulant will transition from a susceptible to infected 
+cause model state in a given timestep.
 
   For instance, consider an example in which the global susceptible population 
   incidence rate of injuries in 2017 was 6,800 cases per 100,000 person-years, 
@@ -381,7 +385,7 @@ a given timestep.
   transition probabilities. 
 
   This transformation from total population incidence rate to an approximation 
-  of the susceptible populatoin incidence rate is performed with the following 
+  of the susceptible population incidence rate is performed with the following 
   calculation:
 
   .. math::
