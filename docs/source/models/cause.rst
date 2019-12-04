@@ -149,8 +149,17 @@ What does a model document look like?
 Basic Cause Model Structures
 ----------------------------
 
-Common basic cause model structures are described in the table and dicussed in 
-further detail below. `Non-Standard Cause Models`_ are covered afterward.
+.. todo::
+
+	Link to examples of cause model documents
+
+Common basic cause model structures are described in the following table and 
+dicussed in further detail below. Notably, cause models are almost always more 
+complicated than the basic structures discussed in this section. The following 
+basic structures should be considered as basic guiding concepts, and not as 
+templates that are appropriate for all (or even most) cause models. Examples 
+of more complicated cause model structures are discussed in the `Other Cause 
+Model Structures`_ section afterward.
 
 .. list-table:: Basic Cause Model Structures
 	:widths: 20 20 20
@@ -183,8 +192,8 @@ the simulation.
 This cause model structure is appropriate for chronic conditions from which 
 individuals can never recover.
 
-Examples of conditions appropriate for SI cause models include Alzheimer’s 
-disease and other dementias.
+Examples of conditions potentially appropriate for an SI cause model structure 
+include Alzheimer’s disease and other dementias.
 
 .. _SIS:
 
@@ -201,8 +210,8 @@ simulants to enter the infected state more than once in a simulation.
 This cause model structure is appropriate for conditions for which individuals 
 can have multiple cases over their lifetimes.
 
-Examples of conditions appropriate for SIS cause models include diarrheal 
-diseases.
+Examples of conditions potentially appropriate for an SIS cause model 
+structure include diarrheal diseases.
 
 .. _SIR:
 
@@ -218,10 +227,11 @@ of the simulation. Notably, the cause model allows individuals to become
 infected only once in a simulation.
 
 This cause model structure is appropriate for conditions for which individuals 
-can only have a single case, but 
-do not stay in the with condition state forever.
+can only have a single case, but do not stay in the with condition state 
+forever.
 
-An example of a condition appropriate for SIR cause models is measles.
+An example of a condition potentially appropriate for an SIR cause model 
+structure is measles.
 
 .. _Neonatal:
 
@@ -247,13 +257,13 @@ treated later in life).
 
 .. image:: Neonatal_recover.png
 
-.. _`Non-Standard Cause Models`:
+.. _`Other Cause Model Structures`:
 
-Non-Standard Cause Models
+Other Cause Model Structures
 +++++++++++++++++++++++++
 
-There are instances where a particular cause may not fit well into one of the 
-common cause model structures discussed above. Examples of situations that may 
+It is common that a particular cause may not fit well into one of the common 
+basic cause model structures discussed above. Examples of situations that may 
 require custom cause model structures are listed below:
 
 - Cause models with severity splits
