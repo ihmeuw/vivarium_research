@@ -152,16 +152,6 @@ generalization thereof]]
 Data Sources for Cause Models
 -----------------------------
 
-.. todo::
-
-   #. Update mortality-related data sources within existing format (yaqi).
-   #. Describe the relationship that duration and transition rates can play
-      when there are multiple ways out of a state (LTBI)
-   #. Update transition rate section to reflect feedback
-   #. Include formulas discussed in office hours for incidence/hazards and
-      then link out to survey. analysis page
-   #. Change remission example to diarrheal disease
-
 Once a cause model structure is specified, data is needed to inform its states
 and transitions. For our purposes, cause models generally have the following
 data needs:
@@ -227,13 +217,13 @@ and discussed in more detail afterward.
      - Initialization
      - Represents the probability that a simulant born during the simulation
        will be born into a with-condition cause model state.
-   * - `Incidence`_
+   * - `Incidence Rates`_
      - Number of new cases of a given condition per person-year of the at-risk
        population.
      - Transition rates
      - Once scaled to simulation time-step, represents the probability a
        simulant will transition from infected to recovered.
-   * - `Remission`_
+   * - `Remission Rates`_
      - Number of recovered cases from a given condition per person-year of the
        population with the condition.
      - Transition rates
@@ -242,7 +232,15 @@ and discussed in more detail afterward.
    * - `Duration`_
      - Length of time a condition lasts.
      - Transition rates
-     - Amount of time a simulant remains in a given state.
+     - Amount of time a simulant remains in a given state
+   * - `Progression`_
+     -
+     - Transition rates
+     -
+   * - `Severity Splits`_
+     -
+     - Transition Rates
+     -
    * - `Restrictions`_
      - List of groups that are not included in a cause.
      - General
@@ -270,17 +268,14 @@ Prevalence
 ^^^^^^^^^^
 
 Prevalence is defined as the **proportion of a given population that possesses
-a given condition or trait** at a given time-point.
+a specific condition or trait** at a given time-point.
 
   For example, the prevalence of diabetes mellitus in the United States was
   approximately 6.5% in 2017.
 
-When a *time-frame* (such as 2016, i.e. 1/1/16 to 12/31/16) instead of a
-*time-point* (such as 1/1/16) is reported, it is commonly assumed that the
-reported prevalence represents the prevalence of the *midpoint* of
-that time-frame (7/1/16 is the midpoint for the time frame of all of 2016).
-However, this may not always be the case and it should be considered when
-relevant.
+	Notably, GBD prevalence estimates for a given year (e.g. 2017) are meant 
+	to represent the point prevalence at the *midpoint* of that year (e.g. 
+	7/1/17).
 
 Prevalence data can be used to **initialize cause model states** and
 represents the **probability that a simulant will begin the simulation in a
@@ -298,9 +293,15 @@ scenarios:
   location
 - A simulant enters the simulation by *aging* into the simulation
 
-Prevalence is **not** used to initialize cause model states when a simulant 
-is *born* into a simulation. See the below section on birth prevalence for 
-how cause model states are initialized in this scenario.
+	Prevalence is **not** used to initialize cause model states when a 
+	simulant is *born* into a simulation. See the below section on birth 
+	prevalence for how cause model states are initialized in this scenario.
+
+GBD results of cause prevalence are estimates of *point* prevalence at the year 
+midpoint. Notably, Vivarium assumes that the prevalence of a given cause is 
+*constant* across the entire year that it represents. This is likely an
+appropriate assumption in cases where prevalence is relatively constant over
+time and over age groups, although it may be limited in cases where it is not. 
 
 Birth Prevalence
 ^^^^^^^^^^^^^^^^
@@ -318,18 +319,162 @@ the simulation will be born into a given neonatal cause model state.**
   For example, the probability that a simulant born during a simulation of
   cleft lip in the United States in 2006 is 0.00106, or 0.106%.
 
-
 Cause Model Transitions
 +++++++++++++++++++++++
 
-Incidence
-^^^^^^^^^
+.. todo::
 
-Remission
-^^^^^^^^^
+	Enhance blurb to beginning of cause model transition section about how we use probabilies to inform cause model transitions (to come in next commits)
+  
+  Limitations/assumptions of incidence rates section
+	
+  Detail remaining transition rate data sources (remission, duration, severity splits, deterministic)
 
-Duration
-^^^^^^^^
+Vivarium uses probabilities to make decisions about how and when simulants 
+move between cause model states. 
+
+Incidence Rates
+^^^^^^^^^^^^^^^
+
+Generally, incidence is a measure of new cases of a given condition that occur 
+in a specified timeframe and population. The count value of new cases of the 
+condition of interest will always be the numerator of incidence measures. The 
+denominator of incidence measures is somewhat more complex and is critical to 
+ensuring an accurate data source to inform cause model transition rates. 
+
+Two incidence measures relevant to cause model transition rate data sources 
+using GBD results are discussed in this section, including measures we refer 
+to as **incidence in the total population** (as estimated by the GBD study) 
+and **incidence in the susceptible** (or *at-risk*) **population.** These 
+measures are defined using the following key concepts:
+
+  **Person-time:** person-time is a measure of the number of individuals 
+  multiplied by the amount of time they individually occupy the population 
+  of interest. Notably, the population of interest varies depending on context 
+  and can be defined by age group, sex, location, time, disease status, etc.
+
+    For example, if one individual is occupies the population of interest for 
+    two years, they contribute two person-years. If another individual is in 
+    our population of interest for 6 months, they contribute 0.5 person-years.
+    Together, these two individuals contribute a total of 2.5 person-years.
+
+  **Susceptible or At-Risk Population:** the susceptible population, also 
+  referred to as the at-risk population, is defined as the population that *
+  does not* have the condition of interest; in other words, the susceptible 
+  population that is at risk of developing the condition. Notably, the number 
+  of individuals in this population will change over time as the following 
+  events occur:
+
+     - Members of the at-risk population develop the condition and are no 
+       longer susceptible
+     - Members of the at-risk population die and are no longer susceptible 
+     - Individuals are born or age into the at-risk population and become 
+       susceptible
+     - Individuals age out of the at-risk population and are no longer susceptible
+     - Individuals with the condition recover from the condition and re-enter 
+       the at-risk population as susceptible (in the case of conditions with 
+       remission)
+
+**Total Population Incidence Rate** is estimated by the Global Burden of 
+Disease Study by estimating the number of incident cases that occur in one 
+year and scaling this value per 100,000 individuals of a specified population.
+
+.. math::
+
+  \frac{n_\text{incident cases}}{\text{person-time}_\text{total population}}
+
+Because the denominator of this measure is not specific to a particular cause 
+model state, it is **not** an appropriate data source for cause model 
+transition rates between states. 
+
+.. note:: 
+
+  GBD estimates of total population incidence rate require transformation 
+  prior to use as a cause model transition probability data source (see below 
+  for more detail).
+
+**Susceptible/At-Risk Population Incidence Rate** as discussed here is also 
+referred to as incidence density rate, person-time incidence rate, and in some 
+cases may simply be referred to as the incidence rate. It is defined as:
+
+.. math::
+
+  \frac{n_\text{incident cases}}{\text{person-time}_\text{susceptible population}}
+
+Because the denominator for the susceptible population incidence rate is 
+person-time in the at-risk population, this incidence rate can be used to 
+compute the probability of a new case of the condition occuring in an individual 
+without the condition in a given time frame. Therefore, it can be used to compute 
+the probability that a simulant will transition from a susceptible to infected 
+cause model state in a given timestep.
+
+  For instance, consider an example in which the global susceptible population 
+  incidence rate of injuries in 2017 was 6,800 cases per 100,000 person-years, 
+  or 0.068 cases per person-year. In this example, 6,800 new injuries occurred 
+  among 100,000 person-years of observation among the non-injured population.
+
+  Now, consider a cause model with a susceptible (not injured) state and an 
+  infected (injured) state with a simulation timestep of 1 year. In this case, 
+  the probability that a simulant will transition from the susceptible to 
+  infected state within a single timestep (i.e. the transition probability) 
+  would be represented as 0.068.
+
+  Notably, in order to represent the transition probability for a single 
+  simulant within a single timestep, the cumulative incidence value needs to 
+  be scaled so that the person-time denominator is equal to the simulation 
+  timestep. Therefore, if the timestep of the cause model considered above 
+  were six months instead of one year, the transition probability would be 
+  0.034 (0.034 cases per 0.5 person-years). 
+
+.. note::
+
+  Because GBD estimates total population incidence rates, Vivarium 
+  automatically transforms GBD results into susceptible population incidence 
+  rates that can be used as an appropriate data source for cause model 
+  transition probabilities. 
+
+  This transformation from total population incidence rate to an approximation 
+  of the susceptible population incidence rate is performed with the following 
+  calculation:
+
+  .. math::
+
+    \frac{\text{Total Population Incidence Rate}}{(1-\text{Condition Prevalence})}
+
+There are several key assumptions and limitations to the approach of using GBD 
+incidence rates as data sources for cause model transition rates, disscussed 
+below.
+
+.. todo::
+
+    Add discussion of transformation of GBD estimates of total population to 
+    susceptible population incidence rates
+
+    Add discuission about assumption that transition probability is constant 
+    over time frame and link to hazard rates page for when this might be an 
+    issue. Include formulas about how we are approximating hazard rate. 
+
+    Add discussion about how cause model transition probabilities are 
+    state-specific and not necessarily cause-specific. Cannot use cumulative 
+    incidence of disease to represent the transition probability from 
+    susceptible to moderate disease directly, for example. (maybe use LTBI as 
+    an example here)
+    
+
+Remission Rates
+^^^^^^^^^^^^^^^
+
+Duration-Based Transitions
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Deterministic or Triggered Transitions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Progression Transitions
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Severity Splits
+^^^^^^^^^^^^^^^
 
 Mortality Impacts
 +++++++++++++++++

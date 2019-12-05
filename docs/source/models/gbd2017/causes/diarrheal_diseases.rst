@@ -25,18 +25,23 @@ prevalence is the reference category" (p. 88).
 
 .. todo::
 
-   Add more context regarding GBD 2016 model.
+   Add more context regarding GBD 2016 model for people who are not familiar.
 
 Regarding the duration of a bout of diarrhea, "the mean duration was
-the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a paper referenced there).
+the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a
+paper referenced there).
 For GBD 2017, the remission period was modeled as 5 days.
+Since this assumption gets into the DisMod
+model, we will use the remission rate that comes from DisMod.
 
 The GBD 2017 adjusted for seasonal variation in diarrheal disease, but
 we have not attempted to include this variation in Vivarium yet. (p. 89)
 
 There is substantial additional effort in GBD to divide diarrhea
 burden into the aetiologies of diarrhea, but we have not included
-aetiologies in this simple model.
+aetiologies in this simple model.  The non-fatal model is severity
+split based. In our model, every individual will have the average
+severity for their age/sex/location/year.
 
 .. todo::
 
