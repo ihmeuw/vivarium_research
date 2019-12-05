@@ -64,45 +64,51 @@ Data Descriptions
 	 
 	 
 .. list-table:: Initialization
-	:widths: 5 10 10 10 10
+	:widths: 5 10 10 10 10 10
 	:header-rows: 1
 	
 	* - State
 	  - State name
 	  - Definition
 	  - Calc
+	  - Metric
 	  - Source
 	* - I
 	  - Infected
 	  - Currently has diarrheal disease
 	  - prev_c302
+	  - proportion
 	  - como
 	* - S
 	  - Susceptible
 	  - Does not currently have diarrheal disease
 	  - 1-prev_c302
-	  - NA
+	  - proportion
+	  -
 
 .. list-table:: Transitions
-	:widths: 5 10 10 10 10 10
+	:widths: 5 10 10 10 10 10 10
 	:header-rows: 1
 	
 	* - Source
 	  - Sink
 	  - Rate name
-	  - Rate calc
+	  - Calc
+	  - Metric
 	  - Source
 	  - Note
 	* - I
 	  - S
 	  - Remission
 	  - rem_c302
+	  - rate
 	  - epi
 	  - Already a rate within with-condition population
 	* - S
 	  - I
 	  - Incidence
 	  - inc_c302/(1-prev_c302)
+	  - rate
 	  - como
 	  - We transform incidence to be a rate within the susceptible population.
 
