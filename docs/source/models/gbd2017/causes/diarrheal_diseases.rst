@@ -100,7 +100,7 @@ Data Descriptions
 	* - I
 	  - S
 	  - Remission
-	  - rem_c302
+	  - rem_m1181
 	  - rate
 	  - epi
 	  - Already a rate within with-condition population
