@@ -10,10 +10,6 @@ Survival Analysis
 .. contents::
 	:local:
 
-----
-++++
-^^^^
-
 Terms and Definitions
 ---------------------
 
@@ -35,6 +31,10 @@ Terms and Definitions
      -
    * - Observation period
      -
+   * - Closed cohort
+     -
+   * - Open cohort
+     -
 
 Survival Function
 -----------------
@@ -46,7 +46,7 @@ Survival Function
 
 	Include formula for survival function, interpretation, description, etc.
 
-	Include kaplain meier plot 
+	Include kaplan-meier plot 
 
 
 Hazard Function
@@ -80,13 +80,13 @@ Implications for Cause Model Transition Rates
 	Discuss how this assumption is less valid for the following scenarios, 
 	with examples:
 
-		increasing hazard rates
+		Increasing hazard rates
 
-		decreasing hazard rates
+		Decreasing hazard rates
 
 		U-shaped and bell shaped hazard rates
 
-		when the hazard rate varies between population timeframe and the 
+		When the hazard rate varies between population timeframe and the 
 		individual timeframe 
 
 Impact on YLLs and YLDs
@@ -100,3 +100,18 @@ Impact on YLLs and YLDs
 	Include examples of how this has been/can be handled (function to increase/
 	decrease incidence rate around the mean relative to time since infection?, 
 	etc.)
+
+Open Cohorts
+------------
+
+.. todo::
+
+	Discuss how assumptions/implications will vary with open cohorts (kaplan 
+	meier plot no longer applies)
+
+Event Recurrance
+----------------
+
+.. todo::
+
+	Discuss how assumptions/implications vary with event recurrance 
