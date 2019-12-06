@@ -168,17 +168,16 @@ Model Structures`_ section afterward.
 	* - Model
 	  - States
 	  - Description
-	* - SI
+	* - SI_
 	  - Susceptible-Infected
 	  - Simulants never recover from the infected (with condition) state
-	* - SIS
+	* - SIS_
 	  - Susceiptible-Infected-Susceptible
 	  - Simulants can recover from the infected (with condition) state and can become infected again after recovery
-	* - SIR
+	* - SIR_
 	  - Susceptible-Infected-Recovered
 	  - Simulants can recover from the infected (with condition) state and cannot become infected after recovery
 
-.. _SI:
 
 SI
 ++
@@ -195,8 +194,6 @@ individuals can never recover.
 Examples of conditions potentially appropriate for an SI cause model structure 
 include Alzheimer’s disease and other dementias.
 
-.. _SIS:
-
 SIS
 +++
 
@@ -212,8 +209,6 @@ can have multiple cases over their lifetimes.
 
 Examples of conditions potentially appropriate for an SIS cause model 
 structure include diarrheal diseases.
-
-.. _SIR:
 
 SIR
 +++
@@ -233,30 +228,6 @@ forever.
 An example of a condition potentially appropriate for an SIR cause model 
 structure is measles.
 
-.. _Neonatal:
-
-Neonatal
-++++++++
-
-In this cause model structure, simulants who are born during the simulation 
-can be born either with condition or without condition. Whether or not 
-simulants born with condition may recover from the with condition state 
-depends on the cause at hand.
-
-This cause model structure is appropriate for conditions that are present at 
-birth.
-
-An example of a condition appropriate for a neonatal cause model without 
-recovery from the condition state is preterm birth.
-
-.. image:: Neonatal_no_recover.png
-
-An example of a condition appropriate for a neonatal cause model with
-potential recovery from the condition state is cleft palate (which may be 
-treated later in life).
-
-.. image:: Neonatal_recover.png
-
 .. _`Other Cause Model Structures`:
 
 Other Cause Model Structures
@@ -268,6 +239,7 @@ require custom cause model structures are listed below:
 
 - Cause models with severity splits
 - Joint cause models (multiple closely related causes represented in a single cause model)
+- Neonatal/Congenital cause models
 - Other scenarios required by the specifics of a given cause
 
 Common data sources for cause models
