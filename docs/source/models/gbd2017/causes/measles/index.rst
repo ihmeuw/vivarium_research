@@ -86,23 +86,6 @@ Modeling Measles in GBD 2017
 GBD Hierarchy
 -------------
 
-**Hierarchy table:**
-
-+----------------------------------+------------+-----------+
-| **Cause**                        | **GBD ID** | **Level** |
-+----------------------------------+------------+-----------+
-| All causes                       | 294        | 0         |
-+----------------------------------+------------+-----------+
-| Communicable, maternal, neonatal | 295        | 1         |
-| and nutritional diseases         |            |           | 
-+----------------------------------+------------+-----------+
-| Other infectious diseases        | 961        | 0         |
-+----------------------------------+------------+-----------+
-| Measles                          | 341        | 3         |
-+----------------------------------+------------+-----------+
-
-- {Measles} = [Moderate Measles, Severe Measles]
-
 **Hierarchy Diagram:**
 
 .. image:: measles_gbd_hierarchy.svg
