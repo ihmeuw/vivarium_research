@@ -6,7 +6,7 @@ Risk Outcome Relationship Models
 
 .. todo::
 
-   Describe how to model interventions here.
+   Describe how to model risk outcome relationships here.
 
 .. toctree::
    :maxdepth: 2

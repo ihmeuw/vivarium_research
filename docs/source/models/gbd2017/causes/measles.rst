@@ -86,10 +86,9 @@ Modeling Measles in GBD 2017
 Cause Model Diagram
 -------------------
 
-.. todo::
-
-   Add Vivarium cause model diagram. It will be a simple SIR (Susceptible,
-   Infected, Recovered) model, using country-specific measles incidence rates.
+.. image:: measles_cause_model.svg
+	:width: 600
+	:alt: Simple SIR Measles cause model diagram
 
 Model Assumptions and Limitations
 ---------------------------------
