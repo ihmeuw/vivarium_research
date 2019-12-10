@@ -83,6 +83,14 @@ Modeling Measles in GBD 2017
 
    Make sure to check on measles sequelae as well. Our models so far have not paid much attention to the nonfatal side, but it looks like some of the complications can persist well after someone recovers from measles, so maybe that's important to think about.
 
+GBD Hierarchy
+-------------
+
+**Hierarchy Diagram:**
+
+.. image:: measles_gbd_hierarchy.svg
+   :alt: Measles GBD hierarchy diagram
+	
 Cause Model Diagram
 -------------------
 
