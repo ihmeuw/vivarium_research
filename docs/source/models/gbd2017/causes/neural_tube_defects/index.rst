@@ -140,6 +140,53 @@ Data Description
 
    Add tables describing data sources for the Vivarium model.
 
+.. list-table:: State Definitions
+   :widths: 1, 5, 10
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - C
+     - With **C**\ ondition
+     - Born with neural tube defects
+   * - F
+     - **F**\ ree from Condition
+     - Born without neural tube defects
+
+.. list-table:: States
+   :widths: 1, 5, 5, 10
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - C
+     - Prevalence
+     - prevalence_c642
+     -
+   * - C
+     - Birth prevalence
+     - birth_prevalence_c642
+     -
+   * - C
+     - Excess mortality rate
+     - excess_mortality_rate_c642
+     -
+   * - C
+     - Disability weight
+     - :math:`\sum_{s\in \text{sequelae}_{c642}} w_s p_s`
+     - Average disability weight over all sequelae
+   * - F
+     - Proportion of population free of condition
+     - 1 - prevalence_c642
+     -
+   * - F
+     - Proportion of births free of condition
+     - 1 - birth_prevalence_c642
+     -
+
 
 Restrictions
 ++++++++++++
