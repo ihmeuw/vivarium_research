@@ -208,7 +208,7 @@ This cause model structure is appropriate for conditions for which individuals
 can have multiple cases over their lifetimes.
 
 Examples of conditions potentially appropriate for an SIS cause model 
-structure include diarrheal diseases.
+structure include :ref:`diarrheal diseases <2017_cause_diarrhea>`.
 
 SIR
 +++
