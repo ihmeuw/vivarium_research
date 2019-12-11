@@ -226,7 +226,7 @@ can only have a single case, but do not stay in the with condition state
 forever.
 
 An example of a condition potentially appropriate for an SIR cause model 
-structure is measles.
+structure is :ref:`measles <2017_cause_measles>`.
 
 .. _`Other Cause Model Structures`:
 
