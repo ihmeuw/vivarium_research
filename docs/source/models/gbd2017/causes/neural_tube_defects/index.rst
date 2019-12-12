@@ -71,9 +71,12 @@ separately and then fit to a total model of all neural tube defects.
 Cause Hierarchy
 +++++++++++++++
 
-cause id: 642
+.. todo::
 
-level: 4
+   Make cause hierarchy diagram.
+
+     | cause id = 642
+     | level = 4
 
 Sequelae and health states associated with Neural Tube Defects
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -121,24 +124,11 @@ mortality rates in the early neonatal age group.
     or do we need to estimate it using prevalence among the early neonatal age
     group?
 
-Model Assumptions and Limitations
----------------------------------
-
-This model is designed to be used for estimating DALYs due to NTDs that are
-averted from an intervention that directly reduces the prevalence of neural tube
-defects, such as large-scale fortification of flour with folic acid, or targeted
-folic acid supplementation during pregnancy.
-
-.. todo::
-
-   Describe more assumptions and limitations of the model.
-
 Data Description
 ----------------
 
-.. todo::
-
-   Add tables describing data sources for the Vivarium model.
+State and Transition Data Tables
+++++++++++++++++++++++++++++++++
 
 .. list-table:: State Definitions
    :widths: 1, 5, 10
@@ -151,10 +141,10 @@ Data Description
      - With **C**\ ondition
      - Born with neural tube defects
    * - F
-     - **F**\ ree from Condition
+     - **F**\ ree of Condition
      - Born without neural tube defects
 
-.. list-table:: States
+.. list-table:: State Data
    :widths: 1, 5, 5, 10
    :header-rows: 1
 
@@ -172,30 +162,91 @@ Data Description
      -
    * - C
      - Excess mortality rate
-     - excess_mortality_rate_c642
+     - :math:`\frac{\text{deaths_c642}}{\text{population } \times \text{ prevalence_c642}}`
      -
    * - C
      - Disability weight
-     - :math:`\sum_{s\in \text{sequelae}_{c642}} w_s p_s`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c642}}} \scriptstyle{\text{disability_weight}_s \times \text{ prevalence}_s}`
      - Average disability weight over all sequelae
    * - F
-     - Proportion of population free of condition
-     - 1 - prevalence_c642
+     - Proportion of population
+     - 1 -- prevalence_c642
      -
    * - F
-     - Proportion of births free of condition
-     - 1 - birth_prevalence_c642
+     - Proportion of births
+     - 1 -- birth_prevalence_c642
+     -
+   * - F
+     - Excess mortality rate
+     - 0
+     -
+   * - F
+     - Disability weight
+     - 0
+     -
+   * - All
+     - Cause-specific mortality rate
+     - cause_specific_mortality_rate_c642
      -
 
+.. list-table:: Transition Data
+   :widths: 1, 1, 1, 5, 10
+   :header-rows: 1
+
+   * - Transition
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - N/A
+     - N/A
+     - N/A
+     - N/A
+     - N/A
+
+.. list-table:: Data Sources
+   :widths: 1, 3, 10
+   :header-rows: 1
+
+   * - Value
+     - Source
+     - Notes
+   * - prevalence_c642
+     -
+     -
+   * - birth_prevalence_c642
+     -
+     -
+   * - deaths_c642
+     -
+     -
+   * - population
+     -
+     -
+   * - cause_specific_mortality_rate_c642
+     -
+     -
 
 Restrictions
 ++++++++++++
 
-yll_age_group_id_start=2,
-yll_age_group_id_end=17,
+.. todo::
 
-yld_age_group_id_start=2,
-yld_age_group_id_end=235,
+   Describe data restrictions. For example:
+
+     yll_age_group_id_start=2,
+     yll_age_group_id_end=17,
+
+     yld_age_group_id_start=2,
+     yld_age_group_id_end=235,
+
+Model Assumptions and Limitations
+---------------------------------
+
+This model is designed to be used for estimating DALYs due to NTDs that are
+averted from an intervention that directly reduces the prevalence of neural tube
+defects, such as large-scale fortification of flour with folic acid, or targeted
+folic acid supplementation during pregnancy.
 
 Validation Criteria
 -------------------
