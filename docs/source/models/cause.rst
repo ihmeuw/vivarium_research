@@ -341,7 +341,7 @@ The numerator is the number of deaths attributed to a specific cause. The denomi
 size of the population. In GBD, cause-specific estimates by country, year, age, sex.
 
   For example, 112 measles deaths in country A during calendar year 2016. 1010,623 estimated 2016 mid-year 
-  population. 11.08 measles deaths per 100,000 population (person-years at risk) during calendar year 
+  population. 11.08 measles deaths per 100,000 population person-years at risk during calendar year 
   2016 in country A. 
 
 Excess Mortality
@@ -362,12 +362,22 @@ Morbidity Impacts
 Disability Weights
 ^^^^^^^^^^^^^^^^^^
 
-A disability weight is a weight factor that reflects the severity of the disease on a scale from 0 (perfect health) to 1 
-(equivalent to death). Years Lost due to Disability (YLD) are calculated by multiplying the incident cases by duration and 
-disability weight for the condition. 
-
+Disability weights are years of disability accrued per years lived with condition. 
+Years Lost due to Disability (YLD) are calculated by multiplying the prevalence cases by duration and 
+disability weight for the condition. In GBD, we need healthstate, sequela for calculating YLDs. Each sequela 
+is associated with a healthstate which has a disability weight. A single cause might have many sequelae that map 
+to the same health state (and therefore the same disability weight). When computing the cause level disability weight,
+compute it as the prevalence weighted sum of the sequelae disability weights. 
+   
+ :math:`Years\_lived\_with\_disability = Disability\_weight * time\_spent\_in\_condition` 
+ 
  :math:`Disability\_weight_{c}`: proportion of health lost due to condition c
- :math:`(1 - Disability\_weight_{c})`: proportion of health remaining when living with condition c
+ 
+ :math:`(1 - Disability\_weight_{c})`: proportion of health remaining when living with condition c 
+ 
+ :math:`\prod_{c\in causes}(1 - Disability\_weight_{c})`: proportion of health remaining when living with all causes
+ 
+ :math:`1 - \prod_{c\in causes}(1 - Disability\_weight_{c})`: proportion of health lost due to causes
 
 Restrictions
 ++++++++++++
