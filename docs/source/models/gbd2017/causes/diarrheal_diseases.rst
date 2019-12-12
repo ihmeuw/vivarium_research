@@ -156,11 +156,6 @@ Data Descriptions
 The severity splits come from a meta-analysis on severity independent from the DisMod estimates.
 These splits do not vary by location/year/age/sex, and are applied to the prevalence and incidence estimates
 in order to calculate YLDs by sequela (severity).  
-	  
-
-.. todo::
-
-	Look into what severity splits were actually used.
 
 
 Validation Criteria
