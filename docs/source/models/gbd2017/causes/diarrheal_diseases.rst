@@ -129,27 +129,33 @@ Data Descriptions
 
 	  
 .. list-table:: Disability Weights
-	:widths: 5 10 10
+	:widths: 5 10 10 10 10
 	:header-rows: 1
 	
 	* - Severity level
 	  - DW (95% CI)
+	  - DW source
 	  - Proportion of estimated diarrhea
+	  - Proportion source
 	* - Mild
 	  - 0.0074 (0.049-0.104)
-	  - .648
+	  - YLDs appendix
+	  - .642
+	  - get_severity_splits, me_id=1181
 	* - Moderate
 	  - 0.188 (0.125-0.264)
+	  - YLDs appendix
 	  - .289
+	  - get_severity_splits, me_id=1181
 	* - Severe
 	  - 0.247 (0.164-0.348)
+	  - YLDs Appendix
 	  - .069
+ 	  - get_severity_splits, me_id=1181
 	  
-Note, the above proportions sum to 1.006. These numbers come from the appendix
-model writeup [GBD-2017-YLD-Capstone-Appendix-1]_. The severity splits come from a
-meta-analysis on severity independent from the DisMod estimates. They splits are then
-applied to the prevalence and incidence estimates, in order to calculate YLDs by sequela and
-etiology.  
+The severity splits come from a meta-analysis on severity independent from the DisMod estimates.
+These splits do not vary by location/year/age/sex, and are applied to the prevalence and incidence estimates
+in order to calculate YLDs by sequela (severity).  
 	  
 
 .. todo::
