@@ -31,10 +31,12 @@ for GBD are EHB from `Rhesus (Rh) disease`_, preterm birth,
 Data Descriptions
 -----------------
 
+Preliminary!
+
 .. list-table:: Definitions
-   :widths: 5 10 10 
-   :header-rows: 1
-   
+	:widths: 5 10 10
+	:header-rows: 1
+	
 	* - State
 	  - State name
 	  - Definition
@@ -44,4 +46,61 @@ Data Descriptions
 	* - F
 	  - Free of condition
 	  - Simulant was not born with haemolytic disease or other neonatal jaundice
-	 
+	  
+.. list-table:: States
+	:widths: 5 10 10 20
+	:header-rows: 1
+	
+	* - State
+	  - Measure
+	  - Value
+	  - Notes
+	* - C
+	  - prevalence
+	  -
+	  -
+	* - C
+	  - birth prevalence
+	  - 
+	  -
+	* - C
+	  - emr
+	  -
+	  -
+	* - C
+	  - disability weight
+	  - 
+	  -
+	* - F
+	  - prevalence
+	  -
+	  -
+	* - F
+	  - birth prevalence
+	  -
+	  -
+	* - F
+	  - emr
+	  -
+	  -
+	* - F
+	  - disability weight
+	  - 
+	  -
+	* - All
+	  - CSMR
+	  -
+	  -
+	  
+	  
+.. list-table:: Data Definitions
+	:widths: 10 10 20
+	:header-rows: 1
+	
+	* - Variable
+	  - Source
+	  - Notes
+	* - prev_c383
+	  -
+	  -
+	
