@@ -148,6 +148,100 @@ What does a model document look like?
 [[to be updated based on experience from LTBI cause model document, and
 generalization thereof]]
 
+Basic Cause Model Structures
+----------------------------
+
+.. todo:: 
+
+	Link to examples of cause model documents
+
+Common basic cause model structures are described in the following table and 
+dicussed in further detail below. Notably, cause models are almost always more 
+complicated than the basic structures discussed in this section. The following 
+basic structures should be considered as basic guiding concepts, and not as 
+templates that are appropriate for all (or even most) cause models. Examples 
+of more complicated cause model structures are discussed in the `Other Cause 
+Model Structures`_ section afterward.
+
+.. list-table:: Basic Cause Model Structures
+	:widths: 20 20 20
+	:header-rows: 1
+
+	* - Model
+	  - States
+	  - Description
+	* - SI_
+	  - Susceptible-Infected
+	  - Simulants never recover from the infected (with condition) state
+	* - SIS_
+	  - Susceiptible-Infected-Susceptible
+	  - Simulants can recover from the infected (with condition) state and can become infected again after recovery
+	* - SIR_
+	  - Susceptible-Infected-Recovered
+	  - Simulants can recover from the infected (with condition) state and cannot become infected after recovery
+
+SI
+++
+
+.. image:: SI.png
+
+In this cause model structure, simulants in the susceptible state can 
+transition to the infected state, where they will remain for the remainder of 
+the simulation. 
+
+This cause model structure is appropriate for chronic conditions from which 
+individuals can never recover.
+
+Examples of conditions potentially appropriate for an SI cause model structure 
+include Alzheimer’s disease and other dementias.
+
+SIS
++++
+
+.. image:: SIS.png
+
+In this cause model structure, simulants in the susceptible state can 
+transition to the infected state and simulants in the infected state can 
+transition to the susceptible state. Notably, this cause model allows for
+simulants to enter the infected state more than once in a simulation. 
+
+This cause model structure is appropriate for conditions for which individuals 
+can have multiple cases over their lifetimes.
+
+Examples of conditions potentially appropriate for an SIS cause model 
+structure include :ref:`diarrheal diseases <2017_cause_diarrhea>`.
+
+SIR
++++
+
+.. image:: SIR.png
+
+In this cause model structure, simulants in the susceptible state can 
+transition to the infected state and simulants in the infected state can 
+transition to a recovered state where they will remain for the remainder
+of the simulation. Notably, the cause model allows individuals to become 
+infected only once in a simulation.
+
+This cause model structure is appropriate for conditions for which individuals 
+can only have a single case, but do not stay in the with condition state 
+forever.
+
+An example of a condition potentially appropriate for an SIR cause model 
+structure is :ref:`measles <2017_cause_measles>`.
+
+.. _`Other Cause Model Structures`:
+
+Other Cause Model Structures
+++++++++++++++++++++++++++++
+
+It is common that a particular cause may not fit well into one of the common 
+basic cause model structures discussed above. Examples of situations that may 
+require custom cause model structures are listed below:
+
+- Cause models with severity splits
+- Joint cause models (multiple closely related causes represented in a single cause model)
+- Neonatal/Congenital cause models
+- Other scenarios required by the specifics of a given cause
 
 Data Sources for Cause Models
 -----------------------------
