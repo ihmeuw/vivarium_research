@@ -250,6 +250,10 @@ averted from an intervention that directly reduces the prevalence of neural tube
 defects, such as large-scale fortification of flour with folic acid, or targeted
 folic acid supplementation during pregnancy.
 
+.. todo::
+
+   Describe more assumptions and limitations of the model.
+
 Validation Criteria
 -------------------
 
