@@ -66,7 +66,7 @@ separately and then fit to a total model of all neural tube defects.
 
    Add relevant detail about NTD modeling process from
    [GBD-2017-YLD-Capstone-Appendix-1-Neural-Tube-Defects]_ and from the `CoD Capstone
-   <http://dx.doi.org/10.1016/S0140-6736(18)32203-7>`_ Appendix.
+   <DOI for CoD Capstone_>`_ Appendix [GBD-2017-CoD-Appendix-1-Neural-Tube-Defects]_.
 
 Cause Hierarchy
 +++++++++++++++
@@ -273,3 +273,17 @@ References
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
 .. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
 .. _DOI for YLD Capstone: https://doi.org/10.1016/S0140-6736(18)32279-7
+
+.. [GBD-2017-CoD-Appendix-1-Neural-Tube-Defects]
+
+   Supplement to: `GBD 2017 Causes of Death Collaborators. Global, regional, and
+   national age-sex-specific mortality for 282 causes of death in 195 countries
+   and territories, 1980–2017: a systematic analysis for the Global Burden of
+   Disease Study 2017. Lancet 2018; 392: 1736–88 <DOI for CoD Capstone_>`_
+   (pp. 318-323)
+
+   (Direct links to the CoD Appendix hosted on `Lancet.com <CoD appendix on Lancet.com_>`_ and `ScienceDirect <CoD appendix on ScienceDirect_>`_)
+
+.. _CoD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32203-7/attachment/5045652a-fddf-48e2-9a84-0da99ff7ebd4/mmc1.pdf
+.. _CoD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
+.. _DOI for CoD Capstone: http://dx.doi.org/10.1016/S0140-6736(18)32203-7
