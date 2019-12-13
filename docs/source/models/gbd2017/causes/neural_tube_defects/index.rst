@@ -68,6 +68,32 @@ separately and then fit to a total model of all neural tube defects.
    [GBD-2017-YLD-Capstone-Appendix-1-Neural-Tube-Defects]_ and from the `CoD Capstone
    <http://dx.doi.org/10.1016/S0140-6736(18)32203-7>`_ Appendix.
 
+Cause Hierarchy
++++++++++++++++
+
+cause id: 642
+
+level: 4
+
+Sequelae and health states associated with Neural Tube Defects
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The Neural Tube Defects cause has 85 sequelae, which can be summarized as follows:
+
+- All infants with anencephaly are assigned the health state of severe motor and
+  cognitive impairment.
+- Cases of spina bifida and encephalocele are split into
+  every combination of mild, moderate and severe motor impairment, all severities
+  of intellectual disability, and urinary incontinence.
+- The proportions of the various sequelae were
+  calculated using a pooled analysis of available literature on the long-term
+  outcomes in cohorts of individuals born with each sub-type of neural tube
+  defects.
+- The distribution of health states associated with encephalocele was
+  derived separately from the distribution of health states associated with spina
+  bifida, although these two categories of neural tube defects are associated with
+  the same list of long-term outcome sequela.
+
 Cause Model Diagram
 -------------------
 
@@ -113,6 +139,16 @@ Data Description
 .. todo::
 
    Add tables describing data sources for the Vivarium model.
+
+
+Restrictions
+++++++++++++
+
+yll_age_group_id_start=2,
+yll_age_group_id_end=17,
+
+yld_age_group_id_start=2,
+yld_age_group_id_end=235,
 
 Validation Criteria
 -------------------
