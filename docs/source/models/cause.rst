@@ -362,7 +362,16 @@ Morbidity Impacts
 Disability Weights
 ^^^^^^^^^^^^^^^^^^
 
-Disability weights are years of disability accrued per years lived with condition. 
+Disability weights are measures that reflect the severity of the disability associated with a specific cause
+and range from 0 (perfect health) to 1 (equivalent to death). In other words, disability weights represent
+the proportion of full health lost when an individual is living with a given condition. Disability weights are years 
+of disability accrued per years lived with condition. 
+ 
+  For example, mild anemia has a disability weight of 0.004, whereas severe anemia has a disability weight of
+  0.149. In contrast, severe multiple sclerosis has a much higher disability weight of 0.719. As seen in these
+  examples, the more severe the cause, the disability weight, and the greater the proportion of full health
+  lost due to the condition.
+
 Years Lost due to Disability (YLD) are calculated by multiplying the prevalence cases by duration and 
 disability weight for the condition. In GBD, we need healthstate, sequela for calculating YLDs. Each sequela 
 is associated with a healthstate which has a disability weight. A single cause might have many sequelae that map 
