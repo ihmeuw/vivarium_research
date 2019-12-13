@@ -10,6 +10,8 @@ Disease Description
 Case definition in GBD 2017
 +++++++++++++++++++++++++++
 
+
+
 `Haemolytic disease of the newborn`_ and other `neonatal jaundice`_ refers to
 several aetiologies by which an infant develops extreme hyperbilirubinemia_
 (EHB) and can then go on to develop kernicterus_. The aetiologies that we model
@@ -25,3 +27,21 @@ for GBD are EHB from `Rhesus (Rh) disease`_, preterm birth,
 
 .. todo::
    Describe cause model
+
+Data Descriptions
+-----------------
+
+.. list-table:: Definitions
+   :widths: 5 10 10 
+   :header-rows: 1
+   
+	* - State
+	  - State name
+	  - Definition
+	* - C
+	  - With condition
+	  - Simulant was born with haemolytic disease or other neonatal jaundice
+	* - F
+	  - Free of condition
+	  - Simulant was not born with haemolytic disease or other neonatal jaundice
+	 
