@@ -41,10 +41,10 @@ Preliminary!
 	  - State name
 	  - Definition
 	* - C
-	  - With condition
+	  - With **C**\ ondition
 	  - Simulant was born with haemolytic disease or other neonatal jaundice
 	* - F
-	  - Free of condition
+	  - **F**\ ree of condition
 	  - Simulant was not born with haemolytic disease or other neonatal jaundice
 	  
 .. list-table:: States
@@ -57,39 +57,39 @@ Preliminary!
 	  - Notes
 	* - C
 	  - prevalence
-	  -
+	  - prev_c384
 	  -
 	* - C
 	  - birth prevalence
-	  - 
-	  -
+	  - birth_prev_unknown
+	  - is this the table we want to house this in?
 	* - C
 	  - emr
-	  -
+	  - :math:`\frac{\text{deaths_c384}}{\text{population} \,\times\, \text{prevalence_c384}}`
 	  -
 	* - C
 	  - disability weight
-	  - 
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c384}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
 	  -
 	* - F
 	  - prevalence
-	  -
+	  - 1-prev_c384
 	  -
 	* - F
 	  - birth prevalence
-	  -
-	  -
+	  - 1-birth_prev_unknown
+	  - is this the table we want this in?
 	* - F
 	  - emr
-	  -
+	  - 0
 	  -
 	* - F
 	  - disability weight
-	  - 
+	  - 0
 	  -
 	* - All
 	  - CSMR
-	  -
+	  - :math:`\frac{\text{deaths_c384}}{\text{population}}`
 	  -
 	  
 .. list-table:: Sequelae
@@ -97,7 +97,7 @@ Preliminary!
 	:header-rows: 1
 	
 	* - Sequela_name
-	  - ID
+	  - sequela_id
 	  - Notes
 	* - Moderate motor impairment due to hemolytic disease and other neonatal jaundice
 	  - 738
@@ -105,22 +105,63 @@ Preliminary!
 	* - Moderate motor impairment with blindness due to hemolytic disease and other neonatal jaundice
 	  - 749
 	  -
-	  +
-								Moderate motor impairment with blindness due to hemolytic disease and other neonatal jaundice        748
- 4:                Moderate motor impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        749
- 5:                              Moderate motor impairment with epilepsy due to hemolytic disease and other neonatal jaundice        760
- 6:              Moderate motor plus cognitive impairment with blindness due to hemolytic disease and other neonatal jaundice        701
- 7: Moderate motor plus cognitive impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        711
- 8:               Moderate motor plus cognitive impairment with epilepsy due to hemolytic disease and other neonatal jaundice        715
- 9:                Severe motor plus cognitive impairment with blindness due to hemolytic disease and other neonatal jaundice        722
-10:   Severe motor plus cognitive impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        727
-11:                 Severe motor plus cognitive impairment with epilepsy due to hemolytic disease and other neonatal jaundice        733
-12:                                       Severe motor impairment severe due to hemolytic disease and other neonatal jaundice        762
-13:                               Severe motor impairment with blindness due to hemolytic disease and other neonatal jaundice        769
-14:                  Severe motor impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        776
-15:                                Severe motor impairment with epilepsy due to hemolytic disease and other neonatal jaundice        784
-16:                      Extreme hyperbilirubinemia due to hemolytic disease and other neonatal jaundice, without kernicterus       7223
+	* - Moderate motor impairment with blindness due to hemolytic disease and other neonatal jaundice
+	  - 748
+	  - 
+	* - Moderate motor impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 749
+	  -
+	* - Moderate motor impairment with epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 760
+	  -
+	* - Moderate motor plus cognitive impairment with blindness due to hemolytic disease and other neonatal jaundice
+	  - 701
+	  -
+	* - Moderate motor plus cognitive impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 711
+	  -
+	* - Moderate motor plus cognitive impairment with epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 715
+	  -
+	* - Severe motor plus cognitive impairment with blindness due to hemolytic disease and other neonatal jaundice
+	  - 722
+	  -
+	* - Severe motor plus cognitive impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 727
+	  -
+	* - Severe motor plus cognitive impairment with epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 733
+	  -
+	* - Severe motor impairment severe due to hemolytic disease and other neonatal jaundice
+	  - 762
+	  -
+	* - Severe motor impairment with blindness due to hemolytic disease and other neonatal jaundice
+	  - 769
+	  -
+	* - Severe motor impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 776
+	  -
+	* - Severe motor impairment with epilepsy due to hemolytic disease and other neonatal jaundice
+	  - 784
+	  -
+	* - Extreme hyperbilirubinemia due to hemolytic disease and other neonatal jaundice, without kernicterus
+	  - 7223
+	  -
 	  
+.. list-table:: Transitions
+	:widths: 10 10 10 10 10
+	:header-rows: 1
+	
+	* - Transition
+	  - Source State
+	  - Sink State
+	  - Value
+	  - Notes
+	* - N/A
+	  - N/A
+	  - N/A
+	  - N/A
+	  - N/A
 	  
 .. list-table:: Data Definitions
 	:widths: 10 10 20
@@ -129,7 +170,16 @@ Preliminary!
 	* - Variable
 	  - Source
 	  - Notes
-	* - prev_c383
-	  -
-	  -
+	* - prev_c384
+	  - como
+	  - 
+	* - birth_prev_unknown
+	  - como?
+	  - have asked helena about this
+	* - deaths_c384
+	  - codcorrect
+	  - 
+	* - disability weights
+	  - YLDs appendix
+	  - 
 	
