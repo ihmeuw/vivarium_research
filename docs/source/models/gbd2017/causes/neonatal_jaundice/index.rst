@@ -92,6 +92,35 @@ Preliminary!
 	  -
 	  -
 	  
+.. list-table:: Sequelae
+	:widths: 10 10 20
+	:header-rows: 1
+	
+	* - Sequela_name
+	  - ID
+	  - Notes
+	* - Moderate motor impairment due to hemolytic disease and other neonatal jaundice
+	  - 738
+	  -
+	* - Moderate motor impairment with blindness due to hemolytic disease and other neonatal jaundice
+	  - 749
+	  -
+	  +
+								Moderate motor impairment with blindness due to hemolytic disease and other neonatal jaundice        748
+ 4:                Moderate motor impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        749
+ 5:                              Moderate motor impairment with epilepsy due to hemolytic disease and other neonatal jaundice        760
+ 6:              Moderate motor plus cognitive impairment with blindness due to hemolytic disease and other neonatal jaundice        701
+ 7: Moderate motor plus cognitive impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        711
+ 8:               Moderate motor plus cognitive impairment with epilepsy due to hemolytic disease and other neonatal jaundice        715
+ 9:                Severe motor plus cognitive impairment with blindness due to hemolytic disease and other neonatal jaundice        722
+10:   Severe motor plus cognitive impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        727
+11:                 Severe motor plus cognitive impairment with epilepsy due to hemolytic disease and other neonatal jaundice        733
+12:                                       Severe motor impairment severe due to hemolytic disease and other neonatal jaundice        762
+13:                               Severe motor impairment with blindness due to hemolytic disease and other neonatal jaundice        769
+14:                  Severe motor impairment with blindness and epilepsy due to hemolytic disease and other neonatal jaundice        776
+15:                                Severe motor impairment with epilepsy due to hemolytic disease and other neonatal jaundice        784
+16:                      Extreme hyperbilirubinemia due to hemolytic disease and other neonatal jaundice, without kernicterus       7223
+	  
 	  
 .. list-table:: Data Definitions
 	:widths: 10 10 20
