@@ -78,7 +78,7 @@ Data Descriptions
 	  - 1-birth_prevalence_c384
 	  - 
 	* - F
-	  - emr
+	  - excess mortality rate
 	  - 0
 	  -
 	* - F
