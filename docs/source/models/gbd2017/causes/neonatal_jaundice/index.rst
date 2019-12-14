@@ -126,6 +126,10 @@ Data Descriptions
 	  - codcorrect
 	  - Count of deaths due to hemolytic diseases and other neonatal jaundice
 	  - 
+	* - population
+	  - Demography
+	  - Mid-year population for given sex/age/year/location
+	  -
 	* - prevalence_s{id}
 	  - como
 	  - Prevalence of sequela with id {id}
