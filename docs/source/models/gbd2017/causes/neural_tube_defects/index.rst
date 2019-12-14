@@ -89,17 +89,18 @@ The Neural Tube Defects cause has 85 sequelae, which can be summarized as follow
 
 - All infants with anencephaly are assigned the health state of severe motor and
   cognitive impairment.
-- Cases of spina bifida and encephalocele are split into
-  every combination of mild, moderate and severe motor impairment, all severities
-  of intellectual disability, and urinary incontinence.
+- Cases of spina bifida and encephalocele are split into every combination of
+  mild, moderate and severe motor impairment, all 5 severities of intellectual
+  disability (borderline, mild, moderate, severe, profound), and presence or
+  absence of urinary incontinence.
 - The proportions of the various sequelae were
   calculated using a pooled analysis of available literature on the long-term
   outcomes in cohorts of individuals born with each sub-type of neural tube
   defects.
-- The distribution of health states associated with encephalocele was
-  derived separately from the distribution of health states associated with spina
-  bifida, although these two categories of neural tube defects are associated with
-  the same list of long-term outcome sequela.
+- The distribution of health states associated with encephalocele was derived
+  separately from the distribution of health states associated with spina
+  bifida, although these two categories of neural tube defects are associated
+  with the same list of long-term outcome sequela.
 
 Cause Model Diagram
 -------------------
@@ -165,11 +166,11 @@ State and Transition Data Tables
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c642}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
      - = average disability weight over all sequelae
    * - F
-     - proportion of population
+     - prevalence
      - 1 -- prevalence_c642
      -
    * - F
-     - proportion of births
+     - birth prevalence
      - 1 -- birth_prevalence_c642
      -
    * - F
@@ -201,40 +202,52 @@ State and Transition Data Tables
      - N/A
 
 .. list-table:: Data Sources and Definitions
-   :widths: 1, 3, 10
+   :widths: 1, 3, 10, 10
    :header-rows: 1
 
    * - Value
      - Source
+     - Description
      - Notes
    * - prevalence_c642
      - COMO
      - Prevalence of neural tube defects
+     -
    * - birth_prevalence_c642
-     - ???
+     - COMO
      - Birth prevalence of neural tube defects
+     -
    * - deaths_c642
      - CoDcorrect
      - Deaths from neural tube defects
+     -
    * - population
      - Demography
      - Mid-year population for given country
+     -
    * - sequelae_c642
      - gbd_mapping
      - List of 85 sequelae for neural tube defects
+     -
    * - prevalence_{`sid`}
-     - ???
+     - COMO
      - Prevalence of sequela with id `sid`
+     -
    * - disability_weight_{`sid`}
      - YLD Appendix
      - Disability weight of sequela with id `sid`
+     -
+
+Model Assumptions and Limitations
+---------------------------------
 
 Restrictions
 ++++++++++++
 
 .. todo::
 
-   Describe data restrictions. For example:
+   Describe data restrictions in table format. For example, age restrictions
+   are:
 
      yll_age_group_id_start=2,
      yll_age_group_id_end=17,
@@ -242,8 +255,10 @@ Restrictions
      yld_age_group_id_start=2,
      yld_age_group_id_end=235,
 
-Model Assumptions and Limitations
----------------------------------
+   Need to look up actual ages that correspond to these id's.
+
+Scope
++++++
 
 This model is designed to be used for estimating DALYs due to NTDs that are
 averted from an intervention that directly reduces the prevalence of neural tube
