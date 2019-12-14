@@ -31,8 +31,6 @@ for GBD are EHB from `Rhesus (Rh) disease`_, preterm birth,
 Data Descriptions
 -----------------
 
-Preliminary!
-
 .. list-table:: State Definitions
 	:widths: 5 10 10
 	:header-rows: 1
