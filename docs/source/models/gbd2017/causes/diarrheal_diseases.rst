@@ -61,30 +61,82 @@ I: _I_nfected and currently experiencing a diarrheal disease bout
 
 Data Descriptions
 -----------------
-	 
-	 
-.. list-table:: Initialization
-	:widths: 5 10 10 10 10 10
+
+.. list-table:: State Definitions
+	:widths: 5 10 10
 	:header-rows: 1
 	
 	* - State
 	  - State name
 	  - Definition
-	  - Calc
-	  - Metric
-	  - Source
-	* - I
-	  - Infected
-	  - Currently has diarrheal disease
-	  - prev_c302
-	  - proportion
-	  - como
 	* - S
-	  - Susceptible
-	  - Does not currently have diarrheal disease
-	  - 1-prev_c302
-	  - proportion
+	  - **S**\ usceptible
+	  - Simulant currently has diarrheal disease
+	* - I
+	  - **I**\ nfected
+	  - Simulant does not currently have diarrheal disease
+
+.. list-table:: State Data
+	:widths: 5 10 10 20
+	:header-rows: 1
+	
+	* - State
+	  - Measure
+	  - Value
+	  - Notes
+	* - I
+	  - prevalence
+	  - prevalence_c302
 	  -
+	* - I
+	  - birth prevalence
+	  - birth_prevalence_c302
+	  - 
+	* - I
+	  - excess mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_c302}}`
+	  -
+	* - I
+	  - disability weight
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  -
+	* - S
+	  - prevalence
+	  - 1-prevalence_c302
+	  -
+	* - S
+	  - birth prevalence
+	  - 1-birth_prevalence_c302
+	  - 
+	* - S
+	  - emr
+	  - 0
+	  -
+	* - S
+	  - disability weight
+	  - 0
+	  -
+	* - All
+	  - cause-specific mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
+	  -
+	 
+
+.. list-table:: Transition Data
+	:widths: 10 10 10 10 10
+	:header-rows: 1
+	
+	* - Transition
+	  - Source State
+	  - Sink State
+	  - Value
+	  - Notes
+	* - i
+	  - 
+	  - inc_c302/(1-prev_c302)
+	  - N/A
+	  - N/A
+	  - N/A
 
 .. list-table:: Transitions
 	:widths: 5 10 10 10 10 10 10
