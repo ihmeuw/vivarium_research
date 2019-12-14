@@ -7,13 +7,13 @@ Lower Respiratory Infections
 Disease Description
 -------------------
 
-Lower respiratory infections(*LRI*), principally clinician-diagnosed pneumonia
+Lower respiratory infections (*LRI*), principally clinician-diagnosed pneumonia
 and bronchiolitis, is a major global killer of both children and adults. Symptoms
 include shortness of breath, weakness, fever, coughing and fatigue. It is important to check for a fever. Symptoms can last about 7 days and the infection is contagious
 to others shortly before and while experiencing symptoms. It is mainly
-caused by four microorganisms - Streptococcus pneumoniae(*pneumococcal
-pneumonia*), Haemophilus influenzae type B(*Hib*),influenza, and respiratory
-syncytial virus(*RCV*). LRI can be caused by multiple pathogens and the pathogens may co-infect.
+caused by four microorganisms - Streptococcus pneumoniae (*pneumococcal
+pneumonia*), Haemophilus influenzae type B (*Hib*),influenza, and respiratory
+syncytial virus (*RCV*). LRI can be caused by multiple pathogens and the pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
 mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
 
@@ -28,9 +28,9 @@ GBD hierarchy
 -------------
 .. image:: lri_hierarchy.svg
 
-c_{} - cause_{gbd_id}
+c_{} - cause_{gbd_id}, s_{} - sequelae_{gbd_id}
 
-s_{} - sequelae_{gbd_id}
+GBS stands for Guillain-Barré syndrome.
 
 Cause Model Diagram
 -------------------
