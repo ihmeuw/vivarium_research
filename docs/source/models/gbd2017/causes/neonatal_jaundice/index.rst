@@ -33,7 +33,7 @@ Data Descriptions
 
 Preliminary!
 
-.. list-table:: Definitions
+.. list-table:: State Definitions
 	:widths: 5 10 10
 	:header-rows: 1
 	
@@ -47,7 +47,7 @@ Preliminary!
 	  - **F**\ ree of condition
 	  - Simulant was not born with haemolytic disease or other neonatal jaundice
 	  
-.. list-table:: States
+.. list-table:: State Data
 	:widths: 5 10 10 20
 	:header-rows: 1
 	
@@ -57,14 +57,14 @@ Preliminary!
 	  - Notes
 	* - C
 	  - prevalence
-	  - prev_c384
+	  - prevalence_c384
 	  -
 	* - C
 	  - birth prevalence
-	  - birth_prev_unknown
-	  - is this the table we want to house this in?
+	  - birth_prevalence_c384
+	  - 
 	* - C
-	  - emr
+	  - excess mortality rate
 	  - :math:`\frac{\text{deaths_c384}}{\text{population} \,\times\, \text{prevalence_c384}}`
 	  -
 	* - C
@@ -73,12 +73,12 @@ Preliminary!
 	  -
 	* - F
 	  - prevalence
-	  - 1-prev_c384
+	  - 1-prevalence_c384
 	  -
 	* - F
 	  - birth prevalence
-	  - 1-birth_prev_unknown
-	  - is this the table we want this in?
+	  - 1-birth_prevalence_c384
+	  - 
 	* - F
 	  - emr
 	  - 0
@@ -88,12 +88,12 @@ Preliminary!
 	  - 0
 	  -
 	* - All
-	  - CSMR
+	  - cause-specific mortality rate
 	  - :math:`\frac{\text{deaths_c384}}{\text{population}}`
 	  -
 	 
 	  
-.. list-table:: Transitions
+.. list-table:: Transition Data
 	:widths: 10 10 10 10 10
 	:header-rows: 1
 	
@@ -108,23 +108,32 @@ Preliminary!
 	  - N/A
 	  - N/A
 	  
-.. list-table:: Data Definitions
-	:widths: 10 10 20
+.. list-table:: Data Sources and Definitions
+	:widths: 10 10 20 20
 	:header-rows: 1
 	
 	* - Variable
 	  - Source
+	  - Description
 	  - Notes
-	* - prev_c384
+	* - prevalence_c384
 	  - como
+	  - Prevalence of hemolytic disease and other neonatal jaundice
 	  - 
-	* - birth_prev_unknown
-	  - como?
-	  - have asked helena about this
+	* - birth_prevalence_c384
+	  - como
+	  - Proportion of babies born with hemolytic disease and other neonatal jaundice
+	  - age_group_id = 164 and measure = 6 (incidence)
 	* - deaths_c384
 	  - codcorrect
+	  - Count of deaths due to hemolytic diseases and other neonatal jaundice
 	  - 
-	* - disability weights
+	* - prevalence_s{id}
+	  - como
+	  - Prevalence of sequela with id {id}
+	  -
+	* - disability_weight_s{id}
 	  - YLDs appendix
-	  - 
+	  - disability weight of sequela with id {id}
+	  -
 	
