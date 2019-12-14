@@ -88,11 +88,17 @@ Sequelae and health states associated with Neural Tube Defects
 The Neural Tube Defects cause has 85 sequelae, which can be summarized as follows:
 
 - All infants with anencephaly are assigned the health state of severe motor and
-  cognitive impairment.
-- Cases of spina bifida and encephalocele are split into every combination of
-  mild, moderate and severe motor impairment, all 5 severities of intellectual
-  disability (borderline, mild, moderate, severe, profound), and presence or
-  absence of urinary incontinence.
+  cognitive impairment, so there is 1 sequela for anencephaly.
+- Cases of spina bifida are split into every combination of mild, moderate and
+  severe motor impairment, all 6 severities of intellectual disability (none,
+  borderline, mild, moderate, severe, profound), and presence or absence of
+  urinary incontinence. Thus, there are :math:`3\times 6\times 2 =36` sequelae
+  for spina bifida.
+- Cases of encephalocele are split into every combination of motor impairments
+  (none, mild, moderate, severe), all 6 severities of intellectual disability
+  (none, borderline, mild, moderate, severe, profound), and presence or absence
+  of urinary incontinence. Thus, there are :math:`4\times 6\times 2 =48` sequelae
+  for encephalocele, and the total number of sequelae for all 3 subcategories of neural tube defects is :math:`1+36+48=85`.
 - The proportions of the various sequelae were
   calculated using a pooled analysis of available literature on the long-term
   outcomes in cohorts of individuals born with each sub-type of neural tube
@@ -210,30 +216,30 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c642
-     - COMO
+     - como
      - Prevalence of neural tube defects
      -
    * - birth_prevalence_c642
-     - COMO
+     - como
      - Birth prevalence of neural tube defects
      -
    * - deaths_c642
-     - CoDcorrect
+     - codcorrect
      - Deaths from neural tube defects
      -
    * - population
-     - Demography
-     - Mid-year population for given country
+     - demography
+     - Mid-year population for given age/sex/year/location
      -
    * - sequelae_c642
      - gbd_mapping
      - List of 85 sequelae for neural tube defects
      -
-   * - prevalence_{`sid`}
-     - COMO
+   * - prevalence_s{`sid`}
+     - como
      - Prevalence of sequela with id `sid`
      -
-   * - disability_weight_{`sid`}
+   * - disability_weight_s{`sid`}
      - YLD Appendix
      - Disability weight of sequela with id `sid`
      -
