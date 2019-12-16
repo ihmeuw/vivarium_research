@@ -1,4 +1,7 @@
 .. _2017_cause_lower_respiratory_infections:
+.. |br| raw:: html
+
+   <br />
 
 ============================
 Lower Respiratory Infections
