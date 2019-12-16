@@ -133,12 +133,12 @@ Data Descriptions
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_c302}}{1-\text{prevalence_c302}}`
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
 	  - We transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - remission_m1181
+	  - remission_rate_m1181
 	  - Already a rate within with-condition population
 
 	  
@@ -158,11 +158,11 @@ Data Descriptions
 	  - codcorrect
 	  - Deaths from diarrheal diseases
 	  -
-	* - incidence_c302
+	* - incidence_rate_c302
 	  - como
 	  - Incidence of diarrheal disease within the entire population
 	  - 
-	* - remission_m1181
+	* - remission_rate_m1181
 	  - dismod
 	  - Remission of diarrheal disease within the infected population
 	  -
