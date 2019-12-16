@@ -90,7 +90,7 @@ Data Descriptions
 	  -
 	* - I
 	  - birth prevalence
-	  - birth_prevalence_c302
+	  - 0
 	  - 
 	* - I
 	  - excess mortality rate
@@ -106,7 +106,7 @@ Data Descriptions
 	  -
 	* - S
 	  - birth prevalence
-	  - 1-birth_prevalence_c302
+	  - 1
 	  - 
 	* - S
 	  - emr
@@ -142,38 +142,39 @@ Data Descriptions
 	  - Already a rate within with-condition population
 
 	  
-.. list-table: Data Sources and Definitions
-
-	  
-	  
-.. list-table:: Disability Weights
-	:widths: 5 10 10 10 10
+.. list-table:: Data Sources and Definitions
+	:widths: 1 3 10 10
 	:header-rows: 1
 	
-	* - Severity level
-	  - DW (95% CI)
-	  - DW source
-	  - Proportion of estimated diarrhea
-	  - Proportion source
-	* - Mild
-	  - 0.0074 (0.049-0.104)
-	  - YLDs appendix
-	  - .642
-	  - get_severity_splits, me_id=1181
-	* - Moderate
-	  - 0.188 (0.125-0.264)
-	  - YLDs appendix
-	  - .289
-	  - get_severity_splits, me_id=1181
-	* - Severe
-	  - 0.247 (0.164-0.348)
-	  - YLDs Appendix
-	  - .069
- 	  - get_severity_splits, me_id=1181
-	  
-The severity splits come from a meta-analysis on severity independent from the DisMod estimates.
-These splits do not vary by location/year/age/sex, and are applied to the prevalence and incidence estimates
-in order to calculate YLDs by sequela (severity).  
+	* - Value
+	  - Source
+	  - Description
+	  - Notes
+	* - prevalence_c302
+	  - como
+	  - Prevalence of diarrheal diseases
+	  -
+	* - deaths_c302
+	  - codcorrect
+	  - Deaths from diarrheal diseases
+	  -
+	* - population
+	  - demography
+	  - Mid-year population for given age/sex/year/location
+	  -
+	* - sequelae_c302
+	  - gbd_mapping
+	  - List of 3 sequelae for diarrheal diseases
+	  -
+	* - prevalence_s{`sid`}
+ 	  - como
+	  - Prevalence of sequela with id `sid`
+	  -
+	* - disability_weight_s{`sid`}
+	  - gbd_compare
+	  - Disability weight of sequela with id `sid`
+	  - NOTE: the 2017 YLD appendix has incorrect disability weights listed. Mild,Moderate,Severe should be 0.0074 (0.049-0.104), 0.188 (0.125-0.264), 0.247 (0.164-0.348), verified with get_severity_splits, me_id=1181
+
 
 
 Validation Criteria
