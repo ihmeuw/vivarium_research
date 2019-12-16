@@ -179,7 +179,7 @@ Data Descriptions
 	  - Prevalence of sequela with id `sid`
 	  -
 	* - disability_weight_s{`sid`}
-	  - gbd_mapping
+	  - YLD appendix
 	  - Disability weight of sequela with id `sid`
 	  - 
 
