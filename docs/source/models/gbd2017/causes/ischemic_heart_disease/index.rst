@@ -1,8 +1,8 @@
 .. _2017_cause_ischemic_heart_disease:
 
-===================
+======================
 Ischemic Heart Disease
-===================
+======================
 
 Disease Description
 -------------------
@@ -35,9 +35,16 @@ Transitions Diagram
 .. image:: ihd_transitions.png
   :width: 200
 
-Model Assumptions and Limitations
-+++++++++++++++++
+Data Description
+----------------
 
+.. todo::
+
+   Add tables describing data sources for the Vivarium model.
+
+
+Model Assumptions and Limitations
+---------------------------------
 Restrictions
 ------------
 .. todo:: 
@@ -49,12 +56,6 @@ Restrictions
 
    Describe more assumptions and limitations of the model.
 
-Data Description
-----------------
-
-.. todo::
-
-   Add tables describing data sources for the Vivarium model.
 
 Validation Criteria
 -------------------
