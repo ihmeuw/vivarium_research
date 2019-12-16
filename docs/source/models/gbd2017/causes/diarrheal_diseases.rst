@@ -120,7 +120,6 @@ Data Descriptions
 	  - cause-specific mortality rate
 	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
 	  -
-	 
 
 .. list-table:: Transition Data
 	:widths: 10 10 10 10 10
@@ -132,53 +131,20 @@ Data Descriptions
 	  - Value
 	  - Notes
 	* - i
-	  - 
-	  - inc_c302/(1-prev_c302)
-	  - N/A
-	  - N/A
-	  - N/A
-
-.. list-table:: Transitions
-	:widths: 5 10 10 10 10 10 10
-	:header-rows: 1
-	
-	* - Source
-	  - Sink
-	  - Rate name
-	  - Calc
-	  - Metric
-	  - Source
-	  - Note
-	* - I
 	  - S
-	  - Remission
-	  - rem_m1181
-	  - rate
-	  - epi
-	  - Already a rate within with-condition population
-	* - S
 	  - I
-	  - Incidence
-	  - inc_c302/(1-prev_c302)
-	  - rate
-	  - como
+	  - :math:`\frac{\text{incidence_c302}}{1-\text{prevalence_c302}}`
 	  - We transform incidence to be a rate within the susceptible population.
+	* - r
+	  - I
+	  - S
+	  - remission_m1181
+	  - Already a rate within with-condition population
 
+	  
+.. list-table: Data Sources and Definitions
 
-.. list-table:: Excess Mortality Rate
-	:widths: 5 10 10
-	:header-rows: 1
-
-	* - State
-	  - Excess Mortality Rate
-	  - Source
-	* - I
-	  - (deaths_c302/pop)/prev_c302
-	  - codcorrect
-	* - S
-	  - 0
-	  - NA
-
+	  
 	  
 .. list-table:: Disability Weights
 	:widths: 5 10 10 10 10
