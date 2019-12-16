@@ -136,6 +136,6 @@ Data Descriptions
 	  -
 	* - disability_weight_s{sid}
 	  - YLD appendix
-	  - disability weight of sequela with id {id}
+	  - Disability weight of sequela with id {id}
 	  -
 	
