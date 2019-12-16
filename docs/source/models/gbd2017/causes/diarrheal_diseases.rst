@@ -158,6 +158,14 @@ Data Descriptions
 	  - codcorrect
 	  - Deaths from diarrheal diseases
 	  -
+	* - incidence_c302
+	  - como
+	  - Incidence of diarrheal disease within the entire population
+	  - 
+	* - remission_m1181
+	  - dismod
+	  - Remission of diarrheal disease within the infected population
+	  -
 	* - population
 	  - demography
 	  - Mid-year population for given age/sex/year/location
