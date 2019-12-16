@@ -59,8 +59,8 @@ S: _S_usceptible to diarrheal diseases
 I: _I_nfected and currently experiencing a diarrheal disease bout
 
 
-Data Descriptions
------------------
+Data Description
+----------------
 
 .. list-table:: State Definitions
 	:widths: 5 10 10
