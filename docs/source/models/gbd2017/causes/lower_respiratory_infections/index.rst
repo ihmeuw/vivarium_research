@@ -46,10 +46,104 @@ Data Description
 
    * - State
      - Definition
-   * - I
-     - Currently infected and having the condition
    * - S
      - Susceptible but does not currently have LRI
+   * - I
+     - Currently infected and having the condition
+
+.. list-table:: **States Data**
+   :widths: 20 25 30 30
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - 1-prevalence_c322
+     -
+   * - S
+     - excess mortality |br| rate
+     - 0
+     -
+   * - S
+     - disabilty weights
+     - 0
+     -
+   * - I
+     - prevalence
+     - prevalence_c322
+     -
+   * - I
+     - excess mortality |br| rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population * prevalence_c322}}`
+     -
+   * - I
+     - disability weights
+     - disability_weight_s670* |br| prevalence_s670+ |br| disability_weight_s669* |br| prevalence_s669
+     - GBD assumes 15% of LRI |br| cases as severe and 85% |br| as moderate |br| [GBD-2017-YLD-Capstone-Appendix-1]_.
+   * - ALL
+     - cause specific |br| mortality rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population}}`
+     -
+
+.. list-table:: **Transition Data**
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+
+   * - Transition
+     - Source
+     - Sink
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - incidence_rate_c322
+     - Incidence rate in |br| total population
+   * - r
+     - I
+     - S
+     - remission_rate_c322
+     -
+.. list-table:: **Data Sources**
+   :widths: 20 25 25 25
+   :header-rows: 1
+
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - prevalence_c322
+     - COMO
+     - Prevalence of LRI
+     -
+   * - deaths_c322
+     - CoDCorrect
+     - Deaths from LRI
+     -
+   * - population
+     - Demography
+     - Mid-year population for |br| given country
+     -
+   * - incidence_rate_c322
+     - COMO
+     - Incidence rate for LRI
+     -
+   * - remission_rate_c322
+     - DisMod-MR
+     - Remission rate for LRI
+     -
+   * - disability_weight_{sid}
+     - GBD YLD Appendix
+     - Disability weights associated |br| with each sequelae
+     -
+   * - prevalence_{sid}
+     - COMO
+     - Prevalence of each sequelae
+     -
+
 
 Model Assumptions and Limitations
 ---------------------------------
