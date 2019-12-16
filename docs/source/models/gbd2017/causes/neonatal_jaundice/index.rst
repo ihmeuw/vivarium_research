@@ -135,7 +135,7 @@ Data Descriptions
 	  - Prevalence of sequela with id {id}
 	  -
 	* - disability_weight_s{sid}
-	  - YLDs appendix
+	  - YLD appendix
 	  - disability weight of sequela with id {id}
 	  -
 	
