@@ -164,16 +164,16 @@ Data Descriptions
 	  -
 	* - sequelae_c302
 	  - gbd_mapping
-	  - List of 3 sequelae for diarrheal diseases
-	  -
+	  - List of 4 sequelae for diarrheal diseases
+	  - Note Guillain-Barre due to diarrheal diseases is included in sequelae.
 	* - prevalence_s{`sid`}
  	  - como
 	  - Prevalence of sequela with id `sid`
 	  -
 	* - disability_weight_s{`sid`}
-	  - gbd_compare
+	  - gbd_mapping
 	  - Disability weight of sequela with id `sid`
-	  - NOTE: the 2017 YLD appendix has incorrect disability weights listed. Mild,Moderate,Severe should be 0.0074 (0.049-0.104), 0.188 (0.125-0.264), 0.247 (0.164-0.348), verified with get_severity_splits, me_id=1181
+	  - 
 
 
 
