@@ -26,12 +26,12 @@ Modeling Strategy for Ischemic Heart Disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
 Cause Model Diagram
---------------------------
+--------------------
 .. image:: ihd_states.png
   :width: 150
 
 Transitions Diagram
---------------------------
+--------------------
 .. image:: ihd_transitions.png
   :width: 200
 
@@ -46,7 +46,7 @@ Data Description
 Model Assumptions and Limitations
 ---------------------------------
 Restrictions
-------------
+++++++++++++
 .. todo:: 
 
     Restriction type (Yll only, YLD only, YLL age start, YLL age end, YLD age start, YLD age end, male only, female only). 
