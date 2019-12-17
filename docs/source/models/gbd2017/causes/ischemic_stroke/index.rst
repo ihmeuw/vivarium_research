@@ -26,7 +26,7 @@ Modeling Strategy for Ischemic Stroke
 +++++++++++++++++++++++++++++++++++++
 
 
-Transitions Diagram
+Cause Model Diagram
 -------------------
 .. image:: ischemic_stroke_transitions.svg
   :width: 200
