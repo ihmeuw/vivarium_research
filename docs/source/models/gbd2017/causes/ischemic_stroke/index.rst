@@ -25,10 +25,6 @@ Strokes in GBD 2017
 Modeling Strategy for Ischemic Stroke
 +++++++++++++++++++++++++++++++++++++
 
-Cause Model Diagram
--------------------
-.. image:: ischemic_stroke_states.svg
-  :width: 150
 
 Transitions Diagram
 -------------------
