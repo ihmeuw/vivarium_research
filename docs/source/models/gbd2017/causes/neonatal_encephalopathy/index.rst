@@ -20,7 +20,9 @@ occur when an infant is deprived of oxygen during delivery or sustains physical
 trauma to the head, among other causes.
 
 .. todo::
-   Add more information about neonatal encephalopathy. Here are some informative links, found by googling "neonatal encephalopathy":
+
+   Add more information about neonatal encephalopathy. Here are some informative
+   links, found by googling "neonatal encephalopathy":
 
    - https://www.rileychildrens.org/health-info/neonatal-encephalopathy
    - https://www.uptodate.com/contents/clinical-features-diagnosis-and-treatment-of-neonatal-encephalopathy
@@ -166,6 +168,13 @@ State and Transition Data Tables
      - YLD Appendix
      - Disability weight of sequela with id `sid`
      -
+
+.. todo::
+
+   Finalize heading structure and titles, once we have several sufficiently
+   complete cause documents. E.g. should the title of this section be "Data
+   Description" or "State and Transition Data Tables" since that's more
+   descriptive? Will there be other subsections here?
 
 Model Assumptions and Limitations
 ---------------------------------
