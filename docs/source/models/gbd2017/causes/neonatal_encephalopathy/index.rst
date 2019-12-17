@@ -33,6 +33,12 @@ Modeling neonatal encephalopathy in GBD 2017
 .. todo::
    Describe GBD modeling process.
 
+Cause Hierarchy
++++++++++++++++
+
+.. todo::
+   Create cause hierarchy diagram.
+
 Cause Model Diagram
 -------------------
 
@@ -160,3 +166,30 @@ State and Transition Data Tables
      - YLD Appendix
      - Disability weight of sequela with id `sid`
      -
+
+Model Assumptions and Limitations
+---------------------------------
+
+Restrictions
+++++++++++++
+
+.. todo::
+
+  Describe data restrictions in table format.
+
+Scope
++++++
+
+.. todo::
+
+  Describe assumptions and limitations of the model.
+
+Validation Criteria
+-------------------
+
+.. todo::
+
+  Describe tests for model validation.
+
+References
+----------
