@@ -19,6 +19,9 @@ or more loose stools in a 24-hour period." (p. 88 of
 Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
 
+
+
+
 According to the [GBD-2017-YLD-Capstone-Appendix-1]_, "There are no
 major modelling updates from GBD 2016," (p. 93) and "self-reported
 prevalence is the reference category" (p. 88).
@@ -48,15 +51,20 @@ severity for their age/sex/location/year.
    Add relevant detail about diarrheal diseases modeling process from
    the CoD Appendix.
 
+GBD Hierarchy
+-------------
+
+.. image:: DD_cause_hierarchy.svg
+
 Cause Model Diagram
 -------------------
 
 .. image:: DD_cause_model.svg
 
 
-S: _S_usceptible to diarrheal diseases
+S: **S**\ usceptible to diarrheal diseases
 
-I: _I_nfected and currently experiencing a diarrheal disease bout
+I: **I**\ nfected and currently experiencing a diarrheal disease bout
 
 
 Data Description
