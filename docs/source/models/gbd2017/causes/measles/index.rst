@@ -129,16 +129,20 @@ Data Description
 ----------------
 
 .. list-table:: Definitions
-   :widths: 25 50
+   :widths: 15 20 30
    :header-rows: 1
 
    * - State
+     - State Name
      - Definition
    * - S
+     - Susceptible
      - Susceptible to measles
    * - I
+     - Infected
      - Infected with measles
    * - R
+     - Recovered
      - Recovered from measles
 
 
@@ -168,11 +172,11 @@ Data Description
      - 
    * - I
      - excess mortality |br| rate
-     - :math:`\frac{\text{deaths_c341}}{\text{population * prevalence_c341}}`
+     - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_c341}}`
      - 
    * - I
      - disability weights
-     - disability_weight_s117* |br| prevalence_s117+ |br| disability_weight_s118* |br| prevalence_s118
+     - disability_weight_s117 :math:`\times` |br| prevalence_s117+ |br| disability_weight_s118 :math:`\times` |br| prevalence_s118
      - GBD assumes 50% of measles |br| cases as severe and other 50% |br| as moderate |br| [GBD-2017-YLD-Capstone-Appendix-1]_.
    * - R
      - prevalence
@@ -204,13 +208,13 @@ Data Description
    * - i
      - S
      - I
-     - incidence_rate_c341
-     - Incidence rate in |br| total population
+     - :math:`\frac{\text{incidence_rate_c341}}{\text{1 - prevalence_c341}}`
+     - Incidence rate in total population |br| is divided by 1-prevalence_c341 |br| to get incidence rate among the |br| susceptible population.
    * - r
      - I
      - R
-     - remission_rate_c341 |br| :math:`= \frac{\text{1}}{\text{10 person-days * 365 person-days}}` |br| :math:`= 36.5`
-     - GBD assumes average |br| case duration as 10 days |br| [GBD-2017-YLD-Capstone-Appendix-1]_. |br| So remission is approximated |br| to this calculation. 
+     - remission_rate_c341 |br| :math:`= \frac{\text{1} \times \text{365 person-days}}{\text{10 person-days} \times \text{1 year}}` |br| :math:`= \frac{\text{36.5}}{\text{year}}`
+     - GBD assumes average case |br| duration as 10 days |br| [GBD-2017-YLD-Capstone-Appendix-1]_. |br| So remission rate is approximated |br| to this calculation. 
 
 
 .. list-table:: Data Sources
@@ -222,31 +226,31 @@ Data Description
      - Description
      - Notes
    * - prevalence_c341
-     - COMO
+     - como
      - Prevalence of cause measles
      - 
    * - deaths_c341
-     - CoDCorrect
+     - codcorrect
      - Deaths from measles
      - 
    * - population
-     - Demography
+     - demography
      - Mid-year population for |br| given country
      - 
    * - incidence_rate_c341
-     - COMO
+     - como
      - Incidence rate for measles
      - 
    * - remission_rate_c341
-     - Calculation
+     - YLD appendix
      - Remission rate for measles
-     - 
-   * - disability_weight_{sid}
-     - GBD YLD Appendix
+     - GBD assumes average case |br| duration as 10 days |br| [GBD-2017-YLD-Capstone-Appendix-1]_. |br| So remission rate is calculated |br| from this assumption. 
+   * - disability_weight_s{sid}
+     - YLD appendix
      - Disability weights associated |br| with each sequelae
      - 
-   * - prevalence_{sid}
-     - COMO
+   * - prevalence_s{sid}
+     - como
      - Prevalence of each sequelae
      - 
 
