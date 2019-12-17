@@ -27,13 +27,9 @@ Modeling Strategy for Ischemic Heart Disease
 
 Cause Model Diagram
 --------------------
-.. image:: ihd_states.png
+.. image:: ischemic_heart_disease_transitions.svg
   :width: 150
 
-Transitions Diagram
---------------------
-.. image:: ihd_transitions.png
-  :width: 200
 
 Data Description
 ----------------
