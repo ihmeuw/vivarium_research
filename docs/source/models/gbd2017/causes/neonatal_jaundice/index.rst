@@ -27,6 +27,12 @@ for GBD are EHB from `Rhesus (Rh) disease`_, preterm birth,
 
 .. todo::
    Describe cause model
+   
+   
+GBD Hierarchy
+-------------
+
+.. image:: jaundice_cause_hierarchy.svg
 
 Data Descriptions
 -----------------
