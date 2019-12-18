@@ -561,14 +561,14 @@ Remission Rates
 **Definition**
 
 Remission is a measure of cases that recover from a with-condition state, given 
-a specified population and time period. Just as with incidence, the numerator is
- given by the count of recovered (or *remitted*) cases, and the denominator is 
- the cumulative person-time [link to person-time definition in incidence 
- section] during which cases are able to go into remission.
+a specified population and time period. Just as with incidence, the numerator is 
+given by the count of recovered (or *remitted*) cases, and the denominator is 
+the cumulative person-time [link to person-time definition in incidence 
+section] during which cases are able to go into remission.
 
-	For example, consider diarrhea cases in the Philippines in 2017. Say there 
-  were 1 million prevalent cases of diarrhea over the course of 2017, and each 
-  case remitted after an average of 5 days. The way we define this remission 
+  For example, consider diarrhea cases in the Philippines in 2017. Say there
+  were 1 million prevalent cases of diarrhea over the course of 2017, and each
+  case remitted after an average of 5 days. The way we define this remission
   rate depends on the denominator we choose; some examples include:
 
 .. math::
