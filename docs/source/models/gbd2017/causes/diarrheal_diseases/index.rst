@@ -19,19 +19,23 @@ or more loose stools in a 24-hour period." (p. 88 of
 Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
 
+
+
+
 According to the [GBD-2017-YLD-Capstone-Appendix-1]_, "There are no
 major modelling updates from GBD 2016," (p. 93) and "self-reported
 prevalence is the reference category" (p. 88).
 
 .. todo::
 
-   Add more context for people who are not familiar.
+   Add more context regarding GBD 2016 model for people who are not familiar.
 
 Regarding the duration of a bout of diarrhea, "the mean duration was
 the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a
-paper referenced there) Since this assumption gets into the DisMod
+paper referenced there).
+For GBD 2017, the remission period was modeled as 5 days.
+Since this assumption gets into the DisMod
 model, we will use the remission rate that comes from DisMod.
-
 
 The GBD 2017 adjusted for seasonal variation in diarrheal disease, but
 we have not attempted to include this variation in Vivarium yet. (p. 89)
@@ -42,11 +46,15 @@ aetiologies in this simple model.  The non-fatal model is severity
 split based. In our model, every individual will have the average
 severity for their age/sex/location/year.
 
-
 .. todo::
 
    Add relevant detail about diarrheal diseases modeling process from
    the CoD Appendix.
+
+GBD Hierarchy
+-------------
+
+.. image:: DD_cause_hierarchy.svg
 
 Cause Model Diagram
 -------------------
@@ -54,17 +62,136 @@ Cause Model Diagram
 .. image:: DD_cause_model.svg
 
 
-S: _S_usceptible to diarrheal diseases
+S: **S**\ usceptible to diarrheal diseases
 
-I: _I_nfected and currently experiencing a diarrheal disease bout
+I: **I**\ nfected and currently experiencing a diarrheal disease bout
 
 
-Data Descriptions
------------------
+Data Description
+----------------
 
-.. todo::
+.. list-table:: State Definitions
+	:widths: 5 10 10
+	:header-rows: 1
+	
+	* - State
+	  - State name
+	  - Definition
+	* - S
+	  - **S**\ usceptible
+	  - Simulant currently has diarrheal disease
+	* - I
+	  - **I**\ nfected
+	  - Simulant does not currently have diarrheal disease
 
-   Add tables describing data sources for the Vivarium model.
+.. list-table:: State Data
+	:widths: 5 10 10 20
+	:header-rows: 1
+	
+	* - State
+	  - Measure
+	  - Value
+	  - Notes
+	* - I
+	  - prevalence
+	  - prevalence_c302
+	  -
+	* - I
+	  - birth prevalence
+	  - 0
+	  - 
+	* - I
+	  - excess mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_c302}}`
+	  -
+	* - I
+	  - disability weight
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  -
+	* - S
+	  - prevalence
+	  - 1-prevalence_c302
+	  -
+	* - S
+	  - birth prevalence
+	  - 1
+	  - 
+	* - S
+	  - emr
+	  - 0
+	  -
+	* - S
+	  - disability weight
+	  - 0
+	  -
+	* - All
+	  - cause-specific mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
+	  -
+
+.. list-table:: Transition Data
+	:widths: 10 10 10 10 10
+	:header-rows: 1
+	
+	* - Transition
+	  - Source State
+	  - Sink State
+	  - Value
+	  - Notes
+	* - i
+	  - S
+	  - I
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
+	  - We transform incidence to be a rate within the susceptible population.
+	* - r
+	  - I
+	  - S
+	  - remission_rate_m1181
+	  - Already a rate within with-condition population
+
+	  
+.. list-table:: Data Sources and Definitions
+	:widths: 1 3 10 10
+	:header-rows: 1
+	
+	* - Value
+	  - Source
+	  - Description
+	  - Notes
+	* - prevalence_c302
+	  - como
+	  - Prevalence of diarrheal diseases
+	  -
+	* - deaths_c302
+	  - codcorrect
+	  - Deaths from diarrheal diseases
+	  -
+	* - incidence_rate_c302
+	  - como
+	  - Incidence of diarrheal disease within the entire population
+	  - 
+	* - remission_rate_m1181
+	  - dismod
+	  - Remission of diarrheal disease within the infected population
+	  -
+	* - population
+	  - demography
+	  - Mid-year population for given age/sex/year/location
+	  -
+	* - sequelae_c302
+	  - gbd_mapping
+	  - List of 4 sequelae for diarrheal diseases
+	  - Note Guillain-Barre due to diarrheal diseases is included in sequelae.
+	* - prevalence_s{`sid`}
+ 	  - como
+	  - Prevalence of sequela with id `sid`
+	  -
+	* - disability_weight_s{`sid`}
+	  - YLD appendix
+	  - Disability weight of sequela with id `sid`
+	  - 
+
+
 
 Validation Criteria
 -------------------

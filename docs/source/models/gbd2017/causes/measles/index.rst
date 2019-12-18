@@ -83,12 +83,21 @@ Modeling Measles in GBD 2017
 
    Make sure to check on measles sequelae as well. Our models so far have not paid much attention to the nonfatal side, but it looks like some of the complications can persist well after someone recovers from measles, so maybe that's important to think about.
 
+GBD Hierarchy
+-------------
+
+**Hierarchy Diagram:**
+
+.. image:: measles_gbd_hierarchy.svg
+   :alt: Measles GBD hierarchy diagram
+   
+
 Cause Model Diagram
 -------------------
 
 .. image:: measles_cause_model.svg
-	:width: 600
-	:alt: Simple SIR Measles cause model diagram
+   :width: 600
+   :alt: Simple SIR Measles cause model diagram
 
 Model Assumptions and Limitations
 ---------------------------------
@@ -115,9 +124,134 @@ outbreaks due to lack of vaccination in small communities.
 Data Description
 ----------------
 
-.. todo::
+.. list-table:: Definitions
+   :widths: 15 20 30
+   :header-rows: 1
 
-   Add tables describing data sources for the Vivarium model.
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - Susceptible
+     - Susceptible to measles
+   * - I
+     - Infected
+     - Infected with measles
+   * - R
+     - Recovered
+     - Recovered from measles
+
+
+.. list-table:: States Data
+   :widths: 20 25 30 30
+   :header-rows: 1
+   
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - 1-prevalence_c341
+     - 
+   * - S
+     - excess mortality rate
+     - 0
+     - 
+   * - S
+     - disabilty weights
+     - 0
+     -
+   * - I
+     - prevalence
+     - prevalence_c341
+     - 
+   * - I
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_c341}}`
+     - 
+   * - I
+     - disability weights
+     - disability_weight_s117 :math:`\times` prevalence_s117+ disability_weight_s118 :math:`\times` prevalence_s118
+     - GBD assumes 50% of measles cases as severe and other 50% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
+   * - R
+     - prevalence
+     - 0
+     - Clearly room for improvement. There is no data available for the number of recovered people in GBD. 
+       So we included recovered among susceptible during initialization and calculating incident rate.
+       This is done to simplify the model as the focus is on LSFF but not on measles.
+   * - R
+     - excess mortality rate
+     - 0
+     - 
+   * - R
+     - disabilty weights
+     - 0
+     - 
+   * - ALL
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c341}}{\text{population}}`
+     - 
+
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+   
+   * - Transition
+     - Source 
+     - Sink 
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - :math:`\frac{\text{incidence_rate_c341}}{\text{1 - prevalence_c341}}`
+     - Incidence rate in total population is divided by 1-prevalence_c341 to get incidence rate among the recovered and susceptible population.
+   * - r
+     - I
+     - R
+     - remission_rate_c341 :math:`= \frac{\text{365 person-days}}{\text{10 person-days} \times \text{1 year}}` :math:`= \frac{\text{36.5}}{\text{year}}`
+     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1]_. So constant remission rate is approximated to this calculation. 
+
+
+.. list-table:: Data Sources
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - prevalence_c341
+     - como
+     - Prevalence of cause measles
+     - 
+   * - deaths_c341
+     - codcorrect
+     - Deaths from measles
+     - 
+   * - population
+     - demography
+     - Mid-year population for given country
+     - 
+   * - incidence_rate_c341
+     - como
+     - Incidence rate for measles
+     - 
+   * - remission_rate_c341
+     - YLD appendix
+     - Remission rate for measles
+     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1]_. So constant remission rate is calculated from this assumption. 
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weights associated with each sequelae
+     - 
+   * - prevalence_s{`sid`}
+     - como
+     - Prevalence of each sequelae
+     - 
+
 
 Validation Criteria
 -------------------
