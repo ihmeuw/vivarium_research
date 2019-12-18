@@ -587,8 +587,8 @@ Most nonfatal models in GBD are run using DisMod [link to DisMod page]. DisMod
 estimates compartmental models of disease, which includes an estimate of 
 remission in terms of **{remitted cases in the with-condition population} per 
 {person-year}**. Thus DisMod's estimates of various measures (prevalence, 
-incidence, remission, excess mortality rate, etc.) are internally consistent for
- any given model.
+incidence, remission, excess mortality rate, etc.) are internally consistent for 
+any given model.
 
 GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To 
 calculate these measures such that they are consistent across different causes, 
