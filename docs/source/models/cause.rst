@@ -560,36 +560,50 @@ Remission Rates
 
 **Definition**
 
-Remission is a measure of cases that recover from a with-condition state, given a specified population and time period. Just as with incidence,
-the numerator is given by the count of recovered (or *remitted*) cases, and the denominator is the cumulative person-time [link to person-time
-definition in incidence section] during which cases are able to go into remission.
+Remission is a measure of cases that recover from a with-condition state, given 
+a specified population and time period. Just as with incidence, the numerator is
+ given by the count of recovered (or *remitted*) cases, and the denominator is 
+ the cumulative person-time [link to person-time definition in incidence 
+ section] during which cases are able to go into remission.
 
-	For example, consider diarrhea cases in the Philippines in 2017. Say there were 1 million prevalent cases of diarrhea over the course of 2017,
-	and each case remitted after an average of 5 days. The way we define this remission rate depends on the denominator we choose; some examples
-	include:
+	For example, consider diarrhea cases in the Philippines in 2017. Say there 
+  were 1 million prevalent cases of diarrhea over the course of 2017, and each 
+  case remitted after an average of 5 days. The way we define this remission 
+  rate depends on the denominator we choose; some examples include:
 
 .. math::
 	
-	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1 person-year}}=73\text{ cases/person-year}
+	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1
+   person-year}}=73\text{ cases/person-year}
  
-Note that, unlike incidence, there is not a strong precedent for referring to remission rates within the entire population; rather, remission rates
-typically refer to rates within an infected, or with-condition population. {Is this true? This is based on limited google searching!}
+Note that, unlike incidence, there is not a strong precedent for referring to 
+remission rates within the entire population; rather, remission rates typically 
+refer to rates within an infected, or with-condition population. {Is this true? 
+This is based on limited google searching!}
 
 **Remission within GBD**
 
-Most nonfatal models in GBD are run using DisMod [link to DisMod page]. DisMod estimates compartmental models of disease,
-which includes an estimate of remission in terms of **{remitted cases in the with-condition population} per {person-year}**. Thus DisMod's estimates
-of various measures (prevalence, incidence, remission, excess mortality rate, etc.) are internally consistent for any given model.
+Most nonfatal models in GBD are run using DisMod [link to DisMod page]. DisMod 
+estimates compartmental models of disease, which includes an estimate of 
+remission in terms of **{remitted cases in the with-condition population} per 
+{person-year}**. Thus DisMod's estimates of various measures (prevalence, 
+incidence, remission, excess mortality rate, etc.) are internally consistent for
+ any given model.
 
-GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To calculate these measures such that they are consistent across different causes,
-GBD runs standardizing processes on estimates of prevalence, incidence, and estimated mortality rate. Note then that these final estimates are no longer
-consistent with the DisMod estimates. However, as remission is not needed to calculate YLDs, the latest-stage estimate
-of remission produced by GBD comes from DisMod models.
+GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To 
+calculate these measures such that they are consistent across different causes, 
+GBD runs standardizing processes on estimates of prevalence, incidence, and 
+estimated mortality rate. Note then that these final estimates are no longer 
+consistent with the DisMod estimates. However, as remission is not needed to 
+calculate YLDs, the latest-stage estimate of remission produced by GBD comes 
+from DisMod models.
 
 **Implementing remission rates in cause models**
 
-As with incidence, as remission is a rate within the with-condition population, it can be used to compute the probability of a simulant transitioning
-from an infected or with-condition state to a susceptible or free-of-condition state in a given timestep.
+As with incidence, as remission is a rate within the with-condition population, 
+it can be used to compute the probability of a simulant transitioning from an 
+infected or with-condition state to a susceptible or free-of-condition state in 
+a given timestep.
 
 Duration-Based Transitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
