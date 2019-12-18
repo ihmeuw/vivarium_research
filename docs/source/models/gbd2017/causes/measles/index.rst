@@ -1,9 +1,5 @@
 .. _2017_cause_measles:
 
-.. |br| raw:: html
-   
-   <br />
-   
 =======
 Measles
 =======
@@ -100,8 +96,8 @@ Cause Model Diagram
 -------------------
 
 .. image:: measles_cause_model.svg
-	:width: 600
-	:alt: Simple SIR Measles cause model diagram
+   :width: 600
+   :alt: Simple SIR Measles cause model diagram
 
 Model Assumptions and Limitations
 ---------------------------------
@@ -159,7 +155,7 @@ Data Description
      - 1-prevalence_c341
      - 
    * - S
-     - excess mortality |br| rate
+     - excess mortality rate
      - 0
      - 
    * - S
@@ -171,19 +167,21 @@ Data Description
      - prevalence_c341
      - 
    * - I
-     - excess mortality |br| rate
+     - excess mortality rate
      - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_c341}}`
      - 
    * - I
      - disability weights
-     - disability_weight_s117 :math:`\times` |br| prevalence_s117+ |br| disability_weight_s118 :math:`\times` |br| prevalence_s118
-     - GBD assumes 50% of measles |br| cases as severe and other 50% |br| as moderate |br| [GBD-2017-YLD-Capstone-Appendix-1]_.
+     - disability_weight_s117 :math:`\times` prevalence_s117+ disability_weight_s118 :math:`\times` prevalence_s118
+     - GBD assumes 50% of measles cases as severe and other 50% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
    * - R
      - prevalence
      - 0
-     - Clearly room for improvement. |br| This is done to simplify the model |br| as the focus is on LSFF but not |br| on measles.
+     - Clearly room for improvement. There is no data available for the number of recovered people in GBD. 
+       So we included recovered among susceptible during initialization and calculating incident rate.
+       This is done to simplify the model as the focus is on LSFF but not on measles.
    * - R
-     - excess mortality |br| rate
+     - excess mortality rate
      - 0
      - 
    * - R
@@ -191,7 +189,7 @@ Data Description
      - 0
      - 
    * - ALL
-     - cause specific |br| mortality rate
+     - cause specific mortality rate
      - :math:`\frac{\text{deaths_c341}}{\text{population}}`
      - 
 
@@ -209,12 +207,12 @@ Data Description
      - S
      - I
      - :math:`\frac{\text{incidence_rate_c341}}{\text{1 - prevalence_c341}}`
-     - Incidence rate in total population |br| is divided by 1-prevalence_c341 |br| to get incidence rate among the |br| susceptible population.
+     - Incidence rate in total population is divided by 1-prevalence_c341 to get incidence rate among the recovered and susceptible population.
    * - r
      - I
      - R
-     - remission_rate_c341 |br| :math:`= \frac{\text{1} \times \text{365 person-days}}{\text{10 person-days} \times \text{1 year}}` |br| :math:`= \frac{\text{36.5}}{\text{year}}`
-     - GBD assumes average case |br| duration as 10 days |br| [GBD-2017-YLD-Capstone-Appendix-1]_. |br| So remission rate is approximated |br| to this calculation. 
+     - remission_rate_c341 :math:`= \frac{\text{365 person-days}}{\text{10 person-days} \times \text{1 year}}` :math:`= \frac{\text{36.5}}{\text{year}}`
+     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1]_. So constant remission rate is approximated to this calculation. 
 
 
 .. list-table:: Data Sources
@@ -235,7 +233,7 @@ Data Description
      - 
    * - population
      - demography
-     - Mid-year population for |br| given country
+     - Mid-year population for given country
      - 
    * - incidence_rate_c341
      - como
@@ -244,12 +242,12 @@ Data Description
    * - remission_rate_c341
      - YLD appendix
      - Remission rate for measles
-     - GBD assumes average case |br| duration as 10 days |br| [GBD-2017-YLD-Capstone-Appendix-1]_. |br| So remission rate is calculated |br| from this assumption. 
-   * - disability_weight_s{sid}
+     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1]_. So constant remission rate is calculated from this assumption. 
+   * - disability_weight_s{`sid`}
      - YLD appendix
-     - Disability weights associated |br| with each sequelae
+     - Disability weights associated with each sequelae
      - 
-   * - prevalence_s{sid}
+   * - prevalence_s{`sid`}
      - como
      - Prevalence of each sequelae
      - 
