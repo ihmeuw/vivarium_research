@@ -1,7 +1,4 @@
 .. _2017_cause_lower_respiratory_infections:
-.. |br| raw:: html
-
-   <br />
 
 ============================
 Lower Respiratory Infections
@@ -40,21 +37,32 @@ Cause Model Diagram
 
 .. image:: lri_disease_model.svg
 
+Model Assumptions and Limitations
+---------------------------------
+There is substantial additional effort in GBD to divide LRI
+burden into the aetiologies of LRI, but we have not included
+aetiologies in this simple model.
+
+There are three sequelae associated with LRI. We do not consider Guillain-Barré syndrome
+in this model because the prevalence of it is too low to affect the overall disability weight.
 
 Data Description
 ----------------
-.. list-table:: **Definition**
-   :widths: 5 30
+.. list-table:: Definition
+   :widths: 5 20 30
    :header-rows: 1
 
    * - State
+     - State Name
      - Definition
    * - S
+     - Susceptible
      - Susceptible but does not currently have LRI
    * - I
+     - Infected
      - Currently infected and having the condition
 
-.. list-table:: **States Data**
+.. list-table:: States Data
    :widths: 20 25 30 30
    :header-rows: 1
 
@@ -67,11 +75,11 @@ Data Description
      - 1-prevalence_c322
      -
    * - S
-     - excess mortality |br| rate
+     - excess mortality rate
      - 0
      -
    * - S
-     - disabilty weights
+     - disability weights
      - 0
      -
    * - I
@@ -79,19 +87,19 @@ Data Description
      - prevalence_c322
      -
    * - I
-     - excess mortality |br| rate
-     - :math:`\frac{\text{deaths_c322}}{\text{population * prevalence_c322}}`
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_c322}}`
      -
    * - I
      - disability weights
-     - disability_weight_s670* |br| prevalence_s670+ |br| disability_weight_s669* |br| prevalence_s669
-     - GBD assumes 15% of LRI |br| cases as severe and 85% |br| as moderate |br| [GBD-2017-YLD-Capstone-Appendix-1]_.
+     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669
+     - GBD assumes 15% of LRI cases as severe and 85% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
    * - ALL
-     - cause specific |br| mortality rate
+     - cause specific mortality rate
      - :math:`\frac{\text{deaths_c322}}{\text{population}}`
      -
 
-.. list-table:: **Transition Data**
+.. list-table:: Transition Data
    :widths: 10 10 10 30 30
    :header-rows: 1
 
@@ -103,14 +111,14 @@ Data Description
    * - i
      - S
      - I
-     - incidence_rate_c322
-     - Incidence rate in |br| total population
+     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_c322})}`
+     - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
    * - r
      - I
      - S
      - remission_rate_c322
      -
-.. list-table:: **Data Sources**
+.. list-table:: Data Sources
    :widths: 20 25 25 25
    :header-rows: 1
 
@@ -119,43 +127,34 @@ Data Description
      - Description
      - Notes
    * - prevalence_c322
-     - COMO
+     - como
      - Prevalence of LRI
      -
    * - deaths_c322
-     - CoDCorrect
+     - codcorrect
      - Deaths from LRI
      -
    * - population
-     - Demography
-     - Mid-year population for |br| given country
+     - demography
+     - Mid-year population for given age/sex/year/location
      -
    * - incidence_rate_c322
-     - COMO
-     - Incidence rate for LRI
+     - como
+     - Incidence rate of LRI within the entire population
      -
-   * - remission_rate_c322
-     - DisMod-MR
-     - Remission rate for LRI
+   * - remission_rate_m1258
+     - dismod-mr
+     - Remission rate of LRI within the infected population
      -
-   * - disability_weight_{sid}
-     - GBD YLD Appendix
-     - Disability weights associated |br| with each sequelae
+   * - disability_weight_s{sid}
+     - YLD Appendix
+     - Disability weights associated with each sequela
      -
-   * - prevalence_{sid}
-     - COMO
-     - Prevalence of each sequelae
+   * - prevalence_s{sid}
+     - como
+     - Prevalence of each sequela
      -
 
-
-Model Assumptions and Limitations
----------------------------------
-There is substantial additional effort in GBD to divide LRI
-burden into the aetiologies of LRI, but we have not included
-aetiologies in this simple model.
-
-There are three sequelae associated with LRI. We do not consider Guillain-Barré syndrome
-in this model because the prevalence of it is too low to affect the overall disability weight.
 
 Validation Criteria
 -------------------
