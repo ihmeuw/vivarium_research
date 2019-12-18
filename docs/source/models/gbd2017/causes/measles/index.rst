@@ -117,9 +117,52 @@ vaccination campaign.
 2. This model uses country-level data, and cannot be used to model local measles
 outbreaks due to lack of vaccination in small communities.
 
+Some of the **assumptions** made in this model are:
+
+1. There is no data available for population in recovered state in GBD. 
+So, we considered all the population who do not have measles as susceptible  This includes both susceptible and recovered population.
+To compensate this, the incidence rate among susceptible and recovered population is used for transition.
+
+2. There is no data avaialable for remission rate in GBD. So a constant remission rate is 
+calculated from duration assumption of 10 days [GBD-2017-YLD-Capstone-Appendix-1]_.
+
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     - 
+   * - Female only
+     - False
+     - 
+   * - YLL only
+     - False
+     - 
+   * - YLD only
+     - False
+     - 
+   * - YLL age group start
+     - Post Neonatal
+     - GBD age group id is 4
+   * - YLL age group end
+     - 50 to 54 years
+     - GBD age group id is 15
+   * - YLD age group start
+     - Post Neonatal
+     - GBD age group id is 4
+   * - YLD age group end
+     - 50 to 54 years
+     - GBD age group id is 15
+
+
 .. todo::
 
-   Describe more assumptions and limitations of the model.
+   Describe more limitations of the model as appropriate.
 
 Data Description
 ----------------
