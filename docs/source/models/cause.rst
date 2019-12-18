@@ -558,6 +558,27 @@ below.
 Remission Rates
 ^^^^^^^^^^^^^^^
 
+Remission is a measure of cases that recover from a with-condition state, given a specified population and time period. Just as with incidence,
+the numerator is given by the count of recovered (or *remitted*) cases, and the denominator is the cumulative `person-time`_ during which
+cases are able to go into remission.
+
+	For example, consider diarrhea cases in the Philippines in 2017. Say there were 1 million prevalent cases of diarrhea over the course of 2017,
+	and each case remitted after an average of 5 days. There are a number of remission rates we can talk about, depending on what denominator we choose.
+	We can say there is a remission rate of:
+
+.. math::
+	
+	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1 person-year}}
+ 
+
+Most nonfatal models, in GBD, are estimated using the modeling tool DisMod [link to DisMod page]. DisMod estimates compartmental models of disease, which includes
+an estimate of remission in terms of **{remitted cases in the with-condition population} per {person-year}**. 
+
+GBD works to standardize it's final outputs, which are in the form of YLLs and YLDs. There is thus consistency across the final estimates
+of prevalence and incidence produced by GBD; however, no standardization is applied to remission rates.
+
+
+
 Duration-Based Transitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
