@@ -7,6 +7,10 @@ Ischemic Heart Disease
 Disease Description
 -------------------
 
+Ischemic heart disease (IHD) occurs when the arteries of the heart cannot deliver enough oxygen-rich blood to the heart. According to NIH_, IHD is also known as Coronary Artery Disease, Coronary Heart Disease, Coronary Microvascular Disease.
+
+.. _NIH: https://www.nhlbi.nih.gov/health-topics/ischemic-heart-disease
+
 .. todo::
 
    Add more information and references. In particular, find data about global prevalence and relation to disease fatal and non-fatal description.
