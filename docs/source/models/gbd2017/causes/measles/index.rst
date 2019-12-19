@@ -124,7 +124,7 @@ So, we considered all the population who do not have measles as susceptible  Thi
 To compensate this, the incidence rate among susceptible and recovered population is used for transition.
 
 2. There is no data avaialable for remission rate in GBD. So a constant remission rate is 
-calculated from duration assumption of 10 days [GBD-2017-YLD-Capstone-Appendix-1]_.
+calculated from average case duration assumption of 10 days [GBD-2017-YLD-Capstone-Appendix-1]_.
 
 
 .. list-table:: Restrictions
@@ -162,7 +162,23 @@ calculated from duration assumption of 10 days [GBD-2017-YLD-Capstone-Appendix-1
 
 .. todo::
 
-   Describe more limitations of the model as appropriate.
+   Describe more limitations and assumptions of the model as appropriate. For example,
+   
+   * There are 2 ways people can be in the "recovered" state - either they get measles and then recover, or 
+     they get vaccinated and move directly into the "recovered" state without ever having the disease. 
+     We should look into measles vaccination rates in the countries we're interested in (Nigeria, India, Ethiopia) 
+     and compare this to the number of people who actually get measles. If the number of vaccinated people is much
+     higher than the number who get the disease, then our assumption will have a smaller effect, because the few 
+     people who enter the recovered state in our model will be be a small proportion of the total number of people
+     in the recovered state, and the GBD incidence rate is already accounting for people who are "recovered" by vaccination.   
+   * We should also look at the case fatality rate / excess mortality rate for measles, as this will also have an 
+     impact on the effect of this assumption, as well as on our assumption of a constant remission rate.   
+   * There are ways we could try to estimate the people who are in the recovered state, but it is probably not 
+     worth the effort and added complexity for this model, particularly because we are not explicitly modeling vaccinations.   
+   * For our assumption of a constant remission rate (below), we should think about what the actual hazard function for 
+     remission should look like (we should be able to get some idea about this from the disease description), and 
+     estimate how replacing it with a constant rate will affect our results.
+
 
 Data Description
 ----------------
