@@ -7,6 +7,9 @@ Haemolytic disease and other neonatal jaundice
 Disease Description
 -------------------
 
+Hemolytic disease and neonatal jaundice are both products of total serum or
+plasma bilirubin (TB) levels rising too high.
+
 Case definition in GBD 2017
 +++++++++++++++++++++++++++
 
