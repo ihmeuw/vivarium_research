@@ -19,37 +19,27 @@ or more loose stools in a 24-hour period." (p. 88 of
 Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
 
+The GBD diarrheal diseases model follows a standard GBD framework, including a cause of death (CoD) model and
+a nonfatal model.
 
+The CoD model estimates the cause-specific mortality rate (CSMR) within the total population, and a cause fraction.
+These estimates are based on vital registration and autopsy data.
 
-
-According to the [GBD-2017-YLD-Capstone-Appendix-1]_, "There are no
-major modelling updates from GBD 2016," (p. 93) and "self-reported
-prevalence is the reference category" (p. 88).
-
-.. todo::
-
-   Add more context regarding GBD 2016 model for people who are not familiar.
-
-Regarding the duration of a bout of diarrhea, "the mean duration was
-the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a
-paper referenced there).
-For GBD 2017, the remission period was modeled as 5 days.
-Since this assumption gets into the DisMod
-model, we will use the remission rate that comes from DisMod.
+The nonfatal model is run in DisMod. The primary inputs are prevalence epi data, for which self-reported prevalence is
+the reference definition, and the CSMR estimates from CodCorrect. Separately,
+the ratio of mild/moderate/severe diarrhea is estimated, based on data from a
+systematic review. These estimates do not vary by age/sex/location/year, and are applied to the prevalence
+and incidence estimates produced by DisMod to produce the three sequela of diarrheal diseases:
+mild diarrheal diseases, moderate diarrheal diseases, and severe diarrheal diseases. In our model, every
+individual will have the average severity for their age/sex/location/year. 
 
 The GBD 2017 adjusted for seasonal variation in diarrheal disease, but
 we have not attempted to include this variation in Vivarium yet. (p. 89)
 
 There is substantial additional effort in GBD to divide diarrhea
 burden into the aetiologies of diarrhea, but we have not included
-aetiologies in this simple model.  The non-fatal model is severity
-split based. In our model, every individual will have the average
-severity for their age/sex/location/year.
+aetiologies in this simple model.
 
-.. todo::
-
-   Add relevant detail about diarrheal diseases modeling process from
-   the CoD Appendix.
 
 GBD Hierarchy
 -------------
