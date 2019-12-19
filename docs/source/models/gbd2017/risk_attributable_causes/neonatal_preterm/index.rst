@@ -20,4 +20,4 @@ preterm birth.
 .. todo::
 
    Discribe the neonatal preterm birth cause, which is 100% attributable to the
-   Low Birthweight and Short Gestation risk.
+   :ref:`Low Birthweight and Short Gestation <2017_risk_lbwsg>` risk.
