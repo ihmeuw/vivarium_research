@@ -19,26 +19,29 @@ or more loose stools in a 24-hour period." (p. 88 of
 Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
 
-The GBD diarrheal diseases model follows a standard GBD framework, including a cause of death (CoD) model and
-a nonfatal model.
+The GBD diarrheal diseases model follows a standard GBD framework, including a 
+cause of death (CoD) model and a nonfatal model.
 
-The CoD model estimates the cause-specific mortality rate (CSMR) within the total population, and a cause fraction.
-These estimates are based on vital registration and autopsy data.
+The CoD model estimates the cause-specific mortality rate (CSMR) within the
+total population, and a cause fraction. These estimates are based on vital
+registration and verabal autopsy data.
 
-The nonfatal model is run in DisMod. The primary inputs are prevalence epi data, for which self-reported prevalence is
-the reference definition, and the CSMR estimates from CodCorrect. Separately,
-the ratio of mild/moderate/severe diarrhea is estimated, based on data from a
-systematic review. These estimates do not vary by age/sex/location/year, and are applied to the prevalence
-and incidence estimates produced by DisMod to produce the three sequela of diarrheal diseases:
-mild diarrheal diseases, moderate diarrheal diseases, and severe diarrheal diseases. In our model, every
-individual will have the average severity for their age/sex/location/year. 
+The nonfatal model is run in DisMod. The primary inputs are prevalence epi data,
+for which self-reported prevalence is the reference definition, and the CSMR
+estimates from CodCorrect. Separately, the ratio of mild/moderate/severe
+diarrhea is estimated, based on data from a systematic review. These estimates
+do not vary by age/sex/location/year, and are applied to the prevalence and
+incidence estimates produced by DisMod to produce the three sequela of diarrheal
+diseases: mild diarrheal diseases, moderate diarrheal diseases, and severe
+diarrheal diseases. In our model, every individual will have the average
+severity for their age/sex/location/year. 
 
-The GBD 2017 adjusted for seasonal variation in diarrheal disease, but
-we have not attempted to include this variation in Vivarium yet. (p. 89)
+The GBD 2017 adjusted for seasonal variation in diarrheal disease, but we have
+not attempted to include this variation in Vivarium yet. (p. 89)
 
-There is substantial additional effort in GBD to divide diarrhea
-burden into the aetiologies of diarrhea, but we have not included
-aetiologies in this simple model.
+There is substantial additional effort in GBD to divide diarrhea burden into the
+aetiologies of diarrhea, but we have not included aetiologies in this simple
+model.
 
 
 GBD Hierarchy
