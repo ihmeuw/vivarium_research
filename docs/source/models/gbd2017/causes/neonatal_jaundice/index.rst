@@ -7,44 +7,44 @@ Haemolytic disease and other neonatal jaundice
 Disease Description
 -------------------
 
-Hemolytic disease and neonatal jaundice are two separate etiologies by which
-an newborn infant might develop hyperbilirubinemia.
+`Hemolytic disease`_ and `neonatal jaundice`_ are two separate etiologies by which
+an newborn infant might develop hyperbilirubinemia, which can in turn become
+kernicterus.
 
 Hemolytic disease is a product of the mother's immunoglobin G antibodies
 attacking the fetus or newborn's red blood cells. The main presentations of
 this condition are RhD hemolytic diseaes and ABO hemolytic disease; however
-there are over 30 other blood groups, some of combinations of which can also
+there are over 30 other blood groups, various combinations of which can also
 result in hemolytic disease.
 
 Neonatal jaundice is a product of total serum or plasma bilirubin (TB)
 levels rising too high.
 
 Bilirubin is produced during the breakdown of hemoglobin and other
-heme-containing proteins, and a healthy infants commonly have TB levels of > 1
-mg/dL, which increases in the hours after birth. As TB level increases,
-"hyperbilirubinemia" is classified into significant, severe, and extreme
-hyperbilirubinemia.
+heme-containing proteins, and healthy infants commonly have TB levels of > 1
+mg/dL, which increases in the hours after birth.
 
-From uptodate: Hemolytic disease of the fetus and newborn (HDFN), also known as alloimmune HDFN or erythroblastosis fetalis, is caused by the destruction of red blood cells (RBCs) of the neonate or fetus by maternal immunoglobulin G (IgG) antibodies. These antibodies are produced when fetal erythrocytes, which express an RBC antigen not expressed in the mother, gain access to the maternal circulation.
+At lower TB levels, an infant may be diagnosed with benign hyperbilirubinemia,
+typified by a yellow pigmentation in the newborn caused by the bilirubin.
+However as TB level increases towards extreme hyperbilirubinemia (EHB; typically
+classified as TB > 30 mg/dL), the infant becomes increasingly at risk of
+bilirubin crossing  the blood-brain barrier and binding to brain tissue, 
+resulting in brain damage: bilirubin-induced neurologic dysfunction (BIND).
 
-Case definition in GBD 2017
-+++++++++++++++++++++++++++
+The most common etiologies of hyperbilirubinemia include incompatibilty between
+the mother and infant's blood types, lack of breastfeeding, recieving breastmilk 
+if the mother's antigens are incompatible with the infant (called Breastmilk
+jaundice; this would develop a few days after birth), and poor liver function in
+the infant.
 
+**The etiologies modeled by GBD** include EHB from `Rhesus (Rh) disease`_, preterm
+birth, `glucose-6-phosphate dehydrogenase deficiency`_ (G6PD), and other causes.
 
-
-`Haemolytic disease of the newborn`_ and other `neonatal jaundice`_ refers to
-several aetiologies by which an infant develops extreme hyperbilirubinemia_
-(EHB) and can then go on to develop kernicterus_. The aetiologies that we model
-for GBD are EHB from `Rhesus (Rh) disease`_, preterm birth,
-`glucose-6-phosphate dehydrogenase deficiency`_ (G6PD), and other causes.
-
-.. _Haemolytic disease of the newborn: https://www.urmc.rochester.edu/encyclopedia/content.aspx?ContentTypeID=90&ContentID=P02368
-.. _neonatal jaundice: https://en.wikipedia.org/wiki/Neonatal_jaundice
-.. _hyperbilirubinemia: https://www.chop.edu/conditions-diseases/hyperbilirubinemia-and-jaundice
-.. _kernicterus: https://en.wikipedia.org/wiki/Kernicterus
+.. _Hemolytic disease: https://www.uptodate.com/contents/postnatal-diagnosis-and-management-of-hemolytic-disease-of-the-fetus-and-newborn?search=hemolytic%20disease%20of%20the%20newborn&source=search_result&selectedTitle=1~150&usage_type=default&display_rank=1
+.. _neonatal jaundice: https://www.uptodate.com/contents/unconjugated-hyperbilirubinemia-in-the-newborn-pathogenesis-and-etiology?search=neonatal%20jaundice&source=search_result&selectedTitle=1~98&usage_type=default&display_rank=1
 .. _Rhesus (Rh) disease: https://en.wikipedia.org/wiki/Rh_disease
 .. _glucose-6-phosphate dehydrogenase deficiency: https://en.wikipedia.org/wiki/Glucose-6-phosphate_dehydrogenase_deficiency
-
+ 
 .. todo::
    Describe cause model
    
