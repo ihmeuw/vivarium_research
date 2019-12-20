@@ -178,6 +178,7 @@ calculated from average case duration assumption of 10 days [GBD-2017-YLD-Capsto
    * For our assumption of a constant remission rate (below), we should think about what the actual hazard function for 
      remission should look like (we should be able to get some idea about this from the disease description), and 
      estimate how replacing it with a constant rate will affect our results.
+   * Also include about GBD's assumption of 50% of measles cases as moderate and other 50% as severe.
 
 
 Data Description
