@@ -26,7 +26,7 @@ Modeling Measles in GBD 2017
 It is worth noting that the ICD 10 and ICD 9 codes used in non-fatal and fatal GBD models are different. 
 The ICD 10 codes used in non fatal model are P36-P36.9, P38-P39.9. K29.0-K29.00, K29.1-K29.20, P77-P78.1 
 codes are also used in hospital/claims analyses of non fatal model The ICD 9 codes used are 771, 771.4-771.89. 
-For hosipal/claims analyses, 535.0-535.00, 535.3-535.30, 777.5-777.7 are also used in addition to the above mentioned ICD 9 codes.
+For hospital/claims analyses, 535.0-535.00, 535.3-535.30, 777.5-777.7 are also used in addition to the above mentioned ICD 9 codes.
 While the fatal model uses only P36-P36.9, P38-P39.9 ICD 10 codes and 771.4-771.9 ICD 9 codes 
 [GBD-2017-YLD-Capstone-Appendix-1-Neonatal-sepsis-and-other-infections]_, [GBD-2017-CoD-Appendix-1-Neonatal-sepsis-and-other-infections]_.
 
@@ -46,8 +46,8 @@ Cause Hierarchy
 Cause Model Diagram
 -------------------
 
-.. todo::
-   Add cause model diagram.
+.. image:: neonatal_sepsis_cause_model.svg
+   :alt: SI cause model diagram for neonatal sepsis and other infections
 
 
 Model Assumptions and Limitations
