@@ -37,20 +37,6 @@ Cause Model Diagram
 
 .. image:: lri_disease_model.svg
 
-
-Data Description
-----------------
-.. list-table:: **Definition**
-   :widths: 5 30
-   :header-rows: 1
-
-   * - State
-     - Definition
-   * - I
-     - Currently infected and having the condition
-   * - S
-     - Susceptible but does not currently have LRI
-
 Model Assumptions and Limitations
 ---------------------------------
 There is substantial additional effort in GBD to divide LRI
@@ -59,6 +45,116 @@ aetiologies in this simple model.
 
 There are three sequelae associated with LRI. We do not consider Guillain-Barré syndrome
 in this model because the prevalence of it is too low to affect the overall disability weight.
+
+Data Description
+----------------
+.. list-table:: Definition
+   :widths: 5 20 30
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - Susceptible
+     - Susceptible but does not currently have LRI
+   * - I
+     - Infected
+     - Currently infected and having the condition
+
+.. list-table:: States Data
+   :widths: 20 25 30 30
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - 1-prevalence_c322
+     -
+   * - S
+     - excess mortality rate
+     - 0
+     -
+   * - S
+     - disability weights
+     - 0
+     -
+   * - I
+     - prevalence
+     - prevalence_c322
+     -
+   * - I
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_c322}}`
+     -
+   * - I
+     - disability weights
+     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669
+     - GBD assumes 15% of LRI cases as severe and 85% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
+   * - ALL
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population}}`
+     -
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+
+   * - Transition
+     - Source
+     - Sink
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_c322})}`
+     - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
+   * - r
+     - I
+     - S
+     - remission_rate_c322
+     -
+.. list-table:: Data Sources
+   :widths: 20 25 25 25
+   :header-rows: 1
+
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - prevalence_c322
+     - como
+     - Prevalence of LRI
+     -
+   * - deaths_c322
+     - codcorrect
+     - Deaths from LRI
+     -
+   * - population
+     - demography
+     - Mid-year population for given age/sex/year/location
+     -
+   * - incidence_rate_c322
+     - como
+     - Incidence rate of LRI within the entire population
+     -
+   * - remission_rate_m1258
+     - dismod-mr
+     - Remission rate of LRI within the infected population
+     -
+   * - disability_weight_s{sid}
+     - YLD Appendix
+     - Disability weights associated with each sequela
+     -
+   * - prevalence_s{sid}
+     - como
+     - Prevalence of each sequela
+     -
+
 
 Validation Criteria
 -------------------

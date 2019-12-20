@@ -34,6 +34,18 @@ GBD Hierarchy
 
 .. image:: jaundice_cause_hierarchy.svg
 
+Cause Model Diagram
+-------------------
+
+There are two possible states for this cause, **with-condition** for people born *with* hemolytic disease or other neonatal jaundice, and
+**free-of-condition** for people born *without* hemolytic disease or other neonatal jaundice:
+
+.. image:: neonatal_jaundice_cause_model_diagram.svg
+
+There is no transition between the states; each person is born into one state or
+the other and permanently stays in that state. **Thus, incidence and remission
+rates are zero.**
+
 Data Descriptions
 -----------------
 
