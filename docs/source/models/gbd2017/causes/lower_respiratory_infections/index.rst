@@ -17,12 +17,29 @@ syncytial virus (*RCV*). LRI can be caused by multiple pathogens and the pathoge
 Pneumococcal pneumonia is the largest cause of LRI
 mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
 
+Transmission of LRI may occur via several pathways, including direct physical contact,
+fomites, direct droplet spread, and suspended small particles. Intermingling of
+large numbers of people can facilitate transmission of respiratory pathogens. [CDC]_
+
+Malnutrition was identified as a leading risk factor for lower respiratory infection
+mortality among children younger than 5 years and, together with air pollution (both household and ambient)
+and increased antibiotic use, was identified as a focus for targeted intervention measures. [Lancet]_
+
+.. todo::
+
+   Describe more about deaths and complications due to LRI.
+   Talk about current vaccination against influenza and pneumonia.
+   https://apps.who.int/iris/bitstream/handle/10665/241904/WER8714_129-144.PDFp
+
 Modeling LRI in GBD 2017
 ------------------------
 
 The GBD 2017 defined the time to recovery for LRI as an average of 10 days(*5-15 days*),
 which corresponds with a remission 36.5.
 
+.. todo::
+
+   Describe more about modeling LRI in GBD 2017
 
 GBD hierarchy
 -------------
@@ -39,12 +56,20 @@ Cause Model Diagram
 
 Model Assumptions and Limitations
 ---------------------------------
+This model is designed to be used for estimating DALYs due to LRI that are averted from a
+country-level intervention(e.g. food fortification or supplementation given to a percentage of the population)
+that can reduce IRI incidence as a downstream effect.
+
 There is substantial additional effort in GBD to divide LRI
-burden into the aetiologies of LRI, but we have not included
+burden into the aetiologies of LRI, but for the use of this model, we do not included
 aetiologies in this simple model.
 
 There are three sequelae associated with LRI. We do not consider Guillain-Barré syndrome
 in this model because the prevalence of it is too low to affect the overall disability weight.
+
+.. todo::
+
+   Describe more assumptions and limitations of the model.
 
 Data Description
 ----------------
@@ -154,7 +179,37 @@ Data Description
      - como
      - Prevalence of each sequela
      -
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
 
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early neonatal
+     - GBD age group id is 2
+   * - YLL age group end
+     - Age 95+
+     - GBD age group id is 235
+   * - YLD age group start
+     - Early neonatal
+     - GBD age group id is 2
+   * - YLD age group end
+     - Age 95+
+     - GBD age group id is 235
 
 Validation Criteria
 -------------------
@@ -169,6 +224,13 @@ References
 .. [Wikipedia] Lower respiratory tact infection. From Wikipedia, the Free Encyclopedia.
    Retrieved 22 Nov 2019.
    https://en.wikipedia.org/wiki/Lower_respiratory_tract_infection
+
+.. [CDC] Respiratory Infections (*The Yellow Book*). Centers for Disease Control and Prevention, 2019. Retrieved 20 Dec 2019.
+   https://wwwnc.cdc.gov/travel/yellowbook/2020/posttravel-evaluation/respiratory-infections
+
+.. [Lancet] The Global Burden of Lower Respiratory Infections: Making Progress, but We Need to Do Better (*Volume 18*).
+   The Lancet Infectious Diseases, 2018. Retrieved 20 Dec 2019.
+   https://www.sciencedirect.com/science/article/pii/S1473309918304079?via%3Dihub
 
 .. [GBD-2017-YLD-Capstone-Appendix-1]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
