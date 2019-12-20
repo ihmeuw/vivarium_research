@@ -29,12 +29,12 @@ registration and verabal autopsy data.
 The nonfatal model is run in DisMod. The primary inputs are prevalence epi data,
 for which self-reported prevalence is the reference definition, and the CSMR
 estimates from CodCorrect. Separately, the ratio of mild/moderate/severe
-diarrhea is estimated, based on data from a systematic review. These estimates
-do not vary by age/sex/location/year, and are applied to the prevalence and
-incidence estimates produced by DisMod to produce the three sequela of diarrheal
-diseases: mild diarrheal diseases, moderate diarrheal diseases, and severe
-diarrheal diseases. In our model, every individual will have the average
-severity for their age/sex/location/year. 
+diarrhea is estimated, based on data from a systematic review. These severity
+ratio estimates do not vary by age/sex/location/year, and are applied to the
+prevalence and incidence estimates produced by DisMod to produce the three
+sequela of diarrheal diseases: mild diarrheal diseases, moderate diarrheal
+diseases, and severe diarrheal diseases. In our model, every individual will
+have the average severity for their age/sex/location/year. 
 
 The GBD 2017 adjusted for seasonal variation in diarrheal disease, but we have
 not attempted to include this variation in Vivarium yet. (p. 89)
