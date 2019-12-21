@@ -11,7 +11,7 @@ Case definition in GBD 2017
 +++++++++++++++++++++++++++
 
 Preterm birth is defined as live birth before 37 completed weeks of gestation.
-In our analysis, we further break down this cause into three sub-categories of
+GBD 2017 further breaks down this cause into three sub-categories of
 preterm birth, based on gestational age: extremely preterm (<28 weeks), very
 preterm (28 to <32 weeks), and moderate to late preterm (32 to <37 weeks). These
 categories are based on the World Health Organization (WHO) definition of

@@ -42,3 +42,12 @@ described below, and relative to the joint TMREL.
    Discribe the Low Birthweight and Short Gestation risk.  Note that the cause
    :ref:`Neonatal preterm birth complications  <2017_cause_neonatal_preterm>` is
    100% attributable to this risk.
+
+   Create an image like the one posted in
+   https://github.com/ihmeuw/vivarium_research/pull/68, showing the actual
+   categories used. Note that the above description of 2-week age bins is not
+   totally accurate, because it looks like:
+
+   - There are 1-week age bins (36-37 weeks, and 37-38 weeks).
+   - There are two categories where the age range is 0-24 weeks (all these
+     "extremely extreme" preterm births are grouped together).
