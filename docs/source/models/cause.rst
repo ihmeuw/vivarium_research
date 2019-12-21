@@ -568,18 +568,43 @@ section] during which cases are able to go into remission.
 
   For example, consider diarrhea cases in the Philippines in 2017. Say there
   were 1 million prevalent cases of diarrhea over the course of 2017, and each
-  case remitted after an average of 5 days. The way we define this remission
-  rate depends on the denominator we choose; some examples include:
+  case remitted after an average of 5 days. Note that here we are using *period
+  prevalence*, rather than the *point prevalence* that we typically use refer
+  to, and that GBD uses. The way we define this remission rate depends on the 
+  denominator we choose; some examples include:
 
-.. math::
-	
-	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1
-   person-year}}=73\text{ cases/person-year}
+    .. math::
+    	
+    	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1
+       person-year}}=73\text{ cases/person-year}
+
+  We also note that in this setting, if we consider a one-year timestep (as
+  GBD does), as diarrheal diseases have such a high remission rate relative to
+  one year, *period prevalence* is effectively the same as incidence. We can
+  see how this would not be the case if the remission rate were low enough,
+  relative to the timestep, such that an incident case in one year is still
+  a prevalent case the following year, and thus prevalent cases for any given
+  year contain more than just the incident cases from the same year.
+
+  To illustrate this idea, say that there were 142,794 prevalent cases of
+  diabetes in Moldova amongst males in 2017. Here we could refer either to the
+  point prevalence on either January 1 2017, or the mid-year point prevalence 
+  (as GBD estimates), or we could consider the period prevalence, as we expect 
+  these to be approximately the same. Say that of those 142,794 cases, 509
+  remitted in 2017. This gives us the following rate:
+
+  .. math::
+
+    \frac{\text{509 cases}}{\text{142,794 person-years}} =
+    \frac{\text{0.0036 cases}}{\text{1 person-year}} = \frac{\text{1 case}}{
+    \text{280 person-years}}
+
+  It is clear why we wouldn't ever talk about someone remitting from diabetes
+  after 280 years.
  
-Note that, unlike incidence, there is not a strong precedent for referring to 
-remission rates within the entire population; rather, remission rates typically 
-refer to rates within an infected, or with-condition population. {Is this true? 
-This is based on limited google searching!}
+Note that when we refer to remission rates, we are typically considering
+a rate within the infected or with-condition population. This is true both in
+general, and in the context of GBD--unlike with incidence.
 
 **Remission within GBD**
 
