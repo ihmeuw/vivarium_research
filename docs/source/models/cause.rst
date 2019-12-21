@@ -589,9 +589,8 @@ section] during which cases are able to go into remission.
   To illustrate this idea, say that there were 142,794 prevalent cases of
   diabetes in Moldova amongst males in 2017. Here we could refer either to the
   point prevalence--say on January 1 2017--or we could consider the period
-  prevalence, as we expect these to be approximately the same.
-  Now, say that of those 142,794 cases, 509 remitted in 2017. This gives us the 
-  following rate:
+  prevalence, as we expect these to be approximately the same. Now, say that of 
+  those 142,794 cases, 509 remitted in 2017. This gives us the following rate:
 
   .. math::
 
@@ -599,9 +598,31 @@ section] during which cases are able to go into remission.
     \frac{\text{0.0036 cases}}{\text{1 person-year}} = \frac{\text{1 case}}{
     \text{280 person-years}}
 
-  It is clear why we wouldn't ever talk about someone remitting from diabetes
-  after 280 years.
- 
+  It is important to note that this is a remission rate for diabetes at all
+  ages. As diabetes follows an age pattern, this makes it seem as if diabetes
+  cases remit, on average, after 280 years--which clearly does a poor job of
+  capturing the behavior of diabetes. This sort of description was only
+  appropriate for diarrhea, as there is a uniform remission rate across all
+  ages. With diabetes, as prevalence increases with age, so does the remission 
+  rate. 
+
+  Lastly, we'll consider Tuberculosis, because the duration of infection is
+  the same order of magnitude as the one-year timesteps within the GBD
+  framework. Specifically, consider Tuberculosis in South Africa. TB has a
+  duration on the order of one year, but incidence and prevalence spike around
+  age 30. 
+
+  .. todo::
+
+    Finish example. TB incidence will always be lower than prevalence.
+    remission fluctuates but not enough to change the relationship between
+    prevalence and incidence, i believe. So period prevalence is always closer to
+    point prevalence, for any one age group, than it is to incidence. I'm no
+    longer sure that it makes sense to include this third example, because it
+    would work to emphasize the difference between point and period prevalence,
+    and their relationship to incidence, but wouldn't be further illuminating
+    wrt remission.
+
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
 general, and in the context of GBD--unlike with incidence.
