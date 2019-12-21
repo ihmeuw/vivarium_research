@@ -569,10 +569,9 @@ section] during which cases are able to go into remission.
   For example, consider diarrhea cases in the Philippines in 2017. Say there
   were 1 million prevalent cases of diarrhea over the course of 2017, and each
   case remitted after an average of 5 days. Note that here we are using *period
-  prevalence*; however, we typically mean *point prevalence* when we say
-  prevalence, and point prevalence is also what GBD uses. The way we then define
-  this remission rate depends on the denominator we choose; some examples
-  include:
+  prevalence*; however, we GBD (and thus we) typically mean *point prevalence*
+  when we refer to prevalence. The way we then define this remission rate
+  depends on the denominator we choose. Some examples include:
 
     .. math::
     	
