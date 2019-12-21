@@ -569,7 +569,7 @@ section] during which cases are able to go into remission.
   For example, consider diarrhea cases in the Philippines in 2017. Say there
   were 1 million prevalent cases of diarrhea over the course of 2017, and each
   case remitted after an average of 5 days. Note that here we are using *period
-  prevalence*; however, GBD (and thus we) typically mean *point prevalence*when 
+  prevalence*; however, GBD (and thus we) typically mean *point prevalence* when 
   we refer to prevalence. The way we then define this remission rate depends on 
   the denominator we choose. Some examples include:
 
@@ -578,20 +578,20 @@ section] during which cases are able to go into remission.
     	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1
        person-year}}=73\text{ cases/person-year}
 
-  We also note that in this setting, if we consider a one-year timestep (as
-  GBD does), as diarrheal diseases have such a high remission rate relative to
-  one year, *period prevalence* is effectively the same as incidence. We can
-  see how this would not be the case if the remission rate were low enough,
-  relative to the timestep, such that an incident case in one year is still
-  a prevalent case the following year, and thus prevalent cases for any given
-  year contain more than just the incident cases from the same year.
+  We also note that in the context of a one-year timestep, as diarrheal diseases
+  have such a high remission rate relative to one year, period prevalence is
+  effectively the same as incidence. We can see how this would not be the case
+  if the remission rate were low enough, relative to the timestep, such that an 
+  incident case in 2015 is still a prevalent case in 2016. In that scenario,
+  prevalent cases for any given year contain more than just the incident cases
+  from the same year.
 
   To illustrate this idea, say that there were 142,794 prevalent cases of
   diabetes in Moldova amongst males in 2017. Here we could refer either to the
-  point prevalence on either January 1 2017, or the mid-year point prevalence 
-  (as GBD estimates), or we could consider the period prevalence, as we expect 
-  these to be approximately the same. Say that of those 142,794 cases, 509
-  remitted in 2017. This gives us the following rate:
+  point prevalence--say on January 1 2017--or we could consider the period
+  prevalence, as we expect these to be approximately the same.
+  Now, say that of those 142,794 cases, 509 remitted in 2017. This gives us the 
+  following rate:
 
   .. math::
 
