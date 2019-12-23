@@ -51,11 +51,11 @@ Iron Deficiency Risk Factor
 +++++++++++++++++++++++++++
 
 The iron deficiency risk factor in GBD 2017 is modeled as a distribution of 
-hemoglobin concentrations.
+hemoglobin concentrations. The risk factor is a **continuous measure**.
 
 .. todo::
 
-	Describe the population and distribution
+	Describe the population and distribution type (normal vs. ensemble)
 
 Modeling Strategy for the Iron Deficiency Risk Factor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
