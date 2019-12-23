@@ -47,8 +47,8 @@ represents **all** forms of anemia that are attributable to several causes,
 including causes such as hemoglobinopathies and hemolytic anemias that are not 
 causally attributable to iron deficiency. 
 
-Iron Deficiency Risk Factor (REI ID = 95)
-+++++++++++++++++++++++++++++++++++++++++
+Iron Deficiency Risk Factor
++++++++++++++++++++++++++++
 
 The iron deficiency risk factor in GBD 2017 is modeled as a distribution of 
 hemoglobin concentrations.
@@ -69,8 +69,8 @@ Risk Factor Hierarchy
 
 .. image:: iron_risk_hierarchy.svg
 
-Dietary Iron Deficiency Cause (Cause ID = 95)
-+++++++++++++++++++++++++++++++++++++++++++++
+Dietary Iron Deficiency Cause
++++++++++++++++++++++++++++++
 
 The dietary iron deficiency cause in GBD 2017 that is 100% attributable to the 
 iron deficiency risk factor. The dietary iron deficiency cause in GBD is a 
