@@ -570,13 +570,13 @@ section] during which cases are able to go into remission.
   were 1 million prevalent cases of diarrhea over the course of 2017, and each
   case remitted after an average of 5 days. Note that here we are using *period
   prevalence*; however, GBD (and thus we) typically mean *point prevalence* when 
-  we refer to prevalence. The way we then define this remission rate depends on 
-  the denominator we choose. Some examples include:
+  we refer to prevalence. Then, the way we then define this remission rate 
+  depends on the denominator we choose. Some examples include:
 
     .. math::
     	
-    	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1
-       person-year}}=73\text{ cases/person-year}
+    	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{
+      \text{1 person-year}}=73\text{ cases/person-year}
 
   We also note that in the context of a one-year timestep, as diarrheal diseases
   have such a high remission rate relative to one year, period prevalence is
@@ -587,24 +587,29 @@ section] during which cases are able to go into remission.
   from the same year.
 
   To illustrate this idea, say that there were 142,794 prevalent cases of
-  diabetes in Moldova amongst males in 2017. Here we could refer either to the
-  point prevalence--say on January 1 2017--or we could consider the period
-  prevalence, as we expect these to be approximately the same. Now, say that of 
-  those 142,794 cases, 509 remitted in 2017. This gives us the following rate:
+  diabetes (both type I and type II) in Moldova amongst males in 2017. Here we 
+  could refer either to the point prevalence, say on January 1 2017, (note that 
+  GBD uses mid-year point prevalence when referring to prevalence) or we could 
+  consider the period prevalence, as we expect these to be approximately the 
+  same. Now, say that of those 142,794 cases, 509 remitted in 2017. This gives 
+  us the following rate:
 
   .. math::
 
     \frac{\text{509 cases}}{\text{142,794 person-years}} =
-    \frac{\text{0.0036 cases}}{\text{1 person-year}} = \frac{\text{1 case}}{
-    \text{280 person-years}}
+    \frac{\text{0.0036 cases}}{\text{1 person-year}}
 
   It is important to note that this is a remission rate for diabetes at all
   ages. As diabetes follows an age pattern, this makes it seem as if diabetes
-  cases remit, on average, after 280 years--which clearly does a poor job of
-  capturing the behavior of diabetes. This sort of description was only
-  appropriate for diarrhea, as there is a uniform remission rate across all
-  ages. With diabetes, as prevalence increases with age, so does the remission 
-  rate. 
+  cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` years--which 
+  clearly does a poor job of capturing the behavior of diabetes. This sort of description was only appropriate for diarrhea, as there is a uniform remission 
+  rate across all ages. With diabetes, remission is not guaranteed for type II,
+  and doesn't occur for type I.
+
+  For both of these rates, we think of :math:`r_1=0.2` as the probability that a 
+  given case of diarrhea will remitt in the next day, and :math:`r_2=0.0036` as 
+  the probability that a given case of diabetes will remitt in the next year. 
+  Notably, this is how these rates are implemented in our models.
 
   Lastly, we'll consider Tuberculosis, because the duration of infection is
   the same order of magnitude as the one-year timesteps within the GBD
