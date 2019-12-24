@@ -22,7 +22,7 @@ loss of health in the population; it can be anywhere on the causal chain as
 long as there is evidence to show that the risk factor is causally linked to an outcome disease or injury.
 
 What do we measure?
--------------------
++++++++++++++++++++
 - Proportion of disease and injury burden attributable to specific risk factors
    - e.g. burden of diarrheal due to unsafe water
    - e.g. burden of lung cancer due to smoking
@@ -31,7 +31,7 @@ What do we measure?
    - e.g. burden of smoking compared with unsafe water
 
 How do we measure?
-------------------
+++++++++++++++++++
 Input:
  - Risk factor exposure (current distribution and counterfactual distribution)
  - Risk factor-disease relationship (risk accumulation and risk reversal)
@@ -40,7 +40,7 @@ Output:
  - Attributabe burden by age, sex, year and location
 
 How do we select risk-outcome pairs?
-------------------------------------
+++++++++++++++++++++++++++++++++++++
 - The likely importance of a risk factor to disease burden and/or policy.
 - Availability of sufficient data and methods to estimate risk factor exposure.
 - Evidence from epidemiological studies supporting a causal relationship between 
