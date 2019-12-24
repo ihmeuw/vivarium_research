@@ -567,7 +567,7 @@ the cumulative person-time [link to person-time definition in incidence
 section] during which cases are able to go into remission.
 
   For example, consider diarrhea cases in the Philippines in 2017. Say there
-  were 1 million prevalent cases of diarrhea over the course of 2017, and each
+  were 53,362,490 prevalent cases of diarrhea over the course of 2017, and each
   case remitted after an average of 5 days. Note that here we are using *period
   prevalence*; however, GBD (and thus we) typically mean *point prevalence* when 
   we refer to prevalence. Then, the way we then define this remission rate 
@@ -606,27 +606,22 @@ section] during which cases are able to go into remission.
   rate across all ages. With diabetes, remission is not guaranteed for type II,
   and doesn't occur for type I.
 
-  For both of these rates, we think of :math:`r_1=0.2` as the probability that a 
-  given case of diarrhea will remitt in the next day, and :math:`r_2=0.0036` as 
-  the probability that a given case of diabetes will remitt in the next year. 
-  Notably, this is how these rates are implemented in our models.
+For both of the above rates, we think of :math:`r_1=0.2` as the probability that 
+a given case of diarrhea in the Philippies in 2017 will remitt in the next day, 
+and :math:`r_2=0.0036` as the probability that a given case of diabetes amongst 
+males in Moldova in 2017 will remitt in the next year. Notably, this is how 
+these rates are implemented in our models.
 
-  Lastly, we'll consider Tuberculosis, because the duration of infection is
-  the same order of magnitude as the one-year timesteps within the GBD
-  framework. Specifically, consider Tuberculosis in South Africa. TB has a
-  duration on the order of one year, but incidence and prevalence spike around
-  age 30. 
+  Lastly, we'll consider Tuberculosis in South Africa, because the duration of infection is the same order of magnitude as the one-year timesteps within the GBD   framework. We'll look at 30-34 year old females, and say that the duration of infection is 6 months on average. This gives us the following remission rate:
 
-  .. todo::
+      .. math::
+      
+      \frac{\text{1 case}}{\text{6 person-months}}=\frac{\text{2 cases}}{
+      \text{1 person-year}}
 
-    Finish example. TB incidence will always be lower than prevalence.
-    remission fluctuates but not enough to change the relationship between
-    prevalence and incidence, i believe. So period prevalence is always closer to
-    point prevalence, for any one age group, than it is to incidence. I'm no
-    longer sure that it makes sense to include this third example, because it
-    would work to emphasize the difference between point and period prevalence,
-    and their relationship to incidence, but wouldn't be further illuminating
-    wrt remission.
+Note that in this final example, as the duration of infection is of the same order as the timestep, *period prevalence* is not approximated by either incidence or point prevalence. To find period prevalence, we would add to the point prevalence on January 1, 2017, all the incident cases over the course of the year. We emphasize that this would not tell us the prevalence of TB among this cohort on January 1, 2018, because we also need to account for mortality in both the susceptible and infected groups over the course of the year.
+
+So, to which population does the remission rate apply? For the purposes of our model, the *remission rate* will be the probability that a given prevalent case who does *not* die during a given timestep remitts.
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
