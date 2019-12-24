@@ -11,15 +11,10 @@ Disease Description
 etiologies by which a newborn might develop extreme hyperbilirubinemia (EHB),
 which can in turn become kernicterus.
 
-`Hemolytic disease`_ is a product of the mother's immunoglobin G antibodies
-attacking the fetus or newborn's red blood cells. The main presentations of
-this condition are RhD hemolytic diseaes and ABO hemolytic disease; however
-there are over 30 other blood groups, various combinations of which can also
-result in hemolytic disease.
-
-Neonatal jaundice is a product of total serum or plasma bilirubin (TB)
-levels rising too high, and has a number of etiologies; hemolytic disease and glucose-6-phosphate dehydrogenase deficiency (G6PD) are two major ones. GBD also
-models 'preterm birth' and 'other causes' as etiologies of EHB.
+`Neonatal jaundice`_ is a product of total serum or plasma bilirubin (TB)
+levels rising too high, and has a number of etiologies; hemolytic disease and glucose-6-phosphate dehydrogenase deficiency (G6PD) are two major ones. In
+addition to these two, GBD models 'preterm birth' and 'other causes' as
+etiologies of EHB.
 
 Bilirubin is produced during the breakdown of hemoglobin and other
 heme-containing proteins. Healthy infants commonly have TB levels of > 1 mg/dL, 
@@ -31,6 +26,22 @@ However as TB level increases towards extreme hyperbilirubinemia (EHB; typically
 classified as TB > 30 mg/dL), the infant becomes increasingly at risk of
 bilirubin crossing  the blood-brain barrier and binding to brain tissue, 
 resulting in brain damage: bilirubin-induced neurologic dysfunction (BIND).
+
+`Hemolytic disease`_ is a product of the mother's immunoglobin G antibodies
+attacking the fetus or newborn's red blood cells. The main presentations of
+this condition are RhD hemolytic diseaes and ABO hemolytic disease; however
+there are over 30 other blood groups, various combinations of which can also
+result in hemolytic disease.
+
+.. todo::
+	G6PD
+
+.. todo::
+	preterm birth
+
+.. todo::
+	other causes
+
 
 The most common etiologies of hyperbilirubinemia include incompatibilty between
 the mother and infant's blood types, lack of breastfeeding, recieving breastmilk 
