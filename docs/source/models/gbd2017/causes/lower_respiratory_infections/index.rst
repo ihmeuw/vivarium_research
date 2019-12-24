@@ -12,7 +12,7 @@ and bronchiolitis, is a major global killer of both children and adults. Symptom
 include shortness of breath, weakness, fever, coughing and fatigue. It is important to check for a fever. Symptoms can last about 7 days and the infection is contagious
 to others shortly before and while experiencing symptoms. It is mainly
 caused by four microorganisms - Streptococcus pneumoniae (*pneumococcal
-pneumonia*), Haemophilus influenzae type B (*Hib*),influenza, and respiratory
+pneumonia*), Haemophilus influenzae type B (*Hib*), influenza, and respiratory
 syncytial virus (*RCV*). LRI can be caused by multiple pathogens and the pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
 mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
@@ -21,7 +21,7 @@ Transmission of LRI may occur via several pathways, including direct physical co
 fomites, direct droplet spread, and suspended small particles. Intermingling of
 large numbers of people can facilitate transmission of respiratory pathogens. [CDC]_
 
-Malnutrition was identified as a leading risk factor for lower respiratory infection
+In GBD 2016, malnutrition was identified as a leading risk factor for lower respiratory infection
 mortality among children younger than 5 years and, together with air pollution (both household and ambient)
 and increased antibiotic use, was identified as a focus for targeted intervention measures. [Lancet]_
 
@@ -33,8 +33,7 @@ and increased antibiotic use, was identified as a focus for targeted interventio
 
 Modeling LRI in GBD 2017
 ------------------------
-
-The GBD 2017 defined the time to recovery for LRI as an average of 10 days(*5-15 days*),
+The GBD 2017 defined the time to recovery for LRI as an average of 10 days (*5-15 days*),
 which corresponds with a remission 36.5.
 
 .. todo::
@@ -58,14 +57,15 @@ Model Assumptions and Limitations
 ---------------------------------
 This model is designed to be used for estimating DALYs due to LRI that are averted from a
 country-level intervention(e.g. food fortification or supplementation given to a percentage of the population)
-that can reduce IRI incidence as a downstream effect.
+that can reduce LRI incidence as a downstream effect.
 
 There is substantial additional effort in GBD to divide LRI
-burden into the aetiologies of LRI, but for the use of this model, we do not included
+burden into the aetiologies of LRI, but we do not include
 aetiologies in this simple model.
 
-There are three sequelae associated with LRI. We do not consider Guillain-Barré syndrome
-in this model because the prevalence of it is too low to affect the overall disability weight.
+There are three sequelae associated with LRI. We are not tracking the long-term
+effects of Guillain-Barré syndrome (which can include paralysis, for example). However, since the prevalence of GBS is so low,
+there would probably not be much benefit in attempting to capture its long-term YLDs in addition to its short term YLDs.
 
 .. todo::
 
@@ -117,7 +117,7 @@ Data Description
      -
    * - I
      - disability weights
-     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669
+     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669 + disability_weight_s671 :math:`\times` prevalence_s671
      - GBD assumes 15% of LRI cases as severe and 85% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
    * - ALL
      - cause specific mortality rate
