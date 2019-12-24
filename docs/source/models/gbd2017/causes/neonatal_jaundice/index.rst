@@ -22,10 +22,10 @@ which increases in the hours after birth.
 
 At lower TB levels, an infant may be diagnosed with benign hyperbilirubinemia,
 typified by a yellow pigmentation in the newborn caused by the bilirubin.
-However as TB level increases towards extreme hyperbilirubinemia (EHB; typically
-classified as TB > 30 mg/dL), the infant becomes increasingly at risk of
-bilirubin crossing  the blood-brain barrier and binding to brain tissue, 
-resulting in brain damage: bilirubin-induced neurologic dysfunction (BIND).
+However as TB level increases towards EHB (typically classified as TB > 30
+mg/dL), the infant becomes increasingly at risk of bilirubin crossing  the 
+blood-brain barrier and binding to brain tissue, resulting in brain damage: 
+bilirubin-induced neurologic dysfunction (BIND).
 
 `Hemolytic disease`_ is a product of the mother's immunoglobin G antibodies
 attacking the fetus or newborn's red blood cells. The main presentations of
@@ -33,30 +33,35 @@ this condition are RhD hemolytic diseaes and ABO hemolytic disease; however
 there are over 30 other blood groups, various combinations of which can also
 result in hemolytic disease.
 
-.. todo::
-	G6PD
+`Glucose-6-phosphate dehygrogenase`_ (G6PD) deficiency is an enzymatic disorder 
+of red blood cells. G6PD is a catalyst in the conversion of NADP to NADPH. NADPH
+functions to protect red blood cells from oxidant accumulation, which in turn 
+causes cell death.
+
+`Preterm birth`_ infants experience a higher rate of EHB than infants born after
+37 weeks of gestation. This is caused by a high level of red blood cell
+turnover in the preterm infant, and thus higher bilirubin levels; a decreased
+ability to process bilirubin, due to an immature liver; and increased
+circulation of bile (which contains bilirubin) from the liver to the small 
+intestine (enterohepatic circulation) in preterm infants. Furthermore, while the mechanic is not entirely understood, preterm infants `have been observed`_ to have 
+a lower TB threshhold for developing BIND than their full-term counterparts.
 
 .. todo::
-	preterm birth
+	Confirm the following:
+	*Other causes*, in the context of this GBD model, refers to any cause of EHB
+	that is not attributable to hemolytic disease, G6PD deficiency, or preterm
+	birth.
 
-.. todo::
-	other causes
-
-
-The most common etiologies of hyperbilirubinemia include incompatibilty between
-the mother and infant's blood types, lack of breastfeeding, recieving breastmilk 
-if the mother's antigens are incompatible with the infant (called Breastmilk
-jaundice; this would develop a few days after birth), and poor liver function in
-the infant.
-
-**The etiologies modeled by GBD** include EHB from `Rhesus (Rh) disease`_, preterm
-birth, `glucose-6-phosphate dehydrogenase deficiency`_ (G6PD), and other causes.
+.. _neonatal jaundice: https://www.uptodate.com/contents/unconjugated-hyperbilirubinemia-in-the-newborn-pathogenesis-and-etiology?search=neonatal%20jaundice&source=search_result&selectedTitle=1~98&usage_type=default&display_rank=1
 
 .. _Hemolytic disease: https://www.uptodate.com/contents/postnatal-diagnosis-and-management-of-hemolytic-disease-of-the-fetus-and-newborn?search=hemolytic%20disease%20of%20the%20newborn&source=search_result&selectedTitle=1~150&usage_type=default&display_rank=1
-.. _neonatal jaundice: https://www.uptodate.com/contents/unconjugated-hyperbilirubinemia-in-the-newborn-pathogenesis-and-etiology?search=neonatal%20jaundice&source=search_result&selectedTitle=1~98&usage_type=default&display_rank=1
-.. _Rhesus (Rh) disease: https://en.wikipedia.org/wiki/Rh_disease
-.. _glucose-6-phosphate dehydrogenase deficiency: https://en.wikipedia.org/wiki/Glucose-6-phosphate_dehydrogenase_deficiency
- 
+
+.. _Glucose-6-phosphate dehygrogenase: https://www.uptodate.com/contents/genetics-and-pathophysiology-of-glucose-6-phosphate-dehydrogenase-g6pd-deficiency?search=G6PD&source=search_result&selectedTitle=2~150&usage_type=default&display_rank=2
+
+.. _Preterm birth: https://www.uptodate.com/contents/unconjugated-hyperbilirubinemia-in-the-preterm-infant-less-than-35-weeks-gestation?search=preterm%20bilirubinemia&source=search_result&selectedTitle=1~150&usage_type=default&display_rank=1
+
+.. _have been observed: https://www.uptodate.com/contents/unconjugated-hyperbilirubinemia-in-the-preterm-infant-less-than-35-weeks-gestation?search=preterm%20bilirubinemia&source=search_result&selectedTitle=1~150&usage_type=default&display_rank=1#H3616699369
+
 .. todo::
    Describe cause model
    
