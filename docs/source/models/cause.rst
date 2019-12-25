@@ -573,10 +573,9 @@ section] during which cases are able to go into remission.
   we refer to prevalence. Then, the way we then define this remission rate 
   depends on the denominator we choose. Some examples include:
 
-    .. math::
-    	
-    	\frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{
-      \text{1 person-year}}=73\text{ cases/person-year}
+  .. math::
+
+    \frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1 person-year}}=73\text{ cases/person-year}
 
   We also note that in the context of a one-year timestep, as diarrheal diseases
   have such a high remission rate relative to one year, period prevalence is
@@ -604,7 +603,8 @@ section] during which cases are able to go into remission.
   cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` years--which 
   clearly does a poor job of capturing the behavior of diabetes. This sort of description was only appropriate for diarrhea, as there is a uniform remission 
   rate across all ages. With diabetes, remission is not guaranteed for type II,
-  and doesn't occur for type I.
+  and doesn't occur for type I, so remission rate does *not* tell us the average 
+  duration that an individual will experience diabetes.
 
 For both of the above rates, we think of :math:`r_1=0.2` as the probability that 
 a given case of diarrhea in the Philippies in 2017 will remitt in the next day, 
@@ -612,20 +612,33 @@ and :math:`r_2=0.0036` as the probability that a given case of diabetes amongst
 males in Moldova in 2017 will remitt in the next year. Notably, this is how 
 these rates are implemented in our models.
 
-  Lastly, we'll consider Tuberculosis in South Africa, because the duration of infection is the same order of magnitude as the one-year timesteps within the GBD   framework. We'll look at 30-34 year old females, and say that the duration of infection is 6 months on average. This gives us the following remission rate:
+  Lastly, we'll consider Tuberculosis in South Africa. Say that among 30-34 year 
+  old females, the duration of infection is 6 months on average. This gives us 
+  the following remission rate:
 
-      .. math::
-      
-      \frac{\text{1 case}}{\text{6 person-months}}=\frac{\text{2 cases}}{
-      \text{1 person-year}}
+  .. math::
+    \frac{\text{1 case}}{\text{6 person-months}}=\frac{\text{2 cases}}{\text{1 
+    person-year}}
 
-Note that in this final example, as the duration of infection is of the same order as the timestep, *period prevalence* is not approximated by either incidence or point prevalence. To find period prevalence, we would add to the point prevalence on January 1, 2017, all the incident cases over the course of the year. We emphasize that this would not tell us the prevalence of TB among this cohort on January 1, 2018, because we also need to account for mortality in both the susceptible and infected groups over the course of the year.
+  Note that in this final example, as the duration of infection is on the same 
+  order of magnitude as the timestep, *period prevalence* is not approximated by 
+  either incidence or point prevalence. To find period prevalence, we would start 
+  with the point prevalence on January 1, 2017 (approximately 30 million cases), 
+  and add the incident cases over the course of the year (approximately 150 
+  million cases). We emphasize that this would also not tell us the prevalence 
+  of TB among this cohort on January 1, 2018, because we also need to account 
+  for mortality in both the susceptible and infected groups over the course of 
+  the year, in addition to remission. This is thus a less helpful measure in 
+  this example.
 
-So, to which population does the remission rate apply? For the purposes of our model, the *remission rate* will be the probability that a given prevalent case who does *not* die during a given timestep remitts.
+So, to which population does the remission rate apply? For the purposes of our 
+model, the *remission rate* will be the probability that a given prevalent case 
+who does *not* die during a given timestep remitts.
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
-general, and in the context of GBD--unlike with incidence.
+general, and in the context of GBD--unlike with incidence, which GBD calculates 
+within the entire population, as discussed above.
 
 **Remission within GBD**
 
@@ -646,8 +659,9 @@ from DisMod models.
 
 **Implementing remission rates in cause models**
 
-As with incidence, as remission is a rate within the with-condition population, 
-it can be used to compute the probability of a simulant transitioning from an 
+For a given simulation with timesteps of length x time-units, we convert 
+remission rates to the form of cases remitted per x time-units. This rate can 
+then be used to compute the probability of a simulant transitioning from an 
 infected or with-condition state to a susceptible or free-of-condition state in 
 a given timestep.
 
