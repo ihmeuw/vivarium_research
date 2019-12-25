@@ -566,32 +566,19 @@ given by the count of recovered (or *remitted*) cases, and the denominator is
 the cumulative person-time [link to person-time definition in incidence 
 section] during which cases are able to go into remission.
 
-  For example, consider diarrhea cases in the Philippines in 2017. Say there
-  were 53,362,490 prevalent cases of diarrhea over the course of 2017, and each
-  case remitted after an average of 5 days. Note that here we are using *period
-  prevalence*; however, GBD (and thus we) typically mean *point prevalence* when 
-  we refer to prevalence. Then, the way we then define this remission rate 
-  depends on the denominator we choose. Some examples include:
+  For example, consider diarrhea cases in the Philippines in 2017. Say that that 
+  year, every such case remitted after an average of 5 days:
 
   .. math::
 
-    \frac{\text{1/5 case}}{\text{1 person-days}}=\frac{365/5\text{ cases}}{\text{1 person-year}}=73\text{ cases/person-year}
+    \frac{\text{1 case}}{\text{5 person-days}}=\frac{365/5\text{ cases}}{\text{1 person-year}}=73\text{ cases/person-year}
 
-  We also note that in the context of a one-year timestep, as diarrheal diseases
-  have such a high remission rate relative to one year, period prevalence is
-  effectively the same as incidence. We can see how this would not be the case
-  if the remission rate were low enough, relative to the timestep, such that an 
-  incident case in 2015 is still a prevalent case in 2016. In that scenario,
-  prevalent cases for any given year contain more than just the incident cases
-  from the same year.
+  This calculation is straightfoward, as diarrheal diseases have a highly
+  consistent disease duration.
 
-  To illustrate this idea, say that there were 142,794 prevalent cases of
-  diabetes (both type I and type II) in Moldova amongst males in 2017. Here we 
-  could refer either to the point prevalence, say on January 1 2017, (note that 
-  GBD uses mid-year point prevalence when referring to prevalence) or we could 
-  consider the period prevalence, as we expect these to be approximately the 
-  same. Now, say that of those 142,794 cases, 509 remitted in 2017. This gives 
-  us the following rate:
+  In contrast, consider diabetes. Say that there were 142,794 prevalent cases of
+  diabetes (both type I and type II) in Moldova amongst males in 2017, and of 
+  those 142,794 cases, 509 remitted in 2017. This gives us the following rate:
 
   .. math::
 
@@ -599,12 +586,13 @@ section] during which cases are able to go into remission.
     \frac{\text{0.0036 cases}}{\text{1 person-year}}
 
   It is important to note that this is a remission rate for diabetes at all
-  ages. As diabetes follows an age pattern, this makes it seem as if diabetes
-  cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` years--which 
-  clearly does a poor job of capturing the behavior of diabetes. This sort of description was only appropriate for diarrhea, as there is a uniform remission 
-  rate across all ages. With diabetes, remission is not guaranteed for type II,
-  and doesn't occur for type I, so remission rate does *not* tell us the average 
-  duration that an individual will experience diabetes.
+  ages. In the context of the diarrheal diseases example, this makes it seem as 
+  if diabetes cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` 
+  years--which clearly does a poor job of capturing the behavior of diabetes. 
+  This sort of description was only appropriate for diarrhea, as there is a 
+  uniform remission rate across all cases. With diabetes, remission is not 
+  guaranteed for type II, and doesn't occur for type I, so remission rate does 
+  *not* tell us the average duration that an individual will experience diabetes.
 
 For both of the above rates, we think of :math:`r_1=0.2` as the probability that 
 a given case of diarrhea in the Philippies in 2017 will remitt in the next day, 
@@ -612,28 +600,9 @@ and :math:`r_2=0.0036` as the probability that a given case of diabetes amongst
 males in Moldova in 2017 will remitt in the next year. Notably, this is how 
 these rates are implemented in our models.
 
-  Lastly, we'll consider Tuberculosis in South Africa. Say that among 30-34 year 
-  old females, the duration of infection is 6 months on average. This gives us 
-  the following remission rate:
-
-  .. math::
-    \frac{\text{1 case}}{\text{6 person-months}}=\frac{\text{2 cases}}{\text{1 
-    person-year}}
-
-  Note that in this final example, as the duration of infection is on the same 
-  order of magnitude as the timestep, *period prevalence* is not approximated by 
-  either incidence or point prevalence. To find period prevalence, we would start 
-  with the point prevalence on January 1, 2017 (approximately 30 million cases), 
-  and add the incident cases over the course of the year (approximately 150 
-  million cases). We emphasize that this would also not tell us the prevalence 
-  of TB among this cohort on January 1, 2018, because we also need to account 
-  for mortality in both the susceptible and infected groups over the course of 
-  the year, in addition to remission. This is thus a less helpful measure in 
-  this example.
-
-So, to which population does the remission rate apply? For the purposes of our 
-model, the *remission rate* will be the probability that a given prevalent case 
-who does *not* die during a given timestep remitts.
+.. todo::
+  Confirm "this is how these rates are implemented in our models."
+  is true
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
@@ -642,12 +611,15 @@ within the entire population, as discussed above.
 
 **Remission within GBD**
 
-Most nonfatal models in GBD are run using DisMod [link to DisMod page]. DisMod 
+Most nonfatal models in GBD are run using DisMod (:ref:`2017_cause_models`). DisMod 
 estimates compartmental models of disease, which includes an estimate of 
 remission in terms of **{remitted cases in the with-condition population} per 
 {person-year}**. Thus DisMod's estimates of various measures (prevalence, 
 incidence, remission, excess mortality rate, etc.) are internally consistent for 
 any given model.
+
+.. todo::
+  update link to dismod page, once available
 
 GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To 
 calculate these measures such that they are consistent across different causes, 
@@ -659,11 +631,11 @@ from DisMod models.
 
 **Implementing remission rates in cause models**
 
-For a given simulation with timesteps of length x time-units, we convert 
-remission rates to the form of cases remitted per x time-units. This rate can 
-then be used to compute the probability of a simulant transitioning from an 
-infected or with-condition state to a susceptible or free-of-condition state in 
-a given timestep.
+For a given simulation with timesteps of length {x time-units}, we convert 
+remission rates to the form of cases remitted per person-{x time-units}. This 
+rate can then be used to compute the probability of a simulant transitioning 
+from an infected or with-condition state to a susceptible or free-of-condition 
+state in a given timestep.
 
 Duration-Based Transitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
