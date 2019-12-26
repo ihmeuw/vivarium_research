@@ -21,21 +21,21 @@ What is latent TB?
 ++++++++++++++++++
 Latent tuberculosis infection (LTBI) is defined as a state of persistent
 immune response to stimulation by Mycobacterium tuberculosis antigens with
-no evidence of clinically manifest active TB. [WHO]_
+no evidence of clinically manifested active TB. [WHO]_
 
 What is active TB?
 ++++++++++++++++++
 Active tuberculosis, also known as reactivation TB. It occurs when individual's
 immune system becomes weakened and is no longer able to contain the latent
 bacteria; then the TB bacteria become "active", overwhelm the immune system and
-cause a person to become ill. [UpToDate]_ In GBD, active TB consist of 6 child
+cause a person to become ill. [UpToDate]_ In GBD, active TB consists of 6 child
 causes: Drug-susceptible TB, Multidrug-resistant TB, Extensively drug-resistant
 TB, HIV/AIDS - Drug-susceptible TB, HIV/AIDS - Multidrug-resistant TB, and
 HIV/AIDS - Extensively drug-resistant TB.
 
 TB progression
 ++++++++++++++
-Active TB disease developed within 2 years called fast progression, Individuals
+Active TB disease developed within 2 years is called fast progression. Individuals
 who do not have rapid progression are classified as having slow-progressing latent
 tuberculosis infection. With latent infection, individuals experience no adverse
 health effects and will not transmit Mycobacterium tuberculosis, but they face
