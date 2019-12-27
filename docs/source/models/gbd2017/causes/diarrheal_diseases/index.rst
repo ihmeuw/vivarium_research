@@ -222,6 +222,37 @@ Data Description
 	  - YLD appendix
 	  - Disability weight of sequela with id `sid`
 	  - 
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
+
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-0.01917808 years)
+	* - YLL age group end
+	  - 90-94
+	  - age_group_id = 32; [90-94 years)
+	* - YLD age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-0.01917808 years)
+	* - YLD age group end
+	  - 90-94
+	  - age_group_id = 32; [90-94 years)
 
 
 
