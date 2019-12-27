@@ -558,8 +558,8 @@ below.
 Remission Rates
 ^^^^^^^^^^^^^^^
 
-**Definition**
-
+Definition
+++++++++++
 Remission is a measure of cases that recover from a with-condition state, given 
 a specified population and time period. Just as with incidence, the numerator is 
 given by the count of recovered (or *remitted*) cases, and the denominator is 
@@ -594,23 +594,24 @@ section] during which cases are able to go into remission.
   guaranteed for type II, and doesn't occur for type I, so remission rate does 
   *not* tell us the average duration that an individual will experience diabetes.
 
-For both of the above rates, we think of :math:`r_1=0.2` as the probability that 
-a given case of diarrhea in the Philippies in 2017 will remitt in the next day, 
-and :math:`r_2=0.0036` as the probability that a given case of diabetes amongst 
-males in Moldova in 2017 will remitt in the next year. Notably, this is how 
-these rates are implemented in our models.
+Say we randomly selected 10 people with diarrhea in the Philippines on a random 
+day in 2017. In the next day, they would accumulate 10 person days. Our rate 
+tells us that in the next day, the expected value for cases remitted is given by 
+:math:`\frac{\text{1 case of diarrhea}}{\text{5 person-days}}\times\text{10 
+person-days} = \text{2 cases of diarrhea}`.
 
-.. todo::
-  Confirm "this is how these rates are implemented in our models."
-  is true
+Similarly, we can take the rate of remission of diabetes, and for a randomly 
+selected case of diabetes in Moldova in 2017, consider if they will remit some 
+time in the next year. The expected value for cases remitted is then given by 
+:math:`\frac{\text{0.0036 cases of diabetes}}{\text{1 person-year}}\times\text{1 person-year} = \text{0.0036 cases of diabetes}`.
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
 general, and in the context of GBD--unlike with incidence, which GBD calculates 
 within the entire population, as discussed above.
 
-**Remission within GBD**
-
+Remission within GBD
+++++++++++++++++++++
 Most nonfatal models in GBD are run using DisMod (:ref:`2017_cause_models`). DisMod 
 estimates compartmental models of disease, which includes an estimate of 
 remission in terms of **{remitted cases in the with-condition population} per 
@@ -629,13 +630,13 @@ consistent with the DisMod estimates. However, as remission is not needed to
 calculate YLDs, the latest-stage estimate of remission produced by GBD comes 
 from DisMod models.
 
-**Implementing remission rates in cause models**
-
-For a given simulation with timesteps of length {x time-units}, we convert 
-remission rates to the form of cases remitted per person-{x time-units}. This 
-rate can then be used to compute the probability of a simulant transitioning 
-from an infected or with-condition state to a susceptible or free-of-condition 
-state in a given timestep.
+Implementing remission rates in cause models
+++++++++++++++++++++++++++++++++++++++++++++
+For a given simulation with timesteps of length *time unit* for some arbitrary 
+time unit, we convert remission rates to the form of cases remitted per 
+person-time-unit. This rate can then be used to compute the probability of a 
+simulant transitioning from an infected or with-condition state to a susceptible 
+or free-of-condition state in a given timestep.
 
 Duration-Based Transitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
