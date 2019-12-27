@@ -15,26 +15,28 @@ GBD Overview
 
 What is a risk factor?
 ++++++++++++++++++++++
-A risk factor is any attribute, characteristic or exposure of an individual 
-that increases the likelihood of developing a disease or injury. Some examples 
-of the more important risk factors are underweight, unsafe sex, high blood pressure, tobacco and alcohol consumption, sanitation and hygiene, and unsafe water. [WHO]_ In GBD, a risk factor refers to any exposure that leads to a 
-loss of health in the population; it can be anywhere on the causal chain as 
-long as there is evidence to show that the risk factor is causally linked to an outcome disease or injury.
+A risk factor is any attribute, characteristic or exposure of an individual
+that increases the likelihood of developing a disease or injury. In GBD, a risk factor refers to a exposure that leads to a loss of health in the population;
+it can be anywhere on the causal chain as long as there is evidence to show that the risk factor is causally linked to an outcome disease or injury.
 
 What do we measure?
 +++++++++++++++++++
 - Proportion of disease and injury burden attributable to specific risk factors
+  (population attributable fraction)
    - e.g. burden of diarrheal due to unsafe water
    - e.g. burden of lung cancer due to smoking
 - Comparative importance of the underlying risk factors which cause disease and
-  injuries
+  injuries (summary exposure value)
    - e.g. burden of smoking compared with unsafe water
 
 How do we measure?
 ++++++++++++++++++
 Input:
- - Risk factor exposure (current distribution and counterfactual distribution)
- - Risk factor-disease relationship (risk accumulation and risk reversal)
+ - Risk factor exposure (e.g. prevalence for dichotmous risks; mean, standard
+   deviation, ensemble weights for continuous risks with an ensemble 
+   distribution)
+ - Risk factor-disease relationship (relative risk of disease outcome at each
+   level of risk factor exposure)
  - Disease burden
 Output:
  - Attributabe burden by age, sex, year and location
@@ -49,55 +51,101 @@ How do we select risk-outcome pairs?
 - Evidence that these effects can be generalized to a general population.
 
 
-Risk factor hierarchy
+Risk Factor Hierarchy
 ---------------------
 - Environmental/occupational risks
    - Unsafe water, sanitation, and handwashing
-      - e.g. Unsafe water source
+      - Unsafe water source
+      - Unsafe sanitation
+      - No access to handwashing facility
    - Air pollution
-	  - e.g. Household air pollution from solid fuels
+	  - Particulate matter pollution
+	  - Ambient ozone pollution
+   - Suboptimal temperature
+      - High temperature
+      - Low temperature
    - Other environmental risks
-	  - e.g. Lead exposure
+	  - Residential radon
+	  - Lead exposure
    - Occupational risks
-      - e.g. Occupational exposure to asbestos
+      - Occupational carcinogens
+      - Occupational asthmagens
+      - Occupational particulate matter, gases, and fumes
+      - Occupational noise
+      - Occupational injuries
+      - Occupational ergonomic factors
 - Behavioral risks
    - Child and maternal malnutrition
 	  - Suboptimal breastfeeding
-	     - e.g. Non-exclusive breastfeeding
 	  - Child growth failure
-	     - e.g. Child underweight
 	  - Low birth weight and short gestation
-	     - e.g. Short gestation for birth weight
+	  - Iron deficiency
+	  - Vitamin A deficiency
+	  - Zinc deficiency
    - Tobacco
-	  - e.g. Smoking
+	  - Smoking
+	  - Chewing tobacco
+	  - Secondhand smoke
+   - Alcohol use
+   - Drug use
    - Dietary risks
-	  - e.g. Diet low in fruits
+	  - Diet low in fruits
+	  - Diet low in vegetables
+	  - Diet low in whole grains
+	  - Diet low in nuts and seeds
+	  - Diet low in milk
+	  - Diet high in red meat
+	  - Diet high in processed meat
+	  - Diet high in sugar-sweetened beverages
+	  - Diet low in fiber
+	  - Diet low in calcium
+	  - Diet low in seafood omega-3 fatty acids
+	  - Diet low in polyunsaturated fatty acids
+	  - Diet high in trans fatty acids
+	  - Diet high in sodium
+   - Intimate partner violence
    - Childhood maltreatment
-      - e.g. childhood sexual abuse
+      - childhood sexual abuse
+      - Bullying victimization
+   - Unsafe sex
+   - Low physical activity 
 - Metabolic risks
    - High fasting plasma glucose
+      - High fasting plasma glucose (continuous)
+      - High fasting plasma glucose (categorical) 
    - High LDL cholesterol
    - High systolic blood pressure
    - High body-mass index
+      - High body-mass index in adults
+      - High body-mass index in children 
    - Low bone mineral density
    - Impaired kidney function
+
+This hierarchy excluded level 4 risk factors, the full list of table lives at
+`GBD 2019 risk factors <https://hub.ihme.washington.edu/display/GBD2019/GBD+2019+Risk+factors?preview=/54736328/80467412/
+list_of_risks_gbd_2019.xlsx>`_
 
 What is a TMREL?
 ----------------
 The theoretical minimum risk level (TMREL) is the level of risk exposure 
 that minimizes risk at the population level, or the level of risk 
 that captures the maximum attributable burden.
-
 - Straightforward: TMREL for smoking is zero = no one in the population smokes
 - Controversial: standard daily consumption of sodium
 
-What is a PAF, and what is a Population Attributable Burden?
-------------------------------------------------------------
- - **Population Attributable Fraction** is the fraction of disease burden
+How do we define PAF, PAB, and SEV?
+-----------------------------------
+ - **Population Attributable Fraction (PAF)** is the fraction of disease burden
    (deaths, YLDs, YLLs, DALYs) from a cause (disease or injury) that is 
-   attributed to exposure to a risk factor. PAFs are not additive, mediation either. 
- - **Population Attributable Burden** is the attributable budrden for a cause 
-   due to exposure to a given risk factor. (Attributable burden = PAF * total burden of cause)
+   attributed to exposure to a risk factor. PAFs are not additive, mediation
+   either.
+ - **Population Attributable Burden (PAB)** is the attributable budrden for a
+   cause due to exposure to a given risk factor. (Attributable burden = PAF *
+   total burden of cause)
+ - **Summary Exposure Value (SEV)** is a measure of a population’s exposure to
+   a risk factor that takes into account the extent of exposure by risk level
+   and the severity of that risk’s contribution to disease burden. SEV takes
+   the value zero when no excess risk for a population exists and the value one when the population is at the highest level of risk; we report SEV on a scale from 0% to 100% to emphasize that it is risk-weighted prevalence.
 
 The structure of a risk exposure model
 --------------------------------------
@@ -137,6 +185,7 @@ Non-standard data sources for risk exposure models
 
 References
 ----------
-
-.. todo::
-  add links
+.. [GBD-2017-Risk-Factors]
+   Global, regional, and national comparative risk assessment of 84 behavioral, environmental and occupational, and metabolic risks or clusters of risks for
+   195 countries and territories, 1990–2017: a systematic analysis for the GBD Study 2017
+   https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)32225-6/fulltext
