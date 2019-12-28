@@ -559,12 +559,16 @@ Remission Rates
 ^^^^^^^^^^^^^^^
 
 Definition
-++++++++++
+""""""""""
 Remission is a measure of cases that recover from a with-condition state, given 
 a specified population and time period. Just as with incidence, the numerator is 
 given by the count of recovered (or *remitted*) cases, and the denominator is 
 the cumulative person-time [link to person-time definition in incidence 
-section] during which cases are able to go into remission.
+section] during which cases are able to go into remission:
+
+  .. math::
+    \frac{\text{number of remitted cases}}{\text{person-time in the with-condition 
+    population}}
 
   For example, consider diarrhea cases in the Philippines in 2017. Say that that 
   year, every such case remitted after an average of 5 days:
@@ -580,30 +584,32 @@ section] during which cases are able to go into remission.
   diabetes (both type I and type II) in Moldova amongst males in 2017, and of 
   those 142,794 cases, 509 remitted in 2017. This gives us the following rate:
 
+    .. math::
+      \frac{\text{509 cases}}{\text{142,794 person-years}} = \frac{\text{0.0036 cases}}{\text{1 person-year}}
+
+  It is important to note two things here: first, that this is a remission rate 
+  for diabetes at all ages, which obscures the generally increasing age-pattern 
+  that this rate follows. Second: there is no set duration for which one generally experiences diabetes. In fact, remission does not occur for type I, and is not guaranteed for type II. In the context of the diarrheal diseases example, this makes it seem as if diabetes cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` years--which clearly does a poor job of capturing the behavior of diabetes. This sort of description was only 
+  appropriate for diarrhea, as there is a uniform remission rate across all 
+  cases. With diabetes, however, the remission rate does *not* tell us the 
+  average duration that an individual will experience diabetes.
+
+  How do we apply this to our simulants? Say we randomly selected 10 people with 
+  diarrhea in the Philippines on a random day in 2017. In the next day, they 
+  would accumulate 10 person days. Our rate tells us that in the next day, the 
+  expected value for cases remitted is given by:
+
   .. math::
 
-    \frac{\text{509 cases}}{\text{142,794 person-years}} =
-    \frac{\text{0.0036 cases}}{\text{1 person-year}}
+    \frac{\text{1 case of diarrhea}}{\text{5 person-days}}\times\text{10 person-days} = \text{2 cases of diarrhea}.
 
-  It is important to note that this is a remission rate for diabetes at all
-  ages. In the context of the diarrheal diseases example, this makes it seem as 
-  if diabetes cases remit, on average, after :math:`\frac{1}{0.0036}\simeq 279` 
-  years--which clearly does a poor job of capturing the behavior of diabetes. 
-  This sort of description was only appropriate for diarrhea, as there is a 
-  uniform remission rate across all cases. With diabetes, remission is not 
-  guaranteed for type II, and doesn't occur for type I, so remission rate does 
-  *not* tell us the average duration that an individual will experience diabetes.
+  Similarly, we can take the rate of remission of diabetes, and for a randomly 
+  selected case of diabetes in Moldova in 2017, consider if they will remit some 
+  time in the next year. The expected value for cases remitted is then given by: 
 
-Say we randomly selected 10 people with diarrhea in the Philippines on a random 
-day in 2017. In the next day, they would accumulate 10 person days. Our rate 
-tells us that in the next day, the expected value for cases remitted is given by 
-:math:`\frac{\text{1 case of diarrhea}}{\text{5 person-days}}\times\text{10 
-person-days} = \text{2 cases of diarrhea}`.
+.. math::
 
-Similarly, we can take the rate of remission of diabetes, and for a randomly 
-selected case of diabetes in Moldova in 2017, consider if they will remit some 
-time in the next year. The expected value for cases remitted is then given by 
-:math:`\frac{\text{0.0036 cases of diabetes}}{\text{1 person-year}}\times\text{1 person-year} = \text{0.0036 cases of diabetes}`.
+  \frac{\text{0.0036 cases of diabetes}}{\text{1 person-year}}\times\text{1 person-year} = \text{0.0036 cases of diabetes}.
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
@@ -611,27 +617,30 @@ general, and in the context of GBD--unlike with incidence, which GBD calculates
 within the entire population, as discussed above.
 
 Remission within GBD
-++++++++++++++++++++
-Most nonfatal models in GBD are run using DisMod (:ref:`2017_cause_models`). DisMod 
-estimates compartmental models of disease, which includes an estimate of 
-remission in terms of **{remitted cases in the with-condition population} per 
-{person-year}**. Thus DisMod's estimates of various measures (prevalence, 
-incidence, remission, excess mortality rate, etc.) are internally consistent for 
-any given model.
+""""""""""""""""""""
+Most nonfatal models in GBD are run using DisMod (:ref:`2017_cause_models`). 
+DisMod estimates compartmental models of disease, and thus produces estimates of 
+measures (prevalence, incidence, remission, excess mortality rate, etc.) that 
+are internally consistent for any given model. DisMod estimates remission rates 
+as:
+
+.. math::
+
+  \frac{\text{number of remitted cases}}{\text{person-years in the with-condition population}}
 
 .. todo::
   update link to dismod page, once available
 
 GBD's final outputs, however, are in the form of YLLs, YLDs, and DALYs. To 
-calculate these measures such that they are consistent across different causes, 
-GBD runs standardizing processes on estimates of prevalence, incidence, and 
-estimated mortality rate. Note then that these final estimates are no longer 
+calculate these measures such that they are consistent across *different* 
+causes, GBD runs standardizing processes on estimates of prevalence, incidence, 
+and estimated mortality rate. Note then that these final estimates are no longer 
 consistent with the DisMod estimates. However, as remission is not needed to 
 calculate YLDs, the latest-stage estimate of remission produced by GBD comes 
 from DisMod models.
 
 Implementing remission rates in cause models
-++++++++++++++++++++++++++++++++++++++++++++
+""""""""""""""""""""""""""""""""""""""""""""
 For a given simulation with timesteps of length *time unit* for some arbitrary 
 time unit, we convert remission rates to the form of cases remitted per 
 person-time-unit. This rate can then be used to compute the probability of a 
