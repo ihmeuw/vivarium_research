@@ -9,16 +9,18 @@ Cause Model Template
    To begin documenting a cause in GBD 2017 for a Vivarium simulation, start by
    following these steps:
 
-   #. Make a subdirectory :file:`gbd2017/causes/{cause_name}/` for your cause
-      model documentation where you will put all related files, including this
-      document, image files, .csv files, etc. The name :file:`{cause_name}` of
-      the subdirectory should be the (potentially shortened) name of the cause
-      you are modeling.
+   #. Make a subdirectory :file:`gbd2017/causes/{cause_name}/`, where
+      :file:`{cause_name}` is replaced with the (potentially shortened) name of
+      the cause you are modeling.  This directory is where you will put all the
+      files for your cause model documentation, including this document, image
+      files, .csv files, etc.
+
 
    #. Copy this template into your subdirectory and rename
       it :code:`index.rst`.
 
-   #. Replace the internal hyperlink target
+   #. Replace the `internal hyperlink target
+      <https://docutils.sourceforge.io/docs/user/rst/quickref.html#internal-hyperlink-targets>`_
       :code:`.. _2017_cause_model_template:` at the top of this file with a
       unique reference label for your cause. The reference label should have the
       form :samp:`.. _2017_cause_{\{cause_name\}}:`, where
@@ -43,11 +45,13 @@ Cause Model Template
 
       **Note:** Remember to adjust the length of the title's underline
       :code:`======` and overline :code:`======` to match the length of your
-      new document title, or you will get errors when Sphinx builds HTML from
-      the :file:`index.rst` file.
+      new document title, or you will get errors in the `section structure
+      <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
+      when Sphinx builds HTML from the :file:`index.rst` file.
 
    #. Once you complete these steps, delete this :code:`.. important::`
-      directive from :file:`index.rst`.
+      `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
+      from :file:`index.rst`.
 
 Disease Description
 -------------------
@@ -71,10 +75,12 @@ Disease Description
      section title, as it currently does, or should we call the section
      something else?
 
-   **Note:** This custom admonition indicates tasks to do while we write this
-   template, whereas the ordinary Todo's (and the "Important" directives) are
-   intended to remain in the template to instruct the cause modeler how to fill
-   out the cause model document.
+   **Note:** This `custom admonition
+   <https://docutils.sourceforge.io/docs/ref/rst/directives.html#generic-admonition>`_
+   indicates tasks to do while we write this template, whereas the ordinary
+   Todo's (and the "Important" directives) are intended to remain in the
+   template to instruct the cause modeler how to fill out the cause model
+   document.
 
 Modeling `{Cause Name}` in GBD 2017
 -----------------------------------
@@ -86,10 +92,13 @@ Modeling `{Cause Name}` in GBD 2017
 
    #. Remember to adjust the length of the section underline
       :code:`--------------` to match the length of your text, or you will get
-      errors when Sphinx builds HTML from the :file:`index.rst` file.
+      errors in the `section structure
+      <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
+      when Sphinx builds HTML from the :file:`index.rst` file.
 
    #. Once you complete these steps, delete this :code:`.. important::`
-      directive from :file:`index.rst`.
+      `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
+      from :file:`index.rst`.
 
 Cause Hierarchy
 +++++++++++++++
