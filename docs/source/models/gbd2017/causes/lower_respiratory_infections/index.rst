@@ -11,11 +11,16 @@ Lower respiratory infections (*LRI*), principally clinician-diagnosed pneumonia
 and bronchiolitis, is a major global killer of both children and adults. Symptoms
 include shortness of breath, weakness, fever, coughing and fatigue. It is important to check for a fever. Symptoms can last about 7 days and the infection is contagious
 to others shortly before and while experiencing symptoms. It is mainly
-caused by four microorganisms - Streptococcus pneumoniae (*pneumococcal
+caused by four pathogens - Streptococcus pneumoniae (*pneumococcal
 pneumonia*), Haemophilus influenzae type B (*Hib*), influenza, and respiratory
-syncytial virus (*RCV*). LRI can be caused by multiple pathogens and the pathogens may co-infect.
+syncytial virus (*RCV*). Those pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
 mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
+
+The lower respiratory tract or lower airway is derived from the developing foregut
+and consists of the trachea, bronchi (primary, secondary and tertiary),
+bronchioles (including terminal and respiratory), and lungs (including alveoli).
+It also sometimes includes the larynx. [Wikipedia]_
 
 Transmission of LRI may occur via several pathways, including direct physical contact,
 fomites, direct droplet spread, and suspended small particles. Intermingling of
@@ -118,7 +123,7 @@ Data Description
    * - I
      - disability weights
      - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669 + disability_weight_s671 :math:`\times` prevalence_s671
-     - GBD assumes 15% of LRI cases as severe and 85% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
+     -
    * - ALL
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_c322}}{\text{population}}`
@@ -174,10 +179,10 @@ Data Description
    * - disability_weight_s{sid}
      - YLD Appendix
      - Disability weights associated with each sequela
-     -
+     - Note Guillain-Barre due to LRI is included in sequelae.
    * - prevalence_s{sid}
      - como
-     - Prevalence of each sequela
+     - Prevalence of each sequela with id 'sid'
      -
 .. list-table:: Restrictions
    :widths: 15 15 20
