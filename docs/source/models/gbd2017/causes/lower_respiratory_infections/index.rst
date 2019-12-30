@@ -15,7 +15,7 @@ caused by four pathogens - Streptococcus pneumoniae (*pneumococcal
 pneumonia*), Haemophilus influenzae type B (*Hib*), influenza, and respiratory
 syncytial virus (*RCV*). Those pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
-mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
+mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1-lri]_
 
 The lower respiratory tract or lower airway is derived from the developing foregut
 and consists of the trachea, bronchi (primary, secondary and tertiary),
@@ -237,7 +237,7 @@ References
    The Lancet Infectious Diseases, 2018. Retrieved 20 Dec 2019.
    https://www.sciencedirect.com/science/article/pii/S1473309918304079?via%3Dihub
 
-.. [GBD-2017-YLD-Capstone-Appendix-1]
+.. [GBD-2017-YLD-Capstone-Appendix-1-lri]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
