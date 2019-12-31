@@ -68,7 +68,7 @@ Data Description
      - 
    * - I
      - birth prevalence
-     - 1-birth_prevalence_c383
+     - birth_prevalence_c383
      - 
    * - I
      - excess mortality rate
@@ -96,11 +96,10 @@ Data Description
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_m1594}}{\text{1 - prevalence_c383}}`
+     - incidence_rate_m1594
      - Incidence rate is estimated in dismod but does not exists in como.
        It is set to 0 after 27 days as by definition neonatal sepsis must occur within neonatal period (0-27 days) 
-       [GBD-2017-YLD-Capstone-Appendix-1-Neonatal-sepsis-and-other-infections]_. Incidence is divided by 1 - prevalence to
-       calculate incidence among susceptible population.
+       [GBD-2017-YLD-Capstone-Appendix-1-Neonatal-sepsis-and-other-infections]_. 
    * - r
      - I
      - R
