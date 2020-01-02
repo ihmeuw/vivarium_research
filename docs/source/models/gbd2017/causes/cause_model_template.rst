@@ -4,8 +4,9 @@
 Cause Model Template
 ====================
 
-.. _Pull Request 91: https://github.com/ihmeuw/vivarium_research/pull/91
+.. _Pull Request 64: https://github.com/ihmeuw/vivarium_research/pull/64
 .. _Pull Request 76: https://github.com/ihmeuw/vivarium_research/pull/76
+.. _Pull Request 91: https://github.com/ihmeuw/vivarium_research/pull/91
 
 .. important::
 
@@ -90,6 +91,8 @@ Cause Model Template
      - For cause hierarchy: description of our strategy for making cause
        hierarchy diagrams (rules + example)
      - For data tables: Template tables and instructions for filling them in
+     - Expand Todo's for Vivarium model `Scope` and `Assumptions and
+       Limitations` sections, with specific examples and guidelines
 
 
 GBD 2017 Modeling Strategy
@@ -116,8 +119,19 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
+.. todo::
+
+  Describe which aspects of the disease this cause model is designed to
+  simulate, and which aspects it is **not** designed to simulate.
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
+
+.. todo::
+
+  Describe the clinical and mathematical assumptions made for this cause model,
+  and the limitations these assumptions impose on the applicability of the
+  model.
 
 Cause Model Diagram
 -------------------
@@ -127,26 +141,37 @@ Data Description
 
 .. admonition:: Todo for template development
 
-    - Decide on section heading names and structure. E.g. should this section be
-      called "Data Description" instead of "State and Transition Data Tables,"
-      like it was originally?
+  Decide on section heading name(s) and structure for the data section. See
+  comments by @Beatrix and @Nathaniel in `Pull Request 64`_ discussing the
+  following questions:
 
-      In `Pull Request 91`_, @James said:
+  - Should this section be called "Data Description" as it is now, or would
+    something like "State and Transition Data Tables" be more descriptive?
 
-        I think `Data Description` is fine.
+    In `Pull Request 91`_, @James said:
 
-    - Is there anything else that belongs in a "Data Description" section
-      besides the data tables?
+      I think `Data Description` is fine.
 
-      In `Pull Request 91`_, @Yongquan said:
+  - Should this section have subsections? Is there anything else that belongs
+    in a "Data Description" section besides the data tables?
 
-        one data-relevant section needed for more complicated models is
-        non-standard data sources where external calculation occurs.
+    In `Pull Request 91`_, @Yongquan said:
 
-Model Assumptions and Limitations
----------------------------------
+      one data-relevant section needed for more complicated models is
+      non-standard data sources where external calculation occurs.
+
+    Does "non-standard data sources" warrant a subsection, even if we don't need
+    it for all cause models?
+
+Validation Criteria
+-------------------
+
+References
+----------
 
 .. admonition:: Todo for template development
+
+  Decide on section names and overall structure.
 
   **Question:** Are the sections in a good order?
 
@@ -155,6 +180,9 @@ Model Assumptions and Limitations
     The template looks good to me. I was putting the model assumptions and
     limitations section right after the cause model diagram. But I think
     this order makes more sense.
+
+    ("This order" referring to: `Cause Model Diagram`, `Data Description`,
+    `Model Assumptions and Limitations`.)
 
   And @Yongquan said:
 
@@ -199,9 +227,3 @@ Model Assumptions and Limitations
     like), what if we did model diagram, then data descriptions, then
     limitations? to maintain some of the newspaper-style high level --->
     detailed ordering?
-
-Validation Criteria
--------------------
-
-References
-----------
