@@ -93,6 +93,7 @@ Cause Model Template
      - For data tables: Template tables and instructions for filling them in
      - Expand Todo's for Vivarium model `Scope` and `Assumptions and
        Limitations` sections, with specific examples and guidelines
+     - Add instructions for filling out the GBD Restrictions table
 
 
 GBD 2017 Modeling Strategy
@@ -112,6 +113,43 @@ Cause Hierarchy
 
 Restrictions
 ++++++++++++
+
+The following table describes any restrictions in GBD 2017 on the effects of
+this cause (such as being only fatal or only nonfatal), as well as restrictions
+on the ages and sexes to which the cause applies.
+
+.. list-table:: GBD 2017 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     -
+     -
+   * - Female only
+     -
+     -
+   * - YLL only
+     -
+     -
+   * - YLD only
+     -
+     -
+   * - YLL age group start
+     -
+     -
+   * - YLL age group end
+     -
+     -
+   * - YLD age group start
+     -
+     -
+   * - YLD age group end
+     -
+     -
+
 
 Vivarium Modeling Strategy
 --------------------------
@@ -133,6 +171,11 @@ Assumptions and Limitations
   and the limitations these assumptions impose on the applicability of the
   model.
 
+.. admonition:: Todo for template development
+
+  What else goes in the `Vivarium Modeling Strategy` section? Should there be
+  any other subsections besides `Scope` and `Assumptions and Limitations`?
+
 Cause Model Diagram
 -------------------
 
@@ -152,8 +195,9 @@ Data Description
 
       I think `Data Description` is fine.
 
-  - Should this section have subsections? Is there anything else that belongs
-    in a "Data Description" section besides the data tables?
+  - Should this section have subsections (such as "State and Transition Data
+    Tables")? Is there anything else that belongs in a "Data Description"
+    section besides the data tables?
 
     In `Pull Request 91`_, @Yongquan said:
 
@@ -192,7 +236,8 @@ References
 
   Whereas @James said:
 
-    I think the restrictions in this section should move up to the GBD Modeling section.
+    I think the restrictions in this section (`Model Assumptions and
+    Limitations`) should move up to the GBD Modeling section.
 
     Also, perhaps we should have a section following the GBD section called
     `vivarium modeling strategy` which would include the scope and the
