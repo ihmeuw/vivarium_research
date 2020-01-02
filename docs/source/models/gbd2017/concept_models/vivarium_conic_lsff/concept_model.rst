@@ -70,8 +70,8 @@ PAF-of-1 Cause/Risk Pairs
 Additional GBD Risks
 ++++++++++++++++++++
 
-Low Birth Weight and Short Gestation
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+:ref:`Low Birth Weight and Short Gestation <2017_risk_lbwsg>`
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
