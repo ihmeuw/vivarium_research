@@ -5,6 +5,7 @@ Cause Model Template
 ====================
 
 .. _Pull Request 91: https://github.com/ihmeuw/vivarium_research/pull/91
+.. _Pull Request 76: https://github.com/ihmeuw/vivarium_research/pull/76
 
 .. important::
 
@@ -170,37 +171,57 @@ Model Assumptions and Limitations
 
 .. admonition:: Todo for template development
 
-  - Are the sections in a good order? In `Pull Request 91`_, @Lu said:
+  **Question:** Are the sections in a good order?
 
-      The template looks good to me. I was putting the model assumptions and
-      limitations section right after the cause model diagram. But I think
-      this order makes more sense.
+  In `Pull Request 91`_, @Lu said:
 
-    And @Yongquan said:
+    The template looks good to me. I was putting the model assumptions and
+    limitations section right after the cause model diagram. But I think
+    this order makes more sense.
 
-      Model assumptions and/or limitations can be mentioned in summary disease
-      model description and fully explained in Model Assumptions and
-      Limitations section.
+  And @Yongquan said:
 
-    Whereas @James said:
+    Model assumptions and/or limitations can be mentioned in summary disease
+    model description and fully explained in Model Assumptions and
+    Limitations section.
 
-      I think the restrictions in this section should move up to the GBD Modeling section.
+  Whereas @James said:
 
-      Also, perhaps we should have a section following the GBD section called
-      `vivarium modeling strategy` which would include the scope and the
-      restrictions we apply to the model (which might be different than GBD's
-      restrictions). To serve as a narrative description accompanying the cause
-      model diagram and data tables.
+    I think the restrictions in this section should move up to the GBD Modeling section.
 
-    On the other hand, @Kiran said:
+    Also, perhaps we should have a section following the GBD section called
+    `vivarium modeling strategy` which would include the scope and the
+    restrictions we apply to the model (which might be different than GBD's
+    restrictions). To serve as a narrative description accompanying the cause
+    model diagram and data tables.
 
-      I am good with this structure. But, we have to make changes to the
-      causes that are finished. Also, for restrictions I like it under
-      Assumptions and Limitations section. We can add subsections if there are
-      different types of restrictions.
+  On the other hand, @Kiran said:
 
-    Do we have examples of restrictions we would apply that are different from
-    GBD restrictions?
+    I am good with this structure. But, we have to make changes to the
+    causes that are finished. Also, for restrictions I like it under
+    Assumptions and Limitations section. We can add subsections if there are
+    different types of restrictions.
+
+  **Question:** Do we have examples of restrictions we would apply that are
+  different from GBD restrictions?
+
+  Also, in `Pull Request 76`_, @Beatrix said:
+
+    I kind of like `Model Assumptions and Limitations` before the data
+    description, because i like the idea of going from most high-level to most
+    nitty-gritty as you go through the document. In that schema, in my mind,
+    it would go:
+
+    | model diagram,
+    | then limitations,
+    | then data description
+    |
+    | (as kiran has).
+
+    If we wanted the diagram near the tables that reference it (which i also
+    like), what if we did model diagram, then data descriptions, then
+    limitations? to maintain some of the newspaper-style high level --->
+    detailed ordering?
 
 Restrictions
 ++++++++++++
