@@ -60,8 +60,9 @@ The codes used in both models can be found in the table below:
 Cause Hierarchy
 +++++++++++++++
 
-.. todo::
-   Add hierarchy diagram.
+.. image:: neonatal_sepsis_hierarchy.svg
+   :alt: Neonatal sepsis GBD hierarchy diagram
+
 
 
 Cause Model Diagram
