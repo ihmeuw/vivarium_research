@@ -61,13 +61,13 @@ Restrictions
 	  -
 	* - YLL age group start
 	  - Early neonatal
-	  - age_group_id = 2; [0-0.01917808 years)
+	  - age_group_id = 2; [0-7 days)
 	* - YLL age group end
 	  - Post neonatal
-	  - age_group_id = 4; [0.07671233-1 years)
+	  - age_group_id = 4; [28 days-1 year)
 	* - YLD age group start
 	  - Early neonatal
-	  - age_group_id = 2; [0-0.01917808 years)
+	  - age_group_id = 2; [0-7 days)
 	* - YLD age group end
-	  - 90-94
-	  - age_group_id = 32; [90-94 years)
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
