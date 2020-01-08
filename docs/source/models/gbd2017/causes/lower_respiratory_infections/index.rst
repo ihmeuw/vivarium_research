@@ -11,18 +11,39 @@ Lower respiratory infections (*LRI*), principally clinician-diagnosed pneumonia
 and bronchiolitis, is a major global killer of both children and adults. Symptoms
 include shortness of breath, weakness, fever, coughing and fatigue. It is important to check for a fever. Symptoms can last about 7 days and the infection is contagious
 to others shortly before and while experiencing symptoms. It is mainly
-caused by four microorganisms - Streptococcus pneumoniae (*pneumococcal
-pneumonia*), Haemophilus influenzae type B (*Hib*),influenza, and respiratory
-syncytial virus (*RCV*). LRI can be caused by multiple pathogens and the pathogens may co-infect.
+caused by four pathogens - Streptococcus pneumoniae (*pneumococcal
+pneumonia*), Haemophilus influenzae type B (*Hib*), influenza, and respiratory
+syncytial virus (*RCV*). Those pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
-mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
+mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1-lri]_
+
+The lower respiratory tract or lower airway is derived from the developing foregut
+and consists of the trachea, bronchi (primary, secondary and tertiary),
+bronchioles (including terminal and respiratory), and lungs (including alveoli).
+It also sometimes includes the larynx. [Wikipedia]_
+
+Transmission of LRI may occur via several pathways, including direct physical contact,
+fomites, direct droplet spread, and suspended small particles. Intermingling of
+large numbers of people can facilitate transmission of respiratory pathogens. [CDC]_
+
+In GBD 2016, malnutrition was identified as a leading risk factor for lower respiratory infection
+mortality among children younger than 5 years and, together with air pollution (both household and ambient)
+and increased antibiotic use, was identified as a focus for targeted intervention measures. [Lancet]_
+
+.. todo::
+
+   Describe more about deaths and complications due to LRI.
+   Talk about current vaccination against influenza and pneumonia.
+   https://apps.who.int/iris/bitstream/handle/10665/241904/WER8714_129-144.PDFp
 
 Modeling LRI in GBD 2017
 ------------------------
-
-The GBD 2017 defined the time to recovery for LRI as an average of 10 days(*5-15 days*),
+The GBD 2017 defined the time to recovery for LRI as an average of 10 days (*5-15 days*),
 which corresponds with a remission 36.5.
 
+.. todo::
+
+   Describe more about modeling LRI in GBD 2017
 
 GBD hierarchy
 -------------
@@ -39,12 +60,21 @@ Cause Model Diagram
 
 Model Assumptions and Limitations
 ---------------------------------
+This model is designed to be used for estimating DALYs due to LRI that are averted from a
+country-level intervention(e.g. food fortification or supplementation given to a percentage of the population)
+that can reduce LRI incidence as a downstream effect.
+
 There is substantial additional effort in GBD to divide LRI
-burden into the aetiologies of LRI, but we have not included
+burden into the aetiologies of LRI, but we do not include
 aetiologies in this simple model.
 
-There are three sequelae associated with LRI. We do not consider Guillain-Barré syndrome
-in this model because the prevalence of it is too low to affect the overall disability weight.
+There are three sequelae associated with LRI. We are not tracking the long-term
+effects of Guillain-Barré syndrome (which can include paralysis, for example). However, since the prevalence of GBS is so low,
+there would probably not be much benefit in attempting to capture its long-term YLDs in addition to its short term YLDs.
+
+.. todo::
+
+   Describe more assumptions and limitations of the model.
 
 Data Description
 ----------------
@@ -92,8 +122,8 @@ Data Description
      -
    * - I
      - disability weights
-     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669
-     - GBD assumes 15% of LRI cases as severe and 85% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
+     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669 + disability_weight_s671 :math:`\times` prevalence_s671
+     -
    * - ALL
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_c322}}{\text{population}}`
@@ -149,12 +179,42 @@ Data Description
    * - disability_weight_s{sid}
      - YLD Appendix
      - Disability weights associated with each sequela
-     -
+     - Note Guillain-Barre due to LRI is included in sequelae.
    * - prevalence_s{sid}
      - como
-     - Prevalence of each sequela
+     - Prevalence of each sequela with id 'sid'
      -
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
 
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early neonatal
+     - GBD age group id is 2
+   * - YLL age group end
+     - Age 95+
+     - GBD age group id is 235
+   * - YLD age group start
+     - Early neonatal
+     - GBD age group id is 2
+   * - YLD age group end
+     - Age 95+
+     - GBD age group id is 235
 
 Validation Criteria
 -------------------
@@ -170,7 +230,14 @@ References
    Retrieved 22 Nov 2019.
    https://en.wikipedia.org/wiki/Lower_respiratory_tract_infection
 
-.. [GBD-2017-YLD-Capstone-Appendix-1]
+.. [CDC] Respiratory Infections (*The Yellow Book*). Centers for Disease Control and Prevention, 2019. Retrieved 20 Dec 2019.
+   https://wwwnc.cdc.gov/travel/yellowbook/2020/posttravel-evaluation/respiratory-infections
+
+.. [Lancet] The Global Burden of Lower Respiratory Infections: Making Progress, but We Need to Do Better (*Volume 18*).
+   The Lancet Infectious Diseases, 2018. Retrieved 20 Dec 2019.
+   https://www.sciencedirect.com/science/article/pii/S1473309918304079?via%3Dihub
+
+.. [GBD-2017-YLD-Capstone-Appendix-1-lri]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries

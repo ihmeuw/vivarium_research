@@ -23,11 +23,11 @@ causes of death or disease are mutually exclusive and collectively exhaustive.
 
     - ... down to the most detailed level
 
-Measures for causes include:  
-Deaths, incidence, prevalence, YLDs, YLLs, and DALYs
+*Measures* are a quantity of disease burden. Measures for causes include:  
+deaths, incidence, prevalence, remission, excess mortality, YLDs, YLLs, and DALYs
 
-And metrics for causes include:  
-Counts, rates, and fractions
+*Metrics* are units that describe disease burden. Metrics for causes include:  
+counts, rates, and percentages
 
 Modeling causes of death
 ------------------------
@@ -108,13 +108,46 @@ The Appendix for the GBD 2017 Cause of Death manuscript is also available and Op
 Modeling non-fatal outcomes (Outline)
 ---------------------------
 
-- Figure of process
 .. image:: gbd_nonfatal_flowchart_sim_team.jpg
    :width: 600
 
-**Modeling approach** 
+**DisMod** 
 
-- Modeling tools like DisMod, ST-GPR
+Disease Model Meta Regression 2.1 (DisMod, sometimes DisMod MR) is a statistical modeling tool developed for the Global
+Burden of Disease study to estimate non-fatal disease burden. It is the most frequently used tool for non-fatal modeling
+in the GBD and models that are run outside of it are frequently called *custom models*. 
+
+DisMod has a user interface. The 
+`External Version
+<https://vizhub.healthdata.org/epi/>`_
+shows published and final models for GBD 2017.
+The 
+`Internal Version
+<https://internal.ihme.washington.edu/epi/>`_
+is where new and ongoing modeling occurs and is for GBD 2019 (but shows GBD 2017 best models). 
+
+There are three main components to DisMod: 
+
+1. It is a meta-regression statistical model. This means that it uses point estimates with uncertainty around those 
+estimates and covariates to predict disease burden for every location/year/age/sex.
+These predictions are produced separately for each estimation year (every 5 years from 1990 to 2015 and the year 2017) and
+there is no cohort component to DisMod meaning that there is no enforcement in incidence and prevalence over time and age.  
+   
+2. It is a compartmental model of disease. This means that DisMod is solving differential equations while fitting meta-regression 
+estimates to enforce consistency between disparate measures of disease like incidence, prevalence, remission, and excess mortality. 
+  
+3. It is age-integrating. Input data in DisMod must have an age or age range associated with those data, ranges which may be noisy. 
+DisMod can account for ranges in age in the input data by integrating across age-specific rates to help it produce continuous estimates of disease burden across all ages.
+
+Input data for DisMod can be any of the measures of disease that are estimated within it. These include prevalence, incidence,
+remission, excess mortality, and cause-specific mortality. Input data will be described in more detail in the following section.
+
+Results from DisMod are internally consistent *within* that model. Incidence, prevalence, remission, and excess mortality are
+linked in the DisMod estimation process and so the results from a model will include all these measures of disease. However, results
+from DisMod will *not* be consistent with final GBD estimates because of processes like COMO that rescale prevalence and sometimes
+incidence of different non-fatal disease models to achieve consistency across all models. 
+
+**Other Modeling tools- ST-GPR**
 
 - Connection between fatal/non-fatal models
 
