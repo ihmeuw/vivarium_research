@@ -12,7 +12,8 @@ etiologies by which a newborn might develop extreme hyperbilirubinemia (EHB),
 which can in turn become kernicterus.
 
 `Neonatal jaundice`_ is a product of total serum or plasma bilirubin (TB)
-levels rising too high, and has a number of etiologies; hemolytic disease and glucose-6-phosphate dehydrogenase deficiency (G6PD) are two major ones. In
+levels rising too high, and has a number of etiologies; Rh disease and 
+glucose-6-phosphate dehydrogenase deficiency (G6PD) are two major ones. In 
 addition to these two, GBD models 'preterm birth' and 'other causes' as
 etiologies of EHB.
 
@@ -43,14 +44,14 @@ causes cell death.
 turnover in the preterm infant, and thus higher bilirubin levels; a decreased
 ability to process bilirubin, due to an immature liver; and increased
 circulation of bile (which contains bilirubin) from the liver to the small 
-intestine (enterohepatic circulation) in preterm infants. Furthermore, while the mechanic is not entirely understood, preterm infants `have been observed`_ to have 
-a lower TB threshhold for developing BIND than their full-term counterparts.
+intestine (enterohepatic circulation) in preterm infants. Furthermore, while the 
+mechanic is not entirely understood, preterm infants `have been observed`_ to 
+have a lower TB threshhold for developing BIND than their full-term counterparts.
 
-.. todo::
-	Confirm the following:
-	*Other causes*, in the context of this GBD model, refers to any cause of EHB
-	that is not attributable to hemolytic disease, G6PD deficiency, or preterm
-	birth.
+We note that in the context of this model, *other causes* is calculated as the 
+remainder of cases of EHB not attributale to Rh disease, preterm birth, or G6PD. 
+It thus is defined to be all causes of EHB outside of Rh disease, preterm birth, 
+and G6PD.
 
 .. _neonatal jaundice: https://www.uptodate.com/contents/unconjugated-hyperbilirubinemia-in-the-newborn-pathogenesis-and-etiology?search=neonatal%20jaundice&source=search_result&selectedTitle=1~98&usage_type=default&display_rank=1
 
