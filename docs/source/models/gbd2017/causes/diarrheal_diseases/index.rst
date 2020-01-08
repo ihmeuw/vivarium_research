@@ -243,16 +243,16 @@ Data Description
 	  -
 	* - YLL age group start
 	  - Early neonatal
-	  - age_group_id = 2; [0-0.01917808 years)
+	  - age_group_id = 2; [0-7 days)
 	* - YLL age group end
 	  - 90-94
-	  - age_group_id = 32; [90-94 years)
+	  - age_group_id = 235; 95 years +
 	* - YLD age group start
 	  - Early neonatal
-	  - age_group_id = 2; [0-0.01917808 years)
+	  - age_group_id = 2; [0-7 days)
 	* - YLD age group end
 	  - 90-94
-	  - age_group_id = 32; [90-94 years)
+	  - age_group_id = 235; 95 years +
 
 
 
