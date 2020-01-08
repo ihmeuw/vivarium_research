@@ -181,7 +181,7 @@ Data Descriptions
 	  - age_group_id = 2; [0-7 days)
 	* - YLL age group end
 	  - Post neonatal
-	  - age_group_id = 4; [7 days-1 year)
+	  - age_group_id = 4; [28 days-1 year)
 	* - YLD age group start
 	  - Early neonatal
 	  - age_group_id = 2; [0-7 days)
