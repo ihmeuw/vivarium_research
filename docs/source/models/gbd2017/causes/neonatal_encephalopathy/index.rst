@@ -38,8 +38,7 @@ Modeling neonatal encephalopathy in GBD 2017
 Cause Hierarchy
 +++++++++++++++
 
-.. todo::
-   Create cause hierarchy diagram.
+.. image:: neonatal_encephalopathy_hierarchy.svg
 
 Cause Model Diagram
 -------------------
