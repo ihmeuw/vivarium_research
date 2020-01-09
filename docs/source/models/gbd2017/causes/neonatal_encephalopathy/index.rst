@@ -181,9 +181,42 @@ Model Assumptions and Limitations
 Restrictions
 ++++++++++++
 
-.. todo::
+The following table describes any restrictions in GBD 2017 on the effects of
+this cause (such as being only fatal or only nonfatal), as well as restrictions
+on the ages and sexes to which the cause applies.
 
-  Describe data restrictions in table format.
+.. list-table:: GBD 2017 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early Neonatal
+     - [0, 7 days), age_group_id=2
+   * - YLL age group end
+     - Post Neonatal
+     - [28 days, 1 year), age_group_id=4
+   * - YLD age group start
+     - Early Neonatal
+     - [0, 7 days), age_group_id=2
+   * - YLD age group end
+     - 95 plus
+     - [95, 125 years), age_group_id=235
+
 
 Scope
 +++++
