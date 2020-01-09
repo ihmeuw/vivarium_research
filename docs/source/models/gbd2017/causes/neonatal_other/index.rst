@@ -15,9 +15,9 @@ list the ICD 10 codes below. The complete lists can be found at:
 
 https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=DT&title=GBD+Cause+Map+and+Cause+List+for+Keywording#tab-GBD+2017
 
-Notably, GBD estimates fatal and nonfatal burden 
-separately, and defines *other neonatal disorders* differently in the nonfatal 
-and fatal models. In particular, they differ on codes P04, P05, and P07:
+Notably, GBD estimates fatal and nonfatal burden separately, and defines 
+*other neonatal disorders* differently in the nonfatal and fatal models. In 
+particular, they differ on codes P04, P05, and P07:
 
 .. csv-table:: ICD Codes
 	:file: ICD_codes.csv
