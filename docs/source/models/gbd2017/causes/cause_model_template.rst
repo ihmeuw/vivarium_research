@@ -7,6 +7,7 @@ Cause Model Template
 .. _Pull Request 64: https://github.com/ihmeuw/vivarium_research/pull/64
 .. _Pull Request 76: https://github.com/ihmeuw/vivarium_research/pull/76
 .. _Pull Request 91: https://github.com/ihmeuw/vivarium_research/pull/91
+.. _Pull Request 93: https://github.com/ihmeuw/vivarium_research/pull/93
 
 .. important::
 
@@ -196,8 +197,8 @@ Data Description
       I think `Data Description` is fine.
 
   - Should this section have subsections (such as "State and Transition Data
-    Tables")? Is there anything else that belongs in a "Data Description"
-    section besides the data tables?
+    Tables" plus some other subsection(s))? Is there anything else that belongs
+    in a "Data Description" section besides the data tables?
 
     In `Pull Request 91`_, @Yongquan said:
 
@@ -216,6 +217,10 @@ References
 .. admonition:: Todo for template development
 
   Decide on section names and overall structure.
+
+  In `Pull Request 93`_, people seemed generally good with the current
+  structure, but there were several suggestions for reorganization that I will
+  implement in the next pull request.
 
   **Question:** Are the sections in a good order?
 
