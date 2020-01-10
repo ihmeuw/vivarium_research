@@ -1,7 +1,7 @@
 .. _models:
 
 ==================
-Model Descriptions
+Model Design
 ==================
 
 .. toctree::
