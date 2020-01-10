@@ -1,8 +1,8 @@
 .. _2017_cause_models:
 
-============
+===================
 Cause Models in GBD
-============
+===================
 
 What is a cause?
 ----------------
@@ -106,7 +106,7 @@ The Appendix for the GBD 2017 Cause of Death manuscript is also available and Op
 
 
 Modeling non-fatal outcomes (Outline)
----------------------------
+-------------------------------------
 
 .. image:: gbd_nonfatal_flowchart_sim_team.jpg
    :width: 600
