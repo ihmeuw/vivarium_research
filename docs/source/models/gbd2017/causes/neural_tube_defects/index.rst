@@ -125,9 +125,9 @@ Data Description
 
 .. todo::
 
-    Look into data sources. In particular, is birth prevalence data available,
-    or do we need to estimate it using prevalence and mortality rates among the
-    early neonatal age group?
+    Decide on section headings and structure. E.g. should this whole section be
+    called "State and Transition Data Tables" instead of "Data Description"? Is
+    there anything else that belongs in a section titled "Data Description"?
 
 
 State and Transition Data Tables
@@ -166,7 +166,7 @@ State and Transition Data Tables
    * - C
      - excess mortality rate
      - :math:`\frac{\text{deaths_c642}}{\text{population} \,\times\, \text{prevalence_c642}}`
-     - = (cause-specific mortality rate) / prevalence
+     - = :math:`\frac{\text{cause-specific mortality rate}}{\text{prevalence}}`
    * - C
      - disability weight
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c642}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
@@ -250,26 +250,55 @@ Model Assumptions and Limitations
 Restrictions
 ++++++++++++
 
-.. todo::
+The following table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
 
-   Describe data restrictions in table format. For example, age restrictions
-   are:
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
 
-     yll_age_group_id_start=2,
-     yll_age_group_id_end=17,
-
-     yld_age_group_id_start=2,
-     yld_age_group_id_end=235,
-
-   Need to look up actual ages that correspond to these id's.
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early neonatal
+     - GBD age group id 2
+   * - YLL age group end
+     - 60 to 64
+     - GBD age group id 17
+   * - YLD age group start
+     - Early neonatal
+     - GBD age group id 2
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
 
 Scope
 +++++
 
-This model is designed to be used for estimating DALYs due to NTDs that are
-averted from an intervention that directly reduces the prevalence of neural tube
-defects, such as large-scale fortification of flour with folic acid, or targeted
-folic acid supplementation during pregnancy.
+This model is designed to be used for estimating DALYs due to neural tube
+defects that are averted from an intervention that directly reduces the birth
+prevalence of neural tube defects, such as large-scale fortification of flour
+with folic acid, or targeted folic acid supplementation during pregnancy.
+
+This model groups together all three severities of neural tube defects
+(anencephaly, encephalocele, and spina bifida), weighted by prevalence. Thus it
+is unable to capture any differential effects of an intervention that affects
+the birth prevalence of the different subtypes of neural tube defects at
+different rates.
 
 .. todo::
 
