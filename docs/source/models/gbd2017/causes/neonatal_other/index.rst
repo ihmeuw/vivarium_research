@@ -80,6 +80,7 @@ interventions with impacts on neonatal disorders, into a vivarium simulation.
 
 To model "other neonatal disorders" within the vivarium framework, we would need 
 to know:
+
 * **prevalence**, in order to correctly initialize the right proportion of the population with other neonatal disorders;
 
 * **birth prevalence**, in order to be able to correctly initialize new simulants throughout the simulation;
