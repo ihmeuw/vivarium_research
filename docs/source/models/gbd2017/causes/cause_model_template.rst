@@ -216,7 +216,7 @@ References
 
 .. [GBD-2017-YLD-Appendix-Cause-Model-Template]
 
-   Pages ???-??? in `Supplementary appendex 1 to the GBD 2017 YLD Capstone <YLD
+   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
    appendix on ScienceDirect_>`_:
 
      **(GBD 2017 YLD Capstone)** GBD 2017 Disease and Injury Incidence and
