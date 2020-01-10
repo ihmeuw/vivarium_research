@@ -81,6 +81,7 @@ interventions with impacts on neonatal disorders, into a vivarium simulation.
 To model "other neonatal disorders" within the vivarium framework, we would need 
 to know:
 
+
 * **prevalence**, in order to correctly initialize the right proportion of the population with other neonatal disorders;
 
 * **birth prevalence**, in order to be able to correctly initialize new simulants throughout the simulation;
@@ -125,7 +126,47 @@ incorrect our birth prevalence inputs are.
 	Include Lu's calculation of % of avoidable burden that is attributed to 
 	other neonatal
 
+
+.. todo::
+   Describe cause model
+
+Restrictions
+------------
+
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
+
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLL age group end
+	  - Post neonatal
+	  - age_group_id = 4; [28 days-1 year)
+	* - YLD age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLD age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+
 References
 ----------
 ..	[YLD] 2017 YLD appendix
 	https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
+
