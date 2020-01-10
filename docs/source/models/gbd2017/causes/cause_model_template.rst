@@ -214,6 +214,66 @@ Validation Criteria
 References
 ----------
 
+.. [GBD-2017-YLD-Appendix-Cause-Model-Template]
+
+   Pages ???-??? in `Supplementary appendex 1 to the GBD 2017 YLD Capstone <YLD
+   appendix on ScienceDirect_>`_:
+
+     **(GBD 2017 YLD Capstone)** GBD 2017 Disease and Injury Incidence and
+     Prevalence Collaborators. :title:`Global, regional, and national incidence,
+     prevalence, and years lived with disability for 354 diseases and injuries
+     for 195 countries and territories, 1990–2017: a systematic analysis for the
+     Global Burden of Disease Study 2017`. Lancet 2018; 392: 1789–858. DOI:
+     https://doi.org/10.1016/S0140-6736(18)32279-7
+
+.. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
+.. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
+
+
+.. [GBD-2017-CoD-Appendix-Cause-Model-Template]
+
+   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 CoD Capstone <CoD
+   appendix on ScienceDirect_>`_:
+
+     **(GBD 2017 CoD Capstone)** GBD 2017 Causes of Death Collaborators.
+     :title:`Global, regional, and national age-sex-specific mortality for 282
+     causes of death in 195 countries and territories, 1980–2017: a systematic
+     analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392:
+     1736–88. DOI: http://dx.doi.org/10.1016/S0140-6736(18)32203-7
+
+.. _CoD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
+.. _CoD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32203-7/attachment/5045652a-fddf-48e2-9a84-0da99ff7ebd4/mmc1.pdf
+
+.. tip::
+
+   In the `citations
+   <https://docutils.sourceforge.io/docs/user/rst/quickref.html#citations>`_
+   above, replace "Pages ???-???" with the correct page numbers for your cause
+   in the two appendices, and replace the `Cause-Model-Template` suffix in the
+   citation names with the name of your cause. The suffix is necessary because
+   Sphinx requires citation names to be unique `throughout the entire
+   documentation
+   <http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#citations>`_.
+
+   You can follow the syntax above to add your own references, and you can cite
+   the references such as [GBD-2017-YLD-Appendix-Cause-Model-Template]_ and
+   [GBD-2017-CoD-Appendix-Cause-Model-Template]_ from within your text by
+   enclosing the full citation name in brackets and adding a trailing
+   underscore, like this: :code:`[Full-Citation-Name]_`.
+
+   Delete this :code:`.. tip::` `directive
+   <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
+   once you fill in the correct page numbers for your cause in the appendices.
+
+.. admonition:: Todo for template development
+
+  Is there a better solution to the global citation problem than making citation
+  names longer to ensure that they're unique?
+
+  The same "append a suffix" rule would also apply to other common citations
+  like WHO, CDC, UpToDate, and Wikipedia. For example, the WHO citation for
+  Measles would be [WHO-Measles].
+
 .. admonition:: Todo for template development
 
   Decide on section names and overall structure.

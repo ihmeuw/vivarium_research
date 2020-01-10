@@ -358,7 +358,8 @@ References
   names longer to ensure that they're unique?
 
   The same "append a suffix" rule would also apply to other common citations
-  like WHO, CDC, UpToDate, and Wikipedia. For example, the WHO citation for Measles would be [WHO-Measles].
+  like WHO, CDC, UpToDate, and Wikipedia. For example, the WHO citation for
+  Measles would be [WHO-Measles].
 
 
   .. (aslo hosted on `Lancet.com <YLD appendix on
