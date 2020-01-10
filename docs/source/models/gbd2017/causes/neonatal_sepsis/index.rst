@@ -208,8 +208,48 @@ Data Description
 Model Assumptions and Limitations
 ---------------------------------
 
+Restrictions
+++++++++++++
+
+The following table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early neonatal
+     - GBD age group id 2
+   * - YLL age group end
+     - Post neonatal
+     - GBD age group id 4
+   * - YLD age group start
+     - Early neonatal
+     - GBD age group id 2
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+
 .. todo::
-   Add assumptions, limitations and restrictions.
+   Add assumptions and limitations.
 
 
 Validation Criteria

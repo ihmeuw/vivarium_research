@@ -215,6 +215,37 @@ Data Description
 	  - YLD appendix
 	  - Disability weight of sequela with id `sid`
 	  - 
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
+
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLL age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+	* - YLD age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLD age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
 
 
 
@@ -248,7 +279,7 @@ References
    https://en.wikipedia.org/wiki/Diarrhea
 
 .. [GBD-2017-YLD-Capstone-Appendix-1]
-   Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
+   Supplement to: GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
    and territories,    Disease Study 2017. Lancet 2018; 392: 178   (pp. 88-94)

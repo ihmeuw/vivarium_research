@@ -4,6 +4,33 @@
 Other Neonatal Disorders
 ========================
 
+Cause description
+-----------------
+
+*Other neonatal disorders* is a label defined by GBD, which refers to a
+specific collection of causes of neonatal health loss.
+
+This collection of causes is defined by a collection of ICD 9 and 10 codes. We 
+list the ICD 10 codes below. The complete lists can be found at:
+
+https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=DT&title=GBD+Cause+Map+and+Cause+List+for+Keywording#tab-GBD+2017
+
+Notably, GBD estimates fatal and nonfatal burden separately, and defines 
+*other neonatal disorders* differently in the nonfatal and fatal models. In 
+particular, they differ on codes P04, P05, and P07:
+
+.. csv-table:: ICD Codes
+	:file: ICD_codes.csv
+	:widths: 1, 10, 20, 1, 1
+	:header-rows: 1
+
+
+It is important to note that "Other neonatal disorders" is precisely the ICD
+codes listed above (plus their ICD 9 counterparts), and does not refer to "all 
+causes of neonatal health loss excluded from other cause models within the GBD 
+framework".
+
+
 Modeling Other Neonatal Disorders in GBD 2017
 ---------------------------------------------
 
@@ -21,7 +48,7 @@ neonatal disorders. These five CoDEM models are run, in addition to a "parent"
 model, to which the children models are all squeezed.
 
 Nonfatal estimates
-++++++++++++++
+++++++++++++++++++
 The nonfatal burden of "other neonatal disorders" is not explicitly modeled by 
 GBD. We here include the complete content of the "Other neonatal disorders" 
 writeup in the 2017 [YLD]_ Appendix:
@@ -54,11 +81,16 @@ interventions with impacts on neonatal disorders, into a vivarium simulation.
 To model "other neonatal disorders" within the vivarium framework, we would need 
 to know:
 
-	- **prevalence**, in order to correctly initialize the right proportion of the population with other neonatal disorders;
-	- **birth prevalence**, in order to be able to correctly initialize new simulants throughout the simulation;
-	- **incidence**, in order for susceptible simulants to appropriately become prevalent cases;
-	- **remission**, in order for prevalent cases to appropriately remit;
-	- **excess mortality rate** (EMR), in order to appropriately calculate YLLs attributable to other neonatal disorers
+
+* **prevalence**, in order to correctly initialize the right proportion of the population with other neonatal disorders;
+
+* **birth prevalence**, in order to be able to correctly initialize new simulants throughout the simulation;
+
+* **incidence**, in order for susceptible simulants to appropriately become prevalent cases;
+
+* **remission**, in order for prevalent cases to appropriately remit;
+
+* **excess mortality rate** (EMR), in order to appropriately calculate YLLs attributable to other neonatal disorers
 
 We have EMR from GBD's fatal other neonatal model. Then, most of the conditions 
 encapsulted by neonatal other have no incidence (other than birth prevalence) or 
@@ -135,6 +167,6 @@ Restrictions
 
 References
 ----------
-..	YLD:: 2017 YLD appendix
+..	[YLD] 2017 YLD appendix
 	https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
 
