@@ -601,7 +601,7 @@ section] during which cases are able to go into remission:
 
   .. math::
 
-    \frac{\text{1 case of diarrhea}}{\text{5 person-days}}\times\text{10 person-days} = \text{2 cases of diarrhea}.
+    \frac{\text{1 case of diarrhea}}{\text{5 person-days}}\times\text{10 person-days} = \text{2 remitted cases of diarrhea}.
 
   Similarly, we can take the rate of remission of diabetes, and for a randomly 
   selected case of diabetes in Moldova in 2017, consider if they will remit some 
@@ -641,8 +641,8 @@ from DisMod models.
 
 Implementing remission rates in cause models
 """"""""""""""""""""""""""""""""""""""""""""
-For a given simulation with timesteps of length *time unit* for some arbitrary 
-time unit, we convert remission rates to the form of cases remitted per 
+For a given simulation with timesteps of length *time unit* and a given time 
+unit, we convert remission rates to the form of cases remitted per 
 person-time-unit. This rate can then be used to compute the probability of a 
 simulant transitioning from an infected or with-condition state to a susceptible 
 or free-of-condition state in a given timestep.
