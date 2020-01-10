@@ -48,7 +48,7 @@ neonatal disorders. These five CoDEM models are run, in addition to a "parent"
 model, to which the children models are all squeezed.
 
 Nonfatal estimates
-++++++++++++++
+++++++++++++++++++
 The nonfatal burden of "other neonatal disorders" is not explicitly modeled by 
 GBD. We here include the complete content of the "Other neonatal disorders" 
 writeup in the 2017 [YLD]_ Appendix:
@@ -80,11 +80,15 @@ interventions with impacts on neonatal disorders, into a vivarium simulation.
 
 To model "other neonatal disorders" within the vivarium framework, we would need 
 to know:
-	- **prevalence**, in order to correctly initialize the right proportion of the population with other neonatal disorders;
-	- **birth prevalence**, in order to be able to correctly initialize new simulants throughout the simulation;
-	- **incidence**, in order for susceptible simulants to appropriately become prevalent cases;
-	- **remission**, in order for prevalent cases to appropriately remit;
-	- **excess mortality rate** (EMR), in order to appropriately calculate YLLs attributable to other neonatal disorers
+* **prevalence**, in order to correctly initialize the right proportion of the population with other neonatal disorders;
+
+* **birth prevalence**, in order to be able to correctly initialize new simulants throughout the simulation;
+
+* **incidence**, in order for susceptible simulants to appropriately become prevalent cases;
+
+* **remission**, in order for prevalent cases to appropriately remit;
+
+* **excess mortality rate** (EMR), in order to appropriately calculate YLLs attributable to other neonatal disorers
 
 We have EMR from GBD's fatal other neonatal model. Then, most of the conditions 
 encapsulted by neonatal other have no incidence (other than birth prevalence) or 
@@ -122,5 +126,5 @@ incorrect our birth prevalence inputs are.
 
 References
 ----------
-..	YLD:: 2017 YLD appendix
+..	[YLD] 2017 YLD appendix
 	https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
