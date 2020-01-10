@@ -47,61 +47,16 @@ represents **all** forms of anemia that are attributable to several causes,
 including causes such as hemoglobinopathies and hemolytic anemias that are not 
 causally attributable to iron deficiency. 
 
-Iron Deficiency Risk Factor
-+++++++++++++++++++++++++++
+Anemia Impairment
++++++++++++++++++
 
-The iron deficiency risk factor in GBD 2017 is modeled as a distribution of 
-hemoglobin concentrations. The risk factor is a **continuous measure**.
+The anemia impairment in GBD 2017 represents the total prevalence of anemia due to all causes modeled in GBD (ex: dietary iron deficiency anemia, anemia due to maternal hemorrhage, sickle cell anemia, etc.). Estimating the total prevalence of the anemia impairment for a given population is the first step in modeling anemia in GBD 2017. This is done by fitting a distribution of hemoglobin levels for that population from primary input data. For GBD 2017, an ensemble distribution was used, which was 40% gamma and 60% mirror gumbel. Source code for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
 
-.. todo::
-
-	Describe the population and distribution type (normal vs. ensemble)
-
-Modeling Strategy for the Iron Deficiency Risk Factor
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. todo::
-
-	Describe anemia envelope and causal attribution
-
-Risk Factor Hierarchy
-^^^^^^^^^^^^^^^^^^^^^
-
-.. image:: iron_risk_hierarchy.svg
-
-Dietary Iron Deficiency Cause
-+++++++++++++++++++++++++++++
-
-The dietary iron deficiency cause in GBD 2017 that is 100% attributable to the 
-iron deficiency risk factor. The dietary iron deficiency cause in GBD is a 
-YLD-only cause, meaning that it contributes to morbidity, but not mortality.
-
-Modeling Strategy for the Dietary Iron Deficiency Cause
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The dietary iron deficiency cause in GBD 2017 is not modeled directly. Rather, 
-the dietary iron deficiency cause is estimated as the remaining cases of 
-anemia after all of the other anemic cases in the overall anemia envelope were 
-causally attributed to their respective attributable causes (ex: 
-hemoglobinopathies and hemolytic anemias).
-
-Cause Hierarchy
-^^^^^^^^^^^^^^^
-
-.. image:: iron_cause_hierarchy.svg
-
-Health States and Sequela
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The sequela associated with the dietary iron deficiency cause in GBD 2017 
-include mild iron deficiency anemia, moderate iron deficiency anemia, and 
-severe iron deficiency anemia. The severity of iron deficiency anemia is 
-determined by the WHO age- and sex- specific hemoglobin concentrations, as 
-described in the table below.
+Once a the distribution is fit to hemoglobin levels for a particular age-, sex-, and location-specific demographic group, age- and sex-specific hemoglobin thresholds, as defined by the WHO and described in the table below, are used to determine the prevalence of anemia by severity for that population.
 
 .. list-table:: Hemoglobin Thresholds (g/L)
-   :widths: 15, 15, 15, 15
-   :header-rows: 1
+	:widths: 15, 15, 15, 15
+	:header-rows: 1
 
 	* - Group
 	  - Mild Anemia
@@ -131,6 +86,60 @@ described in the table below.
 	  - 100-109
 	  - 70-00
 	  - <70
+
+The prevalence of anemia as calculated in the process described above serves as the overall anemia envelope for a age-, sex-, and location-specific demographic groups and prevanet cases of anemia in the anemia envelope are the causally attributed to various causes in GBD 2017 that have anemia as a seqeula. 
+
+Dietary Iron Deficiency Cause
++++++++++++++++++++++++++++++
+
+The dietary iron deficiency cause in GBD 2017 that is 100% attributable to the 
+iron deficiency risk factor. The dietary iron deficiency cause in GBD is a 
+YLD-only cause, meaning that it contributes to morbidity, but not mortality.
+
+Modeling Strategy for the Dietary Iron Deficiency Cause
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The dietary iron deficiency cause in GBD 2017 is not modeled directly. Rather, 
+the dietary iron deficiency cause is estimated as the remaining cases of 
+anemia after all of the other anemic cases in the overall anemia envelope were 
+causally attributed to their respective attributable causes (ex: 
+hemoglobinopathies and hemolytic anemias).
+
+Cause Hierarchy
+^^^^^^^^^^^^^^^
+
+.. image:: iron_cause_hierarchy.svg
+
+Health States and Sequela
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The sequela associated with the dietary iron deficiency cause in GBD 2017 
+include mild iron deficiency anemia, moderate iron deficiency anemia, and 
+severe iron deficiency anemia. The severity of iron deficiency anemia is 
+determined by the WHO age- and sex- specific hemoglobin concentrations, as 
+described in the table above.
+
+Iron Deficiency Risk Factor
++++++++++++++++++++++++++++
+
+The iron deficiency risk factor in GBD 2017 is modeled as a distribution of 
+hemoglobin concentrations. The risk factor is a **continuous measure**.
+
+.. todo::
+
+	Describe the population and distribution type (normal vs. ensemble)
+
+Modeling Strategy for the Iron Deficiency Risk Factor
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+	Describe anemia envelope and causal attribution
+
+Risk Factor Hierarchy
+^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: iron_risk_hierarchy.svg
 
 Cause Model Diagram
 -------------------
