@@ -8,6 +8,7 @@ Cause Model Template
 .. _Pull Request 76: https://github.com/ihmeuw/vivarium_research/pull/76
 .. _Pull Request 91: https://github.com/ihmeuw/vivarium_research/pull/91
 .. _Pull Request 93: https://github.com/ihmeuw/vivarium_research/pull/93
+.. _Pull Request 99: https://github.com/ihmeuw/vivarium_research/pull/99
 
 .. important::
 
@@ -263,7 +264,8 @@ References
 
    Delete this :code:`.. tip::` `directive
    <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
-   once you fill in the correct page numbers for your cause in the appendices.
+   once you fill in the correct page numbers for your cause in the appendices
+   and rename the references appropriately.
 
 .. admonition:: Todo for template development
 
@@ -273,6 +275,10 @@ References
   The same "append a suffix" rule would also apply to other common citations
   like WHO, CDC, UpToDate, and Wikipedia. For example, the WHO citation for
   Measles would be [WHO-Measles].
+
+  In `Pull Request 99`_, we decided to go with the above naming convention for
+  now. But @James said it should be possible to adapt the sphinx builder to
+  resolve citations to the most local level if desired.
 
 .. admonition:: Todo for template development
 
