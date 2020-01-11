@@ -442,6 +442,8 @@ to as **incidence in the total population** (as estimated by the GBD study)
 and **incidence in the susceptible** (or *at-risk*) **population.** These 
 measures are defined using the following key concepts:
 
+  .. _person-time-defn:
+
   **Person-time:** person-time is a measure of the number of individuals 
   multiplied by the amount of time they individually occupy the population 
   of interest. Notably, the population of interest varies depending on context 
@@ -563,19 +565,20 @@ Definition
 Remission is a measure of cases that recover from a with-condition state, given 
 a specified population and time period. Just as with incidence, the numerator is 
 given by the count of recovered (or *remitted*) cases, and the denominator is 
-the cumulative person-time [link to person-time definition in incidence 
-section] during which cases are able to go into remission:
+the cumulative :ref:`person-time <person-time-defn>` during which cases are able to go into remission:
 
   .. math::
     \frac{\text{number of remitted cases}}{\text{person-time in the with-condition 
     population}}
 
-  For example, consider diarrhea cases in the Philippines in 2017. Say that that 
-  year, every such case remitted after an average of 5 days:
+  For example, consider diarrhea cases in the Philippines in 2017. Say that in 
+  the year under consideration, every such case remitted after an average of 5 
+  days:
 
   .. math::
 
-    \frac{\text{1 case}}{\text{5 person-days}}=\frac{365/5\text{ cases}}{\text{1 person-year}}=73\text{ cases/person-year}
+    \frac{\text{1 case}}{\text{5 person-days}} = \frac{\text{1 case}}{\text{5 person-days}} \times 
+    \frac{\text{365 person-days}}{\text{1 person-year}}=\frac{73\text{ cases}}{\text{1 person-year}}
 
   This calculation is straightfoward, as diarrheal diseases have a highly
   consistent disease duration.
@@ -609,7 +612,7 @@ section] during which cases are able to go into remission:
 
 .. math::
 
-  \frac{\text{0.0036 cases of diabetes}}{\text{1 person-year}}\times\text{1 person-year} = \text{0.0036 cases of diabetes}.
+  \frac{\text{0.0036 cases of diabetes}}{\text{1 person-year}}\times\text{1 person-year} = \text{0.0036 remitted cases of diabetes}.
 
 Note that when we refer to remission rates, we are typically considering
 a rate within the infected or with-condition population. This is true both in
@@ -643,9 +646,10 @@ Implementing remission rates in cause models
 """"""""""""""""""""""""""""""""""""""""""""
 For a given simulation with timesteps of length *time unit* and a given time 
 unit, we convert remission rates to the form of cases remitted per 
-person-time-unit. This rate can then be used to compute the probability of a 
-simulant transitioning from an infected or with-condition state to a susceptible 
-or free-of-condition state in a given timestep.
+person-time-unit. If the rate is small with respect to the timestep (that is, if
+the rate is less than 1 per the time step), it can be used to compute the 
+probability of a simulant transitioning from an infected or with-condition state 
+to a susceptible or free-of-condition state in a given timestep.
 
 Duration-Based Transitions
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
