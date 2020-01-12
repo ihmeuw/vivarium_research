@@ -50,9 +50,19 @@ causally attributable to iron deficiency.
 Anemia Impairment
 +++++++++++++++++
 
-The anemia impairment in GBD 2017 represents the total prevalence of anemia due to all causes modeled in GBD (ex: dietary iron deficiency anemia, anemia due to maternal hemorrhage, sickle cell anemia, etc.). Estimating the total prevalence of the anemia impairment for a given population is the first step in modeling anemia in GBD 2017. This is done by fitting a distribution of hemoglobin levels for that population from primary input data. For GBD 2017, an ensemble distribution was used, which was 40% gamma and 60% mirror gumbel. Source code for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
+The anemia impairment in GBD 2017 represents the total prevalence of anemia due 
+to all causes modeled in GBD (ex: dietary iron deficiency anemia, anemia due to 
+maternal hemorrhage, sickle cell anemia, etc.). Estimating the total prevalence 
+of the anemia impairment for a given population is the first step in modeling 
+anemia in GBD 2017. This is done by fitting a distribution of hemoglobin levels 
+for that population from primary input data. For GBD 2017, an ensemble 
+distribution was used, which was 40% gamma and 60% mirror gumbel. Source code 
+for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
 
-Once a the distribution is fit to hemoglobin levels for a particular age-, sex-, and location-specific demographic group, age- and sex-specific hemoglobin thresholds, as defined by the WHO and described in the table below, are used to determine the prevalence of anemia by severity for that population.
+Once a the distribution is fit to hemoglobin levels for a particular age-, 
+sex-, and location-specific demographic group, age- and sex-specific hemoglobin 
+thresholds, as defined by the WHO and described in the table below, are used to 
+determine the prevalence of anemia by severity for that population.
 
 .. list-table:: Hemoglobin Thresholds (g/L)
 	:widths: 15, 15, 15, 15
@@ -87,7 +97,20 @@ Once a the distribution is fit to hemoglobin levels for a particular age-, sex-,
 	  - 70-00
 	  - <70
 
-The prevalence of anemia as calculated in the process described above serves as the overall anemia envelope for a age-, sex-, and location-specific demographic groups and prevanet cases of anemia in the anemia envelope are the causally attributed to various causes in GBD 2017 that have anemia as a seqeula. 
+The prevalence of anemia as calculated in the process described above serves as 
+the overall anemia envelope for a age-, sex-, and location-specific demographic 
+groups and prevanet cases of anemia in the anemia envelope are then causally 
+attributed to various causes in GBD 2017 that have anemia as seqeulae. This is 
+done through a process described in the GBD 2017 non-fatal methods appendix.
+
+Notably, early neonatal and late neonatal age groups (age group IDs 2 and 3) 
+are excluded from this process; instead, these age groups are assigned the 
+anemia prevalence from the postneonatal age group (age group ID 4).
+
+Additionally, a pregnancy correction is performed for women of reproductive 
+age. Therefore, additional considerations beyond the scope of the current 
+documentation will need to be made if planning to model hemoglobin among women 
+of reproductive age.
 
 Dietary Iron Deficiency Cause
 +++++++++++++++++++++++++++++
@@ -122,19 +145,23 @@ described in the table above.
 Iron Deficiency Risk Factor
 +++++++++++++++++++++++++++
 
-The iron deficiency risk factor in GBD 2017 is modeled as a distribution of 
-hemoglobin concentrations. The risk factor is a **continuous measure**.
+The iron deficiency risk factor in GBD 2017 is a **continuous measure** modeled 
+as a distribution of hemoglobin concentrations among the population with 
+conditions that cause iron deficiency anemia. Below is a list of such causes: 
 
-.. todo::
+- Chronic kidney disease
+- Digestive disorders (Gastritis & Duodenitis, Peptic Ulcer Disease, Crohn's Disease, Ulcerative Colitis)
+- Cirrhosis
+- Endocrine disorders
+- Gynecological disorders (Uterine fibroids, Menstrual disorders)
+- Neglected Tropical Diseases (Hookwork, Schistosomiasis, Other neglected) tropical diseases
+- Other infectious diseases
+- Maternal hemorrhage
+- Nutritional deficiencies (Vitamin A Deficiency, Dietary iron deficiency) 
 
-	Describe the population and distribution type (normal vs. ensemble)
-
-Modeling Strategy for the Iron Deficiency Risk Factor
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-.. todo::
-
-	Describe anemia envelope and causal attribution
+The distribution of hemoglobin concentrations represented by the iron 
+deficiency risk factor is assumed to have the same shape as the distribution of 
+hemoglobin concentrations in the entire population (anemia envelope).
 
 Risk Factor Hierarchy
 ^^^^^^^^^^^^^^^^^^^^^
