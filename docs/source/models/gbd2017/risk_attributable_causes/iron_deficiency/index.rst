@@ -99,7 +99,7 @@ determine the prevalence of anemia by severity for that population.
 
 The prevalence of anemia as calculated in the process described above serves as 
 the overall anemia envelope for a age-, sex-, and location-specific demographic 
-groups and prevanet cases of anemia in the anemia envelope are then causally 
+groups, and prevalent cases of anemia in the anemia envelope are then causally 
 attributed to various causes in GBD 2017 that have anemia as seqeulae. This is 
 done through a process described in the GBD 2017 non-fatal methods appendix.
 
