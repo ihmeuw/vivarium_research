@@ -154,7 +154,7 @@ conditions that cause iron deficiency anemia. Below is a list of such causes:
 - Cirrhosis
 - Endocrine disorders
 - Gynecological disorders (Uterine fibroids, Menstrual disorders)
-- Neglected Tropical Diseases (Hookwork, Schistosomiasis, Other neglected) tropical diseases
+- Neglected Tropical Diseases (Hookwork, Schistosomiasis, Other neglected tropical diseases)
 - Other infectious diseases
 - Maternal hemorrhage
 - Nutritional deficiencies (Vitamin A Deficiency, Dietary iron deficiency) 
