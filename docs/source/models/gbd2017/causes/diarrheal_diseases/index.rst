@@ -7,49 +7,74 @@ Diarrheal Diseases
 Disease Description
 -------------------
 
-We follow GBD 2017 and "defined diarrhoeal disease episodes as three
-or more loose stools in a 24-hour period." (p. 88 of
+We follow GBD 2017 and "defined diarrhoeal disease episodes as three or more 
+loose stools in a 24-hour period." (p. 88 of 
 [GBD-2017-YLD-Capstone-Appendix-1]_).
 
-.. todo::
+Diarrhea has various etiologies, with infectious diarrhea accounting for the 
+vast majority of global diarrheal disease burden. The top pathogens responsible 
+for diarrhea include norovirus, rotavirus, E. Coli, Camplyobacter, and 
+Salmonella. Bacterial infections, and specifically species of Shigella, 
+account for the majority of bloody diarrhea.
 
-   Adapt additional material from GBD capstone and other sources, e.g. [WHO]_,
-   [CDC]_, [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1]_
+Infection most commonly occurs via feces-contamined water, and can also spread 
+via contamined food and person-to-person contact. ([WHO]_)
+
+The global prevalence of diarrhea thus varies considerably accoring to resource 
+access. In particular, resource-limited countries have a "baseline frequency... 
+superimposed with epidemic cases of diarrhea" ([UpToDate_1]_). The top risk 
+factors for diarrheal diseases thus include crowding (such as living in refugee 
+camps) and poor sanitation, in addition to immune system-compromising conditions, 
+such as living with HIV.
+
+The most significant outcomes of a nonfatal diarrhea episode are dehydration and 
+the loss of nutrition. In particular, in low-income countries, the high 
+prevalence of diarrhea is a major cause of child malnutrition ([WHO]_), which 
+in turn makes such children more susceptible to future diarrheal episodes and 
+other negative sequelae.
+
+The WHO-recommended measures for diarrhea prevention include:
+	- Access to safe drinking water;
+	- Use of improved sanitation;
+	- Hand washing with soap;
+	- Exclusive breastfeeding for the first six months of life;
+	- Good personal and food hygiene;
+	- Health education about how infections spread; and
+	- Rotavirus vaccination.
+
+Noninfectious diarrhea etiologies are far less common, but are more likely among 
+chronic cases of diarrhea. Causes of noninfectious diarrhea include ischemic 
+colitis, inflammatory bowl disease, among others ([UpToDate_2]_).
+
+
 
 Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
 
+The GBD diarrheal diseases model follows a standard GBD framework, including a 
+cause of death (CoD) model and a nonfatal model.
 
+The CoD model estimates the cause-specific mortality rate (CSMR) within the
+total population, and a cause fraction. These estimates are based on vital
+registration and verabal autopsy data.
 
+The nonfatal model is run in DisMod. The primary inputs are prevalence epi data,
+for which self-reported prevalence is the reference definition, and the CSMR
+estimates from CodCorrect. Separately, the ratio of mild/moderate/severe
+diarrhea is estimated, based on data from a systematic review. These severity
+ratio estimates do not vary by age/sex/location/year, and are applied to the
+prevalence and incidence estimates produced by DisMod to produce the three
+sequela of diarrheal diseases: mild diarrheal diseases, moderate diarrheal
+diseases, and severe diarrheal diseases. In our model, every individual will
+have the average severity for their age/sex/location/year. 
 
-According to the [GBD-2017-YLD-Capstone-Appendix-1]_, "There are no
-major modelling updates from GBD 2016," (p. 93) and "self-reported
-prevalence is the reference category" (p. 88).
+The GBD 2017 adjusted for seasonal variation in diarrheal disease, but we have
+not attempted to include this variation in Vivarium yet. (p. 89)
 
-.. todo::
+There is substantial additional effort in GBD to divide diarrhea burden into the
+aetiologies of diarrhea, but we have not included aetiologies in this simple
+model.
 
-   Add more context regarding GBD 2016 model for people who are not familiar.
-
-Regarding the duration of a bout of diarrhea, "the mean duration was
-the duration in days, an average of 4.3 (4.2 4.4)". (p. 89, based on a
-paper referenced there).
-For GBD 2017, the remission period was modeled as 5 days.
-Since this assumption gets into the DisMod
-model, we will use the remission rate that comes from DisMod.
-
-The GBD 2017 adjusted for seasonal variation in diarrheal disease, but
-we have not attempted to include this variation in Vivarium yet. (p. 89)
-
-There is substantial additional effort in GBD to divide diarrhea
-burden into the aetiologies of diarrhea, but we have not included
-aetiologies in this simple model.  The non-fatal model is severity
-split based. In our model, every individual will have the average
-severity for their age/sex/location/year.
-
-.. todo::
-
-   Add relevant detail about diarrheal diseases modeling process from
-   the CoD Appendix.
 
 GBD Hierarchy
 -------------
@@ -190,6 +215,37 @@ Data Description
 	  - YLD appendix
 	  - Disability weight of sequela with id `sid`
 	  - 
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
+
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLL age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+	* - YLD age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLD age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
 
 
 
@@ -207,6 +263,14 @@ References
    Retrieved 14 Nov 2019.
    https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease
 
+..	[UpToDate_1] Approach to the adult with acute diarrhea in resource-limited countries
+	Retrieved 26 Dec 2019.
+	https://www.uptodate.com/contents/approach-to-the-adult-with-acute-diarrhea-in-resource-limited-countries
+
+..	[UpToDate_2] Approach to the adult with acute diarrhea in resource-rich countries
+	Retrieved 26 Dec 2019.
+	https://www.uptodate.com/contents/approach-to-the-adult-with-acute-diarrhea-in-resource-rich-settings
+
 .. [CDC] Diarrhea: Common Illness, Global Killer.
    https://www.cdc.gov/healthywater/global/diarrhea-burden.html
 
@@ -215,7 +279,7 @@ References
    https://en.wikipedia.org/wiki/Diarrhea
 
 .. [GBD-2017-YLD-Capstone-Appendix-1]
-   Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
+   Supplement to: GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
    and territories,    Disease Study 2017. Lancet 2018; 392: 178   (pp. 88-94)
