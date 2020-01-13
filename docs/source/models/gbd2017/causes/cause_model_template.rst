@@ -34,7 +34,7 @@ Cause Model Template
       :samp:`{\{cause_name\}}` is replaced with a unique descriptive name or
       abbreviation for your cause.
 
-   #. Delete this document's title, above:
+   #. Delete this document's title above:
 
       .. code:: reStructuredText
 
@@ -66,6 +66,61 @@ Cause Model Template
       `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
       from :file:`index.rst`.
 
+.. admonition:: Todo for template development
+
+  Make it clear what content and structure we are looking for in this document.
+  In particular:
+
+  - In `Pull Request 93`_ @James suggested the following high-level
+    organization:
+
+      Operationally, a useful way to think about what these documents are laying out is
+
+      1. An overview of what experts in the world think about the cause
+      2. An overview of what GBD thinks about the cause
+      3. A modeling strategy that synthesizes 1 & 2 into a coherent simulation
+         model with enough detail to both implement it and to reason about how it
+         will behave.
+
+    These 3 content categories correspond to the following 3 sections below:
+
+      1. `Disease Overview`_
+      2. `GBD 2017 Modeling Strategy`_
+      3. `Vivarium Modeling Strategy`_
+
+    I think the introductory paragraph for the document should indicate that
+    this is how the document is organized, and I think the Todo's in each
+    section should expand on what this means.
+
+  - I have begun to reorganize the template to use the following document
+    layout, also suggested by @James in `Pull Request 93`_:
+
+    .. code:: reStructuredText
+
+      =====
+      Title
+      =====
+
+      Summary paragraph describing what's in the document.
+
+      .. contents::
+         :local:
+         :depth: 1
+
+      Section 1
+      ---------
+
+      Section overview
+
+      Subsection 1.1
+      ++++++++++++++
+
+      Subsection contents.
+
+      Etc.
+
+    The template should guide the reader to follow this general layout.
+
 ==============================
 Full Name of Cause in GBD 2017
 ==============================
@@ -73,6 +128,10 @@ Full Name of Cause in GBD 2017
 .. todo::
 
   Add a brief introductory paragraph for this document.
+
+.. contents::
+   :local:
+   :depth: 1
 
 Disease Overview
 ----------------
@@ -207,8 +266,8 @@ State and Transition Data Tables
   comments by @Beatrix and @Nathaniel in `Pull Request 64`_ discussing the
   following questions:
 
-  - Should this section be called "Data Description" as it is now, or would
-    something like "State and Transition Data Tables" be more descriptive?
+  - Should this section be called "Data Description", or would something like
+    "State and Transition Data Tables" be more descriptive?
 
     In `Pull Request 91`_, @James said:
 
@@ -303,7 +362,7 @@ References
 
   In `Pull Request 93`_, people seemed generally good with the current
   structure, but there were several suggestions for reorganization that I will
-  implement in the next pull request.
+  implement in a new pull request.
 
   **Question:** Are the sections in a good order?
 
