@@ -1,8 +1,8 @@
 .. _2017_cause_model_template:
 
-====================
+--------------------
 Cause Model Template
-====================
+--------------------
 
 .. _Pull Request 64: https://github.com/ihmeuw/vivarium_research/pull/64
 .. _Pull Request 76: https://github.com/ihmeuw/vivarium_research/pull/76
@@ -34,15 +34,21 @@ Cause Model Template
       :samp:`{\{cause_name\}}` is replaced with a unique descriptive name or
       abbreviation for your cause.
 
-   #. Replace this document's title
+   #. Delete this document's title, above:
 
       .. code:: reStructuredText
 
-         ====================
+         --------------------
          Cause Model Template
-         ====================
+         --------------------
 
-      with the full name of your cause in GBD 2017:
+      Once the above title is deleted, all the other section titles will be
+      promoted up one level.
+
+   #. The subtitle below should now be the document's title. Replace the text
+      in the below (sub)title with the full name of your cause in GBD 2017 (e.g.
+      "Measles" or "Neonatal encephalopathy due to birth asphyxia and birth
+      trauma"):
 
       .. code:: reStructuredText
 
@@ -50,7 +56,7 @@ Cause Model Template
          Full Name of Cause in GBD 2017
          ==============================
 
-      **Note:** Remember to adjust the length of the title's underline
+      **Note:** Be sure to adjust the length of the title's underline
       :code:`======` and overline :code:`======` to match the length of your
       new document title, or you will get errors in the `section structure
       <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
@@ -59,6 +65,17 @@ Cause Model Template
    #. Once you complete these steps, delete this :code:`.. important::`
       `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
       from :file:`index.rst`.
+
+==============================
+Full Name of Cause in GBD 2017
+==============================
+
+.. todo::
+
+  Add a brief introductory paragraph for this document.
+
+Disease Overview
+----------------
 
 .. todo::
 
@@ -179,10 +196,10 @@ Assumptions and Limitations
   any other subsections besides `Scope` and `Assumptions and Limitations`?
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
-Data Description
-----------------
+State and Transition Data Tables
+++++++++++++++++++++++++++++++++
 
 .. admonition:: Todo for template development
 
@@ -210,7 +227,7 @@ Data Description
     it for all cause models?
 
 Validation Criteria
--------------------
++++++++++++++++++++
 
 References
 ----------
