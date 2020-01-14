@@ -101,7 +101,7 @@ defined in the following table.
 
 The prevalence of anemia as calculated in the process described above serves as 
 the overall anemia envelope for a age-, sex-, and location-specific demographic 
-groups and prevanet cases of anemia in the anemia envelope are then causally 
+groups, and prevalent cases of anemia in the anemia envelope are then causally 
 attributed to various causes in GBD 2017 that have anemia as seqeulae. This is 
 done through a process described in the GBD 2017 non-fatal methods appendix.
 
@@ -208,13 +208,23 @@ conditions that cause iron deficiency anemia. Below is a list of such causes:
 
 .. note::
 
-	According to the GBD modelers, ESRD - Dialysis, Crohn's disease, and ulcerative colitis were also included in this list, although there do not appear to be results for these causes in GBD 2017. Additionally, according to the GBD modelers, cirrhosis should be included in this list, although there do not appear to be any anemia-afflicted sequelae with results in GBD 2017 within any of the cirrhosis causes.
+	According to the GBD modelers, ESRD - Dialysis, Crohn's disease, and 
+	ulcerative colitis were also included in this list, although there do not 
+	appear to be results for these causes in GBD 2017. Additionally, according 
+	to the GBD modelers, cirrhosis should be included in this list, although 
+	there do not appear to be any anemia-afflicted sequelae with results in GBD 
+	2017 within any of the cirrhosis causes.
 
 The distribution of hemoglobin concentrations represented by the iron 
 deficiency risk factor is assumed to have the same shape as the distribution of 
-hemoglobin concentrations in the entire population (anemia envelope), i.e. 40% gamma and 60% mirror Gumbel ensemble distribution. The mean value for the iron deficiency risk factor is stored under modelable entity ID 10487 (also REI ID 95) and the standard deviation is stored under modelable entity ID 10488.
+hemoglobin concentrations in the entire population (anemia envelope), i.e. 40% 
+gamma and 60% mirror Gumbel ensemble distribution. The mean value for the iron 
+deficiency risk factor is stored under modelable entity ID 10487 (also REI ID 
+95) and the standard deviation is stored under modelable entity ID 10488.
 
-The ensemble distribution of hemoglobin concentrations for population afflicted with the causes listed in the table above can be recreated with the following equations: 
+The ensemble distribution of hemoglobin concentrations for population afflicted 
+with the causes listed in the table above can be recreated with the following 
+equations: 
 
 .. list-table:: Constants 
 	:widths: 10, 5, 15
@@ -256,7 +266,9 @@ The ensemble distribution of hemoglobin concentrations for population afflicted 
 	  - (meid_10488) * sqrt(6) / pi
 	  - 
 
-Python code used to recreate the prevalence of anemia for a specific demogrphic group using the ensemble distribution is included below (assuming age- and sex- specific *anemia_threshold* values, as defined in the table above_):
+Python code used to recreate the prevalence of anemia for a specific demogrphic 
+group using the ensemble distribution is included below (assuming age- and sex- 
+specific *anemia_threshold* values, as defined in the table above_):
 
 .. code-block:: language
 
