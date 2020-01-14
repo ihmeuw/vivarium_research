@@ -152,12 +152,8 @@ Iron Deficiency Risk Factor
 +++++++++++++++++++++++++++
 
 The iron deficiency risk factor in GBD 2017 is a **continuous measure** modeled 
-as a distribution of hemoglobin concentrations among the population with 
-conditions that cause iron deficiency anemia. Below is a list of such causes:
-
-.. warning:: 
-
-	Table that contains list of included causes is not currently rendering
+as a distribution of hemoglobin concentrations *among the population with 
+conditions that cause iron deficiency anemia.* Below is a list of such causes, along with the list of sequela IDs that include anemia health states:
 
 .. list-table:: Causes 
 	:widths: 40 40 40
@@ -165,7 +161,7 @@ conditions that cause iron deficiency anemia. Below is a list of such causes:
 
 	* - Cause
 	  - Cause ID
-	  - Anemia-Afflicated sequela ID
+	  - Anemia-Afflicated Sequela ID
 	* - Dietary Iron Deficiency
 	  - 390
 	  - 206, 207, 208
@@ -191,11 +187,11 @@ conditions that cause iron deficiency anemia. Below is a list of such causes:
 	  - 961
 	  - 240, 241, 242
 	* - Maternal Hemorrhage
-      - 367
-      - 182, 183, 184
-    * - Vitamin A Deficiency
-      - 389
-      - 5393, 5396, 5399
+	  - 367
+	  - 182, 183, 184
+	* - Vitamin A Deficiency
+	  - 389
+	  - 5393, 5396, 5399
 	* - Peptic Ulcer Disease
 	  - 527
 	  - 4952, 4955, 4958, 4961, 4964, 4967, 4976, 4979, 4982, 5627, 5630, 5633, 7202, 7205, 7208
