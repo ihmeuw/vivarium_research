@@ -18,7 +18,7 @@ Cause Model Template
 
    #. Make a subdirectory :file:`{cause_name}/` in the folder
       :file:`gbd2017/causes/` , where :file:`{cause_name}` is replaced with the
-      (potentially shortened) name of the cause you are modeling.  This
+      (potentially shortened) name of the cause you are modeling, such as :file:`measles/` or :file:`neonatal_encephalopathy/`.  This
       subdirectory is where you will put all the files for your cause model
       documentation, including this document, image files, .csv files, etc.
 
@@ -32,7 +32,7 @@ Cause Model Template
       unique reference label for your cause. The reference label should have the
       form :samp:`.. _2017_cause_{\{cause_name\}}:`, where
       :samp:`{\{cause_name\}}` is replaced with a unique descriptive name or
-      abbreviation for your cause.
+      abbreviation for your cause, e.g. :code:`.. _2017_cause_measles:`.
 
    #. Delete this document's title above:
 
@@ -46,15 +46,21 @@ Cause Model Template
       promoted up one level.
 
    #. The subtitle below should now be the document's title. Replace the text
-      in the below (sub)title with the full name of your cause in GBD 2017 (e.g.
-      "Measles" or "Neonatal encephalopathy due to birth asphyxia and birth
-      trauma"):
+      in the below (sub)title with the full name of your cause in GBD 2017. For example, if you were modeling the cause "Neonatal encephalopathy due to birth asphyxia and birth trauma," then the title
 
       .. code:: reStructuredText
 
          ==============================
          Full Name of Cause in GBD 2017
          ==============================
+
+      should be replaced by
+
+      .. code:: reStructuredText
+
+         ==============================================================
+         Neonatal encephalopathy due to birth asphyxia and birth trauma
+         ==============================================================
 
       **Note:** Be sure to adjust the length of the title's underline
       :code:`======` and overline :code:`======` to match the length of your
