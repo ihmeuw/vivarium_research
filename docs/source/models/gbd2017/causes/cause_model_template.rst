@@ -119,7 +119,10 @@ Cause Model Template
 
       Etc.
 
-    The template should guide the reader to follow this general layout.
+    The template should guide the reader to follow this general layout. In
+    particular, I added Todo's for adding overviews of the document and the
+    three sections, but perhaps a better strategy would be to actually write
+    template overviews to put in this document.
 
 ==============================
 Full Name of Cause in GBD 2017
@@ -177,6 +180,10 @@ Disease Overview
 GBD 2017 Modeling Strategy
 --------------------------
 
+.. todo::
+
+  Add an overview of the GBD modeling section.
+
 .. admonition:: Todo for template development
 
   In `Pull Request 91`_, @James suggested adding the following to this section:
@@ -184,6 +191,10 @@ GBD 2017 Modeling Strategy
     Point people to yld and cod appendices for their diseases and link to
     http://ghdx.healthdata.org/gbd-2017/code which can serve as an annoying
     to read but authoritative source on how the cause was actually modeled.
+
+  Note that [GBD-2017-YLD-Appendix-Cause-Model-Template]_ and
+  [GBD-2017-CoD-Appendix-Cause-Model-Template]_ are now in the reference section
+  below.
 
 
 Cause Hierarchy
@@ -232,6 +243,10 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
+.. todo::
+
+  Add an overview of the Vivarium modeling section.
+
 Scope
 +++++
 
@@ -249,41 +264,11 @@ Assumptions and Limitations
   and the limitations these assumptions impose on the applicability of the
   model.
 
-.. admonition:: Todo for template development
-
-  What else goes in the `Vivarium Modeling Strategy` section? Should there be
-  any other subsections besides `Scope` and `Assumptions and Limitations`?
-
 Cause Model Diagram
 +++++++++++++++++++
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
-.. admonition:: Todo for template development
-
-  Decide on section heading name(s) and structure for the data section. See
-  comments by @Beatrix and @Nathaniel in `Pull Request 64`_ discussing the
-  following questions:
-
-  - Should this section be called "Data Description", or would something like
-    "State and Transition Data Tables" be more descriptive?
-
-    In `Pull Request 91`_, @James said:
-
-      I think `Data Description` is fine.
-
-  - Should this section have subsections (such as "State and Transition Data
-    Tables" plus some other subsection(s))? Is there anything else that belongs
-    in a "Data Description" section besides the data tables?
-
-    In `Pull Request 91`_, @Yongquan said:
-
-      one data-relevant section needed for more complicated models is
-      non-standard data sources where external calculation occurs.
-
-    Does "non-standard data sources" warrant a subsection, even if we don't need
-    it for all cause models?
 
 Validation Criteria
 +++++++++++++++++++
@@ -360,9 +345,11 @@ References
 
   Decide on section names and overall structure.
 
-  In `Pull Request 93`_, people seemed generally good with the current
-  structure, but there were several suggestions for reorganization that I will
-  implement in a new pull request.
+  In `Pull Request 93`_, people seemed generally good with the existing
+  structure, but there were several suggestions for reorganization (in
+  particular from @James and @Beatrix) that I have implemented above.
+
+  Here are some of the questions and comments we have discussed so far:
 
   **Question:** Are the sections in a good order?
 
@@ -401,6 +388,9 @@ References
 
   **Question:** Do we have examples of restrictions we would apply that are
   different from GBD restrictions?
+
+    See `Pull Request 93`_ for some thoughts on this question from @Ali and
+    @James.
 
   Also, in `Pull Request 76`_, @Beatrix said:
 
