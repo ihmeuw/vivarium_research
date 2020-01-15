@@ -334,7 +334,7 @@ References
 	View `Kassebaum et al. 2016` 
 
 		Kassebaum NJ, GBD 2013 Anemia Collaborators. The Global Burden of 
-		Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: 10.1016/j.hoc.2015.11.002
+		Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: https://doi.org/10.1016/j.hoc.2015.11.002
 
 ..  `Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en US&searchIndex=
 
