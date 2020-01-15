@@ -51,11 +51,11 @@ myocardial ischemia or detection of a rise and/or fall of cardiac biomarker valu
 
 - Asymptomatic ischemic heart disease following myocardial infarction; survival to 28 days following incident MI. The GBD study does not use estimates based on ECG evidence for prior MI, due to its limited specificity and sensitivity.
 
-For GBD 2017 IHD non-fatal model, the type of model input data included epi data from a systematic review, vital registration, and verbal autopsy data. 
-[GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Heart-Disease]_
-
-For GBD 2017 IHD fatal model, the type of model input data included data from vital registration and verbal autopsy data. The fatal model outliered verbal autopsy data in countries and subnational locations where high-quality vital registration data were also available. The fatal model also outliered non-representative subnational verbal autopsy data points, ICD8 and ICD9 BTL data points which were inconsistent with the rest of the data and created implausible time trends, and data in a number of Indian states identified by experts as poor-quality. 
+For GBD 2017 IHD fatal model, the type of model input data included data from vital registration and verbal autopsy data. The fatal model outliered verbal autopsy data in countries and subnational locations where high-quality vital registration data were also available. The fatal model also outliered non-representative subnational verbal autopsy data points, ICD8 and ICD9 BTL data points which were inconsistent with the rest of the data and created implausible time trends, and data in a number of Indian states identified by experts as poor-quality. For the fatal model, estimates for YLLs were calculated by pulling CoD data and location-level covariates, running this data through CODEm models and CodCorrect, and adjusting for deaths at the location/year/age/sex stratification.
 [GBD-2017-YLL-Capstone-Appendix-1-Ischemic-Heart-Disease]_
+
+For GBD 2017 IHD non-fatal model, the type of model input data included epi data from a systematic review, vital registration, and verbal autopsy data. For the non-fatal model, the proportion of MI is calculated by pulling in CoD data  and pre-redistribution of CoDCorrect data and loading into Dismod. Acute IHD CSMR is calculated through a custom process which includes post-CodCorrect IHD deaths. MI prevalence and incidence results are estimated through standard Dismod model. MI prevalence estimates are then used to calculate severity splits of acute MI and chronic IHD. Asymptotic IHD prevalence is estimated through pulling data from Dismod and then making adjustments to avoid double-counting heart failure due to IHD and Angina due to IHD. Angina due to IHD is estimated using a standard Dismod model. These estimates are then used for severity splits of angina due to IHD. YLLS, DALYs, and comorbidity-adjusted YLDs are estimated by pulling in all unadjusted results of prevalence and incidence (MI, acute IHD, IHD following MI, angina due to IHD) and weighing for disability.
+[GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Heart-Disease]_
 
 Vivarium Modeling Strategy
 --------------------------
