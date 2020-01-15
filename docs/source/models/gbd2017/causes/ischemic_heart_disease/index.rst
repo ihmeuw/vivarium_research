@@ -16,7 +16,7 @@ Chronic ischemic heart disease can cause signs and symptoms such as angina, anxi
 .. _NIH: https://www.nhlbi.nih.gov/health-topics/ischemic-heart-disease
 
 
-Modeling Ischemic Heart Disease (IHD) in GBD 2017
+GBD 2017 Modeling Strategy
 -------------------------------------------------
 
 GBD 2017 models fatal and non-fatal IHD estimates separately. GBD 2017 models IHD using Myocardial infarction (MI) sequelae to estimate the prevalence of IHD, due to the challenges of disease detection and varying symptoms across the population.
@@ -54,12 +54,32 @@ myocardial ischemia or detection of a rise and/or fall of cardiac biomarker valu
 For GBD 2017 IHD non-fatal model, the type of model input data included epi data from a systematic review, vital registration, and verbal autopsy data. 
 [GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Heart-Disease]_
 
-For GBD 2017 IHD fatal model, the type of model input data included data from vital registration and verbal autopsy data. The fatal model outliered verbal autopsy data in countries and subnational locations where high-quality vital registration data were also available. The fatal model also outliered non-representative subnational verbal autopsy data points., ICD8 and ICD9 BTL data points which were inconsistent with the rest of the data and created implausible time trends, and data in a number of Indian states identified by experts as poor-quality. 
+For GBD 2017 IHD fatal model, the type of model input data included data from vital registration and verbal autopsy data. The fatal model outliered verbal autopsy data in countries and subnational locations where high-quality vital registration data were also available. The fatal model also outliered non-representative subnational verbal autopsy data points, ICD8 and ICD9 BTL data points which were inconsistent with the rest of the data and created implausible time trends, and data in a number of Indian states identified by experts as poor-quality. 
 [GBD-2017-YLL-Capstone-Appendix-1-Ischemic-Heart-Disease]_
 
-Modeling Ischemic Heart Disease (IHD) in Vivarium
--------------------------------------------------
-The Vivarium model of IHD has been of a similar design to GBD 2017 by modeling IHD using MI sequelae to estimate the prevalence of IHD. Like GBD 2017, Vivarium's design includes two states: one that is defined by myocardial infarction ('Acute MI') and one state defined by a chronic state that is duration-based ('Post-MI'). Vivarium's design of 'Acute MI' is modeled exactly after GBD 2017's 'Acute MI' case definition. Vivarium's design of 'Post MI' is modeled exactly after GBD 2017's 'Chronic IHD' case definition.
+Vivarium Modeling Strategy
+--------------------------
+
+Scope
++++++
+
+The aspects of the disease this cause model is designed to simulate are the states, transitions, and sequelae. The Vivarium model of IHD has been of a similar design to GBD 2017 by modeling IHD using MI sequelae to estimate the prevalence of IHD. Like GBD 2017, Vivarium's design includes two states: one that is defined by myocardial infarction ('Acute MI') and one state defined by a chronic state that is duration-based ('Post-MI'). Vivarium's design of 'Acute MI' is modeled exactly after GBD 2017's 'Acute MI' case definition. Vivarium's design of 'Post MI' is modeled exactly after GBD 2017's 'Chronic IHD' case definition.
+
+Model Assumptions and Limitations
++++++++++++++++++++++++++++++++++
+
+Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. 
+
+Restrictions
+++++++++++++
+.. todo:: 
+
+    Restriction type (Yll only, YLD only, YLL age start, YLL age end, YLD age start, YLD age end, male only, female only). 
+    Value (True, False, 5, 255, 13, No)
+
+.. todo::
+
+   Describe more assumptions and limitations of the model.
 
 Cause Model Diagram
 --------------------
@@ -75,21 +95,7 @@ Data Description
    Add tables describing data sources for the Vivarium model.
 
 
-Model Assumptions and Limitations
----------------------------------
 
-Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. 
-
-Restrictions
-++++++++++++
-.. todo:: 
-
-    Restriction type (Yll only, YLD only, YLL age start, YLL age end, YLD age start, YLD age end, male only, female only). 
-    Value (True, False, 5, 255, 13, No)
-
-.. todo::
-
-   Describe more assumptions and limitations of the model.
 
 
 Validation Criteria
