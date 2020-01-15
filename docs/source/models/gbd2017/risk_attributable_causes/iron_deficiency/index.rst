@@ -266,7 +266,7 @@ Python code used to recreate the prevalence of anemia for a specific demogrphic
 group using the ensemble distribution is included below (assuming age- and sex- 
 specific *anemia_threshold* values, as defined in the table above_):
 
-.. code-block:: language
+.. code-block:: Python
 
 	import scipy.stats
 
