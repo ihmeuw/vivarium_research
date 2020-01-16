@@ -57,6 +57,47 @@ For GBD 2017 IHD fatal model, the type of model input data included data from vi
 For GBD 2017 IHD non-fatal model, the type of model input data included epi data from a systematic review, vital registration, and verbal autopsy data. For the non-fatal model, the proportion of MI is calculated by pulling in CoD data  and pre-redistribution of CoDCorrect data and loading into Dismod. Acute IHD CSMR is calculated through a custom process which includes post-CodCorrect IHD deaths. MI prevalence and incidence results are estimated through standard Dismod model. MI prevalence estimates are then used to calculate severity splits of acute MI and chronic IHD. Asymptomatic IHD prevalence is estimated through pulling data from Dismod and then making adjustments to avoid double-counting heart failure due to IHD and Angina due to IHD. Angina due to IHD is estimated using a standard Dismod model. These estimates are then used for severity splits of angina due to IHD. YLLS, DALYs, and comorbidity-adjusted YLDs are estimated by pulling in all unadjusted results of prevalence and incidence (MI, acute IHD, IHD following MI, angina due to IHD) and weighing for disability.
 [GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Heart-Disease]_
 
+Cause Hierarchy
++++++++++++++++
+.. image:: cause_hierarchy_ihd.svg
+
+Restrictions
+++++++++++++
+
+The following table describes any restrictions in GBD 2017 on the effects of this cause (such as being only fatal or only nonfatal), as well as restrictions on the ages and sexes to which the cause applies.
+
+.. list-table:: GBD 2017 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - [15, 19), age_group_id=8
+   * - YLL age group end
+     - 95 Plus
+     - [95, 125 years), age_group_id=235
+   * - YLD age group start
+     - 15 to 19
+     - [15, 19), age_group_id=8
+   * - YLD age group end
+     - 95 plus
+     - [95, 125 years), age_group_id=235
+     
 Vivarium Modeling Strategy
 --------------------------
 
