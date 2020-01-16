@@ -87,17 +87,17 @@ The following table describes any restrictions in GBD 2017 on the effects of thi
      -
    * - YLL age group start
      - 15 to 19
-     - [15, 19), age_group_id=8
+     - [15, 20), age_group_id=8
    * - YLL age group end
      - 95 Plus
-     - [95, 125 years), age_group_id=235
+     - [95, 126 years), age_group_id=235
    * - YLD age group start
      - 15 to 19
-     - [15, 19), age_group_id=8
+     - [15, 20), age_group_id=8
    * - YLD age group end
      - 95 plus
-     - [95, 125 years), age_group_id=235
-     
+     - [95, 126 years), age_group_id=235
+
 Vivarium Modeling Strategy
 --------------------------
 
