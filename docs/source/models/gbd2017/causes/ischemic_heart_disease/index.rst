@@ -28,28 +28,28 @@ The case definition can be found below and is stratified by two sections: 'Acute
 
 1. Acute myocardial infarction (MI): Definite and possible MI according to the third universal definition of myocardial infarction:
 
-When there is clinical evidence of myocardial necrosis in a clinical setting consistent with
-myocardial ischemia or detection of a rise and/or fall of cardiac biomarker values and with at least one of the following: 
+    When there is clinical evidence of myocardial necrosis in a clinical setting consistent with
+    myocardial ischemia or detection of a rise and/or fall of cardiac biomarker values and with at least one of the following: 
 
-  - symptoms of ischaemia, 
+      - symptoms of ischaemia, 
 
-  - new or presumed new ST-segment-T wave changes or new left bundle branch block, 
+      - new or presumed new ST-segment-T wave changes or new left bundle branch block, 
 
-  - development of pathological Q waves in the 277 ECG, 
+      - development of pathological Q waves in the 277 ECG, 
 
-  - imaging evidence of new loss of viable myocardium or new regional wall motion abnormality, or 
+      - imaging evidence of new loss of viable myocardium or new regional wall motion abnormality, or 
 
-  - identification of an intracoronary thrombus by angiography or autopsy.
+      - identification of an intracoronary thrombus by angiography or autopsy.
 
-  - Sudden (abrupt) unexplained cardiac death, involving cardiac arrest or no evidence of a noncoronary cause of death. 
-  
-  - Prevalent MI is considered to last from the onset of the event to 28 days after the event and is divided into an acute phase (0–2 days) and subacute (3–28 days).
+      - Sudden (abrupt) unexplained cardiac death, involving cardiac arrest or no evidence of a noncoronary cause of death. 
+      
+      - Prevalent MI is considered to last from the onset of the event to 28 days after the event and is divided into an acute phase (0–2 days) and subacute (3–28 days).
 
 2. Chronic IHD
 
-- Angina; clinically diagnosed stable exertional angina pectoris or definite angina pectoris according to the Rose Angina Questionnaire, physician diagnosis, or taking nitrate medication for the relief of chest pain.
+      - Angina; clinically diagnosed stable exertional angina pectoris or definite angina pectoris according to the Rose Angina Questionnaire, physician diagnosis, or taking nitrate medication for the relief of chest pain.
 
-- Asymptomatic ischemic heart disease following myocardial infarction; survival to 28 days following incident MI. The GBD study does not use estimates based on ECG evidence for prior MI, due to its limited specificity and sensitivity.
+      - Asymptomatic ischemic heart disease following myocardial infarction; survival to 28 days following incident MI. The GBD study does not use estimates based on ECG evidence for prior MI, due to its limited specificity and sensitivity.
 
 For GBD 2017 IHD fatal model, the type of model input data included data from vital registration and verbal autopsy data. The fatal model outliered verbal autopsy data in countries and subnational locations where high-quality vital registration data were also available. The fatal model also outliered non-representative subnational verbal autopsy data points, ICD8 and ICD9 BTL data points which were inconsistent with the rest of the data and created implausible time trends, and data in a number of Indian states identified by experts as poor-quality. For the fatal model, estimates for YLLs were calculated by pulling CoD data and location-level covariates, running this data through CODEm models and CodCorrect, and adjusting for deaths at the location/year/age/sex stratification.
 [GBD-2017-YLL-Capstone-Appendix-1-Ischemic-Heart-Disease]_
@@ -70,13 +70,6 @@ Model Assumptions and Limitations
 
 Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. 
 
-Restrictions
-++++++++++++
-.. todo:: 
-
-    Restriction type (Yll only, YLD only, YLL age start, YLL age end, YLD age start, YLD age end, male only, female only). 
-    Value (True, False, 5, 255, 13, No)
-
 .. todo::
 
    Describe more assumptions and limitations of the model.
@@ -84,8 +77,6 @@ Restrictions
 Cause Model Diagram
 --------------------
 .. image:: ischemic_heart_disease_transitions.svg
-  :width: 150
-
 
 Data Description
 ----------------
