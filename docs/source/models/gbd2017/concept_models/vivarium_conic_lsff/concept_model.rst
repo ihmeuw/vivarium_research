@@ -31,19 +31,19 @@ Model Components
 Timeframe
 +++++++++
 
-* Start and end year: 2020 -- 2025
-* Simulation time step: 1 day to capture short timeframe of diarrheal diseases
-  and neonatal causes
+* Start and end year: **2020 -- 2025**
+* Simulation time step: **1 day** to capture short timeframe of diarrheal
+  diseases and neonatal causes
 
 Demographics
 ++++++++++++
 
-* Locations: Nigeria, India, Ethiopia
-* Population: Prospective open cohort of 0-5 year-olds
-* Size of largest starting population: 100,000
-* Youngest start-age and oldest end-age: 0 -- 5 years
-* Exit age (at what age to stop tracking simulants): 5 years
-* Fertility: Crude birth rate
+* Locations: **Nigeria, India, Ethiopia**
+* Population: **Prospective open cohort of 0-5 year-olds**
+* Size of largest starting population: **100,000 simulants**
+* Youngest start-age and oldest end-age: **0 -- 5 years**
+* Exit age (at what age to stop tracking simulants): **5 years**
+* Fertility: **Crude birth rate**
 
 GBD Causes
 ++++++++++
@@ -63,6 +63,7 @@ GBD Causes
 * :ref:`Neonatal Jaundice <2017_cause_neonatal_jaundice>`
 
 * :ref:`Other Neonatal Disorders <2017_cause_neonatal_other>`
+  (Probably omit this cause, as we don't seem to have enough data to model it)
 
 GBD Risks
 +++++++++
@@ -100,7 +101,7 @@ Desired Model Outputs
 Stratification
 ++++++++++++++
 
-Stratify by age, sex, and year.
+Stratify by **age, sex, and year**.
 
 Verification and Validation Strategy
 ------------------------------------
