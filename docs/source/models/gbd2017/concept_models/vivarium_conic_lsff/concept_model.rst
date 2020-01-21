@@ -28,8 +28,8 @@ Concept Model Diagram
 Model Components
 ----------------
 
-Timeframe
-+++++++++
+Time
+++++
 
 * Start and end year: **2020 -- 2025**
 * Simulation time step: **1 day** to capture short timeframe of diarrheal
