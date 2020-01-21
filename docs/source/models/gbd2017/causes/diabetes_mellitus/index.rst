@@ -104,9 +104,6 @@ State and Transition Data Tables
    * - C2
      - With **C**\ ondition of type 2 diabetes mellitus
      - Simulant is a diabetes mellitus case but is not reported as type 1 diabetes mellitus
-   * - C3
-     - With **C**\ ondition of overall diabetes mellitus
-     - Simlant has fasting plasma glucose (FPG) > 126 mg/dL (7 mmol/L) or is on treatment for diabetes
 
 .. list-table:: State Data
    :widths: 5 10 10 20
@@ -168,6 +165,11 @@ State and Transition Data Tables
      - With **C**\ ondition of type 2 diabetes mellitus
      - incidence_c976
      -
+   * - 3
+     - With **C**\ ondition of type 2 diabetes mellitus
+     - susceptible
+     - :math:`\frac{\text{prevalence_c975}}{\text{prevalence_c587}}{\text{remission_c976}}`
+     - This needs to be clarified further with the RT/SE teams
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
