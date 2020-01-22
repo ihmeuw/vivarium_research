@@ -28,8 +28,8 @@ The software libraries used in Vivarium models.
 
 Handy tutorials for common research tasks.
 
-:ref:`Designing Models for Vivarium <models>`
-+++++++++++++++++++++++++++++++++++++++++++++
+:ref:`Designing Models for Vivarium <model_design>`
++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Descriptions of what goes into building all the pieces of a Vivarium model.
 
@@ -51,7 +51,7 @@ To get started adding new documentation, check out our
    data
    software
    tutorials
-   models/index
-   gbd2017/index
+   model_design/index
+   gbd2017_models/index
    contributing
    glossary
