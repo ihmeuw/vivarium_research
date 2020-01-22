@@ -8,10 +8,10 @@ for building public health intervention models with Vivarium.
 Getting Started
 ---------------
 
-:ref:`Modeling Process <process>`
-+++++++++++++++++++++++++++++++++
+:ref:`Model Development Workflow <workflow>`
+++++++++++++++++++++++++++++++++++++++++++++
 
-Details of the intervention modeling process.
+Details of the intervention modeling workflow.
 
 :ref:`Finding Data Sources <data>`
 ++++++++++++++++++++++++++++++++++
@@ -47,7 +47,7 @@ To get started adding new documentation, check out our
 .. toctree::
    :hidden:
 
-   modeling_process/index
+   modeling_workflow/index
    data
    software
    tutorials
