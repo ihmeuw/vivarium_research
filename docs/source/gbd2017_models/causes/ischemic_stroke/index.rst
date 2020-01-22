@@ -1,8 +1,8 @@
 .. _2017_cause_ischemic_stroke:
 
-===================
+===============
 Ischemic Stroke
-===================
+===============
 
 Disease Description
 -------------------
@@ -15,31 +15,16 @@ Disease Description
 
 
 
-Modeling Ischemic Stroke in GBD 2017
-------------------------------------
+GBD 2017 Modeling Strategy
+--------------------------
 
 Strokes in GBD 2017
 +++++++++++++++++++
 
 
-Modeling Strategy for Ischemic Stroke
-+++++++++++++++++++++++++++++++++++++
-
-
-Cause Model Diagram
--------------------
-.. image:: ischemic_stroke_transitions.svg
-  :width: 200
-
-Data Description
-----------------
-
-.. todo::
-
-   Add tables describing data sources for the Vivarium model.
-
-Model Assumptions and Limitations
----------------------------------
+Cause Hierarchy
+++++++++++++++++
+.. image:: cause_hierarchy_is.svg
 
 Restrictions
 ++++++++++++
@@ -51,6 +36,27 @@ Restrictions
 .. todo::
 
    Describe more assumptions and limitations of the model.
+
+Vivarium Modeling Strategy
+--------------------------
+
+Scope
++++++
+
+Model Assumptions and Limitations
++++++++++++++++++++++++++++++++++
+
+Cause Model Diagram
+-------------------
+.. image:: ischemic_stroke_transitions.svg
+
+
+Data Description
+----------------
+
+.. todo::
+
+   Add tables describing data sources for the Vivarium model.
 
 Validation Criteria
 -------------------

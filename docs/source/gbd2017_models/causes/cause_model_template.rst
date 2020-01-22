@@ -1,8 +1,8 @@
 .. _2017_cause_model_template:
 
-====================
+--------------------
 Cause Model Template
-====================
+--------------------
 
 .. _Pull Request 64: https://github.com/ihmeuw/vivarium_research/pull/64
 .. _Pull Request 76: https://github.com/ihmeuw/vivarium_research/pull/76
@@ -18,7 +18,7 @@ Cause Model Template
 
    #. Make a subdirectory :file:`{cause_name}/` in the folder
       :file:`gbd2017/causes/` , where :file:`{cause_name}` is replaced with the
-      (potentially shortened) name of the cause you are modeling.  This
+      (potentially shortened) name of the cause you are modeling, such as :file:`measles/` or :file:`neonatal_encephalopathy/`.  This
       subdirectory is where you will put all the files for your cause model
       documentation, including this document, image files, .csv files, etc.
 
@@ -32,17 +32,21 @@ Cause Model Template
       unique reference label for your cause. The reference label should have the
       form :samp:`.. _2017_cause_{\{cause_name\}}:`, where
       :samp:`{\{cause_name\}}` is replaced with a unique descriptive name or
-      abbreviation for your cause.
+      abbreviation for your cause, e.g. :code:`.. _2017_cause_measles:`.
 
-   #. Replace this document's title
+   #. Delete this document's title above:
 
       .. code:: reStructuredText
 
-         ====================
+         --------------------
          Cause Model Template
-         ====================
+         --------------------
 
-      with the full name of your cause in GBD 2017:
+      Once the above title is deleted, all the other section titles will be
+      promoted up one level.
+
+   #. The subtitle below should now be the document's title. Replace the text
+      in the below (sub)title with the full name of your cause in GBD 2017. For example, if you were modeling the cause "Neonatal encephalopathy due to birth asphyxia and birth trauma," then the title
 
       .. code:: reStructuredText
 
@@ -50,7 +54,15 @@ Cause Model Template
          Full Name of Cause in GBD 2017
          ==============================
 
-      **Note:** Remember to adjust the length of the title's underline
+      should be replaced by
+
+      .. code:: reStructuredText
+
+         ==============================================================
+         Neonatal encephalopathy due to birth asphyxia and birth trauma
+         ==============================================================
+
+      **Note:** Be sure to adjust the length of the title's underline
       :code:`======` and overline :code:`======` to match the length of your
       new document title, or you will get errors in the `section structure
       <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
@@ -59,6 +71,79 @@ Cause Model Template
    #. Once you complete these steps, delete this :code:`.. important::`
       `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
       from :file:`index.rst`.
+
+.. admonition:: Todo for template development
+
+  Make it clear what content and structure we are looking for in this document.
+  In particular:
+
+  - In `Pull Request 93`_ @James suggested the following high-level
+    organization:
+
+      Operationally, a useful way to think about what these documents are laying out is
+
+      1. An overview of what experts in the world think about the cause
+      2. An overview of what GBD thinks about the cause
+      3. A modeling strategy that synthesizes 1 & 2 into a coherent simulation
+         model with enough detail to both implement it and to reason about how it
+         will behave.
+
+    These 3 content categories correspond to the following 3 sections below:
+
+      1. `Disease Overview`_
+      2. `GBD 2017 Modeling Strategy`_
+      3. `Vivarium Modeling Strategy`_
+
+    I think the introductory paragraph for the document should indicate that
+    this is how the document is organized, and I think the Todo's in each
+    section should expand on what this means.
+
+  - I have begun to reorganize the template to use the following document
+    layout, also suggested by @James in `Pull Request 93`_:
+
+    .. code:: reStructuredText
+
+      =====
+      Title
+      =====
+
+      Summary paragraph describing what's in the document.
+
+      .. contents::
+         :local:
+         :depth: 1
+
+      Section 1
+      ---------
+
+      Section overview
+
+      Subsection 1.1
+      ++++++++++++++
+
+      Subsection contents.
+
+      Etc.
+
+    The template should guide the reader to follow this general layout. In
+    particular, I added Todo's for adding overviews of the document and the
+    three sections, but perhaps a better strategy would be to actually write
+    template overviews to put in this document.
+
+==============================
+Full Name of Cause in GBD 2017
+==============================
+
+.. todo::
+
+  Add a brief introductory paragraph for this document.
+
+.. contents::
+   :local:
+   :depth: 1
+
+Disease Overview
+----------------
 
 .. todo::
 
@@ -101,6 +186,10 @@ Cause Model Template
 GBD 2017 Modeling Strategy
 --------------------------
 
+.. todo::
+
+  Add an overview of the GBD modeling section.
+
 .. admonition:: Todo for template development
 
   In `Pull Request 91`_, @James suggested adding the following to this section:
@@ -108,6 +197,10 @@ GBD 2017 Modeling Strategy
     Point people to yld and cod appendices for their diseases and link to
     http://ghdx.healthdata.org/gbd-2017/code which can serve as an annoying
     to read but authoritative source on how the cause was actually modeled.
+
+  Note that [GBD-2017-YLD-Appendix-Cause-Model-Template]_ and
+  [GBD-2017-CoD-Appendix-Cause-Model-Template]_ are now in the reference section
+  below.
 
 
 Cause Hierarchy
@@ -156,6 +249,10 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
+.. todo::
+
+  Add an overview of the Vivarium modeling section.
+
 Scope
 +++++
 
@@ -173,44 +270,14 @@ Assumptions and Limitations
   and the limitations these assumptions impose on the applicability of the
   model.
 
-.. admonition:: Todo for template development
-
-  What else goes in the `Vivarium Modeling Strategy` section? Should there be
-  any other subsections besides `Scope` and `Assumptions and Limitations`?
-
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
-Data Description
-----------------
-
-.. admonition:: Todo for template development
-
-  Decide on section heading name(s) and structure for the data section. See
-  comments by @Beatrix and @Nathaniel in `Pull Request 64`_ discussing the
-  following questions:
-
-  - Should this section be called "Data Description" as it is now, or would
-    something like "State and Transition Data Tables" be more descriptive?
-
-    In `Pull Request 91`_, @James said:
-
-      I think `Data Description` is fine.
-
-  - Should this section have subsections (such as "State and Transition Data
-    Tables" plus some other subsection(s))? Is there anything else that belongs
-    in a "Data Description" section besides the data tables?
-
-    In `Pull Request 91`_, @Yongquan said:
-
-      one data-relevant section needed for more complicated models is
-      non-standard data sources where external calculation occurs.
-
-    Does "non-standard data sources" warrant a subsection, even if we don't need
-    it for all cause models?
+State and Transition Data Tables
+++++++++++++++++++++++++++++++++
 
 Validation Criteria
--------------------
++++++++++++++++++++
 
 References
 ----------
@@ -284,9 +351,11 @@ References
 
   Decide on section names and overall structure.
 
-  In `Pull Request 93`_, people seemed generally good with the current
-  structure, but there were several suggestions for reorganization that I will
-  implement in the next pull request.
+  In `Pull Request 93`_, people seemed generally good with the existing
+  structure, but there were several suggestions for reorganization (in
+  particular from @James and @Beatrix) that I have implemented above.
+
+  Here are some of the questions and comments we have discussed so far:
 
   **Question:** Are the sections in a good order?
 
@@ -325,6 +394,9 @@ References
 
   **Question:** Do we have examples of restrictions we would apply that are
   different from GBD restrictions?
+
+    See `Pull Request 93`_ for some thoughts on this question from @Ali and
+    @James.
 
   Also, in `Pull Request 76`_, @Beatrix said:
 
