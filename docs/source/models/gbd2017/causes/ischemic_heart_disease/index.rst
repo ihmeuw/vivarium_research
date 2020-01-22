@@ -17,7 +17,7 @@ Chronic ischemic heart disease can cause signs and symptoms such as angina, anxi
 
 
 GBD 2017 Modeling Strategy
--------------------------------------------------
+--------------------------
 
 GBD 2017 models fatal and non-fatal IHD estimates separately. GBD 2017 models IHD using Myocardial infarction (MI) sequelae to estimate the prevalence of IHD, due to the challenges of disease detection and varying symptoms across the population.
 
@@ -122,13 +122,102 @@ Cause Model Diagram
 Data Description
 ----------------
 
-.. todo::
+State and Transition Data Tables
+++++++++++++++++++++++++++++++++
 
-   Add tables describing data sources for the Vivarium model.
+.. list-table:: State Definitions
+   :widths: 1, 10, 15
+   :header-rows: 1
 
+   * - State
+     - State Name
+     - Definition
+   * - A
+     - Acute Myocardial Infarction (MI)
+     - Simulant that experiences acute MI symptoms listed in 'Myocardial infarction (MI) in GBD 2017'
+   * - C
+     - Chronic IHD
+     - Simulant that experiences angina and asymptomatic ischemic heart disease following myocardial infarction; survival to 28 days following incident MI
 
+.. list-table:: State Data
+   :widths: 5 10 10 20
+   :header-rows: 1
 
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - C
+     - prevalence
+     - prevalence_c493
+     -
+   * - C
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c493}}{\text{population} \,\times\, \text{prevalence_c493}}`
+     -
+   * - C
+     - disability weight
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c493}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     -
+   * - All
+     - cause-specific mortality rate
+     - :math:`\frac{\text{deaths_c493}}{\text{population}}`
+     -
 
+.. list-table:: Transition Data
+   :widths: 10 10 10 10 10
+   :header-rows: 1
+
+   * - Transition
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - 1
+     - susceptible
+     - Acute Myocardial Infarction (MI)
+     - incidence_(s_378+s_379)
+     -
+   * - 2
+     - Acute Myocardial Infarction (MI)
+     - Chronic IHD
+     - TBD
+     - This needs to be clarified further with the RT/SE teams
+   * - 3
+     - Chronic IHD
+     - Acute Myocardial Infarction (MI)
+     - TBD
+     - This needs to be clarified further with the RT/SE teams
+  
+
+.. list-table:: Data Sources and Definitions
+   :widths: 10 10 20 20
+   :header-rows: 1
+
+   * - Variable
+     - Source
+     - Description
+     - Notes
+   * - prevalence_c589
+     - como
+     - prevalence of chronic kidney disease
+     -
+   * - deaths_c589
+     - codcorrect
+     - Count of deaths due to chronic kidney disease
+     - 
+   * - population
+     - demography
+     - Mid-year population for given sex/age/year/location
+     - 
+   * - prevalence_s{sid}
+     - como
+     - Prevalence of sequela with id {id}
+     - 
+   * - disability_weight_s{sid}
+     - YLD appendix
+     - Disability weight of sequela with id {id}
+     - 
 
 Validation Criteria
 -------------------
