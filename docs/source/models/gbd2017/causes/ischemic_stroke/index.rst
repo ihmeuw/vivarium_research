@@ -81,9 +81,9 @@ Model Assumptions and Limitations
 Cause Model Diagram
 -------------------
 
-According to GBD 2017, stroke cases are considered acute from the day of incidence of a first-ever stroke through day 28 following the event. Chronic stroke includes the sequelae of an acute stroke AND all recurrent stroke events. Stroke cases are considered chronic beginning 28 days following the occurrence of an event. Chronic stroke includes the sequelae of an acute stroke AND all recurrent stroke events.
+According to GBD 2017, stroke cases are considered acute from the day of incidence of a first-ever stroke through day 28 following the event. Post, also known as chronic, stroke includes the sequelae of an acute stroke AND all recurrent stroke events. Stroke cases are considered post beginning 28 days following the occurrence of an event. Post stroke includes the sequelae of an acute stroke AND all recurrent stroke events.
 
-.. image:: ischemic_stroke_transitions.svg
+.. image:: cause_model_is.svg
 
 
 Data Description
@@ -99,11 +99,14 @@ State and Transition Data Tables
    * - State
      - State Name
      - Definition
+   * - S
+     - **S**\ usceptible to Ischemic Stroke
+     - Simulant that has not already had an ischemic stroke event 
    * - A
      - **A**\ cute Ischemic Stroke
      - Simulant that is in duration-based period starting day of incidence of a first-ever stroke through day 28 following the event
-   * - C
-     - **C**\ hronic Ischemic Stroke
+   * - P
+     - **P**\ ost Ischemic Stroke
      - Simulant that is in duration-based period beginning 28 days following the occurrence of a stroke event
 
 .. todo::
@@ -118,38 +121,46 @@ State and Transition Data Tables
      - Measure
      - Value
      - Notes
-   * - A
-     - prevalence
-     - prevalence_s6116
+   * - -
+     - cause-specific mortality rate (csmr)
+     - :math:`\frac{\text{deaths_c495}}{\text{population}}`
      -
-   * - C
-     - prevalence
-     - prevalence_s6248
-     -
+   * - P
+     - excess mortality rate (emr)
+     - emr_m10837
+     - 
    * - A
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_s6116}}{\text{population} \,\times\, \text{prevalence_s6116}}`
-     - = (cause-specific mortality rate) / prevalence or should we just use emr_meid9310 (from htn diagram)
-   * - A
-     - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{s6116}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = average disability weight over all sequelae (but since only sequela for acute IS is s6116, do we need to update this state?)
-   * - C
-     - excess mortality rate
+     - excess mortality rate (emr)
+     - emr_m9310
+     - 
+   * - S
+     - excess mortality rate (emr)
      - 0
-     -
-   * - C
+     - This is not applicable
+   * - P
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae in c_495}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = average disability weight over all sequelae
-   * - All A
-     - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_s6116}}{\text{population}}`
+     - :math:`\displaystyle{\sum_{s\in \text{391}}}^{395} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}` + disability_weight_s946 :math:`\times` prevalence_s946
+     - = average disability weight over all sequelae in the post ischemic stroke state
+   * - A
+     - disability weight
+     - :math:`\displaystyle{\sum_{s\in \text{386}}}^{380} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - = average disability weight over all sequelae in the acute ischemic stroke state
+   * - S
+     - disability weight
+     - 0
+     - This is not applicable
+   * - P
+     - prevalence
+     - prevalence_c495
      -
-   * - All C
-     - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_s6248}}{\text{population}}`
-     -
+   * - A
+     - prevalence
+     - 0
+     - This is not applicable
+   * - S
+     - prevalence
+     - :math:`\displaystyle{1 - \text{ prev_c495}}`
+     - = 1 - prevalence of ischemic stroke (population that has not already had ischemic stroke incidence)
 
 .. list-table:: Transition Data
    :widths: 1, 1, 1, 5, 10
@@ -160,18 +171,18 @@ State and Transition Data Tables
      - Sink State
      - Value
      - Notes
-   * - i
+   * - 1
      - S 
      - A 
      - incidence_c495
      - 
-   * - duration-based
+   * - 2
      - A 
-     - C 
-     - 28-day duration in acute state then progress
-     - 
-   * - i
-     - C
+     - P
+     - 28 days 
+     - duration-based transition from acute state then progress into post state
+   * - 3
+     - P
      - A 
      - incidence_c495
      - 
@@ -184,24 +195,16 @@ State and Transition Data Tables
      - Source
      - Description
      - Notes
-   * - prevalence_s6116
-     - dismod
-     - Prevalence of first ever acute ischemic stroke with CSMR
-     - Confirm if dismod or como, as referred to GBD 2017 to assign source
-   * - prevalence_s6248
-     - dismod
-     - Prevalence of chronic ischemic stroke with CSMR
-     - Confirm if dismod or como, as referred to GBD 2017 to assign source
-   * - deaths_s6116
+   * - prevalence_c495
+     - dismod-mr 2.1
+     - Prevalence of ischemic stroke
+     - 
+   * - deaths_c495
      - codcorrect
-     - Deaths from acute ischemic stroke
-     -
-   * - deaths_s6248
-     - codcorrect
-     - Deaths from chronic ischemic stroke
+     - Deaths from ischemic stroke
      -
    * - incidence_c495
-     - dismod
+     - dismod-mr 2.1
      - Incidence of ischemic stroke
      -
    * - population
@@ -213,14 +216,25 @@ State and Transition Data Tables
      - List of 11 sequelae for ischemic stroke
      -
    * - prevalence_s{`sid`}
-     - como
+     - dismod-mr 2.1
      - Prevalence of sequela with id `sid`
-     - Confirm if needed, as GBD 2017 states that chronic IS includes ALL sequelae of IS
+     - 
    * - disability_weight_s{`sid`}
-     - YLD Appendix
+     - como
      - Disability weight of sequela with id `sid`
      -
-
+   * - emr_m10837
+     - dismod-mr 2.1
+     - excess mortality rate of post ischemic stroke with CSMR
+     -
+   * - emr_m9310
+     - dismod-mr 2.1
+     - excess mortality rate of first ever acute ischemic stroke with CSMR
+     - 
+   * - disability_weight_s{sid}
+     - YLD Appendix
+     - Disability weight of sequela with id sid
+     - 
 
 Model Assumptions and Limitations
 ---------------------------------
