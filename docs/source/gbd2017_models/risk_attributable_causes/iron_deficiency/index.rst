@@ -325,7 +325,7 @@ Modeling Strategy
 The hemoglobin distribution for a given demographic group should be recreated 
 under the assumption that it followd the specified ensemble distribution, as 
 the python code included above instructs. For the population that is severely 
-anemic based on the hemoglobin thresholds, only a certain proportion will 
+anemic based on the hemoglobin thresholds, a certain proportion will not 
 respond to iron supplementation.
 
 The proportion of the population with mild, moderate, or severe anemia that 
@@ -333,7 +333,7 @@ will respond to iron fortification can be measured by:
 
 .. math::
 
-	\frac{\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
+	\frac{\text{prevalence}_\text{total anemia}-\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
 
 Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are 
 equal to the severity-, age-, sex-, and location-specific prevalence summed 
@@ -357,6 +357,13 @@ respectively; sequela IDs for each category are listed in the table below.
 	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 533, 539, 647, 650, 653, 656, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1059, 1060, 1063, 1064, 1067, 1068, 1071, 1074, 1075, 1077, 1081, 1083, 1085, 1087, 1091, 1093, 1095, 1097, 1101, 1108, 1122, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5024, 5033, 5042, 5057, 5069, 5081, 5093, 5105, 5117, 5129, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5612, 5633, 5666, 5669, 5672, 5684, 5717, 5720, 5723, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
 	  - 146, 174, 179, 184, 208, 242, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220, 23032, 23036, 23040, 23044, 23048
 
+Then, effect sizes for iron supplementation or fortification interventions as 
+shifts in mean hemoglobin concentrations should be applied to the entire 
+population, excluding the fraction of each anemia severity that will not 
+respond to iron supplementation, as calculated as described above. The 
+resulting population mean should then be applied as the intervention scenario 
+value for the iron deficiency risk factor exposure.
+
 Model Assumptions and Limitations
 ---------------------------------
 
@@ -368,6 +375,12 @@ Therefore, this model is limited when applied to neonatal age groups.
 The modeling strategy currently described in this document does not consider 
 the effect of pregnancy on hemoglobin concentration and therefore is limited in 
 that is should not be used to model women of reproductive age.
+
+The modeling strategy both as conducted by the GBD modelers and as described in 
+this document assume a constant shape and standard deviation in the hemoglobin 
+distribution throughout the modeling process. This is a limitation of our 
+modeling strategy in that we assume the distribution before a shift is applied 
+maintains the same shift after a shift due to the intervention is applied.
 
 Validation Criteria
 -------------------
