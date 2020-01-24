@@ -382,6 +382,13 @@ distribution throughout the modeling process. This is a limitation of our
 modeling strategy in that we assume the distribution before a shift is applied 
 maintains the same shift after a shift due to the intervention is applied.
 
+.. todo::
+
+	add limitation about differences between pre-processing hemoglobin mean and 
+	post-processing anemia prevalence that causes differences between anemia 
+	prevalence constructed from hemoglobin distribution and anemia impairment 
+	prevalence, pending confirmation from GBD modelers.
+
 Validation Criteria
 -------------------
 
