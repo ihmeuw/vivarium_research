@@ -151,15 +151,9 @@ described in the table above.
 Iron Deficiency Risk Factor
 +++++++++++++++++++++++++++
 
-In GBD 2017, the iron deficiency risk factor is used to evaluate the burden of 
-disease attributable to iron deficiency. This is done by calculating a TMREL 
-for iron deficiency by estimating the counterfactual mean hemoglobin 
-concentration among a given population that there were no cases of iron 
-responsive anemia in the population. For the iron deficiency risk factor, iron 
-responsive anemia was considered to include all anemias that would respond to 
-iron supplementation, including dietary iron deficiency as well as acute or 
-chronic hemorrhagic states. A full list of the included causes are included in 
-the table below.
+The iron deficiency risk factor in GBD 2017 is a **continuous measure** modeled 
+as a distribution of hemoglobin concentrations *among the population with 
+conditions that cause iron deficiency anemia.* Below is a list of such causes, along with the list of sequela IDs that include anemia health states:
 
 .. list-table:: Causes 
 	:widths: 40 40 40
@@ -217,17 +211,12 @@ the table below.
 	there do not appear to be any anemia-afflicted sequelae with results in GBD 
 	2017 within any of the cirrhosis causes.
 
-The TMREL established as described above is then used to estimate population 
-attributable fractions and summary exposure variables for the iron deficiency 
-risk factor through standard GBD computation practices. However, the data 
-stored for the iron deficiency risk factor (REI ID #95) is the **age-, sex-, 
-and location-specific mean hemoglobin concentration among the total 
-population.** Like the distribution that represents the overall anemia 
-envelope, the distribution for the mean value stored in the iron deficiency 
-risk factor is also assumed to follow a 40% gamma and 60% mirror Gumbel 
-ensemble distribution. The mean value for the iron deficiency risk factor is 
-stored under modelable entity ID 10487 (also REI ID 95) and the standard 
-deviation is stored under modelable entity ID 10488.
+The distribution of hemoglobin concentrations represented by the iron 
+deficiency risk factor is assumed to have the same shape as the distribution of 
+hemoglobin concentrations in the entire population (anemia envelope), i.e. 40% 
+gamma and 60% mirror Gumbel ensemble distribution. The mean value for the iron 
+deficiency risk factor is stored under modelable entity ID 10487 (also REI ID 
+95) and the standard deviation is stored under modelable entity ID 10488.
 
 The ensemble distribution of hemoglobin concentrations for population afflicted 
 with the causes listed in the table above can be recreated with the following 
@@ -318,63 +307,24 @@ Risk Factor Hierarchy
 
 .. image:: iron_risk_hierarchy.svg
 
+Cause Model Diagram
+-------------------
 
-Modeling Strategy
-+++++++++++++++++
+Data Description
+----------------
 
-The hemoglobin distribution for a given demographic group should be recreated 
-under the assumption that it followd the specified ensemble distribution, as 
-the python code included above instructs. For the population that is severely 
-anemic based on the hemoglobin thresholds, only a certain proportion will 
-respond to iron supplementation.
-
-The proportion of the population with mild, moderate, or severe anemia that 
-will respond to iron fortification can be measured by:
-
-.. math::
-
-	\frac{\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
-
-Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are 
-equal to the severity-, age-, sex-, and location-specific prevalence summed 
-across all iron responsive anemia and all total anemia sequela IDs, 
-respectively; sequela IDs for each category are listed in the table below. 
-
-.. list-table:: Sequela IDs 
-	:widths: 5, 30, 20
-	:header-rows: 1
-
-	* - Anemia Severity
-	  - All Anemia Sequela
-	  - Iron Responsive Anemia Sequela
-	* - Mild
-	  - 144, 172, 177, 182, 206, 240, 438, 442, 525, 531, 537, 645, 648, 651, 654, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1057, 1061, 1065, 1069, 1079, 1089, 1099, 1106, 1120, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5018, 5027, 5036, 5051, 5063, 5075, 5087, 5099, 5111, 5123, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5606, 5627, 5648, 5651, 5654, 5678, 5699, 5702, 5705, 7202, 7214, 22989, 22990, 22991, 22992, 22993, 23030, 23034, 23038, 23042, 23046
-	  - 144, 172, 177, 182, 206, 240, 525, 537, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1106, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5627, 5678, 7202, 7214, 23030, 23034, 23038, 23042, 23046
-	* - Moderate
-	  - 145, 173, 178, 183, 207, 241, 439, 443, 526, 532, 538, 646, 649, 652, 655, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1058, 1062, 1066, 1070, 1080, 1090, 1100, 1107, 1121, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5021, 5030, 5039, 5054, 5066, 5078, 5090, 5102, 5114, 5126, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5609, 5630, 5657, 5660, 5663, 5681, 5708, 5711, 5714, 7205, 7217, 22999, 23000, 23001, 23002, 23003, 23031, 23035, 23039, 23043, 23047
-	  - 145, 173, 178, 183, 207, 241, 526, 538, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1107, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5630, 5681, 7205, 7217, 23031, 23035, 23039, 23043, 23047
-	* - Severe
-	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 533, 539, 647, 650, 653, 656, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1059, 1060, 1063, 1064, 1067, 1068, 1071, 1074, 1075, 1077, 1081, 1083, 1085, 1087, 1091, 1093, 1095, 1097, 1101, 1108, 1122, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5024, 5033, 5042, 5057, 5069, 5081, 5093, 5105, 5117, 5129, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5612, 5633, 5666, 5669, 5672, 5684, 5717, 5720, 5723, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
-	  - 146, 174, 179, 184, 208, 242, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220, 23032, 23036, 23040, 23044, 23048
+State and Transition Data Tables
+++++++++++++++++++++++++++++++++
 
 Model Assumptions and Limitations
 ---------------------------------
 
-Because hemoglobin concentrations are not directly modeled among the early and 
-late neonatal age groups in GBD, the prevalence of mild, moderate, and severe 
-anemia are assumed to be equal to the prevalence in the postneonatal age group. 
-Therefore, this model is limited when applied to neonatal age groups.
-
-The modeling strategy currently described in this document does not consider 
-the effect of pregnancy on hemoglobin concentration and therefore is limited in 
-that is should not be used to model women of reproductive age.
+.. todo:
+	
+	note neonatal copied prevalence and pregnancy adjustment here
 
 Validation Criteria
 -------------------
-
-.. todo::
-
-	Describe criteria
 
 References
 ----------
