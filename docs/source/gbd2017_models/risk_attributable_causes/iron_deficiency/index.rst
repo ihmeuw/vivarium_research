@@ -1,4 +1,4 @@
-.. _2017 cause iron deficiency:
+..  2017 cause iron deficiency:
 
 ================================================
 Dietary Iron Deficiency (Iron Deficiency Anemia)
@@ -57,7 +57,7 @@ of the anemia impairment for a given population is the first step in modeling
 anemia in GBD 2017. This is done by fitting a distribution of hemoglobin levels 
 for that population from primary input data. For GBD 2017, an ensemble 
 distribution was used, which was 40% gamma and 60% mirror gumbel. Source code 
-for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
+for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>` .
 
 Once a distribution is fit to hemoglobin levels for a particular age-, 
 sex-, and location-specific demographic group, the prevalence of anemia (by 
@@ -66,7 +66,7 @@ defined in the following table.
 
 .. _above:
 
-.. list-table:: WHO Hemoglobin Thresholds (g/L) [Kassebaum-et-al-2016]_
+.. list-table:: WHO Hemoglobin Thresholds (g/L) [Kassebaum-et-al-2016] 
 	:widths: 15, 15, 15, 15
 	:header-rows: 1
 
@@ -103,7 +103,7 @@ The prevalence of anemia as calculated in the process described above serves as
 the overall anemia envelope for a age-, sex-, and location-specific demographic 
 groups, and prevalent cases of anemia in the anemia envelope are then causally 
 attributed to various causes in GBD 2017 that have anemia as seqeulae. This is 
-done through a process described in the [GBD-2017-YLD-Appendix-IDA]_.
+done through a process described in the GBD 2017 non-fatal methods appendix.
 
 .. todo::
 
@@ -137,7 +137,7 @@ hemoglobinopathies and hemolytic anemias).
 Cause Hierarchy
 ^^^^^^^^^^^^^^^
 
-.. image:: iron_cause_hierarchy.svg
+.. image:: iron cause hierarchy.svg
 
 Health States and Sequela
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -316,7 +316,7 @@ specific *anemia_threshold* values, as defined in the table above_):
 Risk Factor Hierarchy
 ^^^^^^^^^^^^^^^^^^^^^
 
-.. image:: iron_risk_hierarchy.svg
+.. image:: iron risk hierarchy.svg
 
 
 Modeling Strategy
@@ -401,17 +401,17 @@ References
 
 .. [Kassebaum-et-al-2016]
 
-	View `Kassebaum et al. 2016`_ 
+	View `Kassebaum et al. 2016` 
 
 		Kassebaum NJ, GBD 2013 Anemia Collaborators. The Global Burden of 
 		Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: https://doi.org/10.1016/j.hoc.2015.11.002
 
-.. _`Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en_US&searchIndex=
+..  `Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en US&searchIndex=
 
 .. [GBD-2017-YLD-Appendix-IDA]
 
    Pages 763-774 in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
-   appendix on ScienceDirect_conda activate vivarium_research>`_:
+   appendix on ScienceDirect >` :
 
      **(GBD 2017 YLD Capstone)** GBD 2017 Disease and Injury Incidence and
      Prevalence Collaborators. :title:`Global, regional, and national incidence,
@@ -420,5 +420,5 @@ References
      Global Burden of Disease Study 2017`. Lancet 2018; 392: 1789–858. DOI:
      https://doi.org/10.1016/S0140-6736(18)32279-7
 
-.. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
-.. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
+..  YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
+..  YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
