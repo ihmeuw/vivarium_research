@@ -66,6 +66,8 @@ Scope
   Describe which aspects of the disease this cause model is designed to
   simulate, and which aspects it is **not** designed to simulate.
 
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a disease state 'With Condition' based on incidence of CKD, and then from there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state.
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
@@ -94,10 +96,38 @@ State and Transition Data Tables
    * - State
      - State Name
      - Definition
+   * - S
+     - **S**\ usceptible
+     - Susceptible to CKD
    * - C
      - With **C**\ ondition of chronic kidney disease
-     - Simulant is has a permanent loss of renal function as indicated in the cause model description above
+     - Has CKD, regardless of moderate or severe CKD
+   * - M
+     - **M**\ oderate CKD
+     - Has moderate CKD (not severe, not fatal)
+   * - Sev
+     - **S**\ evere CKD
+     - Has severe CKD (fatal)
 
+.. list-table:: State Severity Split Definitions
+   :widths: 1, 10, 10
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - **S**\ usceptible
+     - 
+   * - C
+     - With **C**\ ondition of chronic kidney disease
+     - `\displaystyle{\sum_{s\in \text{sequelae_c589}}}`
+   * - M
+     - **M**\ oderate CKD
+     - sequelae_mod = [s_5225, s_5219, 5213, s_5231, s_5249, s_5243, s_5237, s_5255, s_5540, s_5228, s_5222, s_5216, s_5234, s_5252, s_5246, s_5240, s_5258, s_5543, s_1024, s_1025, s_1026, s_1027, s_1433, s_1436, s_1439, s_1430, s_5549, s_1016, s_1017, s_1018, s_1019, s_1421, s_1424, s_1427, s_1418, s_5546, s_1032, s_1033, s_1034, s_1035, s_1445, s_1448, s_1451, s_1442, s_5552] 
+   * - Sev
+     - **S**\ evere CKD
+     - sequela_sev = [s_5201, s_5207, s_5273, s_5267, s_5261, s_5279, s_5204, s_5210, s_5276, s_5270, s_5264, s_5282, s_504, s_505, s_1385, s_1388, s_1391, s_1382, s_501, s_502, s_1373, s_1376, s_1379, s_1370, s_507, s_508, s_1397, s_1400, s_1403, s_1394] 
 .. list-table:: State Data
    :widths: 5 10 10 20
    :header-rows: 1
@@ -106,21 +136,37 @@ State and Transition Data Tables
      - Measure
      - Value
      - Notes
+   * - S
+     - simulants not prevalent with CKD
+     - 1-prevalence_c589
+     -
    * - C
      - prevalence
      - prevalence_c589
      -
-   * - C
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_c589}}{\text{population} \,\times\, \text{prevalence_c589}}`
-     -
+   * - M
+     - prevalence
+     - [[need to add]]
+     - = prevalence of A + III + IV / prevalence of CKD
+   * - Sev
+     - [[need to add]]
+     - prevalence_c589
+     - = prevalence of stage V CKD / prevalence of CKD 
+   * - EMR severe
+     - excess mortality rate of severe CKD
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_severe_ckd}}`
+     - 
+   * - EMR moderate
+     - excess mortality rate of severe CKD
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_moderate_ckd}}`
+     -   
    * - C
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}`
      -
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c589}}{\text{population}}`
+     - :math:`\frac{\text{deaths_c589}}{\text{1 - prev_589} \,\times \text{population}}`
      -
 
 .. list-table:: Transition Data
@@ -133,15 +179,20 @@ State and Transition Data Tables
      - Value
      - Notes
    * - 1
-     - susceptible
-     - With **C**\ ondition of chronic kidney disease
+     - S
+     - C
      - incidence_c589
      -
    * - 2
-     - With **C**\ ondition of type 2 diabetes mellitus
-     - susceptible
-     - TBD
+     - C
+     - M
+     - [[need to add]]
      - This needs to be clarified further with the RT/SE teams
+   * - 3
+     - C
+     - Sev
+     - [[need to add]]
+     - This needs to be clarified further with the RT/SE teams   
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -174,6 +225,14 @@ State and Transition Data Tables
 
 Validation Criteria
 -------------------
+
+* prevalence_moderate_CKD + prevalence_severe_CKD = 1
+
+* incidence_ckd = incidence_severe_CKD/prevalence_severe_CKD
+
+* incidence_ckd = incidence_moderate_CKD/prevalence_moderate_CKD
+
+
 
 References
 ----------
