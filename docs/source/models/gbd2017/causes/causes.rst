@@ -34,6 +34,13 @@ Modeling causes of death
 
 .. image:: fatal_flowchart.png
    :width: 600
+   
+Fatal modeling in the GBD includes statistical and meta-regression models to produce estimates of cause-
+specific mortality rates. In GBD 2017, there were 282 causes of death. For every cause, the GBD estimates
+years of life lost (YLLs) that are based on the age at death and reference population life expectancy. 
+
+This section will provide background information and links to resources for the fatal modeling tools used in 
+GBD 2017, types of input data, enforcement of internal consistency (CoDCorrect), and how to pull results. 
 
 **Modeling approach** 
 
@@ -111,11 +118,28 @@ Modeling non-fatal outcomes (Outline)
 .. image:: gbd_nonfatal_flowchart_sim_team.jpg
    :width: 600
 
+Non-fatal modeling in the GBD includes statistical and meta-regression models to produce estimates of incidence
+and prevalence of diseases. In GBD 2017, there were 354 non-fatal models and 3,484 sequelae. While a non-fatal
+model must produce estimates for incidence and prevalence, a sequela is a health state associated with a disease 
+or disability and are frequently split from a parent model. Impairments are conditions or domains of health loss
+that are spread across multiple sequelae. An example could be anemia which can be caused by maternal hemorrhage, 
+iron deficiency, malaria, or other diseases. To produce estimates of years lived with disability (YLDs),
+a cause, sequela, or impairment must have estimates of prevalence and disability weights. 
+
+This section will provide background information and links to resources for the non-fatal modeling tools used in 
+GBD 2017, types of input data, enforcement of internal consistency (COMO), and how to pull results. 
+   
 **DisMod** 
 
 Disease Model Meta Regression 2.1 (DisMod, sometimes DisMod MR) is a statistical modeling tool developed for the Global
 Burden of Disease study to estimate non-fatal disease burden. It is the most frequently used tool for non-fatal modeling
-in the GBD and models that are run outside of it are frequently called *custom models*. 
+in the GBD and models that are run outside of it are frequently called *custom models*. A short description of DisMod is
+provided below and more information can be found on the HUB including 
+`Training slides
+<https://hub.ihme.washington.edu/display/gbd2017/GBD+2017+Trainings?preview=/44794562/44950973/DisMod_gbd2017.pptx>`_ 
+and a page on settings and running models
+`HUB page for modeling
+<https://hub.ihme.washington.edu/display/gbd2017/DisMod>`_.
 
 DisMod has a user interface. The 
 `External Version
@@ -147,38 +171,44 @@ linked in the DisMod estimation process and so the results from a model will inc
 from DisMod will *not* be consistent with final GBD estimates because of processes like COMO that rescale prevalence and sometimes
 incidence of different non-fatal disease models to achieve consistency across all models. 
 
-**Other Modeling tools- ST-GPR**
+**Custom non-fatal modeling**
 
-- Connection between fatal/non-fatal models
+There are some non-fatal models in GBD that do not use DisMod to produce estimates of incidence and prevalence. Some non-fatal
+causes are too data sparse, have geographic or age restrictions, or are otherwise unsuited to DisMod. Because of their nature,
+custom models follow a variety of modeling approaches. Some examples of custom models include:
 
-- Where to find more information on causes (like flowcharts, write-ups)
+- HIV: HIV incidence uses a custom modeling software called Spectrum, developed by UNAIDS
 
-- Input and output measures (prevalence, incidence, remission, YLDs)
+- Tuberculosis: The case fatality of active tuberculosis is modeled and then applied to the estimates of tuberculosis cause-specific mortality to get disease incidence. Non-fatal estimates of tuberculosis are also split into active and latent disease, disease in HIV- and HIV+ populations, and drug resistant and susceptible infections. 
 
-	- Counts, rates, percentages
+- Visceral leishmaniasis: Case notification data are used in a spatio-temporal Gaussian process regression (ST-GPR). 
 
-**Input data**
+- Neoplasms (cancers): The mortality to incidence ratio for each subtype of cancer was estimated in a mixed-effects linear regression model. The product of this ratio and the cause-specific mortality rates are the incidence of each type of cancer. Prevalence was calculated from the incidence using cancer survival curves.
 
-- Types of data used in non-fatal modeling
+**Finding more information on modeling**
 
-- How to get input data for GBD non-fatal models
+The best place to view non-fatal models is 
+`EpiViz
+<https://internal.ihme.washington.edu/epi-2019/>`_. The site loads GBD 2019 models by default but GBD 2017 final (best) models are available as well. These models
+will not necessarily match the final GBD 2017 estimates because they are pre-COMO.
+Non-fatal final results are available in the 
+`GBD-Compare
+<https://vizhub.healthdata.org/gbd-compare/>`_ visualization tool. 
 
-- Key term definitions  
+Cause write-ups are available from the GBD 2017 non-fatal manuscript in the 
+`Lancet
+<https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)32279-7/fulltext#seccestitle470>`_
+Supplementary Appendix 1. The documentation for GBD includes flowcharts and descriptions of modeling strategies and input data.
+There is an effort within GBD to build extended documentation, intended for internal use. 
 
-	- Crosswalks
-	- modelable_entity_id
-	- Bundles
-	
+GBD Modeler assignments can be found on the 
+`HUB
+<https://hub.ihme.washington.edu/display/GBD2019/GBD+2019?preview=/53336417/83201029/Assignments_191105.xlsx>`_ 
+and Modelers are usually available to help answer specific questions about the causes. 
+
+
 **Epi Computation and COMO**
 
 - What is Comorbidity adjustment (COMO)
 
 - Other processes like years lived with disability calculation
-
-**Getting results**
-
-- Where can draws be pulled
-
-	- How draws from DisMod / COMO differ
-
-- Where data can be found
