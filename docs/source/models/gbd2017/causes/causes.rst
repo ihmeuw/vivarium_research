@@ -90,7 +90,7 @@ epidemics, or famines.
 The central function `get_draws()
 <https://scicomp-docs.ihme.washington.edu/get_draws/current/>`_ 
 can be used to get estimates of cause of deaths models at the draw level for two outputs. Unless there is a good and 
-specific reason, draws from CoDCorrect should be used to estimate cause-specific mortality or YLLs.
+specific reason, draws from CoDCorrect should be used for estimates of cause-specific mortality or YLLs.
 
 - Output from CoDCorrect are age/sex/year/location specific deaths and years of life lost (YLLs). The function get_draws() returns both deaths and YLLs in *count* space.
 	
@@ -99,15 +99,12 @@ specific reason, draws from CoDCorrect should be used to estimate cause-specific
 - Output from CODEm are age/sex/year/location specific cause specific mortality rates and cause fractions (percent of all deaths)
 	
 	- get_draws() can return CODEm and custom COD model results (source = "codem")
-	- This might not be the best place to pull results because they haven't gone through CoDCorrect yet.
+	- These are intermediate results! This might not be the best place to pull results because they haven't gone through CoDCorrect yet.
 
 **Getting more information**
 
-The documentation for GBD causes (write-ups) are typically separate Word documents by cause that become the Appendices
-for the study publication. If you have access to the shared drives at IHME, you can find the documentation on the
-I Drive: I:/RTs_and_Projects/GBD/Publications/Capstone Lancet Papers 2018/Cause Write-Ups/COD/Resubmission/4_final/
-
-The Appendix for the GBD 2017 Cause of Death manuscript is also available and Open Access at the Lancet website 
+The documentation for GBD causes (write-ups) are available as part of the Appendix to peer-reviewed publications.
+The Appendix for the GBD 2017 Cause of Death manuscript is available and Open Access at the Lancet website 
 `GBD COD Capstone
 <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(18)32203-7/fulltext#seccestitle540>`_
 
