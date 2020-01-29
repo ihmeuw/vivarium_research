@@ -39,10 +39,10 @@ on the ages and sexes to which the cause applies.
      -
    * - YLL only
      - False
-     -
+     - Severe CKD only for YLL
    * - YLD only
      - False
-     -
+     - Moderate CKD, Severe CKD include YLD
    * - YLL age group start
      - Post Neonatal
      - (28, 364 days], age_group_id = 4
@@ -191,7 +191,7 @@ State and Transition Data Tables
    * - 3
      - C
      - Sev
-     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c589}}}`
+     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c589}}`
      - = incidence of CKD stage V sequelae + CKD end stage sequelae  
 
 .. list-table:: Data Sources and Definitions
@@ -229,7 +229,8 @@ State and Transition Data Tables
    * - incidence_c589
      - como
      - Incidence of chronic kidney disease
-     -      
+     -   
+        
 Validation Criteria
 -------------------
 
