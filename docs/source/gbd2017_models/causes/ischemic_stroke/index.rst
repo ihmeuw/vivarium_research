@@ -7,6 +7,9 @@ Ischemic Stroke
 Disease Description
 -------------------
 
+Stroke was defined according to WHO criteria - rapidly developing clinical signs of focal (at times global) disturbance of cerebral function lasting more than 24 hours or leading to death with no apparent cause other than that of vascular origin. Data on transient ischaemic attack (TIA) were not included. [WHO-Stroke-Definition]_
+
+
 .. todo::
 
    Add more information and references. In particular, find data about global prevalence and relation to disease fatal and non-fatal description.
@@ -21,6 +24,7 @@ GBD 2017 Modeling Strategy
 Strokes in GBD 2017
 +++++++++++++++++++
 
+Ischemic stroke is defined by GBD 2017 as an episode of neurological dysfunction caused by focal cerebral, spinal, or retinal infarction. [GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Stroke]_
 
 Cause Hierarchy
 ++++++++++++++++
@@ -249,3 +253,14 @@ Validation Criteria
 
 References
 ----------
+
+.. [WHO-Stroke-Definition]
+    Hatano S. Experience from a multicentre stroke register: a preliminary report. Bull WHO 54, 541- 553. 1976.
+
+.. [GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Stroke]
+  Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
+  Collaborators. Global, regional, and national incidence, prevalence, and
+  years lived with disability for 354 diseases and injuries for 195 countries
+  and territories, 1990–2017: a systematic analysis for the Global Burden of
+  Disease Study 2017. Lancet 2018; 392: 1789–858`
+  (pp. 340-352)
