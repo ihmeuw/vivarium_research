@@ -109,7 +109,7 @@ The aspects of the disease this cause model is designed to simulate are the stat
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
-Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. 
+Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. In the Vivarium Modeling Strategy, the limitation of the IHD model is we do not initial 'Acute MI' state in the first 28 days, and assume that prevalence = 0.
 
 .. todo::
 
