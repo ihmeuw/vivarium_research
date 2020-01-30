@@ -143,7 +143,7 @@ State and Transition Data Tables
      - = average disability weight over all sequelae in the post ischemic stroke state
    * - A
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{386}}}^{380} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\displaystyle{\sum_{s\in \text{386}}}^{390} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
      - = average disability weight over all sequelae in the acute ischemic stroke state
    * - S
      - disability weight
