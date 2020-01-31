@@ -1,8 +1,8 @@
 .. _software:
 
-======================
-The Vivarium Framework
-======================
+===============================
+The Vivarium Software Framework
+===============================
 
 The Vivarium microsimulation framework is separated into numerous
 source-controlled repositories to keep things focused and organized. A list of

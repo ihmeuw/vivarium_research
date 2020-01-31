@@ -8,10 +8,10 @@ for building public health intervention models with Vivarium.
 Getting Started
 ---------------
 
-:ref:`Modeling Process <process>`
-+++++++++++++++++++++++++++++++++
+:ref:`Model Development Workflow <workflow>`
+++++++++++++++++++++++++++++++++++++++++++++
 
-Details of the intervention modeling process.
+Details of the intervention modeling workflow.
 
 :ref:`Finding Data Sources <data>`
 ++++++++++++++++++++++++++++++++++
@@ -28,8 +28,13 @@ The software libraries used in Vivarium models.
 
 Handy tutorials for common research tasks.
 
-:ref:`Existing Models <models>`
-+++++++++++++++++++++++++++++++
+:ref:`Designing Models for Vivarium <model_design>`
++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Descriptions of what goes into building all the pieces of a Vivarium model.
+
+:ref:`Existing Models for GBD 2017 <2017_models>`
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Tried and tested models for diseases, risks, and interventions.
 
@@ -42,10 +47,11 @@ To get started adding new documentation, check out our
 .. toctree::
    :hidden:
 
-   modeling_process/index
+   modeling_workflow/index
    data
    software
    tutorials
-   models/index
+   model_design/index
+   gbd2017_models/index
    contributing
    glossary

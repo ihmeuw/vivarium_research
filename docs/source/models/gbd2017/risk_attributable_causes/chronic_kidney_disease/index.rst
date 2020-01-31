@@ -1,0 +1,245 @@
+.. _2017_cause_ckd:
+
+============================
+Chronic Kidney Disease (CKD)
+============================
+
+According to GBD 2017, chronic kidney disease (CKD) is defined as a permanent loss of renal function as indicated by estimated glomerular filtration rate (eGFR) and urinary albumin to creatinine ratio (ACR). The GBD study considers six stages of CKD as defined by degree of loss of renal function or receipt of renal replacement therapy: Albuminuria (eGFR > 60ml/min/1.73m2 and ACR > 30 mg/g), CKD Stage III (eGFR 30-60ml/min/1.73m2), CKD Stage IV (eGFR 15-30ml/min/1.73m2), CKD Stage V (eGFR <15ml/min/1.73m2, not on renal replacement therapy), maintenance dialysis, and renal transplantation.
+
+.. todo:: Add a general clinical overview of the cause. Useful external data sources, note to flesh out how this cause kills or causes disability among with condition. Features of the cause. Links to prominent mathematical models of the cause if they exist. 
+
+GBD 2017 Modeling Strategy
+--------------------------
+
+Cause Hierarchy
++++++++++++++++
+.. image:: cause_hierarchy_ckd.svg
+
+Restrictions
+++++++++++++
+
+The following table describes any restrictions in GBD 2017 on the effects of
+this cause (such as being only fatal or only nonfatal), as well as restrictions
+on the ages and sexes to which the cause applies.
+
+.. todo:: Check in with SE / RT team if Restrictions should be stratified by CKD sub_causes (six stages of CKD).
+
+.. list-table:: GBD 2017 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Post Neonatal
+     - (28, 364 days], age_group_id = 4
+   * - YLL age group end
+     - 95 plus
+     - (95, 125], age_group_id = 235
+   * - YLD age group start
+     - Post Neonatal
+     - (28, 364 days], age_group_id = 4
+   * - YLD age group end
+     - 95 Plus
+     - (95, 125], age_group_id = 235
+
+Vivarium Modeling Strategy
+--------------------------
+
+Scope
++++++
+.. todo::
+
+  Describe which aspects of the disease this cause model is designed to
+  simulate, and which aspects it is **not** designed to simulate.
+
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a disease state 'With Condition' based on incidence of CKD, and then from there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state.
+
+Assumptions and Limitations
++++++++++++++++++++++++++++
+
+.. todo::
+
+  Describe the clinical and mathematical assumptions made for this cause model,
+  and the limitations these assumptions impose on the applicability of the
+  model.
+
+Cause Model Diagram
+-------------------
+
+.. image:: cause_model_ckd.svg
+
+
+Data Description
+----------------
+
+State and Transition Data Tables
+++++++++++++++++++++++++++++++++
+
+.. list-table:: State Definitions
+   :widths: 1, 10, 10
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - **S**\ usceptible
+     - Susceptible to CKD
+   * - C
+     - With **C**\ ondition of chronic kidney disease
+     - Has CKD, regardless of moderate or severe CKD
+   * - M
+     - **M**\ oderate CKD
+     - Has moderate CKD (not severe, not fatal)
+   * - Sev
+     - **S**\ evere CKD
+     - Has severe CKD (fatal)
+
+.. list-table:: State Severity Split Definitions
+   :widths: 1, 10, 10
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - **S**\ usceptible
+     - 
+   * - C
+     - With **C**\ ondition of chronic kidney disease
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}}`
+   * - M
+     - **M**\ oderate CKD
+     - sequelae_mod = [s_5225, s_5219, 5213, s_5231, s_5249, s_5243, s_5237, s_5255, s_5540, s_5228, s_5222, s_5216, s_5234, s_5252, s_5246, s_5240, s_5258, s_5543, s_1024, s_1025, s_1026, s_1027, s_1433, s_1436, s_1439, s_1430, s_5549, s_1016, s_1017, s_1018, s_1019, s_1421, s_1424, s_1427, s_1418, s_5546, s_1032, s_1033, s_1034, s_1035, s_1445, s_1448, s_1451, s_1442, s_5552] 
+   * - Sev
+     - **S**\ evere CKD
+     - sequelae_sev = [s_5201, s_5207, s_5273, s_5267, s_5261, s_5279, s_5204, s_5210, s_5276, s_5270, s_5264, s_5282, s_504, s_505, s_1385, s_1388, s_1391, s_1382, s_501, s_502, s_1373, s_1376, s_1379, s_1370, s_507, s_508, s_1397, s_1400, s_1403, s_1394] 
+.. list-table:: State Data
+   :widths: 5 10 10 20
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - simulants not prevalent with CKD
+     - 1-prevalence_c589
+     -
+   * - C
+     - prevalence
+     - prevalence_c589
+     -
+   * - M
+     - prevalence
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}{\scriptstyle{\text{prevalence_c589}}}`
+     - = (prevalence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae) / prevalence of CKD
+   * - Sev
+     - prevalence
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}{\scriptstyle{\text{prevalence_c589}}}`
+     - = (prevalence of CKD stage V sequelae + CKD end stage sequelae) / prevalence of CKD 
+   * - EMR severe
+     - excess mortality rate of severe CKD
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_severe_ckd}}`
+     - 
+   * - EMR moderate
+     - excess mortality rate of severe CKD
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_moderate_ckd}}`
+     -   
+   * - C
+     - disability weight
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}`
+     -
+   * - All
+     - cause-specific mortality rate
+     - :math:`\frac{\text{deaths_c589}}{\text{1 - prev_589} \,\times \text{population}}`
+     -
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 10 10
+   :header-rows: 1
+
+   * - Transition
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - 1
+     - S
+     - C
+     - incidence_c589
+     -
+   * - 2
+     - C
+     - M
+     - :math:`\sum_{s\in \text{incidence_sequelae_mod.sub_causes.c589}}`
+     - = incidence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae
+   * - 3
+     - C
+     - Sev
+     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c589}}}`
+     - = incidence of CKD stage V sequelae + CKD end stage sequelae  
+
+.. list-table:: Data Sources and Definitions
+   :widths: 10 10 20 20
+   :header-rows: 1
+
+   * - Variable
+     - Source
+     - Description
+     - Notes
+   * - prevalence_c589
+     - como
+     - prevalence of chronic kidney disease
+     -
+   * - deaths_c589
+     - codcorrect
+     - Count of deaths due to chronic kidney disease
+     - 
+   * - population
+     - demography
+     - Mid-year population for given sex/age/year/location
+     - 
+   * - prevalence_s{sid}
+     - como
+     - Prevalence of sequela with id {id}
+     - 
+   * - disability_weight_s{sid}
+     - YLD appendix
+     - Disability weight of sequela with id {id}
+     - 
+   * - incidence_s{sid}
+     - como
+     - Incidence of sequela with id {id}
+     - 
+   * - incidence_c589
+     - como
+     - Incidence of chronic kidney disease
+     -      
+Validation Criteria
+-------------------
+
+* prevalence_moderate_CKD + prevalence_severe_CKD = 1
+
+* incidence_ckd = incidence_severe_CKD/prevalence_severe_CKD
+
+* incidence_ckd = incidence_moderate_CKD/prevalence_moderate_CKD
+
+
+
+References
+----------
