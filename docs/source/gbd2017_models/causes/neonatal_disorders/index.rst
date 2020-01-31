@@ -25,7 +25,9 @@ GBD 2017 Modeling Strategy
 
 .. todo::
 
-  Add an overview of the GBD modeling section.
+  Add an overview of the GBD modeling section, citing
+  [GBD-2017-YLD-Appendix-Neonatal-Disorders]_ and
+  [GBD-2017-CoD-Appendix-Neonatal-Disorders]_.
 
 
 Cause Hierarchy
@@ -74,9 +76,31 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
+This model is designed to estimate YLLs due to neonatal disorders that could be
+averted by an intervention that affects :ref:`Low Birth Weight and Short
+Gestation (LBWSG) <2017_risk_lbwsg>`. The model groups together all of the
+neonatal sub-causes, and is fatal-only (no disability). The rationale for this
+design is as follows:
 
-  Add an overview of the Vivarium modeling section.
+- All of the neonatal sub-causes (except sepsis -- see `Assumptions and
+  Limitations`_ below) have the same 2-state cause model structure: "with
+  condition" and "free of condition", with no between-state transitions.
+
+- All of the causes affected by the LBWSG risk factor have the same risk ratios
+  and hence will be affected in the same way by shifts between LBWSG categories.
+  Thus, for the purposes of measuring the effects of an intervention on LBWSG,
+  we can group together all the neonatal sub-causes into a single model of the
+  parent cause, `neonatal disorders`.
+
+- Based on the available data, it is unclear how to compute an appropriate
+  average disability weight for the collection of all neonatal disorders. For
+  the age groups we're considering in the BEP model (0-2 years), the ratio of
+  YLDs to YLLs for neonatal disorders is very small, so we choose not to model
+  disability for this cause.
+
+  .. todo::
+
+    Look into data and provide an estimate of neonatal YLDs as a fraction of neonatal DALYs for relevant age groups.
 
 Scope
 +++++
@@ -89,17 +113,120 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+We assume no transitions between the "with condition" and "free of condition"
+states because this is the behavior of all of the neonatal sub-causes except
+:ref:`Neonatal Sepsis <2017_cause_neonatal_sepsis>`, which has SIS dynamics. We
+expect this no-transisions assumption to be sufficiently accurate because we
+compared a model of Neonatal Sepsis with no remission or post-birth incidence
+against GBD 2017, and the results were very close [cite Kiran's code once it's
+on GitHub].
 
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: neonatal_disorders_cause_model_diagram.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
+
+.. list-table:: State Definitions
+   :widths: 1, 5, 10
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - C
+     - With **C**\ ondition
+     - Infant developed neonatal disorders
+   * - F
+     - **F**\ ree of Condition
+     - Infant did not develop neonatal disorders
+
+.. list-table:: State Data
+   :widths: 1, 5, 5, 10
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - C
+     - prevalence
+     - prevalence_c380
+     -
+   * - C
+     - birth prevalence
+     - birth_prevalence_c380
+     -
+   * - C
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c380}}{\text{population} \,\times\, \text{prevalence_c380}}`
+     - = (cause-specific mortality rate) / prevalence
+   * - C
+     - disability weight
+     - N/A
+     - this is a fatal-only model
+   * - F
+     - prevalence
+     - 1 -- prevalence_c380
+     -
+   * - F
+     - birth prevalence
+     - 1 -- birth_prevalence_c380
+     -
+   * - F
+     - excess mortality rate
+     - 0
+     -
+   * - F
+     - disability weight
+     - N/A
+     - this is a fatal-only model
+   * - All
+     - cause-specific mortality rate
+     - :math:`\frac{\text{deaths_c380}}{\text{population}}`
+     -
+
+.. list-table:: Transition Data
+   :widths: 1, 1, 1, 5, 10
+   :header-rows: 1
+
+   * - Transition
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - N/A
+     - N/A
+     - N/A
+     - N/A
+     - N/A
+
+.. list-table:: Data Sources and Definitions
+   :widths: 1, 3, 10, 10
+   :header-rows: 1
+
+   * - Value
+     - Source
+     - Description
+     - Notes
+   * - prevalence_c380
+     - como
+     - Prevalence of neonatal disorders
+     -
+   * - birth_prevalence_c380
+     - como
+     - Birth prevalence of neonatal encephalopathy
+     - age_group_id = 164 (at birth) and measure = 6 (incidence)
+   * - deaths_c380
+     - codcorrect
+     - Deaths from neonatal disorders
+     -
+   * - population
+     - demography
+     - Mid-year population for given age/sex/year/location
+     -
 
 Validation Criteria
 +++++++++++++++++++
