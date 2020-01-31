@@ -217,7 +217,7 @@ State and Transition Data Tables
      -
    * - birth_prevalence_c380
      - como
-     - Birth prevalence of neonatal encephalopathy
+     - Birth prevalence of neonatal disorders
      - age_group_id = 164 (at birth) and measure = 6 (incidence)
    * - deaths_c380
      - codcorrect
