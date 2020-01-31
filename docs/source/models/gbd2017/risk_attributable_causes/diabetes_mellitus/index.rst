@@ -4,10 +4,14 @@
 Diabetes Mellitus (DM)
 ======================
 
-.. todo:: Add a general clinical overview of the cause. Useful external data sources, note to flesh out how this cause kills or causes disability among with condition. Features of the cause. Links to prominent mathematical models of the cause if they exist. 
+WHO defines Diabetes Mellitus (DM) as a chronic, metabolic disease characterized by elevated levels of blood glucose (or blood sugar), which leads over time to serious damage to the heart, blood vessels, eyes, kidneys, and nerves. The most common is type 2 diabetes, usually in adults, which occurs when the body becomes resistant to insulin or doesn't make enough insulin. In the past three decades the prevalence of type 2 diabetes has risen dramatically in countries of all income levels. Type 1 diabetes, once known as juvenile diabetes or insulin-dependent diabetes, is a chronic condition in which the pancreas produces little or no insulin by itself. [WHO-Diabetes-Definition]_
 
 GBD 2017 Modeling Strategy
 --------------------------
+
+According to GBD 2017, the case definitions and diagnostic criteria for overall diabetes mellitus, type 1 diabetes mellitus, and type 2 diabetes mellitus are presented differently. The overall diabetes mellitus model is defined as fasting plasma glucose (FPG) > 126 mg/dL (7 mmol/L) or being on treatment for diabetes. The overall type 1 diabetes mellitus model is defined as cases of DM that are on insulin or diagnosed with a biomarker (eg, c-peptide levels) that is not fasting plasma glucose. Type 2 diabetes mellitus cases are those that are not reported as type 1 diabetes mellitus. [GBD-2017-YLD-Capstone-Appendix-1-Diabetes-Mellitus]_
+
+
 
 Cause Hierarchy
 +++++++++++++++
@@ -18,9 +22,7 @@ Restrictions
 
 The following table describes any restrictions in GBD 2017 on the effects of
 this cause (such as being only fatal or only nonfatal), as well as restrictions
-on the ages and sexes to which the cause applies.
-
-.. todo:: Check in with SE / RT team if Restrictions should be stratified by DM Type 1/Type 2. Restrictions vary, whether DM Type 1 or Type 2.
+on the ages and sexes to which the cause applies. If sub cause restrictions vary, then the conflicting restrictions are noted below. 
 
 .. list-table:: GBD 2017 Cause Restrictions
    :widths: 15 15 20
@@ -41,9 +43,12 @@ on the ages and sexes to which the cause applies.
    * - YLD only
      - False
      -
-   * - YLL age group start
+   * - YLL age group start (DM Type 1)
      - Early Neonatal
      - (0, 6 days], age_group_id = 2
+   * - YLL age group start (DM Type 2)
+     - 15 to 19
+     - (15, 19], age_group_id = 8
    * - YLL age group end
      - 95 plus
      - (95, 125], age_group_id = 235
@@ -76,8 +81,6 @@ Assumptions and Limitations
 Cause Model Diagram
 -------------------
 
-According to GBD 2017, the case definitions and diagnostic criteria for overall diabetes mellitus, type 1 diabetes mellitus, and type 2 diabetes mellitus are presented differently. The overall diabetes mellitus model is defined as fasting plasma glucose (FPG) > 126 mg/dL (7 mmol/L) or being on treatment for diabetes. The overall type 1 diabetes mellitus model is defined as cases of DM that are on insulin or diagnosed with a biomarker (eg, c-peptide levels) that is not fasting plasma glucose. Type 2 diabetes mellitus cases are those that are not reported as type 1 diabetes mellitus.
-
 .. image:: cause_model_dm.svg
 
 
@@ -98,12 +101,39 @@ State and Transition Data Tables
    * - State
      - State Name
      - Definition
-   * - C1
-     - With **C**\ ondition of type 1 diabetes mellitus
-     - Simulant is on insulin or diagnosed with a biomarker (eg, c-peptide levels) that is not fasting plasma glucose
-   * - C2
-     - With **C**\ ondition of type 2 diabetes mellitus
-     - Simulant is a diabetes mellitus case but is not reported as type 1 diabetes mellitus
+   * - S
+     - **S**\ usceptible
+     - Susceptible to Diabetes Mellitus
+   * - C
+     - With **C**\ ondition of Diabetes Mellitus
+     - Transient with condition
+   * - M
+     - **M**\ oderate
+     - Simulant is with condition of Uncomplicated Diabetes Mellitus, based on 'uncomplicated' sequelae of Diabetes Mellitus Type 1 and Type 2
+   * - Sev
+     - **S**\ evere
+     - Simulant is with condition of Severe Diabetes Mellitus, based on all other sequelae of Diabetes Mellitus Type 1 and Type 2
+
+.. list-table:: State Severity Split Definitions
+   :widths: 5 10 10 20
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - **S**\ usceptible
+     - Susceptible to Diabetes Mellitus
+     - 
+   * - C
+     - With **C**\ ondition of Diabetes Mellitus
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c587}}}`
+   * - M
+     - **M**\ oderate
+     - sequelae_mod = [s_5441, s_5465]
+   * - Sev
+     - **S**\ evere
+     - sequelae_sev = [s_5429, s_5432, s_s5435, s_5438, s_5444, s_5447, s_5450, s_5453, s_5456, s_5459, s_5462, s_5468, s_5471, s_5474]
 
 .. list-table:: State Data
    :widths: 5 10 10 20
@@ -113,14 +143,33 @@ State and Transition Data Tables
      - Measure
      - Value
      - Notes
-   * - C1
+   * - S
+     - simulants not prevalent with overall Diabetes Mellitus
+     - 1 - prevalence_c587
+   * - C 
+     - prevalence
+     - prevalence_c587
+     - 
+   * - M 
+     - prevalence
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}{\scriptstyle{\text{prevalence_c587}}}` 
+     - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae) / prevalence of overall Diabetes Mellitus  
+   * - Sev
+     - prevalence
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}{\scriptstyle{\text{prevalence_c587}}}`
+     - 
+   * - All
+     - cause-specific mortality rate (csmr)
+     - csmr_c587
+     - Notes
+   * - Sev
      - prevalence
      - prevalence_c975
-     -
+     - - = (prevalence of Diabetes Mellitus Type 1 non-uncomplicated sequelae + CKD end stage sequelae) / prevalence of CKD 
    * - C1
      - excess mortality rate
      - :math:`\frac{\text{deaths_c975}}{\text{population} \,\times\, \text{prevalence_c975}}`
-     -
+     - - = (prevalence of CKD stage V sequelae + CKD end stage sequelae) / prevalence of CKD 
    * - C1
      - disability weight
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c975}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
@@ -213,3 +262,15 @@ Validation Criteria
 
 References
 ----------
+
+.. [WHO-Diabetes-Definition]
+    Retrieved 30 Jan 2020.
+    https://www.who.int/health-topics/diabetes
+
+.. [GBD-2017-YLD-Capstone-Appendix-1-Diabetes-Mellitus]
+    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
+    Collaborators. Global, regional, and national incidence, prevalence, and
+    years lived with disability for 354 diseases and injuries for 195 countries
+    and territories, 1990–2017: a systematic analysis for the Global Burden of
+    Disease Study 2017. Lancet 2018; 392: 1789–858`
+    (pp. 559-572)
