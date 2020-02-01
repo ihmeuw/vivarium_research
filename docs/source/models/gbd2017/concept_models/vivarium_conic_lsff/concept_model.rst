@@ -101,7 +101,10 @@ Desired Model Outputs
 Stratification
 ++++++++++++++
 
-Stratify by **age, sex, and year**.
+Stratify by **location, age, sex, and year**.
+
+Observers
++++++++++
 
 Verification and Validation Strategy
 ------------------------------------
