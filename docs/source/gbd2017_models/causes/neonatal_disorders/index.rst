@@ -55,7 +55,9 @@ on the ages and sexes to which the cause applies.
      -
    * - YLL only
      - False
-     -
+     - **Note:** GBD estimates both YLLs and YLDs for neonatal disorders, but
+       **we are ignoring YLDs for this model**. See `Vivarium Modeling
+       Strategy`_ below.
    * - YLD only
      - False
      -
@@ -86,17 +88,19 @@ design is as follows:
   Limitations`_ below) have the same 2-state cause model structure: "with
   condition" and "free of condition", with no between-state transitions.
 
-- All of the causes affected by the LBWSG risk factor have the same risk ratios
-  and hence will be affected in the same way by shifts between LBWSG categories.
-  Thus, for the purposes of measuring the effects of an intervention on LBWSG,
-  we can group together all the neonatal sub-causes into a single model of the
-  parent cause, `neonatal disorders`.
+- All of the causes affected by the LBWSG risk factor have the same relative
+  risks and hence will be affected in the same way by shifts between LBWSG
+  categories. Thus, for the purposes of measuring the effects of an intervention
+  on LBWSG, we can group together all the neonatal sub-causes into a single
+  model of the parent cause, `neonatal disorders`.
 
-- Based on the available data, it is unclear how to compute an appropriate
-  average disability weight for the collection of all neonatal disorders. For
-  the age groups we're considering in the BEP model (0-2 years), the ratio of
-  YLDs to YLLs for neonatal disorders is very small, so we choose not to model
-  disability for this cause.
+- Based on the available data (in particular, the missing prevalence of
+  :ref:`other neonatal disorders <2017_cause_neonatal_other>` and lack of data
+  about comorbidity between the neonatal sub-causes), it is unclear how to
+  compute an appropriate average disability weight for the collection of all
+  neonatal disorders. For the age groups we're considering in the BEP model (0-2
+  years), the ratio of YLDs to YLLs for neonatal disorders is very small, so we
+  choose not to model disability for this cause.
 
   .. todo::
 
