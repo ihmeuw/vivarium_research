@@ -39,10 +39,10 @@ on the ages and sexes to which the cause applies.
      -
    * - YLL only
      - False
-     - Severe CKD only for YLL
+     - 
    * - YLD only
      - False
-     - Moderate CKD, Severe CKD include YLD
+     - 
    * - YLL age group start
      - Post Neonatal
      - (28, 364 days], age_group_id = 4
@@ -66,7 +66,7 @@ Scope
   Describe which aspects of the disease this cause model is designed to
   simulate, and which aspects it is **not** designed to simulate.
 
-The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a disease state 'With Condition' based on incidence of CKD, and then from there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state.
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. These sequelae are fatal and include YLLs and YLDs. All other sequelae are included in the 'Moderate' CKD, which are designated as non-fatal only and include only YLDs. The assocaited sequelae in each state can be found below in the 'State Severity Split Definitions' table.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
