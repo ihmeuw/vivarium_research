@@ -172,7 +172,7 @@ State and Transition Data Tables
      -
    * - A
      - disability weight
-     - :math:`\scriptstyle{\text{disability_weight_378} \,\times\, \text{prevalence_378} + \text{disability_weight_379} \,\times\, \text{prevalence_379}}`
+     - :math:`\displaystyle{\sum_{s\in \{378,379\}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
      -
    * - S
      - disability weight
@@ -226,7 +226,7 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c493
-     - dismod-mr
+     - como
      - prevalence of ischemic heart disease
      -
    * - deaths_c493
@@ -238,7 +238,7 @@ State and Transition Data Tables
      - Mid-year population for given sex/age/year/location
      - 
    * - prevalence_s{sid}
-     - dismod-mr
+     - como
      - Prevalence of sequela with id {id}
      - 
    * - disability_weight_s{sid}
@@ -246,7 +246,7 @@ State and Transition Data Tables
      - Disability weight of sequela with id {id}
      - 
    * - incidence_493
-     - dismod-mr 
+     - como
      - Incidence of ischemic heart disease
      - 
    * - emr_m15755
