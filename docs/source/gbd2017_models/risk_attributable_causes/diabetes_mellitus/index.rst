@@ -11,6 +11,9 @@ GBD 2017 Modeling Strategy
 
 According to GBD 2017, the case definitions and diagnostic criteria for overall diabetes mellitus, type 1 diabetes mellitus, and type 2 diabetes mellitus are presented differently. The overall diabetes mellitus model is defined as fasting plasma glucose (FPG) > 126 mg/dL (7 mmol/L) or being on treatment for diabetes. The overall type 1 diabetes mellitus model is defined as cases of DM that are on insulin or diagnosed with a biomarker (eg, c-peptide levels) that is not fasting plasma glucose. Type 2 diabetes mellitus cases are those that are not reported as type 1 diabetes mellitus. [GBD-2017-YLD-Capstone-Appendix-1-Diabetes-Mellitus]_
 
+Fasting Plasma Glucose in GBD 2017 
+++++++++++++++++++++++++++++++++++
+
 
 
 Cause Hierarchy
@@ -64,10 +67,9 @@ Vivarium Modeling Strategy
 
 Scope
 +++++
-.. todo::
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of diabetes. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' diabetes state. Across the 2 diabetes sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' diabetes state.  The 'uncomplicated' sequelae for diabetes mellitus type 1 & type 2 are included in the 'Moderate' diabetes state, which are designated as non-fatal only and include only YLDs. The sequelae which map to 'Severe' diabetes state include all other sequelae. These sequelae are fatal and include YLLs and YLDs. The assocaited sequelae in each state can be found below in the 'State Severity Split Definitions' table.
+
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -86,10 +88,6 @@ Cause Model Diagram
 
 Data Description
 ----------------
-
-.. todo::
-
-  Confirm with the RT/SE that simulants cannot transition from C1 to C2 ot C2 to C1 and that C3 should/should not be included in the Data Description tables.
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -115,7 +113,7 @@ State and Transition Data Tables
      - Simulant is with condition of Severe Diabetes Mellitus, based on all other sequelae of Diabetes Mellitus Type 1 and Type 2
 
 .. list-table:: State Severity Split Definitions
-   :widths: 5 10 10 20
+   :widths: 5 10 10 
    :header-rows: 1
 
    * - State
@@ -124,7 +122,6 @@ State and Transition Data Tables
    * - S
      - **S**\ usceptible
      - Susceptible to Diabetes Mellitus
-     - 
    * - C
      - With **C**\ ondition of Diabetes Mellitus
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c587}}}`
@@ -146,6 +143,7 @@ State and Transition Data Tables
    * - S
      - simulants not prevalent with overall Diabetes Mellitus
      - 1 - prevalence_c587
+     - 
    * - C 
      - prevalence
      - prevalence_c587
@@ -153,47 +151,27 @@ State and Transition Data Tables
    * - M 
      - prevalence
      - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}{\scriptstyle{\text{prevalence_c587}}}` 
-     - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae) / prevalence of overall Diabetes Mellitus  
+     - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae / prevalence of overall Diabetes Mellitus  
    * - Sev
      - prevalence
      - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}{\scriptstyle{\text{prevalence_c587}}}`
-     - 
+     - = (prevalence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + prevalence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated) / prevalence of overall Diabetes Mellitus  
+   * - EMR Sev
+     - excess mortality rate for severe DM 
+     - :math:`\frac{\text{CSMR_c587}}{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}`
+     - - = (cause-specific mortality rate of DM) / sum of prevalence of severe DM sequelae
+   * - EMR M
+     - excess mortality rate of moderate DM
+     - :math:`\frac{\text{CSMR_c587}}{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}`
+     - - = (cause-specific mortality rate of DM) / sum of prevalence of moderate DM sequelae
+   * - C
+     - disability_weight
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c587}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}`
+     -
    * - All
      - cause-specific mortality rate (csmr)
-     - csmr_c587
-     - Notes
-   * - Sev
-     - prevalence
-     - prevalence_c975
-     - - = (prevalence of Diabetes Mellitus Type 1 non-uncomplicated sequelae + CKD end stage sequelae) / prevalence of CKD 
-   * - C1
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_c975}}{\text{population} \,\times\, \text{prevalence_c975}}`
-     - - = (prevalence of CKD stage V sequelae + CKD end stage sequelae) / prevalence of CKD 
-   * - C1
-     - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c975}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     -
-   * - C2
-     - prevalence
-     - prevalence_c976
-     -
-   * - C2
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_c976}}{\text{population} \,\times\, \text{prevalence_c976}}`
-     -
-   * - C2
-     - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c976}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     -
-   * - All C1
-     - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c975}}{\text{population}}`
-     -
-   * - All C2
-     - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c976}}{\text{population}}`
-     -
+     - :math:`\frac{\text{deaths_c587}}{\text{1 - prev_587} \,\times \text{population}}`
+     - 
 
 .. list-table:: Transition Data
    :widths: 10 10 10 10 10
@@ -205,20 +183,20 @@ State and Transition Data Tables
      - Value
      - Notes
    * - 1
-     - susceptible
-     - With **C**\ ondition of type 1 diabetes mellitus
-     - incidence_c975
+     - S
+     - S
+     - incidence_c587
      -
    * - 2
-     - susceptible
-     - With **C**\ ondition of type 2 diabetes mellitus
-     - incidence_c976
-     -
+     - C
+     - M
+     - :math:`\sum_{s\in \text{incidence_sequelae_mod.sub_causes.c587}}`
+     - = incidence of Diabetes Mellitus Type 1 uncomplicated sequelae + incidence of Diabetes Mellitus Type 2 uncomplicated sequelae
    * - 3
-     - With **C**\ ondition of type 2 diabetes mellitus
-     - susceptible
-     - :math:`\frac{\text{prevalence_c975}}{\text{prevalence_c587}}{\text{remission_c976}}`
-     - This needs to be clarified further with the RT/SE teams
+     - C
+     - Sev
+     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c587}}`
+     - = incidence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + incidence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -228,21 +206,13 @@ State and Transition Data Tables
      - Source
      - Description
      - Notes
-   * - prevalence_c975
+   * - prevalence_c587
      - como
-     - prevalence of type 1 diabetes mellitus
+     - prevalence of overall diabetes mellitus
      -
-   * - prevalence_c976
-     - como
-     - Prevalence of type 2 diabetes mellitus
-     - 
-   * - deaths_c975
+   * - deaths_c587
      - codcorrect
-     - Count of deaths due to type 1 diabetes mellitus
-     - 
-   * - deaths_c976
-     - codcorrect
-     - Count of deaths due to type 2 diabetes mellitus
+     - Count of deaths due to overall Diabetes Mellitus
      - 
    * - population
      - demography
@@ -256,9 +226,42 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
+   * - incidence_s{sid}
+     - como
+     - Incidence of sequela with id {id}
+     - 
+   * - incidence_c587
+     - como
+     - Incidence of overall diabetes mellitus
+     -      
 
 Validation Criteria
 -------------------
+
+Model Validation
+++++++++++++++++
+
+Check the logical structure and input data for concept model, make sure that 
+
+  * the theories and assumptions underlying the conceptual model are correct
+  * the data to build, evaluate, and test the model are correct
+
+Logic
++++++
+
+* Parent cause is the sum of child causes and/or the sum of sequela 
+
+  * Fatal: Deaths (CSMR, Excess MR), YLLs
+
+  * Non-fatal: YLDs, Prevalence, Incidence
+
+  * DALYS = YLLs + YLDs 
+
+* By location-/age-/sex-
+
+1. Sum of incidence of sequela of Diabetes Mellitus sub_causes = incidence of Diabetes Mellitus
+2. Sum of prevalence of sequela of Diabetes Mellitus sub_causes = prevalence of Diabetes Mellitus
+
 
 References
 ----------
