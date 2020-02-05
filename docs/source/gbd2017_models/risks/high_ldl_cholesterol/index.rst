@@ -26,11 +26,7 @@ LDL-C is a new risk factor in GBD 2017 (previously GBD included Total Cholestero
 
 The LDL-C risk factor exposure was modeled with an ensemble distribution in GBD 2017, which include estimates of the age-/sex-/location-/year-specific mean LDL-C level; the spread of this distribution, quantified by its standard deviation, and also stratified by age, sex, location, and year; and a vector of ensemble weights that does not vary by age, sex, location, or year, which specifies how to obtain a distribution of LDL-C values that best matches the distribution observed in the available individual-person data.
 
-.. todo::
-
-   Define exposure and what units it is in-- LDL-cholesterol level, mmol/L or another unit.
-
-TMREL is 0.7 to 1.3 mmol/L.
+For exposure, to get from mmol/L to mg/dL multiply by 88.57. In addition, to get from mg/dL to mmol/L multiply by 0.01129. TMREL is 0.7 to 1.3 mmol/L.
 
 Risk Exposure Model Hierarchy
 +++++++++++++++++++++++++++++
@@ -102,11 +98,16 @@ Validation Criteria
 +++++++++++++++++++
 
 1. Data
+
     - internal
+
     - external
+
 2. Model
+
     - Does the mean in the model match the mean in GBD?
-    -Does the standard deviation in the model match the std in GBD?
+
+    - Does the standard deviation in the model match the std in GBD?
     
 References
 ----------
