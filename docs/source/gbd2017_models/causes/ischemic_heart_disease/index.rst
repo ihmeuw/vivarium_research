@@ -109,7 +109,7 @@ The aspects of the disease this cause model is designed to simulate are the stat
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
-Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. 
+Apart from inpatient hospital and inpatient claims data, GBD 2017 did not include any data from sources other than the literature for myocardial infarction. Given this information, the assumption is that MI is the best and only estimator for the IHD model. The limitation of this assumption and approach is the exclusion of non-MI data sources could be underestimating the IHD model. In the Vivarium Modeling Strategy, the limitation of the IHD model is we do not initial 'Acute MI' state in the first 28 days, and assume that prevalence = 0.
 
 .. todo::
 
@@ -117,7 +117,7 @@ Apart from inpatient hospital and inpatient claims data, GBD 2017 did not includ
 
 Cause Model Diagram
 --------------------
-.. image:: ischemic_heart_disease_transitions.svg
+.. image:: cause_model_ihd.svg
 
 Data Description
 ----------------
@@ -132,11 +132,14 @@ State and Transition Data Tables
    * - State
      - State Name
      - Definition
+   * - S
+     - **S**\ usceptible
+     - Susceptible to IHD
    * - A
-     - Acute Myocardial Infarction (MI)
-     - Simulant that experiences acute MI symptoms listed in 'Myocardial infarction (MI) in GBD 2017'
-   * - C
-     - Chronic IHD
+     - **A**\ cute Myocardial Infarction (MI)
+     - Simulant that experiences acute MI symptoms 
+   * - P
+     - **P**\ ost-MI IHD
      - Simulant that experiences angina and asymptomatic ischemic heart disease following myocardial infarction; survival to 28 days following incident MI
 
 .. list-table:: State Data
@@ -147,22 +150,46 @@ State and Transition Data Tables
      - Measure
      - Value
      - Notes
-   * - C
-     - prevalence
-     - prevalence_c493
-     -
-   * - C
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_c493}}{\text{population} \,\times\, \text{prevalence_c493}}`
-     -
-   * - C
-     - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c493}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     -
    * - All
      - cause-specific mortality rate
      - :math:`\frac{\text{deaths_c493}}{\text{population}}`
      -
+   * - P
+     - excess mortality rate
+     - emr_m15755
+     -
+   * - A
+     - excess mortality rate
+     - emr_m1814
+     -
+   * - S
+     - excess mortality rate
+     - 0
+     -
+   * - P
+     - disability weight
+     - :math:`\displaystyle{\sum_{s=380}^{385}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     -
+   * - A
+     - disability weight
+     - :math:`\displaystyle{\sum_{s\in \{378,379\}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     -
+   * - S
+     - disability weight
+     - 0
+     -
+   * - P
+     - prevalence
+     - prevalence_c493
+     -
+   * - A
+     - prevalence
+     - 0
+     -
+   * - S
+     - prevalence
+     - 1-prevalence_493
+     - simulants not prevalent with IHD
 
 .. list-table:: Transition Data
    :widths: 10 10 10 10 10
@@ -174,20 +201,20 @@ State and Transition Data Tables
      - Value
      - Notes
    * - 1
-     - susceptible
-     - Acute Myocardial Infarction (MI)
-     - incidence_(s_378+s_379)
+     - S
+     - A
+     - incidence_c493
      -
    * - 2
-     - Acute Myocardial Infarction (MI)
-     - Chronic IHD
-     - TBD
-     - This needs to be clarified further with the RT/SE teams
+     - A
+     - P
+     - 28 days
+     - duration-based transition from acute state then progress into post state
    * - 3
-     - Chronic IHD
-     - Acute Myocardial Infarction (MI)
-     - TBD
-     - This needs to be clarified further with the RT/SE teams
+     - P
+     - A
+     - incidence_493
+     - 
   
 
 .. list-table:: Data Sources and Definitions
@@ -198,11 +225,11 @@ State and Transition Data Tables
      - Source
      - Description
      - Notes
-   * - prevalence_c589
+   * - prevalence_c493
      - como
-     - prevalence of chronic kidney disease
+     - prevalence of ischemic heart disease
      -
-   * - deaths_c589
+   * - deaths_c493
      - codcorrect
      - Count of deaths due to chronic kidney disease
      - 
@@ -218,6 +245,18 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
+   * - incidence_493
+     - como
+     - Incidence of ischemic heart disease
+     - 
+   * - emr_m15755
+     - dismod-mr 
+     - excess-mortality rate of post-MI ischemic heart disease
+     - 
+   * - emr_m1814
+     - dismod-mr 
+     - excess-mortality rate of MI due to ischemic heart disease
+     - 
 
 Validation Criteria
 -------------------
@@ -226,6 +265,9 @@ Validation Criteria
 
    Describe tests for model validation.
 
+At the IHD cause level:
+
+1. Is CSMR close to pre
 
 References
 ----------
