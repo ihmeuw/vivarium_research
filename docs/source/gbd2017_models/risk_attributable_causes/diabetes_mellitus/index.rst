@@ -11,10 +11,15 @@ GBD 2017 Modeling Strategy
 
 According to GBD 2017, the case definitions and diagnostic criteria for overall diabetes mellitus, type 1 diabetes mellitus, and type 2 diabetes mellitus are presented differently. The overall diabetes mellitus model is defined as fasting plasma glucose (FPG) > 126 mg/dL (7 mmol/L) or being on treatment for diabetes. The overall type 1 diabetes mellitus model is defined as cases of DM that are on insulin or diagnosed with a biomarker (eg, c-peptide levels) that is not fasting plasma glucose. Type 2 diabetes mellitus cases are those that are not reported as type 1 diabetes mellitus. [GBD-2017-YLD-Capstone-Appendix-1-Diabetes-Mellitus]_
 
-Fasting Plasma Glucose in GBD 2017 
-++++++++++++++++++++++++++++++++++
+Fasting Plasma Glucose (FPG) in GBD 2017 
+++++++++++++++++++++++++++++++++++++++++
 
+GBD 2017 predicted mean FPG from diabetes prevalence using an ensemble distribution. GBD 2017 also used the ensemble distribution methodology to estimate the prevalence of diabetes based on mean FPG in locations where data on prevalence of diabetes were not available. 
 
+Other measures of blood sugar to estimate diabetes in GBD 2017
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+GBD 2017 incorporated all available data related to population-representative estimates of diabetes, so other measures of blood sugar (glycated hemoglobin A1c, oral glucose tolerance test, post-prandial glucose test) were used to define diabetes and mean fasting plasma glucose (FPG) in a population when data on diabetes were not available as data inputs. 
 
 Cause Hierarchy
 +++++++++++++++
@@ -23,9 +28,7 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
-The following table describes any restrictions in GBD 2017 on the effects of
-this cause (such as being only fatal or only nonfatal), as well as restrictions
-on the ages and sexes to which the cause applies. If sub cause restrictions vary, then the conflicting restrictions are noted below. 
+The following table describes any restrictions in GBD 2017 on the effects of this cause (such as being only fatal or only nonfatal), as well as restrictions on the ages and sexes to which the cause applies. If sub cause restrictions vary, then the conflicting restrictions are noted below. 
 
 .. list-table:: GBD 2017 Cause Restrictions
    :widths: 15 15 20
@@ -70,15 +73,17 @@ Scope
 
 The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of diabetes. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' diabetes state. Across the 2 diabetes sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' diabetes state.  The 'uncomplicated' sequelae for diabetes mellitus type 1 & type 2 are included in the 'Moderate' diabetes state, which are designated as non-fatal only and include only YLDs. The sequelae which map to 'Severe' diabetes state include all other sequelae. These sequelae are fatal and include YLLs and YLDs. The assocaited sequelae in each state can be found below in the 'State Severity Split Definitions' table.
 
+Vivarium Modeling Strategy for Risk Factor FPG
+++++++++++++++++++++++++++++++++++++++++++++++
+
+This cause model is designed to simulate the basic structure of the risk factor (FPG) continuous exposure ensemble distribution model. The FPG distribution will range, starting at the theoretical minimum-risk exposure level (TMREL) of 4.5-5.4 mmol/L to the maximum FPG value for each location/sex/age group. For simulants that are in 'Susceptible' state in the vivarium model, the model will randomly draw a value of FPG that is equal to or less than the TMREL and less than  7.0 mmol/L (case definition for 'With Condition' of overall diabetes mellitus). For simulants that are 'With condition' of Diabetes, the model will randomly draw a value of FPG that is equal to or greater than 7.0 mmol/L.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
+1. Lack of remission data in GBD 2017: The assumptions made for this cause model include that there are no remission rates found for overall diabetes mellitus, diabetes mellitus type 1, or diabetes mellitus type 2. The limitations of these assumptions impose a lack of remission and accuracy on the applicability of the model. According to external sources and GBD 2017, diabetes mellitus and its subcauses should include remission rates but there is no data for remission found in GBD 2017. 
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+2. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
 
 Cause Model Diagram
 -------------------
@@ -207,7 +212,7 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c587
-     - como
+     - dismod
      - prevalence of overall diabetes mellitus
      -
    * - deaths_c587
@@ -219,7 +224,7 @@ State and Transition Data Tables
      - Mid-year population for given sex/age/year/location
      - 
    * - prevalence_s{sid}
-     - como
+     - dismod
      - Prevalence of sequela with id {id}
      - 
    * - disability_weight_s{sid}
@@ -227,7 +232,7 @@ State and Transition Data Tables
      - Disability weight of sequela with id {id}
      - 
    * - incidence_s{sid}
-     - como
+     - dismod
      - Incidence of sequela with id {id}
      - 
    * - incidence_c587
