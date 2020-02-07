@@ -18,17 +18,17 @@ Intervention Definitions
 Business As Usual (BAU) scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A baseline scenario projecting current treatment, patient adherence, and trends of LDL-c and ASCVD outcomes, for the current year and five years into the future. (2019-2024). This scenario will be used to compare the two subsequent scenarios.
+A baseline scenario projecting current treatment (per location), patient adherence, and trends of LDL-c and ASCVD outcomes, for the current year and five years into the future. (2019-2024). This scenario will be used to compare the two subsequent scenarios. The definition of adherence is the probability of a patient taking their medication 80% of the time. The proportion of patients that are adherent come from literature. More detailed information about adherence and probability of prescription given are included in the Data Artifact and subsequent to change during the development of the Zenon project.
 
 2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For each of the simulated populations/locations, IHME will run a counterfactual scenario in which all initial variables are identical to the BAU Scenario, but in which treatments follow the ESC 2019 Guidelines using individual components (i.e., multiple pills) for individuals meeting guideline criteria. The same treatment pathway will be applied to all countries based on ESC 2019 Guidelines. The guidelines propose a more proactive treatment than current treatment practices.
+For each of the simulated populations/locations, IHME will run a counterfactual scenario in which all initial variables are identical to the BAU Scenario, but in which treatments follow the ESC 2019 Guidelines using individual components (i.e., multiple pills) for individuals meeting guideline criteria. The same treatment pathway will be applied to all countries based on ESC 2019 Guidelines. The guidelines propose a more proactive treatment than current treatment practices. More information about this scenario and associated adherence to multiple pills treatment can be found in the Treamtent Ramp below and is included in the Data Artifact.
 
 2019 Guidelines with combination single pill 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For each of the simulated populations/locations, IHME will run a counterfactual scenario in which all initial variables are identical to the Intervention Scenario 1, but in which treatments follow the ESC 2019 Guidelines using FDC rather than individual components for individuals meeting guideline criteria. This scenario would include an assumption about the increased adherence to single pill treatment compared to multiple pills. 
+For each of the simulated populations/locations, IHME will run a counterfactual scenario in which all initial variables are identical to '2019 Guidelines with multiple pills scenario', but in which treatments follow the ESC 2019 Guidelines using FDC rather than individual components for individuals meeting guideline criteria. This scenario would include an assumption about the increased adherence to single pill treatment compared to multiple pills. More information about this scenario and the increased adherence to single pill treatment can be found in the Treamtent Ramp below and is included in the Data Artifact.
 
 Questions of Interest
 +++++++++++++++++++++
@@ -49,7 +49,7 @@ Model Components
 Time
 ++++
 
-* Start and end year: **2020 -- 2024**
+* Start and end date: **Jan 1, 2020 -- Dec 31, 2024**
 * Simulation time step: **28 days** to capture cardiovascular events and treatment timesteps
 
 Demographics
@@ -79,13 +79,22 @@ PAF-of-1 Cause/Risk Pairs
 
 * :ref:`Chronic Kidney Disease (CKD) / Impaired Kidney Function (IKF) <2017_cause_ckd>`
 
-* Will add Diabetes Mellitus once PR is approved.
+* :ref:`Diabetes Mellitus (DM) / Fasting Plasma Glucose (FPG) <_2017_cause_diabetes_mellitus>`
 
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
 
 Coverage Gap Framework
 ++++++++++++++++++++++
+
+Eligible to Treatment Criteria
+++++++++++++++++++++++++++++++
+
+Individuals who are eligible to treatment fall in the criteria of: Starting age group of 40 years old or greater. No new treatment would be given to patients over 75 years old but they continue treatment. 
+
+Utilization estimates used in this model are for the average number of outpatient healthcare visits, which will inform the treatment ramp of when a patient will seek care through a visit and get their LDL-c levels measured. The utilization rates are based on GHDx_, 'Global Inpatient and Outpatient Health Care Utilization, Unit Costs, and Costs and Services Needed to Achieve Universal Health Coverage 1990-2016'.
+
+.. _GHDx: http://ghdx.healthdata.org/record/ihme-data/UHC-cost-and-services-2016
 
 Interventions
 +++++++++++++
@@ -96,12 +105,25 @@ Interventions
 2019 Guidelines with combination single pill 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Treatment Ramp
+++++++++++++++
+
+Business As Usual (BAU) Scenario
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: bau_treatment_ramp.svg
+
+Intervention Scenarios (Both scenarios illustrated)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: intervention_scenarios_treatment_ramp.svg
+
 
 Desired Model Outputs
 ---------------------
 
 .. list-table:: Desired Model Outputs
-   :widths: 1, 5, 10, 5, 5, 30, 30
+   :widths: 1, 5, 10, 5, 5, 30, 30, 20
    :header-rows: 1
 
    * - Location name
@@ -111,6 +133,7 @@ Desired Model Outputs
      - Sex 
      - Scenario
      - Outcome
+     - Outcome Metric
    * - Brazil 
      - 2020
      - Hypertension (SBP > 140 mmHg)
@@ -118,6 +141,7 @@ Desired Model Outputs
      - Male 
      - Business As Usual (BAU)
      - All-cause mortality
+     - Rate per 100k 
    * - China
      - 2021
      - Diabetes (FPG > 7.0 mmol/L)
@@ -125,6 +149,7 @@ Desired Model Outputs
      - Female
      - 2019 Guidelines with multiple pills 
      - DALYs by all four causes 
+     - Rate per 100k
    * - Italy 
      - 2022
      - Entire Population
@@ -132,6 +157,7 @@ Desired Model Outputs
      - Both
      - 2019 Guidelines with combination single pill 
      - YLLS by all four causes
+     - Rate per 100k
    * - France
      - 2023
      - Post-ACS
@@ -139,13 +165,15 @@ Desired Model Outputs
      - 
      - 
      - YLDs by all four causes
+     - Rate per 100k
    * - Spain 
      - 2024
      - Treated, single drug
      - 60-64
      - 
      -
-     - Mean, Standard Deviation for FPG, SBP, LDL-c 
+     - Mean, Standard Deviation for FPG
+     - mmol/L
    * - Russia
      - 
      - Treated, multiple drugs
@@ -153,6 +181,7 @@ Desired Model Outputs
      -
      -
      - Treatment Coverage
+     - Percent 
    * -
      -
      - Not Treated
@@ -160,13 +189,15 @@ Desired Model Outputs
      -
      -
      - Monotherapy vs. multiple pills
+     - Percent
    * - 
      - 
      -
      - 75+
      -
      -
-     - Percent achieving target LDL-c
+     - Population achieving target LDL-c
+     - Percent 
    * -
      - 
      -
@@ -174,13 +205,39 @@ Desired Model Outputs
      -
      -
      - CV risk score
+     - Number
    * -
      - 
      -
-     - All ages
+     - 40-100
      -
      -
      - Proportion of people adherent
+     - Percent
+   * - 
+     - 
+     - 
+     - 
+     -
+     -
+     - Deaths by four causes
+     - Rate per 100k
+   * - 
+     - 
+     -
+     -
+     -
+     -
+     - Mean, Standard Deviation for SBP 
+     - mmHg 
+   * - 
+     -
+     -
+     -
+     -
+     -
+     - Mean, Standard Deviation for LDL-c level
+     - mmol/ L
     
 Stratification
 ++++++++++++++
