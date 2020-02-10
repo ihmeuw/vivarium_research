@@ -25,8 +25,8 @@ A baseline scenario projecting current treatment (per location), patient adheren
 
 For each of the simulated populations/locations, IHME will run a counterfactual scenario in which all initial variables are identical to the BAU Scenario, but in which treatments follow the ESC 2019 Guidelines using individual components (i.e., multiple pills) for simulants meeting guideline criteria. The same treatment pathway will be applied to all countries based on ESC 2019 Guidelines. The guidelines propose a more proactive treatment than current treatment practices. More information about this scenario and associated adherence to multiple pills treatment can be found in the Treamtent Ramp below and is included in the Data Artifact.
 
-2019 Guidelines with combination single pill 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2019 Guidelines with combination single pill scenario
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For each of the simulated populations/locations, IHME will run a counterfactual scenario in which all initial variables are identical to '2019 Guidelines with multiple pills scenario', but in which treatments follow the ESC 2019 Guidelines using FDC rather than individual components for simulants meeting guideline criteria. This scenario would include an assumption about the increased adherence to single pill treatment compared to multiple pills. More information about this scenario and the increased adherence to single pill treatment can be found in the Treamtent Ramp below and is included in the Data Artifact.
 
@@ -101,11 +101,11 @@ Utilization estimates used in this model are for the average number of outpatien
 Interventions
 +++++++++++++
 
-2019 Guidelines with multiple pills
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-2019 Guidelines with combination single pill 
+2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+2019 Guidelines with combination single pill scenario 
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Treatment Ramp
 ++++++++++++++
@@ -268,5 +268,27 @@ Observers
 Verification and Validation Strategy
 ------------------------------------
 
-#to-do- add verification & validation of model outputs against GBD estimates (initialization & forecast)
-#to-do- add v&V of data input consistent with each other 
+1. Develop hypothesis about how this model will behave
+2. Write assumptions down
+
+.. todo::
+
+   Add assumptions from back-of-the-envelope calculations + preliminary data input validation
+
+3. Check internal consistency - all epi measures (data inputs) agree and produce results that make sense
+
+  * Cause-Specific Mortality Rate (CSMR) = Excess Mortality Rate (EMR) * Prevalence for all causes 
+
+4. Check the model outputs as outside sources
+
+* for location in Brazil, China, France, Italy, Spain, Russia:
+
+* for cause in ischemic_heart_disease, ischemic_stroke, chronic_kidney_disease, diabetes_mellitus:
+
+* for measure in incidence, death, yll, yld, daly, emr, csmr:
+
+* for age_group in 30-34, 35-39, 40-44, 45-49, 50-54, 55-59, 60-64, 65-69, 70-74, 75-79, 80-84, 85-89, 90-94, 95+:
+
+  - Simulate history & check against GBD 2017 
+  - model_outputs_location_cause_measure_sex_age_group = gbd_2017__location_cause_measure_sex_age_group
+
