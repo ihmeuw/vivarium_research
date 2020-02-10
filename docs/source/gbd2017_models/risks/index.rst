@@ -9,7 +9,7 @@ Risk Exposure Models
    Describe how to model risks here.
 
 .. toctree::
-   :maxdepth: 1
+   :maxdepth: 2
    :glob:
 
    *
