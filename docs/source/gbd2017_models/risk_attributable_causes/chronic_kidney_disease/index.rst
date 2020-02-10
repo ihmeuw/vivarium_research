@@ -4,15 +4,59 @@
 Chronic Kidney Disease (CKD)
 ============================
 
-According to GBD 2017, chronic kidney disease (CKD) is defined as a permanent loss of renal function as indicated by estimated glomerular filtration rate (eGFR) and urinary albumin to creatinine ratio (ACR). The GBD study considers six stages of CKD as defined by degree of loss of renal function or receipt of renal replacement therapy: Albuminuria (eGFR > 60ml/min/1.73m2 and ACR > 30 mg/g), CKD Stage III (eGFR 30-60ml/min/1.73m2), CKD Stage IV (eGFR 15-30ml/min/1.73m2), CKD Stage V (eGFR <15ml/min/1.73m2, not on renal replacement therapy), maintenance dialysis, and renal transplantation.
-
-.. todo:: Add a general clinical overview of the cause. Useful external data sources, note to flesh out how this cause kills or causes disability among with condition. Features of the cause. Links to prominent mathematical models of the cause if they exist. 
+Chronic kidney disease (CKD) is defined by NIH as kidneys that are damaged and can’t filter blood the way they should. The main risk factors for developing kidney disease are diabetes, high blood pressure, heart disease, and a family history of kidney failure. National Kidney Foundation (NKF) adds that CKD is also known as chronic renal disease. You may develop complications like high blood pressure, anemia (low blood count), weak bones, poor nutritional health and nerve damage. Also, kidney disease increases your risk of having heart and blood vessel disease. These problems may happen slowly over a long period of time. Early detection and treatment can often keep chronic kidney disease from getting worse. When kidney disease progresses, it may eventually lead to kidney failure, which requires dialysis or a kidney transplant to maintain life. [National-Institute-Of-Diabetes-And-Digestive-And-Kidney-Diseases]_, [National-Kidney-Foundation]_
 
 GBD 2017 Modeling Strategy
 --------------------------
 
+According to GBD 2017, Chronic kidney disease (CKD) is defined as a permanent loss of renal function as indicated by estimated glomerular filtration rate (eGFR) and urinary albumin to creatinine ratio (ACR). The GBD study considers six stages of CKD as defined by degree of loss of renal function or receipt of renal replacement therapy: Albuminuria (eGFR > 60ml/min/1.73m2 and ACR > 30 mg/g), CKD Stage III (eGFR 30-60ml/min/1.73m2), CKD Stage IV (eGFR 15-30ml/min/1.73m2), CKD Stage V (eGFR <15ml/min/1.73m2, not on renal replacement therapy), maintenance dialysis, and renal transplantation.
+
+Impaired Kidney Function (IKF) in GBD 2017
+++++++++++++++++++++++++++++++++++++++++++
+
+Impaired kidney function (IKF) is a risk factor in GBD 2017 with:
+
+  * distribution of exposure data: categorical ordered polytomous model
+
+  * rei_id_341
+  
+  * PAF of 1 relationship between IKF and CKD 
+
+.. list-table:: GBD 2017 Risk Factor IKF Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Post Neonatal
+     - (28, 364 days], age_group_id = 2
+   * - YLL age group end
+     - 95 plus
+     - (95, 125], age_group_id = 235
+   * - YLD age group start
+     - Post Neonatal
+     - (28, 364 days], age_group_id = 2
+   * - YLD age group end
+     - 95 Plus
+     - (95, 125], age_group_id = 235
+
 Cause Hierarchy
 +++++++++++++++
+
 .. image:: cause_hierarchy_ckd.svg
 
 Restrictions
@@ -61,12 +105,13 @@ Vivarium Modeling Strategy
 
 Scope
 +++++
-.. todo::
-
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
 
 The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. These sequelae are fatal and include YLLs and YLDs. All other sequelae are included in the 'Moderate' CKD, which are designated as non-fatal only and include only YLDs. The assocaited sequelae in each state can be found below in the 'State Severity Split Definitions' table.
+
+Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Based on the GBD 2017 PAF of 1 relationship between IKF and CKD, simulants are initiated in the model with an assigned value of IKF. Based on this, the simulant will be determined as either moderate or severe CKD. In the treatment ramp for intervention scenarios, this assigned IKF value will determine the care that the simulant receives.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -236,11 +281,23 @@ Validation Criteria
 
 * prevalence_moderate_CKD + prevalence_severe_CKD = 1
 
+* prevalence_CKD = sum of prevalence_sequelae_CKD
+
+* incidence_CKD = sum of incidence_sequela_CKD
+
 * incidence_ckd = incidence_severe_CKD/prevalence_severe_CKD
 
-* incidence_ckd = incidence_moderate_CKD/prevalence_moderate_CKD
+* incidence_ckd = incidence_moderate_CKD/prevalence_moderate_CKD 
 
-
+* csmr_CKD = prevalence_CKD * emr_CKD
 
 References
 ----------
+
+.. [National-Institute-Of-Diabetes-And-Digestive-And-Kidney-Diseases]
+    Retrieved 7 Feb 2020.
+    https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd
+  
+.. [National-Kidney-Foundation]
+    Retrieved 7 Feb 2020.
+    https://www.kidney.org/atoz/content/about-chronic-kidney-disease
