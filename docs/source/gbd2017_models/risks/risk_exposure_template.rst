@@ -80,15 +80,13 @@ Note that this is only for the exposure; you will include information on the
 relative risk of the relevant outcomes, and the cause models for those outcomes, 
 in a different document.
 
-Risk Exposure description
--------------------------
 
 Risk Exposures Description in GBD
-------------------------------
+---------------------------------
 
   - What type of risk model does Type of risk (categorical, continuous, etc.)
 
-  - What is this a risk for?
+  - Which outcomes are affected by this risk?
 
   - TMREL (high level overview. does it vary by outcome?)
 
@@ -101,15 +99,15 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Cause Model Diagram
-+++++++++++++++++++
+Exposure Model Diagram
+++++++++++++++++++++++
 
 Data Description Tables
 +++++++++++++++++++++++
 
  - Constants table
 
- - parameters table
+ - Parameters table
 
  *We discussed following Ali's example with iron deficiency.*
 
