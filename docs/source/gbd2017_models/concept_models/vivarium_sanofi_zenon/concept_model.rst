@@ -79,7 +79,7 @@ PAF-of-1 Cause/Risk Pairs
 
 * :ref:`Chronic Kidney Disease (CKD) / Impaired Kidney Function (IKF) <2017_cause_ckd>`
 
-* :ref:`Diabetes Mellitus (DM) / Fasting Plasma Glucose (FPG) <2017_cause_diabetes_mellitus>`
+* :ref:`Diabetes Mellitus (DM) / Fasting Plasma Glucose (FPG) <_2017_cause_diabetes_mellitus>`
 
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
