@@ -84,35 +84,97 @@ in a different document.
 Risk Exposures Description in GBD
 ---------------------------------
 
-  - What type of risk model does Type of risk (categorical, continuous, etc.)
+Include a description of this exposure model in the context of GBD, involving
+but not limited to:
+
+  - What type of statistical model? (categorical, continuous?)
+
+  - How is the exposure estimated? (DisMod, STGPR?)
 
   - Which outcomes are affected by this risk?
 
-  - TMREL (high level overview. does it vary by outcome?)
+  - TMREL? (This should be a very high level overview. Namely, does the TMREL 
+  vary by outcome? The details of the TMREL will be included in the 
+  *Risk Outcome Relationship Model* section)
 
 Vivarium Modeling Strategy
 --------------------------
 
-Scope
-+++++
+Include here an overview of the Vivarium modeling section
+
+Restrictions
+++++++++++++
+
+.. list-table:: GBD 2017 Exposure Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     -
+     -
+   * - Female only
+     -
+     -
+   * - Age group start
+     -
+     -
+   * - Age group end
+     -
+     -
+
+..	todo::
+
+	Determine if there's something analogous to "YLL/YLD only" for this section
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+Describe the clinical and mathematical assumptions made for this cause model,
+and the limitations these assumptions impose on the applicability of the
+model.
+
 Exposure Model Diagram
 ++++++++++++++++++++++
+
+Include diagram of Vivarium exposure model.
 
 Data Description Tables
 +++++++++++++++++++++++
 
- - Constants table
+As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
+below. If we discover it's not general enough to accommodate all exposure types,
+we need to revise the format in coworking. 
 
- - Parameters table
+.. list-table:: Constants 
+	:widths: 10, 5, 15
+	:header-rows: 1
 
- *We discussed following Ali's example with iron deficiency.*
+	* - Constant
+	  - Value
+	  - Note
+	* - 
+	  - 
+	  - 
+
+.. list-table:: Distribution Parameters
+	:widths: 15, 30, 10
+	:header-rows: 1
+
+	* - Parameter
+	  - Value
+	  - Note
+	* - 
+	  - 
+	  -
 
 Validation Criteria
 +++++++++++++++++++
+
+..	todo::
+	Fill in directives for this section
 
 References
 ----------
