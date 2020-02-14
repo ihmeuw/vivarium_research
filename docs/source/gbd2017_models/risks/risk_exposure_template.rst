@@ -26,8 +26,8 @@ Risk Exposure Template
       <https://docutils.sourceforge.io/docs/user/rst/quickref.html#internal-hyperlink-targets>`_
       :code:`.. _2017_risk_exposure_template:` at the top of this file with a
       unique reference label for your cause. The reference label should have the
-      form :samp:`.. _2017_exposure_{\{exposure_name\}}:`, where
-      :samp:`{\{exposure_name\}}` is replaced with a unique descriptive name or
+      form :samp:`.. _2017_risk_exposure_{\{risk_exposure_name\}}:`, where
+      :samp:`{\{risk_exposure_name\}}` is replaced with a unique descriptive name or
       abbreviation for your risk exposure, e.g.
       :code:`.. _2017_risk_exposure_unsafe_water:`.
 
@@ -89,8 +89,8 @@ outcomes, in a different document.
 Risk Exposures Description in GBD
 ---------------------------------
 
-Include a description of this exposure model in the context of GBD, involving
-but not limited to:
+Include a description of this risk exposure model in the context of GBD, 
+involving but not limited to:
 
   - What type of statistical model? (categorical, continuous?)
 
@@ -108,7 +108,7 @@ Include here an overview of the Vivarium modeling section
 Restrictions
 ++++++++++++
 
-.. list-table:: GBD 2017 Exposure Restrictions
+.. list-table:: GBD 2017 Risk Exposure Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
@@ -139,10 +139,10 @@ Describe the clinical and mathematical assumptions made for this cause model,
 and the limitations these assumptions impose on the applicability of the
 model.
 
-Exposure Model Diagram
+Risk Exposure Model Diagram
 ++++++++++++++++++++++
 
-Include diagram of Vivarium exposure model.
+Include diagram of Vivarium risk exposure model.
 
 Data Description Tables
 +++++++++++++++++++++++
