@@ -25,8 +25,8 @@ Definitions
 TMREL/TMRED
 +++++++++++
 
-Relative Risk
-+++++++++++++
+Relative Risk (RR)
+++++++++++++++++++
 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
