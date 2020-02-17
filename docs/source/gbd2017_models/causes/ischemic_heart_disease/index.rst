@@ -352,17 +352,17 @@ References
 ----------
 
 .. [GBD-2017-YLD-Capstone-Appendix-1-Ischemic-Heart-Disease]
-  Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
-  Collaborators. Global, regional, and national incidence, prevalence, and
-  years lived with disability for 354 diseases and injuries for 195 countries
-  and territories, 1990–2017: a systematic analysis for the Global Burden of
-  Disease Study 2017. Lancet 2018; 392: 1789–858`
-  (pp. 335-341)
+   Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
+   Collaborators. Global, regional, and national incidence, prevalence, and
+   years lived with disability for 354 diseases and injuries for 195 countries
+   and territories, 1990–2017: a systematic analysis for the Global Burden of
+   Disease Study 2017. Lancet 2018; 392: 1789–858`
+   (pp. 335-341)
 
 .. [GBD-2017-YLL-Capstone-Appendix-1-Ischemic-Heart-Disease]
-  Supplement to: `GBD 2017 Causes of Death Collaborators. Global, regional,
-  and national age-sex-specific mortality for 282 causes of death in 195
-  countries and territories, 1980–2017: a systematic analysis for the Global
-  Burden of Disease Study 2017. Lancet 2018; 392: 1736–88`
-  (pp. 203-204)
+   Supplement to: `GBD 2017 Causes of Death Collaborators. Global, regional,
+   and national age-sex-specific mortality for 282 causes of death in 195
+   countries and territories, 1980–2017: a systematic analysis for the Global
+   Burden of Disease Study 2017. Lancet 2018; 392: 1736–88`
+   (pp. 203-204)
 
