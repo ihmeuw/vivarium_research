@@ -261,9 +261,11 @@ State and Transition Data Tables
    * - acute-sequelae
      - sequelae definition
      - {s386, s387, s388, s389, s390}
+     -
    * - chronic-sequelae
      - sequelae definition
      - {s391, s392, s393, s394, s395, s946}
+     -
 
 
 Model Assumptions and Limitations
