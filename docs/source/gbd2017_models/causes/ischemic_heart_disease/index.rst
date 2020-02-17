@@ -328,11 +328,11 @@ State and Transition Data Tables
      - dismod-mr
      - excess-mortality rate of MI due to ischemic heart disease
      -
-   * - acute_sequelae
+   * - acute-sequelae
      - model assumption
      - {s378, s379}
      -
-   * - post_mi_sequelae
+   * - post-mi-sequelae
      - model assumption
      - {s380, s381, s382, s383, s384, s385, s953, s1040, s5726}
      -
