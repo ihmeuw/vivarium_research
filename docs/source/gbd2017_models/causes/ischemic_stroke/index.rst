@@ -131,8 +131,9 @@ State and Transition Data Tables
        a first-ever stroke through day 28 following the event
    * - P
      - **P**\ ost Ischemic Stroke
-     - Simulant that is in duration-based period beginning 28 days following
-       the occurrence of a stroke event
+     - Simulant that has survived more than 28 days following their last
+       ischemic stroke and who may be experiencing chronic elevated mortality
+       and disability due to the event.
 
 .. todo::
 
@@ -162,31 +163,31 @@ State and Transition Data Tables
    * - S
      - excess mortality rate (emr)
      - 0
-     - This is not applicable
+     -
    * - P
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{391}}}^{395} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}` + disability_weight_s946 :math:`\times` prevalence_s946
-     - = average disability weight over all sequelae in the post ischemic stroke state
+     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{chronic-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
    * - A
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{386}}}^{390} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = average disability weight over all sequelae in the acute ischemic stroke state
+     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{acute-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
    * - S
      - disability weight
      - 0
-     - This is not applicable
+     -
    * - P
      - prevalence
-     - prevalence_c495
+     - :math:`\sum\limits_{s \in \text{chronic-sequelae}} \text{prevalence}_s`
      -
    * - A
      - prevalence
-     - 0
-     - This is not applicable
+     - :math:`\sum\limits_{s \in \text{acute-sequelae}} \text{prevalence}_s`
+     -
    * - S
      - prevalence
-     - :math:`\displaystyle{1 - \text{ prev_c495}}`
-     - = 1 - prevalence of ischemic stroke (population that has not already had ischemic stroke incidence)
+     - :math:`1 - \text{prev_c495}`
+     -
 
 .. list-table:: Transition Data
    :widths: 1, 1, 1, 5, 10
@@ -222,7 +223,7 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c495
-     - dismod-mr 2.1
+     - como
      - Prevalence of ischemic stroke
      -
    * - deaths_c495
@@ -230,7 +231,7 @@ State and Transition Data Tables
      - Deaths from ischemic stroke
      -
    * - incidence_c495
-     - dismod-mr 2.1
+     - como
      - Incidence of ischemic stroke
      -
    * - population
@@ -242,11 +243,11 @@ State and Transition Data Tables
      - List of 11 sequelae for ischemic stroke
      -
    * - prevalence_s{`sid`}
-     - dismod-mr 2.1
+     - como
      - Prevalence of sequela with id `sid`
      -
    * - disability_weight_s{`sid`}
-     - como
+     - YLD appendix
      - Disability weight of sequela with id `sid`
      -
    * - emr_m10837
@@ -257,10 +258,13 @@ State and Transition Data Tables
      - dismod-mr 2.1
      - excess mortality rate of first ever acute ischemic stroke with CSMR
      -
-   * - disability_weight_s{sid}
-     - YLD Appendix
-     - Disability weight of sequela with id sid
-     -
+   * - acute-sequelae
+     - sequelae definition
+     - {s386, s387, s388, s389, s390}
+   * - chronic-sequelae
+     - sequelae definition
+     - {s391, s392, s393, s394, s395, s946}
+
 
 Model Assumptions and Limitations
 ---------------------------------
