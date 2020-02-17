@@ -66,16 +66,16 @@ on the ages and sexes to which the cause applies.
      - False
      -
    * - YLL age group start
-     - Early Neonatal
+     - 0
      - [0, 7 days), age_group_id=2
    * - YLL age group end
-     - 95 plus
+     - 125
      - [95, 125 years), age_group_id=235
    * - YLD age group start
-     - Early Neonatal
+     - 0
      - [0, 7 days), age_group_id=2
    * - YLD age group end
-     - 95 plus
+     - 125
      - [95, 125 years), age_group_id=235
 
 .. todo::
