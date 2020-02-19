@@ -81,9 +81,11 @@ This cause model is designed to simulate the basic structure of the risk factor 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-1. Lack of remission data in GBD 2017: The assumptions made for this cause model include that there are no remission rates found for overall diabetes mellitus, diabetes mellitus type 1, or diabetes mellitus type 2. The limitations of these assumptions impose a lack of remission and accuracy on the applicability of the model. According to external sources and GBD 2017, diabetes mellitus and its subcauses should include remission rates but there is no data for remission found in GBD 2017. 
+1. We are using remission data from dismod, modelable_entity_id_2005 for overall DM. 
 
-2. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
+2. Moderate DM is non-fatal only. CSMR is only applicable to Severe DM.
+
+3. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
 
 Cause Model Diagram
 -------------------
@@ -151,7 +153,7 @@ State and Transition Data Tables
      - 
    * - C 
      - prevalence
-     - prevalence_c587
+     - 0
      - 
    * - M 
      - prevalence
@@ -164,18 +166,22 @@ State and Transition Data Tables
    * - EMR Sev
      - excess mortality rate for severe DM 
      - :math:`\frac{\text{CSMR_c587}}{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}`
-     - - = (cause-specific mortality rate of DM) / sum of prevalence of severe DM sequelae
+     - = (cause-specific mortality rate of DM) / sum of prevalence of severe DM sequelae
    * - EMR M
      - excess mortality rate of moderate DM
-     - :math:`\frac{\text{CSMR_c587}}{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}`
-     - - = (cause-specific mortality rate of DM) / sum of prevalence of moderate DM sequelae
-   * - C
+     - 0
+     - EMR for Moderate DM is 0, given the assumption that moderate DM is non-fatal only. 
+   * - M
      - disability_weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c587}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}`
+     - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`
+     -
+   * - Sev
+     - disability_weight
+     - :math:`\frac{{\sum_{s\in \text{sequelae_sev}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`
      -
    * - All
      - cause-specific mortality rate (csmr)
-     - :math:`\frac{\text{deaths_c587}}{\text{1 - prev_587} \,\times \text{population}}`
+     - :math:`\frac{\text{deaths_c587}}{\text{population}}`
      - 
 
 .. list-table:: Transition Data
@@ -189,18 +195,18 @@ State and Transition Data Tables
      - Notes
    * - 1
      - S
-     - S
+     - C
      - incidence_c587
      -
    * - 2
      - C
      - M
-     - :math:`\sum_{s\in \text{incidence_sequelae_mod.sub_causes.c587}}`
+     - :math:`\frac{sum_{s\in \text{incidence_sequelae_mod.sub_causes.c587}}}{\text{incidence_c587}}`
      - = incidence of Diabetes Mellitus Type 1 uncomplicated sequelae + incidence of Diabetes Mellitus Type 2 uncomplicated sequelae
    * - 3
      - C
      - Sev
-     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c587}}`
+     - :math:`\frac{\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c587}}}{\text{incidence_c587}}`
      - = incidence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + incidence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
 
 .. list-table:: Data Sources and Definitions
