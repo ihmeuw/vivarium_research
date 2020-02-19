@@ -106,12 +106,44 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. These sequelae are fatal and include YLLs and YLDs. All other sequelae are included in the 'Moderate' CKD, which are designated as non-fatal only and include only YLDs. The assocaited sequelae in each state can be found below in the 'State Severity Split Definitions' table.
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. These sequelae are fatal and include YLLs and YLDs. All other sequelae are included in the 'Moderate' CKD, which are designated as non-fatal only and include only YLDs. The associated sequelae in each state can be found below in the 'State Severity Split Definitions' table.
 
 Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Based on the GBD 2017 PAF of 1 relationship between IKF and CKD, simulants are initiated in the model with an assigned value of IKF. Based on this, the simulant will be determined as either moderate or severe CKD. In the treatment ramp for intervention scenarios, this assigned IKF value will determine the care that the simulant receives.
+In this model, simulants are initialized as "susceptible" or "with condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence.
+
+Mapping CKD States to IKF Categories in Vivarium
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. list-table:: Disease State to Risk Factor Exposure Category Map Table
+   :widths: 10 30 10 10 10 15 
+   :header-rows: 1
+
+   * - Disease State 
+     - Sequelae Group 
+     - Risk Exposure Category
+     - Sequelae Group Id
+     - Risk Exposure ID
+     - Notes
+   * - **M**\ oderate CKD
+     - stage III sequelae
+     - Stage 3 chronic kidney disease squeezed
+     - [s_5225, s_5219, s_5213, s_5228, s_5222, s_5216, s_1024, s_1025, s_1026, s_1016, s_1017, s_1018, s_1032, s_1033, s_1034, s_5231, s_5234, s_1027, s_1019, s_1035]
+     - me_id_10732
+     - All Stage III sequelae values due to CKD sub_causes
+   * - **M**\ oderate CKD
+     - stage IV sequelae
+     - Stage 4 chronic kidney disease squeezed
+     - [s_5249, s_5243, s_5237, s_5252, s_5246, s_5240, s_1433, s_1436, s_1439, s_1421, s_1424, s_1427, s_1445, s_1448, s_1451, s_5255, s_5258, s_1430, s_1418, s_1442]
+     - me_id_10733
+     - All Stage IV sequelae values due to CKD sub_causes
+   * - **S**\ evere CKD
+     - stage V sequelae
+     - Stage 5 chronic kidney disease squeezed
+     - [s_5273, s_5267, s_5261, s_5276, s_5270, s_5264, s_1385, s_1388, s_1391, s_1373, s_1376, s_1379, s_1397, s_1400, s_1403, s_5279, s_5282, s_1382, s_1370, s_1394]
+     - me_id_10734
+     - All Stage V sequelae values due to CKD sub_causes
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
