@@ -166,6 +166,23 @@ deviation is stored under modelable entity ID 10488. The iron deficiency risk
 factor (population hemoglobin concentration) follows a 40% gamma and 60% mirror 
 Gumbel ensemble distribution. 
 
+NOTE:
+
+	The values stored in the iron deficiency risk factor (i.e. population  
+	hemoglobin concentration parameters) are used in the GBD modeling process 
+	to calculate risk-deleted population hemoglobin concentration where the 
+	risk is all iron deficiency (i.e. iron responsive anemias), which serves as 
+	the population TMREL, in order to calculate the population attributable 
+	fraction between the iron deficiency risk factor and maternal disorder 
+	causes. See the GBD 2017 Risk Factor Methods Appendix for more information. 
+	However, this process is not relevant for the simulation science team use 
+	of the iron deficiency risk factor as it relates to the dietary iron 
+	deficiency cause in GBD 2017.
+
+.. todo::
+
+	Add citation for the GBD risk factor methods appendix.
+
 Risk Factor Hierarchy
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -177,14 +194,18 @@ Vivarium Modeling Strategy
 Model Scope
 +++++++++++
 
-.. note:: 
-
-	The Vivarium modeling strategy described here is a strategy to model the PAF-of-one GBD cause dietary iron deficiency (attributable to the iron deficiency risk factor). The modeling strategy described here does *not* consider the realtionship between the GBD iron deficiency risk factor and other causes (i.e. maternal disorders).
-
 The scope of the Vivarium modeling strategy detailed in this document is to 
 sample the hemoglobin concentration for an individual simulant (who is not a 
 woman of reproductive age) and evaluate if that simulant's hemoglobin 
 concentration will respond to iron supplementation.
+
+.. note:: 
+
+	The Vivarium modeling strategy described here is a strategy to model the 
+	PAF-of-one GBD cause dietary iron deficiency (attributable to the iron 
+	deficiency risk factor). The modeling strategy described here does *not* 
+	consider the realtionship between the GBD iron deficiency risk factor and 
+	other causes (i.e. maternal disorders).
 
 Initialization
 ++++++++++++++
@@ -196,7 +217,8 @@ intialize these parameters are included in the following sections.
 
 .. todo:: 
 	
-	State what order these should occur in and then clarify that in the following sections.
+	State what order these should occur in and then clarify that in the 
+	following sections.
 
 Hemoglobin Concentration
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -276,7 +298,10 @@ sex- specific *anemia_threshold* values as defined in the table above_:
 Iron Responsiveness
 ^^^^^^^^^^^^^^^^^^^
 
-As previously discussed, not all anemias in the anemia impairment are iron deficiency anemias, meaning that not all anemias will respond to iron supplementation. A list of causes with iron-responsive anemia health states (and their associated sequelae) are listed in the table below.
+As previously discussed, not all anemias in the anemia impairment are iron 
+deficiency anemias, meaning that not all anemias will respond to iron 
+supplementation. A list of causes with iron-responsive anemia health states (
+and their associated sequelae) are listed in the table below.
 
 .. list-table:: Causes 
 	:widths: 40 40 40
@@ -334,7 +359,10 @@ As previously discussed, not all anemias in the anemia impairment are iron defic
 	there do not appear to be any anemia-afflicted sequelae with results in GBD 
 	2017 within any of the cirrhosis causes.
 
-Therefore, the probability that a simulant with mild, moderate, or severe anemia (based on their sampled hemoglobin concentration and WHO anemia threshold values) will respond to iron supplementation/fortification can be measured by: 
+Therefore, the probability that a simulant with mild, moderate, or severe 
+anemia (based on their sampled hemoglobin concentration and WHO anemia 
+threshold values) will respond to iron supplementation/fortification can be 
+measured by: 
 
 .. math::
 
@@ -363,7 +391,9 @@ respectively; sequela IDs for each category are listed in the table below.
 	  - 146, 174, 179, 184, 208, 242, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220, 23032, 23036, 23040, 23044, 23048
 
 Then, effect sizes for iron supplementation or fortification interventions as 
-shifts in mean hemoglobin concentrations should be applied only to those who are initialized in the model as iron responsive based on the methodology described here.
+shifts in mean hemoglobin concentrations should be applied only to those who 
+are initialized in the model as iron responsive based on the methodology 
+described here.
 
 Model Progression
 +++++++++++++++++
@@ -380,7 +410,8 @@ Neonatal Age Groups
 
 .. todo:: 
 
-	This section!! Figure out if we need to do anything special here or if GBD data has already taken care of it.
+	This section!! Figure out if we need to do anything special here or if GBD 
+	data has already taken care of it.
 
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
@@ -400,7 +431,13 @@ distribution throughout the modeling process. This is a limitation of our
 modeling strategy in that we assume the distribution before a shift is applied 
 maintains the same shift after a shift due to the intervention is applied.
 
-	Essentially, both the GBD modeling process and our Vivarium implementation assume that hemoglobin shifts are constant regardless of an individual's starting hemoglobin concentration. 
+	Essentially, both the GBD modeling process and our Vivarium implementation 
+	assume that hemoglobin shifts are constant regardless of an individual's 
+	starting hemoglobin concentration. 
+
+Further, the model is limited due to GBD not directly modeling the prevalence 
+of dietary iron deficiency, which may cause error in the estimation of the 
+prevalence of this cause.
 
 Validation Criteria
 +++++++++++++++++++
