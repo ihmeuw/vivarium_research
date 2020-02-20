@@ -75,16 +75,28 @@ also be the differential probability of another risk exposure.
   experiencing a bout of diarrheal disease. We then attribute health loss to this 
   bout of diarrheal disease.
 
-In the context of our models, risk factors will be attributes of populations. 
-For example, we might consider:
+Risk factors are implemented in epidemiological models as a risk exposure
+that is mapped to a risk effect. For example, a categorical exposure to "having 
+a high BMI" is mapped to a higher differential probability of experiencing 
+chronic kidney disease (CKD).
 
-  * The level of particulate matter in the air of the environment the population habituates
+Within the context of our models, a risk factor will be an attribute of a 
+simulant averaged over a timestep. This is in contrast to GBD, wherein a risk 
+factor is an attribute of a population, potentially for a given sex-age-location, 
+averaged over one year.
 
-  * The distribution of blood pressure in the population
+Risk exposures and effects are discussed in more detail in the proceeding 
+sections. Here we will note that when defining the relationship between 
+a risk effect and a risk exposure, the subset of a simulant's history 
+of exposure that ought to be associated with a risk effect will depend on the 
+risk factor. 
 
-  * The level of access to clean water in the population
-  
-  * The distribution individuals who have a family member with alzheimer disease
+	For example, consider the risk-outcome pairs *unsafe water 
+	source* and *diarrheal diseases*, versus *smoking* and *diabetes*. We see that 
+	only a simulant's recent exposure to an unsafe water source will effect their 
+	probability of suffering from diarrheal diseases in the next week. However, the 
+	probability of becoming diabetic in the next year will be affected by a
+	simulants entire history of smoking.
 
 
 What is a causal relationship?
