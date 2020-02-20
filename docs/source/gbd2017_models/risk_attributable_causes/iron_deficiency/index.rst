@@ -35,17 +35,16 @@ levels in the body and a subsequent deficiency of hemoglobin in the blood.
 Modeling Iron Deficiency in GBD 2017
 ------------------------------------
 
-In GBD 2017, the cause dietary iron deficiency is a population attributable 
-fraction (PAF) of 1 cause with the iron deficiency risk factor. This means 
-that 100% of the dietary iron deficiency cases are attributable to the iron 
-deficiency risk factor. Notably, there are additional causes other than 
-dietary iron deficiency that are attributable to the iron deficiency risk 
-factors (ex: maternal disorders).
+In GBD 2017, there is an anemia *impairment* that represents **all** forms of 
+anemia that are attributable to several causes, including causes such as 
+hemoglobinopathies and hemolytic anemias that are not considered iron 
+deficiency anemias.
 
-Additionally, there is an anemia *impairment* modeled in GBD 2017 that 
-represents **all** forms of anemia that are attributable to several causes, 
-including causes such as hemoglobinopathies and hemolytic anemias that are not 
-causally attributable to iron deficiency. 
+The dietary iron deficiency *cause* is a population attributable fraction (PAF) 
+of 1 cause with the iron deficiency risk factor. This means that 100% of the 
+dietary iron deficiency cases are attributable to the iron deficiency risk 
+factor. Notably, the iron deficiency risk factor affects maternal disorder 
+causes, although these relationships are outside of the scope of this document.
 
 Anemia Impairment
 +++++++++++++++++
@@ -55,7 +54,8 @@ to all causes modeled in GBD (ex: dietary iron deficiency anemia, anemia due to
 maternal hemorrhage, sickle cell anemia, etc.). Estimating the total prevalence 
 of the anemia impairment for a given population is the first step in modeling 
 anemia in GBD 2017. This is done by fitting a distribution of hemoglobin levels 
-for that population from primary input data. For GBD 2017, an ensemble 
+for that population from primary input data based on the population's 
+hemoclobin concentration mean and standard deviation. For GBD 2017, an ensemble 
 distribution was used, which was 40% gamma and 60% mirror gumbel. Source code 
 for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
 
@@ -103,11 +103,15 @@ The prevalence of anemia as calculated in the process described above serves as
 the overall anemia envelope for a age-, sex-, and location-specific demographic 
 groups, and prevalent cases of anemia in the anemia envelope are then causally 
 attributed to various causes in GBD 2017 that have anemia as seqeulae. This is 
-done through a process described in the [GBD-2017-YLD-Appendix-IDA]_.
-
-.. todo::
-
-	Describe the causal attribution process in greater detail
+done through a process described in the [GBD-2017-YLD-Appendix-IDA]_. Notably, 
+the causes iron deficiency anemia, other infectious diseases, other neglected 
+tropical diseases, other hemoglobinopathies andhemolytic anemias, and other 
+endorcine, nutrition, blood, and immune disorders are not directly modeled via 
+the causal attribution process. Rather, these causes were allocated to the 
+residual anemia envelope following the causal attribution process for all other 
+anemic causes [GBD-2017-YLD-Appendix-IDA]_. A minimum of 10% of all anemia was 
+assigned to residual categories (a figure selected based on data from the 
+United States) [GBD-2017-YLD-Appendix-IDA]_.
 
 Notably, early neonatal and late neonatal age groups (age group IDs 2 and 3) 
 are excluded from this process; instead, these age groups are assigned the 
@@ -121,18 +125,16 @@ of reproductive age.
 Dietary Iron Deficiency Cause
 +++++++++++++++++++++++++++++
 
-The dietary iron deficiency cause in GBD 2017 that is 100% attributable to the 
+The dietary iron deficiency cause in GBD 2017 is 100% attributable to the 
 iron deficiency risk factor. The dietary iron deficiency cause in GBD is a 
 YLD-only cause, meaning that it contributes to morbidity, but not mortality.
 
 Modeling Strategy for the Dietary Iron Deficiency Cause
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The dietary iron deficiency cause in GBD 2017 is not modeled directly. Rather, 
-the dietary iron deficiency cause is estimated as the remaining cases of 
-anemia after all of the other anemic cases in the overall anemia envelope were 
-causally attributed to their respective attributable causes (ex: 
-hemoglobinopathies and hemolytic anemias).
+As noted above, the dietary iron deficiency cause in GBD 2017 is not modeled 
+directly. Rather, it is assigned to a portion of the residual anemia envelope 
+following causal attribution of other anemic causes.
 
 Cause Hierarchy
 ^^^^^^^^^^^^^^^
@@ -151,15 +153,130 @@ described in the table above.
 Iron Deficiency Risk Factor
 +++++++++++++++++++++++++++
 
-In GBD 2017, the iron deficiency risk factor is used to evaluate the burden of 
-disease attributable to iron deficiency. This is done by calculating a TMREL 
-for iron deficiency by estimating the counterfactual mean hemoglobin 
-concentration among a given population that there were no cases of iron 
-responsive anemia in the population. For the iron deficiency risk factor, iron 
-responsive anemia was considered to include all anemias that would respond to 
-iron supplementation, including dietary iron deficiency as well as acute or 
-chronic hemorrhagic states. A full list of the included causes are included in 
-the table below.
+In GBD 2017, the iron deficiency risk factor is used for two applications. The 
+first is the PAF of 1 relationship with the dietary iron deficiency anemia 
+cause and the second is a risk outcome relationship with maternal disorder 
+causes. 
+
+Notably, the iron deficiency risk factor in GBD 2017 represents the **age-, 
+sex-, and location-specific mean hemoglobin concentration among the total 
+population.** The mean value for the iron deficiency risk factor is 
+stored under modelable entity ID 10487 (also REI ID 95) and the standard 
+deviation is stored under modelable entity ID 10488. The iron deficiency risk 
+factor (population hemoglobin concentration) follows a 40% gamma and 60% mirror 
+Gumbel ensemble distribution. 
+
+Risk Factor Hierarchy
+^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: iron_risk_hierarchy.svg
+
+Vivarium Modeling Strategy
+--------------------------
+
+Model Scope
++++++++++++
+
+.. note:: 
+
+	The Vivarium modeling strategy described here is a strategy to model the PAF-of-one GBD cause dietary iron deficiency (attributable to the iron deficiency risk factor). The modeling strategy described here does *not* consider the realtionship between the GBD iron deficiency risk factor and other causes (i.e. maternal disorders).
+
+The scope of the Vivarium modeling strategy detailed in this document is to 
+sample the hemoglobin concentration for an individual simulant (who is not a 
+woman of reproductive age) and evaluate if that simulant's hemoglobin 
+concentration will respond to iron supplementation.
+
+Initialization
+++++++++++++++
+
+At the start of a Vivarium simulation, each simulant must be initalized with 
+two parameters, including 1) a hemoglobin concentration, and 2) an indicator of 
+whether the simulant will respond to iron supplementation. Details on how to 
+intialize these parameters are included in the following sections.
+
+.. todo:: 
+	
+	State what order these should occur in and then clarify that in the following sections.
+
+Hemoglobin Concentration
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The ensemble distribution of population hemoglobin concentrations can be 
+recreated with the following equations: 
+
+.. list-table:: Population Hemoglobin Parameters
+	:widths: 10, 5, 15
+	:header-rows: 1
+
+	* - Parameter
+	  - Value
+	  - Note
+	* - hemoglobin_mean
+	  - rei_92_exposure
+	  - meid_10487
+	* - hemoglobin_sd
+	  - rei_92_sd
+	  - meid_10488
+
+.. list-table:: Constants 
+	:widths: 10, 5, 15
+	:header-rows: 1
+
+	* - Constant
+	  - Value
+	  - Note
+	* - w_gamma
+	  - 0.4
+	  - Ensemble weight for gamma distribution
+	* - w_mirror_gumbel
+	  - 0.6
+	  - Ensemble weight for mirror gumbel distribution
+	* - eulers_constant
+	  - 0.57721566
+	  - 
+	* - xmax
+	  - 220
+	  - 
+	* - pi
+	  - 3.14.....
+	  - Use `math.pi` for all significant figures
+
+.. list-table:: Distribution Parameters
+	:widths: 15, 30, 10
+	:header-rows: 1
+
+	* - Parameter
+	  - Value
+	  - Note
+	* - gamma_shape
+	  - (hemoglobin_mean)^2 / (hemoglobin_sd)^2
+	  -
+	* - gamma_rate
+	  - (hemoglobin_mean) / (hemoglobin_sd)^2
+	  - 
+	* - mirror_gumbel_alpha
+	  - xmax - (hemoglobin_mean) - eulers_constant * (hemoglobin_sd) * sqrt(6) / pi
+	  - 
+	* - mirror_gumbel_scale
+	  - (hemoglobin_sd) * sqrt(6) / pi
+	  - 
+
+Below is Python code that can be used to sample from the population hemoglobin 
+distribution using the parameters defined in this section and assuming age- and 
+sex- specific *anemia_threshold* values as defined in the table above_:
+
+.. code-block:: Python
+
+	import scipy.stats
+
+
+	# TO-DO: WRITE SOME CODE THAT ACCURATELY SAMPLES FROM THE ENSEMBLE DIST.
+
+
+Iron Responsiveness
+^^^^^^^^^^^^^^^^^^^
+
+As previously discussed, not all anemias in the anemia impairment are iron deficiency anemias, meaning that not all anemias will respond to iron supplementation. A list of causes with iron-responsive anemia health states (and their associated sequelae) are listed in the table below.
 
 .. list-table:: Causes 
 	:widths: 40 40 40
@@ -217,133 +334,11 @@ the table below.
 	there do not appear to be any anemia-afflicted sequelae with results in GBD 
 	2017 within any of the cirrhosis causes.
 
-The TMREL established as described above is then used to estimate population 
-attributable fractions and summary exposure variables for the iron deficiency 
-risk factor through standard GBD computation practices. However, the data 
-stored for the iron deficiency risk factor (REI ID #95) is the **age-, sex-, 
-and location-specific mean hemoglobin concentration among the total 
-population.** Like the distribution that represents the overall anemia 
-envelope, the distribution for the mean value stored in the iron deficiency 
-risk factor is also assumed to follow a 40% gamma and 60% mirror Gumbel 
-ensemble distribution. The mean value for the iron deficiency risk factor is 
-stored under modelable entity ID 10487 (also REI ID 95) and the standard 
-deviation is stored under modelable entity ID 10488.
-
-The ensemble distribution of hemoglobin concentrations for population afflicted 
-with the causes listed in the table above can be recreated with the following 
-equations: 
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* - w_gamma
-	  - 0.4
-	  - Ensemble weight for gamma distribution
-	* - w_mirror_gumbel
-	  - 0.6
-	  - Ensemble weight for mirror gumbel distribution
-	* - eulers_constant
-	  - 0.57721566
-	  - 
-	* - xmax
-	  - 220
-	  - TO-DO: define this value
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - gamma_shape
-	  - (meid_10487)^2 / (meid_10488)^2
-	  -
-	* - gamma_rate
-	  - (meid_10487) / (meid_10488)^2
-	  - 
-	* - mirror_gumbel_alpha
-	  - xmax - (meid_10487) - eulers_constant * (meid_10488) * sqrt(6) / pi
-	  - 
-	* - mirror_gumbel_scale
-	  - (meid_10488) * sqrt(6) / pi
-	  - 
-
-Python code used to recreate the prevalence of anemia for a specific demogrphic 
-group using the ensemble distribution is included below (assuming age- and sex- 
-specific *anemia_threshold* values, as defined in the table above_):
-
-.. warning::
-
-	There is an error either in the parameter definitions described in the 
-	table above or the code described in the block below that is causing a 
-	failure in the validation criteria of anemia prevalence. Error to be 
-	investigated and updated.
-
-.. code-block:: Python
-
-	import scipy.stats
-
-
-	# overall anemia prevalence
-	gamma_prev = scipy.stats.gamma(gamma_shape, loc=0, 
-				scale=1/gamma_rate).cdf(mild_anemia_threshold)
-	mirror_gumbel_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
-				mirror_gumbel_scale).cdf(xmax - mild_anemia_threshold)
-	ensemble_prev = w_gamma * gamma_prev + w_mirror_gumbel * mirror_gumbel_prev
-
-
-	# severe anemia prevalence
-	gamma_severe_prev = scipy.stats.gamma(gamma_shape, loc=0, 
-				scale=1/gamma_rate).cdf(severe_anemia_threshold)
-	mirror_gumbel_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
-				mirror_gumbel_scale).cdf(xmax - severe_anemia_threshold)
-	ensemble_severe_prev = w_gamma * gamma_severe_prev + w_mirror_gumbel * mirror_gumbel_severe_prev	
-
-
-	# moderate anemia prevalence
-	gamma_moderate_prev = scipy.stats.gamma(gamma_shape, loc=0, 
-				scale=1/gamma_rate).cdf(moderate_anemia_threshold) - gamma_severe_prev
-	mirror_moderate_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
-				mirror_gumbel_scale).cdf(xmax - moderate_anemia_threshold) - gamma_severe_prev
-	ensemble_moderate_prev = w_gamma * gamma_moderate_prev + w_mirror_gumbel * mirror_gumbel_moderate_prev	
-
-
-	# mild anemia prevalence
-	gamma_mild_prev = scipy.stats.gamma(gamma_shape, loc=0, 
-				scale=1/gamma_rate).cdf(mild_anemia_threshold) - gamma_moderate_prev
-	mirror_mild_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
-				mirror_gumbel_scale).cdf(xmax - mild_anemia_threshold) - gamma_moderate_prev
-	ensemble_mild_prev = w_gamma * gamma_mild_prev + w_mirror_gumbel * mirror_mild_moderate_prev	
-
-Risk Factor Hierarchy
-^^^^^^^^^^^^^^^^^^^^^
-
-.. image:: iron_risk_hierarchy.svg
-
-Vivarium Modeling Strategy
-++++++++++++++++++++++++++
-
-.. note:: 
-
-	The Vivarium modeling strategy described here is a strategy to model the PAF-of-one GBD cause dietary iron deficiency (attributable to the iron deficiency risk factor). The modeling strategy described here does *not* consider the realtionship between the GBD iron deficiency risk factor and other causes (i.e. maternal disorders).
-
-The hemoglobin distribution for a given demographic group should be recreated 
-under the assumption that it follows the specified ensemble distribution, as 
-the python code included above instructs. For the population that is severely 
-anemic based on the hemoglobin thresholds, a certain proportion will not 
-respond to iron supplementation.
-
-The proportion of the population with mild, moderate, or severe anemia that 
-will not respond to iron fortification can be measured by:
+Therefore, the probability that a simulant with mild, moderate, or severe anemia (based on their sampled hemoglobin concentration and WHO anemia threshold values) will respond to iron supplementation/fortification can be measured by: 
 
 .. math::
 
-	\frac{\text{prevalence}_\text{total anemia}-\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
+	\frac{\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
 
 Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are 
 equal to the severity-, age-, sex-, and location-specific prevalence summed 
@@ -368,22 +363,27 @@ respectively; sequela IDs for each category are listed in the table below.
 	  - 146, 174, 179, 184, 208, 242, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220, 23032, 23036, 23040, 23044, 23048
 
 Then, effect sizes for iron supplementation or fortification interventions as 
-shifts in mean hemoglobin concentrations should be applied to the entire 
-population, excluding the fraction of each anemia severity that will not 
-respond to iron supplementation, as calculated as described above. The 
-resulting population mean should then be applied as the intervention scenario 
-value for the iron deficiency risk factor exposure.
+shifts in mean hemoglobin concentrations should be applied only to those who are initialized in the model as iron responsive based on the methodology described here.
+
+Model Progression
++++++++++++++++++
 
 .. todo::
 
-	Make it more clear how to initialize a) hemoglobin concentration and b) 
-	iron responsiveness (and specify order in which this should occur).
+	This section!!
 
-	Also, describe how an individual's hemoglobin concentration will change 
-	with age.
+Other Model Notes/Strategies
+++++++++++++++++++++++++++++
+
+Neonatal Age Groups
+^^^^^^^^^^^^^^^^^^^
+
+.. todo:: 
+
+	This section!! Figure out if we need to do anything special here or if GBD data has already taken care of it.
 
 Model Assumptions and Limitations
----------------------------------
++++++++++++++++++++++++++++++++++
 
 Because hemoglobin concentrations are not directly modeled among the early and 
 late neonatal age groups in GBD, the prevalence of mild, moderate, and severe 
@@ -400,8 +400,10 @@ distribution throughout the modeling process. This is a limitation of our
 modeling strategy in that we assume the distribution before a shift is applied 
 maintains the same shift after a shift due to the intervention is applied.
 
+	Essentially, both the GBD modeling process and our Vivarium implementation assume that hemoglobin shifts are constant regardless of an individual's starting hemoglobin concentration. 
+
 Validation Criteria
--------------------
++++++++++++++++++++
 
 The overall prevalence and YLDs of anemia should be equal between:
 
