@@ -332,7 +332,7 @@ anemic based on the hemoglobin thresholds, a certain proportion will not
 respond to iron supplementation.
 
 The proportion of the population with mild, moderate, or severe anemia that 
-will respond to iron fortification can be measured by:
+will not respond to iron fortification can be measured by:
 
 .. math::
 
