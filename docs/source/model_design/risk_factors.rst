@@ -93,7 +93,7 @@ risk factor.
 
 	For example, consider the risk-outcome pairs *unsafe water 
 	source* and *diarrheal diseases*, versus *smoking* and *diabetes*. We see that 
-	only a simulant's recent exposure to an unsafe water source will effect their 
+	only a simulant's recent exposure to an unsafe water source will affect their 
 	probability of suffering from diarrheal diseases in the next week. However, the 
 	probability of becoming diabetic in the next year will be affected by a
 	simulants entire history of smoking.
