@@ -368,8 +368,8 @@ measured by:
 	\frac{\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
 
 Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are 
-equal to the severity-, age-, sex-, and location-specific prevalence summed 
-across all iron responsive anemia and all total anemia sequela IDs, 
+equal to the severity-, age-, sex-, and location-specific prevalence (from COMO)
+summed across all iron responsive anemia and all total anemia sequela IDs, 
 respectively; sequela IDs for each category are listed in the table below. 
 
 .. list-table:: Sequela IDs 
@@ -389,10 +389,65 @@ respectively; sequela IDs for each category are listed in the table below.
 	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 533, 539, 647, 650, 653, 656, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1059, 1060, 1063, 1064, 1067, 1068, 1071, 1074, 1075, 1077, 1081, 1083, 1085, 1087, 1091, 1093, 1095, 1097, 1101, 1108, 1122, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5024, 5033, 5042, 5057, 5069, 5081, 5093, 5105, 5117, 5129, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5612, 5633, 5666, 5669, 5672, 5684, 5717, 5720, 5723, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
 	  - 146, 174, 179, 184, 208, 242, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220, 23032, 23036, 23040, 23044, 23048
 
+Therefore, each simulant should be initialized as either iron responsive (1) or 
+non-iron responsive (0) according to the following rules:
+
+.. code-block:: Python
+
+	if hb_i < severe_threshold:
+		if random_number_i < prevalence_severe_ira / prevalence_total_severe_anemia:
+			iron_responsive_i = 1
+		else:
+			iron_responsive_i = 0
+	elif hb_i < moderate_threshold:
+		if random_number_i < prevalence_moderate_ira / prevalence_total_moderate_anemia:
+			iron_responsive_i = 1
+		else:
+			iron_responsive_i = 0
+	elif hb_i < mild_threshold:
+		if random_number_i < prevalence_mild_ira / prevalence_total_mild_anemia:
+			iron_responsive_i = 1
+		else:
+			iron_responsive_i = 0
+	else:
+		iron_responsive_i = 1
+
+Where:
+
+.. list-table:: Parameters
+	:widths: 15, 30, 10
+	:header-rows: 1
+
+	* - Parameter
+	  - Description
+	  - Note
+	* - hb_i
+	  - An individual simulant's hemoglobin distribution
+	  - Sampled from population hemoglobin distribution
+	* - random_number_i
+	  - A random number assigned to an individual simulant
+	  - Generated in Vivarium
+	* - iron_responsive_i
+	  - An individual simulant's value for the iron responsive indicator variable
+	  - 1=iron responsive, 0=not iron responsive
+	* - {severity}_threshold
+	  - Age- and sex-specific hemoglobin anemia threshold
+	  - Defined in WHO treshold table
+	* - prevalence_{severity}_ira
+	  - Severity-specific prevalence of iron responsive anemia
+	  - Sum of iron responsive anemia sequelae
+	* - prevalence_{severity}_total_anemia
+	  - Severity-specific prevalence of all anemia
+	  - Sum of all anemia sequelae
+
+.. todo::
+
+	Confirm how to handle the non-anemic population and any associated limitations (specifically with regard to non-genetic causes of non-iron responsive causes of anemia that could cause someone to transition from non-anemic to anemic).
+
 Then, effect sizes for iron supplementation or fortification interventions as 
 shifts in mean hemoglobin concentrations should be applied only to those who 
-are initialized in the model as iron responsive based on the methodology 
-described here.
+are initialized in the model as iron responsive (iron_responsive_i = 1) based 
+on the methodology described here.
 
 Model Progression
 +++++++++++++++++
@@ -414,6 +469,13 @@ Neonatal Age Groups
 
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
+
+If any causes with anemia health state sequelae are included in the Vivarium 
+simulation, any disability associated with anemic sequela of that cause will be 
+counted both through the process described in this document as well as through 
+the disability weight associated with that cause. The impact of this double 
+counting should be considered when this is the case before implementation in a 
+model and recorded as a model limitation if applicable.
 
 Because hemoglobin concentrations are not directly modeled among the early and 
 late neonatal age groups in GBD, the prevalence of mild, moderate, and severe 
