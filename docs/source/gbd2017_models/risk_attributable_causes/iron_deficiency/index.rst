@@ -215,16 +215,35 @@ two parameters, including 1) a hemoglobin concentration, and 2) an indicator of
 whether the simulant will respond to iron supplementation. Details on how to 
 intialize these parameters are included in the following sections.
 
-.. todo:: 
-	
-	State what order these should occur in and then clarify that in the 
-	following sections.
+Notably, the initialization of a simulant's hemoglobin concentration should 
+occur *before* the initialization of iron responsiveness.
 
 Hemoglobin Concentration
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+In order to initialize an individual's hemoglobin concentration, each simulant 
+should be assigned a random number between 0 and 1 (random_number_i). This 
+number will represent the percentile of hemoglobin concentration for that 
+individual simulant relative to the baseline population distribution of 
+hemoglobin concentrations (from the GBD iron deficiency risk factor rei_92) *
+for the remainder of the simulation*. The corresponding hemoglobin concetration 
+for that percentile should then be assigned to the simulant using the 
+methodology described in the reaminder of this section. 
+
+Any shifts in hemoglobin concentration (due to baseline coverage or 
+intervention effects) should be applied *after* an individual's hemoglobin 
+concentration is sampled from the population distribution as described above. 
+The post-shift hemoglobin concentration will then act as the simulant's 
+assigned hemoglobin concentration.
+
+Notably, because the mean and standard deviation for the population hemoglobin 
+concentration varies by age group, an individual's assigned hemoglobin 
+concentration will vary as they transition between age groups, although their 
+assigned *percentile* within that population hemoglobin concentration 
+distribution will **not** vary as the simulant ages.
+
 The ensemble distribution of population hemoglobin concentrations can be 
-recreated with the following equations: 
+recreated with the following equations and code: 
 
 .. list-table:: Population Hemoglobin Parameters
 	:widths: 10, 5, 15
@@ -292,7 +311,6 @@ distribution using the parameters defined in this section.
 
 
 	# TO-DO: WRITE SOME CODE THAT ACCURATELY SAMPLES FROM THE ENSEMBLE DIST.
-
 
 Iron Responsiveness
 ^^^^^^^^^^^^^^^^^^^
@@ -425,13 +443,13 @@ Where:
 	  - An individual simulant's hemoglobin distribution
 	  - Sampled from population hemoglobin distribution
 	* - random_number_i
-	  - A random number assigned to an individual simulant
-	  - Generated in Vivarium
+	  - An independent random number between 0 and 1 assigned to an individual simulant
+	  - Generated in Vivarium 
 	* - iron_responsive_i
 	  - An individual simulant's value for the iron responsive indicator variable
 	  - 1=iron responsive, 0=not iron responsive
 	* - {severity}_threshold
-	  - Age- and sex-specific hemoglobin anemia threshold
+	  - Age-, sex-, and severity-specific hemoglobin anemia threshold
 	  - Defined in WHO treshold table
 	* - prevalence_{severity}_ira
 	  - Severity-specific prevalence of iron responsive anemia
@@ -448,13 +466,6 @@ Then, effect sizes for iron supplementation or fortification interventions as
 shifts in mean hemoglobin concentrations should be applied only to those who 
 are initialized in the model as iron responsive (iron_responsive_i = 1) based 
 on the methodology described here.
-
-Model Progression
-+++++++++++++++++
-
-.. todo::
-
-	This section!!
 
 Other Model Notes/Strategies
 ++++++++++++++++++++++++++++
