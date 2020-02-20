@@ -277,12 +277,19 @@ Python code used to recreate the prevalence of anemia for a specific demogrphic
 group using the ensemble distribution is included below (assuming age- and sex- 
 specific *anemia_threshold* values, as defined in the table above_):
 
+.. warning::
+
+	There is an error either in the parameter definitions described in the 
+	table above or the code described in the block below that is causing a 
+	failure in the validation criteria of anemia prevalence. Error to be 
+	investigated and updated.
+
 .. code-block:: Python
 
 	import scipy.stats
 
 
-	# overall iron-responsive anemia prevalence
+	# overall anemia prevalence
 	gamma_prev = scipy.stats.gamma(gamma_shape, loc=0, 
 				scale=1/gamma_rate).cdf(mild_anemia_threshold)
 	mirror_gumbel_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
@@ -290,7 +297,7 @@ specific *anemia_threshold* values, as defined in the table above_):
 	ensemble_prev = w_gamma * gamma_prev + w_mirror_gumbel * mirror_gumbel_prev
 
 
-	# severe iron-responsive anemia prevalence
+	# severe anemia prevalence
 	gamma_severe_prev = scipy.stats.gamma(gamma_shape, loc=0, 
 				scale=1/gamma_rate).cdf(severe_anemia_threshold)
 	mirror_gumbel_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
@@ -298,7 +305,7 @@ specific *anemia_threshold* values, as defined in the table above_):
 	ensemble_severe_prev = w_gamma * gamma_severe_prev + w_mirror_gumbel * mirror_gumbel_severe_prev	
 
 
-	# moderate iron-responsive anemia prevalence
+	# moderate anemia prevalence
 	gamma_moderate_prev = scipy.stats.gamma(gamma_shape, loc=0, 
 				scale=1/gamma_rate).cdf(moderate_anemia_threshold) - gamma_severe_prev
 	mirror_moderate_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
@@ -306,7 +313,7 @@ specific *anemia_threshold* values, as defined in the table above_):
 	ensemble_moderate_prev = w_gamma * gamma_moderate_prev + w_mirror_gumbel * mirror_gumbel_moderate_prev	
 
 
-	# mild iron-responsive anemia prevalence
+	# mild anemia prevalence
 	gamma_mild_prev = scipy.stats.gamma(gamma_shape, loc=0, 
 				scale=1/gamma_rate).cdf(mild_anemia_threshold) - gamma_moderate_prev
 	mirror_mild_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
@@ -388,13 +395,11 @@ maintains the same shift after a shift due to the intervention is applied.
 Validation Criteria
 -------------------
 
-The overall prevalence of anemia should be equal between:
+The overall prevalence and YLDs of anemia should be equal between:
 
-- The anemia impairment prevalence (overall only)
-- The prevalence of anemia summed across all anemia sequlae (overall and severity-specific)
-- The prevalence of anemia calculated from the population hemoglobin distribution (overall and severity-specific)
-
-Dietary iron deficiency anemia should account for roughly 80% of total anemia.
+- The anemia impairment (overall only)
+- The sum across all anemia sequlae (overall and severity-specific)
+- The result of anemia prevalence calculated from the population hemoglobin distribution as described in the modeling strategy for prevalence, and prevalence multiplied by the disability weight(s) for YLDs (overall and severity-specific)
 
 References
 ----------
