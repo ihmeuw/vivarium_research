@@ -75,29 +75,36 @@ defined in the following table.
 	  - Moderate Anemia
 	  - Severe Anemia
 	* - Males and Females <1 month
-	  - 130-149
-	  - 90-129
-	  - <90
+	  - 150
+	  - 130
+	  - 90
 	* - Males and Females 1 month - 4 years
-	  - 100-109
-	  - 70-99
-	  - <70
+	  - 110
+	  - 100
+	  - 70
 	* - Males and Females 5-14 years
-	  - 110-114
-	  - 80-109
-	  - <80
+	  - 115
+	  - 110
+	  - 80
 	* - Males 15+ years
-	  - 110-129
-	  - 80-109
-	  - <80
+	  - 130
+	  - 110
+	  - 80
 	* - Females 15+ years, non-pregnant 
-	  - 110-119
-	  - 80-109
-	  - <80
+	  - 120
+	  - 110
+	  - 80
 	* - Females 15+ years, pregnant
-	  - 100-109
-	  - 70-00
-	  - <70
+	  - 110
+	  - 80
+	  - 70
+
+.. note::
+
+	The threshold values in this table are **not** inclusive. For instance, if 
+	a male less than one month old has a hemoglobin level of exactly 130 g/L, 
+	he is not considered mildly anemic. If he has a hemoglobin level of 129 g/
+	L, he is considered moderately anemic.
 
 The prevalence of anemia as calculated in the process described above serves as 
 the overall anemia envelope for a age-, sex-, and location-specific demographic 
@@ -188,6 +195,70 @@ Risk Factor Hierarchy
 
 .. image:: iron_risk_hierarchy.svg
 
+Iron Responsive Anemias in GBD 
+++++++++++++++++++++++++++++++
+
+Notably, not all causes of anemia in the GBD anemia impairment are considered 
+iron responsive (i.e. will respond to iron supplementation). A list of causes 
+with iron responsive anemia health states along with their cause and 
+anemia-afflicated sequelae IDs are included in the table below.
+
+.. list-table:: Iron Responsive Anemia Causes 
+	:widths: 40 40 40
+	:header-rows: 1
+
+	* - Cause
+	  - Cause ID
+	  - Anemia-Afflicated Sequela ID
+	* - Dietary Iron Deficiency
+	  - 390
+	  - 206, 207, 208
+	* - Endocrine, Metabolic, Blood, and Immune Disorders
+	  - 619
+	  - 537, 538, 539
+	* - Uterine Fibroids
+	  - 604
+	  - 1106, 1107, 1108
+	* - Other Gynecological Diseases
+	  - 612
+	  - 525, 526, 527
+	* - Hookworm disease
+	  - 363
+	  - 172, 173, 174
+	* - Schistosomiasis
+	  - 351
+	  - 144, 145, 146
+	* - Other Neglected Tropical Diseases
+	  - 365
+	  - 177, 178, 179
+	* - Other Unspecified Infectious Diseases
+	  - 961
+	  - 240, 241, 242
+	* - Maternal Hemorrhage
+	  - 367
+	  - 182, 183, 184
+	* - Vitamin A Deficiency
+	  - 389
+	  - 5393, 5396, 5399
+	* - Peptic Ulcer Disease
+	  - 527
+	  - 4952, 4955, 4958, 4961, 4964, 4967, 4976, 4979, 4982, 5627, 5630, 5633, 7202, 7205, 7208
+	* - Gastritis and Duodenitis
+	  - 528
+	  - 4985, 4988, 4991, 4994, 4997, 5000, 5009, 5012, 5015, 5678, 5681, 5684, 7214, 7217, 7220
+	* - Chronic Kidney Disease
+	  - 589 (591, 592, 593, 997, 998)
+	  - 1004, 1005, 1006, 1008, 1009, 1010, 1012, 1013, 1014, 1016, 1017, 1018, 1020, 1021, 1022, 1024, 1025, 1026, 1028, 1029, 1030, 1032, 1033, 1034, 1361, 1364, 1367, 1373, 1376, 1379, 1385, 1388, 1391, 1397, 1400, 1403, 1409, 1412, 1415, 1421, 1424, 1427, 1433, 1436, 1439, 1445, 1448, 1451, 5213, 5216, 5219, 5222, 5225, 5228, 5237, 5240, 5243, 5246, 5249, 5252, 5261, 5264, 5267, 5270, 5273, 5276
+
+.. note::
+
+	According to the GBD modelers, ESRD - Dialysis, Crohn's disease, and 
+	ulcerative colitis were also included in this list, although there do not 
+	appear to be results for these causes in GBD 2017. Additionally, according 
+	to the GBD modelers, cirrhosis should be included in this list, although 
+	there do not appear to be any anemia-afflicted sequelae with results in 
+	GBD 2017 within any of the cirrhosis causes.
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -258,14 +329,6 @@ recreated with the following equations and code:
 	* - hemoglobin_sd
 	  - rei_92_sd
 	  - meid_10488
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
 	* - w_gamma
 	  - 0.4
 	  - Ensemble weight for gamma distribution
@@ -281,14 +344,6 @@ recreated with the following equations and code:
 	* - pi
 	  - 3.14.....
 	  - Use `math.pi` for all significant figures
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
 	* - gamma_shape
 	  - (hemoglobin_mean)^2 / (hemoglobin_sd)^2
 	  -
@@ -301,85 +356,27 @@ recreated with the following equations and code:
 	* - mirror_gumbel_scale
 	  - (hemoglobin_sd) * sqrt(6) / pi
 	  - 
-
-Below is Python code that can be used to sample from the population hemoglobin 
-distribution using the parameters defined in this section.
+	* - random_number_i
+	  - random number between 0 and 1
+	  - Assigned to an individual simulant
 
 .. code-block:: Python
 
 	import scipy.stats
 
 
-	# TO-DO: WRITE SOME CODE THAT ACCURATELY SAMPLES FROM THE ENSEMBLE DIST.
+	# TO-DO: WRITE SOME CODE THAT ACCURATELY SAMPLES FROM THE ENSEMBLE DIST. 
+	# BASED ON ASSIGNED RANDOM PERCENTILE
 
 Iron Responsiveness
 ^^^^^^^^^^^^^^^^^^^
 
 As previously discussed, not all anemias in the anemia impairment are iron 
 deficiency anemias, meaning that not all anemias will respond to iron 
-supplementation. A list of causes with iron-responsive anemia health states (
-and their associated sequelae) are listed in the table below.
-
-.. list-table:: Causes 
-	:widths: 40 40 40
-	:header-rows: 1
-
-	* - Cause
-	  - Cause ID
-	  - Anemia-Afflicated Sequela ID
-	* - Dietary Iron Deficiency
-	  - 390
-	  - 206, 207, 208
-	* - Endocrine, Metabolic, Blood, and Immune Disorders
-	  - 619
-	  - 537, 538, 539
-	* - Uterine Fibroids
-	  - 604
-	  - 1106, 1107, 1108
-	* - Other Gynecological Diseases
-	  - 612
-	  - 525, 526, 527
-	* - Hookworm disease
-	  - 363
-	  - 172, 173, 174
-	* - Schistosomiasis
-	  - 351
-	  - 144, 145, 146
-	* - Other Neglected Tropical Diseases
-	  - 365
-	  - 177, 178, 179
-	* - Other Unspecified Infectious Diseases
-	  - 961
-	  - 240, 241, 242
-	* - Maternal Hemorrhage
-	  - 367
-	  - 182, 183, 184
-	* - Vitamin A Deficiency
-	  - 389
-	  - 5393, 5396, 5399
-	* - Peptic Ulcer Disease
-	  - 527
-	  - 4952, 4955, 4958, 4961, 4964, 4967, 4976, 4979, 4982, 5627, 5630, 5633, 7202, 7205, 7208
-	* - Gastritis and Duodenitis
-	  - 528
-	  - 4985, 4988, 4991, 4994, 4997, 5000, 5009, 5012, 5015, 5678, 5681, 5684, 7214, 7217, 7220
-	* - Chronic Kidney Disease
-	  - 589 (591, 592, 593, 997, 998)
-	  - 1004, 1005, 1006, 1008, 1009, 1010, 1012, 1013, 1014, 1016, 1017, 1018, 1020, 1021, 1022, 1024, 1025, 1026, 1028, 1029, 1030, 1032, 1033, 1034, 1361, 1364, 1367, 1373, 1376, 1379, 1385, 1388, 1391, 1397, 1400, 1403, 1409, 1412, 1415, 1421, 1424, 1427, 1433, 1436, 1439, 1445, 1448, 1451, 5213, 5216, 5219, 5222, 5225, 5228, 5237, 5240, 5243, 5246, 5249, 5252, 5261, 5264, 5267, 5270, 5273, 5276
-
-.. note::
-
-	According to the GBD modelers, ESRD - Dialysis, Crohn's disease, and 
-	ulcerative colitis were also included in this list, although there do not 
-	appear to be results for these causes in GBD 2017. Additionally, according 
-	to the GBD modelers, cirrhosis should be included in this list, although 
-	there do not appear to be any anemia-afflicted sequelae with results in GBD 
-	2017 within any of the cirrhosis causes.
-
-Therefore, the probability that a simulant with mild, moderate, or severe 
-anemia (based on their sampled hemoglobin concentration and WHO anemia 
-threshold values) will respond to iron supplementation/fortification can be 
-measured by: 
+supplementation. Therefore, the probability that a simulant with mild, 
+moderate, or severe anemia (based on their sampled hemoglobin concentration 
+and WHO anemia threshold values) will respond to iron supplementation/
+fortification can be measured by: 
 
 .. math::
 
@@ -388,7 +385,7 @@ measured by:
 Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are 
 equal to the severity-, age-, sex-, and location-specific prevalence (from COMO)
 summed across all iron responsive anemia and all total anemia sequela IDs, 
-respectively; sequela IDs for each category are listed in the table below. 
+respectively. Sequela IDs for each category are listed in the table below. 
 
 .. list-table:: Sequela IDs 
 	:widths: 5, 30, 20
@@ -412,23 +409,25 @@ non-iron responsive (0) according to the following rules:
 
 .. code-block:: Python
 
-	if hb_i < severe_threshold:
-		if random_number_i < prevalence_severe_ira / prevalence_total_severe_anemia:
+	if hb_i < severe_threshold: 
+		if random_number_i =< prevalence_severe_ira / prevalence_total_severe_anemia:
 			iron_responsive_i = 1
 		else:
 			iron_responsive_i = 0
 	elif hb_i < moderate_threshold:
-		if random_number_i < prevalence_moderate_ira / prevalence_total_moderate_anemia:
+		if random_number_i =< prevalence_moderate_ira / prevalence_total_moderate_anemia:
 			iron_responsive_i = 1
 		else:
 			iron_responsive_i = 0
 	elif hb_i < mild_threshold:
-		if random_number_i < prevalence_mild_ira / prevalence_total_mild_anemia:
+		if random_number_i =< prevalence_mild_ira / prevalence_total_mild_anemia:
 			iron_responsive_i = 1
 		else:
 			iron_responsive_i = 0
 	else:
 		iron_responsive_i = 1
+
+	# NOTE: use <, not =< for anemia thresholds 
 
 Where:
 
@@ -454,18 +453,19 @@ Where:
 	* - prevalence_{severity}_ira
 	  - Severity-specific prevalence of iron responsive anemia
 	  - Sum of iron responsive anemia sequelae
-	* - prevalence_{severity}_total_anemia
+	* - prevalence_total_{severity}_anemia
 	  - Severity-specific prevalence of all anemia
 	  - Sum of all anemia sequelae
-
-.. todo::
-
-	Confirm how to handle the non-anemic population and any associated limitations (specifically with regard to non-genetic causes of non-iron responsive causes of anemia that could cause someone to transition from non-anemic to anemic).
 
 Then, effect sizes for iron supplementation or fortification interventions as 
 shifts in mean hemoglobin concentrations should be applied only to those who 
 are initialized in the model as iron responsive (iron_responsive_i = 1) based 
 on the methodology described here.
+
+.. todo::
+
+	Describe how to handle the changing prev_ira/prev_total_anemia across age groups.
+
 
 Other Model Notes/Strategies
 ++++++++++++++++++++++++++++
@@ -476,7 +476,20 @@ Neonatal Age Groups
 .. todo:: 
 
 	This section!! Figure out if we need to do anything special here or if GBD 
-	data has already taken care of it.
+	data has already taken care of it. If we are only modeling NN mortality (not 
+	morbidity) for LSFF, then we can ignore for now and only initialize 
+	hemoglobin values for the post neonatal age groups.
+
+Tracking Years Lived with Disability due to Anemia
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Person time in mild, moderate, and severe anemic states (based on assigned 
+simulant hemoglobin concentration and age- and sex- specific hemoglobin 
+thresholds for anemia) should be tracked in the Vivarium simulation and 
+multiplied by the severity-spefic anemia disability weight to obtain a measure 
+of YLDs due to anemia in the model. This can be done for all anemia or 
+iron-responsive anemias (among simulants with iron_responsive_i = 1 only), 
+depending on model needs (use corresponding anemia prevalences for validation).
 
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
@@ -492,6 +505,11 @@ Our approach of assigning individual simulants propensity scores (percentiles
 within the population hemoglobin concentration distribution) is a limitation of 
 our modeling strategy in that it assumes that this remains constant over time 
 and age groups.
+
+Because we are not modeling individual causes of anemia (and their associated 
+mortality), we assume that all simulants have the same mortality rate regardless 
+of their hemoglobin value, when in reality, those with lower hemoglobin values 
+will have higher mortality rates than those with higher hemoglobin values.
 
 Because hemoglobin concentrations are not directly modeled among the early and 
 late neonatal age groups in GBD, the prevalence of mild, moderate, and severe 
@@ -521,7 +539,7 @@ Validation Criteria
 
 The overall prevalence and YLDs of anemia should be equal between:
 
-- The anemia impairment (overall only)
+- The anemia impairment (rei_192 for all anemia, rei_205 for mild anemia, rei_206 for moderate anemia, and rei_207 for severe anemia)
 - The sum across all anemia sequlae (overall and severity-specific)
 - The result of anemia prevalence calculated from the population hemoglobin distribution as described in the modeling strategy for prevalence, and prevalence multiplied by the disability weight(s) for YLDs (overall and severity-specific)
 
