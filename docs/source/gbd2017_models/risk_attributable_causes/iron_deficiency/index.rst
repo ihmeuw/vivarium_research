@@ -374,6 +374,14 @@ respond to iron supplementation, as calculated as described above. The
 resulting population mean should then be applied as the intervention scenario 
 value for the iron deficiency risk factor exposure.
 
+.. todo::
+
+	Make it more clear how to initialize a) hemoglobin concentration and b) 
+	iron responsiveness (and specify order in which this should occur).
+
+	Also, describe how an individual's hemoglobin concentration will change 
+	with age.
+
 Model Assumptions and Limitations
 ---------------------------------
 
