@@ -13,12 +13,12 @@ hemoglobin concentrations below a defined threshold that varies by age and sex.
 Severity of anemia is similarly classified according to ranges of hemoglobin 
 concentrations. Anemia is associated with increased morbidity and mortality and 
 symptoms of anemia often include weakness, fatigue, and difficulty 
-concentrating.
+concentrating [Kassebaum-et-al-2016]_.
 
  Notably, anemia may be caused by many diverse factors. Examples of factors 
  that may cause anemia include genetic mutations in hemoglobin genes, acute or 
  chronic blood loss, altered red blood cell morphology, inadequate nutritional 
- intake, and others.
+ intake, and others [Kassebaum-et-al-2016]_.
 
 **Iron deficiency anemia** is a type of anemia that is due to insufficient 
 iron levels, which lead to a deficiency of hemoglobin in the blood. Notably, 
@@ -318,12 +318,15 @@ Risk Factor Hierarchy
 
 .. image:: iron_risk_hierarchy.svg
 
+Vivarium Modeling Strategy
+++++++++++++++++++++++++++
 
-Modeling Strategy
-+++++++++++++++++
+.. note:: 
+
+	The Vivarium modeling strategy described here is a strategy to model the PAF-of-one GBD cause dietary iron deficiency (attributable to the iron deficiency risk factor). The modeling strategy described here does *not* consider the realtionship between the GBD iron deficiency risk factor and other causes (i.e. maternal disorders).
 
 The hemoglobin distribution for a given demographic group should be recreated 
-under the assumption that it followd the specified ensemble distribution, as 
+under the assumption that it follows the specified ensemble distribution, as 
 the python code included above instructs. For the population that is severely 
 anemic based on the hemoglobin thresholds, a certain proportion will not 
 respond to iron supplementation.
@@ -382,19 +385,16 @@ distribution throughout the modeling process. This is a limitation of our
 modeling strategy in that we assume the distribution before a shift is applied 
 maintains the same shift after a shift due to the intervention is applied.
 
-.. todo::
-
-	add limitation about differences between pre-processing hemoglobin mean and 
-	post-processing anemia prevalence that causes differences between anemia 
-	prevalence constructed from hemoglobin distribution and anemia impairment 
-	prevalence, pending confirmation from GBD modelers.
-
 Validation Criteria
 -------------------
 
-.. todo::
+The overall prevalence of anemia should be equal between:
 
-	Describe criteria
+- The anemia impairment prevalence (overall only)
+- The prevalence of anemia summed across all anemia sequlae (overall and severity-specific)
+- The prevalence of anemia calculated from the population hemoglobin distribution (overall and severity-specific)
+
+Dietary iron deficiency anemia should account for roughly 80% of total anemia.
 
 References
 ----------
