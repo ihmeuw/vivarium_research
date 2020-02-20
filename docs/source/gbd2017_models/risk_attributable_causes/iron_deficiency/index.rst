@@ -284,8 +284,7 @@ recreated with the following equations:
 	  - 
 
 Below is Python code that can be used to sample from the population hemoglobin 
-distribution using the parameters defined in this section and assuming age- and 
-sex- specific *anemia_threshold* values as defined in the table above_:
+distribution using the parameters defined in this section.
 
 .. code-block:: Python
 
@@ -447,6 +446,54 @@ The overall prevalence and YLDs of anemia should be equal between:
 - The anemia impairment (overall only)
 - The sum across all anemia sequlae (overall and severity-specific)
 - The result of anemia prevalence calculated from the population hemoglobin distribution as described in the modeling strategy for prevalence, and prevalence multiplied by the disability weight(s) for YLDs (overall and severity-specific)
+
+The prevalence of anemia using the population hemoglobin distribution can be 
+calculated using the code below using the parameters defined earlier in this 
+document and assuming age- and sex- specific *anemia_threshold* values as 
+defined in the table above_:
+
+.. warning::
+
+	There is an error either in the parameter definitions described in the 
+	table above or the code described in the block below that is causing a 
+	failure in the validation criteria of anemia prevalence. Error to be 
+	investigated and updated.
+
+.. code-block:: Python
+
+	import scipy.stats
+
+
+	# overall anemia prevalence
+	gamma_prev = scipy.stats.gamma(gamma_shape, loc=0, 
+				scale=1/gamma_rate).cdf(mild_anemia_threshold)
+	mirror_gumbel_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
+				mirror_gumbel_scale).cdf(xmax - mild_anemia_threshold)
+	ensemble_prev = w_gamma * gamma_prev + w_mirror_gumbel * mirror_gumbel_prev
+
+
+	# severe anemia prevalence
+	gamma_severe_prev = scipy.stats.gamma(gamma_shape, loc=0, 
+				scale=1/gamma_rate).cdf(severe_anemia_threshold)
+	mirror_gumbel_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
+				mirror_gumbel_scale).cdf(xmax - severe_anemia_threshold)
+	ensemble_severe_prev = w_gamma * gamma_severe_prev + w_mirror_gumbel * mirror_gumbel_severe_prev	
+
+
+	# moderate anemia prevalence
+	gamma_moderate_prev = scipy.stats.gamma(gamma_shape, loc=0, 
+				scale=1/gamma_rate).cdf(moderate_anemia_threshold) - gamma_severe_prev
+	mirror_moderate_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
+				mirror_gumbel_scale).cdf(xmax - moderate_anemia_threshold) - gamma_severe_prev
+	ensemble_moderate_prev = w_gamma * gamma_moderate_prev + w_mirror_gumbel * mirror_gumbel_moderate_prev	
+
+
+	# mild anemia prevalence
+	gamma_mild_prev = scipy.stats.gamma(gamma_shape, loc=0, 
+				scale=1/gamma_rate).cdf(mild_anemia_threshold) - gamma_moderate_prev
+	mirror_mild_severe_prev = 1 - scipy.stats.gumbel_r(mirror_gumbel_alpha, 
+				mirror_gumbel_scale).cdf(xmax - mild_anemia_threshold) - gamma_moderate_prev
+	ensemble_mild_prev = w_gamma * gamma_mild_prev + w_mirror_gumbel * mirror_mild_moderate_prev	
 
 References
 ----------
