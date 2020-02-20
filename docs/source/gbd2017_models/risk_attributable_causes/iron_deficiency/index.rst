@@ -488,6 +488,11 @@ the disability weight associated with that cause. The impact of this double
 counting should be considered when this is the case before implementation in a 
 model and recorded as a model limitation if applicable.
 
+Our approach of assigning individual simulants propensity scores (percentiles 
+within the population hemoglobin concentration distribution) is a limitation of 
+our modeling strategy in that it assumes that this remains constant over time 
+and age groups.
+
 Because hemoglobin concentrations are not directly modeled among the early and 
 late neonatal age groups in GBD, the prevalence of mild, moderate, and severe 
 anemia are assumed to be equal to the prevalence in the postneonatal age group. 
