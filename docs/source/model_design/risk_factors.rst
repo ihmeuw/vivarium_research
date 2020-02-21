@@ -36,6 +36,18 @@ What is a risk factor?
 What is a causal relationship?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Counfounding
+""""""""""""
+
+Intermediates
+"""""""""""""
+
+Effect Modification
+"""""""""""""""""""
+
+Mediation
+"""""""""
+
 What is a risk exposure?
 ++++++++++++++++++++++++
 
