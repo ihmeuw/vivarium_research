@@ -33,6 +33,10 @@ Overview
 What is a risk factor?
 ++++++++++++++++++++++
 
+.. todo::
+  
+  Separate this into "in the field of epi", "in GBD", and "in vivarium"
+
 A risk factor is any attribute whose measure is causally related to the measure 
 of an outcome. Such attributes can range widely, and are categorized by GBD into 
 environmental/occupational, behavioral, and metabolic risks. For example:
