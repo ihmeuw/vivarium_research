@@ -36,7 +36,7 @@ What is a risk factor?
 What is a causal relationship?
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Counfounding
+Confounding
 """"""""""""
 
 Intermediates
