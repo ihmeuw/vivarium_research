@@ -69,7 +69,7 @@ also be the differential probability of another risk exposure.
 
   We might also say that an individual with the attribute "mother had a BMI of 17 
   during pregnancy" is :math:`x_2` times more likely to end up with the attribute "low 
-  weight" than if that same child, all other factors held constant, had the 
+  birth weight" than if that same child, all other factors held constant, had the 
   attribute "mother had a healthy BMI during pregnancy". We will then say that the 
   attribute "low birth weight" causes the child to have a higher probability of 
   experiencing a bout of diarrheal disease. We then attribute health loss to this 
