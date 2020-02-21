@@ -148,11 +148,10 @@ Mapping CKD States to IKF Categories in Vivarium
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
+* EMR = 0 for all states, except for Stage V.
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+* Stage V is the only Stage which is fatal, where there will be YLLs and Deaths.
+
 
 Cause Model Diagram
 -------------------
@@ -219,7 +218,7 @@ State and Transition Data Tables
      -
    * - C
      - prevalence
-     - prevalence_c589
+     - 0
      -
    * - M
      - prevalence
