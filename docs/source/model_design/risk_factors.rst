@@ -49,7 +49,7 @@ environmental/occupational, behavioral, and metabolic risks. For example:
 
     * A low level of physical activity
 
-    * A history or lack thereof of childhood abuse0
+    * A history or lack thereof of childhood abuse
 
   * Metabolic
 
@@ -96,7 +96,7 @@ risk factor.
 	only a simulant's recent exposure to an unsafe water source will affect their 
 	probability of suffering from diarrheal diseases in the next week. However, the 
 	probability of becoming diabetic in the next year will be affected by a
-	simulants entire history of smoking.
+	simulant's entire history of smoking.
 
 
 What is a causal relationship?
