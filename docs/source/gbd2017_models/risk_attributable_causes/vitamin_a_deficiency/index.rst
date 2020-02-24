@@ -9,13 +9,13 @@ Disease Description
 
 Vitamin A deficiency (VAD) is a lack of vitamin A in blood and tissues.
 Vitamin A deficiency is considered as one of the most serious public health concerns in developing countries
-and can contribute directly or indirectly to disability. 
+and can contribute directly or indirectly to disability.[1] 
 
 GBD 2017 Modeling Strategy
 ------------------------------------
 In Global Burden of Disease (GBD) 2017, VAD exposure definition is proportion of the population with serum retinol concentration <0·7 μmol/L.
 Like iron deficiency, the cause VAD is also a population attributable fraction (PAF) of 1 cause with the VAD risk factor. That is, 100% of the VAD cases are attributable 
-to the VAD risk factor. VAD Risk exposure and VAD cause prevalence data are the same.
+to the VAD risk factor. VAD Risk exposure and VAD cause prevalence data are the same.[2]
 
 Vitamin A Deficiency Cause
 +++++++++++++++++++++++++++++
@@ -34,7 +34,7 @@ Modeling Strategy for the Vitamin A Deficiency Cause
 Vitamin A Deficiency Risk Factor
 +++++++++++++++++++++++++++
 
-The Vitamin A deficiency risk factor in GBD 2017 is a ** dichotomous variable** . 
+The Vitamin A deficiency risk factor in GBD 2017 is a **dichotomous variable** . 
 Below is a list of measures and corresponding IDs:
 
 .. list-table:: Measures
@@ -50,7 +50,7 @@ Below is a list of measures and corresponding IDs:
 	* - Incidence rate
 	  - gbd_id = cid(389)
 	  - como, use get_measure
-	* - Risk factor
+	* - Risk factor exposure
 	  - gbd_id = reiid(96)
 	  - como, use get_measure
 
@@ -63,4 +63,6 @@ include Lower respiratory infections, diarrhoeal diseases, measles.
 References
 ----------
 
-James SL, Abate D, Abate KH, et al. Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017. The Lancet 2018; 392: 1789–858.
+1. Amy L. Rice, Keith P. West JR. and Robert E. Black. Comparative quantification of health risks. Chapter 4 Vitamin A deficiency. 
+2. GBD 2017 Risk Factor Collaborators. Global, regional, and national comparative risk assessment of 84 behavioural, environmental and occupational, and metabolic risks or clusters of risks for 195 countries and territories, 1990-2017: a systematic analysis for the Global Burden of Disease Study 2017. Lancet 2018; 392: 1923–94.
+
