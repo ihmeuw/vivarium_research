@@ -54,6 +54,23 @@ Impaired kidney function (IKF) is a risk factor in GBD 2017 with:
      - 95 Plus
      - (95, 125], age_group_id = 235
 
+.. list-table:: GBD 2017 Risk Factor IKF Categories
+   :widths: 15 15 
+   :header-rows: 1
+
+   * - Category Name
+     - Description
+   * - cat1
+     - Stage V chronic kidney disease annual exposure
+   * - cat2
+     - Stage IV chronic kidney disease annual exposure
+   * - cat3
+     - Stage III chronic kidney disease annual exposure
+   * - cat4
+     - Albuminuria annual exposure
+   * - cat5
+     - Unexposed
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -117,32 +134,28 @@ Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table:: Disease State to Risk Factor Exposure Category Map Table
-   :widths: 10 30 10 10 10 15 
+   :widths: 10 15 10 30 10 
    :header-rows: 1
 
    * - Disease State 
      - Sequelae Group 
-     - Risk Exposure Category
+     - IKF Risk Exposure Category
      - Sequelae Group Id
-     - Risk Exposure ID
      - Notes
    * - **M**\ oderate CKD
      - stage III sequelae
-     - Stage 3 chronic kidney disease squeezed
+     - cat3
      - [s_5225, s_5219, s_5213, s_5228, s_5222, s_5216, s_1024, s_1025, s_1026, s_1016, s_1017, s_1018, s_1032, s_1033, s_1034, s_5231, s_5234, s_1027, s_1019, s_1035]
-     - me_id_10732
      - All Stage III sequelae values due to CKD sub_causes
    * - **M**\ oderate CKD
      - stage IV sequelae
-     - Stage 4 chronic kidney disease squeezed
+     - cat2
      - [s_5249, s_5243, s_5237, s_5252, s_5246, s_5240, s_1433, s_1436, s_1439, s_1421, s_1424, s_1427, s_1445, s_1448, s_1451, s_5255, s_5258, s_1430, s_1418, s_1442]
-     - me_id_10733
      - All Stage IV sequelae values due to CKD sub_causes
    * - **S**\ evere CKD
      - stage V sequelae
-     - Stage 5 chronic kidney disease squeezed
+     - cat1
      - [s_5273, s_5267, s_5261, s_5276, s_5270, s_5264, s_1385, s_1388, s_1391, s_1373, s_1376, s_1379, s_1397, s_1400, s_1403, s_5279, s_5282, s_1382, s_1370, s_1394]
-     - me_id_10734
      - All Stage V sequelae values due to CKD sub_causes
 
 Assumptions and Limitations
@@ -197,7 +210,7 @@ State and Transition Data Tables
      - 
    * - C
      - With **C**\ ondition of chronic kidney disease
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}}`
+     - 
    * - M
      - **M**\ oderate CKD
      - sequelae_mod = [s_5225, s_5219, 5213, s_5231, s_5249, s_5243, s_5237, s_5255, s_5540, s_5228, s_5222, s_5216, s_5234, s_5252, s_5246, s_5240, s_5258, s_5543, s_1024, s_1025, s_1026, s_1027, s_1433, s_1436, s_1439, s_1430, s_5549, s_1016, s_1017, s_1018, s_1019, s_1421, s_1424, s_1427, s_1418, s_5546, s_1032, s_1033, s_1034, s_1035, s_1445, s_1448, s_1451, s_1442, s_5552] 
@@ -222,27 +235,31 @@ State and Transition Data Tables
      -
    * - M
      - prevalence
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}{\scriptstyle{\text{prevalence_c589}}}`
-     - = (prevalence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae) / prevalence of CKD
+     - :math:`{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}`
+     - = prevalence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae
    * - Sev
      - prevalence
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}{\scriptstyle{\text{prevalence_c589}}}`
-     - = (prevalence of CKD stage V sequelae + CKD end stage sequelae) / prevalence of CKD 
-   * - EMR severe
-     - excess mortality rate of severe CKD
+     - :math:`{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}`
+     - = prevalence of CKD stage V sequelae + CKD end stage sequelae
+   * - Sev
+     - excess mortality rate (EMR) of severe CKD
      - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_severe_ckd}}`
      - 
-   * - EMR moderate
-     - excess mortality rate of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_moderate_ckd}}`
-     -   
-   * - C
+   * - M
+     - excess mortality rate (EMR) of moderate CKD
+     - 0
+     - EMR for moderate CKD is 0, given the assumption that moderate CKD is non-fatal only.
+   * - M
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}`
+     - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     -
+   * - Sev
+     - disability weight
+     - :math:`\frac{{\sum_{s\in \text{sequelae_sev}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
      -
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c589}}{\text{1 - prev_589} \,\times \text{population}}`
+     - :math:`\frac{\text{deaths_c589}}{\text{population}}`
      -
 
 .. list-table:: Transition Data
@@ -262,13 +279,23 @@ State and Transition Data Tables
    * - 2
      - C
      - M
-     - :math:`\sum_{s\in \text{incidence_sequelae_mod.sub_causes.c589}}`
-     - = incidence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}} \times\ \text{incidence_c589}}{\text{prevalence_c589}}`
+     - = (prevalence of sequelae moderate * incidence of CKD) / prevalence of CKD
    * - 3
      - C
      - Sev
-     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c589}}`
-     - = incidence of CKD stage V sequelae + CKD end stage sequelae  
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}} \times\ \text{incidence_c589}}{\text{prevalence_c589}}`
+     - = (prevalence of sequelae severe * incidence of CKD) / prevalence of CKD
+   * - 4
+     - Alb.
+     - III
+     - 'remission' (progression) from Albuminuria to stage III CKD stage
+     - see: auxilliary remission ratio calculation R script
+   * - 5
+     - III
+     - IV
+     - 'remission' (progression) from stage III CKD to stage IV CKD
+     - see: auxilliary remission ratio calculation R script
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -298,14 +325,14 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
-   * - incidence_s{sid}
-     - como
-     - Incidence of sequela with id {id}
-     - 
    * - incidence_c589
      - como
      - Incidence of chronic kidney disease
      -   
+   * - remission
+     - dismod
+     - see auxilliary remission ration calculation script
+     - 
         
 Validation Criteria
 -------------------
@@ -313,14 +340,6 @@ Validation Criteria
 * prevalence_moderate_CKD + prevalence_severe_CKD = 1
 
 * prevalence_CKD = sum of prevalence_sequelae_CKD
-
-* incidence_CKD = sum of incidence_sequela_CKD
-
-* incidence_ckd = incidence_severe_CKD/prevalence_severe_CKD
-
-* incidence_ckd = incidence_moderate_CKD/prevalence_moderate_CKD 
-
-* csmr_CKD = prevalence_CKD * emr_CKD
 
 References
 ----------
