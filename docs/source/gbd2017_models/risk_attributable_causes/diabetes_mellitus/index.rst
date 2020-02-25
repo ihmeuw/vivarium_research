@@ -83,9 +83,11 @@ Assumptions and Limitations
 
 1. We are using remission data from dismod, modelable_entity_id_2005 for overall DM. 
 
-2. Moderate DM is non-fatal only. CSMR is only applicable to Severe DM.
+2. In vivarium, 'uncomplicated DM Type 1 and Type 2' is 'Moderate', which is different from how GBD 2017 is modelling it. In the future, severity splits will be revisited using disability weights. 
 
-3. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
+3. DM is non-fatal only. CSMR is only applicable to Severe DM.
+
+4. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
 
 Cause Model Diagram
 -------------------
@@ -157,18 +159,18 @@ State and Transition Data Tables
      - 
    * - M 
      - prevalence
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}{\scriptstyle{\text{prevalence_c587}}}` 
-     - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae / prevalence of overall Diabetes Mellitus  
+     - :math:`{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}` 
+     - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae  
    * - Sev
      - prevalence
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}{\scriptstyle{\text{prevalence_c587}}}`
-     - = (prevalence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + prevalence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated) / prevalence of overall Diabetes Mellitus  
-   * - EMR Sev
-     - excess mortality rate for severe DM 
+     - :math:`{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}`
+     - = (prevalence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + prevalence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
+   * - Sev
+     - excess mortality rate (EMR) for severe DM 
      - :math:`\frac{\text{CSMR_c587}}{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}`
      - = (cause-specific mortality rate of DM) / sum of prevalence of severe DM sequelae
-   * - EMR M
-     - excess mortality rate of moderate DM
+   * - M
+     - excess mortality rate (EMR) of moderate DM
      - 0
      - EMR for Moderate DM is 0, given the assumption that moderate DM is non-fatal only. 
    * - M
@@ -201,13 +203,13 @@ State and Transition Data Tables
    * - 2
      - C
      - M
-     - :math:`\frac{sum_{s\in \text{incidence_sequelae_mod.sub_causes.c587}}}{\text{incidence_c587}}`
-     - = incidence of Diabetes Mellitus Type 1 uncomplicated sequelae + incidence of Diabetes Mellitus Type 2 uncomplicated sequelae
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}} \times\ \text{incidence_c587}}{\text{prevalence_c587}}`
+     - = (prevalence of moderate sequelae * incidence of DM)/ prevalence of DM
    * - 3
      - C
      - Sev
-     - :math:`\frac{\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c587}}}{\text{incidence_c587}}`
-     - = incidence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + incidence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}} \times\ \text{incidence_c587}}{\text{prevalence_c587}}`
+     - = (prevalence of severe sequelae * incidence of DM)/ prevalence of DM
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -237,14 +239,13 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
-   * - incidence_s{sid}
-     - dismod
-     - Incidence of sequela with id {id}
-     - 
    * - incidence_c587
      - como
      - Incidence of overall diabetes mellitus
-     -      
+     -  
+   * - remission_modelable_entity_id_2005
+     - dismod
+     - Remission of overall diabetes mellitus
 
 Validation Criteria
 -------------------
