@@ -45,6 +45,23 @@ Demographics
 * Exit age (at what age to stop tracking simulants): **5 years**
 * Fertility: **Crude birth rate**
 
+Stratification
+++++++++++++++
+
+Stratify by **location, age, sex, and year**.
+
+Scenarios
++++++++++
+
+Simulate five scenarios (each nutrient separately, plus iron and
+folic acid together, plus baseline):
+
+#. Baseline (using data on existing coverage of fortification)
+#. Vitamin A scale-up
+#. Iron scale-up
+#. Folic Acid scale-up
+#. Iron + Folic Acid scale-up
+
 GBD Causes
 ++++++++++
 
@@ -89,11 +106,6 @@ Folic Acid Fortification
 
 Desired Model Outputs
 ---------------------
-
-Stratification
-++++++++++++++
-
-Stratify by **location, age, sex, and year**.
 
 Observers
 +++++++++
