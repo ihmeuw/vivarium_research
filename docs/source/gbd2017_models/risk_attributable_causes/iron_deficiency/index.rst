@@ -232,7 +232,7 @@ anemia-afflicated sequelae IDs are included in the table below.
 	  - 365
 	  - 177, 178, 179
 	* - Other Unspecified Infectious Diseases
-	  - 961
+	  - 408
 	  - 240, 241, 242
 	* - Maternal Hemorrhage
 	  - 367
@@ -396,13 +396,13 @@ respectively. Sequela IDs for each category are listed in the table below.
 	  - Iron Responsive Anemia Sequela
 	* - Mild
 	  - 144, 172, 177, 182, 206, 240, 438, 442, 525, 531, 537, 645, 648, 651, 654, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1057, 1061, 1065, 1069, 1079, 1089, 1099, 1106, 1120, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5018, 5027, 5036, 5051, 5063, 5075, 5087, 5099, 5111, 5123, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5606, 5627, 5648, 5651, 5654, 5678, 5699, 5702, 5705, 7202, 7214, 22989, 22990, 22991, 22992, 22993, 23030, 23034, 23038, 23042, 23046
-	  - 144, 172, 177, 182, 206, 240, 525, 537, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1106, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5627, 5678, 7202, 7214, 23030, 23034, 23038, 23042, 23046
+	  - 144, 172, 177, 182, 206, 240, 438, 442, 525, 537, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1106, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5627, 5648, 5651, 5654, 5678, 5699, 5702, 7202, 7214, 22989, 22990, 22991, 22992, 22993, 23030, 23034, 23038, 23042, 23046
 	* - Moderate
 	  - 145, 173, 178, 183, 207, 241, 439, 443, 526, 532, 538, 646, 649, 652, 655, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1058, 1062, 1066, 1070, 1080, 1090, 1100, 1107, 1121, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5021, 5030, 5039, 5054, 5066, 5078, 5090, 5102, 5114, 5126, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5609, 5630, 5657, 5660, 5663, 5681, 5708, 5711, 5714, 7205, 7217, 22999, 23000, 23001, 23002, 23003, 23031, 23035, 23039, 23043, 23047
-	  - 145, 173, 178, 183, 207, 241, 526, 538, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1107, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5630, 5681, 7205, 7217, 23031, 23035, 23039, 23043, 23047
+	  - 145, 173, 178, 183, 207, 241, 439, 443, 526, 538, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1107, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5630, 5657, 5660, 5663, 5681, 5708, 5711, 5714, 7205, 7217, 22999, 23000, 23001, 23002, 23003, 23031, 23035, 23039, 23043, 23047
 	* - Severe
 	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 533, 539, 647, 650, 653, 656, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1059, 1060, 1063, 1064, 1067, 1068, 1071, 1074, 1075, 1077, 1081, 1083, 1085, 1087, 1091, 1093, 1095, 1097, 1101, 1108, 1122, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5024, 5033, 5042, 5057, 5069, 5081, 5093, 5105, 5117, 5129, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5612, 5633, 5666, 5669, 5672, 5684, 5717, 5720, 5723, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
-	  - 146, 174, 179, 184, 208, 242, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220, 23032, 23036, 23040, 23044, 23048
+	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5666, 5669, 5672, 5717, 5720, 5723, 5684, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
 
 Therefore, each simulant should be initialized as either iron responsive (1) or 
 non-iron responsive (0) according to the following rules:
@@ -428,6 +428,14 @@ non-iron responsive (0) according to the following rules:
 		iron_responsive_i = 1
 
 	# NOTE: use <, not =< for anemia thresholds 
+
+.. todo::
+
+	Confirm how to handle final "else" statement with research team. Relevant 
+	non-responsive causes include hemoglobinopathies/hemolytic anemias, HIV/
+	AIDS, malaria.
+
+	Potential approach: [1 - sum_all_anemia_sequelae_prevalence - (sum_hemoglobinopathies_hiv_malaria_cause_prevalence - non_iron_responsive_anemia_sequelae_prevalence)] / (1 - sum_all_anemia_sequela_prevalence)
 
 Where:
 
@@ -464,7 +472,14 @@ on the methodology described here.
 
 .. todo::
 
-	Describe how to handle the changing prev_ira/prev_total_anemia across age groups.
+	Describe how to handle the changing prev_ira/prev_total_anemia across age 
+	groups, which generally decreases by about 2% between the early NN and 1-4 
+	year age groups for locations of interest (India, Nigeria, Ethiopia).
+
+	Tentative approach: initialize only once using the minimum probability of 
+	iron responsiveness across all age groups in simulation. 
+
+	Confirm with research team.
 
 
 Other Model Notes/Strategies
@@ -473,12 +488,15 @@ Other Model Notes/Strategies
 Neonatal Age Groups
 ^^^^^^^^^^^^^^^^^^^
 
+Neonatal age groups should be excluded from the process described in this 
+document. Simulants should be initialized with a hemoglobin value and an iron 
+responsiveness indicator at the start of the simulation and/or when they age 
+into the postneonatal age group.
+
 .. todo:: 
 
-	This section!! Figure out if we need to do anything special here or if GBD 
-	data has already taken care of it. If we are only modeling NN mortality (not 
-	morbidity) for LSFF, then we can ignore for now and only initialize 
-	hemoglobin values for the post neonatal age groups.
+	Confirm this with research team pending validation of this age groups with 
+	functioning code.
 
 Tracking Years Lived with Disability due to Anemia
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -509,7 +527,9 @@ and age groups.
 Because we are not modeling individual causes of anemia (and their associated 
 mortality), we assume that all simulants have the same mortality rate regardless 
 of their hemoglobin value, when in reality, those with lower hemoglobin values 
-will have higher mortality rates than those with higher hemoglobin values.
+will have higher mortality rates than those with higher hemoglobin values. 
+Notably, deaths due to causes with iron responsive anemia sequelae account for 
+approximately 1.1% of deaths in the first five years of life globally. 
 
 Because hemoglobin concentrations are not directly modeled among the early and 
 late neonatal age groups in GBD, the prevalence of mild, moderate, and severe 
