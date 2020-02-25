@@ -64,7 +64,7 @@ sex-, and location-specific demographic group, the prevalence of anemia (by
 severity level) in each group is determined by the WHO hemoglobin thresholds 
 defined in the following table.
 
-.. _above:
+.. _`WHO hemoglobin tresholds table`:
 
 .. list-table:: WHO Hemoglobin Thresholds (g/L) [Kassebaum-et-al-2016]_
 	:widths: 15, 15, 15, 15
@@ -155,7 +155,7 @@ The sequela associated with the dietary iron deficiency cause in GBD 2017
 include mild iron deficiency anemia, moderate iron deficiency anemia, and 
 severe iron deficiency anemia. The severity of iron deficiency anemia is 
 determined by the WHO age- and sex- specific hemoglobin concentrations, as 
-described in the table above.
+described in the `WHO hemoglobin tresholds table`_.
 
 Iron Deficiency Risk Factor
 +++++++++++++++++++++++++++
@@ -202,6 +202,8 @@ Notably, not all causes of anemia in the GBD anemia impairment are considered
 iron responsive (i.e. will respond to iron supplementation). A list of causes 
 with iron responsive anemia health states along with their cause and 
 anemia-afflicated sequelae IDs are included in the table below.
+
+.. _`iron responsive anemia causes table`:
 
 .. list-table:: Iron Responsive Anemia Causes 
 	:widths: 40 40 40
@@ -274,7 +276,10 @@ The modeling strategy detailed in this document aims to evaluate *all* iron
 responsive anemias rather than dietary iron deficiency anemia, specifically. 
 However, the modeling strategy can be modified to include only dietary iron 
 deficiency (PAF of 1 cause), if desired by assuming that dietary iron 
-deficiency anemia is the only iron responsive cause of anemia.
+deficiency anemia is the only iron responsive cause of anemia, rather than all 
+of the causes listed in the `iron responsive anemia causes table`_ and that the 
+dietary iron deficiency anemia sequelae are the only iron responsive anemia 
+sequelae in the `anemia sequelae IDs table`_.
 
 .. note:: 
 
@@ -325,6 +330,8 @@ distribution will **not** vary as the simulant ages.
 
 The ensemble distribution of population hemoglobin concentrations can be 
 recreated with the following equations and code: 
+
+.. _`population hemoglobin parameters table`:
 
 .. list-table:: Population Hemoglobin Parameters
 	:widths: 10, 5, 15
@@ -396,6 +403,8 @@ Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are
 equal to the severity-, age-, sex-, and location-specific prevalence (from COMO)
 summed across all iron responsive anemia and all total anemia sequela IDs, 
 respectively. Sequela IDs for each category are listed in the table below. 
+
+.. _`anemia sequelae IDs table`:
 
 .. list-table:: Sequela IDs 
 	:widths: 5, 30, 20
@@ -590,7 +599,7 @@ The overall prevalence and YLDs of anemia should be equal between:
 The prevalence of anemia using the population hemoglobin distribution can be 
 calculated using the code below using the parameters defined earlier in this 
 document and assuming age- and sex- specific *anemia_threshold* values as 
-defined in the table above_:
+defined in the `WHO hemoglobin tresholds table`_ and using the parameters defined in the `population hemoglobin parameters table`_:
 
 .. warning::
 
