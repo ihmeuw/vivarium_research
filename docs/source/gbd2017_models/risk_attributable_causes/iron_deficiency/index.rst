@@ -475,10 +475,10 @@ Where:
 	  - Defined in WHO treshold table
 	* - prevalence_{severity}_ira
 	  - Severity-specific prevalence of iron responsive anemia
-	  - Sum of iron responsive anemia sequelae
+	  - Sum of severity-specific iron responsive anemia sequelae
 	* - prevalence_total_{severity}_anemia
 	  - Severity-specific prevalence of all anemia
-	  - Sum of all anemia sequelae
+	  - Sum of all severity-specific anemia sequelae
 	* - prevalence_c_316
 	  - Prevalence of hemoglobinopathies and hemolytic anemias
 	  - COMO (NOT a most detailed cause)
