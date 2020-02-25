@@ -52,18 +52,26 @@ GBD Causes
 
 * :ref:`Diarrheal Diseases <2017_cause_diarrhea>`
 
-* :ref:`Neural Tube Defects <2017_cause_neural_tube_defects>`
-
 * :ref:`Lower Respiratory Infections <2017_cause_lower_respiratory_infections>`
 
-* :ref:`Neonatal Encephalopathy <2017_cause_neonatal_encephalopathy>`
+* :ref:`Neural Tube Defects <2017_cause_neural_tube_defects>`
 
-* :ref:`Neonatal Sepsis <2017_cause_neonatal_sepsis>`
+.. note::
 
-* :ref:`Neonatal Jaundice <2017_cause_neonatal_jaundice>`
-
-* :ref:`Other Neonatal Disorders <2017_cause_neonatal_other>`
-  (Probably omit this cause, as we don't seem to have enough data to model it)
+  Although the sub-causes of  :ref:`Neonatal Disorders
+  <2017_cause_neonatal_disorders>` account for the majority of disease burden in
+  the neonatal age groups, we are not explicitly modeling the neonatal causes in
+  this simulation. Instead, the relative risks from :ref:`Low Birth Weight and
+  Short Gestation <2017_risk_lbwsg>` will directly affect each simulant's
+  mortality rate, which indirectly accounts for mortality due to neonatal
+  disorders and other causes like meningitis. Since iron fortification affects
+  birth weight and hence the relative risk of mortality that a simulant
+  experiences, this approach allows us to count how many deaths can be averted
+  from an increased birth weight resulting from iron fortification. This
+  approach ignores morbidity from neonatal disorders, meningitis, and other
+  causes in the neonatal age groups, but YLDs for neonates are negligible
+  compared to YLLs (on the order of 100 times smaller), so ignoring YLDs due to
+  neonatal disorders and other causes is not a concern.
 
 GBD Risks
 +++++++++
