@@ -98,6 +98,9 @@ Stratify by **location, age, sex, and year**.
 Observers
 +++++++++
 
+Verification and Validation Strategy
+------------------------------------
+
 Design Decisions and Rationales
 -------------------------------
 
@@ -154,7 +157,3 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
-
-
-Verification and Validation Strategy
-------------------------------------
