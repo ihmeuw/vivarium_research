@@ -268,7 +268,13 @@ Model Scope
 The scope of the Vivarium modeling strategy detailed in this document is to 
 sample the hemoglobin concentration for an individual simulant (who is not a 
 woman of reproductive age) and evaluate if that simulant's hemoglobin 
-concentration will respond to iron supplementation.
+concentration will respond to iron supplementation (iron responsive). 
+
+The modeling strategy detailed in this document aims to evaluate *all* iron 
+responsive anemias rather than dietary iron deficiency anemia, specifically. 
+However, the modeling strategy can be modified to include only dietary iron 
+deficiency (PAF of 1 cause), if desired by assuming that dietary iron 
+deficiency anemia is the only iron responsive cause of anemia.
 
 .. note:: 
 
@@ -288,6 +294,10 @@ intialize these parameters are included in the following sections.
 
 Notably, the initialization of a simulant's hemoglobin concentration should 
 occur *before* the initialization of iron responsiveness.
+
+.. todo::
+
+	Confirm order in which initialization occurs with research team.
 
 Hemoglobin Concentration
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -425,22 +435,27 @@ non-iron responsive (0) according to the following rules:
 		else:
 			iron_responsive_i = 0
 	else:
-		iron_responsive_i = 1
+		if random_number_i <= ((1 - prevalence_total_overall_anemia 
+					    - (prevalence_c_613 
+					       + prevalence_c_298 
+					       + prevalence_c_345 
+					       - (prevalence_total_overall_anemia
+					          - prevalence_overall_ira)) 
+					  / (1 - prevalence_total_overall_anemia)):
+			iron_responsive_i = 1
+		else:
+			iron_responsive_i = 0
 
 	# NOTE: use <, not =< for anemia thresholds 
 
 .. todo::
 
-	Confirm how to handle final "else" statement with research team. Relevant 
-	non-responsive causes include hemoglobinopathies/hemolytic anemias, HIV/
-	AIDS, malaria.
-
-	Potential approach: [1 - sum_all_anemia_sequelae_prevalence - (sum_hemoglobinopathies_hiv_malaria_cause_prevalence - non_iron_responsive_anemia_sequelae_prevalence)] / (1 - sum_all_anemia_sequela_prevalence)
+	Confirm how to handle final "else" statement with research team. 
 
 Where:
 
 .. list-table:: Parameters
-	:widths: 15, 30, 10
+	:widths: 15, 20, 20
 	:header-rows: 1
 
 	* - Parameter
@@ -464,6 +479,15 @@ Where:
 	* - prevalence_total_{severity}_anemia
 	  - Severity-specific prevalence of all anemia
 	  - Sum of all anemia sequelae
+	* - prevalence_c_316
+	  - Prevalence of hemoglobinopathies and hemolytic anemias
+	  - COMO (NOT a most detailed cause)
+	* - prevalence_c_298
+	  - Prevalence of HIV/AIDs
+	  - COMO (NOT a most detailed cause)
+	* - prevalence_c_345
+	  - Prevalence of malaria
+	  - COMO (most detailed cause)
 
 Then, effect sizes for iron supplementation or fortification interventions as 
 shifts in mean hemoglobin concentrations should be applied only to those who 
