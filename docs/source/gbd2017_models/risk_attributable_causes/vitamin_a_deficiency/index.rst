@@ -66,10 +66,10 @@ Restrictions
      -
    * - YLD age group start
      - Early Neonatal
-     - (0, 6 days], age_group_id = 2
+     - [0, 7 days), age_group_id = 2
    * - YLD age group end
      - 95 Plus
-     - (95, 125], age_group_id = 235
+     - [95, 125 years), age_group_id = 235
 
 
 Vitamin A Deficiency Risk Factor
@@ -124,16 +124,16 @@ Restrictions
      -
    * - YLL age group start
      - Post Neonatal
-     - (28, 364 days], age_group_id = 4
+     - [28, 365 days), age_group_id = 4
    * - YLL age group end
      - 1-4 years
-     - (1, 4 years], age_group_id = 5
+     - [1, 5 years), age_group_id = 5
    * - YLD age group start
      - Early Neonatal
-     - (0, 6 days], age_group_id = 2
+     - [0, 7 days), age_group_id = 2
    * - YLD age group end
      - 95 Plus
-     - (95, 125], age_group_id = 235
+     - [95, 125 years), age_group_id = 235
 
 
 Relative Risks
