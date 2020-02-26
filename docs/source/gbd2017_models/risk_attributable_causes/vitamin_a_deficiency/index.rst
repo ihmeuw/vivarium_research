@@ -26,10 +26,45 @@ YLD-only cause, meaning that it contributes to morbidity, but not mortality.
 
 Modeling Strategy for the Vitamin A Deficiency Cause
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. todo::
 
-	Describe cause in detail
+Cause Hierarchy
+^^^^^^^^^^^^^^^
 
+.. image:: vitA_cause_hierarchy.svg
+
+Health States and Sequela
+^^^^^^^^^^^^^^^^^^^^^^^^^
+The sequela associated with the Vitamin A deficiency cause in GBD 2017 
+include moderate vision impairment loss due to Vitamin A deficiency, 
+severe vision impairment loss due to Vitamin A deficiency, blindness due to Vitamin A deficiency, 
+asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild anemia, Vitamin A deficiency with moderate anemia,
+Vitamin A deficiency with severe anemia. 
+
+.. list-table:: GBD 2017 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - True
+     -
+   * - YLD age group start
+     - Early Neonatal
+     - (0, 6 days], age_group_id = 2
+   * - YLD age group end
+     - 95 Plus
+     - (95, 125], age_group_id = 235
 
 Vitamin A Deficiency Risk Factor
 +++++++++++++++++++++++++++
@@ -59,6 +94,43 @@ Relative Risks
 
 The affected causes with the Vitamin A deficiency cause in GBD 2017 
 include Lower respiratory infections, diarrhoeal diseases, measles. 
+
+Risk Factor Hierarchy
+^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: vitA_risk_hierarchy.svg
+
+.. list-table:: GBD 2017 Risk factor Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Post Neonatal
+     - (28, 364 days], age_group_id = 4
+   * - YLL age group end
+     - 1-4 years
+     - (1, 4 years], age_group_id = 5
+   * - YLD age group start
+     - Early Neonatal
+     - (0, 6 days], age_group_id = 2
+   * - YLD age group end
+     - 95 Plus
+     - (95, 125], age_group_id = 235
 
 References
 ----------
