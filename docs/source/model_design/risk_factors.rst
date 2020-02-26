@@ -96,7 +96,7 @@ While these criteria are a useful guide for assessing whether there is
 sufficient evidence to conclude that a relationship is causal, there are several
 concepts that should be considered when thinking about causality between an 
 exposure and an outcome. Relationships that complicate our understanding of 
-causaility, including confounding, intermediates, effect modification, and 
+causality, including confounding, intermediates, effect modification, and 
 mediation are discussed in the following subsections.
 
 Notably, in the following sections, solid arrows are used to depict causal 
