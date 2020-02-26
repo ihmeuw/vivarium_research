@@ -1,4 +1,4 @@
-.. _2017 cause iron deficiency:
+.. _2017_cause_iron_deficiency:
 
 ================================================
 Dietary Iron Deficiency (Iron Deficiency Anemia)
