@@ -54,19 +54,23 @@ has changed and all else has remained exactly the same.
   smoking and lung cancer. Hypothetically, we could compare lung cancer rates 
   between 1954 when smoking was at its peak in the US and 2020 when smoking 
   rates in the US are lower. However, you can quickly imagine additional 
-  differences between 1954 and 1990 US that may also impact the rates of lung 
+  differences between 1954 and 2020 US that may also impact the rates of lung 
   cancer, such as differences in air pollution due to automobiles and the rise 
   of electronic cigarettes. 
 
   Therefore, while the comparison between 1954 and 2020 US may be interesting 
   and useful, it is not a true counterfactual comparison. Instead, a 
   counterfactual scenario could be conceptualized as "what would the lung 
-  cancer rate in the US be in 1954 *if no one smoked* and all else was equal?" 
+  cancer rate in the US be in 1954 *if no one smoked* and **all else was equal**?" 
+  Then, we could evaluate the independent effect of smoking on lung cancer
+  without interference from any other factors.
 
-By definition, the counterfactual is impossible to directly evaluate, which is 
-the core challenge in causal inference. However, there are several strategies 
-that can be used to attempt to answer the counterfactual question and perform 
-causal inference.
+However, by definition, the counterfactual scenario is impossible to directly 
+evaluate, which is the core challenge in causal inference. Luckily, there are 
+several strategies that can be used to attempt to indirectly answer the 
+counterfactual question and perform causal inference. Some examples include
+randomized control trials and adjustment for confounding variables in 
+epidemiology studies.
 
 One way in which causal inference is performed for a particular relationship 
 between an exposure and outcome is assessment based on the Bradford Hill 
