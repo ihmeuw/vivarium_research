@@ -128,7 +128,7 @@ The aspects of the disease this cause model is designed to simulate is the basic
 Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence.
+In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. This structure means there's no impact of SBP on CKD.
 
 Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -245,12 +245,12 @@ State and Transition Data Tables
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
    * - Sev
      - excess mortality rate (EMR) of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_severe.sub_causes.c589}}`
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_sev.sub_causes.c589 + prevalence_sequelae_mod.sub_causes.c589}}`
      - 
    * - M
      - excess mortality rate (EMR) of moderate CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_mod.sub_causes.c589}}`
-     - EMR for moderate CKD is 0, given the assumption that moderate CKD is non-fatal only.
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_sev.sub_causes.c589 + prevalence_sequelae_mod.sub_causes.c589}}`
+     - 
    * - M
      - disability weight
      - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
