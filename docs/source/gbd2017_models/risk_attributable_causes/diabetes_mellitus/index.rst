@@ -81,11 +81,9 @@ This cause model is designed to simulate the basic structure of the risk factor 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-1. We are using remission data from dismod, modelable_entity_id_2005 for overall DM. 
+1. In vivarium, 'uncomplicated DM Type 1 and Type 2' is 'Moderate', which is different from how GBD 2017 is modelling it. In the future, severity splits will be revisited using disability weights. 
 
-2. In vivarium, 'uncomplicated DM Type 1 and Type 2' is 'Moderate', which is different from how GBD 2017 is modelling it. In the future, severity splits will be revisited using disability weights. 
-
-3. DM is non-fatal only. CSMR is only applicable to Severe DM.
+3. EMR is greater than zero for severe diabetes only.
 
 4. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
 
@@ -186,30 +184,6 @@ State and Transition Data Tables
      - :math:`\frac{\text{deaths_c587}}{\text{population}}`
      - 
 
-.. list-table:: Transition Data
-   :widths: 10 10 10 10 10
-   :header-rows: 1
-
-   * - Transition
-     - Source State
-     - Sink State
-     - Value
-     - Notes
-   * - 1
-     - S
-     - C
-     - incidence_c587
-     -
-   * - 2
-     - C
-     - M
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}} \times\ \text{incidence_c587}}{\text{prevalence_c587}}`
-     - = (prevalence of moderate sequelae * incidence of DM)/ prevalence of DM
-   * - 3
-     - C
-     - Sev
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}} \times\ \text{incidence_c587}}{\text{prevalence_c587}}`
-     - = (prevalence of severe sequelae * incidence of DM)/ prevalence of DM
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -243,9 +217,6 @@ State and Transition Data Tables
      - como
      - Incidence of overall diabetes mellitus
      -  
-   * - remission_modelable_entity_id_2005
-     - dismod
-     - Remission of overall diabetes mellitus
 
 Validation Criteria
 -------------------
@@ -271,8 +242,7 @@ Logic
 
 * By location-/age-/sex-
 
-1. Sum of incidence of sequela of Diabetes Mellitus sub_causes = incidence of Diabetes Mellitus
-2. Sum of prevalence of sequela of Diabetes Mellitus sub_causes = prevalence of Diabetes Mellitus
+1. Sum of prevalence of sequela of Diabetes Mellitus sub_causes = prevalence of Diabetes Mellitus
 
 
 References
