@@ -166,7 +166,7 @@ Mapping CKD States to IKF Categories in Vivarium
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-In the vivarium model, a limitation is that there will be no incidence or transition between states. This means the vivarium model is omitting incidence and remission rates, which is different than GBD 2017.
+Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. If we had remission (which is actually the term used for "progression") rates, we could use these as inter-stage incidence rates.
 
 Cause Model Diagram
 -------------------
