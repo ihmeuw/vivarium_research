@@ -245,11 +245,11 @@ State and Transition Data Tables
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
    * - Sev
      - excess mortality rate (EMR) of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_severe.sub_causes.c589}}`
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_sev.sub_causes.c589 + prevalence_sequelae_mod.sub_causes.c589}}`
      - 
    * - M
      - excess mortality rate (EMR) of moderate CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_mod.sub_causes.c589}}`
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_sev.sub_causes.c589 + prevalence_sequelae_mod.sub_causes.c589}}`
      - 
    * - M
      - disability weight
