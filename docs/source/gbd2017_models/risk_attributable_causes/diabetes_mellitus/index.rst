@@ -71,12 +71,12 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of diabetes. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' diabetes state. Across the 2 diabetes sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' diabetes state.  The 'uncomplicated' sequelae for diabetes mellitus type 1 & type 2 are included in the 'Moderate' diabetes state, which are designated as non-fatal only and include only YLDs. The sequelae which map to 'Severe' diabetes state include all other sequelae. These sequelae are fatal and include YLLs and YLDs. The assocaited sequelae in each state can be found below in the 'State Severity Split Definitions' table.
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. This cause model is designed differently, where simulants are selected and categorized as either 'moderate' or 'severe' diabetes state. Across the 2 diabetes sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' diabetes state.  The 'uncomplicated' sequelae for diabetes mellitus type 1 & type 2 are included in the 'Moderate' diabetes state, which are designated as non-fatal only and include only YLDs. The sequelae which map to 'Severe' diabetes state include all other sequelae. These sequelae are fatal and include YLLs and YLDs. The associated sequelae in each state can be found below in the 'State Severity Split Definitions' table.
 
 Vivarium Modeling Strategy for Risk Factor FPG
 ++++++++++++++++++++++++++++++++++++++++++++++
 
-This cause model is designed to simulate the basic structure of the risk factor (FPG) continuous exposure ensemble distribution model. The FPG distribution will range, starting at the theoretical minimum-risk exposure level (TMREL) of 4.5-5.4 mmol/L to the maximum FPG value for each location/sex/age group. For simulants that are in 'Susceptible' state in the vivarium model, the model will randomly draw a value of FPG that is equal to or less than the TMREL and less than  7.0 mmol/L (case definition for 'With Condition' of overall diabetes mellitus). For simulants that are 'With condition' of Diabetes, the model will randomly draw a value of FPG that is equal to or greater than 7.0 mmol/L.
+This cause model is designed to simulate the basic structure of the risk factor (FPG) continuous exposure ensemble distribution model. The FPG distribution will range, starting at the theoretical minimum-risk exposure level (TMREL) of 4.5-5.4 mmol/L to the maximum FPG value for each location/sex/age group. For simulants that are in 'Susceptible' state in the vivarium model, the model will randomly draw a value of FPG that is equal to or less than the TMREL and less than  7.0 mmol/L (case definition for 'With Condition' of overall diabetes mellitus). For simulants that are included in the 'Moderate' or 'Severe' diabetes states, the model will randomly draw a value of FPG that is equal to or greater than 7.0 mmol/L.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -86,6 +86,8 @@ Assumptions and Limitations
 3. EMR is greater than zero for severe diabetes only.
 
 4. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
+
+5. There are no incidence or transitions between states in this model. In the future, transition between states will be revisited using incidence of diabetes mellitus and remission.
 
 Cause Model Diagram
 -------------------
@@ -109,9 +111,6 @@ State and Transition Data Tables
    * - S
      - **S**\ usceptible
      - Susceptible to Diabetes Mellitus
-   * - C
-     - With **C**\ ondition of Diabetes Mellitus
-     - Transient with condition
    * - M
      - **M**\ oderate
      - Simulant is with condition of Uncomplicated Diabetes Mellitus, based on 'uncomplicated' sequelae of Diabetes Mellitus Type 1 and Type 2
@@ -129,9 +128,6 @@ State and Transition Data Tables
    * - S
      - **S**\ usceptible
      - Susceptible to Diabetes Mellitus
-   * - C
-     - With **C**\ ondition of Diabetes Mellitus
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c587}}}`
    * - M
      - **M**\ oderate
      - sequelae_mod = [s_5441, s_5465]
@@ -213,10 +209,6 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
-   * - incidence_c587
-     - como
-     - Incidence of overall diabetes mellitus
-     -  
 
 Validation Criteria
 -------------------
