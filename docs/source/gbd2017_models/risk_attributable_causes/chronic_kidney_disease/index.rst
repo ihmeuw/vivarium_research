@@ -128,7 +128,7 @@ The aspects of the disease this cause model is designed to simulate is the basic
 Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence.
+In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. This structure means there's no impact of SBP on CKD.
 
 Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
