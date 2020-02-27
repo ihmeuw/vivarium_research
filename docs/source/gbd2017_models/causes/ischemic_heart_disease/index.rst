@@ -140,16 +140,16 @@ restrictions on the ages and sexes to which the cause applies.
      - False
      -
    * - YLL age group start
-     - 15 to 19
+     - 15
      - [15, 20), age_group_id=8
    * - YLL age group end
-     - 95 Plus
+     - 125
      - [95, 125 years), age_group_id=235
    * - YLD age group start
-     - 15 to 19
+     - 15
      - [15, 20), age_group_id=8
    * - YLD age group end
-     - 95 plus
+     - 125
      - [95, 125 years), age_group_id=235
 
 Vivarium Modeling Strategy
@@ -239,11 +239,11 @@ State and Transition Data Tables
      -
    * - P
      - disability weight
-     - :math:`\displaystyle{\sum_{s=380}^{385}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s \in post-mi-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      -
    * - A
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \{378,379\}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      -
    * - S
      - disability weight
@@ -251,11 +251,11 @@ State and Transition Data Tables
      -
    * - P
      - prevalence
-     - prevalence_c493
+     - :math:`\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
      -
    * - A
      - prevalence
-     - 0
+     - :math:`\sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
      -
    * - S
      - prevalence
@@ -327,6 +327,14 @@ State and Transition Data Tables
    * - emr_m1814
      - dismod-mr
      - excess-mortality rate of MI due to ischemic heart disease
+     -
+   * - acute-sequelae
+     - model assumption
+     - {s378, s379}
+     -
+   * - post-mi-sequelae
+     - model assumption
+     - {s380, s381, s382, s383, s384, s385, s953, s1040, s5726}
      -
 
 Validation Criteria

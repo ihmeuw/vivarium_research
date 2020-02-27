@@ -32,6 +32,7 @@ Modeling Strategy for the Vitamin A Deficiency Cause
 
 Cause Hierarchy
 ^^^^^^^^^^^^^^^
+
 .. image:: vitA_cause_hierarchy.svg
 
 Health States and Sequela
@@ -41,6 +42,7 @@ include moderate vision impairment loss due to Vitamin A deficiency,
 severe vision impairment loss due to Vitamin A deficiency, blindness due to Vitamin A deficiency, 
 asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild anemia, Vitamin A deficiency with moderate anemia,
 Vitamin A deficiency with severe anemia.
+
 
 Restrictions
 ^^^^^^^^^^^^
