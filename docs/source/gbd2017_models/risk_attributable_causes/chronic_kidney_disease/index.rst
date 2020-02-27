@@ -250,7 +250,7 @@ State and Transition Data Tables
    * - M
      - excess mortality rate (EMR) of moderate CKD
      - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_mod.sub_causes.c589}}`
-     - EMR for moderate CKD is 0, given the assumption that moderate CKD is non-fatal only.
+     - 
    * - M
      - disability weight
      - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
