@@ -51,5 +51,12 @@ Theoretical Minimum Risk Exposure Level/Distribution (TMREL/D)
 Relative Risk (RR)
 ++++++++++++++++++
 
+A relative risk is a measure of effect. Measures of effect are used to compare the frequency of outcome between specified populations. When one population group is exposed to a risk factor and the other is not, measures of effect can be used to study associations between frequency of disease and the risk factor. They reflect the increase in frequency of disease in one population in comparison with another. Frequency measures (e.g. risks, rates) can be compared by estimating their *differences* or *ratios*. 
+
+Ratio measures estimate how many times more common a disease is in one population compared with another; they provide a measure of the 
+*magnitude* of the effect of a risk factor on incidence of disease. The effect of the risk factor can be also be measured on cause-specific mortality, or all cause-mortality. 
+
+It is possible to compare any type of measure of frequency (e.g. risks, rates) between two populations. For example, the rate ratio (RR) compares the rate of disease between two groups. Similarly, the risk ratio and the odds ratio (OR) compare risks and odds between two groups respectively. For rare diseases, risks and rates tend to be numerically similar, so rate ratios and risk ratios tend also to be numerically very similar. The term ‘relative risk’ is often used to mean either the rate ratio or risk ratio (or sometimes even the odds ratio). However, it is always better to be specific about which ratio measure you are using, to avoid confusion.
+
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
