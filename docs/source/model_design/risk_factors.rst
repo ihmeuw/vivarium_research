@@ -79,16 +79,24 @@ that may be used in evaluating the epidemiologic evidence of a causal
 relationship such that the more criteria that are satisfied, the more likely 
 it is that a causal relationship exists. The criteria are listed below:
 
-  - **Strength/Effect Size:** The larger the association, the more likely that it is causal
-  - **Consistency/Reproducibility:** Consistent findings observed by different people in different places increase the likelihood of causality
-  - **Specificity:** The more specific the association between a cause and an effect, the more likely that it is causal
-  - **Temporality:** The effect **must** occur *after* the cause
-  - **Biological Gradient/Dose-Response Relationship:** Greater exposure should generally lead to greater observed effect
-  - **Plausibility:** A plausible mechanism between cause and effect is helpful (although limited by current knowledge)
-  - **Coherence:** Coherence between epidemiological and laboratory findings increases the likelihood of a causality
-  - **Experiment:** Experimental evidence between the cause and effect generally supports a causal relationship
-  - **Analogy:** Analogies or similarities between the observed associations and other associations exist generally support a causal relationship
-  - **Reversibility:** If the cause is deleted, the effect should also disappear
+  - **Strength/Effect Size:** The larger the association, the more likely 
+    that it is causal.
+  - **Consistency/Reproducibility:** Consistent findings observed by different 
+    people in different places increase the likelihood of causality.
+  - **Specificity:** The more specific the association between a cause and an 
+    effect, the more likely that it is causal.
+  - **Temporality:** The effect **must** occur *after* the cause.
+  - **Biological Gradient/Dose-Response Relationship:** Greater exposure should 
+    generally lead to greater observed effect.
+  - **Plausibility:** A plausible mechanism between cause and effect is helpful 
+    (although limited by current knowledge).
+  - **Coherence:** Coherence between epidemiological and laboratory findings 
+    increases the likelihood of a causality.
+  - **Experiment:** Experimental evidence between the cause and effect generally 
+    supports a causal relationship.
+  - **Analogy:** Analogies or similarities between the observed associations and 
+    other associations exist generally support a causal relationship.
+  - **Reversibility:** If the cause is deleted, the effect should also disappear.
 
 A particularly relevant criterion listed above is **temporality**, which 
 declares that in order for a relationship to be causal, the cause or exposure 
