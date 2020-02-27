@@ -123,12 +123,12 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. These sequelae are fatal and include YLLs and YLDs. All other sequelae are included in the 'Moderate' CKD, which are designated as non-fatal only and include only YLDs. The associated sequelae in each state can be found below in the 'State Severity Split Definitions' table.
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease progression of CKD, as this model does not contain transitions between CKD states/stages. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. All other sequelae are included in the 'Moderate' CKD. The associated sequelae in each state can be found below in the 'State Severity Split Definitions' table.
 
 Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In this model, simulants are initialized as "susceptible" or "with condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence.
+In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence.
 
 Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,6 +142,11 @@ Mapping CKD States to IKF Categories in Vivarium
      - IKF Risk Exposure Category
      - Sequelae Group Id
      - Notes
+   * - **M**\ oderate CKD
+     - albuminuria (stage I and II) sequelae
+     - cat4
+     - [s_5540, s_5543, s_5549, s_5546, s_5552]
+     - All Albuminuria sequelae values due to CKD sub_causes 
    * - **M**\ oderate CKD
      - stage III sequelae
      - cat3
@@ -161,10 +166,7 @@ Mapping CKD States to IKF Categories in Vivarium
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-* EMR = 0 for all states, except for Stage V.
-
-* Stage V is the only Stage which is fatal, where there will be YLLs and Deaths.
-
+In the vivarium model, a limitation is that there will be no incidence or transition between states. This means the vivarium model is omitting incidence and remission rates, which is different than GBD 2017.
 
 Cause Model Diagram
 -------------------
@@ -243,11 +245,11 @@ State and Transition Data Tables
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
    * - Sev
      - excess mortality rate (EMR) of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_severe_ckd}}`
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_severe.sub_causes.c589}}`
      - 
    * - M
      - excess mortality rate (EMR) of moderate CKD
-     - 0
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_mod.sub_causes.c589}}`
      - EMR for moderate CKD is 0, given the assumption that moderate CKD is non-fatal only.
    * - M
      - disability weight
@@ -262,40 +264,6 @@ State and Transition Data Tables
      - :math:`\frac{\text{deaths_c589}}{\text{population}}`
      -
 
-.. list-table:: Transition Data
-   :widths: 10 10 10 10 10
-   :header-rows: 1
-
-   * - Transition
-     - Source State
-     - Sink State
-     - Value
-     - Notes
-   * - 1
-     - S
-     - C
-     - incidence_c589
-     -
-   * - 2
-     - C
-     - M
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}} \times\ \text{incidence_c589}}{\text{prevalence_c589}}`
-     - = (prevalence of sequelae moderate * incidence of CKD) / prevalence of CKD
-   * - 3
-     - C
-     - Sev
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}} \times\ \text{incidence_c589}}{\text{prevalence_c589}}`
-     - = (prevalence of sequelae severe * incidence of CKD) / prevalence of CKD
-   * - 4
-     - Alb.
-     - III
-     - 'remission' (progression) from Albuminuria to stage III CKD stage
-     - see: auxilliary remission ratio calculation R script
-   * - 5
-     - III
-     - IV
-     - 'remission' (progression) from stage III CKD to stage IV CKD
-     - see: auxilliary remission ratio calculation R script
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -329,10 +297,6 @@ State and Transition Data Tables
      - como
      - Incidence of chronic kidney disease
      -   
-   * - remission
-     - dismod
-     - see auxilliary remission ration calculation script
-     - 
         
 Validation Criteria
 -------------------
