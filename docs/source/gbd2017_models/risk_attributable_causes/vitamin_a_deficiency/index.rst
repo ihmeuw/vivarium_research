@@ -33,6 +33,17 @@ Modeling Strategy for the Vitamin A Deficiency Cause
 Cause Hierarchy
 ^^^^^^^^^^^^^^^
 
+.. image:: vitA_cause_hierarchy.svg
+
+Health States and Sequela
+^^^^^^^^^^^^^^^^^^^^^^^^^
+The sequela associated with the Vitamin A deficiency cause in GBD 2017 
+include moderate vision impairment loss due to Vitamin A deficiency, 
+severe vision impairment loss due to Vitamin A deficiency, blindness due to Vitamin A deficiency, 
+asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild anemia, Vitamin A deficiency with moderate anemia,
+Vitamin A deficiency with severe anemia.
+
+
 Restrictions
 ^^^^^^^^^^^^
 
@@ -56,11 +67,11 @@ Restrictions
      - True
      -
    * - YLD age group start
-     -
-     -
+     - Early Neonatal
+     - [0, 7 days), age_group_id = 2
    * - YLD age group end
-     -
-     -
+     - 95 Plus
+     - [95, 125 years), age_group_id = 235
 
 
 Vitamin A Deficiency Risk Factor
@@ -86,8 +97,10 @@ Below is a list of measures and corresponding IDs:
 	  - gbd_id = reiid(96)
 	  - como, use get_measure
 
-Risk Hierarchy
-^^^^^^^^^^^^^^
+Risk Factor Hierarchy
+^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: vitA_risk_hierarchy.svg
 
 Restrictions
 ^^^^^^^^^^^^
@@ -112,17 +125,17 @@ Restrictions
      -
      -
    * - YLL age group start
-     -
-     -
+     - Post Neonatal
+     - [28, 365 days), age_group_id = 4
    * - YLL age group end
-     -
-     -
+     - 1-4 years
+     - [1, 5 years), age_group_id = 5
    * - YLD age group start
-     -
-     -
+     - Early Neonatal
+     - [0, 7 days), age_group_id = 2
    * - YLD age group end
-     -
-     -
+     - 95 Plus
+     - [95, 125 years), age_group_id = 235
 
 
 Relative Risks
