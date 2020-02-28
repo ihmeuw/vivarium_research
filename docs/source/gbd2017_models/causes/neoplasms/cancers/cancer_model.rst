@@ -40,15 +40,22 @@ Cancers in GBD 2017
 +++++++++++++++++++
 
 GBD 2017 uses similar modeling strategies to estimate the prevalence and
-resulting disability and mortality of these categories of cancers [GBD-2017-YLD-Capstone-Appendix-1-Neoplasms]_.
+resulting disability of these categories of cancers [GBD-2017-YLD-Capstone-Appendix-1-Neoplasms]_.
 
-Prevalence for all these cancers are estimated for a maximum of ten years. To estimate the disability, total prevalence for each cancer is split into
+Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
+
+Prevalence for all these cancers are estimated for a maximum of ten years. To estimate the disability, total prevalence 
+for each cancer is split into
+
 1. Diagnosis and primary therapy
 2. Controlled phase
 3. Metastatic phase
 4. Terminal phase
 
-Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
+.. todo::
+
+   Add more details about cancer modelingin GBD 2017.
+
 
 Cause Hierarchy
 ++++++++++++++++
@@ -56,7 +63,6 @@ Cause Hierarchy
 .. todo::
 
    Add hierarchy diagram.
-
 
 Restrictions
 ++++++++++++
@@ -85,10 +91,10 @@ Assumptions and Limitations
 
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
-According to GBD 2017, cancer cases are considered cured if the patient survives more than 10 years. But, there is no data available for remission rate 
-which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
+Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. 
+So, due to data limitations we are simplifying the model.
  
 Note: This simpliflication might over estimate the number of deaths. 
 
@@ -96,7 +102,7 @@ Note: This simpliflication might over estimate the number of deaths.
 
 
 State and Transition Data Tables
---------------------------------
+++++++++++++++++++++++++++++++++
 
 
 .. todo::
@@ -105,14 +111,14 @@ State and Transition Data Tables
 
 
 Model Assumptions and Limitations
----------------------------------
++++++++++++++++++++++++++++++++++
 
 .. todo::
 
    Add model assumptions and limitations.
 
 Validation Criteria
--------------------
++++++++++++++++++++
 
 .. todo::
 
