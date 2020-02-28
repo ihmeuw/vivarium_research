@@ -60,9 +60,8 @@ for each cancer is split into
 Cause Hierarchy
 ++++++++++++++++
 
-.. todo::
+.. image:: cancers_hierarchy.svg
 
-   Add hierarchy diagram.
 
 Restrictions
 ++++++++++++
