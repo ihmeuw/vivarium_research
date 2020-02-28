@@ -60,8 +60,7 @@ Model Assumptions and Limitations
 Cause Model Diagram
 -------------------
 
-According to GBD 2017, cancer cases are considered cured if the patient survives more than 10 years. But, there is no data available for remission rate 
-which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
+Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
  
 Note: This simpliflication might over estimate the number of deaths. 
 
