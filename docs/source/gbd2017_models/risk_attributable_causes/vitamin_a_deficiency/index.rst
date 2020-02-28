@@ -81,7 +81,7 @@ The Vitamin A deficiency risk factor in GBD 2017 is a **dichotomous variable** .
 Below is a list of measures and corresponding IDs:
 
 .. list-table:: Measures
-	:widths: 40 40 40
+	:widths: 20 45 40
 	:header-rows: 1
 
 	* - Measure
@@ -147,6 +147,35 @@ The affected causes with the Vitamin A deficiency cause in GBD 2017 include
 <2017_cause_measles>`. The relative risks for these causes appear in Table 4 on
 p. 112 of [GBD-2017-Risk-Appendix-VAD]_.
 
+.. list-table:: Pooled relative risks for risk-outcome pairs included in GBD 2017
+	:widths: 15 13 15 15
+	:header-rows: 1
+
+	* - Cause
+	  - GBD 2016 RR
+	  - GBD 2017 RR
+	  - Include in GBD 2017
+	* - Diarrhea
+	  - 1.6 (1.21 - 2.02)
+	  - 2.35 (2.17 - 2.54)
+	  - Yes
+	* - Measles
+	  - 2.4 (1.61 - 3.48)
+	  - 2.76 (2.01 - 3.78)
+	  - Yes
+	* - Lower Respiratory Infections (LRI)
+	  - 
+	  - 1.23 (1.03 - 1.48)
+	  - Yes
+	* - Meningitis
+	  - 
+	  - 3.2 (0.69 - 14.75)
+	  - No (not significant)
+	* - Malaria
+	  - 
+	  - 3.65 (2.23 - 5.97)
+	  - No (only one study)
+	  
 Vivarium Modeling Strategy
 --------------------------
 
