@@ -666,6 +666,29 @@ Severity Splits
 Mortality Impacts
 +++++++++++++++++
 
+All-Cause Mortality
+^^^^^^^^^^^^^^^^^^^
+
+All-cause mortality rate (ACMR) is a measure of total deaths (due to all 
+causes) per person-year in the overall age-, sex-, time-, and 
+location-specific population. 
+
+.. math::
+
+  \frac{\text{number of deaths due to all causes}}{\text{person-years in the overall population}}
+
+	For instance, the global ACMR for the early neonatal age group (0-6 days) 
+	in 2017 was approximately 70,000 deaths per 100,000 person-years (0.7 
+	deaths per person-year). However, the global ACMR for the post neonatal 
+	age group (1 month to 1 year) in 2017 was approximately 1,000 deaths per 
+	100,000 person-years (0.01 deaths per person-year). By comparing ACMRs 
+	between these age groups, we can see that individuals die at a higher rate 
+	during the early neonatal period than the post neonatal period. 
+
+Notably, ACMR is used both for validation of Vivarium simulation, as well as 
+for estimating simulation mortality rates (see the `Excess Mortality`_ section 
+for more detail).
+
 Cause-Specific Mortality
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
