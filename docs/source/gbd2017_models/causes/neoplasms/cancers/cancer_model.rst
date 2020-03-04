@@ -54,15 +54,70 @@ for each cancer is split into
 
 .. todo::
 
-   Add more details about cancer modelingin GBD 2017.
+   Add more details about cancer modeling in GBD 2017.
 
 
 Cause Hierarchy
 ++++++++++++++++
 
-.. todo::
+.. image:: cancers_hierarchy.svg
 
-   Add hierarchy diagram.
+
+The following table helps to identify cause id and associated sequelae ids for each cancer.
+
+.. list-table:: Ids of causes and associated  sequelae
+   :widths: 10, 5, 10 
+   :header-rows: 1
+   
+   * - Cancer
+     - Cause Id
+     - Sequelae Ids
+   * - Esophageal cancer 
+     - c_411
+     - s_244, s_245, s_246, s_247
+   * - Stomach cancer
+     - c_414
+     - s_248, s_249, s_250, s_251
+   * - Tracheal, bronchus and lung cancer 
+     - c_426
+     - s_273, s_274, s_275, s_280
+   * - Cervical cancer 
+     - c_432
+     - s_282, s_283, s_284, s_285
+   * - Uterine cancer 
+     - c_435
+     - s_286, s_287, s_288, s_289
+   * - Lip and oral cavity cancer 
+     - c_444
+     - s_301, s_302, s_303, s_304
+   * - Nasopharynx cancer 
+     - c_447
+     - s_305, s_306, s_307, s_308
+   * - Other pharynx cancer 
+     - c_450
+     - s_309, s_310, s_311, s_312
+   * - Gallbladder and biliary tract cancer 
+     - c_453
+     - s_313, s_314, s_315, s_316
+   * - Pancreatic cancer 
+     - c_456
+     - s_317, s_318, s_319, s_320
+   * - Ovarian cancer 
+     - c_465
+     - s_329, s_330, s_331, s_332
+   * - Kidney cancer 
+     - c_471
+     - s_337, s_338, s_339, s_340
+   * - Thyroid cancer 
+     - c_480
+     - s_350, s_351, s_352, s_353
+   * - Non-hodgkin lymphoma 
+     - c_485
+     - s_362, s_363, s_364, s_365
+   * - Multiple myeloma 
+     - c_486
+     - s_366, s_367, s_368, s_369
+
 
 Restrictions
 ++++++++++++
@@ -104,10 +159,11 @@ Note: This simpliflication might over estimate the number of deaths.
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-
 .. todo::
 
-   Add state and transitions  data tables.
+   Add state and transitions data tables
+
+
 
 
 Model Assumptions and Limitations
