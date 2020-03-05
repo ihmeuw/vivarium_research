@@ -151,7 +151,9 @@ The affected causes with the Vitamin A deficiency cause in GBD 2017 include
 :ref:`lower respiratory infections <2017_cause_lower_respiratory_infections>`,
 :ref:`diarrhoeal diseases <2017_cause_diarrhea>`, :ref:`measles
 <2017_cause_measles>`. The relative risks for these causes appear in Table 4 on
-p. 112 of [GBD-2017-Risk-Appendix-VAD]_.
+p. 112 of [GBD-2017-Risk-Appendix-VAD]_, copied here for reference:
+
+.. _gbd_2017_vad_relative_risk_table:
 
 .. list-table:: Pooled relative risks for risk-outcome pairs included in GBD 2017
   :widths: 15 13 15 15
@@ -163,15 +165,15 @@ p. 112 of [GBD-2017-Risk-Appendix-VAD]_.
     - Include in GBD 2017
   * - Diarrhea
     - 1.6 (1.21 - 2.02)
-    - 2.35 (2.17 - 2.54)
+    - **2.35 (2.17 - 2.54)**
     - Yes
   * - Measles
     - 2.4 (1.61 - 3.48)
-    - 2.76 (2.01 - 3.78)
+    - **2.76 (2.01 - 3.78)**
     - Yes
   * - Lower Respiratory Infections (LRI)
     -
-    - 1.23 (1.03 - 1.48)
+    - **1.23 (1.03 - 1.48)**
     - Yes
   * - Meningitis
     -
@@ -181,6 +183,9 @@ p. 112 of [GBD-2017-Risk-Appendix-VAD]_.
     -
     - 3.65 (2.23 - 5.97)
     - No (only one study)
+
+The above relative risks for GBD 2017 should be interpreted as rate ratios for
+the incidence rates of diarrhea, measles, and LRI.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -204,12 +209,28 @@ simulation, which may result in a change in the simulant's vitamin A status.
 
 In particular, our modeling strategy will **not** explicitly use incidence or
 remission data for vitamin A deficiency, but only *prevalence* (which is the
-same as the exposure data for the VAD risk factor).
+same as the exposure data for the VAD risk factor). The rationale for this approach is twofold:
+
+1.  We want to guarantee that the simulated baseline prevalence of vitamin A
+    deficiency matches the prevalence data from GBD, which is likely more
+    trustworthy than incidence and remission data.
+
+2.  Relative risks from the literature about the effects of vitamin A
+    supplementation or fortification on vitamin A status are best interpreted as
+    risk ratios for prevalence of vitamin A deficiency. The exposure model
+    provides a way to directly model these effect sizes in a way that preserves
+    this interpretation.
 
 .. todo::
 
-	Explain why this is a reasonable strategy, citing incidence, remission, and
-	prevalence data, as well as expert opinions about VAD.
+  Verify that effect sizes on VAD should actually be interpreted as described
+  above, and that the prevalence-only model is a good way to accurately
+  represent these numbers.
+
+  Explain why the prevalence-only model is a reasonable strategy, citing
+  incidence, remission, and prevalence data, as well as expert opinions about
+  VAD. (Perhaps this explanation should come later, e.g. in the Assumptions and
+  Limitations section.)
 
 Following is a more detailed description of how the exposure model for VAD
 should work.
@@ -217,19 +238,56 @@ should work.
 Determining Vitamin A Status
 ++++++++++++++++++++++++++++
 
-At each time step, Vivarium needs to determine whether each simulant has vitamin A deficiency. To do so, follow these steps:
+At each time step, Vivarium needs to determine whether each simulant has vitamin
+A deficiency. To do so, follow these steps:
 
-1.  **Initialize:** When simulant :math:`i` enters the simulation (e.g. at the start of the simulation or at the time step when the simulant is born), assign the simulant a random number :math:`v_i \sim \operatorname{Uniform}([0,1])`, which we call the **VAD propensity score** for simulant :math:`i`.
+1.  **Initialize:** When simulant :math:`i` enters the simulation (e.g. at the
+    start of the simulation or at the time step when the simulant is born),
+    assign the simulant a random number :math:`v_i \sim
+    \operatorname{Uniform}([0,1])`, which we call the **VAD propensity score**
+    for simulant :math:`i`.
 
 2.  **Update:** On each time step :math:`t`:
 
-    a)  If simulant :math:`i` survives, update any of simulant :math:`i`'s variables that determine which subpopulation the simulant belongs to. For example, they may move into the next age group, or they may begin receiving or stop receiving an intervention. Call this new subpopulation :math:`\text{subpop}(i,t)`.
+    a)  If simulant :math:`i` survives, update any of simulant :math:`i`'s
+        variables that determine which subpopulation the simulant belongs to.
+        For example, they may move into the next age group, or they may begin
+        receiving or stop receiving an intervention. Call this new subpopulation
+        :math:`\text{subpop}(i,t)`.
 
-    b)  Look up or compute the prevalence :math:`p_\text{VAD}(\text{subpop}(i,t))` of vitamin A deficiency for the simulant's updated subpopulation.
+    b)  Look up or compute the prevalence
+        :math:`p_\text{VAD}(\text{subpop}(i,t))` of vitamin A deficiency for the
+        simulant's updated subpopulation.
 
-    c)  If :math:`v_i < p_\text{VAD}(\text{subpop}(i,t))`, the simulant has vitamin A deficiency on the next time step; otherwise, they don't.
+    c)  If :math:`v_i < p_\text{VAD}(\text{subpop}(i,t))`, the simulant has
+        vitamin A deficiency on the next time step; otherwise, they don't.
 
-To address a point of potential confusion, note that in the above algorithm, a *lower* propensity score :math:`v_i` corresponds to a *higher* propensity for vitamin A deficiency. This is why we called :math:`v_i` the "propensity score" rather than just the "propensity." We could additionally define the **propensity** for VAD to be :math:`1-v_i`, but we don't actually need this number.
+To address a point of potential confusion in the above algorithm, note that a
+*lower* propensity score :math:`v_i` corresponds to a *higher* propensity for
+vitamin A deficiency. This is why we called :math:`v_i` the "propensity score"
+rather than just the "propensity." We could additionally define the
+**propensity** for VAD to be :math:`1-v_i`, but we don't actually need this
+number.
+
+Tracking Years Lived with Disability due to Vitamin A Deficiency
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+.. todo::
+
+  Describe how to calculate YLDs from vitamin A deficiency, using the average
+  disability weight over all sequelae.
+
+Risk Effects
+++++++++++++
+
+.. todo::
+
+  Describe how to apply the relative risks in :ref:`Risk Appendix Table 4
+  <gbd_2017_vad_relative_risk_table>` to affect the incidence rates of measles,
+  diarrhea, and LRI. To capture uncertainty, the RR's should be modeled with a
+  lognormal distribution whose geometric mean (same as median) matches the
+  central estimate and whose 2.5% and 97.5% percentiles match the upper and
+  lower confidence bounds.
 
 Scope
 +++++
@@ -237,8 +295,16 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Data Tables
+Cause Model Diagram
++++++++++++++++++++
+
+State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
+
+.. todo::
+
+  Create tables specifying exactly what data is needed for the model and where
+  to get it.
 
 Validation Criteria
 +++++++++++++++++++
