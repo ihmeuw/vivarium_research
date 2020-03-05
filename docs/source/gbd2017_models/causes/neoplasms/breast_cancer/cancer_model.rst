@@ -111,7 +111,7 @@ might over estimate deaths in that scenario.
 
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
 Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
  
@@ -121,7 +121,7 @@ Note: This simpliflication might over estimate the number of deaths. See Model A
 
 
 State and Transition Data Tables
---------------------------------
+++++++++++++++++++++++++++++++++
 
 .. list-table:: Definitions
    :widths: 15 20 30
@@ -228,7 +228,7 @@ State and Transition Data Tables
 
 
 Validation Criteria
--------------------
++++++++++++++++++++
 
 .. todo::
 
