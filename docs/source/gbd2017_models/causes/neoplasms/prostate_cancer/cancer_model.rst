@@ -70,18 +70,23 @@ Scope
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
+1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
+For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
+10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
+might over estimate deaths in that scenario.
+
 .. todo::
 
-   Add assumptions and limitations.
+   Add more assumptions and limitations.
 
 
 Cause Model Diagram
 -------------------
 
-Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states.
- So, due to data limitations we are simplifying the model.
- 
-Note: This simpliflication might over estimate the number of deaths. 
+Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
+
+Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information.
+
 
 .. image:: cancer_cause_model.svg
 
