@@ -18,16 +18,34 @@ GBD 2017 Modeling Strategy
 Prostate cancer in GBD 2017
 +++++++++++++++++++++++++++
 
+The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Prostate-Cancer]_.
+
+Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
+
+Because of long-term disability associated with prostatectomy, prevalence for prostate cancer is estimated beyond ten years. To estimate the disability, 
+total prevalence for prostate cancer is split into
+
+#. Diagnosis and primary therapy
+#. Controlled phase
+
+   #. Controlled phase of prostate cancer, with impotence
+   #. Controlled phase of prostate cancer, with incontinence
+   #. Controlled phase of prostate cancer, without impotence or incontinence
+#. Metastatic phase
+#. Terminal phase
+#. Impotence and Incontinence after 10-year survival from prostate cancer
+
+   #. Impotence from prostate cancer, beyond 10 years
+   #. Incontincence from prostate cancer, beyond 10 years
+
 .. todo::
 
-   Add GBD modelling strategy of Prostate cancer.
+   Add more details about GBD modelling strategy of Prostate cancer.
 
 Cause Hierarchy
 +++++++++++++++
 
-.. todo::
-
-   Add hierarchy diagram.
+.. image:: prostate_cancer_hierarchy.svg
 
 
 Restrictions
