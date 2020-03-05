@@ -420,7 +420,7 @@ An example of SI model with both prevalence and birth prevalence in the initiali
    * - I
      - disability weights
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_cid}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = average disability weight over all sequelae
+     - = total disability weight over all sequelae
    * - ALL
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_cid}}{\text{population}}`
