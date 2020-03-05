@@ -140,9 +140,14 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
+For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
+10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
+might over estimate deaths in that scenario.
+
 .. todo::
 
-   Add assumptions and limitations.
+   Add more assumptions and limitations.
 
 
 Cause Model Diagram
@@ -151,7 +156,7 @@ Cause Model Diagram
 Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. 
 So, due to data limitations we are simplifying the model.
  
-Note: This simpliflication might over estimate the number of deaths. 
+Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information.
 
 .. image:: cancer_cause_model.svg
 
@@ -159,9 +164,107 @@ Note: This simpliflication might over estimate the number of deaths.
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-.. todo::
+.. list-table:: Definitions
+   :widths: 15 20 30
+   :header-rows: 1
 
-   Add state and transitions data tables
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - Susceptible
+     - Susceptible to cancer
+   * - I
+     - Infected
+     - Infected with cancer
+
+
+.. list-table:: States Data
+   :widths: 20 25 30 30
+   :header-rows: 1
+   
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - 1-prevalence_c{cid}
+     - {cid} represents each cancer in the list of cancers modelled in this document 
+   * - S
+     - excess mortality rate
+     - 0
+     - 
+   * - S
+     - disabilty weights
+     - 0
+     -
+   * - I
+     - prevalence
+     - prevalence_c{cid}
+     - 
+   * - I
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c{cid}}}{\text{population} \times \text{prevalence_c{cid}}}`
+     - 
+   * - I
+     - disability weights
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c{cid}}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - average disability weight over all sequelae corresponding to the cancer
+   * - ALL
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c{cid}}}{\text{population}}`
+     - 
+
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+   
+   * - Transition
+     - Source 
+     - Sink 
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - :math:`\frac{\text{incidence_rate_c{cid}}}{\text{1 - prevalence_c{cid}}}`
+     - Incidence rate in total population is divided by 1-prevalence_c{cid} to get incidence rate among the recovered and susceptible population.
+
+
+.. list-table:: Data Sources
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - prevalence_c{cid}
+     - como
+     - Prevalence of cause {cancer}
+     - {cancer} represents each cancer in the list of cancers modelled in this document
+   * - deaths_c{cid}
+     - codcorrect
+     - Deaths from {cancer}
+     - 
+   * - population
+     - demography
+     - Mid-year population for given country
+     - 
+   * - incidence_rate_c{cid}
+     - como
+     - Incidence rate for {cancer}
+     - 
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weights associated with each sequelae
+     - 
+   * - prevalence_s{`sid`}
+     - como
+     - Prevalence of each sequelae
+     - 
 
 
 
