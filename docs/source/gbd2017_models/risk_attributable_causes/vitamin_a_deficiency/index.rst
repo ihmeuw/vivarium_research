@@ -7,15 +7,19 @@ Vitamin A Deficiency
 Disease Description
 -------------------
 
-Vitamin A deficiency (VAD) is a lack of vitamin A in blood and tissues.
-Vitamin A deficiency is considered as one of the most serious public health concerns in developing countries
-and can contribute directly or indirectly to disability.[1]
+Vitamin A deficiency (VAD) is a lack of vitamin A in blood and tissues. Vitamin
+A deficiency is considered as one of the most serious public health concerns in
+developing countries and can contribute directly or indirectly to disability.[1]
 
 GBD 2017 Modeling Strategy
 ------------------------------------
-In Global Burden of Disease (GBD) 2017, VAD exposure definition is proportion of the population with serum retinol concentration <0·7 μmol/L.
-Like iron deficiency, the cause VAD is also a population attributable fraction (PAF) of 1 cause with the VAD risk factor. That is, 100% of the VAD cases are attributable
-to the VAD risk factor. VAD Risk exposure and VAD cause prevalence data are the same.[2]
+
+In Global Burden of Disease (GBD) 2017, VAD exposure definition is proportion of
+the population with serum retinol concentration <0·7 μmol/L. Like iron
+deficiency, the cause VAD is also a population attributable fraction (PAF) of 1
+cause with the VAD risk factor. That is, 100% of the VAD cases are attributable
+to the VAD risk factor. VAD Risk exposure and VAD cause prevalence data are the
+same.[2]
 
 Vitamin A Deficiency Cause
 +++++++++++++++++++++++++++++
@@ -28,7 +32,7 @@ Modeling Strategy for the Vitamin A Deficiency Cause
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. todo::
 
-	Describe cause in detail
+  Describe cause in detail
 
 Cause Hierarchy
 ^^^^^^^^^^^^^^^
@@ -37,11 +41,13 @@ Cause Hierarchy
 
 Health States and Sequela
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-The sequela associated with the Vitamin A deficiency cause in GBD 2017
-include moderate vision impairment loss due to Vitamin A deficiency,
-severe vision impairment loss due to Vitamin A deficiency, blindness due to Vitamin A deficiency,
-asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild anemia, Vitamin A deficiency with moderate anemia,
-Vitamin A deficiency with severe anemia.
+
+The sequela associated with the Vitamin A deficiency cause in GBD 2017 include
+moderate vision impairment loss due to Vitamin A deficiency, severe vision
+impairment loss due to Vitamin A deficiency, blindness due to Vitamin A
+deficiency, asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild
+anemia, Vitamin A deficiency with moderate anemia, Vitamin A deficiency with
+severe anemia.
 
 
 Restrictions
@@ -81,21 +87,21 @@ The Vitamin A deficiency risk factor in GBD 2017 is a **dichotomous variable** .
 Below is a list of measures and corresponding IDs:
 
 .. list-table:: Measures
-	:widths: 20 45 40
-	:header-rows: 1
+  :widths: 20 45 40
+  :header-rows: 1
 
-	* - Measure
-	  - ID
-	  - Data source
-	* - Remission
-	  - gbd_id = 2510, measure_id = 7
-	  - epi, use get_model_results function
-	* - Incidence rate
-	  - gbd_id = cid(389)
-	  - como, use get_measure
-	* - Risk factor exposure
-	  - gbd_id = reiid(96)
-	  - como, use get_measure
+  * - Measure
+    - ID
+    - Data source
+  * - Remission
+    - gbd_id = 2510, measure_id = 7
+    - epi, use get_model_results function
+  * - Incidence rate
+    - gbd_id = cid(389)
+    - como, use get_measure
+  * - Risk factor exposure
+    - gbd_id = reiid(96)
+    - como, use get_measure
 
 Risk Factor Hierarchy
 ^^^^^^^^^^^^^^^^^^^^^
@@ -148,33 +154,33 @@ The affected causes with the Vitamin A deficiency cause in GBD 2017 include
 p. 112 of [GBD-2017-Risk-Appendix-VAD]_.
 
 .. list-table:: Pooled relative risks for risk-outcome pairs included in GBD 2017
-	:widths: 15 13 15 15
-	:header-rows: 1
+  :widths: 15 13 15 15
+  :header-rows: 1
 
-	* - Cause
-	  - GBD 2016 RR
-	  - GBD 2017 RR
-	  - Include in GBD 2017
-	* - Diarrhea
-	  - 1.6 (1.21 - 2.02)
-	  - 2.35 (2.17 - 2.54)
-	  - Yes
-	* - Measles
-	  - 2.4 (1.61 - 3.48)
-	  - 2.76 (2.01 - 3.78)
-	  - Yes
-	* - Lower Respiratory Infections (LRI)
-	  -
-	  - 1.23 (1.03 - 1.48)
-	  - Yes
-	* - Meningitis
-	  -
-	  - 3.2 (0.69 - 14.75)
-	  - No (not significant)
-	* - Malaria
-	  -
-	  - 3.65 (2.23 - 5.97)
-	  - No (only one study)
+  * - Cause
+    - GBD 2016 RR
+    - GBD 2017 RR
+    - Include in GBD 2017
+  * - Diarrhea
+    - 1.6 (1.21 - 2.02)
+    - 2.35 (2.17 - 2.54)
+    - Yes
+  * - Measles
+    - 2.4 (1.61 - 3.48)
+    - 2.76 (2.01 - 3.78)
+    - Yes
+  * - Lower Respiratory Infections (LRI)
+    -
+    - 1.23 (1.03 - 1.48)
+    - Yes
+  * - Meningitis
+    -
+    - 3.2 (0.69 - 14.75)
+    - No (not significant)
+  * - Malaria
+    -
+    - 3.65 (2.23 - 5.97)
+    - No (only one study)
 
 Vivarium Modeling Strategy
 --------------------------
@@ -203,7 +209,25 @@ same as the exposure data for the VAD risk factor).
 .. todo::
 
 	Explain why this is a reasonable strategy, citing incidence, remission, and
-	prevalence data, as well as external opinions about VAD.
+	prevalence data, as well as expert opinions about VAD.
+
+Following is a more detailed description of how the exposure model for VAD
+should work.
+
+Determining Vitamin A Status
+++++++++++++++++++++++++++++
+
+At each time step, Vivarium needs to determine whether each simulant has vitamin A deficiency. To do so, follow these steps:
+
+1.  When simulant :math:`i` enters the simulation (either at the start of the simulation or at the time step when the simulant is born), assign the simulant a random number :math:`v_i \sim \operatorname{Uniform}([0,1])`, which we call the **VAD propensity score**.
+
+2.  On each time step:
+
+    a)  If simulant :math:`i` survives, update any of simulant :math:`i`'s variables determining which subpopulation they belong to. For example, they may move into the next age group, or they may begin receiving or stop receiving an intervention.
+
+    b)  Look up or compute the prevalence :math:`p_{VAD}` of vitamin A deficiency for the simulant's updated subpopulation.
+
+    c)  If :math:`v_i < p_\text{VAD}`, the simulant has vitamin A deficiency on the next time step; otherwise, they don't.
 
 Scope
 +++++
@@ -211,10 +235,7 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Cause Model Diagram
-+++++++++++++++++++
-
-State and Transition Data Tables
+Data Tables
 ++++++++++++++++++++++++++++++++
 
 Validation Criteria
