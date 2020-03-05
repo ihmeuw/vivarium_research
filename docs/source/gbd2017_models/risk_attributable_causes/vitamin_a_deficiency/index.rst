@@ -37,9 +37,9 @@ Cause Hierarchy
 
 Health States and Sequela
 ^^^^^^^^^^^^^^^^^^^^^^^^^
-The sequela associated with the Vitamin A deficiency cause in GBD 2017 
-include moderate vision impairment loss due to Vitamin A deficiency, 
-severe vision impairment loss due to Vitamin A deficiency, blindness due to Vitamin A deficiency, 
+The sequela associated with the Vitamin A deficiency cause in GBD 2017
+include moderate vision impairment loss due to Vitamin A deficiency,
+severe vision impairment loss due to Vitamin A deficiency, blindness due to Vitamin A deficiency,
 asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild anemia, Vitamin A deficiency with moderate anemia,
 Vitamin A deficiency with severe anemia.
 
@@ -164,20 +164,46 @@ p. 112 of [GBD-2017-Risk-Appendix-VAD]_.
 	  - 2.76 (2.01 - 3.78)
 	  - Yes
 	* - Lower Respiratory Infections (LRI)
-	  - 
+	  -
 	  - 1.23 (1.03 - 1.48)
 	  - Yes
 	* - Meningitis
-	  - 
+	  -
 	  - 3.2 (0.69 - 14.75)
 	  - No (not significant)
 	* - Malaria
-	  - 
+	  -
 	  - 3.65 (2.23 - 5.97)
 	  - No (only one study)
-	  
+
 Vivarium Modeling Strategy
 --------------------------
+
+We will use an **exposure model** (or **prevalence-only model** or **propensity
+model**) for a vitamin A deficiency, in which each simulant is initialized with a "propensity" for vitamin A deficiency, and the simulant's vitamin A status is determined by comparing this
+propensity to the overall VAD exposure/prevalence in the population.
+Such
+propensity/exposure models have been used in Vivarium for other risk factors and
+risk-attributable causes, such as child stunting, :ref:`child wasting/PEM
+<2017_cause_pem>`, and :ref:`iron deficiency anemia
+<2017_cause_iron_deficiency>`.
+
+In more detail, the basic strategy is to initialize each simulant with a
+propensity score distributed uniformly in [0,1], then compare this propensity
+score with the (location/age/sex/year/intervention-status)-dependent prevalence
+of vitamin A deficiency at each time step to determine whether the simulant has
+VAD during that time step. Each simulant's propensity is assigned only once, but
+the underlying prevalence distribution can change throughout the course of the
+simulation, which may result in a change in the simulant's vitamin A status.
+
+In particular, our modeling strategy will **not** explicitly use incidence or
+remission data for vitamin A deficiency, but only *prevalence* (which is the
+same as the exposure data for the VAD risk factor).
+
+.. todo::
+
+	Explain why this is a reasonable strategy, citing incidence, remission, and
+	prevalence data, as well as external opinions about VAD.
 
 Scope
 +++++
