@@ -219,15 +219,17 @@ Determining Vitamin A Status
 
 At each time step, Vivarium needs to determine whether each simulant has vitamin A deficiency. To do so, follow these steps:
 
-1.  When simulant :math:`i` enters the simulation (either at the start of the simulation or at the time step when the simulant is born), assign the simulant a random number :math:`v_i \sim \operatorname{Uniform}([0,1])`, which we call the **VAD propensity score**.
+1.  **Initialize:** When simulant :math:`i` enters the simulation (e.g. at the start of the simulation or at the time step when the simulant is born), assign the simulant a random number :math:`v_i \sim \operatorname{Uniform}([0,1])`, which we call the **VAD propensity score** for simulant :math:`i`.
 
-2.  On each time step:
+2.  **Update:** On each time step :math:`t`:
 
-    a)  If simulant :math:`i` survives, update any of simulant :math:`i`'s variables determining which subpopulation they belong to. For example, they may move into the next age group, or they may begin receiving or stop receiving an intervention.
+    a)  If simulant :math:`i` survives, update any of simulant :math:`i`'s variables that determine which subpopulation the simulant belongs to. For example, they may move into the next age group, or they may begin receiving or stop receiving an intervention. Call this new subpopulation :math:`\text{subpop}(i,t)`.
 
-    b)  Look up or compute the prevalence :math:`p_{VAD}` of vitamin A deficiency for the simulant's updated subpopulation.
+    b)  Look up or compute the prevalence :math:`p_\text{VAD}(\text{subpop}(i,t))` of vitamin A deficiency for the simulant's updated subpopulation.
 
-    c)  If :math:`v_i < p_\text{VAD}`, the simulant has vitamin A deficiency on the next time step; otherwise, they don't.
+    c)  If :math:`v_i < p_\text{VAD}(\text{subpop}(i,t))`, the simulant has vitamin A deficiency on the next time step; otherwise, they don't.
+
+To address a point of potential confusion, note that in the above algorithm, a *lower* propensity score :math:`v_i` corresponds to a *higher* propensity for vitamin A deficiency. This is why we called :math:`v_i` the "propensity score" rather than just the "propensity." We could additionally define the **propensity** for VAD to be :math:`1-v_i`, but we don't actually need this number.
 
 Scope
 +++++
