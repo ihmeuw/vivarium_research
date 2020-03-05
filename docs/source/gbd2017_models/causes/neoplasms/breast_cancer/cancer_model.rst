@@ -33,7 +33,7 @@ total prevalence for breast cancer is split into
    #. Controlled phase of breast cancer, without mastectomy
 #. Metastatic phase
 #. Terminal phase
-
+#. Mastectomy from breast cancer, beyond 10 years
 
 .. todo::
 
