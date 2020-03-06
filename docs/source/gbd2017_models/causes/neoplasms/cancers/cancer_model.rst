@@ -122,9 +122,200 @@ The following table helps to identify cause id and associated sequelae ids for e
 Restrictions
 ++++++++++++
 
-.. todo::
+The restrictions table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
 
-   Add restrictions table.
+For some of the cancer causes in this document, the restrictions differ. 
+So, different tables are used to specify restrictions that are different from others.
+
+The following table describes restrictions of the following cancers:
+
+- Esophageal cancer
+- Stomach cancer
+- Tracheal, bronchus and lung cancer 
+- Lip and oral cavity cancer 
+- Other pharynx cancer
+- Gallbladder and biliary tract cancer 
+- Pancreatic cancer 
+- Multiple myeloma
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of the following cancers:
+
+- Cervical cancer
+- Uterine cancer
+- Ovarian cancer 
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - True
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of the following cancers:
+
+- Kidney cancer
+- Non-hodgkin lymphoma
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early Neonatal
+     - GBD age group id 2
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 1 to 4
+     - GBD age group id 5
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of **Nasopharynx cancer**:
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 5 to 9
+     - GBD age group id 6
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 5 to 9
+     - GBD age group id 6
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of **Thyroid cancer**:
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 10 to 14
+     - GBD age group id 7
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 10 to 14
+     - GBD age group id 7
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+
 
 
 Vivarium Modeling Strategy
