@@ -18,16 +18,34 @@ GBD 2017 Modeling Strategy
 Prostate cancer in GBD 2017
 +++++++++++++++++++++++++++
 
+The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Prostate-Cancer]_.
+
+Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
+
+Because of long-term disability associated with prostatectomy, prevalence for prostate cancer is estimated beyond ten years. To estimate the disability, 
+total prevalence for prostate cancer is split into
+
+#. Diagnosis and primary therapy
+#. Controlled phase
+
+   #. Controlled phase of prostate cancer, with impotence
+   #. Controlled phase of prostate cancer, with incontinence
+   #. Controlled phase of prostate cancer, without impotence or incontinence
+#. Metastatic phase
+#. Terminal phase
+#. Impotence and Incontinence after 10-year survival from prostate cancer
+
+   #. Impotence from prostate cancer, beyond 10 years
+   #. Incontincence from prostate cancer, beyond 10 years
+
 .. todo::
 
-   Add GBD modelling strategy of Prostate cancer.
+   Add more details about GBD modelling strategy of Prostate cancer.
 
 Cause Hierarchy
 +++++++++++++++
 
-.. todo::
-
-   Add hierarchy diagram.
+.. image:: prostate_cancer_hierarchy.svg
 
 
 Restrictions
@@ -41,7 +59,6 @@ Restrictions
 Vivarium Modeling Strategy
 --------------------------
 
-
 Scope
 +++++
 
@@ -52,24 +69,29 @@ Scope
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
+1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
+For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
+10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
+might over estimate deaths in that scenario.
+
 .. todo::
 
-   Add assumptions and limitations.
+   Add more assumptions and limitations.
 
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
-Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states.
- So, due to data limitations we are simplifying the model.
- 
-Note: This simpliflication might over estimate the number of deaths. 
+Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
+
+Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information.
+
 
 .. image:: cancer_cause_model.svg
 
 
 State and Transition Data Tables
---------------------------------
+++++++++++++++++++++++++++++++++
 
 
 .. todo::
@@ -77,15 +99,9 @@ State and Transition Data Tables
    Add state and transitions  data tables.
 
 
-Model Assumptions and Limitations
----------------------------------
-
-.. todo::
-
-   Add model assumptions and limitations.
 
 Validation Criteria
--------------------
++++++++++++++++++++
 
 .. todo::
 
