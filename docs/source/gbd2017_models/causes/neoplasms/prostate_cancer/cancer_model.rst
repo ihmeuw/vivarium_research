@@ -173,11 +173,11 @@ State and Transition Data Tables
      - Notes
    * - prevalence_c438
      - como
-     - Prevalence of cause breast cancer
+     - Prevalence of cause prostate cancer
      - 
    * - deaths_c438
      - codcorrect
-     - Deaths from breast cancer
+     - Deaths from prostate cancer
      - 
    * - population
      - demography
@@ -185,7 +185,7 @@ State and Transition Data Tables
      - 
    * - incidence_rate_c438
      - como
-     - Incidence rate for breast cancer
+     - Incidence rate for prostate cancer
      - 
    * - disability_weight_s{`sid`}
      - YLD appendix
