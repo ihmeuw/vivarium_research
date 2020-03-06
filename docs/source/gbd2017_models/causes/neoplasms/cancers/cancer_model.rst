@@ -316,8 +316,6 @@ The following table describes restrictions of **Thyroid cancer**:
      - GBD age group id 235
 
 
-
-
 Vivarium Modeling Strategy
 --------------------------
 
@@ -401,7 +399,7 @@ State and Transition Data Tables
    * - I
      - disability weights
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c{cid}}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - average disability weight over all sequelae corresponding to the cancer
+     - total disability weight over all sequelae corresponding to the cancer
    * - ALL
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_c{cid}}}{\text{population}}`
@@ -421,7 +419,7 @@ State and Transition Data Tables
      - S
      - I
      - :math:`\frac{\text{incidence_rate_c{cid}}}{\text{1 - prevalence_c{cid}}}`
-     - Incidence rate in total population is divided by 1-prevalence_c{cid} to get incidence rate among the recovered and susceptible population.
+     - Incidence rate in total population is divided by 1-prevalence_c{cid} to get incidence rate among the susceptible population.
 
 
 .. list-table:: Data Sources
@@ -457,15 +455,6 @@ State and Transition Data Tables
      - Prevalence of each sequelae
      - 
 
-
-
-
-Model Assumptions and Limitations
-+++++++++++++++++++++++++++++++++
-
-.. todo::
-
-   Add model assumptions and limitations.
 
 Validation Criteria
 +++++++++++++++++++
