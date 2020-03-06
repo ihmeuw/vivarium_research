@@ -137,39 +137,23 @@ Theoretical Minimum Risk Exposure Level/Distribution (TMREL/D)
 The **theoretical minimum risk exposure level (TMREL)** is the level of risk
 exposure that would minimize the risk of an adverse outcome for an individual.
 For example, the TMREL for smoking would be "has never smoked." The
-**theoretical minimum risk exposure distribution (TMRED)** for a population is
-the distribution of risk exposure that would yield the lowest possible
-population risk [WHO-Global-Health-Risks-Annex]_. For smoking, the TMRED would
-be the trivial probability distribution assigning everyone in the population to
-the TMREL category "has never smoked."
+corresponding concept on the population level is the **theoretical minimum risk
+exposure distribution (TMRED)**, which is the distribution of risk exposure that
+would yield the lowest possible population risk. For smoking, the TMRED would be
+the trivial probability distribution assigning everyone in the population to the
+TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
+[GBD-2017-Risk-Appendix]_
 
-As in the smoking example above, we typically we imagine that everyone in the
-population has the same TMREL, which is often *zero* or *no exposure*, but in
-some cases the TMREL may be a nonzero exposure level. For example, in GBD 2017
-the TMREL for radon exposure is taken to be 10 `Bq
-<https://en.wikipedia.org/wiki/Becquerel>`_/m\ :superscript:`3`, which is
-equivalent to the average outdoor concentration of radon
-[GBD-2017-Risk-Appendix]_, [ICRP]_.
-
-For continuous risk exposure variables such as hemoglobin concentration or
-systolic blood pressure (or radon exposure), it may be impossible to define a
-single TMREL for the population, as we expect different individuals to have
-different hemoglobin levels or blood pressures (or radon exposure levels), even
-in a theoretical population where risk is minimized. In this case the TMRED will
-be a nontrivial probability distribution. For example, a plausible TMRED for
-radon exposure would be some probability distribution of positive radon exposure
-levels concentrated near the point 10 Bq/m\ :superscript:`3`. We will further
-discuss this point below.
-
-Recall from `What is a causal relationship?`_ that counterfactual analysis is
-often used to describe the causal relationship between a risk factor and an
-outcome. The TMRED is a particular choice of counterfactual exposure
-distribution used for the causal attribution of disease burden to a given risk
-factor (see `Population Attributable Fraction (PAF)`_). Other choices of
-counterfactual include the *plausible* minimum risk, *feasible* minimum risk,
-and *cost-effective* minimum risk, each of which can obviously depend on
-specific attributes of the population under consideration. On the other hand,
-Murray et al. state [Comparative-quantification-health-risks]_:
+Recall from the `causality section <What is a causal relationship?_>`_ that
+counterfactual analysis is used to describe the causal relationship between a
+risk factor and an outcome. **The TMRED is a particular choice of counterfactual
+exposure distribution** used for the causal attribution of disease burden to a
+given risk factor in a population (see `Population Attributable Fraction
+(PAF)`_). Other choices of counterfactual include the *plausible* minimum risk,
+*feasible* minimum risk, and *cost-effective* minimum risk, each of which can
+obviously depend on specific attributes of the population under consideration.
+On the other hand, Murray et al. state
+[Comparative-quantification-health-risks]_:
 
   Biological principles as well as considerations of equity would necessitate
   that, **although the exposure distribution for theoretical minimum risk may
@@ -190,22 +174,43 @@ However, they go on to add:
   Is there an updated/better example of TMRED depending on population, since the
   latest research says that that there is no safe amount of alcohol?
 
+The smoking example `above <Theoretical Minimum Risk Exposure Level/Distribution
+(TMREL/D)_>`_ illustrates two features of the TMREL that are typical of many
+risk factors:
 
+1. We imagine that everyone in the population has the same TMREL
+2. The TMREL is *zero* or *no exposure*
 
-  Typically we imagine that everyone in the population has the same TMREL, and
-  often this exposure level is *zero*, or *no exposure*. For example, the TMREL
-  for smoking would be "has never smoked." In this case, the corresponding TMRED
-  is the trivial probability distribution assigning the entire population to the
-  single TMREL. In the example of radon exposure, we might imagine a hypothetical
-  population in which everyone lived outside and were exposed to exactly 10 Bq/m\
-  :superscript:`3` of radon.
+However, neither of these conditions is necessary. In some cases, particularly
+for continuous risk exposure variables, the TMREL may be a nonzero exposure
+level. Moreover, there may be multiple TMRELs experienced by different members
+of the population. For example, in GBD 2017 [GBD-2017-Risk-Appendix]_:
 
-  However, for continuous risk exposure variables such as hemoglobin
-  concentration or systolic blood pressure, it may be impossible to define a
-  single TMREL, as we expect different individuals to have different hemoglobin
-  levels or blood pressures, even in a theoretical population where risk is
-  minimized. In this case the TMRED will be a nontrivial probability distribution. We will further discuss this point below.
+1.  The TMREL for radon exposure is taken to be 10 `Bq
+    <https://en.wikipedia.org/wiki/Becquerel>`_/m\ :superscript:`3`, which is
+    equivalent to the average outdoor concentration of radon [ICRP]_.
+2.  The :ref:`Low Birth Weight and Short Gestation <2017_risk_lbwsg>` risk
+    factor has multiple TMREL categories since healthy babies have many
+    different birth weights and gestational ages.
 
+These examples illustrate some complexities in defining the TMREL and TMRED for
+a given risk factor. For continuous risk exposure variables --- such as radon
+exposure, or hemoglobin concentration, or systolic blood pressure --- it may be
+impossible to define a single TMREL for the population, as we expect different
+individuals to have different radon exposure levels or hemoglobin levels or
+blood pressures, even in a theoretical population where risk is minimized. In
+this case the TMRED will be a nontrivial probability distribution. For example,
+a plausible TMRED for radon exposure would be some probability distribution of
+positive radon exposure levels concentrated near the point 10 Bq/m\
+:superscript:`3`. We will further discuss this point below.
+
+.. todo::
+
+  Add a more in-depth discussion of TMREDs for continuous exposure variables,
+  based on systolic blood pressure example in [Estimating-Attributable-Burden]_.
+
+  Also, say something about whether there should be different TMRELs for
+  different risk-outcome pairs, and how GBD handles this.
 
 Relative Risk (RR)
 ++++++++++++++++++
@@ -221,7 +226,7 @@ References
   `Annex A: Data and methods
   <https://www.who.int/healthinfo/global_burden_disease/GlobalHealthRisks_report_annex.pdf>`_
   in :title:`Global Health Risks: Mortality and burden of disease attributable
-  to selected major risks`. World Health Organization 2009.
+  to selected major risks`. World Health Organization. 2009.
   https://www.who.int/healthinfo/global_burden_disease/global_health_risks/en/
 
 .. [Comparative-quantification-health-risks]
@@ -229,6 +234,17 @@ References
   Murray, C.J., Ezzati, M., Lopez, A.D. et al. Comparative quantification of
   health risks: Conceptual framework and methodological issues. :title:`Popul
   Health Metrics` 1, 1 (2003). https://doi.org/10.1186/1478-7954-1-1
+
+.. [Estimating-Attributable-Burden]
+
+  `Chapter 25: Estimating attributable burden of disease from exposure and
+  hazard data
+  <http://www9.who.int/publications/cra/chapters/volume2/2129-2140.pdf>`_ by
+  Stephen Vander Hoorn, Majid Ezzati, Anthony Rodgers, Alan D. Lopez and
+  Christopher J.L. Murray. In :title:`Comparative Quantification of Health
+  Risks: Global and Regional Burden of Disease Attribution to Selected Major
+  Risk Factors`. World Health Organization. 2004.
+  http://www9.who.int/publications/cra/en/
 
 .. [GBD-2017-Risk-Appendix]
 
