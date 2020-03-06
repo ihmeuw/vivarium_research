@@ -125,6 +125,65 @@ Mediation
 What is a risk exposure?
 ++++++++++++++++++++++++
 
+A **risk exposure** is any attribute whose measure is causally related to the measure 
+of an outcome.
+
+.. todo::
+	Disambiguate language between risk exposure vs. risk factor
+
+A **risk exposure**, together with a **risk outcome**, constitute a **risk factor**.
+
+Consider some risk exposure E. The different possible measures of E will fall 
+along some distribution, and any given individual will possess a specific value 
+within this distribution.
+
+	For example, consider the exposure *systolic blood pressure*. SBP ranges 
+	from about 60 to 200, and any given individual will have a specific SBP measurement.
+
+	One can also define categorical distributions. Consider, for example, the 
+	exposure *has worked in mining*. Here, we assign each individual either 
+	"yes" or "no".
+
+Risk exposure distributions can include:
+ 
+ - Categorical
+ 	
+ 	- Dichotomous
+
+ 	- Unordered polytomous
+
+ 	- Ordered polytomous
+
+ - Continuous
+
+ 	- Normal
+
+ 	- Log normal
+
+ 	- Ensemble
+
+
+.. todo::
+	Include examples of categorical non-dichotomous exposures, both ordered and non-ordered
+
+	- binned BMI
+
+	- profession
+
+	- binned pollution
+
+- For each risk-outcome pair, each measurement of an exposure is mapped to a differential probability of a specific measurement of the outcome. This mapping is not necessarily monotonic.
+	
+	- Consider the exposure BMI. A BMI of 15 will be mapped to a higher probability of death. This will lessen as BMI aproaches 20-25, then increase again as BMI goes beyond 30.
+
+	- Compare to years of smoking. 
+
+- Any given exposure may be a risk for multiple outcome
+
+	- SDI risk for everything
+
+	- Smoking risk for cancer, protective against BMI
+
 What is a risk effect?
 ++++++++++++++++++++++
 
