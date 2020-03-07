@@ -131,16 +131,16 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - False
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
      - Post Neonatal
@@ -296,8 +296,9 @@ Risk Effects
 
   Describe how to apply the relative risks in :ref:`Risk Appendix Table 4
   <gbd_2017_vad_relative_risk_table>` to affect the incidence rates of measles,
-  diarrhea, and LRI. To capture uncertainty, the RR's should be modeled with a
-  lognormal distribution whose geometric mean (same as median) matches the
+  diarrhea, and LRI. The relative risks should be available at the draw level
+  from the VAD risk model in GBD. Presumably the GBD draws of each RR should
+  follow a lognormal distribution whose geometric mean (=median) matches the
   central estimate and whose 2.5% and 97.5% percentiles match the upper and
   lower confidence bounds.
 
