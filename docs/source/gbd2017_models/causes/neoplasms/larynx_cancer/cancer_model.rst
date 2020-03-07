@@ -9,7 +9,7 @@ Disease Overview
 
 .. todo::
 
-   Add definition of each cancer. In particular, find data about global prevalence and disease fatal and non fatal description.
+   Add definition of larynx cancer. In particular, find data about global prevalence and disease fatal and non fatal description.
 
 
 GBD 2017 Modeling Strategy
@@ -18,16 +18,27 @@ GBD 2017 Modeling Strategy
 Larynx cancer in GBD 2017
 ++++++++++++++++++++++++++
 
-.. todo::
+The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Larynx-Cancer]_.
 
-   Add GBD modelling strategy of Larynx cancer.
+Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
+
+Because of long-term disability associated with laryngectomy, prevalence for larynx cancer is estimated beyond ten years. To estimate the disability, 
+total prevalence for larynx cancer is split into
+
+#. Diagnosis and primary therapy
+#. Controlled phase
+
+   #. Controlled phase of larynx cancer, with laryngectomy
+   #. Controlled phase of larynx cancer, without laryngectomy
+#. Metastatic phase
+#. Terminal phase
+#. Laryngectomy from larynx cancer, beyond 10 years
 
 Cause Hierarchy
 ++++++++++++++++
 
-.. todo::
+.. image:: larynx_cancer_hierarchy.svg
 
-   Add hierarchy diagram.
 
 
 Restrictions
@@ -41,7 +52,6 @@ Restrictions
 Vivarium Modeling Strategy
 --------------------------
 
-
 Scope
 +++++
 
@@ -52,40 +62,36 @@ Scope
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
+1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
+For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
+10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
+might over estimate deaths in that scenario.
+
 .. todo::
 
-   Add assumptions and limitations.
+   Add more assumptions and limitations.
 
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
-Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states.
- So, due to data limitations we are simplifying the model.
+Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
  
-Note: This simpliflication might over estimate the number of deaths. 
+Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information. 
 
 .. image:: cancer_cause_model.svg
 
 
 State and Transition Data Tables
---------------------------------
-
+++++++++++++++++++++++++++++++++
 
 .. todo::
 
    Add state and transitions  data tables.
 
 
-Model Assumptions and Limitations
----------------------------------
-
-.. todo::
-
-   Add model assumptions and limitations.
-
 Validation Criteria
--------------------
++++++++++++++++++++
 
 .. todo::
 
