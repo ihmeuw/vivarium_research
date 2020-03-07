@@ -14,19 +14,29 @@ developing countries and can contribute directly or indirectly to disability.[1]
 GBD 2017 Modeling Strategy
 ------------------------------------
 
-In Global Burden of Disease (GBD) 2017, VAD exposure definition is proportion of
-the population with serum retinol concentration <0·7 μmol/L. The VAD cause is a population attributable fraction (PAF) of 1
-cause with the VAD risk factor. That is, 100% of the VAD cases are attributable
-to the VAD risk factor.
-In this particular case, the PAF-of-1 relationship means that the VAD risk and the VAD cause are identical.
-There is only one VAD model for GBD 2017 (not a separate cause model and risk model), and pulling exposure outputs for the VAD risk factor yields the same data as pulling prevalence outputs from the DisMod model for the VAD cause. [#]_ [GBD-2017-YLD-Appendix-VAD]_, [GBD-2017-Risk-Appendix-VAD]_
+In Global Burden of Disease (GBD) 2017, vitamin A deficiency is defined as
+having a serum retinol concentration <0·7 μmol/L (<20 μg/dL). Population
+exposure to vitamin A deficiency is measured by prevalence, i.e. the proportion
+of the population with serum retinol below 0·7 μmol/L. The VAD cause is a
+population attributable fraction (PAF) of 1 cause with the VAD risk factor. That
+is, 100% of VAD morbidity is attributable to the VAD risk factor. In this
+particular case, the PAF-of-1 relationship means that the VAD risk and the VAD
+cause are identical. There is a single VAD model in GBD 2017
+(modelable_entity_id=2510) for both the cause and the risk factor, and pulling
+exposure estimates for the VAD risk factor yields the same data as pulling
+prevalence outputs from the DisMod model for the VAD cause. [#]_
+[GBD-2017-YLD-Appendix-VAD]_, [GBD-2017-Risk-Appendix-VAD]_
 
-.. [#] Actually, there are numerical differences of up to about 30% between exposure and prevalence in a small fraction of the data points (~0.1% of values with a relative difference > 5%), but the VAD modeler assured us that these are probably just artifacts of the data processing and that the data sets are intended to be identical.
+.. [#] Actually, there are numerical differences of up to about 30% between
+  exposure and prevalence in a small fraction of the data points (~0.1% of
+  draw-level values with a relative difference > 5%), but the VAD modeler
+  assured us that these are probably just artifacts of the data processing and
+  that the data sets are intended to be identical.
 
 Vitamin A Deficiency Cause
 +++++++++++++++++++++++++++++
 
-The VAD in GBD 2017 that is 100% attributable to the
+The VAD cause in GBD 2017 is 100% attributable to the
 VAD risk factor. The VAD cause in GBD is a
 YLD-only cause, meaning that it contributes to morbidity, but not mortality.
 
