@@ -15,11 +15,13 @@ GBD 2017 Modeling Strategy
 ------------------------------------
 
 In Global Burden of Disease (GBD) 2017, VAD exposure definition is proportion of
-the population with serum retinol concentration <0·7 μmol/L. Like iron
-deficiency, the cause VAD is also a population attributable fraction (PAF) of 1
+the population with serum retinol concentration <0·7 μmol/L. The VAD cause is a population attributable fraction (PAF) of 1
 cause with the VAD risk factor. That is, 100% of the VAD cases are attributable
-to the VAD risk factor. VAD Risk exposure and VAD cause prevalence data are the
-same.[2]
+to the VAD risk factor.
+In this particular case, the PAF-of-1 relationship means that the VAD risk and the VAD cause are identical.
+There is only one VAD model for GBD 2017 (not a separate cause model and risk model), and pulling exposure outputs for the VAD risk factor yields the same data as pulling prevalence outputs from the DisMod model for the VAD cause. [#]_ [GBD-2017-YLD-Appendix-VAD]_, [GBD-2017-Risk-Appendix-VAD]_
+
+.. [#] Actually, there are numerical differences of up to about 30% between exposure and prevalence in a small fraction of the data points (~0.1% of values with a relative difference > 5%), but the VAD modeler assured us that these are probably just artifacts of the data processing and that the data sets are intended to be identical.
 
 Vitamin A Deficiency Cause
 +++++++++++++++++++++++++++++
@@ -147,9 +149,9 @@ Restrictions
 Relative Risks
 ^^^^^^^^^^^^^^
 
-The affected causes with the Vitamin A deficiency cause in GBD 2017 include
+The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
 :ref:`lower respiratory infections <2017_cause_lower_respiratory_infections>`,
-:ref:`diarrhoeal diseases <2017_cause_diarrhea>`, :ref:`measles
+:ref:`diarrhoeal diseases <2017_cause_diarrhea>`, and :ref:`measles
 <2017_cause_measles>`. The relative risks for these causes appear in Table 4 on
 p. 112 of [GBD-2017-Risk-Appendix-VAD]_, copied here for reference:
 
@@ -313,7 +315,20 @@ References
 ----------
 
 1. Amy L. Rice, Keith P. West JR. and Robert E. Black. Comparative quantification of health risks. Chapter 4 Vitamin A deficiency.
-2. GBD 2017 Risk Factor Collaborators. Global, regional, and national comparative risk assessment of 84 behavioural, environmental and occupational, and metabolic risks or clusters of risks for 195 countries and territories, 1990-2017: a systematic analysis for the Global Burden of Disease Study 2017. Lancet 2018; 392: 1923–94.
+
+.. [GBD-2017-YLD-Appendix-VAD]
+
+   Pages 305-308 in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
+   appendix on ScienceDirect_>`_:
+
+     **(GBD 2017 YLD Capstone)** GBD 2017 Disease and Injury Incidence and
+     Prevalence Collaborators. Global, regional, and national incidence,
+     prevalence, and years lived with disability for 354 diseases and injuries
+     for 195 countries and territories, 1990–2017: a systematic analysis for the
+     Global Burden of Disease Study 2017. :title:`Lancet` 2018; 392: 1789–858. DOI:
+     https://doi.org/10.1016/S0140-6736(18)32279-7
+
+.. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
 
 .. [GBD-2017-Risk-Appendix-VAD]
 
