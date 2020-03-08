@@ -162,12 +162,13 @@ Relative Risks
 The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
 :ref:`lower respiratory infections <2017_cause_lower_respiratory_infections>`,
 :ref:`diarrhoeal diseases <2017_cause_diarrhea>`, and :ref:`measles
-<2017_cause_measles>`. The relative risks for these causes appear in Table 4 on
-p. 112 of [GBD-2017-Risk-Appendix-VAD]_, copied here for reference:
+<2017_cause_measles>`. The relative risks for these causes appear in :ref:`Table
+4 <gbd_2017_vad_relative_risk_table>` on p. 112 of
+[GBD-2017-Risk-Appendix-VAD]_, copied here for reference:
 
 .. _gbd_2017_vad_relative_risk_table:
 
-.. list-table:: Pooled relative risks for risk-outcome pairs included in GBD 2017
+.. list-table:: Table 4: Pooled relative risks for risk-outcome pairs included in GBD 2017
   :widths: 15 13 15 15
   :header-rows: 1
 
@@ -196,8 +197,13 @@ p. 112 of [GBD-2017-Risk-Appendix-VAD]_, copied here for reference:
     - 3.65 (2.23 - 5.97)
     - No (only one study)
 
-The above relative risks for GBD 2017 should be interpreted as rate ratios for
-the incidence rates of diarrhea, measles, and LRI.
+The above relative risks for GBD 2017 can be interpreted as rate ratios for the
+incidence rates of diarrhea, measles, and LRI. They can also be interpreted as
+rate ratios for cause-specific mortality rates. The GBD modelers found no
+statistical difference between RR's for incidence and RR's for mortality, so
+they pooled all data for effect sizes of VAD on incidence and cause-specific
+mortality to arrive at the estimates in :ref:`Table 4
+<gbd_2017_vad_relative_risk_table>`.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -217,7 +223,7 @@ score with the (location/age/sex/year/intervention-status)-dependent prevalence
 of vitamin A deficiency at each time step to determine whether the simulant has
 VAD during that time step. Each simulant's propensity is assigned only once, but
 the underlying prevalence distribution can change throughout the course of the
-simulation, which may result in a change in the simulant's vitamin A status.
+simulation, which may result in a change in the simulant's vitamin A status. The precise algorithm is described `below <Determining Vitamin A Status_>`_
 
 In particular, our modeling strategy will **not** explicitly use incidence or
 remission data for vitamin A deficiency, but only *prevalence* (which is the
@@ -308,6 +314,19 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+In addition to probably not getting incidence and remission of VAD right, this
+model has a particular implication about who does not get VAD. GBD has estimated
+that the prevalence of VAD is around 30% and the duration until remission is
+around 1 year. GBD has not estimated what fraction of the population will have
+ever had VAD over a time longer than a year, however. Will most kids have
+experienced VAD by the time they are five? Or are the same 60% cycling in and
+out of VAD to maintain the 30% prevalence and 1 year duration? Probably
+something in between these extremes, but we have no data on this yet, and we
+don't have guidance from GBD about how to do it. So it is hard to even know how
+wrong our model is when we don't get remission right, let alone how much it
+matters for quantifying the impact of vitamin A fortification or
+supplementation.
+
 Cause Model Diagram
 +++++++++++++++++++
 
@@ -321,6 +340,14 @@ State and Transition Data Tables
 
 Validation Criteria
 +++++++++++++++++++
+
+This model should get prevalence and YLDs right (meaning the prevalence and YLDs
+in the sim should match that in GBD). It will not necessarily get incidence and
+remission right (see `Assumptions and Limitations`_).
+
+.. todo::
+
+  Try to estimate how wrong we expect incidence and remission to be.
 
 References
 ----------
