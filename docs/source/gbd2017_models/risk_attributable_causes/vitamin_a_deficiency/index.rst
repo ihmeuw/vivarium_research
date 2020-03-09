@@ -17,11 +17,12 @@ GBD 2017 Modeling Strategy
 In Global Burden of Disease (GBD) 2017, vitamin A deficiency is defined as
 having a serum retinol concentration <0·7 μmol/L (<20 μg/dL). Population
 exposure to vitamin A deficiency is measured by prevalence, i.e. the proportion
-of the population with serum retinol below 0·7 μmol/L. The VAD cause is a
-population attributable fraction (PAF) of 1 cause with the VAD risk factor. That
-is, 100% of VAD morbidity is attributable to the VAD risk factor. In this
-particular case, the PAF-of-1 relationship means that the VAD risk and the VAD
-cause are identical. There is a single VAD model in GBD 2017
+of the population with serum retinol below 0·7 μmol/L.
+
+The VAD cause is a population attributable fraction (PAF) of 1 cause with the
+VAD risk factor. That is, 100% of VAD morbidity is attributable to the VAD risk
+factor. In this particular case, the PAF-of-1 relationship means that the VAD
+risk and the VAD cause are identical. There is a single VAD model in GBD 2017
 (modelable_entity_id=2510) for both the cause and the risk factor, and pulling
 exposure estimates for the VAD risk factor yields the same data as pulling
 prevalence outputs from the DisMod model for the VAD cause. [#]_
@@ -57,7 +58,7 @@ Health States and Sequela
 The sequela associated with the Vitamin A deficiency cause in GBD 2017 include
 moderate vision impairment loss due to Vitamin A deficiency, severe vision
 impairment loss due to Vitamin A deficiency, blindness due to Vitamin A
-deficiency, asymptomatic Vitamin A deficiency, Vitamin a deficiency with mild
+deficiency, asymptomatic Vitamin A deficiency, Vitamin A deficiency with mild
 anemia, Vitamin A deficiency with moderate anemia, Vitamin A deficiency with
 severe anemia.
 
@@ -209,12 +210,12 @@ Vivarium Modeling Strategy
 --------------------------
 
 We will use an **exposure model** (or **prevalence-only model** or **propensity
-model**) for a vitamin A deficiency, in which each simulant is initialized with a "propensity" for vitamin A deficiency, and the simulant's vitamin A status is determined by comparing this
-propensity to the overall VAD exposure/prevalence in the population.
-Such
-propensity/exposure models have been used in Vivarium for other risk factors and
-risk-attributable causes, such as child stunting, :ref:`child wasting/PEM
-<2017_cause_pem>`, and :ref:`iron deficiency anemia
+model**) for a vitamin A deficiency, in which each simulant is initialized with
+a "propensity" for vitamin A deficiency, and the simulant's vitamin A status is
+determined by comparing this propensity to the overall VAD exposure/prevalence
+in the population. Such propensity/exposure models have been used in Vivarium
+for other risk factors and risk-attributable causes, such as child stunting,
+:ref:`child wasting/PEM <2017_cause_pem>`, and :ref:`iron deficiency anemia
 <2017_cause_iron_deficiency>`.
 
 In more detail, the basic strategy is to initialize each simulant with a
@@ -223,11 +224,13 @@ score with the (location/age/sex/year/intervention-status)-dependent prevalence
 of vitamin A deficiency at each time step to determine whether the simulant has
 VAD during that time step. Each simulant's propensity is assigned only once, but
 the underlying prevalence distribution can change throughout the course of the
-simulation, which may result in a change in the simulant's vitamin A status. The precise algorithm is described `below <Determining Vitamin A Status_>`_
+simulation, which may result in a change in the simulant's vitamin A status. The
+precise algorithm is described `below <Determining Vitamin A Status_>`_
 
 In particular, our modeling strategy will **not** explicitly use incidence or
 remission data for vitamin A deficiency, but only *prevalence* (which is the
-same as the exposure data for the VAD risk factor). The rationale for this approach is twofold:
+same as the exposure data for the VAD risk factor). The rationale for this
+approach is twofold:
 
 1.  We want to guarantee that the simulated baseline prevalence of vitamin A
     deficiency matches the prevalence data from GBD, which is likely more
@@ -280,6 +283,20 @@ A deficiency. To do so, follow these steps:
     c)  If :math:`v_i < p_\text{VAD}(\text{subpop}(i,t))`, the simulant has
         vitamin A deficiency on the next time step; otherwise, they don't.
 
+In the above algorithm, note that each simulant's propensity score is assigned
+only once, and that the simulant's vitamin A status can change only if the
+simulant moves into a new subpopulation with a different VAD prevalence. Even
+then, only simulants with propensity scores in the interval between the old
+prevalence and the new prevalence will change status.
+
+The different possible subpopulations a simulant can belong to will depend on
+the particulars of the simulation, and hence so will the determination of the
+prevalence :math:`p_\text{VAD}`. For the standard baseline model with no
+interventions, the stratification into subpopulations should match GBD 2017:
+Each location, age, sex, and year determines a subpopulation, and the
+corresponding prevalence :math:`p_\text{VAD}` will be the prevalence of vitamin
+A deficiency pulled from the VAD model in GBD 2017.
+
 To address a point of potential confusion in the above algorithm, note that a
 *lower* propensity score :math:`v_i` corresponds to a *higher* propensity for
 vitamin A deficiency. This is why we called :math:`v_i` the "propensity score"
@@ -293,7 +310,7 @@ Tracking Years Lived with Disability due to Vitamin A Deficiency
 .. todo::
 
   Describe how to calculate YLDs from vitamin A deficiency, using the average
-  disability weight over all sequelae.
+  disability weight over all 7 sequelae.
 
 Risk Effects
 ++++++++++++
