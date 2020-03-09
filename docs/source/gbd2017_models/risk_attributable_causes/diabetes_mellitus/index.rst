@@ -81,13 +81,17 @@ This cause model is designed to simulate the basic structure of the risk factor 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-1. In vivarium, 'uncomplicated DM Type 1 and Type 2' is 'Moderate', which is different from how GBD 2017 is modelling it. In the future, severity splits will be revisited using disability weights. 
+- In vivarium, 'uncomplicated DM Type 1 and Type 2' is 'Moderate', which is different from how GBD 2017 is modelling it. In the future, severity splits will be revisited using disability weights. 
 
-3. EMR is greater than zero for severe diabetes only.
+- This model has durations for moderate and severe DM that are too long because they arrive to that disease state immediately. Simulants in this model will not progress from moderate to severe.
 
-4. Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL.
+- This model assumes that EMR from 'moderate' and 'severe' disease states are equal.
 
-5. There are no incidence or transitions between states in this model. In the future, transition between states will be revisited using incidence of diabetes mellitus and remission.
+- This model assumes that Remission from 'moderate' to 'susceptible' and 'severe' to 'susceptible' are the same value.
+
+- Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL. 
+
+- There are no incidence or transitions between states in this model. In the future, transition between states will be revisited using incidence of diabetes mellitus and remission.
 
 Cause Model Diagram
 -------------------
@@ -161,12 +165,12 @@ State and Transition Data Tables
      - = (prevalence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + prevalence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
    * - Sev
      - excess mortality rate (EMR) for severe DM 
-     - :math:`\frac{\text{CSMR_c587}}{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}`
-     - = (cause-specific mortality rate of DM) / sum of prevalence of severe DM sequelae
+     - :math:`\frac{\text{CSMR_c587}}{\text{prevalence_c587}}`
+     - = (cause-specific mortality rate of DM) / prevalence of DM
    * - M
      - excess mortality rate (EMR) of moderate DM
-     - 0
-     - EMR for Moderate DM is 0, given the assumption that moderate DM is non-fatal only. 
+     - :math:`\frac{\text{CSMR_c587}}{\text{prevalence_c587}}`
+     - = (cause-specific mortality rate of DM) / prevalence of DM 
    * - M
      - disability_weight
      - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`
@@ -180,6 +184,35 @@ State and Transition Data Tables
      - :math:`\frac{\text{deaths_c587}}{\text{population}}`
      - 
 
+.. list-table:: Transition Data
+   :widths: 10 10 10 20 20
+   :header-rows: 1
+
+   * - Transition
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - 1
+     - S  
+     - M
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}{\text{prevalence_c587}} \times\ {\text{incidence_c587}}`
+     - = weighted prevalence of moderate DM * incidence of DM
+   * - 2
+     - S  
+     - Sev
+     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}{\text{prevalence_c587}} \times\ {\text{incidence_c587}}`
+     - = weighted prevalence of severe DM * incidence of DM
+   * - 3
+     - M  
+     - S
+     - remission_modelable_entity_id_2005
+     - = remission from moderate DM to Susceptible
+   * - 4
+     - Sev  
+     - S
+     - remission_modelable_entity_id_2005
+     - = remission from severe DM to Susceptible
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -191,7 +224,7 @@ State and Transition Data Tables
      - Notes
    * - prevalence_c587
      - dismod
-     - prevalence of overall diabetes mellitus
+     - prevalence of overall Diabetes Mellitus
      -
    * - deaths_c587
      - codcorrect
@@ -208,6 +241,14 @@ State and Transition Data Tables
    * - disability_weight_s{sid}
      - YLD appendix
      - Disability weight of sequela with id {id}
+     - 
+   * - remission_modelable_entity_id_2005
+     - epi
+     - remission of overall Diabetes Mellitus from epi database
+     - 
+   * - incidence_c587
+     - dismod
+     - incidence of overall Diabetes Mellitus
      - 
 
 Validation Criteria
