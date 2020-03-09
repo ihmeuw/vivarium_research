@@ -128,7 +128,16 @@ The aspects of the disease this cause model is designed to simulate is the basic
 Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. This structure means there's no impact of SBP on CKD.
+Initialization:
+- In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. This structure means there's no impact of SBP on CKD.
+
+Progress:
+- In this model, simulants will not transition into later states over time. Simulants will stay in the disease states they were initialized in.
+
+.. todo::
+Confirm with the RT and SE team how this model affects other models.
+
+- This model affects other models – disability weights, excess mortality weight for each state, cause specific mortality rate. 
 
 Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -166,7 +175,11 @@ Mapping CKD States to IKF Categories in Vivarium
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. If we had remission (which is actually the term used for "progression") rates, we could use these as inter-stage incidence rates.
+- Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. If we had remission (which is actually the term used for "progression") rates, we could use these as inter-stage incidence rates.
+
+- Simulants are in each disease state longer than they should be, compared to GBD 2017. 
+
+- This model effects other models – disability weights, excess mortality weight for each state, cause specific mortality rate
 
 Cause Model Diagram
 -------------------
@@ -245,11 +258,11 @@ State and Transition Data Tables
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
    * - Sev
      - excess mortality rate (EMR) of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_sev.sub_causes.c589 + prevalence_sequelae_mod.sub_causes.c589}}`
-     - 
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalencec589}}`
+     - = CSMR of CKD / prevalence of CKD 
    * - M
      - excess mortality rate (EMR) of moderate CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_sequelae_sev.sub_causes.c589 + prevalence_sequelae_mod.sub_causes.c589}}`
+     - :math:`\frac{\text{CSMR_c589}}{\text{prevalencec589}}`
      - 
    * - M
      - disability weight
