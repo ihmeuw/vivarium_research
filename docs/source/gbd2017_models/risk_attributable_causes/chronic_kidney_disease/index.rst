@@ -244,10 +244,6 @@ State and Transition Data Tables
      - simulants not prevalent with CKD
      - 1-prevalence_c589
      -
-   * - C
-     - prevalence
-     - 0
-     -
    * - M
      - prevalence
      - :math:`{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}`
