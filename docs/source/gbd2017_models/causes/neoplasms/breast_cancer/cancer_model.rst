@@ -189,7 +189,7 @@ State and Transition Data Tables
      - S
      - I
      - :math:`\frac{\text{incidence_rate_c429}}{\text{1 - prevalence_c429}}`
-     - Incidence rate in total population is divided by 1-prevalence_c429 to get incidence rate among the recovered and susceptible population.
+     - Incidence rate in total population is divided by 1-prevalence_c429 to get incidence rate among the susceptible population.
 
 
 .. list-table:: Data Sources
