@@ -9,7 +9,7 @@ Disease Overview
 
 .. todo::
 
-   Add definition of each cancer. In particular, find data about global prevalence and disease fatal and non fatal description.
+   Add definition of colon and rectum cancer. In particular, find data about global prevalence and disease fatal and non fatal description.
 
 
 GBD 2017 Modeling Strategy
@@ -18,16 +18,31 @@ GBD 2017 Modeling Strategy
 Colon and rectum cancer in GBD 2017
 +++++++++++++++++++++++++++++++++++
 
+The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Colon-and-rectum-Cancer]_.
+
+Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
+
+Because of long-term disability associated with stoma, prevalence for colon and rectum cancer is estimated beyond ten years. To estimate the disability, 
+total prevalence for colon and rectum cancer is split into
+
+#. Diagnosis and primary therapy
+#. Controlled phase
+
+   #. Controlled phase of colon and rectum cancer, with stoma
+   #. Controlled phase of colon and rectum cancer, without stoma
+#. Metastatic phase
+#. Terminal phase
+#. Stoma from colon and rectum cancer, beyond 10 years
+
+
 .. todo::
 
-   Add GBD modelling strategy of Colon and rectum cancer.
+   Add more details about GBD modelling strategy of Colon and rectum cancer.
 
 Cause Hierarchy
 ++++++++++++++++
 
-.. todo::
-
-   Add hierarchy diagram.
+.. image:: colon_and_rectum_cancer_hierarchy.svg
 
 
 Restrictions
@@ -52,24 +67,28 @@ Scope
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
+1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
+For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
+10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
+might over estimate deaths in that scenario.
+
 .. todo::
 
-   Add assumptions and limitations.
+   Add more assumptions and limitations.
 
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
-Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states.
- So, due to data limitations we are simplifying the model.
+Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
  
-Note: This simpliflication might over estimate the number of deaths. 
+Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information.
 
 .. image:: cancer_cause_model.svg
 
 
 State and Transition Data Tables
---------------------------------
+++++++++++++++++++++++++++++++++
 
 
 .. todo::
@@ -77,15 +96,8 @@ State and Transition Data Tables
    Add state and transitions  data tables.
 
 
-Model Assumptions and Limitations
----------------------------------
-
-.. todo::
-
-   Add model assumptions and limitations.
-
 Validation Criteria
--------------------
++++++++++++++++++++
 
 .. todo::
 
