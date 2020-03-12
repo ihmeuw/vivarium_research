@@ -98,8 +98,39 @@ Utilization estimates used in this model are for the average number of outpatien
 
 .. _GHDx: http://ghdx.healthdata.org/record/ihme-data/UHC-cost-and-services-2016
 
+Initialization of patients into treatment for BAU
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+We have distributions for the probability of being on Rx given high LDL-C and the probability of control given Rx.
+Using GBD data on high LDL-C (LDL-C > 4.9 mmol/L), we will have the population with measured LDL-C above the relevant threshold.  This, however, ignores the portion of the population that would have high LDL-C if they were not currently on medication.  
+To correct for this, we do the following:
+
+.. todo::
+
+	Add all equation components as probabilities
+
+:math:`\text{pop with high LDL if Rx did not exist=} \frac{\text{GBD estimate of pop with high LDL}} {\text{(1-prob(Rx|high LDL)} \times\ {\text{prob(control|Rx))}}}`
+
+In BAU, patients will be initialized into “currently on treatment” or “no current treatment” based on the “pop with high LDL if Rx did not exist” and the prob(Rx|high LDL).  This will be inconsistent with reality in the following way: individual simulants that are currently on treatment in reality may not initialize into “currently on treatment” in the simulation – but the total population on treatment should be the same as actual current practice.
+Patience that have experienced a CVD event will be on medication with probability 1.
+Selection of which Rx a patient currently on treatment is given will be taken from the distribution of “current Rx” data from the literature.  These data are separated into “high potency” and “low potency” statins, and average dose in mg is available from the literature.  So we will initialize randomly the type of statin (or statin + ezetimibe, etc.) and then draw from the distribution of doses for the dose.
+New patients will be added to Tx based on utilization data and the probability of having LDL-C tested (from literature).
+Rx efficacy data are available from the literature.
+The probability of being adherent (defined as > 80% of days covered) is taken from the literature, and is a function of duration on treatment and history of CVD events (past MI = greater adherence).
+QUESTION:  how should we initialize adherence?  I.e. since I won’t know how long a simulant has been on treatment at time = 0 in the simulation, I can’t determine their adherence.  SUGGESTION: use average adherence taken over time?
+The probability of side effects is also taken from the literature, and if a person experiences a side-effect, it will be assumed that they don’t take their medicine (non-adherent).  
+
 Interventions
 +++++++++++++
+
+Both treatment scenarios are based on the CV RISK score, which is a function of Age, Sex and SBP:
+
+SCORE = -16.5 + 0.043*SBP + 0.266*AGE + 2.32*SEX 
+wher SEX = 1 if male, AGE is in years, and SBP is in mmHg
+
+There are two caveats involving DM state and CKD state, which are included in the treatment diagram.
+New patients will be started on a high dose, high potency statin (max dose of a statin randomly selected from the “high potency” list according to the weighted probability of use for each statin flavor).  
+If a patient experiences a side effect, they will wither have their dose cut in half – unless they are at the minimum dose already, in which case they will be given a low potency statin.  If they are not at target, they will combine these changes with addition of ezetimibe.
 
 2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
