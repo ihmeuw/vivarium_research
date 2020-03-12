@@ -190,6 +190,23 @@ will estimate a continuous age trend of the proportion of, say, individuals with
 BMI over 30. If the exposure is continuous, then GBD estimates the distribution of the 
 exposure variable over the population in each age, sex, year, and location.
 
+GBD's risk exposures will generally be less reliable than GBD cause of death 
+models, and when designing a risk exposure, it is important to both learn from
+the GBD modeler what the entity captured by their exposure model is.
+
+	Take, for example, the GBD exposure *has ever experienced 
+	intimate partner violence*. Barring incredibly high mortality rates among 
+	IPV victims, we would expect the proportion of the population that has ever 
+	experienced IPV to increase monotonically with age. However, survey data 
+	consistenly reports this proportion to peak among 30-40 year olds, which is 
+	refleced in the GBD model. We believe this phenomenon to be the result of 
+	recall bias. When implementing this in a model, however, if we were to 
+	initialize a population with dichotomous and persistent IPV exposure values 
+	from GBD estimates and then allow the simulants to age for 10 years, our 
+	exposure distribution would no longer match our reference data. Thus it 
+	becomes clear that the entity we're describing needs to be "recollection of 
+	IPV", "recent experience of IPV", or some other attribute that incorporates a 
+	time component.
 
 Risk exposures in Vivarium
 --------------------------
@@ -233,20 +250,6 @@ Note that in each case our smoking model captures the same information, but in
 the former we push the complexity of quantifying different types of smoking 
 histories to another part of the model, and in the former we wrap this 
 complexity into the exposure component.
-
-When designing a risk exposure, it is important to clearly state and document 
-what it describes. Take, for example, the GBD exposure *has ever experienced 
-intimate partner violence*. Barring incredibly high mortality rates among 
-IPV victims, we would expect the proportion of the population that has ever 
-experienced IPV to increase monotonically with age. However, survey data 
-consistenly reports this proportion to peak among 30-40 year olds, which we 
-believe to be the result of recall bias. When implementing this in a model, 
-however, if we were to initialize a population with IPV exposure values from 
-survey data or GBD estimates and then allow the simulants to age for 10 years, 
-our exposure distribution would no longer match our reference data. Thus it 
-becomes clear that the entity we're describing needs to be "recollection of 
-IPV", "recent experience of IPV", or some other attribute that incorporates a 
-time component.
 
 
 What is a risk effect?
