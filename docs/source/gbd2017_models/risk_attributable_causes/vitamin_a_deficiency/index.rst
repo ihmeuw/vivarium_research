@@ -116,6 +116,18 @@ Below is a list of measures and corresponding IDs:
     - gbd_id = reiid(96)
     - como, use get_measure
 
+.. todo::
+
+  Address James's comment about the above table in `PR 149 <https://github.com/ihmeuw/vivarium_research/pull/149>`_:
+
+  1.  Incidence and remission are measures for the cause.
+  2.  I thought we decided not to use them at all.
+
+  Correct, we are planning not to use incidence or remission data, so we should
+  make this clear. E.g. move the first two rows of this table into the `Vitamin
+  A Deficiency Cause`_ section and clarify that we're not planning to use them
+  for the Vivarium model, or just omit them entirely.
+
 Risk Factor Hierarchy
 ^^^^^^^^^^^^^^^^^^^^^
 
@@ -206,8 +218,36 @@ they pooled all data for effect sizes of VAD on incidence and cause-specific
 mortality to arrive at the estimates in :ref:`Table 4
 <gbd_2017_vad_relative_risk_table>`.
 
+.. Note::
+
+  In GBD 2019, the effect on lower respiratory infections (LRI) was dropped due
+  to insufficient evidence of causation found by the network meta-analysis.
+  Moreover, the relative risks for measles and diarrheal diseases were found to
+  be smaller than those in the above table.
+
+.. todo::
+
+  Reformat :ref:`Table 4 <gbd_2017_vad_relative_risk_table>` to make it more useful for the software engineers, based on James's comments in `PR 149 <https://github.com/ihmeuw/vivarium_research/pull/149>`_. Namely:
+
+  1.  We can include the actual data means and uncertainties here, but since
+      we're planning to use the draw-level RR's from GBD, we should include the
+      `rei_id` and `cause_id` associated with each risk-outcome pair we're
+      using.
+
+  2.  Including the interpretations of the RR's is good. I think you should
+      have the interpretation as a column in the table though. A single risk
+      factor may have different kinds of effects on different outcomes and
+      should be specified pairwise. Also include the numerator and denominator
+      or a link to what rate ratio means (I think we made a glossary in the
+      documentation).
+
 Vivarium Modeling Strategy
 --------------------------
+
+.. _percentile: https://en.wikipedia.org/wiki/Percentile
+.. _quantile: https://en.wikipedia.org/wiki/Quantile
+.. _percentile rank: https://en.wikipedia.org/wiki/Percentile_rank
+.. _quantile rank: `percentile rank`_
 
 We will use an **exposure model** (or **prevalence-only model** or **propensity
 model**) for a vitamin A deficiency, in which each simulant is initialized with
@@ -218,14 +258,28 @@ for other risk factors and risk-attributable causes, such as child stunting,
 :ref:`child wasting/PEM <2017_cause_pem>`, and :ref:`iron deficiency anemia
 <2017_cause_iron_deficiency>`.
 
+.. todo::
+
+  Reword the above to make it clear that an exposure model is the standard
+  strategy used for risk factors, and that it is *infrequently* used for cause
+  models because we usually trust the dynamic disease parameters more or we care
+  about counting cases. We should eventually have a description of what
+  "exposure model" means in the general risk factor documentation.
+
+  Standardize the terminology above and below to use "exposure model"
+  throughout, since this applies to all risk factors.
+
 In more detail, the basic strategy is to initialize each simulant with a
 propensity score distributed uniformly in [0,1], then compare this propensity
 score with the (location/age/sex/year/intervention-status)-dependent prevalence
 of vitamin A deficiency at each time step to determine whether the simulant has
-VAD during that time step. Each simulant's propensity is assigned only once, but
-the underlying prevalence distribution can change throughout the course of the
-simulation, which may result in a change in the simulant's vitamin A status. The
-precise algorithm is described `below <Determining Vitamin A Status_>`_
+VAD during that time step.  (More precisely, the propensity score is the
+simulant's `quantile rank`_ in the VAD exposure distribution, and their vitamin
+A status will be the corresponding `quantile`_.) Each simulant's propensity is
+assigned only once, but the underlying prevalence of vitamin A deficiency (i.e.
+the exposure distribution) can change throughout the course of the simulation,
+which may result in a change in the simulant's vitamin A status. The precise
+algorithm is described `below <Determining Vitamin A Status_>`_.
 
 In particular, our modeling strategy will **not** explicitly use incidence or
 remission data for vitamin A deficiency, but only *prevalence* (which is the
@@ -244,14 +298,21 @@ approach is twofold:
 
 .. todo::
 
-  Verify that effect sizes on VAD should actually be interpreted as described
-  above, and that the prevalence-only model is a good way to accurately
-  represent these numbers.
+  Be more clear about what we mean in point 1. above. E.g. it looks like using
+  GBD's incidence and remission data will cause most of the population to get
+  VAD over the course of a 5-year simulation, which may not be realistic. See
+  `Assumptions and Limitations`_.
 
-  Explain why the prevalence-only model is a reasonable strategy, citing
-  incidence, remission, and prevalence data, as well as expert opinions about
-  VAD. (Perhaps this explanation should come later, e.g. in the Assumptions and
-  Limitations section.)
+  In `PR 149 <https://github.com/ihmeuw/vivarium_research/pull/149>`_, James
+  commented about the above rationale:
+
+    We are only doing this because of option 2. We expect the cause version of
+    the model to get incidence and remission correct in addition to getting
+    prevalence correct.
+
+    However, it is more important for us to use the intervention data correctly
+    than it is to get the dynamic parameters of the disease correct. Details
+    about the limitations and the expected impact to be found in .
 
 Following is a more detailed description of how the exposure model for VAD
 should work.
@@ -331,6 +392,14 @@ Scope
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+.. todo::
+
+  Explain why the prevalence-only model is a reasonable strategy, citing
+  incidence, remission, and prevalence data, as well as expert opinions about
+  VAD. Note Abie's concern (partially explained below) that using GBD's
+  incidence and remission data would result in most of the population getting
+  VAD over the course of a 5-year simulation.
+
 In addition to probably not getting incidence and remission of VAD right, this
 model has a particular implication about who does not get VAD. GBD has estimated
 that the prevalence of VAD is around 30% and the duration until remission is
@@ -343,6 +412,12 @@ don't have guidance from GBD about how to do it. So it is hard to even know how
 wrong our model is when we don't get remission right, let alone how much it
 matters for quantifying the impact of vitamin A fortification or
 supplementation.
+
+In GBD 2019, the effect on lower respiratory infections (LRI) was dropped due to
+insufficient evidence of causation found by the network meta-analysis. Moreover,
+the relative risks for measles and diarrheal diseases were found to be smaller
+than those in the above table. Clients should be made aware of this if weare
+using the GBD 2017 relative risks.
 
 Cause Model Diagram
 +++++++++++++++++++
