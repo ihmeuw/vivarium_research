@@ -81,6 +81,9 @@ This cause model is designed to simulate the basic structure of the risk factor 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+Assumptions
++++++++++++
+
 - In vivarium, 'uncomplicated DM Type 1 and Type 2' is 'Moderate', which is different from how GBD 2017 is modelling it. In the future, severity splits will be revisited using disability weights. 
 
 - This model has durations for moderate and severe DM that are too long because they arrive to that disease state immediately. Simulants in this model will not progress from moderate to severe.
@@ -91,7 +94,19 @@ Assumptions and Limitations
 
 - Case definition cross-walks on FPG and HbA1c: GBD 2017 assumed that HbA1c >6.5% was equivalent to FPG >126 mg/dL. 
 
-- There are no incidence or transitions between states in this model. In the future, transition between states will be revisited using incidence of diabetes mellitus and remission.
+- The project requires that prevalence for each severity (mild/moderate v. severe) be correct, since this is a condition for treatment of LDL-C. DM is not a cause of interest for the current project beyond its impact on treatment. We will use prevalence weighted incidence to add new patients to both "moderate" and "severe" states as the simulation runs, and simulants may exit based on the CSMR (detailed below).
+
+- There is incidence into both "moderate" and "severe" (prevalence weighted incidence (parent cause incidence)) and remission (equal for both "moderate" and "severe"). There is no state-to-state transition for the reasons cited above.
+
+Limitations
++++++++++++
+
+These limitations will impact the DM model in a couple ways:
+
+- The prevalence of each severity should be appropriate, and will be validated against GBD.
+- The rate of mortality from "moderate" will be high, since we are assuming EMR (calculated from CSMR) is the same for both "moderate" and "severe". It is unclear how this will impact prevalence, since patients in "moderate" will be dying faster (which implies too few simulants in "moderate"), but not transitioning into "severe" (which implies too many simulants in "moderate").
+- This may also impact DM related burden, since progression into more severe states of DM is not possible. In aggregate, if prevalence is right, the morbidity should be close to GBD estimates, but at the simulant level, we will underestimate burden.
+- Again, the impact of the assumptions stated regarding remission is unclear - simulants exiting from "severe" back to "susceptible" is inconsistent with GBD and should drive down burden, but the absence of progression from "moderate" to "severe" mitigates this. It is not clear yet which will have a greater impact. (Recall that our primary concern is getting prevalence correct for the current project's treatment algorithm.)
 
 Cause Model Diagram
 -------------------
@@ -151,26 +166,22 @@ State and Transition Data Tables
      - simulants not prevalent with overall Diabetes Mellitus
      - 1 - prevalence_c587
      - 
-   * - C 
-     - prevalence
-     - 0
-     - 
    * - M 
      - prevalence
-     - :math:`{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c587}}}` 
+     - :math:`{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{prevalence}_s}` 
      - = (prevalence of Diabetes Mellitus Type 1 uncomplicated sequelae + prevalence of Diabetes Mellitus Type 2 uncomplicated sequelae  
    * - Sev
      - prevalence
-     - :math:`{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c587}}}`
+     - :math:`{\sum_{s\in \text{sequelae_sev}}} \scriptstyle{\text{prevalence}_s}` 
      - = (prevalence of Diabetes Mellitus Type 1 all other sequelae (not including uncomplicated) + prevalence of Diabetes Mellitus Type 2 all other sequelae (not including uncomplicated)
    * - Sev
      - excess mortality rate (EMR) for severe DM 
-     - :math:`\frac{\text{CSMR_c587}}{\text{prevalence_c587}}`
-     - = (cause-specific mortality rate of DM) / prevalence of DM
+     - :math:`\frac{\text{CSMR*_c587}}{\text{prevalence_c587}}`
+     - cause-specific mortality rate of DM (*indicates calculated measure) / prevalence of DM
    * - M
      - excess mortality rate (EMR) of moderate DM
-     - :math:`\frac{\text{CSMR_c587}}{\text{prevalence_c587}}`
-     - = (cause-specific mortality rate of DM) / prevalence of DM 
+     - :math:`\frac{\text{CSMR*_c587}}{\text{prevalence_c587}}`
+     - cause-specific mortality rate of DM (*indicates calculated measure) / prevalence of DM 
    * - M
      - disability_weight
      - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`
@@ -182,7 +193,7 @@ State and Transition Data Tables
    * - All
      - cause-specific mortality rate (csmr)
      - :math:`\frac{\text{deaths_c587}}{\text{population}}`
-     - 
+     - calculated, not a direct GBD 2017 data input
 
 .. list-table:: Transition Data
    :widths: 10 10 10 20 20
@@ -223,7 +234,7 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c587
-     - dismod
+     - como
      - prevalence of overall Diabetes Mellitus
      -
    * - deaths_c587
@@ -235,7 +246,7 @@ State and Transition Data Tables
      - Mid-year population for given sex/age/year/location
      - 
    * - prevalence_s{sid}
-     - dismod
+     - como
      - Prevalence of sequela with id {id}
      - 
    * - disability_weight_s{sid}
@@ -247,7 +258,7 @@ State and Transition Data Tables
      - remission of overall Diabetes Mellitus from epi database
      - 
    * - incidence_c587
-     - dismod
+     - como
      - incidence of overall Diabetes Mellitus
      - 
 
@@ -275,7 +286,7 @@ Logic
 
 * By location-/age-/sex-
 
-1. Sum of prevalence of sequela of Diabetes Mellitus sub_causes = prevalence of Diabetes Mellitus
+- Prevalence will be validate against GBD, as will morbidity and mortality. Given the assumptions described above, we prioritize validation of prevalence.
 
 
 References
