@@ -134,11 +134,6 @@ Initialization:
 Progress:
 -As simulants age, their risk exposure will change, which may result in them progressing into a different disease state over time. Also, simulants will experience mortality based on their risk exposure.
 
-.. todo::
-Confirm with the RT and SE team how this model affects other models.
-
-- This model affects other models – disability weights, excess mortality weight for each state, cause specific mortality rate. 
-
 Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -178,11 +173,16 @@ Assumptions and Limitations
 Assumptions
 +++++++++++
 
-- Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. If we had remission (which is actually the term used for "progression") rates, we could use these as inter-stage incidence rates.
+- Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. Transition rates (progression rates) between states are not available from the GBD model. As such, we are using evolution of risk exposure over time (changes with simulant age) to proxy for progression between CKD states - as a simulant ages, they may move to a different part of the IDF distribution, thereby landing them in a more advanced CKD state. The reason we are modeling CKD this way is because it is a condition for treatment of LDL-C, which is the intervention in this model. Thus, we need to get the prevalence at each severity (mild/moderate v. severe) correct. CKD is not a cause of interest in the current project it is being modeled in, so the severity specific prevalence is the current priority.
 
 - Simulants are in each disease state longer than they should be, compared to GBD 2017. 
 
-- This model effects other models – disability weights, excess mortality weight for each state, cause specific mortality rate
+- This model assumes there is no impact of SBP nor FPG on CKD.
+
+Limitations
++++++++++++
+
+- This model is consistent with prevalence in population. The following relationships between CKD/SBP and CKD/FPG will be modeled using correlation. The iniitial distribution will be correct, but will change over time and become inaccurate due to mitigating factors.
 
 Cause Model Diagram
 -------------------
@@ -255,22 +255,50 @@ State and Transition Data Tables
      - prevalence
      - :math:`{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}`
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
-   * - Sev
-     - excess mortality rate (EMR) of severe CKD
+   * - cat1
+     - excess mortality rate (EMR) of cat1
      - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat2
+     - excess mortality rate (EMR) of cat2
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat3
+     - excess mortality rate (EMR) of cat3
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat4
+     - excess mortality rate (EMR) of cat4
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat5
+     - excess mortality rate (EMR) of cat4
+     - 0
+     - this equals 0 because the disease state mapped to this is 'susceptible'
    * - M
      - excess mortality rate (EMR) of moderate CKD
      - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
-   * - M
+   * - cat1
      - disability weight
-     - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
-     -
-   * - Sev
+     - :math:`\frac{{\sum_{sequelae\in \text{cat1}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - disability weight for IKF cat1 (sequelae mapped to IKF cat1)
+   * - cat2
      - disability weight
-     - :math:`\frac{{\sum_{s\in \text{sequelae_sev}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
-     -
+     - :math:`\frac{{\sum_{sequelae\in \text{cat2}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - disability weight for IKF cat2 (sequelae mapped to IKF cat2)
+   * - cat3
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{cat3}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - disability weight for IKF cat3 (sequelae mapped to IKF cat3)
+   * - cat4
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{cat4}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - disability weight for IKF cat4 (sequelae mapped to IKF cat4)
+   * - cat5
+     - disability weight
+     - 0
+     - this equals 0 because the disease state mapped to this is 'susceptible'
    * - All
      - cause-specific mortality rate
      - :math:`\frac{\text{deaths_c589}}{\text{population}}`
@@ -322,9 +350,9 @@ State and Transition Data Tables
 Validation Criteria
 -------------------
 
-* prevalence_moderate_CKD + prevalence_severe_CKD = 1
-
-* prevalence_CKD = sum of prevalence_sequelae_CKD
+Based on the model's assumptions and limitations, the following verification and validation tasks are outlined below:
+- All-Cause Mortality Rate in GBD 2017 vs. this model (initialization, in year = 2020)
+- CKD prevalence in GBD 2017 vs. this model (initialization, in year = 2020)
 
 References
 ----------
