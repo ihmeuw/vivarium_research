@@ -129,10 +129,10 @@ Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Initialization:
-- In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. This structure means there's no impact of SBP on CKD.
+- In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. 
 
 Progress:
-- In this model, simulants will not transition into later states over time. Simulants will stay in the disease states they were initialized in.
+-As simulants age, their risk exposure will change, which may result in them progressing into a different disease state over time. Also, simulants will experience mortality based on their risk exposure.
 
 .. todo::
 Confirm with the RT and SE team how this model affects other models.
@@ -174,6 +174,9 @@ Mapping CKD States to IKF Categories in Vivarium
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
+
+Assumptions
++++++++++++
 
 - Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. If we had remission (which is actually the term used for "progression") rates, we could use these as inter-stage incidence rates.
 
@@ -254,12 +257,12 @@ State and Transition Data Tables
      - = prevalence of CKD stage V sequelae + CKD end stage sequelae
    * - Sev
      - excess mortality rate (EMR) of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalencec589}}`
-     - = CSMR of CKD / prevalence of CKD 
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - M
      - excess mortality rate (EMR) of moderate CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalencec589}}`
-     - 
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - M
      - disability weight
      - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
@@ -271,7 +274,7 @@ State and Transition Data Tables
    * - All
      - cause-specific mortality rate
      - :math:`\frac{\text{deaths_c589}}{\text{population}}`
-     -
+     - calculated CSMR, not a direct input from GBD 2017
 
 
 .. list-table:: Data Sources and Definitions
@@ -302,10 +305,19 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
-   * - incidence_c589
-     - como
-     - Incidence of chronic kidney disease
-     -   
+   * - risk_exposure_rei_id_341
+     - exposure
+     - risk exposure of IKF 
+     - 
+   * - relative_risk_rei_id_341
+     - exposure
+     - relative risk of IKF and affected causes
+     -
+   * - paf_rei_id_341
+     - burdenator
+     - PAF of IKF 
+     - 
+
         
 Validation Criteria
 -------------------
