@@ -123,7 +123,7 @@ Below is a list of measures and corresponding IDs:
   1.  Incidence and remission are measures for the cause.
   2.  I thought we decided not to use them at all.
 
-  Correct, we are planning not to use incidence or remission data, so we should
+  Correct, we are not planning to use incidence or remission data, so we should
   make this clear. E.g. move the first two rows of this table into the `Vitamin
   A Deficiency Cause`_ section and clarify that we're not planning to use them
   for the Vivarium model, or just omit them entirely.
@@ -220,14 +220,18 @@ mortality to arrive at the estimates in :ref:`Table 4
 
 .. Note::
 
-  In GBD 2019, the effect on lower respiratory infections (LRI) was dropped due
-  to insufficient evidence of causation found by the network meta-analysis.
+  In GBD 2019, the effect on lower respiratory infections (LRI) was **dropped**
+  due to insufficient evidence of causation found by the network meta-analysis.
   Moreover, the relative risks for measles and diarrheal diseases were found to
-  be smaller than those in the above table.
+  be smaller than those in the above table. This should be noted as a limitation
+  in any simulation using the RR's from GBD 2017.
 
 .. todo::
 
-  Reformat :ref:`Table 4 <gbd_2017_vad_relative_risk_table>` to make it more useful for the software engineers, based on James's comments in `PR 149 <https://github.com/ihmeuw/vivarium_research/pull/149>`_. Namely:
+  Reformat :ref:`Table 4 <gbd_2017_vad_relative_risk_table>` (or perhaps make a
+  separate table) to make it more useful for the software engineers, based on
+  James's comments in `PR 149
+  <https://github.com/ihmeuw/vivarium_research/pull/149>`_. Namely:
 
   1.  We can include the actual data means and uncertainties here, but since
       we're planning to use the draw-level RR's from GBD, we should include the
@@ -416,8 +420,8 @@ supplementation.
 In GBD 2019, the effect on lower respiratory infections (LRI) was dropped due to
 insufficient evidence of causation found by the network meta-analysis. Moreover,
 the relative risks for measles and diarrheal diseases were found to be smaller
-than those in the above table. Clients should be made aware of this if weare
-using the GBD 2017 relative risks.
+than those in the above table. Clients should be made aware that the relative
+risks from GBD 2017 do not reflect the most up-to-date data.
 
 Cause Model Diagram
 +++++++++++++++++++
