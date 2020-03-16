@@ -48,14 +48,45 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
-.. todo::
+The following table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
 
-   Add restrictions table.
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
 
 
 Vivarium Modeling Strategy
 --------------------------
-
 
 Scope
 +++++
@@ -90,10 +121,107 @@ Note: This simpliflication might over estimate the number of deaths. See Model A
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
+.. list-table:: Definitions
+   :widths: 15 20 30
+   :header-rows: 1
 
-.. todo::
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - Susceptible
+     - Susceptible to colon and rectum cancer
+   * - I
+     - Infected
+     - Infected with colon and rectum cancer
 
-   Add state and transitions  data tables.
+
+.. list-table:: States Data
+   :widths: 20 25 30 30
+   :header-rows: 1
+   
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - 1-prevalence_c441
+     - 
+   * - S
+     - excess mortality rate
+     - 0
+     - 
+   * - S
+     - disabilty weights
+     - 0
+     -
+   * - I
+     - prevalence
+     - prevalence_c441
+     - 
+   * - I
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c441}}{\text{population} \times \text{prevalence_c441}}`
+     - 
+   * - I
+     - disability weights
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c441}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - total disability weight over all sequelae with ids s_296, s_5519, s_5522, s_298, s_299, s_5525
+   * - ALL
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c441}}{\text{population}}`
+     - 
+
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+   
+   * - Transition
+     - Source 
+     - Sink 
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - :math:`\frac{\text{incidence_rate_c441}}{\text{1 - prevalence_c441}}`
+     - Incidence rate in total population is divided by 1-prevalence_c441 to get incidence rate among the susceptible population.
+
+
+.. list-table:: Data Sources
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - prevalence_c441
+     - como
+     - Prevalence of cause colon and rectum cancer
+     - 
+   * - deaths_c441
+     - codcorrect
+     - Deaths from colon and rectum cancer
+     - 
+   * - population
+     - demography
+     - Mid-year population for given country
+     - 
+   * - incidence_rate_c441
+     - como
+     - Incidence rate for colon and rectum cancer
+     - 
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weights associated with each sequelae
+     - 
+   * - prevalence_s{`sid`}
+     - como
+     - Prevalence of each sequelae
+     - 
 
 
 Validation Criteria
