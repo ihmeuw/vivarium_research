@@ -233,10 +233,10 @@ mortality to arrive at the estimates in :ref:`Table 4
   James's comments in `PR 149
   <https://github.com/ihmeuw/vivarium_research/pull/149>`_. Namely:
 
-  1.  We can include the actual data means and uncertainties here, but since
-      we're planning to use the draw-level RR's from GBD, we should include the
-      `rei_id` and `cause_id` associated with each risk-outcome pair we're
-      using.
+  1.  We can include the actual data means and uncertainties here if we want,
+      but since we're planning to use the draw-level RR's from GBD, we should
+      include the `rei_id` and `cause_id` associated with each risk-outcome pair
+      we're using.
 
   2.  Including the interpretations of the RR's is good. I think you should
       have the interpretation as a column in the table though. A single risk
@@ -272,6 +272,16 @@ for other risk factors and risk-attributable causes, such as child stunting,
 
   Standardize the terminology above and below to use "exposure model"
   throughout, since this applies to all risk factors.
+
+  **Proposal:** What about using "exposure propensity model," because each
+  simulant has a fixed propensity for exposure to the risk? This highlights the
+  fact that we are not only using standard `inverse transform sampling
+  <https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to sample from
+  the exposure distribution, but that we do this at each time step *without
+  changing the simulants' percentile ranks*, which we conceptualize as fixed
+  propensities for exposure. The same conceptual framework of "propensity" would
+  still apply even if we come up with a way to dynamically change simulants'
+  `percentile ranks <percentile rank_>`_ over the course of the simulation.
 
 In more detail, the basic strategy is to initialize each simulant with a
 propensity score distributed uniformly in [0,1], then compare this propensity
@@ -368,6 +378,82 @@ vitamin A deficiency. This is why we called :math:`v_i` the "propensity score"
 rather than just the "propensity." We could additionally define the
 **propensity** for VAD to be :math:`1-v_i`, but we don't actually need this
 number.
+
+.. todo::
+
+  Revise the above algorithm to take into account James' comments in `PR 149
+  <https://github.com/ihmeuw/vivarium_research/pull/149>`_:
+
+    I think we should standardize the notation for these things. I follow
+    :code:`scipy` conventions in the code and I think they're reasonable:
+
+    | x_i - the random variable (the exposure)
+    | q_i - the percentile or propensity of the exposure x_i in the distribution
+    | (called q because the inverse cdf is the quantile function, though also
+    | called the percent point function).
+    | Initialize should also describe how we actually get x_i.
+
+  Actually, as noted above, the propensity score is not the percentile_ (or
+  quantile_), but the `quantile rank`_. Perhaps it would be better to use p_i
+  instead of q_i (I used v_i above)?
+
+  In this case x_i would be a binary variable, "has VAD" / "does not have VAD".
+  How would you initialize this before following the procedure in the "Update"
+  step?
+
+    The procedure is the same as in update, but it has to happen before a time
+    step takes place. The value of other attributes the simulant is initialized
+    with (e.g. whether or not they are receiving vitamin a fortification) may be
+    dependent on their initial vitamin a deficiency status. This is a `fencepost
+    error <https://en.wikipedia.org/wiki/Off-by-one_error#Fencepost_error>`_.
+    All attributes of a simulant must be assigned an initial value before the
+    first time step starts or you introduce extremely hairy issues into the
+    order you must update simulant state each time step.
+
+    Here's the procedure:
+
+    1.  Initialization:
+
+        - Sample propensity and store it for all time.
+        - Use attributes initial distribution is conditional on (age, sex,
+          year) to construct probability mass function
+        - Use propensity to sample pmf and assign initial status.
+
+    2.  Update:
+
+        - Your procedure looks good here.
+
+.. todo::
+
+  In a separate document, write a description of how Vivarium's standard risk
+  exposure model works using `inverse transform sampling
+  <https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_, and explain how
+  the VAD model is a special case of this. The general procedure is described by
+  James in `PR 149 <https://github.com/ihmeuw/vivarium_research/pull/149>`_:
+
+    Just leaving notes. I think this section is great. I think we want to pull it out into the general risk model for the **standard way to sample from categorical distributions**. In order to do so, we have to generalize this section a bit. Technically what we do is start with a distribution
+
+    p = [P_1, P_2, ..., P_N, 1 - (P_1 + ... +P_n)]
+
+    where P_j is the probability that an individual is in category j.
+
+    We then take the cumulative sum over the distribution
+
+    p_cum = [P_1, P_1 + P_2, ..., P_1 + ...+ P_N, 1]
+
+    to form the right bounds of a partition of the interval [0, 1] with each
+    subinterval mapping to a risk exposure category with probability
+    p_cum[right] - p_cum[left].
+
+    We then select the exposure category k by arg_max_k (q_i < p_cum[k]) and
+    assign that category as x_i.
+
+    This means the interpretation of propensity is dependent on the sort order
+    of the categories.
+
+    The default sort order is worst to best.
+
+    w/r/t risk effect. We have not had to deal with unordered categorical risks.
 
 Tracking Years Lived with Disability due to Vitamin A Deficiency
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
