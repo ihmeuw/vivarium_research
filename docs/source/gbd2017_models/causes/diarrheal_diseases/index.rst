@@ -4,44 +4,291 @@
 Diarrheal Diseases
 ==================
 
-Background and motivation
---------------------------
-At the individual level, exposure to risk factors are likely to be correlated. Several examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, and childhood height and weight. Vivarium takes population exposure prevalence estimates by age/sex/year/location and determines the if a simulant is exposed to the risk factor such that the prevalence within the simulation matches the GBD estimate. The exposure status for multiple risk factors of the individuals within Vivarium should be adjusted so that they are correlated across those risks.
-Although correlated risk factor exposure may be important in a variety of contexts, we are proposing using childhood height and weight as a testing and motivating example. Childhood growth is an important metric for how children are developing. Children with low height and weight for their age are at higher risk of getting and dying from infectious diseases like diarrhea, lower respiratory infections, and measles. Height and weight should be correlated between children and each child should have dynamic but correlated height and weight over time as they age.  
+Disease Description
+-------------------
+
+We follow GBD 2017 and "defined diarrhoeal disease episodes as three or more 
+loose stools in a 24-hour period." (p. 88 of 
+[GBD-2017-YLD-Capstone-Appendix-1]_).
+
+Diarrhea has various etiologies, with infectious diarrhea accounting for the 
+vast majority of global diarrheal disease burden. The top pathogens responsible 
+for diarrhea include norovirus, rotavirus, E. Coli, Camplyobacter, and 
+Salmonella. Bacterial infections, and specifically species of Shigella, 
+account for the majority of bloody diarrhea.
+
+Infection most commonly occurs via feces-contamined water, and can also spread 
+via contamined food and person-to-person contact. ([WHO]_)
+
+The global prevalence of diarrhea thus varies considerably accoring to resource 
+access. In particular, resource-limited countries have a "baseline frequency... 
+superimposed with epidemic cases of diarrhea" ([UpToDate_1]_). The top risk 
+factors for diarrheal diseases thus include crowding (such as living in refugee 
+camps) and poor sanitation, in addition to immune system-compromising conditions, 
+such as living with HIV.
+
+The most significant outcomes of a nonfatal diarrhea episode are dehydration and 
+the loss of nutrition. In particular, in low-income countries, the high 
+prevalence of diarrhea is a major cause of child malnutrition ([WHO]_), which 
+in turn makes such children more susceptible to future diarrheal episodes and 
+other negative sequelae.
+
+The WHO-recommended measures for diarrhea prevention include:
+	- Access to safe drinking water;
+	- Use of improved sanitation;
+	- Hand washing with soap;
+	- Exclusive breastfeeding for the first six months of life;
+	- Good personal and food hygiene;
+	- Health education about how infections spread; and
+	- Rotavirus vaccination.
+
+Noninfectious diarrhea etiologies are far less common, but are more likely among 
+chronic cases of diarrhea. Causes of noninfectious diarrhea include ischemic 
+colitis, inflammatory bowl disease, among others ([UpToDate_2]_).
 
 
 
-Risk exposure correlation
+Modeling Diarrheal Diseases in GBD 2017
 ---------------------------------------
-The proposed method to introduce correlation in risk factor exposure is by finding the Spearman’s correlation coefficient between two or more risks and sampling from a multivariate normal distribution when assigning a position on an exposure distribution. This plot shows data from a joint distribution reflecting the variance and covariance between height and weight at one month using data from a cohort study. The top panel shows the values for the height and weight and the bottom panel shows the percentiles within the distributions (propensity values).
 
-.. image:: gaussian_copulae.jpg
+The GBD diarrheal diseases model follows a standard GBD framework, including a 
+cause of death (CoD) model and a nonfatal model.
 
-Attributable fraction correlation
+The CoD model estimates the cause-specific mortality rate (CSMR) within the
+total population, and a cause fraction. These estimates are based on vital
+registration and verabal autopsy data.
+
+The nonfatal model is run in DisMod. The primary inputs are prevalence epi data,
+for which self-reported prevalence is the reference definition, and the CSMR
+estimates from CodCorrect. Separately, the ratio of mild/moderate/severe
+diarrhea is estimated, based on data from a systematic review. These severity
+ratio estimates do not vary by age/sex/location/year, and are applied to the
+prevalence and incidence estimates produced by DisMod to produce the three
+sequela of diarrheal diseases: mild diarrheal diseases, moderate diarrheal
+diseases, and severe diarrheal diseases. In our model, every individual will
+have the average severity for their age/sex/location/year. 
+
+The GBD 2017 adjusted for seasonal variation in diarrheal disease, but we have
+not attempted to include this variation in Vivarium yet. (p. 89)
+
+There is substantial additional effort in GBD to divide diarrhea burden into the
+aetiologies of diarrhea, but we have not included aetiologies in this simple
+model.
+
+
+GBD Hierarchy
 -------------
 
-With some testing and simulation, we are able to show that the population attributable fraction for multiple risk factors depends on the correlation in those risks. To date, Vivarium has been using a risk deleted rate (e.g. incidence or mortality) based on an assumption that the risk exposures are independent. However, the more correlated the risks exposures, the more wrong this assumption will be. The overall idea is to take GBD rates and remove the combined contribution of risk factor attributable fractions (PAFs):
+.. image:: DD_cause_hierarchy.svg
 
-Where i_0 is the risk-deleted rate, PAF is the population attributable fraction for a single or multiple risk factors, and  i_GBDis the rate from GBD. A combined PAF for multiple risk factors is the product of 1 minus the independent PAFs. 
- 
-This can be written in a slightly different way for each individual in the simulation and what we are calling the Multiplicative approach to combined PAFs:
- 
-Where RR is a relative risk and e1 & e2 are indicators {0,1} for exposure status to each risk factor for each individual. We are proposing a slight variation on this formulation, what we are calling the Joint approach to combined PAFs: 
- 
-These two approaches give nearly the same value for the attributable fraction when the exposure to each risk is independent. However, when the exposures to the risk factors are correlated, the so-called Joint approach gives a higher value of the attributable fraction than the Multiplicative (current Vivarium) approach. 
-We have conducted some simple tests to determine how this impacts the final rate of events among individuals. In this test, we calculate a risk deleted rate as:
- 
-And calculate the attributable fraction in the two ways described above, as a multiplicative and a joint PAF that we compared. 
- 
-Each individual then has a rate of event defined by 
- 
-Where i is the rate for an individual, i0 is the risk deleted rate, RR is a relative risk and e is an indicator {0,1} denoting if the individual is exposed to that risk factor.
-Our simple tests show that when evaluating these attributable fractions on individuals with a known rate of event, the joint PAFs return rates nearly identical to the known rate of events. In contrast, the multiplicative PAFs return rates that are too high when the risk exposures are correlated (rate here is 0.5).
-
-.. image:: rate_dotplot.jpg
-
-Proposal
+Cause Model Diagram
 -------------------
-We would like to test these two changes for exposures and attributable fractions in the Balanced Energy Protein model as sensitivity analyses supplementing the primary analysis. The risks that we want to test are childhood growth failure: stunting, underweight, and wasting. We are proposing using correlation structures for these exposures from analyses of individual-level data. 
 
-Also in the BEP model, we would like to attempt creating correlated changes to propensity scores for stunting, underweight, and wasting within individuals over time. This would involve implementing multiple samples for these risk factors to determine propensity and risk exposure for each simulant. There would not be any changes to the attributable fractions for these risks, the only change would be in allowing these propensity values to change at defined time points, corresponding with GBD age groups. 
+.. image:: DD_cause_model.svg
+
+
+S: **S**\ usceptible to diarrheal diseases
+
+I: **I**\ nfected and currently experiencing a diarrheal disease bout
+
+
+Data Description
+----------------
+
+.. list-table:: State Definitions
+	:widths: 5 10 10
+	:header-rows: 1
+	
+	* - State
+	  - State name
+	  - Definition
+	* - S
+	  - **S**\ usceptible
+	  - Simulant currently has diarrheal disease
+	* - I
+	  - **I**\ nfected
+	  - Simulant does not currently have diarrheal disease
+
+.. list-table:: State Data
+	:widths: 5 10 10 20
+	:header-rows: 1
+	
+	* - State
+	  - Measure
+	  - Value
+	  - Notes
+	* - I
+	  - prevalence
+	  - prevalence_c302
+	  -
+	* - I
+	  - birth prevalence
+	  - 0
+	  - 
+	* - I
+	  - excess mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_c302}}`
+	  -
+	* - I
+	  - disability weight
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  -
+	* - S
+	  - prevalence
+	  - 1-prevalence_c302
+	  -
+	* - S
+	  - birth prevalence
+	  - 1
+	  - 
+	* - S
+	  - emr
+	  - 0
+	  -
+	* - S
+	  - disability weight
+	  - 0
+	  -
+	* - All
+	  - cause-specific mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
+	  -
+
+.. list-table:: Transition Data
+	:widths: 10 10 10 10 10
+	:header-rows: 1
+	
+	* - Transition
+	  - Source State
+	  - Sink State
+	  - Value
+	  - Notes
+	* - i
+	  - S
+	  - I
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
+	  - We transform incidence to be a rate within the susceptible population.
+	* - r
+	  - I
+	  - S
+	  - remission_rate_m1181
+	  - Already a rate within with-condition population
+
+	  
+.. list-table:: Data Sources and Definitions
+	:widths: 1 3 10 10
+	:header-rows: 1
+	
+	* - Value
+	  - Source
+	  - Description
+	  - Notes
+	* - prevalence_c302
+	  - como
+	  - Prevalence of diarrheal diseases
+	  -
+	* - deaths_c302
+	  - codcorrect
+	  - Deaths from diarrheal diseases
+	  -
+	* - incidence_rate_c302
+	  - como
+	  - Incidence of diarrheal disease within the entire population
+	  - 
+	* - remission_rate_m1181
+	  - dismod
+	  - Remission of diarrheal disease within the infected population
+	  -
+	* - population
+	  - demography
+	  - Mid-year population for given age/sex/year/location
+	  -
+	* - sequelae_c302
+	  - gbd_mapping
+	  - List of 4 sequelae for diarrheal diseases
+	  - Note Guillain-Barre due to diarrheal diseases is included in sequelae.
+	* - prevalence_s{`sid`}
+ 	  - como
+	  - Prevalence of sequela with id `sid`
+	  -
+	* - disability_weight_s{`sid`}
+	  - YLD appendix
+	  - Disability weight of sequela with id `sid`
+	  - 
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
+
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLL age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+	* - YLD age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLD age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+
+
+
+Validation Criteria
+-------------------
+
+.. todo::
+
+   Describe tests for model validation.
+
+References
+----------
+
+.. [WHO] Diarrheal disease Fact Sheet. World Health Organization, 2 May 2019.
+   Retrieved 14 Nov 2019.
+   https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease
+
+..	[UpToDate_1] Approach to the adult with acute diarrhea in resource-limited countries
+	Retrieved 26 Dec 2019.
+	https://www.uptodate.com/contents/approach-to-the-adult-with-acute-diarrhea-in-resource-limited-countries
+
+..	[UpToDate_2] Approach to the adult with acute diarrhea in resource-rich countries
+	Retrieved 26 Dec 2019.
+	https://www.uptodate.com/contents/approach-to-the-adult-with-acute-diarrhea-in-resource-rich-settings
+
+.. [CDC] Diarrhea: Common Illness, Global Killer.
+   https://www.cdc.gov/healthywater/global/diarrhea-burden.html
+
+.. [Wikipedia] Diarrhea. From Wikipedia, the Free Encyclopedia.
+   Retrieved 14 Nov 2019.
+   https://en.wikipedia.org/wiki/Diarrhea
+
+.. [GBD-2017-YLD-Capstone-Appendix-1]
+   Supplement to: GBD 2017 Disease and Injury Incidence and Prevalence
+   Collaborators. Global, regional, and national incidence, prevalence, and
+   years lived with disability for 354 diseases and injuries for 195 countries
+   and territories,    Disease Study 2017. Lancet 2018; 392: 178   (pp. 88-94)
+
+   (Direct links to the YLD Appendix hosted on Lancet.com_ and ScienceDirect_)
+
+.. _Lancet.com: `YLD appendix on Lancet.com`_
+.. _ScienceDirect: `YLD appendix on ScienceDirect`_
+
+.. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
+.. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
+.. _DOI for YLD Capstone: https://doi.org/10.1016/S0140-6736(18)32279-791990
