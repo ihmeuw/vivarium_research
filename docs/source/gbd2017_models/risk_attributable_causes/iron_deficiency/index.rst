@@ -299,7 +299,7 @@ whether the simulant will respond to iron supplementation. Details on how to
 intialize these parameters are included in the following sections.
 
 Notably, the initialization of a simulant's hemoglobin concentration should
-occur *before* the initialization of iron responsiveness. This is because 
+occur *before* the initialization of iron responsiveness.
 
 .. todo::
 
@@ -317,7 +317,7 @@ number will represent the percentile of hemoglobin concentration for that
 individual simulant relative to the baseline population distribution of
 hemoglobin concentrations (from the GBD iron deficiency risk factor rei_92)
 *for the remainder of the simulation*. The corresponding hemoglobin 
-concetration for that percentile should then be assigned to the simulant using 
+concentration for that percentile should then be assigned to the simulant using 
 the methodology described in the reaminder of this section.
 
 Any shifts in hemoglobin concentration (due to baseline coverage or
