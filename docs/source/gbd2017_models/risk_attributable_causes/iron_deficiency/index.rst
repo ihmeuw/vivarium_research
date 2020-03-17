@@ -299,7 +299,7 @@ whether the simulant will respond to iron supplementation. Details on how to
 intialize these parameters are included in the following sections.
 
 Notably, the initialization of a simulant's hemoglobin concentration should
-occur *before* the initialization of iron responsiveness. This is because 
+occur *before* the initialization of iron responsiveness.
 
 .. todo::
 
