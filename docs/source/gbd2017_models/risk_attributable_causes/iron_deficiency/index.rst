@@ -448,22 +448,13 @@ non-iron responsive (0) according to the following rules:
 		else:
 			iron_responsive_i = 0
 	else:
-		if random_number_i <= ((1 - prevalence_total_overall_anemia
-					    - (prevalence_c_613
-					       + prevalence_c_298
-					       + prevalence_c_345
-					       - (prevalence_total_overall_anemia
-					          - prevalence_overall_ira))
-					  / (1 - prevalence_total_overall_anemia)):
-			iron_responsive_i = 1
-		else:
-			iron_responsive_i = 0
+		iron_responsive_i = 1
 
 	# NOTE: use <, not =< for anemia thresholds
 
-.. todo::
+.. note::
 
-	Confirm how to handle final "else" statement with research team. Relevant notebook posted `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Anemia%20research%20questions.ipynb>_.
+	Final else statement indicates that we assume all individuals without anemia will be iron responsive. See calculations that investigate this assumption `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`_.
 
 Where:
 
@@ -581,6 +572,21 @@ Our approach of assigning individual simulants propensity scores (percentiles
 within the population hemoglobin concentration distribution) is a limitation of
 our modeling strategy in that it assumes that this remains constant over time
 and age groups.
+
+We assume that all individuals who are not anemic are iron responsive. This 
+assumption is based on two additional assumptions, including a) asymptomatic 
+individuals with non-iron-responsive causes will remain asymptomatic, and b) 
+the prevalence of individuals with non-iron-responsive causes without anemia 
+is neglible (see a notebook investigating the prevalence of these groups `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`_). 
+
+	These assumptions may cause our model to improve the hemoglobin status via 
+	an iron supplementaion/foritifaction intervention among simulants who may 
+	not actually respond to iron supplmentation and otherwise would be 
+	borderline non-anemic based on their hemoglobin threshold (and may go on 
+	to develop mild anemia as they age and the hemoglobin distribution and 
+	anemia threshold values change). Therefore, this assumption may slightly 
+	overestimate the impact of iron supplementation/fortification 
+	interventions.
 
 Because we are not modeling individual causes of anemia (and their associated
 mortality), we assume that all simulants have the same mortality rate 
