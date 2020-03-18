@@ -195,9 +195,6 @@ Lagos were from the same paper and therefore could have a similar bias.
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^
 
-Coverage Algorithm
-^^^^^^^^^^^^^^^^^^
-
 Let :math:`C(t)` denote the proportion of the population receiving fortified
 food (i.e. the population coverage) after :math:`t` years, and let :math:`t_0`
 denote the time at which our folic acid intervention starts. Our folic acid
@@ -283,7 +280,7 @@ as follows:
   sigma = (log(q_975) - mu) / q_975_stdnorm # std dev of normal distribution for log(RR)
 
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
-  # (s is the shape parameter)
+  # (s is the shape parameter; the scale parameter is exp(mu), which equals the median)
   rr_distribution = lognorm(s=sigma, scale=median)
 
 Desired Model Outputs
