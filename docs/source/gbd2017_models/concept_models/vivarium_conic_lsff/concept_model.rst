@@ -178,6 +178,8 @@ assumptions:
 
 	Add citations for all of these studies/references.
 
+	Add descriptions of strategy and assumptions regarding differences between baseline and intervention coverage (intervention effect lag, non-age-dependent)
+
 **Vivarium Modeling Strategy**
 
 In our Vivarium simulation, the effect of exposure foods **not** fortified 
@@ -189,13 +191,74 @@ exposed to vitamin A fortified foods will be represented as follows:
   RR = \frac{P(\text{VAD prevalence} \mid \text{no fortification})}
   {P(\text{VAD prevalence} \mid \text{fortification})}
   \approx \frac{1}{0.45\: (0.19, 1.05)}
-  \approx 1.71\: (0.95, 5.26).
+  \approx 2.22\: (0.95, 5.26).
 
-.. todo::
+.. note::
 
-	Include detail on age-dependent RR for 0-6 month olds strategy. Include 
-	sampling distribution of confidence interval. Include detail on 
-	intervention effect lag.
+	We are modeling the reciprocal of the relative risk reported in the Cochrane review.
+
+To model the uncertainty in this estimate, the above RR should be drawn from a
+`lognormal <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
+distribution with median = 2.22, 2.5\ :superscript:`th`-percentile = 0.95, and
+97.5\ :superscript:`th`-percentile = 5.26. This distbibution can be created
+using `SciPy's lognorm function
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_
+as follows:
+
+.. code-block:: Python
+
+  from numpy import log
+  from scipy.stats import norm, lognorm
+
+  # median and 0.975-quantile of lognormal distribution for RR
+  median = 2.22
+  q_975 = 5.26
+
+  # 0.975-quantile of standard normal distribution (=1.96, approximately)
+  q_975_stdnorm = norm().ppf(0.975)
+
+  mu = log(median) # mean of normal distribution for log(RR)
+  sigma = (log(q_975) - mu) / q_975_stdnorm # std dev of normal distribution for log(RR)
+
+  # Frozen lognormal distribution for RR, representing uncertainty in our effect size
+  # (s is the shape parameter)
+  rr_distribution = lognorm(s=sigma, scale=median)
+
+Additionally, as described in the research considerations above, the 
+intervention effect is dependent on age and time since intervention coverage.
+
+	For simulants covered by *baseline coverage*, the effect of the 
+	intervention is applied continuously from the start of the simulation to 
+	the end of the simulation and only depends on age, such that:
+
+.. code-block:: Python
+
+  if age_i < 0.5:
+  	rr_i = 1 + (rr - 1) * a_i / 0.5
+  else:
+  	rr_i = rr
+
+	For simulants covered by the *intervention scale-up*, the effect of the 
+	intervention will scale up linearly from zero at the start of coverage to 
+	the full effect after six months of coverage and does *not* depend on age (
+	research assumption), such that:
+
+.. code-block:: Python
+
+  if coverage_time_i < 0.5:
+  	rr_i = 1 + (rr - 1) * coverage_time_i / 0.5
+  else:
+  	rr_i = rr
+
+Where,
+
+	- **age_i** = age of simulant in years
+
+	- **coverage_time_i** = time since start of intervention coverage for a simulant in years
+
+	- **rr_i** = relative risk to be applied to an individual simulant
+
+	- **rr** = relative risk for intervention, sampled as described above based on a random number between 0 and 1, assigned to a simulant *for the entirety of the simulation*
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
