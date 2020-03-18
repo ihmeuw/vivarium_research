@@ -103,8 +103,8 @@ Effect Size
 
 **Research Considerations**
 
-In this model, the vitamin A fortification intervention affects the **
-prevalence of vitamin A deficiency**. The effect size for this intervention 
+In this model, the vitamin A fortification intervention affects the 
+**prevalence of vitamin A deficiency**. The effect size for this intervention 
 was obtained from a Cochrane review performed by Hombali et al. (2019) on the 
 fortification of staple foods with vitamin A for vitamin A deficiency. 
 Notably, the relative risk for vitamin A foritification on vitamin A 
@@ -112,8 +112,8 @@ deficiency from this review only included data from two randomized controlled
 trials and the authors of the review assessed the certainty of the evidence to 
 be "very low" (Hombali et al. 2019). The relative risk of vitamin A deficiency 
 prevalence among the population exposed to vitamin A fortification relative to 
-the population unexposed to vitamin A fortification from this review was **
-0.45 (95% CI: 0.19 - 1.05)**.
+the population unexposed to vitamin A fortification from this review was 
+**0.45 (95% CI: 0.19 - 1.05)**.
 
 Therefore, we conducted a supplementary analysis of the effect of the 
 intervention by pooling the RCT studies from the Cochrane review with studies 
