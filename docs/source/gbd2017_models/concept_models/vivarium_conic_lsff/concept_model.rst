@@ -227,9 +227,9 @@ as follows:
 Additionally, as described in the research considerations above, the 
 intervention effect is dependent on age and time since intervention coverage.
 
-	For simulants covered by *baseline coverage*, the effect of the 
-	intervention is applied continuously from the start of the simulation to 
-	the end of the simulation and only depends on age, such that:
+For simulants covered by *baseline coverage*, the effect of the intervention 
+is applied continuously from the start of the simulation to the end of the 
+simulation and only depends on age, such that:
 
 .. code-block:: Python
 
@@ -238,10 +238,10 @@ intervention effect is dependent on age and time since intervention coverage.
   else:
   	rr_i = rr
 
-	For simulants covered by the *intervention scale-up*, the effect of the 
-	intervention will scale up linearly from zero at the start of coverage to 
-	the full effect after six months of coverage and does *not* depend on age (
-	research assumption), such that:
+For simulants covered by the *intervention scale-up*, the effect of the 
+intervention will scale up linearly from zero at the start of coverage to the 
+full effect after six months of coverage and does *not* depend on age (
+research assumption), such that:
 
 .. code-block:: Python
 
