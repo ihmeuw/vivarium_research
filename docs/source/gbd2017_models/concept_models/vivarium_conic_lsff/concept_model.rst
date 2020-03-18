@@ -236,6 +236,29 @@ In words, our intervention algorithm does the following:
     approach the value :math:`c`, i.e. the proportion of people who eat the
     vehicle.
 
+Determining Whether a Simulant Is Affected
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Folic acid `reduces the birth prevalence <effect size_>`_ of :ref:`neural tube
+defects (NTDs) <2017_cause_neural_tube_defects>`.
+In order for a newborn to have a reduced risk of NTDs, the baby's mother needs sufficient folate intake *three months prior to pregnancy*.
+Therefore, only babies born to mothers who have been eating folic-acid-fortified food for at least a year will have any benefit from our intervention.
+
+With this in mind, here is the algorithm to determine whether a simulant is affected by the folic acid intervention:
+
+1.  **Define variables:** Each simulant needs a boolean attribute `mother_ate_folate_fortified_food`, which will be `True` if the simulant's mother ate folic-acid-fortified food starting at least a year before the simulant was born, and `False` otherwise.
+
+2.  **Initialize the simulation:** At the start of the simulation, set `mother_ate_folate_fortified_food = False` for all simulants; this attribute will not be used after the simulant is born, so the value is irrelevant for all simulants already alive at the start of the simulation.
+
+3.  **Initialize simulants born into the simulation:** For each simulant born at time :math:`t` (in years), the probability that the simulant's mother started eating folic-acid-fortified food at least a year ago is equal to the population coverage one year ago, :math:`C(t-1)`. Therefore, upon the simulant's birth, do the following:
+
+  a. Generate a uniform random number :math:`u\sim \operatorname{Uniform}([0,1])`.
+  b. If :math:`u<C(t-1)`, set `mother_ate_folate_fortified_food = True`; otherwise set `mother_ate_folate_fortified_food = False`.
+
+Note that we are assuming that once someone (in this case the baby's mother) starts eating fortified food, they will continue to eat the fortified food forever.
+
+The variable `mother_ate_folate_fortified_food` will be used to determine the probability that the newborn has a neural tube defect. We will describe how to do this below.
+
 Effect Size
 ^^^^^^^^^^^
 
