@@ -121,8 +121,8 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - :math:`c` = Eats vehicle
   * - Ethiopia
     - 1.0
-    - 7.7
-    - 14.0
+    - 13.9
+    - 25.3
   * - India
     - 6.3 (4.8, 7.9)
     - 7.1 (5.6, 9.1)
@@ -141,8 +141,8 @@ For Ethiopia, assume
 .. math::
 
   a \sim \operatorname{Beta}(0.1,9.9),\quad
-  b \sim \operatorname{Beta}(0.3,3.6),\quad
-  c \sim \operatorname{Beta}(0.4,2.46).
+  b \sim \operatorname{Beta}(0.5,3.1),\quad
+  c \sim \operatorname{Beta}(0.8,2.36).
 
 The means of these `Beta distributions
 <https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
@@ -150,7 +150,7 @@ in the table. Each of the densities has an asymptote at 0 and an x-intercept at
 1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
 monotonically with the mean. The numbers for Ethiopia were chosen so that (i)
 the mean of existing fortification coverage is close to 0, (ii) the percentage
-of people eating wheat flour is similar to that in Lagos, Nigeria, and (iii) 55%
+of people eating wheat flour is similar to that in Nigeria, and (iii) 55%
 of the wheat flour is fortifiable, based on the `Global Fortification Data
 Exchange <https://tinyurl.com/rdm4wza>`_.
 
