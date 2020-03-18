@@ -195,7 +195,15 @@ exposed to vitamin A fortified foods will be represented as follows:
 
 .. note::
 
-	We are modeling the reciprocal of the relative risk reported in the Cochrane review.
+	We are modeling the reciprocal of the relative risk reported in the 
+	Cochrane review.
+
+	Additionally, this effect size crosses the null, and therefore, in some 
+	draws it will cause increasing coverage of the intervention to *increase* 
+	vitamin A deficiency prevalence. This is a limitation caused by the low 
+	quality evidence regarding the relative risk of vitamin A fortification on 
+	vitamin A prevalence. However, on average, increasing coverage of vitamin 
+	A fortification will decrease VAD.
 
 To model the uncertainty in this estimate, the above RR should be drawn from a
 `lognormal <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
@@ -223,6 +231,13 @@ as follows:
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
+
+.. note::
+
+	I copied this from Nathaniel's documentation for the folic acid RR, but I 
+	think that the same approach is appropriate. Perhaps we can eventually 
+	create a separate page that lists similar strategies that we can reference 
+	via links.
 
 Additionally, as described in the research considerations above, the 
 intervention effect is dependent on age and time since intervention coverage.
