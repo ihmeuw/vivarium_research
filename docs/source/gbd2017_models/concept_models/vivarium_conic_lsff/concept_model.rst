@@ -178,7 +178,7 @@ assumptions:
 
 	Add citations for all of these studies/references.
 
-	Add descriptions of strategy and assumptions regarding differences between baseline and intervention coverage (intervention effect lag, non-age-dependent)
+	Add descriptions of strategy and assumptions regarding differences between baseline and intervention coverage (intervention effect lag, non-age-dependent, SOURCES for these)
 
 **Vivarium Modeling Strategy**
 
