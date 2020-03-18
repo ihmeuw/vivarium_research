@@ -173,6 +173,50 @@ and similarly for b and c. The random variables :math:`a_\text{Kano}` and
 :math:`a_\text{Lagos}` can be sampled independently from the Beta distributions
 described above to compute this sum (and similarly for b and c).
 
+Coverage Algorithm
+^^^^^^^^^^^^^^^^^^
+
+Let :math:`C(t)` denote the proportion of the population receiving fortified
+food (i.e. the population coverage) after :math:`t` years, and let :math:`t_0`
+denote the time at which our folic acid intervention starts. Our folic acid
+intervention algorithm is described by the following formula:
+
+.. math::
+
+  C(t) =
+  \begin{cases}
+  a & \text{if $t<t_0$,}\\
+  c - (c-b)(1-r)^{t-t_0} & \text{if $t\ge t_0$,}
+  \end{cases}
+
+where :math:`a`, :math:`b`, and :math:`c` are the existing `population coverage
+data`_ estimates from the previous section, and :math:`r \in [0,1]` is a
+user-defined parameter representing the proportion of people each year who start
+off eating an unfortifiable version of the vehicle but can be convinced to
+switch to the fortified vehicle.
+
+By default, we will start the intervention at :math:`t_0 = 1 \text{ year}`, and we'll assume :math:`r = 0.1` (i.e. an additional 10% of unfortifiable food will be converted to fortified food each year). We may later want to specify different values of these parameters for different locations.
+
+In words, our intervention algorithm does the following:
+
+1.  Before time :math:`t_0`, the population coverage is the proportion
+    :math:`a` of people who are already eating the fortified vehicle.
+
+2.  At time :math:`t_0`, the population coverage jumps immediately from
+    :math:`a` to :math:`b`, i.e. the proportion of people who are already eating
+    a fortifiable version of the vehicle. The rationale for this instantaneous
+    jump is that the government begins enforcing fortification laws at time
+    :math:`t_0`.
+
+3.  After time :math:`t_0`, we run a campaign to convince people to switch to
+    fortified food, and the rate of conversion is controlled by the parameter
+    :math:`r`, with values close to 0 modeling a slow conversion, and values
+    close to 1 modeling a fast conversion.
+
+4.  If we let the simulation run forever, the population coverage would
+    approach the value :math:`c`, i.e. the proportion of people who eat the
+    vehicle.
+
 Effect Size
 ^^^^^^^^^^^
 
