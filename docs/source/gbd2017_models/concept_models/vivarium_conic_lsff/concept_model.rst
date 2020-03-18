@@ -104,6 +104,54 @@ Iron Fortification
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+Effect Size
+^^^^^^^^^^^
+
+Folic acid fortification affects the birth prevalence of :ref:`neural tube
+defects (NTDs) <2017_cause_neural_tube_defects>`. The effect size is measured as
+a risk ratio (RR):
+
+.. math::
+
+  RR = \frac{P(\text{born with NTD} \mid \text{no fortification})}
+  {P(\text{born with NTD} \mid \text{fortification})}
+  \approx \frac{1}{0.59\: (0.49, 0.70)}
+  \approx 1.71\: (1.43, 2.04).
+
+We are estimating this effect size as the reciprocal of the odds ratio (OR) of
+:math:`0.59\: (0.49, 0.70)` found in the Keats review; this odds ratio is the
+ratio of the odds of being born with NTDs in the fortified population to the
+odds of being born with NTDs in the unfortified population. Since the prevalence
+of NTDs is small, the odds ratio is very close to the risk ratio.
+
+To model the uncertainty in the estimate, the above RR should be drawn from a
+`lognormal <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
+distribution with median = 1.71, 2.5\ :superscript:`th`-percentile = 1.43, and
+97.5\ :superscript:`th`-percentile = 2.04. This distbibution can be created
+using `SciPy's lognorm function
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_
+as follows:
+
+.. code-block:: Python
+
+  from numpy import log
+  from scipy.stats import norm, lognorm
+
+  # median and 0.975-quantile of lognormal distribution for RR
+  median = 1.71
+  q_975 = 2.04
+
+  # 0.975-quantile of standard normal distribution (=1.96, approximately)
+  q_975_stdnorm = norm().ppf(0.975)
+
+  mu = log(median) # mean of normal distribution for log(RR)
+  sigma = (log(q_975) - mu) / q_975_stdnorm # std dev of normal distribution for log(RR)
+
+  # Frozen lognormal distribution for RR, representing uncertainty in our effect size
+  # (s is the shape parameter)
+  rr_distribution = lognorm(s=sigma, scale=median)
+
+
 Desired Model Outputs
 ---------------------
 
