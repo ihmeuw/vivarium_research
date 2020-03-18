@@ -181,7 +181,7 @@ The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
 
 .. _gbd_2017_vad_relative_risk_table:
 
-.. list-table:: Table 4: Pooled relative risks for risk-outcome pairs included in GBD 2017
+.. list-table:: Table 4.1: Pooled relative risks for risk-outcome pairs included in GBD 2017
   :widths: 15 13 15 15
   :header-rows: 1
 
@@ -209,6 +209,23 @@ The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
     -
     - 3.65 (2.23 - 5.97)
     - No (only one study)
+	
+.. list-table:: Table 4.2: Pulled relative risks of GBD 2017 from GBD mapping 
+  :widths: 15 14 14 
+  :header-rows: 1
+
+  * - Cause
+    - GBD 2017 RR
+    - Note
+  * - Diarrhea
+    - 2.44 (2.27 - 2.63)
+    - reiid 96 (age 1-5)
+  * - Measles
+    - 3.51 (2.53 - 4.67)
+    - reiid 96 (age 1-5)
+  * - Lower Respiratory Infections (LRI)
+    - 1.33 (1.11 - 1.59)
+    - reiid 96 (age 1-5)
 
 The above relative risks for GBD 2017 can be interpreted as rate ratios for the
 incidence rates of diarrhea, measles, and LRI. They can also be interpreted as
@@ -309,6 +326,23 @@ approach is twofold:
     risk ratios for prevalence of vitamin A deficiency. The exposure model
     provides a way to directly model these effect sizes in a way that preserves
     this interpretation.
+
+.. list-table:: Prevalence of Vitamin A deficiency in GBD 2017
+  :widths: 15 14 14 
+  :header-rows: 1
+
+  * - Source
+    - GBD compare
+    - GBD mapping 
+  * - Nigeria
+    - 0.228 (0.188 - 0.272)
+    - 0.232 (0.184 - 0.288)
+  * - India
+    - 0.295 (0.252 - 0.344)
+    - 0.25 (0.205 - 0.304)
+  * - Ethiopia
+    - 0.367 (0.306 - 0.429)
+    - 0.315 (0.253 - 0.38)
 
 .. todo::
 
