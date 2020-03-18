@@ -265,6 +265,11 @@ research assumption), such that:
   else:
   	rr_i = rr
 
+.. note::
+
+	Any ideas from the research team on how we might want to combine
+	the impact of age_i < 0.5 and coverage_time_i < 0.5 here?
+
 Where,
 
 	- **age_i** = age of simulant in years
