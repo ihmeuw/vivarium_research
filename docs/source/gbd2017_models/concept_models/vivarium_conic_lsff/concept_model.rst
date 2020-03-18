@@ -98,6 +98,105 @@ Interventions
 Vitamin A Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Effect Size
+^^^^^^^^^^^
+
+**Research Considerations**
+
+In this model, the vitamin A fortification intervention affects the **
+prevalence of vitamin A deficiency**. The effect size for this intervention 
+was obtained from a Cochrane review performed by Hombali et al. (2019) on the 
+fortification of staple foods with vitamin A for vitamin A deficiency. 
+Notably, the relative risk for vitamin A foritification on vitamin A 
+deficiency from this review only included data from two randomized controlled 
+trials and the authors of the review assessed the certainty of the evidence to 
+be "very low" (Hombali et al. 2019). The relative risk of vitamin A deficiency 
+prevalence among the population exposed to vitamin A fortification relative to 
+the population unexposed to vitamin A fortification from this review was **
+0.45 (95% CI: 0.19 - 1.05)**.
+
+Therefore, we conducted a supplementary analysis of the effect of the 
+intervention by pooling the RCT studies from the Cochrane review with studies 
+included in the systematic review and meta-analysis performed by Keats et al. 
+(2019). Notably, none of the studies identified from the Keats et al. (2019) 
+review *directly* reported measures of relative risk of vitamin A deficiency 
+prevalence among the population exposed to vitamin A fortification relative to 
+the population unexposed to vitamin A fortification. Therefore, we manually 
+calculated this value based on data reported in study tables and figures, 
+which required visual approximations of certain values. Notably, when this 
+supplementary meta-analysis was performed, the resulting relative risk was 
+calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when limited to sugar 
+and oil vehicles for the vitamin A forticant, the relative risk was **0.36 
+(95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses are represented 
+in the forest plots below. 
+
+.. image:: vitamin_a_meta.png
+
+.. image:: vitamin_a_meta_sugar_oil.png
+
+While the supplementary meta-analysis shown above contains more studies and 
+data than the Cochrane review, it relies on results that were not directly 
+reported in the individual studies (and in some cases visaully estimated 
+values). **Therefore, we will conservatively use the results from the Cochrane 
+review, with increased certainty in the results based on the confirmatory 
+results from the supplementary meta-analysis.**
+
+Notably, all of these studies included in the supplementary analysis were 
+conducted among children and study locations included Guatemala, South Africa, 
+Nicaragua, Indonesia, and the Phillipines, so it is **reasonable to assume 
+generalizability of these results to our model populations.**
+
+Regarding effect sizes in young age groups, Sandjaja et al. (2015) reported 
+that population vitamin A fortification improved serum retinol concentrations 
+among infants aged 6-11 months. Therefore, **we assumed that the effect size 
+from the Cochrane review applies to all age groups above six months of age.** 
+
+	Notably, the effect can occur either through the direct consumption of 
+	vitamin A fortified foods or through the consumption of breastmilk from 
+	mothers who consume vitamin A fortified foods (Sandjaja et al. 2015; WHO 
+	Guidelines).
+
+For individuals aged between 0 and six months, we made the following 
+assumptions:
+
+	1. Maternal consumption of vitamin A fortified foods as no effect on 
+	infant vitamin A deficiency birth prevalence. This assumption is supported 
+	by studies performed by Dror and Allen (2018).
+
+	2. There is a scale up in effect size from no effect (RR=1) at birth to 
+	the full effect size (RR=0.45) at six months of age. While there was no 
+	data identified for the effect of vitamin A *fortification* in children 
+	less than six months of age, we found that there were mixed results on the 
+	impact of maternal vitamin A *supplementation* (via breastmilk) on three 
+	month old infants (as discussed by Martins et al. 2010) and based our 
+	assumption on this finding.
+
+	3. The scale-up in effect size from birth to six months of age occurs in a 
+	linear fashion. We made this assumption in the absence of supporting data.
+
+.. todo::
+
+	Add citations for all of these studies/references.
+
+**Vivarium Modeling Strategy**
+
+In our Vivarium simulation, the effect of exposure foods **not** fortified 
+with vitamin A on the prevalence of vitamin A deficiency realtive to those 
+exposed to vitamin A fortified foods will be represented as follows: 
+
+.. math::
+
+  RR = \frac{P(\text{VAD prevalence} \mid \text{no fortification})}
+  {P(\text{VAD prevalence} \mid \text{fortification})}
+  \approx \frac{1}{0.45\: (0.19, 1.05)}
+  \approx 1.71\: (0.95, 5.26).
+
+.. todo::
+
+	Include detail on age-dependent RR for 0-6 month olds strategy. Include 
+	sampling distribution of confidence interval. Include detail on 
+	intervention effect lag.
+
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
