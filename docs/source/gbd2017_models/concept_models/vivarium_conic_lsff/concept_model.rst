@@ -104,6 +104,75 @@ Iron Fortification
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+Population Coverage Data
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. list-table:: Existing population coverage of folic acid fortification (% of total population)
+  :widths: 5 5 5 5
+  :header-rows: 1
+
+  * - Location
+    - a = Eats fortified vehicle
+    - b = Eats fortifiable vehicle
+    - c = Eats vehicle
+  * - Ethiopia
+    - 1.0
+    - 7.7
+    - 14.0
+  * - India
+    - 6.3 (4.8, 7.9)
+    - 7.1 (5.6, 9.1)
+    - 83.2 (79.5, 86.5)
+  * - Nigeria (Kano)
+    - 22.7 (20.0, 25.5)
+    - 83.8 (81.4, 86.2)
+    - 83.9 (81.5, 86.3)
+  * - Nigeria (Lagos)
+    - 5.4 (3.8, 6.9)
+    - 13.8 (11.5, 16.1)
+    - 14.2 (11.8, 16.5)
+
+For Ethiopia, assume
+
+.. math::
+
+  a \sim \operatorname{Beta}(0.1,9.9),\quad
+  b \sim \operatorname{Beta}(0.3,3.6),\quad
+  c \sim \operatorname{Beta}(0.4,2.5).
+
+The means of these Beta distributions will have the values shown in the table.
+Each of the densities has an asymptote at 0 and an x-intercept at 1, and the
+parameters :math:`\alpha` and :math:`\beta` were chosen to be monotonic. The
+numbers for Ethiopia were chosen so that (i) the mean of existing fortification
+coverage is close to 0, (ii) the percentage of people eating fortified food is
+similar to that in Lagos, Nigeria, and (iii) 55% of the wheat flour is
+fortifiable, based on the `Global Fortification Data Exchange
+<https://tinyurl.com/rdm4wza>`_.
+
+.. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
+
+For all the locations other than Ethiopia, use a Beta distribution with mean
+equal to the central estimate, and variance equal to the variance of a normal
+distribution with the same mean and 95% confidence interval.
+
+To ensure that :math:`a<b<c` for each country, sample a, b, and c so that they
+all have the same `percentile rank
+<https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
+distributions. This can be done by using `inverse transform sampling
+<https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to generate all
+three variables (a,b, and c) from a single uniform random variable u.
+
+To compute the coverage levels a, b, and c for the whole country of Nigeria, we will take a population-weighted average of the corresponding values for Kano and Lagos. Kano has a population of about 4 million, and Lagos has a population of about 21 million, so we have
+
+.. math::
+
+  a_\text{Nigeria}
+  = \frac{4}{25} a_\text{Kano} + \frac{21}{25} a_\text{Lagos},
+
+and similarly for b and c. The random variables :math:`a_\text{Kano}` and
+:math:`a_\text{Lagos}` can be sampled independently from the Beta distributions
+described above to compute this sum (and similarly for b and c).
+
 Effect Size
 ^^^^^^^^^^^
 
@@ -150,7 +219,6 @@ as follows:
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
-
 
 Desired Model Outputs
 ---------------------
