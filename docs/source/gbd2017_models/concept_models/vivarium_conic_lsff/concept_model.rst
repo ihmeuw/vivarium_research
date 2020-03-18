@@ -159,7 +159,7 @@ from the Cochrane review applies to all age groups above six months of age.**
 For individuals aged between 0 and six months, we made the following 
 assumptions:
 
-	1. Maternal consumption of vitamin A fortified foods as no effect on 
+	1. Maternal consumption of vitamin A fortified foods has no effect on 
 	infant vitamin A deficiency birth prevalence. This assumption is supported 
 	by studies performed by Dror and Allen (2018).
 
