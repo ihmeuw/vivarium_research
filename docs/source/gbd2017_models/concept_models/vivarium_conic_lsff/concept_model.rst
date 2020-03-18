@@ -107,6 +107,10 @@ Folic Acid Fortification
 Population Coverage Data
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. todo::
+
+  Define a, b, and c prior to displaying their values in the table below.
+
 The following table provides data for three parameters, :math:`a`, :math:`b`,
 and :math:`c`, that will be used in our `coverage algorithm`_ for the folic acid
 intervention. The food vehicle referred to in the table is wheat flour.
@@ -136,13 +140,13 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - 13.8 (11.5, 16.1)
     - 14.2 (11.8, 16.5)
 
-For Ethiopia, assume
+**For Ethiopia**, assume
 
 .. math::
 
-  a \sim \operatorname{Beta}(0.1,9.9),\quad
-  b \sim \operatorname{Beta}(0.3,3.6),\quad
-  c \sim \operatorname{Beta}(0.4,2.46).
+  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
+  b_\textit{Ethiopia} \sim \operatorname{Beta}(0.3,3.6),\quad
+  c_\textit{Ethiopia} \sim \operatorname{Beta}(0.4,2.46).
 
 The means of these `Beta distributions
 <https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
@@ -156,13 +160,13 @@ Exchange <https://tinyurl.com/rdm4wza>`_.
 
 .. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
 
-For all the locations other than Ethiopia, use a Beta distribution with mean
+**For all the locations other than Ethiopia**, use a Beta distribution with mean
 equal to the central estimate, and variance equal to the variance of a normal
 distribution with the same mean and 95% confidence interval.
 
 .. todo::
 
-  Describe how to get the correct Beta distribution.
+  Show how to get the correct Beta distribution. Maybe even include some graphs.
 
 To ensure that :math:`a<b<c` for each country, sample :math:`a`, :math:`b`, and
 :math:`c` so that they all have the same `percentile rank
@@ -179,18 +183,19 @@ million, and Lagos has a population of about 21 million, so we have
 
 .. math::
 
-  a_\text{Nigeria}
-  = \tfrac{4}{25} a_\text{Kano} + \tfrac{21}{25} a_\text{Lagos},
+  a_\textit{Nigeria}
+  = \tfrac{4}{25} a_\textit{Kano} + \tfrac{21}{25} a_\textit{Lagos},
 
-and similarly for :math:`b` and :math:`c`. Couple the random variables
-:math:`a_\text{Kano}` and :math:`a_\text{Lagos}` by giving them the same
+and similarly for :math:`b` and :math:`c`. `Couple
+<https://en.wikipedia.org/wiki/Coupling_(probability)>`_ the random variables
+:math:`a_\textit{Kano}` and :math:`a_\textit{Lagos}` by giving them the same
 percentile rank (i.e. use the same strategy described above for coupling
 :math:`a`, :math:`b`, and :math:`c`). This coupling strategy will create greater
-uncertainty in the weighted average :math:`a_\text{Nigeria}` than if we sampled
-the two estimates indepdently, and more uncertainty seems like a good idea since
-we're trying to estimate an average for the entire country based on only two
-data points. Moreover, this coupling seems plausible since the data for Kano and
-Lagos were from the same paper and therefore could have a similar bias.
+uncertainty in the weighted average :math:`a_\textit{Nigeria}` than if we
+sampled the two estimates indepdently, and more uncertainty seems like a good
+idea since we're trying to estimate an average for the entire country based on
+only two data points. Moreover, this coupling seems plausible since the data for
+Kano and Lagos were from the same paper and therefore could have a similar bias.
 
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^
@@ -208,10 +213,10 @@ intervention algorithm is described by the following formula:
   c - (c-b)(1-r)^{t-t_0} & \text{if $t\ge t_0$,}
   \end{cases}
 
-where :math:`a`, :math:`b`, and :math:`c` are the existing `population coverage
-data`_ estimates from the previous section, and :math:`r \in [0,1]` is a
-user-defined parameter representing the proportion of people each year who start
-off eating an unfortifiable version of the vehicle but can be convinced to
+where :math:`a`, :math:`b`, and :math:`c` are the randomly sampled `population
+coverage data`_ estimates from the previous section, and :math:`r \in [0,1]` is
+a user-defined parameter representing the proportion of people each year who
+start off eating an unfortifiable version of the vehicle but can be convinced to
 switch to the fortified vehicle.
 
 By default, we will start the intervention at :math:`t_0 = 1 \text{ year}`, and we'll assume :math:`r = 0.1` (i.e. an additional 10% of unfortifiable food will be converted to fortified food each year). We may later want to specify different values of these parameters for different locations.
@@ -240,31 +245,50 @@ Determining Whether a Simulant Is Affected
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Folic acid `reduces the birth prevalence <effect size_>`_ of :ref:`neural tube
-defects (NTDs) <2017_cause_neural_tube_defects>`.
-In order for a newborn to have a reduced risk of NTDs, the baby's mother needs sufficient folate intake *three months prior to pregnancy*.
-Therefore, only babies born to mothers who have been eating folic-acid-fortified food for at least a year will have any benefit from our intervention.
+defects (NTDs) <2017_cause_neural_tube_defects>`. In order for a newborn to have
+a reduced risk of NTDs, the baby's mother needs sufficient folate intake *three
+months prior to pregnancy*. Therefore, only babies born to mothers who have been
+eating folic-acid-fortified food for at least a year will have any benefit from
+our intervention.
 
 With this in mind, here is the algorithm to determine whether a simulant is affected by the folic acid intervention:
 
-1.  **Define variables:** Each simulant needs a boolean attribute `mother_ate_folate_fortified_food`, which will be `True` if the simulant's mother ate folic-acid-fortified food starting at least a year before the simulant was born, and `False` otherwise.
+1.  **Define variables:** Each simulant needs a boolean attribute
+    `mother_ate_folate_fortified_food`, which will be `True` if the simulant's
+    mother ate folic-acid-fortified food starting at least a year before the
+    simulant was born, and `False` otherwise.
 
-2.  **Initialize the simulation:** At the start of the simulation, set `mother_ate_folate_fortified_food = False` for all simulants; this attribute will not be used after the simulant is born, so the value is irrelevant for all simulants already alive at the start of the simulation.
+2.  **Initialize the simulation:** At the start of the simulation, set
+    `mother_ate_folate_fortified_food = False` for all simulants; this attribute
+    will not be used after the simulant is born, so the value is irrelevant for
+    all simulants already alive at the start of the simulation.
 
-3.  **Initialize simulants born into the simulation:** For each simulant born at time :math:`t` (in years), the probability that the simulant's mother started eating folic-acid-fortified food at least a year ago is equal to the population coverage one year ago, :math:`C(t-1)`. Therefore, upon the simulant's birth, do the following:
+3.  **Initialize simulants born into the simulation:** For each simulant born
+    at time :math:`t` (in years), the probability that the simulant's mother
+    started eating folic-acid-fortified food at least a year ago is equal to the
+    population coverage one year ago, :math:`C(t-1)`. Therefore, upon the
+    simulant's birth, do the following:
 
-  a. Generate a uniform random number :math:`u\sim \operatorname{Uniform}([0,1])`.
-  b. If :math:`u<C(t-1)`, set `mother_ate_folate_fortified_food = True`; otherwise set `mother_ate_folate_fortified_food = False`.
+  a.  Generate a uniform random number :math:`u\sim
+      \operatorname{Uniform}([0,1])`.
 
-Note that we are assuming that once someone (in this case the baby's mother) starts eating fortified food, they will continue to eat the fortified food forever.
+  b.  If :math:`u<C(t-1)`, set `mother_ate_folate_fortified_food = True`;
+      otherwise set `mother_ate_folate_fortified_food = False`.
 
-The variable `mother_ate_folate_fortified_food` will be used to determine the probability that the newborn has a neural tube defect. We will describe how to do this below.
+Note that we are assuming that once someone (in this case the baby's mother)
+starts eating fortified food, they will continue to eat the fortified food
+forever.
+
+The variable `mother_ate_folate_fortified_food` will be used to determine the
+probability that the newborn has a neural tube defect. We will describe how to
+do this below.
 
 Effect Size
 ^^^^^^^^^^^
 
-Folic acid fortification affects the birth prevalence of :ref:`neural tube
+Folic acid fortification reduces the birth prevalence of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. The effect size is measured as
-a risk ratio (RR):
+a risk ratio (RR), where we think of "no fortification" as a risk factor:
 
 .. math::
 
@@ -305,6 +329,28 @@ as follows:
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
   # (s is the shape parameter; the scale parameter is exp(mu), which equals the median)
   rr_distribution = lognorm(s=sigma, scale=median)
+
+
+Determining Whether a Simulant Is Born with an NTD
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The procedure here uses the standard coverage gap framework:
+
+1.  Compute a PAF based on the above RR
+2.  When a simulant is born, check whether `mother_ate_folate_fortified_food` is
+    `True`. If so, the simulant has an NTD with probability equal to the
+    risk-deleted prevalence birth_prevalence_of_NTDs_in_GBD * (1-PAF).
+    Otherwise, their risk of an NTD is increased by a factor of RR, to
+    birth_prevalence_of_NTDs_in_GBD * (1-PAF) * RR.
+3.  Once the simulant's probability of an NTD is determined, decide whether
+    they actually have one using standard inverse transform sampling for the
+    Bernoulli random variable representing the simulant's
+    `has_neural_tube_defect` boolean attribute.
+
+.. todo::
+
+  Write this out more explicitly. Perhaps it would be better to merge
+  `Determining Whether a Simulant Is Affected`_ into this section.
 
 Desired Model Outputs
 ---------------------
