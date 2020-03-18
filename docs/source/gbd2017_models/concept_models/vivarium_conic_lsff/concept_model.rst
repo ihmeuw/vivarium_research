@@ -107,14 +107,18 @@ Folic Acid Fortification
 Population Coverage Data
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. list-table:: Existing population coverage of folic acid fortification (% of total population)
+The following table provides data for three parameters, :math:`a`, :math:`b`,
+and :math:`c`, that will be used in our `coverage algorithm`_ for the folic acid
+intervention. The food vehicle referred to in the table is wheat flour.
+
+.. list-table:: Means and 95% CI's for existing population coverage of folic acid fortification (% of total population)
   :widths: 5 5 5 5
   :header-rows: 1
 
   * - Location
-    - a = Eats fortified vehicle
-    - b = Eats fortifiable vehicle
-    - c = Eats vehicle
+    - :math:`a` = Eats fortified vehicle
+    - :math:`b` = Eats fortifiable vehicle
+    - :math:`c` = Eats vehicle
   * - Ethiopia
     - 1.0
     - 7.7
@@ -138,16 +142,17 @@ For Ethiopia, assume
 
   a \sim \operatorname{Beta}(0.1,9.9),\quad
   b \sim \operatorname{Beta}(0.3,3.6),\quad
-  c \sim \operatorname{Beta}(0.4,2.5).
+  c \sim \operatorname{Beta}(0.4,2.46).
 
-The means of these Beta distributions will have the values shown in the table.
-Each of the densities has an asymptote at 0 and an x-intercept at 1, and the
-parameters :math:`\alpha` and :math:`\beta` were chosen to be monotonic. The
-numbers for Ethiopia were chosen so that (i) the mean of existing fortification
-coverage is close to 0, (ii) the percentage of people eating fortified food is
-similar to that in Lagos, Nigeria, and (iii) 55% of the wheat flour is
-fortifiable, based on the `Global Fortification Data Exchange
-<https://tinyurl.com/rdm4wza>`_.
+The means of these `Beta distributions
+<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
+in the table. Each of the densities has an asymptote at 0 and an x-intercept at
+1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
+monotonically with the mean. The numbers for Ethiopia were chosen so that (i)
+the mean of existing fortification coverage is close to 0, (ii) the percentage
+of people eating wheat flour is similar to that in Lagos, Nigeria, and (iii) 55%
+of the wheat flour is fortifiable, based on the `Global Fortification Data
+Exchange <https://tinyurl.com/rdm4wza>`_.
 
 .. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
 
@@ -155,23 +160,40 @@ For all the locations other than Ethiopia, use a Beta distribution with mean
 equal to the central estimate, and variance equal to the variance of a normal
 distribution with the same mean and 95% confidence interval.
 
-To ensure that :math:`a<b<c` for each country, sample a, b, and c so that they
-all have the same `percentile rank
+.. todo::
+
+  Describe how to get the correct Beta distribution.
+
+To ensure that :math:`a<b<c` for each country, sample :math:`a`, :math:`b`, and
+:math:`c` so that they all have the same `percentile rank
 <https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
 distributions. This can be done by using `inverse transform sampling
 <https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to generate all
-three variables (a,b, and c) from a single uniform random variable u.
+three variables (:math:`a`, :math:`b`, and :math:`c`) from a single uniform
+random variable :math:`u`.
 
-To compute the coverage levels a, b, and c for the whole country of Nigeria, we will take a population-weighted average of the corresponding values for Kano and Lagos. Kano has a population of about 4 million, and Lagos has a population of about 21 million, so we have
+To compute the coverage levels :math:`a`, :math:`b`, and :math:`c` for the whole
+country of Nigeria, we will take a population-weighted average of the
+corresponding values for Kano and Lagos. Kano has a population of about 4
+million, and Lagos has a population of about 21 million, so we have
 
 .. math::
 
   a_\text{Nigeria}
-  = \frac{4}{25} a_\text{Kano} + \frac{21}{25} a_\text{Lagos},
+  = \tfrac{4}{25} a_\text{Kano} + \tfrac{21}{25} a_\text{Lagos},
 
-and similarly for b and c. The random variables :math:`a_\text{Kano}` and
-:math:`a_\text{Lagos}` can be sampled independently from the Beta distributions
-described above to compute this sum (and similarly for b and c).
+and similarly for :math:`b` and :math:`c`. Couple the random variables
+:math:`a_\text{Kano}` and :math:`a_\text{Lagos}` by giving them the same
+percentile rank (i.e. use the same strategy described above for coupling
+:math:`a`, :math:`b`, and :math:`c`). This coupling strategy will create greater
+uncertainty in the weighted average :math:`a_\text{Nigeria}` than if we sampled
+the two estimates indepdently, and more uncertainty seems like a good idea since
+we're trying to estimate an average for the entire country based on only two
+data points. Moreover, this coupling seems plausible since the data for Kano and
+Lagos were from the same paper and therefore could have a similar bias.
+
+Coverage Algorithm
+^^^^^^^^^^^^^^^^^^
 
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^
