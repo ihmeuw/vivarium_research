@@ -121,8 +121,8 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - :math:`c` = Eats vehicle
   * - Ethiopia
     - 1.0
-    - 7.7
-    - 14.0
+    - 13.9
+    - 25.3
   * - India
     - 6.3 (4.8, 7.9)
     - 7.1 (5.6, 9.1)
@@ -141,8 +141,8 @@ For Ethiopia, assume
 .. math::
 
   a \sim \operatorname{Beta}(0.1,9.9),\quad
-  b \sim \operatorname{Beta}(0.3,3.6),\quad
-  c \sim \operatorname{Beta}(0.4,2.46).
+  b \sim \operatorname{Beta}(0.5,3.1),\quad
+  c \sim \operatorname{Beta}(0.8,2.36).
 
 The means of these `Beta distributions
 <https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
@@ -150,7 +150,7 @@ in the table. Each of the densities has an asymptote at 0 and an x-intercept at
 1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
 monotonically with the mean. The numbers for Ethiopia were chosen so that (i)
 the mean of existing fortification coverage is close to 0, (ii) the percentage
-of people eating wheat flour is similar to that in Lagos, Nigeria, and (iii) 55%
+of people eating wheat flour is similar to that in Nigeria, and (iii) 55%
 of the wheat flour is fortifiable, based on the `Global Fortification Data
 Exchange <https://tinyurl.com/rdm4wza>`_.
 
@@ -162,7 +162,26 @@ distribution with the same mean and 95% confidence interval.
 
 .. todo::
 
-  Describe how to get the correct Beta distribution.
+  Show how to get the correct Beta distribution, and draw some graphs. Here is
+  the code James used, which truncates the distributions outside the 95%
+  interval:
+
+  .. code-block:: Python
+
+    def sample_from_statistics(mean, upper_bound, lower_bound, variance=None):
+    if variance is None:
+        # Get variance for corresponding normal distribution
+        variance = confidence_interval_variance(upper_bound, lower_bound)
+    support_width = (upper_bound - lower_bound)
+    mean = (mean - lower_bound) / support_width
+    variance /= support_width ** 2
+    alpha = mean * (mean * (1 - mean) / variance - 1)
+    beta = (1 - mean) * (mean * (1 - mean) / variance - 1)
+    return  lower_bound + support_width*scipy.stats.beta.rvs(alpha, beta)
+
+  Another option for India and Nigeria would be to use truncated normal
+  distributions, i.e. just find the normal distribution with the right mean and
+  95% confidence interval, and truncate the tails outside the interval [0,1].
 
 To ensure that :math:`a<b<c` for each country, sample :math:`a`, :math:`b`, and
 :math:`c` so that they all have the same `percentile rank
