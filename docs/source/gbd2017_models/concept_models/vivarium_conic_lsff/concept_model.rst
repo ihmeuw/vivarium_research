@@ -104,6 +104,116 @@ Iron Fortification
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+Population Coverage Data
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+The following table provides data for three parameters, :math:`a`, :math:`b`,
+and :math:`c`, that will be used in our `coverage algorithm`_ for the folic acid
+intervention. The food vehicle referred to in the table is wheat flour.
+
+.. list-table:: Means and 95% CI's for existing population coverage of folic acid fortification (% of total population)
+  :widths: 5 5 5 5
+  :header-rows: 1
+
+  * - Location
+    - :math:`a` = Eats fortified vehicle
+    - :math:`b` = Eats fortifiable vehicle
+    - :math:`c` = Eats vehicle
+  * - Ethiopia
+    - 1.0
+    - 13.9
+    - 25.3
+  * - India
+    - 6.3 (4.8, 7.9)
+    - 7.1 (5.6, 9.1)
+    - 83.2 (79.5, 86.5)
+  * - Nigeria (Kano)
+    - 22.7 (20.0, 25.5)
+    - 83.8 (81.4, 86.2)
+    - 83.9 (81.5, 86.3)
+  * - Nigeria (Lagos)
+    - 5.4 (3.8, 6.9)
+    - 13.8 (11.5, 16.1)
+    - 14.2 (11.8, 16.5)
+
+For Ethiopia, assume
+
+.. math::
+
+  a \sim \operatorname{Beta}(0.1,9.9),\quad
+  b \sim \operatorname{Beta}(0.5,3.1),\quad
+  c \sim \operatorname{Beta}(0.8,2.36).
+
+The means of these `Beta distributions
+<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
+in the table. Each of the densities has an asymptote at 0 and an x-intercept at
+1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
+monotonically with the mean. The numbers for Ethiopia were chosen so that (i)
+the mean of existing fortification coverage is close to 0, (ii) the percentage
+of people eating wheat flour is similar to that in Nigeria, and (iii) 55%
+of the wheat flour is fortifiable, based on the `Global Fortification Data
+Exchange <https://tinyurl.com/rdm4wza>`_.
+
+.. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
+
+For all the locations other than Ethiopia, use a Beta distribution with mean
+equal to the central estimate, and variance equal to the variance of a normal
+distribution with the same mean and 95% confidence interval.
+
+.. todo::
+
+  Show how to get the correct Beta distribution, and draw some graphs. Here is
+  the code James used, which truncates the distributions outside the 95%
+  interval:
+
+  .. code-block:: Python
+
+    def sample_from_statistics(mean, upper_bound, lower_bound, variance=None):
+    if variance is None:
+        # Get variance for corresponding normal distribution
+        variance = confidence_interval_variance(upper_bound, lower_bound)
+    support_width = (upper_bound - lower_bound)
+    mean = (mean - lower_bound) / support_width
+    variance /= support_width ** 2
+    alpha = mean * (mean * (1 - mean) / variance - 1)
+    beta = (1 - mean) * (mean * (1 - mean) / variance - 1)
+    return  lower_bound + support_width*scipy.stats.beta.rvs(alpha, beta)
+
+  Another option for India and Nigeria would be to use truncated normal
+  distributions, i.e. just find the normal distribution with the right mean and
+  95% confidence interval, and truncate the tails outside the interval [0,1].
+
+To ensure that :math:`a<b<c` for each country, sample :math:`a`, :math:`b`, and
+:math:`c` so that they all have the same `percentile rank
+<https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
+distributions. This can be done by using `inverse transform sampling
+<https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to generate all
+three variables (:math:`a`, :math:`b`, and :math:`c`) from a single uniform
+random variable :math:`u`.
+
+To compute the coverage levels :math:`a`, :math:`b`, and :math:`c` for the whole
+country of Nigeria, we will take a population-weighted average of the
+corresponding values for Kano and Lagos. Kano has a population of about 4
+million, and Lagos has a population of about 21 million, so we have
+
+.. math::
+
+  a_\text{Nigeria}
+  = \tfrac{4}{25} a_\text{Kano} + \tfrac{21}{25} a_\text{Lagos},
+
+and similarly for :math:`b` and :math:`c`. Couple the random variables
+:math:`a_\text{Kano}` and :math:`a_\text{Lagos}` by giving them the same
+percentile rank (i.e. use the same strategy described above for coupling
+:math:`a`, :math:`b`, and :math:`c`). This coupling strategy will create greater
+uncertainty in the weighted average :math:`a_\text{Nigeria}` than if we sampled
+the two estimates indepdently, and more uncertainty seems like a good idea since
+we're trying to estimate an average for the entire country based on only two
+data points. Moreover, this coupling seems plausible since the data for Kano and
+Lagos were from the same paper and therefore could have a similar bias.
+
+Coverage Algorithm
+^^^^^^^^^^^^^^^^^^
+
 Effect Size
 ^^^^^^^^^^^
 
@@ -150,7 +260,6 @@ as follows:
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
-
 
 Desired Model Outputs
 ---------------------
