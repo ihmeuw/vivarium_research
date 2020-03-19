@@ -98,6 +98,11 @@ Interventions
 Vitamin A Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Coverage 
+^^^^^^^^
+
+
+
 Effect Size
 ^^^^^^^^^^^
 
@@ -190,7 +195,11 @@ onset of exposure to vitamin A fortification, including:
  	or direct consumption) for long engough to exhibit a response (at least 12 
  	months).
 
-**Vivarium Modeling Strategy**
+ .. todo::
+
+ 	Add more detail regarding the time to response.
+
+**Effect Size**
 
 In our Vivarium simulation, the effect of exposure foods **not** fortified 
 with vitamin A on the prevalence of vitamin A deficiency realtive to those 
@@ -249,6 +258,8 @@ as follows:
 	create a separate page that lists similar strategies that we can reference 
 	via links.
 
+** Time to Response**
+
 Further, the time-to-response to vitamin A fortification in years should also 
 be sampled such that:
 
@@ -271,13 +282,27 @@ be sampled such that:
 	# (s is the shape parameter)
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
-Additionally, as described in the research considerations above, the 
+**Coverage Data**
+
+.. todo::
+
+	Describe coverage algorithm
+
+**Effect of Intervention on Simulants**
+
+As described in the research considerations section, the 
 intervention effect is dependent on age and time since intervention coverage.
 
 For simulants covered by *baseline coverage*, the effect of the 
 vitamin A fortitication is determined as follows:
 
 .. code-block:: Python
+  
+  # draw level
+  
+  rr = rr_distribution.rvs()
+
+  # individual level
 
   if age_i < 0.5:
   	rr_i = 1
@@ -289,12 +314,18 @@ vitamin A fortitication is determined as follows:
 
 .. code-block:: Python
 
+  # draw level
+
+  rr = rr_distribution.rvs()
+
+  # individual level
+
   response_time_i = response_time_distribution.rvs()
 
   if age_i < 0.5 or random_number_i > coverage(t - response_time_i)):
   	rr_i = 1
   else:
-  	rr_i = rr_distribution.rvs()
+  	rr_i = rr
 
 Where,
 
@@ -312,9 +343,19 @@ Where,
 
 	- **random_number_i** = independent random number between 0 and 1, assigned to a simulant 
 
+Therefore, the probability that a simulant has vitamin A deficiency should be evaluated as:
+
+	vitamin_a_deficiency_prevalence * (1 - PAF) * rr_i
+
+Where, 
+
+	- PAF is computed based on the RR for vitamin A fortification
+
+	- rr_i is the relative risk assigned to the individual simulant ()
+
 .. todo::
 
-	Describe coverage algorithm
+	more detail here
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
