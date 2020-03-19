@@ -214,6 +214,29 @@ Lagos were from the same paper and therefore could have a similar bias.
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^
 
+.. todo::
+
+  Add a section to describe baseline coverage, and edit this section
+  appropriately, as per James's recommendation in `PR 170
+  <https://github.com/ihmeuw/vivarium_research/pull/170>`_:
+
+    This is fine, because we talked an I know what you mean. I have a very
+    strong preference for the following framing though:
+
+    1.  Provide a description of how to find coverage in the baseline scenario.
+        (and background info as necessary).
+    2.  In a separate section, describe the intervention as a change in
+        baseline coverage. (e.g. your intervention provides a delta_C(t),
+        describe that).
+
+    This framing is a little more complicated, but handles far more of our
+    intervention cases. Frequently baseline coverage will have it's own time
+    trends or other complicating factors. This framing provides a very clear
+    description on exactly what your intervention is, as well.
+
+  Also, add plots of coverage to show the time trend for a few versions of a, b,
+  c.
+
 Let :math:`C(t)` denote the proportion of the population receiving fortified
 food (i.e. the population coverage) after :math:`t` years, and let :math:`t_0`
 denote the time at which our folic acid intervention starts. Our folic acid
