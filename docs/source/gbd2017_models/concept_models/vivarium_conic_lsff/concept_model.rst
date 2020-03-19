@@ -142,9 +142,10 @@ review, with increased certainty in the results based on the confirmatory
 results from the supplementary meta-analysis.**
 
 Notably, all of these studies included in the supplementary analysis were 
-conducted among children and study locations included Guatemala, South Africa, 
-Nicaragua, Indonesia, and the Phillipines, so it is **reasonable to assume 
-generalizability of these results to our model populations.**
+conducted among children. Additionally, the study locations included 
+Guatemala, South Africa, Nicaragua, Indonesia, and the Phillipines. Therefore, 
+we concluded that it is **reasonable to assume generalizability of these 
+results to our model populations.**
 
 Regarding effect sizes in young age groups, Sandjaja et al. (2015) reported 
 that population vitamin A fortification improved serum retinol concentrations 
@@ -171,8 +172,9 @@ assumptions:
 	month old infants (as discussed by Martins et al. 2010) and based our 
 	assumption on this finding.
 
-	3. The scale-up in effect size from birth to six months of age occurs in a 
-	linear fashion. We made this assumption in the absence of supporting data.
+	3. The scale-up in the *reciprocal* effect size occurs in a linear fashion 
+	from birth to six months of age. We made this assumption in the absence of 
+	supporting data.
 
 .. todo::
 
@@ -249,9 +251,9 @@ simulation and only depends on age, such that:
 .. code-block:: Python
 
   if age_i < 0.5:
-  	rr_i = 1 + (rr - 1) * a_i / 0.5
+  	rr_i = 1 + (rr_distribution.rvs(random_number_i) - 1) * age_i / 0.5
   else:
-  	rr_i = rr
+  	rr_i = rr_distribution.rvs(random_number_i)
 
 For simulants covered by the *intervention scale-up*, the effect of the 
 intervention will scale up linearly from zero at the start of coverage to the 
@@ -261,9 +263,9 @@ research assumption), such that:
 .. code-block:: Python
 
   if coverage_time_i < 0.5:
-  	rr_i = 1 + (rr - 1) * coverage_time_i / 0.5
+  	rr_i = 1 + (rr_distribution.rvs(random_number_i) - 1) * coverage_time_i / 0.5
   else:
-  	rr_i = rr
+  	rr_i = rr_distribution.rvs(random_number_i)
 
 .. note::
 
@@ -278,7 +280,9 @@ Where,
 
 	- **rr_i** = relative risk to be applied to an individual simulant
 
-	- **rr** = relative risk for intervention, sampled as described above based on a random number between 0 and 1, assigned to a simulant *for the entirety of the simulation*
+	- **rr_distribution** = distribution for the relative risk of the  intervention, as described above
+
+	- **random_number_i** = a random number between 0 and 1, assigned to a simulant *for the entirety of the simulation*
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
