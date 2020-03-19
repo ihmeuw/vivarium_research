@@ -295,15 +295,15 @@ our intervention.
 
 With this in mind, here is the algorithm to determine whether a simulant is affected by the folic acid intervention:
 
-1.  **Define variables:** Each simulant needs a boolean attribute
+1.  **Define variables:** Each simulant needs an attribute
     `mother_ate_folate_fortified_food`, which will be `True` if the simulant's
     mother ate folic-acid-fortified food starting at least a year before the
-    simulant was born, and `False` otherwise.
+    simulant was born, `False` if not, and `Unknown` if we don't know.
 
 2.  **Initialize the simulation:** At the start of the simulation, set
-    `mother_ate_folate_fortified_food = False` for all simulants; this attribute
-    will not be used after the simulant is born, so the value is irrelevant for
-    all simulants already alive at the start of the simulation.
+    `mother_ate_folate_fortified_food = Unknown` for all simulants; this
+    attribute will not be used after the simulant is born, so the value is
+    irrelevant for all simulants already alive at the start of the simulation.
 
 3.  **Initialize simulants born into the simulation:** For each simulant born
     at time :math:`t` (in years), the probability that the simulant's mother
