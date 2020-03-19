@@ -123,12 +123,12 @@ The probability of side effects is also taken from the literature, and if a pers
 BAU parameter data tables
 +++++++++++++++++++++++++
 
-.. csv-table:: Current prescriptions
-   :file: current_rx.csv
-   :widths: 30, 20, 10, 10
+.. csv-table:: Table 1: Probability of having LDL-c measured
+   :file: prob_testing_ldlc.csv
+   :widths: 20, 10, 10
    :header-rows: 1
 
-.. csv-table:: Probability of prescription given high LDL-c
+.. csv-table:: Table 2: Probability of Rx given high LDL-c
    :file: prob_rx_given_high_ldlc.csv
    :widths: 20, 10, 10
    :header-rows: 1
@@ -138,17 +138,17 @@ BAU parameter data tables
    :widths: 30, 20, 10, 10
    :header-rows: 1
 
-.. csv-table:: Probability of testing LDL-c 
-   :file: prob_testing_ldlc.csv
-   :widths: 20, 10, 10
-   :header-rows: 1
-
-.. csv-table:: Adherence parameters
+.. csv-table:: Table 4: Probability of Adherence (Table 4a, 4b) parameters
    :file: adherence_parameters.csv
    :widths: 30, 20, 10, 10
    :header-rows: 1
 
-.. csv-table:: Probability of adverse events
+.. csv-table:: Table 6: Current treatment practice - distribution by drug type 
+   :file: current_rx.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Table 7: Probability of side effect (adverse events)
    :file: prob_adverse_events.csv
    :widths: 20, 10, 10
    :header-rows: 1
