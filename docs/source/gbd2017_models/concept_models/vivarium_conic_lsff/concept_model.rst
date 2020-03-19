@@ -164,23 +164,31 @@ assumptions:
 	infant vitamin A deficiency birth prevalence. This assumption is supported 
 	by studies performed by Dror and Allen (2018).
 
-	2. There is a scale up in effect size from no effect (RR=1) at birth to 
-	the full effect size (RR=0.45) at six months of age. While there was no 
-	data identified for the effect of vitamin A *fortification* in children 
-	less than six months of age, we found that there were mixed results on the 
-	impact of maternal vitamin A *supplementation* (via breastmilk) on three 
-	month old infants (as discussed by Martins et al. 2010) and based our 
-	assumption on this finding.
+	2. Maternal consumption of vitamin A fortified foods has no effect on 
+	infant vitamin A deficiency from 0 to six months of age. This assumption 
+	is largely supported by the vitamin A *supplementation* literature among 
+	these age groups and is reflected in WHO guidelines (WHO Guideline: 
+	Vitamin A Supplementation in Infants 1-5 Months of Age).
 
-	3. The scale-up in the *reciprocal* effect size occurs in a linear fashion 
-	from birth to six months of age. We made this assumption in the absence of 
-	supporting data.
+Additionally, we made assumptions regarding the response time following the 
+onset of exposure to vitamin A fortification, including:
 
-.. todo::
+	1. Individuals will exhibit a response in vitamin A deficiency to vitamin 
+	A fortification between appoximately 2 and 12 months after onset of 
+	exposure to vitamin A fortification. There was sparce data available for 
+	the response time to vitamin A fortification, so we used data on the 
+	response time to vitamin D (another fat-soluble vitamin) supplementation 
+	as a proxy. The literature larely indicated that response to vitamin D 
+	supplementation plateaus between 2 and 12 months (Heaney et al. 2008; 
+	Vieth 1999; Taalat et al. 2016; ADDITIONAL). We assumed that the 
+	distribution of response times follows a lognormal distribution with a 
+	median value of five months, a 0.025 percentile of 2 months, and a 0.975 
+	percentile of 12 months.
 
-	Add citations for all of these studies/references.
-
-	Add descriptions of strategy and assumptions regarding differences between baseline and intervention coverage (intervention effect lag, non-age-dependent, SOURCES for these)
+ 	2. If an individual was covered by baseline coverage of vitamin A 
+ 	fotification, we assumed that the individual was covered (via breastmilk 
+ 	or direct consumption) for long engough to exhibit a response (at least 12 
+ 	months).
 
 **Vivarium Modeling Strategy**
 
@@ -241,48 +249,72 @@ as follows:
 	create a separate page that lists similar strategies that we can reference 
 	via links.
 
+Further, the time-to-response to vitamin A fortification in years should also 
+be sampled such that:
+
+.. code-block:: Python
+
+	from numpy import log
+	from scipy.stats import norm, lognorm
+
+	# median and 0.975-quantile of lognormal distribution for RR
+	median = 5/12
+	q_975 = 12/12
+
+	# 0.975-quantile of standard normal distribution (=1.96, approximately)
+	q_975_stdnorm = norm().ppf(0.975)
+
+	mu = log(median) # mean of normal distribution for log(RR)
+	sigma = (log(q_975) - mu) / q_975_stdnorm # std dev of normal distribution for log(RR)
+
+	# Frozen lognormal distribution for RR, representing uncertainty in our effect size
+	# (s is the shape parameter)
+	response_time_distribution = lognorm(s=sigma, scale=median)
+
 Additionally, as described in the research considerations above, the 
 intervention effect is dependent on age and time since intervention coverage.
 
-For simulants covered by *baseline coverage*, the effect of the intervention 
-is applied continuously from the start of the simulation to the end of the 
-simulation and only depends on age, such that:
+For simulants covered by *baseline coverage*, the effect of the 
+vitamin A fortitication is determined as follows:
 
 .. code-block:: Python
 
   if age_i < 0.5:
-  	rr_i = 1 + (rr_distribution.rvs(random_number_i) - 1) * age_i / 0.5
+  	rr_i = 1
   else:
-  	rr_i = rr_distribution.rvs(random_number_i)
+  	rr_i = rr_distribution.rvs()
 
 For simulants covered by the *intervention scale-up*, the effect of the 
-intervention will scale up linearly from zero at the start of coverage to the 
-full effect after six months of coverage and does *not* depend on age (
-research assumption), such that:
+vitamin A fortitication is determined as follows:
 
 .. code-block:: Python
 
-  if coverage_time_i < 0.5:
-  	rr_i = 1 + (rr_distribution.rvs(random_number_i) - 1) * coverage_time_i / 0.5
+  response_time_i = response_time_distribution.rvs()
+
+  if age_i < 0.5 or random_number_i > coverage(t - response_time_i)):
+  	rr_i = 1
   else:
-  	rr_i = rr_distribution.rvs(random_number_i)
-
-.. note::
-
-	Any ideas from the research team on how we might want to combine
-	the impact of age_i < 0.5 and coverage_time_i < 0.5 here?
+  	rr_i = rr_distribution.rvs()
 
 Where,
 
 	- **age_i** = age of simulant in years
 
-	- **coverage_time_i** = time since start of intervention coverage for a simulant in years
-
 	- **rr_i** = relative risk to be applied to an individual simulant
 
-	- **rr_distribution** = distribution for the relative risk of the  intervention, as described above
+	- **rr_distribution** = distribution for the relative risk of the intervention, as described above
 
-	- **random_number_i** = a random number between 0 and 1, assigned to a simulant *for the entirety of the simulation*
+	- **response_time_distribution** = distribution for the response time to the intervention, as described above
+
+	- **response_time_i** = response time to the intervention assigned to an individual simulant
+
+	- **coverage(t - response_time_i)** = population coverage of vitamin A fortification X years prior to the current time-step, where X is response_time_i
+
+	- **random_number_i** = independent random number between 0 and 1, assigned to a simulant 
+
+.. todo::
+
+	Describe coverage algorithm
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
