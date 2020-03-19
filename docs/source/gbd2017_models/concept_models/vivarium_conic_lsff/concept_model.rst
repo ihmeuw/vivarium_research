@@ -98,6 +98,265 @@ Interventions
 Vitamin A Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~
 
+Coverage 
+^^^^^^^^
+
+
+
+Effect Size
+^^^^^^^^^^^
+
+**Research Considerations**
+
+In this model, the vitamin A fortification intervention affects the 
+**prevalence of vitamin A deficiency**. The effect size for this intervention 
+was obtained from a Cochrane review performed by Hombali et al. (2019) on the 
+fortification of staple foods with vitamin A for vitamin A deficiency. 
+Notably, the relative risk for vitamin A foritification on vitamin A 
+deficiency from this review only included data from two randomized controlled 
+trials and the authors of the review assessed the certainty of the evidence to 
+be "very low" (Hombali et al. 2019). The relative risk of vitamin A deficiency 
+prevalence among an intervention population exposed to vitamin A fortified 
+staple foods relative to a control population given the same staple foods not 
+fortified with vitamin A from this review was **0.45 (95% CI: 0.19 - 1.05)**.
+
+Therefore, we conducted a supplementary analysis of the effect of the 
+intervention by pooling the RCT studies from the Cochrane review with studies 
+included in the systematic review and meta-analysis performed by Keats et al. 
+(2019). Notably, none of the studies identified from the Keats et al. (2019) 
+review *directly* reported measures of relative risk of vitamin A deficiency 
+prevalence among the population exposed to vitamin A fortification relative to 
+the population unexposed to vitamin A fortification. Therefore, we manually 
+calculated this value based on data reported in study tables and figures, 
+which required visual approximations of certain values. Notably, when this 
+supplementary meta-analysis was performed, the resulting relative risk was 
+calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when limited to sugar 
+and oil vehicles for the vitamin A forticant, the relative risk was **0.36 
+(95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses are represented 
+in the forest plots below. 
+
+.. image:: vitamin_a_meta.png
+
+.. image:: vitamin_a_meta_sugar_oil.png
+
+While the supplementary meta-analysis shown above contains more studies and 
+data than the Cochrane review, it relies on results that were not directly 
+reported in the individual studies (and in some cases visaully estimated 
+values). **Therefore, we will conservatively use the results from the Cochrane 
+review, with increased certainty in the results based on the confirmatory 
+results from the supplementary meta-analysis.**
+
+Notably, all of these studies included in the supplementary analysis were 
+conducted among children. Additionally, the study locations included 
+Guatemala, South Africa, Nicaragua, Indonesia, and the Phillipines. Therefore, 
+we concluded that it is **reasonable to assume generalizability of these 
+results to our model populations.**
+
+Regarding effect sizes in young age groups, Sandjaja et al. (2015) reported 
+that population vitamin A fortification improved serum retinol concentrations 
+among infants aged 6-11 months. Therefore, **we assumed that the effect size 
+from the Cochrane review applies to all age groups above six months of age.** 
+
+	Notably, the effect can occur either through the direct consumption of 
+	vitamin A fortified foods or through the consumption of breastmilk from 
+	mothers who consume vitamin A fortified foods (Sandjaja et al. 2015; WHO 
+	Guidelines).
+
+For individuals aged between 0 and six months, we made the following 
+assumptions:
+
+	1. Maternal consumption of vitamin A fortified foods has no effect on 
+	infant vitamin A deficiency birth prevalence. This assumption is supported 
+	by studies performed by Dror and Allen (2018).
+
+	2. Maternal consumption of vitamin A fortified foods has no effect on 
+	infant vitamin A deficiency from 0 to six months of age. This assumption 
+	is largely supported by the vitamin A *supplementation* literature among 
+	these age groups and is reflected in WHO guidelines (WHO Guideline: 
+	Vitamin A Supplementation in Infants 1-5 Months of Age).
+
+Additionally, we made assumptions regarding the response time following the 
+onset of exposure to vitamin A fortification, including:
+
+	1. Individuals will exhibit a response in vitamin A deficiency to vitamin 
+	A fortification between appoximately 2 and 12 months after onset of 
+	exposure to vitamin A fortification. There was sparce data available for 
+	the response time to vitamin A fortification, so we used data on the 
+	response time to vitamin D (another fat-soluble vitamin) supplementation 
+	as a proxy. The literature larely indicated that response to vitamin D 
+	supplementation plateaus between 2 and 12 months (Heaney et al. 2008; 
+	Vieth 1999; Taalat et al. 2016; ADDITIONAL). We assumed that the 
+	distribution of response times follows a lognormal distribution with a 
+	median value of five months, a 0.025 percentile of 2 months, and a 0.975 
+	percentile of 12 months.
+
+ 	2. If an individual was covered by baseline coverage of vitamin A 
+ 	fotification, we assumed that the individual was covered (via breastmilk 
+ 	or direct consumption) for long engough to exhibit a response (at least 12 
+ 	months).
+
+ .. todo::
+
+ 	Add more detail regarding the time to response.
+
+**Effect Size**
+
+In our Vivarium simulation, the effect of exposure foods **not** fortified 
+with vitamin A on the prevalence of vitamin A deficiency realtive to those 
+exposed to vitamin A fortified foods will be represented as follows: 
+
+.. math::
+
+  RR = \frac{P(\text{VAD prevalence} \mid \text{no fortification})}
+  {P(\text{VAD prevalence} \mid \text{fortification})}
+  \approx \frac{1}{0.45\: (0.19, 1.05)}
+  \approx 2.22\: (0.95, 5.26).
+
+.. note::
+
+	We are modeling the reciprocal of the relative risk reported in the 
+	Cochrane review.
+
+	Additionally, this effect size crosses the null, and therefore, in some 
+	draws it will cause increasing coverage of the intervention to *increase* 
+	vitamin A deficiency prevalence. This is a limitation caused by the low 
+	quality evidence regarding the relative risk of vitamin A fortification on 
+	vitamin A prevalence. However, on average, increasing coverage of vitamin 
+	A fortification will decrease VAD.
+
+To model the uncertainty in this estimate, the above RR should be drawn from a
+`lognormal <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
+distribution with median = 2.22, 2.5\ :superscript:`th`-percentile = 0.95, and
+97.5\ :superscript:`th`-percentile = 5.26. This distbibution can be created
+using `SciPy's lognorm function
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html>`_
+as follows:
+
+.. code-block:: Python
+
+  from numpy import log
+  from scipy.stats import norm, lognorm
+
+  # median and 0.975-quantile of lognormal distribution for RR
+  median = 2.22
+  q_975 = 5.26
+
+  # 0.975-quantile of standard normal distribution (=1.96, approximately)
+  q_975_stdnorm = norm().ppf(0.975)
+
+  mu = log(median) # mean of normal distribution for log(RR)
+  sigma = (log(q_975) - mu) / q_975_stdnorm # std dev of normal distribution for log(RR)
+
+  # Frozen lognormal distribution for RR, representing uncertainty in our effect size
+  # (s is the shape parameter)
+  rr_distribution = lognorm(s=sigma, scale=median)
+
+.. note::
+
+	I copied this from Nathaniel's documentation for the folic acid RR, but I 
+	think that the same approach is appropriate. Perhaps we can eventually 
+	create a separate page that lists similar strategies that we can reference 
+	via links.
+
+** Time to Response**
+
+Further, the time-to-response to vitamin A fortification in years should also 
+be sampled such that:
+
+.. code-block:: Python
+
+	from numpy import log
+	from scipy.stats import norm, lognorm
+
+	# median and 0.975-quantile of lognormal distribution for RR
+	median = 5/12
+	q_975 = 12/12
+
+	# 0.975-quantile of standard normal distribution (=1.96, approximately)
+	q_975_stdnorm = norm().ppf(0.975)
+
+	mu = log(median) # mean of normal distribution for log(RR)
+	sigma = (log(q_975) - mu) / q_975_stdnorm # std dev of normal distribution for log(RR)
+
+	# Frozen lognormal distribution for RR, representing uncertainty in our effect size
+	# (s is the shape parameter)
+	response_time_distribution = lognorm(s=sigma, scale=median)
+
+**Coverage Data**
+
+.. todo::
+
+	Describe coverage algorithm
+
+**Effect of Intervention on Simulants**
+
+As described in the research considerations section, the 
+intervention effect is dependent on age and time since intervention coverage.
+
+For simulants covered by *baseline coverage*, the effect of the 
+vitamin A fortitication is determined as follows:
+
+.. code-block:: Python
+  
+  # draw level
+  
+  rr = rr_distribution.rvs()
+
+  # individual level
+
+  if age_i < 0.5:
+  	rr_i = 1
+  else:
+  	rr_i = rr_distribution.rvs()
+
+For simulants covered by the *intervention scale-up*, the effect of the 
+vitamin A fortitication is determined as follows:
+
+.. code-block:: Python
+
+  # draw level
+
+  rr = rr_distribution.rvs()
+
+  # individual level
+
+  response_time_i = response_time_distribution.rvs()
+
+  if age_i < 0.5 or random_number_i > coverage(t - response_time_i)):
+  	rr_i = 1
+  else:
+  	rr_i = rr
+
+Where,
+
+	- **age_i** = age of simulant in years
+
+	- **rr_i** = relative risk to be applied to an individual simulant
+
+	- **rr_distribution** = distribution for the relative risk of the intervention, as described above
+
+	- **response_time_distribution** = distribution for the response time to the intervention, as described above
+
+	- **response_time_i** = response time to the intervention assigned to an individual simulant
+
+	- **coverage(t - response_time_i)** = population coverage of vitamin A fortification X years prior to the current time-step, where X is response_time_i
+
+	- **random_number_i** = independent random number between 0 and 1, assigned to a simulant 
+
+Therefore, the probability that a simulant has vitamin A deficiency should be evaluated as:
+
+	vitamin_a_deficiency_prevalence * (1 - PAF) * rr_i
+
+Where, 
+
+	- PAF is computed based on the RR for vitamin A fortification
+
+	- rr_i is the relative risk assigned to the individual simulant ()
+
+.. todo::
+
+	more detail here
+
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
