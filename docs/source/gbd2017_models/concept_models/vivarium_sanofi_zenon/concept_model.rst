@@ -109,7 +109,7 @@ To correct for this, we do the following:
 
 	Add all equation components as probabilities
 
-:math:`\text{pop with high LDL if Rx did not exist=} \frac{\text{GBD estimate of pop with high LDL}} {\text{(1-prob(Rx|high LDL)} \times\ {\text{prob(control|Rx))}}}`
+:math:`\text{prob(high LDL-C | no Rx) = } \frac{\text{GBD estimate of pop with high LDL}} {\text{(1-prob(Rx|high LDL)} \times\ {\text{prob(control|Rx))}}}`
 
 In BAU, patients will be initialized into “currently on treatment” or “no current treatment” based on the “pop with high LDL if Rx did not exist” and the prob(Rx|high LDL).  This will be inconsistent with reality in the following way: individual simulants that are currently on treatment in reality may not initialize into “currently on treatment” in the simulation – but the total population on treatment should be the same as actual current practice.
 Patience that have experienced a CVD event will be on medication with probability 1.
@@ -119,6 +119,39 @@ Rx efficacy data are available from the literature.
 The probability of being adherent (defined as > 80% of days covered) is taken from the literature, and is a function of duration on treatment and history of CVD events (past MI = greater adherence).
 QUESTION:  how should we initialize adherence?  I.e. since I won’t know how long a simulant has been on treatment at time = 0 in the simulation, I can’t determine their adherence.  SUGGESTION: use average adherence taken over time?
 The probability of side effects is also taken from the literature, and if a person experiences a side-effect, it will be assumed that they don’t take their medicine (non-adherent).  
+
+BAU parameter data tables
++++++++++++++++++++++++++
+
+.. csv-table:: Current prescriptions
+   :file: current_rx.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Probability of prescription given high LDL-c
+   :file: prob_rx_given_high_ldlc.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Reduction in LDL-c by drug and dose
+   :file: reduction_in_ldlc.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Probability of testing LDL-c 
+   :file: prob_testing_ldlc.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Adherence parameters
+   :file: adherence_parameters.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Probability of adverse events
+   :file: prob_adverse_events.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
 
 Interventions
 +++++++++++++
