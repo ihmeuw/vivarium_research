@@ -121,6 +121,18 @@ Effect Modification
 
 Mediation
 """""""""
+Rather than a direct causal relationship between the independent variable and the dependent variable,
+a mediating variable improves understanding the relationship between the independent and dependent variables.
+The independent variable influences the mediating variable, which in turn influences the dependent variables. 
+
+Generic Depiction: 
+
+.. image:: risk_factors_mediation_diagram.svg
+
+Example: 
+
+.. image:: risk_factors_mediation_example.svg
+
 
 What is a risk exposure?
 ++++++++++++++++++++++++
