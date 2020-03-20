@@ -1,0 +1,4 @@
+﻿probability_type,mean_value,sd_value
+prob increasing dose if not at target,0.4175,0.02384848
+prob of adding 2nd drug if not at target,0.38,0.018708287
+prob of switching drugs if not at target,0.1925,0.024874686

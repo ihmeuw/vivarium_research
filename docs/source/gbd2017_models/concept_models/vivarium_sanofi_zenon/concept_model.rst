@@ -152,13 +152,29 @@ The probability of side effects is also taken from the literature, and if a pers
 BAU parameter data tables
 +++++++++++++++++++++++++
 
+Information about Table 1: For post-MI visits, the patient is given Rx with probability = 1. LDL-C should be recorded in the simulation, but its value does not impact treatment decision in any of the 3 scenarios.
+
+* For background visits, the patient may or may not have their LDL-C measured, and the probability that they do measure LDL-C is given by the data in Table 1.
+* For follow-up visits, the LDL-C should be measured with probability = 1 and recorded in the simulation (to determine if the patient has reached target), and may impact Tx decisions (e.g. increasing dose if not at target).
+
 .. csv-table:: Table 1: Probability of having LDL-c measured
    :file: prob_testing_ldlc.csv
    :widths: 20, 10, 10
    :header-rows: 1
 
+.. todo::
+
+	Need input from medical experts (Greg/Kelley/Sanofi)- should we treat patients with 100% probability in the 2 intervention scenarios? As is, we are not - we will use the prob(Rx| high LDL-c) from below Table 2.
+
+Information about Table 2: For background visits, if a patient is above the relevant threshold (4.9 mmol/L in BAU and according to the treatment algorithm involving SCORE, DM/CKD state, and SBP in the 2 intervention scenarios), they may or may not (therapeutic inertia) be given Rx. Whether they are given Rx given that they are above the threshold is determined by the data in Table 2.
+
 .. csv-table:: Table 2: Probability of Rx given high LDL-c
    :file: prob_rx_given_high_ldlc.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Table 3: Probability of reaching target given Rx
+   :file: prob_target_given_rx.csv
    :widths: 20, 10, 10
    :header-rows: 1
 
@@ -172,10 +188,21 @@ BAU parameter data tables
    :widths: 30, 20, 10, 10
    :header-rows: 1
 
+Information about Table 5: At a follow-up visit, if a patient has not reached their target (defined as 50% reduction in their untreated LDL-C), they may be given a higher dose, a 2nd drug or a different statin (if on statin). The probability of each is given in Table 5. These numbers are global, not location specific.
+
+.. csv-table:: Table 5: Probability of adding 2nd drug v. increasing dose
+   :file: prob_adding_drugs.csv
+   :widths: 30, 20, 10
+   :header-rows: 1
+
+Information about Table 6: The specific Rx for each patient (at initialization and for new patients during the simulation) is determined by the data in Table 6 - current treatment practice distribution by drug type. First, the type of drug is determined (statin, ezetimibe or fibrate). Then the sub-type of statin is determined for patients on statin. In BAU, dosing is 40mg for low potency statin (called "high dose") and 20mg for high potency statin (called "low dose"). In the 2 intervention scenarios, the initial dose is "high dose" of high potency statin.
+
 .. csv-table:: Table 6: Current treatment practice - distribution by drug type 
    :file: current_rx.csv
    :widths: 30, 20, 10, 10
    :header-rows: 1
+
+Information about Table 7: If a patient experiences a side effect, they will be given a different drug on their next visit. The treatment algorithm assumes these patients are not adherent.
 
 .. csv-table:: Table 7: Probability of side effect (adverse events)
    :file: prob_adverse_events.csv
@@ -385,3 +412,6 @@ Verification and Validation Strategy
   - Simulate history & check against GBD 2017 
   - model_outputs_location_cause_measure_sex_age_group = gbd_2017__location_cause_measure_sex_age_group
 
+5. Model assumptions validation:
+
+* Does the average LDL-C for the population from GBD look like the average LDL-C for the population that is initialized this way? Since we have initialized a certain number of people with specific doses of specific drugs (and we know the efficacy of each drug as a function of dose), we should be able to compare these two population level LDL-Cs.
