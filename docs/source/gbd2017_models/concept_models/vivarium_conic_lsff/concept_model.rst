@@ -323,7 +323,7 @@ math: `a` value for Ethiopia, assume the following:
 
   a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
 
-The means of this `Beta distribution
+The mean of this `Beta distribution
 <https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the value shown
 in the table. The density has an asymptote at 0 and an x-intercept at
 1. The mean value for this parameter was chosen so that the mean of 
