@@ -12,6 +12,35 @@ Objective
 
 The objective is to model and simulate the Public Health Impact of fixed dose combination on LDL cholesterol and ASCVD (Ischemic heart disease, Ischemic stroke) in Brazil, China, France, Spain, and Russia. This includes the intervention targets of reducing deaths and DALYs due to Ischemic Heart Disease and Ischemic Stroke based on the intervention scenario. 
 
+.. list-table:: Table of Term Definitions
+   :widths: 15, 20, 20
+   :header-rows: 1
+
+   * - Term
+     - Definition
+     - Notes
+   * - High LDL-c in Business As Usual (BAU) scenario 
+     - LDL-c > 4.9
+     - 
+   * - High LDL-c in intervention scenarios
+     - LDL-c > 3.0
+     - Determined by CV risk SCORE
+   * - Hitting target
+     - 50% or more reduction over untreated LDL-c
+     - 
+   * - High potency statin
+     - Refers to high potency of drugs: atorvastatin, rosuvastatin
+     - Defined by guidelines and discussion with Sanofi 
+   * - Low potency statin
+     - Refers to low potency of drugs: simvastatin, pravastatin, atorvastatin, fluvastatin
+     - Defined by guidelines and discussion with Sanofi 
+   * - High dose 
+     - 40mg and up
+     - 
+   * - Low dose
+     - under 40mg 
+     - 
+
 Intervention Definitions
 ++++++++++++++++++++++++
 
