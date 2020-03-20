@@ -317,7 +317,7 @@ with mean equal to the central estimate, and variance equal to the variance of
 a normal distribution with the same mean and 95% confidence interval. 
 
 For the :
-math: `a` value for Ethiopia, assume the following: 
+math:`a` value for Ethiopia, assume the following: 
 
 .. math::
 
