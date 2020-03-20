@@ -295,7 +295,7 @@ The coverage algorithm for vitamin A fortification should follow the same approa
     - :math:`b` = Eats fortifiable vehicle
     - :math:`c` = Eats vehicle
   * - Ethiopia
-    - 1.0 (see instructions for folic acid parameter)
+    - 1.0 (see below)
     - 44 (34, 54)
     - 55 (45, 65)
   * - India
@@ -313,9 +313,22 @@ The coverage algorithm for vitamin A fortification should follow the same approa
 
 For all values other than :math: `a` for Ethiopia, use a Beta distribution 
 with mean equal to the central estimate, and variance equal to the variance of 
-a normal distribution with the same mean and 95% confidence interval. For the :
-math: `a` value for Ethiopia, follow the corresponding instructions in the `
-Population Coverage Data`_ section for folic acid.
+a normal distribution with the same mean and 95% confidence interval. 
+
+For the :
+math: `a` value for Ethiopia, assume the following: 
+
+.. math::
+
+  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
+
+The means of this `Beta distribution
+<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the value shown
+in the table. The density has an asymptote at 0 and an x-intercept at
+1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
+monotonically with the mean. The mean value for this parameter was chosen so 
+that the mean of existing fortification coverage is close to 0 (in a similar 
+approach to existing coverage of folic acid in Ethiopia).
 
 .. todo::
 
