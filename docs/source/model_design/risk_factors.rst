@@ -105,14 +105,20 @@ is not satisfied, there is a risk for **reverse causalility**, in which the
 causal relationship occurs in the opposite direction as expected.
 
 While these criteria are a useful guide for assessing whether there is 
-sufficient evidence to conclude that a relationship is causal, there are several
-concepts that should be considered when thinking about causality between an 
-exposure and an outcome. Relationships that complicate our understanding of 
-causality, including confounding, intermediates, effect modification, and 
-mediation are discussed in the following subsections.
+sufficient evidence to conclude that a relationship is causal, there are 
+several concepts that should be considered when thinking about causality 
+between an  exposure and an outcome. Relationships that complicate our 
+understanding of causality, including confounding, intermediates, effect 
+modification, and mediation are discussed in the following subsections.
 
 Notably, in the following sections, solid arrows are used to depict causal 
 relationships directionally between a cause/exposure and effect/outcome. 
+
+.. todo::
+
+  Discuss counterfactual analysis as performed in our assessment of interventions.
+
+  Discuss criteria (sim science and GBD) for modeling a risk outcome pair
 
 Confounding
 """"""""""""
