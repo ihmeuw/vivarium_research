@@ -25,6 +25,44 @@ Concept Model Diagram
 
 .. image:: lsff_concept_model_diagram.svg
 
+Model Versions
+--------------
+
+.. list-table::
+   :header-rows: 1
+   
+   * - Version
+     - Description
+     - Done
+   * - v1.0_disease_only
+     - Model with mortality, morbidity, diarrhea, LRI, measles, and 
+       neural tube defects.
+     - Yes
+   * - v2.0_lbwsg
+     - Model v1.0 plus the low birth weight and short gestation risk
+       factor.
+     - Yes
+   * - v3.0_paf_of_one
+     - Model v2.0 plus vitamin a deficiency and iron deficiency.
+     - Yes
+   * - v4.0_folic_acid_fortification
+     - Model v3.0 plus folic acid fortification baseline and scale up.
+     - Yes
+   * - v5.0_vitamin_a_fortification
+     - Model v4.0 plus vitamin a fortification baseline and scale up.
+     - In progress
+   * - v6.0_iron_fortification
+     - Model v5.0 plus iron fortification baseline and scale up.
+     - Not started
+   * - v7.0_scenarios
+     - Full model with final stratification and all scenarios.
+     - Not started.
+   
+Model results can be located at 
+``/share/costeffectiveness/results/vivarium_conic_lsff`` in the 
+appropriate model version directory.
+   
+
 Model Components
 ----------------
 
