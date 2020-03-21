@@ -211,7 +211,7 @@ The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
     - No (only one study)
 	
 .. list-table:: Table 4.2: Pulled relative risks of GBD 2017 
-  :widths: 15 14 15 
+  :widths: 15 16 15 
   :header-rows: 1
 
   * - Cause
