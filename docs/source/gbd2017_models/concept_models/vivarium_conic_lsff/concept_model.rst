@@ -320,11 +320,59 @@ be sampled such that:
 	# (s is the shape parameter)
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
-**Coverage Data**
+**Population Coverage Data**
+
+The coverage algorithm for vitamin A fortification should follow the same approach described 
+in this concept model document for folic acid fortification (see `Population Coverage Data`_).
+
+.. list-table:: Means and 95% CI's for existing population coverage of vitamin A fortification (% of total population)
+  :widths: 5 5 5 5
+  :header-rows: 1
+
+  * - Location
+    - :math:`a` = Eats fortified vehicle
+    - :math:`b` = Eats fortifiable vehicle
+    - :math:`c` = Eats vehicle
+  * - Ethiopia
+    - 1.0 (see below)
+    - 44 (34, 54)
+    - 55 (45, 65)
+  * - India
+    - 24.3 (21.1, 27.9)
+    - 89.4 (87.0, 91.8)
+    - 100 (100, 100)
+  * - Nigeria (Kano)
+    - 7.6 (5.9, 9.4)
+    - 35.9 (32.7, 39.1)
+    - 98.4 (97.6, 99.3)
+  * - Nigeria (Lagos)
+    - 7.2 (5.5, 8.9)
+    - 22.7 (19.9, 25.5)
+    - 98.6 (97.8, 99.3)
+
+For all values other than :math:`a` for Ethiopia, use a Beta distribution 
+with mean equal to the central estimate, and variance equal to the variance of 
+a normal distribution with the same mean and 95% confidence interval. 
+
+For the :
+math:`a` value for Ethiopia, assume the following: 
+
+.. math::
+
+  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
+
+The mean of this `Beta distribution
+<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the value shown
+in the table. The density has an asymptote at 0 and an x-intercept at
+1. The mean value for this parameter was chosen so that the mean of 
+existing fortification coverage is close to 0 (in a similar approach to 
+existing coverage of folic acid in Ethiopia).
 
 .. todo::
 
-	Describe coverage algorithm
+	Cite Ethiopia data source (Assessment of Feasibility and Potential 
+	Benefits of Food Fortification. Addis Ababa : Government of the 
+	Federal Democratic Republic of Ethiopia, 2011).
 
 **Effect of Intervention on Simulants**
 
