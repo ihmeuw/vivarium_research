@@ -11,7 +11,7 @@ Risk Factor Correlation
 Risk Factor Correlation Overview
 --------------------------------
 
-Let X and Y be random variables with marginal densities f_X and  g_Y, and with joint density h_XY.  The corresponding CDFs are denoted by capital letters: F_X, G_Y and  H_XY.  Although I am using terminology consistent with continuous random variables, I am sloppy herein concerning whether X and Y are in fact discrete or continuous (e.g. see assumption that the inverse CDF exists…).
+Let X and Y be random variables with marginal densities f_x and  g_y, and with joint density h_xy.  The corresponding CDFs are denoted by capital letters: F_X, G_Y and  H_XY.  Although I am using terminology consistent with continuous random variables, I am sloppy herein concerning whether X and Y are in fact discrete or continuous (e.g. see assumption that the inverse CDF exists…).
 Define the matrix of correlation parameters between random variables to be θ, such that, in two variable case:
 
 .. todo::
@@ -127,3 +127,9 @@ Step #2 could be generalized, I think, so that values are drawn not pairwise, bu
 
 The biggest weakness is obviously use of the Gaussian copula, which could be generalized with some additional time and effort.  I know selection of the copula can make a reasonably significant difference (depending on the shape of the scatter plot), but time constraints are binding here, so it’s saved for future work.
 
+Spearman correlations between LDL-c, SBP, FPG, GFR
+
+.. csv-table:: Spearman correlations between LDL-c, SBP, FPG, GFR
+   :file: spearman_correlations.csv
+   :widths: 20, 10, 10, 10, 10, 10
+   :header-rows: 1
