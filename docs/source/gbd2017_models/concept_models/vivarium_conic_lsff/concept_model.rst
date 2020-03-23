@@ -601,6 +601,42 @@ level **in the baseline scenario** should be determined as follows:
 	else: 
 		md_i = MD
 
+The effect size of the iron fortification on a simulant's hemoglobin level for 
+new **intervention** coverage of iron fortification should be determined as 
+follows: 
+
+.. code-block:: Python
+	
+	# at the draw level
+	MD = hb_md_distribution.rvs()
+
+	# at the individual simulant level
+	if age_i < 0.5:
+		md_i = 0
+	if age_i < 1.5: 
+		md_i = MD * (age_i - age_of_coverage_i) / (2 - age_of_coverage_i)
+	if age_i > 1.5 and coverage_time_i < 0.5: 
+		md_i = MD * (age_i - age_of_coverage_i) / 0.5
+	else:
+		md_i = MD
+
+Where,
+
+	- age_i = age of simulant in years
+
+	- md_i = mean difference in hemoglobin to be applied to a simulant
+
+	- age_of_coverage_i = age of simulant in years at which intervention coverage was gained
+
+See below for a visual representation:
+
+..image:: iron_effect_scale_up.png
+
+**Birth Weight** 
+
+.. todo:: 
+
+	Write this section
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
