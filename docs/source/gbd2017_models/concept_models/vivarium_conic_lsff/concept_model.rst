@@ -527,7 +527,11 @@ as follows:
 
 **Birth Weight**
 
-The effect of maternal consumption of iron fortified food on infant birth weight was obtained directly from Haider et al. (2013). According to this data source, mean birth weight among babies born to mothers who consumed iron fortified foods had a mean birth weight **15.1 grams (95% CI: 6.0, 24.2)** higher than babies born to mothers who did not consume iron fortified foods. 
+The effect of maternal consumption of iron fortified food on infant birth 
+weight was obtained directly from Haider et al. (2013). According to this data 
+source, mean birth weight among babies born to mothers who consumed iron 
+fortified foods had a mean birth weight **15.1 grams (95% CI: 6.0, 24.2)** 
+higher than babies born to mothers who did not consume iron fortified foods. 
 
 To model the uncertainty in the estimate, the above mean difference (MD) 
 should be drawn from a normal distribution with mean = 15.1, 
@@ -555,6 +559,48 @@ as follows:
 
 Determining Whether A Simulant is Affected
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Hemoglobin Level**
+
+For the purposes of our simulation, we assumed that simulants only received an 
+effect from iron fortification if they directly consumed iron fortified foods 
+and that they received no effect of iron fortification on their hemoglobin 
+levels from maternal consumption of iron fortified foods.
+
+Additionally, we assumed that simulants in  begin to eat staple foods as a 
+supplement to breast milk consumption at the age of six months and that the 
+quantity of staple foods consumed as a proportion of total consumption 
+increases linearly from six months to two years of age, at which point it 
+reaches its peak and then remains constant.
+
+Further, we assumed that the full effect of the iron fortification 
+intervention takes six months to achieve and that the effect scales up in a 
+linear fashion between the onset of exposure and six months post exposure (
+this is likely a conservative assumption and the shape likely follows more of 
+a logarithmic curve). Additionally, we assumed that all individuals covered by 
+baseline coverage of iron fortification have been covered for at least six 
+months and therefore have already achieved the full effect of the intervention.
+
+.. todo::
+
+	Add justification and references to support for these assumptions.
+
+Therefore, the effect size of iron fortification on a simulant's hemoglobin 
+level **in the baseline scenario** should be determined as follows:
+
+.. code-block:: Python
+	
+	# at the draw level
+	MD = hb_md_distribution.rvs()
+
+	# at the individual simulant level
+	if age_i < 0.5:
+		md_i = 0
+	elif age_i < 2:
+		md_i = MD * (age_i - 0.5) / 1.5
+	else: 
+		md_i = MD
+
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
