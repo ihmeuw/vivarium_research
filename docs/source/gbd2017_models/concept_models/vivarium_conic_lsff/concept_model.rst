@@ -139,8 +139,6 @@ Vitamin A Fortification
 Coverage 
 ^^^^^^^^
 
-
-
 Effect Size
 ^^^^^^^^^^^
 
@@ -446,8 +444,94 @@ Where,
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
+Population Coverage Data and Coverage Algorithm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The baseline coverage for iron fortification is the same as the baseline 
+coverage for folic acid fortification, as described below_.
+
+.. note:: 
+
+	A limitation of our population coverage data is that we assume no baseline 
+	iron fortification occurs in the absence of folic acid fortification and 
+	vice versa.
+
+Additionally, the coverage algorithm should be implemented in the same way as 
+for folic acid fortification, as described here_.
+
+Effect Size
+^^^^^^^^^^^
+
+Iron fortification of staple food affects two outcomes in our simulation 
+model. The first outcome is an individual's hemoglobin concentration following 
+the *direct* consumption of iron fortified foods. The second outcome is a 
+simulant's birth weight following the *maternal* consumption of iron fortified 
+foods.
+
+**Hemoglobin Level**
+
+The effect of iron fortified food consumption on children under 7 years of age 
+was obtained from the Keats et al. systematic review. However, the effect size 
+in this review was reported in standardized mean differences rather than in 
+units of hemoglobin concentration directly. Therefore, we performed a separate 
+meta-analysis of the results included in the Keats et al. review. This 
+meta-analysis is shown below.
+
+.. image:: iron_meta.png
+
+Notably, the above changes in hemoglobin concentration are shown in grams per *
+deciliter* (dL); however, GBD models hemoglobin concentration as grams per *
+liter* (L). Therfore, the effect size used in our simulation model should be 
++3.0 (95% CI: -0.2, +6.1) grams of hemoglobin per liter of blood. This effect 
+size should be interpreted as the population mean shift in hemoglobin 
+concentrations among children less than seven years old in LMICs following 
+iron fortification of staple foods. 
+
+.. note:: 
+
+	The confidence interval for this effect size includes the null (0), 
+	indicating that for some individual simulation draws, the intervention 
+	effect may *decrease* population mean hemoglobin concentrations. However, *
+	on average*, the effect of the intervention will increase population mean 
+	hemoglobin levels.
+
+To model the uncertainty in the estimate, the above mean difference (MD) 
+should be drawn from a normal distribution with mean = 3.0, 2.5\ :superscript:`
+th`-percentile = -0.2, and 97.5\ :superscript:`th`-percentile = 6.1. This 
+distbibution can be created using `SciPy's norm function
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
+as follows:
+
+.. code-block:: Python
+
+	from scipy.stats import norm
+
+	# mean and 0.975-quantile of normal distribution for mean difference (MD)
+	mean = 3
+	q_975 = 6.1
+
+	# 0.975-quantile of standard normal distribution (=1.96, approximately)
+	q_975_stdnorm = norm().ppf(0.975)
+
+	std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+	# Frozen normal distribution for MD, representing uncertainty in our effect size
+	md_distribution = norm(mean, std)
+
+.. note::
+
+	This distirbution is slightly shifted to the right (0.025 percentile is 
+	equal to -0.1, rather than -0.2) due to rounding approximations in the 
+	meta-analysis for the effect size causing a slightly non-symmetrical 
+	confidence interval around the mean.
+
+Determining Whether A Simulant is Affected
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _below:
 
 Population Coverage Data
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -560,6 +644,8 @@ sampled the two estimates indepdently, and more uncertainty seems like a good
 idea since we're trying to estimate an average for the entire country based on
 only two data points. Moreover, this coupling seems plausible since the data for
 Kano and Lagos were from the same paper and therefore could have a similar bias.
+
+.. _here:
 
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^
