@@ -11,21 +11,18 @@ Risk Factor Correlation
 Risk Factor Correlation Overview
 --------------------------------
 
-Let X and Y be random variables with marginal densities f_x and  g_y, and with joint density h_xy.  The corresponding CDFs are denoted by capital letters: F_X, G_Y and  H_XY.  Although I am using terminology consistent with continuous random variables, I am sloppy herein concerning whether X and Y are in fact discrete or continuous (e.g. see assumption that the inverse CDF exists…).
-Define the matrix of correlation parameters between random variables to be θ, such that, in two variable case:
+Let X and Y be random variables with marginal densities f\ :sub:`x` and  g\ :sub:`y`, and with joint density h\ :sub:`xy`.  The corresponding CDFs are denoted by capital letters: F\ :sub:`X`, G\ :sub:`Y` and  H\ :sub:`XY`.  Although I am using terminology consistent with continuous random variables, I am sloppy herein concerning whether X and Y are in fact discrete or continuous (e.g. see assumption that the inverse CDF exists…).
+
+Define the matrix of correlation parameters between random variables to be :math:`\theta`, such that, in two variable case:
 
 .. todo::
   Add correct matrix
 
-\usepackage{amsfonts}
-
-\begin{equation*}
-\theta = 
-\begin{bmatrix}
-1 & \rho \\
-\rho & 1 \\
-\end{bmatrix}
-\end{equation*}
+.. math::
+   \theta = \begin{bmatrix}
+                  1    & \rho \\
+                  \rho & 1    \\
+            \end{bmatrix}
 
 Description of general approach
 -------------------------------
@@ -40,7 +37,7 @@ A copula is a multivariate distribution function whose marginal distributions ar
 .. todo::
   Add equation 
 
-Knowing that the relationship between the random variables in not often linear, Pearson’s rho is not an appropriate metric.  Instead, metrics such as Spearman’s rho or Kendall’s tau, which measure correlation in terms of rank, are a better choice.  Rank correlation is called concordance, and is defined as follows for random variables X and Y:  if large values of X are associated with large values of Y, X and Y are concordant (as opposed to being discordant).  A concordance function, Q, gives the difference between the probability of concordance and the probability of discordance for an independent pair of vectors (X_1,Y_1 )  and (X_2,Y_2 ) of random variables:
+Knowing that the relationship between the random variables in not often linear, Pearson’s rho is not an appropriate metric.  Instead, metrics such as Spearman’s rho or Kendall’s tau, which measure correlation in terms of rank, are a better choice.  Rank correlation is called concordance, and is defined as follows for random variables X and Y:  if large values of X are associated with large values of Y, X and Y are concordant (as opposed to being discordant).  A concordance function, Q, gives the difference between the probability of concordance and the probability of discordance for an independent pair of vectors (X\ :sub:`1`,Y\ :sub:`1` )  and (X\ :sub:`2`,Y\ :sub:`2` ) of random variables:
 
 .. todo::
   Add equation 
@@ -55,7 +52,7 @@ This can be expressed as copulas:
 .. todo::
   Add equation 
 
-**Spearman’s rho** is proportional to the probability of concordance minus the probability of discordance between two random vectors (X_1,Y_1 )  and (X_2,Y_2 ) with the same marginal distributions F(x) and G(y), but with difference copulas:
+**Spearman’s rho** is proportional to the probability of concordance minus the probability of discordance between two random vectors (X\ :sub:`1`,Y\ :sub:`1` )  and (X\ :sub:`2`,Y\ :sub:`2` ) with the same marginal distributions F(x) and G(y), but with difference copulas:
 
 .. todo::
   Add equation 
@@ -70,7 +67,7 @@ The population version of Spearman’s rho is defined as
 .. todo::
   Add equation 
 
-where multiplication by 3 normalizes Spearman’s rho to be on the interval [-1,1].  A result of the definition of copula H_2 is that Spearman’s rho, when written in terms of the integration of copulas,
+where multiplication by 3 normalizes Spearman’s rho to be on the interval [-1,1].  A result of the definition of copula H\ :sub:`2` is that Spearman’s rho, when written in terms of the integration of copulas,
 
 .. todo::
   Add equation 
@@ -80,9 +77,9 @@ simplifies to the following:
 .. todo::
   Add equation 
 
-For certain copulas (Frank, Farlie-Cumbel-Morgenstern, and Gaussian), Spearman’s rho can be expressed as a simple function of the correlation parameter, ρ_s=k(θ), where θ is the linear correlation between the two random variables.  
+For certain copulas (Frank, Farlie-Cumbel-Morgenstern, and Gaussian), Spearman’s rho can be expressed as a simple function of the correlation parameter, :math:`\rho`\ :sub:`s` = k(:math:`\theta`), where :math:`\theta` is the linear correlation between the two random variables.  
 
-**Kendall’s tau** is the probability of concordance minus the probability of discordance between two random vectors (X_1,Y_1 )  and (X_2,Y_2 ) with the same marginal distributions F(x) and G(y), and with a common copula:
+**Kendall’s tau** is the probability of concordance minus the probability of discordance between two random vectors (X\ :sub:`1`,Y\ :sub:`1` )  and (X\ :sub:`2`,Y\ :sub:`2`) with the same marginal distributions F(x) and G(y), and with a common copula:
 
 .. todo::
   Add equation 
