@@ -479,11 +479,11 @@ meta-analysis is shown below.
 
 .. image:: iron_meta.png
 
-Notably, the above changes in hemoglobin concentration are shown in grams per *
-deciliter* (dL); however, GBD models hemoglobin concentration as grams per *
-liter* (L). Therfore, the effect size used in our simulation model should be 
-+3.0 (95% CI: -0.2, +6.1) grams of hemoglobin per liter of blood. This effect 
-size should be interpreted as the population mean shift in hemoglobin 
+Notably, the above changes in hemoglobin concentration are shown in grams per 
+*deciliter* (dL); however, GBD models hemoglobin concentration as grams per 
+*liter* (L). Therfore, the effect size used in our simulation model should be 
+**+3.0 (95% CI: -0.2, +6.1)** grams of hemoglobin per liter of blood. This 
+effect size should be interpreted as the population mean shift in hemoglobin 
 concentrations among children less than seven years old in LMICs following 
 iron fortification of staple foods. 
 
@@ -491,8 +491,8 @@ iron fortification of staple foods.
 
 	The confidence interval for this effect size includes the null (0), 
 	indicating that for some individual simulation draws, the intervention 
-	effect may *decrease* population mean hemoglobin concentrations. However, *
-	on average*, the effect of the intervention will increase population mean 
+	effect may *decrease* population mean hemoglobin concentrations. However, 
+	*on average*, the effect of the intervention will increase population mean 
 	hemoglobin levels.
 
 To model the uncertainty in the estimate, the above mean difference (MD) 
@@ -516,7 +516,7 @@ as follows:
 	std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
 
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
-	md_distribution = norm(mean, std)
+	hb_md_distribution = norm(mean, std)
 
 .. note::
 
@@ -524,6 +524,34 @@ as follows:
 	equal to -0.1, rather than -0.2) due to rounding approximations in the 
 	meta-analysis for the effect size causing a slightly non-symmetrical 
 	confidence interval around the mean.
+
+**Birth Weight**
+
+The effect of maternal consumption of iron fortified food on infant birth weight was obtained directly from Haider et al. (2013). According to this data source, mean birth weight among babies born to mothers who consumed iron fortified foods had a mean birth weight **15.1 grams (95% CI: 6.0, 24.2)** higher than babies born to mothers who did not consume iron fortified foods. 
+
+To model the uncertainty in the estimate, the above mean difference (MD) 
+should be drawn from a normal distribution with mean = 15.1, 
+2.5\ :superscript:`th`-percentile = 6.0, and 
+97.5\ :superscript:`th`-percentile = 24.2. This 
+distbibution can be created using `SciPy's norm function
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
+as follows:
+
+.. code-block:: Python
+
+	from scipy.stats import norm
+
+	# mean and 0.975-quantile of normal distribution for mean difference (MD)
+	mean = 15.1
+	q_975 = 24.2
+
+	# 0.975-quantile of standard normal distribution (=1.96, approximately)
+	q_975_stdnorm = norm().ppf(0.975)
+
+	std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+	# Frozen normal distribution for MD, representing uncertainty in our effect size
+	bw_md_distribution = norm(mean, std)
 
 Determining Whether A Simulant is Affected
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
