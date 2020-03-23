@@ -630,7 +630,7 @@ Where,
 
 See below for a visual representation:
 
-..image:: iron_effect_scale_up.png
+.. image:: iron_effect_scale_up.png
 
 **Birth Weight** 
 
