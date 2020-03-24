@@ -318,7 +318,7 @@ same as the exposure data for the VAD risk factor). The rationale for this
 approach is twofold:
 
 1.  We want to guarantee that the simulated baseline prevalence of vitamin A
-    deficiency matches the prevalence data from GBD, which is likely more
+    deficiency matches the prevalence data from GBD (1 - 5 age group), which is likely more
     trustworthy than incidence and remission data.
 
 2.  Relative risks from the literature about the effects of vitamin A
@@ -335,13 +335,13 @@ approach is twofold:
     - Exposure source using rei_id 96
     - Como 
   * - Nigeria
-    - 0.223 (0.144 - 0.315)
+    - 0.232 (0.184 - 0.288)
     - 0.232 (0.184 - 0.288)
   * - India
-    - 0.564 (0.219 - 0.899)
+    - 0.25 (0.205 - 0.303)
     - 0.25 (0.205 - 0.304)
   * - Ethiopia
-    - 0.624 (0.274 - 0.945)
+    - 0.315 (0.252 - 0.379)
     - 0.315 (0.253 - 0.38)
 
 .. todo::
