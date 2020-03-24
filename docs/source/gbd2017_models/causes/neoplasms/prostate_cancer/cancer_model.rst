@@ -51,9 +51,38 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
-.. todo::
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
 
-   Add restrictions table.
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - True
+     - 
+   * - Female only
+     - False
+     - 
+   * - YLL only
+     - False
+     - 
+   * - YLD only
+     - False
+     - 
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id is 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id is 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id is 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id is 235
+
 
 
 Vivarium Modeling Strategy
