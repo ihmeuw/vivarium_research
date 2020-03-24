@@ -435,7 +435,7 @@ Where,
 
 	- PAF is computed based on the RR for vitamin A fortification
 
-	- rr_i is the relative risk assigned to the individual simulant ()
+	- rr_i is the relative risk assigned to the individual simulant
 
 .. todo::
 
@@ -557,8 +557,8 @@ as follows:
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
 	bw_md_distribution = norm(mean, std)
 
-Determining Whether A Simulant is Affected
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Determining How A Simulant is Affected
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Hemoglobin Level**
 
@@ -607,26 +607,32 @@ follows:
 
 .. code-block:: Python
 	
-	# at the draw level
-	MD = hb_md_distribution.rvs()
+
+	# MD = hb_md_distribution.rvs() : full effect size at the draw level
+	# md_i : effect size for an individual simulant at a given time-step, 
+		# dependent on age and time since coverage
+	# age_i : simulant age in years
+	# age_of_coverage_i : age at which simulant gained coverage access in years
+	# time_since_coverage_i : age_i - age_of_coverage_i
+	# age_of_coverage_i / 1.5 : fraction of full effect that will be achieved 
+		# in six months since onset of coverage access, dependent on 
+		# age_of_coverage_i [(age_of_coverage - 0.5 + 0.5) / (2 - 0.5)]
+	# time_since_coverage_i / 0.5 : fraction of effect that will be achieved 
+		# at six months post onset of coverage access, dependent on 
+		# time_since_coverage_i
+	# (age_i - 0.5) / 1.5 : fraction of full effect, dependent on age
 
 	# at the individual simulant level
 	if age_i < 0.5:
 		md_i = 0
-	if age_i < 1.5: 
-		md_i = MD * (age_i - age_of_coverage_i) / (2 - age_of_coverage_i)
-	if age_i > 1.5 and coverage_time_i < 0.5: 
-		md_i = MD * (age_i - age_of_coverage_i) / 0.5
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i < 0.5: 
+		md_i = MD * age_of_coverage_i / 1.5 * time_since_coverage_i / 0.5
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i >= 0.5: 
+		md_i = MD * (age_i - 0.5) / 1.5
+	if age_i > 0.5 and age_of_coverage >= 1.5 and time_since_coverage_i < 0.5: 
+		md_i = MD * time_since_coverage_i / 0.5
 	else:
 		md_i = MD
-
-Where,
-
-	- age_i = age of simulant in years
-
-	- md_i = mean difference in hemoglobin to be applied to a simulant
-
-	- age_of_coverage_i = age of simulant in years at which intervention coverage was gained
 
 See below for a visual representation:
 
