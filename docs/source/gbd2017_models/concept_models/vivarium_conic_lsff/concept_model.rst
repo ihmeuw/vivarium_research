@@ -567,7 +567,7 @@ effect from iron fortification if they directly consumed iron fortified foods
 and that they received no effect of iron fortification on their hemoglobin 
 levels from maternal consumption of iron fortified foods.
 
-Additionally, we assumed that simulants in  begin to eat staple foods as a 
+Additionally, we assumed that simulants begin to eat staple foods as a 
 supplement to breast milk consumption at the age of six months and that the 
 quantity of staple foods consumed as a proportion of total consumption 
 increases linearly from six months to two years of age, at which point it 
@@ -591,7 +591,8 @@ level **in the baseline scenario** should be determined as follows:
 .. code-block:: Python
 	
 	# at the draw level
-	MD = hb_md_distribution.rvs()
+	MD = hb_md_distribution.rvs() # mean difference in hemoglobin concentration due to iron fortification
+		# note, hb_md_distribution defined above in the effect size section
 
 	# at the individual simulant level
 	if age_i < 0.5:
@@ -607,8 +608,8 @@ follows:
 
 .. code-block:: Python
 	
-
-	# MD = hb_md_distribution.rvs() : full effect size at the draw level
+	# MD = hb_md_distribution.rvs() : full effect size at the draw level 
+		# (mean difference in hemoglobin concentration due to iron fortification)
 	# md_i : effect size for an individual simulant at a given time-step, 
 		# dependent on age and time since coverage
 	# age_i : simulant age in years
