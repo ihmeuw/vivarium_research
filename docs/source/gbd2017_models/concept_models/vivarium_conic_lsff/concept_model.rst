@@ -538,6 +538,78 @@ as follows:
 Determining Whether A Simulant is Affected - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+**Hemoglobin Level**
+
+[This section in another PR that I will have to fix a merge conflict for]
+
+**Birth Weight**
+
+Our model will apply the effect size of maternal consumption of iron fortified 
+foods on infant birth weight under the following assumptions:
+
+1. The effect of consuming iron fortified foods takes place six months after 
+the onset of consumption. This assumption is partially supported by Andersson 
+et al. 2010, which found that the peak response occurs at approximately six 
+months after onset; however, we simplified this finding for our model and 
+assumed that there was only a response six months after onset of consumpiton 
+of iron fortified foods.
+
+2. The effect of maternal iron fortified food consumption must occur at the 
+start of the third trimester of pregnancy in order to impact infant birth 
+weight, which we assumed was equal to 3 months prior to birth of the infant. 
+We chose to make this assumption because the effect of maternal iron was 
+measured at the third trimester in the Haider et al. 2013 paper.
+
+Therefore, for our simulantion, an infant's mother must have gained coverage 
+to iron fortified foods at least **nine months prior to the birth of the 
+infant** in order for the iron fortification coverage to affect the infant's 
+birth weight.
+
+.. note:: 
+
+  The following was adopted from Nathaniel's description for folic acid.
+
+
+1.  **Define variables:** Each simulant needs an attribute
+    `mother_ate_iron_fortified_food`, which will be `True` if the simulant's
+    mother ate iron fortified food starting at least nine months (0.75 years) 
+    before the simulant was born, `False` if not, and `Unknown` if we don't 
+    know.
+
+2.  **Initialize the simulation:** At the start of the simulation, set
+    `mother_ate_iron_fortified_food = Unknown` for all simulants in age groups 
+    4 and 5; this attribute will not be used for these age groups because the 
+    LBWSG risk factor does not apply. Set `mother_ate_iron_fortified_food = 
+    True` for a proportion of the population equal to baseline coverage of 
+    iron fortification, :math:`C`. Set `mother_ate_iron_fortified_food = False`
+    for a proportion of the population equal to 1 - baseline coverage of iron 
+    fortification, :math:`1 - C`. 
+
+3.  **Initialize simulants born into the simulation:** For each simulant born
+    at time :math:`t` (in years), the probability that the simulant's mother
+    started eating iron-fortified food at nine months prior is equal to the
+    population coverage nine months prior, :math:`C(t-0.75)`. Therefore, upon 
+    the simulant's birth, do the following:
+
+  a.  Generate a uniform random number :math:`u\sim
+      \operatorname{Uniform}([0,1])`.
+
+  b.  If :math:`u<C(t-0.75)`, `mother_ate_iron_fortified_food = True`;
+      else `mother_ate_iron_fortified_food = False`.
+
+Note that we are assuming that once someone (in this case the baby's mother)
+starts eating fortified food, they will continue to eat the fortified food
+forever. Additionally, we assume that those covered by baseline coverage of 
+iron fortification have been covered for at least nine months + age of the 
+simulant (in the case of simulants initialized in the early neonatal age 
+groups).
+
+Then, for simulants with the attribute `mother_ate_iron_fortified_food = True`,
+the effect size of iron fortification on birth weight, calculated as described 
+above (`Effect Size - Iron`_), should be applied as an **additive shift** to 
+the simulant's birth weight (in grams). This may then impact their LBWSG risk 
+category.
+
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
