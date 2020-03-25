@@ -528,18 +528,10 @@ as follows:
 **Birth Weight**
 
 The effect of maternal consumption of iron fortified food on infant birth 
-weight was obtained directly from Haider et al. (2013). According to this data 
-source, mean birth weight among babies born to mothers who consumed iron 
-fortified foods had a mean birth weight **15.1 grams (95% CI: 6.0, 24.2)** 
-higher than babies born to mothers who did not consume iron fortified foods. 
-
-To model the uncertainty in the estimate, the above mean difference (MD) 
-should be drawn from a normal distribution with mean = 15.1, 
-2.5\ :superscript:`th`-percentile = 6.0, and 
-97.5\ :superscript:`th`-percentile = 24.2. This 
-distbibution can be created using `SciPy's norm function
-<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
-as follows:
+weight was obtained from Haider et al. (2013). According to this data source,  
+birth weight among babies born to mothers increased, on average, by 15.1 grams 
+(95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The distribution of 
+the parameter should be modeled as follows:
 
 .. code-block:: Python
 
@@ -557,8 +549,101 @@ as follows:
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
 	bw_md_distribution = norm(mean, std)
 
-Determining How A Simulant is Affected
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+	# random sample from effect size distribution
+	bw_md_per_10_mg_iron = bw_md_distribution.rvs()
+
+.. note::
+
+	The Haider et al. 2013 paper did not report if the dose of iron was 
+	measured as elemental iron or as an iron compound such as NaFeEDTA. We 
+	operated under the assumption that 10 mg of daily iron consumption, as 
+	referenced in the Haider paper, represented 10 mg of *elemental* iron.
+
+Therefore, we investigated the amount of daily iron consumption that a 
+pregnant mother would likely consume through iron fortification of staple 
+foods in our locations of interest in order to scale the effect size 
+accordingly. See the table below:
+
+.. list-table:: Daily Iron Consumption Parameters
+  :widths: 5 5 5ight
+  :header-rows: 1
+
+  * - Location
+    - Concentration of forticant in flour
+    - Amount of fortifiable flour consumed daily
+  * - Ethiopia
+    - 30 mg NaFeEDTA / kg flour  [1]
+    - 100 g (IQR: 77.5, 200) [2]
+  * - India
+    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; assume midpoint value of **17.6**
+    - 100 g (IQR: 77.5, 200) [2*]
+  * - Nigeria
+    - 40 mg NaFeEDTA / kg flour [1]
+    - 100 g (IQR:77.5, 200) [2*]
+
+.. note::
+
+	While there was data for the concentration of iron forticants other than 
+	NaFeEDTA for the locations in this table, we conservatively chose to  use 
+	the concentrations of NaFeEDTA because elemental iron is uesd at a *lower* 
+	concentration in flour when NaFeEDTA is used than for other forticants.
+
+[1] https://tinyurl.com/wka9mgh
+
+[2] https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf (table 18; women)
+
+* In the absence of better data, we assumed that individuals in Nigeria and 
+India consumed the same amount of fortifiable flour per day as individuals in 
+Ethiopia.
+
+.. todo:: 
+
+	Find better data and replace values for flour consumption per day for 
+	Nigeria and India.
+
+The amount of elemental iron consumed daily, in miligrams per person, (at the 
+draw level) should be calculated as such:
+
+.. math::
+
+	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour consumed daily}}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} = \frac{\text{Z mg elemental iron consumed daily}}{\text{person}}
+
+.. code-block:: Python
+
+	## WRITE CODE THAT SAMPLES FROM AMOUNT OF FLOUR CONSUMED PER DAY (BETA DISTRIBUTION??)
+
+	daily_flour_consumption_distribution = scipy.stats.XXXXX
+	daily_flour_consumption = daily_flour_consumption_distribution.rvs()
+
+	# elemental iron consumed per day 
+
+		# iron_concentration_in_flour : location-specific value from table above
+
+	loc_specific_elemental_iron_consumed_per_day = daily_flour_consumption * iron_concentration_in_flour * 0.00015
+
+.. todo::
+
+	Write details of distribution of iron consumed per day.
+
+Then, the overall location-specific effect size of iron fortification on low 
+birth weight can be calculated as:
+
+.. math::
+
+	\text{X mg elemental iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) birth weight increase}}{\text{10 mg elemental iron consumed daily}} = \text{Y g birth weight increase}
+
+.. code-block:: Python
+
+	# bw_md_per_10_mg_iron : defined above (random sample from effect size distribution)
+	# loc_specific_elemental_iron_consumed_per_day : defined above (location-specific iron consumed per day in mg)
+
+	location_specific_bw_shift = loc_specific_elemental_iron_consumed_per_day * bw_md_per_10_mg_iron / 10
+
+See the following section to see if/how to apply the 
+*location_specific_bw_shift* parameter to individual simulants.
+
+Determining Whether A Simulant is Affected
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Hemoglobin Level**
 
