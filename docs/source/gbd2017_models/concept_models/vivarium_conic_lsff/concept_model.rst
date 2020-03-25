@@ -444,8 +444,8 @@ Where,
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
-Population Coverage Data and Coverage Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Population Coverage Data and Coverage Algorithm - Iron Fortification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The baseline coverage for iron fortification is the same as the baseline 
 coverage for folic acid fortification, as described below_.
@@ -459,8 +459,8 @@ coverage for folic acid fortification, as described below_.
 Additionally, the coverage algorithm should be implemented in the same way as 
 for folic acid fortification, as described here_.
 
-Effect Size
-^^^^^^^^^^^
+Effect Size - Iron Fortification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Iron fortification of staple food affects two outcomes in our simulation 
 model. The first outcome is an individual's hemoglobin concentration following 
@@ -565,7 +565,7 @@ foods in our locations of interest in order to scale the effect size
 accordingly. See the table below:
 
 .. list-table:: Daily Iron Consumption Parameters
-  :widths: 5 5 5ight
+  :widths: 5 5 5
   :header-rows: 1
 
   * - Location
@@ -588,11 +588,11 @@ accordingly. See the table below:
 	the concentrations of NaFeEDTA because elemental iron is uesd at a *lower* 
 	concentration in flour when NaFeEDTA is used than for other forticants.
 
-[1] https://tinyurl.com/wka9mgh
+[1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
-[2] https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf (table 18; women)
+[2] `Ethiopian National Food Consumption Survey <https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf>`_ (table 18; women)
 
-* In the absence of better data, we assumed that individuals in Nigeria and 
+*In the absence of better data, we assumed that individuals in Nigeria and 
 India consumed the same amount of fortifiable flour per day as individuals in 
 Ethiopia.
 
@@ -602,11 +602,13 @@ Ethiopia.
 	Nigeria and India.
 
 The amount of elemental iron consumed daily, in miligrams per person, (at the 
-draw level) should be calculated as such:
+draw level) should be calculated as such (where X is mg or NaFeEDTA per kg of 
+flour and Y is grams of flour consumed daily per person, as defined in the
+table above):
 
 .. math::
 
-	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour consumed daily}}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} = \frac{\text{Z mg elemental iron consumed daily}}{\text{person}}
+	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour consumed daily}}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
 
 .. code-block:: Python
 
@@ -626,11 +628,12 @@ draw level) should be calculated as such:
 	Write details of distribution of iron consumed per day.
 
 Then, the overall location-specific effect size of iron fortification on low 
-birth weight can be calculated as:
+birth weight can be calculated as follows (where Z is the location-specific
+amount of elemental iron in miligrams, as calculated from the equation above):
 
 .. math::
 
-	\text{X mg elemental iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) birth weight increase}}{\text{10 mg elemental iron consumed daily}} = \text{Y g birth weight increase}
+	\text{Z mg elemental iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) birth weight increase}}{\text{10 mg elemental iron consumed daily}} = \text{Y g birth weight increase}
 
 .. code-block:: Python
 
@@ -642,8 +645,8 @@ birth weight can be calculated as:
 See the following section to see if/how to apply the 
 *location_specific_bw_shift* parameter to individual simulants.
 
-Determining Whether A Simulant is Affected
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Determining Whether A Simulant is Affected - Iron Fortification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
