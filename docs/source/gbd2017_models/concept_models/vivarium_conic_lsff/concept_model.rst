@@ -583,10 +583,11 @@ accordingly. See the table below:
 
 .. note::
 
-	While there was data for the concentration of iron forticants other than 
-	NaFeEDTA for the locations in this table, we conservatively chose to use 
-	the concentrations of NaFeEDTA because elemental iron is used at a *lower* 
-	concentration in flour when NaFeEDTA is used than for other forticants.
+	While there was data for the concentration of iron forticants other
+	than NaFeEDTA for the locations in this table, we conservatively chose 
+	to use the concentrations of the NaFeEDTA forticant. This is because the
+	concentration of elemental iron in flour is lower when the NaFeEDTA 
+	forticant is used compared to other forticants.
 
 [1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
@@ -602,7 +603,7 @@ Ethiopia.
 	Nigeria and India.
 
 The amount of elemental iron consumed daily, in miligrams per person, (at the 
-draw level) should be calculated as such (where X is mg or NaFeEDTA per kg of 
+draw level) should be calculated as such (where X is mg of NaFeEDTA per kg of 
 flour and Y is grams of flour consumed daily per person, as defined in the
 table above):
 
