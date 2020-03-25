@@ -444,8 +444,8 @@ Where,
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
-Population Coverage Data and Coverage Algorithm - Iron Fortification
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Population Coverage Data and Coverage Algorithm - Iron
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The baseline coverage for iron fortification is the same as the baseline 
 coverage for folic acid fortification, as described below_. Additionally, the 
@@ -455,7 +455,7 @@ fortification, as described here_.
 Notably, iron and folic acid coverage should be correlated as specified under 
 the following scenarios:
 
-- **Baseline coverage**: baseline iron and folic acid coverage should be perfectly correlated so that exactly the same simulants are covered by each forticant
+- **Baseline coverage**: baseline iron and folic acid fortification coverage should be perfectly correlated so that exactly the same simulants are covered by each forticant
 
 - **Scale-up of iron fortification**: zero correlation of scaled-up *intervention* coverage (although baseline coverage remains perfectly correlated)
 
@@ -469,8 +469,8 @@ the following scenarios:
 	iron fortification occurs in the absence of folic acid fortification and 
 	vice versa.
 
-Effect Size - Iron Fortification
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Effect Size - Iron
+^^^^^^^^^^^^^^^^^^
 
 Iron fortification of staple food affects two outcomes in our simulation 
 model. The first outcome is an individual's hemoglobin concentration following 
@@ -535,8 +535,8 @@ as follows:
 	meta-analysis for the effect size causing a slightly non-symmetrical 
 	confidence interval around the mean.
 
-Determining Whether A Simulant is Affected - Iron Fortification
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Determining Whether A Simulant is Affected - Iron
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
