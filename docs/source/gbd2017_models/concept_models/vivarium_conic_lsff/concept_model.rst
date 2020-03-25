@@ -608,7 +608,7 @@ table above):
 
 .. math::
 
-	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour consumed daily}}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
+	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
 
 .. code-block:: Python
 
@@ -633,7 +633,7 @@ amount of elemental iron in miligrams, as calculated from the equation above):
 
 .. math::
 
-	\text{Z mg elemental iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) birth weight increase}}{\text{10 mg elemental iron consumed daily}} = \text{Y g birth weight increase}
+	\text{Z mg iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}} = \text{Y g birth weight increase}
 
 .. code-block:: Python
 
