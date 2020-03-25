@@ -555,7 +555,7 @@ the parameter should be modeled as follows:
 .. note::
 
 	The Haider et al. 2013 paper did not report if the dose of iron was 
-	measured as elemental iron or as an iron compound such as NaFeEDTA. We 
+	measured as elemental iron or as an iron compound such as NaFeEDTA (sodium ferric ethylenediaminetetraacetate). We 
 	operated under the assumption that 10 mg of daily iron consumption, as 
 	referenced in the Haider paper, represented 10 mg of *elemental* iron.
 
