@@ -528,7 +528,7 @@ as follows:
 **Birth Weight**
 
 The effect of maternal consumption of iron fortified food on infant birth 
-weight was obtained from Haider et al. (2013). According to this data source,  
+weight was obtained from Haider et al. (2013) _BMJ_. According to this data source,  
 birth weight among babies born to mothers increased, on average, by 15.1 grams 
 (95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The distribution of 
 the parameter should be modeled as follows:
