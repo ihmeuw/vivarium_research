@@ -484,7 +484,7 @@ The effect of iron fortified food consumption on children under 7 years of age
 was obtained from the Keats et al. systematic review. However, the effect size 
 in this review was reported in standardized mean differences rather than in 
 units of hemoglobin concentration directly. Therefore, we performed a separate 
-meta-analysis of the results included in the Keats et al. review. This 
+meta-analysis of the results included in the Keats et al. review to obtain shifts in hemoglobin concentration. This 
 meta-analysis is shown below.
 
 .. image:: iron_meta.png
