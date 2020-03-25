@@ -585,7 +585,7 @@ accordingly. See the table below:
 
 	While there was data for the concentration of iron forticants other than 
 	NaFeEDTA for the locations in this table, we conservatively chose to  use 
-	the concentrations of NaFeEDTA because elemental iron is uesd at a *lower* 
+	the concentrations of NaFeEDTA because elemental iron is used at a *lower* 
 	concentration in flour when NaFeEDTA is used than for other forticants.
 
 [1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
