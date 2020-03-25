@@ -435,7 +435,7 @@ Where,
 
 	- PAF is computed based on the RR for vitamin A fortification
 
-	- rr_i is the relative risk assigned to the individual simulant ()
+	- rr_i is the relative risk assigned to the individual simulant
 
 .. todo::
 
@@ -444,11 +444,24 @@ Where,
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
-Population Coverage Data and Coverage Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Population Coverage Data and Coverage Algorithm - Iron Fortification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The baseline coverage for iron fortification is the same as the baseline 
-coverage for folic acid fortification, as described below_.
+coverage for folic acid fortification, as described below_. Additionally, the 
+coverage algorithm should be implemented in the same way as  for folic acid
+fortification, as described here_.
+
+Notably, iron and folic acid coverage should be correlated as specified under 
+the following scenarios:
+
+- **Baseline coverage**: baseline iron and folic acid coverage should be perfectly correlated so that exactly the same simulants are covered by each forticant
+
+- **Scale-up of iron fortification**: zero correlation of scaled-up *intervention* coverage (although baseline coverage remains perfectly correlated)
+
+- **Scale-up of folic acid fortification**: zero correlation of scaled-up *intervention* coverage (although baseline coverage remains perfectly correlated)
+
+- **Scale-up of iron + folic acid fortification**: both baseline and scaled-up intervention coverage of iron and folic acid fortification are perfectly correlated so that exactly the same simulants are covered by each forticant
 
 .. note:: 
 
@@ -456,11 +469,8 @@ coverage for folic acid fortification, as described below_.
 	iron fortification occurs in the absence of folic acid fortification and 
 	vice versa.
 
-Additionally, the coverage algorithm should be implemented in the same way as 
-for folic acid fortification, as described here_.
-
-Effect Size
-^^^^^^^^^^^
+Effect Size - Iron Fortification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Iron fortification of staple food affects two outcomes in our simulation 
 model. The first outcome is an individual's hemoglobin concentration following 
@@ -525,8 +535,8 @@ as follows:
 	meta-analysis for the effect size causing a slightly non-symmetrical 
 	confidence interval around the mean.
 
-Determining Whether A Simulant is Affected
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Determining Whether A Simulant is Affected - Iron Fortification
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
