@@ -528,10 +528,10 @@ as follows:
 **Birth Weight**
 
 The effect of maternal consumption of iron fortified food on infant birth 
-weight was obtained from Haider et al. (2013) _BMJ_. According to this data source,  
-birth weight among babies born to mothers increased, on average, by 15.1 grams 
-(95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The distribution of 
-the parameter should be modeled as follows:
+weight was obtained from Haider et al. (BMJ 2013). According to this data 
+source, birth weight among babies born to mothers increased, on average, by 
+15.1 grams (95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The 
+distribution of the parameter should be modeled as follows:
 
 .. code-block:: Python
 
@@ -554,10 +554,7 @@ the parameter should be modeled as follows:
 
 .. note::
 
-	The Haider et al. 2013 paper did not report if the dose of iron was 
-	measured as elemental iron or as an iron compound such as NaFeEDTA (sodium ferric ethylenediaminetetraacetate). We 
-	operated under the assumption that 10 mg of daily iron consumption, as 
-	referenced in the Haider paper, represented 10 mg of *elemental* iron.
+	The Haider et al. 2013 paper did not report if the dose of iron was measured as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of daily iron consumption, as referenced in the Haider paper, represented 10 mg of *elemental* iron.
 
 Therefore, we investigated the amount of daily iron consumption that a 
 pregnant mother would likely consume through iron fortification of staple 
@@ -572,14 +569,14 @@ accordingly. See the table below:
     - Concentration of forticant in flour
     - Amount of fortifiable flour consumed daily
   * - Ethiopia
-    - 30 mg NaFeEDTA / kg flour  [1]
-    - 100 g (IQR: 77.5, 200) [2]
+    - 30 mg NaFeEDTA / kg flour  [1]; use point value
+    - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
   * - India
-    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; assume midpoint value of **17.6**
-    - 100 g (IQR: 77.5, 200) [2*]
+    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
+    - 100 g (IQR: 77.5, 200) [2*]; sample from distribution described below
   * - Nigeria
-    - 40 mg NaFeEDTA / kg flour [1]
-    - 100 g (IQR:77.5, 200) [2*]
+    - 40 mg NaFeEDTA / kg flour [1]; use point value
+    - 100 g (IQR:77.5, 200) [2*]; sample from distribution described below
 
 .. note::
 
@@ -611,40 +608,69 @@ table above):
 
 	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
 
+First, we must sample values from the distribution of the amount of flour 
+eaten per day *at the individual simulant level*. We chose to sample at the 
+individual simulant level rather than the draw level because the underlying 
+data from the `Ethiopian National Food Consumption Survey <https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf>`_ 
+represented variation in individual consumption rather than uncertainty around 
+a population mean value. The survey reported that the median daily consumption 
+was 100 g (IQR: 77.5, 200). We assumed that the minumum and maximum values in 
+the distribution (which were not directly reported) were zero and 350.5 grams 
+(75th percentile for the region with the highest value for this parameter). 
+Additionally, we assumed that the values followed a uniform distribution 
+within each quartile of consumption. Values should be sampled as described 
+below:
+
 .. code-block:: Python
 
-	## WRITE CODE THAT SAMPLES FROM AMOUNT OF FLOUR CONSUMED PER DAY (BETA DISTRIBUTION??)
+  import numpy as np
 
-	daily_flour_consumption_distribution = scipy.stats.XXXXX
-	daily_flour_consumption = daily_flour_consumption_distribution.rvs()
+  q0 = 0
+  q1 = 77.5
+  q2 = 100
+  q3 = 200
+  q4 = 350.5
 
-	# elemental iron consumed per day 
+  random_number_i = np.random.uniform(0,1)
 
-		# iron_concentration_in_flour : location-specific value from table above
+  if random_number_i < q1:
+    daily_flour_consumption_i = np.random.uniform(q0,q1)
+  elif random_number_i < q2:
+    daily_flour_consumption_i = np.random.uniform(q1,q2)
+  elif random_number_i < q3:
+    daily_flour_consumption_i = np.random.uniform(q2,q3)
+  else:
+    daily_flour_consumption_i = np.random.uniform(q3,q4)
 
-	loc_specific_elemental_iron_consumed_per_day = daily_flour_consumption * iron_concentration_in_flour * 0.00015
+Next, the amount of elemental iron ingested by an individual simulant should 
+be calculated as follows:
 
-.. todo::
+.. code-block:: Python
 
-	Write details of distribution of iron consumed per day.
+  # daily_flour_consumption_i : value from above code block
+  # iron_concentration_in_flour : location-specific value from table above
 
-Then, the overall location-specific effect size of iron fortification on low 
-birth weight can be calculated as follows (where Z is the location-specific
-amount of elemental iron in miligrams, as calculated from the equation above):
+  elemental_iron_consumed_per_day_i = (daily_flour_consumption_i 
+      * iron_concentration_in_flour 
+      * 0.00015)
+
+Then, the specific effect size of iron fortification on low birth weight can 
+be calculated as follows (where Z is the location-specific amount of elemental 
+iron in miligrams, as calculated from the equation above):
 
 .. math::
 
-	\text{Z mg iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}} = \text{Y g birth weight increase}
+	\text{Z mg iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}} 
 
 .. code-block:: Python
 
 	# bw_md_per_10_mg_iron : defined above (random sample from effect size distribution)
-	# loc_specific_elemental_iron_consumed_per_day : defined above (location-specific iron consumed per day in mg)
+	# elemental_iron_consumed_per_day_i : defined above ( iron consumed per day in mg)
 
-	location_specific_bw_shift = loc_specific_elemental_iron_consumed_per_day * bw_md_per_10_mg_iron / 10
+	bw_shift_i = elemental_iron_consumed_per_day_i * bw_md_per_10_mg_iron / 10
 
-See the following section to see if/how to apply the 
-*location_specific_bw_shift* parameter to individual simulants.
+See the following section to see if/how to apply the *bw_shift_i* parameter to 
+individual simulants.
 
 Determining Whether A Simulant is Affected - Iron Fortification
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
