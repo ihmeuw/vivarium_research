@@ -294,7 +294,7 @@ as follows:
 	create a separate page that lists similar strategies that we can reference 
 	via links.
 
-** Time to Response**
+**Time to Response**
 
 Further, the time-to-response to vitamin A fortification in years should also 
 be sampled such that:
@@ -684,6 +684,100 @@ individual simulants.
 
 Determining Whether A Simulant is Affected - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Hemoglobin Level**
+
+For the purposes of our simulation, we made a few assumptions:
+
+1. We assumed that simulants only received an effect from iron fortification 
+on their hemoglobin levels if they directly consumed iron fortified foods and 
+that they received no effect of iron fortification on their hemoglobin levels 
+from maternal consumption of iron fortified foods (although maternal
+consumption of iron fortified foods affects infant birth weight).
+
+2. We assumed that simulants begin to eat staple foods as a supplement to 
+breast milk consumption at the age of six months and that the quantity of 
+staple foods consumed as a proportion of total consumption increases linearly 
+from six months to two years of age, at which point it reaches its peak and 
+then remains constant.
+
+3. We assumed that the full effect of the iron fortification 
+intervention takes six months to achieve and that the effect scales up in a 
+linear fashion between the onset of exposure and six months post exposure. 
+This is likely a conservative assumption, as there is evidence (Andersson et 
+al. 2010) that the true curve increases more steeply at first, then levels off 
+before reaching the full effect at six months. Thus, the measured response 
+curve is concave down, and our linear approximation lies entirely below this 
+curve -- it is the secant line to the curve, with slope equal to the average 
+rate of increase over the 6 month interval. 
+
+4. We assumed that all individuals covered by baseline coverage of iron 
+fortification have been covered for at least six months and therefore have 
+already achieved the full effect of the intervention.
+
+.. todo::
+
+	Add justification and references to support for these assumptions. (Andersson et al. 2010, WHO guidance, and Diana et al. 2010/Plos One)
+
+Therefore, the effect size of iron fortification on a simulant's hemoglobin 
+level **in the baseline scenario** should be determined as follows:
+
+.. code-block:: Python
+	
+	# at the draw level
+	MD = hb_md_distribution.rvs() # mean difference in hemoglobin concentration due to iron fortification
+		# note, hb_md_distribution defined above in the effect size section
+
+	# at the individual simulant level
+	if age_i < 0.5:
+		md_i = 0
+	elif age_i < 2:
+		md_i = MD * (age_i - 0.5) / 1.5
+	else: 
+		md_i = MD
+
+The effect size of the iron fortification on a simulant's hemoglobin level for 
+new **intervention** coverage of iron fortification should be determined as 
+follows: 
+
+.. code-block:: Python
+	
+	# MD = hb_md_distribution.rvs() : full effect size at the draw level 
+		# (mean difference in hemoglobin concentration due to iron fortification)
+	# md_i : effect size for an individual simulant at a given time-step, 
+		# dependent on age and time since coverage
+	# age_i : simulant age in years
+	# age_of_coverage_i : age at which simulant gained coverage access in years
+	# time_since_coverage_i : age_i - age_of_coverage_i
+	# age_of_coverage_i / 1.5 : fraction of full effect that will be achieved 
+		# in six months since onset of coverage access, dependent on 
+		# age_of_coverage_i [(age_of_coverage - 0.5 + 0.5) / (2 - 0.5)]
+	# time_since_coverage_i / 0.5 : fraction of effect that will be achieved 
+		# at six months post onset of coverage access, dependent on 
+		# time_since_coverage_i
+	# (age_i - 0.5) / 1.5 : fraction of full effect, dependent on age
+
+	# at the individual simulant level
+	if age_i < 0.5:
+		md_i = 0
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i < 0.5: 
+		md_i = MD * age_of_coverage_i / 1.5 * time_since_coverage_i / 0.5
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i >= 0.5: 
+		md_i = MD * (age_i - 0.5) / 1.5
+	if age_i > 0.5 and age_of_coverage >= 1.5 and time_since_coverage_i < 0.5: 
+		md_i = MD * time_since_coverage_i / 0.5
+	else:
+		md_i = MD
+
+See below for a visual representation:
+
+.. image:: iron_effect_scale_up.svg
+
+**Birth Weight** 
+
+.. todo:: 
+
+	Write this section
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
