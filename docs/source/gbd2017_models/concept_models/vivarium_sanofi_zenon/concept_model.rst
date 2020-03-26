@@ -1,7 +1,7 @@
 .. _2017_concept_model_vivarium_sanofi_zenon:
 
 =====================================================
-Vivarium - Sanofi - Zenon - Simulating lipid lowering
+Vivarium - CSU - Simulating lipid lowering
 =====================================================
 
 Model Overview
@@ -30,10 +30,10 @@ The objective is to model and simulate the Public Health Impact of fixed dose co
      - 
    * - High potency statin
      - Refers to high potency of drugs: atorvastatin, rosuvastatin
-     - Defined by guidelines and discussion with Sanofi 
+     - Defined by guidelines and discussion with external private sector experts
    * - Low potency statin
      - Refers to low potency of drugs: simvastatin, pravastatin, atorvastatin, fluvastatin
-     - Defined by guidelines and discussion with Sanofi 
+     - Defined by guidelines and discussion with external private sector experts 
    * - High dose 
      - 40mg and up
      - 
@@ -78,7 +78,10 @@ Model Components
 Time
 ++++
 
-* Start and end date: **Jan 1, 2020 -- Dec 31, 2024**
+* Start and end date: **Jan 1, 2019 -- Dec 31, 2024**
+
+* One year of lead in time (where all the scenarios are the same) and scenarios start to change at **Jan 1, 2020.**
+
 * Simulation time step: **28 days** to capture cardiovascular events and treatment timesteps
 
 Demographics
@@ -164,7 +167,7 @@ Information about Table 1: For post-MI visits, the patient is given Rx with prob
 
 .. todo::
 
-	Need input from medical experts (Greg/Kelley/Sanofi)- should we treat patients with 100% probability in the 2 intervention scenarios? As is, we are not - we will use the prob(Rx| high LDL-c) from below Table 2.
+	Need input from medical experts - should we treat patients with 100% probability in the 2 intervention scenarios? As is, we are not - we will use the prob(Rx| high LDL-c) from below Table 2.
 
 Information about Table 2: For background visits, if a patient is above the relevant threshold (4.9 mmol/L in BAU and according to the treatment algorithm involving SCORE, DM/CKD state, and SBP in the 2 intervention scenarios), they may or may not (therapeutic inertia) be given Rx. Whether they are given Rx given that they are above the threshold is determined by the data in Table 2.
 
@@ -209,6 +212,13 @@ Information about Table 7: If a patient experiences a side effect, they will be 
    :widths: 20, 10, 10
    :header-rows: 1
 
+Information about 'Distribution of therapy type' table: This is not used as a BAU parameter directly. This table was used to calculate 'adherence' parameters. 
+
+.. csv-table:: Distribution of therapy type
+   :file: dist_therapy_type.csv
+   :widths: 20, 10, 10,10
+   :header-rows: 1
+
 Interventions
 +++++++++++++
 
@@ -219,7 +229,7 @@ wher SEX = 1 if male, AGE is in years, and SBP is in mmHg
 
 There are two caveats involving DM state and CKD state, which are included in the treatment diagram.
 New patients will be started on a high dose, high potency statin (max dose of a statin randomly selected from the “high potency” list according to the weighted probability of use for each statin flavor).  
-If a patient experiences a side effect, they will wither have their dose cut in half – unless they are at the minimum dose already, in which case they will be given a low potency statin.  If they are not at target, they will combine these changes with addition of ezetimibe.
+If a patient experiences a side effect, they will either have their dose cut in half – unless they are at the minimum dose already, in which case they will be given a low potency statin.  If they are not at target, they will combine these changes with addition of ezetimibe.
 
 Initialization of patients into treatment for intervention scenarios
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -230,6 +240,7 @@ SCORE is calculated according to the equation in the concept model documentation
 An additional difference between these scenarios and the BAU case is that follow-up visits here are scheduled at 4-6 week intervals instead of the 3-6 month timeframe in BAU.
 In terms of treatment options – here, new patients are started on a low dose of high intensity statin.  Ramp-up follows the diagram “copy of treatment for engineers”.
 
+Additionally, new patients will start treatment on a high potency, high dose statin. In BAU, this is not necessarily true.
 
 2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
