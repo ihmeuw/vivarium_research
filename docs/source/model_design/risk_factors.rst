@@ -51,7 +51,7 @@ Theoretical Minimum Risk Exposure Level/Distribution (TMREL/D)
 Measures of occurence
 +++++++++++++++++++++
 
-This is a recap: Epidemiology is the study of the distribution and determinants of disease frequency in human populations. Simply put, it is the study of the *occurence* of illness. Measures of disease frequency are tools to describe how common an illness is (or outcome of an event) with reference to the size of the population at risk. They are used to count cases, in relation to a population and a measure of time. Outcomes can be infection, disease, disability, death, recovery or usage of health care. 
+This is a recap: Epidemiology is the study of the distribution and determinants of disease frequency in human populations. Simply put, it is the study of the *occurence* of illness. Measures of disease frequency are tools to describe how common an illness is (or outcome of an event) with reference to the size of the population at risk. They are used to count cases, in relation to a population and a measure of time. Outcomes can be infection, disease, disability, death, other risk-exposures, recovery or usage of health care. 
 
 There are two main measures of disease occurence/frequency: prevalence and incidence. Incidence quantifies the occurence of new cases of disease whereas prevalence, a measure of status rather than newly occuring disease, quantifies existing cases. New cases are called incident cases and existing cases are called prevalent cases. 
 
@@ -64,11 +64,16 @@ Incidence
 ^^^^^^^^^
 Incidence focuses on new cases. There are two measures of incidence: risk and rate. 
 
-*Incidence risk*, also called *incidence proportion*, *attack rate*, or *cumulative incidence* is the probability of occurence of disease among a disease free, at risk, population during a specified time period. It is the number of new cases of disease during a defined period of time divided by the population at the start of the time period. It is not interpretable without specification of the time period to which it applies. The counterfactual of the incidence proportion is the survival proportion which is 1-incidence proportion.                                                 
+*Incidence risk*, also called *incidence proportion*, *attack rate*, or *cumulative incidence* is the probability of occurence of disease among a disease free, at risk, population during a specified time period. It is the number of new cases of disease during a defined period of time divided by the population at the start of the time period. It is not interpretable without specification of the time period to which it applies. The survival proportion is 1-incidence proportion.      
+
+TO DO: ADD FORMULAS FOR EVERYTHING                                           
 
 *Incidence rate* has the same numerator as incidence risk, that is the appearance of new cases. In contrast to risks, which relate the number of new cases to the size of the population at risk in the beginning of the period studied, rates relate the number of new cases to the person-time (Y) at risk, a measure that takes into account changes in the size of the population at risk during the follow-up period. The rate takes into account the fact that some people who start at risk do not remain at risk during the whole period, because they develop the disease, or die, or leave the population by migrating, refusing to continue to participate in the study etc. Others may join the population at risk after the beginning of the period, through birth, migration into the area, recruitment into the study, etc. The denominator in a rate (Y) is thus the sum of the time each person in the study population remained at risk during the study period. This is called the person-time experience at risk, and is expressed in units of person-time: person-years at risk, person-days at risk, baby-weeks at risk etc.
 
 For rare diseases, risk and rates are numerically similar. 
+TO DO: GIVE example and how the time period needs to be specified. 
+
+TO DO: HOW TO APPLY POPULATION LEVEL rates to individuals: Talk about incidence hazards
 
 Prevalence
 ^^^^^^^^^^
@@ -76,11 +81,15 @@ Prevalence focuses on existing states. Prevalence of a state (such as the 'with 
 
 *Point prevalence* is the number of current cases (new and pre-existing) at a defined instant in time. The denominator is the population at the same defined instant in time. Eg. the percentage of people with schistosomiasis parasites in the blood in a village in Kenya in a survey in December 2019; the proportion of people who have diabetes in China today. 
 
-*Period prevalence* is the number of current cases (new and pre-existing) over a defined period of time. The denominator is the average or mid-period population. 
+*Period prevalence* is the number of current cases (new and pre-existing) over a defined period of time. The denominator is the average or mid-period population.  
+
+TO DO: our prevalence using person-time with condition over total person time with and without condition
 
 The *prevalence pool* is the subset of the population who is in the given state (such as the 'with condition state'). A person who dies from the state is removed from the prevalence pool: death decreases prevalence. People can also exit the prevalence pool by recovering from the state (remission) or emigrating from the population. Diseases with high incidence rates may have low prevalence if they are rapidly fatal or quickly cured. Conversely, diseases with low incidence rates may have substantial prevalence if they are nonfatal but incurable. 
 
 Prevalence is seldom of direct interest in etiological applications of epidemiological research because it reflects both incidence rate and duration of disease. However, for congentical disesases, prevalence is the measure usually employed. In our simulations, we call this the birth prevalence. 
+
+TO DO: distinguish between birth prevalence and incidence in the mother
 
 Measures of effect
 ++++++++++++++++++
@@ -95,7 +104,9 @@ It is possible to compare any type of measure of frequency (e.g. risks, rates) b
 
 In GBD, relatives risks are usually ratio of incidence rates of causes in those exposed vs unexposed to the risk factor. However, there are exceptions as in the low birth rate short gestation (LBWSG) risk factor where the relative risks are ratios of all-cause mortality rates. It is best practice to always check with the risk appendix or the GBD modeller what the relative risks refer to each risk-outcome pair. 
 
-For example, a study was conducted to measure the effect of vitamin A food fortification on incidence of measles in children under 5. GBD defines risk factors to be malignant. Hence, the exposed group (exposed to poor nutrition) are those who are not covered by food fortification while those unexposed are covered by food fortification. The table below shows the results: 
+TO DO: write down numerator and denominator
+
+For example (hypothetical- cite my brain), a study was conducted to measure the effect of vitamin A food fortification on incidence of measles in children under 5. GBD defines risk factors to be malignant. Hence, the exposed group (exposed to poor nutrition) are those who are not covered by food fortification while those unexposed are covered by food fortification. The table below shows the results: 
 
 .. image:: rate_2x2table.svg
 
@@ -122,6 +133,8 @@ The odds ratio is: ad/bc= risk1(1-risk1)/risk0(1-risk0)
 
 If the disease is rare and not recurrent, then the risk ratio, the rate ratio and the odds ratio are numerically similar. Odds ratios are often derived from case-control studies in which people with and without the outcome of interest are compared for their exposure. Depending on how the controls were sampled the odds ratio in a case control study can be equivalent to the risk of rate ratios that would have been obtained if the whole population had been studied. 
 
+TO DO:  DISCUSS CASE-CONTROL STUDIES
+
 Difference measures
 ^^^^^^^^^^^^^^^^^^^
 
@@ -134,11 +147,7 @@ Risk difference = risk in exposed (risk1) - risk in unexposed (risk0)
 
 Similary, the rate difference is calculated by subtracting the rate in the unexposed from the rate in the exposed. 
 
-For example, A study measured the risk of HIV infection among children born to HIV-infected mothers,according to whether the babies were breastfed or not. Among non-breastfed children of HIVinfected
-mothers, the risk of HIV infection was 150 infections per 1000 children. Among breastfed babies, the risk was 280 infections per 1000 children. The risk difference was thus
-130 infections per 1000 children (130 = 280 - 150). The interpretation is that the risk factor, in this case breastfeeding, was responsible for the infection of 130 of every 1000 children
-born to, and breastfed by, HIV-infected mothers. Notice that the risk difference retains the same units as the original risks used to calculate it. Thus, if the risk in the exposed and
-unexposed groups is measured in ‘cases per 1000 persons’, then the risk difference will have the same units.
+For example, A study measured the risk of HIV infection among children born to HIV-infected mothers,according to whether the babies were breastfed or not. Among non-breastfed children of HIV infected mothers, the risk of HIV infection was 150 infections per 1000 children. Among breastfed babies, the risk was 280 infections per 1000 children. The risk difference was thus 130 infections per 1000 children (130 = 280 - 150). The interpretation is that the risk factor, in this case breastfeeding, was responsible for the infection of 130 of every 1000 children born to, and breastfed by, HIV-infected mothers. Notice that the risk difference retains the same units as the original risks used to calculate it. Thus, if the risk in the exposed and unexposed groups is measured in ‘cases per 1000 persons’, then the risk difference will have the same units.
 
 In most situations, where disease is not very common, risk differences and rate differences will be numerically similar. (Note that in the above example, HIV infection was common among study participants, so risk and rate differences would be unlikely to be similar.) In the literature, the risk difference is sometimes called the *attributable risk* or *excess risk*. Similarly, the terms attributable rate or excess rate are sometimes used to mean the rate difference.
 
@@ -149,9 +158,7 @@ Risk difference % = (risk1-risk0)/risk1
 
 For example, the RD% from the above example is (280/1000 -150/1000)/ 280/1000 = 0.46 or 46%
 
-We interpret this by saying breastfeeding was responsible for 46% of HIV infections among children born to, and breastfed by, HIV-infected mothers (the exposed). Note that this
-does not mean that breastfeeding is responsible for 46% of HIV infections among children born to HIV-infected mothers. Measures of effect tell us only about the additional risk of
-disease among exposed individuals (here, children of HIV-infected mothers who were breastfed) compared with unexposed individuals. In order to estimate how important breastfeeding is as a risk factor for HIV in the target population (here, children born to HIV-infected mothers), we would also need to have information on how common the risk factor is in the population (i.e., what proportion of children born to HIV-infected mothers are breastfed), see next section. The RD% is sometimes also called the *attributable fraction in the exposed*, or the *aetiologic fraction in the exposed*.
+We interpret this by saying breastfeeding was responsible for 46% of HIV infections among children born to, and breastfed by, HIV-infected mothers (the exposed). Note that this does not mean that breastfeeding is responsible for 46% of HIV infections among children born to HIV-infected mothers. Measures of effect tell us only about the additional risk of disease among exposed individuals (here, children of HIV-infected mothers who were breastfed) compared with unexposed individuals. In order to estimate how important breastfeeding is as a risk factor for HIV in the target population (here, children born to HIV-infected mothers), we would also need to have information on how common the risk factor is in the population (i.e., what proportion of children born to HIV-infected mothers are breastfed), see next section. The RD% is sometimes also called the *attributable fraction in the exposed*, or the *aetiologic fraction in the exposed*.
 
 
 Population Attributable Fraction (PAF)
