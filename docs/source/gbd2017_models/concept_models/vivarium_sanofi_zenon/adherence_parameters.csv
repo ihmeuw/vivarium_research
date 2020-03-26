@@ -1,0 +1,31 @@
+﻿adherence_parameter,location,mean_value,sd_value
+Percent of patients adherence (reported values),brazil,0.51,0.158807011
+Percent of patients adherence (reported values),china,0.543485,0.115478
+Percent of patients adherence (reported values),france,0.649,0.137898
+Percent of patients adherence (reported values),italy,0.4258,0.090473
+Percent of patients adherence (reported values),russia,0.449,0.095402
+Percent of patients adherence (reported values),spain,0.656167,0.139421
+Adjusted adherence (% patients with 80% PDC - one Rx),brazil,0.545008,0.113243791
+Adjusted adherence (% patients with 80% PDC - one Rx),china,0.49107,0.104341
+Adjusted adherence (% patients with 80% PDC - one Rx),france,0.661246,0.1405
+Adjusted adherence (% patients with 80% PDC - one Rx),italy,0.432575,0.091912
+Adjusted adherence (% patients with 80% PDC - one Rx),russia,0.382048,0.081177
+Adjusted adherence (% patients with 80% PDC - one Rx),spain,0.69952,0.148632
+Adherence with multiple pills (primary prevention),brazil,0.287008,0.059635591
+Adherence with multiple pills (primary prevention),china,0.23307,0.049522
+Adherence with multiple pills (primary prevention),france,0.403246,0.085681
+Adherence with multiple pills (primary prevention),italy,0.174575,0.037093
+Adherence with multiple pills (primary prevention),russia,0.124048,0.026358
+Adherence with multiple pills (primary prevention),spain,0.44152,0.093813
+Adherence after MI (one pill),brazil,0.670008,0.139216757
+Adherence after MI (one pill),china,0.61607,0.130901
+Adherence after MI (one pill),france,0.786246,0.16706
+Adherence after MI (one pill),italy,0.557575,0.118472
+Adherence after MI (one pill),russia,0.507048,0.107736
+Adherence after MI (one pill),spain,0.82452,0.175192
+Adherence after MI (multi-pill),brazil,0.412008,0.085608556
+Adherence after MI (multi-pill),china,0.35807,0.076082
+Adherence after MI (multi-pill),france,0.528246,0.11224
+Adherence after MI (multi-pill),italy,0.299575,0.063653
+Adherence after MI (multi-pill),russia,0.249048,0.052917
+Adherence after MI (multi-pill),spain,0.56652,0.120373
