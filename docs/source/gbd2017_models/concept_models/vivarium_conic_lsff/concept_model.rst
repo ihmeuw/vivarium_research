@@ -294,7 +294,7 @@ as follows:
 	create a separate page that lists similar strategies that we can reference 
 	via links.
 
-** Time to Response**
+**Time to Response**
 
 Further, the time-to-response to vitamin A fortification in years should also 
 be sampled such that:
@@ -647,28 +647,37 @@ Determining Whether A Simulant is Affected
 
 **Hemoglobin Level**
 
-For the purposes of our simulation, we assumed that simulants only received an 
-effect from iron fortification if they directly consumed iron fortified foods 
-and that they received no effect of iron fortification on their hemoglobin 
-levels from maternal consumption of iron fortified foods.
+For the purposes of our simulation, we made a few assumptions:
 
-Additionally, we assumed that simulants begin to eat staple foods as a 
-supplement to breast milk consumption at the age of six months and that the 
-quantity of staple foods consumed as a proportion of total consumption 
-increases linearly from six months to two years of age, at which point it 
-reaches its peak and then remains constant.
+1. We assumed that simulants only received an effect from iron fortification 
+on their hemoglobin levels if they directly consumed iron fortified foods and 
+that they received no effect of iron fortification on their hemoglobin levels 
+from maternal consumption of iron fortified foods (although maternal
+consumption of iron fortified foods affects infant birth weight).
 
-Further, we assumed that the full effect of the iron fortification 
+2. We assumed that simulants begin to eat staple foods as a supplement to 
+breast milk consumption at the age of six months and that the quantity of 
+staple foods consumed as a proportion of total consumption increases linearly 
+from six months to two years of age, at which point it reaches its peak and 
+then remains constant.
+
+3. We assumed that the full effect of the iron fortification 
 intervention takes six months to achieve and that the effect scales up in a 
-linear fashion between the onset of exposure and six months post exposure (
-this is likely a conservative assumption and the shape likely follows more of 
-a logarithmic curve). Additionally, we assumed that all individuals covered by 
-baseline coverage of iron fortification have been covered for at least six 
-months and therefore have already achieved the full effect of the intervention.
+linear fashion between the onset of exposure and six months post exposure. 
+This is likely a conservative assumption, as there is evidence (Andersson et 
+al. 2010) that the true curve increases more steeply at first, then levels off 
+before reaching the full effect at six months. Thus, the measured response 
+curve is concave down, and our linear approximation lies entirely below this 
+curve -- it is the secant line to the curve, with slope equal to the average 
+rate of increase over the 6 month interval. 
+
+4. We assumed that all individuals covered by baseline coverage of iron 
+fortification have been covered for at least six months and therefore have 
+already achieved the full effect of the intervention.
 
 .. todo::
 
-	Add justification and references to support for these assumptions.
+	Add justification and references to support for these assumptions. (Andersson et al. 2010, WHO guidance, and Diana et al. 2010/Plos One)
 
 Therefore, the effect size of iron fortification on a simulant's hemoglobin 
 level **in the baseline scenario** should be determined as follows:
@@ -722,7 +731,7 @@ follows:
 
 See below for a visual representation:
 
-.. image:: iron_effect_scale_up.png
+.. image:: iron_effect_scale_up.svg
 
 **Birth Weight** 
 
