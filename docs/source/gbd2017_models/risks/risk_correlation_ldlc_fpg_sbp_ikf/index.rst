@@ -108,13 +108,13 @@ Application
 
 This process takes several steps.  The ultimate goal is to generate risk-correlated distributions from which simulants will be initialized.  I calculated Spearman’s rho using data from NHANES 2011.  The steps below assume these are normally distributed, but it would probably be wise to try to find the “true” function form from a literature review.  The first step is simply to create inverse CDFs from GBD data.  Since the GBD distributions are empirical, the inverse CDF exists.  It will be a step function, but this shouldn’t be problematic.  Step 2 generates a random variable for each risk factor and simultaneously builds in the correlation.  Next, transform the underlying GBD distribution into a uniform distribution on [0,1] by way of the Gaussian copula.  Finally, use the inverse CDFs to transform these correlated random variables into correlated marginal distributions.  Sample from these for initialization data.
 
-1. Compute the CDF for each GBD risk factor distribution and find each inverse CDF.  Call this 〖GBD〗_i^(-1) where the subscript denotes the risk factor.
+1. Compute the CDF for each GBD risk factor distribution and find each inverse CDF.  Call this GBD_i^(-1) where the subscript denotes the risk factor.
 
 2. Define Z_i to be a random variable, where i = the number of risk factors.  Generate random values for each 〖(Z〗_i 〖,Z〗_j) pair to be drawn from a bivariate normal distribution with (Spearman’s) correlation matrix **ρ_s**.  
 	
 3. Define U_i=Φ_Z (Z_i) which is the CDF of each Z_i.  Since we sampled values for Z_i, this can be computed (may be a step function – smoothing might be too fancy).
 
-4. Generate X_i=〖GBD〗_i^(-1) (U_i) for each risk factor. These will have the same distributions s their counterparts in GBD, and they will have appropriate correlation thanks to step #2.
+4. Generate X_i= GBD_i^(-1) (U_i) for each risk factor. These will have the same distributions s their counterparts in GBD, and they will have appropriate correlation thanks to step #2.
 	
 5. Sample from each X_i distribution to initialize the simulation population.
 
@@ -130,3 +130,15 @@ Spearman correlations between LDL-c, SBP, FPG, GFR
    :file: spearman_correlations.csv
    :widths: 20, 10, 10, 10, 10, 10
    :header-rows: 1
+
+PAF adjustment
+--------------
+
+With the correlated risk distributions in hand, we can make an adjustment to the GBD PAF calculation.  Let 〖PAF〗_joint be the population attributable fraction which incorporates the correlated risks, such that
+
+PAF\ :sub:`joint` = 1 - :math:`[{\int_{FPG}^{} \int_{IKF}^{} \int_{SBP}^{} \rho_{e_{FPG,IKF,SBP,LDL}} \times\ \prod_{i= \epsilon [LDL,SBP,IKF,FPG]} RR_i^{e_i} de_i}]^{-1}`
+
+If I’m not mistaken, this approach should work for categorical risk factors as well.  The inverse CDF from the GBD data for the categorical risks will be very much a step function, but I’m not sure that matters – since I can’t see where it would crash this recipe.  As long as the inverse CDF is well defined, I think this should work. 
+Step #2 could be generalized, I think, so that values are drawn not pairwise, but from a generic multivariate with dimension = the number of risk factors.  I started writing this with the idea that values would need to be sampled from different distributions (not always normal), but the more time I spend on this, the more I convince myself that we only need the normal distribution, regardless of the risk factor and “true” underlying distribution.  (I hope I’m not overlooking negative values here…)  
+The biggest weakness is obviously use of the Gaussian copula, which could be generalized with some additional time and effort.  I know selection of the copula can make a reasonably significant difference (depending on the shape of the scatter plot), but time constraints are binding here, so it’s saved for future work.
+
