@@ -538,10 +538,6 @@ as follows:
 Determining Whether A Simulant is Affected - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Hemoglobin Level**
-
-[This section in another PR that I will have to fix a merge conflict for]
-
 **Birth Weight**
 
 Our model will apply the effect size of maternal consumption of iron fortified 
@@ -565,6 +561,12 @@ to iron fortified foods at least **nine months prior to the birth of the
 infant** in order for the iron fortification coverage to affect the infant's 
 birth weight.
 
+.. todo::
+
+  Confirm that this is the best approach by evaluating the individual studies 
+  cited in the Haider et al. 2013 paper and update as necessary (as discussed 
+  in `PR #181 <https://github.com/ihmeuw/vivarium_research/pull/181>`_).
+
 .. note:: 
 
   The following was adopted from Nathaniel's description for folic acid.
@@ -581,9 +583,10 @@ birth weight.
     4 and 5; this attribute will not be used for these age groups because the 
     LBWSG risk factor does not apply. Set `mother_ate_iron_fortified_food = 
     True` for a proportion of the population equal to baseline coverage of 
-    iron fortification, :math:`C`. Set `mother_ate_iron_fortified_food = False`
-    for a proportion of the population equal to 1 - baseline coverage of iron 
-    fortification, :math:`1 - C`. 
+    iron fortification at simulation start, :math:`C(0)`. Set 
+    `mother_ate_iron_fortified_food = False` for a proportion of the 
+    population equal to 1 - baseline coverage of iron fortification at 
+    simulation start, :math:`1 - C(0)`. 
 
 3.  **Initialize simulants born into the simulation:** For each simulant born
     at time :math:`t` (in years), the probability that the simulant's mother
