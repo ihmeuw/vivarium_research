@@ -1,0 +1,31 @@
+﻿current_prescription,location,mean_value,sd_value
+% on ezetimibe,brazil,0.100111235,0.099276286
+% on ezetimibe,china,0.004446725,0.005436502
+% on ezetimibe,france,0.042952043,0.035826744
+% on ezetimibe,italy,0.102334951,0.101481456
+% on ezetimibe,russia,0.001146789,0.001137225
+% on ezetimibe,spain,0.095497954,0.09470148
+% on fibrates,brazil,0.142936596,0.1245
+% on fibrates,china,0.089960664,0.046657142
+% on fibrates,france,0.12967513,0.066544628
+% on fibrates,italy,0.006395934,0.003638301
+% on fibrates,russia,0.008027523,0.004
+% on fibrates,spain,0.004092769,0.002328155
+% on statin,brazil,0.756952169,0.0705
+% on statin,china,0.905592612,0.042793107
+% on statin,france,0.827372827,0.087332061
+% on statin,italy,0.891269114,0.186632944
+% on statin,russia,0.990825688,0.115
+% on statin,spain,0.900409277,0.082207699
+% on high potency statin,brazil,0.506883326,0.072637609
+% on high potency statin,china,0.586044374,0.16019127
+% on high potency statin,france,0.605753917,0.067557733
+% on high potency statin,italy,0.684462086,0.226768708
+% on high potency statin,russia,0.560934011,0.199634388
+% on high potency statin,spain,0.555723536,0.24043163
+% on low potency statin,brazil,0.493116674,0.164521175
+% on low potency statin,china,0.413955626,0.163562724
+% on low potency statin,france,0.394246083,0.0319
+% on low potency statin,italy,0.315537914,0.097456188
+% on low potency statin,russia,0.439065989,0.118659605
+% on low potency statin,spain,0.444276464,0.122161976

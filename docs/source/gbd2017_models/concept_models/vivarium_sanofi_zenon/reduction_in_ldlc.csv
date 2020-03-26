@@ -1,0 +1,8 @@
+﻿drug,dose,mean_value,sd_value
+High potency statin,low,0.407222222,0.095644503
+Low potency statin,low,0.332083333,0.037917954
+High potency statin,high,0.528333333,0.022484563
+Low potency statin,high,0.332083333,0.075051929
+Fibrates,N/A,0.12,0.021027289
+Ezetimibe,N/A,0.129,0.044
+Lifestyle intervention,N/A,0.039053803,0.020686456

@@ -1,7 +1,7 @@
 .. _2017_concept_model_vivarium_sanofi_zenon:
 
 =====================================================
-Vivarium - Sanofi - Zenon - Simulating lipid lowering
+Vivarium - CSU - Simulating lipid lowering
 =====================================================
 
 Model Overview
@@ -11,6 +11,35 @@ Objective
 +++++++++
 
 The objective is to model and simulate the Public Health Impact of fixed dose combination on LDL cholesterol and ASCVD (Ischemic heart disease, Ischemic stroke) in Brazil, China, France, Spain, and Russia. This includes the intervention targets of reducing deaths and DALYs due to Ischemic Heart Disease and Ischemic Stroke based on the intervention scenario. 
+
+.. list-table:: Table of Term Definitions
+   :widths: 15, 20, 20
+   :header-rows: 1
+
+   * - Term
+     - Definition
+     - Notes
+   * - High LDL-c in Business As Usual (BAU) scenario 
+     - LDL-c > 4.9
+     - 
+   * - High LDL-c in intervention scenarios
+     - LDL-c > 3.0
+     - Determined by CV risk SCORE
+   * - Hitting target
+     - 50% or more reduction over untreated LDL-c
+     - 
+   * - High potency statin
+     - Refers to high potency of drugs: atorvastatin, rosuvastatin
+     - Defined by guidelines and discussion with external private sector experts
+   * - Low potency statin
+     - Refers to low potency of drugs: simvastatin, pravastatin, atorvastatin, fluvastatin
+     - Defined by guidelines and discussion with external private sector experts 
+   * - High dose 
+     - 40mg and up
+     - 
+   * - Low dose
+     - under 40mg 
+     - 
 
 Intervention Definitions
 ++++++++++++++++++++++++
@@ -49,7 +78,10 @@ Model Components
 Time
 ++++
 
-* Start and end date: **Jan 1, 2020 -- Dec 31, 2024**
+* Start and end date: **Jan 1, 2019 -- Dec 31, 2024**
+
+* One year of lead in time (where all the scenarios are the same) and scenarios start to change at **Jan 1, 2020.**
+
 * Simulation time step: **28 days** to capture cardiovascular events and treatment timesteps
 
 Demographics
@@ -98,8 +130,117 @@ Utilization estimates used in this model are for the average number of outpatien
 
 .. _GHDx: http://ghdx.healthdata.org/record/ihme-data/UHC-cost-and-services-2016
 
+Initialization of patients into treatment for BAU
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+We have distributions for the probability of being on Rx given high LDL-C and the probability of control given Rx.
+Using GBD data on high LDL-C (LDL-C > 4.9 mmol/L), we will have the population with measured LDL-C above the relevant threshold.  This, however, ignores the portion of the population that would have high LDL-C if they were not currently on medication.  
+To correct for this, we do the following:
+
+.. todo::
+
+	Add all equation components as probabilities
+
+:math:`\text{prob(high LDL-C | no Rx) = } \frac{\text{GBD estimate of pop with high LDL}} {\text{(1-prob(Rx|high LDL)} \times\ {\text{prob(control|Rx))}}}`
+
+In BAU, patients will be initialized into “currently on treatment” or “no current treatment” based on the “pop with high LDL if Rx did not exist” and the prob(Rx|high LDL).  This will be inconsistent with reality in the following way: individual simulants that are currently on treatment in reality may not initialize into “currently on treatment” in the simulation – but the total population on treatment should be the same as actual current practice.
+Patience that have experienced a CVD event will be on medication with probability 1.
+Selection of which Rx a patient currently on treatment is given will be taken from the distribution of “current Rx” data from the literature.  These data are separated into “high potency” and “low potency” statins, and average dose in mg is available from the literature.  So we will initialize randomly the type of statin (or statin + ezetimibe, etc.) and then draw from the distribution of doses for the dose.
+New patients will be added to Tx based on utilization data and the probability of having LDL-C tested (from literature).
+Rx efficacy data are available from the literature.
+The probability of being adherent (defined as > 80% of days covered) is taken from the literature, and is a function of duration on treatment and history of CVD events (past MI = greater adherence).
+QUESTION:  how should we initialize adherence?  I.e. since I won’t know how long a simulant has been on treatment at time = 0 in the simulation, I can’t determine their adherence.  SUGGESTION: use average adherence taken over time?
+The probability of side effects is also taken from the literature, and if a person experiences a side-effect, it will be assumed that they don’t take their medicine (non-adherent).  
+
+BAU parameter data tables
++++++++++++++++++++++++++
+
+Information about Table 1: For post-MI visits, the patient is given Rx with probability = 1. LDL-C should be recorded in the simulation, but its value does not impact treatment decision in any of the 3 scenarios.
+
+* For background visits, the patient may or may not have their LDL-C measured, and the probability that they do measure LDL-C is given by the data in Table 1.
+* For follow-up visits, the LDL-C should be measured with probability = 1 and recorded in the simulation (to determine if the patient has reached target), and may impact Tx decisions (e.g. increasing dose if not at target).
+
+.. csv-table:: Table 1: Probability of having LDL-c measured
+   :file: prob_testing_ldlc.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+.. todo::
+
+	Need input from medical experts - should we treat patients with 100% probability in the 2 intervention scenarios? As is, we are not - we will use the prob(Rx| high LDL-c) from below Table 2.
+
+Information about Table 2: For background visits, if a patient is above the relevant threshold (4.9 mmol/L in BAU and according to the treatment algorithm involving SCORE, DM/CKD state, and SBP in the 2 intervention scenarios), they may or may not (therapeutic inertia) be given Rx. Whether they are given Rx given that they are above the threshold is determined by the data in Table 2.
+
+.. csv-table:: Table 2: Probability of Rx given high LDL-c
+   :file: prob_rx_given_high_ldlc.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Table 3: Probability of reaching target given Rx
+   :file: prob_target_given_rx.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Reduction in LDL-c by drug and dose
+   :file: reduction_in_ldlc.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Table 4: Probability of Adherence (Table 4a, 4b) parameters
+   :file: adherence_parameters.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+Information about Table 5: At a follow-up visit, if a patient has not reached their target (defined as 50% reduction in their untreated LDL-C), they may be given a higher dose, a 2nd drug or a different statin (if on statin). The probability of each is given in Table 5. These numbers are global, not location specific.
+
+.. csv-table:: Table 5: Probability of adding 2nd drug v. increasing dose
+   :file: prob_adding_drugs.csv
+   :widths: 30, 20, 10
+   :header-rows: 1
+
+Information about Table 6: The specific Rx for each patient (at initialization and for new patients during the simulation) is determined by the data in Table 6 - current treatment practice distribution by drug type. First, the type of drug is determined (statin, ezetimibe or fibrate). Then the sub-type of statin is determined for patients on statin. In BAU, dosing is 40mg for low potency statin (called "high dose") and 20mg for high potency statin (called "low dose"). In the 2 intervention scenarios, the initial dose is "high dose" of high potency statin.
+
+.. csv-table:: Table 6: Current treatment practice - distribution by drug type 
+   :file: current_rx.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+Information about Table 7: If a patient experiences a side effect, they will be given a different drug on their next visit. The treatment algorithm assumes these patients are not adherent.
+
+.. csv-table:: Table 7: Probability of side effect (adverse events)
+   :file: prob_adverse_events.csv
+   :widths: 20, 10, 10
+   :header-rows: 1
+
+Information about 'Distribution of therapy type' table: This is not used as a BAU parameter directly. This table was used to calculate 'adherence' parameters. 
+
+.. csv-table:: Distribution of therapy type
+   :file: dist_therapy_type.csv
+   :widths: 20, 10, 10,10
+   :header-rows: 1
+
 Interventions
 +++++++++++++
+
+Both treatment scenarios are based on the CV RISK score, which is a function of Age, Sex and SBP:
+
+SCORE = -16.5 + 0.043*SBP + 0.266*AGE + 2.32*SEX 
+wher SEX = 1 if male, AGE is in years, and SBP is in mmHg
+
+There are two caveats involving DM state and CKD state, which are included in the treatment diagram.
+New patients will be started on a high dose, high potency statin (max dose of a statin randomly selected from the “high potency” list according to the weighted probability of use for each statin flavor).  
+If a patient experiences a side effect, they will either have their dose cut in half – unless they are at the minimum dose already, in which case they will be given a low potency statin.  If they are not at target, they will combine these changes with addition of ezetimibe.
+
+Initialization of patients into treatment for intervention scenarios
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+The 2 intervention scenarios (guidelines + multiple pills and guidelines + single, combination pill) are initialized the same way as the BAU case.  
+The difference is that in the intervention scenarios, treatment criteria have changed – there is now a lower threshold for treatment (based on a patient’s CV risk SCORE), including caveats for DM and CKD state.
+SCORE is calculated according to the equation in the concept model documentation.
+An additional difference between these scenarios and the BAU case is that follow-up visits here are scheduled at 4-6 week intervals instead of the 3-6 month timeframe in BAU.
+In terms of treatment options – here, new patients are started on a low dose of high intensity statin.  Ramp-up follows the diagram “copy of treatment for engineers”.
+
+Additionally, new patients will start treatment on a high potency, high dose statin. In BAU, this is not necessarily true.
 
 2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -292,3 +433,6 @@ Verification and Validation Strategy
   - Simulate history & check against GBD 2017 
   - model_outputs_location_cause_measure_sex_age_group = gbd_2017__location_cause_measure_sex_age_group
 
+5. Model assumptions validation:
+
+* Does the average LDL-C for the population from GBD look like the average LDL-C for the population that is initialized this way? Since we have initialized a certain number of people with specific doses of specific drugs (and we know the efficacy of each drug as a function of dose), we should be able to compare these two population level LDL-Cs.
