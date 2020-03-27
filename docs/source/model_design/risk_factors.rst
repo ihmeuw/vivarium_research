@@ -236,7 +236,8 @@ Quickly, we can now see that the relationship we previously knew between
 smoking and lung cancer is now impacted by the use of this hypothetical 
 medication that affects the intermediate variable between smoking and lung 
 cancer. Therefore, now we can only expect our intervention to decrease 
-population lung cancer rates only in areas that do widely use this medication.
+population lung cancer rates only in areas that do not widely use this 
+medication.
 
 Notably, intermediate variables may be relevant in situations in which the 
 variable located most proximal to the outcome in the causal pathway is 
