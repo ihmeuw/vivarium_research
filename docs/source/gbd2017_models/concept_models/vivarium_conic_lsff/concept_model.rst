@@ -83,6 +83,30 @@ Risk-Outcome Relationships
 Coverage Gap Framework
 ++++++++++++++++++++++
 
+For a dichomotous outcome such as Vitamin A deficiency:
+
+We always define the exposure as bad to match GBD 2017 definitions, so relative risks are always >1 
+
+:math:`C_{vita_baseline}`: coverage of vitamin A fortified food in the population from the literature that is applied to our sim population
+:math:`P_{exposure_baseline}`: (1-:math:`C_{vita_baseline}`) prevalence of exposure to unfortified foods in our sim baseline population 
+:math:`ϴ_{1}`: risk of vitamin A deficiency among those exposed to unfortified foods (bad food) in our sim population
+:math:`ϴ_{0}`: risk of vitamin A deficiency among those unexposed to unfortified foods (have fortification) in our sim population
+:math:`ϴ_{GBD}`: risk of vitamin A deficiency in GBD population for age, sex, location, year
+
+RR= reciprocal of effect size (risk ratios) = \frac{1}{0.45(95%CI: 0.19-1.05)}
+
+RR= \frac{:math:`ϴ_{1}`}{:math:`ϴ_{0}`}  we assume this to be true
+
+PAF= \frac{(:math:`P_{exposure_baseline}`(RR-1))}{1+:math:`P_{exposure_baseline}`(RR-1)}	
+1-PAF=\frac{1}{(RR-1):math:`P_{exposure_baseline}`+1}	
+
+This equation for PAF is valid under the assumption of no confounding. An alternate equation for PAF should be used when to get an unbiased PAF in the presence of confounding; however, we will need the attributable fraction in the exposed which we do not readily have. (reference Darrow and Steenland 2011). Hence this is a limitation. The RRs we use, and the exposure % we use are approximating the PAFs. We make the assumption that the RRs pulled from literature is generalizable. 
+
+:math:`ϴ_{1}` = :math:`ϴ_{GBD}`*(1-PAF)*RR … (equation 1)
+:math:`ϴ_{0}`= :math:`ϴ_{GBD}`*(1-PAF) … (equation 2)
+
+**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food (:math:`C_{vita_intevention}`), this shifts the amount of people who receive equation 1 to equation 2. 
+
 Interventions
 +++++++++++++
 
