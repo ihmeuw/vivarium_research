@@ -258,6 +258,9 @@ It should now be clearer why smoking acts as a confounder in the association bet
 
 Having established that smoking appears to confound the association between coffee consumption and pancreatic cancer, the final step is to combine, or pool, the data across strata of smoking to obtain a combined, or pooled, estimate of the effect of coffee consumption on pancreatic cancer adjusted for the confounding effect of smoking. This pooled estimate is an average of the effect across all strata of smoking weighted by the size of each stratum. Methods for obtaining such pooled estimates (e.g. Mantel-Haenszel) are covered in more detail in other Term 1 Statistics units, and will also be discussed in the next lecture. There are a number of strategies to minimise or deal with confounding, both when designing a study and in the analysis phase.
 
+.. to do::
+
+
 Intermediates
 """""""""""""
 
