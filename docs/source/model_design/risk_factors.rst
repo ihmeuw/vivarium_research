@@ -203,6 +203,80 @@ Intermediates
 Effect Modification
 """""""""""""""""""
 
+A factor M is said to be an effect modifier if the effect of the exposure E on 
+disease D varies for different values of M. Sometimes also called *interaction*. 
+Observe this is in direct contrast to confounding, in which the exposure and 
+confounding factor *must not depend on one another* to determine the risk.
+
+We note that Effect modification is a statistical phenomenon which may or may 
+not reflect a biological phenomenon. However, in the case of epidemiological 
+modeling, following the Bradford-Hill criteria of *plausibility*, we would hope 
+to be able to explain the effect modification when implementing an effect 
+modifier in a model.
+
+Consider asbestos dust as an exposure for lung cancer. Say that in a cohort 
+study, we find the following:
+
+.. list-table:: Death rate per 100,000py: asbestos exposure alone
+  :widths: 10 10
+  :header-rows: 0
+  :stub-columns: 1
+
+  * - No Asbestos exposure
+    - 66.95
+  * - Asbestos exposure
+    - 470.85
+
+We might now conclude that the effect of asbestos on lung cancer has a rate 
+ratio for :math:`470.85/66.95\approx 7.0`. However, when we stratify by 
+smoking, we find the following:
+
+.. list-table:: Death rates per 100,000py: asbestos exposure stratified by smoking status
+  :widths: 10 10 10
+  :header-rows: 1
+  :stub-columns: 1
+
+  * - 
+    - Non smokers
+    - Smokers 
+  * - No Asbestos exposure
+    - 11.3
+    - 122.6
+  * - Asbestos exposure
+    - 40.1
+    - 901.6
+
+This shows us that the rate ratios for the effect of asbestos on lung cancer 
+vary according to smoking status: the rate ratio is :math:`40.1/11.3\approx 3.5` 
+for non-smokers and :math:`901.6/122.6\approx 7.3` for smokers.
+
+.. todo:: add citation to Nicole's textbook
+
+We include below a graphical representation of a risk outcome stratified by sex, and by age, taken from (http://osctr.ouhsc.edu/sites/default/files/2020-02/Module8PartVNotes.pdf). On the y-axis we have incidence of some outcome such as high blood pressure, and on the x-axis we have an exposure such as obesity.
+
+.. todo::
+   Format citations.
+
+.. figure:: without_em_illustration.jpg
+   :scale: 75 %
+   :alt: Risk outcome stratified by sex
+
+   Risk outcome stratified by sex.
+
+Observe that the difference in incidence of high blood pressure, between female and male, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups is not modified by sex.
+
+.. figure:: with_em_illustration.jpg
+   :scale: 75 %
+
+   Risk outcome stratified by age cutoff.
+
+Here, we see that the risk attributable to our exposure is higher in our older group than in our younger group; thus age is an effect modifier for this risk outcome.
+
+Finally, we emphasize that when dealing with a confounding variable, in order to best understand the effects of our exposure, we seek to *remove* the influence of the confounder. By contrast, if variable B is an effect modifier for exposure A, then this interaction is an important property of the relationship between A and B, and their influence on the disease. Rather than remove, we thus try to *capture and describe* effect modification in the greatest detail possible. (Cite Nicole's textbook)
+
+.. todo::
+  Add section on GBD. They briefly discussed mediation in the risk factors training this year; no reference to effect modification. I would guess that very few GBD risk factors take this into account. Main challenge is that risk factors are modeled by different teams that are often siloed: if a risk factor on one team is an effect modifier for a risk factor on another team, it's difficult for them to coordinate workflows. Need to do some digging.
+
 Mediation
 """""""""
 
