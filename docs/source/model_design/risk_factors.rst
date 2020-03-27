@@ -205,6 +205,10 @@ Effect Modification
 
 A factor M is said to be an effect modifier if the effect of the exposure E on 
 disease D varies for different values of M. Sometimes also called *interaction*. 
+
+.. todo::
+  get feedback on best diagram.
+
 Observe this is in direct contrast to confounding, in which the exposure and 
 confounding factor *must not depend on one another* to determine the risk.
 
