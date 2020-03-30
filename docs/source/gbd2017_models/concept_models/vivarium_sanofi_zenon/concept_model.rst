@@ -139,9 +139,9 @@ Initialization Strategy
 B+C+D = (C+D) / (1 – pr_rx* pr_hitting_target)
 pr_rx = (B+D) / (B+C+D) # db has from literature (table 2)
 pr_hitting_target = B / (B + D) # db has from literature (table 3)
-A + B + C + D = 1.0
+C + D = pr_high_ldl_c
  
-(four equations with four unknowns; solve the linear system (Abie will write out how))
+we can solve for B in the first line, and then solve for D in the second line
 
 1.     Need:
 
