@@ -224,7 +224,7 @@ Interventions
 
 Both treatment scenarios are based on the CV RISK score, which is a function of Age, Sex and SBP:
 
-SCORE = -16.5 + 0.043*SBP + 0.266*AGE + 2.32*SEX 
+SCORE = -19.5 + 0.043*SBP + 0.266*AGE + 2.32*SEX 
 wher SEX = 1 if male, AGE is in years, and SBP is in mmHg
 
 There are two caveats involving DM state and CKD state, which are included in the treatment diagram.
