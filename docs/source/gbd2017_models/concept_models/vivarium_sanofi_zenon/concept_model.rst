@@ -32,7 +32,7 @@ The objective is to model and simulate the Public Health Impact of fixed dose co
      - Refers to high potency of drugs: atorvastatin, rosuvastatin
      - Defined by guidelines and discussion with external private sector experts
    * - Low potency statin
-     - Refers to low potency of drugs: simvastatin, pravastatin, atorvastatin, fluvastatin
+     - Refers to low potency of drugs: simvastatin, pravastatin, fluvastatin
      - Defined by guidelines and discussion with external private sector experts 
    * - High dose 
      - 40mg and up
@@ -133,24 +133,81 @@ Utilization estimates used in this model are for the average number of outpatien
 Initialization of patients into treatment for BAU
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-We have distributions for the probability of being on Rx given high LDL-C and the probability of control given Rx.
-Using GBD data on high LDL-C (LDL-C > 4.9 mmol/L), we will have the population with measured LDL-C above the relevant threshold.  This, however, ignores the portion of the population that would have high LDL-C if they were not currently on medication.  
-To correct for this, we do the following:
+Initialization Strategy
++++++++++++++++++++++++
 
-.. todo::
+B+C+D = (C+D) / (1 – pr_rx* pr_hitting_target)
+pr_rx = (B+D) / (B+C+D) # db has from literature (table 2)
+pr_hitting_target = B / (B + D) # db has from literature (table 3)
+A + B + C + D = 1.0
+ 
+(four equations with four unknowns; solve the linear system (Abie will write out how))
 
-	Add all equation components as probabilities
+1.     Need:
 
-:math:`\text{prob(high LDL-C | no Rx) = } \frac{\text{GBD estimate of pop with high LDL}} {\text{(1-prob(Rx|high LDL)} \times\ {\text{prob(control|Rx))}}}`
+D / (C+D) = pr[treated | LDL >= 5]
 
-In BAU, patients will be initialized into “currently on treatment” or “no current treatment” based on the “pop with high LDL if Rx did not exist” and the prob(Rx|high LDL).  This will be inconsistent with reality in the following way: individual simulants that are currently on treatment in reality may not initialize into “currently on treatment” in the simulation – but the total population on treatment should be the same as actual current practice.
-Patience that have experienced a CVD event will be on medication with probability 1.
-Selection of which Rx a patient currently on treatment is given will be taken from the distribution of “current Rx” data from the literature.  These data are separated into “high potency” and “low potency” statins, and average dose in mg is available from the literature.  So we will initialize randomly the type of statin (or statin + ezetimibe, etc.) and then draw from the distribution of doses for the dose.
-New patients will be added to Tx based on utilization data and the probability of having LDL-C tested (from literature).
-Rx efficacy data are available from the literature.
-The probability of being adherent (defined as > 80% of days covered) is taken from the literature, and is a function of duration on treatment and history of CVD events (past MI = greater adherence).
-QUESTION:  how should we initialize adherence?  I.e. since I won’t know how long a simulant has been on treatment at time = 0 in the simulation, I can’t determine their adherence.  SUGGESTION: use average adherence taken over time?
-The probability of side effects is also taken from the literature, and if a person experiences a side-effect, it will be assumed that they don’t take their medicine (non-adherent).  
+B / (A+B) = pr[treated | LDL < 5]
+ 
+2. Next we need: (all these normals dists should be truncated normals, truncated to be between [0,1])
+
+Pr[treatment profile t | on treatment] (where t is a treatment profile, including drugs, dosage)
+
+Table 6 says % on each drug; table 8 (not numbered) says % on mono vs multi; %fdc if multi
+
+Abie recommends:
+
+a.     Decide if they are on monotherapy: location-specific probability chosen for all simulants from N(mean_value, sd_value)
+
+b.     If they are not on monotherapy: decide if they are on FDC, location-specific probability chosen for all simulants from N(mean_value, sd_value)
+
+c.     Now to table 6---
+
+a.     if you are on FDC, treatment profile is low-potenecy statin + ezetimibe
+
+b.     if you are on multiple individual pills, treatment profile is statin + ezetimibe
+
+                                                   i.    find a location-specific probability of high potency statin from N(mean_value, sd_value), decide if they are on high or low potency statin
+
+                                                  ii.    they also get ezetimibe
+                                                  
+c.     if you are on monotherapy, decide if it is ezetimibe, fibrates, high-potency statin, or low-potency statin by taking values:
+
+                                                   i.    p_eze_draw ~ N(mean_value, sd_value) population-specific
+
+                                                  ii.    p_fib_draw ~ N(mean_value, sd_value), population-specific
+
+                                                 iii.    p_high_pot_stat ~ N(mean, sd)
+
+                                                 iv.    p_low_pot_stat ~ N(mean, sd)
+
+                                                  v.    T = p_eze_draw + p_fib_draw + p_high_draw + p_low_draw
+
+                                                 vi.    Pr[drug = D] is p_eze_draw / T for D = ezetimibe, p_fib_draw / T for D = firbates, p_high_pot_stat / T for D = high potency statin, p_low_pot_stat / T for D = low potency statin
+
+Then we need:
+Pr[adherence | on treatment profile t, IHD/IS status]
+This is categorical (adherent/non-adherent), and comes from table 4:
+If not IHD or IS, for monotherapy OR FDC, adherent with probability derived from Table 4, first part location-specific value drawn from N_[0,1](mean, std)
+
+              If multiple individual pills, Adherence with multiple pills (primary prevention) location-specific row from Table 4 location-specific value drawn from N(mean, std)
+
+If IHD or IS, for monotherapy OR FDC, adherent with probability from Table 4 location-specific rows for “Adherence after MI (one pill)” location-specific value drawn from N(mean, std)
+If IHD or IS, for multiple individual pills, adherent with probability from Table 4 location-specific rows for “Adherence after MI (multi-pill)” location-specific value drawn from N(mean, std)
+ 
+Finally, we need to know:
+Untreated LDL-C level | treated, treatment profile t, adherence yes/no
+If not treated or not adherent, untreated LDL-c = LDC-c (drawn from GBD)
+If treated, and adherent, look up multiplier in treatment table 3 (second part):
+If monotherapy, treatment profile is {t}, eff_t ~ N(mean, sd) same for all individuals, and
+
+              Untreated LDL-C = LDL-C / (1 - eff_t)
+
+If FDC or multiple individual pills, treatment profile is {t, s}, eff_t ~ N, eff_s ~ N(mean_s, sd_s)
+
+              Untreated LDL-C = LDL-C / ((1 - eff_t) * (1 - eff_s))
+
+(same effect for all indiviuals, which we will note in the limitations)
 
 BAU parameter data tables
 +++++++++++++++++++++++++
@@ -171,22 +228,17 @@ Information about Table 1: For post-MI visits, the patient is given Rx with prob
 
 Information about Table 2: For background visits, if a patient is above the relevant threshold (4.9 mmol/L in BAU and according to the treatment algorithm involving SCORE, DM/CKD state, and SBP in the 2 intervention scenarios), they may or may not (therapeutic inertia) be given Rx. Whether they are given Rx given that they are above the threshold is determined by the data in Table 2.
 
-.. csv-table:: Table 2: Probability of Rx given high LDL-c
+.. csv-table:: Table 2: Probability of Rx given high LDL-C = prob(Rx | LDL-C > 4.9)
    :file: prob_rx_given_high_ldlc.csv
    :widths: 20, 10, 10
    :header-rows: 1
 
-.. csv-table:: Table 3: Probability of reaching target given Rx
+.. csv-table:: Table 3: Probability of reaching target given Rx = prob(reaching target | Rx)
    :file: prob_target_given_rx.csv
    :widths: 20, 10, 10
    :header-rows: 1
 
-.. csv-table:: Reduction in LDL-c by drug and dose
-   :file: reduction_in_ldlc.csv
-   :widths: 30, 20, 10, 10
-   :header-rows: 1
-
-.. csv-table:: Table 4: Probability of Adherence (Table 4a, 4b) parameters
+.. csv-table:: Table 4: Probability of Adherence
    :file: adherence_parameters.csv
    :widths: 30, 20, 10, 10
    :header-rows: 1
@@ -217,6 +269,16 @@ Information about 'Distribution of therapy type' table: This is not used as a BA
 .. csv-table:: Distribution of therapy type
    :file: dist_therapy_type.csv
    :widths: 20, 10, 10,10
+   :header-rows: 1
+
+.. csv-table:: Table 9: Reduction in LDL-c by drug and dose
+   :file: reduction_in_ldlc.csv
+   :widths: 30, 20, 10, 10
+   :header-rows: 1
+
+.. csv-table:: Table 10: Average dose in mg for statins, by potency (all locations)
+   :file: table_10.csv
+   :widths: 20, 10, 10, 10
    :header-rows: 1
 
 Interventions
