@@ -40,6 +40,18 @@ The objective is to model and simulate the Public Health Impact of fixed dose co
    * - Low dose
      - under 40mg 
      - 
+   * - CV risk category: very high risk
+     - past CVD event
+     - 
+   * - CV risk category: high risk 
+     - CV score greater than 10 or severe diabetes or severe CKD
+     - 
+   * - CV risk category: moderate risk 
+     - score between five and 10 or mild/moderate diabetes/CKD or SBP greater than 180
+     - 
+   * - CV risk category: low risk 
+     - CV score less than two
+     - 
 
 Intervention Definitions
 ++++++++++++++++++++++++
@@ -268,14 +280,14 @@ Information about Table 7: If a patient experiences a side effect, they will be 
 
 Information about 'Distribution of therapy type' table: This is not used as a BAU parameter directly. This table was used to calculate 'adherence' parameters. 
 
-.. csv-table:: Distribution of therapy type
+.. csv-table:: Table 8: Distribution of therapy type
    :file: dist_therapy_type.csv
    :widths: 20, 10, 10,10
    :header-rows: 1
 
-.. csv-table:: Table 9: Reduction in LDL-c by drug and dose
+.. csv-table:: Table 9: Efficacy - Reduction in LDL-c by drug and dose
    :file: reduction_in_ldlc.csv
-   :widths: 30, 20, 10, 10
+   :widths: 30, 20, 10, 10, 10
    :header-rows: 1
 
 .. csv-table:: Table 10: Average dose in mg for statins, by potency (all locations)
