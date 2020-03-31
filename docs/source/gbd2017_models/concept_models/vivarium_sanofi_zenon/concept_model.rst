@@ -455,6 +455,14 @@ Desired Model Outputs
      -
      -
      -
+     - Mean, Standard Deviation for IKF categories (cat1-5 distributions)
+     - % value
+   * - 
+     -
+     -
+     -
+     -
+     -
      - Mean, Standard Deviation for LDL-c level
      - mmol/ L
     
@@ -479,8 +487,10 @@ Observers
 - LDLCTimeSeriesObserver()
 - FPGTimeSeriesObserver()
 - SBPTimeSeriesObserver()
+- IKFTimeSeriesObserver()
 - SimulantTrajectoryObserver()
 - LDLCMortalityObserver()
+
 
 Verification and Validation Strategy
 ------------------------------------
