@@ -40,6 +40,18 @@ The objective is to model and simulate the Public Health Impact of fixed dose co
    * - Low dose
      - under 40mg 
      - 
+   * - CV risk category: very high risk
+     - past CVD event
+     - 
+   * - CV risk category: high risk 
+     - CV score greater than 10 or severe diabetes or severe CKD
+     - 
+   * - CV risk category: moderate risk 
+     - score between five and 10 or mild/moderate diabetes/CKD or SBP greater than 180
+     - 
+   * - CV risk category: low risk 
+     - CV score less than two
+     - 
 
 Intervention Definitions
 ++++++++++++++++++++++++
