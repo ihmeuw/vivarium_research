@@ -281,19 +281,19 @@ State and Transition Data Tables
      - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
    * - cat1
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat1}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat1}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat1}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat1 (sequelae mapped to IKF cat1)
    * - cat2
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat2}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat2}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat2}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat2 (sequelae mapped to IKF cat2)
    * - cat3
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat3}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat3}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat3}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat3 (sequelae mapped to IKF cat3)
    * - cat4
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{cat4}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c589}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{cat4}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat4}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for IKF cat4 (sequelae mapped to IKF cat4)
    * - cat5
      - disability weight
