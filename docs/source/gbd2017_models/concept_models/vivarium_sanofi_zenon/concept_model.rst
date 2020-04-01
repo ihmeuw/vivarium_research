@@ -264,6 +264,12 @@ Information about Table 5: At a follow-up visit, if a patient has not reached th
    :widths: 30, 20, 10
    :header-rows: 1
 
+Update: BAU ONLY	mean (sd); 
+prob increasing dose if not at target =	0.07 (0.02); 
+prob of adding 2nd drug if not at target = 0.06 (0.02); 
+prob of switching drugs if not at target = 0.03 (0.02); 
+prob of no change (BAU only) = 0.84 (0.02)
+
 Information about Table 6: The specific Rx for each patient (at initialization and for new patients during the simulation) is determined by the data in Table 6 - current treatment practice distribution by drug type. First, the type of drug is determined (statin, ezetimibe or fibrate). Then the sub-type of statin is determined for patients on statin. In BAU, dosing is 40mg for low potency statin (called "high dose") and 20mg for high potency statin (called "low dose"). In the 2 intervention scenarios, the initial dose is "high dose" of high potency statin.
 
 .. csv-table:: Table 6: Current treatment practice - distribution by drug type 
