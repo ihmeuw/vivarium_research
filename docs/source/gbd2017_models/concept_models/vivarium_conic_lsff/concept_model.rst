@@ -643,11 +643,11 @@ below:
 
   random_number_i = np.random.uniform(0,1)
 
-  if random_number_i < q1:
+  if random_number_i =< 0.25:
     daily_flour_consumption_i = np.random.uniform(q0,q1)
-  elif random_number_i < q2:
+  elif random_number_i =< 0.5:
     daily_flour_consumption_i = np.random.uniform(q1,q2)
-  elif random_number_i < q3:
+  elif random_number_i =< 0.75:
     daily_flour_consumption_i = np.random.uniform(q2,q3)
   else:
     daily_flour_consumption_i = np.random.uniform(q3,q4)
