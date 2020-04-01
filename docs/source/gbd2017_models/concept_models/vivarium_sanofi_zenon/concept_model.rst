@@ -50,7 +50,7 @@ The objective is to model and simulate the Public Health Impact of fixed dose co
      - score between five and 10 or mild/moderate diabetes/CKD or SBP greater than 180
      - 
    * - CV risk category: low risk 
-     - CV score less than two
+     - CV score less than five
      - 
 
 Intervention Definitions
@@ -264,7 +264,8 @@ Information about Table 5: At a follow-up visit, if a patient has not reached th
    :widths: 30, 20, 10
    :header-rows: 1
 
-Information about Table 6: The specific Rx for each patient (at initialization and for new patients during the simulation) is determined by the data in Table 6 - current treatment practice distribution by drug type. First, the type of drug is determined (statin, ezetimibe or fibrate). Then the sub-type of statin is determined for patients on statin. In BAU, dosing is 40mg for low potency statin (called "high dose") and 20mg for high potency statin (called "low dose"). In the 2 intervention scenarios, the initial dose is "high dose" of high potency statin.
+Information about Table 6: The specific Rx for each patient (at initialization and for new patients during the simulation) is determined by the data in Table 6 - current treatment practice distribution by drug type. First, the type of drug is determined (statin, ezetimibe or fibrate). Then the sub-type of statin is determined for patients on statin. In BAU, dosing is 40mg for low potency statin (called "high dose") and 20mg for high potency statin (called "low dose"). In the 2 intervention scenarios, the initial dose is "high dose" of high potency statin. For initialization of patients on FDC, the statin potency and dosage should be: 50% low-dose 50% high-dose. Both must be low potency only for initialization
+
 
 .. csv-table:: Table 6: Current treatment practice - distribution by drug type 
    :file: current_rx.csv
@@ -312,6 +313,7 @@ Initialization of patients into treatment for intervention scenarios
 
 The 2 intervention scenarios (guidelines + multiple pills and guidelines + single, combination pill) are initialized the same way as the BAU case.  
 The difference is that in the intervention scenarios, treatment criteria have changed – there is now a lower threshold for treatment (based on a patient’s CV risk SCORE), including caveats for DM and CKD state.
+
 SCORE is calculated according to the equation in the concept model documentation.
 An additional difference between these scenarios and the BAU case is that follow-up visits here are scheduled at 4-6 week intervals instead of the 3-6 month timeframe in BAU.
 In terms of treatment options – here, new patients are started on a low dose of high intensity statin.  Ramp-up follows the diagram “copy of treatment for engineers”.
