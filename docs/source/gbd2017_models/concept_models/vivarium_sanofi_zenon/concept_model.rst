@@ -223,6 +223,8 @@ If FDC or multiple individual pills, treatment profile is {t, s}, eff_t ~ N, eff
 
 This effect size calculation should also be used during the simulation to determine if a patient is 'at target' - which is defined as a reduction in LDL-C of 50% or more over untreated LDL-C level.
 
+To get on FDC:  prob(adding 2nd drug)*prob(FDC if multi drug). These values are listed in 'Table 5: Probability of adding 2nd drug v. increasing dose' and 'Table 8: Distribution of therapy type' below).
+
 BAU parameter data tables
 +++++++++++++++++++++++++
 
