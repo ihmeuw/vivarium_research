@@ -203,16 +203,22 @@ Intermediates
 Effect Modification
 """""""""""""""""""
 
-A factor M is said to be an effect modifier if the effect of the exposure E on 
-disease D varies for different values of M. Sometimes also called *interaction*. 
+A factor :math:`M` is said to be an effect modifier if the effect of the 
+exposure :math:`E` on disease :math:`D` varies for different values of 
+:math:`M`. Effect modification is sometimes also called *interaction*. We 
+illustrate this relationship below.
 
-.. todo::
-  get feedback on best diagram.
+.. figure:: effect_mod_arrow_diagram.svg
+  :align: center
+
+If :math:`M` is some dichotomous effect modifier, then :math:`B\neq C`, and to 
+understand the full story of how :math:`E` acts on :math:`O`, we cannot simply 
+consider :math:`A`.
 
 Observe this is in direct contrast to confounding, in which the exposure and 
 confounding factor *must not depend on one another* to determine the risk.
 
-We note that Effect modification is a statistical phenomenon which may or may 
+We note that effect modification is a statistical phenomenon which may or may 
 not reflect a biological phenomenon. However, in the case of epidemiological 
 modeling, following the Bradford-Hill criteria of *plausibility*, we would hope 
 to be able to explain the effect modification when implementing an effect 
