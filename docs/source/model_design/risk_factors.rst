@@ -205,6 +205,7 @@ Effect Modification
 
 Mediation
 """""""""
+Definition:
 Rather than a direct causal relationship between the independent variable and the dependent variable,
 a mediating variable improves understanding the relationship between the independent and dependent variables.
 The independent variable influences the mediating variable, which in turn influences the dependent variables. 
@@ -217,6 +218,16 @@ Example:
 
 .. image:: risk_factors_mediation_example.svg
 
+Direct versus indirect effects:
+In the example diagram shown above, the indirect effect is the product of path coefficients "1" and "3". 
+The direct effect is the coefficient "2". The direct effect measures the extent to which the dependent variable 
+changes when the independent variable increases by one unit and the mediator variable remains unaltered.
+In contrast, the indirect effect measures the extent to which the dependent variable changes when the independent variable 
+is held fixed and the mediator variable changes by the amount it would have changed had the independent variable increased by one unit.
+In linear systems, the total effect is equal to the sum of the direct and indirect (2 + 1*3 in the model above). 
+In nonlinear models, the total effect is not generally equal to the sum of the direct and indirect effects, but to a modified combination of the two.
+
+Here is `GBD mediator template <https://hub.ihme.washington.edu/display/gbd2017/Mediator+Template>`_
 
 What is a risk exposure?
 ++++++++++++++++++++++++
