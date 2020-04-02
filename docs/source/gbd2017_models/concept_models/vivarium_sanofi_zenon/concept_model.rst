@@ -333,6 +333,8 @@ In terms of treatment options – here, new patients are started on a low dose o
 
 Additionally, new patients will start treatment on a high potency, high dose statin. In BAU, this is not necessarily true.
 
+If not at target at follow-up, a second drug will be added (ezetimibe) - as 2-pills in scenario 1 and as FDC in scenario 2. If a patient in either intervention scenario experiences a random adverse event, they will be given a lower dose of the same medication at follow-up.
+
 2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
