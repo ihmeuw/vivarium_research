@@ -50,7 +50,7 @@ The objective is to model and simulate the Public Health Impact of fixed dose co
      - score between five and 10 or mild/moderate diabetes/CKD or SBP greater than 180
      - 
    * - CV risk category: low risk 
-     - CV score less than two
+     - CV score less than five
      - 
 
 Intervention Definitions
@@ -74,6 +74,7 @@ For each of the simulated populations/locations, IHME will run a counterfactual 
 Questions of Interest
 +++++++++++++++++++++
 
+Hi david, please fill me out
 
 Scope of Modeling
 +++++++++++++++++
@@ -223,6 +224,8 @@ If FDC or multiple individual pills, treatment profile is {t, s}, eff_t ~ N, eff
 
 This effect size calculation should also be used during the simulation to determine if a patient is 'at target' - which is defined as a reduction in LDL-C of 50% or more over untreated LDL-C level.
 
+To get on FDC:  prob(adding 2nd drug)*prob(FDC if multi drug). These values are listed in 'Table 5: Probability of adding 2nd drug v. increasing dose' and 'Table 8: Distribution of therapy type' below).
+
 BAU parameter data tables
 +++++++++++++++++++++++++
 
@@ -318,6 +321,7 @@ Initialization of patients into treatment for intervention scenarios
 
 The 2 intervention scenarios (guidelines + multiple pills and guidelines + single, combination pill) are initialized the same way as the BAU case.  
 The difference is that in the intervention scenarios, treatment criteria have changed – there is now a lower threshold for treatment (based on a patient’s CV risk SCORE), including caveats for DM and CKD state.
+
 SCORE is calculated according to the equation in the concept model documentation.
 An additional difference between these scenarios and the BAU case is that follow-up visits here are scheduled at 4-6 week intervals instead of the 3-6 month timeframe in BAU.
 In terms of treatment options – here, new patients are started on a low dose of high intensity statin.  Ramp-up follows the diagram “copy of treatment for engineers”.
