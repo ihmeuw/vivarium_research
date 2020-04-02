@@ -44,10 +44,41 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
-.. todo::
+The following table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
 
-   Add restrictions table.
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
 
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
 
 Vivarium Modeling Strategy
 --------------------------
@@ -85,9 +116,107 @@ Note: This simpliflication might over estimate the number of deaths. See Model A
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-.. todo::
+.. list-table:: Definitions
+   :widths: 15 20 30
+   :header-rows: 1
 
-   Add state and transitions  data tables.
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - Susceptible
+     - Susceptible to larynx cancer
+   * - I
+     - Infected
+     - Infected with larynx cancer
+
+
+.. list-table:: States Data
+   :widths: 20 25 30 30
+   :header-rows: 1
+   
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - 1-prevalence_c423
+     - 
+   * - S
+     - excess mortality rate
+     - 0
+     - 
+   * - S
+     - disabilty weights
+     - 0
+     -
+   * - I
+     - prevalence
+     - prevalence_c423
+     - 
+   * - I
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c423}}{\text{population} \times \text{prevalence_c423}}`
+     - 
+   * - I
+     - disability weights
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c423}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - total disability weight over all sequelae with ids s_268, s_5510, s_5513, s_270, s_271, s_5516
+   * - ALL
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c423}}{\text{population}}`
+     - 
+
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+   
+   * - Transition
+     - Source 
+     - Sink 
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - :math:`\frac{\text{incidence_rate_c423}}{\text{1 - prevalence_c423}}`
+     - Incidence rate in total population is divided by 1-prevalence_c423 to get incidence rate among the susceptible population.
+
+
+.. list-table:: Data Sources
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - prevalence_c423
+     - como
+     - Prevalence of cause larynx cancer
+     - 
+   * - deaths_c423
+     - codcorrect
+     - Deaths from larynx cancer
+     - 
+   * - population
+     - demography
+     - Mid-year population for given country
+     - 
+   * - incidence_rate_c423
+     - como
+     - Incidence rate for larynx cancer
+     - 
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weights associated with each sequelae
+     - 
+   * - prevalence_s{`sid`}
+     - como
+     - Prevalence of each sequelae
+     - 
 
 
 Validation Criteria

@@ -25,6 +25,44 @@ Concept Model Diagram
 
 .. image:: lsff_concept_model_diagram.svg
 
+Model Versions
+--------------
+
+.. list-table::
+   :header-rows: 1
+   
+   * - Version
+     - Description
+     - Done
+   * - v1.0_disease_only
+     - Model with mortality, morbidity, diarrhea, LRI, measles, and 
+       neural tube defects.
+     - Yes
+   * - v2.0_lbwsg
+     - Model v1.0 plus the low birth weight and short gestation risk
+       factor.
+     - Yes
+   * - v3.0_paf_of_one
+     - Model v2.0 plus vitamin a deficiency and iron deficiency.
+     - Yes
+   * - v4.0_folic_acid_fortification
+     - Model v3.0 plus folic acid fortification baseline and scale up.
+     - Yes
+   * - v5.0_vitamin_a_fortification
+     - Model v4.0 plus vitamin a fortification baseline and scale up.
+     - In progress
+   * - v6.0_iron_fortification
+     - Model v5.0 plus iron fortification baseline and scale up.
+     - Not started
+   * - v7.0_scenarios
+     - Full model with final stratification and all scenarios.
+     - Not started.
+   
+Model results can be located at 
+``/share/costeffectiveness/results/vivarium_conic_lsff`` in the 
+appropriate model version directory.
+   
+
 Model Components
 ----------------
 
@@ -100,8 +138,6 @@ Vitamin A Fortification
 
 Coverage 
 ^^^^^^^^
-
-
 
 Effect Size
 ^^^^^^^^^^^
@@ -258,7 +294,7 @@ as follows:
 	create a separate page that lists similar strategies that we can reference 
 	via links.
 
-** Time to Response**
+**Time to Response**
 
 Further, the time-to-response to vitamin A fortification in years should also 
 be sampled such that:
@@ -282,11 +318,59 @@ be sampled such that:
 	# (s is the shape parameter)
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
-**Coverage Data**
+**Population Coverage Data**
+
+The coverage algorithm for vitamin A fortification should follow the same approach described 
+in this concept model document for folic acid fortification (see `Population Coverage Data`_).
+
+.. list-table:: Means and 95% CI's for existing population coverage of vitamin A fortification (% of total population)
+  :widths: 5 5 5 5
+  :header-rows: 1
+
+  * - Location
+    - :math:`a` = Eats fortified vehicle
+    - :math:`b` = Eats fortifiable vehicle
+    - :math:`c` = Eats vehicle
+  * - Ethiopia
+    - 1.0 (see below)
+    - 44 (34, 54)
+    - 55 (45, 65)
+  * - India
+    - 24.3 (21.1, 27.9)
+    - 89.4 (87.0, 91.8)
+    - 100 (100, 100)
+  * - Nigeria (Kano)
+    - 7.6 (5.9, 9.4)
+    - 35.9 (32.7, 39.1)
+    - 98.4 (97.6, 99.3)
+  * - Nigeria (Lagos)
+    - 7.2 (5.5, 8.9)
+    - 22.7 (19.9, 25.5)
+    - 98.6 (97.8, 99.3)
+
+For all values other than :math:`a` for Ethiopia, use a Beta distribution 
+with mean equal to the central estimate, and variance equal to the variance of 
+a normal distribution with the same mean and 95% confidence interval. 
+
+For the :
+math:`a` value for Ethiopia, assume the following: 
+
+.. math::
+
+  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
+
+The mean of this `Beta distribution
+<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the value shown
+in the table. The density has an asymptote at 0 and an x-intercept at
+1. The mean value for this parameter was chosen so that the mean of 
+existing fortification coverage is close to 0 (in a similar approach to 
+existing coverage of folic acid in Ethiopia).
 
 .. todo::
 
-	Describe coverage algorithm
+	Cite Ethiopia data source (Assessment of Feasibility and Potential 
+	Benefits of Food Fortification. Addis Ababa : Government of the 
+	Federal Democratic Republic of Ethiopia, 2011).
 
 **Effect of Intervention on Simulants**
 
@@ -351,7 +435,7 @@ Where,
 
 	- PAF is computed based on the RR for vitamin A fortification
 
-	- rr_i is the relative risk assigned to the individual simulant ()
+	- rr_i is the relative risk assigned to the individual simulant
 
 .. todo::
 
@@ -360,8 +444,345 @@ Where,
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
 
+Population Coverage Data and Coverage Algorithm - Iron
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The baseline coverage for iron fortification is the same as the baseline 
+coverage for folic acid fortification, as described below_. Additionally, the 
+coverage algorithm should be implemented in the same way as  for folic acid
+fortification, as described here_.
+
+Notably, iron and folic acid coverage should be correlated as specified under 
+the following scenarios:
+
+- **Baseline coverage**: baseline iron and folic acid fortification coverage should be perfectly correlated so that exactly the same simulants are covered by each forticant
+
+- **Scale-up of iron fortification**: zero correlation of scaled-up *intervention* coverage (although baseline coverage remains perfectly correlated)
+
+- **Scale-up of folic acid fortification**: zero correlation of scaled-up *intervention* coverage (although baseline coverage remains perfectly correlated)
+
+- **Scale-up of iron + folic acid fortification**: both baseline and scaled-up intervention coverage of iron and folic acid fortification are perfectly correlated so that exactly the same simulants are covered by each forticant
+
+.. note:: 
+
+	A limitation of our population coverage data is that we assume no baseline 
+	iron fortification occurs in the absence of folic acid fortification and 
+	vice versa.
+
+Effect Size - Iron
+^^^^^^^^^^^^^^^^^^
+
+Iron fortification of staple food affects two outcomes in our simulation 
+model. The first outcome is an individual's hemoglobin concentration following 
+the *direct* consumption of iron fortified foods. The second outcome is a 
+simulant's birth weight following the *maternal* consumption of iron fortified 
+foods.
+
+**Hemoglobin Level**
+
+The effect of iron fortified food consumption on children under 7 years of age 
+was obtained from the Keats et al. systematic review. However, the effect size 
+in this review was reported in standardized mean differences rather than in 
+units of hemoglobin concentration directly. Therefore, we performed a separate 
+meta-analysis of the results included in the Keats et al. review to obtain shifts 
+in hemoglobin concentration. This meta-analysis is shown below.
+
+.. image:: iron_meta.png
+
+Notably, the above changes in hemoglobin concentration are shown in grams per 
+*deciliter* (dL); however, GBD models hemoglobin concentration as grams per 
+*liter* (L). Therfore, the effect size used in our simulation model should be 
+**+3.0 (95% CI: -0.2, +6.1)** grams of hemoglobin per liter of blood. This 
+effect size should be interpreted as the population mean shift in hemoglobin 
+concentrations among children less than seven years old in LMICs following 
+iron fortification of staple foods. 
+
+.. note:: 
+
+	The confidence interval for this effect size includes the null (0), 
+	indicating that for some individual simulation draws, the intervention 
+	effect may *decrease* population mean hemoglobin concentrations. However, 
+	*on average*, the effect of the intervention will increase population mean 
+	hemoglobin levels.
+
+To model the uncertainty in the estimate, the above mean difference (MD) 
+should be drawn from a normal distribution with mean = 3.0, 2.5\ :superscript:`
+th`-percentile = -0.2, and 97.5\ :superscript:`th`-percentile = 6.1. This 
+distbibution can be created using `SciPy's norm function
+<https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
+as follows:
+
+.. code-block:: Python
+
+	from scipy.stats import norm
+
+	# mean and 0.975-quantile of normal distribution for mean difference (MD)
+	mean = 3
+	q_975 = 6.1
+
+	# 0.975-quantile of standard normal distribution (=1.96, approximately)
+	q_975_stdnorm = norm().ppf(0.975)
+
+	std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+	# Frozen normal distribution for MD, representing uncertainty in our effect size
+	hb_md_distribution = norm(mean, std)
+
+.. note::
+
+	This distirbution is slightly shifted to the right (0.025 percentile is 
+	equal to -0.1, rather than -0.2) due to rounding approximations in the 
+	meta-analysis for the effect size causing a slightly non-symmetrical 
+	confidence interval around the mean.
+
+**Birth Weight**
+
+The effect of maternal consumption of iron fortified food on infant birth 
+weight was obtained from Haider et al. (BMJ 2013). According to this data 
+source, birth weight among babies born to mothers increased, on average, by 
+15.1 grams (95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The 
+distribution of the parameter should be modeled as follows:
+
+.. code-block:: Python
+
+	from scipy.stats import norm
+
+	# mean and 0.975-quantile of normal distribution for mean difference (MD)
+	mean = 15.1
+	q_975 = 24.2
+
+	# 0.975-quantile of standard normal distribution (=1.96, approximately)
+	q_975_stdnorm = norm().ppf(0.975)
+
+	std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+	# Frozen normal distribution for MD, representing uncertainty in our effect size
+	bw_md_distribution = norm(mean, std)
+
+	# random sample from effect size distribution
+	bw_md_per_10_mg_iron = bw_md_distribution.rvs()
+
+.. note::
+
+	The Haider et al. 2013 paper did not report if the dose of iron was measured as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of daily iron consumption, as referenced in the Haider paper, represented 10 mg of *elemental* iron.
+
+Therefore, we investigated the amount of daily iron consumption that a 
+pregnant mother would likely consume through iron fortification of staple 
+foods in our locations of interest in order to scale the effect size 
+accordingly. See the table below:
+
+.. list-table:: Daily Iron Consumption Parameters
+  :widths: 5 5 5
+  :header-rows: 1
+
+  * - Location
+    - Concentration of forticant in flour
+    - Amount of fortifiable flour consumed daily
+  * - Ethiopia
+    - 30 mg NaFeEDTA / kg flour  [1]; use point value
+    - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
+  * - India
+    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
+    - 100 g (IQR: 77.5, 200) [2*]; sample from distribution described below
+  * - Nigeria
+    - 40 mg NaFeEDTA / kg flour [1]; use point value
+    - 100 g (IQR:77.5, 200) [2*]; sample from distribution described below
+
+.. note::
+
+	While there was data for the concentration of iron forticants other
+	than NaFeEDTA for the locations in this table, we conservatively chose 
+	to use the concentrations of the NaFeEDTA forticant. This is because the
+	concentration of elemental iron in flour is lower when the NaFeEDTA 
+	forticant is used compared to other forticants.
+
+[1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
+
+[2] `Ethiopian National Food Consumption Survey <https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf>`_ (table 18; women)
+
+*In the absence of better data, we assumed that individuals in Nigeria and 
+India consumed the same amount of fortifiable flour per day as individuals in 
+Ethiopia.
+
+.. todo:: 
+
+	Find better data and replace values for flour consumption per day for 
+	Nigeria and India.
+
+The amount of elemental iron consumed daily, in miligrams per person, (at the 
+draw level) should be calculated as such (where X is mg of NaFeEDTA per kg of 
+flour and Y is grams of flour consumed daily per person, as defined in the
+table above):
+
+.. math::
+
+	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
+
+First, we must sample values from the distribution of the amount of flour 
+eaten per day *at the individual simulant level*. We chose to sample at the 
+individual simulant level rather than the draw level because the underlying 
+data from the `Ethiopian National Food Consumption Survey <https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf>`_ 
+represented variation in individual consumption rather than uncertainty around 
+a population mean value. The survey reported that the median daily consumption 
+was 100 g (IQR: 77.5, 200). We assumed that the minumum and maximum values in 
+the distribution (which were not directly reported) were zero and 350.5 grams 
+(75th percentile for the region with the highest value for this parameter). 
+Additionally, we assumed that the values followed a uniform distribution 
+within each quartile of consumption. Values should be sampled as described 
+below:
+
+.. code-block:: Python
+
+  import numpy as np
+
+  q0 = 0
+  q1 = 77.5
+  q2 = 100
+  q3 = 200
+  q4 = 350.5
+
+  random_number_i = np.random.uniform(0,1)
+
+  if random_number_i =< 0.25:
+    daily_flour_consumption_i = np.random.uniform(q0,q1)
+  elif random_number_i =< 0.5:
+    daily_flour_consumption_i = np.random.uniform(q1,q2)
+  elif random_number_i =< 0.75:
+    daily_flour_consumption_i = np.random.uniform(q2,q3)
+  else:
+    daily_flour_consumption_i = np.random.uniform(q3,q4)
+
+Next, the amount of elemental iron ingested by an individual simulant should 
+be calculated as follows:
+
+.. code-block:: Python
+
+  # daily_flour_consumption_i : value from above code block
+  # iron_concentration_in_flour : location-specific value from table above
+
+  elemental_iron_consumed_per_day_i = (daily_flour_consumption_i 
+      * iron_concentration_in_flour 
+      * 0.00015)
+
+Then, the specific effect size of iron fortification on low birth weight can 
+be calculated as follows (where Z is the location-specific amount of elemental 
+iron in miligrams, as calculated from the equation above):
+
+.. math::
+
+	\text{Z mg iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}} 
+
+.. code-block:: Python
+
+	# bw_md_per_10_mg_iron : defined above (random sample from effect size distribution)
+	# elemental_iron_consumed_per_day_i : defined above ( iron consumed per day in mg)
+
+	bw_shift_i = elemental_iron_consumed_per_day_i * bw_md_per_10_mg_iron / 10
+
+See the following section to see if/how to apply the *bw_shift_i* parameter to 
+individual simulants.
+
+Determining Whether A Simulant is Affected - Iron
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Hemoglobin Level**
+
+For the purposes of our simulation, we made a few assumptions:
+
+1. We assumed that simulants only received an effect from iron fortification 
+on their hemoglobin levels if they directly consumed iron fortified foods and 
+that they received no effect of iron fortification on their hemoglobin levels 
+from maternal consumption of iron fortified foods (although maternal
+consumption of iron fortified foods affects infant birth weight).
+
+2. We assumed that simulants begin to eat staple foods as a supplement to 
+breast milk consumption at the age of six months and that the quantity of 
+staple foods consumed as a proportion of total consumption increases linearly 
+from six months to two years of age, at which point it reaches its peak and 
+then remains constant.
+
+3. We assumed that the full effect of the iron fortification 
+intervention takes six months to achieve and that the effect scales up in a 
+linear fashion between the onset of exposure and six months post exposure. 
+This is likely a conservative assumption, as there is evidence (Andersson et 
+al. 2010) that the true curve increases more steeply at first, then levels off 
+before reaching the full effect at six months. Thus, the measured response 
+curve is concave down, and our linear approximation lies entirely below this 
+curve -- it is the secant line to the curve, with slope equal to the average 
+rate of increase over the 6 month interval. 
+
+4. We assumed that all individuals covered by baseline coverage of iron 
+fortification have been covered for at least six months and therefore have 
+already achieved the full effect of the intervention.
+
+.. todo::
+
+	Add justification and references to support for these assumptions. (Andersson et al. 2010, WHO guidance, and Diana et al. 2010/Plos One)
+
+Therefore, the effect size of iron fortification on a simulant's hemoglobin 
+level **in the baseline scenario** should be determined as follows:
+
+.. code-block:: Python
+	
+	# at the draw level
+	MD = hb_md_distribution.rvs() # mean difference in hemoglobin concentration due to iron fortification
+		# note, hb_md_distribution defined above in the effect size section
+
+	# at the individual simulant level
+	if age_i < 0.5:
+		md_i = 0
+	elif age_i < 2:
+		md_i = MD * (age_i - 0.5) / 1.5
+	else: 
+		md_i = MD
+
+The effect size of the iron fortification on a simulant's hemoglobin level for 
+new **intervention** coverage of iron fortification should be determined as 
+follows: 
+
+.. code-block:: Python
+	
+	# MD = hb_md_distribution.rvs() : full effect size at the draw level 
+		# (mean difference in hemoglobin concentration due to iron fortification)
+	# md_i : effect size for an individual simulant at a given time-step, 
+		# dependent on age and time since coverage
+	# age_i : simulant age in years
+	# age_of_coverage_i : age at which simulant gained coverage access in years
+	# time_since_coverage_i : age_i - age_of_coverage_i
+	# age_of_coverage_i / 1.5 : fraction of full effect that will be achieved 
+		# in six months since onset of coverage access, dependent on 
+		# age_of_coverage_i [(age_of_coverage - 0.5 + 0.5) / (2 - 0.5)]
+	# time_since_coverage_i / 0.5 : fraction of effect that will be achieved 
+		# at six months post onset of coverage access, dependent on 
+		# time_since_coverage_i
+	# (age_i - 0.5) / 1.5 : fraction of full effect, dependent on age
+
+	# at the individual simulant level
+	if age_i < 0.5:
+		md_i = 0
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i < 0.5: 
+		md_i = MD * age_of_coverage_i / 1.5 * time_since_coverage_i / 0.5
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i >= 0.5: 
+		md_i = MD * (age_i - 0.5) / 1.5
+	if age_i > 0.5 and age_of_coverage >= 1.5 and time_since_coverage_i < 0.5: 
+		md_i = MD * time_since_coverage_i / 0.5
+	else:
+		md_i = MD
+
+See below for a visual representation:
+
+.. image:: iron_effect_scale_up.svg
+
+**Birth Weight** 
+
+.. todo:: 
+
+	Write this section
+
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. _below:
 
 Population Coverage Data
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -474,6 +895,8 @@ sampled the two estimates indepdently, and more uncertainty seems like a good
 idea since we're trying to estimate an average for the entire country based on
 only two data points. Moreover, this coupling seems plausible since the data for
 Kano and Lagos were from the same paper and therefore could have a similar bias.
+
+.. _here:
 
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^

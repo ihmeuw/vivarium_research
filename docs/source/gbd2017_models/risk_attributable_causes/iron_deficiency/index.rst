@@ -272,20 +272,15 @@ sample the hemoglobin concentration for an individual simulant (who is not a
 woman of reproductive age) and evaluate if that simulant's hemoglobin
 concentration will respond to iron supplementation (iron responsive).
 
-The modeling strategy detailed in this section aims to evaluate *all* iron
-responsive anemias rather than dietary iron deficiency anemia, specifically.
-However, the modeling strategy can be modified to include only dietary iron
-deficiency (PAF of 1 cause), if desired by assuming that dietary iron
-deficiency anemia is the only iron responsive cause of anemia, rather than all
-of the causes listed in the `iron responsive anemia causes table`_ and that the
-dietary iron deficiency anemia sequelae are the only iron responsive anemia
-sequelae in the `anemia sequelae IDs table`_.
-
-.. todo::
-
-  Address Beatrix's comment about the above paragraph (lines 275-2828) in `PR
-  132 <https://github.com/ihmeuw/vivarium_research/pull/132>`_ to make it more
-  clear exactly what we're modeling.
+The modeling strategy detailed in this document aims to evaluate *all* iron
+responsive anemias (collection of causes) rather than the singular cause of 
+dietary iron deficiency anemia. However, the modeling strategy described in 
+this docuemnt can be modified to include only dietary iron deficiency anemia (
+PAF of 1 cause), if desired, by assuming that dietary iron deficiency anemia 
+is the only iron responsive cause of anemia, rather than all of the causes 
+listed in the `iron responsive anemia causes table`_ and that the dietary iron 
+deficiency anemia sequelae are the only iron responsive anemia sequelae in the 
+`anemia sequelae IDs table`_.
 
 .. note::
 
@@ -309,7 +304,9 @@ occur *before* the initialization of iron responsiveness.
 .. todo::
 
   Confirm order in which initialization occurs with research team, and explain
-  reasoning.
+  reasoning. (More simple to assign a hemoglobin concentration based full 
+  hemoglobin distribution; bounds are universally between zero and 1. Also 
+  fits more easily with propensity score approach.)
 
 Hemoglobin Concentration
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -319,9 +316,9 @@ should be assigned a random number between 0 and 1 (random_number_i). This
 number will represent the percentile of hemoglobin concentration for that
 individual simulant relative to the baseline population distribution of
 hemoglobin concentrations (from the GBD iron deficiency risk factor rei_92)
-*for the remainder of the simulation*. The corresponding hemoglobin concetration
-for that percentile should then be assigned to the simulant using the
-methodology described in the reaminder of this section.
+*for the remainder of the simulation*. The corresponding hemoglobin 
+concentration for that percentile should then be assigned to the simulant using 
+the methodology described in the reaminder of this section.
 
 Any shifts in hemoglobin concentration (due to baseline coverage or
 intervention effects) should be applied *after* an individual's hemoglobin
@@ -364,7 +361,7 @@ recreated with the following equations and code:
 	  -
 	* - xmax
 	  - 220
-	  -
+	  - Defined by GBD anemia modelers
 	* - pi
 	  - 3.14.....
 	  - Use `math.pi` for all significant figures
@@ -407,9 +404,9 @@ fortification can be measured by:
 	\frac{\text{prevalence}_\text{iron responsive anemia}}{\text{prevalence}_\text{total anemia}}
 
 Where *prevalence_iron_responsive_anemia* and *prevalence_total_anemia* are
-equal to the severity-, age-, sex-, and location-specific prevalence (from COMO)
-summed across all iron responsive anemia and all total anemia sequela IDs,
-respectively. Sequela IDs for each category are listed in the table below.
+equal to the severity-, age-, sex-, and location-specific prevalence (from 
+COMO) summed across all iron responsive anemia and all total anemia sequela 
+IDs, respectively. Sequela IDs for each category are listed in the table below.
 
 .. _`anemia sequelae IDs table`:
 
@@ -421,14 +418,14 @@ respectively. Sequela IDs for each category are listed in the table below.
 	  - All Anemia Sequela
 	  - Iron Responsive Anemia Sequela
 	* - Mild
-	  - 144, 172, 177, 182, 206, 240, 438, 442, 525, 531, 537, 645, 648, 651, 654, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1057, 1061, 1065, 1069, 1079, 1089, 1099, 1106, 1120, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5018, 5027, 5036, 5051, 5063, 5075, 5087, 5099, 5111, 5123, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5606, 5627, 5648, 5651, 5654, 5678, 5699, 5702, 5705, 7202, 7214, 22989, 22990, 22991, 22992, 22993, 23030, 23034, 23038, 23042, 23046
-	  - 144, 172, 177, 182, 206, 240, 438, 442, 525, 537, 1004, 1008, 1012, 1016, 1020, 1024, 1028, 1032, 1106, 1361, 1373, 1385, 1397, 1409, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5627, 5648, 5651, 5654, 5678, 5699, 5702, 7202, 7214, 22989, 22990, 22991, 22992, 22993, 23030, 23034, 23038, 23042, 23046
+	  - 144, 172, 177, 182, 206, 240, 525, 531, 537, 645, 648, 651, 654, 1016, 1024, 1032, 1057, 1061, 1065, 1069, 1079, 1089, 1099, 1106, 1120, 1373, 1385, 1397, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5018, 5027, 5036, 5051, 5063, 5075, 5087, 5099, 5111, 5123, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5606, 5627, 5678, 7202, 7214
+	  - 144, 172, 177, 182, 206, 240, 525, 537, 1016, 1024, 1032, 1106, 1373, 1385, 1397, 1421, 1433, 1445, 4952, 4955, 4976, 4985, 4988, 5009, 5225, 5228, 5249, 5252, 5273, 5276, 5393, 5567, 5579, 5627, 5678, 7202, 7214 
 	* - Moderate
-	  - 145, 173, 178, 183, 207, 241, 439, 443, 526, 532, 538, 646, 649, 652, 655, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1058, 1062, 1066, 1070, 1080, 1090, 1100, 1107, 1121, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5021, 5030, 5039, 5054, 5066, 5078, 5090, 5102, 5114, 5126, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5609, 5630, 5657, 5660, 5663, 5681, 5708, 5711, 5714, 7205, 7217, 22999, 23000, 23001, 23002, 23003, 23031, 23035, 23039, 23043, 23047
-	  - 145, 173, 178, 183, 207, 241, 439, 443, 526, 538, 1005, 1009, 1013, 1017, 1021, 1025, 1029, 1033, 1107, 1364, 1376, 1388, 1400, 1412, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5630, 5657, 5660, 5663, 5681, 5708, 5711, 5714, 7205, 7217, 22999, 23000, 23001, 23002, 23003, 23031, 23035, 23039, 23043, 23047
+	  - 145, 173, 178, 183, 207, 241, 526, 532, 538, 646, 649, 652, 655, 1017, 1025, 1033, 1058, 1062, 1066, 1070, 1080, 1090, 1100, 1107, 1121, 1376, 1388, 1400, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5021, 5030, 5039, 5054, 5066, 5078, 5090, 5102, 5114, 5126, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5609, 5630, 5681, 7205, 7217
+	  - 145, 173, 178, 183, 207, 241, 526, 538, 1017, 1025, 1033, 1107, 1376, 1388, 1400, 1424, 1436, 1448, 4958, 4961, 4979, 4991, 4994, 5012, 5219, 5222, 5243, 5246, 5267, 5270, 5396, 5570, 5582, 5630, 5681, 7205, 7217
 	* - Severe
-	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 533, 539, 647, 650, 653, 656, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1059, 1060, 1063, 1064, 1067, 1068, 1071, 1074, 1075, 1077, 1081, 1083, 1085, 1087, 1091, 1093, 1095, 1097, 1101, 1108, 1122, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5024, 5033, 5042, 5057, 5069, 5081, 5093, 5105, 5117, 5129, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5612, 5633, 5666, 5669, 5672, 5684, 5717, 5720, 5723, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
-	  - 146, 174, 179, 184, 208, 242, 440, 444, 527, 539, 1006, 1010, 1014, 1018, 1022, 1026, 1030, 1034, 1108, 1367, 1379, 1391, 1403, 1415, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5666, 5669, 5672, 5717, 5720, 5723, 5684, 7208, 7220, 23009, 23010, 23011, 23012, 23013, 23032, 23036, 23040, 23044, 23048
+	  - 146, 174, 179, 184, 208, 242, 527, 533, 539, 647, 650, 653, 656, 1018, 1026, 1034, 1059, 1060, 1063, 1064, 1067, 1068, 1071, 1074, 1075, 1077, 1081, 1083, 1085, 1087, 1091, 1093, 1095, 1097, 1101, 1108, 1122, 1379, 1391, 1403, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5024, 5033, 5042, 5057, 5069, 5081, 5093, 5105, 5117, 5129, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5612, 5633, 5684, 7208, 7220
+	  - 146, 174, 179, 184, 208, 242, 527, 539, 1018, 1026, 1034, 1108, 1379, 1391, 1403, 1427, 1439, 1451, 4964, 4967, 4982, 4997, 5000, 5015, 5213, 5216, 5237, 5240, 5261, 5264, 5399, 5573, 5585, 5633, 5684, 7208, 7220  
 
 Therefore, each simulant should be initialized as either iron responsive (1) or
 non-iron responsive (0) according to the following rules:
@@ -451,22 +448,13 @@ non-iron responsive (0) according to the following rules:
 		else:
 			iron_responsive_i = 0
 	else:
-		if random_number_i <= ((1 - prevalence_total_overall_anemia
-					    - (prevalence_c_613
-					       + prevalence_c_298
-					       + prevalence_c_345
-					       - (prevalence_total_overall_anemia
-					          - prevalence_overall_ira))
-					  / (1 - prevalence_total_overall_anemia)):
-			iron_responsive_i = 1
-		else:
-			iron_responsive_i = 0
+		iron_responsive_i = 1
 
 	# NOTE: use <, not =< for anemia thresholds
 
-.. todo::
+.. note::
 
-	Confirm how to handle final "else" statement with research team.
+	Final else statement indicates that we assume all individuals without anemia will be iron responsive. See calculations that investigate this assumption `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`_.
 
 Where:
 
@@ -532,31 +520,32 @@ Neonatal Age Groups
 Neonatal age groups should be excluded from the process described in this
 document. Simulants should be initialized with a hemoglobin value and an iron
 responsiveness indicator at the start of the simulation and/or when they age
-into the postneonatal age group. The reasoning behind this is as follows:
+into the postneonatal age group (age group ID #4). The reasoning behind this 
+is as follows:
 
 1.  GBD did not directly collect data for neonates but instead just copied
     estimates from the post-neonatal age group
 
 2.  The GBD modelers warned us that there might be problems with this
-    approach (though it is unclear exactly what those problems may be)
+    approach (anemia impairment prevalence will likely not agree with anemia prevalence calculated from hemoglobin distribution). Based on an initial investigation, the anemia prevalence for the neonatal age groups do not validate to GBD anemia impairment prevalence as well as for the other under five age groups (see `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Hemoglobin%20distribution%20code.ipynb>`_)
 
-3.  We are currently using this model of iron deficiency anemia to estimate
+3.  We are currently using this model of iron responsive anemia to estimate
     the effect of large-scale food fortification with iron, and we so far
-    don't have data saying that neonates get an effect from their mothers'
-    extra iron intake
+    do not have data to support that neonates' hemoglobin concentrations are affected by their mothers consumption of iron-fortified foods
 
-4.  Since there may be problems with the data, and we don't know whether our
+4.  The neonatal period lasts only 28 days and therefore has a relatively 
+	small impact on YLDs and anemia in GBD does not affect mortality among neonates
+
+5.  Since there may be problems with the data, and we don't know whether our
     intervention should affect neonates anyway, the simplest thing is to not
     bother modeling hemoglobin levels in neonates
 
-If we investigate further and find that the data for neonates make sense, and
-we find more research saying that our intervention should affect hemoglobin
-levels in neonates, then we can adjust the model accordingly.
+.. note::
 
-.. todo::
-
-  Confirm this with research team pending validation of this age groups with
-  functioning code.
+	If upon further investigation the hemoglobin distribution among neonates 
+	can be validated to the GBD anemia impairment prevalence and it is 
+	applicable for a given simulation/intervention, the model may be adjusted 
+	accordingly.
 
 Tracking Years Lived with Disability due to Anemia
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -584,23 +573,33 @@ within the population hemoglobin concentration distribution) is a limitation of
 our modeling strategy in that it assumes that this remains constant over time
 and age groups.
 
+We assume that all individuals who are not anemic are iron responsive. This 
+assumption is based on two additional assumptions, including a) asymptomatic 
+individuals with non-iron-responsive causes will remain asymptomatic, and b) 
+the prevalence of individuals with non-iron-responsive causes without anemia 
+is neglible (see a notebook investigating the prevalence of these groups `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`_). 
+
+	These assumptions may cause our model to improve the hemoglobin status via 
+	an iron supplementaion/foritifaction intervention among simulants who may 
+	not actually respond to iron supplmentation and otherwise would be 
+	borderline non-anemic based on their hemoglobin threshold (and may go on 
+	to develop mild anemia as they age and the hemoglobin distribution and 
+	anemia threshold values change). Therefore, this assumption may slightly 
+	overestimate the impact of iron supplementation/fortification 
+	interventions.
+
 Because we are not modeling individual causes of anemia (and their associated
-mortality), we assume that all simulants have the same mortality rate regardless
-of their hemoglobin value, when in reality, those with lower hemoglobin values
-will have higher mortality rates than those with higher hemoglobin values.
-Notably, deaths due to causes with iron responsive anemia sequelae account for
-approximately 1.1% of deaths in the first five years of life globally.
-
-.. todo::
-
-  Cite this statistic (deaths due to causes with iron responsive anemia sequelae
-  account for approximately 1.1% of deaths in the first five years of life
-  globally).
+mortality), we assume that all simulants have the same mortality rate 
+regardless of their hemoglobin value, when in reality, those with lower 
+hemoglobin values will have higher mortality rates than those with higher 
+hemoglobin values. Notably, deaths due to causes with iron responsive anemia 
+sequelae account for approximately 1.1% of deaths in the first five years of 
+life globally (see the calculations `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Anemia%20research%20questions.ipynb>`_).
 
 Because hemoglobin concentrations are not directly modeled among the early and
 late neonatal age groups in GBD, the prevalence of mild, moderate, and severe
-anemia are assumed to be equal to the prevalence in the post-neonatal age group.
-Therefore, this model is limited when applied to neonatal age groups.
+anemia are assumed to be equal to the prevalence in the post-neonatal age 
+group. Therefore, this model is limited when applied to neonatal age groups.
 
 The modeling strategy currently described in this document does not consider
 the effect of pregnancy on hemoglobin concentration and therefore is limited in
@@ -616,15 +615,14 @@ maintains the same shape after a shift due to the intervention is applied.
   assume that hemoglobin shifts are constant regardless of an individual's
   starting hemoglobin concentration. The implication is that the shift applies
   uniformly to all individuals regardless of their position in the hemoglobin
-  distribution (imagine just pushing a normal distribution to the right, but its
-  shape stays the same). However, we might actually expect the left end of the
-  distribution to get pushed farther than the right end of the distribution in
-  reality, so the shape would change from a normal distribution to a more
-  lop-sided distribution if this were to happen (we assume it doesn't). Note,
-  however, that the the shape is only maintained in our simulation when
-  stratified by iron responsiveness (because non-iron-responsive individuals
-  will not get pushed at all).
-
+  distribution (imagine just pushing a normal distribution to the right, but 
+  its shape stays the same). However, we might actually expect the left end of 
+  the distribution to get pushed farther than the right end of the 
+  distribution in reality, so the shape would change from a normal 
+  distribution to a more lop-sided distribution if this were to happen (we 
+  assume it doesn't). Note, however, that the the shape is only maintained in 
+  our simulation when stratified by iron responsiveness (because 
+  non-iron-responsive individuals will not get pushed at all).
 
 Further, the model is limited due to GBD not directly modeling the prevalence
 of dietary iron deficiency, which may cause error in the estimation of the
@@ -644,12 +642,15 @@ calculated using the code below using the parameters defined earlier in this
 document and assuming age- and sex- specific *anemia_threshold* values as
 defined in the `WHO hemoglobin tresholds table`_ and using the parameters defined in the `population hemoglobin parameters table`_:
 
-.. warning::
+.. note::
 
-	There is an error either in the parameter definitions described in the
-	table above or the code described in the block below that is causing a
-	failure in the validation criteria of anemia prevalence. Error to be
-	investigated and updated.
+	The following code has been validated for the age groups and locations 
+	relevant to the Large Scale Food fortification project (1 month - 5 years (
+	age group IDs 4 and 5) in India, Ethiopia, and Nigeria). See the relevant 
+	notebook `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Hemoglobin%20distribution%20code.ipynb>`_. 
+	However, it requires further validation before application to additional 
+	demographic groups, as this method did not validate for all age groups or 
+	locations. 
 
 .. code-block:: Python
 
@@ -705,11 +706,7 @@ References
    appendix on ScienceDirect_conda activate vivarium_research>`_:
 
      **(GBD 2017 YLD Capstone)** GBD 2017 Disease and Injury Incidence and
-     Prevalence Collaborators. :title:`Global, regional, and national incidence,
-     prevalence, and years lived with disability for 354 diseases and injuries
-     for 195 countries and territories, 1990–2017: a systematic analysis for the
-     Global Burden of Disease Study 2017`. Lancet 2018; 392: 1789–858. DOI:
-     https://doi.org/10.1016/S0140-6736(18)32279-7
+     Prevalence Collaborators. :title:`Global, regional, and national incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392: 1789–858. DOI: https://doi.org/10.1016/S0140-6736(18)32279-7
 
 .. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
