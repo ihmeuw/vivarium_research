@@ -124,7 +124,25 @@ An term that is often used in causal inference is the **counterfactual**. The
 counterfactual refers to an alternate reality in which only a single variable 
 has changed and all else has remained exactly the same. 
 
-  For instance, say that we wanted to evaluate the causal realtionship between 
+  For instance, suppose you've finished work and you're trying to determine 
+  how to get down to the international district for dinner. You go to your 
+  maps application and ask **What is the quickest route to my destination?** 
+  It tells you that based on the current time, weather, day of the week, road 
+  work conditions, etc. that you should take the light rail.
+
+  So you leave the office, walk a few blocks to the westlake station, and 
+  catch the train. Two stops in, your train gets stopped behind a broken down 
+  bus. You decide to get off the train and walk the remaining distance. 
+  Arriving ten minutes late to dinner, you think to yourself **Would I have 
+  arrived on time if I took the bus instead?**
+
+As illustrated here, by definition the counterfactual question is impossible 
+to *directly* answer because it is a purely hypothetical question without 
+direct supporting evidence; we can only use what we know to make a *guess* at 
+what might have happened in the counterfactual scenario. Consider the 
+following example:
+
+  Say that we wanted to evaluate the causal realtionship between 
   smoking and lung cancer. Hypothetically, we could compare lung cancer rates 
   between 1954 when smoking was at its peak in the US and 2020 when smoking 
   rates in the US are lower. However, you can quickly imagine additional 
@@ -137,14 +155,13 @@ has changed and all else has remained exactly the same.
   counterfactual scenario could be conceptualized as "what would the lung 
   cancer rate in the US be in 1954 *if no one smoked* and **all else was equal**?" 
   Then, we could evaluate the independent effect of smoking on lung cancer
-  without interference from any other factors.
+  without interference from any other factors. 
 
-However, by definition, the counterfactual scenario is impossible to directly 
-evaluate, which is the core challenge in causal inference. Luckily, there are 
-several strategies that can be used to attempt to indirectly answer the 
-counterfactual question and perform causal inference. Some examples include
-randomized control trials and adjustment for confounding variables in 
-epidemiology studies.
+  However, we cannot wave a magic wand and explore the lung cancer rate in 
+  this alternative universe in 1954 to answer this question. Luckily, there 
+  are several methods in the field of epidemiology that attempt to answer 
+  conterfactual questions regarding causal relationships through randomized 
+  controlled trials and other types of studies. 
 
 One way in which causal inference is performed for a particular relationship 
 between an exposure and outcome is assessment based on the Bradford Hill 
@@ -188,12 +205,6 @@ modification, and mediation are discussed in the following subsections.
 Notably, in the following sections, solid arrows are used to depict causal 
 relationships directionally between a cause/exposure and effect/outcome. 
 
-.. todo::
-
-  Discuss counterfactual analysis as performed in our assessment of interventions.
-
-  Discuss criteria (sim science and GBD) for modeling a risk outcome pair
-
 Confounding
 """"""""""""
 
@@ -209,9 +220,21 @@ Mediation
 Causal Inference in the Global Burden of Disease Study
 """"""""""""""""""""""""""""""""""""""""""""""""""""""
 
-Notably, GBD researchers use an evidence scoring system that is based off of a subset of the Bradford Hill Criteria to evaluate the quality of evidence regarding causal relationships between risk-outcome pairs in GBD. Specifically, before computing the relative risks for a GBD risk factor, GBD researchers evaluate the *risk of bias* among individual studies that investigate the relationship between a risk-outcome pair. Then, GBD researchers additionally evaluate the strength (as a direct result of the relative risk curve they compute), consistency (through evluating between study heterogeneity), and dose-response (through the shape of the relative risk curve) for the computed relative risks for a given risk factor. Using these criteria, GBD researchers create a quantitive quality of evidence score for each risk-outcome pair in GBD.
+Notably, GBD researchers use an evidence scoring system that is based off of a 
+subset of the Bradford Hill Criteria to evaluate the quality of evidence 
+regarding causal relationships between risk-outcome pairs in GBD. 
+Specifically, before computing the relative risks for a GBD risk factor, GBD 
+researchers evaluate the *risk of bias* among individual studies that 
+investigate the relationship between a risk-outcome pair. Then, GBD 
+researchers additionally evaluate the strength (as a direct result of the 
+relative risk curve they compute), consistency (through evluating between 
+study heterogeneity), and dose-response (through the shape of the relative 
+risk curve) for the computed relative risks for a given risk factor. Using 
+these criteria, GBD researchers create a quantitive quality of evidence score 
+for each risk-outcome pair in GBD.
 
-Specifically, GBD researchers evaluate the risk of bias within individual studies based on the following characteristics:
+Specifically, GBD researchers evaluate the risk of bias within individual 
+studies based on the following characteristics:
 
 1) Representativeness of the study population
 
@@ -251,11 +274,19 @@ Specifically, GBD researchers evaluate the risk of bias within individual studie
 
 .. note::
 
-  This information was obtained from a science seminar presented by Ryan Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`_. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`_.
+  This information was obtained from a science seminar presented by Ryan 
+  Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`_. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`_.
 
 .. note::
 
-  It may be helpful to add sections for bias (selection bias, measurement bias, confounding bias, etc.) and generalizability to the above causal relationships section for additional context here
+  It may be helpful to add sections for bias (selection bias, measurement 
+  bias, confounding bias, etc.) and generalizability to the above causal 
+  relationships section for additional context here.
+
+.. todo::
+
+  Add additional section for causal inference on the simulation science team, 
+  specifically.
 
 What is a risk exposure?
 ++++++++++++++++++++++++
