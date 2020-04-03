@@ -339,6 +339,33 @@ complexity into the exposure component.
 What is a risk effect?
 ++++++++++++++++++++++
 
+A **risk effect** is a differential outcome of some risk exposure for which 
+the exposure is causally and measurably related to the outcome.
+
+For example, we might model the risk effect *blood pressure* as an outcome of 
+*sodium intake*. For each measurement of the exposure sodium intake, this model 
+would map to a probability distribution of possible blood pressures.
+
+.. note::
+  Wrting this up, I realized I'm not sure what the definition is. In the above, 
+  is the risk outcome "blood pressure"? is it a given measurement of blood 
+  pressure? or is it a differential probability of a given measure of blood 
+  pressure?
+
+Note that as a model component, a risk effect only makes sense in the context 
+of a defined exposure. For example, we might also include the component 
+*alcohol consumption*, which we also model as a risk exposure for the risk 
+effect *blood pressure*.
+
+.. note::
+  Again, here, is the risk effect *blood pressure*, or the the differential 
+  probability distribution of blood pressure, given a measurement of alcohol 
+  consumption? Would we say that there are two risk effects here, one is the 
+  differential probability of blood pressure measurements given sodium, and 
+  the other is the differential probability of blood pressure measurements 
+  given alcohol, or that both are "blood pressure"?
+
+
 Definitions
 -----------
 
