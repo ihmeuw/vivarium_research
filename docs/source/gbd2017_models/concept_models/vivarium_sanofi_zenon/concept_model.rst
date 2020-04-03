@@ -341,7 +341,6 @@ Intervention Scenarios (Both scenarios illustrated)
 
 .. image:: intervention_scenarios_treatment_ramp.svg
 
-
 Desired Model Outputs
 ---------------------
 
@@ -350,11 +349,16 @@ Desired Model Outputs
    :widths: 20, 15, 15
    :header-rows: 1
 
-.. csv-table:: Desired Model Outputs
+.. csv-table:: Prioritized Model Outputs
    :file: data_output_shell_table.csv
    :widths: 20, 15, 15, 15, 15, 15, 15
    :header-rows: 1
 
+.. csv-table:: Full Desired Model Outputs
+   :file: data_output_shell_table with_updated_supops_and_strats.csv
+   :widths: 1, 5, 10, 5, 5, 30, 30, 20
+   :header-rows: 1
+   
 Stratification
 ++++++++++++++
 
