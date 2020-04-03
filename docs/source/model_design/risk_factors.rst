@@ -206,6 +206,57 @@ Effect Modification
 Mediation
 """""""""
 
+Causal Inference in the Global Burden of Disease Study
+""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+Notably, GBD researchers use an evidence scoring system that is based off of a subset of the Bradford Hill Criteria to evaluate the quality of evidence regarding causal relationships between risk-outcome pairs in GBD. Specifically, before computing the relative risks for a GBD risk factor, GBD researchers evaluate the *risk of bias* among individual studies that investigate the relationship between a risk-outcome pair. Then, GBD researchers additionally evaluate the strength (as a direct result of the relative risk curve they compute), consistency (through evluating between study heterogeneity), and dose-response (through the shape of the relative risk curve) for the computed relative risks for a given risk factor. Using these criteria, GBD researchers create a quantitive quality of evidence score for each risk-outcome pair in GBD.
+
+Specifically, GBD researchers evaluate the risk of bias within individual studies based on the following characteristics:
+
+1) Representativeness of the study population
+
+2) Exposure measurement
+
+  a) Individual versus population
+
+  b) Objective versus self-report
+
+  c) Multiple prospective versus baseline prospective versus retrospective
+
+3) Outcome measurement
+
+  a) Death certificatie/physician diagnosis/medical records versus self-report
+
+  b) Blind outocme assessment versus not
+
+4) Reverse causation: low, medium, high
+
+5) Control for confounding 
+
+  a) Randomized controlled trial
+
+  b) Age, sex, tobacco, income, education, other critical determinants for a specific outcome not on the causal pathway
+
+  c) Age, sex, tobacco, other critical determininants for a specific outcome not on the causal pathway
+
+  d) Age, sex
+
+6) Selection bias
+
+  a) High follow-up (95%), not opportunity for selection
+
+  b) Moderate follow-up (85-95%), limited opportunity for selection
+
+  c) Low follow-up (<85%), considerable opportunity for selection
+
+.. note::
+
+  This information was obtained from a science seminar presented by Ryan Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`_. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`_.
+
+.. note::
+
+  It may be helpful to add sections for bias (selection bias, measurement bias, confounding bias, etc.) and generalizability to the above causal relationships section for additional context here
+
 What is a risk exposure?
 ++++++++++++++++++++++++
 
