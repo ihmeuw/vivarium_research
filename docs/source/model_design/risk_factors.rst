@@ -162,7 +162,7 @@ bias within the data.
 
 	For example, if the exposure is a one-time event with persistant effects, it 
 	can be defined as a dichotomous exposure. However, if the exposure is smoking 
-	as a risk for diabetes, a continuous exposure defined with units of person-time 
+	as a risk for lung cancer, a continuous exposure defined with units of person-time 
 	such as pack years per individual will likely be more suitable.
 
 As our models will typically use GBD estimates, some of the other typically 
@@ -190,7 +190,7 @@ will estimate a continuous age trend of the proportion of, say, individuals with
 BMI over 30. If the exposure is continuous, then GBD estimates the distribution of the 
 exposure variable over the population in each age, sex, year, and location.
 
-GBD's risk exposures will generally be less reliable than GBD cause of death 
+GBD's risk exposures will generally be less reliable than GBD cause-of-death 
 models, and when designing a risk exposure, it is important to both learn from
 the GBD modeler what the entity captured by their exposure model is.
 
@@ -230,7 +230,7 @@ examples below.
 	BMI.
 
 	Assume we are intersted in capturing *smoking* as a risk exposure. If the 
-	outcome of interest is pneumoconiosis, we will be interested in a subject's 
+	outcome of interest is lung cancer, we will be interested in a subject's 
 	full history of smoking. This might include:
 
 	a) if the subject has ever been a regular smoker
