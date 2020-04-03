@@ -181,7 +181,7 @@ The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
 
 .. _gbd_2017_vad_relative_risk_table:
 
-.. list-table:: Table 4: Pooled relative risks for risk-outcome pairs included in GBD 2017
+.. list-table:: Table 4.1: Relative risks for risk-outcome pairs in GBD 2017 [GBD-2017-Risk-Appendix-VAD]
   :widths: 15 13 15 15
   :header-rows: 1
 
@@ -209,6 +209,23 @@ The causes affected by the Vitamin A Deficiency risk in GBD 2017 include
     -
     - 3.65 (2.23 - 5.97)
     - No (only one study)
+	
+.. list-table:: Table 4.2: Pulled relative risks of GBD 2017 
+  :widths: 15 16 15 
+  :header-rows: 1
+
+  * - Cause
+    - GBD 2017 RR
+    - Note
+  * - Diarrhea
+    - 2.44 (2.27 - 2.63)
+    - RR from relative_risk source pulled with rei_id 96 (age 1-5, 1000 draws)
+  * - Measles
+    - 3.51 (2.53 - 4.67)
+    - RR from relative_risk source pulled with rei_id 96 (age 1-5, 1000 draws)
+  * - Lower Respiratory Infections (LRI)
+    - 1.33 (1.11 - 1.59)
+    - RR from relative_risk source pulled with rei_id 96 (age 1-5, 1000 draws)
 
 The above relative risks for GBD 2017 can be interpreted as rate ratios for the
 incidence rates of diarrhea, measles, and LRI. They can also be interpreted as
@@ -301,7 +318,7 @@ same as the exposure data for the VAD risk factor). The rationale for this
 approach is twofold:
 
 1.  We want to guarantee that the simulated baseline prevalence of vitamin A
-    deficiency matches the prevalence data from GBD, which is likely more
+    deficiency matches the prevalence data from GBD (1 - 5 age group), which is likely more
     trustworthy than incidence and remission data.
 
 2.  Relative risks from the literature about the effects of vitamin A
@@ -309,6 +326,23 @@ approach is twofold:
     risk ratios for prevalence of vitamin A deficiency. The exposure model
     provides a way to directly model these effect sizes in a way that preserves
     this interpretation.
+
+.. list-table:: Prevalence of Vitamin A deficiency in GBD 2017
+  :widths: 15 16 14 
+  :header-rows: 1
+
+  * - Source
+    - Exposure source using rei_id 96
+    - Como 
+  * - Nigeria
+    - 0.232 (0.184 - 0.288)
+    - 0.232 (0.184 - 0.288)
+  * - India
+    - 0.25 (0.205 - 0.303)
+    - 0.25 (0.205 - 0.304)
+  * - Ethiopia
+    - 0.315 (0.252 - 0.379)
+    - 0.315 (0.253 - 0.38)
 
 .. todo::
 
