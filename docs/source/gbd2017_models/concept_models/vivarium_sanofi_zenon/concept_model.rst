@@ -273,6 +273,11 @@ prob of adding 2nd drug if not at target = 0.06 (0.02);
 prob of switching drugs if not at target = 0.03 (0.02); 
 prob of no change (BAU only) = 0.84 (0.02)
 
+Note: patients in BAU will "ramp-up" their treatment if they are not "at target", which is defined as a 50% or more reduction in their untreated LDL-C.  Reduction in LDL-C due to treatment is determined based on the particular treatment given to the simulant, whether they are adherent and intervention efficacy data in Table 9.  Specifically:  LDL-C reduction = is_adherent(0 or 1)*reduction_in_ldlc for their particular drug/dose Rx.
+
+Note:  Ramp-up should be monotonic in terms of average efficacy:  lifestyle_intervention < fibrates < ezetimibe < LP LD statin < LP HD statin < HP LD statin < HP HP statin < 2-drug combination (either as 2-pill or FDC, depending on scenario). The probabilities in Table 5 above determin if dose will increase (from LD to HD) or if potency will increase (from LP to HP) or if a 2nd drug will be added (note BAU Table 5 includes "prob of no change", while intervention scenario Table 5 does not - so there are 2 Table 5s).  These are mutually exclusive events - only one can change at any given time doctor visit.  Thus, it is ok for a patient to transition from LP LD statin to HP LD statin in one step - even though they jumped over LP HD statin - since only potency changed in this example.   
+
+
 Information about Table 6: The specific Rx for each patient (at initialization and for new patients during the simulation) is determined by the data in Table 6 - current treatment practice distribution by drug type. First, the type of drug is determined (statin, ezetimibe or fibrate). Then the sub-type of statin is determined for patients on statin. In BAU, dosing is 40mg for low potency statin (called "high dose") and 20mg for high potency statin (called "low dose"). In the 2 intervention scenarios, the initial dose is "high dose" of high potency statin.
 
 .. csv-table:: Table 6: Current treatment practice - distribution by drug type 
@@ -327,6 +332,8 @@ An additional difference between these scenarios and the BAU case is that follow
 In terms of treatment options – here, new patients are started on a low dose of high intensity statin.  Ramp-up follows the diagram “copy of treatment for engineers”.
 
 Additionally, new patients will start treatment on a high potency, high dose statin. In BAU, this is not necessarily true.
+
+If not at target at follow-up, a second drug will be added (ezetimibe) - as 2-pills in scenario 1 and as FDC in scenario 2. If a patient in either intervention scenario experiences a random adverse event, they will be given a lower dose of the same medication at follow-up.
 
 2019 Guidelines with multiple pills scenario
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
