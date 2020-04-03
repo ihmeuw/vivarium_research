@@ -11,7 +11,7 @@ Interventions critical features
 1. Research aims and objections
 -------------------------------
 
-.. notes::
+.. note::
 
 	1. write a one sentence aim
 	-What does the client want to learn, specifically?
@@ -27,13 +27,13 @@ Interventions critical features
 2. Outcomes the intervention affects
 ------------------------------------
 
-.. notes::
+.. note::
 
 
 3. Effect sizes and definitions
 -------------------------------
 
-.. notes::
+.. note::
 
 	What are the exposure and control groups?
 	What is the definition of the effect size (prevalence or incidence or mortality, etc.)
@@ -46,7 +46,7 @@ Interventions critical features
 4. Potential confounders and mediators
 --------------------------------------
 
-.. notes::
+.. note::
 	What are they?
 	Might we need to control for them?
 
