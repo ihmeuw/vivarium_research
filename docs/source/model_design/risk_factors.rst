@@ -260,25 +260,20 @@ This shows us that the rate ratios for the effect of asbestos on lung cancer
 vary according to smoking status: the rate ratio is :math:`40.1/11.3\approx 3.5` 
 for non-smokers and :math:`901.6/122.6\approx 7.3` for smokers.
 
-.. todo:: add citation to Nicole's textbook
+.. todo:: add citation to Nicole's textbook. Graphs below were reproduced from http://osctr.ouhsc.edu/sites/default/files/2020-02/Module8PartVNotes.pdf
 
-We include below a graphical representation of a risk outcome stratified by sex, and by age, taken from (http://osctr.ouhsc.edu/sites/default/files/2020-02/Module8PartVNotes.pdf). On the y-axis we have incidence of some outcome such as high blood pressure, and on the x-axis we have an exposure such as obesity.
+We include below a graphical representation of a risk outcome stratified by sex, and by age. On the y-axis we have incidence of some outcome such as high blood pressure, and on the x-axis we have an exposure such as obesity.
 
 .. todo::
    Format citations.
 
-.. figure:: without_em_illustration.jpg
-   :scale: 75 %
-   :alt: Risk outcome stratified by sex
+.. image:: without_em_illustration.svg
+  :width: 400
 
-   Risk outcome stratified by sex.
+Observe that the difference in incidence of high blood pressure, between people from Town A versus Town B, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups is not modified by town of residence.
 
-Observe that the difference in incidence of high blood pressure, between female and male, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups is not modified by sex.
-
-.. figure:: with_em_illustration.jpg
-   :scale: 75 %
-
-   Risk outcome stratified by age cutoff.
+.. figure:: with_em_illustration.svg
+  :width: 400
 
 Here, we see that the risk attributable to our exposure is higher in our older group than in our younger group; thus age is an effect modifier for this risk outcome.
 
