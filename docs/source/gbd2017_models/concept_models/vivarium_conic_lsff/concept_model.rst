@@ -115,7 +115,7 @@ risk in (1-:math:`C_{vita}`), exposed group: :math:`ϴ_{1}= ϴ_{GBD}*(1-PAF)*RR`
 
 risk in (:math:`C_{vita}`), unexposed group: :math:`ϴ_{0}= ϴ_{GBD}*(1-PAF)` … equation 2
 
-**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food :math:`C_{vita}`, this shifts the amount of people who receive equation 1 to equation 2. 
+**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and shifts the amount of people who receive equation 1 to equation 2. 
 
 Interventions
 +++++++++++++
