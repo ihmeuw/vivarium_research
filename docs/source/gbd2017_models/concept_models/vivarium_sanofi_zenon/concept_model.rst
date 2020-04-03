@@ -345,131 +345,16 @@ Intervention Scenarios (Both scenarios illustrated)
 Desired Model Outputs
 ---------------------
 
-.. list-table:: Desired Model Outputs
-   :widths: 1, 5, 10, 5, 5, 30, 30, 20
+.. csv-table:: Subpopulations categories
+   :file: subpopulations_categories.csv
+   :widths: 20, 15, 15
    :header-rows: 1
 
-   * - Location name
-     - Year
-     - Subpopulations
-     - Age group
-     - Sex 
-     - Scenario
-     - Outcome
-     - Outcome Metric
-   * - Brazil 
-     - 2020
-     - Hypertension (SBP > 140 mmHg)
-     - 40-44
-     - Male 
-     - Business As Usual (BAU)
-     - All-cause mortality
-     - Rate per 100k 
-   * - China
-     - 2021
-     - Diabetes (FPG > 7.0 mmol/L)
-     - 45-49 
-     - Female
-     - 2019 Guidelines with multiple pills 
-     - DALYs by all four causes 
-     - Rate per 100k
-   * - Italy 
-     - 2022
-     - Entire Population
-     - 50-54
-     - Both
-     - 2019 Guidelines with combination single pill 
-     - YLLS by all four causes
-     - Rate per 100k
-   * - France
-     - 2023
-     - Post-ACS
-     - 55-59 
-     - 
-     - 
-     - YLDs by all four causes
-     - Rate per 100k
-   * - Spain 
-     - 2024
-     - Treated, single drug
-     - 60-64
-     - 
-     -
-     - Mean, Standard Deviation for FPG
-     - mmol/L
-   * - Russia
-     - 
-     - Treated, multiple drugs
-     - 65-69
-     -
-     -
-     - Treatment Coverage
-     - Percent 
-   * -
-     -
-     - Not Treated
-     - 70-74
-     -
-     -
-     - Monotherapy vs. multiple pills
-     - Percent
-   * - 
-     - 
-     -
-     - 75+
-     -
-     -
-     - Population achieving target LDL-c
-     - Percent 
-   * -
-     - 
-     -
-     - 40-74
-     -
-     -
-     - CV risk score
-     - Number
-   * -
-     - 
-     -
-     - 40-100
-     -
-     -
-     - Proportion of people adherent
-     - Percent
-   * - 
-     - 
-     - 
-     - 
-     -
-     -
-     - Deaths by four causes
-     - Rate per 100k
-   * - 
-     - 
-     -
-     -
-     -
-     -
-     - Mean, Standard Deviation for SBP 
-     - mmHg 
-   * - 
-     -
-     -
-     -
-     -
-     -
-     - Mean, Standard Deviation for IKF categories (cat1-5 distributions)
-     - % value
-   * - 
-     -
-     -
-     -
-     -
-     -
-     - Mean, Standard Deviation for LDL-c level
-     - mmol/ L
-    
+.. csv-table:: Desired Model Outputs
+   :file: data_output_shell_table.csv
+   :widths: 20, 15, 15, 15, 15, 15, 15
+   :header-rows: 1
+
 Stratification
 ++++++++++++++
 
