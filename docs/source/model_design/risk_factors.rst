@@ -270,7 +270,7 @@ We include below a graphical representation of a risk outcome stratified by sex,
 .. image:: without_em_illustration.svg
   :width: 400
 
-Observe that the difference in incidence of high blood pressure, between people from Town A versus Town B, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups is not modified by town of residence.
+Observe that the difference in incidence of high blood pressure, between people from Town A versus Town B, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups, within this population, is not modified by town of residence.
 
 .. figure:: with_em_illustration.svg
   :width: 400
