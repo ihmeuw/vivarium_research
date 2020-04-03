@@ -1,0 +1,17 @@
+﻿outcome,Outcome Metric,numerator,denominator,priority,notes,priority_definition
+All-cause mortality,Rate per 100k,number of deaths,sum of person time,high,,high = needed for client
+DALYs by all four causes,Rate per 100k,sum of YLLs for cause i + sum of YLDs for cause i,sum of person time,"high for IHD and IS, mid for CKD and Diabetes",,mid = needed for validation
+YLLS by all four causes,Rate per 100k,sum of YLLs for cause i ,sum of person time,"high for IHD and IS, mid for CKD and Diabetes",,low = needed for additional research
+YLDs by all four causes,Rate per 100k,sum of YLDs for cause i ,sum of person time,"high for IHD and IS, mid for CKD and Diabetes",,
+Deaths by four causes,Rate per 100k,number of deaths for cause i,sum of person time,"high for IHD and IS, mid for CKD and Diabetes",,
+Mean FPG,mmol/L,sum of FPG * person time,sum of person time,mid,,
+Treatment Coverage,Percent,sum of person time on any treatment,sum of person time,high,,
+Multidrug Coverage,Percent,sum of person time on multiple drugs,sum of person time on any treatment,high,,
+FDC Coverage,Percent,sum of person time on FDC,sum of person time on any treatment,high,,
+Population achieving target LDL-c,Percent,sum of person time at/below target LDL-c,sum of person time,high,,
+CV risk score,Number,sum of risk score * person time,sum of person time,low,,
+Proportion of people adherent,Percent,sum of person time adherent,sum of person time,high,,
+Mean SBP,mmHg,sum of SBP * person time,sum of person time,mid,,
+Mean LDL-c level,mmol/ L,sum of LDL-C * person time,sum of person time,high,,
+Incidence of Ischemic Stroke,Rate per 100k,number of transitions from (susceptible_to_ischemic_stroke or post_ischemic_stroke) to acute_ischemic_stroke,sum of person time,high,,
+Incidence of Ischemic Heart Disease,Rate per 100k,number of transitions from (susceptible_to_ihd or post_mi) to acute_mi,sum of person time,high,,
