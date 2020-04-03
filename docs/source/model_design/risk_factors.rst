@@ -206,6 +206,9 @@ in the diagram below:
 
 .. image:: basic_int_diagram.svg
 
+An Example of an Uncomplicated Intermediate
+*******************************************
+
 A (simplified) example that can demonstrate such a causal pathway is the 
 relationship between the exposure of cigarette smoking, which is causally 
 related to the intermediate variable of accumulated tar in lungs, which in 
@@ -226,7 +229,10 @@ Therefore, as we increase intervention coverage, we would exect a decrease in
 population lung cancer rates, as these two variables are located on the same 
 causal pathway. 
 
-However, let's imagine that a brand new hypothetical medication was just 
+An Example of a Complicated Intermediate
+****************************************
+
+Now, let's imagine that a brand new hypothetical medication was just 
 created that dissolves tar in lungs that accumulates due to smoking and is now 
 widely used in some areas. Our causal diagram would now look like this:
 
@@ -268,6 +274,9 @@ medication, applying the data from this new study to this model location would
 be inappropriate. Rather, we should use data that measured the relationship 
 between smoking and lung cancer in a study population with a similar exposure 
 to the medication intermediate variable.
+
+Additional Considerations
+*************************
 
 Another example of when an intermediate variable might interfere with the 
 relationship between an exposure and outcome is when a given intervention 
