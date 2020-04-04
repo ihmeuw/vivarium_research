@@ -146,37 +146,41 @@ Effect Size
 
 In this model, the vitamin A fortification intervention affects the 
 **prevalence of vitamin A deficiency**. The effect size for this intervention 
-was obtained from a Cochrane review performed by Hombali et al. (2019) on the 
+was obtained from a Cochrane review performed by [Hombali-et-al-2019]_ on the 
 fortification of staple foods with vitamin A for vitamin A deficiency. 
 Notably, the relative risk for vitamin A foritification on vitamin A 
 deficiency from this review only included data from two randomized controlled 
 trials and the authors of the review assessed the certainty of the evidence to 
-be "very low" (Hombali et al. 2019). The relative risk of vitamin A deficiency 
+be "very low" [Hombali-et-al-2019]_. The relative risk of vitamin A deficiency 
 prevalence among an intervention population exposed to vitamin A fortified 
 staple foods relative to a control population given the same staple foods not 
 fortified with vitamin A from this review was **0.45 (95% CI: 0.19 - 1.05)**.
 
 Therefore, we conducted a supplementary analysis of the effect of the 
 intervention by pooling the RCT studies from the Cochrane review with studies 
-included in the systematic review and meta-analysis performed by Keats et al. 
-(2019). Notably, none of the studies identified from the Keats et al. (2019) 
-review *directly* reported measures of relative risk of vitamin A deficiency 
-prevalence among the population exposed to vitamin A fortification relative to 
-the population unexposed to vitamin A fortification. Therefore, we manually 
-calculated this value based on data reported in study tables and figures, 
-which required visual approximations of certain values. Notably, when this 
-supplementary meta-analysis was performed, the resulting relative risk was 
-calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when limited to sugar 
-and oil vehicles for the vitamin A forticant, the relative risk was **0.36 
-(95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses are represented 
-in the forest plots below. 
+included in the systematic review and meta-analysis performed by 
+[Keats-et-al-2019]_. Notably, none of the studies identified from the 
+[Keats-et-al-2019]_ review *directly* reported measures of relative risk of 
+vitamin A deficiency prevalence among the population exposed to vitamin A 
+fortification relative to the population unexposed to vitamin A fortification. 
+Therefore, we manually calculated this value based on data reported in study 
+tables and figures, which required visual approximations of certain values. 
+Notably, when this supplementary meta-analysis was performed, the resulting 
+relative risk was calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when 
+limited to sugar and oil vehicles for the vitamin A forticant, the relative 
+risk was **0.36 (95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses 
+are represented in the forest plots below. 
 
 .. image:: vitamin_a_meta.png
 
 .. image:: vitamin_a_meta_sugar_oil.png
 
+.. note::
+
+  There is a spreadsheet of study summaries of the individual studies as well as PDFs of each study included in these meta-analyses hosted on the simulation science research team google drive
+
 While the supplementary meta-analysis shown above contains more studies and 
-data than the Cochrane review, it relies on results that were not directly 
+data than the [Hombali-et-al-2019]_ Cochrane review, it relies on results that were not directly 
 reported in the individual studies (and in some cases visaully estimated 
 values). **Therefore, we will conservatively use the results from the Cochrane 
 review, with increased certainty in the results based on the confirmatory 
@@ -188,28 +192,34 @@ Guatemala, South Africa, Nicaragua, Indonesia, and the Phillipines. Therefore,
 we concluded that it is **reasonable to assume generalizability of these 
 results to our model populations.**
 
-Regarding effect sizes in young age groups, Sandjaja et al. (2015) reported 
+Regarding effect sizes in young age groups, [Sandjaja-et-al-2015]_ reported 
 that population vitamin A fortification improved serum retinol concentrations 
 among infants aged 6-11 months. Therefore, **we assumed that the effect size 
 from the Cochrane review applies to all age groups above six months of age.** 
 
 	Notably, the effect can occur either through the direct consumption of 
 	vitamin A fortified foods or through the consumption of breastmilk from 
-	mothers who consume vitamin A fortified foods (Sandjaja et al. 2015; WHO 
-	Guidelines).
+	mothers who consume vitamin A fortified foods [Sandjaja-et-al-2015]_; [WHO-Vitamin-A-Supplementation-Guidelines]_.
 
 For individuals aged between 0 and six months, we made the following 
 assumptions:
 
 	1. Maternal consumption of vitamin A fortified foods has no effect on 
 	infant vitamin A deficiency birth prevalence. This assumption is supported 
-	by studies performed by Dror and Allen (2018).
+  by [Dror-and-Allen-2018]_.
 
 	2. Maternal consumption of vitamin A fortified foods has no effect on 
 	infant vitamin A deficiency from 0 to six months of age. This assumption 
 	is largely supported by the vitamin A *supplementation* literature among 
-	these age groups and is reflected in WHO guidelines (WHO Guideline: 
-	Vitamin A Supplementation in Infants 1-5 Months of Age).
+	these age groups [Imdad-et-al-2016]_ and is reflected in the [WHO-Vitamin-A-Supplementation-Guidelines]_.
+
+.. note:: 
+
+  PAF = 0 for all causes except for vitamin A deficiency paf-of-one cause for 
+  vitamin a deficiency risk factor in the early neonatal and late neonatal age 
+  groups. Implication for this is that excluding these age groups will only 
+  potentially impact the YLDs accumulated during the person-time spent in 
+  these age groups.
 
 Additionally, we made assumptions regarding the response time following the 
 onset of exposure to vitamin A fortification, including:
@@ -220,15 +230,15 @@ onset of exposure to vitamin A fortification, including:
 	the response time to vitamin A fortification, so we used data on the 
 	response time to vitamin D (another fat-soluble vitamin) supplementation 
 	as a proxy. The literature larely indicated that response to vitamin D 
-	supplementation plateaus between 2 and 12 months (Heaney et al. 2008; 
-	Vieth 1999; Taalat et al. 2016; ADDITIONAL). We assumed that the 
+	supplementation plateaus between 2 and 12 months ([Heaney-2008]_, 
+	[Vieth-1999]_, [Talaat-et-al-2016]_). We assumed that the 
 	distribution of response times follows a lognormal distribution with a 
 	median value of five months, a 0.025 percentile of 2 months, and a 0.975 
 	percentile of 12 months.
 
  	2. If an individual was covered by baseline coverage of vitamin A 
  	fotification, we assumed that the individual was covered (via breastmilk 
- 	or direct consumption) for long engough to exhibit a response (at least 12 
+ 	or direct consumption) for long enough to exhibit a response (at least 12 
  	months).
 
  .. todo::
@@ -481,11 +491,12 @@ foods.
 **Hemoglobin Level**
 
 The effect of iron fortified food consumption on children under 7 years of age 
-was obtained from the Keats et al. systematic review. However, the effect size 
-in this review was reported in standardized mean differences rather than in 
-units of hemoglobin concentration directly. Therefore, we performed a separate 
-meta-analysis of the results included in the Keats et al. review to obtain shifts 
-in hemoglobin concentration. This meta-analysis is shown below.
+was obtained from the [Keats-et-al-2019]_ systematic review. However, the 
+effect size in this review was reported in standardized mean differences 
+rather than in units of hemoglobin concentration directly. Therefore, we 
+performed a separate meta-analysis of the results included in the 
+[Keats-et-al-2019]_ review to obtain shifts in hemoglobin concentration. This 
+meta-analysis is shown below.
 
 .. image:: iron_meta.png
 
@@ -506,8 +517,9 @@ iron fortification of staple foods.
 	hemoglobin levels.
 
 To model the uncertainty in the estimate, the above mean difference (MD) 
-should be drawn from a normal distribution with mean = 3.0, 2.5\ :superscript:`
-th`-percentile = -0.2, and 97.5\ :superscript:`th`-percentile = 6.1. This 
+should be drawn from a normal distribution with mean = 3.0, 
+2.5\ :superscript:`th`-percentile = -0.2, and 
+97.5\ :superscript:`th`-percentile = 6.1. This 
 distbibution can be created using `SciPy's norm function
 <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
 as follows:
@@ -1022,10 +1034,11 @@ a risk ratio (RR), where we think of "no fortification" as a risk factor:
   \approx 1.71\: (1.43, 2.04).
 
 We are estimating this effect size as the reciprocal of the odds ratio (OR) of
-:math:`0.59\: (0.49, 0.70)` found in the Keats review; this odds ratio is the
-ratio of the odds of being born with NTDs in the fortified population to the
-odds of being born with NTDs in the unfortified population. Since the prevalence
-of NTDs is small, the odds ratio is very close to the risk ratio.
+:math:`0.59\: (0.49, 0.70)` found in the [Keats-et-al-2019]_ review; this odds 
+ratio is the ratio of the odds of being born with NTDs in the fortified 
+population to the odds of being born with NTDs in the unfortified population. 
+Since the prevalence of NTDs is small, the odds ratio is very close to the 
+risk ratio.
 
 To model the uncertainty in the estimate, the above RR should be drawn from a
 `lognormal <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
@@ -1141,3 +1154,78 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
+
+References
+----------
+
+.. [Dror-and-Allen-2018]
+
+  View `Dror and Allen 2018`_
+
+    Dror, D. K., & Allen, L. H. (2018). Retinol-to-fat ratio and retinol concentration in human milk show similar time trends and associations with maternal factors at the population level: a systematic review and meta-analysis. Advances in Nutrition, 9(suppl_1), 332S-346S.
+
+.. _`Dror and Allen 2018`: https://doi.org/10.1093/advances/nmy021
+
+.. [Keats-et-al-2019]
+
+  View `Keats et al. 2019`_
+
+    Keats, E. C., Neufeld, L. M., Garrett, G. S., Mbuya, M. N., & Bhutta, Z. A. (2019). Improved micronutrient status and health outcomes in low-and middle-income countries following large-scale fortification: evidence from a systematic review and meta-analysis. The American journal of clinical nutrition, 109(6), 1696-1708.
+
+.. _`Keats et al. 2019`: https://doi.org/10.1093/ajcn/nqz023
+
+.. [Heaney-2008]
+
+  View `Heaney 2008`_
+
+    Heaney R. P. (2008). Vitamin D in health and disease. Clinical journal of the American Society of Nephrology : CJASN, 3(5), 1535–1541. https://doi.org/10.2215/CJN.01160308
+
+.. _`Heaney 2008`: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4571146/
+
+.. [Hombali-et-al-2019]
+
+  View `Hombali et al. 2019`_
+
+    Hombali  AS, Solon  JA, Venkatesh  BT, Nair  NS, Peña‐Rosas  JP. Fortification of staple foods with vitamin A for vitamin A deficiency. Cochrane Database of Systematic Reviews 2019, Issue 5. Art. No.: CD010068. DOI: 10.1002/14651858.CD010068.pub2.
+
+.. _`Hombali et al. 2019`: https://doi.org/10.1002/14651858.CD010068.pub2
+
+.. [Imdad-et-al-2016]
+
+  View `Imdad et al. 2016`_
+
+    Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.  
+
+.. _`Imdad et al. 2016`: https://doi.org/10.1002/14651858.CD007480.pub3
+
+.. [Sandjaja-et-al-2015]
+
+  View `Sandjaja et al. 2015`_
+
+    Sandjaja, Jus’at, I., Jahari, A. B., Htet, M. K., Tilden, R. L., Soekarjo, D., Utomo, B., ... & Korenromp, E. L. (2015). Vitamin A-fortified cooking oil reduces vitamin A deficiency in infants, young children and women: results from a programme evaluation in Indonesia. Public health nutrition, 18(14), 2511-2522.
+
+.. _`Sandjaja et al. 2015`: https://doi.org/10.1017/S136898001400322X
+
+.. [Talaat-et-al-2016]
+
+  View `Talaat et al. 2016`_
+
+    Talaat IM, Kamal NM, Alghamdi HA, Alharthi AA, Alshahrani MA. A randomized clinical trial comparing 3 different replacement regimens of vitamin D in clinically asymptomatic pediatrics and adolescents with vitamin D insufficiency. Ital J Pediatr. 2016;42(1):106. Published 2016 Dec 7. doi:10.1186/s13052-016-0314-z
+
+.. _`Talaat et al. 2016`: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5142392/
+
+.. [Vieth-1999]
+
+  View `Vieth 1999`_
+
+    Vieth, R. (1999). Vitamin D supplementation, 25-hydroxyvitamin D concentrations, and safety. The American journal of clinical nutrition, 69(5), 842-856.
+
+.. _`Vieth 1999`: https://www.ncbi.nlm.nih.gov/pubmed/10232622
+
+.. [WHO-Vitamin-A-Supplementation-Guidelines]
+
+  View `WHO Vitamin A Supplementation Guidelines in Infants 1-5 Months of Age`_
+
+    World Health Organization (2011). Vitamin A supplementation for infants 1–5 months of age: Guideline. ISBN: 978-92-4-150181-1
+
+.. _`WHO Vitamin A Supplementation Guidelines in Infants 1-5 Months of Age`: https://www.who.int/nutrition/publications/micronutrients/guidelines/vas_infants_1-5/en/
