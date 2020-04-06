@@ -210,9 +210,8 @@ An Example of an Uncomplicated Intermediate
 *******************************************
 
 A (simplified) example that can demonstrate such a causal pathway is the 
-relationship between the exposure of cigarette smoking, which is causally 
-related to the intermediate variable of accumulated tar in lungs, which in 
-turn is causally related to lung cancer (note: for the purposes of this 
+relationship between the exposure of cigarette smoking, which causes the intermediate variable of accumulated tar in lungs, which in 
+turn causes lung cancer (note: for the purposes of this 
 example, assume that there is no direct causal relationship between cigarette 
 smoking and lung cancer other than through the intermediate variable of 
 accumulated tar in lungs).
@@ -225,7 +224,7 @@ would look like this:
 
 .. image:: smoking_intervention_example.svg
 
-Therefore, as we increase intervention coverage, we would exect a decrease in 
+Therefore, as we increase intervention coverage (assuming the intervention is effective), we would expect a decrease in 
 population lung cancer rates, as these two variables are located on the same 
 causal pathway. 
 
@@ -241,25 +240,26 @@ widely used in some areas. Our causal diagram would now look like this:
 Quickly, we can now see that the relationship we previously knew between 
 smoking and lung cancer is now impacted by the use of this hypothetical 
 medication that affects the intermediate variable between smoking and lung 
-cancer. Therefore, now we can only expect our intervention to decrease 
-population lung cancer rates only in areas that do not widely use this 
-medication.
+cancer. Therefore, we can only expect lung cancer rates to decrease *by 
+the expected amount as a result of our marketing intervention* in areas 
+that do not widely use this medication.
 
 Notably, intermediate variables may be relevant in situations in which the 
 variable located most proximal to the outcome in the causal pathway is 
 difficult to measure. For instance, measuring the amount of tar in a person's 
 lungs is an invasive procedure; measuring the amount of cigarettes a person 
 smokes is much easier in comparison. Therefore, data availability may dictate 
-that we model cigarette smoking rather than lung tar. 
+that we model cigarette smoking rather than lung tar. Such variables are often 
+referred to as **proxy variables** (variables that are not directly relevant, 
+but serve in place of an unobservable or immeasurable relevant variable).
 
-  This may be a reasonable approach, given that the intermediate variable 
-  *does not* interfere with the relationship between the exposure and outcome 
-  for the given model population (little or no use of the medication that 
-  removes tar from lung). However, if there *is* interference by the 
-  intermediate variable on the relationship between the exposure and outcome 
-  (significant use of the medication), then the previously measured 
-  relationship between smoking and lung cancer will not apply to this 
-  population in the same way.
+  Using cigarette smoking as a proxy variable for lung tar may be a reasonable 
+  approach given that there is no interference on the intermediate variable of 
+  lung tar by another exogenous variable (i.e. the medication). However, if 
+  there *is* interference on the intermediate variable in the relationship 
+  between the exposure and outcome (i.e. significant use of the medication), 
+  then the previously measured relationship between smoking and lung cancer 
+  will not apply to this population in the same way.
 
 Now, let's say that some time has gone by and now this medication has become 
 quite common. A new study measured the relationship between smoking and lung 
@@ -285,6 +285,17 @@ outcome), but the prevalence of that intermediate variable in a specific
 location is already zero and therefore cannot be decreased any further. The 
 opposite example of an intervention that *increases* the prevalence of an 
 intermediate variable that is already 100% prevalent also holds true.
+
+	For instance, imagine the example of folic acid supplementation 
+	(exposure), which *decreases* folic acid deficiency (intermediate), which
+	causes neural tube birth defects (outcome). Notably, neural tube birth 
+	defects are also caused by exogenous variables such as maternal diabetes. 
+	Given that this causal pathway is true, we would expect an increase in 
+	exposure to folic acid supplementation to decrease neural tube defects. 
+	However, the maximum effect of increasing exposure to folic acid 
+	supplementation is dependent on the prevalence of folic acid deficiency in 
+	the population. Notably, if folic acid deficiency is zero, the effect of 
+	increasing folic acid supplementation exposure will also be zero.
 
 The impact of interference by intermediate variables between a given exposure 
 and outcome should be carefully considered when designing simulation models. 
