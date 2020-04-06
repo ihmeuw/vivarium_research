@@ -114,7 +114,8 @@ PAF= :math:`\frac{P_{exposure_{baseline}}(RR-1)}{1+P_{exposure_{baseline}}(RR-1)
 
 .. todo::
 
-   reference Darrow and Steenland 2011
+   reference Darrow and Steenland. Confounding and bias in the attributable fraction. *Epidemiology*. 2011 Jan;22(1):53-8. doi: 10.1097/EDE.0b013e3181fce49b.
+
 
 risk in (1-:math:`C_{vita}`), exposed group: :math:`ϴ_{1}= ϴ_{GBD}*(1-PAF)*RR` … equation 1
 
