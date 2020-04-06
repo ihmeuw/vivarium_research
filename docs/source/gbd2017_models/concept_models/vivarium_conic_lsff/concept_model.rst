@@ -83,6 +83,11 @@ Risk-Outcome Relationships
 Coverage Gap Framework
 ++++++++++++++++++++++
 
+Effect size stratification for baseline population
+--------------------------------------------------
+
+From GBD we obtain mean population values for prevalence of vitamin A deficiency, birth prevalence of neural tube defects, and mean haemoglobin levels. Because we are interested in the effect of fortification and there exists baseline coverage of fortification, we must first stratify our population into those who were covered vs not covered by the forticant of interest. We then need to calculate the risk (prevalence) of vitamin A deficiency, risk (birth prevalence) of neural tube defects, and mean haemoglobin levels by coverage strata. 
+
 This method applies to exposures with dichomotous outcomes such as Vitamin A deficiency or neural tube defects:
 
 We always define the exposure as bad to match GBD 2017 definitions, so relative risks are always >1 
