@@ -51,22 +51,33 @@ Theoretical Minimum Risk Exposure Level/Distribution (TMREL/D)
 Measures of occurence
 +++++++++++++++++++++
 
-This is a recap: Epidemiology is the study of the distribution and determinants of disease frequency in human populations. Simply put, it is the study of the *occurence* of illness. Measures of disease frequency are tools to describe how common an illness is (or outcome of an event) with reference to the size of the population at risk. They are used to count cases, in relation to a population and a measure of time. Outcomes can be infection, disease, disability, death, other risk-exposures, recovery or usage of health care. 
+This is a recap: Epidemiology is the study of the distribution and determinants of disease frequency in human populations. Simply put, it is the study of the *occurence* of illness. Measures of disease frequency are tools to describe how common an illness is (or outcome of an event) with reference to the size of the population at risk. They are used to count cases, in relation to a population and to a measure of time. Outcomes can be infection, disease, disability, death, other risk-exposures, recovery or usage of health care. 
 
-There are two main measures of disease occurence/frequency: prevalence and incidence. Incidence quantifies the occurence of new cases of disease whereas prevalence, a measure of status rather than newly occuring disease, quantifies existing cases. New cases are called incident cases and existing cases are called prevalent cases. 
+There are two main measures of disease occurence/frequency: **prevalence** and **incidence**. Incidence quantifies the occurence of new cases of disease whereas prevalence, a measure of status rather than newly occuring disease, quantifies existing cases. New cases are called **incident cases** and existing cases are called **prevalent cases**. 
+
+.. todo:: 
+  link to the other doc on incidence and prevalence?
 
 Example: 
-1. Measure of incidence: 124.2 out of 100,000 women developed breast cancer in the USA in 2016.
-2. Measure of incidence: A study of 3000 children in selected rural areas of Ethiopia looked at the levels of disease and death caused by diarrhoea. It found 4 deaths of diarrhoea per 1,000 children per year. The same study found 360 episodes of diarrhoea per 100 children per year.
-3. Measure of prevalence: 20.7% of women attending antenatal care at rural clinics Siaya county, western Kenya were HIV positive in 2015
+
+  1. Measure of incidence: 124.2 out of 100,000 women developed breast cancer in the USA in 2016.
+  2. Measure of incidence: A study of 3000 children in selected rural areas of Ethiopia looked at the levels of disease and death caused by diarrhoea. It found 4 deaths of diarrhoea per 1,000 children per year. The same study found 360 episodes of diarrhoea per 100 children per year.
+  3. Measure of prevalence: 20.7% of women attending antenatal care at rural clinics Siaya county, western Kenya were HIV positive in 2015
 
 Incidence
 ^^^^^^^^^
-Incidence focuses on new cases. There are two measures of incidence: risk and rate. 
+Incidence focuses on new cases. There are two measures of incidence: **risk** and **rate**. 
 
-*Incidence risk*, also called *incidence proportion*, *attack rate*, or *cumulative incidence* is the probability of occurence of disease among a disease free, at risk, population during a specified time period. It is the number of new cases of disease during a defined period of time divided by the population at the start of the time period. It is not interpretable without specification of the time period to which it applies. The survival proportion is 1-incidence proportion.      
+*Incidence risk*, also called *incidence proportion*, *attack rate*, or *cumulative incidence* is the probability of occurence of disease among a disease free, at risk, population during a specified time period. It is the number of new cases of disease during a defined period of time divided by the population at the start of the time period. It is not interpretable without specification of the time period to which it applies. The survival proportion is 1 minus incidence proportion.      
 
-TO DO: ADD FORMULAS FOR EVERYTHING                                           
++------------------------+-----------------------------------------------+
+|   Measure              | Math                                          |
++------------------------+-----------------------------------------------+
+|| Incidence risk        |:math:`\frac{\text{new cases of disease during |
+|| Incidence proportion  |time period}}{\text{population at the start of |
+|| Attack rate           |the time period}}`                             |
+|| Cumulative incidence  |                                               |
++------------------------+-----------------------------------------------+
 
 *Incidence rate* has the same numerator as incidence risk, that is the appearance of new cases. In contrast to risks, which relate the number of new cases to the size of the population at risk in the beginning of the period studied, rates relate the number of new cases to the person-time (Y) at risk, a measure that takes into account changes in the size of the population at risk during the follow-up period. The rate takes into account the fact that some people who start at risk do not remain at risk during the whole period, because they develop the disease, or die, or leave the population by migrating, refusing to continue to participate in the study etc. Others may join the population at risk after the beginning of the period, through birth, migration into the area, recruitment into the study, etc. The denominator in a rate (Y) is thus the sum of the time each person in the study population remained at risk during the study period. This is called the person-time experience at risk, and is expressed in units of person-time: person-years at risk, person-days at risk, baby-weeks at risk etc.
 
@@ -108,7 +119,14 @@ TO DO: write down numerator and denominator
 
 For example (hypothetical- cite my brain), a study was conducted to measure the effect of vitamin A food fortification on incidence of measles in children under 5. GBD defines risk factors to be malignant. Hence, the exposed group (exposed to poor nutrition) are those who are not covered by food fortification while those unexposed are covered by food fortification. The table below shows the results: 
 
-.. image:: rate_2x2table.svg
++----------+----------+--------------+-----------------+
+|          | Incident | Person-years | Rate per 100,000|
+|          | cases    | at risk      | person-years    |
++----------+----------+--------------+-----------------+
+|Exposed   |          |              |                 |
++----------+----------+--------------+-----------------+
+|Unexposed |          |              |                 |
++----------+----------+--------------+-----------------+
 
 rate1 is the rate disease in the exposed group (no fortified foods)
 rate0 is the rate of disease in the unexposed group (with fortified foods)
@@ -118,7 +136,14 @@ This is interpreted as: 'children who do not eat foos fortified by vitamin A foo
 
 Alternatively, the risk is computed as follows:
 
-.. image:: risk_2x2table.svg
++----------+----------+----------+----------+
+|          |          |          |          |
+|          |          |          |          |
++----------+----------+----------+----------+
+|Exposed   |          |          |          |
++----------+----------+----------+----------+
+|Unexposed |          |          |          |
++----------+----------+----------+----------+
 
 risk1 is the risk of having measles in the exposed: a/(a+c) 
 risk0 is the risk of having measles in the unexposed: b/(b+d)
