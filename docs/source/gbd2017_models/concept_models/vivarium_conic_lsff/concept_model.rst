@@ -602,7 +602,7 @@ accordingly. See the table below:
   NaFeEDTA per kilogram of flour. While this was not explicitly stated on the 
   [Global-Fortification-Data-Exchange]_, the available literature suggests 
   that this is the measurement convention and is consistent with typical doses 
-  of iron via fortification using NaFeEDTA [Teshome-et-al-2017]_.
+  of iron via fortification using NaFeEDTA [Hurrell-et-al-2010]_.
 
 [1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
@@ -1236,10 +1236,10 @@ References
 
   Will need to resolve merge conflict here
 
-.. [Teshome-et-al-2017]
+.. [Hurrell-et-al-2010]
 
-  View `Teshome et al. 2017`_
+  View `Hurrell et al. 2010`_
 
-    Teshome, E.M., Andang’o, P.E.A., Osoti, V. et al. Daily home fortification with iron as ferrous fumarate versus NaFeEDTA: a randomised, placebo-controlled, non-inferiority trial in Kenyan children. BMC Med 15, 89 (2017). https://doi.org/10.1186/s12916-017-0839-z
+    Hurrell, R., Ranum, P., de Pee, S., Biebinger, R., Hulthen, L., Johnson, Q., & Lynch, S. (2010). Revised Recommendations for Iron Fortification of Wheat Flour and an Evaluation of the Expected Impact of Current National Wheat Flour Fortification Programs. Food and Nutrition Bulletin, 31(1_suppl1), S7–S21. https://doi.org/10.1177/15648265100311S102
 
-.. _`Teshome et al. 2017`: https://doi.org/10.1186/s12916-017-0839-z
+.. _`Hurrell et al. 2010`: https://doi.org/10.1177/15648265100311S102
