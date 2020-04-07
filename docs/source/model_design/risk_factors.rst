@@ -277,8 +277,17 @@ Here, we see that the risk attributable to our exposure is higher in our older g
 
 Finally, we emphasize that when dealing with a confounding variable, in order to best understand the effects of our exposure, we seek to *remove* the influence of the confounder. By contrast, if variable B is an effect modifier for exposure A, then this interaction is an important property of the relationship between A and B, and their influence on the disease. Rather than remove, we thus try to *capture and describe* effect modification in the greatest detail possible. (Cite Nicole's textbook)
 
-.. todo::
-  Add section on GBD. They briefly discussed mediation in the risk factors training this year; no reference to effect modification. I would guess that very few GBD risk factors take this into account. Main challenge is that risk factors are modeled by different teams that are often siloed: if a risk factor on one team is an effect modifier for a risk factor on another team, it's difficult for them to coordinate workflows. Need to do some digging.
+
+**Effect modification in GBD**
+
+GBD models estimate globally, and almost all of GBD's relative risks are used universally across location, sex, age, and time. This means that GBD generally assumes that the study populations from which they calculate their relative risks are applicable universally, without adjustments for the different sexes, locations, or other potential effect modifiers. When using GBD risk factors in a Vivarium model, it is thus important to know what studies GBD used for their relative risk calculation. From these studies it is necessary to consider:
+
+  - what the prevalence of various effect modifiers in these populations might have been
+
+  - if we believe these are similar enough to the populations we are modeling to use GBD effect sizes
+
+In the case that GBD effect sizes are *not* generalizeable and we are unable to find studies that supply relative risks and effect sizes stratified by the appropriate effect modifiers, it is also necessary to state the uncertainty that will derive from this lack of information.
+
 
 Mediation
 """""""""
