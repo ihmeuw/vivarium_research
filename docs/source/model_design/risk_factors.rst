@@ -201,8 +201,208 @@ Confounding
 Intermediates
 """""""""""""
 
+An intermediate variable as discussed in this section is defined as a variable 
+between an exposure and outcome in a sequential causal chain, as demonstrated 
+in the diagram below:
+
+.. image:: basic_int_diagram.svg
+
+An Example of an Uncomplicated Intermediate
+*******************************************
+
+A (simplified) example that can demonstrate such a causal pathway is the 
+relationship between the exposure of cigarette smoking, which causes the intermediate variable of accumulated tar in lungs, which in 
+turn causes lung cancer (note: for the purposes of this 
+example, assume that there is no direct causal relationship between cigarette 
+smoking and lung cancer other than through the intermediate variable of 
+accumulated tar in lungs).
+
+.. image:: smoking_intermediate_example.svg
+
+Now, let's say that we plan to enact an advertising campaign to reduce smoking 
+in hopes of reducing population lung cancer rates. Our expected causal pathway 
+would look like this:
+
+.. image:: smoking_intervention_example.svg
+
+Therefore, as we increase intervention coverage (assuming the intervention is effective), we would expect a decrease in 
+population lung cancer rates, as these two variables are located on the same 
+causal pathway. 
+
+An Example of a Complicated Intermediate
+****************************************
+
+Now, let's imagine that a brand new hypothetical medication was just 
+created that dissolves tar in lungs that accumulates due to smoking and is now 
+widely used in some areas. Our causal diagram would now look like this:
+
+.. image:: medication_example.svg
+
+Quickly, we can now see that the relationship we previously knew between 
+smoking and lung cancer is now impacted by the use of this hypothetical 
+medication that affects the intermediate variable between smoking and lung 
+cancer. Therefore, we can only expect lung cancer rates to decrease *by 
+the expected amount as a result of our marketing intervention* in areas 
+that do not widely use this medication.
+
+Notably, intermediate variables may be relevant in situations in which the 
+variable located most proximal to the outcome in the causal pathway is 
+difficult to measure. For instance, measuring the amount of tar in a person's 
+lungs is an invasive procedure; measuring the amount of cigarettes a person 
+smokes is much easier in comparison. Therefore, data availability may dictate 
+that we model cigarette smoking rather than lung tar. Such variables are often 
+referred to as **proxy variables** (variables that are not directly relevant, 
+but serve in place of an unobservable or immeasurable relevant variable).
+
+  Using cigarette smoking as a proxy variable for lung tar may be a reasonable 
+  approach given that there is no interference on the intermediate variable of 
+  lung tar by another exogenous variable (i.e. the medication). However, if 
+  there *is* interference on the intermediate variable in the relationship 
+  between the exposure and outcome (i.e. significant use of the medication), 
+  then the previously measured relationship between smoking and lung cancer 
+  will not apply to this population in the same way.
+
+Now, let's say that some time has gone by and now this medication has become 
+quite common. A new study measured the relationship between smoking and lung 
+cancer in a study population in which 50% of smokers used the medication. Now, 
+let's say that we are interested in using the data from that study on the 
+relationship between smoking and lung cancer in a simulation for a different 
+location. However, in the location we wish to model, the medication is not 
+approved at a national level and therefore use of the medication is close to 
+zero. However, since we know that the relationship between smoking and lung 
+cancer as we've defined it in this example is affected by the use of this 
+medication, applying the data from this new study to this model location would 
+be inappropriate. Rather, we should use data that measured the relationship 
+between smoking and lung cancer in a study population with a similar exposure 
+to the exogenous variable (medication) on the intermediate variable.
+
+Additional Considerations
+*************************
+
+Another example of when an intermediate variable might interfere with the 
+relationship between an exposure and outcome is when a given intervention 
+*decreases* the prevalence of an intermediate variable (that is related to an 
+outcome), but the prevalence of that intermediate variable in a specific 
+location is already zero and therefore cannot be decreased any further. The 
+opposite example of an intervention that *increases* the prevalence of an 
+intermediate variable that is already 100% prevalent also holds true.
+
+	For instance, imagine the example of folic acid supplementation 
+	(exposure), which *decreases* folic acid deficiency (intermediate), which
+	causes neural tube birth defects (outcome). Notably, neural tube birth 
+	defects are also caused through other causal pathways such as maternal diabetes. 
+	Given that the causal pathway from folic acid fortification-->folic acid deficiency-->neural tube defects is true, we would expect an increase in 
+	exposure to folic acid supplementation to decrease neural tube defects. 
+	However, the maximum effect of increasing exposure to folic acid 
+	supplementation is dependent on the prevalence of the intermediary, folic acid deficiency, in 
+	the population. Notably, if folic acid deficiency is zero,
+	increasing folic acid supplementation exposure will have no effect on neural tube defects (there is no folic acid deficiency in the population!).  We will need to act on other exposures to reduce neural tube defects in this population, assuming there are other causal pathways for neural tube defects (eg. maternal diabetes) 
+
+The impact of interference by intermediate variables between a given exposure 
+and outcome should be carefully considered when designing simulation models. 
+Particularly, special consideration should be given to how a relationship 
+between an exposure and outcome may differ in various populations based on the 
+differing levels of the intermediate variables.
+
+Notably, when the exact mechanism that drives the effect of an exposure on an 
+outcome is not well understood, it is possible that there may be *unknown* or 
+*unmeasured* intermediate variables on the causal pathway between the exposure 
+and outcome. In this case, it is important to carefully consider the 
+*generalizability* of data sources that measure the relationship between the 
+exposure and outcome to the model population to which it will be applied; or 
+in other words, consider key similarities and differences between between the 
+study and model populations that may or may not cause the study data to 
+accurately reflect the situation in the model population. Additionally, 
+limitations of the model should be noted when appropriate.
+
 Effect Modification
 """""""""""""""""""
+
+A factor :math:`M` is said to be an effect modifier if the effect of the 
+exposure :math:`E` on disease :math:`D` varies for different values of 
+:math:`M`. Effect modification is sometimes also called *interaction*. We 
+illustrate this relationship below.
+
+.. figure:: effect_mod_arrow_diagram.svg
+  :align: center
+
+If :math:`M` is some dichotomous effect modifier, then :math:`B\neq C`, and :math:`A` does not encompass the entire picture of how :math:`E` acts on :math:`O`. Rather, :math:`A` was calculated from some population; for the sake of example, let's say that :math:`M=1` in :math:`\frac{1}{10}` of this population. Then we see that :math:`A` is tells us about the effect of :math:`E` on a new population if and only if the new population also has the same prevalence of :math:`M`. If we wish to understand how :math:`E` operates in some population where :math:`M` is prevalent in :math:`\frac{1}{3}` of the population, then we would need to know :math:`B` and :math:`C`.
+
+Observe this is in direct contrast to confounding, in which the exposure and 
+confounding factor *must not depend on one another* to determine the risk.
+
+We note that effect modification is a statistical phenomenon which may or may 
+not reflect a biological phenomenon. However, in the case of epidemiological 
+modeling, following the Bradford-Hill criteria of *plausibility*, we would hope 
+to be able to explain the effect modification when implementing an effect 
+modifier in a model.
+
+Consider asbestos dust as an exposure for lung cancer. Say that in a cohort 
+study, we find the following:
+
+.. list-table:: Death rate per 100,000py: asbestos exposure alone
+  :widths: 10 10
+  :header-rows: 0
+  :stub-columns: 1
+
+  * - No Asbestos exposure
+    - 66.95
+  * - Asbestos exposure
+    - 470.85
+
+We might now conclude that the effect of asbestos on lung cancer has a rate 
+ratio for :math:`470.85/66.95\approx 7.0`. However, when we stratify by 
+smoking, we find the following:
+
+.. list-table:: Death rates per 100,000py: asbestos exposure stratified by smoking status
+  :widths: 10 10 10
+  :header-rows: 1
+  :stub-columns: 1
+
+  * - 
+    - Non smokers
+    - Smokers 
+  * - No Asbestos exposure
+    - 11.3
+    - 122.6
+  * - Asbestos exposure
+    - 40.1
+    - 901.6
+
+This shows us that the rate ratios for the effect of asbestos on lung cancer 
+vary according to smoking status: the rate ratio is :math:`40.1/11.3\approx 3.5` 
+for non-smokers and :math:`901.6/122.6\approx 7.3` for smokers.
+
+.. todo:: add citation to Nicole's textbook. Graphs below were reproduced from http://osctr.ouhsc.edu/sites/default/files/2020-02/Module8PartVNotes.pdf
+
+We include below a graphical representation of a risk outcome stratified by sex, and by age. On the y-axis we have incidence of some outcome such as high blood pressure, and on the x-axis we have an exposure such as obesity.
+
+.. todo::
+   Format citations.
+
+.. image:: without_em_illustration.svg
+  :width: 400
+
+Observe that the difference in incidence of high blood pressure, between people from Town A versus Town B, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups, within this population, is not modified by town of residence.
+
+.. figure:: with_em_illustration.svg
+  :width: 400
+
+Here, we see that the risk attributable to our exposure is higher in our older group than in our younger group; thus age is an effect modifier for this risk outcome.
+
+Finally, we emphasize that when dealing with a confounding variable, in order to best understand the effects of our exposure, we seek to *remove* the influence of the confounder. By contrast, if variable B is an effect modifier for exposure A, then this interaction is an important property of the relationship between A and B, and their influence on the disease. Rather than remove, we thus try to *capture and describe* effect modification in the greatest detail possible. (Cite Nicole's textbook)
+
+
+**Effect modification in GBD**
+
+GBD models estimate globally, and almost all of GBD's relative risks are used universally across location, sex, age, and time. This means that GBD generally assumes that the study populations from which they calculate their relative risks are applicable universally, without adjustments for the different sexes, locations, or other potential effect modifiers. When using GBD risk factors in a Vivarium model, it is thus important to know what studies GBD used for their relative risk calculation. From these studies it is necessary to consider:
+
+  - what the prevalence of various effect modifiers in these populations might have been
+
+  - if we believe these are similar enough to the populations we are modeling to use GBD effect sizes
+
+In the case that GBD effect sizes are *not* generalizeable and we are unable to find studies that supply relative risks and effect sizes stratified by the appropriate effect modifiers, it is also necessary to state the uncertainty that will derive from this lack of information.
+
 
 Mediation
 """""""""

@@ -130,6 +130,46 @@ Risk-Outcome Relationships
 Coverage Gap Framework
 ++++++++++++++++++++++
 
+Effect size stratification for baseline population
+--------------------------------------------------
+
+From GBD we obtain mean population values for prevalence of vitamin A deficiency, birth prevalence of neural tube defects, and mean haemoglobin levels. Because we are interested in the effect of fortification and there exists baseline coverage of fortification, we must first stratify our population into those who were covered vs not covered by the forticant of interest. We then need to calculate the risk (prevalence) of vitamin A deficiency, risk (birth prevalence) of neural tube defects, and mean haemoglobin levels by coverage strata. 
+
+This method applies to exposures with dichomotous outcomes such as Vitamin A deficiency or neural tube defects:
+
+We always define the exposure as bad to match GBD 2017 definitions, so relative risks are always >1 
+
+:math:`C_{vita_{baseline}}`: coverage of vitamin A fortified food in the population from the literature that is applied to our sim population at baseline
+
+:math:`P_{exposure_{baseline}}`: 1-:math:`C_{vita_{baseline}}` prevalence of exposure to unfortified foods in our sim population at baseline
+
+:math:`ϴ_{1}`: risk of vitamin A deficiency among those exposed to unfortified foods (bad food) in our sim population
+
+:math:`ϴ_{0}`: risk of vitamin A deficiency among those unexposed to unfortified foods (eats fortified foods) in our sim population
+
+:math:`ϴ_{GBD}`: risk of vitamin A deficiency in GBD population for age, sex, location, year
+
+RR= reciprocal of a <1 effect size (risk ratios of prevalence) = :math:`\frac{1}{\text{0.45(95%CI: 0.19-1.05)}}`
+
+RR= :math:`\frac{ϴ_{1}}{ϴ_{0}}` (we assume this to also be true in our sim population)
+
+PAF= :math:`\frac{P_{exposure_{baseline}}(RR-1)}{1+P_{exposure_{baseline}}(RR-1)}`
+
+1-PAF= :math:`\frac{1}{1+P_{exposure_{baseline}}(RR-1)}`
+
+*Important assumptions and limitations* This equation for PAF is valid under the assumption of no confounding. An alternate equation for PAF should be used when to get an unbiased PAF in the presence of confounding; however, we will need the attributable fraction in the exposed which we do not readily have. Hence this is a limitation. The RRs we use, and the exposure % we use are approximating the PAFs. We make the assumption that the RRs pulled from literature is generalizable. 
+
+.. todo::
+
+   reference Darrow and Steenland. Confounding and bias in the attributable fraction. *Epidemiology*. 2011 Jan;22(1):53-8. doi: 10.1097/EDE.0b013e3181fce49b.
+
+
+risk in (1-:math:`C_{vita}`), exposed group: :math:`ϴ_{1}= ϴ_{GBD}*(1-PAF)*RR` … equation 1
+
+risk in (:math:`C_{vita}`), unexposed group: :math:`ϴ_{0}= ϴ_{GBD}*(1-PAF)` … equation 2
+
+**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and shifts the amount of people who receive equation 1 to equation 2. 
+
 Interventions
 +++++++++++++
 
@@ -821,6 +861,81 @@ See below for a visual representation:
 
 	Write this section
 
+Application of Effect to Simulants - Iron
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Hemoglobin Level**
+
+The age- and time-dependent effect of iron fortification on a simulant's 
+hemoglobin level (as documented in the sections above) should be **additively**
+applied to a simulant's hemoglobin level, as sampled as described in the 
+:ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>` 
+given that the simulant's value for *iron_responsive_i* (as described in the 
+:ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>`)
+is equal to 1. The age- and time-dependent intervention effect should be 
+applied *each time* that a simulant's hemoglobin level is sampled. If a 
+simulant's value for *iron_responsive_i* = 0, the effect of the intervention 
+should **not** be applied to that simulant.
+
+.. note::
+
+  See Baseline Calibration section below for special considerations regarding baseline coverage
+
+**Birth Weight**
+
+The time-dependent effect of iron fortification on a simulant's birth weight 
+(as documented in the sections above) should be **additively** applied to a 
+simulant's birth weight after it is sampled as a value *in grams* from the 
+continuous distribution of birth weight from the low birthweight short 
+gestation risk factor. The simulant's birthweight post-application of the 
+effect size will then be used to determine the simulant's LBWSG risk category.
+
+.. note::
+
+  See Baseline Calibration section below for special considerations regarding baseline coverage
+
+.. todo:: Reference the LBWSG risk factor page when complete
+
+**Baseline Calibration**
+
+- **C_forticant_base** = coverage of forticant in the population at baseline
+
+- **P_exp_base**  = (1 - C_forticant_base), prevalence of exposure to unfortified foods at baseline
+
+- **π_1** = mean outcome value among those exposed to unfortified foods
+
+- **π_0** = mean outcome value among those unexposed to unfortified foods (covered by fortification)
+
+- **π_GBD** = mean outcome value in overall GBD population for age, sex, location, year
+
+- **effect_size** = (π_0 - π_1), effect size for relevant outcome, as documented in the above sections, dependent on *age*, but **not** *time* (because it is assumed all simulants have been exposed for sufficient duration in the baseline scneario)
+
+- **∆_π_0** = (π_0 - π_GBD), the difference between the mean outcome value in the population unexposed to unfortified foods (covered by fortification) and the overall age-, sex-, and location-specific GBD population
+
+- **∆_π_1** = (π_1 - π_GBD), the difference between the mean outcome value in the population exposed to unfortified foods (not covered by fortification) and the overall age-, sex-, and location-specific GBD population
+
+Equations:
+
+  π_GBD = π_1 * P_exp_base + π_0 * (1 - P_exp_base)
+  
+  π_0 - π_1 = effect_size
+
+  ∆_π_0 = π_0 - π_GBD
+
+  ∆_π_1 = π_1 - π_GBD
+
+Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
+
+Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by baseline coverage and ∆_π_1 as the additive effect size for simulants not covered by baseline coverage (apply in the same fashion as described in the sections above; notably, this is only done in the iron_responsive_i = 1 population for the hemoglobin outcome).
+
+.. note::
+
+  Through this method, we assume that π_0 - π_1 = effect_size is true for our model population(s).
+  
+.. todo::
+
+  Improve formatting/layout in this section
+
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1184,7 +1299,7 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
-
+  
 References
 ----------
 
