@@ -295,7 +295,7 @@ intermediate variable that is already 100% prevalent also holds true.
 	However, the maximum effect of increasing exposure to folic acid 
 	supplementation is dependent on the prevalence of the intermediary, folic acid deficiency, in 
 	the population. Notably, if folic acid deficiency is zero,
-	increasing folic acid supplementation exposure will also be zero.
+	increasing folic acid supplementation exposure will have no effect on neural tube defects (there is no folic acid deficiency in the population!).  We will need to act on other exposures to reduce neural tube defects in this population, assuming there are other causal pathways for neural tube defects (eg. maternal diabetes) 
 
 The impact of interference by intermediate variables between a given exposure 
 and outcome should be carefully considered when designing simulation models. 
