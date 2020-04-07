@@ -201,6 +201,120 @@ Confounding
 Intermediates
 """""""""""""
 
+An intermediate variable as discussed in this section is defined as a variable 
+between an exposure and outcome in a sequential causal chain, as demonstrated 
+in the diagram below:
+
+.. image:: basic_int_diagram.svg
+
+An Example of an Uncomplicated Intermediate
+*******************************************
+
+A (simplified) example that can demonstrate such a causal pathway is the 
+relationship between the exposure of cigarette smoking, which causes the intermediate variable of accumulated tar in lungs, which in 
+turn causes lung cancer (note: for the purposes of this 
+example, assume that there is no direct causal relationship between cigarette 
+smoking and lung cancer other than through the intermediate variable of 
+accumulated tar in lungs).
+
+.. image:: smoking_intermediate_example.svg
+
+Now, let's say that we plan to enact an advertising campaign to reduce smoking 
+in hopes of reducing population lung cancer rates. Our expected causal pathway 
+would look like this:
+
+.. image:: smoking_intervention_example.svg
+
+Therefore, as we increase intervention coverage (assuming the intervention is effective), we would expect a decrease in 
+population lung cancer rates, as these two variables are located on the same 
+causal pathway. 
+
+An Example of a Complicated Intermediate
+****************************************
+
+Now, let's imagine that a brand new hypothetical medication was just 
+created that dissolves tar in lungs that accumulates due to smoking and is now 
+widely used in some areas. Our causal diagram would now look like this:
+
+.. image:: medication_example.svg
+
+Quickly, we can now see that the relationship we previously knew between 
+smoking and lung cancer is now impacted by the use of this hypothetical 
+medication that affects the intermediate variable between smoking and lung 
+cancer. Therefore, we can only expect lung cancer rates to decrease *by 
+the expected amount as a result of our marketing intervention* in areas 
+that do not widely use this medication.
+
+Notably, intermediate variables may be relevant in situations in which the 
+variable located most proximal to the outcome in the causal pathway is 
+difficult to measure. For instance, measuring the amount of tar in a person's 
+lungs is an invasive procedure; measuring the amount of cigarettes a person 
+smokes is much easier in comparison. Therefore, data availability may dictate 
+that we model cigarette smoking rather than lung tar. Such variables are often 
+referred to as **proxy variables** (variables that are not directly relevant, 
+but serve in place of an unobservable or immeasurable relevant variable).
+
+  Using cigarette smoking as a proxy variable for lung tar may be a reasonable 
+  approach given that there is no interference on the intermediate variable of 
+  lung tar by another exogenous variable (i.e. the medication). However, if 
+  there *is* interference on the intermediate variable in the relationship 
+  between the exposure and outcome (i.e. significant use of the medication), 
+  then the previously measured relationship between smoking and lung cancer 
+  will not apply to this population in the same way.
+
+Now, let's say that some time has gone by and now this medication has become 
+quite common. A new study measured the relationship between smoking and lung 
+cancer in a study population in which 50% of smokers used the medication. Now, 
+let's say that we are interested in using the data from that study on the 
+relationship between smoking and lung cancer in a simulation for a different 
+location. However, in the location we wish to model, the medication is not 
+approved at a national level and therefore use of the medication is close to 
+zero. However, since we know that the relationship between smoking and lung 
+cancer as we've defined it in this example is affected by the use of this 
+medication, applying the data from this new study to this model location would 
+be inappropriate. Rather, we should use data that measured the relationship 
+between smoking and lung cancer in a study population with a similar exposure 
+to the exogenous variable (medication) on the intermediate variable.
+
+Additional Considerations
+*************************
+
+Another example of when an intermediate variable might interfere with the 
+relationship between an exposure and outcome is when a given intervention 
+*decreases* the prevalence of an intermediate variable (that is related to an 
+outcome), but the prevalence of that intermediate variable in a specific 
+location is already zero and therefore cannot be decreased any further. The 
+opposite example of an intervention that *increases* the prevalence of an 
+intermediate variable that is already 100% prevalent also holds true.
+
+	For instance, imagine the example of folic acid supplementation 
+	(exposure), which *decreases* folic acid deficiency (intermediate), which
+	causes neural tube birth defects (outcome). Notably, neural tube birth 
+	defects are also caused through other causal pathways such as maternal diabetes. 
+	Given that the causal pathway from folic acid fortification-->folic acid deficiency-->neural tube defects is true, we would expect an increase in 
+	exposure to folic acid supplementation to decrease neural tube defects. 
+	However, the maximum effect of increasing exposure to folic acid 
+	supplementation is dependent on the prevalence of the intermediary, folic acid deficiency, in 
+	the population. Notably, if folic acid deficiency is zero,
+	increasing folic acid supplementation exposure will have no effect on neural tube defects (there is no folic acid deficiency in the population!).  We will need to act on other exposures to reduce neural tube defects in this population, assuming there are other causal pathways for neural tube defects (eg. maternal diabetes) 
+
+The impact of interference by intermediate variables between a given exposure 
+and outcome should be carefully considered when designing simulation models. 
+Particularly, special consideration should be given to how a relationship 
+between an exposure and outcome may differ in various populations based on the 
+differing levels of the intermediate variables.
+
+Notably, when the exact mechanism that drives the effect of an exposure on an 
+outcome is not well understood, it is possible that there may be *unknown* or 
+*unmeasured* intermediate variables on the causal pathway between the exposure 
+and outcome. In this case, it is important to carefully consider the 
+*generalizability* of data sources that measure the relationship between the 
+exposure and outcome to the model population to which it will be applied; or 
+in other words, consider key similarities and differences between between the 
+study and model populations that may or may not cause the study data to 
+accurately reflect the situation in the model population. Additionally, 
+limitations of the model should be noted when appropriate.
+
 Effect Modification
 """""""""""""""""""
 
