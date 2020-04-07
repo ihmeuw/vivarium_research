@@ -273,7 +273,7 @@ cancer as we've defined it in this example is affected by the use of this
 medication, applying the data from this new study to this model location would 
 be inappropriate. Rather, we should use data that measured the relationship 
 between smoking and lung cancer in a study population with a similar exposure 
-to the medication intermediate variable.
+to the exogenous variable (medication) on the intermediate variable.
 
 Additional Considerations
 *************************
