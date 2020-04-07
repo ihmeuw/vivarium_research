@@ -791,7 +791,16 @@ weight, which we assumed was equal to 3 months prior to birth of the infant.
 We chose to make this assumption because the effect of maternal iron was 
 measured at the third trimester in the Haider et al. 2013 paper.
 
-Therefore, for our simulantion, an infant's mother must have gained coverage 
+3. A simulant's birth weight will affect their all-cause mortality rate
+during the early and late neonatal periods only. This assumption is a 
+product of assumptions made in the modeling of the low birth weight and 
+short gestation (LBWSG) risk factor in GBD. 
+
+.. todo::
+
+	Cite the LBWSG risk factor page once created.
+
+Therefore, for our simulation, an infant's mother must have gained coverage 
 to iron fortified foods at least **nine months prior to the birth of the 
 infant** in order for the iron fortification coverage to affect the infant's 
 birth weight.
@@ -814,8 +823,9 @@ birth weight.
     know.
 
 2.  **Initialize the simulation:** At the start of the simulation, set
-    `mother_ate_iron_fortified_food = Unknown` for all simulants in age groups 
-    4 and 5; this attribute will not be used for these age groups because the 
+    `mother_ate_iron_fortified_food = Unknown` for all simulants in the 
+    post-neonatal and 1-4 year age groups (age_group_ids 4 and 5); 
+    this attribute will not be used for these age groups because the 
     LBWSG risk factor does not apply. Set `mother_ate_iron_fortified_food = 
     True` for a proportion of the population equal to baseline coverage of 
     iron fortification at simulation start, :math:`C(0)`. Set 
