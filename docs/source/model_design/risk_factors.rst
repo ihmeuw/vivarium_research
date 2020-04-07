@@ -290,7 +290,7 @@ intermediate variable that is already 100% prevalent also holds true.
 	(exposure), which *decreases* folic acid deficiency (intermediate), which
 	causes neural tube birth defects (outcome). Notably, neural tube birth 
 	defects are also caused through other causal pathways such as maternal diabetes. 
-	Given that this causal pathway is true, we would expect an increase in 
+	Given that the causal pathway from folic acid fortification-->folic acid deficiency-->neural tube defects is true, we would expect an increase in 
 	exposure to folic acid supplementation to decrease neural tube defects. 
 	However, the maximum effect of increasing exposure to folic acid 
 	supplementation is dependent on the prevalence of the intermediary, folic acid deficiency, in 
