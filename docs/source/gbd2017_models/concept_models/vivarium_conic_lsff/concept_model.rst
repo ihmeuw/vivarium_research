@@ -822,16 +822,17 @@ birth weight.
     before the simulant was born, `False` if not, and `Unknown` if we don't 
     know.
 
-2.  **Initialize the simulation:** At the start of the simulation, set
+2.  **Initialize the simulation:** At the start of the simulation for the early 
+    neonatal and late neonatal age groups (IDs 2 and 3), set 
+    `mother_ate_iron_fortified_food = True` for a proportion of the population 
+    equal to baseline coverage of iron fortification at simulation start, 
+    :math:`C(0)`. Set `mother_ate_iron_fortified_food = False` for a proportion 
+    of the population equal to 1 - baseline coverage of iron fortification at 
+    simulation start, :math:`1 - C(0)`. Set
     `mother_ate_iron_fortified_food = Unknown` for all simulants in the 
     post-neonatal and 1-4 year age groups (age_group_ids 4 and 5); 
     this attribute will not be used for these age groups because the 
-    LBWSG risk factor does not apply. Set `mother_ate_iron_fortified_food = 
-    True` for a proportion of the population equal to baseline coverage of 
-    iron fortification at simulation start, :math:`C(0)`. Set 
-    `mother_ate_iron_fortified_food = False` for a proportion of the 
-    population equal to 1 - baseline coverage of iron fortification at 
-    simulation start, :math:`1 - C(0)`. 
+    LBWSG risk factor does not apply.
 
 3.  **Initialize simulants born into the simulation:** For each simulant born
     at time :math:`t` (in years), the probability that the simulant's mother
