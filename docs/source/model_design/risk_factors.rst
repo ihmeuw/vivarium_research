@@ -293,7 +293,7 @@ intermediate variable that is already 100% prevalent also holds true.
 	Given that this causal pathway is true, we would expect an increase in 
 	exposure to folic acid supplementation to decrease neural tube defects. 
 	However, the maximum effect of increasing exposure to folic acid 
-	supplementation is dependent on the prevalence of folic acid deficiency in 
+	supplementation is dependent on the prevalence of the intermediary, folic acid deficiency, in 
 	the population. Notably, if folic acid deficiency is zero, the effect of 
 	increasing folic acid supplementation exposure will also be zero.
 
