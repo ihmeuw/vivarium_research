@@ -779,6 +779,81 @@ See below for a visual representation:
 
 	Write this section
 
+Application of Effect to Simulants - Iron
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**Hemoglobin Level**
+
+The age- and time-dependent effect of iron fortification on a simulant's 
+hemoglobin level (as documented in the sections above) should be **additively**
+applied to a simulant's hemoglobin level, as sampled as described in the 
+:ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>` 
+given that the simulant's value for *iron_responsive_i* (as described in the 
+:ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>`)
+is equal to 1. The age- and time-dependent intervention effect should be 
+applied *each time* that a simulant's hemoglobin level is sampled. If a 
+simulant's value for *iron_responsive_i* = 0, the effect of the intervention 
+should **not** be applied to that simulant.
+
+.. note::
+
+  See Baseline Calibration section below for special considerations regarding baseline coverage
+
+**Birth Weight**
+
+The time-dependent effect of iron fortification on a simulant's birth weight 
+(as documented in the sections above) should be **additively** applied to a 
+simulant's birth weight after it is sampled as a value *in grams* from the 
+continuous distribution of birth weight from the low birthweight short 
+gestation risk factor. The simulant's birthweight post-application of the 
+effect size will then be used to determine the simulant's LBWSG risk category.
+
+.. note::
+
+  See Baseline Calibration section below for special considerations regarding baseline coverage
+
+.. todo:: Reference the LBWSG risk factor page when complete
+
+**Baseline Calibration**
+
+- **C_forticant_base** = coverage of forticant in the population at baseline
+
+- **P_exp_base**  = (1 - C_forticant_base), prevalence of exposure to unfortified foods at baseline
+
+- **π_1** = mean outcome value among those exposed to unfortified foods
+
+- **π_0** = mean outcome value among those unexposed to unfortified foods (covered by fortification)
+
+- **π_GBD** = mean outcome value in overall GBD population for age, sex, location, year
+
+- **effect_size** = (π_0 - π_1), effect size for relevant outcome, as documented in the above sections, dependent on *age*, but **not** *time* (because it is assumed all simulants have been exposed for sufficient duration in the baseline scneario)
+
+- **∆_π_0** = (π_0 - π_GBD), the difference between the mean outcome value in the population unexposed to unfortified foods (covered by fortification) and the overall age-, sex-, and location-specific GBD population
+
+- **∆_π_1** = (π_1 - π_GBD), the difference between the mean outcome value in the population exposed to unfortified foods (not covered by fortification) and the overall age-, sex-, and location-specific GBD population
+
+Equations:
+
+  π_GBD = π_1 * P_exp_base + π_0 * (1 - P_exp_base)
+  
+  π_0 - π_1 = effect_size
+
+  ∆_π_0 = π_0 - π_GBD
+
+  ∆_π_1 = π_1 - π_GBD
+
+Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
+
+Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by baseline coverage and ∆_π_1 as the additive effect size for simulants not covered by baseline coverage (apply in the same fashion as described in the sections above; notably, this is only done in the iron_responsive_i = 1 population for the hemoglobin outcome).
+
+.. note::
+
+  Through this method, we assume that π_0 - π_1 = effect_size is true for our model population(s).
+  
+.. todo::
+
+  Improve formatting/layout in this section
+
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
