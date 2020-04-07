@@ -76,6 +76,17 @@ there would probably not be much benefit in attempting to capture its long-term 
 
    Describe more assumptions and limitations of the model.
 
+.. warning::
+
+  Initial validation of the LRI cause model has indicated that prevalence (and 
+  therefore cause-specific mortality) of LRI is significantly underestimated for 
+  the early neonatal and late neonatal age groups (age group IDs 2 and 3). This 
+  may be because DISMOD models allow for birth prevalence of LRI, although birth 
+  prevalence is not a reported outcome of GBD. This issue should be investigated 
+  to see if we can incorporate birth prevalence into the LRI cause model to avoid 
+  underestimation of LRI in the neonatal age groups. Note: according to GBD 
+  modeler (Chris Troeger) LRI birth prevalence can be found using age_group_id 164.
+
 Data Description
 ----------------
 .. list-table:: Definition

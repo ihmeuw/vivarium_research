@@ -54,6 +54,23 @@ Impaired kidney function (IKF) is a risk factor in GBD 2017 with:
      - 95 Plus
      - (95, 125], age_group_id = 235
 
+.. list-table:: GBD 2017 Risk Factor IKF Categories
+   :widths: 15 15 
+   :header-rows: 1
+
+   * - Category Name
+     - Description
+   * - cat1
+     - Stage V chronic kidney disease annual exposure
+   * - cat2
+     - Stage IV chronic kidney disease annual exposure
+   * - cat3
+     - Stage III chronic kidney disease annual exposure
+   * - cat4
+     - Albuminuria annual exposure
+   * - cat5
+     - Unexposed
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -106,53 +123,66 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease structure of CKD, related sub causes, and sequelae. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. These sequelae are fatal and include YLLs and YLDs. All other sequelae are included in the 'Moderate' CKD, which are designated as non-fatal only and include only YLDs. The associated sequelae in each state can be found below in the 'State Severity Split Definitions' table.
+The aspects of the disease this cause model is designed to simulate is the basic structure of the disease, its sub causes, associated measures (deaths, prevalence, incidence, emr), associated sequelae, and associated disability weights. The aspects of the disease this cause model is not designed to simulate is the disease progression of CKD, as this model does not contain transitions between CKD states/stages. This cause model is designed differently, with a transient disease state titled 'With Condition' based on incidence of CKD. From there, the sub causes and sequelae are categorized within either a 'moderate' or 'severe' CKD state. Across the 5 CKD sub causes, some of the associated sequelae will either be grouped into the 'Moderate' or 'Severe' CKD state. The sequelae which map to 'Severe' CKD state include end stage renal disease sequelae and all Stage V CKD sequelae. All other sequelae are included in the 'Moderate' CKD. The associated sequelae in each state can be found below in the 'State Severity Split Definitions' table.
 
 Vivarium Modeling Strategy for Risk Factor Impaired Kidney Function (IKF) 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-In this model, simulants are initialized as "susceptible" or "with condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence.
+Initialization:
+- In this model, simulants are initialized as "susceptible" or "with specific sequelae-level condition" through the following process: simulants will be assigned directly to a CKD sequelae ("with condition" state) based on each sequelae prevalence. Those not assigned to a sequelae will be initialized to the "susceptible" state. Each sequelae will then be mapped back to the distribution of IKF based on sequelae based severity splits. The result will be an IKF value for each simulant that is consistent with sub-cause prevalence. 
+
+Progress:
+-As simulants age, their risk exposure will change, which may result in them progressing into a different disease state over time. Also, simulants will experience mortality based on their risk exposure.
 
 Mapping CKD States to IKF Categories in Vivarium
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. list-table:: Disease State to Risk Factor Exposure Category Map Table
-   :widths: 10 30 10 10 10 15 
+   :widths: 10 15 10 30 10 
    :header-rows: 1
 
    * - Disease State 
      - Sequelae Group 
-     - Risk Exposure Category
+     - IKF Risk Exposure Category
      - Sequelae Group Id
-     - Risk Exposure ID
      - Notes
    * - **M**\ oderate CKD
+     - albuminuria (stage I and II) sequelae
+     - cat4
+     - [s_5540, s_5543, s_5549, s_5546, s_5552]
+     - All Albuminuria sequelae values due to CKD sub_causes 
+   * - **M**\ oderate CKD
      - stage III sequelae
-     - Stage 3 chronic kidney disease squeezed
+     - cat3
      - [s_5225, s_5219, s_5213, s_5228, s_5222, s_5216, s_1024, s_1025, s_1026, s_1016, s_1017, s_1018, s_1032, s_1033, s_1034, s_5231, s_5234, s_1027, s_1019, s_1035]
-     - me_id_10732
      - All Stage III sequelae values due to CKD sub_causes
    * - **M**\ oderate CKD
      - stage IV sequelae
-     - Stage 4 chronic kidney disease squeezed
+     - cat2
      - [s_5249, s_5243, s_5237, s_5252, s_5246, s_5240, s_1433, s_1436, s_1439, s_1421, s_1424, s_1427, s_1445, s_1448, s_1451, s_5255, s_5258, s_1430, s_1418, s_1442]
-     - me_id_10733
      - All Stage IV sequelae values due to CKD sub_causes
    * - **S**\ evere CKD
      - stage V sequelae
-     - Stage 5 chronic kidney disease squeezed
+     - cat1
      - [s_5273, s_5267, s_5261, s_5276, s_5270, s_5264, s_1385, s_1388, s_1391, s_1373, s_1376, s_1379, s_1397, s_1400, s_1403, s_5279, s_5282, s_1382, s_1370, s_1394]
-     - me_id_10734
      - All Stage V sequelae values due to CKD sub_causes
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
+Assumptions
++++++++++++
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+- Presently, we are using prevalence for each stage of CKD to assign the each person in the population a CKD severity state. We are assuming (for now) that there is no transition between states. As a result, we should expect the prevalence for early stage CKD to swell as the simulation runs, since there is nowhere for these new incident cases to go. Transition rates (progression rates) between states are not available from the GBD model. As such, we are using evolution of risk exposure over time (changes with simulant age) to proxy for progression between CKD states - as a simulant ages, they may move to a different part of the IDF distribution, thereby landing them in a more advanced CKD state. The reason we are modeling CKD this way is because it is a condition for treatment of LDL-C, which is the intervention in this model. Thus, we need to get the prevalence at each severity (mild/moderate v. severe) correct. CKD is not a cause of interest in the current project it is being modeled in, so the severity specific prevalence is the current priority.
+
+- Simulants are in each disease state longer than they should be, compared to GBD 2017. 
+
+- This model assumes there is no impact of SBP nor FPG on CKD.
+
+Limitations
++++++++++++
+
+- This model is consistent with prevalence in population. The following relationships between CKD/SBP and CKD/FPG will be modeled using correlation. The iniitial distribution will be correct, but will change over time and become inaccurate due to mitigating factors.
 
 Cause Model Diagram
 -------------------
@@ -198,7 +228,7 @@ State and Transition Data Tables
      - 
    * - C
      - With **C**\ ondition of chronic kidney disease
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}}`
+     - 
    * - M
      - **M**\ oderate CKD
      - sequelae_mod = [s_5225, s_5219, 5213, s_5231, s_5249, s_5243, s_5237, s_5255, s_5540, s_5228, s_5222, s_5216, s_5234, s_5252, s_5246, s_5240, s_5258, s_5543, s_1024, s_1025, s_1026, s_1027, s_1433, s_1436, s_1439, s_1430, s_5549, s_1016, s_1017, s_1018, s_1019, s_1421, s_1424, s_1427, s_1418, s_5546, s_1032, s_1033, s_1034, s_1035, s_1445, s_1448, s_1451, s_1442, s_5552] 
@@ -217,59 +247,63 @@ State and Transition Data Tables
      - simulants not prevalent with CKD
      - 1-prevalence_c589
      -
-   * - C
-     - prevalence
-     - prevalence_c589
-     -
    * - M
      - prevalence
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}{\scriptstyle{\text{prevalence_c589}}}`
-     - = (prevalence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae) / prevalence of CKD
+     - :math:`{\sum_{s\in \text{prevalence_sequelae_mod.sub_causes.c589}}}`
+     - = prevalence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae
    * - Sev
      - prevalence
-     - :math:`\frac{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}{\scriptstyle{\text{prevalence_c589}}}`
-     - = (prevalence of CKD stage V sequelae + CKD end stage sequelae) / prevalence of CKD 
-   * - EMR severe
-     - excess mortality rate of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_severe_ckd}}`
-     - 
-   * - EMR moderate
-     - excess mortality rate of severe CKD
-     - :math:`\frac{\text{CSMR_c589}}{\text{prevalence_moderate_ckd}}`
-     -   
-   * - C
+     - :math:`{\sum_{s\in \text{prevalence_sequelae_sev.sub_causes.c589}}}`
+     - = prevalence of CKD stage V sequelae + CKD end stage sequelae
+   * - cat1
+     - excess mortality rate (EMR) of cat1
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat2
+     - excess mortality rate (EMR) of cat2
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat3
+     - excess mortality rate (EMR) of cat3
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat4
+     - excess mortality rate (EMR) of cat4
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat5
+     - excess mortality rate (EMR) of cat4
+     - 0
+     - this equals 0 because the disease state mapped to this is 'susceptible'
+   * - M
+     - excess mortality rate (EMR) of moderate CKD
+     - :math:`\frac{\text{CSMR*_c589}}{\text{prevalencec589}}`
+     - = CSMR (* indicates calculated below) of CKD / prevalence of CKD
+   * - cat1
      - disability weight
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c589}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}`
-     -
+     - :math:`\frac{{\sum_{sequelae\in \text{cat1}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat1}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for IKF cat1 (sequelae mapped to IKF cat1)
+   * - cat2
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{cat2}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat2}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for IKF cat2 (sequelae mapped to IKF cat2)
+   * - cat3
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{cat3}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat3}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for IKF cat3 (sequelae mapped to IKF cat3)
+   * - cat4
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{cat4}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{cat4}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for IKF cat4 (sequelae mapped to IKF cat4)
+   * - cat5
+     - disability weight
+     - 0
+     - this equals 0 because the disease state mapped to this is 'susceptible'
    * - All
      - cause-specific mortality rate
-     - :math:`\frac{\text{deaths_c589}}{\text{1 - prev_589} \,\times \text{population}}`
-     -
+     - :math:`\frac{\text{deaths_c589}}{\text{population}}`
+     - calculated CSMR, not a direct input from GBD 2017
 
-.. list-table:: Transition Data
-   :widths: 10 10 10 10 10
-   :header-rows: 1
-
-   * - Transition
-     - Source State
-     - Sink State
-     - Value
-     - Notes
-   * - 1
-     - S
-     - C
-     - incidence_c589
-     -
-   * - 2
-     - C
-     - M
-     - :math:`\sum_{s\in \text{incidence_sequelae_mod.sub_causes.c589}}`
-     - = incidence of Albuminuria sequelae + CKD stage III sequelae + CKD stage IV sequelae
-   * - 3
-     - C
-     - Sev
-     - :math:`\sum_{s\in \text{incidence_sequelae_sev.sub_causes.c589}}`
-     - = incidence of CKD stage V sequelae + CKD end stage sequelae  
 
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
@@ -299,29 +333,26 @@ State and Transition Data Tables
      - YLD appendix
      - Disability weight of sequela with id {id}
      - 
-   * - incidence_s{sid}
-     - como
-     - Incidence of sequela with id {id}
+   * - risk_exposure_rei_id_341
+     - exposure
+     - risk exposure of IKF 
      - 
-   * - incidence_c589
-     - como
-     - Incidence of chronic kidney disease
-     -   
+   * - relative_risk_rei_id_341
+     - exposure
+     - relative risk of IKF and affected causes
+     -
+   * - paf_rei_id_341
+     - burdenator
+     - PAF of IKF 
+     - 
+
         
 Validation Criteria
 -------------------
 
-* prevalence_moderate_CKD + prevalence_severe_CKD = 1
-
-* prevalence_CKD = sum of prevalence_sequelae_CKD
-
-* incidence_CKD = sum of incidence_sequela_CKD
-
-* incidence_ckd = incidence_severe_CKD/prevalence_severe_CKD
-
-* incidence_ckd = incidence_moderate_CKD/prevalence_moderate_CKD 
-
-* csmr_CKD = prevalence_CKD * emr_CKD
+Based on the model's assumptions and limitations, the following verification and validation tasks are outlined below:
+- All-Cause Mortality Rate in GBD 2017 vs. this model (initialization, in year = 2020)
+- CKD prevalence in GBD 2017 vs. this model (initialization, in year = 2020)
 
 References
 ----------
