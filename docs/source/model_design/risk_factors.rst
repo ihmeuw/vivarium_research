@@ -318,6 +318,92 @@ limitations of the model should be noted when appropriate.
 Effect Modification
 """""""""""""""""""
 
+A factor :math:`M` is said to be an effect modifier if the effect of the 
+exposure :math:`E` on disease :math:`D` varies for different values of 
+:math:`M`. Effect modification is sometimes also called *interaction*. We 
+illustrate this relationship below.
+
+.. figure:: effect_mod_arrow_diagram.svg
+  :align: center
+
+If :math:`M` is some dichotomous effect modifier, then :math:`B\neq C`, and :math:`A` does not encompass the entire picture of how :math:`E` acts on :math:`O`. Rather, :math:`A` was calculated from some population; for the sake of example, let's say that :math:`M=1` in :math:`\frac{1}{10}` of this population. Then we see that :math:`A` is tells us about the effect of :math:`E` on a new population if and only if the new population also has the same prevalence of :math:`M`. If we wish to understand how :math:`E` operates in some population where :math:`M` is prevalent in :math:`\frac{1}{3}` of the population, then we would need to know :math:`B` and :math:`C`.
+
+Observe this is in direct contrast to confounding, in which the exposure and 
+confounding factor *must not depend on one another* to determine the risk.
+
+We note that effect modification is a statistical phenomenon which may or may 
+not reflect a biological phenomenon. However, in the case of epidemiological 
+modeling, following the Bradford-Hill criteria of *plausibility*, we would hope 
+to be able to explain the effect modification when implementing an effect 
+modifier in a model.
+
+Consider asbestos dust as an exposure for lung cancer. Say that in a cohort 
+study, we find the following:
+
+.. list-table:: Death rate per 100,000py: asbestos exposure alone
+  :widths: 10 10
+  :header-rows: 0
+  :stub-columns: 1
+
+  * - No Asbestos exposure
+    - 66.95
+  * - Asbestos exposure
+    - 470.85
+
+We might now conclude that the effect of asbestos on lung cancer has a rate 
+ratio for :math:`470.85/66.95\approx 7.0`. However, when we stratify by 
+smoking, we find the following:
+
+.. list-table:: Death rates per 100,000py: asbestos exposure stratified by smoking status
+  :widths: 10 10 10
+  :header-rows: 1
+  :stub-columns: 1
+
+  * - 
+    - Non smokers
+    - Smokers 
+  * - No Asbestos exposure
+    - 11.3
+    - 122.6
+  * - Asbestos exposure
+    - 40.1
+    - 901.6
+
+This shows us that the rate ratios for the effect of asbestos on lung cancer 
+vary according to smoking status: the rate ratio is :math:`40.1/11.3\approx 3.5` 
+for non-smokers and :math:`901.6/122.6\approx 7.3` for smokers.
+
+.. todo:: add citation to Nicole's textbook. Graphs below were reproduced from http://osctr.ouhsc.edu/sites/default/files/2020-02/Module8PartVNotes.pdf
+
+We include below a graphical representation of a risk outcome stratified by sex, and by age. On the y-axis we have incidence of some outcome such as high blood pressure, and on the x-axis we have an exposure such as obesity.
+
+.. todo::
+   Format citations.
+
+.. image:: without_em_illustration.svg
+  :width: 400
+
+Observe that the difference in incidence of high blood pressure, between people from Town A versus Town B, is not *modified* by the exposure status. Thus the incidence ratio between exposed and unexposed groups, within this population, is not modified by town of residence.
+
+.. figure:: with_em_illustration.svg
+  :width: 400
+
+Here, we see that the risk attributable to our exposure is higher in our older group than in our younger group; thus age is an effect modifier for this risk outcome.
+
+Finally, we emphasize that when dealing with a confounding variable, in order to best understand the effects of our exposure, we seek to *remove* the influence of the confounder. By contrast, if variable B is an effect modifier for exposure A, then this interaction is an important property of the relationship between A and B, and their influence on the disease. Rather than remove, we thus try to *capture and describe* effect modification in the greatest detail possible. (Cite Nicole's textbook)
+
+
+**Effect modification in GBD**
+
+GBD models estimate globally, and almost all of GBD's relative risks are used universally across location, sex, age, and time. This means that GBD generally assumes that the study populations from which they calculate their relative risks are applicable universally, without adjustments for the different sexes, locations, or other potential effect modifiers. When using GBD risk factors in a Vivarium model, it is thus important to know what studies GBD used for their relative risk calculation. From these studies it is necessary to consider:
+
+  - what the prevalence of various effect modifiers in these populations might have been
+
+  - if we believe these are similar enough to the populations we are modeling to use GBD effect sizes
+
+In the case that GBD effect sizes are *not* generalizeable and we are unable to find studies that supply relative risks and effect sizes stratified by the appropriate effect modifiers, it is also necessary to state the uncertainty that will derive from this lack of information.
+
+
 Mediation
 """""""""
 
