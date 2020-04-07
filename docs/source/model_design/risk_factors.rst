@@ -211,9 +211,7 @@ illustrate this relationship below.
 .. figure:: effect_mod_arrow_diagram.svg
   :align: center
 
-If :math:`M` is some dichotomous effect modifier, then :math:`B\neq C`, and to 
-understand the full story of how :math:`E` acts on :math:`O`, we cannot simply 
-consider :math:`A`.
+If :math:`M` is some dichotomous effect modifier, then :math:`B\neq C`, and :math:`A` does not encompass the entire picture of how :math:`E` acts on :math:`O`. Rather, :math:`A` was calculated from some population; for the sake of example, let's say that :math:`M=1` in :math:`\frac{1}{10}` of this population. Then we see that :math:`A` is tells us about the effect of :math:`E` on a new population if and only if the new population also has the same prevalence of :math:`M`. If we wish to understand how :math:`E` operates in some population where :math:`M` is prevalent in :math:`\frac{1}{3}` of the population, then we would need to know :math:`B` and :math:`C`.
 
 Observe this is in direct contrast to confounding, in which the exposure and 
 confounding factor *must not depend on one another* to determine the risk.
