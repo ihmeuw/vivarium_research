@@ -289,7 +289,7 @@ intermediate variable that is already 100% prevalent also holds true.
 	For instance, imagine the example of folic acid supplementation 
 	(exposure), which *decreases* folic acid deficiency (intermediate), which
 	causes neural tube birth defects (outcome). Notably, neural tube birth 
-	defects are also caused by exogenous variables such as maternal diabetes. 
+	defects are also caused through other causal pathways such as maternal diabetes. 
 	Given that this causal pathway is true, we would expect an increase in 
 	exposure to folic acid supplementation to decrease neural tube defects. 
 	However, the maximum effect of increasing exposure to folic acid 
