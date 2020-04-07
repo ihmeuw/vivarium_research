@@ -130,46 +130,6 @@ Risk-Outcome Relationships
 Coverage Gap Framework
 ++++++++++++++++++++++
 
-Effect size stratification for baseline population
---------------------------------------------------
-
-From GBD we obtain mean population values for prevalence of vitamin A deficiency, birth prevalence of neural tube defects, and mean haemoglobin levels. Because we are interested in the effect of fortification and there exists baseline coverage of fortification, we must first stratify our population into those who were covered vs not covered by the forticant of interest. We then need to calculate the risk (prevalence) of vitamin A deficiency, risk (birth prevalence) of neural tube defects, and mean haemoglobin levels by coverage strata. 
-
-This method applies to exposures with dichomotous outcomes such as Vitamin A deficiency or neural tube defects:
-
-We always define the exposure as bad to match GBD 2017 definitions, so relative risks are always >1 
-
-:math:`C_{vita_{baseline}}`: coverage of vitamin A fortified food in the population from the literature that is applied to our sim population at baseline
-
-:math:`P_{exposure_{baseline}}`: 1-:math:`C_{vita_{baseline}}` prevalence of exposure to unfortified foods in our sim population at baseline
-
-:math:`ϴ_{1}`: risk of vitamin A deficiency among those exposed to unfortified foods (bad food) in our sim population
-
-:math:`ϴ_{0}`: risk of vitamin A deficiency among those unexposed to unfortified foods (eats fortified foods) in our sim population
-
-:math:`ϴ_{GBD}`: risk of vitamin A deficiency in GBD population for age, sex, location, year
-
-RR= reciprocal of a <1 effect size (risk ratios of prevalence) = :math:`\frac{1}{\text{0.45(95%CI: 0.19-1.05)}}`
-
-RR= :math:`\frac{ϴ_{1}}{ϴ_{0}}` (we assume this to also be true in our sim population)
-
-PAF= :math:`\frac{P_{exposure_{baseline}}(RR-1)}{1+P_{exposure_{baseline}}(RR-1)}`
-
-1-PAF= :math:`\frac{1}{1+P_{exposure_{baseline}}(RR-1)}`
-
-*Important assumptions and limitations* This equation for PAF is valid under the assumption of no confounding. An alternate equation for PAF should be used when to get an unbiased PAF in the presence of confounding; however, we will need the attributable fraction in the exposed which we do not readily have. Hence this is a limitation. The RRs we use, and the exposure % we use are approximating the PAFs. We make the assumption that the RRs pulled from literature is generalizable. 
-
-.. todo::
-
-   reference Darrow and Steenland. Confounding and bias in the attributable fraction. *Epidemiology*. 2011 Jan;22(1):53-8. doi: 10.1097/EDE.0b013e3181fce49b.
-
-
-risk in (1-:math:`C_{vita}`), exposed group: :math:`ϴ_{1}= ϴ_{GBD}*(1-PAF)*RR` … equation 1
-
-risk in (:math:`C_{vita}`), unexposed group: :math:`ϴ_{0}= ϴ_{GBD}*(1-PAF)` … equation 2
-
-**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and shifts the amount of people who receive equation 1 to equation 2. 
-
 Interventions
 +++++++++++++
 
@@ -619,13 +579,13 @@ accordingly. See the table below:
     - Concentration of forticant in flour
     - Amount of fortifiable flour consumed daily
   * - Ethiopia
-    - 30 mg NaFeEDTA / kg flour  [1]; use point value
+    - 30 mg iron as NaFeEDTA / kg flour  [1]; use point value
     - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
   * - India
-    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
+    - 14 to 21.25 mg iron as NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
     - 100 g (IQR: 77.5, 200) [2*]; sample from distribution described below
   * - Nigeria
-    - 40 mg NaFeEDTA / kg flour [1]; use point value
+    - 40 mg iron as NaFeEDTA / kg flour [1]; use point value
     - 100 g (IQR:77.5, 200) [2*]; sample from distribution described below
 
 .. note::
@@ -635,6 +595,14 @@ accordingly. See the table below:
 	to use the concentrations of the NaFeEDTA forticant. This is because the
 	concentration of elemental iron in flour is lower when the NaFeEDTA 
 	forticant is used compared to other forticants.
+
+  We assumed that the concentrations listed in the 
+  [Global-Fortification-Data-Exchange]_ represented miligrams of 
+  *elemental iron as NaFeEDTA* per kilogram of flour rather than miligrams of 
+  NaFeEDTA per kilogram of flour. While this was not explicitly stated on the 
+  [Global-Fortification-Data-Exchange]_, the available literature suggests 
+  that this is the measurement convention and is consistent with typical doses 
+  of iron via fortification using NaFeEDTA [Teshome-et-al-2017]_.
 
 [1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
@@ -656,7 +624,7 @@ table above):
 
 .. math::
 
-	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
+	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} 
 
 First, we must sample values from the distribution of the amount of flour 
 eaten per day *at the individual simulant level*. We chose to sample at the 
@@ -701,8 +669,7 @@ be calculated as follows:
   # iron_concentration_in_flour : location-specific value from table above
 
   elemental_iron_consumed_per_day_i = (daily_flour_consumption_i 
-      * iron_concentration_in_flour 
-      * 0.00015)
+      * iron_concentration_in_flour / 1_000)
 
 Then, the specific effect size of iron fortification on low birth weight can 
 be calculated as follows (where Z is the location-specific amount of elemental 
@@ -884,12 +851,17 @@ Equations:
 
 Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
 
-Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by baseline coverage and ∆_π_1 as the additive effect size for simulants not covered by baseline coverage (apply in the same fashion as described in the sections above; notably, this is only done in the iron_responsive_i = 1 population for the hemoglobin outcome).
+Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by 
+baseline coverage and ∆_π_1 as the additive effect size for simulants not 
+covered by baseline coverage (apply in the same fashion as described in the 
+sections above; notably, this is only done in the iron_responsive_i = 1 
+population for the hemoglobin outcome).
 
 .. note::
 
-  Through this method, we assume that π_0 - π_1 = effect_size is true for our model population(s).
-  
+  Through this method, we assume that π_0 - π_1 = effect_size is true for our 
+  model population(s).
+
 .. todo::
 
   Improve formatting/layout in this section
@@ -1256,3 +1228,18 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
+
+References
+----------
+
+.. note::
+
+  Will need to resolve merge conflict here
+
+.. [Teshome-et-al-2017]
+
+  View `Teshome et al. 2017`_
+
+    Teshome, E.M., Andang’o, P.E.A., Osoti, V. et al. Daily home fortification with iron as ferrous fumarate versus NaFeEDTA: a randomised, placebo-controlled, non-inferiority trial in Kenyan children. BMC Med 15, 89 (2017). https://doi.org/10.1186/s12916-017-0839-z
+
+.. _`Teshome et al. 2017`: https://doi.org/10.1186/s12916-017-0839-z
