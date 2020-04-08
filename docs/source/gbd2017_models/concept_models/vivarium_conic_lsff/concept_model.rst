@@ -619,22 +619,30 @@ accordingly. See the table below:
     - Concentration of forticant in flour
     - Amount of fortifiable flour consumed daily
   * - Ethiopia
-    - 30 mg NaFeEDTA / kg flour  [1]; use point value
+    - 30 mg iron as NaFeEDTA / kg flour  [1]; use point value
     - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
   * - India
-    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
+    - 14 to 21.25 mg iron as NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
     - 100 g (IQR: 77.5, 200) [2*]; sample from distribution described below
   * - Nigeria
-    - 40 mg NaFeEDTA / kg flour [1]; use point value
+    - 40 mg iron as NaFeEDTA / kg flour [1]; use point value
     - 100 g (IQR:77.5, 200) [2*]; sample from distribution described below
 
 .. note::
 
-	While there was data for the concentration of iron forticants other
-	than NaFeEDTA for the locations in this table, we conservatively chose 
-	to use the concentrations of the NaFeEDTA forticant. This is because the
-	concentration of elemental iron in flour is lower when the NaFeEDTA 
-	forticant is used compared to other forticants.
+  While there was data for the concentration of iron forticants other
+  than NaFeEDTA for the locations in this table, we conservatively chose 
+  to use the concentrations of the NaFeEDTA forticant. This is because the
+  concentration of elemental iron in flour is lower when the NaFeEDTA 
+  forticant is used compared to other forticants.
+
+  We assumed that the concentrations listed in the 
+  [Global-Fortification-Data-Exchange]_ represented miligrams of 
+  *elemental iron as NaFeEDTA* per kilogram of flour rather than miligrams of 
+  NaFeEDTA per kilogram of flour. While this was not explicitly stated on the 
+  [Global-Fortification-Data-Exchange]_, the available literature suggests 
+  that this is the measurement convention and is consistent with typical doses 
+  of iron via fortification using NaFeEDTA [Hurrell-et-al-2010]_.
 
 [1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
@@ -650,13 +658,11 @@ Ethiopia.
 	Nigeria and India.
 
 The amount of elemental iron consumed daily, in miligrams per person, (at the 
-draw level) should be calculated as such (where X is mg of NaFeEDTA per kg of 
-flour and Y is grams of flour consumed daily per person, as defined in the
-table above):
+draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg of flour and Y is grams of flour consumed daily per person, as defined in the table above):
 
 .. math::
 
-	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
+	\frac{\text{X mg iron as NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} 
 
 First, we must sample values from the distribution of the amount of flour 
 eaten per day *at the individual simulant level*. We chose to sample at the 
@@ -701,8 +707,7 @@ be calculated as follows:
   # iron_concentration_in_flour : location-specific value from table above
 
   elemental_iron_consumed_per_day_i = (daily_flour_consumption_i 
-      * iron_concentration_in_flour 
-      * 0.00015)
+      * iron_concentration_in_flour / 1_000)
 
 Then, the specific effect size of iron fortification on low birth weight can 
 be calculated as follows (where Z is the location-specific amount of elemental 
@@ -884,12 +889,17 @@ Equations:
 
 Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
 
-Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by baseline coverage and ∆_π_1 as the additive effect size for simulants not covered by baseline coverage (apply in the same fashion as described in the sections above; notably, this is only done in the iron_responsive_i = 1 population for the hemoglobin outcome).
+Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by 
+baseline coverage and ∆_π_1 as the additive effect size for simulants not 
+covered by baseline coverage (apply in the same fashion as described in the 
+sections above; notably, this is only done in the iron_responsive_i = 1 
+population for the hemoglobin outcome).
 
 .. note::
 
-  Through this method, we assume that π_0 - π_1 = effect_size is true for our model population(s).
-  
+  Through this method, we assume that π_0 - π_1 = effect_size is true for our 
+  model population(s).
+
 .. todo::
 
   Improve formatting/layout in this section
@@ -1256,3 +1266,18 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
+
+References
+----------
+
+.. note::
+
+  Will need to resolve merge conflict here
+
+.. [Hurrell-et-al-2010]
+
+  View `Hurrell et al. 2010`_
+
+    Hurrell, R., Ranum, P., de Pee, S., Biebinger, R., Hulthen, L., Johnson, Q., & Lynch, S. (2010). Revised Recommendations for Iron Fortification of Wheat Flour and an Evaluation of the Expected Impact of Current National Wheat Flour Fortification Programs. Food and Nutrition Bulletin, 31(1_suppl1), S7–S21. https://doi.org/10.1177/15648265100311S102
+
+.. _`Hurrell et al. 2010`: https://doi.org/10.1177/15648265100311S102
