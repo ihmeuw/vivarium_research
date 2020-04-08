@@ -750,12 +750,12 @@ infant birth weight). As discussed in a review by [Siddappa-et-al-2007]_,
 there may be an association between maternal iron deficiency and infant iron 
 levels at birth (measured as serum ferritin). However, a significant 
 relationship between maternal iron deficiency and infant *hemoglobin* at birth 
-has not been consistently demonstrated [Altinkaynak-et-al-1994]_, 
+has not been consistently demonstrated [Allen-2002]_, [Altinkaynak-et-al-1994]_, 
 [Emamghorashi-and-Heidari-2004]_, [Erdem-et-al-2002]_, [Turkay-et-al-1995]_. 
 Notably, there is some evidence of a correlation between maternal hemoglobin 
 and infant hemoglobin in the first months of life [Marques-et-al-2016]_, 
 [De-Pee-et-al-2002]_, [Kilbride-et-al-1999]_; however, the amount and quality 
-of evidence is limited and the scope of our model additionally limited our 
+of evidence is limited [Allen-2002]_ and the scope of our model additionally limited our 
 ability to consider this correlation.
 
 2. We assumed that simulants begin to eat staple foods as a supplement to 
@@ -1302,6 +1302,14 @@ causes affected by low birth weight and short gestation are as follows:
   
 References
 ----------
+
+.. [Allen-2002]_
+
+  View `Allen 2002`_
+
+    Lindsay H Allen, Anemia and iron deficiency: effects on pregnancy outcome, The American Journal of Clinical Nutrition, Volume 71, Issue 5, May 2000, Pages 1280S–1284S, https://doi.org/10.1093/ajcn/71.5.1280s
+
+.. _`Allen 2002`: https://doi.org/10.1093/ajcn/71.5.1280s
 
 .. [Altinkaynak-et-al-1994]
 
