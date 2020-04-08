@@ -68,7 +68,7 @@ Prevalence
 ^^^^^^^^^^
 Prevalence focuses on existing states. Prevalence of a state (such as the 'with condition state') at a point in time may be defined as the proportion of a population in that state at that time; thus prevalence is the proportion of persons in a defined population that have the outcome under study in a defined period of time. Prevalence is a proportion and has no time units. However, the point in time to which it refers must always be specified. The term ‘prevalence rate’ is often wrongly used instead of ‘prevalence’. Prevalence is, by definition, a proportion not a rate. 
 
-*Point prevalence* is the number of current cases (new and pre-existing) at a defined instant in time. The denominator is the population at the same defined instant in time. This measure is called point prevalencea because it refers to a single point in time. It is often referred to simply as prevalence.
+*Point prevalence* is the number of current cases (new and pre-existing) at a defined instant in time. The denominator is the population at the same defined instant in time. This measure is called point prevalence because it refers to a single point in time. It is often referred to simply as prevalence.
 
 Examples:
 
@@ -85,7 +85,8 @@ Examples:
 +------------------------+-----------------------------------------------+
 
 *Period prevalence* is the number of current cases (new and pre-existing) over a defined period of time. The denominator is the average or mid-period population. This measure
-is used when the condition is recurrent and non-fatal. 
+is used when the condition is recurrent and non-fatal. An example of period prevalence would be the proportion of women who have used oral contraceptives at any time
+during the 12-month period preceding the day of the survey.
 
 +------------------------+-----------------------------------------------+
 |   Measure              | Math                                          |
@@ -95,7 +96,6 @@ is used when the condition is recurrent and non-fatal.
 |                        |{\text{average or mid-period population}}`     |
 +------------------------+-----------------------------------------------+
 
-
 Because of these dynamic changes, the magnitude of the prevalence varies from one point in time to another as illustrated by the following diagram:
 
     .. image:: prevalence_diagram.svg
@@ -103,7 +103,7 @@ Because of these dynamic changes, the magnitude of the prevalence varies from on
 .. note::
     In our vivarium models, we estimate the **period prevalence** of condition as
 
-    :math:`\frac{\text{person-time in with-condition state}}{\text{total person time for age, sex, location, year}}`
+            :math:`\frac{\text{person-time in with-condition state}}{\text{total person time for age, sex, location, year}}`
    
 
 The *prevalence pool* is the subset of the population who is in the given state (such as the 'with-condition state'). A person who dies from the state is removed from the prevalence pool: death decreases prevalence. People can also exit the prevalence pool by recovering from the state (remission) or emigrating from the population. Diseases with high incidence rates may have low prevalence if they are rapidly fatal or quickly cured. Conversely, diseases with low incidence rates may have substantial prevalence if they are nonfatal but incurable. 
@@ -179,7 +179,7 @@ For rare diseases, risk and rates are numerically similar.
 
 .. todo::
    James says: give example and how the time period needs to be specified. 
-   Has this been addressed?
+   Has this been addressed in the examples?
 
 Relationship between rate and risk
 **********************************
@@ -197,12 +197,12 @@ Example:
   * The incidence rate of a particular condition in a population is 50 per 100 000 person-years. The risk for an individual in this population of developing this condition during a five-year period (assuming no other causes of death) is given by
 
       - 5-year risk = :math:`1 – e^\text{( –0.0005 per person-year × 5 years)}` = 0.25%
-    The simplified equation can yield the same result
+        | The simplified equation can yield the same result
       - 5-year risk=0.0005 per person-year X 5 years = 0.25%
   * Consider now a common condition with an incidence rate of 300 per 1000 person-years
 
       - 5-year risk = :math:`1 – e^\text{( –0.3 per person-year × 5 years)}` = 78%
-    The simplified equation does not yield the same result
+        | The simplified equation does not yield the same result
       - 5-year risk = 0.3 per person-year X 5 years = 150%
 
 Measures of effect
@@ -219,7 +219,7 @@ It is possible to compare any type of measure of frequency (e.g. risks, rates) b
 In GBD, relatives risks are usually ratio of incidence rates of causes in those exposed vs unexposed to the risk factor. However, there are exceptions as in the low birth rate short gestation (LBWSG) risk factor where the relative risks are ratios of all-cause mortality rates. It is best practice to always check with the risk appendix or the GBD modeller what the relative risks refer to each risk-outcome pair. 
 
 .. todo::
-      write down numerator and denominator
+      write down numerator and denominator. Has this been adequately addressed with the equations written out below?
 
 For example (hypothetical- cite my brain), a study was conducted to measure the effect of vitamin A food fortification on incidence of measles in children under 5. GBD defines risk factors to be malignant. Hence, the exposed group (exposed to poor nutrition) are those who are not covered by food fortification while those unexposed are covered by food fortification. The table below shows the results: 
 
@@ -245,7 +245,7 @@ Alternatively, we can compute the risk ratio for a disease as follows:
 +----------------+---------+----------+----------+
 |With disease    |  a      |  b       | a+b      |
 +----------------+---------+----------+----------+
-|without disease |  c      |  d       | c+d      |
+|Without disease |  c      |  d       | c+d      |
 +----------------+---------+----------+----------+
 |                | a+c     | b+d      | a+b+d+c  |
 +----------------+---------+----------+----------+ 
@@ -265,7 +265,8 @@ If we want to compute the odds ratio:
 If the disease is rare and not recurrent, then the risk ratio, the rate ratio and the odds ratio are numerically similar. Odds ratios are often derived from case-control studies in which people with and without the outcome of interest are compared for their exposure. Depending on how the controls were sampled the odds ratio in a case control study can be equivalent to the risk of rate ratios that would have been obtained if the whole population had been studied. 
 
 ..todo::
-    DISCUSS CASE-CONTROL STUDIES
+    give example how they are similar
+    DISCUSS CASE-CONTROL STUDIES- should we do another section on study designs?
 
 Difference measures
 ^^^^^^^^^^^^^^^^^^^
@@ -275,7 +276,7 @@ disease in the exposed group was due to the risk factor of interest. Two commonl
 
 *Risk difference* (RD) is the absolute differene between two risks. This is calculated by subracting the risk in the unexposed group :math:`risk_{0}` from the risk in the exposed group :math:`risk_{1}`:
 
-    Risk difference = risk in exposed :math:`risk_{1}` - risk in unexposed :math:`risk_{0}`
+    Risk difference (RD) = risk in exposed :math:`risk_{1}` - risk in unexposed :math:`risk_{0}`
 
 Similary, the rate difference is calculated by subtracting the rate in the unexposed from the rate in the exposed. 
 
@@ -287,7 +288,7 @@ In most situations, where disease is not very common, risk differences and rate 
 
 The *risk difference percent* (RD%) measures the proportion of cases in the exposed group that are due to the exposure. That is, the RD% is the excess risk among the exposed expressed as a proportion (or percentage) of the risk in the exposed group. It is calculated by dividing the risk difference by the risk among the exposed: 
 
-Risk difference % = :math:`\frac{risk_1-risk_0}{risk_1}`
+    Risk difference % = :math:`\frac{risk_1-risk_0}{risk_1}`
 
 For example, the RD% from the above example is :math:`\frac{(280/1000) - (150/1000)}{280/1000} = 0.46` or 46%
 
