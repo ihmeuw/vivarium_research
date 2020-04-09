@@ -782,7 +782,7 @@ foods on infant birth weight under the following assumptions:
 the onset of consumption. This assumption is partially supported by Andersson 
 et al. 2010, which found that the peak response occurs at approximately six 
 months after onset; however, we simplified this finding for our model and 
-assumed that there was only a response six months after onset of consumpiton 
+assumed that there was only a response six months after onset of consumption
 of iron fortified foods.
 
 2. The effect of maternal iron fortified food consumption must occur at the 
