@@ -176,9 +176,6 @@ Interventions
 Vitamin A Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Coverage 
-^^^^^^^^
-
 Effect Size
 ^^^^^^^^^^^
 
@@ -477,9 +474,48 @@ Where,
 
 	- rr_i is the relative risk assigned to the individual simulant
 
-.. todo::
+The pseudo-code used to implement the vitamin A intervention effect in Vivarium is shown below:
 
-	more detail here
+
+.. code-block:: Python
+
+	# Definitions
+	effectively_covered := individual is recieving fortification and it is affecting their 
+					probability of being vitamin a deficient.
+	t                   := current time
+
+	# Population level params
+	rr                = 1 if under 6 months, else 2.22 (or whatever)
+	coverage(t)       = baseline coverage of vitamin a fortification
+	exposure(t)       = baseline exposure to lack of vitamin a fortification 
+	                  = 1 - coverage(t)
+	delta_coverage(t) = intervention shift in baseline coverage of vitamin a fortification
+	coverage*(t)      = coverage(t) + delta_coverage(t)
+	exposure*(t)      = 1 - coverage*(t)
+	time_lag          = time from when an individual starts eating fortified 
+				food until the effect is present
+	mean_rr(t)        = rr * exposure(t) + 1 * (1 - exposure(t))
+	paf(t)            = (mean_rr(t) - 1)/mean_rr(t)
+	p_gbd(t)          = vitamin a deficiency exposure
+
+	# Individual attributes
+	qx_i           = propensity for an indidual to receive vitamin a fortification
+	x_i(t)         = whether an individual is receiving vitamin a fortification
+	               = qx_i > exposure*(t) 
+	               = qx_i < coverage*(t)   
+	tx_i           = time at which individual started receiving fortification
+	               = argmin_t(x_i(t) == True)
+
+	# Note this definition of eff_x_i depends on coverage*(t) weakly monotonically increasing
+	eff_x_i(t)     = whether an individual is effectively covered
+	               = (t - tx_i) > time_lag
+	qp_i           = propensity for an individual to be vitamin a deficient
+	rr(eff_x_i(t)) = 1 if eff_x_i(t) else rr
+	p_i(t)         = probability individual is vitamin a deficient
+	               = p_gbd(t) * (1 - paf(t)) * rr(eff_x_i(t))
+	y_i(t)         = whether an individual is vitamin a deficient
+	               = qp_i < p_i(t)
+
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
