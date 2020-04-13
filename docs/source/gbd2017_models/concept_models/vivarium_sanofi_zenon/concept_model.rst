@@ -371,19 +371,35 @@ Observers
 
    Confirm with RT/SE teams if these are the correct observers or if any observers should be removed/added. I added 'FPGTimeSeries', SBPTimeSeries', and 'LDLCTimeSeries' observers to account for the need to be able to provide Mean LDL-C/SBP/FPG value per location/sex/age group/scenario.
 
-- DisabilityObserver()
-- MedicationObserver()
-- DiseaseCountObserver('ischemic_heart_disease')
-- DiseaseCountObserver('ischemic_stroke)
-- DiseaseCountObserver('chronic_kidney_disease')
-- DiseaseCountObserver('diabetes_mellitus')
-- LDLCTimeSeriesObserver()
-- FPGTimeSeriesObserver()
-- SBPTimeSeriesObserver()
-- IKFTimeSeriesObserver()
-- SimulantTrajectoryObserver()
-- LDLCMortalityObserver()
 
+.. list-table:: Observers
+   :widths: 15 20
+   :header-rows: 1
+
+   * - Observer Type
+     - Definition 
+   * - Disability 
+     - Disability observed at the simulant-level throughout the simulation
+   * - Medication
+     - The treatment prescription (medication) observed at the simulation-level throughout the treatment algorithm per intervention scenario 
+   * - Disease observer - 'Ischemic heart disease (IHD)'
+     - Count of IHD observed at the simulant-level throughout the simulation 
+   * - Disease observer - 'Ischemic_stroke'
+     - Count of Ischemic stroke observed at the simulant-level throughout the simulation 
+   * - Disease observer - 'Chronic kidney disease (CKD)'
+     - Count of CKD observed at the simulant-level throughout the simulation 
+   * - Disease observer - 'Diabetes mellitus (DM)'
+     - Count of DM observed at the simulant-level throughout the simulation 
+   * - LDL-c 
+     - The LDL-c level in (mmol/L units) throughout the simulation at the simulant-level 
+   * - FPG 
+     - The FPG level in (mmol/L units) throughout the simulation at the simulant-level 
+   * - IKF 
+     - The category of IKF throughout the simulation at the simulant-level 
+   * - LDL-c Mortality
+     - The count of deaths due to LDL-c throughout the simulation at the simulant-level 
+   * - Doctor visit 
+     - The number of outpatient visits throughout the simulation at the simulant-level 
 
 Verification and Validation Strategy
 ------------------------------------
