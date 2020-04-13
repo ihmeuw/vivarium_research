@@ -778,18 +778,24 @@ See below for a visual representation:
 Our model will apply the effect size of maternal consumption of iron fortified 
 foods on infant birth weight under the following assumptions:
 
-1. The effect of consuming iron fortified foods takes place six months after 
-the onset of consumption. This assumption is partially supported by Andersson 
-et al. 2010, which found that the peak response occurs at approximately six 
-months after onset; however, we simplified this finding for our model and 
-assumed that there was only a response six months after onset of consumption
-of iron fortified foods.
+1. Maternal consumption of iron fortified foods must begin at week 20 
+(CI: 8 - 28) of gestation and continue for a minimum of seven weeks in 
+order to impact infant birth weight. This assumption is based on the studies
+included in [Haider-et-al-2013]_ that evaluated birth weight as an outcome.
+These studies initiated iron supplementation between approximately 8 and 28 
+weeks of gestation, with most studies initiating approximately at week 20 of 
+gestation. Additionally, [Haider-et-al-2013]_ found that supplementation 
+duration did not affect the relationship between maternal iron consumption 
+and birth weight after adjusting for dose; however, the minimum duration of 
+iron consumption in the studies included in [Haider-et-al-2013]_ was seven
+weeks, so we used this as the lower bound of necessary duration for our model.
 
-2. The effect of maternal iron fortified food consumption must occur at the 
-start of the third trimester of pregnancy in order to impact infant birth 
-weight, which we assumed was equal to 3 months prior to birth of the infant. 
-We chose to make this assumption because the effect of maternal iron was 
-measured at the third trimester in the Haider et al. 2013 paper.
+2. We assumed that each simulant was born at 40 weeks of gestation.
+
+.. todo::
+
+	Update this assumption pending confirmation to model gestational age 
+	(Nathaniel will follow-up).
 
 3. A simulant's birth weight will affect their all-cause mortality rate
 during the early and late neonatal periods only. This assumption is a 
@@ -801,24 +807,17 @@ short gestation (LBWSG) risk factor in GBD.
 	Cite the LBWSG risk factor page once created.
 
 Therefore, for our simulation, an infant's mother must have gained coverage 
-to iron fortified foods at least **nine months prior to the birth of the 
+to iron fortified foods at least **twenty weeks prior to the birth of the 
 infant** in order for the iron fortification coverage to affect the infant's 
 birth weight.
-
-.. todo::
-
-  Confirm that this is the best approach by evaluating the individual studies 
-  cited in the Haider et al. 2013 paper and update as necessary (as discussed 
-  in `PR #181 <https://github.com/ihmeuw/vivarium_research/pull/181>`_).
 
 .. note:: 
 
   The following was adopted from Nathaniel's description for folic acid.
 
-
 1.  **Define variables:** Each simulant needs an attribute
     `mother_ate_iron_fortified_food`, which will be `True` if the simulant's
-    mother ate iron fortified food starting at least nine months (0.75 years) 
+    mother ate iron fortified food starting at least twenty weeks (0.384 years) 
     before the simulant was born, `False` if not, and `Unknown` if we don't 
     know.
 
@@ -837,13 +836,13 @@ birth weight.
 3.  **Initialize simulants born into the simulation:** For each simulant born
     at time :math:`t` (in years), the probability that the simulant's mother
     started eating iron-fortified food at nine months prior is equal to the
-    population coverage nine months prior, :math:`C(t-0.75)`. Therefore, upon 
+    population coverage nine months prior, :math:`C(t-0.384)`. Therefore, upon 
     the simulant's birth, do the following:
 
   a.  Generate a uniform random number :math:`u\sim
       \operatorname{Uniform}([0,1])`.
 
-  b.  If :math:`u<C(t-0.75)`, `mother_ate_iron_fortified_food = True`;
+  b.  If :math:`u<C(t-0.384)`, `mother_ate_iron_fortified_food = True`;
       else `mother_ate_iron_fortified_food = False`.
 
 Note that we are assuming that once someone (in this case the baby's mother)
