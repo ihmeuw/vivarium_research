@@ -233,6 +233,17 @@ risk curve) for the computed relative risks for a given risk factor. Using
 these criteria, GBD researchers create a quantitive quality of evidence score 
 for each risk-outcome pair in GBD.
 
+.. note::
+
+	The formal evidence scoring system is planned to be used in GBD 2020 and 
+	was not used in this systematic way for previous GBD rounds.
+
+	Additional, this evaluation of the epidemiological evidence to support a 
+	causal relationship between a risk-outcome pair is part of a large process 
+	that GBD uses to select risk-outcome pairs to model, which includes an 
+	evaluation of the importance of the risk factor to the outcome, data 
+	availability, and generalizability.
+
 Specifically, GBD researchers evaluate the risk of bias within individual 
 studies based on the following characteristics:
 
@@ -250,7 +261,7 @@ studies based on the following characteristics:
 
   a) Death certificatie/physician diagnosis/medical records versus self-report
 
-  b) Blind outocme assessment versus not
+  b) Blind outcome assessment versus not
 
 4) Reverse causation: low, medium, high
 
@@ -272,21 +283,22 @@ studies based on the following characteristics:
 
   c) Low follow-up (<85%), considerable opportunity for selection
 
+Parameters related to evidence quality are then accounted for in the assessment
+of the relationship of the risk-outcome pair through MR-BRT analyses.
+
 .. note::
 
   This information was obtained from a science seminar presented by Ryan 
   Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`_. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`_.
 
-.. note::
-
-  It may be helpful to add sections for bias (selection bias, measurement 
-  bias, confounding bias, etc.) and generalizability to the above causal 
-  relationships section for additional context here.
-
 .. todo::
 
   Add additional section for causal inference on the simulation science team, 
   specifically.
+
+  Additionally, t may be helpful to add sections for bias (selection bias, 
+  measurement bias, confounding bias, etc.) and generalizability to the above 
+  causal relationships section for additional context here.
 
 What is a risk exposure?
 ++++++++++++++++++++++++
