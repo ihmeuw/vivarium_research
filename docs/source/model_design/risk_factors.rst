@@ -227,7 +227,7 @@ Specifically, before computing the relative risks for a GBD risk factor, GBD
 researchers evaluate the *risk of bias* among individual studies that 
 investigate the relationship between a risk-outcome pair. Then, GBD 
 researchers additionally evaluate the strength (as a direct result of the 
-relative risk curve they compute), consistency (through evluating between 
+relative risk curve they compute), consistency (through evaluating between 
 study heterogeneity), and dose-response (through the shape of the relative 
 risk curve) for the computed relative risks for a given risk factor. Using 
 these criteria, GBD researchers create a quantitive quality of evidence score 
