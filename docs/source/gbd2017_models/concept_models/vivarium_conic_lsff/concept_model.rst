@@ -176,9 +176,6 @@ Interventions
 Vitamin A Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Coverage 
-^^^^^^^^
-
 Effect Size
 ^^^^^^^^^^^
 
@@ -487,9 +484,51 @@ Where,
 
 	- rr_i is the relative risk assigned to the individual simulant
 
-.. todo::
+The pseudo-code used to implement the vitamin A intervention effect in Vivarium is shown below:
 
-	more detail here
+
+.. code-block:: Python
+
+	# Definitions
+	effectively_covered := individual is recieving fortification and it is affecting their 
+					probability of being vitamin a deficient.
+	t                   := current time
+
+	# Population level params
+	rr                = 1 if under 6 months, else 2.22 (or whatever)
+	coverage(t)       = baseline coverage of vitamin a fortification
+	exposure(t)       = baseline exposure to lack of vitamin a fortification 
+	                  = 1 - coverage(t)
+	delta_coverage(t) = intervention shift in baseline coverage of vitamin a fortification
+	coverage*(t)      = coverage(t) + delta_coverage(t)
+	exposure*(t)      = 1 - coverage*(t)
+	time_lag          = time from when an individual starts eating fortified 
+				food until the effect is present
+	mean_rr(t)        = rr * exposure(t) + 1 * (1 - exposure(t))
+	paf(t)            = (mean_rr(t) - 1)/mean_rr(t)
+	p_gbd(t)          = vitamin a deficiency exposure
+
+	# Individual attributes
+	qx_i           = propensity for an indidual to receive vitamin a fortification
+	x_i(t)         = whether an individual is receiving vitamin a fortification
+	               = qx_i > exposure*(t) 
+	               = qx_i < coverage*(t)   
+	tx_i           = time at which individual started receiving fortification
+	               = argmin_t(x_i(t) == True)
+
+	# Note this definition of eff_x_i depends on coverage*(t) weakly monotonically increasing
+	eff_x_i(t)     = whether an individual is effectively covered
+	               = (t - tx_i) > time_lag
+	qp_i           = propensity for an individual to be vitamin a deficient
+	rr(eff_x_i(t)) = 1 if eff_x_i(t) else rr
+	p_i(t)         = probability individual is vitamin a deficient
+	               = p_gbd(t) * (1 - paf(t)) * rr(eff_x_i(t))
+	y_i(t)         = whether an individual is vitamin a deficient
+	               = qp_i < p_i(t)
+
+.. note::
+
+	Perhaps need to make coverage inclusive such that: qx_i > exposure*(t) and qx_i >= coverage*(t) for future model runs
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
@@ -631,22 +670,30 @@ accordingly. See the table below:
     - Concentration of forticant in flour
     - Amount of fortifiable flour consumed daily
   * - Ethiopia
-    - 30 mg NaFeEDTA / kg flour  [1]; use point value
+    - 30 mg iron as NaFeEDTA / kg flour  [1]; use point value
     - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
   * - India
-    - 14 to 21.25 mg NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
+    - 14 to 21.25 mg iron as NaFeEDTA / kg flour [1]; sample from uniform distribution with range: 14 - 21.25
     - 100 g (IQR: 77.5, 200) [2*]; sample from distribution described below
   * - Nigeria
-    - 40 mg NaFeEDTA / kg flour [1]; use point value
+    - 40 mg iron as NaFeEDTA / kg flour [1]; use point value
     - 100 g (IQR:77.5, 200) [2*]; sample from distribution described below
 
 .. note::
 
-	While there was data for the concentration of iron forticants other
-	than NaFeEDTA for the locations in this table, we conservatively chose 
-	to use the concentrations of the NaFeEDTA forticant. This is because the
-	concentration of elemental iron in flour is lower when the NaFeEDTA 
-	forticant is used compared to other forticants.
+  While there was data for the concentration of iron forticants other
+  than NaFeEDTA for the locations in this table, we conservatively chose 
+  to use the concentrations of the NaFeEDTA forticant. This is because the
+  concentration of elemental iron in flour is lower when the NaFeEDTA 
+  forticant is used compared to other forticants.
+
+  We assumed that the concentrations listed in the 
+  [Global-Fortification-Data-Exchange]_ represented miligrams of 
+  *elemental iron as NaFeEDTA* per kilogram of flour rather than miligrams of 
+  NaFeEDTA per kilogram of flour. While this was not explicitly stated on the 
+  [Global-Fortification-Data-Exchange]_, the available literature suggests 
+  that this is the measurement convention and is consistent with typical doses 
+  of iron via fortification using NaFeEDTA [Hurrell-et-al-2010]_.
 
 [1] [Global-Fortification-Data-Exchange]_
 
@@ -662,13 +709,11 @@ Ethiopia.
 	Nigeria and India.
 
 The amount of elemental iron consumed daily, in miligrams per person, (at the 
-draw level) should be calculated as such (where X is mg of NaFeEDTA per kg of 
-flour and Y is grams of flour consumed daily per person, as defined in the
-table above):
+draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg of flour and Y is grams of flour consumed daily per person, as defined in the table above):
 
 .. math::
 
-	\frac{\text{X mg NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} * \frac{\text{55.845 g elemental iron}}{\text{367.047 g NaFeEDTA}} 
+	\frac{\text{X mg iron as NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} 
 
 First, we must sample values from the distribution of the amount of flour 
 eaten per day *at the individual simulant level*. We chose to sample at the 
@@ -713,8 +758,7 @@ be calculated as follows:
   # iron_concentration_in_flour : location-specific value from table above
 
   elemental_iron_consumed_per_day_i = (daily_flour_consumption_i 
-      * iron_concentration_in_flour 
-      * 0.00015)
+      * iron_concentration_in_flour / 1_000)
 
 Then, the specific effect size of iron fortification on low birth weight can 
 be calculated as follows (where Z is the location-specific amount of elemental 
@@ -857,9 +901,88 @@ See below for a visual representation:
 
 **Birth Weight** 
 
-.. todo:: 
+Our model will apply the effect size of maternal consumption of iron fortified 
+foods on infant birth weight under the following assumptions:
 
-	Write this section
+1. Maternal consumption of iron fortified foods must begin at week 20 
+(CI: 8 - 28) of gestation and continue for a minimum of seven weeks in 
+order to impact infant birth weight. This assumption is based on the studies
+included in [Haider-et-al-2013]_ that evaluated birth weight as an outcome.
+These studies initiated iron supplementation between approximately 8 and 28 
+weeks of gestation, with most studies initiating approximately at week 20 of 
+gestation. Additionally, [Haider-et-al-2013]_ found that supplementation 
+duration did not affect the relationship between maternal iron consumption 
+and birth weight after adjusting for dose; however, the minimum duration of 
+iron consumption in the studies included in [Haider-et-al-2013]_ was seven
+weeks, so we used this as the lower bound of necessary duration for our model.
+
+2. We assumed that each simulant was born at 40 weeks of gestation.
+
+.. todo::
+
+	Update this assumption pending confirmation to model gestational age 
+	(Nathaniel will follow-up).
+
+3. A simulant's birth weight will affect their all-cause mortality rate
+during the early and late neonatal periods only. This assumption is a 
+product of assumptions made in the modeling of the low birth weight and 
+short gestation (LBWSG) risk factor in GBD. 
+
+.. todo::
+
+	Cite the LBWSG risk factor page once created.
+
+Therefore, for our simulation, an infant's mother must have gained coverage 
+to iron fortified foods at least **twenty weeks prior to the birth of the 
+infant** in order for the iron fortification coverage to affect the infant's 
+birth weight.
+
+.. note:: 
+
+  The following was adopted from Nathaniel's description for folic acid.
+
+1.  **Define variables:** Each simulant needs an attribute
+    `mother_ate_iron_fortified_food`, which will be `True` if the simulant's
+    mother ate iron fortified food starting at least twenty weeks (0.384 years) 
+    before the simulant was born, `False` if not, and `Unknown` if we don't 
+    know.
+
+2.  **Initialize the simulation:** At the start of the simulation for the early 
+    neonatal and late neonatal age groups (IDs 2 and 3), set 
+    `mother_ate_iron_fortified_food = True` for a proportion of the population 
+    equal to baseline coverage of iron fortification at simulation start, 
+    :math:`C(0)`. Set `mother_ate_iron_fortified_food = False` for a proportion 
+    of the population equal to 1 - baseline coverage of iron fortification at 
+    simulation start, :math:`1 - C(0)`. Set
+    `mother_ate_iron_fortified_food = Unknown` for all simulants in the 
+    post-neonatal and 1-4 year age groups (age_group_ids 4 and 5); 
+    this attribute will not be used for these age groups because the 
+    LBWSG risk factor does not apply.
+
+3.  **Initialize simulants born into the simulation:** For each simulant born
+    at time :math:`t` (in years), the probability that the simulant's mother
+    started eating iron-fortified food at nine months prior is equal to the
+    population coverage nine months prior, :math:`C(t-0.384)`. Therefore, upon 
+    the simulant's birth, do the following:
+
+  a.  Generate a uniform random number :math:`u\sim
+      \operatorname{Uniform}([0,1])`.
+
+  b.  If :math:`u<C(t-0.384)`, `mother_ate_iron_fortified_food = True`;
+      else `mother_ate_iron_fortified_food = False`.
+
+Note that we are assuming that once someone (in this case the baby's mother)
+starts eating fortified food, they will continue to eat the fortified food
+forever. Additionally, we assume that those covered by baseline coverage of 
+iron fortification have been covered for at least nine months + age of the 
+simulant (in the case of simulants initialized in the early neonatal age 
+groups).
+
+Then, for simulants with the attribute `mother_ate_iron_fortified_food = True`,
+the effect size of iron fortification on birth weight, calculated as described 
+above (`Effect Size - Iron`_), should be applied as an **additive shift** to 
+the simulant's birth weight (in grams). This may then impact their LBWSG risk 
+category.
 
 Application of Effect to Simulants - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -926,12 +1049,17 @@ Equations:
 
 Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
 
-Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by baseline coverage and ∆_π_1 as the additive effect size for simulants not covered by baseline coverage (apply in the same fashion as described in the sections above; notably, this is only done in the iron_responsive_i = 1 population for the hemoglobin outcome).
+Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by 
+baseline coverage and ∆_π_1 as the additive effect size for simulants not 
+covered by baseline coverage (apply in the same fashion as described in the 
+sections above; notably, this is only done in the iron_responsive_i = 1 
+population for the hemoglobin outcome).
 
 .. note::
 
-  Through this method, we assume that π_0 - π_1 = effect_size is true for our model population(s).
-  
+  Through this method, we assume that π_0 - π_1 = effect_size is true for our 
+  model population(s).
+
 .. todo::
 
   Improve formatting/layout in this section
@@ -1299,7 +1427,7 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
-  
+
 References
 ----------
 
@@ -1406,6 +1534,14 @@ References
     Hombali  AS, Solon  JA, Venkatesh  BT, Nair  NS, Peña‐Rosas  JP. Fortification of staple foods with vitamin A for vitamin A deficiency. Cochrane Database of Systematic Reviews 2019, Issue 5. Art. No.: CD010068. DOI: 10.1002/14651858.CD010068.pub2.
 
 .. _`Hombali et al. 2019`: https://doi.org/10.1002/14651858.CD010068.pub2
+
+.. [Hurrell-et-al-2010]
+
+  View `Hurrell et al. 2010`_
+
+    Hurrell, R., Ranum, P., de Pee, S., Biebinger, R., Hulthen, L., Johnson, Q., & Lynch, S. (2010). Revised Recommendations for Iron Fortification of Wheat Flour and an Evaluation of the Expected Impact of Current National Wheat Flour Fortification Programs. Food and Nutrition Bulletin, 31(1_suppl1), S7–S21. https://doi.org/10.1177/15648265100311S102
+
+.. _`Hurrell et al. 2010`: https://doi.org/10.1177/15648265100311S102
 
 .. [Imdad-et-al-2016]
 
