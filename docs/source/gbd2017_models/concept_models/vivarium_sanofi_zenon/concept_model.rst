@@ -244,7 +244,7 @@ Information about Table 1: For post-MI visits, the patient is given Rx with prob
 
 Information about Table 2: For background visits, if a patient is above the relevant threshold (4.9 mmol/L in BAU and according to the treatment algorithm involving SCORE, DM/CKD state, and SBP in the 2 intervention scenarios), they may or may not (therapeutic inertia) be given Rx. Whether they are given Rx given that they are above the threshold is determined by the data in Table 2.
 
-.. csv-table:: Table 2: Probability of Rx given high LDL-C = prob(Rx | LDL-C > 4.9)
+.. csv-table:: Table 2: Probability of Rx given high LDL-C = P(Rx | Untreated LDL-C > 4.9)
    :file: prob_rx_given_high_ldlc.csv
    :widths: 20, 10, 10
    :header-rows: 1
