@@ -516,6 +516,9 @@ The pseudo-code used to implement the vitamin A intervention effect in Vivarium 
 	y_i(t)         = whether an individual is vitamin a deficient
 	               = qp_i < p_i(t)
 
+.. note::
+
+	Perhaps need to make coverage inclusive such that: qx_i > exposure*(t) and qx_i >= coverage*(t) for future model runs
 
 Iron Fortification
 ~~~~~~~~~~~~~~~~~~
