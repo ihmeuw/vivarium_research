@@ -1,3 +1,26 @@
+..
+  Section title decorators for this document:
+
+  ==============
+  Document Title
+  ==============
+
+  Section Level 1
+  ---------------
+
+  Section Level 2
+  +++++++++++++++
+
+  Section Level 3
+  ~~~~~~~~~~~~~~~
+
+  Section Level 4
+  ^^^^^^^^^^^^^^^
+
+  Section Level 5
+  '''''''''''''''
+
+
 .. _2017_concept_model_vivarium_conic_lsff:
 
 =============================================
@@ -127,28 +150,29 @@ PAF-of-1 Cause/Risk Pairs
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
 
-Effect size stratification for baseline population
-++++++++++++++++++++++++++++++++++++++++++++++++++
+Stratifying Exposure Variables by Baseline Intervention Coverage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 From GBD we obtain overall population estimates for our outcomes of interest
 (prevalence of vitamin A deficiency, birth prevalence of neural tube defects,
 distribution of haemoglobin levels, and distribution of birth weights). Because
-there exists baseline coverage of our interventions -- i.e. there is already
-some food fortification occurring in the locations we are simulating -- these
+there exists baseline coverage of our interventions --- i.e. there is already
+some food fortification occurring in the locations we are simulating --- these
 overall population estimates include both people who are eating fortified food
 and those who are not.
 
 When we introduce additional food fortification into the population, only those
 who are *not* already eating fortified food should receive the benefit.
 Therefore, in order to properly measure the effects of our interventions, we
-must first stratify our population into those who were already covered vs. not
+must first stratify our population into those who are already covered vs. not
 covered by the forticant of interest. We then need to calculate the risk
-exposure in each coverage stratum to get a complete picture of the baseline
-population. For example, we need to know the prevalence of vitamin A deficiency
-or the distribution of haemoglobin in the subpopulation already eating fortified
-food as well as in the subpopulation not eating fortified food.
+exposure (or other relevant outcome) in each coverage stratum to get a complete
+picture of the baseline population. For example, we will need to know the
+prevalence of vitamin A deficiency or the distribution of haemoglobin in the
+subpopulation already eating fortified food as well as in the subpopulation not
+eating fortified food.
 
-These coverage-stratified risk exposures are calculated so that
+These coverage-stratified exposures are calculated so that:
 
 1.  Their population-weighted average matches the overall population estimate
     from GBD, and
@@ -162,8 +186,8 @@ mean haemoglobin level between the fortified and unfortified groups should match
 the mean shift in haemoglobin from iron fortification found in the literature.
 When we stratify the population in this way, we are assuming that the effect
 sizes of fortification found in the literature are generalizable to the
-populations we are simulating (note if this assumption is *not* true, we should
-not be simulating the interventions in theses populations at all).
+populations we are simulating (note that if this assumption is *not* true, we
+should not be simulating the interventions in theses populations at all).
 
 .. todo::
 
@@ -175,23 +199,23 @@ not be simulating the interventions in theses populations at all).
   the shape of the underlying exposure distribution, and the magnitude of the
   effect size.
 
-The details of stratifying the baseline population depend on form of the risk
+The details of stratifying the baseline population depend on the form of the
 exposure distribution, in particular whether it is categorical or continuous.
-The simplest case is for a dichotomous risk (e.g. vitamin A deficiency or neural
-tube defects). This situation has been dealt with in a number of Vivarium models
-under the title "Coverage Gap Framework." The strategy for continuous risk
+The simplest case is for a dichotomous outcome (e.g. vitamin A deficiency or
+neural tube defects). This situation has been dealt with in a number of Vivarium
+models under the title "Coverage Gap Framework." The strategy for continuous
 exposure distributions (e.g. haemoglobin or birth weight) is less well-developed
 -- the current approach only approximates a true stratification of the
 continuous distribution, and it has mathematical limitations that may be
 problematic in certain situations. We discuss the dichotomous and continuous
 cases in separate sections below.
 
-Coverage Gap Framework for Dichotomous Risk Exposures
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framework)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This method applies to exposures with dichotomous distributions such as Vitamin A deficiency or neural tube defects:
+This method applies to exposures with dichotomous measures such as Vitamin A deficiency or neural tube defects:
 
-We always define the exposure as bad to match GBD 2017 definitions, so relative risks are always >1.
+We always define the exposure as bad to match GBD 2017 definitions for risk exposures, so relative risks are always >1.
 
 :math:`C_{vita_{baseline}}`: coverage of vitamin A fortified food in the population from the literature that is applied to our sim population at baseline
 
@@ -211,24 +235,40 @@ PAF= :math:`\frac{P_{exposure_{baseline}}(RR-1)}{1+P_{exposure_{baseline}}(RR-1)
 
 1-PAF= :math:`\frac{1}{1+P_{exposure_{baseline}}(RR-1)}`
 
-*Important assumptions and limitations* This equation for PAF is valid under the
-assumption of no confounding. An alternate equation for PAF should be used when
-to get an unbiased PAF in the presence of confounding; however, we will need the
-attributable fraction in the exposed which we do not readily have. Hence this is
-a limitation. The RRs we use, and the exposure % we use are approximating the
-PAFs. We make the assumption that the RRs pulled from literature is
-generalizable.
+**Important assumptions and limitations:** This equation for PAF is valid under
+the assumption of no confounding. An alternate equation for PAF should be used
+when to get an unbiased PAF in the presence of confounding; however, we will
+need the attributable fraction in the exposed which we do not readily have.
+Hence this is a limitation. The RRs we use, and the exposure % we use are
+approximating the PAFs. We make the assumption that the RRs pulled from
+literature is generalizable.
 
 .. todo::
 
-   reference Darrow and Steenland. Confounding and bias in the attributable fraction. *Epidemiology*. 2011 Jan;22(1):53-8. doi: 10.1097/EDE.0b013e3181fce49b.
+   Reference Darrow and Steenland. Confounding and bias in the attributable
+   fraction. *Epidemiology*. 2011 Jan;22(1):53-8. DOI:
+   https://doi.org/10.1097/EDE.0b013e3181fce49b.
 
 
 risk in (1-:math:`C_{vita}`), exposed group: :math:`ϴ_{1}= ϴ_{GBD}*(1-PAF)*RR` … equation 1
 
 risk in (:math:`C_{vita}`), unexposed group: :math:`ϴ_{0}= ϴ_{GBD}*(1-PAF)` … equation 2
 
-**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and shifts the amount of people who receive equation 1 to equation 2.
+**How to apply the intervention**: the intervention increases the population
+coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and
+shifts the amount of people who receive equation 1 to equation 2.
+
+Baseline Coverage Stratification -- Continuous Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This method applies to continuous exposure variables such as hemoglobin or birth
+weight.
+
+The steps for performing baseline stratification for continuous variables are
+outlined in the section `Baseline Calibration -- Hemoglobin and Birth Weight`_
+below.
+
+
 
 Interventions
 +++++++++++++
@@ -887,7 +927,8 @@ See below for a visual representation:
 Application of Effect to Simulants - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Hemoglobin Level**
+Hemoglobin Level
+''''''''''''''''
 
 The age- and time-dependent effect of iron fortification on a simulant's
 hemoglobin level (as documented in the sections above) should be **additively**
@@ -904,7 +945,8 @@ should **not** be applied to that simulant.
 
   See Baseline Calibration section below for special considerations regarding baseline coverage
 
-**Birth Weight**
+Birth Weight
+''''''''''''
 
 The time-dependent effect of iron fortification on a simulant's birth weight
 (as documented in the sections above) should be **additively** applied to a
@@ -919,7 +961,8 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 
 .. todo:: Reference the LBWSG risk factor page when complete
 
-**Baseline Calibration -- Hemoglobin and Birth Weight**
+Baseline Calibration -- Hemoglobin and Birth Weight
+'''''''''''''''''''''''''''''''''''''''''''''''''''
 
 - **C_forticant_base** = coverage of forticant in the population at baseline
 
