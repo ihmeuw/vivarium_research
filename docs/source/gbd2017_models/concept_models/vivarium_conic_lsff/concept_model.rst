@@ -268,7 +268,9 @@ The steps for performing baseline stratification for continuous variables are
 outlined in the section `Baseline Calibration -- Hemoglobin and Birth Weight`_
 below.
 
+.. todo::
 
+  Add more details to this section.
 
 Interventions
 +++++++++++++
