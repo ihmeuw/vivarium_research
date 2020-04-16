@@ -215,7 +215,7 @@ Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framewor
 
 This method applies to exposures with dichotomous measures such as Vitamin A deficiency or neural tube defects:
 
-We always define the exposure as bad to match GBD 2017 definitions for risk exposures, so relative risks are always >1.
+We always define the exposure as deleterious to match GBD 2017 definitions for risk exposures, so relative risks are always >1.
 
 :math:`C_{vita_{baseline}}`: coverage of vitamin A fortified food in the population from the literature that is applied to our sim population at baseline
 
