@@ -183,37 +183,41 @@ Effect Size
 
 In this model, the vitamin A fortification intervention affects the 
 **prevalence of vitamin A deficiency**. The effect size for this intervention 
-was obtained from a Cochrane review performed by Hombali et al. (2019) on the 
+was obtained from a Cochrane review performed by [Hombali-et-al-2019]_ on the 
 fortification of staple foods with vitamin A for vitamin A deficiency. 
 Notably, the relative risk for vitamin A foritification on vitamin A 
 deficiency from this review only included data from two randomized controlled 
 trials and the authors of the review assessed the certainty of the evidence to 
-be "very low" (Hombali et al. 2019). The relative risk of vitamin A deficiency 
+be "very low" [Hombali-et-al-2019]_. The relative risk of vitamin A deficiency 
 prevalence among an intervention population exposed to vitamin A fortified 
 staple foods relative to a control population given the same staple foods not 
 fortified with vitamin A from this review was **0.45 (95% CI: 0.19 - 1.05)**.
 
 Therefore, we conducted a supplementary analysis of the effect of the 
 intervention by pooling the RCT studies from the Cochrane review with studies 
-included in the systematic review and meta-analysis performed by Keats et al. 
-(2019). Notably, none of the studies identified from the Keats et al. (2019) 
-review *directly* reported measures of relative risk of vitamin A deficiency 
-prevalence among the population exposed to vitamin A fortification relative to 
-the population unexposed to vitamin A fortification. Therefore, we manually 
-calculated this value based on data reported in study tables and figures, 
-which required visual approximations of certain values. Notably, when this 
-supplementary meta-analysis was performed, the resulting relative risk was 
-calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when limited to sugar 
-and oil vehicles for the vitamin A forticant, the relative risk was **0.36 
-(95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses are represented 
-in the forest plots below. 
+included in the systematic review and meta-analysis performed by 
+[Keats-et-al-2019]_. Notably, none of the studies identified from the 
+[Keats-et-al-2019]_ review *directly* reported measures of relative risk of 
+vitamin A deficiency prevalence among the population exposed to vitamin A 
+fortification relative to the population unexposed to vitamin A fortification. 
+Therefore, we manually calculated this value based on data reported in study 
+tables and figures, which required visual approximations of certain values. 
+Notably, when this supplementary meta-analysis was performed, the resulting 
+relative risk was calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when 
+limited to sugar and oil vehicles for the vitamin A forticant, the relative 
+risk was **0.36 (95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses 
+are represented in the forest plots below. 
 
 .. image:: vitamin_a_meta.png
 
 .. image:: vitamin_a_meta_sugar_oil.png
 
+.. note::
+
+  There is a spreadsheet of study summaries of the individual studies as well as PDFs of each study included in these meta-analyses hosted on the simulation science research team google drive
+
 While the supplementary meta-analysis shown above contains more studies and 
-data than the Cochrane review, it relies on results that were not directly 
+data than the [Hombali-et-al-2019]_ Cochrane review, it relies on results that were not directly 
 reported in the individual studies (and in some cases visaully estimated 
 values). **Therefore, we will conservatively use the results from the Cochrane 
 review, with increased certainty in the results based on the confirmatory 
@@ -225,28 +229,34 @@ Guatemala, South Africa, Nicaragua, Indonesia, and the Phillipines. Therefore,
 we concluded that it is **reasonable to assume generalizability of these 
 results to our model populations.**
 
-Regarding effect sizes in young age groups, Sandjaja et al. (2015) reported 
+Regarding effect sizes in young age groups, [Sandjaja-et-al-2015]_ reported 
 that population vitamin A fortification improved serum retinol concentrations 
 among infants aged 6-11 months. Therefore, **we assumed that the effect size 
 from the Cochrane review applies to all age groups above six months of age.** 
 
 	Notably, the effect can occur either through the direct consumption of 
 	vitamin A fortified foods or through the consumption of breastmilk from 
-	mothers who consume vitamin A fortified foods (Sandjaja et al. 2015; WHO 
-	Guidelines).
+	mothers who consume vitamin A fortified foods [Sandjaja-et-al-2015]_; [WHO-Vitamin-A-Supplementation-Guidelines]_.
 
 For individuals aged between 0 and six months, we made the following 
 assumptions:
 
 	1. Maternal consumption of vitamin A fortified foods has no effect on 
 	infant vitamin A deficiency birth prevalence. This assumption is supported 
-	by studies performed by Dror and Allen (2018).
+  by [Dror-and-Allen-2018]_.
 
 	2. Maternal consumption of vitamin A fortified foods has no effect on 
 	infant vitamin A deficiency from 0 to six months of age. This assumption 
 	is largely supported by the vitamin A *supplementation* literature among 
-	these age groups and is reflected in WHO guidelines (WHO Guideline: 
-	Vitamin A Supplementation in Infants 1-5 Months of Age).
+	these age groups [Imdad-et-al-2016]_ and is reflected in the [WHO-Vitamin-A-Supplementation-Guidelines]_.
+
+.. note:: 
+
+  PAF = 0 for all causes except for vitamin A deficiency paf-of-one cause for 
+  vitamin a deficiency risk factor in the early neonatal and late neonatal age 
+  groups. Implication for this is that excluding these age groups will only 
+  potentially impact the YLDs accumulated during the person-time spent in 
+  these age groups.
 
 Additionally, we made assumptions regarding the response time following the 
 onset of exposure to vitamin A fortification, including:
@@ -257,15 +267,15 @@ onset of exposure to vitamin A fortification, including:
 	the response time to vitamin A fortification, so we used data on the 
 	response time to vitamin D (another fat-soluble vitamin) supplementation 
 	as a proxy. The literature larely indicated that response to vitamin D 
-	supplementation plateaus between 2 and 12 months (Heaney et al. 2008; 
-	Vieth 1999; Taalat et al. 2016; ADDITIONAL). We assumed that the 
+	supplementation plateaus between 2 and 12 months ([Heaney-2008]_, 
+	[Vieth-1999]_, [Talaat-et-al-2016]_). We assumed that the 
 	distribution of response times follows a lognormal distribution with a 
 	median value of five months, a 0.025 percentile of 2 months, and a 0.975 
 	percentile of 12 months.
 
  	2. If an individual was covered by baseline coverage of vitamin A 
  	fotification, we assumed that the individual was covered (via breastmilk 
- 	or direct consumption) for long engough to exhibit a response (at least 12 
+ 	or direct consumption) for long enough to exhibit a response (at least 12 
  	months).
 
  .. todo::
@@ -560,11 +570,12 @@ foods.
 **Hemoglobin Level**
 
 The effect of iron fortified food consumption on children under 7 years of age 
-was obtained from the Keats et al. systematic review. However, the effect size 
-in this review was reported in standardized mean differences rather than in 
-units of hemoglobin concentration directly. Therefore, we performed a separate 
-meta-analysis of the results included in the Keats et al. review to obtain shifts 
-in hemoglobin concentration. This meta-analysis is shown below.
+was obtained from the [Keats-et-al-2019]_ systematic review. However, the 
+effect size in this review was reported in standardized mean differences 
+rather than in units of hemoglobin concentration directly. Therefore, we 
+performed a separate meta-analysis of the results included in the 
+[Keats-et-al-2019]_ review to obtain shifts in hemoglobin concentration. This 
+meta-analysis is shown below.
 
 .. image:: iron_meta.png
 
@@ -585,8 +596,9 @@ iron fortification of staple foods.
 	hemoglobin levels.
 
 To model the uncertainty in the estimate, the above mean difference (MD) 
-should be drawn from a normal distribution with mean = 3.0, 2.5\ :superscript:`
-th`-percentile = -0.2, and 97.5\ :superscript:`th`-percentile = 6.1. This 
+should be drawn from a normal distribution with mean = 3.0, 
+2.5\ :superscript:`th`-percentile = -0.2, and 
+97.5\ :superscript:`th`-percentile = 6.1. This 
 distbibution can be created using `SciPy's norm function
 <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
 as follows:
@@ -617,7 +629,7 @@ as follows:
 **Birth Weight**
 
 The effect of maternal consumption of iron fortified food on infant birth 
-weight was obtained from Haider et al. (BMJ 2013). According to this data 
+weight was obtained from [Haider-et-al-2013]_. According to this data 
 source, birth weight among babies born to mothers increased, on average, by 
 15.1 grams (95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The 
 distribution of the parameter should be modeled as follows:
@@ -643,7 +655,7 @@ distribution of the parameter should be modeled as follows:
 
 .. note::
 
-	The Haider et al. 2013 paper did not report if the dose of iron was measured as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of daily iron consumption, as referenced in the Haider paper, represented 10 mg of *elemental* iron.
+	The [Haider-et-al-2013]_ paper did not report if the dose of iron was measured as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of daily iron consumption, as referenced in [Haider-et-al-2013]_, represented 10 mg of *elemental* iron.
 
 Therefore, we investigated the amount of daily iron consumption that a 
 pregnant mother would likely consume through iron fortification of staple 
@@ -683,9 +695,9 @@ accordingly. See the table below:
   that this is the measurement convention and is consistent with typical doses 
   of iron via fortification using NaFeEDTA [Hurrell-et-al-2010]_.
 
-[1] `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
+[1] [Global-Fortification-Data-Exchange]_
 
-[2] `Ethiopian National Food Consumption Survey <https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf>`_ (table 18; women)
+[2] [Ethiopian-National-Food-Consumption-Survey]_
 
 *In the absence of better data, we assumed that individuals in Nigeria and 
 India consumed the same amount of fortifiable flour per day as individuals in 
@@ -706,7 +718,7 @@ draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg 
 First, we must sample values from the distribution of the amount of flour 
 eaten per day *at the individual simulant level*. We chose to sample at the 
 individual simulant level rather than the draw level because the underlying 
-data from the `Ethiopian National Food Consumption Survey <https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf>`_ 
+data from the [Ethiopian-National-Food-Consumption-Survey]_
 represented variation in individual consumption rather than uncertainty around 
 a population mean value. The survey reported that the median daily consumption 
 was 100 g (IQR: 77.5, 200). We assumed that the minumum and maximum values in 
@@ -774,34 +786,64 @@ Determining Whether A Simulant is Affected - Iron
 For the purposes of our simulation, we made a few assumptions:
 
 1. We assumed that simulants only received an effect from iron fortification 
-on their hemoglobin levels if they directly consumed iron fortified foods and 
-that they received no effect of iron fortification on their hemoglobin levels 
-from maternal consumption of iron fortified foods (although maternal
-consumption of iron fortified foods affects infant birth weight).
+on their *hemoglobin levels* if they directly consumed iron fortified foods; 
+they received no effect of iron fortification on their hemoglobin levels 
+from maternal consumption of iron fortified foods in utero or through 
+breastmilk (although maternal consumption of iron fortified foods does affect 
+infant birth weight). As discussed in a review by [Siddappa-et-al-2007]_, 
+there may be an association between maternal iron deficiency and infant iron 
+levels at birth (measured as serum ferritin). However, a significant 
+relationship between maternal iron deficiency and infant *hemoglobin* at birth 
+has not been consistently demonstrated [Allen-2002]_, [Altinkaynak-et-al-1994]_, 
+[Emamghorashi-and-Heidari-2004]_, [Erdem-et-al-2002]_, [Turkay-et-al-1995]_. 
+Notably, there is some evidence of a correlation between maternal hemoglobin 
+and infant hemoglobin in the first months of life [Marques-et-al-2016]_, 
+[De-Pee-et-al-2002]_, [Kilbride-et-al-1999]_; however, the amount and quality 
+of evidence is limited [Allen-2002]_ and the scope of our model additionally limited our 
+ability to consider this correlation.
 
 2. We assumed that simulants begin to eat staple foods as a supplement to 
 breast milk consumption at the age of six months and that the quantity of 
 staple foods consumed as a proportion of total consumption increases linearly 
 from six months to two years of age, at which point it reaches its peak and 
-then remains constant.
+then remains constant. We based this assumption on the WHO guideline to a) 
+begin to introduce complementary foods as a supplement to breastfeeding at six 
+months of age (p. 10), b) continue breastfeeding until 2 years or age or 
+beyond (p.12), and c) to start feeding "small amounts" of complementary food 
+at six months and to "increase the quantity as the child gets older" (p. 18) 
+[WHO-Guidelines-For-Complementary-Feeding]_. Additionally, data reported by 
+[Diana-et-al-2016]_ indicated that complementary feeding began at six months 
+and increased in quantity at nine and twelve months among a study population 
+in Indonesia. 
 
-3. We assumed that the full effect of the iron fortification 
+.. note::
+
+  Due to the absence of more detailed data, we did not evaluate the specific 
+  intake of *staple* foods among these age groups, but rather made the 
+  assumption that the amount of staple foods consumed was proportional to the 
+  amount of total complementary foods consumed as a supplement to breastmilk.
+
+3. We assumed that the effect of consumption of iron fortified foods on an 
+individual's hemoglobin level is proportional to the amount of staple foods 
+consumed as a proportion of total consumption. This assumption was made in the 
+absence of supporting data.
+
+4. We assumed that the full effect of the iron fortification 
 intervention takes six months to achieve and that the effect scales up in a 
 linear fashion between the onset of exposure and six months post exposure. 
-This is likely a conservative assumption, as there is evidence (Andersson et 
-al. 2010) that the true curve increases more steeply at first, then levels off 
-before reaching the full effect at six months. Thus, the measured response 
-curve is concave down, and our linear approximation lies entirely below this 
-curve -- it is the secant line to the curve, with slope equal to the average 
-rate of increase over the 6 month interval. 
+This is likely a conservative assumption, as there is evidence 
+[Andersson-et-al-2010]_ that the true curve increases more steeply at first, 
+then levels off before reaching the full effect at six months. Thus, the 
+measured response curve is concave down, and our linear approximation lies 
+entirely below this curve -- it is the secant line to the curve, with slope 
+equal to the average rate of increase over the 6 month interval. Notably, the 
+evidence from [Andersson-et-al-2010]_ is limited in its application to our 
+model in that it evaluated iron fortification of margarine in adult women, not 
+iron fortification of flour among children.
 
-4. We assumed that all individuals covered by baseline coverage of iron 
+5. We assumed that all individuals covered by baseline coverage of iron 
 fortification have been covered for at least six months and therefore have 
-already achieved the full effect of the intervention.
-
-.. todo::
-
-	Add justification and references to support for these assumptions. (Andersson et al. 2010, WHO guidance, and Diana et al. 2010/Plos One)
+already achieved the full effect of the intervention. 
 
 Therefore, the effect size of iron fortification on a simulant's hemoglobin 
 level **in the baseline scenario** should be determined as follows:
@@ -1265,10 +1307,11 @@ a risk ratio (RR), where we think of "no fortification" as a risk factor:
   \approx 1.71\: (1.43, 2.04).
 
 We are estimating this effect size as the reciprocal of the odds ratio (OR) of
-:math:`0.59\: (0.49, 0.70)` found in the Keats review; this odds ratio is the
-ratio of the odds of being born with NTDs in the fortified population to the
-odds of being born with NTDs in the unfortified population. Since the prevalence
-of NTDs is small, the odds ratio is very close to the risk ratio.
+:math:`0.59\: (0.49, 0.70)` found in the [Keats-et-al-2019]_ review; this odds 
+ratio is the ratio of the odds of being born with NTDs in the fortified 
+population to the odds of being born with NTDs in the unfortified population. 
+Since the prevalence of NTDs is small, the odds ratio is very close to the 
+risk ratio.
 
 To model the uncertainty in the estimate, the above RR should be drawn from a
 `lognormal <https://en.wikipedia.org/wiki/Log-normal_distribution>`_
@@ -1388,9 +1431,109 @@ causes affected by low birth weight and short gestation are as follows:
 References
 ----------
 
-.. note::
+.. [Allen-2002]_
 
-  Will need to resolve merge conflict here
+  View `Allen 2002`_
+
+    Lindsay H Allen, Anemia and iron deficiency: effects on pregnancy outcome, The American Journal of Clinical Nutrition, Volume 71, Issue 5, May 2000, Pages 1280S–1284S, https://doi.org/10.1093/ajcn/71.5.1280s
+
+.. _`Allen 2002`: https://doi.org/10.1093/ajcn/71.5.1280s
+
+.. [Altinkaynak-et-al-1994]
+
+  View `Altinkaynak et al. 1994`_
+
+    Altinkaynak S, Alp H, Bastem A, Selimoğlu M, Energin M (1994). Serum ferritin and hemoglobin levels of mothers and their newborns. Turk J Pediatr. 1994 Oct-Dec;36(4):289-93.
+
+.. _`Altinkaynak et al. 1994`: https://www.ncbi.nlm.nih.gov/pubmed/7825234
+
+.. [Andersson-et-al-2010]
+
+  View `Andersson et al. 2010`_
+
+    Maria Andersson, Winfried Theis, Michael B Zimmermann, Jasmin Tajeri Foman, Martin Jäkel, Guus SMJE Duchateau, Leon GJ Frenken, Richard F Hurrell, Random serial sampling to evaluate efficacy of iron fortification: a randomized controlled trial of margarine fortification with ferric pyrophosphate or sodium iron edetate, The American Journal of Clinical Nutrition, Volume 92, Issue 5, November 2010, Pages 1094–1104, https://doi.org/10.3945/ajcn.2010.29523
+
+.. _`Andersson et al. 2010`: https://doi.org/10.3945/ajcn.2010.29523
+
+.. [De-Pee-et-al-2002]
+
+  View `De Pee et al. 2002`_
+
+    De Pee S, Bloem MW, Sari M, Kiess L, Yip R, Kosen S. The high prevalence of low hemoglobin concentration among Indonesian infants aged 3-5 months is related to maternal anemia. J Nutr. 2002 Aug;132(8):2215-21.
+
+.. _`De Pee et al. 2002`: https://doi.org/10.1093/jn/132.8.2215
+
+.. [Emamghorashi-and-Heidari-2004]
+
+  View `Emamghorashi and Heidari 2004`_
+
+    Emamghorashi F, Heidari T (2004). Iron status of babies born to iron-deficient anaemic mothers in an Iranian hospital. East Mediterr Health J. 2004 Nov;10(6):808-14.
+
+.. _`Emamghorashi and Heidari 2004`: https://www.ncbi.nlm.nih.gov/pubmed/16335768
+
+.. [Erdem-et-al-2002]
+
+  View `Erdem et al. 2002`_
+
+    Erdem A, Erdem M, Arslan M, Yazici G, Eskandari R, Himmetoglu O (2002). The effect of maternal anemia and iron deficiency on fetal erythropoiesis: comparison between serum erythropoietin, hemoglobin and ferritin levels in mothers and newborns. J Matern Fetal Neonatal Med. 2002 May;11(5):329-32.
+
+.. _`Erdem et al. 2002`: https://www.ncbi.nlm.nih.gov/pubmed/?term=12389675
+
+.. [Ethiopian-National-Food-Consumption-Survey]
+
+  View `Ethiopian National Food Consumption Survey`_
+
+    Ethiopian Public Health Institute (2013). Ethiopian National Food Consumption Survey. Addis Ababa, Ethiopia. [table 18; women]
+
+.. _`Ethiopian National Food Consumption Survey`: https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf
+
+.. [Diana-et-al-2016]
+
+  View `Diana et al. 2016`_
+
+    Diana A, Mallard SR, Haszard JJ, Purnamasari DM, Nurulazmi I, Herliani PD, Nugraha GI, Gibson RS, Houghton L. Consumption of fortified infant foods reduces dietary diversity but has a positive effect on subsequent growth in infants from Sumedang district, Indonesia. PLoS One. 2017 Apr 20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
+
+.. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
+
+.. [Dror-and-Allen-2018]
+
+  View `Dror and Allen 2018`_
+
+    Dror, D. K., & Allen, L. H. (2018). Retinol-to-fat ratio and retinol concentration in human milk show similar time trends and associations with maternal factors at the population level: a systematic review and meta-analysis. Advances in Nutrition, 9(suppl_1), 332S-346S.
+
+.. _`Dror and Allen 2018`: https://doi.org/10.1093/advances/nmy021
+
+.. [Global-Fortification-Data-Exchange]
+
+  View `Global Fortification Data Exchange`_
+
+    Global Fortification Data Exchange. Map: Nutrient Levels in Fortification Standards (mid-range or average). Accessed 4/7/2020. [http://www.fortificationdata.org.]
+
+.. _`Global Fortification Data Exchange`: https://tinyurl.com/wka9mgh
+
+.. [Haider-et-al-2013]
+
+  View `Haider et al. 2013`_
+
+    Haider, B. A., Olofin, I., Wang, M., Spiegelman, D., Ezzati, M., & Fawzi, W. W. (2013). Anaemia, prenatal iron use, and risk of adverse pregnancy outcomes: systematic review and meta-analysis. Bmj, 346, f3443.
+
+.. _`Haider et al. 2013`: https://doi.org/10.1136/bmj.f3443   
+
+.. [Heaney-2008]
+
+  View `Heaney 2008`_
+
+    Heaney R. P. (2008). Vitamin D in health and disease. Clinical journal of the American Society of Nephrology : CJASN, 3(5), 1535–1541. https://doi.org/10.2215/CJN.01160308
+
+.. _`Heaney 2008`: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4571146/
+
+.. [Hombali-et-al-2019]
+
+  View `Hombali et al. 2019`_
+
+    Hombali  AS, Solon  JA, Venkatesh  BT, Nair  NS, Peña‐Rosas  JP. Fortification of staple foods with vitamin A for vitamin A deficiency. Cochrane Database of Systematic Reviews 2019, Issue 5. Art. No.: CD010068. DOI: 10.1002/14651858.CD010068.pub2.
+
+.. _`Hombali et al. 2019`: https://doi.org/10.1002/14651858.CD010068.pub2
 
 .. [Hurrell-et-al-2010]
 
@@ -1399,3 +1542,91 @@ References
     Hurrell, R., Ranum, P., de Pee, S., Biebinger, R., Hulthen, L., Johnson, Q., & Lynch, S. (2010). Revised Recommendations for Iron Fortification of Wheat Flour and an Evaluation of the Expected Impact of Current National Wheat Flour Fortification Programs. Food and Nutrition Bulletin, 31(1_suppl1), S7–S21. https://doi.org/10.1177/15648265100311S102
 
 .. _`Hurrell et al. 2010`: https://doi.org/10.1177/15648265100311S102
+
+.. [Imdad-et-al-2016]
+
+  View `Imdad et al. 2016`_
+
+    Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.  
+
+.. _`Imdad et al. 2016`: https://doi.org/10.1002/14651858.CD007480.pub3
+
+.. [Keats-et-al-2019]
+
+  View `Keats et al. 2019`_
+
+    Keats, E. C., Neufeld, L. M., Garrett, G. S., Mbuya, M. N., & Bhutta, Z. A. (2019). Improved micronutrient status and health outcomes in low-and middle-income countries following large-scale fortification: evidence from a systematic review and meta-analysis. The American journal of clinical nutrition, 109(6), 1696-1708.
+
+.. _`Keats et al. 2019`: https://doi.org/10.1093/ajcn/nqz023
+
+.. [Kilbride-et-al-1999]
+
+  View `Kilbride et al. 1999`_
+
+    J Kilbride, T G Baker, L A Parapia, S A Khoury, S W Shuqaidef, D Jerwood, Anaemia during pregnancy as a risk factor for iron-deficiency anaemia in infancy: a case-control study in Jordan., International Journal of Epidemiology, Volume 28, Issue 3, Jun 1999, Pages 461–468, https://doi.org/10.1093/ije/28.3.461
+
+.. _`Kilbride et al. 1999`: https://doi.org/10.1093/ije/28.3.461
+
+.. [Marques-et-al-2016]
+
+  View `Marques et al. 2016`_
+
+    Marques Rde F, Taddei JA, Konstantyner T, Marques AC, Braga JA (2016). Correlation between hemoglobin levels of mothers and children on exclusive breastfeeding in the first six months of life. J Pediatr (Rio J). 2016 Sep-Oct;92(5):479-85. doi: 10.1016/j.jped.2015.11.006. Epub 2016 May 4.
+
+.. _`Marques et al. 2016`: https://doi.org/10.1016/j.jped.2015.11.006
+
+.. [Sandjaja-et-al-2015]
+
+  View `Sandjaja et al. 2015`_
+
+    Sandjaja, Jus’at, I., Jahari, A. B., Htet, M. K., Tilden, R. L., Soekarjo, D., Utomo, B., ... & Korenromp, E. L. (2015). Vitamin A-fortified cooking oil reduces vitamin A deficiency in infants, young children and women: results from a programme evaluation in Indonesia. Public health nutrition, 18(14), 2511-2522.
+
+.. _`Sandjaja et al. 2015`: https://doi.org/10.1017/S136898001400322X
+
+.. [Siddappa-et-al-2007]
+
+  View `Siddappa et al. 2007`_
+
+    Siddappa AM, Rao R, Long JD, Widness JA, Georgieff MK (2007).The assessment of newborn iron stores at birth: a review of the literature and standards for ferritin concentrations. Neonatology. 2007;92(2):73-82. Epub 2007 Mar 14.
+
+.. _`Siddappa et al. 2007`: https://www.ncbi.nlm.nih.gov/pubmed/17361090
+
+.. [Talaat-et-al-2016]
+
+  View `Talaat et al. 2016`_
+
+    Talaat IM, Kamal NM, Alghamdi HA, Alharthi AA, Alshahrani MA. A randomized clinical trial comparing 3 different replacement regimens of vitamin D in clinically asymptomatic pediatrics and adolescents with vitamin D insufficiency. Ital J Pediatr. 2016;42(1):106. Published 2016 Dec 7. doi:10.1186/s13052-016-0314-z
+
+.. _`Talaat et al. 2016`: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5142392/
+
+.. [Turkay-et-al-1995]
+
+  View `Turkay et al. 1995`_
+
+    Türkay S, Tanzer F, Gültekin A, Bakici MZ (1995). The influence of maternal iron deficiency anaemia on the haemoglobin concentration of the infant. J Trop Pediatr. 1995 Dec;41(6):369-71. doi: 10.1093/tropej/41.6.369.
+
+.. _`Turkay et al. 1995`: https://www.ncbi.nlm.nih.gov/pubmed/8606448
+
+.. [Vieth-1999]
+
+  View `Vieth 1999`_
+
+    Vieth, R. (1999). Vitamin D supplementation, 25-hydroxyvitamin D concentrations, and safety. The American journal of clinical nutrition, 69(5), 842-856.
+
+.. _`Vieth 1999`: https://www.ncbi.nlm.nih.gov/pubmed/10232622
+
+.. [WHO-Vitamin-A-Supplementation-Guidelines]
+
+  View `WHO Vitamin A Supplementation Guidelines in Infants 1-5 Months of Age`_
+
+    World Health Organization (2011). Vitamin A supplementation for infants 1–5 months of age: Guideline. ISBN: 978-92-4-150181-1
+
+.. _`WHO Vitamin A Supplementation Guidelines in Infants 1-5 Months of Age`: https://www.who.int/nutrition/publications/micronutrients/guidelines/vas_infants_1-5/en/
+
+.. [WHO-Guidelines-For-Complementary-Feeding]
+
+  View `WHO Guiding Principles for Complementary Feeding of the Breastfed Child`_
+
+  World Health Organization; Pan American Health Organization. Division of Health Promotion and Protection - Food and Nutrition Program. WHO Guiding Principles for Complementary Feeding of the Breastfed Child. 2003.
+
+.. _`WHO Guiding Principles for Complementary Feeding of the Breastfed Child`: https://www.who.int/maternal_child_adolescent/documents/a85622/en/
