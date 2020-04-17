@@ -72,20 +72,13 @@ There are three sequelae associated with LRI. We are not tracking the long-term
 effects of Guillain-Barré syndrome (which can include paralysis, for example). However, since the prevalence of GBS is so low,
 there would probably not be much benefit in attempting to capture its long-term YLDs in addition to its short term YLDs.
 
+.. note::
+
+	Birth prevalence of LRI was allowed in the DISMOD modeling process for LRI. However, it was not reported as a final result in GBD 2017. LRI birth prevalence must therefore be retreieved using get_model_results('epi', 1258, age_group_id=164, measure_id=5) or get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5). 
+
 .. todo::
 
    Describe more assumptions and limitations of the model.
-
-.. warning::
-
-  Initial validation of the LRI cause model has indicated that prevalence (and 
-  therefore cause-specific mortality) of LRI is significantly underestimated for 
-  the early neonatal and late neonatal age groups (age group IDs 2 and 3). This 
-  may be because DISMOD models allow for birth prevalence of LRI, although birth 
-  prevalence is not a reported outcome of GBD. This issue should be investigated 
-  to see if we can incorporate birth prevalence into the LRI cause model to avoid 
-  underestimation of LRI in the neonatal age groups. Note: according to GBD 
-  modeler (Chris Troeger) LRI birth prevalence can be found using age_group_id 164.
 
 Data Description
 ----------------
@@ -167,6 +160,10 @@ Data Description
      - Sources
      - Description
      - Notes
+   * - birth_prevalence_meid_1258
+     - epi
+     - Birth Prevalence of LRI
+     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5)
    * - prevalence_c322
      - como
      - Prevalence of LRI
@@ -230,9 +227,15 @@ Data Description
 Validation Criteria
 -------------------
 
-.. todo::
+Baseline vivarium model results should compare to GBD artifact data with respect to age-, sex-, location-, and year-specific LRI:
 
-   Describe tests for model validation.
+- Prevalence
+- Incidence rate
+- Remission rate
+- Cause-specifc mortality rate
+- Excess mortality rate
+- YLDs due to LRI
+- YLLs due to LRI
 
 References
 ----------
