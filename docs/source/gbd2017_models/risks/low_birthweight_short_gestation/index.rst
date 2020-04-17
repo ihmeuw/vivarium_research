@@ -58,8 +58,7 @@ year, and sex estimated in GBD 2017, three types of information are used:
 
    - Distribution of gestational age for each location, year, and sex
    - Distribution of birth weight for each location, year, and sex
-   - Copula family and parameters, specifying correlation between gestational age and birth weight
-   distributions
+   - Copula family and parameters, specifying correlation between gestational age and birth weight distributions
 
 Exposure modelling strategy in GBD 2017
 ---------------------------------------
@@ -101,8 +100,7 @@ microdata was available from the 11 locations, pooling across all years of data 
 The joint distribution of birth weight and gestational age per location-year-sex was modelled using the
 global copula family and parameters selected and the location-year-sex gestational age and birth weight
 distributions. The joint distribution was simulated 100 times to capture uncertainty. Each simulation
-consisted of 100,000 simulated joint birth weight and gestational age data points. Each joint distribution was divided into 500g by 2wk bins to match the categorical bins of the relative risk surface. Birth
-prevalence was then calculated for each 500g by 2wk bin.
+consisted of 100,000 simulated joint birth weight and gestational age data points. Each joint distribution was divided into 500g by 2wk bins to match the categorical bins of the relative risk surface. Birth prevalence was then calculated for each 500g by 2wk bin.
 
 Relative risks estimate in GBD 2017
 -----------------------------------
