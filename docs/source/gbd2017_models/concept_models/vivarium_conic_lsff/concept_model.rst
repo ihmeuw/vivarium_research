@@ -153,6 +153,12 @@ Risk-Outcome Relationships
 Stratifying Exposure Variables by Baseline Intervention Coverage
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+.. todo::
+
+  I think most of the content of this seciton should eventually be pulled out
+  into a separate page (somewhere in the :ref:`model_design` section) that can
+  be referred to from different concept models.
+
 From GBD we obtain overall population estimates for our outcomes of interest
 (prevalence of vitamin A deficiency, birth prevalence of neural tube defects,
 distribution of haemoglobin levels, and distribution of birth weights). Because
@@ -165,29 +171,85 @@ When we introduce additional food fortification into the population, only those
 who are *not* already eating fortified food should receive the benefit.
 Therefore, in order to properly measure the effects of our interventions, we
 must first stratify our population into those who are already covered vs. not
-covered by the forticant of interest. We then need to calculate the risk
-exposure (or other relevant outcome) in each coverage stratum to get a complete
-picture of the baseline population. For example, we will need to know the
-prevalence of vitamin A deficiency or the distribution of haemoglobin in the
+covered by the forticant of interest. We then need to calculate the relevant
+exposure distribution in each coverage stratum to get a complete picture of the
+baseline population. For example, we will need to know the birth prevalence of
+neural tube defects or the distribution of haemoglobin levels in the
 subpopulation already eating fortified food as well as in the subpopulation not
 eating fortified food.
 
-These coverage-stratified exposures are calculated so that:
+These coverage-stratified exposure variables are calculated so that:
 
-1.  Their population-weighted average matches the overall population estimate
-    from GBD, and
+1.  The population-weighted average of the exposure distributions matches the
+    overall population estimate from GBD (at least approximately), and
+
 2.  The differential exposure between the subpopulations matches the
-    corresponding effect size for our intervention.
+    corresponding effect size for our intervention (perhaps under some
+    simplifying assumptions).
 
-For example, the ratio of the prevalence of vitamin A deficiency between the
-fortified and unfortified groups should match the risk ratio of vitamin A
-fortification on vitamin A deficiency from the literature, and the difference in
-mean haemoglobin level between the fortified and unfortified groups should match
-the mean shift in haemoglobin from iron fortification found in the literature.
-When we stratify the population in this way, we are assuming that the effect
-sizes of fortification found in the literature are generalizable to the
-populations we are simulating (note that if this assumption is *not* true, we
-should not be simulating the interventions in theses populations at all).
+For example, the ratio of the birth prevalence of neural tube defects between
+the fortified and unfortified groups should match the risk ratio of neural tube
+defects from folic acid fortification found in the literature, and the
+difference in mean haemoglobin level between the fortified and unfortified
+groups should match the mean shift in haemoglobin from iron fortification found
+in the literature.
+
+When we stratify the population in this way, we are assuming that the proportion
+of our outcome attributable to the absence of our intervention is the same in
+our model population as it is in our study population. (A necessary condition
+for this, and indeed for modeling the intervention at all, is that the effect
+sizes found in the literature are generalizable to the populations we are
+simulating.) For something like vitamin A deficiency, the outcome is pretty much
+all attributable to vitamin A intake. For something like haemoglobin on the
+other hand, the outcome is not necessarily all attributable to iron intake
+(because of non-iron-responsive anemias) --- in this case we will need to do
+some extra work (essentially, additional stratification) to estimate what effect
+iron fortification will have on haemoglobin levels. The above assumption is
+valid for situations in which there are not many factors that cause the outcome
+other than the exposure at hand. However, it should be more carefully evaluated
+when there are multiple factors that can cause the outcome (for example, many
+things can cause low birth weight).
+
+.. todo::
+
+  Can we dig a little deeper into what exactly the above assumption means, and
+  when it's valid vs. when it's not? How is it different from assuming the
+  effect size is generalizable to our population? And in our particular case
+  (LSFF simulation), what does it mean to "more carefully evaluate" the low
+  birth weight example above? Is our current strategy for stratifying birth
+  weight on fortification coverage appropriate, or do we need to account for
+  other factors that can affect birth weight? And can we explain exactly why we
+  think our approach for accounting for non-iron-responsive anemias when
+  stratifying the hemoglobin distribution is valid (e.g. I'd like a coherent
+  mathematical framework for how we are handling anemia, which could be
+  generalized to other situations)?
+
+  Here are some relevant comments from Ali and Nathaniel in `PR 211
+  <https://github.com/ihmeuw/vivarium_research/pull/211>`_:
+
+    AB: We generally get around this issue (i.e. assuming that the proportion of
+    our outcome attributable to our exposure is the same in our model population
+    as it is in our study population) in our vivarium simulations by directly
+    using the PAF for a given exposure and outcome. However, we don't use the
+    PAF in this approach, so that is why it requires stronger assumptions (than
+    just assuming that the effect size is generalizable to our population).
+
+    NBS: When you say we don't use the PAF in this approach, are you referring
+    specifically to continuous outcomes like hemoglobin or birth weight? Because
+    I thought our approach for dichotomous outcomes like VAD was essentially
+    equivalent to computing the PAF. Is that accurate, or am I missing
+    something?
+
+    AB: Ah... yes, the point I was trying to make was that we're not using GBD's
+    PAF. GBD's PAFs are calculated after going through a process that vets the
+    RRs and adjusts for potential confounders etc. in MRBRT and assesses
+    generalizability so we are relying on this analysis and don't have to make
+    the assumption on our own; we just have to assume that GBD is correct : ).
+
+  If our approach for handling dichotomous (or polytomous?) outcomes is
+  equivalent to computing a PAF (or PIF = population impact fraction), should we
+  be computing a PAF/PIF in the continuous case as well? What would this
+  approach look like for hemoglobin or birth weight?
 
 .. todo::
 
@@ -199,16 +261,56 @@ should not be simulating the interventions in theses populations at all).
   the shape of the underlying exposure distribution, and the magnitude of the
   effect size.
 
+  Here are some examples from Ali in `PR 211
+  <https://github.com/ihmeuw/vivarium_research/pull/211>`_ that can be edited to
+  fit in here somewhere (Nicole also says she has an example):
+
+    I think that the most obvious example of this is for birth weight. The
+    additional 10 grams of birth weight from an intervention will be much more
+    valuable to you if you are born in the 0-500 gram category than the 2500 to
+    2750 category.
+
+    So, if we DO calibrate to baseline coverage, the uncovered group will have a
+    lower baseline mean birth weight (say 2500) than the covered group (say
+    2750). The difference in RR between the 2500 g group and the next birth
+    weight group >> the difference in RR between the 2750 group and the next
+    birth weight group. Essentially, we are helping those who really need it!
+
+    If we do NOT calibrate for baseline coverage, both groups have the same
+    starting mean birth weight. In this case, the uncovered group will be
+    starting slightly "better off" and therefore have less to gain from the
+    intervention (we might underestimate the effect of the intervention).
+
+    A similar situation is true for dichotomous exposures like VAD. If overall
+    population prevalence of VAD is 20% (baseline covered VAD prevalence = 10%,
+    baseline uncovered = 30%) and the RR for vitamin A fortification is 0.5.
+    Also let's say that baseline coverage is 50%.
+
+    So if we DO account for baseline coverage differences, we will reduce VAD by
+    50% in the baseline uncovered group... 30% to 15% so that 15% of the
+    population remits.
+
+    If we DO NOT account for baseline coverage differences, we will still reduce
+    VAD by 50% in the baseline uncovered group, but there will be less VAD there
+    to reduce so that VAD prevalence changes from 20% to 10% so that 10% of the
+    population remits.
+
+    So in general, we will underestimate the effect of our intervention if we do
+    not do this, although it will depend on the overall dynamics of the risk
+    factor and the corresponding relative risks.
+
 The details of stratifying the baseline population depend on the form of the
 exposure distribution, in particular whether it is categorical or continuous.
 The simplest case is for a dichotomous outcome (e.g. vitamin A deficiency or
 neural tube defects). This situation has been dealt with in a number of Vivarium
-models under the title "Coverage Gap Framework." The strategy for continuous
-exposure distributions (e.g. haemoglobin or birth weight) is less well-developed
--- the current approach only approximates a true stratification of the
-continuous distribution, and it has mathematical limitations that may be
-problematic in certain situations. We discuss the dichotomous and continuous
-cases in separate sections below.
+models under the title "Coverage Gap Framework"; it uses the same approach GBD
+uses for risk factors to compute a PAF for the "risk" of not having the
+intervention we are simulating. The strategy for continuous exposure
+distributions (e.g. haemoglobin or birth weight) is less well-developed -- the
+current approach only approximates a true stratification of the continuous
+distribution, and it has mathematical limitations that may be problematic in
+certain situations. We discuss the dichotomous and continuous cases in separate
+sections below.
 
 Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framework)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -270,7 +372,16 @@ below.
 
 .. todo::
 
-  Add more details to this section.
+  Add more details to this section. In particular, make it clear that our
+  current strategy is to assume that the two stratified distributions (e.g. the
+  distributions of hemoglobin levels in the covered and uncovered
+  subpopulations) each have the **same shape** as the overall population
+  distribution from GBD. The steps outlined in the `Baseline Calibration --
+  Hemoglobin and Birth Weight`_ section explain how to get the **means** of
+  these distributions, which is sufficient to specify the entire distribution
+  under the "same shape" assumption. Another missing piece is to specify what to
+  do if shifting the distribution to the left causes nonsensical negative values
+  -- I'd say just resample until you get something positive.
 
 Interventions
 +++++++++++++
