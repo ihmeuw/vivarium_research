@@ -20,6 +20,12 @@
   Section Level 5
   '''''''''''''''
 
+  The depth of each section level is determined by the order in which each
+  decorator is encountered below. If you need an even deeper section level, just
+  choose a new decorator symbol from the list here:
+  https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
+  And then add it to the list of decorators above.
+
 
 .. _2017_concept_model_vivarium_conic_lsff:
 
@@ -381,7 +387,9 @@ below.
   these distributions, which is sufficient to specify the entire distribution
   under the "same shape" assumption. Another missing piece is to specify what to
   do if shifting the distribution to the left causes nonsensical negative values
-  -- I'd say just resample until you get something positive.
+  -- one simple strategy is to just resample until you get something positive.
+  This will make the mean slightly larger than it should be, but so will any
+  strategy we pick.
 
 Interventions
 +++++++++++++
@@ -447,21 +455,23 @@ that population vitamin A fortification improved serum retinol concentrations
 among infants aged 6-11 months. Therefore, **we assumed that the effect size
 from the Cochrane review applies to all age groups above six months of age.**
 
-	Notably, the effect can occur either through the direct consumption of
-	vitamin A fortified foods or through the consumption of breastmilk from
-	mothers who consume vitamin A fortified foods [Sandjaja-et-al-2015]_; [WHO-Vitamin-A-Supplementation-Guidelines]_.
+	Notably, the effect can occur either through the direct consumption of vitamin
+	A fortified foods or through the consumption of breastmilk from mothers who
+	consume vitamin A fortified foods [Sandjaja-et-al-2015]_;
+	[WHO-Vitamin-A-Supplementation-Guidelines]_.
 
 For individuals aged between 0 and six months, we made the following
 assumptions:
 
-	1. Maternal consumption of vitamin A fortified foods has no effect on
-	infant vitamin A deficiency birth prevalence. This assumption is supported
-  by [Dror-and-Allen-2018]_.
+  1.  Maternal consumption of vitamin A fortified foods has no effect on
+      infant vitamin A deficiency birth prevalence. This assumption is
+      supported by [Dror-and-Allen-2018]_.
 
-	2. Maternal consumption of vitamin A fortified foods has no effect on
-	infant vitamin A deficiency from 0 to six months of age. This assumption
-	is largely supported by the vitamin A *supplementation* literature among
-	these age groups [Imdad-et-al-2016]_ and is reflected in the [WHO-Vitamin-A-Supplementation-Guidelines]_.
+  2.  Maternal consumption of vitamin A fortified foods has no effect on
+      infant vitamin A deficiency from 0 to six months of age. This assumption
+      is largely supported by the vitamin A *supplementation* literature among
+      these age groups [Imdad-et-al-2016]_ and is reflected in the
+      [WHO-Vitamin-A-Supplementation-Guidelines]_.
 
 .. note::
 
@@ -474,22 +484,22 @@ assumptions:
 Additionally, we made assumptions regarding the response time following the
 onset of exposure to vitamin A fortification, including:
 
-	1. Individuals will exhibit a response in vitamin A deficiency to vitamin
-	A fortification between appoximately 2 and 12 months after onset of
-	exposure to vitamin A fortification. There was sparce data available for
-	the response time to vitamin A fortification, so we used data on the
-	response time to vitamin D (another fat-soluble vitamin) supplementation
-	as a proxy. The literature larely indicated that response to vitamin D
-	supplementation plateaus between 2 and 12 months ([Heaney-2008]_,
-	[Vieth-1999]_, [Talaat-et-al-2016]_). We assumed that the
-	distribution of response times follows a lognormal distribution with a
-	median value of five months, a 0.025 percentile of 2 months, and a 0.975
-	percentile of 12 months.
+  1.  Individuals will exhibit a response in vitamin A deficiency to vitamin
+      A fortification between appoximately 2 and 12 months after onset of
+      exposure to vitamin A fortification. There was sparce data available for
+      the response time to vitamin A fortification, so we used data on the
+      response time to vitamin D (another fat-soluble vitamin) supplementation
+      as a proxy. The literature larely indicated that response to vitamin D
+      supplementation plateaus between 2 and 12 months ([Heaney-2008]_,
+      [Vieth-1999]_, [Talaat-et-al-2016]_). We assumed that the distribution of
+      response times follows a lognormal distribution with a median value of
+      five months, a 0.025 percentile of 2 months, and a 0.975 percentile of 12
+      months.
 
- 	2. If an individual was covered by baseline coverage of vitamin A
- 	fotification, we assumed that the individual was covered (via breastmilk
- 	or direct consumption) for long enough to exhibit a response (at least 12
- 	months).
+  2.  If an individual was covered by baseline coverage of vitamin A
+      fotification, we assumed that the individual was covered (via breastmilk
+      or direct consumption) for long enough to exhibit a response (at least 12
+      months).
 
  .. todo::
 
@@ -868,7 +878,11 @@ distribution of the parameter should be modeled as follows:
 
 .. note::
 
-	The [Haider-et-al-2013]_ paper did not report if the dose of iron was measured as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of daily iron consumption, as referenced in [Haider-et-al-2013]_, represented 10 mg of *elemental* iron.
+	The [Haider-et-al-2013]_ paper did not report if the dose of iron was measured
+	as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric
+	ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of
+	daily iron consumption, as referenced in [Haider-et-al-2013]_, represented 10
+	mg of *elemental* iron.
 
 Therefore, we investigated the amount of daily iron consumption that a
 pregnant mother would likely consume through iron fortification of staple
@@ -880,8 +894,10 @@ accordingly. See the table below:
   :header-rows: 1
 
   * - Location
-    - Concentration of forticant in flour
-    - Amount of fortifiable flour consumed daily
+    - | Concentration of forticant in flour
+      | (X)
+    - | Amount of fortifiable flour consumed daily
+      | (Y)
   * - Ethiopia
     - 30 mg iron as NaFeEDTA / kg flour  [1]; use point value
     - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
@@ -921,12 +937,14 @@ Ethiopia.*
 	Find better data and replace values for flour consumption per day for
 	Nigeria and India.
 
-The amount of elemental iron consumed daily, in miligrams per person, (at the
-draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg of flour and Y is grams of flour consumed daily per person, as defined in the table above):
+The amount Z of elemental iron consumed daily, in miligrams per person, (at the
+draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg
+of flour and Y is grams of flour consumed daily per person, as defined in the
+table above):
 
 .. math::
-
-	\frac{\text{X mg iron as NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}}
+  \frac{\text{Z mg iron daily}}{\text{person}} =
+  \frac{\text{X mg iron as NaFeEDTA}}{\text{kg flour}} \cdot \frac{\text{Y g flour daily}}{\text{person}} \cdot \frac{\text{1 kg flour}}{\text{1,000 g flour}}
 
 First, we must sample values from the distribution of the amount of flour
 eaten per day *at the individual simulant level*. We chose to sample at the
@@ -979,7 +997,8 @@ iron in miligrams, as calculated from the equation above):
 
 .. math::
 
-	\text{Z mg iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}}
+  \text{BW increase} =
+	\text{Z mg iron consumed daily} \cdot \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}}
 
 .. code-block:: Python
 
@@ -998,36 +1017,37 @@ Determining Whether A Simulant is Affected - Iron
 
 For the purposes of our simulation, we made a few assumptions:
 
-1. We assumed that simulants only received an effect from iron fortification
-on their *hemoglobin levels* if they directly consumed iron fortified foods;
-they received no effect of iron fortification on their hemoglobin levels
-from maternal consumption of iron fortified foods in utero or through
-breastmilk (although maternal consumption of iron fortified foods does affect
-infant birth weight). As discussed in a review by [Siddappa-et-al-2007]_,
-there may be an association between maternal iron deficiency and infant iron
-levels at birth (measured as serum ferritin). However, a significant
-relationship between maternal iron deficiency and infant *hemoglobin* at birth
-has not been consistently demonstrated [Allen-2002]_, [Altinkaynak-et-al-1994]_,
-[Emamghorashi-and-Heidari-2004]_, [Erdem-et-al-2002]_, [Turkay-et-al-1995]_.
-Notably, there is some evidence of a correlation between maternal hemoglobin
-and infant hemoglobin in the first months of life [Marques-et-al-2016]_,
-[De-Pee-et-al-2002]_, [Kilbride-et-al-1999]_; however, the amount and quality
-of evidence is limited [Allen-2002]_ and the scope of our model additionally limited our
-ability to consider this correlation.
+1.  We assumed that simulants only received an effect from iron fortification
+    on their *hemoglobin levels* if they directly consumed iron fortified foods;
+    they received no effect of iron fortification on their hemoglobin levels
+    from maternal consumption of iron fortified foods in utero or through
+    breastmilk (although maternal consumption of iron fortified foods does
+    affect infant birth weight). As discussed in a review by
+    [Siddappa-et-al-2007]_, there may be an association between maternal iron
+    deficiency and infant iron levels at birth (measured as serum ferritin).
+    However, a significant relationship between maternal iron deficiency and
+    infant *hemoglobin* at birth has not been consistently demonstrated
+    [Allen-2002]_, [Altinkaynak-et-al-1994]_, [Emamghorashi-and-Heidari-2004]_,
+    [Erdem-et-al-2002]_, [Turkay-et-al-1995]_. Notably, there is some evidence
+    of a correlation between maternal hemoglobin and infant hemoglobin in the
+    first months of life [Marques-et-al-2016]_, [De-Pee-et-al-2002]_,
+    [Kilbride-et-al-1999]_; however, the amount and quality of evidence is
+    limited [Allen-2002]_ and the scope of our model additionally limited our
+    ability to consider this correlation.
 
-2. We assumed that simulants begin to eat staple foods as a supplement to
-breast milk consumption at the age of six months and that the quantity of
-staple foods consumed as a proportion of total consumption increases linearly
-from six months to two years of age, at which point it reaches its peak and
-then remains constant. We based this assumption on the WHO guideline to a)
-begin to introduce complementary foods as a supplement to breastfeeding at six
-months of age (p. 10), b) continue breastfeeding until 2 years or age or
-beyond (p.12), and c) to start feeding "small amounts" of complementary food
-at six months and to "increase the quantity as the child gets older" (p. 18)
-[WHO-Guidelines-For-Complementary-Feeding]_. Additionally, data reported by
-[Diana-et-al-2016]_ indicated that complementary feeding began at six months
-and increased in quantity at nine and twelve months among a study population
-in Indonesia.
+2.  We assumed that simulants begin to eat staple foods as a supplement to
+    breast milk consumption at the age of six months and that the quantity of
+    staple foods consumed as a proportion of total consumption increases
+    linearly from six months to two years of age, at which point it reaches its
+    peak and then remains constant. We based this assumption on the WHO
+    guideline to a) begin to introduce complementary foods as a supplement to
+    breastfeeding at six months of age (p. 10), b) continue breastfeeding until
+    2 years or age or beyond (p.12), and c) to start feeding "small amounts" of
+    complementary food at six months and to "increase the quantity as the child
+    gets older" (p. 18) [WHO-Guidelines-For-Complementary-Feeding]_.
+    Additionally, data reported by [Diana-et-al-2016]_ indicated that
+    complementary feeding began at six months and increased in quantity at nine
+    and twelve months among a study population in Indonesia.
 
 .. note::
 
@@ -1036,27 +1056,27 @@ in Indonesia.
   assumption that the amount of staple foods consumed was proportional to the
   amount of total complementary foods consumed as a supplement to breastmilk.
 
-3. We assumed that the effect of consumption of iron fortified foods on an
-individual's hemoglobin level is proportional to the amount of staple foods
-consumed as a proportion of total consumption. This assumption was made in the
-absence of supporting data.
+3.  We assumed that the effect of consumption of iron fortified foods on an
+    individual's hemoglobin level is proportional to the amount of staple foods
+    consumed as a proportion of total consumption. This assumption was made in
+    the absence of supporting data.
 
-4. We assumed that the full effect of the iron fortification
-intervention takes six months to achieve and that the effect scales up in a
-linear fashion between the onset of exposure and six months post exposure.
-This is likely a conservative assumption, as there is evidence
-[Andersson-et-al-2010]_ that the true curve increases more steeply at first,
-then levels off before reaching the full effect at six months. Thus, the
-measured response curve is concave down, and our linear approximation lies
-entirely below this curve -- it is the secant line to the curve, with slope
-equal to the average rate of increase over the 6 month interval. Notably, the
-evidence from [Andersson-et-al-2010]_ is limited in its application to our
-model in that it evaluated iron fortification of margarine in adult women, not
-iron fortification of flour among children.
+4.  We assumed that the full effect of the iron fortification
+    intervention takes six months to achieve and that the effect scales up in a
+    linear fashion between the onset of exposure and six months post exposure.
+    This is likely a conservative assumption, as there is evidence
+    [Andersson-et-al-2010]_ that the true curve increases more steeply at first,
+    then levels off before reaching the full effect at six months. Thus, the
+    measured response curve is concave down, and our linear approximation lies
+    entirely below this curve -- it is the secant line to the curve, with slope
+    equal to the average rate of increase over the 6 month interval. Notably,
+    the evidence from [Andersson-et-al-2010]_ is limited in its application to
+    our model in that it evaluated iron fortification of margarine in adult
+    women, not iron fortification of flour among children.
 
-5. We assumed that all individuals covered by baseline coverage of iron
-fortification have been covered for at least six months and therefore have
-already achieved the full effect of the intervention.
+5.  We assumed that all individuals covered by baseline coverage of iron
+    fortification have been covered for at least six months and therefore have
+    already achieved the full effect of the intervention.
 
 Therefore, the effect size of iron fortification on a simulant's hemoglobin
 level **in the baseline scenario** should be determined as follows:
@@ -1594,7 +1614,10 @@ Design Decisions and Rationales
 Do not explicitly model neonatal disorders, meningitis, or other LBWSG-affected causes
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-For context, here are `treemaps for Nigeria and India on GBD Compare <http://ihmeuw.org/51tj>`_ showing that the majority of DALYs attributable to low birth weight and short gestation in the under-5 age groups are due to neonatal disorders, LRI, diarrhea, and meningitis.
+For context, here are `treemaps for Nigeria and India on GBD Compare
+<http://ihmeuw.org/51tj>`_ showing that the majority of DALYs attributable to
+low birth weight and short gestation in the under-5 age groups are due to
+neonatal disorders, LRI, diarrhea, and meningitis.
 
 Although the sub-causes of  :ref:`neonatal disorders
 <2017_cause_neonatal_disorders>` account for the majority of disease burden in
@@ -1648,11 +1671,13 @@ causes affected by low birth weight and short gestation are as follows:
 References
 ----------
 
-.. [Allen-2002]_
+.. [Allen-2002]
 
   View `Allen 2002`_
 
-    Lindsay H Allen, Anemia and iron deficiency: effects on pregnancy outcome, The American Journal of Clinical Nutrition, Volume 71, Issue 5, May 2000, Pages 1280S–1284S, https://doi.org/10.1093/ajcn/71.5.1280s
+    Lindsay H Allen, Anemia and iron deficiency: effects on pregnancy outcome,
+    The American Journal of Clinical Nutrition, Volume 71, Issue 5, May 2000,
+    Pages 1280S–1284S, https://doi.org/10.1093/ajcn/71.5.1280s
 
 .. _`Allen 2002`: https://doi.org/10.1093/ajcn/71.5.1280s
 
@@ -1722,11 +1747,12 @@ References
 
 .. [Global-Fortification-Data-Exchange]
 
-  View `Global Fortification Data Exchange`_
+  View `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
     Global Fortification Data Exchange. Map: Nutrient Levels in Fortification Standards (mid-range or average). Accessed 4/7/2020. [http://www.fortificationdata.org.]
 
-.. _`Global Fortification Data Exchange`: https://tinyurl.com/wka9mgh
+..
+  .. _Global Fortification Data Exchange: https://tinyurl.com/wka9mgh
 
 .. [Haider-et-al-2013]
 
