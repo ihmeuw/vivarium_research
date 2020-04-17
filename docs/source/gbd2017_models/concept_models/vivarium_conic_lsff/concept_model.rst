@@ -1,3 +1,32 @@
+..
+  Section title decorators for this document:
+
+  ==============
+  Document Title
+  ==============
+
+  Section Level 1
+  ---------------
+
+  Section Level 2
+  +++++++++++++++
+
+  Section Level 3
+  ~~~~~~~~~~~~~~~
+
+  Section Level 4
+  ^^^^^^^^^^^^^^^
+
+  Section Level 5
+  '''''''''''''''
+
+  The depth of each section level is determined by the order in which each
+  decorator is encountered below. If you need an even deeper section level, just
+  choose a new decorator symbol from the list here:
+  https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
+  And then add it to the list of decorators above.
+
+
 .. _2017_concept_model_vivarium_conic_lsff:
 
 =============================================
@@ -30,12 +59,12 @@ Model Versions
 
 .. list-table::
    :header-rows: 1
-   
+
    * - Version
      - Description
      - Done
    * - v1.0_disease_only
-     - Model with mortality, morbidity, diarrhea, LRI, measles, and 
+     - Model with mortality, morbidity, diarrhea, LRI, measles, and
        neural tube defects.
      - Yes
    * - v2.0_lbwsg
@@ -57,11 +86,11 @@ Model Versions
    * - v7.0_scenarios
      - Full model with final stratification and all scenarios.
      - Not started.
-   
-Model results can be located at 
-``/share/costeffectiveness/results/vivarium_conic_lsff`` in the 
+
+Model results can be located at
+``/share/costeffectiveness/results/vivarium_conic_lsff`` in the
 appropriate model version directory.
-   
+
 
 Model Components
 ----------------
@@ -127,17 +156,174 @@ PAF-of-1 Cause/Risk Pairs
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
 
-Coverage Gap Framework
-++++++++++++++++++++++
+Stratifying Exposure Variables by Baseline Intervention Coverage
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Effect size stratification for baseline population
---------------------------------------------------
+.. todo::
 
-From GBD we obtain mean population values for prevalence of vitamin A deficiency, birth prevalence of neural tube defects, and mean haemoglobin levels. Because we are interested in the effect of fortification and there exists baseline coverage of fortification, we must first stratify our population into those who were covered vs not covered by the forticant of interest. We then need to calculate the risk (prevalence) of vitamin A deficiency, risk (birth prevalence) of neural tube defects, and mean haemoglobin levels by coverage strata. 
+  I think most of the content of this seciton should eventually be pulled out
+  into a separate page (somewhere in the :ref:`model_design` section) that can
+  be referred to from different concept models.
 
-This method applies to exposures with dichomotous outcomes such as Vitamin A deficiency or neural tube defects:
+From GBD we obtain overall population estimates for our outcomes of interest
+(prevalence of vitamin A deficiency, birth prevalence of neural tube defects,
+distribution of haemoglobin levels, and distribution of birth weights). Because
+there exists baseline coverage of our interventions --- i.e. there is already
+some food fortification occurring in the locations we are simulating --- these
+overall population estimates include both people who are eating fortified food
+and those who are not.
 
-We always define the exposure as bad to match GBD 2017 definitions, so relative risks are always >1 
+When we introduce additional food fortification into the population, only those
+who are *not* already eating fortified food should receive the benefit.
+Therefore, in order to properly measure the effects of our interventions, we
+must first stratify our population into those who are already covered vs. not
+covered by the forticant of interest. We then need to calculate the relevant
+exposure distribution in each coverage stratum to get a complete picture of the
+baseline population. For example, we will need to know the birth prevalence of
+neural tube defects or the distribution of haemoglobin levels in the
+subpopulation already eating fortified food as well as in the subpopulation not
+eating fortified food.
+
+These coverage-stratified exposure variables are calculated so that:
+
+1.  The population-weighted average of the exposure distributions matches the
+    overall population estimate from GBD (at least approximately), and
+
+2.  The differential exposure between the subpopulations matches the
+    corresponding effect size for our intervention (perhaps under some
+    simplifying assumptions).
+
+For example, the ratio of the birth prevalence of neural tube defects between
+the fortified and unfortified groups should match the risk ratio of neural tube
+defects from folic acid fortification found in the literature, and the
+difference in mean haemoglobin level between the fortified and unfortified
+groups should match the mean shift in haemoglobin from iron fortification found
+in the literature.
+
+When we stratify the population in this way, we are assuming that the proportion
+of our outcome attributable to the absence of our intervention is the same in
+our model population as it is in our study population. (A necessary condition
+for this, and indeed for modeling the intervention at all, is that the effect
+sizes found in the literature are generalizable to the populations we are
+simulating.) For something like vitamin A deficiency, the outcome is pretty much
+all attributable to vitamin A intake. For something like haemoglobin on the
+other hand, the outcome is not necessarily all attributable to iron intake
+(because of non-iron-responsive anemias) --- in this case we will need to do
+some extra work (essentially, additional stratification) to estimate what effect
+iron fortification will have on haemoglobin levels. The above assumption is
+valid for situations in which there are not many factors that cause the outcome
+other than the exposure at hand. However, it should be more carefully evaluated
+when there are multiple factors that can cause the outcome (for example, many
+things can cause low birth weight).
+
+.. todo::
+
+  Can we dig a little deeper into what exactly the above assumption means, and
+  when it's valid vs. when it's not? How is it different from assuming the
+  effect size is generalizable to our population? And in our particular case
+  (LSFF simulation), what does it mean to "more carefully evaluate" the low
+  birth weight example above? Is our current strategy for stratifying birth
+  weight on fortification coverage appropriate, or do we need to account for
+  other factors that can affect birth weight? And can we explain exactly why we
+  think our approach for accounting for non-iron-responsive anemias when
+  stratifying the hemoglobin distribution is valid (e.g. I'd like a coherent
+  mathematical framework for how we are handling anemia, which could be
+  generalized to other situations)?
+
+  Here are some relevant comments from Ali and Nathaniel in `PR 211
+  <https://github.com/ihmeuw/vivarium_research/pull/211>`_:
+
+    AB: We generally get around this issue (i.e. assuming that the proportion of
+    our outcome attributable to our exposure is the same in our model population
+    as it is in our study population) in our vivarium simulations by directly
+    using the PAF for a given exposure and outcome. However, we don't use the
+    PAF in this approach, so that is why it requires stronger assumptions (than
+    just assuming that the effect size is generalizable to our population).
+
+    NBS: When you say we don't use the PAF in this approach, are you referring
+    specifically to continuous outcomes like hemoglobin or birth weight? Because
+    I thought our approach for dichotomous outcomes like VAD was essentially
+    equivalent to computing the PAF. Is that accurate, or am I missing
+    something?
+
+    AB: Ah... yes, the point I was trying to make was that we're not using GBD's
+    PAF. GBD's PAFs are calculated after going through a process that vets the
+    RRs and adjusts for potential confounders etc. in MRBRT and assesses
+    generalizability so we are relying on this analysis and don't have to make
+    the assumption on our own; we just have to assume that GBD is correct : ).
+
+  If our approach for handling dichotomous (or polytomous?) outcomes is
+  equivalent to computing a PAF (or PIF = population impact fraction), should we
+  be computing a PAF/PIF in the continuous case as well? What would this
+  approach look like for hemoglobin or birth weight?
+
+.. todo::
+
+  Come up with some examples to show what would happen if we *didn't* first
+  stratify by existing coverage. I.e., why is this baseline stratification
+  important? It is not totally obvious to me what the effect would be if we
+  didn't do it (e.g. would we end up overestimating or underestimating the true
+  effect?) -- I think the net effect depends on the level of existing coverage,
+  the shape of the underlying exposure distribution, and the magnitude of the
+  effect size.
+
+  Here are some examples from Ali in `PR 211
+  <https://github.com/ihmeuw/vivarium_research/pull/211>`_ that can be edited to
+  fit in here somewhere (Nicole also says she has an example):
+
+    I think that the most obvious example of this is for birth weight. The
+    additional 10 grams of birth weight from an intervention will be much more
+    valuable to you if you are born in the 0-500 gram category than the 2500 to
+    2750 category.
+
+    So, if we DO calibrate to baseline coverage, the uncovered group will have a
+    lower baseline mean birth weight (say 2500) than the covered group (say
+    2750). The difference in RR between the 2500 g group and the next birth
+    weight group >> the difference in RR between the 2750 group and the next
+    birth weight group. Essentially, we are helping those who really need it!
+
+    If we do NOT calibrate for baseline coverage, both groups have the same
+    starting mean birth weight. In this case, the uncovered group will be
+    starting slightly "better off" and therefore have less to gain from the
+    intervention (we might underestimate the effect of the intervention).
+
+    A similar situation is true for dichotomous exposures like VAD. If overall
+    population prevalence of VAD is 20% (baseline covered VAD prevalence = 10%,
+    baseline uncovered = 30%) and the RR for vitamin A fortification is 0.5.
+    Also let's say that baseline coverage is 50%.
+
+    So if we DO account for baseline coverage differences, we will reduce VAD by
+    50% in the baseline uncovered group... 30% to 15% so that 15% of the
+    population remits.
+
+    If we DO NOT account for baseline coverage differences, we will still reduce
+    VAD by 50% in the baseline uncovered group, but there will be less VAD there
+    to reduce so that VAD prevalence changes from 20% to 10% so that 10% of the
+    population remits.
+
+    So in general, we will underestimate the effect of our intervention if we do
+    not do this, although it will depend on the overall dynamics of the risk
+    factor and the corresponding relative risks.
+
+The details of stratifying the baseline population depend on the form of the
+exposure distribution, in particular whether it is categorical or continuous.
+The simplest case is for a dichotomous outcome (e.g. vitamin A deficiency or
+neural tube defects). This situation has been dealt with in a number of Vivarium
+models under the title "Coverage Gap Framework"; it uses the same approach GBD
+uses for risk factors to compute a PAF for the "risk" of not having the
+intervention we are simulating. The strategy for continuous exposure
+distributions (e.g. haemoglobin or birth weight) is less well-developed -- the
+current approach only approximates a true stratification of the continuous
+distribution, and it has mathematical limitations that may be problematic in
+certain situations. We discuss the dichotomous and continuous cases in separate
+sections below.
+
+Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framework)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This method applies to exposures with dichotomous measures such as Vitamin A deficiency or neural tube defects:
+
+We always define the exposure as deleterious to match GBD 2017 definitions for risk exposures, so relative risks are always >1.
 
 :math:`C_{vita_{baseline}}`: coverage of vitamin A fortified food in the population from the literature that is applied to our sim population at baseline
 
@@ -157,18 +343,53 @@ PAF= :math:`\frac{P_{exposure_{baseline}}(RR-1)}{1+P_{exposure_{baseline}}(RR-1)
 
 1-PAF= :math:`\frac{1}{1+P_{exposure_{baseline}}(RR-1)}`
 
-*Important assumptions and limitations* This equation for PAF is valid under the assumption of no confounding. An alternate equation for PAF should be used when to get an unbiased PAF in the presence of confounding; however, we will need the attributable fraction in the exposed which we do not readily have. Hence this is a limitation. The RRs we use, and the exposure % we use are approximating the PAFs. We make the assumption that the RRs pulled from literature is generalizable. 
+**Important assumptions and limitations:** This equation for PAF is valid under
+the assumption of no confounding. An alternate equation for PAF should be used
+when to get an unbiased PAF in the presence of confounding; however, we will
+need the attributable fraction in the exposed which we do not readily have.
+Hence this is a limitation. The RRs we use, and the exposure % we use are
+approximating the PAFs. We make the assumption that the RRs pulled from
+literature is generalizable.
 
 .. todo::
 
-   reference Darrow and Steenland. Confounding and bias in the attributable fraction. *Epidemiology*. 2011 Jan;22(1):53-8. doi: 10.1097/EDE.0b013e3181fce49b.
+   Reference Darrow and Steenland. Confounding and bias in the attributable
+   fraction. *Epidemiology*. 2011 Jan;22(1):53-8. DOI:
+   https://doi.org/10.1097/EDE.0b013e3181fce49b.
 
 
 risk in (1-:math:`C_{vita}`), exposed group: :math:`ϴ_{1}= ϴ_{GBD}*(1-PAF)*RR` … equation 1
 
 risk in (:math:`C_{vita}`), unexposed group: :math:`ϴ_{0}= ϴ_{GBD}*(1-PAF)` … equation 2
 
-**How to apply the intervention**: the intervention increases the population coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and shifts the amount of people who receive equation 1 to equation 2. 
+**How to apply the intervention**: the intervention increases the population
+coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and
+shifts the amount of people who receive equation 1 to equation 2.
+
+Baseline Coverage Stratification -- Continuous Variables
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This method applies to continuous exposure variables such as hemoglobin or birth
+weight.
+
+The steps for performing baseline stratification for continuous variables are
+outlined in the section `Baseline Calibration -- Hemoglobin and Birth Weight`_
+below.
+
+.. todo::
+
+  Add more details to this section. In particular, make it clear that our
+  current strategy is to assume that the two stratified distributions (e.g. the
+  distributions of hemoglobin levels in the covered and uncovered
+  subpopulations) each have the **same shape** as the overall population
+  distribution from GBD. The steps outlined in the `Baseline Calibration --
+  Hemoglobin and Birth Weight`_ section explain how to get the **means** of
+  these distributions, which is sufficient to specify the entire distribution
+  under the "same shape" assumption. Another missing piece is to specify what to
+  do if shifting the distribution to the left causes nonsensical negative values
+  -- one simple strategy is to just resample until you get something positive.
+  This will make the mean slightly larger than it should be, but so will any
+  strategy we pick.
 
 Interventions
 +++++++++++++
@@ -181,32 +402,32 @@ Effect Size
 
 **Research Considerations**
 
-In this model, the vitamin A fortification intervention affects the 
-**prevalence of vitamin A deficiency**. The effect size for this intervention 
-was obtained from a Cochrane review performed by [Hombali-et-al-2019]_ on the 
-fortification of staple foods with vitamin A for vitamin A deficiency. 
-Notably, the relative risk for vitamin A foritification on vitamin A 
-deficiency from this review only included data from two randomized controlled 
-trials and the authors of the review assessed the certainty of the evidence to 
-be "very low" [Hombali-et-al-2019]_. The relative risk of vitamin A deficiency 
-prevalence among an intervention population exposed to vitamin A fortified 
-staple foods relative to a control population given the same staple foods not 
+In this model, the vitamin A fortification intervention affects the
+**prevalence of vitamin A deficiency**. The effect size for this intervention
+was obtained from a Cochrane review performed by [Hombali-et-al-2019]_ on the
+fortification of staple foods with vitamin A for vitamin A deficiency.
+Notably, the relative risk for vitamin A foritification on vitamin A
+deficiency from this review only included data from two randomized controlled
+trials and the authors of the review assessed the certainty of the evidence to
+be "very low" [Hombali-et-al-2019]_. The relative risk of vitamin A deficiency
+prevalence among an intervention population exposed to vitamin A fortified
+staple foods relative to a control population given the same staple foods not
 fortified with vitamin A from this review was **0.45 (95% CI: 0.19 - 1.05)**.
 
-Therefore, we conducted a supplementary analysis of the effect of the 
-intervention by pooling the RCT studies from the Cochrane review with studies 
-included in the systematic review and meta-analysis performed by 
-[Keats-et-al-2019]_. Notably, none of the studies identified from the 
-[Keats-et-al-2019]_ review *directly* reported measures of relative risk of 
-vitamin A deficiency prevalence among the population exposed to vitamin A 
-fortification relative to the population unexposed to vitamin A fortification. 
-Therefore, we manually calculated this value based on data reported in study 
-tables and figures, which required visual approximations of certain values. 
-Notably, when this supplementary meta-analysis was performed, the resulting 
-relative risk was calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when 
-limited to sugar and oil vehicles for the vitamin A forticant, the relative 
-risk was **0.36 (95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses 
-are represented in the forest plots below. 
+Therefore, we conducted a supplementary analysis of the effect of the
+intervention by pooling the RCT studies from the Cochrane review with studies
+included in the systematic review and meta-analysis performed by
+[Keats-et-al-2019]_. Notably, none of the studies identified from the
+[Keats-et-al-2019]_ review *directly* reported measures of relative risk of
+vitamin A deficiency prevalence among the population exposed to vitamin A
+fortification relative to the population unexposed to vitamin A fortification.
+Therefore, we manually calculated this value based on data reported in study
+tables and figures, which required visual approximations of certain values.
+Notably, when this supplementary meta-analysis was performed, the resulting
+relative risk was calcualted as **0.43 (95% CI: 0.28 - 0.65)**. However, when
+limited to sugar and oil vehicles for the vitamin A forticant, the relative
+risk was **0.36 (95% CI: 0.26 - 0.50)**. These two supplementary meta-analyses
+are represented in the forest plots below.
 
 .. image:: vitamin_a_meta.png
 
@@ -216,67 +437,69 @@ are represented in the forest plots below.
 
   There is a spreadsheet of study summaries of the individual studies as well as PDFs of each study included in these meta-analyses hosted on the simulation science research team google drive
 
-While the supplementary meta-analysis shown above contains more studies and 
-data than the [Hombali-et-al-2019]_ Cochrane review, it relies on results that were not directly 
-reported in the individual studies (and in some cases visaully estimated 
-values). **Therefore, we will conservatively use the results from the Cochrane 
-review, with increased certainty in the results based on the confirmatory 
+While the supplementary meta-analysis shown above contains more studies and
+data than the [Hombali-et-al-2019]_ Cochrane review, it relies on results that were not directly
+reported in the individual studies (and in some cases visaully estimated
+values). **Therefore, we will conservatively use the results from the Cochrane
+review, with increased certainty in the results based on the confirmatory
 results from the supplementary meta-analysis.**
 
-Notably, all of these studies included in the supplementary analysis were 
-conducted among children. Additionally, the study locations included 
-Guatemala, South Africa, Nicaragua, Indonesia, and the Phillipines. Therefore, 
-we concluded that it is **reasonable to assume generalizability of these 
+Notably, all of these studies included in the supplementary analysis were
+conducted among children. Additionally, the study locations included
+Guatemala, South Africa, Nicaragua, Indonesia, and the Phillipines. Therefore,
+we concluded that it is **reasonable to assume generalizability of these
 results to our model populations.**
 
-Regarding effect sizes in young age groups, [Sandjaja-et-al-2015]_ reported 
-that population vitamin A fortification improved serum retinol concentrations 
-among infants aged 6-11 months. Therefore, **we assumed that the effect size 
-from the Cochrane review applies to all age groups above six months of age.** 
+Regarding effect sizes in young age groups, [Sandjaja-et-al-2015]_ reported
+that population vitamin A fortification improved serum retinol concentrations
+among infants aged 6-11 months. Therefore, **we assumed that the effect size
+from the Cochrane review applies to all age groups above six months of age.**
 
-	Notably, the effect can occur either through the direct consumption of 
-	vitamin A fortified foods or through the consumption of breastmilk from 
-	mothers who consume vitamin A fortified foods [Sandjaja-et-al-2015]_; [WHO-Vitamin-A-Supplementation-Guidelines]_.
+	Notably, the effect can occur either through the direct consumption of vitamin
+	A fortified foods or through the consumption of breastmilk from mothers who
+	consume vitamin A fortified foods [Sandjaja-et-al-2015]_;
+	[WHO-Vitamin-A-Supplementation-Guidelines]_.
 
-For individuals aged between 0 and six months, we made the following 
+For individuals aged between 0 and six months, we made the following
 assumptions:
 
-	1. Maternal consumption of vitamin A fortified foods has no effect on 
-	infant vitamin A deficiency birth prevalence. This assumption is supported 
-  by [Dror-and-Allen-2018]_.
+  1.  Maternal consumption of vitamin A fortified foods has no effect on
+      infant vitamin A deficiency birth prevalence. This assumption is
+      supported by [Dror-and-Allen-2018]_.
 
-	2. Maternal consumption of vitamin A fortified foods has no effect on 
-	infant vitamin A deficiency from 0 to six months of age. This assumption 
-	is largely supported by the vitamin A *supplementation* literature among 
-	these age groups [Imdad-et-al-2016]_ and is reflected in the [WHO-Vitamin-A-Supplementation-Guidelines]_.
+  2.  Maternal consumption of vitamin A fortified foods has no effect on
+      infant vitamin A deficiency from 0 to six months of age. This assumption
+      is largely supported by the vitamin A *supplementation* literature among
+      these age groups [Imdad-et-al-2016]_ and is reflected in the
+      [WHO-Vitamin-A-Supplementation-Guidelines]_.
 
-.. note:: 
+.. note::
 
-  PAF = 0 for all causes except for vitamin A deficiency paf-of-one cause for 
-  vitamin a deficiency risk factor in the early neonatal and late neonatal age 
-  groups. Implication for this is that excluding these age groups will only 
-  potentially impact the YLDs accumulated during the person-time spent in 
+  PAF = 0 for all causes except for vitamin A deficiency paf-of-one cause for
+  vitamin a deficiency risk factor in the early neonatal and late neonatal age
+  groups. Implication for this is that excluding these age groups will only
+  potentially impact the YLDs accumulated during the person-time spent in
   these age groups.
 
-Additionally, we made assumptions regarding the response time following the 
+Additionally, we made assumptions regarding the response time following the
 onset of exposure to vitamin A fortification, including:
 
-	1. Individuals will exhibit a response in vitamin A deficiency to vitamin 
-	A fortification between appoximately 2 and 12 months after onset of 
-	exposure to vitamin A fortification. There was sparce data available for 
-	the response time to vitamin A fortification, so we used data on the 
-	response time to vitamin D (another fat-soluble vitamin) supplementation 
-	as a proxy. The literature larely indicated that response to vitamin D 
-	supplementation plateaus between 2 and 12 months ([Heaney-2008]_, 
-	[Vieth-1999]_, [Talaat-et-al-2016]_). We assumed that the 
-	distribution of response times follows a lognormal distribution with a 
-	median value of five months, a 0.025 percentile of 2 months, and a 0.975 
-	percentile of 12 months.
+  1.  Individuals will exhibit a response in vitamin A deficiency to vitamin
+      A fortification between appoximately 2 and 12 months after onset of
+      exposure to vitamin A fortification. There was sparce data available for
+      the response time to vitamin A fortification, so we used data on the
+      response time to vitamin D (another fat-soluble vitamin) supplementation
+      as a proxy. The literature larely indicated that response to vitamin D
+      supplementation plateaus between 2 and 12 months ([Heaney-2008]_,
+      [Vieth-1999]_, [Talaat-et-al-2016]_). We assumed that the distribution of
+      response times follows a lognormal distribution with a median value of
+      five months, a 0.025 percentile of 2 months, and a 0.975 percentile of 12
+      months.
 
- 	2. If an individual was covered by baseline coverage of vitamin A 
- 	fotification, we assumed that the individual was covered (via breastmilk 
- 	or direct consumption) for long enough to exhibit a response (at least 12 
- 	months).
+  2.  If an individual was covered by baseline coverage of vitamin A
+      fotification, we assumed that the individual was covered (via breastmilk
+      or direct consumption) for long enough to exhibit a response (at least 12
+      months).
 
  .. todo::
 
@@ -284,9 +507,9 @@ onset of exposure to vitamin A fortification, including:
 
 **Effect Size**
 
-In our Vivarium simulation, the effect of exposure foods **not** fortified 
-with vitamin A on the prevalence of vitamin A deficiency realtive to those 
-exposed to vitamin A fortified foods will be represented as follows: 
+In our Vivarium simulation, the effect of exposure foods **not** fortified
+with vitamin A on the prevalence of vitamin A deficiency realtive to those
+exposed to vitamin A fortified foods will be represented as follows:
 
 .. math::
 
@@ -297,14 +520,14 @@ exposed to vitamin A fortified foods will be represented as follows:
 
 .. note::
 
-	We are modeling the reciprocal of the relative risk reported in the 
+	We are modeling the reciprocal of the relative risk reported in the
 	Cochrane review.
 
-	Additionally, this effect size crosses the null, and therefore, in some 
-	draws it will cause increasing coverage of the intervention to *increase* 
-	vitamin A deficiency prevalence. This is a limitation caused by the low 
-	quality evidence regarding the relative risk of vitamin A fortification on 
-	vitamin A prevalence. However, on average, increasing coverage of vitamin 
+	Additionally, this effect size crosses the null, and therefore, in some
+	draws it will cause increasing coverage of the intervention to *increase*
+	vitamin A deficiency prevalence. This is a limitation caused by the low
+	quality evidence regarding the relative risk of vitamin A fortification on
+	vitamin A prevalence. However, on average, increasing coverage of vitamin
 	A fortification will decrease VAD.
 
 To model the uncertainty in this estimate, the above RR should be drawn from a
@@ -336,14 +559,14 @@ as follows:
 
 .. note::
 
-	I copied this from Nathaniel's documentation for the folic acid RR, but I 
-	think that the same approach is appropriate. Perhaps we can eventually 
-	create a separate page that lists similar strategies that we can reference 
+	I copied this from Nathaniel's documentation for the folic acid RR, but I
+	think that the same approach is appropriate. Perhaps we can eventually
+	create a separate page that lists similar strategies that we can reference
 	via links.
 
 **Time to Response**
 
-Further, the time-to-response to vitamin A fortification in years should also 
+Further, the time-to-response to vitamin A fortification in years should also
 be sampled such that:
 
 .. code-block:: Python
@@ -367,8 +590,8 @@ be sampled such that:
 
 **Population Coverage Data**
 
-The coverage algorithm for vitamin A fortification should follow the same approach described 
-in this concept model document for folic acid fortification (see `Population Coverage Data`_).
+The coverage algorithm for vitamin A fortification should follow the same approach described
+in this concept model document for folic acid fortification (see `Population Coverage Data - Iron and Folic Acid`_).
 
 .. list-table:: Means and 95% CI's for existing population coverage of vitamin A fortification (% of total population)
   :widths: 5 5 5 5
@@ -395,12 +618,12 @@ in this concept model document for folic acid fortification (see `Population Cov
     - 22.7 (19.9, 25.5)
     - 98.6 (97.8, 99.3)
 
-For all values other than :math:`a` for Ethiopia, use a Beta distribution 
-with mean equal to the central estimate, and variance equal to the variance of 
-a normal distribution with the same mean and 95% confidence interval. 
+For all values other than :math:`a` for Ethiopia, use a Beta distribution
+with mean equal to the central estimate, and variance equal to the variance of
+a normal distribution with the same mean and 95% confidence interval.
 
 For the :
-math:`a` value for Ethiopia, assume the following: 
+math:`a` value for Ethiopia, assume the following:
 
 .. math::
 
@@ -409,28 +632,28 @@ math:`a` value for Ethiopia, assume the following:
 The mean of this `Beta distribution
 <https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the value shown
 in the table. The density has an asymptote at 0 and an x-intercept at
-1. The mean value for this parameter was chosen so that the mean of 
-existing fortification coverage is close to 0 (in a similar approach to 
+1. The mean value for this parameter was chosen so that the mean of
+existing fortification coverage is close to 0 (in a similar approach to
 existing coverage of folic acid in Ethiopia).
 
 .. todo::
 
-	Cite Ethiopia data source (Assessment of Feasibility and Potential 
-	Benefits of Food Fortification. Addis Ababa : Government of the 
+	Cite Ethiopia data source (Assessment of Feasibility and Potential
+	Benefits of Food Fortification. Addis Ababa : Government of the
 	Federal Democratic Republic of Ethiopia, 2011).
 
 **Effect of Intervention on Simulants**
 
-As described in the research considerations section, the 
+As described in the research considerations section, the
 intervention effect is dependent on age and time since intervention coverage.
 
-For simulants covered by *baseline coverage*, the effect of the 
+For simulants covered by *baseline coverage*, the effect of the
 vitamin A fortitication is determined as follows:
 
 .. code-block:: Python
-  
+
   # draw level
-  
+
   rr = rr_distribution.rvs()
 
   # individual level
@@ -440,7 +663,7 @@ vitamin A fortitication is determined as follows:
   else:
   	rr_i = rr_distribution.rvs()
 
-For simulants covered by the *intervention scale-up*, the effect of the 
+For simulants covered by the *intervention scale-up*, the effect of the
 vitamin A fortitication is determined as follows:
 
 .. code-block:: Python
@@ -472,13 +695,13 @@ Where,
 
 	- **coverage(t - response_time_i)** = population coverage of vitamin A fortification X years prior to the current time-step, where X is response_time_i
 
-	- **random_number_i** = independent random number between 0 and 1, assigned to a simulant 
+	- **random_number_i** = independent random number between 0 and 1, assigned to a simulant
 
 Therefore, the probability that a simulant has vitamin A deficiency should be evaluated as:
 
 	vitamin_a_deficiency_prevalence * (1 - PAF) * rr_i
 
-Where, 
+Where,
 
 	- PAF is computed based on the RR for vitamin A fortification
 
@@ -490,19 +713,19 @@ The pseudo-code used to implement the vitamin A intervention effect in Vivarium 
 .. code-block:: Python
 
 	# Definitions
-	effectively_covered := individual is recieving fortification and it is affecting their 
+	effectively_covered := individual is recieving fortification and it is affecting their
 					probability of being vitamin a deficient.
 	t                   := current time
 
 	# Population level params
 	rr                = 1 if under 6 months, else 2.22 (or whatever)
 	coverage(t)       = baseline coverage of vitamin a fortification
-	exposure(t)       = baseline exposure to lack of vitamin a fortification 
+	exposure(t)       = baseline exposure to lack of vitamin a fortification
 	                  = 1 - coverage(t)
 	delta_coverage(t) = intervention shift in baseline coverage of vitamin a fortification
 	coverage*(t)      = coverage(t) + delta_coverage(t)
 	exposure*(t)      = 1 - coverage*(t)
-	time_lag          = time from when an individual starts eating fortified 
+	time_lag          = time from when an individual starts eating fortified
 				food until the effect is present
 	mean_rr(t)        = rr * exposure(t) + 1 * (1 - exposure(t))
 	paf(t)            = (mean_rr(t) - 1)/mean_rr(t)
@@ -511,8 +734,8 @@ The pseudo-code used to implement the vitamin A intervention effect in Vivarium 
 	# Individual attributes
 	qx_i           = propensity for an indidual to receive vitamin a fortification
 	x_i(t)         = whether an individual is receiving vitamin a fortification
-	               = qx_i > exposure*(t) 
-	               = qx_i < coverage*(t)   
+	               = qx_i > exposure*(t)
+	               = qx_i < coverage*(t)
 	tx_i           = time at which individual started receiving fortification
 	               = argmin_t(x_i(t) == True)
 
@@ -536,12 +759,12 @@ Iron Fortification
 Population Coverage Data and Coverage Algorithm - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The baseline coverage for iron fortification is the same as the baseline 
-coverage for folic acid fortification, as described below_. Additionally, the 
+The baseline coverage for iron fortification is the same as the baseline
+coverage for folic acid fortification, as described below_. Additionally, the
 coverage algorithm should be implemented in the same way as  for folic acid
 fortification, as described here_.
 
-Notably, iron and folic acid coverage should be correlated as specified under 
+Notably, iron and folic acid coverage should be correlated as specified under
 the following scenarios:
 
 - **Baseline coverage**: baseline iron and folic acid fortification coverage should be perfectly correlated so that exactly the same simulants are covered by each forticant
@@ -552,53 +775,53 @@ the following scenarios:
 
 - **Scale-up of iron + folic acid fortification**: both baseline and scaled-up intervention coverage of iron and folic acid fortification are perfectly correlated so that exactly the same simulants are covered by each forticant
 
-.. note:: 
+.. note::
 
-	A limitation of our population coverage data is that we assume no baseline 
-	iron fortification occurs in the absence of folic acid fortification and 
+	A limitation of our population coverage data is that we assume no baseline
+	iron fortification occurs in the absence of folic acid fortification and
 	vice versa.
 
 Effect Size - Iron
 ^^^^^^^^^^^^^^^^^^
 
-Iron fortification of staple food affects two outcomes in our simulation 
-model. The first outcome is an individual's hemoglobin concentration following 
-the *direct* consumption of iron fortified foods. The second outcome is a 
-simulant's birth weight following the *maternal* consumption of iron fortified 
+Iron fortification of staple food affects two outcomes in our simulation
+model. The first outcome is an individual's hemoglobin concentration following
+the *direct* consumption of iron fortified foods. The second outcome is a
+simulant's birth weight following the *maternal* consumption of iron fortified
 foods.
 
 **Hemoglobin Level**
 
-The effect of iron fortified food consumption on children under 7 years of age 
-was obtained from the [Keats-et-al-2019]_ systematic review. However, the 
-effect size in this review was reported in standardized mean differences 
-rather than in units of hemoglobin concentration directly. Therefore, we 
-performed a separate meta-analysis of the results included in the 
-[Keats-et-al-2019]_ review to obtain shifts in hemoglobin concentration. This 
+The effect of iron fortified food consumption on children under 7 years of age
+was obtained from the [Keats-et-al-2019]_ systematic review. However, the
+effect size in this review was reported in standardized mean differences
+rather than in units of hemoglobin concentration directly. Therefore, we
+performed a separate meta-analysis of the results included in the
+[Keats-et-al-2019]_ review to obtain shifts in hemoglobin concentration. This
 meta-analysis is shown below.
 
 .. image:: iron_meta.png
 
-Notably, the above changes in hemoglobin concentration are shown in grams per 
-*deciliter* (dL); however, GBD models hemoglobin concentration as grams per 
-*liter* (L). Therfore, the effect size used in our simulation model should be 
-**+3.0 (95% CI: -0.2, +6.1)** grams of hemoglobin per liter of blood. This 
-effect size should be interpreted as the population mean shift in hemoglobin 
-concentrations among children less than seven years old in LMICs following 
-iron fortification of staple foods. 
+Notably, the above changes in hemoglobin concentration are shown in grams per
+*deciliter* (dL); however, GBD models hemoglobin concentration as grams per
+*liter* (L). Therfore, the effect size used in our simulation model should be
+**+3.0 (95% CI: -0.2, +6.1)** grams of hemoglobin per liter of blood. This
+effect size should be interpreted as the population mean shift in hemoglobin
+concentrations among children less than seven years old in LMICs following
+iron fortification of staple foods.
 
-.. note:: 
+.. note::
 
-	The confidence interval for this effect size includes the null (0), 
-	indicating that for some individual simulation draws, the intervention 
-	effect may *decrease* population mean hemoglobin concentrations. However, 
-	*on average*, the effect of the intervention will increase population mean 
+	The confidence interval for this effect size includes the null (0),
+	indicating that for some individual simulation draws, the intervention
+	effect may *decrease* population mean hemoglobin concentrations. However,
+	*on average*, the effect of the intervention will increase population mean
 	hemoglobin levels.
 
-To model the uncertainty in the estimate, the above mean difference (MD) 
-should be drawn from a normal distribution with mean = 3.0, 
-2.5\ :superscript:`th`-percentile = -0.2, and 
-97.5\ :superscript:`th`-percentile = 6.1. This 
+To model the uncertainty in the estimate, the above mean difference (MD)
+should be drawn from a normal distribution with mean = 3.0,
+2.5\ :superscript:`th`-percentile = -0.2, and
+97.5\ :superscript:`th`-percentile = 6.1. This
 distbibution can be created using `SciPy's norm function
 <https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html>`_
 as follows:
@@ -621,17 +844,17 @@ as follows:
 
 .. note::
 
-	This distirbution is slightly shifted to the right (0.025 percentile is 
-	equal to -0.1, rather than -0.2) due to rounding approximations in the 
-	meta-analysis for the effect size causing a slightly non-symmetrical 
+	This distirbution is slightly shifted to the right (0.025 percentile is
+	equal to -0.1, rather than -0.2) due to rounding approximations in the
+	meta-analysis for the effect size causing a slightly non-symmetrical
 	confidence interval around the mean.
 
 **Birth Weight**
 
-The effect of maternal consumption of iron fortified food on infant birth 
-weight was obtained from [Haider-et-al-2013]_. According to this data 
-source, birth weight among babies born to mothers increased, on average, by 
-15.1 grams (95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The 
+The effect of maternal consumption of iron fortified food on infant birth
+weight was obtained from [Haider-et-al-2013]_. According to this data
+source, birth weight among babies born to mothers increased, on average, by
+15.1 grams (95% CI: 6.0, 24.2) per 10 mg of daily iron consumption. The
 distribution of the parameter should be modeled as follows:
 
 .. code-block:: Python
@@ -655,11 +878,15 @@ distribution of the parameter should be modeled as follows:
 
 .. note::
 
-	The [Haider-et-al-2013]_ paper did not report if the dose of iron was measured as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of daily iron consumption, as referenced in [Haider-et-al-2013]_, represented 10 mg of *elemental* iron.
+	The [Haider-et-al-2013]_ paper did not report if the dose of iron was measured
+	as elemental iron or as an iron compound such as NaFeEDTA  (sodium ferric
+	ethylenediaminetetraacetate). We operated under the  assumption that 10 mg of
+	daily iron consumption, as referenced in [Haider-et-al-2013]_, represented 10
+	mg of *elemental* iron.
 
-Therefore, we investigated the amount of daily iron consumption that a 
-pregnant mother would likely consume through iron fortification of staple 
-foods in our locations of interest in order to scale the effect size 
+Therefore, we investigated the amount of daily iron consumption that a
+pregnant mother would likely consume through iron fortification of staple
+foods in our locations of interest in order to scale the effect size
 accordingly. See the table below:
 
 .. list-table:: Daily Iron Consumption Parameters
@@ -667,8 +894,10 @@ accordingly. See the table below:
   :header-rows: 1
 
   * - Location
-    - Concentration of forticant in flour
-    - Amount of fortifiable flour consumed daily
+    - | Concentration of forticant in flour
+      | (X)
+    - | Amount of fortifiable flour consumed daily
+      | (Y)
   * - Ethiopia
     - 30 mg iron as NaFeEDTA / kg flour  [1]; use point value
     - 100 g (IQR: 77.5, 200) [2]; sample from distribution described below
@@ -682,50 +911,52 @@ accordingly. See the table below:
 .. note::
 
   While there was data for the concentration of iron forticants other
-  than NaFeEDTA for the locations in this table, we conservatively chose 
+  than NaFeEDTA for the locations in this table, we conservatively chose
   to use the concentrations of the NaFeEDTA forticant. This is because the
-  concentration of elemental iron in flour is lower when the NaFeEDTA 
+  concentration of elemental iron in flour is lower when the NaFeEDTA
   forticant is used compared to other forticants.
 
-  We assumed that the concentrations listed in the 
-  [Global-Fortification-Data-Exchange]_ represented miligrams of 
-  *elemental iron as NaFeEDTA* per kilogram of flour rather than miligrams of 
-  NaFeEDTA per kilogram of flour. While this was not explicitly stated on the 
-  [Global-Fortification-Data-Exchange]_, the available literature suggests 
-  that this is the measurement convention and is consistent with typical doses 
+  We assumed that the concentrations listed in the
+  [Global-Fortification-Data-Exchange]_ represented miligrams of
+  *elemental iron as NaFeEDTA* per kilogram of flour rather than miligrams of
+  NaFeEDTA per kilogram of flour. While this was not explicitly stated on the
+  [Global-Fortification-Data-Exchange]_, the available literature suggests
+  that this is the measurement convention and is consistent with typical doses
   of iron via fortification using NaFeEDTA [Hurrell-et-al-2010]_.
 
 [1] [Global-Fortification-Data-Exchange]_
 
 [2] [Ethiopian-National-Food-Consumption-Survey]_
 
-*In the absence of better data, we assumed that individuals in Nigeria and 
-India consumed the same amount of fortifiable flour per day as individuals in 
-Ethiopia.
+*In the absence of better data, we assumed that individuals in Nigeria and
+India consumed the same amount of fortifiable flour per day as individuals in
+Ethiopia.*
 
-.. todo:: 
+.. todo::
 
-	Find better data and replace values for flour consumption per day for 
+	Find better data and replace values for flour consumption per day for
 	Nigeria and India.
 
-The amount of elemental iron consumed daily, in miligrams per person, (at the 
-draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg of flour and Y is grams of flour consumed daily per person, as defined in the table above):
+The amount Z of elemental iron consumed daily, in miligrams per person, (at the
+draw level) should be calculated as such (where X is mg iron as NaFeEDTA per kg
+of flour and Y is grams of flour consumed daily per person, as defined in the
+table above):
 
 .. math::
+  \frac{\text{Z mg iron daily}}{\text{person}} =
+  \frac{\text{X mg iron as NaFeEDTA}}{\text{kg flour}} \cdot \frac{\text{Y g flour daily}}{\text{person}} \cdot \frac{\text{1 kg flour}}{\text{1,000 g flour}}
 
-	\frac{\text{X mg iron as NaFeEDTA}}{\text{kg flour}} * \frac{\text{Y g flour }}{\text{person}} * \frac{\text{1 kg flour}}{\text{1,000 g flour}} 
-
-First, we must sample values from the distribution of the amount of flour 
-eaten per day *at the individual simulant level*. We chose to sample at the 
-individual simulant level rather than the draw level because the underlying 
+First, we must sample values from the distribution of the amount of flour
+eaten per day *at the individual simulant level*. We chose to sample at the
+individual simulant level rather than the draw level because the underlying
 data from the [Ethiopian-National-Food-Consumption-Survey]_
-represented variation in individual consumption rather than uncertainty around 
-a population mean value. The survey reported that the median daily consumption 
-was 100 g (IQR: 77.5, 200). We assumed that the minumum and maximum values in 
-the distribution (which were not directly reported) were zero and 350.5 grams 
-(75th percentile for the region with the highest value for this parameter). 
-Additionally, we assumed that the values followed a uniform distribution 
-within each quartile of consumption. Values should be sampled as described 
+represented variation in individual consumption rather than uncertainty around
+a population mean value. The survey reported that the median daily consumption
+was 100 g (IQR: 77.5, 200). We assumed that the minumum and maximum values in
+the distribution (which were not directly reported) were zero and 350.5 grams
+(75th percentile for the region with the highest value for this parameter).
+Additionally, we assumed that the values followed a uniform distribution
+within each quartile of consumption. Values should be sampled as described
 below:
 
 .. code-block:: Python
@@ -749,7 +980,7 @@ below:
   else:
     daily_flour_consumption_i = np.random.uniform(q3,q4)
 
-Next, the amount of elemental iron ingested by an individual simulant should 
+Next, the amount of elemental iron ingested by an individual simulant should
 be calculated as follows:
 
 .. code-block:: Python
@@ -757,16 +988,17 @@ be calculated as follows:
   # daily_flour_consumption_i : value from above code block
   # iron_concentration_in_flour : location-specific value from table above
 
-  elemental_iron_consumed_per_day_i = (daily_flour_consumption_i 
+  elemental_iron_consumed_per_day_i = (daily_flour_consumption_i
       * iron_concentration_in_flour / 1_000)
 
-Then, the specific effect size of iron fortification on low birth weight can 
-be calculated as follows (where Z is the location-specific amount of elemental 
+Then, the specific effect size of iron fortification on low birth weight can
+be calculated as follows (where Z is the location-specific amount of elemental
 iron in miligrams, as calculated from the equation above):
 
 .. math::
 
-	\text{Z mg iron consumed daily} * \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}} 
+  \text{BW increase} =
+	\text{Z mg iron consumed daily} \cdot \frac{\text{15.1 g (95% CI 6.0 - 24.2) BW increase}}{\text{10 mg iron consumed daily}}
 
 .. code-block:: Python
 
@@ -775,7 +1007,7 @@ iron in miligrams, as calculated from the equation above):
 
 	bw_shift_i = elemental_iron_consumed_per_day_i * bw_md_per_10_mg_iron / 10
 
-See the following section to see if/how to apply the *bw_shift_i* parameter to 
+See the following section to see if/how to apply the *bw_shift_i* parameter to
 individual simulants.
 
 Determining Whether A Simulant is Affected - Iron
@@ -785,71 +1017,72 @@ Determining Whether A Simulant is Affected - Iron
 
 For the purposes of our simulation, we made a few assumptions:
 
-1. We assumed that simulants only received an effect from iron fortification 
-on their *hemoglobin levels* if they directly consumed iron fortified foods; 
-they received no effect of iron fortification on their hemoglobin levels 
-from maternal consumption of iron fortified foods in utero or through 
-breastmilk (although maternal consumption of iron fortified foods does affect 
-infant birth weight). As discussed in a review by [Siddappa-et-al-2007]_, 
-there may be an association between maternal iron deficiency and infant iron 
-levels at birth (measured as serum ferritin). However, a significant 
-relationship between maternal iron deficiency and infant *hemoglobin* at birth 
-has not been consistently demonstrated [Allen-2002]_, [Altinkaynak-et-al-1994]_, 
-[Emamghorashi-and-Heidari-2004]_, [Erdem-et-al-2002]_, [Turkay-et-al-1995]_. 
-Notably, there is some evidence of a correlation between maternal hemoglobin 
-and infant hemoglobin in the first months of life [Marques-et-al-2016]_, 
-[De-Pee-et-al-2002]_, [Kilbride-et-al-1999]_; however, the amount and quality 
-of evidence is limited [Allen-2002]_ and the scope of our model additionally limited our 
-ability to consider this correlation.
+1.  We assumed that simulants only received an effect from iron fortification
+    on their *hemoglobin levels* if they directly consumed iron fortified foods;
+    they received no effect of iron fortification on their hemoglobin levels
+    from maternal consumption of iron fortified foods in utero or through
+    breastmilk (although maternal consumption of iron fortified foods does
+    affect infant birth weight). As discussed in a review by
+    [Siddappa-et-al-2007]_, there may be an association between maternal iron
+    deficiency and infant iron levels at birth (measured as serum ferritin).
+    However, a significant relationship between maternal iron deficiency and
+    infant *hemoglobin* at birth has not been consistently demonstrated
+    [Allen-2002]_, [Altinkaynak-et-al-1994]_, [Emamghorashi-and-Heidari-2004]_,
+    [Erdem-et-al-2002]_, [Turkay-et-al-1995]_. Notably, there is some evidence
+    of a correlation between maternal hemoglobin and infant hemoglobin in the
+    first months of life [Marques-et-al-2016]_, [De-Pee-et-al-2002]_,
+    [Kilbride-et-al-1999]_; however, the amount and quality of evidence is
+    limited [Allen-2002]_ and the scope of our model additionally limited our
+    ability to consider this correlation.
 
-2. We assumed that simulants begin to eat staple foods as a supplement to 
-breast milk consumption at the age of six months and that the quantity of 
-staple foods consumed as a proportion of total consumption increases linearly 
-from six months to two years of age, at which point it reaches its peak and 
-then remains constant. We based this assumption on the WHO guideline to a) 
-begin to introduce complementary foods as a supplement to breastfeeding at six 
-months of age (p. 10), b) continue breastfeeding until 2 years or age or 
-beyond (p.12), and c) to start feeding "small amounts" of complementary food 
-at six months and to "increase the quantity as the child gets older" (p. 18) 
-[WHO-Guidelines-For-Complementary-Feeding]_. Additionally, data reported by 
-[Diana-et-al-2016]_ indicated that complementary feeding began at six months 
-and increased in quantity at nine and twelve months among a study population 
-in Indonesia. 
+2.  We assumed that simulants begin to eat staple foods as a supplement to
+    breast milk consumption at the age of six months and that the quantity of
+    staple foods consumed as a proportion of total consumption increases
+    linearly from six months to two years of age, at which point it reaches its
+    peak and then remains constant. We based this assumption on the WHO
+    guideline to a) begin to introduce complementary foods as a supplement to
+    breastfeeding at six months of age (p. 10), b) continue breastfeeding until
+    2 years or age or beyond (p.12), and c) to start feeding "small amounts" of
+    complementary food at six months and to "increase the quantity as the child
+    gets older" (p. 18) [WHO-Guidelines-For-Complementary-Feeding]_.
+    Additionally, data reported by [Diana-et-al-2016]_ indicated that
+    complementary feeding began at six months and increased in quantity at nine
+    and twelve months among a study population in Indonesia.
 
 .. note::
 
-  Due to the absence of more detailed data, we did not evaluate the specific 
-  intake of *staple* foods among these age groups, but rather made the 
-  assumption that the amount of staple foods consumed was proportional to the 
+  Due to the absence of more detailed data, we did not evaluate the specific
+  intake of *staple* foods among these age groups, but rather made the
+  assumption that the amount of staple foods consumed was proportional to the
   amount of total complementary foods consumed as a supplement to breastmilk.
 
-3. We assumed that the effect of consumption of iron fortified foods on an 
-individual's hemoglobin level is proportional to the amount of staple foods 
-consumed as a proportion of total consumption. This assumption was made in the 
-absence of supporting data.
+3.  We assumed that the effect of consumption of iron fortified foods on an
+    individual's hemoglobin level is proportional to the amount of staple foods
+    consumed as a proportion of total consumption. This assumption was made in
+    the absence of supporting data.
 
-4. We assumed that the full effect of the iron fortification 
-intervention takes six months to achieve and that the effect scales up in a 
-linear fashion between the onset of exposure and six months post exposure. 
-This is likely a conservative assumption, as there is evidence 
-[Andersson-et-al-2010]_ that the true curve increases more steeply at first, 
-then levels off before reaching the full effect at six months. Thus, the 
-measured response curve is concave down, and our linear approximation lies 
-entirely below this curve -- it is the secant line to the curve, with slope 
-equal to the average rate of increase over the 6 month interval. Notably, the 
-evidence from [Andersson-et-al-2010]_ is limited in its application to our 
-model in that it evaluated iron fortification of margarine in adult women, not 
-iron fortification of flour among children.
+4.  We assumed that the full effect of the iron fortification
+    intervention takes six months to achieve and that the effect scales up in a
+    linear fashion between the onset of exposure and six months post exposure.
+    This is likely a conservative assumption, as there is evidence
+    [Andersson-et-al-2010]_ that the true curve increases more steeply at first,
+    then levels off before reaching the full effect at six months. Thus, the
+    measured response curve is concave down, and our linear approximation lies
+    entirely below this curve -- it is the secant line to the curve, with slope
+    equal to the average rate of increase over the 6 month interval. Notably,
+    the evidence from [Andersson-et-al-2010]_ is limited in its application to
+    our model in that it evaluated iron fortification of margarine in adult
+    women, not iron fortification of flour among children.
 
-5. We assumed that all individuals covered by baseline coverage of iron 
-fortification have been covered for at least six months and therefore have 
-already achieved the full effect of the intervention. 
+5.  We assumed that all individuals covered by baseline coverage of iron
+    fortification have been covered for at least six months and therefore have
+    already achieved the full effect of the intervention.
 
-Therefore, the effect size of iron fortification on a simulant's hemoglobin 
+Therefore, the effect size of iron fortification on a simulant's hemoglobin
 level **in the baseline scenario** should be determined as follows:
 
 .. code-block:: Python
-	
+
 	# at the draw level
 	MD = hb_md_distribution.rvs() # mean difference in hemoglobin concentration due to iron fortification
 		# note, hb_md_distribution defined above in the effect size section
@@ -859,38 +1092,38 @@ level **in the baseline scenario** should be determined as follows:
 		md_i = 0
 	elif age_i < 2:
 		md_i = MD * (age_i - 0.5) / 1.5
-	else: 
+	else:
 		md_i = MD
 
-The effect size of the iron fortification on a simulant's hemoglobin level for 
-new **intervention** coverage of iron fortification should be determined as 
-follows: 
+The effect size of the iron fortification on a simulant's hemoglobin level for
+new **intervention** coverage of iron fortification should be determined as
+follows:
 
 .. code-block:: Python
-	
-	# MD = hb_md_distribution.rvs() : full effect size at the draw level 
+
+	# MD = hb_md_distribution.rvs() : full effect size at the draw level
 		# (mean difference in hemoglobin concentration due to iron fortification)
-	# md_i : effect size for an individual simulant at a given time-step, 
+	# md_i : effect size for an individual simulant at a given time-step,
 		# dependent on age and time since coverage
 	# age_i : simulant age in years
 	# age_of_coverage_i : age at which simulant gained coverage access in years
 	# time_since_coverage_i : age_i - age_of_coverage_i
-	# age_of_coverage_i / 1.5 : fraction of full effect that will be achieved 
-		# in six months since onset of coverage access, dependent on 
+	# age_of_coverage_i / 1.5 : fraction of full effect that will be achieved
+		# in six months since onset of coverage access, dependent on
 		# age_of_coverage_i [(age_of_coverage - 0.5 + 0.5) / (2 - 0.5)]
-	# time_since_coverage_i / 0.5 : fraction of effect that will be achieved 
-		# at six months post onset of coverage access, dependent on 
+	# time_since_coverage_i / 0.5 : fraction of effect that will be achieved
+		# at six months post onset of coverage access, dependent on
 		# time_since_coverage_i
 	# (age_i - 0.5) / 1.5 : fraction of full effect, dependent on age
 
 	# at the individual simulant level
 	if age_i < 0.5:
 		md_i = 0
-	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i < 0.5: 
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i < 0.5:
 		md_i = MD * age_of_coverage_i / 1.5 * time_since_coverage_i / 0.5
-	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i >= 0.5: 
+	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i >= 0.5:
 		md_i = MD * (age_i - 0.5) / 1.5
-	if age_i > 0.5 and age_of_coverage >= 1.5 and time_since_coverage_i < 0.5: 
+	if age_i > 0.5 and age_of_coverage >= 1.5 and time_since_coverage_i < 0.5:
 		md_i = MD * time_since_coverage_i / 0.5
 	else:
 		md_i = MD
@@ -899,20 +1132,20 @@ See below for a visual representation:
 
 .. image:: iron_effect_scale_up.svg
 
-**Birth Weight** 
+**Birth Weight**
 
-Our model will apply the effect size of maternal consumption of iron fortified 
+Our model will apply the effect size of maternal consumption of iron fortified
 foods on infant birth weight under the following assumptions:
 
-1. Maternal consumption of iron fortified foods must begin at week 20 
-(CI: 8 - 28) of gestation and continue for a minimum of seven weeks in 
+1. Maternal consumption of iron fortified foods must begin at week 20
+(CI: 8 - 28) of gestation and continue for a minimum of seven weeks in
 order to impact infant birth weight. This assumption is based on the studies
 included in [Haider-et-al-2013]_ that evaluated birth weight as an outcome.
-These studies initiated iron supplementation between approximately 8 and 28 
-weeks of gestation, with most studies initiating approximately at week 20 of 
-gestation. Additionally, [Haider-et-al-2013]_ found that supplementation 
-duration did not affect the relationship between maternal iron consumption 
-and birth weight after adjusting for dose; however, the minimum duration of 
+These studies initiated iron supplementation between approximately 8 and 28
+weeks of gestation, with most studies initiating approximately at week 20 of
+gestation. Additionally, [Haider-et-al-2013]_ found that supplementation
+duration did not affect the relationship between maternal iron consumption
+and birth weight after adjusting for dose; however, the minimum duration of
 iron consumption in the studies included in [Haider-et-al-2013]_ was seven
 weeks, so we used this as the lower bound of necessary duration for our model.
 
@@ -920,49 +1153,49 @@ weeks, so we used this as the lower bound of necessary duration for our model.
 
 .. todo::
 
-	Update this assumption pending confirmation to model gestational age 
+	Update this assumption pending confirmation to model gestational age
 	(Nathaniel will follow-up).
 
 3. A simulant's birth weight will affect their all-cause mortality rate
-during the early and late neonatal periods only. This assumption is a 
-product of assumptions made in the modeling of the low birth weight and 
-short gestation (LBWSG) risk factor in GBD. 
+during the early and late neonatal periods only. This assumption is a
+product of assumptions made in the modeling of the low birth weight and
+short gestation (LBWSG) risk factor in GBD.
 
 .. todo::
 
 	Cite the LBWSG risk factor page once created.
 
-Therefore, for our simulation, an infant's mother must have gained coverage 
-to iron fortified foods at least **twenty weeks prior to the birth of the 
-infant** in order for the iron fortification coverage to affect the infant's 
+Therefore, for our simulation, an infant's mother must have gained coverage
+to iron fortified foods at least **twenty weeks prior to the birth of the
+infant** in order for the iron fortification coverage to affect the infant's
 birth weight.
 
-.. note:: 
+.. note::
 
   The following was adopted from Nathaniel's description for folic acid.
 
 1.  **Define variables:** Each simulant needs an attribute
     `mother_ate_iron_fortified_food`, which will be `True` if the simulant's
-    mother ate iron fortified food starting at least twenty weeks (0.384 years) 
-    before the simulant was born, `False` if not, and `Unknown` if we don't 
+    mother ate iron fortified food starting at least twenty weeks (0.384 years)
+    before the simulant was born, `False` if not, and `Unknown` if we don't
     know.
 
-2.  **Initialize the simulation:** At the start of the simulation for the early 
-    neonatal and late neonatal age groups (IDs 2 and 3), set 
-    `mother_ate_iron_fortified_food = True` for a proportion of the population 
-    equal to baseline coverage of iron fortification at simulation start, 
-    :math:`C(0)`. Set `mother_ate_iron_fortified_food = False` for a proportion 
-    of the population equal to 1 - baseline coverage of iron fortification at 
+2.  **Initialize the simulation:** At the start of the simulation for the early
+    neonatal and late neonatal age groups (IDs 2 and 3), set
+    `mother_ate_iron_fortified_food = True` for a proportion of the population
+    equal to baseline coverage of iron fortification at simulation start,
+    :math:`C(0)`. Set `mother_ate_iron_fortified_food = False` for a proportion
+    of the population equal to 1 - baseline coverage of iron fortification at
     simulation start, :math:`1 - C(0)`. Set
-    `mother_ate_iron_fortified_food = Unknown` for all simulants in the 
-    post-neonatal and 1-4 year age groups (age_group_ids 4 and 5); 
-    this attribute will not be used for these age groups because the 
+    `mother_ate_iron_fortified_food = Unknown` for all simulants in the
+    post-neonatal and 1-4 year age groups (age_group_ids 4 and 5);
+    this attribute will not be used for these age groups because the
     LBWSG risk factor does not apply.
 
 3.  **Initialize simulants born into the simulation:** For each simulant born
     at time :math:`t` (in years), the probability that the simulant's mother
     started eating iron-fortified food at nine months prior is equal to the
-    population coverage nine months prior, :math:`C(t-0.384)`. Therefore, upon 
+    population coverage nine months prior, :math:`C(t-0.384)`. Therefore, upon
     the simulant's birth, do the following:
 
   a.  Generate a uniform random number :math:`u\sim
@@ -973,44 +1206,46 @@ birth weight.
 
 Note that we are assuming that once someone (in this case the baby's mother)
 starts eating fortified food, they will continue to eat the fortified food
-forever. Additionally, we assume that those covered by baseline coverage of 
-iron fortification have been covered for at least nine months + age of the 
-simulant (in the case of simulants initialized in the early neonatal age 
+forever. Additionally, we assume that those covered by baseline coverage of
+iron fortification have been covered for at least nine months + age of the
+simulant (in the case of simulants initialized in the early neonatal age
 groups).
 
 Then, for simulants with the attribute `mother_ate_iron_fortified_food = True`,
-the effect size of iron fortification on birth weight, calculated as described 
-above (`Effect Size - Iron`_), should be applied as an **additive shift** to 
-the simulant's birth weight (in grams). This may then impact their LBWSG risk 
+the effect size of iron fortification on birth weight, calculated as described
+above (`Effect Size - Iron`_), should be applied as an **additive shift** to
+the simulant's birth weight (in grams). This may then impact their LBWSG risk
 category.
 
 Application of Effect to Simulants - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Hemoglobin Level**
+Hemoglobin Level
+''''''''''''''''
 
-The age- and time-dependent effect of iron fortification on a simulant's 
+The age- and time-dependent effect of iron fortification on a simulant's
 hemoglobin level (as documented in the sections above) should be **additively**
-applied to a simulant's hemoglobin level, as sampled as described in the 
-:ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>` 
-given that the simulant's value for *iron_responsive_i* (as described in the 
+applied to a simulant's hemoglobin level, as sampled as described in the
+:ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>`
+given that the simulant's value for *iron_responsive_i* (as described in the
 :ref:`Dietary Iron Deficiency / Iron Deficiency Documentation <2017_cause_iron_deficiency>`)
-is equal to 1. The age- and time-dependent intervention effect should be 
-applied *each time* that a simulant's hemoglobin level is sampled. If a 
-simulant's value for *iron_responsive_i* = 0, the effect of the intervention 
+is equal to 1. The age- and time-dependent intervention effect should be
+applied *each time* that a simulant's hemoglobin level is sampled. If a
+simulant's value for *iron_responsive_i* = 0, the effect of the intervention
 should **not** be applied to that simulant.
 
 .. note::
 
   See Baseline Calibration section below for special considerations regarding baseline coverage
 
-**Birth Weight**
+Birth Weight
+''''''''''''
 
-The time-dependent effect of iron fortification on a simulant's birth weight 
-(as documented in the sections above) should be **additively** applied to a 
-simulant's birth weight after it is sampled as a value *in grams* from the 
-continuous distribution of birth weight from the low birthweight short 
-gestation risk factor. The simulant's birthweight post-application of the 
+The time-dependent effect of iron fortification on a simulant's birth weight
+(as documented in the sections above) should be **additively** applied to a
+simulant's birth weight after it is sampled as a value *in grams* from the
+continuous distribution of birth weight from the low birthweight short
+gestation risk factor. The simulant's birthweight post-application of the
 effect size will then be used to determine the simulant's LBWSG risk category.
 
 .. note::
@@ -1019,7 +1254,8 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 
 .. todo:: Reference the LBWSG risk factor page when complete
 
-**Baseline Calibration**
+Baseline Calibration -- Hemoglobin and Birth Weight
+'''''''''''''''''''''''''''''''''''''''''''''''''''
 
 - **C_forticant_base** = coverage of forticant in the population at baseline
 
@@ -1040,7 +1276,7 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 Equations:
 
   π_GBD = π_1 * P_exp_base + π_0 * (1 - P_exp_base)
-  
+
   π_0 - π_1 = effect_size
 
   ∆_π_0 = π_0 - π_GBD
@@ -1049,15 +1285,15 @@ Equations:
 
 Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
 
-Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by 
-baseline coverage and ∆_π_1 as the additive effect size for simulants not 
-covered by baseline coverage (apply in the same fashion as described in the 
-sections above; notably, this is only done in the iron_responsive_i = 1 
+Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by
+baseline coverage and ∆_π_1 as the additive effect size for simulants not
+covered by baseline coverage (apply in the same fashion as described in the
+sections above; notably, this is only done in the iron_responsive_i = 1
 population for the hemoglobin outcome).
 
 .. note::
 
-  Through this method, we assume that π_0 - π_1 = effect_size is true for our 
+  Through this method, we assume that π_0 - π_1 = effect_size is true for our
   model population(s).
 
 .. todo::
@@ -1069,8 +1305,8 @@ Folic Acid Fortification
 
 .. _below:
 
-Population Coverage Data
-^^^^^^^^^^^^^^^^^^^^^^^^
+Population Coverage Data - Iron and Folic Acid
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. todo::
 
@@ -1222,11 +1458,12 @@ intervention algorithm is described by the following formula:
   c - (c-b)(1-r)^{t-t_0} & \text{if $t\ge t_0$,}
   \end{cases}
 
-where :math:`a`, :math:`b`, and :math:`c` are the randomly sampled `population
-coverage data`_ estimates from the previous section, and :math:`r \in [0,1]` is
-a user-defined parameter representing the proportion of people each year who
-start off eating an unfortifiable version of the vehicle but can be convinced to
-switch to the fortified vehicle.
+where :math:`a`, :math:`b`, and :math:`c` are the randomly sampled population
+coverage data estimates from the `previous section <population coverage data -
+iron and folic acid_>`_, and :math:`r \in [0,1]` is a user-defined parameter
+representing the proportion of people each year who start off eating an
+unfortifiable version of the vehicle but can be convinced to switch to the
+fortified vehicle.
 
 By default, we will start the intervention at :math:`t_0 = 1 \text{ year}`, and we'll assume :math:`r = 0.1` (i.e. an additional 10% of unfortifiable food will be converted to fortified food each year). We may later want to specify different values of these parameters for different locations.
 
@@ -1250,10 +1487,10 @@ In words, our intervention algorithm does the following:
     approach the value :math:`c`, i.e. the proportion of people who eat the
     vehicle.
 
-Determining Whether a Simulant Is Affected
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Determining Whether a Simulant Is Affected - Folic Acid
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Folic acid `reduces the birth prevalence <effect size_>`_ of :ref:`neural tube
+Folic acid `reduces the birth prevalence <effect size - folic acid_>`_ of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. In order for a newborn to have
 a reduced risk of NTDs, the baby's mother needs sufficient folate intake *three
 months prior to pregnancy*. Therefore, only babies born to mothers who have been
@@ -1292,8 +1529,8 @@ The variable `mother_ate_folate_fortified_food` will be used to determine the
 probability that the newborn has a neural tube defect. We will describe how to
 do this below.
 
-Effect Size
-^^^^^^^^^^^
+Effect Size - Folic Acid
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 Folic acid fortification reduces the birth prevalence of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. The effect size is measured as
@@ -1307,10 +1544,10 @@ a risk ratio (RR), where we think of "no fortification" as a risk factor:
   \approx 1.71\: (1.43, 2.04).
 
 We are estimating this effect size as the reciprocal of the odds ratio (OR) of
-:math:`0.59\: (0.49, 0.70)` found in the [Keats-et-al-2019]_ review; this odds 
-ratio is the ratio of the odds of being born with NTDs in the fortified 
-population to the odds of being born with NTDs in the unfortified population. 
-Since the prevalence of NTDs is small, the odds ratio is very close to the 
+:math:`0.59\: (0.49, 0.70)` found in the [Keats-et-al-2019]_ review; this odds
+ratio is the ratio of the odds of being born with NTDs in the fortified
+population to the odds of being born with NTDs in the unfortified population.
+Since the prevalence of NTDs is small, the odds ratio is very close to the
 risk ratio.
 
 To model the uncertainty in the estimate, the above RR should be drawn from a
@@ -1360,7 +1597,7 @@ The procedure here uses the standard coverage gap framework:
 .. todo::
 
   Write this out more explicitly. Perhaps it would be better to merge
-  `Determining Whether a Simulant Is Affected`_ into this section.
+  `Determining Whether a Simulant Is Affected - Folic Acid`_ into this section.
 
 Desired Model Outputs
 ---------------------
@@ -1377,7 +1614,10 @@ Design Decisions and Rationales
 Do not explicitly model neonatal disorders, meningitis, or other LBWSG-affected causes
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-For context, here are `treemaps for Nigeria and India on GBD Compare <http://ihmeuw.org/51tj>`_ showing that the majority of DALYs attributable to low birth weight and short gestation in the under-5 age groups are due to neonatal disorders, LRI, diarrhea, and meningitis.
+For context, here are `treemaps for Nigeria and India on GBD Compare
+<http://ihmeuw.org/51tj>`_ showing that the majority of DALYs attributable to
+low birth weight and short gestation in the under-5 age groups are due to
+neonatal disorders, LRI, diarrhea, and meningitis.
 
 Although the sub-causes of  :ref:`neonatal disorders
 <2017_cause_neonatal_disorders>` account for the majority of disease burden in
@@ -1431,11 +1671,13 @@ causes affected by low birth weight and short gestation are as follows:
 References
 ----------
 
-.. [Allen-2002]_
+.. [Allen-2002]
 
   View `Allen 2002`_
 
-    Lindsay H Allen, Anemia and iron deficiency: effects on pregnancy outcome, The American Journal of Clinical Nutrition, Volume 71, Issue 5, May 2000, Pages 1280S–1284S, https://doi.org/10.1093/ajcn/71.5.1280s
+    Lindsay H Allen, Anemia and iron deficiency: effects on pregnancy outcome,
+    The American Journal of Clinical Nutrition, Volume 71, Issue 5, May 2000,
+    Pages 1280S–1284S, https://doi.org/10.1093/ajcn/71.5.1280s
 
 .. _`Allen 2002`: https://doi.org/10.1093/ajcn/71.5.1280s
 
@@ -1505,11 +1747,12 @@ References
 
 .. [Global-Fortification-Data-Exchange]
 
-  View `Global Fortification Data Exchange`_
+  View `Global Fortification Data Exchange <https://tinyurl.com/wka9mgh>`_
 
     Global Fortification Data Exchange. Map: Nutrient Levels in Fortification Standards (mid-range or average). Accessed 4/7/2020. [http://www.fortificationdata.org.]
 
-.. _`Global Fortification Data Exchange`: https://tinyurl.com/wka9mgh
+..
+  .. _Global Fortification Data Exchange: https://tinyurl.com/wka9mgh
 
 .. [Haider-et-al-2013]
 
@@ -1517,7 +1760,7 @@ References
 
     Haider, B. A., Olofin, I., Wang, M., Spiegelman, D., Ezzati, M., & Fawzi, W. W. (2013). Anaemia, prenatal iron use, and risk of adverse pregnancy outcomes: systematic review and meta-analysis. Bmj, 346, f3443.
 
-.. _`Haider et al. 2013`: https://doi.org/10.1136/bmj.f3443   
+.. _`Haider et al. 2013`: https://doi.org/10.1136/bmj.f3443
 
 .. [Heaney-2008]
 
@@ -1547,7 +1790,7 @@ References
 
   View `Imdad et al. 2016`_
 
-    Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.  
+    Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.
 
 .. _`Imdad et al. 2016`: https://doi.org/10.1002/14651858.CD007480.pub3
 
