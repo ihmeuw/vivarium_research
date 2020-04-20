@@ -125,6 +125,21 @@ notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, we
 |  686     | sudden infant death syndrome                            |
 +----------+---------------------------------------------------------+
 
+Restrictions
+------------
+
+LBWSG risk effect on all-cause moratality only applies to the early neonatal and late neonatal age groups.
+
++------------------+-------------------------------------------------------+-----------+
+| Restriction type | Value                                                 | Notes     |
++==================+=======================================================+===========+
+|  Male only       | False                                                 |           |
++------------------+-------------------------------------------------------+-----------+
+|  Female only     | False                                                 |           |
++------------------+-------------------------------------------------------+-----------+
+|  Age group       | early neonatal (0-6 days)                             | id 2      |
+|                  | late neonatal (7-28 days)                             | id 3      |
++------------------+-------------------------------------------------------+-----------+
 
 Vivarium modelling strategy
 +++++++++++++++++++++++++++
@@ -150,8 +165,14 @@ All-cause mortality is sum of all cause-specific mortalities:
 
 The mortality from unmodelled causes affected by lbwsg (blue) is thus: 
 
-   ACMR - :math:`\sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR}`
+   :math:`\sum\limits_{\text{blue}}\text{CSMR}` = ACMR - :math:`\sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR}`
 
+Because we model some of the causes affected by lbwsg, we can use their excess-morality rates (EMR) instead of the average CSMRs: The mortality from modelled causes affected by lbwsg (green):
+
+   | * cause-specific mortality if the person who does NOT have the condition: 0
+   | * cause-specific mortality if the person HAS the condition: EMR of the condition
+
+ 
 We are interested in applying the PAF and relative risk to only the causes that GBD considers to be affected by lbwsg (green and blue):
 
    |  i = low birth weight short gestation category
@@ -160,9 +181,16 @@ We are interested in applying the PAF and relative risk to only the causes that 
    |  state = either 1 with condition or 0 without condition 
    |  PAF* = this is the PAF of the most detailed cause affected by lbwsg
 
-Hence, the mortality hazard for an individual in category i is:  
+Hence, the mortality hazard for an individual in lbwsg category i is:  
 
-:math:`\sum\limits_{\text{salmon}}\text{CSMR} + (ACMR - \sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
+mr_i 
+
+   | = ACMR_i 
+   | = (sum of unaffected causes) + affected(sum of unmodelled + sum of modelled)x(1-PAF*) x :math:`rr_i`
+
+= :math:`\sum\limits_{\text{salmon}}\text{CSMR} + (\sum\limits_{\text{blue}}\text{CSMR} + \sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
+
+= :math:`\sum\limits_{\text{salmon}}\text{CSMR} + (ACMR - \sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
 
 
 .. important :: 
@@ -171,23 +199,6 @@ Hence, the mortality hazard for an individual in category i is:
 
 .. todo ::
    link notebook that ali made on obtaining most-detailed-cause PAF lbwsg PAFs and abie's notebook on continuous conversion of the categories 
-
-
-Restrictions
-------------
-
-LBWSG risk effect on all-cause moratality only applies to the early neonatal and late neonatal age groups.
-
-+------------------+-------------------------------------------------------+-----------+
-| Restriction type | Value                                                 | Notes     |
-+==================+=======================================================+===========+
-|  Male only       | False                                                 |           |
-+------------------+-------------------------------------------------------+-----------+
-|  Female only     | False                                                 |           |
-+------------------+-------------------------------------------------------+-----------+
-|  Age group       | early neonatal (0-6 days)                             | id 2      |
-|                  | late neonatal (7-28 days)                             | id 3      |
-+------------------+-------------------------------------------------------+-----------+
 
    
 Assumptions and limitations
