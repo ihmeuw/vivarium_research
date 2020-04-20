@@ -206,8 +206,9 @@ Effect Modification
 Mediation
 """""""""
 **Definition**:
-Rather than a direct causal relationship between the independent variable and the dependent variable,
-a mediating variable improves understanding the relationship between the independent and dependent variables.
+Mediation analysis aims to disentangle the effect of an independent variable on an dependent variable explained (indirect effect) or 
+unexplained (direct effect) by a given set of mediators. Rather than a direct causal relationship between the 
+independent variable and the dependent variable, a mediating variable improves understanding the relationship between the independent and dependent variables.
 The independent variable influences the mediating variable, which in turn influences the dependent variables. 
 
 Generic Depiction: 
@@ -235,7 +236,7 @@ Generalized for multiple pathways of R1 through other RFs
 This adjusted or non-mediated RR is then used to calculate a non-mediated PAF, with which we can assume independence across risk 
 factors when aggregating
 
-Here is `GBD mediator template <https://hub.ihme.washington.edu/display/gbd2017/Mediator+Template>`_
+Here is `GBD mediator template <https://hub.ihme.washington.edu/display/gbd2017/Mediator+Template>`_ which belongs to GBD/risk factors causal criteria section
 
 What is a risk exposure?
 ++++++++++++++++++++++++
