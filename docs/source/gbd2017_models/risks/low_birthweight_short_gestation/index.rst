@@ -169,8 +169,8 @@ The mortality from unmodelled causes affected by lbwsg (blue) is thus:
 
 Because we model some of the causes affected by lbwsg, we can use their excess-morality rates (EMR) instead of the average CSMRs: The mortality from modelled causes affected by lbwsg (green):
 
-   | * cause-specific mortality if the person who does NOT have the condition: 0
-   | * cause-specific mortality if the person HAS the condition: EMR of the condition
+   - cause-specific mortality if the person who does NOT have the condition: 0
+   - cause-specific mortality if the person HAS the condition: EMR of the condition
 
  
 We are interested in applying the PAF and relative risk to only the causes that GBD considers to be affected by lbwsg (green and blue):
@@ -186,7 +186,7 @@ Hence, the mortality hazard for an individual in lbwsg category i is:
 mr_i 
 
    | = ACMR_i 
-   | = (sum of unaffected causes) + affected(sum of unmodelled + sum of modelled)x(1-PAF*) x :math:`rr_i`
+   | = (sum of unaffected causes) + affected(sum of unmodelled + sum of modelled) x (1-PAF*) x :math:`rr_i`
 
 = :math:`\sum\limits_{\text{salmon}}\text{CSMR} + (\sum\limits_{\text{blue}}\text{CSMR} + \sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
 
