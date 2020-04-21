@@ -7,7 +7,7 @@ Low Birth Weight and Short Gestation
 Risk exposure overview
 ++++++++++++++++++++++
 
-what is lbsg ? blahblahblahb 
+Describe this risk
 
 GBD 2017 modelling strategy 
 +++++++++++++++++++++++++++
@@ -155,7 +155,7 @@ Because the relative risks from GBD are for all-cause mortality in the early and
    - mortality from causes that are affected by lbwsg but not modelled in the sim (blue)
    - mortality from causes that are unaffected by lbwsg, modelled or not modelled (salmon)
 
-An example of these causes from the large-scale-food fortification concept model diagram is shown below: 
+An example of these causes from the :ref:`large-scale-food fortification concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below: 
 
 .. image:: causes_equation.svg
 
@@ -197,8 +197,10 @@ mr_i
 
    PAF in the above equation represents PAFs for most-detailed-cause (they are all roughly equal) affected by LBWSG (or as calculated in vivarium from LBWSG relative risks and exposure). This approach assumes that relative risks for LBWSG applies only to causes that GBD considers to be affected by LBWSG (green and blue causes). 
 
+   `lbwsg PAF notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/LBWSG%20exposure%2C%20rrs%2C%20pafs.ipynb>`__.
+
 .. todo ::
-   link notebook that ali made on obtaining most-detailed-cause PAF lbwsg PAFs and abie's notebook on continuous conversion of the categories 
+   link notebook abie's notebook on continuous conversion of the categories 
 
    
 Assumptions and limitations
@@ -210,9 +212,14 @@ Strengths
    
 Limitations
 
-   o  This approach applies the LBWSG relative risks in an inconsistent manner with what they represent (ratios of ACMRs). This implies that the relative risks may be different as they relate to the subset of causes that GBD considers affected by LBWSG rather than all causes.
-   
-Notably, we are not sure which direction this may bias the results (We would need to evaluate stratified microdata results.) If the studies from which we obtain our intervention effect sizes includes mortality data due to causes that GBD considers unaffected by LBWSG, then we may be underestimating the impact of the intervention in our model.
+   o  The risk appendix of GBD 2017 says that the data available to compute the relative risks for the risk exposure lbwsg are for the outcome of all-cause mortality. GBD then decided which causes are responsible for all this mortality from the lbwsg risk. It came up with a list of 15 causes (in blue) and assumes that all of the excess mortality that was measured in the RR's are theoretically all coming from these plausible blue causes. We are choosing to apply the RRs only to this list of lbwsg-affected causes. We believe this is consistent with GBD's approach but may not fully reflect what the RRs capture.
+
+    
+.. todo ::
+   Notably, we are not sure which direction this may bias the results (We would need to evaluate stratified microdata results.) If the studies from which we obtain our intervention effect sizes includes mortality data due to causes that GBD considers unaffected by LBWSG, then we may be underestimating the impact of the intervention in our model.
+
+   for example: suppose we have a nutritional supplement that impacts lbwsg. This supplement was tested in an RCT in western Kenya where malaria is prevalent. Suppose there is some causal link in both directions between birthweight and malaria. While malaria causes lbw, there might also be some causal pathway that lbw babies are more susepticble to malaria infection. If we improve birthweight in this population due to the supplement, we also decrease incidence of malaria, and decrease mortality from malaria. However, this effect through malaria will not be captured in our model, so our modelled effect on neonatal mortality might be less than the empirial effect of this supplement on neonatal mortality. 
+
 
 Risk Exposure Model Diagram
 +++++++++++++++++++++++++++
