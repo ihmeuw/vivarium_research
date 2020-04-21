@@ -237,6 +237,7 @@ Validation Criteria
 
 Baseline vivarium model results should compare to GBD artifact data with respect to age-, sex-, location-, and year-specific LRI:
 
+- Birth prevalence
 - Prevalence
 - Incidence rate
 - Remission rate
