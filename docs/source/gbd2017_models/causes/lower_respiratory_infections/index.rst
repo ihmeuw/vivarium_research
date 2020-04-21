@@ -105,6 +105,10 @@ Data Description
      - Value
      - Notes
    * - S
+     - birth prevalence
+     - 1-birth_prevalence_meid1258
+     -
+   * - S
      - prevalence
      - 1-prevalence_c322
      -
@@ -115,6 +119,10 @@ Data Description
    * - S
      - disability weights
      - 0
+     -
+   * - I
+     - birth prevalence
+     - birth_prevalence_meid1258
      -
    * - I
      - prevalence
@@ -160,7 +168,7 @@ Data Description
      - Sources
      - Description
      - Notes
-   * - birth_prevalence_meid_1258
+   * - birth_prevalence_meid1258
      - epi
      - Birth Prevalence of LRI
      - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5)
@@ -236,6 +244,10 @@ Baseline vivarium model results should compare to GBD artifact data with respect
 - Excess mortality rate
 - YLDs due to LRI
 - YLLs due to LRI
+
+.. note::
+
+	The prior bound for the LRI remission rate is 7.3 days, which is longer than the duration of the early neonatal age group (6 days), so theoretically there should be few or no remitted cases of LRI in the early neonatal age group. However, LRI birth prevalence is expected to be greater than LRI prevalence in the early neonatal age group due to LRI's excess mortality rate.
 
 References
 ----------
