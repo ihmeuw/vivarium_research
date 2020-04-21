@@ -245,7 +245,7 @@ Information about Table 1: For post-MI visits, the patient is given Rx with prob
 
 Information about Table 2: For background visits, if a patient is above the relevant threshold (4.9 mmol/L in BAU and according to the treatment algorithm involving SCORE, DM/CKD state, and SBP in the 2 intervention scenarios), they may or may not (therapeutic inertia) be given Rx. Whether they are given Rx given that they are above the threshold is determined by the data in Table 2.
 
-.. csv-table:: Table 2: Probability of Rx given high LDL-C = prob(Rx | LDL-C > 4.9)
+.. csv-table:: Table 2: Probability of Rx given high LDL-C = P(Rx | Untreated LDL-C > 4.9)
    :file: prob_rx_given_high_ldlc.csv
    :widths: 20, 10, 10
    :header-rows: 1
@@ -384,19 +384,38 @@ Observers
 
    Confirm with RT/SE teams if these are the correct observers or if any observers should be removed/added. I added 'FPGTimeSeries', SBPTimeSeries', and 'LDLCTimeSeries' observers to account for the need to be able to provide Mean LDL-C/SBP/FPG value per location/sex/age group/scenario.
 
-- DisabilityObserver()
-- MedicationObserver()
-- DiseaseCountObserver('ischemic_heart_disease')
-- DiseaseCountObserver('ischemic_stroke)
-- DiseaseCountObserver('chronic_kidney_disease')
-- DiseaseCountObserver('diabetes_mellitus')
-- LDLCTimeSeriesObserver()
-- FPGTimeSeriesObserver()
-- SBPTimeSeriesObserver()
-- IKFTimeSeriesObserver()
-- SimulantTrajectoryObserver()
-- LDLCMortalityObserver()
+For validation and reports, the research team requests the observers needed to create simulant trajectory visualizations. An example simulant trajectory plot is located below. 
 
+.. image:: example_trajectory.png
+
+.. list-table:: Observers
+   :widths: 15 20
+   :header-rows: 1
+
+   * - Observer Type
+     - Definition 
+   * - Disability 
+     - Disability observed (by cause) at the simulant-level at each time step
+   * - Medication
+     - The treatment prescription (medication) observed at the simulation-level throughout the treatment algorithm per intervention scenario 
+   * - Disease observer - 'Ischemic heart disease (IHD)'
+     - Count of IHD observed at the simulant-level throughout the simulation 
+   * - Disease observer - 'Ischemic_stroke'
+     - Count of Ischemic stroke observed at the simulant-level throughout the simulation 
+   * - Disease observer - 'Chronic kidney disease (CKD)'
+     - Count of CKD observed at the simulant-level throughout the simulation 
+   * - Disease observer - 'Diabetes mellitus (DM)'
+     - Count of DM observed at the simulant-level throughout the simulation 
+   * - LDL-c 
+     - Observed LDL-c level in (mmol/L units) throughout the simulation at the simulant-level 
+   * - FPG 
+     - Observed FPG level in (mmol/L units) throughout the simulation at the simulant-level 
+   * - IKF 
+     - The category of IKF throughout the simulation at the simulant-level 
+   * - SBP 
+     - Observed SBP for simulant at each time step
+   * - Doctor visit 
+     - The number of outpatient visits throughout the simulation at the simulant-level 
 
 Verification and Validation Strategy
 ------------------------------------
