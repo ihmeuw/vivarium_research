@@ -224,11 +224,25 @@ Bias
 
     o   One way of bias could be from not including the reverse-causality causes: suppose we have a nutritional supplement that impacts LBWSG. This supplement was tested in an RCT in western Kenya where malaria is prevalent. Suppose there is some causal link in both directions between birthweight and malaria. While malaria causes lbw, there might also be some causal pathway that lbw babies are more susepticble to malaria infection. If we improve birthweight in this population due to the supplement, we also decrease incidence of malaria, and decrease mortality from malaria. However, this effect through malaria will not be captured in our model, so our modelled effect on neonatal mortality might be less than the empirial effect of this supplement on neonatal mortality. 
 
-    o  Following from the limitation mentioned above, we are applying the RRs in an inconsistent manner with that they represent: they represent a ratio of ACMRs (let's call it RR_acmr), but we are are using them as a ratio of all-affected (blue and green) cause-mortality-rates (let's call this RR_aacmr). We do not know whether the RR_acmr is larger or smaller than the RR_aacmr. If the RR_acmr < RR_aacmr, we are underestimating deaths. If the RR_acmr > RR_aacmr then we are over-estimating deaths. This becomes clearer with the following equations:
+    o  Following from the limitation mentioned above, we are applying the RRs in an inconsistent manner with that they represent: they represent a ratio of ACMRs (let's call it :math:`RR_{acmr}`), but we are using them as a ratio of all-"affected (blue and green) cause"-mortality-rates (let's call this :math:`RR_{aacmr}`). We do not know whether the :math:`RR_{acmr}` is larger or smaller than the :math:`RR_{aacmr}`. 
 
+      | If the :math:`RR_{acmr}` < :math:`RR_{aacmr}`, we are underestimating deaths.
+      | If the :math:`RR_{acmr}` > :math:`RR_{aacmr}` then we are over-estimating deaths.    
 
+   This can be illusted by the following equations:
 
+    | LWB=low birth weight babies
+    | NBW=normal birth weight babies (or TMREL category)
 
+    :math:`RR_{acmr}` = :math:`\frac{\text{(LBW_deaths_affected + LBW_deaths_unaffected)/LBW_births}}{\text{(NBW_deaths_affected + NBW_deaths_unaffected)/NBW_births}}`
+
+                      = :math:`\frac{\text{(LBW_deaths_affected + LBW_deaths_unaffected)}}{\text{(NBW_deaths_affected + NBW_deaths_unaffected)}} \times \frac{\text{NBW_births}}{\text{LBW_births}}`
+
+    :math:`RR_{aacmr}` = :math:`\frac{\text{LBW_deaths_affected/LBW_births}}{\text{NBW_deaths_affected/NBW_births}}`
+
+                       = :math:`\frac{\text{LBW_deaths_affected}}{\text{NBW_deaths_affected}} \times \frac{\text{NBW_births}}{\text{LBW_births}}`
+
+   Since we do not know the ratio of the number of :math:`\text{LBW_deaths_unaffected}` to the number of :math:`\text{NBW_deaths_unaffected}`, we do not know the direction of bias. We would need to analyse the stratified microdata. 
 
 Risk Exposure Model Diagram
 +++++++++++++++++++++++++++
