@@ -201,11 +201,13 @@ mr_i
    PAF in the above equation represents PAFs for most-detailed-cause (they are all roughly equal) affected by LBWSG (or as calculated in vivarium from LBWSG relative risks and exposure). This approach assumes that relative risks for LBWSG applies only to causes that GBD considers to be affected by LBWSG (green and blue causes). 
 
    `LBWSG PAF notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/LBWSG%20exposure%2C%20rrs%2C%20pafs.ipynb>`__.
-.. todo::
-   - add more description of the all-causes PAF and mode-detailed-cause PAF and the logical reasoning for using one over the other. 
-   - here, we can also discuss the other equations that thought of but did not end up using. 
 
-   
+.. todo::
+   - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other. 
+   - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF 
+   - here, we can also discuss the other equations that thought up but did not end up using. 
+   - this way the following section will have more context. 
+
 Assumptions and limitations
 +++++++++++++++++++++++++++
  
@@ -215,16 +217,19 @@ Strengths
    
 Limitations
 
-   o  The risk appendix of GBD 2017 says that the data available to compute the relative risks for the risk exposure LBWSG are for the outcome of all-cause mortality. GBD then evaluated the relative risk of all-cause mortality across all available sources.  Based on criteria of biologic plausibility, a list of causes were selected. Some causes, most
-   notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded. GBD assumed that the relative risks for all-cause mortality rates by LBWSG category applied equally to mortality rates from each of these blue causes only and did not apply to any other GBD causes in order to calculate the population attributable burden due to LBWSG; in other words, the conservatively ignored the potential impact of LBWSG on mortality due to causes that did not meet their causal criteria. We are choosing to apply the RRs only to this list of LBWSG-affected causes. We believe this is consistent with GBD's approach but may not fully reflect what the RRs capture.
+   o  The risk appendix of GBD 2017 says that the data available to compute the relative risks (RR) for the risk exposure LBWSG are for the outcome of all-cause mortality. GBD then evaluated the relative risk of all-cause mortality across all available sources.  Based on criteria of biologic plausibility, a list of causes for which GBD believes LBWSG impacts mortality through were selected. Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded. GBD assumed that the relative risks for all-cause mortality rates by LBWSG category applied equally to mortality rates from each of these blue causes only and did not apply to any other GBD causes in order to calculate the population attributable burden due to LBWSG; in other words, the conservatively ignored the potential impact of LBWSG on mortality due to causes that did not meet their causal criteria. We are choosing to apply the RRs only to this list of LBWSG-affected causes. We believe this is consistent with GBD's approach but may not fully reflect what the RRs capture.
+
+   o  Because we are applying the same all-cause mortality RR to all affected causes, we are not able to evaluate the impact of LBWSG on cause-specific mortality accurately.
 
 Bias
 
-   Notably, we are not sure which direction this may bias the results (We would need to evaluate stratified microdata results.) If the studies from which we obtain our intervention effect sizes includes mortality data due to causes that GBD considers unaffected by LBWSG, then we may be underestimating the impact of the intervention in our model.
+   Notably, it is uncertain if this approach will cause an exaggeration or underestimation of the impact of LBWSG on mortality in the neonatal age groups in our models compared with real-life because it requires an evaluation of the relative risks of mortality by LBWSG exposure category stratified by affected and unaffected causes and these data are not readily available to us.
 
-    o   One way of bias could be from not including the reverse-causality causes: suppose we have a nutritional supplement that impacts LBWSG. This supplement was tested in an RCT in western Kenya where malaria is prevalent. Suppose there is some causal link in both directions between birthweight and malaria. While malaria causes lbw, there might also be some causal pathway that lbw babies are more susepticble to malaria infection. If we improve birthweight in this population due to the supplement, we also decrease incidence of malaria, and decrease mortality from malaria. However, this effect through malaria will not be captured in our model, so our modelled effect on neonatal mortality might be less than the empirial effect of this supplement on neonatal mortality. 
+    o   One source of bias could be from not including the reverse-causality causes: suppose we have a nutritional supplement that impacts LBWSG. This supplement was tested in an RCT in western Kenya where malaria is prevalent. Suppose there is some causal link in both directions between birthweight and malaria. For example, malaria during pregnancy can cause low birth weight babies due to the accumulation of parasites in the placentas of pregnant women. She can also pass on the malaria to the baby before or during childbirth. A low birth weight baby may also be more susceptible to diseases including malaria. So if a baby is low birth weight and has malaria, we do not know 100% whether this was 'congenital malaria' acquired from the mother before or during delivery and the mother's malaria caused its low birth weight, or whether the baby was born low birth weight malaria-free but had higher likelihood of acquiring malaria from an infectious mosquito bite. Without a well designed study, it is hard to know. Hence GBD did not include malaria in the list of LBWSG-affected causes. If we improve birthweight in this population due to the supplement, we also decrease incidence of malaria in the latter case (the low birth weight baby born malaria free, but then acquired it because it was low birth weight), and decrease mortality from malaria. However, this effect through malaria will not be captured in our model, so our modelled effect on neonatal mortality might be less than the empirial effect of this supplement on neonatal mortality. 
 
-    o  Following from the limitation mentioned above, we are applying the RRs in an inconsistent manner with that they represent: they represent a ratio of ACMRs (let's call it :math:`RR_{acmr}`), but we are using them as a ratio of all-"affected (blue and green) cause"-mortality-rates (let's call this :math:`RR_{aacmr}`). We do not know whether the :math:`RR_{acmr}` is larger or smaller than the :math:`RR_{aacmr}`. 
+    o  GBD assumes that the RR's for CSMR for each LBWSG-affected-causes (green and blue) are the same as the overall RR for ACMR (RR_acmr). This won't matter for the blue causes that we aren't modeling explicitly, but for the green causes that we *are* modeling, it could throw off our results depending on whether the RR's for that cause (RR_csmr) is larger or smaller than the overall RR for all causes (RR_acmr).
+
+    o  Another source of bias could be from not applying the RRs to the causes they are intended for. Following from the limitation mentioned above, we are applying the RRs in an inconsistent manner with that they represent: they represent a ratio of ACMRs (let's call it :math:`RR_{acmr}`), but we are using them as a ratio of all-"affected (blue and green) cause"-mortality-rates (let's call this :math:`RR_{aacmr}`). We do not know whether the :math:`RR_{acmr}` is larger or smaller than the :math:`RR_{aacmr}`. 
 
       | If the :math:`RR_{acmr}` < :math:`RR_{aacmr}`, we are underestimating deaths.
       | If the :math:`RR_{acmr}` > :math:`RR_{aacmr}` then we are over-estimating deaths.    
@@ -244,6 +249,12 @@ Bias
 
    Since we do not know the ratio of the number of :math:`\text{LBW_deaths_unaffected}` to the number of :math:`\text{NBW_deaths_unaffected}`, we do not know the direction of bias. We would need to analyse the stratified microdata. 
 
+   .. todo::
+      check to see (LBW_deaths_unaffected / NBW_deaths_unaffected) ?<? (LBW_deaths_affected / NBW_deaths_affected) or the reverse inequality?
+      - if this above inequality is true, then it implies RR_acmr < RR_aacmr (the math checks out)
+      - at first glance, the above inequality seems more likely than the reverse, BUT the unaffected causes include reverse causality causes which can complicate things. 
+      - thus, we should dig into a bit more later
+
 Risk Exposure Model Diagram
 +++++++++++++++++++++++++++
 
@@ -252,3 +263,8 @@ Data Description Tables
 
 Validation Criteria
 +++++++++++++++++++
+
+Our baseline scenario should compare with GBD artifact data with regards to:
+
+  - LBWSG exposure categories (note: consider a proxy for this so that we don't need to observe person time in each category, perhaps mean BW or mean RR or birth prevalence?)
+  - All-cause mortality rates in the early neonatal and late neonatal categories
