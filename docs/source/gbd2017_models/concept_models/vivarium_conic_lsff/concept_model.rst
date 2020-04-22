@@ -391,6 +391,21 @@ below.
   This will make the mean slightly larger than it should be, but so will any
   strategy we pick.
 
+Model Randomness
+~~~~~~~~~~~~~~~~
+
+Random samples drawn from distributions of **intervention effect sizes** 
+should be identical across model locations for each draw.
+
+	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a 
+	series of effect sizes drawn for a series of 5 input draws in the Ethiopia 
+	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect 
+	sizes should be drawn for the India and Nigeria models as well.
+
+This is to ensure that differences in intervention impact across model 
+locations are attributable to disease burden in each model location rather 
+than randomness in sampling from the effect size distribution. 
+
 Interventions
 +++++++++++++
 
@@ -556,6 +571,11 @@ as follows:
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
+
+.. note:: 
+
+	The same draws from this distribution should be applied to each model 
+	location as described in the `Model Randomness`_ section
 
 .. note::
 
@@ -842,6 +862,11 @@ as follows:
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
 	hb_md_distribution = norm(mean, std)
 
+.. note:: 
+
+	The same draws from this distribution should be applied to each model 
+	location as described in the `Model Randomness`_ section
+
 .. note::
 
 	This distirbution is slightly shifted to the right (0.025 percentile is
@@ -875,6 +900,11 @@ distribution of the parameter should be modeled as follows:
 
 	# random sample from effect size distribution
 	bw_md_per_10_mg_iron = bw_md_distribution.rvs()
+
+.. note:: 
+
+	The same draws from this distribution should be applied to each model 
+	location as described in the `Model Randomness`_ section
 
 .. note::
 
@@ -1159,11 +1189,7 @@ weeks, so we used this as the lower bound of necessary duration for our model.
 3. A simulant's birth weight will affect their all-cause mortality rate
 during the early and late neonatal periods only. This assumption is a
 product of assumptions made in the modeling of the low birth weight and
-short gestation (LBWSG) risk factor in GBD.
-
-.. todo::
-
-	Cite the LBWSG risk factor page once created.
+short gestation (LBWSG) risk factor in GBD (see :ref:`Low Birth Weight and Short Gestation (LBWSG) <2017_risk_lbwsg>`)
 
 Therefore, for our simulation, an infant's mother must have gained coverage
 to iron fortified foods at least **twenty weeks prior to the birth of the
@@ -1576,6 +1602,11 @@ as follows:
   # Frozen lognormal distribution for RR, representing uncertainty in our effect size
   # (s is the shape parameter; the scale parameter is exp(mu), which equals the median)
   rr_distribution = lognorm(s=sigma, scale=median)
+
+.. note:: 
+
+	The same draws from this distribution should be applied to each model 
+	location as described in the `Model Randomness`_ section
 
 
 Determining Whether a Simulant Is Born with an NTD
