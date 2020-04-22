@@ -1257,48 +1257,36 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 Baseline Calibration -- Hemoglobin and Birth Weight
 '''''''''''''''''''''''''''''''''''''''''''''''''''
 
-- **C_forticant_base** = coverage of forticant in the population at baseline
+A simulant's individual hemoglobin/birthweight value *in the baseline scenario* should be assigned as follows:
 
-- **P_exp_base**  = (1 - C_forticant_base), prevalence of exposure to unfortified foods at baseline
+.. math::
 
-- **π_1** = mean outcome value among those exposed to unfortified foods
+  π_i =	\hat{π}_{GBD(i)} - αp + αx_i
 
-- **π_0** = mean outcome value among those unexposed to unfortified foods (covered by fortification)
+Where,
 
-- **π_GBD** = mean outcome value in overall GBD population for age, sex, location, year
+.. list-table:: Parameter Definitions
+  :widths: 5 15
+  :header-rows: 1
 
-- **effect_size** = (π_0 - π_1), effect size for relevant outcome, as documented in the above sections, dependent on *age*, but **not** *time* (because it is assumed all simulants have been exposed for sufficient duration in the baseline scneario)
+  * - Parameter
+    - Definition
+  * - :math:`p`
+    - Proportion covered by iron fortification in the baseline scenario
+  * - :math:`π_{GBD}`
+    - Mean birthweight or hemoglobin from GBD
+  * - :math:`α`
+    - Effect size (age-dependent, sampled from distribution as described above)
+  * - :math:`π_{i}`
+    - Individual simulant birthweight/hemoglobin value
+  * - :math:`\hat{π}_{GBD}`
+    - Distribution of birthweight/hemoglobin according to GBD
+  * - :math:`x_{i}`
+    - Whether an individual simulant is covered (1=yes, 0=no)
 
-- **∆_π_0** = (π_0 - π_GBD), the difference between the mean outcome value in the population unexposed to unfortified foods (covered by fortification) and the overall age-, sex-, and location-specific GBD population
+See the proofs for this approach below.
 
-- **∆_π_1** = (π_1 - π_GBD), the difference between the mean outcome value in the population exposed to unfortified foods (not covered by fortification) and the overall age-, sex-, and location-specific GBD population
-
-Equations:
-
-  π_GBD = π_1 * P_exp_base + π_0 * (1 - P_exp_base)
-
-  π_0 - π_1 = effect_size
-
-  ∆_π_0 = π_0 - π_GBD
-
-  ∆_π_1 = π_1 - π_GBD
-
-Step 1: Solve for ∆_π_0 and ∆_π_1 using the equations above
-
-Step 2: Apply ∆_π_0 as the additive effect size for simulants covered by
-baseline coverage and ∆_π_1 as the additive effect size for simulants not
-covered by baseline coverage (apply in the same fashion as described in the
-sections above; notably, this is only done in the iron_responsive_i = 1
-population for the hemoglobin outcome).
-
-.. note::
-
-  Through this method, we assume that π_0 - π_1 = effect_size is true for our
-  model population(s).
-
-.. todo::
-
-  Improve formatting/layout in this section
+.. image:: baseline_calibration_proofs.png
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
