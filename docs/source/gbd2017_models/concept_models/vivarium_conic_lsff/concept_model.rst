@@ -1261,7 +1261,7 @@ A simulant's individual hemoglobin/birthweight value *in the baseline scenario* 
 
 .. math::
 
-  π_i =	\hat{π}_{GBD(i)} - αp + αx_i
+  π_i =	\hat{π}_{GBD}(i) - αp + αx_i
 
 Where,
 
@@ -1273,16 +1273,16 @@ Where,
     - Definition
   * - :math:`p`
     - Proportion covered by iron fortification in the baseline scenario
-  * - :math:`π_{GBD}`
-    - Mean birthweight or hemoglobin from GBD
   * - :math:`α`
     - Effect size (age-dependent, sampled from distribution as described above)
-  * - :math:`π_{i}`
-    - Individual simulant birthweight/hemoglobin value
-  * - :math:`\hat{π}_{GBD}`
-    - Distribution of birthweight/hemoglobin according to GBD
+  * - :math:`π_{GBD}`
+    - Mean birthweight or hemoglobin from GBD
+  * - :math:`\hat{π}_{GBD}(i)`
+    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution 
   * - :math:`x_{i}`
     - Whether an individual simulant is covered (1=yes, 0=no)
+  * - :math:`π_{i}`
+    - Draw of birthweight/hemoglobin distribution according to GBD
 
 See the proofs for this approach below.
 
