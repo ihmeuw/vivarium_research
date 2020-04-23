@@ -63,7 +63,7 @@ GBD 2017 creates a joint distribution of birth weight and gestation age to creat
    - There are 1-week age bins (36-37 weeks, and 37-38 weeks).
    - There are two categories where the age range is 0-24 weeks (all these
      "extremely extreme" preterm births are grouped together).
-     See image of LBWSG categories below under Exposure modelling strategy in GBD 2017
+     See image of LBWSG categories below
 
 .. image:: lbwsg_categories.svg
 
@@ -251,6 +251,7 @@ Bias
 
    .. todo::
       check to see (LBW_deaths_unaffected / NBW_deaths_unaffected) ?<? (LBW_deaths_affected / NBW_deaths_affected) or the reverse inequality?
+
       - if this above inequality is true, then it implies RR_acmr < RR_aacmr (the math checks out)
       - at first glance, the above inequality seems more likely than the reverse, BUT the unaffected causes include reverse causality causes which can complicate things. 
       - thus, we should dig into a bit more later
