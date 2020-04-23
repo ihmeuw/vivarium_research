@@ -392,7 +392,7 @@ below.
   strategy we pick.
 
 Model Randomness
-~~~~~~~~~~~~~~~~
+++++++++++++++++
 
 Random samples drawn from distributions of **intervention effect sizes** 
 should be identical across model locations for each draw.
