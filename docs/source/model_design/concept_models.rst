@@ -40,7 +40,7 @@ Common random numbers
 	- Between model scenarios
 	- Between model locations
 
-Statistical distributions of uncertainty
+Statistical Distributions of Uncertainty
 ++++++++++++++++++++++++++++++++++++++++
 
 .. todo::
@@ -61,7 +61,7 @@ Common Statistical Distributions
 	- Etc.
 
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
@@ -83,7 +83,7 @@ Other Considerations
 	- How to handle uncertainty distribution in the case of joint distributions
 
 When to choose causal associations versus non-causal correlations in a Vivarium concept model
-++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. todo::
 
@@ -121,7 +121,7 @@ Continuous Outcome
 	This section (take from LSFF? Note that LSFF method could be improved; sample from opposite ends of existing distribution rather than shift entire distribution up/down)
 
 Additional sub-groups with differential risks in baseline scenario
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
@@ -197,7 +197,7 @@ Double Counting Issues
 	This section
 
 Incompatibilities Between Disease States Needed for Model and GBD Disease States
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. todo::
 
