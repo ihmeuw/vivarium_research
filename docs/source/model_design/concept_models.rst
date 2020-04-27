@@ -104,14 +104,14 @@ Accounting for Baseline Intervention Coverage
 
 .. todo::
 
-	Intro
+	Intro (link to or copy from LSFF description)
 
 Dichotomous Outcome
 ~~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
-	This section (take from LSFF?)
+	This section (link to or copy from LSFF description)
 
 Continuous Outcome 
 ~~~~~~~~~~~~~~~~~~
@@ -206,9 +206,7 @@ Incompatibilities Between Disease States Needed for Model and GBD Disease States
 Back of Envelope Calculations
 +++++++++++++++++++++++++++++
 
-.. todo::
-
-	Link to Abie's presentation
+See the presentation Abie made on back of envelope presentations for Vivarium simulation models `here <https://www.dropbox.com/s/bo44c1jy149m06r/vivarium_back_of_envelop_method.pptx?dl=0>`_.
 
 Monte Carlo Simulation Uncertainty
 +++++++++++++++++++++++++++++++++++
