@@ -39,7 +39,7 @@ Common random numbers
 Common Random Numbers Between Model Scenarios
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Vivarium uses common random numbers between model scenarios to ensure that our comparison of the baseline and intervention scenarios represents a true *counterfactual* comparison in which the scenarios are exactly the same with regard to all factors besides the defined intervention. See the `Vivarium documentation page on common random numbers <https://vivarium.readthedocs.io/en/develop/concepts/crn.html>`_: for more detail on how this is implemented.
+Vivarium uses common random numbers between model scenarios to ensure that our comparison of the baseline and intervention scenarios represents a true *counterfactual* comparison in which the scenarios are exactly the same with regard to all factors besides the defined intervention. See the `Vivarium documentation page on common random numbers <https://vivarium.readthedocs.io/en/develop/concepts/crn.html>`_ for more detail on how this is implemented.
 
 Common Random Numbers Between Model Locations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
