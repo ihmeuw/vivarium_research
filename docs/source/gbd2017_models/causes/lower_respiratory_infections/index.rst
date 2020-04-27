@@ -171,7 +171,7 @@ Data Description
    * - birth_prevalence_meid1258
      - epi
      - Birth Prevalence of LRI
-     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5)
+     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=5, year_id=2017)
    * - prevalence_c322
      - como
      - Prevalence of LRI
