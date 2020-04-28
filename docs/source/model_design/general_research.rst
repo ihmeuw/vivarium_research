@@ -679,12 +679,11 @@ Conducting Systematic Literature Searches/Reviews
 Directed Acyclic Graphs (Causal Diagrams)
 ------------------------------------------
 
+.. todo::
 
-- How to draw directional acyclic graphs (DAGs aka causal diagrams)
+  - How to draw directional acyclic graphs (DAGs aka causal diagrams)
 	- Causal relationships vs. correlated
-	- Confounding/effect mod/mediation, etc. (link to existing pages)
-- Causal section from risk factors page
-
+	
 Selecting Appropriate Data Sources
 ----------------------------------
 
