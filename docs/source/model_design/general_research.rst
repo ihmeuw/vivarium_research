@@ -126,6 +126,13 @@ Meta-Analyses and Meta-Regressions
 
 	- GBD resources on how to conduct your own
 	- WHEN we would need/want to conduct our own
+	
+Correlation
+-----------
+
+.. todo::
+
+	Define different measures of correlation
 
 Conducting Systematic Literature Searches/Reviews
 -------------------------------------------------
