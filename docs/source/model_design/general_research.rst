@@ -43,7 +43,7 @@ be quite a challenging task and many fields, including epidemiology, are
 devoted to the process of *causal inference,* or drawing a conclusion about a 
 causal relationship based on the available evidence.
 
-An term that is often used in causal inference is the **counterfactual**. The 
+A term that is often used in causal inference is the **counterfactual**. The 
 counterfactual refers to an alternate reality in which only a single variable 
 has changed and all else has remained exactly the same. 
 
