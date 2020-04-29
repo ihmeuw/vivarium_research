@@ -394,17 +394,17 @@ below.
 Model Randomness
 ++++++++++++++++
 
-Random samples drawn from distributions of **intervention effect sizes** 
+Random samples drawn from distributions of **intervention effect sizes**
 should be identical across model locations for each draw.
 
-	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a 
-	series of effect sizes drawn for a series of 5 input draws in the Ethiopia 
-	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect 
+	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a
+	series of effect sizes drawn for a series of 5 input draws in the Ethiopia
+	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect
 	sizes should be drawn for the India and Nigeria models as well.
 
-This is to ensure that differences in intervention impact across model 
-locations are attributable to disease burden in each model location rather 
-than randomness in sampling from the effect size distribution. 
+This is to ensure that differences in intervention impact across model
+locations are attributable to disease burden in each model location rather
+than randomness in sampling from the effect size distribution.
 
 Interventions
 +++++++++++++
@@ -572,9 +572,9 @@ as follows:
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -642,8 +642,7 @@ For all values other than :math:`a` for Ethiopia, use a Beta distribution
 with mean equal to the central estimate, and variance equal to the variance of
 a normal distribution with the same mean and 95% confidence interval.
 
-For the :
-math:`a` value for Ethiopia, assume the following:
+For the :math:`a` value for Ethiopia, assume the following:
 
 .. math::
 
@@ -862,9 +861,9 @@ as follows:
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
 	hb_md_distribution = norm(mean, std)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -901,9 +900,9 @@ distribution of the parameter should be modeled as follows:
 	# random sample from effect size distribution
 	bw_md_per_10_mg_iron = bw_md_distribution.rvs()
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -1304,7 +1303,7 @@ Where,
   * - :math:`π_{GBD}`
     - Mean birthweight or hemoglobin from GBD
   * - :math:`\hat{π}_{GBD}(i)`
-    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution 
+    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution
   * - :math:`x_{i}`
     - Whether an individual simulant is covered (1=yes, 0=no)
   * - :math:`π_{i}`
@@ -1340,9 +1339,9 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - :math:`c` = Eats vehicle
   * - Ethiopia
     - 1.0
-    - 13.9
-    - 25.3
-  * - India
+    - 15.0 (10.0, 20.0)
+    - 28.0 (23.0, 33.0)
+  * - India (Rajsathan)
     - 6.3 (4.8, 7.9)
     - 7.1 (5.6, 9.1)
     - 83.2 (79.5, 86.5)
@@ -1355,60 +1354,97 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - 13.8 (11.5, 16.1)
     - 14.2 (11.8, 16.5)
 
-**For Ethiopia**, assume
+The above data for India and Nigeria is from Table 4 in [Aaron-et-al-2017]_. The
+numbers for Ethiopia were chosen so that (i) the mean of existing wheat flour
+fortification coverage is close to 0, based on the `GFDx Ethiopia Fortification
+Dashboard`_, (ii) the percentage of people eating wheat flour is 28%, based on
+[Ethiopian-Federal-Ministry-of-Health-2011]_, (iii) between 53% and 55% of the
+wheat flour is fortifiable, based data from
+[Ethiopian-Federal-Ministry-of-Health-2011]_ and the `GFDx Ethiopia
+Fortification Dashboard`_, and (iv) the 95% confidence intervals for :math:`b`
+and :math:`c` have a width of 10% (chosen arbitrarily).
+
+.. _GFDx Ethiopia Fortification Dashboard: https://tinyurl.com/rdm4wza
+
+**For Ethiopia parameter** :math:`a`, assume
 
 .. math::
 
-  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
-  b_\textit{Ethiopia} \sim \operatorname{Beta}(0.5,3.1),\quad
-  c_\textit{Ethiopia} \sim \operatorname{Beta}(0.8,2.36).
+  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9).
 
-The means of these `Beta distributions
-<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
-in the table. Each of the densities has an asymptote at 0 and an x-intercept at
-1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
-monotonically with the mean. The numbers for Ethiopia were chosen so that (i)
-the mean of existing fortification coverage is close to 0, (ii) the percentage
-of people eating wheat flour is similar to that in Nigeria, and (iii) 55%
-of the wheat flour is fortifiable, based on the `Global Fortification Data
-Exchange <https://tinyurl.com/rdm4wza>`_.
+This `Beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ will
+have mean 1.0 as in the table. The density has an asymptote at 0 and an
+x-intercept at 1.
 
 .. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
 
-**For all the locations other than Ethiopia**, use a Beta distribution with mean
-equal to the central estimate, and variance equal to the variance of a normal
-distribution with the same mean and 95% confidence interval.
+**For all the remaining parameters**, use a Beta
+distribution with mean equal to the central estimate, and variance equal to the
+variance of a normal distribution with the same mean and 95% confidence
+interval. Here is Python code for achieving this:
 
-.. todo::
+.. code-block:: Python
 
-  Show how to get the correct Beta distribution, and draw some graphs. Here is
-  the code James used, which truncates the distributions outside the 95%
-  interval:
+  # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html
+  import scipy.stats.beta
 
-  .. code-block:: Python
+  def beta_a_b_from_mean_var(mean, variance):
+  """
+  Returns the parameters a=alpha and b=beta for a beta distribution
+  with the specified mean and variance.
+  """
+    if mean <= 0 or mean >= 1:
+        raise ValueError("Mean must be in the interval (0,1)")
+    if variance >= mean*(1-mean):
+        raise ValueError("Variance too large")
 
-    def sample_from_statistics(mean, upper_bound, lower_bound, variance=None):
-    if variance is None:
-        # Get variance for corresponding normal distribution
-        variance = confidence_interval_variance(upper_bound, lower_bound)
-    support_width = (upper_bound - lower_bound)
-    mean = (mean - lower_bound) / support_width
-    variance /= support_width ** 2
-    alpha = mean * (mean * (1 - mean) / variance - 1)
-    beta = (1 - mean) * (mean * (1 - mean) / variance - 1)
-    return  lower_bound + support_width*scipy.stats.beta.rvs(alpha, beta)
+    # For derivations of these formulas, see:
+    # https://en.wikipedia.org/wiki/Beta_distribution#Mean_and_variance
+    a = mean*(mean*(1-mean)/variance - 1)
+    b = (1-mean)*(mean*(1-mean)/variance - 1)
+    return a, b
 
-  Another option for India and Nigeria would be to use truncated normal
-  distributions, i.e. just find the normal distribution with the right mean and
-  95% confidence interval, and truncate the tails outside the interval [0,1].
+  def normal_stdev_from_mean_quantile(mean, quantile, quantile_rank):
+  """
+  Computes the standard deviation of a normal distribution that has the
+  specified mean and quantile.
+  """
+    # If q = quantile, mu = mean, and sigma = std deviation, then
+    # q = mu + q'*sigma, where q' is the standard normal quantile
+    # and q is the transformed quantile, so sigma = (q-mu)/q'
+    return (quantile - mean) / scipy.stats.norm().ppf(quantile_rank)
 
-To ensure that :math:`a<b<c` for each country, sample :math:`a`, :math:`b`, and
+  def beta_from_mean_approx_quantile(mean, approx_quantile, quantile_rank):
+    """
+    Returns a scipy.stats Beta distribution with the specified mean and a
+    quantile of rank quantile_rank approximately equal to approx_quantile.
+    This is achieved by specifying that the variance of the Beta distribution
+    is equal to the variance of a normal distribution with the same mean and
+    the specified quantile.
+    """
+    variance = normal_stdev_from_mean_quantile(mean, approx_quantile, quantile_rank)**2
+    a,b = beta_a_b_from_mean_var(mean, variance)
+    return scipy.stats.beta(a,b)
+
+  # Example usage - distribution of parmeter a for India (Rajsathan)
+  mean = 6.3 / 100
+  q_975 = 7.9 / 100
+  india_a_distribution = beta_from_mean_approx_quantile(mean, q_975, 0.975)
+
+Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
+(Kano), and Nigeria (Lagos):
+
+.. image:: coverage_india_nigeria.svg
+
+To ensure that :math:`a<b<c` for each location, sample :math:`a`, :math:`b`, and
 :math:`c` so that they all have the same `percentile rank
 <https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
 distributions. This can be done by using `inverse transform sampling
 <https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to generate all
 three variables (:math:`a`, :math:`b`, and :math:`c`) from a single uniform
 random variable :math:`u`.
+
+For India, we will assume that the national values for :math:`a`, :math:`b`, and :math:`c` are the same as those in Rajasthan listed in the table.
 
 To compute the coverage levels :math:`a`, :math:`b`, and :math:`c` for the whole
 country of Nigeria, we will take a population-weighted average of the
@@ -1591,9 +1627,9 @@ as follows:
   # (s is the shape parameter; the scale parameter is exp(mu), which equals the median)
   rr_distribution = lognorm(s=sigma, scale=median)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 
@@ -1690,6 +1726,19 @@ causes affected by low birth weight and short gestation are as follows:
 References
 ----------
 
+.. [Aaron-et-al-2017]
+
+  View `Aaron et al. 2017`_
+
+    Grant J Aaron, Valerie M Friesen, Svenja Jungjohann, Greg S Garrett,
+    Lynnette M Neufeld, Mark Myatt, Coverage of Large-Scale Food Fortification
+    of Edible Oil, Wheat Flour, and Maize Flour Varies Greatly by Vehicle and
+    Country but Is Consistently Lower among the Most Vulnerable: Results from
+    Coverage Surveys in 8 Countries, The Journal of Nutrition, Volume 147, Issue
+    5, May 2017, Pages 984S–994S, https://doi.org/10.3945/jn.116.245753
+
+.. _Aaron et al. 2017: https://doi.org/10.3945/jn.116.245753
+
 .. [Allen-2002]
 
   View `Allen 2002`_
@@ -1724,6 +1773,29 @@ References
 
 .. _`De Pee et al. 2002`: https://doi.org/10.1093/jn/132.8.2215
 
+.. [Diana-et-al-2016]
+
+  View `Diana et al. 2016`_
+
+    Diana A, Mallard SR, Haszard JJ, Purnamasari DM, Nurulazmi I, Herliani PD,
+    Nugraha GI, Gibson RS, Houghton L. Consumption of fortified infant foods
+    reduces dietary diversity but has a positive effect on subsequent growth in
+    infants from Sumedang district, Indonesia. PLoS One. 2017 Apr
+    20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
+
+.. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
+
+.. [Dror-and-Allen-2018]
+
+  View `Dror and Allen 2018`_
+
+    Dror, D. K., & Allen, L. H. (2018). Retinol-to-fat ratio and retinol
+    concentration in human milk show similar time trends and associations with
+    maternal factors at the population level: a systematic review and
+    meta-analysis. Advances in Nutrition, 9(suppl_1), 332S-346S.
+
+.. _`Dror and Allen 2018`: https://doi.org/10.1093/advances/nmy021
+
 .. [Emamghorashi-and-Heidari-2004]
 
   View `Emamghorashi and Heidari 2004`_
@@ -1740,6 +1812,15 @@ References
 
 .. _`Erdem et al. 2002`: https://www.ncbi.nlm.nih.gov/pubmed/?term=12389675
 
+.. [Ethiopian-Federal-Ministry-of-Health-2011]
+
+  View `Ethiopian Federal Ministry of Health 2011`_
+
+    Ethiopian Federal Ministry of Health. Assessment of Feasibility and
+    Potential Benefits of Food Fortification. 2011.
+
+.. _Ethiopian Federal Ministry of Health 2011: http://www.ffinetwork.org/about/calendar/2011/documents%202011/Ethiopia.pdf
+
 .. [Ethiopian-National-Food-Consumption-Survey]
 
   View `Ethiopian National Food Consumption Survey`_
@@ -1747,22 +1828,6 @@ References
     Ethiopian Public Health Institute (2013). Ethiopian National Food Consumption Survey. Addis Ababa, Ethiopia. [table 18; women]
 
 .. _`Ethiopian National Food Consumption Survey`: https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf
-
-.. [Diana-et-al-2016]
-
-  View `Diana et al. 2016`_
-
-    Diana A, Mallard SR, Haszard JJ, Purnamasari DM, Nurulazmi I, Herliani PD, Nugraha GI, Gibson RS, Houghton L. Consumption of fortified infant foods reduces dietary diversity but has a positive effect on subsequent growth in infants from Sumedang district, Indonesia. PLoS One. 2017 Apr 20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
-
-.. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
-
-.. [Dror-and-Allen-2018]
-
-  View `Dror and Allen 2018`_
-
-    Dror, D. K., & Allen, L. H. (2018). Retinol-to-fat ratio and retinol concentration in human milk show similar time trends and associations with maternal factors at the population level: a systematic review and meta-analysis. Advances in Nutrition, 9(suppl_1), 332S-346S.
-
-.. _`Dror and Allen 2018`: https://doi.org/10.1093/advances/nmy021
 
 .. [Global-Fortification-Data-Exchange]
 
