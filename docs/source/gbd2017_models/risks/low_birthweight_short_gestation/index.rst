@@ -180,9 +180,9 @@ The final list of outcomes included in calculating the attributable burden for L
 |  686     | sudden infant death syndrome                            |
 +----------+---------------------------------------------------------+
 
-      .. todo::
+.. todo::
 
-   discuss in detail the PAF of 1 causes.
+  discuss in detail the PAF of 1 causes.
 
 Restrictions
 ------------
@@ -315,7 +315,7 @@ We are interested in applying the PAF and relative risk to only the causes that 
 Hence, the mortality hazard for an individual in LBWSG category i is:  
 
 mr_i
- 
+
   | = ACMR_i
   | = unaffected(unmodelled + modelled) + affected(unmodelled + modelled) x (1-PAF*) x :math:`rr_i`
 
