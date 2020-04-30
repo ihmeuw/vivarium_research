@@ -74,7 +74,7 @@ there would probably not be much benefit in attempting to capture its long-term 
 
 .. note::
 
-	Birth prevalence of LRI was allowed in the DISMOD modeling process for LRI. However, it was not reported as a final result in GBD 2017. LRI birth prevalence must therefore be retreieved using get_model_results('epi', 1258, age_group_id=164, measure_id=5) or get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5). 
+	Birth prevalence of LRI was allowed in the DISMOD modeling process for LRI. However, it was not reported as a final result in GBD 2017. LRI birth prevalence must therefore be retreieved using get_model_results('epi', 1258, age_group_id=164, measure_id=5, gbd_round_id=5, year_id=2017) or get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=5, year_id=2017). 
 
 .. todo::
 
@@ -171,7 +171,7 @@ Data Description
    * - birth_prevalence_meid1258
      - epi
      - Birth Prevalence of LRI
-     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5)
+     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=5, year_id=2017)
    * - prevalence_c322
      - como
      - Prevalence of LRI
