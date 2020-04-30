@@ -1366,6 +1366,9 @@ and :math:`c` have a width of 10% (chosen arbitrarily).
 
 .. _GFDx Ethiopia Fortification Dashboard: https://tinyurl.com/rdm4wza
 
+Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
 **For Ethiopia parameter** :math:`a`, assume
 
 .. math::
@@ -1376,6 +1379,10 @@ This `Beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ will
 have mean 1.0 as in the table. The density has an asymptote at 0 and an
 x-intercept at 1.
 
+.. todo::
+
+  Add graphs of the beta distributions of a, b, and c for Ethiopia.
+
 .. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
 
 **For all the remaining parameters**, use a Beta
@@ -1385,7 +1392,9 @@ interval. Here is Python code for achieving this:
 
 .. code-block:: Python
 
+  # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html
   # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html
+  import scipy.stats.norm
   import scipy.stats.beta
 
   def beta_a_b_from_mean_var(mean, variance):
@@ -1436,7 +1445,12 @@ Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
 
 .. image:: coverage_india_nigeria.svg
 
-To ensure that :math:`a<b<c` for each location, sample :math:`a`, :math:`b`, and
+Joint distribution of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+To ensure that :math:`a<b<c` for each location, we will use the `comonotone
+coupling <https://en.wikipedia.org/wiki/Comonotonicity>`_ of the three random
+variables. That is, for each location, sample :math:`a`, :math:`b`, and
 :math:`c` so that they all have the same `percentile rank
 <https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
 distributions. This can be done by using `inverse transform sampling
@@ -1444,10 +1458,27 @@ distributions. This can be done by using `inverse transform sampling
 three variables (:math:`a`, :math:`b`, and :math:`c`) from a single uniform
 random variable :math:`u`.
 
-For India, we will assume that the national values for :math:`a`, :math:`b`, and :math:`c` are the same as those in Rajasthan listed in the table.
+*Between* locations, the random vectors :math:`(a,b,c)` should be independent.
+For example, the vector :math:`(a,b,c)_\textit{Ethiopia}` for Ethiopia should be
+independent of the vector :math:`(a,b,c)_\textit{India}` for India.
+
+.. todo::
+
+  Experiment with different joint distributions to see what what happens to the
+  overall uncertainty. For example, it may be better to generate a,b,c
+  independently, then resample until a<b<c (i.e. use the independent coupling
+  and condition on the event that a<b<c), because I think that will produce more
+  variation in the differences c-b and b-a, which may better reflect our
+  uncertainty.
+
+Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+For **India**, we will assume that the national values for :math:`a`, :math:`b`,
+and :math:`c` are the same as those in Rajasthan listed in the table.
 
 To compute the coverage levels :math:`a`, :math:`b`, and :math:`c` for the whole
-country of Nigeria, we will take a population-weighted average of the
+country of **Nigeria**, we will take a population-weighted average of the
 corresponding values for Kano and Lagos. Kano has a population of about 4
 million, and Lagos has a population of about 21 million, so we have
 
@@ -1460,12 +1491,13 @@ and similarly for :math:`b` and :math:`c`. `Couple
 <https://en.wikipedia.org/wiki/Coupling_(probability)>`_ the random variables
 :math:`a_\textit{Kano}` and :math:`a_\textit{Lagos}` by giving them the same
 percentile rank (i.e. use the same strategy described above for coupling
-:math:`a`, :math:`b`, and :math:`c`). This coupling strategy will create greater
-uncertainty in the weighted average :math:`a_\textit{Nigeria}` than if we
-sampled the two estimates indepdently, and more uncertainty seems like a good
-idea since we're trying to estimate an average for the entire country based on
-only two data points. Moreover, this coupling seems plausible since the data for
-Kano and Lagos were from the same paper and therefore could have a similar bias.
+:math:`a`, :math:`b`, and :math:`c` comonotonically). This coupling strategy
+will create greater uncertainty in the weighted average
+:math:`a_\textit{Nigeria}` than if we sampled the two estimates indepdently, and
+more uncertainty seems like a good idea since we're trying to estimate an
+average for the entire country based on only two data points. Moreover, this
+coupling seems plausible since the data for Kano and Lagos were from the same
+paper and therefore could have a similar bias.
 
 .. _here:
 
