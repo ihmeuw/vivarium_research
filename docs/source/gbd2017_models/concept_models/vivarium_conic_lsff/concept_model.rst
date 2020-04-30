@@ -1321,13 +1321,29 @@ Folic Acid Fortification
 Population Coverage Data - Iron and Folic Acid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+Our `coverage algorithm`_ for folic acid and iron will use three parameters,
+:math:`a`, :math:`b`, and :math:`c`, which describe the existing level of
+fortification as well as the potential level of fortification we can hope to
+achieve. The food vehicle we are using for folic acid and iron is wheat flour.
 
-  Define a, b, and c prior to displaying their values in the table below.
+.. list-table:: Definitions of the coverage parameters :math:`a`, :math:`b`, and :math:`c`
+  :widths: 1 5
+  :header-rows: 1
 
-The following table provides data for three parameters, :math:`a`, :math:`b`,
-and :math:`c`, that will be used in our `coverage algorithm`_ for the folic acid
-intervention. The food vehicle referred to in the table is wheat flour.
+  * - Parameter
+    - Definition
+  * - :math:`a`
+    - Proportion of the population who eats a fortified version of the vehicle
+  * - :math:`b`
+    - Proportion of the population who eats a fortifiable version of the vehicle
+  * - :math:`c`
+    - Proportion of the population who eats the vehicle
+
+Note that by definition we must have :math:`a\le b\le c`. We will assume that
+:math:`a`, :math:`b`, and :math:`c` are random variables distributed as
+described in the following subsections. The following table provides estimates
+of :math:`a`, :math:`b`, and :math:`c` for our locations (data sources listed
+below). The food vehicle referred to in the table is wheat flour.
 
 .. list-table:: Means and 95% CI's for existing population coverage of folic acid fortification (% of total population)
   :widths: 5 5 5 5
@@ -1356,15 +1372,13 @@ intervention. The food vehicle referred to in the table is wheat flour.
 
 The above data for India and Nigeria is from Table 4 in [Aaron-et-al-2017]_. The
 numbers for Ethiopia were chosen so that (i) the mean of existing wheat flour
-fortification coverage is close to 0, based on the `GFDx Ethiopia Fortification
-Dashboard`_, (ii) the percentage of people eating wheat flour is 28%, based on
-[Ethiopian-Federal-Ministry-of-Health-2011]_, (iii) between 53% and 55% of the
-wheat flour is fortifiable, based data from
-[Ethiopian-Federal-Ministry-of-Health-2011]_ and the `GFDx Ethiopia
-Fortification Dashboard`_, and (iv) the 95% confidence intervals for :math:`b`
-and :math:`c` have a width of 10% (chosen arbitrarily).
-
-.. _GFDx Ethiopia Fortification Dashboard: https://tinyurl.com/rdm4wza
+fortification coverage is close to 0, based on
+[GFDx-Ethiopia-Fortification-Dashboard]_, (ii) the percentage of people eating
+wheat flour is 28%, based on [Ethiopian-Federal-Ministry-of-Health-2011]_, (iii)
+between 53% and 55% of the wheat flour is fortifiable, based data from
+[Ethiopian-Federal-Ministry-of-Health-2011]_ and
+[GFDx-Ethiopia-Fortification-Dashboard]_, and (iv) the 95% confidence intervals
+for :math:`b` and :math:`c` have a width of 10% (chosen arbitrarily).
 
 Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -1438,6 +1452,7 @@ interval. Here is Python code for achieving this:
   # Example usage - distribution of parmeter a for India (Rajsathan)
   mean = 6.3 / 100
   q_975 = 7.9 / 100
+
   india_a_distribution = beta_from_mean_approx_quantile(mean, q_975, 0.975)
 
 Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
@@ -1445,22 +1460,65 @@ Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
 
 .. image:: coverage_india_nigeria.svg
 
+Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+For **Ethiopia**, the estimates in the table are already at the national level.
+
+For **India**, we will assume that the national values for :math:`a`, :math:`b`,
+and :math:`c` are the same as those in Rajasthan listed in the table.
+
+Fpr **Nigeria**, to estimate the national coverage levels :math:`a`, :math:`b`,
+and :math:`c`, we will take a population-weighted average of the corresponding
+values for Kano and Lagos. Kano has a population of about 4 million, and Lagos
+has a population of about 21 million, so we have
+
+.. math::
+
+  a_\textit{Nigeria}
+  = \tfrac{4}{25} a_\textit{Kano} + \tfrac{21}{25} a_\textit{Lagos},
+
+and similarly for :math:`b` and :math:`c`.
+
+`Couple <https://en.wikipedia.org/wiki/Coupling_(probability)>`_ the random
+variables :math:`a_\textit{Kano}` and :math:`a_\textit{Lagos}` `comonotonically
+<comonotonicity_>`_, i.e. by giving them the same `percentile rank`_ (and
+similarly for :math:`b` and :math:`c`). This can be done by using `inverse
+transform sampling`_ to generate :math:`a_\textit{Kano}` and
+:math:`a_\textit{Lagos}` from a single uniform random variable :math:`u`. This
+is the same strategy described below for coupling :math:`a`, :math:`b`, and
+:math:`c` for each location, so only one uniform random variable :math:`u` will
+be needed to generate all six subnational numbers for Nigeria, which will then
+be averaged as described above to obtain the national estimates.
+
+The comonotone coupling strategy will create greater uncertainty in the weighted
+average :math:`a_\textit{Nigeria}` than if we sampled the two estimates
+indepdently, and more uncertainty seems like a good idea since we're trying to
+estimate an average for the entire country based on only two data points.
+Moreover, this coupling seems plausible since the data for Kano and Lagos were
+from the same paper and therefore could have a similar bias.
+
+.. todo::
+
+  List the means of a, b, and c for Nigeria, for easier validation later.
+  Also, draw histograms for the distributions.
+
 Joint distribution of :math:`a`, :math:`b`, and :math:`c`
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 
-To ensure that :math:`a<b<c` for each location, we will use the `comonotone
-coupling <https://en.wikipedia.org/wiki/Comonotonicity>`_ of the three random
-variables. That is, for each location, sample :math:`a`, :math:`b`, and
-:math:`c` so that they all have the same `percentile rank
-<https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
-distributions. This can be done by using `inverse transform sampling
-<https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to generate all
-three variables (:math:`a`, :math:`b`, and :math:`c`) from a single uniform
-random variable :math:`u`.
+To ensure that :math:`a\le b\le c` for each location, we will use the
+`comonotone coupling <comonotonicity_>`_ of the three random variables. That is,
+for each location, sample :math:`a`, :math:`b`, and :math:`c` so that they all
+have the same `percentile rank`_ in their respective distributions. This can be
+done by using `inverse transform sampling`_ to generate all three variables
+(:math:`a`, :math:`b`, and :math:`c`) from a single uniform random variable
+:math:`u`.
 
-*Between* locations, the random vectors :math:`(a,b,c)` should be independent.
-For example, the vector :math:`(a,b,c)_\textit{Ethiopia}` for Ethiopia should be
-independent of the vector :math:`(a,b,c)_\textit{India}` for India.
+*Between* countries, the random vectors :math:`(a,b,c)` should be independent.
+That is, the three random vectors :math:`(a,b,c)_\textit{Ethiopia}`,
+:math:`(a,b,c)_\textit{India}`, and :math:`(a,b,c)_\textit{Nigeria}` should be
+mutually independent, where :math:`(a,b,c)_\text{\{country_name\}}` indicates
+the national estimate  obtained as described above.
 
 .. todo::
 
@@ -1471,33 +1529,9 @@ independent of the vector :math:`(a,b,c)_\textit{India}` for India.
   variation in the differences c-b and b-a, which may better reflect our
   uncertainty.
 
-Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-
-For **India**, we will assume that the national values for :math:`a`, :math:`b`,
-and :math:`c` are the same as those in Rajasthan listed in the table.
-
-To compute the coverage levels :math:`a`, :math:`b`, and :math:`c` for the whole
-country of **Nigeria**, we will take a population-weighted average of the
-corresponding values for Kano and Lagos. Kano has a population of about 4
-million, and Lagos has a population of about 21 million, so we have
-
-.. math::
-
-  a_\textit{Nigeria}
-  = \tfrac{4}{25} a_\textit{Kano} + \tfrac{21}{25} a_\textit{Lagos},
-
-and similarly for :math:`b` and :math:`c`. `Couple
-<https://en.wikipedia.org/wiki/Coupling_(probability)>`_ the random variables
-:math:`a_\textit{Kano}` and :math:`a_\textit{Lagos}` by giving them the same
-percentile rank (i.e. use the same strategy described above for coupling
-:math:`a`, :math:`b`, and :math:`c` comonotonically). This coupling strategy
-will create greater uncertainty in the weighted average
-:math:`a_\textit{Nigeria}` than if we sampled the two estimates indepdently, and
-more uncertainty seems like a good idea since we're trying to estimate an
-average for the entire country based on only two data points. Moreover, this
-coupling seems plausible since the data for Kano and Lagos were from the same
-paper and therefore could have a similar bias.
+.. _percentile rank: https://en.wikipedia.org/wiki/Percentile_rank
+.. _comonotonicity: https://en.wikipedia.org/wiki/Comonotonicity
+.. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
 
 .. _here:
 
@@ -1869,6 +1903,15 @@ References
 
 ..
   .. _Global Fortification Data Exchange: https://tinyurl.com/wka9mgh
+
+.. [GFDx-Ethiopia-Fortification-Dashboard]
+
+  View `GFDx Ethiopia Fortification Dashboard`_
+
+    Global Fortification Data Exchange. Ethiopia Fortification Dashboard.
+    Accessed 4/28/2020. http://www.fortificationdata.org
+
+.. _GFDx Ethiopia Fortification Dashboard: https://tinyurl.com/rdm4wza
 
 .. [Haider-et-al-2013]
 
