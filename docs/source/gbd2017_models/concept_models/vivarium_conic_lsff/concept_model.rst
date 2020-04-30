@@ -1390,12 +1390,29 @@ Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
   a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9).
 
 This `Beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ will
-have mean 1.0 as in the table. The density has an asymptote at 0 and an
-x-intercept at 1.
+have a mean of 1% as in the table, since
+
+.. math::
+
+  E[a_\textit{Ethiopia}] = \frac{\alpha}{\alpha+\beta}
+  = \frac{0.1}{0.1+9.9} = 0.01.
+
+The density has an asymptote at 0 and an x-intercept at 1.
+
+.. warning::
+
+  We may need to change the parameters of this distribution (and/or the
+  distributions of b and c for Ethiopia) to make sure that we can find a joint
+  distribution that guarantees a<b<c almost surely. In particular, the
+  distribution functions need to satisfy :math:`F_a(x)\ge F_b(x)\ge F_c(x)`.
 
 .. todo::
 
-  Add graphs of the beta distributions of a, b, and c for Ethiopia.
+  Check whether our definitions of the distributions of a,b, and c for Ethiopia
+  are compatible with the requirement that a<b<c. Once we finalize the
+  distributions, add graphs of the beta distributions of a, b, and c for
+  Ethiopia.
+
 
 .. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
 
@@ -1517,21 +1534,29 @@ done by using `inverse transform sampling`_ to generate all three variables
 *Between* countries, the random vectors :math:`(a,b,c)` should be independent.
 That is, the three random vectors :math:`(a,b,c)_\textit{Ethiopia}`,
 :math:`(a,b,c)_\textit{India}`, and :math:`(a,b,c)_\textit{Nigeria}` should be
-mutually independent, where :math:`(a,b,c)_\text{\{country_name\}}` indicates
+mutually independent, where :math:`(a,b,c)_\text{[country_name]}` indicates
 the national estimate  obtained as described above.
 
 .. todo::
+
+  Check whether a, b, and c are actually `stochastically ordered <stochastic
+  ordering_>`_, i.e. their distribution functions satisfy :math:`F_a(x)\ge
+  F_b(x)\ge F_c(x)` for all x. If not, then then the comonotone coupling won't
+  work for guaranteeing :math:`a\le b\le c`, and neither will any other. This
+  could particularly be a problem for Ethiopia since the distribution for
+  :math:`a` has a different form from the others.
 
   Experiment with different joint distributions to see what what happens to the
   overall uncertainty. For example, it may be better to generate a,b,c
   independently, then resample until a<b<c (i.e. use the independent coupling
   and condition on the event that a<b<c), because I think that will produce more
   variation in the differences c-b and b-a, which may better reflect our
-  uncertainty.
+  uncertainty. Note that then the marginal distributions won't exactly match the beta distributions listed above, but that's less important than making sure we have :math:`a\le b\le c` and we are getting reasonable estimates for our overall uncertainty.
 
 .. _percentile rank: https://en.wikipedia.org/wiki/Percentile_rank
 .. _comonotonicity: https://en.wikipedia.org/wiki/Comonotonicity
 .. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
+.. _stochastic ordering: https://en.wikipedia.org/wiki/Stochastic_ordering
 
 .. _here:
 
