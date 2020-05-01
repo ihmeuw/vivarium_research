@@ -1,5 +1,61 @@
 .. _2017_risk_lbwsg:
 
+.. role:: sal
+
+.. raw:: html
+
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script>
+     $(document).ready(function() {
+       $('.sal').parent().addClass('sal-parent');
+     });
+   </script>
+   <style>
+      .sal-parent {background-color:#E9967A;}
+   </style>
+
+.. role:: pin
+
+.. raw:: html
+
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script>
+     $(document).ready(function() {
+       $('.pin').parent().addClass('pin-parent');
+     });
+   </script>
+   <style>
+      .pin-parent {background-color:#FFBCD9;}
+   </style>
+
+.. role:: gre
+
+.. raw:: html
+
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script>
+     $(document).ready(function() {
+       $('.gre').parent().addClass('gre-parent');
+     });
+   </script>
+   <style>
+      .gre-parent {background-color:#B0BF1A;}
+   </style>
+
+.. role:: blu
+
+.. raw:: html
+
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+   <script>
+     $(document).ready(function() {
+       $('.blu').parent().addClass('blu-parent');
+     });
+   </script>
+   <style>
+      .blu-parent {background-color:#89CFF0;}
+   </style>
+
 ====================================
 Low Birth Weight and Short Gestation
 ====================================
@@ -126,7 +182,7 @@ The final list of outcomes included in calculating the attributable burden for L
 
 .. todo::
 
-   discuss in detail the PAF of 1 causes.
+  discuss in detail the PAF of 1 causes.
 
 Restrictions
 ------------
@@ -154,27 +210,99 @@ First, we convert the GBD 500g-2weeks birthweight-ga bins/categories to a joint 
 
 Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first define all-cause mortality rate (ACMR) as the sum of: 
 
-   - mortality from causes that are affected by LBWSG and modelled in the sim (green)
-   - mortality from causes that are affected by LBWSG but not modelled in the sim (blue)
-   - mortality from causes that are unaffected by LBWSG, modelled or not modelled (salmon)
+   - mortality from causes that are affected by LBWSG and modelled in the sim (:gre:`green`)
+   - mortality from causes that are affected by LBWSG but not modelled in the sim (:blu:`blue`)
+   - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
+   - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
 An example of these causes from the :ref:`large-scale-food fortification concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below: 
 
-.. image:: causes_equation.svg
+
++---------------------+------------------------------------------------------------------------+
+|        Cause        | Causes by risk factors                                                 |
++==========+==========+=======================+=================+================+=============+
+|  Group   | ID       | LBWSG                 | vitamin A       |   iron         |folic acid   |
++----------+----------+-----------------------+-----------------+----------------+-------------+
+|Modelled  |:gre:`302`|diarrheal diseases     |diarrheal        |                |             |
+|causes    |          |                       |diseases         |                |             |
+|affected  +----------+-----------------------+-----------------+----------------+-------------+
+|by        |:gre:`322`|lower respiratory      |lower respiratory|                |             |  
+|LBWSG     |          |tract infection        |tract infection  |                |             |
++----------+----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`328`|upper respiratory      |                 |                |             |
+|Un-       |          |tract infections       |                 |                |             |             
+|modelled  +----------+-----------------------+-----------------+----------------+-------------+
+|causes    |:blu:`329`|otitis media           |                 |                |             |
+|affected  |          |                       |                 |                |             |
+|by        +----------+-----------------------+-----------------+----------------+-------------+
+|LBWSG     |:blu:`333`|pneumococcal           |                 |                |             |
+|          |          |meningitis             |                 |                |             |
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`334`|H influenzae type      |                 |                |             |  
+|          |          |B meningitis           |                 |                |             |
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`335`|meningococcal          |                 |                |             |  
+|          |          |meningitis             |                 |                |             |  
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`336`|other meningitis       |                 |                |             |  
+|          |          |                       |                 |                |             |  
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`337`|encephalitis           |                 |                |             |   
+|          |          |                       |                 |                |             |  
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`381`|neonatal preterm       |                 |                |             |   
+|          |          |birth complications    |                 |                |             |         
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`382`|neonatal               |                 |                |             |  
+|          |          |encephalopathy         |                 |                |             |  
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`383`|neonatal sepsis and oth|                 |                |             |  
+|          |          |er neonatal infections |                 |                |             |    
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`384`|hemolytic disease and  |                 |                |             |  
+|          |          |other neonatal jaundice|                 |                |             |  
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`385`|other neonatal         |                 |                |             |  
+|          |          |disorders              |                 |                |             |     
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:blu:`686`|sudden infant          |                 |                |             |  
+|          |          |death syndrome         |                 |                |             |  
++----------+----------+-----------------------+-----------------+----------------+-------------+
+|Modelled  |:sal:`341`|                       | measles         |                |             |  
+|causes    |          |                       |                 |                |             |    
+|unaffected+----------+-----------------------+-----------------+----------------+-------------+
+|by        |:sal:`389`|                       | vitamin A       |                |             |  
+|LBWSG     |          |                       |                 |                |             |  
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:sal:`390`|                       |                 |dietary iron    |             |  
+|          |          |                       |                 |deficiency      |             |     
+|          +----------+-----------------------+-----------------+----------------+-------------+
+|          |:sal:`642`|                       |                 |                | neural tube | 
+|          |          |                       |                 |                | defects     |  
++----------+----------+-----------------------+-----------------+----------------+-------------+
+|Un-       |:pin:`---`|causes not in our model                                                 | 
+|modelled  |          |                                                                        | 
+|causes    |          |                                                                        | 
+|unaffected|          |                                                                        | 
+|by LBWSG  |          |                                                                        | 
++----------+----------+------------------------------------------------------------------------+
+
+.. note:: 
+
+  to pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
 
 All-cause mortality is sum of all cause-specific mortalities: 
 
-   ACMR =  :math:`\sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR}`
+   ACMR =  :math:`\sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR} + \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR}`
 
-The mortality from unmodelled causes affected by LBWSG (blue) is thus: 
+The mortality from unmodelled causes unaffected by LBWSG (pink) is thus: 
 
-   :math:`\sum\limits_{\text{blue}}\text{CSMR}` = ACMR - :math:`\sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR}`
+   :math:`\sum\limits_{\text{pink}}\text{CSMR}` = ACMR - :math:`\sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR} - \sum\limits_{\text{blue}}\text{CSMR}`
 
-Because we model some of the causes affected by LBWSG, we can use their excess-morality rates (EMR) instead of the average CSMRs: The mortality from modelled causes affected by LBWSG (green):
+For modelled causes, we can use their excess-morality rates (EMR) instead of the average CSMRs. The mortality from modelled causes (green and salmon):
 
-   - cause-specific mortality if the person who does NOT have the condition: 0
-   - cause-specific mortality if the person HAS the condition: EMR of the condition
-
+   - mortality rate due to cause if the person does NOT have the condition: 0
+   - mortality rate due to cause if the person HAS the condition: EMR of the condition
  
 We are interested in applying the PAF and relative risk to only the causes that GBD considers to be affected by LBWSG (green and blue):
 
@@ -186,19 +314,16 @@ We are interested in applying the PAF and relative risk to only the causes that 
 
 Hence, the mortality hazard for an individual in LBWSG category i is:  
 
-mr_i 
+mr_i
 
-   | = ACMR_i 
-   | = (sum of unaffected causes) + affected(sum of unmodelled + sum of modelled) x (1-PAF*) x :math:`rr_i`
+  | = ACMR_i
+  | = unaffected(unmodelled + modelled) + affected(unmodelled + modelled) x (1-PAF*) x :math:`rr_i`
 
-= :math:`\sum\limits_{\text{salmon}}\text{CSMR} + (\sum\limits_{\text{blue}}\text{CSMR} + \sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
-
-= :math:`\sum\limits_{\text{salmon}}\text{CSMR} + (ACMR - \sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
-
+= :math:`\sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{EMR_state} + (\sum\limits_{\text{blue}}\text{CSMR}+\sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
 
 .. important :: 
 
-   PAF in the above equation represents PAFs for most-detailed-cause (they are all roughly equal) affected by LBWSG (or as calculated in vivarium from LBWSG relative risks and exposure). This approach assumes that relative risks for LBWSG applies only to causes that GBD considers to be affected by LBWSG (green and blue causes). 
+   PAF in the above equation represents PAFs for most-detailed-cause (they are all roughly equal tp 0.94) affected by LBWSG (or as calculated in vivarium from LBWSG relative risks and exposure). This approach assumes that relative risks for LBWSG applies only to causes that GBD considers to be affected by LBWSG (green and blue causes). 
 
    `LBWSG PAF notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/LBWSG%20exposure%2C%20rrs%2C%20pafs.ipynb>`__.
 
