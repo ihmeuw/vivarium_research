@@ -394,17 +394,17 @@ below.
 Model Randomness
 ++++++++++++++++
 
-Random samples drawn from distributions of **intervention effect sizes** 
+Random samples drawn from distributions of **intervention effect sizes**
 should be identical across model locations for each draw.
 
-	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a 
-	series of effect sizes drawn for a series of 5 input draws in the Ethiopia 
-	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect 
+	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a
+	series of effect sizes drawn for a series of 5 input draws in the Ethiopia
+	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect
 	sizes should be drawn for the India and Nigeria models as well.
 
-This is to ensure that differences in intervention impact across model 
-locations are attributable to disease burden in each model location rather 
-than randomness in sampling from the effect size distribution. 
+This is to ensure that differences in intervention impact across model
+locations are attributable to disease burden in each model location rather
+than randomness in sampling from the effect size distribution.
 
 Interventions
 +++++++++++++
@@ -572,9 +572,9 @@ as follows:
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -862,9 +862,9 @@ as follows:
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
 	hb_md_distribution = norm(mean, std)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -901,9 +901,9 @@ distribution of the parameter should be modeled as follows:
 	# random sample from effect size distribution
 	bw_md_per_10_mg_iron = bw_md_distribution.rvs()
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -1304,7 +1304,7 @@ Where,
   * - :math:`π_{GBD}`
     - Mean birthweight or hemoglobin from GBD
   * - :math:`\hat{π}_{GBD}(i)`
-    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution 
+    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution
   * - :math:`x_{i}`
     - Whether an individual simulant is covered (1=yes, 0=no)
   * - :math:`π_{i}`
@@ -1313,6 +1313,62 @@ Where,
 See the proofs for this approach below.
 
 .. image:: baseline_calibration_proofs.png
+
+Summary of Iron Intervention Algorithm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  # Definitions
+  t         := current time in years since start of simulation
+  t_end     := time when simulation ends, in years since start (e.g. 6 years)
+  20_weeks  := 20 weeks, measurd in years (e.g. 20*7/365.25)
+
+  # Population level parameters
+  hb_shift              = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
+  bw_response           = dose-response on birthweight (normally distributed, mean 15.1/10 g/mg)
+  baseline_coverage(t)  = iron fortification coverage at time t in baseline scenario
+  delta_coverage(t)     = change in coverage from baseline to intervention
+  coverage(t)           = iron fortification coverage at time t
+                        = baseline_coverage(t) + delta_coverage(t)
+    # Multiplier on hb_shift due to age
+  hb_age_fraction(age)  = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
+    # Multiplier on hb_shift due to lag in response time (=1 if simulant hasn't yet received fortification)
+  hb_lag_fraction(time_since_coverage)
+                        = time_since_coverage/0.5 if 0<=time_since_coverage<0.5 else 1
+  iron_concentration    = concentration of iron in the country's fortified flour
+
+  # Individual level attributes
+  p_i = propensity of simulant and mother for exposure to unfortified flour
+  daily_flour_i = average daily flour consumption of simulant's mother
+  gestational_age_i = gestational age of simulant drawn from GBD (in years)
+  birthweight_gbd_i = birthweight drawn from GBD for simulant
+  age_i(t) = the simulant's age at time t
+  hb_gbd(age_i(t)) = hemoglobin level drawn from GBD for simulant
+  birthweight_i := simulant's birthweight after adjusting for mother's iron consumption
+  hb_i(t) := simulant's hemoglobin level after adjusting for fortification
+
+  # Stratification on child coverage - assign categories on simulant initialization
+  child_fortified_baseline_end_i = p_i < baseline_coverage(t_end)
+  child_fortified_end_i = p_i < coverage(t_end)
+
+  # At beginning of simulation
+  mother_fortified_i = "unknown"
+  mother_fortified_baseline_i = "unknown" # For stratification
+  birth_weight_i = birthweight_gbd_i
+  child_fortified_i(0) = p_i < coverage(0)
+  hb_i(0) = hb_gbd(age_i(0)) + (-coverage(0)+child_fortified_i(0)) * hb_shift *  hb_age_fraction(age_i(0))
+
+  # When simulant is born in the simulation
+  mother_fortified_i = p_i < coverage(t - gestational_age_i + 20_weeks)
+  mother_fortified_baseline_i = p_i < baseline_coverage(t - gestational_age_i + 20_weeks) # For stratification
+  bw_shift_i = bw_response * iron_concentration * daily_flour_i
+  birth_weight_i = birthweight_gbd_i + (-coverage(t)+mother_fortified_i) * bw_shift_i
+
+  # At each simulation time step (including when simulant is born)
+  child_fortified_i(t) = p_i < coverage(t)
+  time_covered_i = argmin_t(child_fortified_i(t) == True) # =float('inf') if simulant never gets covered
+  hb_i(t) = hb_gbd(age_i(t)) + (-coverage(t)+child_fortified_i(t)) * hb_shift *  hb_age_fraction(age_i(t)) * hb_lag_fraction(t-time_covered_i)
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1591,9 +1647,9 @@ as follows:
   # (s is the shape parameter; the scale parameter is exp(mu), which equals the median)
   rr_distribution = lognorm(s=sigma, scale=median)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 
