@@ -56,7 +56,9 @@ This is a recap: Epidemiology is the study of the distribution and determinants 
 There are two main measures of disease occurence/frequency: **prevalence** and **incidence**. Incidence quantifies the occurence of new cases of disease whereas prevalence, a measure of status rather than newly occuring disease, quantifies existing cases. New cases are called **incident cases** and existing cases are called **prevalent cases**. 
 
 .. todo:: 
-  link to the other doc on incidence and prevalence?
+  link to the other doc on incidence and prevalence? how do we thin this down? 
+
+  :ref: `prevalence/incidence <_models_cause>'
 
 Example: 
 
@@ -74,6 +76,7 @@ Examples:
 
     * the percentage of people with schistosomiasis parasites in the blood in a village in Kenya in a survey on 12th  December 2019
     * the proportion of people who have diabetes in China today 
+    * The proportion of the population experiencing a diarrhoea day (3 or more loose or liquid stools per day) at the time of interest, e.g. the day of a surveillance visit or the day before.
 
 +------------------------+-----------------------------------------------+
 |   Measure              | Math                                          |
@@ -84,9 +87,12 @@ Examples:
 |                        |population at the same time point}}`           |
 +------------------------+-----------------------------------------------+
 
-*Period prevalence* is the number of current cases (new and pre-existing) over a defined period of time. The denominator is the average or mid-period population. This measure
-is used when the condition is recurrent and non-fatal. An example of period prevalence would be the proportion of women who have used oral contraceptives at any time
-during the 12-month period preceding the day of the survey.
+*Period prevalence* is the proportion of persons in the population who have the disease (new and pre-existing cases) over a defined period of time. The denominator is the average or mid-period population. This measure is used when the condition is recurrent and non-fatal. 
+
+Examples:
+
+    * The proportion of women who have used oral contraceptives at any time during the 12-month period preceding the day of the survey.
+    * The proportion of the population experiencing at least 1 day with diarrhoea over a pre-defined time window (recall period) prior to a given point in time, e.g. a surveillance visit by the study team.
 
 +------------------------+-----------------------------------------------+
 |   Measure              | Math                                          |
@@ -141,7 +147,7 @@ In the second example, the measures are risks, as they represent the proportion 
 Odds
 ****
 
-Another measure of incidence is odds of disease, which is the ratio of the total number of cases to the total number of persons who remained disease free over the study period.
+Another measure of disease occurence or frequency is odds of disease, which is the ratio of the total number of cases to the total number of persons who remained disease free over the study period. 
 
 +------------------------+-----------------------------------------------+
 |   Measure              | Math                                          |
@@ -208,7 +214,7 @@ Example:
 Measures of effect
 ++++++++++++++++++
 
-Measures of effect are used to compare the frequency of outcome between specified populations. When one population group is exposed to a risk factor and the other is not, measures of effect can be used to study associations between frequency of disease and the risk factor. They reflect the increase in frequency of disease in one population in comparison with another. Frequency measures (e.g. risks, rates) can be compared by estimating their *ratios* or *differences*. 
+Measures of effect are used to compare the frequency of outcome between specified populations. When one population group is exposed to a risk factor and the other is not, measures of effect can be used to study associations between frequency of disease and the risk factor. They reflect the increase or decrease in frequency of disease in one population in comparison with another. Frequency measures (e.g. risks, rates) can be compared by estimating their *ratios* or *differences*. 
 
 Ratio measures
 ^^^^^^^^^^^^^^
@@ -256,6 +262,8 @@ Alternatively, we can compute the risk ratio for a disease as follows:
 
 This is interpreted as: 'there are X times more cases of measles among children who do not eat vitamin A fortified foods than those who eat vitamin A fortified foods'
 
+We might need to use the odds ratio to measure effect of an exposure on rare diseases using a case-control design. Because the disease is rare, we will need to follow a lot of people for a long time before we see an incident cases. It would be easier to actively find the rare cases and then look at whether they have been exposed or not. 
+
 If we want to compute the odds ratio:
 
 | :math:`odds_{1}` is the odds of disease in the exposed: :math:`\frac{a}{c} = \frac{risk_1}{1-risk_1}`
@@ -267,6 +275,16 @@ If the disease is rare and not recurrent, then the risk ratio, the rate ratio an
 ..todo::
     give example how they are similar
     DISCUSS CASE-CONTROL STUDIES- should we do another section on study designs?
+
+
+To summarize, relative risks can be:
+
+  1. Risk ratio: probability of disease in exposed/probability of disease in unexposed
+  2. Rate ratio: incidence rate of disease in exposed/ incidence rate of disease in unexposed
+  3. Odds ratio: odds of disease in exposed/odds of disease in unexposed
+
+  If the relative risk is >1, the exposure is harmful. If the relative risk is <1, the exposure is protective. In GBD, we define risks as harmful and so we always use >1 relative risks. 
+
 
 Difference measures
 ^^^^^^^^^^^^^^^^^^^
@@ -293,6 +311,13 @@ The *risk difference percent* (RD%) measures the proportion of cases in the expo
 For example, the RD% from the above example is :math:`\frac{(280/1000) - (150/1000)}{280/1000} = 0.46` or 46%
 
 We interpret this by saying breastfeeding was responsible for 46% of HIV infections among children born to, and breastfed by, HIV-infected mothers (the exposed). Note that this does not mean that breastfeeding is responsible for 46% of HIV infections among children born to HIV-infected mothers. Measures of effect tell us only about the additional risk of disease among exposed individuals (here, children of HIV-infected mothers who were breastfed) compared with unexposed individuals. In order to estimate how important breastfeeding is as a risk factor for HIV in the target population (here, children born to HIV-infected mothers), we would also need to have information on how common the risk factor is in the population (i.e., what proportion of children born to HIV-infected mothers are breastfed), see next section. The RD% is sometimes also called the *attributable fraction in the exposed*, or the *aetiologic fraction in the exposed*.
+
+Ratios versus differences: which is more appropriate?
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Ratio measures and difference measures tell us very different things. Ratio measures are used to summarise the strength of association between a risk factor and an outcome. Difference measures, on the other hand, are used to summarise how much more disease is experienced by a group exposed to a risk factor of interest compared to an unexposed group. Assuming that the association between risk factor and disease is causal, difference measures can be used to estimate how much of a disease among the exposed can be attributed to exposure, or could be prevented by eliminating the risk factor. Note these measures only relate to the exposed group. 
+
+Difference measures relating to the whole population tend to be more useful and thus more widely used. These population difference measures, also called measures of impact. It is important to realise that ratios and differences can result in very different interpretations. For example, if an association between a risk factor and disease outcome is very strong in a particular group (high relative risks), but the outcome is relatively uncommon in this group, a big increase in risk will result in a modest increase in cases. Alternatively, if the outcome is common among a group, a small relative risk can lead to a large increase in cases. Ratio measures are most useful for determining which risk factors are most strongly associated with disease, whereas difference measures are more useful for estimating the public health importance of different risk factors.
 
 
 Population Attributable Fraction (PAF)
