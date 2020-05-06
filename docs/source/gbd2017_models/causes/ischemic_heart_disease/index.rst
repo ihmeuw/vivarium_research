@@ -180,9 +180,7 @@ IHD model. In the Vivarium Modeling Strategy, the limitation of the IHD model
 is we do not initial 'Acute MI' state in the first 28 days, and assume that
 prevalence = 0.
 
-.. todo::
-
-   Describe more assumptions and limitations of the model.
+The risk factor of SBP affects the transition rates 1 and 3 listed below, through the GBD measure of incidence_c493.
 
 Cause Model Diagram
 --------------------
