@@ -56,9 +56,10 @@ This is a recap: Epidemiology is the study of the distribution and determinants 
 There are two main measures of disease occurence/frequency: **prevalence** and **incidence**. Incidence quantifies the occurence of new cases of disease whereas prevalence, a measure of status rather than newly occuring disease, quantifies existing cases. New cases are called **incident cases** and existing cases are called **prevalent cases**. 
 
 .. todo:: 
+
   link to the other doc on incidence and prevalence? how do we thin this down? 
 
-  :ref: `prevalence/incidence <_models_cause>'
+  :ref:`prevalence and incidence <models_cause>`
 
 Example: 
 
@@ -107,6 +108,7 @@ Because of these dynamic changes, the magnitude of the prevalence varies from on
     .. image:: prevalence_diagram.svg
 
 .. note::
+
     In our vivarium models, we estimate the **period prevalence** of condition as
 
             :math:`\frac{\text{person-time in with-condition state}}{\text{total person time for age, sex, location, year}}`
@@ -115,13 +117,12 @@ Because of these dynamic changes, the magnitude of the prevalence varies from on
 The *prevalence pool* is the subset of the population who is in the given state (such as the 'with-condition state'). A person who dies from the state is removed from the prevalence pool: death decreases prevalence. People can also exit the prevalence pool by recovering from the state (remission) or emigrating from the population. Diseases with high incidence rates may have low prevalence if they are rapidly fatal or quickly cured. Conversely, diseases with low incidence rates may have substantial prevalence if they are nonfatal but incurable. 
 
 .. note::
+
     Prevalence is seldom of direct interest in etiological applications of epidemiological research because it reflects both incidence rate and duration of disease. However, for congentical diseases, prevalence is the measure usually employed. This the birth prevalence. The incidence of the condition that causes the congenital condition would have occured in the pregnant mother, which only becomes apparent when the baby is born.  
 
 Incidence
 ^^^^^^^^^
-The number of cases of a condition present in a population at a point in time depends not only on the frequency with which new cases occur and are identified, but also on the average duration of the condition (i.e.remission, mortality). As a consequence, prevalence may vary from one population to another solely because of variations in
-duration of the condition. Prevalence is therefore not the most useful measure when attempting to establish and quantify the determinants of disease; for this purpose, a
-measurement of the flow of new cases arising from the population is more informative. Incidence focuses on new cases. There are three main measures of incidence: **risk**, **rate**, and **odds**. 
+The number of cases of a condition present in a population at a point in time depends not only on the frequency with which new cases occur and are identified, but also on the average duration of the condition (i.e.remission, mortality). As a consequence, prevalence may vary from one population to another solely because of variations in duration of the condition. Prevalence is therefore not the most useful measure when attempting to establish and quantify the determinants of disease; for this purpose, a measurement of the flow of new cases arising from the population is more informative. Incidence focuses on new cases. There are three main measures of incidence: **risk**, **rate**, and **odds**. 
 
 Risk
 ****
@@ -142,7 +143,7 @@ Example:
   * A group of 5000 healthy women aged 45–75 years was identified at the beginning of 1981 and followed up for five years. During this period, 20 new cases of breast cancer were  detected. Hence, the risk of developing breast cancer in this population during this five-year period was 20/5000 = 0.4%.
   * A total of 13 264 lung cancer cases in males were diagnosed in a certain population in 1971. These cases were followed up for five years. At the end of this follow-up period, only 472 cases were still alive. The probability of surviving during this five-year period was 472/13 264 = 3.6%. Thus, the probability of dying during the period was 100% – 3.6% = 96.4%. 
 
-In the second example, the measures are risks, as they represent the proportion of lung cancer cases who were still alive (or who died) at the end of the follow-up period out of all cases diagnosed at the beginning of the study. These calculations assume that all individuals were followed up for the entire five-year period (or until death if it occurred earlier). These measures are often called survival and fatality ‘rates’; this is incorrect as, by definition, they are proportions. Risk is a measure commonly used to quantify the survival experience of a group of subjects
+In the second example, the measures are risks, as they represent the proportion of lung cancer cases who were still alive (or who died) at the end of the follow-up period out of all cases diagnosed at the beginning of the study. These calculations assume that all individuals were followed up for the entire five-year period (or until death if it occurred earlier). These measures are often called survival and fatality ‘rates’; this is incorrect as, by definition, they are proportions. Risk is a measure commonly used to quantify the survival experience of a group of subjects.
 
 Odds
 ****
@@ -161,8 +162,7 @@ Another measure of disease occurence or frequency is odds of disease, which is t
 +------------------------+-----------------------------------------------+
 
 .. note::
-  Risk and odds of disease use the same numerator (number of new cases) but different denominators. In the calculation of risk, the denominator is the total
-  number of disease-free individuals at the beginning of the study period, whereas when calculating the odds of disease, it is the number of individuals who remained disease-free at the end of the period
+  Risk and odds of disease use the same numerator (number of new cases) but different denominators. In the calculation of risk, the denominator is the total number of disease-free individuals at the beginning of the study period, whereas when calculating the odds of disease, it is the number of individuals who remained disease-free at the end of the period.
 
 Rate
 ****
@@ -172,7 +172,9 @@ Rate
 For rare diseases, risk and rates are numerically similar. 
 
 .. todo::
+
   example of how this is so
+
 
 +------------------------+-----------------------------------------------+
 |   Measure              | Math                                          |
@@ -184,6 +186,7 @@ For rare diseases, risk and rates are numerically similar.
 +------------------------+-----------------------------------------------+
 
 .. todo::
+
    James says: give example and how the time period needs to be specified. 
    Has this been addressed in the examples?
 
@@ -225,6 +228,7 @@ It is possible to compare any type of measure of frequency (e.g. risks, rates) b
 In GBD, relatives risks are usually ratio of incidence rates of causes in those exposed vs unexposed to the risk factor. However, there are exceptions as in the low birth rate short gestation (LBWSG) risk factor where the relative risks are ratios of all-cause mortality rates. It is best practice to always check with the risk appendix or the GBD modeller what the relative risks refer to each risk-outcome pair. 
 
 .. todo::
+
       write down numerator and denominator. Has this been adequately addressed with the equations written out below?
 
 For example (hypothetical- cite my brain), a study was conducted to measure the effect of vitamin A food fortification on incidence of measles in children under 5. GBD defines risk factors to be malignant. Hence, the exposed group (exposed to poor nutrition) are those who are not covered by food fortification while those unexposed are covered by food fortification. The table below shows the results: 
@@ -272,9 +276,10 @@ If we want to compute the odds ratio:
 
 If the disease is rare and not recurrent, then the risk ratio, the rate ratio and the odds ratio are numerically similar. Odds ratios are often derived from case-control studies in which people with and without the outcome of interest are compared for their exposure. Depending on how the controls were sampled the odds ratio in a case control study can be equivalent to the risk of rate ratios that would have been obtained if the whole population had been studied. 
 
-..todo::
-    give example how they are similar
-    DISCUSS CASE-CONTROL STUDIES- should we do another section on study designs?
+.. todo::
+
+  give example how they are similar
+  DISCUSS CASE-CONTROL STUDIES- should we do another section on study designs?
 
 
 To summarize, relative risks can be:
