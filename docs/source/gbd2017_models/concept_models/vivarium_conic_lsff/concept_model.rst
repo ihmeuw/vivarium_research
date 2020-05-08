@@ -1334,25 +1334,33 @@ Summary of Iron Intervention Algorithm
                            child's mother got sufficient iron-fortification during pregnancy
 
   # Population level parameters
-  hb_shift              = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
-  bw_response           = dose-response on birthweight (normally distributed, mean 1.51 g/mg)
-  baseline_coverage(t)  = iron fortification coverage at time t in baseline scenario
+  hb_shift                = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
+  bw_response             = dose-response on birthweight (normally distributed, mean 1.51 g/mg)
+  eats_flour_proportion   = proportion of people who eat flour (c in data table)
+  baseline_coverage(t)    = iron fortification coverage at time t in baseline scenario
     # Note: If delta_coverage is defined to be 0 in the baseline scenario, then
     # the below strategies should work in both baseline and intervention scenarios
-  delta_coverage(t)     = change in coverage from baseline
-  coverage(t)           = iron fortification coverage at time t
-                        = baseline_coverage(t) + delta_coverage(t)
+  delta_coverage(t)       = change in coverage from baseline
+  coverage(t)             = iron fortification coverage at time t
+                          = baseline_coverage(t) + delta_coverage(t)
     # Multiplier on hb_shift due to age
   hb_age_fraction(age)  = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
     # Multiplier on hb_shift due to lag in response time
     # (value is irrelevant if simulant hasn't yet received fortification)
   hb_lag_fraction(time_since_coverage)
-                        = time_since_coverage/0.5 if 0<=time_since_coverage<0.5 else 1
-  iron_concentration    = concentration X of iron in the country's fortified flour
+                          = time_since_coverage/0.5 if 0<=time_since_coverage<0.5 else 1
+  iron_concentration      = concentration X of iron in the country's fortified flour
+  flour_consumption_dist  = distribution of flour consumption Y among women who eat flour
+  mean_flour_consumption  = mean flour consumption among all women
+                          = eats_flour_proportion * mean(flour_consumption_dist)
+  mean_bw_shift           = bw_response * iron_concentration * mean_flour_consumption
 
   # Individual level attributes
-  p_i                     = propensity of simulant and mother for exposure to unfortified flour (uniform(0,1))
-  daily_flour_i           = average daily flour consumption Y of simulant's mother (sampled from population distribution)
+  p_i                     = propensity of simulant and mother for exposure to lack of iron fortification (uniform(0,1))
+  eats_flour_i            = whether simulan't mother eats flour
+                          = p_i < eats_flour_proportion
+  daily_flour_i           = average daily flour consumption of simulant's mother
+                          = 0 if not eats_flour_i else sampled from flour_consumption_dist for Y
   gestational_age_i       = gestational age of simulant drawn from GBD (in years)
   birthweight_gbd_i       = birthweight drawn from GBD for simulant
   age_i(t)                = the simulant's age at time t
@@ -1391,10 +1399,10 @@ Summary of Iron Intervention Algorithm
   mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
                          'intervention_not_baseline' if mother_fortified_i else
                          'uncovered')
-  bw_shift_i = bw_response * iron_concentration * daily_flour_i
-  birth_weight_i      = birthweight_gbd_i + (
-                        -baseline_coverage(t) + mother_fortified_i
-                        ) * bw_shift_i
+  bw_shift_i          = bw_response * iron_concentration * daily_flour_i
+  birth_weight_i      = (birthweight_gbd_i
+                         - baseline_coverage(t) * mean_bw_shift
+                         + mother_fortified_i * bw_shift_i)
 
   # At each simulation time step (including when simulant is born)
   child_fortified_i(t)  = time_covered_i <= t
