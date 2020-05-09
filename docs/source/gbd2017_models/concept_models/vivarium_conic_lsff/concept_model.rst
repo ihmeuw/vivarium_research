@@ -1846,6 +1846,62 @@ The procedure here uses the standard coverage gap framework:
 Desired Model Outputs
 ---------------------
 
+.. list-table:: Priorities
+  :widths: 1 5
+  :header-rows: 1
+
+  * - Priority
+    - Definition
+  * - High
+    - Needed for client
+  * - Med
+    - Needed for primary verification & validation
+  * - Low
+    - Needed for additional V&V or research
+
+.. csv-table:: Output Summary
+  :file: output_summary.csv
+  :widths: 1 1 1 1 1 1 1
+  :header-rows: 1
+
+.. csv-table:: Stratification Groups
+  :file: stratification_groups.csv
+  :widths: 1 1 1 1 1
+  :header-rows: 1
+
+.. list-table:: Final Outputs
+  :header-rows: 1
+
+  * - Measure
+    - Metric
+    - Numerator
+    - Denominator
+    - Priority
+  * -
+    -
+    -
+    -
+    -
+
+.. list-table:: Raw Outputs
+  :header-rows: 1
+
+  * - Measure
+    - Units
+    - Definition
+    - Standard Stratification
+    - Additional Stratification
+  * -
+    -
+    -
+    -
+    -
+
+.. todo::
+
+  Fill out the above output tables and update the Output Summary table
+  accordingly.
+
 Observers
 +++++++++
 
