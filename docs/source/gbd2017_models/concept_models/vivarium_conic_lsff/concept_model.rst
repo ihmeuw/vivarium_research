@@ -394,17 +394,17 @@ below.
 Model Randomness
 ++++++++++++++++
 
-Random samples drawn from distributions of **intervention effect sizes** 
+Random samples drawn from distributions of **intervention effect sizes**
 should be identical across model locations for each draw.
 
-	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a 
-	series of effect sizes drawn for a series of 5 input draws in the Ethiopia 
-	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect 
+	For example if there is an effect size of 1.2 (95% CI: 0.9, 1.5) and a
+	series of effect sizes drawn for a series of 5 input draws in the Ethiopia
+	model is [0.99, 1.15, 1.24, 1.12, 1.27], then this same series of effect
 	sizes should be drawn for the India and Nigeria models as well.
 
-This is to ensure that differences in intervention impact across model 
-locations are attributable to disease burden in each model location rather 
-than randomness in sampling from the effect size distribution. 
+This is to ensure that differences in intervention impact across model
+locations are attributable to disease burden in each model location rather
+than randomness in sampling from the effect size distribution.
 
 Interventions
 +++++++++++++
@@ -572,9 +572,9 @@ as follows:
   # (s is the shape parameter)
   rr_distribution = lognorm(s=sigma, scale=median)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -642,8 +642,7 @@ For all values other than :math:`a` for Ethiopia, use a Beta distribution
 with mean equal to the central estimate, and variance equal to the variance of
 a normal distribution with the same mean and 95% confidence interval.
 
-For the :
-math:`a` value for Ethiopia, assume the following:
+For the :math:`a` value for Ethiopia, assume the following:
 
 .. math::
 
@@ -862,9 +861,9 @@ as follows:
 	# Frozen normal distribution for MD, representing uncertainty in our effect size
 	hb_md_distribution = norm(mean, std)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -901,9 +900,9 @@ distribution of the parameter should be modeled as follows:
 	# random sample from effect size distribution
 	bw_md_per_10_mg_iron = bw_md_distribution.rvs()
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 .. note::
@@ -1304,7 +1303,7 @@ Where,
   * - :math:`π_{GBD}`
     - Mean birthweight or hemoglobin from GBD
   * - :math:`\hat{π}_{GBD}(i)`
-    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution 
+    - Unadjusted individual simulant birthweight/hemoglobin sampled from a draw of GBD's exposure distribution
   * - :math:`x_{i}`
     - Whether an individual simulant is covered (1=yes, 0=no)
   * - :math:`π_{i}`
@@ -1314,6 +1313,104 @@ See the proofs for this approach below.
 
 .. image:: baseline_calibration_proofs.png
 
+Summary of Iron Intervention Algorithm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block::
+
+  # Definitions
+  t                     := current time in years since start of simulation
+  t_end                 := time when simulation ends, in years since start (e.g. 6 years)
+  n_weeks               := n weeks, measured in years (e.g. n*7/365.25)
+  time_covered_i        := time at which simulant's household first receives iron-fortified food
+  mother_fortified_i    := whether simulant's mother got sufficient iron-fortification during pregnancy
+  child_fortified_i(t)  := whether child is eating fortified food at time t
+  birthweight_i         := simulant's birthweight after adjusting for mother's iron consumption
+  hb_i(t)               := simulant's hemoglobin level after adjusting for fortification
+    # Coverage groups are used only for stratification
+  iron_coverage_group   := population subgroup indicating in which scenario (if any) the
+                           child started eating iron-fortified food by the end of the simulation
+  mother_iron_group     := population subgroup indicating in which scenario (if any) the
+                           child's mother got sufficient iron-fortification during pregnancy
+
+  # Population level parameters
+  hb_shift              = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
+  bw_response           = dose-response on birthweight (normally distributed, mean 1.51 g/mg)
+  baseline_coverage(t)  = iron fortification coverage at time t in baseline scenario
+    # Note: If delta_coverage is defined to be 0 in the baseline scenario, then
+    # the below strategies should work in both baseline and intervention scenarios
+  delta_coverage(t)     = change in coverage from baseline
+  coverage(t)           = iron fortification coverage at time t
+                        = baseline_coverage(t) + delta_coverage(t)
+    # Multiplier on hb_shift due to age
+  hb_age_fraction(age)  = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
+    # Multiplier on hb_shift due to lag in response time
+    # (value is irrelevant if simulant hasn't yet received fortification)
+  hb_lag_fraction(time_since_coverage)
+                        = time_since_coverage/0.5 if 0<=time_since_coverage<0.5 else 1
+  iron_concentration    = concentration X of iron in the country's fortified flour
+
+  # Individual level attributes
+  p_i                     = propensity of simulant and mother for exposure to unfortified flour (uniform(0,1))
+  daily_flour_i           = average daily flour consumption Y of simulant's mother (sampled from population distribution)
+  gestational_age_i       = gestational age of simulant drawn from GBD (in years)
+  birthweight_gbd_i       = birthweight drawn from GBD for simulant
+  age_i(t)                = the simulant's age at time t
+  hb_gbd(age_i(t))        = hemoglobin level drawn from GBD for simulant
+    # These times are both float('-inf') if simulant is covered in baseline
+    # and float('inf') if simulant never gets covered
+  time_covered_baseline_i = argmin_t(p_i < baseline_coverage(t) == True)
+  time_covered_i          = argmin_t(p_i < coverage(t) == True)
+    # Stratification on child's iron coverage
+  iron_coverage_group     = ('baseline' if time_covered_baseline_i <= t_end else
+                             'intervention_not_baseline' if time_covered_i <= t_end else
+                             'uncovered')
+                          = ('baseline' if p_i < baseline_coverage(t_end) else
+                             'intervention_not_baseline' if p_i < coverage(t_end) else
+                             'uncovered')
+
+  # At beginning of simulation
+  mother_fortified_i    = 'unknown'
+  mother_iron_group     = 'unknown'
+  birth_weight_i        = birthweight_gbd_i
+  child_fortified_i(0)  = time_covered_i <= 0 # time_covered_i = float('-inf') if covered in baseline
+                        = p_i < coverage(0)
+  hb_i(0)               = hb_gbd(age_i(0)) + (
+                          -baseline_coverage(0) + child_fortified_i(0)
+                          ) * hb_shift *  hb_age_fraction(age_i(0))
+
+  # When simulant is born in the simulation (t = time of birth)
+  critical_time       = t - gestational_age_i + 20_weeks
+  mother_fortified_i  = ((time_covered_i <= critical_time) and
+                         (t-time_covered_i) >= 7_weeks)
+    # For stratification on mother's iron coverage
+  mother_fortified_baseline_i
+                      = ((time_covered_baseline_i <= critical_time) and
+                         (t-time_covered_baseline_i) >= 7_weeks)
+                      = p_i < baseline_coverage(0) # since baseline coverage is constant
+  mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
+                         'intervention_not_baseline' if mother_fortified_i else
+                         'uncovered')
+  bw_shift_i = bw_response * iron_concentration * daily_flour_i
+  birth_weight_i      = birthweight_gbd_i + (
+                        -baseline_coverage(t) + mother_fortified_i
+                        ) * bw_shift_i
+
+  # At each simulation time step (including when simulant is born)
+  child_fortified_i(t)  = time_covered_i <= t
+                        = p_i < coverage(t)
+    # If child is covered in baseline, then time_covered_i = float('-inf'),
+    # and hence hb_lag_fraction(t-time_covered_i) = 1, i.e. the child receives
+    # the full age-dependent effect in this case since the time lag has passed.
+  hb_i(t)               = hb_gbd(age_i(t)) + (
+                          -baseline_coverage(t) + child_fortified_i(t) * hb_lag_fraction(t-time_covered_i)
+                          ) * hb_shift *  hb_age_fraction(age_i(t))
+
+.. todo::
+
+  Edit above summary so that downward shift to treatment-deleted birthweight is
+  population-level rather than individual-level.
+
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1322,13 +1419,29 @@ Folic Acid Fortification
 Population Coverage Data - Iron and Folic Acid
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+Our `coverage algorithm`_ for folic acid and iron will use three parameters,
+:math:`a`, :math:`b`, and :math:`c`, which describe the existing level of
+fortification as well as the potential level of fortification we can hope to
+achieve. The food vehicle we are using for folic acid and iron is wheat flour.
 
-  Define a, b, and c prior to displaying their values in the table below.
+.. list-table:: Definitions of the coverage parameters :math:`a`, :math:`b`, and :math:`c`
+  :widths: 1 5
+  :header-rows: 1
 
-The following table provides data for three parameters, :math:`a`, :math:`b`,
-and :math:`c`, that will be used in our `coverage algorithm`_ for the folic acid
-intervention. The food vehicle referred to in the table is wheat flour.
+  * - Parameter
+    - Definition
+  * - :math:`a`
+    - Proportion of the population who eats a fortified version of the vehicle
+  * - :math:`b`
+    - Proportion of the population who eats a fortifiable version of the vehicle
+  * - :math:`c`
+    - Proportion of the population who eats the vehicle
+
+Note that by definition we must have :math:`a\le b\le c`. We will assume that
+:math:`a`, :math:`b`, and :math:`c` are random variables distributed as
+described in the following subsections. The following table provides estimates
+of :math:`a`, :math:`b`, and :math:`c` for our locations (data sources listed
+below). The food vehicle referred to in the table is wheat flour.
 
 .. list-table:: Means and 95% CI's for existing population coverage of folic acid fortification (% of total population)
   :widths: 5 5 5 5
@@ -1340,9 +1453,9 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - :math:`c` = Eats vehicle
   * - Ethiopia
     - 1.0
-    - 13.9
-    - 25.3
-  * - India
+    - 15.0 (10.0, 20.0)
+    - 28.0 (23.0, 33.0)
+  * - India (Rajsathan)
     - 6.3 (4.8, 7.9)
     - 7.1 (5.6, 9.1)
     - 83.2 (79.5, 86.5)
@@ -1355,81 +1468,193 @@ intervention. The food vehicle referred to in the table is wheat flour.
     - 13.8 (11.5, 16.1)
     - 14.2 (11.8, 16.5)
 
-**For Ethiopia**, assume
+The above data for India and Nigeria is from Table 4 in [Aaron-et-al-2017]_. The
+numbers for Ethiopia were chosen so that (i) the mean of existing wheat flour
+fortification coverage is close to 0, based on
+[GFDx-Ethiopia-Fortification-Dashboard]_, (ii) the percentage of people eating
+wheat flour is 28%, based on [Ethiopian-Federal-Ministry-of-Health-2011]_, (iii)
+between 53% and 55% of the wheat flour is fortifiable, based data from
+[Ethiopian-Federal-Ministry-of-Health-2011]_ and
+[GFDx-Ethiopia-Fortification-Dashboard]_, and (iv) the 95% confidence intervals
+for :math:`b` and :math:`c` have a width of 10% (chosen arbitrarily).
+
+Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+**For Ethiopia parameter** :math:`a`, assume
 
 .. math::
 
-  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9),\quad
-  b_\textit{Ethiopia} \sim \operatorname{Beta}(0.5,3.1),\quad
-  c_\textit{Ethiopia} \sim \operatorname{Beta}(0.8,2.36).
+  a_\textit{Ethiopia} \sim \operatorname{Beta}(0.1,9.9).
 
-The means of these `Beta distributions
-<https://en.wikipedia.org/wiki/Beta_distribution>`_ will have the values shown
-in the table. Each of the densities has an asymptote at 0 and an x-intercept at
-1, and the parameters :math:`\alpha` and :math:`\beta` were chosen to vary
-monotonically with the mean. The numbers for Ethiopia were chosen so that (i)
-the mean of existing fortification coverage is close to 0, (ii) the percentage
-of people eating wheat flour is similar to that in Nigeria, and (iii) 55%
-of the wheat flour is fortifiable, based on the `Global Fortification Data
-Exchange <https://tinyurl.com/rdm4wza>`_.
+This `Beta distribution <https://en.wikipedia.org/wiki/Beta_distribution>`_ will
+have a mean of 1% as in the table, since
 
-.. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
+.. math::
 
-**For all the locations other than Ethiopia**, use a Beta distribution with mean
-equal to the central estimate, and variance equal to the variance of a normal
-distribution with the same mean and 95% confidence interval.
+  E[a_\textit{Ethiopia}] = \frac{\alpha}{\alpha+\beta}
+  = \frac{0.1}{0.1+9.9} = 0.01.
+
+The density has an asymptote at 0 and an x-intercept at 1.
+
+.. warning::
+
+  We may need to change the parameters of this distribution (and/or the
+  distributions of b and c for Ethiopia) to make sure that we can find a joint
+  distribution that guarantees a<b<c almost surely. In particular, the
+  distribution functions need to satisfy :math:`F_a(x)\ge F_b(x)\ge F_c(x)`.
 
 .. todo::
 
-  Show how to get the correct Beta distribution, and draw some graphs. Here is
-  the code James used, which truncates the distributions outside the 95%
-  interval:
+  Check whether our definitions of the distributions of a,b, and c for Ethiopia
+  are compatible with the requirement that a<b<c. Once we finalize the
+  distributions, add graphs of the beta distributions of a, b, and c for
+  Ethiopia.
 
-  .. code-block:: Python
 
-    def sample_from_statistics(mean, upper_bound, lower_bound, variance=None):
-    if variance is None:
-        # Get variance for corresponding normal distribution
-        variance = confidence_interval_variance(upper_bound, lower_bound)
-    support_width = (upper_bound - lower_bound)
-    mean = (mean - lower_bound) / support_width
-    variance /= support_width ** 2
-    alpha = mean * (mean * (1 - mean) / variance - 1)
-    beta = (1 - mean) * (mean * (1 - mean) / variance - 1)
-    return  lower_bound + support_width*scipy.stats.beta.rvs(alpha, beta)
+.. _GFDx Ethiopia Dashboard: https://fortificationdata.org/country-fortification-dashboard/?alpha3_code=ETH&lang=en
 
-  Another option for India and Nigeria would be to use truncated normal
-  distributions, i.e. just find the normal distribution with the right mean and
-  95% confidence interval, and truncate the tails outside the interval [0,1].
+**For all the remaining parameters**, use a Beta
+distribution with mean equal to the central estimate, and variance equal to the
+variance of a normal distribution with the same mean and 95% confidence
+interval. Here is Python code for achieving this:
 
-To ensure that :math:`a<b<c` for each country, sample :math:`a`, :math:`b`, and
-:math:`c` so that they all have the same `percentile rank
-<https://en.wikipedia.org/wiki/Percentile_rank>`_ in their respective
-distributions. This can be done by using `inverse transform sampling
-<https://en.wikipedia.org/wiki/Inverse_transform_sampling>`_ to generate all
-three variables (:math:`a`, :math:`b`, and :math:`c`) from a single uniform
-random variable :math:`u`.
+.. code-block:: Python
 
-To compute the coverage levels :math:`a`, :math:`b`, and :math:`c` for the whole
-country of Nigeria, we will take a population-weighted average of the
-corresponding values for Kano and Lagos. Kano has a population of about 4
-million, and Lagos has a population of about 21 million, so we have
+  # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.norm.html
+  # https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.beta.html
+  import scipy.stats.norm
+  import scipy.stats.beta
+
+  def beta_a_b_from_mean_var(mean, variance):
+  """
+  Returns the parameters a=alpha and b=beta for a beta distribution
+  with the specified mean and variance.
+  """
+    if mean <= 0 or mean >= 1:
+        raise ValueError("Mean must be in the interval (0,1)")
+    if variance >= mean*(1-mean):
+        raise ValueError("Variance too large")
+
+    # For derivations of these formulas, see:
+    # https://en.wikipedia.org/wiki/Beta_distribution#Mean_and_variance
+    a = mean*(mean*(1-mean)/variance - 1)
+    b = (1-mean)*(mean*(1-mean)/variance - 1)
+    return a, b
+
+  def normal_stdev_from_mean_quantile(mean, quantile, quantile_rank):
+  """
+  Computes the standard deviation of a normal distribution that has the
+  specified mean and quantile.
+  """
+    # If q = quantile, mu = mean, and sigma = std deviation, then
+    # q = mu + q'*sigma, where q' is the standard normal quantile
+    # and q is the transformed quantile, so sigma = (q-mu)/q'
+    return (quantile - mean) / scipy.stats.norm().ppf(quantile_rank)
+
+  def beta_from_mean_approx_quantile(mean, approx_quantile, quantile_rank):
+    """
+    Returns a scipy.stats Beta distribution with the specified mean and a
+    quantile of rank quantile_rank approximately equal to approx_quantile.
+    This is achieved by specifying that the variance of the Beta distribution
+    is equal to the variance of a normal distribution with the same mean and
+    the specified quantile.
+    """
+    variance = normal_stdev_from_mean_quantile(mean, approx_quantile, quantile_rank)**2
+    a,b = beta_a_b_from_mean_var(mean, variance)
+    return scipy.stats.beta(a,b)
+
+  # Example usage - distribution of parmeter a for India (Rajsathan)
+  mean = 6.3 / 100
+  q_975 = 7.9 / 100
+
+  india_a_distribution = beta_from_mean_approx_quantile(mean, q_975, 0.975)
+
+Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
+(Kano), and Nigeria (Lagos):
+
+.. image:: coverage_india_nigeria.svg
+
+Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+For **Ethiopia**, the estimates in the table are already at the national level.
+
+For **India**, we will assume that the national values for :math:`a`, :math:`b`,
+and :math:`c` are the same as those in Rajasthan listed in the table.
+
+Fpr **Nigeria**, to estimate the national coverage levels :math:`a`, :math:`b`,
+and :math:`c`, we will take a population-weighted average of the corresponding
+values for Kano and Lagos. Kano has a population of about 4 million, and Lagos
+has a population of about 21 million, so we have
 
 .. math::
 
   a_\textit{Nigeria}
   = \tfrac{4}{25} a_\textit{Kano} + \tfrac{21}{25} a_\textit{Lagos},
 
-and similarly for :math:`b` and :math:`c`. `Couple
-<https://en.wikipedia.org/wiki/Coupling_(probability)>`_ the random variables
-:math:`a_\textit{Kano}` and :math:`a_\textit{Lagos}` by giving them the same
-percentile rank (i.e. use the same strategy described above for coupling
-:math:`a`, :math:`b`, and :math:`c`). This coupling strategy will create greater
-uncertainty in the weighted average :math:`a_\textit{Nigeria}` than if we
-sampled the two estimates indepdently, and more uncertainty seems like a good
-idea since we're trying to estimate an average for the entire country based on
-only two data points. Moreover, this coupling seems plausible since the data for
-Kano and Lagos were from the same paper and therefore could have a similar bias.
+and similarly for :math:`b` and :math:`c`.
+
+`Couple <https://en.wikipedia.org/wiki/Coupling_(probability)>`_ the random
+variables :math:`a_\textit{Kano}` and :math:`a_\textit{Lagos}` `comonotonically
+<comonotonicity_>`_, i.e. by giving them the same `percentile rank`_ (and
+similarly for :math:`b` and :math:`c`). This can be done by using `inverse
+transform sampling`_ to generate :math:`a_\textit{Kano}` and
+:math:`a_\textit{Lagos}` from a single uniform random variable :math:`u`. This
+is the same strategy described below for coupling :math:`a`, :math:`b`, and
+:math:`c` for each location, so only one uniform random variable :math:`u` will
+be needed to generate all six subnational numbers for Nigeria, which will then
+be averaged as described above to obtain the national estimates.
+
+The comonotone coupling strategy will create greater uncertainty in the weighted
+average :math:`a_\textit{Nigeria}` than if we sampled the two estimates
+indepdently, and more uncertainty seems like a good idea since we're trying to
+estimate an average for the entire country based on only two data points.
+Moreover, this coupling seems plausible since the data for Kano and Lagos were
+from the same paper and therefore could have a similar bias.
+
+.. todo::
+
+  List the means of a, b, and c for Nigeria, for easier validation later.
+  Also, draw histograms for the distributions.
+
+Joint distribution of :math:`a`, :math:`b`, and :math:`c`
+'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
+To ensure that :math:`a\le b\le c` for each location, we will use the
+`comonotone coupling <comonotonicity_>`_ of the three random variables. That is,
+for each location, sample :math:`a`, :math:`b`, and :math:`c` so that they all
+have the same `percentile rank`_ in their respective distributions. This can be
+done by using `inverse transform sampling`_ to generate all three variables
+(:math:`a`, :math:`b`, and :math:`c`) from a single uniform random variable
+:math:`u`.
+
+*Between* countries, the random vectors :math:`(a,b,c)` should be independent.
+That is, the three random vectors :math:`(a,b,c)_\textit{Ethiopia}`,
+:math:`(a,b,c)_\textit{India}`, and :math:`(a,b,c)_\textit{Nigeria}` should be
+mutually independent, where :math:`(a,b,c)_\text{[country_name]}` indicates
+the national estimate  obtained as described above.
+
+.. todo::
+
+  Check whether a, b, and c are actually `stochastically ordered <stochastic
+  ordering_>`_, i.e. their distribution functions satisfy :math:`F_a(x)\ge
+  F_b(x)\ge F_c(x)` for all x. If not, then then the comonotone coupling won't
+  work for guaranteeing :math:`a\le b\le c`, and neither will any other. This
+  could particularly be a problem for Ethiopia since the distribution for
+  :math:`a` has a different form from the others.
+
+  Experiment with different joint distributions to see what what happens to the
+  overall uncertainty. For example, it may be better to generate a,b,c
+  independently, then resample until a<b<c (i.e. use the independent coupling
+  and condition on the event that a<b<c), because I think that will produce more
+  variation in the differences c-b and b-a, which may better reflect our
+  uncertainty. Note that then the marginal distributions won't exactly match the beta distributions listed above, but that's less important than making sure we have :math:`a\le b\le c` and we are getting reasonable estimates for our overall uncertainty.
+
+.. _percentile rank: https://en.wikipedia.org/wiki/Percentile_rank
+.. _comonotonicity: https://en.wikipedia.org/wiki/Comonotonicity
+.. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
+.. _stochastic ordering: https://en.wikipedia.org/wiki/Stochastic_ordering
 
 .. _here:
 
@@ -1591,9 +1816,9 @@ as follows:
   # (s is the shape parameter; the scale parameter is exp(mu), which equals the median)
   rr_distribution = lognorm(s=sigma, scale=median)
 
-.. note:: 
+.. note::
 
-	The same draws from this distribution should be applied to each model 
+	The same draws from this distribution should be applied to each model
 	location as described in the `Model Randomness`_ section
 
 
@@ -1690,6 +1915,19 @@ causes affected by low birth weight and short gestation are as follows:
 References
 ----------
 
+.. [Aaron-et-al-2017]
+
+  View `Aaron et al. 2017`_
+
+    Grant J Aaron, Valerie M Friesen, Svenja Jungjohann, Greg S Garrett,
+    Lynnette M Neufeld, Mark Myatt, Coverage of Large-Scale Food Fortification
+    of Edible Oil, Wheat Flour, and Maize Flour Varies Greatly by Vehicle and
+    Country but Is Consistently Lower among the Most Vulnerable: Results from
+    Coverage Surveys in 8 Countries, The Journal of Nutrition, Volume 147, Issue
+    5, May 2017, Pages 984S–994S, https://doi.org/10.3945/jn.116.245753
+
+.. _Aaron et al. 2017: https://doi.org/10.3945/jn.116.245753
+
 .. [Allen-2002]
 
   View `Allen 2002`_
@@ -1724,6 +1962,29 @@ References
 
 .. _`De Pee et al. 2002`: https://doi.org/10.1093/jn/132.8.2215
 
+.. [Diana-et-al-2016]
+
+  View `Diana et al. 2016`_
+
+    Diana A, Mallard SR, Haszard JJ, Purnamasari DM, Nurulazmi I, Herliani PD,
+    Nugraha GI, Gibson RS, Houghton L. Consumption of fortified infant foods
+    reduces dietary diversity but has a positive effect on subsequent growth in
+    infants from Sumedang district, Indonesia. PLoS One. 2017 Apr
+    20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
+
+.. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
+
+.. [Dror-and-Allen-2018]
+
+  View `Dror and Allen 2018`_
+
+    Dror, D. K., & Allen, L. H. (2018). Retinol-to-fat ratio and retinol
+    concentration in human milk show similar time trends and associations with
+    maternal factors at the population level: a systematic review and
+    meta-analysis. Advances in Nutrition, 9(suppl_1), 332S-346S.
+
+.. _`Dror and Allen 2018`: https://doi.org/10.1093/advances/nmy021
+
 .. [Emamghorashi-and-Heidari-2004]
 
   View `Emamghorashi and Heidari 2004`_
@@ -1740,6 +2001,15 @@ References
 
 .. _`Erdem et al. 2002`: https://www.ncbi.nlm.nih.gov/pubmed/?term=12389675
 
+.. [Ethiopian-Federal-Ministry-of-Health-2011]
+
+  View `Ethiopian Federal Ministry of Health 2011`_
+
+    Ethiopian Federal Ministry of Health. Assessment of Feasibility and
+    Potential Benefits of Food Fortification. 2011.
+
+.. _Ethiopian Federal Ministry of Health 2011: http://www.ffinetwork.org/about/calendar/2011/documents%202011/Ethiopia.pdf
+
 .. [Ethiopian-National-Food-Consumption-Survey]
 
   View `Ethiopian National Food Consumption Survey`_
@@ -1747,22 +2017,6 @@ References
     Ethiopian Public Health Institute (2013). Ethiopian National Food Consumption Survey. Addis Ababa, Ethiopia. [table 18; women]
 
 .. _`Ethiopian National Food Consumption Survey`: https://www.ephi.gov.et/images/pictures/National%20Food%20Consumption%20Survey%20Report_Ethiopia.pdf
-
-.. [Diana-et-al-2016]
-
-  View `Diana et al. 2016`_
-
-    Diana A, Mallard SR, Haszard JJ, Purnamasari DM, Nurulazmi I, Herliani PD, Nugraha GI, Gibson RS, Houghton L. Consumption of fortified infant foods reduces dietary diversity but has a positive effect on subsequent growth in infants from Sumedang district, Indonesia. PLoS One. 2017 Apr 20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
-
-.. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
-
-.. [Dror-and-Allen-2018]
-
-  View `Dror and Allen 2018`_
-
-    Dror, D. K., & Allen, L. H. (2018). Retinol-to-fat ratio and retinol concentration in human milk show similar time trends and associations with maternal factors at the population level: a systematic review and meta-analysis. Advances in Nutrition, 9(suppl_1), 332S-346S.
-
-.. _`Dror and Allen 2018`: https://doi.org/10.1093/advances/nmy021
 
 .. [Global-Fortification-Data-Exchange]
 
@@ -1772,6 +2026,15 @@ References
 
 ..
   .. _Global Fortification Data Exchange: https://tinyurl.com/wka9mgh
+
+.. [GFDx-Ethiopia-Fortification-Dashboard]
+
+  View `GFDx Ethiopia Fortification Dashboard`_
+
+    Global Fortification Data Exchange. Ethiopia Fortification Dashboard.
+    Accessed 4/28/2020. http://www.fortificationdata.org
+
+.. _GFDx Ethiopia Fortification Dashboard: https://tinyurl.com/rdm4wza
 
 .. [Haider-et-al-2013]
 
