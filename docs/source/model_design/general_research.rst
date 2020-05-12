@@ -725,7 +725,7 @@ Backdoor paths are those in which two variables are connected via a common cause
 
 .. image:: backdoor_path_dag.svg
 
-**In the case of a backdoor path between two variables, there will be a correaltion (due to a common cause between them), but no causal relationship betwen the two variables.**
+**In the case of a backdoor path between two variables (and no directional path), there will be a correaltion (due to a common cause between them), but no causal relationship betwen the two variables.**
 
 Colliders
 ^^^^^^^^^
@@ -734,14 +734,14 @@ Colliders are variables that have more than one cause; in other words, where pat
 
 .. image:: collider_dag.svg
 
-**In the case that two variables are linked through a pathway with a collider, there will be no correlation or causal realtionship between the two variables.** This is also referred to as a "closed path."
+**In the case that two variables are linked through a pathway with a collider (and there is no directional or backdoor pathway between them), there will be no correlation or causal realtionship between the two variables.** This is also referred to as a "closed path."
 
 Identifying Counfounding Using Directed Acyclic Graphs
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-As discussed previously in this documentation, confouding arises when a given exposure and outcome share a common cause (Confounding_). This section will help to identify potential confounding variables in a given causal network that may be more complicated than the example(s) presented in the Confounding_ section.
+As discussed previously in this documentation, confounding arises when a given exposure and outcome share a common cause (Confounding_). This section will help to identify potential confounding variables in a given causal network that may be more complicated than the example(s) presented in the Confounding_ section.
 
-In the context of DAGs, confounding may occur when there is an open backdoor pathway between an exposure and outcome of interest. Therefore, any variable that can be used to block an open backdoor path between a given exposure and outcome is a *confounder* with regard to the relationship between that exposure and outcome. 
+In the context of DAGs, confounding may occur when there is an *open* backdoor pathway (*unblocked* backdoor pathway with no colliders) between an exposure and outcome of interest. Therefore, any variable that can be used to block an open backdoor path between a given exposure and outcome is a *confounder* with regard to the relationship between that exposure and outcome. 
 
 "Blocking" an open backdoor path can be done via randomization of that variable between exposure groups or via conditioning (adjustment via stratification or other methods) on that variable. In the following diagrams, variables that are blocked in this way will be represented as rectangles rather than ovals; when this is the case, assume that a pathway with a square variable is a *closed* pathway. Notably, it is not necessary to condition on all variables on a backdoor path; the path can be closed by conditioning on a minimal set of variables and there may be more than one possible minimal set of variables. See below for possible options for closing backdoor paths by conditioning a minimal set of variables (in this case a single variable).
 
