@@ -679,11 +679,78 @@ Conducting Systematic Literature Searches/Reviews
 Directed Acyclic Graphs (Causal Diagrams)
 ------------------------------------------
 
-.. todo::
+Introduction to Directed Acyclic Graphs
++++++++++++++++++++++++++++++++++++++++
 
-  - How to draw directional acyclic graphs (DAGs aka causal diagrams)
-	- Causal relationships vs. correlated
-	
+Directed acyclic graphs (DAGs), also termed causal diagrams, are composed of variables that are linked together by directional arrows. Critically, the solid arrows in DAGs represent a causal relationship between an exposure (start of the arrow) and outcome (node of the arrow), representing the *directional* aspect of DAGs. Notably, a directional arrow in a DAG does not offer any information about whether the exposure causes in increased or decreased probability of the outcome, only that there is some causal realtionship bewteen the exposure and outcome. 
+
+The *acyclic* nature of DAGs is that there cannot be feedback loops between any variables in the graph. In this way, the arrows in DAGs can be interpreted as the passage of time so that the exposure (cause) must always occur temporally *before* the outcome (effect). See the diagram below for an example of an inappropriate and appropriate DAG with regard to temporality.
+
+.. image:: acyclic_dags.svg
+
+Applications, Assumptions, and Limitations of Directed Acyclic Graphs
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+DAGs are used in epidemiology to represent a network of relationships between several variables, which in turn helps to guide the selection of variable that will need to be measured or considered in a given study/project. Further, the exact relationship between variables in a DAG will dictate *how* to treat or consider a specific variable in that study/project by helping to indentify potential confounding, intermediate, or mediating variables between a given exposure and outcome of interest (see the `Causal Relationships`_ section for definitions).
+
+However, DAGs are limited in that they require *prior causal knowledge* about the variables that may be causally related to a given exposure and outcome of interest. Therefore, there may be uncertain, unmeasured, or unknown variables that cannot be represented in a given DAG. Further, DAGs do not allow for easy representation of direction or magnitude of a causal relationship or for effect modification.
+
+For the purpose of this section of our documentation, we will assume that each DAG represents **all** relevant variables in a given causal network and that there are no unrepresented variables.
+
+Types of Pathways Within Directed Acyclic Graphs
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+A path in a DAG is defined as any route drawn through arrows that link two variables **regardless of the direction of the arrow heads**.
+
+Directed Paths
+~~~~~~~~~~~~~~
+
+Directed paths are those in which variables are connected through arrows that flow  head to tail. See below for an example of a directed path between variables A and D.
+
+.. image:: directional_dag.svg
+
+**In the case of a directed path between two variables, those variables will be causally related.**
+
+Undirected Paths
+~~~~~~~~~~~~~~~~
+
+Undirected paths are those in which variables are connected through arrows that do not all flow from head to tail. The two cases of undirected paths covered here include backdoor paths and colliders.
+
+**In the case that there is an undirected path (and no directed path) bewteen two variables, those variables will NOT be causally related, although they may be correlated.**
+
+Backdoor Paths
+^^^^^^^^^^^^^^
+
+Backdoor paths are those in which two variables are connected via a common cause. In other words, two variables that are linked via a variable that has two arrows flowing *away* from it. See below for an example in which variables E and O are connected via a backdoor path through variable A.
+
+.. image:: backdoor_path_dag.svg
+
+**In the case of a backdoor path between two variables, there will be a correaltion (due to a common cause between them), but no causal relationship betwen the two variables.**
+
+Colliders
+^^^^^^^^^
+
+Colliders are variables that have more than one cause; in other words, where pathways collide and a variable has two arrows flowing *toward* it. See below for an example in which variable C is a collider.
+
+.. image:: collider_dag.svg
+
+**In the case that two variables are linked through a pathway with a collider, there will be no correlation or causal realtionship between the two variables.** This is also referred to as a "closed path."
+
+Identifying Counfounding Using Directed Acyclic Graphs
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+As discussed previously in this documentation, confouding arises when a given exposure and outcome share a common cause (Confounding_). This section will help to identify potential confounding variables in a given causal network that may be more complicated than the example(s) presented in the Confounding_ section.
+
+In the context of DAGs, confounding may occur when there is an open backdoor pathway between an exposure and outcome of interest. Therefore, any variable that can be used to block an open backdoor path between a given exposure and outcome is a *confounder* with regard to the relationship between that exposure and outcome. 
+
+"Blocking" an open backdoor path can be done via randomization of that variable between exposure groups or via conditioning (adjustment via stratification or other methods) on that variable. In the following diagrams, variables that are blocked in this way will be represented as rectangles rather than ovals; when this is the case, assume that a pathway with a square variable is a *closed* pathway. Notably, it is not necessary to condition on all variables on a backdoor path; the path can be closed by conditioning on a minimal set of variables and there may be more than one possible minimal set of variables. See below for possible options for closing backdoor paths by conditioning a minimal set of variables (in this case a single variable).
+
+.. image:: closed_backdoor_paths.svg
+
+Finally, do not be fooled by siutations in which there is no open backdoor path (and therefore no confounding and no need to condition)! See the two examples below in which the undirectional pathway between the exposure (E) and outcome (O) are closed via colliders.
+
+.. image:: paths_closed_by_colliders.svg
+
 Selecting Appropriate Data Sources
 ----------------------------------
 
@@ -692,3 +759,4 @@ Selecting Appropriate Data Sources
 	- When can we reasonably conclude an association is causal?
 	- When can we reasonably conclude a measure of effect is generalizable?
 	- When can we reasonably conclude a study is or is not biased?
+ 
