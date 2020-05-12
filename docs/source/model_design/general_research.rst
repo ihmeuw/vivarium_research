@@ -751,6 +751,10 @@ Finally, do not be fooled by siutations in which there is no open backdoor path 
 
 .. image:: paths_closed_by_colliders.svg
 
+.. todo::
+
+	How to draw DAGs, correlation versus causation
+
 Selecting Appropriate Data Sources
 ----------------------------------
 
