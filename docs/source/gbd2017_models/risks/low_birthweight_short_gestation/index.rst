@@ -368,12 +368,12 @@ below:
   :nowrap:
 
   \begin{align*}
-  &\text{csmr}_c(i) &&= \text{unstratified cause-specific mortality hazard from cause $c$ for $i$}\\
-  &\text{csmr}_c^*(i) &&= \text{LBWSG-stratified cause-specific mortality hazard from $c$ for $i$}\\
+  &\text{csmr}_c(i) &&= \text{conditional cause-specific mortality hazard of cause $c$ for individual $i$}\\
+  &\text{csmr}_c^*(i) &&= \text{LBWSG-stratified cause-specific mortality hazard of $c$ for $i$}\\
   &\text{mr}(i) &&= \text{overall mortality hazard for individual $i$}
   \end{align*}
 
-For each cause :math:`c`, define the unstratified cause-specific mortality
+For each cause :math:`c`, define the conditional cause-specific mortality
 hazard for individual :math:`i` to be
 
 .. math::
@@ -386,11 +386,11 @@ hazard for individual :math:`i` to be
     & \text{if $c\in $ modelled}.
   \end{cases}
 
-Note that "unstratified" here means unstratified with respect to LBWSG category.
-The above individual csmr's can in fact be interpreted as the cause-level CSMR's
-stratified on all the individual cause states observed in the simulation. Now
-define the LBWSG-stratified cause-specific mortality hazard of :math:`c` for
-individual :math:`i` to be
+The descriptor "conditional" here means that the above individual csmr's can be
+interpreted as the cause-level expected CSMR's conditioned (i.e. stratified) on
+all the individual cause states observed in the simulation. Now we additionally
+stratify by LBWSG category: Define the LBWSG-stratified cause-specific mortality
+hazard of :math:`c` for individual :math:`i` to be
 
 .. math::
 
