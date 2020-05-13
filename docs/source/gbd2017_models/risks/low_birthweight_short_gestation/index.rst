@@ -210,14 +210,17 @@ First, we convert the GBD 500g-2weeks birthweight-ga bins/categories to a joint 
 .. note ::
     That this is likely biasing towards overestimating extreme birthweights or gestational ages. For example, in the 0-500g category, most babies are probably pretty close to 500g, not equally probable to be 1 gram versus 499 grams.
 
-Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first define all-cause mortality rate (ACMR) as the sum of:
+Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first decompose all-cause mortality rate (ACMR) as the sum of:
 
    - mortality from causes that are affected by LBWSG and modelled in the sim (:gre:`green`)
    - mortality from causes that are affected by LBWSG but not modelled in the sim (:blu:`blue`)
    - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
    - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
-An example of these causes from the :ref:`large-scale-food fortification concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below:
+We are interested in applying the PAF and relative risk to only the causes that
+GBD considers to be affected by LBWSG (green and blue). An example of these
+causes from the :ref:`large-scale-food fortification concept model
+<2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below:
 
 
 +---------------------+------------------------------------------------------------------------+
@@ -291,57 +294,55 @@ An example of these causes from the :ref:`large-scale-food fortification concept
 
 .. note::
 
-  to pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
+  To pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
 
-All-cause mortality is sum of all cause-specific mortality rates (CSMRs):
+At any time :math:`t` in a Vivarium simulation, each individual  :math:`i` has
+an instantaneous mortality rate (i.e. mortality hazard) :math:`\text{mr}(i) =
+\text{mr}_t(i)` that is dependent on which cause states the individual is in at
+time :math:`t`. Our goal is do define the individual mortality hazard
+:math:`\text{mr}(i)` so that the LBWSG PAF and relative risks are applied only
+to the causes that GBD considers to be affected by LBWSG (green and blue), while
+preserving the requirement that the expected value of the mortality hazard
+equals the all-cause mortality rate:
+
+.. math::
+
+  E [\text{mr}(i)] = \text{ACMR}.
+
+All-cause mortality is the sum of all the cause-specific mortality rates
+(CSMRs):
 
 .. math::
 
    \text{ACMR} =  \sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR} + \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR}
 
-The mortality from unmodelled causes unaffected by LBWSG (pink) is thus:
+.. note::
 
-   :math:`\sum\limits_{\text{pink}}\text{CSMR}` = ACMR - :math:`\sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR} - \sum\limits_{\text{blue}}\text{CSMR}`
+  To minimize the amount of data we need to pull from GBD, we can solve for the
+  sum of mortality rates from unmodelled causes unaffected by LBWSG (pink) in
+  terms of the all-cause mortality rate and the CSMRs of the green, blue, and
+  salmon causes:
 
-For modelled causes, we need to use the cause-state-dependent excess morality rates (EMR) instead of the CSMR, which is the average over all cause states. The mortality from modelled causes (green and salmon):
+  .. math::
 
-   - mortality rate due to cause if the person does NOT have the condition: 0
+    \sum_{\text{pink}}\text{CSMR} = \text{ACMR}
+    - \sum_{\text{salmon}}\text{CSMR}
+    - \sum_{\text{green}}\text{CSMR}
+    - \sum\limits_{\text{blue}}\text{CSMR}
+
+  This equation can be substituted into :eq:`mortality_hazard` below to
+  compute the mortality hazard for an individual simulant.
+
+To compute the individual mortality hazard :math:`\text{mr}(i)`, for the
+modelled causes (green and salmon) we will need the cause-state-dependent excess
+morality rates (EMR) instead of the CSMR, which is the average EMR over all
+cause states. For example, the excess mortality rates for a two-state cause
+(with condition / without condition) would be:
+
+   - mortality rate due to cause if the person does NOT have the condition: EMR=0
    - mortality rate due to cause if the person HAS the condition: EMR of the condition
 
-We are interested in applying the PAF and relative risk to only the causes that GBD considers to be affected by LBWSG (green and blue):
-
-   |  i = low birth weight short gestation category
-   |  mr_i = mortality hazard in early and late neonatal period for category i
-   |  rr_i = relative risk for all cause mortality in category i
-   |  state = either 1 with condition or 0 without condition
-   |  PAF* = this is the PAF of the most detailed cause affected by LBWSG
-
-Hence, the mortality hazard for an individual in LBWSG category i is:
-
-mr_i
-
-  | = ACMR_i
-  | = unaffected(unmodelled + modelled) + affected(unmodelled + modelled) x (1-PAF*) x :math:`rr_i`
-
-= :math:`\sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{EMR_state} + (\sum\limits_{\text{blue}}\text{CSMR}+\sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
-
-At each time t in a Vivarium simulation, each individual  i is assigned an instantaneous mortality rate (i.e. mortality hazard) :math:`\text{MR}_i(t)` that is dependent on which cause states the individual is in at time t. Our goal is do define the individual mortality hazard so that
-
-.. math::
-
-  E_i [\textsf{MR}_i(t)] = \text{ACMR} \\
-  \text{mr}_i(t) = \sum_{c : i \in state(c)} \text{CSMR}_c
-
-
-Variables:
-
-  |  MR_i = mortality hazard of individual i
-  |  cat(i) = low birth weight short gestation category of individual i
-  |  rr_cat = relative risk for all cause mortality of LBWSG category cat
-  |  state(i) = either 1 with condition or 0 without condition
-  |  PAF* = this is the PAF of the most detailed cause affected by LBWSG
-
-Variable definitions:
+We will need the following variables:
 
 .. math::
   :nowrap:
@@ -353,13 +354,27 @@ Variable definitions:
   &\text{state}_c(i) &&= \text{current cause state of individual $i$ in cause model diagram for $c$}\\
   &\text{CSMR}_c &&= \text{cause-specific mortality rate for cause $c$}\\
   &\text{EMR}_{\text{state}_c(i)} &&= \text{excess mortality rate for the cause state state$_c(i)$}\\
-  &\textit{RR}_{\text{cat}(i)} &&= \text{the relative risk for all-cause mortality in LBWSG category cat$(i)$}\\
-  &\text{PAF} &&= \text{PAF of LBWSG at the most-detailed cause level}\\
-  &\text{mr}(i) &&= \text{mortality hazard for individual $i$}\\
+  &\textit{RR}_{\text{cat}(i)} &&= \text{relative risk for all-cause mortality in LBWSG category cat$(i)$}\\
+  &\text{PAF} &&= \text{PAF of LBWSG for affected causes at most-detailed cause level}
   \end{align*}
 
+See the :ref:`note below <PAF information>` about how to compute the above PAF.
+Note that since :math:`\text{state}_c(i)` implicitly depends on the time
+:math:`t`, the individual mortality hazard will also depend on time. Using the
+above definitions, we will define the following individual mortality rates
+below:
 
-For each cause :math:`c`, define the unmodified cause-specific mortality hazard for individual i to be
+.. math::
+  :nowrap:
+
+  \begin{align*}
+  &\text{csmr}_c(i) &&= \text{unstratified cause-specific mortality hazard from cause $c$ for $i$}\\
+  &\text{csmr}_c^*(i) &&= \text{LBWSG-stratified cause-specific mortality hazard from $c$ for $i$}\\
+  &\text{mr}(i) &&= \text{overall mortality hazard for individual $i$}
+  \end{align*}
+
+For each cause :math:`c`, define the unstratified cause-specific mortality
+hazard for individual :math:`i` to be
 
 .. math::
 
@@ -371,7 +386,11 @@ For each cause :math:`c`, define the unmodified cause-specific mortality hazard 
     & \text{if $c\in $ modelled}.
   \end{cases}
 
-Now define the LBWSG-modified cause-specific mortality hazard of :math:`c` for individual i to be
+Note that "unstratified" here means unstratified with respect to LBWSG category.
+The above individual csmr's can in fact be interpreted as the cause-level CSMR's
+stratified on all the individual cause states observed in the simulation. Now
+define the LBWSG-stratified cause-specific mortality hazard of :math:`c` for
+individual :math:`i` to be
 
 .. math::
 
@@ -383,39 +402,22 @@ Now define the LBWSG-modified cause-specific mortality hazard of :math:`c` for i
     & \text{if $c \in$ affected}.
   \end{cases}
 
-
-Then the individual's total mortality hazard, stratified by all modeled cause states and LBWSG risk categories, is
+As described above, we are applying the PAF and relative risks only to the
+causes GBD considers affected by LBWSG. Then the individual's total mortality
+hazard, stratified by all modeled cause states and LBWSG risk categories, is
 
 .. math::
+  :label: mortality_hazard
 
   \text{mr}(i)
-  & = \sum_{c\,\in\, \text{causes}} \text{csmr}_c^*(i) \\
-  %&= \sum_{c\,\in\, \text{unaffected}} \text{csmr}_c(i)
-  %  + \sum_{c\,\in\, \text{affected}} \text{csmr}_c(i)
-  %  \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)} \\
-  %&= \sum_{\substack{\text{unaffected}\\ \text{unmodeled}}}
-  %  \text{MR}
-  %  + \sum_{\substack{\text{unaffected}\\ \text{modeled}}}
-  %  \text{MR}
-  %  + \left( \sum_{\substack{\text{affected}\\ \text{unmodeled}}}
-  %  \text{MR}
-  %  + \sum_{\substack{\text{affected}\\ \text{modeled}}}
-  %  \text{MR} \right) \cdot (1-\text{PAF})\cdot \text{RR}\\
-  %&= \sum_{c\in \bigl\{\substack{\text{unaffected}\\ \text{unmodeled}}\bigr\}}
-  %  \text{CSMR}_c
-  %  + \sum_{c\in \bigl\{\substack{\text{unaffected}\\ \text{modeled}}\bigr\}}
-  %  \text{EMR}_{\text{state}_c(i,t)}
-  %  + \Bigl(\sum_{c\in \bigl\{\substack{\text{affected}\\ \text{unmodeled}}\bigr\}}
-  %  \text{CSMR}_c
-  %  + \sum_{c\in \bigl\{\substack{\text{affected}\\ \text{modeled}}\bigr\}}
-  %  \text{EMR}_{\text{state}_c(i,t)}\Bigr) \\
-  &= \sum_{c\in \text{pink}}
+  & := \sum_{c\,\in\, \text{causes}} \text{csmr}_c^*(i) \\
+  &= \sum_{c\,\in\, \text{pink}}
     \text{CSMR}_c
-    + \sum_{c\in \text{salmon}}
+    + \sum_{c\,\in\, \text{salmon}}
     \text{EMR}_{\text{state}_c(i)} \\
-    &\qquad\qquad + \left(\sum_{c\in \text{blue}}
+    &\qquad\qquad + \left(\sum_{c\,\in\, \text{blue}}
     \text{CSMR}_c
-    + \sum_{c\in \text{green}}
+    + \sum_{c\,\in\, \text{green}}
     \text{EMR}_{\text{state}_c(i)}\right)
     \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)},
 
@@ -434,6 +436,8 @@ because
   \text{EMR}_{\text{state}_c(i)}\cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}
     & \text{if $c \in$ green (affected, modelled)}.
   \end{cases}
+
+.. _PAF information:
 
 .. important::
 
