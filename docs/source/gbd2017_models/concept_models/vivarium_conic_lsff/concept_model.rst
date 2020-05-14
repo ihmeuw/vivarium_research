@@ -1899,8 +1899,20 @@ Desired Model Outputs
 
 .. todo::
 
-  Fill out the above output tables and update the Output Summary table
-  accordingly.
+  - Fill out the above output tables and update the Output Summary table
+    accordingly.
+  - Take into account Ali's feedback from PR 226:
+
+      I wonder if there should be an additional column in the Priorities table
+      that indicates what stage of the model building process an output for V&V
+      is needed. I know we had previously discussed that once we validated a
+      cause model that it likely isn't necessary to report the state person time
+      for that cause any more. I'm not sure what the best way to include this
+      information might be, but maybe some columns that have the status of V&V
+      for each model build by the software engineers and then we can update the
+      table as "verified; no longer needed"? And others that we might want to
+      keep in as "verified; still needed". Just a thought! Otherwise I think
+      this looks good.
 
 Observers
 +++++++++
