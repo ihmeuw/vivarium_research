@@ -19,23 +19,23 @@ Disease Overview
 
 :math:`R_{0}'` will be defined here as the population level average number of infectiouns a single individual with covid-19 will transmit over the entire infectious period assuming a completely susceptible population and a given level of mobility and population density.
 
-:math:`R_{effective}` will be defined here as the number of infections a single individual with covid-19 will transmit over the entire infectious period at a given point in time.
+:math:`R_{t}` (effective :math:`R`) will be defined here as the population average number of infections a single individual with covid-19 will transmit over the entire infectious period at a given point in time.
 
-Notably, while :math:`R_{0}`, :math:`R_{0}'`, and :math:`R_{effective}` are population level average parameters, the distribution of these parameters at the *individual level* will be highly right skewed, indicating that many infectious individuals will transmit fewer infections than the population mean R value, while some individuals will transmit many more infections that the population mean value (e.g. mass transmission events).
+Notably, while :math:`R_{0}`, :math:`R_{0}'`, and :math:`R_{t}` are population level average parameters, the distribution of these parameters at the *individual level* will be highly right skewed, indicating that many infectious individuals will transmit fewer infections than the population mean R value, while some individuals will transmit many more infections that the population mean value (e.g. mass transmission events).
 
 GBD 2017 Modeling Strategy
 --------------------------
 
 Covid-19 is not included in GBD 2017. Rather, we will use custom data for all parameters in this cause model.
 
-IHME's existing covid-19 models have fit covariate estimates for population density,  relative mobility, testing capacity, etc. using reported covid-19 deaths and extrapolated covid-19 :math:`R_{effective}` values over time.
+IHME's existing covid-19 models have fit covariate estimates for population density,  relative mobility, testing capacity, etc. using reported covid-19 deaths and extrapolated covid-19 :math:`R_{t}` values over time.
 
 Vivarium Modeling Strategy
 --------------------------
 
 Modeling covid-19 in Vivarium will require a different strategy than our standard cause models. The standard methodology for Vivarium cause models assumes event independence in that one simulant's disease incidence does not affect another simulant's chance of disease incidence. However, given the infectious nature of covid-19, this cause model document will outline a strategy to model the dependent infectious nature of the disease transmission.
 
-The general strategy of the covid-19 cause model in Vivarium will be to utilize the population density and relative mobility covariates in the existing IHME covid-19 model for a specific location (ideally the smallest unit) that have been fit to the derived :math:`R_{effective}` value. We can do this by evaluating how hypothetical changes in population density and relative mobility will impact :math:`R_{effective}`. The modeling strategy proposed in this document requires the use of :math:`R_{0}` (infectious number given typical mobility/population density and a 100% susceptible population); therefore, this modeling strategy is dependent on the derivation of :math:`R_{0}` from the existing IHME covid-19 models.
+The general strategy of the covid-19 cause model in Vivarium will be to utilize the population density and relative mobility covariates in the existing IHME covid-19 model for a specific location (ideally the smallest unit) that have been fit to the derived :math:`R_{t}` value. We can do this by evaluating how hypothetical changes in population density and relative mobility will impact :math:`R_{t}`. The modeling strategy proposed in this document requires the use of :math:`R_{0}` (infectious number given typical mobility/population density and a 100% susceptible population); therefore, this modeling strategy is dependent on the derivation of :math:`R_{0}` from the existing IHME covid-19 models.
 
 Scope
 +++++
