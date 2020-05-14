@@ -217,10 +217,11 @@ Because the relative risks from GBD are for all-cause mortality in the early and
    - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
    - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
-We are interested in applying the PAF and relative risk to only the causes that
-GBD considers to be affected by LBWSG (green and blue). An example of these
-causes from the :ref:`large-scale-food fortification concept model
-<2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below:
+We are interested in applying the PAF and relative risk only to the causes that
+GBD considers to be affected by LBWSG (green and blue). An example of the
+color-coded cause breakdown from the :ref:`large-scale-food fortification
+concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is
+shown below:
 
 
 +---------------------+------------------------------------------------------------------------+
@@ -318,7 +319,13 @@ All-cause mortality is the sum of all the cause-specific mortality rates
 
 .. math::
 
-   \text{ACMR} =  \sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR} + \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR}
+   \text{ACMR} =  \sum_{\text{pink}}\text{CSMR} +
+   \sum_{\text{salmon}}\text{CSMR} + \sum_{\text{green}}\text{CSMR} +
+   \sum_{\text{blue}}\text{CSMR}.
+
+Likewise, we will decompose the individual mortality hazard :math:`\text{mr}(i)`
+as a sum of individual-level cause-specific mortality hazards, defined according
+to the green/blue/salmon/pink breakdown (i.e. modelled vs. unmodelled causes and affected vs. unaffected causes).
 
 .. note::
 
@@ -340,11 +347,11 @@ All-cause mortality is the sum of all the cause-specific mortality rates
 
 We now describe our strategy for defining the individual mortality hazard
 :math:`\text{mr}(i)`, taking an individual's LBWSG category into account. For
-the modelled causes (green and salmon) we will use the cause-state-dependent
-excess morality rates (EMRs) instead of the CSMR, which is the average EMR over
-all cause states (including the "without condition" state). For example, the
-excess mortality rates for a two-state cause (with condition / without
-condition) would be:
+the modelled causes (green and salmon) we will use the excess morality rates
+(EMRs) instead of the CSMR. The EMR is cause-state dependent while the CSMR is
+the average EMR over all cause states (including the "without condition" state).
+For example, the excess mortality rates for a two-state cause (with condition /
+without condition) would be:
 
    - mortality rate due to cause if the person does NOT have the condition: EMR=0
    - mortality rate due to cause if the person HAS the condition: EMR of the condition (with EMR > CSMR)
@@ -368,7 +375,7 @@ We will need the following variables:
 See the :ref:`note below <PAF information>` about how to compute the above PAF
 or pull it from GBD. Note that since :math:`\text{state}_c(i)` implicitly
 depends on the time :math:`t`, the individual mortality hazard will also depend
-on time. Using the above definitions, we will define the following individual
+on time. Using the above variables, we will define the following individual
 mortality rates below:
 
 .. math::
@@ -394,12 +401,13 @@ hazard for individual :math:`i` to be
   \end{cases}
 
 The descriptor "conditional" here means that the above individual csmr's can be
-interpreted as the cause-level expected CSMR's `conditioned <conditioning_>`_
+interpreted as the expected cause-level CSMR's `conditioned <conditioning_>`_
 (i.e. `stratified <stratification_>`_) on all the individual cause states
-observed in the simulation. In other words, :math:`\text{csmr}_c(i)` is the
-`conditional expectation`_ of an individual's cause-specific mortality hazard,
-given whether :math:`c` is one of the causes we are modeling, and if so, given
-which of :math:`c`'s cause states the individual :math:`i` is in.
+observed in the simulation (note that we can only observe cause states for
+*modelled* causes). In other words, :math:`\text{csmr}_c(i)` is the `conditional
+expectation`_ of individual :math:`i`'s cause-specific mortality hazard, given
+whether :math:`c` is one of the causes we are modeling, and if so, given which
+of :math:`c`'s cause states the individual is in.
 
 .. _conditioning: https://en.wikipedia.org/wiki/Conditioning_(probability)
 .. _conditional expectation: https://en.wikipedia.org/wiki/Conditional_expectation
