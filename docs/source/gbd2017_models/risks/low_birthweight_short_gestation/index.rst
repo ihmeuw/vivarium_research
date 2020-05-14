@@ -401,13 +401,13 @@ observed in the simulation. In other words, :math:`\text{csmr}_c(i)` is the
 given whether :math:`c` is one of the causes we are modeling, and if so, given
 which of :math:`c`'s cause states the individual :math:`i` is in.
 
-Now we additionally stratify/condition the csmr's by the individual's LBWSG
-category. Define the LBWSG-stratified cause-specific mortality hazard of
-:math:`c` for individual :math:`i` to be
-
 .. _conditioning: https://en.wikipedia.org/wiki/Conditioning_(probability)
 .. _conditional expectation: https://en.wikipedia.org/wiki/Conditional_expectation
 .. _stratification: https://en.wikipedia.org/wiki/Stratification_(clinical_trials)
+
+Now we additionally stratify/condition the csmr's by the individual's LBWSG
+category. Define the LBWSG-stratified cause-specific mortality hazard of
+:math:`c` for individual :math:`i` to be
 
 .. math::
 
