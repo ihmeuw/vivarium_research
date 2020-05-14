@@ -298,16 +298,17 @@ shown below:
   To pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
 
 At any time :math:`t` in a Vivarium simulation, each individual  :math:`i` has
-an instantaneous mortality rate (i.e. mortality hazard) :math:`\text{mr}(i) =
-\text{mr}_t(i)` that dictates how likely they are to die in the next instant.
-The mortality hazard is dependent on which cause states the individual is in at
-time :math:`t`. Our goal is to define the individual mortality hazard
-:math:`\text{mr}(i)` so that the LBWSG relative risks for mortality are applied
-only to the causes that GBD considers to be affected by LBWSG (green and blue),
-while preserving the requirement that the `expected value`_ (denoted by
-:math:`E`) of the mortality hazard equals the all-cause mortality rate for the
-individual's location, year, age, and sex:
+an instantaneous mortality rate (i.e. `mortality hazard <hazard function_>`_)
+:math:`\text{mr}(i) = \text{mr}_t(i)` that dictates how likely they are to die
+in the next instant. The mortality hazard is dependent on which cause states the
+individual is in at time :math:`t`. Our goal is to define the individual
+mortality hazard :math:`\text{mr}(i)` so that the LBWSG relative risks for
+mortality are applied only to the causes that GBD considers to be affected by
+LBWSG (green and blue), while preserving the requirement that the `expected
+value`_ (denoted by :math:`E`) of the mortality hazard equals the all-cause
+mortality rate for the individual's location, year, age, and sex:
 
+.. _hazard function: https://en.wikipedia.org/wiki/Survival_analysis#Hazard_function_and_cumulative_hazard_function
 .. _expected value: https://en.wikipedia.org/wiki/Expected_value
 
 .. math::
