@@ -65,7 +65,7 @@ Risk exposure overview
 
 Describe this risk
 
-GBD 2017 modelling strategy 
+GBD 2017 modelling strategy
 +++++++++++++++++++++++++++
 
 Risk exposure description in GBD 2017
@@ -94,13 +94,15 @@ causes, and relative to the joint TMREL.
 
 .. note::
 
-   *PAF-of-1 with LBWSG.
-   - the cause :ref:`Neonatal preterm birth complications  <2017_cause_neonatal_preterm>` is
-   100% attributable to this risk.
+   *  PAF-of-1 with LBWSG:
+
+      - The cause :ref:`Neonatal preterm birth complications
+        <2017_cause_neonatal_preterm>` is
+        100% attributable to this risk.
 
 How is the exposure estimated in GBD 2017
 -----------------------------------------
-   
+
 To model the joint distribution of exposure of low birth weight and short gestation for each location,
 year, and sex estimated in GBD 2017, three types of information are used:
 
@@ -114,10 +116,10 @@ Exposure modelling strategy in GBD 2017
 GBD 2017 creates a joint distribution of birth weight and gestation age to create the low birth weight short gestation risk factor. It takes birth weight and gestational age microdata from 11 locations and uses ensemble model methods standard to GBD risk factors, to first create separate distributions of birth weight and gestational age for every location-sex-year. Then to model the joint distribution of gestational age and birth weight from separate distributions, the Spearman correlation for each country where joint microdata was available was pooled across all years of data available. This ranged from 0.25-0.49. Pooling across all countries in the dataset, the overall Spearman correlation was 0.38. Copula modelling was used to model joint distributions between the birth weight and gestational age marginal distributions. The joint distribution is then divided into 500g by 2wk bins. Birth prevalence was then calculated for each 500g by 2wk bin.
 
 .. note::
-   The risk appendix's description of "2-week age bins" is not totally accurate because it looks like:
+   The risk appendix's description of "2-week age bins" is not totally accurate because:
 
-   - There are 1-week age bins (36-37 weeks, and 37-38 weeks).
-   - There are two categories where the age range is 0-24 weeks (all these
+   - There are two 1-week age bins (36-37 weeks, and 37-38 weeks).
+   - There are two categories where the age range is 0-24 weeks (all the
      "extremely extreme" preterm births are grouped together).
      See image of LBWSG categories below
 
@@ -133,7 +135,7 @@ TMREL in GBD 2017
 For each of the country-derived relative risk surfaces, the 500 g and 2-week gestational age joint bin with the lowest risk was identified. This bin differed within each country dataset. To identify the universal 500 g and 2-week gestational age category that would serve as the universal TMREL, all bins that were identified as the TMREL was chosen. This is cat55 (40-42ga, 3500-400g) and cat56 (40-42ga, 4000-4500g)
 
 .. note::
-   the TMREL categories listed in GBD 2017 risk appendix are wrong.  
+   the TMREL categories listed in GBD 2017 risk appendix are wrong.
 
 Causes that are affected by LBWSG
 ---------------------------------
@@ -141,19 +143,19 @@ Causes that are affected by LBWSG
 The available data for deriving relative risk was only for all-cause mortality. The exception was the USA
 linked infant birth-death cohort data, which contained 3-digit ICD causes of death, but also had nearly
 30% of deaths coded to causes that are ill-defined, or intermediate, in the GBD cause classification
-system. GBD 2017 analysed the relative risk of all-cause mortality across all available sources and selected 
-outcomes based on criteria of biologic plausibility. Some causes, most notably congenital birth defects, 
-haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded. 
-The final list of outcomes included in calculating the attributable burden for LBWSG are in the table below. 
+system. GBD 2017 analysed the relative risk of all-cause mortality across all available sources and selected
+outcomes based on criteria of biologic plausibility. Some causes, most notably congenital birth defects,
+haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.
+The final list of outcomes included in calculating the attributable burden for LBWSG are in the table below.
 
 +----------+---------------------------------------------------------+
-| Cause id | Cause (outcomes)                                        | 
+| Cause id | Cause (outcomes)                                        |
 +==========+=========================================================+
 |  302     | diarrheal diseases                                      |
 +----------+---------------------------------------------------------+
 |  322     | lower respiratory tract infections                      |
 +----------+---------------------------------------------------------+
-|  328     | upper respiratory tract infections                      | 
+|  328     | upper respiratory tract infections                      |
 +----------+---------------------------------------------------------+
 |  329     | otitis media                                            |
 +----------+---------------------------------------------------------+
@@ -203,19 +205,22 @@ LBWSG risk effect on all-cause moratality only applies to the early neonatal and
 Vivarium modelling strategy
 +++++++++++++++++++++++++++
 
-First, we convert the GBD 500g-2weeks birthweight-ga bins/categories to a joint continuous distribution using `Abie's notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb>`__.. We assume a uniform distribution within each bin/category. 
+First, we convert the GBD 500g-2weeks birthweight-ga bins/categories to a joint continuous distribution using `Abie's notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb>`__.. We assume a uniform distribution within each bin/category.
 
 .. note ::
     That this is likely biasing towards overestimating extreme birthweights or gestational ages. For example, in the 0-500g category, most babies are probably pretty close to 500g, not equally probable to be 1 gram versus 499 grams.
 
-Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first define all-cause mortality rate (ACMR) as the sum of: 
+Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first decompose all-cause mortality rate (ACMR) as the sum of:
 
    - mortality from causes that are affected by LBWSG and modelled in the sim (:gre:`green`)
    - mortality from causes that are affected by LBWSG but not modelled in the sim (:blu:`blue`)
    - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
    - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
-An example of these causes from the :ref:`large-scale-food fortification concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below: 
+We are interested in applying the PAF and relative risk to only the causes that
+GBD considers to be affected by LBWSG (green and blue). An example of these
+causes from the :ref:`large-scale-food fortification concept model
+<2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below:
 
 
 +---------------------+------------------------------------------------------------------------+
@@ -226,11 +231,11 @@ An example of these causes from the :ref:`large-scale-food fortification concept
 |Modelled  |:gre:`302`|diarrheal diseases     |diarrheal        |                |             |
 |causes    |          |                       |diseases         |                |             |
 |affected  +----------+-----------------------+-----------------+----------------+-------------+
-|by        |:gre:`322`|lower respiratory      |lower respiratory|                |             |  
+|by        |:gre:`322`|lower respiratory      |lower respiratory|                |             |
 |LBWSG     |          |tract infection        |tract infection  |                |             |
 +----------+----------+-----------------------+-----------------+----------------+-------------+
 |          |:blu:`328`|upper respiratory      |                 |                |             |
-|Un-       |          |tract infections       |                 |                |             |             
+|Un-       |          |tract infections       |                 |                |             |
 |modelled  +----------+-----------------------+-----------------+----------------+-------------+
 |causes    |:blu:`329`|otitis media           |                 |                |             |
 |affected  |          |                       |                 |                |             |
@@ -238,108 +243,225 @@ An example of these causes from the :ref:`large-scale-food fortification concept
 |LBWSG     |:blu:`333`|pneumococcal           |                 |                |             |
 |          |          |meningitis             |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`334`|H influenzae type      |                 |                |             |  
+|          |:blu:`334`|H influenzae type      |                 |                |             |
 |          |          |B meningitis           |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`335`|meningococcal          |                 |                |             |  
-|          |          |meningitis             |                 |                |             |  
+|          |:blu:`335`|meningococcal          |                 |                |             |
+|          |          |meningitis             |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`336`|other meningitis       |                 |                |             |  
-|          |          |                       |                 |                |             |  
+|          |:blu:`336`|other meningitis       |                 |                |             |
+|          |          |                       |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`337`|encephalitis           |                 |                |             |   
-|          |          |                       |                 |                |             |  
+|          |:blu:`337`|encephalitis           |                 |                |             |
+|          |          |                       |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`381`|neonatal preterm       |                 |                |             |   
-|          |          |birth complications    |                 |                |             |         
+|          |:blu:`381`|neonatal preterm       |                 |                |             |
+|          |          |birth complications    |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`382`|neonatal               |                 |                |             |  
-|          |          |encephalopathy         |                 |                |             |  
+|          |:blu:`382`|neonatal               |                 |                |             |
+|          |          |encephalopathy         |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`383`|neonatal sepsis and oth|                 |                |             |  
-|          |          |er neonatal infections |                 |                |             |    
+|          |:blu:`383`|neonatal sepsis and oth|                 |                |             |
+|          |          |er neonatal infections |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`384`|hemolytic disease and  |                 |                |             |  
-|          |          |other neonatal jaundice|                 |                |             |  
+|          |:blu:`384`|hemolytic disease and  |                 |                |             |
+|          |          |other neonatal jaundice|                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`385`|other neonatal         |                 |                |             |  
-|          |          |disorders              |                 |                |             |     
+|          |:blu:`385`|other neonatal         |                 |                |             |
+|          |          |disorders              |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:blu:`686`|sudden infant          |                 |                |             |  
-|          |          |death syndrome         |                 |                |             |  
+|          |:blu:`686`|sudden infant          |                 |                |             |
+|          |          |death syndrome         |                 |                |             |
 +----------+----------+-----------------------+-----------------+----------------+-------------+
-|Modelled  |:sal:`341`|                       | measles         |                |             |  
-|causes    |          |                       |                 |                |             |    
+|Modelled  |:sal:`341`|                       | measles         |                |             |
+|causes    |          |                       |                 |                |             |
 |unaffected+----------+-----------------------+-----------------+----------------+-------------+
-|by        |:sal:`389`|                       | vitamin A       |                |             |  
-|LBWSG     |          |                       |                 |                |             |  
+|by        |:sal:`389`|                       | vitamin A       |                |             |
+|LBWSG     |          |                       |                 |                |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:sal:`390`|                       |                 |dietary iron    |             |  
-|          |          |                       |                 |deficiency      |             |     
+|          |:sal:`390`|                       |                 |dietary iron    |             |
+|          |          |                       |                 |deficiency      |             |
 |          +----------+-----------------------+-----------------+----------------+-------------+
-|          |:sal:`642`|                       |                 |                | neural tube | 
-|          |          |                       |                 |                | defects     |  
+|          |:sal:`642`|                       |                 |                | neural tube |
+|          |          |                       |                 |                | defects     |
 +----------+----------+-----------------------+-----------------+----------------+-------------+
-|Un-       |:pin:`---`|causes not in our model                                                 | 
-|modelled  |          |                                                                        | 
-|causes    |          |                                                                        | 
-|unaffected|          |                                                                        | 
-|by LBWSG  |          |                                                                        | 
+|Un-       |:pin:`---`|causes not in our model                                                 |
+|modelled  |          |                                                                        |
+|causes    |          |                                                                        |
+|unaffected|          |                                                                        |
+|by LBWSG  |          |                                                                        |
 +----------+----------+------------------------------------------------------------------------+
 
-.. note:: 
+.. note::
 
-  to pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
+  To pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
 
-All-cause mortality is sum of all cause-specific mortalities: 
+At any time :math:`t` in a Vivarium simulation, each individual  :math:`i` has
+an instantaneous mortality rate (i.e. mortality hazard) :math:`\text{mr}(i) =
+\text{mr}_t(i)` that is dependent on which cause states the individual is in at
+time :math:`t`. Our goal is do define the individual mortality hazard
+:math:`\text{mr}(i)` so that the LBWSG PAF and relative risks are applied only
+to the causes that GBD considers to be affected by LBWSG (green and blue), while
+preserving the requirement that the expected value of the mortality hazard
+equals the all-cause mortality rate:
 
-   ACMR =  :math:`\sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR} + \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR}`
+.. math::
 
-The mortality from unmodelled causes unaffected by LBWSG (pink) is thus: 
+  E [\text{mr}(i)] = \text{ACMR}.
 
-   :math:`\sum\limits_{\text{pink}}\text{CSMR}` = ACMR - :math:`\sum\limits_{\text{salmon}}\text{CSMR} - \sum\limits_{\text{green}}\text{CSMR} - \sum\limits_{\text{blue}}\text{CSMR}`
+All-cause mortality is the sum of all the cause-specific mortality rates
+(CSMRs):
 
-For modelled causes, we can use their excess-morality rates (EMR) instead of the average CSMRs. The mortality from modelled causes (green and salmon):
+.. math::
 
-   - mortality rate due to cause if the person does NOT have the condition: 0
+   \text{ACMR} =  \sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR} + \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR}
+
+.. note::
+
+  To minimize the amount of data we need to pull from GBD, we can solve for the
+  sum of mortality rates from unmodelled causes unaffected by LBWSG (pink) in
+  terms of the all-cause mortality rate and the CSMRs of the green, blue, and
+  salmon causes:
+
+  .. math::
+
+    \sum_{\text{pink}}\text{CSMR} = \text{ACMR}
+    - \sum_{\text{salmon}}\text{CSMR}
+    - \sum_{\text{green}}\text{CSMR}
+    - \sum\limits_{\text{blue}}\text{CSMR}
+
+  This equation can be substituted into :eq:`mortality_hazard` below to
+  compute the mortality hazard for an individual simulant.
+
+To compute the individual mortality hazard :math:`\text{mr}(i)`, for the
+modelled causes (green and salmon) we will need the cause-state-dependent excess
+morality rates (EMR) instead of the CSMR, which is the average EMR over all
+cause states. For example, the excess mortality rates for a two-state cause
+(with condition / without condition) would be:
+
+   - mortality rate due to cause if the person does NOT have the condition: EMR=0
    - mortality rate due to cause if the person HAS the condition: EMR of the condition
- 
-We are interested in applying the PAF and relative risk to only the causes that GBD considers to be affected by LBWSG (green and blue):
 
-   |  i = low birth weight short gestation category
-   |  mr_i = mortality hazard in early and late neonatal period for category i
-   |  rr_i = relative risk for all cause mortality in category i
-   |  state = either 1 with condition or 0 without condition 
-   |  PAF* = this is the PAF of the most detailed cause affected by LBWSG
+We will need the following variables:
 
-Hence, the mortality hazard for an individual in LBWSG category i is:  
+.. math::
+  :nowrap:
 
-mr_i
+  \begin{align*}
+  &i &&= \text{identifier for an individual simulant}\\
+  &c &&= \text{identifier for a cause}\\
+  &\text{cat}(i) &&= \text{low birth weight short gestation category of individual $i$}\\
+  &\text{state}_c(i) &&= \text{current cause state of individual $i$ in cause model diagram for $c$}\\
+  &\text{CSMR}_c &&= \text{cause-specific mortality rate for cause $c$}\\
+  &\text{EMR}_{\text{state}_c(i)} &&= \text{excess mortality rate for the cause state state$_c(i)$}\\
+  &\textit{RR}_{\text{cat}(i)} &&= \text{relative risk for all-cause mortality in LBWSG category cat$(i)$}\\
+  &\text{PAF} &&= \text{PAF of LBWSG for affected causes at most-detailed cause level}
+  \end{align*}
 
-  | = ACMR_i
-  | = unaffected(unmodelled + modelled) + affected(unmodelled + modelled) x (1-PAF*) x :math:`rr_i`
+See the :ref:`note below <PAF information>` about how to compute the above PAF.
+Note that since :math:`\text{state}_c(i)` implicitly depends on the time
+:math:`t`, the individual mortality hazard will also depend on time. Using the
+above definitions, we will define the following individual mortality rates
+below:
 
-= :math:`\sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{EMR_state} + (\sum\limits_{\text{blue}}\text{CSMR}+\sum\limits_{\text{green}}\text{EMR_state})\cdot\text{(1-PAF*)}\cdot rr_i`
+.. math::
+  :nowrap:
 
-.. important :: 
+  \begin{align*}
+  &\text{csmr}_c(i) &&= \text{conditional cause-specific mortality hazard of cause $c$ for individual $i$}\\
+  &\text{csmr}_c^*(i) &&= \text{LBWSG-stratified cause-specific mortality hazard of $c$ for $i$}\\
+  &\text{mr}(i) &&= \text{overall mortality hazard for individual $i$}
+  \end{align*}
 
-   PAF in the above equation represents PAFs for most-detailed-cause (they are all roughly equal tp 0.94) affected by LBWSG (or as calculated in vivarium from LBWSG relative risks and exposure). This approach assumes that relative risks for LBWSG applies only to causes that GBD considers to be affected by LBWSG (green and blue causes). 
+For each cause :math:`c`, define the conditional cause-specific mortality
+hazard for individual :math:`i` to be
+
+.. math::
+
+  \text{csmr}_c(i) :=
+  \begin{cases}
+  \text{CSMR}_c
+    & \text{if $c \in$ unmodelled}, \\
+  \text{EMR}_{\text{state}_c(i)}
+    & \text{if $c\in $ modelled}.
+  \end{cases}
+
+The descriptor "conditional" here means that the above individual csmr's can be
+interpreted as the cause-level expected CSMR's `conditioned <conditional
+expectation_>`_ (i.e. `stratified <stratification_>`_) on all the individual
+cause states observed in the simulation. Now we additionally stratify by LBWSG
+category: Define the LBWSG-stratified cause-specific mortality hazard of
+:math:`c` for individual :math:`i` to be
+
+.. _conditional expectation: https://en.wikipedia.org/wiki/Conditional_expectation
+.. _stratification: https://en.wikipedia.org/wiki/Stratification_(clinical_trials)
+
+.. math::
+
+  \text{csmr}_c^*(i) :=
+  \begin{cases}
+  \text{csmr}_c(i)
+    & \text{if $c \in$ unaffected}, \\
+  \text{csmr}_c(i)\cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}
+    & \text{if $c \in$ affected}.
+  \end{cases}
+
+As described above, we are applying the PAF and relative risks only to the
+causes GBD considers affected by LBWSG. Then the individual's total mortality
+hazard, stratified by all modeled cause states and LBWSG risk categories, is
+
+.. math::
+  :label: mortality_hazard
+
+  \text{mr}(i)
+  & := \sum_{c\,\in\, \text{causes}} \text{csmr}_c^*(i) \\
+  &= \sum_{c\,\in\, \text{pink}}
+    \text{CSMR}_c
+    + \sum_{c\,\in\, \text{salmon}}
+    \text{EMR}_{\text{state}_c(i)} \\
+    &\qquad\qquad + \left(\sum_{c\,\in\, \text{blue}}
+    \text{CSMR}_c
+    + \sum_{c\,\in\, \text{green}}
+    \text{EMR}_{\text{state}_c(i)}\right)
+    \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)},
+
+because
+
+.. math::
+
+  \text{csmr}_c^*(i) =
+  \begin{cases}
+  \text{CSMR}_c
+    & \text{if $c \in$ pink (unaffected, unmodelled)}, \\
+  \text{EMR}_{\text{state}_c(i)}
+    & \text{if $c\in $ salmon (unaffected, modelled)}, \\
+  \text{CSMR}_c\cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}
+    & \text{if $c \in$ blue (affected, unmodelled)}, \\
+  \text{EMR}_{\text{state}_c(i)}\cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}
+    & \text{if $c \in$ green (affected, modelled)}.
+  \end{cases}
+
+.. _PAF information:
+
+.. important::
+
+   The population attributable fraction (PAF) in the above equation represents PAFs for most-detailed causes (they are all roughly equal tp 0.94) affected by LBWSG (or as calculated in vivarium from LBWSG relative risks and exposure). This approach assumes that relative risks for LBWSG applies only to causes that GBD considers to be affected by LBWSG (green and blue causes).
 
    `LBWSG PAF notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/LBWSG%20exposure%2C%20rrs%2C%20pafs.ipynb>`__.
 
 .. todo::
-   - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other. 
-   - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF 
-   - here, we can also discuss the other equations that thought up but did not end up using. 
-   - this way the following section will have more context. 
+   - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other.
+   - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF
+   - here, we can also discuss the other equations that thought up but did not end up using.
+   - this way the following section will have more context.
 
 Assumptions and limitations
 +++++++++++++++++++++++++++
- 
+
 Strengths
 
    o  This approach is consistent with GBD methodology and avoids artificially decreasing the mortality rate for individual causes that are not affected by improvements in LBWSG (due to reverse causality or other concerns).
-   
+
 Limitations
 
    o  The risk appendix of GBD 2017 says that the data available to compute the relative risks (RR) for the risk exposure LBWSG are for the outcome of all-cause mortality. GBD then evaluated the relative risk of all-cause mortality across all available sources.  Based on criteria of biologic plausibility, a list of causes for which GBD believes LBWSG impacts mortality through were selected. Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded. GBD assumed that the relative risks for all-cause mortality rates by LBWSG category applied equally to mortality rates from each of these blue causes only and did not apply to any other GBD causes in order to calculate the population attributable burden due to LBWSG; in other words, the conservatively ignored the potential impact of LBWSG on mortality due to causes that did not meet their causal criteria. We are choosing to apply the RRs only to this list of LBWSG-affected causes. We believe this is consistent with GBD's approach but may not fully reflect what the RRs capture.
@@ -350,14 +472,14 @@ Bias
 
    Notably, it is uncertain if this approach will cause an exaggeration or underestimation of the impact of LBWSG on mortality in the neonatal age groups in our models compared with real-life because it requires an evaluation of the relative risks of mortality by LBWSG exposure category stratified by affected and unaffected causes and these data are not readily available to us.
 
-    o   One source of bias could be from not including the reverse-causality causes: suppose we have a nutritional supplement that impacts LBWSG. This supplement was tested in an RCT in western Kenya where malaria is prevalent. Suppose there is some causal link in both directions between birthweight and malaria. For example, malaria during pregnancy can cause low birth weight babies due to the accumulation of parasites in the placentas of pregnant women. She can also pass on the malaria to the baby before or during childbirth. A low birth weight baby may also be more susceptible to diseases including malaria. So if a baby is low birth weight and has malaria, we do not know 100% whether this was 'congenital malaria' acquired from the mother before or during delivery and the mother's malaria caused its low birth weight, or whether the baby was born low birth weight malaria-free but had higher likelihood of acquiring malaria from an infectious mosquito bite. Without a well designed study, it is hard to know. Hence GBD did not include malaria in the list of LBWSG-affected causes. If we improve birthweight in this population due to the supplement, we also decrease incidence of malaria in the latter case (the low birth weight baby born malaria free, but then acquired it because it was low birth weight), and decrease mortality from malaria. However, this effect through malaria will not be captured in our model, so our modelled effect on neonatal mortality might be less than the empirial effect of this supplement on neonatal mortality. 
+    o   One source of bias could be from not including the reverse-causality causes: suppose we have a nutritional supplement that impacts LBWSG. This supplement was tested in an RCT in western Kenya where malaria is prevalent. Suppose there is some causal link in both directions between birthweight and malaria. For example, malaria during pregnancy can cause low birth weight babies due to the accumulation of parasites in the placentas of pregnant women. She can also pass on the malaria to the baby before or during childbirth. A low birth weight baby may also be more susceptible to diseases including malaria. So if a baby is low birth weight and has malaria, we do not know 100% whether this was 'congenital malaria' acquired from the mother before or during delivery and the mother's malaria caused its low birth weight, or whether the baby was born low birth weight malaria-free but had higher likelihood of acquiring malaria from an infectious mosquito bite. Without a well designed study, it is hard to know. Hence GBD did not include malaria in the list of LBWSG-affected causes. If we improve birthweight in this population due to the supplement, we also decrease incidence of malaria in the latter case (the low birth weight baby born malaria free, but then acquired it because it was low birth weight), and decrease mortality from malaria. However, this effect through malaria will not be captured in our model, so our modelled effect on neonatal mortality might be less than the empirial effect of this supplement on neonatal mortality.
 
     o  GBD assumes that the RR's for CSMR for each LBWSG-affected-causes (green and blue) are the same as the overall RR for ACMR (RR_acmr). This won't matter for the blue causes that we aren't modeling explicitly, but for the green causes that we *are* modeling, it could throw off our results depending on whether the RR's for that cause (RR_csmr) is larger or smaller than the overall RR for all causes (RR_acmr).
 
-    o  Another source of bias could be from not applying the RRs to the causes they are intended for. Following from the limitation mentioned above, we are applying the RRs in an inconsistent manner with that they represent: they represent a ratio of ACMRs (let's call it :math:`RR_{acmr}`), but we are using them as a ratio of all-"affected (blue and green) cause"-mortality-rates (let's call this :math:`RR_{aacmr}`). We do not know whether the :math:`RR_{acmr}` is larger or smaller than the :math:`RR_{aacmr}`. 
+    o  Another source of bias could be from not applying the RRs to the causes they are intended for. Following from the limitation mentioned above, we are applying the RRs in an inconsistent manner with that they represent: they represent a ratio of ACMRs (let's call it :math:`RR_{acmr}`), but we are using them as a ratio of all-"affected (blue and green) cause"-mortality-rates (let's call this :math:`RR_{aacmr}`). We do not know whether the :math:`RR_{acmr}` is larger or smaller than the :math:`RR_{aacmr}`.
 
       | If the :math:`RR_{acmr}` < :math:`RR_{aacmr}`, we are underestimating deaths.
-      | If the :math:`RR_{acmr}` > :math:`RR_{aacmr}` then we are over-estimating deaths.    
+      | If the :math:`RR_{acmr}` > :math:`RR_{aacmr}` then we are over-estimating deaths.
 
    This can be illusted by the following equations:
 
@@ -372,13 +494,13 @@ Bias
 
                        = :math:`\frac{\text{LBW_deaths_affected}}{\text{NBW_deaths_affected}} \times \frac{\text{NBW_births}}{\text{LBW_births}}`
 
-   Since we do not know the ratio of the number of :math:`\text{LBW_deaths_unaffected}` to the number of :math:`\text{NBW_deaths_unaffected}`, we do not know the direction of bias. We would need to analyse the stratified microdata. 
+   Since we do not know the ratio of the number of :math:`\text{LBW_deaths_unaffected}` to the number of :math:`\text{NBW_deaths_unaffected}`, we do not know the direction of bias. We would need to analyse the stratified microdata.
 
    .. todo::
       check to see (LBW_deaths_unaffected / NBW_deaths_unaffected) ?<? (LBW_deaths_affected / NBW_deaths_affected) or the reverse inequality?
 
       - if this above inequality is true, then it implies RR_acmr < RR_aacmr (the math checks out)
-      - at first glance, the above inequality seems more likely than the reverse, BUT the unaffected causes include reverse causality causes which can complicate things. 
+      - at first glance, the above inequality seems more likely than the reverse, BUT the unaffected causes include reverse causality causes which can complicate things.
       - thus, we should dig into a bit more later
 
 Risk Exposure Model Diagram
