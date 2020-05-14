@@ -217,10 +217,11 @@ Because the relative risks from GBD are for all-cause mortality in the early and
    - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
    - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
-We are interested in applying the PAF and relative risk to only the causes that
-GBD considers to be affected by LBWSG (green and blue). An example of these
-causes from the :ref:`large-scale-food fortification concept model
-<2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below:
+We are interested in applying the PAF and relative risk only to the causes that
+GBD considers to be affected by LBWSG (green and blue). An example of the
+color-coded cause breakdown from the :ref:`large-scale-food fortification
+concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is
+shown below:
 
 
 +---------------------+------------------------------------------------------------------------+
@@ -297,13 +298,18 @@ causes from the :ref:`large-scale-food fortification concept model
   To pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
 
 At any time :math:`t` in a Vivarium simulation, each individual  :math:`i` has
-an instantaneous mortality rate (i.e. mortality hazard) :math:`\text{mr}(i) =
-\text{mr}_t(i)` that is dependent on which cause states the individual is in at
-time :math:`t`. Our goal is do define the individual mortality hazard
-:math:`\text{mr}(i)` so that the LBWSG PAF and relative risks are applied only
-to the causes that GBD considers to be affected by LBWSG (green and blue), while
-preserving the requirement that the expected value of the mortality hazard
-equals the all-cause mortality rate:
+an instantaneous mortality rate (i.e. `mortality hazard <hazard function_>`_)
+:math:`\text{mr}(i) = \text{mr}_t(i)` that dictates how likely they are to die
+in the next instant. The mortality hazard is dependent on which cause states the
+individual is in at time :math:`t`. Our goal is to define the individual
+mortality hazard :math:`\text{mr}(i)` so that the LBWSG relative risks for
+mortality are applied only to the causes that GBD considers to be affected by
+LBWSG (green and blue), while preserving the requirement that the `expected
+value`_ (denoted by :math:`E`) of the mortality hazard equals the all-cause
+mortality rate for the individual's location, year, age, and sex:
+
+.. _hazard function: https://en.wikipedia.org/wiki/Survival_analysis#Hazard_function_and_cumulative_hazard_function
+.. _expected value: https://en.wikipedia.org/wiki/Expected_value
 
 .. math::
 
@@ -314,7 +320,13 @@ All-cause mortality is the sum of all the cause-specific mortality rates
 
 .. math::
 
-   \text{ACMR} =  \sum\limits_{\text{pink}}\text{CSMR} + \sum\limits_{\text{salmon}}\text{CSMR} + \sum\limits_{\text{green}}\text{CSMR} + \sum\limits_{\text{blue}}\text{CSMR}
+   \text{ACMR} =  \sum_{\text{pink}}\text{CSMR} +
+   \sum_{\text{salmon}}\text{CSMR} + \sum_{\text{green}}\text{CSMR} +
+   \sum_{\text{blue}}\text{CSMR}.
+
+Likewise, we will decompose the individual mortality hazard :math:`\text{mr}(i)`
+as a sum of individual-level cause-specific mortality hazards, defined according
+to the green/blue/salmon/pink breakdown (i.e. modelled vs. unmodelled causes and affected vs. unaffected causes).
 
 .. note::
 
@@ -331,16 +343,19 @@ All-cause mortality is the sum of all the cause-specific mortality rates
     - \sum\limits_{\text{blue}}\text{CSMR}
 
   This equation can be substituted into :eq:`mortality_hazard` below to
-  compute the mortality hazard for an individual simulant.
+  eliminate the pink causes from the computation of the mortality hazard for an
+  individual simulant.
 
-To compute the individual mortality hazard :math:`\text{mr}(i)`, for the
-modelled causes (green and salmon) we will need the cause-state-dependent excess
-morality rates (EMR) instead of the CSMR, which is the average EMR over all
-cause states. For example, the excess mortality rates for a two-state cause
-(with condition / without condition) would be:
+We now describe our strategy for defining the individual mortality hazard
+:math:`\text{mr}(i)`, taking an individual's LBWSG category into account. For
+the modelled causes (green and salmon) we will use the excess morality rates
+(EMRs) instead of the CSMR. The EMR is cause-state dependent while the CSMR is
+the average EMR over all cause states (including the "without condition" state).
+For example, the excess mortality rates for a two-state cause (with condition /
+without condition) would be:
 
    - mortality rate due to cause if the person does NOT have the condition: EMR=0
-   - mortality rate due to cause if the person HAS the condition: EMR of the condition
+   - mortality rate due to cause if the person HAS the condition: EMR of the condition (with EMR > CSMR)
 
 We will need the following variables:
 
@@ -358,11 +373,11 @@ We will need the following variables:
   &\text{PAF} &&= \text{PAF of LBWSG for affected causes at most-detailed cause level}
   \end{align*}
 
-See the :ref:`note below <PAF information>` about how to compute the above PAF.
-Note that since :math:`\text{state}_c(i)` implicitly depends on the time
-:math:`t`, the individual mortality hazard will also depend on time. Using the
-above definitions, we will define the following individual mortality rates
-below:
+See the :ref:`note below <PAF information>` about how to compute the above PAF
+or pull it from GBD. Note that since :math:`\text{state}_c(i)` implicitly
+depends on the time :math:`t`, the individual mortality hazard will also depend
+on time. Using the above variables, we will define the following individual
+mortality rates below:
 
 .. math::
   :nowrap:
@@ -387,14 +402,21 @@ hazard for individual :math:`i` to be
   \end{cases}
 
 The descriptor "conditional" here means that the above individual csmr's can be
-interpreted as the cause-level expected CSMR's `conditioned <conditional
-expectation_>`_ (i.e. `stratified <stratification_>`_) on all the individual
-cause states observed in the simulation. Now we additionally stratify by LBWSG
-category: Define the LBWSG-stratified cause-specific mortality hazard of
-:math:`c` for individual :math:`i` to be
+interpreted as the expected cause-level CSMR's `conditioned <conditioning_>`_
+(i.e. `stratified <stratification_>`_) on all the individual cause states
+observed in the simulation (note that we can only observe cause states for
+*modelled* causes). In other words, :math:`\text{csmr}_c(i)` is the `conditional
+expectation`_ of individual :math:`i`'s cause-specific mortality hazard, given
+whether :math:`c` is one of the causes we are modeling, and if so, given which
+of :math:`c`'s cause states the individual is in.
 
+.. _conditioning: https://en.wikipedia.org/wiki/Conditioning_(probability)
 .. _conditional expectation: https://en.wikipedia.org/wiki/Conditional_expectation
 .. _stratification: https://en.wikipedia.org/wiki/Stratification_(clinical_trials)
+
+Now we additionally stratify/condition the csmr's by the individual's LBWSG
+category. Define the LBWSG-stratified cause-specific mortality hazard of
+:math:`c` for individual :math:`i` to be
 
 .. math::
 
@@ -407,8 +429,14 @@ category: Define the LBWSG-stratified cause-specific mortality hazard of
   \end{cases}
 
 As described above, we are applying the PAF and relative risks only to the
-causes GBD considers affected by LBWSG. Then the individual's total mortality
-hazard, stratified by all modeled cause states and LBWSG risk categories, is
+causes GBD considers affected by LBWSG. For the affected causes, we first
+compute the risk-deleted mortality rate by multiplying the individual csmr by
+:math:`(1-\text{PAF})`, then multiply by the relative risk for the individual's
+LBWSG category to get the cause-specific mortality hazard corresponding to that
+risk category.
+
+The individual's total mortality hazard, stratified by all modeled cause states
+and LBWSG risk categories, is then
 
 .. math::
   :label: mortality_hazard
@@ -450,6 +478,8 @@ because
    `LBWSG PAF notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/LBWSG%20exposure%2C%20rrs%2C%20pafs.ipynb>`__.
 
 .. todo::
+
+   - add a proof that the expected value of :math:`\text{mr}(i)` equals the ACMR.
    - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other.
    - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF
    - here, we can also discuss the other equations that thought up but did not end up using.
