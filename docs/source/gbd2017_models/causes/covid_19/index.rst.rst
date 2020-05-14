@@ -13,10 +13,15 @@ Disease Overview
 
 .. todo::
 
-   Add a general clinical overview of the covid-19.
+   Add a general clinical overview of the covid-19, any relevant research.
 
-   Define :math:`R_{0}`, :math:`R_{effective}`.
+:math:`R_{0}` will be defined here as the population level average number of infections a single individual with covid-19 will transmit over the entire infectious period assuming a completely susceptible population and typical mobility and population density.
 
+:math:`R_{0}'` will be defined here as the population level average number of infectiouns a single individual with covid-19 will transmit over the entire infectious period assuming a completely susceptible population and a given level of mobility and population density.
+
+:math:`R_{effective}` will be defined here as the number of infections a single individual with covid-19 will transmit over the entire infectious period at a given point in time.
+
+Notably, while :math:`R_{0}`, :math:`R_{0}'`, and :math:`R_{effective}` are population level average parameters, the distribution of these parameters at the *individual level* will be highly right skewed, indicating that many infectious individuals will transmit fewer infections than the population mean R value, while some individuals will transmit many more infections that the population mean value (e.g. mass transmission events).
 
 GBD 2017 Modeling Strategy
 --------------------------
@@ -38,17 +43,20 @@ Scope
 This cause model requires data exogenous to the model:
 
 - :math:`R_{0}` for covid-19 (derived from IHME model)
+
+  * Notably, :math:`R_{0}'` can be used to model counterfactual scenarios
+
 - Initial prevalence of each disease state (from IHME model forecasts)
 
 Additionally, this cause model strategy aims to model the following parameters (which also require exogenous data sources):
 
-- Susceptible/Exposed/Infected/Recovered disease states
-- Symptomatic/Asymptomatic infected disease states
+- Susceptible/Exposed/Infectious/Recovered disease states
+- Symptomatic/Asymptomatic infectious disease states
 - Age- and comorbidity-specific mortality rates
 - Transmission related parameters, including
 
-  * Self-quarentine of symptomatic individuals, highly susceptible individuals, etc.
-  * Contact tracing of exposed individuals
+  * Self-quarantine of symptomatic individuals, highly susceptible individuals, etc.
+  * Contact tracing/testing of exposed/infected individuals
   * Self-protection measures such as wearing a mask
 
 Assumptions and Limitations
@@ -57,13 +65,19 @@ Assumptions and Limitations
 Assumptions: 
 
 - No birth prevalence of covid-19
-- Individuals are infectious only when they occupy the I (infected) disease state
-- Self-quarentined individuals will not be infected
+- Self-quarantined individuals will not become exposed to covid-19
 - Random mixing of the population
 
 .. note::
 
   The last two assumptions may be revisited by incorporating additional complexity
+
+Model Population/Demography
++++++++++++++++++++++++++++
+
+.. todo::
+
+  This section
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -84,15 +98,15 @@ S -> E -> I -> R
      - Exposed
      - Exposed to covid-19, but not yet infected
    * - I
-     - Infected
-     - Infected with covid-19; symptomatic OR asymptomatic
+     - Infectious
+     - Infectious with covid-19; symptomatic OR asymptomatic
    * - R
      - Recovered
      - Recovered from covid-19, no longer susceptible
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
+ 
 Indicator variables:
 
 .. list-table:: Indicator Variable Definitions
@@ -100,17 +114,17 @@ Indicator variables:
    :header-rows: 1
 
    * - Variable
-     - State Name
+     - Values
      - Definition
    * - symptomatic
      - 1 = symptomatic
        
        0 = asymptomatic
      - An individual is expressing covid-19 symptoms
-   * - self_quarentine
-     - 1 = self quarentine
+   * - self_quarantine
+     - 1 = self quarantine
 
-       0 = no self quarentine
+       0 = no self quarantine
      - An individual is self isolating in their home
    * - traced
      - 1 = contact traced or tested
@@ -194,7 +208,7 @@ States Data
      - N/A
      - N/A
 
-self_quarentine prevalence (regardless of state):
+self_quarantine prevalence (regardless of state):
 
   if traced=1 and symptomatic=1, XXX
 
@@ -242,12 +256,12 @@ Assign each simulant an integer value, num_i
 
 :math:`R_{0}` = XXX (with skewed distribution)
 
-For each individual in the infected state for which self_quarentine=0, sample from the pool of num_i values for *all* simulants :math:`R_{0}` times. 
+For each individual in the infected state for which self_quarantine=0, sample from the pool of num_i values for *all* simulants :math:`R_{0}` times. 
 
 For the simulant corresponding to each of the selected num_i value transition from the S to E state if the following conditions are met:
 
 - Simulant is in the S state
-- self_quarentine = 0
+- self_quarantine = 0
 
 Data Sources
 """"""""""""
@@ -259,7 +273,7 @@ Data Sources
 Validation Criteria
 +++++++++++++++++++
 
-For self-quarentine prevalence data for the baseline scenario should be chose to accurately reflect the mobility data in the existing IHME forecast model. The microsimulation results should compare to the IHME forecasts assuming that this is the case.
+For self-quarantine prevalence data for the baseline scenario should be chose to accurately reflect the mobility data in the existing IHME forecast model. The microsimulation results should compare to the IHME forecasts assuming that this is the case.
 
 References
 ----------
