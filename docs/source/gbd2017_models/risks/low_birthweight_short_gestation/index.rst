@@ -387,10 +387,14 @@ hazard for individual :math:`i` to be
   \end{cases}
 
 The descriptor "conditional" here means that the above individual csmr's can be
-interpreted as the cause-level expected CSMR's conditioned (i.e. stratified) on
-all the individual cause states observed in the simulation. Now we additionally
-stratify by LBWSG category: Define the LBWSG-stratified cause-specific mortality
-hazard of :math:`c` for individual :math:`i` to be
+interpreted as the cause-level expected CSMR's `conditioned <conditional
+expectation_>`_ (i.e. `stratified <stratification_>`_) on all the individual
+cause states observed in the simulation. Now we additionally stratify by LBWSG
+category: Define the LBWSG-stratified cause-specific mortality hazard of
+:math:`c` for individual :math:`i` to be
+
+.. _conditional expectation: https://en.wikipedia.org/wiki/Conditional_expectation
+.. _stratification: https://en.wikipedia.org/wiki/Stratification_(clinical_trials)
 
 .. math::
 
