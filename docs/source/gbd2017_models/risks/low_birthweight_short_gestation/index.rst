@@ -63,17 +63,14 @@ Low Birth Weight and Short Gestation
 .. contents::
   :local:
 
-Risk exposure overview
-++++++++++++++++++++++
+Risk overview
++++++++++++++
 
 .. todo::
   Describe this risk
 
 GBD 2017 modelling strategy
 +++++++++++++++++++++++++++
-
-Risk exposure description in GBD 2017
--------------------------------------
 
 The meaning of the “low birth weight” and “short gestation” in GBD have subtle definitional differences
 compared to other usages of “low birth weight” and “short gestation” in literature. The term “low birth
@@ -104,8 +101,11 @@ causes, and relative to the joint TMREL.
         <2017_cause_neonatal_preterm>` is
         100% attributable to this risk.
 
+Risk exposure in GBD 2017
+-------------------------
+
 How is the exposure estimated in GBD 2017
------------------------------------------
+'''''''''''''''''''''''''''''''''''''''''
 
 To model the joint distribution of exposure of low birth weight and short gestation for each location,
 year, and sex estimated in GBD 2017, three types of information are used:
@@ -115,7 +115,7 @@ year, and sex estimated in GBD 2017, three types of information are used:
    - Copula family and parameters, specifying correlation between gestational age and birth weight distributions
 
 Exposure modelling strategy in GBD 2017
----------------------------------------
+'''''''''''''''''''''''''''''''''''''''
 
 GBD 2017 creates a joint distribution of birth weight and gestation age to create the low birth weight short gestation risk factor. It takes birth weight and gestational age microdata from 11 locations and uses ensemble model methods standard to GBD risk factors, to first create separate distributions of birth weight and gestational age for every location-sex-year. Then to model the joint distribution of gestational age and birth weight from separate distributions, the Spearman correlation for each country where joint microdata was available was pooled across all years of data available. This ranged from 0.25-0.49. Pooling across all countries in the dataset, the overall Spearman correlation was 0.38. Copula modelling was used to model joint distributions between the birth weight and gestational age marginal distributions. The joint distribution is then divided into 500g by 2wk bins. Birth prevalence was then calculated for each 500g by 2wk bin.
 
@@ -129,20 +129,23 @@ GBD 2017 creates a joint distribution of birth weight and gestation age to creat
 
 .. image:: lbwsg_categories.svg
 
+Risk effects in GBD 2017
+------------------------
+
 Relative risks estimate in GBD 2017
------------------------------------
+'''''''''''''''''''''''''''''''''''
 
 **The available data for deriving relative risk was only for all-cause mortality.** For each location, the risk of all-cause mortality at the *early neonatal* period and *late neonatal* period at joint birth weight and gestational age combinations was calculated. In all datasets except for the United States, sex-specific data were combined to maximise sample size. The United States analyses were sex-specific. Relative risks were then calculated for each 500g and 2wk combination.
 
 TMREL in GBD 2017
------------------
+'''''''''''''''''
 For each of the country-derived relative risk surfaces, the 500 g and 2-week gestational age joint bin with the lowest risk was identified. This bin differed within each country dataset. To identify the universal 500 g and 2-week gestational age category that would serve as the universal TMREL, all bins that were identified as the TMREL was chosen. This is cat55 (40-42ga, 3500-400g) and cat56 (40-42ga, 4000-4500g)
 
 .. note::
    the TMREL categories listed in GBD 2017 risk appendix are wrong.
 
 Causes that are affected by LBWSG
----------------------------------
+'''''''''''''''''''''''''''''''''
 
 The available data for deriving relative risk was only for all-cause mortality. The exception was the USA
 linked infant birth-death cohort data, which contained 3-digit ICD causes of death, but also had nearly
@@ -191,7 +194,7 @@ The final list of outcomes included in calculating the attributable burden for L
   discuss in detail the PAF of 1 causes.
 
 Restrictions
-------------
+''''''''''''
 
 LBWSG risk effect on all-cause moratality only applies to the early neonatal and late neonatal age groups.
 
@@ -209,8 +212,8 @@ LBWSG risk effect on all-cause moratality only applies to the early neonatal and
 Vivarium modelling strategy
 +++++++++++++++++++++++++++
 
-Risk Esposure Distribution
---------------------------
+Risk exposure in Vivarium
+-------------------------
 
 In GBD 2017, LBWSG exposure is modeled as an ordered polytomous distribution
 specifying the prevalence of births in each 500g-2week birthweight-ga
@@ -231,8 +234,8 @@ in the Vivarium Data Analysis repo.
     probably pretty close to 500g, not equally likely to be <1 gram versus
     499-500 grams.
 
-Risk Effects
-------------
+Risk effects in Vivarium
+------------------------
 
 Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first decompose all-cause mortality rate (ACMR) as the sum of:
 
