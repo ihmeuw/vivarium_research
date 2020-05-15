@@ -1846,6 +1846,74 @@ The procedure here uses the standard coverage gap framework:
 Desired Model Outputs
 ---------------------
 
+.. list-table:: Priorities
+  :widths: 1 5
+  :header-rows: 1
+
+  * - Priority
+    - Definition
+  * - High
+    - Needed for client
+  * - Med
+    - Needed for primary verification & validation
+  * - Low
+    - Needed for additional V&V or research
+
+.. csv-table:: Output Summary
+  :file: output_summary.csv
+  :widths: 1 1 1 1 1 1 1
+  :header-rows: 1
+
+.. csv-table:: Stratification Groups
+  :file: stratification_groups.csv
+  :widths: 1 1 1 1 1
+  :header-rows: 1
+
+.. list-table:: Final Outputs
+  :header-rows: 1
+
+  * - Measure
+    - Metric
+    - Numerator
+    - Denominator
+    - Priority
+  * -
+    -
+    -
+    -
+    -
+
+.. list-table:: Raw Outputs
+  :header-rows: 1
+
+  * - Measure
+    - Units
+    - Definition
+    - Standard Stratification
+    - Additional Stratification
+  * -
+    -
+    -
+    -
+    -
+
+.. todo::
+
+  - Fill out the above output tables and update the Output Summary table
+    accordingly.
+  - Take into account Ali's feedback from PR 226:
+
+      I wonder if there should be an additional column in the Priorities table
+      that indicates what stage of the model building process an output for V&V
+      is needed. I know we had previously discussed that once we validated a
+      cause model that it likely isn't necessary to report the state person time
+      for that cause any more. I'm not sure what the best way to include this
+      information might be, but maybe some columns that have the status of V&V
+      for each model build by the software engineers and then we can update the
+      table as "verified; no longer needed"? And others that we might want to
+      keep in as "verified; still needed". Just a thought! Otherwise I think
+      this looks good.
+
 Observers
 +++++++++
 

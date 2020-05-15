@@ -1,0 +1,27 @@
+Stratification by,Group,Definition,Defined When,Priority
+Year,2020,Simulants in 2020,Time of measurement,High
+Year,2021,Simulants in 2021,Time of measurement,High
+Year,2022,Simulants in 2022,Time of measurement,High
+Year,2023,Simulants in 2023,Time of measurement,High
+Year,2024,Simulants in 2024,Time of measurement,High
+Age group,Early Neonatal,Simulants aged 0-7 days,Time of measurement,High
+Age group,Late Neonatal,Simulants aged 7-28 days,Time of measurement,High
+Age group,Post-neonatal,Simulants aged 28-365 days,Time of measurement,High
+Age group,1 to 4,Simulants aged 1-4 years,Time of measurement,High
+Sex,Male,Male simulants,Simulant initialization,Med
+Sex,Female,Female simulants,Simulant initialization,Med
+Vitamin A coverage group,Uncovered,Simulant's household does not receive vitamin A fortification in baseline or intervention,Simulant initialization,Med
+Vitamin A coverage group,Covered in baseline,Simulant's household receives vitamin A fortification in baseline scenario,Simulant initialization,Med
+Vitamin A coverage group,Covered in intervention not baseline,Simulant's household receives vitamin A fortification in intervention scenario but not baseline scenario,Simulant initialization,Med
+Mother folic acid coverage group,Unknown,"Simulant born prior to start of simulation, hence mother's folic acid fortification status is unknown",Simulant initialization,Med
+Mother folic acid coverage group,Uncovered,Mother does not receive suffieicnt folic acid fortification in baseline or intervention,Simulant initialization,Med
+Mother folic acid coverage group,Covered in baseline,Mother receives sufficient folic acid fortification in baseline scenario,Simulant initialization,Med
+Mother folic acid coverage group,Covered in intervention not baseline,Mother receives sufficient folic acid fortification in intervention scenario but not baseline scenario,Simulant initialization,Med
+Mother iron coverage group,Unknown,"Simulant born prior to start of simulation, hence mother's iron fortification status is unknown",Simulant initialization,Med
+Mother iron coverage group,Uncovered,Mother does not receive suffieicnt iron fortification in baseline or intervention,Simulant initialization,Med
+Mother iron coverage group,Covered in baseline,Mother receives sufficient iron fortification in baseline scenario,Simulant initialization,Med
+Mother iron coverage group,Covered in intervention not baseline,Mother receives sufficient iron fortification in intervention scenario but not baseline scenario,Simulant initialization,Med
+Child iron coverage group,Uncovered,Child does not receive iron fortification,Simulant initialization,Med
+Child iron coverage group,Covered in baseline,Child receives iron fortification in baseline scenario,Simulant initialization,Med
+Child iron coverage group,Covered in intervention not baseline,Child receives iron fortification inintervention scenario but not baseline scenario,Simulant initialization,Med
+LBWSG category,[groups to be determined],[group definitions to be determined],Simulant initialization,Med
