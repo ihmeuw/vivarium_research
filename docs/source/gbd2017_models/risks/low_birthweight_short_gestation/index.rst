@@ -60,16 +60,17 @@
 Low Birth Weight and Short Gestation
 ====================================
 
-Risk exposure overview
-++++++++++++++++++++++
+.. contents::
+  :local:
 
-Describe this risk
+Risk overview
++++++++++++++
+
+.. todo::
+  Describe this risk
 
 GBD 2017 modelling strategy
 +++++++++++++++++++++++++++
-
-Risk exposure description in GBD 2017
--------------------------------------
 
 The meaning of the “low birth weight” and “short gestation” in GBD have subtle definitional differences
 compared to other usages of “low birth weight” and “short gestation” in literature. The term “low birth
@@ -100,8 +101,11 @@ causes, and relative to the joint TMREL.
         <2017_cause_neonatal_preterm>` is
         100% attributable to this risk.
 
+Risk exposure in GBD 2017
+-------------------------
+
 How is the exposure estimated in GBD 2017
------------------------------------------
+'''''''''''''''''''''''''''''''''''''''''
 
 To model the joint distribution of exposure of low birth weight and short gestation for each location,
 year, and sex estimated in GBD 2017, three types of information are used:
@@ -111,7 +115,7 @@ year, and sex estimated in GBD 2017, three types of information are used:
    - Copula family and parameters, specifying correlation between gestational age and birth weight distributions
 
 Exposure modelling strategy in GBD 2017
----------------------------------------
+'''''''''''''''''''''''''''''''''''''''
 
 GBD 2017 creates a joint distribution of birth weight and gestation age to create the low birth weight short gestation risk factor. It takes birth weight and gestational age microdata from 11 locations and uses ensemble model methods standard to GBD risk factors, to first create separate distributions of birth weight and gestational age for every location-sex-year. Then to model the joint distribution of gestational age and birth weight from separate distributions, the Spearman correlation for each country where joint microdata was available was pooled across all years of data available. This ranged from 0.25-0.49. Pooling across all countries in the dataset, the overall Spearman correlation was 0.38. Copula modelling was used to model joint distributions between the birth weight and gestational age marginal distributions. The joint distribution is then divided into 500g by 2wk bins. Birth prevalence was then calculated for each 500g by 2wk bin.
 
@@ -125,20 +129,23 @@ GBD 2017 creates a joint distribution of birth weight and gestation age to creat
 
 .. image:: lbwsg_categories.svg
 
+Risk effects in GBD 2017
+------------------------
+
 Relative risks estimate in GBD 2017
------------------------------------
+'''''''''''''''''''''''''''''''''''
 
 **The available data for deriving relative risk was only for all-cause mortality.** For each location, the risk of all-cause mortality at the *early neonatal* period and *late neonatal* period at joint birth weight and gestational age combinations was calculated. In all datasets except for the United States, sex-specific data were combined to maximise sample size. The United States analyses were sex-specific. Relative risks were then calculated for each 500g and 2wk combination.
 
 TMREL in GBD 2017
------------------
+'''''''''''''''''
 For each of the country-derived relative risk surfaces, the 500 g and 2-week gestational age joint bin with the lowest risk was identified. This bin differed within each country dataset. To identify the universal 500 g and 2-week gestational age category that would serve as the universal TMREL, all bins that were identified as the TMREL was chosen. This is cat55 (40-42ga, 3500-400g) and cat56 (40-42ga, 4000-4500g)
 
 .. note::
    the TMREL categories listed in GBD 2017 risk appendix are wrong.
 
 Causes that are affected by LBWSG
----------------------------------
+'''''''''''''''''''''''''''''''''
 
 The available data for deriving relative risk was only for all-cause mortality. The exception was the USA
 linked infant birth-death cohort data, which contained 3-digit ICD causes of death, but also had nearly
@@ -187,7 +194,7 @@ The final list of outcomes included in calculating the attributable burden for L
   discuss in detail the PAF of 1 causes.
 
 Restrictions
-------------
+''''''''''''
 
 LBWSG risk effect on all-cause moratality only applies to the early neonatal and late neonatal age groups.
 
@@ -205,10 +212,30 @@ LBWSG risk effect on all-cause moratality only applies to the early neonatal and
 Vivarium modelling strategy
 +++++++++++++++++++++++++++
 
-First, we convert the GBD 500g-2weeks birthweight-ga bins/categories to a joint continuous distribution using `Abie's notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb>`__.. We assume a uniform distribution within each bin/category.
+Risk exposure in Vivarium
+-------------------------
 
-.. note ::
-    That this is likely biasing towards overestimating extreme birthweights or gestational ages. For example, in the 0-500g category, most babies are probably pretty close to 500g, not equally probable to be 1 gram versus 499 grams.
+In GBD 2017, LBWSG exposure is modeled as an ordered polytomous distribution
+specifying the prevalence of births in each 500g-2week birthweight-ga
+bin/category.  We first convert this discrete exposure distribution into a
+continuous joint exposure distribution of birthweight and gestational age by
+assuming a uniform distribution of birthweights and gestational ages within each
+bin/category. In this way, each simulant can be assigned a continuously
+distributed birthweight and gestational age, which can then be easily mapped
+back to the appropriate risk category in GBD. Python code for achieving these
+transformations can be found in `Abie's notebook
+<https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb>`_
+in the Vivarium Data Analysis repo.
+
+.. note::
+
+    This strategy is likely biasing towards overestimating extreme birthweights
+    or gestational ages. For example, in the 0-500g category, most babies are
+    probably pretty close to 500g, not equally likely to be <1 gram versus
+    499-500 grams.
+
+Risk effects in Vivarium
+------------------------
 
 Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first decompose all-cause mortality rate (ACMR) as the sum of:
 
@@ -217,8 +244,17 @@ Because the relative risks from GBD are for all-cause mortality in the early and
    - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
    - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
-We are interested in applying the PAF and relative risk only to the causes that
-GBD considers to be affected by LBWSG (green and blue). An example of the
+We are interested in applying the PAF and relative risk only to the
+cause-specific mortality rates of the causes that GBD considers to be affected
+by LBWSG (green and blue). The rest of this section describes the details of how
+to do this. See the `Assumptions and Limitations`_ section for a discussion of
+the strengths and limitations of this approach, and a comparison with other
+possible strategies.
+
+Cause categories
+''''''''''''''''
+
+An example of the above
 color-coded cause breakdown from the :ref:`large-scale-food fortification
 concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is
 shown below:
@@ -297,6 +333,9 @@ shown below:
 
   To pull CSMRs for the blue causes, use measure_id for death and metric_id for rate
 
+Individual mortality hazard and all-cause mortality rate
+''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+
 At any time :math:`t` in a Vivarium simulation, each individual  :math:`i` has
 an instantaneous mortality rate (i.e. `mortality hazard <hazard function_>`_)
 :math:`\text{mr}(i) = \text{mr}_t(i)` that dictates how likely they are to die
@@ -345,6 +384,9 @@ to the green/blue/salmon/pink breakdown (i.e. modelled vs. unmodelled causes and
   This equation can be substituted into :eq:`mortality_hazard` below to
   eliminate the pink causes from the computation of the mortality hazard for an
   individual simulant.
+
+Defining the individual mortality hazard
+''''''''''''''''''''''''''''''''''''''''
 
 We now describe our strategy for defining the individual mortality hazard
 :math:`\text{mr}(i)`, taking an individual's LBWSG category into account. For
@@ -482,11 +524,22 @@ because
    - add a proof that the expected value of :math:`\text{mr}(i)` equals the ACMR.
    - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other.
    - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF
-   - here, we can also discuss the other equations that thought up but did not end up using.
-   - this way the following section will have more context.
+   - we can also discuss the other equations that thought up but did not end up using.
+   - this way the discussion in the assumptions and limitations section will have more context (perhaps most of the above things should go in that section).
 
-Assumptions and limitations
+Assigning a cause of death
+''''''''''''''''''''''''''
+
+.. todo::
+
+  Describe how to compute the probability distribution for assigning a cause of
+  death given that a simulant died.
+
+Assumptions and Limitations
 +++++++++++++++++++++++++++
+
+Apply relative risks only to causes affected by LBWSG in GBD
+------------------------------------------------------------
 
 Strengths
 
