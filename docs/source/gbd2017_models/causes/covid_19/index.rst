@@ -14,6 +14,69 @@ Disease Overview
 IHME Covid Team Modeling Strategy
 ---------------------------------
 
+Covid-19 is not included in currently available GBD study data. Rather, we will use custom data for all parameters in this cause model using available data from the existing IHME covid-19 forecasting model.
+
+IHME's existing covid-19 models have fit covariate estimates for **population density,  relative mobility, testing capacity, and temperature.** values over time. Below is a brief overview of the SEIR component of the IHME forecast model.
+
+The steps that the SEIR component of the forecast model follows are:
+
+#. Fit an SEIR model (e.g. fit :math:`\beta(t)`) to past and recent death model output for all locations
+
+#. Regress :math:`\beta(t)` on available covariates
+
+#. Forecast time-varying covariates into the future
+
+#. Combine regression with forecasts to forecast :math:`\beta(t)`
+
+#. Run forecasted :math:`\beta(t)` through SEIR model to forecast infections
+
+#. Calculate deaths from infections and infection fatality ratio (IFR)
+
+Notably, the IHME forecast SEIR component includes a dual infectious state, :math:`I_{1}` and :math:`I_{2}`. The following equations represent the differential equations for each state in the SEIR component used in the IHME forecast model:
+
+:math:`dS/dt = -(\beta(t)S(I_1+I_2)^\alpha)/N`
+
+:math:`dE/dt = (\beta(t)S(I_1+I_2)^\alpha)/N - \sigma E`
+
+:math:`dI_1/dt = \sigma E - \gamma_1 I_1`
+
+:math:`dI_2/dt = \gamma_1 I_1 - \gamma_2 I_2`
+
+:math:`dR/dt = \gamma_2 I_2`
+
+Where,
+
+.. list-table:: Parameter Definitions
+   :widths: 5 15
+   :header-rows: 1
+
+   * - Parameter
+     - Definition
+   * - :math:`S`, :math:`E`, :math:`I_1`, :math:`I_2`, and :math:`R`
+     - Number of individuals in respective model state
+   * - :math:`N`
+     - Number of individuals in all model states
+   * - :math:`\beta(t)`
+     - Degree of transmission (fit to/driven by model covariates). Approximately average number of contacts per person per time multiplied by the disease transmission probability of a contact between an infectious and susecptible individual
+   * - :math:`\alpha`
+     - Parameter to account for cluster nature of population transmission network. Ex: if alpha < 1, when the infectious population is large  the force of infection is attenuated
+   * - :math:`\sigma`
+     - Rate at which an exposed person becomes infectious (enteres the :math:`I_1` state), i.e. :math:`1/\text{duration}_{E}`
+   * - :math:`\gamma_1`
+     - Rate at which an individual transitions from :math:`I_1` to :math:`I_2`, i.e. :math:`1/\text{duration}_{I_{1}}`
+   * - :math:`\gamma_2`
+     - Rate at which an infectious individual (:math:`I_2`) recovers, i.e. :math:`1/\text{duration}_{I_{2}}`
+
+.. todo::
+
+  Obtain precise definition of :math:`I_1` versus :math:`I_2`
+
+.. note::
+
+	In standard SEIR models, the parameter :math:`\beta(t)` defined here is often a *constant* parameter that represents the average number of contacts per person per time multiplied by the transmission probability of a contact between an infectious and susceptible individual (equal to :math:`R_0` when unit time is equal to the duration of the infectious period).
+
+	However, as described above, the :math:`\beta(t)` parameter is a function of time the considers the time-varying covariates used in the IHME forecasting model, which allows for the consideration of changes in relative mobility (which could be considered a proxy variable for the number of social contacts per person per time).
+
 Vivarium Modeling Strategy
 --------------------------
 
