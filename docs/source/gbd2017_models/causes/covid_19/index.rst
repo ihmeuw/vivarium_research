@@ -11,6 +11,20 @@ Covid-19 Custom SEIR Vivarium Cause Model
 Disease Overview
 ----------------
 
+.. todo::
+
+   Add a general clinical overview of the covid-19, any relevant research.
+
+:math:`R_{0}` will be defined here as the population level average number of infections a single individual with covid-19 will transmit over the entire infectious period assuming a completely susceptible population and typical mobility and population density.
+
+  Notably, :math:`R_0` is approximately equal to the average number of social contacts per person per day multiplied by the transmission probability of a contact between an infectious individual multiplied by the average duration of the infectious period.
+
+:math:`R_{0}'` will be defined here as the population level average number of infectiouns a single individual with covid-19 will transmit over the entire infectious period assuming a completely susceptible population and a given level of mobility and population density.
+
+:math:`R_{t}` (or effective :math:`R`) will be defined here as the population average number of infections a single individual with covid-19 will transmit over the entire infectious period at a given point in time.
+
+Notably, while :math:`R_{0}`, :math:`R_{0}'`, and :math:`R_{t}` are population level average parameters, the distribution of these parameters at the *individual level* will be highly right skewed, indicating that many infectious individuals will transmit fewer infections than the population mean R value, while some individuals will transmit many more infections that the population mean value (e.g. mass transmission events).
+
 IHME Covid Team Modeling Strategy
 ---------------------------------
 
