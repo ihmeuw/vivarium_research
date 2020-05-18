@@ -539,9 +539,6 @@ The population attributable fraction is a quantification of the proportion of ca
 Bias in PAF Calculation
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-The following is a high-level summary of the paper *Confounding and Bias in the 
-Attributable Fraction* by [Darrow]_.
-
 The PAF can be calculated using the following formula:
 
 .. math::
@@ -613,8 +610,9 @@ the cases in the stratum.
 While we know equation (2) to be biased, we have had to use it in Vivarium 
 modeling due to insufficient data for use of equation (2) or (3).
 
-Darrow's paper examines the direction and magnitude of this bias for different 
-scenarios, which we recount here. This was achieved by generating synthetic 
+The following is a high-level summary of a the paper *Confounding and Bias in the 
+Attributable Fraction* by [Darrow]_, which examines the direction and 
+magnitude of this bias for different scenarios. This was achieved by generating synthetic 
 data with varying degrees of exposure prevalence, confounding, relative 
 risk for the disease (or cause), and prevalence of the confounder in the exposed 
 and unexposed groups. These scenarios were all examined for one dichotomous 
@@ -637,7 +635,7 @@ risk ratio:
 ..	math:: \frac{\text{crude RR}}{\text{Mantel-Haensel adjusted RR}}
 
 Specifically, a positive counfouding RR (:math:`>1.0`) resulted in a negative 
-PAF bias, and a negative counfounding RR (:math:`<1.0`) resulted in a positive 
+PAF bias, and a negative confounding RR (:math:`<1.0`) resulted in a positive 
 PAF bias.
 
 Furthermore, the direction of the confounding RR is fully determined by (1) the 
@@ -650,7 +648,7 @@ This relationship is captured as follows:
 	:widths: 4 4 3 3
 	:header-rows: 1
 
-	* - Counfounder-exp \n assoc.
+	* - Confounder-exp \n assoc.
 	  - Confounder-cond'n assoc.
 	  - Confouding ratio
 	  - PAF bias
@@ -676,7 +674,7 @@ Magnitude
 
 The magnitude of the PAF bias was shown to **increase** with:
 
-	- smaller exposure prevalence
+	- lower exposure prevalence
 
 	- smaller RR for the disease (or cause)
 
@@ -687,6 +685,10 @@ THe first two factors are intuitive: observe that in our measure of bias,
 prevalence will lead to a smaller true AF in the denominator, amplifying the 
 bias. Similarly, a smaller RR will also result in a smaller true AF, again 
 amplifing the bias.
+
+However, when examining the absolute difference between the biased and unbiased 
+AFs, note that Darrow did not find that lower exposure prevalence necessarily 
+caused a larger *absolute* AF bias.
 
 For the confounding RR, we note that by "magnitude" we mean distance from 
 confounding RR=1. That is, as a confouding RR<1 decreases, it causes an 
