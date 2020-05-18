@@ -524,16 +524,75 @@ because
    - add a proof that the expected value of :math:`\text{mr}(i)` equals the ACMR.
    - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other.
    - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF
+   - discuss the implications of including preterm birth in the causes to which we are applying the PAF and relative risks, and why we decided to do it this way (note that this is inherently inconsistent since preterm birth is PAF-of-1 with LBWSG, but this approach seems reasonably consistent with what the GBD modelers did, which itself is inconsistent).
    - we can also discuss the other equations that thought up but did not end up using.
    - this way the discussion in the assumptions and limitations section will have more context (perhaps most of the above things should go in that section).
 
 Assigning a cause of death
 ''''''''''''''''''''''''''
 
-.. todo::
+First we describe how cause of death is assigned in Vivarium's standard
+Mortality component, then we describe how to modify the procedure if LBWSG is
+included in the model.
 
-  Describe how to compute the probability distribution for assigning a cause of
-  death given that a simulant died.
+Cause of death *without* LBWSG
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In standard Vivarium models not including LBWSG, an individual's mortality
+hazard is defined to be
+
+.. math::
+
+  \text{mr}(i) := \text{BGMR} + \sum_{c\,\in\, \text{modelled}}
+  \text{EMR}_{\text{state}_c(i)},
+
+where :math:`\text{BGMR}` is the **background mortality rate** for the
+simulation, i.e. the mortality rate for simulant :math:`i`'s
+location/year/age/sex due to all unmodelled causes:
+
+.. math::
+
+    \text{BGMR}
+    := \sum_{c\,\in\, \text{unmodelled}} \text{CSMR}_c
+    = \text{ACMR} - \sum_{c\,\in\, \text{modelled}} \text{CSMR}_c.
+
+We also refer to BGMR as the **cause-deleted mortality rate**, since it is the
+mortality rate obtained by removing all the modelled causes.
+
+If simulant :math:`i` dies, the cause of death is assigned randomly, either to
+one of the modelled causes, or else to the category `other_causes` if the death
+was due to a cause we are not explicitly modeling. The random assignment is made
+by sampling from the following probability distribution:
+
+.. math::
+
+  P(\text{cause of death } = c)
+  = \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+  \quad\text{if $c\in$ modelled},
+
+and
+
+.. math::
+
+  P(\text{cause of death } = \textsf{other_causes})
+  = \frac{\text{BGMR}}{\text{mr}(i)}.
+
+Note that this does in fact define a probability distribution since
+
+.. math::
+
+  P(\text{cause of death } = \textsf{other_causes})
+  + \sum_{c\,\in\, \text{modelled}} P(\text{cause of death } = c) = 1.
+
+This probability distribution can be derived by observing that each individual cause-specific mortality hazard is the probability that i dies of cause c in the next instant.
+
+.. note::
+
+  The assignment of a cause of death should be independent of the decision of
+  whether the simulant died.
+
+Cause of death *with* LBWSG included
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
