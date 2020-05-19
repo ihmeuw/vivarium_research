@@ -1,3 +1,7 @@
+.. role:: underline
+    :class: underline
+
+
 ..
   Section title decorators for this document:
 
@@ -33,91 +37,285 @@
 Vivarium SwissRe Breast Cancer Screening
 ========================================
 
-Project Overview
-++++++++++++++++
-
-Modeling aim and objectives
-+++++++++++++++++++++++++++
-
-IHME will estimate the yearly number of cases of cancer detected per 100,000 insured population under specific screening practices to allow Swiss Re to identify the trends that are important to its critical illness product. This will facilitate their work to project how much they will pay out for certain cancer sites they picked in both a baseline and alternative scenario.
-
-Modeling design and methodology
-+++++++++++++++++++++++++++++++
-
-Model design
-------------
-
-A closed cohort of simulants carrying insurance for their entire life and stay in the simulation world from 2020 to 2040. We intend to model both sexes, 0 to 74 in 5 years age band, given age and sex weight distribution for a mix of four or five provinces in China. 
-
-Model location description
---------------------------
-Swiss Re suggests us to model a combination of provinces rather than select a proxy city such as Beijing or Shanghai. This is because GBD cancer incidence in Beijing/Shanghai is much lower than national average. Potential provinces they have mentioned in the last call are: Guangdong, Jiangsu, Jilin, and Gansu; where Guangdong and Jiangsu located in the south, Jilin and Gansu located in the north.
-
-
-Population description
-----------------------
-
-Our projections will focus on the population from a weighted blend of Chinese provinces that Swiss Re and IHME agree best resemble Swiss Re’s insured population, and on the annual number of cancer cases detected by cancer screening programs among the insured population from 2018 to 2030.
-
-.. todo::
-	population distribution table
-
-
-Causal diagram
---------------
-
 .. todo::
 
-	- insert causal diagrams (8,9,10);
-	- state and transition tables
+  list of abbreviations?
 
-Intervention
-------------
+  - DCIS Ductal carcinoma in situ
+  - CII critical illness insurance
+  - NCDs non-communicable diseases
 
-Outcomes intervention affects
------------------------------
+1.0 Background
+++++++++++++++
 
-Risk factors
--Family history
--High body-mass index
--High fasting plasma glucose
--Alcohol use
--Secondhand smoke
--Low physical activity
--Smoking
-
-Cause
--Breast cancer
- 
-.. todo::
-
-	- detail risks
-	- cause hierarchy
-
-
-Simulation scenarios
+1.1 Project overview
 --------------------
 
-IHME will produce both a baseline (business as usual) simulation, and an alternative scenario simulation in which key cancer screening practice or policies are implemented in our Vivarium simulation framework. The baseline scenario will incorporate expected trends in disease rates. The alternative scenario will augment the baseline scenario with the introduction and scale-up of new screening technology.
+Swiss Re is the world's second largest reinsurer. One of its China-based products is health insurance for routine breast cancer screening. It also offers critical illness insurance to cover treatment for those if cancer a diagnosis is made. 
 
-Screening algorithm
--------------------
+Swiss Re is interested in estimating the yearly number of detected breast cancer cases for their Chinese insured population under specific screening practices to identify the trends that are important to its critical illness insurance product. This will inform their projections of how much they will pay out for different cancer types under different screening coverage rates. 
 
-.. todo:: screening algorithm diagram
+Is Swiss Re also interested in mortality/morb from breast cancer? 
+
+.. todo::
+  
+  - add more project Background
 
 
-Baseline correlations
+1.2 Literature review
 ---------------------
 
-Effect sizes
-------------
+.. todo::
+ maybe just a brief summary of what the literature says about the risks/cause/risk-outcome pairs
+
+  - what is breast cancer?
+  - types of breast cancer?
+  - risk factors for breast cancer? 
+  - why breast cancer screening
+  - predictors of breast cancer screening
+  - types of breast cancer screening 
 
 
-Simulation model specs
-++++++++++++++++++++++
+2.0 Modeling aims and objectives
+++++++++++++++++++++++++++++++++
+
+To estimate the yearly number of cases of cancer detected per 100,000 insured population under specific screening practices to allow Swiss Re to identify the trends that are important to its critical illness insurance product.
+
+
+3.0 Modeling design and methodology
++++++++++++++++++++++++++++++++++++
+
+3.1 Model conceptual framework
+------------------------------
+
+3.1.1 Causal diagrams (directed acyclic graph)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:underline:`Breast cancer mortality/morbidity`
+
+  .. image:: causal_dagmodel1.svg
+
+:underline:`Breast cancer detection`
+
+  .. image:: causal_dagmodel2.svg
+
+**Outcome (O)**:
+
+  - Breast cancer diagnosis/detection stage 0, 1+
+
+**Most proximal risk factors (E)**:
+  
+  - (1) Breast cancer status
+  - (2) Screening 
+
+**Confounders (C)**:
+
+  -
+  -
+
+**Effect modifiers**:
+
+  -
+  -
+
+
+**Mediators (M)**:
+
+  -
+  -
+
+
+**Risk-factor: (1) breast cancer status**
+  
+  .. todo::
+
+    move this all to the breast cancer page and update things there
+
+  +------------------------------------------------------------------------------------------------------------------+
+  | Breast cancer types                                                                                              |
+  +===============+========================================================================+=============+===========+
+  | Disease stage | Definition                                                             | Sequaelae id| Notes     |
+  +---------------+------------------------------------------------------------------------+-------------+-----------+
+  | stage 0       | non-invasive breast cancers, such as DCIS (ductal carcinoma in situ).  |             | external  |
+  |               | Both cancerous and non-cancerous cells are within the boundaries of    |             | data need-|
+  |               | Both cancerous and non-cancerous cells are within the boundaries of    |             | ed for in |
+  |               | that part of the breast in which the tumor begins to grow and no       |             | situ brea-|
+  |               | evidence found of their invasion in the surrounding tissues.           |             | st cancer |
+  +---------------+------------------------------------------------------------------------+-------------+-----------+
+  | stage 1+      | invasive breast cancer, it exists when abnormal cells from within the  | s_277,s_5486|           |
+  |               | lobules or milk ducts split out into close proximity of breast tissue. | s_5489,s_279|           |
+  |               | Cancer cells can pass through the breast to different parts of the body| s_280,s_5492|           |
+  |               | through immune system or the systemic circulation.                     |             |           |
+  +---------------+------------------------------------------------------------------------+-------------+-----------+
+
+  :underline:`Compartmental model`
+
+    .. image:: compartmental_model.svg
+
+  STATES
+
+    * S =susceptible
+    * DCIS = with ductal carcinoma in situ (stage 0 non-invasive breast cancer)
+    * C = with condition (stage 1+ invasive breast cancer with 6 sequaelas as defined by GBD)
+
+  TRANSITIONS
+
+    * i_0 = incidence of DCIS
+    * i_1 = incidence of stage 1+ breast cancer (= GBD breast cancer incidence)
+    * r = remission rate from DCIS to S with treatment 
+
+  .. note::
+
+    1.  “Recovered” state is removed because no breast cancer remission data is available in GBD.
+    2.  We might overestimate the total number of deaths due to breast cancer. According to GBD definition, patients are considered cured if they have survived more than 10 years after the mastectomy. However, the excess mortality rate still exists in simulation and generates extra deaths if we plan to run the model over 10 years.
+
+
+  .. todo::
+    change SEIR model to rectangles/squares
+
+  +-------------------------------------------------------------------------------------------------------------+
+  | GBD breast cancer cause hierarchy                                                                           |
+  +===============+======================+=======+=================================+============================+    
+  | Cause name    | GBD cause id         | Level | Sequaelae                       |                            |    
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | All causes    | c_294                | 0     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | All NCDs      | c_409                | 1     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | Neoplasms     | C_410                | 2     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | Breast cancer | C_429                | 3     | diagnosis_and_primary_therapy_phase_of_breast_cancer (s_277) |
+  |               |                      |       | metastatic_phase_of_breast_cancer (s_279)                    |
+  |               |                      |       | terminal_phase_of_breast_cancer (s_280)                      |
+  |               |                      |       | controlled_phase_of_breast_cancer_with_mastectomy (s_5486)   |
+  |               |                      |       | controlled_phase_of_breast_cancer_without_mastectomy (s_5489)| 
+  |               |                      |       | mastectomy_from_breast_cancer_beyond_ten_years (s_5492)      |
+  +---------------+----------------------+-------+--------------------------------------------------------------+
+
+  .. image:: breast_cancer_hierarchy.svg
+
+
+  .. todo::
+
+    1) Re: first DAG are Swissre interested in mortality/morbidity? If so, do we need to include treatment in the mort/morb models?
+    2) DAG <--change into bubbles
+    3) from the second diagram, it seems there is correlation between insurance (therefore screening) and breast cancer, induced by common cause age/sex and family history 
+
+
+**Risk-factor: (2) screening**
+
+    .. todo::
+      - types of breast cancer screening
+      - Screening coverage equations
+      - sensitivity/specificity of screening methods
+      - how to estimate number of cases from screening results
+
+    .. image:: breast_cancer_screening_tree_China.svg
+
+
+**Outcome: Breast cancer detection**
+
+    .. todo:: 
+      how to model breast cancer detection given breast cancer status and screening? 
+
+
+
+3.2 Demographics
+----------------
+
+3.2.1 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A closed cohort of 100,000 male and female total simulants from age 15 to 95 will be modelled in 5 year-age bands from Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
+
+
+3.2.2 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
+
++---------------------------------+
+| Population size weight table    |
++============+===========+========+
+| Province   | Region    | Weight |
++------------+-----------+--------+
+| Tianjian   | North     | 18%    |
++------------+-----------+--------+
+| Jiangsu    | East      | 28%    |
++------------+-----------+--------+
+| Guangdong  | South     | 15%    |
+|            +-----------+--------+
+|            | Southwest | 7%     |
++------------+-----------+--------+
+| Henan      | Central   | 17%    |
++------------+-----------+--------+
+| Helilong-  | Northeast | 8%     |
+| jiang      +-----------+--------+
+|            | Northwest | 8%     |
++------------+-----------+--------+
+
+.. todo::
+ currently adds up to 101%
+
+
+3.3 Intervention
+----------------
+
+Scale-up of breast cancer screening coverage among insured population 
+
+3.4 Simulation scenarios
+------------------------
+
+:underline:`Baseline scenario`
+
+30% of insured Chinese female initiate breast cancer screening in 2020 and hold constant to 2040 for selected provinces, where
+
+  * 30 to 69 year olds with family history are provided with MRI every year;
+  * 30 to 44 year olds with previous treatment of DCIS but not family history are provided with ultrasound every year;
+  * 45 to 69 year olds with previous treatment of DCIS but not family history are provided with ultrasound and mammography every year;
+  30 to 69 year olds at average risk (no family history nor previous treatment of DCIS) are given mammography every two years.
+
+:underline:`Alternative scenario`
+
+30% of insured Chinese female initiated breast cancer screening in 2020, project to 75% by 2030 and hold constant till 2040 for selected provinces, where:
+
+  * same screening mechanisms as compared to baseline for different age groups and risk exposure level.
+
+.. note::
+
+ high-risk population for breast cancer are women 
+
+  ● with a family history of breast cancer (such that parent, sibling, or child with BRCA1/BRCA2 gene mutation or breast cancer).
+  ● with ductal/lobular carcinoma in-situ
+
+ -  GBD risk factors including BMI, smoking, and FPG are not used to determine the high-risk population for breast cancer.
+
+ - Initial screening coverage is a flexible number greater than 22.5%.
+
+ - The target screening coverage is fixed to 75% based on UK setting. 
+  
+ - Should we apply screening guidelines proposed by SR?
+
+
+4.0 Vivarium modelling components
++++++++++++++++++++++++++++++++++
+
+.. todo::
+
+	- insert vivarium causal diagram? any?
+
 
 Output meta-table shell
 +++++++++++++++++++++++
 
 Limitations
 +++++++++++
+
+a.  How to incorporate the health utilization estimates when building the screening algorithm?
+b.  Which one is suitable for vivarium software settings, one model with all cancer sites included or five separate models to study the screening impact on cancer outcomes.?
+c.  How to capture the change of risk exposure level or screening coverage switching from general population to insured population? (e.g. 20% less of smoking prevalence for insured population)
+d.  What’s our approach known that GBD does not have separate clinical mapping for cervical versus uterine for benign and in situ cervical and uterine neoplasms?
+e.  How do we design a scenario that initiates the commercial screening like liquid biopsy to all cancer sites?
+f.  What kind of histopathological test exists for further cell analysis after a positive screening? <- Could we include false positives in the simulation?
+g.  Does cancer always progress through the cancer in-situ (non-invasive) stage to the malignant stages? If that is true, can we backout the incidence of developing non-invasive/stage 0 cancer?
+h.  Can we stratify the screening results like sensitivity and specificity by cancer stages?
