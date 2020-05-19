@@ -185,7 +185,7 @@ Method One
 
 This method of modeling the susceptible to exposed state transition in the covid-19 model will be a replication of the transition probability used in the IHME forecast model such that the **incidence rate for an individual simulant at time-step t is defined as:**
 
-			:math:`(\beta(t)S(I_1+I_2)^\alpha)/N`
+.. math:: \frac{\beta(t)S(I_1+I_2)^\alpha}{N}
 
 Where,
 
@@ -221,9 +221,13 @@ This method of modeling the susceptible to exposed state transition in the covid
 
 	This method requires careful scrutiny of the value that will be used for the simulation's :math:`R_0` to ensure that it is being applied in a consistent way
 
-At each time-step, for each simulant in the :math:`I_1` and :math:`I_2` covid-19 model states, sample the following number of simulants from the *entire simulant pool*:
+At each time-step, for each simulant in the :math:`I_1` and :math:`I_2` covid-19 model states, sample the following number of simulants from the *entire simulant pool* (see *Important* note below for exception):
 
-	:math:`n_\text{simulants to sample} = R_0 * (\gamma_1 + \gamma_2) * duration_{\text{time step}}` 
+.. math:: n_\text{simulants to sample} = R_0 * (\gamma_1 + \gamma_2) * duration_{\text{time step}}
+
+.. important::
+
+	If :math:`R_t` from the IHME forecast model is being used as the simulation :math:`R_0` value, simulants should only be drawn from the pool of simulants who were initialized into the population in the :math:`S` state. Notably, if a simulant is initialized into the :math:`S` state and later progresses to later model states, they are still eligible to be sampled.
 
 Then, if a sampled simulant's current model state is :math:`S`, that simulant should be transitioned to model state :math:`E`. If a sampled simulant's current model state is not :math:`E`, no change should be made.
 
