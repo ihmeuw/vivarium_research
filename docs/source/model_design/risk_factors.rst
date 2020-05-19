@@ -680,7 +680,7 @@ The magnitude of the PAF bias was shown to **increase** with:
 
 	- magnitude of the confounding RR
 
-THe first two factors are intuitive: observe that in our measure of bias, 
+The first two factors are intuitive: observe that in our measure of bias, 
 :math:`\frac{\text{biased AF}}{\text{unbiased AF}}`, a smaller exposure 
 prevalence will lead to a smaller true AF in the denominator, amplifying the 
 bias. Similarly, a smaller RR will also result in a smaller true AF, again 
