@@ -546,7 +546,7 @@ The PAF can be calculated using the following formula:
 
 	\text{PAF}_{pop}=\frac{p_c(RR-1)}{RR}
 
-In which we define :math:`p_c` to be the proportion of cases that are exposed, 
+In which we define :math:`p_c` to be the proportion of cases (individuals who posses the outcome of interest) that are exposed, 
 and *RR* has been adjusted for confounding and effect modification.
 
 There is the a second PAF equation, which can be used *in the absence of 
