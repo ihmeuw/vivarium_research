@@ -34,7 +34,7 @@
 .. _2017_concept_model_vivarium_swissre_breastcancer:
 
 ========================================
-Vivarium SwissRe Breast Cancer Screening
+Vivarium CSU Breast Cancer Screening
 ========================================
 
 .. todo::
@@ -51,22 +51,22 @@ Vivarium SwissRe Breast Cancer Screening
 1.1 Project overview
 --------------------
 
-Swiss Re is the world's second largest reinsurer. One of its China-based products is health insurance for routine breast cancer screening. It also offers critical illness insurance to cover treatment for those if cancer a diagnosis is made. 
+A health insurance provider in China offers routine breast cancer screening for their insurees. The provider also offers critical illness insurance to cover treatment for those if cancer a diagnosis is made. 
 
-Swiss Re is interested in estimating the yearly number of detected breast cancer cases for their Chinese insured population under specific screening practices to identify the trends that are important to its critical illness insurance product. This will inform their projections of how much they will pay out for different cancer types under different screening coverage rates. 
+The health insurance provider is interested in estimating the yearly number of detected breast cancer cases for their Chinese insured population under specific screening practices to identify the trends that are important to its critical illness insurance product. This will inform their projections of how much they will pay out for different cancer types under different screening coverage rates. 
 
-Is Swiss Re also interested in mortality/morb from breast cancer? 
+
 
 .. todo::
   
   - add more project Background
-
+  - Is the provider also interested in mortality/morb from breast cancer? if not, then we can delete the mortality/morb dag?
 
 1.2 Literature review
 ---------------------
 
 .. todo::
- maybe just a brief summary of what the literature says about the risks/cause/risk-outcome pairs
+ maybe just a brief summary of what the literature says about the exposures/outcome/exp-outcome relationship?
 
   - what is breast cancer?
   - types of breast cancer?
@@ -79,7 +79,7 @@ Is Swiss Re also interested in mortality/morb from breast cancer?
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-To estimate the yearly number of cases of cancer detected per 100,000 insured population under specific screening practices to allow Swiss Re to identify the trends that are important to its critical illness insurance product.
+To estimate the yearly number of cases of breast cancer detected per 100,000 insured population under specific screening practices in order to identify pay-out trends for critical insurance claims (CII).  
 
 
 3.0 Modeling design and methodology
@@ -103,7 +103,7 @@ To estimate the yearly number of cases of cancer detected per 100,000 insured po
 
   - Breast cancer diagnosis/detection stage 0, 1+
 
-**Most proximal risk factors (E)**:
+**Most proximal determinant/exposure (E)**:
   
   - (1) Breast cancer status
   - (2) Screening 
@@ -125,7 +125,7 @@ To estimate the yearly number of cases of cancer detected per 100,000 insured po
   -
 
 
-**Risk-factor: (1) breast cancer status**
+**Determinant: (1) breast cancer status**
   
   .. todo::
 
@@ -197,12 +197,12 @@ To estimate the yearly number of cases of cancer detected per 100,000 insured po
 
   .. todo::
 
-    1) Re: first DAG are Swissre interested in mortality/morbidity? If so, do we need to include treatment in the mort/morb models?
+    1) Re: first DAG are they interested in mortality/morbidity? If so, do we need to include treatment in the mort/morb models?
     2) DAG <--change into bubbles
     3) from the second diagram, it seems there is correlation between insurance (therefore screening) and breast cancer, induced by common cause age/sex and family history 
 
 
-**Risk-factor: (2) screening**
+**Determinant: (2) screening**
 
     .. todo::
       - types of breast cancer screening
