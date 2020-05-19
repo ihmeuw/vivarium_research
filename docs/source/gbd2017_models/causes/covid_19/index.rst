@@ -75,7 +75,7 @@ Where,
    * - :math:`I_1`
      - Number of infectious individuals in the first infectious state in the population 
    * - :math:`I_2`
-     - Number of infectious individuals in the second infected state in the population
+     - Number of infectious individuals in the second infectious state in the population
    * - :math:`R`
      - Number of recovered individuals in the population
    * - :math:`N`
