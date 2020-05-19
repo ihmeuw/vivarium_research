@@ -11,3 +11,7 @@
       overflow: visible !important;
    }
 }
+
+.underline {
+   text-decoration: underline;
+ }
