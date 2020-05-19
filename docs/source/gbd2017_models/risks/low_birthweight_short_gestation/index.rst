@@ -564,18 +564,30 @@ one of the modelled causes, or else to the category `other_causes` if the death
 was due to a cause we are not explicitly modeling. The random assignment is made
 by sampling from the following probability distribution:
 
+..
+  .. math::
+
+    P(\text{cause of death } = c)
+    = \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+    \quad\text{if $c\in$ modelled},
+
+  and
+
+  .. math::
+
+    P(\text{cause of death } = \textsf{other_causes})
+    = \frac{\text{BGMR}}{\text{mr}(i)}.
+
 .. math::
+  :nowrap:
 
-  P(\text{cause of death } = c)
-  = \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
-  \quad\text{if $c\in$ modelled},
-
-and
-
-.. math::
-
-  P(\text{cause of death } = \textsf{other_causes})
-  = \frac{\text{BGMR}}{\text{mr}(i)}.
+  \begin{align*}
+  &P(\text{cause of death } = c)
+  &&= \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+  \quad\text{if $c\in$ modelled}\\
+  &P(\text{cause of death } = \textsf{other_causes})
+  &&= \frac{\text{BGMR}}{\text{mr}(i)}.
+  \end{align*}
 
 Note that this does in fact define a probability distribution since
 
@@ -593,6 +605,58 @@ This probability distribution can be derived by observing that each individual c
 
 Cause of death *with* LBWSG included
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We follow essentially the same strategy as above to assign a cause of death when LBWSG is included, but we take into account the different individual cause-spceific mortality hazards depending on the individual's LBWSG category.
+
+First define the individual background mortality rate to be
+
+.. math::
+
+  \text{bgmr}(i)
+  &= \sum_{c\,\in\, \text{unmodelled}} \text{csmr}_c^*(i)\\
+  &= \sum_{c\,\in\, \text{pink}} \text{CSMR}_c
+    + \sum_{c\,\in\, \text{blue}} \text{CSMR}_c
+    \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}\\
+  &= \text{ACMR}
+    - \sum_{c\,\in\, \text{salmon}} \text{CSMR}_c
+    - \sum_{c\,\in\, \text{green}} \text{CSMR}_c\\
+  &\qquad\qquad\qquad +\bigl[(1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}-1\bigr]
+    \cdot \sum_{c\,\in\, \text{blue}} \text{CSMR}_c.
+
+Now define the cause-of-death probability distribution by
+
+..
+  .. math::
+    :nowrap:
+
+    \begin{align*}
+    &P(\text{cause of death } = c)
+    &&= \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+    \quad\text{if $c\in$ salmon (unaffected, modelled)}\\
+    &P(\text{cause of death } = c)
+    &&= \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+      \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}
+      \quad\text{if $c\in$ green (affected, modelled)}\\
+    &P(\text{cause of death } = \textsf{other_causes})
+    &&= \frac{\text{bgmr}(i)}{\text{mr}(i)}.
+    \end{align*}
+
+.. math::
+
+  P(\text{cause of death } = c)=
+  \begin{cases}
+  \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+    & \text{if $c\in$ salmon (modelled, unaffected)},\\
+  \frac{\text{EMR}_{\text{state}_c(i)}\cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}}{\text{mr}(i)}
+    & \text{if $c\in$ green (modelled, affected)},
+  \end{cases}
+
+and
+
+.. math::
+
+  P(\text{cause of death } = \textsf{other_causes})
+  = \frac{\text{bgmr}(i)}{\text{mr}(i)}.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
