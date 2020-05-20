@@ -546,7 +546,7 @@ The PAF can be calculated using the following formula:
 
 	\text{PAF}_{pop}=\frac{p_c(RR-1)}{RR}
 
-In which we define :math:`p_c` to be the proportion of cases that are exposed, 
+In which we define :math:`p_c` to be the proportion of cases (individuals who possess the outcome of interest) that are exposed, 
 and *RR* has been adjusted for confounding and effect modification.
 
 There is the a second PAF equation, which can be used *in the absence of 
@@ -680,7 +680,7 @@ The magnitude of the PAF bias was shown to **increase** with:
 
 	- magnitude of the confounding RR
 
-THe first two factors are intuitive: observe that in our measure of bias, 
+The first two factors are intuitive: observe that in our measure of bias, 
 :math:`\frac{\text{biased AF}}{\text{unbiased AF}}`, a smaller exposure 
 prevalence will lead to a smaller true AF in the denominator, amplifying the 
 bias. Similarly, a smaller RR will also result in a smaller true AF, again 
@@ -724,6 +724,6 @@ References
 .. [Darrow] Confounding and bias in the attributable fraction, Jan 2011
 	https://www.ncbi.nlm.nih.gov/pubmed/20975564	
 
-.. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Res earch: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
+.. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
    Retrieved 11 March 2020.
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
