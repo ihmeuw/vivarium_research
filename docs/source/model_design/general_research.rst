@@ -697,7 +697,7 @@ The *acyclic* nature of DAGs is that there cannot be feedback loops between any 
 Applications, Assumptions, and Limitations of Directed Acyclic Graphs
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-DAGs are used in epidemiology to represent a network of relationships between several variables, which in turn helps to guide the selection of variable that will need to be measured or considered in a given study/project. Further, the exact relationship between variables in a DAG will dictate *how* to treat or consider a specific variable in that study/project by helping to indentify potential confounding, intermediate, or mediating variables between a given exposure and outcome of interest (see the `Causal Relationships`_ section for definitions).
+DAGs are used in epidemiology to represent a network of relationships between several variables, which in turn helps to guide the selection of variables that will need to be measured or considered in a given study/project. Further, the exact relationship between variables in a DAG will dictate *how* to treat or consider a specific variable in that study/project by helping to indentify potential confounding, intermediate, or mediating variables between a given exposure and outcome of interest (see the `Causal Relationships`_ section for definitions).
 
 However, DAGs are limited in that they require *prior causal knowledge* about the variables that may be causally related to a given exposure and outcome of interest. Therefore, there may be uncertain, unmeasured, or unknown variables that cannot be represented in a given DAG. Further, DAGs do not allow for easy representation of direction or magnitude of a causal relationship or for effect modification.
 
