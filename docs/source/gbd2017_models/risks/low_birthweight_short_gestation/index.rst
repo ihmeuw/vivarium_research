@@ -155,6 +155,8 @@ outcomes based on criteria of biologic plausibility. Some causes, most notably c
 haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.
 The final list of outcomes included in calculating the attributable burden for LBWSG are in the table below.
 
+.. _lbwsg_affected_causes_table:
+
 +----------+---------------------------------------------------------+
 | Cause id | Cause (outcomes)                                        |
 +==========+=========================================================+
@@ -237,27 +239,34 @@ in the Vivarium Data Analysis repo.
 Risk effects in Vivarium
 ------------------------
 
-Because the relative risks from GBD are for all-cause mortality in the early and late neonatal period, we first decompose all-cause mortality rate (ACMR) as the sum of:
+The relative risk of each LBWSG category in GBD is for *all-cause mortality* in
+the early and late neonatal period. However, GBD identifies only a *subset* of
+causes (not *all* causes) that are affected by LBWSG, listed in the :ref:`table
+above <lbwsg_affected_causes_table>`. Therefore, despite the RR's being measured
+for *all*-cause mortality, **we are interested in applying the PAF and relative
+risks only to the cause-specific mortality rates of the causes that GBD
+considers to be affected by LBWSG.**
+
+To do this, we first decompose the all-cause mortality rate (ACMR) as the sum
+of:
 
    - mortality from causes that are affected by LBWSG and modelled in the sim (:gre:`green`)
    - mortality from causes that are affected by LBWSG but not modelled in the sim (:blu:`blue`)
    - mortality from causes that are unaffected by LBWSG and modelled in the sim (:sal:`salmon`)
    - mortality from causes that are unaffected by LBWSG but not modelled in the sim (:pin:`pink`)
 
-We are interested in applying the PAF and relative risk only to the
-cause-specific mortality rates of the causes that GBD considers to be affected
-by LBWSG (green and blue). The rest of this section describes the details of how
-to do this. See the `Assumptions and Limitations`_ section for a discussion of
-the strengths and limitations of this approach, and a comparison with other
-possible strategies.
+Our strategy will be to apply the relative risks and PAF only to the green and
+blue causes, i.e. those GBD says are affected by LBWSG. The rest of this section
+describes the details of how to do this. See the `Assumptions and Limitations`_
+section for a discussion of the strengths and limitations of this approach, and
+a comparison with other possible strategies.
 
 Cause categories
 ''''''''''''''''
 
-An example of the above
-color-coded cause breakdown from the :ref:`large-scale-food fortification
-concept model <2017_concept_model_vivarium_conic_lsff>` concept model diagram is
-shown below:
+An example of the above color-coded cause breakdown from the
+:ref:`large-scale-food fortification concept model
+<2017_concept_model_vivarium_conic_lsff>` concept model diagram is shown below:
 
 
 +---------------------+------------------------------------------------------------------------+
@@ -345,7 +354,7 @@ mortality hazard :math:`\text{mr}(i)` so that the LBWSG relative risks for
 mortality are applied only to the causes that GBD considers to be affected by
 LBWSG (green and blue), while preserving the requirement that the `expected
 value`_ (denoted by :math:`E`) of the mortality hazard equals the all-cause
-mortality rate for the individual's location, year, age, and sex:
+mortality rate for the individual's location, year, age group, and sex:
 
 .. _hazard function: https://en.wikipedia.org/wiki/Survival_analysis#Hazard_function_and_cumulative_hazard_function
 .. _expected value: https://en.wikipedia.org/wiki/Expected_value
@@ -354,7 +363,7 @@ mortality rate for the individual's location, year, age, and sex:
 
   E [\text{mr}(i)] = \text{ACMR}.
 
-All-cause mortality is the sum of all the cause-specific mortality rates
+(In actuality, this equation may only hold approximately when following our approach; see :ref:`note below <expected_mortality_hazard_note>`.) All-cause mortality is the sum of all the cause-specific mortality rates
 (CSMRs):
 
 .. math::
@@ -384,6 +393,24 @@ to the green/blue/salmon/pink breakdown (i.e. modelled vs. unmodelled causes and
   This equation can be substituted into :eq:`mortality_hazard` below to
   eliminate the pink causes from the computation of the mortality hazard for an
   individual simulant.
+
+.. note::
+
+  Throughout this section, we will use the following notational convention for quantities related to a simulant i:
+
+  - Abbreviations in all-capital letters, such as ACMR or CSMR above, and EMR
+    and BGMR below, denote quantities that depend only on an individual's
+    demographic group in GBD (location, year, age group, sex), but not on other
+    modeled quantities of the individual in our simulation. We consider these
+    variables "constant" for a fixed demographic group, and we suppress their
+    explicit dependence on the individual :math:`i` to reduce notational
+    clutter.
+
+  - Abbreviations in all-lower-case letters, such as :math:`\text{mr}` above,
+    or :math:`\text{cat}`, :math:`\text{state}`, :math:`\text{csmr}`, and
+    :math:`\text{bgmr}` below, denote quantities that depend on an individual's
+    current state in the simulation. We cannot treat these quantities as
+    "constant" in the sense above.
 
 Defining the individual mortality hazard
 ''''''''''''''''''''''''''''''''''''''''
@@ -519,9 +546,19 @@ because
 
    `LBWSG PAF notebook <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/LBWSG%20exposure%2C%20rrs%2C%20pafs.ipynb>`__.
 
+.. _expected_mortality_hazard_note:
+
 .. todo::
 
-   - add a proof that the expected value of :math:`\text{mr}(i)` equals the ACMR.
+  Show that :math:`E[\text{mr}_t(i)] \approx \text{ACMR}`, with equality if :math:`\text{state}_c(i)` is independent of :math:`\text{cat}(i)` at time :math:`t`.
+
+  **Question:** Are these independent in general or not? It seems like since
+  we are applying the relative risks to the with-condiiton states, these states
+  will become less likely to be observed with higher risk LBWSG categories as
+  time goes on.
+
+.. todo::
+
    - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other.
    - add the problems we ran in and how we ended up trouble-shooting and came to the conclusion to use the most-detailed-cause PAF
    - discuss the implications of including preterm birth in the causes to which we are applying the PAF and relative risks, and why we decided to do it this way (note that this is inherently inconsistent since preterm birth is PAF-of-1 with LBWSG, but this approach seems reasonably consistent with what the GBD modelers did, which itself is inconsistent).
@@ -564,30 +601,30 @@ one of the modelled causes, or else to the category `other_causes` if the death
 was due to a cause we are not explicitly modeling. The random assignment is made
 by sampling from the following probability distribution:
 
-..
-  .. math::
+.. math::
 
-    P(\text{cause of death } = c)
-    = \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
-    \quad\text{if $c\in$ modelled},
+  P(\text{cause of death } = c)
+  = \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+  \quad\text{if $c\in$ modelled},
 
-  and
-
-  .. math::
-
-    P(\text{cause of death } = \textsf{other_causes})
-    = \frac{\text{BGMR}}{\text{mr}(i)}.
+and
 
 .. math::
-  :nowrap:
 
-  \begin{align*}
-  &P(\text{cause of death } = c)
-  &&= \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
-  \quad\text{if $c\in$ modelled}\\
-  &P(\text{cause of death } = \textsf{other_causes})
-  &&= \frac{\text{BGMR}}{\text{mr}(i)}.
-  \end{align*}
+  P(\text{cause of death } = \textsf{other_causes})
+  = \frac{\text{BGMR}}{\text{mr}(i)}.
+
+..
+  .. math::
+    :nowrap:
+
+    \begin{align*}
+    &P(\text{cause of death } = c)
+    &&= \frac{\text{EMR}_{\text{state}_c(i)}}{\text{mr}(i)}
+    \quad\text{if $c\in$ modelled}\\
+    &P(\text{cause of death } = \textsf{other_causes})
+    &&= \frac{\text{BGMR}}{\text{mr}(i)}.
+    \end{align*}
 
 Note that this does in fact define a probability distribution since
 
@@ -600,8 +637,11 @@ This probability distribution can be derived by observing that each individual c
 
 .. note::
 
-  The assignment of a cause of death should be independent of the decision of
-  whether the simulant died.
+  The assignment of a cause of death should be *independent* of the decision of
+  whether the simulant died. That is, a new random number should be generated to
+  sample from the above probability distribution for cause of death, independent
+  of the number compared with the mortality hazard to determine whether the
+  simulant dies.
 
 Cause of death *with* LBWSG included
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -610,18 +650,27 @@ We follow essentially the same strategy as above to assign a cause of death when
 
 First define the individual background mortality rate to be
 
+..
+  .. math::
+
+    \text{bgmr}(i)
+    &= \sum_{c\,\in\, \text{unmodelled}} \text{csmr}_c^*(i)\\
+    &= \sum_{c\,\in\, \text{pink}} \text{CSMR}_c
+      + \sum_{c\,\in\, \text{blue}} \text{CSMR}_c
+      \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}\\
+    &= \text{ACMR}
+      - \sum_{c\,\in\, \text{salmon}} \text{CSMR}_c
+      - \sum_{c\,\in\, \text{green}} \text{CSMR}_c\\
+    &\qquad\qquad\qquad +\bigl[(1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}-1\bigr]
+      \cdot \sum_{c\,\in\, \text{blue}} \text{CSMR}_c.
+
 .. math::
 
   \text{bgmr}(i)
   &= \sum_{c\,\in\, \text{unmodelled}} \text{csmr}_c^*(i)\\
   &= \sum_{c\,\in\, \text{pink}} \text{CSMR}_c
     + \sum_{c\,\in\, \text{blue}} \text{CSMR}_c
-    \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}\\
-  &= \text{ACMR}
-    - \sum_{c\,\in\, \text{salmon}} \text{CSMR}_c
-    - \sum_{c\,\in\, \text{green}} \text{CSMR}_c\\
-  &\qquad\qquad\qquad +\bigl[(1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}-1\bigr]
-    \cdot \sum_{c\,\in\, \text{blue}} \text{CSMR}_c.
+    \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}.
 
 Now define the cause-of-death probability distribution by
 
