@@ -688,7 +688,7 @@ Directed Acyclic Graphs (Causal Diagrams)
 Introduction to Directed Acyclic Graphs
 +++++++++++++++++++++++++++++++++++++++
 
-Directed acyclic graphs (DAGs), also termed causal diagrams, are composed of variables that are linked together by directional arrows. Critically, the solid arrows in DAGs represent a causal relationship between an exposure (start of the arrow) and outcome (node of the arrow), representing the *directional* aspect of DAGs. Notably, a directional arrow in a DAG does not offer any information about whether the exposure causes in increased or decreased probability of the outcome, only that there is some causal realtionship bewteen the exposure and outcome. 
+Directed acyclic graphs (DAGs), also termed causal diagrams, are composed of variables that are linked together by directional arrows. Critically, the solid arrows in DAGs represent a causal relationship between an exposure (start of the arrow) and outcome (node of the arrow), representing the *directional* aspect of DAGs. Notably, a directional arrow in a DAG does not offer any information about whether the exposure causes an increased or decreased probability of the outcome, only that there is some causal realtionship bewteen the exposure and outcome. 
 
 The *acyclic* nature of DAGs is that there cannot be feedback loops between any variables in the graph. In this way, the arrows in DAGs can be interpreted as the passage of time so that the exposure (cause) must always occur temporally *before* the outcome (effect). See the diagram below for an example of an inappropriate and appropriate DAG with regard to temporality.
 
