@@ -391,8 +391,9 @@ mortality rate for the individual's location, year, age group, and sex:
 
   E [\text{mr}(i)] = \text{ACMR}.
 
-(In actuality, this equation may only hold approximately when following our approach; see :ref:`note below <expected_mortality_hazard_note>`.) All-cause mortality is the sum of all the cause-specific mortality rates
-(CSMRs):
+(In actuality, this equation may only hold approximately when following our
+approach; see :ref:`note below <expected_mortality_hazard_note>`.) All-cause
+mortality is the sum of all the cause-specific mortality rates (CSMRs):
 
 .. math::
 
@@ -412,19 +413,22 @@ to the green/blue/salmon/pink breakdown (i.e. modelled vs. unmodelled causes and
   salmon causes:
 
   .. math::
+    :label: solve_for_pink
 
     \sum_{\text{pink}}\text{CSMR} = \text{ACMR}
     - \sum_{\text{salmon}}\text{CSMR}
     - \sum_{\text{green}}\text{CSMR}
     - \sum\limits_{\text{blue}}\text{CSMR}
 
-  This equation can be substituted into :eq:`mortality_hazard` below to
-  eliminate the pink causes from the computation of the mortality hazard for an
-  individual simulant.
+  This equation can be substituted into :eq:`mortality_hazard` and
+  :eq:`bgmr_definition` below to eliminate the pink causes from the computation
+  of the mortality hazard and background mortality rate for an individual
+  simulant.
 
 .. note::
 
-  Throughout this section, we will use the following notational convention for quantities related to a simulant i:
+  Throughout this section, we will use the following notational convention for
+  quantities related to an individual simulant :math:`i`:
 
   - Abbreviations in all-capital letters, such as ACMR or CSMR above, and EMR
     and BGMR below, denote quantities that depend only on an individual's
@@ -591,6 +595,10 @@ because
     & \text{if $c \in$ green (affected, modelled)}.
   \end{cases}
 
+When implementing :eq:`mortality_hazard`, recall that
+:math:`\sum_{c\in\text{pink}} \text{CSMR}_c` can be computed using
+:eq:`solve_for_pink`.
+
 .. _expected_mortality_hazard_note:
 
 .. todo::
@@ -699,12 +707,16 @@ cause-spceific mortality hazards depending on the individual's LBWSG category.
 First define individual :math:`i`'s background mortality rate to be
 
 .. math::
+  :label: bgmr_definition
 
   \text{bgmr}(i)
   &= \sum_{c\,\in\, \text{unmodelled}} \text{csmr}_c^*(i)\\
   &= \sum_{c\,\in\, \text{pink}} \text{CSMR}_c
     + \sum_{c\,\in\, \text{blue}} \text{CSMR}_c
     \cdot (1-\text{PAF})\cdot \textit{RR}_{\text{cat}(i)}.
+
+Recall that :math:`\sum_{c\in\text{pink}} \text{CSMR}_c` can be computed using
+:eq:`solve_for_pink`.
 
 Now define the cause-of-death probability distribution by
 
