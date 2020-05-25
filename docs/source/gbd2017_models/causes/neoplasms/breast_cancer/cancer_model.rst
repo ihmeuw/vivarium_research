@@ -42,6 +42,25 @@ total prevalence for breast cancer is split into
 Cause Hierarchy
 ++++++++++++++++
 
+  +-------------------------------------------------------------------------------------------------------------+
+  | GBD breast cancer cause hierarchy                                                                           |
+  +===============+======================+=======+=================================+============================+    
+  | Cause name    | GBD cause id         | Level | Sequaelae                       |                            |    
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | All causes    | c_294                | 0     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | All NCDs      | c_409                | 1     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | Neoplasms     | C_410                | 2     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | Breast cancer | C_429                | 3     | diagnosis_and_primary_therapy_phase_of_breast_cancer (s_277) |
+  |               |                      |       | metastatic_phase_of_breast_cancer (s_279)                    |
+  |               |                      |       | terminal_phase_of_breast_cancer (s_280)                      |
+  |               |                      |       | controlled_phase_of_breast_cancer_with_mastectomy (s_5486)   |
+  |               |                      |       | controlled_phase_of_breast_cancer_without_mastectomy (s_5489)| 
+  |               |                      |       | mastectomy_from_breast_cancer_beyond_ten_years (s_5492)      |
+  +---------------+----------------------+-------+--------------------------------------------------------------+
+
 .. image:: breast_cancer_hierarchy.svg
 
 
