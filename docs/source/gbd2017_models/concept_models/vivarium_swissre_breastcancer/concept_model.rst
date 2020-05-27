@@ -110,8 +110,8 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 
 **Confounders (C)**:
 
-  -
-  -
+  - age
+  - sex
 
 **Effect modifiers**:
 
@@ -127,25 +127,23 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 3.2 :math:`E_1` Breast cancer status 
 ------------------------------------
 
-non-GBD Risk factor
-~~~~~~~~~~~~~~~~~~~
+3.2.1 Family history (non-GBD Risk factor) exposure model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - family history (non-GBD)
   - (history of breast cancer<--do we want to model this?) 
 
-GBD risk factor
-~~~~~~~~~~~~~~~
+  .. todo::
+    - distribution of family history
+    - relative risk of family history and breast cancer DCIS/LCIS and stage 1+?
 
-  - These will not be modelled
+  .. note:: 
+    - GBD risk factors will not be modelled
 
-non-GBD intermediate cause
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+3.2.2 DCIS/LCIS (non-GBD intermediate cause) and stage 1+ breast cancer (GBD cause) model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - prevalence of DCIS/LCIS
-
-GBD cause 
-~~~~~~~~~
-
   - stage 1+ breast cancer
  
   .. note::
@@ -171,6 +169,7 @@ GBD cause
 
   :underline:`Compartmental model`
 
+
     .. image:: compartmental_model_1.svg
 
   STATES
@@ -194,8 +193,9 @@ GBD cause
   .. todo::
     do we need to model S'? and a remission-with-breast-cancer pool and 'istory-of-breast-cancer risk factor?
 
-3.3 :math:`E_2`: Screening
---------------------------
+
+3.3 :math:`E_2`: Screening model
+--------------------------------
 
   .. todo::
    - types of breast cancer screening
@@ -206,13 +206,19 @@ GBD cause
     .. image:: breast_cancer_screening_tree_China.svg
 
 
-3.4 :math:`O_1`: Breast cancer detection
-----------------------------------------
+3.4 :math:`O_1`: Breast cancer detection model
+----------------------------------------------
 
     .. todo:: 
       how to model breast cancer detection given breast cancer status and screening? 
 
 
+3.5 :math:`O_2`: Mortality/morbidity model
+------------------------------------------
+
+.. todo:: 
+
+  -does the treatment model and breast cancer remission go here?
 
 4.0 Intervention
 ++++++++++++++++
