@@ -37,13 +37,20 @@
 Vivarium CSU Breast Cancer Screening
 ========================================
 
-.. todo::
++------------------------------------+
+| List of abbreviations              |
++=======+============================+
+| DCIS  | ductal carcinoma in situ   |
++-------+----------------------------+
+| LCIS  | lobular carcinoma in situ  |
++-------+----------------------------+
+| CII   | critical illness insurance |
++-------+----------------------------+
+| NCDs  | non-communicable diseases  |
++-------+----------------------------+
+| Tx    | treatment                  |
++-------+----------------------------+
 
-  list of abbreviations?
-
-  - DCIS Ductal carcinoma in situ
-  - CII critical illness insurance
-  - NCDs non-communicable diseases
 
 1.0 Background
 ++++++++++++++
@@ -82,26 +89,19 @@ The health insurance provider is interested in estimating the yearly number of d
 To estimate the yearly number of cases of breast cancer detected per 100,000 insured population under specific screening practices in order to identify pay-out trends for critical insurance claims (CII).  
 
 
-3.0 Modeling design and methodology
-+++++++++++++++++++++++++++++++++++
+3.0 Causal framework
+++++++++++++++++++++
 
-3.1 Model conceptual framework
-------------------------------
+3.1 Causal diagram
+------------------
 
-3.1.1 Causal diagrams (directed acyclic graph)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:underline:`Breast cancer mortality/morbidity`
-
-  .. image:: causal_dagmodel1.svg
-
-:underline:`Breast cancer detection`
-
-  .. image:: causal_dagmodel2.svg
+  .. image:: causal_dagmodel_all.svg
 
 **Outcome (O)**:
 
-  - Breast cancer diagnosis/detection stage 0, 1+
+  - (1) Breast cancer diagnosis/detection stage 0, 1+
+  - (2) Mortality and morbidity
 
 **Most proximal determinant/exposure (E)**:
   
@@ -110,8 +110,8 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 
 **Confounders (C)**:
 
-  -
-  -
+  - age
+  - sex
 
 **Effect modifiers**:
 
@@ -124,12 +124,31 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
   -
   -
 
+3.2 :math:`E_1` Breast cancer status 
+------------------------------------
 
-**Determinant: (1) breast cancer status**
-  
+3.2.1 Family history (non-GBD Risk factor) exposure model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - family history (non-GBD)
+  - (history of breast cancer<--do we want to model this?) 
+
   .. todo::
+    - distribution of family history
+    - relative risk of family history and breast cancer DCIS/LCIS and stage 1+?
 
-    move this all to the breast cancer page and update things there
+  .. note:: 
+    - GBD risk factors will not be modelled
+
+3.2.2 DCIS/LCIS (non-GBD intermediate cause) and stage 1+ breast cancer (GBD cause) model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - prevalence of DCIS/LCIS
+  - stage 1+ breast cancer
+ 
+  .. note::
+    see :ref:`Breast cancer cause model <2017_cancer_model_breast_cancer>`
+    
 
   +------------------------------------------------------------------------------------------------------------------+
   | Breast cancer types                                                                                              |
@@ -150,18 +169,19 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 
   :underline:`Compartmental model`
 
-    .. image:: compartmental_model.svg
+
+    .. image:: compartmental_model_1.svg
 
   STATES
 
-    * S =susceptible
+    * S =susceptible with no breast cancer history
     * DCIS = with ductal carcinoma in situ (stage 0 non-invasive breast cancer)
     * C = with condition (stage 1+ invasive breast cancer with 6 sequaelas as defined by GBD)
 
   TRANSITIONS
 
-    * i_0 = incidence of DCIS
-    * i_1 = incidence of stage 1+ breast cancer (= GBD breast cancer incidence)
+    * i_0 = incidence of DCIS from S
+    * i_1 = incidence of stage 1+ breast cancer (= GBD breast cancer incidence) from DCIS
     * r = remission rate from DCIS to S with treatment 
 
   .. note::
@@ -171,99 +191,41 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 
 
   .. todo::
-    change SEIR model to rectangles/squares
+    do we need to model S'? and a remission-with-breast-cancer pool and 'istory-of-breast-cancer risk factor?
 
-  +-------------------------------------------------------------------------------------------------------------+
-  | GBD breast cancer cause hierarchy                                                                           |
-  +===============+======================+=======+=================================+============================+    
-  | Cause name    | GBD cause id         | Level | Sequaelae                       |                            |    
-  +---------------+----------------------+-------+---------------------------------+----------------------------+
-  | All causes    | c_294                | 0     |                                 |                            |
-  +---------------+----------------------+-------+---------------------------------+----------------------------+
-  | All NCDs      | c_409                | 1     |                                 |                            |
-  +---------------+----------------------+-------+---------------------------------+----------------------------+
-  | Neoplasms     | C_410                | 2     |                                 |                            |
-  +---------------+----------------------+-------+---------------------------------+----------------------------+
-  | Breast cancer | C_429                | 3     | diagnosis_and_primary_therapy_phase_of_breast_cancer (s_277) |
-  |               |                      |       | metastatic_phase_of_breast_cancer (s_279)                    |
-  |               |                      |       | terminal_phase_of_breast_cancer (s_280)                      |
-  |               |                      |       | controlled_phase_of_breast_cancer_with_mastectomy (s_5486)   |
-  |               |                      |       | controlled_phase_of_breast_cancer_without_mastectomy (s_5489)| 
-  |               |                      |       | mastectomy_from_breast_cancer_beyond_ten_years (s_5492)      |
-  +---------------+----------------------+-------+--------------------------------------------------------------+
 
-  .. image:: breast_cancer_hierarchy.svg
-
+3.3 :math:`E_2`: Screening model
+--------------------------------
 
   .. todo::
-
-    1) Re: first DAG are they interested in mortality/morbidity? If so, do we need to include treatment in the mort/morb models?
-    2) DAG <--change into bubbles
-    3) from the second diagram, it seems there is correlation between insurance (therefore screening) and breast cancer, induced by common cause age/sex and family history 
-
-
-**Determinant: (2) screening**
-
-    .. todo::
-      - types of breast cancer screening
-      - Screening coverage equations
-      - sensitivity/specificity of screening methods
-      - how to estimate number of cases from screening results
+   - types of breast cancer screening
+   - Screening coverage equations
+   - sensitivity/specificity of screening methods
+   - how to estimate number of cases from screening results
 
     .. image:: breast_cancer_screening_tree_China.svg
 
 
-**Outcome: Breast cancer detection**
+3.4 :math:`O_1`: Breast cancer detection model
+----------------------------------------------
 
     .. todo:: 
       how to model breast cancer detection given breast cancer status and screening? 
 
 
+3.5 :math:`O_2`: Mortality/morbidity model
+------------------------------------------
 
-3.2 Demographics
-----------------
+.. todo:: 
 
-3.2.1 Population description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  -does the treatment model and breast cancer remission go here?
 
-A closed cohort of 100,000 male and female total simulants from age 15 to 95 will be modelled in 5 year-age bands from Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
-
-
-3.2.2 Location description
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-*Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
-
-+---------------------------------+
-| Population size weight table    |
-+============+===========+========+
-| Province   | Region    | Weight |
-+------------+-----------+--------+
-| Tianjian   | North     | 18%    |
-+------------+-----------+--------+
-| Jiangsu    | East      | 28%    |
-+------------+-----------+--------+
-| Guangdong  | South     | 15%    |
-|            +-----------+--------+
-|            | Southwest | 7%     |
-+------------+-----------+--------+
-| Henan      | Central   | 17%    |
-+------------+-----------+--------+
-| Helilong-  | Northeast | 8%     |
-| jiang      +-----------+--------+
-|            | Northwest | 8%     |
-+------------+-----------+--------+
-
-.. todo::
- currently adds up to 101%
-
-
-3.3 Intervention
-----------------
+4.0 Intervention
+++++++++++++++++
 
 Scale-up of breast cancer screening coverage among insured population 
 
-3.4 Simulation scenarios
+4.1 Simulation scenarios
 ------------------------
 
 :underline:`Baseline scenario`
@@ -297,19 +259,70 @@ Scale-up of breast cancer screening coverage among insured population
  - Should we apply screening guidelines proposed by SR?
 
 
-4.0 Vivarium modelling components
+5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
+5.1 Vivarium concept model 
+--------------------------
+
+.. image:: viviarium_concept_model_vcm.svg
+
+
+5.2 Demographics
+----------------
+
+5.2.1 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A closed cohort of 100,000 male and female total simulants from age 15 to 95 will be modelled in 5 year-age bands from Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
+
+
+5.2.2 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+*Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
+
++---------------------------------+
+| Population size weight table    |
++============+===========+========+
+| Province   | Region    | Weight |
++------------+-----------+--------+
+| Tianjian   | North     | 18%    |
++------------+-----------+--------+
+| Jiangsu    | East      | 28%    |
++------------+-----------+--------+
+| Guangdong  | South     | 15%    |
+|            +-----------+--------+
+|            | Southwest | 7%     |
++------------+-----------+--------+
+| Henan      | Central   | 17%    |
++------------+-----------+--------+
+| Helilong-  | Northeast | 8%     |
+| jiang      +-----------+--------+
+|            | Northwest | 8%     |
++------------+-----------+--------+
+
 .. todo::
+ currently adds up to 101%
 
-	- insert vivarium causal diagram? any?
 
 
-Output meta-table shell
-+++++++++++++++++++++++
+5.3 Model versions
+------------------
 
-Limitations
-+++++++++++
+5.4 Desired outputs
+-------------------
+
+
+5.5 Output meta-table shell
+---------------------------
+
+Stratifications:
+
+
+6.0 Limitations
++++++++++++++++
+
 
 a.  How to incorporate the health utilization estimates when building the screening algorithm?
 b.  Which one is suitable for vivarium software settings, one model with all cancer sites included or five separate models to study the screening impact on cancer outcomes.?
