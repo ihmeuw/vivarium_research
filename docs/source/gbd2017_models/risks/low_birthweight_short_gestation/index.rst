@@ -741,6 +741,12 @@ To assign a cause of death when LBWSG is included, randomly sample a cause (or
 `other_causes`) from the above probability distribution, independent of other
 random choices.
 
+.. todo::
+
+  Update the above equations and prose with more descriptive variable names in
+  addition to colors. See comments in `PR 239
+  <https://github.com/ihmeuw/vivarium_research/pull/239>`_
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
