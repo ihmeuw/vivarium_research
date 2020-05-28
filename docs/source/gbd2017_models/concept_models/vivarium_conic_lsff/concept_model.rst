@@ -1319,10 +1319,8 @@ Summary of Iron Intervention Algorithm
 
 The following Python-style pseudocode summarizes all the pieces of the iron
 intervention algorithm (for both birthweight and hemoglobin) and is intended to
-resolve any ambiguities that may remain in the descriptions above. If there are
-any inconsistencies between the above descriptions and the algorithm below, the
-algorithm in this section takes precedence. However, some details for
-implementation are only provided above, and if any ambiguities or
+resolve any ambiguities that may remain in the descriptions above. However, some
+details for implementation are only provided above, and if any ambiguities or
 inconsistencies remain in the algorithm below, the above descriptions may help
 clarify the intent.
 
@@ -1436,8 +1434,8 @@ clarify the intent.
 
 .. todo::
 
-  Edit above summary so that downward shift to treatment-deleted birthweight is
-  population-level rather than individual-level.
+  Edit above summary to account for iron-responsive vs. iron-non-responsive
+  anemias in the Hb shift.
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
