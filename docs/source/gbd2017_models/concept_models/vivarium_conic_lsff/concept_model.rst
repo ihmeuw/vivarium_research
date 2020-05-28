@@ -1,3 +1,4 @@
+.. _2017_concept_model_vivarium_conic_lsff:
 ..
   Section title decorators for this document:
 
@@ -26,12 +27,12 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-
-.. _2017_concept_model_vivarium_conic_lsff:
-
 =============================================
 Vivarium CoNIC Large Scale Food Fortification
 =============================================
+
+.. contents::
+  :local:
 
 Model Overview
 --------------
@@ -1336,7 +1337,6 @@ Summary of Iron Intervention Algorithm
   # Population level parameters
   hb_shift                = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
   bw_response             = dose-response on birthweight (normally distributed, mean 1.51 g/mg)
-  eats_flour_proportion   = proportion of people who eat flour (c in data table)
   baseline_coverage(t)    = iron fortification coverage at time t in baseline scenario
     # Note: If delta_coverage is defined to be 0 in the baseline scenario, then
     # the below strategies should work in both baseline and intervention scenarios
@@ -1344,23 +1344,22 @@ Summary of Iron Intervention Algorithm
   coverage(t)             = iron fortification coverage at time t
                           = baseline_coverage(t) + delta_coverage(t)
     # Multiplier on hb_shift due to age
-  hb_age_fraction(age)  = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
+  hb_age_fraction(age)    = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
     # Multiplier on hb_shift due to lag in response time
     # (value is irrelevant if simulant hasn't yet received fortification)
   hb_lag_fraction(time_since_coverage)
-                          = time_since_coverage/0.5 if 0<=time_since_coverage<0.5 else 1
+                          = (0 if time_since_coverage<0 else
+                             time_since_coverage/0.5 if time_since_coverage<0.5 else
+                             1)
   iron_concentration      = concentration X of iron in the country's fortified flour
   flour_consumption_dist  = distribution of flour consumption Y among women who eat flour
-  mean_flour_consumption  = mean flour consumption among all women
-                          = eats_flour_proportion * mean(flour_consumption_dist)
-  mean_bw_shift           = bw_response * iron_concentration * mean_flour_consumption
+  mean_flour_consumption  = mean flour consumption among women who eat flour
+                          = flour_consumption_dist.mean()
+  mean_bw_shift           = mean birthweight shift among babies whose mothers ate fortified flour
+                          = bw_response * iron_concentration * mean_flour_consumption
 
   # Individual level attributes
   p_i                     = propensity of simulant and mother for exposure to lack of iron fortification (uniform(0,1))
-  eats_flour_i            = whether simulan't mother eats flour
-                          = p_i < eats_flour_proportion
-  daily_flour_i           = average daily flour consumption of simulant's mother
-                          = 0 if not eats_flour_i else sampled from flour_consumption_dist for Y
   gestational_age_i       = gestational age of simulant drawn from GBD (in years)
   birthweight_gbd_i       = birthweight drawn from GBD for simulant
   age_i(t)                = the simulant's age at time t
@@ -1380,9 +1379,10 @@ Summary of Iron Intervention Algorithm
   # At beginning of simulation
   mother_fortified_i    = 'unknown'
   mother_iron_group     = 'unknown'
-  birth_weight_i        = birthweight_gbd_i
+  birth_weight_i        = birthweight_gbd_i # No adjustment at start of sim
   child_fortified_i(0)  = time_covered_i <= 0 # time_covered_i = float('-inf') if covered in baseline
                         = p_i < coverage(0)
+    # Effect on Hb - no lag time at start of sim, only age dependance
   hb_i(0)               = hb_gbd(age_i(0)) + (
                           -baseline_coverage(0) + child_fortified_i(0)
                           ) * hb_shift *  hb_age_fraction(age_i(0))
@@ -1399,6 +1399,10 @@ Summary of Iron Intervention Algorithm
   mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
                          'intervention_not_baseline' if mother_fortified_i else
                          'uncovered')
+    # Effect on birthweight
+  daily_flour_i       = average daily flour consumption Y of simulant's mother
+                      = (flour_consumption_dist.rvs() if mother_fortified_i else
+                         'irrelevant')
   bw_shift_i          = bw_response * iron_concentration * daily_flour_i
   birth_weight_i      = (birthweight_gbd_i
                          - baseline_coverage(t) * mean_bw_shift
@@ -1407,12 +1411,18 @@ Summary of Iron Intervention Algorithm
   # At each simulation time step (including when simulant is born)
   child_fortified_i(t)  = time_covered_i <= t
                         = p_i < coverage(t)
-    # If child is covered in baseline, then time_covered_i = float('-inf'),
-    # and hence hb_lag_fraction(t-time_covered_i) = 1, i.e. the child receives
-    # the full age-dependent effect in this case since the time lag has passed.
-  hb_i(t)               = hb_gbd(age_i(t)) + (
-                          -baseline_coverage(t) + child_fortified_i(t) * hb_lag_fraction(t-time_covered_i)
-                          ) * hb_shift *  hb_age_fraction(age_i(t))
+    # Coverage starts either when the household receives coverage, or when
+    # the child turns 6 months old and starts eating solids, whichever is later.
+    # Recall that if the child is covered in baseline, then time_covered_i =
+    # float('-inf'), so coverage always starts at 6 months in this case.
+  time_since_coverage_i = min(t - time_covered_i, t - age(t) + 0.5)
+    # Effect on Hb - calibrate for baseline coverage, and take into account
+    # the age-dependent effect size and the 6 month lag time.
+  hb_i(t)               = (hb_gbd(age_i(t)) +
+                           (-baseline_coverage(t) +
+                            child_fortified_i(t) * hb_lag_fraction(time_since_coverage_i)
+                           ) * hb_shift *  hb_age_fraction(age_i(t))
+                          )
 
 .. todo::
 
