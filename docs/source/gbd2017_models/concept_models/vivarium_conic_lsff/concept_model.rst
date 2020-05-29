@@ -1407,11 +1407,12 @@ clarify the intent.
   daily_flour_i       = average daily flour consumption Y of simulant's mother
                       = (flour_consumption_dist.rvs() if mother_fortified_i else
                          'irrelevant')
-  bw_shift_i          = birthweight shift Z given flour consumption Y (if mother was fortified)
-                      = bw_response * iron_concentration * daily_flour_i
+  bw_shift_i          = birthweight shift Z given flour consumption Y
+                      = (bw_response * iron_concentration * daily_flour_i if mother_fortified_i else
+                         'irrelevant')
   birth_weight_i      = (birthweight_gbd_i
                          - baseline_coverage(t) * mean_bw_shift
-                         + mother_fortified_i * bw_shift_i)
+                         + bw_shift_i if mother_fortified_i else 0)
 
   ## At each simulation time step (including t=0 or when simulant is born):
   household_covered_i(t)    = time_covered_i <= t
