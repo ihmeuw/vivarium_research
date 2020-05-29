@@ -1370,6 +1370,7 @@ clarify the intent.
   p_i                     = propensity of simulant and mother for exposure to lack of iron fortification (~uniform(0,1))
   gestational_age_i       = gestational age of simulant drawn from GBD (in years)
   birthweight_gbd_i       = birthweight drawn from GBD for simulant
+  iron_responsive_i       = whether individual is responsive to iron fortification
   age_i(t)                = the simulant's age at time t
   hb_gbd(age_i(t))        = hemoglobin level drawn from GBD for simulant
     # These times are both float('-inf') if simulant is covered in baseline
@@ -1415,28 +1416,25 @@ clarify the intent.
                          + bw_shift_i if mother_fortified_i else 0)
 
   ## At each simulation time step (including t=0 or when simulant is born):
-  household_covered_i(t)    = time_covered_i <= t
-                            = p_i < coverage(t)
-    # Fortification starts either when the household receives coverage, or when
-    # the child turns 6 months old and starts eating solids, whichever is later.
-    # Recall that if the child is covered in baseline, then time_covered_i =
-    # float('-inf'), so coverage always starts at age 6 months in this case.
-  time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
-    # Effect on Hb - calibrate for baseline coverage, and take into account
-    # the age-dependent effect size and the 6 month lag time.
-  hb_i(t)                   = (hb_gbd(age_i(t))
-                               - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
-                               + (household_covered_i(t)
-                                  * hb_lag_fraction(time_since_fortified_i(t))
-                                  * hb_age_fraction(age_i(t))
-                                  * hb_shift
-                                 )
-                              )
-
-.. todo::
-
-  Edit above summary to account for iron-responsive vs. iron-non-responsive
-  anemias in the Hb shift.
+    # Only adjust Hb level for iron-responsive individuals
+  if iron_responsive_i:
+    household_covered_i(t)    = time_covered_i <= t
+                              = p_i < coverage(t)
+      # Fortification starts either when the household receives coverage, or when
+      # the child turns 6 months old and starts eating solids, whichever is later.
+      # Recall that if the child is covered in baseline, then time_covered_i =
+      # float('-inf'), so coverage always starts at age 6 months in this case.
+    time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
+      # Effect on Hb - calibrate for baseline coverage, and take into account
+      # the age-dependent effect size and the 6 month lag time.
+    hb_i(t)                   = (hb_gbd(age_i(t))
+                                 - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
+                                 + (household_covered_i(t)
+                                    * hb_lag_fraction(time_since_fortified_i(t))
+                                    * hb_age_fraction(age_i(t))
+                                    * hb_shift
+                                   )
+                                )
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
