@@ -1390,7 +1390,7 @@ clarify the intent.
   mother_iron_group     = 'unknown'
     # Use GBD birthweight distribution at start of sim, because we don't have
     # the need or the data to stratify by baseline coverage after birth.
-  birth_weight_i        = birthweight_gbd_i
+  birthweight_i         = birthweight_gbd_i
 
   ## When simulant is born in the simulation (t = time of birth):
   critical_time       = t - gestational_age_i + 20_weeks
@@ -1404,19 +1404,19 @@ clarify the intent.
   mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
                          'intervention_not_baseline' if mother_fortified_i else
                          'uncovered')
-    # Effect on birthweight
-  daily_flour_i       = average daily flour consumption Y of simulant's mother
-                      = (flour_consumption_dist.rvs() if mother_fortified_i else
-                         'irrelevant')
-  bw_shift_i          = birthweight shift Z given flour consumption Y
-                      = (bw_response * iron_concentration * daily_flour_i if mother_fortified_i else
-                         'irrelevant')
-  birth_weight_i      = (birthweight_gbd_i
-                         - baseline_coverage(t) * mean_bw_shift
-                         + bw_shift_i if mother_fortified_i else 0)
+    # Effect on birthweight:
+    # Shift everyone's birthweight down to calibrate for baseline coverage
+  birthweight_i       = birthweight_gbd_i - baseline_coverage(t) * mean_bw_shift
+    # If simulant's mother was fortified, shift their birthweight up accordingly
+  if mother_fortified_i:
+    daily_flour_i     = average daily flour consumption Y of simulant's mother
+                      = flour_consumption_dist.rvs()
+    bw_shift_i        = birthweight shift Z given flour consumption Y
+                      = bw_response * iron_concentration * daily_flour_i
+    birthweight_i     = birthweight_i + bw_shift_i
 
   ## At each simulation time step (including t=0 or when simulant is born):
-    # Only adjust Hb level for iron-responsive individuals
+      # Only adjust Hb level for iron-responsive individuals
   if iron_responsive_i:
     household_covered_i(t)    = time_covered_i <= t
                               = p_i < coverage(t)
@@ -1425,7 +1425,8 @@ clarify the intent.
       # Recall that if the child is covered in baseline, then time_covered_i =
       # float('-inf'), so coverage always starts at age 6 months in this case.
     time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
-      # Effect on Hb - calibrate for baseline coverage, and take into account
+      # Effect on Hb:
+      # #calibrate for baseline coverage, and take into account
       # the age-dependent effect size and the 6 month lag time.
     hb_i(t)                   = (hb_gbd(age_i(t))
                                  - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
