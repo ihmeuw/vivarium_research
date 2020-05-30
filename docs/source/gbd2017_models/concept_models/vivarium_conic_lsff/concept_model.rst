@@ -1,3 +1,4 @@
+.. _2017_concept_model_vivarium_conic_lsff:
 ..
   Section title decorators for this document:
 
@@ -26,12 +27,12 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-
-.. _2017_concept_model_vivarium_conic_lsff:
-
 =============================================
 Vivarium CoNIC Large Scale Food Fortification
 =============================================
+
+.. contents::
+  :local:
 
 Model Overview
 --------------
@@ -1316,45 +1317,60 @@ See the proofs for this approach below.
 Summary of Iron Intervention Algorithm
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The following Python-style pseudocode summarizes all the pieces of the iron
+intervention algorithm (for both birthweight and hemoglobin) and is intended to
+resolve any ambiguities that may remain in the descriptions above. However, some
+details for implementation are only provided above, and if any ambiguities or
+inconsistencies remain in the algorithm below, the above descriptions may help
+clarify the intent.
+
 .. code-block::
 
-  # Definitions
-  t                     := current time in years since start of simulation
-  t_end                 := time when simulation ends, in years since start (e.g. 6 years)
-  n_weeks               := n weeks, measured in years (e.g. n*7/365.25)
-  time_covered_i        := time at which simulant's household first receives iron-fortified food
-  mother_fortified_i    := whether simulant's mother got sufficient iron-fortification during pregnancy
-  child_fortified_i(t)  := whether child is eating fortified food at time t
-  birthweight_i         := simulant's birthweight after adjusting for mother's iron consumption
-  hb_i(t)               := simulant's hemoglobin level after adjusting for fortification
+  ## Definitions:
+  t                         := current time in years (t=0 is start of simulation)
+  t_end                     := time when simulation ends, in years since start (e.g. 6 years)
+  n_weeks                   := n weeks, measured in years (e.g. n*7/365.25)
+  time_covered_i            := time at which simulant's household first receives iron-fortified food
+  mother_fortified_i        := whether simulant's mother got sufficient iron fortification during pregnancy
+  household_covered_i(t)    := whether child's household is receiving iron-fortified food at time t
+  time_since_fortified_i(t) := amount of time since child started eating iron-fortified food
+  birthweight_i             := simulant's birthweight after adjusting for mother's iron consumption
+  hb_i(t)                   := simulant's hemoglobin level after adjusting for fortification
     # Coverage groups are used only for stratification
-  iron_coverage_group   := population subgroup indicating in which scenario (if any) the
-                           child started eating iron-fortified food by the end of the simulation
-  mother_iron_group     := population subgroup indicating in which scenario (if any) the
-                           child's mother got sufficient iron-fortification during pregnancy
+  iron_coverage_group       := population subgroup indicating in which scenario (if any) the child's
+                               household received iron-fortified food by the end of the simulation
+  mother_iron_group         := population subgroup indicating in which scenario (if any) the child's
+                               mother got sufficient iron-fortification during pregnancy
 
-  # Population level parameters
-  hb_shift              = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
-  bw_response           = dose-response on birthweight (normally distributed, mean 1.51 g/mg)
-  baseline_coverage(t)  = iron fortification coverage at time t in baseline scenario
+  ## Population level parameters:
+  hb_shift                = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
+  bw_response             = dose-response on birthweight (normally distributed, mean 1.51 g/mg)
+  baseline_coverage(t)    = iron fortification coverage at time t in baseline scenario
     # Note: If delta_coverage is defined to be 0 in the baseline scenario, then
     # the below strategies should work in both baseline and intervention scenarios
-  delta_coverage(t)     = change in coverage from baseline
-  coverage(t)           = iron fortification coverage at time t
-                        = baseline_coverage(t) + delta_coverage(t)
+  delta_coverage(t)       = change in coverage from baseline
+  coverage(t)             = iron fortification coverage at time t
+                          = baseline_coverage(t) + delta_coverage(t)
     # Multiplier on hb_shift due to age
-  hb_age_fraction(age)  = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
+  hb_age_fraction(age)    = 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
     # Multiplier on hb_shift due to lag in response time
-    # (value is irrelevant if simulant hasn't yet received fortification)
-  hb_lag_fraction(time_since_coverage)
-                        = time_since_coverage/0.5 if 0<=time_since_coverage<0.5 else 1
-  iron_concentration    = concentration X of iron in the country's fortified flour
+    # Negative time_since_fortified indicates child has not yet started eating fortified food
+  hb_lag_fraction(time_since_fortified)
+                          = (0 if time_since_fortified < 0 else
+                             time_since_fortified/0.5 if time_since_fortified < 0.5 else
+                             1)
+  iron_concentration      = concentration X of iron in the country's fortified flour
+  flour_consumption_dist  = distribution of flour consumption Y among women who eat flour
+  mean_flour_consumption  = mean flour consumption among women who eat flour
+                          = flour_consumption_dist.mean()
+  mean_bw_shift           = mean birthweight shift among babies whose mothers ate fortified flour
+                          = bw_response * iron_concentration * mean_flour_consumption
 
-  # Individual level attributes
-  p_i                     = propensity of simulant and mother for exposure to unfortified flour (uniform(0,1))
-  daily_flour_i           = average daily flour consumption Y of simulant's mother (sampled from population distribution)
+  ## Individual level attributes:
+  p_i                     = propensity of simulant and mother for exposure to lack of iron fortification (~uniform(0,1))
   gestational_age_i       = gestational age of simulant drawn from GBD (in years)
   birthweight_gbd_i       = birthweight drawn from GBD for simulant
+  iron_responsive_i       = whether individual is responsive to iron fortification
   age_i(t)                = the simulant's age at time t
   hb_gbd(age_i(t))        = hemoglobin level drawn from GBD for simulant
     # These times are both float('-inf') if simulant is covered in baseline
@@ -1369,17 +1385,14 @@ Summary of Iron Intervention Algorithm
                              'intervention_not_baseline' if p_i < coverage(t_end) else
                              'uncovered')
 
-  # At beginning of simulation
+  ## At beginning of simulation (t=0):
   mother_fortified_i    = 'unknown'
   mother_iron_group     = 'unknown'
-  birth_weight_i        = birthweight_gbd_i
-  child_fortified_i(0)  = time_covered_i <= 0 # time_covered_i = float('-inf') if covered in baseline
-                        = p_i < coverage(0)
-  hb_i(0)               = hb_gbd(age_i(0)) + (
-                          -baseline_coverage(0) + child_fortified_i(0)
-                          ) * hb_shift *  hb_age_fraction(age_i(0))
+    # Use GBD birthweight distribution at start of sim, because we don't have
+    # the need or the data to stratify by baseline coverage after birth.
+  birthweight_i         = birthweight_gbd_i
 
-  # When simulant is born in the simulation (t = time of birth)
+  ## When simulant is born in the simulation (t = time of birth):
   critical_time       = t - gestational_age_i + 20_weeks
   mother_fortified_i  = ((time_covered_i <= critical_time) and
                          (t-time_covered_i) >= 7_weeks)
@@ -1391,25 +1404,38 @@ Summary of Iron Intervention Algorithm
   mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
                          'intervention_not_baseline' if mother_fortified_i else
                          'uncovered')
-  bw_shift_i = bw_response * iron_concentration * daily_flour_i
-  birth_weight_i      = birthweight_gbd_i + (
-                        -baseline_coverage(t) + mother_fortified_i
-                        ) * bw_shift_i
+    # Effect on birthweight:
+    # Shift everyone's birthweight down to calibrate for baseline coverage
+  birthweight_i       = birthweight_gbd_i - baseline_coverage(t) * mean_bw_shift
+    # If simulant's mother was fortified, shift their birthweight up accordingly
+  if mother_fortified_i:
+    daily_flour_i     = average daily flour consumption Y of simulant's mother
+                      = flour_consumption_dist.rvs()
+    bw_shift_i        = birthweight shift Z given flour consumption Y
+                      = bw_response * iron_concentration * daily_flour_i
+    birthweight_i     = birthweight_i + bw_shift_i
 
-  # At each simulation time step (including when simulant is born)
-  child_fortified_i(t)  = time_covered_i <= t
-                        = p_i < coverage(t)
-    # If child is covered in baseline, then time_covered_i = float('-inf'),
-    # and hence hb_lag_fraction(t-time_covered_i) = 1, i.e. the child receives
-    # the full age-dependent effect in this case since the time lag has passed.
-  hb_i(t)               = hb_gbd(age_i(t)) + (
-                          -baseline_coverage(t) + child_fortified_i(t) * hb_lag_fraction(t-time_covered_i)
-                          ) * hb_shift *  hb_age_fraction(age_i(t))
-
-.. todo::
-
-  Edit above summary so that downward shift to treatment-deleted birthweight is
-  population-level rather than individual-level.
+  ## At each simulation time step (including t=0 or when simulant is born):
+      # Only adjust Hb level for iron-responsive individuals
+  if iron_responsive_i:
+    household_covered_i(t)    = time_covered_i <= t
+                              = p_i < coverage(t)
+      # Fortification starts either when the household receives coverage, or when
+      # the child turns 6 months old and starts eating solids, whichever is later.
+      # Recall that if the child is covered in baseline, then time_covered_i =
+      # float('-inf'), so coverage always starts at age 6 months in this case.
+    time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
+      # Effect on Hb:
+      # #calibrate for baseline coverage, and take into account
+      # the age-dependent effect size and the 6 month lag time.
+    hb_i(t)                   = (hb_gbd(age_i(t))
+                                 - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
+                                 + (household_covered_i(t)
+                                    * hb_lag_fraction(time_since_fortified_i(t))
+                                    * hb_age_fraction(age_i(t))
+                                    * hb_shift
+                                   )
+                                )
 
 Folic Acid Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~~
