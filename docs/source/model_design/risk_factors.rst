@@ -531,7 +531,9 @@ Difference measures relating to the whole population tend to be more useful and 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
 
-The population attributable fraction is a quantification of the proportion of cases of a given cause that could be eliminated by removing a risk exposure.
+The population attributable fraction is a quantification of the proportion of 
+of a given cause outcome, such as cases, deaths, or DALYs, that could be 
+eliminated by removing a risk exposure.
 
 ..todo::
 	Fill in PAF overview
@@ -621,9 +623,9 @@ dichotomous confounders.
 
 We consider PAF bias primarily in terms of the following ratio:
 
-.. math:: \frac{\text{biased AF}}{\text{unbiased AF}}
+.. math:: \frac{\text{biased PAF}}{\text{unbiased PAF}}
 
-Where the biased AF is calculated using equation (2), and the unbiased AF is 
+Where the biased PAF is calculated using equation (2), and the unbiased PAF is 
 calculated using equation (3).
 
 Direction
@@ -681,14 +683,14 @@ The magnitude of the PAF bias was shown to **increase** with:
 	- magnitude of the confounding RR
 
 The first two factors are intuitive: observe that in our measure of bias, 
-:math:`\frac{\text{biased AF}}{\text{unbiased AF}}`, a smaller exposure 
-prevalence will lead to a smaller true AF in the denominator, amplifying the 
-bias. Similarly, a smaller RR will also result in a smaller true AF, again 
+:math:`\frac{\text{biased PAF}}{\text{unbiased PAF}}`, a smaller exposure 
+prevalence will lead to a smaller true PAF in the denominator, amplifying the 
+bias. Similarly, a smaller RR will also result in a smaller true PAF, again 
 amplifing the bias.
 
 However, when examining the absolute difference between the biased and unbiased 
-AFs, note that Darrow did not find that lower exposure prevalence necessarily 
-caused a larger *absolute* AF bias.
+PAFs, note that Darrow did not find that lower exposure prevalence necessarily 
+caused a larger *absolute* PAF bias.
 
 For the confounding RR, we note that by "magnitude" we mean distance from 
 confounding RR=1. That is, as a confouding RR<1 decreases, it causes an 
