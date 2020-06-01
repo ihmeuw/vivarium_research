@@ -810,7 +810,8 @@ the *direct* consumption of iron fortified foods. The second outcome is a
 simulant's birth weight following the *maternal* consumption of iron fortified
 foods.
 
-**Hemoglobin Level**
+Hemoglobin Level
+''''''''''''''''
 
 The effect of iron fortified food consumption on children under 7 years of age
 was obtained from the [Keats-et-al-2019]_ systematic review. However, the
@@ -874,7 +875,8 @@ as follows:
 	meta-analysis for the effect size causing a slightly non-symmetrical
 	confidence interval around the mean.
 
-**Birth Weight**
+Birth Weight
+''''''''''''
 
 The effect of maternal consumption of iron fortified food on infant birth
 weight was obtained from [Haider-et-al-2013]_. According to this data
@@ -1043,7 +1045,8 @@ individual simulants.
 Determining Whether A Simulant is Affected - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Hemoglobin Level**
+Hemoglobin Level
+''''''''''''''''
 
 For the purposes of our simulation, we made a few assumptions:
 
@@ -1162,7 +1165,8 @@ See below for a visual representation:
 
 .. image:: iron_effect_scale_up.svg
 
-**Birth Weight**
+Birth Weight
+''''''''''''
 
 Our model will apply the effect size of maternal consumption of iron fortified
 foods on infant birth weight under the following assumptions:
