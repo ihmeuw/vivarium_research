@@ -546,19 +546,19 @@ The PAF can be calculated using the following formula:
 .. math::
 	:label: eq1
 
-	\text{PAF}_{pop}=\frac{p_c(RR-1)}{RR}
+	\text{PAF}_{pop}=\frac{p_c(RR_{adj}-1)}{RR_{adj}}
 
-In which we define :math:`p_c` to be the proportion of cases (individuals who possess the outcome of interest) that are exposed, 
-and *RR* has been adjusted for confounding and effect modification.
+In which we define :math:`p_c` to be the proportion of cases (individuals who 
+possess the outcome of interest) that are exposed, and :math:`RR_{adj}` has been adjusted for confounding and effect modification.
 
 There is the a second PAF equation, which can be used *in the absence of 
 confounding or effect modification:*
 
-.. math:: \text{PAF}_{pop}=\frac{p_p(RR-1)}{1+p_p(RR-1)}
+.. math:: \text{PAF}_{pop}=\frac{p_p(RR_{cr}-1)}{1+p_p(RR_{cr}-1)} =\frac{p_p(RR_{adj}-1)}{1+p_p(RR_{adj}-1)}
 	:label: eq2
 
-Here we define :math:`p_p` to be the proportion of the entire population that 
-is exposed.
+Note that here, the crude relative risk :math:`(RR_{cr})` is equivalent to the adjusted :math:`(RR_{adj})`. We define :math:`p_p` to be the proportion of the entire 
+population that is exposed.
 
 This is typically easier to conceptualize if we break the population down as
 follows:
@@ -589,25 +589,30 @@ And the proportion of the entire population that is exposed is given by:
 .. math:: p_p = \frac{a+b}{a+b+c+d}
 
 It can be shown that when the fraction of cases in the unexposed times the 
-relative risk :math:`\left( \frac{c}{c+d} \cdot RR \right)` equals the fraction 
+relative risk :math:`\left( \frac{c}{c+d} \cdot RR_{adj} \right)` equals the fraction 
 of cases in the exposed :math:`\left( \frac{a}{a+b} \right)`, i.e., when there 
 are no confounders, equation (1) equals equation (2).
 
-However, when :math:`\frac{c}{c+d} \cdot RR \neq \frac{a}{a+b}`, this inequality 
+However, when :math:`\frac{c}{c+d} \cdot RR_{adj} \neq \frac{a}{a+b}`, this inequality 
 fails. Intuitively, we can imagine a confounder that is positively associated with
 our exposure, holding all else constant. Then there will be a 
 disproportionately high number of cases among the exposed, and 
-:math:`\frac{c}{c+d} \cdot RR < \frac{a}{a+b}`, using the true RR.
+:math:`\frac{c}{c+d} \cdot RR_{adj} < \frac{a}{a+b}`.
 
-This can be solved via weighting equation (2) per stratum of our confounder, 
-yielding equation (3):
+This can be solved via weighting equation (2) per stratum of our confounder or
+effect modifier, yielding equation (3):
 
 .. math:: \sum_{i=1}^z W_i \frac{p_i(RR_i-1)}{1+p_i(RR_i-1)}
 	:label: eq3
 
-Here, for each stratum :math:`i` of our confounder, :math:`p_i` is the 
-proportion of the stratum that is exposed, and :math:`W_i` is the proportion of 
-the cases in the stratum.
+Here, for each stratum :math:`i` of our confounder or effect modifier, 
+:math:`p_i` is the proportion of the stratum that is exposed, :math:`W_i` is 
+the proportion of the cases in the stratum, and :math:`RR_i` is the 
+stratum-specific adjusted *RR*. Note that in the case of a confounder, 
+:math:`RR_{i}` will be equal across strata, and in the case of effect 
+modification, there will be a different :math:`RR_{i}` per stratum. More 
+information on confounding and effect modification can be found
+in the section on :ref:`causal relationships<causal_relationships>`.
 
 While we know equation (2) to be biased, we have had to use it in Vivarium 
 modeling due to insufficient data for use of equation (2) or (3).
@@ -634,13 +639,13 @@ Direction
 The direction of this bias was found to be fully determined by the confounding 
 risk ratio:
 
-..	math:: \frac{\text{crude RR}}{\text{Mantel-Haensel adjusted RR}}
+..	math:: \frac{RR_{crude}}{RR_{adj}}
 
-Specifically, a positive counfouding RR (:math:`>1.0`) resulted in a negative 
-PAF bias, and a negative confounding RR (:math:`<1.0`) resulted in a positive 
+Here, :math:`RR_{adj}` is the Mantel-Haensel adjusted RR. A positive *counfouding RR* (:math:`>1.0`) resulted in a negative 
+PAF bias, and a negative *confounding RR* (:math:`<1.0`) resulted in a positive 
 PAF bias.
 
-Furthermore, the direction of the confounding RR is fully determined by (1) the 
+Furthermore, the direction of the *confounding RR* is fully determined by (1) the 
 direction of the association between the confounder and the exposure, and (2) 
 the direction of the association between the confounder and disease (or cause).
 
@@ -678,23 +683,23 @@ The magnitude of the PAF bias was shown to **increase** with:
 
 	- lower exposure prevalence
 
-	- smaller RR for the disease (or cause)
+	- smaller :math:`RR_{adj}` for the disease (or cause)
 
-	- magnitude of the confounding RR
-
+	- magnitude of the *confounding RR*
+E
 The first two factors are intuitive: observe that in our measure of bias, 
 :math:`\frac{\text{biased PAF}}{\text{unbiased PAF}}`, a smaller exposure 
 prevalence will lead to a smaller true PAF in the denominator, amplifying the 
-bias. Similarly, a smaller RR will also result in a smaller true PAF, again 
+bias. Similarly, a smaller :math:`RR_{adj}` will also result in a smaller true PAF, again 
 amplifing the bias.
 
 However, when examining the absolute difference between the biased and unbiased 
 PAFs, note that Darrow did not find that lower exposure prevalence necessarily 
 caused a larger *absolute* PAF bias.
 
-For the confounding RR, we note that by "magnitude" we mean distance from 
-confounding RR=1. That is, as a confouding RR<1 decreases, it causes an 
-increased **overestimation** of the PAF, and as a confounding RR>1 increases, 
+For the *confounding RR*, we note that by "magnitude" we mean distance from 
+*confounding RR*=1. That is, as a *confouding RR*<1 decreases, it causes an 
+increased **overestimation** of the PAF, and as a *confounding RR*>1 increases, 
 it causes an increased **underestimation** of the PAF.
 
 Darrow states that the amount of bias under most realistic scenarios is on the 
