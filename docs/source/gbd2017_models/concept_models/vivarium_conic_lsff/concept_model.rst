@@ -1129,21 +1129,66 @@ For the purposes of our simulation, we made a few assumptions:
 To summarize, we are trying to account for two factors that will decrease the
 reported effect size of iron fortification on hemoglobin in our simulants:
 
-1.  (**Age effect**) Children don't start eating (fortified) solid food until 6 months of age, at which
-    point the amount of food slowly increases to a maximum at 2 years of age,
-    then remains constant.
+1.  (**Age effect**) Children don't start eating (fortified) solid food until 6
+    months of age, at which point the amount of (fortified) food slowly
+    increases to a maximum at 2 years of age, then remains constant.
 
-2.  (**Time-lag effect**) When someone starts eating iron-fortified food, the measured effect on
-    hemoglobin increases from 0 to the maximum effect size over a period of 6
-    months.
+2.  (**Time-lag effect**) When someone starts eating iron-fortified food, the
+    measured effect on hemoglobin increases from 0 to the maximum effect size
+    over a period of 6 months.
 
-To model these two effects mathematically, we are making the following simplifying assumptions:
+To model these two effects mathematically, we are making the following
+simplifying assumptions:
 
-1.  The above two factors each reduce the reported Hb effect size by a multiplicative factor, independent of the other factor.
+1.  The above two factors each reduce the reported Hb effect size by a multiplicative factor independent of the other factor.
 
-2.  Each multiplicative factor is a piecewise linear function of time.
+2.  Each multiplicative factor is a continuous piecewise linear function of time.
 
-We will model the age effect with a piecewise lineear function ``hb_age_fraction(age)``, where ``age`` is the current age of the simulant, and we will model the time-lag effect with a piecewise linear function ``hb_lag_fraction(time_since_fortified)``, where ``time_since_fortified`` is the time since the simulant started eating iron-fortified food:
+We will model the age effect with a continuous piecewise linear function
+``hb_age_fraction(age)``, where ``age`` is the current age of the simulant, and
+we will model the time-lag effect with a continuous piecewise linear function
+``hb_lag_fraction(time_since_fortified)``, where ``time_since_fortified`` is the
+time since the simulant started eating iron-fortified food:
+
+.. code-block:: Python
+
+  def hb_age_fraction(age):
+  """
+  Multiplier on Hb effect size due to children eating less food at younger
+  ages. (`age` is current age in years).
+  """
+    return 0 if age<0.5 else (age-0.5)/1.5 if age<2 else 1
+
+  def hb_lag_fraction(time_since_fortified):
+  """
+  Multiplier on Hb effect size due to lag in response time to iron fortification.
+  The argument `time_since_fortified` is the time (in years) since a simulant
+  started eating fortified food (a negative value of `time_since_fortified`
+  indicates the child has not yet started eating fortified food).
+  """
+    return (0                         if time_since_fortified < 0   else
+            time_since_fortified/0.5  if time_since_fortified < 0.5 else
+            1)
+
+.. Note::
+
+  Since children don't start eating fortified food until 6 months of age, the
+  argument ``time_since_fortified`` for the time-lag function will be *either*
+  the time since the child's household got fortification coverage, *or* the time
+  since the child turned 6 months old, *whichever is smaller*.
+
+.. Note::
+
+  When calibrating hemoglobin levels for baseline coverage (see the
+  :ref:`baseline calibration <baseline_calibration_hb_bw_section>` section
+  below), we will use **only** the age effect to compute the treatment-deleted
+  hemoglobin levels of the population (the down-shift), whereas we will use
+  **both** the age effect *and* the time-lag effect when applying the treatment
+  to an individual simulant (the up-shift). This will cause our population's
+  overall mean hemoglobin level to be slightly lower than the value in GBD, but
+  not by much, and this is the simplest strategy that seems reasonable.
+
+
 
 Therefore, the effect size of iron fortification on a simulant's hemoglobin
 level **in the baseline scenario** should be determined as follows:
@@ -1317,6 +1362,8 @@ effect size will then be used to determine the simulant's LBWSG risk category.
   See Baseline Calibration section below for special considerations regarding baseline coverage
 
 .. todo:: Reference the LBWSG risk factor page when complete
+
+.. _baseline_calibration_hb_bw_section:
 
 Baseline Calibration -- Hemoglobin and Birth Weight
 '''''''''''''''''''''''''''''''''''''''''''''''''''
