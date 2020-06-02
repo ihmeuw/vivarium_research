@@ -253,25 +253,25 @@ Scale-up of breast cancer screening coverage among insured population
 
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
-+-------------------------------------------------------------------------------------------------------------+
-| Population size weight table                                                                                | 
-+============+===========+========+===========================================================================+
-| Province   | Region    | Weight | Forcasted ACMR                                                            |
-+------------+-----------+--------+---------------------------------------------------------------------------+
-| Tianjian   | North     | 18%    | filepath:                                                                 |
-+------------+-----------+--------+                                                                           | 
-| Jiangsu    | East      | 28%    | /home/j/temp/agoros/CSU/swissre/cancer_inc/294_ets_mortality_45_beta_85.nc| 
-+------------+-----------+--------+                                                                           |
-| Guangdong  | South     | 15%    |                                                                           |
-|            +-----------+--------+                                                                           |
-|            | Southwest | 7%     |                                                                           |
-+------------+-----------+--------+                                                                           |
-| Henan      | Central   | 17%    |                                                                           |
-+------------+-----------+--------+                                                                           |
-| Helilong-  | Northeast | 8%     |                                                                           |
-| jiang      +-----------+--------+                                                                           |
-|            | Northwest | 8%     |                                                                           |
-+------------+-----------+--------+---------------------------------------------------------------------------+                                                                           
++-------------------------------------------------------------------------------+
+| Population size weight table                                                  | 
++============+===========+========+=============================================+
+| Province   | Region    | Weight | Forcasted ACMR                              |
++------------+-----------+--------+---------------------------------------------+
+| Tianjian   | North     | 18%    | filepath:                                   |
++------------+-----------+--------+                                             | 
+| Jiangsu    | East      | 28%    | /home/j/temp/agoros/CSU/swissre/            | 
++------------+-----------+--------+ cancer_inc/294_ets_mortality_45_beta_85.nc  |
+| Guangdong  | South     | 15%    |                                             |
+|            +-----------+--------+                                             |
+|            | Southwest | 7%     |                                             |
++------------+-----------+--------+                                             |
+| Henan      | Central   | 17%    |                                             |
++------------+-----------+--------+                                             |
+| Helilong-  | Northeast | 8%     |                                             |
+| jiang      +-----------+--------+                                             |
+|            | Northwest | 8%     |                                             |
++------------+-----------+--------+---------------------------------------------+                                                                           
 
 .. todo::
  currently adds up to 101%
@@ -286,7 +286,7 @@ Scale-up of breast cancer screening coverage among insured population
 
 5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-(holymoly)
+
 The breast cancer model includes both a stage 0 and stage 1+. Stage 0 is not modelled in GBD 2017 while stage 1+ is. 
 
 +------------------------------------------------------------------------------------------------------------------+
@@ -395,23 +395,25 @@ GBD does not give us any information on the prevalence of DCIS or LCIS. Hence we
 :download:`Age-specific prevalence ratio of LCIS CSV file <ratio.csv>`
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------+
-| Transition data DCIS                                                                                                                           |
-+============+===============+===============+==============================================+====================================================+ 
-| Transition | Source state  | Sink state    | Value                                        | Notes                                              |
-+------------+---------------+---------------+----------------------------------------------+----------------------------------------------------+
-| i_DCIS     | S             |  DCIS         | | incidence_c429                             | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                          | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | incidence ratio of DCIS                    | incidence ratio of DCIS comes from MarketScan 2017 |
-+------------+---------------+---------------+----------------------------------------------+----------------------------------------------------+
-| i_LCIS     | S             |  LCIS         | | incidence_c429                             | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                          | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | incidence ratio of LCIS                    | incidence ratio of DCIS comes from MarketScan 2017 |
-+------------+---------------+---------------+----------------------------------------------+----------------------------------------------------+
-| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{i_DCIS}}`  | i_BC= i_DCIS x i_BC|DCIS                           |
-+------------+---------------+---------------+----------------------------------------------+----------------------------------------------------+
-| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{i_LCIS}}`  | i_BC= i_LCIS x i_BC|LCIS                           |
-+------------+---------------+---------------+----------------------------------------------+----------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------+
+| Transition data DCIS                                                                                                                             |
++============+===============+===============+================================================+====================================================+ 
+| Transition | Source state  | Sink state    | Value                                          | Notes                                              |
++------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
+| i_DCIS     | S             |  DCIS         | | incidence_c429                               | incidence_c429 (breast cancer) comes from como for | 
+|            |               |               | | x                                            | 2017 and forecasted for 2020-2040                  |
+|            |               |               | | incidence ratio of DCIS                      | incidence ratio of DCIS comes from MarketScan 2017 |
++------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
+| i_LCIS     | S             |  LCIS         | | incidence_c429                               | incidence_c429 (breast cancer) comes from como for | 
+|            |               |               | | x                                            | 2017 and forecasted for 2020-2040                  |
+|            |               |               | | incidence ratio of LCIS                      | incidence ratio of DCIS comes from MarketScan 2017 |
++------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
+| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_DCIS}}` | i_BC|DCIS = i_BC /prev_DCIS                        |
++------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
+| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_LCIS}}` | i_BC|LCIS = i_BC /prev_LCIS                        |
++------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
+| see :ref:`Breast cancer cause model link <2017_cancer_model_breast_cancer>` for i_BC (i_c429)                                                    |
++--------------------------------------------------------------------------------------------------------------------------------------------------+
 
 
 :underline:`Incidence ratio of DCIS and LCIS`
@@ -435,11 +437,11 @@ GBD does not give us any information on the incidence of DCIS or LCIS. Hence we 
 
 **LCIS**
 
-   - Age-specific incidence ratio of DCIS = :math:`\frac{\text{age-specific incidence of LCIS}}{\text{age-specific incidence of breast cancer}}`
+   - Age-specific incidence ratio of LCIS = :math:`\frac{\text{age-specific incidence of LCIS}}{\text{age-specific incidence of breast cancer}}`
 
-   - Age-specific incidence of DCIS 
+   - Age-specific incidence of LCIS 
 
-      = age-specific incidence of ratio of DCIS X age-specific incidence of breast cancer (prev_c429)
+      = age-specific incidence of ratio of LCIS X age-specific incidence of breast cancer (prev_c429)
 
 .. image:: age_specific_i_ratio_LCIS.svg
 
