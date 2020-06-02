@@ -1115,8 +1115,35 @@ For the purposes of our simulation, we made a few assumptions:
     women, not iron fortification of flour among children.
 
 5.  We assumed that all individuals covered by baseline coverage of iron
-    fortification have been covered for at least six months and therefore have
-    already achieved the full effect of the intervention.
+    fortification have been covered for at least six months, and therefore
+    either
+
+    a) They have already achieved the full age-dependent effect of the
+    intervention *if* they have been eating food for at least 6 months; that is,
+    they receive the full effect if they are at least one year old, or
+
+    b) If they are less than one year old, they have started or will start
+    eating fortified food as soon as they turn(ed) 6 months old, hence will
+    achieve the full age-dependent effect at exactly one year old.
+
+To summarize, we are trying to account for two factors that will decrease the
+reported effect size of iron fortification on hemoglobin in our simulants:
+
+1.  (**Age effect**) Children don't start eating (fortified) solid food until 6 months of age, at which
+    point the amount of food slowly increases to a maximum at 2 years of age,
+    then remains constant.
+
+2.  (**Time-lag effect**) When someone starts eating iron-fortified food, the measured effect on
+    hemoglobin increases from 0 to the maximum effect size over a period of 6
+    months.
+
+To model these two effects mathematically, we are making the following simplifying assumptions:
+
+1.  The above two factors each reduce the reported Hb effect size by a multiplicative factor, independent of the other factor.
+
+2.  Each multiplicative factor is a piecewise linear function of time.
+
+We will model the age effect with a piecewise lineear function ``hb_age_fraction(age)``, where ``age`` is the current age of the simulant, and we will model the time-lag effect with a piecewise linear function ``hb_lag_fraction(time_since_fortified)``, where ``time_since_fortified`` is the time since the simulant started eating iron-fortified food:
 
 Therefore, the effect size of iron fortification on a simulant's hemoglobin
 level **in the baseline scenario** should be determined as follows:
