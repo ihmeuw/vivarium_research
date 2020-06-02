@@ -33,43 +33,12 @@
 
 .. _concept_model_template:
 
-=====
-TITLE
-=====
+======================
+Concept model template
+======================
 
-Contents: 
-	
-	+ :ref:`1.0 Background <1.0>`
-
-		* :ref:`1.1 Project overview <1.1>`
-		* :ref:`1.2 Literature review <1.2>`
-	+ :ref:`2.0 Modelling aims and objectives <2.0>`
-
-	+ :ref:`3.0 Baseline causal framework <3.0>`
-
-		* :ref:`3.1 Causal diagram <3.1>`
-		* :ref:`3.2 Effect size <3.2>`
-	+ :ref:`4.0 Intervention <4.0>`
-
-		* :ref:`4.1 scenarios <4.1>`
-	+ :ref:`5.0 Vivarium modelling components <5.0>`
-
-        * :ref:`5.1 Vivarium concept model diagram <5.1>`
-
-		* :ref:`5.2 Demographics <5.2>`
-
-			- :ref:`5.2.1 Population <5.2.1>`
-			- :ref:`5.2.2 Location <5.2.2>`
-		* :ref:`5.3 Models <5.3>`
-
-			- :ref:`5.3.1 Model 1: <5.3.1>`
-			- :ref:`5.3.2 Model 2:  <5.3.2>`
-			- :ref:`5.3.3 Model 3:  <5.3.3>`
-			- :ref:`5.3.4 Model 4:  <5.3.4>`
-		* :ref:`5.4 Desired outputs <5.4>`
-		* :ref:`5.5 Meta-table shell <5.5>`
-	+ :ref:`6.0 Limitations <6.0>`
-
+.. contents::
+  :local:
 
 +------------------------------------+
 | List of abbreviations              |
@@ -232,6 +201,12 @@ Stratifications:
 
 .. _6.0:
 
-6.0 Limitations
+6.0 Back of the envelope calculation
+++++++++++++++++++++++++++++++++++++
+
+
+.. _7.0:
+
+7.0 Limitations
 +++++++++++++++
 
