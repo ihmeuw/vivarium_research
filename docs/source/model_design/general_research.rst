@@ -731,7 +731,7 @@ Backdoor paths are those in which two variables are connected via a common cause
 
 .. image:: backdoor_path_dag.svg
 
-**In the case of a backdoor path between two variables (and no directional path), there will be an association (due to a common cause between them), but no causal relationship between the two variables.**
+**In the case of a backdoor path between two variables (and no directed path), there will be an association (due to a common cause between them), but no causal relationship between the two variables.**
 
 Colliders
 ^^^^^^^^^
