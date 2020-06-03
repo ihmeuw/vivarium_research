@@ -1163,7 +1163,7 @@ time since the simulant started eating iron-fortified food:
   """
   Multiplier on Hb effect size due to lag in response time to iron fortification.
   The argument `time_since_fortified` is the time (in years) since a simulant
-  started eating fortified food (a negative value of `time_since_fortified`
+  started eating fortified food (note that a negative value of `time_since_fortified`
   indicates the child has not yet started eating fortified food).
   """
     return (0                         if time_since_fortified < 0   else
@@ -1188,61 +1188,91 @@ time since the simulant started eating iron-fortified food:
   overall mean hemoglobin level to be slightly lower than the value in GBD, but
   not by much, and this is the simplest strategy that seems reasonable.
 
+.. Note::
 
+  When calibrating hemoglobin levels for baseline coverage (see the
+  :ref:`baseline calibration <baseline_calibration_hb_bw_section>` section
+  below), it is *possible* (but highly unlikely with the shift size we're dealing with) that a simulant's hemoglobin level can end up *negative* after the down-shift. **In the case of a negative hemoglobin level, we will arbitrarily reset the hemoglobin level to 10 g/L**.
 
-Therefore, the effect size of iron fortification on a simulant's hemoglobin
-level **in the baseline scenario** should be determined as follows:
+.. Note::
+
+  As described in the :ref:`Dietary Iron Deficiency / Iron Deficiency
+  Documentation <2017_cause_iron_deficiency>`, the hemoglobin shift from iron
+  fortification should be applied **only** to simulants who are *iron
+  responsive*. This applies both to the baseline calibration (down-shift) and
+  the application of the effect size to simulants with fortification coverage
+  (up-shift).
+
+.. Note::
+
+  When determining whether a simulant gets covered by our iron fortification
+  program, the child's propensity for coverage (for the hemoglobin effect)
+  should be **the same** as their mother's propensity for coverage (for the
+  birthweight effect). In other words, when comparing the random propensity
+  against the iron fortification :ref:`coverage function
+  <coverage_algorithm_section>`, the same random number should be used to
+  determine whether the child's mother ate fortified food during pregnancy as is
+  used to determine whether the child eats fortified food.
+
+Combining everything:
 
 .. code-block:: Python
 
-	# at the draw level
-	MD = hb_md_distribution.rvs() # mean difference in hemoglobin concentration due to iron fortification
-		# note, hb_md_distribution defined above in the effect size section
+  # At the draw level
 
-	# at the individual simulant level
-	if age_i < 0.5:
-		md_i = 0
-	elif age_i < 2:
-		md_i = MD * (age_i - 0.5) / 1.5
-	else:
-		md_i = MD
+  # Mean difference in hemoglobin concentration due to iron fortification.
+  # Note: hb_md_distribution is defined above in the effect size section.
+  hb_shift = hb_md_distribution.rvs()
 
-The effect size of the iron fortification on a simulant's hemoglobin level for
-new **intervention** coverage of iron fortification should be determined as
-follows:
+  # At the individual simulant level, at each time step (time = t)
+  # Only adjust Hb level for iron-responsive individuals
+  if iron_responsive_i:
+    household_covered_i(t)  = time_covered_i <= t
+                            = p_i < coverage(t)
+    # Fortification starts either when the household receives coverage, or when
+    # the child turns 6 months old and starts eating solids, whichever is later.
+    # Recall that if the child is covered in baseline, then time_covered_i =
+    # float('-inf'), so coverage always starts at age 6 months in this case.
+    time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
+    # Effect on Hb:
+    # #calibrate for baseline coverage, and take into account
+    # the age-dependent effect size and the 6 month lag time.
 
-.. code-block:: Python
+    hb_i = hb_gbd(age_i(t)) - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
 
-	# MD = hb_md_distribution.rvs() : full effect size at the draw level
-		# (mean difference in hemoglobin concentration due to iron fortification)
-	# md_i : effect size for an individual simulant at a given time-step,
-		# dependent on age and time since coverage
-	# age_i : simulant age in years
-	# age_of_coverage_i : age at which simulant gained coverage access in years
-	# time_since_coverage_i : age_i - age_of_coverage_i
-	# age_of_coverage_i / 1.5 : fraction of full effect that will be achieved
-		# in six months since onset of coverage access, dependent on
-		# age_of_coverage_i [(age_of_coverage - 0.5 + 0.5) / (2 - 0.5)]
-	# time_since_coverage_i / 0.5 : fraction of effect that will be achieved
-		# at six months post onset of coverage access, dependent on
-		# time_since_coverage_i
-	# (age_i - 0.5) / 1.5 : fraction of full effect, dependent on age
+    if hb_i < 0:
+      hb_i = 10 # Arbitrarily set value to 10 if shifting made it negative
 
-	# at the individual simulant level
-	if age_i < 0.5:
-		md_i = 0
-	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i < 0.5:
-		md_i = MD * age_of_coverage_i / 1.5 * time_since_coverage_i / 0.5
-	if age_i > 0.5 and age_of_coverage < 1.5 and time_since_coverage_i >= 0.5:
-		md_i = MD * (age_i - 0.5) / 1.5
-	if age_i > 0.5 and age_of_coverage >= 1.5 and time_since_coverage_i < 0.5:
-		md_i = MD * time_since_coverage_i / 0.5
-	else:
-		md_i = MD
+    if household_covered_i(t):
+      hb_i += (hb_lag_fraction(time_since_fortified_i(t))
+               * hb_age_fraction(age_i(t))
+               * hb_shift
+              )
+
+.. todo::
+
+  Edit the above code to define all variables, make it valid Python code, and
+  comment appropriately.
 
 See below for a visual representation:
 
 .. image:: iron_effect_scale_up.svg
+
+.. todo::
+
+  Edit the above graph to reflect the modified definition of our effect size.
+  Namely:
+
+  - The blue line represents the effect size as a function of age, ``hb_shift *
+    hb_age_fraction(age)``, without taking the time lag into account.
+
+  - To get the graph for "coverage gained at birth" (or "coverage gained before
+    6 months"), modify the blue graph by making it a quadratic function between
+    0.5 years and 1 year, such that the graph has slope 0 at 6 months and
+    remains continuous.
+
+  - The graph for "coverage gained at 1 year" should be slightly curved
+    (quadratic concave up) between 1 year and 1.5 years.
 
 Birth Weight
 ''''''''''''
@@ -1768,6 +1798,7 @@ the national estimate  obtained as described above.
 .. _stochastic ordering: https://en.wikipedia.org/wiki/Stochastic_ordering
 
 .. _here:
+.. _coverage_algorithm_section:
 
 Coverage Algorithm
 ^^^^^^^^^^^^^^^^^^
