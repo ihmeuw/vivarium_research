@@ -150,8 +150,6 @@ State and Transition Data Tables
 | BC                    | with condition | with condition breast cancer      |
 +-----------------------+----------------+-----------------------------------+
 
-HELLO THERE??????????????
-
 .. list-table:: State Data
    :widths: 10 15 15 35 25
    :header-rows: 1
