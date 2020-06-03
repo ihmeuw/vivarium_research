@@ -413,10 +413,8 @@ Interventions
 Vitamin A Fortification
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Effect Size
-^^^^^^^^^^^
-
-**Research Considerations**
+Research Considerations
+^^^^^^^^^^^^^^^^^^^^^^^
 
 In this model, the vitamin A fortification intervention affects the
 **prevalence of vitamin A deficiency**. The effect size for this intervention
@@ -521,7 +519,8 @@ onset of exposure to vitamin A fortification, including:
 
  	Add more detail regarding the time to response.
 
-**Effect Size**
+Effect Size - Vitamin A
+^^^^^^^^^^^^^^^^^^^^^^^
 
 In our Vivarium simulation, the effect of exposure foods **not** fortified
 with vitamin A on the prevalence of vitamin A deficiency realtive to those
@@ -585,7 +584,8 @@ as follows:
 	create a separate page that lists similar strategies that we can reference
 	via links.
 
-**Time to Response**
+Time to Response
+^^^^^^^^^^^^^^^^
 
 Further, the time-to-response to vitamin A fortification in years should also
 be sampled such that:
@@ -609,7 +609,8 @@ be sampled such that:
 	# (s is the shape parameter)
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
-**Population Coverage Data**
+Population Coverage Data
+^^^^^^^^^^^^^^^^^^^^^^^^
 
 The coverage algorithm for vitamin A fortification should follow the same approach described
 in this concept model document for folic acid fortification (see `Population Coverage Data - Iron and Folic Acid`_).
@@ -662,7 +663,8 @@ existing coverage of folic acid in Ethiopia).
 	Benefits of Food Fortification. Addis Ababa : Government of the
 	Federal Democratic Republic of Ethiopia, 2011).
 
-**Effect of Intervention on Simulants**
+Effect of Intervention on Simulants
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As described in the research considerations section, the
 intervention effect is dependent on age and time since intervention coverage.
@@ -727,7 +729,12 @@ Where,
 
 	- rr_i is the relative risk assigned to the individual simulant
 
-The pseudo-code used to implement the vitamin A intervention effect in Vivarium is shown below:
+Summary of Vitamin A Intervention Algorithm
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The pseudo-code used to implement the vitamin A intervention effect in Vivarium
+is shown below. This summary was written by James and sent to Ali and Nathaniel
+via Slack on March 19, 2020.
 
 
 .. code-block:: Python
@@ -810,7 +817,8 @@ the *direct* consumption of iron fortified foods. The second outcome is a
 simulant's birth weight following the *maternal* consumption of iron fortified
 foods.
 
-**Hemoglobin Level**
+Hemoglobin Level
+''''''''''''''''
 
 The effect of iron fortified food consumption on children under 7 years of age
 was obtained from the [Keats-et-al-2019]_ systematic review. However, the
@@ -874,7 +882,8 @@ as follows:
 	meta-analysis for the effect size causing a slightly non-symmetrical
 	confidence interval around the mean.
 
-**Birth Weight**
+Birth Weight
+''''''''''''
 
 The effect of maternal consumption of iron fortified food on infant birth
 weight was obtained from [Haider-et-al-2013]_. According to this data
@@ -1043,7 +1052,8 @@ individual simulants.
 Determining Whether A Simulant is Affected - Iron
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Hemoglobin Level**
+Hemoglobin Level
+''''''''''''''''
 
 For the purposes of our simulation, we made a few assumptions:
 
@@ -1162,7 +1172,8 @@ See below for a visual representation:
 
 .. image:: iron_effect_scale_up.svg
 
-**Birth Weight**
+Birth Weight
+''''''''''''
 
 Our model will apply the effect size of maternal consumption of iron fortified
 foods on infant birth weight under the following assumptions:
