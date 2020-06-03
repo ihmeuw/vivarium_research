@@ -15,8 +15,8 @@ Disease Overview
 GBD 2017 Modeling Strategy
 --------------------------
 
-Breast cancer in GBD 2017
-++++++++++++++++++++++++++
+Breast cancer stage 1+ in GBD 2017 and stage 0 not in GBD
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This breast cancer model includes both stage 0 and stage 1+. Stage 0 is not modelled in GBD 2017 while stage 1+ is. 
 
@@ -38,7 +38,7 @@ This breast cancer model includes both stage 0 and stage 1+. Stage 0 is not mode
 +---------------+------------------------------------------------------------------------+-------------+-----------+
 
 Cause Hierarchy of stage 1+ breast cancer in GBD
-++++++++++++++++++++++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   +-------------------------------------------------------------------------------------------------------------+
   | GBD breast cancer cause hierarchy                                                                           |
@@ -63,7 +63,7 @@ Cause Hierarchy of stage 1+ breast cancer in GBD
 
 
 Restrictions
-++++++++++++
+~~~~~~~~~~~~
 
 The following table describes any restrictions on the effects of this cause
 (such as being only fatal or only nonfatal), as well as restrictions on the age
@@ -105,22 +105,10 @@ and sex of simulants to which different aspects of the cause model apply.
 Vivarium Modeling Strategy
 --------------------------
 
+Things to consider: 
 
-Scope
-+++++
-
-.. todo::
-
-   Add scope.
-
-Model Assumptions and Limitations
-+++++++++++++++++++++++++++++++++
-
-1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
-For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
-10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
-might over estimate deaths in that scenario.
-
+1. Within GBD 2017 data, there is no remission rate for stage 1+ breast cancer.
+2. Within GBD 2017, after diagnosis/treatment if a patient survives more than 10 years, they are considered cured for calculating disability. Additionally, per GBD 2017, the patients also do not have excess mortality rate after 10 years. For vivarium simulation models, this means we need to track how long patients have been in the breast cancer state. This should be easy for those who has a breast cancer incidence after sim start. For those who were iniatialized in the breast cancer state, we need to assign when breast cancer was diagnosised in the past. After their 10 years is up and they still havent died, we need to decide what susceptability state to remit them to. 
 
 .. todo::
 
