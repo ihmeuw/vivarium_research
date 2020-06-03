@@ -287,32 +287,13 @@ Scale-up of breast cancer screening coverage among insured population
 5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The breast cancer model includes both a stage 0 and stage 1+. Stage 0 is not modelled in GBD 2017 while stage 1+ is. 
-
-+------------------------------------------------------------------------------------------------------------------+
-| Breast cancer types                                                                                              |
-+===============+========================================================================+=============+===========+
-| Disease stage | Definition                                                             | Sequaelae id| Notes     |
-+---------------+------------------------------------------------------------------------+-------------+-----------+
-| stage 0       | non-invasive breast cancers, such as DCIS or LCIS.                     |             | external  |
-|               | Both cancerous and non-cancerous cells are within the boundaries of    |             | data need-|
-|               | the part of the breast in which the tumor begins to grown and no       |             | ed for in |
-|               | evidence found of their invasion in the surrounding tissues.           |             | situ brea-|
-|               |                                                                        |             | st cancer |
-+---------------+------------------------------------------------------------------------+-------------+-----------+
-| stage 1+      | invasive breast cancer, it exists when abnormal cells from within the  | s_277,s_5486|           |
-|               | lobules or milk ducts split out into close proximity of breast tissue. | s_5489,s_279|           |
-|               | Cancer cells can pass through the breast to different parts of the body| s_280,s_5492|           |
-|               | through immune system or the systemic circulation.                     |             |           |
-+---------------+------------------------------------------------------------------------+-------------+-----------+
-
 :underline:`Compartmental model`
 
   .. image:: compartmental_model_simple.svg
 
 
 +----------------------------------------------------------------------------+
-| State definitions                                                         |
+| State definitions                                                          |
 +=======================+================+===================================+ 
 | State                 | State name     | Definition                        |
 +-----------------------+----------------+-----------------------------------+
@@ -359,8 +340,10 @@ The breast cancer model includes both a stage 0 and stage 1+. Stage 0 is not mod
 | BC   | disability | YLD appendix              | :math:`\displaystyle{\sum_{s\in\text{seq_c429}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`| sources for            |   
 |      | weight     |                           |                                                                                                                 | 2020-2040              |
 +------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
-| Once in breast cancer (BC) state, see :ref:`Breast cancer cause model link <2017_cancer_model_breast_cancer>`                                                                            |
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| BC   | cause      | coodcorrect               | :math:`\frac{\text{deaths_c429}}{\text{population}}`                                                            |                        |   
+|      | mortality  |                           |                                                                                                                 |                        |
+|      | rate       |                           |                                                                                                                 |                        |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
 
 
 :underline:`Prevalence ratio of DCIS and LCIS`
@@ -395,25 +378,26 @@ GBD does not give us any information on the prevalence of DCIS or LCIS. Hence we
 :download:`Age-specific prevalence ratio of LCIS CSV file <ratio.csv>`
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------+
-| Transition data DCIS                                                                                                                             |
-+============+===============+===============+================================================+====================================================+ 
-| Transition | Source state  | Sink state    | Value                                          | Notes                                              |
-+------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
-| i_DCIS     | S             |  DCIS         | | incidence_c429                               | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                            | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | incidence ratio of DCIS                      | incidence ratio of DCIS comes from MarketScan 2017 |
-+------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
-| i_LCIS     | S             |  LCIS         | | incidence_c429                               | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                            | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | incidence ratio of LCIS                      | incidence ratio of DCIS comes from MarketScan 2017 |
-+------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
-| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_DCIS}}` | i_BC|DCIS = i_BC /prev_DCIS                        |
-+------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
-| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_LCIS}}` | i_BC|LCIS = i_BC /prev_LCIS                        |
-+------------+---------------+---------------+------------------------------------------------+----------------------------------------------------+
-| see :ref:`Breast cancer cause model link <2017_cancer_model_breast_cancer>` for i_BC (i_c429)                                                    |
-+--------------------------------------------------------------------------------------------------------------------------------------------------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Transition data DCIS                                                                                                                                                   |
++============+===============+===============+======================================================================+====================================================+ 
+| Transition | Source state  | Sink state    | Value                                                                | Notes                                              |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_DCIS     | S             |  DCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
+|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
+|            |               |               | | incidence ratio of DCIS                                            | incidence ratio of DCIS comes from MarketScan 2017 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_LCIS     | S             |  LCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
+|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
+|            |               |               | | incidence ratio of LCIS                                            | incidence ratio of DCIS comes from MarketScan 2017 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_DCIS+prev_LCIS+prev_LCIS}}`   | i_BC|DCIS = i_BC /prev_(DCIS+LCIS)                 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_LCIS+prev_DCIS}}`             | i_BC|LCIS = i_BC /prev_(LCIS+DCIS)                 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_BC       | S             | BC            |:math:`\frac{\text{incidence_rate_c429}}{\text{1 - prevalence_c429}}` | i_BC|LCIS = i_BC /(1-prev_BC)                      |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+
 
 
 :underline:`Incidence ratio of DCIS and LCIS`

@@ -1,8 +1,8 @@
-.. _2017_cancer_model_breast_cancer:
+.. _2017_cancer_model_breast_cancer_with_stage_0:
 
-=============
-Breast Cancer
-=============
+==========================
+Breast Cancer with stage 0
+==========================
 
 Disease Overview
 ----------------
@@ -18,29 +18,27 @@ GBD 2017 Modeling Strategy
 Breast cancer in GBD 2017
 ++++++++++++++++++++++++++
 
-The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Breast-Cancer]_.
+This breast cancer model includes both stage 0 and stage 1+. Stage 0 is not modelled in GBD 2017 while stage 1+ is. 
 
++------------------------------------------------------------------------------------------------------------------+
+| Breast cancer types                                                                                              |
++===============+========================================================================+=============+===========+
+| Disease stage | Definition                                                             | Sequaelae id| Notes     |
++---------------+------------------------------------------------------------------------+-------------+-----------+
+| stage 0       | non-invasive breast cancers, such as DCIS or LCIS.                     |             | external  |
+|               | Both cancerous and non-cancerous cells are within the boundaries of    |             | data need-|
+|               | the part of the breast in which the tumor begins to grown and no       |             | ed for in |
+|               | evidence found of their invasion in the surrounding tissues.           |             | situ brea-|
+|               |                                                                        |             | st cancer |
++---------------+------------------------------------------------------------------------+-------------+-----------+
+| stage 1+      | invasive breast cancer, it exists when abnormal cells from within the  | s_277,s_5486|           |
+|               | lobules or milk ducts split out into close proximity of breast tissue. | s_5489,s_279|           |
+|               | Cancer cells can pass through the breast to different parts of the body| s_280,s_5492|           |
+|               | through immune system or the systemic circulation.                     |             |           |
++---------------+------------------------------------------------------------------------+-------------+-----------+
 
-Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
-
-Because of long-term disability associated with mastectomy, prevalence for breast cancer is estimated beyond ten years. To estimate the disability, 
-total prevalence for breast cancer is split into
-
-#. Diagnosis and primary therapy
-#. Controlled phase
-
-   #. Controlled phase of breast cancer, with mastectomy
-   #. Controlled phase of breast cancer, without mastectomy
-#. Metastatic phase
-#. Terminal phase
-#. Mastectomy from breast cancer, beyond 10 years
-
-.. todo::
-
-   Add more details about GBD modelling strategy of Breast cancer.
-
-Cause Hierarchy
-++++++++++++++++
+Cause Hierarchy of stage 1+ breast cancer in GBD
+++++++++++++++++++++++++++++++++++++++++++++++++
 
   +-------------------------------------------------------------------------------------------------------------+
   | GBD breast cancer cause hierarchy                                                                           |
@@ -129,120 +127,160 @@ might over estimate deaths in that scenario.
    Add more assumptions and limitations.
 
 
-Cause Model Diagram
-+++++++++++++++++++
+Compartmental Diagram
++++++++++++++++++++++
 
-Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
- 
-Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information. 
-
-.. image:: cancer_cause_model.svg
+  .. image:: compartmental_model_simple.svg
 
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-.. list-table:: Definitions
-   :widths: 15 20 30
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - S
-     - Susceptible
-     - Susceptible to breast cancer
-   * - I
-     - Infected
-     - Infected with breast cancer
-
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
-     - Value
-     - Notes
-   * - S
-     - prevalence
-     - 1-prevalence_c429
-     - 
-   * - S
-     - excess mortality rate
-     - 0
-     - 
-   * - S
-     - disabilty weights
-     - 0
-     -
-   * - I
-     - prevalence
-     - prevalence_c429
-     - 
-   * - I
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_c429}}{\text{population} \times \text{prevalence_c429}}`
-     - 
-   * - I
-     - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c429}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - total disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c429}}{\text{population}}`
-     - 
++----------------------------------------------------------------------------+
+| State definitions                                                          |
++=======================+================+===================================+ 
+| State                 | State name     | Definition                        |
++-----------------------+----------------+-----------------------------------+
+| S                     | Susceptible    | Susceptible to DCIS or LCIS       |
++-----------------------+----------------+-----------------------------------+
+| DCIS                  | with condition | with condition DCIS               |
++-----------------------+----------------+-----------------------------------+
+| LCIS                  | with condition | with condition LCIS               |
++-----------------------+----------------+-----------------------------------+
+| BC                    | with condition | with condition breast cancer      |
++-----------------------+----------------+-----------------------------------+
 
 
-.. list-table:: Transition Data
-   :widths: 10 10 10 30 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
-     - S
-     - I
-     - :math:`\frac{\text{incidence_rate_c429}}{\text{1 - prevalence_c429}}`
-     - Incidence rate in total population is divided by 1-prevalence_c429 to get incidence rate among the susceptible population.
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| State data                                                                                                                                                                               |
++======+============+===========================+=================================================================================================================+========================+ 
+| State| Measure    | Sources                   | Value                                                                                                           | Notes                  |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
+| S    | prevalence | derived                   | 1- prev(DCIS+ LCIS+ BC)                                                                                         | Use 2017               |                
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+ sources for 2017;      |   
+| S    | excess     | None                      | 0                                                                                                               | use forecast           |
+|      | mortality  |                           |                                                                                                                 | sources for            |   
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+ 2020-2040              |
+| DCIS | prevalence | | MarketScan (2017)       | | prevalence ratio of DCIS                                                                                      |                        |
+|      |            | | Como (GBD 2017)         | | x                                                                                                             |                        |
+|      |            | | Forecasted (2020-2040)  | | prev_c429                                                                                                     |                        |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
+| DCIS | excess     | None                      | 0                                                                                                               |                        |
+|      | mortality  |                           |                                                                                                                 |                        |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
+| LCIS | prevalence | | MarketScan (2017)       | | prevalence ratio of LCIS                                                                                      |                        |        
+|      |            | | Como (2017)             | | x                                                                                                             |                        |
+|      |            | | Forecasted (2020-2040)  | | prev_c429                                                                                                     |                        |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
+| LCIS | excess     | None                      | 0                                                                                                               |                        |  
+|      | mortality  |                           |                                                                                                                 |                        |             
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
+| BC   | prevalence | | Como (2017)             | prev_c429                                                                                                       | see breast cancer      | 
+|      |            | | Forecasted (2020-2040)  |                                                                                                                 | model link below       |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
+| BC   | excess     | | codcorrect (2017)       | :math:`\frac{\text{deaths_c429}}{\text{pop}\times\text{prev_c429}}`                                             | Use 2017               |
+|      | mortality  | | Forecasted (2020-2040)  |                                                                                                                 | sources for 2017;      |                
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+ use forecast           |
+| BC   | disability | YLD appendix              | :math:`\displaystyle{\sum_{s\in\text{seq_c429}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`| sources for            |   
+|      | weight     |                           |                                                                                                                 | 2020-2040              |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
+| BC   | cause      | coodcorrect               | :math:`\frac{\text{deaths_c429}}{\text{population}}`                                                            |                        |   
+|      | mortality  |                           |                                                                                                                 |                        |
+|      | rate       |                           |                                                                                                                 |                        |
++------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
+
+**Prevalence ratio**
+
+GBD does not give us any information on the prevalence of DCIS or LCIS. Hence we need to infer using data from another population, namely from MarketScan outpatient data from 2016 to 2017 in USA. From MarketScane, we obtain the age-specific prevalence of DCIS or LCIS and the age-specific prevalence of breast cancer. This gives us a ratio of the prevalence of DCIS or LCIS to breast cancer for each age group. Applying this ratio to the prevalence of breast cancer in our population gives us an estimate of the prevalence of DCIS or LCIS in our population by age group. 
+
+    - *Currently we do not have data for 65+ and for 2017 onwards* 
+    -  A major assumption of this method is that the ratio of DCIS or LCIS to breast cancer in the US population is the same as that in the Chinese population we are modelling. This could be a limitation if breast cancer manifests differently among racial groups. 
+
+**DCIS**
+
+   - Age-specific prevalence ratio of DCIS = :math:`\frac{\text{age-specific prevalence of DCIS}}{\text{age-specific prevalence of breast cancer}}`
+
+   - Age-specific prevalence of DCIS 
+
+      = age-specific prevalence of ratio of DCIS x age-specific prevalence of breast cancer (prev_c429)
+
+.. image:: age_specific_prev_ratio_DCIS.svg
+
+:download:`Age-specific prevalence ratio of DCIS CSV file <ratio.csv>`
+
+**LCIS**
+
+   - Age-specific prevalence ratio of DCIS = :math:`\frac{\text{age-specific prevalence of LCIS}}{\text{age-specific prevalence of breast cancer}}`
+
+   - Age-specific prevalence of DCIS 
+
+      = age-specific prevalence of ratio of DCIS X age-specific prevalence of breast cancer (prev_c429)
+
+.. image:: age_specific_prev_ratio_LCIS.svg
+
+:download:`Age-specific prevalence ratio of LCIS CSV file <ratio.csv>`
 
 
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_c429
-     - como
-     - Prevalence of cause breast cancer
-     - 
-   * - deaths_c429
-     - codcorrect
-     - Deaths from breast cancer
-     - 
-   * - population
-     - demography
-     - Mid-year population for given country
-     - 
-   * - incidence_rate_c429
-     - como
-     - Incidence rate for breast cancer
-     - 
-   * - disability_weight_s{`sid`}
-     - YLD appendix
-     - Disability weights associated with each sequelae
-     - 
-   * - prevalence_s{`sid`}
-     - como
-     - Prevalence of each sequelae
-     - 
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+| Transition data DCIS                                                                                                                                                   |
++============+===============+===============+======================================================================+====================================================+ 
+| Transition | Source state  | Sink state    | Value                                                                | Notes                                              |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_DCIS     | S             |  DCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
+|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
+|            |               |               | | incidence ratio of DCIS                                            | incidence ratio of DCIS comes from MarketScan 2017 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_LCIS     | S             |  LCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
+|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
+|            |               |               | | incidence ratio of LCIS                                            | incidence ratio of DCIS comes from MarketScan 2017 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_DCIS+prev_LCIS+prev_LCIS}}`   | i_BC|DCIS = i_BC /prev_(DCIS+LCIS)                 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{i_c429}}{\text{prev_LCIS+prev_DCIS}}`             | i_BC|LCIS = i_BC /prev_(LCIS+DCIS)                 |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+| i_BC       | S             | BC            |:math:`\frac{\text{incidence_rate_c429}}{\text{1 - prevalence_c429}}` | i_BC|LCIS = i_BC /(1-prev_BC)                      |
++------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+
+
+**Incidence ratio**
+
+
+GBD does not give us any information on the incidence of DCIS or LCIS. Hence we need to infer using data from another population, namely from MarketScan outpatient data from 2016 to 2017 in USA. From MarketScane, we obtain the age-specific incidence of DCIS or LCIS and the age-specific incidence of breast cancer. This gives us a ratio of the incidence of DCIS or LCIS to breast cancer for each age group. Applying this ratio to the incidence of breast cancer in our population gives us an estimate of the incidence of DCIS or LCIS in our population by age group. 
+
+    - *Currently we do not have data for 65+ and for 2017 onwards* 
+    -  A major assumption of this method is that the incidence of DCIS8 or LCIS to breast cancer in the US population is the same as that in the Chinese population we are modelling. This could be a limitation if breast cancer manifests differently among racial groups. 
+
+**DCIS**
+
+   - Age-specific incidence ratio of DCIS = :math:`\frac{\text{age-specific incidence of DCIS}}{\text{age-specific incidence of breast cancer}}`
+
+   - Age-specific incidence of DCIS 
+
+      = age-specific incidence of ratio of DCIS x age-specific incidence of breast cancer (i_c429)
+
+.. image:: age_specific_i_ratio_DCIS.svg
+
+:download:`Age-specific incidence ratio of DCIS CSV file <ratio.csv>`
+
+**LCIS**
+
+   - Age-specific incidence ratio of LCIS = :math:`\frac{\text{age-specific incidence of LCIS}}{\text{age-specific incidence of breast cancer}}`
+
+   - Age-specific incidence of LCIS 
+
+      = age-specific incidence of ratio of LCIS X age-specific incidence of breast cancer (prev_c429)
+
+.. image:: age_specific_i_ratio_LCIS.svg
+
+:download:`Age-specific incidence ratio of LCIS CSV file <ratio.csv>`
+
+
+.. todo::
+
+    - how to model 65+ ?? 
+    - How to obtain marketScan ratios for 2020-2040? 
+    - for those who are treated successfully do they stay in DCIS or remit back to susceptible? Need to read more literature
+    - We might overestimate the total number of deaths due to breast cancer. According to GBD definition, patients are considered cured if they have survived more than 10 years after the mastectomy. However, the excess mortality rate still exists in simulation and generates extra deaths if we plan to run the model over 10 years.
 
 
 
