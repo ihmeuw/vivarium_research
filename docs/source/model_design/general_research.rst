@@ -701,7 +701,7 @@ DAGs are used in epidemiology to represent a network of relationships between se
 
 However, DAGs are limited in that they require *prior causal knowledge* about the variables that may be causally related to a given exposure and outcome of interest. Therefore, there may be uncertain, unmeasured, or unknown variables that cannot be represented in a given DAG. Further, DAGs do not allow for easy representation of direction or magnitude of a causal relationship or for effect modification.
 
-For the purpose of this section of our documentation, we will assume that each DAG is completely accurate, represents **all** relevant variables in a given causal network and that there are no unrepresented variables.
+For the purposes of this section of our documentation, we will assume that each DAG is completely accurate, represents **all** relevant variables in a given causal network and that there are no unrepresented variables.
 
 Types of Pathways Within Directed Acyclic Graphs
 ++++++++++++++++++++++++++++++++++++++++++++++++
