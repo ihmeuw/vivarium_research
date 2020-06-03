@@ -114,6 +114,7 @@ Concept model template
 ++++++++++++++++
 
 
+
 .. _4.1:
 
 4.1 Simulation scenarios
@@ -147,6 +148,8 @@ Concept model template
   - cohort length
   - age and sex structure
   - time step
+  - fertility
+  - stratifications 
 
 
 .. _5.2.2:
@@ -162,29 +165,48 @@ Concept model template
 ----------
 
 .. note::
-  here we can use the compartmental models using squares
+  here we use the compartmental (SEIR) models with squares
+  
 
 .. _5.3.1:
 
 5.3.1 Model 1
 ~~~~~~~~~~~~~
 
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
 
 .. _5.3.2:
 
 5.3.2 Model 2
 ~~~~~~~~~~~~~
 
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
 
 .. _5.3.3:
 
 5.3.3 Model 3
 ~~~~~~~~~~~~~
 
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
+
 .. _5.3.4:
 
 5.3.4 Model 4
 ~~~~~~~~~~~~~
+
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
 
 
 .. _5.4:
@@ -197,12 +219,13 @@ Concept model template
 5.5 Output meta-table shell
 ---------------------------
 
-Stratifications:
+.. todo::
+  - add special stratifications if necessary
 
 .. _6.0:
 
-6.0 Back of the envelope calculation
-++++++++++++++++++++++++++++++++++++
+6.0 Back of the envelope calculations
++++++++++++++++++++++++++++++++++++++
 
 
 .. _7.0:
