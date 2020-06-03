@@ -150,44 +150,73 @@ State and Transition Data Tables
 | BC                    | with condition | with condition breast cancer      |
 +-----------------------+----------------+-----------------------------------+
 
+HELLO THERE??????????????
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| State data                                                                                                                                                                               |
-+======+============+===========================+=================================================================================================================+========================+ 
-| State| Measure    | Sources                   | Value                                                                                                           | Notes                  |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
-| S    | prevalence | derived                   | 1- prev(DCIS+ LCIS+ BC)                                                                                         | Use 2017               |                
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+ sources for 2017;      |   
-| S    | excess     | None                      | 0                                                                                                               | use forecast           |
-|      | mortality  |                           |                                                                                                                 | sources for            |   
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+ 2020-2040              |
-| DCIS | prevalence | | MarketScan (2017)       | | prevalence ratio of DCIS                                                                                      |                        |
-|      |            | | Como (GBD 2017)         | | x                                                                                                             |                        |
-|      |            | | Forecasted (2020-2040)  | | prev_c429                                                                                                     |                        |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
-| DCIS | excess     | None                      | 0                                                                                                               |                        |
-|      | mortality  |                           |                                                                                                                 |                        |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
-| LCIS | prevalence | | MarketScan (2017)       | | prevalence ratio of LCIS                                                                                      |                        |        
-|      |            | | Como (2017)             | | x                                                                                                             |                        |
-|      |            | | Forecasted (2020-2040)  | | prev_c429                                                                                                     |                        |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
-| LCIS | excess     | None                      | 0                                                                                                               |                        |  
-|      | mortality  |                           |                                                                                                                 |                        |             
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
-| BC   | prevalence | | Como (2017)             | prev_c429                                                                                                       | see breast cancer      | 
-|      |            | | Forecasted (2020-2040)  |                                                                                                                 | model link below       |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+                        |
-| BC   | excess     | | codcorrect (2017)       | :math:`\frac{\text{deaths_c429}}{\text{pop}\times\text{prev_c429}}`                                             | Use 2017               |
-|      | mortality  | | Forecasted (2020-2040)  |                                                                                                                 | sources for 2017;      |                
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+ use forecast           |
-| BC   | disability | YLD appendix              | :math:`\displaystyle{\sum_{s\in\text{seq_c429}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`| sources for            |   
-|      | weight     |                           |                                                                                                                 | 2020-2040              |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
-| BC   | cause      | coodcorrect               | :math:`\frac{\text{deaths_c429}}{\text{population}}`                                                            |                        |   
-|      | mortality  |                           |                                                                                                                 |                        |
-|      | rate       |                           |                                                                                                                 |                        |
-+------+------------+---------------------------+-----------------------------------------------------------------------------------------------------------------+------------------------+
+.. list-table:: State Data
+   :widths: 10 15 15 35 25
+   :header-rows: 1
+   
+   * - State
+     - Measure
+     - Value
+     - Sources
+     - Notes
+   * - S
+     - prevalence
+     - 1-prev(DCIS+LCIS+BC)
+     - derived
+     - used only at initialization
+   * - S
+     - excess mortality rate
+     - 0
+     - None
+     - No EMR for S state
+   * - S
+     - disabilty weights
+     - 0
+     - None
+     - No disability weights for S state
+   * - DCIS
+     - prevalence
+     - prevalence ratio of DCIS x prev_c429
+     - prevalence ratio from MarketScan 2017, prev_c429 from como (GBD 2017)
+     - used only at initialization
+   * - DCIS 
+     - excess mortality rate
+     - 0
+     - None
+     - assume no EMR in DCIS state, add reference to this assumption
+   * - LCIS 
+     - prevalence
+     - prevalence ratio of LCIS x prev_c429
+     - prevalence ratio from MarketScan 2017, prev_c429 from como (GBD 2017)
+     - used only at initialization
+   * - LCIS 
+     - excess mortality rate
+     - 0
+     - None
+     - assume no EMR in LCIS state, add reference to this assumption
+   * - BC
+     - prevalence
+     - prev_c429
+     - como for 2017 and forecasted for future years
+     - use forecasted prev to calculate EMR for future years
+   * - BC
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c429}}{\text{pop}\times\text{prev_c429}}`
+     - codcorrect for 2017 deaths, and forecasted for future years; como for 2017 prevalence, and forecasted for future years; pop from demography mid-yr
+     - add link to forecasted data
+   * - BC  
+     - disability weights
+     - :math:`\displaystyle{\sum_{s\in\text{s_c429}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
+     - YLD appendix
+     - total breast cancer disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
+   * - BC
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c429}}{\text{population}}`
+     - codcorrect for 2017 deaths and forecasted for future years
+     - add link to forecasted data
+
 
 **Prevalence ratio**
 
