@@ -1,0 +1,5 @@
+Source,Measure ,Unit,Granularity,filepath
+forcasted 2020-2040,prevalence c429,percent,draw-level,to be determined
+,death date c429,"per 100,000 pyrs",draw-level,/ihme/costeffectiveness/vivarium_csu_cancer/429_ets_mortality.nc
+,incidence c429,"per 100,000 pyrs",draw-level,/ihme/costeffectiveness/vivarium_csu_cancer/429_ets_direct_incidence.nc
+,acmr,"per 100,000 pyrs",draw-level,/ihme/costeffectiveness/vivarium_csu_cancer/294_ets_mortality_beta_8_phi_89.nc
