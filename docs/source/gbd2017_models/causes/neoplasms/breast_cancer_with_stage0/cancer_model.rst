@@ -127,19 +127,19 @@ Compartmental Diagram
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-+--------------------------------------------------------------------------------------+
-| State definitions                                                                    |
-+===================+==============================+===================================+ 
-| State             | State name                   | Definition                        |
-+-------------------+------------------------------+-----------------------------------+
-| S                 | Susceptible                  | Susceptible to DCIS or LCIS       |
-+-------------------+------------------------------+-----------------------------------+
-| DCIS              | with condition               | with condition DCIS               |
-+-------------------+------------------------------+-----------------------------------+
-| LCIS              | with condition               | with condition LCIS               |
-+-------------------+------------------------------+-----------------------------------+
-| BC                | with condition               | with condition breast cancer      |
-+-------------------+------------------------------+-----------------------------------+
++---------------------------------+
+| State definitions               |
++============+====================+
+| State      | State definitions  |                       
++------------+--------------------+
+| S          | Susceptible        | 
++------------+--------------------+
+| DCIS       | with DCIS          | 
++------------+--------------------+
+| LCIS       | with LCIS          | 
++------------+--------------------+
+| BC         | with breast cancer | 
++------------+--------------------+
 
 .. list-table:: State Data
    :widths: 10 25 25 40
@@ -262,7 +262,7 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
 
 **DCIS**
 
-   - Crude prevalence ratio of DCIS = :math:`\frac{\text{proportion of DCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` =0.35
+   - Crude prevalence ratio of DCIS = :math:`\frac{\text{proportion of DCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` =0.35±.02
 
    - Prevalence of DCIS 
 
@@ -270,7 +270,7 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
 
 **LCIS**
 
-   - Crude prevalence ratio of LCIS = :math:`\frac{\text{proportion of LCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` =0.08
+   - Crude prevalence ratio of LCIS = :math:`\frac{\text{proportion of LCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` =0.08±.01
 
    - Prevalence of LCIS 
 
