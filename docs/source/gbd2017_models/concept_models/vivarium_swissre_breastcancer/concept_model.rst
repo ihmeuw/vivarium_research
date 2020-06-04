@@ -78,12 +78,17 @@ Contents(hello):
 +-------+----------------------------+
 | LCIS  | lobular carcinoma in situ  |
 +-------+----------------------------+
+| BC    | breast cancer              |
++-------+----------------------------+
 | CII   | critical illness insurance |
 +-------+----------------------------+
 | NCDs  | non-communicable diseases  |
 +-------+----------------------------+
 | Tx    | treatment                  |
 +-------+----------------------------+
+| ACMR  | all cause mortality rate   |
++-------+----------------------------+
+
 
 .. _1.0:
 
@@ -237,7 +242,9 @@ Scale-up of breast cancer screening coverage among insured population
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A closed cohort of 100,000 male and female total simulants from age 15 to 95 will be modelled in 5 year-age bands from Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
+* Cohort type: Closed cohort of 100,000 male and female total simulants
+* Age and sex: Aged 15 to 95+, 5 year-age bands, uniformly distributed age and sex structure
+* Time span: Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
 
 .. _5.2.2:
 
@@ -246,25 +253,25 @@ A closed cohort of 100,000 male and female total simulants from age 15 to 95 wil
 
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
-+---------------------------------+
-| Population size weight table    |
-+============+===========+========+
-| Province   | Region    | Weight |
-+------------+-----------+--------+
-| Tianjian   | North     | 18%    |
-+------------+-----------+--------+
-| Jiangsu    | East      | 28%    |
-+------------+-----------+--------+
-| Guangdong  | South     | 15%    |
-|            +-----------+--------+
-|            | Southwest | 7%     |
-+------------+-----------+--------+
-| Henan      | Central   | 17%    |
-+------------+-----------+--------+
-| Helilong-  | Northeast | 8%     |
-| jiang      +-----------+--------+
-|            | Northwest | 8%     |
-+------------+-----------+--------+
++-------------------------------------------------------------------------------+
+| Population size weight table                                                  | 
++============+===========+========+=============================================+
+| Province   | Region    | Weight | Forcasted ACMR                              |
++------------+-----------+--------+---------------------------------------------+
+| Tianjian   | North     | 18%    | filepath:                                   |
++------------+-----------+--------+                                             | 
+| Jiangsu    | East      | 28%    | /home/j/temp/agoros/CSU/swissre/            | 
++------------+-----------+--------+ cancer_inc/294_ets_mortality_45_beta_85.nc  |
+| Guangdong  | South     | 15%    |                                             |
+|            +-----------+--------+                                             |
+|            | Southwest | 7%     |                                             |
++------------+-----------+--------+                                             |
+| Henan      | Central   | 17%    |                                             |
++------------+-----------+--------+                                             |
+| Helilong-  | Northeast | 8%     |                                             |
+| jiang      +-----------+--------+                                             |
+|            | Northwest | 8%     |                                             |
++------------+-----------+--------+---------------------------------------------+                                                                           
 
 .. todo::
  currently adds up to 101%
@@ -277,219 +284,10 @@ A closed cohort of 100,000 male and female total simulants from age 15 to 95 wil
 
 .. _5.3.1:
 
-5.3.1 Core breast cancer model
+5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - prevalence of DCIS/LCIS
-  - prevalence of stage 1+ breast cancer
- 
-
-  +------------------------------------------------------------------------------------------------------------------+
-  | Breast cancer types                                                                                              |
-  +===============+========================================================================+=============+===========+
-  | Disease stage | Definition                                                             | Sequaelae id| Notes     |
-  +---------------+------------------------------------------------------------------------+-------------+-----------+
-  | stage 0       | non-invasive breast cancers, such as DCIS (ductal carcinoma in situ).  |             | external  |
-  |               | Both cancerous and non-cancerous cells are within the boundaries of    |             | data need-|
-  |               | Both cancerous and non-cancerous cells are within the boundaries of    |             | ed for in |
-  |               | that part of the breast in which the tumor begins to grow and no       |             | situ brea-|
-  |               | evidence found of their invasion in the surrounding tissues.           |             | st cancer |
-  +---------------+------------------------------------------------------------------------+-------------+-----------+
-  | stage 1+      | invasive breast cancer, it exists when abnormal cells from within the  | s_277,s_5486|           |
-  |               | lobules or milk ducts split out into close proximity of breast tissue. | s_5489,s_279|           |
-  |               | Cancer cells can pass through the breast to different parts of the body| s_280,s_5492|           |
-  |               | through immune system or the systemic circulation.                     |             |           |
-  +---------------+------------------------------------------------------------------------+-------------+-----------+
-
-  :underline:`Compartmental model`
-
-
-    .. image:: compartmental_model_simple.svg
-
-  STATES
-
-    * S =susceptible 
-    * DCIS = with ductal carcinoma in situ (stage 0 non-invasive breast cancer)
-    * LCIS = with lobular carcinoma in situ (stage 0 non-invasive breast cancer)
-    * C = with breast cancer condition (stage 1+ invasive breast cancer with 6 sequaelas as defined by GBD)
-
-  TRANSITIONS
-
-    * i_DCIS = incidence of DCIS from S
-    * i_LCIS = incidence of LCIS from S
-    * i_C = incidence of stage 1+ breast cancer (= GBD breast cancer incidence) from DCIS or LCIS
-    * r = remission rate from DCIS to S with treatment 
-
-  .. note::
-
-    1.  “Recovered” state is removed because no breast cancer remission data is available in GBD.
-    2.  We might overestimate the total number of deaths due to breast cancer. According to GBD definition, patients are considered cured if they have survived more than 10 years after the mastectomy. However, the excess mortality rate still exists in simulation and generates extra deaths if we plan to run the model over 10 years.
-
-+---------------------------------------------------------------------------------+
-| Initialization                                                                  |
-+===========================================+=====================================+ 
-| Attribute                                 | Value                              |
-+-------------------------------------------+-------------------------------------+
-| Which disease state is this simulant in?  | population cross-sectional          | 
-| - with breast cancer                      | prevalence of these 4 states,       | 
-| - with DCIS                               | adding up to 100%                   |
-| - with LCIS                               |                                     |
-| - in susceptible state                    |                                     |
-+-------------------------------------------+-------------------------------------+
-| Does simulant have family history?        | Population prevalence of family     |
-|  - fh1 = with family history              | history.                            |
-|  - fh0 = no family history                | :ref:`*see model 4* <5.3.4>`        | 
-|                                           | Will disease state and fam history  |
-|                                           | have joint/conditional distributions|
-|                                           | or disease state and fam history    |
-|                                           | will be independent?                |
-+-------------------------------------------+-------------------------------------+
-
-.. image:: compartmental_model_complex.svg
-
-+---------------------------------------------------------------------------+
-| State definitions                                                         |
-+=======================+===============+===================================+ 
-| State                 | State name    | Definition                        |
-+-----------------------+---------------+-----------------------------------+
-| S_DCIS |fh1           | Susceptible   | Susceptible to DCIS               |
-|                       |               | family history = true             |
-+-----------------------+---------------+-----------------------------------+
-| S_DCIS |fh0           | Susceptible   | Susceptible to DCIS               |
-|                       |               | family history = false            |
-+-----------------------+---------------+-----------------------------------+
-| S_LCIS |fh1           | Susceptible   | Susceptible to LCIS               |
-|                       |               | family history = true             |
-+-----------------------+---------------+-----------------------------------+
-| S_LCIS |fh0           | Susceptible   | Susceptible to LCIS               |
-|                       |               | family history = false            |
-+-----------------------+---------------+-----------------------------------+
-| DCIS |fh1             | with          | with condition DCIS given         |
-|                       | condition     | family history = true             |
-+-----------------------+---------------+-----------------------------------+
-| DCIS |fh0             | with          | with condition DCIS given         |
-|                       | condition     | family history = false            |
-+-----------------------+---------------+-----------------------------------+
-| LCIS |fh1             | with          | with condition LCIS given         |
-|                       | condition     | family history = true             |     
-+-----------------------+---------------+-----------------------------------+
-| LCIS |fh0             | with          | with condition LCIS               |
-|                       | condition     | family history = false            |                  
-+-----------------------+---------------+-----------------------------------+
-| BC |DCIS|fh1          | with          | with condition breast cancer      |
-|                       | condition     | from DCIS, family history = true  |                  
-+-----------------------+---------------+-----------------------------------+
-| BC |DCIS|fh0          | with          | with condition breast cancer      |
-|                       | condition     | from DCIS, family history = false |                  
-+-----------------------+---------------+-----------------------------------+
-| BC |LCIS|fh1          | with          | with condition breast cancer      |
-|                       | condition     | from LCIS, family history = true  |                  
-+-----------------------+---------------+-----------------------------------+
-| BC |LCIS|fh0          | with          | with condition breast cancer      |
-|                       | condition     | from LCIS, family history = false |                  
-+-----------------------+---------------+-----------------------------------+
-
-
-+---------------------------------------------------------------------------------------------+
-| State data                                                                                  |
-+=======================+===============+=====================================================+ 
-| State                 | Measure       | Value                                               |
-+-----------------------+---------------+-----------------------------------------------------+
-| S_DCIS |fh1           | prevalence    | Among simulants with family history (fh1):          |
-|                       |               | 1-prevalence DCIS|fh1 - prevalence BC|DCIS|fh1      |
-+-----------------------+---------------+-----------------------------------------------------+
-| S_DCIS |fh0           | prevalence    | Among simulants without family history (fh0):       |  
-|                       |               | 1-prevalence DCIS|fh0 - prevalence BC|DCIS|fh0      |
-+-----------------------+---------------+-----------------------------------------------------+
-| S_LCIS |fh1           | prevalence    | Among simulants with family history (fh1):          | 
-|                       |               | 1-prevalence LCIS|fh1 - prevalence BC|LCIS|fh1      |
-+-----------------------+---------------+-----------------------------------------------------+
-| S_LCIS |fh0           | prevalence    | Among simulants without family history (fh0):       |  
-|                       |               | 1-prevalence LCIS|fh0 - prevalence BC|LCIS|fh0      | 
-+-----------------------+---------------+-----------------------------------------------------+
-| DCIS |fh1             | prevalence    | Among simulants with family history (fh1):          |        
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-| DCIS |fh0             | prevalence    | Among simulants without family history (fh0):       |           
-|                       |               | *fill in with literature value*                     
-+-----------------------+---------------+-----------------------------------------------------+
-| LCIS |fh1             | prevalence    | Among simulants with family history (fh1):          |        
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-| LCIS |fh0             | prevalence    | Among simulants without family history (fh0):       |           
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-| BC |DCIS|fh1          | prevalence    | Among simulants with family history(fh1) & DCIS:    |        
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-| BC |DCIS|fh0          | prevalence    | Among simulants without family history(fh0) & DCIS: |           
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-| BC |LCIS|fh1          | prevalence    | Among simulants with family history(fh1) & LCIS:    |        
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-| BC |LCIS|fh0          | prevalence    | Among simulants without family history(fh0) & LCIS: |           
-|                       |               | *fill in with literature value*                     |
-+-----------------------+---------------+-----------------------------------------------------+
-
-+---------------------------------------------------------------------------------------------------------------------------------------+
-| Transition data DCIS                                                                                                                  |
-+================+===============+===============+=================================+====================================================+ 
-| Transition     | Source        | Sink          | Value                           | Notes                                              |
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
-| i_DCIS_fh1     | | S_DCIS|fh1  | | DCIS |fh1   | *fill in with literature value* | Relative risk of DCIS in those with family         | 
-|                |               |               |                                 | history vs no family history =                     | 
-|                |               |               |                                 | :math:`\frac{\text{i_DCIS_fh1}}{\text{i_DCIS_fh0}}`|
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
-| i_DCIS_fh0     | | S_DCIS|fh0  | | DCIS |fh0   | *fill in with literature value* | Relative risk of DCIS in those with family         | 
-|                |               |               |                                 | history vs no family history =                     | 
-|                |               |               |                                 | :math:`\frac{\text{i_DCIS_fh1}}{\text{i_DCIS_fh0}}`|
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
-| i_BC_DCIS_tx1  | | DCIS |fh1   | | BC |DCIS|fh1| *fill in with literature value* | incidence rate of invasive breast cancer           | 
-|                | | or          | | or          |                                 | from source DCIS among those screened              |
-|                | | DCIS |fh0   | | BC |DCIS|fh0|                                 | and treated. This is equal to                      |
-|                | | (proportion |               |                                 | 1-DCIS treatment efficacy                          |
-|                | | screened    |               |                                 |                                                    |
-+----------------+ | & treated)  +---------------+---------------------------------+----------------------------------------------------+
-| r_DCIS_tx      |               | either remain | *fill in with literature value* | treatment efficacy rate of DCIS                    |                              
-|                |               | in DCIS or    |                                 | (does this depend on fam hist?)                    |                                
-|                |               | go back to    |                                 |                                                    |                                
-|                |               | susceptible?  |                                 |                                                    |
-|                |               | or transition |                                 |                                                    |
-|                |               | to an S' pool?|                                 |                                                    |
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
-| i_BC_DCIS_fh1  | | DCIS |fh1   | | BC |DCIS|fh1| *fill in with literature value* | incidence rate of invasive breast cancer           | 
-| _tx0           | | (proportion |               |                                 | from source DCIS among those NOT screened          |    
-|                | | NOT screened|               |                                 | & screened but not treated.                        |    
-|                | | & screened  |               |                                 |                                                    |
-|                | | but not     |               |                                 |                                                    | 
-|                | | treated)    |               |                                 |                                                    | 
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
-| i_BC_DCIS_fh0  | | DCIS |fh1   | | BC |DCIS|fh0| *fill in with literature value* | incidence rate of invasive breast cancer           | 
-| _tx0           | | (proportion |               |                                 | from source DCIS among those NOT screened          | 
-|                | | NOT         |               |                                 | & screened but not treated.                        |
-|                | | screened|   |               |                                 |                                                    |    
-|                | | & screened  |               |                                 |                                                    |
-|                | | but not     |               |                                 |                                                    | 
-|                | | treated)    |               |                                 |                                                    | 
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
-
-
-+---------------------------------------------------------------------------------------------------------------------------------------+
-| Transition data LCIS                                                                                                                  |
-+================+===============+===============+=================================+====================================================+ 
-| Transition     | Source        | Sink          | Value                           | Notes                                              |
-+----------------+---------------+---------------+---------------------------------+----------------------------------------------------+
- 
-
-.. todo::
-   	- for those who are treated successfully do they stay in DCIS or remit back to susceptible?
-   	- How to make sure the incidences and prevalences all match up to GBDs? with added family history and DCIS/LCIS?
-
-
-.. note::
-    Once in breast cancer state, see :ref:`Breast cancer cause model <2017_cancer_model_breast_cancer>`
-
+see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
 
 
 .. _5.3.2:
