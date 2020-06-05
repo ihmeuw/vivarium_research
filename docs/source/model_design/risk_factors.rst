@@ -241,6 +241,64 @@ complexity into the exposure component.
 
 What is a risk effect?
 ++++++++++++++++++++++
+In epidemiological studies, risk effect is used to study the relationship
+between risk exposures and outcomes. We are not only interested in whether
+a link between a given risk exposure (e.g. smoking) and certain outcome
+(e.g. lung cancer) is statistically meaningful, but also the magnitude of
+this relationship. The effect of exposure can be measured both in relative
+and absolute terms. The risk ratio, the rate ratio, and the odds ratio are
+relative measures of effect. Risk difference is an absolute measure of effect
+and it is calculated by subtracting the risk of the outcome in exposed group
+from unexposed. [Measure_of_effect]_
+
+Risk effect in GBD
+^^^^^^^^^^^^^^^^^^
+The measure of risk effect in GBD is usually reported in relative term, namely
+relative risk. It describes the relative relationship between the risk of
+disease Y in the presence of agent X versus in absence of X. Mathematically,
+it's calculated by dividing the incidence rate of cause in exposed population
+by the incidence rate of cause in unexposed population for a certain risk factor.
+For example, if there are A incident cases and B person-years in exposed group;
+C incident cases and D person-years in unexposed group, then the relative risk
+(rate ratio) equals :math:`\frac{AD}{BC}`. Note that there are exceptions as in
+the low birth weight short gestation (LBWSG) risk factor where the relative risk
+is the ratio of all-cause mortality rate (ACMR) rather than incidence rate we mentioned above. Therefore, we'd better check with GBD modeller what relative
+risk they refer to before we model any risk-outcome pair in vivarium.  
+
+Risk effect in vivarium
+^^^^^^^^^^^^^^^^^^^^^^^
+In vivarium, we used to build the risk-outcomes component in order to study the impact of desired outcomes contributed by given risk exposure. The outcome might
+be a cause (e.g. ischemic heart disease attributable to high body-mass index)
+or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
+For a risk-cause pair, simulation model would link the incidecen of that cause
+to the relative risk from GBD or external data sources like literature evidence.
+The mathematical expressions are mainly fall into two categories:
+ - risk exposure is categorical distributed:
+     - :math:`i_{exposed} = i \times (1-PAF) \times RR`
+     - :math:`i_{unexposed} = i \times (1-PAF)`
+     - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
+     - :math:`E(RRe) = p \times RR + (1-p)`
+ - risk exposure is continuous distributed:
+     - :math:`i_{exposed} = i \times (1-PAF) \times RR`
+     - :math:`i_{unexposed} = i \times (1-PAF)`
+     - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
+     - :math:`E(RRe) = \int_{lb}^{ub}RR^{max(e−tmrel,0)/scalar}p(e)de`
+For a risk-mediator outcome, simulation model would map a probability
+distribution of possible mediator exposure level to each measurement of
+associated risk factor (e.g. there is X% chance you will observe a SBP
+>= 100 mm Hg for given BMI of 25 in adults).
+
+Direct and indirect risk effect
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In general, we would model the risk-outcomes that is directly correlated
+(e.g. BMI -> IHD), but sometimes we consider add mediator to account for
+indirect relationship between a risk-cause pair. (e.g. BMI -> SBP -> IHD)
+In the example shown above, the direct effect is determined by risk effect
+between BMI and IHD (:math:`\mu_{1}`) and the indirect effect is the product
+of risk effect between BMI and SBP (:math:`\mu_{2}`) and risk effect between
+SBP and IHD (:math:`\mu_{3}`). Therefore, the total risk effect is the sum of
+direct and indirect effect, namely :math:`\mu_{1} + \mu_{2} \times \mu_{3}`
+based on a linear approach.
 
 Definitions
 -----------
@@ -537,3 +595,7 @@ References
 .. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Res earch: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
    Retrieved 11 March 2020.
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
+
+.. [Measure_of_effect] Measures of Effect: Relative Risks, Odds Ratios, Risk Difference, and 'Number Needed to Treat'
+   Retrived 19 March 2020.
+   https://pubmed.ncbi.nlm.nih.gov/17653136/
