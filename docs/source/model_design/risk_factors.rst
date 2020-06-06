@@ -279,8 +279,7 @@ The mathematical expressions are mainly fall into two categories:
      - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
      - :math:`E(RRe) = p \times RR + (1-p)`
  - risk exposure is continuous distributed:
-     - :math:`i_{exposed} = i \times (1-PAF) \times RR`
-     - :math:`i_{unexposed} = i \times (1-PAF)`
+     - :math:`i = i \times (1-PAF) \times RR^{max(e−tmrel,0)/scalar}`
      - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
      - :math:`E(RRe) = \int_{lb}^{ub}RR^{max(e−tmrel,0)/scalar}p(e)de`
 For a risk-mediator outcome, simulation model would map a probability
