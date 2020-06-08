@@ -253,36 +253,28 @@ Scale-up of breast cancer screening coverage among insured population
 
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
-+-------------------------------------------------------------------------------+
-| Population size weight table                                                  | 
-+============+===========+========+=============================================+
-| Province   | Region    | Weight | Forcasted ACMR                              |
-+------------+-----------+--------+---------------------------------------------+
-| Tianjian   | North     | 18%    | filepath:                                   |
-+------------+-----------+--------+                                             | 
-| Jiangsu    | East      | 28%    | /home/j/temp/agoros/CSU/swissre/            | 
-+------------+-----------+--------+ cancer_inc/294_ets_mortality_45_beta_85.nc  |
-| Guangdong  | South     | 15%    |                                             |
-|            +-----------+--------+                                             |
-|            | Southwest | 7%     |                                             |
-+------------+-----------+--------+                                             |
-| Henan      | Central   | 17%    |                                             |
-+------------+-----------+--------+                                             |
-| Helilong-  | Northeast | 8%     |                                             |
-| jiang      +-----------+--------+                                             |
-|            | Northwest | 8%     |                                             |
-+------------+-----------+--------+---------------------------------------------+                                                                           
 
-.. todo::
- currently adds up to 101%
++---------------------------------------------------------------------+
+| Population size weight table                                        | 
++============+========+===============================================+
+| Province   | Weight | Forcasted ACMR                                |
++------------+--------+-----------------------------------------------+
+| Tianjian   | 18%    | filepath                                      |
++------------+--------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
+| Jiangsu    | 28%    |                                               |
++------------+--------+ Note: GBD does not produce estimates below    |
+| Guangdong  | 22%    | province level, so we do not have data for    |
++------------+--------+ sub-provinces. Therefore, we are summing      |
+| Henan      | 16%    | the sub-province weights to get total         |
++------------+--------+ province weights for Guangdong and            |
+| Heilong-   | 16%    | Heilongjiang.                                 |
+| jiang      |        |                                               |
++------------+--------+-----------------------------------------------+                                                                           
 
-
-.. _5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
 
 5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -290,7 +282,6 @@ Scale-up of breast cancer screening coverage among insured population
 see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
 
 
-.. _5.3.2:
 
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -303,7 +294,6 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
 
 .. image:: breast_cancer_screening_tree_China.svg
 
-.. _5.3.3:
 
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,7 +302,6 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
       how to model breast cancer detection given breast cancer status and screening? 
 
 
-.. _5.3.4:
 
 5.3.4 Family history model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -330,19 +319,16 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
 5.3.5 DCIS and LCIS treatment model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _5.4:
 
 5.4 Desired outputs
 -------------------
 
-.. _5.5:
 
 5.5 Output meta-table shell
 ---------------------------
 
 Stratifications:
 
-.. _6.0:
 
 6.0 Limitations
 +++++++++++++++
