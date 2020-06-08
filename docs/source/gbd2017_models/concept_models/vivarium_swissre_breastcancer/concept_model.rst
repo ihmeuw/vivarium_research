@@ -242,7 +242,7 @@ Scale-up of breast cancer screening coverage among insured population
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Cohort type: Closed cohort of 100,000 male and female total simulants
+* Cohort type: Closed cohort of 100,000 insured male (50%) and female (50%) simulants
 * Age and sex: Aged 15 to 95+, 5 year-age bands, uniformly distributed age and sex structure
 * Time span: Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
 
@@ -254,22 +254,22 @@ Scale-up of breast cancer screening coverage among insured population
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
 
-+---------------------------------------------------------------------+
-| Population size weight table                                        | 
-+============+========+===============================================+
-| Province   | Weight | Forcasted ACMR                                |
-+------------+--------+-----------------------------------------------+
-| Tianjian   | 18%    | filepath                                      |
-+------------+--------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
-| Jiangsu    | 28%    |                                               |
-+------------+--------+ Note: GBD does not produce estimates below    |
-| Guangdong  | 22%    | province level, so we do not have data for    |
-+------------+--------+ sub-provinces. Therefore, we are summing      |
-| Henan      | 16%    | the sub-province weights to get total         |
-+------------+--------+ province weights for Guangdong and            |
-| Heilong-   | 16%    | Heilongjiang.                                 |
-| jiang      |        |                                               |
-+------------+--------+-----------------------------------------------+                                                                           
++-----------------------------------------------------------------------------------+
+| Population size weight table                                                      | 
++============+=============+========+===============================================+
+| Province   | location_id | Weight | Forcasted ACMR                                |
++------------+-------------+--------+-----------------------------------------------+
+| Tianjian   |  517        | 18%    | filepath                                      |
++------------+-------------+--------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
+| Jiangsu    |  506        | 28%    |                                               |
++------------+-------------+--------+ Note: GBD does not produce estimates below    |
+| Guangdong  |  496        | 22%    | province level, so we do not have data for    |
++------------+-------------+--------+ sub-provinces. Therefore, we are summing      |
+| Henan      |  502        | 16%    | the sub-province weights to get total         |
++------------+-------------+--------+ province weights for Guangdong and            |
+| Heilong-   |  501        | 16%    | Heilongjiang.                                 |
+| jiang      |             |        |                                               |
++------------+-------------+--------+-----------------------------------------------+                                                                           
 
 
 5.3 Models
