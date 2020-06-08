@@ -254,23 +254,26 @@ Scale-up of breast cancer screening coverage among insured population
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
 
-+-----------------------------------------------------------------------------------+
-| Population size weight table                                                      | 
-+============+=============+========+===============================================+
-| Province   | location_id | Weight | Forcasted ACMR                                |
-+------------+-------------+--------+-----------------------------------------------+
-| Tianjian   |  517        | 18%    | filepath                                      |
-+------------+-------------+--------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
-| Jiangsu    |  506        | 28%    |                                               |
-+------------+-------------+--------+ Note: GBD does not produce estimates below    |
-| Guangdong  |  496        | 22%    | province level, so we do not have data for    |
-+------------+-------------+--------+ sub-provinces. Therefore, we are summing      |
-| Henan      |  502        | 16%    | the sub-province weights to get total         |
-+------------+-------------+--------+ province weights for Guangdong and            |
-| Heilong-   |  501        | 16%    | Heilongjiang.                                 |
-| jiang      |             |        |                                               |
-+------------+-------------+--------+-----------------------------------------------+                                                                           
++---------------------------------------------------------------------------------------------------+
+| Population size weight table                                                                      | 
++============+=============+========+===============+===============================================+
+| Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                  |
++------------+-------------+--------+---------------+-----------------------------------------------+
+| Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                      |
++------------+-------------+--------+---------------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
+| Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                               |
++------------+-------------+--------+---------------+ Note: GBD does not produce estimates below    |
+| Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for    |
++------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing      |
+| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights to get total         |
++------------+-------------+--------+---------------+ province weights for Guangdong and            |
+| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | Heilongjiang.                                 |
+| jiang      |             |        |               |                                               |
++------------+-------------+--------+---------------+-----------------------------------------------+
 
+.. note::
+
+  The forecasted data in the .nc files are in log space. The acmr is labelled as 'mr'. To get the simulation population's all cause mortality rate (acmr), first take the exponential of the mr values for location, in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the log transformation is in person years. Multiple by 100,000 to get per 100,000 person years.                                                                            
 
 5.3 Models
 ----------
@@ -327,7 +330,11 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
 5.5 Output meta-table shell
 ---------------------------
 
-Stratifications:
+:download:`output table shell<output_table_shell_breastcancer.xlsx>`
+
+.. todo::
+  any special stratifications?
+
 
 
 6.0 Limitations
