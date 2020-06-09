@@ -242,7 +242,7 @@ Scale-up of breast cancer screening coverage among insured population
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Cohort type: Closed cohort of 100,000 male and female total simulants
+* Cohort type: Closed cohort of 100,000 insured male (50%) and female (50%) simulants
 * Age and sex: Aged 15 to 95+, 5 year-age bands, uniformly distributed age and sex structure
 * Time span: Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
 
@@ -253,36 +253,35 @@ Scale-up of breast cancer screening coverage among insured population
 
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
-+-------------------------------------------------------------------------------+
-| Population size weight table                                                  | 
-+============+===========+========+=============================================+
-| Province   | Region    | Weight | Forcasted ACMR                              |
-+------------+-----------+--------+---------------------------------------------+
-| Tianjian   | North     | 18%    | filepath:                                   |
-+------------+-----------+--------+                                             | 
-| Jiangsu    | East      | 28%    | /home/j/temp/agoros/CSU/swissre/            | 
-+------------+-----------+--------+ cancer_inc/294_ets_mortality_45_beta_85.nc  |
-| Guangdong  | South     | 15%    |                                             |
-|            +-----------+--------+                                             |
-|            | Southwest | 7%     |                                             |
-+------------+-----------+--------+                                             |
-| Henan      | Central   | 17%    |                                             |
-+------------+-----------+--------+                                             |
-| Helilong-  | Northeast | 8%     |                                             |
-| jiang      +-----------+--------+                                             |
-|            | Northwest | 8%     |                                             |
-+------------+-----------+--------+---------------------------------------------+                                                                           
+
++---------------------------------------------------------------------------------------------------+
+| Population size weight table                                                                      | 
++============+=============+========+===============+===============================================+
+| Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                  |
++------------+-------------+--------+---------------+-----------------------------------------------+
+| Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                      |
++------------+-------------+--------+---------------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
+| Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                               |
++------------+-------------+--------+---------------+ Note: GBD does not produce estimates below    |
+| Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for    |
++------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing      |
+| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights (not shown) that was |
++------------+-------------+--------+---------------+ given by CSU to get total province weights    |
+| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | for Guangdong and Heilongjiang.               |
+| jiang      |             |        |               |                                               |
++------------+-------------+--------+---------------+-----------------------------------------------+
+
+.. note::
+
+  Note about 'mr' in the column 'Weighted ACMR' in the above table: The forecasted data is stored in .nc files. The acmr estimate under column labelled as 'mr' is in log space with base natural e. To get the simulation population's all-cause mortality rate (acmr), first take the exponential of the mr values for location in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the exp transformation is in person years. Multiply by 100,000 to get per 100,000 person years.    
 
 .. todo::
- currently adds up to 101%
-
-
-.. _5.3:
+  add notebook
+  click here to see notebook exploring the .nc files: :ref:`forecast data <  >`                                                                        
 
 5.3 Models
 ----------
 
-.. _5.3.1:
 
 5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -290,7 +289,6 @@ Scale-up of breast cancer screening coverage among insured population
 see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
 
 
-.. _5.3.2:
 
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -303,7 +301,6 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
 
 .. image:: breast_cancer_screening_tree_China.svg
 
-.. _5.3.3:
 
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -312,7 +309,6 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
       how to model breast cancer detection given breast cancer status and screening? 
 
 
-.. _5.3.4:
 
 5.3.4 Family history model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -330,19 +326,20 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
 5.3.5 DCIS and LCIS treatment model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _5.4:
 
 5.4 Desired outputs
 -------------------
 
-.. _5.5:
 
 5.5 Output meta-table shell
 ---------------------------
 
-Stratifications:
+:download:`output table shell<output_table_shell_breastcancer.xlsx>`
 
-.. _6.0:
+.. todo::
+  any special stratifications?
+
+
 
 6.0 Limitations
 +++++++++++++++
