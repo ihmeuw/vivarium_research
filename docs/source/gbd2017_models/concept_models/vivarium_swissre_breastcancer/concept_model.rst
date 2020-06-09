@@ -265,15 +265,19 @@ Scale-up of breast cancer screening coverage among insured population
 +------------+-------------+--------+---------------+ Note: GBD does not produce estimates below    |
 | Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for    |
 +------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing      |
-| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights to get total         |
-+------------+-------------+--------+---------------+ province weights for Guangdong and            |
-| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | Heilongjiang.                                 |
+| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights (not shown) that was |
++------------+-------------+--------+---------------+ given by CSU to get total province weights    |
+| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | for Guangdong and Heilongjiang.               |
 | jiang      |             |        |               |                                               |
 +------------+-------------+--------+---------------+-----------------------------------------------+
 
 .. note::
 
-  The forecasted data in the .nc files are in log space. The acmr is labelled as 'mr'. To get the simulation population's all cause mortality rate (acmr), first take the exponential of the mr values for location, in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the log transformation is in person years. Multiple by 100,000 to get per 100,000 person years.                                                                            
+  Note about 'mr' in the column 'Weighted ACMR' in the above table: The forecasted data is stored in .nc files. The acmr estimate under column labelled as 'mr' is in log space with base natural e. To get the simulation population's all-cause mortality rate (acmr), first take the exponential of the mr values for location in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the exp transformation is in person years. Multiply by 100,000 to get per 100,000 person years.    
+
+.. todo::
+  add notebook
+  click here to see notebook exploring the .nc files: :ref:`forecast data <  >`                                                                        
 
 5.3 Models
 ----------
