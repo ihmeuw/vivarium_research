@@ -1218,6 +1218,8 @@ Combining everything:
 
 .. code-block:: Python
 
+  import numpy as np
+
   # At the draw level
 
   # Mean difference in hemoglobin concentration due to iron fortification.
@@ -1225,25 +1227,27 @@ Combining everything:
   hb_shift = hb_md_distribution.rvs()
 
   # At the individual simulant level, at each time step (time = t)
+
+  household_covered_i(t)  = time_covered_i <= t
+                          = p_i < coverage(t)
+
   # Only adjust Hb level for iron-responsive individuals
   if iron_responsive_i:
-    household_covered_i(t)  = time_covered_i <= t
-                            = p_i < coverage(t)
-    # Fortification starts either when the household receives coverage, or when
-    # the child turns 6 months old and starts eating solids, whichever is later.
-    # Recall that if the child is covered in baseline, then time_covered_i =
-    # float('-inf'), so coverage always starts at age 6 months in this case.
-    time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
     # Effect on Hb:
     # #calibrate for baseline coverage, and take into account
     # the age-dependent effect size and the 6 month lag time.
 
     hb_i = hb_gbd(age_i(t)) - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
 
-    if hb_i < 0:
-      hb_i = 10 # Arbitrarily set value to 10 if shifting made it negative
+    # Clip value to be >=1 in case shifting made it negative
+    hb_i = np.clip(hb_i, 1, np.inf)
 
     if household_covered_i(t):
+      # Fortification starts either when the household receives coverage, or when
+      # the child turns 6 months old and starts eating solids, whichever is later.
+      # Recall that if the child is covered in baseline, then time_covered_i =
+      # float('-inf'), so coverage always starts at age 6 months in this case.
+      time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
       hb_i += (hb_lag_fraction(time_since_fortified_i(t))
                * hb_age_fraction(age_i(t))
                * hb_shift
