@@ -117,6 +117,11 @@ The health insurance provider is interested in estimating the yearly number of d
 1.2 Literature review
 ---------------------
 
+  - The peak onset age for breast cancer in Chinese women is between 40 and 50 years, which is younger than that in Western countries by 5 to 10 years. (China Anti-Cancer Association 2019)
+
+
+
+
 .. todo::
  maybe just a brief summary of what the literature says about the exposures/outcome/exp-outcome relationship?
 
@@ -297,13 +302,63 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. todo::
-   - types of breast cancer screening
-   - Screening coverage equations
-   - sensitivity/specificity of screening methods
-   - how to estimate number of cases from screening results
+:underline:`I. Screening algorithm`
 
-.. image:: breast_cancer_screening_tree_China.svg
+Breast cancer screening algorithm was derived from the 2019 guidelines from the China Anti-Cancer Association and National Clinical Research Center for Cancer. All simulants will follow this decision tree to decide if they are due a screening. The decision tree branches according to:  
+
+   1) Sex
+   2) Age 
+   3) Family history
+   4) With diagnosis of DCIS/LCIS 
+
+  .. image:: breast_cancer_screening_tree_China2.svg
+
+
++--------------------------------------------------------------------------------------------------+
+| Screening branches                                                                               | 
++========+========+=======+==========+===========+=====================+=============+=============+
+| Branch | Sex    | Age   | Family   | With DCIS | Screening           | Sensitivity | Specificity |
+|        |        | group | history  | or LCIS   | tech                |             |             |
++--------+--------+-------+----------+-----------+---------------------+-------------+-------------+
+| A      | Female | 30-69 | Yes      | either    | MRI, every year     | 91%         | 100%        |
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+                                             
+| B      |        | 30-44 | No       | Yes       | BUS, every year     | 73.7%       | 100%        |      
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+   
+| C      |        | 45-69 | No       | Yes       | MAM+BUS, every year | 93.9%       | 100%        |      
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+    
+| D      |        | 30-69 | No       | No        | MAM, every 2 years  | 84.8%       | 100%        |
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+    
+| E      |        | <30   | either   | either    | No screening                                    |
+|        |        | or 70+|          |           |                                                 |
++--------+--------+-------+----------+-----------+-------------------------------------------------+
+| F      | Male   | any   | either   | either    | No screening                                    |
++--------+--------+-------+----------+-----------+-------------------------------------------------+
+| MAM: mammography; BUS: breast ultrasound                                                         |
++--------------------------------------------------------------------------------------------------+
+ 
+ 
+.. todo::
+  The breast cancer recommendation says: "Women aged 69 years and older and with an average risk of breast cancer should have the opportunity to continue screening as long as their overall health is good and they have a life expectancy of 10 years or longer." I'm wondering if this only applies to average risk women and that high risk 70+ women would continue to have MRI (follow branch A). Yongquan, do you see any recommendation that separates out average risk and high risk 70+ women?   
+
+
+.. note:: 
+  see :download:`breast cancer screening memo <breast_cancer_screening_memo.docx>` for more in depth explanation how modelling decisions were adpated from guidelines, as well as assumptions and limiations of these modelling decisions. 
+
+
+:underline:`II. Probability of attending screening`
+
+ - 1) All simulants will be due a screening according to their attributes in the decision tree
+ - 2) Probability of simulants attending their first due screening is 22.5% (95%CI 20.4-24.6%).
+ - 3) If a simulant attends a screening, they are 1.89 (95%CI 1.06-2.04) times more likely to attend their next screening than those who did not attend a  
+      screening. 
+
+.. todo:: 
+  details equations for this
+
+:underline:`III. Time to next screening`
+ 
+ - scheduled time to next screening based on algorithm tree irregardless of whether they attended screening. 
+
 
 .. _5.3.3:
 
