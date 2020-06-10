@@ -1192,7 +1192,11 @@ time since the simulant started eating iron-fortified food:
 
   When calibrating hemoglobin levels for baseline coverage (see the
   :ref:`baseline calibration <baseline_calibration_hb_bw_section>` section
-  below), it is *possible* (but highly unlikely with the shift size we're dealing with) that a simulant's hemoglobin level can end up *negative* after the down-shift. **In the case of a negative hemoglobin level, we will arbitrarily reset the hemoglobin level to 10 g/L**.
+  below), it is *possible* (but highly unlikely with the shift size we're
+  dealing with) that a simulant's hemoglobin level can end up *negative* after
+  the down-shift. To correct for this possibility, if any shifted hemoblobin
+  levels end up below 1 g/L, reset them to 1 g/L.
+
 
 .. Note::
 
