@@ -1216,7 +1216,9 @@ time since the simulant started eating iron-fortified food:
   against the iron fortification :ref:`coverage function
   <coverage_algorithm_section>`, the same random number should be used to
   determine whether the child's mother ate fortified food during pregnancy as is
-  used to determine whether the child eats fortified food.
+  used to determine whether the child eats fortified food. (In the future, we
+  could consider using a positive correlation instead -- see :ref:`Model
+  Limitations <limitations_section>`.)
 
 Combining everything:
 
@@ -2129,6 +2131,15 @@ causes affected by low birth weight and short gestation are as follows:
   YLLs due to these cause will in theory be captured by the above strategy of
   using the LBWSG relative risks to affect the overall mortality rate of
   simulants.
+
+.. _limitations_section:
+
+Model Limitations
+-----------------
+
+* For iron fortification, we are assuming the child's propensity for getting
+  fortified food is the same as their mother's. It may be better to model these
+  propensities as positively correlated but not necessarily identical.
 
 References
 ----------
