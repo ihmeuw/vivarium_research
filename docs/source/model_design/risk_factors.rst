@@ -535,7 +535,7 @@ The population attributable fraction is a quantification of the proportion of
 of a given cause outcome, such as cases, deaths, or DALYs, that could be 
 eliminated by removing a risk exposure.
 
-..todo::
+.. todo::
 	Fill in PAF overview
 
 Bias in PAF Calculation
@@ -546,7 +546,7 @@ The PAF can be calculated using the following formula:
 .. math::
 	:label: eq1
 
-	\text{PAF}_{pop}=\frac{p_c(RR_{adj}-1)}{RR_{adj}}
+	\text{PAF}=\frac{p_c(RR_{adj}-1)}{RR_{adj}}
 
 In which we define :math:`p_c` to be the proportion of cases (individuals who 
 possess the outcome of interest) that are exposed, and :math:`RR_{adj}` has been adjusted for confounding and effect modification.
@@ -554,7 +554,7 @@ possess the outcome of interest) that are exposed, and :math:`RR_{adj}` has been
 There is the a second PAF equation, which can be used *in the absence of 
 confounding or effect modification:*
 
-.. math:: \text{PAF}_{pop}=\frac{p_p(RR_{cr}-1)}{1+p_p(RR_{cr}-1)} =\frac{p_p(RR_{adj}-1)}{1+p_p(RR_{adj}-1)}
+.. math:: \text{PAF}=\frac{p_p(RR_{cr}-1)}{1+p_p(RR_{cr}-1)} =\frac{p_p(RR_{adj}-1)}{1+p_p(RR_{adj}-1)}
 	:label: eq2
 
 Note that here, the crude relative risk :math:`(RR_{cr})` is equivalent to the adjusted :math:`(RR_{adj})`. We define :math:`p_p` to be the proportion of the entire 
@@ -591,10 +591,11 @@ And the proportion of the entire population that is exposed is given by:
 It can be shown that when the fraction of cases in the unexposed times the 
 relative risk :math:`\left( \frac{c}{c+d} \cdot RR_{adj} \right)` equals the fraction 
 of cases in the exposed :math:`\left( \frac{a}{a+b} \right)`, i.e., when there 
-are no confounders, equation (1) equals equation (2).
+are no confounders or effect modifiers, equation (1) equals equation (2).
 
-However, when :math:`\frac{c}{c+d} \cdot RR_{adj} \neq \frac{a}{a+b}`, this inequality 
-fails. Intuitively, we can imagine a confounder that is positively associated with
+However, when :math:`\frac{c}{c+d} \cdot RR_{adj} \neq \frac{a}{a+b}`, 
+equation (1) does *not* equal equation (2). Intuitively, we can imagine 
+a confounder that is positively associated with
 our exposure, holding all else constant. Then there will be a 
 disproportionately high number of cases among the exposed, and 
 :math:`\frac{c}{c+d} \cdot RR_{adj} < \frac{a}{a+b}`.
@@ -602,7 +603,7 @@ disproportionately high number of cases among the exposed, and
 This can be solved via weighting equation (2) per stratum of our confounder or
 effect modifier, yielding equation (3):
 
-.. math:: \sum_{i=1}^z W_i \frac{p_i(RR_i-1)}{1+p_i(RR_i-1)}
+.. math:: \text{PAF} = \sum_{i=1}^z W_i \frac{p_i(RR_i-1)}{1+p_i(RR_i-1)}
 	:label: eq3
 
 Here, for each stratum :math:`i` of our confounder or effect modifier, 
