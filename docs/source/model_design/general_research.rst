@@ -681,7 +681,7 @@ Directed Acyclic Graphs (Causal Diagrams)
 
 .. important::
 
-  The figures represented in this section represent directed acyclic graphs/causal diagrams. These figures are distinct from compartamental model diagrams (such as SIR models). For our purposes we will represent directed acyclic graphs as *circles* connected by arrows and compartamental model diagrams as *squares* connected by arrows.
+  The figures represented in this section represent directed acyclic graphs/causal diagrams. These figures are distinct from compartamental model diagrams (such as SIR models). DAGs for causal diagrams are commonly represented as *circles* connected by arrows, and compartmental model diagrams are commonly represented as *squares* connected by arrows; we will follow this convention here.
 
   Additionally, for the purposes of directed acyclic graphs, variables will be labeled with capital letters (A, B, C, etc.) and arrows will be labeled with lower case letters (a, b, c, etc.).
 
@@ -694,12 +694,16 @@ The *acyclic* nature of DAGs is that there cannot be feedback loops between any 
 
 .. image:: acyclic_dags.svg
 
+.. note::
+
+	The figure below represents a feedback loop between two variables; however feedback loops that involve more than two variables are also not appropriate for use in causal diagram DAGs.
+
 Applications, Assumptions, and Limitations of Directed Acyclic Graphs
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 DAGs are used in epidemiology to represent a network of relationships between several variables, which in turn helps to guide the selection of variables that will need to be measured or considered in a given study/project. Further, the exact relationship between variables in a DAG will dictate *how* to treat or consider a specific variable in that study/project by helping to indentify potential confounding, intermediate, or mediating variables between a given exposure and outcome of interest (see the `Causal Relationships`_ section for definitions).
 
-However, DAGs are limited in that they require *prior causal knowledge* about the variables that may be causally related to a given exposure and outcome of interest. Therefore, there may be uncertain, unmeasured, or unknown variables that cannot be represented in a given DAG. Further, DAGs do not allow for easy representation of direction or magnitude of a causal relationship or for effect modification.
+However, DAGs are limited in that they require *prior causal knowledge* about the variables that may be causally related to a given exposure and outcome of interest. Therefore, there may be uncertain, unmeasured, or unknown variables that cannot be represented in a given DAG. Further, DAGs do not allow for *easy* representation of whether a relationship is positive or negative, the magnitude of a causal relationship, or effect modification. Note that alternative formats may be utilized to represent these factors as needed, such as varying arrow weights, denoting :math:`+` and :math:`-` signs with arrows, etc.; however, these formats are not shown in this section.
 
 For the purposes of this section of our documentation, we will assume that each DAG is completely accurate, represents **all** relevant variables in a given causal network and that there are no unrepresented variables.
 
@@ -711,7 +715,7 @@ A path in a DAG is defined as any route drawn through arrows that link two varia
 Directed Paths
 ~~~~~~~~~~~~~~
 
-Directed paths are those in which variables are connected through arrows that flow all flow in the same direction. See below for an example of a directed path between variables A and D.
+Directed paths are those in which variables are connected through arrows that all flow in the same direction. See below for an example of a directed path between variables A and D.
 
 .. image:: directional_dag.svg
 
@@ -720,14 +724,14 @@ Directed paths are those in which variables are connected through arrows that fl
 Undirected Paths
 ~~~~~~~~~~~~~~~~
 
-Undirected paths are those in which variables are connected through arrows that do not all flow from head to tail. The two cases of undirected paths covered here include backdoor paths and colliders.
+Undirected paths are those in which variables are connected through arrows that do not all flow in the same direction. The two cases of undirected paths covered here include backdoor paths and colliders.
 
 **In the case that there is an undirected path (and no directed path) bewteen two variables, those variables will NOT be causally related, although they may be associated in some way.**
 
 Backdoor Paths
 ^^^^^^^^^^^^^^
 
-Backdoor paths are those in which two variables are connected via a common cause. In other words, two variables that are linked via a variable that has two arrows flowing *away* from it. See below for an example in which variables Y and Z are connected via a backdoor path through variable X.
+Backdoor paths are those in which two variables are connected via a common cause. The simplest example of this is when two variables that are linked via a variable that has two arrows flowing *away* from it. See below for an example in which variables Y and Z are connected via a backdoor path through variable X.
 
 .. image:: backdoor_path_dag.svg
 
@@ -736,11 +740,11 @@ Backdoor paths are those in which two variables are connected via a common cause
 Colliders
 ^^^^^^^^^
 
-Colliders are variables that have more than one cause; in other words, where pathways collide and a variable has two arrows flowing *toward* it. See below for an example in which variable Z is a collider on the path between X and Y.
+Colliders are variables that have more than one cause; in other words, where pathways collide and a variable has two arrows flowing *toward* it. See below for an example in which variable Z is a collider on the path between variables X and Y.
 
 .. image:: collider_dag.svg
 
-**In the case that two variables are linked through a pathway with a collider (and there is no directional or backdoor pathway between them), there will be no association or causal realtionship between the two variables.** This is also referred to as a **"closed path."**
+**In the case that two variables are linked through a path with a collider (and there is no directed or backdoor path between them), there will be no association or causal relationship between the two variables.** Paths bewteen two variables with a collider are referred to as a **"closed paths,"** while paths without colliders are referred to as **"open paths."**
 
 Summary
 ~~~~~~~
@@ -754,7 +758,7 @@ Summary
      - Direction
      - Open or closed
      - Association
-   * - Direct path
+   * - Directed path
      - Path with arrows flowing in same direction
      - Directed
      - Open
@@ -765,7 +769,7 @@ Summary
      - Open
      - Non-causal association
    * - Closed path
-     - Path with arrows flowing in different directions with a collider
+     - Path with a collider
      - Undirected
      - Closed
      - No association
@@ -787,6 +791,8 @@ Finally, do not be fooled by the following situations for which there is no need
 
 .. image:: paths_closed_by_colliders.svg
 
+In fact, if we were to condition on a collider (i.e. variable Y in example 1 or variable X in example 2), we would introduce dependence between the colliding variable's parent variables (i.e. variables X and Z in example 1 and variables E and Y in example 2). In other words, conditioning on a collider between two variables *opens* the previously closed path between those variables and introduces bias in the evaluation of the causal relationship between them. Therefore, one should **not** condition on colliding variables between an exposure and outcome.
+
 Denoting Non-Causal Associations
 ++++++++++++++++++++++++++++++++
 
@@ -803,6 +809,10 @@ The second approach is to represent the association between the two variables wi
 .. image:: dashed_association.svg
 
 For our purposes, the two approaches shown in this section for representing non-causal associations between two variables (a common cause of an unknown variable and a dashed connecting line) are  equivalent representations.
+
+.. note:: 
+
+	Dashed lines will represent non-causal associations as described above in all causal diagram DAGs in the Vivarium Research repository. 
 
 Selecting Appropriate Data Sources
 ----------------------------------
