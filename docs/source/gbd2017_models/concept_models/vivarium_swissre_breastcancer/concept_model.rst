@@ -351,7 +351,7 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 :underline:`II. Probability of attending screening`
 
  - 1) All simulants will be due a screening according to their attributes in the decision tree
- - 2) Probability of simulants attending their first due screening is 22.5% (95%CI 20.4-24.6%).*this is the parameter we vary in scale-up scenario 
+ - 2) Probability of simulants attending their first due screening is 22.5% (SD=0.225). *this is the parameter we vary in scale-up scenario* 
  - 3) If a simulant attends a screening, they have 1.89 (95%CI 1.06-2.49) (Yan et al 2017) more odds of attending their next screening than those who did not attend a screening. 
 
 +----------------+-------------+---------------+----------+
@@ -368,24 +368,27 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 +----------------+-------------+---------------+----------+ 
 
 
-      - :math:`P(\text{attended last screen}) = \frac{a+c}{a+b+c+d}` = 22.5% (SD 0.225%)
-      - :math:`P(\text{attends next screen}) = \frac{a+b}{a+b+c+d}`  = 22.5% (SD 0.225%)
+      - :math:`P(\text{attended last screen}) = \frac{a+c}{a+b+c+d}` = 30% (SD 0.3%)
+      - :math:`P(\text{attends next screen}) = \frac{a+b}{a+b+c+d}`  = 30% (SD 0.3%)
       - OR = :math:`\frac{a/c}{b/d}=\frac{ad}{bc}` = 1.89 (95%CI 1.06-2.49)
       - a+b+c+d = 1
-      
-      Solve for a, b, c, d:
 
-        - a = 0.071575
-        - b = 0.153425
-        - c = 0.153425
-        - d = 0.621575
+      - a = 0.071575
+      - b = 0.153425
+      - c = 0.153425
+      - d = 0.621575
+
+      .. code-block:: Python
+
+        Solve for a, b, c, d: describe how to solve equations
 
       - :math:`P(\text{attended next screen among those who attended last screen}) = \frac{a}{a+c}` = 31.8%
-      - :math:`P(\text{attended next screen among those who did not attend last screen}) =\frac{b}{b+d}` = 19.8%
+      - :math:`P(\text{attended next screen among those who did not attend last screen}) =\frac{b}{b+d}` =  19.8%
 
 
 .. note::
-  For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 22.5, so please use draws from distribution Normal(mean=22.5,SD=0.225)
+  - For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 22.5%, so please use draws from distribution Normal(mean=22.5%,SD=0.225)
+  - These values are mainly placeholders for now, they may chance. Probability simulant attends first screening is was found to be 22.5% (95%CI 20.4-24.6%) among the general population in Bao et al 2017. We may want to use a slightly higher attendence coverage of ~30% because we believe it might be higher in the population with critical insurance coverage. More research to be done to investigate how much higher. 
 
 
 .. todo:: 
@@ -414,7 +417,9 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. todo:: 
-      add screening scale-up description and equations 
+      - add screening scale-up description 
+      - In the screening model, the probability of attending next screen is based on a 22.5% first and second screening attendance. The below figure shows a 30% first screen attendence coverage. More work needs to be done to finalize a value. 
+
 
 .. image:: screening_scale_up_figure.svg
 
