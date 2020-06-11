@@ -88,6 +88,10 @@ Contents(hello):
 +-------+----------------------------+
 | ACMR  | all cause mortality rate   |
 +-------+----------------------------+
+| MAM   |    |
++-------+----------------------------+
+| BUS   |    |
++-------+----------------------------+
 
 
 .. _1.0:
@@ -334,30 +338,74 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 | F      | Male   | any   | either   | either    | No screening                                    |
 +--------+--------+-------+----------+-----------+-------------------------------------------------+
 | MAM: mammography; BUS: breast ultrasound                                                         |
+| sensitivity and specficity here refers to the entire screening series. We expect the specificity |
+| to be 100% (no 'false positives') as a biopsy will likely be done before a cancer diagnosis      | 
 +--------------------------------------------------------------------------------------------------+
  
  
-.. todo::
-  The breast cancer recommendation says: "Women aged 69 years and older and with an average risk of breast cancer should have the opportunity to continue screening as long as their overall health is good and they have a life expectancy of 10 years or longer." I'm wondering if this only applies to average risk women and that high risk 70+ women would continue to have MRI (follow branch A). Yongquan, do you see any recommendation that separates out average risk and high risk 70+ women?   
-
 
 .. note:: 
-  see :download:`breast cancer screening memo <breast_cancer_screening_memo.docx>` for more in depth explanation how modelling decisions were adpated from guidelines, as well as assumptions and limiations of these modelling decisions. 
+  see :download:`breast cancer screening memo <breast_cancer_screening_memo.docx>` for more in depth explanation how modelling decisions were adpated from guidelines, as well as assumptions and limitations of these modelling decisions. 
 
 
 :underline:`II. Probability of attending screening`
 
  - 1) All simulants will be due a screening according to their attributes in the decision tree
- - 2) Probability of simulants attending their first due screening is 22.5% (95%CI 20.4-24.6%).
- - 3) If a simulant attends a screening, they are 1.89 (95%CI 1.06-2.04) times more likely to attend their next screening than those who did not attend a  
-      screening. 
+ - 2) Probability of simulants attending their first due screening is 22.5% (95%CI 20.4-24.6%). 
+ - 3) If a simulant attends a screening, they have 1.89 (95%CI 1.06-2.49) (Yan et al 2017) more odds of attending their next screening than those who did not attend a screening. 
+
++----------------+-------------+---------------+----------+
+|                | Attended    |Did not attend | Total    |
+|                | last screen |last screen    |          |
++----------------+-------------+---------------+----------+
+| Attends next   |  a          |  b            | a+b      |
+| screen         |             |               |          |
++----------------+-------------+---------------+----------+
+| Does not attend|  c          |  d            | c+d      |
+| next screen    |             |               |          |
++----------------+-------------+---------------+----------+
+|                | a+c         | b+d           | a+b+c+d  |
++----------------+-------------+---------------+----------+ 
+
+
+      - :math:`P(\text{attended last screen}) = \frac{a+c}{a+b+c+d}` = 22.5% (SD 0.225%)
+      - :math:`P(\text{attends next screen}) = \frac{a+b}{a+b+c+d}`  = 22.5% (SD 0.225%)
+      - OR = :math:`\frac{a/c}{b/d}=\frac{ad}{bc}` = 1.89 (95%CI 1.06-2.49)
+      - a+b+c+d = 1
+      
+      Solve for a, b, c, d:
+
+        - a = 0.071575
+        - b = 0.153425
+        - c = 0.153425
+        - d = 0.621575
+
+      - :math:`P(\text{attended next screen among those who attended last screen}) = \frac{a}{a+c}` = 31.8%
+      - :math:`P(\text{attended next screen among those who did not attend last screen}) =\frac{b}{b+d}` = 19.8%
+
+
+.. note::
+  For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 22.5, so please use draws from distribution Normal(mean=22.5,SD=0.225)
+
 
 .. todo:: 
-  details equations for this
+  
+  write a python function that will solve for a,c,d,c with different values of P and OR 
 
-:underline:`III. Time to next screening`
+
+:underline:`III. Time to next scheduled screening`
  
  - scheduled time to next screening based on algorithm tree irregardless of whether they attended screening. 
+ - For those who are in Branch A, B, C (yearly screening): truncated normal distribution with mean 364 days, SD +/- 156 days, lower limit is 100 days, upper limit is 700 days
+ - for those in Branch D (every two years screening): truncated normal distribution with mean 728 days, SD +/- 156 days, lower limit is 200 days, upper limit is 1400 days
+
+ .. todo:: 
+
+    - (upload notebook exploring Marketscan data that informed the distribution paratmers)
+
+    - I'm wondering if the upper and lower limits of the truncated normal distributions should be narrower? What we are modelling here are the 'guideline times' to next screening, hence shouldn't they fall within the bounds of 1 year or 2 years according to the screening tree? Currently for someone who is in branch A, B, or C and supposed to have yearly screens, their next scheduled screen can be as far in the future as two years (with an upper bound of 700 days). 
+
+    - I'm wondering if the Marketscan data, where we got the empirical distributions from, is giving us the time interval between screens that the patient actually showed up to? (which in our model is a combintation of time to next scheduled screening + probabiltiy of showing up)
 
 
 .. _5.3.3:
@@ -366,7 +414,9 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. todo:: 
-      how to model breast cancer detection given breast cancer status and screening? 
+      add screening scale-up description and equations 
+
+.. image:: screening_scale_up_figure.svg
 
 .. _5.3.4:
 
