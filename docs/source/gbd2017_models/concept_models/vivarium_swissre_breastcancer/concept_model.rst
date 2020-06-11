@@ -351,7 +351,7 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 :underline:`II. Probability of attending screening`
 
  - 1) All simulants will be due a screening according to their attributes in the decision tree
- - 2) Probability of simulants attending their first due screening is 22.5% (95%CI 20.4-24.6%). 
+ - 2) Probability of simulants attending their first due screening is 22.5% (95%CI 20.4-24.6%).*this is the parameter we vary in scale-up scenario 
  - 3) If a simulant attends a screening, they have 1.89 (95%CI 1.06-2.49) (Yan et al 2017) more odds of attending their next screening than those who did not attend a screening. 
 
 +----------------+-------------+---------------+----------+
