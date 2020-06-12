@@ -351,7 +351,7 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 :underline:`II. Probability of attending screening`
 
  - 1) All simulants will be due a screening according to their attributes in the decision tree
- - 2) Probability of simulants attending their first due screening is 22.5% (SD=0.225). *this is the parameter we vary in scale-up scenario* 
+ - 2) Probability of simulants attending their first due screening is 30% (SD=0.3). *Note: this is the parameter we vary in the scale-up scenario* 
  - 3) If a simulant attends a screening, they have 1.89 (95%CI 1.06-2.49) (Yan et al 2017) more odds of attending their next screening than those who did not attend a screening. 
 
 +----------------+-------------+---------------+----------+
@@ -368,32 +368,52 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 +----------------+-------------+---------------+----------+ 
 
 
-      - :math:`P(\text{attended last screen}) = \frac{a+c}{a+b+c+d}` = 30% (SD 0.3%)
-      - :math:`P(\text{attends next screen}) = \frac{a+b}{a+b+c+d}`  = 30% (SD 0.3%)
-      - OR = :math:`\frac{a/c}{b/d}=\frac{ad}{bc}` = 1.89 (95%CI 1.06-2.49)
-      - a+b+c+d = 1
+      (1) :math:`P(\text{attended last screen}) = \frac{a+c}{a+b+c+d}` = 30% (SD 0.3%)
+      (2) :math:`P(\text{attends next screen}) = \frac{a+b}{a+b+c+d}`  = 30% (SD 0.3%)
+      (3) OR = :math:`\frac{a/c}{b/d}=\frac{ad}{bc}` = 1.89 (95%CI 1.06-2.49)
+      (4) a+b+c+d = 1
 
-      - a = 0.071575
-      - b = 0.153425
-      - c = 0.153425
-      - d = 0.621575
+.. code-block:: Python
 
-      .. code-block:: Python
+  1. Solve for a, b, c, d by first solving the following quadratic equation:
 
-        Solve for a, b, c, d: describe how to solve equations
+  (OR-1)b^2 + b - P(1-P) = 0 
 
-      - :math:`P(\text{attended next screen among those who attended last screen}) = \frac{a}{a+c}` = 31.8%
-      - :math:`P(\text{attended next screen among those who did not attend last screen}) =\frac{b}{b+d}` =  19.8%
+  Once you obtain b, then
+  | c=b
+  | a=P-b
+  | d=(1-P)-b
+
+  2. Obtain PAF for unmatched case-control OR
+
+  | PAF= 1- [b/(a+b)]/[d/(c+d)]
+  | Error factor of the 1-PAF = exp{1.96 x √[a/(b(a+b)) + c/(d(c+d)]}
+
+Using OR value of 1.89 and P as 0.3
+
+  - a = 0.11912
+  - b = 0.18088
+  - c = 0.18088
+  - d = 0.51912
+  - 1-PAF = 0.813
+  - PAF = 0.187
+  
+
+:math:`P(\text{attended next screen among those who attended last screen}) = \frac{a}{a+c}` = 39.7%
+:math:`P(\text{attended next screen among those who did not attend last screen}) =\frac{b}{b+d}` = 25.8%
+
+:math:`P(\text{attended next screen among those who attended last screen}) = P(1-PAF)*OR = 0.3x0.813x1.89` = 46.1% 
+:math:`P(\text{attended next screen among those who did not attend last screen}) =P(1-PAF) = 0.3x0.813` = 24.4%
+
+.. todo::
+
+    In the above, I presented two ways to calculate the probability of someone going for their next screening, the second one uses the PAF. Not sure which one is correct? 
 
 
 .. note::
   - For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 22.5%, so please use draws from distribution Normal(mean=22.5%,SD=0.225)
-  - These values are mainly placeholders for now, they may chance. Probability simulant attends first screening is was found to be 22.5% (95%CI 20.4-24.6%) among the general population in Bao et al 2017. We may want to use a slightly higher attendence coverage of ~30% because we believe it might be higher in the population with critical insurance coverage. More research to be done to investigate how much higher. 
+  - These values are mainly placeholders for now, they may chance. Probability simulant attends first screening is was found to be 22.5% (95%CI 20.4-24.6%) among the general population in Bao et al 2017. We may want to use a slightly higher attendence coverage of ~30% because we believe it might be higher in the population with critical insurance coverage. More research needs to be done to investigate how much higher. 
 
-
-.. todo:: 
-  
-  write a python function that will solve for a,c,d,c with different values of P and OR 
 
 
 :underline:`III. Time to next scheduled screening`
