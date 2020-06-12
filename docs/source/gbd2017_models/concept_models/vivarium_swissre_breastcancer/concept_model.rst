@@ -411,7 +411,7 @@ Using OR value of 1.89 and P as 0.3
 
 
 .. note::
-  - For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 22.5%, so please use draws from distribution Normal(mean=22.5%,SD=0.225)
+  - For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 30%, so please use draws from distribution Normal(mean=30%,SD=0.3)
   - These values are mainly placeholders for now, they may chance. Probability simulant attends first screening is was found to be 22.5% (95%CI 20.4-24.6%) among the general population in Bao et al 2017. We may want to use a slightly higher attendence coverage of ~30% because we believe it might be higher in the population with critical insurance coverage. More research needs to be done to investigate how much higher. 
 
 
