@@ -2018,7 +2018,7 @@ Desired Model Outputs
 
 .. csv-table:: Stratification Groups
   :file: stratification_groups.csv
-  :widths: 1 1 1 1 1
+  :widths: 1 1 1 1 1 1
   :header-rows: 1
 
 .. list-table:: Final Outputs
