@@ -88,6 +88,10 @@ Contents(hello):
 +-------+----------------------------+
 | ACMR  | all cause mortality rate   |
 +-------+----------------------------+
+| MAM   |    |
++-------+----------------------------+
+| BUS   |    |
++-------+----------------------------+
 
 
 .. _1.0:
@@ -116,6 +120,11 @@ The health insurance provider is interested in estimating the yearly number of d
 
 1.2 Literature review
 ---------------------
+
+  - The peak onset age for breast cancer in Chinese women is between 40 and 50 years, which is younger than that in Western countries by 5 to 10 years. (China Anti-Cancer Association 2019)
+
+
+
 
 .. todo::
  maybe just a brief summary of what the literature says about the exposures/outcome/exp-outcome relationship?
@@ -277,38 +286,165 @@ Scale-up of breast cancer screening coverage among insured population
 
 .. todo::
   add notebook
-  click here to see notebook exploring the .nc files: :ref:`forecast data <  >`                                                                        
+  click here to see notebook exploring the .nc files: :ref:`forecast data <  >`           
+
+
+.. _5.3:
 
 5.3 Models
 ----------
 
+.. _5.3.1:
 
 5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
 
-
+.. _5.3.2:
 
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  .. todo::
-   - types of breast cancer screening
-   - Screening coverage equations
-   - sensitivity/specificity of screening methods
-   - how to estimate number of cases from screening results
+:underline:`I. Screening algorithm`
 
-.. image:: breast_cancer_screening_tree_China.svg
+Breast cancer screening algorithm was derived from the 2019 guidelines from the China Anti-Cancer Association and National Clinical Research Center for Cancer. All simulants will follow this decision tree to decide if they are due a screening. The decision tree branches according to:  
 
+   1) Sex
+   2) Age 
+   3) Family history
+   4) With diagnosis of DCIS/LCIS 
+
+  .. image:: breast_cancer_screening_tree_China2.svg
+
+
++--------------------------------------------------------------------------------------------------+
+| Screening branches                                                                               | 
++========+========+=======+==========+===========+=====================+=============+=============+
+| Branch | Sex    | Age   | Family   | With DCIS | Screening           | Sensitivity | Specificity |
+|        |        | group | history  | or LCIS   | tech                |             |             |
++--------+--------+-------+----------+-----------+---------------------+-------------+-------------+
+| A      | Female | 30-69 | Yes      | either    | MRI, every year     | 91%         | 100%        |
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+                                             
+| B      |        | 30-44 | No       | Yes       | BUS, every year     | 73.7%       | 100%        |      
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+   
+| C      |        | 45-69 | No       | Yes       | MAM+BUS, every year | 93.9%       | 100%        |      
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+    
+| D      |        | 30-69 | No       | No        | MAM, every 2 years  | 84.8%       | 100%        |
++--------+        +-------+----------+-----------+---------------------+-------------+-------------+    
+| E      |        | <30   | either   | either    | No screening                                    |
+|        |        | or 70+|          |           |                                                 |
++--------+--------+-------+----------+-----------+-------------------------------------------------+
+| F      | Male   | any   | either   | either    | No screening                                    |
++--------+--------+-------+----------+-----------+-------------------------------------------------+
+| MAM: mammography; BUS: breast ultrasound                                                         |
+| sensitivity and specficity here refers to the entire screening series. We expect the specificity |
+| to be 100% (no 'false positives') as a biopsy will likely be done before a cancer diagnosis      | 
++--------------------------------------------------------------------------------------------------+
+ 
+ 
+
+.. note:: 
+  see :download:`breast cancer screening memo <breast_cancer_screening_memo.docx>` for more in depth explanation how modelling decisions were adpated from guidelines, as well as assumptions and limitations of these modelling decisions. 
+
+
+:underline:`II. Probability of attending screening`
+
+ - 1) All simulants will be due a screening according to their attributes in the decision tree
+ - 2) Probability of simulants attending their first due screening is 30% (SD=0.3). *Note: this is the parameter we vary in the scale-up scenario* 
+ - 3) If a simulant attended their last screening, they have 1.89 (95%CI 1.06-2.49) (Yan et al 2017) more odds of attending the next screening than those who did not attend their last screening. 
+
++----------------+-------------+---------------+----------+
+|                | Attended    |Did not attend | Total    |
+|                | last screen |last screen    |          |
++----------------+-------------+---------------+----------+
+| Attends        |  a          |  b            | a+b      |
+| screening      |             |               |          |
++----------------+-------------+---------------+----------+
+| Does not attend|  c          |  d            | c+d      |
+| screening      |             |               |          |
++----------------+-------------+---------------+----------+
+|                | a+c         | b+d           | a+b+c+d  |
++----------------+-------------+---------------+----------+ 
+
+
+      (1) :math:`P(\text{attended last screen}) = \frac{a+c}{a+b+c+d}` = 30% (SD 0.3%)
+      (2) :math:`P(\text{attends screening}) = \frac{a+b}{a+b+c+d}`  = 30% (SD 0.3%)
+      (3) OR = :math:`\frac{a/c}{b/d}=\frac{ad}{bc}` = 1.89 (95%CI 1.06-2.49)
+      (4) a+b+c+d = 1
+
+.. code-block:: Python
+
+  1. Solve for a, b, c, d by first solving the following quadratic equation:
+
+  (OR-1)b^2 + b - P(1-P) = 0 
+
+  Once you obtain b, then
+  | c=b
+  | a=P-b
+  | d=(1-P)-b
+
+  2. Obtain PAF for unmatched case-control OR
+
+  | PAF= 1- [b/(a+b)]/[d/(c+d)]
+  | Error factor of the 1-PAF = exp{1.96 x √[a/(b(a+b)) + c/(d(c+d)]}
+
+Using OR value of 1.89 and P as 0.3
+
+  - a = 0.11912
+  - b = 0.18088
+  - c = 0.18088
+  - d = 0.51912
+  - 1-PAF = 0.813
+  - PAF = 0.187
+  
+*if OR came from a cohort/cross-sectional study, then use this set of values*
+:math:`P(\text{attends screening among those who attended last screen}) = \frac{a}{a+c}` = 39.7%
+:math:`P(\text{attends screening among those who did not attend last screen}) =\frac{b}{b+d}` = 25.8%
+
+*if OR came from a case-control study, then use this set of values*
+:math:`P(\text{attends screening among those who attended last screen}) = P(1-PAF)*OR = 0.3*0.813*1.89` = 46.1% 
+:math:`P(\text{attends screening among those who did not attend last screen}) =P(1-PAF) = 0.3*0.813` = 24.4%
+
+.. todo::
+
+    In the above, I presented two ways to calculate the probability of someone going for their next screening depending on the underlying study design. We need to dig a bit deeper to the original study that produced this 1.89 value. For now, use let's use the first set (~40/25%) as stand-in value. Note equation (1) and (2) would not be valid if this were a case-control. We would need to know how the controls were sampled in order to know what the OR can approximate to. 
+
+
+.. note::
+  - For now, use normal distibutions with 1% SD around the mean for all parameters i.e. for probability of attending screening, mean is 30%, so please use draws from distribution Normal(mean=30%,SD=0.3)
+  - These values are mainly placeholders for now, they may chance. Probability simulant attends first screening is was found to be 22.5% (95%CI 20.4-24.6%) among the general population in Bao et al 2017. We may want to use a slightly higher attendence coverage of ~30% because we believe it might be higher in the population with critical insurance coverage. More research needs to be done to investigate how much higher. 
+
+
+
+:underline:`III. Time to next scheduled screening`
+ 
+ - scheduled time to next screening based on algorithm tree irregardless of whether they attended screening. 
+ - For those who are in Branch A, B, C (yearly screening): truncated normal distribution with mean 364 days, SD +/- 156 days, lower limit is 100 days, upper limit is 700 days
+ - for those in Branch D (every two years screening): truncated normal distribution with mean 728 days, SD +/- 156 days, lower limit is 200 days, upper limit is 1400 days
+
+ .. todo:: 
+
+    - (upload notebook exploring Marketscan data that informed the distribution paratmers)
+
+    - I'm wondering if the upper and lower limits of the truncated normal distributions should be narrower? What we are modelling here are the 'guideline times' to next screening, hence shouldn't they fall within the bounds of 1 year or 2 years according to the screening tree? Currently for someone who is in branch A, B, or C and supposed to have yearly screens, their next scheduled screen can be as far in the future as two years (with an upper bound of 700 days). 
+
+    - I'm wondering if the Marketscan data, where we got the empirical distributions from, is giving us the time interval between screens that the patient actually showed up to? (which in our model is a combintation of time to next scheduled screening + probabiltiy of showing up)
+
+
+.. _5.3.3:
 
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
     .. todo:: 
-      how to model breast cancer detection given breast cancer status and screening? 
+      - add screening scale-up description 
+      - In the screening model, the probability of attending next screen is based on a 22.5% first and second screening attendance. The below figure shows a 30% first screen attendence coverage. More work needs to be done to finalize a value. 
 
 
+.. image:: screening_scale_up_figure.svg
+
+.. _5.3.4:
 
 5.3.4 Family history model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -323,13 +459,19 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
   .. note:: 
     - GBD risk factors will not be modelled
 
+
+.. _5.3.5:
+
 5.3.5 DCIS and LCIS treatment model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. _5.4:
 
 5.4 Desired outputs
 -------------------
 
+
+.. _5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -340,8 +482,15 @@ see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_
   any special stratifications?
 
 
+.. _6.0:
 
-6.0 Limitations
+6.0 Back-of-envelope calculations
++++++++++++++++++++++++++++++++++
+
+
+.. _7.0:
+
+7.0 Limitations
 +++++++++++++++
 
 

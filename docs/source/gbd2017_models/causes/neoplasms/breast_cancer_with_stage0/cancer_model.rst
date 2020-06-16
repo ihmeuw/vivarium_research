@@ -262,7 +262,7 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
 
 **DCIS**
 
-   - Crude prevalence ratio of DCIS = :math:`\frac{\text{proportion of DCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` =0.35±.02
+   - Crude prevalence ratio of DCIS = :math:`\frac{\text{proportion of DCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` = 0.33 (SD=0.10)
 
    - Prevalence of DCIS 
 
@@ -270,7 +270,7 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
 
 **LCIS**
 
-   - Crude prevalence ratio of LCIS = :math:`\frac{\text{proportion of LCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` =0.08±.01
+   - Crude prevalence ratio of LCIS = :math:`\frac{\text{proportion of LCIS among those tested}}{\text{proportion of stage 1+ breast cancer among those tested}}` = 0.07 (SD=0.06)
 
    - Prevalence of LCIS 
 
