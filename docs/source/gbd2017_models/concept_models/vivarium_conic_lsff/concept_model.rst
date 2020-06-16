@@ -2033,13 +2033,38 @@ Desired Model Outputs
 
 .. note::
 
-  To compute the `variance <https://en.wikipedia.org/wiki/Variance>`_ of a random variable :math:`Y` in the population (e.g. a risk exposure variable like hemoglobin level or birthweight), there are (at least) two possible options for the raw outputs to report in ``output.hdf``. Both options require calculating the *mean* of :math:`Y` as well as the variance:
+  To compute the `variance <https://en.wikipedia.org/wiki/Variance>`_ of a
+  random variable :math:`Y` in the population (e.g. a risk exposure variable
+  like hemoglobin level or birthweight), there are (at least) two possible
+  options for the raw outputs to report in ``output.hdf``. Both options require
+  calculating the *mean* of :math:`Y` as well as the variance:
 
-  1.  Directly record the *mean* and *variance* of :math:`Y` for the population in each random seed, then use the `law of total variance <https://en.wikipedia.org/wiki/Law_of_total_variance>`_ (equivalently, the `formula for the variance of a mixture distribution <https://en.wikipedia.org/wiki/Mixture_distribution#Moments>`_) to compute the variance of the population in each draw when aggregating over random seeds. That is, compute the variance of the means of :math:`Y` over the random seeds and the mean of the variances of :math:`Y` over the random seeds, and add these together.
+  1.  Directly record the *mean* and *variance* of :math:`Y` for the population
+      in each random seed, then use the `law of total variance
+      <https://en.wikipedia.org/wiki/Law_of_total_variance>`_ (equivalently, the
+      `formula for the variance of a mixture distribution
+      <https://en.wikipedia.org/wiki/Mixture_distribution#Moments>`_) to compute
+      the variance of the population in each draw when aggregating over random
+      seeds. That is, compute the variance of the means of :math:`Y` over the
+      random seeds and the mean of the variances of :math:`Y` over the random
+      seeds, and add these together.
 
-  2. Record the *first moment* :math:`\sum_i y_i` and *second moment* :math:`\sum_i y_i^2` of :math:`Y` with respect to population measure, then compute the variance of :math:`Y` using the formula :math:`\operatorname{Var}(Y) = \operatorname{E}(Y^2) - (\operatorname{E}Y)^2`. With this option, the first and second moments can be aggregated over random seeds simply by summing. **Caution:** It is possible that this method can become `numerically unstable <https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance>`_ if the population is very large or the values of :math:`Y` are very large, though typically this should not be a problem.
+  2.  Record the *first moment* :math:`\sum_i y_i` and *second moment*
+      :math:`\sum_i y_i^2` of :math:`Y` with respect to population measure, then
+      compute the variance of :math:`Y` using the formula
+      :math:`\operatorname{Var}(Y) = \operatorname{E}(Y^2) -
+      (\operatorname{E}Y)^2`. With this option, the first and second moments can
+      be aggregated over random seeds simply by summing. **Caution:** It is
+      possible that this method can become `numerically unstable
+      <https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance>`_ if
+      the population is very large or the values of :math:`Y` are very large,
+      though typically this should not be a problem.
 
-  **To do:** Include more explicit formulas to make it clearer exactly how the above two options work. Also, be clearer with notation for population parameters vs. statistical estimates. Also, somewhere (perhaps not here) describe the alternative definitions as person-time-weighted averages.
+  **To do:** Include more explicit formulas to make it clearer exactly how the
+  above two options work. Also, be clearer with notation for population
+  parameters vs. statistical estimates. Also, somewhere (perhaps not here)
+  describe the alternative definitions of mean and variance as
+  person-time-weighted averages.
 
 .. todo::
 
