@@ -2021,6 +2021,16 @@ Desired Model Outputs
   :widths: 1 1 1 1 1 1
   :header-rows: 1
 
+.. csv-table:: Final Outputs
+  :file: final_outputs.csv
+  :widths: 1 1 1 1 1 1
+  :header-rows: 1
+
+.. csv-table:: Raw Outputs
+  :file: raw_outputs.csv
+  :widths: 1 1 1 1 1 1
+  :header-rows: 1
+
 .. list-table:: Final Outputs
   :header-rows: 1
 
