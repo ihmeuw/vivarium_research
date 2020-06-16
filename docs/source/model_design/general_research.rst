@@ -1,3 +1,6 @@
+.. role:: underline
+    :class: underline
+
 ..
   Section title decorators for this document:
   ==============
@@ -640,9 +643,177 @@ Cross-Sectional Studies
 Case-Control Studies
 ++++++++++++++++++++
 
+Case-control studies are *analytical studies*. In case-control studies, individuals are selected on the basis of their disease status. The starting point for this type of study is the identification of :underline:`cases` - **individuals suffering from a particular disease or condition**. These are compared with a group of :underline:`controls` - **individuals who do not have the disease or condition** . The exposure history in the cases and controls is then compared.
+
+.. image:: case_control_design_visual.svg 
+
+The main advantage of the case-control approach is that it reduces the number of people we need to study because we (usually) study all of the people who develop the disease, but only
+a sample of the people who don’t. So for example, if there is a population of 20,000 people who are followed over a period of two years, and there are 200 new cases of the outcome of
+interest during this time, we might just study the 200 cases and 200 controls, rather than having to interview or take blood samples from all 20,000.
+
+Thus, a case-control study recruits some people because they have the disease/outcome of interest and some people because they don't (usually). **The key feature of a case-control
+study is that the probability of being recruited into the study differs between individuals with and without the disease of interest**. In practice we usually try and recruit all of the incident
+cases of disease during the risk periods so the probability of recruitment for the individuals with the disease is 100%, whereas it is much lower for those who don’t have the disease.
+
+
+Source population
+~~~~~~~~~~~~~~~~~
+
+It is useful to consider that there is a population underlying every case-control study:
+
+   - cases are individuals in the population who have developed the disease of interest and 
+   - controls are a representative sample of individuals without the disease from the same population. 
+
+This population is sometimes called the base or the source population. Exposure is ascertained for cases and controls only (not for the whole population), and the population does not have to be followed up to see who develops the disease. Therefore, this is an *efficient study design*. Notably, as individuals are selected on the basis of their disease status, it is particularly useful for studying rare diseases and diseases of long latency.
+
+
+Case-control design
+~~~~~~~~~~~~~~~~~~~
+
+  1. What is the study question? 
+    *  The specific question the study is designed to answer must be clearly stated. It usually takes the form of “Is this exposure associated with this outcome?” Failure to do this can lead to poor design and problems in the interpretation of results.
+  2. Who are the **cases**? 
+    * :underline:`Definition`: There needs to be a precise case definition that all cases fulfil. This may be histological, a clinical pattern or may be the result of a coding exercise (for example, death certificate diagnoses).
+    * Source: The source of the cases needs to be clearly defined. In a population-based study, cases might be all possible individuals with the disease arising within a defined population within a fixed period of time. In this situation the ‘base’ is the defined population, and there might be multiple sources of cases - surveillance, death certificates, pathology records etc. Alternatively, the study may be hospital-based – the source of cases might be all patients fulfilling the case definition who attend one or more specific hospitals. In this example the cases in the study may arise from a more selective population, because cases who attend these hospitals may not be representative of all cases who fulfil the case definition in the study area: issues to consider include cases’ access to health services and referrals to specialist hospitals. In general, population-based studies are easier to interpret than hospital-based studies but are more difficult to conduct.
+    * :underline:`Incident or prevalent cases`: An important distinction is whether only incident or also prevalent cases are included. Incident cases are new cases appearing with the condition within a fixed period of time, whereas prevalent cases are all patients with the condition at a specific point in time. Prevalent cases will include individuals who may have had the disease for some time and who have not died. If prevalent cases are studied then any associations identified in the study may not just be related to developing the disease but also to surviving with the disease. Also, prevalent cases who have had the disease for some time may have changed their exposure because of their disease, and this may lead to incorrect ascertainment of exposure information.
+  3. Who are the **controls** (this is the most difficult decision in designing a case-control study)?
+    * :underline:`Definitions`: As a rule, the controls must fulfil all the eligibility criteria defined for the cases apart from those relating to the diagnosis of the disease. Further, the controls should represent the same population, from which the cases are drawn, i.e., they should provide an estimate of the exposure prevalence in the population from which the cases arise. If not, the results of the study are likely to be distorted because of selection bias. 
+    * :underline:`Source of controls`: Controls must be a representative sample of individuals without the disease of interest, taken from the population from which the cases arose. Therefore, the source of controls depends on the source of the cases. If the cases are a population-based sample of all incident cases over a specific time period then the most appropriate source of controls is a random sample of individuals without the disease from the same population during this time period. On the other hand, if the cases are ascertained through hospital admissions or other health facilities, the choice of controls is less straightforward. If all cases from a defined population end up in a specific hospital then the base is the defined population and a population sample of controls is best. However, if only selected cases reach the hospital (for example, those with greater access to health services), then the population that gave rise to the cases is less clear and it may be more appropriate to select controls who have undergone a similar selection process – from amongst other hospital patients who have diseases of similar severity to the cases. This presents another problem. The controls should not be biased in terms of the exposure of interest. For example, if you are studying the possibility that a disease is related to alcohol you would not want controls with conditions also related to alcohol (such as patients involved in accidents, who often have a higher level of alcohol consumption than the general population). The selection of controls presents problems of judgement, as well as the fact that appropriate selection is dependent on knowledge of the aetiology of other disease, which is probably incomplete. Alternative sources of controls are relatives, neighbours and people nominated by the case. Each of these may present problems – for example, they may be more similar to the case with respect to exposure than the population at large.
+    * :underline:`Will the controls be matched to the case?`: Matching refers to the procedure whereby one or more controls are selected for each case on the basis of similarity for certain characteristics other than the factor under investigation. Common matching variables are age and sex, but others might be place of residence, socio-economic status or parity. The characteristics chosen for matching are those that are thought to be potential confounders. Cases may be individually matched to one (or more) controls or frequency matched to controls (i.e. during recruitment investigators ensure that there are equal number of cases and controls in each level of a matching variable, such as age). Matching is a way of increasing the efficiency of the study, but the controls selected are different from those who would have been selected in an unmatched study, and this must be taken into account by adjusting for the matching factors (e.g. age or gender) in the analysis of a frequency matched study or by carrying out a matched analysis in an individually matched study. In general, matching may offer some gain in efficiency by matching on a few variables but it becomes increasingly difficult to match on more and more variables. So, most studies limit it to age and sex.
+    * :underline:`How many control groups?`: It may be tempting to include more than one control group. For example, if the cases are all dead then it may be unclear as to whether the controls should be dead or alive. However, if we choose two separate control groups and they produce different answers then it may be unclear which the correct answer is. On the other hand it may be possible to examine more than one hypothesis by choosing different control groups. For example, if we have a group of healthy controls and a group of cirrhotic controls in a study of liver cancer, it is possible to examine whether risk factors act by leading to cirrhosis or are independent of this pathway. However, this must be explicit in the hypotheses being tested.
+    * :underline:`How many controls per case?`: The statistical precision of the estimate of exposure prevalence depends on the number of individuals studied, and so precision can be improved by increasing the number of individuals in the study. The number of cases available is usually limited but this does not apply to controls. We can therefore improve the statistical power of the study by increasing the number of controls per case. However, there will be logistic constraints in terms of how easy it is to find and interrogate controls. In general, the increase in power when we go beyond four controls per case is limited and does not justify the effort.
+
+
+Estimating exposure in cases and controls
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Data on exposure can be gathered in many ways: by personal, postal or telephone interview, by examining medical, occupational or other records, or by taking biological samples. The important issue is to *minimise bias*. Information bias is 
+
+  - **Recall bias**: Having a disease may influence the answers to questions. 
+  - **Observer bias**: If the interviewer knows who is a case and who is a control they may be influenced in the way they gather information. 
+
+So, gathering of information must be done as similarly as possible for cases and controls. In addition, the exposure data may be affected by the disease itself. This is a particular problem in case-control studies in which measurement of exposure is done *after* the disease is established. The only situation in which this is not so is when the exposure cannot be affected by the disease (for example, a genetic trait). 
+
+.. todo::
+  discuss recall and observer bias more
+
+Nest-case control studies
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In this type of study, cases occur as a cohort is followed up. These cases become the cases of the nested case-control study and a sample of unaffected cohort members are selected as controls. Once the cases and controls have been selected, further exposure information on them can be collected as required. This is an efficient design and more than one case-control study can be ‘nested’ within a cohort. Also, the 'base' is the cohort and so we know that the controls are representative of the source population that produced the cases.
+
+Analysis for unmatched study
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+CASE-CONTROL STUDIES CANNOT DIRECTLY ESTIMATE DISEASE INCIDENCE UNLESS ALL CASES IN A DEFINED POPULATION ARE OBTAINED (or in the rare circumstance that the "sampling fraction" is known for both cases and controls).
+
+In the analysis of a case-control study, the exposure of cases and controls is compared. The measure of effect obtained from a case-control study is the **odds ratio**.
+
+In an *unmatched* case-control study, the numbers of exposed and unexposed cases and controls can be entered into a 2x2 table as follows:
+
++-----------+---------+----------+----------+
+|           | Cases   | Controls | Total    |
++-----------+---------+----------+----------+
+| Exposed   |  a      |  b       | a+b      |
++-----------+---------+----------+----------+
+| Unexposed |  c      |  d       | c+d      |
++-----------+---------+----------+----------+
+|           | a+c     | b+d      | a+b+d+c  |
++-----------+---------+----------+----------+ 
+
+| The odds of exposure among cases: a/c
+| The odds of exposure among controls: b/d
+| Ratio of these odds: OR = :math:`\frac{a/c}{b/d}` = :math:`\frac{ad}{bc}`
+
+However, our main question of interest is really whether the frequency (odds) of disease is greater or less among people who are exposed compared to people who are not exposed. The ‘odds ratio of exposure’ among people with and without disease (above) can be interpreted as the ‘odds ratio of disease’ among those with and without exposure. (:math:`\frac{a/b}{c/d}` = :math:`\frac{ad}{bc}`)
+
 .. todo::
 
-	This section
+  Give more formal proof that the exposure odds is the same as the disease odds
+
+This odds ratio is the same as that obtained from a cohort study following exposed and unexposed individuals to see if they develop disease over time. 
+
+.. important::
+
+  Note that it would be **wrong** to say that the risk/prevalence of disease among the exposed is :math:`\frac{a}{a+b}` or the risk/prevalence of disease in unexposed is :math:`\frac{c}{c+d}` from a ocase-control study. This is because in a case-control study, a+b or c+d may not represent the whole pool of exposed or unexposed population. In other words, it is because it is likely that **add** the cases were recruited (a and c) whereas only a **sample** of controls were recruited (b and d)
+
+Rare-disease assumption
+~~~~~~~~~~~~~~~~~~~~~~~
+
+If the study is appropriately designed, in particularly, that sampling of cases and controls is independent of their exposure status, and the disease is rare (incidence of the outcome of interest is <10% in the study population, see :download:`Zhang (1998) What's the Relative Risk? <Zhang_1998_What_is_a_relative risk>`) then the odds ratio provides an estimate of the risk ratio or the rate ratio. This is because when the disease is rare in the study population, the odds ratio, risk ratio and rate ratio are all very similar **numerically**.
+
+The risk ratio of a :underline:`cohort study` is given by the following 2x2 table
+
++-----------+---------+----------+----------+
+|           | with    | without  | Total    |
+|           | disease | disease  |          |
++-----------+---------+----------+----------+
+| Exposed   |  a      |  b       | a+b      |
++-----------+---------+----------+----------+
+| Unexposed |  c      |  d       | c+d      | 
++-----------+---------+----------+----------+
+|           | a+c     | b+d      | a+b+d+c  |
++-----------+---------+----------+----------+ 
+
+| Risk of disease in the exposed: :math:`\frac{a}{a+b}` 
+| Risk of disease in the unexposed: :math:`\frac{c}{c+d}`
+| The **risk ratio** is thus :math:`\frac{a/(a+b)}{c/(c+d)}`
+
+If the disease is rare, a and c are very small compared to b and d, and so contribute very little to the denominators (a + b) and (c + d). 
+
+| So RR = :math:`\frac{a/(a+b)}{c/(c+d)}` ~ :math:`\frac{a/b}{c/d}` = :math:`\frac{ad}{bc}`
+
+
+Common-diseases
+~~~~~~~~~~~~~~~
+
+When the disease is common, which measure (risk ratio, rate ratio or odds ratio) the odds ratio estimates will depend on how controls are sampled. 
+
+.. todo:: 
+
+  discuss common disease estimates
+
+
+Analysis for matched study
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ .. todo::
+
+
+PAF for unmatched case-controls
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Consider a simple unmatched case-control study in which we have a representative sample of cases, together with controls chosen as a random sample of the source population. Then θ can be estimated as usual by the odds ratio, while p or p' can be estimated as the proportion of controls or cases who are exposed:
+
++-----------+---------+----------+----------+
+|           | Cases   | Controls | Total    |
++-----------+---------+----------+----------+
+| Exposed   |  a      |  b       | m_1      |
++-----------+---------+----------+----------+
+| Unexposed |  c      |  d       | m_0      |
++-----------+---------+----------+----------+
+|           | n_1     | n_0      | N        |
++-----------+---------+----------+----------+ 
+
+ | OR = :math:`\frac{ad}{bc}` = θ (relative risk)
+ | p(proportion exposed in the study population) = :math:`\frac{b}{n_0}`
+ | p'(proportion exposed among cases) = :math:`\frac{a}{n_1}`
+
+Substituting the above into the PAF equation (2) *<---link this to the PAF page*
+
+PAF= :math:`\frac{p'(θ-1)}{θ}`
+
+
+| PAF = p'(θ - 1)/ θ
+| PAF = 1 - :math:`\frac{c/n_1}{d/n_0}`
+
+The second half of the formula is just the ratio of the proportion of cases unexposed to the proportion of controls unexposed.
+
+Because this is just the ratio of two proportions, and because independent samples of cases and controls were selected, a simple formula is available for an approximate confidence interval for the PAF in this simple case. We work in terms of (1 - PAF) = :math:`\frac{c/n_1}{d/n_0}`, and multiply and divide this by the following error factor (derivation not given):
+
+  Error factor = exp{1.96 x √[a/(bn1) + c/(dn0)]} 
+
+Then subtracting from 1 gives a 95% confidence interval for the PAF. Note that this error factor can only be used in the simple case of an unmatched case-control study with a binary exposure.
 
 Ecologic Studies
 ++++++++++++++++
