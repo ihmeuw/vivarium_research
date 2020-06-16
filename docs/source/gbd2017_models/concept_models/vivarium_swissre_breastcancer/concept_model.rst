@@ -398,16 +398,17 @@ Using OR value of 1.89 and P as 0.3
   - 1-PAF = 0.813
   - PAF = 0.187
   
-
+*if OR came from a cohort/cross-sectional study, then use this set of values*
 :math:`P(\text{attended next screen among those who attended last screen}) = \frac{a}{a+c}` = 39.7%
 :math:`P(\text{attended next screen among those who did not attend last screen}) =\frac{b}{b+d}` = 25.8%
 
-:math:`P(\text{attended next screen among those who attended last screen}) = P(1-PAF)*OR = 0.3x0.813x1.89` = 46.1% 
-:math:`P(\text{attended next screen among those who did not attend last screen}) =P(1-PAF) = 0.3x0.813` = 24.4%
+*if OR came from a case-control study, then use this set of values*
+:math:`P(\text{attended next screen among those who attended last screen}) = P(1-PAF)*OR = 0.3*0.813*1.89` = 46.1% 
+:math:`P(\text{attended next screen among those who did not attend last screen}) =P(1-PAF) = 0.3*0.813` = 24.4%
 
 .. todo::
 
-    In the above, I presented two ways to calculate the probability of someone going for their next screening, the second one uses the PAF. Not sure which one is correct? 
+    In the above, I presented two ways to calculate the probability of someone going for their next screening depending on the underlying study design. We need to dig a bit deeper to the original study that produced this 1.89 value. For now, use either as stand-in value as they are somewhat numerically similar. 
 
 
 .. note::
