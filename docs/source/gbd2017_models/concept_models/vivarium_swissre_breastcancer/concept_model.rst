@@ -88,9 +88,9 @@ Contents(hello):
 +-------+----------------------------+
 | ACMR  | all cause mortality rate   |
 +-------+----------------------------+
-| MAM   |    |
+| MAM   | mammography                |
 +-------+----------------------------+
-| BUS   |    |
+| BUS   | breast ultra sound         |
 +-------+----------------------------+
 
 
@@ -437,12 +437,14 @@ Using OR value of 1.89 and P as 0.3
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-    .. todo:: 
-      - add screening scale-up description 
-      - In the screening model, the probability of attending next screen is based on a 22.5% first and second screening attendance. The below figure shows a 30% first screen attendence coverage. More work needs to be done to finalize a value. 
+| **Baseline**: breast cancer screening uptake of 30% among insured population from 2020-2040
+| **Alternative scenario**: breast cancer screening uptake of 30% among insured population from 2020-2021, then linear increase to 75% by 2030 and hold constant until 2040
 
 
 .. image:: screening_scale_up_figure.svg
+
+ .. todo:: 
+  -More work needs to be done to finalize a baseline screening uptake value. Right now the 30% comes from a 22.5% screening uptake in the general population by Bao et a 2018. We believe the insured population would have a higher screening uptake than the general population.     
 
 .. _5.3.4:
 
