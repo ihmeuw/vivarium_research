@@ -2068,8 +2068,24 @@ Desired Model Outputs
 
 .. todo::
 
-  - Fill out the above output tables and update the Output Summary table
-    accordingly.
+  - Finish the above tables and add clarifying descriptions:
+
+    - Add birthweight mean and variance to Raw Outputs table
+    - Add "low birthweight proportion" to Final Outputs table, and add
+      corresponding numerator and denominator to Raw Outputs
+    - Add coverage person-time to Raw Outputs table
+    - Add "Additional Stratification" variables to Raw Outputs table
+    - Split the "Live births with {cause state}" entry of Raw Outputs into two
+      rows, one for NTDs and one for LRI (to allow for different specification
+      of Additional Stratification)
+    - Be consistent with "first moment" and "second moment" terminology
+    - Add a note about which measures fall into the generic category of "state
+      person time"
+    - Add note to clarify that simulants "at a particular age" means simulants
+      who turned that age between the last timestep and the current timestep
+    - Add note to clarify that all measures are for *live* simulants (i.e. make
+      sure to filter to "alive" simulants when doing stratification)
+
   - Take into account Ali's feedback from PR 226:
 
       I wonder if there should be an additional column in the Priorities table

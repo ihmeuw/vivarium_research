@@ -12,7 +12,7 @@ Child mortality rate,proportion,Sum over all causes of deaths due to {cause} for
 Total DALY rate,rate,Total YLLs for {strata} + Total YLDs for {strata},Person-time for {strata},High,
 Total YLL rate,rate,Total YLLs for {strata},Person-time for {strata},High,
 Total YLD rate,rate,Total YLDs for {strata},Person-time for {strata},High,
-DALY rate for {cause},rate,YLL rate for {cause} + YLD rate for {cause},Person-time for {strata},High,
+DALY rate for {cause},rate,YLLs due to {cause} for {strata} + YLDs due to {cause} for {strata},Person-time for {strata},High,
 YLL rate for {cause},rate,YLLs due to {cause} for {strata},Person-time for {strata},High,
 YLD rate for {cause},rate,YLDs due to {cause} for {strata},Person-time for {strata},High,
 Proportion of population with IFA coverage,proportion,"Person-time with simulant's household covered by iron fortification or folic acid fortification, for simulants in {strata}",Person-time for {strata},High,The same households receive iron as receive folic acid since they share the same vehicle (wheat flour)
