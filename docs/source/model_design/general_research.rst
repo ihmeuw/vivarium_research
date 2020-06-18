@@ -727,15 +727,22 @@ In an *unmatched* case-control study, the numbers of exposed and unexposed cases
 
 However, our main question of interest is really whether the frequency (odds) of disease is greater or less among people who are exposed compared to people who are not exposed. The ‘odds ratio of exposure’ among people with and without disease (above) can be interpreted as the ‘odds ratio of disease’ among those with and without exposure. (:math:`\frac{a/b}{c/d}` = :math:`\frac{ad}{bc}`)
 
-.. todo::
-
-  Give more formal proof that the exposure odds is the same as the disease odds
-
-This odds ratio is the same as that obtained from a cohort study following exposed and unexposed individuals to see if they develop disease over time. 
-
 .. important::
 
   Note that it would be **wrong** to say that the risk/prevalence of disease among the exposed is :math:`\frac{a}{a+b}` or the risk/prevalence of disease in unexposed is :math:`\frac{c}{c+d}` from a case-control study. This is because in a case-control study, a+b or c+d may not represent the whole pool of exposed or unexposed population. In other words, it is because it is likely that **all** the cases were recruited (a and c) whereas only a **sample** of controls were recruited (b and d)
+
+Let's take an example of an exposure that causes harm. We can’t directly estimate what proportion of people who were exposed became ill with the disease (cases). What we can say (ignoring the issue of sampling variation for the time being) is that a somewhat higher proportion of cases than controls had been exposed. Another way of putting this is that "exposure is more common among the cases". While this statement can be made directly from the the 2x2 table, the sort of statement which we are interested in making is something along the lines of "disease is more/less/equally common among those exposed".
+
+Which of these three options – more/less/equally – is the correct one? The answer is that, in the absence of selection bias, "disease is more common among the exposed"
+implies that "the exposre is more common among those with disease". This "flip" in logic is fundamental to the interpretation of a case-control study and it is important that you feel comfortable with it. If you don’t feel happy with this, try making up some simple numerical examples to convince yourself that it is true.
+
+.. todo::
+
+  Give more formal proof/numerical that the exposure odds is the same as the disease odds
+
+.. note::
+  This odds ratio is the same as that obtained from a cohort study following exposed and unexposed individuals to see if they develop disease over time. 
+
 
 Rare-disease assumption
 ~~~~~~~~~~~~~~~~~~~~~~~
