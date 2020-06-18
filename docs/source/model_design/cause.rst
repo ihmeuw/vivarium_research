@@ -671,7 +671,7 @@ All-Cause Mortality
 
 All-cause mortality rate (ACMR) is a measure of total deaths (due to all 
 causes) per person-year in the overall age-, sex-, time-, and 
-location-specific population. 
+location-specific population. Specifically, 
 
 .. math::
 
@@ -691,6 +691,16 @@ for more detail).
 
 Cause-Specific Mortality
 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+Cause-specific mortality rate (CSMR) is a measure of deaths due to a particular cause (or group of causes) per person-year in the overall age-, sex-, time-, and location-specific population. Specifically, 
+
+.. math::
+
+  \frac{\text{number of deaths due cause}}{\text{person-years in the overall population}}
+
+For instance, the global CSMR for mesothelioma in 2017 was approximately 0.4 deaths per 100,000 person-years. The global CSMR for diabetes mellitus in 2017 was approximately 18 deaths per 100,000 person years. By comparing these two CSMRs, we can see that more individuals in the overall global popultaion died due to diabetes mellitus than mesothelioma in 2017.
+
+Notably, CSMRs are useful for validation of Vivarium simulations, as well as for estimating simulation mortality rates (see the `Excess Mortality`_ section for more detail).
 
 Excess Mortality
 ^^^^^^^^^^^^^^^^
