@@ -238,16 +238,16 @@ State and Transition Data Tables
      - see below for prevalence ratio calculation
    * - prev_c429
      - como for 2017 and forecasted for future years 2020-2040
-     - forcasted data filepath :download:`prev_c429<filepaths_c429_forecast.xlsx>`
+     - forcasted data filepath :download:`prev_c429 <filepaths_c429_forecast.xlsx>`
    * - deaths_c429
      - codcorrect for 2017 deaths
      - future deaths 2020-2040 need to be derived from forecasted csmr_c429 and population size
    * - csmr_c429
      - csmr forecasted for future years 2020-2040
-     - forcasted data filepath :download:`csmr_c429<filepaths_c429_forecast.xlsx>` 
+     - forcasted data filepath :download:`csmr_c429 <filepaths_c429_forecast.xlsx>` 
    * - incidence_c429
      - como for 2017 and forecasted for future years 2020-2040
-     - forcasted data filepath :download:`incidence_c429<filepaths_c429_forecast.xlsx>` 
+     - forcasted data filepath :download:`incidence_c429 <filepaths_c429_forecast.xlsx>` 
    * - Disability weights for breast cancer sequelae
      - YLD appendix
      - total breast cancer disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492

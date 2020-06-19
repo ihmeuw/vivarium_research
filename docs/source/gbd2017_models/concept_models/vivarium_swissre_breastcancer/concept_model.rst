@@ -434,7 +434,7 @@ Using OR value of 1.89 and P as 0.3
 .. image:: screening_scale_up_figure.svg
 
 
- .. todo:: 
+.. todo:: 
   -More work needs to be done to finalize a baseline screening uptake value. Right now the 30% comes from a 22.5% screening uptake in the general population by Bao et a 2018. We believe the insured population would have a higher screening uptake than the general population.     
 
 .. _5.3.4:
