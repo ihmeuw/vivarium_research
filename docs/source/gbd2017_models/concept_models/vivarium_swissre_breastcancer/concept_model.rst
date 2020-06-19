@@ -37,7 +37,7 @@
 Vivarium CSU Breast Cancer Screening
 ====================================
 
-Contents(hello): 
+Contents: 
 	
 	+ :ref:`1.0 Background <1.0>`
 
@@ -263,31 +263,28 @@ Scale-up of breast cancer screening coverage among insured population
 *Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
 
-+---------------------------------------------------------------------------------------------------+
-| Population size weight table                                                                      | 
-+============+=============+========+===============+===============================================+
-| Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                  |
-+------------+-------------+--------+---------------+-----------------------------------------------+
-| Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                      |
-+------------+-------------+--------+---------------+ :download:`asmr<filepaths_c429_forecast.xlsx>`|                                             
-| Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                               |
-+------------+-------------+--------+---------------+ Note: GBD does not produce estimates below    |
-| Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for    |
-+------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing      |
-| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights (not shown) that was |
-+------------+-------------+--------+---------------+ given by CSU to get total province weights    |
-| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | for Guangdong and Heilongjiang.               |
-| jiang      |             |        |               |                                               |
-+------------+-------------+--------+---------------+-----------------------------------------------+
++--------------------------------------------------------------------------------------------------------+
+| Population size weight table                                                                           | 
++============+=============+========+===============+====================================================+
+| Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                       |
++------------+-------------+--------+---------------+----------------------------------------------------+
+| Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                           |
++------------+-------------+--------+---------------+ :download:`acmr<filepaths_acmr_c294_forecast.xlsx>`|                                             
+| Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                                    |
++------------+-------------+--------+---------------+ Note: GBD does not produce estimates below         |
+| Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for         |
++------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing           |
+| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights (not shown) that was      |
++------------+-------------+--------+---------------+ given by CSU to get total province weights         |
+| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | for Guangdong and Heilongjiang.                    |
+| jiang      |             |        |               |                                                    |
++------------+-------------+--------+---------------+----------------------------------------------------+
 
 .. note::
 
   Note about 'mr' in the column 'Weighted ACMR' in the above table: The forecasted data is stored in .nc files. The acmr estimate under column labelled as 'mr' is in log space with base natural e. To get the simulation population's all-cause mortality rate (acmr), first take the exponential of the mr values for location in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the exp transformation is in person years. Multiply by 100,000 to get per 100,000 person years.    
 
-.. todo::
-  add notebook
-  click here to see notebook exploring the .nc files: :ref:`forecast data <  >`           
-
+Click here to download notebook exploring the forecasted acmr data .nc files: :download:`forecast data <sw breast cancer forecasted data.ipynb>`   
 
 .. _5.3:
 
@@ -300,6 +297,8 @@ Scale-up of breast cancer screening coverage among insured population
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
+
+Click here to download notebook exploring the forecasted data .nc files: :download:`forecast data <sw breast cancer forecasted data.ipynb>`   
 
 .. _5.3.2:
 
@@ -354,6 +353,8 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
  - 2) Probability of simulants attending their first due screening is 30% (SD=0.3). *Note: this is the parameter we vary in the scale-up scenario* 
  - 3) If a simulant attended their last screening, they have 1.89 (95%CI 1.06-2.49) (Yan et al 2017) more odds of attending the next screening than those who did not attend their last screening. 
 
++---------------------------------------------------------+
+| Hypothetical cross-sectional 2x2 table                  |
 +----------------+-------------+---------------+----------+
 |                | Attended    |Did not attend | Total    |
 |                | last screen |last screen    |          |
@@ -384,31 +385,20 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
   | a=P-b
   | d=(1-P)-b
 
-  2. Obtain PAF for unmatched case-control OR
-
-  | PAF= 1- [b/(a+b)]/[d/(c+d)]
-  | Error factor of the 1-PAF = exp{1.96 x √[a/(b(a+b)) + c/(d(c+d)]}
-
 Using OR value of 1.89 and P as 0.3
 
   - a = 0.11912
   - b = 0.18088
   - c = 0.18088
   - d = 0.51912
-  - 1-PAF = 0.813
-  - PAF = 0.187
+
   
-*if OR came from a cohort/cross-sectional study, then use this set of values*
+*if OR came from a cross-sectional study, then use this set of values*
 :math:`P(\text{attends screening among those who attended last screen}) = \frac{a}{a+c}` = 39.7%
 :math:`P(\text{attends screening among those who did not attend last screen}) =\frac{b}{b+d}` = 25.8%
 
-*if OR came from a case-control study, then use this set of values*
-:math:`P(\text{attends screening among those who attended last screen}) = P(1-PAF)*OR = 0.3*0.813*1.89` = 46.1% 
-:math:`P(\text{attends screening among those who did not attend last screen}) =P(1-PAF) = 0.3*0.813` = 24.4%
-
 .. todo::
-
-    In the above, I presented two ways to calculate the probability of someone going for their next screening depending on the underlying study design. We need to dig a bit deeper to the original study that produced this 1.89 value. For now, use let's use the first set (~40/25%) as stand-in value. Note equation (1) and (2) would not be valid if this were a case-control. We would need to know how the controls were sampled in order to know what the OR can approximate to. 
+  Describe the Yan et al cross-sectional study that produced the OR, and the potential biases
 
 
 .. note::
@@ -443,7 +433,8 @@ Using OR value of 1.89 and P as 0.3
 
 .. image:: screening_scale_up_figure.svg
 
- .. todo:: 
+
+.. todo:: 
   -More work needs to be done to finalize a baseline screening uptake value. Right now the 30% comes from a 22.5% screening uptake in the general population by Bao et a 2018. We believe the insured population would have a higher screening uptake than the general population.     
 
 .. _5.3.4:
