@@ -269,7 +269,7 @@ Scale-up of breast cancer screening coverage among insured population
 | Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                       |
 +------------+-------------+--------+---------------+----------------------------------------------------+
 | Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                           |
-+------------+-------------+--------+---------------+ :download:`asmr<filepaths_acmr_c294_forecast.xlsx>`|                                             
++------------+-------------+--------+---------------+ :download:`acmr<filepaths_acmr_c294_forecast.xlsx>`|                                             
 | Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                                    |
 +------------+-------------+--------+---------------+ Note: GBD does not produce estimates below         |
 | Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for         |
@@ -284,7 +284,7 @@ Scale-up of breast cancer screening coverage among insured population
 
   Note about 'mr' in the column 'Weighted ACMR' in the above table: The forecasted data is stored in .nc files. The acmr estimate under column labelled as 'mr' is in log space with base natural e. To get the simulation population's all-cause mortality rate (acmr), first take the exponential of the mr values for location in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the exp transformation is in person years. Multiply by 100,000 to get per 100,000 person years.    
 
-
+Click here to download notebook exploring the forecasted acmr data .nc files: :download:`forecast data <sw breast cancer forecasted data.ipynb>`   
 
 .. _5.3:
 
@@ -298,7 +298,7 @@ Scale-up of breast cancer screening coverage among insured population
 
 see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
 
-Click here to see notebook exploring the forecasted data .nc files: :ref:`forecast data <  >`   
+Click here to download notebook exploring the forecasted data .nc files: :download:`forecast data <sw breast cancer forecasted data.ipynb>`   
 
 .. _5.3.2:
 
