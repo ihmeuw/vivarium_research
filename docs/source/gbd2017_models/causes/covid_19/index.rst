@@ -32,6 +32,10 @@ Covid-19 is not included in currently available GBD study data. Rather, we will 
 
 IHME's existing covid-19 models have fit covariate estimates for **population density,  relative mobility, testing capacity, seasonality, mask use, and others** values over time. Below is a brief overview of the SEIR component of the IHME forecast model.
 
+.. note::
+
+	The list of covariates used in the IHME model evolves over time and the coviariates available for use in our modeling strategy will need to be cross referenced with the currently available coviates in the IHME forecast model.
+
 The steps that the SEIR component of the forecast model follows are:
 
 #. Fit an SEIR model (e.g. fit :math:`\beta(t)`) to past and recent death model output for all locations
@@ -108,6 +112,8 @@ Scope
 The immediate intention of this cause model will be to aid in modeling various scenarios relating to varied population density, mobility, mask use, and other potential covid-19 control measures at the University of Washington and immediately surrounding areas/populations. This covid-19 Vivarium cause model is intended to make use of the data and framework of the existing IHME covid-19 forecast model SEIR component (briefly described above). The scope of this cause model document is intended to develop a basic strategy for an infectious SEIR cause model and will start with minimal complexity and can be expanded upon if it becomes necessary.
 
 Notably, this is currently intended to be a **mortality-only** cause model and does not indend to measure years lived with disability (YLDs).
+
+Main outcomes in this model will be the number of covid-19 infections and deaths in the model population.
 
 Model Population/Demography
 +++++++++++++++++++++++++++
@@ -325,9 +331,9 @@ Where,
 Mortality
 ^^^^^^^^^
 
-We will model covid-19 mortality using an age-dependent infection fatality ratio (IFR), as consistent with the IHME forecast model. There will be two steps to this piece of the model, the first being the determination of if an individual dies due to covid-19 (described here), and the being determining *when* they exit their current model state (decribed in the `Transition Data`_ section).
+We will model covid-19 mortality using an age-dependent infection fatality ratio (IFR), as consistent with the IHME forecast model. There will be two steps to this piece of the model, the first being the determination of if an individual dies due to covid-19 (described here), and the second being determining *when* they exit their current model state (decribed in the Transition_ section).
 
-In the same time-step for which a simulant is initialized into the :math:`E`, :math:`I_Q`, :math:`I_A`, :math:`I_1`, or :math:`I_2` covid-19 model states or transitions into the :math:`E` model state, the age-specific IFR should be used to determine if that simulant will die of covid-19, such that the IFR shown in the table below represents the probability that an infected individual dies from covid-19. 
+In the same time-step for which a simulant is initialized into the :math:`E`, :math:`I_Q`, :math:`I_A`, :math:`I_1`, or :math:`I_2` model states or transitions into the :math:`E` model state, the age-specific IFR should be used to determine if that simulant will die of covid-19, such that the IFR shown in the table below represents the probability that an infected individual dies from covid-19. 
 
 .. csv-table:: Infection Fatality Ratios
 	:file: ifr_data.csv
@@ -338,6 +344,10 @@ In the same time-step for which a simulant is initialized into the :math:`E`, :m
 	This data was obtained from an email communication with Abie from May 5, 2020. These values may need to be updated as more recent numbers become available.  
 
 If it is determined that a simulant will die due to covid-19 (as described above), assume that the individual dies at the instant they would have transitioned into the :math:`R` state.
+
+.. todo::
+
+	Investigate if we have an ability to evaluate with race stratification.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
