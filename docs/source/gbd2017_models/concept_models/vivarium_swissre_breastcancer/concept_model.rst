@@ -413,7 +413,7 @@ Using OR value of 1.89 and P as 0.3
  - For those who are in Branch A, B, C (yearly screening): truncated normal distribution with mean 364 days, SD +/- 156 days, lower limit is 100 days, upper limit is 700 days
  - for those in Branch D (every two years screening): truncated normal distribution with mean 728 days, SD +/- 156 days, lower limit is 200 days, upper limit is 1400 days
 
- .. todo:: 
+.. todo:: 
 
     - (upload notebook exploring Marketscan data that informed the distribution paratmers)
 
@@ -442,15 +442,95 @@ Using OR value of 1.89 and P as 0.3
 5.3.4 Family history model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - family history (non-GBD)
-  - (history of breast cancer<--do we want to model this?) 
+Family history determines which screening branch a simulant will undertake. Subsequently, the screening branch and the underlying incidence of disease among simulants within each branch determines the rate of disease detection. 
 
-  .. todo::
-    - distribution of family history
-    - relative risk of family history and breast cancer DCIS/LCIS and stage 1+?
+Family history is a risk factor that increases the likelihood that one gets breast cancer. Hence the state transition incidence rate for those who have a family history of breast cancer is higher than the incidence rate for those who do not have a family history of breast cancer. In order to model disease incidence among those with and without family history, we need to obtain the marginal incidences of those with and without family history from the joint incidence. 
 
-  .. note:: 
-    - GBD risk factors will not be modelled
+:underline:`1. From susceptable S state to DCIS state`
+
+.. image:: S_to_DCIS.svg
+
+- Let family history be denoted as fh
+- Let the prevalence of family history **among the S state populatio** be :math:`P_{fh{s}}`
+- Let i_DCIS be the overall incidence from S state to DCIS state (:ref:`see breast cancer with stage 0 model for i_DCIS value <2017_cancer_model_breast_cancer_with_stage_0>`)
+- Let Incidence among those with family history be  :math:`i_{DCIS{|fh1}}`
+- Let Incidence among those without family history be :math:`i_{DCIS{|fh0}}`
+- Let PAF be the population attributable fraction of family history on DCIS among the S population
+- Let RR be the ratio of the probability of developing the outcome DCIS in the exposed to family history group versus the probability of developing the outcome DCIS in the unexposed to family history group among the S state population.
+
+(1) RR = 1.23
+(2) :math:`P_{fh{s}}` = 0.02
+(3) PAF= :math:`\frac{P_{fh{s}}(RR-1)}{1+P_{fh{s}}(RR-1)}`
+(4) 1-PAF= 
+
+
+(5) :math:`i_{DCIS{|fh1}} =  i_{DCIS}\times(1-PAF)\times RR`
+(6) :math:`i_{DCIS{|fh0}} =  i_{DCIS}\times(1-PAF)`
+
+
+:underline:`2. From susceptable S state to LCIS state`
+
+.. image:: S_to_LCIS.svg
+
+- Let family history be denoted as fh
+- Let the prevalence of family history **among the S state population** be :math:`P_{fh{s}}`
+- Let i_LCIS be the overall incidence from S state to LCIS state (:ref:`see breast cancer with stage 0 model for i_LCIS value <2017_cancer_model_breast_cancer_with_stage_0>`)
+- Let incidence among those with family history be  :math:`i_{LCIS{|fh1}}`
+- Let incidence among those without family history be :math:`i_{LCIS{|fh0}}`
+- Let PAF be the population attributable fraction of family history on LCIS among the S population
+- Let RR be the ratio of the probability of developing the outcome LCIS in the exposed to family history group versus the probability of developing the outcome LCIS in the unexposed to family history group among the S state population.
+
+(1) RR = 1.61
+(2) :math:`P_{fh{s}}` = 0.02
+(3) PAF= :math:`\frac{P_{fh{s}}(RR-1)}{1+P_{fh{s}}(RR-1)}`
+(4) 1-PAF= 
+
+(5) :math:`i_{LCIS{|fh1}} =  i_{LCIS}\times(1-PAF)\times RR`
+(6) :math:`i_{LCIS{|fh0}} =  i_{LCIS}\times(1-PAF)`
+
+
+:underline:`3. From susceptable DCIS state to Breast cancer state`
+
+.. image:: DCIS_to_BC.svg
+
+- Let family history be denoted as fh
+- Let the prevalence of family history **among the DCIS state population** be :math:`P_{fh{dcis}}`
+- Let i_BC|DCIS be the overall incidence from DCIS state to BC state (:ref:`see breast cancer with stage 0 model for i_BC|DCIS value <2017_cancer_model_breast_cancer_with_stage_0>`)
+- Let incidence among those with family history be  :math:`i_{BC|DCIS{|fh1}}`
+- Let incidence among those without family history be :math:`i_{BC|DCIS{|fh0}}`
+- Let PAF be the population attributable fraction of family history on breast cancer among DCIS population
+- Let RR be the ratio of the probability of developing the outcome BC in the exposed to family history group versus the probability of developing the outcome BC in the unexposed to family history group among the DCIS state population.
+
+
+(1) RR = 
+(2) :math:`P_{fh{dcis}}` = 
+(3) PAF= :math:`\frac{P_{fh{dcis}}(RR-1)}{1+P_{fh{dcis}}(RR-1)}`
+(4) 1-PAF= 
+
+(5)  :math:`i_{BC|DCIS{|fh1}} =  i_{BC|DCIS}\times(1-PAF)\times RR`
+(6)  :math:`i_{BC|DCIS{|fh0}} =  i_{BC|DCIS}\times(1-PAF)`
+
+:underline:`4. From susceptable LCIS state to Breast cancer state`
+
+.. image:: LCIS_to_BC.svg
+
+- Let family history be denoted as fh
+- Let the prevalence of family history **among the LCIS state population** be :math:`P_{fh{lcis}}`
+- Let i_BC|LCIS be the overall incidence from LCIS state to BC state (:ref:`see breast cancer with stage 0 model for i_BC|DCIS value <2017_cancer_model_breast_cancer_with_stage_0>`)
+- Let incidence among those with family history be  :math:`i_{BC|LCIS{|fh1}}`
+- Let incidence among those without family history be :math:`i_{BC|LCIS{|fh0}}`
+- Let PAF be the population attributable fraction of family history on breast cancer among LCIS population
+- Let RR be the ratio of the probability of developing the outcome BC in the exposed to family history group versus the probability of developing the outcome BC in the unexposed to family history group among the LCIS state population.
+
+
+(1) RR = 
+(2) :math:`P_{fh{lcis}}` = 
+(3) PAF= :math:`\frac{P_{fh{lcis}}(RR-1)}{1+P_{fh{lcis}}(RR-1)}`
+(4) 1-PAF= 
+
+(5)  :math:`i_{BC|LCIS{|fh1}} =  i_{BC|LCIS}\times(1-PAF)\times RR`
+(6)  :math:`i_{BC|LCIS{|fh0}} =  i_{BC|LCIS}\times(1-PAF)`
+
 
 
 .. _5.3.5:
