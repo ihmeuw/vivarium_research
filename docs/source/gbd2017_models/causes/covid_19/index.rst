@@ -297,7 +297,7 @@ Susceptible to Exposed Transition
 
 The transition from the :math:`S` state to the :math:`E` state in our model will make use of the transition probability used in the IHME forecast model such that the **incidence rate for an individual simulant at time-step t is defined as:**
 
-.. math:: P*\frac{\beta(t)S(I_1+I_2)^\alpha}{N} + (1-P)*\beta(t)'(I_1+I_2)^\alpha
+.. math:: P*\frac{\beta(t)S(I_1+I_2)^\alpha}{N} + (1-P)*\beta(t)'(I_{1'}+I_{2'})^\alpha
 
 Where,
 
@@ -319,6 +319,8 @@ Where,
      - Taken from IHME forecast model under given covariate assumptions for UW population
    * - :math:`\beta(t)'`
      - Taken from IHME forecast model for general King and Snohomish county populations
+   * - :math:`I_{1'} + I_{2'}`
+     - The number of infectious individuals in the non-modeled King and Snohomish county population from the IHME forecast model
    * - :math:`P`
      - Proportion of all contacts among UW population members that occur within the UW population
    * - :math:`\alpha`
