@@ -7,9 +7,19 @@ Multiple Myeloma
 Disease Overview
 ----------------
 
-.. todo::
+Multiple myeloma (MM) is a clonal plasma cell neoplasm with substantial morbidity and mortality, characterized by end organ damage—renal 
+impairment, hypercalcemia, lytic bony lesions, and anemia. With the development of better therapies, myeloma has changed from an untreatable 
+ailment to one that is still not curable but treatable with mostly outpatient therapy [Cowan et al. 2018]. 
 
-   Add definition of multiple myeloma. 
+Although several new treatment options for multiple
+myeloma are now available, there is no cure for this disease.
+Additionally, despite therapeutic advances, relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments.
+The combination of pomalidomide and low-dose dexamethasone is an approved and established option for the treatment of relapsed and refractory myeloma in
+patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal et al. 2019]
+was taken to compare isatuximab plus pomalidomide and dexamethasone 
+with pomalidomide and dexamethasone in patients with relapsed and refractory multiple myeloma. Result shows that the addition of isatuximab to pomalidomide and dexamethasone was associated with a significant and
+clinically meaningful benefit in progression-free survival in heavily treated patients with relapsed and refractory multiple myeloma with results from both the investigators
+and an independent response committee being consistent.
 
 GBD 2017 Modeling Strategy
 --------------------------
@@ -176,7 +186,17 @@ Validation Criteria
 References
 ----------
 
-.. [GBD-2017-YLD-Capstone-Appendix-1-Multiple-Myeloma]
+..[Attal et al. 2019]
+   Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and low-dose 
+   dexamethasone versus pomalidomide and low-dose dexamethasone in patients with relapsed 
+   and refractory multiple myeloma (ICARIA-MM): a randomised, multicentre, open-label, phase 
+   3 study. Lancet 2019; 394: 2096–107.
+
+..[Cowan et al. 2018]
+   Cowan AJ, Allen C, Barac A, et al. Global Burden of Multiple Myeloma: A Systematic 
+   Analysis for the Global Burden of Disease Study 2016. JAMA Oncol 2018; 4: 1221–7.
+
+..[GBD-2017-YLD-Capstone-Appendix-1-Multiple-Myeloma]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
