@@ -328,7 +328,7 @@ Where,
 
 .. note::
 
-	This method assumes random mixing of the population UW population and assumes homogeneous transmission probability across all demographic groups.
+	This method assumes random mixing of the UW population (except for as determined by the :math:`\alpha` parameter) and assumes homogeneous transmission probability across all demographic groups within the UW population.
 
 Mortality
 ^^^^^^^^^
@@ -362,7 +362,7 @@ There are several assumptions used in this cause model:
 
 - These is random mixing of the UW population (unless :math:`\alpha` parameter is not equal to one or correlated mixing structure is introduced)
 
-- The transmission probability is homogenous across demographic groups
+- The transmission probability is homogenous across demographic groups. Students and staff are equally likely to be exposed with covid-19.
 
 This cause model document so far is limited in that it currently:
 
