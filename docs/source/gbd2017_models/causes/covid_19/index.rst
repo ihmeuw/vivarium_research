@@ -173,8 +173,8 @@ Transitions
    :widths: 5 5 5 10 10
    :header-rows: 1
 
-   * - Sink State
-     - Source State
+   * - Source State
+     - Sink State
      - Transition Type
      - Value
      - Note
