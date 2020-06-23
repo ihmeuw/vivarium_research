@@ -454,7 +454,7 @@ Family history is a risk factor that increases the likelihood that one gets brea
 - Let PAF be the population attributable fraction of family history on LCIS among the S population
 - Let RR be the ratio of the probability of developing the outcome LCIS in the exposed to family history group versus the probability of developing the outcome LCIS in the unexposed to family history group among the S state population (we are using the RR for breast cancer for this value, see note below).
 
-(1) RR = RR = 1.9 (95%CI 1.7-2.0) from Pharoah et al. Int. J. Cancer, 1997
+(1) RR = 1.9 (95%CI 1.7-2.0) from Pharoah et al. Int. J. Cancer, 1997
 (2) :math:`P_{fh{s}}` = 0.02
 (3) PAF= :math:`\frac{P_{fh{s}}(RR-1)}{1+P_{fh{s}}(RR-1)}`
 (4) 1-PAF= 
