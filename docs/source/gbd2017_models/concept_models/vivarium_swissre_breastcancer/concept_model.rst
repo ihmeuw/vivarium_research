@@ -523,6 +523,10 @@ We assume family history does not affect incidence rates from LCIS to breast can
 5.3.5 DCIS and LCIS treatment model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ - treatment model baseline (using GBD incidence)
+ - screening scale-up and treatment coverage scale-up model (changes incidence, should reduce breast cancer prevalence, mortaliaty and morbidity)
+
+
 .. _5.4:
 
 5.4 Desired outputs
@@ -539,24 +543,20 @@ We assume family history does not affect incidence rates from LCIS to breast can
 .. todo::
   any special stratifications?
 
+.. _5.6:
+
+5.6 Validation and verification
+-------------------------------
+
 
 .. _6.0:
 
 6.0 Back-of-envelope calculations
 +++++++++++++++++++++++++++++++++
 
+.. _7.0:
 
-
-.. _6.0:
-
-8.0 Validation and verification
-+++++++++++++++++++++++++++++++
-
-Validate against real pay out numbers
-
-.. _9.0:
-
-9.0 Limitations
+7.0 Limitations
 +++++++++++++++
 
 
