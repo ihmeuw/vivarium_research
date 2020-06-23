@@ -341,7 +341,9 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 | to be 100% (no 'false positives') as a biopsy will likely be done before a cancer diagnosis      | 
 +--------------------------------------------------------------------------------------------------+
  
- 
+In initialization, We assume that no one has prior knowledge of their DCIS or BC status. Hence no one will be initialized into branch B or C at initialization. Subsequently, if DCIS or LCIS was detected 
+
+
 
 .. note:: 
   see :download:`breast cancer screening memo <breast_cancer_screening_memo.docx>` for more in depth explanation how modelling decisions were adpated from guidelines, as well as assumptions and limitations of these modelling decisions. 
@@ -412,6 +414,9 @@ Using OR value of 1.89 and P as 0.3
  - scheduled time to next screening based on algorithm tree irregardless of whether they attended screening. 
  - For those who are in Branch A, B, C (yearly screening): truncated normal distribution with mean 364 days, SD +/- 156 days, lower limit is 100 days, upper limit is 700 days
  - for those in Branch D (every two years screening): truncated normal distribution with mean 728 days, SD +/- 156 days, lower limit is 200 days, upper limit is 1400 days
+ - initiate the population with the assumption that their 'last' screening was uniformly distributed in the year before sim start. 
+ - those enter age 30 during the sim will have their next screening uniformly distributed in their 30th year of life. 
+ - those who are 69 will have their usual scheduled screening according to screening algorithm. If screening is due and simulant has aged into 70 years old, then they do not attend screening. 
 
 .. todo:: 
 
@@ -427,7 +432,7 @@ Using OR value of 1.89 and P as 0.3
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-| **Baseline**: breast cancer screening uptake of 30% among insured population from 2020-2040
+| **Baseline**: breast cancer screening uptake of 30% among insured population from 2020-2040.
 | **Alternative scenario**: breast cancer screening uptake of 30% among insured population from 2020-2021, then linear increase to 75% by 2030 and hold constant until 2040
 
 
@@ -458,7 +463,7 @@ Family history is a risk factor that increases the likelihood that one gets brea
 - Let PAF be the population attributable fraction of family history on DCIS among the S population
 - Let RR be the ratio of the probability of developing the outcome DCIS in the exposed to family history group versus the probability of developing the outcome DCIS in the unexposed to family history group among the S state population.
 
-(1) RR = 1.23
+(1) RR = 1.9 (95%CI 1.7-2.0) from Pharoah et al. Int. J. Cancer, 1997
 (2) :math:`P_{fh{s}}` = 0.02
 (3) PAF= :math:`\frac{P_{fh{s}}(RR-1)}{1+P_{fh{s}}(RR-1)}`
 (4) 1-PAF= 
@@ -478,9 +483,9 @@ Family history is a risk factor that increases the likelihood that one gets brea
 - Let incidence among those with family history be  :math:`i_{LCIS{|fh1}}`
 - Let incidence among those without family history be :math:`i_{LCIS{|fh0}}`
 - Let PAF be the population attributable fraction of family history on LCIS among the S population
-- Let RR be the ratio of the probability of developing the outcome LCIS in the exposed to family history group versus the probability of developing the outcome LCIS in the unexposed to family history group among the S state population.
+- Let RR be the ratio of the probability of developing the outcome LCIS in the exposed to family history group versus the probability of developing the outcome LCIS in the unexposed to family history group among the S state population (we are using the RR for breast cancer for this value, see note below).
 
-(1) RR = 1.61
+(1) RR = RR = 1.9 (95%CI 1.7-2.0) from Pharoah et al. Int. J. Cancer, 1997
 (2) :math:`P_{fh{s}}` = 0.02
 (3) PAF= :math:`\frac{P_{fh{s}}(RR-1)}{1+P_{fh{s}}(RR-1)}`
 (4) 1-PAF= 
@@ -488,49 +493,29 @@ Family history is a risk factor that increases the likelihood that one gets brea
 (5) :math:`i_{LCIS{|fh1}} =  i_{LCIS}\times(1-PAF)\times RR`
 (6) :math:`i_{LCIS{|fh0}} =  i_{LCIS}\times(1-PAF)`
 
+.. note::
+
+  - The value of RR we use in the above is actually for family history (exposure) to breast cancer (outcome). We are using the RR for breast cancer outcome instead of DCIS or LCIS because are unable to obtain a relative risk from DCIS or LCIS state to breast cancer among the DCIS or LCIS population respectively. 
+  - In uSing the RR for breast cancer outcome as the RR for DCIS/LCIS outcome, we over-estimate the DCIS cases detected by screening and under-estimate breast cancer cases detected by screening (this is because those with family history are screened twice as often). This means it will under-estimate the total pay-out value. (assuming there is a relative risk > 1 of family history on breast cancer from DCIS and LCIS state in reality).
+  - This value is also currently a stand-in value which was taken from Pharoah et al. The research team will derive an RR with a meta-analysis. 
+
+.. todo::
+
+  if the bias stated above is unclear, I can write out a numberical example to illustrate this
+
+
 
 :underline:`3. From susceptable DCIS state to Breast cancer state`
 
 .. image:: DCIS_to_BC.svg
 
-- Let family history be denoted as fh
-- Let the prevalence of family history **among the DCIS state population** be :math:`P_{fh{dcis}}`
-- Let i_BC|DCIS be the overall incidence from DCIS state to BC state (:ref:`see breast cancer with stage 0 model for i_BC|DCIS value <2017_cancer_model_breast_cancer_with_stage_0>`)
-- Let incidence among those with family history be  :math:`i_{BC|DCIS{|fh1}}`
-- Let incidence among those without family history be :math:`i_{BC|DCIS{|fh0}}`
-- Let PAF be the population attributable fraction of family history on breast cancer among DCIS population
-- Let RR be the ratio of the probability of developing the outcome BC in the exposed to family history group versus the probability of developing the outcome BC in the unexposed to family history group among the DCIS state population.
-
-
-(1) RR = 
-(2) :math:`P_{fh{dcis}}` = 
-(3) PAF= :math:`\frac{P_{fh{dcis}}(RR-1)}{1+P_{fh{dcis}}(RR-1)}`
-(4) 1-PAF= 
-
-(5)  :math:`i_{BC|DCIS{|fh1}} =  i_{BC|DCIS}\times(1-PAF)\times RR`
-(6)  :math:`i_{BC|DCIS{|fh0}} =  i_{BC|DCIS}\times(1-PAF)`
+We assume family history does not affect incidence rates from DCIS to breast cancer among the DCIS population. The RR of breast cancer among those with family history vs. those without family history is 1. 
 
 :underline:`4. From susceptable LCIS state to Breast cancer state`
 
 .. image:: LCIS_to_BC.svg
 
-- Let family history be denoted as fh
-- Let the prevalence of family history **among the LCIS state population** be :math:`P_{fh{lcis}}`
-- Let i_BC|LCIS be the overall incidence from LCIS state to BC state (:ref:`see breast cancer with stage 0 model for i_BC|DCIS value <2017_cancer_model_breast_cancer_with_stage_0>`)
-- Let incidence among those with family history be  :math:`i_{BC|LCIS{|fh1}}`
-- Let incidence among those without family history be :math:`i_{BC|LCIS{|fh0}}`
-- Let PAF be the population attributable fraction of family history on breast cancer among LCIS population
-- Let RR be the ratio of the probability of developing the outcome BC in the exposed to family history group versus the probability of developing the outcome BC in the unexposed to family history group among the LCIS state population.
-
-
-(1) RR = 
-(2) :math:`P_{fh{lcis}}` = 
-(3) PAF= :math:`\frac{P_{fh{lcis}}(RR-1)}{1+P_{fh{lcis}}(RR-1)}`
-(4) 1-PAF= 
-
-(5)  :math:`i_{BC|LCIS{|fh1}} =  i_{BC|LCIS}\times(1-PAF)\times RR`
-(6)  :math:`i_{BC|LCIS{|fh0}} =  i_{BC|LCIS}\times(1-PAF)`
-
+We assume family history does not affect incidence rates from LCIS to breast cancer among the DCIS population. The RR of breast cancer among those with family history vs. those without family history is 1. 
 
 
 .. _5.3.5:
@@ -561,9 +546,17 @@ Family history is a risk factor that increases the likelihood that one gets brea
 +++++++++++++++++++++++++++++++++
 
 
-.. _7.0:
 
-7.0 Limitations
+.. _6.0:
+
+8.0 Validation and verification
++++++++++++++++++++++++++++++++
+
+Validate against real pay out numbers
+
+.. _9.0:
+
+9.0 Limitations
 +++++++++++++++
 
 
