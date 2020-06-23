@@ -101,6 +101,23 @@ Where,
 
 	However, as described above, the :math:`\beta(t)` parameter is a function of time the considers the time-varying covariates used in the IHME forecasting model, which allows for the consideration of changes in relative mobility (which could be considered a proxy variable for the number of social contacts per person per time).
 
+Covariates
+++++++++++
+
+Descriptions of IHME forecast model covariate definitions, data, and model influence.
+
+Population Density
+^^^^^^^^^^^^^^^^^^
+
+Mobility
+^^^^^^^^
+
+Testing
+^^^^^^^
+
+Mask use
+^^^^^^^^
+
 Simulation Science Modeling Strategy
 -------------------------------------
 
@@ -372,6 +389,18 @@ Validation Criteria
 +++++++++++++++++++
 
 This cause model should replicate the IHME forecast model at the population level when the same assumptions and parameter values are used.
+
+Scenarios
++++++++++
+
+The University of Washington is interested in estimating the impact of various conditions for re-opening the University in the fall. The conditions under consideration are listed below.
+
+- Population density (e.g. 30% of students return in-person)
+- Mask use (100% in all scenarios)
+- Testing  
+- Mobility (?)
+- Contact tracing (?)
+- Symptom attestation (?)
 
 References
 ----------
