@@ -432,8 +432,8 @@ Using OR value of 1.89 and P as 0.3
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-| **Baseline**: breast cancer screening uptake of 30% among insured population from 2020-2040.
-| **Alternative scenario**: breast cancer screening uptake of 30% among insured population from 2020-2021, then linear increase to 75% by 2030 and hold constant until 2040
+ (1) **Baseline**: breast cancer screening uptake of 30% among insured population from 2020-2040.
+ (2) **Alternative scenario**: breast cancer screening uptake of 30% among insured population from 2020-2021, then linear increase to 75% by 2030 and hold constant until 2040
 
 
 .. image:: screening_scale_up_figure.svg
@@ -543,11 +543,13 @@ We assume family history does not affect incidence rates from LCIS to breast can
 .. todo::
   any special stratifications?
 
+
 .. _5.6:
 
 5.6 Validation and verification
 -------------------------------
 
+validate with actual pay-out numbers
 
 .. _6.0:
 
