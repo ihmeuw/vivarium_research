@@ -531,9 +531,207 @@ Difference measures relating to the whole population tend to be more useful and 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
 
+The population attributable fraction is a quantification of the proportion of 
+of a given cause outcome, such as cases, deaths, or DALYs, that could be 
+eliminated by removing a risk exposure.
+
+.. todo::
+	Fill in PAF overview
+
+Bias in PAF Calculation
+^^^^^^^^^^^^^^^^^^^^^^^
+
+The PAF can be calculated using the following formula:
+
+.. math::
+	:label: exposed_cases_paf_eq
+
+	\text{PAF}=\frac{p_c(RR_{adj}-1)}{RR_{adj}}
+
+In which we define :math:`p_c` to be the proportion of cases (individuals who 
+possess the outcome of interest) that are exposed, and :math:`RR_{adj}` has been adjusted for confounding and effect modification.
+
+There is the a second PAF equation, which can be used *in the absence of 
+confounding or effect modification:*
+
+.. math:: \text{PAF}=\frac{p_p(RR_{cr}-1)}{1+p_p(RR_{cr}-1)} =\frac{p_p(RR_{adj}-1)}{1+p_p(RR_{adj}-1)}
+	:label: exposed_population_paf_eq
+
+Note that here, the crude relative risk :math:`(RR_{cr})` is equivalent to the adjusted :math:`(RR_{adj})`. We define :math:`p_p` to be the proportion of the entire 
+population that is exposed.
+
+This is typically easier to conceptualize if we break the population down as
+follows:
+
+.. list-table:: Exposure x Cases
+	:widths: 1 1 1
+	:header-rows: 1
+	:stub-columns: 1
+	:align: center
+
+	* - 
+	  - Cases
+	  - Non-cases
+	* - Exposed
+	  - a
+	  - b
+	* - Unexposed
+	  - c
+	  - d
+
+Observe that the above table is a full partition of our population. We can see 
+then that the proportion of cases that are exposed is given by:
+
+..	math:: p_c=\frac{a}{a+c}
+
+And the proportion of the entire population that is exposed is given by:
+
+.. math:: p_p = \frac{a+b}{a+b+c+d}
+
+It can be shown that when the fraction of cases in the unexposed times the 
+relative risk :math:`\left( \frac{c}{c+d} \cdot RR_{adj} \right)` equals the fraction 
+of cases in the exposed :math:`\left( \frac{a}{a+b} \right)`, i.e., when there 
+are no confounders or effect modifiers, equation (1) equals equation (2).
+
+However, when :math:`\frac{c}{c+d} \cdot RR_{adj} \neq \frac{a}{a+b}`, 
+equation (1) does *not* equal equation (2). Intuitively, we can imagine 
+a confounder that is positively associated with
+our exposure, holding all else constant. Then there will be a 
+disproportionately high number of cases among the exposed, and 
+:math:`\frac{c}{c+d} \cdot RR_{adj} < \frac{a}{a+b}`.
+
+This can be solved via weighting equation (2) per stratum of our confounder or
+effect modifier, yielding equation (3):
+
+.. math:: \text{PAF} = \sum_{i=1}^z W_i \frac{p_i(RR_i-1)}{1+p_i(RR_i-1)}
+	:label: stratified_paf_eq
+
+Here, for each stratum :math:`i` of our confounder or effect modifier, 
+:math:`p_i` is the proportion of the stratum that is exposed, :math:`W_i` is 
+the proportion of the cases in the stratum, and :math:`RR_i` is the 
+stratum-specific adjusted *RR*. Note that in the case of a confounder, 
+:math:`RR_{i}` will be equal across strata, and in the case of effect 
+modification, there will be a different :math:`RR_{i}` per stratum. More 
+information on confounding and effect modification can be found
+in the section on :ref:`causal relationships<causal_relationships>`.
+
+While we know equation (2) to be biased, we have had to use it in Vivarium 
+modeling due to insufficient data for use of equation (2) or (3).
+
+The following is a high-level summary of a the paper *Confounding and Bias in the 
+Attributable Fraction* by [Darrow]_, which examines the direction and 
+magnitude of this bias for different scenarios. This was achieved by generating synthetic 
+data with varying degrees of exposure prevalence, confounding, relative 
+risk for the disease (or cause), and prevalence of the confounder in the exposed 
+and unexposed groups. These scenarios were all examined for one dichotomous 
+confounder; however, Darrow then showed these results generalize to two 
+dichotomous confounders.
+
+We consider PAF bias primarily in terms of the following ratio:
+
+.. math:: \frac{\text{biased PAF}}{\text{unbiased PAF}}
+
+Where the biased PAF is calculated using equation (2), and the unbiased PAF is 
+calculated using equation (3).
+
+Direction
+^^^^^^^^^
+
+The direction of this bias was found to be fully determined by the confounding 
+risk ratio:
+
+..	math:: \frac{RR_{crude}}{RR_{adj}}
+
+Here, :math:`RR_{adj}` is the Mantel-Haensel adjusted RR. A positive *counfouding RR* (:math:`>1.0`) resulted in a negative 
+PAF bias, and a negative *confounding RR* (:math:`<1.0`) resulted in a positive 
+PAF bias.
+
+Furthermore, the direction of the *confounding RR* is fully determined by (1) the 
+direction of the association between the confounder and the exposure, and (2) 
+the direction of the association between the confounder and disease (or cause).
+
+This relationship is captured as follows:
+
+.. list-table:: Direction of Bias in the PAF
+	:widths: 4 4 3 3
+	:header-rows: 1
+
+	* - Confounder-exp \n assoc.
+	  - Confounder-cond'n assoc.
+	  - Confouding ratio
+	  - PAF bias
+	* - :math:`+`
+	  - :math:`+`
+	  - :math:`>1.0` :math:`(+)`
+	  - :math:`-`
+	* - :math:`-`
+	  - :math:`-`
+	  - :math:`>1.0` :math:`(+)`
+	  - :math:`-`
+	* - :math:`-`
+	  - :math:`+`
+	  - :math:`<1.0` :math:`(-)`
+	  - :math:`+`
+	* - :math:`+`
+	  - :math:`-`
+	  - :math:`<1.0` :math:`(-)`
+	  - :math:`+`
+
+Magnitude
+^^^^^^^^^
+
+The magnitude of the PAF bias was shown to **increase** with:
+
+	- lower exposure prevalence
+
+	- smaller :math:`RR_{adj}` for the disease (or cause)
+
+	- magnitude of the *confounding RR*
+E
+The first two factors are intuitive: observe that in our measure of bias, 
+:math:`\frac{\text{biased PAF}}{\text{unbiased PAF}}`, a smaller exposure 
+prevalence will lead to a smaller true PAF in the denominator, amplifying the 
+bias. Similarly, a smaller :math:`RR_{adj}` will also result in a smaller true PAF, again 
+amplifing the bias.
+
+However, when examining the absolute difference between the biased and unbiased 
+PAFs, note that Darrow did not find that lower exposure prevalence necessarily 
+caused a larger *absolute* PAF bias.
+
+For the *confounding RR*, we note that by "magnitude" we mean distance from 
+*confounding RR* =1. That is, as a *confouding RR* <1 decreases, it causes an 
+increased **overestimation** of the PAF, and as a *confounding RR*>1 increases, 
+it causes an increased **underestimation** of the PAF.
+
+Darrow states that the amount of bias under most realistic scenarios is on the 
+order of 10%-20%. Note that this percentage describes the percentage difference 
+between the biased and unbiased PAF. That is, if the true PAF is 50%, and the 
+biased PAF is 40%, we characterize this as a 20% negative bias.
+
+Below we include graphs from the paper illustrating PAF bias as a function of 
+exposure prevalence and RR.
+
+    .. image:: darrow_confounding_figures.jpg
+
+Other sources of bias
+^^^^^^^^^^^^^^^^^^^^^
+
+Darrow concludes by noting that the PAF is highly sensitive to the relative 
+risk, exposure prevalence, and distribution of confounders. Thus when relative 
+risk and exposure prevalence data is collected from published papers, if one 
+tries to apply these measures to a target population with different population 
+characteristics and without sufficient data to correctly calculate the PAF, the 
+bias caused by the differing distributions between the study and target 
+populations can result in vastly more bias than that of using the wrong PAF 
+equation.
+
+
 References
 ----------
 
-.. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Res earch: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
+.. [Darrow] Confounding and bias in the attributable fraction, Jan 2011
+	https://www.ncbi.nlm.nih.gov/pubmed/20975564	
+
+.. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
    Retrieved 11 March 2020.
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
