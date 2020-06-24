@@ -544,7 +544,7 @@ Bias in PAF Calculation
 The PAF can be calculated using the following formula:
 
 .. math::
-	:label: eq1
+	:label: exposed_cases_paf_eq
 
 	\text{PAF}=\frac{p_c(RR_{adj}-1)}{RR_{adj}}
 
@@ -555,7 +555,7 @@ There is the a second PAF equation, which can be used *in the absence of
 confounding or effect modification:*
 
 .. math:: \text{PAF}=\frac{p_p(RR_{cr}-1)}{1+p_p(RR_{cr}-1)} =\frac{p_p(RR_{adj}-1)}{1+p_p(RR_{adj}-1)}
-	:label: eq2
+	:label: exposed_population_paf_eq
 
 Note that here, the crude relative risk :math:`(RR_{cr})` is equivalent to the adjusted :math:`(RR_{adj})`. We define :math:`p_p` to be the proportion of the entire 
 population that is exposed.
@@ -604,7 +604,7 @@ This can be solved via weighting equation (2) per stratum of our confounder or
 effect modifier, yielding equation (3):
 
 .. math:: \text{PAF} = \sum_{i=1}^z W_i \frac{p_i(RR_i-1)}{1+p_i(RR_i-1)}
-	:label: eq3
+	:label: stratified_paf_eq
 
 Here, for each stratum :math:`i` of our confounder or effect modifier, 
 :math:`p_i` is the proportion of the stratum that is exposed, :math:`W_i` is 
@@ -699,7 +699,7 @@ PAFs, note that Darrow did not find that lower exposure prevalence necessarily
 caused a larger *absolute* PAF bias.
 
 For the *confounding RR*, we note that by "magnitude" we mean distance from 
-*confounding RR*=1. That is, as a *confouding RR*<1 decreases, it causes an 
+*confounding RR* =1. That is, as a *confouding RR* <1 decreases, it causes an 
 increased **overestimation** of the PAF, and as a *confounding RR*>1 increases, 
 it causes an increased **underestimation** of the PAF.
 
