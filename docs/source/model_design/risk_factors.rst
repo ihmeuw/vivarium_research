@@ -591,17 +591,17 @@ And the proportion of the entire population that is exposed is given by:
 It can be shown that when the fraction of cases in the unexposed times the 
 relative risk :math:`\left( \frac{c}{c+d} \cdot RR_{adj} \right)` equals the fraction 
 of cases in the exposed :math:`\left( \frac{a}{a+b} \right)`, i.e., when there 
-are no confounders or effect modifiers, equation (1) equals equation (2).
+are no confounders or effect modifiers, equation :eq:`exposed_cases_paf_eq` equals equation :eq:`exposed_population_paf_eq`.
 
 However, when :math:`\frac{c}{c+d} \cdot RR_{adj} \neq \frac{a}{a+b}`, 
-equation (1) does *not* equal equation (2). Intuitively, we can imagine 
+equation :eq:`exposed_cases_paf_eq` does *not* equal equation :eq:`exposed_population_paf_eq`. Intuitively, we can imagine 
 a confounder that is positively associated with
 our exposure, holding all else constant. Then there will be a 
 disproportionately high number of cases among the exposed, and 
 :math:`\frac{c}{c+d} \cdot RR_{adj} < \frac{a}{a+b}`.
 
-This can be solved via weighting equation (2) per stratum of our confounder or
-effect modifier, yielding equation (3):
+This can be solved via weighting equation :eq:`exposed_population_paf_eq` per stratum of our confounder or
+effect modifier, yielding equation :eq:`stratified_paf_eq`:
 
 .. math:: \text{PAF} = \sum_{i=1}^z W_i \frac{p_i(RR_i-1)}{1+p_i(RR_i-1)}
 	:label: stratified_paf_eq
@@ -615,8 +615,8 @@ modification, there will be a different :math:`RR_{i}` per stratum. More
 information on confounding and effect modification can be found
 in the section on :ref:`causal relationships<causal_relationships>`.
 
-While we know equation (2) to be biased, we have had to use it in Vivarium 
-modeling due to insufficient data for use of equation (2) or (3).
+While we know equation :eq:`exposed_population_paf_eq` to be biased, we have had to use it in Vivarium 
+modeling due to insufficient data for use of equation :eq:`exposed_population_paf_eq` or :eq:`stratified_paf_eq`.
 
 The following is a high-level summary of a the paper *Confounding and Bias in the 
 Attributable Fraction* by [Darrow]_, which examines the direction and 
@@ -631,8 +631,8 @@ We consider PAF bias primarily in terms of the following ratio:
 
 .. math:: \frac{\text{biased PAF}}{\text{unbiased PAF}}
 
-Where the biased PAF is calculated using equation (2), and the unbiased PAF is 
-calculated using equation (3).
+Where the biased PAF is calculated using equation :eq:`exposed_population_paf_eq`, and the unbiased PAF is 
+calculated using equation :eq:`stratified_paf_eq`.
 
 Direction
 ^^^^^^^^^
@@ -646,8 +646,8 @@ Here, :math:`RR_{adj}` is the Mantel-Haensel adjusted RR. A positive *counfoudin
 PAF bias, and a negative *confounding RR* (:math:`<1.0`) resulted in a positive 
 PAF bias.
 
-Furthermore, the direction of the *confounding RR* is fully determined by (1) the 
-direction of the association between the confounder and the exposure, and (2) 
+Furthermore, the direction of the *confounding RR* is fully determined by :eq:`exposed_cases_paf_eq` the 
+direction of the association between the confounder and the exposure, and :eq:`exposed_population_paf_eq` 
 the direction of the association between the confounder and disease (or cause).
 
 This relationship is captured as follows:
