@@ -39,19 +39,81 @@ Multiple myeloma in GBD 2017
 
 The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Multiple-Myeloma]_.
 
-.. todo:: fill incidence and prevalence information of GBD 2017
+.. list-table:: 
+   :widths: 20 25 30 30
+   :header-rows: 1
+   
+   * - sequelae
+     - health states
+     - health state lay descriptions
+     - disability weights
+   * - Diagnosis and primary therapy phase 
+     - Cancer, diagnosis and primary therapy 
+     - has pain, nausea, fatigue, weight loss and high anxiety
+     - 0.288(0.193-0.399)
+   * - Controlled phase 
+     - Generic uncomplicated disease: worry and daily medication
+     - medication every day and causes some worry but minimal interference with daily activities
+     - 0.049(0.031-0.072)
+   * - Metastatic phase
+     - Cancer, metastatic
+     - has severe pain, extreme fatigue, weight loss and high anxiety
+     - 0.451(0.307-0.600)
+   * - Terminal phase
+     - Terminal phase, with medication
+     - has lost a lot of weight and regularly uses strong medication to avoid constant pain.
+     - 0.540(0.377-0.687)
+
+International Classification of Diseases (ICD) codes mapped to the Global Burden of Disease cause (multiple myeloma):
+
+- ICD10 C88-C90.32
+- ICD9 203-203.9
 
 Cause Hierarchy
 ++++++++++++++++
 
-.. todo:: fill in hierarchy figure 
+.. image:: mm_hierarchy.svg
 
 
 
 Restrictions
 ++++++++++++
 
-.. todo:: get restrictions from GBD mapping 
+The following table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
 
 Vivarium Modeling Strategy
 --------------------------
