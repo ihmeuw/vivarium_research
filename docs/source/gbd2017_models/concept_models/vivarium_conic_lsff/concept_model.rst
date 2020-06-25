@@ -2018,41 +2018,79 @@ Desired Model Outputs
 
 .. csv-table:: Stratification Groups
   :file: stratification_groups.csv
-  :widths: 1 1 1 1 1
+  :widths: 1 1 1 1 1 1
   :header-rows: 1
 
-.. list-table:: Final Outputs
+.. csv-table:: Final Outputs
+  :file: final_outputs.csv
+  :widths: 1 1 1 1 1 1
   :header-rows: 1
 
-  * - Measure
-    - Metric
-    - Numerator
-    - Denominator
-    - Priority
-  * -
-    -
-    -
-    -
-    -
-
-.. list-table:: Raw Outputs
+.. csv-table:: Raw Outputs
+  :file: raw_outputs.csv
+  :widths: 1 1 1 1 1 1
   :header-rows: 1
 
-  * - Measure
-    - Units
-    - Definition
-    - Standard Stratification
-    - Additional Stratification
-  * -
-    -
-    -
-    -
-    -
+.. note::
+
+  To compute the `variance <https://en.wikipedia.org/wiki/Variance>`_ of a
+  random variable :math:`Y` in the population (e.g. a risk exposure variable
+  like hemoglobin level or birthweight), there are (at least) two possible
+  options for the raw outputs to report in ``output.hdf``. Both options require
+  calculating the *mean* of :math:`Y` as well as the variance:
+
+  1.  Directly record the *mean* and *variance* of :math:`Y` for the population
+      in each random seed, then use the `law of total variance
+      <https://en.wikipedia.org/wiki/Law_of_total_variance>`_ (equivalently, the
+      `formula for the variance of a mixture distribution
+      <https://en.wikipedia.org/wiki/Mixture_distribution#Moments>`_) to compute
+      the variance of the population in each draw when aggregating over random
+      seeds. That is, compute the variance of the means of :math:`Y` over the
+      random seeds and the mean of the variances of :math:`Y` over the random
+      seeds, and add these together.
+
+  2.  Record the *first moment* :math:`\sum_i y_i` and *second moment*
+      :math:`\sum_i y_i^2` of :math:`Y` with respect to population measure, then
+      compute the variance of :math:`Y` using the formula
+      :math:`\operatorname{Var}(Y) = \operatorname{E}(Y^2) -
+      (\operatorname{E}Y)^2`. With this option, the first and second moments can
+      be aggregated over random seeds simply by summing. **Caution:** It is
+      possible that this method can become `numerically unstable
+      <https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance>`_ if
+      the population is very large or the values of :math:`Y` are very large,
+      though typically this should not be a problem.
+
+  **To do:** Include more explicit formulas to make it clearer exactly how the
+  above two options work. Also, be clearer with notation for population
+  parameters vs. statistical estimates. Perhaps researchers should also figure
+  out if the law of total variance (approach 1) is preferred to the moments
+  approach (2) because of the numerical stability issue. Also, somewhere
+  (perhaps not here) describe the alternative definitions of mean and variance
+  as person-time-weighted averages.
 
 .. todo::
 
-  - Fill out the above output tables and update the Output Summary table
-    accordingly.
+  - Finish the above tables and add clarifying descriptions:
+
+    - Add birthweight mean and variance to Raw Outputs table
+    - Add "low birthweight proportion" to Final Outputs table, and add
+      corresponding numerator and denominator to Raw Outputs
+    - Add coverage person-time to Raw Outputs table and Output Summary table
+    - Add "Additional Stratification" variables to Raw Outputs table
+    - Change definitions of stratification groups to match our actual
+      outputs (which are defined at time of measurement rather than simulant
+      initialization)
+    - Split the "Live births with {cause state}" entry of Raw Outputs into two
+      rows, one for NTDs and one for LRI (to allow for different specification
+      of Additional Stratification)
+    - Be consistent with "first moment" and "second moment" terminology
+    - Add a note about which measures fall into the generic category of "state
+      person time"
+    - Add note to clarify that simulants "at a particular age" means simulants
+      who turned that age between the last timestep and the current timestep
+    - Add note to clarify that all measures are for *live* simulants (i.e. make
+      sure to filter to "alive" simulants when doing stratification)
+
   - Take into account Ali's feedback from PR 226:
 
       I wonder if there should be an additional column in the Priorities table

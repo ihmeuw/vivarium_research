@@ -1,0 +1,19 @@
+﻿Measure,Metric,Numerator,Denominator,Priority,Notes
+"Prevalence of {cause} for cause in [measles, diarrhea, LRI, neural tube defects, vitamin A deficiency]",proportion,Person-time in {cause state} for {strata},Person-time for {strata},High,
+"Prevalence of {sequela} for sequela in [severe anemia, moderate anemia, mild anemia, no anemia]",proportion,Person-time in {sequela} for {strata},Person-time for {strata},High,
+"Birth prevalence of {cause} for cause in [neural tube defects, lower respiratory infections]",proportion,Live births with {cause state} for {strata},Live births for {strata},"High for NTDs, Med for LRI",
+"Hemoglobin mean at {age} for age in [6 months, 1 year, 2 years, 3 years]",moment,sum of hemoglobin values at {age} for {strata},Population at {age} for {strata},High,
+"Hemoglobin variance at {age} for age in [6 months, 1 year, 2 years, 3 years]",moment,sum of squared differences between hemoglobin value and hemoglobin mean at {age},Population at {age} for {strata},Low,See notes below for two possible methods of computing variance
+Birthweight mean at birth,moment,sum of birthweights of simulants in {strata},Live births for {strata},High,
+Birthweight variance at birth,moment,sum of squared differences between individual birthweight and mean birthweight in {strata},Live births for {strata},Low,See notes below for two possible methods of computing variance
+All-cause mortality rate,rate,Sum over all causes of deaths due to {cause} for {strata},Person-time for {strata},High,
+Cause-specific mortality rate for {cause},rate,Deaths due to {cause} for {strata},Person-time for {strata},High,
+Child mortality rate,proportion,Sum over all causes of deaths due to {cause} for {strata},Live births for {strata},High,
+Total DALY rate,rate,Total YLLs for {strata} + Total YLDs for {strata},Person-time for {strata},High,
+Total YLL rate,rate,Total YLLs for {strata},Person-time for {strata},High,
+Total YLD rate,rate,Total YLDs for {strata},Person-time for {strata},High,
+DALY rate for {cause},rate,YLLs due to {cause} for {strata} + YLDs due to {cause} for {strata},Person-time for {strata},High,
+YLL rate for {cause},rate,YLLs due to {cause} for {strata},Person-time for {strata},High,
+YLD rate for {cause},rate,YLDs due to {cause} for {strata},Person-time for {strata},High,
+Proportion of population with IFA coverage,proportion,"Person-time with simulant's household covered by iron fortification or folic acid fortification, for simulants in {strata}",Person-time for {strata},High,The same households receive iron as receive folic acid since they share the same vehicle (wheat flour)
+Proportion of population with vitamin A coverage,proportion,"Person-time with simulant's household covered by vitamin A fortification, for simulants in {strata}",Person-time for {strata},High,
