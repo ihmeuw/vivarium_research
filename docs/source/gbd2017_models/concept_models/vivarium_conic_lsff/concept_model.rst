@@ -2062,9 +2062,11 @@ Desired Model Outputs
 
   **To do:** Include more explicit formulas to make it clearer exactly how the
   above two options work. Also, be clearer with notation for population
-  parameters vs. statistical estimates. Also, somewhere (perhaps not here)
-  describe the alternative definitions of mean and variance as
-  person-time-weighted averages.
+  parameters vs. statistical estimates. Perhaps researchers should also figure
+  out if the law of total variance (approach 1) is preferred to the moments
+  approach (2) because of the numerical stability issue. Also, somewhere
+  (perhaps not here) describe the alternative definitions of mean and variance
+  as person-time-weighted averages.
 
 .. todo::
 
@@ -2073,8 +2075,11 @@ Desired Model Outputs
     - Add birthweight mean and variance to Raw Outputs table
     - Add "low birthweight proportion" to Final Outputs table, and add
       corresponding numerator and denominator to Raw Outputs
-    - Add coverage person-time to Raw Outputs table
+    - Add coverage person-time to Raw Outputs table and Output Summary table
     - Add "Additional Stratification" variables to Raw Outputs table
+    - Change definitions of stratification groups to match our actual
+      outputs (which are defined at time of measurement rather than simulant
+      initialization)
     - Split the "Live births with {cause state}" entry of Raw Outputs into two
       rows, one for NTDs and one for LRI (to allow for different specification
       of Additional Stratification)
