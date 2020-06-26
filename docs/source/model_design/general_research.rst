@@ -618,12 +618,41 @@ In **randomized experimental studies**, the process of randomising individuals (
 
 In **observational studies**, however, it is rarely possible for individuals to be randomly assigned to an exposure. Often, individuals who share a particular risk factor have other characteristics in common that influence their risk of disease. Individuals who do not share this particular risk factor may also differ in other important ways that influence their risk of disease. So we cannot be sure that those with and without the risk factor of interest (exposed and unexposed individuals) are similar, or comparable, with respect to all other relevant factors. This makes it difficult to determine if the association we observe between disease and our risk factor of interest is real, or whether it is influenced by other factors.
 
+Intervention Studies
+++++++++++++++++++++
+
 Randomized Controlled Trials
-++++++++++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+Randomized Controlled Trials (RCTs) are a type of epidemiologic study design in which researchers randomly divide a study population into two or more groups and experimentally expose one (or more) of those group to a given exposure(s) while the remaining group serves as a control population. The goal of RCTs is to measure the potential causal relationship between a given exposure (or intervention) and a given outcome or outcomes without the influence of counfounding variables and they require exposures that can be experimentally administered to study subjects in an ethical manner.
 
-	This section
+Randomization is a critical aspect of RCTs. The goal behind randomizing study subjects to exposure groups is to ensure that any potential confounders between the exposure and outcome are evenly distributed between groups; in other words, to eliminate any association between the confounder and the exposure (a necessary condition for Confounding_). When equal distribution of confounding variables across exposure groups is achieved via randomization, there will be no bias in the measurement of the association between the exposure and outcome due to confounding. This means that there is no need to identify and control for potential confounding variables when conducting RCTs. This makes RCTs a favorable study design for relationships between exposures and outcomes that are not well known, because identification of potential confounders is not necessary apriori.
+
+RCTs are almost always longitudinal in nature in that study subjects are tracked over time following administration of the exposure or treatment. Selection of study participants are generally required to be at-risk for the outcome (note that the outcome may be *remission* from a condition, requiring study subjects to be infected at study enrollment).
+
+Potential Biases
+^^^^^^^^^^^^^^^^
+
+Although randomization minimizes the potential for confounding bias, it may still occur if randomization of study subjects to exposure groups does not achieve equal distribution of confounding variables across groups. This may occur due to random chance and is more likely to occur when the study size is small. For this reason, RCTs generally report the distribution of demographic and other variables across exposure groups.
+
+Another source of potential bias in RCTs arises from lack of blinding of exposure groups. For instance, if a study subject was aware that they were assigned to take a status quo version of a drug rather than a new formulation of a drug, they may be less likely to comply with the treatment algorithm than a study subject who knew they were taking the new formulation. Further, study administrators may differentially treat patients in either the experimental or control groups, which could differentially affect outcomes. For this reason, **single-blinded** (blinding of exposure groups to study subjects OR study administrators), or more preferentially **double-blinded** (blinding of exposure groups to study subjects AND study administrators) RCTs are less subject to bias than non-blinded RCTs. The **placebo effect** is an example of a phenomenon that can bias study results in the lack of blinding study participants to their treatment group.
+
+Another concern with RCTs is the degree to which they can be generalized to the general population. For instance, if an RCT is conducted in an outpatient clinic in a wealthy area where people are generally healthy, it does not provide any information about how the treatment may function in a population that may have more underlying health conditions. Therefore, it is important to attempt to recruit a study population that is representative of the general population of interest, with potential consideration given to the oversampling individuals from underrepresented and/or vulnerable groups. Further, it is possible that the administration of the treatment in a formal and controlled RCT setting may differ from typical administration of the treatment in the real world. Therefore, a treatment that has proven effective in an RCT setting may not be as effective in the real world due to issues related to compliance, sub-par administration, etc.
+
+Attrition bias is an additional concern in RCTs that may arise when study subjects drop out of the study at differential rates by treatment group. This may occur in situations in which one treatment group is experiencing worse symptoms than others.
+
+Ethical Concerns
+^^^^^^^^^^^^^^^^
+
+Because study administrators must intentionally expose study subjects to the experimental exposure in RCTs, it is an ethical requirement that RCTs are only used for exposures that are reasonably believed to be beneficial and not harmful to study subjects. 
+
+Additionally, it is also an ethical requirement that study administrators may not withhold treatments that are known to be beneficial from study subjects. Therefore, in situations in which a new treatment is being investigated but a status-quo treatment already exists, the control group in an RCT must be administered the status-quo treatment instead of placebo.
+
+Non-Randomized Controlled Trials
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Intervention Studies
+~~~~~~~~~~~~~~~~~~~~
 
 Cohort Studies
 ++++++++++++++
