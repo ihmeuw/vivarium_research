@@ -223,6 +223,7 @@ Scale-up of breast cancer screening coverage among insured population
 * Cohort type: Closed cohort of 100,000 insured male (50%) and female (50%) simulants
 * Age and sex: Aged 15 to 95+, 5 year-age bands, uniformly distributed age and sex structure
 * Time span: Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
+* Currently assume the sim population buys insurance on the first day of sim start. This means no one has prior insurance and were paid out for their cancers before sim start. 
 
 .. _5.2.2:
 
@@ -494,6 +495,15 @@ We assume family history does not affect incidence rates from LCIS to breast can
 
  - treatment model baseline (using GBD incidence)
  - screening scale-up and treatment coverage scale-up model (changes incidence, should reduce breast cancer prevalence, mortaliaty and morbidity)
+
+ :math:`i_{BC|DICS}  = i_{BC|DCIS{tx1}} \times \ P_{tx1} + i_{BC|DCIS{tx0}} \times \ (1-P_{tx1})` 
+
+- :math:`i_{BC|DICS}` is the incidence of breast cancer from DCIS in the current population (baseline) based on GBD's i_BC
+- let :math:`P_{tx1}` be the proportion of people who were screened and thus treated for DCIS (assuming all DCIS cases were caught by screening and were treated which is 30% in baseline)
+- let :math:`i_{BC|DCIS{tx1}}` be the overall weighted-average incidence of breast cancer from DCIS from distribution of treatments
+- let  :math:`i_{BC|DCIS{tx0}}` be the incidence of breast cancer from DCIS among untreated population (we can caclulate this based on the equation above and apply to scale up scenario)
+
+
 
 
 .. _5.4:
