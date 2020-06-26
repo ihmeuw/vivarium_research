@@ -496,13 +496,84 @@ We assume family history does not affect incidence rates from LCIS to breast can
  - treatment model baseline (using GBD incidence)
  - screening scale-up and treatment coverage scale-up model (changes incidence, should reduce breast cancer prevalence, mortaliaty and morbidity)
 
+:underline:`Baseleine scenario for DCIS`
+
  :math:`i_{BC|DICS}  = i_{BC|DCIS{tx1}} \times \ P_{tx1} + i_{BC|DCIS{tx0}} \times \ (1-P_{tx1})` 
 
-- :math:`i_{BC|DICS}` is the incidence of breast cancer from DCIS in the current population (baseline) based on GBD's i_BC
-- let :math:`P_{tx1}` be the proportion of people who were screened and thus treated for DCIS (assuming all DCIS cases were caught by screening and were treated which is 30% in baseline)
-- let :math:`i_{BC|DCIS{tx1}}` be the overall weighted-average incidence of breast cancer from DCIS from distribution of treatments
-- let  :math:`i_{BC|DCIS{tx0}}` be the incidence of breast cancer from DCIS among untreated population (we can caclulate this based on the equation above and apply to scale up scenario)
 
+- :math:`i_{BC|DICS}` is the incidence of breast cancer from DCIS (baseline) based on GBD's i_BC
+- let :math:`P_{tx1}` be the proportion of people who have DCIS and treatment. 
+- :math:`1- P_{tx1}` is the poportion of people who have DCIS and no treatment
+- let :math:`i_{BC|DCIS{tx1}}` be the incidence of breast cancer from DCIS after treatment.
+- let  :math:`i_{BC|DCIS{tx0}}` be the incidence of breast cancer from DCIS among those without treatment (we can caclulate this based on the equation above and apply to scale up scenario). 
+
+
+(1) :math:`i_{BC|DCIS{tx1}}` = 882 (95%CI 845-921) per 100,000 person years (Mannu 2020 **BMJ**)
+(2) :math:`P_{tx1}` = 30% as baseline screening uptake x 100% as treatment uptake
+(3) :math:`i_{BC|DCIS{tx0}}` = solve for this value
+
+Note: The distribution of treatment types in Mannu 2020 **BMJ**. 
+
+.. list-table::
+   :header-rows: 1
+
+   * - Treatment among women diagnosed with unilateral DCIS 1988-2014 (N=30,496)
+     - Proportion%
+   * - lumpectomy only
+     - 49.8%
+   * - lumpectomy + radiotherapy
+     - 17.6%
+   * - mastectomy
+     - 27.8%
+   * - no surgery
+     - 4.7%
+
+.. note:: 
+   - using stand-in values
+   - verification- check to see if   :math:`i_{BC|DCIS{tx0}} > i_{BC|DCIS{tx0}}` 
+
+
+:underline:`Baseleine scenario dor LCIS`
+
+ :math:`i_{BC|LICS}  = i_{BC|LCIS{tx1}} \times \ P_{tx1} + i_{BC|LCIS{tx0}} \times \ (1-P_{tx1})` 
+
+
+- :math:`i_{BC|LICS}` is the incidence of breast cancer from LCIS (baseline) based on GBD's i_BC
+- let :math:`P_{tx1}` be the proportion of people who have LCIS and treatment. 
+- :math:`1- P_{tx1}` is the poportion of people who have LCIS and no treatment
+- let :math:`i_{BC|LCIS{tx1}}` be the incidence of breast cancer from LCIS after treatment.
+- let  :math:`i_{BC|LCIS{tx0}}` be the incidence of breast cancer from LCIS among those without treatment (we can caclulate this based on the equation above and apply to scale up scenario). 
+
+
+(1) :math:`i_{BC|LCIS{tx1}}` = 488 per 100,000 PY from King 2015, Journal of Clinical Oncology
+(2) :math:`P_{tx1}` = 30% as baseline screening uptake x 100% as treatment uptake
+(3) :math:`i_{BC|LCIS{tx0}}` = solve for this value  
+
+.. note:: 
+   - using stand-in values
+   - verification- check to see if :math:`i_{BC|LCIS{tx0}} > i_{BC|LCIS{tx0}}` 
+
+The distribution of treatment types in 
+
+
+.. list-table::
+   :header-rows: 1
+
+   * - Treatment among women diagnosed with LCIS
+     - Proportion%
+   * - lumpectomy only
+     - 
+   * - lumpectomy + radiotherapy
+     - 
+   * - mastectomy
+     - 
+   * - no surgery
+     - 
+
+
+:underline:`Alternative scenarios`
+
+As screening proportion increases, so will :math:`1- P_{tx1}`. Hence, a higher proportion of simulants will have incidence :math:`i_{BC|DCIS{tx1}}`. 
 
 
 
