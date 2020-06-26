@@ -530,7 +530,21 @@ Note: The distribution of treatment types in Mannu 2020 **BMJ**.
 
 .. note:: 
    - using stand-in values
-   - verification- check to see if   :math:`i_{BC|DCIS{tx0}} > i_{BC|DCIS{tx0}}` 
+   - verification- check to see if   :math:`i_{BC|DCIS{tx1}} > i_{BC|DCIS{tx0}}` 
+   - also note conclusions from Narod 2015: However, although it is accepted that,
+    for women with invasive breast cancer, prevention of inbreast
+    recurrence does not prevent death,26 this has not been
+    widely accepted for women with DCIS. Also, for women with
+    invasive cancers it is acceptedthat, intermsof survival, lumpectomy
+    is equivalent to mastectomy,27 even though patientswho
+    undergo mastectomy experience fewer local recurrences. For
+    womenwith invasive cancer, radiotherapy is given to prevent
+    in-breast recurrence, but the effect of radiotherapy onmortality
+    is acknowledged to be small.26 In the SEER database, these
+    relationships between local recurrence and mortality hold
+    equally well for patients with DCIS. These observations have
+    been reported in other studies as well.
+  - hence the two incidences may not be so different. 
 
 
 :underline:`Baseleine scenario dor LCIS`
@@ -551,7 +565,8 @@ Note: The distribution of treatment types in Mannu 2020 **BMJ**.
 
 .. note:: 
    - using stand-in values
-   - verification- check to see if :math:`i_{BC|LCIS{tx0}} > i_{BC|LCIS{tx0}}` 
+   - verification- check to see if :math:`i_{BC|LCIS{tx1}} > i_{BC|LCIS{tx0}}` 
+   - note The incidence of breast cancer for those diagnosed with LCIS and received tamoxifen alone = 383 per  100,000 PY from Fisher 1998, JNCI.
 
 The distribution of treatment types in 
 
@@ -561,14 +576,12 @@ The distribution of treatment types in
 
    * - Treatment among women diagnosed with LCIS
      - Proportion%
-   * - lumpectomy only
-     - 
-   * - lumpectomy + radiotherapy
-     - 
+   * - surveillance only
+     - 78%
+   * - surveillance + chemoprevention
+     - 17%
    * - mastectomy
-     - 
-   * - no surgery
-     - 
+     - 5%
 
 
 :underline:`Alternative scenarios`
