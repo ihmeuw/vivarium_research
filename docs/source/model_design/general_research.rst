@@ -626,7 +626,7 @@ Randomized Controlled Trials
 
 Randomized Controlled Trials (RCTs) are a type of epidemiologic study design in which researchers randomly divide a study population into two or more groups and experimentally expose one (or more) of those group to a given exposure(s) while the remaining group serves as a control population. The goal of RCTs is to measure the potential causal relationship between a given exposure (or intervention) and a given outcome or outcomes without the influence of counfounding variables and they require exposures that can be experimentally administered to study subjects in an ethical manner.
 
-Randomization is a critical aspect of RCTs. The goal behind randomizing study subjects to exposure groups is to ensure that any potential confounders between the exposure and outcome are evenly distributed between groups; in other words, to eliminate any association between the confounder and the exposure (a necessary condition for Confounding_). When equal distribution of confounding variables across exposure groups is achieved via randomization, there will be no bias in the measurement of the association between the exposure and outcome due to confounding. This means that there is no need to identify and control for potential confounding variables when conducting RCTs. This makes RCTs a favorable study design for relationships between exposures and outcomes that are not well known, because identification of potential confounders is not necessary apriori.
+Randomization is a critical aspect of RCTs. The goal behind randomizing study subjects to exposure groups is to ensure that any potential confounders, both known and unknown, between the exposure and outcome are evenly distributed between groups; in other words, to eliminate any association between the confounder and the exposure (a necessary condition for Confounding_). When equal distribution of confounding variables across exposure groups is achieved via randomization, there will be no bias in the measurement of the association between the exposure and outcome due to confounding. This means that there is no need to identify and control for potential confounding variables when conducting RCTs. This makes RCTs a favorable study design for relationships between exposures and outcomes that are not well known, because identification of potential confounders is not necessary apriori.
 
 RCTs are almost always longitudinal in nature in that study subjects are tracked over time following administration of the exposure or treatment. Selection of study participants are generally required to be at-risk for the outcome (note that the outcome may be *remission* from a condition, requiring study subjects to be infected at study enrollment).
 
@@ -641,12 +641,23 @@ Another concern with RCTs is the degree to which they can be generalized to the 
 
 Attrition bias is an additional concern in RCTs that may arise when study subjects drop out of the study at differential rates by treatment group. This may occur in situations in which one treatment group is experiencing worse symptoms than others.
 
+Intent to Treat Versus As-Treated 
+'''''''''''''''''''''''''''''''''
+
+There are two analytical protocols in experimental studies that have significant implications for how to interpret the results and potential bias: intent to treat (ITT) and as-treated. Intent to treat analytic protocols considers each study subject in their assigned exposure group as exposed, regardless of whether they fully complied with the treatment protocol. In this case, the measured treatment effect from the study may be less effective than if all study subjects were 100% compliant with the treatment protocol, but bias will be avoided.
+
+On the other hand, the as-treated analytic protocol allows for censoring or reclassification of exposure status of study subjects based on their treatment protocol compliance. While the as-treated analytic protocol may allow for measurement of treatment effect specific to a certain level of treatment protocol compliance, it may introduce bias into the study by nullifying exposure group randomization if treatment compliance is associated with any possible known or unknown confounding variables. Therefore, if an RCT is analyzed via an as-treated analytic protocol, control for confounding variables may be necessary to to avoid confounding bias. 
+
+.. note::
+
+  This section could be better suited at the end of this section so that it also applies to non-randomized controlled trials as well.
+
 Ethical Concerns
 ^^^^^^^^^^^^^^^^
 
-Because study administrators must intentionally expose study subjects to the experimental exposure in RCTs, it is an ethical requirement that RCTs are only used for exposures that are reasonably believed to be beneficial and not harmful to study subjects. 
+Because study administrators must intentionally expose study subjects to the experimental exposure in RCTs, it is an ethical requirement that RCTs are only used for exposures that are reasonably believed to be beneficial and not harmful to study subjects. For this reason, measures of effect that come from RCTs are generally protective measures (relative risks less than one).
 
-Additionally, it is also an ethical requirement that study administrators may not withhold treatments that are known to be beneficial from study subjects. Therefore, in situations in which a new treatment is being investigated but a status-quo treatment already exists, the control group in an RCT must be administered the status-quo treatment instead of placebo.
+Additionally, it is also an ethical requirement that study administrators may not withhold treatments that are known to be beneficial from study subjects. Therefore, in situations in which a new treatment is being investigated but a status-quo treatment already exists, the control group in an RCT must be administered the status-quo treatment instead of placebo. 
 
 Non-Randomized Controlled Trials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
