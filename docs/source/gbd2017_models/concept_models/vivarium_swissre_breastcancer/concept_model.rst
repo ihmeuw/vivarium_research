@@ -532,22 +532,22 @@ Note: The distribution of treatment types in Mannu 2020 **BMJ**.
    - using stand-in values
    - verification- check to see if   :math:`i_{BC|DCIS{tx1}} > i_{BC|DCIS{tx0}}` 
    - also note conclusions from Narod 2015: However, although it is accepted that,
-    for women with invasive breast cancer, prevention of inbreast
-    recurrence does not prevent death,26 this has not been
+    for women with invasive breast cancer, prevention of in breast
+    recurrence does not prevent death,(see ref 26 in paper) this has not been
     widely accepted for women with DCIS. Also, for women with
-    invasive cancers it is acceptedthat, intermsof survival, lumpectomy
-    is equivalent to mastectomy,27 even though patientswho
+    invasive cancers it is accepted that, in terms of survival, lumpectomy
+    is equivalent to mastectomy, (see ref 27 in paper) even though patients who
     undergo mastectomy experience fewer local recurrences. For
-    womenwith invasive cancer, radiotherapy is given to prevent
-    in-breast recurrence, but the effect of radiotherapy onmortality
-    is acknowledged to be small.26 In the SEER database, these
+    women with invasive cancer, radiotherapy is given to prevent
+    in-breast recurrence, but the effect of radiotherapy on mortality
+    is acknowledged to be small.(see ref 26 in paper) In the SEER database, these
     relationships between local recurrence and mortality hold
     equally well for patients with DCIS. These observations have
-    been reported in other studies as well.
-  - hence the two incidences may not be so different. 
+    been reported in other studies as well.(see ref 7, 10, and 28 in paper)
+  - The incidences with and without treatment may not be very different. 
 
 
-:underline:`Baseleine scenario dor LCIS`
+:underline:`Baseleine scenario for LCIS`
 
  :math:`i_{BC|LICS}  = i_{BC|LCIS{tx1}} \times \ P_{tx1} + i_{BC|LCIS{tx0}} \times \ (1-P_{tx1})` 
 
