@@ -258,7 +258,7 @@ State and Transition Data Tables
 
 **Crude prevalence ratios**
 
-GBD does not give us any information on the prevalence or incidence of DCIS or LCIS. Hence we need to infer using data from another population, namely from MarketScan outpatient data from 2016 to 2017 in USA for age 15-65 only. From MarketScane, we obtain the a non-age specific ratio of DCIS prevalence and breast cancer prevalence among those tested. Applying this ratio to the prevalence of breast cancer in our population gives us an estimate of the prevalence of DCIS or LCIS in our population. 
+GBD does not give us any information on the prevalence or incidence of DCIS or LCIS. Hence we need to infer using data from another population, namely from MarketScan outpatient data from 2016 to 2017 in USA for age 15 plus. From MarketScane, we obtain the a non-age specific ratio of DCIS prevalence and breast cancer prevalence among those tested. Applying this ratio to the prevalence of breast cancer in our population gives us an estimate of the prevalence of DCIS or LCIS in our population. 
 
 **DCIS**
 
@@ -277,23 +277,66 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
       = Crude prevalence of ratio of LCIS X prevalence of breast cancer (prev_c429)
 
 
-.. todo::
+.. note::
 
-    - add age-specific ratios? Currently we do not have data for 65+ and for 2017 onwards.
-    - looking at revising the data from marketscan to see if we can get 65+ data. then will re-evaluate to see if we want to use age specific ratios. 
-    - A major assumption of this method of using ratios is that the ratio of DCIS or LCIS to breast cancer in the US population is the same as that in the Chinese population we are modelling. This could be a limitation if breast cancer manifests differently among racial groups. how to model 65+ ?? 
-    - How to obtain marketScan ratios for 2020-2040? 
-    - for those who are treated successfully do they stay in DCIS or remit back to susceptible? Need to read more literature (nicoly task)
-    - We might overestimate the total number of deaths due to breast cancer. According to GBD definition, patients are considered cured if they have survived more than 10 years after the mastectomy. However, the excess mortality rate still exists in simulation and generates extra deaths if we plan to run the model over 10 years.
+    - Currently we have applied non-age specific DCIS and LCIS prevalence ratios
+      from marketscan to inform DCIS and LCIS prevalence in 2020-2040.
+    - A major assumption of this method of using marketscan ratios is that the
+      ratio of DCIS or LCIS to breast cancer in the US population is the same as
+      that in the Chinese population we are modelling. This could be a limitation
+      if breast cancer manifests differently among racial groups.
+    - We believe that the crude prevalence ratio of DCIS and crude prevalence
+      ratio of LCIS are independent, meaning no correlation between these two
+      ratios.
+    - The draw-level DCIS and LCIS prevalence ratios can be generated based on
+      a truncated normal distirbution (lower bound = 0) with given mean and
+      standard deviation. 
+    - For those who are treated successfully, we assume they will stay in stage
+      0 rather than remit back to susceptible.
+    - We might overestimate the total number of deaths due to breast cancer.
+      According to GBD definition, patients are considered cured if they have
+      survived more than 10 years after the mastectomy. However, the excess
+      mortality rate still exists in simulation and generates extra deaths if
+      we plan to run the model over 10 years.
 
 
 
 Validation Criteria
 +++++++++++++++++++
 
+Fatal outcomes
+ - Deaths
+     - EMR_DCIS = EMR_LCIS = 0
+     - ACMR = CSMR_BC + CSMR_other
+ - YLLs
+     - YLLs_DCIS = YLLs_LCIS = 0
+     - YLLs_total = YLLs_BC + YLLs_other
+
+Non-fatal outcomes
+ - YLDs
+     - YLDs_DCIS = YLDs_LCIS = YLDs_other = 0
+     - YLDs_total = YLDs_BC
+ - Prevalence
+     - Crude prevalence ratio of DCIS = PREV_DCIS / PREV_BC = 0.33
+     - Crude prevalence ratio of LCIS = PREV_LCIS / PREV_BC = 0.07
+     - PREV_DCIS / PREV_LCIS = 4.7
+ - Incidence
+     - Crude prevalence ratio of DCIS = INCIDENCE_DCIS / INCIDENCE_BC = 0.33
+     - Crude prevalence ratio of LCIS = DENCE_LCIS / INCIDENCE_BC = 0.07
+     - INCIINCIDENCE_DCIS / INCIDENCE_LCIS = 4.7
+
 .. todo::
 
-   Describe tests for model validation.
+   1. Compare forecast data in 2020 against GBD 2017 (2019) results.
+   2. Compare prevalence, incidence, CSMR of breast cancer, and ACMR over year
+      with GBD age-/sex- stratification that calculated from simulation baseline
+      to forecast data.
+   3. Check outcomes such as YLDs and YLLs in 2020 yield from simulation baseline
+      against GBD 2017 (2019) all causes and breast cancer results.
+   4. Compare prevalence ratio of DCIS or LCIS to breast cancer and incidence
+      ratio of DCIS or LCIS to breast cancer yield from simulation baseline to
+      ratios from marketscan and literature evidence in China.
+
 
 
 References
