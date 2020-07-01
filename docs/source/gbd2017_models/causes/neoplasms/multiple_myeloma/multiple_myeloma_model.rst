@@ -22,8 +22,8 @@ rise in age-specific incidence rates (contributing 157%), followed by an aging p
 With the development of better therapies, myeloma has changed from an untreatable 
 ailment to one that is still not curable but treatable with mostly outpatient therapy. 
 Although several new treatment options for multiple
-myeloma are now available, there is no cure for this disease.
-Additionally, despite therapeutic advances, relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments.
+myeloma are now available, there is no cure for this disease. And almost all patient with multiple myeloma develop relapse/refractory.
+Relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments.
 The combination of pomalidomide and low-dose dexamethasone is an approved and established option for the treatment of relapsed and refractory myeloma in
 patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal et al. 2019]
 was taken to compare isatuximab plus pomalidomide and dexamethasone 
@@ -148,7 +148,7 @@ State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
 .. list-table:: State Definitions
-   :widths: 15 30
+   :widths: 15 35
    :header-rows: 1
 
    * - State
@@ -159,8 +159,6 @@ State and Transition Data Tables
      - with MM
    * - RR
      - with relapse/refractory
-   * - t_RR
-     - with relapse/refractory and treatment 
 
 
 .. list-table:: States Data
