@@ -88,6 +88,13 @@ There is belief that benefits of BEP supplementation are currently underestimate
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
+To understand the cost-effectiveness of BEP and MMN supplementation for pregnant and lactating women (PLW) on child health outcomes. We will consider the costs and DALYs of baseline, and all scenarios
+
+Objective 1: Comparing the cost-effectiveness of BEP, MMN, and IFA
+This objective will compare MMN scenario vs baseline, and IFA vs MMN scenario
+
+Objective 2:  Comparing the cost-effectiveness of universal vs. targeted BEP administration
+This objective will compare scenario with targeted BEP vs scenario with universal BEP
 
 
 .. _3.0:
@@ -137,8 +144,8 @@ There is belief that benefits of BEP supplementation are currently underestimate
 3.2 Effect sizes
 ----------------
 
-.. list-table:: Effect sizes
-   :widths: 10 20 20 20 20 20
+.. list-table::
+   :widths: 5 20 20 20 10 20
    :header-rows: 1
 
    * - Effect
