@@ -630,6 +630,8 @@ Randomization is a critical aspect of RCTs. The goal behind randomizing study su
 
 RCTs are almost always longitudinal in nature in that study subjects are tracked over time following administration of the exposure or treatment. Selection of study participants are generally required to be at-risk for the outcome (note that the outcome may be *remission* from a condition, requiring study subjects to be infected at study enrollment).
 
+Of note, another type of RCTs is a *cluster* randomized trial. In cluster randomized trials, *groups* of study subjects (perhaps individual schools or neighborhoods) are treated as the unit for randomization rather than individual study subjects.
+
 Potential Biases
 ^^^^^^^^^^^^^^^^
 
@@ -641,17 +643,6 @@ Another concern with RCTs is the degree to which they can be generalized to the 
 
 Attrition bias is an additional concern in RCTs that may arise when study subjects drop out of the study at differential rates by treatment group. This may occur in situations in which one treatment group is experiencing worse symptoms than others.
 
-Intent to Treat Versus As-Treated 
-'''''''''''''''''''''''''''''''''
-
-There are two analytical protocols in experimental studies that have significant implications for how to interpret the results and potential bias: intent to treat (ITT) and as-treated. Intent to treat analytic protocols considers each study subject in their assigned exposure group as exposed, regardless of whether they fully complied with the treatment protocol. In this case, the measured treatment effect from the study may be less effective than if all study subjects were 100% compliant with the treatment protocol, but bias will be avoided.
-
-On the other hand, the as-treated analytic protocol allows for censoring or reclassification of exposure status of study subjects based on their treatment protocol compliance. While the as-treated analytic protocol may allow for measurement of treatment effect specific to a certain level of treatment protocol compliance, it may introduce bias into the study by nullifying exposure group randomization if treatment compliance is associated with any possible known or unknown confounding variables. Therefore, if an RCT is analyzed via an as-treated analytic protocol, control for confounding variables may be necessary to to avoid confounding bias. 
-
-.. note::
-
-  This section could be better suited at the end of this section so that it also applies to non-randomized controlled trials as well.
-
 Ethical Concerns
 ^^^^^^^^^^^^^^^^
 
@@ -662,8 +653,21 @@ Additionally, it is also an ethical requirement that study administrators may no
 Non-Randomized Controlled Trials
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Intervention Studies
-~~~~~~~~~~~~~~~~~~~~
+As discussed above, *randomization* to exposure groups a critical aspect of randomized controlled trials that controls for the influence of confounding. However, experimental studies may still be conducted in the absence of randomization. These studies are often referred to as non-randomized controlled trials (NRCTs). NRCTs can be used in situations in which individual study subjects' needs and/or preferences are given priority in treatment group assignment. While NRCTs are very similar to RCTs, because study subjects are not randomly assigned to exposure groups in NRCTs, they are subject to confounding bias and must be analyzed with this in mind.
+
+Controlled Before and After Studies
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Controlled before and after studies are a type of intervention study that assesses a study population at a baseline measurement in time, delivers some type of intervention or exposure to that study population, and then re-assesses the study population at a later time point. In these studies, the unexposed and exposed groups are the same study subjects, just before (unexposed) and after (exposed) the administration of an intervention. 
+
+While the unexposed group and exposed group are hypothetically the same in controlled before and after studies, potential for bias due to differences between these groups arise if the time between baseline and follow-up measurements is long (potential for significant differences in the population to arise due to factors other than the intervention) and if there is high (and especially differential) loss to follow up of study subjects between the baseline and follow-up measurements. Additionally, generalizability is an important consideration with this type of study design. 
+
+Intent to Treat Versus As-Treated Analytic Protocols
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There are two analytical protocols in experimental studies that have significant implications for how to interpret the results and potential bias: intent to treat (ITT) and as-treated. Intent to treat analytic protocols considers each study subject in their assigned exposure group as exposed, regardless of whether they fully complied with the treatment protocol. In this case, the measured treatment effect from the study may be less effective than if all study subjects were 100% compliant with the treatment protocol, but bias will be avoided.
+
+On the other hand, the as-treated analytic protocol allows for censoring or reclassification of exposure status of study subjects based on their treatment protocol compliance. While the as-treated analytic protocol may allow for measurement of treatment effect specific to a certain level of treatment protocol compliance, it may introduce bias into the study by nullifying exposure group randomization if treatment compliance is associated with any possible known or unknown confounding variables. Therefore, if an RCT is analyzed via an as-treated analytic protocol, control for confounding variables may be necessary to to avoid confounding bias. 
 
 Cohort Studies
 ++++++++++++++
