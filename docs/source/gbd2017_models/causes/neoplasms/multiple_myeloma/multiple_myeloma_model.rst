@@ -20,10 +20,10 @@ increased by 126%, and deaths increased by 94%. Among SDI quintiles, the largest
 rise in age-specific incidence rates (contributing 157%), followed by an aging population (contributing 85%) and population growth (contributing 20%).
 
 With the development of better therapies, myeloma has changed from an untreatable 
-ailment to one that is still not curable but treatable with mostly outpatient therapy . 
+ailment to one that is still not curable but treatable with mostly outpatient therapy. 
 Although several new treatment options for multiple
-myeloma are now available, there is no cure for this disease.
-Additionally, despite therapeutic advances, relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments.
+myeloma are now available, there is no cure for this disease. And almost all patient with multiple myeloma develop relapse/refractory.
+Relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments.
 The combination of pomalidomide and low-dose dexamethasone is an approved and established option for the treatment of relapsed and refractory myeloma in
 patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal et al. 2019]
 was taken to compare isatuximab plus pomalidomide and dexamethasone 
@@ -128,35 +128,37 @@ Scope
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
-
-.. todo::
-
-   Add assumptions and limitations.
+There is no remission data for multiple myeloma.
+Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, 
+they are considered cured for calculating disability. For simulation models, this means 
+that if the simulation is run for more than 10 years, then excess mortality rate exists due 
+to cancer after 10 years and the number of deaths increase. But as per GBD 2017, after 10 years, 
+the patients do not have excess mortality rate. So, this model might over estimate deaths in that scenario.
+ 
 
 
 Cause Model Diagram
 +++++++++++++++++++
 
 
-.. todo:: fill in transition figure 
+.. image:: mm_cause_model.svg
 
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-.. list-table:: Definitions
-   :widths: 15 20 30
+.. list-table:: State Definitions
+   :widths: 15 35
    :header-rows: 1
 
    * - State
-     - State Name
      - Definition
    * - S
-     - Susceptible
-     - 
-   * - I
-     - Infected
-     - 
+     - Susceptible to MM
+   * - MM
+     - with MM
+   * - RR
+     - with relapse/refractory
 
 
 .. list-table:: States Data
@@ -169,30 +171,42 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 
+     - 1-prevalence_c486
      - 
    * - S
      - excess mortality rate
-     - 
+     - 0
      - 
    * - S
      - disabilty weights
-     - 
+     - 0
      -
-   * - I
+   * - MM
+     - prevalence
+     - prevalence_c486
+     - 
+   * - MM
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c486}}{\text{population} \times \text{prevalence_c486}}`
+     - 
+   * - MM
+     - disability weights
+     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c486}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+     - total disability weight over all sequelae with ids s_366, s_367, s_368, s_369
+   * - MM
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c486}}{\text{population}}`
+     - 
+   * - RR
      - prevalence
      - 
      - 
-   * - I
+   * - RR
      - excess mortality rate
      - 
      - 
-   * - I
+   * - RR
      - disability weights
-     - 
-     - 
-   * - ALL
-     - cause specific mortality rate
      - 
      - 
 
@@ -206,12 +220,16 @@ State and Transition Data Tables
      - Sink 
      - Value
      - Notes
-   * - i
+   * - i_MM
      - S
-     - I
+     - MM
+     - :math:`\frac{\text{incidence_rate_c486}}{\text{1 - prevalence_c486}}`
+     - Incidence rate in total population is divided by 1-prevalence_c486 to get incidence rate among the susceptible population.
+   * - i_RR
+     - MM
+     - RR
      - 
      - 
-
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -221,31 +239,30 @@ State and Transition Data Tables
      - Sources
      - Description
      - Notes
-   * - 
+   * - prevalence_c486
+     - como
+     - Prevalence of cause multiple myeloma
      - 
+   * - deaths_c486
+     - codcorrect
+     - Deaths from multiple myeloma
      - 
+   * - population
+     - demography
+     - Mid-year population for given country
      - 
-   * - 
+   * - incidence_rate_c486
+     - como
+     - Incidence rate for multiple myeloma
      - 
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weights associated with each sequelae
      - 
+   * - prevalence_s{`sid`}
+     - como
+     - Prevalence of each sequelae
      - 
-   * - 
-     - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-     - 
-
 
 Validation Criteria
 +++++++++++++++++++
