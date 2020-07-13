@@ -127,13 +127,13 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 
 **Outcome (O)**:
 
-  - (1) Breast cancer diagnosis/detection stage 0, 1+
-  - (2) Mortality and morbidity
+  - Breast cancer diagnosis/detection stage 0, 1+
+  - Mortality and morbidity
 
 **Most proximal determinant/exposure (E)**:
   
-  - (1) Breast cancer status
-  - (2) Screening 
+  - Breast cancer status
+  - Screening 
 
 **Confounders (C)**:
 
@@ -142,14 +142,11 @@ To estimate the yearly number of cases of breast cancer detected per 100,000 ins
 
 **Effect modifiers**:
 
-  -
-  -
-
+  - N/A
 
 **Mediators (M)**:
 
-  -
-  -
+  - N/A
 
 .. _3.2:
 
@@ -170,16 +167,16 @@ Scale-up of breast cancer screening coverage among insured population
 
 :underline:`Baseline scenario`
 
-30% of insured Chinese female initiate breast cancer screening in 2020 and hold constant to 2040 for selected provinces, where
+30% of insured Chinese female initiate breast cancer screening in 2020 and hold constant to 2040 for blended provinces, where
 
   * 30 to 69 year olds with family history are provided with MRI every year;
-  * 30 to 44 year olds with previous treatment of DCIS but not family history are provided with ultrasound every year;
-  * 45 to 69 year olds with previous treatment of DCIS but not family history are provided with ultrasound and mammography every year;
-  30 to 69 year olds at average risk (no family history nor previous treatment of DCIS) are given mammography every two years.
+  * 30 to 44 year olds with previous diagnosis of DCIS/LCIS but not family history are provided with ultrasound every year;
+  * 45 to 69 year olds with previous diagnosis of DCIS/LCIS but not family history are provided with ultrasound and mammography every year;
+  * 30 to 69 year olds at average risk (no family history nor previous diagnosis of DCIS/LCIS) are given mammography every two years.
 
 :underline:`Alternative scenario`
 
-30% of insured Chinese female initiated breast cancer screening in 2020, project to 75% by 2030 and hold constant till 2040 for selected provinces, where:
+30% of insured Chinese female initiated breast cancer screening in 2020, stay 30% for one year then linearly project to 75% by 2030 and hold constant till 2040 for blended provinces, where:
 
   * same screening mechanisms as compared to baseline for different age groups and risk exposure level.
 
@@ -187,8 +184,8 @@ Scale-up of breast cancer screening coverage among insured population
 
  high-risk population for breast cancer are women 
 
-  ● with a family history of breast cancer (such that parent, sibling, or child with BRCA1/BRCA2 gene mutation or breast cancer).
-  ● with ductal/lobular carcinoma in-situ
+  1. with a family history of breast cancer (such that parent, sibling, or child with BRCA1/BRCA2 gene mutation or breast cancer).
+  2. with ductal/lobular carcinoma in-situ
 
  -  GBD risk factors including BMI, smoking, and FPG are not used to determine the high-risk population for breast cancer.
 
@@ -220,9 +217,9 @@ Scale-up of breast cancer screening coverage among insured population
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Cohort type: Closed cohort of 100,000 insured male (50%) and female (50%) simulants
+* Cohort type: Closed cohort of 200,000 insured male (50%) and female (50%) simulants
 * Age and sex: Aged 15 to 95+, 5 year-age bands, uniformly distributed age and sex structure
-* Time span: Jan 1, 2020 to Dec 31, 2040 with 30-day time-steps. 
+* Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps. 
 * Currently assume the sim population buys insurance on the first day of sim start. This means no one has prior insurance and were paid out for their cancers before sim start. 
 
 .. _5.2.2:
@@ -311,7 +308,9 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
 | to be 100% (no 'false positives') as a biopsy will likely be done before a cancer diagnosis      | 
 +--------------------------------------------------------------------------------------------------+
  
-In initialization, We assume that no one has prior knowledge of their DCIS or BC status. Hence no one will be initialized into branch B or C at initialization. Subsequently, if DCIS or LCIS was detected 
+In initialization, We assume that no one has prior knowledge of their DCIS or BC status. Hence no one will be initialized into branch B or C at initialization. Subsequently, if DCIS or LCIS was detected.
+
+Swiss Re confirmed that no material is available in context of critical illness products for male at any age or female blelow 30 or above 70 in China. The entry age for adult products is 35 and 50 for senior products. So for a 20-year simulation, we wouldn't have much exposure above age 70. Also, for women who have purchased insurance, you would expect them to take up regular screening before 70 anyhow. 
 
 
 
@@ -466,7 +465,7 @@ Family history is a risk factor that increases the likelihood that one gets brea
 .. note::
 
   - The value of RR we use in the above is actually for family history (exposure) to breast cancer (outcome). We are using the RR for breast cancer outcome instead of DCIS or LCIS because are unable to obtain a relative risk from DCIS or LCIS state to breast cancer among the DCIS or LCIS population respectively. 
-  - In uSing the RR for breast cancer outcome as the RR for DCIS/LCIS outcome, we over-estimate the DCIS cases detected by screening and under-estimate breast cancer cases detected by screening (this is because those with family history are screened twice as often). This means it will under-estimate the total pay-out value. (assuming there is a relative risk > 1 of family history on breast cancer from DCIS and LCIS state in reality).
+  - In using the RR for breast cancer outcome as the RR for DCIS/LCIS outcome, we over-estimate the DCIS cases detected by screening and under-estimate breast cancer cases detected by screening (this is because those with family history are screened twice as often). This means it will under-estimate the total pay-out value. (assuming there is a relative risk > 1 of family history on breast cancer from DCIS and LCIS state in reality).
   - This value is also currently a stand-in value which was taken from Pharoah et al. The research team will derive an RR with a meta-analysis. 
 
 .. todo::
@@ -601,7 +600,7 @@ As screening proportion increases, so will :math:`1- P_{tx1}`. Hence, a higher p
 5.5 Output meta-table shell
 ---------------------------
 
-:download:`output table shell<output_table_shell_breastcancer.xlsx>`
+:download:`output table shell<output_table_shell_breastcancer.csv>`
 
 .. todo::
   any special stratifications?
@@ -612,24 +611,54 @@ As screening proportion increases, so will :math:`1- P_{tx1}`. Hence, a higher p
 5.6 Validation and verification
 -------------------------------
 
-validate with actual pay-out numbers
+:underline:`Model 1: Core Cancer`
+
+See :ref:`core cancer model validation criteria <2017_cancer_model_breast_cancer_with_stage_0>`
+
+:underline:`Model 2: Screening and Detection`
+
+Compare age-/sex-specific breast cancer detection rate calculated from simulation baseline to insured claim rate of 2016 provided by Swiss Re. They do expect breast claims to increase 4% annually, so we need to multiply by (1+4%)^4 on the 2016 data for all ages above 20 in order to project the breast cancer claim rates to simulation star year 2020.
+
+:underline:`Model 3: Alternative Screening Scenario`
+
+Compare year-specific screening coverage yield from simulation to what we proposed in scenario design. The population screening coverage can be calculated from dividing `attended screening event count` by `insured population size` for each year. This coverage is supposed to be 30% whole time at baseline, it reaches 75% in 2030 at alternative scenario with 5% average increase from 2021 to 2030 and keep 75% till 2040.
+
+:underline:`Model 4: Family History Risk Factor`
+
+TBD
+
+:underline:`Model 5: Treatment`
+
+TBD
 
 .. _6.0:
 
 6.0 Back-of-envelope calculations
 +++++++++++++++++++++++++++++++++
 
+What's the proportion of deaths due to breast cancer out of total deaths we would expect if we made following assumptions:
+
+ 1. breast cancer deaths in China among female at all ages in 2020 = 1.89% of the total deaths (95CI% 1.48-2.43)
+ 2. assume treatment efficacy for those who diagnosed DCIS or LCIS and received surgical management = 50% reduction to invasive breast cancer
+ 3. assume treatment coverage = 95% for those who undergo breast cancer screening
+ 4. change in screening coverage from baseline to alternative scenario = 75% - 30% = 45% for a 20-year simulation
+
+In 2040, the averted breast cancer deaths in China among female at all ages = 1.89% * 50% * 95% * 45% = 0.40% of the total deaths by scaling up breast cancer screening.
+
+.. todo::
+  
+  What would we expect for breast cancer detection rate at the end of simulation? 
+
+
 .. _7.0:
 
 7.0 Limitations
 +++++++++++++++
 
-
 a.  How to incorporate the health utilization estimates when building the screening algorithm?
-b.  Which one is suitable for vivarium software settings, one model with all cancer sites included or five separate models to study the screening impact on cancer outcomes.?
-c.  How to capture the change of risk exposure level or screening coverage switching from general population to insured population? (e.g. 20% less of smoking prevalence for insured population)
-d.  What’s our approach known that GBD does not have separate clinical mapping for cervical versus uterine for benign and in situ cervical and uterine neoplasms?
-e.  How do we design a scenario that initiates the commercial screening like liquid biopsy to all cancer sites?
-f.  What kind of histopathological test exists for further cell analysis after a positive screening? <- Could we include false positives in the simulation?
-g.  Does cancer always progress through the cancer in-situ (non-invasive) stage to the malignant stages? If that is true, can we backout the incidence of developing non-invasive/stage 0 cancer?
-h.  Can we stratify the screening results like sensitivity and specificity by cancer stages?
+b.  How to capture the change of risk exposure level or screening coverage switching from general population to insured population? (e.g. 20% less of smoking prevalence for insured population)
+c.  How do we design a scenario that initiates the commercial screening like liquid biopsy to all cancer sites?
+d.  What's the duration of people stay in DCIS or LCIS?
+e.  No forecast data is avalialbe for DCIS and LCIS, the measures are imputed from marketscan outpatient data and breast cancer forecasts.
+f.  No false positives will be captured in the simulation if we assume 100% specificity for different breast cancer screening tests.
+g.  We assume that breast cancer always progress through the cancer in-situ stage to the malignant stage.
