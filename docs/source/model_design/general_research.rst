@@ -713,7 +713,13 @@ significant comorbidities, which may have the potential for significant
 treatment in a formal and controlled RCT setting may differ from typical 
 administration of the treatment in the real world. Therefore, a treatment that 
 has proven effective in an RCT setting may not be as effective in the real 
-world due to issues related to compliance, sub-par administration, etc. 
+world due to issues related to compliance, sub-par administration, etc. An 
+`article by Loudon et al. (2015) <https://pubmed.ncbi.nlm.nih.gov/25956159/>`_ 
+discusses a tool termed *PRECIS-2* that provides an evaluation framework to 
+assess the degree to which an RCT is *explanatory* (how a treatment functions 
+under ideal conditions) or *pragmatic* (how a treatment functions under usual 
+conditions); this framework may be used by the simulation science team to 
+critically evaluate RCTs.
 
 Attrition bias is an additional concern in RCTs that may arise when study 
 subjects drop out of the study at differential rates by treatment group. This 
