@@ -671,7 +671,8 @@ design of these trials will be similar, they differ with respect to their
 *null hypotheses* and therefore will have different appropriate statistical 
 analytic protocols. Notably equivalence trials will use two-sided statistical 
 tests, whereas non-inferiority and superiority trials will use one-sided 
-statistical tests. 
+statistical tests. See `here <https://pubmed.ncbi.nlm.nih.gov/18537788/>`_ 
+for more reading. 
 
 Potential Biases
 ^^^^^^^^^^^^^^^^
@@ -696,7 +697,9 @@ administrators), or more preferentially **double-blinded** (blinding of
 exposure groups to study subjects AND study administrators) RCTs are less 
 subject to bias than non-blinded RCTs. The **placebo effect** (or lack 
 thereof) is an example of a phenomenon that can bias study results when study 
-subjects are not blinded to their treatment group.
+subjects are not blinded to their treatment group. See 
+`here <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2947122/>`_ for more 
+reading. 
 
 Another concern with RCTs is the degree to which they can be generalized to 
 the general population. RCTs often have strict inclusion criteria 
