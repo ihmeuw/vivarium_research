@@ -726,7 +726,7 @@ Or, approximately,
 
 .. math::
 
-  \frac{\text{CSMR per 100,000 person years}}{\text{population size}*\text{Prevalence of cause per 100,000}}
+  \frac{\text{CSMR per 100,000 person years}}{\text{Prevalence of cause per 100,000}}
 
 For instance, the excess mortality rate of mesothelioma in 2017 was 
 approximately 0.38 while the excess mortality rate of diabetes mellitus was 
