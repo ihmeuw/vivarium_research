@@ -831,10 +831,33 @@ Ecologic Studies
 Meta-Analyses and Meta-Regressions
 ++++++++++++++++++++++++++++++++++
 
-.. todo::
+Meta-Analyses and Meta-Regressions are two similar study designs that allow researchers to combine and summarize findings from several individual studies that investigated the same association between an exposure and outcome. Studies included in meta-analyses and meta-regressions are typically identified using systematic literature searchers (see `Conducting Systematic Literature Searches/Reviews`_) and chosen for inclusion based on a set of inclusion and exclusion criteria for that particular meta-analysis or -regression. While each study in a meta-analysis or meta-regression should have the same exposure and outcome of interest, they may differ with respect to study design, study populations, and confounding bias. Briefly, meta-analysis summarizes study findings without formal control for differences between individual studies while meta-regression allows for flexible formal control for these differences. Details are discussed below.
 
-	- GBD resources on how to conduct your own
-	- WHEN we would need/want to conduct our own
+Measures of Effect
+^^^^^^^^^^^^^^^^^^
+
+Meta-anlyses can be performed for dichotomous and continuous outcomes. For dichotomous outcomes, the measure of effect is typically risk ratios or odds ratios; for continous outcomes the measure of effect is typically standardized mean differences.
+
+Heterogeneity Analysis
+^^^^^^^^^^^^^^^^^^^^^^
+
+Fixed Effects 
+'''''''''''''
+
+Random Effects
+''''''''''''''
+
+Weighting
+^^^^^^^^^
+
+Sensistivity Analysis
+^^^^^^^^^^^^^^^^^^^^^
+
+Publication Bias
+^^^^^^^^^^^^^^^^
+
+Meta-Regressions
+~~~~~~~~~~~~~~~~
 	
 Correlation
 -----------
