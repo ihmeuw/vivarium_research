@@ -13,7 +13,7 @@ important pieces of documentation to know about.
 
 - `The model specification <https://vivarium.readthedocs.io/en/latest/concepts/model_specification/index.html>`_
 - `Running a simulation <https://vivarium.readthedocs.io/en/latest/tutorials/running_a_simulation/index.html>`_
-- `Exploring a simulation in an interactive setting <https://vivarium.readthedocs.io/en/latest/tutorials/running_a_simulation/interactive.html>`_
+- `Exploring a simulation in an interactive setting <https://vivarium.readthedocs.io/en/latest/tutorials/exploration.html>`_
 - `Creating and altering a data artifact <https://vivarium.readthedocs.io/en/latest/tutorials/artifact.html>`_
 - `Pulling data using Vivarium Inputs <https://vivarium-inputs.readthedocs.io/en/latest/tutorials/pulling_data.html>`_
 - `YAML basics <https://vivarium.readthedocs.io/en/latest/concepts/model_specification/yaml_basics.html#model-specification-yaml-concept>`_
