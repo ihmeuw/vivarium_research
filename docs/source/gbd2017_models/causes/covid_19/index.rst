@@ -54,7 +54,7 @@ Notably, the IHME forecast SEIR component includes a dual infectious state, :mat
 
 			:math:`S` --> :math:`E` --> :math:`I_1` --> :math:`I_2` --> :math:`R`
 
-:math:`dS/dt = -(\beta(t)S(I_1+I_2)^\alpha)/N`
+:math:`dS/dt = -(\beta(t)S(I_1+I_2)^\alpha + \theta)/N`
 
 :math:`dE/dt = (\beta(t)S(I_1+I_2)^\alpha)/N - \sigma E`
 
@@ -88,6 +88,8 @@ Where,
      - Degree of transmission (fit to/driven by model covariates). Approximately average number of contacts per person per time multiplied by the disease transmission probability of a contact between an infectious and susecptible individual
    * - :math:`\alpha`
      - Parameter to account for cluster nature of population transmission network. Ex: if alpha < 1, when the infectious population is large  the force of infection is attenuated
+   * - :math:`\theta`
+     - A parameter that accounts for infectious spread from surrounding population into the population of interest
    * - :math:`\sigma`
      - Rate at which an exposed person becomes infectious (enters the :math:`I_1` state), i.e. :math:`1/\text{duration}_{E}`
    * - :math:`\gamma_1`
@@ -114,6 +116,8 @@ Mobility
 
 Testing
 ^^^^^^^
+
+Tests conducted per capita per day.
 
 Mask use
 ^^^^^^^^
@@ -316,6 +320,10 @@ The transition from the :math:`S` state to the :math:`E` state in our model will
 
 .. math:: P*\frac{\beta(t)S(I_1+I_2)^\alpha}{N} + (1-P)*\beta(t)'(I_{1'}+I_{2'})^\alpha
 
+.. note::
+
+  This mixing scheme may be incompatible with Abie's methodology and should be revisited
+
 Where,
 
 .. list-table:: Parameter Definitions
@@ -364,10 +372,6 @@ In the same time-step for which a simulant is initialized into the :math:`E`, :m
 
 If it is determined that a simulant will die due to covid-19 (as described above), assume that the individual dies at the instant they would have transitioned into the :math:`R` state.
 
-.. todo::
-
-	Investigate if we have an ability to evaluate with race stratification.
-
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
@@ -379,7 +383,7 @@ There are several assumptions used in this cause model:
 
 - These is random mixing of the UW population (unless :math:`\alpha` parameter is not equal to one or correlated mixing structure is introduced)
 
-- The transmission probability is homogenous across demographic groups. Students and staff are equally likely to be exposed with covid-19.
+- The transmission probability is homogenous across demographic groups. Students and staff are equally likely to be exposed and infected with covid-19.
 
 This cause model document so far is limited in that it currently:
 
