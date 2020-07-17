@@ -36,7 +36,12 @@ Descriptions of what goes into building all the pieces of a Vivarium model.
 :ref:`Existing Models for GBD 2017 <2017_models>`
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-Tried and tested models for diseases, risks, and interventions.
+Tried and tested models for diseases, risks, and interventions from the 2017 Global Burden of Disease Study.
+
+:ref:`Existing Models for GBD 2019 <2019_models>`
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tried and tested models for disease, risks, and interventions from the 2019 Global Burden of Disease Study.
 
 Contributing
 ------------
@@ -53,5 +58,6 @@ To get started adding new documentation, check out our
    tutorials
    model_design/index
    gbd2017_models/index
+   gbd2019_models/index
    contributing
    glossary
