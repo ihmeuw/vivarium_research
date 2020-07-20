@@ -167,13 +167,13 @@ This objective will compare scenario with targeted BEP vs scenario with universa
      - same
      - same 
    * - d1
-     - BEP vs MMN on birthweight in g among low BMI women
+     - BEP vs IFA on birthweight in g among low BMI women
      - +66.96g (13.13 to 120.78)
      - Ota 2015 Cochrane review
      - +100g (±10)  
      - TPP target
    * - d0
-     - BEP vs MMN on birthweight in g among normal BMI women
+     - BEP vs IFA on birthweight in g among normal BMI women
      - +40.96g (4.66,77.26)
      - Ota 2015 Cochrane review
      - +75g (±10)   
