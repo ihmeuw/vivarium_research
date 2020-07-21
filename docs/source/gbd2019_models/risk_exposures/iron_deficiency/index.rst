@@ -32,25 +32,51 @@ levels in the body and a subsequent deficiency of hemoglobin in the blood.
 Risk Exposure Description in GBD
 --------------------------------
 
+.. todo::
+
+  Cite the GBD 2019 risk factors appendix
+
 Iron deficiency in the GBD risk factors is defined as **inadequate iron to meet the body's needs** and is quantified in terms of mean hemoglobin concentration at the population level from the cumulative effect of all causes that lead to iron deficiency, including dietary iron deficiency (GBD *cause* of inadequate intake of elemental iron) as well as other causes that manifest as iron deficiency (eg, maternal hemorrhage, uterine fibroids, menstrual disorders, hookworm, schistosomiasis, gastritis and duodenitis, inflammatory bowel
 disease, etc.).
 
 In the Global Burden of Disease study, iron deficiency exposure is represented as a **continuous ensemble distribution of hemoglobin concentration in the population.** The theoretical minimum risk exposure level (TMREL) for the iron deficiency risk factor is specific to each demographic group in GBD 2019 and is the *implied mean hemoglobin concentration in the population if there were no iron deficiency*, which is used to calculate population attributable fractions due to iron deficiency. The TMREL was calculated by summing cause-specific hemoglobin shifts time the prevalence for all causes classified as iron-responsive and then adding that sum to the observed hemoglobin concentration for each population group.
 
-.. todo::
-
-  Include list of all causes with cause IDs and sequela IDs, REI hierarchy, etc.
-
 Notably, the iron deficiency risk factor should be distinguished from the dietary iron deficiency cause in GBD 2019 (there is a PAF of 1 relationship between the dietary iron deficiency cause and the iron deficiency risk factor). The iron deficiency risk factor also affects maternal causes. These relationships are discussed in the `Iron Deficiency Risk Effects Document <2019_risk_effects_iron_deficiency_>`.
 
 .. todo::
-  
-  Make the risk effects page so that this link will work :) 
 
-Further, the iron deficiency risk factor is modeled in tandem with the **anemia impairment**, discussed below.
+  create this page so that the link will work
+
+Further, the iron deficiency risk factor is modeled in tandem with the **anemia impairment**, discussed in the sections below.
+
+The following figure shows the risk factor hierarchy and corresponding IDs for the iron deficiency risk factor. A table of GBD 2019 causes and corresponding anemia-afflicted sequelae IDs is included below as well.
+
+.. image:: iron_risk_hierarchy.svg
+
+.. csv-table:: Iron Deficiency Anemia Causes and Sequelae
+  :file:  iron_deficiency_causes_and_sequelae.csv
+  :widths: 10 5 5 5 5
+  :header-rows: 1
 
 Anemia Impairment
 +++++++++++++++++
+
+The anemia impairment in GBD 2019 represents the total burden due to anemia across *all* causes with anemia sequelae. For instance, mild anemia due to dietary iron deficiency, mild anemia due to hookworm disease, and mild anemia due to maternal hemorrhage all contribute to the mild anemia *impairment* in GBD. See the REI IDs for the anemia impairments in the table below.
+
+.. list-table:: Anemia Impairment REI IDs
+  :widths: 15, 15
+  :header-rows: 1
+
+  * - Impairment
+    - REI ID
+  * - Total anemia
+    - 192
+  * - Mild anemia
+    - 205
+  * - Moderate anemia
+    - 206
+  * - Severe anemia
+    - 207
 
 The anemia impairment is modeled in two steps, 1) the anemia envelope and 2) causal attribution. 
 
@@ -135,10 +161,6 @@ A complete list of the causes included in the causal attribution process for ane
 
   P. falciparum parasitaemia without clinical malaria; P. vivax parasitaemia without clinical malaria; Clinical malaria; Schistosomiasis; Hookworm disease; Other neglected tropical diseases; Maternal haemorrhage; Vitamin A deficiency (under 15 years only); Other infectious diseases; Peptic ulcer disease; Gastritis; Stage III chronic kidney disease ; Stage IV chronic kidney disease ; Stage V chronic kidney disease ; End stage renal disease; Uterine fibroids; Menstrual disorders; Other haemoglobinopathies and haemolytic anaemias; Other endocrine, nutrition, blood, and immune disorders; G6PD deficiency; Hemizygous G6PD deficiency; Beta-thalassaemia major; Beta-thalassaemia trait; Haemoglobin E trait; Haemoglobin E/beta-thalassaemia; Haemoglobin H disease; Homozygous sickle cell and severe sickle cell/beta-thalassaemia parent; Haemoglobin SC disease; Mild sickle cell/beta-thalassaemia; Sickle cell trait; HIV; Cirrhosis and other chronic liver diseases, decompensated; Ulcerative colitis; Crohn’s disease; dietary iron deficiency; other infectious diseases; other neglected tropical diseases; other endocrine, nutrition, blood, and immune disorders; and other hemoglobinopathies and hemolytic anemias.
 
-.. todo::
-
-  Move this into table?
-
 Vivarium Modeling Strategy
 --------------------------
 
@@ -216,7 +238,17 @@ Validation Criteria
 +++++++++++++++++++
 
 ..	todo::
+
 	Fill in directives for this section
 
 References
 ----------
+
+.. [Kassebaum-et-al-2016]
+
+  View `Kassebaum et al. 2016`_
+
+    Kassebaum NJ, GBD 2013 Anemia Collaborators. The Global Burden of
+    Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: https://doi.org/10.1016/j.hoc.2015.11.002
+
+.. _`Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en_US&searchIndex=
