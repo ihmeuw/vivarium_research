@@ -632,18 +632,26 @@ Overview
 ~~~~~~~~
 
 Cohort studies can tell us about the relationship between an exposure and an 
-outcome. For an exposure of interest, we might consider n exposure levels. 
-These could be :math:`n=2`, with exposed and unexposed, or :math:`n=5`, with 
-several levels of exposure. The cohort is then followed up for a predetermined 
-period of time, after which the outcome is measured in each exposure group.
+outcome. For an exposure of interest, we might consider k exposure levels. 
+Groups of study subjects are selected for each exposure level, and then
+folloewd for a predetermined period of time, after which the outcome is measured 
+in each exposure group.
+
+The :math:`k` exposure levels can be :math:`k=2`, with exposed and unexposed, 
+or :math:`k=5`, with several levels of exposure. For :math:`k>2`, which we call 
+a **polytomous** exposure, note these exposures can be ordered or unordered. 
+For example, if the strata represent different ranges of pack-years of 
+cigarettes, more pack years will put subjects at a strictly higher risk for lung 
+cancer. However, if the different exposures are different occupations, the 
+strata won't necessarily be ordered.
 
 Cohort studies are particularly useful for when interested in:
 
-  - Rare exposures
+  - Rare exposures. Note that this is because we are selecting study groups by exposure status, allowing us to seek out the (rare) exposure, and then wait to see how outcomes develop in each group. This is in contrast to case control studies, in which study groups are selected for their outcomes. Case control studies are thus better for rare outcomes, and can pose accuracy issues for rare exposures.
 
-  - Multiple outcomes for one exposure
+  - Multiple outcomes for one exposure. For example, we could look at people who exercise in differing amounts per week, and then look at blood pressure, BMI, and depression in the subjects, as three different outcomes.
 
-In addition, cohort studies have the advantage of the exposure being measured 
+Cohort studies also have the advantage of the exposure being measured 
 before incidence of the outcome, helping to mitigate bias arising from 
 the outcome(s).
 
@@ -661,12 +669,11 @@ Study design
 ~~~~~~~~~~~~
 
 When selecting study subjects for each exposure group, it is essential that the 
-groups resemble one another with respect to all variables that are not 
-independent from the exposure. This will include age and sex, in addition to any 
-confounders. In the event that it is not possible for each exposure group to 
-have the same distribution of each confounder, it is important to measure the 
-prevalence of the confounders in each exposure group at the start of the study, 
-so the results can be adjusted for confounding at the close of the study.
+groups resemble one another with respect to all variables that are potential confounders. This will likely include age and sex, in addition to any exposure-specific confounders. In the event that it is not possible for each 
+exposure group to have the same distribution of each confounder, it is 
+important to measure the prevalence of the confounders in each exposure group 
+at the start of the study, so the results can be adjusted for confounding at 
+the close of the study.
 
 It is also important that follow-up methods are identical between groups, 
 to help ensure that the measurement of differential outcomes in the exposure 
@@ -699,6 +706,10 @@ Historical cohort studies can be conducted with significantly less time and
 cost than real-time cohort studies; however, the data for such studies will 
 typically have been collected for an unrelated purpose, potentially resulting in 
 incomplete or inaccurate data.
+
+These studies are most commonly conducted in the context of occupational data. 
+For example, examining how long individuals worked in mining, as a risk for 
+respiratory disease.
 
 Cross-Sectional Studies
 +++++++++++++++++++++++
