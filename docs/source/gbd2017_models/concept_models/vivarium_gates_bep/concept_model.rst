@@ -154,26 +154,26 @@ This objective will compare scenario with targeted BEP vs scenario with universa
      - Source
      - Hopes and dreams
      - Source 
-   * - a
-     - IFA vs no IFA or placebo on birthweight in g
+   * - a (∆ifa)
+     - IFA vs no IFA or placebo on birthweight in g 
      - +57.73 g (7.66 to 107.79)
      - Pena 2015 Cochrane review
      - same
      - same 
-   * - b
+   * - b (∆mmn)
      - MMN vs IFA on birthweight in g
      - +51.24 (43.71 to 58.76)
      - fixed effects meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
      - same
      - same 
-   * - d1
-     - BEP vs IFA on birthweight in g among low BMI women
+   * - d1 (∆bep_low)
+     - BEP vs control/no intervention on birthweight in g among low BMI women :download:`memo <bep_controlgroup_memo.docx>`
      - +66.96g (13.13 to 120.78)
      - Ota 2015 Cochrane review
      - +100g (±10)  
      - TPP target
-   * - d0
-     - BEP vs IFA on birthweight in g among normal BMI women
+   * - d0 (∆bep_norm)
+     - BEP vs control/no intervention on birthweight in g among normal BMI women :download:`memo <bep_controlgroup_memo.docx>`
      - +40.96g (4.66,77.26)
      - Ota 2015 Cochrane review
      - +75g (±10)   
@@ -216,21 +216,40 @@ This objective will compare scenario with targeted BEP vs scenario with universa
 4.0 Intervention
 ++++++++++++++++
 
-• IFA: Iron and folic acid supplementation 
-- Dosage: Combined pill or separate pill (30-60 mg iron, 400 μg folic acid)
-- Duration: as soon as possible during pregnancy 
-- Infant outcomes affected: increases birthweight(g)
+In this model, there are essentially three entities that affect child outcomes: 1) iron and folic acid, 2) multi-micronutrients (excluding iron and folic acid), and 3) protein plus extra caloric energy. Each of these entities produce a ∆effect size as follows:
 
-• MMN: multi-micro nutrient supplementation
-- Multiple micronutrients defined as supplementation with at least 5 micronutrients including the UNIMMAP formulation: 2 mg copper, 65 μg selenium, 800 μg RE vitamin A, 1.4 mg vitamin B1, 1.4 mg vitamin B2, 18 mg niacin, 1.9 mg vitamin B6, 2.6 μg vitamin B12, 70 mg vitamin C, 5 μg vitamin D, 10 mg vitamin E and 150 μg iodine, 30 mg iron, 400 μg folic acid, 15 mg zinc
-- Infant outcomes affected (MMN): reduces preterm births (<37 weeks)-CIs slightly spans 1, reduces low birth weight, increases birthweight(g), reduces small-for gestational age 
+:underline:`∆ifa: effect of iron and folic acid supplementation vs. no iron no folic acid or placebo`
 
-• BEP:  balanced energy protein supplementation
-- Dosage: supplements in which protein provides less than 25% of the total energy content
-- Duration: administered 6 months during pregnancy and 6 months during lactation
-- Infant outcomes affected:  increases birthweight(g), reduces small for gestational age
+  - Dosage: Combined pill or separate pill (30-60 mg iron, 400 μg folic acid)
+  - Duration: as soon as possible during pregnancy 
+  - Infant outcomes affected: increases birthweight(g)
 
-*The intervention ‘MMN’ refers to a single pill that includes iron and folic acid and intervention ‘BEP’ refers to a nutrient bar that includes micronutrients as well as iron and folic
+:underline:`∆mmn: multi-micro nutrient supplementation vs. iron and folic acid`
+
+  - Multiple micronutrients supplementation is defined as supplementation with at least 5 micronutrients including the UNIMMAP formulation: 2 mg copper, 65 μg selenium, 800 μg RE vitamin A, 1.4 mg vitamin B1, 1.4 mg vitamin B2, 18 mg niacin, 1.9 mg vitamin B6, 2.6 μg vitamin B12, 70 mg vitamin C, 5 μg vitamin D, 10 mg vitamin E and 150 μg iodine, 30 mg iron, 400 μg folic acid, 15 mg zinc
+  - Infant outcomes affected (MMN): reduces preterm births (<37 weeks)-CIs slightly spans 1, reduces low birth weight, increases birthweight(g), reduces small-for gestational age 
+  - Note: the intervention MMN inherently contains IFA. The trials looking at the effect size of MMN compares the intervention group (MMN) with IFA supplemented group. Hence the ∆MMN effect size is the effect of those *extra* minerals and vitamins (not including ifa). 
+
+:underline:`∆bep: balanced energy protein supplementation vs. control or placebo`
+
+  - Dosage: supplements in which protein provides less than 25% of the total energy content
+  - Duration: the trials investigating the effect size of BEP starts supplementing anywhere between first trimester to third trimester. 
+  - Infant outcomes affected:  increases birthweight(g), reduces small for gestational age
+  - Note: The trials report no standard forumla for BEP. It can come in the form of a pre-fabricated nutrient bar/goo/drink that contains calories, proteins, and fat, and additionally may contain minerals or vitamins OR it can be food vouchers for milk, oil, nuts. The intervention vs control groups mostly compares the effect of the energy + protein only :download:`see memo <bep_controlgroup_memo.docx>`. Hence, the ∆bep coming from these trials refers to the benefit of energy and protein only. 
+
+We have three tiers of **interventions**: 
+
+1) :underline:`Basic: iron and folic acid only`
+ - this is present in the basline. 
+ - Women recieve a ∆ifa effect if they are covered
+
+2) :underline:`Basic+ (iron and folic acid + other multi-micronutrients)`
+ - This is not present in baseline and only in the scenarios
+ - women who are covered by basic+ recieve ∆ifa + ∆mmn 
+
+3) :underline:`Basic++ (iron and folic acid + other multi-micronutrients + energy and protein)`
+ - this is also not present in baseline and only in the scenarios
+ - women who are covered by basic++ recieve  ∆ifa + ∆mmn + ∆bep
 
 
 .. _4.1:
@@ -238,12 +257,25 @@ This objective will compare scenario with targeted BEP vs scenario with universa
 4.1 Simulation scenarios
 ------------------------
 
-• Baseline: Offering IFA to any women attending ANC (at empirical baseline coverage of IFA)
-• Scenario 1: Offering MMN to any women attending ANC (intervention at target 90% coverage at ANC)
-• Scenario 2: Offering BEP (current evidence effect size) to any women attending ANC (intervention at target 90% coverage at ANC)
-• Scenario 3: Offering BEP (current evidence effect size) to targeted undernourished women, and MMN to any other women attending ANC (intervention at target 90% coverage at ANC)
-• Scenario 4: Offering BEP (hope and dreams effect size) to any women attending ANC (intervention at target 90% coverage at ANC)
-• Scenario 5: Offering BEP (hope and dreams effect size) to targeted undernourished women, and MMN to any other women attending ANC (intervention at target 90% coverage at ANC)
+A.  **Scenario 0 (baseline)**: Offering basic (IFA) to any women attending ANC at empirical baseline coverage of IFA at ANC.
+  - among the general population: this is the % who attends ANC x % of IFA coverage at ANC
+
+B.  **Scenario 1**: Offering basic+(IFA + MMN) to any women attending ANC at 90% coverage at ANC.
+  - Those who receive basic+ among the general population = % who attends ANC x 90% coverge at ANC
+
+C.  **Scenario 2**: Offering basic++(IFA + MMN + BEP_universal), using current-evidence effect size, to 90% of women attending ANC. 
+  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC
+
+D.  **Scenario 2b**: Offering basic++(IFA + MMN + BEP_targeted), using current-evidence effect size, to 90% of undernourished women attending ANC, and basic+ (IFA + MMN) to 90% of normal BMI women attending ANC.
+  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC X % undernourished population 
+  - Those who receive basic+ among the general population = % who attends ANC x 90% coverage at ANC X % normal population 
+
+E.  **Scenario 3a**: Offering basic++(IFA + MMN + BEP_universal), using hopes-and-dreams effect size, to any women attending ANC at 90% coverage at ANC.
+  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC
+
+F.  **Scenario 3b**: Offering basic++(IFA + MMN + BEP_targeted), using hopes-and-dreams effect size, to 90% of undernourished women attending ANC, and basic+ (IFA + MMN) to 90% of normal BMI women attending ANC. 
+  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC X % undernourished population 
+  - Those who receive basic+ among the general population = % who attends ANC x 90% coverage at ANC X % normal population 
 
 .. _5.0:
 
