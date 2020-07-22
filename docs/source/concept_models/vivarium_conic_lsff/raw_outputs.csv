@@ -1,0 +1,14 @@
+﻿Measure,Units,Definition,Standard Stratification,Additional Stratification,Notes
+deaths due to {cause} for each cause,count of deaths,total deaths in population subgroup,"year, sex, age group",,
+YLLs due to {cause} for each cause,years,total YLLs due to {cause} in population subgroup,"year, sex, age group",,
+YLDs due to {cause} for each cause,years,total YLDs due to {cause} accumulated by population subgroup,"year, sex, age group",,
+total YLLs,years,total YLLs accumulated by population subgroup,"year, sex, age group",,
+total YLDs,years,"total YLDs accumulated by population subgroup, with comorbidity correction","year, sex, age group",,
+person-time,person-years,person-years accumulated by population subgroup,"year, sex, age group",,
+person-time in {cause state} for each cause state for each cause,person-years,person-years accumulated in {cause state} by population subgroup,"year, sex, age group",,state person time
+"person-time in {sequela} for sequela in [mild anemia, moderate anemia, severe anemia, no anemia]",person-years,sum of person-years when simulant's hemoglobin level is between the severity-specific anemia cutoffs for the simulant's sex and age group (see Iron Deficiency cause model for anemia cutoffs),"year, sex, age group","child iron coverage group, iron responsiveness group",state person time
+live births,count of births,total number of live births for the population subgroup,"year, sex",,
+"live births with {cause state} for each cause state of [neural tube defects, lower respiratory infections]",count of births,number of live births in a specific cause state (e.g. with NTDs or without NTDs) for the population subgroup,"year, sex",,
+"population at age {age} for age in [6 months, 1 year, 2 years, 3 years]",count of people,total number of simulants of the specified age in the population subgroup,"year, sex","child iron coverage group, iron responsiveness group",
+"first moment of hemoglobin in population at {age} for age in [6 months, 1 year, 2 years, 3 years]",g/L,sum of hemoglobin levels of simulants of the specified age in the population subgroup,"year, sex","child iron coverage group, iron responsiveness group",
+"second moment of hemoglobin in population at {age} for age in [6 months, 1 year, 2 years, 3 years]",(g/L) squared,sum of squared hemoglobin levels of simulants of the specified age in the population subgroup,"year, sex","child iron coverage group, iron responsiveness group",
