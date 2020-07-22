@@ -888,9 +888,123 @@ respiratory disease.
 Cross-Sectional Studies
 +++++++++++++++++++++++
 
-.. todo::
+Introduction
+~~~~~~~~~~~~
 
-	This section
+Cross-sectional studies are observational design in nature and give a snapshot 
+of the characteristics of study subjects at one point of time. In general, the 
+information can be gathered with respect to exposure, outcome alone, or both 
+concurrently. Unlike cohort studies, cross-sectional studies do not have a 
+follow-up period and therefore are relatively simple to conduct. As the exposure 
+status and outcome of interest information is collected in a single timepoint 
+often by surveys, it's quite difficult to determine the association between cause 
+and effect. We should not make a causal inference unless the exposure assumed to 
+be steady over time and not influenced by the outcome. This study design is 
+commonly used to assess the prevalence of a disease in a population, so called 
+`prevalence` study. Prevalence measures the prorpotion of population who have 
+the exposure or outcome of interest, it's calculated as the number of people 
+with the outcome in a population at specific point in time, divided by the 
+total number of people in that population at same time.
+
+
+Purpose of study
+~~~~~~~~~~~~~~~~
+
+Cross-sectional studies are used when we aim to find the prevalence of the 
+outcome of interest in a population or subgroups within the population at 
+specific timepoint; or describe a population or subgroups within the population 
+with respect to an outcomes and a set of risk factors. To investigate the 
+relationship between risk factors and the outcome of interest, research often 
+conducted in the form of a survey. Since the study performed at single moment of 
+time point, the limitation is obvious. It cannot show the sequence of events and 
+lack of information for a exposure in the past or future, therefore impossible 
+to infer causality. However, the cross-sectional studies are still useful in 
+designing hypotheses for future research.
+
+
+Types of study
+~~~~~~~~~~~~~~
+
+Cross-sectional studies can be either **descriptive** or **analytical**. 
+Descriptive studies evaluate the outcome or exposure alone, which collects the 
+information on frequency or distribution of health-related variables in a defined 
+population at one time point. (e.g. prevalence of cervical cancer among Chinese 
+women aged 40 to 45) It's a **point prevalence** measure if the data is collected 
+by asking a question "Do you have cervical cancer today?". In contrast, it would 
+become **period prevalence** if question changed to "Have you had cervical cancer 
+on any day within the past month?". Many cross-sectional studies include both 
+questions on current status of the subject and questions about the past, often 
+called retrospective questions, that allow researchers to answer analytical 
+questions from the survey. Analytical studies explore the relationship between 
+exposures (risk factors) and the outcome. The prevalence of the outcome is 
+compared between exposed and unexposed group. It's calculated as prevalence 
+of a disease in exposed population divided by prevalence of that disease in 
+unexposed population, namely the **prevalence ratio**. The prevalence ratio 
+describes the association between the exposure and prevalence of the outcome. 
+For example, we set gender as a risk factor and smoking as the outcome, assuming 
+the prevalence of smoking among men over 15 in 2005 was 30% and 4% for women at 
+same age and year, then the prevalence ratio for smoking is 8. That's being said men are 8 times more likely to be smoker than women in this population, indicating 
+a strong association between sex and prevalence of smoking.
+
+
+Sample selection
+~~~~~~~~~~~~~~~~
+
+Both the method used to select samples and response rate determine how well the 
+results can be generalized to a population as a whole. In a cross-sectional 
+study, the sample is often taken from the whole population or subgroups within 
+the population that are randomly selected and highly representative. It's very 
+important to ensure the responders are representative as well, as non-response 
+might occur in a large-scale survey. The technologies to minimise this problem 
+include telephone and mail prompting, and other incentive actions. Another 
+outstaning issue related to reponse is biased reponse, where individuals are 
+more likely to answer the questions or complete the surveys with a paticular 
+characteristic or a set of characteristics. Bias will introduce when certain 
+characteristic in questionnaire is related to probability of having a disease 
+or outcome. For example, you might observe a high response rate among elder 
+people and those unemployed by conducting a door-to-door interview for a disease. 
+The results are biased because we are accidentally assume these two groups are 
+actually experiencing higher risk of disease but ignore the fact that they are 
+more likey to be stay in home during the daytime.
+
+
+Advantages and disadvantages
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Cross-sectional study is less expensive and take shorter time to conduct than a 
+longitudinal study because the subjects are not necessarily to be tracked over 
+time, therefore the analysis of the study can start immediately after the data 
+collection finished. They are powerful in health planning, understadning etiology 
+and generation of hypotheses. Researchers can collect data about their 
+hypothesized phenomenon, and also gather the information about the demographic 
+and other relevant characteristics in order to compare the finidngs from 
+different groups. In addition, cross-sectional studies do not have a concern of 
+loss to follow-up.
+
+There are some disadvantages in cross-sectional study design. It's often diffcult 
+to draw a conclusion on causation because data are captured at single timepoint. 
+Researchers who chose a cross-sectional study design may be confounded by 
+historical factors during or before data collection. For example, a researcher 
+studying emergency preparedness may get flawed results if he conducted a survey 
+immediately after a major hurricane. In the same condition, a longitudinal study 
+would show trends in emergency preparedness and demonstrate if the hurricane had 
+an effect on the phenomenon. We may see the prevalence-incidence bias in 
+cross-sectional studies, especially in the case of longer-lasting diseases (e.g. 
+chronic diseases like diabetes or hypertension), any risk factor that results in 
+death will be under-represented among those with condition.
+
+
+Data analysis
+~~~~~~~~~~~~~
+
+For calculation of point/period prevalence and the prevalence ratio, we assumed 
+that both the exposures and the outcome were discrete variables. For example, 
+you would expect a binary distirbution for prevalence of smoking. "Yes, you are
+current smoker" or "No, you are current non-smoker". Sometimes we have observed 
+continuous distirbution for prevalence of smoking, the prevalence measure has to fall below/above a certain threshold (e.g. 20 pack-years) or in a certain range 
+(e.g. 20 to 30 pack-years). In this circumstance, your analytical approach would 
+be to compare mean or median values in exposed population against unexposed 
+population.
 
 Case-Control Studies
 ++++++++++++++++++++
