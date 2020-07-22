@@ -1,5 +1,0 @@
-﻿subpopulations,categories,categories_2
-Hypertension (SBP >= 140 mmHg),hypertensive_cat_1 (SBP >= 140 at simulant initalization),hypertensive_cat_0 (SBP < 140 at simulant initalization)
-Diabetes (FPG >= 7.0 mmol/L),diabetic_cat_1 (FPG >= 7 at simulant initialization),diabetic_cat_0 (FPG < 7 at simulant initialization)
-High LDL-C (LDL-C >= 5.0 mmol/L),high_ldlc_cat_1 (LDL-C >= 5 at simulant initialization),high_ldlc_cat_0 (LDL-C < 5 at simulant initialization)
-Post-ACS,"post_acs_cat_1 (in at least one of the states acute_mi, post_mi, acute_ischemic_stroke, post_ischemic_stroke at simulant initialization)","post_acs_cat_0 (in none of the states acute_mi, post_mi, acute_ischemic_stroke, post_ischemic_stroke at simulant initialization)"

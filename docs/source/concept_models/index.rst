@@ -1,4 +1,4 @@
-.. _2017_concept_models:
+.. _concept_models:
 
 =========================
 Simulation Concept Models

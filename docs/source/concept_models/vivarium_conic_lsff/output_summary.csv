@@ -1,0 +1,29 @@
+﻿Location,Year,Age group,Sex,Stratification,Scenario,Outcome
+Ethiopia,2020,Early neonatal (0-7 days),Male,Vitamin A coverage group,Baseline (existing fortification),Total DALYs per 100K person-years
+India,2021,Late neonatal (7-28 days),Female,Mother folic acid coverage group,Vitamin A scale-up,DALYs due to {cause} per 100K person-years
+Nigeria,2022,Post neonatal (28d - 1y),,Mother iron coverage group,Iron scale-up,Cause-specific mortality rates (deaths due to {cause} / 100K PYs)
+,2023,1 to 4 (1 year - 5 years),,Child iron coverage group,Folic Acid scale-up,All cause mortality rate (deaths/100K PYs)
+,2024,Birth,,Iron responsiveness,Iron+Folic Acid scale-up,Child mortality rate (deaths per 1000 live births)
+,2025,6 months,,,,Vitamin A Deficiency prevalence
+,,1 year,,,,Anemia prevalence (mild/moderate/severe/none)
+,,2 years,,,,NTD birth prevalence (at birth)
+,,3 years,,,,NTD prevalence (in all age groups other than birth)
+,,,,,,"Hemoglobin mean at {age} (age=6 months, 1 year, 2 years, 3 years)"
+,,,,,,Birth weight mean (at birth)
+,,,,,,Low birth weight proportion (at birth)
+,,,,,,Total YLLs
+,,,,,,Total YLDs
+,,,,,,YLLs due to {cause}
+,,,,,,YLDs due to {cause}
+,,,,,,Deaths due to {cause}
+,,,,,,Incidence rates
+,,,,,,Remission rates
+,,,,,,Prevalence of {cause}
+,,,,,,Birth prevalence of Lower Respiratory Infections
+,,,,,,Total population
+,,,,,,Total person-time
+,,,,,,State person-time for {cause state}
+,,,,,,Transition counts
+,,,,,,Number of live births
+,,,,,,Hemoglobin variance at {age}
+,,,,,,Birth weight variance (at birth)

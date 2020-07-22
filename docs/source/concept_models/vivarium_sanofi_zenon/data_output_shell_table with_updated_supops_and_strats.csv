@@ -1,0 +1,17 @@
+﻿Location name,Year,Subpopulations,Age group,Sex,Scenario,Outcome,Outcome Metric
+Brazil,2020,Hypertension (SBP >= 140 mmHg),40-44,Male,Business As Usual,All-cause mortality,Rate per 100k
+China,2021,Diabetes (FPG >= 7.0 mmol/L),45-49,Female,Intervention 1,DALYs by all four causes,Rate per 100k
+Italy,2022,High LDL-C (LDL-C >= 5.0 mmol/L),50-54,Both,Intervention 2,YLLS by all four causes,Rate per 100k
+France,2023,Post-ACS,55-59,,,YLDs by all four causes,Rate per 100k
+Spain,2024,,60-64,,,Deaths by four causes,Rate per 100k
+Russia,,,65-69,,,Mean FPG,mmol/L
+,,,70-74,,,Treatment Coverage,Percent
+,,,75+,,,Multidrug Coverage,Percent
+,,,40-74,,,FDC Coverage,Percent
+,,,All ages,,,Population achieving target LDL-c,Percent
+,,,,,,CV risk score,Number
+,,,,,,Proportion of people adherent,Percent
+,,,,,,Mean SBP,mmHg
+,,,,,,Mean LDL-c level,mmol/ L
+,,,,,,Incidence of Ischemic Stroke,Rate per 100k
+,,,,,,Incidence of Ischemic Heart Disease,Rate per 100k
