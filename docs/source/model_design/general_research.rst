@@ -943,7 +943,8 @@ unexposed population, namely the **prevalence ratio**. The prevalence ratio
 describes the association between the exposure and prevalence of the outcome. 
 For example, we set gender as a risk factor and smoking as the outcome, assuming 
 the prevalence of smoking among men over 15 in 2005 was 30% and 4% for women at 
-same age and year, then the prevalence ratio for smoking is 8. That's being said men are 8 times more likely to be smoker than women in this population, indicating 
+same age and year, then the prevalence ratio for smoking is 8. That's being said 
+men are 8 times more likely to be smoker than women in this population, indicating 
 a strong association between sex and prevalence of smoking.
 
 
@@ -1001,7 +1002,8 @@ For calculation of point/period prevalence and the prevalence ratio, we assumed
 that both the exposures and the outcome were discrete variables. For example, 
 you would expect a binary distirbution for prevalence of smoking. "Yes, you are
 current smoker" or "No, you are current non-smoker". Sometimes we have observed 
-continuous distirbution for prevalence of smoking, the prevalence measure has to fall below/above a certain threshold (e.g. 20 pack-years) or in a certain range 
+continuous distirbution for prevalence of smoking, the prevalence measure has to 
+fall below/above a certain threshold (e.g. 20 pack-years) or in a certain range 
 (e.g. 20 to 30 pack-years). In this circumstance, your analytical approach would 
 be to compare mean or median values in exposed population against unexposed 
 population.
