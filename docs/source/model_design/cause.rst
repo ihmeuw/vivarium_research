@@ -706,6 +706,12 @@ was approximately 18 deaths per 100,000 person years. By comparing these two
 CSMRs, we can see that more individuals in the overall global popultaion died 
 due to diabetes mellitus than mesothelioma in 2017.
 
+.. note::
+
+  The concept of cause-specific mortality as we discuss here (and as it is used in the Global Burden of Disease study and Vivarium simulations) implies that there is always one *single* cause of death for an individual. This may be a reasonable assumption in some cases, for instance, death due to a traffic accident. However, ascertaining a single cause of death can be more complicated in other cases; imagine an individual is in a serious traffic accident and the stress of the accident causes them to have a heart attack -- did the traffic accident or the heart attack cause the death of this individual? 
+
+  If interested, see this publication by `Piffaretti et al. (2016) <https://www.who.int/bulletin/volumes/94/12/16-172189.pdf>`_ that discusses the classical single cause of death analysis and proposes an alternative approach that weights multiple causes of death. 
+
 Notably, CSMRs are useful for validation of Vivarium simulations, as well as 
 for estimating simulation mortality rates (see the `Mortality Hazards`_ 
 section for more detail).
@@ -743,6 +749,10 @@ to die of mesothelioma than of diabetes because mesothelioma is much less
 Notably, EMRs are useful for validation of Vivarium simulations, as well as 
 for estimating simulation mortality rates (see the `Mortality Hazards`_ 
 section for more detail).
+
+.. note::
+
+  The application of EMRs in Vivarium simulations allow for the consideration that an individual with a given cause is at an increased mortality rate for *that* cause. However, it does not necessarily allow for the consideration that an individual with that cause may *also* have an increased mortality rate for *other* causes due to the impact of comorbidities. While this phenomenon can be represented for *some* causes through the GBD risk factors framework (ex: vitamin A deficiency is related to increased mortality due to measles), our modeling framework is limited in that it does not consider the effect of comorbidities outside of GBD risk factors. 
 
 Mortality Hazards
 ^^^^^^^^^^^^^^^^^
