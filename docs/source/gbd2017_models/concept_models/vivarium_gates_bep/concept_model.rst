@@ -99,7 +99,7 @@ To understand the cost-effectiveness of BEP and MMN supplementation for pregnant
 **Objective 2**: Comparing the cost-effectiveness of BEP (targed and universal) interventions using hypotehical hope-n-dreams effect for BEP. 
 
 .. important::
- note that there is now a set of hope-n-dreams scenarios (objective 2). Objective 1 are the scenarios we had in our feb_2020 model
+ note that there is now a set of current evidence scenarios (objective 1). Objective 2 (hopes-n-dreams) were the scenarios we modelled in our feb_2020 model using Gates provided aspirational effect sizes.
 
 .. _3.0:
 
