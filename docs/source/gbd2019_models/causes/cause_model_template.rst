@@ -12,12 +12,12 @@ Cause Model Template
 
 .. important::
 
-   To begin documenting a cause in GBD 2017 for a Vivarium simulation, start by
+   To begin documenting a cause in GBD 2019 for a Vivarium simulation, start by
    following these steps (after you have :ref:`created a new git branch
    <contributing>` to work in):
 
    #. Make a subdirectory :file:`{cause_name}/` in the folder
-      :file:`gbd2017/causes/` , where :file:`{cause_name}` is replaced with the
+      :file:`gbd2019/causes/` , where :file:`{cause_name}` is replaced with the
       (potentially shortened) name of the cause you are modeling, such as :file:`measles/` or :file:`neonatal_encephalopathy/`.  This
       subdirectory is where you will put all the files for your cause model
       documentation, including this document, image files, .csv files, etc.
@@ -189,19 +189,6 @@ GBD 2019 Modeling Strategy
 .. todo::
 
   Add an overview of the GBD modeling section.
-
-.. admonition:: Todo for template development
-
-  In `Pull Request 91`_, @James suggested adding the following to this section:
-
-    Point people to yld and cod appendices for their diseases and link to
-    http://ghdx.healthdata.org/gbd-2019/code which can serve as an annoying
-    to read but authoritative source on how the cause was actually modeled.
-
-  Note that [GBD-2017-YLD-Appendix-Cause-Model-Template]_ and
-  [GBD-2017-CoD-Appendix-Cause-Model-Template]_ are now in the reference section
-  below.
-
 
 Cause Hierarchy
 +++++++++++++++
