@@ -834,31 +834,90 @@ Meta-Analyses and Meta-Regressions
 Meta-Analyses and Meta-Regressions are two similar study designs that allow researchers to combine and summarize findings from several individual studies that investigated the same association between an exposure and outcome. Studies included in meta-analyses and meta-regressions are typically identified using systematic literature searchers (see `Conducting Systematic Literature Searches/Reviews`_) and chosen for inclusion based on a set of inclusion and exclusion criteria for that particular meta-analysis or -regression. While each study in a meta-analysis or meta-regression should have the same exposure and outcome of interest, they may differ with respect to study design, study populations, and confounding bias. Briefly, meta-analysis summarizes study findings without formal control for differences between individual studies while meta-regression allows for flexible formal control for these differences. Details are discussed below.
 
 Measures of Effect
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
-Meta-anlyses can be performed for dichotomous and continuous outcomes. For dichotomous outcomes, the measure of effect is typically risk ratios or odds ratios; for continous outcomes the measure of effect is typically standardized mean differences.
+Meta-analyses can be performed for dichotomous and continuous outcomes. For dichotomous outcomes, the measure of effect is typically risk ratios or odds ratios; for continous outcomes the measure of effect is typically standardized mean differences.
 
-Heterogeneity Analysis
-^^^^^^^^^^^^^^^^^^^^^^
+Fixed Versus Random Effects Assumptions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Fixed Effects 
-'''''''''''''
+There are two main hypotheses regarding meta-analysis, referred to as fixed effects and random effects assumptions, discussed below.
 
-Random Effects
-''''''''''''''
+In **fixed effects** analysis, it is assumed that the *true* effect size is the same in all studies, although they may vary slightly due to random sampling error. Therefore, a summary meta-analysis effect size in fixed effects analysis will be an *estimate of the* **one common** *effect size.* 
 
-Weighting
-^^^^^^^^^
+  In fixed effects analysis, weighting of studies included in a meta-analysis is therefore performed proportionately to study sample size such that the largest studies (which have less sampling error) will be given more weight than smaller studies (which have more sampling error).
 
-Sensistivity Analysis
-^^^^^^^^^^^^^^^^^^^^^
+  Fixed effects analysis should be chosen if two conditions are met:
 
-Publication Bias
-^^^^^^^^^^^^^^^^
+    #. It is believed that all studies included in the meta-analysis are functionally identical.
 
-Meta-Regressions
-~~~~~~~~~~~~~~~~
-	
+    #. The goal of the meta-analysis is to compute the common effect size for an identified population and is not intended to be generalized to another population.
+
+  An example of an appropriate application of fixed effects analysis might be a drug trial intended to include 1,000 study subjects, but that must be conducted in sub-trials of around 100 study subjects at a time due to resource constraints. Fixed effects analysis may be used to estimate a summary effect of all of the sub-trials.
+
+In **random effects** analysis, it is assumed that the *true* effect size varies from one study to the next due to population heterogeneity. Therefore, a summary meta-analysis in random effects analysis will be an *estimate of the* **mean** *of these effects.* 
+
+  In contrast to fixed effects analysis, weighting protocols in random effects analysis gives greater weight to small studies, even if they are imprecise, because it is assumed that each study provides information about a different effect size and should be represented in the study estimate.
+
+  Random effects analysis should be chosen in situations in which studies included in a meta-analysis were conducted by different researchers with different study populations for which one common effect size cannot be assumed. Generally, the use of random effects analysis is more easily justified than fixed effects analysis.
+
+    Note: A common practice is to start with the assumption of fixed effects and then update the assumption to random effects if a statistical *test of heterogeneity* (which assesses if the effect sizes from the included studies are significantly heterogeneous) proves significant. However, it may be preferred that the decision to use fixed or random effects analysis is based on underlying research assumptions rather than statistical tests of heterogeneity. 
+
+Additionally, some meta-analyses may use custom weighting schemes that are neither fixed effects analysis nor random effects analysis. Such custom weighting schemes may rely on systemtatic quantitivative measures of study quality and will weight higher quality studies with lower potential for bias more heavily than lower quality studies. 
+
+Network Meta-Analyses
+~~~~~~~~~~~~~~~~~~~~~
+
+Network meta-analyses are a type of meta-analysis that allow for the comparison between two exposures that were not directly compared in a primary study. For instance, let's consider three different exposures:
+
+  A: Placebo/no-treatment
+
+  B: Status quo drug
+
+  C: New drug
+
+Let's say that there are several trials that compared treatment B to treatment A and several trials that compared treatment B to treatment C. However, there may be little or no trials that compared treatments A and C directly. Network meta-analyses allow for estimation of the summary effect of treatment C compared to treatment A using the studies that directly measured the effects of treatment B compared to treatment A and treatment C compared to treatment B.
+
+Network meta-analyses provide a formal methodology to compare exposures that are not directly compared in primary studies and can also increase statistical precision. 
+
+Forest Plots
+~~~~~~~~~~~~
+
+Meta-analysis results are most often presented as forest plots. Below is an example of a forest plot for a meta-analysis that was conducted for the :ref:`Large Scale Food Fortification project <2017_concept_model_vivarium_conic_lsff>`. 
+
+.. image:: iron_meta.png
+
+In forest plots, each study included in the meta-analysis is typically given a row in the plot and the effect size from that study will be marked as a square at the appropriate point on the X-axis. The size of the square represents the *weight* given to that study in the meta-analysis and the bars coming out of the square represent the uncertainty interval of the effect size from that specific study. The effect sizes and weights of each study are generally listed on the forest plot as well (see the right side of the plot above). The diamond at the bottom of the forrest plot represents the *summary effect size* with the top and bottom vertices of the diamond placed on effect size value on the x-axis and the left and right vertices of the diamond placed at the uncertainty ranges for the effect size. 
+
+.. note:: 
+
+  The forest plot shown above uses random effects analysis and the included studies are all given relatively similar weights, so the boxes for each study are very similar in size.
+
+  If fized effects analysis were to be used, there would be more variation in the weights and box sizes for each study.
+
+Publication Bias - Funnel Plots
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+An important consideration when conducting meta-analyses is the possibility of publication bias. Publication bias occurs when the outcome of a research study or trial influences the decision to publish. For instance, researchers who find a significant association between a treatment and outcome may be more likely to publish their findings than researchers who find no association between a treatment and outcome because it may be interpreted as a "non-finding." Further, if researchers find a result that was the *opposite* of the expected finding, they may choose not to publish the results due to the perception that the results may not be valid.
+
+Publication bias can lead to bias in using meta-analysis to estimate a summary effect. Consider the following scenario:
+
+  Let's say that there is interest in the news about whether eating fruit is associated with clinical depression. Let's also say that there are 30 nutritional epidemiologists who have large datasets available on nutritional habits and mental health who see this news and think, "wow, I should investigate this association in my data." Ten of the epidemiologists find a positive association between fruit and clinical depression and think, "wow, I should publish these results!" and do. Another ten of the epidemiologists find no association and the remaining ten find a negative association and think, "huh, must have been nothing to those news stories" and do not publish thier findings. 
+
+  Then, another researcher notices that several studies have reported an association between fruit consumption and clinical depression and decides to perform a meta-analysis on the available studies. That researcher collects the 10 published studies and finds that there is a significant positive association! However, if all 30 of the studies *conducted* had been published and available for inclusion in the meta-analysis, the researcher would have likely found no association! 
+
+One way to assess for the presence of publication bias is to make a **funnel plot**. The x-axis of a funnel plot is effect size and the y-axis is the confidence in the effect size (standard error, plotted from high to low). Each study eligible for inclusion in a meta-analysis is then plotted on these axes. 
+
+  If no publication bias is present, the points on the plot should be arranged in a pyramid (or inverted funnel) shape such that the studies with the most precision (high on the y-axis) will fall close to the center of the pyramid (average effect size) and studies with lower precision (lower on the y-axis) may fall farther from the center of the pyramid, *with* **equal** *distribution on either side**.
+
+  If the points on a funnel plot show significant asymmetry, it is likely that publication bias may be present. 
+
+Notably, funnel plots are a rather crude assessment of publications bias and may also represent other potential biases in the studies (ex: small studies may be more subject to selection bias that may result in systematic under- or over-estimation of the effect size).
+
+.. todo::
+
+  Include exmaple funnel plot
+
 Correlation
 -----------
 
