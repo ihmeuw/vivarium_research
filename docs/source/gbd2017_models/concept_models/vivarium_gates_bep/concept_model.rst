@@ -111,7 +111,7 @@ To understand the cost-effectiveness of BEP and MMN supplementation for pregnant
 3.1 Causal diagram
 ------------------
 
-  .. image:: causal_dag_bep_scenarios.svg
+  .. image:: causal_dag_bep_scenarios_v2.svg
 
 **Outcome (O)**:
 
@@ -170,7 +170,7 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same 
    * - b (∆oMMN)
      - MMN vs IFA on birthweight in g
-     - +51.24 (43.71 to 58.76) 
+     - +51.24 (43.71 to 58.76)  
      - fixed effects meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
      - same
      - same 
@@ -192,6 +192,12 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - meta analysis of 3 studies :download:`memo <meta-analysis_BMI_vs_birthweight_memo.docx>`
      - same
      - same
+   * - f
+     - effect size of BMI on CGF (laz and wlz)
+     - none (although we will validate with correlation literature)
+     - Source
+     - RR = 2(1.5-5)
+     - Gates, informed by Zhou Br Nutr J 2019, Misra Med J Armed Forces India 2015; Yang Plos One 2015, Model assumption
    * - E_laz
      - BEP vs. control/no intervention on LAZ score at 6 months
      - none
@@ -219,9 +225,9 @@ Here is a memo describing the rationale underlying the causal structure of this 
 
 .. important::
   1) this table reflects effect sizes for the DAGs show in causal diagram section which reflects new summer_2020 model structure. The difference is that we got rid of the effect size of BMI and laz/wlz (childgrowth stuff) but instead correlate birthweight and childgrowth using MAL-ED spearman co-efficient that chris analysed. We will need to update this if we cannot do this correlation and we need to use the old feb_2020 structure. 
-  2) also note that I have updated the effect size of MMN
-  3) updated effect size of BEP for current-evidence scenario
-  4) updated effect of BMI on birthweight to a continuous shift rather than back-calculating a shift using an RR of 2
+  2) b: also note that I have updated the effect size of ∆oMMN
+  3) d1 and d0: updated effect size of BEP for **current-evidence scenario** (∆BEP_norm and ∆BEP_mal)
+  4) x: updated effect of BMI on birthweight to a continuous shift rather than back-calculating a shift using an RR of 2(1.5-5)
 
 
 In this model, there are three 'entities' that affect child outcomes: 
@@ -344,8 +350,8 @@ Green arrow indicates target effect sizes given by Gates TPP targets; dotted arr
 
 .. _5.3.1:
 
-5.3.1 model 1: Baseline
-~~~~~~~~~~~~~~~~~~~~~~~
+5.3.1 model 1: Baseline (scenario A)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The baseline model contains a baseline coverage rate of IFA and a proportion of malnourished women. Both IFA and mother's BMI status has an affect on birthweight. Hence we must calibrate the baseline model by IFA coverage and maternal BMI. 
 
