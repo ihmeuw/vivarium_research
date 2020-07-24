@@ -478,7 +478,7 @@ Updates by scenario for summer_2020 model from feb_2020 model:
  * update effect size d1 and d0 to value from hopes-n-dreams
  * add effect size E_laz and E_wlz
 
- 6) Scenario F(i) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+6) Scenario F(i) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
  * add LRI birth prevalence
  * update LBWSG risk 
  * update effect x (directly use shift in grams provided, random effects value)
@@ -488,7 +488,7 @@ Updates by scenario for summer_2020 model from feb_2020 model:
  * add effect size E_laz and E_wlz
 
 
- 7) Scenario F(ii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+7) Scenario F(ii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
  * add LRI birth prevalence
  * update LBWSG risk 
  * update effect x (directly use shift in grams provided, random effects value)
@@ -498,7 +498,7 @@ Updates by scenario for summer_2020 model from feb_2020 model:
  * add effect size E_laz and E_wlz
  * add correlation c
 
-  8) Scenario F(iii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+8) Scenario F(iii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
  * add LRI birth prevalence
  * update LBWSG risk 
  * update effect x (directly use shift in grams provided, random effects value)
