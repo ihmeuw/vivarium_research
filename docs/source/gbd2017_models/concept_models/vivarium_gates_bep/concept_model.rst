@@ -432,11 +432,11 @@ Apply the following intervention shifts according to interventions recieved in e
 .. image:: intervention_shifts.svg
 
 .. important:: 
-  note the highlighted effect sizes, which are different from the previous feb_2020 model.
+  note-
    
-   1) oMMN size has changed
-   2) there is now a current evidence effect size for BEP
-   3) the shift in laz/wlz scores due to maternal BMI status can be kept in there if it is currently in there already, as it doesnt make any difference with or without it in scenarios A-E, only in F(i) targeted and F(ii) targeted. 
+   1) oMMN size has changed from feb_2020 model
+   2) there is now a current-evidence effect size for BEP
+   3) the baseline shifts in laz/wlz scores due to maternal BMI status can be kept in there if it is currently in there already, as it doesnt make any difference with or without it in scenarios A-E. The shifts in cgf z-scores due to maternal bmi only matters in scenarios F(i) and F(ii) which are hopes-n-dreams targeted scenarios. 
 
 Updates by scenario for summer_2020 model from feb_2020 model:
 
