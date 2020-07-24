@@ -94,9 +94,9 @@ There is belief that benefits of BEP supplementation are currently underestimate
 
 To understand the cost-effectiveness of BEP and MMN supplementation for pregnant and lactating women (PLW) on child health outcomes. We will consider the costs and DALYs of baseline, and a range of scenarios.
 
-**Objective 1**: Comparing the cost-effectiveness of IFA, MMN, and BEP (targed and universal) interventions using current evidence available. 
+**Objective 1**: Comparing the cost-effectiveness of IFA, MMN, and BEP (targeted and universal) interventions using current evidence available. 
 
-**Objective 2**: Comparing the cost-effectiveness of BEP (targed and universal) interventions using hypotehical hope-n-dreams effect for BEP. 
+**Objective 2**: Comparing the cost-effectiveness of BEP (targeted and universal) interventions using hypothetical hope-n-dreams effect for BEP. 
 
 .. important::
  note that there is now a set of current evidence scenarios (objective 1). Objective 2 (hopes-n-dreams) were the scenarios we modelled in our feb_2020 model using Gates provided aspirational effect sizes.
@@ -224,10 +224,11 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same  
 
 .. important::
-  1) this table reflects effect sizes for the DAGs show in causal diagram section which reflects new summer_2020 model structure. The difference is that we got rid of the effect size of BMI and laz/wlz (childgrowth stuff) but instead correlate birthweight and childgrowth using MAL-ED spearman co-efficient that chris analysed. We will need to update this if we cannot do this correlation and we need to use the old feb_2020 structure. 
-  2) b: also note that I have updated the effect size of ∆oMMN
-  3) d1 and d0: updated effect size of BEP for **current-evidence scenario** (∆BEP_norm and ∆BEP_mal)
-  4) x: updated effect of BMI on birthweight to a continuous shift rather than back-calculating a shift using an RR of 2(1.5-5)
+
+  1) b: also note that I have updated the effect size of ∆oMMN
+  2) d1 and d0: added effect size of BEP for **current-evidence scenario** (∆BEP_norm and ∆BEP_mal)
+  3) x: updated effect of BMI on birthweight to a continuous shift rather than back-calculating a shift using an RR of 2(1.5-5)
+  4) use random effects for x
 
 
 In this model, there are three 'entities' that affect child outcomes: 
@@ -309,7 +310,7 @@ F.  **Scenario F**: Offering basic++(IFA + MMN + BEP_targeted), using hopes-and-
 
 
 .. important::
-  note there are now E and F which uses hopes-n-dreams effect sizes for BEP_targeted
+  note there are now scenarios C and D which uses current-evidence effect sizes for BEP_targeted
 
 .. _5.0:
 
