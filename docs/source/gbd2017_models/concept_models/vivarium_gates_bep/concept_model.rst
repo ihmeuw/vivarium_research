@@ -156,7 +156,7 @@ Here is a memo describing the rationale underlying the causal structure of this 
    :widths: 5 20 20 20 10 20
    :header-rows: 1
 
-   * - Effect
+   * - Effect 
      - Description
      - Current evidence
      - Source
@@ -170,8 +170,8 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same 
    * - b (∆oMMN)
      - MMN vs IFA on birthweight in g
-     - +51.24 (43.71 to 58.76)  
-     - fixed effects meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
+     - +51.24 (43.71 to 58.76) fixed effects *or* +45.16 (32.31 to 58.02) random effects
+     - meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
      - same
      - same 
    * - d1 (∆BEP_mal)
@@ -188,7 +188,7 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - TPP target
    * - x
      - crude birthweight in g shift between low and normal BMI women
-     - -160.44g (-196.65 to -124.23) fixed effect *or* -142.93g (-232.68 to -53.18) random effects
+     - -160.44g (-196.65 to -124.23) fixed effects *or* -142.93g (-232.68 to -53.18) random effects
      - meta analysis of 3 studies :download:`memo <meta-analysis_BMI_vs_birthweight_memo.docx>`
      - same
      - same
@@ -222,6 +222,10 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - MAL-ED study
      - same
      - same  
+
+.. note::
+  
+  use random effect values
 
 .. important::
 
