@@ -310,7 +310,7 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
  
 In initialization, We assume that no one has prior knowledge of their DCIS or BC status. Hence no one will be initialized into branch B or C at initialization. Subsequently, if DCIS or LCIS was detected.
 
-For individuals with breast cancer (regardless of detection) and have survived more than 10 years, they are considered to step into a recovered state (R) and should not make a second critical illness (CI) claim. We assume that people in breast cancer state and recovered state follow exactly the same screening algorithm, namely branch A, B, or C depending on their age, sex, and family history status. Note that the negaive screening results were expected for those in R state in order to avoid double counting the CI claim from detected breast cancer.
+For individuals in disease state BC (regardless of detection) they have a transition rate of 0.1 (per person-year) of moving into a recovered state (R); this results in an average duration in state BC of 10 years. Individuals do not ever make a second BC CI claim. We assume that people in breast cancer state and recovered state follow exactly the same screening algorithm, namely branch A, B, or C depending on their age, sex, and family history status. Note that the negaive screening results were expected for those in R state in order to avoid double counting the CI claim from detected breast cancer.
 
 Swiss Re confirmed that no material is available in context of critical illness products for male at any age or female blelow 30 or above 70 in China. The entry age for adult products is 35 and 50 for senior products. So for a 20-year simulation, we wouldn't have much exposure above age 70. Also, for women who have purchased insurance, you would expect them to take up regular screening before 70 anyhow. 
 
@@ -397,8 +397,7 @@ Using OR value of 1.89 and P as 0.3
 
     - I'm wondering if the Marketscan data, where we got the empirical distributions from, is giving us the time interval between screens that the patient actually showed up to? (which in our model is a combintation of time to next scheduled screening + probabiltiy of showing up)
     
-    - For individuals survive more than 10 years after the diagnosis and treatment, 
-    send them to susceptible state or we could create a remission state and assume they will never have a chance to be screened during the simulation.
+    - For individuals survive more than 10 years after the diagnosis and treatment, they are going into a remission state and then continuing to get screened in the model.
 
 
 .. _5.3.3:
