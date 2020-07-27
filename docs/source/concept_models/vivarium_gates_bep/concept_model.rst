@@ -94,9 +94,9 @@ There is belief that benefits of BEP supplementation are currently underestimate
 
 To understand the cost-effectiveness of BEP and MMN supplementation for pregnant and lactating women (PLW) on child health outcomes. We will consider the costs and DALYs of baseline, and a range of scenarios.
 
-**Objective 1**: Comparing the cost-effectiveness of IFA, MMN, and BEP (targed and universal) interventions using current evidence available. 
+**Objective 1**: Comparing the cost-effectiveness of IFA, MMN, and BEP (targeted and universal) interventions using current evidence available. 
 
-**Objective 2**: Comparing the cost-effectiveness of BEP (targed and universal) interventions using hypotehical hope-n-dreams effect for BEP. 
+**Objective 2**: Comparing the cost-effectiveness of BEP (targeted and universal) interventions using hypothetical hope-n-dreams effect for BEP. 
 
 .. important::
  note that there is now a set of current evidence scenarios (objective 1). Objective 2 (hopes-n-dreams) were the scenarios we modelled in our feb_2020 model using Gates provided aspirational effect sizes.
@@ -111,7 +111,7 @@ To understand the cost-effectiveness of BEP and MMN supplementation for pregnant
 3.1 Causal diagram
 ------------------
 
-  .. image:: causal_dag_bep_scenarios.svg
+  .. image:: causal_dag_bep_scenarios_v2.svg
 
 **Outcome (O)**:
 
@@ -156,7 +156,7 @@ Here is a memo describing the rationale underlying the causal structure of this 
    :widths: 5 20 20 20 10 20
    :header-rows: 1
 
-   * - Effect
+   * - Effect 
      - Description
      - Current evidence
      - Source
@@ -170,8 +170,8 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same 
    * - b (∆oMMN)
      - MMN vs IFA on birthweight in g
-     - +51.24 (43.71 to 58.76) 
-     - fixed effects meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
+     - +51.24 (43.71 to 58.76) fixed effects *or* +45.16 (32.31 to 58.02) random effects
+     - meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
      - same
      - same 
    * - d1 (∆BEP_mal)
@@ -188,10 +188,16 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - TPP target
    * - x
      - crude birthweight in g shift between low and normal BMI women
-     - -160.44g (-196.65 to -124.23) fixed effect *or* -142.93g (-232.68 to -53.18) random effects
+     - -160.44g (-196.65 to -124.23) fixed effects *or* -142.93g (-232.68 to -53.18) random effects
      - meta analysis of 3 studies :download:`memo <meta-analysis_BMI_vs_birthweight_memo.docx>`
      - same
      - same
+   * - f
+     - effect size of BMI on CGF (laz and wlz)
+     - none (although we will validate with correlation literature)
+     - Source
+     - RR = 2(1.5-5)
+     - Gates, informed by Zhou Br Nutr J 2019, Misra Med J Armed Forces India 2015; Yang Plos One 2015, Model assumption
    * - E_laz
      - BEP vs. control/no intervention on LAZ score at 6 months
      - none
@@ -217,11 +223,16 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same
      - same  
 
+.. note::
+  
+  use random effect values
+
 .. important::
-  1) this table reflects effect sizes for the DAGs show in causal diagram section which reflects new summer_2020 model structure. The difference is that we got rid of the effect size of BMI and laz/wlz (childgrowth stuff) but instead correlate birthweight and childgrowth using MAL-ED spearman co-efficient that chris analysed. We will need to update this if we cannot do this correlation and we need to use the old feb_2020 structure. 
-  2) also note that I have updated the effect size of MMN
-  3) updated effect size of BEP for current-evidence scenario
-  4) updated effect of BMI on birthweight to a continuous shift rather than back-calculating a shift using an RR of 2
+
+  1) b: also note that I have updated the effect size of ∆oMMN
+  2) d1 and d0: added effect size of BEP for **current-evidence scenario** (∆BEP_norm and ∆BEP_mal)
+  3) x: updated effect of BMI on birthweight to a continuous shift rather than back-calculating a shift using an RR of 2(1.5-5)
+  4) use random effects for x
 
 
 In this model, there are three 'entities' that affect child outcomes: 
@@ -303,7 +314,7 @@ F.  **Scenario F**: Offering basic++(IFA + MMN + BEP_targeted), using hopes-and-
 
 
 .. important::
-  note there are now E and F which uses hopes-n-dreams effect sizes for BEP_targeted
+  note there are now scenarios C and D which uses current-evidence effect sizes for BEP_targeted
 
 .. _5.0:
 
@@ -344,20 +355,21 @@ Green arrow indicates target effect sizes given by Gates TPP targets; dotted arr
 
 .. _5.3.1:
 
-5.3.1 model 1: Baseline
-~~~~~~~~~~~~~~~~~~~~~~~
+5.3.1 model 1: Baseline (scenario A)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The baseline model contains a baseline coverage rate of IFA and a proportion of malnourished women. Both IFA and mother's BMI status has an affect on birthweight. Hence we must calibrate the baseline model by IFA coverage and maternal BMI. 
 
 .. image:: baseline_coverage.svg
 
 Notation: 
-bmi1   Babies born to malnourished mothers with low BMI (<18.5) 
-bmi0   Babies born to normal mothers with BMI (>18.5)
-ifa1   Babies born to mothers who had IFA coverage
-ifa0   Babies born to mothers without IFA coverage
-pop    Baseline population 
-BW     Birthweight
+
+ | bmi1   Babies born to malnourished mothers with low BMI (<18.5) 
+ | bmi0   Babies born to normal mothers with BMI (>18.5)
+ | ifa1   Babies born to mothers who had IFA coverage
+ | ifa0   Babies born to mothers without IFA coverage
+ | pop    Baseline population 
+ | BW     Birthweight
 
 :underline:`Calibrating birthweight to maternal BMI and IFA baseline coverage`:
 
@@ -372,56 +384,133 @@ BW     Birthweight
   | Eq. 2: BW_bmi0_ifa1  - BWbmi0_ifa0 = +57.73g(7.66 to 107.79) Birthweight(g) difference from IFA vs nothing 
   | Eq. 3: BW_bmi1_ifa0 -  BWbmi0_ifa0 = -160.44g (-196.65 to -124.23) 
            :download:`memo <meta-analysis_BMI_vs_birthweight_memo.docx>`
-  | Eq. 4: M1 * IFA1 * (BW_bmi1_ifa1) + M1 * (1-IFA1) * (BW_bmi1_ifa0) + (1- M1)* IFA1 * BW_bmi0_ifa1 + (1- M1)* (1-IFA1) * BW_bmi0_ifa0 = BW_pop from GBD
+  | Eq. 4: M1 x IFA1 x (BW_bmi1_ifa1) + M1 x (1-IFA1) x (BW_bmi1_ifa0) + (1- M1) x IFA1 x BW_bmi0_ifa1 + (1- M1) x (1-IFA1) x BW_bmi0_ifa0 = BW_pop from GBD
+To get the ∆BW shift to apply to the GBD population by simulant attribute group:
 
-  To get the ∆BW shift to apply to the GBD population by simulant attribute group:
-
-   ∆BW_bmi1_ifa1 =  BW_pop - BW_bmi1_ifa1 (malnourished, covered by baseline IFA)
-   ∆BW_bmi1_ifa0 =  BW_pop - BW_bmi1_ifa0 (malnourished, not covered by baseline IFA)
-   ∆BW_bmi0_ifa1 =  BW_pop - BW_bmi0_ifa1 (normal, covered by baseline IFA)
-   ∆BW_bmi0_ifa0 =  BW_pop - BW_bmi0_ifa0 (normal, not covered by baseline IFA)
+  | ∆BW_bmi1_ifa1 =  BW_pop - BW_bmi1_ifa1 (malnourished, covered by baseline IFA)
+  | ∆BW_bmi1_ifa0 =  BW_pop - BW_bmi1_ifa0 (malnourished, not covered by baseline IFA)
+  | ∆BW_bmi0_ifa1 =  BW_pop - BW_bmi0_ifa1 (normal, covered by baseline IFA)
+  | ∆BW_bmi0_ifa0 =  BW_pop - BW_bmi0_ifa0 (normal, not covered by baseline IFA)
 
 
-.. important::
-  here I have not included the calibration shifts for BMI vs. laz/wlz as this current concept model documentation is consistent with summer_2020 model method. 
+:underline:`Maternal BMI and stunting`
+
+• Women with low BMI have higher risk for stunting
+
+  | LAZ_bmi1: mean LAZ score of babies born to low BMI mothers at 6 months
+  | LAZ_bmi0: mean LAZ score of babies born to normal BMI mothers at 6 months
+  | M1: proportion of mothers with low BMI (<18.5) 
+
+  | Eq. 1: LAZ_bmi1 - LAZ_bmi0 = shift in LAZ score corresponding to a RR of 2(1.5-5)  
+  | Eq. 2: LAZ_bmi1 x M1 + LAZ_bmi0 x (1- M1) = LAZ_pop from GBD 
+
+  | ∆LAZ_bmi1   = LAZ_pop - LAZ_bmi1  
+  | ∆LAZ_bmi0   = LAZ_pop - LAZ_bmi0 
+
+Method for how to calculate the shift in LAZ score from a risk ratio not shown
+
+:underline:`Maternal BMI and wasting`
+
+• Women with low BMI have higher risk for wasting
+
+  | WLZ_bmi1: mean WLZ score of babies born to low BMI mothers at 6 months
+  | WLZ_bmi0: mean WLZ score of babies born to normal BMI mothers at 6 months
+  | M1: proportion of mothers with low BMI (<18.5) 
+
+  | Eq. 1: WLZ_bmi1 - WLZ_bmi0 = shift in WLZ score corresponding to a RR of 2(1.5-5)  
+  | Eq. 2: WLZ_bmi1 x M1 + WLZ_bmi0 x (1- M1) = WLZ_pop from GBD 
+
+  | ∆WLZ_bmi1   = WLZ_pop - LAZ_bmi1  
+  | ∆WLZ_bmi0   = WLZ_pop - LAZ_bmi0 
+
+Method for how to calculate the shift in WLZ score from a risk ratio not shown
+
 
 .. _5.3.2:
 
 5.3.2 model 2: Interventions 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Apply the following intervention shifts according to scenarios 
+Apply the following intervention shifts according to interventions recieved in each of the scenarios A-F 
 
 .. image:: intervention_shifts.svg
 
 .. important:: 
-  note the highlighted effect sizes, which are different from the previous feb_2020 model.
+  note-
    
-   1) oMMN size has changed
-   2) there is now a current evidence and hope-n-dreams effect size for BEP
-   3) there is no shift in laz/wlz scores due to maternal BMI status
+   1) oMMN size has changed from feb_2020 model
+   2) there is now a current-evidence effect size for BEP
+   3) the baseline shifts in laz/wlz scores due to maternal BMI status can be kept in there if it is currently in there already, as it doesnt make any difference with or without it in scenarios A-E. The shifts in cgf z-scores due to maternal bmi only matters in scenarios F(i) and F(ii) which are hopes-n-dreams targeted scenarios. 
+
+Updates by scenario for summer_2020 model from feb_2020 model:
+
+1) Scenario A (some gets nothing, some gets basic)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results. 
+
+2) Scenario B (some gets nothing, some gets basic+)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size b
+
+3) Scenario C (some gets nothing, some gets basic++, use current-evidence for BEP | universal)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size d1 and d0 using value from current-evidence
+ * delete effect E_laz and E_wlz
+
+4) Scenario D (some gets nothing, some gets basic+, some gets basic++, use current-evidence for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size b
+ * update effect size d1 and d0 using value from current-evidence
+ * delete effect E_laz and E_wlz
+
+5) Scenario E (some gets nothing, some gets basic++, use hopes-n-dreams for BEP | universal)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+
+6) Scenario F(i) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * ensure effect size f is there.
+ * update effect size b
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
 
 
-.. _5.3.3:
+7) Scenario F(ii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * ensure effect size f is there.
+ * update effect size b
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+ * add correlation c
 
-5.3.3 model 3
-~~~~~~~~~~~~~
-
-
-
-.. _5.3.4:
-
-5.3.4 model 4
-~~~~~~~~~~~~~
-
-
-.. _5.3.5:
-
-5.3.5 model 5
-~~~~~~~~~~~~~
-
-
-
+8) Scenario F(iii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * take out effect f
+ * update effect size b
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+ * add correlation c
 
 
 .. _5.4:
@@ -435,7 +524,7 @@ Apply the following intervention shifts according to scenarios
 5.5 Output meta-table shell
 ---------------------------
 
-:download:`output table shell<xxx.xlsx>`
+:download:`output table shell<BEP_output_shell_metadata_24July2020.xlsx>`
 
 
 
