@@ -110,7 +110,7 @@ The health insurance provider is interested in estimating the yearly number of d
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-To estimate the yearly number of cases of breast cancer detected per 100,000 insured population under specific screening practices in order to identify pay-out trends for critical insurance claims (CII).  
+To estimate the yearly number of cases of breast cancer detected under specific screening practices and the yearly number of deaths from undetected breast cancer (both in unit of per 100,000 insured person-years) in order to identify pay-out trends for critical insurance claims (CII).  
 
 .. _3.0:
 
@@ -219,7 +219,7 @@ Scale-up of breast cancer screening coverage among insured population
 
 * Cohort type: Closed cohort of 200,000 insured male (50%) and female (50%) simulants
 * Age and sex: Aged 15 to 95+, 5 year-age bands, uniformly distributed age and sex structure
-* Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps. 
+* Time span: Jan 1, 2020 to Dec 31, 2039 with 36.5-day time-steps. 
 * Currently assume the sim population buys insurance on the first day of sim start. This means no one has prior insurance and were paid out for their cancers before sim start. 
 
 .. _5.2.2:
@@ -310,6 +310,8 @@ Breast cancer screening algorithm was derived from the 2019 guidelines from the 
  
 In initialization, We assume that no one has prior knowledge of their DCIS or BC status. Hence no one will be initialized into branch B or C at initialization. Subsequently, if DCIS or LCIS was detected.
 
+For individuals in disease state BC (regardless of detection) they have a transition rate of 0.1 (per person-year) of moving into a recovered state (R); this results in an average duration in state BC of 10 years. Individuals do not ever make a second BC CI claim. We assume that people in breast cancer state and recovered state follow exactly the same screening algorithm, namely branch A, B, or C depending on their age, sex, and family history status. Note that the negaive screening results were expected for those in R state in order to avoid double counting the CI claim from detected breast cancer.
+
 Swiss Re confirmed that no material is available in context of critical illness products for male at any age or female blelow 30 or above 70 in China. The entry age for adult products is 35 and 50 for senior products. So for a 20-year simulation, we wouldn't have much exposure above age 70. Also, for women who have purchased insurance, you would expect them to take up regular screening before 70 anyhow. 
 
 
@@ -394,6 +396,8 @@ Using OR value of 1.89 and P as 0.3
     - I'm wondering if the upper and lower limits of the truncated normal distributions should be narrower? What we are modelling here are the 'guideline times' to next screening, hence shouldn't they fall within the bounds of 1 year or 2 years according to the screening tree? Currently for someone who is in branch A, B, or C and supposed to have yearly screens, their next scheduled screen can be as far in the future as two years (with an upper bound of 700 days). 
 
     - I'm wondering if the Marketscan data, where we got the empirical distributions from, is giving us the time interval between screens that the patient actually showed up to? (which in our model is a combintation of time to next scheduled screening + probabiltiy of showing up)
+    
+    - For individuals survive more than 10 years after the diagnosis and treatment, they are going into a remission state and then continuing to get screened in the model.
 
 
 .. _5.3.3:
@@ -492,28 +496,28 @@ We assume family history does not affect incidence rates from LCIS to breast can
 5.3.5 DCIS and LCIS treatment model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- - treatment model baseline (using GBD incidence)
- - screening scale-up and treatment coverage scale-up model (changes incidence, should reduce breast cancer prevalence, mortaliaty and morbidity)
+ - treatment model baseline (using forecasted breast cancer incidence)
+ - screening scale-up and treatment coverage scale-up model (change in incidence should reduce breast cancer prevalence, mortaliaty and morbidity)
 
 :underline:`Baseleine scenario for DCIS`
 
- :math:`i_{BC|DICS}  = i_{BC|DCIS{tx1}} \times \ P_{tx1} + i_{BC|DCIS{tx0}} \times \ (1-P_{tx1})` 
+:math:`i_{BC|DCIS{tx1}}  = i_{BC|DCIS} \times (1 - PAF) \times RR_{tx|DCIS}`
+:math:`i_{BC|DCIS{tx0}}  = i_{BC|DCIS} \times (1 - PAF)`
 
+- Let tx be denoted as treatment for DCIS
+- Let :math:`i_{BC|DCIS{tx1}}` be the incidence of breast cancer from DCIS after treatment.
+- Let  :math:`i_{BC|DCIS{tx0}}` be the incidence of breast cancer from DCIS among those without treatment
+- Let PAF be the population attributable fraction of treatment for people who have DCIS
+- :math:`i_{BC|DCIS}` is the incidence of breast cancer from DCIS
+- :math:`P_{tx1}` is the proportion of people who have DCIS and treatment 
+- :math:`1-P_{tx1}` is the poportion of people who have DCIS and no treatment
+- :math:`RR_{tx|DCIS}` is the ratio of probability of developing breast cancer in treatment group versus no treatment group among the DCIS population, where value changes according to treatment type.
 
-- :math:`i_{BC|DICS}` is the incidence of breast cancer from DCIS (baseline) based on GBD's i_BC
-- let :math:`P_{tx1}` be the proportion of people who have DCIS and treatment. 
-- :math:`1- P_{tx1}` is the poportion of people who have DCIS and no treatment
-- let :math:`i_{BC|DCIS{tx1}}` be the incidence of breast cancer from DCIS after treatment.
-- let  :math:`i_{BC|DCIS{tx0}}` be the incidence of breast cancer from DCIS among those without treatment (we can caclulate this based on the equation above and apply to scale up scenario). 
+(1) :math:`RR_{tx|DCIS}` = 0.53 for mastectomy versus no surgery, 0.40 for lumpectomy + radiotherapy versus no surgery, and 0.69 for lumpectomy only versus no surgery, respectively. (Mannu 2020, BMJ)
+(2) PAF = :math:`\frac{P_{tx1}(RR_{tx|DCIS}-1)}{1+P_{tx1}(RR_{tx|DCIS}-1)}`
+(3) :math:`P_{tx1}` = 30% as baseline screening uptake x 100% as treatment uptake
 
-
-(1) :math:`i_{BC|DCIS{tx1}}` = 882 (95%CI 845-921) per 100,000 person years (Mannu 2020 **BMJ**)
-(2) :math:`P_{tx1}` = 30% as baseline screening uptake x 100% as treatment uptake
-(3) :math:`i_{BC|DCIS{tx0}}` = solve for this value
-
-Note: The distribution of treatment types in Mannu 2020 **BMJ**. 
-
-.. list-table::
+.. list-table:: The distribution of treatment types (Mannu 2020, BMJ) 
    :header-rows: 1
 
    * - Treatment among women diagnosed with unilateral DCIS 1988-2014 (N=30,496)
@@ -528,64 +532,38 @@ Note: The distribution of treatment types in Mannu 2020 **BMJ**.
      - 4.7%
 
 .. note:: 
-   - using stand-in values
-   - verification- check to see if   :math:`i_{BC|DCIS{tx1}} > i_{BC|DCIS{tx0}}` 
-   - also note conclusions from Narod 2015: However, although it is accepted that,
-    for women with invasive breast cancer, prevention of in breast
-    recurrence does not prevent death,(see ref 26 in paper) this has not been
-    widely accepted for women with DCIS. Also, for women with
-    invasive cancers it is accepted that, in terms of survival, lumpectomy
-    is equivalent to mastectomy, (see ref 27 in paper) even though patients who
-    undergo mastectomy experience fewer local recurrences. For
-    women with invasive cancer, radiotherapy is given to prevent
-    in-breast recurrence, but the effect of radiotherapy on mortality
-    is acknowledged to be small.(see ref 26 in paper) In the SEER database, these
-    relationships between local recurrence and mortality hold
-    equally well for patients with DCIS. These observations have
-    been reported in other studies as well.(see ref 7, 10, and 28 in paper)
-  - The incidences with and without treatment may not be very different. 
+   - using stand-in values for both coverage and relative risk of DCIS treatment. 
+   - verification: check to see if :math:`i_{BC|DCIS{tx1}} < i_{BC|DCIS{tx0}}`
+   - note conclusions from Narod 2015: However, although it is accepted that, for women with invasive breast cancer, prevention of in breast recurrence does not prevent death, (see ref 26 in paper) this has not been widely accepted for women with DCIS. Also, for women with invasive cancers it is accepted that, in terms of survival, lumpectomy is equivalent to mastectomy, (see ref 27 in paper) even though patients who undergo mastectomy experience fewer local recurrences. For women with invasive cancer, radiotherapy is given to prevent in-breast recurrence, but the effect of radiotherapy on mortality is acknowledged to be small. (see ref 26 in paper) In the SEER database, these relationships between local recurrence and mortality hold equally well for patients with DCIS. These observations have been reported in other studies as well. (see ref 7, 10, and 28 in paper)
 
 
 :underline:`Baseleine scenario for LCIS`
 
- :math:`i_{BC|LICS}  = i_{BC|LCIS{tx1}} \times \ P_{tx1} + i_{BC|LCIS{tx0}} \times \ (1-P_{tx1})` 
+:math:`i_{BC|LCIS{tx1}}  = i_{BC|LCIS} \times (1 - PAF) \times RR_{tx|LCIS}`
+:math:`i_{BC|LCIS{tx0}}  = i_{BC|LCIS} \times (1 - PAF)`
 
+- Let tx be denoted as treatment for LCIS
+- Let :math:`i_{BC|LCIS{tx1}}` be the incidence of breast cancer from LCIS after treatment.
+- Let  :math:`i_{BC|LCIS{tx0}}` be the incidence of breast cancer from LCIS among those without treatment
+- Let PAF be the population attributable fraction of treatment for people who have LCIS
+- :math:`i_{BC|LCIS}` is the incidence of breast cancer from LCIS
+- :math:`P_{tx1}` is the proportion of people who have LCIS and treatment 
+- :math:`1-P_{tx1}` is the poportion of people who have LCIS and no treatment
+- :math:`RR_{tx|LCIS}` is the ratio of probability of developing breast cancer in treatment group versus no treatment group among the LCIS population, where value changes according to treatment type.
 
-- :math:`i_{BC|LICS}` is the incidence of breast cancer from LCIS (baseline) based on GBD's i_BC
-- let :math:`P_{tx1}` be the proportion of people who have LCIS and treatment. 
-- :math:`1- P_{tx1}` is the poportion of people who have LCIS and no treatment
-- let :math:`i_{BC|LCIS{tx1}}` be the incidence of breast cancer from LCIS after treatment.
-- let  :math:`i_{BC|LCIS{tx0}}` be the incidence of breast cancer from LCIS among those without treatment (we can caclulate this based on the equation above and apply to scale up scenario). 
-
-
-(1) :math:`i_{BC|LCIS{tx1}}` = 488 per 100,000 PY from King 2015, Journal of Clinical Oncology
-(2) :math:`P_{tx1}` = 30% as baseline screening uptake x 100% as treatment uptake
-(3) :math:`i_{BC|LCIS{tx0}}` = solve for this value  
+(1) :math:`RR_{tx|LCIS}` = 0.44 (95% CI 0.16-1.06) for those treated with tamoxifen versus placebo. (Fisher 1998, JNCI)
+(2) PAF = :math:`\frac{P_{tx1}(RR_{tx|LCIS}-1)}{1+P_{tx1}(RR_{tx|LCIS}-1)}`
+(3) :math:`P_{tx1}` = 30% as baseline screening uptake x 100% as treatment uptake
 
 .. note:: 
-   - using stand-in values
-   - verification- check to see if :math:`i_{BC|LCIS{tx1}} > i_{BC|LCIS{tx0}}` 
-   - note The incidence of breast cancer for those diagnosed with LCIS and received tamoxifen alone = 383 per  100,000 PY from Fisher 1998, JNCI.
-
-The distribution of treatment types in 
-
-
-.. list-table::
-   :header-rows: 1
-
-   * - Treatment among women diagnosed with LCIS
-     - Proportion%
-   * - surveillance only
-     - 78%
-   * - surveillance + chemoprevention
-     - 17%
-   * - mastectomy
-     - 5%
+   - using stand-in values for both coverage and relative risk of LCIS treatment.
+   - verification: check to see if :math:`i_{BC|LCIS{tx1}} < i_{BC|LCIS{tx0}}` 
+   - note treatment efficacy of tamoxifen is slightly lower in paticipants with family history as compared with those without family history, hence we can assume that the relative risk of treatment is weakly or not associated with family history. 
 
 
 :underline:`Alternative scenarios`
 
-As screening proportion increases, so will :math:`1- P_{tx1}`. Hence, a higher proportion of simulants will have incidence :math:`i_{BC|DCIS{tx1}}`. 
+As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger proportion of simulants will have incidence :math:`i_{BC|DCIS{tx1}}` or :math:`i_{BC|LCIS{tx1}}`. 
 
 
 
@@ -621,15 +599,15 @@ Compare age-/sex-specific breast cancer detection rate calculated from simulatio
 
 :underline:`Model 3: Alternative Screening Scenario`
 
-Compare year-specific screening coverage yield from simulation to what we proposed in scenario design. The population screening coverage can be calculated from dividing `attended screening event count` by `insured population size` for each year. This coverage is supposed to be 30% whole time at baseline, it reaches 75% in 2030 at alternative scenario with 5% average increase from 2021 to 2030 and keep 75% till 2040.
+Compare year-specific screening coverage yield from simulation to what we proposed in scenario design. The population screening coverage can be calculated from dividing `attended screening event count` by `scheduled screening event count` for each year. This coverage is supposed to be 30% whole time at baseline, it reaches 75% in 2030 at alternative scenario with 5% average increase from 2021 to 2030 and keep 75% till 2040.
 
 :underline:`Model 4: Family History Risk Factor`
 
-TBD
+Compare prevalence and relative risk of family history from simulation to extracted literature values, neither of the measures are dependent on age, sex, and year in simulation. 
 
 :underline:`Model 5: Treatment`
 
-TBD
+After we adjust the treatment coverage for DCIS and LCIS to a value not equal to 100%, we should compare relative risk of treatment for DCIS yield from simulation to literature evidence, and also repeat the comparison for LCIS.  
 
 .. _6.0:
 
@@ -662,3 +640,4 @@ d.  What's the duration of people stay in DCIS or LCIS?
 e.  No forecast data is avalialbe for DCIS and LCIS, the measures are imputed from marketscan outpatient data and breast cancer forecasts.
 f.  No false positives will be captured in the simulation if we assume 100% specificity for different breast cancer screening tests.
 g.  We assume that breast cancer always progress through the cancer in-situ stage to the malignant stage.
+h.  We set a constant breast cancer screening coverage across ages, where the real world may have a larger value in younger population and smaller value in elder population.

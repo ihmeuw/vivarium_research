@@ -127,19 +127,21 @@ Compartmental Diagram
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-+---------------------------------+
-| State definitions               |
-+============+====================+
-| State      | State definitions  |                       
-+------------+--------------------+
-| S          | Susceptible        | 
-+------------+--------------------+
-| DCIS       | with DCIS          | 
-+------------+--------------------+
-| LCIS       | with LCIS          | 
-+------------+--------------------+
-| BC         | with breast cancer | 
-+------------+--------------------+
++--------------------------------------------+
+| State definitions                          |
++============+===============================+
+| State      | State definitions             |                       
++------------+-------------------------------+
+| S          | Susceptible                   | 
++------------+-------------------------------+
+| DCIS       | with DCIS                     | 
++------------+-------------------------------+
+| LCIS       | with LCIS                     | 
++------------+-------------------------------+
+| BC         | with breast cancer            | 
++------------+-------------------------------+
+| R          | recovered from breast cancer  | 
++------------+-------------------------------+
 
 .. list-table:: State Data
    :widths: 10 25 25 40
@@ -201,24 +203,53 @@ State and Transition Data Tables
      - cause specific mortality rate
      - csmr_c429= :math:`\frac{\text{deaths_c429}}{\text{population}}`
      - 
+   * - R
+     - prevalence
+     - 0
+     - No initialization for recovered state
+   * - R
+     - excess mortality rate
+     - 0
+     - 
+   * - R
+     - disability weights
+     - 0
+     - 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Transition data                                                                                                                                                        |
-+============+===============+===============+======================================================================+====================================================+ 
-| Transition | Source state  | Sink state    | Value                                                                | Notes                                              |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_DCIS     | S             |  DCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | crude prevalence ratio of DCIS                                     |                                                    |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_LCIS     | S             |  LCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | crude prevalence ratio of LCIS                                     |                                                    |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`     | i_BC|DCIS = i_BC /prev_(DCIS+LCIS)                 |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`     | i_BC|LCIS = i_BC /prev_(LCIS+DCIS)                 |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+.. list-table:: Transition Data
+   :widths: 5 5 5 30 30
+   :header-rows: 1
+
+   * - Transition
+     - Source state
+     - Sink state
+     - Value
+     - Notes
+   * - i_DCIS
+     - S
+     - DCIS
+     - :math:`\frac{\text{prev_c429}\times\text{crude prevalence ratio of DCIS}}{\text{duration_DCIS}}`
+     - prev_c429 comes from forecast data for 2020-2040
+   * - i_LCIS
+     - S
+     - LCIS
+     - :math:`\frac{\text{prev_c429}\times\text{crude prevalence ratio of LCIS}}{\text{duration_LCIS}}`
+     - prev_c429 comes from forecast data for 2020-2040
+   * - i_BC|DCIS
+     - DCIS
+     - BC
+     - :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`
+     - i_BC|DCIS = i_BC / prev_(DCIS+LCIS)
+   * - i_BC|LCIS
+     - LCIS
+     - BC
+     - :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`
+     - i_BC|LCIS = i_BC / prev_(DCIS+LCIS)
+   * - r_BC
+     - BC
+     - R
+     - 0.1 per person-years regardless of age
+     - No transition out of recovered state
 
 .. list-table:: Data sources
    :widths: 30 30 30
@@ -233,6 +264,12 @@ State and Transition Data Tables
    * - prev_LCIS
      - derived from LCIS prevalence ratio and prev_c429
      - see below for prevalence ratio calculation
+   * - duration_DCIS
+     - extracted from literature
+     - temporarily use 3 years
+   * - duration_LCIS
+     - extracted from literature
+     - temporarily use 5 years
    * - crude-prevalence ratio 
      - derived from external data
      - see below for prevalence ratio calculation
@@ -251,6 +288,9 @@ State and Transition Data Tables
    * - Disability weights for breast cancer sequelae
      - YLD appendix
      - total breast cancer disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
+   * - remission_c429
+     - GBD 2017
+     - remission rate of breast cancer = 1 / duration of breast cancer = 1/10 per person-years for all ages 
    * - Population
      - demography for 2017 
      - mid-year population
@@ -297,7 +337,9 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
       According to GBD definition, patients are considered cured if they have
       survived more than 10 years after the mastectomy. However, the excess
       mortality rate still exists in simulation and generates extra deaths if
-      we plan to run the model over 10 years.
+      we plan to run the model over 10 years. The way we handle this problem is
+      to send patients to a recovered state (R) with transition rate from bresat
+      cancer to R calculated as 1 divided by duration of breast cancer (10 years).
 
 
 
