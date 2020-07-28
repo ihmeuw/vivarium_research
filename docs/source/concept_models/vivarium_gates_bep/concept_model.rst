@@ -212,13 +212,13 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - TPP target
    * - *c_laz*
      - Spearman correlation co-efficient for birthweight and LAZ
-     - 0.394 :download:`spreadsheet <child_growth_birthweight_correlations.xlsx>`
+     - 0.394 (0.353 to 0.433; sd = 0.020) :download:`spreadsheet <child_growth_birthweight_correlations.xlsx>`
      - MAL-ED study
      - same
      - same  
    * - *c_wlz*
      - Spearman correlation co-efficient for birthweight and LAZ
-     - 0.308 :download:`spreadsheet <child_growth_birthweight_correlations.xlsx>`
+     - 0.308 (0.263 to 0.351; sd = 0.022)  :download:`spreadsheet <child_growth_birthweight_correlations.xlsx>`
      - MAL-ED study
      - same
      - same  
