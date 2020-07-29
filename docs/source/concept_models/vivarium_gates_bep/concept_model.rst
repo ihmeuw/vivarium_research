@@ -217,7 +217,7 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same
      - same  
    * - *c_wlz*
-     - Spearman correlation co-efficient for birthweight and LAZ
+     - Spearman correlation co-efficient for birthweight and WLZ
      - 0.308 (0.263 to 0.351; sd = 0.022)  :download:`spreadsheet <child_growth_birthweight_correlations.xlsx>`
      - MAL-ED study
      - same
