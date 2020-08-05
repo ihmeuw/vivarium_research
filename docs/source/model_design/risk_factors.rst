@@ -531,12 +531,93 @@ Difference measures relating to the whole population tend to be more useful and 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
 
-The population attributable fraction is a quantification of the proportion of 
-of a given cause outcome, such as cases, deaths, or DALYs, that could be 
-eliminated by removing a risk exposure.
+Measures of population impact estimate the expected impact on a population of removing or changing the distribution of risk factors in that population. They take into account the both the strength of the association (estimated by a measure of effect, like the rate ratio) **and** the distribution of the risk factor in the population. It assumes that we have established that the association between disease and risk factor is *causal*. If this assumption is true, population impact estimates measure how much of the disease in the population is caused by the suspected risk factor. 
+
+It is important to remember that measures of population impact are **specific to the population studied**, and can **only be generalised to populations with exactly the same distribution of risk factors**. Also note that risk factors that are strongly associations but which are rare, like being exposed to an X ray in pregnancy and leukaemia in childhood, may have a large measure of effect but small measure of impact.
+
+There are two main measures of population impact: 1) population attributable risk (PAR) and 2) population attributable risk fraction (PAF).
+
+Population attributable risk (PAR)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Example 2x2 risk table:
+
++----------------+--------------+--------------+---------------------+
+|                | Exposed      | Unexposed     | Total              | 
++----------------+--------------+--------------+---------------------+
+|With disease    |  a           |  c           | a+c                 | 
++----------------+--------------+--------------+---------------------+
+|Without disease |  b           |  d           | b+d                 |
++----------------+--------------+--------------+---------------------+
+|Total           | a+b          | c+d          | a+b+d+c             |
++----------------+--------------+--------------+---------------------+ 
+|Risk            | r1 = a/(a+b) | r0 = c/(c+d) | r = (a+c)/(a+b+c+d) |
++----------------+--------------+--------------+---------------------+ 
+
+
+The PAR is the absolute difference between the risk/rate in the whole population (r) and the risk/rate in the unexposed group (r0). 
+
+Population attributable risk (PAR) is calculated as
+
+	PAR = r - r0
+
+	*Note* that the risk difference (RD) in the earlier section contrasts the rate/risk in the exposed group (r1) and the rate/risk in the unexposed group (r0 = r1-r0. 
+
+If we know the risks among the exposed (r1) and unexposed (r0), and the prevalence of exposure in the population ( :math:`p_p` )
+
+.. math:: PAR = p_p (r1-r0)
+
+where 
+
+.. math:: p_p = \frac{a+b}{a+b+c+d}
+
+.. code-block:: Python
+
+  The prevalence of exposure in the population is 
+                                                                                      
+  It can be shown that 
+
+  PAR = r - r0
+      = (a+c)/(a+b+c+d) - c/(c+d)
+      = (ad-bc)/[(a+b+c+d)(c+d)]
+
+  PAR =  .. math:: p_p (r1-r0)
+      = (a+b)/(a+b+c+d) x [(a/(a+b) - c/(c+d)]
+      = (ad-bc)/[(a+b+c+d)(c+d)]
+
+
+Population attributable risk fraction (PAF)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The population attributable fraction is a quantification of the proportion of a given cause outcome, such as cases, deaths, or DALYs, that could be eliminated by removing a risk exposure.
+It is the proportion of all cases in the whole study population (exposed and unexposed) that may be attributed to the exposure, assuming a causal association.
+The population attributable risk fraction (PAF) is estimated by dividing the population attributable risk by the risk in the total population (r).
+
+   PAF = PAR/r
+
+       = (r - r0) / r
+
+When only the risk ratio (RR) and the **prevalence of exposure in the population** are known, PAF can also be written as:
+
+.. math:: \text{PAF}=\frac{p_p(RR-1)}{1+p_p(RR-1)} ...(a)
+
+Note that the PAF increases with the rate ratio θ, but also with the prevalence of exposure p. It will therefore vary between populations, depending on how common the
+exposure is.
+
+It is important to note the PAF in equation (a) will give us an accurate representation of the porportion of cases occuring in the total population that would be avoided if the exposure were removed only if the assumptions that 1) the observed association between exposure and disease is causal, and that 2) it is free from confounding and bias. 
 
 .. todo::
-	Fill in PAF overview
+
+  I'm wondering if it is it possible to illustrate this using DAGs? or visually? I'll have a think
+
+Although equation (a) is the best-known formula for the PAF and the one used in GBD PAF calculations, there is an alternative formulation which can be useful when we wish to take account of confounders and joint effects
+
+If you know the **prevalence of exposure among cases** (:math:`p_c`) there is a very useful formula for PAF which can be used with risk or rate ratios that have been adjusted for confounding:
+
+.. math:: \text{PAF}=\frac{p_c(RR_{adj}-1)}{RR_{adj}} ...(b)
+
+However, it is not always possible to find the *prevalence of exposure among cases* (:math:`p_c`) and so equation (a) is used in our models. Below section talks about the bias when we do so. 
+
 
 Bias in PAF Calculation
 ^^^^^^^^^^^^^^^^^^^^^^^
