@@ -531,7 +531,9 @@ Difference measures relating to the whole population tend to be more useful and 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
 
-Measures of population impact estimate the expected impact on a population of removing or changing the distribution of risk factors in that population. They take into account the both the strength of the association (estimated by a measure of effect, like the rate ratio) **and** the distribution of the risk factor in the population. It assumes that we have established that the association between disease and risk factor is *causal*. If this assumption is true, population impact estimates measure how much of the disease in the population is caused by the suspected risk factor. 
+Measures of population impact estimate the expected impact on a population of removing or changing the distribution of risk factors in that population. In GBD, this is the level of exposure that is equal to the TMREL. They take into account the both the strength of the association (estimated by a measure of effect, like the rate ratio) **and** the distribution of the risk factor in the population. It assumes that we have established that the association between disease and risk factor is *causal*. If this assumption is true, population impact estimates measure how much of the disease in the population is caused by the suspected risk factor. 
+
+Intuitively, PAF equals (O − E)/O, where O and E refer to the observed number of cases and the expected number of cases under no exposure, respectively. The term “attributable” has a causal interpretation: PAF is the estimated fraction of all cases that would not have occurred if there had been no exposure. As an example, in early 1950, Doll derived O = 11189 and E= 1875 using the Doll and Hill case-control study of smoking and lung cancer deaths throughout England and Wales, so the smoking PAF for lung cancer deaths was (11189 − 1875)/11189= 83%.
 
 It is important to remember that measures of population impact are **specific to the population studied**, and can **only be generalised to populations with exactly the same distribution of risk factors**. Also note that risk factors that are strongly associations but which are rare, like being exposed to an X ray in pregnancy and leukaemia in childhood, may have a large measure of effect but small measure of impact.
 
@@ -616,7 +618,11 @@ If you know the **prevalence of exposure among cases** (:math:`p_c`) there is a 
 
 .. math:: \text{PAF}=\frac{p_c(RR_{adj}-1)}{RR_{adj}} ...(b)
 
-However, it is not always possible to find the *prevalence of exposure among cases* (:math:`p_c`) and so equation (a) is used in our models. Below section talks about the bias when we do so. 
+The following diagram illustrates how the PAF is derived intuitively from the **prevalence of exposure among cases** (:math:`p_c`) 
+
+.. image:: PAF_intuitive_diagram.svg
+
+However, it is not always possible to find the *prevalence of exposure among cases* (:math:`p_c`) and so equation (a) is used in our simulation models. This will introduce bias. The following section talks about the bias that occurs. 
 
 
 Bias in PAF Calculation
@@ -816,3 +822,22 @@ References
 .. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
    Retrieved 11 March 2020.
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
+
+
+Estimation of the PAF in epidemiologicl studies
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  detail this section more and give modified PAF for each study design
+
+Cohort studies: Simplest situation, since disease rates in exposed and unexposed can be measured directly
+Cross-sectional studies: Prevalence of a disease state is measured, rather than its incidence.
+Unmatched case-control studies: Ratio of two proportions, given independent samples
+Matched case-control studies: Can use alternative equation in this case, providing the cases can be regarded as a representative sample of all cases.
+Exposure with multiple levels: Estimate the proportion of cases attributable to each level of exposure, the proportion of cases that would be avoided if the rate of disease in each exposure group were reduced to that in the unexposed (or baseline) group.
+There are some caveats to the cohort studies estimation of PAF, if exposed and unexposed cohorts have been sampled separately for the study. A separate estimate of p or p’ will be required.
+
+In cross-sectional studies, this is also known as the proportion of prevalent cases in the population. There are some potential issues this type of study of interpreting prevalence rather than incidence cases. If an exposure is associated with increased prevalence of disease, it could be because the exposure increases the risk of developing the disease, or because it increases the amount of time a person has the disease, or even because it increases survival from the disease.
+
+This use of PAF is recommended for chronic disease states.
