@@ -400,6 +400,14 @@ Using OR value of 1.89 and P as 0.3
     - For individuals survive more than 10 years after the diagnosis and treatment, they are going into a remission state and then continuing to get screened in the model.
 
 
+:underline:`IV. Screening initialization`
+
+The date of the first screening appointment (T_appt) for females at age between 30 and 70 is determined as follows. We assume that each simulant had a previous appointment scheduled at some point before the simulation begins. We calculate the time between that past appointment and their next appointment (delta_T) using the methodology outlined in Section 5.3.2.III (Time to next scheduled screening). With a uniform distribution we randomly determine how far along that time interval between appointments each individual is (X) at the beginning of the simulation (T_0). For females under 30 when the simulation begins the methodology is identical, except T_0 is the simulant's 30th birthday rather than the beginning of the simulation. No screening appointment will be initialized for males at any age, as well as females above 70.
+
+.. image:: screening_event_time.svg
+
+
+
 .. _5.3.3:
 
 5.3.3 Alternative screening scenarios model
