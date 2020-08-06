@@ -565,17 +565,117 @@ We assume family history does not affect incidence rates from LCIS to breast can
 
 As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger proportion of simulants will have incidence :math:`i_{BC|DCIS{tx1}}` or :math:`i_{BC|LCIS{tx1}}`. 
 
-
-
 .. _5.4:
 
-5.4 Desired outputs
--------------------
+5.4 Input Data Sources
+-----------------------
+
+
++------------------------------------------------------------------------+
+|                 Correspondence With Manoj, Cancer Expert               |
++------------------------+--------------------+--------------------------+
+|  Assumption            |      Evidence      |       Manoj’s Expert     |
+|  in Model              |                    |          Opinion         |
++------------------------+--------------------+--------------------------+
+| Excess mortality of 0  |                    |We are correct in this    |
+| for in-situ growths    |                    |assumption. Those who     |
+|                        |                    |did die were likely       |
+|                        |                    |improperly diagnosed or   |
+|                        |                    |treated and invasive      |
+|                        |                    |cancer would have been the|
+|                        |                    |real cause of death       |
++------------------------+--------------------+--------------------------+      
+|DCIS duration of        |    Literature      |                          |
+|3 years                 |                    |                          |
++------------------------+--------------------+--------------------------+
+|LCIS duration of        |Assumption, have not|                          |
+|5 years                 |found evidence for  |                          |
+|                        |this yet besides a  |                          |
+|                        |longer duration     |                          |
+|                        |than DCIS           |                          |
++------------------------+--------------------+--------------------------+               
+|Relative Risk of family |Meta-analysis using |                          |
+|history of 2.64 (UI 1.56|10 Chinese specific |                          |
+|– 4.47) for China       |papers (11 data     |                          |
+|population and 1.92 (UI |points). Wang 1992, |                          |
+|1.55 - 2.38) for China  |Huang 2007, Zheng   |                          |
+|and other countries     |2010, Yu 2012, Zhou |                          |
+|                        |2013, Wang 2015,    |                          |
+|                        |Wang 2019, Yu 2012, |                          |
+|                        |Wang 1992, Li 2013, |                          |
+|                        |Tao 1988 and 7 other|                          |
+|                        |countries papers    |                          |
+|                        |Wahidin 2018,       |                          |
+|                        |Gokdemir-Yazar 2014,|                          |
+|                        |Martin 2010, Thomson|                          |
+|                        |2014, Baglia 2018,  |                          |
+|                        |Carpenter 2003,     |                          |
+|                        |Khalis 2018         |                          |
++------------------------+--------------------+--------------------------+
+|DCIS treatment efficacy:|Literature, Mannu   |                          |
+|Relative risk of 0.53   |2020 BMJ (UK        |                          |
+|for mastectomy versus   |specific)           |                          |
+|no surgery,             |                    |                          |
+|Relative risk of 0.40   |                    |                          |
+|for lumpectomy +        |                    |                          |
+|radiotherapy versus no  |                    |                          |
+|surgery,                |                    |                          |
+|Relative risk of 0.69   |                    |                          |
+|for lumpectomy only     |                    |                          |
+|versus no surgery       |                    |                          |
++------------------------+--------------------+--------------------------+
+|LCIS treatment efficacy:|Literature, Fisher  |                          |
+|Rate ratio of 0.44 (95% |1998 JNCI           |                          |
+|CI 0.16 - 1.06)for those|                    |                          |
+|treated with tamoxifen  |                    |                          |
+|versus placebo          |                    |                          |
++------------------------+--------------------+--------------------------+
+|Proportion of treatment |King 2015, J Clin   |                          |
+|among women diagnosed   |Oncol               |                          |
+|with LCIS: Surveillance |                    |                          |
+|alone = 78.4%,          |                    |                          |
+|Surveillance +          |                    |                          |
+|chemoprevention = 16.3%,|                    |                          |
+|Mastectomy = 5.3%       |                    |                          |
++------------------------+--------------------+--------------------------+
+|100% of people diagnosed|King 2015, J Clin   |                          |
+|with DCIS receive       |Oncol 100% treatment|                          |
+|treatment               |coverage for those  |                          |
+|                        |diagnosed with DCIS |                          |
+|                        |and enrolled in     |                          |
+|                        |hospital            |                          |
++------------------------+--------------------+--------------------------+
+|100% of people diagnosed|King 2015, J Clin   |                          |
+|with LCIS receive       |Oncol 100% treatment|                          |
+|treatment               |coverage for those  |                          |
+|                        |diagnosed with LCIS |                          |
+|                        |and enrolled in     |                          |
+|                        |hospital            |                          |
++------------------------+--------------------+--------------------------+
+|30% screening coverage  |Bao et al 2018 found|                          |
+|in baseline scenario    |22.5% screening     |                          |
+|                        |probability in      |                          |
+|                        |general population  |                          |
+|                        |and we assumed that |                          |
+|                        |the insured         |                          |
+|                        |population in our   |                          |
+|                        |simulation would    |                          |
+|                        |have a higher       |                          |
+|                        |attendence coverage |                          |
+|                        |than the general    |                          |
+|                        |population.         |                          |
++------------------------+--------------------+--------------------------+
 
 
 .. _5.5:
 
-5.5 Output meta-table shell
+5.5 Desired outputs
+-------------------
+
+
+.. _5.6:
+
+5.6 Output meta-table shell
 ---------------------------
 
 :download:`output table shell<output_table_shell_breastcancer.csv>`
@@ -584,9 +684,9 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
   any special stratifications?
 
 
-.. _5.6:
+.. _5.7:
 
-5.6 Validation and verification
+5.7 Validation and verification
 -------------------------------
 
 :underline:`Model 1: Core Cancer`
