@@ -382,9 +382,10 @@ Notation:
 
   | Eq. 1: BW_bmi1_ifa1  - BWbmi1_ifa0 = +57.73g(7.66 to 107.79) Birthweight(g) difference from IFA vs nothing 
   | Eq. 2: BW_bmi0_ifa1  - BWbmi0_ifa0 = +57.73g(7.66 to 107.79) Birthweight(g) difference from IFA vs nothing 
-  | Eq. 3: BW_bmi1_ifa0 -  BWbmi0_ifa0 = -160.44g (-196.65 to -124.23) 
+  | Eq. 3: BW_bmi1_ifa0 -  BWbmi0_ifa0 = -142.93g (-232.68 to -53.18)  random effects
            :download:`memo <meta-analysis_BMI_vs_birthweight_memo.docx>`
   | Eq. 4: M1 x IFA1 x (BW_bmi1_ifa1) + M1 x (1-IFA1) x (BW_bmi1_ifa0) + (1- M1) x IFA1 x BW_bmi0_ifa1 + (1- M1) x (1-IFA1) x BW_bmi0_ifa0 = BW_pop from GBD
+  
 To get the ∆BW shift to apply to the GBD population by simulant attribute group:
 
   | ∆BW_bmi1_ifa1 =  BW_pop - BW_bmi1_ifa1 (malnourished, covered by baseline IFA)
