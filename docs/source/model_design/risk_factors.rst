@@ -531,11 +531,11 @@ Difference measures relating to the whole population tend to be more useful and 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
 
-Measures of population impact estimate the expected impact on a population of removing or changing the distribution of risk factors in that population. In GBD, this is the level of exposure that is equal to the TMREL. They take into account the both the strength of the association (estimated by a measure of effect, like the rate ratio) **and** the distribution of the risk factor in the population. It assumes that we have established that the association between disease and risk factor is *causal*. If this assumption is true, population impact estimates measure how much of the disease in the population is caused by the suspected risk factor. 
+Measures of population impact estimate the expected health impact on a population *if* the distribution of risk factors that cause disease in that population is changed or removed. In GBD, this means lowering the level of exposure to disease causing risk factors to that of the theoretical minimum risk exposure level (TMREL, see TMREL section). Measures of impact take into account both the **strength of the association** (estimated by a measure of effect, like the rate ratio) *and* the **distribution of the risk factor in the population**. Measures of impact assume that we have established that the association between disease and risk factor is *causal*. If this assumption is true, population impact estimates measure how much of the disease in the population is caused by the suspected risk factor. 
 
-Intuitively, PAF equals (O − E)/O, where O and E refer to the observed number of cases and the expected number of cases under no exposure, respectively. The term “attributable” has a causal interpretation: PAF is the estimated fraction of all cases that would not have occurred if there had been no exposure. As an example, in early 1950, Doll derived O = 11189 and E= 1875 using the Doll and Hill case-control study of smoking and lung cancer deaths throughout England and Wales, so the smoking PAF for lung cancer deaths was (11189 − 1875)/11189= 83%.
+The population attributable fraction (PAF) is a measure of population impact. Intuitively, PAF equals (O − E)/O, where O and E refer to the observed number of cases and the expected number of cases under no exposure or a minimum exposure level, respectively. As an example, in early 1950, using the Doll and Hill case-control study of smoking and lung cancer deaths throughout England and Wales, Doll derived O = 11189 (observed number of cases in a population distributed with smokers and non-smokers) and E = 1875 (expected number of cases in a population of non-smokers). Therefore the smoking PAF for lung cancer deaths was (11189 − 1875)/11189= 83%; interpreted as 83% of lung cancer deaths was caused by smoking and if no one smoked, 83% of lung cancer cases can be avoided. The term “attributable” has a causal interpretation: **PAF is the estimated fraction of all cases that would not have occurred if there had been no exposure (or TMREL level of exposure)**. 
 
-It is important to remember that measures of population impact are **specific to the population studied**, and can **only be generalised to populations with exactly the same distribution of risk factors**. Also note that risk factors that are strongly associations but which are rare, like being exposed to an X ray in pregnancy and leukaemia in childhood, may have a large measure of effect but small measure of impact.
+It is important to remember that measures of population impact are **specific to the population studied**, and can **only be generalised to populations with exactly the same distribution of risk factors**. Also note that risk factors that are strongly associations but which are rare, like being exposed to an X-ray in pregnancy and leukaemia in childhood, may have a large measure of effect but small measure of impact.
 
 There are two main measures of population impact: 1) population attributable risk (PAR) and 2) population attributable risk fraction (PAF).
 
@@ -562,8 +562,9 @@ The PAR is the absolute difference between the risk/rate in the whole population
 Population attributable risk (PAR) is calculated as
 
 	PAR = r - r0
+	Relative risk RR = r1/r0
 
-	*Note* that the risk difference (RD) in the earlier section contrasts the rate/risk in the exposed group (r1) and the rate/risk in the unexposed group (r0 = r1-r0. 
+	*Note* that the risk difference (RD) in the earlier section contrasts the rate/risk in the exposed group (r1) and the rate/risk in the unexposed group (r0 = r1-r0). 
 
 If we know the risks among the exposed (r1) and unexposed (r0), and the prevalence of exposure in the population ( :math:`p_p` )
 
@@ -588,12 +589,12 @@ where
       = (ad-bc)/[(a+b+c+d)(c+d)]
 
 
+
+
 Population attributable risk fraction (PAF)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The population attributable fraction is a quantification of the proportion of a given cause outcome, such as cases, deaths, or DALYs, that could be eliminated by removing a risk exposure.
-It is the proportion of all cases in the whole study population (exposed and unexposed) that may be attributed to the exposure, assuming a causal association.
-The population attributable risk fraction (PAF) is estimated by dividing the population attributable risk by the risk in the total population (r).
+The population attributable fraction is a quantification of the proportion of a given cause outcome, such as cases, deaths, or DALYs, that could be eliminated by removing a risk exposure. It is the proportion of all cases in the whole study population (exposed and unexposed) that may be attributed to the exposure, assuming a causal association. The population attributable risk fraction (PAF) is estimated by dividing the population attributable risk by the risk in the total population (r).
 
    PAF = PAR/r
 
