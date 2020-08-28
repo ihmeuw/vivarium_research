@@ -130,8 +130,17 @@ Mediators
 
 4.0 Intervention
 ++++++++++++++++
-Scale-up of both cervical cancer screening coverage and HPV vaccination rate 
-among insured population
+There is an urgent need to implement the evidenced-based interventions (e.g. HPV 
+vaccination, cervical cancer screening, management of detected disease) for eliminating cervical cancer as a public health problem, such action must be 
+strategic in nature. [WHO cervical cancer elimination strategy]_
+
+Based on SwissRe's interest, our simulation intervention combined the cervical 
+cancer screening and HPV vaccination to evaluate the extreme of the cervical 
+cancer detections in following scenarios:
+ - Baseline (lowest claim rate/payout): Scale-up of HPV vaccination while 
+   keeping cervical cancer screening constant over time among insured population.
+ - Alternative (highest claim rate/payout): Scale-up of cervical cancer 
+   screening while keeping HPV vaccination constant over time among insured population.
 
 .. _4.1:
 
