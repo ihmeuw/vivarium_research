@@ -115,7 +115,8 @@ Outcome
 Most proximal determinant/exposure
  - Cervical cancer status
  - Cervical cancer screening
- - HPV infection  
+ - HPV infection
+ - HPV vaccination status
 Confounders
  - age
  - sex
@@ -136,14 +137,15 @@ among insured population
 
 4.1 Simulation scenarios
 ------------------------
-**Baseline:** project existing level of HPV vaccination for women aged 15 to 44 
-and cervical cancer screening for women aged 25 to 64, where:
+**Baseline:** by 2040, project existing level of cervical cancer screening for 
+women aged 21 to 65; linear ramp up HPV vaccination to cover 90% of the women 
+aged 15 to 45 in 2030, then stay 90% in 2031-2040. Where:
  - Women without HPV infection are provided with cytology every three years
  - Women with HPV infection are provided cytology every year
 
-**Alternative scenario:** by 2040, linear ramp up both HPV vaccination to cover 
-90% of the women aged 15 to 44 in 2021-2025 and cervical cancer screening to cover 
-70% of women aged 25 to 64 in 2021-2030, where:
+**Alternative scenario:** by 2040, project existing level of HPV vaccination for 
+women aged 15 to 45; linear ramp up cervical cancer screening to cover 70% of the 
+women aged 21 to 65 in 2030, then stay 70% in 2031-2040. Where:
  - Women without HPV infection are provided with cytology every three years
  - Women with HPV infection are provided cytology every year
 
@@ -159,34 +161,36 @@ and cervical cancer screening for women aged 25 to 64, where:
    * - Baseline
      - Cervical cancer screening
      - 2020-2040
-     - 20%
+     - 25%
+   * - Baseline
+     - HPV vaccination
+     - 2020-2030
+     - Stay 10% in 2020-2021, then linearly ramp up from 10% to 90% in 2021-2030.
+   * - Baseline
+     - HPV vaccination
+     - 2031-2040
+     - 90%
+   * - Alternative
+     - HPV vaccination
+     - 2020-2040
+     - 10%
    * - Alternative
      - Cervical cancer screening
      - 2020-2030
-     - Stay 20% in 2020-2021 then linearly ramp up from 20% to 70% in 2021-2030
+     - Stay 25% in 2020-2021, then linearly ramp up from 25% to 70% in 2021-2030.
    * - Alternative
      - Cervical cancer screening
      - 2031-2040
      - 70%
-   * - Baseline
-     - HPV vaccination
-     - 2020-2040
-     - 10% (stand-in value)
-   * - Alternative
-     - HPV vaccination
-     - 2020-2030
-     - Stay 10% in 2020-2021 then linearly ramp up from 10% to 90% in 2021-2030
-   * - Alternative
-     - HPV vaccination
-     - 2031-2040
-     - 90%
 
 .. note::
 
- - Initial screening coverage = 20.7% with 95%CI 18.6-22.8 (Wang et al. 2015). 
- - No data identified for current HPV vaccination rates in China.
- - The target screening and HPV vaccination coverage are guided by WHO cervical 
-   cancer elimination strategy.
+ - Wang et al. reported a current cervical cancer screening coverage of 20.7% 
+   with 95%CI 18.6-22.8 in China. We set it as 25% as we believe insured population has higher screening coverage than general population. 
+ - No data has identified for current HPV vaccination rates in China. Temporarily 
+   we will use 10%.
+ - The target screening and HPV vaccination coverage in 2030 are guided by WHO 
+   cervical cancer elimination strategy.
 
 
 .. _5.0:
@@ -210,8 +214,7 @@ and cervical cancer screening for women aged 25 to 64, where:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- - Cohort type: Closed cohort of 200,000 insured male (50%) and female (50%) 
-   simulants.
+ - Cohort type: Closed cohort of 200,000 insured female (100%) simulants.
  - Age and sex: Age 15 to 95+, 5 year-age bands, uniformly distributed age and 
    sex structure.
  - Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps.
@@ -306,8 +309,6 @@ Cervical cancer screening algorithm was determined by three variables
  1) Sex
  2) Age 
  3) Diagnosis of HPV infection
-We will assign every simulant a cytology plus HPV co-test at the beginning of 
-the simulation.
 
 .. image:: cervical_screening_branches.svg 
 
@@ -318,51 +319,57 @@ the simulation.
      - Sex
      - Age
      - Screening technology
-     - Screening result
-     - proportion
-     - follow-up test
-     - Sensitivity
-     - Specificity
+     - Co-test result
+     - Co-test sensitivity
+     - Co-test specificity
+     - Follow-up test
+     - Follow-up test sensitivity
+     - Follow-up test specificity
    * - A
      - Female
-     - 25-65
-     - Cytology plus HPV test
+     - 21-65
+     - Cytology plus HPV test, every 3 years
      - HPV negative, Cytology negative
      - 17.4%
+     - 100%
      - Cytology, every 3 years
-     - 65.9% with 95%CI 54.9 to 75.3
+     - 65.9% (95%CI 54.9 to 75.3)
      - 100%
    * - B
      - Female
-     - 25-65
-     - Cytology plus HPV test
+     - 21-65
+     - Cytology plus HPV test, every 3 years
      - HPV positive, Cytology negative
      - 23.5%
+     - 100%
      - Cytology, every year
-     - 65.9% with 95%CI 54.9 to 75.3
+     - 65.9% (95%CI 54.9 to 75.3)
      - 100%
    * - C
      - Female
-     - 25-65
-     - Cytology plus HPV test
+     - 21-65
+     - Cytology plus HPV test, every 3 years
      - HPV negative, Cytology positive
      - 5.9%
-     - Colposcopy
+     - 100%
+     - 
      - 
      - 
    * - D
      - Female
-     - 25-65
-     - Cytology plus HPV test
+     - 21-65
+     - Cytology plus HPV test, every 3 years
      - HPV positive, Cytology positive
      - 53.2%
-     - Colposcopy
+     - 100%
+     - 
      - 
      - 
    * - E
      - Female
-     - <25 or 65+
+     - <21 or 65+
      - No screening
+     - 
      - 
      - 
      - 
@@ -377,6 +384,18 @@ the simulation.
      - 
      - 
      - 
+     - 
+
+.. note::
+ 
+ - Co-test (cytology plus HPV test) is not highly recommended for women under 
+   30 according to guidelines from American Cancer Society and U.S. Preventive Services Task Force. To simply our screening algorithm, we decided to set initial age of the co-test to be the same as initial age of cytology alone, 
+   namely 21 years old in our simulation.
+ - The stand-in value of co-test sensitivity was extracted from Schiffman et al. 
+   2018.
+ - For now, follow-up test is not applicable with positive Cytology results. 
+   Though colposcopy is recommended after diagnosis of benign/invasive cervical cancer, we could use colposcopy referral rate to determine treatment coverage for benign cervical cancer. 
+ - Specificity for both co-test and cytology alone are set to 100% in our model. 
 
 In initialization, We assume that
  - No one has prior knowledge of their disease status (and HPV status) on day one 
@@ -384,8 +403,6 @@ In initialization, We assume that
  - All simulants are buying insurance on day one of the simulation.
  - For simulants in cervical cancer (CC) state regardless of detection, they have 
    a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, C, or D depending on their age, sex, and co-test result. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
- - The initial age of cervical cancer screening is set to 30 years old since HPV 
-   co-test (cytology plus HPV test) is not recommended for women under 30 according to guidelines from American Cancer Society and U.S. Preventive Services Task Force.
 
 :underline:`II. Screening schedule and attendance`
 
@@ -406,13 +423,13 @@ Time to next scheduled screening
 :underline:`III. Screening initialization`
 
 The date of the first screening appointment (T_appt) for females at age between 
-30 and 65 is determined as follows. We assume that each simulant had a previous 
+21 and 65 is determined as follows. We assume that each simulant had a previous 
 appointment scheduled at some point before the simulation begins. We calculate 
 the time between that past appointment and their next appointment (delta_T) using 
 the methodology outlined in Section 5.3.2.II (Time to next scheduled screening). 
 With a uniform distribution we randomly determine how far along that time interval 
 between appointments each individual is (X) at the beginning of the simulation (
-T_0). For females under 30 when the simulation begins the methodology is identical, 
+T_0). For females under 21 when the simulation begins the methodology is identical, 
 except T_0 is the simulant's 30th birthday rather than the beginning of the 
 simulation. No screening appointment will be initialized for males at any age, as 
 well as females above 65.
@@ -467,31 +484,36 @@ Treatment for benign cervical cancer
      - 14.5 years
      - Chen et al. 2011
      - Globally, the duration ranged from 5-15 years
-   * - % cervical cancer screening coverage at baseline
-     - 20.7% (95%CI 18.6-22.8) 
+   * - Initial cervical cancer screening coverage
+     - 25%
      - Wang et al. 2015
-     - 
-   * - % cervical cancer screening in alternative scenario
+     - It's an arbitrary number greater than 20.7%.
+   * - Target cervical cancer screening coverage in 2030
      - 70%
      - WHO cervical cancer elimination strategy
      - 
-   * - % HPV vaccination coverage at baseline
+   * - Initial HPV vaccination coverage
      - 10%
      - 
-     - the current HPV vaccination rates remain low in China, no data has
+     - The current HPV vaccination rates remain low in China, no data has
        identified.
-   * - % HPV vaccination coverage in alternative scenario
+   * - Target HPV vaccination coverage in 2030
      - 90%
      - WHO cervical cancer elimination strategy
      - 
-   * - Screening sensitivity
+   * - Screening sensitivity of co-test
+     - The detection rates of HPV-/Cytology-, HPV+/Cytology-, HPV-/Cytology+, 
+       HPV+/Cytology+ are 17.4%, 23.5%, 5.9%, 53.2%, respectively.
+     - Schiffman et al. 2018
+     - 
+   * - Screening sensitivity of cytology alone
      - 65.9% (95% CI 54.9 to 75.3)
      - Koliopoulos et al. 2017
      - 
-   * - Screening specificity
+   * - Screening specificity of both co-test and cytology alone
      - 100%
      - 
-     - by client’s assumption (no false positive results of screening)
+     - by client’s assumption
    * - Prevalence of HPV
      - 19.0% (95%CI 17.1-20.9)
      - Li et al. 2019
@@ -500,7 +522,7 @@ Treatment for benign cervical cancer
      - 
      - 
      - 
-   * - relative risk of HPV
+   * - Relative risk of HPV
      - 16.2 (95%CI 9.6 to 27.3)
      - Chen et al. 2011
      - 
