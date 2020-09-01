@@ -193,7 +193,6 @@ Scale-up of breast cancer screening coverage among insured population
 
  - The target screening coverage is fixed to 75% based on UK setting. 
   
- - Should we apply screening guidelines proposed by SR?
 
 .. _5.0:
 
@@ -385,9 +384,6 @@ Using OR value of 1.89 and P as 0.3
  - scheduled time to next screening based on algorithm tree irregardless of whether they attended screening. 
  - For those who are in Branch A, B, C (yearly screening): truncated normal distribution with mean 364 days, SD +/- 156 days, lower limit is 100 days, upper limit is 700 days
  - for those in Branch D (every two years screening): truncated normal distribution with mean 728 days, SD +/- 156 days, lower limit is 200 days, upper limit is 1400 days
- - initiate the population with the assumption that their 'last' screening was uniformly distributed in the year before sim start. 
- - those enter age 30 during the sim will have their next screening uniformly distributed in their 30th year of life. 
- - those who are 69 will have their usual scheduled screening according to screening algorithm. If screening is due and simulant has aged into 70 years old, then they do not attend screening. 
 
 .. todo:: 
 
@@ -478,7 +474,7 @@ Family history is a risk factor that increases the likelihood that one gets brea
 
   - The value of RR we use in the above is actually for family history (exposure) to breast cancer (outcome). We are using the RR for breast cancer outcome instead of DCIS or LCIS because are unable to obtain a relative risk from DCIS or LCIS state to breast cancer among the DCIS or LCIS population respectively. 
   - In using the RR for breast cancer outcome as the RR for DCIS/LCIS outcome, we over-estimate the DCIS cases detected by screening and under-estimate breast cancer cases detected by screening (this is because those with family history are screened twice as often). This means it will under-estimate the total pay-out value. (assuming there is a relative risk > 1 of family history on breast cancer from DCIS and LCIS state in reality).
-  - This value is a pooled estimate derived from 10 China-specific studies. 
+  - The RR of family history is a pooled estimate derived from 10 China-specific studies. 
 
 .. todo::
 
@@ -618,20 +614,20 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
      - 
      - **5 years.** TO-DO: write justification to explain why LCIS duration longer 
        than DCIS.
-   * - Relative Risk of family history of 2.64 (UI 1.56 – 4.47) for China 
-       population and 1.92 (UI 1.55 - 2.38) for China and other countries
-     - Meta-analyses using 10 Chinese specific papers (11 data points). Wang 1992, 
-       Huang 2007, Zheng 2010, Yu 2012, Zhou 2013, Wang 2015, Wang 2019, Yu 2012, 
+   * - Relative Risk of family history of 2.64 (UI 1.56–4.47) for China 
+       population and 1.92 (UI 1.55-2.38) for China and other countries
+     - Meta-analyses using 10 Chinese specific papers. Wang 1992, Huang 2007, 
+       Zheng 2010, Yu 2012, Zhou 2013, Wang 2015, Wang 2019, Yu 2012, 
        Wang 1992, Li 2013, Tao 1988 and 7 other countries papers Wahidin 2018, 
-       Gokdemir-Yazar 2014, Martin 2010, Thomson 2014, Baglia 2018, Carpenter 2003, 
-       Khalis 2018
+       Gokdemir-Yazar 2014, Martin 2010, Thomson 2014, Baglia 2018, 
+       Carpenter 2003, Khalis 2018
      - I think it makes sense to use the China specific data for family history.
-     - Relative Risk of family history of **2.64 (UI 1.56 – 4.47)** for China 
+     - Relative Risk of family history of **2.64 (UI 1.56–4.47)** for China 
        population. Justification: There are 7 other country papers, but they lead 
        to a lower synthesized estimate (1.92) and we erred on the side of more 
        uncertainty and a higher mean.
    * - DCIS treatment efficacy
-     - Literature, Mannu 2020 BMJ (UK specific)
+     - Literature, Mannu 2020 BMJ
      - With regard to treatment efficacy, the comparison groups are not the same, 
        but the relative risk of developing an invasive breast cancer after 
        mastectomy is lower than for the other interventions. Any typically 
@@ -642,8 +638,8 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
    * - LCIS treatment efficacy
      - Literature, Fisher 1998 JNCI
      - 
-     - Rate ratio of **0.44 (95% CI 0.16 – 1.06)** for those treated with tamoxifen 
-       versus placebo
+     - Rate ratio of **0.44 (UI 0.16–1.06)** for those treated with tamoxifen 
+       versus placebo.
    * - DCIS treatment coverage
      - Literature, Mannu 2020  BMJ
      - Among US women, the percentages receiving the various treatment for DCIS 
@@ -652,12 +648,13 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
        treatment was lumpectomy with radiation (43%), then lumpectomy (27%), then 
        mastectomy (unilateral - 24%, bilateral 4.5%). 2.3% did not receive any 
        intervention. There were changes over time.
-     - **97.5% (95-100%)** of people diagnosed with DCIS receive treatment. 
-       Justification: SEER found 2.3% no intervention in USA, Mannu 2020 found no surgery in 4.7% in UK.
+     - **97.5% (UI 95-100%)** of people diagnosed with DCIS receive treatment. 
+       Justification: SEER found 2.3% no intervention in USA, Mannu 2020 found 
+       no surgery in 4.7% in UK.
    * - LCIS treatment coverage
      - King 2015, J Clin Oncol
      - I think the proportion of treatment for LCIS is accurate.
-     - **20.0% (15-25%)** of people diagnosed with LCIS receive treatment. 
+     - **20.0% (UI 15-25%)** of people diagnosed with LCIS receive treatment. 
        Justification: 21.6% treated in King 2015 (MSK cancer center, USA), but value might be different in china insured population
    * - 30% screening coverage in baseline scenario
      - Bao et al found 22.5% screening probability in general population and we 
