@@ -622,24 +622,25 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
        Gokdemir-Yazar 2014, Martin 2010, Thomson 2014, Baglia 2018, 
        Carpenter 2003, Khalis 2018
      - I think it makes sense to use the China specific data for family history.
-     - Relative Risk of family history of **2.64 (UI 1.56–4.47)** for China 
+     - Relative Risk of family history of 2.64 (UI 1.56–4.47) for China 
        population. Justification: There are 7 other country papers, but they lead 
        to a lower synthesized estimate (1.92) and we erred on the side of more 
-       uncertainty and a higher mean.
+       uncertainty and a higher mean. Use Log-normal distribution: **exp(normal( 
+       mean=log(2.64), SD=0.27))**
    * - DCIS treatment efficacy
      - Literature, Mannu 2020 BMJ
      - With regard to treatment efficacy, the comparison groups are not the same, 
        but the relative risk of developing an invasive breast cancer after 
        mastectomy is lower than for the other interventions. Any typically 
        mastectomy would be the preferred option if the DCIS is diffuse.
-     - Relative risk of **0.53** for mastectomy versus no surgery; Relative risk 
-       of 0.40 for lumpectomy + radiotherapy versus no surgery; Relative risk of 
-       0.69 for lumpectomy only versus no surgery.
+     - Relative risk of 0.40 for lumpectomy + radiotherapy versus no surgery. 
+       Use normal distribution: **normal(mean=0.40, SD=0.05)**
    * - LCIS treatment efficacy
      - Literature, Fisher 1998 JNCI
      - 
-     - Rate ratio of **0.44 (UI 0.16–1.06)** for those treated with tamoxifen 
-       versus placebo.
+     - Relative risk of 0.44 (UI 0.16–1.06) for those treated with tamoxifen 
+       versus placebo. Use Log-normal distribution: **exp(normal(mean=log(0.44), 
+       SD=0.48))**
    * - DCIS treatment coverage
      - Literature, Mannu 2020  BMJ
      - Among US women, the percentages receiving the various treatment for DCIS 
@@ -648,19 +649,21 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
        treatment was lumpectomy with radiation (43%), then lumpectomy (27%), then 
        mastectomy (unilateral - 24%, bilateral 4.5%). 2.3% did not receive any 
        intervention. There were changes over time.
-     - **97.5% (UI 95-100%)** of people diagnosed with DCIS receive treatment. 
+     - 97.5% (UI 95-100%) of people diagnosed with DCIS receive treatment. 
        Justification: SEER found 2.3% no intervention in USA, Mannu 2020 found 
-       no surgery in 4.7% in UK.
+       no surgery in 4.7% in UK. Use triangular distribution: **triangular(lower limit=0.95, mode=0.975, upper limit=1)**
    * - LCIS treatment coverage
      - King 2015, J Clin Oncol
      - I think the proportion of treatment for LCIS is accurate.
-     - **20.0% (UI 15-25%)** of people diagnosed with LCIS receive treatment. 
-       Justification: 21.6% treated in King 2015 (MSK cancer center, USA), but value might be different in china insured population
+     - 20.0% (UI 15-25%) of people diagnosed with LCIS receive treatment. 
+       Justification: 21.6% treated in King 2015 (MSK cancer center, USA), but 
+       value might be different in china insured population. Use triangular 
+       distribution: **triangular(lower limit=0.15, mode=0.20, upper limit=0.25)**
    * - 30% screening coverage in baseline scenario
      - Bao et al found 22.5% screening probability in general population and we 
        assumed that the insured population in our simulation would have a higher attendance coverage than the general population.
      - 
-     - 
+     - Use normal distribution: **normal(mean=0.3, SD=0.003)**
 
 
 .. _5.5:
