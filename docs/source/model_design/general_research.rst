@@ -865,6 +865,10 @@ In **random effects** analysis, it is assumed that the *true* effect size varies
 
 Additionally, some meta-analyses may use custom weighting schemes that are neither fixed effects analysis nor random effects analysis. Such custom weighting schemes may rely on systemtatic quantitivative measures of study quality and will weight higher quality studies with lower potential for bias more heavily than lower quality studies. 
 
+.. todo::
+
+	Include more in-depth descriptions of how random effects/fixed effects meta-analysis models work (with equations and weighting schemes)
+
 Network Meta-Analyses
 ~~~~~~~~~~~~~~~~~~~~~
 
