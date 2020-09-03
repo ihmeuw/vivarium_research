@@ -836,7 +836,7 @@ Meta-Analyses and Meta-Regressions are two similar study designs that allow rese
 Measures of Effect
 ~~~~~~~~~~~~~~~~~~
 
-Meta-analyses can be performed for dichotomous and continuous outcomes. For dichotomous outcomes, the measure of effect is typically risk ratios or odds ratios; for continous outcomes the measure of effect is typically standardized mean differences.
+Meta-analyses can be performed for dichotomous, polytonomous, and continuous outcomes. For dichotomous and polytonomous outcomes, the measure of effect is typically risk ratios or odds ratios; for continous outcomes the measure of effect is typically standardized mean differences.
 
 Fixed Versus Random Effects Assumptions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
