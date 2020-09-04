@@ -68,3 +68,16 @@ The iron deficiency risk factor exposure model should be utilized when the popul
 :ref:`The 2019 GBD Iron Deficiency Risk Exposure Documentation Page can be found here <2019_risk_exposure_iron_deficiency>`.
 
 :ref:`The 2019 GBD Iron Deficiency Risk Effects Documentation Page can be found here <2019_risk_effect_iron_deficiency>`.
+
+
+References
+----------
+
+.. [Kassebaum-et-al-2016]
+
+  View `Kassebaum et al. 2016`_
+
+    Kassebaum NJ, GBD 2013 Anemia Collaborators. The Global Burden of
+    Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: https://doi.org/10.1016/j.hoc.2015.11.002
+
+.. _`Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en_US&searchIndex=
