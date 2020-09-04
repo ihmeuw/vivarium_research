@@ -163,7 +163,7 @@ To see the implications of this strategy, see the notebook hosted HERE.
 Vivarium Modeling Strategy
 --------------------------
 
-NOTE: It is likely not necessary to model iron deficiency risk exposure for Vivarium projects. See the :ref:`Iron Deficiency Risk Effects Document` <2019_risk_effect_iron_deficiency>` for more details.
+NOTE: It is likely not necessary to model iron deficiency risk exposure for Vivarium projects. See the :ref:`Iron Deficiency Risk Effects Document <2019_risk_effect_iron_deficiency>` for more details.
 
 References
 ----------
