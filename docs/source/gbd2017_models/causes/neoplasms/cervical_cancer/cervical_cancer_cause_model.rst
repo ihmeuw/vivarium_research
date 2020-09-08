@@ -10,10 +10,14 @@ Cervical Cancer
 Disease Overview
 ++++++++++++++++
 
-.. todo::
-
-   Add definition of cervical cancer. In particular, find data about global 
-   prevalence and disease fatal and non fatal description.
+Cervical cancer is a female-specific cancer. It is prevalent globally, ranked 
+as the fourth-most common cancer in women. In 2018, about 106,430 new cervical 
+cancer cases are diagnosed in China and about 47,739 cervical cancer deaths occur 
+annually in China. For women at 50-54 years of age, the incidence of cervical 
+cancer reaches its maximum value, 30 cases per 100,000 person-years. The deaths 
+due to cervical cancer are increase over age, has the highest value 29 per 
+100,000 person-years in elder people who aged above 75 years. 
+[HPV-and-related-disease-2019-summary-report]_
 
 .. list-table:: ICD codes for cervical cancer
    :widths: 5 10 10
@@ -49,10 +53,10 @@ remap this cause to benign cervical and uterine separately in next round.
      - Notes
    * - Benign cervical cancer (BCC)
      - The carcinoma has not extended beyond the pelvic wall.
-     - Stage 1 to 3 according to [FIGO staging of cancer of the cervix uteri]_
+     - Stage 1 to 3 according to [FIGO-cancer-stage-2018-report]_
    * - Invasive cervival cancer (ICC)
      - The carcinoma has extended beyond the true pelvis and spread to adjacent pelvic organs or distant organs.
-     - Stage 4 according to [FIGO staging of cancer of the cervix uteri]_   
+     - Stage 4 according to [FIGO-cancer-stage-2018-report]_
 
 
 Cause hierarchy of cervical cancer in GBD
@@ -135,8 +139,12 @@ Vivarium Modeling Strategy
 Things to consider: 
 
 1. Within GBD 2017 data, there is no remission rate for invasive cervical cancer.
-2. After diagnosis of invasive cervical cancer if a patient survives more than 10 years, they are considered cured for calculating disability. Additionally, per GBD 2017, the patients also do not have excess mortality rate after 10 years. In vivarium simulation model, we will remit them back to a recovered state.
-3. Keep simulants in benign cervical cancer state and don't go into remission after successful treatment unless literature tells us otherwise.
+2. After diagnosis of invasive cervical cancer if a patient survives more than 
+   10 years, they are considered cured for calculating disability. Additionally, per GBD 2017, the patients also do not have excess mortality rate after 10 years. In vivarium simulation model, we will remit them back to a recovered state.
+3. Keep simulants in benign cervical cancer state and don't go into remission 
+   after successful treatment unless literature tells us otherwise.
+4. Most of the benign cervical cancer cases are resutling from a disease state 
+   called `hrHPV-infected`, where only high risk subtypes of HPV (e.g. 16 and 18) are considered in our model. Though we do include the transition from susceptible state to benign cervical cancer state without HPV infection.
 
 .. todo::
 
@@ -160,21 +168,33 @@ State and Transition Data Tables
      - Measure
      - Value
      - Notes
-   * - S
+   * - Susceptible
      - prevalence
-     - 1 - (prev_BCC + prev_c432)
+     - 1 - (prev_hrHPV + prev_BCC + prev_c432)
      - derived, used only at initialization
-   * - S
+   * - Susceptible
      - excess mortality rate
      - 0
-     - No EMR for S state
-   * - S
+     - No EMR for susceptible state
+   * - Susceptible
      - disabilty weights
      - 0
-     - No disability weights for S state
+     - No disability weights for susceptible state
+   * - hrHPV-infected
+     - prevalence
+     - 19.0% (95%CI, 17.1-20.9)
+     - extracted from Li et al.
+   * - hrHPV-infected
+     - excess mortality rate
+     - 0
+     - assume zero death due to high risk HPV infection
+   * - hrHPV-infected
+     - disabilty weights
+     - 0
+     - 
    * - Benign cervical cancer (BCC)
      - prevalence
-     - crude prevalence ratio of BCC x prev_c432
+     - crude prevalence ratio of BCC * prev_c432
      - used only at initialization
    * - Benign cervical cancer (BCC)
      - excess mortality rate
@@ -206,12 +226,22 @@ State and Transition Data Tables
      - Sink state
      - Value
      - Notes
-   * - i1
-     - S
+   * - i_hrHPV
+     - Susceptible
+     - hrHPV-infected
+     - hrHPV incidence
+     - no data has identified for Chinese women
+   * - i_BCC_HPV+
+     - hrHPV-infected
      - Benign cervical cancer (BCC)
-     - :math:`\frac{\text{prev_c432}\times\text{crude prevalence ratio of BCC}}{\text{duration_BCC}}`
-     - prev_c432 comes from forecast data for 2020-2040
-   * - i2
+     - :math:`\frac{\text{incidence_BCC}\times(1-PAF)\times\text{RR_hrHPV}}{\text{prev_hrHPV}}`
+     - prev_hrHPV is specified in `State Data`; incidence_BCC, PAF, and RR_hrHPV are specified in `Data sources`.
+   * - i_BCC_HPV-
+     - Susceptible
+     - Benign cervical cancer (BCC)
+     - :math:`\frac{\text{incidence_BCC}\times(1-PAF)}{\text{prev_susceptible}}`
+     - prev_susceptible is specified in `State Data`; incidence_BCC and PAF are specified in `Data sources`.
+   * - i_ICC
      - Benign cervical cancer (BCC)
      - Cervical cancer
      - :math:`\frac{\text{incidence_c432}}{\text{prev_BCC}}`
@@ -229,18 +259,18 @@ State and Transition Data Tables
    * - Measure
      - Sources
      - Notes
-   * - prev_BCC 
-     - derived from crude prevalence ratio of BCC and prev_c432
-     - 
-   * - duration_BCC
-     - extracted from literature
-     - temporarily use ? years
-   * - Incidence_BCC
-     - derived from prev_BCC and duration_BCC
-     - 
    * - crude-prevalence ratio of BCC
      - derived from marketscan data
      - see below for prevalence ratio calculation
+   * - prev_BCC 
+     - derived from crude prevalence ratio of BCC and prev_c432
+     - prev_BCC = crude prevalence ratio of BCC * prev_c432
+   * - duration_BCC
+     - extracted from Chen et al.
+     - temporarily use 14.5 years
+   * - incidence_BCC
+     - derived from prev_BCC and duration_BCC
+     - incidence_BCC = :math:`\frac{\text{prev_BCC}}{\text{duration_BCC}}`
    * - prev_c432
      - forecasted for future years 2020-2040
      - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
@@ -262,6 +292,15 @@ State and Transition Data Tables
    * - Population
      - demography for 2017 
      - mid-year population
+   * - prev_hrHPV
+     - extracted from Li et al.
+     - age-standardized high-risk HPV infection rate in Chinese women = 19.0% (95%CI, 17.1-20.9)
+   * - RR_hrHPV
+     - extracted from Chen et al.
+     - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
+   * - PAF
+     - derived from prev_hrHPV and RR_hrHPV
+     - PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
 
 .. todo::
 
@@ -277,15 +316,15 @@ Validation Criteria
 
 Fatal outcomes
  - Deaths
-     - EMR_BCC = 0
+     - EMR_hrHPV = EMR_BCC = 0
      - ACMR = CSMR_c432 + CSMR_other
  - YLLs
-     - YLLs_BCC = 0
+     - YLLs_hrHPV = YLLs_BCC = 0
      - YLLs_total = YLLs_c432 + YLLs_other
 
 Non-fatal outcomes
  - YLDs
-     - YLDs_BCC = YLDs_other = 0
+     - YLDs_hrHPV = YLDs_BCC = YLDs_other = 0
      - YLDs_total = YLDs_c432
  - Prevalence
      - add formula here once we identified marketscan data
@@ -311,5 +350,11 @@ References
    years lived with disability for 354 diseases and injuries for 195 countries
    and territories, 1990–2017: a systematic analysis for the Global Burden of
    Disease Study 2017. Lancet 2018; 392: 1789–858 (pp. 310-317)
-.. [FIGO staging of cancer of the cervix uteri] FIGO Cancer Report 2018: Cancer of the cervix uteri
+.. [FIGO-cancer-stage-2018-report] 
+   FIGO Cancer Report 2018: Cancer of the cervix uteri 
    https://obgyn.onlinelibrary.wiley.com/doi/epdf/10.1002/ijgo.12611
+.. [HPV-and-related-disease-2019-summary-report] 
+   Ferlay J, Ervik M, Lam F, Colombet M, Mery L, Piñeros M, Znaor A, Soerjomataram 
+   I, Bray F (2018). Global Cancer Observatory: Cancer Today. Lyon, France: 
+   International Agency for Research on Cancer.
+
