@@ -70,7 +70,7 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
 
 .. note::
 
-  GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any internatioanl guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
+  GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any international guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
 
 Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered a direct cause of death in GBD 2019.
 
@@ -106,7 +106,7 @@ A complete list of the causes included in the causal attribution process for ane
 
   P. falciparum parasitaemia without clinical malaria; P. vivax parasitaemia without clinical malaria; Clinical malaria; Schistosomiasis; Hookworm disease; Other neglected tropical diseases; Maternal haemorrhage; Vitamin A deficiency (under 15 years only); Other infectious diseases; Peptic ulcer disease; Gastritis; Stage III chronic kidney disease; Stage IV chronic kidney disease ; Stage V chronic kidney disease; End stage renal disease; Uterine fibroids; Menstrual disorders; Other haemoglobinopathies and haemolytic anaemias; Other endocrine, nutrition, blood, and immune disorders; G6PD deficiency; Hemizygous G6PD deficiency; Beta-thalassaemia major; Beta-thalassaemia trait; Haemoglobin E trait; Haemoglobin E/beta-thalassaemia; Haemoglobin H disease; Homozygous sickle cell and severe sickle cell/beta-thalassaemia parent; Haemoglobin SC disease; Mild sickle cell/beta-thalassaemia; Sickle cell trait; HIV; Cirrhosis and other chronic liver diseases, decompensated; Ulcerative colitis; Crohn’s disease; dietary iron deficiency; other infectious diseases; other neglected tropical diseases; other endocrine, nutrition, blood, and immune disorders; and other hemoglobinopathies and hemolytic anemias.
 
-The following table displays the cause- and sex-specific hemoglobin shifts used for the anemia causal attribution process in GBD 2019.
+The following table displays the cause- and sex-specific hemoglobin shifts used for the anemia causal attribution process in GBD 2019. These shifts are hosted `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/priors/hb_shifts.csv>`_.
 
 .. csv-table:: Cause- and Sex-Specific Hemoglobin Shifts
   :widths: 15 15 15
