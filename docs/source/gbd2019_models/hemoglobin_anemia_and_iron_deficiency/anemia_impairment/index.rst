@@ -4,6 +4,10 @@
 Anemia Impairment
 =================
 
+.. contents::
+   :local:
+   :depth: 2
+
 Impairment Description in GBD 2019
 -------------------------------------
 
