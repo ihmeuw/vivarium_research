@@ -666,11 +666,157 @@ Severity Splits
 Mortality Impacts
 +++++++++++++++++
 
+All-Cause Mortality
+^^^^^^^^^^^^^^^^^^^
+
+All-cause mortality rate (ACMR) is a measure of total deaths (due to all 
+causes) per person-year in the overall age-, sex-, time-, and 
+location-specific population. Specifically, 
+
+.. math::
+
+  \frac{\text{number of deaths due to all causes}}{\text{person-years in the overall population}}
+
+For instance, the global ACMR for the early neonatal age group (0-6 days) 
+in 2017 was approximately 70,000 deaths per 100,000 person-years (0.7 
+deaths per person-year). However, the global ACMR for the post neonatal 
+age group (1 month to 1 year) in 2017 was approximately 1,000 deaths per 
+100,000 person-years (0.01 deaths per person-year). By comparing ACMRs 
+between these age groups, we can see that individuals die at a higher rate 
+during the early neonatal period than the post neonatal period. 
+
+Notably, ACMR is used both for validation of Vivarium simulations, as well as 
+for estimating simulation mortality rates (see the `Mortality Hazards`_ 
+section for more detail).
+
 Cause-Specific Mortality
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
+Cause-specific mortality rate (CSMR) is a measure of deaths due to a 
+particular cause (or group of causes) per person-year in the overall age-, 
+sex-, time-, and location-specific population. Specifically, 
+
+.. math::
+
+  \frac{\text{number of deaths due to cause}}{\text{person-years in the overall population}}
+
+For instance, the global CSMR for mesothelioma in 2017 was approximately 0.4 
+deaths per 100,000 person-years. The global CSMR for diabetes mellitus in 2017 
+was approximately 18 deaths per 100,000 person years. By comparing these two 
+CSMRs, we can see that more individuals in the overall global popultaion died 
+due to diabetes mellitus than mesothelioma in 2017.
+
+.. note::
+
+  The concept of cause-specific mortality as we discuss here (and as it is used in the Global Burden of Disease study and Vivarium simulations) implies that there is always one *single* cause of death for an individual. This may be a reasonable assumption in some cases, for instance, death due to a traffic accident. However, ascertaining a single cause of death can be more complicated in other cases; imagine an individual is in a serious traffic accident and the stress of the accident causes them to have a heart attack -- did the traffic accident or the heart attack cause the death of this individual? 
+
+  If interested, see this publication by `Piffaretti et al. (2016) <https://www.who.int/bulletin/volumes/94/12/16-172189.pdf>`_ that discusses the classical single cause of death analysis and proposes an alternative approach that weights multiple causes of death. 
+
+Notably, CSMRs are useful for validation of Vivarium simulations, as well as 
+for estimating simulation mortality rates (see the `Mortality Hazards`_ 
+section for more detail).
+
 Excess Mortality
 ^^^^^^^^^^^^^^^^
+
+Excess mortality rates (EMRs) are a measure of the rate at which individuals 
+with a given condition die due to that position; in other words, the number of 
+deaths due to a particular condition per person-year in the age-, sex-, time-, 
+and location-specific population *with that condition*. Specifically,
+
+.. math::
+
+  \frac{\text{number of deaths due to cause}}{\text{person-years spent infected with cause}}
+
+Or, approximately,
+
+.. math::
+
+  \frac{\text{CSMR per 100,000 person years}}{\text{Prevalence of cause per 100,000}}
+
+For instance, the excess mortality rate of mesothelioma in 2017 was 
+approximately 0.38 while the excess mortality rate of diabetes mellitus was 
+0.003, indicating that mesothelioma is a more fatal disease than diabetes 
+mellitus once acquired. Contrast this with the cause-specific mortality rates 
+for these two conditions discussed above; mesothelioma has a higher EMR but 
+lower CSMR than diabetes mellitus. This means that while someone with 
+mesothelioma is more likely to die due to mesothelioma than someone with 
+diabetes is to die due to diabetes  because mesothelioma is more fatal (as 
+reflected by the higher EMR), someone in the general population is less likely 
+to die of mesothelioma than of diabetes because mesothelioma is much less 
+*prevalent* than diabetes (as reflected by the lower CSMR).  
+
+Notably, EMRs are useful for validation of Vivarium simulations, as well as 
+for estimating simulation mortality rates (see the `Mortality Hazards`_ 
+section for more detail).
+
+.. note::
+
+  The application of EMRs in Vivarium simulations allow for the consideration that an individual with a given cause is at an increased mortality rate for *that* cause. However, it does not necessarily allow for the consideration that an individual with that cause may *also* have an increased mortality rate for *other* causes due to the impact of comorbidities. While this phenomenon can be represented for *some* causes through the GBD risk factors framework (ex: vitamin A deficiency is related to increased mortality due to measles), our modeling framework is limited in that it does not consider the effect of comorbidities outside of GBD risk factors. 
+
+Mortality Hazards
+^^^^^^^^^^^^^^^^^
+
+At each time-step in a Vivarium simulation it must be determined if each 
+simulant remains alive or dies. The **probability that a simulant will die** 
+is assessed using the *mortality hazard* for an individual simulant, 
+:math:`i`, as shown below:
+
+In a simulation with only one cause, :math:`c`:
+
+.. math::
+
+  \text{mortality hazard}_i = ACMR - CSMR_c + C_i * EMR_c
+
+Where,
+
+- :math:`ACMR` is the all-cause mortality rate specific to the simulant's age, sex, time, and location group
+- :math:`CSMR` is the cause-specific mortaltiy rate for cause :math:`c` specific to the simulant's age, sex, time, and location group
+- :math:`C_i` is a variable that indicates the cause state for an individual simulant so that it is equal to 1 if a simulant is *with condition* :math:`c` and equal to 0 if a simulant is *without condition* :math:`c`
+- :math:`EMR_c` is the excess mortality rate for cause :math:`c` for the simulant's age, sex, time, and location group
+
+.. note::
+
+  The individual mortality hazard for a simulation that models more than one 
+  cause is represented as follows:
+
+  .. math::
+
+    \text{mortality hazard}_i = ACMR - \sum_{c=1}^{c} CSMR_c + \sum_{c=1}^{c} C_i * EMR_c
+
+If it is determined that a simulant dies at a given time-step (as determined 
+by the individual mortality hazard above), it then needs to be determined what 
+the cause of death was. The simulant may have died due to a cause that was 
+explicitly modeled in the simulation, or the simulant may have died due to a 
+cause that was not explicitly modeled in the simulation, which we will refer 
+to as *other causes*. 
+
+The probability that a simulant died of a modeled cause :math:`c` is 
+represented as:
+
+.. math::
+  
+  P(\text{cause of death} = c) = \frac{C_i * EMR_c}{\text{mortality hazard}_i}
+
+And the probability that a simulant died of other causes is represented as:
+
+.. math:: 
+
+  P(\text{cause of death} = \text{other causes}) = \frac{ACMR - \sum_{c=1}^{c} CSMR_c}{\text{mortality hazard}_i}
+
+Observing Mortality
+^^^^^^^^^^^^^^^^^^^
+
+When it is determined that a simulant dies at a given time step, the 
+simulant's age and cause of death should be observed and recorded by the 
+simulation. This allows for the recording of deaths and years of life lost due 
+to specific modeled causes in the simulation, which can then be used to 
+validate against baseline GBD estimates as well as to estimate measure of 
+intevention impact between simulation scenarios. 
+
+Years of life lost (YLLs) are calculated in the simulation by subtracting the 
+simulants age at the time of death from the simulant's sex- and age-specific 
+*theoretical minimum risk life expectancy* (TMRLE) value. Notably, the TMRLE does not vary by location.
 
 Morbidity Impacts
 +++++++++++++++++
