@@ -134,17 +134,9 @@ The recommended approach for modeling the relationship between hemoglobin and ma
 
 Instead, the relative risks should be applied to both the YLD (or incidence) and YLL (CSMR or EMR) rate for maternal disorders (or a specific modeled individual maternal disorder), such that:
 
-if :math:`Hgb_i >= Hgb_\text{GBD}:`
-
 .. math:: 
 
     rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (Hgb_i - Hgb_\text{GBD})}
-
-if :math:`Hgb_i < Hgb_\text{GBD}:`
-
-.. math::
-
-  rate_i = rate_\text{GBD} * e^{\text{ln(RR)} * (Hgb_\text{GBD} - Hgb_i)}
 
 Where, 
 
