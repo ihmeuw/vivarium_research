@@ -1,0 +1,22 @@
+Location,Cause,Year,Birth cohort,Sex,Risk group,Scenario,Outcome
+China,All,All,2000 to 2005,Both,All,Baseline,Number of cases detected among insured population
+,DCIS,2020,1995 to 2000,Male,Average risk,Alternative,"Cases detected per 100,000 insured population"
+,LCIS,2021,1990 to 1995,Female,High risk with family history,,Change of cases detected among insured population as compared with baseline
+,Stage 1+ breast cancer,2022,1985 to 1990,,High risk with previous diagnosis of DCIS or LCIS but not family history,,"Change of cases detected per 100,000 insured population as compared with baseline"
+,,2023,1980 to 1985,,,,Number of deaths from breast cancer among insured population who did not have their breast cancer detected
+,,2024,1975 to 1980,,,,"Deaths per 100,000 from breast cancer among insured population who did not have their breast cancer detected"
+,,2025,1970 to 1975,,,,Change of deaths from breast cancer among insured population who did not have their breast cancer detected as compared with baseline
+,,2026,1965 to 1970,,,,"Change of deaths per 100,000 from breast cancer among insured population who did not have their breast cancer detected as compared with baseline"
+,,2027,1960 to 1965,,,,Person-Year
+,,2028,1955 to 1960,,,,
+,,2029,1950 to 1955,,,,
+,,2030,1945 to 1950,,,,
+,,2031,1940 to 1945,,,,
+,,2032,1935 to 1940,,,,
+,,2033,1930 to 1935,,,,
+,,2034,1925 to 1930,,,,
+,,2035,1900 to 1925,,,,
+,,2036,,,,,
+,,2037,,,,,
+,,2038,,,,,
+,,2039,,,,,

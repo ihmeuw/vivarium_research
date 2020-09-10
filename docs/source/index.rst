@@ -33,10 +33,20 @@ Handy tutorials for common research tasks.
 
 Descriptions of what goes into building all the pieces of a Vivarium model.
 
+:ref:`Concept Models for Vivarium Simulations <concept_models>`
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Concept model documents for Vivarium simulations, which may rely on GBD 2017 or GBD 2019 cause and risk models.
+
 :ref:`Existing Models for GBD 2017 <2017_models>`
 +++++++++++++++++++++++++++++++++++++++++++++++++
 
-Tried and tested models for diseases, risks, and interventions.
+Tried and tested models for diseases, risks, and interventions from the 2017 Global Burden of Disease Study.
+
+:ref:`Existing Models for GBD 2019 <2019_models>`
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tried and tested models for disease, risks, and interventions from the 2019 Global Burden of Disease Study.
 
 Contributing
 ------------
@@ -52,6 +62,8 @@ To get started adding new documentation, check out our
    software
    tutorials
    model_design/index
+   concept_models/index
    gbd2017_models/index
+   gbd2019_models/index
    contributing
    glossary

@@ -127,19 +127,21 @@ Compartmental Diagram
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-+---------------------------------+
-| State definitions               |
-+============+====================+
-| State      | State definitions  |                       
-+------------+--------------------+
-| S          | Susceptible        | 
-+------------+--------------------+
-| DCIS       | with DCIS          | 
-+------------+--------------------+
-| LCIS       | with LCIS          | 
-+------------+--------------------+
-| BC         | with breast cancer | 
-+------------+--------------------+
++--------------------------------------------+
+| State definitions                          |
++============+===============================+
+| State      | State definitions             |                       
++------------+-------------------------------+
+| S          | Susceptible                   | 
++------------+-------------------------------+
+| DCIS       | with DCIS                     | 
++------------+-------------------------------+
+| LCIS       | with LCIS                     | 
++------------+-------------------------------+
+| BC         | with breast cancer            | 
++------------+-------------------------------+
+| R          | recovered from breast cancer  | 
++------------+-------------------------------+
 
 .. list-table:: State Data
    :widths: 10 25 25 40
@@ -201,24 +203,53 @@ State and Transition Data Tables
      - cause specific mortality rate
      - csmr_c429= :math:`\frac{\text{deaths_c429}}{\text{population}}`
      - 
+   * - R
+     - prevalence
+     - 0
+     - No initialization for recovered state
+   * - R
+     - excess mortality rate
+     - 0
+     - 
+   * - R
+     - disability weights
+     - 0
+     - 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-| Transition data                                                                                                                                                        |
-+============+===============+===============+======================================================================+====================================================+ 
-| Transition | Source state  | Sink state    | Value                                                                | Notes                                              |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_DCIS     | S             |  DCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | crude prevalence ratio of DCIS                                     |                                                    |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_LCIS     | S             |  LCIS         | | incidence_c429                                                     | incidence_c429 (breast cancer) comes from como for | 
-|            |               |               | | x                                                                  | 2017 and forecasted for 2020-2040                  |
-|            |               |               | | crude prevalence ratio of LCIS                                     |                                                    |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_BC|DCIS  | DCIS          | BC            | :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`     | i_BC|DCIS = i_BC /prev_(DCIS+LCIS)                 |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
-| i_BC|LCIS  | LCIS          | BC            | :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`     | i_BC|LCIS = i_BC /prev_(LCIS+DCIS)                 |
-+------------+---------------+---------------+----------------------------------------------------------------------+----------------------------------------------------+
+.. list-table:: Transition Data
+   :widths: 5 5 5 30 30
+   :header-rows: 1
+
+   * - Transition
+     - Source state
+     - Sink state
+     - Value
+     - Notes
+   * - i_DCIS
+     - S
+     - DCIS
+     - :math:`\frac{\text{prev_c429}\times\text{crude prevalence ratio of DCIS}}{\text{duration_DCIS}}`
+     - prev_c429 comes from forecast data for 2020-2040
+   * - i_LCIS
+     - S
+     - LCIS
+     - :math:`\frac{\text{prev_c429}\times\text{crude prevalence ratio of LCIS}}{\text{duration_LCIS}}`
+     - prev_c429 comes from forecast data for 2020-2040
+   * - i_BC|DCIS
+     - DCIS
+     - BC
+     - :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`
+     - i_BC|DCIS = i_BC / prev_(DCIS+LCIS)
+   * - i_BC|LCIS
+     - LCIS
+     - BC
+     - :math:`\frac{\text{incidence_c429}}{\text{prev_DCIS+prev_LCIS}}`
+     - i_BC|LCIS = i_BC / prev_(DCIS+LCIS)
+   * - r_BC
+     - BC
+     - R
+     - 0.1 per person-years regardless of age
+     - No transition out of recovered state
 
 .. list-table:: Data sources
    :widths: 30 30 30
@@ -233,6 +264,12 @@ State and Transition Data Tables
    * - prev_LCIS
      - derived from LCIS prevalence ratio and prev_c429
      - see below for prevalence ratio calculation
+   * - duration_DCIS
+     - extracted from literature
+     - temporarily use 3 years
+   * - duration_LCIS
+     - extracted from literature
+     - temporarily use 5 years
    * - crude-prevalence ratio 
      - derived from external data
      - see below for prevalence ratio calculation
@@ -251,6 +288,9 @@ State and Transition Data Tables
    * - Disability weights for breast cancer sequelae
      - YLD appendix
      - total breast cancer disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
+   * - remission_c429
+     - GBD 2017
+     - remission rate of breast cancer = 1 / duration of breast cancer = 1/10 per person-years for all ages 
    * - Population
      - demography for 2017 
      - mid-year population
@@ -258,7 +298,7 @@ State and Transition Data Tables
 
 **Crude prevalence ratios**
 
-GBD does not give us any information on the prevalence or incidence of DCIS or LCIS. Hence we need to infer using data from another population, namely from MarketScan outpatient data from 2016 to 2017 in USA for age 15-65 only. From MarketScane, we obtain the a non-age specific ratio of DCIS prevalence and breast cancer prevalence among those tested. Applying this ratio to the prevalence of breast cancer in our population gives us an estimate of the prevalence of DCIS or LCIS in our population. 
+GBD does not give us any information on the prevalence or incidence of DCIS or LCIS. Hence we need to infer using data from another population, namely from MarketScan outpatient data from 2016 to 2017 in USA for age 15 plus. From MarketScane, we obtain the a non-age specific ratio of DCIS prevalence and breast cancer prevalence among those tested. Applying this ratio to the prevalence of breast cancer in our population gives us an estimate of the prevalence of DCIS or LCIS in our population. 
 
 **DCIS**
 
@@ -277,23 +317,68 @@ GBD does not give us any information on the prevalence or incidence of DCIS or L
       = Crude prevalence of ratio of LCIS X prevalence of breast cancer (prev_c429)
 
 
-.. todo::
+.. note::
 
-    - add age-specific ratios? Currently we do not have data for 65+ and for 2017 onwards.
-    - looking at revising the data from marketscan to see if we can get 65+ data. then will re-evaluate to see if we want to use age specific ratios. 
-    - A major assumption of this method of using ratios is that the ratio of DCIS or LCIS to breast cancer in the US population is the same as that in the Chinese population we are modelling. This could be a limitation if breast cancer manifests differently among racial groups. how to model 65+ ?? 
-    - How to obtain marketScan ratios for 2020-2040? 
-    - for those who are treated successfully do they stay in DCIS or remit back to susceptible? Need to read more literature (nicoly task)
-    - We might overestimate the total number of deaths due to breast cancer. According to GBD definition, patients are considered cured if they have survived more than 10 years after the mastectomy. However, the excess mortality rate still exists in simulation and generates extra deaths if we plan to run the model over 10 years.
+    - Currently we have applied non-age specific DCIS and LCIS prevalence ratios
+      from marketscan to inform DCIS and LCIS prevalence in 2020-2040.
+    - A major assumption of this method of using marketscan ratios is that the
+      ratio of DCIS or LCIS to breast cancer in the US population is the same as
+      that in the Chinese population we are modelling. This could be a limitation
+      if breast cancer manifests differently among racial groups.
+    - We believe that the crude prevalence ratio of DCIS and crude prevalence
+      ratio of LCIS are independent, meaning no correlation between these two
+      ratios.
+    - The draw-level DCIS and LCIS prevalence ratios can be generated based on
+      a truncated normal distirbution (lower bound = 0) with given mean and
+      standard deviation. 
+    - For those who are treated successfully, we assume they will stay in stage
+      0 rather than remit back to susceptible.
+    - We might overestimate the total number of deaths due to breast cancer.
+      According to GBD definition, patients are considered cured if they have
+      survived more than 10 years after the mastectomy. However, the excess
+      mortality rate still exists in simulation and generates extra deaths if
+      we plan to run the model over 10 years. The way we handle this problem is
+      to send patients to a recovered state (R) with transition rate from bresat
+      cancer to R calculated as 1 divided by duration of breast cancer (10 years).
 
 
 
 Validation Criteria
 +++++++++++++++++++
 
+Fatal outcomes
+ - Deaths
+     - EMR_DCIS = EMR_LCIS = 0
+     - ACMR = CSMR_BC + CSMR_other
+ - YLLs
+     - YLLs_DCIS = YLLs_LCIS = 0
+     - YLLs_total = YLLs_BC + YLLs_other
+
+Non-fatal outcomes
+ - YLDs
+     - YLDs_DCIS = YLDs_LCIS = YLDs_other = 0
+     - YLDs_total = YLDs_BC
+ - Prevalence
+     - Crude prevalence ratio of DCIS = PREV_DCIS / PREV_BC = 0.33
+     - Crude prevalence ratio of LCIS = PREV_LCIS / PREV_BC = 0.07
+     - PREV_DCIS / PREV_LCIS = 4.7
+ - Incidence
+     - Crude prevalence ratio of DCIS = INCIDENCE_DCIS / INCIDENCE_BC = 0.33
+     - Crude prevalence ratio of LCIS = DENCE_LCIS / INCIDENCE_BC = 0.07
+     - INCIINCIDENCE_DCIS / INCIDENCE_LCIS = 4.7
+
 .. todo::
 
-   Describe tests for model validation.
+   1. Compare forecast data in 2020 against GBD 2017 (2019) results.
+   2. Compare prevalence, incidence, CSMR of breast cancer, and ACMR over year
+      with GBD age-/sex- stratification that calculated from simulation baseline
+      to forecast data.
+   3. Check outcomes such as YLDs and YLLs in 2020 yield from simulation baseline
+      against GBD 2017 (2019) all causes and breast cancer results.
+   4. Compare prevalence ratio of DCIS or LCIS to breast cancer and incidence
+      ratio of DCIS or LCIS to breast cancer yield from simulation baseline to
+      ratios from marketscan and literature evidence in China.
+
 
 
 References

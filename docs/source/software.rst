@@ -24,7 +24,7 @@ tutorials for running simulations and exploring them interactively, among other
 things.
 
 - `Repository <https://github.com/ihmeuw/vivarium>`_
-- `Documentation <https://vivarium.readthedocs.io/projects/vivarium/en/latest/>`_
+- `Documentation <https://vivarium.readthedocs.io/en/latest/>`_
 
 
 Vivarium Public Health
@@ -62,7 +62,7 @@ simulations in parallel using IHME's cluster. It contains documentation
 describing how this is done, as well as how YAML files and branches files work.
 
 - `Repository <https://github.com/ihmeuw/vivarium_cluster_tools>`_
-- `Documentation <https://vivarium-cluster-tools.readthedocs.io/en/latest/)>`_
+- `Documentation <https://vivarium-cluster-tools.readthedocs.io/en/latest/>`_
 
 
 GBD Mapping
