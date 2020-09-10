@@ -15,7 +15,7 @@ as the fourth-most common cancer in women. In 2018, about 106,430 new cervical
 cancer cases are diagnosed in China and about 47,739 cervical cancer deaths occur 
 annually in China. For women at 50-54 years of age, the incidence of cervical 
 cancer reaches its maximum value, 30 cases per 100,000 person-years. The deaths 
-due to cervical cancer are increase over age, has the highest value 29 per 
+due to cervical cancer increase over age, and have the highest value 29 per 
 100,000 person-years in elder people who aged above 75 years. 
 [HPV-and-related-disease-2019-summary-report]_
 
@@ -183,7 +183,7 @@ State and Transition Data Tables
    * - hrHPV-infected
      - prevalence
      - 19.0% (95%CI, 17.1-20.9)
-     - extracted from Li et al.
+     - see age-specific value at Data sources table
    * - hrHPV-infected
      - excess mortality rate
      - 0
@@ -294,7 +294,7 @@ State and Transition Data Tables
      - mid-year population
    * - prev_hrHPV
      - extracted from Li et al.
-     - age-standardized high-risk HPV infection rate in Chinese women = 19.0% (95%CI, 17.1-20.9)
+     - the infection rate of high-risk HPVs in women aged <25, 25-45, and >45 years was 24.3% (95%CI, 19.0%-29.6%), 19.9% (95%CI, 16.4-23.4), and 21.4% (95%CI, 17.3-25.5), respectively.
    * - RR_hrHPV
      - extracted from Chen et al.
      - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
@@ -304,11 +304,8 @@ State and Transition Data Tables
 
 .. todo::
 
-  add details for crude prevalence ratio calculation
-
-.. note::
-
-  - add details
+  1. add details for crude prevalence ratio calculation
+  2. add methods to estimate incidence of high risk HPV infection
 
 
 Validation Criteria
