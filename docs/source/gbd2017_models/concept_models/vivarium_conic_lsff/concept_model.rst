@@ -2208,8 +2208,12 @@ Model Limitations
     Accounting for this correlation would likely reduce the impact from
     increased birthweight.
 
-* GBD data for neural tube defects is too low, so we are likely underestimating
-  the impact of folic acid fortification.
+* GBD data for neural tube defects, particularly for India, is low relative to
+  estimates of NTD burden from other data sources such as
+  [Kancherla-et-al-2018-India]_, [Dixon-et-al-2019]_,
+  [Kancherla-et-al-2018-Global]_, [Kancherla-et-al-2019]_. Therefore, we are
+  likely underestimating the impact of folic acid fortification in our
+  simulation, which relies upon GBD data.
 
 * GBD does not model folate deficiency, so we need to be careful that our
   populations are comparable to the Keats study populations when applying the
@@ -2218,14 +2222,20 @@ Model Limitations
   folate-rich food for a high rate of neural tube defects?)
 
 * The fortification scale-up strategy is relatively simple and does not capture
-  any of the
+  the numerous complexities of actually implementing a large-scale fortification
+  program. This design is deliberate, as the model is intended to provide an
+  upper bound on the potential impact fortification could have, by providing a
+  flexible framework to specify the maximum possible population coverage one
+  could hope to achieve with a given fortification strategy. Estimating what
+  this maximum possible coverage would be for a particular fortification
+  strategy is outside the scope of this model.
 
 * The model does not currently track individual sequelae of any cause (except
   for anemia severity in the Iron Deficiency model), only overall DALYs due to
   each cause, averaging over all sequalae.
 
 * The model does not currently allow modeling iron fortification and vitamin A
-  fortification together, because of different strategies for tracking anemia due to vitamin A deficiency.
+  fortification together, because of different strategies for tracking anemia due to vitamin A deficiency in the two interventions.
 
 References
 ----------
@@ -2288,6 +2298,17 @@ References
     20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
 
 .. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
+
+.. [Dixon-et-al-2019]
+
+  View `Dixon et al. 2019`_
+
+    Dixon, M, Kancherla, V, Magana, T, Mulugeta, A, Oakley, GP. High potential
+    for reducing folic acid‐preventable spina bifida and anencephaly, and
+    related stillbirth and child mortality, in Ethiopia. Birth Defects Research.
+    2019; 111: 1513– 1519. https://doi.org/10.1002/bdr2.1584
+
+.. _Dixon et al. 2019: https://doi.org/10.1002/bdr2.1584
 
 .. [Dror-and-Allen-2018]
 
@@ -2390,6 +2411,38 @@ References
     Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.
 
 .. _`Imdad et al. 2016`: https://doi.org/10.1002/14651858.CD007480.pub3
+
+.. [Kancherla-et-al-2018-Global]
+
+  View `Kancherla et al. 2018 (Global)`_
+
+    Kancherla, V, Wagh, K, Johnson, Q, Oakley, GP. A 2017 global update on folic
+    acid‐preventable spina bifida and anencephaly. Birth Defects Research. 2018;
+    110: 1139– 1147. https://doi.org/10.1002/bdr2.1366
+
+.. _Kancherla et al. 2018 (Global): https://doi.org/10.1002/bdr2.1366
+
+.. [Kancherla-et-al-2018-India]
+
+  View `Kancherla et al. 2018 (India)`_
+
+    Kancherla, V, Oakley, GP. Total prevention of folic acid‐preventable spina
+    bifida and anencephaly would reduce child mortality in India: Implications
+    in achieving Target 3.2 of the Sustainable Development Goals. Birth Defects
+    Research. 2018; 110: 421– 428. https://doi.org/10.1002/bdr2.1175
+
+.. _Kancherla et al. 2018 (India): https://doi.org/10.1002/bdr2.1175
+
+.. [Kancherla-et-al-2019]
+
+  View `Kancherla et al. 2019`_
+
+    Kancherla, V., Carmichael, S.L., Feldkamp, M.L. and Berry, R.J. (2019),
+    Teratology society position statement on surveillance and prevalence
+    estimation of neural tube defects. Birth Defects Research, 111: 5-8.
+    https://doi.org/10.1002/bdr2.1434
+
+.. _Kancherla et al. 2019: https://doi.org/10.1002/bdr2.1434
 
 .. [Keats-et-al-2019]
 
