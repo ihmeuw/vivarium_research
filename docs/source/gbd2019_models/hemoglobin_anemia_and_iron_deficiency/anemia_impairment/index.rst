@@ -129,7 +129,7 @@ Vivarium Modeling Strategy
 Scope
 ++++++++
 
-The Vivarium modeling strategy for the anemia impairment will first rely on the :ref:`Hemoglobin Distribution Model <2019_hemoglobin_distribution>`. Vivarium simulants should first be assigned a hemoglobin value and then their anemia status can be evaluated by the hemoglobin thresholds shown on this page (thresholds are pregnancy-specific for women of reproductive age; see the pregnancy hemoglobin adjustment documentation on the :ref:`Hemoglobin Distribution Model documentation page <2019_hemoglobin_distribution>`. YLDs should be accrued according to the severity-specific disability weights listed in this document. Specific causes (or groups of causes, for example iron-responsive causes) of anemia can also be assigned to individual if relevant/necessary for the project.
+The Vivarium modeling strategy for the anemia impairment will first rely on the :ref:`Hemoglobin Distribution Model <2019_hemoglobin_distribution>`. Vivarium simulants should first be assigned a hemoglobin value and then their anemia status can be evaluated by the hemoglobin thresholds shown on this page (thresholds are pregnancy-specific for women of reproductive age; see the pregnancy hemoglobin adjustment documentation on the :ref:`Hemoglobin Distribution Model documentation page <2019_hemoglobin_distribution>`. YLDs should be accrued according to the severity-specific disability weights listed in this document. Specific causes (or groups of causes, for example iron-responsive causes) of anemia can also be assigned to individual simulants if relevant/necessary for the project (this could be done by using the cause-specific hemoglobin shifts, but this process is not yet described in this document).
 
 Restrictions
 ++++++++++++
