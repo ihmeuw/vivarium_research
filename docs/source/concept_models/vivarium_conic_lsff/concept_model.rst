@@ -2037,7 +2037,8 @@ Desired Model Outputs
   random variable :math:`Y` in the population (e.g. a risk exposure variable
   like hemoglobin level or birthweight), there are (at least) two possible
   options for the raw outputs to report in ``output.hdf``. Both options require
-  calculating the *mean* of :math:`Y` as well as the variance:
+  calculating the *mean* of :math:`Y` as well as the variance, as well as the
+  *size of the population* for which the mean and variance are computed:
 
   1.  Directly record the *mean* and *variance* of :math:`Y` for the population
       in each random seed, then use the `law of total variance
@@ -2047,15 +2048,21 @@ Desired Model Outputs
       the variance of the population in each draw when aggregating over random
       seeds. That is, compute the variance of the means of :math:`Y` over the
       random seeds and the mean of the variances of :math:`Y` over the random
-      seeds, and add these together.
+      seeds, and add these together. The mean of the variances and the variance
+      of the means are both weighted averages, so for each random seed we need
+      the *size of the population* for which the mean and variance are being
+      computed in order to weight the components appropriately.
 
   2.  Record the *first moment* :math:`\sum_i y_i` and *second moment*
       :math:`\sum_i y_i^2` of :math:`Y` with respect to population measure, then
       compute the variance of :math:`Y` using the formula
       :math:`\operatorname{Var}(Y) = \operatorname{E}(Y^2) -
       (\operatorname{E}Y)^2`. With this option, the first and second moments can
-      be aggregated over random seeds simply by summing. **Caution:** It is
-      possible that this method can become `numerically unstable
+      be aggregated over random seeds simply by summing. Again, for each random
+      seed we also need the *size of the population* for which the mean and
+      variance are being computed, as the population size appears in the
+      denominator. **Caution:** It is possible that this method can become
+      `numerically unstable
       <https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance>`_ if
       the population is very large or the values of :math:`Y` are very large,
       though typically this should not be a problem.
@@ -2076,6 +2083,8 @@ Desired Model Outputs
     - Add "low birthweight proportion" to Final Outputs table, and add
       corresponding numerator and denominator to Raw Outputs
     - Add coverage person-time to Raw Outputs table and Output Summary table
+    - Add incidence and remission to Final Outputs table and corresponding
+      transition counts to Raw Outputs table
     - Add "Additional Stratification" variables to Raw Outputs table
     - Change definitions of stratification groups to match our actual
       outputs (which are defined at time of measurement rather than simulant
@@ -2090,6 +2099,8 @@ Desired Model Outputs
       who turned that age between the last timestep and the current timestep
     - Add note to clarify that all measures are for *live* simulants (i.e. make
       sure to filter to "alive" simulants when doing stratification)
+    - Similar to the note about variance, specify more carefully how to compute
+      means and how to either aggregate them as population-weighted averages or report raw moments and populations
 
   - Take into account Ali's feedback from PR 226:
 
@@ -2179,6 +2190,53 @@ Model Limitations
   fortified food is the same as their mother's. It may be better to model these
   propensities as positively correlated but not necessarily identical.
 
+* For the iron effect on birthweight:
+
+  - We are assuming that flour consumption is independent of birthweight as
+    sampled by GBD. Thus we are not accounting for confounding by overall
+    caloric intake, which is likely correlated with both flour consumption as
+    well as birthweight.
+
+  - We are also assuming that fortification is independent of flour
+    consumption, given whether or not you eat flour. Thus we are not accounting
+    for confounding due to factors like urban vs. rural settings, which could be
+    correlated with both flour consumption and fortification.
+
+  - Ideally, we would want to get correlations between birthweight, flour
+    consumption, and fortification in our populations, so that we could create a
+    joint distribution to appropriately sample all three variables at once.
+    Accounting for this correlation would likely reduce the impact from
+    increased birthweight.
+
+* GBD data for neural tube defects, particularly for India, is low relative to
+  estimates of NTD burden from other data sources such as
+  [Kancherla-et-al-2018-India]_, [Dixon-et-al-2019]_,
+  [Kancherla-et-al-2018-Global]_, [Kancherla-et-al-2019]_. Therefore, we are
+  likely underestimating the impact of folic acid fortification in our
+  simulation, which relies upon GBD data.
+
+* GBD does not model folate deficiency, so we need to be careful that our
+  populations are comparable to the Keats study populations when applying the
+  effect size of folic acid fortification directly to the birth prevalence of
+  neural tube defects. (E.g., could there be some reason besides lack of
+  folate-rich food for a high rate of neural tube defects?)
+
+* The fortification scale-up strategy is relatively simple and does not capture
+  the numerous complexities of actually implementing a large-scale fortification
+  program. This design is deliberate, as the model is intended to provide an
+  upper bound on the potential impact fortification could have, by providing a
+  flexible framework to specify the maximum possible population coverage one
+  could hope to achieve with a given fortification strategy. Estimating what
+  this maximum possible coverage would be for a particular fortification
+  strategy is outside the scope of this model.
+
+* The model does not currently track individual sequelae of any cause (except
+  for anemia severity in the Iron Deficiency model), only overall DALYs due to
+  each cause, averaging over all sequalae.
+
+* The model does not currently allow modeling iron fortification and vitamin A
+  fortification together, because of different strategies for tracking anemia due to vitamin A deficiency in the two interventions.
+
 References
 ----------
 
@@ -2240,6 +2298,17 @@ References
     20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
 
 .. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
+
+.. [Dixon-et-al-2019]
+
+  View `Dixon et al. 2019`_
+
+    Dixon, M, Kancherla, V, Magana, T, Mulugeta, A, Oakley, GP. High potential
+    for reducing folic acid‐preventable spina bifida and anencephaly, and
+    related stillbirth and child mortality, in Ethiopia. Birth Defects Research.
+    2019; 111: 1513– 1519. https://doi.org/10.1002/bdr2.1584
+
+.. _Dixon et al. 2019: https://doi.org/10.1002/bdr2.1584
 
 .. [Dror-and-Allen-2018]
 
@@ -2342,6 +2411,38 @@ References
     Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.
 
 .. _`Imdad et al. 2016`: https://doi.org/10.1002/14651858.CD007480.pub3
+
+.. [Kancherla-et-al-2018-Global]
+
+  View `Kancherla et al. 2018 (Global)`_
+
+    Kancherla, V, Wagh, K, Johnson, Q, Oakley, GP. A 2017 global update on folic
+    acid‐preventable spina bifida and anencephaly. Birth Defects Research. 2018;
+    110: 1139– 1147. https://doi.org/10.1002/bdr2.1366
+
+.. _Kancherla et al. 2018 (Global): https://doi.org/10.1002/bdr2.1366
+
+.. [Kancherla-et-al-2018-India]
+
+  View `Kancherla et al. 2018 (India)`_
+
+    Kancherla, V, Oakley, GP. Total prevention of folic acid‐preventable spina
+    bifida and anencephaly would reduce child mortality in India: Implications
+    in achieving Target 3.2 of the Sustainable Development Goals. Birth Defects
+    Research. 2018; 110: 421– 428. https://doi.org/10.1002/bdr2.1175
+
+.. _Kancherla et al. 2018 (India): https://doi.org/10.1002/bdr2.1175
+
+.. [Kancherla-et-al-2019]
+
+  View `Kancherla et al. 2019`_
+
+    Kancherla, V., Carmichael, S.L., Feldkamp, M.L. and Berry, R.J. (2019),
+    Teratology society position statement on surveillance and prevalence
+    estimation of neural tube defects. Birth Defects Research, 111: 5-8.
+    https://doi.org/10.1002/bdr2.1434
+
+.. _Kancherla et al. 2019: https://doi.org/10.1002/bdr2.1434
 
 .. [Keats-et-al-2019]
 
