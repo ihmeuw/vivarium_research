@@ -13,6 +13,8 @@ Impairment Description in GBD 2019
 
 The anemia impairment in GBD 2019 represents the total burden due to anemia across *all* GBD causes with anemia sequelae. For instance, mild anemia due to dietary iron deficiency, mild anemia due to hookworm disease, and mild anemia due to maternal hemorrhage all contribute to the mild anemia *impairment* in GBD. See the REI IDs for the anemia impairments in the table below.
 
+.. _`Anemia Impairment REI IDs Table`:
+
 .. list-table:: Anemia Impairment REI IDs
   :widths: 15, 15
   :header-rows: 1
@@ -81,7 +83,7 @@ Once severity-specific anemia prevalence is estimated, years lived with disabili
 .. _`Anemia Disability Weights`:
 
 .. list-table:: Anemia Disability Weights
-  :widths: 15, 15, 15, 15
+  :widths: 15, 15
   :header-rows: 1
 
   * - Anemia Severity
@@ -127,7 +129,7 @@ Vivarium Modeling Strategy
 Scope
 ++++++++
 
-The Vivarium modeling strategy for the anemia impairment will first rely on the :ref:`Hemoglobin Distribution Model <2019_hemoglobin_distribution>`. Vivarium simulants should first be assigned a hemoglobin value and then their anemia status can be evaluated by the hemoglobin thresholds shown on this page. YLDs should be accrued according to the severity-specific disability weights listed in this document. Specific causes (or groups of causes, for example iron-responsive causes) of anemia can also be assigned to individual if relevant/necessary for the project.
+The Vivarium modeling strategy for the anemia impairment will first rely on the :ref:`Hemoglobin Distribution Model <2019_hemoglobin_distribution>`. Vivarium simulants should first be assigned a hemoglobin value and then their anemia status can be evaluated by the hemoglobin thresholds shown on this page (thresholds are pregnancy-specific for women of reproductive age; see the pregnancy hemoglobin adjustment documentation on the :ref:`Hemoglobin Distribution Model documentation page <2019_hemoglobin_distribution>`. YLDs should be accrued according to the severity-specific disability weights listed in this document. Specific causes (or groups of causes, for example iron-responsive causes) of anemia can also be assigned to individual if relevant/necessary for the project.
 
 Restrictions
 ++++++++++++
@@ -144,9 +146,9 @@ Restrictions
      -
    * - Female only
      - False
-     - Note the pregnancy adjustment for women of reproductive age
+     - Note the pregnancy adjustment for women of reproductive age, described in the :ref:`Hemoglobin Model Documentation <2019_hemoglobin_model>`
    * - Age group start
-     - Birth (age_group_id=2)
+     - Early neonatal (age_group_id=2)
      - Note early and late neonatal age group (ID 2,3) modelling exception
    * - Age group end
      - 95+
@@ -162,9 +164,11 @@ Additionally, the GBD 2019 causal attribution process assumes no change in hemog
 Validation Criteria
 +++++++++++++++++++
 
-Prevalence of severity-specific anemia should be approximately equal to the GBD 2019 severity-specific anemia impairment prevalence.
+Prevalence of severity-specific anemia as calculated in the Vivarium simulation should be approximately equal to the GBD 2019 severity-specific anemia impairment prevalence (REI IDs listed in the `Anemia Impairment REI IDs Table`_).
 
-0 < Severity-specific anemia prevalence < 1
+0 < severity-specific anemia prevalence < 1
+
+0 < total anemia prevalence < 1
 
 References
 ----------
