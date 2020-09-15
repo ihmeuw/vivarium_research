@@ -328,90 +328,86 @@ Cervical cancer screening algorithm was determined by three variables
      - Sex
      - Age
      - Screening technology
+     - Screening frequency
      - Co-test result
-     - Co-test sensitivity
-     - Co-test specificity
      - Follow-up test
-     - Follow-up test sensitivity
-     - Follow-up test specificity
+     - Follow-up frequency
    * - A
      - Female
-     - 21-65
-     - Cytology plus HPV test, every 3 years
-     - HPV negative, Cytology negative
-     - 17.4%
-     - 100%
-     - Cytology, every 3 years
-     - 65.9% (95%CI 54.9 to 75.3)
-     - 100%
+     - 21-29
+     - Cytology
+     - every 3 years
+     - 
+     - 
+     - 
    * - B
      - Female
-     - 21-65
-     - Cytology plus HPV test, every 3 years
-     - HPV positive, Cytology negative
-     - 23.5%
-     - 100%
-     - Cytology, every year
-     - 65.9% (95%CI 54.9 to 75.3)
-     - 100%
+     - 30-65
+     - Cytology plus HPV test
+     - every 5 years
+     - HPV negative, Cytology negative
+     - Cytology plus HPV test
+     - every 5 years
    * - C
      - Female
-     - 21-65
-     - Cytology plus HPV test, every 3 years
+     - 30-65
+     - Cytology plus HPV test
+     - every 5 years
+     - HPV positive, Cytology negative
+     - Cytology
+     - every year
+   * - C
+     - Female
+     - 30-65
+     - Cytology plus HPV test
+     - every 5 years
      - HPV negative, Cytology positive
-     - 5.9%
-     - 100%
-     - 
-     - 
-     - 
+     - Cytology
+     - every year
+   * - C
+     - Female
+     - 30-65
+     - Cytology plus HPV test
+     - every 5 years
+     - HPV positive, Cytology positive
+     - Cytology
+     - every year
    * - D
      - Female
-     - 21-65
-     - Cytology plus HPV test, every 3 years
-     - HPV positive, Cytology positive
-     - 53.2%
-     - 100%
-     - 
-     - 
-     - 
-   * - E
-     - Female
-     - <21 or 65+
+     - <21 or >65
      - No screening
-     - 
-     - 
-     - 
-     - 
-     - 
-     - 
-   * - F
-     - Male
-     - Any
-     - No screening
-     - 
-     - 
      - 
      - 
      - 
      - 
 
+.. list-table:: Screening sensitivity and specificity
+   :header-rows: 1
+
+   * - Screening technology
+     - Sensitivity
+     - Specificity
+   * - Cytology plus HPV test
+     - HPV-/Cytology- = 17.4%, HPV+/Cytology- = 23.5%, HPV-/Cytology+ = 5.9%, HPV+/Cytology+ = 53.2%
+     - 100%
+   * - Cytology
+     - 65.9% (95% CI 54.9 to 75.3)
+     - 100%
+
 .. note::
  
- - Co-test (cytology plus HPV test) is not highly recommended for women under 
-   30 according to guidelines from American Cancer Society and U.S. Preventive Services Task Force. To simply our screening algorithm, we decided to set initial age of the co-test to be the same as initial age of cytology alone, 
-   namely 21 years old in our simulation.
- - The stand-in value of co-test sensitivity was extracted from Schiffman et al. 
-   2018.
- - For now, follow-up test is not applicable with positive Cytology results. 
-   Though colposcopy is recommended after diagnosis of benign/invasive cervical cancer, we could use colposcopy referral rate to determine treatment coverage for benign cervical cancer. 
- - Specificity for both co-test and cytology alone are set to 100% in our model. 
+ - Co-test (cytology plus HPV test) is not recommended for women under 30 
+   according to guidelines from American Cancer Society and U.S. Preventive Services Task Force.
+ - High risk HPV infection is persistent and not self-curable during the simulation.
+ - We are not tracking HPV status for women under 30 and those follow-up with
+   cytology alone every year in Branch C.
 
 In initialization, We assume that
  - No one has prior knowledge of their disease status (and HPV status) on day one 
    of the simulation.
  - All simulants are buying insurance on day one of the simulation.
  - For simulants in cervical cancer (CC) state regardless of detection, they have 
-   a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, C, or D depending on their age, sex, and co-test result. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
+   a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, or C depending on their age and co-test result if performed. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
 
 :underline:`II. Screening schedule and attendance`
 
@@ -422,12 +418,19 @@ Probability of attending screening
    (Yan et al. 2017) more odds of attending the next screening than those who did
    not attend their last screening. 
 Time to next scheduled screening
- - For those who are in Branch A (yearly cytology): use truncated normal
-   distribution with mean 364 days, SD +/- 148 days, lower limit is 100 days,
-   upper limit is 700 days.
- - For those in Branch B (every 3 years cytology): use truncated normal
-   distribution with mean 1092 days, SD +/- 148 days, lower limit is 300 days,
-   upper limit is 2100 days.
+ - For those who are in Branch A (cytology in 3 years): use truncated normal
+   distribution with mean 1185 days, SD +/- 72 days, lower limit is x days,
+   upper limit is y days.
+ - For those who are in Branch B (co-test in 5 years): use truncated normal
+   distribution with mean 1975 days, SD +/- 72 days, lower limit is x days,
+   upper limit is y days.
+ - For those in Branch C (annual cytology): use truncated normal
+   distribution with mean 395 days, SD +/- 72 days, lower limit is x days,
+   upper limit is y days.
+
+.. todo::
+ 
+ Find evidence with smaller x and y compare to number derived from marketscan.
 
 :underline:`III. Screening initialization`
 
@@ -439,19 +442,27 @@ the methodology outlined in Section 5.3.2.II (Time to next scheduled screening).
 With a uniform distribution we randomly determine how far along that time interval 
 between appointments each individual is (X) at the beginning of the simulation (
 T_0). For females under 21 when the simulation begins the methodology is identical, 
-except T_0 is the simulant's 30th birthday rather than the beginning of the 
-simulation. No screening appointment will be initialized for males at any age, as 
-well as females above 65.
+except T_0 is the simulant's 21th birthday rather than the beginning of the 
+simulation. No screening appointment will be initialized for females above 65.
 
 .. image:: cervical_cancer_screening_event_time.svg
 
+:underline:`IV. Simulant screening trajectory`
+
+Screening events for women aged 21-29 years
+
+.. image:: screening_events_among_female_age_21_to_29.PNG
+
+Screening events for women aged 30-65 years
+
+.. image:: screening_events_among_female_age_30_to_65.PNG
+
 .. _5.3.3:
 
-5.3.3 Risk factor model
-~~~~~~~~~~~~~~~~~~~~~~~
-GBD risk factors: N/A
+5.3.3 HPV model
+~~~~~~~~~~~~~~~
 
-Non-GBD risk factor: Human Papilloma Virus (HPV)
+Human Papilloma Virus (HPV)
  - prevalence: 19.0% with 95%CI 17.1-20.9 (Li et al. 2019)
  - Incidence: TBD
  - exposure distirbution: dichotomous
@@ -464,8 +475,15 @@ relevant formulas
 
 .. note::
 
-  - Find HPV incidence (age-specific or age-standardized) from external sources
-  - How can we include the change of HPV incience by year?
+  - Can we back calculate the age-specific HPV incidence from age-specific HPV 
+    prevalence and the duration of HPV infection?
+     - incidence_HPV = :math:`\frac{\text{prevalence_HPV}}{\text{duration_HPV}}
+  - Do we need forecast HPV incience from 2020 to 2040?
+    
+.. todo::
+ 
+ add HPV vaccine efficacy section
+
 
 .. _5.3.4:
 
@@ -543,6 +561,11 @@ Treatment for benign cervical cancer
      - 
      - 
      - 
+   * - HPV vaccine efficacy
+     - ATP efficacy against persistent HPV infection = 89.6% (95%CI 79.3-95.4), 
+       ATP efficacy against CIN in any grade = 94.1 (95%CI 62.5-99.9)
+     - Schiller et al.
+     - ATP = according to protocol
 
 .. _5.5:
 
