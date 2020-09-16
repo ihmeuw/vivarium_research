@@ -388,8 +388,11 @@ Cervical cancer screening algorithm was determined by three variables
      - Sensitivity
      - Specificity
    * - Cytology plus HPV test
-     - HPV-/Cytology- = 17.4%, HPV+/Cytology- = 23.5%, HPV-/Cytology+ = 5.9%, HPV+/Cytology+ = 53.2%
-     - 100%
+     - HPV+: 76.7%
+     - HPV-: TBD
+   * - Cytology plus HPV test
+     - Cytology+: 59.1%
+     - Cytology-: 100%
    * - Cytology
      - 65.9% (95% CI 54.9 to 75.3)
      - 100%
@@ -398,9 +401,12 @@ Cervical cancer screening algorithm was determined by three variables
  
  - Co-test (cytology plus HPV test) is not recommended for women under 30 
    according to guidelines from American Cancer Society and U.S. Preventive Services Task Force.
- - High risk HPV infection is persistent and not self-curable during the simulation.
- - We are not tracking HPV status for women under 30 and those follow-up with
+ - High risk HPV infection is persistent and not self-curable during the 
+   simulation.
+ - We are not testing HPV for women under 30 and those follow-up with
    cytology alone every year in Branch C.
+ - Women who have been vaccinated or detected BCC and treated should continue 
+   to be screened.
 
 In initialization, We assume that
  - No one has prior knowledge of their disease status (and HPV status) on day one 
@@ -419,18 +425,18 @@ Probability of attending screening
    not attend their last screening. 
 Time to next scheduled screening
  - For those who are in Branch A (cytology in 3 years): use truncated normal
-   distribution with mean 1185 days, SD +/- 72 days, lower limit is x days,
-   upper limit is y days.
+   distribution with mean 1185 days, SD +/- 72 days, lower limit is 838 days,
+   upper limit is 1516 days.
  - For those who are in Branch B (co-test in 5 years): use truncated normal
    distribution with mean 1975 days, SD +/- 72 days, lower limit is x days,
    upper limit is y days.
  - For those in Branch C (annual cytology): use truncated normal
-   distribution with mean 395 days, SD +/- 72 days, lower limit is x days,
-   upper limit is y days.
+   distribution with mean 395 days, SD +/- 72 days, lower limit is 180 days,
+   upper limit is 1800 days.
 
 .. todo::
  
- Find evidence with smaller x and y compare to number derived from marketscan.
+ make the uncertainty interval smaller if possible
 
 :underline:`III. Screening initialization`
 
@@ -533,11 +539,15 @@ Treatment for benign cervical cancer
        HPV+/Cytology+ are 17.4%, 23.5%, 5.9%, 53.2%, respectively.
      - Schiffman et al. 2018
      - 
+   * - Screening specificity of co-test
+     - TBD
+     - 
+     - 
    * - Screening sensitivity of cytology alone
      - 65.9% (95% CI 54.9 to 75.3)
      - Koliopoulos et al. 2017
      - 
-   * - Screening specificity of both co-test and cytology alone
+   * - Screening specificity of cytology alone
      - 100%
      - 
      - by client’s assumption
