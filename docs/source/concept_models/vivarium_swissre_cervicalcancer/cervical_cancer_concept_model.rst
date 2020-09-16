@@ -418,25 +418,41 @@ In initialization, We assume that
 :underline:`II. Screening schedule and attendance`
 
 Probability of attending screening
- - Generate 1000 draws from normal distribution with mean=0.2, SD=0.002 for
+ - Generate 1000 draws from normal distribution with mean=0.25, SD=0.0025 for
    calculating the probability of simulants attending their first due screening.
  - If a simulant attended their last screening, they have 1.89 with 95%CI 1.06-2.49
    (Yan et al. 2017) more odds of attending the next screening than those who did
    not attend their last screening. 
-Time to next scheduled screening
- - For those who are in Branch A (cytology in 3 years): use truncated normal
-   distribution with mean 1185 days, SD +/- 72 days, lower limit is 838 days,
-   upper limit is 1516 days.
- - For those who are in Branch B (co-test in 5 years): use truncated normal
-   distribution with mean 1975 days, SD +/- 72 days, lower limit is x days,
-   upper limit is y days.
- - For those in Branch C (annual cytology): use truncated normal
-   distribution with mean 395 days, SD +/- 72 days, lower limit is 180 days,
-   upper limit is 1800 days.
 
-.. todo::
- 
- make the uncertainty interval smaller if possible
+Time to next scheduled screening
+
+.. list-table:: Screening waiting time distribution (days)
+   :header-rows: 1
+
+   * - Screening method
+     - Distribution
+     - Mean
+     - Standard deviation
+     - Lower limit
+     - Upper limit
+   * - Cytology in 3 years
+     - Normal distribution
+     - 1185
+     - 72
+     - 
+     - 
+   * - Cytology plus HPV test in 5 years
+     - Normal distribution
+     - 1975
+     - 72
+     - 
+     - 
+   * - Annual cytology
+     - Truncated normal distribution
+     - 395
+     - 72
+     - 180
+     - 1800
 
 :underline:`III. Screening initialization`
 
@@ -489,7 +505,6 @@ relevant formulas
 .. todo::
  
  add HPV vaccine efficacy section
-
 
 .. _5.3.4:
 
