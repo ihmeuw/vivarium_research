@@ -63,7 +63,7 @@ Cause hierarchy of cervical cancer in GBD
 -----------------------------------------
 
 .. list-table:: GBD cervical cancer cause hierarchy
-   :widths: 5 5 5 10
+   :widths: 5 5 5 20
    :header-rows: 1
 
    * - Cause name
@@ -85,10 +85,9 @@ Cause hierarchy of cervical cancer in GBD
    * - Cervical cancer
      - c_432
      - 3
-     - diagnosis_and_primary_therapy_phase_of_cervical_cancer (s_282)
-     - controlled_phase_of_cervical_cancer (s_283)
-     - metastatic_phase_of_cervical_cancer (s_284)
-     - terminal_phase_of_cervical_cancer (s_285)
+     - diagnosis_and_primary_therapy_phase_of_cervical_cancer (s_282), controlled_phase_of_cervical_cancer (s_283), metastatic_phase_of_cervical_cancer (s_284), terminal_phase_of_cervical_cancer (s_285)
+      
+       
 
 .. image:: cervical_cancer_hierarchy.svg
 
@@ -304,8 +303,58 @@ State and Transition Data Tables
 
 .. todo::
 
-  1. add details for crude prevalence ratio calculation
+  1. add details for crude prevalence ratio calculation (done)
   2. add methods to estimate incidence of high risk HPV infection
+
+Prevalence ratio calculation:
+
+1. MarketScan research databases capture person-specific clinical utilization, expenditures, and enrollment across inpatient, outpatient, prescription drug and carve-out services. 
+   Currently GBD estimates bundle benign and in situ cervical and uterine neoplasms. Thus, we use external marketScan data source to calculate ratio of benign to malignant cervical cancer. 
+2. Outpatient year 2016 and 2017 data were pulled with following ICD 10 codes: C53 Malignant neoplasm of cervix uteri, C53.0 Malignant neoplasm of endocervix, C53.1 Malignant neoplasm 
+   of exocervix, C53.8 Malignant neoplasm of overlapping sites of cervix uteri, C53.9 Malignant neoplasm of cervix uteri, D06 Carcinoma in situ of cervix uteri, D06.0 Carcinoma in situ of 
+   endocervix, D06.1 Carcinoma in situ of exocervix, D06.7 Carcinoma in situ of other parts of cervix, D06.9 Carcinoma in situ of cervix, D26.0 Other benign neoplasm of cervix uteri, Z12.4 
+   Encounter for screening for malignant neoplasm of cervix. 
+3. Non-medicare (age 0-65) & medicare (subset age 65+ only) were merged together to include all ages and limited to screened female patients only. After concatenating 2016& 2017 outpatient 
+   data, duplicates were removed based on enrolid and data were grouped by 5-year age band to align with GBD age pattern. Prevalence ratio was calculated using benign cervical cancer counts 
+   over invasive cervical cancer counts within each age group. Result shows younger age groups have larger ratio with wider uncertainty level. This ratio pattern is consistent with a study [Sun-et-al-2010]_ , 
+   that is BCC prevalence is higher than ICC prevalence for younger and middle age groups, but the specific ratio values are a little off.
+
+.. list-table:: prevalence ratio
+   :widths: 20 20
+   :header-rows: 1
+
+   * - Age Group
+     - Prevalence Ratio
+   * - 15_to_19
+     - 11.5    
+   * - 20_to_24
+     - 45.1  
+   * - 25_to_29
+     - 21.4  
+   * - 30_to_34
+     - 14.9  
+   * - 35_to_39
+     - 7.9  
+   * - 40_to_44
+     - 5.9  
+   * - 45_to_49
+     - 4.57 
+   * - 50_to_54
+     - 3.5 
+   * - 55_to_59
+     - 2.2
+   * - 60_to_64
+     - 1.96  
+   * - 65_to_69
+     - 1.2
+   * - 70_to_74
+     - 0.94
+   * - 75_to_79
+     - 0.57
+   * - 80 plus 0.5
+     - 0.5
+   * - all ages
+     - 6.22
 
 
 Validation Criteria
@@ -354,4 +403,7 @@ References
    Ferlay J, Ervik M, Lam F, Colombet M, Mery L, Piñeros M, Znaor A, Soerjomataram 
    I, Bray F (2018). Global Cancer Observatory: Cancer Today. Lyon, France: 
    International Agency for Research on Cancer.
-
+.. [Sun-et-al-2010]
+   Sun Z-R, Ji Y-H, Zhou W-Q, Zhang S-L, Jiang W-G, Ruan Q. Characteristics of HPV 
+   prevalence among women in Liaoning province, China. International Journal of Gynecology & Obstetrics 2010; 109: 105–9.
+   
