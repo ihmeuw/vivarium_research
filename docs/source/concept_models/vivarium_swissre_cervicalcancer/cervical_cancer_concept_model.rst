@@ -251,35 +251,35 @@ provinces.
      - 517
      - 18%
      - e^(ACMR) * 100,000 * 18%
-     - e^(prev_c432) * 18%
+     - prev_c432 * 18%
      - incidence_c432 * 100,000 * 18%
      - csmr_c432 * 100,000 * 18%
    * - Jiangsu
      - 506
      - 28%
-     - e^(ACMR) * 100,000 * 28%)
-     - e^(prev_c432) * 28%
+     - e^(ACMR) * 100,000 * 28%
+     - prev_c432 * 28%
      - incidence_c432 * 100,000 * 28%
      - csmr_c432 * 100,000 * 28%
    * - Guangdong
      - 496
      - 22%
      - e^(ACMR) * 100,000 * 22%
-     - e^(prev_c432) * 22%
+     - prev_c432 * 22%
      - incidence_c432 * 100,000 * 22%
      - csmr_c432 * 100,000 * 22%
    * - Henan
      - 502
      - 16%
      - e^(ACMR) * 100,000 * 16%
-     - e^(prev_c432) * 16%
+     - prev_c432 * 16%
      - incidence_c432 * 100,000 * 16%
      - csmr_c432 * 100,000 * 16%
    * - Heilongjiang
      - 501
      - 16%
      - e^(ACMR) * 100,000 * 16%
-     - e^(prev_c432) * 16%
+     - prev_c432 * 16%
      - incidence_c432 * 100,000 * 16%
      - csmr_c432 * 100,000 * 16%
 
