@@ -230,6 +230,11 @@ State and Transition Data Tables
      - hrHPV-infected
      - hrHPV incidence
      - no data has identified for Chinese women
+   * - r_hrHPV
+     - hrHPV-infected
+     - Susceptible
+     - hrHPV clearance/remission
+     - using stand in value of 0.1, to be updated later
    * - i_BCC_HPV+
      - hrHPV-infected
      - Benign cervical cancer (BCC)
