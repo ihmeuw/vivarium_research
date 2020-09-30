@@ -113,8 +113,8 @@ Demographics
 * Exit age (at what age to stop tracking simulants): **5 years**
 * Fertility: **Crude birth rate**
 
-Stratification
-++++++++++++++
+Output Stratification
++++++++++++++++++++++
 
 Stratify by **location, age, sex, and year**.
 
@@ -157,8 +157,11 @@ PAF-of-1 Cause/Risk Pairs
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
 
+Interventions
++++++++++++++
+
 Stratifying Exposure Variables by Baseline Intervention Coverage
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+----------------------------------------------------------------
 
 .. todo::
 
@@ -320,7 +323,7 @@ certain situations. We discuss the dichotomous and continuous cases in separate
 sections below.
 
 Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framework)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This method applies to exposures with dichotomous measures such as Vitamin A deficiency or neural tube defects:
 
@@ -368,7 +371,7 @@ coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and
 shifts the amount of people who receive equation 1 to equation 2.
 
 Baseline Coverage Stratification -- Continuous Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This method applies to continuous exposure variables such as hemoglobin or birth
 weight.
@@ -393,7 +396,7 @@ below.
   strategy we pick.
 
 Model Randomness
-++++++++++++++++
+----------------
 
 Random samples drawn from distributions of **intervention effect sizes**
 should be identical across model locations for each draw.
