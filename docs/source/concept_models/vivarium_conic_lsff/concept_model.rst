@@ -784,10 +784,10 @@ via Slack on March 19, 2020.
 	Perhaps need to make coverage inclusive such that: qx_i > exposure*(t) and qx_i >= coverage*(t) for future model runs
 
 Iron Fortification
-~~~~~~~~~~~~~~~~~~
+++++++++++++++++++
 
 Population Coverage Data and Coverage Algorithm - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The baseline coverage for iron fortification is the same as the baseline
 coverage for folic acid fortification, as described below_. Additionally, the
@@ -812,7 +812,7 @@ the following scenarios:
 	vice versa.
 
 Effect Size - Iron
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 Iron fortification of staple food affects two outcomes in our simulation
 model. The first outcome is an individual's hemoglobin concentration following
@@ -821,7 +821,7 @@ simulant's birth weight following the *maternal* consumption of iron fortified
 foods.
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 The effect of iron fortified food consumption on children under 7 years of age
 was obtained from the [Keats-et-al-2019]_ systematic review. However, the
@@ -886,7 +886,7 @@ as follows:
 	confidence interval around the mean.
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 The effect of maternal consumption of iron fortified food on infant birth
 weight was obtained from [Haider-et-al-2013]_. According to this data
@@ -1053,10 +1053,10 @@ See the following section to see if/how to apply the *bw_shift_i* parameter to
 individual simulants.
 
 Determining Whether A Simulant is Affected - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 For the purposes of our simulation, we made a few assumptions:
 
@@ -1288,7 +1288,7 @@ See below for a visual representation:
     (quadratic concave up) between 1 year and 1.5 years.
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 Our model will apply the effect size of maternal consumption of iron fortified
 foods on infant birth weight under the following assumptions:
@@ -1370,10 +1370,10 @@ the simulant's birth weight (in grams). This may then impact their LBWSG risk
 category.
 
 Application of Effect to Simulants - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 The age- and time-dependent effect of iron fortification on a simulant's
 hemoglobin level (as documented in the sections above) should be **additively**
@@ -1391,7 +1391,7 @@ should **not** be applied to that simulant.
   See Baseline Calibration section below for special considerations regarding baseline coverage
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 The time-dependent effect of iron fortification on a simulant's birth weight
 (as documented in the sections above) should be **additively** applied to a
@@ -1409,7 +1409,7 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 .. _baseline_calibration_hb_bw_section:
 
 Baseline Calibration -- Hemoglobin and Birth Weight
-'''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A simulant's individual hemoglobin/birthweight value *in the baseline scenario* should be assigned as follows:
 
@@ -1443,7 +1443,7 @@ See the proofs for this approach below.
 .. image:: baseline_calibration_proofs.png
 
 Summary of Iron Intervention Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following Python-style pseudocode summarizes all the pieces of the iron
 intervention algorithm (for both birthweight and hemoglobin) and is intended to
