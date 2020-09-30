@@ -135,30 +135,27 @@ vaccination, cervical cancer screening, management of detected disease) for elim
 strategic in nature. [WHO cervical cancer elimination strategy]_
 
 Based on SwissRe's interest, our simulation intervention combined the cervical 
-cancer screening and HPV vaccination to evaluate the extreme of the cervical 
-cancer detections in following scenarios:
- - Baseline (lowest claim rate/payout): Scale-up of HPV vaccination while 
-   keeping cervical cancer screening constant over time among insured population.
- - Alternative (highest claim rate/payout): Scale-up of cervical cancer 
-   screening while keeping HPV vaccination constant over time among insured population.
+cancer screening and HPV vaccination to evaluate the cervical cancer detection 
+in following scenarios:
+ - Baseline (status quo scenario): keep HPV vaccination and cervical cancer 
+   screening coverage constant over time among insured female.
+ - Alternative (expected future scenario): scale-up of both cervical cancer 
+   screening and HPV vaccination over time among insured female.
 
 .. _4.1:
 
 4.1 Simulation scenarios
 ------------------------
 **Baseline:** by 2040, project existing level of cervical cancer screening for 
-women aged 21 to 65; linear ramp up HPV vaccination to cover 90% of the women 
-aged 15 to 45 in 2030, then stay 90% in 2031-2040. Where:
- - Women without HPV infection are provided with cytology every three years
- - Women with HPV infection are provided cytology every year
+insured female aged 21 to 65 years and HPV vaccination for insured female aged 
+15 to 45 years.
 
-**Alternative scenario:** by 2040, project existing level of HPV vaccination for 
-women aged 15 to 45; linear ramp up cervical cancer screening to cover 70% of the 
-women aged 21 to 65 in 2030, then stay 70% in 2031-2040. Where:
- - Women without HPV infection are provided with cytology every three years
- - Women with HPV infection are provided cytology every year
+**Alternative scenario:** by 2030, linear ramp up cervical cancer screening to 
+cover 50% of the insured female aged 21 to 65 years and HPV vaccination to cover 
+40% of the insured female aged 15 to 45 years. Both of the HPV vaccination and 
+cervical cancer screening coverage remain constant in 2030 to 2040.
 
-.. image:: cervical_cancer_scale_up.PNG
+.. image:: cervical_cancer_scale_up.png
 
 .. list-table:: Intervention scale-up
    :header-rows: 1
@@ -173,24 +170,24 @@ women aged 21 to 65 in 2030, then stay 70% in 2031-2040. Where:
      - 25%
    * - Baseline
      - HPV vaccination
-     - 2020-2030
-     - Stay 10% in 2020-2021, then linearly ramp up from 10% to 90% in 2021-2030.
-   * - Baseline
-     - HPV vaccination
-     - 2031-2040
-     - 90%
-   * - Alternative
-     - HPV vaccination
      - 2020-2040
      - 10%
    * - Alternative
      - Cervical cancer screening
      - 2020-2030
-     - Stay 25% in 2020-2021, then linearly ramp up from 25% to 70% in 2021-2030.
+     - Stay 25% in 2020-2021, then linearly ramp up from 25% to 50% in 2021-2030.
    * - Alternative
      - Cervical cancer screening
-     - 2031-2040
-     - 70%
+     - 2030-2040
+     - 50%
+   * - Alternative
+     - HPV vaccination
+     - 2020-2030
+     - Stay 10% in 2020-2021, then linearly ramp up from 10% to 40% in 2021-2030.
+   * - Alternative
+     - HPV vaccination
+     - 2030-2040
+     - 40%
 
 .. note::
 
@@ -198,8 +195,8 @@ women aged 21 to 65 in 2030, then stay 70% in 2031-2040. Where:
    with 95%CI 18.6-22.8 in China. We set it as 25% as we believe insured population has higher screening coverage than general population. 
  - No data has identified for current HPV vaccination rates in China. Temporarily 
    we will use 10%.
- - The target screening and HPV vaccination coverage in 2030 are guided by WHO 
-   cervical cancer elimination strategy.
+ - The target HPV vaccination and cervical cancer screening coverage in 2030 are 
+   guided by IHME and SwissRe's assumption for Chinese insured female.
 
 
 .. _5.0:
@@ -473,11 +470,11 @@ simulation. No screening appointment will be initialized for females above 65.
 
 Screening events for women aged 21-29 years
 
-.. image:: screening_events_among_female_age_21_to_29.PNG
+.. image:: screening_events_among_female_age_21_to_29.png
 
 Screening events for women aged 30-65 years
 
-.. image:: screening_events_among_female_age_30_to_65.PNG
+.. image:: screening_events_among_female_age_30_to_65.png
 
 .. _5.3.3:
 
@@ -537,18 +534,18 @@ Treatment for benign cervical cancer
      - Wang et al. 2015
      - It's an arbitrary number greater than 20.7%.
    * - Target cervical cancer screening coverage in 2030
-     - 70%
-     - WHO cervical cancer elimination strategy
+     - 50%
      - 
+     - by assumption
    * - Initial HPV vaccination coverage
      - 10%
      - 
      - The current HPV vaccination rates remain low in China, no data has
        identified.
    * - Target HPV vaccination coverage in 2030
-     - 90%
-     - WHO cervical cancer elimination strategy
+     - 40%
      - 
+     - by assumption
    * - Screening sensitivity of co-test
      - The detection rates of HPV-/Cytology-, HPV+/Cytology-, HPV-/Cytology+, 
        HPV+/Cytology+ are 17.4%, 23.5%, 5.9%, 53.2%, respectively.
@@ -558,11 +555,11 @@ Treatment for benign cervical cancer
      - TBD
      - 
      - 
-   * - Screening sensitivity of cytology alone
+   * - Screening sensitivity of cytology alone test
      - 65.9% (95% CI 54.9 to 75.3)
      - Koliopoulos et al. 2017
      - 
-   * - Screening specificity of cytology alone
+   * - Screening specificity of cytology alone test
      - 100%
      - 
      - by client’s assumption
