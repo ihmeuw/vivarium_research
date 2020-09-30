@@ -1566,12 +1566,12 @@ clarify the intent.
                                 )
 
 Folic Acid Fortification
-~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++
 
 .. _below:
 
 Population Coverage Data - Iron and Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our `coverage algorithm`_ for folic acid and iron will use three parameters,
 :math:`a`, :math:`b`, and :math:`c`, which describe the existing level of
@@ -1633,7 +1633,7 @@ between 53% and 55% of the wheat flour is fortifiable, based data from
 for :math:`b` and :math:`c` have a width of 10% (chosen arbitrarily).
 
 Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **For Ethiopia parameter** :math:`a`, assume
 
@@ -1730,7 +1730,7 @@ Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
 .. image:: coverage_india_nigeria.svg
 
 Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For **Ethiopia**, the estimates in the table are already at the national level.
 
@@ -1773,7 +1773,7 @@ from the same paper and therefore could have a similar bias.
   Also, draw histograms for the distributions.
 
 Joint distribution of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To ensure that :math:`a\le b\le c` for each location, we will use the
 `comonotone coupling <comonotonicity_>`_ of the three random variables. That is,
@@ -1814,7 +1814,7 @@ the national estimate  obtained as described above.
 .. _coverage_algorithm_section:
 
 Coverage Algorithm
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
@@ -1882,7 +1882,7 @@ In words, our intervention algorithm does the following:
     vehicle.
 
 Determining Whether a Simulant Is Affected - Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Folic acid `reduces the birth prevalence <effect size - folic acid_>`_ of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. In order for a newborn to have
@@ -1924,7 +1924,7 @@ probability that the newborn has a neural tube defect. We will describe how to
 do this below.
 
 Effect Size - Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Folic acid fortification reduces the birth prevalence of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. The effect size is measured as
@@ -1978,7 +1978,7 @@ as follows:
 
 
 Determining Whether a Simulant Is Born with an NTD
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The procedure here uses the standard coverage gap framework:
 
