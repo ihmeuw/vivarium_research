@@ -411,13 +411,13 @@ locations are attributable to disease burden in each model location rather
 than randomness in sampling from the effect size distribution.
 
 Interventions
-+++++++++++++
+-------------
 
 Vitamin A Fortification
-~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++
 
 Research Considerations
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In this model, the vitamin A fortification intervention affects the
 **prevalence of vitamin A deficiency**. The effect size for this intervention
@@ -523,7 +523,7 @@ onset of exposure to vitamin A fortification, including:
  	Add more detail regarding the time to response.
 
 Effect Size - Vitamin A
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In our Vivarium simulation, the effect of exposure foods **not** fortified
 with vitamin A on the prevalence of vitamin A deficiency realtive to those
@@ -588,7 +588,7 @@ as follows:
 	via links.
 
 Time to Response
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
 Further, the time-to-response to vitamin A fortification in years should also
 be sampled such that:
@@ -613,7 +613,7 @@ be sampled such that:
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
 Population Coverage Data
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The coverage algorithm for vitamin A fortification should follow the same approach described
 in this concept model document for folic acid fortification (see `Population Coverage Data - Iron and Folic Acid`_).
@@ -667,7 +667,7 @@ existing coverage of folic acid in Ethiopia).
 	Federal Democratic Republic of Ethiopia, 2011).
 
 Effect of Intervention on Simulants
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As described in the research considerations section, the
 intervention effect is dependent on age and time since intervention coverage.
@@ -733,7 +733,7 @@ Where,
 	- rr_i is the relative risk assigned to the individual simulant
 
 Summary of Vitamin A Intervention Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The pseudo-code used to implement the vitamin A intervention effect in Vivarium
 is shown below. This summary was written by James and sent to Ali and Nathaniel
