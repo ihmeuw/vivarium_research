@@ -116,7 +116,8 @@ Demographics
 Output Stratification
 +++++++++++++++++++++
 
-Stratify by **location, age, sex, and year**.
+See the :ref:`Output Stratification Groups Table <stratification_groups_table>`
+and the :ref:`Raw Outputs Table <raw_outputs_table>`.
 
 Scenarios
 +++++++++
@@ -159,6 +160,12 @@ Risk-Outcome Relationships
 
 Interventions
 +++++++++++++
+
+* :ref:`Vitamin A Fortification <vitamin_a_intervention_section>`
+
+* :ref:`Iron Fortification <iron_intervention_section>`
+
+* :ref:`Folic Acid Fortification <folic_acid_intervention_section>`
 
 Stratifying Exposure Variables by Baseline Intervention Coverage
 ----------------------------------------------------------------
@@ -410,8 +417,10 @@ This is to ensure that differences in intervention impact across model
 locations are attributable to disease burden in each model location rather
 than randomness in sampling from the effect size distribution.
 
-Interventions
--------------
+Intervention Descriptions
+-------------------------
+
+.. _vitamin_a_intervention_section:
 
 Vitamin A Fortification
 +++++++++++++++++++++++
@@ -782,6 +791,8 @@ via Slack on March 19, 2020.
 .. note::
 
 	Perhaps need to make coverage inclusive such that: qx_i > exposure*(t) and qx_i >= coverage*(t) for future model runs
+
+.. _iron_intervention_section:
 
 Iron Fortification
 ++++++++++++++++++
@@ -1565,6 +1576,8 @@ clarify the intent.
                                    )
                                 )
 
+.. _folic_acid_intervention_section:
+
 Folic Acid Fortification
 ++++++++++++++++++++++++
 
@@ -2019,7 +2032,9 @@ Desired Model Outputs
   :widths: 1 1 1 1 1 1 1
   :header-rows: 1
 
-.. csv-table:: Stratification Groups
+.. _stratification_groups_table:
+
+.. csv-table:: Output Stratification Groups
   :file: stratification_groups.csv
   :widths: 1 1 1 1 1 1
   :header-rows: 1
@@ -2028,6 +2043,8 @@ Desired Model Outputs
   :file: final_outputs.csv
   :widths: 1 1 1 1 1 1
   :header-rows: 1
+
+.. _raw_outputs_table:
 
 .. csv-table:: Raw Outputs
   :file: raw_outputs.csv
