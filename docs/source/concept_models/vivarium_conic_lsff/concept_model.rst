@@ -113,10 +113,11 @@ Demographics
 * Exit age (at what age to stop tracking simulants): **5 years**
 * Fertility: **Crude birth rate**
 
-Stratification
-++++++++++++++
+Output Stratification
++++++++++++++++++++++
 
-Stratify by **location, age, sex, and year**.
+See the :ref:`Output Stratification Groups Table <stratification_groups_table>`
+and the :ref:`Raw Outputs Table <raw_outputs_table>`.
 
 Scenarios
 +++++++++
@@ -157,8 +158,17 @@ PAF-of-1 Cause/Risk Pairs
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
 
+Interventions
++++++++++++++
+
+* :ref:`Vitamin A Fortification <vitamin_a_intervention_section>`
+
+* :ref:`Iron Fortification <iron_intervention_section>`
+
+* :ref:`Folic Acid Fortification <folic_acid_intervention_section>`
+
 Stratifying Exposure Variables by Baseline Intervention Coverage
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+----------------------------------------------------------------
 
 .. todo::
 
@@ -320,7 +330,7 @@ certain situations. We discuss the dichotomous and continuous cases in separate
 sections below.
 
 Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framework)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This method applies to exposures with dichotomous measures such as Vitamin A deficiency or neural tube defects:
 
@@ -368,7 +378,7 @@ coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and
 shifts the amount of people who receive equation 1 to equation 2.
 
 Baseline Coverage Stratification -- Continuous Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This method applies to continuous exposure variables such as hemoglobin or birth
 weight.
@@ -393,7 +403,7 @@ below.
   strategy we pick.
 
 Model Randomness
-++++++++++++++++
+----------------
 
 Random samples drawn from distributions of **intervention effect sizes**
 should be identical across model locations for each draw.
@@ -407,14 +417,16 @@ This is to ensure that differences in intervention impact across model
 locations are attributable to disease burden in each model location rather
 than randomness in sampling from the effect size distribution.
 
-Interventions
-+++++++++++++
+Intervention Descriptions
+-------------------------
+
+.. _vitamin_a_intervention_section:
 
 Vitamin A Fortification
-~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++
 
 Research Considerations
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In this model, the vitamin A fortification intervention affects the
 **prevalence of vitamin A deficiency**. The effect size for this intervention
@@ -520,7 +532,7 @@ onset of exposure to vitamin A fortification, including:
  	Add more detail regarding the time to response.
 
 Effect Size - Vitamin A
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In our Vivarium simulation, the effect of exposure foods **not** fortified
 with vitamin A on the prevalence of vitamin A deficiency realtive to those
@@ -585,7 +597,7 @@ as follows:
 	via links.
 
 Time to Response
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
 Further, the time-to-response to vitamin A fortification in years should also
 be sampled such that:
@@ -610,7 +622,7 @@ be sampled such that:
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
 Population Coverage Data
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The coverage algorithm for vitamin A fortification should follow the same approach described
 in this concept model document for folic acid fortification (see `Population Coverage Data - Iron and Folic Acid`_).
@@ -664,7 +676,7 @@ existing coverage of folic acid in Ethiopia).
 	Federal Democratic Republic of Ethiopia, 2011).
 
 Effect of Intervention on Simulants
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As described in the research considerations section, the
 intervention effect is dependent on age and time since intervention coverage.
@@ -730,7 +742,7 @@ Where,
 	- rr_i is the relative risk assigned to the individual simulant
 
 Summary of Vitamin A Intervention Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The pseudo-code used to implement the vitamin A intervention effect in Vivarium
 is shown below. This summary was written by James and sent to Ali and Nathaniel
@@ -780,11 +792,13 @@ via Slack on March 19, 2020.
 
 	Perhaps need to make coverage inclusive such that: qx_i > exposure*(t) and qx_i >= coverage*(t) for future model runs
 
+.. _iron_intervention_section:
+
 Iron Fortification
-~~~~~~~~~~~~~~~~~~
+++++++++++++++++++
 
 Population Coverage Data and Coverage Algorithm - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The baseline coverage for iron fortification is the same as the baseline
 coverage for folic acid fortification, as described below_. Additionally, the
@@ -809,7 +823,7 @@ the following scenarios:
 	vice versa.
 
 Effect Size - Iron
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 Iron fortification of staple food affects two outcomes in our simulation
 model. The first outcome is an individual's hemoglobin concentration following
@@ -818,7 +832,7 @@ simulant's birth weight following the *maternal* consumption of iron fortified
 foods.
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 The effect of iron fortified food consumption on children under 7 years of age
 was obtained from the [Keats-et-al-2019]_ systematic review. However, the
@@ -883,7 +897,7 @@ as follows:
 	confidence interval around the mean.
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 The effect of maternal consumption of iron fortified food on infant birth
 weight was obtained from [Haider-et-al-2013]_. According to this data
@@ -1050,10 +1064,10 @@ See the following section to see if/how to apply the *bw_shift_i* parameter to
 individual simulants.
 
 Determining Whether A Simulant is Affected - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 For the purposes of our simulation, we made a few assumptions:
 
@@ -1285,7 +1299,7 @@ See below for a visual representation:
     (quadratic concave up) between 1 year and 1.5 years.
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 Our model will apply the effect size of maternal consumption of iron fortified
 foods on infant birth weight under the following assumptions:
@@ -1367,10 +1381,10 @@ the simulant's birth weight (in grams). This may then impact their LBWSG risk
 category.
 
 Application of Effect to Simulants - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 The age- and time-dependent effect of iron fortification on a simulant's
 hemoglobin level (as documented in the sections above) should be **additively**
@@ -1388,7 +1402,7 @@ should **not** be applied to that simulant.
   See Baseline Calibration section below for special considerations regarding baseline coverage
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 The time-dependent effect of iron fortification on a simulant's birth weight
 (as documented in the sections above) should be **additively** applied to a
@@ -1406,7 +1420,7 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 .. _baseline_calibration_hb_bw_section:
 
 Baseline Calibration -- Hemoglobin and Birth Weight
-'''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A simulant's individual hemoglobin/birthweight value *in the baseline scenario* should be assigned as follows:
 
@@ -1440,7 +1454,7 @@ See the proofs for this approach below.
 .. image:: baseline_calibration_proofs.png
 
 Summary of Iron Intervention Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following Python-style pseudocode summarizes all the pieces of the iron
 intervention algorithm (for both birthweight and hemoglobin) and is intended to
@@ -1562,13 +1576,15 @@ clarify the intent.
                                    )
                                 )
 
+.. _folic_acid_intervention_section:
+
 Folic Acid Fortification
-~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++
 
 .. _below:
 
 Population Coverage Data - Iron and Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our `coverage algorithm`_ for folic acid and iron will use three parameters,
 :math:`a`, :math:`b`, and :math:`c`, which describe the existing level of
@@ -1630,7 +1646,7 @@ between 53% and 55% of the wheat flour is fortifiable, based data from
 for :math:`b` and :math:`c` have a width of 10% (chosen arbitrarily).
 
 Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **For Ethiopia parameter** :math:`a`, assume
 
@@ -1727,7 +1743,7 @@ Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
 .. image:: coverage_india_nigeria.svg
 
 Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For **Ethiopia**, the estimates in the table are already at the national level.
 
@@ -1770,7 +1786,7 @@ from the same paper and therefore could have a similar bias.
   Also, draw histograms for the distributions.
 
 Joint distribution of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To ensure that :math:`a\le b\le c` for each location, we will use the
 `comonotone coupling <comonotonicity_>`_ of the three random variables. That is,
@@ -1811,7 +1827,7 @@ the national estimate  obtained as described above.
 .. _coverage_algorithm_section:
 
 Coverage Algorithm
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
@@ -1879,7 +1895,7 @@ In words, our intervention algorithm does the following:
     vehicle.
 
 Determining Whether a Simulant Is Affected - Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Folic acid `reduces the birth prevalence <effect size - folic acid_>`_ of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. In order for a newborn to have
@@ -1921,7 +1937,7 @@ probability that the newborn has a neural tube defect. We will describe how to
 do this below.
 
 Effect Size - Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Folic acid fortification reduces the birth prevalence of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. The effect size is measured as
@@ -1975,7 +1991,7 @@ as follows:
 
 
 Determining Whether a Simulant Is Born with an NTD
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The procedure here uses the standard coverage gap framework:
 
@@ -2016,7 +2032,9 @@ Desired Model Outputs
   :widths: 1 1 1 1 1 1 1
   :header-rows: 1
 
-.. csv-table:: Stratification Groups
+.. _stratification_groups_table:
+
+.. csv-table:: Output Stratification Groups
   :file: stratification_groups.csv
   :widths: 1 1 1 1 1 1
   :header-rows: 1
@@ -2025,6 +2043,8 @@ Desired Model Outputs
   :file: final_outputs.csv
   :widths: 1 1 1 1 1 1
   :header-rows: 1
+
+.. _raw_outputs_table:
 
 .. csv-table:: Raw Outputs
   :file: raw_outputs.csv
