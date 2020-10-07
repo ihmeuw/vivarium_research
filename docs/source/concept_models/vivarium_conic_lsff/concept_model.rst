@@ -1465,6 +1465,8 @@ clarify the intent.
 
 .. code-block::
 
+  import numpy as np
+
   ## Definitions:
   t                         := current time in years (t=0 is start of simulation)
   t_end                     := time when simulation ends, in years since start (e.g. 6 years)
@@ -1555,6 +1557,32 @@ clarify the intent.
     birthweight_i     = birthweight_i + bw_shift_i
 
   ## At each simulation time step (including t=0 or when simulant is born):
+    # Determine whether simulant's household is receiving iron-fortified food,
+    # regardless of whether the simulant is iron-responsive
+  household_covered_i(t)  = time_covered_i <= t
+                          = p_i < coverage(t)
+    # Effect on Hb:
+    # Only adjust Hb level for iron-responsive individuals
+  if iron_responsive_i:
+      # Shift iron-responsive simulants' Hb levels down to calibrate for baseline coverage.
+      # Take into account the age-dependent effect size but not the 6-month time lag.
+    hb_i = hb_gbd(age_i(t)) - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
+      # Clip Hb value to be >=1 in case shifting made it negative
+    hb_i = np.clip(hb_i, 1, np.inf)
+      # Only increase simulant's Hb if their household is covered
+    if household_covered_i(t):
+        # Fortification starts either when the household receives coverage, or when
+        # the child turns 6 months old and starts eating solids, whichever is later.
+        # Recall that if the child is covered in baseline, then time_covered_i =
+        # float('-inf'), so coverage always starts at age 6 months in this case.
+      time_since_fortified_i(t) = min(t - time_covered_i, age(t) - 0.5)
+        # Increase simulant's Hb level by the appropriate amount, taking into
+        # account both the age-dependent effect and the 6-month time lag.
+      hb_i += (hb_lag_fraction(time_since_fortified_i(t))
+               * hb_age_fraction(age_i(t))
+               * hb_shift
+              )
+
       # Only adjust Hb level for iron-responsive individuals
   if iron_responsive_i:
     household_covered_i(t)    = time_covered_i <= t
