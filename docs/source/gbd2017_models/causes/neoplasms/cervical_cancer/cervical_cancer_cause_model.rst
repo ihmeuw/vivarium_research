@@ -297,8 +297,14 @@ State and Transition Data Tables
      - demography for 2017 
      - mid-year population
    * - prev_hrHPV
-     - extracted from Zhao et al 2012 for urban women 
-     - :download:`data source memo<memo_cervical_cancer_transition_6oct20.docs>`
+     - :download:`prevalence<prevalence_dismod_6oct20.csv>` output from Dismod notebook
+     - :download:`data source memo<memo_cervical_cancer_transition_6oct20.docx>` 
+   * - i_hrHPV
+     - :download:`incidence<incidence_dismod_6oct20.csv>` output from Dismod notebook
+     - :download:`data source memo<memo_cervical_cancer_transition_6oct20.docx>` 
+   * - r_hrHPV
+     - :download:`clearance<clearance_dismod_6oct20.csv>` output from Dismod notebook
+     - :download:`data source memo<memo_cervical_cancer_transition_6oct20.docx>` 
    * - RR_hrHPV
      - extracted from Chen et al.
      - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3) -use log normal-
