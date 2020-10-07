@@ -180,9 +180,9 @@ State and Transition Data Tables
      - 0
      - No disability weights for susceptible state
    * - hrHPV-infected
-     - prevalence
-     - 19.0% (95%CI, 17.1-20.9)
-     - see age-specific value at Data sources table
+     - age-specific prevalence
+     - hrHPV age-specific prevalence :download:`prevalence<prevalence_dismod_6oct20.csv>` 
+     - age-specific prevalence outputted from Dismod notebook 
    * - hrHPV-infected
      - excess mortality rate
      - 0
@@ -227,14 +227,14 @@ State and Transition Data Tables
      - Notes
    * - i_hrHPV
      - Susceptible
-     - hrHPV-infected
-     - hrHPV incidence
-     - no data has identified for Chinese women
+     - hrHPV-infected 
+     - hrHPV age-specific incidence :download:`incidence<incidence_dismod_6oct20.csv>` 
+     - age-specific incidence data outputted by Dismod notebook from prevalence and clearance input
    * - r_hrHPV
      - hrHPV-infected
      - Susceptible
-     - hrHPV clearance/remission
-     - using stand in value of 0.1, to be updated later
+     - hrHPV age-specific clearance :download:`clearance<clearance_dismod_6oct20.csv>`
+     - age-specific clearance data outputted by Dismod notebook
    * - i_BCC_HPV+
      - hrHPV-infected
      - Benign cervical cancer (BCC)
@@ -297,11 +297,11 @@ State and Transition Data Tables
      - demography for 2017 
      - mid-year population
    * - prev_hrHPV
-     - extracted from Li et al.
-     - the infection rate of high-risk HPVs in women aged <25, 25-45, and >45 years was 24.3% (95%CI, 19.0%-29.6%), 19.9% (95%CI, 16.4-23.4), and 21.4% (95%CI, 17.3-25.5), respectively.
+     - extracted from Zhao et al 2012 for urban women 
+     - :download:`data source memo<memo_cervical_cancer_transition_6oct20.docs>`
    * - RR_hrHPV
      - extracted from Chen et al.
-     - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
+     - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3) -use log normal-
    * - PAF
      - derived from prev_hrHPV and RR_hrHPV
      - PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
