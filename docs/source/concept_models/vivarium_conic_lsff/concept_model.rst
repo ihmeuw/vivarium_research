@@ -1477,11 +1477,6 @@ clarify the intent.
   time_since_fortified_i(t) := amount of time since child started eating iron-fortified food
   birthweight_i             := simulant's birthweight after adjusting for mother's iron consumption
   hb_i(t)                   := simulant's hemoglobin level after adjusting for fortification
-    # Coverage groups are used only for stratification
-  iron_coverage_group       := population subgroup indicating in which scenario (if any) the child's
-                               household received iron-fortified food by the end of the simulation
-  mother_iron_group         := population subgroup indicating in which scenario (if any) the child's
-                               mother got sufficient iron-fortification during pregnancy
 
   ## Population level parameters:
   hb_shift                = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
@@ -1514,17 +1509,9 @@ clarify the intent.
   iron_responsive_i       = whether individual is responsive to iron fortification
   age_i(t)                = the simulant's age at time t
   hb_gbd(age_i(t))        = hemoglobin level drawn from GBD for simulant
-    # These times are both float('-inf') if simulant is covered in baseline
+    # This time is float('-inf') if simulant is covered in baseline
     # and float('inf') if simulant never gets covered
-  time_covered_baseline_i = argmin_t(p_i < baseline_coverage(t) == True)
   time_covered_i          = argmin_t(p_i < coverage(t) == True)
-    # Stratification on child's iron coverage
-  iron_coverage_group     = ('baseline' if time_covered_baseline_i <= t_end else
-                             'intervention_not_baseline' if time_covered_i <= t_end else
-                             'uncovered')
-                          = ('baseline' if p_i < baseline_coverage(t_end) else
-                             'intervention_not_baseline' if p_i < coverage(t_end) else
-                             'uncovered')
 
   ## At beginning of simulation (t=0):
   mother_fortified_i    = 'unknown'
@@ -1537,14 +1524,6 @@ clarify the intent.
   critical_time       = t - gestational_age_i + 20_weeks
   mother_fortified_i  = ((time_covered_i <= critical_time) and
                          (t-time_covered_i) >= 7_weeks)
-    # For stratification on mother's iron coverage
-  mother_fortified_baseline_i
-                      = ((time_covered_baseline_i <= critical_time) and
-                         (t-time_covered_baseline_i) >= 7_weeks)
-                      = p_i < baseline_coverage(0) # since baseline coverage is constant
-  mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
-                         'intervention_not_baseline' if mother_fortified_i else
-                         'uncovered')
     # Effect on birthweight:
     # Shift everyone's birthweight down to calibrate for baseline coverage
   birthweight_i       = birthweight_gbd_i - baseline_coverage(t) * mean_bw_shift
@@ -1582,27 +1561,6 @@ clarify the intent.
                * hb_age_fraction(age_i(t))
                * hb_shift
               )
-
-      # Only adjust Hb level for iron-responsive individuals
-  if iron_responsive_i:
-    household_covered_i(t)    = time_covered_i <= t
-                              = p_i < coverage(t)
-      # Fortification starts either when the household receives coverage, or when
-      # the child turns 6 months old and starts eating solids, whichever is later.
-      # Recall that if the child is covered in baseline, then time_covered_i =
-      # float('-inf'), so coverage always starts at age 6 months in this case.
-    time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
-      # Effect on Hb:
-      # #calibrate for baseline coverage, and take into account
-      # the age-dependent effect size and the 6 month lag time.
-    hb_i(t)                   = (hb_gbd(age_i(t))
-                                 - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
-                                 + (household_covered_i(t)
-                                    * hb_lag_fraction(time_since_fortified_i(t))
-                                    * hb_age_fraction(age_i(t))
-                                    * hb_shift
-                                   )
-                                )
 
 .. _folic_acid_intervention_section:
 
