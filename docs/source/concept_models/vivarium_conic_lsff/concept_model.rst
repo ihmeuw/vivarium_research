@@ -1248,31 +1248,37 @@ Combining everything:
 
   # At the individual simulant level, at each time step (time = t)
 
+  # Determine whether simulant's household is receiving iron-fortified food,
+  # regardless of whether the simulant is iron-responsive
   household_covered_i(t)  = time_covered_i <= t
                           = p_i < coverage(t)
 
+  # Effect on Hb:
   # Only adjust Hb level for iron-responsive individuals
   if iron_responsive_i:
-    # Effect on Hb:
-    # #calibrate for baseline coverage, and take into account
-    # the age-dependent effect size and the 6 month lag time.
 
+    # Shift iron-responsive simulants' Hb levels down to calibrate for baseline coverage.
+    # Take into account the age-dependent effect size but not the 6-month time lag.
     hb_i = hb_gbd(age_i(t)) - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
 
-    # Clip value to be >=1 in case shifting made it negative
+    # Clip Hb value to be >=1 in case shifting made it negative
     hb_i = np.clip(hb_i, 1, np.inf)
 
+    # Only increase simulant's Hb if their household is covered
     if household_covered_i(t):
+
       # Fortification starts either when the household receives coverage, or when
       # the child turns 6 months old and starts eating solids, whichever is later.
       # Recall that if the child is covered in baseline, then time_covered_i =
       # float('-inf'), so coverage always starts at age 6 months in this case.
-      time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
+      time_since_fortified_i(t) = min(t - time_covered_i, age(t) - 0.5)
+
+      # Increase simulant's Hb level by the appropriate amount, taking into
+      # account both the age-dependent effect and the 6-month time lag.
       hb_i += (hb_lag_fraction(time_since_fortified_i(t))
                * hb_age_fraction(age_i(t))
                * hb_shift
               )
-
 .. todo::
 
   Edit the above code to define all variables, make it valid Python code, and
