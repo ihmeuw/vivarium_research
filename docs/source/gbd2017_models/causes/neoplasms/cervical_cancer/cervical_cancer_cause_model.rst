@@ -44,19 +44,29 @@ clinical informatics data in DisMod so they don’t have a way to split it in
 cause level. However, it seems doable if the clinical informatics team could 
 remap this cause to benign cervical and uterine separately in next round.
 
-.. list-table:: Cervical cancer states
+.. list-table:: State definition
    :widths: 5 25 10
    :header-rows: 1
 
    * - State name
      - Definition
      - Notes
+   * - Susceptible
+     - Individuals who are not infected with HPV 16 or 18
+     - 
+   * - hrHPV-infected
+     - Individuals who are infected with HPV 16 or 18
+     - Our model restricts high-risk HPV infection to be subtypes 16 and 18 only.
    * - Benign cervical cancer (BCC)
-     - The carcinoma has not extended beyond the pelvic wall.
-     - Stage 1 to 3 according to [FIGO-cancer-stage-2018-report]_
+     - High grade cervical intraepithelial neoplasia (CIN-2+) without the 
+       invasion of basement membrane.
+     - ICO/IARC HPV Information Centre
    * - Invasive cervival cancer (ICC)
-     - The carcinoma has extended beyond the true pelvis and spread to adjacent pelvic organs or distant organs.
-     - Stage 4 according to [FIGO-cancer-stage-2018-report]_
+     - The high-grade precancerous cells invade the basement membrane.
+     - ICC stages range from 1 to 4 according to [FIGO-cancer-stage-2018-report]_
+   * - Recovered
+     - Recovered from invasive cervical cancer
+     - 
 
 
 Cause hierarchy of cervical cancer in GBD
@@ -88,7 +98,6 @@ Cause hierarchy of cervical cancer in GBD
      - diagnosis_and_primary_therapy_phase_of_cervical_cancer (s_282), controlled_phase_of_cervical_cancer (s_283), metastatic_phase_of_cervical_cancer (s_284), terminal_phase_of_cervical_cancer (s_285)
       
        
-
 .. image:: cervical_cancer_hierarchy.svg
 
 
@@ -143,7 +152,9 @@ Things to consider:
 3. Keep simulants in benign cervical cancer state and don't go into remission 
    after successful treatment unless literature tells us otherwise.
 4. Most of the benign cervical cancer cases are resutling from a disease state 
-   called `hrHPV-infected`, where only high risk subtypes of HPV (e.g. 16 and 18) are considered in our model. Though we do include the transition from susceptible state to benign cervical cancer state without HPV infection.
+   called `hrHPV-infected`, where only high risk subtypes 16 and 18 of HPV 
+   infection are considered in our model. Though we do include the transition 
+   from susceptible state to benign cervical cancer state without high-risk HPV infection.
 
 .. todo::
 
@@ -213,8 +224,8 @@ State and Transition Data Tables
      - csmr_c432 = deaths_c432 / population
    * - Cervical cancer  
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
-     - total cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{prev}_s}}`
+     - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
 
 .. list-table:: Transition Data
    :widths: 5 5 5 30 30
@@ -297,8 +308,14 @@ State and Transition Data Tables
      - demography for 2017 
      - mid-year population
    * - prev_hrHPV
-     - extracted from Li et al.
-     - the infection rate of high-risk HPVs in women aged <25, 25-45, and >45 years was 24.3% (95%CI, 19.0%-29.6%), 19.9% (95%CI, 16.4-23.4), and 21.4% (95%CI, 17.3-25.5), respectively.
+     - derived from Abie's dismod
+     - add filepath
+   * - incidence_hrHPV
+     - derived from Abie's dismod
+     - add filepath
+   * - remission_hrHPV
+     - derived from Abie's dismod
+     - add filepath
    * - RR_hrHPV
      - extracted from Chen et al.
      - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
@@ -308,8 +325,7 @@ State and Transition Data Tables
 
 .. todo::
 
-  1. add details for crude prevalence ratio calculation (done)
-  2. add methods to estimate incidence of high risk HPV infection
+  add methods to estimate prevalence, incidence, and remission of high risk HPV infection.
 
 Prevalence ratio calculation:
 
