@@ -58,7 +58,8 @@ remap this cause to benign cervical and uterine separately in next round.
      - Individuals who are infected with HPV 16 or 18
      - Our model restricts high-risk HPV infection to be subtypes 16 and 18 only.
    * - Benign cervical cancer (BCC)
-     - High grade cervical intraepithelial neoplasia (CIN-2+) without the 
+     - High grade cervical lesions or worse (CIN2+), including cervical 
+       intraepithelial neoplasia grade 2-3 and cervical carcinoma without 
        invasion of basement membrane.
      - ICO/IARC HPV Information Centre
    * - Invasive cervival cancer (ICC)

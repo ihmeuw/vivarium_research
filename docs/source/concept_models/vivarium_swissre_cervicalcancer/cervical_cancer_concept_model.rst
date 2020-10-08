@@ -491,26 +491,22 @@ Screening events for women aged 30-65 years
 ~~~~~~~~~~~~~~~
 
 Human Papilloma Virus (HPV)
- - prevalence: 19.0% with 95%CI 17.1-20.9 (Li et al. 2019)
+ - prevalence: TBD
  - Incidence: TBD
+ - remission: TBD
  - exposure distirbution: dichotomous
- - relative risk: RR = 16.2 with 95%CI 9.6 to 27.3 (Chen et al. 2011)
+ - relative risk of HPV 16/18 causing BCC: RR = 16.2 with 95%CI 9.6 to 27.3 
+   (Chen et al. 2011)
 
 relevant formulas 
  (1) PAF = :math:`\frac{\text{Prev_HPV}(RR-1)}{\text{Prev_HPV}(RR-1)+1}`
  (2) :math:`\text{i_HPV+} =  i \times (1-PAF) \times RR`
  (3) :math:`\text{i_HPV-} =  i \times (1-PAF)`
-
-.. note::
-
-  - Can we back calculate the age-specific HPV incidence from age-specific HPV 
-    prevalence and the duration of HPV infection?
-     - incidence_HPV = :math:`\frac{\text{prevalence_HPV}}{\text{duration_HPV}}
-  - Do we need forecast HPV incience from 2020 to 2040?
-    
+  
 .. todo::
  
- add HPV vaccine efficacy section
+  1. add HPV vaccine efficacy section
+  2. compare and combine subtypes 16 and 18
 
 .. _5.3.4:
 
@@ -597,9 +593,9 @@ Treatment for benign cervical cancer
      - 
      - 
    * - HPV vaccine efficacy
-     - ATP efficacy against persistent HPV infection = 89.6% (95%CI 79.3-95.4), 
-       ATP efficacy against CIN in any grade = 94.1 (95%CI 62.5-99.9)
-     - Schiller et al.
+     - ATP efficacy against persistent HPV infection = TBD
+       ATP efficacy against CIN2+ = TBD
+     - Lu et al. 2011
      - ATP = according to protocol
 
 .. _5.5:
