@@ -397,7 +397,7 @@ Cervical cancer screening algorithm was determined by three variables
      - Specificity
    * - Cytology plus HPV test
      - HPV+: 76.7%
-     - HPV-: TBD
+     - HPV-: 94.1%
    * - Cytology plus HPV test
      - Cytology+: 59.1%
      - Cytology-: 100%
