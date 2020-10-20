@@ -71,29 +71,20 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
-
 Scope
 +++++
 
-.. todo::
-
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer does not occur more than ten years past incidence. Notably, since GBD performs the TBL cancer fatal and non-fatal models separately, this assumption in GBD applies to the non-fatal model only and not the fatal model, which is a limitation of our strategy. The assumption also asserts that there is no recurrance of TBL cancer.
 
 Cause Model Diagram
 +++++++++++++++++++
+
+.. image:: lung_cancer_cause_model.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -113,12 +104,15 @@ This table contains the definitions of all the states in **cause model diagram**
    * - State
      - State Name
      - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
+   * - S
+     - Susceptible
+     - Without condition
+   * - I
+     - Infected
+     - With condition
+   * - R
+     - Recovered
+     - Recovered from condition; without condition
 
 States Data
 """""""""""
