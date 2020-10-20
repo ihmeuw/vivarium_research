@@ -49,6 +49,10 @@ Vivarium CSU Cervical Cancer Simulation
      - susceptible
    * - hrHPV
      - high-risk HPV
+   * - S_hrHPV
+     - without high-risk HPV infection
+   * - C_hrHPV
+     - with high-risk HPV infection
    * - BCC
      - benign cervical cancer
    * - ICC
@@ -337,50 +341,58 @@ Cervical cancer screening algorithm was determined by three variables
      - Age
      - Screening technology
      - Screening frequency
-     - Co-test result
+     - Test result
      - Follow-up test
      - Follow-up frequency
    * - A
      - Female
      - 21-29
      - Cytology
-     - every 3 years
-     - 
-     - 
-     - 
+     - in 3 years
+     - Cytology positive
+     - Cytology
+     - in 1 year
+   * - A
+     - Female
+     - 21-29
+     - Cytology
+     - in 3 years
+     - Cytology negative
+     - Cytology
+     - in 3 years
    * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV negative, Cytology negative
      - Cytology plus HPV test
-     - every 5 years
-   * - C
+     - in 5 years
+   * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV positive, Cytology negative
-     - Cytology
-     - every year
-   * - C
+     - Cytology plus HPV test
+     - in 1 year
+   * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV negative, Cytology positive
      - Cytology
-     - every year
-   * - C
+     - in 1 year
+   * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV positive, Cytology positive
      - Cytology
-     - every year
-   * - D
+     - in 1 year
+   * - C
      - Female
      - <21 or >65
      - No screening
@@ -410,7 +422,7 @@ Cervical cancer screening algorithm was determined by three variables
  - Co-test (cytology plus HPV test) is not recommended for women under 30 
    according to guidelines from American Cancer Society and U.S. Preventive Services Task Force.
  - We are not testing HPV for women under 30 and those follow-up with
-   cytology alone every year in Branch C.
+   cytology alone in one year at Branch B.
  - Women who have been vaccinated or detected BCC and treated should continue 
    to be screened.
 
@@ -419,7 +431,7 @@ In initialization, We assume that
    of the simulation.
  - All simulants are buying insurance on day one of the simulation.
  - For simulants in cervical cancer (CC) state regardless of detection, they have 
-   a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, or C depending on their age and co-test result if performed. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
+   a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, or C depending on their age. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
 
 :underline:`II. Screening schedule and attendance`
 
