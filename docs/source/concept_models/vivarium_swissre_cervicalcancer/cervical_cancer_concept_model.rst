@@ -397,7 +397,7 @@ Cervical cancer screening algorithm was determined by three variables
      - Specificity
    * - Cytology plus HPV test
      - HPV+: 76.7%
-     - HPV-: 94.1%
+     - HPV-: 94.1% 
    * - Cytology plus HPV test
      - Cytology+: 59.1%
      - Cytology-: 100%
@@ -413,7 +413,7 @@ Cervical cancer screening algorithm was determined by three variables
    cytology alone every year in Branch C.
  - Women who have been vaccinated or detected BCC and treated should continue 
    to be screened.
-
+ - HPV- specificity value 94.1% is HPV test alone as a proxy for co-test HPV test specificity ( `Link reference paper <https://search.proquest.com/openview/73be186c328532400a3e69524aed0bf9/1?pq-origsite=gscholar&cbl=35707>`_ )
 In initialization, We assume that
  - No one has prior knowledge of their disease status (and HPV status) on day one 
    of the simulation.
