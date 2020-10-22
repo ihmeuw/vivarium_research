@@ -26,11 +26,11 @@ Cause Hierarchy
 Restrictions
 ++++++++++++
 
-The following table describes any restrictions in GBD 2017 on the effects of
+The following table describes any restrictions in GBD 2019 on the effects of
 this cause (such as being only fatal or only nonfatal), as well as restrictions
 on the ages and sexes to which the cause applies.
 
-.. list-table:: GBD 2017 Cause Restrictions
+.. list-table:: GBD 2019 Cause Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
