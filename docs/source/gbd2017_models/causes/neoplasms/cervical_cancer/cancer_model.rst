@@ -333,8 +333,8 @@ Prevalence ratio calculation:
 1. MarketScan research databases capture person-specific clinical utilization, expenditures, and enrollment across inpatient, outpatient, prescription drug and carve-out services. 
    Currently GBD estimates bundle benign and in situ cervical and uterine neoplasms. Thus, we use external marketScan data source to calculate ratio of benign to malignant cervical cancer. 
 2. Outpatient year 2016 and 2017 data were pulled with following ICD 10 codes: C53 Malignant neoplasm of cervix uteri, C53.0 Malignant neoplasm of endocervix, C53.1 Malignant neoplasm 
-   of exocervix, C53.8 Malignant neoplasm of overlapping sites of cervix uteri, C53.9 Malignant neoplasm of cervix uteri, D06 Carcinoma in situ of cervix uteri, D06.0 Carcinoma in situ of 
-   endocervix, D06.1 Carcinoma in situ of exocervix, D06.7 Carcinoma in situ of other parts of cervix, D06.9 Carcinoma in situ of cervix, D26.0 Other benign neoplasm of cervix uteri, Z12.4 
+   of exocervix, C53.8 Malignant neoplasm of overlapping sites of cervix uteri, C53.9 Malignant neoplasm of cervix uteri, D06  (CIN3) Carcinoma in situ of cervix uteri, D06.0 Carcinoma in situ of 
+   endocervix, D06.1 Carcinoma in situ of exocervix, D06.7 Carcinoma in situ of other parts of cervix, D06.9 Carcinoma in situ of cervix, N87.1 (CIN2) Moderate cervical dysplasia, Z12.4 
    Encounter for screening for malignant neoplasm of cervix. 
 3. Non-medicare (age 0-65) & medicare (subset age 65+ only) were merged together to include all ages and limited to screened female patients only. After concatenating 2016& 2017 outpatient 
    data, duplicates were removed based on enrolid and data were grouped by 5-year age band to align with GBD age pattern. Prevalence ratio was calculated using benign cervical cancer counts 
@@ -348,35 +348,35 @@ Prevalence ratio calculation:
    * - Age Group
      - Prevalence Ratio
    * - 15_to_19
-     - 11.5    
+     - 26.5    
    * - 20_to_24
-     - 45.1  
+     - 89.6  
    * - 25_to_29
-     - 21.4  
+     - 36.8  
    * - 30_to_34
-     - 14.9  
+     - 22.2  
    * - 35_to_39
-     - 7.9  
+     - 11.5 
    * - 40_to_44
-     - 5.9  
+     - 7.2  
    * - 45_to_49
-     - 4.57 
+     - 4.98 
    * - 50_to_54
-     - 3.5 
+     - 3.75 
    * - 55_to_59
-     - 2.2
+     - 2.5
    * - 60_to_64
-     - 1.96  
+     - 1.92  
    * - 65_to_69
-     - 1.2
+     - 1.26
    * - 70_to_74
-     - 0.94
+     - 0.71
    * - 75_to_79
-     - 0.57
+     - 0.48
    * - 80 plus 0.5
      - 0.5
    * - all ages
-     - 6.22
+     - 8.83
 
 
 Validation Criteria
