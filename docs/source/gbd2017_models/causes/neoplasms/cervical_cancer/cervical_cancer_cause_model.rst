@@ -20,18 +20,15 @@ due to cervical cancer increase over age, and have the highest value 29 per
 [HPV-and-related-disease-2019-summary-report]_
 
 .. list-table:: ICD codes for cervical cancer
-   :widths: 5 10 10
+   :widths: 5 10
    :header-rows: 1
 
    * - Cause
      - ICD10
-     - IDC9
    * - Benign cervical cancer
      - D06 (D06.0, D06.1, D06.7, D06.9), N87.1
-     - 219.0, 233.1
    * - Invasive cervical cancer
      - C53 (C53.0, C53.1, C53.3, C53.4, C53.8, C53.9)
-     - 180 (180.0-180.9 except 180.7)
 
 
 GBD 2017 Modeling Strategy
@@ -194,7 +191,7 @@ State and Transition Data Tables
    * - hrHPV-infected
      - prevalence
      - add filepath
-     - 
+     - used only at initialization
    * - hrHPV-infected
      - excess mortality rate
      - 0
@@ -204,8 +201,8 @@ State and Transition Data Tables
      - 0
      - 
    * - BCC, S_hrHPV
-     - prevalence
-     - crude prevalence ratio of BCC * prev_c432 * (1 - prev_hrHPV)
+     - prevalence (prev_BCC_and_S_hrHPV)
+     - :math:`\frac{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}{\text{RR_hrHPV}+1}`
      - used only at initialization
    * - BCC, S_hrHPV
      - excess mortality rate
@@ -216,8 +213,8 @@ State and Transition Data Tables
      - 0
      - 
    * - BCC, C_hrHPV
-     - prevalence
-     - crude prevalence ratio of BCC * prev_c432 * prev_hrHPV
+     - prevalence (prev_BCC_and_C_hrHPV)
+     - :math:`\frac{\text{crude prevalence ratio of BCC}\times\text{prev_c432}\times\text{RR_hrHPV}}{\text{RR_hrHPV}+1}`
      - used only at initialization
    * - BCC, C_hrHPV
      - excess mortality rate
@@ -228,24 +225,24 @@ State and Transition Data Tables
      - 0
      - 
    * - ICC, S_hrHPV
-     - prevalence
-     - prev_c432 * (1 - prev_hrHPV)
-     - 
+     - prevalence (prev_ICC_and_S_hrHPV)
+     - :math:`\frac{\text{prev_c432}}{\text{RR_hrHPV}+1}`
+     - used only at initialization
    * - ICC, S_hrHPV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}\times(1-\text{prev_hrHPV})}`
+     - :math:`\frac{\text{csmr_c432}}{\text{prev_ICC_and_S_hrHPV}}`
      - 
    * - ICC, S_hrHPV  
      - disability weights
      - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{prev}_s}}`
      - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
    * - ICC, C_hrHPV
-     - prevalence
-     - prev_c432 * prev_hrHPV
-     - 
+     - prevalence (prev_ICC_and_C_hrHPV)
+     - :math:`\frac{\text{prev_c432}\times\text{RR_hrHPV}}{\text{RR_hrHPV}+1}`
+     - used only at initialization
    * - ICC, C_hrHPV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}\times\text{prev_hrHPV}}`
+     - :math:`\frac{\text{csmr_c432}}{\text{prev_ICC_and_C_hrHPV}}`
      - 
    * - ICC, C_hrHPV  
      - disability weights
@@ -297,12 +294,12 @@ S_ = susceptible; C_ = with condition
      - BCC, S_hrHPV
      - ICC, S_hrHPV
      - :math:`\frac{\text{incidence_c432}}{\text{prev_BCC_and_S_hrHPV}}`
-     - prev_BCC_and_S_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`. To be updated after we find RR of hrHPV for ICC
+     - prev_BCC_and_S_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`.
    * - i_ICC
      - BCC, C_hrHPV
      - ICC, C_hrHPV
      - :math:`\frac{\text{incidence_c432}}{\text{prev_BCC_and_C_hrHPV}}`
-     - prev_BCC_and_C_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`. To be updated after we find RR of hrHPV for ICC
+     - prev_BCC_and_C_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`.
    * - i_hrHPV
      - ICC, S_hrHPV
      - ICC, C_hrHPV
@@ -377,15 +374,14 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - add filepath
    * - RR_hrHPV
      - extracted from Chen et al.
-     - relative risk of developing BCC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
+     - relative risk of developing BCC and/or ICC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
    * - PAF
      - derived from prev_hrHPV and RR_hrHPV
      - PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
 
 .. todo::
 
-  1. add methods to estimate prevalence, incidence, and remission of high risk HPV infection.
-  2. find the relative risk of high-risk HPV infection causing invasive cervical cancer, namely the impact of hrHPV on transition from BCC to ICC.
+  Add methods to estimate prevalence, incidence, and remission of high risk HPV infection.
 
 Prevalence ratio calculation:
 
