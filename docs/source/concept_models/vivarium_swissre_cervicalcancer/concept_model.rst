@@ -49,6 +49,10 @@ Vivarium CSU Cervical Cancer Simulation
      - susceptible
    * - hrHPV
      - high-risk HPV
+   * - S_hrHPV
+     - without high-risk HPV infection
+   * - C_hrHPV
+     - with high-risk HPV infection
    * - BCC
      - benign cervical cancer
    * - ICC
@@ -337,50 +341,58 @@ Cervical cancer screening algorithm was determined by three variables
      - Age
      - Screening technology
      - Screening frequency
-     - Co-test result
+     - Screening result
      - Follow-up test
      - Follow-up frequency
    * - A
      - Female
      - 21-29
      - Cytology
-     - every 3 years
-     - 
-     - 
-     - 
+     - in 3 years
+     - Cytology positive
+     - Cytology
+     - in 1 year
+   * - A
+     - Female
+     - 21-29
+     - Cytology
+     - in 3 years
+     - Cytology negative
+     - Cytology
+     - in 3 years
    * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV negative, Cytology negative
      - Cytology plus HPV test
-     - every 5 years
-   * - C
+     - in 5 years
+   * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV positive, Cytology negative
-     - Cytology
-     - every year
-   * - C
+     - Cytology plus HPV test
+     - in 1 year
+   * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV negative, Cytology positive
      - Cytology
-     - every year
-   * - C
+     - in 1 year
+   * - B
      - Female
      - 30-65
      - Cytology plus HPV test
-     - every 5 years
+     - in 5 years
      - HPV positive, Cytology positive
      - Cytology
-     - every year
-   * - D
+     - in 1 year
+   * - C
      - Female
      - <21 or >65
      - No screening
@@ -410,25 +422,25 @@ Cervical cancer screening algorithm was determined by three variables
  - Co-test (cytology plus HPV test) is not recommended for women under 30 
    according to guidelines from American Cancer Society and U.S. Preventive Services Task Force.
  - We are not testing HPV for women under 30 and those follow-up with
-   cytology alone every year in Branch C.
+   cytology alone in one year at Branch B.
  - Women who have been vaccinated or detected BCC and treated should continue 
    to be screened.
- - HPV- specificity value 94.1% is HPV test alone as a proxy for co-test HPV test specificity ( `Link reference paper <https://search.proquest.com/openview/73be186c328532400a3e69524aed0bf9/1?pq-origsite=gscholar&cbl=35707>`_ )
+ - HPV- specificity value 94.1% is HPV test alone as a proxy for co-test HPV test 
+   specificity ( `Reference paper <https://search.proquest.com/openview/73be186c328532400a3e69524aed0bf9/1?pq-origsite=gscholar&cbl=35707>`_ )
 In initialization, We assume that
  - No one has prior knowledge of their disease status (and HPV status) on day one 
    of the simulation.
  - All simulants are buying insurance on day one of the simulation.
  - For simulants in cervical cancer (CC) state regardless of detection, they have 
-   a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, or C depending on their age and co-test result if performed. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
+   a transition rate of 0.1 (per person-year) of moving into a recovered (R) state; this results in an average duration in state CC of 10 years. People in state CC and R follow exactly the same screening algorithm, namely branch A, B, or C depending on their age. Simulants do not ever make a second cervical cancer claim, therefore the negative screening results were expected for those in R state in order to avoid double counting the CI claim from detected cervical cancer.
 
 :underline:`II. Screening schedule and attendance`
 
 Probability of attending screening
  - Generate 1000 draws from normal distribution with mean=0.25, SD=0.0025 for
    calculating the probability of simulants attending their first due screening.
- - If a simulant attended their last screening, they have 1.89 with 95%CI 1.06-2.49
-   (Yan et al. 2017) more odds of attending the next screening than those who did
-   not attend their last screening. 
+ - If simulant attended their last screening, they have a normal distirbution 
+   with mean=1.89, SD=0.36 (Yan et al. 2017) more odds of attending the next screening than those who did not attend their last screening. 
 
 Time to next scheduled screening
 
@@ -552,13 +564,12 @@ Treatment for benign cervical cancer
      - 
      - by assumption
    * - Screening sensitivity of co-test
-     - The detection rates of HPV-/Cytology-, HPV+/Cytology-, HPV-/Cytology+, 
-       HPV+/Cytology+ are 17.4%, 23.5%, 5.9%, 53.2%, respectively.
+     - HPV+: 76.7%; Cytology+: 59.1%
      - Schiffman et al. 2018
      - 
    * - Screening specificity of co-test
-     - TBD
-     - 
+     - HPV-: 94.1%; Cytology-: 100%
+     - Kripke et al. 2008
      - 
    * - Screening sensitivity of cytology alone test
      - 65.9% (95% CI 54.9 to 75.3)
