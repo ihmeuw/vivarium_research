@@ -439,8 +439,9 @@ In initialization, We assume that
 Probability of attending screening
  - Generate 1000 draws from normal distribution with mean=0.25, SD=0.0025 for
    calculating the probability of simulants attending their first due screening.
- - If simulant attended their last screening, they have a normal distirbution 
-   with mean=1.89, SD=0.36 (Yan et al. 2017) more odds of attending the next screening than those who did not attend their last screening. 
+ - If simulant attended their last screening, they have a truncated normal 
+   distirbution with mean=1.89, SD=0.36, lower=1.0 (Yan et al. 2017) more odds 
+   of attending the next screening than those who did not attend their last screening. 
 
 Time to next scheduled screening
 
