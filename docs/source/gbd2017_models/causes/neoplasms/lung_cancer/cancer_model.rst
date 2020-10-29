@@ -64,6 +64,13 @@ Covariates used in the fatal TBL cancer model for GBD 2017 included:
    * - C33-C34.9, D02.1-D02.3, D14.2-D14.3, D38.1
      - 162-162.9, 212.2-212.3, 231.1-231.2, 235.7
 
+
+.. todo::
+
+	What moment of cancer progression does GBD intend to model as incidence? Cancer onset or symptom onset? What are the limitations of this? Most likely symptom onset/diagnosis.
+
+	How can we integrate the 10 year GBD assumption into our vivarium strategy while also accounting for pre-symptomatic incidence?
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -111,40 +118,36 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
-
 Scope
 +++++
 
-.. todo::
-
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
+This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer does not occur more than ten years past incidence. Notably, since GBD performs the TBL cancer fatal and non-fatal models separately, this assumption in GBD applies to the non-fatal model only and not the fatal model, which is a limitation of our strategy. The assumption also asserts that there is no recurrance of TBL cancer.
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+Vivarium Modeling Strategy
+--------------------------
+
+Scope
++++++
+
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD.
+
+Assumptions and Limitations
++++++++++++++++++++++++++++
+
+This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer does not occur more than ten years past incidence. Notably, since GBD performs the TBL cancer fatal and non-fatal models separately, this assumption in GBD applies to the non-fatal model only and not the fatal model, which is a limitation of our strategy. The assumption also asserts that there is no recurrance of TBL cancer.
 
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: lung_cancer_cause_model.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
-
-Definitions
-"""""""""""
-
-This table contains the definitions of all the states in **cause model diagram**. 
 
 .. list-table:: State Definitions
    :widths: 5 5 20
@@ -153,18 +156,15 @@ This table contains the definitions of all the states in **cause model diagram**
    * - State
      - State Name
      - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-States Data
-"""""""""""
-
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. 
+   * - S
+     - Susceptible
+     - Without condition
+   * - I
+     - Infected
+     - With condition
+   * - R
+     - Recovered
+     - Without condition; not susceptible
 
 .. list-table:: States Data
    :widths: 20 25 30 30
@@ -174,31 +174,54 @@ initialize the model.
      - Measure
      - Value
      - Notes
-   * - State
+   * - S
      - prevalence
+     - 1 - prevalence_c426
      - 
-     - 
-   * - State
+   * - S
      - birth prevalence
+     - 0
      - 
-     - 
-   * - State
+   * - S
      - excess mortality rate
+     - 0
      - 
-     - 
-   * - State
+   * - S
      - disabilty weights
-     - 
+     - 0
      -
-   * - ALL
-     - cause specific mortality rate
+   * - I
+     - prevalence
+     - prevalence_c426
      - 
+   * - I
+     - birth prevalence
+     - 0
      - 
-
-Transition Data
-"""""""""""""""
-
-This table contains the measures needed for transition from one state to other in the cause model. 
+   * - I
+     - excess mortality rate
+     - :math:`\text{csmr_c426}\times\text{prevalence_c426}`
+     - 
+   * - I
+     - disabilty weights
+     - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
+     - Total TBL cancer disability weight overa ll sequelae with IDs s273, s274, s275, s276
+   * - R
+     - prevalence
+     - 0
+     - No initialization into recovered state
+   * - R
+     - birth prevalence
+     - 0
+     - 
+   * - R
+     - excess mortality rate
+     - 0
+     - No excess mortality in recovered state assumed
+   * - R
+     - disabilty weights
+     - 0
+     - No long term disability in recovered state assumed
 
 .. list-table:: Transition Data
    :widths: 10 10 10 20 30
@@ -212,18 +235,13 @@ This table contains the measures needed for transition from one state to other i
    * - i
      - S
      - I
-     - 
+     - incidence_c426
      - 
    * - r
      - I
      - R
-     - 	
-     - 
-
-Data Sources
-""""""""""""
-
-This table contains the data sources for all the measures. The table structure and common measures are as below:
+     - 0.1 per person-year for each age group	
+     - To be consistent with 10 year GBD assumption
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -233,42 +251,26 @@ This table contains the data sources for all the measures. The table structure a
      - Sources
      - Description
      - Notes
-   * - prevalence_cid
-     - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
-     - 
-   * - population
-     - 
-     - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_mid
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
-     - 
+   * - prevalence_c426
+     - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - CSU TBL cancer prevalence forecasts
+     - 2020-2040
+   * - csmr_c426
+     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - CSU TBL cancer cause specific mortality rate forecast
+     - 2020-2040
+   * - incidence_rate_c426
+     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - CSU TBL cancer cause-specific mortality rate forecast
+     - 2020-2040
+   * - disability_weight_s{273, 274, 275, 276}
+     - YLD appendix
+     - Sequela disability weights
+     - 0.288 (0.193-0.145), 0.049 (0.031-0.072), 0.451 (0.307-0.6), 0.54 (0.377-0.687)
+   * - prevalence_s{273, 274, 275, 276}
+     - GBD 2019, COMO, decomp_step='step4'
+     - TBL cancer sequelae prevalence
+     - Not forecasted
 
 Validation Criteria
 +++++++++++++++++++
