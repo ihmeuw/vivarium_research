@@ -530,7 +530,9 @@ Vaccine coverage
    U[0, 1] and use constant propensity for every simulation timestep. We assume 
    no one has been vaccinated on day one of the simulation. At each simulation 
    timestep, give the vaccination to unvaccinated women who at 15 to 45 years 
-   of age and has a `HPV_vacciation_propensity` value less than the current HPV vaccine coverage level. Use the vaccine coverage specified in section 4.1 Simulation scenarios to differentiate coverage threshold between baseline 
+   of age and has a `HPV_vacciation_propensity` value less than the current HPV 
+   vaccine coverage level. Use the vaccine coverage specified in section 4.1 
+   Simulation scenarios to differentiate coverage threshold between baseline 
    and alternative scenarios.
 
 Vaccine efficacy
