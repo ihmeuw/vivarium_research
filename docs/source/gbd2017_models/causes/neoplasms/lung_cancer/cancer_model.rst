@@ -186,7 +186,7 @@ State and Transition Data Tables
      -
    * - I_PC
      - prevalence
-     - prevalence_c426 * MST / (MST + 1/AST)
+     - prevalence_c426 * MST / (MST + AST)
      - May need to incorporate consideration of baseline screening rates here
    * - I_PC
      - birth prevalence
