@@ -126,7 +126,7 @@ This Vivarium modeling strategy is intended to simulate TBL cancer incidence/mor
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer does not occur more than ten years past incidence of the *clinical* phase of TBL cancer. The assumption also asserts that there is no recurrance of TBL cancer.
+This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer occurs more than ten years past incidence of the *clinical* phase of TBL cancer. The assumption also asserts that there is no recurrance of TBL cancer.
 
 .. todo::
 
@@ -150,11 +150,11 @@ State and Transition Data Tables
    * - S
      - Susceptible
      - Without condition OR with asymptomatic condition, but not screen-detectable
-   * - PC
-     - Preclinical
+   * - I_PC
+     - Infected; preclinical, screen-detectable
      - With asymptomatic condition, screen-detectable
-   * - C
-     - Clinical
+   * - I_C
+     - Infected; clinical
      - With symptomatic condition
    * - R
      - Recovered
@@ -184,35 +184,35 @@ State and Transition Data Tables
      - disabilty weights
      - 0
      -
-   * - PC
+   * - I_PC
      - prevalence
-     - 0
-     - Assumption; may revisit
-   * - PC
+     - prevalence_c426 * MST / (MST + 1/AST)
+     - May need to incorporate consideration of baseline screening rates here
+   * - I_PC
      - birth prevalence
      - 0
      - 
-   * - PC
+   * - I_PC
      - excess mortality rate
      - 0
      - 
-   * - PC
+   * - I_PC
      - disability weights
      - 0 
      - 
-   * - C
+   * - I_C
      - prevalence
      - prevalence_c426
      - 
-   * - C
+   * - I_C
      - birth prevalence
      - 0
      - 
-   * - C
+   * - I_C
      - excess mortality rate
      - :math:`\text{csmr_c426}\times\text{prevalence_c426}`
      - 
-   * - C
+   * - I_C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
      - Total TBL cancer disability weight overa ll sequelae with IDs s273, s274, s275, s276
@@ -242,18 +242,18 @@ State and Transition Data Tables
      - Sink 
      - Value
      - Notes
-   * - pc
+   * - i_pc
      - S
-     - PC
+     - I_PC
      - incidence_c426
      - 
-   * - c
-     - PC
-     - C
+   * - i_c
+     - I_PC
+     - I_C
      - 1/MST per person-year
      - See MST definition in table below
    * - r
-     - I
+     - I_C
      - R
      - 0.1 per person-year for each sex and age group	
      - To be consistent with 10 year GBD assumption
@@ -290,12 +290,14 @@ State and Transition Data Tables
      - XXX (XXX, XXX); YYY distribution of uncertainty
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See details below
+   * - AST
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Average survival time; mean duration of time between detection and death
+     - See details below. Can use GBD mortality rates, but need to be mindful of age groups
 
 .. todo::
 
-	Define MST values and uncertainty distribution from literature
-
-	Revisit assumption that initial prevalence of PC state = 0
+	Define MST and AST values and uncertainty distribution from literature
 
 Validation Criteria
 +++++++++++++++++++
