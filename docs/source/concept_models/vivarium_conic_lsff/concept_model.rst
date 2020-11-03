@@ -99,7 +99,7 @@ Model Components
 Time
 ++++
 
-* Start and end year: **2020 -- 2025**
+* Start and end date: **January 1, 2020 -- December 31, 2024**
 * Simulation time step: **1 day** to capture short timeframe of diarrheal
   diseases and neonatal causes
 
