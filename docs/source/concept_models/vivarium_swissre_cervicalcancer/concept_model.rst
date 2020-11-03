@@ -498,28 +498,56 @@ Screening events for women aged 30-65 years
 
 .. image:: screening_events_among_female_age_30_to_65.png
 
+:underline:`V. Symptomatic presentation`
+
+.. todo::
+
+ Find data to inform the probability of women with symptoms and get diagnosed 
+ with invasive cervical cancer, but they didn't go for routine screening.
+
 .. _5.3.3:
 
 5.3.3 HPV model
 ~~~~~~~~~~~~~~~
 
-Human Papilloma Virus (HPV)
- - prevalence: TBD
- - Incidence: TBD
- - remission: TBD
- - exposure distirbution: dichotomous
- - relative risk of HPV 16/18 causing BCC: RR = 16.2 with 95%CI 9.6 to 27.3 
-   (Chen et al. 2011)
+:underline:`I. Disease model inputs`
+
+ - prevalence: add updated data filepath here
+ - Incidence: add updated data filepath here
+ - remission: add updated data filepath here
+ - relative risk of HPV 16 and/or 18 causing CIN2+ (RR_hrHPV): use log-normal 
+   distribution **exp(normal(mean=log(27.4), SD=0.17))**
 
 relevant formulas 
- (1) PAF = :math:`\frac{\text{Prev_HPV}(RR-1)}{\text{Prev_HPV}(RR-1)+1}`
- (2) :math:`\text{i_HPV+} =  i \times (1-PAF) \times RR`
- (3) :math:`\text{i_HPV-} =  i \times (1-PAF)`
+ (1) PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
+ (2) :math:`\text{incidence_BCC_HPV+} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_hrHPV}`
+ (3) :math:`\text{incidence_BCC_HPV-} =  \text{incidence_BCC}\times(1-PAF)`
   
+:underline:`II. HPV vaccination`
+
+Vaccine coverage
+ - Create 1000 draws of HPV vaccination propensity from an uniform distributon 
+   U[0, 1] and use constant propensity for every simulation timestep. We assume 
+   no one has been vaccinated on day one of the simulation. At each simulation 
+   timestep, give the vaccination to unvaccinated women who at 15 to 45 years 
+   of age and has a `HPV_vacciation_propensity` value less than the current HPV 
+   vaccine coverage level. Use the vaccine coverage specified in section 4.1 
+   Simulation scenarios to differentiate coverage threshold between baseline 
+   and alternative scenarios.
+
+Vaccine efficacy
+ - Relative risk of getting HPV 16/18 infection for those vaccinated versus 
+   unvaccinated (RR_vaccine): use normal distribution **normal(mean=0.22, SD=0.04)**
+
+relevant formulas 
+ (1) PAF = :math:`\frac{\text{prev_vaccine}\times(\text{RR_vaccine}-1)}{\text{prev_vaccine}\times(\text{RR_vaccine}-1)+1}`
+ (2) :math:`\text{incidence_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_vaccine}`
+ (3) :math:`\text{incidence_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
+
 .. todo::
- 
-  1. add HPV vaccine efficacy section
-  2. compare and combine subtypes 16 and 18
+
+ add relative risk of developing BCC without HPV infection (BCC, S_hrHPV) for 
+ those vaccinated versus unvaccinated
 
 .. _5.3.4:
 
@@ -593,9 +621,16 @@ Treatment for benign cervical cancer
      - kang et al. 2014
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific remission data
    * - Relative risk of HPV
-     - 16.2 (95%CI 9.6 to 27.3)
-     - Chen et al. 2011
+     - 27.4 (95%CI 19.7 to 38.0); use log-normal distribution **exp(normal( 
+       mean=log(27.4), SD=0.17))**
+     - Naucler et al. 2007
      - 
+   * - HPV vaccine according to protocol efficacy against incident HPV 16/18 
+       infection
+     - use normal distribution **normal(mean=0.22, SD=0.04)**
+     - Zhu et al. 2019
+     - We convert the efficacy to a relatiev risk of HPV 16/18 infection for 
+       those vaccinated versus unvaccinated
    * - BCC treatment coverage
      - 
      - 
@@ -604,11 +639,7 @@ Treatment for benign cervical cancer
      - 
      - 
      - 
-   * - HPV vaccine efficacy
-     - ATP efficacy against persistent HPV infection = TBD
-       ATP efficacy against CIN2+ = TBD
-     - Lu et al. 2011
-     - ATP = according to protocol
+
 
 .. _5.5:
 
