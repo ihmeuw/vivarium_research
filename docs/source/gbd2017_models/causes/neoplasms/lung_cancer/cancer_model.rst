@@ -121,30 +121,21 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD.
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. Additionally, this cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer does not occur more than ten years past incidence. Notably, since GBD performs the TBL cancer fatal and non-fatal models separately, this assumption in GBD applies to the non-fatal model only and not the fatal model, which is a limitation of our strategy. The assumption also asserts that there is no recurrance of TBL cancer.
+This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer occurs more than ten years past incidence of the *clinical* phase of TBL cancer. The assumption also asserts that there is no recurrance of TBL cancer.
 
-Vivarium Modeling Strategy
---------------------------
+.. todo::
 
-Scope
-+++++
-
-This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD.
-
-Assumptions and Limitations
-+++++++++++++++++++++++++++
-
-This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer does not occur more than ten years past incidence. Notably, since GBD performs the TBL cancer fatal and non-fatal models separately, this assumption in GBD applies to the non-fatal model only and not the fatal model, which is a limitation of our strategy. The assumption also asserts that there is no recurrance of TBL cancer.
+	Confirm that the 10 year assumption should apply to the clinical phase of TBL cancer with GBD modeler.
 
 Cause Model Diagram
 +++++++++++++++++++
 
-.. image:: lung_cancer_cause_model.svg
+.. image:: tbl_cancer_cause_diagram.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -158,10 +149,13 @@ State and Transition Data Tables
      - Definition
    * - S
      - Susceptible
-     - Without condition
-   * - I
-     - Infected
-     - With condition
+     - Without condition OR with asymptomatic condition, but not screen-detectable
+   * - I_PC
+     - Infected; preclinical, screen-detectable
+     - With asymptomatic condition, screen-detectable
+   * - I_C
+     - Infected; clinical
+     - With symptomatic condition
    * - R
      - Recovered
      - Without condition; not susceptible
@@ -190,22 +184,38 @@ State and Transition Data Tables
      - disabilty weights
      - 0
      -
-   * - I
+   * - I_PC
      - prevalence
-     - prevalence_c426
-     - 
-   * - I
+     - prevalence_c426 / AST * MST
+     - May need to incorporate consideration of baseline screening rates here
+   * - I_PC
      - birth prevalence
      - 0
      - 
-   * - I
+   * - I_PC
      - excess mortality rate
-     - :math:`\text{csmr_c426}\times\text{prevalence_c426}`
+     - 0
      - 
-   * - I
+   * - I_PC
+     - disability weights
+     - 0 
+     - 
+   * - I_C
+     - prevalence
+     - prevalence_c426
+     - 
+   * - I_C
+     - birth prevalence
+     - 0
+     - 
+   * - I_C
+     - excess mortality rate
+     - csmr_c426 / prevalence_c426
+     - 
+   * - I_C
      - disabilty weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
-     - Total TBL cancer disability weight overa ll sequelae with IDs s273, s274, s275, s276
+     - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
    * - R
      - prevalence
      - 0
@@ -232,15 +242,20 @@ State and Transition Data Tables
      - Sink 
      - Value
      - Notes
-   * - i
+   * - i_pc
      - S
-     - I
-     - incidence_c426
-     - 
+     - I_PC
+     - incidence_c426 / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
+     - NOTE: this incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low)
+   * - i_c
+     - I_PC
+     - I_C
+     - 1/MST per person-year
+     - See MST definition in table below
    * - r
-     - I
+     - I_C
      - R
-     - 0.1 per person-year for each age group	
+     - 0.1 per person-year for each sex and age group	
      - To be consistent with 10 year GBD assumption
 
 .. list-table:: Data Sources
@@ -254,15 +269,15 @@ State and Transition Data Tables
    * - prevalence_c426
      - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer prevalence forecasts
-     - 2020-2040
+     - 2020-2040; defined as proportion of population with condition
    * - csmr_c426
      - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer cause specific mortality rate forecast
-     - 2020-2040
+     - 2020-2040; defined as deaths per person-year in general population
    * - incidence_rate_c426
      - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer cause-specific mortality rate forecast
-     - 2020-2040
+     - 2020-2040; defined as incidence cases per person-year in general population
    * - disability_weight_s{273, 274, 275, 276}
      - YLD appendix
      - Sequela disability weights
@@ -271,9 +286,25 @@ State and Transition Data Tables
      - GBD 2019, COMO, decomp_step='step4'
      - TBL cancer sequelae prevalence
      - Not forecasted
+   * - MST
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
+     - See details below
+   * - AST
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Average survival time; mean duration of time between detection and death
+     - See details below. Can use GBD mortality rates, but need to be mindful of age groups
+
+.. todo::
+
+	Define MST and AST values and uncertainty distribution from literature
 
 Validation Criteria
 +++++++++++++++++++
+
+.. todo::
+
+	List validation criteria
 
 References
 ----------
