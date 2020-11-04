@@ -64,6 +64,13 @@ Covariates used in the fatal TBL cancer model for GBD 2017 included:
    * - C33-C34.9, D02.1-D02.3, D14.2-D14.3, D38.1
      - 162-162.9, 212.2-212.3, 231.1-231.2, 235.7
 
+
+.. todo::
+
+	What moment of cancer progression does GBD intend to model as incidence? Cancer onset or symptom onset? What are the limitations of this? Most likely symptom onset/diagnosis.
+
+	How can we integrate the 10 year GBD assumption into our vivarium strategy while also accounting for pre-symptomatic incidence?
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -111,40 +118,27 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
-
 Scope
 +++++
 
-.. todo::
-
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. Additionally, this cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer occurs more than ten years past incidence of the *clinical* phase of TBL cancer. The assumption also asserts that there is no recurrance of TBL cancer.
+
 .. todo::
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+	Confirm that the 10 year assumption should apply to the clinical phase of TBL cancer with GBD modeler.
 
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: tbl_cancer_cause_diagram.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
-
-Definitions
-"""""""""""
-
-This table contains the definitions of all the states in **cause model diagram**. 
 
 .. list-table:: State Definitions
    :widths: 5 5 20
@@ -153,18 +147,18 @@ This table contains the definitions of all the states in **cause model diagram**
    * - State
      - State Name
      - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-States Data
-"""""""""""
-
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. 
+   * - S
+     - Susceptible
+     - Without condition OR with asymptomatic condition, but not screen-detectable
+   * - I_PC
+     - Infected; preclinical, screen-detectable
+     - With asymptomatic condition, screen-detectable
+   * - I_C
+     - Infected; clinical
+     - With symptomatic condition
+   * - R
+     - Recovered
+     - Without condition; not susceptible
 
 .. list-table:: States Data
    :widths: 20 25 30 30
@@ -174,31 +168,70 @@ initialize the model.
      - Measure
      - Value
      - Notes
-   * - State
+   * - S
      - prevalence
+     - 1 - prevalence_c426
      - 
-     - 
-   * - State
+   * - S
      - birth prevalence
+     - 0
      - 
-     - 
-   * - State
+   * - S
      - excess mortality rate
+     - 0
      - 
-     - 
-   * - State
+   * - S
      - disabilty weights
-     - 
+     - 0
      -
-   * - ALL
-     - cause specific mortality rate
+   * - I_PC
+     - prevalence
+     - prevalence_c426 / AST * MST
+     - May need to incorporate consideration of baseline screening rates here
+   * - I_PC
+     - birth prevalence
+     - 0
      - 
+   * - I_PC
+     - excess mortality rate
+     - 0
      - 
-
-Transition Data
-"""""""""""""""
-
-This table contains the measures needed for transition from one state to other in the cause model. 
+   * - I_PC
+     - disability weights
+     - 0 
+     - 
+   * - I_C
+     - prevalence
+     - prevalence_c426
+     - 
+   * - I_C
+     - birth prevalence
+     - 0
+     - 
+   * - I_C
+     - excess mortality rate
+     - csmr_c426 / prevalence_c426
+     - 
+   * - I_C
+     - disabilty weights
+     - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
+   * - R
+     - prevalence
+     - 0
+     - No initialization into recovered state
+   * - R
+     - birth prevalence
+     - 0
+     - 
+   * - R
+     - excess mortality rate
+     - 0
+     - No excess mortality in recovered state assumed
+   * - R
+     - disabilty weights
+     - 0
+     - No long term disability in recovered state assumed
 
 .. list-table:: Transition Data
    :widths: 10 10 10 20 30
@@ -209,21 +242,21 @@ This table contains the measures needed for transition from one state to other i
      - Sink 
      - Value
      - Notes
-   * - i
+   * - i_pc
      - S
-     - I
-     - 
-     - 
+     - I_PC
+     - incidence_c426 / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
+     - NOTE: this incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low)
+   * - i_c
+     - I_PC
+     - I_C
+     - 1/MST per person-year
+     - See MST definition in table below
    * - r
-     - I
+     - I_C
      - R
-     - 	
-     - 
-
-Data Sources
-""""""""""""
-
-This table contains the data sources for all the measures. The table structure and common measures are as below:
+     - 0.1 per person-year for each sex and age group	
+     - To be consistent with 10 year GBD assumption
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -233,45 +266,45 @@ This table contains the data sources for all the measures. The table structure a
      - Sources
      - Description
      - Notes
-   * - prevalence_cid
-     - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
-     - 
-   * - population
-     - 
-     - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_mid
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
-     - 
+   * - prevalence_c426
+     - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - CSU TBL cancer prevalence forecasts
+     - 2020-2040; defined as proportion of population with condition
+   * - csmr_c426
+     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - CSU TBL cancer cause specific mortality rate forecast
+     - 2020-2040; defined as deaths per person-year in general population
+   * - incidence_rate_c426
+     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - CSU TBL cancer cause-specific mortality rate forecast
+     - 2020-2040; defined as incidence cases per person-year in general population
+   * - disability_weight_s{273, 274, 275, 276}
+     - YLD appendix
+     - Sequela disability weights
+     - 0.288 (0.193-0.145), 0.049 (0.031-0.072), 0.451 (0.307-0.6), 0.54 (0.377-0.687)
+   * - prevalence_s{273, 274, 275, 276}
+     - GBD 2019, COMO, decomp_step='step4'
+     - TBL cancer sequelae prevalence
+     - Not forecasted
+   * - MST
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
+     - See details below
+   * - AST
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Average survival time; mean duration of time between detection and death
+     - See details below. Can use GBD mortality rates, but need to be mindful of age groups
+
+.. todo::
+
+	Define MST and AST values and uncertainty distribution from literature
 
 Validation Criteria
 +++++++++++++++++++
+
+.. todo::
+
+	List validation criteria
 
 References
 ----------
