@@ -186,7 +186,7 @@ State and Transition Data Tables
      -
    * - I_PC
      - prevalence
-     - prevalence_c426 * MST / (MST + AST)
+     - prevalence_c426 / AST * MST
      - May need to incorporate consideration of baseline screening rates here
    * - I_PC
      - birth prevalence
@@ -210,12 +210,12 @@ State and Transition Data Tables
      - 
    * - I_C
      - excess mortality rate
-     - :math:`\text{csmr_c426}\times\text{prevalence_c426}`
+     - csmr_c426 / prevalence_c426
      - 
    * - I_C
      - disabilty weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}`
-     - Total TBL cancer disability weight overa ll sequelae with IDs s273, s274, s275, s276
+     - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
    * - R
      - prevalence
      - 0
@@ -245,8 +245,8 @@ State and Transition Data Tables
    * - i_pc
      - S
      - I_PC
-     - incidence_c426
-     - 
+     - incidence_c426 / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
+     - NOTE: this incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low)
    * - i_c
      - I_PC
      - I_C
@@ -269,15 +269,15 @@ State and Transition Data Tables
    * - prevalence_c426
      - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer prevalence forecasts
-     - 2020-2040
+     - 2020-2040; defined as proportion of population with condition
    * - csmr_c426
      - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer cause specific mortality rate forecast
-     - 2020-2040
+     - 2020-2040; defined as deaths per person-year in general population
    * - incidence_rate_c426
      - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer cause-specific mortality rate forecast
-     - 2020-2040
+     - 2020-2040; defined as incidence cases per person-year in general population
    * - disability_weight_s{273, 274, 275, 276}
      - YLD appendix
      - Sequela disability weights
