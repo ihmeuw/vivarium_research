@@ -208,6 +208,14 @@ Lung cancer screening specificity is assumed to be 100%; in other words, we assu
 
   link to smoking risk factor document page once it exists :) 
 
+
+5.3.4 Tumor Growth Rate Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  link to tumor growth rate custom risk factor document page once it exists :) 
+
 .. _5.4:
 
 5.4 Input data sources
