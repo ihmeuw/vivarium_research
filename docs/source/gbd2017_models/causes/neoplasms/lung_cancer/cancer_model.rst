@@ -150,11 +150,11 @@ State and Transition Data Tables
    * - S
      - Susceptible
      - Without condition OR with asymptomatic condition, but not screen-detectable
-   * - I_PC
-     - Infected; preclinical, screen-detectable
+   * - PC
+     - Preclinical, screen-detectable TBL cancer
      - With asymptomatic condition, screen-detectable
-   * - I_C
-     - Infected; clinical
+   * - C
+     - Clinical TBL cancer
      - With symptomatic condition
    * - R
      - Recovered
@@ -184,7 +184,7 @@ State and Transition Data Tables
      - disabilty weights
      - 0
      -
-   * - I_PC
+   * - PC
      - prevalence
      - prevalence_c426 / AST * MST
      - May need to incorporate consideration of baseline screening rates here
@@ -192,27 +192,27 @@ State and Transition Data Tables
      - birth prevalence
      - 0
      - 
-   * - I_PC
+   * - PC
      - excess mortality rate
      - 0
      - 
-   * - I_PC
+   * - PC
      - disability weights
      - 0 
      - 
-   * - I_C
+   * - C
      - prevalence
      - prevalence_c426
      - 
-   * - I_C
+   * - C
      - birth prevalence
      - 0
      - 
-   * - I_C
+   * - C
      - excess mortality rate
      - csmr_c426 / prevalence_c426
      - 
-   * - I_C
+   * - C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
      - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
@@ -244,16 +244,16 @@ State and Transition Data Tables
      - Notes
    * - i_pc
      - S
-     - I_PC
-     - incidence_c426 / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
-     - NOTE: this incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low)
+     - PC
+     - incidence_c426 * ODF / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
+     - NOTE: Apply prevalence from the age group equal to simulant's age PLUS MST. This incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low). 
    * - i_c
-     - I_PC
-     - I_C
+     - PC
+     - C
      - 1/MST per person-year
      - See MST definition in table below
    * - r
-     - I_C
+     - C
      - R
      - 0.1 per person-year for each sex and age group	
      - To be consistent with 10 year GBD assumption
@@ -294,17 +294,19 @@ State and Transition Data Tables
      - XXX (XXX, XXX); YYY distribution of uncertainty
      - Average survival time; mean duration of time between detection and death
      - See details below. Can use GBD mortality rates, but need to be mindful of age groups
+   * - ODF
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Over-diagnosis factor (ex: 1.25 times as many lung cancers diagnosed with LDCT screening than without)
+     - See details below
 
 .. todo::
 
-	Define MST and AST values and uncertainty distribution from literature
+	Define MST, AST, and ODF values and uncertainty distribution from literature
 
 Validation Criteria
 +++++++++++++++++++
 
-.. todo::
-
-	List validation criteria
+The incidence and prevalence of *clinical* TBL cancers in the general population should approximately validate to the GBD incidenceand prevalence of TBL cancers. The mortality rates (CSMR and EMR) of TBL cancer should validate to those of GBD.
 
 References
 ----------
