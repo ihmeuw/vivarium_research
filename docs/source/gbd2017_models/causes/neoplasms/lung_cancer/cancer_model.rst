@@ -131,12 +131,12 @@ Assumptions and Limitations
 2. This model assumes that the GBD incidence rate corresponds to the incidence of asymptomatic preclinical/LDCT screen-detectable TBL cancer rather than *detected* lung cancer, which is a mix of preclinical and clinical detections. This assumption has a few notable downstream limitations, including:
 
 	- Underestimation of clinical TBL cancer as a result of simulants dying between incidence of preclinical/screen-detectable TBL cancer and progression to clinical TBL cancer (death due to other causes during the mean sojourn time period).
-	
-.. todo::
-
-	Quantify the potential impact of this assumption here
 
 	- Simulation incidence of *clinical* TBL cancer will lag slightly behind forecasted incidence of TBL cancer due to the mean sojourn time period delay
+
+.. todo::
+
+  Quantify the potential impact of this assumption here
 
 3. The prevalence of preclinical/screen-detectable TBL cancer is assumed to be equal to prevalence of detected TBL cancer (GBD prevalence of TBL cancer) scaled to the ratio of duration spent in the preclinical/screen-detectable state (mean sojourn time) and the clinical state (average survival time). This method relies on the assumption that GBD prevalence of TBL cancer represents clinical TBL cancers; this may be a reasonable assumption for China given that the current screening coverage is low.
 
@@ -145,7 +145,7 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
-.. image:: tbl_cancer_cause_diagram.svg
+.. image:: cause_model_diagram.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
