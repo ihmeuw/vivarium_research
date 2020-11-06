@@ -353,6 +353,22 @@ A systematic literature search was performed to obtain estimates of the mean soj
 
   Extract study details and perform meta-analysis if appropriate
 
+Average Survival Time
+^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  Document average survival time values and references
+
+  May be able to rely on GBD data (MIRs and survival statistics) here
+
+Over-Diagnosis Factor
+^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  Document over-diagnosis factor values and references
+
 Validation Criteria
 +++++++++++++++++++
 
