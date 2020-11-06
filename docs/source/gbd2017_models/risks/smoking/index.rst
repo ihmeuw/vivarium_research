@@ -54,6 +54,9 @@ Vivarium Modeling Strategy
 
     Years since quitting will be used for initialization only
 
+    Pack-year smoking history exposure will be assigned to former smokers by looking up the pack-year history among current smokers in the year that they quit (assumption/limitation of model; potential error here should be investigated)
+
+
 Restrictions
 ++++++++++++
 
