@@ -126,11 +126,27 @@ This Vivarium modeling strategy is intended to simulate TBL cancer incidence/mor
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer occurs more than ten years past incidence of the *clinical* phase of TBL cancer. The assumption also asserts that there is no recurrance of TBL cancer.
+1. This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to TBL cancer occurs more than ten years past incidence of the *clinical* phase of TBL cancer. The assumption also asserts that there is no recurrance of TBL cancer.
+
+2. This model assumes that the GBD incidence rate corresponds to the incidence of asymptomatic preclinical/LDCT screen-detectable TBL cancer rather than *detected* lung cancer, which is a mix of preclinical and clinical detections. This assumption has a few notable downstream limitations, including:
+
+	- Underestimation of clinical TBL cancer as a result of simulants dying between incidence of preclinical/screen-detectable TBL cancer and progression to clinical TBL cancer (death due to other causes during the mean sojourn time period).
+	
+.. todo::
+
+	Quantify the potential impact of this assumption here
+
+	- Simulation incidence of *clinical* TBL cancer will lag slightly behind forecasted incidence of TBL cancer due to the mean sojourn time period delay
+
+	- The application of the GBD incidence rate to *preclinical* TBL cancer rather than *clinical* TBL cancer may cause the delay of detected TBL cancer to the *next* GBD age group
 
 .. todo::
 
-	Confirm that the 10 year assumption should apply to the clinical phase of TBL cancer with GBD modeler.
+	Update methods by drawing from incidence of age+MST in forthcoming PR
+
+3. The prevalence of preclinical/screen-detectable TBL cancer is assumed to be equal to prevalence of detected TBL cancer (GBD prevalence of TBL cancer) scaled to the ratio of duration spent in the preclinical/screen-detectable state (mean sojourn time) and the clinical state (average survival time). This method relies on the assumption that GBD prevalence of TBL cancer represents clinical TBL cancers; this may be a reasonable assumption for China given that the current screening coverage is low.
+
+4. This model assumes that TBL cancers are interchangeable with lung cancer with respect to mean sojourn time, average survival time, and screening sensitivity and specificity by LDCT.
 
 Cause Model Diagram
 +++++++++++++++++++
