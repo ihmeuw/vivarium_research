@@ -206,16 +206,16 @@ Lung cancer screening specificity is assumed to be 100%; in other words, we assu
 
 The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
 
-The smoking risk factor should affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
+The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
 
 The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
 
-5.3.4 Tumor Growth Rate Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5.3.4 Lung Cancer Growth Rate Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+The lung cancer growth rate risk exposure model to be used for this project is documented :ref:`here <2017_risk_exposure_lung_cancer_growth_rate>`.
 
-  link to tumor growth rate custom risk factor document page once it exists :) 
+The lung cancer growth rate risk factor will affect the mean sojourn time parameter duration in the :ref:`lung cancer cause model <2017_lung_cancer>`; the documentation of this risk outcome relationship can be found on the :ref:`lung cancer growth rate risk effects page <2017_risk_effect_lung_cancer_growth>`.
 
 .. _5.4:
 
