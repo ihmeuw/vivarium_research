@@ -180,7 +180,7 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c426
+     - 1 - prevalence_c426 - prevalence_c426 * MST / AST
      - 
    * - S
      - birth prevalence
@@ -196,9 +196,9 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prevalence_c426 / AST * MST
+     - prevalence_c426 * ODF * MST / AST
      - May need to incorporate consideration of baseline screening rates here
-   * - I_PC
+   * - PC
      - birth prevalence
      - 0
      - 
@@ -255,7 +255,7 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c426 * ODF / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
+     - incidence_c426 * ODF / prevalence_S
      - NOTE: Apply prevalence from the age group equal to simulant's age PLUS MST. This incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low). 
    * - i_c
      - PC
