@@ -131,18 +131,12 @@ Assumptions and Limitations
 2. This model assumes that the GBD incidence rate corresponds to the incidence of asymptomatic preclinical/LDCT screen-detectable TBL cancer rather than *detected* lung cancer, which is a mix of preclinical and clinical detections. This assumption has a few notable downstream limitations, including:
 
 	- Underestimation of clinical TBL cancer as a result of simulants dying between incidence of preclinical/screen-detectable TBL cancer and progression to clinical TBL cancer (death due to other causes during the mean sojourn time period).
-	
-.. todo::
-
-	Quantify the potential impact of this assumption here
 
 	- Simulation incidence of *clinical* TBL cancer will lag slightly behind forecasted incidence of TBL cancer due to the mean sojourn time period delay
 
-	- The application of the GBD incidence rate to *preclinical* TBL cancer rather than *clinical* TBL cancer may cause the delay of detected TBL cancer to the *next* GBD age group
-
 .. todo::
 
-	Update methods by drawing from incidence of age+MST in forthcoming PR
+  Quantify the potential impact of this assumption here
 
 3. The prevalence of preclinical/screen-detectable TBL cancer is assumed to be equal to prevalence of detected TBL cancer (GBD prevalence of TBL cancer) scaled to the ratio of duration spent in the preclinical/screen-detectable state (mean sojourn time) and the clinical state (average survival time). This method relies on the assumption that GBD prevalence of TBL cancer represents clinical TBL cancers; this may be a reasonable assumption for China given that the current screening coverage is low.
 
@@ -151,7 +145,7 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
-.. image:: tbl_cancer_cause_diagram.svg
+.. image:: cause_model_diagram.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -166,11 +160,11 @@ State and Transition Data Tables
    * - S
      - Susceptible
      - Without condition OR with asymptomatic condition, but not screen-detectable
-   * - I_PC
-     - Infected; preclinical, screen-detectable
+   * - PC
+     - Preclinical, screen-detectable TBL cancer
      - With asymptomatic condition, screen-detectable
-   * - I_C
-     - Infected; clinical
+   * - C
+     - Clinical TBL cancer
      - With symptomatic condition
    * - R
      - Recovered
@@ -200,7 +194,7 @@ State and Transition Data Tables
      - disabilty weights
      - 0
      -
-   * - I_PC
+   * - PC
      - prevalence
      - prevalence_c426 / AST * MST
      - May need to incorporate consideration of baseline screening rates here
@@ -208,27 +202,27 @@ State and Transition Data Tables
      - birth prevalence
      - 0
      - 
-   * - I_PC
+   * - PC
      - excess mortality rate
      - 0
      - 
-   * - I_PC
+   * - PC
      - disability weights
      - 0 
      - 
-   * - I_C
+   * - C
      - prevalence
      - prevalence_c426
      - 
-   * - I_C
+   * - C
      - birth prevalence
      - 0
      - 
-   * - I_C
+   * - C
      - excess mortality rate
      - csmr_c426 / prevalence_c426
      - 
-   * - I_C
+   * - C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
      - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
@@ -260,16 +254,16 @@ State and Transition Data Tables
      - Notes
    * - i_pc
      - S
-     - I_PC
-     - incidence_c426 / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
-     - NOTE: this incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low)
+     - PC
+     - incidence_c426 * ODF / (1 - prevalence_c426 - prevalence_c426 / AST * MST)
+     - NOTE: Apply prevalence from the age group equal to simulant's age PLUS MST. This incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low). 
    * - i_c
-     - I_PC
-     - I_C
+     - PC
+     - C
      - 1/MST per person-year
      - See MST definition in table below
    * - r
-     - I_C
+     - C
      - R
      - 0.1 per person-year for each sex and age group	
      - To be consistent with 10 year GBD assumption
@@ -303,24 +297,82 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - 2.53 (95% CI: 1.5, 3.88) years; YYY distribution of uncertainty
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See details below
    * - AST
      - XXX (XXX, XXX); YYY distribution of uncertainty
      - Average survival time; mean duration of time between detection and death
      - See details below. Can use GBD mortality rates, but need to be mindful of age groups
+   * - ODF
+     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - Over-diagnosis factor (ex: 1.25 times as many lung cancers diagnosed with LDCT screening than without)
+     - See details below
 
 .. todo::
 
-	Define MST and AST values and uncertainty distribution from literature
+	Define MST, AST, and ODF values and uncertainty distribution from literature
+
+Mean Sojourn Time
+^^^^^^^^^^^^^^^^^
+
+.. image:: mst_diagram.svg
+
+A systematic literature search was performed to obtain estimates of the mean sojourn time of lung cancer using low-dose computed topography (LDCT) screening methodology. The search yielded the following results:
+
+.. list-table:: Mean Sojourn Time References
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Paper
+     - Description
+     - Results
+     - Notes
+   * - Chien and Chen 2008
+     - Modeling study, uses cancer data from Asia
+     - 2.53 (95% CI: 1.5, 3.88) years
+     - Study selected for use in this model currently
+   * - Pinsky 2004
+     - 
+     - 
+     - 
+   * - Ten Haaf et al. 2015
+     - Modeling study; estimated MST at the sex-, stage-, and histology-specific level
+     - 
+     - Not selected for use in this model due to stage-specificity 
+   * - Patz et al. 2014
+     - 
+     - 
+     - 
+   * - Wu et al. 2016
+     - 
+     - 
+     - 
+
+.. todo::
+
+  Extract study details and perform meta-analysis if appropriate
+
+Average Survival Time
+^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  Document average survival time values and references
+
+  May be able to rely on GBD data (MIRs and survival statistics) here
+
+Over-Diagnosis Factor
+^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  Document over-diagnosis factor values and references
 
 Validation Criteria
 +++++++++++++++++++
 
-.. todo::
-
-	List validation criteria
+The incidence and prevalence of *clinical* TBL cancers in the general population should approximately validate to the GBD incidenceand prevalence of TBL cancers. The mortality rates (CSMR and EMR) of TBL cancer should validate to those of GBD.
 
 References
 ----------
