@@ -297,7 +297,7 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - 2.53 (95% CI: 1.5, 3.88) years; YYY distribution of uncertainty
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See details below
    * - AST
@@ -312,6 +312,46 @@ State and Transition Data Tables
 .. todo::
 
 	Define MST, AST, and ODF values and uncertainty distribution from literature
+
+Mean Sojourn Time
+^^^^^^^^^^^^^^^^^
+
+.. image:: mst_diagram.svg
+
+A systematic literature search was performed to obtain estimates of the mean sojourn time of lung cancer using low-dose computed topography (LDCT) screening methodology. The search yielded the following results:
+
+.. list-table:: Mean Sojourn Time References
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Paper
+     - Description
+     - Results
+     - Notes
+   * - Chien and Chen 2008
+     - Modeling study, uses cancer data from Asia
+     - 2.53 (95% CI: 1.5, 3.88) years
+     - Study selected for use in this model currently
+   * - Pinsky 2004
+     - 
+     - 
+     - 
+   * - Ten Haaf et al. 2015
+     - Modeling study; estimated MST at the sex-, stage-, and histology-specific level
+     - 
+     - Not selected for use in this model due to stage-specificity 
+   * - Patz et al. 2014
+     - 
+     - 
+     - 
+   * - Wu et al. 2016
+     - 
+     - 
+     - 
+
+.. todo::
+
+  Extract study details and perform meta-analysis if appropriate
 
 Validation Criteria
 +++++++++++++++++++
