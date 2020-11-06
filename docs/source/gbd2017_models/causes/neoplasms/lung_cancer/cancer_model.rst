@@ -138,12 +138,6 @@ Assumptions and Limitations
 
 	- Simulation incidence of *clinical* TBL cancer will lag slightly behind forecasted incidence of TBL cancer due to the mean sojourn time period delay
 
-	- The application of the GBD incidence rate to *preclinical* TBL cancer rather than *clinical* TBL cancer may cause the delay of detected TBL cancer to the *next* GBD age group
-
-.. todo::
-
-	Update methods by drawing from incidence of age+MST in forthcoming PR
-
 3. The prevalence of preclinical/screen-detectable TBL cancer is assumed to be equal to prevalence of detected TBL cancer (GBD prevalence of TBL cancer) scaled to the ratio of duration spent in the preclinical/screen-detectable state (mean sojourn time) and the clinical state (average survival time). This method relies on the assumption that GBD prevalence of TBL cancer represents clinical TBL cancers; this may be a reasonable assumption for China given that the current screening coverage is low.
 
 4. This model assumes that TBL cancers are interchangeable with lung cancer with respect to mean sojourn time, average survival time, and screening sensitivity and specificity by LDCT.
