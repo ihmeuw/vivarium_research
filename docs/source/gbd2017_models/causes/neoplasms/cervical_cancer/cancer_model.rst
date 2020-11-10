@@ -230,7 +230,7 @@ State and Transition Data Tables
      - used only at initialization
    * - ICC, S_hrHPV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c432}}{\text{prev_ICC_and_S_hrHPV}}`
+     - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}}`
      - 
    * - ICC, S_hrHPV  
      - disability weights
@@ -242,7 +242,7 @@ State and Transition Data Tables
      - used only at initialization
    * - ICC, C_hrHPV
      - excess mortality rate
-     - :math:`\frac{\text{csmr_c432}}{\text{prev_ICC_and_C_hrHPV}}`
+     - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}}`
      - 
    * - ICC, C_hrHPV  
      - disability weights
@@ -283,33 +283,33 @@ S_ = susceptible; C_ = with condition
    * - i_hrHPV
      - BCC, S_hrHPV
      - BCC, C_hrHPV
-     - :math:`\frac{\text{incidence_hrHPV}}{\text{prev_BCC_and_S_hrHPV}}`
-     - prev_BCC_and_S_hrHPV is specified in `State Data`
+     - hrHPV incidence
+     - 
    * - r_hrHPV
      - BCC, C_hrHPV
      - BCC, S_hrHPV
-     - :math:`\frac{\text{r_hrHPV}}{\text{prev_BCC_and_C_hrHPV}}`
-     - prev_BCC_and_C_hrHPV is specified in `State Data`
+     - hrHPV clearance/remission
+     - 
    * - i_ICC
      - BCC, S_hrHPV
      - ICC, S_hrHPV
-     - :math:`\frac{\text{incidence_c432}}{\text{prev_BCC_and_S_hrHPV}}`
+     - :math:`\frac{\text{incidence_c432}}{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}`
      - prev_BCC_and_S_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`.
    * - i_ICC
      - BCC, C_hrHPV
      - ICC, C_hrHPV
-     - :math:`\frac{\text{incidence_c432}}{\text{prev_BCC_and_C_hrHPV}}`
+     - :math:`\frac{\text{incidence_c432}}{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}`
      - prev_BCC_and_C_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`.
    * - i_hrHPV
      - ICC, S_hrHPV
      - ICC, C_hrHPV
-     - :math:`\frac{\text{incidence_hrHPV}}{\text{prev_ICC_and_S_hrHPV}}`
-     - prev_ICC_and_S_hrHPV is specified in `State Data`
+     - hrHPV incidence
+     - 
    * - r_hrHPV
      - ICC, C_hrHPV
      - ICC, S_hrHPV
-     - :math:`\frac{\text{r_hrHPV}}{\text{prev_ICC_and_C_hrHPV}}`
-     - prev_ICC_and_C_hrHPV is specified in `State Data`
+     - hrHPV clearance/remission
+     - 
    * - r
      - ICC, S_hrHPV
      - Recovered
@@ -373,8 +373,8 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - derived from Abie's dismod
      - add filepath
    * - RR_hrHPV
-     - extracted from Chen et al.
-     - relative risk of developing BCC and/or ICC for hrHPV infected women versus without HPV infection = 16.2 (95%CI 9.6 to 27.3)
+     - extracted from Naucler et al.
+     - relative risk of HPV 16/18 causing CIN2+ = 27.4 (95%CI 19.7 to 38.0)
    * - PAF
      - derived from prev_hrHPV and RR_hrHPV
      - PAF = :math:`\frac{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)}{\text{prev_hrHPV}\times(\text{RR_hrHPV}-1)+1}`
