@@ -45,7 +45,20 @@ Vivarium CSU Stomach Cancer Screening
 +=======+============================+
 | GC    | Gastric cancer             |
 +-------+----------------------------+
-
+| G     | non-atrophic gastritis     |
++-------+----------------------------+
+| AG    | atrophic gastritis         |
++-------+----------------------------+
+| IM    | intestinal metaplasia      |
++-------+----------------------------+
+| DYS   | Dysplasia                  |
++-------+----------------------------+
+| LGIN  | low-grade intra-epithelial |
+|       | neoplasm/dysplasia         |
++-------+----------------------------+
+| HGIN  | high-grade intra-epithelial|
+|       | neoplasm/dysplasia         |
++-------+----------------------------+
 
 
 .. _1.0:
@@ -53,42 +66,40 @@ Vivarium CSU Stomach Cancer Screening
 1.0 Background
 ++++++++++++++
 
+Stomach/gastric cancer (GC) epidemiology and risk factors Gastric carcinogenesis is a multifactorial, multistep process. Host factors include blood group A, pernicious anemia, prior gastric surgery, family history, hereditary diffuse GC, and genetic syndromes. Smoking, salt, salty and smoked food, red meat, obesity, and low socioeconomic status are environmental factors. Moreover, infection with Helicobacter pylori and Epstein–Barr virus also play a role in gastric carcinogenesis. Information on these risk factors helps characterize individuals at risk of GC during their lifetime. Furthermore, identification of premalignant lesions is important for the purpose of screening and surveillance. Premalignant lesions of GC include atrophic gastritis (AG), intestinal metaplasia (IM), and dysplasia (DYS). 
+  o It has been estimated that annually 0%–1.8%, 0%–10%, and 0%–73% of the patients with AG, IM, and dysplasia, respectively, progress to GC. The wide variations on the reported progression rates may result from differences in the study design, recruited population, and definitions. 
+  o The Netherlands cohort study also revealed that premalignant lesions would progress to GC with an annual incidence of 0.2% from AG, 0.25% from IM, 0.6% from mild-to-moderate dysplasia, and 6% from severe dysplasia2. 
+  
+Endoscopic surveillances in individuals with premalignant lesions may detect GC at an early and curable stage and therefore improve their survival.
+• Prognosis of upper gastrointestinal cancer depends largely on disease stage at diagnosis. 
+  o The survival rate is less than 10% when diagnosed at an advanced stage but is as high as 85% if detected at an earlier stage. 
+• Endoscopic screening can potentially prevent upper gastrointestinal cancers by early diagnosis and early treatment and has been widely adopted in screening programmes. 
+  o Developed countries such as Japan and South Korea have launched nationwide endoscopic screening programmes.
+  o While developing countries such as China and Iran conduct endoscopic screening only in high risk areas due to a larger cancer burden, capabilities of local doctors and availability of technology.
+
+.. image:: stomach_image.svg
+
+Stomach cancers tend to develop slowly over many years. Before a true cancer develops, pre-cancerous changes often occur in the inner lining (mucosa) of the stomach. These early changes rarely cause symptoms and therefore often go undetected. Most (about 90% to 95%) cancers of the stomach are adenocarcinomas. A stomach cancer or gastric cancer almost always is an adenocarcinoma. These cancers develop from the cells that form the innermost lining of the stomach (the mucosa). Correa pointed out that the human gastric carcinogenesis is a slow progressive, multistep, and multifactorial pathology process. The multistep process is composed of chronic superficial gastritis, atrophy gastritis, intestinal metaplasia (IM), dysplasia (DYS), and adenocarcinoma (malignant neoplasm).
+
+ -  Note that there are cardia (50-60%) and non-cardia cancers (40-50%) both classified by GBD as stomach cancers
+ - Cardia cancers are not associated with H. pylori infection while non-cardia cancers are. There is evidence written that says cardia cancers may be protected by H. pylori. Incidence is cardia cancers are rising while stomach cancer overall and non-cardia cancers are decreasing (better hygiene?) 
+ - This pools all stomach cancer
+
+
+
 
 .. _1.1:
 
 1.1 Project overview
 --------------------
 
-A health insurance provider in China offers routine stomach cancer screening for their insurees. The provider also offers critical illness insurance to cover treatment for those if cancer a diagnosis is made. 
-
-The health insurance provider is interested in estimating the yearly number of detected stomach cancer cases for their Chinese insured population under specific screening practices to identify the trends that are important to its critical illness insurance product. This will inform their projections of how much they will pay out for different cancer types under different screening coverage rates. 
-
-
-
-.. todo::
-  
-  - add more project Background
-  - Is the provider also interested in mortality/morb from stomach cancer?
 
 .. _1.2:
 
 1.2 Literature review
 ---------------------
 
-  - 
 
-
-
-
-.. todo::
- maybe just a brief summary of what the literature says about the exposures/outcome/exp-outcome relationship?
-
-  - what is stomach cancer?
-  - types of stomach cancer?
-  - risk factors for stomach cancer? 
-  - why stomach cancer screening
-  - predictors of stomach cancer screening
-  - types of stomach cancer screening 
 
 .. _2.0:
 
@@ -106,9 +117,6 @@ To estimate the yearly number of cases of stomach cancer detected under specific
 
 3.1 Causal diagram
 ------------------
-
-
-  .. image:: XXXXX.svg
 
 **Outcome (O)**:
 
