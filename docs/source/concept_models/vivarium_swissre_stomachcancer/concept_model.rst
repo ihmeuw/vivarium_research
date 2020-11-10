@@ -86,7 +86,9 @@ Stomach cancers tend to develop slowly over many years. Before a true cancer dev
  - This pools all stomach cancer
 
 
+.. image:: correa_cascade.svg
 
+.. image:: stomachcancer_lifehistory.svg
 
 .. _1.1:
 
