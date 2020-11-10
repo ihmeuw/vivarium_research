@@ -45,6 +45,8 @@ Vivarium CSU Lung Cancer Simulation
      - Mean sojourn time
    * - AST
      - Average survival time
+   * - ODF
+     - Overdiagnosis factor
    * - LDCT
      - Low dose computed topography
    * - CXR
@@ -164,14 +166,14 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 
   Detection via screening occurs when:
 
-    - Simulant is in the PC state of the lung cancer cause model
+    - Simulant is in the PC or I states of the lung cancer cause model
     - Simulant attends a scheduled lung cancer screening
     - Lung cancer is detected according to sensitivity parameters defined below
 
   Detection via symptomatic presentation occurs when:
 
     - Simulant has not already had lung cancer detection via screening
-    - Simulant transitions from PC to C states in the lung cancer cause model
+    - Simulant transitions from PC to C state in the lung cancer cause model
 
 .. note::
 
@@ -209,13 +211,6 @@ The smoking risk exposure model to be used for this project is documented :ref:`
 The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
 
 The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
-
-5.3.4 Lung Cancer Growth Rate Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-The lung cancer growth rate risk exposure model to be used for this project is documented :ref:`here <2017_risk_exposure_lung_cancer_growth_rate>`.
-
-The lung cancer growth rate risk factor will affect the mean sojourn time parameter duration in the :ref:`lung cancer cause model <2017_lung_cancer>`; the documentation of this risk outcome relationship can be found on the :ref:`lung cancer growth rate risk effects page <2017_risk_effect_lung_cancer_growth>`.
 
 .. _5.4:
 
