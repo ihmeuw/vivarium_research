@@ -121,7 +121,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. Additionally, this cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer. 
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. Additionally, this cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer. Additionally, this cause model will allow for the differentiation of indolent lung cancers from other lung cancers. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -297,9 +297,9 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 2.53 (95% CI: 1.5, 3.88) years; YYY distribution of uncertainty
+     - 2.06 years (95% CI: 0.42 - 3.83)
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
-     - See details below
+     - See below for instructions on how to sample and research background
    * - AST
      - XXX (XXX, XXX); YYY distribution of uncertainty
      - Average survival time; mean duration of time between detection and death
@@ -311,14 +311,41 @@ State and Transition Data Tables
 
 .. todo::
 
-	Define MST, AST, and ODF values and uncertainty distribution from literature
+	Define AST and ODF values and uncertainty distribution from literature
 
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
 
+**Parameter for Use in Model:**
+
+This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
+
+.. code-block:: Python
+
+  from scipy.stats import norm
+
+  # mean and 0.975-quantile of normal distribution for mean difference (MD)
+  mean = 2.06
+  q_975 = 3.83
+
+  # 0.975-quantile of standard normal distribution (=1.96, approximately)
+  q_975_stdnorm = norm().ppf(0.975)
+
+  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+  # Frozen normal distribution for MST, representing uncertainty in the parameter
+  mst_distribution = norm(mean, std)
+
+.. note::
+
+  May consider adding individual-level variation to this parameter at a later date.
+
+
+**Research Background:**
+
 .. image:: mst_diagram.svg
 
-A systematic literature search was performed to obtain estimates of the mean sojourn time of lung cancer using low-dose computed topography (LDCT) screening methodology. The search yielded the following results:
+A systematic literature search was performed to obtain estimates of the mean sojourn time of lung cancer using low-dose computed topography (LDCT) screening methodology. The search yielded the following relevant studies:
 
 .. list-table:: Mean Sojourn Time References
    :widths: 20 25 25 25
@@ -328,30 +355,24 @@ A systematic literature search was performed to obtain estimates of the mean soj
      - Description
      - Results
      - Notes
-   * - Chien and Chen 2008
-     - Modeling study, uses cancer data from Asia
-     - 2.53 (95% CI: 1.5, 3.88) years
-     - Study selected for use in this model currently
-   * - Pinsky 2004
+   * - [Chien-and-Chen-2008]_
+     - Used a Markov model to estimate MST using data meta-analyzed from six studies. Assumes a gamma distribution of MSTs.
+     - Median: 2.06 years (95% CI: 0.42 - 3.83)
      - 
+   * - [ten-Haaf-et-al-2015]_
+     - Used the MISCAN-Lung model to estimate MST using data from SEER, the National Lung Screening Trial (NLST), and the Prostate, Lung, Ovarian Colon and Ovarian Cancer Screening Trial (PLCO). Estimated MST at the sex-, stage- and histology-specific level. Assumed a weilbull distribution of MSTs.
+     - Not reported here due to specificity at the histological level. Notably, MST was greater in women than men.
      - 
-     - 
-   * - Ten Haaf et al. 2015
-     - Modeling study; estimated MST at the sex-, stage-, and histology-specific level
-     - 
-     - Not selected for use in this model due to stage-specificity 
-   * - Patz et al. 2014
-     - 
-     - 
-     - 
-   * - Wu et al. 2016
-     - 
-     - 
-     - 
+   * - [Patz-et-al-2014]_
+     - Used data from the National Lung Screening Trial (NLST) to estimate MST 
+     - For non-BAC NSCLC: 3.6 years (95% CI: 3.0-4.3); For BAC: 32.1 years (17.3-270.7)
+     - NSCLC: non-small cell carcinoma lung cancer, BAC: bronchioloalveolar carcinoma
 
-.. todo::
+Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ paper as the data source for the mean sojourn time in this model. 
 
-  Extract study details and perform meta-analysis if appropriate
+  Notably, this is limited in that it does not consider variation by sex or histology.
+
+Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time of lung cancer tumors (a measure related to mean sojourn time) did not significantly vary by age or pack-year cigarette consumption. 
 
 Average Survival Time
 ^^^^^^^^^^^^^^^^^^^^^
@@ -372,10 +393,14 @@ Over-Diagnosis Factor
 Validation Criteria
 +++++++++++++++++++
 
-The incidence and prevalence of *clinical* TBL cancers in the general population should approximately validate to the GBD incidenceand prevalence of TBL cancers. The mortality rates (CSMR and EMR) of TBL cancer should validate to those of GBD.
+The incidence and prevalence of *clinical* TBL cancers in the general population should approximately validate to the GBD incidence and prevalence of TBL cancers. The mortality rates (CSMR and EMR) of TBL cancer should validate to those of GBD.
 
 References
 ----------
+
+.. [Chien-and-Chen-2008]
+
+  Chien, Chun‐Ru, and Tony Hsiu‐Hsi Chen. "Mean sojourn time and effectiveness of mortality reduction for lung cancer screening with computed tomography." International journal of cancer 122.11 (2008): 2594-2599. `Available here <https://pubmed.ncbi.nlm.nih.gov/18302157/>`_
 
 .. [Deng-et-al-2020]
 
@@ -385,9 +410,21 @@ References
 
   Javidan-Nejad, Cylen. "MDCT of trachea and main bronchi." Radiologic Clinics 48.1 (2010): 157-176. `Available here <https://pubmed.ncbi.nlm.nih.gov/19995634/>`_
 
+.. [Patz-et-al-2014]
+
+  Patz, Edward F., et al. "Overdiagnosis in low-dose computed tomography screening for lung cancer." JAMA internal medicine 174.2 (2014): 269-274. `Available here <https://pubmed.ncbi.nlm.nih.gov/24322569/>`_
+
 .. [Sherani-et-al-2015]
 
   Sherani, Khalid, et al. "Malignant tracheal tumors: a review of current diagnostic and management strategies." Current Opinion in Pulmonary Medicine 21.4 (2015): 322-326. `Available here <https://journals.lww.com/co-pulmonarymedicine/Abstract/2015/07000/Malignant_tracheal_tumors__a_review_of_current.4.aspx>`_
+
+.. [ten-Haaf-et-al-2015]
+
+  ten Haaf, Kevin, Joost van Rosmalen, and Harry J. de Koning. "Lung cancer detectability by test, histology, stage, and gender: estimates from the NLST and the PLCO trials." Cancer Epidemiology and Prevention Biomarkers 24.1 (2015): 154-161. `Available here <https://pubmed.ncbi.nlm.nih.gov/25312998/>`_
+
+.. [Veronesi-et-al-2012]
+
+  Veronesi, Giulia, et al. "Estimating overdiagnosis in low-dose computed tomography screening for lung cancer: a cohort study." Annals of internal medicine 157.11 (2012): 776-784. `Available here <https://pubmed.ncbi.nlm.nih.gov/23208167/>`_
 
 .. [GBD-2017-YLD-Appendix-TBL-cancer]
 
