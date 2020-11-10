@@ -340,7 +340,6 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
   May consider adding individual-level variation to this parameter at a later date.
 
-
 **Research Background:**
 
 .. image:: mst_diagram.svg
@@ -367,12 +366,20 @@ A systematic literature search was performed to obtain estimates of the mean soj
      - Used data from the National Lung Screening Trial (NLST) to estimate MST 
      - For non-BAC NSCLC: 3.6 years (95% CI: 3.0-4.3); For BAC: 32.1 years (17.3-270.7)
      - NSCLC: non-small cell carcinoma lung cancer, BAC: bronchioloalveolar carcinoma
+   * - [Gonzalez-Maldonado-et-al-2020]_
+     - German RCT among long-term smokers 50.3-71.9 years of age; LDCT screening versus no screening. Median follow-up of 9.77 years.
+     - 5.38 years (95% CI: 4.76, 5.88)
+     - 
 
 Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ paper as the data source for the mean sojourn time in this model. 
 
   Notably, this is limited in that it does not consider variation by sex or histology.
 
 Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time of lung cancer tumors (a measure related to mean sojourn time) did not significantly vary by age or pack-year cigarette consumption. 
+
+.. note::
+
+  The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be sensitive to this parameter. Given that there is variation around this parameter, this is a value that we should reach consensus on with the client. 
 
 Average Survival Time
 ^^^^^^^^^^^^^^^^^^^^^
@@ -383,12 +390,63 @@ Average Survival Time
 
   May be able to rely on GBD data (MIRs and survival statistics) here
 
-Over-Diagnosis Factor
+Overdiagnosis Factor
 ^^^^^^^^^^^^^^^^^^^^^
+
+**Parameter for Use in Model:**
+
+.. warning::
+
+  This is currently a stand-in value
+
+
 
 .. todo::
 
-  Document over-diagnosis factor values and references
+  Detail parameter value and distribution with more detail
+
+**Research Background:**
+
+Overdiagnosis by cancer screening is defined as the detection/diagnosis of very slow growing or indolent cancers that never would have resulted in a clinical cancer due to death from other causes first. The following figure demonstrates this phenomenon. 
+
+.. image:: overdiagnosis_figure.svg
+
+Overdiagnosis is a major concern associated with lung cancer screening programs and as such has been evaluated for LDCT lung cancer screening programs by several investigators. Notably, when investigating overdiagnosis by LDCT an adequate follow-up period is critical to allow for suspected indolent cancers to progress to the clinical phase. Additionally, the age distribution of the study subjects will also impact the potential for overdiagnosis (older subjects are more susceptible due to their higher background mortality rates).
+
+Estimates of overdiagnosis factors in LDCT lung cancer screening programs have varied greatly, from as low as 1.03 to nearly as high as 1.5. A summary of the relevant literature is included below.
+
+.. list-table:: Overdiagnosis References
+   :widths: 20 25 25 25
+   :header-rows: 1
+   
+   * - Paper
+     - Description
+     - Results
+     - Notes
+   * - [Broderson-et-al-2020]_
+     - Meta-analysis of overdiagnosis in LDCT screening RCTs.
+     - Concluded 49% of screen-detected cancers were overdiagnosed from two RCTs with low risk of bias. 3.6 years considered sufficient lead time (time between screen-detect and clinical presentation).
+     - "There is uncertainty about this substantial degree of overdiagnosis due to unexplained heterogeneity and low precision of the summed estimate across the two trials" (p. 2).
+   * - [de-Koning-et-al-2020]_
+     - NELSON trial: RCT among former and current smokers; LDCT screening versus no screening. 11 years follow-up from initial screening.
+     - Concluded 8.9% (bootstrapped 95% CI, −18.2 to 32.4) of cancers were overdiagnosed; consider this estimate the upper limit due to limited follow-up period.
+     - This most recent update was not included in the [Broderson-et-al-2020]_ meta-analysis estimate 
+   * - [Gonzalez-Maldonado-et-al-2020]_
+     - German RCT among long-term smokers 50.3-71.9 years of age; LDCT screening versus no screening. Median follow-up of 9.77 years.
+     - 25.4% (95% CI: -11.3, 64.3) of screen-detected cancer cases were overdiagnosed.
+     - Not included in [Broderson-et-al-2020]_ meta-analysis due to more recent publication.
+   * - [de-Koning-et-al-2014]_
+     - Cohort study
+     - 8.7% - 13.5% of screen-detected lung cancers are overdiagnosed
+     - 
+
+.. note::  
+
+  Some percentage of non-screen-detected lung cancers may be overdiagnosed as well (i.e. incidental findings). Inflation of incidence rate (as reported in the [Broderson-et-al-2020]_ study as RR = 1.2 or 1.5 depending on sensitivity analysis) may be the more appropriate parameter to use here.
+
+.. note::
+
+  The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be highly sensitive to this parameter. Given that there is so much variation and contraversy around the degree of overdiagnosis in LDCT screening programs, this is a value that we should reach consensus on with the client. 
 
 Validation Criteria
 +++++++++++++++++++
@@ -398,13 +456,26 @@ The incidence and prevalence of *clinical* TBL cancers in the general population
 References
 ----------
 
+.. [Broderson-et-al-2020]
+
+  Brodersen J, Voss T, Martiny F, et al. Overdiagnosis of lung cancer with low-dose computed tomography screening: meta-analysis of the randomised clinical trials. Breathe 2020; 16: 200013
+
 .. [Chien-and-Chen-2008]
 
   Chien, Chun‐Ru, and Tony Hsiu‐Hsi Chen. "Mean sojourn time and effectiveness of mortality reduction for lung cancer screening with computed tomography." International journal of cancer 122.11 (2008): 2594-2599. `Available here <https://pubmed.ncbi.nlm.nih.gov/18302157/>`_
 
+.. [de-Koning-et-al-2020]
+  
+  de Koning et al. "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial." The New England Journal of Medicine 382.6 (2020): 503-513.
+
 .. [Deng-et-al-2020]
 
   Deng, Yujiao, et al. "Epidemiological trends of tracheal, bronchus, and lung cancer at the global, regional, and national levels: a population-based study." Journal of hematology & oncology 13.1 (2020): 1-16. `Available here <https://pubmed.ncbi.nlm.nih.gov/32690044/>`_
+
+.. [Gonzalez-Maldonado-et-al-2020]
+
+  González Maldonado, Sandra, et al. "Overdiagnosis in lung cancer screening: Estimates from the German Lung Cancer Screening Intervention Trial." International Journal of Cancer (2020). `Available here <https://pubmed.ncbi.nlm.nih.gov/32930386/>`_
+
 
 .. [Javidan-Nejad-2010]
 
