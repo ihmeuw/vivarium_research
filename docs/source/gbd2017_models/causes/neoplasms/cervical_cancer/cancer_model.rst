@@ -294,12 +294,12 @@ S_ = susceptible; C_ = with condition
      - BCC, S_hrHPV
      - ICC, S_hrHPV
      - :math:`\frac{\text{incidence_c432}}{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}`
-     - prev_BCC_and_S_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`.
+     - incidence_c432 and prev_c432 are specified in `Data sources`.
    * - i_ICC
      - BCC, C_hrHPV
      - ICC, C_hrHPV
      - :math:`\frac{\text{incidence_c432}}{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}`
-     - prev_BCC_and_C_hrHPV is specified in `State Data`; incidence_c432 is specified in `Data sources`.
+     - incidence_c432 and prev_c432 are specified in `Data sources`.
    * - i_hrHPV
      - ICC, S_hrHPV
      - ICC, C_hrHPV
@@ -313,12 +313,12 @@ S_ = susceptible; C_ = with condition
    * - r
      - ICC, S_hrHPV
      - Recovered
-     - :math:`\frac{0.1}{\text{prev_ICC_and_S_hrHPV}}`
+     - 0.1 per person-years regardless of age
      - remission rate from ICC to R = 1 divided by duration of cervical cancer (10 years) = 0.1 per person-years regardless of age
    * - r
      - ICC, C_hrHPV
      - Recovered
-     - :math:`\frac{0.1}{\text{prev_ICC_and_C_hrHPV}}`
+     - 0.1 per person-years regardless of age
      - remission rate from ICC to R = 1 divided by duration of cervical cancer (10 years) = 0.1 per person-years regardless of age
 
 prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = population attributable fraction
