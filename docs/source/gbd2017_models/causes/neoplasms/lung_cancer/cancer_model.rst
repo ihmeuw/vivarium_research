@@ -162,7 +162,10 @@ State and Transition Data Tables
      - Without condition OR with asymptomatic condition, but not screen-detectable
    * - PC
      - Preclinical, screen-detectable TBL cancer
-     - With asymptomatic condition, screen-detectable
+     - With asymptomatic condition, screen-detectable, will progress to clinical phase
+   * - I
+     - Indolent, screen-detectable TBL cancer
+     - With asymptomatic condition, screen-detectable, will not progress to clinical phase during remainder of simulant lifespan 
    * - C
      - Clinical TBL cancer
      - With symptomatic condition
@@ -180,8 +183,8 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c426 - prevalence_c426 * MST / AST
-     - 
+     - 1 - prevalence_c426 - prevalence_c426 * MST / AST - prevalence_c426 * ODF
+     - Note: this assumes no initial prevalence in R state
    * - S
      - birth prevalence
      - 0
@@ -196,8 +199,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prevalence_c426 * ODF * MST / AST
-     - May need to incorporate consideration of baseline screening rates here
+     - prevalence_c426 * MST / AST
+     - Note: assumes all cancers in prevalence_c426 are in clinical phase
    * - PC
      - birth prevalence
      - 0
@@ -209,6 +212,22 @@ State and Transition Data Tables
    * - PC
      - disability weights
      - 0 
+     - 
+   * - I
+     - prevalence
+     - prevalence_c426 * ODF
+     - Note: this may be an underestimate of initial prevalence due to longer duration than clinical TBL cancer
+   * - I
+     - birth prevalence
+     - 0
+     -
+   * - I
+     - excess mortality rate
+     - 0
+     - 
+   * - I
+     - disability weights
+     - 0
      - 
    * - C
      - prevalence
@@ -255,8 +274,13 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c426 * ODF / prevalence_S
-     - NOTE: Apply prevalence from the age group equal to simulant's age PLUS MST. This incidence calculation is meant to replace the standard vivarium GBD incidence transformation; currently does not consider prevalence of R state (which is hypothetically low). 
+     - incidence_c426 / prevalence_S
+     - NOTE: Apply incidence_c426 rate from the age group equal to simulant's age plus MST 
+   * - i_i
+     - S
+     - I
+     - incidence_c_426 * ODF / prevalence_S
+     - NOTE: Apply incidence_c426 rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
      - C
@@ -297,21 +321,21 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 2.06 years (95% CI: 0.42 - 3.83)
+     - 2.06 years (95% CI: 0.42 - 3.83); normal distrbution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
-     - See below for instructions on how to sample and research background
+     - See below for instructions on how to sample and research background. NOTE: may update this value
    * - AST
-     - XXX (XXX, XXX); YYY distribution of uncertainty
+     - 5 (95% CI: 4, 6); normal distribution of uncertainty at the draw level
      - Average survival time; mean duration of time between detection and death
-     - See details below. Can use GBD mortality rates, but need to be mindful of age groups
+     - See details below for sampling below. PLACEHOLDER VALUE
    * - ODF
-     - XXX (XXX, XXX); YYY distribution of uncertainty
-     - Over-diagnosis factor (ex: 1.25 times as many lung cancers diagnosed with LDCT screening than without)
-     - See details below
+     - 0.35 (0.2, 0.5); normal distribution of uncertainty at the draw level
+     - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
+     - See details for sampling below. NOTE: placeholder value
 
 .. todo::
 
-	Define AST and ODF values and uncertainty distribution from literature
+	Update/confirm placeholder values
 
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
@@ -384,11 +408,39 @@ Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time
 Average Survival Time
 ^^^^^^^^^^^^^^^^^^^^^
 
+**Parameter for Use in Model:**
+
+.. warning::
+
+  This is currently a stand-in value
+
+This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
+
+.. code-block:: Python
+
+  from scipy.stats import norm
+
+  # mean and 0.975-quantile of normal distribution for mean difference (MD)
+  mean = 5
+  q_975 = 6
+
+  # 0.975-quantile of standard normal distribution (=1.96, approximately)
+  q_975_stdnorm = norm().ppf(0.975)
+
+  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+  # Frozen normal distribution for MST, representing uncertainty in the parameter
+  odf_distribution = norm(mean, std)
+
 .. todo::
 
-  Document average survival time values and references
+  Update/confirm stand-in value
 
-  May be able to rely on GBD data (MIRs and survival statistics) here
+**Research Background:**
+
+.. todo::
+
+  Detail research background
 
 Overdiagnosis Factor
 ^^^^^^^^^^^^^^^^^^^^^
@@ -397,13 +449,29 @@ Overdiagnosis Factor
 
 .. warning::
 
-  This is currently a stand-in value
+  This is currently a stand-in value based on the [Broderson-et-al-2020]_ meta-analysis finding that LDCT screening programs increase lung cancer incidence by 20% or 50% based on sensitivity analyses.
 
+This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
 
+.. code-block:: Python
+
+  from scipy.stats import norm
+
+  # mean and 0.975-quantile of normal distribution for mean difference (MD)
+  mean = 0.35
+  q_975 = 0.5
+
+  # 0.975-quantile of standard normal distribution (=1.96, approximately)
+  q_975_stdnorm = norm().ppf(0.975)
+
+  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
+
+  # Frozen normal distribution for MST, representing uncertainty in the parameter
+  odf_distribution = norm(mean, std)
 
 .. todo::
 
-  Detail parameter value and distribution with more detail
+  Update/confirm stand-in value
 
 **Research Background:**
 
@@ -424,12 +492,12 @@ Estimates of overdiagnosis factors in LDCT lung cancer screening programs have v
      - Results
      - Notes
    * - [Broderson-et-al-2020]_
-     - Meta-analysis of overdiagnosis in LDCT screening RCTs.
-     - Concluded 49% of screen-detected cancers were overdiagnosed from two RCTs with low risk of bias. 3.6 years considered sufficient lead time (time between screen-detect and clinical presentation).
+     - Meta-analysis of overdiagnosis in LDCT screening RCTs. 3.6 years considered sufficient lead time (time between screen-detect and clinical presentation).
+     - 49% (11-87) of screen-detected cancers were overdiagnosed from two RCTs with low risk of bias; 38% (14-63) from all RCTs. RR for lung cancer incidence 1.51 (1.06-2.14) based on low-bias RCTs; 1.22 (1.02-1.47) based on all RCTs.
      - "There is uncertainty about this substantial degree of overdiagnosis due to unexplained heterogeneity and low precision of the summed estimate across the two trials" (p. 2).
    * - [de-Koning-et-al-2020]_
      - NELSON trial: RCT among former and current smokers; LDCT screening versus no screening. 11 years follow-up from initial screening.
-     - Concluded 8.9% (bootstrapped 95% CI, −18.2 to 32.4) of cancers were overdiagnosed; consider this estimate the upper limit due to limited follow-up period.
+     - 8.9% (bootstrapped 95% CI, −18.2 to 32.4) of cancers were overdiagnosed; consider this estimate the upper limit due to limited follow-up period.
      - This most recent update was not included in the [Broderson-et-al-2020]_ meta-analysis estimate 
    * - [Gonzalez-Maldonado-et-al-2020]_
      - German RCT among long-term smokers 50.3-71.9 years of age; LDCT screening versus no screening. Median follow-up of 9.77 years.
@@ -464,6 +532,10 @@ References
 
   Chien, Chun‐Ru, and Tony Hsiu‐Hsi Chen. "Mean sojourn time and effectiveness of mortality reduction for lung cancer screening with computed tomography." International journal of cancer 122.11 (2008): 2594-2599. `Available here <https://pubmed.ncbi.nlm.nih.gov/18302157/>`_
 
+.. [de-Koning-et-al-2014]
+
+  de Koning et al. Benefits and harms of computed tomography lung cancer screening strategies: a comparative modeling study for the U.S. Preventive Services Task Force. Ann Intern Med. 2014 Mar 4;160(5):311-20. doi: 10.7326/M13-2316. `Available here <https://pubmed.ncbi.nlm.nih.gov/24379002/>`_.
+
 .. [de-Koning-et-al-2020]
   
   de Koning et al. "Reduced Lung-Cancer Mortality with Volume CT Screening in a Randomized Trial." The New England Journal of Medicine 382.6 (2020): 503-513.
@@ -475,7 +547,6 @@ References
 .. [Gonzalez-Maldonado-et-al-2020]
 
   González Maldonado, Sandra, et al. "Overdiagnosis in lung cancer screening: Estimates from the German Lung Cancer Screening Intervention Trial." International Journal of Cancer (2020). `Available here <https://pubmed.ncbi.nlm.nih.gov/32930386/>`_
-
 
 .. [Javidan-Nejad-2010]
 
