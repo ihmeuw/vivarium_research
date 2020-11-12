@@ -1,15 +1,22 @@
 Location,Year,Birth cohort,Sex,Smoking status,Scenario,Outcomes
 Blended provinces in China,2020,2000 to 2005,Male,Current,Baseline,Number of preclinical lung cancers detected by screening
 ,2021,1995 to 2000,Female,Former,Alternative,Number of indolent lung cancers detected by screening
-,…,…,,Never,,Number of clinical lung cancers detected by symptomatic presentation
-,2040,1925 to 1930,,,,Number of deaths with undetected indolent lung cancer
-,,1900 to 1925,,,,Number of deaths with undetected preclinical lung cancer
-,,,,,,Transition counts for each lung cancer cause model transition
-,,,,,,State person time for each lung cancer cause state
-,,,,,,Deaths due to lung cancer
-,,,,,,Deaths due to other causes
-,,,,,,Mean pack-years (N/A for never smokers)
-,,,,,,Mean years since quitting (N/A for never and current smokers)
-,,,,,,Number of scheduled screenings
-,,,,,,Number of attended screenings
-,,,,,,Person-time
+,2022,1990 to 1995,,Never,,Number of clinical lung cancers detected by symptomatic presentation
+,2023,1985 to 1990,,,,Number of deaths with undetected indolent lung cancer
+,2024,1980 to 1985,,,,Number of deaths with undetected preclinical lung cancer
+,2025,1975 to 1980,,,,Transition counts for each lung cancer cause model transition
+,2026,1970 to 1975,,,,State person time for each lung cancer cause state
+,2027,1965 to 1970,,,,Deaths due to lung cancer
+,2028,1960 to 1965,,,,Deaths due to other causes
+,2029,1955 to 1960,,,,Mean pack-years (N/A for never smokers)
+,2030,1950 to 1955,,,,Mean years since quitting (N/A for never and current smokers)
+,2031,1945 to 1950,,,,Number of scheduled screenings
+,2032,1940 to 1945,,,,Number of attended screenings
+,2033,1935 to 1940,,,,Person-time
+,2034,1930 to 1935,,,,
+,2035,1925 to 1930,,,,
+,2036,1900 to 1925,,,,
+,2037,,,,,
+,2038,,,,,
+,2039,,,,,
+,2040,,,,,
