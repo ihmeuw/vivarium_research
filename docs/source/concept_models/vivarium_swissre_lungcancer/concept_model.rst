@@ -64,24 +64,19 @@ The re-insurance company SwissRe is interested in the expected impact of increas
 1.1 Project overview
 --------------------
 
-This project intends to model the impact of increased lung cancer screening coverage on lung cancer detection forecasted from 2020 to 2040 among the insured population in select areas of China. The model will make use of the current lung cancer screening guidelines, which are dependent on age, smoking status, and cumulative smoking history.
+This project intends to model the impact of increased lung cancer screening coverage on lung cancer detection forecasted from 2020 to 2040 among the insured population in select areas of China. The model will make use of the current lung cancer screening guidelines, which are dependent on age, smoking status, and cumulative smoking history. Screening will affect the timing of dection for some lung cancers (in the preclinical rather than clinical phase) as well as whether indolent cancers are detected or not.
 
 .. _1.2:
 
 1.2 Literature review
 ---------------------
 
-.. todo::
-
- add literature background
-
 .. _2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up.
-
+The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. 
 .. _3.0:
 
 3.0 Causal framework
@@ -147,7 +142,8 @@ The lung cancer cause model that should be used for this project is documented o
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Screening Model:**
+5.3.2.1 Screening Model
+^^^^^^^^^^^^^^^^^^^^^^^
 
 *Annual* screenings should be scheduled for simulants who meet ALL of the following criteria: 
 
@@ -160,7 +156,8 @@ The lung cancer cause model that should be used for this project is documented o
 
   Include probability of attending screening data, time to next scheduled screen distribution, screenining initialization information
 
-**Detection Model:**
+5.3.2.2 Detection Model
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation.
 
@@ -179,7 +176,8 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 
   We may want to eventually incorporate some lag period here between when simulant begins to experience symptoms and when lung cancer is actually formally diagnosed.
 
-**Screening Sensitivity and Specificity:**
+5.3.2.3 Screening Sensitivity and Specificity
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancer screening specificity is assumed to be 100%; in other words, we assume that there will be no false negative lung cancer results detected via screening. 
 
@@ -187,7 +185,8 @@ Lung cancer screening specificity is assumed to be 100%; in other words, we assu
 
   Document screening sensitivity value and references
 
-**Screening Coverage**
+5.3.2.4 Screening Coverage
+^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Baseline
 
@@ -221,6 +220,10 @@ The smoking risk exposure should also be used to determine the lung cancer scree
 
 5.5 Output meta-table shell
 ---------------------------
+
+.. csv-table:: Output table shell metadata
+  :file: output_table_shell.csv
+  :header-rows: 1
 
 .. _6.0:
 
