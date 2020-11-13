@@ -59,7 +59,7 @@ Vivarium CSU Lung Cancer Simulation
 
 .. _1.1:
 
-The re-insurance company SwissRe is interested in the expected impact of increases in lung cancer screening coverage on the rates of detected lung cancer over the next 20 years among the insured population in select areas in China. 
+For this project, we are interested in the expected impact of increases in lung cancer screening coverage on the rates of detected lung cancer over the next 20 years among the insured population in select areas in China. 
 
 1.1 Project overview
 --------------------
@@ -116,6 +116,8 @@ The main outcome of this model is lung cancer *detections*, diagnosed either via
 --------------------------
 
 .. image:: concept_model_diagram.svg
+
+Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality and morbidity because it is not an explicit outcome of interest in this project, although there is evidence that there is an effect.
 
 .. _5.2:
 
