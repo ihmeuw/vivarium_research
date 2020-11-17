@@ -250,8 +250,8 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`prevalence_\text{c426} * ODF * MST / AST`
-     - Note: this may be an underestimate of initial prevalence due to longer duration than clinical TBL cancer
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC} * ODF`
+     - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
      - 0
@@ -266,7 +266,7 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - :math:`screening_\text{baseline} * prevalence_\text{c426} * (1 - ODF) + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
      - 
    * - C
      - birth prevalence
@@ -309,12 +309,12 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * (1 - ODF) + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_i
      - S
      - I
-     - :math:`incidence_\text{c426*} * ODF / prevalence_S`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
