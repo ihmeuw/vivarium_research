@@ -8,6 +8,41 @@ Tracheal, Bronchus, and Lung Cancer
    :local:
    :depth: 1
 
+.. list-table:: Abbreviations
+   :widths: 15 15 15
+   :header-rows: 1
+
+   * - Abbreviation
+     - Definition
+     - Note
+   * - TBL
+     - Tracheal, bronchus, and lung
+     - 
+   * - MST
+     - Mean sojourn time
+     - Time between screen-detectable and symptom onset
+   * - ODF
+     - Overdiagnosis factor
+     - Increase in lung cancer incidence attributable to screening program
+   * - AST
+     - Average survival time
+     - 
+   * - LDCT
+     - Low-dose computed tomography
+     - Lung cancer screening
+   * - CXR
+     - Chest x-ray
+     - Lung cancer screening
+   * - ACMR
+     - All-cause mortality rate
+     - 
+   * - CSMR
+     - Cause-specific mortality rate
+     -
+   * - EMR
+     - Excess mortality rate
+     - 
+
 Disease Overview
 ----------------
 
@@ -183,7 +218,7 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c426 - prevalence_c426 * MST / AST - prevalence_c426 * ODF
+     - :math:`1 - prevalence_I - prevalence_\text{PC} - prevalence_C`
      - Note: this assumes no initial prevalence in R state
    * - S
      - birth prevalence
@@ -199,7 +234,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prevalence_c426 * MST / AST
+     - :math:`prevalence_C * MST / AST`
      - Note: assumes all cancers in prevalence_c426 are in clinical phase
    * - PC
      - birth prevalence
@@ -215,12 +250,12 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - prevalence_c426 * ODF
+     - :math:`prevalence_\text{c426} * ODF * MST / AST`
      - Note: this may be an underestimate of initial prevalence due to longer duration than clinical TBL cancer
    * - I
      - birth prevalence
      - 0
-     -
+     - 
    * - I
      - excess mortality rate
      - 0
@@ -231,7 +266,7 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - prevalence_c426
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * (1 - ODF) + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
      - 
    * - C
      - birth prevalence
@@ -239,7 +274,7 @@ State and Transition Data Tables
      - 
    * - C
      - excess mortality rate
-     - csmr_c426 / prevalence_c426
+     - :math:`csmr_\text{c426} / prevalence_C`
      - 
    * - C
      - disabilty weights
@@ -274,22 +309,22 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c426 / prevalence_S
-     - NOTE: Apply incidence_c426 rate from the age group equal to simulant's age plus MST 
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * (1 - ODF) + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S}`
+     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_i
      - S
      - I
-     - incidence_c_426 * ODF / prevalence_S
-     - NOTE: Apply incidence_c426 rate from the age group equal to simulant's age plus MST 
+     - :math:`incidence_\text{c426*} * ODF / prevalence_S`
+     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
      - C
-     - 1/MST per person-year
+     - 1/MST
      - See MST definition in table below
    * - r
      - C
      - R
-     - 0.1 per person-year for each sex and age group	
+     - 0.1
      - To be consistent with 10 year GBD assumption
 
 .. list-table:: Data Sources
@@ -325,13 +360,17 @@ State and Transition Data Tables
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
    * - AST
-     - 5 (95% CI: 4, 6); normal distribution of uncertainty at the draw level
+     - :math:`1/(csmr_\text{c426} / prevalence_C + ACMR - csmr_\text{c426})`
      - Average survival time; mean duration of time between detection and death
-     - See details below for sampling below. PLACEHOLDER VALUE
+     - ACMR: all cause-mortality rate for demographic group from GBD
    * - ODF
      - 0.35 (0.2, 0.5); normal distribution of uncertainty at the draw level
      - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
      - See details for sampling below. NOTE: placeholder value
+   * - :math:`screening_\text{baseline}`
+     - Defined in :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>`
+     - Baseline coverage of lung cancer screening by LDCT
+     - 
 
 .. todo::
 
@@ -404,43 +443,6 @@ Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time
 .. note::
 
   The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be sensitive to this parameter. Given that there is variation around this parameter, this is a value that we should reach consensus on with the client. 
-
-Average Survival Time
-^^^^^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-.. warning::
-
-  This is currently a stand-in value
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 5
-  q_975 = 6
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for MST, representing uncertainty in the parameter
-  odf_distribution = norm(mean, std)
-
-.. todo::
-
-  Update/confirm stand-in value
-
-**Research Background:**
-
-.. todo::
-
-  Detail research background
 
 Overdiagnosis Factor
 ^^^^^^^^^^^^^^^^^^^^^
@@ -519,7 +521,15 @@ Estimates of overdiagnosis factors in LDCT lung cancer screening programs have v
 Validation Criteria
 +++++++++++++++++++
 
-The incidence and prevalence of *clinical* TBL cancers in the general population should approximately validate to the GBD incidence and prevalence of TBL cancers. The mortality rates (CSMR and EMR) of TBL cancer should validate to those of GBD.
+The following should be true:
+
+  :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
+
+  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline}`
+
+    NOTE: The simulation will overestimate prevalence because there is no excess mortality in the indolent state
+
+  :math:`csmr_\text{c426} \approx csmr_C`
 
 References
 ----------
