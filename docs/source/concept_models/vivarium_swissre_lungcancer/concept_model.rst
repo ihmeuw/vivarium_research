@@ -77,9 +77,15 @@ There is a concensus that lung cancer screening programs do not significantly af
 
 [Li-et-al-2018]_ found that low insurance reimbursement rates negatively affected the diagnosis and treatment of non-small cell lung cancer in China.
 
-There have been several recent studies that have analyzed screening programs implemented in China with respect to screening compliance and performance, including [Qiao-et-al-2020]_ in Sichuan, [Wei-et-al-2020]_ in Gejiu and Yunnan, [Guo-et-al-2020]_ in Henan (article in Chinese), [Lin-et-al-2019]_ in Kunming, Yunnan (article in Chinese). 
+There have been several recent studies that have analyzed screening programs implemented in China with respect to screening compliance and performance, including [Qiao-et-al-2020]_ in Sichuan, [Wei-et-al-2020]_ in Gejiu and Yunnan, [Guo-et-al-2020]_ in Henan (article in Chinese), and [Lin-et-al-2019]_ in Kunming, Yunnan (article in Chinese). 
 
-LDCT screening program outcomes have been evaluated in several studies.
+Lung cancer screening coverage by LDCT for the eligible population has been low according to the available data [Jemal-and-Fedewa-2017]_, [Smith-et-al-2019]_ at 3.3% in 2010 and 3.9% in 2015 based on the National Health Interview Survey. Notably, [Blom-et-al-2019]_ conducted a modeling study that suggested "full-scale implementation" of the lung cancer screening guidelines in the United States would cause a major increase in surgical demand and that a "gradual buildup of adherence can spread this peak over time."
+
+  Note: the United States screening adherence data is relevant because it may be used as a proxy for Chinese adherence with a lag period.
+
+.. todo::
+
+  Include overview of LDCT screening trials conducted
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -253,6 +259,14 @@ The smoking risk exposure should also be used to determine the lung cancer scree
 8.0 References
 ++++++++++++++
 
+.. [Blom-et-al-2019]
+
+  Blom EF, Ten Haaf K, Arenberg DA, de Koning HJ. Treatment capacity required for full-scale implementation of lung cancer screening in the United States. Cancer. 2019 Jun 15;125(12):2039-2048. doi: 10.1002/cncr.32026. Epub 2019 Feb 27. PMID: 30811590; PMCID: PMC6541509. `Available here <https://pubmed.ncbi.nlm.nih.gov/30811590/>`_.
+
+.. [Jemal-and-Fedewa-2017]
+
+  Jemal A, Fedewa SA. Lung Cancer Screening With Low-Dose Computed Tomography in the United States-2010 to 2015. JAMA Oncol. 2017 Sep 1;3(9):1278-1281. doi: 10.1001/jamaoncol.2016.6416. PMID: 28152136; PMCID: PMC5824282. `Available here <https://pubmed.ncbi.nlm.nih.gov/28152136/>`_.
+
 .. [Li-et-al-2018]
 
   Li X, Zhou Q, Wang X, Su S, Zhang M, Jiang H, Wang J, Liu M. The effect of low insurance reimbursement on quality of care for non-small cell lung cancer in China: a comprehensive study covering diagnosis, treatment, and outcomes. BMC Cancer. 2018 Jun 25;18(1):683. doi: 10.1186/s12885-018-4608-y. PMID: 29940893; PMCID: PMC6019825. `Available here <https://pubmed.ncbi.nlm.nih.gov/29940893/>`_.
@@ -269,6 +283,10 @@ The smoking risk exposure should also be used to determine the lung cancer scree
 .. [Slatore-et-al-2014]
 
   Slatore CG, Baumann C, Pappas M, Humphrey LL. Smoking behaviors among patients receiving computed tomography for lung cancer screening. Systematic review in support of the U.S. preventive services task force. Ann Am Thorac Soc. 2014 May;11(4):619-27. doi: 10.1513/AnnalsATS.201312-460OC. PMID: 24701999. `Available here <https://pubmed.ncbi.nlm.nih.gov/24701999/>`_.
+
+.. [Smith-et-al-2019]
+
+  Smith RA, Andrews KS, Brooks D, Fedewa SA, Manassaram-Baptiste D, Saslow D, Wender RC. Cancer screening in the United States, 2019: A review of current American Cancer Society guidelines and current issues in cancer screening. CA Cancer J Clin. 2019 May;69(3):184-210. doi: 10.3322/caac.21557. Epub 2019 Mar 15. PMID: 30875085. `Available here <https://pubmed.ncbi.nlm.nih.gov/30875085/>`_.
 
 .. [Qian-et-al-2020]
 
