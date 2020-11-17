@@ -156,7 +156,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. Additionally, this cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer. Additionally, this cause model will allow for the differentiation of indolent lung cancers from other lung cancers. 
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. This cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer as well as allow for the differentiation of indolent lung cancers from other lung cancers. This cause model intends to use cancer forecast data from 2020-2040 in tandem with the :ref:`Lung cancer screening concept model <lung_cancer_cancer_concept_model>`. This cause model document should not be used in other concept models without careful review and appropriate edits.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -525,9 +525,9 @@ The following should be true:
 
   :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
 
-  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline}`
+  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
 
-    NOTE: The simulation will overestimate prevalence because there is no excess mortality in the indolent state
+    NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
 
   :math:`csmr_\text{c426} \approx csmr_C`
 
