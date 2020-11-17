@@ -531,6 +531,12 @@ The following should be true:
 
   :math:`csmr_\text{c426} \approx csmr_C`
 
+Some test simulations of this cause model that aim to verify the modelling strategy described here are available `here on the Vivarium Data Analysis Repository <https://github.com/ihmeuw/vivarium_data_analysis/pull/90>`_.
+
+.. todo::
+
+  Update this link to https://github.com/ihmeuw/vivarium_data_analysis/tree/master/pre_processing/lung_cancer_model once the PR is merged
+
 References
 ----------
 
