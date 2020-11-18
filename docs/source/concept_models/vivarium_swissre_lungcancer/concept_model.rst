@@ -97,10 +97,36 @@ The main outcome of this model is lung cancer *detections*, diagnosed either via
 3.0 Causal framework
 ++++++++++++++++++++
 
+.. image:: causal_framework_diagram
+
 .. _3.1:
 
 3.1 Causal variables
 --------------------
+
+Exposure/Intervention: Lung cancer screening coverage
+
+Primary outcome: Lung cancer detection
+
+Secondary outcomes: Lung cancer mortality, morbidity
+
+**Relationship between exposure and outcomes:**
+
+  - There is a *direct* path between lung cancer screening and lung cancer detection (early detection as well as probability of detecting indolent cancers). Notably, there is also a potential *indirect* path between lung cancer screening and lung cancer detection through the impact of lung cancer screening on future smoking behaviors (although there is little evidence on this association) and its causal impact on lung cancer, which is causally related to lung cancer detection; we are not considering this path in our model.
+
+  - There are *direct* paths between lung cancer screening and lung cancer mortality (early detection via screening has been shown to reduce mortality) and morbidity (both through increased recovery from lung cancer due to early detection AND through anxiety associated with false positive screening results and/or additional invasive procedures); however, we are NOT considering these associations in our model. The *indirect* path that exists between lung cancer screening and lung cancer detection exists for lung cancer mortality and morbidity as well.
+
+*Potential for confounding:*
+
+  There are two potential paths for confounding in the association bewteen lung cancer screening coverage and lung cancer detection as drawn in this diagram:
+
+    - Though smoking history and its effect on lung cancer
+
+    - Through smoking history and its effect on mortality due to causes other than lung cancer. For our purposes, we can think of death due to other causes as associated with lung cancer and lung cancer detection in that if a simulant is dead, they cannot develop or detect lung cancer. Therefore, since smoking status creates a differential risk of death due to other causes (and therefore the probability of the outcome) as well as affects the probability of the exposure, it presents an opportunity for confounding in this model.
+
+Additional considerations:
+
+  Age was not shown in this diagram because it is inherently controlled for by the age-specific estimates inherent to GBD. However, age affects screening eligibility and therefore there are still potential downstream impacts. Particularly, age affects the probability that lung cancer will be indolent. Therefore, age is a potential effect modifier in the relationship between lung cancer screening and lung cancer detection. 
  
 .. _4.0:
 
