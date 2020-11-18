@@ -521,9 +521,9 @@ development, the estimated duration in pre-clinical state is close to 10 years.
 
 :underline:`I. Disease model inputs`
 
- - prevalence: add updated data filepath here
- - Incidence: add updated data filepath here
- - remission: add updated data filepath here
+ - prevalence: /ihme/costeffectiveness/vivarium_csu_cancer/hpv_prevalence_dismod.csv
+ - Incidence: /ihme/costeffectiveness/vivarium_csu_cancer/hpv_incidence_dismod.csv
+ - remission: /ihme/costeffectiveness/vivarium_csu_cancer/hpv_clearance_dismod.csv
  - relative risk of HPV 16 and/or 18 causing CIN2+ (RR_hrHPV): use log-normal 
    distribution **exp(normal(mean=log(27.4), SD=0.17))**
 
@@ -626,15 +626,15 @@ relevant formulas
      - 
      - by client’s assumption
    * - Prevalence of HPV
-     - add file path
-     - Kang et al. 2014
+     - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_prevalence_dismod.csv
+     - Zhao et al. 2012
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific prevalence data
    * - Incidence of HPV
-     - add file path
-     - Kang et al. 2014
+     - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_incidence_dismod.csv
+     - 
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific incidence data
    * - remission of HPV
-     - add file path
+     - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_clearance_dismod.csv
      - kang et al. 2014
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific remission data
    * - Relative risk of HPV
