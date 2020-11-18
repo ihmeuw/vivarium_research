@@ -505,7 +505,7 @@ who get diagnosed from routine screening with a positive test result. (2)
 individuals who didn't go for routine screening but found symptoms then get 
 diagnosed. After we add symptomatic presentation module, we will see detected 
 cancer cases in cohorts not eligible for routine screening and a narrower 
-difference of detection rate between baseline and alternative scenario. we 
+difference of detection rate between baseline and alternative scenario. We 
 assume symptoms will not occur in pre-invasive cervical cancer state, the 
 transition rate (lambda) from pre-clinical screening detectable cancer (PC) 
 state to clinical invasive state (onset of symptoms) is equal to 1 divided by 
@@ -584,9 +584,14 @@ relevant formulas
      - Source
      - Note
    * - Duration from BCC to CC
-     - 14.5 years
+     - 14.5 years, use triangular distirbution: triangular(lower limit=5, 
+       mode=10, upper limit=15)
      - Chen et al. 2011
-     - Globally, the duration ranged from 5-15 years
+     - Globally, the duration ranged from 5-15 years (Moscicki et al. 2012)
+   * - Mean sojourn time
+     - 10 years
+     - 
+     - stand-in value, constrained to be smaller than 14.5 years
    * - Initial cervical cancer screening coverage
      - 25%
      - Wang et al. 2015
@@ -653,7 +658,7 @@ relevant formulas
      - Katki et al. 2013
      - stand-in value
    * - BCC treatment efficacy
-     - RR_tx = 0.03
+     - RR_tx = 0.03 for those diagnosed with CIN2+ and treated versus no treatment
      - Katki et al. 2013
      - stand-in value
 
