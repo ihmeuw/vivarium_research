@@ -150,7 +150,7 @@ Scale-up of stomach cancer screening coverage among insured population
 
 :underline:`Alternative scenario`
 
-30% of insured Chinese male/female initiated stomach cancer screening in 2020, stay 30% for one year then linearly project to 75% by 2030 and hold constant till 2040 for blended provinces, where:
+XX% of insured Chinese male/female initiated stomach cancer screening in 2020, stay XX% for one year then linearly project to XX% by 2030 and hold constant till 2040 for blended provinces, where:
 
   * same screening mechanisms as compared to baseline for different age groups and risk exposure level.
 
@@ -188,7 +188,7 @@ Scale-up of stomach cancer screening coverage among insured population
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
+*Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
 
 +--------------------------------------------------------------------------------------------------------+
