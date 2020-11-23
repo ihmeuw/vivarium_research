@@ -79,13 +79,19 @@ There is a concensus that lung cancer screening programs do not significantly af
 
 There have been several recent studies that have analyzed screening programs implemented in China with respect to screening compliance and performance, including [Qiao-et-al-2020]_ in Sichuan, [Wei-et-al-2020]_ in Gejiu and Yunnan, [Guo-et-al-2020]_ in Henan (article in Chinese), and [Lin-et-al-2019]_ in Kunming, Yunnan (article in Chinese). 
 
-Lung cancer screening coverage by LDCT for the eligible population has been low according to the available data [Jemal-and-Fedewa-2017]_, [Smith-et-al-2019]_ at 3.3% in 2010 and 3.9% in 2015 based on the National Health Interview Survey. Notably, [Blom-et-al-2019]_ conducted a modeling study that suggested "full-scale implementation" of the lung cancer screening guidelines in the United States would cause a major increase in surgical demand and that a "gradual buildup of adherence can spread this peak over time."
+Lung cancer screening coverage by LDCT for the eligible population in the United states has been low according to the available data [Jemal-and-Fedewa-2017]_, [Smith-et-al-2019]_ at 3.3% in 2010 and 3.9% in 2015 based on the National Health Interview Survey. Notably, [Blom-et-al-2019]_ conducted a modeling study that suggested "full-scale implementation" of the lung cancer screening guidelines in the United States would cause a major increase in surgical demand and that a "gradual buildup of adherence can spread this peak over time."
 
   Note: the United States screening adherence data is relevant because it may be used as a proxy for Chinese adherence with a lag period.
 
-.. todo::
+There are several randomized controlled trials on LDCT lung cancer screening programs that have been conducted and are briefly described below.
 
-  Include overview of LDCT screening trials conducted
+.. csv-table:: LDCT 
+  :file: rct_summary.csv
+  :header-rows: 1
+
+.. note::
+
+  The NLST trial had an active compartor arm (chest x-ray screening), and therefore should not be used as evidence for LDCT screening relative to no screening, but it is included here because it is an often cited study and the first to demonstrate a mortality reduction associated with LDCT screening programs.
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
