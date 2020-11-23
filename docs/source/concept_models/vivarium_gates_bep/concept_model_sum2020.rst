@@ -435,8 +435,84 @@ Method for how to calculate the shift in WLZ score from a risk ratio not shown
 
 Apply the following intervention shifts according to interventions recieved in each of the scenarios A-F 
 
-.. image:: intervention_shifts_fall.svg
+.. image:: intervention_shifts.svg
 
+.. important:: 
+  note-
+   
+   1) oMMN size has changed from feb_2020 model
+   2) there is now a current-evidence effect size for BEP
+   3) the baseline shifts in laz/wlz scores due to maternal BMI status can be kept in there if it is currently in there already, as it doesnt make any difference with or without it in scenarios A-E. The shifts in cgf z-scores due to maternal bmi only matters in scenarios F(i) and F(ii) which are hopes-n-dreams targeted scenarios. 
+
+Updates by scenario for summer_2020 model from feb_2020 model:
+
+1) Scenario A (some gets nothing, some gets basic)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results. 
+
+2) Scenario B (some gets nothing, some gets basic+)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size b
+
+3) Scenario C (some gets nothing, some gets basic++, use current-evidence for BEP | universal)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size d1 and d0 using value from current-evidence
+ * delete effect E_laz and E_wlz
+
+4) Scenario D (some gets nothing, some gets basic+, some gets basic++, use current-evidence for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size b
+ * update effect size d1 and d0 using value from current-evidence
+ * delete effect E_laz and E_wlz
+
+5) Scenario E (some gets nothing, some gets basic++, use hopes-n-dreams for BEP | universal)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+
+6) Scenario F(i) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * ensure effect size f is there.
+ * update effect size b
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+
+
+7) Scenario F(ii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * ensure effect size f is there.
+ * update effect size b
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+ * add correlation c
+
+8) Scenario F(iii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
+ * add LRI birth prevalence
+ * update LBWSG risk 
+ * update effect x (directly use shift in grams provided, random effects value)
+ * take out effect f
+ * update effect size b
+ * update effect size d1 and d0 to value from hopes-n-dreams
+ * add effect size E_laz and E_wlz
+ * add correlation c
 
 
 .. _5.4:
@@ -452,7 +528,7 @@ Apply the following intervention shifts according to interventions recieved in e
 
 :download:`output table shell<BEP_output_shell_metadata_24July2020.xlsx>`
 
-*added cgf z-score outputs by timepoint 29 days and 366 days
+
 
 .. _5.6:
 

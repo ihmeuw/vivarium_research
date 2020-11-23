@@ -500,10 +500,19 @@ Screening events for women aged 30-65 years
 
 :underline:`V. Symptomatic presentation`
 
-.. todo::
+In our model, cancer cases are detected through two pathways. (1) individuals 
+who get diagnosed from routine screening with a positive test result. (2) 
+individuals who didn't go for routine screening but found symptoms then get 
+diagnosed. After we add symptomatic presentation module, we will see detected 
+cancer cases in cohorts not eligible for routine screening and a narrower 
+difference of detection rate between baseline and alternative scenario. We 
+assume symptoms will not occur in pre-invasive cervical cancer state, the 
+transition rate (lambda) from pre-clinical screening detectable cancer (PC) 
+state to clinical invasive state (onset of symptoms) is equal to 1 divided by 
+average time spent in PC state (mean sojourn time). In cervical cancer 
+development, the estimated duration in pre-clinical state is close to 10 years.
 
- Find data to inform the probability of women with symptoms and get diagnosed 
- with invasive cervical cancer, but they didn't go for routine screening.
+.. image:: symptomatic_presentation.svg
 
 .. _5.3.3:
 
@@ -512,9 +521,9 @@ Screening events for women aged 30-65 years
 
 :underline:`I. Disease model inputs`
 
- - prevalence: add updated data filepath here
- - Incidence: add updated data filepath here
- - remission: add updated data filepath here
+ - prevalence: /ihme/costeffectiveness/vivarium_csu_cancer/hpv_prevalence_dismod.csv
+ - Incidence: /ihme/costeffectiveness/vivarium_csu_cancer/hpv_incidence_dismod.csv
+ - remission: /ihme/costeffectiveness/vivarium_csu_cancer/hpv_clearance_dismod.csv
  - relative risk of HPV 16 and/or 18 causing CIN2+ (RR_hrHPV): use log-normal 
    distribution **exp(normal(mean=log(27.4), SD=0.17))**
 
@@ -536,28 +545,31 @@ Vaccine coverage
    and alternative scenarios.
 
 Vaccine efficacy
- - Relative risk of getting HPV 16/18 infection for those vaccinated versus 
-   unvaccinated (RR_vaccine): use normal distribution **normal(mean=0.22, SD=0.04)**
+ - Zhu et al. reported a relative risk of getting HPV 16/18 infection for those 
+   unvaccinated versus vaccinated: use normal distribution 
+   **normal(mean=4.71, SD=0.94)**
+ - Lu et al. reported a relative risk of getting BCC without hrHPV infection for 
+   those unvaccinated versus vaccinated: use normal distribution 
+   **normal(mean=1.77, SD=0.26)**
 
 relevant formulas 
  (1) PAF = :math:`\frac{\text{prev_vaccine}\times(\text{RR_vaccine}-1)}{\text{prev_vaccine}\times(\text{RR_vaccine}-1)+1}`
- (2) :math:`\text{incidence_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_vaccine}`
+ (2) :math:`\text{incidence_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_vaccine_hrHPV}`
  (3) :math:`\text{incidence_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
-
-.. todo::
-
- add relative risk of developing BCC without HPV infection (BCC, S_hrHPV) for 
- those vaccinated versus unvaccinated
+ (4) :math:`\text{incidence_BCC_S_hrHPV_with_vaccine} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_vaccine_CIN2+}`
+ (5) :math:`\text{incidence_BCC_S_hrHPV_without_vaccine} =  \text{incidence_BCC}\times(1-PAF)`
 
 .. _5.3.4:
 
 5.3.4 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
-Treatment for benign cervical cancer
 
-.. todo::
+ - PAF = :math:`\frac{\text{prev_tx}\times(\text{RR_tx}-1)}{\text{prev_tx}\times(\text{RR_tx}-1)+1}`
+ - :math:`\text{incidence_ICC_with_tx} =  \text{incidence_ICC}\times(1-PAF)\times\text{RR_tx}`
+ - :math:`\text{incidence_ICC_without_tx} =  \text{incidence_ICC}\times(1-PAF)`
 
- add more details
+1. prev_tx = screening coverage * treatment coverage (80%, stand-in value)
+2. RR_tx = 1 - np.random.beta(3_273 - 105, 105) stand-in distribution
 
 .. _5.4:
 
@@ -572,9 +584,14 @@ Treatment for benign cervical cancer
      - Source
      - Note
    * - Duration from BCC to CC
-     - 14.5 years
+     - 14.5 years, use triangular distirbution: triangular(lower limit=5, 
+       mode=10, upper limit=15)
      - Chen et al. 2011
-     - Globally, the duration ranged from 5-15 years
+     - Globally, the duration ranged from 5-15 years (Moscicki et al. 2012)
+   * - Mean sojourn time
+     - 10 years
+     - 
+     - stand-in value, constrained to be smaller than 14.5 years
    * - Initial cervical cancer screening coverage
      - 25%
      - Wang et al. 2015
@@ -609,15 +626,15 @@ Treatment for benign cervical cancer
      - 
      - by client’s assumption
    * - Prevalence of HPV
-     - add file path
-     - Kang et al. 2014
+     - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_prevalence_dismod.csv
+     - Zhao et al. 2012
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific prevalence data
    * - Incidence of HPV
-     - add file path
-     - Kang et al. 2014
+     - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_incidence_dismod.csv
+     - 
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific incidence data
    * - remission of HPV
-     - add file path
+     - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_clearance_dismod.csv
      - kang et al. 2014
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific remission data
    * - Relative risk of HPV
@@ -627,18 +644,23 @@ Treatment for benign cervical cancer
      - 
    * - HPV vaccine according to protocol efficacy against incident HPV 16/18 
        infection
-     - use normal distribution **normal(mean=0.22, SD=0.04)**
+     - use normal distribution **normal(mean=4.71, SD=0.94)**
      - Zhu et al. 2019
      - We convert the efficacy to a relatiev risk of HPV 16/18 infection for 
-       those vaccinated versus unvaccinated
+       those unvaccinated versus vaccinated
+   * - HPV vaccine according to protocol efficacy against CIN2+
+     - use normal distribution **normal(mean=1.77, SD=0.26)**
+     - Lu et al. 2011
+     - In this study, CIN2+ was associated with non-16/18 HPV infection (other 
+       oncogenic types including 31/33/45/52/58)
    * - BCC treatment coverage
-     - 
-     - 
-     - 
+     - 80%
+     - Katki et al. 2013
+     - stand-in value
    * - BCC treatment efficacy
-     - 
-     - 
-     - 
+     - RR_tx = 0.03 for those diagnosed with CIN2+ and treated versus no treatment
+     - Katki et al. 2013
+     - stand-in value
 
 
 .. _5.5:
