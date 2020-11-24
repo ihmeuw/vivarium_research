@@ -1058,7 +1058,7 @@ Consider a simple unmatched case-control study in which we have a representative
 +-----------+---------+----------+----------+ 
 
  | OR = :math:`\frac{ad}{bc}` = θ (relative risk)
- | p(proportion exposed in the study population) = :math:`\frac{b}{n_0}`
+ | p(proportion exposed in the control population) = :math:`\frac{b}{n_0}`
  | p'(proportion exposed among cases) = :math:`\frac{a}{n_1}`
 
 Substituting the above into the PAF equation (2) *<---link this to the PAF page*
