@@ -473,7 +473,7 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
 .. todo::
 
-  Update/confirm stand-in value
+  Update/confirm stand-in value... possibly with age-specific values from [Criss-et-al-2018]_
 
 **Research Background:**
 
