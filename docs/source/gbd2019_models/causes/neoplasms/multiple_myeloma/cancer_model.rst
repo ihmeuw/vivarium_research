@@ -4,6 +4,10 @@
 Multiple Myeloma
 ================
 
+.. contents::
+   :local:
+   :depth: 1
+
 Disease Overview
 ----------------
 
@@ -32,36 +36,43 @@ GBD 2019 Modeling Strategy
 --------------------------
 
 Multiple myeloma in GBD 2019
-++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
 
 In GBD 2019, MM includes death and disability resulting from malignant neoplasms of plasma cells, including ICD-10 codes such as C90.0. The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]_. 
 
 There is nothing custom about how MM is modeled in GBD compared to the other cancer causes that go through our standard fatal and non-fatal modeling pipelines.
 
 .. list-table:: 
-   :widths: 20 25 30 30
+   :widths: 20 25 30 30 20
    :header-rows: 1
    
    * - sequelae
      - health states
      - health state lay descriptions
      - disability weights
+     - duration of four prevalence sequelae (in months)
    * - Diagnosis and primary therapy phase 
      - Cancer, diagnosis and primary therapy 
      - has pain, nausea, fatigue, weight loss and high anxiety
      - 0.288 (0.193-0.399)
+     - :math:`7^{12}`
    * - Controlled phase 
      - Generic uncomplicated disease: worry and daily medication
      - medication every day and causes some worry but minimal interference with daily activities
      - 0.049 (0.031-0.072)
+     - 
    * - Metastatic phase
      - Cancer, metastatic
      - has severe pain, extreme fatigue, weight loss and high anxiety
      - 0.451 (0.307-0.600)
+     - :math:`36.82^{10}`
    * - Terminal phase
      - Terminal phase, with medication
      - has lost a lot of weight and regularly uses strong medication to avoid constant pain.
      - 0.540 (0.377-0.687)
+     - 1
+
+Remission is calculated based on remainder of time after attributing other sequelae. Duration of these four sequelae remained the same as for GBD 2013, GBD 2015, GBD 2016, and GBD 2017. The sources used to determine their length are SEER Median age standardized survival all patients, all years.
 
 Cause Hierarchy
 ++++++++++++++++
