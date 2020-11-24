@@ -1,168 +1,233 @@
+.. role:: underline
+    :class: underline
+
+
+..
+  Section title decorators for this document:
+  ==============
+  Document Title
+  ==============
+  Section Level 1 (#.0)
+  +++++++++++++++++++++
+  
+  Section Level 2 (#.#)
+  ---------------------
+  Section Level 3 (#.#.#)
+  ~~~~~~~~~~~~~~~~~~~~~~~
+  Section Level 4
+  ^^^^^^^^^^^^^^^
+  Section Level 5
+  '''''''''''''''
+  The depth of each section level is determined by the order in which each
+  decorator is encountered below. If you need an even deeper section level, just
+  choose a new decorator symbol from the list here:
+  https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
+  And then add it to the list of decorators above.
+
 .. _2017_concept_model_vivarium_sanofi_multiple_myeloma:
 
 =======================================================
 Vivarium - CSU - Simulating Multiple Myeloma registries
 =======================================================
 
-Model Overview
---------------
+.. contents::
+  :local:
 
-Objective
-+++++++++
++------------------------------------+
+| List of abbreviations              |
++=======+============================+
+|       |                            |
++-------+----------------------------+
 
-.. todo::
+.. _1.0:
 
-  Describe objective of model concept.
-
-Intervention Definitions
-++++++++++++++++++++++++
-
-.. todo::
-  Describe intervention scenarios.
-  
-
-Questions of Interest
-+++++++++++++++++++++
-
-.. todo::
-
-   Update with research questions.
-
-Scope of Modeling
-+++++++++++++++++
+1.0 Background
+++++++++++++++
 
 
-Concept Model Diagram
+.. _1.1:
+
+1.1 Project overview
+--------------------
+
+
+
+.. _1.2:
+
+1.2 Literature review
 ---------------------
 
-.. todo::
 
-   Update with concept model diagram.
+.. _2.0:
 
-Model Components
+2.0 Modeling aims and objectives
+++++++++++++++++++++++++++++++++
+
+
+.. _3.0:
+
+3.0 Causal framework
+++++++++++++++++++++
+
+.. _3.1:
+
+3.1 Causal diagram
+------------------
+
+ .. note::
+    link to DAGs page
+    use round circles with DAGs
+
+**Outcome (O)**:
+
+
+
+**Most proximal determinant/exposure (E)**:
+
+
+
+**Confounders (C)**:
+
+
+
+**Effect modifiers**:
+
+
+**Mediators (M)**:
+
+
+.. _3.2:
+
+3.2 Effect sizes
 ----------------
 
-Time
-++++
 
-* Start and end date: TBD
-.. todo::
 
-   Decide if there will be any lead in time (where all the scenarios are the same) and scenarios start to change at specified date.
+4.0 Intervention
+++++++++++++++++
 
-* Simulation time step: TBD
 
-Demographics
-++++++++++++
 
-.. todo::
+.. _4.1:
 
-   Describe demographics of simulants.
+4.1 Simulation scenarios
+------------------------
 
-* Locations: TBD
-* Population: TBD
-* Size of largest starting population: TBD
-* Youngest start-age and oldest end-age: TBD
-* Exit age (at what age to stop tracking simulants): TBD
-* Fertility: TBD
 
-GBD Causes
-++++++++++
+.. _5.0:
 
-.. todo::
+5.0 Vivarium modelling components
++++++++++++++++++++++++++++++++++
 
-   Add reference link to GBD 2019 Multiple Myeloma cancer model.
+.. _5.1:
 
-GBD Risks
-+++++++++
+5.1 Vivarium concept model 
+--------------------------
 
-.. todo::
+.. note::
+  This is our standard vivarium concept model diagram we are used to seeing
 
-   Determine with research team if risk factor reference is necessary.
+.. _5.2:
 
-PAF-of-1 Cause/Risk Pairs
-+++++++++++++++++++++++++
+5.2 Demographics
+----------------
 
-.. todo::
+.. _5.2.1:
 
-   Determine with research team if risk factor PAF of 1 reference is necessary.
+5.2.1 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Risk-Outcome Relationships
-++++++++++++++++++++++++++
+  - cohort type
+  - cohort length
+  - age and sex structure
+  - time step
+  - fertility
+  - stratifications 
 
-Coverage Gap Framework
-++++++++++++++++++++++
 
-Eligible to Treatment Criteria
-++++++++++++++++++++++++++++++
+.. _5.2.2:
 
-.. todo::
+5.2.2 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-   Describe eligibility to treatment criteria.
 
-Initialization of patients into treatment for BAU
-+++++++++++++++++++++++++++++++++++++++++++++++++
 
-Initialization Strategy
-+++++++++++++++++++++++
+.. _5.3:
 
-.. todo::
+5.3 Models
+----------
 
-   Describe initialization strategy.
+.. note::
+  here we use the compartmental (SEIR) models with squares
 
-BAU parameter data tables
-+++++++++++++++++++++++++
+
+.. _5.3.1:
+
+5.3.1 Model 1
+~~~~~~~~~~~~~
 
 .. todo::
 
-   Insert BAU parameter data tables.
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
 
-Interventions
-+++++++++++++
+.. _5.3.2:
 
-.. todo::
-
-   Describe the intervention scenarios.
-
-Initialization of patients into treatment for intervention scenarios
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+5.3.2 Model 2
+~~~~~~~~~~~~~
 
 .. todo::
 
-   Describe the initialization to intervention scenarios.
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
 
+.. _5.3.3:
 
-Treatment Ramp
-++++++++++++++
-
-.. todo::
-
-   Insert treatment ramp and describe treatment ramp-up.
-
-Desired Model Outputs
----------------------
+5.3.3 Model 3
+~~~~~~~~~~~~~
 
 .. todo::
 
-   Insert table of desired model outputs, based on data output shell table (agreed upon with client).
-   
-Stratification
-++++++++++++++
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
+
+.. _5.3.4:
+
+5.3.4 Model 4
+~~~~~~~~~~~~~
 
 .. todo::
 
-   Describe the stratification of desired model outputs.
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
 
-Observers
-+++++++++
+
+.. _5.4:
+
+5.4 Desired outputs
+-------------------
+
+.. _5.5:
+
+5.5 Output meta-table shell
+---------------------------
 
 .. todo::
+  - add special stratifications if necessary
 
-   Confirm with RT/SE teams if these are the correct observers or if any observers should be removed/added. 
+.. _6.0:
 
-Verification and Validation Strategy
-------------------------------------
+6.0 Back of the envelope calculations
++++++++++++++++++++++++++++++++++++++
+
+
+.. _7.0:
+
+7.0 Limitations
++++++++++++++++
+
+8.0 References
++++++++++++++++
 
 .. todo::
-
-   Add assumptions from back-of-the-envelope calculations + preliminary data input validation.
+  - add references as needed
