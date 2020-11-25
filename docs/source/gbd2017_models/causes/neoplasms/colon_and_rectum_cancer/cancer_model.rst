@@ -4,56 +4,49 @@
 Colon and Rectum Cancer
 =======================
 
+.. contents::
+  :local:
+
 Disease Overview
-----------------
+++++++++++++++++
 
 .. todo::
 
-   Add definition of colon and rectum cancer. In particular, find data about global prevalence and disease fatal and non fatal description.
+ add CRC overview
+
+.. list-table:: Malignant neoplasm of colon and rectum cancer 
+   :widths: 10 10
+   :header-rows: 1
+
+   * - ICD 10
+     - ICD 9
+   * - C18-C19.0, C20, C21-C21.8, Z12.1-Z12.13 (Z*=screening)
+     - 153-154.9, V76.41, V76.5-V76.52 (V*=screening)
 
 
 GBD 2017 Modeling Strategy
---------------------------
-
-Colon and rectum cancer in GBD 2017
-+++++++++++++++++++++++++++++++++++
-
-The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Colon-and-rectum-Cancer]_.
-
-Incidence is estimated directly from mortality using mortality to incidence ratios (MIR).
-
-Because of long-term disability associated with stoma, prevalence for colon and rectum cancer is estimated beyond ten years. To estimate the disability, 
-total prevalence for colon and rectum cancer is split into
-
-#. Diagnosis and primary therapy
-#. Controlled phase
-
-   #. Controlled phase of colon and rectum cancer, with stoma
-   #. Controlled phase of colon and rectum cancer, without stoma
-#. Metastatic phase
-#. Terminal phase
-#. Stoma from colon and rectum cancer, beyond 10 years
-
+++++++++++++++++++++++++++
 
 .. todo::
 
-   Add more details about GBD modelling strategy of Colon and rectum cancer.
+ add GBD CRC modeling strategy
+
 
 Cause Hierarchy
-++++++++++++++++
-
-.. image:: colon_and_rectum_cancer_hierarchy.svg
+------------------------------------------
+       
+.. image:: colon_and_rectum_cancer_cause_hierarchy.svg
 
 
 Restrictions
-++++++++++++
+------------
 
-The following table describes any restrictions on the effects of this cause
-(such as being only fatal or only nonfatal), as well as restrictions on the age
-and sex of simulants to which different aspects of the cause model apply.
+The following table describes any restrictions on the effects of this cause 
+(such as being only fatal or only nonfatal), as well as restrictions on the 
+age and sex of simulants to which different aspects of the cause model applies.
 
 .. list-table:: Restrictions
-   :widths: 15 15 20
+   :widths: 10 10 10
    :header-rows: 1
 
    * - Restriction Type
@@ -86,58 +79,49 @@ and sex of simulants to which different aspects of the cause model apply.
 
 
 Vivarium Modeling Strategy
---------------------------
+++++++++++++++++++++++++++
 
-Scope
-+++++
+Things to consider: 
 
-.. todo::
-
-   Add scope.
-
-Model Assumptions and Limitations
-+++++++++++++++++++++++++++++++++
-
-1. Within GBD 2017, after diagnosis/ treatment if a patient survives more than 10 years, they are considered cured for calculating disability. 
-For simulation models, this means that if the simulation is run for more than 10 years, then excess mortality rate exists due to cancer after 
-10 years and the number of deaths increase. But as per GBD 2017, after 10 years, the patients do not have excess mortality rate. So, this model 
-might over estimate deaths in that scenario.
+1. Duration of remission from clinical CRC *over 10 years*, to be confirmed 
+   with GBD modeler.
 
 .. todo::
 
-   Add more assumptions and limitations.
+   Add assumptions and limitations.
 
 
-Cause Model Diagram
-+++++++++++++++++++
+Compartmental Diagram
++++++++++++++++++++++
 
-Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
- 
-Note: This simpliflication might over estimate the number of deaths. See Model Assumptions and Limitations section for more information.
-
-.. image:: cancer_cause_model.svg
+  .. image:: colon_and_rectum_cancer_cause_model_diagram.svg
 
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-.. list-table:: Definitions
-   :widths: 15 20 30
+.. list-table:: State Definitions
+   :widths: 5 10 20
    :header-rows: 1
-
+   
    * - State
-     - State Name
+     - State name
      - Definition
    * - S
-     - Susceptible
-     - Susceptible to colon and rectum cancer
-   * - I
-     - Infected
-     - Infected with colon and rectum cancer
+     - Susceptible 
+     - Healthy OR with asymptomatic condition, but not screen-detectable
+   * - PC
+     - Pre-clinical screen-detectable colon and rectum cancer
+     - with asymptomatic condition and screen-detectable
+   * - C
+     - Clinical colon and rectum cancer
+     - With symptomatic condition
+   * - R
+     - Recovered
+     - Recovered from clinical colon and rectum cancer, not susceptible
 
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
+.. list-table:: State Data
+   :widths: 5 5 20 20
    :header-rows: 1
    
    * - State
@@ -146,7 +130,7 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1-prevalence_c441
+     - (1 - prev_PC - prev_C)
      - 
    * - S
      - excess mortality rate
@@ -155,90 +139,136 @@ State and Transition Data Tables
    * - S
      - disabilty weights
      - 0
-     -
-   * - I
+     - 
+   * - PC
      - prevalence
-     - prevalence_c441
+     - prev_c441 * MST / AST
      - 
-   * - I
+   * - PC
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c441}}{\text{population} \times \text{prevalence_c441}}`
+     - 0
      - 
-   * - I
-     - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_c441}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - total disability weight over all sequelae with ids s_296, s_5519, s_5522, s_298, s_299, s_5525
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\text{deaths_c441}}{\text{population}}`
+   * - PC
+     - disabilty weights
+     - 0
      - 
-
+   * - C
+     - prevalence
+     - prev_c441
+     - 
+   * - C
+     - excess mortality rate
+     - :math:`\frac{\text{csmr_c441}}{\text{prev_c441}}`
+     - 
+   * - C
+     - disabilty weights
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c441}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c441}}}\scriptstyle{\text{prev}_s}}`
+     - weighted average of colon and rectum cancer disability weight over all sequelae including ids s_296, s_298, s_299, s_5519, s_5522, s_5525
+   * - R
+     - prevalence
+     - 0
+     - No initialization in R state
+   * - R
+     - excess mortality rate
+     - 0
+     - 
+   * - R
+     - disabilty weights
+     - 0
+     - 
 
 .. list-table:: Transition Data
-   :widths: 10 10 10 30 30
+   :widths: 5 5 5 20 20
    :header-rows: 1
-   
+
    * - Transition
-     - Source 
-     - Sink 
+     - Source state
+     - Sink state
      - Value
      - Notes
-   * - i
+   * - i_pc
      - S
-     - I
-     - :math:`\frac{\text{incidence_rate_c441}}{\text{1 - prevalence_c441}}`
-     - Incidence rate in total population is divided by 1-prevalence_c441 to get incidence rate among the susceptible population.
+     - PC
+     - incidence_c441(age + MST)
+     - 
+   * - i_c
+     - PC
+     - C
+     - 1 / MST
+     - 
+   * - r
+     - C
+     - R
+     - ? per person-year for all ages and sexes
+     - 
 
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
+.. list-table:: Data sources
+   :widths: 5 20 20
    :header-rows: 1
    
    * - Measure
      - Sources
-     - Description
      - Notes
-   * - prevalence_c441
-     - como
-     - Prevalence of cause colon and rectum cancer
+   * - prev_c441
+     - forecasted for future years 2020-2040
+     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+   * - incidence_c441
+     - forecasted for future years 2020-2040
+     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+   * - csmr_c441
+     - forecasted for future years 2020-2040
+     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+   * - remission_c441
+     - GBD 2017
+     - remission rate of cervical cancer = 1/? per person-years for all ages 
+     and sexes 
+   * - Disability weights for colon and rectum cancer
+     - GBD 2017 YLD appendix
+     - weighted average of colon and rectum cancer disability weight over all sequelae with ids s_296, s_298, s_299, s_5519, s_5522, s_5525
+   * - ACMR
+     - forecasted for future years 2020-2040 
+     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+   * - Population
+     - demography for 2017 
+     - mid-year population
+   * - MST
+     - 4.5-5.8 years (Brenner et al.)
      - 
-   * - deaths_c441
-     - codcorrect
-     - Deaths from colon and rectum cancer
+   * - AST
+     - ?
      - 
-   * - population
-     - demography
-     - Mid-year population for given country
-     - 
-   * - incidence_rate_c441
-     - como
-     - Incidence rate for colon and rectum cancer
-     - 
-   * - disability_weight_s{`sid`}
-     - YLD appendix
-     - Disability weights associated with each sequelae
-     - 
-   * - prevalence_s{`sid`}
-     - como
-     - Prevalence of each sequelae
-     - 
-
 
 Validation Criteria
 +++++++++++++++++++
 
+Fatal outcomes
+ - Deaths
+     - EMR_PC = 0
+     - ACMR = CSMR_c441 + CSMR_other
+ - YLLs
+     - YLLs_PC = 0
+     - YLLs_total = YLLs_c441 + YLLs_other
+
+Non-fatal outcomes
+ - YLDs
+     - YLDs_PC = YLDs_other = 0
+     - YLDs_total = YLDs_c441
+
 .. todo::
 
-   Describe tests for model validation.
+   1. Compare forecast data in 2020 against GBD 2019 results.
+   2. Compare prevalence, incidence, CSMR of colon and rectum cancer, and ACMR 
+      over year with GBD age-/sex- stratification that calculated from simulation baseline to forecast data.
+   3. Check outcomes such as YLDs and YLLs in 2020 yield from simulation baseline
+      against GBD 2019 all causes and colon and rectum cancer results.
 
 
 References
-----------
+++++++++++
 
-.. [GBD-2017-YLD-Capstone-Appendix-1-Colon-and-rectum-Cancer]
-   Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
+.. [GBD-2017-YLD-Capstone-Appendix-Cervical-Cancer]
+   Supplement to: GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
    and territories, 1990–2017: a systematic analysis for the Global Burden of
-   Disease Study 2017. Lancet 2018; 392: 1789–858`
-   (pp. 310-317)
+   Disease Study 2017. Lancet 2018; 392: 1789–858 (pp. 310-317)
