@@ -190,7 +190,7 @@ State and Transition Data Tables
      - No disability weights for susceptible state
    * - hrHPV-infected
      - prevalence
-     - add filepath
+     - /ihme/costeffectiveness/vivarium_csu_cancer
      - used only at initialization
    * - hrHPV-infected
      - excess mortality rate
@@ -251,6 +251,10 @@ State and Transition Data Tables
 
 S_ = susceptible; C_ = with condition
 
+.. todo::
+
+  link prevalence of BCC to prevalence of hrHPV
+
 .. list-table:: Transition Data
    :widths: 5 5 5 30 30
    :header-rows: 1
@@ -264,22 +268,32 @@ S_ = susceptible; C_ = with condition
      - Susceptible
      - hrHPV-infected
      - hrHPV incidence
-     - add filepath
+     - i_hrHPV is specified in `Data sources`.
    * - r_hrHPV
      - hrHPV-infected
      - Susceptible
      - hrHPV clearance/remission
-     - add filepath
-   * - i_BCC_HPV+
+     - r_hrHPV is specified in `Data sources`.
+   * - i_BCC_hrHPV+
      - hrHPV-infected
      - BCC, C_hrHPV
      - :math:`\text{incidence_BCC}\times(1-PAF)\times\text{RR_hrHPV}`
      - incidence_BCC, PAF, and RR_hrHPV are specified in `Data sources`.
-   * - i_BCC_HPV-
+   * - r_BCC_hrHPV+
+     - BCC, C_hrHPV
+     - Susceptible
+     - BCC_C_hrHPV regression rate
+     - r_BCC_hrHPV+ is specified in `Data sources`.
+   * - i_BCC_hrHPV-
      - Susceptible
      - BCC, S_hrHPV
      - :math:`\text{incidence_BCC}\times(1-PAF)`
      - incidence_BCC and PAF are specified in `Data sources`.
+   * - r_BCC_hrHPV-
+     - BCC, S_hrHPV
+     - Susceptible
+     - BCC_S_hrHPV regression rate
+     - r_BCC_hrHPV- is specified in `Data sources`.
    * - i_hrHPV
      - BCC, S_hrHPV
      - BCC, C_hrHPV
@@ -342,15 +356,21 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
    * - incidence_BCC
      - derived from prev_BCC and duration_BCC
      - incidence_BCC = :math:`\frac{\text{prev_BCC}}{\text{duration_BCC}}`
+   * - r_BCC_hrHPV+
+     - 
+     - add data filepath
+   * - r_BCC_hrHPV-
+     - 
+     - add data filepath
    * - prev_c432
      - forecasted for future years 2020-2040
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - csmr_c432
      - forecasted for future years 2020-2040
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - incidence_c432
      - forecasted for future years 2020-2040
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - remission_c432
      - GBD 2017
      - remission rate of cervical cancer = 1/10 per person-years for all ages 
@@ -359,19 +379,19 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - total breast cancer disability weight over all sequelae with ids s_282, s_283, s_284, s_285
    * - ACMR
      - forecasted for future years 2020-2040 
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - Population
      - demography for 2017 
      - mid-year population
    * - prev_hrHPV
      - derived from Abie's dismod
-     - add filepath
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - incidence_hrHPV
      - derived from Abie's dismod
-     - add filepath
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - remission_hrHPV
      - derived from Abie's dismod
-     - add filepath
+     - /ihme/costeffectiveness/vivarium_csu_cancer
    * - RR_hrHPV
      - extracted from Naucler et al.
      - relative risk of HPV 16/18 causing CIN2+ = 27.4 (95%CI 19.7 to 38.0)
@@ -381,7 +401,9 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
 
 .. todo::
 
-  Add methods to estimate prevalence, incidence, and remission of high risk HPV infection.
+  Describe dismod approach to estimate consistent rates for:
+   - prevalence, incidence, and remission of high risk HPV infection.
+   - prevalence, incidence, and regression of benign cervical cancer
 
 Prevalence ratio calculation:
 
