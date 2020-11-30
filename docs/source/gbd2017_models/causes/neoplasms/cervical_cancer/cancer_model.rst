@@ -164,6 +164,11 @@ Compartmental Diagram
 
   .. image:: cervical_cancer_cause_model_diagram.svg
 
+.. note::
+
+   For BCC caused by hrHPV infection, should we include CIN regression only or 
+   both CIN and HPV regression if we decided to add this parameter?
+
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -202,8 +207,8 @@ State and Transition Data Tables
      - 
    * - BCC, S_hrHPV
      - prevalence (prev_BCC_and_S_hrHPV)
-     - :math:`\frac{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}{\text{RR_hrHPV}+1}`
-     - used only at initialization
+     - :math:`\text{prev_BCC}\times(1-PAF\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1})`
+     - prev_BCC, PAF, and RR_hrHPV are specified in `Data sources`
    * - BCC, S_hrHPV
      - excess mortality rate
      - 0
@@ -214,8 +219,8 @@ State and Transition Data Tables
      - 
    * - BCC, C_hrHPV
      - prevalence (prev_BCC_and_C_hrHPV)
-     - :math:`\frac{\text{crude prevalence ratio of BCC}\times\text{prev_c432}\times\text{RR_hrHPV}}{\text{RR_hrHPV}+1}`
-     - used only at initialization
+     - :math:`\text{prev_BCC}\times\text{PAF}\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1}`
+     - prev_BCC, PAF, and RR_hrHPV are specified in `Data sources`
    * - BCC, C_hrHPV
      - excess mortality rate
      - 0
@@ -226,8 +231,8 @@ State and Transition Data Tables
      - 
    * - ICC, S_hrHPV
      - prevalence (prev_ICC_and_S_hrHPV)
-     - :math:`\frac{\text{prev_c432}}{\text{RR_hrHPV}+1}`
-     - used only at initialization
+     - :math:`\text{prev_c432}\times(1-PAF\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1})`
+     - prev_c432, PAF, and RR_hrHPV are specified in `Data sources`
    * - ICC, S_hrHPV
      - excess mortality rate
      - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}}`
@@ -238,8 +243,8 @@ State and Transition Data Tables
      - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
    * - ICC, C_hrHPV
      - prevalence (prev_ICC_and_C_hrHPV)
-     - :math:`\frac{\text{prev_c432}\times\text{RR_hrHPV}}{\text{RR_hrHPV}+1}`
-     - used only at initialization
+     - :math:`\text{prev_c432}\times\text{PAF}\times\frac{\text{RR_hrHPV}}{\text{RR_hrHPV}-1}`
+     - prev_c432, PAF, and RR_hrHPV are specified in `Data sources`
    * - ICC, C_hrHPV
      - excess mortality rate
      - :math:`\frac{\text{csmr_c432}}{\text{prev_c432}}`
@@ -250,10 +255,6 @@ State and Transition Data Tables
      - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
 
 S_ = susceptible; C_ = with condition
-
-.. todo::
-
-  link prevalence of BCC to prevalence of hrHPV
 
 .. list-table:: Transition Data
    :widths: 5 5 5 30 30
@@ -307,13 +308,13 @@ S_ = susceptible; C_ = with condition
    * - i_ICC
      - BCC, S_hrHPV
      - ICC, S_hrHPV
-     - :math:`\frac{\text{incidence_c432}}{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}`
-     - incidence_c432 and prev_c432 are specified in `Data sources`.
+     - 1 / duration_BCC
+     - duration_BCC is specified in `Data sources`.
    * - i_ICC
      - BCC, C_hrHPV
      - ICC, C_hrHPV
-     - :math:`\frac{\text{incidence_c432}}{\text{crude prevalence ratio of BCC}\times\text{prev_c432}}`
-     - incidence_c432 and prev_c432 are specified in `Data sources`.
+     - 1 / duration_BCC
+     - duration_BCC is specified in `Data sources`.
    * - i_hrHPV
      - ICC, S_hrHPV
      - ICC, C_hrHPV
@@ -348,14 +349,14 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - derived from marketscan data
      - see below for prevalence ratio calculation
    * - prev_BCC 
-     - derived from crude prevalence ratio of BCC and prev_c432
-     - prev_BCC = crude prevalence ratio of BCC * prev_c432
+     - derived from incidence_c432 and duration of BCC
+     - prev_BCC(age) = incidence_c432(age) * duration_BCC
    * - duration_BCC
-     - extracted from Chen et al.
-     - temporarily use 14.5 years
+     - extracted from [Burger-et-al-2020]_
+     - 10 years
    * - incidence_BCC
-     - derived from prev_BCC and duration_BCC
-     - incidence_BCC = :math:`\frac{\text{prev_BCC}}{\text{duration_BCC}}`
+     - derived from incidence_c432
+     - incidence_BCC(age) = incidence_c432(age + duration_BCC)
    * - r_BCC_hrHPV+
      - 
      - add data filepath
@@ -375,7 +376,7 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - GBD 2017
      - remission rate of cervical cancer = 1/10 per person-years for all ages 
    * - Disability weights for cervical cancer sequelae
-     - GBD 2017 YLD appendix
+     - [GBD-2017-YLD-Appendix-Cervical-Cancer]_
      - total breast cancer disability weight over all sequelae with ids s_282, s_283, s_284, s_285
    * - ACMR
      - forecasted for future years 2020-2040 
@@ -393,7 +394,7 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - derived from Abie's dismod
      - /ihme/costeffectiveness/vivarium_csu_cancer
    * - RR_hrHPV
-     - extracted from Naucler et al.
+     - extracted from [Naucler-et-al-2007]_
      - relative risk of HPV 16/18 causing CIN2+ = 27.4 (95%CI 19.7 to 38.0)
    * - PAF
      - derived from prev_hrHPV and RR_hrHPV
@@ -489,7 +490,7 @@ Non-fatal outcomes
 References
 ++++++++++
 
-.. [GBD-2017-YLD-Capstone-Appendix-Cervical-Cancer]
+.. [GBD-2017-YLD-Appendix-Cervical-Cancer]
    Supplement to: GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
@@ -504,5 +505,13 @@ References
    International Agency for Research on Cancer.
 .. [Sun-et-al-2010]
    Sun Z-R, Ji Y-H, Zhou W-Q, Zhang S-L, Jiang W-G, Ruan Q. Characteristics of HPV 
-   prevalence among women in Liaoning province, China. International Journal of Gynecology & Obstetrics 2010; 109: 105–9.
-
+   prevalence among women in Liaoning province, China. International Journal of 
+   Gynecology & Obstetrics 2010; 109: 105–9.
+.. [Burger-et-al-2020]
+   Burger EA, de Kok IMCM, Groene E, et al. Estimating the Natural History of 
+   Cervical Carcinogenesis Using Simulation Models: A CISNET Comparative Analysis. 
+   J Natl Cancer Inst 2020; 112: 955–63.
+.. [Naucler-et-al-2007]
+   Naucler P, Ryd W, Törnberg S, et al. HPV type-specific risks of high-grade CIN 
+   during 4 years of follow-up: a population-based prospective study. Br J Cancer 
+   2007; 97: 129–32.
