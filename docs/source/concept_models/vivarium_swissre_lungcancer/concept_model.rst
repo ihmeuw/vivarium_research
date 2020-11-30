@@ -73,19 +73,66 @@ This project intends to model the impact of increased lung cancer screening cove
 
 .. _2.0:
 
+There is a concensus that lung cancer screening programs do not significantly affect smoking behaviors among the screened population, as supported by a systemtatic review [Slatore-et-al-2014]_. However, this conclusion is limited in that it included studies from Europe and the United States only. It is therefore possible that lung cancer screening programs could either *increase* smoking behaviors by providing a sense of safety or *decrease* smoking behaviors by drawing attention to the risks of smoking in our population of interest that was not studied by the systematic review. 
+
+[Li-et-al-2018]_ found that low insurance reimbursement rates negatively affected the diagnosis and treatment of non-small cell lung cancer in China.
+
+There have been several recent studies that have analyzed screening programs implemented in China with respect to screening compliance and performance, including [Qiao-et-al-2020]_ in Sichuan, [Wei-et-al-2020]_ in Gejiu and Yunnan, [Guo-et-al-2020]_ in Henan (article in Chinese), and [Lin-et-al-2019]_ in Kunming, Yunnan (article in Chinese). 
+
+Lung cancer screening coverage by LDCT for the eligible population in the United states has been low according to the available data [Jemal-and-Fedewa-2017]_, [Smith-et-al-2019]_ at 3.3% in 2010 and 3.9% in 2015 based on the National Health Interview Survey. Notably, [Blom-et-al-2019]_ conducted a modeling study that suggested "full-scale implementation" of the lung cancer screening guidelines in the United States would cause a major increase in surgical demand and that a "gradual buildup of adherence can spread this peak over time."
+
+  Note: the United States screening adherence data is relevant because it may be used as a proxy for Chinese adherence with a lag period.
+
+There are several randomized controlled trials on LDCT lung cancer screening programs that have been conducted and are briefly described below.
+
+.. csv-table:: LDCT 
+  :file: rct_summary.csv
+  :header-rows: 1
+
+.. note::
+
+  The NLST trial had an active compartor arm (chest x-ray screening), and therefore should not be used as evidence for LDCT screening relative to no screening, but it is included here because it is an often cited study and the first to demonstrate a mortality reduction associated with LDCT screening programs.
+
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
 The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. 
+
 .. _3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
+.. image:: causal_framework_diagram
+
 .. _3.1:
 
 3.1 Causal variables
 --------------------
+
+Exposure/Intervention: Lung cancer screening coverage
+
+Primary outcome: Lung cancer detection
+
+Secondary outcomes: Lung cancer mortality, morbidity
+
+**Relationship between exposure and outcomes:**
+
+  - There is a *direct* path between lung cancer screening and lung cancer detection (early detection as well as probability of detecting indolent cancers). Notably, there is also a potential *indirect* path between lung cancer screening and lung cancer detection through the impact of lung cancer screening on future smoking behaviors (although there is little evidence on this association) and its causal impact on lung cancer, which is causally related to lung cancer detection; we are not considering this path in our model.
+
+  - There are *direct* paths between lung cancer screening and lung cancer mortality (early detection via screening has been shown to reduce mortality) and morbidity (both through increased recovery from lung cancer due to early detection AND through anxiety associated with false positive screening results and/or additional invasive procedures); however, we are NOT considering these associations in our model. The *indirect* path that exists between lung cancer screening and lung cancer detection exists for lung cancer mortality and morbidity as well.
+
+*Potential for confounding:*
+
+  There are two potential paths for confounding in the association bewteen lung cancer screening coverage and lung cancer detection as drawn in this diagram:
+
+    - Though smoking history and its effect on lung cancer
+
+    - Through smoking history and its effect on mortality due to causes other than lung cancer. For our purposes, we can think of death due to other causes as associated with lung cancer and lung cancer detection in that if a simulant is dead, they cannot develop or detect lung cancer. Therefore, since smoking status creates a differential risk of death due to other causes (and therefore the probability of the outcome) as well as affects the probability of the exposure, it presents an opportunity for confounding in this model.
+
+Additional considerations:
+
+  Age was not shown in this diagram because it is inherently controlled for by the age-specific estimates inherent to GBD. However, age affects screening eligibility and therefore there are still potential downstream impacts. Particularly, age affects the probability that lung cancer will be indolent. Therefore, age is a potential effect modifier in the relationship between lung cancer screening and lung cancer detection. 
  
 .. _4.0:
 
@@ -237,11 +284,46 @@ The smoking risk exposure should also be used to determine the lung cancer scree
 7.0 Limitations
 +++++++++++++++
 
+- Assumes that lung cancer screening programs have no effect on smoking behaviors. This assumption is somewhat supported by [Slatore-et-al-2014]_, although there is no evidence that this conclusion is generalizable to the Chinese population.
+
 .. _8.0:
 
 8.0 References
 ++++++++++++++
 
-.. todo::
+.. [Blom-et-al-2019]
 
- add cited works
+  Blom EF, Ten Haaf K, Arenberg DA, de Koning HJ. Treatment capacity required for full-scale implementation of lung cancer screening in the United States. Cancer. 2019 Jun 15;125(12):2039-2048. doi: 10.1002/cncr.32026. Epub 2019 Feb 27. PMID: 30811590; PMCID: PMC6541509. `Available here <https://pubmed.ncbi.nlm.nih.gov/30811590/>`_.
+
+.. [Jemal-and-Fedewa-2017]
+
+  Jemal A, Fedewa SA. Lung Cancer Screening With Low-Dose Computed Tomography in the United States-2010 to 2015. JAMA Oncol. 2017 Sep 1;3(9):1278-1281. doi: 10.1001/jamaoncol.2016.6416. PMID: 28152136; PMCID: PMC5824282. `Available here <https://pubmed.ncbi.nlm.nih.gov/28152136/>`_.
+
+.. [Li-et-al-2018]
+
+  Li X, Zhou Q, Wang X, Su S, Zhang M, Jiang H, Wang J, Liu M. The effect of low insurance reimbursement on quality of care for non-small cell lung cancer in China: a comprehensive study covering diagnosis, treatment, and outcomes. BMC Cancer. 2018 Jun 25;18(1):683. doi: 10.1186/s12885-018-4608-y. PMID: 29940893; PMCID: PMC6019825. `Available here <https://pubmed.ncbi.nlm.nih.gov/29940893/>`_.
+
+.. [Lin-et-al-2019]
+
+  Lin Y, Ma J, Feng J, Zhang Q, Huang Y. [Results of Lung Cancer Screening among Urban Residents in Kunming]. Zhongguo Fei Ai Za Zhi. 2019 Jul 20;22(7):413-418. Chinese. doi: 10.3779/j.issn.1009-3419.2019.07.02. PMID: 31315779; PMCID: PMC6712263. `Available here <https://pubmed.ncbi.nlm.nih.gov/31315779/>`_.
+
+
+.. [Guo-et-al-2020]
+
+  Guo LW, Zhang SK, Liu SZ, Yang FN, Wu Y, Zheng LY, Chen Q, Cao XQ, Sun XB, Zhang JG. [Compliance of lung cancer screening with low-dose computed tomography and influencing factors in urban area of Henan province]. Zhonghua Liu Xing Bing Xue Za Zhi. 2020 Jul 10;41(7):1076-1080. Chinese. doi: 10.3760/cma.j.cn112338-20190730-00564. PMID: 32741174. `Available here <https://pubmed.ncbi.nlm.nih.gov/32741174/>`_.
+
+.. [Slatore-et-al-2014]
+
+  Slatore CG, Baumann C, Pappas M, Humphrey LL. Smoking behaviors among patients receiving computed tomography for lung cancer screening. Systematic review in support of the U.S. preventive services task force. Ann Am Thorac Soc. 2014 May;11(4):619-27. doi: 10.1513/AnnalsATS.201312-460OC. PMID: 24701999. `Available here <https://pubmed.ncbi.nlm.nih.gov/24701999/>`_.
+
+.. [Smith-et-al-2019]
+
+  Smith RA, Andrews KS, Brooks D, Fedewa SA, Manassaram-Baptiste D, Saslow D, Wender RC. Cancer screening in the United States, 2019: A review of current American Cancer Society guidelines and current issues in cancer screening. CA Cancer J Clin. 2019 May;69(3):184-210. doi: 10.3322/caac.21557. Epub 2019 Mar 15. PMID: 30875085. `Available here <https://pubmed.ncbi.nlm.nih.gov/30875085/>`_.
+
+.. [Qian-et-al-2020]
+
+  Qiao L, Zhou P, Li B, Liu XX, Li LN, Chen YY, Ma J, Zhao YQ, Li TY, Li Q. Performance of low-dose computed tomography on lung cancer screening in high-risk populations: The experience over five screening rounds in Sichuan, China. Cancer Epidemiol. 2020 Oct 2;69:101801. doi: 10.1016/j.canep.2020.101801. Epub ahead of print. PMID: 33017728. `Available here <https://pubmed.ncbi.nlm.nih.gov/33017728/>`_.
+
+.. [Wei-et-al-2020]
+
+  Wei MN, Su Z, Wang JN, Gonzalez Mendez MJ, Yu XY, Liang H, Zhou QH, Fan YG, Qiao YL. Performance of lung cancer screening with low-dose CT in Gejiu, Yunnan: A population-based, screening cohort study. Thorac Cancer. 2020 May;11(5):1224-1232. doi: 10.1111/1759-7714.13379. Epub 2020 Mar 20. PMID: 32196998; PMCID: PMC7180575. `Available here <https://pubmed.ncbi.nlm.nih.gov/32196998/>`_.
