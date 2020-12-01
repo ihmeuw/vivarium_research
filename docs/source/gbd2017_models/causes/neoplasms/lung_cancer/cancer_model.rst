@@ -511,6 +511,12 @@ Given that these modeling studies were fit to data from the US, it is challengin
 
 Additionally, the [Han-et-al-2017]_ study provides estimates of overdiagnosis by several stratifying variables that can aid in the consideration of additional detail.
 
+In addition to the modeling studies discussed, cohort studies with long term follow-up may also provide information on overdiagnosis in CT lung cancer screening programs, as discussed by [Carter-et-al-2015]_.
+
+A retrospective cohort study of patients aged 50-74 screened by LDCT relative to CXR in Japan found that lung cancer incidence among those screened via LDCT was 1.23 times that of those screened via CXR, which the authors noted was a maximum estimate [Nawa-et-al-2019]_. Notably, the CT group had a mean follow-up period of 9.85 years (+/- 2.71) and the CXR group had a mean follow-up period of 8.65 (+/- 2.09). Additionally, there were no smoking eligibility requirements in this study population and the authors noted that considerably more cancers with long doubling-times would be detected in individuals with no or low smoking histories.
+
+[Sone-et-al-2007]_ conducted a long-term follow-up study of a population-based mass CT screening program among those aged 40-74 in Japan and estimated that 13.3% of cases might be overdiagnosed. Postoperative follow-up of the 50 survived patients ranged from 70 to 117 (median, 101) months. Notably, this study relied on the assumption of constant tumor volume doubling time and noted that if this assumption does not hold that the number of over-diagnosed cases would be smaller. Additionally, the study population included never and light smokers, which they noted had tumors with slower volume doubling times and therefore were more likely to be overdiagnosed than smokers. 
+
 .. note::
 
   The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be highly sensitive to this parameter. Given that there is so much variation and contraversy around the degree of overdiagnosis in LDCT screening programs, this is a value that we should reach consensus on with the client. 
@@ -544,6 +550,10 @@ References
 .. [Broderson-et-al-2020]
 
   Brodersen J, Voss T, Martiny F, et al. Overdiagnosis of lung cancer with low-dose computed tomography screening: meta-analysis of the randomised clinical trials. Breathe 2020; 16: 200013
+
+.. [Carter-et-al-2015]
+
+  Carter, J. L., Coletti, R. J., & Harris, R. P. (2015). Quantifying and monitoring overdiagnosis in cancer screening: A systematic review of methods. BMJ (Clinical Research Ed.), 350, g7773. `Available here <https://doi.org/10.1136/bmj.g7773>`_.
 
 .. [Chien-and-Chen-2008]
 
@@ -581,6 +591,10 @@ References
 
   McMahon PM, Meza R, Plevritis SK, Black WC, Tammemagi CM, Erdogan A, ten Haaf K, Hazelton W, Holford TR, Jeon J, Clarke L, Kong CY, Choi SE, Munshi VN, Han SS, van Rosmalen J, Pinsky PF, Moolgavkar S, de Koning HJ, Feuer EJ. Comparing benefits from many possible computed tomography lung cancer screening programs: extrapolating from the National Lung Screening Trial using comparative modeling. PLoS One. 2014 Jun 30;9(6):e99978. doi: 10.1371/journal.pone.0099978. PMID: 24979231; PMCID: PMC4076275. `Available here <https://pubmed.ncbi.nlm.nih.gov/24979231/>`_.
 
+.. [Nawa-et-al-2019]
+
+  Nawa, T., Fukui, K., Nakayama, T., Sagawa, M., Nakagawa, T., Ichimura, H., & Mizoue, T. (2019). A population-based cohort study to evaluate the effectiveness of lung cancer screening using low-dose CT in Hitachi city, Japan. Japanese Journal of Clinical Oncology, 49(2), 130–136. `Available here <https://doi.org/10.1093/jjco/hyy185>`_.
+
 .. [Patz-et-al-2014]
 
   Patz, Edward F., et al. "Overdiagnosis in low-dose computed tomography screening for lung cancer." JAMA internal medicine 174.2 (2014): 269-274. `Available here <https://pubmed.ncbi.nlm.nih.gov/24322569/>`_
@@ -588,6 +602,10 @@ References
 .. [Sherani-et-al-2015]
 
   Sherani, Khalid, et al. "Malignant tracheal tumors: a review of current diagnostic and management strategies." Current Opinion in Pulmonary Medicine 21.4 (2015): 322-326. `Available here <https://journals.lww.com/co-pulmonarymedicine/Abstract/2015/07000/Malignant_tracheal_tumors__a_review_of_current.4.aspx>`_
+
+.. [Sone-et-al-2007]
+
+  Sone, S., Nakayama, T., Honda, T., Tsushima, K., Li, F., Haniuda, M., Takahashi, Y., Suzuki, T., Yamanda, T., Kondo, R., Hanaoka, T., Takayama, F., Kubo, K., & Fushimi, H. (2007). Long-term follow-up study of a population-based 1996–1998 mass screening programme for lung cancer using mobile low-dose spiral computed tomography. Lung Cancer, 58(3), 329–341. `Available here <https://doi.org/10.1016/j.lungcan.2007.06.022>`_.
 
 .. [ten-Haaf-et-al-2015a]
 
