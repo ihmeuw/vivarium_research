@@ -79,7 +79,7 @@ Total yearly prevalence of stomach cancer is split into four sequelae (see page 
   - assumed 5.2 month duration for stomach cancer 
   - Disability weight of 0.288 (0.193, 0.399)
 #. :underline:`Controlled phase`: 
-  - time between end of primary treatment and earlist of either:  cure (defined as recurrence- and progression-free survival after ten years), death from another cause, or progression to the metastatic phase
+ - time between end of primary treatment and earlist of either:  cure (defined as recurrence- and progression-free survival after ten years), death from another cause, or progression to the metastatic phase
  - duration calculated based on remainder of time after attributing other sequelae. 
  - Disability weight of 0.049 (0.031, 0.072)
 #. :underline:`Metastatic phase`: 
@@ -419,6 +419,10 @@ Validation Criteria
 +++++++++++++++++++
 
 The incidence and prevalence of *clinical* stomach cancers in the general population should approximately validate to the GBD incidence and prevalence of stomach cancers. The mortality rates (CSMR and EMR) of stomach cancer should validate to those of GBD.
+
+
+References
+++++++++++
 
 
 .. [GBD-2017-YLD-Appendix]
