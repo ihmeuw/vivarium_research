@@ -85,10 +85,6 @@ Lung cancer screening coverage by LDCT for the eligible population in the United
 
 There are several randomized controlled trials on LDCT lung cancer screening programs that have been conducted and are briefly described below.
 
-.. csv-table:: LDCT 
-  :file: rct_summary.csv
-  :header-rows: 1
-
 .. note::
 
   The NLST trial had an active compartor arm (chest x-ray screening), and therefore should not be used as evidence for LDCT screening relative to no screening, but it is included here because it is an often cited study and the first to demonstrate a mortality reduction associated with LDCT screening programs.
@@ -269,10 +265,6 @@ The smoking risk exposure should also be used to determine the lung cancer scree
 
 5.5 Output meta-table shell
 ---------------------------
-
-.. csv-table:: Output table shell metadata
-  :file: output_table_shell.csv
-  :header-rows: 1
 
 .. _6.0:
 
