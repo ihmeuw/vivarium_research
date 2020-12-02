@@ -59,6 +59,10 @@ Vivarium CSU Stomach Cancer Screening
 | HGIN  | high-grade intra-epithelial|
 |       | neoplasm/dysplasia         |
 +-------+----------------------------+
+| PC    | pre-clinical cancer        |
++-------+----------------------------+
+|pre-can| pre-cancerous states       |
++-------+----------------------------+
 
 
 .. _1.0:
@@ -148,6 +152,9 @@ Scale-up of stomach cancer screening coverage among insured population
 
   * no screening coverage
 
+.. note::
+  unless we want to bake a coverage into the baseline as well because insured pop might be screened more? Then we might want to also adjust cancer incidence among insured population (lower than general) because screening would protect againt stomach cancer incidence. 
+
 :underline:`Alternative scenario`
 
 XX% of insured Chinese male/female initiated stomach cancer screening in 2020, stay XX% for one year then linearly project to XX% by 2030 and hold constant till 2040 for blended provinces, where:
@@ -222,9 +229,9 @@ Click here to download notebook exploring the forecasted acmr data .nc files: :d
 5.3.1 Core stomach cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: S_to_GC_to_R.svg
+.. image:: state_diagram.svg
 
-see :ref:`stomach cancer model <2017_cancer_model_stomach_cancer>`
+see :ref:`stomach cancer model <2017_stomach_cancer>`
 
 
 .. _5.3.1.1:
