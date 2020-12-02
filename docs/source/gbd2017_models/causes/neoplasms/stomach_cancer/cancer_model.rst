@@ -55,6 +55,7 @@ Stomach Cancer
 +-------+----------------------------+
 
 
+
 Disease Overview
 ----------------
 
@@ -301,7 +302,7 @@ State and Transition Data Tables
      - S
      - PC
      - incidence_c414 / prevalence_S
-     -    
+     - may need to add MST*   
    * - i_c
      - PC
      - C
@@ -312,6 +313,11 @@ State and Transition Data Tables
      - R
      - 0.1 per person-year for each sex and age group	
      - To be consistent with 10 year GBD assumption
+
+
+.. note::
+
+  * we may need to draw from i_c414/prev_S + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
