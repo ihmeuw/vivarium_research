@@ -266,6 +266,10 @@ The smoking risk exposure should also be used to determine the lung cancer scree
 5.5 Output meta-table shell
 ---------------------------
 
+.. csv-table:: Output table shell metadata
+  :file: output_table_shell.csv
+  :header-rows: 1
+
 .. _6.0:
 
 6.0 Validation and verification
