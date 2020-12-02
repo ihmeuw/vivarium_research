@@ -468,7 +468,7 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
   std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
 
-  # Frozen normal distribution for MST, representing uncertainty in the parameter
+  # Frozen normal distribution for ODF, representing uncertainty in the parameter
   odf_distribution = norm(mean, std)
 
 .. todo::
@@ -524,6 +524,8 @@ Validation Criteria
 The following should be true:
 
   :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
+
+    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST
 
   :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
 
