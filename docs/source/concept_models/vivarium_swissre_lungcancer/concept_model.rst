@@ -85,9 +85,65 @@ Lung cancer screening coverage by LDCT for the eligible population in the United
 
 There are several randomized controlled trials on LDCT lung cancer screening programs that have been conducted and are briefly described below.
 
-.. csv-table:: LDCT 
-  :file: rct_summary.csv
-  :header-rows: 1
+.. list-table:: RCT Summaries
+   :header-rows: 1
+
+   * - Study Name
+     - Recent Publication(s)
+     - Location
+     - Intervention arm
+     - Control arm
+     - Eligible population
+     - Length of follow-up
+   * - Chinese Yang Trial
+     - Yang et al. 2018
+     - China
+     - LDCT screening every two years for three rounds
+     - No screening
+     - Asymptomatic residents 45–70 years of age showing at least one high-risk factor, including smoking, persoal/family cancer history, occupational exposure, secondhand smoke exposure, cooking oil fumes (see paper for specific exposure definitions)
+     - 6 years postrandomization, 0 years after last screening
+   * - Danish Lung Cancer Screening Trial (DLCST)
+     - Heleno et al. 2018
+     - Denmark
+     - LDCT screening annually for five years
+     - No screening
+     - 50-70 year old current or former smokers with at least 20 pack-years of smoking history. Former smokers should have quit after the age of 50 and within the past 10 years. Healthy (see paper for specific definition)
+     - 10 years postrandomization, 5 years after last screening
+   * - German lung cancer screening intervention study (LUSI)
+     - Gonzalez Maldonado et al. 2020
+     - Germany
+     - LDCT screening annually for five years
+     - No screening
+     - 50 to 69 year old men and women with at least 25 years of smoking history of 15 cigarettes per day or 30 years of smoking 10 cigarettes per day and less than 10 years since smoking cessation
+     - 9.77 years postrandomization  5.73 years post last screening
+   * - Detection and Screening of Early Lung Cancer by Novel Imaging Technology and Molecular Assays (DANTE)
+     - Infante et al. 2020
+     - Italy
+     - LDCT screening annually for four years following CXR baseline screening
+     - No screening following baseline CXR
+     - Male smokers of 20+ pack-years aged 60 to 74 years
+     - 4 years postrandomization  0 years after last screening
+   * - Italian Lung Cancer Computed Tomography Screening Trial (ITALUNG)
+     - Paci et al. 2020
+     - Italy
+     - LDCT screening annually for four years following CXR baseline screening
+     - No screening following CXR baseline screening
+     - Eligible subjects aged 55-69 years, smokers or ex-smokers (at least 20 pack-years in the last 10 years)
+     - 8.3 years after last screening
+   * - Nederlands-Leuvens Longkanker Screenings Onderzoek (NELSON)
+     - de Koning et al. 2020
+     - Netherlands and Belgium
+     - LDCT screening every 1, 2, and 2.5 years for four rounds
+     - No screening
+     - Men, 50-74 years, >15 cigarettes a day for >25 years or >10 cigarettes a day for >30 years, cessation <10 years
+     - 10 years postrandomization  4.5 years after last screening
+   * - National Lung Cancer Screening Trial (NLST)
+     - Patz et al. 2014; NLST Team 2019
+     - US
+     - LDCT screening annually for three years
+     - CXR screening annually for three years
+     - Men and women, 55-74 years, at least 30 pack-year smoking history, smoking cessation within the last 15 years for former smokers
+     - 4.5 years after last screening (Patz et al. 2014), 9.3 years after last screening (NLST Team 2019)
 
 .. note::
 
@@ -103,7 +159,7 @@ The main outcome of this model is lung cancer *detections*, diagnosed either via
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. image:: causal_framework_diagram
+.. image:: causal_framework_diagram.svg
 
 .. _3.1:
 
