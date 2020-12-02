@@ -8,6 +8,41 @@ Tracheal, Bronchus, and Lung Cancer
    :local:
    :depth: 1
 
+.. list-table:: Abbreviations
+   :widths: 15 15 15
+   :header-rows: 1
+
+   * - Abbreviation
+     - Definition
+     - Note
+   * - TBL
+     - Tracheal, bronchus, and lung
+     - 
+   * - MST
+     - Mean sojourn time
+     - Time between screen-detectable and symptom onset
+   * - ODF
+     - Overdiagnosis factor
+     - Increase in lung cancer incidence attributable to screening program
+   * - AST
+     - Average survival time
+     - 
+   * - LDCT
+     - Low-dose computed tomography
+     - Lung cancer screening
+   * - CXR
+     - Chest x-ray
+     - Lung cancer screening
+   * - ACMR
+     - All-cause mortality rate
+     - 
+   * - CSMR
+     - Cause-specific mortality rate
+     -
+   * - EMR
+     - Excess mortality rate
+     - 
+
 Disease Overview
 ----------------
 
@@ -121,7 +156,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. Additionally, this cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer. Additionally, this cause model will allow for the differentiation of indolent lung cancers from other lung cancers. 
+This Vivarium modeling strategy is intended to simulate TBL cancer incidence/morbidity as well as mortality so that it reflects the estimates and assumptions of GBD. This cause model intends to allow for the differentiation of preclinical screen-detectable (asymptomatic) phase of TBL cancer and the clinical (symptomatic) phase of TBL lung cancer as well as allow for the differentiation of indolent lung cancers from other lung cancers. This cause model intends to use cancer forecast data from 2020-2040 in tandem with the :ref:`Lung cancer screening concept model <lung_cancer_cancer_concept_model>`. This cause model document should not be used in other concept models without careful review and appropriate edits.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -183,7 +218,7 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c426 - prevalence_c426 * MST / AST - prevalence_c426 * ODF
+     - :math:`1 - prevalence_I - prevalence_\text{PC} - prevalence_C`
      - Note: this assumes no initial prevalence in R state
    * - S
      - birth prevalence
@@ -199,7 +234,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prevalence_c426 * MST / AST
+     - :math:`prevalence_C * MST / AST`
      - Note: assumes all cancers in prevalence_c426 are in clinical phase
    * - PC
      - birth prevalence
@@ -215,12 +250,12 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - prevalence_c426 * ODF
-     - Note: this may be an underestimate of initial prevalence due to longer duration than clinical TBL cancer
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC} * ODF`
+     - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
      - 0
-     -
+     - 
    * - I
      - excess mortality rate
      - 0
@@ -231,7 +266,7 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - prevalence_c426
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
      - 
    * - C
      - birth prevalence
@@ -239,7 +274,7 @@ State and Transition Data Tables
      - 
    * - C
      - excess mortality rate
-     - csmr_c426 / prevalence_c426
+     - :math:`csmr_\text{c426} / prevalence_C`
      - 
    * - C
      - disabilty weights
@@ -274,22 +309,22 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c426 / prevalence_S
-     - NOTE: Apply incidence_c426 rate from the age group equal to simulant's age plus MST 
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S}`
+     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_i
      - S
      - I
-     - incidence_c_426 * ODF / prevalence_S
-     - NOTE: Apply incidence_c426 rate from the age group equal to simulant's age plus MST 
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S}`
+     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
      - C
-     - 1/MST per person-year
+     - 1/MST
      - See MST definition in table below
    * - r
      - C
      - R
-     - 0.1 per person-year for each sex and age group	
+     - 0.1
      - To be consistent with 10 year GBD assumption
 
 .. list-table:: Data Sources
@@ -325,13 +360,17 @@ State and Transition Data Tables
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
    * - AST
-     - 5 (95% CI: 4, 6); normal distribution of uncertainty at the draw level
+     - :math:`1/(csmr_\text{c426} / prevalence_C + ACMR - csmr_\text{c426})`
      - Average survival time; mean duration of time between detection and death
-     - See details below for sampling below. PLACEHOLDER VALUE
+     - ACMR: all cause-mortality rate for demographic group from GBD
    * - ODF
      - 0.35 (0.2, 0.5); normal distribution of uncertainty at the draw level
      - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
      - See details for sampling below. NOTE: placeholder value
+   * - :math:`screening_\text{baseline}`
+     - Defined in :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>`
+     - Baseline coverage of lung cancer screening by LDCT
+     - 
 
 .. todo::
 
@@ -382,7 +421,7 @@ A systematic literature search was performed to obtain estimates of the mean soj
      - Used a Markov model to estimate MST using data meta-analyzed from six studies. Assumes a gamma distribution of MSTs.
      - Median: 2.06 years (95% CI: 0.42 - 3.83)
      - 
-   * - [ten-Haaf-et-al-2015]_
+   * - [ten-Haaf-et-al-2015a]_
      - Used the MISCAN-Lung model to estimate MST using data from SEER, the National Lung Screening Trial (NLST), and the Prostate, Lung, Ovarian Colon and Ovarian Cancer Screening Trial (PLCO). Estimated MST at the sex-, stage- and histology-specific level. Assumed a weilbull distribution of MSTs.
      - Not reported here due to specificity at the histological level. Notably, MST was greater in women than men.
      - 
@@ -405,45 +444,8 @@ Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time
 
   The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be sensitive to this parameter. Given that there is variation around this parameter, this is a value that we should reach consensus on with the client. 
 
-Average Survival Time
-^^^^^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-.. warning::
-
-  This is currently a stand-in value
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 5
-  q_975 = 6
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for MST, representing uncertainty in the parameter
-  odf_distribution = norm(mean, std)
-
-.. todo::
-
-  Update/confirm stand-in value
-
-**Research Background:**
-
-.. todo::
-
-  Detail research background
-
-Overdiagnosis Factor
-^^^^^^^^^^^^^^^^^^^^^
+Cumulative Excess Incidence Factor
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **Parameter for Use in Model:**
 
@@ -466,51 +468,54 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
   std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
 
-  # Frozen normal distribution for MST, representing uncertainty in the parameter
+  # Frozen normal distribution for ODF, representing uncertainty in the parameter
   odf_distribution = norm(mean, std)
 
 .. todo::
 
-  Update/confirm stand-in value
+  Update/confirm stand-in value... possibly with age-specific values from [Criss-et-al-2018]_
 
 **Research Background:**
 
-Overdiagnosis by cancer screening is defined as the detection/diagnosis of very slow growing or indolent cancers that never would have resulted in a clinical cancer due to death from other causes first. The following figure demonstrates this phenomenon. 
+Overdiagnosis by cancer screening is defined as the detection/diagnosis of very slow growing or indolent cancers that never would have resulted in a clinical cancer due to death from other causes first (and therefore would not be expected to experience clinical detection of the cancer). The following figure demonstrates the concept of an "overdiagnosed" case. 
 
 .. image:: overdiagnosis_figure.svg
 
-Overdiagnosis is a major concern associated with lung cancer screening programs and as such has been evaluated for LDCT lung cancer screening programs by several investigators. Notably, when investigating overdiagnosis by LDCT an adequate follow-up period is critical to allow for suspected indolent cancers to progress to the clinical phase. Additionally, the age distribution of the study subjects will also impact the potential for overdiagnosis (older subjects are more susceptible due to their higher background mortality rates).
+Overdiagnosis is a major concern associated with lung cancer screening programs and as such has been evaluated for LDCT lung cancer screening programs by several investigators. 
 
-Estimates of overdiagnosis factors in LDCT lung cancer screening programs have varied greatly, from as low as 1.03 to nearly as high as 1.5. A summary of the relevant literature is included below.
+Cumulative excess incidence in the experimental arm relative to the control arm of RCTs can be used to estimate overdiagnosis of lung cancer screening by LDCT. The table below provides a summary of RCTs that have estimated overdiagnosis using the excess cumulative incidence approach, as summarized by [Gonzalez-Maldonado-et-al-2020]_.
 
-.. list-table:: Overdiagnosis References
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Paper
-     - Description
-     - Results
-     - Notes
-   * - [Broderson-et-al-2020]_
-     - Meta-analysis of overdiagnosis in LDCT screening RCTs. 3.6 years considered sufficient lead time (time between screen-detect and clinical presentation).
-     - 49% (11-87) of screen-detected cancers were overdiagnosed from two RCTs with low risk of bias; 38% (14-63) from all RCTs. RR for lung cancer incidence 1.51 (1.06-2.14) based on low-bias RCTs; 1.22 (1.02-1.47) based on all RCTs.
-     - "There is uncertainty about this substantial degree of overdiagnosis due to unexplained heterogeneity and low precision of the summed estimate across the two trials" (p. 2).
-   * - [de-Koning-et-al-2020]_
-     - NELSON trial: RCT among former and current smokers; LDCT screening versus no screening. 11 years follow-up from initial screening.
-     - 8.9% (bootstrapped 95% CI, −18.2 to 32.4) of cancers were overdiagnosed; consider this estimate the upper limit due to limited follow-up period.
-     - This most recent update was not included in the [Broderson-et-al-2020]_ meta-analysis estimate 
-   * - [Gonzalez-Maldonado-et-al-2020]_
-     - German RCT among long-term smokers 50.3-71.9 years of age; LDCT screening versus no screening. Median follow-up of 9.77 years.
-     - 25.4% (95% CI: -11.3, 64.3) of screen-detected cancer cases were overdiagnosed.
-     - Not included in [Broderson-et-al-2020]_ meta-analysis due to more recent publication.
-   * - [de-Koning-et-al-2014]_
-     - Cohort study
-     - 8.7% - 13.5% of screen-detected lung cancers are overdiagnosed
-     - 
+.. image:: overdiagnosis_study_table.png
 
-.. note::  
+Further, [Broderson-et-al-2020]_ conducted a meta-analysis of overdiagnosis as estimated by LDCT RCTs and concluded that the RR for lung cancer incidence 1.51 (1.06-2.14) based on low-bias RCTs; 1.22 (1.02-1.47) based on all RCTs. They also concluded that 49% (11-87) of screen-detected cancers were overdiagnosed from two RCTs with low risk of bias; 38% (14-63) from all RCTs. They noted that "there is uncertainty about this substantial degree of overdiagnosis due to unexplained heterogeneity and low precision of the summed estimate across the two trials" (p. 2).
 
-  Some percentage of non-screen-detected lung cancers may be overdiagnosed as well (i.e. incidental findings). Inflation of incidence rate (as reported in the [Broderson-et-al-2020]_ study as RR = 1.2 or 1.5 depending on sensitivity analysis) may be the more appropriate parameter to use here.
+Notably, excess incidence in RCTs (lead time greater than the study follow-up period) does not necessarily reflect overdiagnosis (lead time greater than life expectancy). Therefore, if the follow-up period since the last screening is shorter than the maximum leda times for all participants, then cumulative excess incidence estimates will *overestimate* overdiagnosis. 
+
+  This is illustrated with the NLST trial results for which the cumulative excess incidence estimate decreased from 19% with 4.5 years of follow-up to 3% with 9.3 years of follow-up (note that this was in comparison to CXR screening rather than no screening). Similarly, excess incidence overdiagnosis was estimated at 19.7% with 4.5 years of follow-up since last screening in the NELSON trial, which was then updated to 8.9% after 5.5 years of follow-up after the last screening round.
+
+As discussed by [Gonzalez-Maldonado-et-al-2020]_ and [de-Koning-et-al-2020]_, additional follow-up times are needed to more accurately measure cumulative excess incidence in these RCTs, as lead times of CT screening can be up to 9 to 12 years for some cancers [ten-Haaf-et-al-2015a]_.
+
+Additionally, background lung cancer risk, screening eligibility, and the age distribution of the study subjects will also impact the potential for overdiagnosis/excess incidence (older subjects are more susceptible due to their higher background mortality rates) [Blom-et-al-2020]_.
+
+Due to the limitations of evaluating excess incidence/overdiagnosis through randomized controlled trials with insufficient follow-up periods, modeling studies may provide additional insight.
+
+  [McMahon-et-al-2014]_, [de-Koning-et-al-2014]_, [ten-Haaf-et-al-2015b]_, [Han-et-al-2017]_, and [ten-Haaf-et-al-2020]_ have evaluated the impact of LDCT screening programs on overdiagnosis in the US among a single birth cohort.
+
+  [Criss-et-al-2018]_ and [Blom-et-al-2020]_ have evaluated the impact of LDCT screening programs on overdiagnosis at the population level in the US.
+
+As a whole, most of these models found overdiagnosed cases as a proportion of screen-detected lung cancers to be generally less than 10%. However, it was noted that this figure varies with screening eligibility by age (younger ages have lower proportion), screening frequency (more frequent have greater proportion), smoking history (greater pack-years have greater proportion), and histological subtype (BAC at highest risk, small cell at lowest risk) [Han-et-al-2017]_. Also found in [Han-et-al-2017]_, three of the four independent models used found similar or no difference in the proportion of overdiagnosed screen-detected cancers by sex, although one of the models found that females had a higher proportion of overdiagnosis. Notably, stopping age of screening eligibility was the most influential of these parameters [Han-et-al-2017]_.
+
+Given that these modeling studies were fit to data from the US, it is challenging to generalize to different populations given that the results are sensitive to age, screening eligibility, histologic make-up, background mortality rates, etc. However, because age is so influential, the analysis by [Criss-et-al-2018]_ provides particularly useful data stratified by age groups, presented in the figure below.
+
+.. image:: overdiagnosis_by_age.png
+
+Additionally, the [Han-et-al-2017]_ study provides estimates of overdiagnosis by several stratifying variables that can aid in the consideration of additional detail.
+
+In addition to the modeling studies discussed, cohort studies with long term follow-up may also provide information on overdiagnosis in CT lung cancer screening programs, as discussed by [Carter-et-al-2015]_.
+
+A retrospective cohort study of patients aged 50-74 screened by LDCT relative to CXR in Japan found that lung cancer incidence among those screened via LDCT was 1.23 times that of those screened via CXR, which the authors noted was a maximum estimate [Nawa-et-al-2019]_. Notably, the CT group had a mean follow-up period of 9.85 years (+/- 2.71) and the CXR group had a mean follow-up period of 8.65 (+/- 2.09). Additionally, there were no smoking eligibility requirements in this study population and the authors noted that considerably more cancers with long doubling-times would be detected in individuals with no or low smoking histories.
+
+[Sone-et-al-2007]_ conducted a long-term follow-up study of a population-based mass CT screening program among those aged 40-74 in Japan and estimated that 13.3% of cases might be overdiagnosed. Postoperative follow-up of the 50 survived patients ranged from 70 to 117 (median, 101) months. Notably, this study relied on the assumption of constant tumor volume doubling time and noted that if this assumption does not hold that the number of over-diagnosed cases would be smaller. Additionally, the study population included never and light smokers, which they noted had tumors with slower volume doubling times and therefore were more likely to be overdiagnosed than smokers. 
 
 .. note::
 
@@ -519,18 +524,46 @@ Estimates of overdiagnosis factors in LDCT lung cancer screening programs have v
 Validation Criteria
 +++++++++++++++++++
 
-The incidence and prevalence of *clinical* TBL cancers in the general population should approximately validate to the GBD incidence and prevalence of TBL cancers. The mortality rates (CSMR and EMR) of TBL cancer should validate to those of GBD.
+The following should be true:
+
+  :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
+
+    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST
+
+  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
+
+    NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
+
+  :math:`csmr_\text{c426} \approx csmr_C`
+
+Some test simulations of this cause model that aim to verify the modelling strategy described here are available `here on the Vivarium Data Analysis Repository <https://github.com/ihmeuw/vivarium_data_analysis/pull/90>`_.
+
+.. todo::
+
+  Update this link to https://github.com/ihmeuw/vivarium_data_analysis/tree/master/pre_processing/lung_cancer_model once the PR is merged
 
 References
 ----------
+
+.. [Blom-et-al-2020]
+
+  Blom EF, Ten Haaf K, de Koning HJ. Trends in lung cancer risk and screening eligibility affect overdiagnosis estimates. Lung Cancer. 2020 Jan;139:200-206. doi: 10.1016/j.lungcan.2019.11.024. Epub 2019 Nov 28. PMID: 31816564. `Available here <https://pubmed.ncbi.nlm.nih.gov/31816564/>`_.
 
 .. [Broderson-et-al-2020]
 
   Brodersen J, Voss T, Martiny F, et al. Overdiagnosis of lung cancer with low-dose computed tomography screening: meta-analysis of the randomised clinical trials. Breathe 2020; 16: 200013
 
+.. [Carter-et-al-2015]
+
+  Carter, J. L., Coletti, R. J., & Harris, R. P. (2015). Quantifying and monitoring overdiagnosis in cancer screening: A systematic review of methods. BMJ (Clinical Research Ed.), 350, g7773. `Available here <https://doi.org/10.1136/bmj.g7773>`_.
+
 .. [Chien-and-Chen-2008]
 
   Chien, Chun‐Ru, and Tony Hsiu‐Hsi Chen. "Mean sojourn time and effectiveness of mortality reduction for lung cancer screening with computed tomography." International journal of cancer 122.11 (2008): 2594-2599. `Available here <https://pubmed.ncbi.nlm.nih.gov/18302157/>`_
+
+.. [Criss-et-al-2018]
+
+  Criss SD, Sheehan DF, Palazzo L, Kong CY. Population impact of lung cancer screening in the United States: Projections from a microsimulation model. PLoS Med. 2018 Feb 7;15(2):e1002506. doi: 10.1371/journal.pmed.1002506. PMID: 29415013; PMCID: PMC5802442. `Available here <https://pubmed.ncbi.nlm.nih.gov/29415013/>`_.
 
 .. [de-Koning-et-al-2014]
 
@@ -548,9 +581,21 @@ References
 
   González Maldonado, Sandra, et al. "Overdiagnosis in lung cancer screening: Estimates from the German Lung Cancer Screening Intervention Trial." International Journal of Cancer (2020). `Available here <https://pubmed.ncbi.nlm.nih.gov/32930386/>`_
 
+.. [Han-et-al-2017]
+
+  Han SS, Ten Haaf K, Hazelton WD, Munshi VN, Jeon J, Erdogan SA, Johanson C, McMahon PM, Meza R, Kong CY, Feuer EJ, de Koning HJ, Plevritis SK. The impact of overdiagnosis on the selection of efficient lung cancer screening strategies. Int J Cancer. 2017 Jun 1;140(11):2436-2443. doi: 10.1002/ijc.30602. PMID: 28073150; PMCID: PMC5516788. `Available here <https://pubmed.ncbi.nlm.nih.gov/28073150/>`_.
+
 .. [Javidan-Nejad-2010]
 
   Javidan-Nejad, Cylen. "MDCT of trachea and main bronchi." Radiologic Clinics 48.1 (2010): 157-176. `Available here <https://pubmed.ncbi.nlm.nih.gov/19995634/>`_
+
+.. [McMahon-et-al-2014]
+
+  McMahon PM, Meza R, Plevritis SK, Black WC, Tammemagi CM, Erdogan A, ten Haaf K, Hazelton W, Holford TR, Jeon J, Clarke L, Kong CY, Choi SE, Munshi VN, Han SS, van Rosmalen J, Pinsky PF, Moolgavkar S, de Koning HJ, Feuer EJ. Comparing benefits from many possible computed tomography lung cancer screening programs: extrapolating from the National Lung Screening Trial using comparative modeling. PLoS One. 2014 Jun 30;9(6):e99978. doi: 10.1371/journal.pone.0099978. PMID: 24979231; PMCID: PMC4076275. `Available here <https://pubmed.ncbi.nlm.nih.gov/24979231/>`_.
+
+.. [Nawa-et-al-2019]
+
+  Nawa, T., Fukui, K., Nakayama, T., Sagawa, M., Nakagawa, T., Ichimura, H., & Mizoue, T. (2019). A population-based cohort study to evaluate the effectiveness of lung cancer screening using low-dose CT in Hitachi city, Japan. Japanese Journal of Clinical Oncology, 49(2), 130–136. `Available here <https://doi.org/10.1093/jjco/hyy185>`_.
 
 .. [Patz-et-al-2014]
 
@@ -560,9 +605,21 @@ References
 
   Sherani, Khalid, et al. "Malignant tracheal tumors: a review of current diagnostic and management strategies." Current Opinion in Pulmonary Medicine 21.4 (2015): 322-326. `Available here <https://journals.lww.com/co-pulmonarymedicine/Abstract/2015/07000/Malignant_tracheal_tumors__a_review_of_current.4.aspx>`_
 
-.. [ten-Haaf-et-al-2015]
+.. [Sone-et-al-2007]
+
+  Sone, S., Nakayama, T., Honda, T., Tsushima, K., Li, F., Haniuda, M., Takahashi, Y., Suzuki, T., Yamanda, T., Kondo, R., Hanaoka, T., Takayama, F., Kubo, K., & Fushimi, H. (2007). Long-term follow-up study of a population-based 1996–1998 mass screening programme for lung cancer using mobile low-dose spiral computed tomography. Lung Cancer, 58(3), 329–341. `Available here <https://doi.org/10.1016/j.lungcan.2007.06.022>`_.
+
+.. [ten-Haaf-et-al-2015a]
 
   ten Haaf, Kevin, Joost van Rosmalen, and Harry J. de Koning. "Lung cancer detectability by test, histology, stage, and gender: estimates from the NLST and the PLCO trials." Cancer Epidemiology and Prevention Biomarkers 24.1 (2015): 154-161. `Available here <https://pubmed.ncbi.nlm.nih.gov/25312998/>`_
+
+.. [ten-Haaf-et-al-2015b]
+
+  Ten Haaf K, de Koning HJ. Overdiagnosis in lung cancer screening: why modelling is essential. J Epidemiol Community Health 2015; 69: 1035-9.
+
+.. [ten-Haaf-et-al-2020]
+
+  Ten Haaf K, Jeon J, Tammemägi MC, Han SS, Kong CY, Plevritis SK, Feuer EJ, de Koning HJ, Steyerberg EW, Meza R. Risk prediction models for selection of lung cancer screening candidates: A retrospective validation study. PLoS Med. 2017 Apr 4;14(4):e1002277. doi: 10.1371/journal.pmed.1002277. Erratum in: PLoS Med. 2020 Sep 25;17(9):e1003403. PMID: 28376113; PMCID: PMC5380315. `Available here <https://pubmed.ncbi.nlm.nih.gov/28376113/>`_.
 
 .. [Veronesi-et-al-2012]
 
