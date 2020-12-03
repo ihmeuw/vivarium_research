@@ -57,7 +57,7 @@ GBD 2017 Modeling Strategy
 
 The following information was obtained from the GBD 2017 fatal and non-fatal methods appendices [GBD-2017-YLD-Appendix-TBL-cancer]_, [GBD-2017-CoD-Appendix-TBL-cancer]_.
 
-Tracheal, bronchus, and lung (TBL) cancers are modeled together as a single cause in GBD. These cancers are not differentiated in the input data for the GBD model and are not crosswalked for alternative cause definitions. 
+Tracheal, bronchus, and lung (TBL) cancers are modeled together as a single cause in GBD. These cancers are not differentiated in the input data for the GBD model and are not crosswalked for alternative cause definitions. Notably, GBD estimates represent *diagnosed* cases of TBL cancers in a given population. 
 
 As with the majority of neoplasm causes in GBD, a remission rate for TBL cancer is not explicitly modeled. Rather, there is no morbidity modeled for TBL cancer after 10 years. As such, prevalence for TBL cancer extends for no more than 10 years after incidence.
 
@@ -98,13 +98,6 @@ Covariates used in the fatal TBL cancer model for GBD 2017 included:
      - ICD 9
    * - C33-C34.9, D02.1-D02.3, D14.2-D14.3, D38.1
      - 162-162.9, 212.2-212.3, 231.1-231.2, 235.7
-
-
-.. todo::
-
-	What moment of cancer progression does GBD intend to model as incidence? Cancer onset or symptom onset? What are the limitations of this? Most likely symptom onset/diagnosis.
-
-	How can we integrate the 10 year GBD assumption into our vivarium strategy while also accounting for pre-symptomatic incidence?
 
 Cause Hierarchy
 +++++++++++++++
