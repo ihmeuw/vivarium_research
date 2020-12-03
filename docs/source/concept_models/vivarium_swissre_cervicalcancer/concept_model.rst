@@ -504,13 +504,13 @@ In our model, cancer cases are detected through two pathways. (1) individuals
 who get diagnosed from routine screening with a positive test result. (2) 
 individuals who didn't go for routine screening but found symptoms then get 
 diagnosed. After we add symptomatic presentation module, we will see detected 
-cancer cases in cohorts not eligible for routine screening and a narrower 
+cancer cases in cohorts not eligible for routine screening and a smaller 
 difference of detection rate between baseline and alternative scenario. We 
 assume symptoms will not occur in pre-invasive cervical cancer state, the 
-transition rate (lambda) from pre-clinical screening detectable cancer (PC) 
-state to clinical invasive state (onset of symptoms) is equal to 1 divided by 
-average time spent in PC state (mean sojourn time). In cervical cancer 
-development, the estimated duration in pre-clinical state is close to 10 years.
+transition rate (lambda) from pre-clinical screening detectable asymptomatic 
+invasive cervical cancer (PC) to clinical symptomactic invasive cervical cancer 
+is equal to 1 divided by average time spent in PC state (mean sojourn time). In 
+cervical cancer development, the mean sojourn time is around **4** years.
 
 .. image:: symptomatic_presentation.svg
 
@@ -583,18 +583,17 @@ relevant formulas
      - Value
      - Source
      - Note
-   * - Duration from BCC to CC
-     - 14.5 years, use triangular distirbution: triangular(lower limit=5, 
-       mode=10, upper limit=15)
-     - Chen et al. 2011
-     - Globally, the duration ranged from 5-15 years (Moscicki et al. 2012)
-   * - Mean sojourn time
+   * - Duration of BCC
      - 10 years
+     - [Burger-et-al-2020]_
      - 
-     - stand-in value, constrained to be smaller than 14.5 years
+   * - Mean sojourn time
+     - 4 years
+     - [Burger-et-al-2020]_
+     - 
    * - Initial cervical cancer screening coverage
      - 25%
-     - Wang et al. 2015
+     - [Wang-et-al-2015]_
      - It's an arbitrary number greater than 20.7%.
    * - Target cervical cancer screening coverage in 2030
      - 50%
@@ -611,15 +610,15 @@ relevant formulas
      - by assumption
    * - Screening sensitivity of co-test
      - HPV+: 76.7%; Cytology+: 59.1%
-     - Schiffman et al. 2018
+     - [Schiffman-et-al-2018]_
      - 
    * - Screening specificity of co-test
      - HPV-: 94.1%; Cytology-: 100%
-     - Kripke et al. 2008
+     - [Kripke-et-al-2008]_
      - 
    * - Screening sensitivity of cytology alone test
      - 65.9% (95% CI 54.9 to 75.3)
-     - Koliopoulos et al. 2017
+     - [Koliopoulos-et-al-2017]_
      - 
    * - Screening specificity of cytology alone test
      - 100%
@@ -627,7 +626,7 @@ relevant formulas
      - by client’s assumption
    * - Prevalence of HPV
      - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_prevalence_dismod.csv
-     - Zhao et al. 2012
+     - [Zhao-et-al-2012]_
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific prevalence data
    * - Incidence of HPV
      - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_incidence_dismod.csv
@@ -635,22 +634,22 @@ relevant formulas
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific incidence data
    * - remission of HPV
      - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_clearance_dismod.csv
-     - kang et al. 2014
+     - [kang-et-al-2014]_
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific remission data
    * - Relative risk of HPV
      - 27.4 (95%CI 19.7 to 38.0); use log-normal distribution **exp(normal( 
        mean=log(27.4), SD=0.17))**
-     - Naucler et al. 2007
+     - [Naucler-et-al-2007]_
      - 
    * - HPV vaccine according to protocol efficacy against incident HPV 16/18 
        infection
      - use normal distribution **normal(mean=4.71, SD=0.94)**
-     - Zhu et al. 2019
+     - [Zhu-et-al-2019]_
      - We convert the efficacy to a relatiev risk of HPV 16/18 infection for 
        those unvaccinated versus vaccinated
    * - HPV vaccine according to protocol efficacy against CIN2+
      - use normal distribution **normal(mean=1.77, SD=0.26)**
-     - Lu et al. 2011
+     - [Lu-et-al-2011]_
      - In this study, CIN2+ was associated with non-16/18 HPV infection (other 
        oncogenic types including 31/33/45/52/58)
    * - BCC treatment coverage
@@ -742,6 +741,42 @@ TBD
 8.0 References
 ++++++++++++++
 
-.. todo::
-
- add cited works
+.. [Burger-et-al-2020]
+   Burger EA, de Kok IMCM, Groene E, et al. Estimating the Natural History of 
+   Cervical Carcinogenesis Using Simulation Models: A CISNET Comparative Analysis. 
+   J Natl Cancer Inst 2020; 112: 955–63.
+.. [Wang-et-al-2015]
+   Wang B, He M, Chao A, et al. Cervical Cancer Screening Among Adult Women in 
+   China, 2010. Oncologist 2015; 20: 627–34.
+.. [Schiffman-et-al-2018]
+   Schiffman M, Kinney WK, Cheung LC, et al. Relative Performance of HPV and 
+   Cytology Components of Cotesting in Cervical Screening. J Natl Cancer Inst 
+   2018; 110: 501–8.
+.. [Kripke-et-al-2008]
+   Kripke, C. (2008). Pap smear vs. HPV screening tests for cervical cancer. 
+   American Family Physician, 77(12), 1740.
+.. [Koliopoulos-et-al-2017]
+   Koliopoulos G, Nyaga VN, Santesso N, et al. Cytology versus HPV testing for 
+   cervical cancer screening in the general population. Cochrane Database Syst 
+   Rev 2017; 8: CD008587.
+.. [Zhao-et-al-2012]
+   Zhao F-H, Lewkowitz AK, Hu S-Y, et al. Prevalence of human papillomavirus 
+   and cervical intraepithelial neoplasia in China: a pooled analysis of 17 
+   population-based studies. Int J Cancer 2012; 131: 2929–38.
+.. [Kang-et-al-2014]
+   Kang L-N, Castle PE, Zhao F-H, et al. A prospective study of age trends of 
+   high-risk human papillomavirus infection in rural China. BMC Infect Dis 2014; 
+   14: 96.
+.. [Naucler-et-al-2007]
+   Naucler P, Ryd W, Törnberg S, et al. HPV type-specific risks of high-grade 
+   CIN during 4 years of follow-up: a population-based prospective study. Br J 
+   Cancer 2007; 97: 129–32.
+.. [Zhu-et-al-2019]
+   Zhu F-C, Hu S-Y, Hong Y, et al. Efficacy, immunogenicity and safety of the 
+   AS04-HPV-16/18 vaccine in Chinese women aged 18-25 years: End-of-study 
+   results from a phase II/III, randomised, controlled trial. Cancer Med 2019; 
+   8: 6195–211.
+.. [Lu-et-al-2011]
+   Lu B, Kumar A, Castellsagué X, Giuliano AR. Efficacy and safety of prophylactic 
+   vaccines against cervical HPV infection and diseases among women: a systematic 
+   review & meta-analysis. BMC Infect Dis 2011; 11: 13.
