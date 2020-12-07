@@ -242,7 +242,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prevalence_c414 x MST/AST
+     - i_c414(at age 'current age + MST') * MST
      - Note: assumes all cancers in prevalence_c414 are in clinical phase
    * - PC
      - birth prevalence
@@ -301,8 +301,8 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c414 / prevalence_S
-     - may need to add MST*   
+     - incidence_c414* / prevalence_S
+     - *at age 'current age + MST'   
    * - i_c
      - PC
      - C
@@ -328,15 +328,15 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c414
-     - need to get filepath
+     - 414_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU stomach cancer prevalence forecasts
      - 2020-2040; defined as proportion of population with condition
    * - csmr_c414
-     - need to get filepath
+     - 414_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU stomach cancer cause specific mortality rate forecast
      - 2020-2040; defined as deaths per person-year in general population
    * - incidence_rate_c414
-     - need to get filepath
+     - 414_ets_incidence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU stomach cancer cause-specific mortality rate forecast
      - 2020-2040; defined as incidence cases per person-year in general population
    * - disability_weight_s{248, 249, 250, 251}
@@ -387,33 +387,6 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
   May consider adding individual-level variation to this parameter at a later date.
 
-
-Average Survival Time
-^^^^^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-.. warning::
-
-  This is currently a stand-in value
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = ??
-  q_975 = ??
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for AST, representing uncertainty in the parameter
-  ast_distribution = norm(mean, std)
 
 .. todo::
 
