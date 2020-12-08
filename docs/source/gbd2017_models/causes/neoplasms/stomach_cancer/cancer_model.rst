@@ -226,7 +226,7 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c414 x MST/AST - prevalence_c414
+     - 1 - prev_PC - prev_C
      - Note: this assumes no initial prevalence in R state
    * - S
      - birth prevalence
@@ -242,7 +242,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - i_c414(at age 'current age + MST') * MST
+     - prev_PC = i_c414 (at age 'current age + MST') * MST
      - Note: assumes all cancers in prevalence_c414 are in clinical phase
    * - PC
      - birth prevalence
@@ -258,7 +258,7 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - prevalence_c414
+     - prev_C = prevalence_c414
      - 
    * - C
      - birth prevalence
