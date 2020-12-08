@@ -152,7 +152,7 @@ There are several randomized controlled trials on LDCT lung cancer screening pro
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. 
+The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. NOTE: deaths with undetected lung cancer is not a relevant model outcome.
 
 .. _3.0:
 
@@ -220,7 +220,7 @@ Additional considerations:
 
 .. image:: concept_model_diagram.svg
 
-Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality and morbidity because it is not an explicit outcome of interest in this project, although there is evidence that there is an effect.
+Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality because it is not an explicit outcome of interest in this project, although there is evidence of an effect.
 
 .. _5.2:
 
@@ -237,17 +237,35 @@ The demographic model for this project should follow the same demographic model 
 
 .. _5.3.1:
 
-5.3.1 Core lung cancer model
+5.3.1 Core Lung Cancer Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The lung cancer cause model that should be used for this project is documented on the :ref:`2017 Tracheal, Bronchus, and Lung Cancer Page <2017_lung_cancer>`.
 
 .. _5.3.2:
 
-5.3.2 Screening and detection model
+5.3.2 Smoking-Affected Causes Excluding Lung Cancer Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The smoking affected causes model that should be used for this project is documented on the :ref:`2017 Smoking-Affected Causes page <2017_smoking_affected_causes>`.
+
+.. _5.3.3:
+
+5.3.3 Smoking Model
+~~~~~~~~~~~~~~~~~~~
+
+The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
+
+The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
+
+The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
+
+.. _5.3.4:
+
+5.3.4 Screening and Detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5.3.2.1 Screening Model
+5.3.4.1 Screening Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 *Annual* screenings should be scheduled for simulants who meet ALL of the following criteria: 
@@ -261,7 +279,7 @@ The lung cancer cause model that should be used for this project is documented o
 
   Include probability of attending screening data, time to next scheduled screen distribution, screenining initialization information
 
-5.3.2.2 Detection Model
+5.3.4.2 Detection Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation.
@@ -281,42 +299,37 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 
   We may want to eventually incorporate some lag period here between when simulant begins to experience symptoms and when lung cancer is actually formally diagnosed.
 
-5.3.2.3 Screening Sensitivity and Specificity
+5.3.4.3 Screening Sensitivity and Specificity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancer screening specificity is assumed to be 100%; in other words, we assume that there will be no false negative lung cancer results detected via screening. 
 
+Lung cancer screening sensitivity is assumed to be XXX; in other words, we assume that the probability that LDCT screening will detect lung cancer given that the individual has lung cancer is XXX. 
+
 .. todo::
 
-  Document screening sensitivity value and references
+  Document screening sensitivity value, uncertainty, and references
 
-5.3.2.4 Screening Coverage
+5.3.4.4 Screening Coverage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Baseline
+**Baseline**
 
 .. todo:: 
   
   Document values for 20 year lag from US coverage, as suggested by SwissRe. Sex-specific values if possible. 
 
-- Alternative
+**Alternative**
 
 .. todo::
 
   Document target screening coverage rate and scale-up algorithm
 
-.. _5.3.3:
+**Sex Differences**
 
-5.3.3 Smoking model
-~~~~~~~~~~~~~~~~~~~
-
-The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
-
-The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
-
-The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
-
-.. _5.4:
+.. todo::
+  
+  Document the differential coverage by sex
 
 5.4 Input data sources
 ----------------------
