@@ -4,7 +4,6 @@
 Smoking Risk Exposure -- Forecasted
 ======================================
 
-
 Risk Exposure Overview
 ----------------------
 
@@ -19,32 +18,83 @@ Risk Exposures Description in GBD
 The smoking risk factor in GBD is multifactorial and includes estimates on:
 
 - The prevalence of current/former/never smokers 
-- Cumulative pack-year smoking history for current smokers 
-- Years since quitting for former smokers
+- Cumulative pack-year smoking history *among current smokers* 
+- Years since quitting *among former smokers*
 
 This document will cover all three of these risk exposures. 
 
 The TMREL for the smoking risk factor is never-smokers.
 
-Smoking Prevalence
+Smoking Status
 ++++++++++++++++++
 
-This is a categorical risk exposure model with three categories.
+Smoking status is a categorical risk exposure model with three categories: never smokers, current smokers, and former smokers.
 
 Pack-years for Current Smokers
 ++++++++++++++++++++++++++++++
 
-This is a *continuous* risk exposure model that follows an *ensemble* distribution.
+This is a *continuous* risk exposure model that follows an *ensemble* distribution that has been converted to a **categorical** risk exposure model.
 
-One pack‐year represents the equivalent of smoking one pack of cigarettes (assuming a 20‐cigarette pack) per day for one year. Since the pack‐years indicator collapses duration and intensity into a single dimension, one pack‐year of exposure can reflect smoking 40 cigarettes per day for six months or smoking 10 cigarettes per day for two years.
+One pack‐year represents the equivalent of smoking one pack of cigarettes (assuming a 20‐cigarette pack) per day for one year. Since the pack‐years indicator collapses duration and intensity into a single dimension, one pack‐year of exposure can reflect smoking 40 cigarettes per day for six months or smoking 10 cigarettes per day for two years. Pack-years is a transformed measure of cumulative cigarettes smoked.
 
 Years Since Quitting for Former Smokers
 +++++++++++++++++++++++++++++++++++++++
 
-This is a *continuous* risk exposure model that follows an *ensemble* distribution.
+This is a *continuous* risk exposure model that follows an *ensemble* distribution that has been converted to a **categorical** risk exposure model.
 
 Vivarium Modeling Strategy
 --------------------------
+
+Smoking Status
+++++++++++++++
+
+Smoking status should be assigned in the following fashion:
+
+.. code-block:: python
+
+  if propensity_i < never_smoker_prevalence:
+    smoking_status_i = 'never'
+  elif propensity_i < never_smoker_prevalence + current_smoker_prevalence:
+    smoking_status_i = 'current'
+  else:
+    smoking_status_i = 'former'
+
+.. list-table:: Smoking Status Data Table
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Source
+    - Note
+  * - current_smoker_prevalence
+    - Prevalence of current smokers
+    - XXX
+    - Forecasted from 2020-2040
+  * - former_smoker_prevalence
+    - Prevalence of former smokers
+    - XXX
+    - Forecasted from 2020-2040
+  * - never_smoker_prevalence
+    - Prevalence of never smokers
+    - 1 - current_smoker_prevalence - former_smoker_prevalence
+    - Derived from estimates forecasted from 2020-2040
+
+Notably, this modeling strategy has the potential for current smokers to become never smokers (an illogical transition) if the prevalence of never smokers *increases* from one age group to the next. However, this possibility should be relatively inconsequential given that this should only happen if the current and former smokers die at a greater rate than they are replaced.
+
+.. todo::
+
+  Evaluate this possibility in the forecast data
+
+Pack-years Among Current Smokers
++++++++++++++++++++++++++++++++++
+
+Pack-years among current smokers 
+
+Pack-years Among Former Smokers
++++++++++++++++++++++++++++++++
+
+Years Since Quitting Among Former Smokers
++++++++++++++++++++++++++++++++++++++++++++
 
 .. todo::
 
