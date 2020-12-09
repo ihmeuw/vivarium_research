@@ -57,7 +57,7 @@ GBD 2017 Modeling Strategy
 
 The following information was obtained from the GBD 2017 fatal and non-fatal methods appendices [GBD-2017-YLD-Appendix-TBL-cancer]_, [GBD-2017-CoD-Appendix-TBL-cancer]_.
 
-Tracheal, bronchus, and lung (TBL) cancers are modeled together as a single cause in GBD. These cancers are not differentiated in the input data for the GBD model and are not crosswalked for alternative cause definitions. 
+Tracheal, bronchus, and lung (TBL) cancers are modeled together as a single cause in GBD. These cancers are not differentiated in the input data for the GBD model and are not crosswalked for alternative cause definitions. Notably, GBD estimates represent *diagnosed* cases of TBL cancers in a given population. 
 
 As with the majority of neoplasm causes in GBD, a remission rate for TBL cancer is not explicitly modeled. Rather, there is no morbidity modeled for TBL cancer after 10 years. As such, prevalence for TBL cancer extends for no more than 10 years after incidence.
 
@@ -98,13 +98,6 @@ Covariates used in the fatal TBL cancer model for GBD 2017 included:
      - ICD 9
    * - C33-C34.9, D02.1-D02.3, D14.2-D14.3, D38.1
      - 162-162.9, 212.2-212.3, 231.1-231.2, 235.7
-
-
-.. todo::
-
-	What moment of cancer progression does GBD intend to model as incidence? Cancer onset or symptom onset? What are the limitations of this? Most likely symptom onset/diagnosis.
-
-	How can we integrate the 10 year GBD assumption into our vivarium strategy while also accounting for pre-symptomatic incidence?
 
 Cause Hierarchy
 +++++++++++++++
@@ -234,8 +227,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - :math:`prevalence_C * MST / AST`
-     - Note: assumes all cancers in prevalence_c426 are in clinical phase
+     - :math:`incidence_\text{PC} * MST`
+     - Note: :math:`incidence_\text{PC}` defined in table below
    * - PC
      - birth prevalence
      - 0
@@ -528,13 +521,17 @@ The following should be true:
 
   :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
 
-    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST
+    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST. Each of these incidence rates should be defined with person-time in the *general population* as the denominator.
 
   :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
 
     NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
 
   :math:`csmr_\text{c426} \approx csmr_C`
+
+.. note::  
+  
+  Estimates of YLLs and YLDs likely will no longer validate well with high levels of baseline screening due to the incorporation of asymptomatic cases.
 
 Some test simulations of this cause model that aim to verify the modelling strategy described here are available `here on the Vivarium Data Analysis Repository <https://github.com/ihmeuw/vivarium_data_analysis/pull/90>`_.
 
