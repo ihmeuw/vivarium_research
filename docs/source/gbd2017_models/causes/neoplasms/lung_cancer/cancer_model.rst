@@ -259,8 +259,8 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
-     - 
+     - 0
+     - Assumed that there are no prevalent clinical (detected) lung cancers in the insured population; see the definition of :math:`prevalence_\text{C, general population}` for the prevalence of clinical lung cancers in the general population (Data Sources Table)
    * - C
      - birth prevalence
      - 0
@@ -302,12 +302,12 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S - prevalence_\text{C, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_i
      - S
      - I
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S - prevalence_\text{C, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
@@ -361,8 +361,12 @@ State and Transition Data Tables
      - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
      - See details for sampling below. NOTE: placeholder value
    * - :math:`screening_\text{baseline}`
-     - Defined in :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>`
+     - 0.06
      - Baseline coverage of lung cancer screening by LDCT
+     - The value in this table should be used prior to implementation of the screening model, which will be defined in the :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>` and should then supercede the 0.06 value.
+   * - :math:`prevalence_\text{C, general population}`
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
+     - Prevalence of clinical TBL cancer in the general (insured and uninsured) population
      - 
 
 .. todo::
