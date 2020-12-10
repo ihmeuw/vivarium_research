@@ -77,16 +77,50 @@ Remission is calculated based on remainder of time after attributing other seque
 Cause Hierarchy
 ++++++++++++++++
 
-.. todo::
+.. image:: mm_hierarchy.svg
 
-   Add cause hierarchy.
+This cause hierarchy has not changed since GBD 2017.
 
 Restrictions
 ++++++++++++
 
-.. todo::
+The following table describes any restrictions in GBD 2019 on the effects of
+this cause (such as being only fatal or only nonfatal), as well as restrictions
+on the ages and sexes to which the cause applies.
 
-   Add restrictions.
+.. list-table:: GBD 2019 Cause Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+This cause's restrictions have not changed since GBD 2017.
 
 Vivarium Modeling Strategy
 --------------------------
