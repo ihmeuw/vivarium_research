@@ -186,8 +186,13 @@ to cover 60% of women aged 50 to 74 years in 2030, then keep 60% coverage till
    rual. Temporarily, let's use 20% as baseline screening coverage across all 
    ages and sexes for SwissRe's insured population.
  - We assume that the screenig uptake rate in China is 20 years behind the US; 
-   therefore, we will use the documented number in 2015 among US general 
-   population to determine the target screening coverage in China.
+   therefore, we will use the documented number in 2010 among US general 
+   population to determine the target screening coverage in China. In 2008, 
+   51.6% of american adults were up-to-date with CRC screening. From 2008 to 
+   2010, screening rates increased by 6.7 percentage points to 58.3%. Although 
+   CRC rates were essentially unchanged from 2010 to 2013 (58.3% to 57.3%), they 
+   increased an additional four percentage points to 61.3% between 2013 and 
+   2015. [de-Moor-et-al-2018]_
 
 
 .. _5.0:
@@ -460,9 +465,9 @@ Relevant formulas
      - [lin-et-al-2019]_
      - 
    * - Colon and rectum cancer screening covearge in alternative scenario
-     - scale up to 60% in 2035
+     - scale up to 60% in 2030
      - [de-Moor-et-al-2018]_
-     - We applied 20-year lag based on the US screening coverage in 2015
+     - We applied 20-year lag on US coverage
    * - Screening sensitivity
      - 
      - 
