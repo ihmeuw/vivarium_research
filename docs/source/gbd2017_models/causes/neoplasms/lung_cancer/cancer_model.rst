@@ -211,8 +211,8 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - :math:`1 - prevalence_I - prevalence_\text{PC} - prevalence_C`
-     - Note: this assumes no initial prevalence in R state
+     - :math:`1 - prevalence_I - prevalence_\text{PC}`
+     - Note: this assumes no initial prevalence in R or C states
    * - S
      - birth prevalence
      - 0
@@ -367,7 +367,7 @@ State and Transition Data Tables
    * - :math:`prevalence_\text{C, general population}`
      - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
      - Prevalence of clinical TBL cancer in the general (insured and uninsured) population
-     - 
+     - Should use the forecasted prevalence for this parameter
 
 .. todo::
 
