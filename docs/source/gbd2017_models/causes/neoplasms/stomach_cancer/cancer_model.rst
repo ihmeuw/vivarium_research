@@ -348,9 +348,9 @@ State and Transition Data Tables
      - stomach cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 4 months (95% CI: ); ?? distrbution of uncertainty at draw level
+     - 8 months (95%UI:7m to 9m); distrbution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the asymptomtic stomach cancer to the clinical phase
-     - See below for instructions on how to sample and research background. NOTE: may update this value
+     - See below for instructions on how to sample and research background. NOTE: this is stand in value for now
    * - AST
      - ? (95% CI: ?); normal distribution of uncertainty at the draw level
      - Average survival time; mean duration of time between detection and death
@@ -372,8 +372,8 @@ This parameter should be sampled *at the draw level* from the distribution detai
   from scipy.stats import norm
 
   # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = ??
-  q_975 = ??
+  mean = 8
+  q_975 = 9
 
   # 0.975-quantile of standard normal distribution (=1.96, approximately)
   q_975_stdnorm = norm().ppf(0.975)
@@ -385,8 +385,9 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
 .. note::
 
-  May consider adding individual-level variation to this parameter at a later date.
+  Currently I have an individual sojourn time (IST) from Yeh et al's 2008 modelling paper. The IST likely follows a beta distribution with median 4m, and max 24m. Currently using a stand-in value for the MST at draw-level (sampling distribution of the mean) of 8m with +/- 10% as the UIs. I will refine this parameter. 
 
+  Alternatively, we can model the transition duration at the individual level using the IST and the incidence rate at the individual level using 1/IST. 
 
 .. todo::
 
