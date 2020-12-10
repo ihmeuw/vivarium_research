@@ -267,12 +267,12 @@ State and Transition Data Tables
      - 
    * - C
      - excess mortality rate
-     - :math:`csmr_\text{c426} / prevalence_C`
+     - :math:`csmr_\text{c426} / prevalence_\text{C, general_population}`
      - 
    * - C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
-     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276. Use GBD 2019 sequalea prevalence for weighting since these were not forecasted. Can be excluded from model for simplicity.
    * - R
      - prevalence
      - 0
@@ -346,7 +346,7 @@ State and Transition Data Tables
      - 0.288 (0.193-0.145), 0.049 (0.031-0.072), 0.451 (0.307-0.6), 0.54 (0.377-0.687)
    * - prevalence_s{273, 274, 275, 276}
      - GBD 2019, COMO, decomp_step='step4'
-     - TBL cancer sequelae prevalence
+     - TBL cancer sequelae prevalence from GBD 2019
      - Not forecasted
    * - MST
      - 2.06 years (95% CI: 0.42 - 3.83); normal distrbution of uncertainty at draw level
