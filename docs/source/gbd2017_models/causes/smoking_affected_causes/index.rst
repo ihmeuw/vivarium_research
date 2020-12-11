@@ -316,12 +316,12 @@ Scope
 
 The Vivarium modeling strategy outlined in this document will be a **mortality only** model that combines several causes within GBD. This cause is intended to be modeled as a outcome pair with the smoking risk factor.
 
+Rather than individual measure the relative risk of mortality due to each individual smoking affected cause to create an overall summary relative risk of mortality due to smoking affected causes, this model will use the all cause mortality PAF for smoking, subtract out the contribution of lung cancer, and then back-calculate a summary relative risk for all smokers (including current and former). 
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-	List assumptions and limitations
+Assuming a single relative risk of mortality due to all causes except for lung cancer among current and former smokers will underestimate the mortality rate for current smokers with high pack-year exposures and former smokers with low years since quitting and overestimate the mortality rate for current smokers with low pack-year exposures and former smokers with high years since quitting. 
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -330,99 +330,97 @@ There is no cause model diagram for this cause model because it is a mortality-o
 
 .. math::
 
-	mr_i = ACMR - CSMR_\text{SACs} + CSMR_\text{SACs} * (1 - PAF) * RR_i - \sum_{c}^{n} CSMR_c + \sum_{c}^{n} EMR(i)_c
-
-.. note:: 
-
-	Prior to implementation of the smoking risk factor, use the following equation:
-
-	:math:`mr_i = ACMR - \sum_{c}^{n} CSMR_c + \sum_{c}^{n} EMR(i)_c`
+	mr_i = (ACMR - CSMR_\text{c426}) * (1 - PAF_\text{*}) * RR_i + EMR(i)_\text{c426}
 
 Where, 
 
 .. list-table:: Definitions
-	:header-rows: 1
+  :header-rows: 1
 
-	* - Parameter
-	  - Definition
-	  - Note
-	* - :math:`mr_i`
-	  - Mortality rate for an individual simulant
-	  - 
-	* - :math:`ACMR`
-	  - All cause mortality rate
-	  - 
-	* - :math:`CSMR_\text{SACs}`
-	  - Cause-specific mortality rate for smoking-affected causes
-	  - Defined in the data tables below
-	* - :math:`PAF`
-	  - Population attributable fraction for smoking on smoking affected causes
-	  - Will be defined in the :ref:`smoking risk effects document <2017_risk_effect_smoking>`
-	* - :math:`RR_i`
-	  - Relative risk of mortality due to smoking-affected causes for an individual based on smoking exposure
-	  - Will be defined in the :ref:`smoking risk effects document <2017_risk_effect_smoking>`
-	* - :math:`\sum_{c}^{n} CSMR_c`
-	  - Sum of cause-specific mortality rates for all other modeled causes
-	  - 
-	* - :math:`\sum_{c}^{n} EMR(i)_c`
-	  - Sum of excess mortaltiy rates for all other modeled causes, based on the simulant's cause model state
-	  - 
-
-Then, if it is determined that a simulant dies in a given time-step based on the simulant's mortality hazard, :math:`mr_i`, then the probability that the death was due to a given cause should be represented as follows:
-
-.. list-table:: Causes of death likelihoods
-	:header-rows: 1
-
-	* - Cause of death
-	  - Probability
-	  - Note
-	* - Smoking-affected causes
-	  - :math:`\frac{CSMR_\text{SACs} * (1 - PAF) * RR_i}{mr_i}`
-	  - Prior to smoking RF implementation: :math:`\frac{CSMR_\text{SACs}}{mr_i}`
-	* - Other modeled cause
-	  - :math:`\frac{EMR(i)_c}{mr_i}`
-	  - Repeated for additional modeled causes
-	* - Other (unmodeled) causes
-	  - :math:`\frac{ACMR - CSMR_\text{SACs} - CSMR_\text{other modeled cause 1}}{mr_i}`
-	  - 
+  * - Parameter
+    - Definition
+    - Note
+  * - :math:`ACMR`
+    - All cause mortality rate
+    - 
+  * - :math:`mr_i`
+    - Mortality rate for an individual simulant
+    - 
+  * - :math:`CSMR_\text{c426}`
+    - Cause-specific mortality rate for lung cancer
+    - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`; use forecasted 2019 value
+  * - :math:`PAF_\text{*}`
+    - Population attributable fraction for smoking on all-cause mortality, excluding lung cancer
+    - Defined below
+  * - :math:`RR_i`
+    - Summary relative risk of mortality due smoking for all causes except lung cancer
+    - Defined below
+  * - :math:`EMR(i)_\text{c426}`
+    - Excess mortality rate of lung cancer for an individual simulant (based on cause model state)
+    - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`; use forecasted 2019 value
 
 Data Tables
 ++++++++++++++++++++++++++++++++
 
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
-     - Value
-     - Notes
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\sum_{cid=1}^{cid=n} deaths_\text{cid}}{\text{population}}`
-     - For all cids in [297, 322, 411, 414, 474, 417, 423, 429, 432, 441, 444, 447, 450, 456, 471, 487, 493, 495, 496, 497, 500, 501, 502, 509, 520, 515, 527, 534, 543, 544, 546, 976, 627]
-
 .. list-table:: Data Sources
-   :widths: 20 25 25 25
    :header-rows: 1
    
    * - Measure
-     - Sources
-     - Description
+     - Value/Source
      - Notes
-   * - :math:`deaths_\text{cid}`
-     - codcorrect
-     - Deaths from cause
-     - For causes with restrictions (Sex: 432, Age: 500, 502, 543, 544, 546), death data may not be available for certain age/sex groups. In this case assume :math:`deaths_\text{cid} = 0`
-   * - :math:`population`
-     - demography
-     - Mid-year population for given age/sex/year/location
+   * - :math:`PAF_\text{*}`
+     - :math:`\frac{\sum_{cid}^{n} CSMR_\text{cid} * PAF_\text{cid}}{ACMR - CSMR_\text{c426}}`
+     - For cids in [322, 411, 414, 418, 419, 420, 421, 423, 429, 432, 441, 444, 447, 450, 456, 471, 493, 495, 496, 497, 500, 501, 502, 509, 515, 534, 543, 544, 546, 845, 846, 847, 848, 934, 946, 947, 954, 976, 996]. See parameter definitions below 
+   * - :math:`csmr_\text{cid}`
+     - GBD 2019, codcorrect, decomp_step='step4', year_id=2019, cause_id=cid
+     - For causes with restrictions (Sex: 432, Age: 500, 502, 543, 544, 546), death data may not be available for certain age/sex groups. In this case assume :math:`csmr_\text{cid} = 0`
+   * - :math:`PAF_\text{cid}`
+     - /ihme/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/exposure/modeling/GBD2019/outputs/paf/final/pafs_ss_annual/
+     - This filepath contains .csv files with smoking PAF values by cause ID for GBD 2019 that are named '{location_id}_{sex_id}'. Use year_id=2019
+   * - :math:`ACMR`
+     - GBD 2019, codcorrect, decomp_step='step4', year_id=2019, cause_id=294
      - 
+   * - :math:`RR_i`
+     - for never smokers: :math:`1`, for current or former smokers: :math:`\frac{\frac{1}{1 - PAF_\text{*}} - (1 - prev_\text{smok})}{prev_\text{smok}}`
+     - 
+   * - :math:`prev_\text{smok}`
+     - Prevalence of current and former smokers in 2019
+     - Defined in :ref:`smoking risk exposure document <2017_risk_exposure_smoking_forecasted>`; can use forecast prevalence. Prior to implementation of smoking risk factor, can use 0.2 as a placeholder.
+
+.. note:: 
+
+  The following shows the proof for the :math:`RR_i` value or current and former smokers:
+
+  1. 
+
+  .. math::
+
+    (ACMR - CSMR_\text{c426}) = (ACMR - CSMR_\text{c426})(1 - PAF_\text{*})(1 - prev_\text{smok}) 
+
+      + (ACMR - CSMR_\text{c426})(1 - PAF_\text{*}) * RR_i * prev_\text{smok}
+
+  2.
+
+  .. math::
+
+    1 = (1 - PAF_\text{*})(1 - prev_\text{smok}) + (1 - PAF_\text{*}) * RR_i * prev_\text{smok}
+
+  3.
+
+  .. math::
+
+    \frac{1}{1 - PAF_\text{*}} = (1 - prev_\text{smok}) * RR_i * prev\text{smok}
+
+  4.
+
+  .. math::
+
+    RR_i = \frac{\frac{1}{1 - PAF_\text{*}} - (1 - prev_\text{smok})}{prev_\text{smok}}
 
 Validation Criteria
 +++++++++++++++++++
 
-The simulation output should replicate the cause-specific mortality rate of smoking affected causes as defined in the data tables. Additionally, GBD all cause mortality should be replicated in the simulation output. Additional validation based on the incorporation of the smoking risk factor will be detailed in the :ref:`smoking risk effects documentation <2017_risk_effect_smoking>`. 
+The simulation output should replicate the cause-specific mortality rate of smoking affected causes as defined in the data tables. Additionally, GBD all cause mortality should be replicated in the simulation output. 
 
 References
 ----------
