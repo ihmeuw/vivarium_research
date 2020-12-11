@@ -272,7 +272,7 @@ State and Transition Data Tables
    * - C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
-     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276. Use GBD 2019 sequalea prevalence for weighting since these were not forecasted. Can be excluded from model for simplicity.
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276. Use GBD 2019 sequalea prevalence for weighting since these were not forecasted. Can be excluded from model for simplicity (YLDs not in output table shell).
    * - R
      - prevalence
      - 0
