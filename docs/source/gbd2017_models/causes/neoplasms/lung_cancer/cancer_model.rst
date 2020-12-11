@@ -353,7 +353,7 @@ State and Transition Data Tables
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
    * - AST
-     - :math:`1/(csmr_\text{c426} / prevalence_C + ACMR - csmr_\text{c426})`
+     - :math:`1/(ACMR - csmr_\text{c426} + \frac{csmr_\text{c426}}{prevalence_\text{C, general population}})`
      - Average survival time; mean duration of time between detection and death
      - ACMR: all cause-mortality rate for demographic group from GBD
    * - ODF
