@@ -211,7 +211,7 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - :math:`1 - prevalence_I - prevalence_\text{PC}`
+     - :math:`1 - prevalence_I - prevalence_\text{PC} - prevalence_C`
      - Note: this assumes no initial prevalence in R or C states
    * - S
      - birth prevalence
@@ -227,8 +227,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - :math:`incidence_\text{PC} * MST`
-     - Note: :math:`incidence_\text{PC}` defined in table below
+     - :math:`\frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} - \frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} * baseline_screening`
+     - Note: :math:`incidence_\text{PC}` defined in table below. This assumes that there are no prevalent *detected* preclinical lung cancers
    * - PC
      - birth prevalence
      - 0
@@ -243,7 +243,7 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC} * ODF`
+     - :math:`prevalence_\text{PC} * ODF`
      - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
@@ -302,12 +302,12 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S - prevalence_\text{C, general population}}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_\text{S, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_i
      - S
      - I
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S - prevalence_\text{C, general population}}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_\text{S, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
@@ -368,6 +368,20 @@ State and Transition Data Tables
      - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
      - Prevalence of clinical TBL cancer in the general (insured and uninsured) population
      - Should use the forecasted prevalence for this parameter
+   * - :math:`prevalence_\text{PC, general population}`
+     - :math:`incidence_\text{PC} * MST`
+     - 
+     - 
+   * - :math:`prevalence_\text{I, general population}`
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC, general population} * ODF`
+     - 
+     - 
+   * - :math:`prevalence_\text{S, general population}`
+     - :math:`1 - prevalence_\text{C, general population} - prevalence_\text{PC, general population} - prevalence_\text{I, general population}`
+     - 
+     - 
+     - 
+
 
 .. todo::
 
