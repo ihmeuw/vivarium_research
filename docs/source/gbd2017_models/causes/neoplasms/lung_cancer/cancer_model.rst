@@ -381,7 +381,6 @@ State and Transition Data Tables
      - 
      - 
 
-
 .. todo::
 
 	Update/confirm placeholder values
@@ -540,7 +539,9 @@ The following should be true:
 
     NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST. Each of these incidence rates should be defined with person-time in the *general population* as the denominator.
 
-  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
+  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline}`
+
+    NOTE: The simulation prevalence will lag behind the forecasted prevalence in the early years of the simulation because of the assumption that there are no prevalent detected cancers at the start of the simulation.
 
     NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
 
