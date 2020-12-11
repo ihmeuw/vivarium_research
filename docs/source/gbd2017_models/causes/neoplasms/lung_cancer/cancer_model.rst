@@ -212,7 +212,7 @@ State and Transition Data Tables
    * - S
      - prevalence
      - :math:`1 - prevalence_I - prevalence_\text{PC} - prevalence_C`
-     - Note: this assumes no initial prevalence in R state
+     - Note: this assumes no initial prevalence in R or C states
    * - S
      - birth prevalence
      - 0
@@ -227,8 +227,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - :math:`incidence_\text{PC} * MST`
-     - Note: :math:`incidence_\text{PC}` defined in table below
+     - :math:`\frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} - \frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} * baseline_\text{screening}`
+     - Note: :math:`incidence_\text{PC}` defined in table below. This assumes that there are no prevalent *detected* preclinical lung cancers
    * - PC
      - birth prevalence
      - 0
@@ -243,7 +243,7 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC} * ODF`
+     - :math:`prevalence_\text{PC} * ODF`
      - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
@@ -267,12 +267,12 @@ State and Transition Data Tables
      - 
    * - C
      - excess mortality rate
-     - :math:`csmr_\text{c426} / prevalence_C`
+     - :math:`csmr_\text{c426} / prevalence_\text{C, general_population}`
      - 
    * - C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
-     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276. Use GBD 2019 sequalea prevalence for weighting since these were not forecasted. Can be excluded from model for simplicity (YLDs not in output table shell).
    * - R
      - prevalence
      - 0
@@ -302,12 +302,12 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S - prevalence_\text{C, general population}}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_\text{S, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_i
      - S
      - I
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S - prevalence_\text{C, general population}}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_\text{S, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
@@ -346,14 +346,14 @@ State and Transition Data Tables
      - 0.288 (0.193-0.145), 0.049 (0.031-0.072), 0.451 (0.307-0.6), 0.54 (0.377-0.687)
    * - prevalence_s{273, 274, 275, 276}
      - GBD 2019, COMO, decomp_step='step4'
-     - TBL cancer sequelae prevalence
+     - TBL cancer sequelae prevalence from GBD 2019
      - Not forecasted
    * - MST
      - 2.06 years (95% CI: 0.42 - 3.83); normal distrbution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
    * - AST
-     - :math:`1/(csmr_\text{c426} / prevalence_C + ACMR - csmr_\text{c426})`
+     - :math:`1/(ACMR - csmr_\text{c426} + \frac{csmr_\text{c426}}{prevalence_\text{C, general population}})`
      - Average survival time; mean duration of time between detection and death
      - ACMR: all cause-mortality rate for demographic group from GBD
    * - ODF
@@ -367,6 +367,18 @@ State and Transition Data Tables
    * - :math:`prevalence_\text{C, general population}`
      - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
      - Prevalence of clinical TBL cancer in the general (insured and uninsured) population
+     - Should use the forecasted prevalence for this parameter
+   * - :math:`prevalence_\text{PC, general population}`
+     - :math:`incidence_\text{PC} * MST`
+     - 
+     - 
+   * - :math:`prevalence_\text{I, general population}`
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC, general population} * ODF`
+     - 
+     - 
+   * - :math:`prevalence_\text{S, general population}`
+     - :math:`1 - prevalence_\text{C, general population} - prevalence_\text{PC, general population} - prevalence_\text{I, general population}`
+     - 
      - 
 
 .. todo::
@@ -527,7 +539,9 @@ The following should be true:
 
     NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST. Each of these incidence rates should be defined with person-time in the *general population* as the denominator.
 
-  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
+  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline}`
+
+    NOTE: The simulation prevalence will lag behind the forecasted prevalence in the early years of the simulation because of the assumption that there are no prevalent detected cancers at the start of the simulation.
 
     NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
 
