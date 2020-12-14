@@ -551,6 +551,8 @@ Vaccine efficacy
  - Lu et al. reported a relative risk of getting BCC without hrHPV infection for 
    those unvaccinated versus vaccinated (RR_no_vaccine_CIN2+): use normal 
    distribution **normal(mean=1.77, SD=0.26)**
+ - Use same relative risk (RR_no_vaccine_CIN2+) distribution for people moving 
+   from `BCC_S_hrHPV to BCC_C_hrHPV` among those unvaccinated versus vaccinated. 
 
 relevant formulas 
  (1) PAF = :math:`\frac{\text{prev_vaccine}\times(\text{RR_vaccine}-1)}{\text{prev_vaccine}\times(\text{RR_vaccine}-1)+1}`
@@ -558,6 +560,8 @@ relevant formulas
  (3) :math:`\text{incidence_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
  (4) :math:`\text{incidence_BCC_S_hrHPV_with_vaccine} =  \text{incidence_BCC}\times(1-PAF)`
  (5) :math:`\text{incidence_BCC_S_hrHPV_without_vaccine} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_no_vaccine_CIN2+}`
+ (6) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
+ (7) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_CIN2+}`
 
 .. _5.3.4:
 
