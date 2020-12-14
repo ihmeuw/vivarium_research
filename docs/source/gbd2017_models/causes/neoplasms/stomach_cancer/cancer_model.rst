@@ -231,7 +231,7 @@ State and Transition Data Tables
    * - S
      - prevalence
      - 1 - prev_PC - prev_C - prev_R
-     - Note: we assume no initial prevalence in C or R state (prev_c and prev_R =0)
+     - Note: we assume no initial prevalence in C or R state (prev_C and prev_R =0)
    * - S
      - birth prevalence
      - 0
