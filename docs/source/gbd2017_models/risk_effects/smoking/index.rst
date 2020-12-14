@@ -52,9 +52,11 @@ GBD 2017 Modeling Strategy
 
 The smoking risk factor affects *several* outcomes in GBD, including tuberculosis, lower respiratory tract infections, oesophageal cancer, stomach cancer, bladder cancer, liver cancer, laryngeal cancer, lung cancer, breast cancer, cervical cancer, colorectal cancer, lip and oral cancer, nasopharyngeal cancer, other pharyngeal cancer, pancreatic cancer, kidney cancer, leukaemia, ischaemic heart disease, ischaemic stroke, haemorrhagic stroke, subarachnoid haemorrhage, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic obstructive pulmonary disease, other chronic respiratory diseases, asthma, peptic ulcer disease, gallbladder and biliary tract diseases, Alzheimer disease and other dementias, Parkinson disease (protective), multiple sclerosis, type‐II diabetes, rheumatoid arthritis, low back pain, cataracts, macular degeneration, and fracture.
 
-Notably, the relative risks for the smoking risk factor in GBD are defined separately for current smokers (intensity of smoking) and former smokers (time since quitting). 
+Notably, the relative risks for the smoking risk factor in GBD are defined separately for current smokers (intensity of smoking) and former smokers (time since quitting). The TMREL for the smoking risk factor is never smokers.
 
 The relative risks for the smoking risk factor cannot be pulled using standard tools. Rather, filepaths to the relative risk data (both for current and former smokers) are available in :download:`this excel document <rr_reference.csv>`.
+
+  The relative risk data for the smoking risk factor are defined as a continous risk curve. This curve is modeled according to "mesh points" that are documented in the above excel file and the risk curve is assumed to connect linearly between each mesh point.
 
 .. todo:: 
 
@@ -104,46 +106,96 @@ Vivarium Modeling Strategy
 Lung Cancer Incidence
 +++++++++++++++++++++
 
-See the relevant documentation for the :ref:`lung cancer cause model here <2017_lung_cancer>`.
+See the relevant documentation for the :ref:`lung cancer cause model here <2017_lung_cancer>` and the :ref:`forecasted smoking risk exposure model here <2017_risk_exposure_smoking_forecasted>`.
 
-.. note::
+Relative Risk Data
+~~~~~~~~~~~~~~~~~~
 
-  The lung cancer relative risks cannot be pulled using get_draws or other standard tools.
+The lung cancer relative risks cannot be pulled using get_draws or other standard tools.
 
-  The relative risks for **current smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/426_lung_cancer/draws_pack.csv
+  The mesh points for the relative risk curves for **current smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/426_lung_cancer/draws_pack.csv
 
-  The relative risks for **former smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/426_lung_cancer/draws_quit.csv
+  The mesh points for the relative risk curves for **former smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/426_lung_cancer/draws_quit.csv
 
-.. todo::
+The following code demonstrates how to assign relative risk values to individual simulants based on their exposure values.
 
-	Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`). 
+.. code-block:: python
 
-  Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
+  from scipy.interpolate import interp1d
 
-.. todo::
+  """
+  rr_i =: simulant's individual relative risk
+  smoking_status_i =: simulant's smoking status exposure
+  draw_x =: selected draw for a given model run
+  sex_i =: simulant's sex
+  age_group_i =: simulant's age group
+  pack_year_exposure_i =: simulant's pack year exposure value, if applicable
+  years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
+  """
 
-  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable. 
+  if smoking_status_i == 'never':
+    rr_i = 1
 
-  Relative risks for a risk factor may be pulled from GBD at the draw-level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`. You can then calculate the mean value as well as 2.5th, and 97.5th percentiles across draws.
+  elif smoking_status_i == 'current':
 
-  The relative risks in the table below should be included for easy reference and should match the relative risks pulled from GBD using the above code. In this case, update the :code:`Note` below to include the appropriate :code:`{risk_name}`.
+    rr_current = pd.read_csv('/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/426_lung_cancer/draws_pack.csv')
+    rr_current_i = rr_current.loc[rr_current.draw=draw_X].loc[rr_current.sex_id==sex_i].loc[rr_current.age_group_id==age_group_i]
+    x = rr_current_i.exposure.values
+    y = rr_current_i.rr.values
+    current_rr_function_i = interp1d(x, y)
 
-  If for any reason the modeling strategy uses non-GBD relative risks, update the :code:`Note` below to explain that the relative risks in the table are a custom, non-GBD data source and include a sampling strategy.
+    rr_i = current_rr_function_i(pack_year_exposure_i)
 
-.. note::
+  elif smoking_status_i == 'former':
 
-  The following relative risks are displayed below for convenient reference. The relative risks in the table below should match the relative risks that can be pulled at the draw level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`.
+    rr_former = pd.read_csv('/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/426_lung_cancer/draws_quit.csv')
+    rr_former_i = rr_former.loc[rr_former.draw=draw_X].loc[rr_former.sex_id==sex_i].loc[rr_former.age_group_id==age_group_i]
+    x = rr_former_i.exposure.values
+    y = rr_former_i.rr.values
+    former_rr_function_i = interp1d(x, y)
 
-.. list-table:: Relative Risks
-   :widths: 5 5 5
+    rr_i = former_rr_function_i(years_since_quitting_exposure_i)  
+
+PAF Calculation
+~~~~~~~~~~~~~~~
+
+The lung cancer PAF specific to an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
+
+.. math:: 
+
+  PAF_\text{a,s,l,y} = \frac{\overline{rr_\text{a,s,l,y}} - 1}{\overline{rr_\text{a,s,l,y}}}
+
+Where, :math:`\overline{rr_\text{a,s,l,y}}` is the mean value of relative risks for all simulants in a given age, sex, location, and year demographic group.
+
+Application of Risk Factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The smoking risk factor should affect the incidence of the preclinical lung cancer cause model state, :math:`incidence_\text{PC}`, such that:
+
+.. math::
+
+  incidence_\text{PC_i} = incidence_\text{PC} * (1 - PAF_\text{a,s,l,y}) * rr_i
+
+Where,
+
+.. list-table:: Parameter Definitions
    :header-rows: 1
 
-   * - Exposure Category
-     - Relative Risk
+   * - Parameter
+     - Definition
      - Note
-   * - 
+   * - :math:`incidence_\text{PC_i}`
+     - Individual simulant's preclinical lung cancer incidence probability
      - 
-     - 
+   * - :math:`incidence_\text{PC}`
+     - Population level incidence rate of preclinical lung cancer
+     - As defined in :ref:`the lung cancer cause model document <2017_lung_cancer>`
+   * - :math:`PAF_\text{a,s,l,y}`
+     - Lung cancer PAF for smoking for simulant's demographic group
+     - As calculated in the `PAF Calculation`_ section
+   * - :math:`rr_i`
+     - Individual simulant's relative risk value
+     - Assigned as described in the `Relative Risk Data`_ section
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
