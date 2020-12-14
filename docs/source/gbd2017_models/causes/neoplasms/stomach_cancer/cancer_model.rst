@@ -326,7 +326,7 @@ State and Transition Data Tables
 
 .. note::
 
-  * we may need to draw from i_c414/prev_S + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
+  * we need to draw from i_c414/(1-prev_c414) + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -357,13 +357,10 @@ State and Transition Data Tables
      - stomach cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 8 months (95%UI:7m to 9m); distrbution of uncertainty at draw level
+     - 4.5 months (95%UI:4-5m); distrbution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the asymptomtic stomach cancer to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: this is stand in value for now
-   * - AST
-     - ? (95% CI: ?); normal distribution of uncertainty at the draw level
-     - Average survival time; mean duration of time between detection and death
-     - See details below for sampling below. PLACEHOLDER VALUE
+
 
 .. todo::
 
