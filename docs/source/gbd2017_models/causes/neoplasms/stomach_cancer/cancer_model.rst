@@ -45,13 +45,11 @@ Stomach Cancer
 +=======+============================+
 | MST   | Mean Sojourn Time          |
 +-------+----------------------------+
-| AST   | Average Survival Time      |
-+-------+----------------------------+
 | PC    | Pre-Clinical Cancer        |
 +-------+----------------------------+
-| S     | Susceptible                |
+| S     | Susceptible in sim pop     |
 +-------+----------------------------+
-| C     | With Cancer condition      |
+| C     | Clinical cancer in sim pop |
 +-------+----------------------------+
 
 
