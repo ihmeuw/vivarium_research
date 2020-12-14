@@ -176,7 +176,7 @@ Assumptions and Limitations
 
 1. This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to stomach cancer occurs more than ten years past incidence of the *clinical* phase of stomach cancer. The assumption also asserts that there is no recurrance of stomach cancer.
 
-2. This model assumes that the GBD incidence rate corresponds to the incidence of asymptomatic stomach cancer rather than *clinically detected* stomach cancer arising from symptomatic presentation at the doctor's office, which is a mix of pre-clinical (detection of pre-clinical stomach cancer from other non-stomach cancer related reasons) and clinical detections. This assumption has a few notable downstream limitations, including:
+2. This model assumes that the GBD incidence rate corresponds to the incidence of all pre-clinical asymptomatic stomach cancer rather than symptomatic clinical stomach cancer arising from symptomatic presentation at the doctor's office. This assumption has a few notable downstream limitations, including:
 
 	- simulation incidence of *clinical* stomach cancer will lag slightly behind forecasted incidence of stomach cancer due to the mean sojourn time period delay
   - assume a short mean sojourn time 
@@ -185,11 +185,15 @@ Assumptions and Limitations
 
   think more about these assumptions in relation to the sojourn time
 
-3. The prevalence of preclinical/screen-detectable stomach cancer is assumed to be equal to prevalence of detected stomach cancer (GBD prevalence of stomach cancer) scaled to the ratio of duration spent in the preclinical/screen-detectable state (mean sojourn time) and the clinical state (average survival time). This method relies on the assumption that GBD prevalence of stomach cancer represents clinical stomach cancers; this may be a reasonable assumption for China given that they do not have an aggressive screening program. 
+3. The prevalence of pre-clinical (the pre-clincial cancer is screen-detectable for stomach cancer) is assumed to be equal to incidence of pre-clinical cancer (per assumption #2, this would be i_c414 which is the GBD incidence rate scaled to the susceptable population) x duration in the pre-clinical state which is the mean sojourn time (MST).
+
+4. If there is any baseline screening in the general population (GBD population), then the prevalence obtained from GBD (prev_c414) is equal to a combination of asymptomatic cancers detected from screening and symptomatic cancers that were not screened and reached clinical stage. Our simulation population is slightly different from the general population- we exclude any symptomatic cancers in the sim population. Additioanlly, we also exclude those pre-clinical cancers detected from any baseline screening in the general population. Hence, the susceptive population S in the sim population is prev_PC x (1- baseline screening %). Prev_PC (per assumption #2 and 3) = i_c414 (GBD incidence) / prevalence of susceptibles in the general population (GBD population) x MST.
 
 
 Cause Model Diagram
 +++++++++++++++++++
+
+This causal diagram reflects the simulation population which is different from the general population (GBD). In the simulation population, we assume there are no symptomatic cancers (prev_C = 0). Note that the general population refers to the GBD population. 
 
 .. image:: cause_model_diagram.svg
 
@@ -226,8 +230,8 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prev_PC - prev_C
-     - Note: this assumes no initial prevalence in R state
+     - 1 - prev_PC - prev_C - prev_R
+     - Note: we assume no initial prevalence in C or R state (prev_c and prev_R =0)
    * - S
      - birth prevalence
      - 0
@@ -242,8 +246,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prev_PC = i_c414 (at age 'current age + MST') * MST
-     - Note: assumes all cancers in prevalence_c414 are in clinical phase
+     - prev_PC = (1-baseline screening %) x i_pc x MST
+     - see definition of i_pc below
    * - PC
      - birth prevalence
      - 0
@@ -258,7 +262,7 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - prev_C = prevalence_c414
+     - 0
      - 
    * - C
      - birth prevalence
@@ -270,7 +274,7 @@ State and Transition Data Tables
      - 
    * - C
      - disabilty weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c414}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c414}}}`
+     - :math:`\displaystyle{\sum_{s\in\text{s_c414}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prev_c414}}}`
      - Total stomach cancer disability weight over all sequelae with IDs s248, s249, s250, s251
    * - R
      - prevalence
@@ -301,13 +305,18 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c414* / prevalence_S
-     - *at age 'current age + MST'   
+     - i_c414*/ prev_S, general population
+     - *at age 'current age + MST'; prev_S, general population = 1 - prev_c414   
    * - i_c
      - PC
      - C
      - 1/MST per person-year
      - See MST definition in table below
+   * - i_c414
+     - 
+     - 
+     - GBD incidence
+     -    
    * - r
      - C
      - R
@@ -365,15 +374,15 @@ Mean Sojourn Time
 
 **Parameter for Use in Model:**
 
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
+This parameter is be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
 
 .. code-block:: Python
 
   from scipy.stats import norm
 
   # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 8
-  q_975 = 9
+  mean = 4.5
+  q_975 = 5
 
   # 0.975-quantile of standard normal distribution (=1.96, approximately)
   q_975_stdnorm = norm().ppf(0.975)
@@ -385,13 +394,13 @@ This parameter should be sampled *at the draw level* from the distribution detai
 
 .. note::
 
-  Currently I have an individual sojourn time (IST) from Yeh et al's 2008 modelling paper. The IST likely follows a beta distribution with median 4m, and max 24m. Currently using a stand-in value for the MST at draw-level (sampling distribution of the mean) of 8m with +/- 10% as the UIs. I will refine this parameter. 
+  Currently I have an individual sojourn time (IST) from Yeh et al's 2008 modelling paper. The IST likely follows a beta distribution with median 4m, and max 24m. Computing the MST as the sample mean from the beta distribution gives (sampling distribution of the mean) a mean of 4.5m. We use +/- 10% as approximate UIs. I will refine this parameter. 
 
   Alternatively, we can model the transition duration at the individual level using the IST and the incidence rate at the individual level using 1/IST. 
 
 .. todo::
 
-  find values
+  refine value, upload beta distribution
 
 
 
