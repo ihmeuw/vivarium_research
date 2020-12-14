@@ -12,7 +12,7 @@ Disease Overview
 
 .. todo::
 
- add CRC overview
+ Introduce natural history of colon and rectum cancer development
 
 .. list-table:: Malignant neoplasm of colon and rectum cancer 
    :widths: 10 10
@@ -81,15 +81,29 @@ age and sex of simulants to which different aspects of the cause model applies.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-Things to consider: 
+Scope
+-----
+The Vivarium cause model is designed to include both preclinical 
+screening-detecable (asymptomatic) state of colorectal cancer and clinical 
+(symptomatic) state of colorectal cancer. This design intends to allow for 
+colorectal cancer diagnosis through symptomatic presentation. This model will 
+use GBD forecasts of cancer incidence, prevalence, and cause-specific mortality 
+from 2020 to 2040 as disease input.
 
-1. Duration of remission from clinical CRC *over 10 years*, to be confirmed 
-   with GBD modeler.
-
-.. todo::
-
-   Add assumptions and limitations.
-
+Assumptions and Limitations
+---------------------------
+1. To avoid overestimate deaths due to colorectal cancer after 10 years stay in 
+   clinical state, we will model a "recovered" state and use 10 years for 
+   duration of remission from clinical colorectal cancer to its recovery.
+2. We might consider exlude sequalae `stoma from colon and rectum cancer beyond 
+   ten years` when calculating YLDs contributable to colon and rectum cancer.
+3. We assume that GBD forecasted incidence of colorectal cancer corresponds to 
+   the incidence of preclinical colorectal cancer rather than clinical colorectal 
+   cancer. The incidence of clinical colorectal cancer will lag behind forecasted 
+   incidence by a interval of mean sojourn time (MST).
+4. The precancerous state `Adenoma` will not be modeled in Vivarium due to lack 
+   of transitional rates for regression, persistence, and progression. 
+   Alternatively, we will model it as a risk factor for colorectal cancer.
 
 Compartmental Diagram
 +++++++++++++++++++++
@@ -142,8 +156,8 @@ State and Transition Data Tables
      - 
    * - PC
      - prevalence
-     - prev_c441 * MST / AST
-     - 
+     - i_PC * MST
+     - formula used to calculate `i_PC` is specified in `Transition Data` table
    * - PC
      - excess mortality rate
      - 0
@@ -199,7 +213,7 @@ State and Transition Data Tables
    * - r
      - C
      - R
-     - ? per person-year for all ages and sexes
+     - 0.1 per person-year for all ages and sexes
      - 
 
 .. list-table:: Data sources
@@ -233,9 +247,6 @@ State and Transition Data Tables
      - mid-year population
    * - MST
      - 4.5-5.8 years (Brenner et al.)
-     - 
-   * - AST
-     - ?
      - 
 
 Validation Criteria
