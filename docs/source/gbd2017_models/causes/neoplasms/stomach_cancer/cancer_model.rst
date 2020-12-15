@@ -1,3 +1,5 @@
+.. _2017_stomach_cancer:
+
 .. role:: underline
     :class: underline
 
@@ -30,7 +32,7 @@
   And then add it to the list of decorators above.
 
 
-.. _2017_stomach_cancer:
+
 
 ==============
 Stomach Cancer
@@ -183,15 +185,15 @@ Assumptions and Limitations
 
   think more about these assumptions in relation to the sojourn time
 
-3. The prevalence of pre-clinical (the pre-clincial cancer is screen-detectable for stomach cancer) is assumed to be equal to incidence of pre-clinical cancer (per assumption #2, this would be i_c414 which is the GBD incidence rate scaled to the susceptable population) x duration in the pre-clinical state which is the mean sojourn time (MST).
+3. For stomach cancer, we are assuming there is a 5% H. pylori screening coverage in the insured population (double check if we want to bake this into the general population or we create an insured population for our baseline scenario?). For now, we assume that the insured population is the general GBD population. There is no endoscopy screening in the general GBD population, hence there are no PC states in the general population. Therefore prevalence_S, general population = 1 - prevalence_c414
 
-4. If there is any baseline screening in the general population (GBD population), then the prevalence obtained from GBD (prev_c414) is equal to a combination of asymptomatic cancers detected from screening and symptomatic cancers that were not screened and reached clinical stage. Our simulation population is slightly different from the general population- we exclude any symptomatic cancers in the sim population. Additioanlly, we also exclude those pre-clinical cancers detected from any baseline screening in the general population. Hence, the susceptive population S in the sim population is prev_PC x (1- baseline screening %). Prev_PC (per assumption #2 and 3) = i_c414 (GBD incidence) / prevalence of susceptibles in the general population (GBD population) x MST.
+4. In our simulation, we will model th pre-clinical state because we will introduce endoscopy screening which will detect pre-clinical canceers and move pay-out forward (earlier). The prevalence of pre-clinical (the pre-clincial cancer is screen-detectable for stomach cancer) is assumed to be equal to incidence of pre-clinical cancer (per assumption #2, this would be i_c414 which is the GBD incidence rate among the susceptable population) x duration in the pre-clinical state which is the mean sojourn time (MST).
 
 
 Cause Model Diagram
 +++++++++++++++++++
 
-This causal diagram reflects the simulation population which is different from the general population (GBD). In the simulation population, we assume there are no symptomatic cancers (prev_C = 0). Note that the general population refers to the GBD population. 
+This causal diagram reflects the simulation population which is different from the general population (GBD). Note that the general population refers to the GBD population. 
 
 .. image:: cause_model_diagram.svg
 
@@ -244,8 +246,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prev_PC = (1-baseline screening %) x i_pc x MST
-     - see definition of i_pc below
+     - prev_PC = :math:`\frac{\text{i_c414}}{\text{(1 - prev_c414)}}` x MST 
+     - 
    * - PC
      - birth prevalence
      - 0
@@ -268,7 +270,7 @@ State and Transition Data Tables
      - 
    * - C
      - excess mortality rate
-     - csmr_c414 / prevalence_c414
+     - csmr_c414 / prev_c414
      - 
    * - C
      - disabilty weights
@@ -303,8 +305,8 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - i_c414*/ prev_S, general population
-     - *at age 'current age + MST'; prev_S, general population = 1 - prev_c414   
+     - :math:`\frac{\text{i_c414}}{\text{(1 - prev_c414)}}`
+     - *at age 'current age + MST'   
    * - i_c
      - PC
      - C
