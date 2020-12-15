@@ -249,7 +249,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prev_PC = :math:`\frac{\text{i_c414}}{\text{(1 - prev_c414)}}` x MST 
+     - prev_PC = :math:`\frac{\text{i_c414}}{\text{(1 - prev_c414)^2}}` x MST 
      - 
    * - PC
      - birth prevalence
