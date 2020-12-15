@@ -49,9 +49,9 @@ Stomach Cancer
 +-------+----------------------------+
 | PC    | Pre-Clinical Cancer        |
 +-------+----------------------------+
-| S     | Susceptible in sim pop     |
+| S     | Susceptible                |
 +-------+----------------------------+
-| C     | Clinical cancer in sim pop |
+| C     | Clinical cancer            |
 +-------+----------------------------+
 
 
@@ -176,26 +176,29 @@ Assumptions and Limitations
 
 1. This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to stomach cancer occurs more than ten years past incidence of the *clinical* phase of stomach cancer. The assumption also asserts that there is no recurrance of stomach cancer.
 
-2. This model assumes that the GBD incidence rate corresponds to the incidence of all pre-clinical asymptomatic stomach cancer rather than symptomatic clinical stomach cancer arising from symptomatic presentation at the doctor's office. This assumption has a few notable downstream limitations, including:
+2. This model assumes that the GBD incidence rate corresponds to the incidence of all pre-clinical asymptomatic stomach cancer (PC state) rather than symptomatic clinical stomach cancer arising from symptomatic presentation at the doctor's office. This assumption has a few notable downstream limitations, including:
 
 	- simulation incidence of *clinical* stomach cancer will lag slightly behind forecasted incidence of stomach cancer due to the mean sojourn time period delay
-  - assume a short mean sojourn time 
+  - this should not cause too much trouble for stomach cancer as we assume a short mean sojourn time (<1 year)
 
 .. todo::
 
   think more about these assumptions in relation to the sojourn time
 
-3. For stomach cancer, we are assuming there is a 5% H. pylori screening coverage in the insured population (double check if we want to bake this into the general population or we create an insured population for our baseline scenario?). For now, we assume that the insured population is the general GBD population. There is no endoscopy screening in the general GBD population, hence there are no PC states in the general population. Therefore prevalence_S, general population = 1 - prevalence_c414
+3. For stomach cancer, we are assuming there is a 5% H. pylori screening coverage in the insured population (double check if we want to bake this into the general population or we create an insured population for our baseline scenario?). For now, we assume that the insured population is the general GBD population. There is no endoscopy screening in theinsured population/general GBD population as there is no reliable data for this, hence all the cancers in the general population would have been detected as symptomatic clinical presentations. This means there are no PC states in the general population. Therefore prevalence_S, general population = 1 - prevalence_c414
 
 4. In our simulation, we will model th pre-clinical state because we will introduce endoscopy screening which will detect pre-clinical canceers and move pay-out forward (earlier). The prevalence of pre-clinical (the pre-clincial cancer is screen-detectable for stomach cancer) is assumed to be equal to incidence of pre-clinical cancer (per assumption #2, this would be i_c414 which is the GBD incidence rate among the susceptable population) x duration in the pre-clinical state which is the mean sojourn time (MST).
+
+5. In our simulation, we will intialize the model with nobody in the C state in line with the insured population: people cannot get insurance if they already know they have cancer. 
 
 
 Cause Model Diagram
 +++++++++++++++++++
 
-This causal diagram reflects the simulation population which is different from the general population (GBD). Note that the general population refers to the GBD population. 
 
 .. image:: cause_model_diagram.svg
+
+This causal diagram reflects the simulation population which is different from the general population (GBD). The simulation population reflects as close as possible the insured population. The simulation population has addition PC state and will be initlized with no one in the C state (the general population refers to the GBD population). We assume there is a 5% H. pylori coverage in the general population, and is the same in the simulation population.  
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
