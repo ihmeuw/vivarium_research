@@ -243,7 +243,7 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`prevalence_\text{PC} * ODF`
+     - :math:`\frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} * ODF`
      - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
@@ -349,7 +349,7 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence from GBD 2019
      - Not forecasted
    * - MST
-     - 2.06 years (95% CI: 0.42 - 3.83); normal distrbution of uncertainty at draw level
+     - Uniform distribution between 2.06 and 5.38 years
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
    * - AST
@@ -357,9 +357,9 @@ State and Transition Data Tables
      - Average survival time; mean duration of time between detection and death
      - ACMR: all cause-mortality rate for demographic group from GBD
    * - ODF
-     - 0.35 (0.2, 0.5); normal distribution of uncertainty at the draw level
+     - Triangle distribution of uncertainty with min=4, point=10, max=23. np.random.triangular(4, 10, 23)
      - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
-     - See details for sampling below. NOTE: placeholder value
+     - 
    * - :math:`screening_\text{baseline}`
      - 0.06
      - Baseline coverage of lung cancer screening by LDCT
@@ -381,36 +381,71 @@ State and Transition Data Tables
      - 
      - 
 
-.. todo::
+Since many of these equations are dependent on one another, they can be solved for using the optimization code below:
 
-	Update/confirm placeholder values
+.. code-block:: python
+
+  import numpy as np
+  from scipy.optimize import fsolve
+
+  """
+  # define constants
+  baseline_screening = 
+  mst = 
+  odf = 
+  prevalence_c426 = 
+  incidence_c426 = 
+  """
+
+  # solve independent values
+  incidence_c = 1/mst
+  incidence_r = 1/10
+  prevalence_c_model = 0
+  prevalence_c_pop = baseline_screening * prevalence_c426 * 1 / (1+odf) + (1 - baseline_screening) * prevalence_c426
+
+  # solve dependent values
+  def myfunction(z):
+      prevalence_s_model = z[0]
+      prevalence_pc_model = z[1]
+      prevalence_i_model = z[2]
+      prevalence_s_pop = z[3]
+      prevalence_pc_pop = z[4]
+      prevalence_i_pop = z[5]
+      incidence_pc = z[6]
+      incidence_i = z[7]
+      
+      F = np.empty((8))
+      F[0] = -prevalence_s_model + 1 - prevalence_pc_model - prevalence_i_model
+      F[1] = -prevalence_pc_model + (1 - baseline_screening) * incidence_pc * mst / (1 - prevalence_c_pop)
+      F[2] = -prevalence_i_model + incidence_pc * mst / (1 - prevalence_c_pop) * odf 
+      F[3] = -prevalence_s_pop + 1 - prevalence_i_pop - prevalence_pc_pop - prevalence_c_pop
+      F[4] = -prevalence_pc_pop + incidence_pc * mst
+      F[5] = -prevalence_i_pop + baseline_screening * prevalence_c426 * odf / (1+odf) + (1 - baseline_screening) * prevalence_pc_pop * odf
+      F[6] = -incidence_pc + (baseline_screening * incidence_c426 * 1 / (1+odf) + (1 - baseline_screening) * incidence_c426) / prevalence_s_pop
+      F[7] = -incidence_i + (baseline_screening * incidence_c426 * odf / (1+odf) + (1 - baseline_screening) * incidence_c426) / prevalence_s_pop
+      return F
+
+  zGuess = np.array([1-prevalence_c426, 
+                     prevalence_c426, 
+                     prevalence_c426*odf, 
+                     1-prevalence_c426, 
+                     prevalence_c426, 
+                     prevalence_c426,
+                     incidence_c426,
+                     incidence_c426*odf])
+  z = fsolve(myfunction,zGuess)
+
+  prevalence_s_model = z[0]
+  prevalence_pc_model = z[1]
+  prevalence_i_model = z[2]
+  prevalence_s_pop = z[3]
+  prevalence_pc_pop = z[4]
+  prevalence_i_pop = z[5]
+  incidence_pc = z[6]
+  incidence_i = z[7]
 
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 2.06
-  q_975 = 3.83
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for MST, representing uncertainty in the parameter
-  mst_distribution = norm(mean, std)
-
-.. note::
-
-  May consider adding individual-level variation to this parameter at a later date.
 
 **Research Background:**
 
@@ -455,34 +490,6 @@ Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time
 
 Cumulative Excess Incidence Factor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-.. warning::
-
-  This is currently a stand-in value based on the [Broderson-et-al-2020]_ meta-analysis finding that LDCT screening programs increase lung cancer incidence by 20% or 50% based on sensitivity analyses.
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 0.35
-  q_975 = 0.5
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for ODF, representing uncertainty in the parameter
-  odf_distribution = norm(mean, std)
-
-.. todo::
-
-  Update/confirm stand-in value... possibly with age-specific values from [Criss-et-al-2018]_
 
 **Research Background:**
 
