@@ -249,8 +249,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prev_PC = :math:`\frac{\text{i_c414}}{\text{(1 - prev_c414)^2}}` x MST 
-     - 
+     - prev_PC = :math:`\frac{\text{i_pc}}{\text{(1 - prev_c414)}}` x MST 
+     - we scale prev_PC by 1-prev_c414 to account for 0 prevalence in the C state at initialization
    * - PC
      - birth prevalence
      - 0
@@ -329,7 +329,7 @@ State and Transition Data Tables
 
 .. note::
 
-  * we need to draw from i_c414/(1-prev_c414) + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
+  * we need to draw from i_c414 at current age + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
