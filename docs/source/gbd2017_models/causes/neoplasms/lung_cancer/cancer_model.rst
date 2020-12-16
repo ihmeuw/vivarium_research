@@ -535,19 +535,53 @@ A retrospective cohort study of patients aged 50-74 screened by LDCT relative to
 Validation Criteria
 +++++++++++++++++++
 
+**Incidence**
+
 The following should be true:
 
   :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
 
-    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST. Each of these incidence rates should be defined with person-time in the *general population* as the denominator.
+    NOTE: Each of these incidence rates should be defined with person-time in the *general population* as the denominator.
 
-  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline}`
+    NOTE: in the early years of the simulation, simulation incidence will overestimate GBD incidence because the prevalence of the susceptible state at baseline is greater in the simulation than in GBD.
+
+    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST.
+
+  :math:`incidence_\text{PC(input)} \approx incidence_\text{PC(output)}`
+
+    NOTE: person-time in the susceptible state should be used as the denominator 
+
+  :math:`incidence_\text{I(input)} \approx incidence_\text{I(output)}`
+
+    NOTE: person-time in the susceptible state should be used as the denominator 
+
+  :math:`incidence_\text{C(input)} \approx incidence_\text{C(output)}`
+
+    NOTE: person-time in the preclinical state should be used as the denominator 
+
+  :math:`incidence_\text{R(input)} \approx incidence_\text{R(output)}`
+
+    NOTE: person-time in the clinical state should be used as the denominator
+
+**Prevalence**
+
+  :math:`prevalence_\text{c426} \approx prevalence_C + prevalence_I * screening_\text{baseline}`
 
     NOTE: The simulation prevalence will lag behind the forecasted prevalence in the early years of the simulation because of the assumption that there are no prevalent detected cancers at the start of the simulation.
 
     NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
 
+  :math:`prevalence_\text{c426} > prevalence_C`
+
+    NOTE: under the assumption of non-zero baseline screening coverage
+
+**Mortality**
+
+  :math:`emr_\text{C(input)} \approx emr_\text{C(output)}`
+
   :math:`csmr_\text{c426} \approx csmr_C`
+
+    NOTE: CSMR from the simulation will lag behind forecasts by the duration of MST. It will start lower than the forecast due to the assumption that there are no prevalent detected cases upon initialization. 
 
 .. note::  
   
