@@ -250,7 +250,7 @@ State and Transition Data Tables
    * - PC
      - prevalence
      - prev_PC = :math:`\frac{\text{i_pc}}{\text{(1 - prev_c414)}}` x MST 
-     - we scale prev_PC by 1-prev_c414 to account for 0 prevalence in the C state at initialization
+     - we scale prev_PC by 1-prev_c414 to account for 0 prevalence in the C state at initialization so as to preserve the ratio of people without stomach cancers to people with pre-clinical cancers. 
    * - PC
      - birth prevalence
      - 0
@@ -266,7 +266,7 @@ State and Transition Data Tables
    * - C
      - prevalence
      - 0
-     - 
+     - No clinical cancers at initialization because those with clinical cancers cannot purchase insurance and are therefore not included in our sim population. See assumption #5. 
    * - C
      - birth prevalence
      - 0
@@ -308,8 +308,8 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{\text{i_c414}}{\text{(1 - prev_c414)}}`
-     - *at age 'current age + MST'   
+     - :math:`\frac{\text{i_c414*}}{\text{(1 - prev_c414)}}`
+     - *draw at age 'current age + MST'   
    * - i_c
      - PC
      - C
