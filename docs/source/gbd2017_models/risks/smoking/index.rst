@@ -52,7 +52,7 @@ This risk exposure was forecast from 2020-2040 based on the GBD 2019 risk exposu
 Vivarium Modeling Strategy
 --------------------------
 
-The overall scope of the Vivarium modeling strategy for the smoking risk exposure for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` is that simulants will be assigned exposure values based on the exposure distribution for a given age-, sex-, location-, and year-specific demographic group and their exposure will be updated each time they move through these groups. Each simulant will be given a propensity score that determines the relative magnitude of their individual exposure value to the exposure distribution. However, this strategy does allow for the possibility of illogical smoking exposure transitions for individual simulants (i.e.: moving from a current smoker to a never smoker, decreases in pack-year exposure values over time).
+The overall scope of the Vivarium modeling strategy for the smoking risk exposure for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` is that simulants will be assigned exposure values based on the exposure distribution for a given age-, sex-, location-, and year-specific demographic group and their exposure will be updated each time they move through these groups. Each simulant will be given propensity scores that determines the relative magnitude of their individual exposure value to the exposure distribution(s). However, this strategy does allow for the possibility of illogical smoking exposure transitions for individual simulants (i.e.: moving from a current smoker to a never smoker, decreases in pack-year exposure values over time).
 
 .. todo::
 
@@ -121,7 +121,7 @@ A point-value of pack-years should be assigned to current smokers based on the f
 
 Pack-years among current smokers should be assigned as a categorical exposure value that is assigned in the following way:
 
-- Each simulant gets an individual propensity value, which is a random value between 0 and 1 (uniformly distributed). This propensity value does not change over the course of the simulant's life.
+- Each simulant gets an individual pack-year propensity value (pack_year_propensity_i), which is a random value between 0 and 1 (uniformly distributed). This propensity value does not change over the course of the simulant's life and should be separate and independent from smoking_status_propensity_i.
 
 - This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category divided by the sum of values across all exposure categories for each age/sex/year/location group.
 
