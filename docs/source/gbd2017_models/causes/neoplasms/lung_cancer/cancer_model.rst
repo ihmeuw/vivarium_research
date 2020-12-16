@@ -381,7 +381,7 @@ The following equation demonstrates how to solve for :math:`incidence_\text{PC}`
 
 .. math ::
 
-  a = -MST + (1 - screening_\text{baseline}) * MST * ODF
+  a = -MST - (1 - screening_\text{baseline}) * MST * ODF
 
 .. math ::
 
@@ -427,13 +427,13 @@ The below equations show a proof for the above equation.
   
   1 - prevalence_\text{C, general population} - incidence_\text{PC} * MST 
   
-  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF
+  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF)
 
 4. 
 
 .. math ::
 
-  0 = (-MST + (1 - screening_\text{baseline}) * MST * ODF) * {incidence_\text{PC}}^2 
+  0 = (-MST - (1 - screening_\text{baseline}) * MST * ODF) * {incidence_\text{PC}}^2 
 
   + (1 - prevalence_\text{C, general population} - screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF}) * incidence_\text{PC}
 
