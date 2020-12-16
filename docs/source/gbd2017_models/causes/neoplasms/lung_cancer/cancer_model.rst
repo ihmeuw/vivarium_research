@@ -397,7 +397,7 @@ The following equation demonstrates how to solve for :math:`incidence_\text{PC}`
 
 The below equations show a proof for the above equation.
 
-1.
+1a.
 
 .. math ::
 
@@ -405,13 +405,19 @@ The below equations show a proof for the above equation.
   
   - prevalence_\text{PC, general population} - prevalence_\text{I, general population}
 
+1b.
+
+.. math ::
+
+  incidence_\text{PC} = \frac{screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline} * incidence_\text{c426})}{prevalence_\text{S, general population}}
+
 2. 
 
 .. math ::
 
   prevalence_\text{S, general population} = 1 - prevalence_\text{C, general population} - incidence_\text{PC} * MST 
   
-  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF
+  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF)
 
 3. 
 
