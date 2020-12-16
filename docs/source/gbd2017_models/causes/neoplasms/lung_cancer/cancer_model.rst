@@ -409,7 +409,7 @@ The below equations show a proof for the above equation.
 
 .. math ::
 
-  incidence_\text{PC} = \frac{screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline} * incidence_\text{c426})}{prevalence_\text{S, general population}}
+  incidence_\text{PC} = \frac{screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426}}{prevalence_\text{S, general population}}
 
 2. 
 
