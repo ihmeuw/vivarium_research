@@ -227,7 +227,7 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - :math:`\frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} - \frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} * baseline_\text{screening}`
+     - :math:`(1 - screening_\text{baseline}) * \frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}}`
      - Note: :math:`incidence_\text{PC}` defined in table below. This assumes that there are no prevalent *detected* preclinical lung cancers
    * - PC
      - birth prevalence
