@@ -303,7 +303,7 @@ State and Transition Data Tables
      - S
      - PC
      - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_\text{S, general population}}`
-     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
+     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST. SEE SECTION BELOW FOR HOW TO CALCULATE.
    * - i_i
      - S
      - I
@@ -352,10 +352,6 @@ State and Transition Data Tables
      - Uniform distribution between 2.06 and 5.38 years
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
-   * - AST
-     - :math:`1/(ACMR - csmr_\text{c426} + \frac{csmr_\text{c426}}{prevalence_\text{C, general population}})`
-     - Average survival time; mean duration of time between detection and death
-     - ACMR: all cause-mortality rate for demographic group from GBD
    * - ODF
      - Triangle distribution of uncertainty with min=4, point=10, max=23. np.random.triangular(4, 10, 23)
      - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
@@ -366,83 +362,76 @@ State and Transition Data Tables
      - The value in this table should be used prior to implementation of the screening model, which will be defined in the :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>` and should then supercede the 0.06 value.
    * - :math:`prevalence_\text{C, general population}`
      - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
-     - Prevalence of clinical TBL cancer in the general (insured and uninsured) population
+     - Prevalence of clinical TBL cancer in the general (insured and uninsured) population. Will be used in incidence_pc equation
      - Should use the forecasted prevalence for this parameter
    * - :math:`prevalence_\text{PC, general population}`
      - :math:`incidence_\text{PC} * MST`
      - 
-     - 
+     - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
    * - :math:`prevalence_\text{I, general population}`
      - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC, general population} * ODF`
      - 
-     - 
+     - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
    * - :math:`prevalence_\text{S, general population}`
      - :math:`1 - prevalence_\text{C, general population} - prevalence_\text{PC, general population} - prevalence_\text{I, general population}`
      - 
-     - 
+     - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
 
-Since many of these equations are dependent on one another, they can be solved for using the optimization code below:
+The following equation demonstrates how to solve for :math:`incidence_\text{PC}` based on the dependent equalities for the definitions of :math:`incidence_\text{c426}` and :math:`prevalence_\text{S, general population}`.
 
-.. code-block:: python
+.. math ::
 
-  import numpy as np
-  from scipy.optimize import fsolve
+  a = -MST + (1 - screening_\text{baseline}) * MST * ODF
 
-  """
-  # define constants
-  baseline_screening = 
-  mst = 
-  odf = 
-  prevalence_c426 = 
-  incidence_c426 = 
-  """
+.. math ::
 
-  # solve independent values
-  incidence_c = 1/mst
-  incidence_r = 1/10
-  prevalence_c_model = 0
-  prevalence_c_pop = baseline_screening * prevalence_c426 * 1 / (1+odf) + (1 - baseline_screening) * prevalence_c426
+  b = 1 - prevalence_\text{C, general population} - screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF}
 
-  # solve dependent values
-  def myfunction(z):
-      prevalence_s_model = z[0]
-      prevalence_pc_model = z[1]
-      prevalence_i_model = z[2]
-      prevalence_s_pop = z[3]
-      prevalence_pc_pop = z[4]
-      prevalence_i_pop = z[5]
-      incidence_pc = z[6]
-      incidence_i = z[7]
-      
-      F = np.empty((8))
-      F[0] = -prevalence_s_model + 1 - prevalence_pc_model - prevalence_i_model
-      F[1] = -prevalence_pc_model + (1 - baseline_screening) * incidence_pc * mst / (1 - prevalence_c_pop)
-      F[2] = -prevalence_i_model + incidence_pc * mst / (1 - prevalence_c_pop) * odf 
-      F[3] = -prevalence_s_pop + 1 - prevalence_i_pop - prevalence_pc_pop - prevalence_c_pop
-      F[4] = -prevalence_pc_pop + incidence_pc * mst
-      F[5] = -prevalence_i_pop + baseline_screening * prevalence_c426 * odf / (1+odf) + (1 - baseline_screening) * prevalence_pc_pop * odf
-      F[6] = -incidence_pc + (baseline_screening * incidence_c426 * 1 / (1+odf) + (1 - baseline_screening) * incidence_c426) / prevalence_s_pop
-      F[7] = -incidence_i + (baseline_screening * incidence_c426 * odf / (1+odf) + (1 - baseline_screening) * incidence_c426) / prevalence_s_pop
-      return F
+.. math ::
 
-  zGuess = np.array([1-prevalence_c426, 
-                     prevalence_c426, 
-                     prevalence_c426*odf, 
-                     1-prevalence_c426, 
-                     prevalence_c426, 
-                     prevalence_c426,
-                     incidence_c426,
-                     incidence_c426*odf])
-  z = fsolve(myfunction,zGuess)
+  c = -(screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426})
 
-  prevalence_s_model = z[0]
-  prevalence_pc_model = z[1]
-  prevalence_i_model = z[2]
-  prevalence_s_pop = z[3]
-  prevalence_pc_pop = z[4]
-  prevalence_i_pop = z[5]
-  incidence_pc = z[6]
-  incidence_i = z[7]
+.. math ::
+
+  incidence_\text{PC} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
+
+The below equations show a proof for the above equation.
+
+1.
+
+.. math ::
+
+  prevalence_\text{S, general population} = 1 - prevalence_\text{C, general population} 
+  
+  - prevalence_\text{PC, general population} - prevalence_\text{I, general population}
+
+2. 
+
+.. math ::
+
+  prevalence_\text{S, general population} = 1 - prevalence_\text{C, general population} - incidence_\text{PC} * MST 
+  
+  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF
+
+3. 
+
+.. math :: 
+
+  \frac{screening_\text{baseline}*incidence_\text{c426}*\frac{1}{1+ODF} + (1-screening_\text{baseline})*incidence_\text{c426}}{incidence_\text{PC}} = 
+  
+  1 - prevalence_\text{C, general population} - incidence_\text{PC} * MST 
+  
+  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF
+
+4. 
+
+.. math ::
+
+  0 = (-MST + (1 - screening_\text{baseline}) * MST * ODF) * {incidence_\text{PC}}^2 
+
+  + (1 - prevalence_\text{C, general population} - screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF}) * incidence_\text{PC}
+
+  - (screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426})
 
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
