@@ -426,7 +426,7 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 5.6 Output meta-table shell
 ---------------------------
 
-:download:`output table shell<output_table_shell_stomachcancer.csv>`
+:download:`output table shell<output_table_shell_stomach_cancer.xlsx>`
 
 
 .. _5.7:
