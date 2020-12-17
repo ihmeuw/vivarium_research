@@ -243,7 +243,7 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`\frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} * ODF`
+     - :math:`prevalence_\text{PC} * ODF`
      - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
