@@ -183,7 +183,7 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - TPP target/potentially Ceesay et al 1997 BMJ
    * - d and d'0 (∆BEP_norm)
      - BEP vs control (we interpret this as MMS) on birthweight in g among adequately nourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
-     - +15.93 (-20.83 to 52.69) dor d0
+     - +15.93 (-20.83 to 52.69) for d0
      - Ota 2015 Cochrane review
      - +15.93 (-20.83 to 52.69) for d'0
      - Ota 2015 Cochrane review
