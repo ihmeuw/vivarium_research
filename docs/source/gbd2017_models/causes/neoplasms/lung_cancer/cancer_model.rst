@@ -349,11 +349,11 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence from GBD 2019
      - Not forecasted
    * - MST
-     - Uniform distribution between 2.06 and 5.38 years
+     - Normal distribution of uncertainty about mean: 3.82 years (95% CI: 0.57, 7.07), standard deviation=1.66 (derived from 95% CI) 
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
      - See below for instructions on how to sample and research background. NOTE: may update this value
    * - ODF
-     - Triangle distribution of uncertainty with min=4, point=10, max=23. np.random.triangular(4, 10, 23)
+     - Triangle distribution of uncertainty with min=0.04, point=0.10, max=0.23. np.random.triangular(0.04, 0.10, 0.23)
      - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
      - 
    * - :math:`screening_\text{baseline}`
@@ -473,9 +473,11 @@ A systematic literature search was performed to obtain estimates of the mean soj
      - 5.38 years (95% CI: 4.76, 5.88)
      - 
 
-Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ paper as the data source for the mean sojourn time in this model. 
+Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ and [Gonzalez-Maldonado-et-al-2020]_ papers as the data sources for the mean sojourn time in this model and ran a random effects meta-analysis on these two studies for a summary parameter, shown below.
 
-  Notably, this is limited in that it does not consider variation by sex or histology.
+.. image:: mst_meta_analysis.svg
+
+Notably, this is limited in that it does not consider variation by sex or histology.
 
 Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time of lung cancer tumors (a measure related to mean sojourn time) did not significantly vary by age or pack-year cigarette consumption. 
 
