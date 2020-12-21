@@ -307,8 +307,8 @@ reinfection in adulthood are rare (add ref) and will not allowed in our model.
 - Let PAF be the population attributable fraction of H. pylori on GC among the S population
 - Let RR be the ratio of the probability of developing the outcome GC in the exposed to H. pylori gourp versus the probability of developing the outcome GC in the unexposed to H. pylori group among the S state population.
 
-(1) :math:`RR_{hp}` = 4.5 (95%CI need reference and UI) for China population
-(2) :math:`P_{hp{s}}` = 0.44
+(1) :math:`RR_{hp}` = 1.89 (95%CI: 1.57 to 2.26) [Jiang Eur J Clin Microbiol Infect Dis 2017]
+(2) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
 (3) PAF= :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}`
 (4) 1-PAF= 
 
