@@ -234,9 +234,35 @@ Click here to download notebook exploring the forecasted acmr data .nc files: :d
 see :ref:`stomach cancer model <2017_stomach_cancer>`
 
 
-.. _5.3.1.1:
-5.3.1.1 Prevalence of pre-cancerous states
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _5.3.2:
+5.3.2 H. pylori risk factor model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+We assume there is a 5% baseline primary prevention programme of H. pylori screening and treatment in the general population. We also assume that the prevalence of H. Pylori in the general population has accounted for this level of screening. 
+
+:underline:`1. From susceptable S state to PC state`
+
+
+- Let H. pylori infection be denoted as hp
+- Let the prevalence of H. pylori **among the S state population** be :math:`P_{hp{s}}`
+- Let i_pc be the overall incidence from S state to PC state (:ref:`see stomach cancer model for i_GCvalue <2017_cancer_model_stomachcancer>`)
+- Let Incidence among those with H. pylori be  :math:`i_{pc{|hp+}}`
+- Let Incidence among those without H. pylori be :math:`i_{pc{|hp-}}`
+- Let PAF be the population attributable fraction of H. pylori on gastric cancer among the S population
+- Let RR be the ratio of the probability of developing the outcome PC in the exposed to H. pylori gourp versus the probability of developing the outcome PC in the unexposed to H. pylori group among the S state population.
+
+(1) :math:`RR_{hp}` = 1.89 (95%CI: 1.57 to 2.26) [Jiang Eur J Clin Microbiol Infect Dis 2017]
+(2) :math:`P_{hp{s}}` = 0.4457 (9%CI: 0.4141 to 0.4778) []
+(3) PAF = :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}` = 
+(4) 1-PAF = 
+
+(5) :math:`i_{pc{|hp+}} =  i_{pc}\times(1-PAF)\times RR_{hp}`
+(6) :math:`i_{pc{|hp-}} =  i_{pc}\times(1-PAF)`
+
+
+.. _5.3.3:
+5.3.3 Prevalence of pre-cancerous states stratified by H. pylori status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A. Obtain age-specific prevalence distributions of pre-cancerous states from cross-sectional studies/cohort from young age in populations with similar risks of 
  - H. pylori prevalence
@@ -245,7 +271,7 @@ A. Obtain age-specific prevalence distributions of pre-cancerous states from cro
 
 
 +--------------------------------------------------------------------------------+
-| Age-specific prevalence of pre-cancerous states                                | 
+| Age-specific prevalence of pre-cancerous states among H. pylori negative (-)   | 
 +===========+===========+===========+============+===========+========+==========+
 | age-bands | Normal    | Gastritis | Atrophy    | IM        | DYS    |    GC    |     
 +-----------+-----------+-----------+------------+-----------+--------+----------+
@@ -263,14 +289,30 @@ A. Obtain age-specific prevalence distributions of pre-cancerous states from cro
 +-----------+-----------+-----------+------------+-----------+--------+----------+       
   
 
++--------------------------------------------------------------------------------+
+| Age-specific prevalence of pre-cancerous states among H. pylori positive (+)   | 
++===========+===========+===========+============+===========+========+==========+
+| age-bands | Normal    | Gastritis | Atrophy    | IM        | DYS    |    GC    |     
++-----------+-----------+-----------+------------+-----------+--------+----------+
+| 35-39     |           |           |            |           |        |          |    
++-----------+-----------+-----------+------------+-----------+--------+----------+                                                  
+| 40-44     |           |           |            |           |        |          |   
++-----------+-----------+-----------+------------+-----------+--------+----------+
+| 45-49     |           |           |            |           |        |          |   
++-----------+-----------+-----------+------------+-----------+--------+----------+
+| 50-54     |           |           |            |           |        |          |   
++-----------+-----------+-----------+------------+-----------+--------+----------+
+| 55-59     |           |           |            |           |        |          |   
++-----------+-----------+-----------+------------+-----------+--------+----------+
+| 60-64     |           |           |            |           |        |          |   
++-----------+-----------+-----------+------------+-----------+--------+----------+       
+  
+
+
 Obtain prevalence of pre-cancerous states by either:
   - 1 - prev_c414 x distribution of each state/total precancerous states OR
   - use prevalence ratio of precancerous state to cancer state
 
-
-.. _5.3.1.2: 
-5.3.1.2 Distribution of H. pylori among pre-cancerous states and cancer state
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 B. Obtain H. pylori distribution by age and pre-cancerous state
  
@@ -279,10 +321,7 @@ reinfection in adulthood are rare (add ref) and will not allowed in our model.
 
 .. note::
  - method from Yeh 2008:
-  A meta-analysis of 12 case-control studies nested in prospective cohorts in multiple countries, including the United States, the United Kingdom, Japan, and China, found that 91.5%
-  of all gastric cancers were H. pylori+ among controls with a H. pylori prevalence of 64.6% using blood samples collected more than 10 years before cancer diagnosis and
-  case-control sets matched on sex, age, and date of sampling (Helicobactor and Cancer Collab Group, Gut, 2001). Based on this epidemiologic evidence, we can assume that 92% of gastric cancers would be
-  H. pylori+, where 44% ( :math:`P_{hp{s}}` that we will use) are H. pylori infected in the total population.
+  A meta-analysis of 12 case-control studies nested in prospective cohorts in multiple countries, including the United States, the United Kingdom, Japan, and China, found that 91.5%   of all gastric cancers were H. pylori+ among controls with a H. pylori prevalence of 64.6% using blood samples collected more than 10 years before cancer diagnosis and  case-control sets matched on sex, age, and date of sampling (Helicobactor and Cancer Collab Group, Gut, 2001). Based on this epidemiologic evidence, we can assume that 92% of gastric cancers would be   H. pylori+, where 44% ( :math:`P_{hp{s}}` that we will use) are H. pylori infected in the total population.
 
  - We can then calculate the distribution among the precancerous health states for a cohort of 100% H. pylori+ individuals by assuming that 92% of dysplasia, intestinal, metaplasia, and atrophy prevalence is attributable to those who were infected with H. pylori. Similar calculations can be conducted to estimate the distribution for a cohort of H. pylori- individuals
 
@@ -291,36 +330,9 @@ reinfection in adulthood are rare (add ref) and will not allowed in our model.
  - NOTE check the studies to make sure this method is ok for all gastric cancers (cardia + non-cardia)
 
 
-
-.. _5.3.2:
-5.3.2 H. pylori risk factor model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-:underline:`1. From susceptable S state to GC state`
-
-
-- Let H. pylori infection be denoted as hp
-- Let the prevalence of H. pylori **among the S state population** be :math:`P_{hp{s}}`
-- Let i_GC be the overall incidence from S state to GC state (:ref:`see stomach cancer model for i_GCvalue <2017_cancer_model_stomachcancer>`)
-- Let Incidence among those with H. pylori be  :math:`i_{GC{|hp+}}`
-- Let Incidence among those without H. pylori be :math:`i_{GC{|hp-}}`
-- Let PAF be the population attributable fraction of H. pylori on GC among the S population
-- Let RR be the ratio of the probability of developing the outcome GC in the exposed to H. pylori gourp versus the probability of developing the outcome GC in the unexposed to H. pylori group among the S state population.
-
-(1) :math:`RR_{hp}` = 4.5 (95%CI need reference and UI) for China population
-(2) :math:`P_{hp{s}}` = 0.44
-(3) PAF= :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}`
-(4) 1-PAF= 
-
-
-(5) :math:`i_{GC{|hp+}} =  i_{GC}\times(1-PAF)\times RR_{hp}`
-(6) :math:`i_{GC{|hp-}} =  i_{GC}\times(1-PAF)`
-
-
-
-5.3.3 Screening and detection model
+.. _5.3.4:
+5.3.4 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 
 .. image:: stomachcancer_screening_tree.svg
 
@@ -374,17 +386,17 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 | Pre-cancer      | H. pylori +ve                 | H. pylori -ve             |
 | States          |                               |                           |        
 +-----------------+-------------------------------+---------------------------+
-| Normal (N)      | :math:`i_{GC{|hp+}}` x 0.64   | :math:`i_{GC{|hp-}}`      |
+| Normal (N)      | :math:`i_{pc{|hp+}}` x 0.64   | :math:`i_{pc{|hp-}}`      |
 +-----------------+-------------------------------+---------------------------+                                                   
-| Gastritis (G)   | :math:`i_{GC{|hp+}}` x 0.64   | :math:`i_{GC{|hp-}}`      | 
+| Gastritis (G)   | :math:`i_{pc{|hp+}}` x 0.64   | :math:`i_{pc{|hp-}}`      | 
 +-----------------+-------------------------------+---------------------------+       
-| Atrophic (AG)   | :math:`i_{GC{|hp+}}` x 0.64   | :math:`i_{GC{|hp-}}`      |  
+| Atrophic (AG)   | :math:`i_{pc{|hp+}}` x 0.64   | :math:`i_{pc{|hp-}}`      |  
 | Gastritis       |                               |                           |
 +-----------------+-------------------------------+---------------------------+          
-| Intestinal      | :math:`i_{GC{|hp+}}` x 0.88   | :math:`i_{GC{|hp-}}`      |
+| Intestinal      | :math:`i_{pc{|hp+}}` x 0.88   | :math:`i_{pc{|hp-}}`      |
 | Metaplasia (IM) |                               |                           |          
 +-----------------+-------------------------------+---------------------------+         
-| Dysplasia (DYS) | :math:`i_{GC{|hp+}}` x 0.88   | :math:`i_{GC{|hp-}}`      |     
+| Dysplasia (DYS) | :math:`i_{pc{|hp+}}` x 0.88   | :math:`i_{pc{|hp-}}`      |     
 |                 |                               |                           |        
 +-----------------+-------------------------------+---------------------------+
 
@@ -426,7 +438,7 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 5.6 Output meta-table shell
 ---------------------------
 
-:download:`output table shell<output_table_shell_stomachcancer.csv>`
+:download:`output table shell<output_table_shell_stomach_cancer.csv>`
 
 
 .. _5.7:

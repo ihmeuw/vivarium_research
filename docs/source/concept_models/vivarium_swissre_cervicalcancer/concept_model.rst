@@ -563,7 +563,9 @@ relevant formulas
  (5) :math:`\text{incidence_BCC_S_hrHPV_without_vaccine} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_no_vaccine_CIN2+}`
  (6) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
  (7) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
-
+ (8) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
+ (9) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
+ 
 .. _5.3.4:
 
 5.3.4 Treatment model
