@@ -337,7 +337,7 @@ State and Transition Data Tables
      - CSU TBL cancer cause specific mortality rate forecast
      - 2020-2040; defined as deaths per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - incidence_rate_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - /ihme/csu/swiss_re/forecast/426_incidence_12_21.nc
      - CSU TBL cancer cause-specific mortality rate forecast
      - 2020-2040; defined as incidence cases per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - disability_weight_s{273, 274, 275, 276}
@@ -530,9 +530,9 @@ A retrospective cohort study of patients aged 50-74 screened by LDCT relative to
 
 [Sone-et-al-2007]_ conducted a long-term follow-up study of a population-based mass CT screening program among those aged 40-74 in Japan and estimated that 13.3% of cases might be overdiagnosed. Postoperative follow-up of the 50 survived patients ranged from 70 to 117 (median, 101) months. Notably, this study relied on the assumption of constant tumor volume doubling time and noted that if this assumption does not hold that the number of over-diagnosed cases would be smaller. Additionally, the study population included never and light smokers, which they noted had tumors with slower volume doubling times and therefore were more likely to be overdiagnosed than smokers. 
 
-.. note::
+The following random effects meta-analysis shows the summary estimates of ODF grouped by study design. Notably, [Criss-et-al-2018]_ was excluded from this meta-analysis because confidence intervals were not reported and confidence intervals for [Sone-et-al-2007]_ were calculated based on the reported sample size and proportion.
 
-  The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be highly sensitive to this parameter. Given that there is so much variation and contraversy around the degree of overdiagnosis in LDCT screening programs, this is a value that we should reach consensus on with the client. 
+.. image:: odf_meta_analysis.svg
 
 Validation Criteria
 +++++++++++++++++++
