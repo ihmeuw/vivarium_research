@@ -320,6 +320,10 @@ Assumptions and Limitations
 
 This model is limited in that it only considers smoking attributable deaths due to IHD and COPD (as well as lung cancer when modeled as a part of the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`) and not the totality of smoking attributable deaths.
 
+.. todo::
+
+  Quantify the approx. proportion
+
 Cause Model Diagram
 +++++++++++++++++++
 
@@ -357,10 +361,21 @@ Where,
     - Defined in :ref:`the smoking risk effects documentation page <2017_risk_effect_smoking>` for lung cancer, COPD, and IHD
   * - :math:`PAF_\text{c}`
     - Population attributable fraction for smoking on mortality due to cause c
-    - :math:`\frac{\overline{RR(i)_c} - 1}{\overline{RR(i)_c}}`
+    - :math:`\frac{\overline{RR(i)_c} - 1}{\overline{RR(i)_c}}` (details in :ref:`the smoking risk effects page <2017_risk_effect_smoking>`)
   * - :math:`EMR(i)_\text{c426}`
     - Excess mortality rate of lung cancer for an individual simulant (based on cause model state)
     - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`; use forecasted 2019 value
+  * - c426
+    - Lung cancer
+    - 
+  * - c496
+    - Ischemic heart disease (IHD)
+    - 
+  * - c509
+    - Chronic obstructive pulmonary disease (COPD)
+    - 
+
+
 
 Data Tables
 ++++++++++++++++++++++++++++++++
