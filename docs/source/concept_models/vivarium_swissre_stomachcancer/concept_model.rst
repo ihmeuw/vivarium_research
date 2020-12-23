@@ -132,9 +132,9 @@ To estimate the yearly number of cases of stomach cancer detected under specific
 3.2 Effect and impact size
 --------------------------
 
-RR of H. pylori = 4.5 
-Exposure of H. pylori = 44%
-PAF of H. pylori = 60%
+RR of H. pylori = 1.89
+Exposure of H. pylori = 55%
+PAF of H. pylori = 
 
 .. _4.0:
 
@@ -198,28 +198,34 @@ XX% of insured Chinese male/female initiated stomach cancer screening in 2020, s
 *Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
 
 
-+--------------------------------------------------------------------------------------------------------+
-| Population size weight table                                                                           | 
-+============+=============+========+===============+====================================================+
-| Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                       |
-+------------+-------------+--------+---------------+----------------------------------------------------+
-| Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                           |
-+------------+-------------+--------+---------------+ :download:`acmr<filepaths_acmr_c414_forecast.xlsx>`|                                             
-| Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                                    |
-+------------+-------------+--------+---------------+ Note: GBD does not produce estimates below         |
-| Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for         |
-+------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing           |
-| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights (not shown) that was      |
-+------------+-------------+--------+---------------+ given by CSU to get total province weights         |
-| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | for Guangdong and Heilongjiang.                    |
-| jiang      |             |        |               |                                                    |
-+------------+-------------+--------+---------------+----------------------------------------------------+
++-----------------------------------------------------+
+| Population size weight table                        | 
++============+=============+========+=================+
+| Province   | location_id | Weight | Weighted ACMR   | 
++------------+-------------+--------+-----------------+
+| Tianjian   |  517        | 18%    | e^(acmr) x 0.18 |                                            
++------------+-------------+--------+-----------------+                                              
+| Jiangsu    |  506        | 28%    | e^(acmr) x 0.28 |                                                    
++------------+-------------+--------+-----------------+         
+| Guangdong  |  496        | 22%    | e^(acmr) x 0.22 | 
++------------+-------------+--------+-----------------+ 
+| Henan      |  502        | 16%    | e^(acmr) x 0.16 | 
++------------+-------------+--------+-----------------+ 
+| Heilong-   |  501        | 16%    | e^(acmr) x 0.16 | 
+| jiang      |             |        |                 |                                                    
++------------+-------------+--------+-----------------+
+
+file paths for 2019 forecast data:
+
+   ACMR: used transformed data from breast cancer
+   incidence:  /ihme/csu/swiss_re/forecast/414_incidence_12_15.csv
+   prevalence: /ihme/csu/swiss_re/forecast/414_prevalence_12_15.csv
+   cause-specific mortality: /ihme/csu/swiss_re/forecast/414_deaths_12_15.csv
 
 .. note::
 
-  Note about 'mr' in the column 'Weighted ACMR' in the above table: The forecasted data is stored in .nc files. The acmr estimate under column labelled as 'mr' is in log space with base natural e. To get the simulation population's all-cause mortality rate (acmr), first take the exponential of the mr values for location in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the exp transformation is in person years. Multiply by 100,000 to get per 100,000 person years.    
+    Multiply acmr, csmr and incidence by 100,000 to get cases per 100,000
 
-Click here to download notebook exploring the forecasted acmr data .nc files: :download:`forecast data <xxxxxxxx.ipynb>`   
 
 .. _5.3:
 5.3 Models
@@ -252,7 +258,7 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 - Let RR be the ratio of the probability of developing the outcome PC in the exposed to H. pylori gourp versus the probability of developing the outcome PC in the unexposed to H. pylori group among the S state population.
 
 (1) :math:`RR_{hp}` = 1.89 (95%CI: 1.57 to 2.26) [Jiang Eur J Clin Microbiol Infect Dis 2017]
-(2) :math:`P_{hp{s}}` = 0.4457 (9%CI: 0.4141 to 0.4778) []
+(2) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
 (3) PAF = :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}` = 
 (4) 1-PAF = 
 
