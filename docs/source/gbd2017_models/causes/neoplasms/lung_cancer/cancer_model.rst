@@ -549,6 +549,8 @@ The following should be true:
 
     NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST.
 
+  :math:`incidence_\text{PC} * ODF \approx incidence_I`
+
   :math:`incidence_\text{PC(input)} \approx incidence_\text{PC(output)}`
 
     NOTE: person-time in the susceptible state should be used as the denominator 
