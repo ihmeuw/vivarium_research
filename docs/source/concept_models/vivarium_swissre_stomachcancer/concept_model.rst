@@ -270,70 +270,81 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 5.3.3 Prevalence of pre-cancerous states stratified by H. pylori status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A. Obtain age-specific prevalence distributions of pre-cancerous states from cross-sectional studies/cohort from young age in populations with similar risks of 
+To make this section easier to follow, we define
+  - p_i = prevalence of i
+  - f_i = fraction of i that is H. pylori positive 
+  - i = pre-cancer states of normal/chronic gastritis (NCG), atrophic gastritis (AG), intestinal metaplasia (IM), dysplasia (DYS)
+
+
+:underline:`A. Pre-cancerous states`
+
+Ideally we obtain age-specific distribution of pre-cancer state prevalence from cross-sectional studies/cohort starting from young age in populations with similar risks of 
+
  - H. pylori prevalence
  - urban
  - China
 
+.. todo::
 
-+--------------------------------------------------------------------------------+
-| Age-specific prevalence of pre-cancerous states among H. pylori negative (-)   | 
-+===========+===========+===========+============+===========+========+==========+
-| age-bands | Normal    | Gastritis | Atrophy    | IM        | DYS    |    GC    |     
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 35-39     |           |           |            |           |        |          |    
-+-----------+-----------+-----------+------------+-----------+--------+----------+                                                  
-| 40-44     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 45-49     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 50-54     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 55-59     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 60-64     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+       
-  
-
-+--------------------------------------------------------------------------------+
-| Age-specific prevalence of pre-cancerous states among H. pylori positive (+)   | 
-+===========+===========+===========+============+===========+========+==========+
-| age-bands | Normal    | Gastritis | Atrophy    | IM        | DYS    |    GC    |     
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 35-39     |           |           |            |           |        |          |    
-+-----------+-----------+-----------+------------+-----------+--------+----------+                                                  
-| 40-44     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 45-49     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 50-54     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 55-59     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+
-| 60-64     |           |           |            |           |        |          |   
-+-----------+-----------+-----------+------------+-----------+--------+----------+       
-  
+  this prevalence distribution table was adapted from a Korean population. Will dig deeper into the literature to see if we can find age-specific prevalences in China with similar H pylori prevalence. I tried with You 1993's distributions for high risk population with 70% H. pylori prevalence and it doesnt work for 55% prevalence. 
 
 
-Obtain prevalence of pre-cancerous states by either:
-  - 1 - prev_c414 x distribution of each state/total precancerous states OR
-  - use prevalence ratio of precancerous state to cancer state
++--------------------------------------------------------------------+
+| Age-specific prevalence (p_i) of pre-cancerous states (Kang 2015)  |   
++===========+===================+===========+============+===========+
+| age-bands | Normal /Gastritis | Atrophy   | IM         | DYS       |  
++-----------+-------------------+-----------+------------+-----------+
+| <40       | 0.650             |  0.250    | 0.100      | 0.000     |          
++-----------+-------------------+-----------+------------+-----------+                                             
+| 40-49     | 0.650             |  0.250    | 0.100      | 0.000     |        
++-----------+-------------------+-----------+------------+-----------+
+| 50-59     | 0.571             |  0.280    | 0.148      | 0.001     |  
++-----------+-------------------+-----------+------------+-----------+
+| 60-69     | 0.471             |  0.321    | 0.201      | 0.007     |        
++-----------+-------------------+-----------+------------+-----------+
+| 70-80     | 0.432             |  0.332    | 0.231      | 0.005     |        
++-----------+-------------------+-----------+------------+-----------+
+| 80+       | 0.474             |  0.313    | 0.192      | 0.022     |        
++-----------+-------------------+-----------+------------+-----------+  
 
+Each row sums up to 1. 
 
-B. Obtain H. pylori distribution by age and pre-cancerous state
+We first need to obtain a pre-cancerous state. To do that we give every simulant a pre-cancer state propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 np.random.uniform(). 
+
+With the simulant's pre-cancer propensity and age, use the table above to figure out what pre-cancer state this corresponds to and assign this to the simulant. Update the simulants pre-cancer states as they age through the simulation.   
+
+:underline:`B. Obtain H. pylori status conditional upon age and pre-cancerous state`
  
-*H. pylori epidemiology*. Individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected (add ref). New infections and 
-reinfection in adulthood are rare (add ref) and will not allowed in our model. 
+*H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and 
+reinfection in adulthood are rare (add ref) and will not be allowed in our model. We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
 
-.. note::
- - method from Yeh 2008:
-  A meta-analysis of 12 case-control studies nested in prospective cohorts in multiple countries, including the United States, the United Kingdom, Japan, and China, found that 91.5%   of all gastric cancers were H. pylori+ among controls with a H. pylori prevalence of 64.6% using blood samples collected more than 10 years before cancer diagnosis and  case-control sets matched on sex, age, and date of sampling (Helicobactor and Cancer Collab Group, Gut, 2001). Based on this epidemiologic evidence, we can assume that 92% of gastric cancers would be   H. pylori+, where 44% ( :math:`P_{hp{s}}` that we will use) are H. pylori infected in the total population.
++--------------------------------------------------------------------+
+| Fraction of pre-cancer state that is H. pylori positive + (f_i)    |   
++===========+===================+===========+============+===========+
+| age-bands | Normal /Gastritis | Atrophy   | IM         | DYS       |  
++-----------+-------------------+-----------+------------+-----------+
+| <40       | 0.36              |  0.9      |  0.9       |  0.9      |          
++-----------+-------------------+-----------+------------+-----------+                                             
+| 40-49     | 0.36              |  0.9      |  0.9       |  0.9      |        
++-----------+-------------------+-----------+------------+-----------+
+| 50-59     | 0.29              |  0.9      |  0.9       |  0.9      |  
++-----------+-------------------+-----------+------------+-----------+
+| 60-69     | 0.16              |   0.9     |  0.9       |  0.9      |        
++-----------+-------------------+-----------+------------+-----------+
+| 70-80     | 0.09              |   0.9     |  0.9       |  0.9      |        
++-----------+-------------------+-----------+------------+-----------+
+| 80+       | 0.16              |   0.9     |  0.9       |  0.9      |        
++-----------+-------------------+-----------+------------+-----------+  
 
- - We can then calculate the distribution among the precancerous health states for a cohort of 100% H. pylori+ individuals by assuming that 92% of dysplasia, intestinal, metaplasia, and atrophy prevalence is attributable to those who were infected with H. pylori. Similar calculations can be conducted to estimate the distribution for a cohort of H. pylori- individuals
+Each cell is a proportion out of 1. 
 
- - read technical appendix for method and equations to do calcuations
+Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 np.random.uniform(). Using the simulant's pre-cancer state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
 
- - NOTE check the studies to make sure this method is ok for all gastric cancers (cardia + non-cardia)
+To see how the above two tables were derived, see :download:` Method workbook <precancer_states_and_hpylori_memo_21dec2020.xlsx>`
+
+.. todo::
+
+  write up a narrative description to accompany the workbook. also, upload python notebook on vivarium_data_analysis and create link. 
 
 
 .. _5.3.4:
