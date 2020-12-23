@@ -311,27 +311,29 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The Vivarium modeling strategy outlined in this document will be a **mortality only** model that combines several causes within GBD. This model is intended to be pair with the :ref:`smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
+The Vivarium modeling strategy outlined in this document will be a **mortality only** model that utilizes forecasted cause-specific mortality rates for ischemic heart disease (IHD) and chronic obstructive pulmomary disease (COPD) from 2020 to 2040. These causes were selected because they represent a large share of all smoking-related mortality without needing to model several additional causes with smaller contributions. This model is intended to be pair with the :ref:`smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
 
-Rather than individual measure the relative risk of mortality due to each individual smoking affected cause to create an overall summary relative risk of mortality due to smoking affected causes, this model will use the all cause mortality PAF for smoking, subtract out the contribution of lung cancer, and then back-calculate a summary relative risk for all smokers (including current and former). 
-
-This model was designed for use in the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`, which uses data forecasted from 2020 to 2040. However, with the exception of smoking prevalence and lung cancer data, other parameters were not forecasted over this period. Therefore, this model will make use of GBD 2019 data for 2019 only. Additionally, this model excludes the contributions of lung cancer as a source of smoking-related mortality because lung cancer will be modeled separately for this project.
+This model was designed for use in the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`, which uses data forecasted from 2020 to 2040. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Assuming a single relative risk of mortality due to all causes except for lung cancer among current and former smokers will underestimate the mortality rate for current smokers with high pack-year exposures and former smokers with low years since quitting and overestimate the mortality rate for current smokers with low pack-year exposures and former smokers with high years since quitting. 
-
-Given that not all data was forecasted, this model assumes that the mean relative risk of mortality among all current and former smokers does not change from 2019 to 2040; in other words, there is relatively little change in pack-year values among current smokers and years since quitting values among former smokers for the same demographic groups over time. 
+This model is limited in that it only considers smoking attributable deaths due to IHD and COPD (as well as lung cancer when modeled as a part of the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`) and not the totality of smoking attributable deaths.
 
 Cause Model Diagram
 +++++++++++++++++++
 
 There is no cause model diagram for this cause model because it is a mortality-only model. Mortality using should be modeled as follows:
 
-.. math::
+.. math ::
 
-	mr_i = (ACMR - CSMR_\text{c426}) * (1 - PAF_\text{*}) * RR_i + EMR(i)_\text{c426}
+	mr_i = ACMR - CSMR_\text{c426} - CSMR_\text{c493} - CSMR_\text{c509} 
+
+  + CSMR_\text{c493} * (1 - PAF_\text{c493}) * RR(i)_\text{c493}  
+
+  + CSMR_\text{c509} * (1 - PAF_\text{c509}) * RR(i)_\text{c509}  
+
+  + EMR(i)_\text{c426} * (1 - PAF_\text{c426}) * RR(i)_\text{c426}
 
 Where, 
 
@@ -347,15 +349,15 @@ Where,
   * - :math:`mr_i`
     - Mortality rate for an individual simulant
     - 
-  * - :math:`CSMR_\text{c426}`
-    - Cause-specific mortality rate for lung cancer
-    - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`; use forecasted 2019 value
-  * - :math:`PAF_\text{*}`
-    - Population attributable fraction for smoking on all-cause mortality, excluding lung cancer
-    - Defined below
-  * - :math:`RR_i`
-    - Summary relative risk of mortality due smoking for all causes except lung cancer
-    - Defined below
+  * - :math:`CSMR_\text{c}`
+    - Cause-specific mortality rate for cause c
+    - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>` for lung cancer, below for COPD and IHD
+  * - :math:`RR(i)_\text{c}`
+    - Relative risk of a given cause for an individual simulant based on their smoking exposure
+    - Defined in :ref:`the smoking risk effects documentation page <2017_risk_effect_smoking>` for lung cancer, COPD, and IHD
+  * - :math:`PAF_\text{c}`
+    - Population attributable fraction for smoking on mortality due to cause c
+    - :math:`\frac{\overline{RR(i)_c} - 1}{\overline{RR(i)_c}}`
   * - :math:`EMR(i)_\text{c426}`
     - Excess mortality rate of lung cancer for an individual simulant (based on cause model state)
     - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`; use forecasted 2019 value
@@ -369,54 +371,18 @@ Data Tables
    * - Measure
      - Value/Source
      - Notes
-   * - :math:`PAF_\text{*}`
-     - :math:`\frac{\sum_{cid}^{n} CSMR_\text{cid} * PAF_\text{cid}}{ACMR - CSMR_\text{c426}}`
-     - For cids in [322, 411, 414, 418, 419, 420, 421, 423, 429, 432, 441, 444, 447, 450, 456, 471, 493, 495, 496, 497, 500, 501, 502, 509, 515, 534, 543, 544, 546, 845, 846, 847, 848, 934, 946, 947, 954, 976, 996]. See parameter definitions below. Assumed constant 2020-2040
-   * - :math:`csmr_\text{cid}`
-     - GBD 2019, codcorrect, decomp_step='step4', year_id=2019, cause_id=cid
-     - For causes with restrictions (Sex: 432, Age: 500, 502, 543, 544, 546), death data may not be available for certain age/sex groups. In this case assume :math:`csmr_\text{cid} = 0`. Assumed constant 2020-2040
-   * - :math:`PAF_\text{cid}`
-     - /ihme/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/exposure/modeling/GBD2019/outputs/paf/final/pafs_ss_annual/
-     - This filepath contains .csv files with smoking PAF values by cause ID for GBD 2019 that are named '{location_id}_{sex_id}'. Use year_id=2019
+   * - :math:`csmr_\text{c509}`
+     - /ihme/csu/swiss_re/forecast/509_deatjs_12_21.nc
+     - 2020-2040, CSV file with same name also available. Use 'noised_forecast' column
+   * - :math:`csmr_\text{c493}`
+     - /ihme/csu/swiss_re/forecast/493_deaths_12_21.nc
+     - 2020-2040, CSV file with same name also available. Use 'noised_forecast' column
    * - :math:`ACMR`
-     - GBD 2019, codcorrect, decomp_step='step4', year_id=2019, cause_id=294
-     - Assumed constant 2020-2040
-   * - :math:`RR_i`
-     - for never smokers: :math:`1`, for current or former smokers: :math:`\frac{\frac{1}{1 - PAF_\text{*}} - (1 - prev_\text{smok})}{prev_\text{smok}}`
-     - Assumed constant 2020-2040
-   * - :math:`prev_\text{smok}`
-     - Prevalence of current and former smokers in 2019
-     - Defined in :ref:`smoking risk exposure document <2017_risk_exposure_smoking_forecasted>`; can use forecast prevalence. Prior to implementation of smoking risk factor, can use 0.2 as a placeholder.
-
-.. note:: 
-
-  The following shows the proof for the :math:`RR_i` value or current and former smokers:
-
-  1. 
-
-  .. math::
-
-    (ACMR - CSMR_\text{c426}) = (ACMR - CSMR_\text{c426})(1 - PAF_\text{*})(1 - prev_\text{smok}) 
-
-      + (ACMR - CSMR_\text{c426})(1 - PAF_\text{*}) * RR_i * prev_\text{smok}
-
-  2.
-
-  .. math::
-
-    1 = (1 - PAF_\text{*})(1 - prev_\text{smok}) + (1 - PAF_\text{*}) * RR_i * prev_\text{smok}
-
-  3.
-
-  .. math::
-
-    \frac{1}{1 - PAF_\text{*}} = (1 - prev_\text{smok}) * RR_i * prev_\text{smok}
-
-  4.
-
-  .. math::
-
-    RR_i = \frac{\frac{1}{1 - PAF_\text{*}} - (1 - prev_\text{smok})}{prev_\text{smok}}
+     - /ihme/csu/swiss_re/forecast
+     - 2020-2040
+   * - :math:`RR(i)_c`
+     - Defined in :ref:`the smoking risk effects documentation page <2017_risk_effect_smoking>`
+     - 
 
 Validation Criteria
 +++++++++++++++++++
