@@ -329,17 +329,17 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - /ihme/csu/swiss_re/forecast/426_prevalence_12_21.nc
      - CSU TBL cancer prevalence forecasts
-     - 2020-2040; defined as proportion of population with condition
-   * - csmr_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - 2020-2040; defined as proportion of population with condition, csv file with same name also available, use the 'noised_forecast' column
+   * - csmr_c426 
+     - /ihme/csu/swiss_re/forecast/426_deaths_12_21.nc
      - CSU TBL cancer cause specific mortality rate forecast
-     - 2020-2040; defined as deaths per person-year in general population
+     - 2020-2040; defined as deaths per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - incidence_rate_c426
      - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer cause-specific mortality rate forecast
-     - 2020-2040; defined as incidence cases per person-year in general population
+     - 2020-2040; defined as incidence cases per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - disability_weight_s{273, 274, 275, 276}
      - YLD appendix
      - Sequela disability weights
@@ -351,11 +351,11 @@ State and Transition Data Tables
    * - MST
      - Normal distribution of uncertainty about mean: 3.82 years (95% CI: 0.57, 7.07), standard deviation=1.66 (derived from 95% CI) 
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
-     - See below for instructions on how to sample and research background. NOTE: may update this value
+     - See below for research background. NOTE: may update this value
    * - ODF
-     - Triangle distribution of uncertainty with min=0.04, point=0.10, max=0.23. np.random.triangular(0.04, 0.10, 0.23)
-     - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
-     - 
+     - Normal distribution of uncertainty around 0.14 (95% CI: 0.05, 0.23), standard deviation=0.1764 (derived from 95% CI)
+     - Overdiagnosis factor (ex: 14% excess incidence of lung cancer associated with LDCT screening program)
+     - See below for reserach backgroud
    * - :math:`screening_\text{baseline}`
      - 0.06
      - Baseline coverage of lung cancer screening by LDCT
