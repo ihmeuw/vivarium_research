@@ -243,7 +243,7 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`\frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}} * ODF`
+     - :math:`prevalence_\text{PC} * ODF`
      - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
@@ -329,17 +329,17 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - /ihme/csu/swiss_re/forecast/426_prevalence_12_21.nc
      - CSU TBL cancer prevalence forecasts
-     - 2020-2040; defined as proportion of population with condition
-   * - csmr_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - 2020-2040; defined as proportion of population with condition, csv file with same name also available, use the 'noised_forecast' column
+   * - csmr_c426 
+     - /ihme/csu/swiss_re/forecast/426_deaths_12_21.nc
      - CSU TBL cancer cause specific mortality rate forecast
-     - 2020-2040; defined as deaths per person-year in general population
+     - 2020-2040; defined as deaths per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - incidence_rate_c426
      - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU TBL cancer cause-specific mortality rate forecast
-     - 2020-2040; defined as incidence cases per person-year in general population
+     - 2020-2040; defined as incidence cases per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - disability_weight_s{273, 274, 275, 276}
      - YLD appendix
      - Sequela disability weights
@@ -349,13 +349,13 @@ State and Transition Data Tables
      - TBL cancer sequelae prevalence from GBD 2019
      - Not forecasted
    * - MST
-     - Uniform distribution between 2.06 and 5.38 years
+     - Normal distribution of uncertainty about mean: 3.82 years (95% CI: 0.57, 7.07), standard deviation=1.66 (derived from 95% CI) 
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
-     - See below for instructions on how to sample and research background. NOTE: may update this value
+     - See below for research background. NOTE: may update this value
    * - ODF
-     - Triangle distribution of uncertainty with min=4, point=10, max=23. np.random.triangular(4, 10, 23)
-     - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
-     - 
+     - Normal distribution of uncertainty around 0.14 (95% CI: 0.05, 0.23), standard deviation=0.1764 (derived from 95% CI)
+     - Overdiagnosis factor (ex: 14% excess incidence of lung cancer associated with LDCT screening program)
+     - See below for reserach backgroud
    * - :math:`screening_\text{baseline}`
      - 0.06
      - Baseline coverage of lung cancer screening by LDCT
@@ -473,9 +473,11 @@ A systematic literature search was performed to obtain estimates of the mean soj
      - 5.38 years (95% CI: 4.76, 5.88)
      - 
 
-Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ paper as the data source for the mean sojourn time in this model. 
+Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ and [Gonzalez-Maldonado-et-al-2020]_ papers as the data sources for the mean sojourn time in this model and ran a random effects meta-analysis on these two studies for a summary parameter, shown below.
 
-  Notably, this is limited in that it does not consider variation by sex or histology.
+.. image:: mst_meta_analysis.svg
+
+Notably, this is limited in that it does not consider variation by sex or histology.
 
 Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time of lung cancer tumors (a measure related to mean sojourn time) did not significantly vary by age or pack-year cigarette consumption. 
 
