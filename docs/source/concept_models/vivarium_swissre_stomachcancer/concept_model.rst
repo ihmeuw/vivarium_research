@@ -195,7 +195,7 @@ XX% of insured Chinese male/female initiated stomach cancer screening in 2020, s
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
+*Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang. The same population distribution of age and sex will be used among the different provinces.
 
 
 +-----------------------------------------------------+
@@ -217,10 +217,10 @@ XX% of insured Chinese male/female initiated stomach cancer screening in 2020, s
 
 file paths for 2019 forecast data:
 
-   ACMR: used transformed data from breast cancer
-   incidence:  /ihme/csu/swiss_re/forecast/414_incidence_12_15.csv
-   prevalence: /ihme/csu/swiss_re/forecast/414_prevalence_12_15.csv
-   cause-specific mortality: /ihme/csu/swiss_re/forecast/414_deaths_12_15.csv
+   * ACMR: used transformed data from breast cancer
+   * incidence:  /ihme/csu/swiss_re/forecast/414_incidence_12_15.csv
+   * prevalence: /ihme/csu/swiss_re/forecast/414_prevalence_12_15.csv
+   * cause-specific mortality: /ihme/csu/swiss_re/forecast/414_deaths_12_15.csv
 
 .. note::
 
@@ -261,16 +261,16 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 (2) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
 (3) PAF = :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}` = 
 (4) 1-PAF = 
-
 (5) :math:`i_{pc{|hp+}} =  i_{pc}\times(1-PAF)\times RR_{hp}`
 (6) :math:`i_{pc{|hp-}} =  i_{pc}\times(1-PAF)`
-
+(7) use normal distribution
 
 .. _5.3.3:
 5.3.3 Prevalence of pre-cancerous states stratified by H. pylori status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To make this section easier to follow, we define
+To make this section easier to follow, we define:
+
   - p_i = prevalence of i
   - f_i = fraction of i that is H. pylori positive 
   - i = pre-cancer states of normal/chronic gastritis (NCG), atrophic gastritis (AG), intestinal metaplasia (IM), dysplasia (DYS)
@@ -278,11 +278,11 @@ To make this section easier to follow, we define
 
 :underline:`A. Pre-cancerous states`
 
-Ideally we obtain age-specific distribution of pre-cancer state prevalence from cross-sectional studies/cohort starting from young age in populations with similar risks of 
+Ideally we obtain age-specific distribution of pre-cancer state prevalence from cross-sectional studies/cohort starting from young age in populations with similar risks of:
 
- - H. pylori prevalence
- - urban
- - China
+  - urban
+  - China
+  - H.pylori prevalence
 
 .. todo::
 
@@ -309,14 +309,14 @@ Ideally we obtain age-specific distribution of pre-cancer state prevalence from 
 
 Each row sums up to 1. 
 
-We first need to obtain a pre-cancerous state. To do that we give every simulant a pre-cancer state propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 np.random.uniform(). 
+We first need to obtain a pre-cancerous state. To do that we give every simulant a pre-cancer state propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
 
 With the simulant's pre-cancer propensity and age, use the table above to figure out what pre-cancer state this corresponds to and assign this to the simulant. Update the simulants pre-cancer states as they age through the simulation.   
 
 :underline:`B. Obtain H. pylori status conditional upon age and pre-cancerous state`
  
 *H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and 
-reinfection in adulthood are rare (add ref) and will not be allowed in our model. We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
+reinfection in adulthood are rare (add ref) and will not be allowed in our model. 
 
 +--------------------------------------------------------------------+
 | Fraction of pre-cancer state that is H. pylori positive + (f_i)    |   
@@ -338,13 +338,21 @@ reinfection in adulthood are rare (add ref) and will not be allowed in our model
 
 Each cell is a proportion out of 1. 
 
-Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 np.random.uniform(). Using the simulant's pre-cancer state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
+Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's pre-cancer state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
 
-To see how the above two tables were derived, see :download:` Method workbook <precancer_states_and_hpylori_memo_21dec2020.xlsx>`
+We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
+
+To see how the above two tables were derived, see :download:`Method workbook<precancer_states_and_hpylori_memo_21dec2020.xlsx>`
 
 .. todo::
 
-  write up a narrative description to accompany the workbook. also, upload python notebook on vivarium_data_analysis and create link. 
+   1. write up a narrative description to accompany the workbook. 
+   2. also, upload python notebook on vivarium_data_analysis and create link. 
+
+.. todo:: 
+  
+   1. should we add uncertainty range of +/-10%? 
+   2. Should we have engineers calculate f_i table so that there is undertainty in the f_i parameter too? 
 
 
 .. _5.3.4:
@@ -358,31 +366,26 @@ To see how the above two tables were derived, see :download:` Method workbook <p
 
 Stomach cancer screening algorithm was derived from the 2019 guidelines from the China Anti-Cancer Association and National Clinical Research Center for Cancer. All simulants will follow this decision tree to decide if they are due a screening. The decision tree branches according to:  
 
-   1) Pre-cancer state
+   1) Pre-cancer state (atrophy vs no atrophy)
    2) H pylori status
 
-+--------------------------------------------------------------------------+
-| Screening frequency by H.pylori and endoscopy (need more clarification)  | 
-+=================+============================+===========================+
-| Pre-cancer      | H. pylori +ve              | H. pylori -ve             |
-| States          |                            |                           |        
-+-----------------+----------------------------+---------------------------+
-| Normal (N)      |                            |                           |
-+-----------------+----------------------------+---------------------------+                                                   
-| Gastritis (G)   |                            |                           |         
-+-----------------+----------------------------+---------------------------+       
-| Atrophic (AG)   |                            |                           |          
-| Gastritis       |                            |                           |
-+-----------------+----------------------------+---------------------------+          
-| Intestinal      |                            |                           |
-| Metaplasia (IM) |                            |                           |          
-+-----------------+----------------------------+---------------------------+         
-| Dysplasia (DYS) |                            |                           |        
-|                 |                            |                           |        
-+-----------------+----------------------------+---------------------------+
++--------------------------------------------------------------------------------+
+| Screening frequency by H.pylori and atrophy status (ABC method)                | 
++=======================+============================+===========================+
+| Pre-cancer            | H. pylori negative (-)     | H. pylori positive (+)    |
+| States                |                            |                           |        
++-----------------------+----------------------------+---------------------------+
+|   N/CG  (atrophy -)   | repeat ABC every 5 years   | endoscopy every 3 years   |
++-----------------------+----------------------------+---------------------------+                                                   
+|   AG    (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |          
++-----------------------+----------------------------+---------------------------+          
+|   IM    (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |          
++-----------------------+----------------------------+---------------------------+         
+|   DYS   (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |        
++-----------------------+----------------------------+---------------------------+
 
-
-- screening attendence? 
+.. todo::
+   - screening attendence? 
 
 
 .. _5.3.4:
