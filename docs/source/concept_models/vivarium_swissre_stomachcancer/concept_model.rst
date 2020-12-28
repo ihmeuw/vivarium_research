@@ -278,9 +278,9 @@ References:
 
 To make this section easier to follow, we define:
 
-  - p_i = prevalence of atrophy
-  - f_i = fraction of atrophy that is H. pylori positive 
-  - i = atrophic gastritis (AG)
+  - p_i+ = prevalence of atrophy
+  - f_i+/- = fraction of atrophic state that is H. pylori positive 
+  - i+/- = atrophic state
 
 
 :underline:`A. Pre-cancerous states`
@@ -293,11 +293,11 @@ Ideally we obtain age-specific distribution of pre-cancer state prevalence from 
 
 .. todo::
 
-  this prevalence distribution Aoki 2005. Data from China came from Chinese project (1996/1997): A total of 1741 individuals from Zhanhuang County (population: 208,000) of the   Province of Hebei, the People’s Republic of China, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination   by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female. CAGwas serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
+  this prevalence distribution Aoki 2005. Data from China came from Chinese project (1996/1997): A total of 1741 individuals from Zhanhuang County (population: 208,000) of the   Province of Hebei, the People’s Republic of China, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination   by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female using serum antibody test. CAG was serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
 
 +------------------------------------+         +------------------------------------+
 | MALE age-specific prevalence       |         | FEMALE age-specific prevalence     |
-|(p_i) atrophy (Aoki 2005)           |         | (p_i) atrophy (Aoki 2005)          |
+|(p_i+) atrophy (Aoki 2005)          |         | (p_i+) atrophy (Aoki 2005)         |
 +===========+============+===========+         +===========+============+===========+
 | age-bands | Atrophy +  | 95% CI    |         | age-bands | Atrophy +  | 95% CI    |
 +-----------+------------+-----------+         +-----------+------------+-----------+
@@ -331,17 +331,17 @@ With the simulant's sex, atrophy propensity and age, use the table above to figu
 +===========+============================+===========================+
 | age-bands |  atrophy  +                | atrophy -                 |
 +-----------+----------------------------+---------------------------+
-| <30       |                            |                           |       
+| <30       |  f_i+                      |  f_i-                     |       
 +-----------+----------------------------+---------------------------+                                    
-| 30-39     |                            |                           |     
+| 30-39     |  f_i+                      |  f_i-                     |     
 +-----------+----------------------------+---------------------------+
-| 40-49     |                            |                           |  
+| 40-49     |  f_i+                      |  f_i-                     |  
 +-----------+----------------------------+---------------------------+
-| 50-59     |                            |                           |  
+| 50-59     |  f_i+                      |  f_i-                     |  
 +-----------+----------------------------+---------------------------+
-| 60-70     |                            |                           |
+| 60-70     |  f_i+                      |  f_i-                     |
 +-----------+----------------------------+---------------------------+
-| 70+       |                            |                           |
+| 70+       |  f_i+                      |  f_i-                     |
 +-----------+----------------------------+---------------------------+
 
 Each cell is a proportion out of 1 which is the atrophic state. The proportion is the fraction of the atrophic state that is H pylori positive.  
@@ -363,30 +363,26 @@ To derive the table with uncertainty intervals, use ann odds ratio of 3.8 (95%CI
 (2) c+d = 1 :math:`P_{hp{s}}`
 (3) (a+c)/(a+b+c+d) = p_i 
 (4) ab/bc = OR
+(5) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
+(6) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005]
+(7) f_i+ = a/(a+c)
+(8) f_i- = b/(b+d)
 
-
-
-  :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599)
-  OR = 3.8 (95%CI: 3.054 - 4.631)
-
-To see how the above two tables were derived, see :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
-
+:download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
 
 We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
 
 
-
 .. todo::
 
-   1. write up a narrative description to accompany the workbook. 
-   2. also, upload python notebook on vivarium_data_analysis and create link. 
+  1. write up a narrative description to accompany the workbook. 
+  2. also, upload python notebook on vivarium_data_analysis and create link. 
 
 .. todo:: 
   
    1. Should we have engineers calculate f_i table so that there is undertainty in the f_i parameter too? 
 
 References: 
-
 
 
 
@@ -426,8 +422,8 @@ H. pylori antibiody test [Chen 2018]
   - specificity 97.4% 
 
 Serum pepsinogen test [Chen 2018]
-  - sensitivity 70.5% 
-  - specificity 97% 
+  - the prevalence of CAG was serologically diagnosed.
+
 
 H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
   -  ITT efficacy: 87.9% [95%CI: 81.7–94.0%) [Liang 2013]
