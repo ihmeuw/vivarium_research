@@ -359,7 +359,9 @@ To see how the above two tables were derived, see :download:`Method workbook<pre
 5.3.4 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: stomachcancer_screening_tree.svg
+This screening model will be applied in the alternative scenario. Apply first screening coverage to those who are 40 years old and above using the screening scale-up figure below. Simulants' first screen will be using the non-invasive with the ABC method delineated by Chen 2018 which combines H. pylori antibody test and serum pepsinogen (PG) test for atrophy.
+
+.. image:: stomach_cancer_screening_coverage.svg
 
 
 :underline:`Screening frequency`
@@ -368,6 +370,9 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 
    1) Pre-cancer state (atrophy vs no atrophy)
    2) H pylori status
+
+
+.. image:: stomachcancer_screening_tree.svg
 
 +--------------------------------------------------------------------------------+
 | Screening frequency by H.pylori and atrophy status (ABC method)                | 
@@ -384,62 +389,51 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 |   DYS   (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |        
 +-----------------------+----------------------------+---------------------------+
 
-.. todo::
-   - screening attendence? 
 
+H. pylori antibiody test [Chen 2018]
+  - sensitivity 91.2%
+  - specificity 97.4% 
 
-.. _5.3.4:
-5.3.4 H.pylori treatment model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Serum pepsinogen test [Chen 2018]
+  - sensitivity 70.5% 
+  - specificity 97% 
 
-.. note:: 
-  - H. pylori eradication significantly decreases the risk of gastric cancer in patients with chronic atrophic (AG) or nonatrophic gastritis (G) (pooled relative risk RR 0.64, 95 %CI 0.48 – 0.85)7 
-  - But not in patients with IM or dysplasia (RR 0.88, 95%CI 0.59 – 1.31)7
-  - ?? Need to check if normal group included ??
-  - Note to self - Difference values in Rokkas 2017 (check literature)
-  - GC risk according to baseline histology in five studies [26,28,31,43,46 <- check reference] examined the GC risk according to baseline histology. These studies stratified baseline histology into two groups: i.e., a group of subjects with chronic non-AG (NAG) or AG, and a group of subjects with IM or DYS. The RR [95% CI] was significant in the NAG/AG group (0.28 [0.08-0.96], Z= -2.03, P=0.04), but not but not in the IM/DYS group (0.84 [0.55-1.28], Z= -0.83, P=0.41).
-  - Non-screened population will have the baseline incidence from the baseline model
-
-+-----------------------------------------------------------------------------+
-| Treatment efficacy by H.pylori and endoscopy (need more clarification)      | 
-+=================+===============================+===========================+
-| Pre-cancer      | H. pylori +ve                 | H. pylori -ve             |
-| States          |                               |                           |        
-+-----------------+-------------------------------+---------------------------+
-| Normal (N)      | :math:`i_{pc{|hp+}}` x 0.64   | :math:`i_{pc{|hp-}}`      |
-+-----------------+-------------------------------+---------------------------+                                                   
-| Gastritis (G)   | :math:`i_{pc{|hp+}}` x 0.64   | :math:`i_{pc{|hp-}}`      | 
-+-----------------+-------------------------------+---------------------------+       
-| Atrophic (AG)   | :math:`i_{pc{|hp+}}` x 0.64   | :math:`i_{pc{|hp-}}`      |  
-| Gastritis       |                               |                           |
-+-----------------+-------------------------------+---------------------------+          
-| Intestinal      | :math:`i_{pc{|hp+}}` x 0.88   | :math:`i_{pc{|hp-}}`      |
-| Metaplasia (IM) |                               |                           |          
-+-----------------+-------------------------------+---------------------------+         
-| Dysplasia (DYS) | :math:`i_{pc{|hp+}}` x 0.88   | :math:`i_{pc{|hp-}}`      |     
-|                 |                               |                           |        
-+-----------------+-------------------------------+---------------------------+
+H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
+  -  ITT efficacy: 87.9% [95%CI: 81.7–94.0%) [Liang 2013]
 
 
 .. note::
- - Assume normal group has same RR as those in G/AG?
- - Assume all endoscopy is followed up endoscopic biopsy? Hence assume detection of states are true states. 
- - H. pylori test sensitivity/specificity 0.9 and 0.9 CONFUSION MATRIX? 
- - This method only works if we do not need to get state by state transitions and we can use the RRs from the above comment. Hence we need to assume:
- - Incidence of GC from IM/DYS states is not changed by screening by endoscopy and associated treatment 
- - Zhang 20189: resection/treatment of high/low grade dysplasia has no effect on incidence of GC 
+  - we do not model treatment for atrophy (Zhang 2018: resection/treatment of high/low grade dysplasia has no effect on incidence of stomach cancer) 
 
-.. important: 
- Check RRs:
+Reference: 
 
- Source population:  source population is a group (1-prevalence of GC) with all non-GC states including normal AND has H+ infection. 
+  - National Health Commission of the People’s Republic of China. Chinese guidelines for diagnosis and treatment of gastric cancer 2018 (English version). Chin J Cancer Res 2019; 31: 707–37.
+  - Chen X-Z, Huang C-Z, Hu W-X, Liu Y, Yao X-Q. Gastric Cancer Screening by Combined Determination of Serum Helicobacter pylori Antibody and Pepsinogen Concentrations: ABC Method for Gastric Cancer Screening. Chin Med J (Engl) 2018; 131: 1232–9.
+  - Du Y, Zhu H, Liu J, et al. Consensus on eradication of Helicobacter pylori and prevention and control of gastric cancer in China (2019, Shanghai). J Gastroenterol Hepatol 2020; 35: 624–9
+  - Liang X, Xu X, Zheng Q, Zhang W, Sun Q, Liu W, et al. Efficacy of bismuth-containing quadruple therapies for clarithromycin-, metronidazole-, and fluoroquinolone-resistant Helicobacter pylori infections in a prospective study. Clin Gastroenterol Hepatol. 2013 Jan 29; doi: 10.1016/j.cgh.2013.01.008
+  - 
 
- Exposure: H. pylori treatment, compared to no-treatment
+.. _5.3.4:
+5.3.4 Gastic cancer incidence after ABC screening
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- Outcome: cardia and non-cardia cancers
+Meta-analysis of 14 studies by Lee 2016 showed reduction in the incidence rate ratio of gastric cancer among asymptomatic individuals with H. pylori eradication of 0.62 (95%CI: 0.49-0.79). We apply this rate ratio to H. pylori +ve simulants who recieve successful eradication. This meta-analysis supports no differential efficacy among pre-cancer states. 
 
- RR: relative risk of treated vs. not treated for H pylori among H pylori positive cohort with state distribution. 
++-------------------------------------------------------------------------+
+| Gastric cancer incidence after outcome of screening and treatment       |
++===============================+=========================================+
+|  H. pylori +ve without        | :math:`i_{pc{|hp+}}`                    |
+|  eradication                  |                                         |        
++-------------------------------+-----------------------------------------+
+|  H. pylori +ve with           | :math:`i_{pc{|hp+}}`                    |
+|  with successful eradication  | x 0.62 (95%CI: 0.49-0.79)               |        
++-------------------------------+-----------------------------------------+
+|  H. pylori -ve                | :math:`i_{pc{|hp-}}`                    |
++-------------------------------+-----------------------------------------+                                               
 
+References:
+
+  - Lee Y-C, Chiang T-H, Chou C-K, et al. Association Between Helicobacter pylori Eradication and Gastric Cancer Incidence: A Systematic Review and Meta-analysis. Gastroenterology 2016; 150: 1113-1124.e5
 
 .. _5.4:
 
