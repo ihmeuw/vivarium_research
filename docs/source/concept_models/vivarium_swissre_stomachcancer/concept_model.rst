@@ -265,15 +265,22 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 (6) :math:`i_{pc{|hp-}} =  i_{pc}\times(1-PAF)`
 (7) use normal distribution
 
+
+References: 
+
+  - 
+  -
+
+
 .. _5.3.3:
-5.3.3 Prevalence of pre-cancerous states stratified by H. pylori status
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+5.3.3 Prevalence of atrophy stratified by H. pylori status
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To make this section easier to follow, we define:
 
-  - p_i = prevalence of i
-  - f_i = fraction of i that is H. pylori positive 
-  - i = pre-cancer states of normal/chronic gastritis (NCG), atrophic gastritis (AG), intestinal metaplasia (IM), dysplasia (DYS)
+  - p_i = prevalence of atrophy
+  - f_i = fraction of atrophy that is H. pylori positive 
+  - i = atrophic gastritis (AG)
 
 
 :underline:`A. Pre-cancerous states`
@@ -286,63 +293,88 @@ Ideally we obtain age-specific distribution of pre-cancer state prevalence from 
 
 .. todo::
 
-  this prevalence distribution table was adapted from a Korean population. Will dig deeper into the literature to see if we can find age-specific prevalences in China with similar H pylori prevalence. I tried with You 1993's distributions for high risk population with 70% H. pylori prevalence and it doesnt work for 55% prevalence. 
+  this prevalence distribution Aoki 2005. Data from China came from Chinese project (1996/1997): A total of 1741 individuals from Zhanhuang County (population: 208,000) of the   Province of Hebei, the People’s Republic of China, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination   by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female. CAGwas serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
 
++------------------------------------+         +------------------------------------+
+| MALE age-specific prevalence       |         | FEMALE age-specific prevalence     |
+|(p_i) atrophy (Aoki 2005)           |         | (p_i) atrophy (Aoki 2005)          |
++===========+============+===========+         +===========+============+===========+
+| age-bands | Atrophy +  | 95% CI    |         | age-bands | Atrophy +  | 95% CI    |
++-----------+------------+-----------+         +-----------+------------+-----------+
+| <30       | 0.08       | 0.00-0.18 |         | <30       | 0.08       | 0.00-0.18 |             
++-----------+------------+-----------+         +-----------+------------+-----------+
+| 30-39     | 0.12       | 0.06-0.18 |         | 30-39     | 0.12       | 0.06-0.18 |
++-----------+------------+-----------+         +-----------+------------+-----------+
+| 40-49     | 0.12       | 0.07-0.17 |         | 40-49     | 0.12       | 0.07-0.17 |
++-----------+------------+-----------+         +-----------+------------+-----------+
+| 50-59     | 0.16       | 0.08-0.24 |         | 50-59     | 0.16       | 0.08-0.24 |  
++-----------+------------+-----------+         +-----------+------------+-----------+
+| 60-69     | 0.18       | 0.10-0.26 |         | 60-69     | 0.18       | 0.10-0.26 |    
++-----------+------------+-----------+         +-----------+------------+-----------+         
+| 70+       | 0.28       | 0.06-0.50 |         | 70+       | 0.28       | 0.06-0.50 |       
++-----------+------------+-----------+         +-----------+------------+-----------+
 
-+--------------------------------------------------------------------+
-| Age-specific prevalence (p_i) of pre-cancerous states (Kang 2015)  |   
-+===========+===================+===========+============+===========+
-| age-bands | Normal /Gastritis | Atrophy   | IM         | DYS       |  
-+-----------+-------------------+-----------+------------+-----------+
-| <40       | 0.650             |  0.250    | 0.100      | 0.000     |          
-+-----------+-------------------+-----------+------------+-----------+                                             
-| 40-49     | 0.650             |  0.250    | 0.100      | 0.000     |        
-+-----------+-------------------+-----------+------------+-----------+
-| 50-59     | 0.571             |  0.280    | 0.148      | 0.001     |  
-+-----------+-------------------+-----------+------------+-----------+
-| 60-69     | 0.471             |  0.321    | 0.201      | 0.007     |        
-+-----------+-------------------+-----------+------------+-----------+
-| 70-80     | 0.432             |  0.332    | 0.231      | 0.005     |        
-+-----------+-------------------+-----------+------------+-----------+
-| 80+       | 0.474             |  0.313    | 0.192      | 0.022     |        
-+-----------+-------------------+-----------+------------+-----------+  
 
 Each row sums up to 1. 
 
-We first need to obtain a pre-cancerous state. To do that we give every simulant a pre-cancer state propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
+We first need to obtain an atrophy state. To do that we give every simulant a atrophy propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
 
-With the simulant's pre-cancer propensity and age, use the table above to figure out what pre-cancer state this corresponds to and assign this to the simulant. Update the simulants pre-cancer states as they age through the simulation.   
+With the simulant's sex, atrophy propensity and age, use the table above to figure out what atrophic state this corresponds to and assign this to the simulant. Update the simulants atrophic state as they age through the simulation.   
 
-:underline:`B. Obtain H. pylori status conditional upon age and pre-cancerous state`
+
+:underline:`B. Obtain H. pylori status conditional upon age and atrophic state`
  
-*H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and 
-reinfection in adulthood are rare (add ref) and will not be allowed in our model. 
+*H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and reinfection in adulthood are rare (add ref) and will not be allowed in our model. 
 
 +--------------------------------------------------------------------+
-| Fraction of pre-cancer state that is H. pylori positive + (f_i)    |   
-+===========+===================+===========+============+===========+
-| age-bands | Normal /Gastritis | Atrophy   | IM         | DYS       |  
-+-----------+-------------------+-----------+------------+-----------+
-| <40       | 0.36              |  0.9      |  0.9       |  0.9      |          
-+-----------+-------------------+-----------+------------+-----------+                                             
-| 40-49     | 0.36              |  0.9      |  0.9       |  0.9      |        
-+-----------+-------------------+-----------+------------+-----------+
-| 50-59     | 0.29              |  0.9      |  0.9       |  0.9      |  
-+-----------+-------------------+-----------+------------+-----------+
-| 60-69     | 0.16              |   0.9     |  0.9       |  0.9      |        
-+-----------+-------------------+-----------+------------+-----------+
-| 70-80     | 0.09              |   0.9     |  0.9       |  0.9      |        
-+-----------+-------------------+-----------+------------+-----------+
-| 80+       | 0.16              |   0.9     |  0.9       |  0.9      |        
-+-----------+-------------------+-----------+------------+-----------+  
+| Fraction of atrophic state that is H. pylori positive + (f_i)      |   
++===========+============================+===========================+
+| age-bands |  atrophy  +                | atrophy -                 |
++-----------+----------------------------+---------------------------+
+| <30       |                            |                           |       
++-----------+----------------------------+---------------------------+                                    
+| 30-39     |                            |                           |     
++-----------+----------------------------+---------------------------+
+| 40-49     |                            |                           |  
++-----------+----------------------------+---------------------------+
+| 50-59     |                            |                           |  
++-----------+----------------------------+---------------------------+
+| 60-70     |                            |                           |
++-----------+----------------------------+---------------------------+
+| 70+       |                            |                           |
++-----------+----------------------------+---------------------------+
 
-Each cell is a proportion out of 1. 
+Each cell is a proportion out of 1 which is the atrophic state. The proportion is the fraction of the atrophic state that is H pylori positive.  
 
-Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's pre-cancer state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
+Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's atrophic state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
+
+To derive the table with uncertainty intervals, use ann odds ratio of 3.8 (95%CI: 3.054 - 4.631). This is the odds ratio after adjusting for age and sex. 
+
+
++-----------+----------------------------+---------------------------+
+|           |   Atrophy +                |   Atrophy -               |  
++-----------+----------------------------+---------------------------+
+| H+        |     a                      | b                         |
++-----------+----------------------------+---------------------------+
+| H-        |     c                      | d                         |
++-----------+----------------------------+---------------------------+
+
+(1) a+b = :math:`P_{hp{s}}`
+(2) c+d = 1 :math:`P_{hp{s}}`
+(3) (a+c)/(a+b+c+d) = p_i 
+(4) ab/bc = OR
+
+
+
+  :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599)
+  OR = 3.8 (95%CI: 3.054 - 4.631)
+
+To see how the above two tables were derived, see :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
+
 
 We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
 
-To see how the above two tables were derived, see :download:`Method workbook<precancer_states_and_hpylori_memo_21dec2020.xlsx>`
+
 
 .. todo::
 
@@ -351,8 +383,11 @@ To see how the above two tables were derived, see :download:`Method workbook<pre
 
 .. todo:: 
   
-   1. should we add uncertainty range of +/-10%? 
-   2. Should we have engineers calculate f_i table so that there is undertainty in the f_i parameter too? 
+   1. Should we have engineers calculate f_i table so that there is undertainty in the f_i parameter too? 
+
+References: 
+
+
 
 
 .. _5.3.4:
@@ -380,14 +415,10 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 | Pre-cancer            | H. pylori negative (-)     | H. pylori positive (+)    |
 | States                |                            |                           |        
 +-----------------------+----------------------------+---------------------------+
-|   N/CG  (atrophy -)   | repeat ABC every 5 years   | endoscopy every 3 years   |
+|   atrophy -           | repeat ABC every 5 years   | endoscopy every 3 years   |
 +-----------------------+----------------------------+---------------------------+                                                   
-|   AG    (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |          
+|   atrophy +           | endoscopy every 1 year     | endoscopy every 2 years   |          
 +-----------------------+----------------------------+---------------------------+          
-|   IM    (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |          
-+-----------------------+----------------------------+---------------------------+         
-|   DYS   (atrophy +)   | endoscopy every 1 year     | endoscopy every 2 years   |        
-+-----------------------+----------------------------+---------------------------+
 
 
 H. pylori antibiody test [Chen 2018]
@@ -400,7 +431,6 @@ Serum pepsinogen test [Chen 2018]
 
 H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
   -  ITT efficacy: 87.9% [95%CI: 81.7–94.0%) [Liang 2013]
-
 
 .. note::
   - we do not model treatment for atrophy (Zhang 2018: resection/treatment of high/low grade dysplasia has no effect on incidence of stomach cancer) 
