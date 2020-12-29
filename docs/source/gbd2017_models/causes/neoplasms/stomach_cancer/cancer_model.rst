@@ -360,17 +360,16 @@ State and Transition Data Tables
      - stomach cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 4.5 months (95%UI:4-5m); distrbution of uncertainty at draw level
+     - 2.37 years (95%CI: 1.92 to 2.96); distribution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the asymptomtic stomach cancer to the clinical phase
-     - See below for instructions on how to sample and research background. NOTE: this is stand in value for now
+     - See below for instructions on how to sample and research background. 
 
 
-.. todo::
-
-	Update/confirm placeholder values
 
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
+
+Obtained from Bae et al. Mean Sojourn Time of Preclinical Gastric Cancer in Korean Men: A Retrospective Observational Study J Prev Med Public Health 2014;47:201-205
 
 **Parameter for Use in Model:**
 
@@ -381,8 +380,8 @@ This parameter is be sampled *at the draw level* from the distribution detailed 
   from scipy.stats import norm
 
   # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 4.5
-  q_975 = 5
+  mean = 2.37
+  q_975 = 2.96
 
   # 0.975-quantile of standard normal distribution (=1.96, approximately)
   q_975_stdnorm = norm().ppf(0.975)
@@ -391,16 +390,6 @@ This parameter is be sampled *at the draw level* from the distribution detailed 
 
   # Frozen normal distribution for MST, representing uncertainty in the parameter
   mst_distribution = norm(mean, std)
-
-.. note::
-
-  Currently I have an individual sojourn time (IST) from Yeh et al's 2008 modelling paper. The IST likely follows a beta distribution with median 4m, and max 24m. Computing the MST as the sample mean from the beta distribution gives (sampling distribution of the mean) a mean of 4.5m. We use +/- 10% as approximate UIs. I will refine this parameter. 
-
-  Alternatively, we can model the transition duration at the individual level using the IST and the incidence rate at the individual level using 1/IST. 
-
-.. todo::
-
-  refine value, upload beta distribution
 
 
 
