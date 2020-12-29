@@ -249,16 +249,16 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 
 
 - Let H. pylori infection be denoted as hp
-- Let the prevalence of H. pylori **among the S state population** be :math:`P_{hp{s}}`
-- Let i_pc be the overall incidence from S state to PC state (:ref:`see stomach cancer model for i_GCvalue <2017_cancer_model_stomachcancer>`)
-- Let Incidence among those with H. pylori be  :math:`i_{pc{|hp+}}`
-- Let Incidence among those without H. pylori be :math:`i_{pc{|hp-}}`
-- Let PAF be the population attributable fraction of H. pylori on gastric cancer among the S population
-- Let RR be the ratio of the probability of developing the outcome PC in the exposed to H. pylori gourp versus the probability of developing the outcome PC in the unexposed to H. pylori group among the S state population.
+- Let the true prevalence of H. pylori be :math:`P_{hp{t}}`
+- Let i_pc be the overall incidence from S state to PC state (:ref:`see stomach cancer model for i_pc value <2017_cancer_model_stomachcancer>`)
+- Let incidence among those with H. pylori be  :math:`i_{pc{|hp+}}`
+- Let incidence among those without H. pylori be :math:`i_{pc{|hp-}}`
+- Let PAF be the population attributable fraction of H. pylori on gastric cancer
+- Let RR be the ratio of the probability of developing cancer in the exposed to H. pylori group versus unexposed group.
 
 (1) :math:`RR_{hp}` = 1.89 (95%CI: 1.57 to 2.26) [Jiang Eur J Clin Microbiol Infect Dis 2017]
-(2) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
-(3) PAF = :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}` = 
+(2) :math:`P_{hp{t}}` = see calculation below
+(3) PAF = :math:`\frac{P_{hp{s}}(RR_{hp}-1)}{1+P_{hp{s}}(RR_{hp}-1)}` 
 (4) 1-PAF = 
 (5) :math:`i_{pc{|hp+}} =  i_{pc}\times(1-PAF)\times RR_{hp}`
 (6) :math:`i_{pc{|hp-}} =  i_{pc}\times(1-PAF)`
@@ -274,7 +274,7 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
    sensitivity and specificity obtained from Wang 2015. Diagnostic accuracy also varies depending on the test used and conditions. To caculate the true HP prevalence, let us assume a 95% sensitivity and specificity as a combined average for the tests used in the meta-analysis.  
 
 
-True prevalence of HP 
+True prevalence of HP :math:`P_{hp{t}}`
 
 +-----------+----------------------------+---------------------------+
 | H. pylori |   True HP+                 |   True HP-                |  
@@ -289,7 +289,7 @@ True prevalence of HP
 
 (1) sensitivity a/(a+c) = 0.95
 (2) specificity d/(b+d) = 0.95
-(3) HP prevalence by test = (a+b) / (a+b+c+d) = 0.558 (95%CI: 0.518 to 0.599)
+(3) HP prevalence by test = (a+b) / (a+b+c+d) = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
 (4) a+b+c+d = 1000
 
 solving the 4 equations:
@@ -298,7 +298,7 @@ solving the 4 equations:
   - c = 28  (false negative)
   - d = 414 (true negative) 
 
-True HP prevalence = a+c/1000 = 564/1000 = 0.564
+True HP prevalence = a+c/1000 = 564/1000 = 0.564 
 
 References: 
 
@@ -385,18 +385,17 @@ With the simulant's sex, age and atrophy propensity, use the tables above to fig
  
 *H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and reinfection in adulthood are rare and will not be allowed in our model. 
 
+Each cell is a proportion out of 1 which is the atrophic state. The proportion is the fraction of the atrophic state that is H pylori positive.  
+
+Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's age and atrophic state obtained in the previous step, assign H. pylori status using the table below. Those who have propensity below the fraction are positive. 
+
 +--------------------------------------------------------------------+
 | Fraction of atrophic state that is H. pylori positive + (f_atrophy)|   
 +===========+============================+===========================+
 | age-bands |  Atrophy +                 | Atrophy -                 |
 +-----------+----------------------------+---------------------------+
 | age       |  f_atrophy+                | f_atrohpy-                |       
-+-----------+----------------------------+---------------------------+                                    
-
-
-Each cell is a proportion out of 1 which is the atrophic state. The proportion is the fraction of the atrophic state that is H pylori positive.  
-
-Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's age and atrophic state obtained in the previous step, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
++-----------+----------------------------+---------------------------+    
 
 To derive f_atrophy+ and f_atrophy- for the above table with uncertainty intervals use the following set of equations:
 
@@ -408,28 +407,24 @@ To derive f_atrophy+ and f_atrophy- for the above table with uncertainty interva
 | H-        |     c                      |     d                     |
 +-----------+----------------------------+---------------------------+
 
-(1) a+b/(a+b+c+d) = :math:`P_{hp{s}}`
-(2) (a+c)/(a+b+c+d) = p_i 
+(1) a+b/(a+b+c+d) = :math:`P_{hp{t}}`
+(2) (a+c)/(a+b+c+d) = p_atrophy+ 
 (3) a+b+c+d = 1000
 (4) ad/bc = OR
-(6) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
-(7) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005]
-(8) f_i+ = a/(a+c)
-(9) f_i- = b/(b+d)
+(6) :math:`P_{hp{t}}` = 0.564 (equations above)
+(7) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005] *We assume this OR is for the true prevalence of H. pylori*
+(8) f_atrophy+ = a/(a+c)
+(9) f_atrophy- = b/(b+d)
 
-see tab Aoki 2005 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
+The calculated values should look similar to this: see tab Aoki 2005 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
 
 .. note::
   f_i+ should be approximately 0.80 and f_i- approximately 0.50. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
 
 We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment for H. pylori). H.pylori status is binary: pos or neg. We assume H. pylori prevalence is consistent across all ages and sex [Aoki 2005].
 
-
-.. todo::
-
-  1. write up a narrative description to accompany the workbook. 
-  2. also, upload python notebook on vivarium_data_analysis and create link. 
-
+Example: Lets say we have a simulant Sally-Sim who is age 42. She has been randomly assigned atrophic percentile of 0.03 and h.pylori percentile of 0.5. Looking at the p_atrophy+ table for females, she is in the atrophic+ state for her percentile rank. Next, we determine her H. pylori status. Because she is atrophic, her H. pylori status will be determined by f_atrophy+ for her age group. Reading off the excel table, f_atrophy+ for 40-49 year olds is 0.82. Hence, she is also H. pylori positive. 
+ 
 
 References: 
 
@@ -458,7 +453,7 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 | Screening frequency by H.pylori and atrophy status (ABC method)                | 
 +=======================+============================+===========================+
 | Pre-cancer            | H. pylori negative (-)     | H. pylori positive (+)    |
-| States                |                            |                           |        
+| States                | from screening test        | from screening test       |        
 +-----------------------+----------------------------+---------------------------+
 |   atrophy -           | repeat ABC every 5 years   | endoscopy every 3 years   |
 +-----------------------+----------------------------+---------------------------+                                                   
@@ -471,7 +466,7 @@ H. pylori antibiody test [Chen 2018]
   - specificity 97.4% 
 
 Serum pepsinogen test [Chen 2018]
-  - the prevalence of CAG was serologically diagnosed.
+  - because the incidence of gastric cancer is determined by true H. pylori status and not by atrophic state, we do not need to apply test accuracy for atrophy. The atrophic state identified in model 2 determines frequency of screening.   
 
 
 H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
@@ -498,7 +493,8 @@ Meta-analysis of 14 studies by Lee 2016 showed reduction in the incidence rate r
 | Gastric cancer incidence after outcome of screening and treatment       |
 +===============================+=========================================+
 |  H. pylori +ve without        | :math:`i_{pc{|hp+}}`                    |
-|  eradication                  |                                         |        
+|  eradication or with          |                                         |
+|  unsuccessful eradication     |                                         |        
 +-------------------------------+-----------------------------------------+
 |  H. pylori +ve with           | :math:`i_{pc{|hp+}}`                    |
 |  with successful eradication  | x 0.62 (95%CI: 0.49-0.79)               |        
