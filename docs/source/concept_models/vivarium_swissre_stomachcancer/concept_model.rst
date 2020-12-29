@@ -264,12 +264,47 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 (6) :math:`i_{pc{|hp-}} =  i_{pc}\times(1-PAF)`
 (7) use normal distribution
 
+.. note:: 
+  The prevalence of HP was obtained from meta-analysis of 22 studies. The primary modality of testing HP, include  
+   - serology (varies depending on antigen used): 97.6% sensitivity and 96.2% specificity for recomLine
+   - urea breath test: 95% sensitvity and specificity
+   - stool antigen: 94% sensitvity and 97% specificity
+   - Campylobacter-like organism or histopathology: invasive and considered gold standard
+
+   sensitivity and specificity obtained from Wang 2015. Diagnostic accuracy also varies depending on the test used and conditions. To caculate the true HP prevalence, let us assume a 95% sensitivity and specificity as a combined average for the tests used in the meta-analysis.  
+
+
+True prevalence of HP 
+
++-----------+----------------------------+---------------------------+
+| H. pylori |   True HP+                 |   True HP-                |  
++-----------+----------------------------+---------------------------+
+| test +    |     a                      |     b                     |
++-----------+----------------------------+---------------------------+
+| test -    |     c                      |     d                     |
++-----------+----------------------------+---------------------------+
+| total     |    a+c                     |    b+d                    |
++-----------+----------------------------+---------------------------+
+
+
+(1) sensitivity a/(a+c) = 0.95
+(2) specificity d/(b+d) = 0.95
+(3) HP prevalence by test = (a+b) / (a+b+c+d) = 0.558 (95%CI: 0.518 to 0.599)
+(4) a+b+c+d = 1000
+
+solving the 4 equations:
+  - a = 536 (true positive)
+  - b = 22  (false positive) 
+  - c = 28  (false negative)
+  - d = 414 (true negative) 
+
+True HP prevalence = a+c/1000 = 564/1000 = 0.564
 
 References: 
 
   - 
   -
-
+  - Wang Diagnosis of Helicobacter pylori infection: Current options and developments. World J Gastroenterol 2015 October 28; 21(40): 11221-11235
 
 .. _5.3.3:
 5.3.3 Prevalence of atrophy stratified by H. pylori status
@@ -301,7 +336,7 @@ The following tables show the sex and age specific CAG prevalence tables by read
 
 +------------------------------------+
 | Male age-specific prevalence       | 
-| (p_i+) atrophy (Aoki 2005)         | 
+| (p_atrohpy+) atrophy [Aoki 2005]   | 
 +===========+============+===========+
 | age-bands | Atrophy +  | 95% CI    | 
 +-----------+------------+-----------+
@@ -321,7 +356,7 @@ The following tables show the sex and age specific CAG prevalence tables by read
 
 +------------------------------------+
 | Female age-specific prevalence     | 
-| (p_i+) atrophy (Aoki 2005)         | 
+| (p_atrophy+) atrophy [Aoki 2005]   | 
 +===========+============+===========+
 | age-bands | Atrophy +  | 95% CI    |
 +-----------+------------+-----------+
@@ -339,55 +374,44 @@ The following tables show the sex and age specific CAG prevalence tables by read
 +-----------+------------+-----------+
 
 
-Each row is out of 1. 
+Each row is a proportion out of 1. 
 
 We first need to obtain an atrophy state. To do that we give every simulant an atrophy propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
 
-With the simulant's sex, age and atrophy propensity, use the tables above to figure out what atrophic state this corresponds to and assign this to the simulant. Update the simulant's atrophic state as they age through the simulation.   
+With the simulant's sex, age and atrophy propensity, use the tables above to figure out what atrophic state the propensity corresponds to and assign this to the simulant. Update the simulant's atrophic state as they age through the simulation.   
 
 
 :underline:`B. Obtain H. pylori status conditional upon age and atrophic state`
  
-*H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and reinfection in adulthood are rare (add ref) and will not be allowed in our model. 
+*H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and reinfection in adulthood are rare and will not be allowed in our model. 
 
 +--------------------------------------------------------------------+
-| Fraction of atrophic state that is H. pylori positive + (f_i)      |   
+| Fraction of atrophic state that is H. pylori positive + (f_atrophy)|   
 +===========+============================+===========================+
-| age-bands |  Atrophy  +                | Atrophy -                 |
+| age-bands |  Atrophy +                 | Atrophy -                 |
 +-----------+----------------------------+---------------------------+
-| <30       |  f_i+                      |  f_i-                     |       
+| age       |  f_atrophy+                | f_atrohpy-                |       
 +-----------+----------------------------+---------------------------+                                    
-| 30-39     |  f_i+                      |  f_i-                     |     
-+-----------+----------------------------+---------------------------+
-| 40-49     |  f_i+                      |  f_i-                     |  
-+-----------+----------------------------+---------------------------+
-| 50-59     |  f_i+                      |  f_i-                     |  
-+-----------+----------------------------+---------------------------+
-| 60-70     |  f_i+                      |  f_i-                     |
-+-----------+----------------------------+---------------------------+
-| 70+       |  f_i+                      |  f_i-                     |
-+-----------+----------------------------+---------------------------+
+
 
 Each cell is a proportion out of 1 which is the atrophic state. The proportion is the fraction of the atrophic state that is H pylori positive.  
 
-Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's atrophic state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
+Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's age and atrophic state obtained in the previous step, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
 
-To derive f_i+ and f_i- for the above table with uncertainty intervals use the following set of equations:
-
+To derive f_atrophy+ and f_atrophy- for the above table with uncertainty intervals use the following set of equations:
 
 +-----------+----------------------------+---------------------------+
-|           |   Atrophy +                |   Atrophy -               |  
+| H. pylori |   Atrophy +                |   Atrophy -               |  
 +-----------+----------------------------+---------------------------+
-| H+        |     a                      | b                         |
+| H+        |     a                      |     b                     |
 +-----------+----------------------------+---------------------------+
-| H-        |     c                      | d                         |
+| H-        |     c                      |     d                     |
 +-----------+----------------------------+---------------------------+
 
-(1) a+b = :math:`P_{hp{s}}`
-(2) c+d = 1 - :math:`P_{hp{s}}`
-(3) (a+c)/(a+b+c+d) = p_i 
-(4) a+b+c+d = 1000
-(5) ad/bc = OR
+(1) a+b/(a+b+c+d) = :math:`P_{hp{s}}`
+(2) (a+c)/(a+b+c+d) = p_i 
+(3) a+b+c+d = 1000
+(4) ad/bc = OR
 (6) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
 (7) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005]
 (8) f_i+ = a/(a+c)
@@ -396,9 +420,9 @@ To derive f_i+ and f_i- for the above table with uncertainty intervals use the f
 see tab Aoki 2005 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
 
 .. note::
-   f_i+ should be approximately 0.80 and f_i- approximately 0.50. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
+  f_i+ should be approximately 0.80 and f_i- approximately 0.50. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
 
-We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
+We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment for H. pylori). H.pylori status is binary: pos or neg. We assume H. pylori prevalence is consistent across all ages and sex [Aoki 2005].
 
 
 .. todo::
