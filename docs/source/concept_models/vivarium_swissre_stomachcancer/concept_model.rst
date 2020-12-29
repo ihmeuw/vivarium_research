@@ -49,6 +49,8 @@ Vivarium CSU Stomach Cancer Screening
 +-------+----------------------------+
 | AG    | atrophic gastritis         |
 +-------+----------------------------+
+| CAG   | chronic atrophic gastritis |
++-------+----------------------------+
 | IM    | intestinal metaplasia      |
 +-------+----------------------------+
 | DYS   | Dysplasia                  |
@@ -278,41 +280,68 @@ References:
 
 To make this section easier to follow, we define:
 
-  - p_i+ = prevalence of atrophy
-  - f_i+/- = fraction of atrophic state that is H. pylori positive 
-  - i+/- = atrophic state
+  - atrophy+ = with atrophic gastritis
+  - atrophy- = without atrophic gastritis
+  - p_atrophy+ = prevalence of atrophic gastritis
+  - f_atrophy+/- = fraction of the atrophic state that is H. pylori positive 
+  
 
+:underline:`A. Pre-cancerous state (chronic atrophic gastritis)`
 
-:underline:`A. Pre-cancerous states`
-
-Ideally we obtain age-specific distribution of pre-cancer state prevalence from cross-sectional studies/cohort starting from young age in populations with similar risks of:
+Ideally we obtain age-specific distribution of the pre-cancer atrophic state prevalence from cross-sectional studies/cohort starting from young age in populations with similar risks of:
 
   - urban
   - China
   - H.pylori prevalence
 
-.. todo::
 
-  this prevalence distribution Aoki 2005. Data from China came from Chinese project (1996/1997): A total of 1741 individuals from Zhanhuang County (population: 208,000) of the   Province of Hebei, the People’s Republic of China, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination   by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female using serum antibody test. CAG was serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
+This age and sex specific prevalence distribution of chronic atrophic gastritis is from Chinese population from 1997/1997 [Aoki 2005]. A total of 1741 individuals from Zhanhuang County (population: 208,000) of the Province of Hebei, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female using serum antibody test. CAG was serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
 
-+------------------------------------+         +------------------------------------+
-| MALE age-specific prevalence       |         | FEMALE age-specific prevalence     |
-|(p_i+) atrophy (Aoki 2005)          |         | (p_i+) atrophy (Aoki 2005)         |
-+===========+============+===========+         +===========+============+===========+
-| age-bands | Atrophy +  | 95% CI    |         | age-bands | Atrophy +  | 95% CI    |
-+-----------+------------+-----------+         +-----------+------------+-----------+
-| <30       | 0.08       | 0.00-0.18 |         | <30       | 0.08       | 0.00-0.18 |             
-+-----------+------------+-----------+         +-----------+------------+-----------+
-| 30-39     | 0.12       | 0.06-0.18 |         | 30-39     | 0.12       | 0.06-0.18 |
-+-----------+------------+-----------+         +-----------+------------+-----------+
-| 40-49     | 0.12       | 0.07-0.17 |         | 40-49     | 0.12       | 0.07-0.17 |
-+-----------+------------+-----------+         +-----------+------------+-----------+
-| 50-59     | 0.16       | 0.08-0.24 |         | 50-59     | 0.16       | 0.08-0.24 |  
-+-----------+------------+-----------+         +-----------+------------+-----------+
-| 60-69     | 0.18       | 0.10-0.26 |         | 60-69     | 0.18       | 0.10-0.26 |    
-+-----------+------------+-----------+         +-----------+------------+-----------+         
-| 70+       | 0.28       | 0.06-0.50 |         | 70+       | 0.28       | 0.06-0.50 |       
-+-----------+------------+-----------+         +-----------+------------+-----------+
+The following tables show the sex and age specific CAG prevalence tables were by reading off figure 5 and 6 from Aoko 2005
+
+.. image:: prevalence_chronic_atrophic_gastritis_china.svg
+
+
++------------------------------------+
+| MALE age-specific prevalence       | 
+| (p_i+) atrophy (Aoki 2005)         | 
++===========+============+===========+
+| age-bands | Atrophy +  | 95% CI    | 
++-----------+------------+-----------+
+| <30       | 0.08       | 0.00-0.18 |       
++-----------+------------+-----------+
+| 30-39     | 0.12       | 0.06-0.18 |
++-----------+------------+-----------+
+| 40-49     | 0.12       | 0.07-0.17 |
++-----------+------------+-----------+
+| 50-59     | 0.16       | 0.08-0.24 | 
++-----------+------------+-----------+
+| 60-69     | 0.18       | 0.10-0.26 | 
++-----------+------------+-----------+ 
+| 70+       | 0.28       | 0.06-0.50 |
++-----------+------------+-----------+
+
+
++------------------------------------+
+| FEMALE age-specific prevalence     | 
+| (p_i+) atrophy (Aoki 2005)         | 
++===========+============+===========+
+| age-bands | Atrophy +  | 95% CI    |
++-----------+------------+-----------+
+| <30       | 0.08       | 0.00-0.18 |            
++-----------+------------+-----------+
+| 30-39     | 0.12       | 0.06-0.18 | 
++-----------+------------+-----------+
+| 40-49     | 0.12       | 0.07-0.17 | 
++-----------+------------+-----------+
+| 50-59     | 0.16       | 0.08-0.24 | 
++-----------+------------+-----------+
+| 60-69     | 0.18       | 0.10-0.26 | 
++-----------+------------+-----------+     
+| 70+       | 0.28       | 0.06-0.50 | 
++-----------+------------+-----------+
+
+
 
 
 Each row sums up to 1. 
@@ -348,7 +377,7 @@ Each cell is a proportion out of 1 which is the atrophic state. The proportion i
 
 Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's atrophic state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
 
-To derive the table with uncertainty intervals, use ann odds ratio of 3.8 (95%CI: 3.054 - 4.631). This is the odds ratio after adjusting for age and sex. 
+To derive the table with uncertainty intervals use the following set of equations. This is the odds ratio after adjusting for age and sex. 
 
 
 +-----------+----------------------------+---------------------------+
@@ -360,13 +389,14 @@ To derive the table with uncertainty intervals, use ann odds ratio of 3.8 (95%CI
 +-----------+----------------------------+---------------------------+
 
 (1) a+b = :math:`P_{hp{s}}`
-(2) c+d = 1 :math:`P_{hp{s}}`
+(2) c+d = 1 - :math:`P_{hp{s}}`
 (3) (a+c)/(a+b+c+d) = p_i 
-(4) ab/bc = OR
-(5) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
-(6) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005]
-(7) f_i+ = a/(a+c)
-(8) f_i- = b/(b+d)
+(4) a+b+c+d = 1000
+(5) ad/bc = OR
+(6) :math:`P_{hp{s}}` = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
+(7) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005]
+(8) f_i+ = a/(a+c)
+(9) f_i- = b/(b+d)
 
 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
 
