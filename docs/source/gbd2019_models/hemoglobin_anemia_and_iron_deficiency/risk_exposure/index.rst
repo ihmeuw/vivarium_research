@@ -34,7 +34,7 @@ This estimation approach is not described in the GBD 2019 Risk Factor Methods Ap
 
 	The iron deficiency risk factor is calculated according to the following equation, as documented `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency/nutrition_iron_exposure.py>`_ and externally validated `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/custom_paf_calculations.ipynb>`_.
 
-	:math:`exposure = TMREL - (p_* * (TMREL - mean_\text{Hgb}))`
+	:math:`exposure = TMREL - p_* * (TMREL - mean_\text{Hgb})`
 
 	Where, :math:`p_*` is the summed prevalence of all anemia caused by any disease except dietary iron deficiency (using the MEIDs listed below) and :math:`mean_\text{Hgb}` is the observed mean population hemoglobin value (MEID = 10487).
 
@@ -60,7 +60,7 @@ This estimation approach is described in the GBD 2019 Risk Factor Methods Append
 
 The location-specific TMREL exposure estimation approach has the following steps:
 
-#. Estimate a location-specific TMREL, defined as the counterfactual population mean hemoglobin concentration in the absence of all diseases that cause iron deficiency
+1. Estimate a location-specific TMREL, defined as the counterfactual population mean hemoglobin concentration in the absence of all diseases that cause iron deficiency
 
 	:math:`TMREL = mean_\text{Hgb} + \sum_{c=1}^{n} p_c * shift_c`
 
@@ -68,7 +68,7 @@ The location-specific TMREL exposure estimation approach has the following steps
 
 	An estimation of the TMREL using this method can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/custom_paf_calculations.ipynb>`_.
 
-	The cause-specific hemoglobin shifts represent the average difference in hemoglobin concentration among individuals afflicted with that cause and the general population (from the literature) and can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/hb_shifts.csv>`_. Note that these shifts are sex-specific but do not vary by age. Additionally, these shifts apply to mean hemoglobin concentration only; it is assumed that there is no change in hemoglobin distribution standard deviation, which is a limitation in this analysis due to a significant data gap.
+	The cause-specific hemoglobin shifts represent the average difference in hemoglobin concentration among individuals afflicted with that cause and the general population (from the literature) and can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/hb_shifts.csv>`_. Note that these shifts are sex-specific but do not vary by age. 
 
 	The following table lists the relevant IDs for the diseases that cause iron deficiency that should be used for this analysis.
 
@@ -141,7 +141,7 @@ The location-specific TMREL exposure estimation approach has the following steps
 
 	There are some diseases that cause iron deficiency that are available in the necessary format as modelable entities or sequelae rather than causes, which is why several ID types are listed in the table above.
 
-#. Estimate iron deficiency risk exposure as the observed mean population hemoglobin concentration
+2. Estimate iron deficiency risk exposure as the observed mean population hemoglobin concentration
 
 	In the location-specific TMREL exposure estimation approach, the iron deficiency risk exposure is equal to the observed mean population hemoglobin concentration, which can be pulled at the draw level using the following code:
 
