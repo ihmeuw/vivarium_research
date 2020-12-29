@@ -152,17 +152,14 @@ Scale-up of stomach cancer screening coverage among insured population
 
 :underline:`Baseline scenario`
 
-  * no screening coverage
+* we assume a 5% H pylori screening that is already inherent in the population.
 
-.. note::
-  unless we want to bake a coverage into the baseline as well because insured pop might be screened more? Then we might want to also adjust cancer incidence among insured population (lower than general) because screening would protect againt stomach cancer incidence. 
 
 :underline:`Alternative scenario`
 
-XX% of insured Chinese male/female initiated stomach cancer screening in 2020, stay XX% for one year then linearly project to XX% by 2030 and hold constant till 2040 for blended provinces, where:
+In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure below. 
 
-  * same screening mechanisms as compared to baseline for different age groups and risk exposure level.
-
+.. image:: stomach_cancer_screening_coverage.svg
  
 
 .. _5.0:
@@ -297,13 +294,13 @@ Ideally we obtain age-specific distribution of the pre-cancer atrophic state pre
 
 This age and sex specific prevalence distribution of chronic atrophic gastritis is from Chinese population from 1997/1997 [Aoki 2005]. A total of 1741 individuals from Zhanhuang County (population: 208,000) of the Province of Hebei, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female using serum antibody test. CAG was serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
 
-The following tables show the sex and age specific CAG prevalence tables were by reading off figure 5 and 6 from Aoko 2005
+The following tables show the sex and age specific CAG prevalence tables by reading off figure 5 and 6 from Aoko 2005
 
 .. image:: prevalence_chronic_atrophic_gastritis_china.svg
 
 
 +------------------------------------+
-| MALE age-specific prevalence       | 
+| Male age-specific prevalence       | 
 | (p_i+) atrophy (Aoki 2005)         | 
 +===========+============+===========+
 | age-bands | Atrophy +  | 95% CI    | 
@@ -323,32 +320,30 @@ The following tables show the sex and age specific CAG prevalence tables were by
 
 
 +------------------------------------+
-| FEMALE age-specific prevalence     | 
+| Female age-specific prevalence     | 
 | (p_i+) atrophy (Aoki 2005)         | 
 +===========+============+===========+
 | age-bands | Atrophy +  | 95% CI    |
 +-----------+------------+-----------+
-| <30       | 0.08       | 0.00-0.18 |            
+| <30       | 0.10       | 0.00-0.20 |            
 +-----------+------------+-----------+
-| 30-39     | 0.12       | 0.06-0.18 | 
+| 30-39     | 0.11       | 0.09-0.13 | 
 +-----------+------------+-----------+
-| 40-49     | 0.12       | 0.07-0.17 | 
+| 40-49     | 0.06       | 0.04-0.08 | 
 +-----------+------------+-----------+
-| 50-59     | 0.16       | 0.08-0.24 | 
+| 50-59     | 0.12       | 0.08-0.16 | 
 +-----------+------------+-----------+
 | 60-69     | 0.18       | 0.10-0.26 | 
 +-----------+------------+-----------+     
-| 70+       | 0.28       | 0.06-0.50 | 
+| 70+       | 0.19       | 0.08-0.30 | 
 +-----------+------------+-----------+
 
 
+Each row is out of 1. 
 
+We first need to obtain an atrophy state. To do that we give every simulant an atrophy propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
 
-Each row sums up to 1. 
-
-We first need to obtain an atrophy state. To do that we give every simulant a atrophy propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
-
-With the simulant's sex, atrophy propensity and age, use the table above to figure out what atrophic state this corresponds to and assign this to the simulant. Update the simulants atrophic state as they age through the simulation.   
+With the simulant's sex, age and atrophy propensity, use the tables above to figure out what atrophic state this corresponds to and assign this to the simulant. Update the simulant's atrophic state as they age through the simulation.   
 
 
 :underline:`B. Obtain H. pylori status conditional upon age and atrophic state`
@@ -358,7 +353,7 @@ With the simulant's sex, atrophy propensity and age, use the table above to figu
 +--------------------------------------------------------------------+
 | Fraction of atrophic state that is H. pylori positive + (f_i)      |   
 +===========+============================+===========================+
-| age-bands |  atrophy  +                | atrophy -                 |
+| age-bands |  Atrophy  +                | Atrophy -                 |
 +-----------+----------------------------+---------------------------+
 | <30       |  f_i+                      |  f_i-                     |       
 +-----------+----------------------------+---------------------------+                                    
@@ -377,7 +372,7 @@ Each cell is a proportion out of 1 which is the atrophic state. The proportion i
 
 Next, we need to assign H. pylori status. We do this by giving each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's atrophic state obtained in the previous step, and age, assign H. pylori status using the table above. Those who have propensity below the fraction are positive. 
 
-To derive the table with uncertainty intervals use the following set of equations. This is the odds ratio after adjusting for age and sex. 
+To derive f_i+ and f_i- for the above table with uncertainty intervals use the following set of equations:
 
 
 +-----------+----------------------------+---------------------------+
@@ -398,7 +393,10 @@ To derive the table with uncertainty intervals use the following set of equation
 (8) f_i+ = a/(a+c)
 (9) f_i- = b/(b+d)
 
-:download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
+see tab Aoki 2005 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
+
+.. note::
+   f_i+ should be approximately 0.80 and f_i- approximately 0.50. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
 
 We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment). H.pylori status is binary: pos or neg. 
 
@@ -408,9 +406,6 @@ We only assign H. pylori status once and simulants will keep the same status thr
   1. write up a narrative description to accompany the workbook. 
   2. also, upload python notebook on vivarium_data_analysis and create link. 
 
-.. todo:: 
-  
-   1. Should we have engineers calculate f_i table so that there is undertainty in the f_i parameter too? 
 
 References: 
 
