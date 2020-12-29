@@ -449,13 +449,16 @@ This screening model will be applied in the alternative scenario. Apply first sc
 
 :underline:`First screen`
 
+We model screening only in the alternative scenario. All simulants are eligible for screening. The current screening coverage (orange line in the graph) is the proportion of simulants who will attend their first screening. The screening coverage is **cumulative**. Only simulants aged 40 and above will be covered. We can model the first screen attendance uniformly distributed within the first year of coverage. For example, in 2020, 5% (the screening coverage in 2020) of simulants aged 40 and above will recieve a first screen within the first year (before 2021). If the screening coverage in 2021 is 6%, then 1% more simulants will attend first screening in 2021. 
+
+Based on the simulants H. pylori status by **screen test**, and atrophy state, they will be due their next screening according to the screening branch. Make sure we track simulants' H. pylori true status, H. hylori screen status, and H. pylori treatment status. Note that the screening tree branches by simulants H. pylori screening status but the simulants cancer incidence follows the H. pylori true status. 
 
 
 .. image:: stomach_cancer_screening_coverage.svg
 
-:underline:`Screening frequency`
+:underline:`Subsequent screening frequency`
 
-Stomach cancer screening algorithm was derived from the 2019 guidelines from the China Anti-Cancer Association and National Clinical Research Center for Cancer. All simulants will follow this decision tree to decide if they are due a screening. The decision tree branches according to:  
+Stomach cancer screening algorithm was derived from the 2019 guidelines from the China Anti-Cancer Association and National Clinical Research Center for Cancer. All simulants will follow this decision tree to decide if they are due a subsequent screening. The decision tree branches according to:  
 
    1) Pre-cancer state (atrophy vs no atrophy)
    2) H pylori status
@@ -469,9 +472,11 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 | Pre-cancer            | H. pylori negative (-)     | H. pylori positive (+)    |
 | States                | from screening test        | from screening test       |        
 +-----------------------+----------------------------+---------------------------+
-|   atrophy -           | repeat ABC every 5 years   | endoscopy every 3 years   |
+|   atrophy -           | Branch 1                   |  Branch 2                 |
+|                       |  repeat ABC every 5 years  |  endoscopy every 3 years  |
 +-----------------------+----------------------------+---------------------------+                                                   
-|   atrophy +           | endoscopy every 1 year     | endoscopy every 2 years   |          
+|   atrophy +           | Branch 4                   | Branch 3                  |
+|                       | endoscopy every 1 year     | endoscopy every 2 years   |          
 +-----------------------+----------------------------+---------------------------+          
 
 
@@ -491,12 +496,23 @@ H. pylori eradication success rate using standard bismuth-containing quadruple t
 
 .. note::
 
-  - we do not model treatment for atrophy (Zhang 2018: resection/treatment of high/low grade dysplasia has no effect on incidence of stomach cancer) 
+  - we do not model treatment for atrophy [Zhang 2018] resection/treatment of high/low grade dysplasia has no effect on incidence of stomach cancer.
 
-.. todo::
 
-  1. timing of first screen
-  2. probability of attending due screen
+:underline:`Subsequent screens`
+
+(1) We can model that 100% of simulants who are due for another ABC test (Branch 1) will attend. 
+(2) Those who are due for endoscopy (branch 2-4), the proportion who will show up at their scheduled screening time will be normally distributed around 18.4% (95%CI: 18.1%‐18.7%). 
+
+For example, if Sally-Sim is H. pylori + and atrophy +. She goes for her first screening in 2020 and she falls under Branch 4 and is due a screening in 2 years which is 2022. The probability she attends that screening is 18.4%. Whether or not she attends that screening, she will be due for another endoscopy in 2 years in 2024 and the probability she will attend that is also 18.4% and so on and so forth. 
+
+.. note::
+  
+  we can also model a probability of attending a catch-up screening if simulant misses the scheduled screening. To keep it simple, we are not allowing catch-up screenings for that but we may incorporate is we feel is necessary later on. 
+
+Reference: 
+
+ - Guo Determinants of participation and detection rate of upper gastrointestinal cancer from population‐based screening program in China. Cancer Medicine. 2019;8:7098–7107.
 
 
 Reference: 
