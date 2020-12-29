@@ -136,16 +136,12 @@ To estimate the yearly number of cases of stomach cancer detected under specific
 3.2 Effect and impact size
 --------------------------
 
-RR of H. pylori = 1.89
-Exposure of H. pylori = 55%
-PAF of H. pylori = 
-
 .. _4.0:
 
 4.0 Intervention
 ++++++++++++++++
 
-Scale-up of stomach cancer screening coverage among insured population 
+Scale-up of stomach cancer screening using ABC method with endoscopic follow-up among insured population 
 
 .. _4.1:
 
@@ -159,7 +155,7 @@ Scale-up of stomach cancer screening coverage among insured population
 
 :underline:`Alternative scenario`
 
-In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure below. 
+In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure below. We do not assume that the 5% who recieve H. pylori screening in the baseline is the same groups those who recieve screening in the alternative scenario. 
 
 .. image:: stomach_cancer_screening_coverage.svg
  
@@ -384,7 +380,7 @@ Each row is a proportion out of 1.
 
 We first need to obtain an atrophy state. To do that we give every simulant an atrophy propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
 
-With the simulant's sex, age and atrophy propensity, use the tables above to figure out what atrophic state the propensity corresponds to and assign this to the simulant. Update the simulant's atrophic state as they age through the simulation.   
+With the simulant's sex, age and atrophy propensity, use the tables above to figure out what atrophic state the propensity corresponds to and assign this to the simulant. If the propensity is < the proportion in the table, they are atrophic+. Update the simulant's atrophic state as they age through the simulation.   
 
 
 :underline:`B. Obtain H. pylori status conditional upon age and atrophic state`
@@ -429,12 +425,15 @@ The calculated values should look similar to this back of envelope calculation: 
 
   f_atrophy+ should be approximately 0.80 and f_atrophy- approximately 0.50. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
 
-We only assign H. pylori status once and simulants will keep the same status throughout the sim - will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment for H. pylori). H.pylori status is binary: pos or neg. We assume H. pylori prevalence is consistent across all ages and sex [Aoki 2005].
+.. important::
+  We only assign H. pylori status once at initialization and simulants will keep the same status throughout the sim - we will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment for H. pylori). H.pylori status is binary: pos or neg. Although some studies have observed H. pylori prevalence increasing with age, we use a population prevalence of H. pylori and assume the prevalence is consistent across all ages and sex as supported by Aoki 2005.
 
 Example: 
 
   Lets say we have a simulant Sally-Sim who is age 42. She has been randomly assigned atrophic percentile of 0.03 and h.pylori percentile of 0.5. Looking at the p_atrophy+ table for females, she is in the atrophic+ state for her percentile rank. Next, we determine her H. pylori status. Because she is atrophic, her H. pylori status will be determined by f_atrophy+ for her age group. Reading off the excel table, f_atrophy+ for 40-49 year olds is 0.82. Hence, she is also H. pylori positive. 
  
+
+Here is a notebook that describes the above steps:  
 
 References: 
  -
@@ -447,6 +446,10 @@ References:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This screening model will be applied in the alternative scenario. Apply first screening coverage to those who are 40 years old and above using the screening scale-up figure below. Simulants' first screen will be using the non-invasive with the ABC method delineated by Chen 2018 which combines H. pylori antibody test and serum pepsinogen (PG) test for atrophy.
+
+:underline:`First screen`
+
+
 
 .. image:: stomach_cancer_screening_coverage.svg
 
