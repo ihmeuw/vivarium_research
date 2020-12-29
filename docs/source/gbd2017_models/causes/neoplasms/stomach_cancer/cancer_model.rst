@@ -369,7 +369,7 @@ State and Transition Data Tables
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
 
-Obtained from Bae et al. Mean Sojourn Time of Preclinical Gastric Cancer in Korean Men: A Retrospective Observational Study J Prev Med Public Health 2014;47:201-205
+The MST derived from Bae 2014 is 2.37 years (95%CI: 1.92 to 2.96). We will use 2.37 years with 95%CIs of 1.78 to 2.96 to make the distribution symmetrical. This means that the MST is 1.92-1.78 = 0.14 years shorter ~ 1.6 months for approximately 5% of the population. 
 
 **Parameter for Use in Model:**
 
@@ -392,6 +392,9 @@ This parameter is be sampled *at the draw level* from the distribution detailed 
   mst_distribution = norm(mean, std)
 
 
+Reference: 
+
+ - Bae et al. Mean Sojourn Time of Preclinical Gastric Cancer in Korean Men: A Retrospective Observational Study J Prev Med Public Health 2014;47:201-205
 
 Validation Criteria
 +++++++++++++++++++
