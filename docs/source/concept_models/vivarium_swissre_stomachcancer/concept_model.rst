@@ -473,7 +473,7 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 | States                | from screening test        | from screening test       |        
 +-----------------------+----------------------------+---------------------------+
 |   atrophy -           | Branch 1                   |  Branch 2                 |
-|                       |  repeat ABC every 5 years  |  endoscopy every 3 years  |
+|                       | repeat ABC every 5 years   |  endoscopy every 3 years  |
 +-----------------------+----------------------------+---------------------------+                                                   
 |   atrophy +           | Branch 4                   | Branch 3                  |
 |                       | endoscopy every 1 year     | endoscopy every 2 years   |          
@@ -504,7 +504,7 @@ H. pylori eradication success rate using standard bismuth-containing quadruple t
 (1) We can model that 100% of simulants who are due for another ABC test (Branch 1) will attend. 
 (2) Those who are due for endoscopy (branch 2-4), the proportion who will show up at their scheduled screening time will be normally distributed around 18.4% (95%CI: 18.1%‐18.7%). 
 
-For example, if Sally-Sim is H. pylori + and atrophy +. She goes for her first screening in 2020 and she falls under Branch 4 and is due a screening in 2 years which is 2022. The probability she attends that screening is 18.4%. Whether or not she attends that screening, she will be due for another endoscopy in 2 years in 2024 and the probability she will attend that is also 18.4% and so on and so forth. 
+For example, if Sally-Sim is H. pylori + and atrophy +. She goes for her first screening in 2020 and she falls under Branch 3 and is due a screening in 2 years which is 2022. The probability she attends that screening is 18.4%. Whether or not she attends that screening, she will be due for another endoscopy in 2 years in 2024 and the probability she will attend that is also 18.4% and so on and so forth. 
 
 .. note::
   
