@@ -222,6 +222,8 @@ Additional considerations:
 
 Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality and morbidity because it is not an explicit outcome of interest in this project, although there is evidence that there is an effect.
 
+Note that we are using mortality due to chronic obstructive pulmonary disease (COPD) and ischemic heart disease (IHD) as a proxy for smoking-related mortality other than lung cancer (more details below).
+
 .. _5.2:
 
 5.2 Demographics
@@ -242,12 +244,32 @@ The demographic model for this project should follow the same demographic model 
 
 The lung cancer cause model that should be used for this project is documented on the :ref:`2017 Tracheal, Bronchus, and Lung Cancer Page <2017_lung_cancer>`.
 
+Additionally, the effect of the smoking risk factor on this model is documented on the :ref:`2017 Smoking Risk Effects page <2017_risk_effect_smoking>`.
+
 .. _5.3.2:
 
-5.3.2 Screening and detection model
+5.3.2 Smoking-Related Mortality Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The smoking-related mortaltiy model will be incorporated into this project in order to capture the excess mortality attributable to the smoking risk factor from causes other than lung cancer. This is a mortality-only model that considers mortality due to chronic obstructive pulmonary disease and ischemic heart disease only. The mortality component of this model is documented on the :ref:`2017 Smoking-Related Mortality Model <2017_smoking_related_mortality>`. Additionally, the effect of the smoking risk factor on this model is documented on the :ref:`2017 Smoking Risk Effects page <2017_risk_effect_smoking>`.
+
+.. _5.3.3:
+
+5.3.3 Smoking model
+~~~~~~~~~~~~~~~~~~~
+
+The smoking risk exposure model to be used for this project is documented on the :ref:`Forecasted Smoking Risk Exposure Page <2017_risk_exposure_smoking_forecasted>`.
+
+The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
+
+The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.4`_ Screening and detection model.
+
+.. _5.3.4:
+
+5.3.4 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5.3.2.1 Screening Model
+5.3.4.1 Screening Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 *Annual* screenings should be scheduled for simulants who meet ALL of the following criteria: 
@@ -261,7 +283,7 @@ The lung cancer cause model that should be used for this project is documented o
 
   Include probability of attending screening data, time to next scheduled screen distribution, screenining initialization information
 
-5.3.2.2 Detection Model
+5.3.4.2 Detection Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation.
@@ -281,7 +303,7 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 
   We may want to eventually incorporate some lag period here between when simulant begins to experience symptoms and when lung cancer is actually formally diagnosed.
 
-5.3.2.3 Screening Sensitivity and Specificity
+5.3.4.3 Screening Sensitivity and Specificity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancer screening specificity is assumed to be 100%; in other words, we assume that there will be no false negative lung cancer results detected via screening. 
@@ -290,7 +312,7 @@ Lung cancer screening specificity is assumed to be 100%; in other words, we assu
 
   Document screening sensitivity value and references
 
-5.3.2.4 Screening Coverage
+5.3.4.4 Screening Coverage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - Baseline
@@ -304,17 +326,6 @@ Lung cancer screening specificity is assumed to be 100%; in other words, we assu
 .. todo::
 
   Document target screening coverage rate and scale-up algorithm
-
-.. _5.3.3:
-
-5.3.3 Smoking model
-~~~~~~~~~~~~~~~~~~~
-
-The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
-
-The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
-
-The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
 
 .. _5.4:
 

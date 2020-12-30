@@ -41,14 +41,14 @@ Risk Overview
 
 .. todo::
 
-	Provide a brief description of the risk, including potential opportunities for confounding (factors that may cause or be associated with the risk exposure), effect modification/generalizability, etc. by any relevant variables. Note that literature reviews and speaking with the GBD risk modeler will be good resources for this.
+  Provide a brief description of the risk, including potential opportunities for confounding (factors that may cause or be associated with the risk exposure), effect modification/generalizability, etc. by any relevant variables. Note that literature reviews and speaking with the GBD risk modeler will be good resources for this.
 
 GBD 2017 Modeling Strategy
 --------------------------
 
 .. note::
 
-	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
+  This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
 
 The smoking risk factor affects *several* outcomes in GBD, including tuberculosis, lower respiratory tract infections, oesophageal cancer, stomach cancer, bladder cancer, liver cancer, laryngeal cancer, lung cancer, breast cancer, cervical cancer, colorectal cancer, lip and oral cancer, nasopharyngeal cancer, other pharyngeal cancer, pancreatic cancer, kidney cancer, leukaemia, ischaemic heart disease, ischaemic stroke, haemorrhagic stroke, subarachnoid haemorrhage, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic obstructive pulmonary disease, other chronic respiratory diseases, asthma, peptic ulcer disease, gallbladder and biliary tract diseases, Alzheimer disease and other dementias, Parkinson disease (protective), multiple sclerosis, type‐II diabetes, rheumatoid arthritis, low back pain, cataracts, macular degeneration, and fracture.
 
@@ -56,14 +56,9 @@ Notably, the relative risks for the smoking risk factor in GBD are defined separ
 
 The relative risks for the smoking risk factor cannot be pulled using standard tools. Rather, filepaths to the relative risk data (both for current and former smokers) are available in :download:`this excel document <rr_reference.csv>`.
 
-  The relative risk data for the smoking risk factor are defined as a continous risk curve. This curve is modeled according to "mesh points" that are documented in the above excel file and the risk curve is assumed to connect linearly between each mesh point.
+  The relative risk data for the smoking risk factor are defined as a continous risk curve. This curve is modeled according to "mesh points" that are documented in the above excel file and the risk curve is assumed to connect **linearly** between each mesh point.
 
-.. todo:: 
-
-	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2017.
-
-.. list-table:: Affected Entities
-   :widths: 5 5 5 5 5
+.. list-table:: Smoking-Affected Cause IDs
    :header-rows: 1
 
    * - Outcome
@@ -71,18 +66,203 @@ The relative risks for the smoking risk factor cannot be pulled using standard t
      - Outcome ID
      - Affected measure
      - Note
-   * - 
+   * - Tuberculosis
+     - Cause
+     - 297
      - 
      - 
+   * - Lower respiratory tract infections
+     - Cause
+     - 322
      - 
      - 
+   * - Oesophageal cancer
+     - Cause
+     - 411
+     - 
+     - 
+   * - Stomach cancer
+     - Cause
+     - 414
+     - 
+     - 
+   * - Bladder cancer
+     - Cause
+     - 474
+     - 
+     - 
+   * - Liver cancer
+     - Cause
+     - 417
+     - 
+     - Not most detailed cause
+   * - Laryngeal cancer
+     - Cause
+     - 423
+     - 
+     - 
+   * - Lung cancer
+     - Cause
+     - 426
+     - 
+     - 
+   * - Breast cancer
+     - Cause
+     - 429
+     - 
+     - 
+   * - Cervical cancer
+     - Cause
+     - 432
+     - 
+     - Female only cause
+   * - Colorectal cancer
+     - Cause
+     - 441
+     - 
+     - 
+   * - Lip and oral cancer
+     - Cause
+     - 444
+     - 
+     - 
+   * - Nasopharyngeal cancer
+     - Cause
+     - 447
+     - 
+     - 
+   * - Other pharyngeal cancer
+     - Cause
+     - 450
+     - 
+     - 
+   * - Pancreatic cancer
+     - Cause
+     - 456
+     - 
+     - 
+   * - Kidney cancer
+     - Cause
+     - 471
+     - 
+     - 
+   * - Leukaemia
+     - Cause
+     - 487
+     - 
+     - Not most detailed cause
+   * - Ischaemic heart disease
+     - Cause
+     - 493
+     - 
+     - 
+   * - Ischaemic stroke
+     - Cause
+     - 495
+     - 
+     - 
+   * - Haemorrhagic stroke (Intracerebral hemorrhage)
+     - Cause
+     - 496
+     - 
+     - 
+   * - Subarachnoid haemorrhage
+     - Cause
+     - 497
+     - 
+     - 
+   * - Atrial fibrillation and flutter
+     - Cause
+     - 500
+     - 
+     - 
+   * - Aortic aneurysm
+     - Cause
+     - 501
+     - 
+     - 
+   * - Peripheral arterial disease
+     - Cause
+     - 502
+     - 
+     - 
+   * - Chronic obstructive pulmonary disease
+     - Cause
+     - 509
+     - 
+     - 
+   * - Other chronic respiratory diseases
+     - Cause
+     - 520
+     - 
+     - 
+   * - Asthma
+     - Cause
+     - 515
+     - 
+     - 
+   * - Peptic ulcer disease
+     - Cause
+     - 527
+     - 
+     - 
+   * - Gallbladder and biliary tract diseases
+     - Cause
+     - 534
+     - 
+     - 
+   * - Alzheimer disease and other dementias
+     - Cause
+     - 543
+     - 
+     - 
+   * - Parkinson disease 
+     - Cause
+     - 544
+     - 
+     - Smoking exposure is protective for this cause
+   * - Multiple sclerosis
+     - Cause
+     - 546
+     - 
+     - 
+   * - Type‐II diabetes
+     - Cause
+     - 976
+     - 
+     - 
+   * - Rheumatoid arthritis
+     - Cause
+     - 627
+     - 
+     - 
+   * - Low back pain
+     - Cause
+     - 630
+     - 
+     - YLD only cause
+   * - Cataracts
+     - Cause
+     - 671
+     - 
+     - YLD only cause
+   * - Macular degeneration
+     - Cause
+     - 672
+     - 
+     - YLD only cause
+   * - Fracture
+     - Cause
+     - 
+     - 
+     - YLD only cause
 
 Vivarium Modeling Strategy
 --------------------------
 
 .. note::
 
-	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
+  This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
 
 .. todo::
 
@@ -102,11 +282,19 @@ Vivarium Modeling Strategy
      - 426
      - Incidence
      - 
+   * - Ischemic heart disease
+     - 493
+     - Cause-specific mortality rate
+     - For the :ref:`smoking related mortality model <2017_smoking_related_mortality>`
+   * - Chronic obstructive pulmonary disease
+     - 509
+     - Cause-specific mortality rate
+     - For the :ref:`smoking related mortality model <2017_smoking_related_mortality>`
 
 Lung Cancer Incidence
 +++++++++++++++++++++
 
-See the relevant documentation for the :ref:`lung cancer cause model here <2017_lung_cancer>` and the :ref:`forecasted smoking risk exposure model here <2017_risk_exposure_smoking_forecasted>`.
+See the relevant documentation for the :ref:`lung cancer cause model <2017_lung_cancer>` and the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
 
 Relative Risk Data
 ~~~~~~~~~~~~~~~~~~
@@ -214,7 +402,234 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
 
 .. todo::
 
-	Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+  Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+
+Chronic Obstructive Pulmonary Disease Mortality
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+See the relevant documentation for the :ref:`smoking related mortality model <2017_smoking_related_mortality>` and the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
+
+Relative Risk Data
+~~~~~~~~~~~~~~~~~~
+
+The COPD relative risks cannot be pulled using get_draws or other standard tools.
+
+  The mesh points for the relative risk curves for **current smokers** can be found here: /share/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/rr/modeling/outputs/decomp3/copd/draws_for_PAF/509_copd/draws_pack.csv
+
+  The mesh points for the relative risk curves for **former smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/509_copd/draws_quit.csv
+
+The following code demonstrates how to assign relative risk values to individual simulants based on their exposure values.
+
+.. code-block:: python
+
+  from scipy.interpolate import interp1d
+
+  """
+  rr_i =: simulant's individual relative risk
+  smoking_status_i =: simulant's smoking status exposure
+  draw_x =: selected draw for a given model run
+  sex_i =: simulant's sex
+  age_group_i =: simulant's age group
+  pack_year_exposure_i =: simulant's pack year exposure value, if applicable
+  years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
+  """
+
+  if smoking_status_i == 'never':
+    rr_i = 1
+
+  elif smoking_status_i == 'current':
+
+    rr_current = pd.read_csv('/share/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/rr/modeling/outputs/decomp3/copd/draws_for_PAF/509_copd/draws_pack.csv')
+    rr_current_i = rr_current.loc[rr_current.draw=draw_X].loc[rr_current.sex_id==sex_i].loc[rr_current.age_group_id==age_group_i]
+    x = rr_current_i.exposure.values
+    y = rr_current_i.rr.values
+    current_rr_function_i = interp1d(x, y)
+
+    rr_i = current_rr_function_i(pack_year_exposure_i)
+
+  elif smoking_status_i == 'former':
+
+    rr_former = pd.read_csv('/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/509_copd/draws_quit.csv')
+    rr_former_i = rr_former.loc[rr_former.draw=draw_X].loc[rr_former.sex_id==sex_i].loc[rr_former.age_group_id==age_group_i]
+    x = rr_former_i.exposure.values
+    y = rr_former_i.rr.values
+    former_rr_function_i = interp1d(x, y)
+
+    rr_i = former_rr_function_i(years_since_quitting_exposure_i)  
+
+PAF Calculation
+~~~~~~~~~~~~~~~
+
+The COPD PAF specific to an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
+
+.. math:: 
+
+  PAF_\text{a,s,l,y} = \frac{\overline{rr_\text{a,s,l,y}} - 1}{\overline{rr_\text{a,s,l,y}}}
+
+Where, :math:`\overline{rr_\text{a,s,l,y}}` is the mean value of relative risks for all simulants in a given age, sex, location, and year demographic group.
+
+Application of Risk Factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The smoking risk factor should affect the mortality rate of COPD, as defined in the :ref:`smoking related mortality model documentation <2017_smoking_related_mortality>`, such that:
+
+.. math::
+
+  mr_i = ACMR - CSMR_\text{c509} + CSMR_\text{c509} * (1 - PAF_\text{a,s,l,y}) * rr_i
+
+Where,
+
+.. list-table:: Parameter Definitions
+   :header-rows: 1
+
+   * - Parameter
+     - Definition
+     - Note
+   * - ACMR
+     - All-cause mortality rate 
+     - 
+   * - :math:`CSMR_\text{c509}`
+     - Cause-specific mortality rate for COPD
+     - Should use forecasted rates from 2020-2040 as documented on the  :ref:`smoking related mortality model document <2017_smoking_related_mortality>`
+   * - :math:`PAF_\text{a,s,l,y}`
+     - COPD PAF for smoking for simulant's demographic group
+     - As calculated in the `PAF Calculation`_ section
+   * - :math:`rr_i`
+     - Individual simulant's relative risk value
+     - Assigned as described in the `Relative Risk Data`_ section
+
+Validation and Verification Criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+While validating the exact application of the relative risks will be difficult to do with Vivarium simulation outputs, results should be stratified by smoking status and then, the all cause mortality rates should be lowest for never smokers, higher for former smokers, and highest for current smokers.
+
+Assumptions and Limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This model is limited in that it relies on the GBD relative risk structure that does not differentiate relative risks of former smokers by pack-year history so that current smokers with low pack-year histories who become former smokers may increase their risk of lung cancer by doing so, according to the GBD relative risk curves.
+
+Bias in the Population Attributable Fraction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As noted in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias.
+
+.. todo::
+
+  Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+
+Ischemic Heart Disease (IHD) Mortality
+++++++++++++++++++++++++++++++++++++++++++++++++
+
+See the relevant documentation for the :ref:`smoking related mortality model <2017_smoking_related_mortality>` and the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
+
+Relative Risk Data
+~~~~~~~~~~~~~~~~~~
+
+The IHD relative risks cannot be pulled using get_draws or other standard tools.
+
+  The mesh points for the relative risk curves for **current smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/493_ihd/draws_cig.csv
+
+
+  The mesh points for the relative risk curves for **former smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/493_ihd/draws_quit.csv
+
+The following code demonstrates how to assign relative risk values to individual simulants based on their exposure values.
+
+.. code-block:: python
+
+  from scipy.interpolate import interp1d
+
+  """
+  rr_i =: simulant's individual relative risk
+  smoking_status_i =: simulant's smoking status exposure
+  draw_x =: selected draw for a given model run
+  sex_i =: simulant's sex
+  age_group_i =: simulant's age group
+  pack_year_exposure_i =: simulant's pack year exposure value, if applicable
+  years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
+  """
+
+  if smoking_status_i == 'never':
+    rr_i = 1
+
+  elif smoking_status_i == 'current':
+
+    rr_current = pd.read_csv(/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/493_ihd/draws_cig.csv')
+    rr_current_i = rr_current.loc[rr_current.draw=draw_X].loc[rr_current.sex_id==sex_i].loc[rr_current.age_group_id==age_group_i]
+    x = rr_current_i.exposure.values
+    y = rr_current_i.rr.values
+    current_rr_function_i = interp1d(x, y)
+
+    rr_i = current_rr_function_i(pack_year_exposure_i)
+
+  elif smoking_status_i == 'former':
+
+    rr_former = pd.read_csv('/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/493_ihd/draws_quit.csv')
+    rr_former_i = rr_former.loc[rr_former.draw=draw_X].loc[rr_former.sex_id==sex_i].loc[rr_former.age_group_id==age_group_i]
+    x = rr_former_i.exposure.values
+    y = rr_former_i.rr.values
+    former_rr_function_i = interp1d(x, y)
+
+    rr_i = former_rr_function_i(years_since_quitting_exposure_i)  
+
+PAF Calculation
+~~~~~~~~~~~~~~~
+
+The IHD PAF specific to an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
+
+.. math:: 
+
+  PAF_\text{a,s,l,y} = \frac{\overline{rr_\text{a,s,l,y}} - 1}{\overline{rr_\text{a,s,l,y}}}
+
+Where, :math:`\overline{rr_\text{a,s,l,y}}` is the mean value of relative risks for all simulants in a given age, sex, location, and year demographic group.
+
+Application of Risk Factor
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The smoking risk factor should affect the mortality rate of IHD, as defined in the :ref:`smoking related mortality model documentation <2017_smoking_related_mortality>`, such that:
+
+.. math::
+
+  mr_i = ACMR - CSMR_\text{c493} + CSMR_\text{c493} * (1 - PAF_\text{a,s,l,y}) * rr_i
+
+Where,
+
+.. list-table:: Parameter Definitions
+   :header-rows: 1
+
+   * - Parameter
+     - Definition
+     - Note
+   * - ACMR
+     - All-cause mortality rate 
+     - 
+   * - :math:`CSMR_\text{c493}`
+     - Cause-specific mortality rate for IHD
+     - Should use forecasted rates from 2020-2040 as documented on the  :ref:`smoking related mortality model document <2017_smoking_related_mortality>`
+   * - :math:`PAF_\text{a,s,l,y}`
+     - COPD PAF for smoking for simulant's demographic group
+     - As calculated in the `PAF Calculation`_ section
+   * - :math:`rr_i`
+     - Individual simulant's relative risk value
+     - Assigned as described in the `Relative Risk Data`_ section
+
+Validation and Verification Criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+While validating the exact application of the relative risks will be difficult to do with Vivarium simulation outputs, results should be stratified by smoking status and then, the all cause mortality rates should be lowest for never smokers, higher for former smokers, and highest for current smokers.
+
+Assumptions and Limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This model is limited in that it relies on the GBD relative risk structure that does not differentiate relative risks of former smokers by pack-year history so that current smokers with low pack-year histories who become former smokers may increase their risk of lung cancer by doing so, according to the GBD relative risk curves.
+
+Bias in the Population Attributable Fraction
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+As noted in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias.
+
+.. todo::
+
+  Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
 
 References
 ----------
