@@ -320,9 +320,7 @@ Assumptions and Limitations
 
 This model is limited in that it only considers smoking attributable deaths due to IHD and COPD (as well as lung cancer when modeled as a part of the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`) and not the totality of smoking attributable deaths.
 
-.. todo::
-
-  Quantify the approx. proportion
+  According to GBD 2019 estimates, lung cancer, COPD, and IHD combined account for approximately 60% (UI: 56.9 - 62.5) of all smoking-attributable mortaltiy in China across all age groups and both sexes. For males, the value is 58.6% and for females it is 68.8%. The calculation of these values is hosted `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lung_cancer_model/ihd_copd_mortality.ipynb>`_.
 
 Cause Model Diagram
 +++++++++++++++++++
