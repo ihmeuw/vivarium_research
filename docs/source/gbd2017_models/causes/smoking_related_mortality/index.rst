@@ -320,7 +320,7 @@ Assumptions and Limitations
 
 This model is limited in that it only considers smoking attributable deaths due to IHD and COPD (as well as lung cancer when modeled as a part of the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`) and not the totality of smoking attributable deaths.
 
-  According to GBD 2019 estimates, lung cancer, COPD, and IHD combined account for approximately 60% (UI: 56.9 - 62.5) of all smoking-attributable mortaltiy in China across all age groups and both sexes. For males, the value is 58.6% and for females it is 68.8%. The calculation of these values is hosted `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lung_cancer_model/ihd_copd_mortality.ipynb>`_.
+  According to GBD 2019 estimates, lung cancer, COPD, and IHD combined account for 65.6% (UI: 62.6 - 67.9) of all smoking-attributable mortaltiy in China across all age groups and both sexes. For males, the value is 64.8% and for females it is 71.1%. The calculation of these values is hosted `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lung_cancer_model/ihd_copd_mortality.ipynb>`_.
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -329,13 +329,11 @@ There is no cause model diagram for this cause model because it is a mortality-o
 
 .. math ::
 
-  mr_i = ACMR - CSMR_\text{c426} - CSMR_\text{c493} - CSMR_\text{c509} 
+  mr_i = ACMR - CSMR_\text{426} - (\sum_{c=1}^{n} CSMR_c) 
 
-  + CSMR_\text{c493} * (1 - PAF_\text{c493}) * RR(i)_\text{c493}  
+  + EMR(i)_\text{426} * (1 - PAF_\text{426}) * RR(i)_\text{426}
 
-  + CSMR_\text{c509} * (1 - PAF_\text{c509}) * RR(i)_\text{c509}  
-
-  + EMR(i)_\text{c426} * (1 - PAF_\text{c426}) * RR(i)_\text{c426}
+  + (\sum_{c=1}^{n} CSMR_c * (1 - PAF_c) * RR(i)_c)
 
 Where, 
 
@@ -351,40 +349,56 @@ Where,
   * - :math:`ACMR`
     - All cause mortality rate forecasted from 2020-2040
     - /ihme/csu/swiss_re/forecast
-  * - :math:`c426`
+  * - :math:`426`
     - Lung cancer
     - 
-  * - :math:`c496`
-    - Ischemic heart disease (IHD)
-    - 
-  * - :math:`c509`
-    - Chronic obstructive pulmonary disease (COPD) 
-    - 
-  * - :math:`CSMR_\text{c426}`
+  * - :math:`c`
+    - 509, 493, 414, 441
+    - COPD, IHD, Stomach cancer, Colorectal cancer
+  * - :math:`CSMR_\text{426}`
     - Cause-specific mortality rate for lung cancer forecasted from 2020-2040
     - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`
-  * - :math:`CSMR_\text{c496}`
-    - Chronic obstructive pulmonary disease (COPD) forecasted from 2020-2040
-    - /ihme/csu/swiss_re/forecast/426_deaths_12_29_ng.nc, 'nosed_forecast' column
-  * - :math:`CSMR_\text{c509}`
-    - Cause-specific mortality rate for ischemic heart disease (IHD) forecasted from 2020-2040
-    - /ihme/csu/swiss_re/forecast/509_deaths_12_29_ng.nc, 'nosed_forecast' column
+  * - :math:`CSMR_c`
+    - Cause-specific mortality rate for cause :math:`c`, forecasted from 2020-2040
+    - :code:`/ihme/csu/swiss_re/forecast/{c}_deaths_12_29_ng_smooth_13.nc`, 'nosed_forecast' column
   * - :math:`RR(i)_\text{c}`
     - Relative risk of a given cause for an individual simulant based on their smoking exposure
-    - Defined in :ref:`the smoking risk effects documentation page <2017_risk_effect_smoking>` for lung cancer, COPD, and IHD
+    - Defined in :ref:`the smoking risk effects documentation page <2017_risk_effect_smoking>`
   * - :math:`PAF_\text{c}`
     - Population attributable fraction for smoking on mortality due to cause c
     - :math:`\frac{\overline{RR(i)_c} - 1}{\overline{RR(i)_c}}` (details in :ref:`the smoking risk effects page <2017_risk_effect_smoking>`)
-  * - :math:`EMR(i)_\text{c426}`
+  * - :math:`EMR(i)_\text{426}`
     - Excess mortality rate of lung cancer for an individual simulant (based on cause model state)
     - Defined in the :ref:`lung cancer cause model document <2017_lung_cancer>`; use forecasted 2019 value
+
+.. note::
+
+  May also include cause 494 (stroke) in cause list :math:`c` if/when it is added to the forecast models
+
+Upon the event that a simulant dies according to their :math:`mr_i`, the probability that their cause of death was one of the following causes is represented in the table below:
+
+.. list-table:: Cause of death likelihoods
+  :header-rows: 1
+
+  * - Cause of death
+    - Probability
+    - Note
+  * - Lung cancer
+    - :math:`\frac{EMR(i)_\text{426} * (1 - PAF_\text{426}) * RR(i)_\text{426}}{mr_i}`
+    - 
+  * - Smoking-affected causes
+    - :math:`\frac{\sum_{c=1}^{n} CSMR_c * (1 - PAF_c) * RR(i)_c}{mr_i}`
+    - For :math:`c` in [493,509,414,441]
+  * - Other causes
+    - :math:`\frac{1 - EMR(i)_\text{426} * (1 - PAF_\text{426}) * RR(i)_\text{426} + (\sum_{c=1}^{n} CSMR_c * (1 - PAF_c) * RR(i)_c)}{mr_i}`
+    - 
 
 Validation Criteria
 +++++++++++++++++++
 
 The simulation output should replicate the cause-specific mortality rate of smoking affected causes as defined in the data tables. Additionally, GBD all cause mortality should be replicated in the simulation output. 
 
-When simulation output is stratified on smoking status, never smokers should have lower mortality rates due to COPD and IHD than current and former smokers.
+When simulation output is stratified on smoking status, never smokers should have lower mortality rates than current and former smokers.
 
 References
 ----------

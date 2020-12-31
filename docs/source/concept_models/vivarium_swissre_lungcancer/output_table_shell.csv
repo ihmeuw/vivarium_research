@@ -7,14 +7,14 @@ Blended provinces in China,2020,2000 to 2005,Male,Current,Baseline,Number of pre
 ,2025,1975 to 1980,,,,Transition counts for each lung cancer cause model transition,For validation
 ,2026,1970 to 1975,,,,State person time for each lung cancer cause state,For validation
 ,2027,1965 to 1970,,,,Deaths due to lung cancer,For validation
-,2028,1960 to 1965,,,,Deaths due to COPD,For validation
-,2029,1955 to 1960,,,,Deaths due to IHD,For validation
-,2030,1950 to 1955,,,,Deaths due to other causes,For validation
-,2031,1945 to 1950,,,,Mean pack-years (N/A for never smokers),For validation
-,2032,1940 to 1945,,,,Mean years since quitting (N/A for never and current smokers),For validation
-,2033,1935 to 1940,,,,Number of scheduled screenings,For validation
-,2034,1930 to 1935,,,,Number of attended screenings,For validation
-,2035,1925 to 1930,,,,Person-time,For validation
+,2028,1960 to 1965,,,,Deaths due to smoking-affected causes,For validation
+,2029,1955 to 1960,,,,Deaths due to other causes,For validation
+,2030,1950 to 1955,,,,Mean pack-years (N/A for never smokers),For validation
+,2031,1945 to 1950,,,,Mean years since quitting (N/A for never and current smokers),For validation
+,2032,1940 to 1945,,,,Number of scheduled screenings,For validation
+,2033,1935 to 1940,,,,Number of attended screenings,For validation
+,2034,1930 to 1935,,,,Person-time,For validation
+,2035,1925 to 1930,,,,,
 ,2036,1900 to 1925,,,,,
 ,2037,,,,,,
 ,2038,,,,,,

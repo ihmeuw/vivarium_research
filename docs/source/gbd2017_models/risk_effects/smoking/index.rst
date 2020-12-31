@@ -404,7 +404,7 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
 
   Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
 
-Chronic Obstructive Pulmonary Disease Mortality
+Smoking-Related Mortality
 ++++++++++++++++++++++++++++++++++++++++++++++++
 
 See the relevant documentation for the :ref:`smoking related mortality model <2017_smoking_related_mortality>` and the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
@@ -412,20 +412,38 @@ See the relevant documentation for the :ref:`smoking related mortality model <20
 Relative Risk Data
 ~~~~~~~~~~~~~~~~~~
 
-The COPD relative risks cannot be pulled using get_draws or other standard tools.
+Relative risks for the causes included in the :ref:`smoking related mortality model <2017_smoking_related_mortality>` model are located at the filepath :code:`/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/` (unless otherwise specified, as for COPD) and the subfolder specified in the table below.
 
-  The mesh points for the relative risk curves for **current smokers** can be found here: /share/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/rr/modeling/outputs/decomp3/copd/draws_for_PAF/509_copd/draws_pack.csv
+.. list-table:: File paths for relative risk data
+  :header-rows: 1
 
-  The mesh points for the relative risk curves for **former smokers** can be found here: /home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/509_copd/draws_quit.csv
+  * - Cause
+    - Pack-years
+    - Years since quitting
+  * - Stomach cancer (414)
+    - 414_stomach_cancer/draws_pack.csv
+    - 414_stomach_cancer/draws_quit.csv
+  * - Colorectal cancer (441)
+    - 441_colon_and_rectum_cancer/draws_pack.csv
+    - 441_colon_and_rectum_cancer/draws_quit.csv
+  * - COPD (509)
+    - /share/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/rr/modeling/outputs/decomp3/copd/draws_for_PAF/509_copd/draws_pack.csv
+    - 509_copd/draws_quit.csv
+  * - IHD (493)
+    - 493_ihd/draws_cig.csv
+    - 493_ihd/draws_quit.csv
+  * - Stroke (494)
+    - 494_stroke/draws_cig.csv
+    - 494_stroke/draws_quit.csv
 
-The following code demonstrates how to assign relative risk values to individual simulants based on their exposure values.
+The following code demonstrates how to assign relative risk values for a single cause to individual simulants based on their exposure values.
 
 .. code-block:: python
 
   from scipy.interpolate import interp1d
 
   """
-  rr_i =: simulant's individual relative risk
+  rr_i =: simulant's individual relative risk for a given cause
   smoking_status_i =: simulant's smoking status exposure
   draw_x =: selected draw for a given model run
   sex_i =: simulant's sex
@@ -439,7 +457,7 @@ The following code demonstrates how to assign relative risk values to individual
 
   elif smoking_status_i == 'current':
 
-    rr_current = pd.read_csv('/share/gbd/WORK/05_risk/TEAM/sub_risks/tobacco/smoking_direct_prev/rr/modeling/outputs/decomp3/copd/draws_for_PAF/509_copd/draws_pack.csv')
+    rr_current = pd.read_csv({filepath})
     rr_current_i = rr_current.loc[rr_current.draw=draw_X].loc[rr_current.sex_id==sex_i].loc[rr_current.age_group_id==age_group_i]
     x = rr_current_i.exposure.values
     y = rr_current_i.rr.values
@@ -449,7 +467,7 @@ The following code demonstrates how to assign relative risk values to individual
 
   elif smoking_status_i == 'former':
 
-    rr_former = pd.read_csv('/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/509_copd/draws_quit.csv')
+    rr_former = pd.read_csv({filepath})
     rr_former_i = rr_former.loc[rr_former.draw=draw_X].loc[rr_former.sex_id==sex_i].loc[rr_former.age_group_id==age_group_i]
     x = rr_former_i.exposure.values
     y = rr_former_i.rr.values
@@ -460,22 +478,22 @@ The following code demonstrates how to assign relative risk values to individual
 PAF Calculation
 ~~~~~~~~~~~~~~~
 
-The COPD PAF specific to an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
+The PAF specific to a cause for an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
 
 .. math:: 
 
-  PAF_\text{a,s,l,y} = \frac{\overline{rr_\text{a,s,l,y}} - 1}{\overline{rr_\text{a,s,l,y}}}
+  PAF_\text{c,a,s,l,y} = \frac{\overline{rr_\text{c,a,s,l,y}} - 1}{\overline{rr_\text{c,a,s,l,y}}}
 
-Where, :math:`\overline{rr_\text{a,s,l,y}}` is the mean value of relative risks for all simulants in a given age, sex, location, and year demographic group.
+Where, :math:`\overline{rr_\text{c,a,s,l,y}}` is the mean value of relative risks for a given cause among all simulants in a given age, sex, location, and year demographic group.
 
 Application of Risk Factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The smoking risk factor should affect the mortality rate of COPD, as defined in the :ref:`smoking related mortality model documentation <2017_smoking_related_mortality>`, such that:
+The smoking risk factor should affect the mortality rate of the individual modeled causes, as defined in the :ref:`smoking related mortality model documentation <2017_smoking_related_mortality>`, such that:
 
 .. math::
 
-  mr_i = ACMR - CSMR_\text{c509} + CSMR_\text{c509} * (1 - PAF_\text{a,s,l,y}) * rr_i
+  mr_i = ACMR - CSMR_\text{c} + CSMR_\text{c} * (1 - PAF_\text{c,a,s,l,y}) * rr(c)_i
 
 Where,
 
@@ -488,14 +506,14 @@ Where,
    * - ACMR
      - All-cause mortality rate 
      - 
-   * - :math:`CSMR_\text{c509}`
-     - Cause-specific mortality rate for COPD
+   * - :math:`CSMR_\text{c}`
+     - Cause-specific mortality rate for cause c
      - Should use forecasted rates from 2020-2040 as documented on the  :ref:`smoking related mortality model document <2017_smoking_related_mortality>`
-   * - :math:`PAF_\text{a,s,l,y}`
-     - COPD PAF for smoking for simulant's demographic group
+   * - :math:`PAF_\text{c,a,s,l,y}`
+     - PAF for smoking and cause c for simulant's demographic group
      - As calculated in the `PAF Calculation`_ section
-   * - :math:`rr_i`
-     - Individual simulant's relative risk value
+   * - :math:`rr(c)_i`
+     - Individual simulant's relative risk value for cause c
      - Assigned as described in the `Relative Risk Data`_ section
 
 Validation and Verification Criteria
