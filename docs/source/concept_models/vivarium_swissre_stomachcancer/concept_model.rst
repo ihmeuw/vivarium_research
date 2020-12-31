@@ -74,7 +74,7 @@ Vivarium CSU Stomach Cancer Screening
 1.0 Background
 ++++++++++++++
 
-Stomach/gastric cancer (GC) epidemiology and risk factors Gastric carcinogenesis is a multifactorial, multistep process. Host factors include blood group A, pernicious anemia, prior gastric surgery, family history, hereditary diffuse GC, and genetic syndromes. Smoking, salt, salty and smoked food, red meat, obesity, and low socioeconomic status are environmental factors. Moreover, infection with Helicobacter pylori and Epstein–Barr virus also play a role in gastric carcinogenesis. Information on these risk factors helps characterize individuals at risk of GC during their lifetime. Furthermore, identification of premalignant lesions is important for the purpose of screening and surveillance. Premalignant lesions of GC include atrophic gastritis (AG), intestinal metaplasia (IM), and dysplasia (DYS). It has been estimated that annually 0%–1.8%, 0%–10%, and 0%–73% of the patients with AG, IM, and dysplasia, respectively, progress to GC. The wide variations on the reported progression rates may result from differences in the study design, recruited population, and definitions. The Netherlands cohort study also revealed that premalignant lesions would progress to GC with an annual incidence of 0.2% from AG, 0.25% from IM, 0.6% from mild-to-moderate dysplasia, and 6% from severe dysplasia2. 
+Stomach/gastric cancer (GC) epidemiology and risk factors Gastric carcinogenesis is a multifactorial, multistep process. Host factors include blood group A, pernicious anemia, prior gastric surgery, family history, hereditary diffuse GC, and genetic syndromes. Smoking, salt, salty and smoked food, red meat, obesity, and low socioeconomic status are environmental factors. Moreover, infection with Helicobacter pylori and Epstein–Barr virus also play a role in gastric carcinogenesis. Information on these risk factors helps characterize individuals at risk of GC during their lifetime. Furthermore, identification of premalignant lesions is important for the purpose of screening and surveillance. Premalignant lesions of GC include atrophic gastritis (AG), intestinal metaplasia (IM), and dysplasia (DYS). It has been estimated that annually 0%–1.8%, 0%–10%, and 0%–73% of the patients with AG, IM, and dysplasia, respectively, progress to GC. The wide variations on the reported progression rates may result from differences in the study design, recruited population, and definitions. The Netherlands cohort study also revealed that premalignant lesions would progress to GC with an annual incidence of 0.2% from AG, 0.25% from IM, 0.6% from mild-to-moderate dysplasia, and 6% from severe dysplasia. 
   
 Endoscopic surveillances in individuals with premalignant lesions may detect GC at an early and curable stage and therefore improve their survival. Prognosis of upper gastrointestinal cancer depends largely on disease stage at diagnosis. The survival rate is less than 10% when diagnosed at an advanced stage but is as high as 85% if detected at an earlier stage. Endoscopic screening can potentially prevent upper gastrointestinal cancers by early diagnosis and early treatment and has been widely adopted in screening programmes. Developed countries such as Japan and South Korea have launched nationwide endoscopic screening programmes. While developing countries such as China and Iran conduct endoscopic screening only in high risk areas due to a larger cancer burden, capabilities of local doctors and availability of technology.
 
@@ -83,9 +83,8 @@ Endoscopic surveillances in individuals with premalignant lesions may detect GC 
 Stomach cancers tend to develop slowly over many years. Before a true cancer develops, pre-cancerous changes often occur in the inner lining (mucosa) of the stomach. These early changes rarely cause symptoms and therefore often go undetected. Most (about 90% to 95%) cancers of the stomach are adenocarcinomas. A stomach cancer or gastric cancer almost always is an adenocarcinoma. These cancers develop from the cells that form the innermost lining of the stomach (the mucosa). Correa pointed out that the human gastric carcinogenesis is a slow progressive, multistep, and multifactorial pathology process. The multistep process is composed of chronic superficial gastritis, atrophy gastritis, intestinal metaplasia (IM), dysplasia (DYS), and adenocarcinoma (malignant neoplasm).
 
  -  Note that there are cardia (50-60%) and non-cardia cancers (40-50%) both classified by GBD as stomach cancers
- -  Cardia cancers are not associated with H. pylori infection while non-cardia cancers are. There is evidence written that says cardia cancers may be protected by H. pylori. Incidence is cardia cancers   are rising while stomach cancer overall and non-cardia cancers are decreasing (better hygiene?) 
- - This pools all stomach cancer
-
+ -  Cardia cancers are not associated with H. pylori infection while non-cardia cancers are. There is evidence written that says cardia cancers may be protected by H. pylori. Incidence is cardia cancers are rising while stomach cancer overall and non-cardia cancers are decreasing. There is some suggestion in the literature that cardio cancers may be rising due to H. pylori eradication campaigns. 
+ - This model does not make the distinction between cardio or non-cardia cancers. We use relative risks and H. pylori treatment efficacy for all gastric cancers. 
 
 .. image:: correa_cascade.svg
 
@@ -96,6 +95,7 @@ Stomach cancers tend to develop slowly over many years. Before a true cancer dev
 1.1 Project overview
 --------------------
 
+This project aims to compare gastric cancer detected symptomatically without a population wide endoscopy screening programme vs. gastric cancer detected with a population endoscopic screening programme that would be able to detect pre-clinical (asymptomatic) stomach cancers. We want to quantify how many more cancers the screening programme will detect. 
 
 .. _1.2:
 
@@ -109,7 +109,7 @@ Stomach cancers tend to develop slowly over many years. Before a true cancer dev
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-To estimate the yearly number of cases of stomach cancer detected under specific screening practices and the yearly number of deaths from undetected stomach cancer (both in unit of per 100,000 insured person-years) in order to identify pay-out trends for critical insurance claims (CII).  
+To estimate the yearly number of cases of stomach cancer detected under specific screening practices in order to identify pay-out trends for critical insurance claims (CII).  
 
 .. _3.0:
 
@@ -127,7 +127,7 @@ To estimate the yearly number of cases of stomach cancer detected under specific
 
 **Exposure (E)**:
   
-  - h.pylori
+  - h.pylori infection
 
 
 
@@ -136,12 +136,14 @@ To estimate the yearly number of cases of stomach cancer detected under specific
 3.2 Effect and impact size
 --------------------------
 
+See below risk factor model 2
+
 .. _4.0:
 
 4.0 Intervention
 ++++++++++++++++
 
-Scale-up of stomach cancer screening using ABC method with endoscopic follow-up among insured population 
+Scale-up of stomach cancer screening using ABC method for first screen followed by endoscopic follow-up among insured population from 5% in 2020 to 30% in 2030 and hold constant until 2040. 
 
 .. _4.1:
 
@@ -155,7 +157,10 @@ Scale-up of stomach cancer screening using ABC method with endoscopic follow-up 
 
 :underline:`Alternative scenario`
 
-In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure below. We do not assume that the 5% who recieve H. pylori screening in the baseline is the same groups those who recieve screening in the alternative scenario. 
+In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure (orange line) below. 
+
+.. note::
+  We do not assume that the 5% who recieve H. pylori screening in the baseline is the same groups those who will recieve screening in the alternative scenario. (Hence H. pylori prevalence does not need to be split out between baseline screened or not screened).
 
 .. image:: stomach_cancer_screening_coverage.svg
  
@@ -236,6 +241,37 @@ file paths for 2019 forecast data:
 
 see :ref:`stomach cancer model <2017_stomach_cancer>`
 
+Data Sources Table
+
++----------------------+----------------------------+-----------------------------------+-------------------------------------------+
+| Input parameter      | Value                      | Note                              | Reference                                 |
++----------------------+----------------------------+-----------------------------------+-------------------------------------------+
+| Mean sojourn time    |  2.37 years                | The UI from Bae is actually       | Bae J Prev Med Pub Health 2014            |
+|                      |  (95%CI: 1.78 to 2.96)     | (95%CI: 1.92 to 2.96) which is    |                                           | 
+|                      |                            | skewed. To make a symmetrical     |                                           |      
+|                      |                            | normal distribution, we make the  |                                           | 
+|                      |                            | lower bound shorter to 1.78       |                                           |
++----------------------+----------------------------+-----------------------------------+-------------------------------------------+
+
+
+Full references
+
+  - Bae J-M, Shin SY, Kim EH. Mean Sojourn Time of Preclinical Gastric Cancer in Korean Men: A Retrospective Observational Study. J Prev Med Pub Health 2014; 47: 201–5.
+
+Validation and verification
+
+  - i_pc should validate to ~ i_c414/(1-prev_c414) shifted by the 2.37 years forward. i_c414 and prev_c414 comes from forecast.
+  - i_c should validate to ~ 1/MST
+  - prevalence of pc ~ i_pc/(1-prev_c414) X 2.37 shifted by the 2.37 years forward. 
+  - prevalence of C should be 0 at the start and eventually catch up to forecast prevalence in later years
+  - EMR for clinical cancers should validate to CSMR/prev_c414 from forecasts.
+
+Assumptions and limitations
+ 
+  - The MST was derived from a population of Korean men. 
+  - We do not use age-specific or sex-specific MST. Nor do we use different MSTs for HP risk factor exposure category. 
+  - We shifted the lower bound of the MST to 1.78 which is 1.6 months shorter for lower bound of the population ~approximately 5%. This means that these simulants in the lower bound stay in the PC state shorter than the Bae distribution suggests. 
+
 
 .. _5.3.2:
 5.3.2 H. pylori risk factor model
@@ -246,8 +282,8 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 :underline:`Incidence of cancer by H. pylori status`
 
 
-- Let H. pylori infection be denoted as hp
-- Let the true prevalence of H. pylori be :math:`P_{hp{-true}}`
+- Let H. pylori infection be denoted by the subscript hp
+- Let the true prevalence of H. pylori be :math:`P_{hp_{true}}`
 - Let i_pc be the overall incidence from S state to PC state (:ref:`see stomach cancer model for i_pc value <2017_cancer_model_stomachcancer>`)
 - Let incidence among those with H. pylori be  :math:`i_{pc{|hp+}}`
 - Let incidence among those without H. pylori be :math:`i_{pc{|hp-}}`
@@ -255,8 +291,8 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 - Let RR be the ratio of the probability of developing cancer in the exposed to H. pylori group versus unexposed group.
 
 (1) :math:`RR_{hp}` = 1.89 (95%CI: 1.57 to 2.26) [Jiang Eur J Clin Microbiol Infect Dis 2017]
-(2) :math:`P_{hp{-true}}` = see calculation below
-(3) PAF = :math:`\frac{P_{hp{-true}}(RR_{hp}-1)}{1+P_{hp{-rue}}(RR_{hp}-1)}` 
+(2) :math:`P_{hp_{true}}` = see calculation below
+(3) PAF = :math:`\frac{P_{hp_{true}}(RR_{hp}-1)}{1+P_{hp{_true}}(RR_{hp}-1)}` 
 (4) 1-PAF = 
 (5) :math:`i_{pc{|hp+}} =  i_{pc}\times(1-PAF)\times RR_{hp}`
 (6) :math:`i_{pc{|hp-}} =  i_{pc}\times(1-PAF)`
@@ -264,49 +300,70 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 
 .. note:: 
 
-  The prevalence of HP was obtained from meta-analysis of 22 studies. For China, the prevalence was 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]. The primary modality of testing for HP, include  
+  The prevalence of HP was obtained from meta-analysis of 22 studies. For China, the prevalence was 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]. There are other estimates of prevalences, but this was the reference the Chinese Consensus on Chronic Gastritis quoted. The primary modality of testing for HP from the meta-analysis, include  
 
   - serology (varies depending on antigen used): 97.6% sensitivity and 96.2% specificity for recomLine
   - urea breath test: 95% sensitvity and specificity
   - stool antigen: 94% sensitvity and 97% specificity
   - Campylobacter-like organism or histopathology: invasive and considered gold standard
 
-  Sensitivity and specificity of screening tests were obtained from Wang 2015. Diagnostic accuracy also varies depending on the test used and conditions. To calculate the true HP prevalence, let us assume a 95% sensitivity and specificity as a combined average for the tests used in the meta-analysis.  
+  Sensitivity and specificity of screening tests were obtained from Wang 2015. These values can vary depending on the specific make of the test used and conditions. To calculate the true HP prevalence, we approximately assume a 95% sensitivity and specificity as a combined average for the tests used in the meta-analysis.  
 
 
-True prevalence of HP :math:`P_{hp{-true}}`
+True prevalence of HP :math:`P_{hp_{true}}`
 
-+-----------+----------------------------+---------------------------+
-| H. pylori |   True HP+                 |   True HP-                |  
-+-----------+----------------------------+---------------------------+
-| test +    |     a                      |     b                     |
-+-----------+----------------------------+---------------------------+
-| test -    |     c                      |     d                     |
-+-----------+----------------------------+---------------------------+
-| total     |    a+c                     |    b+d                    |
-+-----------+----------------------------+---------------------------+
++-------------+---------------+----------------+
+| H. pylori   |   True HP+    |   True HP-     |  
++-------------+---------------+----------------+
+| screen HP + |     a         |     b          |
++-------------+---------------+----------------+
+| test -      |     c         |     d          |
++-------------+---------------+----------------+
+| total       |    a+c        |    b+d         |
++-------------+---------------+----------------+
 
 
 (1) sensitivity a/(a+c) = 0.95
 (2) specificity d/(b+d) = 0.95
-(3) HP prevalence by test :math:`P_{hp{-screen}}` = (a+b)/(a+b+c+d) = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
+(3) HP prevalence by screen :math:`P_{hp_{screen}}` = (a+b)/(a+b+c+d) = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
 (4) a+b+c+d = 1000
 (5) use normal distribution for uncertainty ranges
 
-solving the 4 equations:
+Solving the 4 equations using the mean of :math:`P_{hp_{screen}}` = 0.558:
 
   - a = 536 (true positive)
   - b = 22  (false positive) 
   - c = 28  (false negative)
   - d = 414 (true negative) 
 
-True HP prevalence = a+c/1000 = 564/1000 = 0.564 (calculate UIs)
+True HP prevalence = (a+c)/1000 = 564/1000 = 0.564 (solve for variables a-d by draw to obtain UIs)
 
-References: 
+Data Sources Table
 
-  - 
-  -
-  - Wang Diagnosis of Helicobacter pylori infection: Current options and developments. World J Gastroenterol 2015 October 28; 21(40): 11221-11235
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| Input parameter      | Value                      | Note                          | Reference                                 |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| Relative risk of HP  | 1.89 (95%CI: 1.57 to 2.26) | Normal distribution           | Jiang Eur J Clin Microbiol Infect Dis 2017|
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| Screen prevalence    | 0.558                      | Normal distribution           | Hooi Gastroenterology 2017                |
+| of HP                | (95%CI: 0.518 to 0.599)    |                               |                                           |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| HP test accuracy     | 95% sensitivity/specificity| Assumed average of tests      | Wang World J Gastroenterol 2015           |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+
+Full references: 
+
+  - Jiang J, Chen Y, Shi J, Song C, Zhang J, Wang K. Population attributable burden of Helicobacter pylori-related gastric cancer, coronary heart disease, and ischemic stroke in China. Eur J Clin Microbiol Infect Dis 2017; 36: 199–212.
+  - Hooi JKY, Lai WY, Ng WK, et al. Global Prevalence of Helicobacter pylori Infection: Systematic Review and Meta-Analysis. Gastroenterology 2017; 153: 420–9.
+  - Wang Y-K, Kuo F-C, Liu C-J, et al. Diagnosis of Helicobacter pylori infection: Current options and developments. World J Gastroenterol WJG 2015; 21: 11221–35.
+
+Validation and verification
+
+  - Make sure we have true HP+/- stratification
+  - Validate that the external parameter of HP true prevalence should equal to ~ 0.564 for all age bands
+  - Validate the relative risk should equal to ~ 1.89 by calculating [cases of PC cancers among true HP+] / [cases of PC cancers among true HP-]
+
+
 
 .. _5.3.3:
 5.3.3 Prevalence of atrophy stratified by H. pylori status
@@ -411,7 +468,7 @@ To derive f_atrophy+ and f_atrophy- for the above table with uncertainty interva
 (2) (a+c)/(a+b+c+d) = p_atrophy+ 
 (3) a+b+c+d = 1000
 (4) ad/bc = OR
-(5) :math:`P_{hp{-true}}` = 0.564 (equations above)
+(5) :math:`P_{hp{-true}}` = 0.564 (use equations above to calculate true HP prevalence)
 (6) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005] 
 (7) f_atrophy+ = a/(a+c)
 (8) f_atrophy- = b/(b+d)
@@ -504,7 +561,9 @@ H. pylori eradication success rate using standard bismuth-containing quadruple t
 (1) We can model that 100% of simulants who are due for another ABC test (Branch 1) will attend. 
 (2) Those who are due for endoscopy (branch 2-4), the proportion who will show up at their scheduled screening time will be normally distributed around 18.4% (95%CI: 18.1%‐18.7%). 
 
-For example, if Sally-Sim is H. pylori + and atrophy +. She goes for her first screening in 2020 and she falls under Branch 3 and is due a screening in 2 years which is 2022. The probability she attends that screening is 18.4%. Whether or not she attends that screening, she will be due for another endoscopy in 2 years in 2024 and the probability she will attend that is also 18.4% and so on and so forth. 
+For example
+
+  If our simulant Sally-Sim is H. pylori + and atrophy +. She goes for her first screening in 2020 and she falls under Branch 3 and is due a screening in 2 years which is 2022. The probability she attends that screening is 18.4%. Whether or not she attends that screening, she will be due for another endoscopy in 2 years in 2024 and the probability she will attend that is also 18.4% and so on and so forth. 
 
 .. note::
   
