@@ -67,6 +67,8 @@ Vivarium CSU Stomach Cancer Screening
 +-------+----------------------------+
 | HP    | H. pylori                  |
 +-------+----------------------------+
+| ITT   | intention-to-treat         |
++-------+----------------------------+
 
 
 .. _1.0:
@@ -157,10 +159,10 @@ Scale-up of stomach cancer screening using ABC method for first screen followed 
 
 :underline:`Alternative scenario`
 
-In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure (orange line) below. 
+In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure (orange line) below. Note that the alternative scenario uses a different screening modality (atrophy screening + H. pylori screening) than the baseline. This is different from other models where the alternative scenario scales-up the same screening technology used in the baseline. 
 
 .. note::
-  We do not assume that the 5% who recieve H. pylori screening in the baseline is the same groups those who will recieve screening in the alternative scenario. (Hence H. pylori prevalence does not need to be split out between baseline screened or not screened).
+  We do not yet have any evidence to suggest that the 5% who would have recieve H. pylori screening/treatment in the baseline is more or less likely to be covered for stomach cancer screening in the alternative scenario. For simplicity, we assume that H. pylori prevalence is non-differential to screening coverage. 
 
 .. image:: stomach_cancer_screening_coverage.svg
  
@@ -262,15 +264,15 @@ Validation and verification
 
   - i_pc should validate to ~ i_c414/(1-prev_c414) shifted by the 2.37 years forward. i_c414 and prev_c414 comes from forecast.
   - i_c should validate to ~ 1/MST
-  - prevalence of pc ~ i_pc/(1-prev_c414) X 2.37 shifted by the 2.37 years forward. 
-  - prevalence of C should be 0 at the start and eventually catch up to forecast prevalence in later years
+  - prevalence of pc ~ i_pc/(1-prev_c414) X 2.37 
+  - prevalence of C should be 0 at the start and eventually catch up to forecast prevalence in later years (sooner than MST + 10)
   - EMR for clinical cancers should validate to CSMR/prev_c414 from forecasts.
 
 Assumptions and limitations
  
   - The MST was derived from a population of Korean men. 
   - We do not use age-specific or sex-specific MST. Nor do we use different MSTs for HP risk factor exposure category. 
-  - We shifted the lower bound of the MST to 1.78 which is 1.6 months shorter for lower bound of the population ~approximately 5%. This means that these simulants in the lower bound stay in the PC state shorter than the Bae distribution suggests. 
+  - We shifted the lower bound of the MST to 1.78 which is 1.6 months shorter for lower bound of the population ~approximately 5%. This means that these simulants in the lower bound stay in the PC state shorter than the Bae distribution suggests. Since the shortest screening interval is 1 year (1.6 months/12 months ~ 0.13) for the highest risk branch (H+, A-), this would only affect a very small fraction of the simulation. 
 
 
 .. _5.3.2:
@@ -317,7 +319,7 @@ True prevalence of HP :math:`P_{hp_{true}}`
 +-------------+---------------+----------------+
 | screen HP + |     a         |     b          |
 +-------------+---------------+----------------+
-| test -      |     c         |     d          |
+| screen HP - |     c         |     d          |
 +-------------+---------------+----------------+
 | total       |    a+c        |    b+d         |
 +-------------+---------------+----------------+
@@ -363,7 +365,10 @@ Validation and verification
   - Validate that the external parameter of HP true prevalence should equal to ~ 0.564 for all age bands
   - Validate the relative risk should equal to ~ 1.89 by calculating [cases of PC cancers among true HP+] / [cases of PC cancers among true HP-]
 
-
+Assumptions and limitations
+  
+  - We use an adjusted relative risk and this may bias the estimation of our PAF when using the proportion of total population exposed to HP in the PAF equation. 
+  - The prevalence of HP could be different in different regions, or rural/urban areas. We are applying the prevalence of HP from a meta-analysis of 22 studies to our blended population. 
 
 .. _5.3.3:
 5.3.3 Prevalence of atrophy stratified by H. pylori status
@@ -432,7 +437,6 @@ The following tables show the sex and age specific CAG prevalence tables by read
 | 70+       | 0.19       | 0.08-0.30 | 
 +-----------+------------+-----------+
 
-
 Each row is a proportion out of 1. 
 
 We first need to obtain an atrophy state. To do that we give every simulant an atrophy propensity. This propensity determines at what percentile of the risk exposure distribution they are. To obtain the propensity, assign each simulant a random number using a uniform distribution between 0 and 1 ``np.random.uniform()`` 
@@ -474,7 +478,6 @@ To derive f_atrophy+ and f_atrophy- for the above table with uncertainty interva
 (8) f_atrophy- = b/(b+d)
 (9) use normal distribution uncertainty ranges
 
-* We assume the OR is for the true prevalence of H. pylori among the atrophic states
 
 The calculated values should look similar to this back of envelope calculation: see tab Aoki 2005 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
 
@@ -487,15 +490,39 @@ The calculated values should look similar to this back of envelope calculation: 
 
 Example: 
 
-  Lets say we have a simulant Sally-Sim who is age 42. She has been randomly assigned atrophic percentile of 0.03 and h.pylori percentile of 0.5. Looking at the p_atrophy+ table for females, she is in the atrophic+ state for her percentile rank. Next, we determine her H. pylori status. Because she is atrophic, her H. pylori status will be determined by f_atrophy+ for her age group. Reading off the excel table, f_atrophy+ for 40-49 year olds is 0.82. Hence, she is also H. pylori positive. 
+  Lets say we have a simulant Sally-Sim who is age 40. She has been randomly assigned atrophic percentile of 0.03 and h.pylori percentile of 0.5. Looking at the p_atrophy+ table for females, she is in the atrophic+ state for her percentile rank. Next, we determine her H. pylori status. Because she is atrophic, her H. pylori status will be determined by f_atrophy+ for her age group. Reading off the excel table, f_atrophy+ for 40-49 year olds is 0.82. Hence, she is also H. pylori positive. 
  
-
 Here is a notebook that describes the above steps:  
 
-References: 
- -
- -
- -
+Data Sources Table
+
++----------------------+----------------------------+----------------------+------------------------------+
+| Input parameter      | Value                      | Note                 | Reference                    |
++----------------------+----------------------------+----------------------+------------------------------+
+| prevalence of atrophy| see tables                 |                      | Aoki Ann Epidemiol 2005      |
++----------------------+----------------------------+----------------------+------------------------------+
+| odds ratio HP        | 3.8 (95%CI: 3.054 - 4.631) | Normal distribution  | Aoki Ann Epidemiol 2005      |
++----------------------+----------------------------+----------------------+------------------------------+
+
+
+Full references: 
+
+  - Aoki K, Kihaile PE, Wenyuan Z, et al. Comparison of Prevalence of Chronic Atrophic Gastritis in Japan, China, Tanzania, and the Dominican Republic. Ann Epidemiol 2005; 15: 598–606
+
+
+Validation and verification:
+
+  - Make sure we have atrophy+/- stratification
+  - Validate that the atrophy prevalence should ~ the age-specific tables (50:50 sex ratio values in the xlsx)
+  - The proportion of true HP+ among atrophic+ ~ 0.8 and the proportion of true HP+ among atrophic- ~ 0.5 (back of envelope calculation in xlsx)
+
+
+Assumptions and limitations:
+
+  - We assume prevalence of HP is consistent across sex and age groups. 
+  - The age-sex-specific prevalence of atrophy was taken from a high HP prevalence (~70%) population. 
+  - Our prevalence of atrophy comes from only one study. 
+  - We assume the OR is for the true prevalence of H. pylori among the atrophic states although it was obtained among studies with screen prevalence of HP.
 
 
 .. _5.3.4:
@@ -537,29 +564,30 @@ Stomach cancer screening algorithm was derived from the 2019 guidelines from the
 +-----------------------+----------------------------+---------------------------+          
 
 
-H. pylori antibiody test [Chen 2018]
+H. pylori antibiody test [Chin Med J (Engl) 2018]
 
   - sensitivity 91.2%
   - specificity 97.4% 
 
-Serum pepsinogen test [Chen 2018]
+Serum pepsinogen test [Chin Med J (Engl) 2018]
 
   - because the incidence of gastric cancer is determined by true H. pylori status and not by atrophic state, we do not need to apply test accuracy for atrophy. The atrophic state identified in model 2 determines frequency of screening.   
 
 
 H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
 
-  -  ITT efficacy: 87.9% [95%CI: 81.7–94.0%) [Liang 2013]
+  -  ITT efficacy: 87.9% (95%CI: 81.7–94.0%) [Liang Clin Gastroenterol Hepatol 2013]
 
 .. note::
 
-  - we do not model treatment for atrophy [Zhang 2018] resection/treatment of high/low grade dysplasia has no effect on incidence of stomach cancer.
+  - We do not model treatment for atrophy as [Zhang Gastroenterology 2018] suggests that endoscopy screening has no effect on incidence of stomach cancer.
+  - Not that our mortality model from the alternative screening scenario will not be accurate because we do not model the reduction (40% reduction in the RR) in gastric cancer mortality from endoscopic screening. 
 
 
 :underline:`Subsequent screens`
 
 (1) We can model that 100% of simulants who are due for another ABC test (Branch 1) will attend. 
-(2) Those who are due for endoscopy (branch 2-4), the proportion who will show up at their scheduled screening time will be normally distributed around 18.4% (95%CI: 18.1%‐18.7%). 
+(2) Those who are due for endoscopy (branch 2-4), the proportion who will show up at their scheduled screening time will be normally distributed around 18.4% (95%CI: 18.1%‐18.7%). [Guo Cancer Medicine 2019]
 
 For example
 
@@ -567,20 +595,46 @@ For example
 
 .. note::
   
-  we can also model a probability of attending a catch-up screening if simulant misses the scheduled screening. To keep it simple, we are not allowing catch-up screenings for that but we may incorporate is we feel is necessary later on. 
-
-Reference: 
-
- - Guo Determinants of participation and detection rate of upper gastrointestinal cancer from population‐based screening program in China. Cancer Medicine. 2019;8:7098–7107.
+  We can also model a probability of attending a catch-up screening if simulant misses the scheduled screening. To keep it simple, we are not allowing catch-up screenings for that but we may incorporate is we feel is necessary later on. 
 
 
-Reference: 
+Data Sources Table
+
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| Input parameter      | Value                      | Note                          | Reference                                 |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| screening tree       | see figure                 |                               | Chinese guidelines                        | 
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| screening technology | HP test sensitivity 91.2%  |                               | Chen Chin Med J (Engl) 2018               |
+|                      | specificity 97.4%          |                               |                                           |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| HP treatment efficacy| 87.9% (95%CI: 81.7–94.0%)  | Normal distribution, ITT      | Liang Clin Gastroenterol Hepatol 2013     |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| Endoscopy uptake     | 18.4% (95%CI: 18.1%‐18.7%) | Normal distribution           | Guo Cancer Medicine 2019                  |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| ABC follow-up        | 100%                       |                               | Assumption, follows coverage curve        |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
+
+
+Full references: 
 
   - National Health Commission of the People’s Republic of China. Chinese guidelines for diagnosis and treatment of gastric cancer 2018 (English version). Chin J Cancer Res 2019; 31: 707–37.
   - Chen X-Z, Huang C-Z, Hu W-X, Liu Y, Yao X-Q. Gastric Cancer Screening by Combined Determination of Serum Helicobacter pylori Antibody and Pepsinogen Concentrations: ABC Method for Gastric Cancer Screening. Chin Med J (Engl) 2018; 131: 1232–9.
   - Du Y, Zhu H, Liu J, et al. Consensus on eradication of Helicobacter pylori and prevention and control of gastric cancer in China (2019, Shanghai). J Gastroenterol Hepatol 2020; 35: 624–9
   - Liang X, Xu X, Zheng Q, Zhang W, Sun Q, Liu W, et al. Efficacy of bismuth-containing quadruple therapies for clarithromycin-, metronidazole-, and fluoroquinolone-resistant Helicobacter pylori infections in a prospective study. Clin Gastroenterol Hepatol. 2013 Jan 29; doi: 10.1016/j.cgh.2013.01.008
-  - 
+  - Guo Determinants of participation and detection rate of upper gastrointestinal cancer from population‐based screening program in China. Cancer Medicine. 2019;8:7098–7107.
+  - Zhang X, Li M, Chen S, et al. Endoscopic Screening in Asian Countries Is Associated With Reduced Gastric Cancer Mortality: A Meta-analysis and Systematic Review. Gastroenterology 2018; 155: 347-354.e9
+
+
+Validation and verification:
+ 
+ - validate screening coverage among total population is ~ orange line in the coverage curve.
+
+  
+
+Assumptions and limitations:
+
+
 
 .. _5.3.4:
 5.3.4 Gastic cancer incidence after ABC screening
@@ -591,15 +645,18 @@ Meta-analysis of 14 studies by Lee 2016 showed reduction in the incidence rate r
 +-------------------------------------------------------------------------+
 | Gastric cancer incidence after outcome of screening and treatment       |
 +===============================+=========================================+
-|  H. pylori +ve without        | :math:`i_{pc{|hp+}}`                    |
-|  eradication or with          |                                         |
-|  unsuccessful eradication     |                                         |        
+|  HP + without treatment       | :math:`i_{pc{|hp+}}`                    |
+|  or with unsuccessful         |                                         |
+|  treatment                    |                                         |        
 +-------------------------------+-----------------------------------------+
-|  H. pylori +ve with           | :math:`i_{pc{|hp+}}`                    |
-|  with successful eradication  | x 0.62 (95%CI: 0.49-0.79)               |        
+|  HP + with                    | :math:`i_{pc{|hp+}}`                    |
+|  with successful treatment    | x 0.62 (95%CI: 0.49-0.79)               |        
 +-------------------------------+-----------------------------------------+
-|  H. pylori -ve                | :math:`i_{pc{|hp-}}`                    |
+|  HP -ve                       | :math:`i_{pc{|hp-}}`                    |
 +-------------------------------+-----------------------------------------+                                               
+
+.. image:: hp_treatment_tree.svg
+
 
 References:
 
@@ -610,11 +667,16 @@ References:
 5.4 Input Data Sources
 -----------------------
 
+See relevant sections
 
 .. _5.5:
 
 5.5 Desired outputs
 -------------------
+
+  - Proportion of simulants recieved first screen
+  - Number of C cases detected per 100,000 in baseline
+  - Number of PC and C cases detected per 100,000 in alternative scenario
 
 
 .. _5.6:
@@ -630,6 +692,8 @@ References:
 5.7 Validation and verification
 -------------------------------
 
+See relevant section
+
 .. _6.0:
 
 6.0 Back-of-envelope calculations
@@ -640,4 +704,5 @@ References:
 7.0 Limitations
 +++++++++++++++
 
+See relevant sections
 
