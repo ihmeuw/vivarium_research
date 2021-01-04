@@ -166,9 +166,14 @@ Compartmental Diagram
 
 .. note::
 
-   For BCC caused by hrHPV infection, should we include CIN regression only or 
-   both CIN and HPV regression if we decided to add this parameter?
-
+   Regression of BCC will not be included in our Vivarium cause model, this is 
+   because we have little evidence to tell how it varies by age and subtypes of 
+   HPV infection. This measure may confound our assumption on duration of BCC. 
+   For simulants have BCC caused by high-risk HPV infection (subtypes 16 and 18),
+   it brings more complexity to allow for two transition pathways: 1) regress 
+   from `BCC_C_hrHPV to hrHPV-infected`; 2) regress from `BCC_C_hrHPV to 
+   Susceptible`. Notably, the detection of BCC cases would change if we add 
+   it back for future model improvement.
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -280,21 +285,11 @@ S_ = susceptible; C_ = with condition
      - BCC, C_hrHPV
      - :math:`\text{incidence_BCC}\times(1-PAF)\times\text{RR_hrHPV}`
      - incidence_BCC, PAF, and RR_hrHPV are specified in `Data sources`.
-   * - r_BCC_hrHPV+
-     - BCC, C_hrHPV
-     - Susceptible
-     - BCC_C_hrHPV regression rate
-     - r_BCC_hrHPV+ is specified in `Data sources`.
    * - i_BCC_hrHPV-
      - Susceptible
      - BCC, S_hrHPV
      - :math:`\text{incidence_BCC}\times(1-PAF)`
      - incidence_BCC and PAF are specified in `Data sources`.
-   * - r_BCC_hrHPV-
-     - BCC, S_hrHPV
-     - Susceptible
-     - BCC_S_hrHPV regression rate
-     - r_BCC_hrHPV- is specified in `Data sources`.
    * - i_hrHPV
      - BCC, S_hrHPV
      - BCC, C_hrHPV
@@ -357,12 +352,6 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
    * - incidence_BCC
      - derived from incidence_c432
      - incidence_BCC(age) = incidence_c432(age + duration_BCC)
-   * - r_BCC_hrHPV+
-     - 
-     - add data filepath
-   * - r_BCC_hrHPV-
-     - 
-     - add data filepath
    * - prev_c432
      - forecasted for future years 2020-2040
      - /ihme/costeffectiveness/vivarium_csu_cancer

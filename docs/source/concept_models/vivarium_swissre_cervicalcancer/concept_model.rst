@@ -167,7 +167,7 @@ insured female aged 21 to 65 years and HPV vaccination for insured female aged
 
 **Alternative scenario:** by 2030, linear ramp up cervical cancer screening to 
 cover 50% of the insured female aged 21 to 65 years and HPV vaccination to cover 
-40% of the insured female aged 15 to 45 years. Both of the HPV vaccination and 
+25% of the insured female aged 15 to 45 years. Both of the HPV vaccination and 
 cervical cancer screening coverage remain constant in 2030 to 2040.
 
 .. image:: cervical_cancer_scale_up.png
@@ -198,11 +198,11 @@ cervical cancer screening coverage remain constant in 2030 to 2040.
    * - Alternative
      - HPV vaccination
      - 2020-2030
-     - Stay 10% in 2020-2021, then linearly ramp up from 10% to 40% in 2021-2030.
+     - Stay 10% in 2020-2021, then linearly ramp up from 10% to 25% in 2021-2030.
    * - Alternative
      - HPV vaccination
      - 2030-2040
-     - 40%
+     - 25%
 
 .. note::
 
@@ -546,30 +546,40 @@ Vaccine coverage
 
 Vaccine efficacy
  - Zhu et al. reported a relative risk of getting HPV 16/18 infection for those 
-   unvaccinated versus vaccinated: use normal distribution 
+   unvaccinated versus vaccinated (RR_no_vaccine_hrHPV): use normal distribution 
    **normal(mean=4.71, SD=0.94)**
  - Lu et al. reported a relative risk of getting BCC without hrHPV infection for 
-   those unvaccinated versus vaccinated: use normal distribution 
-   **normal(mean=1.77, SD=0.26)**
+   those unvaccinated versus vaccinated (RR_no_vaccine_CIN2+): use normal 
+   distribution **normal(mean=1.77, SD=0.26)**
+ - Use same relative risk (RR_no_vaccine_hrHPV) distribution for people moving
+   from `BCC_S_hrHPV to BCC_C_hrHPV` and `ICC_S_hrHPV to ICC_C_hrHPV` among those
+   unvaccinated versus vaccinated.
 
 relevant formulas 
  (1) PAF = :math:`\frac{\text{prev_vaccine}\times(\text{RR_vaccine}-1)}{\text{prev_vaccine}\times(\text{RR_vaccine}-1)+1}`
- (2) :math:`\text{incidence_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_vaccine_hrHPV}`
- (3) :math:`\text{incidence_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
- (4) :math:`\text{incidence_BCC_S_hrHPV_with_vaccine} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_vaccine_CIN2+}`
- (5) :math:`\text{incidence_BCC_S_hrHPV_without_vaccine} =  \text{incidence_BCC}\times(1-PAF)`
-
+ (2) :math:`\text{incidence_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
+ (3) :math:`\text{incidence_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
+ (4) :math:`\text{incidence_BCC_S_hrHPV_with_vaccine} =  \text{incidence_BCC}\times(1-PAF)`
+ (5) :math:`\text{incidence_BCC_S_hrHPV_without_vaccine} =  \text{incidence_BCC}\times(1-PAF)\times\text{RR_no_vaccine_CIN2+}`
+ (6) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
+ (7) :math:`\text{incidence_hrHPV_for_BCC_S_hrHPV_to_BCC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
+ (8) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
+ (9) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
+ 
 .. _5.3.4:
 
 5.3.4 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
 
  - PAF = :math:`\frac{\text{prev_tx}\times(\text{RR_tx}-1)}{\text{prev_tx}\times(\text{RR_tx}-1)+1}`
- - :math:`\text{incidence_ICC_with_tx} =  \text{incidence_ICC}\times(1-PAF)\times\text{RR_tx}`
- - :math:`\text{incidence_ICC_without_tx} =  \text{incidence_ICC}\times(1-PAF)`
+ - :math:`\text{incidence_ICC_with_tx} =  \text{incidence_ICC}\times(1-PAF)`
+ - :math:`\text{incidence_ICC_without_tx} =  \text{incidence_ICC}\times(1-PAF)\times\text{RR_no_tx}`
 
-1. prev_tx = screening coverage * treatment coverage (80%, stand-in value)
-2. RR_tx = 1 - np.random.beta(3_273 - 105, 105) stand-in distribution
+1. prev_tx = baseline screening coverage * treatment coverage among those who 
+   attended cervical cancer screening = 25% * 9% = **2.25%** (Tai et al. 2018)
+2. RR_no_tx = relative risk of developing CIN3+ for ASCUS women without treatment 
+   versus with treatment: use log-normal distribution **exp(normal(mean=log(4.86), SD=0.51))** 
+   (Tai et al. 2018)
 
 .. _5.4:
 
@@ -605,7 +615,7 @@ relevant formulas
      - The current HPV vaccination rates remain low in China, no data has
        identified.
    * - Target HPV vaccination coverage in 2030
-     - 40%
+     - 25%
      - 
      - by assumption
    * - Screening sensitivity of co-test
@@ -653,13 +663,16 @@ relevant formulas
      - In this study, CIN2+ was associated with non-16/18 HPV infection (other 
        oncogenic types including 31/33/45/52/58)
    * - BCC treatment coverage
-     - 80%
-     - Katki et al. 2013
-     - stand-in value
+     - 9%
+     - [Tai-et-al-2018]_
+     - proportion of people treated among those who attended cervical cancer 
+       screening
    * - BCC treatment efficacy
-     - RR_tx = 0.03 for those diagnosed with CIN2+ and treated versus no treatment
-     - Katki et al. 2013
-     - stand-in value
+     - 0.22 (95%CI 0.07 to 0.68); relative risk of developing CIN3+ for ASCUS 
+       women with treatment versus no treatment
+     - [Tai-et-al-2018]_
+     - use log-normal distribution **exp(normal(mean=log(4.86), SD=0.51))** 
+       for inverse distribution
 
 
 .. _5.5:
@@ -780,3 +793,7 @@ TBD
    Lu B, Kumar A, Castellsagué X, Giuliano AR. Efficacy and safety of prophylactic 
    vaccines against cervical HPV infection and diseases among women: a systematic 
    review & meta-analysis. BMC Infect Dis 2011; 11: 13.
+.. [Tai-et-al-2018]
+   Tai YJ, Chen YY, Hsu HC, et al. Risks of cervical intraepithelial neoplasia 
+   grade 3 or invasive cancers in ASCUS women with different management: a 
+   population-based cohort study. J Gynecol Oncol 2018; 29: e55.

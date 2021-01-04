@@ -57,7 +57,7 @@ GBD 2017 Modeling Strategy
 
 The following information was obtained from the GBD 2017 fatal and non-fatal methods appendices [GBD-2017-YLD-Appendix-TBL-cancer]_, [GBD-2017-CoD-Appendix-TBL-cancer]_.
 
-Tracheal, bronchus, and lung (TBL) cancers are modeled together as a single cause in GBD. These cancers are not differentiated in the input data for the GBD model and are not crosswalked for alternative cause definitions. 
+Tracheal, bronchus, and lung (TBL) cancers are modeled together as a single cause in GBD. These cancers are not differentiated in the input data for the GBD model and are not crosswalked for alternative cause definitions. Notably, GBD estimates represent *diagnosed* cases of TBL cancers in a given population. 
 
 As with the majority of neoplasm causes in GBD, a remission rate for TBL cancer is not explicitly modeled. Rather, there is no morbidity modeled for TBL cancer after 10 years. As such, prevalence for TBL cancer extends for no more than 10 years after incidence.
 
@@ -98,13 +98,6 @@ Covariates used in the fatal TBL cancer model for GBD 2017 included:
      - ICD 9
    * - C33-C34.9, D02.1-D02.3, D14.2-D14.3, D38.1
      - 162-162.9, 212.2-212.3, 231.1-231.2, 235.7
-
-
-.. todo::
-
-	What moment of cancer progression does GBD intend to model as incidence? Cancer onset or symptom onset? What are the limitations of this? Most likely symptom onset/diagnosis.
-
-	How can we integrate the 10 year GBD assumption into our vivarium strategy while also accounting for pre-symptomatic incidence?
 
 Cause Hierarchy
 +++++++++++++++
@@ -219,7 +212,7 @@ State and Transition Data Tables
    * - S
      - prevalence
      - :math:`1 - prevalence_I - prevalence_\text{PC} - prevalence_C`
-     - Note: this assumes no initial prevalence in R state
+     - Note: this assumes no initial prevalence in R or C states
    * - S
      - birth prevalence
      - 0
@@ -234,8 +227,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - :math:`prevalence_C * MST / AST`
-     - Note: assumes all cancers in prevalence_c426 are in clinical phase
+     - :math:`(1 - screening_\text{baseline}) * \frac{incidence_\text{PC} * MST}{1 - prevalence_\text{C, general population}}`
+     - Note: :math:`incidence_\text{PC}` defined in table below. This assumes that there are no prevalent *detected* preclinical lung cancers
    * - PC
      - birth prevalence
      - 0
@@ -250,7 +243,7 @@ State and Transition Data Tables
      - 
    * - I
      - prevalence
-     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC} * ODF`
+     - :math:`prevalence_\text{PC} * ODF`
      - Note: this may be an underestimate of initial prevalence due to longer duration than preclinical TBL cancer
    * - I
      - birth prevalence
@@ -266,20 +259,20 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
-     - 
+     - 0
+     - Assumed that there are no prevalent clinical (detected) lung cancers in the insured population; see the definition of :math:`prevalence_\text{C, general population}` for the prevalence of clinical lung cancers in the general population (Data Sources Table)
    * - C
      - birth prevalence
      - 0
      - 
    * - C
      - excess mortality rate
-     - :math:`csmr_\text{c426} / prevalence_C`
+     - :math:`csmr_\text{c426} / prevalence_\text{C, general_population}`
      - 
    * - C
      - disabilty weights
      - :math:`\displaystyle{\sum_{s\in\text{s_c426}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c426}}}`
-     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276
+     - Total TBL cancer disability weight over all sequelae with IDs s273, s274, s275, s276. Use GBD 2019 sequalea prevalence for weighting since these were not forecasted. Can be excluded from model for simplicity (YLDs not in output table shell).
    * - R
      - prevalence
      - 0
@@ -309,12 +302,12 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_S}`
-     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426*}}{prevalence_\text{S, general population}}`
+     - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST. SEE SECTION BELOW FOR HOW TO CALCULATE.
    * - i_i
      - S
      - I
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_S}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_\text{S, general population}}`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
@@ -336,72 +329,122 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - :code:`/ihme/csu/swiss_re/forecast/426_prevalence_12_29_ng.nc`
      - CSU TBL cancer prevalence forecasts
-     - 2020-2040; defined as proportion of population with condition
-   * - csmr_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - 2020-2040; defined as proportion of population with condition, csv file with same name also available, use the 'noised_forecast' column
+   * - csmr_c426 
+     - :code:`/ihme/csu/swiss_re/forecast/426_deaths_12_29_ng.nc`
      - CSU TBL cancer cause specific mortality rate forecast
-     - 2020-2040; defined as deaths per person-year in general population
+     - 2020-2040; defined as deaths per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - incidence_rate_c426
-     - /ihme/csu/swiss_re/forecast/426_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
+     - :code:`/ihme/csu/swiss_re/forecast/426_incidence_12_29_ng.nc`
      - CSU TBL cancer cause-specific mortality rate forecast
-     - 2020-2040; defined as incidence cases per person-year in general population
+     - 2020-2040; defined as incidence cases per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - disability_weight_s{273, 274, 275, 276}
      - YLD appendix
      - Sequela disability weights
      - 0.288 (0.193-0.145), 0.049 (0.031-0.072), 0.451 (0.307-0.6), 0.54 (0.377-0.687)
    * - prevalence_s{273, 274, 275, 276}
      - GBD 2019, COMO, decomp_step='step4'
-     - TBL cancer sequelae prevalence
+     - TBL cancer sequelae prevalence from GBD 2019
      - Not forecasted
    * - MST
-     - 2.06 years (95% CI: 0.42 - 3.83); normal distrbution of uncertainty at draw level
+     - Normal distribution of uncertainty about mean: 3.82 years (95% CI: 0.57, 7.07), standard deviation=1.66 (derived from 95% CI) 
      - Mean sojourn time; duration of time between onset of the CT screen-detectable preclinical phase to the clinical phase
-     - See below for instructions on how to sample and research background. NOTE: may update this value
-   * - AST
-     - :math:`1/(csmr_\text{c426} / prevalence_C + ACMR - csmr_\text{c426})`
-     - Average survival time; mean duration of time between detection and death
-     - ACMR: all cause-mortality rate for demographic group from GBD
+     - See below for research background. NOTE: may update this value
    * - ODF
-     - 0.35 (0.2, 0.5); normal distribution of uncertainty at the draw level
-     - Overdiagnosis factor (ex: 35% excess incidence of lung cancer associated with LDCT screening program)
-     - See details for sampling below. NOTE: placeholder value
+     - Normal distribution of uncertainty around 0.14 (95% CI: 0.05, 0.23), standard deviation=0.1764 (derived from 95% CI)
+     - Overdiagnosis factor (ex: 14% excess incidence of lung cancer associated with LDCT screening program)
+     - See below for reserach backgroud
    * - :math:`screening_\text{baseline}`
-     - Defined in :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>`
+     - 0.06
      - Baseline coverage of lung cancer screening by LDCT
+     - The value in this table should be used prior to implementation of the screening model, which will be defined in the :ref:`Lung Cancer Screening Cause Model Document <lung_cancer_cancer_concept_model>` and should then supercede the 0.06 value.
+   * - :math:`prevalence_\text{C, general population}`
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{c426}`
+     - Prevalence of clinical TBL cancer in the general (insured and uninsured) population. Will be used in incidence_pc equation
+     - Should use the forecasted prevalence for this parameter
+   * - :math:`prevalence_\text{PC, general population}`
+     - :math:`incidence_\text{PC} * MST`
      - 
-
-.. todo::
-
-	Update/confirm placeholder values
-
-Mean Sojourn Time
-^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 2.06
-  q_975 = 3.83
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for MST, representing uncertainty in the parameter
-  mst_distribution = norm(mean, std)
+     - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
+   * - :math:`prevalence_\text{I, general population}`
+     - :math:`screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * prevalence_\text{PC, general population} * ODF`
+     - 
+     - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
+   * - :math:`prevalence_\text{S, general population}`
+     - :math:`1 - prevalence_\text{C, general population} - prevalence_\text{PC, general population} - prevalence_\text{I, general population}`
+     - 
+     - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
 
 .. note::
 
-  May consider adding individual-level variation to this parameter at a later date.
+  The forecast data used for the current version of the cause model is listed in the table above. Updated forecasts may be used in the final version of the model (:code:`426_{measure}_12_29_ng_smooth_13` or :code:`426_{measure}_12_29_ng_smooth_15` or others).
+
+The following equation demonstrates how to solve for :math:`incidence_\text{PC}` based on the dependent equalities for the definitions of :math:`incidence_\text{c426}` and :math:`prevalence_\text{S, general population}`.
+
+.. math ::
+
+  a = -MST - (1 - screening_\text{baseline}) * MST * ODF
+
+.. math ::
+
+  b = 1 - prevalence_\text{C, general population} - screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF}
+
+.. math ::
+
+  c = -(screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426})
+
+.. math ::
+
+  incidence_\text{PC} = \frac{-b + \sqrt{b^2 - 4ac}}{2a}
+
+The below equations show a proof for the above equation.
+
+1a.
+
+.. math ::
+
+  prevalence_\text{S, general population} = 1 - prevalence_\text{C, general population} 
+  
+  - prevalence_\text{PC, general population} - prevalence_\text{I, general population}
+
+1b.
+
+.. math ::
+
+  incidence_\text{PC} = \frac{screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426}}{prevalence_\text{S, general population}}
+
+2. 
+
+.. math ::
+
+  prevalence_\text{S, general population} = 1 - prevalence_\text{C, general population} - incidence_\text{PC} * MST 
+  
+  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF)
+
+3. 
+
+.. math :: 
+
+  \frac{screening_\text{baseline}*incidence_\text{c426}*\frac{1}{1+ODF} + (1-screening_\text{baseline})*incidence_\text{c426}}{incidence_\text{PC}} = 
+  
+  1 - prevalence_\text{C, general population} - incidence_\text{PC} * MST 
+  
+  - (screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{PC} * MST * ODF)
+
+4. 
+
+.. math ::
+
+  0 = (-MST - (1 - screening_\text{baseline}) * MST * ODF) * {incidence_\text{PC}}^2 
+
+  + (1 - prevalence_\text{C, general population} - screening_\text{baseline} * prevalence_\text{c426} * \frac{ODF}{1+ODF}) * incidence_\text{PC}
+
+  - (screening_\text{baseline} * incidence_\text{c426} * \frac{1}{1+ODF} + (1 - screening_\text{baseline}) * incidence_\text{c426})
+
+Mean Sojourn Time
+^^^^^^^^^^^^^^^^^
 
 **Research Background:**
 
@@ -434,9 +477,11 @@ A systematic literature search was performed to obtain estimates of the mean soj
      - 5.38 years (95% CI: 4.76, 5.88)
      - 
 
-Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ paper as the data source for the mean sojourn time in this model. 
+Given that our model is not specific to any given histologies or cancer stages, we selected the [Chien-and-Chen-2008]_ and [Gonzalez-Maldonado-et-al-2020]_ papers as the data sources for the mean sojourn time in this model and ran a random effects meta-analysis on these two studies for a summary parameter, shown below.
 
-  Notably, this is limited in that it does not consider variation by sex or histology.
+.. image:: mst_meta_analysis.svg
+
+Notably, this is limited in that it does not consider variation by sex or histology.
 
 Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time of lung cancer tumors (a measure related to mean sojourn time) did not significantly vary by age or pack-year cigarette consumption. 
 
@@ -446,34 +491,6 @@ Further, an analysis by [Veronesi-et-al-2012]_ suggested that mean doubling time
 
 Cumulative Excess Incidence Factor
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-.. warning::
-
-  This is currently a stand-in value based on the [Broderson-et-al-2020]_ meta-analysis finding that LDCT screening programs increase lung cancer incidence by 20% or 50% based on sensitivity analyses.
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = 0.35
-  q_975 = 0.5
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for ODF, representing uncertainty in the parameter
-  odf_distribution = norm(mean, std)
-
-.. todo::
-
-  Update/confirm stand-in value... possibly with age-specific values from [Criss-et-al-2018]_
 
 **Research Background:**
 
@@ -517,24 +534,66 @@ A retrospective cohort study of patients aged 50-74 screened by LDCT relative to
 
 [Sone-et-al-2007]_ conducted a long-term follow-up study of a population-based mass CT screening program among those aged 40-74 in Japan and estimated that 13.3% of cases might be overdiagnosed. Postoperative follow-up of the 50 survived patients ranged from 70 to 117 (median, 101) months. Notably, this study relied on the assumption of constant tumor volume doubling time and noted that if this assumption does not hold that the number of over-diagnosed cases would be smaller. Additionally, the study population included never and light smokers, which they noted had tumors with slower volume doubling times and therefore were more likely to be overdiagnosed than smokers. 
 
-.. note::
+The following random effects meta-analysis shows the summary estimates of ODF grouped by study design. Notably, [Criss-et-al-2018]_ was excluded from this meta-analysis because confidence intervals were not reported and confidence intervals for [Sone-et-al-2007]_ were calculated based on the reported sample size and proportion.
 
-  The model results for the :ref:`SwissRe lung cancer screening model <lung_cancer_cancer_concept_model>` will be highly sensitive to this parameter. Given that there is so much variation and contraversy around the degree of overdiagnosis in LDCT screening programs, this is a value that we should reach consensus on with the client. 
+.. image:: odf_meta_analysis.svg
 
 Validation Criteria
 +++++++++++++++++++
+
+**Incidence**
 
 The following should be true:
 
   :math:`incidence_\text{c426} \approx incidence_C + incidence_I * screening_\text{baseline}`
 
-    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST
+    NOTE: Each of these incidence rates should be defined with person-time in the *general population* as the denominator.
 
-  :math:`prevalence_\text{c426} \approx< prevalence_C + prevalence_I * screening_\text{baseline} * screening_\text{sensitivity}`
+    NOTE: in the early years of the simulation, simulation incidence will overestimate GBD incidence because the prevalence of the susceptible state at baseline is greater in the simulation than in GBD.
+
+    NOTE: our incidence estimates will lag behind the GBD forecasts by the duration of MST.
+
+  :math:`incidence_\text{PC} * ODF \approx incidence_I`
+
+  :math:`incidence_\text{PC(input)} \approx incidence_\text{PC(output)}`
+
+    NOTE: person-time in the susceptible state should be used as the denominator 
+
+  :math:`incidence_\text{I(input)} \approx incidence_\text{I(output)}`
+
+    NOTE: person-time in the susceptible state should be used as the denominator 
+
+  :math:`incidence_\text{C(input)} \approx incidence_\text{C(output)}`
+
+    NOTE: person-time in the preclinical state should be used as the denominator 
+
+  :math:`incidence_\text{R(input)} \approx incidence_\text{R(output)}`
+
+    NOTE: person-time in the clinical state should be used as the denominator
+
+**Prevalence**
+
+  :math:`prevalence_\text{c426} \approx prevalence_C + prevalence_I * screening_\text{baseline}`
+
+    NOTE: The simulation prevalence will lag behind the forecasted prevalence in the early years of the simulation because of the assumption that there are no prevalent detected cancers at the start of the simulation.
 
     NOTE: The simulation will overestimate prevalence because there is no excess mortality or remission in the indolent state currently. Screening sensitivity information avaialable on the :ref:`Lung cancer concept model documentation page <lung_cancer_cancer_concept_model>`.
 
+  :math:`prevalence_\text{c426} > prevalence_C`
+
+    NOTE: under the assumption of non-zero baseline screening coverage
+
+**Mortality**
+
+  :math:`emr_\text{C(input)} \approx emr_\text{C(output)}`
+
   :math:`csmr_\text{c426} \approx csmr_C`
+
+    NOTE: CSMR from the simulation will lag behind forecasts by the duration of MST. It will start lower than the forecast due to the assumption that there are no prevalent detected cases upon initialization. 
+
+.. note::  
+  
+  Estimates of YLLs and YLDs likely will no longer validate well with high levels of baseline screening due to the incorporation of asymptomatic cases.
 
 Some test simulations of this cause model that aim to verify the modelling strategy described here are available `here on the Vivarium Data Analysis Repository <https://github.com/ihmeuw/vivarium_data_analysis/pull/90>`_.
 

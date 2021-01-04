@@ -176,17 +176,17 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same
      - same 
    * - d1 and d'1 (∆BEP_mal)
-     - BEP vs control/no intervention on birthweight in g among malnourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
+     - BEP vs control (we interpret this as MMS) on birthweight in g among malnourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
      - +66.96g (13.13 to 120.78) for d1
      - Ota 2015 Cochrane review
      - +100g (±10) for d'1
      - TPP target/potentially Ceesay et al 1997 BMJ
    * - d and d'0 (∆BEP_norm)
-     - BEP vs control/no intervention on birthweight in g among adequately nourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
-     - +15.93 (-20.83 to 52.69)
+     - BEP vs control (we interpret this as MMS) on birthweight in g among adequately nourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
+     - +15.93 (-20.83 to 52.69) for d0
      - Ota 2015 Cochrane review
-     - +75g (±10) for d'0
-     - TPP target
+     - +15.93 (-20.83 to 52.69) for d'0
+     - Ota 2015 Cochrane review
    * - x
      - crude birthweight in g shift between low and normal BMI women
      - -147.71 (-210.9 to -84.52) random effects

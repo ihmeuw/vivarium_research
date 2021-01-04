@@ -1,3 +1,5 @@
+.. _2017_stomach_cancer:
+
 .. role:: underline
     :class: underline
 
@@ -30,7 +32,7 @@
   And then add it to the list of decorators above.
 
 
-.. _2017_stomach_cancer:
+
 
 ==============
 Stomach Cancer
@@ -45,13 +47,11 @@ Stomach Cancer
 +=======+============================+
 | MST   | Mean Sojourn Time          |
 +-------+----------------------------+
-| AST   | Average Survival Time      |
-+-------+----------------------------+
 | PC    | Pre-Clinical Cancer        |
 +-------+----------------------------+
 | S     | Susceptible                |
 +-------+----------------------------+
-| C     | With Cancer condition      |
+| C     | Clinical cancer            |
 +-------+----------------------------+
 
 
@@ -176,22 +176,29 @@ Assumptions and Limitations
 
 1. This model will assume the existence of a "recovered" cause model state in an attempt to be consistent with the GBD assumption that no morbidity due to stomach cancer occurs more than ten years past incidence of the *clinical* phase of stomach cancer. The assumption also asserts that there is no recurrance of stomach cancer.
 
-2. This model assumes that the GBD incidence rate corresponds to the incidence of asymptomatic stomach cancer rather than *clinically detected* stomach cancer arising from symptomatic presentation at the doctor's office, which is a mix of pre-clinical (detection of pre-clinical stomach cancer from other non-stomach cancer related reasons) and clinical detections. This assumption has a few notable downstream limitations, including:
+2. This model assumes that the GBD incidence rate corresponds to the incidence of all pre-clinical asymptomatic stomach cancer (PC state) rather than symptomatic clinical stomach cancer arising from symptomatic presentation at the doctor's office. This assumption has a few notable downstream limitations, including:
 
 	- simulation incidence of *clinical* stomach cancer will lag slightly behind forecasted incidence of stomach cancer due to the mean sojourn time period delay
-  - assume a short mean sojourn time 
+  - this should not cause too much trouble for stomach cancer as we assume a short mean sojourn time (<1 year)
 
 .. todo::
 
   think more about these assumptions in relation to the sojourn time
 
-3. The prevalence of preclinical/screen-detectable stomach cancer is assumed to be equal to prevalence of detected stomach cancer (GBD prevalence of stomach cancer) scaled to the ratio of duration spent in the preclinical/screen-detectable state (mean sojourn time) and the clinical state (average survival time). This method relies on the assumption that GBD prevalence of stomach cancer represents clinical stomach cancers; this may be a reasonable assumption for China given that they do not have an aggressive screening program. 
+3. For stomach cancer, we are assuming there is a 5% H. pylori screening coverage in the insured population (double check if we want to bake this into the general population or we create an insured population for our baseline scenario?). For now, we assume that the insured population is the general GBD population. There is no endoscopy screening in theinsured population/general GBD population as there is no reliable data for this, hence all the cancers in the general population would have been detected as symptomatic clinical presentations. This means there are no PC states in the general population. Therefore prevalence_S, general population = 1 - prevalence_c414
+
+4. In our simulation, we will model th pre-clinical state because we will introduce endoscopy screening which will detect pre-clinical canceers and move pay-out forward (earlier). The prevalence of pre-clinical (the pre-clincial cancer is screen-detectable for stomach cancer) is assumed to be equal to incidence of pre-clinical cancer (per assumption #2, this would be i_c414 which is the GBD incidence rate among the susceptable population) x duration in the pre-clinical state which is the mean sojourn time (MST).
+
+5. In our simulation, we will intialize the model with nobody in the C state in line with the insured population: people cannot get insurance if they already know they have cancer. 
 
 
 Cause Model Diagram
 +++++++++++++++++++
 
+
 .. image:: cause_model_diagram.svg
+
+This causal diagram reflects the simulation population which is different from the general population (GBD). The simulation population reflects as close as possible the insured population. The simulation population has addition PC state and will be initlized with no one in the C state (the general population refers to the GBD population). We assume there is a 5% H. pylori coverage in the general population, and is the same in the simulation population.  
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -226,8 +233,8 @@ State and Transition Data Tables
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c414 x MST/AST - prevalence_c414
-     - Note: this assumes no initial prevalence in R state
+     - 1 - prev_PC - prev_C - prev_R
+     - Note: we assume no initial prevalence in C or R state (prev_C and prev_R =0)
    * - S
      - birth prevalence
      - 0
@@ -242,8 +249,8 @@ State and Transition Data Tables
      -
    * - PC
      - prevalence
-     - prevalence_c414 x MST/AST
-     - Note: assumes all cancers in prevalence_c414 are in clinical phase
+     - prev_PC = :math:`\frac{\text{i_pc}}{\text{(1 - prev_c414)}}` x MST 
+     - we scale prev_PC by 1-prev_c414 to account for 0 prevalence in the C state at initialization so as to preserve the ratio of people without stomach cancers to people with pre-clinical cancers. 
    * - PC
      - birth prevalence
      - 0
@@ -258,19 +265,19 @@ State and Transition Data Tables
      - 
    * - C
      - prevalence
-     - prevalence_c414
-     - 
+     - 0
+     - No clinical cancers at initialization because those with clinical cancers cannot purchase insurance and are therefore not included in our sim population. See assumption #5. 
    * - C
      - birth prevalence
      - 0
      - 
    * - C
      - excess mortality rate
-     - csmr_c414 / prevalence_c414
+     - csmr_c414 / prev_c414
      - 
    * - C
      - disabilty weights
-     - :math:`\displaystyle{\sum_{s\in\text{s_c414}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prevalence_c414}}}`
+     - :math:`\displaystyle{\sum_{s\in\text{s_c414}}}\scriptstyle{\text{disability_weight}_s\,\times\,\frac{\text{prev}_s}{\text{prev_c414}}}`
      - Total stomach cancer disability weight over all sequelae with IDs s248, s249, s250, s251
    * - R
      - prevalence
@@ -301,13 +308,18 @@ State and Transition Data Tables
    * - i_pc
      - S
      - PC
-     - incidence_c414 / prevalence_S
-     - may need to add MST*   
+     - :math:`\frac{\text{i_c414*}}{\text{(1 - prev_c414)}}`
+     - *draw at age 'current age + MST'   
    * - i_c
      - PC
      - C
      - 1/MST per person-year
      - See MST definition in table below
+   * - i_c414
+     - 
+     - 
+     - GBD incidence
+     -    
    * - r
      - C
      - R
@@ -317,7 +329,7 @@ State and Transition Data Tables
 
 .. note::
 
-  * we may need to draw from i_c414/prev_S + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
+  * we need to draw from i_c414 at current age + MST because otherwise we are making people get clinical cancer a period of +MST older than they would have otherwise by giving them the pre-clinical cancer first with i_c414 and then waiting MST time to get clinical cancer. To keep clinical cancer incidence consistent with the right age groups, we can draw the incidence rates for preclinical cancer from the future- age group MST-time older than the stimulants current age. This depends on what duration of MST we end up using- if its shorter than the time incidence rates increase (1 year?), then we might not need to add this period. 
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -328,15 +340,15 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c414
-     - need to get filepath
+     - 414_ets_prevalence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU stomach cancer prevalence forecasts
      - 2020-2040; defined as proportion of population with condition
    * - csmr_c414
-     - need to get filepath
+     - 414_ets_deaths_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU stomach cancer cause specific mortality rate forecast
      - 2020-2040; defined as deaths per person-year in general population
    * - incidence_rate_c414
-     - need to get filepath
+     - 414_ets_incidence_scaled_logit_phi_89_minmax_3_1000_gbd19.csv
      - CSU stomach cancer cause-specific mortality rate forecast
      - 2020-2040; defined as incidence cases per person-year in general population
    * - disability_weight_s{248, 249, 250, 251}
@@ -348,32 +360,28 @@ State and Transition Data Tables
      - stomach cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 4 months (95% CI: ); ?? distrbution of uncertainty at draw level
+     - 2.37 years (95%CI: 1.78 to 2.96); distribution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the asymptomtic stomach cancer to the clinical phase
-     - See below for instructions on how to sample and research background. NOTE: may update this value
-   * - AST
-     - ? (95% CI: ?); normal distribution of uncertainty at the draw level
-     - Average survival time; mean duration of time between detection and death
-     - See details below for sampling below. PLACEHOLDER VALUE
+     - See below for instructions on how to sample and research background. 
 
-.. todo::
 
-	Update/confirm placeholder values
 
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
 
+The MST that Bae 2014 estimated for population of Korean men is 2.37 years (95%CI: 1.92 to 2.96). We will use a lower bound of 1.78 instead to make the distribution symmetrical. This means that the MST is 1.92-1.78 = 0.14 years shorter ~ 1.6 months for approximately 5% of the population. 
+
 **Parameter for Use in Model:**
 
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
+This parameter is be sampled *at the draw level* from the distribution detailed below and should be applied universally to all simulants within that draw.
 
 .. code-block:: Python
 
   from scipy.stats import norm
 
   # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = ??
-  q_975 = ??
+  mean = 2.37
+  q_975 = 2.96
 
   # 0.975-quantile of standard normal distribution (=1.96, approximately)
   q_975_stdnorm = norm().ppf(0.975)
@@ -383,43 +391,10 @@ This parameter should be sampled *at the draw level* from the distribution detai
   # Frozen normal distribution for MST, representing uncertainty in the parameter
   mst_distribution = norm(mean, std)
 
-.. note::
 
-  May consider adding individual-level variation to this parameter at a later date.
+Reference: 
 
-
-Average Survival Time
-^^^^^^^^^^^^^^^^^^^^^
-
-**Parameter for Use in Model:**
-
-.. warning::
-
-  This is currently a stand-in value
-
-This parameter should be sampled *at the draw level* from the distribution detailed below and should be applied universally within that draw.
-
-.. code-block:: Python
-
-  from scipy.stats import norm
-
-  # mean and 0.975-quantile of normal distribution for mean difference (MD)
-  mean = ??
-  q_975 = ??
-
-  # 0.975-quantile of standard normal distribution (=1.96, approximately)
-  q_975_stdnorm = norm().ppf(0.975)
-
-  std = (q_975 - mean) / q_975_stdnorm # std dev of normal distribution
-
-  # Frozen normal distribution for AST, representing uncertainty in the parameter
-  ast_distribution = norm(mean, std)
-
-.. todo::
-
-  find values
-
-
+ - Bae et al. Mean Sojourn Time of Preclinical Gastric Cancer in Korean Men: A Retrospective Observational Study J Prev Med Public Health 2014;47:201-205
 
 Validation Criteria
 +++++++++++++++++++
