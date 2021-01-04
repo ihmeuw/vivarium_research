@@ -53,7 +53,7 @@ Vivarium CSU Stomach Cancer Screening
 +-------+----------------------------+
 | IM    | intestinal metaplasia      |
 +-------+----------------------------+
-| DYS   | Dysplasia                  |
+| DYS   | dysplasia                  |
 +-------+----------------------------+
 | LGIN  | low-grade intra-epithelial |
 |       | neoplasm/dysplasia         |
@@ -302,14 +302,14 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 
 .. note:: 
 
-  The prevalence of HP was obtained from meta-analysis of 22 studies. For China, the prevalence was 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]. There are other estimates of prevalences, but this was the reference the Chinese Consensus on Chronic Gastritis quoted. The primary modality of testing for HP from the meta-analysis, include  
+  The prevalence of HP was obtained from systematic review and meta-analysis of representative studies for 12 provinces, 2 of which are part of our blended provinces: Tianjin, and Jiangsu from Chen et al. Lancet Global Health 2019 (appendix). Since the prevalence of HP was estimated from studies using different HP detection tests, we assume a 95% sensitivity and specificity as a combined average for the tests used in the meta-analysis to estimate the true HP prevalence. 
 
   - serology (varies depending on antigen used): 97.6% sensitivity and 96.2% specificity for recomLine
   - urea breath test: 95% sensitvity and specificity
   - stool antigen: 94% sensitvity and 97% specificity
   - Campylobacter-like organism or histopathology: invasive and considered gold standard
 
-  Sensitivity and specificity of screening tests were obtained from Wang 2015. These values can vary depending on the specific make of the test used and conditions. To calculate the true HP prevalence, we approximately assume a 95% sensitivity and specificity as a combined average for the tests used in the meta-analysis.  
+  Sensitivity and specificity of screening tests were obtained from Wang 2015. These values can vary depending on the specific make of the test used and conditions. 
 
 
 True prevalence of HP :math:`P_{hp_{true}}`
@@ -327,18 +327,18 @@ True prevalence of HP :math:`P_{hp_{true}}`
 
 (1) sensitivity a/(a+c) = 0.95
 (2) specificity d/(b+d) = 0.95
-(3) HP prevalence by screen :math:`P_{hp_{screen}}` = (a+b)/(a+b+c+d) = 0.558 (95%CI: 0.518 to 0.599) [Hooi Gastroenterology 2017]
-(4) a+b+c+d = 1000
+(3) HP prevalence by screen :math:`P_{hp_{screen}}` = (a+b)/(a+b+c+d) = 0.4457 (95%CI: 0.4141 to 0.4778) [Chen Lancet Global Health 2019]
+(4) a+b+c+d = 10,000
 (5) use normal distribution for uncertainty ranges
 
-Solving the 4 equations using the mean of :math:`P_{hp_{screen}}` = 0.558:
+Solving the 4 equations using the mean of :math:`P_{hp_{screen}}` = 0.4457:
 
-  - a = 536 (true positive)
-  - b = 22  (false positive) 
-  - c = 28  (false negative)
-  - d = 414 (true negative) 
+  - a =  4177 (true positive)
+  - b =  280 (false positive) 
+  - c =  220 (false negative)
+  - d =  5323 (true negative) 
 
-True HP prevalence = (a+c)/1000 = 564/1000 = 0.564 (solve for variables a-d by draw to obtain UIs)
+True HP prevalence = (a+c)/1000 = 4397/10,000 = 0.4397 (solve for variables a-d by draw to obtain UIs)
 
 Data Sources Table
 
@@ -347,8 +347,8 @@ Data Sources Table
 +----------------------+----------------------------+-------------------------------+-------------------------------------------+
 | Relative risk of HP  | 1.89 (95%CI: 1.57 to 2.26) | Normal distribution           | Jiang Eur J Clin Microbiol Infect Dis 2017|
 +----------------------+----------------------------+-------------------------------+-------------------------------------------+
-| Screen prevalence    | 0.558                      | Normal distribution           | Hooi Gastroenterology 2017                |
-| of HP                | (95%CI: 0.518 to 0.599)    |                               |                                           |
+| Screen prevalence    | 0.4457                     | Normal distribution           | Chen Lancet Global Health 2019            |
+| of HP                | (95%CI: 0.4141 to 0.4778)  |                               |                                           |
 +----------------------+----------------------------+-------------------------------+-------------------------------------------+
 | HP test accuracy     | 95% sensitivity/specificity| Assumed average of tests      | Wang World J Gastroenterol 2015           |
 +----------------------+----------------------------+-------------------------------+-------------------------------------------+
@@ -356,19 +356,19 @@ Data Sources Table
 Full references: 
 
   - Jiang J, Chen Y, Shi J, Song C, Zhang J, Wang K. Population attributable burden of Helicobacter pylori-related gastric cancer, coronary heart disease, and ischemic stroke in China. Eur J Clin Microbiol Infect Dis 2017; 36: 199–212.
-  - Hooi JKY, Lai WY, Ng WK, et al. Global Prevalence of Helicobacter pylori Infection: Systematic Review and Meta-Analysis. Gastroenterology 2017; 153: 420–9.
+  - Chen W, Xia C, Zheng R, et al. Disparities by province, age, and sex in site-specific cancer burden attributable to 23 potentially modifiable risk factors in China: a comparative risk assessment. Lancet Glob Health 2019; 7: e257–69.
   - Wang Y-K, Kuo F-C, Liu C-J, et al. Diagnosis of Helicobacter pylori infection: Current options and developments. World J Gastroenterol WJG 2015; 21: 11221–35.
 
 Validation and verification
 
   - Make sure we have true HP+/- stratification
-  - Validate that the external parameter of HP true prevalence should equal to ~ 0.564 for all age bands
+  - Validate that the external parameter of HP true prevalence should equal to ~  for all age bands
   - Validate the relative risk should equal to ~ 1.89 by calculating [cases of PC cancers among true HP+] / [cases of PC cancers among true HP-]
 
 Assumptions and limitations
   
   - We use an adjusted relative risk and this may bias the estimation of our PAF when using the proportion of total population exposed to HP in the PAF equation. 
-  - The prevalence of HP could be different in different regions, or rural/urban areas. We are applying the prevalence of HP from a meta-analysis of 22 studies to our blended population. 
+  - The prevalence of HP could be different in different regions, or rural/urban areas. We are applying the prevalence of HP from a meta-analysis of studies from 12 provinces to our blended population. 
 
 .. _5.3.3:
 5.3.3 Prevalence of atrophy stratified by H. pylori status
@@ -378,8 +378,8 @@ To make this section easier to follow, we define:
 
   - atrophy+ = with atrophic gastritis
   - atrophy- = without atrophic gastritis
-  - p_atrophy+ = prevalence of atrophic gastritis
-  - f_atrophy+/- = fraction of the atrophic state that is H. pylori positive 
+  - p_atrophy+ = prevalence of atrophic gastritis (proportion)
+  - f_atrophy+/- = fraction of the atrophic state that is H. pylori positive (proportion)
   
 
 :underline:`A. Pre-cancerous state (chronic atrophic gastritis)`
@@ -391,51 +391,35 @@ Ideally we obtain age-specific distribution of the pre-cancer atrophic state pre
   - H.pylori prevalence
 
 
+We obtain the age-specific prevalence of atrophic gastritis from a retrospective hospital-based cross-sectional study, from the Sichuan Gastric Cancer Early Detection and Screening (SIGES) project. The study was conducted in West China Hospital, Sichuan University, a central high-volume teaching hospital at Sichuan province in the southwest of China. The period of the study was between May 2016 and May 2017. The subjects covered healthy controls, symptomatic cancer-free patients, and gastric cancer patients, who were managed or treated in West China Hospital. We obtain the age-specific atrophic gastritis prevalence from the results of healthy controls (n=9,425). Sex was not associated with risk of atrophic gastritis. 
+
 .. note::
 
-  This age and sex specific prevalence distribution of chronic atrophic gastritis is from Chinese population from 1997/1997 [Aoki 2005]. A total of 1741 individuals from Zhanhuang County (population: 208,000) of the Province of Hebei, underwent a health survey consisting of medical examination by interview, blood sampling, and clinical examination by physicians. All participants were Han Chinese (Asian). Prevalence of H. pylori was 72.5% among male and 73.4% among female using serum antibody test. CAG was serologically diagnosed when PGI was<70 (mg/l) and PGI/PGII was <3.
+  This study seems more suitable to estimate atrophic state in our blended population than the Aoki 2005 study used in the last PR because 
+   1) The estimated H. pylori prevalence in the study region is around 41.1% which is more similar to the prevalence we use. The prevalence of HP from the Aoki study was ~70% (Discussion section of Wang Scientific Reports 2020)
+   2) The Wang study is more recent.
+  
 
-The following tables show the sex and age specific CAG prevalence tables by reading off figure 5 and 6 from Aoki 2005
+The following tables show the age specific atrophic gastritis prevalence from Wang & Chen Scientific Reports 2020
 
 .. image:: prevalence_chronic_atrophic_gastritis_china.svg
 
-+------------------------------------+
-| Male age-specific prevalence       | 
-| (p_atrohpy+) atrophy [Aoki 2005]   | 
-+===========+============+===========+
-| age-bands | Atrophy +  | 95% CI    | 
-+-----------+------------+-----------+
-| <30       | 0.08       | 0.00-0.18 |       
-+-----------+------------+-----------+
-| 30-39     | 0.12       | 0.06-0.18 |
-+-----------+------------+-----------+
-| 40-49     | 0.12       | 0.07-0.17 |
-+-----------+------------+-----------+
-| 50-59     | 0.16       | 0.08-0.24 | 
-+-----------+------------+-----------+
-| 60-69     | 0.18       | 0.10-0.26 | 
-+-----------+------------+-----------+ 
-| 70+       | 0.28       | 0.06-0.50 |
-+-----------+------------+-----------+
-
-+------------------------------------+
-| Female age-specific prevalence     | 
-| (p_atrophy+) atrophy [Aoki 2005]   | 
-+===========+============+===========+
-| age-bands | Atrophy +  | 95% CI    |
-+-----------+------------+-----------+
-| <30       | 0.10       | 0.00-0.20 |            
-+-----------+------------+-----------+
-| 30-39     | 0.11       | 0.09-0.13 | 
-+-----------+------------+-----------+
-| 40-49     | 0.06       | 0.04-0.08 | 
-+-----------+------------+-----------+
-| 50-59     | 0.12       | 0.08-0.16 | 
-+-----------+------------+-----------+
-| 60-69     | 0.18       | 0.10-0.26 | 
-+-----------+------------+-----------+     
-| 70+       | 0.19       | 0.08-0.30 | 
-+-----------+------------+-----------+
++----------------------------------------+
+| Age-specific prevalence                | 
+| (p_atrohpy+) atrophy [Wang 2020]       | 
++===========+============+===============+
+| age-bands | Atrophy +  | 95% CI        | 
++-----------+------------+---------------+
+| <20       | 0.0000     | 0.0000-0.0000 |       
++-----------+------------+---------------+
+| 20-39     | 0.0051     | 0.0022-0.0079 |
++-----------+------------+---------------+
+| 40-59     | 0.0145     | 0.0114-0.0176 |
++-----------+------------+---------------+
+| 60-79     | 0.0413     | 0.0301-0.0525 | 
++-----------+------------+---------------+
+| 80+       | 0.0976     | 0.0067-0.188  | 
++-----------+------------+---------------+
 
 Each row is a proportion out of 1. 
 
@@ -472,25 +456,25 @@ To derive f_atrophy+ and f_atrophy- for the above table with uncertainty interva
 (2) (a+c)/(a+b+c+d) = p_atrophy+ 
 (3) a+b+c+d = 1000
 (4) ad/bc = OR
-(5) :math:`P_{hp{-true}}` = 0.564 (use equations above to calculate true HP prevalence)
+(5) :math:`P_{hp{-true}}` = 0.4397 (use equations above to calculate true HP prevalence)
 (6) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005] 
 (7) f_atrophy+ = a/(a+c)
 (8) f_atrophy- = b/(b+d)
 (9) use normal distribution uncertainty ranges
 
 
-The calculated values should look similar to this back of envelope calculation: see tab Aoki 2005 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
+The calculated values should look similar to this back of envelope calculation: see tab Wang 2020 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
 
 .. note::
 
-  f_atrophy+ should be approximately 0.80 and f_atrophy- approximately 0.50. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
+  f_atrophy+ should be approximately 0.75 and f_atrophy- approximately 0.4. This is supported by the literature that estimates 70-90% of patients with chronic gastritis are infected with H. pylori [Fang Journal of Digestive Diseases 2018]
 
 .. important::
-  We only assign H. pylori status once at initialization and simulants will keep the same status throughout the sim - we will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment for H. pylori). H.pylori status is binary: pos or neg. Although some studies have observed H. pylori prevalence increasing with age, we use a population prevalence of H. pylori and assume the prevalence is consistent across all ages and sex as supported by Aoki 2005.
+  We only assign H. pylori status once at initialization and simulants will keep the same status throughout the sim - we will NOT update H. pylori status as the simulants move through the sim (this will not be true in the alternative scenario where we add screening and treatment for H. pylori). H.pylori status is binary: pos or neg. We assume the HP prevalence is consistent across all ages and sex.
 
 Example: 
 
-  Lets say we have a simulant Sally-Sim who is age 40. She has been randomly assigned atrophic percentile of 0.03 and h.pylori percentile of 0.5. Looking at the p_atrophy+ table for females, she is in the atrophic+ state for her percentile rank. Next, we determine her H. pylori status. Because she is atrophic, her H. pylori status will be determined by f_atrophy+ for her age group. Reading off the excel table, f_atrophy+ for 40-49 year olds is 0.82. Hence, she is also H. pylori positive. 
+  Lets say we have a simulant Sally-Sim who is age 40. She has been randomly assigned atrophic percentile of 0.010 and h.pylori percentile of 0.5. Looking at the p_atrophy+ table, she is in the atrophic+ state for her percentile rank. Next, we determine her H. pylori status. Because she is atrophic, her H. pylori status will be determined by f_atrophy+ for her age group. Reading off the excel table, f_atrophy+ for 40-59 year olds is ~0.75. Hence, she is also H. pylori positive. 
  
 Here is a notebook that describes the above steps:  
 
@@ -499,7 +483,7 @@ Data Sources Table
 +----------------------+----------------------------+----------------------+------------------------------+
 | Input parameter      | Value                      | Note                 | Reference                    |
 +----------------------+----------------------------+----------------------+------------------------------+
-| prevalence of atrophy| see tables                 |                      | Aoki Ann Epidemiol 2005      |
+| prevalence of atrophy| see tables                 |                      | Wang Scientific reports 2005 |
 +----------------------+----------------------------+----------------------+------------------------------+
 | odds ratio HP        | 3.8 (95%CI: 3.054 - 4.631) | Normal distribution  | Aoki Ann Epidemiol 2005      |
 +----------------------+----------------------------+----------------------+------------------------------+
@@ -507,22 +491,23 @@ Data Sources Table
 
 Full references: 
 
+  - Wang R, Chen X-Z. Prevalence of atrophic gastritis in southwest China and predictive strength of serum gastrin-17: A cross-sectional study (SIGES). Sci Rep 2020; 10: 4523.
   - Aoki K, Kihaile PE, Wenyuan Z, et al. Comparison of Prevalence of Chronic Atrophic Gastritis in Japan, China, Tanzania, and the Dominican Republic. Ann Epidemiol 2005; 15: 598–606
 
 
 Validation and verification:
 
   - Make sure we have atrophy+/- stratification
-  - Validate that the atrophy prevalence should ~ the age-specific tables (50:50 sex ratio values in the xlsx)
-  - The proportion of true HP+ among atrophic+ ~ 0.8 and the proportion of true HP+ among atrophic- ~ 0.5 (back of envelope calculation in xlsx)
+  - Validate that the atrophy prevalence should ~ the age-specific tables
+  - The proportion of true HP+ among atrophic+ ~ 0.75 and the proportion of true HP+ among atrophic- ~ 0.40 (back of envelope calculation in xlsx)
 
 
 Assumptions and limitations:
 
   - We assume prevalence of HP is consistent across sex and age groups. 
-  - The age-sex-specific prevalence of atrophy was taken from a high HP prevalence (~70%) population. 
-  - Our prevalence of atrophy comes from only one study. 
+  - The age-specific prevalence of atrophy was taken from a one hospital based study in Sichuan. Their risk profile (atrophic status) might be similar to the insured population.  
   - We assume the OR is for the true prevalence of H. pylori among the atrophic states although it was obtained among studies with screen prevalence of HP.
+  - We assume that the OR is generalisable to a different population.
 
 
 .. _5.3.4:
