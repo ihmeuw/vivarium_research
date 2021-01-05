@@ -316,13 +316,13 @@ The **secondary screening target population** will consist of simulants who meet
 5.3.4.2 Detection Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation.
+Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation. It is important to track and record *how* each lung cancer was detected in the simulation (as noted in the output table shell).
 
   Detection via screening occurs when:
 
     - Simulant is in the PC or I states of the lung cancer cause model
     - Simulant attends a scheduled lung cancer screening
-    - Lung cancer is detected according to sensitivity parameters defined below in `5.2.4.3`_
+    - Lung cancer is detected according to sensitivity parameters defined below in `5.3.4.3`_
 
   Detection via symptomatic presentation occurs when:
 
@@ -342,7 +342,7 @@ Lung cancer screening sensitivity is assumed to be 98.1% (95% CI: 88.4, 99.9); i
 
 Since the confidence interval for this parameter is not symmetric about the mean, we will assume a lognormal distribution of uncertainty, detailed by the code below. Note that this code plots the inverse of the true distribution and then converts back to a sensitivity parameter. The value sampled by this code will represent sensitivity as a *proportion* of lung cancers successfully detected by LDCT. The sensitivity parameter should be sampled at the *draw* level.
 
-.. code block:: python
+.. code-block:: python
 
   from scipy.stats import lognorm
 
@@ -357,21 +357,21 @@ Since the confidence interval for this parameter is not symmetric about the mean
 5.3.4.4 Screening Coverage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Baseline**
+To view a write-up of the research background on lung cancer screening coverage in China, download :download:`this word document <screening_coverage_research_background.docx>`. 
 
-.. todo:: 
-  
-  Document values for 20 year lag from US coverage, as suggested by SwissRe. Sex-specific values if possible. 
+The population-level coverage rates for *both* the primary and secondary target screening populations are defined below for both scenarios. Note that the figure represents the population coverage rate, although we will model differences in the sex-specific coverage rates, as described below. 
 
-**Alternative**
+Note that considerations of additional differential coverage rates by variables such as target screening population, age, and smoking status likely exist but are not considered in our simulation, which is a limitation of our model.
 
-.. todo::
+.. image:: screening_coverage_plot.png
 
-  Document target screening coverage rate and scale-up algorithm
+The above figure demonstrates the overall screening coverage rates that should be used in our model. Specifically, the baseline scenario population coverage rate should be 5.9% from 2020 to 2040. The alternative scenario population coverage rate should scale up from 5.9% in 2020 at a rate of one percent per year until 2035 and then remain constant at 20.9% from 2035 to 2040.
 
 **Sex Differences**
 
-A study conducted by XXX on participation in a population-based LDCT lung cancer screening study in cities in Henan, China, females were significantly more likely to participate in the screening program (OR: 1.69, 95% CI: 1.56, 1.83). We will use this differential probability of attending a screening in our model such that:
+A study conducted by [Guo-et-al-2020]_ on participation in a population-based LDCT lung cancer screening study in cities in Henan, China, females were significantly more likely to participate in the screening program (OR: 1.69, 95% CI: 1.56, 1.83). Values for this OR should be sampled at the draw level from a normal distribution with a mean of 1.69 and standard deviation of 0.068 (note that the confidence interval is not exactly symmetric, so this distribution is shifted very slightly down from the confidence interval).
+
+The value for We will use this differential probability of attending a screening in our model such that:
 
 +---------------------------------------------------------+
 | Hypothetical cross-sectional 2x2 table                  |
@@ -435,7 +435,7 @@ The following provides code to calculate sex-specific screening coverate rates b
 
   import math, scipy.stats
 
-  OR = scipy.stats.norm.rvs(1.69, 0.0357)
+  OR = scipy.stats.norm.rvs(1.69, 0.068)
   coverage = 0.1 # this should be implemented as a time-varying function in the simulation, as described above
   fraction_f = 0.5 # assumption, may eventually be defined as a time-varying function based on proportion of female screening-eligible simulants
   fraction_m = 1 - fraction_f
