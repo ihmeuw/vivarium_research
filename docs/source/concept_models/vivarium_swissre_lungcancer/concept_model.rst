@@ -365,7 +365,11 @@ Note that considerations of additional differential coverage rates by variables 
 
 .. image:: screening_coverage_plot.png
 
-The above figure demonstrates the overall screening coverage rates that should be used in our model. Specifically, the baseline scenario population coverage rate for the primary screening target population should be 5.9% from 2020 to 2040. The alternative scenario population coverage rate for the primary screening target population should scale up from 5.9% in 2020 at a rate of one percent per year until 2030 and then remain constant at 16.9% from 2030 to 2040. For both scenarios, the coverage rate for the secondary screening target population should be 50% of the coverage rate for the primary screening target population.
+The above figure demonstrates the overall screening coverage rates that should be used in our model. Specifically, the baseline scenario population coverage rate for the primary screening target population should be 5.9% from 2020 to 2040. The alternative scenario population coverage rate for the primary screening target population should remain at 5.9% before starting to scale up from 5.9% in 2021 at a rate of one percent per year until 2030 and then remain constant from 2030 to 2040. For both scenarios, the coverage rate for the secondary screening target population should be 50% of the coverage rate for the primary screening target population.
+
+.. todo::
+
+  Determine when scale up ends for other cancer sites (begining, middle or end of 2030) in order to calculate ending coverage rate
 
 **Sex Differences**
 
