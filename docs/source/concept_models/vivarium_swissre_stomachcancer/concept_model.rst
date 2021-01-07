@@ -199,36 +199,37 @@ In the alternative scenario, there will be a scale up of ABC screening starting 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang. The same population distribution of age and sex will be used among the different provinces.
+Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang. The same population distribution of age and sex will be used among the different provinces.
 
 
-+-----------------------------------------------------+
-| Population size weight table                        | 
-+============+=============+========+=================+
-| Province   | location_id | Weight | Weighted ACMR   | 
-+------------+-------------+--------+-----------------+
-| Tianjian   |  517        | 18%    | e^(acmr) x 0.18 |                                            
-+------------+-------------+--------+-----------------+                                              
-| Jiangsu    |  506        | 28%    | e^(acmr) x 0.28 |                                                    
-+------------+-------------+--------+-----------------+         
-| Guangdong  |  496        | 22%    | e^(acmr) x 0.22 | 
-+------------+-------------+--------+-----------------+ 
-| Henan      |  502        | 16%    | e^(acmr) x 0.16 | 
-+------------+-------------+--------+-----------------+ 
-| Heilong-   |  501        | 16%    | e^(acmr) x 0.16 | 
-| jiang      |             |        |                 |                                                    
-+------------+-------------+--------+-----------------+
++-----------------------------------+
+| Population size weight table      |
++============+=============+========+
+| Province   | location_id | Weight |
++------------+-------------+--------+
+| Tianjian   |  517        | 18%    |
++------------+-------------+--------+
+| Jiangsu    |  506        | 28%    |
++------------+-------------+--------+
+| Guangdong  |  496        | 22%    |
++------------+-------------+--------+
+| Henan      |  502        | 16%    |
++------------+-------------+--------+
+| Heilong-   |  501        | 16%    |
+| jiang      |             |        |
++------------+-------------+--------+
 
 file paths for 2019 forecast data:
 
-   * ACMR: used transformed data from breast cancer
-   * incidence:  /ihme/csu/swiss_re/forecast/414_incidence_12_15.csv
-   * prevalence: /ihme/csu/swiss_re/forecast/414_prevalence_12_15.csv
-   * cause-specific mortality: /ihme/csu/swiss_re/forecast/414_deaths_12_15.csv
+   * ACMR (per person-year): /ihme/csu/swiss_re/forecast/294_deaths_12_29_ng_smooth_13.csv
+   * incidence (cases per person-year):  /ihme/csu/swiss_re/forecast/414_incidence_12_29_ng_smooth_13.csv
+   * prevalence (proportion): /ihme/csu/swiss_re/forecast/414_prevalence_12_29_ng_smooth_13.csv
+   * cause-specific mortality (per person-year): /ihme/csu/swiss_re/forecast/414_deaths_12_29_ng_smooth_13.csv
 
 .. note::
 
-    Multiply acmr, csmr and incidence by 100,000 to get cases per 100,000
+ - Multiply acmr, csmr and incidence by 100,000 to get cases per 100,000 person-years.
+ - See column **noised_forecast** for output value.
 
 
 .. _5.3:
