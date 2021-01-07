@@ -285,7 +285,7 @@ The **secondary screening target population** will consist of simulants who meet
 
   The secondary screening target population has been included due to the client's observations of screening behaviors in the insured population that are outside of the Chinese national guidelines for screening eligibility.
 
-  Note: coverage rates may differ between these two screening populations, although this is not currently included in the model.
+  Note: we will assume that screening coverage among the secondary screening target population is *one half* that of screening coverage among the primary screening target population.
 
 *Annual* screenings should be scheduled for simulants who meet ALL of the following criteria: 
 
@@ -361,11 +361,11 @@ To view a write-up of the research background on lung cancer screening coverage 
 
 The population-level coverage rates for *both* the primary and secondary target screening populations are defined below for both scenarios. Note that the figure represents the population coverage rate, although we will model differences in the sex-specific coverage rates, as described below. 
 
-Note that considerations of additional differential coverage rates by variables such as target screening population, age, and smoking status likely exist but are not considered in our simulation, which is a limitation of our model.
+Note that considerations of additional differential coverage rates by variables such as  age likely exist but are not considered in our simulation, which is a limitation of our model.
 
 .. image:: screening_coverage_plot.png
 
-The above figure demonstrates the overall screening coverage rates that should be used in our model. Specifically, the baseline scenario population coverage rate should be 5.9% from 2020 to 2040. The alternative scenario population coverage rate should scale up from 5.9% in 2020 at a rate of one percent per year until 2035 and then remain constant at 20.9% from 2035 to 2040.
+The above figure demonstrates the overall screening coverage rates that should be used in our model. Specifically, the baseline scenario population coverage rate for the primary screening target population should be 5.9% from 2020 to 2040. The alternative scenario population coverage rate for the primary screening target population should scale up from 5.9% in 2020 at a rate of one percent per year until 2030 and then remain constant at 16.9% from 2030 to 2040. For both scenarios, the coverage rate for the secondary screening target population should be 50% of the coverage rate for the primary screening target population.
 
 **Sex Differences**
 
@@ -387,6 +387,8 @@ The value for We will use this differential probability of attending a screening
 +----------------+-------------+---------------+----------+
 | Total          | a+c         | b+d           | a+b+c+d  |
 +----------------+-------------+---------------+----------+ 
+
+For the primary screening target population and secondary screening target population, separately, the following is true:
 
 (1) :math:`1 = a + b + c + d`
 (2) :math:`OR = \frac{ad}{cb}`
@@ -425,19 +427,24 @@ Where,
 
   :math:`quad_c = coverage * fraction_M`
 
-.. note::
 
-  The fraction of females among the screening-eligible population will vary between the primary target population and the total (primary and secondary population). When coverage rates are the same between the primary and secondary screening target populations, it is safe to assume that :math:`fraction_F = 0.5`. However, when coverage rates differ between these target populations, :math:`fraction_F` should be defined as a proportion of the respective screening-eligible simulant population that are female.
+Therefore,
 
-The following provides code to calculate sex-specific screening coverate rates based on the equations and values defined above:
+:math:`fraction_F` should be calculated *at each timestep* of the simulation specific to the primary or secondary target screening population as defined below:
+
+.. math::
+
+  fraction_F = \frac{n_\text{females in given target population}}{n_\text{simulants in given target population}}
+
+The following provides code to calculate sex-specific screening coverate rates within a given target screening population based on the equations and values defined above:
 
 .. code-block:: Python
 
   import math, scipy.stats
 
   OR = scipy.stats.norm.rvs(1.69, 0.068)
-  coverage = 0.1 # this should be implemented as a time-varying function in the simulation, as described above
-  fraction_f = 0.5 # assumption, may eventually be defined as a time-varying function based on proportion of female screening-eligible simulants
+  coverage = 0.1 # this is a stand-in value; it should be implemented as a time-varying function in the simulation, as described above
+  fraction_f = 0.5 # this is a stand-in value; it should be implemented as a time-varying function in the simulation as described above
   fraction_m = 1 - fraction_f
 
   quad_a = (1 - OR)
