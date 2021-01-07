@@ -329,15 +329,15 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c426
-     - :code:`/ihme/csu/swiss_re/forecast/426_prevalence_12_29_ng.nc`
+     - :code:`/ihme/csu/swiss_re/forecast/426_prevalence_12_29_ng_smooth_13.nc`
      - CSU TBL cancer prevalence forecasts
      - 2020-2040; defined as proportion of population with condition, csv file with same name also available, use the 'noised_forecast' column
    * - csmr_c426 
-     - :code:`/ihme/csu/swiss_re/forecast/426_deaths_12_29_ng.nc`
+     - :code:`/ihme/csu/swiss_re/forecast/426_deaths_12_29_ng_smooth_13.nc`
      - CSU TBL cancer cause specific mortality rate forecast
      - 2020-2040; defined as deaths per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - incidence_rate_c426
-     - :code:`/ihme/csu/swiss_re/forecast/426_incidence_12_29_ng.nc`
+     - :code:`/ihme/csu/swiss_re/forecast/426_incidence_12_29_ng_smooth_13.nc`
      - CSU TBL cancer cause-specific mortality rate forecast
      - 2020-2040; defined as incidence cases per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - disability_weight_s{273, 274, 275, 276}
@@ -379,7 +379,7 @@ State and Transition Data Tables
 
 .. note::
 
-  The forecast data used for the current version of the cause model is listed in the table above. Updated forecasts may be used in the final version of the model (:code:`426_{measure}_12_29_ng_smooth_13` or :code:`426_{measure}_12_29_ng_smooth_15` or others).
+  The forecast data used for the first version of the cause model was :code:`426_{measure}_12_29_ng`
 
 The following equation demonstrates how to solve for :math:`incidence_\text{PC}` based on the dependent equalities for the definitions of :math:`incidence_\text{c426}` and :math:`prevalence_\text{S, general population}`.
 

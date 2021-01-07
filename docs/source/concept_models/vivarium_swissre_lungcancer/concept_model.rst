@@ -310,7 +310,7 @@ Lung cancer screening specificity is assumed to be 100%; in other words, we assu
 5.3.3 Smoking model
 ~~~~~~~~~~~~~~~~~~~
 
-The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
+The smoking risk exposure model to be used for this project is documented :ref:`on the forecasted smoking risk exposure page <2017_risk_smoking_forecasted>`.
 
 The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
 
