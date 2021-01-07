@@ -397,33 +397,33 @@ The value for We will use this differential probability of attending a screening
 
 So then,
 
-:math:`a = coverage - c`
+  :math:`a = coverage - c`
 
-:math:`b = fraction_F - (coverage - c) = fraction_F - coverage + c`
+  :math:`b = fraction_F - (coverage - c) = fraction_F - coverage + c`
 
-:math:`c = c`
+  :math:`c = c`
 
-:math:`d = fraction_M - c`
+  :math:`d = fraction_M - c`
 
 And,
 
-:math:`OR = \frac{(coverage - c)(fraction_M - coverage)}{c(fraction_F - coverage + c)}`
+  :math:`OR = \frac{(coverage - c)(fraction_M - coverage)}{c(fraction_F - coverage + c)}`
 
-:math:`OR * c^2 + OR * (fraction_F - coverage) * c = c^2 - (coverage + fraction_M) * c + coverage * fraction_M`
+  :math:`OR * c^2 + OR * (fraction_F - coverage) * c = c^2 - (coverage + fraction_M) * c + coverage * fraction_M`
 
-:math:`0 = (1 - OR) c ^2 - OR (coverage + fraction_M)(fraction_F - coverage) c + coverage * fraction_M`
+  :math:`0 = (1 - OR) c^2 - OR (coverage + fraction_M)(fraction_F - coverage) c + coverage * fraction_M`
 
 Now, we can solve for c using the quadratic equation such that:
 
-:math:`c = \frac{- quad_b - \sqrt{quad_b ^ 2 - 4 *quad_a * quad_c}}{2quad_a}`
+  :math:`c = \frac{- quad_b - \sqrt{quad_b ^ 2 - 4 *quad_a * quad_c}}{2quad_a}`
 
 Where,
 
-:math:`quad_a = 1 - OR`
+  :math:`quad_a = 1 - OR`
 
-:math:`quad_b = - OR(coverage + fraction_M)(fraction_F - coverage)`
+  :math:`quad_b = - OR(coverage + fraction_M)(fraction_F - coverage)`
 
-:math:`quad_c = coverage * fraction_M`
+  :math:`quad_c = coverage * fraction_M`
 
 .. note::
 
