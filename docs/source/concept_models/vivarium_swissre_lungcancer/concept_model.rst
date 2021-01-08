@@ -152,7 +152,7 @@ There are several randomized controlled trials on LDCT lung cancer screening pro
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. 
+The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. NOTE: deaths with undetected lung cancer is not a relevant model outcome.
 
 .. _3.0:
 
@@ -220,7 +220,7 @@ Additional considerations:
 
 .. image:: concept_model_diagram.svg
 
-Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality and morbidity because it is not an explicit outcome of interest in this project, although there is evidence that there is an effect.
+Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality because it is not an explicit outcome of interest in this project, although there is evidence of an effect.
 
 .. _5.2:
 
@@ -237,40 +237,92 @@ The demographic model for this project should follow the same demographic model 
 
 .. _5.3.1:
 
-5.3.1 Core lung cancer model
+5.3.1 Core Lung Cancer Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The lung cancer cause model that should be used for this project is documented on the :ref:`2017 Tracheal, Bronchus, and Lung Cancer Page <2017_lung_cancer>`.
 
 .. _5.3.2:
 
-5.3.2 Screening and detection model
+5.3.2 Smoking-Affected Causes Excluding Lung Cancer Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The smoking affected causes model that should be used for this project is documented on the :ref:`2017 Smoking-Affected Causes page <2017_smoking_affected_causes>`.
+
+.. _5.3.3:
+
+5.3.3 Smoking Model
+~~~~~~~~~~~~~~~~~~~
+
+The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
+
+The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
+
+The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
+
+.. _5.3.4:
+
+5.3.4 Screening and Detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5.3.2.1 Screening Model
+5.3.4.1 Screening Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-*Annual* screenings should be scheduled for simulants who meet ALL of the following criteria: 
+For the purposes of our model, we will define two target populations for lung cancer screening coverage: a primary target population of high-risk smokers, and a secondary target population of lower risk or never smokers.
+
+The **primary screening target population** will consist of simulants who meet the following criteria:
 
 #. 50-74 years old
 #. 20+ pack-year history
 #. Current smokers or former smokers with <5 years since quitting
+
+The **secondary screening target population** will consist of simulants who meet the following criteria:
+
+#. Does not meet primary target population criteria
+#. 20-74 years old
+
+.. note::
+
+  The secondary screening target population has been included due to the client's observations of screening behaviors in the insured population that are outside of the Chinese national guidelines for screening eligibility.
+
+  Note: we will assume that screening coverage among the secondary screening target population is *one half* that of screening coverage among the primary screening target population.
+
+*Annual* screenings should be scheduled for simulants who meet ALL of the following criteria: 
+
+#. Meet either the primary or secondary target population criteria
 #. Lung cancer not already detected
 
-.. todo::
+**Time until next annual screening** for an inidividual simulant should be sampled from a lognormal distribution, as demonstrated with the code below in days. This value was derived from marketscan data, a notebook that obtains this distribution is hosted on the :code:`vivarium_data_analysis` repository, `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lung_cancer_model/lung_cancer_screening_waiting_time_distribution.ipynb>`_.
 
-  Include probability of attending screening data, time to next scheduled screen distribution, screenining initialization information
+.. code-block:: python
 
-5.3.2.2 Detection Model
+  import scipy.stats
+  s = 0.5
+  loc = 317
+  scale = 60
+
+  time_until_next_screening_i = scipy.stats.lognorm.rvs(s, loc, scale)
+
+**Screening initialization**
+
+  For simulants who are eligible for screening upon initialization, we will assume that they had previously scheduled screenings, so they require additional consideration for their first scheduled screenings. To determine the time until the first modeled screening for simulants eligible for screening upon initialization:
+
+    First,sampling a :code:`time_until_next_annual_screening_i` value for the simulant as described above. 
+
+    Then, sample a value from a uniform distribution between 0 and :code:`time_until_next_annual_screening_i`. This value should be used as the time until the simulant's first screening.
+
+  For simulants who become newly eligible for screening during the simulation, their first screening should be scheduled at the moment they become eligible.
+
+5.3.4.2 Detection Model
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation.
+Lung cancers may be detected in one of two ways in this simulation: either via screening or symptomatic presentation. It is important to track and record *how* each lung cancer was detected in the simulation (as noted in the output table shell).
 
   Detection via screening occurs when:
 
     - Simulant is in the PC or I states of the lung cancer cause model
     - Simulant attends a scheduled lung cancer screening
-    - Lung cancer is detected according to sensitivity parameters defined below
+    - Lung cancer is detected according to sensitivity parameters defined below in `5.3.4.3`_
 
   Detection via symptomatic presentation occurs when:
 
@@ -281,42 +333,137 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 
   We may want to eventually incorporate some lag period here between when simulant begins to experience symptoms and when lung cancer is actually formally diagnosed.
 
-5.3.2.3 Screening Sensitivity and Specificity
+5.3.4.3 Screening Sensitivity and Specificity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Lung cancer screening specificity is assumed to be 100%; in other words, we assume that there will be no false negative lung cancer results detected via screening. 
 
-.. todo::
+Lung cancer screening sensitivity is assumed to be 98.1% (95% CI: 88.4, 99.9); in other words, we assume that the probability that LDCT screening will detect lung cancer given that the individual has lung cancer is 98.1% (95% CI: 88.4, 99.9). This value was obtained from the Yang et al. (2018) lung cancer screening trial conducted in China to be most representative of the model population.
 
-  Document screening sensitivity value and references
+Since the confidence interval for this parameter is not symmetric about the mean, we will assume a lognormal distribution of uncertainty, detailed by the code below. Note that this code plots the inverse of the true distribution and then converts back to a sensitivity parameter. The value sampled by this code will represent sensitivity as a *proportion* of lung cancers successfully detected by LDCT. The sensitivity parameter should be sampled at the *draw* level.
 
-5.3.2.4 Screening Coverage
+.. code-block:: python
+
+  from scipy.stats import lognorm
+
+  # set distribution parameters
+  s = 1
+  loc = 0
+  scale = 1.9
+
+  # sample sensitivity value as PROPORTION of lung cancers successfully detected by LDCT
+  sensitivity = (100 - lognorm.rvs(s, loc, scale, size=1)) / 100
+
+5.3.4.4 Screening Coverage
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- Baseline
+To view a write-up of the research background on lung cancer screening coverage in China, download :download:`this word document <screening_coverage_research_background.docx>`. 
 
-.. todo:: 
-  
-  Document values for 20 year lag from US coverage, as suggested by SwissRe. Sex-specific values if possible. 
+The population-level coverage rates for *both* the primary and secondary target screening populations are defined below for both scenarios. Note that the figure represents the population coverage rate, although we will model differences in the sex-specific coverage rates, as described below. 
 
-- Alternative
+Note that considerations of additional differential coverage rates by variables such as  age likely exist but are not considered in our simulation, which is a limitation of our model.
+
+.. image:: screening_coverage_plot.png
+
+The above figure demonstrates the overall screening coverage rates that should be used in our model. Specifically, the baseline scenario population coverage rate for the primary screening target population should be 5.9% from 2020 to 2040. The alternative scenario population coverage rate for the primary screening target population should remain at 5.9% before starting to scale up from 5.9% in 2021 at a rate of one percent per year until 2030 and then remain constant from 2030 to 2040. For both scenarios, the coverage rate for the secondary screening target population should be 50% of the coverage rate for the primary screening target population.
 
 .. todo::
 
-  Document target screening coverage rate and scale-up algorithm
+  Determine when scale up ends for other cancer sites (begining, middle or end of 2030) in order to calculate ending coverage rate
 
-.. _5.3.3:
+**Sex Differences**
 
-5.3.3 Smoking model
-~~~~~~~~~~~~~~~~~~~
+A study conducted by [Guo-et-al-2020]_ on participation in a population-based LDCT lung cancer screening study in cities in Henan, China, females were significantly more likely to participate in the screening program (OR: 1.69, 95% CI: 1.56, 1.83). Values for this OR should be sampled at the draw level from a normal distribution with a mean of 1.69 and standard deviation of 0.068 (note that the confidence interval is not exactly symmetric, so this distribution is shifted very slightly down from the confidence interval).
 
-The smoking risk exposure model to be used for this project is documented :ref:`on the forecasted smoking risk exposure page <2017_risk_smoking_forecasted>`.
+The value for We will use this differential probability of attending a screening in our model such that:
 
-The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
++---------------------------------------------------------+
+| Hypothetical cross-sectional 2x2 table                  |
++----------------+-------------+---------------+----------+
+|                | Attended    |Did not attend | Total    |
+|                | screening   |screening      |          |
++----------------+-------------+---------------+----------+
+| Female         |  a          |  b            | a+b      |
+|                |             |               |          |
++----------------+-------------+---------------+----------+
+| Male           |  c          |  d            | c+d      |
+|                |             |               |          |
++----------------+-------------+---------------+----------+
+| Total          | a+c         | b+d           | a+b+c+d  |
++----------------+-------------+---------------+----------+ 
 
-The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
+For the primary screening target population and secondary screening target population, separately, the following is true:
 
-.. _5.4:
+(1) :math:`1 = a + b + c + d`
+(2) :math:`OR = \frac{ad}{cb}`
+(3) :math:`coverage = \frac{a + c}{a + b + c + d} = a + c`
+(4) :math:`fraction_F = \frac{a + b}{a + b + c + d} = a + b`
+(5) :math:`fraction_M = 1 - fraction_F`
+(6) :math:`fraction_M = \frac{c + d}{a + b + c + d} = c + d`
+
+So then,
+
+  :math:`a = coverage - c`
+
+  :math:`b = fraction_F - (coverage - c) = fraction_F - coverage + c`
+
+  :math:`c = c`
+
+  :math:`d = fraction_M - c`
+
+And,
+
+  :math:`OR = \frac{(coverage - c)(fraction_M - coverage)}{c(fraction_F - coverage + c)}`
+
+  :math:`OR * c^2 + OR * (fraction_F - coverage) * c = c^2 - (coverage + fraction_M) * c + coverage * fraction_M`
+
+  :math:`0 = (1 - OR) c^2 - OR (coverage + fraction_M)(fraction_F - coverage) c + coverage * fraction_M`
+
+Now, we can solve for c using the quadratic equation such that:
+
+  :math:`c = \frac{- quad_b - \sqrt{quad_b ^ 2 - 4 *quad_a * quad_c}}{2quad_a}`
+
+Where,
+
+  :math:`quad_a = 1 - OR`
+
+  :math:`quad_b = - OR(coverage + fraction_M)(fraction_F - coverage)`
+
+  :math:`quad_c = coverage * fraction_M`
+
+
+Therefore,
+
+:math:`fraction_F` should be calculated *at each timestep* of the simulation specific to the primary or secondary target screening population as defined below:
+
+.. math::
+
+  fraction_F = \frac{n_\text{females in given target population}}{n_\text{simulants in given target population}}
+
+The following provides code to calculate sex-specific screening coverate rates within a given target screening population based on the equations and values defined above:
+
+.. code-block:: Python
+
+  import math, scipy.stats
+
+  OR = scipy.stats.norm.rvs(1.69, 0.068)
+  coverage = 0.1 # this is a stand-in value; it should be implemented as a time-varying function in the simulation, as described above
+  fraction_f = 0.5 # this is a stand-in value; it should be implemented as a time-varying function in the simulation as described above
+  fraction_m = 1 - fraction_f
+
+  quad_a = (1 - OR)
+  quad_b = - (coverage + fraction_m) - (fraction_f - coverage) * OR
+  quad_c = coverage * fraction_m
+
+  c = (-quad_b - math.sqrt(quad_b**2 - 4 * quad_a * quad_c)) / (2 * quad_a)
+
+  a = coverage - c
+  b = fraction_f - (coverage - c)
+  d = (1 - fraction_f) - c
+
+  female_coverage_rate = a / (a + b)
+
+  male_coverage_rate = c / (c + d)
 
 5.4 Input data sources
 ----------------------
