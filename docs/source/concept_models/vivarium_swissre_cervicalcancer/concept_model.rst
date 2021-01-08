@@ -255,57 +255,56 @@ provinces.
    * - Province
      - location id
      - Weight
-     - Weighted ACMR (per 100,000 person-years)
+     - Weighted ACMR (per person-year)
      - Weighted prev_c432 (proportion)
-     - Weighted incidence_c432 (cases per 100,000 person-years)
-     - Weighted csmr_c432 (per 100,000 person-years)
+     - Weighted incidence_c432 (cases per person-year)
+     - Weighted csmr_c432 (per person-year)
    * - Tianjin
      - 517
      - 18%
-     - e^(ACMR) * 100,000 * 18%
+     - ACMR * 18%
      - prev_c432 * 18%
-     - incidence_c432 * 100,000 * 18%
-     - csmr_c432 * 100,000 * 18%
+     - incidence_c432 * 18%
+     - csmr_c432 * 18%
    * - Jiangsu
      - 506
      - 28%
-     - e^(ACMR) * 100,000 * 28%
+     - ACMR * 28%
      - prev_c432 * 28%
-     - incidence_c432 * 100,000 * 28%
-     - csmr_c432 * 100,000 * 28%
+     - incidence_c432 * 28%
+     - csmr_c432 * 28%
    * - Guangdong
      - 496
      - 22%
-     - e^(ACMR) * 100,000 * 22%
+     - ACMR * 22%
      - prev_c432 * 22%
-     - incidence_c432 * 100,000 * 22%
-     - csmr_c432 * 100,000 * 22%
+     - incidence_c432 * 22%
+     - csmr_c432 * 22%
    * - Henan
      - 502
      - 16%
-     - e^(ACMR) * 100,000 * 16%
+     - ACMR * 16%
      - prev_c432 * 16%
-     - incidence_c432 * 100,000 * 16%
-     - csmr_c432 * 100,000 * 16%
+     - incidence_c432 * 16%
+     - csmr_c432 * 16%
    * - Heilongjiang
      - 501
      - 16%
-     - e^(ACMR) * 100,000 * 16%
+     - ACMR * 16%
      - prev_c432 * 16%
-     - incidence_c432 * 100,000 * 16%
-     - csmr_c432 * 100,000 * 16%
+     - incidence_c432 * 16%
+     - csmr_c432 * 16%
 
 .. note::
 
- Forecast data were temporarily saved to /ihme/costeffectiveness/vivarium_csu_cancer/{measure_name}_scaled_logit_no_bounds_max_6_1000_year_fix_lik.nc
+ GBD (2019 round) cervical cancer forecast data can be found at `/ihme/csu/swiss_re/forecast` 
 
- - ACMR: Using transformed data from breast cancer model
- - prev_c432: 432_ets_prevalence
- - incidence_c432: 432_ets_incidence
- - csmr_432: 432_ets_deaths
- 
- Zach is working on updating forecast data to GBD 2019, so expect these filenames 
- to change soon. 
+ - ACMR: 294_deaths_12_29_ng_smooth_13.csv
+ - prev_c432: 432_prevalence_12_29_ng_smooth_13.csv
+ - incidence_c432: 432_incidence_12_29_ng_smooth_13.csv
+ - csmr_c432: 432_deaths_12_29_ng_smooth_13.csv
+
+See column **noised_forecast** for output value.
 
 .. _5.3:
 

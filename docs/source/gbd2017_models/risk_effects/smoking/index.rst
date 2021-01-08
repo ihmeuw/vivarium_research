@@ -170,11 +170,17 @@ Where, :math:`\overline{rr_\text{a,s,l,y}}` is the mean value of relative risks 
 Application of Risk Factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The smoking risk factor should affect the incidence of the preclinical lung cancer cause model state, :math:`incidence_\text{PC}`, such that:
+The smoking risk factor should affect the incidence rates of the preclinical *and* indolent lung cancer cause model states, :math:`incidence_\text{PC}` and :math:`incidence_I`, respectively, using the same relative risk values such that:
 
 .. math::
 
   incidence_\text{PC_i} = incidence_\text{PC} * (1 - PAF_\text{a,s,l,y}) * rr_i
+
+And,
+
+.. math::
+
+  incidence_\text{I_i} = incidence_\text{I} * (1 - PAF_\text{a,s,l,y}) * rr_i
 
 Where,
 
@@ -189,6 +195,12 @@ Where,
      - 
    * - :math:`incidence_\text{PC}`
      - Population level incidence rate of preclinical lung cancer
+     - As defined in :ref:`the lung cancer cause model document <2017_lung_cancer>`
+   * - :math:`incidence_\text{I_i}`
+     - Individual simulant's incidence lung cancer incidence probability
+     - 
+   * - :math:`incidence_\text{I}`
+     - Population level incidence rate of indolent lung cancer
      - As defined in :ref:`the lung cancer cause model document <2017_lung_cancer>`
    * - :math:`PAF_\text{a,s,l,y}`
      - Lung cancer PAF for smoking for simulant's demographic group
@@ -207,6 +219,8 @@ Assumptions and Limitations
 
 This model is limited in that it relies on the GBD relative risk structure that does not differentiate relative risks of former smokers by pack-year history so that current smokers with low pack-year histories who become former smokers may increase their risk of lung cancer by doing so, according to the GBD relative risk curves.
 
+This model is limited in that it assumes the relative risk for smoking and lung cancer applies to preclinical and indolent lung cancer incidence rates equally. However, there is data that suggests that while indolent lung cancers occur at higher rates among smokers than nonsmokers, lung cancers are more likely to be indolent among non-smokers than among smokers, as tumor growth rates tend to be higher in smokers than never smokers [Mackintosh-et-al-2014]_. 
+
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -218,6 +232,10 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
 
 References
 ----------
+
+.. [Mackintosh-et-al-2014]
+
+  Mackintosh JA, Marshall HM, Yang IA, Bowman RV, Fong KM. A retrospective study of volume doubling time in surgically resected non-small cell lung cancer. Respirology. 2014 Jul;19(5):755-62. doi: 10.1111/resp.12311. Epub 2014 May 6. PMID: 24797504. `Available here <https://pubmed.ncbi.nlm.nih.gov/24797504/>`_.
 
 .. todo::
 
