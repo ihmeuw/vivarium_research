@@ -226,31 +226,37 @@ Scale-up of breast cancer screening coverage among insured population
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-*Potential* provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang (optional). The same population distribution of age and sex will be used among the different provinces.
+Provinces to model include Tianjin, Jiangsu, Guangdong, Henan, and Heilongjiang. The same population distribution of age and sex will be used among the different provinces.
 
 
-+--------------------------------------------------------------------------------------------------------+
-| Population size weight table                                                                           | 
-+============+=============+========+===============+====================================================+
-| Province   | location_id | Weight | Weighted ACMR | Forecasted ACMR in log space                       |
-+------------+-------------+--------+---------------+----------------------------------------------------+
-| Tianjian   |  517        | 18%    | e^(mr) x 0.18 | filepath                                           |
-+------------+-------------+--------+---------------+ :download:`acmr<filepaths_acmr_c294_forecast.xlsx>`|                                             
-| Jiangsu    |  506        | 28%    | e^(mr) x 0.28 |                                                    |
-+------------+-------------+--------+---------------+ Note: GBD does not produce estimates below         |
-| Guangdong  |  496        | 22%    | e^(mr) x 0.22 | province level, so we do not have data for         |
-+------------+-------------+--------+---------------+ sub-provinces. Therefore, we are summing           |
-| Henan      |  502        | 16%    | e^(mr) x 0.16 | the sub-province weights (not shown) that was      |
-+------------+-------------+--------+---------------+ given by CSU to get total province weights         |
-| Heilong-   |  501        | 16%    | e^(mr) x 0.16 | for Guangdong and Heilongjiang.                    |
-| jiang      |             |        |               |                                                    |
-+------------+-------------+--------+---------------+----------------------------------------------------+
++-----------------------------------+
+| Population size weight table      |
++============+=============+========+
+| Province   | location_id | Weight |
++------------+-------------+--------+
+| Tianjian   |  517        | 18%    |
++------------+-------------+--------+
+| Jiangsu    |  506        | 28%    |
++------------+-------------+--------+
+| Guangdong  |  496        | 22%    |
++------------+-------------+--------+
+| Henan      |  502        | 16%    |
++------------+-------------+--------+
+| Heilong-   |  501        | 16%    |
+| jiang      |             |        |
++------------+-------------+--------+
+
+file paths for 2019 forecast data:
+
+   * ACMR (per person-year): /ihme/csu/swiss_re/forecast/294_deaths_12_29_ng_smooth_13.csv
+   * incidence (cases per person-year):  /ihme/csu/swiss_re/forecast/429_incidence_12_29_ng_smooth_13.csv
+   * prevalence (proportion): /ihme/csu/swiss_re/forecast/429_prevalence_12_29_ng_smooth_13.csv
+   * cause-specific mortality (per person-year): /ihme/csu/swiss_re/forecast/429_deaths_12_29_ng_smooth_13.csv
 
 .. note::
 
-  Note about 'mr' in the column 'Weighted ACMR' in the above table: The forecasted data is stored in .nc files. The acmr estimate under column labelled as 'mr' is in log space with base natural e. To get the simulation population's all-cause mortality rate (acmr), first take the exponential of the mr values for location in the .nc files, then mulitply by the population weight, and sum over all locations. The unit after the exp transformation is in person years. Multiply by 100,000 to get per 100,000 person years.    
-
-Click here to download notebook exploring the forecasted acmr data .nc files: :download:`forecast data <sw breast cancer forecasted data.ipynb>`   
+ - Multiply acmr, csmr and incidence by 100,000 to get cases per 100,000 person-years.
+ - See column **noised_forecast** for output value.  
 
 .. _5.3:
 
