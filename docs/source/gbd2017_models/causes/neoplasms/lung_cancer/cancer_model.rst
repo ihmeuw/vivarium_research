@@ -307,7 +307,7 @@ State and Transition Data Tables
    * - i_i
      - S
      - I
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_\text{S, general population}}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF}}{prevalence_\text{S, general population}} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
