@@ -170,7 +170,7 @@ Where, :math:`\overline{rr_\text{a,s,l,y}}` is the mean value of relative risks 
 Application of Risk Factor
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The smoking risk factor should affect the incidence rates of the preclinical *and* indoldent lung cancer cause model states, :math:`incidence_\text{PC}` and :math:`incidence_I`, respectively, using the same relative risk values such that:
+The smoking risk factor should affect the incidence rates of the preclinical *and* indolent lung cancer cause model states, :math:`incidence_\text{PC}` and :math:`incidence_I`, respectively, using the same relative risk values such that:
 
 .. math::
 
