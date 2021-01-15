@@ -237,54 +237,56 @@ provinces.
    * - Province
      - location id
      - Weight
-     - Weighted ACMR
-     - Weighted prev_c441
-     - Weighted incidence_c441
-     - Weighted csmr_c441
+     - Weighted ACMR (per person-year)
+     - Weighted prev_c441 (proportion)
+     - Weighted incidence_c441 (cases per person-year)
+     - Weighted csmr_c441 (per person-year)
    * - Tianjin
      - 517
      - 18%
-     - e^(ACMR) * 18% (per person-year)
-     - prev_c441 * 18% (proportion)
-     - incidence_c441 * 18% (cases per person-year)
-     - csmr_c441 * 18% (per person-year)
+     - ACMR * 18%
+     - prev_c441 * 18%
+     - incidence_c441 * 18%
+     - csmr_c441 * 18%
    * - Jiangsu
      - 506
      - 28%
-     - e^(ACMR) * 28% (per person-year)
-     - prev_c441 * 28% (proportion)
-     - incidence_c441 * 28% (cases per person-year)
-     - csmr_c441 * 28% (per person-year)
+     - ACMR * 28%
+     - prev_c441 * 28%
+     - incidence_c441 * 28%
+     - csmr_c441 * 28%
    * - Guangdong
      - 496
      - 22%
-     - e^(ACMR) * 22% (per person-year)
-     - prev_c441 * 22% (proportion)
-     - incidence_c441 * 22% (cases per person-year)
-     - csmr_c441 * 22% (per person-year)
+     - ACMR * 22%
+     - prev_c441 * 22%
+     - incidence_c441 * 22%
+     - csmr_c441 * 22%
    * - Henan
      - 502
      - 16%
-     - e^(ACMR) * 16% (per person-year)
-     - prev_c441 * 16% (proportion)
-     - incidence_c441 * 16% (cases per person-year)
-     - csmr_c441 * 16% (per person-year)
+     - ACMR * 16%
+     - prev_c441 * 16%
+     - incidence_c441 * 16%
+     - csmr_c441 * 16%
    * - Heilongjiang
      - 501
      - 16%
-     - e^(ACMR) * 16% (per person-year)
-     - prev_c441 * 16% (proportion)
-     - incidence_c441 * 16% (cases per person-year)
-     - csmr_c441 * 16% (per person-year)
+     - ACMR * 16%
+     - prev_c441 * 16%
+     - incidence_c441 * 16%
+     - csmr_c441 * 16%
 
 .. note::
 
- GBD 2019 Forecast data can be found at `/ihme/costeffectiveness/vivarium_csu_cancer/` 
+ GBD (2019 round) colorectal cancer forecast data can be found at `/ihme/csu/swiss_re/forecast` 
 
- - ACMR: Using transformed data from breast cancer model
- - prev_c441: 441_ets_prevalence.nc
- - incidence_c441: 441_ets_incidence.nc
- - csmr_c441: 441_ets_deaths.nc
+ - ACMR: 294_deaths_12_29_ng_smooth_13.csv
+ - prev_c441: 441_prevalence_12_29_ng_smooth_13.csv
+ - incidence_c441: 441_incidence_12_29_ng_smooth_13.csv
+ - csmr_c441: 441_deaths_12_29_ng_smooth_13.csv
+
+See column **noised_forecast** for output value.
 
 .. _5.3:
 

@@ -360,7 +360,7 @@ State and Transition Data Tables
      - stomach cancer sequelae prevalence
      - Not forecasted
    * - MST
-     - 2.37 years (95%CI: 1.92 to 2.96); distribution of uncertainty at draw level
+     - 2.37 years (95%CI: 1.78 to 2.96); distribution of uncertainty at draw level
      - Mean sojourn time; duration of time between onset of the asymptomtic stomach cancer to the clinical phase
      - See below for instructions on how to sample and research background. 
 
@@ -369,7 +369,7 @@ State and Transition Data Tables
 Mean Sojourn Time
 ^^^^^^^^^^^^^^^^^
 
-The MST derived from Bae 2014 is 2.37 years (95%CI: 1.92 to 2.96). We will use 2.37 years with 95%CIs of 1.78 to 2.96 to make the distribution symmetrical. This means that the MST is 1.92-1.78 = 0.14 years shorter ~ 1.6 months for approximately 5% of the population. 
+The MST that Bae 2014 estimated for population of Korean men is 2.37 years (95%CI: 1.92 to 2.96). We will use a lower bound of 1.78 instead to make the distribution symmetrical. This means that the MST is 1.92-1.78 = 0.14 years shorter ~ 1.6 months for approximately 5% of the population. 
 
 **Parameter for Use in Model:**
 

@@ -1,4 +1,4 @@
-.. _2017_risk_exposure_smoking_forecasted:
+.. _2017_risk_smoking_forecasted:
 
 ======================================
 Smoking Risk Exposure -- Forecasted

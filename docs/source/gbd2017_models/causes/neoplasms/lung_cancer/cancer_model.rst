@@ -307,7 +307,7 @@ State and Transition Data Tables
    * - i_i
      - S
      - I
-     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF}{prevalence_\text{S, general population}}`
+     - :math:`\frac{screening_\text{baseline} * incidence_\text{c426*} * \frac{ODF}{1+ODF}}{prevalence_\text{S, general population}} + (1 - screening_\text{baseline}) * i_\text{pc} * ODF`
      - NOTE: :math:`incidence_\text{c426*}` is the rate from the age group equal to simulant's age plus MST 
    * - i_c
      - PC
@@ -329,15 +329,15 @@ State and Transition Data Tables
      - Description
      - Notes
    * - prevalence_c426
-     - /ihme/csu/swiss_re/forecast/426_prevalence_12_21.nc
+     - :code:`/ihme/csu/swiss_re/forecast/426_prevalence_12_29_ng_smooth_13.nc`
      - CSU TBL cancer prevalence forecasts
      - 2020-2040; defined as proportion of population with condition, csv file with same name also available, use the 'noised_forecast' column
    * - csmr_c426 
-     - /ihme/csu/swiss_re/forecast/426_deaths_12_21.nc
+     - :code:`/ihme/csu/swiss_re/forecast/426_deaths_12_29_ng_smooth_13.nc`
      - CSU TBL cancer cause specific mortality rate forecast
      - 2020-2040; defined as deaths per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - incidence_rate_c426
-     - /ihme/csu/swiss_re/forecast/426_incidence_12_21.nc
+     - :code:`/ihme/csu/swiss_re/forecast/426_incidence_12_29_ng_smooth_13.nc`
      - CSU TBL cancer cause-specific mortality rate forecast
      - 2020-2040; defined as incidence cases per person-year in general population, csv file with same name also available, use the 'noised_forecast' column
    * - disability_weight_s{273, 274, 275, 276}
@@ -376,6 +376,10 @@ State and Transition Data Tables
      - :math:`1 - prevalence_\text{C, general population} - prevalence_\text{PC, general population} - prevalence_\text{I, general population}`
      - 
      - Does not need to be calculated for use in model; shown as a proof for incidence_pc equation
+
+.. note::
+
+  The forecast data used for the first version of the cause model was :code:`426_{measure}_12_29_ng`
 
 The following equation demonstrates how to solve for :math:`incidence_\text{PC}` based on the dependent equalities for the definitions of :math:`incidence_\text{c426}` and :math:`prevalence_\text{S, general population}`.
 
