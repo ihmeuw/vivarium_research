@@ -222,6 +222,8 @@ Additional considerations:
 
 Note that we are not modeling an effect of lung cancer screening coverage on lung cancer mortality because it is not an explicit outcome of interest in this project, although there is evidence of an effect.
 
+Note that we are using mortality due to chronic obstructive pulmonary disease (COPD) and ischemic heart disease (IHD) as a proxy for smoking-related mortality other than lung cancer (more details below).
+
 .. _5.2:
 
 5.2 Demographics
@@ -242,23 +244,25 @@ The demographic model for this project should follow the same demographic model 
 
 The lung cancer cause model that should be used for this project is documented on the :ref:`2017 Tracheal, Bronchus, and Lung Cancer Page <2017_lung_cancer>`.
 
+Additionally, the effect of the smoking risk factor on this model is documented on the :ref:`2017 Smoking Risk Effects page <2017_risk_effect_smoking>`.
+
 .. _5.3.2:
 
-5.3.2 Smoking-Affected Causes Excluding Lung Cancer Model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5.3.2 Smoking-Related Mortality Model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The smoking affected causes model that should be used for this project is documented on the :ref:`2017 Smoking-Affected Causes page <2017_smoking_affected_causes>`.
+The smoking-related mortaltiy model will be incorporated into this project in order to capture the excess mortality attributable to the smoking risk factor from causes other than lung cancer. This is a mortality-only model that considers mortality due to chronic obstructive pulmonary disease and ischemic heart disease only. The mortality component of this model is documented on the :ref:`2017 Smoking-Related Mortality Model <2017_smoking_related_mortality>`. Additionally, the effect of the smoking risk factor on this model is documented on the :ref:`2017 Smoking Risk Effects page <2017_risk_effect_smoking>`.
 
 .. _5.3.3:
 
-5.3.3 Smoking Model
+5.3.3 Smoking model
 ~~~~~~~~~~~~~~~~~~~
 
-The smoking risk exposure model to be used for this project is documented :ref:`here <2017_smoking_risk_exposure_forecasted>`.
+The smoking risk exposure model to be used for this project is documented on the :ref:`Forecasted Smoking Risk Exposure Page <2017_risk_exposure_smoking_forecasted>`.
 
 The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
 
-The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.2`_ Screening and detection model.
+The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.4`_ Screening and detection model.
 
 .. _5.3.4:
 
@@ -464,6 +468,8 @@ The following provides code to calculate sex-specific screening coverate rates w
   female_coverage_rate = a / (a + b)
 
   male_coverage_rate = c / (c + d)
+
+.. _5.4:
 
 5.4 Input data sources
 ----------------------
