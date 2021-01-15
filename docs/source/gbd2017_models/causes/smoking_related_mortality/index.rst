@@ -324,7 +324,7 @@ This model is limited in that it only considers smoking attributable deaths due 
 
 .. note::
 
-  If stroke (cause ID 494) were to be added to this mortality model, which would require forecasted mortality estimates, 82.1% of smoking attributable mortality among the Chinese population would be represented in our model. 
+  If stroke (cause ID 494) were to be added to this mortality model, which would require forecasted mortality estimates, 82.1% of smoking attributable mortality among the Chinese population would be represented in our model. This was not included in the current modeling strategy due to scope constraints on the forecast models.
 
 Cause Model Diagram
 +++++++++++++++++++
