@@ -109,23 +109,13 @@ Notably, this modeling strategy has the potential for current smokers to become 
 Pack-years Among Current Smokers
 +++++++++++++++++++++++++++++++++
 
-A point-value of pack-years should be assigned to current smokers based on the  categorical exposure distribution.
-
 Pack-years among current smokers should be assigned as a categorical exposure value that is assigned in the following way:
 
 - Each simulant gets an individual pack-year propensity value (pack_year_propensity_i), which is a random value between 0 and 1 (uniformly distributed). This propensity value does not change over the course of the simulant's life and should be separate and independent from smoking_status_propensity_i.
 
 - This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category in the datafile specified below 
 
-- The *point* value for pack-year exposure assigned to each simulant should be the **minimum** value of the exposure bin to which the simulant was assigned.
-
-.. todo::
-
-  CONFIRM THAT MINIMUM VALUE IS STILL APPROPRIATE
-
-.. note::
-
-  See the notebook `here <https://github.com/ihmeuw/vivarium_data_analysis/pull/95>`_ that demonstrates this method most closely replicates the smoking PAF (most likely because the higher exposure bins are very large and likely right skewed).
+- The *point* value for pack-year exposure used for the calculation of relative risk should be the **minimum** value of the exposure bin to which the simulant was assigned.
 
 - Pack-year exposure values are updated when the exposure distribution for that simulant's demographic group changes (each year of the simulation and/or when a simulant ages into a new age group).
 
@@ -159,21 +149,13 @@ Years Since Quitting Among Former Smokers
 
 Years since quitting exposures among former smokers should be assigned in a similar manner to pack-year exposures among current smokers.
 
-A point-value of years since quitting should be assigned to former smokers based on the  categorical exposure distribution in the following manner:
+Years since quitting exposures should be assigned to former smokers based on the  categorical exposure distribution in the following manner:
 
 - Each simulant gets an individual years since quitting propensity value (ysq_propensity_i), which is a random value between 0 and 1 (uniformly distributed). This propensity value does not change over the course of the simulant's life and should be separate and independent from smoking_status_propensity_i.
 
 - This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category in the datafile specified below
 
-- The *point* value for pack-year exposure assigned to each simulant should be the **minimum** value of the exposure bin to which the simulant was assigned.
-
-.. todo::
-
-  CONFIRM THAT MINIMUM VALUE IS STILL APPROPRIATE
-
-.. note::
-
-  See the notebook `here <https://github.com/ihmeuw/vivarium_data_analysis/pull/95>`_ that demonstrates this method most closely replicates the smoking PAF (most likely because the higher exposure bins are very large and likely right skewed).
+- The *point* value for pack-year exposure used to calculate relative risk should be the **maximum** value of the exposure bin to which the simulant was assigned.
 
 - Years-since quitting exposure values should be initialized among former smokers at the start of the simulation and also when a simulant newly *becomes* a former smoker. YSQ exposures should be updated when the exposure distribution for that simulant's demographic group changes (i.e. when a simulant ages into a new age group).
 
