@@ -92,15 +92,15 @@ Where,
   * - current_smoker_prevalence
     - Prevalence of current smokers
     - :code:`J\Project\simulation_science\cancer\data\smoking\smoking_status_exposure_2019.csv`, measure='current'
-    - Province-weighted location for :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>
+    - Province-weighted location for :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>`
   * - former_smoker_prevalence
     - Prevalence of former smokers
     - :code:`J\Project\simulation_science\cancer\data\smoking\smoking_status_exposure_2019.csv`, measure='former'
-    - Province-weighted location for :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>
+    - Province-weighted location for :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>`
   * - never_smoker_prevalence
     - Prevalence of never smokers
     - :code:`J\Project\simulation_science\cancer\data\smoking\smoking_status_exposure_2019.csv`, measure='never'
-    - Province-weighted location for :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>
+    - Province-weighted location for :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>`
 
 The GBD 2019 prevalence estimates of current/former/never smokers are age-, sex-, location-specific.
 
@@ -115,13 +115,13 @@ Pack-years among current smokers should be assigned as a categorical exposure va
 
 - Each simulant gets an individual pack-year propensity value (pack_year_propensity_i), which is a random value between 0 and 1 (uniformly distributed). This propensity value does not change over the course of the simulant's life and should be separate and independent from smoking_status_propensity_i.
 
-- This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category divided by the sum of values across all exposure categories for each age/sex/year/location group.
+- This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category in the datafile specified below 
 
 - The *point* value for pack-year exposure assigned to each simulant should be the **minimum** value of the exposure bin to which the simulant was assigned.
 
 .. todo::
 
-  CONFIRM THAT THIS IS STILL APPROPRIATE
+  CONFIRM THAT MINIMUM VALUE IS STILL APPROPRIATE
 
 .. note::
 
@@ -133,53 +133,53 @@ Pack-years among current smokers should be assigned as a categorical exposure va
 
   This method has the possibility that some simulants will have *decreases* in their pack-year exposure value, which is a measure of cumulative cigarettes smoked and therefore should logically increase monotonically.
 
-Pack-year exposure data are stored here: `/ihme/csu/swiss_re/forecast/py_forecast_draws.csv` and are age-, sex-, location-, and year-specific. The units of this file are number of individuals in each exposure bin per person-year of the *general population.* 
+Pack-year exposure data for the blended province location for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` are stored here: :code:`J:\Project\simulation_science\cancer\data\smoking\years_since_quitting_exposure_2019.csv` and are age-, sex-, location-, and year-specific. The values in this file represent the proportion of current smokers in each pack-year exposure category such that the sum across all exposure categories for a given draw is equal to one.
 
-.. todo::
-
-  UPDATE LINK, this is not currently the correct data source
+For current smokers, the values specific to 2019 should be used and should remain constant over the 2020-2040 period of the lung cancer screening simulation. (Note: there are other years in this data file which will be used to assign pack-year exposures to former smokers as defined below.)
 
 Pack-years Among Former Smokers
 +++++++++++++++++++++++++++++++
 
-Pack-years among former smokers should be assigned in a similar way to pack-years among current smokers, although the exposure should be sampled from the pack-year distribution among current smokers *the last year that the former smoker was a current smoker*. In other words, the year equal to the current year minus the simulant's years since quitting (see section below).
+Pack-years among former smokers should be assigned in a similar way to pack-years among current smokers, although the exposure should be sampled from the pack-year distribution among current smokers *the last year that the former smoker was a current smoker*. In other words, the year equal to the current year minus the simulant's years since quitting (see section below). 
 
-The pack-year exposure data for former smokers should not change for the entire duration that a simulant is classified as a former smoker. 
+  If a simulant becomes a former smoker *during* the simulation, they will keep their previously assigned pack-year exposure value that was assigned when they were a current smoker (using the GBD 2019 pack-year exposure distribution). 
 
-If a former smoker simulant becomes a current smoker, that simulant's pack-year exposure should be updated to reflect the pack-year exposure distribution in the current year (the year in which the former smoker becomes a current smoker).
+  For simulants initialized as former smokers, historical (pre-2019) pack-year exposure distributions may be used (given that the simulant has a years since quitting exposure of at least one). 
+
+    Notably, there are only estimates for the following years: :code:`[1980,1985,1990,1995,2000,2005,2007,2009,2010,2012,2014,2015,2017,2019]`. 
+
+    Since there are not pack-year estimates for every year prior to 2019, select the most proximal year with estimates in the event that there is not a pack-year estimation for the year in which a simulant quit smoking.
+
+The pack-year exposure data for former smokers **should not change for the entire duration that a simulant is classified as a former smoker.**
+
+If a former smoker simulant becomes a current smoker, that simulant's pack-year exposure should be updated to reflect the pack-year exposure distribution in the current year (the year in which the former smoker becomes a current smoker, which for our purposes is the 2019-specific pack-year exposure distribution).
 
 Years Since Quitting Among Former Smokers
 +++++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
+Years since quitting exposures among former smokers should be assigned in a similar manner to pack-year exposures among current smokers.
 
-  UPDATE THIS SECTION TO REFLECT PROPENSITY APPROACH
+A point-value of years since quitting should be assigned to former smokers based on the  categorical exposure distribution in the following manner:
 
-Years since quitting should be assigned to former smokers upon initialization of the simulation using the forecasted exposure distribution data located here: /ihme/csu/swiss_re/forecast/ysq_forecast_draws.csv
+- Each simulant gets an individual years since quitting propensity value (ysq_propensity_i), which is a random value between 0 and 1 (uniformly distributed). This propensity value does not change over the course of the simulant's life and should be separate and independent from smoking_status_propensity_i.
 
-.. todo::
+- This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category in the datafile specified below
 
-  UPDATE THIS LINK; this is not currently the correct data source
-
-Simulants who are intialized into the simulation as former smokers should be assigned a years since quitting point value based on the forecasted categorical exposure values in the following manner:
-
-  - Simulants will be assigned to an exposure category such that the probability of occupying a given category is the exposure value for that category divided by the sum of exposure values across all exposure categories for a given age/sex/location group.
-
-  - Simulants will then be assigned a *point* exposure value that is equal to the minimum value for that exposure bin.
+- The *point* value for pack-year exposure assigned to each simulant should be the **minimum** value of the exposure bin to which the simulant was assigned.
 
 .. todo::
 
-  CONFIRM THAT THIS IS APPROPRIATE
+  CONFIRM THAT MINIMUM VALUE IS STILL APPROPRIATE
 
 .. note::
 
-  See the notebook here `here <https://github.com/ihmeuw/vivarium_data_analysis/pull/95>`_ that demonstrates this method most closely replicates the smoking PAF (most likely because the higher exposure bins are very large and likely right skewed).
+  See the notebook `here <https://github.com/ihmeuw/vivarium_data_analysis/pull/95>`_ that demonstrates this method most closely replicates the smoking PAF (most likely because the higher exposure bins are very large and likely right skewed).
 
-As simulants progress through the simulation:
+- Years-since quitting exposure values should be initialized among former smokers at the start of the simulation and also when a simulant newly *becomes* a former smoker. YSQ exposures should be updated when the exposure distribution for that simulant's demographic group changes (i.e. when a simulant ages into a new age group).
 
-- Former smokers will accurue years since quitting exposure over time such that simulation time that passes is added to their years since quitting exposure value.
+Years since quitting exposure data for the blended province location for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` are stored here: :code:`J:\Project\simulation_science\cancer\data\smoking\years_since_quitting_exposure_2019.csv` and are age-, sex-, location-, and 2019-specific. The values in this file represent the proportion of former smokers that occupy each exposure category such that the sum across all exposure categories for a given draw sum to one.
 
-- Simulants that *become* former smokers over the course of the simulation will be immediately initialized with zero years since quitting and then will begin to accrue years since quitting exposure as simulation time passes.
+These exposure distributions should remain constant over the course of the 2020-2040 lung cancer screening simulation.
 
 Restrictions
 ++++++++++++
@@ -215,7 +215,7 @@ Our model is limited in that it does not enforce logical individual simulant smo
 
 Our model is additionally limited in that it converts from a continous exposure distribution from GBD (as described in the methods appendix), to a categorical exposure distribution from the CSU forecasts, and then back to a continous exposure distribution for Vivarium. We assume that the continuous exposures are equal to the minimum values for each exposure category, which causes a unrealistic continuous exosure distribution among our simulants, but was chosen to most closely recreate the lung cancer population attributable fraction for smoking.
 
-For use in the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model> that runs from 2020 to 2040, we assume that the smoking exposure remains constant over this period and is equal to the exposure in 2019.
+For use in the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` that runs from 2020 to 2040, we assume that the smoking exposure remains constant over this period and is equal to the exposure in 2019.
 
 Validation Criteria
 +++++++++++++++++++
