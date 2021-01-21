@@ -264,10 +264,6 @@ Vivarium Modeling Strategy
 
   This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
 
-.. todo::
-
-  List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
-
 .. list-table:: Risk Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
    :header-rows: 1
@@ -321,7 +317,7 @@ The following code demonstrates how to assign relative risk values to individual
   years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
   """
 
-  if smoking_status_i == 'never':
+  if smoking_status_i.isin(['never','unassigned]):
     rr_i = 1
 
   elif smoking_status_i == 'current':
@@ -466,7 +462,7 @@ The following code demonstrates how to assign relative risk values for a single 
   years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
   """
 
-  if smoking_status_i == 'never':
+  if smoking_status_i.isin(['never','unassigned']):
     rr_i = 1
 
   elif smoking_status_i == 'current':

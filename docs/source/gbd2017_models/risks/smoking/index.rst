@@ -1,7 +1,7 @@
 .. _2017_risk_smoking_forecasted:
 
 ======================================
-Smoking Risk Exposure -- Forecasted
+Smoking Risk Exposure 
 ======================================
 
 Risk Exposure Overview
@@ -69,16 +69,23 @@ Smoking Status
 
 Each simulant should get a smoking status propensity score (smoking_status_propensity_i) that is a random value assigned based on a uniform distribution from 0 to 1. This propensity score for an individual should remain constant for the entire duration of the simulation. 
 
-Smoking status for an individual simulant (smoking status_i) should be assigned in the following fashion:
+Smoking status for individual simulants (smoking_status_i) should be assigned in the following fashion:
 
 .. code-block:: python
 
-  if smoking_status_propensity_i < never_smoker_prevalence:
-    smoking_status_i = 'never'
-  elif smoking_status_propensity_i < never_smoker_prevalence + current_smoker_prevalence:
-    smoking_status_i = 'current'
+  if 11 <= age_group_i <= 20:
+    if smoking_status_propensity_i < never_smoker_prevalence:
+      smoking_status_i = 'never'
+    elif smoking_status_propensity_i < never_smoker_prevalence + current_smoker_prevalence:
+      smoking_status_i = 'current'
+    else:
+      smoking_status_i = 'former'
   else:
-    smoking_status_i = 'former'
+    smoking_status_i = 'unassigned'
+
+.. note::
+
+  'unassigned' smoking status is an auxillary category to classify simulants for whom the smoking risk effects do not apply based on their age group (see the Restrictions_ section).
 
 Where,
 
