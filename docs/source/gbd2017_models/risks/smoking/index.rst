@@ -52,7 +52,7 @@ Similar to the pack-year exposures, this risk exposure is formatted in populatio
 Vivarium Modeling Strategy
 --------------------------
 
-The overall scope of the Vivarium modeling strategy for the smoking risk exposure for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` is that simulants will be assigned exposure values based on the exposure distribution for a given age-, sex-, and location-specific demographic group and their exposure will be updated each time they move through these groups. Age-, sex-, and location-specific demographic group exposures are assumed to remain constant over time. Each simulant will be given propensity scores that determines the relative magnitude of their individual exposure value to the exposure distribution(s). However, this strategy does allow for the possibility of illogical smoking exposure transitions for individual simulants (i.e.: moving from a current smoker to a never smoker, decreases in pack-year exposure values over time).
+The overall scope of the Vivarium modeling strategy for the smoking risk exposure for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` is that simulants will be assigned exposure values based on the exposure distribution for a given age-, sex-, and location-specific demographic group and their exposure will be updated each time they move through these groups. Age-, sex-, and location-specific demographic group exposures are assumed to remain constant over time (although individual simulant exposure values may change as they age). Each simulant will be given propensity scores that determines the relative magnitude of their individual exposure value to the exposure distribution(s). However, this strategy does allow for the possibility of illogical smoking exposure transitions for individual simulants (i.e.: moving from a current smoker to a never smoker, decreases in pack-year exposure values over time).
 
 .. todo::
 
@@ -125,7 +125,7 @@ Pack-years among current smokers should be assigned as a categorical exposure va
 
 Pack-year exposure data for the blended province location for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` are stored here: :code:`J:\Project\simulation_science\cancer\data\smoking\years_since_quitting_exposure_2019.csv` and are age-, sex-, location-, and year-specific. The values in this file represent the proportion of current smokers in each pack-year exposure category such that the sum across all exposure categories for a given draw is equal to one.
 
-For current smokers, the values specific to 2019 should be used and should remain constant over the 2020-2040 period of the lung cancer screening simulation. (Note: there are other years in this data file which will be used to assign pack-year exposures to former smokers as defined below.)
+For current smokers, the exposure distribution specific to 2019 should be used and should remain constant at the sex- and age-specific population level over the 2020-2040 period of the lung cancer screening simulation (although individual simulant exposure values may change as the simulant ages). (Note: there are other years in this data file which will be used to assign pack-year exposures to former smokers as defined below.)
 
 Pack-years Among Former Smokers
 +++++++++++++++++++++++++++++++
@@ -161,7 +161,7 @@ Years since quitting exposures should be assigned to former smokers based on the
 
 Years since quitting exposure data for the blended province location for the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` are stored here: :code:`J:\Project\simulation_science\cancer\data\smoking\years_since_quitting_exposure_2019.csv` and are age-, sex-, location-, and 2019-specific. The values in this file represent the proportion of former smokers that occupy each exposure category such that the sum across all exposure categories for a given draw sum to one.
 
-These exposure distributions should remain constant over the course of the 2020-2040 lung cancer screening simulation.
+These exposure distributions at the age- and sex-specific population level should remain constant over the course of the 2020-2040 lung cancer screening simulation (although individual simulant exposure values may change as they age).
 
 Restrictions
 ++++++++++++
@@ -197,7 +197,7 @@ Our model is limited in that it does not enforce logical individual simulant smo
 
 Our model is additionally limited in that it converts from a continous exposure distribution from GBD (as described in the methods appendix), to a categorical exposure distribution from the CSU forecasts, and then back to a continous exposure distribution for Vivarium. We assume that the continuous exposures are equal to the minimum values for each exposure category, which causes a unrealistic continuous exosure distribution among our simulants, but was chosen to most closely recreate the lung cancer population attributable fraction for smoking.
 
-For use in the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` that runs from 2020 to 2040, we assume that the smoking exposure remains constant over this period and is equal to the exposure in 2019.
+For use in the :ref:`Lung Cancer Screening Model <lung_cancer_cancer_concept_model>` that runs from 2020 to 2040, we assume that the smoking exposure distribution at the sex- and age-specific population level remains constant over this period and is equal to the exposure in 2019 (although individual simulant exposure values may change over time as they age).
 
 Validation Criteria
 +++++++++++++++++++
