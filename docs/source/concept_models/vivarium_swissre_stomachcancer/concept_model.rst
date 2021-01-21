@@ -315,31 +315,45 @@ We assume there is a 5% baseline primary prevention programme of H. pylori scree
 
 True prevalence of HP :math:`P_{hp_{true}}`
 
-+-------------+---------------+----------------+
-| H. pylori   |   True HP+    |   True HP-     |  
-+-------------+---------------+----------------+
-| screen HP + |     a         |     b          |
-+-------------+---------------+----------------+
-| screen HP - |     c         |     d          |
-+-------------+---------------+----------------+
-| total       |    a+c        |    b+d         |
-+-------------+---------------+----------------+
++-------------+---------------+----------------+---------+
+| H. pylori   |   True HP+    |   True HP-     | total   | 
++-------------+---------------+----------------+---------+
+| screen HP + |     a         |     b          | a+b     |
++-------------+---------------+----------------+---------+
+| screen HP - |     c         |     d          | c+d     |
++-------------+---------------+----------------+---------+
+| total       |    a+c        |    b+d         | a+b+c+d |
++-------------+---------------+----------------+---------+
 
 
 (1) sensitivity a/(a+c) = 0.95
 (2) specificity d/(b+d) = 0.95
 (3) HP prevalence by screen :math:`P_{hp_{screen}}` = (a+b)/(a+b+c+d) = 0.4457 (95%CI: 0.4141 to 0.4778) [Chen Lancet Global Health 2019]
-(4) a+b+c+d = 10,000
-(5) use normal distribution for uncertainty ranges
+(4) a+b+c+d = 10,000 (this is just a simple whole number to work with)
+(5) use normal distribution for uncertainty ranges ``standard_error = (upper_CI_limit - lower_CI_limit)/3.92``
 
-Solving the 4 equations using the mean of :math:`P_{hp_{screen}}` = 0.4457:
+Proof of the solve is here :download:`Equation solutions<solving_equations.docx>`
 
-  - a =  4177 (true positive)
-  - b =  280 (false positive) 
-  - c =  220 (false negative)
-  - d =  5323 (true negative) 
 
-True HP prevalence = (a+c)/1000 = 4397/10,000 = 0.4397 (solve for variables a-d by draw to obtain UIs)
+.. code-block:: python
+
+    First solve for c: 
+
+    18c + 500 = 0.4457 (95%CI: 0.4141 to 0.4778)
+
+    Then
+    a = 19c
+    b = 500 -c
+    d = 19b
+
+  For example: solving the 4 equations using the mean of P_hp_screen = 0.4457:
+
+    - a =  4180 (true positive)
+    - b =  280 (false positive) 
+    - c =  220 (false negative)
+    - d =  5320 (true negative) 
+
+  we get the true HP prevalence = (a+c)/1000 = 4397/10,000 = 0.4400 (solve for variables a-d by draw to obtain UIs)
 
 Data Sources Table
 
@@ -436,7 +450,8 @@ With the simulant's sex, age and atrophy propensity, use the tables above to fig
 To assign H. pylori status we give each simulant an H. pylori percentile using a uniform distribution between 0 and 1 ``np.random.uniform()``. Using the simulant's age and atrophic state obtained in the previous step, assign H. pylori status using the table below. Each cell is a proportion out of 1 which is the atrophic state they are in. The proportion is the fraction of the atrophic state that is H pylori positive. Those who have propensity below the fraction are positive. 
 
 +--------------------------------------------------------------------+
-| Fraction of atrophic state that is H. pylori positive + (f_atrophy)|   
+| Fraction of atrophic state that is H. pylori positive (f_atrophy)  |   
+| by age bands                                                       |
 +===========+============================+===========================+
 | age-bands |  Atrophy +                 | Atrophy -                 |
 +-----------+----------------------------+---------------------------+
@@ -445,23 +460,55 @@ To assign H. pylori status we give each simulant an H. pylori percentile using a
 
 To derive f_atrophy+ and f_atrophy- for the above table with uncertainty intervals use the following set of equations:
 
-+-----------+----------------------------+---------------------------+
-| H. pylori |   Atrophy +                |   Atrophy -               |  
-+-----------+----------------------------+---------------------------+
-| H+        |     a                      |     b                     |
-+-----------+----------------------------+---------------------------+
-| H-        |     c                      |     d                     |
-+-----------+----------------------------+---------------------------+
+
++----------------------------------------------------------+
+| For each age group                                       | 
++===========+=================+=================+==========+
+| H. pylori |   Atrophy +     |   Atrophy -     |  total   |
++-----------+-----------------+-----------------+----------+
+| H+        |     a           |     b           |  a+b     |
++-----------+-----------------+-----------------+----------+
+| H-        |     c           |     d           |  c+d     |
++-----------+-----------------+-----------------+----------+
+| total     |     a+c         |     b+d         | a+b+c+d  |
++-----------+-----------------+-----------------+----------+
 
 (1) a+b/(a+b+c+d) = :math:`P_{hp{-true}}`
 (2) (a+c)/(a+b+c+d) = p_atrophy+ 
-(3) a+b+c+d = 1000
+(3) a+b+c+d = 10,000 (this is just a simple whole number to work with)
 (4) ad/bc = OR
 (5) :math:`P_{hp{-true}}` = 0.4397 (use equations above to calculate true HP prevalence)
 (6) OR = 3.8 (95%CI: 3.054 - 4.631) [Aoki Ann Epidemiology 2005] 
 (7) f_atrophy+ = a/(a+c)
 (8) f_atrophy- = b/(b+d)
-(9) use normal distribution uncertainty ranges
+(9) use normal distribution uncertainty ranges ``standard_error = (upper_CI_limit - lower_CI_limit)/3.92``
+
+.. code-block:: python
+ 
+ To solve for the variables a, b, c, d, let 
+
+ H = P_hp_true x 10,000
+ N = 10,000 - H
+ A = P_atrophy x 10,000 (this value is age-specific)
+
+ To solve for c, use the following quadratic equation with the above variables by draw-level
+
+ (OR-1)c^2 + (HxOR - AxOR + A + N)c -AxN
+
+ Then 
+ a = A - c
+ b = H - A + c
+ d = N - c
+
+ with a, c, b, and d, you can now solve for the age-specific values of f_atrophy+ and f_atrophy-
+
+ Using an example with the means values of OR = 3.8, H = 4400, N = 5600 and A = 145 for age 40-59
+    
+    2.8c^2 + 21,914c – 812,000
+
+    c ~ 37, a =107, b =4293, d =5562
+    f_atrophy+ = a/(a+c) = 0.743
+    f_atrophy- = b/(b+d) = 0.4356
 
 
 The calculated values should look similar to this back of envelope calculation: see tab Wang 2020 :download:`Method workbook<precancer_states_and_hpylori_memo_28dec2020.xlsx>`
