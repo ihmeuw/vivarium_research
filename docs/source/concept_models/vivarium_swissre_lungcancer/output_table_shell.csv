@@ -2,7 +2,7 @@ Location,Year,Birth cohort,Sex,Smoking status,Screening population,Scenario,Outc
 Blended provinces in China,2020,2000 to 2005,Male,Current,Primary screening target population,Baseline,Number of preclinical lung cancers detected by screening,Stratification by method of detection for validation; total detected cancers is a key outcome
 ,2021,1995 to 2000,Female,Former,Secondary screening target population,Alternative,Number of indolent lung cancers detected by screening,Stratification by method of detection for validation; total detected cancers is a key outcome
 ,2022,1990 to 1995,,Never,Not eligible for screening,,Number of clinical lung cancers detected by symptomatic presentation,Stratification by method of detection for validation; total detected cancers is a key outcome
-,2023,1985 to 1990,,,,,Number of deaths with undetected indolent lung cancer,Stratification by method of detection for validation; total detected cancers is a key outcome
+,2023,1985 to 1990,,Unassigned,,,Number of deaths with undetected indolent lung cancer,Stratification by method of detection for validation; total detected cancers is a key outcome
 ,2024,1980 to 1985,,,,,Number of deaths with undetected preclinical lung cancer,Stratification by method of detection for validation; total detected cancers is a key outcome
 ,2025,1975 to 1980,,,,,Transition counts for each lung cancer cause model transition,For validation
 ,2026,1970 to 1975,,,,,State person time for each lung cancer cause state,For validation

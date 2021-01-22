@@ -264,10 +264,6 @@ Vivarium Modeling Strategy
 
   This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
 
-.. todo::
-
-  List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
-
 .. list-table:: Risk Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
    :header-rows: 1
@@ -321,7 +317,7 @@ The following code demonstrates how to assign relative risk values to individual
   years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
   """
 
-  if smoking_status_i == 'never':
+  if smoking_status_i.isin(['never','unassigned]):
     rr_i = 1
 
   elif smoking_status_i == 'current':
@@ -409,6 +405,8 @@ This model is limited in that it relies on the GBD relative risk structure that 
 
 This model is limited in that it assumes the relative risk for smoking and lung cancer applies to preclinical and indolent lung cancer incidence rates equally. However, there is data that suggests that while indolent lung cancers occur at higher rates among smokers than nonsmokers, lung cancers are more likely to be indolent among non-smokers than among smokers, as tumor growth rates tend to be higher in smokers than never smokers [Mackintosh-et-al-2014]_. 
 
+As described in the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`, some age groups will have unassigned smoking status exposures which we are assuming have a relative risk value of one. For groups with unassigned smoking status exposures, the smoking risk factor will not have an affect on lung cancer incidence. 
+
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -466,7 +464,7 @@ The following code demonstrates how to assign relative risk values for a single 
   years_since_quitting_exposure_i =: simulant's years since quitting exposure value, if applicable
   """
 
-  if smoking_status_i == 'never':
+  if smoking_status_i.isin(['never','unassigned']):
     rr_i = 1
 
   elif smoking_status_i == 'current':
@@ -539,6 +537,8 @@ Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This model is limited in that it relies on the GBD relative risk structure that does not differentiate relative risks of former smokers by pack-year history so that current smokers with low pack-year histories who become former smokers may increase their risk of lung cancer by doing so, according to the GBD relative risk curves.
+
+As described in the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`, some age groups will have unassigned smoking status exposures which we are assuming have a relative risk value of one. For groups with unassigned smoking status exposures, the smoking risk factor will not have an affect on smoking-related mortality due to the causes covered in this document. 
 
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
