@@ -162,7 +162,7 @@ Years since quitting exposures should be assigned to former smokers based on the
 
 - This propensity will determine the exposure category such that the probability of occupying an exposure category will be defined as the value for that category in the datafile specified below
 
-- The *point* value for pack-year exposure used to calculate relative risk should be the **maximum** value of the exposure bin to which the simulant was assigned. NOTE: for the highest exposure category (50 to 99 years since quitting), it is possible that the highest mesh-point for the relative risk data is less than the maximum bin value of 99. In these cases, the highest mesh-point can be used to calculate the relative risk for the exposure category.
+- The *point* value for pack-year exposure used to calculate relative risk should be the **maximum** value of the exposure bin (ex: 5-9 exposure category assigned point value of 10) to which the simulant was assigned for all exposure categories except for 50-99 YSQ. A point value of 50 YSQ should be used to calculate the relative risk for simulants in the 50-99 YSQ exposure group (the exception for this exposure bin was implemented because the highest mesh point for the relative risk is often lower than the upper range of the exposure category).
 
 - Years-since quitting exposure values should be initialized among former smokers at the start of the simulation and also when a simulant newly *becomes* a former smoker. YSQ exposures should be updated when the exposure distribution for that simulant's demographic group changes (i.e. when a simulant ages into a new age group).
 
