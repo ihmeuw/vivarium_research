@@ -494,6 +494,14 @@ The following provides code to calculate sex-specific screening coverate rates w
 +++++++++++++++
 
 - Assumes that lung cancer screening programs have no effect on smoking behaviors. This assumption is somewhat supported by [Slatore-et-al-2014]_, although there is no evidence that this conclusion is generalizable to the Chinese population.
+- We assume that there is no recurrence of lung cancer.
+- We assume that tracheal, bronchus, and lung cancers are interchangeable with lung cancer with respect to mean sojourn time, overdiagnosis, and screening sensitivity.
+- We assume that there are no changes in smoking exposure distributions at the age- and sex-specific level from 2019 to 2040 with respect to the prevalence of current, former, and never smokers as well as to the distribution of pack-years among former smokers and years since quitting among former smokers.
+- We assume that the relative risks for smoking apply equally to the incidence rates of the preclinical and indolent lung cancer states. However, there is evidence that smoking may not be as strongly associated with indolent lung cancer as it is with clinical lung cancer (CITE).
+- We assumed coverage rates for lung cancer screening due to a lack of sufficient data on coverage rates in China.
+- We assumed a screening specificity of 100 percent such that there are no false positive lung cancer screenings in our model. 
+- We assumed that deaths that occur with undetected indolent or preclinical lung cancer remain undetected upon death (note there are no deaths due to indolent or preclinical lung cancer in our model because they are by definition asymptomatic). 
+- We assumed that the lung cancer mean sojourn time parameter applied to the duration of the preclinical lung cancer state for all simulants in the model and did not consider variation in the preclinical state duration at the individual simulant level. Further, we assumed that lung cancer was detected via symptomatic presentation at the moment of symptom onset (i.e. upon transition to the clinical lung cancer state) and did not consider a distribution of lead time delays between symptom onset and detection via symptomatic presentation.
 
 .. _8.0:
 
