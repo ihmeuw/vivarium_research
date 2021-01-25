@@ -338,15 +338,15 @@ Positive for FOBT does not necessarily mean you have colorectal cancer
      - Medium-risk
      - Fecal occult blood test (FOBT)
      - every year
-     - 33%-75%
-     - 100%
+     - 68% (95%CI 57%-79%)
+     - 88% (95%CI 84%-91%)
    * - B
      - 50-75
      - Both
      - High-risk
      - Colonoscopy
      - every 5 years
-     - >95%
+     - 98% (95%CI 91%-100%)
      - 100%
    * - C
      - Under 50 or above 75
@@ -359,11 +359,12 @@ Positive for FOBT does not necessarily mean you have colorectal cancer
 
 .. note::
  
-  - There are studies suggest an earlier colon and rectum cancer screeening 
-    starts from age of 40 years for high-risk population.
-  - One or two negative examinations of colonoscopy may signal lifetime protection 
-    against CRC. We should confirm with cancer experts whether we want to 
-    discontinue screening for those who had negative results of prior colonoscopy.
+  - FOBT can be further stratified by the type of FOBT: guaiac-based FOBT 
+    (gFOBT) and immunochemical FOBT (iFOBT). For detecting CRC, we documented 
+    pooled sensitivity and specificity of traditional gFOBT from Meklin et al.
+  - Colonoscopy is the most sensitive test acorss all available colorectal 
+    cancer screening test options. In a study by Rockey et al., the sensitivity 
+    was calculated on a per-patient basis, with lesions size larger than 10 mm. 
 
 In initialization, We assume that
  - No one has prior knowledge of their disease status on day 1 of the simulation.
@@ -382,8 +383,13 @@ Probability of attending screening
    coverage` (e.g., 0.2 for baseline), SD of `1% of current screening coverage` 
    (e.g., 0.002 for baseline) for calculating the probability of simulants 
    attending their first due screening.
- - If a simulant attended their last screening, they have {X} more odds of
-   attending the next screening than those who did not attend their last screening.
+ - Zhang et al. documented the odds ratios of factors associated with participation 
+   rate of colorectal cancer screening program. For people who underwent FOBT, the 
+   odds ratio was estimated to be 0.91 (95%CI 0.82-1.00) among those tested 
+   negative, and 1.24 (95%CI 1.11-1.38) among those tested positive, when compared 
+   to people who never go for FOBT. Hence we assume that simulants all have equal 
+   probability of attending their next screening test, regardless of their previous 
+   screening behavior.
 
 Time to next scheduled screening
 
@@ -392,23 +398,16 @@ Time to next scheduled screening
 
    * - Screening method
      - Distribution
-     - Mean
-     - Standard deviation
-     - Lower limit
-     - Upper limit
+     - Parameters
+     - Function
    * - Annual FOBT
-     - 
-     - 
-     - 
-     - 
-     - 
+     - Log-normal
+     - s = shape parameter; loc = location parameter; scale = scale parameter
+     - stats.lognorm.rvs(s=0.7, loc=330, scale=100, size=1000)
    * - Colonoscopy in 5 years
-     - 
-     - 
-     - 
-     - 
-     - 
-
+     - Log-normal
+     - s = shape parameter; loc = location parameter; scale = scale parameter
+     - stats.lognorm.rvs(s=0.7, loc=1650, scale=100, size=1000)
 
 :underline:`III. Screening initialization`
 
@@ -433,18 +432,39 @@ for simulants at any age above 65.
 GBD risk factors: N/A
 
 Non-GBD risk factor 1: Family history of colon and rectum cancer
- - prevalence:
- - exposure distirbution: dichotomous
- - relative risk:
+ - prevalence: 3-10%
+ - relative risk:  1.76 (95%CI 1.57-1.97)
 Non-GBD risk factor 2: Personal history of adenoma 
- - prevalence:
- - exposure distirbution: dichotomous
- - relative risk: 
+ - prevalence: TBD
+ - relative risk:  2.7 (95%CI, 1.9-3.7)
+
+To joint model family history of CRC (F) and personal history of adenoma (A), 
+we decided to create a dichtomous exposure distribution with 2 categories: 
+(cat1) `exposed` means you have either A/F alone or both; (cat2) `unexposed` 
+means you don't have A nor F.
+
+.. list-table:: Distribution of risk exposure and relative risk
+   :header-rows: 1
+
+   * - Exposure category
+     - Prevalence
+     - Relative risk
+   * - Exposed (cat1)
+     - stand-in value: 10%
+     - stand-in value: 2.3
+   * - Unexposed (cat2)
+     - 1 - prevalence_{exposed}
+     - 1
 
 Relevant formulas 
- 1. PAF= :math:`\frac{prev_{rf}(RR-1)}{prev_{rf}(RR-1)+1}`
- 2. :math:`i_{PC|exposed} =  i_{PC} \times(1-PAF) \times RR`
+ 1. PAF= :math:`\frac{prevalence \times (RR-1)}{prevalence \times (RR-1)+1}`
+ 2. :math:`i_{PC|exposed} =  i_{PC} \times (1-PAF) \times RR`
  3. :math:`i_{PC|unexposed} =  i_{PC} \times (1-PAF)`
+
+.. todo::
+
+ 1. Describe the literature findings
+ 2. Fill-in proper distributions for combined risk factors
 
 .. _5.4:
 
@@ -470,29 +490,37 @@ Relevant formulas
      - scale up to 60% in 2030
      - [de-Moor-et-al-2018]_
      - We applied 20-year lag on US coverage
-   * - Screening sensitivity
+   * - FOBT sensitivity
+     - 68% (95%CI 57%-79%)
+     - [Meklin-et-al-2020]_
+     - We documented the sensitivity of gFOBT
+   * - FOBT specificity
+     - 88% (95%CI 84%-91%)
+     - [Meklin-et-al-2020]_
+     - We documented the specificity of gFOBT
+   * - Colonoscopy sensitivity
+     - 98% (95%CI 91%-100%)
+     - [Rockey-et-al-2005]_
      - 
-     - 
-     - 
-   * - Screening specificity
+   * - Colonoscopy specificity
      - 100%
      - 
      - by client’s assumption (no false positive results of screening)
    * - Prevalence of family history of colon and rectum cancer
-     - 
-     - 
+     - 3-10%
+     - [Henrikson0-et-al-2015]_
      - 
    * - Relative risk of family history of colon and rectum cancer
-     - 2.33
-     - Tung et al.
+     - 1.76 (95%CI 1.57-1.97)
+     - [Wong-et-al-2018]_
      - 
    * - Prevalence of personal history of adenoma
      - 
      - 
      - 
    * - Relative risk of personal history of adenoma
-     - 4.5
-     - Tung et al.
+     - 2.7 (95%CI, 1.9-3.7)
+     - [Click-et-al-2018]_
      - 
 
 .. _5.5:
@@ -552,7 +580,11 @@ TBD
     need to model treatment for detected adenoma.
  2. The screening waiting time distirbution is built based on Marketscan data 
     (clinical records for US general population).
- 3. The external parameters are not stratified by attributes like age, sex or 
+ 3. The factors like family history of colorectal cancer or personal history of 
+    colorectal polyps (adenoma) are associated with participation rate of 
+    colorectal cancer screening; However, we don't model such relationship due to 
+    lack of evidence for insured Chinese.
+ 4. The external parameters are not stratified by attributes like age, sex or 
     residence (urban vs rural), unless the literature tells us to do so. We will 
     compare the evidence from China to studies conducted in other locations.
 
