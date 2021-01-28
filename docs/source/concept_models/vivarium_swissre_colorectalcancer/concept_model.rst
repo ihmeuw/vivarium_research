@@ -167,7 +167,7 @@ to cover 60% of women aged 50 to 74 years in 2030, then keep 60% coverage till
    * - Baseline
      - Colon and rectum cancer screening
      - 2020-2040
-     - 15%
+     - 10%
    * - Alternative
      - Colon and rectum cancer screening
      - 2020-2035
@@ -185,10 +185,8 @@ to cover 60% of women aged 50 to 74 years in 2030, then keep 60% coverage till
    study, the screening update rate varies by age and sex, but less likely 
    associated with residence of urban and rual. Notice that the true screening 
    coverage may be lower among general population as compared with coverage among 
-   eligible population. We assume that the screening coverage reported among eligible 
-   population is similar to coverage among insured population. Hence, we use 15% 
-   as baseline screening coverage across all ages and sexes for SwissRe's insured 
-   population.
+   eligible population. For now, we assume a 10% of baseline screening coverage 
+   across all ages and sexes for SwissRe's insured population.
  - We assume that the screenig uptake rate in China is 20 years behind the US; 
    therefore, we will use the documented number in 2010 among US general 
    population to determine the target screening coverage in China. In 2008, 
@@ -384,8 +382,8 @@ In initialization, We assume that
 
 Probability of attending screening
  - Generate 1000 draws from normal distribution with mean of `current screening 
-   coverage` (e.g., 0.2 for baseline), SD of `1% of current screening coverage` 
-   (e.g., 0.002 for baseline) for calculating the probability of simulants 
+   coverage` (e.g., 0.1 for baseline), SD of `1% of current screening coverage` 
+   (e.g., 0.001 for baseline) for calculating the probability of simulants 
    attending their first due screening.
  - Zhang et al. documented the odds ratios of factors associated with participation 
    rate of colorectal cancer screening program. For people who underwent FOBT, the 
@@ -447,11 +445,16 @@ Non-GBD risk factor 1: Family history of colon and rectum cancer
    first-degree relative. (Wong et al. 2018 and Butterworth et al. 2006) 
 
 Non-GBD risk factor 2: Personal history of adenoma 
- - prevalence: In a cross-sectional study of 19,372 participants aged 20 to 79 
-   years underwent colonoscopy in Korea from 2006-2009, the prevalence of 
-   advanced adenoma were found to be 3.1% in men and 1.5% in women among 
+ - prevalence: The prevalence of adenoma was found to be 13.3% from a 
+   cross-sectional study on patients who had undergone colonoscopy examination 
+   in a university hospital in mainland China. (Hong et al. 2018) 
+   21·1% (95%CI 17·3–25·1) has been documented in a meta-analysis included 16 
+   studies reporting on a total of 81,262 people between 1996 and 2015. 
+   (Huang et al. 2019) In a cross-sectional study of 19,372 participants aged 
+   20 to 79 years underwent colonoscopy in Korea from 2006-2009, the prevalence 
+   of advanced adenoma were found to be 3.1% in men and 1.5% in women among 
    participants at average risk, those without a history of colorectal polyps 
-   or a family history of colorectal cancer. (Yang et al. 2014) 
+   or a family history of colorectal cancer. (Yang et al. 2014)
  - relative risk: For the association between adenoma and colorectal cancer
    incidence, I found a prospetive cohort study that focus on participants aged 
    55-74 years in the Prostate, Lung, Colorectal, and Ovarian (PLCO) Cancer 
@@ -459,7 +462,9 @@ Non-GBD risk factor 2: Personal history of adenoma
    1993 with follow-up for CRC incidence to 2013 across the United States. 
    Through the end of follow-up, participants with advanced adenoma were 
    2.7 (95%CI, 1.9-3.7) more likely to develop CRC compared with participants 
-   with no adenoma. (Click et al. 2018)
+   with no adenoma. There was no significant difference in CRC risk between 
+   participants with nonadvanced adenoma compared with no adenoma 
+   (RR = 1.2 [95%CI, 0.8-1.7]). (Click et al. 2018)
 
 To joint model family history of CRC (F) and personal history of adenoma (A), 
 we decided to create a dichtomous exposure distribution with 2 categories: 
@@ -473,8 +478,8 @@ means you don't have A nor F.
      - Prevalence
      - Relative risk
    * - Exposed (cat1)
-     - normal distribution: normal(mean=0.05, SD=0.005)
-     - Log-normal distribution: exp(normal(mean=log(2.4), SD=0.21))
+     - 20%
+     - Log-normal distribution: exp(normal(mean=log(1.46), SD=0.13))
    * - Unexposed (cat2)
      - 1 - prevalence_{exposed}
      - 1
@@ -486,12 +491,13 @@ Relevant formulas
 
 .. note::
 
- The uncertainty interval of RR combining family history and adenoma was derived 
- from the extremes of reported numbers. To be precise, we use min(RR_family_history_lower, 
- RR_adenoma_lower) and max(RR_family_history_upper, RR_adenoma_upper) as the 
- lower and upper bound of our distribution. Based on the literatures we have 
- identified, we assume the prevalence of having family history of CRC or personal 
- history of adenoma remains low in China, roughly between 4-6%.
+ By adding the prevalence of family history of CRC (5%) and the prevalence of 
+ adenoma (15%), we assume the prevalence of simulants in `cat1` to be 20%. 
+ According to the evidence we have identfied, only 10% of colorectal adenoma are 
+ advanced adenoma. We decide to use the CRC risk associated with family history 
+ and non-advanced adenoma for calculating the probability of developing CRC when 
+ exposed to `cat1`. The formula is described as follow: RR_cat1 = RR_family_history 
+ * 0.25 + RR_nonadvanced_adenoma * 0.75 = 2.24 * 0.25 + 1.2 * 0.75 = 1.46.
 
 .. _5.4:
 
@@ -510,7 +516,7 @@ Relevant formulas
      - [Brenner-et-al-2012]_
      - Let's use a MST of 5 years for all ages.
    * - Colon and rectum cancer screening coverage in baseline
-     - 15%
+     - 10%
      - [lin-et-al-2019]_
      - 
    * - Colon and rectum cancer screening covearge in alternative scenario
@@ -528,19 +534,19 @@ Relevant formulas
    * - Colonoscopy sensitivity
      - 98% (95%CI 91%-100%)
      - [Rockey-et-al-2005]_
-     - Triangular distribution with left=0.90, mode=0.98, and right=1.00
+     - Truncated normal distribution with mean=0.98, std_dev=0.04, and upper limit=1.0
    * - Colonoscopy specificity
      - 100%
      - 
      - by client’s assumption (no false positive results of screening)
    * - Prevalence of having family history of CRC or personal history of 
        adenoma, or both
-     - Normal distribution with mean=0.05 and std_dev=0.005
-     - [Henrikson-et-al-2015]_ and [Yang-et-al-2014]_
+     - 20%
+     - [Henrikson-et-al-2015]_, [Hong-et-al-2018]_, and [Huang-et-al-2019]_
      - We assume prevalence is independent from age and sex
    * - Relative risk of family history of CRC, or personal history of adenoma, 
        or both causing colorectal cancer
-     - exp(normal(mean=log(2.4), SD=0.21))
+     - exp(normal(mean=log(1.46), SD=0.13))
      - [Butterworth-et-al-2006]_, [Wong-et-al-2018]_, and [Click-et-al-2018]_ 
      - We assume RR is independent from age and sex.
 
@@ -639,10 +645,14 @@ TBD
 .. [Henrikson-et-al-2015]
    Henrikson NB, Webber EM, Goddard KA, et al. Family history and the natural 
    history of colorectal cancer: systematic review. Genet Med 2015; 17: 702–12.
-.. [Yang-et-al-2014]
-   Yang MH, Rampal S, Sung J, et al. The Prevalence of Colorectal Adenomas in 
-   Asymptomatic Korean Men and Women. Cancer Epidemiol Biomarkers Prev 2014; 
-   23: 499–507.
+.. [Hong-et-al-2018]
+   Hong W, Dong L, Stock S, Basharat Z, Zippi M, Zhou M. Prevalence and 
+   characteristics of colonic adenoma in mainland China. Cancer Manag Res 2018; 
+   10: 2743–55.
+.. [Huang-et-al-2019]
+   Huang J, Pang TWY, Leung C, et al. Prevalence of colorectal neoplasia in an 
+   average-risk Chinese population: a systematic review and meta-analysis. 
+   The Lancet 2019; 394: S74.
 .. [Butterworth-et-al-2006]
    Butterworth AS, Higgins JPT, Pharoah P. Relative and absolute risk of 
    colorectal cancer for individuals with a family history: a meta-analysis. 
