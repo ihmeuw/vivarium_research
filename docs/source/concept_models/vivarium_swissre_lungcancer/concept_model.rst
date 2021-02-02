@@ -309,13 +309,11 @@ The **secondary screening target population** will consist of simulants who meet
 
 **Screening initialization**
 
-  For simulants who are eligible for screening upon initialization, we will assume that they had previously scheduled screenings, so they require additional consideration for their first scheduled screenings. To determine the time until the first modeled screening for simulants eligible for screening upon initialization:
+  For simulants who are eligible for screening upon initialization, we will assume that they had previously scheduled screenings, so they require additional consideration for their first scheduled screenings. For these simulants as well as simulants who are not eligible for screening upon initialization and who become eligible during the simulation, the time until the first scheduled screening in the model should be determined as follows:
 
     First,sampling a :code:`time_until_next_annual_screening_i` value for the simulant as described above. 
 
     Then, sample a value from a uniform distribution between 0 and :code:`time_until_next_annual_screening_i`. This value should be used as the time until the simulant's first screening.
-
-  For simulants who become newly eligible for screening during the simulation, their first screening should be scheduled at the moment they become eligible.
 
 5.3.4.2 Detection Model
 ^^^^^^^^^^^^^^^^^^^^^^^
