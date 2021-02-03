@@ -235,13 +235,13 @@ State and Transition Data Tables
      - Notes
    * - prev_c441
      - forecasted for future years 2020-2040
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - forcasted data filepath: /ihme/csu/swiss_re/forecast/441_prevalence_12_29_ng_smooth_13.csv
    * - incidence_c441
      - forecasted for future years 2020-2040
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - forcasted data filepath: /ihme/csu/swiss_re/forecast/441_incidence_12_29_ng_smooth_13.csv
    * - csmr_c441
      - forecasted for future years 2020-2040
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - forcasted data filepath: /ihme/csu/swiss_re/forecast/441_deaths_12_29_ng_smooth_13.csv
    * - remission_c441
      - GBD 2017
      - remission rate of cervical cancer = 0.1 per person-years for all ages 
@@ -252,7 +252,7 @@ State and Transition Data Tables
        sequelae with ids s_296, s_298, s_299, s_5519, s_5522, s_5525
    * - ACMR
      - forecasted for future years 2020-2040 
-     - forcasted data filepath: /ihme/costeffectiveness/vivarium_csu_cancer
+     - forcasted data filepath: /ihme/csu/swiss_re/forecast/294_deaths_12_29_ng_smooth_13.csv
    * - Population
      - demography for 2017 
      - mid-year population
