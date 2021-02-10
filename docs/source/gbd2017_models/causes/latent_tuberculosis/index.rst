@@ -486,12 +486,9 @@ Steps of model verification
       the disease event at the end of the sim to make sure the baseline
       model outcomes match with GBD 2017 results.
 
-Measure types in verification
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Constrained verification
- - Compare (disease preson time / total person time) to prevalence in GBD
- - Compare (disease counts / person time) to incidence in GBD
-Unconstrained verification
+Measures to exam in verification:
+ - Compare (disease person time / total person time) to prevalence in GBD
+ - Compare (disease counts / total person time) to incidence in GBD
  - CSMR
  - YLLs
  - YLDs
