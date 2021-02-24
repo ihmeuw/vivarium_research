@@ -146,16 +146,36 @@ Model Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
-.. todo::
-
-   Add cause model diagram.
+.. image:: cause_model_multiple_myeloma.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
+.. list-table:: State Definitions
+   :widths: 1, 10, 15
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - **S**\ usceptible
+     - Susceptible to MM
+   * - PC
+     - **P**\ re- **C**\linical, detectable MM cancer
+     - With asymptomatic condition, screen-detectable, will progress to clinical phase
+   * - C
+     - **C**\ linical MM cancer
+     - With symptomatic condition
+   * - RR
+     - **R**\ elapsed/ **R**\efractory MM
+     - With condition which becomes non-responsive or progressive on therapy or within 60 days of the last treatment in patients who had achieved a minimal response (MR) or better on prior therapy.
+   * - R
+     - **R**\ ecovered
+     - Without condition; not susceptible
+
 .. todo::
 
-   Add state and transition data tables.
-
+   Add State Data & Transition Data tables.
 
 Validation Criteria
 +++++++++++++++++++
