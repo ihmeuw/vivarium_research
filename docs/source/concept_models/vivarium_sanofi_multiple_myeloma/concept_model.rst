@@ -38,7 +38,7 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 +=======+============================+
 |   MM  | Multiple myeloma           |
 +-------+----------------------------+
-|   RR  | Relapsed/ Refractory MM    |
+| RRMM  | Relapsed/ Refractory MM    |
 +-------+----------------------------+
 |   isa.| Isatuximab                 |
 +-------+----------------------------+
@@ -64,7 +64,7 @@ In the absence of data on treatment effects for sub-groups we will need to make 
 
 1.1 Project overview
 --------------------
-This project intends to model the impact of a new treatment option for MM, Isatuximab, from 2021 to 2026 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States, which are dependent on cancer stage, age, comorbidities, eligibility for stem cell transplantation, and risk category.  
+This project intends to model the impact of a new treatment option for RRMM, Isatuximab, from 2021 to 2026 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States, which are dependent on cancer stage, age, comorbidities, eligibility for stem cell transplantation, and risk category.  
 
 
 .. _1.2:
