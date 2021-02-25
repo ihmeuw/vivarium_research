@@ -100,6 +100,8 @@ There is one randomized controlled trial on Isatuximab treatment that is current
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
+The sub-aim for this project is to create a 'power calculation' of how many patients would need to be in a registry population in order to observe a significant effect of a given magnitude, and how many patients per year out of all patients per year would need to be enrolled over X years in order to reach that target.
+
 .. _3.0:
 
 3.0 Causal framework
