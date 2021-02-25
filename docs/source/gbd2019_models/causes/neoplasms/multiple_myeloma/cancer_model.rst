@@ -175,7 +175,9 @@ State and Transition Data Tables
 
 .. todo::
 
-   Add State Data & Transition Data tables.
+  Add State Data & Transition Data tables. 
+  If screening is not necessary for this project, can we get rid of PC state since GBD didn't model such state.
+  Let's confirm with Manoj whether or not patient can go directly to recovered state from clinical MM state. If duration of recovery is long enough, simulants must go through RRMM before they step into a recovered state.
 
 Validation Criteria
 +++++++++++++++++++
