@@ -185,13 +185,14 @@ The sub-aim for this project is to create a 'power calculation' of how many pati
 
 .. _5.2.2:
 
-5.2.2 Sub-populations of interest
+5.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ - General US population
  - Black/African American population 
  - Population with chronic obstructive pulmonary disease (COPD) 
  - Population with renal impairment (CKD)
- - *Registry population (e.g. 1,000 simulants)* 
+ - Registry population (e.g. 1,000 simulants) 
 
 
 .. _5.3:
@@ -304,7 +305,7 @@ treatment but new to Isatuximab treatment.
      - 2025
      - 95 plus
      - 
-     - 
+     - Registry population
      - 
      - YLDs and YLLs due to multiple myeloma (internal only)
 
