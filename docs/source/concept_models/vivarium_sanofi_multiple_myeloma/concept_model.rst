@@ -36,20 +36,35 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 +------------------------------------+
 | List of abbreviations              |
 +=======+============================+
-|       |                            |
+|   MM  | Multiple myeloma           |
 +-------+----------------------------+
+| RRMM  | Relapsed/ Refractory MM    |
++-------+----------------------------+
+|   isa.| Isatuximab                 |
++-------+----------------------------+
+
 
 .. _1.0:
 
 1.0 Background
 ++++++++++++++
+For this project, we are interested in the expected impact of Isatuximab on the overall Unites States population, among a registry population, and in key-subpopulations listed below, in comparison to a business as usual treatment scenario over 5 years.
 
+Key sub-populations agreed upon include: 
+
+* Black/African American population 
+
+* Population with COPD 
+
+* Population with renal impairment 
+
+In the absence of data on treatment effects for sub-groups we will need to make assumptions with client guidance. A strength of this project is that we will be able to iteratively update such assumptions as we get real world data from registries and re-run the simulation. 
 
 .. _1.1:
 
 1.1 Project overview
 --------------------
-
+This project intends to model the impact of a new treatment option for RRMM, Isatuximab, from 2021 to 2026 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States, which are dependent on cancer stage, age, comorbidities, eligibility for stem cell transplantation, and risk category.  
 
 
 .. _1.2:
@@ -57,12 +72,35 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 1.2 Literature review
 ---------------------
 
+There is one randomized controlled trial on Isatuximab treatment that is currently active and is briefly described below.
+
+.. list-table:: RCT Summaries
+   :header-rows: 1
+
+   * - Study Name
+     - Recent Publication(s)
+     - Location
+     - Intervention arm
+     - Control arm
+     - Eligible population
+     - Length of follow-up
+   * - Multinational Clinical Study Comparing Isatuximab, Pomalidomide, and Dexamethasone to Pomalidomide and Dexamethasone in Refractory or Relapsed and Refractory Multiple Myeloma Patients (ICARIA-MM)
+     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019 
+     - 102 sites in 24 countries
+     - IPd (isatuximab + pomalidomide + dexamethasone)
+     - Pd (pomalidomide + dexamethasone)
+     - Adult patients with relapsed and refractory multiple myeloma who had received at least two previous lines of treatment, including lenalidomide and a proteasome inhibitor.
+     - 28-day treatment cycle
+
+
+
 
 .. _2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
+The sub-aim for this project is to create a 'power calculation' of how many patients would need to be in a registry population in order to observe a significant effect of a given magnitude, and how many patients per year out of all patients per year would need to be enrolled over X years in order to reach that target.
 
 .. _3.0:
 
