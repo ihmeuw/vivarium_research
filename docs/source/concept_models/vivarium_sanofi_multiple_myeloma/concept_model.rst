@@ -100,7 +100,7 @@ There is one randomized controlled trial on Isatuximab treatment that is current
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-The obejective of this project is to provide Sanofi with a simulation design and implementation solution for a MM clinical registry, we will simulate outcomes rates among different populations to aid in registry design. For a population level of scope, we will assess the impact of Isatuximab in the populaiton of intertes at the completion of simulation. Estimating the incidence, prevalence, and survival of MM to be overall in the US, and in key sub-populationss listed above, under a business-as-usual treatment scenario and an Isatuximab treatment sceanrio over 5 years. The outcomes will be stratified by age, sex, and relavant demographic. 
+The objective of this project is to provide Sanofi with a simulation design and implementation solution for a MM clinical registry, we will simulate outcomes rates among different populations to aid in registry design. For a population level of scope, we will assess the impact of Isatuximab in the population of interest at the completion of simulation. Estimating the incidence, prevalence, and survival of MM to be overall in the US, and in key sub-populations listed above, under a business-as-usual treatment scenario and an Isatuximab treatment scenario over 5 years. The outcomes will be stratified by age, sex, and relevant demographic. 
 The sub-aim for this project is to create a 'power calculation' of how many patients would need to be in a registry population in order to observe a significant effect of a given magnitude, and how many patients per year out of all patients per year would need to be enrolled over X years in order to reach that target.
 
 .. _3.0:
