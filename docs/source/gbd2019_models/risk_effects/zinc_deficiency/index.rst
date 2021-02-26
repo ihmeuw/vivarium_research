@@ -67,7 +67,11 @@ GBD 2019 Modeling Strategy
      - Cause
      - 302
      - Morbidity and mortality
-     - 
+     - Relative risks updated from GBD 2017
+
+.. note:: 
+
+  LRI was included as an affected entity in GBD 2017, but was excluded as an affected entity in GBD 2019 after re-analyzing the meta-analysis using MR-BRT. The relative risk for diarrheal diseases from 2017 was updated in this reanalysis as well.
 
 Vivarium Modeling Strategy
 --------------------------
