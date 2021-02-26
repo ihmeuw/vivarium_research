@@ -106,6 +106,33 @@ Information on the diarrheal diseases cause model can be found on the :ref:`2017
 
 The zinc deficiency risk factor affects both the likelihood of morbidity and mortality from diarrheal diseases. We will model this in Vivarium such that exposure to zinc deficiency will impact the incidence rate of diarrheal diseases while the excess mortality rate will be unaffected.
 
+.. list-table:: GBD 2019 Risk Outcome Pair Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - Age group start
+     - 5
+     - 1-4 years 
+   * - Age group end
+     - 5
+     - 1-4 years
+
+.. note::
+
+  The zinc deficiency risk factor should affect the diarrheal incidence rate of 1 to 4 year old simulants (age_group_id=5) **only**.
+
+  There are PAFs available for age_group_id=4 using the code snippet above, although there are no relative risks or exposure data for this age group. The zinc deficiency relative risk is restricted to age_group_id=5 only, so the PAF data for age_group_id=4 should not be used in the Vivarium model.
+
+
 Therefore, the diarrheal diseases incidence rate for a given simulant should be modeled as follows:
 
 .. math::
