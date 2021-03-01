@@ -85,7 +85,7 @@ The following code can be used to access draw-level exposure data for the zinc d
 
 	Zinc deficiency exposure for all other age groups should be specified as not applicable, or 100% exposure probability for exposure category :code:`cat2`, the TMREL.
 
-The exposure values for each exposure category should the be used to represent the probability that a simulant will be assigned that exposure.
+The exposure values for each exposure category should be used to represent the probability that a simulant will be assigned that exposure.
 
 Validation Criteria
 +++++++++++++++++++
