@@ -13,7 +13,7 @@ Hemoglobin Model Description in GBD 2019
 
 The hemoglobin model in GBD 2019 serves as the underlying basis for both the anemia impairment model and iron deficiency risk factor model. The hemoglobin model output is an estimate of the year-, location-, age-, and sex-speciifc **continuous ensemble distribution of population hemoglobin concentration in grams per liter**.
 
-The hemoglobin distribution is estimated from a variety of sources reported as either anemia prevalence and/or mean and standard deviation hemoglobin concentration; altitude adjustments were made when appropriate and possible, although no smoking adjustments were performed. For data sources that *only* included pregnant women, data were crosswalked to the general population using MR-BRT such that pregnant women were matched to non-pregnant women in the same age and location group and the ratios of their hemoglobin concentrations were assessed. The resulting adjustment factor was 0.92 (95% CI: 0.86 - 0.98), such that the hemoglobin level of pregnant women is 0.92 times that of non-pregnant women.
+The hemoglobin distribution is estimated from a variety of sources reported as either anemia prevalence and/or mean and standard deviation hemoglobin concentration; altitude adjustments were made when appropriate and possible, although no smoking adjustments were performed. For data sources that *only* included pregnant women, data were crosswalked to the general population using MR-BRT such that pregnant women were matched to non-pregnant women in the same age and location group and the ratios of their hemoglobin concentrations were assessed. The resulting adjustment factor was 0.92 (95% CI: 0.86 - 0.98), such that the hemoglobin level of pregnant women is 0.92 times that of women in the general population.
 
 The hemoglobin distribution was modeled in three steps:
 
@@ -29,6 +29,35 @@ The hemoglobin distribution was modeled in three steps:
 
     The weights used for the GBD 2019 hemoglobin distribution model were 40% gamma and 60% mirror gumbel.
 
+.. todo::
+
+	Include mathematical formulas for the gamma and mirror Gumbel distributions.
+
+.. note::
+
+	As summarized by Nathaneil, for context (details perhaps to be moved to a separate documentation page), the steps for finding an ensemble distribution are:
+
+	1). Each of the two-parameter distributions is "fit" to the data in each location/year/age/sex group using the "method of moments." I.e. you just choose the distribution that has the same mean and standard deviation as the data in each group, so there's not actually any complicated curve fitting going on here.
+
+	2). The distribution F of hemoglobin is assumed to be a mixture distribution that also comes from a 2-parameter family (GBD calls this an ensemble), of the form
+	
+	F(x; m_i,s_i) = w_1 F_1(x; m_i,s_i) + ... + w_k F_k(x; m_i,s_i),
+
+	where
+
+	m_i = mean Hb in group i
+
+	s_i = standard deviation of Hb in group i
+
+	F_1,...,F_k are the distributions in the list above (gamma, mirror gamma,etc.), parameterized by mean m and standard deviation s
+	F is the mixture distribution for Hb, also parameterized by mean m and standard deviation s
+
+	w_1,...,w_k are the global weights of the distributions in the mixture, used in all groups
+	
+	(I think the important thing to note here is that the distribution weights are global, not depending on the location/year/age/sex, whereas it is only the mean and standard deviation that vary across groups. This is not totally clear from your description above.)
+
+	3). The global weights w_1,...,w_k are found by solving an optimization problem that somehow chooses the "best" weights that match the data in all the groups simultaneously. According to the YLD appendix, this "best fit" is defined by taking anemia prevalence data into account. Whatever they did to solve this optimization problem, the weights they came up with are w_1 = 0.4 (for F_1 = gamma distribution) and w_2 = 0.6 (for F_2 = mirror gumbel distribution), with w_j = 0 for all the other distributions.
+
 3. Generation of ensemble distributions for each location/year/age/sex group
 
     Because anemia thresholds depend on pregnancy status, hemoglobin distributions were modeled separately for pregnant and non-pregnant females. The pregnancy model was identical to the non-pregnancy model except that the mean and variance were adjusted by the adjustment factor. The prevalence of anemia in pregnant women and non-pregnant women were then weighted by the pregnancy rate and combined to estimate population anemia prevalence. See the table below for the exact adjustment factors used.
@@ -42,7 +71,7 @@ The hemoglobin distribution was modeled in three steps:
    * - Parameter
      - Adjustment Factor
    * - Mean hemoglobin
-     - 0.919325
+     - 0.919325 (0.86, 0.98)
    * - Hemoglobin standard deviation
      - 1.032920188
 
@@ -191,6 +220,10 @@ Below is R code written to randomly sample hemoglobin concentration values from 
       w[2] * pmgumbel(x, params_mgumbel$alpha, params_mgumbel$scale, lower.tail=T))
     prev}
 
+.. note::
+
+	While not explicitly enforced by the code above, all hemoglobin values should be withn the bounds of 0 and 220 (XMAX). The probability of sampling a value outside of these bounds is small, but if it occurs, the value should be resampled until it falls within the bounds of 0 and 220.
+
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -205,7 +238,7 @@ To sample hemoglobin values for pregnant/lactating women, use the same functions
     - Note
   * - Mean hemoglobin adjustment factor
     - 0.919325
-    - No uncertainty is used in the GBD 2019 code
+    - No uncertainty is used in the GBD 2019 code, although a UI is listed in methods appendix as (0.86 - 0.98)
   * - Hemoglobin standard deviation adjustment factor
     - 1.032920188
     - No uncertainty is used in the GBD 2019 code
@@ -213,7 +246,7 @@ To sample hemoglobin values for pregnant/lactating women, use the same functions
 Validation Criteria
 +++++++++++++++++++
 
-Hemoglobin samples should satisfy the following criteria:
+Hemoglobin concentration values assigned to simulants should satisfy the following criteria:
 
 - all_samples > 0
 - all_samples < XMAX = 220
@@ -222,8 +255,8 @@ Hemoglobin samples should satisfy the following criteria:
 
 When the pregnancy adjustment is applied:
 
-- mean(general_population_samples) > mean(pregnant_population_samples)
-- standard_deviation(general_population_samples) < standard_deviation(pregnant_population_samples)
+- mean(pregnant_population_samples) / mean(general_population_samples) ~= 0.92
+- standard_deviation(pregnant_population_samples) / standard_deviation(general_population_samples) ~= 1.03
 
 At the population distribution level:
 
