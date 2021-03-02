@@ -13,7 +13,11 @@ Hemoglobin Model Description in GBD 2019
 
 The hemoglobin model in GBD 2019 serves as the underlying basis for both the anemia impairment model and iron deficiency risk factor model. The hemoglobin model output is an estimate of the year-, location-, age-, and sex-speciifc **continuous ensemble distribution of population hemoglobin concentration in grams per liter**.
 
-The hemoglobin distribution is estimated from a variety of sources reported as either anemia prevalence and/or mean and standard deviation hemoglobin concentration; altitude adjustments were made when appropriate and possible, although no smoking adjustments were performed. For data sources that *only* included pregnant women, data were crosswalked to the general population using MR-BRT such that pregnant women were matched to non-pregnant women in the same age and location group and the ratios of their hemoglobin concentrations were assessed. The resulting adjustment factor was 0.92 (95% CI: 0.86 - 0.98), such that the hemoglobin level of pregnant women is 0.92 times that of women in the general population.
+The hemoglobin distribution is estimated from a variety of sources reported as either anemia prevalence and/or mean and standard deviation hemoglobin concentration; altitude adjustments were made when appropriate and possible, although no smoking adjustments were performed. For data sources that *only* included pregnant women, data were crosswalked to the general population using MR-BRT such that pregnant women were matched to non-pregnant women in the same age and location group and the ratios of their hemoglobin concentrations were assessed. The resulting adjustment factor was 0.92 (95% CI: 0.86 - 0.98), such that the hemoglobin level of pregnant women is 0.92 times that of women in the general population. 
+
+.. note:: 
+
+	The preganncy adjustment factor was used to crosswalk between the pregnant population and the general population in GBD (both for transformation of input data specific to pregnant women and for calculation of pregnancy-specific anemia prevalence using pregnancy-specific thresholds), however, the pregnancy adjustment factor appears to be derived from comparisons of pregnant women to non-pregnant women, which may be a limiation of this approach in that it does not account for differences in the prevalence of pregnancy in different populations; however, because this prevalence is generally low, it is likely minimally impactful.
 
 The hemoglobin distribution was modeled in three steps:
 
@@ -27,11 +31,27 @@ The hemoglobin distribution was modeled in three steps:
 
     A set of two-parameter distributions (gamma, mirror gamma, Weibull, mirror lognormal, and mirror gumbel) were fit to the sample’s haemoglobin mean and variance for each location/year/age/sex group
 
-    The weights used for the GBD 2019 hemoglobin distribution model were 40% gamma and 60% mirror gumbel.
+    The weights used for the GBD 2019 hemoglobin distribution model were 40% gamma and 60% mirror gumbel, such that:
+
+    .. math::
+
+    	F(x|\mu,\sigma) = 0.4 * F_1(x|\mu,\sigma) + 0.6 * F_2(x|\mu,\sigma)
+
+    Where,
+
+    :math:`\mu` is the mean population hemoglobin concentration
+
+    :math:`\sigma` is the standard deviation of the population hemoglobin concentration distribution
+
+    :math:`F(x)` is the ensemble distribution for population hemoglobin parameterized by :math:`\mu` and :math:`\sigma`
+
+    :math:`F_1(x)` is a gamma distribution parameterized by :math:`\mu` and :math:`\sigma`
+
+    And :math:`F_1(x)` is a mirror gumbel distribution parameterized by :math:`\mu` and :math:`\sigma`
 
 .. todo::
 
-	Include mathematical formulas for the gamma and mirror Gumbel distributions.
+	Include mathematical formulas for the gamma and mirror Gumbel distributions. For now, see the R code in the `Data Description Tables`_ section for details.
 
 .. note::
 
@@ -53,7 +73,7 @@ The hemoglobin distribution was modeled in three steps:
 	F is the mixture distribution for Hb, also parameterized by mean m and standard deviation s
 
 	w_1,...,w_k are the global weights of the distributions in the mixture, used in all groups
-	
+
 	(I think the important thing to note here is that the distribution weights are global, not depending on the location/year/age/sex, whereas it is only the mean and standard deviation that vary across groups. This is not totally clear from your description above.)
 
 	3). The global weights w_1,...,w_k are found by solving an optimization problem that somehow chooses the "best" weights that match the data in all the groups simultaneously. According to the YLD appendix, this "best fit" is defined by taking anemia prevalence data into account. Whatever they did to solve this optimization problem, the weights they came up with are w_1 = 0.4 (for F_1 = gamma distribution) and w_2 = 0.6 (for F_2 = mirror gumbel distribution), with w_j = 0 for all the other distributions.
@@ -71,13 +91,13 @@ The hemoglobin distribution was modeled in three steps:
    * - Parameter
      - Adjustment Factor
    * - Mean hemoglobin
-     - 0.919325 (0.86, 0.98)
+     - 0.919325
    * - Hemoglobin standard deviation
      - 1.032920188
 
 .. note::
 
-  These adjustment factors were obtained from the hemoglobin code hosted `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope/fit_ensemblemv2p_parallel.R>`_.
+  These adjustment factors were obtained from the hemoglobin code hosted `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope/fit_ensemblemv2p_parallel.R>`_. The code here does not utilize uncertainty around these adjustment factors, although the methods appendix reports the pregnancy adjustment factor as 0.92 (0.86 - 0.98)
 
 Vivarium Modeling Strategy
 --------------------------
