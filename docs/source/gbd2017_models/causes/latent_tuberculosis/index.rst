@@ -192,16 +192,315 @@ in the GBD.
 Cause model diagram
 +++++++++++++++++++
 
-
+.. image:: cause_model_diagram.svg
 
 State and transition data tables
 ++++++++++++++++++++++++++++++++
 
+.. list-table:: States Definition
+   :widths: 5 10
+   :header-rows: 1
 
+   * - State
+     - Definition
+   * - S_TB, S_HIV
+     - Susceptible to TB or HIV infection
+   * - LTBI, S_HIV
+     - Latent TB infected, but not HIV infected
+   * - AcTB, S_HIV
+     - HIV negative active TB, which contains DS-TB, MDR-TB, and XDR-TB
+   * - S_TB, C_HIV
+     - HIV infected, but not (latent) TB infected
+   * - LTBI, C_HIV
+     - Latent TB infected, and HIV infected
+   * - AcTB, C_HIV
+     - HIV positive active TB, which contains HIV+ DS-TB, HIV+ MDR-TB, and HIV+ XDR-TB
+
+.. list-table:: States Data
+   :widths: 5 5 15 15
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S_TB, S_HIV
+     - prevalence
+     - 1 - everything (sum of all other states prev)
+     - confirm everything = (prev_c297 + prev_c298) - prev_c954 * prev_c300
+   * - S_TB, S_HIV
+     - excess mortality rate
+     - 0
+     - 
+   * - S_TB, S_HIV
+     - disability weight
+     - 0
+     - 
+   * - LTBI, S_HIV
+     - prevalence
+     - prev_c954 * (1 - prev_c300)
+     - 
+   * - LTBI, S_HIV
+     - excess mortality rate
+     - 0
+     - 
+   * - LTBI, S_HIV
+     - disability weight
+     - 0
+     - 
+   * - AcTB, S_HIV
+     - prevalence
+     - prev_c934 + prev_c946 + prev_c947
+     - 
+   * - AcTB, S_HIV
+     - excess mortality rate
+     - :math:`\frac{\text{csmr_c934} \,+\, \text{csmr_c946} \,+\,
+       \text{csmr_c947}}{\text{prev_c934} \,+\, \text{prev_c946} \,+\,
+       \text{prev_c947}}`
+     - confirm csmr_c954 = 0, csmr_c297 = csmr_c934 + csmr_c946 + csmr_c947
+   * - AcTB, S_HIV
+     - disability weight
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c934, sequelae_c946,
+       sequelae_c947}}} \text{dw_s} \,\times\, \text{prev_s}}{\displaystyle
+       {\sum_{s\in\text{sequelae_c934, sequelae_c946, sequelae_c947}}}
+       \text{prev_s}}`
+     - sequelae_c934, sequelae_c946, sequelae_c947; each of them has a list of
+       4 sequelaes. dw_c934, dw_c946, dw_c947; expect to match 0.333 [0.224, 0.454].
+   * - S_TB, C_HIV
+     - prevalence
+     - (1 - prev_c954) * prev_c300
+     - 
+   * - S_TB, C_HIV
+     - excess mortality rate
+     - :math:`\text{emr_c300} = \frac{\text{csmr_c300}}{\text{prev_c300}}`
+     -
+   * - S_TB, C_HIV
+     - disability weight
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c300}}} \text{dw_s}
+       \,\times\, \text{prev_s}}{\displaystyle{\sum_{s\in\text{sequelae_c300}}}
+       \text{prev_s}}`
+     - sequelae_c300 has a list of 16 sequelaes
+   * - LTBI, C_HIV
+     - prevalence
+     - prev_c954 * prev_c300
+     - 
+   * - LTBI, C_HIV
+     - excess mortality rate
+     - :math:`\text{emr_c300} = \frac{\text{csmr_c300}}{\text{prev_c300}}`
+     -
+   * - LTBI, C_HIV
+     - disability weight
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c300}}} \text{dw_s}
+       \,\times\, \text{prev_s}}{\displaystyle{\sum_{s\in\text{sequelae_c300}}}
+       \text{prev_s}}`
+     - sequelae_c300 has a list of 16 sequelaes
+   * - AcTB, C_HIV
+     - prevalence
+     - prev_c948 + prev_c949 + prev_c950
+     - 
+   * - AcTB, C_HIV
+     - excess mortality rate
+     - :math:`\frac{\text{csmr_c948} \,+\, \text{csmr_c949} \,+\,
+       \text{csmr_c950}}{\text{prev_c948} \,+\, \text{prev_c949} \,+\,
+       \text{prev_c950}}`
+     - 
+   * - AcTB, C_HIV
+     - disability weight
+     - :math:`\frac{\displaystyle{\sum_{s\in\text{sequelae_c948, sequelae_c949,
+       sequelae_c950}}} \text{dw_s} \,\times\, \text{prev_s}}{\displaystyle
+       {\sum_{s\in\text{sequelae_c948, sequelae_c949, sequelae_c950}}}
+       \text{prev_s}}`
+     - sequelae_c948, sequelae_c949, sequelae_c950; each of them has a list of
+       4 sequelaes. dw_c948, dw_c949, dw_c950; expect to match 0.408 [0.274, 0.549].
+
+.. list-table:: Transition Data
+   :widths: 1 5 5 10 10
+   :header-rows: 1
+
+   * - Label
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - 1
+     - S_TB, C_HIV
+     - LTBI, C_HIV
+     - LTBI incidence (i_c954)
+     - calculated by dismod_mr 1.1.0
+   * - 2
+     - LTBI, C_HIV
+     - AcTB, C_HIV
+     - :math:`\frac{\text{i_c948} \,+\, \text{i_c949} \,+\,
+       \text{i_c950}}{\text{prev_c954} \,\times\, \text{prev_c300}}`
+     - 
+   * - 3
+     - AcTB, C_HIV
+     - S_TB, C_HIV
+     - All-form TB remission
+     - dismod id 9422 stand-in
+   * - 4
+     - S_TB, S_HIV
+     - LTBI, S_HIV
+     - LTBI incidence (i_c954)
+     - calculated by dismod_mr 1.1.0
+   * - 5
+     - LTBI, S_HIV
+     - AcTB, S_HIV
+     - :math:`\frac{\text{i_c934} \,+\, \text{i_c946} \,+\,
+       \text{i_c947}}{\text{prev_c954} \,\times\, (1 \,-\, \text{prev_c300})}`
+     -
+   * - 6
+     - AcTB, S_HIV
+     - S_TB, S_HIV
+     - All-form TB remission
+     - dismod id 9422 stand-in
+   * - 7
+     - S_TB, S_HIV
+     - S_TB, C_HIV
+     - i_c300
+     - 
+   * - 8
+     - LTBI, S_HIV
+     - LTBI, C_HIV
+     - i_c300
+     -
+   * - 9
+     - AcTB, S_HIV
+     - AcTB, C_HIV
+     - i_c300
+     -
+
+.. list-table:: Data Sources
+   :widths: 5 10 5
+   :header-rows: 1
+   
+   * - Measure
+     - Sources
+     - Notes
+   * - Prevalence
+     - como
+     - 
+   * - Incidence
+     - como
+     - 
+   * - Cause-specific mortality rate
+     - codcorrect
+     -
+   * - Disability weight
+     - [GBD-2017-YLD-Capstone-Appendix-1]_
+     -
+
+Modeling strategy for non-standard data sources
++++++++++++++++++++++++++++++++++++++++++++++++
+LTBI incidence
+ - We ran DisMod-MR 1.1.0 and used LTBI prevalence, excess mortality rate 
+   (equivalent to AcTB incidence / LTBI prevalence), remission (assume zero), 
+   and all-cause mortality rate as inputs to back calculate the LTBI incidence 
+   data that are not exist in GBD. Then we load the location-/age-/sex-/year-/draw- 
+   specific LTBI incidence estimates into the artifact. (Note that the age range 
+   for estimated LTBI incidence is 0 to 100 and age interval equal to one.)
+TB remission
+ - The current model applied all-form active TB remission (dismod_id=9422)
+   to inform the transition flow from HIV-positive active TB and HIV-negative
+   active TB back to susceptible. The future plan is to disaggregate the all-form
+   active TB remission by HIV status based on TB duration data.
+   [Global-TB-Burden-2018]_ (Table 1, pp. 26)
 
 Validation criteria
 +++++++++++++++++++
 
+Objective
+~~~~~~~~~
+External
+ - Model results should be checked against local TB epidemiology
+    - e.g. rate of decline in burden of disease should be compared
+      with historical evidence.
+ - Compare our results (e.g., Deaths) to similar models or empirical
+   assessments where possible
+Internal
+ - Test hypotheses without develop a full simulation. (e.g., nano simulation)
+ - Calibrate simulation baseline against GBD 2017 results
+    - Sim outputs mean should perfectly match GBD results.
+    - Sim outputs uncertainty should be wider than GBD results,
+      because both stochastic and parametric uncertainty are included.
+
+V&V strategy
+~~~~~~~~~~~~
+Model validation
+ - Check the logical structure and input data for cause model,
+   make sure
+    - the theories and assumptions underlying the cause model are correct.
+    - the data to build, evaluate, and test model are correct.
+Model verification
+ - Check the translation from cause model document to Vivarium scripts,
+   make sure
+    - the computer programming and implementation of the cause model is correct.
+    - the output of the model can be calibrated against GBD results.
+
+GBD post-processing steps
+~~~~~~~~~~~~~~~~~~~~~~~~~
+GBD starts from All-form TB results, then they stratify the results by following 
+the steps described below:
+    1. Find proportion of HIV+ cases among all TB cases
+    2. Disaggregate all TB cases into HIV+ TB and HIV- TB
+    3. Find proportion of drug-resistant cases among HIV+ TB cases
+       and HIV- TB cases
+    4. Breakdown those cases into:
+        - drug-susceptible TB, multidrug-resistant TB, and extensively
+          drug-resistant TB
+        - HIV+ drug-susceptible TB, HIV+ multidrug-resistant TB,
+          and HIV+ extensively drug-resistant TB
+
+Formula
+~~~~~~~
+For certain location-/age-/sex-
+    - Deaths due to all causes equal to sum of:
+        - Deaths due to all-form TB (aggregate all child active TB causes)
+        - Deaths due to HIV resulting in other diseases
+        - Deaths due to other causes
+Apply the formula to other measures (e.g., DALYs)
+
+Steps of model verification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1. Set hypothesis
+    - The sum of the prevalences of all model states should equal
+      to the GBD TB prevalence plus HIV prevalence. (Pre_297 + Prev_298
+      = Sum(Prev_state))
+    - The sum of the cause-specific mortality of all model states
+      should equal to the GBD TB CSMR plus HIV CSMR. (CSMR_297 + 
+      CSMR_298 = Sum(Prev_state * ExcessMR_state))
+    - The prevalence weighted sum of the disability weight of all model states
+      should equal to the GBD TB YLDs plus HIV YLDs. (ylds_297 + ylds_298 
+      = Sum(Prev_state * dw_state))
+2. Check for proposed hypothesis (e.g. prevalence for the whole model)
+    - **Data:** Once the model input data is produced and put in the artifact,
+      produce a graph of the sum of the input data prevalences and compare
+      it to the GBD data not in the model.
+    - **Sim initialization:** Initialize a simulation using the model input data
+      and count the disease event to make sure it matches with GBD data 
+      not in the model.
+    - **Historical calibration:** Run a simulation from 2012 to 2017 and count
+      the disease event at the end of the sim to make sure it matches with
+      GBD data not in the model.
+    - **Baseline verification:** Run a simulation from 2020 to 2025 and count
+      the disease event at the end of the sim to make sure the baseline
+      model outcomes match with GBD 2017 results.
+
+Measures to exam in verification:
+ - Compare (disease person time / total person time) to prevalence in GBD
+ - Compare (disease counts / total person time) to incidence in GBD
+ - CSMR
+ - YLLs
+ - YLDs
+
+Back-envelope calculation for concept model
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+We can roughly calculate the expected value of averted active TB Deaths (or DALYs) 
+by TB preventive therapy (TPT) if given following values:
+ - X: deaths due to active TB in certain location and year
+ - Y: percent reduction in active TB incidence if received and adherent to TPT (TPT per-protocol efficacy)
+ - Z: change in TPT coverage between baseline and alternative scenarios
+Then, active TB deaths averted = X * Y * Z
 
 
 References
