@@ -5,7 +5,7 @@ Intervention Models
 =========================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :glob:
 
-   */intervention_model
+   */index
