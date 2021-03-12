@@ -66,7 +66,7 @@ GBD 2019 Modeling Strategy
    * - Diarrheal diseases
      - Cause
      - 302
-     - Morbidity and mortality
+     - Morbidity and mortality (GBD YLDs and YLLs)
      - Relative risks updated from GBD 2017
 
 .. note:: 
@@ -126,13 +126,6 @@ The zinc deficiency risk factor affects both the likelihood of morbidity and mor
      - 5
      - 1-4 years
 
-.. note::
-
-  The zinc deficiency risk factor should affect the diarrheal incidence rate of 1 to 4 year old simulants (age_group_id=5) **only**.
-
-  There are PAFs available for age_group_id=4 using the code snippet above, although there are no relative risks or exposure data for this age group. The zinc deficiency relative risk is restricted to age_group_id=5 only, so the PAF data for age_group_id=4 should not be used in the Vivarium model.
-
-
 Therefore, the diarrheal diseases incidence rate for a given simulant should be modeled as follows:
 
 .. math::
@@ -165,7 +158,7 @@ Where,
      - GBD 2019: see code snippet below
      - 
 
-PAFs and relative risks can be pulled from GBD using the code below after specifying desired sex, age_group, and location IDs.
+PAFs and relative risks can be pulled from GBD using the code below (be sure to additionally specify desired sex, age_group, and location IDs).
 
 .. code:: 
 
@@ -190,7 +183,7 @@ PAFs and relative risks can be pulled from GBD using the code below after specif
 
 .. note::
 
-  In GBD 2019, the stored PAF for deaths and YLLs is slightly greater than the stored PAF for DALYs. There is no stored PAF for YLDs. The specified measure in the code snippet above is DALYs to be conservative; however, we should talk with the GBD modeler about why this is, as there do not appear to be different relative risks for morbidity and mortality in the data available. 
+  In GBD 2019, the stored PAF for deaths and YLLs is slightly greater than the stored PAF for DALYs and YLDs. According to the GBD modeler, this is likely because of processing from the burdenator, and provided confirmation that the relative risks for zinc deficiency should apply equally to both YLDs and YLLs.
 
 .. list-table:: Relative Risks
    :widths: 5 5 5
@@ -232,23 +225,11 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
 References
 ----------
 
-.. todo::
+.. [GBD-2019-Risk-Factors-Appendix-Zinc-Deficiency-Risk-Effects]
 
-  Update references to GBD 2019 once published
+   Pages 184-185 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
 
-.. todo::
+     **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factor Collaborators. :title:`Global burden of 87 risk factors in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019`. Lancet 2020; 396: 1223-1249. DOI:
+     https://doi.org/10.1016/S0140-6736(20)30752-2
 
-  Update the GBD 2017 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
-
-  Update the appropriate page numbers in the GBD risk factors methods appendix below
-
-  Add additional references as necessary 
-
-.. [GBD-2017-Risk-Factors-Appendix-Risk-Effects-Model-Template]
-
-   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
-
-     **(GBD 2017 Risk Factors Capstone)** GBD 2017 Risk Factor Collaborators. :title:`Global, regional, and national comparative risk assessment of 84 behavioural, environmental and occupational, and metabolic risks or clusters of risks for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392: 1923-1994. DOI:
-     https://doi.org/10.1016/S0140-6736(18)32225-6
-
-.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32225-6/attachment/be595013-2d8b-4552-86e3-6c622827d2e9/mmc1.pdf
+.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
