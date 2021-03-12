@@ -168,7 +168,30 @@ Affected Outcome #1
 
 .. todo::
 
-  Fill out the effect size table below
+  Fill out the tables below
+
+.. list-table:: Affected Outcome #1 Restrictions
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - 
+    - 
+  * - Female only
+    - 
+    - 
+  * - Age group start
+    - 
+    - 
+  * - Age group end
+    - 
+    - 
+  * - Other
+    - 
+    - 
 
 .. list-table:: Affected Outcome #1 Effect Size
   :widths: 15 15 15 
