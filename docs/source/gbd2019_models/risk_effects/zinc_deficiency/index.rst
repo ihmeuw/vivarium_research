@@ -172,7 +172,7 @@ PAFs and relative risks can be pulled from GBD using the code below (be sure to 
 
   pafs = get_draws(
             gbd_id_type=['rei_id', 'cause_id'], 
-            gbd_id=[94, 302],
+            gbd_id=[97, 302],
             source='burdenator',
             measure_id=2, #dalys
             metric_id=2, #percent
