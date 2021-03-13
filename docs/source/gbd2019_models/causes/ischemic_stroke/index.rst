@@ -144,11 +144,158 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
+
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
+.. list-table:: State Definitions
+   :widths: 1, 5, 20
+   :header-rows: 1
+
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - **S**\ usceptible to Ischemic Stroke
+     - Simulant that has not already had an ischemic stroke event
+   * - A
+     - **A**\ cute Ischemic Stroke
+     - Simulant that is in duration-based period starting day of incidence of
+       a first-ever stroke through day 28 following the event
+   * - P
+     - **P**\ ost Ischemic Stroke
+     - Simulant that has survived more than 28 days following their last
+       ischemic stroke and who may be experiencing chronic elevated mortality
+       and disability due to the event.
+
+
+.. list-table:: State Data
+   :widths: 1, 5, 5, 10
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - -
+     - cause-specific mortality rate (csmr)
+     - :math:`\frac{\text{deaths_c495}}{\text{population}}`
+     -
+   * - P
+     - excess mortality rate (emr)
+     - emr_m10837
+     -
+   * - A
+     - excess mortality rate (emr)
+     - emr_m9310
+     -
+   * - S
+     - excess mortality rate (emr)
+     - 0
+     -
+   * - P
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{chronic-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - A
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_c495}} \times \sum\limits_{s \in \text{acute-sequelae}} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - S
+     - disability weight
+     - 0
+     -
+   * - P
+     - prevalence
+     - :math:`\sum\limits_{s \in \text{chronic-sequelae}} \text{prevalence}_s`
+     -
+   * - A
+     - prevalence
+     - :math:`\sum\limits_{s \in \text{acute-sequelae}} \text{prevalence}_s`
+     -
+   * - S
+     - prevalence
+     - :math:`1 - \text{prev_c495}`
+     -
+
+.. list-table:: Transition Data
+   :widths: 1, 1, 1, 5, 10
+   :header-rows: 1
+
+   * - Transition
+     - Source State
+     - Sink State
+     - Value
+     - Notes
+   * - 1
+     - S
+     - A
+     - incidence_c495
+     -
+   * - 2
+     - A
+     - P
+     - 28 days
+     - duration-based transition from acute state then progress into post state
+   * - 3
+     - P
+     - A
+     - incidence_c495
+     -
+
+.. list-table:: Data Sources and Definitions
+   :widths: 1, 3, 10, 10
+   :header-rows: 1
+
+   * - Value
+     - Source
+     - Description
+     - Notes
+   * - prevalence_c495
+     - como
+     - Prevalence of ischemic stroke
+     -
+   * - deaths_c495
+     - codcorrect
+     - Deaths from ischemic stroke
+     -
+   * - incidence_c495
+     - como
+     - Incidence of ischemic stroke
+     -
+   * - population
+     - demography
+     - Mid-year population for given age/sex/year/location
+     -
+   * - sequelae_c495
+     - gbd_mapping
+     - List of 11 sequelae for ischemic stroke
+     -
+   * - prevalence_s{`sid`}
+     - como
+     - Prevalence of sequela with id `sid`
+     -
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weight of sequela with id `sid`
+     -
+   * - emr_m10837
+     - dismod-mr 2.1
+     - excess mortality rate of post ischemic stroke with CSMR
+     -
+   * - emr_m9310
+     - dismod-mr 2.1
+     - excess mortality rate of first ever acute ischemic stroke with CSMR
+     -
+   * - acute-sequelae
+     - sequelae definition
+     - {s386, s387, s388, s389, s390}
+     -
+   * - chronic-sequelae
+     - sequelae definition
+     - {s391, s392, s393, s394, s395, s946}
+     -     
 
 Definitions
 """""""""""
