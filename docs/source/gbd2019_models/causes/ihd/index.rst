@@ -4,35 +4,39 @@
 Ischemic Heart Disease
 ======================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
-
 .. contents::
    :local:
    :depth: 1
 
+
 .. list-table:: Abbreviations
-  :widths: 15 15 15
-  :header-rows: 1
+   :widths: 15 15 15
+   :header-rows: 1
 
-  * - Abbreviation
-    - Definition
-    - Note
-  * - 
-    - 
-    - 
+   * - Abbreviation
+     - Definition
+     - Notes
+   * - IHD
+     - Ischemic heart disease
+     - 
+   * - MI
+     - Myocardial infarction
+     - 
+   * - AMI
+     - Acute myocardial infarction
+     - 
 
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
 
 Disease Overview
 ----------------
 
-.. todo::
+Ischemic heart disease (IHD) is a non-communicable cardiovascular disease which occurs when the arteries of the heart cannot deliver enough oxygen-rich blood to the heart. Since 1990, this disease has been a leading cause of global Years of Life Lost (YLL). GBD 2019 listed IHD as the leading cause of YLLs globally, with a mean percentage increase of 4.19% in all-age YLL rate since 2007. According to NIH_, IHD is also known as Coronary Artery Disease, Coronary Heart Disease, and Coronary Microvascular Disease. Symptoms and complications can vary by person, even if they have the same type of ischemic heart disease. Reported symptoms vary whether a person is experiencing an acute coronary event, such as a heart attack, or has chronic IHD. Symptoms may get worse as the buildup of plague continues to narrow the coronary arteries. 
 
-   Add a general clinical overview of the cause.
+Acute coronary events may cause symptoms such as angina, cold sweats, dizziness, nausea, neck pain, shortness of breath, sleep disturbances, or weakness. 
+
+Chronic ischemic heart disease can cause signs and symptoms such as angina, anxiety or nervousness, fatigue, or neck pain. 
+
+.. _NIH: https://www.nhlbi.nih.gov/health-topics/ischemic-heart-disease
 
 GBD 2019 Modeling Strategy
 --------------------------
@@ -43,6 +47,7 @@ GBD 2019 Modeling Strategy
 
 Cause Hierarchy
 +++++++++++++++
+.. image:: cause_hierarchy_ihd.svg
 
 Restrictions
 ++++++++++++
@@ -59,29 +64,29 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - False
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
-     -
+     - 15
+     - [15, 20), age_group_id=8
    * - YLL age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235
    * - YLD age group start
-     -
-     -
+     - 15
+     - [15, 20), age_group_id=8
    * - YLD age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235
 
 
 Vivarium Modeling Strategy
