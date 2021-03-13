@@ -21,7 +21,10 @@ Ischemic Heart Disease
      - 
    * - MI
      - Myocardial infarction
-     - AMI refers to Acute MI
+     - 
+   * - AMI
+     - Acute myocardial infarction
+     - 
 
 
 Disease Overview
