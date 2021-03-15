@@ -112,7 +112,13 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
+MI
+"""""""""""
+
 .. image:: cause_model_mi.svg
+
+Angina
+"""""""""""
 
 .. image:: cause_model_angina.svg
 
