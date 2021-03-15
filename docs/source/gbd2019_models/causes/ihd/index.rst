@@ -92,10 +92,6 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
-
 Scope
 +++++
 
@@ -116,330 +112,217 @@ Assumptions and Limitations
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: cause_model_mi.svg
+
+.. image:: cause_model_angina.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
 
 Definitions
 """""""""""
 
-This table contains the definitions of all the states in **cause model diagram**. 
-
 .. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
-
-**SIR Model**
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
+   :widths: 1, 10, 15
    :header-rows: 1
 
    * - State
      - State Name
      - Definition
    * - S
-     - Susceptible
-     - Susceptible to {cause name}
-   * - I
-     - Infected
-     - Infected with {cause name}
-   * - R
-     - Recovered
-     - Infected with {cause name}
-
-
-**With-Condition and Free of Condition Model**
-
-.. list-table:: State Definitions
-   :widths: 1, 5, 10
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - C
-     - With **C**\ ondition
-     - Born with {cause name}
-   * - F
-     - **F**\ ree of Condition
-     - Born without {cause name}
-
-Include states, their names and definitions appropriate to your model.
+     - **S**\ usceptible
+     - Susceptible to IHD
+   * - A
+     - **A**\ cute Myocardial Infarction (MI)
+     - Simulant that experiences acute MI symptoms
+   * - P
+     - **P**\ ost-MI IHD
+     - Simulant that experiences angina and asymptomatic ischemic heart
+       disease following myocardial infarction; survival to 28 days following
+       incident MI
+   * - S2
+     - **S**\ usceptible
+     - Susceptible to IHD
+   * - A2
+     - **A**\ ngina
+     - Sequelae
 
 States Data
 """""""""""
 
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. The common measures in each state are prevalence, birth prevalence, excess mortality rate and disability weights. 
-Cause specific mortality rate is the common measure for all states. In most of the models either prevalence or birth prevalence is used. 
-But in some rare cases like neonatal models both prevalence and birth prevalence are used in model initialization. The Value column contains the formula to calculate 
-the measure in each state.
-
-The structure of the table is as below. For each state, the measures and values must be included.
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
+.. list-table:: State Data
+   :widths: 5 10 10 20
    :header-rows: 1
-   
+
    * - State
      - Measure
      - Value
      - Notes
-   * - State
-     - prevalence
-     - 
-     - 
-   * - State
-     - birth prevalence
-     - 
-     - 
-   * - State
-     - excess mortality rate
-     - 
-     - 
-   * - State
-     - disabilty weights
-     - 
+   * - All
+     - cause-specific mortality rate
+     - :math:`\frac{\text{deaths_c493}}{\text{population}}`
      -
-   * - ALL
-     - cause specific mortality rate
-     - 
-     - 
-
-An example of SI model with both prevalence and birth prevalence in the initialization is given below to explain better. 
-
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
-     - Value
-     - Notes
-   * - S
-     - prevalence
-     - 1-prevalence_cid
-     - 
-   * - S
-     - birth prevalence
-     - 1-birth_prevalence_cid
-     - 
+   * - P
+     - excess mortality rate
+     - emr_m15755
+     -
+   * - A
+     - excess mortality rate
+     - emr_m24694
+     -
    * - S
      - excess mortality rate
      - 0
-     - 
-   * - S
-     - disabilty weights
+     -
+   * - A2
+     - excess mortality rate
+     - emr_m1817
+     -
+   * - S2
+     - excess mortality rate
      - 0
      -
-   * - I
+   * - P
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s \in post-mi-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - A
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - S
+     - disability weight
+     - 0
+     -
+   * - A2
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s\in angina-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - S2
+     - disability weight
+     - 0
+     -
+   * - P
      - prevalence
-     - prevalence_cid
-     - 
-   * - I
-     - birth prevalence
-     - birth_prevalence_cid
-     - 
-   * - I
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population} \times \text{prevalence_cid}}`
-     - = (cause-specific mortality rate) / prevalence
-   * - I
-     - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_cid}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = total disability weight over all sequelae
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population}}`
-     - 
+     - :math:`\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
+     -
+   * - A
+     - prevalence
+     - :math:`\sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
+     -
+   * - S
+     - prevalence
+     - 1-prevalence_493
+     - simulants not prevalent with IHD
+   * - A2
+     - prevalence
+     - :math:`\sum\limits_{s\in angina-sequelae} \text{prevalence}_s`
+     -
+   * - S2
+     - prevalence
+     - 1-prevalence_493
+     - simulants not prevalent with IHD
 
 Transition Data
 """""""""""""""
 
-This table contains the measures needed for transition from one state to other in the cause model. The common measures used are *incident rate* to 
-move from Susceptible to Infected and *remission rate* to move from Infected to Susceptible or Recovered states. Some times there may not be transition 
-between states as in Neonatal disorders.
-
-The structure of the table is as below. 
-
 .. list-table:: Transition Data
-   :widths: 10 10 10 20 30
+   :widths: 10 10 10 10 10
    :header-rows: 1
-   
+
    * - Transition
-     - Source 
-     - Sink 
+     - Source State
+     - Sink State
      - Value
      - Notes
-   * - i
+   * - 1
      - S
-     - I
-     - 
-     - 
-   * - r
-     - I
-     - R
-     - 	
-     - 
- 
-
-An example, if the data is present in GBD,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
-     - S
-     - I
-     - :math:`\frac{\text{incidence_rate_cid}}{\text{1 - prevalence_cid}}`
-     - 
-   * - r
-     - I
-     - R
-     - remission_rate_cid
-     - 
-
-Sometimes, we might need to use *modelable entity id* to get data. Sometimes, we might need to calculate remission rate 
-based on average case duration. In that case, the row would look like,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - r
-     - I
-     - R
-     - remission_rate_cid :math:`= \frac{\text{365 person-days}}{\text{average case duration in days} \times \text{1 year}}`
-     - 
-	 
+     - A
+     - incidence_c493
+     -
+   * - 2
+     - A
+     - P
+     - 28 days
+     - duration-based transition from acute state then progress into post state
+   * - 3
+     - P
+     - A
+     - incidence_493
+     -
+   * - 4
+     - S2
+     - A2
+     - incidence_493
+     -
 
 Data Sources
 """"""""""""
 
-This table contains the data sources for all the measures. The table structure and common measures are as below:
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
+.. list-table:: Data Sources and Definitions
+   :widths: 10 10 20 20
    :header-rows: 1
-   
-   * - Measure
-     - Sources
+
+   * - Variable
+     - Source
      - Description
      - Notes
-   * - prevalence_cid
-     - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
-     - 
-   * - population
-     - 
-     - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_m1594
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
-     - 
-
-An example, that contains common sources for the measures,
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_cid
+   * - prevalence_c493
      - como
-     - Prevalence of cause
-     - 
-   * - birth_prevalence_cid
-     - como
-     - Birth prevalence of cause
+     - prevalence of ischemic heart disease
      -
-   * - deaths_cid
+   * - deaths_c493
      - codcorrect
-     - Deaths from cause
-     - 
+     - Count of deaths due to ischemic heart disease
+     -
    * - population
      - demography
-     - Mid-year population for given age/sex/year/location
-     - 
-   * - sequelae_cid
-     - gbd_mapping
-     - List of sequelae
-     - 
-   * - incidence_rate_cid/mid
-     - como/dismod
-     - Incidence rate for cause
-     - 
-   * - remission_rate_cid/mid
-     - como/dismod
-     - Remission rate for cause
-     - 
-   * - disability_weight_s{`sid`}
-     - YLD appendix
-     - Disability weight of sequela with id `sid`
-     - 
-   * - prevalence_s{`sid`}
+     - Mid-year population for given sex/age/year/location
+     -
+   * - prevalence_s{sid}
      - como
-     - Prevalence of sequela with id `sid`
-     - 
+     - Prevalence of sequela with id {id}
+     -
+   * - disability_weight_s{sid}
+     - YLD appendix
+     - Disability weight of sequela with id {id}
+     -
+   * - incidence_493
+     - como
+     - Incidence of ischemic heart disease
+     -
+   * - emr_m15755
+     - dismod-mr
+     - excess-mortality rate of post-MI ischemic heart disease
+     -
+   * - emr_m24694
+     - dismod-mr
+     - excess-mortality rate of MI due to ischemic heart disease
+     -
+   * - emr_m1817
+     - dismod-mr
+     - excess-mortality rate of angina due to ischemic heart disease
+     -
+   * - acute-sequelae
+     - model assumption
+     - {s378, s379}
+     -
+   * - post-mi-sequelae
+     - model assumption
+     - {s383, s384, s385, s1040, s5726}
+     -
+   * - angina-sequelae
+     - model assumption
+     - {s380, s381, s382, s953}
+     -
 
 
 Validation Criteria
 +++++++++++++++++++
+
+.. todo::
+
+  Add in validation criteria
 
 References
 ----------
