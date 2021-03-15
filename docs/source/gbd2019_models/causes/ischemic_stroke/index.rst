@@ -141,9 +141,17 @@ Assumptions and Limitations
   and the limitations these assumptions impose on the applicability of the
   model.
 
+
 Cause Model Diagram
 +++++++++++++++++++
 
+According to GBD 2019, stroke cases are considered acute from the day of incidence of a first-ever stroke through day 28 following the event. Post, also known as chronic, stroke includes the sequelae of an acute stroke AND all recurrent stroke events. Stroke cases are considered post beginning 28 days following the occurrence of an event. Post stroke includes the sequelae of an acute stroke AND all recurrent stroke events.’’ 
+
+ 
+
+The risk factor of BMI, SBP, LDL cholesterol, smoking, FPG, physical inactivity, total alcohol inactivity, should all affect the transition rates 1 and 3 through the GBD measure of incidence for each stroke cause. 
+
+.. image:: cause_model_is.svg
 
 
 State and Transition Data Tables
@@ -300,21 +308,6 @@ State and Transition Data Tables
 Definitions
 """""""""""
 
-This table contains the definitions of all the states in **cause model diagram**. 
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
 
 For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
 
