@@ -244,8 +244,8 @@ Transition Data
    * - 1
      - S
      - A
-     - incidence_c493
-     -
+     - :math:`\frac{\text{incidence_m24694}}{(1-\text{prevalence_c493})}`
+     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
    * - 2
      - A
      - P
@@ -254,13 +254,13 @@ Transition Data
    * - 3
      - P
      - A
-     - incidence_493
-     -
+     - :math:`\frac{\text{incidence_m24694}}{(1-\text{prevalence_c493})}`
+     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
    * - 4
      - S2
      - A2
-     - incidence_493
-     -
+     - :math:`\frac{\text{incidence_m1817}}{(1-\text{prevalence_c493})}`
+     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
 
 Data Sources
 """"""""""""
@@ -293,10 +293,14 @@ Data Sources
      - YLD appendix
      - Disability weight of sequela with id {id}
      -
-   * - incidence_493
-     - como
-     - Incidence of ischemic heart disease
-     -
+   * - :math:`\frac{\text{incidence_m24694}}{(1-\text{prevalence_c493})}`
+     - dismod-mr, como
+     - Incidence of MI due to ischemic heart disease
+     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
+   * - :math:`\frac{\text{incidence_m1817}}{(1-\text{prevalence_c493})}`
+     - dismod-mr, como
+     - Incidence of angina due to ischemic heart disease
+     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
    * - emr_m15755
      - dismod-mr
      - excess-mortality rate of post-MI ischemic heart disease
@@ -326,9 +330,10 @@ Data Sources
 Validation Criteria
 +++++++++++++++++++
 
-.. todo::
+At the IHD cause level:
 
-  Add in validation criteria
+  - Validate that the simulation comes up with rates within X% of the GBD estimates for age-/sex-specific incidence, prevalence, excess mortality, cause-specific mortality, and all-cause mortality rates
+  - Is CSMR close to last known GBD2019 CSMR? Is it close to FHS CSMR for the same year?
 
 References
 ----------
