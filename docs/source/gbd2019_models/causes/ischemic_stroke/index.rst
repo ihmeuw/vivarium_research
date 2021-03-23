@@ -70,7 +70,129 @@ GBD 2019 Modeling Strategy
 
 .. todo::
 
-  Add an overview of the GBD modeling section.
+Definitions
+
+  Ischemic stroke is defined as: an episode of neurological dysfunction caused by focal cerebral, spinal, or retinal infarction.
+
+.. list-table:: GBD 2019 Ischemic Stroke Definitions
+   :widths: 15 15 60
+   :header-rows: 1
+
+   * - Measure
+     - Type
+     - Definition
+   * - Incidence
+     - Reference
+     - First-ever acute ischemic stroke, including fatal and nonfatal events
+   * - Incidence
+     - Alternative
+     - First ever and recurrent ischemic stroke
+   * - Incidence
+     - Alternative
+     - Incident stroke events, subtype not specified
+   * - Incidence
+     - Alternative
+     - Nonfatal ischemic stroke only
+   * - Incidence
+     - Alternative
+     - Ischemic stroke from administrative data, including inpatient hospital data and claims
+
+
+
+Data Sources
+
+  Data sources include data from literature reviews, inpatient hospital data, claims data, and unpublished stroke registry data.
+
+
+Severity Splits
+
+ Severity split inputs
+
+ The table below illustrates the severity level, lay description, and disability weights for GBD 2019. 
+ For GBD 2016, we undertook a review to identify epidemiologic literature which reported the degree of disability at 28 days (for acute stroke) or one year (for chronic stroke) using the modified Rankin scale (mRS) and the Mini-Mental State Examination (MMSE) or the Montreal Cognitive Assessment (MoCA). 
+ The mRS assesses functional capabilities, while the MMSE and MoCA tests provide evaluations of cognitive functioning. 
+ We then mapped these measures to the existing GBD categories as indicated below. 
+ This approach allowed us to include location-specific information and can be updated as more data on functional or cognitive status become available.
+
+
+.. list-table:: Acute Stroke Severity Splits
+   :widths: 15 50 10 10 10
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - Modified Rankin score
+     - Cognitive status
+     - DW (95% CI)
+   * - Stroke, mild
+     - Has some difficulty in moving around and some weakness in one hand, but is able to walk without help.
+     - 1
+     - N/A
+     - 0.019 (0.01–0.032)
+   * - Stroke, moderate
+     - Has some difficulty in moving around, and in using the hands for lifting and holding things, dressing, and grooming.
+     - 2, 3
+     - MoCA>=24 or MMSE>=26
+     - 0.07 (0.046–0.099)
+   * - Stroke, moderate plus cognition problems
+     - Has some difficulty in moving around, in using the hands for lifting and holding things, dressing and grooming, and in speaking. The person is often forgetful and confused.
+     - 2, 3
+     - MoCA<24 or MMSE<26
+     - 0.316 (0.206–0.437)
+   * - Stroke, severe
+     - Is confined to bed or a wheelchair, has difficulty speaking, and depends on others for feeding, toileting, and dressing.
+     - 4, 5
+     - MoCA>=24 or MMSE>=26
+     - 0.552 (0.377–0.707)
+   * - Stroke, severe plus cognition problems
+     - Is confined to bed or a wheelchair, depends on others for feeding, toileting, and dressing, and has difficulty speaking, thinking clearly, and remembering things.
+     - 
+     - MoCA<24 or MMSE<26
+     - 0.588 (0.411–0.744)
+
+
+
+.. list-table:: Chronic Stroke Severity Splits
+   :widths: 15 50 10 10 10
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - Modified Rankin score
+     - Cognitive status
+     - DW (95% CI)
+   * - Stroke, asymptomatic
+     - 
+     - 0
+     - N/A
+     - N/A
+   * - Stroke, long-term consequences, mild
+     - Has some difficulty in moving around and some weakness in one hand, but is able to walk without help.
+     - 1
+     - N/A
+     - 0.019 (0.01–0.032)
+   * - Stroke, long-term consequences, moderate
+     - Has some difficulty in moving around, and in using the hands for lifting and holding things, dressing, and grooming.
+     - 2, 3
+     - MoCA>=24 or MMSE>=26
+     - 0.07 (0.046–0.099)
+   * - Stroke, long-term consequences, moderate plus cognition problems
+     - Has some difficulty in moving around, in using the hands for lifting and holding things, dressing and grooming, and in speaking. The person is often forgetful and confused.
+     - 2, 3
+     - MoCA<24 or MMSE<26
+     - 0.316 (0.206–0.437)
+   * - Stroke, long-term consequences, severe
+     - Is confined to bed or a wheelchair, has difficulty speaking, and depends on others for feeding, toileting, and dressing.
+     - 4, 5
+     - MoCA>=24 or MMSE>=26
+     - 0.552 (0.377–0.707)
+   * - Stroke, long-term consequences, severe plus cognition problems
+     - Is confined to bed or a wheelchair, depends on others for feeding, toileting, and dressing, and has difficulty speaking, thinking clearly, and remembering things.
+     - 4, 5
+     - MoCA<24 or MMSE<26
+     - 0.588 (0.411–0.744)
+
+
 
 Cause Hierarchy
 +++++++++++++++
