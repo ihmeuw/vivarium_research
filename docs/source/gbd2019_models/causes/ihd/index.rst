@@ -41,9 +41,91 @@ Chronic ischemic heart disease can cause signs and symptoms such as angina, anxi
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. todo::
+GBD 2019 Non-Fatal Modeling Strategy
+++++++++++++++++++++++++++++++++++++
 
-  Add an overview of the GBD modeling section.
+**Case definitions:**\
+
+1. Acute myocardial infarction (MI): Definite and possible MI according to the third universal definition of myocardial infarction:
+  
+  a. When there is clinical evidence of myocardial necrosis in a clinical setting consistent with myocardial ischaemia or
+  b. Detection of a rise and/or fall of cardiac biomarker values and with at least one of the following: i) symptoms of ischaemia, ii) new or presumed new ST-segment-T wave changes or new left bundle branch block, iii) development of pathological Q waves in the ECG, iv) imaging evidence of new loss of viable myocardium or new regional wall motion abnormality, or v) identification of an intracoronary thrombus by angiography or autopsy.
+  c. Sudden (abrupt) unexplained cardiac death, involving cardiac arrest or no evidence of a non-coronary cause of death
+  d. Prevalent MI is considered to last from the onset of the event to 28 days after the event and is divided into an acute phase (0-2 days) and subacute (3-28 days).
+
+2. Chronic IHD:
+  
+  a. Angina; clinically diagnosed stable exertional angina pectoris or definite angina pectoris according to the Rose Angina Questionnaire, physician diagnosis, or taking nitrate medication for the relief of chest pain.
+  b. Asymptomatic ischaemic heart disease following myocardial infarction; survival to 28 days following incident MI. The GBD study does not use estimates based on ECG evidence for prior MI, due to its limited specificity and sensitivity.
+
+
+**Input data:**\
+
+Apart from inpatient hospital and inpatient claims data, we did not include any data from sources other than the literature for myocardial infarction. 
+
+The primary input for the asymptomatic ischaemic heart disease following myocardial infarction model are 28-day survivors calculated from the excess mortality estimates for the myocardial infarction model. We included data for excess mortality and standardised mortality ratio to inform the estimates of survival after myocardial infarction.
+
+For angina, the data sources used include literature data, survey data, and U.S. claims data (but we did not include inpatient hospital data from any locations). All outpatient data were excluded as they were implausibly low for all locations when compared with literature and claims data.
+
+**Severity split inputs:**\
+
+Acute myocardial infarction was split into two severity levels by length of time since the event – days 1 and 2 versus days 3 through 28. Disability weights were established for these two severities using the standard approach for GBD 2019. 
+
+.. list-table:: Severity distribution for acute myocardial infarction
+   :widths: 15 25 12
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - DW (95% CI)
+   * - Acute myocardial infarction, days 1-2
+     - Has severe chest pain that becomes worse with any physical activity. The person feels nauseated, short of breath, and very anxious
+     - 0.432 (0.288–0.579)
+   * - Acute myocardial infarction, days 3-28 
+     - Gets short of breath after heavy physical activity, and tires easily, but has no problems when at rest. The person has to take medication every day and has some anxiety. 
+     - 0.074 (0.049–0.105)
+
+Asymptomatic ischaemic heart disease following myocardial infarction was all assigned to the asymptomatic severity level. No disability weight is assigned to this level. 
+
+.. list-table:: Severity distribution for asymptomatic ischaemic heart disease following myocardial infarction
+   :widths: 15 25 12
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - DW (95% CI)
+   * - Asymptomatic ischaemic heart disease
+     - 
+     - 0.0
+
+Angina was split into asymptomatic, mild, moderate, and severe groups using information from MEPS. Disability weights were established for these severities using the standard approach for GBD 2019. 
+
+.. list-table:: Severity distribution for angina pectoris
+   :widths: 15 25 12
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - DW (95% CI)
+   * - Asymptomatic angina
+     - 
+     - 0.0
+   * - Mild angina
+     - Has chest pain that occurs with strenuous physical activity, such as running or lifting heavy objects. After a brief rest, the pain goes away.
+     - 0.033 (0.02–0.052)
+   * - Moderate angina
+     - Has chest pain that occurs with moderate physical activity, such as walking uphill or more than half a kilometer (around a quarter-mile) on level ground. After a brief rest, the pain goes away.
+     - 0.08 (0.052–0.113)
+   * - Severe angina
+     - Has chest pain that occurs with minimal physical activity, such as walking only a short distance. After a brief rest, the pain goes away. The person avoids most physical activities because of the pain.
+     - 0.167 (0.11–0.24)
+
+GBD 2019 Fatal Modeling Strategy
+++++++++++++++++++++++++++++++++
+
+**Input data:**\
+
+Vital registration and verbal autopsy data were used to model ischaemic heart disease.
 
 Cause Hierarchy
 +++++++++++++++
@@ -95,19 +177,16 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-.. todo::
+The aspects of the disease this cause model is designed to simulate are the states, transitions, and sequelae. The Vivarium model of IHD has been of a similar design to GBD 2019 by modeling IHD using MI sequelae to estimate the prevalence of IHD. Like GBD 2019, Vivarium's design includes several states:
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+  a) Acute myocardial infarction ('Acute MI' or AMI) is a GBD sequela and simulants should have myocardial infarction at the GBD incidence rate. Vivarium's design of 'Acute MI' is modeled exactly after GBD 2019's 'Acute MI' case definition and informed by the GBD 2019 "Myocardial infarction due to ischemic heart disease - EMR comparison"
+  b) Post-MI is a state entered by survivors of AMI. Vivarium's design of 'Post MI' is modeled exactly after GBD 2019's 'Chronic IHD' case definition, which is captured in GBD as the "Asymptomatic Ischemic Heart Disease following myocardial infarction" dismod model and sequelae.
+  c) Angina (stable coronary artery disease) is a state entered by individuals based on the incidence rate of the "angina due to ischemic heart disease" dismod model and sequelae.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+The risk factors BMI, SBP, LDL-c, smoking, FPG, physical inactivity, total alcohol inactivity, diet high in processed meats, and diet high in sugar-sweetened beverage could all affect the transition rates 1, 3, and 4 listed below, through the GBD measure of incidence_c493.
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -338,6 +417,6 @@ At the IHD cause level:
 References
 ----------
 
-.. todo::
+Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
 
-  Update references to GBD 2019 once published
+.. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
