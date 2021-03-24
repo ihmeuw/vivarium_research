@@ -96,7 +96,7 @@ Asymptomatic ischaemic heart disease following myocardial infarction was all ass
      - DW (95% CI)
    * - Asymptomatic ischaemic heart disease
      - 
-     - N/A
+     - 0.0
 
 Angina was split into asymptomatic, mild, moderate, and severe groups using information from MEPS. Disability weights were established for these severities using the standard approach for GBD 2019. 
 
@@ -109,7 +109,7 @@ Angina was split into asymptomatic, mild, moderate, and severe groups using info
      - DW (95% CI)
    * - Asymptomatic angina
      - 
-     - N/A
+     - 0.0
    * - Mild angina
      - Has chest pain that occurs with strenuous physical activity, such as running or lifting heavy objects. After a brief rest, the pain goes away.
      - 0.033 (0.02–0.052)
