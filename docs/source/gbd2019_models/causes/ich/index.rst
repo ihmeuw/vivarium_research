@@ -14,7 +14,7 @@ Disease Overview
 
 A stroke occurs when the blood supply to part of your brain is interrupted or reduced, preventing brain tissue from getting oxygen and nutrients. There are two main causes of stroke: a blocked artery (ischemic stroke) or leaking or bursting of a blood vessel (intracerebral hemorrhage and subarachnoid hemorrhage (combination is referred to as hemorrhagic stroke)). Some people may have only a temporary disruption of blood flow to the brain. This is known as a transient ischemic attack (TIA); symptoms of a TIA last less than 24 hours. While there are no long term-effects of TIAs, they have been shown to increase the risk of subsequent strokes. 
 
-Intracerebral hemorrhage is a sudden leakage of blood from into the brain, causing injury to the tissue and resulting in the symptoms of a stroke as described above.
+Intracerebral hemorrhage is a sudden leakage of blood into the brain, causing injury to the tissue and resulting in the symptoms of a stroke as described above.
 [Mayo-Clinic]_
 [UCLA-Health]_
 
