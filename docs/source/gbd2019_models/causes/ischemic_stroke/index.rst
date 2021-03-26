@@ -33,165 +33,82 @@ Disease Overview
 Disease Description
 -------------------
 
-Stroke was defined according to WHO criteria - rapidly developing clinical
-signs of focal (at times global) disturbance of cerebral function lasting more
-than 24 hours or leading to death with no apparent cause other than that of
-vascular origin. Data on transient ischaemic attack (TIA) were not included.
-[WHO-Stroke-Definition]_
+A stroke occurs when the blood supply to part of your brain is interrupted or reduced, preventing brain tissue from getting oxygen and nutrients. There are two main causes of stroke: a blocked artery (ischemic stroke) or leaking or bursting of a blood vessel (intracerebral hemorrhage and subarachnoid hemorrhage (combination is referred to as hemorrhagic stroke). Some people may have only a temporary disruption of blood flow to the brain. This is known as a transient ischemic attack (TIA); symptoms of a TIA last less than 24 hours. While there are no long term-effects of TIAs, they have been shown to increase the risk of subsequent strokes. 
 
-
-In 2019, global prevalence of ischemic stroke was 77.2 million (95% UI 68.9 to 86.5 million).
-For females, the global prevalence in 2019 was 44 million (95% UI 39.4 to 49.1 million).
-For males, the global prevalence in 2019 was 33.2 million (95% UI 29.5 to 37.6 million).
-
-The global incidence in 2019 was 7.6 million new cases (95% UI 6.6 to 8.9 million).
-For females, the global incidence was 4.2 million new cases (95% UI 3.6 to 4.9 million).
-For males, the global incidence was 3.4 million new cases (95% UI 3 to 4 million).
-`GBD Compare <https://vizhub.healthdata.org/gbd-compare/>`_
-
-.. todo:: 
-
-	move this to references section
-
-.. [WHO-Stroke-Definition]
-   Hatano S. Experience from a multicentre stroke register: a preliminary
-   report. Bull WHO 54, 541- 553. 1976.
-
-
-.. todo::
-
-   Add more information and references. In particular, find data about global
-   prevalence and relation to disease fatal and non-fatal description.
+ 
+Ischemic stroke is the most common type of stroke, particularly in older adults. An ischemic stroke occurs when the blood vessels leading to or in the brain become narrowed or blocked, causing severely reduced blood flow. Blocked or narrowed blood vessels are caused by fatty deposits that build up in blood vessels or by blood clots or other debris that travel through your bloodstream and lodge in the blood vessels in your brain. 
+[Mayo-Clinic-Stroke-Definition]_
 
 
 
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. todo::
+**Non-Fatal Modeling Strategy**
 
-Definitions
+Stroke was defined according to WHO criteria - rapidly developing clinical signs of focal (at times global) disturbance of cerebral function lasting more than 24 hours or leading to death with no apparent cause other than that of vascular origin. Data on transient ischemic attack (TIA) were not included. 
+[WHO-Stroke-Definition]_ 
+Ischemic stroke is defined by GBD as an episode of neurological dysfunction caused by focal cerebral, spinal, or retinal infarction. We model first ever strokes as acute events; recurrent strokes are captured in the chronic phase of the modeling process. 
 
-  Ischemic stroke is defined as: an episode of neurological dysfunction caused by focal cerebral, spinal, or retinal infarction.
-
-.. list-table:: GBD 2019 Ischemic Stroke Definitions
-   :widths: 15 15 60
-   :header-rows: 1
-
-   * - Measure
-     - Type
-     - Definition
-   * - Incidence
-     - Reference
-     - First-ever acute ischemic stroke, including fatal and nonfatal events
-   * - Incidence
-     - Alternative
-     - First ever and recurrent ischemic stroke
-   * - Incidence
-     - Alternative
-     - Incident stroke events, subtype not specified
-   * - Incidence
-     - Alternative
-     - Nonfatal ischemic stroke only
-   * - Incidence
-     - Alternative
-     - Ischemic stroke from administrative data, including inpatient hospital data and claims
-
-
-
-Data Sources
-
-  Data sources include data from literature reviews, inpatient hospital data, claims data, and unpublished stroke registry data.
-
+For ischemic stroke, data using alternate definitions of incidence and excess mortality were adjusted relative to the reference case definition using MR-BRT. The reference case definition for ischemic stroke is first ever, subtype-specific data which also includes subjects who did not survive to hospital admission. We incorporate data from the scientific literature, registries, and administrative inpatient records in our analysis. 
 
 Severity Splits
 
- Severity split inputs
-
- The table below illustrates the severity level, lay description, and disability weights for GBD 2019. 
- For GBD 2016, we undertook a review to identify epidemiologic literature which reported the degree of disability at 28 days (for acute stroke) or one year (for chronic stroke) using the modified Rankin scale (mRS) and the Mini-Mental State Examination (MMSE) or the Montreal Cognitive Assessment (MoCA). 
- The mRS assesses functional capabilities, while the MMSE and MoCA tests provide evaluations of cognitive functioning. 
- We then mapped these measures to the existing GBD categories as indicated below. 
- This approach allowed us to include location-specific information and can be updated as more data on functional or cognitive status become available.
+ Details on the severity levels for acute and chronic ischemic stroke in GBD and the associated disability weight (DW) with that severity. These values are valid only for results from GBD 2019 and GBD 2017
 
 
-.. list-table:: Acute Stroke Severity Splits
-   :widths: 15 50 10 10 10
+
+.. list-table:: Severity Distribution
+   :widths: 5 5 30 5 5 10
    :header-rows: 1
 
    * - Severity level
-     - Lay description
-     - Modified Rankin score
-     - Cognitive status
-     - DW (95% CI)
-   * - Stroke, mild
-     - Has some difficulty in moving around and some weakness in one hand, but is able to walk without help.
-     - 1
-     - N/A
-     - 0.019 (0.01–0.032)
-   * - Stroke, moderate
-     - Has some difficulty in moving around, and in using the hands for lifting and holding things, dressing, and grooming.
-     - 2, 3
-     - MoCA>=24 or MMSE>=26
-     - 0.07 (0.046–0.099)
-   * - Stroke, moderate plus cognition problems
-     - Has some difficulty in moving around, in using the hands for lifting and holding things, dressing and grooming, and in speaking. The person is often forgetful and confused.
-     - 2, 3
-     - MoCA<24 or MMSE<26
-     - 0.316 (0.206–0.437)
-   * - Stroke, severe
-     - Is confined to bed or a wheelchair, has difficulty speaking, and depends on others for feeding, toileting, and dressing.
-     - 4, 5
-     - MoCA>=24 or MMSE>=26
-     - 0.552 (0.377–0.707)
-   * - Stroke, severe plus cognition problems
-     - Is confined to bed or a wheelchair, depends on others for feeding, toileting, and dressing, and has difficulty speaking, thinking clearly, and remembering things.
-     - 
-     - MoCA<24 or MMSE<26
-     - 0.588 (0.411–0.744)
-
-
-
-.. list-table:: Chronic Stroke Severity Splits
-   :widths: 15 50 10 10 10
-   :header-rows: 1
-
-   * - Severity level
+     - Acute or Chronic
      - Lay description
      - Modified Rankin score
      - Cognitive status
      - DW (95% CI)
    * - Stroke, asymptomatic
+     - Chronic only
      - 
      - 0
      - N/A
      - N/A
-   * - Stroke, long-term consequences, mild
+   * - Stroke, mild
+     - Both
      - Has some difficulty in moving around and some weakness in one hand, but is able to walk without help.
      - 1
      - N/A
      - 0.019 (0.01–0.032)
-   * - Stroke, long-term consequences, moderate
+   * - Stroke, moderate
+     - Both
      - Has some difficulty in moving around, and in using the hands for lifting and holding things, dressing, and grooming.
      - 2, 3
      - MoCA>=24 or MMSE>=26
      - 0.07 (0.046–0.099)
-   * - Stroke, long-term consequences, moderate plus cognition problems
+   * - Stroke, moderate plus cognition problems
+     - Both
      - Has some difficulty in moving around, in using the hands for lifting and holding things, dressing and grooming, and in speaking. The person is often forgetful and confused.
      - 2, 3
      - MoCA<24 or MMSE<26
      - 0.316 (0.206–0.437)
-   * - Stroke, long-term consequences, severe
+   * - Stroke, severe
+     - Both
      - Is confined to bed or a wheelchair, has difficulty speaking, and depends on others for feeding, toileting, and dressing.
      - 4, 5
      - MoCA>=24 or MMSE>=26
      - 0.552 (0.377–0.707)
-   * - Stroke, long-term consequences, severe plus cognition problems
+   * - Stroke, severe plus cognition problems
+     - Both
      - Is confined to bed or a wheelchair, depends on others for feeding, toileting, and dressing, and has difficulty speaking, thinking clearly, and remembering things.
-     - 4, 5
+     - 
      - MoCA<24 or MMSE<26
      - 0.588 (0.411–0.744)
 
+
+**Fatal Modeling Strategy**
+
+Vital registration data were used as input data to model deaths from ischemic stroke in CODEm.  
 
 
 Cause Hierarchy
@@ -734,6 +651,12 @@ Validation Criteria
 References
 ----------
 
+.. [Mayo-Clinic-Stroke-Definition]
+   `Stroke.` Mayo Clinic, Mayo Foundation for Medical Education and Research, 9 Feb. 2021, www.mayoclinic.org/diseases-conditions/stroke/symptoms-causes/syc-20350113. 
+
+
+
+
 .. todo::
 
   Update references to GBD 2019 once published
@@ -768,106 +691,3 @@ References
 .. _CoD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
 .. _CoD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32203-7/attachment/5045652a-fddf-48e2-9a84-0da99ff7ebd4/mmc1.pdf
 
-.. tip::
-
-   In the `citations
-   <https://docutils.sourceforge.io/docs/user/rst/quickref.html#citations>`_
-   above, replace "Pages ???-???" with the correct page numbers for your cause
-   in the two appendices, and replace the `Cause-Model-Template` suffix in the
-   citation names with the name of your cause. The suffix is necessary because
-   Sphinx requires citation names to be unique `throughout the entire
-   documentation
-   <http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#citations>`_.
-
-   You can follow the syntax above to add your own references, and you can cite
-   the references such as [GBD-2017-YLD-Appendix-Cause-Model-Template]_ and
-   [GBD-2017-CoD-Appendix-Cause-Model-Template]_ from within your text by
-   enclosing the full citation name in brackets and adding a trailing
-   underscore, like this: :code:`[Full-Citation-Name]_`.
-
-   Delete this :code:`.. tip::` `directive
-   <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
-   once you fill in the correct page numbers for your cause in the appendices
-   and rename the references appropriately.
-
-.. admonition:: Todo for template development
-
-  Is there a better solution to the global citation problem than making citation
-  names longer to ensure that they're unique?
-
-  The same "append a suffix" rule would also apply to other common citations
-  like WHO, CDC, UpToDate, and Wikipedia. For example, the WHO citation for
-  Measles would be [WHO-Measles].
-
-  In `Pull Request 99`_, we decided to go with the above naming convention for
-  now. But @James said it should be possible to adapt the sphinx builder to
-  resolve citations to the most local level if desired.
-
-.. admonition:: Todo for template development
-
-  Decide on section names and overall structure.
-
-  In `Pull Request 93`_, people seemed generally good with the existing
-  structure, but there were several suggestions for reorganization (in
-  particular from @James and @Beatrix) that I have implemented above.
-
-  Here are some of the questions and comments we have discussed so far:
-
-  **Question:** Are the sections in a good order?
-
-  In `Pull Request 91`_, @Lu said:
-
-    The template looks good to me. I was putting the model assumptions and
-    limitations section right after the cause model diagram. But I think
-    this order makes more sense.
-
-    ("This order" referring to: `Cause Model Diagram`, `Data Description`,
-    `Model Assumptions and Limitations`.)
-
-  And @Yongquan said:
-
-    Model assumptions and/or limitations can be mentioned in summary disease
-    model description and fully explained in Model Assumptions and
-    Limitations section.
-
-  Whereas @James said:
-
-    I think the restrictions in this section (`Model Assumptions and
-    Limitations`) should move up to the GBD Modeling section.
-
-    Also, perhaps we should have a section following the GBD section called
-    `vivarium modeling strategy` which would include the scope and the
-    restrictions we apply to the model (which might be different than GBD's
-    restrictions). To serve as a narrative description accompanying the cause
-    model diagram and data tables.
-
-  On the other hand, @Kiran said:
-
-    I am good with this structure. But, we have to make changes to the
-    causes that are finished. Also, for restrictions I like it under
-    Assumptions and Limitations section. We can add subsections if there are
-    different types of restrictions.
-
-  **Question:** Do we have examples of restrictions we would apply that are
-  different from GBD restrictions?
-
-    See `Pull Request 93`_ for some thoughts on this question from @Ali and
-    @James.
-
-  Also, in `Pull Request 76`_, @Beatrix said:
-
-    I kind of like `Model Assumptions and Limitations` before the data
-    description, because i like the idea of going from most high-level to most
-    nitty-gritty as you go through the document. In that schema, in my mind,
-    it would go:
-
-    | model diagram,
-    | then limitations,
-    | then data description
-    |
-    | (as kiran has).
-
-    If we wanted the diagram near the tables that reference it (which i also
-    like), what if we did model diagram, then data descriptions, then
-    limitations? to maintain some of the newspaper-style high level --->
-    detailed ordering?
