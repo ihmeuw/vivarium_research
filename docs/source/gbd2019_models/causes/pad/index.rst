@@ -5,10 +5,6 @@
 Peripheral Arterial Disease
 ===========================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
-
 .. contents::
    :local:
    :depth: 1
@@ -32,7 +28,13 @@ Peripheral Arterial Disease
 
 Disease Overview
 ----------------
-Patients with peripheral arterial disease (PAD) have decreased lower extremity arterial perfusion which is commonly referred to as “poor circulation.” In most cases of PAD, atherosclerotic plaques narrow the arterial flow lumen which restricts blood flow to the distal extremity. Reduced blood flow can cause thigh or calf pain with walking due to temporary ischemia of the leg muscles during exertion. Walking pain from PAD is referred to as intermittent claudication which means “to limp.” Many patients with PAD have either no symptoms or atypical complaints that do not strictly conform to the definition of claudication. Others may develop limb-threatening compromise of blood flow, necessitating emergent surgery. PAD acts as a marker for systemic atherosclerosis. PAD usually involves atherosclerotic disease in the abdominal aorta, iliac, and femoral arteries. The pathophysiology of atherosclerosis involves complex interactions between cholesterol and vascular cells. Atherosclerotic plaque builds up slowly on the inside of arteries. In the early stages of PAD, the arteries compensate for the plaque buildup by dilating to preserve flow through the vessel. Eventually, the artery cannot dilate any further, and the atherosclerotic plaque starts to narrow the arterial flow lumen.
+Patients with peripheral arterial disease (PAD) have decreased lower extremity arterial perfusion which is commonly referred to as “poor circulation.” In most cases of PAD, atherosclerotic plaques narrow the arterial flow lumen which restricts blood flow to the distal extremity. 
+Reduced blood flow can cause thigh or calf pain with walking due to temporary ischemia of the leg muscles during exertion. 
+Walking pain from PAD is referred to as intermittent claudication which means “to limp.” Many patients with PAD have either no symptoms or atypical complaints that do not strictly conform to the definition of claudication. 
+Others may develop limb-threatening compromise of blood flow, necessitating emergent surgery. PAD acts as a marker for systemic atherosclerosis. PAD usually involves atherosclerotic disease in the abdominal aorta, iliac, and femoral arteries. 
+The pathophysiology of atherosclerosis involves complex interactions between cholesterol and vascular cells. 
+Atherosclerotic plaque builds up slowly on the inside of arteries. In the early stages of PAD, the arteries compensate for the plaque buildup by dilating to preserve flow through the vessel. 
+Eventually, the artery cannot dilate any further, and the atherosclerotic plaque starts to narrow the arterial flow lumen.
 [PAD-Definition]_
 
 
@@ -66,7 +68,8 @@ Details on the severity levels for Peripheral Arterial Disease in GBD 2019 and t
 
 
 
-DisMod-MR 2.1 was used to model both the overall prevalence of PAD and the proportion of peripheral arterial disease with intermittent claudication. To obtain final estimates for the sequelae of interest, we multiplied the prevalence model by the proportion model at the draw level to generate the prevalence of symptomatic and asymptomatic peripheral vascular disease. To obtain final estimates for the sequelae of interest, we multiplied the prevalence model by the proportion model at the draw level to generate the prevalence of symptomatic and asymptomatic peripheral vascular disease. 
+DisMod-MR 2.1 was used to model both the overall prevalence of PAD and the proportion of peripheral arterial disease with intermittent claudication. 
+To obtain final estimates for the sequelae of interest, we multiplied the prevalence model by the proportion model at the draw level to generate the prevalence of symptomatic and asymptomatic peripheral vascular disease. 
 
 
 **Fatal Modeling Strategy**
@@ -77,12 +80,10 @@ We included vital registration data in a standard CODEm approach to model periph
 Cause Hierarchy
 +++++++++++++++
 
+.. image:: cause_hierarchy_pad.svg
+
 Restrictions
 ++++++++++++
-
-The following table describes any restrictions in GBD 2019 on the effects of
-this cause (such as being only fatal or only nonfatal), as well as restrictions
-on the ages and sexes to which the cause applies.
 
 .. list-table:: GBD 2019 Cause Restrictions
    :widths: 15 15 20
@@ -92,57 +93,54 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - False
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
-     -
+     - 40
+     - [40, 44 years), age_group_id=13 
    * - YLL age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235 
    * - YLD age group start
-     -
-     -
+     - 40
+     - [40, 44 years), age_group_id=13 
    * - YLD age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235 
 
 
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
 
 Scope
 +++++
 
-.. todo::
+PAD should occur at the incidence of PAD in the DisMod model. PAD is then a chronic state without remission. 
+Transition from prevalent PAD to death should occur at the GBD EMR rate for PAD from the PAD DisMod model. 
+The transition rate from the susceptible state to the prevalent state should be modified by fasting plasma glucose, smoking, systolic blood pressure, and impaired kidney function.
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
+PAD is highly comorbid with ischemic heart disease (IHD). 
+Because of this, persons with PAD have high with-condition mortality, but low cause-specific mortality.
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
 
 Cause Model Diagram
 +++++++++++++++++++
+
+
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
