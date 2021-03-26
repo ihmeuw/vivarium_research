@@ -14,7 +14,7 @@ Peripheral Arterial Disease
    :depth: 1
 
 .. list-table:: Abbreviations
-  :widths: 15 15 15
+  :widths: 10 15 20
   :header-rows: 1
 
   * - Abbreviation
@@ -23,11 +23,16 @@ Peripheral Arterial Disease
   * - PAD
     - Peripheral Arterial Disease
     - 
+  * - ABI
+    - Ankle-Brachial Index
+    - The ankle-brachial index test compares the blood pressure measured at your ankle with the blood pressure measured at your arm. It is a method of checking for PAD.
+
+[ABI-Definition]_  
 
 
 Disease Overview
 ----------------
-Patients with peripheral arterial disease (PAD) have decreased lower extremity arterial perfusion which is commonly referred to as “poor circulation.” In most cases of PAD, atherosclerotic plaques narrow the arterial flow lumen which restricts blood flow to the distal extremity. Reduced blood flow can cause thigh or calf pain with walking due to temporary ischemia of the leg muscles during exertion. Walking pain from PAD is referred to as intermittent claudication which means “to limp.” Many patients with PAD have either no symptoms or atypical complaints that do not strictly conform to the definition of claudication. Others may develop limb-threatening compromise of blood flow, necessitating emergent surgery. PAD acts as a marker for systemic atherosclerosis. PAD usually involves atherosclerotic disease in the abdominal aorta, iliac, and femoral arteries. The pathophysiology of atherosclerosis involves complex interactions between cholesterol and vascular cells the details. Atherosclerotic plaque builds up slowly on the inside of arteries. In the early stages of PAD, the arteries compensate for the plaque buildup by dilating to preserve flow through the vessel. Eventually, the artery cannot dilate any further, and the atherosclerotic plaque starts to narrow the arterial flow lumen.
+Patients with peripheral arterial disease (PAD) have decreased lower extremity arterial perfusion which is commonly referred to as “poor circulation.” In most cases of PAD, atherosclerotic plaques narrow the arterial flow lumen which restricts blood flow to the distal extremity. Reduced blood flow can cause thigh or calf pain with walking due to temporary ischemia of the leg muscles during exertion. Walking pain from PAD is referred to as intermittent claudication which means “to limp.” Many patients with PAD have either no symptoms or atypical complaints that do not strictly conform to the definition of claudication. Others may develop limb-threatening compromise of blood flow, necessitating emergent surgery. PAD acts as a marker for systemic atherosclerosis. PAD usually involves atherosclerotic disease in the abdominal aorta, iliac, and femoral arteries. The pathophysiology of atherosclerosis involves complex interactions between cholesterol and vascular cells. Atherosclerotic plaque builds up slowly on the inside of arteries. In the early stages of PAD, the arteries compensate for the plaque buildup by dilating to preserve flow through the vessel. Eventually, the artery cannot dilate any further, and the atherosclerotic plaque starts to narrow the arterial flow lumen.
 [PAD-Definition]_
 
 
@@ -35,9 +40,39 @@ Patients with peripheral arterial disease (PAD) have decreased lower extremity a
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. todo::
+**Non-Fatal Modeling Strategy**
 
-  Add an overview of the GBD modeling section.
+Peripheral arterial disease was defined as having an ankle-brachial index (ABI) < 0.9. Intermittent claudication was defined clinically. Administrative claims data were adjusted to the reference (prevalence of PAD based on directly-measured ABI values) using MR-BRT.  
+
+
+We used the proportion of intermittent claudication to split the overall prevalence of peripheral arterial disease into symptomatic and asymptomatic peripheral vascular disease. The table below illustrates these values: 
+
+Details on the severity levels for Peripheral Arterial Disease in GBD 2019 and the associated disability weight (DW) with that severity.  
+
+
+.. list-table:: Severity Distribution
+   :widths: 15 30 15
+   :header-rows: 1
+
+   * - Severity level 
+     - Lay description 
+     - DW (95% CI) 
+   * - Asymptomatic
+     - No symptoms 
+     - No DW assigned 
+   * - Symptomatic 
+     - Has cramping pains in the legs after walking a medium distance. The pain goes away after a short rest. 
+     - 0.014 (0.007–0.025) 
+
+
+
+DisMod-MR 2.1 was used to model both the overall prevalence of PAD and the proportion of peripheral arterial disease with intermittent claudication. To obtain final estimates for the sequelae of interest, we multiplied the prevalence model by the proportion model at the draw level to generate the prevalence of symptomatic and asymptomatic peripheral vascular disease. To obtain final estimates for the sequelae of interest, we multiplied the prevalence model by the proportion model at the draw level to generate the prevalence of symptomatic and asymptomatic peripheral vascular disease. 
+
+
+**Fatal Modeling Strategy**
+
+We included vital registration data in a standard CODEm approach to model peripheral artery disease.
+
 
 Cause Hierarchy
 +++++++++++++++
@@ -439,6 +474,9 @@ References
 
 .. [PAD-Definition]
 Zemaitis MR, Boll JM, Dreyer MA. :title:`Peripheral Arterial Disease.` [Updated 2021 Mar 17]. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2021 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK430745/
+
+.. [ABI-Definition]
+:title:`Ankle-Brachial Index.` Mayo Clinic, Mayo Foundation for Medical Education and Research, 13 Feb. 2020. Available from: https://www.mayoclinic.org/tests-procedures/ankle-brachial-index/about/pac-20392934 
 
 .. todo::
 
