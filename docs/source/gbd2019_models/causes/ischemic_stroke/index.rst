@@ -4,9 +4,6 @@
 Ischemic Stroke
 ===============
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
 
 .. contents::
    :local:
@@ -59,7 +56,7 @@ Severity Splits
 
 
 .. list-table:: Severity Distribution
-   :widths: 5 5 30 5 5 10
+   :widths: 1 1 10 1 1 2
    :header-rows: 1
 
    * - Severity level
@@ -159,38 +156,23 @@ The following table describes any restrictions in GBD 2019 on the effects of thi
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
 
 Scope
 +++++
 
-.. todo::
+This cause model is designed to simulate the occurrence of first and recurrent acute ischemic stroke. It is not designed to simulate recurrent events where the second event is a different type of stroke. When incorporating risk factors, BMI, SBP, LDL cholesterol, smoking, FPG, physical inactivity, and total alcohol inactivity should affect transition rates 1 and 3 through the GBD measure of incidence for each stroke cause. 
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+Stroke cases are considered acute from the day of incidence of a first-ever stroke through day 28 following the event. The GBD category of chronic stroke includes the sequelae of an acute stroke AND all recurrent stroke events. Stroke cases are considered chronic beginning 28 days following the occurrence of an event. The incidence rate of first ever strokes and recurrent strokes are considered to be the same. 
 
 
 Cause Model Diagram
 +++++++++++++++++++
 
-According to GBD 2019, stroke cases are considered acute from the day of incidence of a first-ever stroke through day 28 following the event. Post, also known as chronic, stroke includes the sequelae of an acute stroke AND all recurrent stroke events. Stroke cases are considered post beginning 28 days following the occurrence of an event. Post stroke includes the sequelae of an acute stroke AND all recurrent stroke events.’’ 
-
- 
-
-The risk factor of BMI, SBP, LDL cholesterol, smoking, FPG, physical inactivity, total alcohol inactivity, should all affect the transition rates 1 and 3 through the GBD measure of incidence for each stroke cause. 
-
-.. image:: cause_model_is.svg
+.. image:: cause_model_stroke.svg
 
 
 State and Transition Data Tables
@@ -210,8 +192,8 @@ State and Transition Data Tables
      - **A**\ cute Ischemic Stroke
      - Simulant that is in duration-based period starting day of incidence of
        a first-ever stroke through day 28 following the event
-   * - P
-     - **P**\ ost Ischemic Stroke
+   * - C
+     - **C**\ hronic Ischemic Stroke
      - Simulant that has survived more than 28 days following their last
        ischemic stroke and who may be experiencing chronic elevated mortality
        and disability due to the event.
