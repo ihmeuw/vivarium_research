@@ -69,7 +69,7 @@ Severity Splits
      - Cognitive status
      - DW (95% CI)
    * - Stroke, asymptomatic
-     - Chornic only
+     - Chronic only
      - 
      - 0
      - N/A
