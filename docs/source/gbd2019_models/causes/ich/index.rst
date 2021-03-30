@@ -138,52 +138,24 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-.. todo::
-
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+This cause model is designed to simulate the occurrence of first and recurrent acute intracerebral hemorrhage. It is not designed to simulate recurrent events where the second event is a different type of stroke. When incorporating risk factors, BMI, SBP, LDL cholesterol, smoking, FPG, physical inactivity, and total alcohol consumption should affect transition rates 1 and 3 through the GBD measure of incidence for each stroke cause. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+Stroke cases are considered acute from the day of incidence of a first-ever stroke through day 28 following the event. The GBD category of chronic stroke includes the sequelae of an acute stroke AND all recurrent stroke events. Stroke cases are considered chronic beginning 28 days following the occurrence of an event. The incidence rate of first ever strokes and recurrent strokes are considered to be the same. 
 
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: cause_model_stroke.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
 
 Definitions
 """""""""""
 
-This table contains the definitions of all the states in **cause model diagram**. 
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
-
-**SIR Model**
-
 .. list-table:: State Definitions
    :widths: 5 5 20
    :header-rows: 1
@@ -192,131 +164,79 @@ For example, the *Definitions* table for *SIR* and *With-Condition and Free of C
      - State Name
      - Definition
    * - S
-     - Susceptible
-     - Susceptible to {cause name}
-   * - I
-     - Infected
-     - Infected with {cause name}
-   * - R
-     - Recovered
-     - Infected with {cause name}
-
-
-**With-Condition and Free of Condition Model**
-
-.. list-table:: State Definitions
-   :widths: 1, 5, 10
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
+     - **S**\usceptible to Intracerebral Hemorrhage
+     - Simulant that has not already had an intracerebral hemorrhage
+   * - A
+     - **A**\cute Intracerebral Hemorrhage
+     - Simulant that is in duration-based period starting day of incidence of a first-ever stroke through day 28 following the event
    * - C
-     - With **C**\ ondition
-     - Born with {cause name}
-   * - F
-     - **F**\ ree of Condition
-     - Born without {cause name}
+     - **C**\hronic Intracerebral Hemorrhage
+     - Simulant that has survived more than 28 days following their last intracerebral hemorrhage and who may be experiencing chronic elevated mortality and disability due to the event. 
 
-Include states, their names and definitions appropriate to your model.
 
 States Data
 """""""""""
 
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. The common measures in each state are prevalence, birth prevalence, excess mortality rate and disability weights. 
-Cause specific mortality rate is the common measure for all states. In most of the models either prevalence or birth prevalence is used. 
-But in some rare cases like neonatal models both prevalence and birth prevalence are used in model initialization. The Value column contains the formula to calculate 
-the measure in each state.
-
-The structure of the table is as below. For each state, the measures and values must be included.
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
+.. list-table:: State Data
+   :widths: 5 10 10 20
    :header-rows: 1
-   
+
    * - State
      - Measure
      - Value
      - Notes
-   * - State
-     - prevalence
-     - 
-     - 
-   * - State
-     - birth prevalence
-     - 
-     - 
-   * - State
-     - excess mortality rate
-     - 
-     - 
-   * - State
-     - disabilty weights
-     - 
+   * - All
+     - cause-specific mortality rate (csmr)
+     - :math:`\frac{\text{deaths_c496}}{\text{population}}`
      -
-   * - ALL
-     - cause specific mortality rate
-     - 
-     - 
-
-An example of SI model with both prevalence and birth prevalence in the initialization is given below to explain better. 
-
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
-     - Value
-     - Notes
+   * - :math:`\text{D}_A`
+     - acute cause-specific mortality rate (csmr)
+     - :math:`\frac{\text{acute_deaths_c496}}{\text{population}}`
+     - custom CSMR split
+   * - :math:`\text{D}_C`
+     - chronic cause-specific mortality rate (csmr)
+     - :math:`\frac{\text{chronic_deaths_c496}}{\text{population}}`
+     - custom CSMR split
    * - S
      - prevalence
-     - 1-prevalence_cid
+     - :math:`1-\text{prevalence_c496}`
+     - 
+   * - A
+     - prevalence
+     - :math:`\sum\limits_{s \in sequelae} \text{acute_prevalence}_s`
+     - 
+   * - C
+     - prevalence
+     - :math:`\sum\limits_{s \in sequelae} \text{chronic_prevalence}_s`
      - 
    * - S
-     - birth prevalence
-     - 1-birth_prevalence_cid
-     - 
-   * - S
-     - excess mortality rate
+     - excess mortality rate (emr)
      - 0
      - 
+   * - A
+     - excess mortality rate (emr)
+     - emr_m24706
+     - 
+   * - C
+     - excess mortality rate (emr)
+     - emr_m10836
+     - 
    * - S
-     - disabilty weights
+     - disability weight
      - 0
-     -
-   * - I
-     - prevalence
-     - prevalence_cid
      - 
-   * - I
-     - birth prevalence
-     - birth_prevalence_cid
+   * - A
+     - disability weight
+     - :math:`\frac{1}{\text{acute_prevalence_c496}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{acute_prevalence}_s`
      - 
-   * - I
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population} \times \text{prevalence_cid}}`
-     - = (cause-specific mortality rate) / prevalence
-   * - I
-     - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_cid}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = total disability weight over all sequelae
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population}}`
+   * - C
+     - disability weight
+     - :math:`\frac{1}{\text{chronic_prevalence_c496}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{chronic_prevalence}_s`
      - 
 
 Transition Data
 """""""""""""""
 
-This table contains the measures needed for transition from one state to other in the cause model. The common measures used are *incident rate* to 
-move from Susceptible to Infected and *remission rate* to move from Infected to Susceptible or Recovered states. Some times there may not be transition 
-between states as in Neonatal disorders.
-
-The structure of the table is as below. 
-
 .. list-table:: Transition Data
    :widths: 10 10 10 20 30
    :header-rows: 1
@@ -326,64 +246,35 @@ The structure of the table is as below.
      - Sink 
      - Value
      - Notes
-   * - i
+   * - 1
      - S
-     - I
-     - 
-     - 
-   * - r
-     - I
-     - R
-     - 	
-     - 
- 
-
-An example, if the data is present in GBD,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
-     - S
-     - I
-     - :math:`\frac{\text{incidence_rate_cid}}{\text{1 - prevalence_cid}}`
-     - 
-   * - r
-     - I
-     - R
-     - remission_rate_cid
-     - 
-
-Sometimes, we might need to use *modelable entity id* to get data. Sometimes, we might need to calculate remission rate 
-based on average case duration. In that case, the row would look like,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - r
-     - I
-     - R
-     - remission_rate_cid :math:`= \frac{\text{365 person-days}}{\text{average case duration in days} \times \text{1 year}}`
-     - 
-	 
+     - A
+     - incidence_c496
+     - This is the population rate, not the susceptible rate
+   * - 2
+     - A
+     - P
+     - 28 days
+     - Duration-based transition from acute state into chronic state
+   * - 3
+     - C
+     - A
+     - incidence_c496
+     - Assumption is that recurrent events have the same incidence rate as first ever events; population rate
+   * - 4
+     - A
+     - :math:`\text{D}_A`
+     - emr_m24706
+     - Excess mortality rate for acute intracerebral hemorrhage w/ CSMR
+   * - 5
+     - C
+     - :math:`\text{D}_C`
+     - emr_m10836
+     - Excess mortality rate for chronic intracerebral hemorrhage w/ CSMR
 
 Data Sources
 """"""""""""
 
-This table contains the data sources for all the measures. The table structure and common measures are as below:
-
 .. list-table:: Data Sources
    :widths: 20 25 25 25
    :header-rows: 1
@@ -392,93 +283,63 @@ This table contains the data sources for all the measures. The table structure a
      - Sources
      - Description
      - Notes
-   * - prevalence_cid
+   * - prevalence_c496
+     - como
+     - Prevalence of intracerebral hemorrhage
+     - This is the prevalence of acute + chronic sequelae
+   * - deaths_c496
+     - codcorrect
+     - Deaths from intracerebral hemorrhage
+     - This is all deaths, regardless of whether the people are in the acute or chronic state
+   * - acute_csmr_c496
+     - custom csv
+     - Deaths from intracerebral hemorrhage during the acute period 
+     - Custom CSMR calculation
+   * - chronic_csmr_c496
+     - custom csv
+     - Deaths from intracerebral hemorrhage during the chronic period 
+     - Custom CSMR calculation
+   * - incidence_c496
+     - como
+     - Incidence of intracerebral hemorrhage
+     - This is the population incidence rate for first ever acute stroke
+   * - Population
+     - demography
+     - Mid-year population for given age/sex/year/location 
      - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
-     - 
-   * - population
-     - 
-     - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_m1594
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
+   * - sequelae_c496
+     - gbd_mapping
+     - List of 11 sequelae for intracerebral hemorrhage
      - 
    * - prevalence_s{`sid`}
-     - 
-     - 
-     - 
-
-An example, that contains common sources for the measures,
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_cid
      - como
-     - Prevalence of cause
-     - 
-   * - birth_prevalence_cid
-     - como
-     - Birth prevalence of cause
-     -
-   * - deaths_cid
-     - codcorrect
-     - Deaths from cause
-     - 
-   * - population
-     - demography
-     - Mid-year population for given age/sex/year/location
-     - 
-   * - sequelae_cid
-     - gbd_mapping
-     - List of sequelae
-     - 
-   * - incidence_rate_cid/mid
-     - como/dismod
-     - Incidence rate for cause
-     - 
-   * - remission_rate_cid/mid
-     - como/dismod
-     - Remission rate for cause
+     - Prevalence of sequela with id *sid* 
      - 
    * - disability_weight_s{`sid`}
      - YLD appendix
-     - Disability weight of sequela with id `sid`
+     - Disability weight of sequela with id *sid*
      - 
-   * - prevalence_s{`sid`}
-     - como
-     - Prevalence of sequela with id `sid`
+   * - emr_m10836
+     - dismod-mr 2.1
+     - excess mortality rate of chronic intracerebral hemorrhage with CSMR
      - 
-
+   * - emr_m24706
+     - dismod-mr 2.1
+     - excess mortality rate of first ever acute intracerebral hemorrhage with CSMR
+     - 
+   * - acute_sequelae
+     - sequelae definition
+     - {s396, s397, s398, s399, s400}
+     - GBD 2019 and earlier only
+   * - chronic_sequelae
+     - sequelae definition
+     - {s401, s402, s403, s404, s405, s947} 
+     - GBD 2019 and earlier only
 
 Validation Criteria
 +++++++++++++++++++
+
+Compare CSMR experienced by simulants to CSMR from CoDCorrect in GBD
 
 References
 ----------
