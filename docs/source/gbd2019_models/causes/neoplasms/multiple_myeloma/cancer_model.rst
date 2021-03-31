@@ -14,14 +14,9 @@ Disease Overview
 Multiple myeloma (MM) is a clonal plasma cell neoplasm with substantial morbidity and mortality, characterized by end organ damage—renal 
 impairment, hypercalcemia, lytic bony lesions, and anemia. 
 
-According to Global Burden of Multiple Myeloma Capstone Publication, there were 156 000 incident cases (95% UI 137 000–173 000), 113 000 deaths (99 500–122 000), and 2·50 million (2·19–2·72) DALYs due to multiple myeloma globally in 2019.
+According to GBD 2019, there were 27 thousand incident cases (95%UI 23-33), 18 thousand deaths (95%UI 16-21), and 350 thousand (95%UI 326–431) disability adjusted life years (DALYs) due to multiple myeloma in the US in 2019.
 
-From 2010 to 2019, MM incident cases increased by 28.8%, and deaths increased by 28.8% for both sexes globally. Among SDI quintiles, the largest increase (176%) was seen in middle SDI countries (from 7 653 [95% UI, 6 695-9 513] in 
-1990 to 21 143 [95% UI, 17 470-24 144] in 2019).
-
-.. todo::
-
-   Add statistics on region-specific increases, and largest cause-specific contributors.
+From 2010 to 2019, MM incident cases increased by 25%, and deaths increased by 27% for both sexes in the US.
 
 With the development of better therapies, myeloma has changed from an untreatable ailment to one that is still not curable but treatable with mostly outpatient therapy. 
 Although several new treatment options for multiple myeloma are now available, there is no cure for this disease. And almost all patient with multiple myeloma develop relapse/refractory.
@@ -38,7 +33,7 @@ and an independent response committee being consistent.
 GBD 2019 Modeling Strategy
 --------------------------
 
-Multiple myeloma in GBD 2019
+Multiple Myeloma in GBD 2019
 ++++++++++++++++++++++++++++
 
 In GBD 2019, MM includes death and disability resulting from malignant neoplasms of plasma cells, including ICD-10 codes such as C90.0. The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]_. 
@@ -131,53 +126,261 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-.. todo::
-
-   Add scope.
+To study the impact of different lines of treament for myeloma patients, we 
+split multiple myeloma into two disease states: active multiple myeloma (MM); 
+and relapsed and refractory multiple myeloma (RRMM). The RRMM state consists of 
+multiple relpase stages. Each relapse stage is subsequent outcome corresponding 
+to each line of treatment. This MM cause model is intended to simulate MM incidence, 
+RRMM incidence, RRMM progression, as well as the mortality from MM and RRMM. The 
+inputs for this cause model come from GBD 2019 estimates, scientific literature, 
+and survival regression analysis supported by Flatiron data.
 
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
-.. todo::
-
-   Describe model assumptions and limitations.
-
+1. This cause model assumes no recovery from MM and RRMM since myeloma is an 
+   incurable disease. Patients with MM will inevitably develop relapse and the 
+   health outcomes worsen with every relapse and line of treatment.
+2. This cause model assumes that the GBD incidence rate corresponding to the incidence 
+   of symptomatic MM. That's said, we are comfortable using GBD incidence of MM 
+   as the detection rate of symptomatic MM cases. The incidence of RRMM will be 
+   calculated from survival regression analysis using Cox's proportional hazard model.
+3. The asymptomatic/idolent state (smoldering MM) is exlcuded from this cause 
+   model because we are not interested in the screening and early managment for 
+   MM. As a result, the simulation will not track/model simulants with asymptomatic 
+   condition.
+4. YLDs and YLLs are trivial outcomes for this cause model. Consequently, we 
+   will not build a disability component to capture such outcomes. (TBD)
 
 Cause Model Diagram
 +++++++++++++++++++
 
-.. image:: cause_model_multiple_myeloma.svg
+.. image:: cause_model_diagram.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
+
 .. list-table:: State Definitions
-   :widths: 1, 10, 15
+   :widths: 1, 5, 15
    :header-rows: 1
 
    * - State
      - State Name
      - Definition
    * - S
-     - **S**\ usceptible
-     - Susceptible to MM
-   * - PC
-     - **P**\ re- **C**\linical, detectable MM cancer
-     - With asymptomatic condition, screen-detectable, will progress to clinical phase
-   * - C
-     - **C**\ linical MM cancer
+     - Susceptible
+     - Susceptible to MM, without condition
+   * - MM
+     - Multiple myeloma
      - With symptomatic condition
-   * - RR
-     - **R**\ elapsed/ **R**\efractory MM
-     - With condition which becomes non-responsive or progressive on therapy or within 60 days of the last treatment in patients who had achieved a minimal response (MR) or better on prior therapy.
-   * - R
-     - **R**\ ecovered
-     - Without condition; not susceptible
+   * - RRMM
+     - Relpased/refractory multiple myeloma
+     - Myeloma returns after initial treatment and can include multiple bouts of 
+       relapse before mortality
+
+.. list-table:: State Data
+   :widths: 1, 5, 15, 15
+   :header-rows: 1
+   
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - prevalence
+     - (1 - prev_c486)
+     - 
+   * - S
+     - excess mortality rate
+     - 0
+     - 
+   * - MM
+     - prevalence
+     - prev_c486 * prevalence ratio of MM to RRMM
+     - The prevalence ratio is based on literature evidence
+   * - MM
+     - excess mortality rate
+     - Derived from survival regression analysis
+     - 
+   * - RRMM
+     - prevalence
+     - prev_c486 * (1 - prevalence ratio of MM to RRMM)
+     - The prevalence ratio is based on literature evidence
+   * - RRMM
+     - excess mortality rate
+     - Derived from survival regression analysis
+     - 
+
+.. list-table:: Transition Data
+   :widths: 1, 1, 1, 10, 10
+   :header-rows: 1
+
+   * - Transition
+     - Source state
+     - Sink state
+     - Value
+     - Notes
+   * - incidence_MM
+     - S
+     - MM
+     - :math:`\frac{\text{incidence_c486}}{1-\text{prev_c486}}`
+     - incidence of MM among susceptible population
+   * - incidence_RRMM
+     - MM
+     - RRMM
+     - Derived from survival regression analysis
+     - 
+   * - incidence_relapse
+     - (N-1)th relapse
+     - Nth relapse
+     - Derived from survival regression analysis
+     - 
+.. list-table:: Data sources
+   :widths: 5 10 10
+   :header-rows: 1
+   
+   * - Measure
+     - Sources
+     - Notes
+   * - prev_c486
+     - GBD 2019
+     - 
+   * - incidence_c486
+     - GBD 2019
+     - 
+   * - emr_MM
+     - Derived from survival regression analysis
+     - Don't use emr_c486
+   * - prev_RRMM
+     - GBD 2019 and literature review
+     - Calculated from prev_c486 and prevalence ratio of MM to RRMM
+   * - prevalence ratio of MM to RRMM
+     - literature review
+     - 
+   * - incidence_RRMM
+     - Derived from survival regression analysis
+     - 
+   * - emr_RRMM
+     - Derived from survival regression analysis
+     - 
+   * - incidence_relapse
+     - Derived from survival regression analysis
+     - 
 
 .. todo::
 
-  Add State Data & Transition Data tables. 
-  If screening is not necessary for this project, can we get rid of PC state since GBD didn't model such state.
-  Let's confirm with Manoj whether or not patient can go directly to recovered state from clinical MM state. If duration of recovery is long enough, simulants must go through RRMM before they step into a recovered state.
+   Describe methods for splitting the RRMM prevalene by relapse stage.
+
+Survival Regression Model
+-------------------------
+
+Model Overview
+++++++++++++++
+
+The rates for RRMM are unknown from GBD. So we plan to use the `time-varying Cox's 
+proportional hazard model` to predict the transition from MM to RRMM, the transition 
+between relapses within RRMM, the mortality from MM, and the mortality from RRMM 
+(every relapse). These rates are assumed to be dependent on covariates such as 
+age, sex, race/ethnicity, renal function, cytogenetic risk, and different lines 
+of therapy. Our survival regression aims to model the rates as a function of hazard 
+that is determined by time and a series of covariates. Moreover, time-varying 
+regression model will allow us to model individuals' covariate (e.g., age) that 
+changes over time. The idea behind this model is that the log-hazard of an individual 
+is a linear function of their covariates and a population-level baseline that 
+changes over time. Mathematically: 
+
+:math:`h(t|x) = b_{0}(t) \times \exp\left(\sum \limits_{i=1}^n \beta_{i}(x_{i}(t)-\bar{x_{i}})\right)`
+
+Where,
+ - :math:`t` is the survival time
+ - :math:`x` is the covariate
+ - :math:`h(t|x)` is the hazard function determined by a set of covariates
+ - :math:`b_{0}(t)` is the baseline hazard
+ - :math:`\beta_{i}` is the coefficient that measures the impact of covariate
+ - :math:`\sum \limits_{i=1}^n \beta_{i}(x_{i}(t)-\bar{x_{i}})` is the time-variant log partial hazard
+
+This survival model consists of two parts: the underlying baseline hazard function, 
+often denoted as :math:`b_{0}(t)`, describing how the risk of event per time unit 
+changes over time at baseline levels of covariates; and the effect parameters, 
+describing how the hazard varies in response to explanatory covariates. The baseline 
+hazard function is consistent across time, calculated from the start when all 
+covariates are set to zero. It could be parametric or non-parametric depending 
+on what data are available in Flatiron. We hope that the coefficient of effect 
+for all relevant covariates can be guided by Flatiron data as well.
+
+From the survival regression model, we expect to output the survival/hazard as a 
+function of time to tell when an event will happen and its likelihood, in a 
+baseline survival model and a model with different values of covariates. In general, 
+We will create two survival regression models:
+ 1. Mortality hazard model to predict time to death from MM and time to death from 
+    each of relapse states. 
+ 2. Transition hazard model to predict time from MM to RRMM, and time between last 
+    relapse and next relapse within RRMM state. 
+
+Model Assumptions
++++++++++++++++++
+
+ - The proportional hazard model assumes that `all` individuals have the same hazard 
+   function, but a unique scaling factor infront. So the `shape` of the hazard function 
+   is the same for all individuals, and only a scalar multiple changes per individual.
+ - Another key assumption is that each covariate has a multiplicative effect in 
+   the hazard function that is constant over time.
+
+
+Diagnostics for the Cox Model
++++++++++++++++++++++++++++++
+
+ - Testing the proportional hazards assumption (Schoenfeld residual)
+ - Detecting nonlinearity for continous variables (Martingale residual)
+ - Examining influential observations (Deviance residual)
+
+We will perform certain diagnostic tests for the Cox’s proportional hazard model. 
+To check the model assumptions, residual methods are intended to be used in our 
+survival analysis. In principle, the Schoenfeld residuals are independent of time. 
+A plot that shows a non-random pattern against time is evidence of a violation of 
+the PH assumption. By plotting event time against the Schoenfeld residual for each 
+covariate, we except to see a non-significant relationship between Schoenfeld 
+residuals and time. Often, we assume that continuous covariates have a linear form. 
+However, this assumption should be checked. We can detect the nonlinearity between 
+log hazard and the covariates by plotting the Martingale residual against continuous 
+covariates. In addition, we plan to use the Deviance residual (a normalized 
+transform of the martingale residual) to examine any influential observations 
+or outliers.
+
+To check the performance of Cox's model, we will include goodness of fit in our 
+survival analysis results. Specifically, Cox-Snell residuals will be used to assess 
+a model's goodness-of-fit. By plotting the Cox-Snell residual against the cumulative 
+hazard function a model's fit can be assessed. We might modify the standard Cox-Snell 
+residuals to account for the censored observations.
+
+Input Data Table
+++++++++++++++++
+
+.. list-table:: Combination of different observations
+   :header-rows: 1
+   
+   * - Age
+     - Sex
+     - Race
+     - CKD
+     - Cytogenetic risk
+     - Transplantation
+     - Treatment
+     - Duration
+     - Event
+   * - 15 to 95 plus with 5-year age bin
+     - ['Male', 'Female']
+     - ['Black/African', 'Non-Black/African']
+     - ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4', 'Stage 5']
+     - ['High-risk', 'Standard-risk']
+     - ['Eligible', 'Ineligible']
+     - ['First line not Isa', 'Second line not Isa', 'Third or later line not Isa', 'Isatuximab']
+     - ['Duration from MM to RRMM', 'Duration from MM to death', 'Duration from Nth relapse to (N+1)th relapse', 'Duration from Nth relapse to death']
+     - ['Event of transition from MM to RRMM', 'Event of transition from Nth relapse to (N+1)th relapse', 'Event of death from MM', 'Event of death from Nth relapse']
+
+.. todo::
+
+   Add more details
 
 Validation Criteria
 +++++++++++++++++++
