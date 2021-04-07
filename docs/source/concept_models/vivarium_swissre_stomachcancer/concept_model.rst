@@ -279,8 +279,6 @@ Assumptions and limitations
 5.3.2 H. pylori risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We assume there is a 5% baseline primary prevention programme of H. pylori screening and treatment in the general population. We also assume that the prevalence of H. Pylori in the general population has accounted for this level of screening. 
-
 :underline:`Incidence of cancer by H. pylori status`
 
 
@@ -396,7 +394,7 @@ To make this section easier to follow, we define:
   - f_atrophy+/- = fraction of the atrophic state that is H. pylori positive (proportion)
   
 
-:underline:`A. Pre-cancerous state (chronic atrophic gastritis) for susceptible population`
+:underline:`A. Pre-cancerous state (chronic atrophic gastritis) for non-clinical cancer population`
 
 Ideally we obtain age-specific distribution of the pre-cancer atrophic state prevalence from cross-sectional studies/cohort starting from young age in populations with similar risks of:
 
@@ -441,12 +439,8 @@ We first need to obtain an atrophy state. To do that we give every simulant an a
 
 With the simulant's sex, age and atrophy propensity, use the tables above to figure out what atrophic state the propensity corresponds to and assign this to the simulant. If the propensity is < the proportion in the table, they are atrophic+. Update the simulant's atrophic state as they age through the simulation.   
 
-:underline:`B. Determine H. pylori and atrophy for simulants initalized into the pre-clinical state`
 
-  Assign all simulants initialized in the pre-clinical cancer state to atrophy positive.
-
-
-:underline:`C. Obtain H. pylori status conditional upon age and atrophic state`
+:underline:`B. Obtain H. pylori status conditional upon age and atrophic state`
  
 *H. pylori epidemiology*. We assume all individuals acquire H. pylori infection during childhood and, unless treated with antibiotics, remain infected. New infections and reinfection in adulthood are rare and will not be allowed in our model. 
 
@@ -568,11 +562,11 @@ Assumptions and limitations:
 5.3.4 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This screening model will be applied in the alternative scenario. Apply first ABC screening coverage to those who are 40 years old and above using the screening scale-up figure below. Simulants' first screen will be using the non-invasive ABC method delineated by Chen 2018 which combines H. pylori antibody test and serum pepsinogen (PG) test for atrophy.
+This screening model will be applied in the baseline and alternative scenario. Apply first ABC screening coverage to those who are 40 years old and above using the screening scale-up figure below. Simulants' first screen will be using the non-invasive ABC method delineated by Chen 2018 which combines H. pylori antibody test and serum pepsinogen (PG) test for atrophy.
 
-:underline:`1. First screen with ABC`
+:underline:`1. Cancer risk screening with ABC`
 
-We model screening only in the alternative scenario. All simulants are eligible for screening. The current screening coverage (orange line in the graph) is the proportion of simulants who will attend their first screening. The screening coverage is **cumulative**. Only simulants aged 40 and above will be covered. We can model the first screen attendance uniformly distributed within the first year of coverage. For example, in 2020, 5% (the screening coverage in 2020) of simulants aged 40 and above will recieve a first screen within the first year (before 2021). If the screening coverage in 2021 is 6%, then 1% more simulants will attend first screening in 2021. 
+We model ABC screening  in the baseline and alternative scenario. All simulants are eligible for screening. The current screening coverage (orange line in the graph) is the proportion of simulants who will attend their first screening. The screening coverage is **cumulative**. Only simulants aged 40 and above will be covered. We can model the first screen attendance uniformly distributed within the first year of coverage. For example, in 2020, 5% (the screening coverage in 2020) of simulants aged 40 and above will recieve a first screen within the first year (before 2021). If the screening coverage in 2021 is 6%, then 1% more simulants will attend first screening in 2021. 
 
 Based on the simulants H. pylori status by **screen test**, and atrophy state, they will be due their next screening according to the screening branch. Make sure we track simulants' H. pylori true status, H. hylori screen status, and H. pylori treatment status. Note that the screening tree branches by simulants H. pylori screening status but the simulants cancer incidence follows the H. pylori true status. 
 
@@ -609,9 +603,7 @@ H. pylori antibiody test [Chen Chin Med J (Engl) 2018]
 
 Serum pepsinogen test [Miki Gastric Cancer 2006]
 
-  - For **S** population: because the incidence of gastric cancer for the cancer-free susceptible population is determined by true H. pylori status and not by atrophic state, we do not apply test accuracy for atrophy for the S population. The age-specific prevalence of atrophic states was obtained from serum pepsinogen test [Wang Scientific reports 2005] among cancer-free population and is thus the test-positive prevalence of atrophy among our S population. The test-positive prevalence of atrophy identified in model 2 determines frequency of screening for the S population. (In reality, those who were determined to be in group B-D by ABC screening would be referred for endoscopy and their endoscopic follow-up frequency will be determined by the outcome of the endoscopy. However, we do not have the data to use the true pre-cancer states to determine screening frequency)    
-
-  - For **PC** population: All simulants initialized in the pre-clinical cancer state are assigned to be atrophy positive. Their H. pylori status is the fraction of H. pylori+ among atrophy (f_atrophy+) for that age group. When simulants attend their first ABC screening, PC cancers will be detected with 77% sensitivity. Those who are false negatives (23%) will be assigned into branch 1 (group A) or branch 2 (group B) depending on their H. pylori status for continued surveillance. (Their H. pylori status helps to determine their screening frequency in case of false negative.) 
+  - For non-**C** population: When simulants attend their first ABC screening, PC cancers will be detected with 77% sensitivity. We also assume that simulants who have a false positive pepsinogen test would have their false positive detected during endoscopic follow-up and so we use a specificity of pepsinogen test with endoscopic confirmation of 98%.
 
 H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
 
@@ -652,6 +644,9 @@ Data Sources Table
 | Serum pepsinogen     | 77% to detect atrophy/     | pepsinogen I level <=70 ng/ml | Miki Gastric Cancer 2006                  |
 | sensitivity          | cancer among PC cases      | pepsinogen I/II ratio <=3     |                                           |
 +----------------------+----------------------------+-------------------------------+-------------------------------------------+
+| Serum pepsinogen     | 98% after endoscopic       |                               |                                           |
+| specficity           | confirmation               |                               |                                           |
++----------------------+----------------------------+-------------------------------+-------------------------------------------+
 | HP treatment efficacy| 87.9% (95%CI: 81.7–94.0%)  | Normal distribution, ITT      | Liang Clin Gastroenterol Hepatol 2013     |
 +----------------------+----------------------------+-------------------------------+-------------------------------------------+
 | Endoscopy uptake     | 18.4% (95%CI: 18.1%‐18.7%) | Normal distribution           | Guo Cancer Medicine 2019                  |
@@ -677,12 +672,13 @@ Validation and verification:
 
 
 Assumptions and limitations:
- - we are using the results of the the ABC screening test for atrophic gastritis to determine frequency of screening. In reality, those who fall into group B, C, and D may be referred for immediate endoscopy and the result of the endoscopic finding will determine the frequency of subsequent endoscopy screening. Since the positive predictive value (PPV) of the screening tests depends on the true prevalence of atrophy, we cannot obtain a PPV from a different population and apply it to our population to predict the true prevalence. This is a limitation from lack of data on atrophic states. 
+ - We initialized the simulation without PC simulants having higher probability of endoscopy which would detect their PC cancer. This would underestimate the detection of PC cancers that were initialized into the sim. However, this population is very small and is a minor limitation.
+ 
 
 
 .. _5.3.4:
-5.3.4 Gastic cancer incidence after ABC screening among susceptibe population
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+5.3.4 Gastic cancer incidence after ABC screening among susceptible population
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Meta-analysis of 14 studies by Lee 2016 showed reduction in the incidence rate ratio of gastric cancer among asymptomatic individuals with H. pylori eradication of 0.62 (95%CI: 0.49-0.79). We apply this rate ratio to H. pylori +ve simulants who recieve successful eradication. This meta-analysis supports no differential efficacy among pre-cancer states. 
 
