@@ -145,12 +145,12 @@ Model Assumptions and Limitations
    of symptomatic MM. That's said, we are comfortable using GBD incidence of MM 
    as the detection rate of symptomatic MM cases. The incidence of RRMM will be 
    calculated from survival regression analysis using Cox's proportional hazard model.
-3. The asymptomatic/idolent state (smoldering MM) is exlcuded from this cause 
+3. The asymptomatic/idolent state (smoldering MM) is excluded from this cause 
    model because we are not interested in the screening and early managment for 
    MM. As a result, the simulation will not track/model simulants with asymptomatic 
    condition.
-4. YLDs and YLLs are trivial outcomes for this cause model. Consequently, we 
-   will not build a disability component to capture such outcomes. (TBD)
+4. YLLs are substantially larger than YLDs for this cause. For now, we will not 
+   build a disability component to capture those secondary outcomes.
 
 Cause Model Diagram
 +++++++++++++++++++
