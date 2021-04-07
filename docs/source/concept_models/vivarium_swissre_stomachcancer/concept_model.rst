@@ -33,9 +33,9 @@
 
 .. _2017_concept_model_vivarium_swissre_stomachcancer:
 
-====================================
+=====================================
 Vivarium CSU Stomach Cancer Screening
-====================================
+=====================================
 
 .. contents::
   :local:
@@ -145,7 +145,7 @@ See below risk factor model 2
 4.0 Intervention
 ++++++++++++++++
 
-Scale-up of stomach cancer screening using ABC method for first screen followed by endoscopic follow-up among insured population from 5% in 2020 to 30% in 2030 and hold constant until 2040. 
+Scale-up of stomach cancer screening using ABC method with endoscopic surveillance among insured population from 5% in 2020 to 30% in 2030 and hold constant until 2040. 
 
 .. _4.1:
 
@@ -154,15 +154,12 @@ Scale-up of stomach cancer screening using ABC method for first screen followed 
 
 :underline:`Baseline scenario`
 
-* we assume a 5% H pylori screening that is already inherent in the population.
+* we assume a 5% ABC cancer risk screening with endoscopic surveillance.
 
 
 :underline:`Alternative scenario`
 
-In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure (orange line) below. Note that the alternative scenario uses a different screening modality (atrophy screening + H. pylori screening) than the baseline. This is different from other models where the alternative scenario scales-up the same screening technology used in the baseline. 
-
-.. note::
-  We do not yet have any evidence to suggest that the 5% who would have recieve H. pylori screening/treatment in the baseline is more or less likely to be covered for stomach cancer screening in the alternative scenario. For simplicity, we assume that H. pylori prevalence is non-differential to screening coverage. 
+In the alternative scenario, there will be a scale up of ABC screening starting from 5% to 30% as indicated in the coverage figure (orange line) below. 
 
 .. image:: stomach_cancer_screening_coverage.svg
  
@@ -457,7 +454,6 @@ To assign H. pylori status we give each simulant an H. pylori percentile using a
 
 To derive f_atrophy+ and f_atrophy- for the above table with uncertainty intervals using the following set of equations:
 
-
 +----------------------------------------------------------+
 | For each age group                                       | 
 +===========+=================+=================+==========+
@@ -603,7 +599,7 @@ H. pylori antibiody test [Chen Chin Med J (Engl) 2018]
 
 Serum pepsinogen test [Miki Gastric Cancer 2006]
 
-  - For non-**C** population: When simulants attend their first ABC screening, PC cancers will be detected with 77% sensitivity. We also assume that simulants who have a false positive pepsinogen test would have their false positive detected during endoscopic follow-up and so we use a specificity of pepsinogen test with endoscopic confirmation of 98%.
+  - For non-**C** population: When simulants attend their first ABC cancer risk screening, PC cancers will be detected with 77% sensitivity. We also assume that simulants who have a false positive pepsinogen test would have their false positive detected during endoscopic follow-up and so we use a specificity of pepsinogen test with endoscopic confirmation of 98%.
 
 H. pylori eradication success rate using standard bismuth-containing quadruple therapy for 10 or 14 days [Du 2020]
 
