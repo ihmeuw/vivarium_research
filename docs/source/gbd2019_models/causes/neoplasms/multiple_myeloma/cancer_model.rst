@@ -235,6 +235,7 @@ State and Transition Data Tables
      - Nth relapse
      - Derived from survival regression analysis
      - 
+
 .. list-table:: Data sources
    :widths: 5 10 10
    :header-rows: 1
@@ -326,7 +327,6 @@ Model Assumptions
  - Another key assumption is that each covariate has a multiplicative effect in 
    the hazard function that is constant over time.
 
-
 Diagnostics for the Cox Model
 +++++++++++++++++++++++++++++
 
@@ -388,7 +388,6 @@ Validation Criteria
 .. todo::
 
    Describe tests for model validation.
-
 
 References
 ----------
