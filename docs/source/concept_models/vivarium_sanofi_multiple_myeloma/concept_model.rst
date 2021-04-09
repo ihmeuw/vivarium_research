@@ -184,10 +184,10 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Location: United States
-  - Cohort type: Prospective open cohort of 15 years and older
+  - Cohort type: Prospective closed cohort of individuals 15 years and older
   - Size of largest starting population: 100,000 simulants
-  - Time span: Jan 1, 2021 to Dec 31, 2025
-  - Time step: X days (e.g. 28 days) to capture time interval of clinical MM to RRMM and duration of treatment
+  - Time span: Jan 1, 2018 to Dec 31, 2025
+  - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
 
 
 .. _5.2.2:
@@ -197,10 +197,12 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 
  - General US population
  - Black/African American population 
- - Population with chronic obstructive pulmonary disease (COPD) 
- - Population with renal impairment (CKD)
- - Registry population (e.g. 1,000 simulants) 
+ - Population with high-risk cytogenetics  
+ - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
+ - Elder population (aged > 75 years) 
 
+.. note::
+  Confirm with RT that 'Registry population' is still a population of interest. It is no longer in the concept model doc shared with Sanofi.
 
 .. _5.3:
 
