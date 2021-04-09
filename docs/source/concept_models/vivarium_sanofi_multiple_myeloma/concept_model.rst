@@ -117,8 +117,9 @@ There is one randomized controlled trial on Isatuximab treatment that is current
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-The objective of this project is to provide Sanofi with a simulation design and implementation solution for a MM clinical registry, we will simulate outcomes rates among different populations to aid in registry design. For a population level of scope, we will assess the impact of Isatuximab in the population of interest at the completion of simulation. Estimating the incidence, prevalence, and survival of MM to be overall in the US, and in key sub-populations listed above, under a business-as-usual treatment scenario and an Isatuximab treatment scenario over 5 years. The outcomes will be stratified by age, sex, and relevant demographic. 
-The sub-aim for this project is to create a 'power calculation' of how many patients would need to be in a registry population in order to observe a significant effect of a given magnitude, and how many patients per year out of all patients per year would need to be enrolled over X years in order to reach that target.
+The primary objective of this project is to answer the following question: what can we expect the incidence, prevalence, mortality, and survival of MM to be overall and among a registry population in the United States, and in key sub-populations, under a business-as-usual treatment scenario and an Isatuximab treatment scenario over 5 years? The key sub-populations include the Black/African American population, population with high-risk cytogenetics, population with renal impairment and the elderly population (age > 75 years).  
+
+To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our ownuse survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2026 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk. 
 
 .. _3.0:
 
