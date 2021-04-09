@@ -52,6 +52,8 @@ In March of 2020, the United States (US) Food and Drug Administration approved t
 
 As Isatuximab is still relatively new and the clinical registry is in early stages of enrollment, Sanofi is interested in using simulation to further understand Isatuximab’s potential impact and aid in registry design. Simulation is a general method that allows the incorporation of inter-related and dynamic factors and processes to predict health outcomes over time. In this project, we employ customized agent-based simulation software in which thousands of simulated individuals (“simulants”) with individual characteristics and health backgrounds experience MM including treatment, progression, and survival in a realistic way. This project is currently planned out in three phases including, 1) simulating the general population in one location and a registry population in the same location, 2) updating input data parameters using real registry data and rerunning the microsimulation from phase 1 iteratively to calibrate with real-world evidence and 3) expanding the microsimulation to other locations of interest. This document will outline the current analysis plan for phase 1 of this project. 
 
+FDA just approved isatuximab in combination with carfilzomib and dexamethasone (Kd), for the treatment of adult patients with RRMM who have received one to three prior lines of therapy.([Sanofi-2021]_)
+
 Key sub-populations agreed upon include: 
 
 * Black/African American population 
@@ -332,6 +334,10 @@ treatment but new to Isatuximab treatment.
 .. [Sanofi-2020] 	Sanofi : FDA approves Sarclisa® (isatuximab-irfc) for patients with relapsed refractory multiple myeloma. Sanofi. 2020; 2 March 2021.
     Retrieved 18 March 2021.
     https://www.sanofi.com/en/media-room/press-releases/2020/2020-03-02-19-51-16
+
+.. [Sanofi-2021] FDA approves Sarclisa® (isatuximab) in combination with carfilzomib and dexamethasone for patients with relapsed or refractory multiple myeloma. Sanofi. 2021; 31 March 2021.
+    Retrieved 9 April 2021.
+    https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
 
 .. [Dimopoulos-et-al-2020]
    Dimopoulos MA, Leleu X, Moreau P, et al. Isatuximab plus pomalidomide and 
