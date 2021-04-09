@@ -52,6 +52,18 @@ In March of 2020, the United States (US) Food and Drug Administration approved t
 
 As Isatuximab is still relatively new and the clinical registry is in early stages of enrollment, Sanofi is interested in using simulation to further understand Isatuximab’s potential impact and aid in registry design. Simulation is a general method that allows the incorporation of inter-related and dynamic factors and processes to predict health outcomes over time. In this project, we employ customized agent-based simulation software in which thousands of simulated individuals (“simulants”) with individual characteristics and health backgrounds experience MM including treatment, progression, and survival in a realistic way. This project is currently planned out in three phases including, 1) simulating the general population in one location and a registry population in the same location, 2) updating input data parameters using real registry data and rerunning the microsimulation from phase 1 iteratively to calibrate with real-world evidence and 3) expanding the microsimulation to other locations of interest. This document will outline the current analysis plan for phase 1 of this project. 
 
+Key sub-populations agreed upon include: 
+
+* Black/African American population 
+
+* Population with high-risk cytogenetics 
+
+* Population with renal impairment/CKD (GFR < 60 ml/min/1.73m^2)
+
+* Elder population (aged > 75 years) 
+
+In the absence of data on treatment effects for sub-groups we will need to make assumptions with client guidance. A strength of this project is that we will be able to iteratively update such assumptions as we get real world data from registries and re-run the simulation. 
+
 .. _1.1:
 
 1.1 Project overview
