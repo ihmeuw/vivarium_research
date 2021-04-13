@@ -19,49 +19,23 @@ Atrial fibrillation and flutter
     - 
     - 
 
-.. todo::
 
-  Fill out table with any abbreviations and their definitions used in this document.
+Disease Description
+-------------------
 
-Disease Overview
-----------------
+Atrial fibrillation is an irregular and often rapid heart rate that can increase the risk of certain types of strokes, heart failure and other cardiovascular complications. 
 
-.. todo::
+In atrial fibrillation, the atria beat chaotically and irregularly and out of coordination with the ventricles. Symptoms often include heart palpitations, shortness of breath, and
+weakness. Atrial fibrillation may be episodic or it may by consistent. A major concern with atrial fibrillation is the potential to develop blood clots within the upper chambers of the 
+heart, which can circulate to other organs, particularly the brain, and lead to blockages in blood flow. 
 
-   Add a general clinical overview of the cause.
+Treatments for atrial fibrillation may include medications for rhythm and rate control. In more serious cases of disease, and other interventions such as ablation may be used to try to 
+alter the heart's electrical system to prevent the errant signals that cause irregular heartbeats. 
 
-.. admonition:: Todo for template development
+[Mayo-Clinic-Atrial-Fibrillation-Definition]_
 
-   **Note:** This `custom admonition
-   <https://docutils.sourceforge.io/docs/ref/rst/directives.html#generic-admonition>`_
-   indicates tasks to do while we write this template, whereas the ordinary
-   Todo's (and the "Important" directives) are intended to remain in the
-   template to instruct the cause modeler how to fill out the cause model
-   document.
+[Johns-Hopkins-Ablation-Definition]_
 
-   - In the above todo box, add more details about what we're looking for in
-     cause descriptions, such as:
-
-     - Useful external data sources
-     - note to flesh out how this cause kills or causes disability among the
-       with condition
-     - Important features of the cause (vaccine coverage, is it a progressive
-       disease, etc.)
-     - Links to other prominent mathematical models of the cause if they exist
-       (e.g. @yongqx found like 40 different versions of tb models).
-
-   - Add instructions in other sections, including:
-
-     - Using editable :file:`.svg` format for figures
-     - For cause model diagram: description of what the bubbles and arrows
-       represent. Maybe include svg templates for common diagrams like SI, SIS,
-       SIR, etc.
-     - For cause hierarchy: description of our strategy for making cause
-       hierarchy diagrams (rules + example)
-     - For data tables: Template tables and instructions for filling them in
-     - Expand Todo's for Vivarium model `Scope` and `Assumptions and
-       Limitations` sections, with specific examples and guidelines
-     - Add instructions for filling out the GBD Restrictions table
 
 
 GBD 2019 Modeling Strategy
@@ -469,34 +443,10 @@ Validation Criteria
 References
 ----------
 
-
-.. [GBD-2017-YLD-Appendix-Cause-Model-Template]
-
-   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
-   appendix on ScienceDirect_>`_:
-
-     **(GBD 2017 YLD Capstone)** GBD 2017 Disease and Injury Incidence and
-     Prevalence Collaborators. :title:`Global, regional, and national incidence,
-     prevalence, and years lived with disability for 354 diseases and injuries
-     for 195 countries and territories, 1990–2017: a systematic analysis for the
-     Global Burden of Disease Study 2017`. Lancet 2018; 392: 1789–858. DOI:
-     https://doi.org/10.1016/S0140-6736(18)32279-7
-
-.. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
-.. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
+.. [Mayo-Clinic-Atrial-Fibrillation-Definition]
+    `Atrial Fibrillation.` Mayo Clinic, Mayo Foundation for Medical Education and Research, 20 June 2019, www.mayoclinic.org/diseases-conditions/atrial-fibrillation/symptoms-causes/syc-20350624. 
 
 
-.. [GBD-2017-CoD-Appendix-Cause-Model-Template]
-
-   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 CoD Capstone <CoD
-   appendix on ScienceDirect_>`_:
-
-     **(GBD 2017 CoD Capstone)** GBD 2017 Causes of Death Collaborators.
-     :title:`Global, regional, and national age-sex-specific mortality for 282
-     causes of death in 195 countries and territories, 1980–2017: a systematic
-     analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392:
-     1736–88. DOI: http://dx.doi.org/10.1016/S0140-6736(18)32203-7
-
-.. _CoD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322037-mmc1.pdf
-.. _CoD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32203-7/attachment/5045652a-fddf-48e2-9a84-0da99ff7ebd4/mmc1.pdf
+.. [Johns-Hopkins-Ablation-Definition]
+    `Atrial Fibrillation Ablation.` Johns Hopkins Medicine, www.hopkinsmedicine.org/health/treatment-tests-and-therapies/atrial-fibrillation-ablation. 
 
