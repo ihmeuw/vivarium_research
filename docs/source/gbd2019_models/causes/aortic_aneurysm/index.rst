@@ -21,12 +21,21 @@ An aortic aneurysm can grow large and either rupture or split. A split is called
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. todo::
+GBD 2019 Non-Fatal Modeling Strategy
+++++++++++++++++++++++++++++++++++++
 
-  Add an overview of the GBD modeling section.
+Aortic aneurysm is not currently modeled as a non-fatal model in GBD.
+
+GBD 2019 Fatal Modeling Strategy
+++++++++++++++++++++++++++++++++++++
+
+We included vital registration data in a standard CODEm approach to model aortic aneurysm. 
+[GBD-2019-Capstone-Appendix]_ 
 
 Cause Hierarchy
 +++++++++++++++
+
+.. image:: cause_hierarchy_aa.svg
 
 Restrictions
 ++++++++++++
@@ -43,30 +52,29 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - True
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
-     -
+     - 15
+     - [15, 19 years), age_group_id=8
    * - YLL age group end
-     -
-     -
+     - 125
+     - [95, 125), age_group_id=235
    * - YLD age group start
-     -
+     - NULL
      -
    * - YLD age group end
+     - NULL
      -
-     -
-
 
 Vivarium Modeling Strategy
 --------------------------
@@ -422,3 +430,8 @@ References
 .. [NIH] Aortic Aneurysm. National Heart Lung and Blood Institute, U.S. Department of Health and Human Services.
   Retrieved 13 April 2021.
   https://www.nhlbi.nih.gov/health-topics/aneurysm
+
+.. [GBD-2019-Capstone-Appendix]
+  Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
+
+.. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
