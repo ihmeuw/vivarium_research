@@ -101,12 +101,10 @@ atrial fibrillation:
 Cause Hierarchy
 +++++++++++++++
 
+.. image:: afib_cause_hierarchy.svg
+
 Restrictions
 ++++++++++++
-
-The following table describes any restrictions in GBD 2019 on the effects of
-this cause (such as being only fatal or only nonfatal), as well as restrictions
-on the ages and sexes to which the cause applies.
 
 .. list-table:: GBD 2019 Cause Restrictions
    :widths: 15 15 20
@@ -119,26 +117,26 @@ on the ages and sexes to which the cause applies.
      -
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - False
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
-     -
+     - 30
+     - [30, 34 years), age_group_id=11 
    * - YLL age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235 
    * - YLD age group start
-     -
-     -
+     - 30
+     - [30, 34 years), age_group_id=11 
    * - YLD age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235 
 
 
 Vivarium Modeling Strategy
