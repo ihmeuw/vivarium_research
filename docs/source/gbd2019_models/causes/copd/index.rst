@@ -183,7 +183,7 @@ States Data
      - prevalence
      - :math:`1-\text{prevalence_c509}`
      - 
-   * - P
+   * - C
      - prevalence
      - :math:`\sum\limits_{s \in sequelae} \text{prevalence}_s`
      - 
@@ -191,7 +191,7 @@ States Data
      - excess mortality
      - 0
      -
-   * - P
+   * - C
      - excess mortality
      - emr_m24543
      - 
@@ -199,7 +199,7 @@ States Data
      - disability weight
      - 0
      -
-   * - P
+   * - C
      - disability weight
      - :math:`\frac{1}{\text{prevalence_c509}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{prevalence}_s`
      - 
@@ -218,7 +218,7 @@ Transition Data
      - Notes
    * - 1
      - S
-     - P
+     - C
      - incidence_c509
      - This is cause-level incidence which is equivalent to the "population rate"
 
