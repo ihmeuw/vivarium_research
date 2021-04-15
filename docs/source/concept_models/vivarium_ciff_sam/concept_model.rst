@@ -43,11 +43,17 @@ Vivarium ACUTE MALNUTRITION
 +------------------------------------+
 | List of abbreviations              |
 +=======+============================+
+| AM    | acute malnutrition         |
++-------+----------------------------+
+| MAM   | moderate acute malnutrtion |
++-------+----------------------------+
+| SAM   | Severe acute malnutrition  |
++-------+----------------------------+
 
 1.0 Background
 ++++++++++++++
 
-Malnutrition is an imbalance between the body’s needs and its use and intake of nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, disease states, lack of knowledge, and cultural practices, among others. Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies are all forms of malnutrition. Acute malnutrition (AM), also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM1. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates MAM and a z-score below -3 indicate SAM. Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. MAM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, MAM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children. 
+Malnutrition is an imbalance between the body’s needs and its use and intake of nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, disease states, lack of knowledge, and cultural practices, among others. Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies are all forms of malnutrition. Acute malnutrition (AM), also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM1. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate severe acute malnutrition (SAM). SAM and MAM together is referred to as global acute malnutrition (GAM). Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. MAM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, MAM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children. 
 
 
 .. _1.1:
@@ -59,7 +65,7 @@ Wasting is commonly considered an acute condition and is categorized into modera
 
 In addition to management and treatment of MAM and SAM, we will model a number of sufficiently robust interventions that directly prevent AM. We will also model interventions that affect risk factors for wasting including birthweight and infectious disease. For each intervention, we obtain current population coverage levels, effect sizes and costs for cost-effectiveness analysis. 
 
-We will model wasting in an individual as a collection of distinct states, where an individual is in a single state and may transition to other states following the arrows between states (Figure 6). In GBD, wasting has four categories corresponding to different WFH z-score ranges. Simulants transition forward through the four wasting states by the incidence rate and backward towards healthier states by the recovery rate. Risk factors such as low birthweight (LBW) or infectious diseases increases the forward incidence rates. We will model differential incidence and recovery rates based on intervention coverage: simulants covered by direct wasting preventive interventions will experience lower forward incidence rates compared to those not covered and simulants covered by therapeutic interventions will experience a higher recovery rate than those not covered.  Wasting prevalence and incidence will be reduced either by greater effectiveness of interventions or greater coverage of interventions. Interventions that address birthweight or infectious diseases will affect wasting through the risk factor causal pathway. 
+We will model wasting in an individual as a collection of distinct states, where an individual is in a single state and may transition to other states following the arrows between states (see wasting exposure model). In GBD, wasting has four categories corresponding to different WFH z-score ranges. Simulants transition forward through the four wasting states by the incidence rate and backward towards healthier states by the recovery rate. Risk factors such as low birthweight (LBW) or infectious diseases increases the forward incidence rates. We will model differential incidence and recovery rates based on intervention coverage: simulants covered by direct wasting preventive interventions will experience lower forward incidence rates compared to those not covered and simulants covered by therapeutic interventions will experience a higher recovery rate than those not covered.  Wasting prevalence and incidence will be reduced either by greater effectiveness of interventions or greater coverage of interventions. Interventions that address birthweight or infectious diseases will affect wasting through the risk factor causal pathway. 
 
 This model will allow us to understand and quantify the impact of different combinations of preventive and treatment strategies on wasting and wasting attributable DALYs at the national level. 
 
@@ -85,14 +91,18 @@ We will use data from the 2019 GBD and published literature to inform the parame
 3.0 Causal framework
 ++++++++++++++++++++
 
+While there are various well-studied risk factors that are associated with becoming wasted, we will only address those that have interventions with sufficient strength of evidence for effect. The risk factors we include in our model include birthweight and infectious diseases.
+
+
+
+
 .. _3.1:
 
 3.1 Causal diagram
 ------------------
 
- .. note::
-    link to DAGs page
-    use round circles with DAGs
+.. image:: DAG_acute_malnutrition.svg
+
 
 **Outcome (O)**:
 
@@ -122,7 +132,7 @@ We will use data from the 2019 GBD and published literature to inform the parame
 4.0 Intervention
 ++++++++++++++++
 
-Historically, prevention research has primarily focused on stunting, and, as a research outcome, wasting has been considered primarily within the context of humanitarian emergencies. Although the volume of studies related to wasting prevention through direct and indirect health-care sector areas has increased in recent years, this evidence base is mixed and often inconclusive8. We reviewed the literature from the recent Keats et al 2021 update of effective interventions to address maternal and child malnutrition and selected interventions that have moderate or strong evidence for implementation5. We selected interventions that:  
+Historically, prevention research has primarily focused on stunting, and, as a research outcome, wasting has been considered primarily within the context of humanitarian emergencies. Although the volume of studies related to wasting prevention through direct and indirect health-care sector areas has increased in recent years, this evidence base is mixed and often inconclusive. We reviewed the literature from the recent Keats et al 2021 update of effective interventions to address maternal and child malnutrition and selected interventions that have moderate or strong evidence for implementation5. We selected interventions that:  
 
 1)	Directly prevent acute malnutrition, moderate or severe;
 2)	Treat or manage acute malnutrition, moderate or severe;
@@ -131,6 +141,10 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 5)	Reduce incidence of infectious disease; or
 6)	Improve recovery from infectious disease.
 
+.. csv-table:: Table 1: Interventions
+   :file: am_interventions_table.csv
+   :widths: 30, 30, 30, 30, 30, 30, 20, 20
+   :header-rows: 1
 
 
 .. _4.1:
@@ -141,11 +155,11 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 **Baseline**
 The baseline scenario will project GBD 2019 demographic and disease trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario. 
 
-**Alternative**
-Some aspects of the alternative scenarios will be the same as the baseline scenario: it will project GBD 2019 demographic and disease trends out from 2022 to 2027. In contrast to the baseline scenario, the first alternative scenario will scale up the coverage of MAM and SAM management and treatment interventions to 90% and the second alternative scenario will scale up the coverage of treatment and prevention interventions to 90%. 
+**Alternative scenario 1**
+Scale up the coverage of MAM management and MAM treatment interventions to 90%
 
-
-
+**Alternative scenario 2**
+Scale up the coverage of treatment and prevention interventions to 90%. 
 
 .. _5.0:
 
@@ -159,8 +173,6 @@ Some aspects of the alternative scenarios will be the same as the baseline scena
 
 .. image:: sam_concept_model_diagram.svg
 
-.. note::
-  This is our standard vivarium concept model diagram we are used to seeing
 
 .. _5.2:
 
