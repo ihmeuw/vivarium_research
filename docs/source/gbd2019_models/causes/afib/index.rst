@@ -192,7 +192,7 @@ Definitions
      - **S**\ usceptible to Atrial fibrillation and flutter 
      - Simulant that has not been diagnosed with atrial fibrillation and flutter.
    * - A
-     - **P**\ revalent Atrial fibrillation and flutter 
+     - Prevalent **A**\ trial fibrillation and flutter 
      - Simulant with prevalent atrial fibrillation and flutter diagnosed by ECG .
 
 
@@ -251,7 +251,7 @@ Transition Data
      - Notes
    * - 1
      - S
-     - P
+     - A
      - :math:`{incidence}_c500`
      - This is cause-level incidence which is equivalent to the “population rate”
 	 
