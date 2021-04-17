@@ -50,9 +50,15 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 | MM    | Multiple myeloma           |
 +-------+----------------------------+
 | OS    | Overall Survival           |
+<<<<<<< HEAD
 +-------+----------------------------+
 | PFS   | Progression-free survival  |
 +-------+----------------------------+
+=======
++-------+----------------------------+
+| PFS   | Progression-free survival  |
++-------+----------------------------+
+>>>>>>> 135784a9e1766907c383103ce0a683336a2224fc
 | RCT   | Randomized controlled trial|
 +-------+----------------------------+
 | RRMM  | Relapsed/ Refractory MM    |
@@ -251,10 +257,39 @@ The simulation concept model consists of five main components:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Location: United States
+<<<<<<< HEAD
   - Cohort type: Prospective closed cohort of 15 years and older
   - Size of largest starting population: 100,000 simulants
   - Time span: Jan 1, 2018 to Dec 31, 2025
   - Time step: 28 days to capture duration of treatment, and time to response
+=======
+<<<<<<< HEAD
+  - Cohort type: Prospective closed cohort of individuals 15 years and older
+  - Size of largest starting population: 100,000 simulants
+  - Time span: Jan 1, 2018 to Dec 31, 2025
+  - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
+
+
+.. _5.2.2:
+
+5.2.2 Population of interest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ - General US population
+ - Black/African American population 
+ - Population with high-risk cytogenetics  
+ - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
+ - Elder population (aged > 75 years) 
+
+.. note::
+  Confirm with RT that 'Registry population' is still a population of interest. It is no longer in the concept model doc shared with Sanofi.
+=======
+  - Cohort type: Prospective closed cohort of 15 years and older
+  - Size of largest starting population: 100,000 simulants
+  - Time span: Jan 1, 2018 to Dec 31, 2025
+  - Time step: 28 days to capture duration of treatment, and time to response
+>>>>>>> cebd1338b9fd2818ebd3a1d892986a4b8b105e43
+>>>>>>> 135784a9e1766907c383103ce0a683336a2224fc
 
 .. _5.3:
 
@@ -301,6 +336,7 @@ of high-risk cytogenetics among adults in the US population with multiple myelom
 
 5.3.3 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
+<<<<<<< HEAD
 
 First-line treatment
 ^^^^^^^^^^^^^^^^^^^^
@@ -308,6 +344,15 @@ First-line treatment
 Second-line treatment
 ^^^^^^^^^^^^^^^^^^^^
 
+=======
+
+First-line treatment
+^^^^^^^^^^^^^^^^^^^^
+
+Second-line treatment
+^^^^^^^^^^^^^^^^^^^^
+
+>>>>>>> 135784a9e1766907c383103ce0a683336a2224fc
 Third- or later-line treatment
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
