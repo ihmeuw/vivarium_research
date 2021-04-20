@@ -251,10 +251,25 @@ The simulation concept model consists of five main components:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Location: United States
-  - Cohort type: Prospective closed cohort of 15 years and older
+  - Cohort type: Prospective closed cohort of individuals 15 years and older
   - Size of largest starting population: 100,000 simulants
-  - Time span: Jan 1, 2018 to Dec 31, 2025
-  - Time step: 28 days to capture duration of treatment, and time to response
+  - Time span: Jan 1, 2011 to Dec 31, 2025
+  - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
+
+
+.. _5.2.2:
+
+5.2.2 Population of interest
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ - General US population
+ - Black/African American population 
+ - Population with high-risk cytogenetics  
+ - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
+ - Elder population (aged > 75 years) 
+
+.. note::
+  Confirm with RT that 'Registry population' is still a population of interest. It is no longer in the concept model doc shared with Sanofi.
 
 .. _5.3:
 
