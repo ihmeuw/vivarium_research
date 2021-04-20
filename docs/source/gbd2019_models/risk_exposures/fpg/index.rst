@@ -17,19 +17,80 @@ and has greater utility to monitor diabetes control over 2 to 3 months.
 [Normal-FPG-Levels]_
 
 
-Risk Exposures Description in GBD
----------------------------------
+GBD 2019 Modeling Strategy
+--------------------------
 
-Include a description of this risk exposure model in the context of GBD, 
-involving but not limited to:
+In GBD, FPG is modeled as a continuous variable using ST-GPR based on estimates of mean FPG in a representative population, individual-level data of fasting plasma glucose measured from surveys, or    
+estimates of diabetes prevalence in a representative population. 
 
-  - What type of statistical model? (categorical, continuous?)
+Fasting plasma glucose is frequently tested or reported in surveys aiming at assessing the prevalence of diabetes mellitus. In these surveys, the case definition of diabetes may include both a glucose 
+test and questions about treatment for diabetes. People with positive history of diabetes treatment may be excluded from the FPG test. Thus, the mean FPG in these surveys would not represent the mean FPG 
+in the entire population. In this event, we estimated the prevalence of diabetes assuming a definition of FPG>126 mg/dL (7mmol/L), then crosswalked it to our reference case definition, and then predicted 
+mean FPG.   
 
-  - How is the exposure estimated? (DisMod, STGPR?)
+The theoretical minimum-risk exposure level (TMREL) for FPG is 4.8-5.4 mmol/L for those risk-outcome pairs where risk is assessed on a continuous basis. This was calculated by taking the person-year 
+weighted average of the levels of FPG that were associated with the lowest risk of mortality in the pooled analyses of prospective cohort studies. The TMREL is no diabetes for those outcomes where risk 
+is assessed on a categorical basis. The risk-outcome pairs are listed below, along with whether they are continuous or categorical.  
 
-  - Which outcomes are affected by this risk?
+[Prospective-cohort-studies]_
 
-  - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
+
+
+.. list-table:: FPG Risk-Outcomes Pairs
+   :widths: 15 20
+   :header-rows: 1
+
+   * - Type
+     - Outcome
+   * - Continuous
+     - Ischemic heart disease
+   * - Continuous
+     - Ischemic stroke
+   * - Continuous
+     - Subarachnoid hemorrhage
+   * - Continuous
+     - Intracerebral hemorrhage
+   * - Continuous
+     - Peripheral vascular disease
+   * - Continuous
+     - Type 1 diabetes
+   * - Continuous
+     - Type 2 diabetes
+   * - Continuous
+     - Chronic kidney disease due to Type 1 diabetes
+   * - Continuous
+     - Chronic kidney disease due to Type 2 diabetes
+   * - Categorical
+     - Drug-resistant tuberculosis
+   * - Categorical
+     - Drug-susceptible tuberculosis
+   * - Categorical
+     - Multidrug-resistant tuberculosis without extensive drug resistance
+   * - Categorical
+     - Extensively drug-resistant tuberculosis
+   * - Categorical
+     - Liver cancer due to NASH
+   * - Categorical
+     - Liver cancer due to other causes
+   * - Categorical
+     - Pancreatic cancer
+   * - Categorical
+     - Ovarian cancer
+   * - Categorical
+     - Colorectal cancer
+   * - Categorical
+     - Bladder cancer
+   * - Categorical
+     - Lung cancer
+   * - Categorical
+     - Breast cancer
+   * - Categorical
+     - Glaucoma
+   * - Categorical
+     - Cataracts
+   * - Categorical
+     - Dementia
+
 
 Vivarium Modeling Strategy
 --------------------------
@@ -115,3 +176,6 @@ References
 
 .. [Normal-FPG-Levels]
     Gurung, Purnima. `Plasma Glucose.` StatPearls [Internet]., U.S. National Library of Medicine, 2 Sept. 2020, www.ncbi.nlm.nih.gov/books/NBK541081/. 
+
+.. [Prospective-cohort-studies]
+    Singh GM, Danaei G, Farzadfar F, Stevens GA, Woodward M, Wormser D, et al. (2013) `The Age-Specific Quantitative Effects of Metabolic Risk Factors on Cardiovascular Diseases and Diabetes: A Pooled Analysis.` PLoS ONE 8(7): e65174. https://doi.org/10.1371/journal.pone.0065174
