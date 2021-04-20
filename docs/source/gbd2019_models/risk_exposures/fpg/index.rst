@@ -10,7 +10,7 @@ Risk Exposure Overview
 
 Glucose is the primary energy source of the cells of the human body. Homeostasis of glucose metabolism is assessed by measuring plasma glucose levels either by 
 measuring fasting plasma glucose (FPG), performing an oral glucose tolerance test (OGTT), or analyzing glycated hemoglobin (HbA1c). These measurements can be used 
-to classify subjects as having normal glucose metabolism (FPG <100 mg/dL, OGTT <140 mg/dL, HbA1c <5.7%), impaired glucose metabolism (FPG 100 to 125 mg/dL, 
+to classify subjects as having normal glucose metabolism (FPG <100 mg/dL, OGTT <140 mg/dL, HbA1c <5.7%), impaired glucose metabolism (FPG 100 to <126 mg/dL, 
 OGTT 140 to 199 mg/dL, HbA1c 5.7 to 6.4%), or diabetes mellitus (FPG >=126 mg/dL, OGTT >=200 mg/dL, HbA1c >=6.5%). HbA1c is specific for diabetes but not very sensitive 
 and has greater utility to monitor diabetes control over 2 to 3 months.
 
