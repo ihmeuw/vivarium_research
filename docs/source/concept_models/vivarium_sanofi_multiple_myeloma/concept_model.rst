@@ -253,7 +253,7 @@ The simulation concept model consists of five main components:
   - Location: United States
   - Cohort type: Prospective closed cohort of individuals 15 years and older
   - Size of largest starting population: 100,000 simulants
-  - Time span: Jan 1, 2018 to Dec 31, 2025
+  - Time span: Jan 1, 2011 to Dec 31, 2025
   - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
 
 
