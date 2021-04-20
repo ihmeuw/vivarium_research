@@ -15,16 +15,58 @@ Blood pressure is recorded as two numbers, systolic (SBP) and diastolic (DBP), a
 Risk Exposures Description in GBD
 ---------------------------------
 
-Include a description of this risk exposure model in the context of GBD, 
-involving but not limited to:
+In GBD, systolic blood pressure is modeled as a continuous variable using ST-GPR based on blood pressure readings from population-based surveys and scientific studies. The quantity of interest is exposure to the mean blood pressure level regardless of whether that level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and do not account for duration of exposure to elevated SBP.  
 
-  - What type of statistical model? (categorical, continuous?)
+To account for in-person variation in systolic blood pressure, a “usual blood pressure” adjustment was done. The need for this adjustment has been described elsewhere. Briefly, measurements of a risk factor taken at a single time point may not accurately capture an individual’s true long-term exposure to that risk. Blood pressure readings are highly variable over time due to measurement error as well as diurnal, seasonal, or biological variation. These sources of variation result in an overestimation of the variation in cross-sectional studies of the distribution of SBP.  
 
-  - How is the exposure estimated? (DisMod, STGPR?)
+To adjust for this overestimation, we applied a correction factor to each location-, age-, time-, and sex-specific standard deviation. These correction factors were age-specific and represented the proportion of the variation in blood pressure within a population that would be observed if there were no within-person variation across time. Four longitudinal surveys were used to estimate these factors: the China Health and Retirement Longitudinal Survey (CHRLS), the Indonesia Family Life Survey (IFLS), the National Health and Nutrition Examination Survey I Epidemiological Follow-up Study (NHANES I/EFS), and the South Africa National Income Dynamics Survey (NIDS). 
 
-  - Which outcomes are affected by this risk?
+The theoretical minimum risk exposure was defined as a range between 110 to 115 mm Hg. This is the same for all risk-outcome pairs. These are listed below: 
 
-  - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
+.. list-table:: Risk-Outcome Pairs for SBP
+   :widths: 11 25
+   :header-rows: 1
+
+   * - Risk
+     - Outcome
+   * - High systolic blood pressure
+     - Rheumatic heart disease
+   * - High systolic blood pressure
+     - Ischemic heart disease
+   * - High systolic blood pressure
+     - Ischemic stroke
+   * - High systolic blood pressure
+     - Intracerebral hemorrhage
+   * - High systolic blood pressure
+     - Subarachnoid hemorrhage
+   * - High systolic blood pressure
+     - Hypertensive heart disease
+   * - High systolic blood pressure
+     - Atrial fibrillation and flutter
+   * - High systolic blood pressure
+     - Aortic aneurysm
+   * - High systolic blood pressure
+     - Peripheral artery disease
+   * - High systolic blood pressure
+     - Endocarditis
+   * - High systolic blood pressure
+     - Other cardiovascular and circulatory diseases (internal)
+   * - High systolic blood pressure
+     - Chronic kidney diseases due to hypertension
+   * - High systolic blood pressure
+     - Chronic kidney disease due to glomerulonephritis
+   * - High systolic blood pressure
+     - Chronic kidney disease due to other and unspecified causes
+   * - High systolic blood pressure
+     - Other cardiomyopathy
+   * - High systolic blood pressure
+     - Non-rheumatic calcific aortic valve disease
+   * - High systolic blood pressure
+     - Chronic kidney disease due to diabetes mellitus type 1
+   * - High systolic blood pressure
+     - Chronic kidney disease due to diabetes mellitus type 2
+
+[GBD-2019-Capstone-Appendix]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -115,3 +157,8 @@ References
 .. [JACC] Bakris, George, Waleed Ali, and Gianfranco Parati. "ACC/AHA versus ESC/ESH on hypertension guidelines: JACC guideline comparison." Journal of the American College of Cardiology 73.23 (2019): 3018-3026.
 	Retrieved 19 April 2021.
 	https://www.jacc.org/doi/full/10.1016/j.jacc.2019.03.507
+
+.. [GBD-2019-Capstone-Appendix]
+  Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249` 
+  
+.. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
