@@ -251,7 +251,6 @@ The simulation concept model consists of five main components:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Location: United States
-<<<<<<< HEAD
   - Cohort type: Prospective closed cohort of individuals 15 years and older
   - Size of largest starting population: 100,000 simulants
   - Time span: Jan 1, 2018 to Dec 31, 2025
@@ -271,12 +270,6 @@ The simulation concept model consists of five main components:
 
 .. note::
   Confirm with RT that 'Registry population' is still a population of interest. It is no longer in the concept model doc shared with Sanofi.
-=======
-  - Cohort type: Prospective closed cohort of 15 years and older
-  - Size of largest starting population: 100,000 simulants
-  - Time span: Jan 1, 2018 to Dec 31, 2025
-  - Time step: 28 days to capture duration of treatment, and time to response
->>>>>>> cebd1338b9fd2818ebd3a1d892986a4b8b105e43
 
 .. _5.3:
 
