@@ -25,16 +25,32 @@ particles directly using nuclear magnetic resonance spectroscopy; however, this 
 Risk Exposures Description in GBD
 ---------------------------------
 
-Include a description of this risk exposure model in the context of GBD, 
-involving but not limited to:
+In GBD, low density lipoprotein is modeled as a continuous variable using ST-GPR based on data from population-based surveys and scientific 
+studies. The reference definition for input data is calculated LDL-C. We also include data sources which provide estimates of HDL, TC, or TG 
+alone or in combination and adjust these data points using statistical modeling to estimate the amount of bias in non-reference data. The 
+quantity of interest is exposure to the mean LDL-C level regardless of whether that level is naturally occurring or occurs via use of 
+medication; we assume full reversibility of risk and do not account for duration of exposure to elevated LDL-C.   
 
-  - What type of statistical model? (categorical, continuous?)
+LDL-C is commonly reported using two different units. To convert from mmol/L to mg/dL multiply by 88.57. To convert from mg/dL to mmol/L 
+multiply by 0.01129.  
 
-  - How is the exposure estimated? (DisMod, STGPR?)
+The TMREL for LDL-C is 0.7 to 1.3 mmol/L. This is the same for all risk-outcome pairs. These are listed below. 
 
-  - Which outcomes are affected by this risk?
 
-  - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
+.. list-table:: Risk-Outcome Pairs for LDL
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Risk
+     - Outcome
+     - Cause_id
+   * - High low-density lipoprotein
+     - Ischemic heart disease
+     - 493
+   * - High low-density lipoprotein
+     - Ischemic stroke
+     - 495
+
 
 Vivarium Modeling Strategy
 --------------------------
