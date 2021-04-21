@@ -95,7 +95,12 @@ is assessed on a categorical basis. The risk-outcome pairs are listed below, alo
 Vivarium Modeling Strategy
 --------------------------
 
-Include here an overview of the Vivarium modeling section
+Scope
++++++
+
+Mean FPG is a continuous exposure modelled in GBD. FPG will be a target of lifestyle interventions in the simulation; 
+the outcomes affected are described in the overall concept model document.
+
 
 Restrictions
 ++++++++++++
@@ -108,68 +113,71 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
+     - False
      -
+   * - YLD only
+     - False
+     -
+   * - YLL only
+     - False
      -
    * - Age group start
-     -
-     -
+     - 10
+     - [25, 29 years) 
    * - Age group end
-     -
-     -
+     - 235
+     - [95, 125 years) 
 
-..	todo::
 
-	Determine if there's something analogous to "YLL/YLD only" for this section
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
+The quantity of interest is exposure to the mean fasting plasma glucose level regardless of whether that 
+level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and 
+do not account for duration of exposure to elevated FPG.
 
-Risk Exposure Model Diagram
-++++++++++++++++++++++
 
-Include diagram of Vivarium risk exposure model.
 
 Data Description Tables
 +++++++++++++++++++++++
 
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
+The rei_id for FPG is 105.
 
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
 
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
+.. list-table:: Components
+   :widths: 15 15 20
+   :header-rows: 1
 
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
+   * - Components
+     - ME_ID
+     - Notes
+   * - Mean exposure 
+     - 8909 
+     -
+   * - Standard deviation 
+     - 18705 
+     -
+   * - Relative risk, continuous 
+     - 9056 
+     - Must be accessed with get_draws 
+   * - Relative risk, categorical 
+     - 9057 
+     - Must be accessed with get_draws 
 
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
+The exposure values should be used to represent the distribution of mean fasting plasma glucose 
+levels that the simulants will be assigned in the model. 
+
 
 Validation Criteria
 +++++++++++++++++++
 
-..	todo::
-	Fill in directives for this section
+1. Does the mean in the model match the mean in GBD? 
+2. Does the standard deviation in the model match the std in GBD? 
+
 
 References
 ----------
