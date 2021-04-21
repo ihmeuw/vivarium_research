@@ -55,7 +55,11 @@ The TMREL for LDL-C is 0.7 to 1.3 mmol/L. This is the same for all risk-outcome 
 Vivarium Modeling Strategy
 --------------------------
 
-Include here an overview of the Vivarium modeling section
+Scope
++++++
+
+We will model LDL-C as a continuous risk factor in the Vivarium simulation, similar to the GBD approach.
+
 
 Restrictions
 ++++++++++++
@@ -68,68 +72,61 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
+     - False
      -
+   * - YLD only
+     - False
+     -
+   * - YLL only
+     - False
      -
    * - Age group start
-     -
-     -
+     - 10
+     - [25, 29 years) 
    * - Age group end
-     -
-     -
+     - 235
+     - [95, 125 years)
 
-..	todo::
-
-	Determine if there's something analogous to "YLL/YLD only" for this section
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
+As described above, LDL-C is a calculated value; there is measurement error inherent in the lipid panel 
+assays used to obtain values for the input into the formula. 
 
-Risk Exposure Model Diagram
-++++++++++++++++++++++
-
-Include diagram of Vivarium risk exposure model.
 
 Data Description Tables
 +++++++++++++++++++++++
 
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
+The rei_id for LDL is 367.
 
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
+.. list-table:: Components
+   :widths: 15 15 20
+   :header-rows: 1
 
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
+   * - Component
+     - ME_ID
+     - Notes
+   * - Mean exposure 
+     - 18822 
+     -
+   * - Standard deviation 
+     - 18823 
+     -
+   * - Relative risk 
+     - 18824 
+     - Must be accessed with get_draws 
 
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
 
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
 
 Validation Criteria
 +++++++++++++++++++
 
-..	todo::
-	Fill in directives for this section
+1. Does the mean in the model match the mean in GBD? 
+2. Does the standard deviation in the model match the standard deviation in GBD? 
 
 References
 ----------
