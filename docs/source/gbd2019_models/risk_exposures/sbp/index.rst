@@ -71,7 +71,7 @@ The theoretical minimum risk exposure was defined as a range between 110 to 115 
 Vivarium Modeling Strategy
 --------------------------
 
-Mean SBP is a continuous exposure modelled in GBD. SBP will be a target of medication interventions in the simulation; the outcomes affected are described in the overall concept model document.  
+Mean SBP is a continuous exposure modelled in GBD using an ensemble distribution. SBP will be a target of medication interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
 Restrictions
 ++++++++++++
