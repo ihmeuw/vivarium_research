@@ -308,7 +308,7 @@ two risk exposure categories: with high-risk cytogenetics, or with standard-risk
 cytogenetics. We intend to use Flatiron data to inform the existing prevalence 
 of high-risk cytogenetics among adults in the US population with multiple myeloma.
 
-.. list-table:: Cytogenetic risk stratification of myeloma (Rajan and Rajkumar et al. 2015)
+.. list-table:: Cytogenetic risk stratification of myeloma ([Rajan-and-Rajkumar-et-al-2015]_)
    :header-rows: 1
 
    * - Risk stratification	
@@ -318,15 +318,15 @@ of high-risk cytogenetics among adults in the US population with multiple myelom
    * - Standard risk
      - Trisomies t(11;14) t(6;14)
      - 7 to 10 years
-     - 
+     - Informed by Flatiron data
    * - Intermediate risk
      - t(4;14) Gain(1q21)
      - 5 years
-     - 
+     - Informed by Flatiron data
    * - High risk
      - Del(17p) t(14;16) t(14;20) Del(1p)
      - 3 years
-     - 
+     - Informed by Flatiron data
 
 .. note::
 
@@ -544,3 +544,7 @@ Where,
    low-dose dexamethasone versus pomalidomide and low-dose dexamethasone in patients 
    with relapsed and refractory multiple myeloma (ICARIA-MM): a randomised, 
    multicentre, open-label, phase 3 study. Lancet 2019; 394: 2096–107.
+
+.. [Rajan-and-Rajkumar-et-al-2015]
+   Rajan AM, Rajkumar SV. Interpretation of cytogenetic results in multiple 
+   myeloma for clinical practice. Blood Cancer J 2015; 5: e365.
