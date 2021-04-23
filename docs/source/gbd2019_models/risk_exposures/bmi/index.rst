@@ -128,7 +128,7 @@ For adults (ages 20+), the theoretical minimum risk exposure level (TMREL) of BM
 Vivarium Modeling Strategy
 --------------------------
 
-Mean BMI is a continuous exposure modelled in GBD. BMI will be a target of lifestyle interventions in the simulation; the outcomes affected are described in the overall concept model document.  
+Mean BMI is a continuous exposure modelled in GBD using an ensemble distribution. BMI will be a target of lifestyle interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
 Restrictions
 ++++++++++++
