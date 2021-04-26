@@ -141,10 +141,6 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 5)	Reduce incidence of infectious disease; or
 6)	Improve recovery from infectious disease.
 
-.. csv-table:: Table 1: Interventions
-   :file: am_interventions_table.csv
-   :widths: 30, 30, 30, 30, 30, 30, 20, 20
-   :header-rows: 1
 
 
 .. _4.1:
