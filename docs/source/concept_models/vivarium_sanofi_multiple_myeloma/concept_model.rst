@@ -41,7 +41,8 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 +-------+----------------------------+
 | CKD   | Chronic kidney disease     |
 +-------+----------------------------+
-| GFR   | Glomerular filtration rate |
+| eGFR  | Estimated glomerular       |
+|       | filtration rate            |
 +-------+----------------------------+
 | HR    | Hazard ratio               |
 +-------+----------------------------+
@@ -75,7 +76,7 @@ Key sub-populations agreed upon include:
 
 * Population with high-risk cytogenetics 
 
-* Population with renal impairment/CKD (GFR < 60 ml/min/1.73m^2)
+* Population with renal impairment/CKD (eGFR < 60 ml/min/1.73m^2)
 
 * Elder population (aged > 75 years) 
 
@@ -235,7 +236,7 @@ In the absence of data from Flatiron, we made following assumptions:
 
 The simulation concept model consists of five main components: 
  1. Covariates (age, sex, race/ethnicity) 
- 2. Risk factors (GFR and cytogenetics) 
+ 2. Risk factors (eGFR and cytogenetics) 
  3. Causes (progression of multiple myeloma) 
  4. Health system (multiple lines of treatment for MM and RRMM population) 
  5. Patient registry 
@@ -262,14 +263,12 @@ The simulation concept model consists of five main components:
 5.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- - General US population
+**General US population** and **Registry population** stratified by 
+sub-population groups of following:
  - Black/African American population 
- - Population with high-risk cytogenetics  
+ - Population with high-risk cytogenetics (abnormality includes Del(17p) t(14;16) t(14;20) Del(1p))
  - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
  - Elder population (aged > 75 years) 
-
-.. note::
-  Confirm with RT that 'Registry population' is still a population of interest. It is no longer in the concept model doc shared with Sanofi.
 
 .. _5.3:
 
@@ -295,22 +294,46 @@ developing MM. Instead, they are considered as determinants in patient and
 disease characteristics. For simulants at a given age, sex, and race/ethnicity, 
 the choice of therapy is based on their GFR and cytogenetic risk. 
 
-**GFR** has a continuous risk exposure by age and sex (or race/ethnicity). 
-Simulants will be assigned to a CKD stage based on their GFR value. We consider 
-4 stages of CKD:
- - No CKD: GFR > 90 ml/min/1.73m^2
- - Mild CKD: GFR 60 to 90 ml/min/1.73m^2
- - Moderate CKD: GFR 30 to 60 ml/min/1.73m^2
- - Severe CKD: GFR < 30 ml/min/1.73m^2
+**eGFR** has a continuous risk exposure by age, sex, and race/ethnicity. 
+Simulants will be assigned to a CKD stage based on their eGFR value. We consider 
+5 stages of CKD:
+ - Stage 1: eGFR > 90 ml/min/1.73m^2
+ - Stage 2: eGFR 60 to 90 ml/min/1.73m^2
+ - Stage 3: eGFR 30 to 60 ml/min/1.73m^2
+ - Stage 4: eGFR 15 to 30 ml/min/1.73m^2
+ - Stage 5: eGFR < 15 ml/min/1.73m^2
 
 **Cytogenetic risk** is a binary risk factor. Simulants will fall into one of 
 two risk exposure categories: with high-risk cytogenetics, or with standard-risk 
 cytogenetics. We intend to use Flatiron data to inform the existing prevalence 
 of high-risk cytogenetics among adults in the US population with multiple myeloma.
 
+.. list-table:: Cytogenetic risk stratification of myeloma ([Rajan-and-Rajkumar-et-al-2015]_)
+   :header-rows: 1
+
+   * - Risk stratification	
+     - Cytogenetic abnormalities
+     - Median OS from MM diagnosis
+     - Percentage of patients
+   * - Standard risk
+     - Trisomies t(11;14) t(6;14)
+     - 7 to 10 years
+     - Informed by Flatiron data
+   * - Intermediate risk
+     - t(4;14) Gain(1q21)
+     - 5 years
+     - Informed by Flatiron data
+   * - High risk
+     - Del(17p) t(14;16) t(14;20) Del(1p)
+     - 3 years
+     - Informed by Flatiron data
+
 .. note::
 
- Describe how to stratify GFR by race/ethnicity.
+ In our risk model, we assume myeloma patients without high-risk cytogenetic 
+ abnormalities have 'standard-risk', namely with standard- or intermediate-risk 
+ abnormalities as described above. No abnormalities detected on fluorescence in 
+ situ hybridization (FISH) is considered 'standard-risk' as well. 
 
 .. _5.3.3:
 
@@ -393,6 +416,7 @@ Where,
      - Age group
      - Sex
      - Poulation group
+     - Population subgroup
      - Scenario
      - Cause
      - Outcome
@@ -401,6 +425,7 @@ Where,
      - 15 to 19
      - Female
      - General population
+     - Black/African American population
      - Baseline
      - Multiple myeloma
      - Incidence (cases per person-year)
@@ -408,7 +433,8 @@ Where,
      - 2022
      - 20 to 24
      - Male
-     - Black/African American population
+     - Registry population
+     - High-risk cytogenetics population
      - Alternative
      - Relapsed/refractory multiple myeloma
      - Prevalence (cases per person-year)
@@ -416,34 +442,55 @@ Where,
      - 2023
      - 25 to 29
      - 
-     - High-risk cytogenetics population
+     - 
+     - Population with RI
      - 
      - 
-     - Survival (PFS and OS in months)
+     - Death (per person-year)
    * - 
      - 2024
      - ...
      - 
-     - Population with CKD (GFR < 60 ml/min/1.73m^2)
+     - 
+     - Elder population
      - 
      - 
-     - Deaths (per person-year)
+     - Median PFS (months)
    * - 
      - 2025
      - 95 plus
      - 
-     - Elder population (aged > 75 years)
      - 
      - 
      - 
+     - 
+     - One-year PFS (%)
    * - 
      - 
      - 
      - 
-     - Registry population
      - 
      - 
      - 
+     - 
+     - Median OS (months)
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - One-year OS (%)
+
+- High-risk cytogenetics: abnormalities of Del(17p) t(14;16) t(14;20) Del(1p)
+- Renal impairment (RI): eGFR < 60 ml/min/1.73m^2
+- Elder: aged > 75 years
+- Median PFS (months): median length of time-to-progression in months
+- One-year PFS (%): proportion of patients survival without progression during a one-year period
+- Median OS (months): median length of time-to-death in months
+- One-year OS (%): proportion of patients survival without death during a one-year period
 
 .. _6.0:
 
@@ -497,3 +544,7 @@ Where,
    low-dose dexamethasone versus pomalidomide and low-dose dexamethasone in patients 
    with relapsed and refractory multiple myeloma (ICARIA-MM): a randomised, 
    multicentre, open-label, phase 3 study. Lancet 2019; 394: 2096–107.
+
+.. [Rajan-and-Rajkumar-et-al-2015]
+   Rajan AM, Rajkumar SV. Interpretation of cytogenetic results in multiple 
+   myeloma for clinical practice. Blood Cancer J 2015; 5: e365.
