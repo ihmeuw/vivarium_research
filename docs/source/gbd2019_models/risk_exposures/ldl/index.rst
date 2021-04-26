@@ -58,7 +58,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-We will model LDL-C as a continuous risk factor in the Vivarium simulation, similar to the GBD approach.
+We will model LDL-C as a continuous risk factor in the Vivarium simulation using an ensemble distribution, similar to the GBD approach.
 
 
 Restrictions
