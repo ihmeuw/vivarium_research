@@ -98,7 +98,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-Mean FPG is a continuous exposure modelled in GBD. FPG will be a target of lifestyle interventions in the simulation; 
+Mean FPG is a continuous exposure modelled in GBD using an ensemble distribution. FPG will be a target of lifestyle interventions in the simulation; 
 the outcomes affected are described in the overall concept model document.
 
 
