@@ -30,3 +30,12 @@ Ensemble Distributions in GBD
 .. contents::
    :local:
    :depth: 1
+
+What Is an Ensemble Distribution?
+---------------------------------
+
+Mathematical Definition of Ensemble Distributions
+-------------------------------------------------
+
+Sampling from Ensemble Distributions in Vivarium
+------------------------------------------------
