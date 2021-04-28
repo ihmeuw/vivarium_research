@@ -34,61 +34,202 @@ Vivarium - US Health Disparities - CVD Interventions
 .. contents::
   :local:
 
++------------------------------------+
+| List of abbreviations              |
++=======+============================+
+|       |                            |
++-------+----------------------------+
+
 .. _1.0:
 
-1.0 Model Overview
-++++++++++++++++++
+1.0 Background
+++++++++++++++
 
-.. todo::
 
-	Fill this section out
+.. _1.1:
+
+1.1 Project overview
+--------------------
+
+
+
+.. _1.2:
+
+1.2 Literature review
+---------------------
 
 
 .. _2.0:
 
-2.0 Model Components
-++++++++++++++++++++
+2.0 Modeling aims and objectives
+++++++++++++++++++++++++++++++++
 
-.. todo::
-
-	Fill this section out
 
 .. _3.0:
 
-3.0 Risk-Outcome
+3.0 Causal framework
+++++++++++++++++++++
+
+.. _3.1:
+
+3.1 Causal diagram
+------------------
+ 
+ .. note::
+    link to DAGs page
+    use round circles with DAGs
+
+**Outcome (O)**:
+
+
+
+**Most proximal determinant/exposure (E)**:
+  
+
+
+**Confounders (C)**:
+
+
+
+**Effect modifiers**:
+
+
+**Mediators (M)**:
+
+
+.. _3.2:
+
+3.2 Effect sizes
+----------------
+
+
+
+4.0 Intervention
 ++++++++++++++++
 
-.. todo::
 
-	Fill this section out
 
-.. todo::
+.. _4.1:
 
-	Add "mediation_matrix_summary_gbd_2019.csv"
- 
-.. _4.0:
+4.1 Simulation scenarios
+------------------------
 
-4.0 Interventions
-+++++++++++++++++
-
-.. todo::
-
-	Fill this section out
 
 .. _5.0:
 
-5.0 Desired Model Outputs
-+++++++++++++++++++++++++
+5.0 Vivarium modelling components
++++++++++++++++++++++++++++++++++
+
+.. _5.1:
+
+5.1 Vivarium concept model 
+--------------------------
+
+.. note::
+  This is our standard vivarium concept model diagram we are used to seeing
+
+.. _5.2:
+
+5.2 Demographics
+----------------
+
+.. _5.2.1:
+
+5.2.1 Population description
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  - cohort type
+  - cohort length
+  - age and sex structure
+  - time step
+  - fertility
+  - stratifications 
+
+
+.. _5.2.2:
+
+5.2.2 Location description
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+.. _5.3:
+
+5.3 Models
+----------
+
+.. note::
+  here we use the compartmental (SEIR) models with squares
+  
+
+.. _5.3.1:
+
+5.3.1 Model 1
+~~~~~~~~~~~~~
 
 .. todo::
 
-	Fill this section out
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
+
+.. _5.3.2:
+
+5.3.2 Model 2
+~~~~~~~~~~~~~
+
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
+
+.. _5.3.3:
+
+5.3.3 Model 3
+~~~~~~~~~~~~~
+
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
+
+.. _5.3.4:
+
+5.3.4 Model 4
+~~~~~~~~~~~~~
+
+.. todo::
+
+  - add verification and validation strategy
+  - add python-style pseudo code to summarize model algorithm if necessary
+
+
+.. _5.4:
+
+5.4 Desired outputs
+-------------------
+
+.. _5.5:
+
+5.5 Output meta-table shell
+---------------------------
+
+.. todo::
+  - add special stratifications if necessary
 
 .. _6.0:
 
-6.0 References
+6.0 Back of the envelope calculations
++++++++++++++++++++++++++++++++++++++
+
+
+.. _7.0:
+
+7.0 Limitations
++++++++++++++++
+
+
+
+.. _8.0:
+
+8.0 References
 ++++++++++++++
-
-.. todo::
-
-	Fill this section out
