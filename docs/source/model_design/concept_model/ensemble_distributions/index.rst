@@ -49,14 +49,17 @@ fits the data better than any of its individual components.
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
 
-The R code for fitting ensemble distributions can be found on Stash and on the cluster.
+Here are links to R code and Python code implementing GBD's ensemble distributions:
 
-* Stash repo: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
-* Cluster access: :file:`/ihme/code/risk/ensemble/`
+* `R code for ensemble distributions on Stash <https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse>`_,
+  accessible on the cluster at :file:`/ihme/code/risk/ensemble/` and maintained
+  by Central Comp
 
-There are 13 distribution families listed in the file `pdf_families.R <https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/pdf_families.R>`_ in the above repo, though it appears that GBD currently uses only 11 of them  as base distributions to create ensembles:
+* `Python code for ensemble distributions on GitHub <https://github.com/ihmeuw/risk_distributions/>`_,
+  part of `Vivarium Public Health <https://github.com/ihmeuw/vivarium_public_health>`_
+  and maintained by the Vivarium Engineering Team
 
-Name+Wikipedia link, R function+documentation link, Number of parameters, (formula)
+There are 14 distribution families listed in the file `pdf_families.R <https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/pdf_families.R>`_ in the R code base, and 12 of them are implemented for Vivarium in `risk_distributions.py <https://github.com/ihmeuw/risk_distributions/blob/master/src/risk_distributions/risk_distributions.py>`_:
 
 * Gamma
 * Mirrored Gamma
@@ -72,6 +75,8 @@ Name+Wikipedia link, R function+documentation link, Number of parameters, (formu
 * Gumbel
 * Mirrored Gumbel
 * Beta (with shift+scale)
+
+Name+Wikipedia link, R function+documentation link, Number of parameters, (formula)
 
 
 Mathematical Definition of Ensemble Distributions
