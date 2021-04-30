@@ -46,6 +46,9 @@ fits the data better than any of its individual components.
 
 .. _ensemble learning: https://www.toptal.com/machine-learning/ensemble-methods-machine-learning#:~:text=Ensemble%20methods%20are%20techniques%20that,winning%20solutions%20used%20ensemble%20methods.
 
+Mathematical Definition of Ensemble Distributions
+-------------------------------------------------
+
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
 
@@ -58,9 +61,9 @@ Here are links to R code and Python code implementing GBD's ensemble distributio
   `Vivarium Public Health <https://github.com/ihmeuw/vivarium_public_health>`_
   and maintained by the Vivarium Engineering Team
 
-There are 14 distribution families listed in the file `pdf_families.R`_ in the R
-code base, and 12 of them are implemented for Vivarium in
-`risk_distributions.py`_ (all except the Generalized Normal and Generalized Log-normal):
+The R code base lists 14 distribution families in the file `pdf_families.R`_,
+and 12 of them are implemented for Vivarium in `risk_distributions.py`_ (all
+except the Generalized Normal and Generalized Log-normal):
 
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
@@ -82,8 +85,8 @@ code base, and 12 of them are implemented for Vivarium in
 * Mirrored Gumbel
 * Beta (with shift+scale)
 
-Unless otherwise specified, each of the above distribution families has 2
-parameters.
+Each of the above distribution families has 2 parameters except as otherwise
+specified.
 
 .. todo::
 
@@ -103,10 +106,6 @@ parameters.
   currently used for ensemble modeling by Central Comp, because they don't get
   added to ``classA``, ``classB``, or ``classM`` at the end of
   `pdf_families.R`_.
-
-
-Mathematical Definition of Ensemble Distributions
--------------------------------------------------
 
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
