@@ -49,6 +49,26 @@ fits the data better than any of its individual components.
 Mathematical Definition of Ensemble Distributions
 -------------------------------------------------
 
+Mathematically, an ensemble distribution in GBD is just a `mixture
+distribution`_, which is defined as follows. Suppose :math:`F_1, F_2,\ldots,
+F_n` are `cumulative distribution functions <CDF_>`_ (CDFs), called the **base
+distributions** of the ensemble or the **components** of the mixture, and
+suppose we have a set of non-negative numbers :math:`w_1, w_2,\ldots, w_n`,
+called **weights**, such that :math:`\sum_1^n w_i = 1`. Then the **mixture
+distribution** with components :math:`\{F_i\}_1^n` and weights
+:math:`\{w_i\}_1^n` is the probability distribution on :math:`\mathbb{R}` whose
+cumulative distribution function :math:`F` is defined by
+
+.. math::
+
+  F(x) = \sum_{i=1}^n w_i F_i(x)\quad \text{for } x\in \mathbb{R}.
+
+That is, the CDF of the mixture is just a weighted average of the CDFs of the
+components, with the weight of :math:`F_i` being :math:`w_i`.
+
+.. _mixture distribution: https://en.wikipedia.org/wiki/Mixture_distribution
+.. _CDF: https://en.wikipedia.org/wiki/Cumulative_distribution_function
+
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
 
