@@ -64,6 +64,11 @@ Vivarium - US Health Disparities - CVD Interventions
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
+The intent of this simulation is to determine the effect of various interventions aimed at: 1) improving blood pressure and LDL-cholesterol control, 2) increasing exercise, 3) decreasing BMI/weight, 4) improving control of fasting plasma glucose, and 5) decreasing tobacco use. 
+
+Initial efforts will focus on the 50 US states and Washington DC; when inputs are available for simulations by race/ethnicity groups within the US subnationals, we will transition to that level. 
+
+Comparisons will be with the GBD results of incidence, prevalence, and mortality for the causes and risks included in the following sections. 
 
 .. _3.0:
 
