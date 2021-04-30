@@ -42,9 +42,36 @@ data to match these nicely parameterized, mathematically convenient models.
 Thus, in order to model exposure data more accurately, GBD uses an `ensemble
 learning
 <https://www.toptal.com/machine-learning/ensemble-methods-machine-learning#:~:text=Ensemble%20methods%20are%20techniques%20that,winning%20solutions%20used%20ensemble%20methods.>`_
-approach, fitting multiple distributions to the data, and averaging them
-together to get an overall "ensemble" distribution that fits the data better
-than any of its individual components.
+approach, fitting multiple distributions to the data, and averaging the
+distribution functions together to get an overall "ensemble" distribution that
+fits the data better than any of its individual components.
+
+What Base Distributions Are Used in GBD's Ensembles?
+----------------------------------------------------
+
+The R code for fitting ensemble distributions can be found on Stash and on the cluster.
+
+* Stash repo: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
+* Cluster access: :file:`/ihme/code/risk/ensemble/`
+
+There are 13 distribution families listed in the file `pdf_families.R <https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/pdf_families.R>`_ in the above repo, though it appears that GBD currently uses only 11 of them  as base distributions to create ensembles:
+
+Name+Wikipedia link, R function+documentation link, Number of parameters, (formula)
+
+* Gamma
+* Mirrored Gamma
+* Inverse Gamma
+* Normal
+* Generalized Normal (3-parameter, not used)
+* Log-normal
+* Generalized log-normal (3-parameter, not used)
+* Exponential (1-parameter)
+* Weibull
+* Inverse Weibull (not used)
+* Log-logistic
+* Gumbel
+* Mirrored Gumbel
+* Beta (with shift+scale)
 
 
 Mathematical Definition of Ensemble Distributions
