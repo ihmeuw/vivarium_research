@@ -83,11 +83,36 @@ continuous case.
 .. _continuous probability distributions: https://en.wikipedia.org/wiki/Probability_distribution#Continuous_probability_distribution
 .. _PDF: https://en.wikipedia.org/wiki/Probability_density_function
 
-Fitting an Ensemble Distribution to a GBD Risk Exposure
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Fitting an Ensemble Distribution to GBD Risk Exposure Data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-Suppose we have a continuous risk exposure variable :math:`E` that we want to model with an ensemble distribution. For example, :math:`E` could be fasting plasma glucose, body mass index, birthweight, or hemoglobin level.
-Suppose that we want to model :math:`E` for :math:`K` different population groups, e.g. indexed by location/age/sex/year as in GBD. Let :math:`k\in \{1,2,\ldots,K\}` specify which population group we are referring to. Suppose further that we have microdata on :math:`E` for at least some of the groups, and we are able to estimate the mean :math:`\mu_k` and standard deviation :math:`\sigma_k` of :math:`E` for each group :math:`k`; typically GBD teams do this using ST-GPR or other regression methods. Our goal is to find an ensemble distribution function :math:`F(x | \mu, \sigma)`, parameterized by mean :math:`\mu` and standard deviation :math:`\sigma`, such that :math:`F(x | \mu_k, \sigma_k)` provides a good approximation of the CDF of :math:`E` for each group :math:`k` that has microdata.
+Suppose we have a continuous risk exposure variable :math:`E` that we want to
+model. For example, :math:`E` could be body mass index, fasting plasma glucose,
+birthweight, or hemoglobin level. Suppose that we want to model :math:`E` for
+:math:`K` different population groups, e.g. indexed by location/age/sex/year as
+in GBD. Let :math:`k\in \{1,2,\ldots,K\}` specify which population group we are
+referring to. Suppose further that we have microdata on :math:`E` for at least
+some of the groups, and we are able to estimate the mean :math:`\mu_k` and
+standard deviation :math:`\sigma_k` of :math:`E` for each group :math:`k`;
+typically GBD teams do this using ST-GPR or other regression methods. Our goal
+is to find a family of distribution functions :math:`F(x | \mu, \sigma)`,
+parameterized by mean :math:`\mu` and standard deviation :math:`\sigma`, such
+that:
+
+* The distribution function :math:`F(x | \mu_k, \sigma_k)` provides a good
+  approximation of the empirical CDF of :math:`E` for each group :math:`k` that
+  has microdata; and
+
+* The mean and standard deviation of :math:`F(x | \mu_k, \sigma_k)` match
+  :math:`\mu_k` and :math:`\sigma_k` for all groups :math:`k`.
+
+
+The family of functions :math:`F(x | \mu, \sigma)` will be defined as a mixture
+of a fixed set of base distributions :math:`F_1(x | \mu, \sigma), F_2(x | \mu,
+\sigma),\ldots, F_n(x | \mu, \sigma)`  parameterized by mean :math:`\mu` and
+standard deviation :math:`\sigma`, using a fixed global set of weights
+:math:`\{w_i\}_1^n` for all :math:`\mu` and :math:`\sigma`. GBD calls :math:`F(x
+| \mu, \sigma)` an **ensemble distribution**.
 
 
 The goal for modeling :math:`E` with an ensemble distribution is to find a **global** set of weights :math:`\{w_i\}_1^n`
