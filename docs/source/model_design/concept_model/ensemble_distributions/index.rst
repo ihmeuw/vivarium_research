@@ -83,11 +83,11 @@ continuous case.
 .. _continuous probability distributions: https://en.wikipedia.org/wiki/Probability_distribution#Continuous_probability_distribution
 .. _PDF: https://en.wikipedia.org/wiki/Probability_density_function
 
-The following section describes how GBD uses mixture distributions to define an
-ensemble distribution for modeling risk exposure.
-
 Fitting an Ensemble Distribution to GBD Risk Exposure Data
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This section describes how GBD uses mixture distributions to define an ensemble
+distribution for modeling risk exposure.
 
 Problem setup
 ~~~~~~~~~~~~~~~
@@ -132,24 +132,29 @@ and standard deviation :math:`\sigma_k` for the population group :math:`k`.
 Improving the distribution estimates with an ensemble approach
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The family of functions :math:`F(x | \mu, \sigma)` will be defined as a mixture
-of a fixed set of base distributions :math:`F_1(x | \mu, \sigma), F_2(x | \mu,
-\sigma),\ldots, F_n(x | \mu, \sigma)`  parameterized by mean :math:`\mu` and
-standard deviation :math:`\sigma`, using a fixed global set of weights
-:math:`\{w_i\}_1^n` for all :math:`\mu` and :math:`\sigma`. GBD calls :math:`F(x
-| \mu, \sigma)` an **ensemble distribution**.
+.. todo::
+  **Fill in this section.** Here are some unfinished snippets I started:
+
+  The family of functions :math:`F(x | \mu, \sigma)` will be defined as a
+  mixture of a fixed set of base distributions :math:`F_1(x | \mu, \sigma),
+  F_2(x | \mu, \sigma),\ldots, F_n(x | \mu, \sigma)`  parameterized by mean
+  :math:`\mu` and standard deviation :math:`\sigma`, using a fixed global set of
+  weights :math:`\{w_i\}_1^n` for all :math:`\mu` and :math:`\sigma`. GBD calls
+  :math:`F(x | \mu, \sigma)` an **ensemble distribution**.
 
 
-The goal for modeling :math:`E` with an ensemble distribution is to find a **global** set of weights :math:`\{w_i\}_1^n`
+  The goal for modeling :math:`E` with an ensemble distribution is to find a **global** set of weights :math:`\{w_i\}_1^n`
 
 
-to start with a specified set of base distributions :math:`F_1(x | \mu, \sigma), F_2(x | \mu, \sigma),\ldots,
-F_n(x | \mu, \sigma)`  parameterized by mean :math:`\mu` and standard deviation :math:`\sigma` and
+  to start with a specified set of base distributions :math:`F_1(x | \mu,
+  \sigma), F_2(x | \mu, \sigma),\ldots, F_n(x | \mu, \sigma)`  parameterized by
+  mean :math:`\mu` and standard deviation :math:`\sigma` and
 
-To model risk exposures using ensemble distributions, GBD uses the following procedure:
+  To model risk exposures using ensemble distributions, GBD uses the following
+  procedure:
 
-1. Start with a collection of base distributions :math:`F_1, F_2,\ldots,
-F_n`
+  1. Start with a collection of base distributions :math:`F_1, F_2,\ldots,
+  F_n`
 
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
