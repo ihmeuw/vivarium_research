@@ -83,8 +83,14 @@ continuous case.
 .. _continuous probability distributions: https://en.wikipedia.org/wiki/Probability_distribution#Continuous_probability_distribution
 .. _PDF: https://en.wikipedia.org/wiki/Probability_density_function
 
+The following section describes how GBD uses mixture distributions to define an
+ensemble distribution for modeling risk exposure.
+
 Fitting an Ensemble Distribution to GBD Risk Exposure Data
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Problem setup
+~~~~~~~~~~~~~~~
 
 Suppose we have a continuous risk exposure variable :math:`E` that we want to
 model. For example, :math:`E` could be body mass index, fasting plasma glucose,
@@ -96,16 +102,35 @@ some of the groups, and we are able to estimate the mean :math:`\mu_k` and
 standard deviation :math:`\sigma_k` of :math:`E` for each group :math:`k`;
 typically GBD teams do this using ST-GPR or other regression methods. Our goal
 is to find a family of distribution functions :math:`F(x | \mu, \sigma)`,
-parameterized by mean :math:`\mu` and standard deviation :math:`\sigma`, such
-that:
+parameterized by mean :math:`\mu` and standard deviation :math:`\sigma`,
+satisfying the following criteria:
 
-* The distribution function :math:`F(x | \mu_k, \sigma_k)` provides a good
-  approximation of the empirical CDF of :math:`E` for each group :math:`k` that
-  has microdata; and
+* For each group :math:`k` that has microdata, the distribution function
+  :math:`F(x | \mu_k, \sigma_k)` provides a good approximation of the
+  `empirical CDF`_ of :math:`E` ; and
 
-* The mean and standard deviation of :math:`F(x | \mu_k, \sigma_k)` match
-  :math:`\mu_k` and :math:`\sigma_k` for all groups :math:`k`.
+* For all groups :math:`k`, the function :math:`F(x | \mu_k, \sigma_k)` provides
+  a plausible estimate of the population distribution of :math:`E` --- in particular, its mean and
+  standard deviation match :math:`\mu_k` and :math:`\sigma_k`.
 
+.. _empirical CDF: https://en.wikipedia.org/wiki/Empirical_distribution_function
+
+A simple strategy for estimating exposure distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One simple approach to finding such a family of distributions :math:`F(x | \mu,
+\sigma)` would be to choose a 2-parameter family of probability distributions on
+:math:`\mathbb{R}`, such as the family of normal distributions
+:math:`\mathcal{N}(\mu,\sigma^2)`, and to fit distributions from that family to
+the exposure data using the `method of moments`_. That is, we would set
+:math:`F(x | \mu, \sigma) \equiv \mathcal{N}(\mu,\sigma^2)` so that :math:`E`
+would be normally distributed for each population group, with mean :math:`\mu_k`
+and standard deviation :math:`\sigma_k` for the population group :math:`k`.
+
+.. _method of moments: https://en.wikipedia.org/wiki/Method_of_moments_(statistics)
+
+Improving the distribution estimates with an ensemble approach
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The family of functions :math:`F(x | \mu, \sigma)` will be defined as a mixture
 of a fixed set of base distributions :math:`F_1(x | \mu, \sigma), F_2(x | \mu,
