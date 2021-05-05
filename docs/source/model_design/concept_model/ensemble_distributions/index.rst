@@ -49,8 +49,8 @@ fits the data better than any of its individual components.
 Mathematical Definition of Ensemble Distributions
 -------------------------------------------------
 
-Mathematically, an ensemble distribution in GBD is just a `mixture
-distribution`_, which is defined as follows.
+Mathematically, an ensemble distribution in GBD is a `mixture distribution`_,
+which is defined as follows.
 
 Mixture Distributions
 +++++++++++++++++++++
@@ -67,7 +67,7 @@ distribution on :math:`\mathbb{R}` whose cumulative distribution function :math:
 
   F(x) = \sum_{i=1}^n w_i F_i(x)\quad \text{for } x\in \mathbb{R}.
 
-That is, the CDF of the mixture is just a weighted average of the CDFs of the
+That is, the CDF of the mixture is a weighted average of the CDFs of the
 components, with the weight of :math:`F_i` being :math:`w_i`. If the
 :math:`F_i`'s all correspond to `continuous probability distributions`_ on
 :math:`\mathbb{R}`, then differentiating the above equation shows that the
@@ -86,8 +86,8 @@ continuous case.
 Fitting an Ensemble Distribution to GBD Risk Exposure Data
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-This section describes how GBD uses mixture distributions to define an ensemble
-distribution for modeling risk exposure.
+This section describes how GBD uses mixture distributions to define ensemble
+distributions for modeling risk exposures.
 
 Problem setup
 ~~~~~~~~~~~~~~~
