@@ -68,9 +68,10 @@ distribution on :math:`\mathbb{R}` whose cumulative distribution function :math:
   F(x) = \sum_{i=1}^n w_i F_i(x)\quad \text{for } x\in \mathbb{R}.
 
 That is, the CDF of the mixture is a weighted average of the CDFs of the
-components, with the weight of :math:`F_i` being :math:`w_i`. If the
-:math:`F_i`'s all correspond to `continuous probability distributions`_ on
-:math:`\mathbb{R}`, then differentiating the above equation shows that the
+components, with the weight of :math:`F_i` being :math:`w_i`.
+
+If the :math:`F_i`'s all correspond to `continuous probability distributions`_
+on :math:`\mathbb{R}`, then differentiating the above equation shows that the
 mixture distribution is also continuous, with `probability density function
 <PDF_>`_ (PDF) given by the coresponding weighted average of the component
 densities, i.e. :math:`f(x) = \sum_1^n w_i f_i(x)`, where :math:`f=F'` and
@@ -92,18 +93,23 @@ distributions for modeling risk exposures.
 Problem setup
 ~~~~~~~~~~~~~~~
 
-Suppose we have a continuous risk exposure variable :math:`E` that we want to
-model. For example, :math:`E` could be body mass index, fasting plasma glucose,
-birthweight, or hemoglobin level. Suppose that we want to model :math:`E` for
-:math:`K` different population groups, e.g. indexed by location/age/sex/year as
-in GBD. Let :math:`k\in \{1,2,\ldots,K\}` specify which population group we are
-referring to. Suppose further that we have microdata on :math:`E` for at least
-some of the groups, and we are able to estimate the mean :math:`\mu_k` and
-standard deviation :math:`\sigma_k` of :math:`E` for each group :math:`k`;
-typically GBD teams do this using ST-GPR or other regression methods. Our goal
-is to find a family of distribution functions :math:`F(x | \mu, \sigma)`,
-parameterized by mean :math:`\mu` and standard deviation :math:`\sigma`,
-satisfying the following criteria:
+Suppose we have a continuous risk exposure variable :math:`E` whose distribution
+we want to model. For example, :math:`E` could be body mass index, fasting
+plasma glucose, birthweight, or hemoglobin level. Suppose that we want to model
+:math:`E` for :math:`K` different population groups, e.g. indexed by (location,
+age, sex, year) as in GBD. Let :math:`k\in \{1,2,\ldots,K\}` specify which
+population group we are referring to.
+
+Typically, a GBD team will have microdata on :math:`E` for at least some of the
+population groups, and they are able to estimate the mean :math:`\mu_k` and
+standard deviation :math:`\sigma_k` of :math:`E` for each group :math:`k` using
+various regression methods. The goal is to use all the available microdata plus
+the estimates of :math:`\mu_k` and :math:`\sigma_k` to reconstruct the
+approxmiate distribution function of :math:`E` for each group :math:`k`.
+
+More precisely, the goal is to find a family of cumulative distribution
+functions :math:`F(x | \mu, \sigma)`, parameterized by mean :math:`\mu` and
+standard deviation :math:`\sigma`, satisfying the following criteria:
 
 * For each group :math:`k` that has microdata, the distribution function
   :math:`F(x | \mu_k, \sigma_k)` provides a good approximation of the
