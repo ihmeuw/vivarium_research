@@ -223,13 +223,32 @@ specified.
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
 
-GBD teams generally do not need to sample values of an exposure variable :math:`E` from its estimated ensemble distribution.
-Rather, a typical use case of ensemble distributions for a GBD team would be to estimate the prevalence of each exposure category of :math:`E` by computing areas under the PDF of :math:`E`. Thus, having a formula for the PDF or CDF of :math:`E` is sufficient.
+A key feature of Vivarium is *propensity-based* sampling, in which each simulant
+posesses a "propensity" for a certain attribute :math:`X` (such as a risk
+exposure) that is invariant across scenarios, time, and/or draws of model
+parameters, and the propensity is used to determine the value of :math:`X` for
+the simulant. This is typically done by defining the propensities as real
+numbers that are drawn uniformly from the interval :math:`[0,1]` and then
+applying `inverse transform sampling`_ to in order to guarantee that :math:`X`
+follows a prescribed distribution across the simulated population. Here we
+describe two propensity-based approaches to sampling from an ensemble
+distribution.
+
+GBD teams generally do not need to sample values of an exposure variable
+:math:`E` from its estimated ensemble distribution. Rather, a typical use case
+of ensemble distributions for a GBD team would be to estimate the prevalence of
+each exposure category of :math:`E` by computing areas under the PDF of
+:math:`E`. Thus, having a formula for the PDF or CDF of :math:`E` is sufficient.
 
 ..
   In general, GBD teams do not need to sample values from an ensemble distribution
 
-Vivarium, on the other hand, *does* need to sample values from the exposure distribution of :math:`E`, as we need to initialize a population of simulants with the correct distribution of exposures. The standard strategy Vivarium uses for sampling from a probability distribution is `inverse transform sampling`_: Sample a uniform random variable :math:`U`, then compute :math:`E = Q(U)`, where :math:`Q` is the `quantile function`_ (or percent point function) for :math:`E`.
+Vivarium, on the other hand, *does* need to sample values from the exposure
+distribution of :math:`E`, as we need to initialize a population of simulants
+with the correct distribution of exposures. The standard strategy Vivarium uses
+for sampling from a probability distribution is `inverse transform sampling`_:
+Sample a uniform random variable :math:`U`, then compute :math:`E = Q(U)`, where
+:math:`Q` is the `quantile function`_ (or percent point function) for :math:`E`.
 
 
 .. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
