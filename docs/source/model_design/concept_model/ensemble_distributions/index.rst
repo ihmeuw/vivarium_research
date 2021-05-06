@@ -222,3 +222,15 @@ specified.
 
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
+
+GBD teams generally do not need to sample values of an exposure variable :math:`E` from its estimated ensemble distribution.
+Rather, a typical use case of ensemble distributions for a GBD team would be to estimate the prevalence of each exposure category of :math:`E` by computing areas under the PDF of :math:`E`. Thus, having a formula for the PDF or CDF of :math:`E` is sufficient.
+
+..
+  In general, GBD teams do not need to sample values from an ensemble distribution
+
+Vivarium, on the other hand, *does* need to sample values from the exposure distribution of :math:`E`, as we need to initialize a population of simulants with the correct distribution of exposures. The standard strategy Vivarium uses for sampling from a probability distribution is `inverse transform sampling`_: Sample a uniform random variable :math:`U`, then compute :math:`E = Q(U)`, where :math:`Q` is the `quantile function`_ (or percent point function) for :math:`E`.
+
+
+.. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
+.. _quantile function: https://en.wikipedia.org/wiki/Quantile_function
