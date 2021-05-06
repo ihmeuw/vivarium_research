@@ -223,13 +223,27 @@ specified.
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
 
-A key feature of Vivarium is *propensity-based* sampling, in which each simulant
-posesses a "propensity" for a certain attribute :math:`X` (such as a risk
+As noted above, a GBD ensemble distribution is mathematically defined as a mixture distribution, so it is sufficient to describe how to sample from mixture distributions.
+
+Sampling from a Mixture Distribution
++++++++++++++++++++++++++++++++++++++
+
+Let :math:`F = \sum_1^k w_i F_i` be the CDF of a mixture distribution with component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`.
+There is a simple two-step procedure to sample a random variable :math:`E` distributed according to :math:`F`:
+
+1. Randomly choose a number :math:`i\in \{1,2,\ldots, k\}`, with the probability of :math:`i` being :math:`w_i`.
+
+2. Independently sample :math:`E` from the distribution :math:`F_i`, where :math:`i` is the number chosen in step 1.
+
+, and set :math:`E` equal to the sampled value.
+
+A key design feature of Vivarium is *propensity-based sampling*, in which each simulant
+posesses a "propensity" for an attribute :math:`E` (such as a risk
 exposure) that is invariant across scenarios, time, and/or draws of model
-parameters, and the propensity is used to determine the value of :math:`X` for
+parameters, and the propensity is used to determine the value of :math:`E` for
 the simulant. This is typically done by defining the propensities as real
 numbers that are drawn uniformly from the interval :math:`[0,1]` and then
-applying `inverse transform sampling`_ to in order to guarantee that :math:`X`
+applying `inverse transform sampling`_ to in order to guarantee that :math:`E`
 follows a prescribed distribution across the simulated population. Here we
 describe two propensity-based approaches to sampling from an ensemble
 distribution.
