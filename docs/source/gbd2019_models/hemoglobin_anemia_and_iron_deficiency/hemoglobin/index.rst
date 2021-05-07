@@ -29,13 +29,13 @@ The hemoglobin distribution was modeled in three steps:
 
 2. Calculation of ensemble weights
 
-    A set of two-parameter distributions (gamma, mirror gamma, Weibull, mirror lognormal, and mirror gumbel) were fit to the sample’s haemoglobin mean and variance for each location/year/age/sex group
+    A set of two-parameter distributions (gamma, mirror gamma, Weibull, mirror lognormal, and mirror gumbel) were fit to the sample’s haemoglobin mean and variance for each location/year/age/sex group. Notably, the distribution weights are global across location/year/age/sex groups, and only the mean and variance of the hemoglobin distribution vary by demographic group in GBD.
 
     The weights used for the GBD 2019 hemoglobin distribution model were 40% gamma and 60% mirror gumbel, such that:
 
     .. math::
 
-    	F(x|\mu,\sigma) = 0.4 * F_1(x|\mu,\sigma) + 0.6 * F_2(x|\mu,\sigma)
+    	F(x|\mu,\sigma) = 0.4 \cdot F_1(x|\mu,\sigma) + 0.6 \cdot F_2(x|\mu,\sigma)
 
     Where,
 
@@ -53,9 +53,11 @@ The hemoglobin distribution was modeled in three steps:
 
 	Include mathematical formulas for the gamma and mirror Gumbel distributions. For now, see the R code in the `Data Description Tables`_ section for details.
 
+	Link to ensemble distribution page that Nathaniel is in the process of making.
+
 .. note::
 
-	As summarized by Nathaneil, for context (details perhaps to be moved to a separate documentation page), the steps for finding an ensemble distribution are:
+	As summarized by Nathaniel, for context (details perhaps to be moved to a separate documentation page), the steps for finding an ensemble distribution are:
 
 	1). Each of the two-parameter distributions is "fit" to the data in each location/year/age/sex group using the "method of moments." I.e. you just choose the distribution that has the same mean and standard deviation as the data in each group, so there's not actually any complicated curve fitting going on here.
 
@@ -82,7 +84,7 @@ The hemoglobin distribution was modeled in three steps:
 
     Because anemia thresholds depend on pregnancy status, hemoglobin distributions were modeled separately for pregnant and non-pregnant females. The pregnancy model was identical to the non-pregnancy model except that the mean and variance were adjusted by the adjustment factor. The prevalence of anemia in pregnant women and non-pregnant women were then weighted by the pregnancy rate and combined to estimate population anemia prevalence. See the table below for the exact adjustment factors used.
 
-      The pregnancy rate was represented as :math:`(ASFR + SB) * 46/52`, where :math:`ASFR` is the location- and age-specific fertility rate and :math:`SB` is the location-specific stillbirth rate.
+	The pregnancy rate was represented as :math:`(ASFR + SB) \times 46/52`, where :math:`ASFR` is the location- and age-specific fertility rate, :math:`SB` is the location-specific stillbirth rate, and :math:`46/52` represents 40 weeks of preganancy and 6 weeks of post-pregnancy lactation out of 52 weeks in one year.
 
 .. list-table:: Hemoglobin Distribution Pregnancy Adjustment Factors
    :widths: 15 15
@@ -172,7 +174,11 @@ Below is R code written to randomly sample hemoglobin concentration values from 
 
 .. note::
 
-  Attempts to move this code to python have not been successful in validating to GBD while using the R code has been successful. The recommended approach is to use the python package `rpy2` to run this R code within python.
+  This code has been translated to python in a notebook hosted `here <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`_.
+
+.. todo::
+
+	Integrate python code from above notebook into this document.
 
 .. code-block:: R
 
@@ -210,9 +216,9 @@ Below is R code written to randomly sample hemoglobin concentration values from 
     params_mgumbel = mgumbel_mv2p(mn, vr)
 
     ##weighting
-    sample_list = sum(
-      w[1] * rgamma(n, params_gamma$shape, params_gamma$rate), 
-      w[2] * rmgumbel(n, params_mgumbel$alpha, params_mgumbel$scale)
+    sample_list = c(
+      rgamma(round(n * w[1], digits=0), params_gamma$shape, params_gamma$rate), 
+      rmgumbel(round(n * w[2], digits=0), params_mgumbel$alpha, params_mgumbel$scale)
     )
     sample_list
   }
@@ -242,7 +248,7 @@ Below is R code written to randomly sample hemoglobin concentration values from 
 
 .. note::
 
-	While not explicitly enforced by the code above, all hemoglobin values should be withn the bounds of 0 and 220 (XMAX). The probability of sampling a value outside of these bounds is small, but if it occurs, the value should be resampled until it falls within the bounds of 0 and 220.
+	While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers. The probability of sampling a negative value is small, but if it occurs, the value should be resampled until it falls within the bounds of 0 and 220 or clipped to a value of 1.
 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
@@ -269,7 +275,6 @@ Validation Criteria
 Hemoglobin concentration values assigned to simulants should satisfy the following criteria:
 
 - all_samples > 0
-- all_samples < XMAX = 220
 - mean(all_samples) ~= meid_10487
 - sd(all_samples) ~= meid_10488
 

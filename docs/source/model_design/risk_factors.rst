@@ -162,7 +162,6 @@ account for any gaps within the attribute of interest and the data available.
 	with biases from factors such as underreporting in the data. 
 	[Exposure_definition_and_measurement]_
 
-
 Risk exposures in GBD
 ---------------------
 
@@ -237,7 +236,6 @@ Note that in each case our smoking model captures the same information, but in
 the former we push the complexity of quantifying different types of smoking 
 histories to another part of the model, and in the former we wrap this 
 complexity into the exposure component.
-
 
 What is a risk effect?
 ++++++++++++++++++++++
@@ -493,7 +491,6 @@ To summarize, relative risks can be:
 
   If the relative risk is >1, the exposure is harmful. If the relative risk is <1, the exposure is protective. In GBD, we define risks as harmful and so we always use >1 relative risks. 
 
-
 Difference measures
 ^^^^^^^^^^^^^^^^^^^
 
@@ -526,7 +523,6 @@ Ratios versus differences: which is more appropriate?
 Ratio measures and difference measures tell us very different things. Ratio measures are used to summarise the strength of association between a risk factor and an outcome. Difference measures, on the other hand, are used to summarise how much more disease is experienced by a group exposed to a risk factor of interest compared to an unexposed group. Assuming that the association between risk factor and disease is causal, difference measures can be used to estimate how much of a disease among the exposed can be attributed to exposure, or could be prevented by eliminating the risk factor. Note these measures only relate to the exposed group. 
 
 Difference measures relating to the whole population tend to be more useful and thus more widely used. These population difference measures, also called measures of impact. It is important to realise that ratios and differences can result in very different interpretations. For example, if an association between a risk factor and disease outcome is very strong in a particular group (high relative risks), but the outcome is relatively uncommon in this group, a big increase in risk will result in a modest increase in cases. Alternatively, if the outcome is common among a group, a small relative risk can lead to a large increase in cases. Ratio measures are most useful for determining which risk factors are most strongly associated with disease, whereas difference measures are more useful for estimating the public health importance of different risk factors.
-
 
 Population Attributable Fraction (PAF)
 ++++++++++++++++++++++++++++++++++++++
@@ -588,9 +584,6 @@ where
       = (a+b)/(a+b+c+d) x [(a/(a+b) - c/(c+d)]
       = (ad-bc)/[(a+b+c+d)(c+d)]
 
-
-
-
 Population attributable risk fraction (PAF)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -624,7 +617,6 @@ The following diagram illustrates how the PAF is derived intuitively from the **
 .. image:: PAF_intuitive_diagram.svg
 
 However, it is not always possible to find the *prevalence of exposure among cases* (:math:`p_c`) and so equation (a) is used in our simulation models. This will introduce bias. The following section talks about the bias that occurs. 
-
 
 Bias in PAF Calculation
 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -825,7 +817,7 @@ References
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
 
 
-Estimation of the PAF in epidemiologicl studies
+Estimation of the PAF in epidemiological studies
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. todo::
