@@ -38,6 +38,49 @@ and increased antibiotic use, was identified as a focus for targeted interventio
 Modeling LRI in GBD 2019
 ------------------------
 
+The GBD LRI model comprises a fatal and a nonfatal model.
+
+LRI deaths are estimated using separate CODEm models for children under 5 and 
+persons aged 5-95+, due to the significant difference in fatality patterns. These 
+models run using CoD death from vital registration systems, surveillance 
+systems, and verbal autopsy, along with a set of covariates discussed in more 
+detail below.
+
+The case definition used for the nonfatal LRI model is "clinician- diagnosed 
+pneumonia or bronchiolitis". Primary data types include incidence and prevalence 
+data from population surveys, scientific literature, and hospital/claims 
+records. The modellers first adjust survey data for seasonality; then all input 
+data with a non-reference case definition is adjusted using correction factors 
+estimated with MR-BRT. The modellers defined time to recovery as 10 (5-15) days, 
+which corresponds with a remission 36.5. The comprise the inputs for a DisMod 
+model. LRI severity splits are obtained from a meta-analysis, and then the 
+DisMod outputs are split according to severity before disablility weights for 
+YLD calculation are applied.
+
+.. todo: go back and check if missing or misrepresenting any of these steps
+
+A separate model is run for LRI etiologies, which both the fatal and nonfatal 
+results are fit to.
+
+
+
+
+..todo: ask sim science, and then gbd team, what "model-MR" is. different from dismod?
+
+
+
+
+
+The 2019 set of covariates for the LRI CODEm models were updated slightly from those used in GBD 
+2017, and include the following:
+
+.. todo: include covariate tables. p96: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
+
+
+
+Nonfatal estimation:
+
+Using prevalence and incidence data, GBD models overall nonfatal LRI burden. 
 
 GBD hierarchy
 -------------
