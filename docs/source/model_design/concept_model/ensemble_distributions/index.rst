@@ -235,7 +235,53 @@ There is a simple two-step procedure to sample a random variable :math:`E` distr
 
 2. Independently sample :math:`E` from the distribution :math:`F_i`, where :math:`i` is the number chosen in step 1.
 
-, and set :math:`E` equal to the sampled value.
+.. admonition:: Theorem
+
+  If :math:`E` is sampled using the above two-step procedure, then the
+  distribution of :math:`E` is the mixture distribution :math:`F = \sum_1^k w_i
+  F_i`.
+
+  **Proof.** Let :math:`Y` be a random variable having a `categorical
+  distribution`_ on :math:`\{1,2,\ldots, k\}` with :math:`\Pr(Y=i) = w_i`. Let
+  :math:`X_1,X_2,\ldots, X_k` be random variables with distributions
+  :math:`F_1,F_2,\ldots F_k`, respectively, and assume that each :math:`X_i` is
+  independent of :math:`Y`. Then the above sampling procedure is equivalent to
+  the statement that
+
+  .. math::
+
+    E = X_1 \cdot \mathbf{1}_{\{Y=1\}} + X_2\cdot \mathbf{1}_{\{Y=2\}}
+    + \dotsb + X_k\cdot \mathbf{1}_{\{Y=k\}},
+
+  where :math:`\mathbf{1}_{\{Y=i\}}` is the `indicator function`_ of the event
+  :math:`\{Y=i\}` (i.e. for each outcome :math:`\omega`,
+  :math:`\mathbf{1}_{\{Y=i\}}(\omega) = 1` if :math:`Y(\omega) = i`, and
+  :math:`\mathbf{1}_{\{Y=i\}}(\omega) = 0` otherwise). In particular, we have
+
+  .. math::
+
+    E=X_i \text{ on the event } \{Y=i\}.
+
+  Using this observation and the fact that the events :math:`\{Y=i\}` partition
+  the sample space, for any :math:`x\in\mathbb{R}` we have
+
+  .. math::
+
+    \begin{align*}
+    \Pr(E\le x)
+    = \sum_{i=1}^k \Pr(Y=i \text{ and } E\le x)
+    &= \sum_{i=1}^k \Pr(Y=i \text{ and } X_i\le x)\\
+    &= \sum_{i=1}^k \Pr(Y=i) \Pr(X_i\le x)\\
+    &= \sum_{i=1}^k w_i F_i(x)
+    = F(x).
+    \end{align*}
+
+  Note that we have used the independence between :math:`Y` and :math:`X_i` in
+  the second line. This shows that the distribution function of :math:`E` is
+  :math:`F`. :math:`\blacksquare`
+
+.. _categorical distribution: https://en.wikipedia.org/wiki/Categorical_distribution
+.. _indicator function: https://en.wikipedia.org/wiki/Indicator_function
 
 A key design feature of Vivarium is *propensity-based sampling*, in which each simulant
 posesses a "propensity" for an attribute :math:`E` (such as a risk
