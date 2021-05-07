@@ -237,16 +237,17 @@ There is a simple two-step procedure to sample a random variable :math:`E` distr
 
 .. admonition:: Theorem
 
-  If :math:`E` is sampled using the above two-step procedure, then the
-  distribution of :math:`E` is the mixture distribution :math:`F = \sum_1^k w_i
-  F_i`.
+  **(Two-step sampling from mixture distributions)**
+  *If* :math:`E` *is sampled using the above two-step procedure, then the
+  distribution of* :math:`E` *is the mixture distribution*
+  :math:`F = \sum_1^k w_i F_i`.
 
-  **Proof.** Let :math:`Y` be a random variable having a `categorical
+  **Proof.** Let :math:`Y` be a random variable having the `categorical
   distribution`_ on :math:`\{1,2,\ldots, k\}` with :math:`\Pr(Y=i) = w_i`. Let
   :math:`X_1,X_2,\ldots, X_k` be random variables with distributions
   :math:`F_1,F_2,\ldots F_k`, respectively, and assume that each :math:`X_i` is
-  independent of :math:`Y`. Then the above sampling procedure is equivalent to
-  the statement that
+  independent of :math:`Y`. Then the above sampling procedure can be formalized
+  as the statement
 
   .. math::
 
@@ -260,10 +261,12 @@ There is a simple two-step procedure to sample a random variable :math:`E` distr
 
   .. math::
 
-    E=X_i \text{ on the event } \{Y=i\}.
+    E=X_i \text{ on the event } \{Y=i\}
 
-  Using this observation and the fact that the events :math:`\{Y=i\}` partition
-  the sample space, for any :math:`x\in\mathbb{R}` we have
+  because the events :math:`\{Y=i\}` partition the sample space, so exactly one
+  of the indicator functions :math:`\mathbf{1}_{\{Y=i\}}` will be nonzero for
+  any outcome. Using this observation, plus the independence between :math:`Y`
+  and :math:`X_i`, it follows that for any :math:`x\in\mathbb{R}` we have
 
   .. math::
 
@@ -276,9 +279,8 @@ There is a simple two-step procedure to sample a random variable :math:`E` distr
     = F(x).
     \end{align*}
 
-  Note that we have used the independence between :math:`Y` and :math:`X_i` in
-  the second line. This shows that the distribution function of :math:`E` is
-  :math:`F`. :math:`\blacksquare`
+  This shows that the distribution function of :math:`E` is :math:`F`.
+  :math:`\blacksquare`
 
 .. _categorical distribution: https://en.wikipedia.org/wiki/Categorical_distribution
 .. _indicator function: https://en.wikipedia.org/wiki/Indicator_function
