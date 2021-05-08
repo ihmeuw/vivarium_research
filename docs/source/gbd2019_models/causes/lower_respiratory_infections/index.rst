@@ -138,4 +138,4 @@ References
   Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
-  17 Oct 
+  17 Oct 2020;396:1204-1222` 
