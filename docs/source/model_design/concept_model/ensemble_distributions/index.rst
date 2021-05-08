@@ -228,16 +228,26 @@ As noted above, a GBD ensemble distribution is mathematically defined as a mixtu
 Sampling from a Mixture Distribution
 +++++++++++++++++++++++++++++++++++++
 
-Let :math:`F = \sum_1^k w_i F_i` be the CDF of a mixture distribution with component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`.
-There is a simple two-step procedure to sample a random variable :math:`E` distributed according to :math:`F`:
+Let :math:`F = \sum_1^k w_i F_i` be the CDF of a mixture distribution with
+component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`. We describe two possible methods for sampling a random variable :math:`E` from the mixture distribution :math:`F`.
+
+Two-step sampling from mixture distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is a simple two-step procedure to sample a random variable :math:`E`
+distributed according to :math:`F`, assuming that we have a method of sampling
+from each of the component distributions :math:`F_i`:
 
 1. Randomly choose a number :math:`i\in \{1,2,\ldots, k\}`, with the probability of :math:`i` being :math:`w_i`.
 
-2. Independently sample :math:`E` from the distribution :math:`F_i`, where :math:`i` is the number chosen in step 1.
+2. Independently sample :math:`E` from the distribution :math:`F_i`, where :math:`i` is the number chosen in Step 1.
+
+This sampling method is the source of the name "mixture": You can think of a sequence of independent draws from the mixture distribution :math:`F` as each coming from one of the component distributions :math:`F_i`, but the draws are mixed together in a random order, with the proportion of draws from :math:`F_i` being :math:`w_i`.
+The following theorem shows that this interpretation of :math:`F` is valid.
 
 .. admonition:: Theorem
 
-  **(Two-step sampling from mixture distributions)**
+  **(Two-step mixture sampling)**
   *If* :math:`E` *is sampled using the above two-step procedure, then the
   distribution of* :math:`E` *is the mixture distribution*
   :math:`F = \sum_1^k w_i F_i`.
@@ -285,6 +295,16 @@ There is a simple two-step procedure to sample a random variable :math:`E` distr
 .. _categorical distribution: https://en.wikipedia.org/wiki/Categorical_distribution
 .. _indicator function: https://en.wikipedia.org/wiki/Indicator_function
 
+Inverse transform sampling from mixture distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Like any probability distribution, a mixture distribution can be sampled using `inverse transform sampling`_. That is, sample a uniform random variable :math:`U`, then compute :math:`E = Q(U)`, where
+:math:`Q` is the `quantile function`_ for :math:`E`.
+
+The challenge with this approach is that in general, there is no simple formula for the quantile function :math:`Q` of the mixture distribution :math:`F = \sum_1^k w_i F_i`. In particular, even when :math:`F` and :math:`F_i` are `invertible`_, we have :math:`Q = F^{-1}`, but there is generally no simple way to write :math:`F^{-1}` in terms of the components' quantile functions :math:`Q_i = F_i^{-1}`.
+
+However, it is still possible to compute the quantile function directly from the definition :math:`Q(p) = \min \{q\in \mathbb{R} : F(q) \ge p\}`. That is, to compute :math:`Q(p)` for :math:`p\in [0,1]`, we look for the smallest :math:`q` such that :math:`F(q)\ge p`. This optimization problem can be solved efficiently using a binary search.
+
 A key design feature of Vivarium is *propensity-based sampling*, in which each simulant
 posesses a "propensity" for an attribute :math:`E` (such as a risk
 exposure) that is invariant across scenarios, time, and/or draws of model
@@ -315,3 +335,4 @@ Sample a uniform random variable :math:`U`, then compute :math:`E = Q(U)`, where
 
 .. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
 .. _quantile function: https://en.wikipedia.org/wiki/Quantile_function
+.. _invertible: https://en.wikipedia.org/wiki/Inverse_function
