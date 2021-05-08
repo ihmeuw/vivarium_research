@@ -222,19 +222,29 @@ specified.
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
 
-Vivarium needs to sample values of a risk exposure variable :math:`E` from its distribution in order to assign an exposure value to each simulant. This contrasts with the usage of ensemble distributions in GBD, where computing the CDF or PDF of :math:`E` is sufficient. For example, a typical use case
-of ensemble distributions for a GBD team might be to estimate the prevalence of
-each exposure category of :math:`E` by computing areas under its PDF.
+Vivarium needs to sample values of the exposure variable :math:`E` from its
+estimated ensemble distribution in order to assign an exposure value to each
+simulant. This contrasts with the usage of ensemble distributions in GBD, where
+a typical use case might be to estimate the prevalence of each exposure category
+of :math:`E` by computing areas under its PDF. In particular, computing the CDF
+or PDF of :math:`E` is generally sufficient for a GBD team, whereas sampling
+values from the ensemble distribution requires an additional algorithm.
 
-
-
-As noted above, a GBD ensemble distribution is mathematically defined as a mixture distribution, so it is sufficient to describe how to sample from mixture distributions.
+Below, we describe two possible strategies for sampling from an ensemble
+distribution. As noted above, a GBD ensemble distribution is mathematically
+defined as a mixture distribution, so it is sufficient to describe how to sample
+from mixture distributions.
 
 Sampling from a Mixture Distribution
 +++++++++++++++++++++++++++++++++++++
 
 Let :math:`F = \sum_1^k w_i F_i` be the CDF of a mixture distribution with
-component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`. We describe two possible methods for sampling a random variable :math:`E` from the mixture distribution :math:`F`.
+component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`. Our goal is
+to algorithmically generate a random variable :math:`E` whose CDF is :math:`F`
+(i.e. generate a "draw" from the distribution :math:`F`).
+
+..
+  We describe two possible methods for sampling a random variable :math:`E` from the mixture distribution :math:`F`.
 
 Two-step sampling from mixture distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -253,7 +263,7 @@ This sampling method is the source of the name "mixture": You can think of a
 sequence of independent draws from the mixture distribution :math:`F` as each
 coming from one of the component distributions :math:`F_i`, but the draws are
 mixed together in a random order, with the proportion of draws from :math:`F_i`
-being on average :math:`w_i`. The following theorem shows that this
+being :math:`w_i` on average. The following theorem shows that this
 interpretation of :math:`F` is valid.
 
 .. admonition:: Theorem
@@ -309,12 +319,26 @@ interpretation of :math:`F` is valid.
 Inverse transform sampling from mixture distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Like any probability distribution, a draw :math:`E` from a mixture distribution can be sampled using `inverse transform sampling`_. That is, sample a :math:`\mathrm{Uniform}(0,1)` random variable :math:`U`, then compute :math:`E = Q(U)`, where
-:math:`Q` is the `quantile function`_ for :math:`E` (also called the *percent point function* or *inverse CDF* of :math:`E`).
+Like any probability distribution, a draw :math:`E` from a mixture distribution
+can be generated using `inverse transform sampling`_. That is, sample a
+:math:`\mathrm{Uniform}(0,1)` random variable :math:`U`, then compute :math:`E =
+Q(U)`, where :math:`Q` is the `quantile function`_ for :math:`E` (also called
+the **percent point function** or **inverse CDF** of :math:`E`).
 
-The challenge with this approach is that in general, there is no simple formula for the quantile function :math:`Q` of the mixture distribution :math:`F = \sum_1^k w_i F_i`. In particular, even when :math:`F` and :math:`F_i` are `invertible`_, we have :math:`Q = F^{-1}`, but there is generally no simple way to write :math:`F^{-1}` in terms of the components' quantile functions :math:`Q_i = F_i^{-1}`.
+The challenge with this approach is that in general, there is no simple formula
+for the quantile function :math:`Q` of the mixture distribution :math:`F =
+\sum_1^k w_i F_i`. In particular, even when :math:`F` and :math:`F_i` are
+`invertible`_, we have :math:`Q = F^{-1}`, but there is generally no simple way
+to write :math:`F^{-1}` in terms of the components' quantile functions
+:math:`Q_i = F_i^{-1}`.
 
-However, it is still possible to compute the quantile function directly from the definition :math:`Q(p) = \min \{x\in \mathbb{R} : F(x) \ge p\}`. That is, to compute :math:`Q(p)` for :math:`p\in [0,1]`, we look for the smallest number :math:`x` such that :math:`F(x)\ge p`. Since :math:`F` is an increasing function, this optimization problem can be solved efficiently using a `binary search`_. For an example of this approach coded in Python, see this `blog post by Andrew Webb`_.
+However, it is still possible to compute the quantile function directly from the
+definition :math:`Q(p) = \min \{x\in \mathbb{R} : F(x) \ge p\}`. That is, to
+compute :math:`Q(p)` for :math:`p\in [0,1]`, we look for the smallest number
+:math:`x` such that :math:`F(x)\ge p`. Since :math:`F` is an increasing
+function, this optimization problem can be solved efficiently using a `binary
+search`_. For an example of this approach coded in Python, see this `blog post
+by Andrew Webb`_.
 
 .. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
 .. _quantile function: https://en.wikipedia.org/wiki/Quantile_function
