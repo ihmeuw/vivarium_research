@@ -17,7 +17,7 @@ The hemoglobin distribution is estimated from a variety of sources reported as e
 
 .. note:: 
 
-	The preganncy adjustment factor was used to crosswalk between the pregnant population and the general population in GBD (both for transformation of input data specific to pregnant women and for calculation of pregnancy-specific anemia prevalence using pregnancy-specific thresholds), however, the pregnancy adjustment factor appears to be derived from comparisons of pregnant women to non-pregnant women, which may be a limiation of this approach in that it does not account for differences in the prevalence of pregnancy in different populations; however, because this prevalence is generally low, it is likely minimally impactful.
+	The pregnancy adjustment factor was used to crosswalk between the pregnant population and the general population in GBD (both for transformation of input data specific to pregnant women and for calculation of pregnancy-specific anemia prevalence using pregnancy-specific thresholds), however, the pregnancy adjustment factor appears to be derived from comparisons of pregnant women to non-pregnant women, which may be a limiation of this approach in that it does not account for differences in the prevalence of pregnancy in different populations; however, because this prevalence is generally low, it is likely minimally impactful.
 
 The hemoglobin distribution was modeled in three steps:
 
@@ -204,25 +204,6 @@ Below is R code written to randomly sample hemoglobin concentration values from 
     mn = alpha + scale*EULERS_CONSTANT
     rgumbel(n, alpha+XMAX-(2*mn), scale)}
 
-  # function to sample from ensemble hemoglobin distribution using functions defined above
-    # n = number of samples to take
-    # mn = mean hemoglobin concentration
-    # vr = hemoglobin distribution variance (standard deviation squared)
-    # w = list of ensemble distribution weights c(gamma_weight, mirror_gumbel_weight)
-  sample_from_hemoglobin_distribution <- function(n, mn, vr, w){
-
-    ##parameters
-    params_gamma = gamma_mv2p(mn, vr)
-    params_mgumbel = mgumbel_mv2p(mn, vr)
-
-    ##weighting
-    sample_list = c(
-      rgamma(round(n * w[1], digits=0), params_gamma$shape, params_gamma$rate), 
-      rmgumbel(round(n * w[2], digits=0), params_mgumbel$alpha, params_mgumbel$scale)
-    )
-    sample_list
-  }
-
   # function to calculate area under curve below threshold q for mirror gumbel distribution
   pmgumbel = function(q, alpha, scale, lower.tail){ 
     #NOTE: with mirroring, take the other tail
@@ -248,7 +229,11 @@ Below is R code written to randomly sample hemoglobin concentration values from 
 
 .. note::
 
-	While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers. The probability of sampling a negative value is small, but if it occurs, the value should be resampled until it falls within the bounds of 0 and 220 or clipped to a value of 1.
+	While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers. The probability of sampling a negative value is small, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 1.
+
+.. todo::
+
+  Write R-code to accurately sample from the *weighted ensemble* distribution like has been done for the python code hosted `here <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`_.
 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
