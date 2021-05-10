@@ -177,28 +177,20 @@ Among MM and RRMM patients, they expect to have:
 4.1 Simulation scenarios
 ------------------------
 
-To measure the impact of Isatuximab, we will simulate two scenarios, a baseline 
-scenario and an alternative scenario, outlined below. The underlying health state 
-of each simulant will be measured at each 28-day time step and the probability 
-that each simulant is treated will be dependent on the coverage stated in that 
-scenario. 
+To measure the impact of Isatuximab, we will simulate two scenarios, a baseline scenario and an alternative scenario, outlined below. The underlying health state of each simulated individual (“simulant”) will be measured at each 28-day time step and the probability that each simulant is treated will be dependent on the coverage stated in that scenario, as well as the simulant’s cytogenetic risk level, RI, age, sex, and race/ethnicity. 
 
 `We might stratify the treatment covearge rates by simulant’s cytogenetic risk 
 level, age, sex, and race/ethnicity if Flatiron data support us to do so.`
 
 **Baseline** The baseline scenario will project GBD 2019 demographic and disease 
-trends out from 2021 to 2026. For any simulated population, the coverage rates 
-for all regimens except Isatuximab will be held constant across the 5 years of 
-the simulation; Isatuximab will start to be available to simulants as a second-line 
-regimen and ramp up to 45% coverage by 2026 to simulate a business-as-usual 
-treatment scenario.
+trends out from 2021 to 2025. For the US general population, registry population, and key sub-populations, the proportion of individuals receiving particular non-Isatuximab regimens (for example, PI, IMiD, etc.) will be held constant across the 5 years of the simulation.  Isatuximab will be used as a second-line and later (i.e., second line, third line, fourth line, etc.) regimen and ramp up to *205% coverage by 2025 to simulate a business-as-usual treatment scenario.  
+
+*205% coverage scale-up to be re-evaluated by Sanofi’s commercial team. 
 
 **Alternative** Most aspects of the alternative scenario will be the same as the 
 baseline scenario: it will project GBD 2019 demographic and disease trends out 
-from 2021 to 2026 and apply the same coverage rates (or ramp up) for all regimens 
-specified in the baseline. In contrast to the baseline scenario, Isatuximab in 
-the alternative scenario will start to be available to simulants as a first-line 
-regimen among all simulated population.
+from 2021 to 2025 and apply the same coverage rates (or ramp up) for all regimens 
+specified in the baseline. In contrast to the baseline scenario, the alternative scenario will simulate use of Isatuximab as first-line and later (i.e. first line, second line, third line, etc.) regimen among the US general population, registry population, and key-subpopulations.
 
 
 In the absence of data from Flatiron, we made following assumptions:
@@ -384,6 +376,8 @@ Where,
 5.5 Output meta-table shell
 ---------------------------
 
+Table 7 below outlines the outputs of this simulation. Specifically, each column represents a stratification of results. In other words, the simulation will provide population-level estimates as well as sub-population level estimates (listed in the population subgroup column) on incidence, prevalence, mortality, as well as survival (progression-free survival and overall survival) among the US general population and the registry population, stratified by year, age, sex, and disease state, under the business-as-usual treatment scenario and the alternative treatment scenario. 
+
 .. list-table:: Output shell table
    :header-rows: 1
 
@@ -391,7 +385,7 @@ Where,
      - Year
      - Age group
      - Sex
-     - Poulation group
+     - Population group
      - Scenario
      - Cause
      - Outcome
@@ -434,15 +428,39 @@ Where,
      - Elder population (aged > 75 years)
      - 
      - 
-     - 
+     - Median PFS (months) 
    * - 
      - 
-     - 
+     - All Ages
      - 
      - Registry population
      - 
      - 
+     - One-year PFS (%) 
+   * - 
      - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - Median OS (months) 
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - One-year OS (months)
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - Proportion of population eligibile for registry 
 
 .. _6.0:
 
@@ -466,14 +484,10 @@ Where,
     receiving a transplant if we assume any patient who dies before receiving a 
     transplant is a non-transplant patient. We do not intend to incorporate an 
     option for “delayed transplant” in which transplant occurs at first relapse.
- 2. We assume the incidence of MM from GBD is the detection rate of symptomatic 
-    cases.
- 3. Guided by Sanofi’s RRMM patient registry protocol, patients who had previous 
-    malignancy in the past 3 years are not eligible to be enrolled in the registry. 
-    That means some RRMM patients will be excluded based on their personal history 
-    of malignancy. We will use literature evidence or SEER data to inform the 
-    proportion of RRMM patients with other malignancy in the past 3 years.
-
+ 2. We assume the incidence of MM from GBD is the detection rate of symptomatic cases. GBD has developed methods to estimate true population level incidence of cancers, even in locations where cancer cases can easily go undetected (because registries are of poor quality or non-existent, etc.). In some cases, that results in differences between GBD estimates and cancer registry records. In locations with robust cancer registry systems, such as the United States, and in consideration of the particular qualities of MM (vs e.g. breast cancer, which can more easily go undetected) we are comfortable with the assumption that GBD incidence of MM reflects the detection rate. 
+ 3. Guided by Sanofi’s RRMM patient registry protocol, patients who had previous malignancy in the past 3 years are not eligible to be enrolled in the registry. That means some RRMM patients will be excluded based on their personal history of malignancy. We will use literature evidence or SEER data to inform the proportion of RRMM patients with other malignancy in the past 3 years. 
+ 4. We are not including adverse events at this time due to data availability/quality, but will revisit including AE’s in phase 2 of this project using data from the real-world registry. Limitation is that we will not report adverse events in our output table, but the survival regression parameters used in the simulation will be based on data sources where individuals may have stopped treatment because of an adverse event (so inclusion/exclusion of AE’s will not impact survival regression).
+ 5. We will hold coverage levels of drug therapies other than ISA constant in both baseline and alternative scenarios. Projecting how non-ISA treatment may change over the course of the simulation will introduce large complexity with little benefit in terms of increasing accuracy of simulation outcomes.
 
 8.0 References
 +++++++++++++++
