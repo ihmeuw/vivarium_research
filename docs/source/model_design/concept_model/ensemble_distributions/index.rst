@@ -161,7 +161,7 @@ Improving the distribution estimates with an ensemble approach
   1. Start with a collection of base distributions :math:`F_1, F_2,\ldots,
   F_k`
 
-What Base Distributions Are Used in GBD's Ensembles?
+Where Is the Code for GBD's Ensemble Distributions?
 ----------------------------------------------------
 
 Here are links to R code and Python code implementing GBD's ensemble distributions:
@@ -173,14 +173,17 @@ Here are links to R code and Python code implementing GBD's ensemble distributio
   `Vivarium Public Health <https://github.com/ihmeuw/vivarium_public_health>`_
   and maintained by the Vivarium Engineering Team
 
-The R code base lists 14 distribution families in the file `pdf_families.R`_,
-and 12 of them are implemented for Vivarium in `risk_distributions.py`_ (all
-except the Generalized Normal and Generalized Log-normal):
-
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
 .. _pdf_families.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/pdf_families.R
 .. _risk_distributions.py: https://github.com/ihmeuw/risk_distributions/blob/master/src/risk_distributions/risk_distributions.py
+
+What Base Distributions Are Used in GBD's Ensembles?
+----------------------------------------------------
+
+The R code base lists 14 distribution families in the file `pdf_families.R`_,
+and 12 of them are implemented for Vivarium in `risk_distributions.py`_ (all
+except the Generalized Normal and Generalized Log-normal):
 
 * Gamma
 * Mirrored Gamma
