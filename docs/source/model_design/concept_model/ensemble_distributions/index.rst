@@ -226,8 +226,8 @@ Vivarium needs to sample values of the exposure variable :math:`E` from its
 estimated ensemble distribution in order to assign an exposure value to each
 simulant. This contrasts with the usage of ensemble distributions in GBD, where
 a typical use case might be to estimate the prevalence of each exposure category
-of :math:`E` by computing areas under its PDF. In particular, computing the CDF
-or PDF of :math:`E` is generally sufficient for a GBD team, whereas sampling
+of :math:`E` by computing areas under its PDF. In particular, computing the PDF
+or CDF of :math:`E` is generally sufficient for a GBD team, whereas sampling
 values from the ensemble distribution requires an additional algorithm.
 
 Below, we describe two possible strategies for sampling from an ensemble
@@ -264,7 +264,7 @@ sequence of independent draws from the mixture distribution :math:`F` as each
 coming from one of the component distributions :math:`F_i`, but the draws are
 mixed together in a random order, with the proportion of draws from :math:`F_i`
 being :math:`w_i` on average. The following theorem shows that this
-interpretation of :math:`F` is valid.
+sampling strategy works.
 
 .. admonition:: Theorem
 
@@ -333,7 +333,7 @@ to write :math:`F^{-1}` in terms of the components' quantile functions
 :math:`Q_i = F_i^{-1}`.
 
 However, it is still possible to compute the quantile function directly from the
-definition :math:`Q(p) = \min \{x\in \mathbb{R} : F(x) \ge p\}`. That is, to
+definition :math:`Q(p) = \min \{x\in \mathbb{R} : F(x) \ge p\}`. Namely, to
 compute :math:`Q(p)` for :math:`p\in [0,1]`, we look for the smallest number
 :math:`x` such that :math:`F(x)\ge p`. Since :math:`F` is an increasing
 function, this optimization problem can be solved efficiently using a `binary
@@ -350,35 +350,19 @@ Propensity-Based Sampling from Ensemble Distributions
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 A key design feature of Vivarium is *propensity-based sampling*, in which each
-simulant posesses a "propensity" for an attribute :math:`E` (such as a risk
-exposure) that is invariant across scenarios, time, and/or draws of model
-parameters, and the propensity is used to determine the value of :math:`E` for
-the simulant at each time step. This is typically done by defining the
-propensities as real numbers that are drawn uniformly from the interval
-:math:`[0,1]` and then applying inverse transform sampling to in order to
-guarantee that :math:`E` follows a prescribed distribution across the simulated
-population. Here we describe two propensity-based approaches to sampling from an
-ensemble distribution, based on the two sampling strategies for mixture
-distributions deescribed above.
+simulant posesses a random "propensity" for an attribute :math:`E` (such as a
+risk exposure) that is invariant across scenarios and/or time and/or draws of
+model parameters, and the propensity is used to deterministically assign the
+value of :math:`E` for the simulant at each time step. This is typically done by
+defining the propensities as real numbers that are drawn uniformly from the
+interval :math:`[0,1]` and then applying `inverse transform sampling`_ in order
+to guarantee that :math:`E` follows a prescribed distribution across the
+simulated population. Here we describe two propensity-based approaches to
+sampling from an ensemble distribution, based on the two sampling strategies for
+mixture distributions deescribed above.
 
 Two-propensity sampling from ensemble distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 One-propensity sampling from ensemble distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-GBD teams generally do not need to sample values of an exposure variable
-:math:`E` from its estimated ensemble distribution. Rather, a typical use case
-of ensemble distributions for a GBD team would be to estimate the prevalence of
-each exposure category of :math:`E` by computing areas under the PDF of
-:math:`E`. Thus, having a formula for the PDF or CDF of :math:`E` is sufficient.
-
-..
-  In general, GBD teams do not need to sample values from an ensemble distribution
-
-Vivarium, on the other hand, *does* need to sample values from the exposure
-distribution of :math:`E`, as we need to initialize a population of simulants
-with the correct distribution of exposures. The standard strategy Vivarium uses
-for sampling from a probability distribution is `inverse transform sampling`_:
-Sample a uniform random variable :math:`U`, then compute :math:`E = Q(U)`, where
-:math:`Q` is the `quantile function`_ (or percent point function) for :math:`E`.
