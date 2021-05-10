@@ -212,7 +212,17 @@ specified.
   * scipy.stats function + documentation link
   * Number of parameters for the distribution family (1, 2, or 3)
   * Formula for pdf or cdf?
-  * How to get distribution parameters from mean and variance?
+  * How to get distribution parameters from mean and variance (i.e. method of moments)?
+  * Tail behavior?
+  * Whether min and max are needed in addition to other parameters
+
+  It may be better to make a table with some small number of the above things,
+  then add a brief section on each distribution going into more details.
+
+  Also, somewhere explain how the mean and variance will stay the same when we
+  average the distributions together because of the Law of Total
+  Expectation/Variance, *unless* the weight for the Exponential distribution is
+  nonzero, which will throw the variance off.
 
 .. note::
 
