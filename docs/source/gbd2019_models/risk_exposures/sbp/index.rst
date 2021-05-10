@@ -71,7 +71,7 @@ The theoretical minimum risk exposure was defined as a range between 110 to 115 
 Vivarium Modeling Strategy
 --------------------------
 
-Include here an overview of the Vivarium modeling section
+Mean SBP is a continuous exposure modelled in GBD using an ensemble distribution. SBP will be a target of medication interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
 Restrictions
 ++++++++++++
@@ -84,68 +84,59 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
+     - False
      -
+   * - YLD only
+     - False
+     -
+   * - YLL only
+     - False
      -
    * - Age group start
-     -
-     -
+     - 10
+     - [25, 29 years)
    * - Age group end
-     -
-     -
-
-..	todo::
-
-	Determine if there's something analogous to "YLL/YLD only" for this section
+     - 235
+     - [95, 125 years)
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
+The quantity of interest is exposure to the mean blood pressure level regardless of whether that level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and do not account for duration of exposure to elevated SBP. 
 
-Risk Exposure Model Diagram
-++++++++++++++++++++++
+Data Description
+++++++++++++++++
 
-Include diagram of Vivarium risk exposure model.
+The rei_id for SBP is 107
 
-Data Description Tables
-+++++++++++++++++++++++
-
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
+.. list-table:: ID Table 
 	:widths: 10, 5, 15
 	:header-rows: 1
 
-	* - Constant
-	  - Value
-	  - Note
-	* - 
+	* - Component
+	  - ME_ID
+	  - Notes
+	* - Mean exposure
+	  - 2547
 	  - 
+	* - Standard deviation
+	  - 15788
 	  - 
+	* - Relative risk
+	  - 9030
+	  - Must be accessed with get_draws
 
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
+The exposure values should be used to represent the distribution of mean blood pressure values that the simulants will be assigned in the model. 
 
 Validation Criteria
 +++++++++++++++++++
 
-..	todo::
-	Fill in directives for this section
+Does the mean in the model match the mean in GBD? 
+
+Does the standard deviation in the model match the standard deviation in GBD? 
 
 References
 ----------
