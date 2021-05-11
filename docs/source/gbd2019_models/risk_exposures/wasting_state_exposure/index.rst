@@ -267,17 +267,19 @@ T =
 :math:`π_{T}` is the eigenvector at equilibriuum
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
-  b) :math:`\sum_{\text{i=p}}\text{π{T}}`
+  b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
   c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4
 
 
-Solving a):
+Solving a)
+
   1)  p4xs4 + p3xr4 = p4 
   2)  p4xi3 + p3xs3 + p2xr3 = p3
   3)  p3xi2 + p2xs2 + p1xr2 = p2
   4)  p2xi1 + p1xs1 = p1
 
-Rows of the P matrix sums to 1:
+Rows of the P matrix sums to 1
+
   5)  s4 + i3 =1
   6)  r4 + s3 + i2 = 1
   7)  r3 + s2 + i1 =1
@@ -296,8 +298,44 @@ tx is treated
 ux is untreated
 C is treatment coverage proportion
 
+We solve for the unknowns using the matrix solution
+
 .. code-block::
   import pandas as pd, numpy as np, matplotlib.pyplot as pyplot
 
   p4 =  sex/age-specific GBD prevalence of wasting cat 4 
-  p3 =  sex/ge-specifi
+  p3 =  sex/ge-specific GBD prevalence of wasting cat 3 
+  p2 =  sex/age-specific GBD prevalence of wasting cat 2 
+  p1 =  sex/age-specific GBD prevalence of wasting cat 1 
+
+  # row order from equation 1 - 10;
+  # column order is s1, s2, s3, s4, r2, r3, r4, i1, i2, i3
+
+
+  a = np.array([[0,0,0,p4,0,0,p3,0,0,0],
+                [0,0,p3,0,0,p2,0,p4,0,0],
+                [0,p2,0,0,p1,0,0,0,p3,0],
+                [p1,0,0,0,0,0,0,p2,0,0],
+                [0,0,0,1,0,0,0,0,0,1],
+                [0,0,1,0,0,0,1,0,1,0],
+                [0,1,0,0,0,1,0,1,0,0],
+                [1,0,0,0,1,0,0,0,0,0],
+                [0,0,0,0,1,0,0,0,0,0],
+                [0,0,0,0,0,1,0,1,0,0]])
+
+  b =np.array([[p4],
+               [p3],
+               [p2],
+               [p1],
+               [1],
+               [1],
+               [1],
+               [1],
+               [0.0250],
+               [0.0143]])
+
+  x = np.linalg.solve(a,b)
+
+  # checking that ax=b
+
+  np.allclose(np.dot(a
