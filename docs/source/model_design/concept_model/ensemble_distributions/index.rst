@@ -164,19 +164,38 @@ Improving the distribution estimates with an ensemble approach
 Where Is the Code for GBD's Ensemble Distributions?
 ----------------------------------------------------
 
-Here are links to R code and Python code implementing GBD's ensemble distributions:
+Here are two repositories implementing GBD's ensemble distributions:
 
-* `R code for ensemble distributions <R code_>`_ on Stash, accessible on the
-  cluster at :file:`/ihme/code/risk/ensemble/` and maintained by Central Comp
+* `Ensemble Distributions repository (R code)  <R code_>`_ on Stash, maintained
+  by Central Comp and accessible on the cluster at
+  :file:`/ihme/code/risk/ensemble/`
 
-* `Python code for ensemble distributions <Python code_>`_ on GitHub, part of
+  - `pdf_families.R`_ contains the list of base distributions for the ensemble, with functions for returning the PDF and CDF for each distribution and implementing the method of moments (i.e. calculating the parameters of the distribution given its mean and variance). Each distribution is added to one of the classes ``classA`` (standard distributions supported on :math:`[0,\infty)` or :math:`(-\infty, \infty)`), ``classB`` (the shifted, scaled Beta distribution) or ``classM`` (mirrored distributions) at the end of the file, which then get concatenated into a single distribution list (``dlist``) in :file:`fit.R` and passed to the ``eKS`` function in :file:`eKS_parallel.R`.
+
+  - `eKS_parallel.R`_ is the optimization routine that finds the best set of ensemble weights by minimizing the `Kolmogorov--Smirnov statistic`_ between the ensemble distribution and the empirical distribution of the data.
+
+  - `fit.R`_ loads the list of distributions from :file:`pdf_families.R` and calls calls :file:`eKS_parallel.R` to do the actual distribution fitting.
+
+  - `fit_submit.R`_ is the main program to submit a job on the cluster to fit an ensemble distribution to data. It calls :file:`fit.R`.
+
+
+* `Risk Distributions repository (Python code) <Python code_>`_ on GitHub,
+  maintained by the Vivarium Engineering Team as part of
   `Vivarium Public Health <https://github.com/ihmeuw/vivarium_public_health>`_
-  and maintained by the Vivarium Engineering Team
+
+R code: fit_submit.R calls fit.R calls eKS_parallel.R and pdf_families.R, and assigns classes A,B and M to distlist
 
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
+.. _fit_submit.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/fit_submit.R
+.. _fit.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/fit.R
+.. _eKS_parallel.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/eKS_parallel.R
 .. _pdf_families.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/pdf_families.R
+.. _edensity.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/edensity.R
+.. _scale_density_simpson.cpp: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/scale_density_simpson.cpp
 .. _risk_distributions.py: https://github.com/ihmeuw/risk_distributions/blob/master/src/risk_distributions/risk_distributions.py
+
+.. _Kolmogorov--Smirnov statistic: https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test
 
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
@@ -223,6 +242,10 @@ specified.
   average the distributions together because of the Law of Total
   Expectation/Variance, *unless* the weight for the Exponential distribution is
   nonzero, which will throw the variance off.
+
+  Also, somewhere add examples of GBD and Vivarium models that use ensemble
+  distributions and/or specific distributions from the list. It would be nice to
+  show pictures of the ensembles and list the ensemble weights.
 
 .. note::
 
