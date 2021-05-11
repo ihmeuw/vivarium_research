@@ -246,7 +246,6 @@ Risk Exposure Model Diagram
 Finite state machine 1x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
-HELOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
 
 .. image:: wasting_state_1x4.svg
 
@@ -254,6 +253,9 @@ To solve the 10 transition pobabilities, we use a Markov Chain transition matrix
 
 T = 
 
+.. csv-table:: 
+   :file: wasting_state_1x4.csv
+   :widths: 5, 5, 5, 5, 5
 
 
 :math:`π_{T}` = 
@@ -264,57 +266,38 @@ T =
 
 :math:`π_{T}` is the eigenvector at equilibriuum
 
-  a) :math:`π_{T} * T = π_{T}` (the T means tranposted, this is a 1 row vector)
-  b) :math:`\sum_{\text{i=p}}\text{π_{T}}`
+  a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
+  b) :math:`\sum_{\text{i=p}}\text{π{T}}`
   c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4
 
 
+Solving a):
+  1)  p4xs4 + p3xr4 = p4 
+  2)  p4xi3 + p3xs3 + p2xr3 = p3
+  3)  p3xi2 + p2xs2 + p1xr2 = p2
+  4)  p2xi1 + p1xs1 = p1
 
-.. _2.2.2: 
+Rows of the P matrix sums to 1:
+  5)  s4 + i3 =1
+  6)  r4 + s3 + i2 = 1
+  7)  r3 + s2 + i1 =1
+  8)  r2 + s1 = 1
 
-Finite state machine 2x4 
-~~~~~~~~~~~~~~~~~~~~~~~~~
+We have duration of treated and untreated sam and mam as well as coverage from the literature :   
 
-.. image:: wasting_state_2x4.svg
+  9)  r2 = 1/Dsam   
+  10) r3 + i1  = 1/Dmam   
 
+where:
 
+Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
+Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
+tx is treated
+ux is untreated
+C is treatment coverage proportion
 
+.. code-block::
+  import pandas as pd, numpy as np, matplotlib.pyplot as pyplot
 
-
-Data Description Tables
-+++++++++++++++++++++++
-
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
-
-Validation Criteria
-+++++++++++++++++++
-
-..	todo::
-	Fill in directives for this section
-
-References
-----------
+  p4 =  sex/age-specific GBD prevalence of wasting cat 4 
+  p3 =  sex/ge-specifi
