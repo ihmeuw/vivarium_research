@@ -167,7 +167,44 @@ CGF burden does not start until after neonatal age groups. In neonatal age group
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-We will calibrate a duration based finite state transition model for progression and recovery of acute malnutrition according to GBD 2019 prevalence of wasting. The model consists of four wasting states. The arrows in the figure represent the transition probabilities into and out of each state which determines the movement of children in and out of each state. 
+We will build a duration based Markov chain finite state state transition model for progression and recovery of acute malnutrition calibrated to GBD 2019 prevalence of wasting. We do this progressively frrom a wasting only model to one with causes and disease feedback. The arrows in the model diagram figures represent the transition probabilities into and out of each state which determines the movement of children in and out of each state. 
+
+We first build
+
+  1. 1x4 state model with wasting only
+  2. 2x4 state model with 2 disease states and 4 wasting states
+  3. 2x4 state model with 2 disease states and 4 wasting states with death and fertility (tbd)
+
+
+Assumptions and Limitations
++++++++++++++++++++++++++++
+
+Describe the clinical and mathematical assumptions made for this cause model,
+and the limitations these assumptions impose on the applicability of the
+model.
+
+Markov chains
+-------------
+
+.. todo::
+  add some detail about markov chains, define mathematic notations 
+
+Equilibirum
+-----------
+
+.. todo::
+  add some detail about equilirium
+
+Arborescence
+------------
+
+.. todo::
+  add some detail about graph theory and the process we did to discover the pattern in our markov chains
+
+As a rule for the finiate state machines, the numerator of the prevalence of a state is the sum of the product of all edges in every unique anti-arborescence (graph theory).
+
+.. note::
+  This section will become the methods section in the manuscript. 
 
 
 .. _2.1: 
@@ -183,17 +220,17 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     - no
+     - False
      -
    * - Female only
-     - no
+     - False
      -
    * - Age group start
-     - 4
+     - post-neonatal 1mo to 1 year, id 4 
      - exclude neonatal age groups
    * - Age group end
-     - 5
-     - 5 years
+     - 1yr to 4yr id 5
+     - 
 
 ..	todo::
 
@@ -209,7 +246,28 @@ Risk Exposure Model Diagram
 Finite state machine 1x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
+HELOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+
 .. image:: wasting_state_1x4.svg
+
+To solve the 10 transition pobabilities, we use a Markov Chain transition matrix **T**. 
+
+T = 
+
+
+
+:math:`π_{T}` = 
+
++----+----+----+----+
+| p4 | p3 | p2 | p1 |
++----+----+----+----+
+
+:math:`π_{T}` is the eigenvector at equilibriuum
+
+  a) :math:`π_{T} * T = π_{T}` (the T means tranposted, this is a 1 row vector)
+  b) :math:`\sum_{\text{i=p}}\text{π_{T}}`
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4
+
 
 
 .. _2.2.2: 
@@ -220,12 +278,7 @@ Finite state machine 2x4
 .. image:: wasting_state_2x4.svg
 
 
-Assumptions and Limitations
-+++++++++++++++++++++++++++
 
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
 
 
 Data Description Tables
@@ -233,35 +286,4 @@ Data Description Tables
 
 As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
 below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
-
-Validation Criteria
-+++++++++++++++++++
-
-..	todo::
-	Fill in directives for this section
-
-References
-----------
+we need to revise the format in cowork
