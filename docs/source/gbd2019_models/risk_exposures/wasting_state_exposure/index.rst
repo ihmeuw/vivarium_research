@@ -290,13 +290,13 @@ We have duration of treated and untreated sam and mam as well as coverage from t
   9)  r2 = 1/Dsam   
   10) r3 + i1  = 1/Dmam   
 
-where:
+where
 
-Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
-Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
-tx is treated
-ux is untreated
-C is treatment coverage proportion
+ - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
+ - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
+ - tx is treated
+ - ux is untreated
+ - C is treatment coverage proportion
 
 We solve for the unknowns using the matrix solution
 
@@ -389,5 +389,4 @@ Validation Criteria
 ..	todo::
 	Fill in directives for this section
 
-References
---------
+Referen
