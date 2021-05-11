@@ -286,4 +286,35 @@ Data Description Tables
 
 As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
 below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in cowork
+we need to revise the format in coworking. 
+
+.. list-table:: Constants 
+	:widths: 10, 5, 15
+	:header-rows: 1
+
+	* - Constant
+	  - Value
+	  - Note
+	* - 
+	  - 
+	  - 
+
+.. list-table:: Distribution Parameters
+	:widths: 15, 30, 10
+	:header-rows: 1
+
+	* - Parameter
+	  - Value
+	  - Note
+	* - 
+	  - 
+	  -
+
+Validation Criteria
++++++++++++++++++++
+
+..	todo::
+	Fill in directives for this section
+
+References
+----------
