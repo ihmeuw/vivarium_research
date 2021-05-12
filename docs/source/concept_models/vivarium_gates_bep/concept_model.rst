@@ -57,7 +57,8 @@ Vivarium Gates Balanced Energy Protein
 | oMMN  | multi-nutrients *other*    |
 |       | than iron and folic acid   |
 +-------+----------------------------+
-
+| CGF   | child-growth failure       |
++-------+----------------------------+
 
 .. _1.0:
 
@@ -111,7 +112,7 @@ To understand the cost-effectiveness of BEP and MMN supplementation for pregnant
 3.1 Causal diagram
 ------------------
 
-  .. image:: causal_dag_bep_scenarios_v2.svg
+  .. image:: causal_dag_bep_scenarios_v3_fall.svg
 
 **Outcome (O)**:
 
@@ -170,29 +171,29 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - same 
    * - b (∆oMMN)
      - MMN vs IFA on birthweight in g
-     - +51.24 (43.71 to 58.76) fixed effects *or* +45.16 (32.31 to 58.02) random effects
+     - +45.16 (32.31 to 58.02) random effects
      - meta analysis of 13 trials from Keats 2019 :download:`memo <meta-analysis_MMN_vs_IFA_memo.docx>`
      - same
      - same 
-   * - d1 (∆BEP_mal)
-     - BEP vs control/no intervention on birthweight in g among malnourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
-     - +66.96g (13.13 to 120.78)
+   * - d1 and d'1 (∆BEP_mal)
+     - BEP vs control (we interpret this as MMS) on birthweight in g among malnourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
+     - +66.96g (13.13 to 120.78) for d1
      - Ota 2015 Cochrane review
-     - +100g (±10)  
-     - TPP target
-   * - d0 (∆BEP_norm)
-     - BEP vs control/no intervention on birthweight in g among normal BMI women :download:`memo <bep_controlgroup_memo.docx>`
-     - +40.96g (4.66,77.26)
+     - +100g (±10) for d'1
+     - TPP target/potentially Ceesay et al 1997 BMJ
+   * - d and d'0 (∆BEP_norm)
+     - BEP vs control (we interpret this as MMS) on birthweight in g among adequately nourished BMI women :download:`memo <bep_controlgroup_memo.docx>`
+     - +15.93 (-20.83 to 52.69) for d0
      - Ota 2015 Cochrane review
-     - +75g (±10)   
-     - TPP target
+     - +15.93 (-20.83 to 52.69) for d'0
+     - Ota 2015 Cochrane review
    * - x
      - crude birthweight in g shift between low and normal BMI women
-     - -160.44g (-196.65 to -124.23) fixed effects *or* -142.93g (-232.68 to -53.18) random effects
-     - meta analysis of 3 studies :download:`memo <meta-analysis_BMI_vs_birthweight_memo.docx>`
+     - -147.71 (-210.9 to -84.52) random effects
+     - meta analysis of 9 studies :download:`memo <maternal_BMI_crude_bw_shift.docx>`
      - same
      - same
-   * - f
+   * - f (WE NO LONGER USE f)
      - effect size of BMI on CGF (laz and wlz)
      - none (although we will validate with correlation literature)
      - Source
@@ -203,13 +204,13 @@ Here is a memo describing the rationale underlying the causal structure of this 
      - none
      - none
      - +0.3 (±0.1)
-     - TPP target
+     - TPP target/ Kusin et.al 1992 Lancet
    * - E_wlz
      - BEP vs. control/no intervention on WLZ score at 6 months
      - none
      - none
      - +0.3 (±0.1)
-     - TPP target
+     - TPP target/ Kusin et.al 1992 Lancet
    * - *c_laz*
      - Spearman correlation co-efficient for birthweight and LAZ
      - 0.394 (0.353 to 0.433; sd = 0.020) :download:`spreadsheet <child_growth_birthweight_correlations.xlsx>`
@@ -434,84 +435,8 @@ Method for how to calculate the shift in WLZ score from a risk ratio not shown
 
 Apply the following intervention shifts according to interventions recieved in each of the scenarios A-F 
 
-.. image:: intervention_shifts.svg
+.. image:: intervention_shifts_fall.svg
 
-.. important:: 
-  note-
-   
-   1) oMMN size has changed from feb_2020 model
-   2) there is now a current-evidence effect size for BEP
-   3) the baseline shifts in laz/wlz scores due to maternal BMI status can be kept in there if it is currently in there already, as it doesnt make any difference with or without it in scenarios A-E. The shifts in cgf z-scores due to maternal bmi only matters in scenarios F(i) and F(ii) which are hopes-n-dreams targeted scenarios. 
-
-Updates by scenario for summer_2020 model from feb_2020 model:
-
-1) Scenario A (some gets nothing, some gets basic)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results. 
-
-2) Scenario B (some gets nothing, some gets basic+)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
- * update effect size b
-
-3) Scenario C (some gets nothing, some gets basic++, use current-evidence for BEP | universal)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
- * update effect size d1 and d0 using value from current-evidence
- * delete effect E_laz and E_wlz
-
-4) Scenario D (some gets nothing, some gets basic+, some gets basic++, use current-evidence for BEP | targeted)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
- * update effect size b
- * update effect size d1 and d0 using value from current-evidence
- * delete effect E_laz and E_wlz
-
-5) Scenario E (some gets nothing, some gets basic++, use hopes-n-dreams for BEP | universal)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * we can keep effect size f in there if it already is. Whether it is or not won't make a difference to the results.
- * update effect size d1 and d0 to value from hopes-n-dreams
- * add effect size E_laz and E_wlz
-
-6) Scenario F(i) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * ensure effect size f is there.
- * update effect size b
- * update effect size d1 and d0 to value from hopes-n-dreams
- * add effect size E_laz and E_wlz
-
-
-7) Scenario F(ii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * ensure effect size f is there.
- * update effect size b
- * update effect size d1 and d0 to value from hopes-n-dreams
- * add effect size E_laz and E_wlz
- * add correlation c
-
-8) Scenario F(iii) (some gets nothing, some gets basic+, some gets basic++, use hopes-n-dreams for BEP | targeted)
- * add LRI birth prevalence
- * update LBWSG risk 
- * update effect x (directly use shift in grams provided, random effects value)
- * take out effect f
- * update effect size b
- * update effect size d1 and d0 to value from hopes-n-dreams
- * add effect size E_laz and E_wlz
- * add correlation c
 
 
 .. _5.4:
@@ -527,7 +452,7 @@ Updates by scenario for summer_2020 model from feb_2020 model:
 
 :download:`output table shell<BEP_output_shell_metadata_24July2020.xlsx>`
 
-
+*added cgf z-score outputs by timepoint 29 days and 366 days
 
 .. _5.6:
 
