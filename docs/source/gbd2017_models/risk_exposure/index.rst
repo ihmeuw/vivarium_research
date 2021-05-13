@@ -1,12 +1,8 @@
-.. _2017_risk_models:
+.. _2017_risk_exposure_models:
 
 ====================
 Risk Exposure Models
 ====================
-
-.. todo::
-
-   Describe how to model risks here.
 
 .. toctree::
    :maxdepth: 1

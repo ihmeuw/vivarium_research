@@ -153,7 +153,17 @@ calculated from average case duration assumption of 10 days [GBD-2019-Capstone-A
      - 50 to 54 years
      - GBD age group id is 
 
-Notably, our cause model as described accounts for the number of simulants that enter the recovered state by becoming infected with measles and recovering, but does not consider simulants who enter the recovered state by receiving the measles vaccine without becoming infected with measles. Therefore, we are underestimating the prevalence of the recovered state in our model. This strategy was employed so that the size of the susceptible and recovered populations at model initialization will remain stable as the simulation runs and simulants progress through the SIR cause model (this is an improvement from our previous assumption that there was zero prevalence of the recovered state upon model initialization, which caused an decrease in the susceptible population and an increase in the recovered population over time, which affected calibration of simulation incidence and mortality rates to GBD rates).
+Notably, our cause model as described accounts for the number of simulants that enter the recovered state by becoming infected with measles and recovering, but does not consider simulants who enter the recovered state by receiving the measles vaccine without becoming infected with measles. Therefore, we are underestimating the prevalence of the recovered state in our model. This strategy was employed so that the size of the susceptible and recovered populations at model initialization will remain stable as the simulation runs and simulants progress through the SIR cause model (this is an improvement from our previous assumption that there was zero prevalence of the recovered state upon model initialization, which caused an decrease in the susceptible population and an increase in the recovered population over time, which affected calibration of simulation incidence and mortality rates to GBD rates); see note below.
+
+.. note::
+
+	A note on why the assumption of :math:`prevalence_R = 0` at initialization used in the :ref:`2017 measles cause model document <2017_cause_measles>`  needed improvement:
+
+	:math:`prevalence_S = 1 - prevalence_\text{c341} - prevalence_R`
+
+	:math:`incidence_I = incidence_\text{c341} / prevalence_S`
+
+	Since vivarium calculates :math:`incidence_I` once at the beginning of the simulation, if we assume that no simulants are initialized into the recovered state (:math:`prevalence_R = 0`), then :math:`incidence_I` will be scaled to the prevalence susceptible population that is artificially inflated by this assumption (as we can safely assume that the *true* prevalence of the recovered state is greater than zero). Then as simulants move from the susceptible state through the infected state and into the recovered state as the simulation progresses, the prevalence of the susceptible state will decrease as simulants accumulate in the recovered state. Because the prevalence of the susceptible population decreased over time in our simulation in this manner but the incidence rate did not increase, the overall incidence of measles in our simulation decreased over time. Therefore, we updated our assumption so that some number of simulants will be initialized into the recovered state in an attempt to avoid this issue.
 
 Alternative model structures to consider include:
 
