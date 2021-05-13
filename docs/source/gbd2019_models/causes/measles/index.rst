@@ -116,7 +116,7 @@ Some of the **assumptions** made in this model are:
 
 1. There is no data available for population in recovered state in GBD. Since the early and late neonatal age groups are not modeled in GBD, we made the assumption that there are no individuals in the recovered state at the start of the post-neonatal age group. We then calculated the proportion of the population in the recovered state in the 1-4 year age group using GBD measles incidence and mortality rates. Note that we performed this calculation only for the 1-4 age group because measles is most often of interest among the children under five population, but this assumption could be expanded to other older ages as well.
 
-2. There is no data avaialable for remission rate in GBD. So a constant remission rate is 
+2. There is no data available for remission rate in GBD. So a constant remission rate is 
 calculated from average case duration assumption of 10 days [GBD-2017-YLD-Capstone-Appendix-1]_.
 
 
