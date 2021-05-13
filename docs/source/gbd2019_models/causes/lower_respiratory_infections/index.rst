@@ -38,6 +38,68 @@ and increased antibiotic use, was identified as a focus for targeted interventio
 Modeling LRI in GBD 2019
 ------------------------
 
+The GBD LRI model comprises a fatal and a nonfatal model. The outputs of each of 
+these are fit to four etiologies, which are modeled separately.
+
+LRI deaths are estimated using separate CODEm models for children under 5 and 
+persons aged 5-95+, due to the significant difference in fatality patterns. These 
+models run using CoD data from vital registration systems, surveillance 
+systems, and verbal autopsy, along with a set of covariates updated slightly 
+from those used in GBD 2017. [GBD-2019-Capstone-Appendix]_
+
+.. todo:: 
+
+   include covariate tables. p96: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
+
+These estimates are then adjusted using CodCorrect to fit the overall mortality 
+envelope estimated by the GBD, and mapped to etiologies by location, year, age, 
+and sex.
+
+The case definition used for the nonfatal LRI model is "clinician- diagnosed 
+pneumonia or bronchiolitis". Primary input data types include incidence and prevalence 
+data from population surveys, scientific literature, and hospital/claims 
+records. The modelers first adjust survey data for seasonality; then all input 
+data with a non-reference case definition is adjusted using correction factors 
+estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days, 
+which corresponds with a remission 36.5. The comprise the inputs for a DisMod 
+model. LRI severity splits are obtained from a meta-analysis, and then the 
+DisMod outputs are split according to severity before disablility weights for 
+YLD calculation are applied. [GBD-2019-Capstone-Appendix]_
+
+.. todo::
+
+   ask sim science, and then gbd team, what "model-MR" is. different from dismod?
+
+LRI viral etiologies include influenza and respiratory syncytial virus (RSV), 
+and bacterial etiologies include Streptococcus pneumoniae and Haemophilus 
+influenzae type B (Hib). The two types of etiologies are modeled using two different 
+counterfactual strategies, and then for each etiology a PAF is calculated. Note 
+that as LRI pathogens can co-infect, these PAFs can overlap. Due to a lack of 
+data, the modelers did not map neonatal deaths to etiologies. [GBD-2019-Capstone-Appendix]_
+
+
+The viral etiologies were modeled using the following formula:
+
+.. math:: 
+
+   PAF = Proportion(modeled)*(1-\frac{1}{OR})
+
+Here, *Proportion* is the proportion of LRI cases that test positive for 
+influenza or LRI, and *OR* is defined to be the odds ratio of LRI given the 
+presence of the pathogen. The odds ratios were obtained from a log-linear 
+interpolation model, and the proportion data for each etiology was modeled 
+using DisMod. [GBD-2019-Capstone-Appendix]_
+
+
+The bacterial etiologies were modeled using a vaccine probe design: the
+modelers first calculated the ratio of vaccine effectiveness against
+nonspecific pneumonia to pathogen-specific pneumonia. Estimates were adjusted by 
+vaccine coverage and exoected vaccine performance to generate country- and year-
+specific PAFs. DisMod was used to model an age pattern, resulting in the final
+location- year- and age- specific PAF estimates. Due to a lack of vaccine
+efficacy data for children over two years old, the modelers did not map LRI in 
+over-5 year olds to Hib. [GBD-2019-Capstone-Appendix]_
+
 
 GBD hierarchy
 -------------
