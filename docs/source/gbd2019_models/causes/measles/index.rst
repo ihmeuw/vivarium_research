@@ -62,9 +62,9 @@ The `ICD 10`_ codes for measles are B05-B05.9, Z24.4, and ICD 9 codes are
 Modeling Measles in GBD 2019
 ----------------------------
 
-The non-fatal measles model "primarily leverages the relationship between direct reports of measles case notifications annually released by the World Health Organization (WHO) in the Joint Reporting Form (JRF), modeled estimates of measles-containing-vaccine (MCV) vaccination coverage proportions for doses 1 and 2 (five year rolling mean coverage), and supplementary immunization campaign (SIA) coverage (lagged by 1, 2, 3, 4, and 5 years) to produce global estimates of measles cases" (GBD 2019, p. 721). GBD assumes that 50% of measles cases are moderate (disability weight 0.051, 95% CI: 0.032, 0.074) and that 50% are severe (disability weight 0.133, 95% CI: 0.088, 0.19); symptoms of the measles sequelae in GBD include fever, aches/pain, and weakness. GBD assumes a universal 95% attack rate in the absence of vaccination. Measles prevalence was estimated by multiplying incident case estimations by an average case duration of ten days.
+The non-fatal measles model "primarily leverages the relationship between direct reports of measles case notifications annually released by the World Health Organization (WHO) in the Joint Reporting Form (JRF), modeled estimates of measles-containing-vaccine (MCV) vaccination coverage proportions for doses 1 and 2 (five year rolling mean coverage), and supplementary immunization campaign (SIA) coverage (lagged by 1, 2, 3, 4, and 5 years) to produce global estimates of measles cases" [GBD-2019-Capstone-Appendix-1]_ (p. 721). GBD assumes that 50% of measles cases are moderate (disability weight 0.051, 95% CI: 0.032, 0.074) and that 50% are severe (disability weight 0.133, 95% CI: 0.088, 0.19); symptoms of the measles sequelae in GBD include fever, aches/pain, and weakness. GBD assumes a universal 95% attack rate in the absence of vaccination. Measles prevalence was estimated by multiplying incident case estimations by an average case duration of ten days [GBD-2019-Capstone-Appendix-1]_.
 
-The GBD 2019 fatal measles estimates were modeled in one of two ways depending on available data quality for a given country. For data-rich countries, the Cause of Death Ensemble model (CODEm) was used, with measles-containing vaccination dose one, healthcare access and quality (HAQ) index, socio-demographic index (SDI), and mean years of education per capita as covariates (NOTE: the maternal care and immunization covariate was used in place of HAQ and SDI covariates in previous GBD cycles). For data-poor countries, a natural history model was used that built off of the GBD non-fatal estimates. The natural history model estimated a case fatality ratio via a model informed by data from a systematic literature search that was updated in 2019. "With the available measles CFR input data, we make location- and year-specific death estimates using a negative binomial model with Socio-demographic Index (SDI) as a country-level covariate, additionally accounting for three indicators (hospital-based or not; outbreak or not; and rural or urban/mixed) as study-level covariates, with country random effects" (GBD 2019, page 177).
+The GBD 2019 fatal measles estimates were modeled in one of two ways depending on available data quality for a given country. For data-rich countries, the Cause of Death Ensemble model (CODEm) was used, with measles-containing vaccination dose one, healthcare access and quality (HAQ) index, socio-demographic index (SDI), and mean years of education per capita as covariates (NOTE: the maternal care and immunization covariate was used in place of HAQ and SDI covariates in previous GBD cycles). For data-poor countries, a natural history model was used that built off of the GBD non-fatal estimates. The natural history model estimated a case fatality ratio via a model informed by data from a systematic literature search that was updated in 2019. "With the available measles CFR input data, we make location- and year-specific death estimates using a negative binomial model with Socio-demographic Index (SDI) as a country-level covariate, additionally accounting for three indicators (hospital-based or not; outbreak or not; and rural or urban/mixed) as study-level covariates, with country random effects" [GBD-2019-Capstone-Appendix-1]_ (page 177).
 
 .. todo::
 
@@ -119,8 +119,7 @@ Some of the **assumptions** made in this model are:
 1. There is no data available for population in recovered state in GBD. Since the early and late neonatal age groups are not modeled in GBD, we made the assumption that there are no individuals in the recovered state at the start of the post-neonatal age group. We then calculated the proportion of the population in the recovered state in the 1-4 year age group using GBD measles incidence and mortality rates. Note that we performed this calculation only for the 1-4 age group because measles is most often of interest among the children under five population, but this assumption could be expanded to other older ages as well.
 
 2. There is no data avaialable for remission rate in GBD. So a constant remission rate is 
-calculated from average case duration assumption of 10 days [GBD-2017-YLD-Capstone-Appendix-1]_.
-
+calculated from average case duration assumption of 10 days [GBD-2019-Capstone-Appendix-1]_.
 
 .. list-table:: Restrictions
    :widths: 15 15 20
@@ -385,9 +384,15 @@ References
    and territories, 1990–2017: a systematic analysis for the Global Burden of
    Disease Study 2017. Lancet 2018; 392: 1789–858 <DOI for YLD Capstone_>`_
    (pp. 246-7)
-
    (Direct links to the YLD Appendix hosted on `Lancet.com <YLD appendix on Lancet.com_>`_ and `ScienceDirect <YLD appendix on ScienceDirect_>`_)
-
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
 .. _YLD appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322797-mmc1.pdf
 .. _DOI for YLD Capstone: https://doi.org/10.1016/S0140-6736(18)32279-7
+
+.. [GBD-2019-Capstone-Appendix-1]
+   Supplement 1 to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. Lancet 2019; 396: 1204–22 <DOI for GBD 2019 Capstone_>`_
+   (pp. 176-177, 721-723)
+
+   (Direct links to the GBD 2019 capstone paper hosted on `Lancet.com <https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf>`_)
+
+.. _DOI for GBD 2019 Capstone: https://doi.org/10.1016/S0140-6736(20)30925-9
