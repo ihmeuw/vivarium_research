@@ -63,7 +63,20 @@ Data Description
 
 Validation Criteria
 -------------------
+Baseline vivarium model results should compare to GBD artifact data with respect to age-, sex-, location-, and year-specific LRI:
 
+- Birth prevalence
+- Prevalence
+- Incidence rate
+- Remission rate
+- Cause-specifc mortality rate
+- Excess mortality rate
+- YLDs due to LRI
+- YLLs due to LRI
+
+.. note::
+
+  The prior bound for the LRI remission rate is 7.3 days, which is longer than the duration of the early neonatal age group (6 days), so theoretically there should be few or no remitted cases of LRI in the early neonatal age group. However, LRI birth prevalence is expected to be greater than LRI prevalence in the early neonatal age group due to LRI's excess mortality rate.
 
 References
 ----------
