@@ -58,14 +58,16 @@ There is substantial additional effort in GBD to divide LRI
 burden into the aetiologies of LRI, but we do not include
 aetiologies in this simple model.
 
-.. todo::
+
+
+.. note::
 
    There are three sequelae associated with LRI, including moderate LRI, severe 
    LRI, and Guillain-Barré syndrome due to LRI. In the gbd 2017 iteration, we 
    did not track the long-term effects of GBS. As the prevalence of GBS is so 
-   low, we noted tehre would likely not be great benefit in capturing its 
-   long-term YLDs in addition to its short-term YLDs. Need to determine if this 
-   still applied for our 2019 version of this model.
+   low, we noted there would likely not be great benefit in capturing its 
+   long-term YLDs in addition to its short-term YLDs. Need to determine if we 
+   will also not track long-term GBS YLDs in our 2019 version.
 
 
 .. note::
