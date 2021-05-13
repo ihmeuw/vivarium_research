@@ -29,7 +29,7 @@ Ensemble Distributions in GBD
 
 .. contents::
    :local:
-   :depth: 1
+   :depth: 2
 
 What Is an Ensemble Distribution?
 ---------------------------------
@@ -48,6 +48,119 @@ fits the data better than any of its individual components.
 
 Mathematical Definition of Ensemble Distributions
 -------------------------------------------------
+
+Mathematically, an ensemble distribution in GBD is a `mixture distribution`_,
+which is defined as follows.
+
+Mixture Distributions
++++++++++++++++++++++
+
+Suppose :math:`F_1, F_2,\ldots, F_k` are `cumulative distribution functions
+<CDF_>`_ (CDFs), called the **base distributions** of the ensemble or the
+**components** of the mixture, and suppose we have a collection of non-negative
+numbers :math:`w_1, w_2,\ldots, w_k`, called **weights**, such that
+:math:`\sum_1^k w_i = 1`. Then the **mixture distribution** with components
+:math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k` is the probability
+distribution on :math:`\mathbb{R}` whose cumulative distribution function :math:`F` is defined by
+
+.. math::
+
+  F(x) = \sum_{i=1}^k w_i F_i(x)\quad \text{for } x\in \mathbb{R}.
+
+That is, the CDF of the mixture is a weighted average of the CDFs of the
+components, with the weight of :math:`F_i` being :math:`w_i`.
+
+If the :math:`F_i`'s all correspond to `continuous probability distributions`_
+on :math:`\mathbb{R}`, then differentiating the above equation shows that the
+mixture distribution is also continuous, with `probability density function
+<PDF_>`_ (PDF) given by the coresponding weighted average of the component
+densities, i.e. :math:`f(x) = \sum_1^k w_i f_i(x)`, where :math:`f=F'` and
+:math:`f_i=F_i'`. Thus, the mixture distribution can be defined in terms of
+density functions (PDFs) instead of distribution functions (CDFs) in the
+continuous case.
+
+.. _mixture distribution: https://en.wikipedia.org/wiki/Mixture_distribution
+.. _CDF: https://en.wikipedia.org/wiki/Cumulative_distribution_function
+.. _continuous probability distributions: https://en.wikipedia.org/wiki/Probability_distribution#Continuous_probability_distribution
+.. _PDF: https://en.wikipedia.org/wiki/Probability_density_function
+
+Fitting an Ensemble Distribution to GBD Risk Exposure Data
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This section describes how GBD uses mixture distributions to define ensemble
+distributions for modeling risk exposures.
+
+Problem setup
+~~~~~~~~~~~~~~~
+
+Suppose we have a continuous risk exposure variable :math:`E` whose distribution
+we want to model. For example, :math:`E` could be body mass index, fasting
+plasma glucose, birthweight, or hemoglobin level. Suppose that we want to model
+:math:`E` for :math:`n` different population groups, e.g. indexed by (location,
+age, sex, year) as in GBD. Let :math:`j\in \{1,2,\ldots,n\}` specify which
+population group we are referring to.
+
+Typically, a GBD team will have microdata on :math:`E` for at least some of the
+population groups, and they are able to estimate the mean :math:`\mu_j` and
+standard deviation :math:`\sigma_j` of :math:`E` for each group :math:`j` using
+various regression methods. The goal is to use all the available microdata plus
+the estimates of :math:`\mu_j` and :math:`\sigma_j` to reconstruct the
+approxmiate distribution function of :math:`E` for each group :math:`j`.
+
+More precisely, the goal is to find a family of cumulative distribution
+functions :math:`F(x | \mu, \sigma)`, parameterized by mean :math:`\mu` and
+standard deviation :math:`\sigma`, satisfying the following criteria:
+
+* For each group :math:`j` that has microdata, the distribution function
+  :math:`F(x | \mu_j, \sigma_j)` provides a good approximation of the
+  `empirical CDF`_ of :math:`E` ; and
+
+* For all groups :math:`j`, the function :math:`F(x | \mu_j, \sigma_j)` provides
+  a plausible estimate of the population distribution of :math:`E` --- in particular, its mean and
+  standard deviation match :math:`\mu_j` and :math:`\sigma_j`.
+
+.. _empirical CDF: https://en.wikipedia.org/wiki/Empirical_distribution_function
+
+A simple strategy for estimating exposure distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One simple approach to finding such a family of distributions :math:`F(x | \mu,
+\sigma)` would be to choose a 2-parameter family of probability distributions on
+:math:`\mathbb{R}`, such as the family of normal distributions
+:math:`\mathcal{N}(\mu,\sigma^2)`, and to fit distributions from that family to
+the exposure data using the `method of moments`_. That is, we would set
+:math:`F(x | \mu, \sigma) \equiv \mathcal{N}(\mu,\sigma^2)` so that :math:`E`
+would be normally distributed for each population group, with mean :math:`\mu_j`
+and standard deviation :math:`\sigma_j` for the population group :math:`j`.
+
+.. _method of moments: https://en.wikipedia.org/wiki/Method_of_moments_(statistics)
+
+Improving the distribution estimates with an ensemble approach
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+  **Fill in this section.** Here are some unfinished snippets I started:
+
+  The family of functions :math:`F(x | \mu, \sigma)` will be defined as a
+  mixture of a fixed set of base distributions :math:`F_1(x | \mu, \sigma),
+  F_2(x | \mu, \sigma),\ldots, F_k(x | \mu, \sigma)`  parameterized by mean
+  :math:`\mu` and standard deviation :math:`\sigma`, using a fixed global set of
+  weights :math:`\{w_i\}_1^k` for all :math:`\mu` and :math:`\sigma`. GBD calls
+  :math:`F(x | \mu, \sigma)` an **ensemble distribution**.
+
+
+  The goal for modeling :math:`E` with an ensemble distribution is to find a **global** set of weights :math:`\{w_i\}_1^k`
+
+
+  to start with a specified set of base distributions :math:`F_1(x | \mu,
+  \sigma), F_2(x | \mu, \sigma),\ldots, F_k(x | \mu, \sigma)`  parameterized by
+  mean :math:`\mu` and standard deviation :math:`\sigma` and
+
+  To model risk exposures using ensemble distributions, GBD uses the following
+  procedure:
+
+  1. Start with a collection of base distributions :math:`F_1, F_2,\ldots,
+  F_k`
 
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
