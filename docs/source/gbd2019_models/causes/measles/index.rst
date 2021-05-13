@@ -393,6 +393,6 @@ References
    Supplement 1 to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. Lancet 2019; 396: 1204–22 <DOI for GBD 2019 Capstone_>`_
    (pp. 176-177, 721-723)
 
-   (Direct links to the GBD 2019 capstone paper hosted on `Lancet.com <https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf>`_)
+   (Direct links to the GBD 2019 methods appendix hosted on `Lancet.com <https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf>`_)
 
 .. _DOI for GBD 2019 Capstone: https://doi.org/10.1016/S0140-6736(20)30925-9
