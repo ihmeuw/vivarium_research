@@ -41,10 +41,16 @@ Modeling LRI in GBD 2019
 
 GBD hierarchy
 -------------
+.. image:: lri_hierarchy.svg
 
+c_{} - cause_{gbd_id}, s_{} - sequelae_{gbd_id}
+
+GBS stands for Guillain-Barré syndrome.
 
 Cause Model Diagram
 -------------------
+
+.. image:: lri_disease_model.svg
 
 
 Model Assumptions and Limitations
