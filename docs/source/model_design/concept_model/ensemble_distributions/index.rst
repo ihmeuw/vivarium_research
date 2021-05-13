@@ -366,3 +366,20 @@ Two-propensity sampling from ensemble distributions
 
 One-propensity sampling from ensemble distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Add discussion of pros and cons of the above sampling approaches, including
+  what would happen if we make propensities change over time. Here's a note from
+  Abie, based on a conversation with James:
+
+    In future simulations, we might want individual simulants to have risk
+    factor exposures that are correlated over time, but not perfectly correlated
+    over time. For example, this could be accomplished in a normally distributed
+    risk by changing the risk factor propensity by a small amount every
+    timestep, in a way that keeps the propensity uniformly distributed between
+    zero and one.  The mixture interpretation of the ensemble distribution is
+    amenable to a similar sort of imperfectly autocorrelated risk exposure, by
+    changing the second propensity while leaving the first fixed.  This might
+    result in unexpected features, however, and we will need to proceed with
+    caution, if and when the time comes.
