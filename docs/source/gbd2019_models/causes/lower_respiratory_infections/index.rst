@@ -142,7 +142,7 @@ Data Description
    * - birth_prevalence_meid1258
      - epi
      - Birth Prevalence of LRI
-     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step='step4', status = 'best')
+     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step='step4', status = 'best') #double check that it isn't measure_id=6
    * - prevalence_c322
      - como
      - Prevalence of LRI
@@ -223,4 +223,5 @@ References
 .. [GBD-2019-Capstone-Appendix]
   Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
-  systematic analysis for the Global Burden of Disease Study 2019. The L
+  systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
+  17 Oct 2020;396:1204-1222` 
