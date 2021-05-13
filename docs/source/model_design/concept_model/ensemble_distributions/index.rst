@@ -164,8 +164,9 @@ Improving the distribution estimates with an ensemble approach
 Where Is the Code for GBD's Ensemble Distributions?
 ----------------------------------------------------
 
-Here are the repositories implementing ensemble distributions for :ref:`GBD modeling <GBD_ensemble_repo_description>`
-and for :ref:`Vivarium <Vivarium_risk_distributions_repo_description>`:
+Here are the repositories implementing ensemble distributions for :ref:`GBD
+modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
+<Vivarium_risk_distributions_repo_description>`:
 
 .. _GBD_ensemble_repo_description:
 
@@ -187,15 +188,25 @@ and for :ref:`Vivarium <Vivarium_risk_distributions_repo_description>`:
     distribution list called ``dlist`` in :file:`fit.R` and passed to the
     ``eKS`` function in :file:`eKS_parallel.R`.
 
-  - `eKS_parallel.R`_ contains the optimization routine that finds the best set of ensemble weights by minimizing the `Kolmogorov--Smirnov statistic`_ between the ensemble distribution and the empirical distribution of the data. This file also has code to plot the results of the fitting procedure.
+  - `eKS_parallel.R`_ contains the optimization routine that finds the best set
+    of ensemble weights by minimizing the `Kolmogorov--Smirnov statistic`_
+    between the ensemble distribution and the empirical distribution of the
+    data. This file also has code to plot the results of the fitting procedure.
 
   - `fit.R`_ loads the list of distributions from :file:`pdf_families.R` and
     calls :file:`eKS_parallel.R` to do the actual distribution fitting and plot
     the results.
 
-  - `fit_submit.R`_ is the main program to submit a job on the cluster to fit an ensemble distribution to data by calling :file:`fit.R`.
+  - `fit_submit.R`_ is the main program to submit a job on the cluster to fit an
+    ensemble distribution to data by calling :file:`fit.R`.
 
-  - `scale_density_simpson.cpp`_ is C++ code to rescale a distribution so that it integrates to 1 after it has been truncated at min and max values, using Simpson's rule. This function is called by the ``get_edensity`` function in `edensity.R`_. However, neither :file:`edensity.R` nor :file:`scale_density_simpson.cpp` appear to be used in any of the files above, as the ``get_edensity`` function has a different implementation in :file:`eKS_parallel.R`.
+  - `scale_density_simpson.cpp`_ is C++ code to rescale a distribution so that
+    it integrates to 1 after it has been truncated at min and max values, using
+    Simpson's rule. This function is called by the ``get_edensity`` function in
+    `edensity.R`_. However, neither :file:`edensity.R` nor
+    :file:`scale_density_simpson.cpp` appear to be used in any of the files
+    above, as the ``get_edensity`` function has a different implementation in
+    :file:`eKS_parallel.R`.
 
 .. _Vivarium_risk_distributions_repo_description:
 
@@ -203,9 +214,20 @@ and for :ref:`Vivarium <Vivarium_risk_distributions_repo_description>`:
   maintained by the Vivarium Engineering Team as part of
   `Vivarium Public Health <https://github.com/ihmeuw/vivarium_public_health>`_
 
-  - `risk_distributions.py`_ implements GBD's ensemble distributions via a collection of classes that wrap ``scipy.stats`` distributions for use as risk exposure distributions in Vivarium. There is a class for each base distribution, each extending the ``BaseDistribution`` class, and an ``EnsembleDistribution`` class implementing the mixture of the base distributions. Each base distribution class implements the functions ``get_parameters`` to calculate the parameters of the distribution given its mean and standard deviation (implementing the method of moments), ``pdf`` to compute the probability density function, ``cdf`` to compute the cumulative distribution function, and ``ppf`` to compute the percent point function (i.e. quantile function, used for inverse transform sampling).
+  - `risk_distributions.py`_ implements GBD's ensemble distributions via a
+    collection of classes that wrap ``scipy.stats`` distributions for use as
+    risk exposure distributions in Vivarium. There is a class for each base
+    distribution, each extending the ``BaseDistribution`` class, and an
+    ``EnsembleDistribution`` class implementing the mixture of the base
+    distributions. Each base distribution class implements the functions
+    ``get_parameters`` to calculate the parameters of the distribution given its
+    mean and standard deviation (implementing the method of moments), ``pdf`` to
+    compute the probability density function, ``cdf`` to compute the cumulative
+    distribution function, and ``ppf`` to compute the percent point function
+    (i.e. quantile function, used for `inverse transform sampling`_).
 
-  - `formatting.py`_ contains helper functions for formatting data and converting between data types.
+  - `formatting.py`_ contains helper functions for formatting data and
+    converting between data types.
 
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
@@ -224,9 +246,11 @@ and for :ref:`Vivarium <Vivarium_risk_distributions_repo_description>`:
 What Base Distributions Are Used in GBD's Ensembles?
 ----------------------------------------------------
 
-The R code base lists 14 distribution families in the file `pdf_families.R`_,
-and 12 of them are implemented for Vivarium in `risk_distributions.py`_ (all
-except the Generalized Normal and Generalized Log-normal):
+:ref:`Central Comp's R code base <GBD_ensemble_repo_description>` lists 14
+distribution families in the file `pdf_families.R`_, and 12 of them are
+:ref:`implemented for Vivarium <Vivarium_risk_distributions_repo_description>`
+in `risk_distributions.py`_ (all except the Generalized Normal and Generalized
+Log-normal):
 
 * Gamma
 * Mirrored Gamma
@@ -283,6 +307,9 @@ specified.
       get used, or does GBD use the version of ``get_edensity`` in
       `eKS_parallel.R`_ instead? This truncation is also implemented in Vivarium
       in `risk_distributions.py`_.
+
+    - Note somewhere that in the R code, ``betasr`` evidently stands for "beta
+      with shifted range".
 
 .. note::
 
