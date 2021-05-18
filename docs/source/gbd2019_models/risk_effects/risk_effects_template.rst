@@ -32,7 +32,7 @@
 Risk Effects Model Template
 ===========================
 
-.. important::
+.. todo::
 
    To begin documenting a risk effects in GBD 2019 for a Vivarium simulation, start by following these steps (after you have :ref:`created a new git branch
    <contributing>` to work in):
@@ -78,7 +78,7 @@ Risk Effects Model Template
       <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
       when Sphinx builds HTML from the :file:`index.rst` file.
 
-   #. Once you complete these steps, delete this :code:`.. important::`
+   #. Once you complete these steps, delete this :code:`.. todo::`
       `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
       from :file:`index.rst`.
 
@@ -227,7 +227,7 @@ References
 
 .. todo::
 
-  Update the GBD 2017 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
+  Update the GBD 2019 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
 
   Update the appropriate page numbers in the GBD risk factors methods appendix below
 
