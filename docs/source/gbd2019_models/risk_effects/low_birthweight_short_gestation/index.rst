@@ -48,11 +48,7 @@ GBD 2019 Modeling Strategy
 
 .. note::
 
-	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_page_link>` page.
-
-.. todo::
-
-	Replace '2019_risk_exposure_page_link' with a reference to the appropriate risk exposure page in the above note.
+	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
 .. todo::
 
@@ -82,11 +78,7 @@ Vivarium Modeling Strategy
 
 .. note::
 
-	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_page_link>` page.
-
-.. todo::
-
-	Replace '2019_risk_exposure_page_link' with a reference to the appropriate risk exposure page in the above note.
+	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
 .. todo::
 
