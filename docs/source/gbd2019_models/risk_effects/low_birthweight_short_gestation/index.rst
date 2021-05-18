@@ -32,60 +32,6 @@
 Low Birthweight and Short Gestation Risk Effects
 ================================================
 
-.. important::
-
-   To begin documenting a risk effects in GBD 2019 for a Vivarium simulation, start by following these steps (after you have :ref:`created a new git branch
-   <contributing>` to work in):
-
-   #. Make a subdirectory :file:`{risk_name}/` in the folder
-      :file:`gbd2019/risk_effects/`, where :file:`{risk_name}` is replaced with the
-      (potentially shortened) name of the risk you are modeling, such as :file:`lbwsg/` or :file:`iron_deficiency/`. This
-      subdirectory is where you will put all the files for your risk effects model
-      documentation, including this document, image files, .csv files, etc.
-
-   #. Copy this template into your subdirectory and rename
-      it :code:`index.rst`.
-
-   #. Replace the `internal hyperlink target
-      <https://docutils.sourceforge.io/docs/user/rst/quickref.html#internal-hyperlink-targets>`_
-      :code:`.. _2019_risk_effect_template:` at the top of this file with a
-      unique reference label for your cause. The reference label should have the
-      form :samp:`.. _2019_{\{risk_name\}}_risk_effects:`, where
-      :samp:`{\{risk_name\}}` is replaced with a unique descriptive name or
-      abbreviation for your cause, e.g. :code:`.. _2019_lbwsg_risk_effects:`.
-
-   #. Delete this document's title above:
-
-      .. code:: reStructuredText
-
-         ===========================
-         Risk Effects Model Template
-         ===========================
-
-      Once the above title is deleted, all the other section titles will be
-      promoted up one level.
-
-   #. The subtitle below should now be the document's title. Replace the {Risk Name} text
-      in the below (sub)title with the full name of your risk in GBD 2019.
-
-      **Note:** Be sure to adjust the length of the title's underline
-      :code:`======` and overline :code:`======` to match the length of your
-      new document title, or you will get errors in the `section structure
-      <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
-      when Sphinx builds HTML from the :file:`index.rst` file.
-
-   #. Once you complete these steps, delete this :code:`.. important::`
-      `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
-      from :file:`index.rst`.
-
-.. todo::
-
-  Create the document title (insert appropriate risk name and remove from this to-do)
-
-  ========================
-  {Risk Name} Risk Effects
-  ========================
-
 .. contents::
    :local:
    :depth: 2
