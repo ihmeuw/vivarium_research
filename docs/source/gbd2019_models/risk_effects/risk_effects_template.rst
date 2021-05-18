@@ -32,7 +32,7 @@
 Risk Effects Model Template
 ===========================
 
-.. important::
+.. todo::
 
    To begin documenting a risk effects in GBD 2019 for a Vivarium simulation, start by following these steps (after you have :ref:`created a new git branch
    <contributing>` to work in):
@@ -50,11 +50,11 @@ Risk Effects Model Template
       <https://docutils.sourceforge.io/docs/user/rst/quickref.html#internal-hyperlink-targets>`_
       :code:`.. _2019_risk_effect_template:` at the top of this file with a
       unique reference label for your cause. The reference label should have the
-      form :samp:`.. _2019_{\{risk_name\}}_risk_effects:`, where
+      form :samp:`.. _2019_risk_effect_{\{risk_name\}}:`, where
       :samp:`{\{risk_name\}}` is replaced with a unique descriptive name or
-      abbreviation for your cause, e.g. :code:`.. _2019_lbwsg_risk_effects:`.
+      abbreviation for your cause, e.g. :code:`.. _2019_risk_effect_lbwsg:`.
 
-   #. Delete this document's title above:
+   #. Create the document title: Replace the above title
 
       .. code:: reStructuredText
 
@@ -62,11 +62,15 @@ Risk Effects Model Template
          Risk Effects Model Template
          ===========================
 
-      Once the above title is deleted, all the other section titles will be
-      promoted up one level.
+      with a title that includes the appropriate risk name, i.e.
 
-   #. The subtitle below should now be the document's title. Replace the {Risk Name} text
-      in the below (sub)title with the full name of your risk in GBD 2019. 
+      .. code:: reStructuredText
+
+         ========================
+         {Risk Name} Risk Effects
+         ========================
+
+      where {Risk Name} is the full name of your risk in GBD 2019.
 
       **Note:** Be sure to adjust the length of the title's underline
       :code:`======` and overline :code:`======` to match the length of your
@@ -74,17 +78,9 @@ Risk Effects Model Template
       <https://docutils.sourceforge.io/docs/user/rst/quickref.html#section-structure>`_
       when Sphinx builds HTML from the :file:`index.rst` file.
 
-   #. Once you complete these steps, delete this :code:`.. important::`
+   #. Once you complete these steps, delete this :code:`.. todo::`
       `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
       from :file:`index.rst`.
-
-.. todo::
-
-  Create the document title (insert appropriate risk name and remove from this to-do)
-
-  ========================
-  {Risk Name} Risk Effects
-  ========================
 
 .. contents::
    :local:
@@ -110,9 +106,9 @@ GBD 2019 Modeling Strategy
 
 .. todo::
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]_ is a good source for this information in addition to the GBD risk modeler.
+	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix]_ is a good source for this information in addition to the GBD risk modeler.
 
-.. todo:: 
+.. todo::
 
 	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2019.
 
@@ -125,11 +121,11 @@ GBD 2019 Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * - 
-     - 
-     - 
-     - 
-     - 
+   * -
+     -
+     -
+     -
+     -
 
 Vivarium Modeling Strategy
 --------------------------
@@ -155,11 +151,11 @@ Vivarium Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * - 
-     - 
-     - 
-     - 
-     - 
+   * -
+     -
+     -
+     -
+     -
 
 Risk Outcome Pair #1
 ++++++++++++++++++++
@@ -174,13 +170,13 @@ Risk Outcome Pair #1
 
 .. todo::
 
-	Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`). 
+  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
 
   Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
 
 .. todo::
 
-  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable. 
+  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable.
 
   Relative risks for a risk factor may be pulled from GBD at the draw-level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`. You can then calculate the mean value as well as 2.5th, and 97.5th percentiles across draws.
 
@@ -199,9 +195,9 @@ Risk Outcome Pair #1
    * - Exposure Category
      - Relative Risk
      - Note
-   * - 
-     - 
-     - 
+   * -
+     -
+     -
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -231,21 +227,18 @@ References
 
 .. todo::
 
-  Update references to GBD 2019 once published
-
-.. todo::
-
-  Update the GBD 2017 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
-
   Update the appropriate page numbers in the GBD risk factors methods appendix below
 
-  Add additional references as necessary 
+  Add additional references as necessary
 
-.. [GBD-2017-Risk-Factors-Appendix-Risk-Effects-Model-Template]
+.. [GBD-2019-Risk-Factors-Appendix]
 
-   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
+  Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
 
-     **(GBD 2017 Risk Factors Capstone)** GBD 2017 Risk Factor Collaborators. :title:`Global, regional, and national comparative risk assessment of 84 behavioural, environmental and occupational, and metabolic risks or clusters of risks for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392: 1923-1994. DOI:
-     https://doi.org/10.1016/S0140-6736(18)32225-6
+    **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
+    :title:`Global burden of 87 risk factors in 204 countries and territories,
+    1990–2019: a systematic analysis for the Global Burden of Disease Study
+    2019`. Lancet 2020; **396:** 1223–49. DOI:
+    https://doi.org/10.1016/S0140-6736(20)30752-2
 
-.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32225-6/attachment/be595013-2d8b-4552-86e3-6c622827d2e9/mmc1.pdf
+.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
