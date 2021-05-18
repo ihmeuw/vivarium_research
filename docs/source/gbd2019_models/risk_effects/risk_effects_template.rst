@@ -106,7 +106,7 @@ GBD 2019 Modeling Strategy
 
 .. todo::
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]_ is a good source for this information in addition to the GBD risk modeler.
+	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix]_ is a good source for this information in addition to the GBD risk modeler.
 
 .. todo::
 
@@ -170,7 +170,7 @@ Risk Outcome Pair #1
 
 .. todo::
 
-	Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
+  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
 
   Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
 
@@ -227,13 +227,11 @@ References
 
 .. todo::
 
-  Update the GBD 2019 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
-
   Update the appropriate page numbers in the GBD risk factors methods appendix below
 
   Add additional references as necessary
 
-.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]
+.. [GBD-2019-Risk-Factors-Appendix]
 
   Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
 
