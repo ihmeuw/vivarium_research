@@ -50,30 +50,24 @@ GBD 2019 Modeling Strategy
 
 	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
-.. todo::
+**The available data for deriving relative risk was only for all-cause mortality.**
+For each location, data were pooled across years, and the risk of all-cause mortality at the **early neonatal** period and **late neonatal period** at joint birthweight and gestational age combinations was calculated.
+In all datasets except for the USA, sex-specific data were combined to maximise sample size. The USA analyses were sex-specific.
+Relative risks of mortality were calculated for each 500g and 2wk category of birthweight and gestational age.
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix]_ is a good source for this information in addition to the GBD risk modeler.
+To calculate relative risk at each 500-gram and two-week combination, logistic regression was first used to calculate mortality odds for each joint two-week gestational age and 500-gram birthweight category. Mortality odds were smoothed with Gaussian process regression, with the independent distributions of mortality odds by birthweight and mortality odds by gestational age serving as priors in the regression.
+A pooled country analysis of mortality risk in the early neonatal period and late neonatal period by SGA category in developing countries in Asia and sub-Saharan Africa were also converted into 500-gram and two-week bin mortality odds surfaces.
 
-.. todo::
+The relative risk surfaces produced from microdata and the Asia and Africa surfaces produced from the pooled country analysis were meta-analysed, resulting in a meta- analysed mortality odds surface for each location. The meta-analysed mortality odds surface for each location was smoothed using Gaussian process regression and then converted into mortality risk.
 
-	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2019.
+To calculate mortality relative risks, the risk of each joint two-week gestational age and 500-gram birthweight category were divided by the risk of mortality in the joint gestational age and birthweight category with the lowest mortality risk. [GBD-2019-Risk-Factors-Appendix]_
 
-  .. code:: Python
+Affected Outcomes
++++++++++++++++++
 
-    [
-      (302, 'diarrheal_diseases'),
-      (322, 'lower_respiratory_infections'),
-      (328, 'upper_respiratory_infections'),
-      (329, 'otitis_media'),
-      (332, 'meningitis'),
-      (337, 'encephalitis'),
-      (381, 'neonatal_preterm_birth'),
-      (382, 'neonatal_encephalopathy_due_to_birth_asphyxia_and_trauma'),
-      (383, 'neonatal_sepsis_and_other_neonatal_infections'),
-      (384, 'hemolytic_disease_and_other_neonatal_jaundice'),
-      (385, 'other_neonatal_disorders'),
-      (686, 'sudden_infant_death_syndrome')
-    ]
+The available data for deriving relative risk was only for *all-cause mortality* rather than for cause-specific outcomes. The exception was the USA linked infant birth-death cohort data, which contained three-digit ICD causes of death, but also had nearly 30% of deaths coded to causes that are ill-defined, or intermediate, in the GBD cause classification system.
+
+Therefore, the GBD modelers analysed the relative risk of all-cause mortality across all available sources and selected outcomes based on criteria of biological plausibility. **Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.** [GBD-2019-Risk-Factors-Appendix]_
 
 .. list-table:: Affected Entities
    :widths: 5 5 5 5 5
@@ -115,7 +109,7 @@ GBD 2019 Modeling Strategy
      - Mortality (GBD YLLs)
      -
    * - Neonatal preterm birth
-     - Cause
+     - Cause (PAF-of-1)
      - 381
      - Mortality and Morbidity (GBD YLLs and YLDs)
      - 100% attributable to Low birthweight and short gestation
@@ -144,6 +138,11 @@ GBD 2019 Modeling Strategy
      - 686
      - Mortality (GBD YLLs)
      -
+
+Restrictions
+++++++++++++
+
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -183,7 +182,7 @@ Risk Outcome Pair #1
 
 .. todo::
 
-	Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
+  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
 
   Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
 
