@@ -227,21 +227,20 @@ References
 
 .. todo::
 
-  Update references to GBD 2019 once published
-
-.. todo::
-
   Update the GBD 2017 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
 
   Update the appropriate page numbers in the GBD risk factors methods appendix below
 
   Add additional references as necessary
 
-.. [GBD-2017-Risk-Factors-Appendix-Risk-Effects-Model-Template]
+.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]
 
-   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
+  Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
 
-     **(GBD 2017 Risk Factors Capstone)** GBD 2017 Risk Factor Collaborators. :title:`Global, regional, and national comparative risk assessment of 84 behavioural, environmental and occupational, and metabolic risks or clusters of risks for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392: 1923-1994. DOI:
-     https://doi.org/10.1016/S0140-6736(18)32225-6
+    **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
+    :title:`Global burden of 87 risk factors in 204 countries and territories,
+    1990–2019: a systematic analysis for the Global Burden of Disease Study
+    2019`. Lancet 2020; **396:** 1223–49. DOI:
+    https://doi.org/10.1016/S0140-6736(20)30752-2
 
-.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32225-6/attachment/be595013-2d8b-4552-86e3-6c622827d2e9/mmc1.pdf
+.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
