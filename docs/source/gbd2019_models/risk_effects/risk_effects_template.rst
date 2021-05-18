@@ -54,7 +54,7 @@ Risk Effects Model Template
       :samp:`{\{risk_name\}}` is replaced with a unique descriptive name or
       abbreviation for your cause, e.g. :code:`.. _2019_risk_effect_lbwsg:`.
 
-   #. Delete this document's title above:
+   #. Create the document title: Replace the above title
 
       .. code:: reStructuredText
 
@@ -62,8 +62,15 @@ Risk Effects Model Template
          Risk Effects Model Template
          ===========================
 
-      Once the above title is deleted, all the other section titles will be
-      promoted up one level.
+      with a title that includes the appropriate risk name, i.e.
+
+      .. code:: reStructuredText
+
+         ========================
+         {Risk Name} Risk Effects
+         ========================
+
+      where {Risk Name} is the full name of your risk in GBD 2019.
 
    #. The subtitle below should now be the document's title. Replace the {Risk Name} text
       in the below (sub)title with the full name of your risk in GBD 2019.
@@ -82,9 +89,11 @@ Risk Effects Model Template
 
   Create the document title (insert appropriate risk name and remove from this to-do)
 
-  ========================
-  {Risk Name} Risk Effects
-  ========================
+  .. code:: reStructuredText
+
+    ========================
+    {Risk Name} Risk Effects
+    ========================
 
 .. contents::
    :local:
