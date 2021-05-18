@@ -58,6 +58,23 @@ GBD 2019 Modeling Strategy
 
 	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2019.
 
+  .. code:: Python
+
+    [
+      (302, 'diarrheal_diseases'),
+      (322, 'lower_respiratory_infections'),
+      (328, 'upper_respiratory_infections'),
+      (329, 'otitis_media'),
+      (332, 'meningitis'),
+      (337, 'encephalitis'),
+      (381, 'neonatal_preterm_birth'),
+      (382, 'neonatal_encephalopathy_due_to_birth_asphyxia_and_trauma'),
+      (383, 'neonatal_sepsis_and_other_neonatal_infections'),
+      (384, 'hemolytic_disease_and_other_neonatal_jaundice'),
+      (385, 'other_neonatal_disorders'),
+      (686, 'sudden_infant_death_syndrome')
+    ]
+
 .. list-table:: Affected Entities
    :widths: 5 5 5 5 5
    :header-rows: 1
@@ -67,12 +84,66 @@ GBD 2019 Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * -
+   * - Diarrheal diseases
+     - Cause
+     - 302
+     - Mortality (GBD YLLs)
      -
+   * - Lower respiratory infections
+     - Cause
+     - 322
+     - Mortality (GBD YLLs)
      -
+   * - Upper respiratory infections
+     - Cause
+     - 328
+     - Mortality (GBD YLLs)
      -
+   * - Otitis media
+     - Cause
+     - 329
+     - Mortality (GBD YLLs)
      -
-
+   * - Meningitis
+     - Cause
+     - 332
+     - Mortality (GBD YLLs)
+     -
+   * - Encephalitis
+     - Cause
+     - 337
+     - Mortality (GBD YLLs)
+     -
+   * - Neonatal preterm birth
+     - Cause
+     - 381
+     - Mortality and Morbidity (GBD YLLs and YLDs)
+     - 100% attributable to Low birthweight and short gestation
+   * - Neonatal encephalopathy due to birth asphyxia and trauma
+     - Cause
+     - 382
+     - Mortality (GBD YLLs)
+     -
+   * - Neonatal sepsis and other neonatal infections
+     - Cause
+     - 383
+     - Mortality (GBD YLLs)
+     -
+   * - Hemolytic disease and other neonatal jaundice
+     - Cause
+     - 384
+     - Mortality (GBD YLLs)
+     -
+   * - Other neonatal disorders
+     - Cause
+     - 385
+     - Mortality (GBD YLLs)
+     -
+   * - Sudden infant death syndrome
+     - Cause
+     - 686
+     - Mortality (GBD YLLs)
+     -
 Vivarium Modeling Strategy
 --------------------------
 
