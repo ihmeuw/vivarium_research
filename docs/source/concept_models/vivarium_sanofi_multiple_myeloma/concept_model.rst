@@ -398,6 +398,27 @@ Notably, [Braulin-et-al-2021]_ reported that 90.7 percent of all patients receiv
 
 As discussed in treatment guideline reviews, in general triplet regimens are preferred, but doublet regimens should be considered if patients are frail [Rajkumar-and-Kumar-2020]_. Additionally, for relapsed multiple myeloma, at least two new drugs that the patient is not refractory to, and preferably from a different class, should be considered [Rajkumar-and-Kumar-2020]_. [Rajkumar-and-Kumar-2020]_ notes that "patients refractory to a drug are likely to be reractory to different drug[s] in the same class"; although, two important exceptions exist, including pomalidomide for patients refractory to lenalidomide and carfilzombib in patients refractory to bortezomib (p. 6). 
 
+[Rajkumar-and-Kumar-2020]_ provide treatment recommendations for first line therapy based on ASCT eligibility and cytogenetic risk-stratification, summarized in the table below. Notably, ASCT improves median overall survival and can be delayed until first relapse, primarily based on patient choice (overall survival is similar whether ASCT was performed early or delayed until relapse) [Rajkumar-and-Kumar-2020]_.
+
+.. list-table:: Initial therapy recommendations
+   :header-rows: 1
+
+   * - ASCT eligibility
+     - Cytogenetic risk
+     - Treatment recommendation
+   * - Eligible
+     - Standard
+     - VRd: bortezomib + lenalidomide + dexamethasone
+   * - Eligible
+     - High
+     - VRd: bortezomib + lenalidomide + dexamethasone; OR dara-VRD: daratumumab + bortezomib + lenalidomide + dexamethasone 
+   * - Ineligible
+     - Standard
+     - VRd: bortezomib + lenalidomide + dexamethasone; OR DRd: daratumumab, lenalidomide, dexamethasone
+   * - Ineligible
+     - High
+     - VRd: bortezomib + lenalidomide + dexamethasone
+
 First-line treatment
 ^^^^^^^^^^^^^^^^^^^^
 
