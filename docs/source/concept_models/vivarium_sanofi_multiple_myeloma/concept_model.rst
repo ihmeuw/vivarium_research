@@ -340,6 +340,85 @@ of high-risk cytogenetics among adults in the US population with multiple myelom
 5.3.3 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
 
+Research Background
+^^^^^^^^^^^^^^^^^^^^
+
+Treatment guidelines for multiple myeloma are complex and varied. [Rajkumar-and-Kumar-2020]_ and [Nijhof-et-al-2017]_ published recent reviews on multiple myeloma treatment options and guidelines. Important classes of anti-myeloma drugs are summarized (non-exhaustively) below, according to [Nijhof-et-al-2017]_:
+
+.. list-table:: Select anti-myeloma drug classes
+   :header-rows: 1
+
+   * - Class
+     - Acronym
+     - Drugs
+   * - Immunomodulatory agents
+     - IMiDs
+     - Thalidomide, lenalidomide, pomalidomide
+   * - Proteasome inhibitors
+     - PIs
+     - Bortezomib, carfilzomib, ixazomib, marizomib, oprozomib
+   * - Monoclonal antibodies
+     - MoABs
+     - isatuximab (anti-CD38), daratumumab (anti-CD38), MOR202 (anti-CD38), elotuzamab (anti-CS1/anti-SLAM7), denosumab (anti-RANKL), siltuximab (anti-IL6), IPH2101 (anti-KIR2DL1/2/3)
+   * - Corticosteroids
+     - 
+     - Dexamethasone, prednisone
+
+The treatment indications with FDA approval for isatuxamib [FDA-prescribing-information-isa-2021]_ are listed below: 
+
+- in combination with pomalidomide (PI) and dexamethasone, for the treatment of adult patients with multiple myeloma who have received at least two prior therapies including lenalidomide (IMiD) and a proteasome inhibitor (PI)
+
+- in combination with carfilzomib (PI) and dexamethasone, for the treatment of adult patients with relapsed or refractory multiple myeloma who have received 1 to 3 prior lines of therapy
+
+.. note::
+
+	Clinical trial efficacy data exists for isatuxamib + pomalidomide + dexamethasone treatment relative to pomalidomide + dexamethasone alone [Attal-et-al-2019]_. A clinical trial comparing isatuxamib + carfilzomib + dexamethasone relative to carfilzomib + dexamethasone is ongoing [Moreau-et-al-2019]_.
+
+The treatment indications with FDA approval for DARZALEX FASPRO [FDA-prescribing-information-dara-2021]_, a monoclonal antibody competitor to isatuxamib, include:
+
+- in combination with lenalidomide (PI) and dexamethasone in newly diagnosed patients ineligible for autologous stem cell transplant (ASCT)
+
+- in combination with lenalidomide (PI) and dexamethasone in newly diagnosed patients ineligible for ASCT *and* in patients with replased or refractory multiple myeloma who have received at least one prior therapy
+
+- in combination with bortezomib (PI), thalidomide (IMiD), and dexamethasone in newly diagnosed patients who are eligible for ASCT
+
+- in combination with bortezomib (PI) and dexamethasone in patients who have received at least one prior therapy
+
+- as monotherapy in patients who have received at least three prior lines of therapy including a PI and an IMiD or who are double-refractory to a PI and an IMiD
+
+- in combination with bortezomib (PI), cyclophosphamide, and dexamethasome in newly diagnosed patients 
+
+[Braulin-et-al-2021]_ summarized the multiple myeloma treatment landscape among recent years using Flatiron registry data. [Goto-et-al-2019]_ and [Jagannath-et-al-2016]_ published similar, but less recent, studies using SEER and International Oncology Netword data, respectively.
+
+A figure of the multiple myeloma treatment regimens by line of treatment from [Braulin-et-al-2021]_ is shown below. Notably, the usage of different treatment regimens has significantly changed over time as more treatments have become avaliable.
+
+.. image:: treatment_landscape_braulin_et_al_2021.png
+
+Notably, [Braulin-et-al-2021]_ reported that 90.7 percent of all patients received at least one treatment. As shown by [Goto-et-al-2019]_, older patients are significantly more likely to receive no treatment than younger patients.
+
+As discussed in treatment guideline reviews, in general triplet regimens are preferred, but doublet regimens should be considered if patients are frail [Rajkumar-and-Kumar-2020]_. Additionally, for relapsed multiple myeloma, at least two new drugs that the patient is not refractory to, and preferably from a different class, should be considered [Rajkumar-and-Kumar-2020]_. [Rajkumar-and-Kumar-2020]_ notes that "patients refractory to a drug are likely to be reractory to different drug[s] in the same class"; although, two important exceptions exist, including pomalidomide for patients refractory to lenalidomide and carfilzombib in patients refractory to bortezomib (p. 6). 
+
+[Rajkumar-and-Kumar-2020]_ provide treatment recommendations for first line therapy based on ASCT eligibility and cytogenetic risk-stratification, summarized in the table below. Notably, ASCT improves median overall survival and can be delayed until first relapse, primarily based on patient choice (overall survival is similar whether ASCT was performed early or delayed until relapse) [Rajkumar-and-Kumar-2020]_.
+
+.. list-table:: Initial therapy recommendations
+   :header-rows: 1
+
+   * - ASCT eligibility
+     - Cytogenetic risk
+     - Treatment recommendation
+   * - Eligible
+     - Standard
+     - VRd: bortezomib + lenalidomide + dexamethasone
+   * - Eligible
+     - High
+     - VRd: bortezomib + lenalidomide + dexamethasone; OR dara-VRD: daratumumab + bortezomib + lenalidomide + dexamethasone 
+   * - Ineligible
+     - Standard
+     - VRd: bortezomib + lenalidomide + dexamethasone; OR DRd: daratumumab, lenalidomide, dexamethasone
+   * - Ineligible
+     - High
+     - VRd: bortezomib + lenalidomide + dexamethasone
+
 First-line treatment
 ^^^^^^^^^^^^^^^^^^^^
 
@@ -526,6 +605,45 @@ Where,
 8.0 References
 +++++++++++++++
 
+.. [Attal-et-al-2019]
+   Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and 
+   low-dose dexamethasone versus pomalidomide and low-dose dexamethasone in patients 
+   with relapsed and refractory multiple myeloma (ICARIA-MM): a randomised, 
+   multicentre, open-label, phase 3 study. Lancet 2019; 394: 2096–107.
+
+.. [Braulin-et-al-2021]
+	Braunlin, Megan, et al. "Trends in the multiple myeloma treatment landscape and survival: A US analysis using 2011–2019 oncology clinic electronic health record data." Leukemia & Lymphoma 62.2 (2021): 377-386.
+
+.. [Dimopoulos-et-al-2020]
+   Dimopoulos MA, Leleu X, Moreau P, et al. Isatuximab plus pomalidomide and 
+   dexamethasone in relapsed/refractory multiple myeloma patients with renal 
+   impairment: ICARIA-MM subgroup analysis. Leukemia 2021; 35: 562–72.
+
+.. [FDA-prescribing-information-dara-2021]
+	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`_
+
+.. [FDA-prescribing-information-isa-2021]
+	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`_
+
+.. [Goto-et-al-2019]
+	Goto, Daisuke, et al. "Utilization of novel systemic therapies for multiple myeloma: A retrospective study of front‐line regimens using the SEER‐Medicare data." Cancer medicine 9.2 (2020): 626-639.
+
+.. [Jagannath-et-al-2016]
+	Jagannath, Sundar, et al. "Real-world treatment patterns and associated progression-free survival in relapsed/refractory multiple myeloma among US community oncology practices." Expert review of hematology 9.7 (2016): 707-717.
+
+.. [Moreau-et-al-2019]
+	Moreau P, Dimopoulos MA, Yong K, Mikhael J, Risse ML, Asset G, Martin T. Isatuximab plus carfilzomib/dexamethasone versus carfilzomib/dexamethasone in patients with relapsed/refractory multiple myeloma: IKEMA Phase III study design. Future Oncol. 2020 Jan;16(2):4347-4358. doi: 10.2217/fon-2019-0431. Epub 2019 Dec 13. PMID: 31833394.
+
+.. [Nijhof-et-al-2017]
+	Nijhof, Inger S., et al. "Current and new therapeutic strategies for relapsed and refractory multiple myeloma: an update." Drugs 78.1 (2018): 19-37.
+
+.. [Rajan-and-Rajkumar-et-al-2015]
+   Rajan AM, Rajkumar SV. Interpretation of cytogenetic results in multiple 
+   myeloma for clinical practice. Blood Cancer J 2015; 5: e365.
+
+.. [Rajkumar-and-Kumar-2020]
+	Rajkumar, S. Vincent, and Shaji Kumar. "Multiple myeloma current treatment algorithms." Blood cancer journal 10.9 (2020): 1-10.
+
 .. [Sanofi-2020] 	Sanofi : FDA approves Sarclisa® (isatuximab-irfc) for patients with relapsed refractory multiple myeloma. Sanofi. 2020; 2 March 2021.
     Retrieved 18 March 2021.
     https://www.sanofi.com/en/media-room/press-releases/2020/2020-03-02-19-51-16
@@ -534,17 +652,3 @@ Where,
     Retrieved 9 April 2021.
     https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
 
-.. [Dimopoulos-et-al-2020]
-   Dimopoulos MA, Leleu X, Moreau P, et al. Isatuximab plus pomalidomide and 
-   dexamethasone in relapsed/refractory multiple myeloma patients with renal 
-   impairment: ICARIA-MM subgroup analysis. Leukemia 2021; 35: 562–72.
-
-.. [Attal-et-al-2019]
-   Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and 
-   low-dose dexamethasone versus pomalidomide and low-dose dexamethasone in patients 
-   with relapsed and refractory multiple myeloma (ICARIA-MM): a randomised, 
-   multicentre, open-label, phase 3 study. Lancet 2019; 394: 2096–107.
-
-.. [Rajan-and-Rajkumar-et-al-2015]
-   Rajan AM, Rajkumar SV. Interpretation of cytogenetic results in multiple 
-   myeloma for clinical practice. Blood Cancer J 2015; 5: e365.
