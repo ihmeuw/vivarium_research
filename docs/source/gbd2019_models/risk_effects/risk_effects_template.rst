@@ -72,9 +72,6 @@ Risk Effects Model Template
 
       where {Risk Name} is the full name of your risk in GBD 2019.
 
-   #. The subtitle below should now be the document's title. Replace the {Risk Name} text
-      in the below (sub)title with the full name of your risk in GBD 2019.
-
       **Note:** Be sure to adjust the length of the title's underline
       :code:`======` and overline :code:`======` to match the length of your
       new document title, or you will get errors in the `section structure
@@ -84,16 +81,6 @@ Risk Effects Model Template
    #. Once you complete these steps, delete this :code:`.. important::`
       `directive <https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#directives>`_
       from :file:`index.rst`.
-
-.. todo::
-
-  Create the document title (insert appropriate risk name and remove from this to-do)
-
-  .. code:: reStructuredText
-
-    ========================
-    {Risk Name} Risk Effects
-    ========================
 
 .. contents::
    :local:
