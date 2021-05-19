@@ -51,9 +51,12 @@ GBD 2019 Modeling Strategy
 	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
 **The available data for deriving relative risk was only for all-cause mortality.**
-For each location, data were pooled across years, and the risk of all-cause mortality at the **early neonatal** period and **late neonatal period** at joint birthweight and gestational age combinations was calculated.
+For each location, data were pooled across years, and the risk of all-cause mortality at the **early neonatal period** and **late neonatal period** at joint birthweight and gestational age combinations was calculated.
 In all datasets except for the USA, sex-specific data were combined to maximise sample size. The USA analyses were sex-specific.
-Relative risks of mortality were calculated for each 500g and 2wk category of birthweight and gestational age.
+**Relative risks of all-cause mortality were calculated for each 500g and 2wk category of birthweight and gestational age.** [GBD-2019-Risk-Factors-Appendix]_
+
+Details of Relative Risk Estimation
++++++++++++++++++++++++++++++++++++
 
 To calculate relative risk at each 500-gram and two-week combination, logistic regression was first used to calculate mortality odds for each joint two-week gestational age and 500-gram birthweight category. Mortality odds were smoothed with Gaussian process regression, with the independent distributions of mortality odds by birthweight and mortality odds by gestational age serving as priors in the regression.
 A pooled country analysis of mortality risk in the early neonatal period and late neonatal period by SGA category in developing countries in Asia and sub-Saharan Africa were also converted into 500-gram and two-week bin mortality odds surfaces.
@@ -142,6 +145,8 @@ Therefore, the GBD modelers analysed the relative risk of all-cause mortality ac
 Restrictions
 ++++++++++++
 
+Risk Exposure Categories and TMREL
+++++++++++++++++++++++++++++++++++
 
 Vivarium Modeling Strategy
 --------------------------
