@@ -305,11 +305,69 @@ where
 
 We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
 for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
-find values from the literature with which to update this. The code used to solve this
-system of equations is here:
+find values from the literature with which to update this.
 
+Solving in terms of :math:`i_3`, we get:
+
+.. list-table:: Transition rates solved in terms of :math:`i_3`
+   :widths: 10 25
+   :header-rows: 1
+
+   * - Variable
+     - Value
+   * - :math:`s_1`
+     - :math:`0.975`
+   * - :math:`s_2`
+     - :math:`0.985714285714286`
+   * - :math:`s_3`
+     - :math:`-i_3p_4/p_3 + 0.00357142857142857(7.0p_1 - 4.0p_2 + 280.0p_3)/p_3`
+   * - :math:`s_4`
+     - :math:`1.0 - i_3`
+   * - :math:`r_2`
+     - :math:`0.025`
+   * - :math:`r_3`
+     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_2`
+   * - :math:`r_4`
+     - :math:`i_3p_4/p_3`
+   * - :math:`i_1`
+     - :math:`0.025p_1/p_2`
+   * - :math:`i_2`
+     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_3`
+
+
+Solving in terms of :math:`dur\_cat3`, we get:
+
+.. list-table:: Transition rates solved in terms of :math:`dur\_cat3`
+   :widths: 10 25
+   :header-rows: 1
+
+   * - Variable
+     - Value
+   * - :math:`s_1`
+     - :math:`0.975`
+   * - :math:`s_2`
+     - :math:`0.985714285714286`
+   * - :math:`s_3`
+     - :math:`(dur\_cat3 - 1.0)/dur\_cat3`
+   * - :math:`s_4`
+     - :math:`0.00357142857142857(-7.0dur\_cat3p_1 + 4.0dur\_cat3p_2 + 280.0dur\_cat3p_4 - 280.0p_3)/(dur\_cat3p_4)`
+   * - :math:`r_2`
+     - :math:`0.025`
+   * - :math:`r_3`
+     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_2`
+   * - :math:`r_4`
+     - :math:`0.00357142857142857(7.0dur\_cat3p_1 - 4.0dur\_cat3p_2 + 280.0p_3)/(dur\_cat3*p_3)`
+   * - :math:`i_1`
+     - :math:`0.025p_1/p_2`
+   * - :math:`i_2`
+     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_3`
+   * - :math:`i_3`
+     - :math:`0.00357142857142857(7.0dur\_cat3p_1 - 4.0dur\_cat3p_2 + 280.0p_3)/(dur\_cat3p_4)`
+
+The code used to solve this system of equations is here:
 
 .. code-block:: python
+
   import numpy as np, pandas as pd
   import sympy as sym
   from sympy import symbols, Matrix, solve, simplify
@@ -436,7 +494,8 @@ system of equations is here:
 
 
 .. todo::
-    - Beatrix will update the above to write the solution x in terms of the p and i3 or duration of MILD (cat3)
+    - Beatrix will update the above to incorporate a death state
+    - Beatrix will add a table of solutions that holds values for p1,p2,p3,p4
     - We also need the closed form graph theory solution
 
 .. _2.2.2: 
@@ -483,7 +542,4 @@ Validation Criteria
 +++++++++++++++++++
 
 ..	todo::
-	Fill in directives for this section
-
-References
-----------
+	Fill in directives for this
