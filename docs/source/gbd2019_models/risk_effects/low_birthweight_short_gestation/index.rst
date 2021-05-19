@@ -78,7 +78,7 @@ The available data for deriving relative risk was only for *all-cause mortality*
 
 Therefore, the GBD modelers analysed the relative risk of all-cause mortality across all available sources and selected outcomes based on criteria of biological plausibility. **Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.** [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
-.. list-table:: Affected Entities
+.. list-table:: Entities Affected by LBWSG in GBD 2019
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -150,6 +150,48 @@ Therefore, the GBD modelers analysed the relative risk of all-cause mortality ac
 
 Restrictions
 ++++++++++++
+
+.. list-table:: Age, Sex, and Outcome Restrictions for LBWSG Relative Risks in GBD 2019
+  :widths: 15 15 20
+  :header-rows: 1
+
+  * - Restriction Type
+    - Value
+    - Notes
+  * - Male only
+    - False
+    -
+  * - Female only
+    - False
+    -
+  * - YLL only
+    - True
+    - Except for Neonatal preterm birth; see note below
+  * - YLD only
+    - False
+    -
+  * - Age group start
+    - Early neonatal (0-7 days, age_group_id = 2)
+    -
+  * - Age group end
+    - Late neonatal (7-28 days, age_group_id = 3)
+    - Except for Neonatal preterm birth; see note below
+
+.. note::
+
+  GBD 2019 attributes 100% of the DALYs due to Neonatal Preterm Birth to the LBWSG risk factor. In particular, the attribution includes YLDs as well as YLLs, and the age restrictions for the LBWSG-attributale DALYs are the same as the age restrictions for Neonatal Preterm Birth.
+
+  * **YLLs due to Neonatal preterm birth**, 100% attributable to LBWSG:
+
+    - Age group start = 2 (Early neonatal, 0-7 days)
+    - Age group end = 5 (1 to 4)
+
+  * **YLDs due to Neonatal preterm birth**, 100% attributable to LBWSG:
+
+    - Age group start = 2 (Early neonatal, 0-7 days)
+    - Age group end = 235 (95+)
+
+  Note that this attribution of DALYs is **not** based on the relative risks for all-cause mortality, but instead is based on the logic that all preterm births are due to short gestation by definition. Thus, if we include Neonatal Preterm Birth in our models, the relative risks likely must be handled differently for this cause.
 
 Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
