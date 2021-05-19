@@ -58,12 +58,18 @@ In all datasets except for the USA, sex-specific data were combined to maximise 
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
 
+In the Norway, New Zealand, and USA Linked Birth/Death Cohort microdata datasets, livebirths are reported with gestational age, birthweight, and an indicator of death at 7 days and 28 days. For this analysis, gestational age was grouped into two-week categories, and birthweight was grouped into 500-gram categories. The Taiwan, Japan, and Singapore datasets were prepared in tabulations of joint 500-gram and two-week categories. A pooled country analysis of mortality risk in the early neonatal period and late neonatal period by “small for gestational age” category in developing countries in Asia and sub-Saharan Africa were also used to inform the relative risk analysis.
+
 To calculate relative risk at each 500-gram and two-week combination, logistic regression was first used to calculate mortality odds for each joint two-week gestational age and 500-gram birthweight category. Mortality odds were smoothed with Gaussian process regression, with the independent distributions of mortality odds by birthweight and mortality odds by gestational age serving as priors in the regression.
 A pooled country analysis of mortality risk in the early neonatal period and late neonatal period by SGA category in developing countries in Asia and sub-Saharan Africa were also converted into 500-gram and two-week bin mortality odds surfaces.
 
 The relative risk surfaces produced from microdata and the Asia and Africa surfaces produced from the pooled country analysis were meta-analysed, resulting in a meta- analysed mortality odds surface for each location. The meta-analysed mortality odds surface for each location was smoothed using Gaussian process regression and then converted into mortality risk.
 
 To calculate mortality relative risks, the risk of each joint two-week gestational age and 500-gram birthweight category were divided by the risk of mortality in the joint gestational age and birthweight category with the lowest mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+
+.. note::
+
+  Although the above description from the GBD 2019 risk appendix sometimes refers to location-specific mortality risks, the relative risks in GBD 2019 are the same for all locations. Pulling LBWSG RR's with ``get_draws`` for any location returns RR's with location_id = 1 (Global), and they are stratified by year/age_group/sex.
 
 Affected Outcomes
 +++++++++++++++++
