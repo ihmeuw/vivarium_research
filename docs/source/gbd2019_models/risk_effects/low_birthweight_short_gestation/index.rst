@@ -53,7 +53,7 @@ GBD 2019 Modeling Strategy
 **The available data for deriving relative risk was only for all-cause mortality.**
 For each location, data were pooled across years, and the risk of all-cause mortality at the **early neonatal period** and **late neonatal period** at joint birthweight and gestational age combinations was calculated.
 In all datasets except for the USA, sex-specific data were combined to maximise sample size. The USA analyses were sex-specific.
-**Relative risks of all-cause mortality were calculated for each 500g and 2wk category of birthweight and gestational age.** [GBD-2019-Risk-Factors-Appendix]_
+**Relative risks of all-cause mortality were calculated for each 500g and 2wk category of birthweight and gestational age.** [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
@@ -63,14 +63,14 @@ A pooled country analysis of mortality risk in the early neonatal period and lat
 
 The relative risk surfaces produced from microdata and the Asia and Africa surfaces produced from the pooled country analysis were meta-analysed, resulting in a meta- analysed mortality odds surface for each location. The meta-analysed mortality odds surface for each location was smoothed using Gaussian process regression and then converted into mortality risk.
 
-To calculate mortality relative risks, the risk of each joint two-week gestational age and 500-gram birthweight category were divided by the risk of mortality in the joint gestational age and birthweight category with the lowest mortality risk. [GBD-2019-Risk-Factors-Appendix]_
+To calculate mortality relative risks, the risk of each joint two-week gestational age and 500-gram birthweight category were divided by the risk of mortality in the joint gestational age and birthweight category with the lowest mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
 Affected Outcomes
 +++++++++++++++++
 
 The available data for deriving relative risk was only for *all-cause mortality* rather than for cause-specific outcomes. The exception was the USA linked infant birth-death cohort data, which contained three-digit ICD causes of death, but also had nearly 30% of deaths coded to causes that are ill-defined, or intermediate, in the GBD cause classification system.
 
-Therefore, the GBD modelers analysed the relative risk of all-cause mortality across all available sources and selected outcomes based on criteria of biological plausibility. **Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.** [GBD-2019-Risk-Factors-Appendix]_
+Therefore, the GBD modelers analysed the relative risk of all-cause mortality across all available sources and selected outcomes based on criteria of biological plausibility. **Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.** [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
 .. list-table:: Affected Entities
    :widths: 5 5 5 5 5
@@ -242,7 +242,7 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
 References
 ----------
 
-.. [GBD-2019-Risk-Factors-Appendix]
+.. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]
 
  Pages 167-177 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
 
