@@ -231,9 +231,15 @@ or CDF of :math:`E` is generally sufficient for a GBD team, whereas sampling
 values from the ensemble distribution requires an additional algorithm.
 
 Below, we describe two possible strategies for sampling from an ensemble
-distribution. As noted above, a GBD ensemble distribution is mathematically
-defined as a mixture distribution, so it is sufficient to describe how to sample
-from mixture distributions.
+distribution. The first strategy (:ref:`two-step sampling
+<two_step_sampling_of_mixtures>`) requires two random choices for each sampled
+value but is easy to implement if we already have a sampling strategy for all
+the base distributions. The second strategy (:ref:`inverse transform sampling
+<inverse_transform_sampling_of_mixtures>`) uses a single random choice for each
+sampled value but requires calculation of the ensemble distribution's quantile
+function, which is not straightforward. As noted above, a GBD ensemble
+distribution is mathematically defined as a mixture distribution, so it is
+sufficient to describe how to sample from mixture distributions.
 
 Sampling from a Mixture Distribution
 +++++++++++++++++++++++++++++++++++++
@@ -243,8 +249,7 @@ component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`. Our goal is
 to algorithmically generate a random variable :math:`E` whose CDF is :math:`F`
 (i.e. generate a "draw" from the distribution :math:`F`).
 
-..
-  We describe two possible methods for sampling a random variable :math:`E` from the mixture distribution :math:`F`.
+.. _two_step_sampling_of_mixtures:
 
 Two-step sampling from mixture distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -301,20 +306,20 @@ sampling strategy works.
 
   .. math::
 
-    \begin{align*}
     \Pr(E\le x)
     = \sum_{i=1}^k \Pr(Y=i \text{ and } E\le x)
     &= \sum_{i=1}^k \Pr(Y=i \text{ and } X_i\le x)\\
     &= \sum_{i=1}^k \Pr(Y=i) \Pr(X_i\le x)\\
     &= \sum_{i=1}^k w_i F_i(x)
     = F(x).
-    \end{align*}
 
   This shows that the distribution function of :math:`E` is :math:`F`.
   :math:`\blacksquare`
 
 .. _categorical distribution: https://en.wikipedia.org/wiki/Categorical_distribution
 .. _indicator function: https://en.wikipedia.org/wiki/Indicator_function
+
+.. _inverse_transform_sampling_of_mixtures:
 
 Inverse transform sampling from mixture distributions
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
