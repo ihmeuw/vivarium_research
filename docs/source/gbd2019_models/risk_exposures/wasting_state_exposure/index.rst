@@ -275,75 +275,162 @@ T =
 
 Solving a)
 
-  1)  p4xs4 + p3xr4 = p4 
-  2)  p4xi3 + p3xs3 + p2xr3 = p3
-  3)  p3xi2 + p2xs2 + p1xr2 = p2
-  4)  p2xi1 + p1xs1 = p1
+  1)  :math:`p_4s_4 + p_3r_4 = p_4` 
+  2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 = p_3`
+  3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 = p_2`
+  4)  :math:`p_2i_1 + p_1xs_1 = p_1`
+
 
 Rows of the P matrix sums to 1
 
-  5)  s4 + i3 =1
-  6)  r4 + s3 + i2 = 1
-  7)  r3 + s2 + i1 =1
-  8)  r2 + s1 = 1
+  5)  :math:`s_4 + i_3 = 1`
+  6)  :math:`r_4 + s_3 + i_2 = 1`
+  7)  :math:`r_3 + s_2 + i_1 = 1`
+  8)  :math:`r_2 + s_1 = 1`
 
 We have duration of treated and untreated sam and mam as well as coverage from the literature :   
 
-  9)  r2 = 1/Dsam   
-  10) r3 + i1  = 1/Dmam
-  11) Eq 11 is defined in terms of i3 or duration of MILD (cat3); we write the solution in terms of cat3 duration or i3   
+  9)  :math:`r_2 = 1/Dsam`   
+  10) :math:`r_3 + i_1  = 1/Dmam`
+  11) :math:`i_2 + r_4 = 1/dur\_cat3`
 
 where
 
  - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
  - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
+ - Duration of cat 3: :math:`1 / (i_2 + r_4)`. We still need more values from the literature to solve for this.
  - tx is treated
  - ux is untreated
  - C is treatment coverage proportion
 
-We solve for the unknowns using the matrix solution
+We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
+for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
+find values from the literature with which to update this. The code used to solve this
+system of equations is here:
+
 
 .. code-block:: python
+  import numpy as np, pandas as pd
+  import sympy as sym
+  from sympy import symbols, Matrix, solve, simplify
 
-  import pandas as pd, numpy as np, matplotlib.pyplot as pyplot
+  # define symbols / unknowns
+  s4, i3 = symbols('s4 i3')
+  r4, s3, i2 = symbols('r4 s3 i2')
+  r3, s2, i1 = symbols('r3 s2 i1')
+  r2, s1 = symbols('r2 s1')
+  p4, p3, p2, p1 = symbols('p4 p3 p2 p1')
 
-  p4 =  sex/age-specific GBD prevalence of wasting cat 4 
-  p3 =  sex/ge-specific GBD prevalence of wasting cat 3 
-  p2 =  sex/age-specific GBD prevalence of wasting cat 2 
-  p1 =  sex/age-specific GBD prevalence of wasting cat 1 
+  # # uncomment these if don't want to solve in terms of p_is
+  # sex/age-specific GBD prevalence of wasting cat 1-4
+  # p4 = 0.7
+  # p3 = 0.2
+  # p2 = 0.07 
+  # p1 = 0.03
 
-  # row order from equation 1 - 10;
-  # column order is s1, s2, s3, s4, r2, r3, r4, i1, i2, i3
+  unknowns = [s1,s2,s3,s4,r2,r3,r4,i1,i2,i3]
+
+  def add_eq(terms, y, i, A, v):
+    """
+    For input equation y = sum([coeff*var for var:coeff in {terms}])
+    adds right side of equation to to row i of matrix A
+    
+    adds y to row i of vector v
+    """
+    for x in terms.keys():
+        A[x][i] = terms[x]
+    v.iloc[i] = y
+
+  # define equations
+  # 1) p4*s4 + p3*r4 = p4 
+  eq1 = [{s4:p4, r4:p3}, p4]
+
+  # 2) p4*i3 + p3*s3 +p2*r3 = p3
+  eq2 = [{i3:p4, s3:p3, r3:p2}, p3]
+
+  # 3) p3*i2 + p2*s2 + p1*r2 = p2
+  eq3 = [{i2:p3, s2:p2, r2:p1}, p2]
+
+  # 4) p2*i1 + p1*s1 = p1
+  eq4 = [{i1:p2, s1:p1}, p1]
+
+  # 5) s4 + i3 =1
+  eq5 = [{s4:1, i3:1}, 1]
+
+  # 6) r4 + s3 + i2 = 1
+  eq6 = [{r4:1, s3:1, i2:1}, 1]
+
+  # 7) r3 + s2 + i1 =1
+  eq7 = [{r3:1, s2:1, i1:1}, 1]
+
+  # 8) r2 + s1 = 1
+  eq8 = [{r2:1, s1:1}, 1]
+
+  # 9) r2 = 1/Dsam
+  eq9 = [{r2:1}, 1/40]
+
+  # 10) r3 + i1  = 1/Dmam
+  eq10 = [{r3:1, i1:1}, 1/70]
+
+  # 1/dur_cat3 = i2 + r4
+  dur_cat3 = sym.Symbol('dur_cat3')
+
+  eq11 = [{i2:1, r4:1}, 1/dur_cat3]
+
+  def build_matrix(eqns, unknowns):
+    """
+    INPUT
+    ----
+    eqns: a list of sympy equations
+    unknowns: a list of sympy unknowns
+    ----
+    OUTPUT
+    ----
+    A:  a matrix containing the coefficients of LHS of all eq in eqns.
+        nrows = number of equations
+        rcols = number of unknowns
+    b: an nx1 matrix containing the RHS of all the eqns
+    x: a sympy matrix of the unknowns
+    """
+    n_eqns = len(eqns)
+    n_unknowns = len(unknowns)
+
+    # frame for matrix/LHS equations.
+    # nrows = n_eqns, ncols = n_unknowns
+    A = pd.DataFrame(
+        index = range(n_eqns),
+        columns = unknowns,
+        data = np.zeros([n_eqns,n_unknowns])
+    )
+    
+    # frame for RHS of equations
+    b = pd.DataFrame(index = range(n_eqns), columns = ['val'])
+    
+    # populate LHS/RHS
+    i = 0
+    for eq in eqns:
+        add_eq(eq[0], eq[1], i, A, b)
+        i += 1
+    
+    # convert to sympy matrices
+    A = sym.Matrix(A)
+    b = sym.Matrix(b)
+    x = sym.Matrix(unknowns) #vars to solve for
+    
+    return A, x, b
+
+  # solve in terms of p1, p2, p3, p4, and one dependent unknown:
+  A0, x0, b0 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10],
+                           unknowns)
 
 
-  a = np.array([[0,0,0,p4,0,0,p3,0,0,0],
-                [0,0,p3,0,0,p2,0,p4,0,0],
-                [0,p2,0,0,p1,0,0,0,p3,0],
-                [p1,0,0,0,0,0,0,p2,0,0],
-                [0,0,0,1,0,0,0,0,0,1],
-                [0,0,1,0,0,0,1,0,1,0],
-                [0,1,0,0,0,1,0,1,0,0],
-                [1,0,0,0,1,0,0,0,0,0],
-                [0,0,0,0,1,0,0,0,0,0],
-                [0,0,0,0,0,1,0,1,0,0]])
+  result_0 = sym.solve(A0 * x0 - b0, x0)
 
-  #write b in terms of i3 and the ps
-  b =np.array([[p4],
-               [p3],
-               [p2],
-               [p1],
-               [1],
-               [1],
-               [1],
-               [1],
-               [0.0250],
-               [0.0143]])
+  # solve in terms of duration of cat3 instead of i3:
+  A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11],
+                         unknowns)
+  result_1 = sym.solve(A1 * x1 - b1, x1)
 
-  x = np.linalg.solve(a,b)
-
-  # checking that ax=b
-
-  np.allclose(np.dot(a,x),b)
 
 
 
