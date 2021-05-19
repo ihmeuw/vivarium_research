@@ -117,6 +117,30 @@ Cause Model Diagram
 
 Model Assumptions and Limitations
 ---------------------------------
+This model is designed to be used for estimating DALYs due to LRI that are 
+averted from a country-level intervention(e.g. food fortification or 
+supplementation given to a percentage of the population) that can reduce LRI 
+incidence as a downstream effect.
+
+There is substantial additional effort in GBD to divide LRI
+burden into the aetiologies of LRI, but we do not include
+aetiologies in this simple model.
+
+There are three sequelae associated with LRI, including moderate LRI, severe 
+LRI, and Guillain-Barré syndrome due to LRI. We are not tracking the long-term 
+effects of Guillain-Barré syndrome (which can include paralysis, for example). 
+However, since the prevalence of GBS is so low, there would likely not be great 
+benefit in capturing its long-term YLDs in addition to its short-term YLDs.
+
+
+.. note::
+
+	Birth prevalence of LRI was allowed in the DisMod modeling process for LRI. However, it was not reported as a final result in GBD 2019. LRI birth prevalence must therefore be retreieved using get_model_results('epi', 1258, age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step = 'step4', status = 'best') or get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step = 'step4'). (Todo: this
+  was the case in GBD2017. Check that it's not measure_id=6 instead of 5?)
+
+.. todo::
+
+   Describe more assumptions and limitations of the model.
 
 
 Data Description
