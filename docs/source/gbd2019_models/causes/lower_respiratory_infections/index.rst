@@ -121,7 +121,155 @@ Model Assumptions and Limitations
 
 Data Description
 ----------------
+.. list-table:: Definition
+   :widths: 5 20 30
+   :header-rows: 1
 
+   * - State
+     - State Name
+     - Definition
+   * - S
+     - Susceptible
+     - Susceptible but does not currently have LRI
+   * - I
+     - Infected
+     - Currently infected and having the condition
+
+.. list-table:: States Data
+   :widths: 20 25 30 30
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - S
+     - birth prevalence
+     - 1-birth_prevalence_meid1258
+     -
+   * - S
+     - prevalence
+     - 1-prevalence_c322
+     -
+   * - S
+     - excess mortality rate
+     - 0
+     -
+   * - S
+     - disability weights
+     - 0
+     -
+   * - I
+     - birth prevalence
+     - birth_prevalence_meid1258
+     -
+   * - I
+     - prevalence
+     - prevalence_c322
+     -
+   * - I
+     - excess mortality rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_c322}}`
+     -
+   * - I
+     - disability weights
+     - disability_weight_s670 :math:`\times` prevalence_s670+ disability_weight_s669 :math:`\times` prevalence_s669 + disability_weight_s671 :math:`\times` prevalence_s671
+     -
+   * - ALL
+     - cause specific mortality rate
+     - :math:`\frac{\text{deaths_c322}}{\text{population}}`
+     -
+
+.. list-table:: Transition Data
+   :widths: 10 10 10 30 30
+   :header-rows: 1
+
+   * - Transition
+     - Source
+     - Sink
+     - Value
+     - Notes
+   * - i
+     - S
+     - I
+     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_c322})}`
+     - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
+   * - r
+     - I
+     - S
+     - remission_rate_c322
+     -
+.. list-table:: Data Sources
+   :widths: 20 25 25 25
+   :header-rows: 1
+
+   * - Measure
+     - Sources
+     - Description
+     - Notes
+   * - birth_prevalence_meid1258
+     - epi
+     - Birth Prevalence of LRI
+     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step='step4', status = 'best') #double check that it isn't measure_id=6
+   * - prevalence_c322
+     - como
+     - Prevalence of LRI
+     -
+   * - deaths_c322
+     - codcorrect
+     - Deaths from LRI
+     -
+   * - population
+     - demography
+     - Mid-year population for given age/sex/year/location
+     -
+   * - incidence_rate_c322
+     - como
+     - Incidence rate of LRI within the entire population
+     -
+   * - remission_rate_m1258
+     - dismod-mr
+     - Remission rate of LRI within the infected population
+     -
+   * - disability_weight_s{sid}
+     - YLD Appendix
+     - Disability weights associated with each sequela
+     - Note Guillain-Barre due to LRI is included in sequelae.
+   * - prevalence_s{sid}
+     - como
+     - Prevalence of each sequela with id 'sid'
+     -
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early neonatal
+     - GBD age group id is 2
+   * - YLL age group end
+     - Age 95+
+     - GBD age group id is 235
+   * - YLD age group start
+     - Early neonatal
+     - GBD age group id is 2
+   * - YLD age group end
+     - Age 95+
+     - GBD age group id is 235
 
 Validation Criteria
 -------------------
