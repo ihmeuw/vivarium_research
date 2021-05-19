@@ -29,7 +29,6 @@ Ensemble Distributions in GBD
 
 .. contents::
    :local:
-   :depth: 2
 
 What Is an Ensemble Distribution?
 ---------------------------------
@@ -222,3 +221,170 @@ specified.
 
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
+
+Vivarium needs to sample values of the exposure variable :math:`E` from its
+estimated ensemble distribution in order to assign an exposure value to each
+simulant. This contrasts with the usage of ensemble distributions in GBD, where
+a typical use case might be to estimate the prevalence of each exposure category
+of :math:`E` by computing areas under its PDF. In particular, computing the PDF
+or CDF of :math:`E` is generally sufficient for a GBD team, whereas sampling
+values from the ensemble distribution requires an additional algorithm.
+
+Below, we describe two possible strategies for sampling from an ensemble
+distribution. The first strategy (:ref:`two-step sampling
+<two_step_sampling_of_mixtures>`) requires two random choices for each sampled
+value but is easy to implement if we already have a sampling strategy for all
+the base distributions. The second strategy (:ref:`inverse transform sampling
+<inverse_transform_sampling_of_mixtures>`) uses a single random choice for each
+sampled value but requires calculation of the ensemble distribution's quantile
+function, which is not straightforward. As noted above, a GBD ensemble
+distribution is mathematically defined as a mixture distribution, so it is
+sufficient to describe how to sample from mixture distributions.
+
+Sampling from a Mixture Distribution
++++++++++++++++++++++++++++++++++++++
+
+Let :math:`F = \sum_1^k w_i F_i` be the CDF of a mixture distribution with
+component CDFs :math:`\{F_i\}_1^k` and weights :math:`\{w_i\}_1^k`. Our goal is
+to algorithmically generate a random variable :math:`E` whose CDF is :math:`F`
+(i.e. generate a "draw" from the distribution :math:`F`).
+
+.. _two_step_sampling_of_mixtures:
+
+Two-step sampling from mixture distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is a simple two-step procedure to sample a random variable :math:`E`
+distributed according to :math:`F`, assuming that we have a method of sampling
+from each of the component distributions :math:`F_i`:
+
+1.  Randomly choose a number :math:`i\in \{1,2,\ldots, k\}`, with the
+    probability of :math:`i` being :math:`w_i`.
+
+2.  Independently sample :math:`E` from the distribution :math:`F_i`, where
+    :math:`i` is the number chosen in Step 1.
+
+This sampling method is the source of the name "mixture": You can think of a
+sequence of independent draws from the mixture distribution :math:`F` as each
+coming from one of the component distributions :math:`F_i`, but the draws are
+mixed together in a random order, with the proportion of draws from :math:`F_i`
+being :math:`w_i` on average. The following theorem shows that this
+sampling strategy works.
+
+.. admonition:: Theorem
+
+  **(Two-step mixture sampling)**
+  *If* :math:`E` *is sampled using the above two-step procedure, then the
+  distribution of* :math:`E` *is the mixture distribution*
+  :math:`F = \sum_1^k w_i F_i`.
+
+  **Proof.** Let :math:`Y` be a random variable having the `categorical
+  distribution`_ on :math:`\{1,2,\ldots, k\}` with :math:`\Pr(Y=i) = w_i`. Let
+  :math:`X_1,X_2,\ldots, X_k` be random variables with distributions
+  :math:`F_1,F_2,\ldots F_k`, respectively, and assume that each :math:`X_i` is
+  independent of :math:`Y`. Then the above sampling procedure can be formalized
+  as the statement
+
+  .. math::
+
+    E = X_1 \cdot \mathbf{1}_{\{Y=1\}} + X_2\cdot \mathbf{1}_{\{Y=2\}}
+    + \dotsb + X_k\cdot \mathbf{1}_{\{Y=k\}},
+
+  where :math:`\mathbf{1}_{\{Y=i\}}` is the `indicator function`_ of the event
+  :math:`\{Y=i\}` (i.e. for each outcome :math:`\omega`,
+  :math:`\mathbf{1}_{\{Y=i\}}(\omega) = 1` if :math:`Y(\omega) = i`, and
+  :math:`\mathbf{1}_{\{Y=i\}}(\omega) = 0` otherwise). In particular, we have
+
+  .. math::
+
+    E=X_i \text{ on the event } \{Y=i\}
+
+  because the events :math:`\{Y=i\}` partition the sample space, so exactly one
+  of the indicator functions :math:`\mathbf{1}_{\{Y=i\}}` will be nonzero for
+  any outcome. Using this observation, plus the independence between :math:`Y`
+  and :math:`X_i`, it follows that for any :math:`x\in\mathbb{R}` we have
+
+  .. math::
+
+    \Pr(E\le x)
+    = \sum_{i=1}^k \Pr(Y=i \text{ and } E\le x)
+    &= \sum_{i=1}^k \Pr(Y=i \text{ and } X_i\le x)\\
+    &= \sum_{i=1}^k \Pr(Y=i) \Pr(X_i\le x)\\
+    &= \sum_{i=1}^k w_i F_i(x)
+    = F(x).
+
+  This shows that the distribution function of :math:`E` is :math:`F`.
+  :math:`\blacksquare`
+
+.. _categorical distribution: https://en.wikipedia.org/wiki/Categorical_distribution
+.. _indicator function: https://en.wikipedia.org/wiki/Indicator_function
+
+.. _inverse_transform_sampling_of_mixtures:
+
+Inverse transform sampling from mixture distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Like any probability distribution, a draw :math:`E` from a mixture distribution
+can be generated using `inverse transform sampling`_. That is, sample a
+:math:`\mathrm{Uniform}(0,1)` random variable :math:`U`, then compute :math:`E =
+Q(U)`, where :math:`Q` is the `quantile function`_ for :math:`E` (also called
+the **percent point function** or **inverse CDF** of :math:`E`).
+
+The challenge with this approach is that in general, there is no simple formula
+for the quantile function :math:`Q` of the mixture distribution :math:`F =
+\sum_1^k w_i F_i`. In particular, even when :math:`F` and :math:`F_i` are
+`invertible`_, we have :math:`Q = F^{-1}`, but there is generally no simple way
+to write :math:`F^{-1}` in terms of the components' quantile functions
+:math:`Q_i = F_i^{-1}`.
+
+However, it is still possible to compute the quantile function directly from the
+definition :math:`Q(p) = \min \{x\in \mathbb{R} : F(x) \ge p\}`. Namely, to
+compute :math:`Q(p)` for :math:`p\in [0,1]`, we look for the smallest number
+:math:`x` such that :math:`F(x)\ge p`. Since :math:`F` is an increasing
+function, this optimization problem can be solved efficiently using a `binary
+search`_. For an example of this approach coded in Python, see this `blog post
+by Andrew Webb`_.
+
+.. _inverse transform sampling: https://en.wikipedia.org/wiki/Inverse_transform_sampling
+.. _quantile function: https://en.wikipedia.org/wiki/Quantile_function
+.. _invertible: https://en.wikipedia.org/wiki/Inverse_function
+.. _binary search: https://en.wikipedia.org/wiki/Binary_search_algorithm
+.. _blog post by Andrew Webb: http://www.awebb.info/probability/2017/05/12/quantiles-of-mixture-distributions.html
+
+Propensity-Based Sampling from Ensemble Distributions
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+A key design feature of Vivarium is *propensity-based sampling*, in which each
+simulant posesses a random "propensity" for an attribute :math:`E` (such as a
+risk exposure) that is invariant across scenarios and/or time and/or draws of
+model parameters, and the propensity is used to deterministically assign the
+value of :math:`E` for the simulant at each time step. This is typically done by
+defining the propensities as real numbers that are drawn uniformly from the
+interval :math:`[0,1]` and then applying `inverse transform sampling`_ in order
+to guarantee that :math:`E` follows a prescribed distribution across the
+simulated population. Here we describe two propensity-based approaches to
+sampling from an ensemble distribution, based on the two sampling strategies for
+mixture distributions deescribed above.
+
+Two-propensity sampling from ensemble distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+One-propensity sampling from ensemble distributions
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Add discussion of pros and cons of the above sampling approaches, including
+  what would happen if we make propensities change over time. Here's a note from
+  Abie, based on a conversation with James:
+
+    In future simulations, we might want individual simulants to have risk
+    factor exposures that are correlated over time, but not perfectly correlated
+    over time. For example, this could be accomplished in a normally distributed
+    risk by changing the risk factor propensity by a small amount every
+    timestep, in a way that keeps the propensity uniformly distributed between
+    zero and one.  The mixture interpretation of the ensemble distribution is
+    amenable to a similar sort of imperfectly autocorrelated risk exposure, by
+    changing the second propensity while leaving the first fixed.  This might
+    result in unexpected features, however, and we will need to proceed with
+    caution, if and when the time comes.
