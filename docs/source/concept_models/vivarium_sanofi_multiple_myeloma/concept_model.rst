@@ -419,14 +419,109 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
      - High
      - VRd: bortezomib + lenalidomide + dexamethasone
 
-First-line treatment
-^^^^^^^^^^^^^^^^^^^^
+Treatment Modeling Strategy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Second-line treatment
-^^^^^^^^^^^^^^^^^^^^
+**Scope**:
 
-Third- or later-line treatment
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+This modeling strategy allows us to track the proportion of MM/RRMM simulants that receive an isatuxamib-containing treatment. It also allows for coherent assignment of isatuxamib-containing treatments at the simulant level so that any given simulant is not assigned an isatuxamib-containing treatment an illogical amount of times, which will reduce noise in our estimations.
+
+This model strategy does NOT consider:
+
+- Differences between isatuxamib-containing treatment regimens (ex: isatuxamib + pomalidomide + dexamethasone versus isatuxamib + carfilzomib + dexamethasone)
+- Differences between the numerous treatment regimens that do NOT contain isatuxamib (note this has important implications for applying efficacy data to the appropriate reference group(s))
+- Specific eligibility requirements for isatuxamib-contianing treatments other than previous treatment with isatuxamib. Specifically, 
+	- We do not directly consider the requirement of previous treatment with lenalidomide and a PI, although this is likely minimally impactful as these are very common treatment regimens and "almost all" patients with myeloma develop disease that is eventually refracotory to lenalidomide and PIs, [Attal-et-al-2019]_.
+	- We do not consider previous treatment with other monoclonal antibody drugs such as daratumumab, which may impact probability of receiving an isa-containing treatment
+
+We will consider the following treatment categories in our treatment model:
+
+- Isa-containing treatment regimen
+- Non-isa-containing treatment regimen
+
+.. note::
+
+	Other treatment categories to consider tracking include: reference treatment regimen from ISA RCT (polidamide + dexamethasone), daratumumab-containing regimens
+
+Importantly, we will assume that a given percentage of patients who receive isa-containing regimen for a specific line of treatment will not receive an isa-containing regimen at a later line of treatment.
+
+	Currently, we will assume that 100% of patients who receive isa-containing regimens will not receive isa-containing regimens at a later line of treatment.
+
+.. todo::
+	
+	Confirm use of probability 1.0 for ineligibility for future isa-containing treatment regimen based on past treatment with isa.
+
+	Alternative approach: make ineligible if simulant progresses on or within 60 days seven months time OR with a probability of 60% if simulant progresses within seven months. This was chosen because the ISA trial defined non-response as progression on or within 60 days or progression within 6 months after achieving at least a partial response and reported at least partial response in 60% of subjects and a median time to response among this group was 35 days).
+
+.. note::
+
+	Consider similarly assuming that patients who recieve dara-containing regimens will not receive isa-containing regimens at later lines of treatment.
+
+The overall proportion of patients who receive isa-containing treatment regimens at each line of treatment and in each scenario is shown in the table below.
+
+.. list-table:: Isatuximab treatment coverage assumptions
+   :header-rows: 1
+
+   * - Treatment line
+     - 2021 coverage (Baseline and Alternative)
+     - 2025 coverage (Baseline)
+     - 2025 coverage (Alternative)
+   * - 1st
+     - 0%
+     - 0%
+     - 20%
+   * - 2nd
+     - 0%
+     - 20%
+     - 20%
+   * - 3rd 
+     - XXX
+     - 20%
+     - 20%
+   * - 4th+
+     - XXX
+     - 20%
+     - 20%
+
+.. todo::
+
+	Describe linear scale-up
+
+	Finalize numbers currently marked as "XXX" based on commercial team input
+
+**How to assign treatment category to a simulant:**
+
+*Initialization*:
+
+	Each simulant initialized into a multiple myeloma state should be assigned to a treatment category. They should be assigned to the isa-containing treatment category or non-isa-containing treatment category with the probability of the isa-containing treatment category equal to the isatuxamib treatment coverage values for 2021 in the table above, specific to the cause model state that the simulant occupies.
+
+	For simulants assigned to the isatuxamib-containing treatment category, assign the attribute :code:`ineligible_for_future_isa = True` with a probability of 1. For all other simulants, set :code:`ineligible_for_future_isa` to :code:`False`.
+
+		NOTE: This strategy makes several assumptions, including:
+
+			- Incident treatment coverage is equal to prevalent treatment coverage of isatuxamib. In other words, it assumes that there is similar progression-free survival among patients who have been treated with isatuxamib and those not treated with isatuxamib.
+
+			- Isatuxamib treatment coverage at the time of most recent relapse was equal to isatuxamib treatment coverage in 2021.
+
+*Later time-steps*:
+
+	When a simulant progresses through the cause model states of the MM cause model diagram, they should be assigned to a treatment category for that state in the following manner:
+
+		If :code:`ineligible_for_future_isa = True`, assign the non-isa-containing treatment category.
+
+		If :code:`ineligible_for_future_isa = False`, assign the isa-containing treatment category with the probability of the isatuxamib treatment coverage defined above *divided by the proportion of simulants in the preeceding cause model state with the attribute* :code:`ineligible_for_future_isa = False`.
+
+			NOTE: this is an approximation that assumes similar progression free survival rates among :code:`ineligible_for_future_isa` states, which will cause a slightly greater number of simulants to be assigned to the isa treatment category than specified in the above table, especially for earlier lines of treatment -- consider a transformation based on the Isa HR?
+
+	If a simulant is assigned an isa-containing treatment regimen, assign them an attribute :code:`ineligible_for_future_isa = True` with a probability of 1. Otherwise, this attribute should be set to False.
+
+.. note::
+
+	The multiple myeloma cause model does not differentiate between the fourth relapse and any subsequent relapses. However, **treatment lines** should continue to be tracked in the same way as described above for all relapses after the fourth. For example, if a simulant is treated with an isa-containing regimen at fourth relapse and becomes ineligible for future isa-containing treatment regimens, that simulant should not receive isa-containing treatment regimens at subsequent relapses. Further, if a simulant remains eligible for isa-containing treatment through the fourth relapse, they can be assigned an isa-containing treatment at the fifth relapse.
+
+.. todo::
+
+	Confirm use of probability 1.0 for ineligibility for future isa-containing treatment regimen based on past treatment with isa.
 
 .. _5.3.4:
 
