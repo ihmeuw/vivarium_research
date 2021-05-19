@@ -72,7 +72,9 @@ Wasting as finite state machines
 Risk Exposure Overview
 ++++++++++++++++++++++
 
-Malnutrition is an imbalance between the body’s needs and its use and intake of nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, disease states, lack of knowledge, and cultural practices, among others. Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies are all forms of malnutrition. Acute malnutrition (AM), also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate severe acute malnutrition (SAM). WHZ z-scores range from -7 to +7. Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. AM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, AM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children. 
+Malnutrition is an imbalance between the body’s needs and its use and intake of nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, disease states, lack of knowledge, and cultural practices, among others. Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies are all forms of malnutrition. 
+
+**Acute malnutrition (AM)**, also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate severe acute malnutrition (SAM). WHZ z-scores range from -7 to +7. Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. AM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, AM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children. 
 
 .. note::
   Include here a clinical background and overview of the risk exposure you're modeling. Note that this is only for the exposure; you will include information on the relative risk of the relevant outcomes, and the cause models for those outcomes, in a different document.
@@ -87,7 +89,7 @@ Risk Exposures Description in GBD
 Case definition
 ---------------
 
-Wasting, a sub-compoonent indicator of child growth failure (CGF), is based on a categorical definition using the WHO 2006 growth standards for children 0-59 months. Definitions are based on Z-cores from the growth standards, which were derived from an international reference population. Mild, moderate and severe categorical prevalences were estimated for each of the three indicators. Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be greater than or equal to -1 SD of the WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
+Wasting, a sub-compoonent indicator of child growth failure (CGF), is based on a categorical definition using the WHO 2006 growth standards for children 0-59 months. Definitions are based on Z-cores from the growth standards, which were derived from an international reference population. Mild, moderate and severe categorical prevalences were estimated for each of the three indicators. Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be greater than or equal to one standard deviation below the mean (-1 SD) of the WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
 
 +----------------------------------------------+
 | Wasting category definition (range -7 to +7) |
@@ -110,7 +112,7 @@ Two types of input data are used in CGF estimation:
 
   1. **Tabulated report data**. This data does not report individual anthropometric measurements. It only reports the prevalence of forms of CGF in a sample size. For example, this data would may report a 15% prevalence of moderate stunting out of a nationally representative sample of 5,000 children.
 
-  2. **Microdata**. This data does have individual anthropometric measurements. From these datasources, we can see entire distributions of CGF, while also collapsing them down to point prevalences like moderate and severe CGF. 
+  2. **Microdata**. This data does have individual anthropometric measurements. From these datasources, GBD can see entire distributions of CGF, while also collapsing them down to point prevalences like moderate and severe CGF. 
 
 
 .. _1.1.3:
@@ -125,7 +127,7 @@ We also take the microdata sources and fit ensemble distributions to the shapes 
 Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores between -4 and +4, we will be excluding a lot of kids.
 
 .. note::
-  In the Ryan (GBD modeller for CGF and LWBSG) paper that he is working on right now, they actually present the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
+  In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right now, he presents the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
 
 
 .. _1.1.4:
@@ -133,7 +135,7 @@ Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores be
 Outcomes affected by wasting
 ----------------------------
 
-CGF burden does not start until after neonatal age groups. In neonatal age groups, burden comes from LBWSG. Outcomes affected include lower-respiratory disease (LRI), diarrheal disease (DD), measles, and protein energy malnutrition (PEM). 
+CGF burden does not start until *after* neonatal age groups (from 1mo onwards). In the neonatal age groups (0-1mo), burden comes from LBWSG. From post-neonatal (1mo+) age onwards, CGF outcomes affected include lower-respiratory disease (LRI), diarrheal disease (DD), measles, and protein energy malnutrition (PEM). The literature on interventions for wasting target age groups 6mo onwards. This coincides with the timing of supplementary food introduction. Prior to 6mo, interventions to reduce DALYs focus on breastfeeding and reduction of LBWSG. 
 
 +------------------------------------------------------------------+
 |Adjusted RR for each risk-outcome pair for wasting                |
@@ -288,7 +290,8 @@ Rows of the P matrix sums to 1
 We have duration of treated and untreated sam and mam as well as coverage from the literature :   
 
   9)  r2 = 1/Dsam   
-  10) r3 + i1  = 1/Dmam   
+  10) r3 + i1  = 1/Dmam
+  11) Eq 11 is defined in terms of i3 or duration of MILD (cat3); we write the solution in terms of cat3 duration or i3   
 
 where
 
@@ -324,6 +327,7 @@ We solve for the unknowns using the matrix solution
                 [0,0,0,0,1,0,0,0,0,0],
                 [0,0,0,0,0,1,0,1,0,0]])
 
+  #write b in terms of i3 and the ps
   b =np.array([[p4],
                [p3],
                [p2],
@@ -342,6 +346,11 @@ We solve for the unknowns using the matrix solution
   np.allclose(np.dot(a,x),b)
 
 
+
+
+.. todo::
+    - Beatrix will update the above to write the solution x in terms of the p and i3 or duration of MILD (cat3)
+    - We also need the closed form graph theory solution
 
 .. _2.2.2: 
 
@@ -389,4 +398,5 @@ Validation Criteria
 ..	todo::
 	Fill in directives for this section
 
-Referen
+References
+----------
