@@ -50,33 +50,74 @@ GBD 2019 Modeling Strategy
 
 	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
-**The available data for deriving relative risk was only for all-cause mortality.**
-For each location, data were pooled across years, and the risk of all-cause mortality at the **early neonatal period** and **late neonatal period** at joint birthweight and gestational age combinations was calculated.
-In all datasets except for the USA, sex-specific data were combined to maximise sample size. The USA analyses were sex-specific.
-**Relative risks of all-cause mortality were calculated for each 500g and 2wk category of birthweight and gestational age.** [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+**The available data for deriving relative risk was only for all-cause
+mortality.**
+For each location, data were pooled across years, and the risk of all-cause
+mortality at the **early neonatal period** and **late neonatal period** at joint
+birthweight and gestational age combinations was calculated. In all datasets
+except for the USA, sex-specific data were combined to maximise sample size. The
+USA analyses were sex-specific.
+**Relative risks of all-cause mortality were calculated for each 500g and 2wk
+category of birthweight and gestational age.**
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
 
-In the Norway, New Zealand, and USA Linked Birth/Death Cohort microdata datasets, livebirths are reported with gestational age, birthweight, and an indicator of death at 7 days and 28 days. For this analysis, gestational age was grouped into two-week categories, and birthweight was grouped into 500-gram categories. The Taiwan, Japan, and Singapore datasets were prepared in tabulations of joint 500-gram and two-week categories. A pooled country analysis of mortality risk in the early neonatal period and late neonatal period by “small for gestational age” category in developing countries in Asia and sub-Saharan Africa were also used to inform the relative risk analysis.
+In the Norway, New Zealand, and USA Linked Birth/Death Cohort microdata
+datasets, livebirths are reported with gestational age, birthweight, and an
+indicator of death at 7 days and 28 days. For this analysis, gestational age was
+grouped into two-week categories, and birthweight was grouped into 500-gram
+categories. The Taiwan, Japan, and Singapore datasets were prepared in
+tabulations of joint 500-gram and two-week categories. A pooled country analysis
+of mortality risk in the early neonatal period and late neonatal period by
+“small for gestational age” category in developing countries in Asia and
+sub-Saharan Africa were also used to inform the relative risk analysis.
 
-To calculate relative risk at each 500-gram and two-week combination, logistic regression was first used to calculate mortality odds for each joint two-week gestational age and 500-gram birthweight category. Mortality odds were smoothed with Gaussian process regression, with the independent distributions of mortality odds by birthweight and mortality odds by gestational age serving as priors in the regression.
-A pooled country analysis of mortality risk in the early neonatal period and late neonatal period by SGA category in developing countries in Asia and sub-Saharan Africa were also converted into 500-gram and two-week bin mortality odds surfaces.
+To calculate relative risk at each 500-gram and two-week combination, logistic
+regression was first used to calculate mortality odds for each joint two-week
+gestational age and 500-gram birthweight category. Mortality odds were smoothed
+with Gaussian process regression, with the independent distributions of
+mortality odds by birthweight and mortality odds by gestational age serving as
+priors in the regression. A pooled country analysis of mortality risk in the
+early neonatal period and late neonatal period by SGA category in developing
+countries in Asia and sub-Saharan Africa were also converted into 500-gram and
+two-week bin mortality odds surfaces.
 
-The relative risk surfaces produced from microdata and the Asia and Africa surfaces produced from the pooled country analysis were meta-analysed, resulting in a meta- analysed mortality odds surface for each location. The meta-analysed mortality odds surface for each location was smoothed using Gaussian process regression and then converted into mortality risk.
+The relative risk surfaces produced from microdata and the Asia and Africa
+surfaces produced from the pooled country analysis were meta-analysed, resulting
+in a meta- analysed mortality odds surface for each location. The meta-analysed
+mortality odds surface for each location was smoothed using Gaussian process
+regression and then converted into mortality risk.
 
-To calculate mortality relative risks, the risk of each joint two-week gestational age and 500-gram birthweight category were divided by the risk of mortality in the joint gestational age and birthweight category with the lowest mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+To calculate mortality relative risks, the risk of each joint two-week
+gestational age and 500-gram birthweight category were divided by the risk of
+mortality in the joint gestational age and birthweight category with the lowest
+mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
 .. note::
 
-  Although the above description from the GBD 2019 risk appendix sometimes refers to location-specific mortality risks, the relative risks in GBD 2019 are the same for all locations. Pulling LBWSG RR's with ``get_draws`` for any location returns RR's with location_id = 1 (Global), and they are stratified by year/age_group/sex.
+  Although the above description from the GBD 2019 risk appendix sometimes
+  refers to location-specific mortality risks, the relative risks in GBD 2019
+  are the same for all locations. Pulling LBWSG RR's with ``get_draws`` for any
+  location returns RR's with location_id = 1 (Global), and they are stratified
+  by year/age_group/sex.
 
 Affected Outcomes
 +++++++++++++++++
 
-The available data for deriving relative risk was only for *all-cause mortality* rather than for cause-specific outcomes. The exception was the USA linked infant birth-death cohort data, which contained three-digit ICD causes of death, but also had nearly 30% of deaths coded to causes that are ill-defined, or intermediate, in the GBD cause classification system.
+The available data for deriving relative risk was only for *all-cause mortality*
+rather than for cause-specific outcomes. The exception was the USA linked infant
+birth-death cohort data, which contained three-digit ICD causes of death, but
+also had nearly 30% of deaths coded to causes that are ill-defined, or
+intermediate, in the GBD cause classification system.
 
-Therefore, the GBD modelers analysed the relative risk of all-cause mortality across all available sources and selected outcomes based on criteria of biological plausibility. **Some causes, most notably congenital birth defects, haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria that reverse causality could not be excluded.** [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+Therefore, the GBD modelers analysed the relative risk of all-cause mortality
+across all available sources and selected outcomes based on criteria of
+biological plausibility. **Some causes, most notably congenital birth defects,
+haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria
+that reverse causality could not be excluded.**
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
 .. list-table:: Entities Affected by LBWSG in GBD 2019
    :widths: 5 5 5 5 5
@@ -181,7 +222,10 @@ Restrictions
 
 .. note::
 
-  GBD 2019 attributes 100% of the DALYs due to Neonatal Preterm Birth to the LBWSG risk factor. In particular, the attribution includes YLDs as well as YLLs, and the age restrictions for the LBWSG-attributale DALYs are the same as the age restrictions for Neonatal Preterm Birth.
+  GBD 2019 attributes 100% of the DALYs due to Neonatal Preterm Birth to the
+  LBWSG risk factor. In particular, the attribution includes YLDs as well as
+  YLLs, and the age restrictions for the LBWSG-attributale DALYs are the same as
+  the age restrictions for Neonatal Preterm Birth.
 
   * **YLLs due to Neonatal preterm birth**, 100% attributable to LBWSG:
 
@@ -193,7 +237,11 @@ Restrictions
     - Age group start = 2 (Early neonatal, 0-7 days)
     - Age group end = 235 (95+)
 
-  Note that this attribution of DALYs is **not** based on the relative risks for all-cause mortality, but instead is based on the logic that all preterm births are due to short gestation by definition. Thus, if we include Neonatal Preterm Birth in our models, the relative risks likely must be handled differently for this cause.
+  Note that this attribution of DALYs is **not** based on the relative risks for
+  all-cause mortality, but instead is based on the logic that all preterm births
+  are due to short gestation by definition. Thus, if we include Neonatal Preterm
+  Birth in our models, the relative risks likely must be handled differently for
+  this cause.
 
 Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
