@@ -424,13 +424,15 @@ Treatment Modeling Strategy
 
 **Scope**:
 
-This modeling strategy allows us to track the proportion of MM/RRMM simulants that receive an isatuxamib-containing treatment. It also allows for coherent assignment of isatuxamib-containing treatments at the simulant level so that any given simulant is not assigned an isatuxamib-containing treatment an illogical amount of times, which will reduce noise in our estimations.
+This modeling strategy allows us to track the proportion of MM/RRMM simulants that receive isatuxamib as part of their regimen for a given treatment line. We assume that the scale-up of isatuxamib coverage will result in isatuxamib incorporation as an additional drug added to an existing treatment regimen that would have been delivered in the absence of an isatuxamib coverage scale-up. It also allows for coherent assignment of isatuxamib-containing treatments at the simulant level so that any given simulant is not assigned an isatuxamib-containing treatment an illogical amount of times, which will reduce noise in our estimations.
 
 This model strategy does NOT consider:
 
 - Differences between isatuxamib-containing treatment regimens (ex: isatuxamib + pomalidomide + dexamethasone versus isatuxamib + carfilzomib + dexamethasone)
-- Differences between the numerous treatment regimens that do NOT contain isatuxamib (note this has important implications for applying efficacy data to the appropriate reference group(s))
-- Specific eligibility requirements for isatuxamib-contianing treatments other than previous treatment with isatuxamib. Specifically, 
+- Differences between existing treatment regimens that would be eligible/ineligible for the addition of isatuxamib (For instance, isatuxamib logically would not be added to a treatment regimen that already contains dara. Additionally, isatuxamib is more likely to be added to a doublet treatment regimen than a triplet regimen.)
+- Differences between the numerous treatment regimens that do NOT contain isatuxamib 
+- Eligibility requirements for isatuxamib-containing treatments other than previous treatment with isatuxamib. Specifically, 
+
 	- We do not directly consider the requirement of previous treatment with lenalidomide and a PI, although this is likely minimally impactful as these are very common treatment regimens and "almost all" patients with myeloma develop disease that is eventually refracotory to lenalidomide and PIs, [Attal-et-al-2019]_.
 	- We do not consider previous treatment with other monoclonal antibody drugs such as daratumumab, which may impact probability of receiving an isa-containing treatment
 
@@ -441,7 +443,7 @@ We will consider the following treatment categories in our treatment model:
 
 .. note::
 
-	Other treatment categories to consider tracking include: reference treatment regimen from ISA RCT (polidamide + dexamethasone), daratumumab-containing regimens
+	Other treatment categories to consider tracking include: daratumumab-containing regimens
 
 Importantly, we will assume that a given percentage of patients who receive isa-containing regimen for a specific line of treatment will not receive an isa-containing regimen at a later line of treatment.
 
@@ -457,7 +459,7 @@ Importantly, we will assume that a given percentage of patients who receive isa-
 
 	Consider similarly assuming that patients who recieve dara-containing regimens will not receive isa-containing regimens at later lines of treatment.
 
-The overall proportion of patients who receive isa-containing treatment regimens at each line of treatment and in each scenario is shown in the table below.
+The overall proportion of incident cases that receive isa-containing treatment regimens upon diagnosis of MM or RRMM at each line of treatment and in each scenario is shown in the table below.
 
 .. list-table:: Isatuximab treatment coverage assumptions
    :header-rows: 1
@@ -488,6 +490,18 @@ The overall proportion of patients who receive isa-containing treatment regimens
 	Describe linear scale-up
 
 	Finalize numbers currently marked as "XXX" based on commercial team input
+
+Notably, for the scale-up of isatuxamib coverage, we will assume that coverage of all other treatment regimens will remain constant from 2021 to 2025 and that isatuxamib will be incorporated into treatment coverage as an additional drug in the existing regimen for a given line of treatment. For example, if a given patient were to receive a doublet regimen for their second line of treatment (pomalidamide + dexamethasone, for example) in the absence of an isatuxamib scale-up, then we assume they would receive an isatuxamib-containing triplet regimen for their second line of treatment (isatuxamib + pomalidamide + dexamethasone, for example). This modeling strategy has the following important implications:
+
+- In the absence of available data to inform alternate strategies, we will assume that the addition of isatuxamib to the doublet pomalidomide + dexamethasone reigmen will have the same relative effect on progression free survival and overall survival as the addition of isatuxamib to all other multiple myeloma treatment regimens, as obtained from [Attal-et-al-2019]_
+
+- This strategy assumes that isatuxamib will be *added* to existing treatment regimens so that monotherapies become doublet therapies, doublets become triplets, and so on, rather than assuming that isatuxamib will replace a drug in an existing treatment regimen. This may or may not accurately reflect clinical practice as the number of drugs administered in a given line of treatment is a clinical decision based on patient frailty and triplet therapies are generally preferred in the absence of frailty. 
+
+- This strategy currently does not (yet) consider that isatuxamib logically would not be added to treatment regimens that already contain monoclonal antibody drugs such as dara and does not consider that such treatments already are benefitting from the additional clinical impact of an anti-C38 MoAB drug as part of the treatment regimen and therefore would likely not see an additional clinical benefit from an isatuxamib scale-up.
+
+.. todo::
+
+	Consider tracking this treatment category as part of baseline coverage so that it can be appropriately considered in the baseline calibration strategy.
 
 **How to assign treatment category to a simulant:**
 
