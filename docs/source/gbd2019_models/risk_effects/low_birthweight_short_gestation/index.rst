@@ -166,7 +166,7 @@ Restrictions
     -
   * - YLL only
     - True
-    - Except for Neonatal preterm birth; see note below
+    - Except for Neonatal preterm birth; see :ref:`note <note_on_preterm_birth_DALYs>` below
   * - YLD only
     - False
     -
@@ -175,7 +175,9 @@ Restrictions
     -
   * - Age group end
     - Late neonatal (7-28 days, age_group_id = 3)
-    - Except for Neonatal preterm birth; see note below
+    - Except for Neonatal preterm birth; see :ref:`note <note_on_preterm_birth_DALYs>` below
+
+.. _note_on_preterm_birth_DALYs:
 
 .. note::
 
