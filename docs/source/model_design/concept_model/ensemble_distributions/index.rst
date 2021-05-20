@@ -161,26 +161,96 @@ Improving the distribution estimates with an ensemble approach
   1. Start with a collection of base distributions :math:`F_1, F_2,\ldots,
   F_k`
 
-What Base Distributions Are Used in GBD's Ensembles?
+Where Is the Code for GBD's Ensemble Distributions?
 ----------------------------------------------------
 
-Here are links to R code and Python code implementing GBD's ensemble distributions:
+Here are the repositories implementing ensemble distributions for :ref:`GBD
+modeling <GBD_ensemble_repo_description>` and for :ref:`Vivarium
+<Vivarium_risk_distributions_repo_description>`:
 
-* `R code for ensemble distributions <R code_>`_ on Stash, accessible on the
-  cluster at :file:`/ihme/code/risk/ensemble/` and maintained by Central Comp
+.. _GBD_ensemble_repo_description:
 
-* `Python code for ensemble distributions <Python code_>`_ on GitHub, part of
+* `Ensemble Distributions repository (R code)  <R code_>`_ on Stash, maintained
+  by Central Comp and accessible on the cluster at
+  :file:`/ihme/code/risk/ensemble/`
+
+  - `pdf_families.R`_ contains the list of base distributions for the ensemble,
+    each with functions :samp:`d{distname}` to compute the density function
+    (PDF), :samp:`p{distname}` to compute the probability distribution function
+    (CDF), and :samp:`{distname}_mv2p` to implement the method of moments (i.e.
+    calculate the parameters of the distribution given its mean and variance),
+    where :samp:`{distname}` is the name of the base distribution in the R code.
+    Each distribution is added to one of the classes ``classA`` (standard
+    distributions supported on :math:`[0,\infty)` or :math:`(-\infty, \infty)`),
+    ``classB`` (the shifted, scaled Beta distribution supported on
+    :math:`[a,b]`), or ``classM`` (mirrored distributions) at the end of the
+    file. The three distribution classes then get concatenated into a single
+    distribution list called ``dlist`` in :file:`fit.R` and passed to the
+    ``eKS`` function in :file:`eKS_parallel.R`.
+
+  - `eKS_parallel.R`_ contains the optimization routine that finds the best set
+    of ensemble weights by minimizing the `Kolmogorov--Smirnov statistic`_
+    between the ensemble distribution and the empirical distribution of the
+    data. This file also has code to plot the results of the fitting procedure.
+
+  - `fit.R`_ loads the list of distributions from :file:`pdf_families.R` and
+    calls :file:`eKS_parallel.R` to do the actual distribution fitting and plot
+    the results.
+
+  - `fit_submit.R`_ is the main program to submit a job on the cluster to fit an
+    ensemble distribution to data by calling :file:`fit.R`.
+
+  - `scale_density_simpson.cpp`_ is C++ code to rescale a distribution so that
+    it integrates to 1 after it has been truncated at min and max values, using
+    Simpson's rule. This function is called by the ``get_edensity`` function in
+    `edensity.R`_. However, neither :file:`edensity.R` nor
+    :file:`scale_density_simpson.cpp` appear to be used in any of the files
+    above, as the ``get_edensity`` function has a different implementation in
+    :file:`eKS_parallel.R`.
+
+.. _Vivarium_risk_distributions_repo_description:
+
+* `Risk Distributions repository (Python code) <Python code_>`_ on GitHub,
+  maintained by the Vivarium Engineering Team as part of
   `Vivarium Public Health <https://github.com/ihmeuw/vivarium_public_health>`_
-  and maintained by the Vivarium Engineering Team
 
-The R code base lists 14 distribution families in the file `pdf_families.R`_,
-and 12 of them are implemented for Vivarium in `risk_distributions.py`_ (all
-except the Generalized Normal and Generalized Log-normal):
+  - `risk_distributions.py`_ implements GBD's ensemble distributions via a
+    collection of classes that wrap ``scipy.stats`` distributions for use as
+    risk exposure distributions in Vivarium. There is a class for each base
+    distribution, each extending the ``BaseDistribution`` class, and an
+    ``EnsembleDistribution`` class implementing the mixture of the base
+    distributions. Each base distribution class implements the functions
+    ``get_parameters`` to calculate the parameters of the distribution given its
+    mean and standard deviation (implementing the method of moments), ``pdf`` to
+    compute the probability density function, ``cdf`` to compute the cumulative
+    distribution function, and ``ppf`` to compute the percent point function
+    (i.e. quantile function, used for `inverse transform sampling`_).
+
+  - `formatting.py`_ contains helper functions for formatting data and
+    converting between data types.
 
 .. _R code: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse
 .. _Python code: https://github.com/ihmeuw/risk_distributions/
+.. _fit_submit.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/fit_submit.R
+.. _fit.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/fit.R
+.. _eKS_parallel.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/eKS_parallel.R
 .. _pdf_families.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/pdf_families.R
+.. _edensity.R: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/edensity.R
+.. _scale_density_simpson.cpp: https://stash.ihme.washington.edu/projects/RF/repos/ensemble/browse/scale_density_simpson.cpp
+
+.. _Kolmogorov--Smirnov statistic: https://en.wikipedia.org/wiki/Kolmogorov%E2%80%93Smirnov_test
+
 .. _risk_distributions.py: https://github.com/ihmeuw/risk_distributions/blob/master/src/risk_distributions/risk_distributions.py
+.. _formatting.py: https://github.com/ihmeuw/risk_distributions/blob/main/src/risk_distributions/formatting.py
+
+What Base Distributions Are Used in GBD's Ensembles?
+----------------------------------------------------
+
+:ref:`Central Comp's R code base <GBD_ensemble_repo_description>` lists 14
+distribution families in the file `pdf_families.R`_, and 12 of them are
+:ref:`implemented for Vivarium <Vivarium_risk_distributions_repo_description>`
+in `risk_distributions.py`_ (all except the Generalized Normal and Generalized
+Log-normal):
 
 * Gamma
 * Mirrored Gamma
@@ -204,20 +274,54 @@ specified.
 
   Make a table out of the above list, including the following possible columns:
 
-  * Name + Wikipedia link (or other source)
+  * Distribution name + Wikipedia link (or other source)
+  * Variable names for the distributions used in the R and Python repos
   * R function + documentation link
   * scipy.stats function + documentation link
   * Number of parameters for the distribution family (1, 2, or 3)
   * Formula for pdf or cdf?
-  * How to get distribution parameters from mean and variance?
+  * How to get distribution parameters from mean and variance (i.e. method of moments)?
+  * Tail behavior?
+  * Whether min and max are needed in addition to other parameters
+
+  It may be better to make a table with some small number of the above things,
+  then add a brief section on each distribution going into more details.
+
+  Also, here are some other things to add somewhere:
+
+    - Explain how the mean and variance will stay the same when we average the
+      distributions together because of the Laws of Total Expectation/Variance,
+      *unless* the weight for the Exponential distribution is nonzero, which
+      will throw the variance off.
+
+    - Add examples of GBD and Vivarium models that use ensemble distributions
+      and/or specific distributions from the list. It would be nice to show
+      pictures of the ensembles and list the ensemble weights.
+
+    - Add a link to the anemia team's repo with its own implementation of
+      ensembles, and any other custom implementations that we find.
+
+    - Add an explanation of how/why the support of the ensemble distribution is
+      cut off at the 0.001 and 0.999 quantiles of the lognormal distribution. It
+      appears that this is done in `edensity.R`_, but does that code actually
+      get used, or does GBD use the version of ``get_edensity`` in
+      `eKS_parallel.R`_ instead? This truncation is also implemented in Vivarium
+      in `risk_distributions.py`_.
+
+    - Note somewhere that in the R code, ``betasr`` evidently stands for "beta
+      with shifted range".
 
 .. note::
 
-  As of April 30, 2021, it appears that three of the above distributions
+  As of May 12, 2021, it appears that three of the above distributions
   (Generalized Normal, Generalized Log-normal, Inverse Weibull) are not
   currently used for ensemble modeling by Central Comp, because they don't get
-  added to ``classA``, ``classB``, or ``classM`` at the end of
-  `pdf_families.R`_.
+  added to any of the distribution classes ``classA`` (most distributions),
+  ``classB`` (beta distribution), or ``classM`` (mirrored distributions) at the
+  end of `pdf_families.R`_, and hence they don't get added to the distribution
+  list variable ``dlist`` in `fit.R`_. In previous versions of the code, the
+  Generalized Log-normal and Inverse Weibull distributions were put in
+  ``classA``, but they have been removed.
 
 Sampling from Ensemble Distributions in Vivarium
 ------------------------------------------------
