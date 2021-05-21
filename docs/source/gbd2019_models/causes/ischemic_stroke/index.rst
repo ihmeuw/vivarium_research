@@ -290,11 +290,11 @@ State and Transition Data Tables
      - Deaths from ischemic stroke
      - This is all deaths, regardless of whether people are in the acute or chronic state 
    * - acute_csmr_c495
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_acute_ischemic_csmr_2021-05-20.csv'
      - Deaths from ischemic stroke during the acute period 
      - Custom CSMR calculation
    * - chronic_csmr_c495
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_chronic_ischemic_csmr_2021-05-20.csv'
      - Deaths from ischemic stroke during the chronic period  
      - Custom CSMR calculation 
    * - incidence_c495
