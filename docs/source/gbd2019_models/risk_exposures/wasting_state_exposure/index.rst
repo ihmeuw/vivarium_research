@@ -315,24 +315,24 @@ Solving in terms of :math:`i_3`, we get:
 
    * - Variable
      - Value
-   * - :math:`s_1`
-     - :math:`0.975`
-   * - :math:`s_2`
-     - :math:`0.985714285714286`
-   * - :math:`s_3`
-     - :math:`-i_3p_4/p_3 + 0.00357142857142857(7.0p_1 - 4.0p_2 + 280.0p_3)/p_3`
-   * - :math:`s_4`
-     - :math:`1.0 - i_3`
-   * - :math:`r_2`
-     - :math:`0.025`
-   * - :math:`r_3`
-     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_2`
-   * - :math:`r_4`
-     - :math:`i_3p_4/p_3`
-   * - :math:`i_1`
-     - :math:`0.025p_1/p_2`
-   * - :math:`i_2`
-     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_3`
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - -i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3)/p3
+   * - s4
+     - 1.0 - i3
+   * - r2
+     - 0.025
+   * - r3
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p2
+   * - r4
+     - i3*p4/p3
+   * - i1
+     - 0.025*p1/p2
+   * - i2
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p3
 
 
 Solving in terms of :math:`dur\_cat3`, we get:
@@ -343,26 +343,26 @@ Solving in terms of :math:`dur\_cat3`, we get:
 
    * - Variable
      - Value
-   * - :math:`s_1`
-     - :math:`0.975`
-   * - :math:`s_2`
-     - :math:`0.985714285714286`
-   * - :math:`s_3`
-     - :math:`(dur\_cat3 - 1.0)/dur\_cat3`
-   * - :math:`s_4`
-     - :math:`0.00357142857142857(-7.0dur\_cat3p_1 + 4.0dur\_cat3p_2 + 280.0dur\_cat3p_4 - 280.0p_3)/(dur\_cat3p_4)`
-   * - :math:`r_2`
-     - :math:`0.025`
-   * - :math:`r_3`
-     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_2`
-   * - :math:`r_4`
-     - :math:`0.00357142857142857(7.0dur\_cat3p_1 - 4.0dur\_cat3p_2 + 280.0p_3)/(dur\_cat3*p_3)`
-   * - :math:`i_1`
-     - :math:`0.025p_1/p_2`
-   * - :math:`i_2`
-     - :math:`0.00357142857142857(-7.0p_1 + 4.0p_2)/p_3`
-   * - :math:`i_3`
-     - :math:`0.00357142857142857(7.0dur\_cat3p_1 - 4.0dur\_cat3p_2 + 280.0p_3)/(dur\_cat3p_4)`
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - (dur_cat3 - 1.0)/dur_cat3
+   * - s4
+     - 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 - 280.0*p3)/(dur_cat3*p4)
+   * - r2
+     - 0.025
+   * - r3
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p2
+   * - r4
+     - 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 + 280.0*p3)/(dur_cat3*p3)
+   * - i1
+     - 0.025*p1/p2
+   * - i2
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p3
+   * - i3
+     - 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 + 280.0*p3)/(dur_cat3*p4)
 
 The code used to solve this system of equations is here:
 
@@ -573,28 +573,29 @@ Solving in terms of :math:`i_3`, we get:
 
    * - Variable
      - Value
-   * - :math:`s_1`
-     - :math:`0.975`
-   * - :math:`s_2`
-     - :math:`0.985714285714286`
-   * - :math:`s_3`
-     - :math:`d_2p_2/p_3 + f_2pfd/p_3 + f_4pfd/p_3 - i_3p_4/p_3 + 0.00357142857142857(7.0p_1 - 4.0p_2 + 280.0p_3 - 280.0pfd)/p_3`
-   * - :math:`s_4`
-     - :math:`-d_4 - i_3 + 1.0`
-   * - :math:`r_2`
-     - :math:`d_2p_2/p_1 + d_3p_3/p_1 + d_4p_4/p_1 + 0.025(p_1 - 40.0pfd)/p_1`
-   * - :math:`r_3`
-     - :math:`-d_2 - f_2pfd/p_2 - f_3pfd/p_2 - f_4pfd/p_2 + 0.00357142857142857(-7.0p_1 + 4.0p_2 + 280.0pfd)/p_2`
-   * - :math:`r_4`
-     - :math:`d_4p_4/p_3 - f_4pfd/p_3 + i_3p_4/p_3`
-   * - :math:`i_1`
-     - :math:`f_2pfd/p_2 + f_3pfd/p_2 + f_4pfd/p_2 + 0.025(p_1 - 40.0pfd)/p_2`
-   * - :math:`i_2`
-     - :math:`-d_2p_2/p_3 - d_3 - d_4p_4/p_3 - f_2pfd/p_3 + 0.00357142857142857(-7.0p_1 + 4.0p_2 + 280.0pfd)/p_3`
-   * - :math:`d_1`
-     - :math:`-d_2p_2/p_1 - d_3p_3/p_1 - d_4p_4/p_1 + pfd/p_1`
-   * - :math:`f_1`
-     - :math:`-f_2 - f_3 - f_4 + 1.0`
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - d2*p2/p3 + f2*pfd/p3 + f4*pfd/p3 - i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3 - 280.0*pfd)/p3
+   * - s4
+     - -d4 - i3 + 1.0
+   * - r2
+     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*pfd)/p1
+   * - r3
+     - -d2 - f2*pfd/p2 - f3*pfd/p2 - f4*pfd/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p2
+   * - r4
+     - d4*p4/p3 - f4*pfd/p3 + i3*p4/p3
+   * - i1
+     - f2*pfd/p2 + f3*pfd/p2 + f4*pfd/p2 + 0.025*(p1 - 40.0*pfd)/p2
+   * - i2
+     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*pfd/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p3
+   * - d1
+     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + pfd/p1
+   * - f1
+     - -f2 - f3 - f4 + 1.0
+
 
 Solving in terms of :math:`dur\_cat3`, we get:
 
@@ -604,30 +605,30 @@ Solving in terms of :math:`dur\_cat3`, we get:
 
    * - Variable
      - Value
-   * - :math:`s_1`
-     - :math:`0.975`
-   * - :math:`s_2`
-     - :math:`0.985714285714286`
-   * - :math:`s_3`
-     - :math:`(dur\_cat3 - 1.0)/dur_cat3`
-   * - :math:`s_4`
-     - :math:`-d_2p_2/p_4 - d_4 - f_2pfd/p_4 - f_4pfd/p_4 + 0.00357142857142857(-7.0dur\_cat3p_1 + 4.0dur\_cat3p_2 + 280.0dur\_cat3p_4 + 280.0dur\_cat3pfd - 280.0p_3)/(dur\_cat3p_4)`
-   * - :math:`r_2`
-     - :math:`d_2p_2/p_1 + d_3p_3/p_1 + d_4p_4/p_1 + 0.025(p_1 - 40.0pfd)/p_1`
-   * - :math:`r_3`
-     - :math:`-d_2 - f_2pfd/p_2 - f_3pfd/p_2 - f_4pfd/p_2 + 0.00357142857142857(-7.0p_1 + 4.0p_2 + 280.0pfd)/p_2`
-   * - :math:`r_4`
-     - :math:`d_2p_2/p_3 + d_4p_4/p_3 + f_2pfd/p_3 + 0.00357142857142857(7.0dur\_cat3p_1 - 4.0dur\_cat3p_2 - 280.0dur\_cat3pfd + 280.0p_3)/(dur\_cat3p_3)`
-   * - :math:`i_1`
-     - :math:`f_2pfd/p_2 + f_3pfd/p_2 + f_4pfd/p_2 + 0.025(p_1 - 40.0pfd)/p_2`
-   * - :math:`i_2`
-     - :math:`-d_2p_2/p_3 - d_3 - d_4p_4/p_3 - f_2pfd/p_3 + 0.00357142857142857(-7.0p_1 + 4.0p_2 + 280.0pfd)/p_3`
-   * - :math:`i_3`
-     - :math:`d_2p_2/p_4 + f_2pfd/p_4 + f_4pfd/p_4 + 0.00357142857142857(7.0dur\_cat3p_1 - 4.0dur\_cat3p_2 - 280.0dur\_cat3pfd + 280.0p_3)/(dur\_cat3p_4)`
-   * - :math:`d_1`
-     - :math:`-d_2p_2/p_1 - d_3p_3/p_1 - d_4p_4/p_1 + pfd/p_1`
-   * - :math:`f_1`
-     - :math:`-f_2 - f_3 - f_4 + 1.0`
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - (dur_cat3 - 1.0)/dur_cat3
+   * - s4
+     - -d2*p2/p4 - d4 - f2*pfd/p4 - f4*pfd/p4 + 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 + 280.0*dur_cat3*pfd - 280.0*p3)/(dur_cat3*p4)
+   * - r2
+     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*pfd)/p1
+   * - r3
+     - -d2 - f2*pfd/p2 - f3*pfd/p2 - f4*pfd/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p2
+   * - r4
+     - d2*p2/p3 + d4*p4/p3 + f2*pfd/p3 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*pfd + 280.0*p3)/(dur_cat3*p3)
+   * - i1
+     - f2*pfd/p2 + f3*pfd/p2 + f4*pfd/p2 + 0.025*(p1 - 40.0*pfd)/p2
+   * - i2
+     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*pfd/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p3
+   * - i3
+     - d2*p2/p4 + f2*pfd/p4 + f4*pfd/p4 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*pfd + 280.0*p3)/(dur_cat3*p4)
+   * - d1
+     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + pfd/p1
+   * - f1
+     - -f2 - f3 - f4 + 1.0
 
 
 The code used to solve this system of equations is here:
