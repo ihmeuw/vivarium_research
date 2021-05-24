@@ -190,6 +190,14 @@ that reverse causality could not be excluded.**
      - Mortality (GBD YLLs)
      -
 
+.. note::
+
+  There are 12 causes affected by LBWSG in GBD 2019, whereas GBD 2017 included
+  15 affected causes. The only difference is that meningitis (c332) had four
+  subcauses in GBD 2017 (c333, c334, c335, c336, corresponding to different
+  etiologies), whereas in GBD 2019, c332 is the most detailed cause, and the
+  subcauses have been removed.
+
 Restrictions
 ++++++++++++
 
