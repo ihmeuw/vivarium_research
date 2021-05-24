@@ -101,7 +101,8 @@ mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
   refers to location-specific mortality risks, the relative risks in GBD 2019
   are the same for all locations. Pulling LBWSG RR's with ``get_draws`` for any
   location returns RR's with location_id = 1 (Global), and they are stratified
-  by year/age_group/sex.
+  by year/age_group/sex. If we need clarification on exactly how the relative
+  risks were calculated, we should consult the GBD modelers.
 
 Affected Outcomes
 +++++++++++++++++
@@ -222,10 +223,10 @@ Restrictions
 
 .. note::
 
-  GBD 2019 attributes 100% of the DALYs due to Neonatal Preterm Birth to the
-  LBWSG risk factor. In particular, the attribution includes YLDs as well as
-  YLLs, and the age restrictions for the LBWSG-attributale DALYs are the same as
-  the age restrictions for Neonatal Preterm Birth.
+  GBD attributes 100% of the DALYs due to Neonatal Preterm Birth to the LBWSG
+  risk factor. In particular, the attribution includes YLDs as well as YLLs, and
+  the age restrictions for the LBWSG-attributable DALYs are the same as the age
+  restrictions for Neonatal Preterm Birth.
 
   * **YLLs due to Neonatal preterm birth**, 100% attributable to LBWSG:
 
