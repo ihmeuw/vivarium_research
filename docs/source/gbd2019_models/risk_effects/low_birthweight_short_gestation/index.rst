@@ -262,6 +262,12 @@ Vivarium Modeling Strategy
 
 	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
+Interpolation of Relative Risks
++++++++++++++++++++++++++++++++
+
+Affected Outcomes
++++++++++++++++++
+
 .. todo::
 
   List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
