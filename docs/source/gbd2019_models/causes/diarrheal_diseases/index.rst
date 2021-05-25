@@ -86,4 +86,18 @@ Cause Model Diagram
 
 S: **S**\ usceptible to diarrheal diseases
 
-I: **I**\ nfected and currently experiencing a diarrheal diseas
+I: **I**\ nfected and currently experiencing a diarrheal disease bout
+
+
+Data Description
+----------------
+
+
+
+Validation Criteria
+-------------------
+
+
+References
+----------
+
