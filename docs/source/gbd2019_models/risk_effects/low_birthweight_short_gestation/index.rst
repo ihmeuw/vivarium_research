@@ -265,6 +265,27 @@ Vivarium Modeling Strategy
 Interpolation of Relative Risks
 +++++++++++++++++++++++++++++++
 
+GBD models the relative risk for all-cause mortality on each 500g and 2wk
+category of birthweight (BW) and gestational age (GA). Thus, if we assume a
+constant relative risk on each rectangular LBWSG category, the relative risk
+estimates define a piecewise constant function on the union of the LBWSG
+categories, which is a subset of the GAxBW rectangle :math:`[0,42\text{wk}]
+\times [0,4500\text{g}]`. This relative risk function is discontinuous,
+jumping from one value to another at the rectangle boundaries between the LBWSG
+categories (i.e. when GA is a multiple of 2 or BW is a multiple of 500).
+
+We are interested in coming up with a smooth (or at least continuous) risk
+surface that interpolates between the relative risks estimated by GBD. The main
+reasons for doing so are:
+
+- With piecewise constant RRs, any intervention that has an effect on
+  birthweight or gestational age will only affect simulants that are near the
+  boundary of one of the LBWSG categories. If we can create a continuously
+  varying RR function instead, then every simulant will have the opportunity to
+  get the effect of the intervention.
+
+- A continuously varying RR function probably better matches reality.
+
 Affected Outcomes
 +++++++++++++++++
 
