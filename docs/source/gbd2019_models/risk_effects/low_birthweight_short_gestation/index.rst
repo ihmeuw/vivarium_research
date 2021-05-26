@@ -63,9 +63,16 @@ category of birthweight and gestational age.**
 
 .. note::
 
-  The risk appendix's description of 2-week age bins is not totally accurate;
-  there are two exceptions:
+  The risk appendix's description of 2-week age bins is not totally accurate
+  --- there are two exceptions:
 
+  - 2 of the 58 categories (cat2 and cat8) have an age range of 0-24 weeks.
+
+  - 14 of the 58 categories have a 1-week age range, either 36-37 weeks or 37-38 weeks, because 37 weeks
+    is the usual cutoff for defining "preterm birth."
+
+  For simplicity, we will generally refer to "500g and 2wk categories," with the understanding that there are some exceptions.
+..
   - There are two 1-week age bins, 36-37 weeks and 37-38 weeks, because 37 weeks
     is the usual cutoff for defining "preterm birth." 14 of the 58 LBWSG
     categories have an age window of 1 week: cat24, cat25, cat35, cat36, cat40,
@@ -278,7 +285,7 @@ Vivarium Modeling Strategy
 
 	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
-Interpolation of LBwSG Relative Risks
+Interpolation of LBWSG Relative Risks
 +++++++++++++++++++++++++++++++++++++
 
 The GBD LBWSG modelers estimated the relative risk for all-cause mortality on
@@ -322,19 +329,19 @@ then *interpolating the extrapolated values* to the full rectangular GAxBW
 domain. Here is a summary of the procedure Nathaniel used to interpolate the
 LBWSG RRs for the large-scale food fortification project in 2021.
 
-1.  **Starting assumption:** We will assume that the relative risk
+1.  **Start at category midpoints:** We will assume that the relative risk
     at the *midpoint* of each
     rectangular LBWSG category is equal to the relative risk for that category
     estimated by GBD.
 
-2.  **Preprocessing step:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
+2.  **Take logarithms:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
     the TMREL up to more than 1600 in the highest risk category), we will do
     the interpolation in log space and then exponentiate the results.
     Thus we start by computing :math:`\log(\mathit{RR})`, where :math:`\mathit{RR}` denotes the relative risk function defined at the LBWSG category midpoints, and :math:`\log` denotes the natural logarithm.
 
-3.  **Extrapolation step:** Use `nearest-neighbor interpolation`_ to extrapolate the logarithms of the relative risks to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
+3.  **Extrapolate to a rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate the logarithms of the relative risks to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
 
-4.  **Interpolation step:** Use `bilinear interpolation`_ to fill in all values
+4.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
     of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
     :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
     extrapolated values of :math:`\log(\mathit{RR})` on the grid in the previous
@@ -344,6 +351,10 @@ LBWSG RRs for the large-scale food fortification project in 2021.
     gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
     constants), so each "piece" of :math:`f` is linear in each variable
     separately and is quadratic as a function of two variables.
+
+5.  **Exponentiate:**
+
+6.  **Reset RRs in TMREL categories to 1:**
 
 .. _convex set: https://en.wikipedia.org/wiki/Convex_set
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
