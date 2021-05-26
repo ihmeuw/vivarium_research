@@ -307,8 +307,8 @@ risk surface.
 .. _piecewise constant function: https://mathworld.wolfram.com/PiecewiseConstantFunction.html
 .. _continuous: https://en.wikipedia.org/wiki/Continuous_function
 
-Summary of Strategy for Interpolating Relative Risks
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Strategy for Interpolating Relative Risks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Since the region on which the GBD RRs are defined is `non-convex <convex set_>`_,
 interpolating between the RRs is not completely straightforward. Using SciPy's interpolation package, it required a two-step process of
@@ -317,20 +317,70 @@ then *interpolating the extrapolated values* to the full rectangular GAxBW
 domain. Here is a summary of the procedure Nathaniel used to interpolate the
 LBWSG RRs for the large-scale food fortification project in 2021.
 
-1.  **Start at category midpoints:** We will assume that the relative risk
+#.  **Start at category midpoints:** We will assume that the relative risk
     at the *midpoint* of each
     rectangular LBWSG category is equal to the relative risk for that category
     as estimated by GBD.
     That is, if :math:`\mathit{RR}_\text{cat}` is the GBD relative risk for the LBWSG category ':math:`\text{cat}`', and the midpoint of :math:`\text{cat}` is :math:`(x_\text{cat}, y_\text{cat})`, we will assume that :math:`\mathit{RR}(x_\text{cat},y_\text{cat}) = \mathit{RR}_\text{cat}`, where :math:`\mathit{RR}(x,y)` denotes the relative risk at gestational age :math:`x` and birthweight :math:`y`. Our goal is to assign an interpolated value to :math:`\mathit{RR}(x,y)` for all :math:`(x,y)\in [0,42\text{wk}] \times [0,4500\text{g}]`, starting with the values :math:`\mathit{RR}(x_\text{cat},y_\text{cat})` at the 58 category midpoints.
 
-2.  **Take logarithms:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
+#.  **Take logarithms:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
     the TMREL up to more than 1600 in the highest risk category in some draws), we will do
     the interpolation in log space to keep everything at a reasonable scale, and then exponentiate the results.
     Thus, we compute :math:`\log\bigl(\mathit{RR}(x_\text{cat}, y_\text{cat})\bigr)` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
 
-3.  **Extrapolate to a rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
+#.  **Define a complete rectangular grid:** In order to get SciPy's
 
-4.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
+    interpolation functions to work well, it helps to have the initial data
+    points defined on a rectangular grid. The LBWSG category midpoints
+    :math:`(x_\text{cat}, y_\text{cat})` define a *partial* rectangular grid, so
+    we would like to extrapolate the values of log(RR) to the "missing" points
+    on the full grid spanned by these midpoints, using a simple interpolation
+    strategy such as nearest-neighbor. In addition to the midpoints, we will
+    also include grid points on the GAxBW rectangle's boundary to guarantee that
+    our interpolation will cover the entire domain defined by the LBWSG
+    categories.
+
+    We will use the rectangular grid as a "stepping stone" to actual interpolation we want to do.
+
+    To define the rectangular grid, we first define sequences :math:`x_i` and :math:`y_j` of the unique category midpoints plus the boundary values for GA and BW:
+
+    .. math::
+
+      \text{bw_grid} &=
+        \{ x : (x,y) \text{ is a LBWSG category midpoint or }
+        x\in \{0,42\}\}\\
+      \text{ga_grid} &=
+        \{ y : (x,y) \text{ is a LBWSG category midpoint or }
+        y\in \{0,4500\}\}\\
+      \text{bw_grid} &=
+        \{ x : x = x_\text{cat} \text{ for some LBWSG category cat or }
+        x\in \{0,42\}\}\\
+      \text{bw_grid} &=
+        \{ x_\text{cat} : \text{cat is a LBWSG category}\}
+        \cup \{0,42\}\\
+
+    and define :math:`G = \text{bw_grid} \times \text{ga_grid}`
+
+    More explicitly, we can list the 13 points in :math:`\text{bw_grid}` and 11 points in :math:`\text{ga_grid}` in increasing order and define :math:`G` as the set of 143 pairs coming from these two sets:
+
+    .. math::
+      :nowrap:
+
+      \begin{alignat*}{7}
+      x_0&=0,\, &x_1&=12,\, &x_2&=25, &&\ldots,\,
+        &x_9&=37.5,\, &x_{10}&=39,\,
+        &&x_{11}=41, x_{12}=42\\
+      y_0&=0,\, &y_1&=250,\, &y_2&=750,\, &&\ldots,\,
+      &y_9&=4250,\, &y_{10}&=4500\, &&
+      %x_0 &=0, x_1=12, x_2=25, \ldots, x_9=37.5, x_{10}=39, x_{11}=41, x_{12}=42\\
+      %y_0 &=0, y_1=250, y_2=750, \ldots, y_9=4250, y_{10}=4500,
+      \end{alignat*}
+
+    and define a rectangular grid of 143 points by :math:`G = \{(x_i,y_j) : 0\le i\le 12, 0\le j\le 10\}`.
+
+#.  **Extrapolate to the rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
+
+#.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
     of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
     :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
     extrapolated values of :math:`\log(\mathit{RR})` on the grid in the previous
@@ -341,13 +391,16 @@ LBWSG RRs for the large-scale food fortification project in 2021.
     constants), so each "piece" of :math:`f` is linear in each variable
     separately and is quadratic as a function of two variables.
 
-5.  **Exponentiate:**
+#.  **Exponentiate:**
 
-6.  **Reset RRs in TMREL categories to 1:**
+#.  **Reset RRs in TMREL categories to 1:**
 
 .. _convex set: https://en.wikipedia.org/wiki/Convex_set
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 .. _bilinear interpolation: https://en.wikipedia.org/wiki/Bilinear_interpolation
+
+Implementation of RR Interpolation in SciPy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
