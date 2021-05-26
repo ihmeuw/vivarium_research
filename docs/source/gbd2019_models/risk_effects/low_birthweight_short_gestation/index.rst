@@ -265,7 +265,7 @@ Vivarium Modeling Strategy
 Interpolation of Relative Risks
 +++++++++++++++++++++++++++++++
 
-The GBD modelers of LBWSG estimate the relative risk for all-cause mortality on
+The GBD LBWSG modelers estimate the relative risk for all-cause mortality on
 each 500g and 2wk category of birthweight (BW) and gestational age (GA). If we
 assume a constant relative risk on each rectangular LBWSG category, these
 relative risk estimates define a `piecewise constant function`_ on the union of
@@ -282,26 +282,57 @@ their newborns) can only have an effect on a small percentage of our simulants,
 namely those whose birthweight or gestational age is near the boundary of one of
 the LBWSG categories.
 
-Thus, we are interested in coming up with a smooth (or `continuous`_),
+To correct for this deficiency, we are interested in coming up with a smooth (or `continuous`_),
 continuously varying risk surface that interpolates between the relative risks
 estimated by GBD. In addition to (probably) being a better model of reality,
 this would allow every simulant the opportunity to get the effect of an
-intervention that affects birthweight or gestational age.
-
-We are interested in coming up with a smooth (or `continuous`_) risk
-surface that interpolates between the relative risks estimated by GBD. The main
-reasons for doing so are:
-
-- A continuously varying RR function probably better matches reality.
-
-- With piecewise constant RRs, any intervention that has an effect on
-  birthweight or gestational age can only affect simulants whose birthweight or
-  gestational age lies near the boundary of one of the LBWSG categories. If we
-  can create a continuously varying RR function instead, then every simulant
-  will have the opportunity to get the effect of the intervention.
+intervention that affects birthweight or gestational age. The practical effect
+of this interpolation will be that every treated simulant will experience a
+small change in relative risk, vs. a small proportion of treated simulants
+experiencing a larger change in relative risk if we used the piecewise constant
+risk surface.
 
 .. _piecewise constant function: https://mathworld.wolfram.com/PiecewiseConstantFunction.html
 .. _continuous: https://en.wikipedia.org/wiki/Continuous_function
+
+Summary of Strategy for Interpolating Relative Risks
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Since the region on which the GBD RRs are defined is `nonconvex <convex set_>`_,
+interpolating between them is not completely straightforward using standard
+tools. Using SciPy's interpolation package, it required a two-step process of
+first *extrapolating* the relative risks to a complete rectangular grid, and
+then *interpolating the extrapolated values* to the full rectangular GAxBW
+domain. Here is a summary of the procedure Nathaniel used to interpolate the
+LBWSG RRs for the large-scale food fortification project in 2021.
+
+1.  **Starting assumption:** We will assume that the relative risk
+    at the midpoint of each
+    rectangular LBWSG category is equal to the relative risk for that category
+    estimated by GBD.
+
+2.  **Preprocessing step:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
+    the TMREL up to more than 1600 in the highest risk category), we will do
+    the interpolation in log space and then exponentiate the results.
+    .. So first we compute the logarithms of the relative risks.
+    Thus we start by computing :math:`\log(\mathit{RR})`, where :math:`\mathit{RR}` denotes the relative risk function defined at the LBWSG category midpoints, and :math:`\log` denotes the natural logarithm.
+
+3.  **Extrapolation step:** Use `nearest-neighbor interpolation`_ to extrapolate the logarithms of the relative risks to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
+
+4.  **Interpolation step:** Use `bilinear interpolation`_ to fill in all values
+    of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
+    :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
+    extrapolated values of :math:`\log(\mathit{RR})` on the grid in the previous
+    step. The interpolating function :math:`f` is continuous and piecewise
+    bilinear. On each rectangle whose corners are neighboring grid points, it
+    has has the form :math:`f(x,y) = a + bx + cy + dxy` (where :math:`x` is
+    gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
+    constants), so each "piece" of :math:`f` is linear in each variable
+    separately and is quadratic as a function of two variables.
+
+.. _convex set: https://en.wikipedia.org/wiki/Convex_set
+.. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
+.. _bilinear interpolation: https://en.wikipedia.org/wiki/Bilinear_interpolation
 
 Affected Outcomes
 +++++++++++++++++
