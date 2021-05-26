@@ -303,6 +303,8 @@ where
  - ux is untreated
  - C is treatment coverage proportion
 
+
+
 We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
 for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
 find values from the literature with which to update this.
@@ -515,24 +517,24 @@ T =
 :math:`π_{T}` = 
 
 +----+----+----+----+----+
-| p4 | p3 | p2 | p1 | pfd|
+| p4 | p3 | p2 | p1 | p0 |
 +----+----+----+----+----+
 
 :math:`π_{T}` is the eigenvector at equilibrium
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`pfd`, which will equal the number of people who die in a timestep
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of people who die in a timestep
 
 .. todo:: add info on the the concept of the life/death box, and how 'f' isn't really fertility
 
 Solving a)
 
-  1)  :math:`p_4s_4 + p_3r_4 + pfdf_4 = p_4` 
-  2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 + pfdf_3 = p_3`
-  3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 + pfdf_2 = p_2`
-  4)  :math:`p_2i_1 + p_1xs_1 + pfdf_1 = p_1`
-  5)  :math:`p_4d_4 + p_3d_3 + p_2d_2 + p_1d_1=pfd`
+  1)  :math:`p_4s_4 + p_3r_4 + p_0f_4 = p_4` 
+  2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 + p_0f_3 = p_3`
+  3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 + p_0f_2 = p_2`
+  4)  :math:`p_2i_1 + p_1xs_1 + p_0f_1 = p_1`
+  5)  :math:`p_4d_4 + p_3d_3 + p_2d_2 + p_1d_1=p_0`
 
 Rows of the P matrix sums to 1
 
@@ -557,10 +559,15 @@ where
  - ux is untreated
  - C is treatment coverage proportion
 
+
+.. todo::
+    Check with Chris Troeger about the duration of cat3. Also see if Gates 
+    Foundation has a way to calculate this from their KI database.
+
 We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
 for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
 find values from the literature with which to update this. Note that the below
-equations also contain unknowns for :math:`d1, d2, d3, d4, f1, f2, f3, f4, pfd`; 
+equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`; 
 however, we are able to calculate these values from GBD data per age/sex.
 
 .. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
@@ -578,21 +585,21 @@ Solving in terms of :math:`i_3`, we get:
    * - s2
      - 0.985714285714286
    * - s3
-     - d2*p2/p3 + f2*pfd/p3 + f4*pfd/p3 - i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3 - 280.0*pfd)/p3
+     - d2*p2/p3 + f2*p0/p3 + f4*p0/p3 - i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3 - 280.0*p0)/p3
    * - s4
      - -d4 - i3 + 1.0
    * - r2
-     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*pfd)/p1
+     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*p0)/p1
    * - r3
-     - -d2 - f2*pfd/p2 - f3*pfd/p2 - f4*pfd/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p2
+     - -d2 - f2*p0/p2 - f3*p0/p2 - f4*p0/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p2
    * - r4
-     - d4*p4/p3 - f4*pfd/p3 + i3*p4/p3
+     - d4*p4/p3 - f4*p0/p3 + i3*p4/p3
    * - i1
-     - f2*pfd/p2 + f3*pfd/p2 + f4*pfd/p2 + 0.025*(p1 - 40.0*pfd)/p2
+     - f2*p0/p2 + f3*p0/p2 + f4*p0/p2 + 0.025*(p1 - 40.0*p0)/p2
    * - i2
-     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*pfd/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p3
+     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*p0/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p3
    * - d1
-     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + pfd/p1
+     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + p0/p1
    * - f1
      - -f2 - f3 - f4 + 1.0
 
@@ -612,21 +619,21 @@ Solving in terms of :math:`dur\_cat3`, we get:
    * - s3
      - (dur_cat3 - 1.0)/dur_cat3
    * - s4
-     - -d2*p2/p4 - d4 - f2*pfd/p4 - f4*pfd/p4 + 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 + 280.0*dur_cat3*pfd - 280.0*p3)/(dur_cat3*p4)
+     - -d2*p2/p4 - d4 - f2*p0/p4 - f4*p0/p4 + 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 + 280.0*dur_cat3*p0 - 280.0*p3)/(dur_cat3*p4)
    * - r2
-     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*pfd)/p1
+     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*p0)/p1
    * - r3
-     - -d2 - f2*pfd/p2 - f3*pfd/p2 - f4*pfd/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p2
+     - -d2 - f2*p0/p2 - f3*p0/p2 - f4*p0/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p2
    * - r4
-     - d2*p2/p3 + d4*p4/p3 + f2*pfd/p3 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*pfd + 280.0*p3)/(dur_cat3*p3)
+     - d2*p2/p3 + d4*p4/p3 + f2*p0/p3 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*p0 + 280.0*p3)/(dur_cat3*p3)
    * - i1
-     - f2*pfd/p2 + f3*pfd/p2 + f4*pfd/p2 + 0.025*(p1 - 40.0*pfd)/p2
+     - f2*p0/p2 + f3*p0/p2 + f4*p0/p2 + 0.025*(p1 - 40.0*p0)/p2
    * - i2
-     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*pfd/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*pfd)/p3
+     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*p0/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p3
    * - i3
-     - d2*p2/p4 + f2*pfd/p4 + f4*pfd/p4 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*pfd + 280.0*p3)/(dur_cat3*p4)
+     - d2*p2/p4 + f2*p0/p4 + f4*p0/p4 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*p0 + 280.0*p3)/(dur_cat3*p4)
    * - d1
-     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + pfd/p1
+     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + p0/p1
    * - f1
      - -f2 - f3 - f4 + 1.0
 
@@ -647,7 +654,7 @@ The code used to solve this system of equations is here:
   d4, d3, d2, d1, sld = symbols('d4 d3 d2 d1 sld')
   f4, f3, f2, f1 = symbols('f4 f3 f2 f1')
 
-  p4, p3, p2, p1, pfd = symbols('p4 p3 p2 p1 pfd')
+  p4, p3, p2, p1, p0 = symbols('p4 p3 p2 p1 p0')
 
   dur_cat3 = sym.Symbol('dur_cat3')  
 
@@ -666,20 +673,20 @@ The code used to solve this system of equations is here:
 
 
   # # assuming equilibrium:
-  # p4*s4 + p3*r4 + pfd*f4 = p4
-  eq1 = [{s4:p4, r4:p3, f4:pfd}, p4]
+  # p4*s4 + p3*r4 + p0*f4 = p4
+  eq1 = [{s4:p4, r4:p3, f4:p0}, p4]
 
-  # p4*i3 + p3*s3 + p2*r3 + pfd*f3 = p3
-  eq2 = [{i3:p4, s3:p3, r3:p2, f3:pfd}, p3]
+  # p4*i3 + p3*s3 + p2*r3 + p0*f3 = p3
+  eq2 = [{i3:p4, s3:p3, r3:p2, f3:p0}, p3]
 
-  # p3*i2 + p2*s2 + p1*r2 + pfd*f2 = p2
-  eq3 = [{i2:p3, s2:p2, r2:p1, f2:pfd}, p2]
+  # p3*i2 + p2*s2 + p1*r2 + p0*f2 = p2
+  eq3 = [{i2:p3, s2:p2, r2:p1, f2:p0}, p2]
 
-  # p2*i1 + p1*s1 + pfd*f1 = p1
-  eq4 = [{i1:p2, s1:p1, f1:pfd}, p1]
+  # p2*i1 + p1*s1 + p0*f1 = p1
+  eq4 = [{i1:p2, s1:p1, f1:p0}, p1]
 
-  # p4*d4 + p3*d3 + p2*d2 + p1*d1 + pfd*sld = pfd
-  eq5 = [{d4:p4, d3:p3, d2:p2, d1:p1}, pfd]
+  # p4*d4 + p3*d3 + p2*d2 + p1*d1 + p0*sld = p0
+  eq5 = [{d4:p4, d3:p3, d2:p2, d1:p1}, p0]
 
 
   # # rows sum to one:
