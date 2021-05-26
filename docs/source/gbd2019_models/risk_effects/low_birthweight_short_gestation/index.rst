@@ -72,17 +72,6 @@ category of birthweight and gestational age.**
     is the usual cutoff for defining "preterm birth."
 
   For simplicity, we will generally refer to "500g and 2wk categories," with the understanding that there are some exceptions.
-..
-  - There are two 1-week age bins, 36-37 weeks and 37-38 weeks, because 37 weeks
-    is the usual cutoff for defining "preterm birth." 14 of the 58 LBWSG
-    categories have an age window of 1 week: cat24, cat25, cat35, cat36, cat40,
-    cat42, cat45, cat46, cat47, cat48, cat49, cat50, cat106, cat124.
-
-  - There are two low-prevalence, high-risk categories (cat2 and cat8) where
-    the age range is 0-24 weeks.
-
-  Despite the non-uniformity in gestational age cutoffs, for simplicity this
-  documentation page will generally refer to "500g and 2wk categories," with the understanding that some categories span more or less than 2 weeks.
 
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
@@ -321,9 +310,8 @@ risk surface.
 Summary of Strategy for Interpolating Relative Risks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Since the region on which the GBD RRs are defined is `nonconvex <convex set_>`_,
-interpolating between the RRs is not completely straightforward using standard
-tools. Using SciPy's interpolation package, it required a two-step process of
+Since the region on which the GBD RRs are defined is `non-convex <convex set_>`_,
+interpolating between the RRs is not completely straightforward. Using SciPy's interpolation package, it required a two-step process of
 first *extrapolating* the relative risks to a complete rectangular grid, and
 then *interpolating the extrapolated values* to the full rectangular GAxBW
 domain. Here is a summary of the procedure Nathaniel used to interpolate the
@@ -332,14 +320,15 @@ LBWSG RRs for the large-scale food fortification project in 2021.
 1.  **Start at category midpoints:** We will assume that the relative risk
     at the *midpoint* of each
     rectangular LBWSG category is equal to the relative risk for that category
-    estimated by GBD.
+    as estimated by GBD.
+    That is, if :math:`\mathit{RR}_\text{cat}` is the GBD relative risk for the LBWSG category ':math:`\text{cat}`', and the midpoint of :math:`\text{cat}` is :math:`(x_\text{cat}, y_\text{cat})`, we will assume that :math:`\mathit{RR}(x_\text{cat},y_\text{cat}) = \mathit{RR}_\text{cat}`, where :math:`\mathit{RR}(x,y)` denotes the relative risk at gestational age :math:`x` and birthweight :math:`y`. Our goal is to assign an interpolated value to :math:`\mathit{RR}(x,y)` for all :math:`(x,y)\in [0,42\text{wk}] \times [0,4500\text{g}]`, starting with the values :math:`\mathit{RR}(x_\text{cat},y_\text{cat})` at the 58 category midpoints.
 
 2.  **Take logarithms:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
-    the TMREL up to more than 1600 in the highest risk category), we will do
-    the interpolation in log space and then exponentiate the results.
-    Thus we start by computing :math:`\log(\mathit{RR})`, where :math:`\mathit{RR}` denotes the relative risk function defined at the LBWSG category midpoints, and :math:`\log` denotes the natural logarithm.
+    the TMREL up to more than 1600 in the highest risk category in some draws), we will do
+    the interpolation in log space to keep everything at a reasonable scale, and then exponentiate the results.
+    Thus, we compute :math:`\log\bigl(\mathit{RR}(x_\text{cat}, y_\text{cat})\bigr)` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
 
-3.  **Extrapolate to a rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate the logarithms of the relative risks to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
+3.  **Extrapolate to a rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
 
 4.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
     of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
