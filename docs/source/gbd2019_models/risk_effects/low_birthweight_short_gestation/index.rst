@@ -61,6 +61,22 @@ USA analyses were sex-specific.
 category of birthweight and gestational age.**
 [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
 
+.. note::
+
+  The risk appendix's description of 2-week age bins is not totally accurate;
+  there are two exceptions:
+
+  - There are two 1-week age bins, 36-37 weeks and 37-38 weeks, because 37 weeks
+    is the usual cutoff for defining "preterm birth." 14 of the 58 LBWSG
+    categories have an age window of 1 week: cat24, cat25, cat35, cat36, cat40,
+    cat42, cat45, cat46, cat47, cat48, cat49, cat50, cat106, cat124.
+
+  - There are two low-prevalence, high-risk categories (cat2 and cat8) where
+    the age range is 0-24 weeks.
+
+  Despite the non-uniformity in gestational age cutoffs, for simplicity this
+  documentation page will generally refer to "500g and 2wk categories," with the understanding that some categories span more or less than 2 weeks.
+
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
 
@@ -104,8 +120,8 @@ mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
   by year/age_group/sex. If we need clarification on exactly how the relative
   risks were calculated, we should consult the GBD modelers.
 
-Affected Outcomes
-+++++++++++++++++
+Affected Outcomes in GBD 2019
++++++++++++++++++++++++++++++
 
 The available data for deriving relative risk was only for *all-cause mortality*
 rather than for cause-specific outcomes. The exception was the USA linked infant
@@ -262,10 +278,10 @@ Vivarium Modeling Strategy
 
 	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
 
-Interpolation of Relative Risks
-+++++++++++++++++++++++++++++++
+Interpolation of LBwSG Relative Risks
++++++++++++++++++++++++++++++++++++++
 
-The GBD LBWSG modelers estimate the relative risk for all-cause mortality on
+The GBD LBWSG modelers estimated the relative risk for all-cause mortality on
 each 500g and 2wk category of birthweight (BW) and gestational age (GA). If we
 assume a constant relative risk on each rectangular LBWSG category, these
 relative risk estimates define a `piecewise constant function`_ on the union of
@@ -299,7 +315,7 @@ Summary of Strategy for Interpolating Relative Risks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Since the region on which the GBD RRs are defined is `nonconvex <convex set_>`_,
-interpolating between them is not completely straightforward using standard
+interpolating between the RRs is not completely straightforward using standard
 tools. Using SciPy's interpolation package, it required a two-step process of
 first *extrapolating* the relative risks to a complete rectangular grid, and
 then *interpolating the extrapolated values* to the full rectangular GAxBW
@@ -307,14 +323,13 @@ domain. Here is a summary of the procedure Nathaniel used to interpolate the
 LBWSG RRs for the large-scale food fortification project in 2021.
 
 1.  **Starting assumption:** We will assume that the relative risk
-    at the midpoint of each
+    at the *midpoint* of each
     rectangular LBWSG category is equal to the relative risk for that category
     estimated by GBD.
 
 2.  **Preprocessing step:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
     the TMREL up to more than 1600 in the highest risk category), we will do
     the interpolation in log space and then exponentiate the results.
-    .. So first we compute the logarithms of the relative risks.
     Thus we start by computing :math:`\log(\mathit{RR})`, where :math:`\mathit{RR}` denotes the relative risk function defined at the LBWSG category midpoints, and :math:`\log` denotes the natural logarithm.
 
 3.  **Extrapolation step:** Use `nearest-neighbor interpolation`_ to extrapolate the logarithms of the relative risks to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
@@ -334,8 +349,8 @@ LBWSG RRs for the large-scale food fortification project in 2021.
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 .. _bilinear interpolation: https://en.wikipedia.org/wiki/Bilinear_interpolation
 
-Affected Outcomes
-+++++++++++++++++
+Affected Outcomes in Vivarium
++++++++++++++++++++++++++++++
 
 .. todo::
 
