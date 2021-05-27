@@ -329,39 +329,32 @@ LBWSG RRs for the large-scale food fortification project in 2021.
     Thus, we compute :math:`\log\bigl(\mathit{RR}(x_\text{cat}, y_\text{cat})\bigr)` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
 
 #.  **Define a complete rectangular grid:** In order to get SciPy's
-
     interpolation functions to work well, it helps to have the initial data
     points defined on a rectangular grid. The LBWSG category midpoints
     :math:`(x_\text{cat}, y_\text{cat})` define a *partial* rectangular grid, so
     we would like to extrapolate the values of log(RR) to the "missing" points
-    on the full grid spanned by these midpoints, using a simple interpolation
-    strategy such as nearest-neighbor. In addition to the midpoints, we will
+    on the full grid :math:`G` spanned by these midpoints. We will use a simple interpolation
+    strategy (nearest-neighbor) to extrapolate to the grid :math:`G`, then use a more sophisticated method (bilinear interpolation) to fill in values between the grid points. In addition to the midpoints, we will
     also include grid points on the GAxBW rectangle's boundary to guarantee that
     our interpolation will cover the entire domain defined by the LBWSG
     categories.
 
-    We will use the rectangular grid as a "stepping stone" to actual interpolation we want to do.
-
-    To define the rectangular grid, we first define sequences :math:`x_i` and :math:`y_j` of the unique category midpoints plus the boundary values for GA and BW:
+    To define the rectangular grid :math:`G` more precisely, we first take the the unique GA and BW coordinates of the category midpoints plus the boundary values,
 
     .. math::
 
-      \text{bw_grid} &=
-        \{ x : (x,y) \text{ is a LBWSG category midpoint or }
-        x\in \{0,42\}\}\\
       \text{ga_grid} &=
-        \{ y : (x,y) \text{ is a LBWSG category midpoint or }
-        y\in \{0,4500\}\}\\
-      \text{bw_grid} &=
-        \{ x : x = x_\text{cat} \text{ for some LBWSG category cat or }
-        x\in \{0,42\}\}\\
-      \text{bw_grid} &=
         \{ x_\text{cat} : \text{cat is a LBWSG category}\}
         \cup \{0,42\}\\
+      \text{bw_grid} &=
+        \{ y_\text{cat} : \text{cat is a LBWSG category}\}
+        \cup \{0,4500\}
 
-    and define :math:`G = \text{bw_grid} \times \text{ga_grid}`
+    and then define the rectangular grid as the Cartesian product
 
-    More explicitly, we can list the 13 points in :math:`\text{bw_grid}` and 11 points in :math:`\text{ga_grid}` in increasing order and define :math:`G` as the set of 143 pairs coming from these two sets:
+    .. math:: G = \text{ga_grid} \times \text{bw_grid}.
+
+    More explicitly, we can list the 13 :math:`x`-coordinates in :math:`\text{ga_grid}` and 11 :math:`y`-coordinates in :math:`\text{bw_grid}` in increasing order,
 
     .. math::
       :nowrap:
@@ -371,12 +364,15 @@ LBWSG RRs for the large-scale food fortification project in 2021.
         &x_9&=37.5,\, &x_{10}&=39,\,
         &&x_{11}=41, x_{12}=42\\
       y_0&=0,\, &y_1&=250,\, &y_2&=750,\, &&\ldots,\,
-      &y_9&=4250,\, &y_{10}&=4500\, &&
-      %x_0 &=0, x_1=12, x_2=25, \ldots, x_9=37.5, x_{10}=39, x_{11}=41, x_{12}=42\\
-      %y_0 &=0, y_1=250, y_2=750, \ldots, y_9=4250, y_{10}=4500,
+        &y_9&=4250,\, &y_{10}&=4500\,
+        &&
       \end{alignat*}
 
-    and define a rectangular grid of 143 points by :math:`G = \{(x_i,y_j) : 0\le i\le 12, 0\le j\le 10\}`.
+    and then the rectangular grid of 143 points is
+
+    .. math:: G = \{(x_i,y_j) : 0\le i\le 12, 0\le j\le 10\}.
+
+    We can think of the grid :math:`G` as a "stepping stone" on our path to interpolating :math:`\log(\mathit{RR})` on the entire GAxBW rectangle :math:`[0,42\text{wk}] \times [0,4500\text{g}]`.
 
 #.  **Extrapolate to the rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
 
