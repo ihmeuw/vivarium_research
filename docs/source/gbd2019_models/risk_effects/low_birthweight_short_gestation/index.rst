@@ -392,16 +392,23 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
     bilinear. On each rectangle whose corners are neighboring grid points, it
     has has the form
 
-    .. math:: \log(\mathit{RR}(x,y)) = f(x,y) = a + bx + cy + dxy,
+    .. math::
+
+      \log(\mathit{RR}(x,y)) = f(x,y) = a + bx + cy + dxy
+      \quad (x_i\le x\le x_{i+1}, y_j\le y\le y_{j+1}),
 
     where :math:`x` is
     gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
-    constants that depend on the function values at the rectangle's corners, so each "piece" of :math:`f` is linear in :math:`x` and :math:`y`
+    constants that depend on the function values at the rectangle's corners. There are 120 such rectangles indexed by :math:`i` and :math:`j`, and  each such rectangular "piece" of :math:`f` is linear in :math:`x` and :math:`y`
     separately and is quadratic as a function of two variables.
 
 #.  **Exponentiate:** Once we interpolate :math:`f = \log(\mathit{RR})`, recover the relative risks by computing :math:`\mathit{RR}(x,y) = \exp(f(x,y))`. The above interpolation strategy guarantees that the interpolated RRs will remain between the minimum and maximum RR values in GBD.
 
 #.  **Reset RRs in TMREL categories to 1:** Since we assumed that the RR values were equal to the GBD RRs at the *midpoints* of the LBWSG categories, and the interpolated RRs vary continuously, the interpolated RRs in the TMREL categories will be greater than 1 as GA or BW approaches a category of higher relative risk. In order to be consistent with GBD, we reset the RR to 1.0 in each of the four TMREL categories (cat53, cat54, cat55, cat56) after interpolation. This will introduce some discontinuity at the boundaries of the TMREL categories, but that is an acceptable tradeoff for consistency with GBD.
+
+    .. note::
+
+        It may be worth discussing the strategy of resetting the RRs to 1 with the GBD modelers to see if it matches their conception of the TMREL, or if it would actually be better to keep the interpolated RRs even though they are greater than 1 in some regions of the TMREL categories.
 
 .. _convex set: https://en.wikipedia.org/wiki/Convex_set
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
