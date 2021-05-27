@@ -326,7 +326,7 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
 #.  **Take logarithms:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
     the TMREL up to more than 1600 in the highest risk category in some draws), we will do
     the interpolation in log space to keep everything at a reasonable scale, and then exponentiate the results.
-    Thus, we compute :math:`\log\bigl(\mathit{RR}(x_\text{cat}, y_\text{cat})\bigr)` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
+    Thus, we compute :math:`\log(\mathit{RR}(x_\text{cat}, y_\text{cat}))` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
 
 #.  **Define a rectangular grid:** In order to get SciPy's
     interpolation functions to work well, it helps to have the initial data
@@ -375,17 +375,28 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
 
     We can think of the grid :math:`G` as a "stepping stone" on our path to interpolating :math:`\log(\mathit{RR})` on the entire GAxBW rectangle :math:`[0,42\text{wk}] \times [0,4500\text{g}]`.
 
-#.  **Extrapolate to the rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints to all points on a complete rectangular grid. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g).
+#.  **Extrapolate to the rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints :math:`(x_\text{cat}, y_\text{cat})` to all points on the rectangular grid :math:`G`. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` before computing distances since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g). Explicitly,
+
+    - Divide all the GA coordinates of points in :math:`G` by 42, and divide
+      all the BW coordinates of points in :math:`G` by 4500.
+
+    - For each rescaled grid point :math:`(x_i/42, y_i/4500)`, find the
+      nearest rescaled category midpoint :math:`(x_\text{cat}/42,
+      y_\text{cat}/4500)`, and set :math:`\log (\mathit{RR}(x_i,
+      y_j)) = \log(\mathit{RR}(x_\text{cat}, y_\text{cat}))`.
 
 #.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
     of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
     :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
-    extrapolated values of :math:`\log(\mathit{RR})` on the grid in the previous
-    step. The interpolating function :math:`f` is continuous and piecewise
+    extrapolated values of :math:`\log(\mathit{RR})` on the grid :math:`G`. The interpolating function :math:`f = \log(\mathit{RR})` is continuous and piecewise
     bilinear. On each rectangle whose corners are neighboring grid points, it
-    has has the form :math:`f(x,y) = a + bx + cy + dxy` (where :math:`x` is
+    has has the form
+
+    .. math:: \log(\mathit{RR}(x,y)) = f(x,y) = a + bx + cy + dxy,
+
+    where :math:`x` is
     gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
-    constants), so each "piece" of :math:`f` is linear in each variable
+    constants that depend on the function values at the rectangle's corners, so each "piece" of :math:`f` is linear in :math:`x` and :math:`y`
     separately and is quadratic as a function of two variables.
 
 #.  **Exponentiate:**
