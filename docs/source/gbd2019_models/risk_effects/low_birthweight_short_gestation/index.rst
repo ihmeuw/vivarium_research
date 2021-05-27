@@ -314,8 +314,8 @@ Since the region on which the GBD RRs are defined is `non-convex <convex set_>`_
 interpolating between the RRs is not completely straightforward. Using SciPy's interpolation package, it required a two-step process of
 first *extrapolating* the relative risks to a complete rectangular grid, and
 then *interpolating the extrapolated values* to the full rectangular GAxBW
-domain. Here is a summary of the procedure Nathaniel used to interpolate the
-LBWSG RRs for the large-scale food fortification project in 2021.
+domain. Here is a description of the procedure Nathaniel used to interpolate the
+LBWSG RRs for the large-scale food fortification project in March 2021.
 
 #.  **Start at category midpoints:** We will assume that the relative risk
     at the *midpoint* of each
@@ -328,18 +328,19 @@ LBWSG RRs for the large-scale food fortification project in 2021.
     the interpolation in log space to keep everything at a reasonable scale, and then exponentiate the results.
     Thus, we compute :math:`\log\bigl(\mathit{RR}(x_\text{cat}, y_\text{cat})\bigr)` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
 
-#.  **Define a complete rectangular grid:** In order to get SciPy's
+#.  **Define a rectangular grid:** In order to get SciPy's
     interpolation functions to work well, it helps to have the initial data
-    points defined on a rectangular grid. The LBWSG category midpoints
-    :math:`(x_\text{cat}, y_\text{cat})` define a *partial* rectangular grid, so
-    we would like to extrapolate the values of log(RR) to the "missing" points
-    on the full grid :math:`G` spanned by these midpoints. We will use a simple interpolation
-    strategy (nearest-neighbor) to extrapolate to the grid :math:`G`, then use a more sophisticated method (bilinear interpolation) to fill in values between the grid points. In addition to the midpoints, we will
+    points defined on a rectangular grid.
+    The LBWSG category midpoints
+    :math:`(x_\text{cat}, y_\text{cat})` define a *partial* rectangular grid,
+    so our strategy will be to use a simple interpolation method (`nearest-neighbor <nearest-neighbor interpolation_>`_) to extrapolate values of :math:`\log(\mathit{RR})` to the "missing" points
+    on the full grid :math:`G` spanned by the category midpoints, and then use a more sophisticated method (`bilinear interpolation`_) to fill in values of :math:`\log(\mathit{RR})` between the grid points.
+
+    In addition to the category midpoints, we will
     also include grid points on the GAxBW rectangle's boundary to guarantee that
     our interpolation will cover the entire domain defined by the LBWSG
     categories.
-
-    To define the rectangular grid :math:`G` more precisely, we first take the the unique GA and BW coordinates of the category midpoints plus the boundary values,
+    To define the rectangular grid :math:`G` precisely, we first take the the unique GA and BW coordinates of the 58 category midpoints, plus the boundary values,
 
     .. math::
 
@@ -348,9 +349,9 @@ LBWSG RRs for the large-scale food fortification project in 2021.
         \cup \{0,42\}\\
       \text{bw_grid} &=
         \{ y_\text{cat} : \text{cat is a LBWSG category}\}
-        \cup \{0,4500\}
+        \cup \{0,4500\},
 
-    and then define the rectangular grid as the Cartesian product
+    and then define the rectangular grid :math:`G` as the `Cartesian product`_,
 
     .. math:: G = \text{ga_grid} \times \text{bw_grid}.
 
@@ -364,7 +365,7 @@ LBWSG RRs for the large-scale food fortification project in 2021.
         &x_9&=37.5,\, &x_{10}&=39,\,
         &&x_{11}=41, x_{12}=42\\
       y_0&=0,\, &y_1&=250,\, &y_2&=750,\, &&\ldots,\,
-        &y_9&=4250,\, &y_{10}&=4500\,
+        &y_9&=4250,\, &y_{10}&=4500,\,
         &&
       \end{alignat*}
 
@@ -394,6 +395,7 @@ LBWSG RRs for the large-scale food fortification project in 2021.
 .. _convex set: https://en.wikipedia.org/wiki/Convex_set
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 .. _bilinear interpolation: https://en.wikipedia.org/wiki/Bilinear_interpolation
+.. _Cartesian product: https://en.wikipedia.org/wiki/Cartesian_product
 
 Implementation of RR Interpolation in SciPy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
