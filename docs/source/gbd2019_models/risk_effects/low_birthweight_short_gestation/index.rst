@@ -256,14 +256,14 @@ Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
 
 Here is a plot `created by Kjell <kjell_lbwsg_category_rr_notebook_>`_ that
-shows the LBWSG categories and the mean relative risk estimate in each category
-(the mean appears to be taken across all all sexes, age groups, and draws):
+shows the LBWSG exposure categories and the mean relative risk estimate in each
+category (the mean is taken across all all sexes, age groups, and draws):
 
 .. image:: LBWSG_with_RR.png
 
 Based on the GBD data as shown above, there are **four TMREL categories** where
 the relative risk is always at the minimum 1.0 regardless of sex, age group, or
-draw:
+draw (recall that the relative risks are the same for all locations):
 
 - cat53 (38-40 weeks, 4000-4500 g)
 - cat54 (38-40 weeks, 3500-4000 g)
