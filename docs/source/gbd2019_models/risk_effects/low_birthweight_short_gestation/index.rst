@@ -71,7 +71,8 @@ category of birthweight and gestational age.**
   - 14 of the 58 categories have a 1-week age range, either 36-37 weeks or 37-38
     weeks, because 37 weeks is the usual cutoff for defining preterm birth.
 
-  For simplicity, we will generally refer to "500g and 2wk categories," with the understanding that there are some exceptions.
+  For simplicity, we will generally refer to "500g and 2wk categories," with
+  the understanding that there are some exceptions.
 
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
