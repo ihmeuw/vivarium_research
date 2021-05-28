@@ -1,4 +1,5 @@
-.. _intervention_wasting_treatment:
+.. role:: underline
+    :class: underline
 
 ..
   Section title decorators for this document:
@@ -28,26 +29,19 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
+.. _intervention_wasting_treatment:
 
 ===============================================
 Treatment and management for acute malnutrition 
 ===============================================
 
-This documentation focuses on treatment and management of acute malnutrition in Ethiopia based on 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
-
-The prevalence of stunting in Ethiopia has declined from 58% in 2000 to 38% in 2016. However, the prevalence of wasting has remained fairly static at 12% in 2000 and 10% in 2016. To address malnutrition in all its forms, the Government is applying two programmatic approaches. The first focuses on increasing access to and availability of food through improved economic growth, better agricultural production systems along with promotion of good nutrition practices and prevention of malnutrition. The second approach aims to strengthen early warning systems and timely emergency response, including wide-scale delivery of services for the management of acute
-malnutrition.
-
-The Federal Ministry of Health (FMOH) developed the first Protocol for the Management of Severe Acute
-Malnutrition (SAM) in 2007, and the Guideline for the Management of Moderate Acute Malnutrition (MAM)
-in 2012. This is the latest National Guideline for the Management of Acute Malnutrition in Ethiopia (2019). It includes the latest World Health Organisation (WHO) guidelines and recommendations, and emerging national and international evidence. It is also aligned to the National Nutrition Programme (NNP) II 2016-2020, the National Food and Nutrition Policy and the Health Sector Transformation Plan (HSTP) 2015/16 - 2019/20.
-
 .. contents::
    :local:
    :depth: 1
 
+
 .. list-table:: Abbreviations
-  :widths: 15 15 15
+  :widths: 5 15
   :header-rows: 1
 
   * - Abbreviation
@@ -62,7 +56,54 @@ in 2012. This is the latest National Guideline for the Management of Acute Malnu
     - demographic health survey
   * - IMNICI
     - Integrated Management of Newborn and Childhood illness
+  * - HEWs
+    - Health Extension Workers
+  * - HDA
+    - Health Development Army
+  * - HDG
+    - Health Development Group
+  * - HP
+    - Health post 
+  * - OTP
+    - Outpatient Therapeutic Programme
+  * - TSFP
+    - Targeted Supplementary Feeding Programme 
+  * - SC
+    - Stablisation Centre
+  * - PSNP
+    - Productive Safety Net Programme
+  * - TSFP 
+    - Targeted Supplementary Feeding Programme
+  * - BSFP
+    - Blanket Supplementary Feeding Programme
+  * - IYCF
+    - Infant and young child feeding
+  * - 
+    - 
+  * - 
+    - 
+  * - 
+    - 
+  * - 
+    - 
+  * - 
+    - 
+  * - 
+    - 
+  * - 
+    - 
 
+This documentation focuses on treatment and management of acute malnutrition in Ethiopia based on 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
+
+The prevalence of stunting in Ethiopia has declined from 58% in 2000 to 38% in 2016. However, the prevalence of wasting has remained fairly static at 12% in 2000 and 10% in 2016. To address malnutrition in all its forms, the Government is applying two programmatic approaches. The first focuses on increasing access to and availability of food through improved economic growth, better agricultural production systems along with promotion of good nutrition practices and prevention of malnutrition. The second approach aims to strengthen early warning systems and timely emergency response, including wide-scale delivery of services for the management of acute
+malnutrition.
+
+The Federal Ministry of Health (FMOH) developed the first Protocol for the Management of Severe Acute
+Malnutrition (SAM) in 2007, and the Guideline for the Management of Moderate Acute Malnutrition (MAM)
+in 2012. This is the latest National Guideline for the Management of Acute Malnutrition in Ethiopia (2019). It includes the latest World Health Organisation (WHO) guidelines and recommendations, and emerging national and international evidence. It is also aligned to the National Nutrition Programme (NNP) II 2016-2020, the National Food and Nutrition Policy and the Health Sector Transformation Plan (HSTP) 2015/16 - 2019/20.
+
+
+.. _1.0:
 
 Intervention Overview
 ---------------------
@@ -70,54 +111,180 @@ Intervention Overview
 This flow chart summarizes the core aspects of the care and treatment for SAM and MAM, and integration into the
 routine health system. 
 
-.. image:: flow_chart_management_of_acute_malnutrition
-   :alt: Flow chart for the management of acute malnutrition
+.. image:: flow_chart_management_of_acute_malnutrition.svg
+   :alt: Flow chart of management of acute malnutrition
 
 .. todo::
 
    Add a general narrative overview of the intervention, including what it is, what outcomes it affects, if/how/when/where it has been used, etc.
 
+.. _1.1:
+
 Health system delivery
 ++++++++++++++++++++++
 
+Interventions for wasting treatment are delivered through different levels of the health system.
 
-0-6 months
-++++++++++
+:underline:`Community and household level`
+ 
+ Community outreach ensures early identification of SAM and MAM cases. Community outreach also aims to empower communities and families to understand the causes of malnutrition, and prevent and manage acute malnutrition in their communities. Health Extension Workers (HEWs) collaborate with the community-based structures such as health committees and engage with the Health Development Army (HDA)/Health Development Group (HDG) to screen and refer cases to the appropriate service for treatment.
 
-Infants 0-6 months: Recent weight loss or failure to gain weight OR Ineffective feeding (attachment, position, and suckling)
+:underline:`Health post level`
+
+ The HPs provide primary health care services such as disease prevention and control, hygiene and environmental sanitation, family health services, and health education and communication. The service provider at the HP works closely with the network of the HDA/HDG to facilitate the management of SAM and MAM. The
+ service provider diagnoses acute malnutrition and provides Outpatient Therapeutic Programme (OTP) and Targeted Supplementary Feeding Programme (TSFP) services. They also determine patients who have medical complications and refer them to the Stablisation Centre (SC).
+
+:underline:`Health center level`
+
+ The HC provides 24-hour SC for the management of SAM with medical complications. The HC also manages and provides technical support to a cluster of one to five HPs within its vicinity.
+
+:underline:`Hospital level`
+
+ Woreda, Zonal, Regional and referral Hospitals provide higher level referral points where further care can be provided to patients with SAM and more complex medical complications. The referral Hospitals have the facilities and expertise to manage situations that may require administration of oxygen, blood transfusion, and other critical care.
+
+.. _2.0:
+
+Assessing and classifying acute malnutrition
+--------------------------------------------
+
+The classification of SAM and MAM cases is derived from the 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
+
+:download:`2019 guidelines<guidelines_2019.pdf>`
+
+.. note:: 
+  
+  - Based on the guideline, we will need to make some modelling decisions on how we classifiy SAM, MAM, NONE and think about how it may bias our results. 
+
+  - The ORs and ANDs in the classifications are not very clear or consistent in the guideline. It would be useful if we can clarify with a clinician when it should be OR/AND? 
+
+  - I think for our model we will probably classify according to the WHZ scores, but it would be good to get an idea if that over-estimates or under-estimates SAM and MAM compared to classification criteria in the guideline. 
 
 
-Severe acute malnutrition
-~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _2.1:
 
-With medical complications
-^^^^^^^^^^^^^^^^^^^^^^^^^^
-Without medical complications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In infants 0-6 months
++++++++++++++++++++++
+
+:underline:`Classify SAM with or without medical complications`
+
+* Any grade of bilateral pitting oedema (+, ++ or +++) OR
+* WFL < -3 zscore OR
+* Recent weight loss or failure to gain weight OR
+* Ineffective feeding (attachment, positioning and suckling) directly observed for 15-20, minutes, ideally in supervised separate area OR
+* Presence of any of the following medical complications:
+
+  - Poor appetite
+  - Intractable vomiting
+  - Convulsions
+  - Lethargy, not alert
+  - Unconsciousness
+  - High fever (≥38.5 °C)
+  - Pneumonia (Chest indrawing, fast breathing)
+  - Dehydration
+  - Persistent diarrhoea
+  - Severe anaemia
+  - Hypoglycaemia
+  - Hypothermia
+  - Severe skin lesions
+  - Eye signs of vitamin A deficiency
+
+**Treatment**
+
+NOTE: All infants 0-6 months of age with SAM with or without medical complications should be referred to the SC.
+
+.. note::
+
+  The WHO classification criteria for infants 0-6mo is 
+
+    1) weight-for-length <–3 Z-scores of the WHO Child Growth Standards median, or
+    2) presence of bilateral pitting oedema 
 
 
-6-60 months
-+++++++++++
+:underline:`Classify MAM`
 
-Moderate acute malnutrition
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- Children 6-59 months: WFH <-2 z-score
+* MUAC of lactatating mother of infant 0-6 months <23.0 cm
+* WFH ≥-3 to <-2 zscores AND 
+* No bilateral pitting oedema AND 
+* No medical complications
+* Clinically well and alert
 
-With medical complications
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Treatment** 
 
-Without medical complications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Assess the infant’s feeding and counsel the mother or caregiver on appropriate IYCF practices. Emphasize on establishing effective exclusive
+breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, follow up in 30 days. Admit the mother to TSFP. Refer the mother for Productive Safety Net Programme (PSNP).
 
-Severe acute malnutrition
-~~~~~~~~~~~~~~~~~~~~~~~~~
-- Children 6-59 months: WFH ≥ -3 to <-2 z-scores
+:underline:`Classify no acute malnutrition`
 
-With medical complications
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+* WFH ≥-2 zscores AND 
+* No bilateral pitting oedema
 
-Without medical complications
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Treatment** 
+
+Congratulate and counsel the mother on appropriate IYCF practices.
+
+.. _2.1:
+
+In children 6-59 months
+++++++++++++++++++++++++
+
+:underline:`Classify SAM with medical complications`
+
+* Any grade of bilateral pitting oedema (+, ++, +++) OR 
+* WFH < -3 zscore OR
+* Presence of any of the following medical complications:
+
+  - Poor appetite
+  - Intractable vomiting
+  - Convulsions
+  - Lethargy, not alert
+  - Unconsciousness
+  - High fever (≥38.5 °C)
+  - Pneumonia (Chest indrawing, fast breathing)
+  - Dehydration
+  - Persistent diarrhoea
+  - Severe anaemia
+  - Hypoglycaemia
+  - Hypothermia
+  - Severe skin lesions
+  - Eye signs of vitamin A deficiency
+
+**Treatment**
+
+Admit to SC
+
+:underline:`Classify SAM without medical complications`
+
+* Bilateral pitting oedema + or ++ OR 
+* WFH <-3 z-scores AND 
+* Appetite test passed
+* No medical complications
+* Clinically well and alert
+
+**Treatment**
+
+Admit in OTP
+
+:underline:`Classify MAM`
+
+* WFH ≥ -3 to <-2 z scores AND
+* No bilateral pitting oedema 
+* No medical complications
+* Clinically well and alert
+
+**Treatment**
+
+Admit in TSFP and counsel on appropriate IYCF practices.
+
+:underline:`Classify no acute malnutrition`
+
+* WFH ≥ -2 z score AND 
+* No bilateral pitting oedema
+
+**Treatment**
+
+Congratulate and counsel the mother on appropriate IYCF practices.
+
+
 
 .. todo::
 
@@ -275,9 +442,3 @@ References
    National Guideline for the Management of Acute
    Malnutrition. Addis Ababa: FMOH.
 
-.. [xx] Chapter 13: Measles.
-   :title:`Epidemiology and Prevention of Vaccine-Preventable Diseases
-   (The Pink Book, 13th Edition)`.
-   Centers for Disease Control and Prevention, 2015.
-   Retrieved 13 Nov 2019.
-   https://www.cdc.gov/vaccines/pubs/pinkbook/meas.html
