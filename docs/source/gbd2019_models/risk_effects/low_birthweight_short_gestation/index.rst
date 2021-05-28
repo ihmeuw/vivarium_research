@@ -315,7 +315,7 @@ interpolating between the RRs is not completely straightforward. Using `SciPy's 
 first *extrapolating* the relative risks to a complete rectangular grid, and
 then *interpolating the extrapolated values* to the full rectangular GAxBW
 domain. Here is a description of the procedure Nathaniel used to interpolate the
-LBWSG RRs for the large-scale food fortification project in March 2021.
+LBWSG RRs for the `large-scale food fortification project`_ in March 2021.
 
 #.  **Start at category midpoints:** We will assume that the relative risk
     at the *midpoint* of each
@@ -414,6 +414,8 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
 
         It may be worth discussing the strategy of resetting the RRs to 1 with the GBD modelers to see if it matches their conception of the TMREL, or if it would actually be better to keep the interpolated RRs even though they are greater than 1 in some regions of the TMREL categories.
 
+.. _large-scale food fortification project: https://github.com/ihmeuw/vivarium_research_lsff
+
 .. _convex set: https://en.wikipedia.org/wiki/Convex_set
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 .. _bilinear interpolation: https://en.wikipedia.org/wiki/Bilinear_interpolation
@@ -428,6 +430,23 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
 
 Implementation of RR Interpolation in SciPy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  Show Python code that implements the above procedure. In the meantime, here
+  are the original notebooks where I figured out how to do it:
+
+  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_09b_plot_lbwsg_rr_interpolation_using_griddata.ipynb
+  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
+  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
+
+  Here's a link to Jupyter nbviewer in case GitHub sucks:
+
+  - https://nbviewer.jupyter.org/
+
+  And here's my implementation of RR interpolation for a nanosim:
+
+  - https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
