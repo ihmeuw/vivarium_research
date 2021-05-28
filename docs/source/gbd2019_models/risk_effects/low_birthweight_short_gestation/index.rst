@@ -255,7 +255,13 @@ Restrictions
 Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
 
+Here is a plot `created by Kjell <kjell_lbwsg_category_rr_notebook_>`_ that
+shows the LBWSG categories and the mean relative risk estimate in each category
+(the mean appears to be taken across all all sexes, age groups, and draws):
+
 .. image:: LBWSG_with_RR.png
+
+.. _kjell_lbwsg_category_rr_notebook: https://github.com/KjellSwedin/investigate_lbwsg_categories/blob/main/LSFF_Expose_RR.ipynb
 
 Vivarium Modeling Strategy
 --------------------------
