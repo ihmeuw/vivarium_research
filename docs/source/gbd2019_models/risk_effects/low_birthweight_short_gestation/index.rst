@@ -69,7 +69,7 @@ category of birthweight and gestational age.**
   - 2 of the 58 categories (cat2 and cat8) have an age range of 0-24 weeks.
 
   - 14 of the 58 categories have a 1-week age range, either 36-37 weeks or 37-38 weeks, because 37 weeks
-    is the usual cutoff for defining "preterm birth."
+    is the usual cutoff for defining preterm birth.
 
   For simplicity, we will generally refer to "500g and 2wk categories," with the understanding that there are some exceptions.
 
@@ -404,9 +404,9 @@ LBWSG RRs for the `large-scale food fortification project`_ in March 2021.
     gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
     constants that depend on the function values at the rectangle's corners. There are 120 such rectangles indexed by :math:`i` and :math:`j`, and  each such rectangular "piece" of :math:`f` is linear in :math:`x` and :math:`y`
     separately and is quadratic as a function of two variables.
-    The bilinear interpolation can be easily implemented using SciPy's `RectBivariateSpline`_ class (with ``kx=1,ky=1``), `interp2d`_ function (with ``kind='linear'``), or `RegularGridInterpolator`_ class (with ``method='linear'``).
+    The bilinear interpolation can be easily implemented using either SciPy's `RectBivariateSpline`_ class (with ``kx=1,ky=1``), or `interp2d`_ function (with ``kind='linear'``), or `RegularGridInterpolator`_ class (with ``method='linear'``).
 
-#.  **Exponentiate:** Once we interpolate :math:`f = \log(\mathit{RR})`, recover the relative risks by computing :math:`\mathit{RR}(x,y) = \exp(f(x,y))`. The above interpolation strategy guarantees that the interpolated RRs will remain between the minimum and maximum RR values in GBD.
+#.  **Exponentiate:** Once we interpolate :math:`f = \log(\mathit{RR})`, we recover the relative risks by computing :math:`\mathit{RR}(x,y) = \exp(f(x,y))`. The above interpolation strategy guarantees that the interpolated RRs will remain between the minimum and maximum RR values in GBD.
 
 #.  **Reset RRs in TMREL categories to 1:** Since we assumed that the RR values were equal to the GBD RRs at the *midpoints* of the LBWSG categories, and the interpolated RRs vary continuously, the interpolated RRs in the TMREL categories will be greater than 1 as GA or BW approaches a category of higher relative risk. In order to be consistent with GBD, we reset the RR to 1.0 in each of the four TMREL categories (cat53, cat54, cat55, cat56) after interpolation. This will introduce some discontinuity at the boundaries of the TMREL categories, but that is an acceptable tradeoff for consistency with GBD.
 
@@ -434,7 +434,7 @@ Implementation of RR Interpolation in SciPy
 .. todo::
 
   Show Python code that implements the above procedure. In the meantime, here
-  are the original notebooks where I figured out how to do it:
+  are the original notebooks where I figured out how to do it (with pictures!):
 
   - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_09b_plot_lbwsg_rr_interpolation_using_griddata.ipynb
   - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
