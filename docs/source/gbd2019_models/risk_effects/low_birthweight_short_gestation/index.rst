@@ -261,6 +261,15 @@ shows the LBWSG categories and the mean relative risk estimate in each category
 
 .. image:: LBWSG_with_RR.png
 
+Based on the GBD data as shown above, there are **four TMREL categories** where
+the relative risk is always at the minimum 1.0 regardless of sex, age group, or
+draw:
+
+- cat53 (38-40 weeks, 4000-4500 g)
+- cat54 (38-40 weeks, 3500-4000 g)
+- cat55 (40-42 weeks, 3500-4000 g)
+- cat66 (40-42 weeks, 4000-4500 g)
+
 .. _kjell_lbwsg_category_rr_notebook: https://github.com/KjellSwedin/investigate_lbwsg_categories/blob/main/LSFF_Expose_RR.ipynb
 
 Vivarium Modeling Strategy
