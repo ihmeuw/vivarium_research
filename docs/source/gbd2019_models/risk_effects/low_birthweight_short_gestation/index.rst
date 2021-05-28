@@ -68,8 +68,8 @@ category of birthweight and gestational age.**
 
   - 2 of the 58 categories (cat2 and cat8) have an age range of 0-24 weeks.
 
-  - 14 of the 58 categories have a 1-week age range, either 36-37 weeks or 37-38 weeks, because 37 weeks
-    is the usual cutoff for defining preterm birth.
+  - 14 of the 58 categories have a 1-week age range, either 36-37 weeks or 37-38
+    weeks, because 37 weeks is the usual cutoff for defining preterm birth.
 
   For simplicity, we will generally refer to "500g and 2wk categories," with the understanding that there are some exceptions.
 
@@ -284,15 +284,15 @@ relative risk estimates define a `piecewise constant function`_ on the union of
 the LBWSG categories, which is a subset of the GAxBW rectangle
 :math:`[0,42\text{wk}] \times [0,4500\text{g}]`.
 
-This piecewise constant relative risk function is `discontinuous <continuous function_>`_, jumping from
-one value to another at the linear boundaries between the LBWSG categories
-(usually when GA is a multiple of 2 or BW is a multiple of 500), and the
-relative risk does not change at all within each LBWSG category. Therefore, any
-simulated intervention that affects birthweight or gestational age (e.g. a
-nutritional supplement given to pregnant mothers to increase the birthweight of
-their newborns) can only have an effect on a small percentage of our simulants,
-namely those whose birthweight or gestational age is near the boundary of one of
-the LBWSG categories.
+This piecewise constant relative risk function is `discontinuous <continuous
+function_>`_, jumping from one value to another at the linear boundaries between
+the LBWSG categories (usually when GA is a multiple of 2 or BW is a multiple of
+500), and the relative risk does not change at all within each LBWSG category.
+Therefore, any simulated intervention that affects birthweight or gestational
+age (e.g. a nutritional supplement given to pregnant mothers to increase the
+birthweight of their newborns) can only have an effect on a small percentage of
+our simulants, namely those whose birthweight or gestational age is near the
+boundary of one of the LBWSG categories.
 
 To correct for this deficiency, we are interested in coming up with a
 continuously varying risk surface that interpolates between the relative risks
@@ -310,37 +310,53 @@ risk surface.
 Strategy for Interpolating Relative Risks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Since the region on which the GBD RRs are defined is `non-convex <convex set_>`_,
-interpolating between the RRs is not completely straightforward. Using `SciPy's interpolation package <scipy.interpolate_>`_, it required a two-step process of
-first *extrapolating* the relative risks to a complete rectangular grid, and
-then *interpolating the extrapolated values* to the full rectangular GAxBW
-domain. Here is a description of the procedure Nathaniel used to interpolate the
-LBWSG RRs for the `large-scale food fortification project`_ in March 2021.
+Since the region on which the GBD RRs are defined is `non-convex <convex
+set_>`_, interpolating between the RRs is not completely straightforward. Using
+`SciPy's interpolation package <scipy.interpolate_>`_, it required a two-step
+process of first *extrapolating* the relative risks to a complete rectangular
+grid, and then *interpolating the extrapolated values* to the full rectangular
+GAxBW domain. Here is a description of the procedure Nathaniel used to
+interpolate the LBWSG RRs for the `large-scale food fortification project`_ in
+March 2021.
 
-#.  **Start at category midpoints:** We will assume that the relative risk
-    at the *midpoint* of each
-    rectangular LBWSG category is equal to the relative risk for that category
-    as estimated by GBD.
-    That is, if :math:`\mathit{RR}_\text{cat}` is the GBD relative risk for the LBWSG category ':math:`\text{cat}`', and the midpoint of :math:`\text{cat}` is :math:`(x_\text{cat}, y_\text{cat})`, we will assume that :math:`\mathit{RR}(x_\text{cat},y_\text{cat}) = \mathit{RR}_\text{cat}`, where :math:`\mathit{RR}(x,y)` denotes the relative risk at gestational age :math:`x` and birthweight :math:`y`. Our goal is to assign an interpolated value to :math:`\mathit{RR}(x,y)` for all :math:`(x,y)\in [0,42\text{wk}] \times [0,4500\text{g}]`, starting with the values :math:`\mathit{RR}(x_\text{cat},y_\text{cat})` at the 58 category midpoints.
+#.  **Start at category midpoints:** We will assume that the relative risk at
+    the *midpoint* of each rectangular LBWSG category is equal to the relative
+    risk for that category as estimated by GBD. That is, if
+    :math:`\mathit{RR}_\text{cat}` is the GBD relative risk for the LBWSG
+    category ':math:`\text{cat}`', and the midpoint of :math:`\text{cat}` is
+    :math:`(x_\text{cat}, y_\text{cat})`, we will assume that
+    :math:`\mathit{RR}(x_\text{cat},y_\text{cat}) = \mathit{RR}_\text{cat}`,
+    where :math:`\mathit{RR}(x,y)` denotes the relative risk at gestational age
+    :math:`x` and birthweight :math:`y`. Our goal is to assign an interpolated
+    value to :math:`\mathit{RR}(x,y)` for all :math:`(x,y)\in [0,42\text{wk}]
+    \times [0,4500\text{g}]`, starting with the values
+    :math:`\mathit{RR}(x_\text{cat},y_\text{cat})` at the 58 category midpoints.
 
-#.  **Take logarithms:** Since the LBWSG relative risks vary widely between categories (from 1.0 in
-    the TMREL up to more than 1600 in the highest risk category in some draws), we will do
-    the interpolation in log space to keep everything at a reasonable scale, and then exponentiate the results.
-    Thus, we compute :math:`\log(\mathit{RR}(x_\text{cat}, y_\text{cat}))` for each of the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where :math:`\mathit{RR}` denotes the relative risk function as defined above, and :math:`\log` denotes the natural logarithm.
+#.  **Take logarithms:** Since the LBWSG relative risks vary widely between
+    categories (from 1.0 in the TMREL up to more than 1600 in the highest risk
+    category in some draws), we will do the interpolation in log space to keep
+    everything at a reasonable scale, and then exponentiate the results. Thus,
+    we compute :math:`\log(\mathit{RR}(x_\text{cat}, y_\text{cat}))` for each of
+    the 58 category midpoints :math:`(x_\text{cat}, y_\text{cat})`, where
+    :math:`\mathit{RR}` denotes the relative risk function as defined above, and
+    :math:`\log` denotes the natural logarithm.
 
-#.  **Define a rectangular grid:** In order to get SciPy's
-    interpolation functions to work well, it helps to have the initial data
-    points defined on a rectangular grid.
-    The LBWSG category midpoints
-    :math:`(x_\text{cat}, y_\text{cat})` define a *partial* rectangular grid,
-    so our strategy will be to use a simple interpolation method (`nearest-neighbor <nearest-neighbor interpolation_>`_) to extrapolate values of :math:`\log(\mathit{RR})` to the "missing" points
-    on the full grid :math:`G` spanned by the category midpoints, and then use a more sophisticated method (`bilinear interpolation`_) to fill in values of :math:`\log(\mathit{RR})` between the grid points.
+#.  **Define a rectangular grid:** In order to get SciPy's interpolation
+    functions to work well, it helps to have the initial data points defined on
+    a rectangular grid. The LBWSG category midpoints :math:`(x_\text{cat},
+    y_\text{cat})` define a *partial* rectangular grid, so our strategy will be
+    to use a simple interpolation method (`nearest-neighbor <nearest-neighbor
+    interpolation_>`_) to extrapolate values of :math:`\log(\mathit{RR})` to the
+    "missing" points on the full grid :math:`G` spanned by the category
+    midpoints, and then use a more sophisticated method (`bilinear
+    interpolation`_) to fill in values of :math:`\log(\mathit{RR})` between the
+    grid points.
 
-    In addition to the category midpoints, we will
-    also include grid points on the GAxBW rectangle's boundary to guarantee that
-    our interpolation will cover the entire domain defined by the LBWSG
-    categories.
-    To define the rectangular grid :math:`G` precisely, we first take the the unique GA and BW coordinates of the 58 category midpoints, plus the boundary values,
+    In addition to the category midpoints, we will also include grid points on
+    the GAxBW rectangle's boundary to guarantee that our interpolation will
+    cover the entire domain defined by the LBWSG categories. To define the
+    rectangular grid :math:`G` precisely, we first take the the unique GA and BW
+    coordinates of the 58 category midpoints, plus the boundary values,
 
     .. math::
 
@@ -356,7 +372,9 @@ LBWSG RRs for the `large-scale food fortification project`_ in March 2021.
 
     .. math:: G = \text{ga_grid} \times \text{bw_grid}.
 
-    More explicitly, we can list the 13 :math:`x`-coordinates in :math:`\text{ga_grid}` and 11 :math:`y`-coordinates in :math:`\text{bw_grid}` in increasing order,
+    More explicitly, we can list the 13 :math:`x`-coordinates in
+    :math:`\text{ga_grid}` and 11 :math:`y`-coordinates in
+    :math:`\text{bw_grid}` in increasing order,
 
     .. math::
       :nowrap:
@@ -374,9 +392,17 @@ LBWSG RRs for the `large-scale food fortification project`_ in March 2021.
 
     .. math:: G = \{(x_i,y_j) : 0\le i\le 12, 0\le j\le 10\}.
 
-    We can think of the grid :math:`G` as a "stepping stone" on our path to interpolating :math:`\log(\mathit{RR})` on the entire GAxBW rectangle :math:`[0,42\text{wk}] \times [0,4500\text{g}]`.
+    We can think of the grid :math:`G` as a "stepping stone" on our path to
+    interpolating :math:`\log(\mathit{RR})` on the entire GAxBW rectangle
+    :math:`[0,42\text{wk}] \times [0,4500\text{g}]`.
 
-#.  **Extrapolate to the rectangular grid:** Use `nearest-neighbor interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category midpoints :math:`(x_\text{cat}, y_\text{cat})` to all points on the rectangular grid :math:`G`. When doing this extrapolation, we rescale both the GA and BW coordinates to the interval :math:`[0,1]` before computing distances since the scales of gestational age and birthweight are incomparable and drastically different (0-42wk vs. 0-4500g). Explicitly,
+#.  **Extrapolate to the rectangular grid:** Use `nearest-neighbor
+    interpolation`_ to extrapolate :math:`\log(\mathit{RR})` from the category
+    midpoints :math:`(x_\text{cat}, y_\text{cat})` to all points on the
+    rectangular grid :math:`G`. When doing this extrapolation, we rescale both
+    the GA and BW coordinates to the interval :math:`[0,1]` before computing
+    distances since the scales of gestational age and birthweight are
+    incomparable and drastically different (0-42wk vs. 0-4500g). Explicitly,
 
     - Divide all the GA coordinates of points in :math:`G` by 42, and divide
       all the BW coordinates of points in :math:`G` by 4500.
@@ -386,33 +412,56 @@ LBWSG RRs for the `large-scale food fortification project`_ in March 2021.
       y_\text{cat}/4500)`, and set :math:`\log (\mathit{RR}(x_i,
       y_j)) = \log(\mathit{RR}(x_\text{cat}, y_\text{cat}))`.
 
-    The rescaled nearest-neighbor interpolation can be easily implemented using SciPy's `griddata`_ function (with ``method='nearest'`` and ``rescale='True'``) or `NearestNDInterpolator`_ class (with ``rescale='True'``).
+    The rescaled nearest-neighbor interpolation can be easily implemented using
+    SciPy's `griddata`_ function (with ``method='nearest'`` and
+    ``rescale='True'``) or `NearestNDInterpolator`_ class (with
+    ``rescale='True'``).
 
-#.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
-    of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
-    :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
-    extrapolated values of :math:`\log(\mathit{RR})` on the grid :math:`G`. The interpolating function :math:`f = \log(\mathit{RR})` is continuous and piecewise
-    bilinear. On each rectangle whose corners are neighboring grid points, it
-    has has the form
+#.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to
+    fill in all values of :math:`\log(\mathit{RR})` in the entire GAxBW
+    rectangle :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
+    extrapolated values of :math:`\log(\mathit{RR})` on the grid :math:`G`. The
+    interpolating function :math:`f = \log(\mathit{RR})` is continuous and
+    piecewise bilinear. On each rectangle whose corners are neighboring grid
+    points, it has has the form
 
     .. math::
 
       \log(\mathit{RR}(x,y)) = f(x,y) = a + bx + cy + dxy
       \quad (x_i\le x\le x_{i+1}, y_j\le y\le y_{j+1}),
 
-    where :math:`x` is
-    gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
-    constants that depend on the function values at the rectangle's corners. There are 120 such rectangles indexed by :math:`i` and :math:`j`, and  each such rectangular "piece" of :math:`f` is linear in :math:`x` and :math:`y`
-    separately and is quadratic as a function of two variables.
-    The bilinear interpolation can be easily implemented using either SciPy's `RectBivariateSpline`_ class (with ``kx=1,ky=1``), or `interp2d`_ function (with ``kind='linear'``), or `RegularGridInterpolator`_ class (with ``method='linear'``).
+    where :math:`x` is gestational age, :math:`y` is birthweight, and
+    :math:`a,b,c,d` are constants that depend on the function values at the
+    rectangle's corners. There are 120 such rectangles indexed by :math:`i` and
+    :math:`j`, and  each such rectangular "piece" of :math:`f` is linear in
+    :math:`x` and :math:`y` separately and is quadratic as a function of two
+    variables. The bilinear interpolation can be easily implemented using either
+    SciPy's `RectBivariateSpline`_ class (with ``kx=1,ky=1``), or `interp2d`_
+    function (with ``kind='linear'``), or `RegularGridInterpolator`_ class (with
+    ``method='linear'``).
 
-#.  **Exponentiate:** Once we interpolate :math:`f = \log(\mathit{RR})`, we recover the relative risks by computing :math:`\mathit{RR}(x,y) = \exp(f(x,y))`. The above interpolation strategy guarantees that the interpolated RRs will remain between the minimum and maximum RR values in GBD.
+#.  **Exponentiate:** Once we interpolate :math:`f = \log(\mathit{RR})`, we
+    recover the relative risks by computing :math:`\mathit{RR}(x,y) =
+    \exp(f(x,y))`. The above interpolation strategy guarantees that the
+    interpolated RRs will remain between the minimum and maximum RR values in
+    GBD.
 
-#.  **Reset RRs in TMREL categories to 1:** Since we assumed that the RR values were equal to the GBD RRs at the *midpoints* of the LBWSG categories, and the interpolated RRs vary continuously, the interpolated RRs in the TMREL categories will be greater than 1 as GA or BW approaches a category of higher relative risk. In order to be consistent with GBD, we reset the RR to 1.0 in each of the four TMREL categories (cat53, cat54, cat55, cat56) after interpolation. This will introduce some discontinuity at the boundaries of the TMREL categories, but that is an acceptable tradeoff for consistency with GBD.
+#.  **Reset RRs in TMREL categories to 1:** Since we assumed that the RR values
+    were equal to the GBD RRs at the *midpoints* of the LBWSG categories, and
+    the interpolated RRs vary continuously, the interpolated RRs in the TMREL
+    categories will be greater than 1 as GA or BW approaches a category of
+    higher relative risk. In order to be consistent with GBD, we reset the RR to
+    1.0 in each of the four TMREL categories (cat53, cat54, cat55, cat56) after
+    interpolation. This will introduce some discontinuity at the boundaries of
+    the TMREL categories, but that is an acceptable tradeoff for consistency
+    with GBD.
 
     .. note::
 
-        It may be worth discussing the strategy of resetting the RRs to 1 with the GBD modelers to see if it matches their conception of the TMREL, or if it would actually be better to keep the interpolated RRs even though they are greater than 1 in some regions of the TMREL categories.
+        It may be worth discussing the strategy of resetting the RRs to 1 with
+        the GBD modelers to see if it matches their conception of the TMREL, or
+        if it would actually be better to keep the interpolated RRs even though
+        they are greater than 1 in some regions of the TMREL categories.
 
 .. _large-scale food fortification project: https://github.com/ihmeuw/vivarium_research_lsff
 
