@@ -255,6 +255,8 @@ Restrictions
 Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
 
+.. image:: LBWSG_with_RR.png
+
 Vivarium Modeling Strategy
 --------------------------
 
