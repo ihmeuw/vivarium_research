@@ -285,7 +285,6 @@ Admit in TSFP and counsel on appropriate IYCF practices.
 Congratulate and counsel the mother on appropriate IYCF practices.
 
 
-
 .. todo::
 
   Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
@@ -312,6 +311,8 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
+Let us assume program coverage is a stand-in value of 40%. C = 0.4; 1-C = 0.6 (This will be updated). 
+
 .. todo::
 
   We have been in contact with EMOH but seems like they only have DHIS data which does not give us coverage rate. We will dig a bit more into the literature, or reach out to CIFF/UNICEF since UNICEF is the implementation partner for treatment in Ethiopia. 
@@ -331,12 +332,37 @@ Baseline Coverage Data
     - 
     - 
 
+.. _3.0:
+
 Vivarium Modeling Strategy
 --------------------------
+
+.. image:: treatment_diagram.svg
+   :alt: Compartmental diagram with treatment
+
+For MAM 
+
+  - :math:`r3 =  r3_{ux}\times(1-C) + r3_{tx}\times(C)`
+  - :math:`d2 =  d2_{ux}\times(1-C) + d2_{tx}\times(C)`
+  - :math:`i1 =  i1_{ux}\times(1-C) + i1_{tx}\times(C)`
+
+For SAM
+
+ - :math:`r2 =  r2_{ux}\times(1-C) + r2_{tx}\times(C)`
+ - :math:`d1 =  d1_{ux}\times(1-C) + d1_{tx}\times(C)`
+
+
+
+
 
 .. todo::
 
   Add an overview of the Vivarium modeling section.
+  - We have r3, d2, i1, r2 and d1 from solving the wasting compartmental modeling (missing duration of cat3 as constraint)
+  - Need to find programmatic data to obtain r3tx, d2tx, i1tx, r2tx and d1tx
+  - Get coverage rate (currently use 0.4 as stand-in)
+  - We can then derive r3ux, d2ux, i1ux, r2ux and d1ux
+
 
 .. todo::
 
@@ -429,16 +455,4 @@ Affected Outcome #1
 
   Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
 
-Assumptions and Limitations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Validation and Verification Criteria
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-References
-----------
-
-.. [EMOH] Government of Ethiopia, Federal Ministry of Health. 2019. 
-   National Guideline for the Management of Acute
-   Malnutrition. Addis Ababa: FMOH.
-
+Assumptions an
