@@ -284,7 +284,7 @@ relative risk estimates define a `piecewise constant function`_ on the union of
 the LBWSG categories, which is a subset of the GAxBW rectangle
 :math:`[0,42\text{wk}] \times [0,4500\text{g}]`.
 
-This piecewise constant relative risk function is discontinuous, jumping from
+This piecewise constant relative risk function is `discontinuous <continuous function_>`_, jumping from
 one value to another at the linear boundaries between the LBWSG categories
 (usually when GA is a multiple of 2 or BW is a multiple of 500), and the
 relative risk does not change at all within each LBWSG category. Therefore, any
@@ -294,7 +294,7 @@ their newborns) can only have an effect on a small percentage of our simulants,
 namely those whose birthweight or gestational age is near the boundary of one of
 the LBWSG categories.
 
-To correct for this deficiency, we are interested in coming up with a smooth (or `continuous`_),
+To correct for this deficiency, we are interested in coming up with a
 continuously varying risk surface that interpolates between the relative risks
 estimated by GBD. In addition to (probably) being a better model of reality,
 this would allow every simulant the opportunity to get the effect of an
@@ -305,13 +305,13 @@ experiencing a larger change in relative risk if we used the piecewise constant
 risk surface.
 
 .. _piecewise constant function: https://mathworld.wolfram.com/PiecewiseConstantFunction.html
-.. _continuous: https://en.wikipedia.org/wiki/Continuous_function
+.. _continuous function: https://en.wikipedia.org/wiki/Continuous_function
 
 Strategy for Interpolating Relative Risks
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Since the region on which the GBD RRs are defined is `non-convex <convex set_>`_,
-interpolating between the RRs is not completely straightforward. Using SciPy's interpolation package, it required a two-step process of
+interpolating between the RRs is not completely straightforward. Using `SciPy's interpolation package <scipy.interpolate_>`_, it required a two-step process of
 first *extrapolating* the relative risks to a complete rectangular grid, and
 then *interpolating the extrapolated values* to the full rectangular GAxBW
 domain. Here is a description of the procedure Nathaniel used to interpolate the
@@ -351,7 +351,8 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
         \{ y_\text{cat} : \text{cat is a LBWSG category}\}
         \cup \{0,4500\},
 
-    and then define the rectangular grid :math:`G` as the `Cartesian product`_,
+    and then define the rectangular grid :math:`G` as the `Cartesian product`_
+    of these coordinates,
 
     .. math:: G = \text{ga_grid} \times \text{bw_grid}.
 
@@ -385,6 +386,8 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
       y_\text{cat}/4500)`, and set :math:`\log (\mathit{RR}(x_i,
       y_j)) = \log(\mathit{RR}(x_\text{cat}, y_\text{cat}))`.
 
+    The rescaled nearest-neighbor interpolation can be easily implemented using SciPy's `griddata`_ function (with ``method='nearest'`` and ``rescale='True'``) or `NearestNDInterpolator`_ class (with ``rescale='True'``).
+
 #.  **Interpolate to the full rectangle:** Use `bilinear interpolation`_ to fill in all values
     of :math:`\log(\mathit{RR})` in the entire GAxBW rectangle
     :math:`[0,42\text{wk}] \times [0,4500\text{g}]` from the
@@ -401,6 +404,7 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
     gestational age, :math:`y` is birthweight, and :math:`a,b,c,d` are
     constants that depend on the function values at the rectangle's corners. There are 120 such rectangles indexed by :math:`i` and :math:`j`, and  each such rectangular "piece" of :math:`f` is linear in :math:`x` and :math:`y`
     separately and is quadratic as a function of two variables.
+    The bilinear interpolation can be easily implemented using SciPy's `RectBivariateSpline`_ class (with ``kx=1,ky=1``), `interp2d`_ function (with ``kind='linear'``), or `RegularGridInterpolator`_ class (with ``method='linear'``).
 
 #.  **Exponentiate:** Once we interpolate :math:`f = \log(\mathit{RR})`, recover the relative risks by computing :math:`\mathit{RR}(x,y) = \exp(f(x,y))`. The above interpolation strategy guarantees that the interpolated RRs will remain between the minimum and maximum RR values in GBD.
 
@@ -414,6 +418,13 @@ LBWSG RRs for the large-scale food fortification project in March 2021.
 .. _nearest-neighbor interpolation: https://en.wikipedia.org/wiki/Nearest-neighbor_interpolation
 .. _bilinear interpolation: https://en.wikipedia.org/wiki/Bilinear_interpolation
 .. _Cartesian product: https://en.wikipedia.org/wiki/Cartesian_product
+
+.. _scipy.interpolate: https://docs.scipy.org/doc/scipy/reference/interpolate.html
+.. _griddata: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.griddata.html
+.. _NearestNDInterpolator: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.NearestNDInterpolator.html
+.. _RectBivariateSpline: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RectBivariateSpline.html
+.. _interp2d: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp2d.html
+.. _RegularGridInterpolator: https://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.RegularGridInterpolator.html
 
 Implementation of RR Interpolation in SciPy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
