@@ -270,6 +270,21 @@ draw (recall that the relative risks are the same for all locations):
 - cat55 (40-42 weeks, 3500-4000 g)
 - cat66 (40-42 weeks, 4000-4500 g)
 
+Here is the description of the modeling procedure for the TMREL in
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 177):
+
+  For each of the country-derived relative risk surfaces, the 500-gram and
+  two-week gestational age joint bin with the lowest risk was identified. This
+  bin differed within each country dataset. To identify the universal 500-gram
+  and two-week gestational age category that would serve as the universal TMREL
+  for our analysis, we chose the bins that was identified to be the TMREL in
+  each country dataset to contribute to the universal TMREL. Therefore, the
+  joint categories that served as our universal TMREL for the LBWSG risk factor
+  were “38-40 weeks of gestation and 3500-4000 grams”, “38-40 weeks of gestation
+  and 4000-4500 grams”, and “40-42 weeks of gestation and 4000-4500 grams”. As
+  the joint TMREL, all three categories were assigned to a relative risk equal
+  to 1.
+
 .. _kjell_lbwsg_category_rr_notebook: https://github.com/KjellSwedin/investigate_lbwsg_categories/blob/main/LSFF_Expose_RR.ipynb
 
 Vivarium Modeling Strategy
