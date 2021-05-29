@@ -27,9 +27,6 @@ Interventions critical features
 2. Outcomes the intervention affects
 ------------------------------------
 
-.. note::
-
-
 3. Effect sizes and definitions
 -------------------------------
 
