@@ -59,7 +59,7 @@ except for the USA, sex-specific data were combined to maximise sample size. The
 USA analyses were sex-specific.
 **Relative risks of all-cause mortality were calculated for each 500g and 2wk
 category of birthweight and gestational age.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 Details of Relative Risk Estimation
 +++++++++++++++++++++++++++++++++++
@@ -93,7 +93,7 @@ regression and then converted into mortality risk.
 To calculate mortality relative risks, the risk of each joint two-week
 gestational age and 500-gram birthweight category were divided by the risk of
 mortality in the joint gestational age and birthweight category with the lowest
-mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. note::
 
@@ -118,7 +118,7 @@ across all available sources and selected outcomes based on criteria of
 biological plausibility. **Some causes, most notably congenital birth defects,
 haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria
 that reverse causality could not be excluded.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. list-table:: Entities Affected by LBWSG in GBD 2019
    :widths: 5 5 5 5 5
