@@ -806,20 +806,8 @@ bias caused by the differing distributions between the study and target
 populations can result in vastly more bias than that of using the wrong PAF
 equation.
 
-
-References
-----------
-
-.. [Darrow] Confounding and bias in the attributable fraction, Jan 2011
-	https://www.ncbi.nlm.nih.gov/pubmed/20975564
-
-.. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
-   Retrieved 11 March 2020.
-   https://www.ncbi.nlm.nih.gov/books/NBK126190/
-
-
 Estimation of the PAF in epidemiological studies
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. todo::
 
@@ -835,3 +823,13 @@ There are some caveats to the cohort studies estimation of PAF, if exposed and u
 In cross-sectional studies, this is also known as the proportion of prevalent cases in the population. There are some potential issues this type of study of interpreting prevalence rather than incidence cases. If an exposure is associated with increased prevalence of disease, it could be because the exposure increases the risk of developing the disease, or because it increases the amount of time a person has the disease, or even because it increases survival from the disease.
 
 This use of PAF is recommended for chronic disease states.
+
+References
+----------
+
+.. [Darrow] Confounding and bias in the attributable fraction, Jan 2011
+	https://www.ncbi.nlm.nih.gov/pubmed/20975564
+
+.. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
+   Retrieved 11 March 2020.
+   https://www.ncbi.nlm.nih.gov/books/NBK126190/
