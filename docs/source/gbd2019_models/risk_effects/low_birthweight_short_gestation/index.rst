@@ -363,6 +363,11 @@ c.  Add in one or more explicitly modeled causes, and apply the the RRs to the
     EMR or CSMR of the affected causes, depending on whether the cause is
     explicitly modeled.
 
+d.  The validation could also be done by initializing a cohort in the ENN age
+    group or LNN age group based on GBD prevalences, to ensure that the LBWSG
+    relative risks will work correctly for simulants initialized into these age
+    groups in our models.
+
 .. note::
 
   It would be worth checking with the GBD modelers to see whether it is accurate
