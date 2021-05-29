@@ -1,4 +1,4 @@
-.. _models_intervention:
+.. _models_intervention_features:
 
 ===============================
 Interventions critical features
