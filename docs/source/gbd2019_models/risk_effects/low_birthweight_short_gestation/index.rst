@@ -346,6 +346,18 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
     each age group, and compare the simulated prevalences with the ENN and LNN
     category prevalences pulled from GBD.
 
+.. note::
+
+  It would be worth checking with the GBD modelers to see whether it is accurate
+  to interpret the ENN exposure and LNN exposure as average LBWSG category
+  prevalences for the 0-7 day period and 7-28 day period (or equivalently(?),
+  the point prevalence at the midpoint of each interval).
+
+  Also, it would be worth finding out whether the modelers have data on the
+  LBWSG category prevalences **at** 7 days and 28 days, as the risk appendix
+  indicates that these point prevalences were estimated as part of the analysis.
+  If so, these would provide additional data to validate against.
+
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
