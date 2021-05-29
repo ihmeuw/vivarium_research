@@ -768,7 +768,7 @@ The magnitude of the PAF bias was shown to **increase** with:
 	- smaller :math:`RR_{adj}` for the disease (or cause)
 
 	- magnitude of the *confounding RR*
-E
+
 The first two factors are intuitive: observe that in our measure of bias,
 :math:`\frac{\text{biased PAF}}{\text{unbiased PAF}}`, a smaller exposure
 prevalence will lead to a smaller true PAF in the denominator, amplifying the
