@@ -275,10 +275,65 @@ Vivarium Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * -
+   * - Diarrheal diseases
+     - Cause
+     - 302
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Lower respiratory infections
+     - Cause
+     - 322
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Upper respiratory infections
+     - Cause
+     - 328
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Otitis media
+     - Cause
+     - 329
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Meningitis
+     - Cause
+     - 332
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Encephalitis
+     - Cause
+     - 337
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Neonatal preterm birth
+     - Cause (PAF-of-1)
+     - 381
+     - CSMR if unmodeled, EMR if modeled
+     - **Note:** Preterm birth may need to be handled differently if explicitly modeled
+   * - Neonatal encephalopathy due to birth asphyxia and trauma
+     - Cause
+     - 382
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Neonatal sepsis and other neonatal infections
+     - Cause
+     - 383
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Hemolytic disease and other neonatal jaundice
+     - Cause
+     - 384
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Other neonatal disorders
+     - Cause
+     - 385
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Sudden infant death syndrome
+     - Cause
+     - 686
+     - CSMR if unmodeled, EMR if modeled
      -
 
 Risk Outcome Pair #1
