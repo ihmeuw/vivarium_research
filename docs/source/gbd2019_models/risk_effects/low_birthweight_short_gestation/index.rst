@@ -356,7 +356,8 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
 
 This validation could be run with increasing degrees of complexity:
 
-a.  Apply the RRs directly to the all-cause mortality rate of the simulants.
+a.  Apply the RRs directly to the all-cause mortality rate of the simulants (or
+    did we already try this and decide it was a bad idea?).
 
 b.  Do not explicitly model any causes, but distinguish between causes affected
     by LBWSG vs. unaffected by LBWSG, and apply the RRs only to the CSMRs of the
