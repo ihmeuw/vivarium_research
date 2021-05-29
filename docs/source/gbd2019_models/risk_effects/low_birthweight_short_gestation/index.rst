@@ -346,6 +346,23 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
     each age group, and compare the simulated prevalences with the ENN and LNN
     category prevalences pulled from GBD.
 
+#.  Record deaths in the ENN and LNN age groups, and compare the mortality
+    rates with the corresponding all-cause mortality rates in GBD. Deaths could
+    also be stratified by LBWSG category to validate simulated RRs against the
+    RR input data.
+
+This validation could be run with increasing degrees of complexity:
+
+a.  Apply the RRs directly to the all-cause mortality rate of the simulants.
+
+b.  Do not explicitly model any causes, but distinguish between causes affected
+    by LBWSG vs. unaffected by LBWSG, and apply the RRs only to the CSMRs of the
+    affected causes.
+
+c.  Add in one or more explicitly modeled causes, and apply the the RRs to the
+    EMR or CSMR of the affected causes, depending on whether the cause is
+    explicitly modeled.
+
 .. note::
 
   It would be worth checking with the GBD modelers to see whether it is accurate
