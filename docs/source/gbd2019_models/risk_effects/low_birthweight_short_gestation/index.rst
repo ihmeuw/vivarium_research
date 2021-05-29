@@ -268,7 +268,7 @@ draw (recall that the relative risks are the same for all locations):
 - cat53 (38-40 weeks, 4000-4500 g)
 - cat54 (38-40 weeks, 3500-4000 g)
 - cat55 (40-42 weeks, 3500-4000 g)
-- cat66 (40-42 weeks, 4000-4500 g)
+- cat56 (40-42 weeks, 4000-4500 g)
 
 Here is the description of the modeling procedure for the TMREL in
 [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 177):
@@ -284,6 +284,25 @@ Here is the description of the modeling procedure for the TMREL in
   and 4000-4500 grams”, and “40-42 weeks of gestation and 4000-4500 grams”. As
   the joint TMREL, all three categories were assigned to a relative risk equal
   to 1.
+
+.. note::
+
+  The above description from the risk appendix indicates that there are only
+  **three** universal TMREL categories (cat54, cat53, and cat56), whereas the RR
+  data in GBD 2019 indicates that cat55 is also a TMREL category.
+
+  Moreover, digging further into the RR data reveals that in addition to the 4 categories that have RR=1 for all sexes, age groups, and draws (cat53, cat54, cat55, cat56):
+
+  - There is one additional category (cat52) that has RR=1 for early neonatal
+    females for all draws;
+  - The two categories cat51 and cat52 have RR=1 in more than 75% of draws in
+    the early neonatal age group for both males and females;
+  - There are 4 additional categories (cat44, cat48, cat49, cat50) that have
+    RR=1 in at least one age/sex/draw combination.
+
+  Thus, it may be worth discussing with the GBD modeler whether using the four
+  categories cat53, cat54, cat55, cat56 as the TMREL regardless of sex, age
+  group, or draw is a reasonable approach.
 
 .. _kjell_lbwsg_category_rr_notebook: https://github.com/KjellSwedin/investigate_lbwsg_categories/blob/main/LSFF_Expose_RR.ipynb
 
