@@ -330,6 +330,22 @@ Validation and Verification Criteria
 
   List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
 
+Here is a validation that can be run in isolation prior to putting the LBWSG model into a full simulation with other model components:
+
+#.  Initialize a birth cohort with birthweights and gestational ages
+    distributed according to the LBWSG exposure distribution at birth
+    (age_group_id=164).
+
+#.  Age the population to 7 days and to 28 days, subjecting the population to
+    the LBWSG relative risks of all-cause mortality based on their LBWSG
+    category.
+
+#.  Record the person-time in the early neonatal age group (0-7 days) and late
+    neonatal age group (7-28 days) **in each of the 58 LBWSG categories**. Use
+    the person time to compute the average prevalence of each LBWSG catgory in
+    each age group, and compare the simulated prevalences with the ENN and LNN
+    category prevalences pulled from GBD.
+
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
