@@ -4,7 +4,7 @@
 Interventions critical features
 ===============================
 
-.. notes::
+.. note::
 
    This  template aims at making sure basic aspects of an intervention are understood and written out so that the SWE team has a clear idea of expectations and the Researchers and SWEs do not need to go back and forth about clarifying these details throughout the project. Questions we need to answer about intervention early in research process (to be agreed upon with the client):
 
@@ -19,10 +19,10 @@ Interventions critical features
 
 	2. Write a few SMART objectives, answering one question per objective
 	*Think about* What are they willing to ignore? Is GBD/Vivarium able to answer these questions well? How might we adapt our questions to questions that GBD can answer?
-	
+
 	eg. Research Q1: To quantify the what-if scenario of increasing coverage of vitamin A from exiting to X% on under 5 childhood mortality and morbidity.
 
-	eg. Research Q2: To quantify the what-if scenario of increasing coverage of folic acid from exiting to X% on under 5 childhood mortality and morbidity   
+	eg. Research Q2: To quantify the what-if scenario of increasing coverage of folic acid from exiting to X% on under 5 childhood mortality and morbidity
 
 2. Outcomes the intervention affects
 ------------------------------------
