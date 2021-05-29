@@ -330,6 +330,9 @@ Validation and Verification Criteria
 
   List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
 
+Validation of Mortality Rates, Relative Risks, and Exposure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Here is a validation that can be run in isolation prior to putting the LBWSG model into a full simulation with other model components:
 
 #.  Initialize a birth cohort with birthweights and gestational ages
@@ -348,8 +351,8 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
 
 #.  Record deaths in the ENN and LNN age groups, and compare the mortality
     rates with the corresponding all-cause mortality rates in GBD. Deaths could
-    also be stratified by LBWSG category to validate simulated RRs against the
-    RR input data.
+    also be stratified by LBWSG category to verify simulated RRs against the RR
+    input data.
 
 This validation could be run with increasing degrees of complexity:
 
@@ -367,6 +370,14 @@ d.  The validation could also be done by initializing a cohort in the ENN age
     group or LNN age group based on GBD prevalences, to ensure that the LBWSG
     relative risks will work correctly for simulants initialized into these age
     groups in our models.
+
+This validation strategy requires recording outputs stratified by all 58 LBWSG
+exposure categories, so it would be best to do the validation with as few model
+components as possible, then remove the stratified outputs once satisfactory
+behavior has been verified. In fact, it would be worth writing a reusable
+simulation specifically to do the (a), (b), and (d) validations above,
+independent of any specific project we're working on, and do the (c) validation
+for each project that uses LBWSG, depending on which causes are modeled.
 
 .. note::
 
