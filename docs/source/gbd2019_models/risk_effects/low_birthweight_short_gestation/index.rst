@@ -268,20 +268,34 @@ Vivarium Modeling Strategy
 
   List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
 
+We will follow the same strategy detailed in the :ref:`GBD 2017 LBWSG
+documentation <riks_effects_vivarium_section>`, with modifications to account
+for the continuous relative risk function defined by the interpolation method
+described above. In particular, we will need to compute a PAF for the
+interpolated RRs rather than using the PAF from GBD.
+
 The relative risk of each LBWSG category in GBD is for *all-cause mortality* in
-the early and late neonatal period. However, GBD identifies only a *subset* of
+the early and late neonatal periods. However, GBD identifies only a *subset* of
 causes (not *all* causes) that are affected by LBWSG, listed in the
 :ref:`affected entities table above <lbwsg_affected_causes_table_gbd_2019>`.
 Therefore, despite the RR's being measured for *all*-cause mortality, **we are
 interested in applying the relative risks only to the cause-specific mortality
 rates of the causes that GBD considers to be affected by LBWSG.**
 
-We will follow the same strategy detailed in the :ref:`GBD 2017 LBWSG
-documentation <riks_effects_vivarium_section>`, with modifications to account
-for the continuous relative risk function defined by the interpolation method
-described above.
+First we decompose the all-cause mortality rate (ACMR) as the sum of:
 
-.. list-table:: Risk Outcome Relationships for Vivarium
+   - Mortality from causes **affected** by LBWSG and **modeled** in the sim
+   - Mortality from causes **affected** by LBWSG but **not modeled** in the sim
+   - Mortality from causes **unaffected** by LBWSG and **modeled** in the sim
+   - Mortality from causes **unaffected** by LBWSG but **not modeled** in the sim
+
+We want to apply the relative risk and PAF only to the causes in the first two
+categories above. Specifically, we will apply the relative risks to the *excess
+mortality rate* (EMR) of modeled affected causes, and to the *cause-specific
+mortality rate* (CSMR) of unmodeled affected causes, as indicated in the
+following table.
+
+.. list-table:: Risk-Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
    :header-rows: 1
 
