@@ -345,9 +345,9 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
 
 #.  Record the person-time in the early neonatal age group (0-7 days) and late
     neonatal age group (7-28 days) **in each of the 58 LBWSG categories**. Use
-    the person time to compute the average prevalence of each LBWSG catgory in
-    each age group, and compare the simulated prevalences with the ENN and LNN
-    category prevalences pulled from GBD.
+    the person time to compute the person-time-weighted average prevalence of
+    each LBWSG catgory in each age group, and compare the simulated prevalences
+    with the ENN and LNN category prevalences pulled from GBD.
 
 #.  Record deaths in the ENN and LNN age groups, and compare the mortality
     rates with the corresponding all-cause mortality rates in GBD. Deaths could
@@ -383,9 +383,11 @@ for each project that uses LBWSG, depending on which causes are modeled.
 .. note::
 
   It would be worth checking with the GBD modelers to see whether it is accurate
-  to interpret the ENN exposure and LNN exposure as average LBWSG category
-  prevalences for the 0-7 day period and 7-28 day period (or equivalently(?),
-  the point prevalence at the midpoint of each interval).
+  to interpret the ENN exposure and LNN exposure as person-time-weighted average
+  LBWSG category prevalences for the 0-7 day period and 7-28 day period (or
+  perhaps the point prevalence at the midpoint of each interval, which
+  approximates the average prevalence using the midpoint rule with one
+  rectangle).
 
   Also, it would be worth finding out whether the modelers have data on the
   LBWSG category prevalences **at** 7 days and 28 days, as the risk appendix
