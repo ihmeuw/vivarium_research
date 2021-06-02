@@ -616,6 +616,8 @@ When implementing :eq:`mortality_hazard`, recall that
   "attributable fraction among cases" instead of the *population* attributable
   fraction?
 
+.. _2017_risk_lbwsg_todo_alternative_approaches:
+
 .. todo::
 
    - add more description of the all-causes PAF and most-detailed-cause PAF and the logical reasoning for using one over the other.
@@ -749,6 +751,8 @@ random choices.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
+
+.. _2017_risk_lbwsg_rr_strategy_assumptions_limitations:
 
 Apply relative risks only to causes affected by LBWSG in GBD
 ------------------------------------------------------------
