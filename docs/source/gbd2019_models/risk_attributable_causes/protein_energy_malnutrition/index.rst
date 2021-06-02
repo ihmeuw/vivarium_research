@@ -73,6 +73,7 @@ State and Transition Data Tables
      - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for SAM
 
+
 .. list-table:: Data Sources and Definitions
    :widths: 10 10 20 20
    :header-rows: 1
@@ -82,16 +83,12 @@ State and Transition Data Tables
      - Description
      - Notes
    * - MAM sequelae
-   	 - 
-   	 - {s198, s2033}
-   	 - Moderate wasting with edema, moderate wasting without edema
+     - 
+     - {s198, s2033}
+     - Moderate wasting with edema, moderate wasting without edema
    * - SAM sequelae
-   	 - 
-   	 - {s199, s2036}
-   	 - Severe wasting with edema, severe wasting without edema
-   
-Validation Criteria
--------------------
+     - 
+     - {s199, s2036}
+     - Severe wasting with edema, severe wasting without edema
 
-References
-----------
+Validatio
