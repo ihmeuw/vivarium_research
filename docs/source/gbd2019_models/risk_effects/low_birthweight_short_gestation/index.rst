@@ -346,7 +346,11 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
 #.  Record the person-time in the early neonatal age group (0-7 days) and late
     neonatal age group (7-28 days) **in each of the 58 LBWSG categories**. Use
     the person time to compute the person-time-weighted average prevalence of
-    each LBWSG catgory in each age group, and compare the simulated prevalences
+    each LBWSG catgory in each age group as
+
+      average = (person-time in category for age group) / (total person time for age group),
+
+    and compare the simulated prevalences
     with the ENN and LNN category prevalences pulled from GBD.
 
 #.  Record deaths in the ENN and LNN age groups, and compare the mortality
@@ -393,6 +397,48 @@ for each project that uses LBWSG, depending on which causes are modeled.
   LBWSG category prevalences **at** 7 days and 28 days, as the risk appendix
   indicates that these point prevalences were estimated as part of the analysis.
   If so, these would provide additional data to validate against.
+
+  We should ask the GBD modelers exactly how to interpret the ENN and LNN
+  prevalences pulled from GBD. According to
+  [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 175), the final step
+  of modeling LBWSG exposure is:
+
+    **Step C: Model joint distributions from birth to the end of the neonatal period, by l/y/s**
+
+    Early neonatal prevalence and late neonatal prevalence were estimated using
+    life table approaches for each 500g and 2-week bin. Using the all-cause
+    early neonatal mortality rate for each location-year-sex, births per
+    location-year-sex-bin, and the relative risks for each location-year-sex-bin
+    in the early neonatal period, the all-cause early neonatal mortality rate
+    was calculated for each location-year-sex- bin. The early neonatal mortality
+    rate per bin was used to calculate the number of survivors at seven days and
+    prevalence in the early neonatal period. Using the same process, the
+    all-cause late neonatal mortality rate for each location-year-sex was paired
+    with the number of survivors at seven days and late neonatal relative risks
+    per bin to calculate late neonatal prevalence and survivors at 28 days.
+
+  Specifically, we should ask the following:
+
+  - How exactly were the ENN and LNN prevalences computed in the above life
+    table approach? In particular:
+
+    - Can we interpret the ENN and LNN prevalences as person-time-weighted
+      average LBWSG category prevalences for the 0-7 day period and 7-28 day
+      periods, as described in the validation strategy above?
+
+    - Should the ENN and LNN prevalences instead be interpreted as the point
+      prevalence at the *midpoint* of each interval? The point prevalence at the
+      midpoint approximates the person-time-weighted average prevalence using the
+      midpoint rule with one rectangle, so these should be close to the average
+      prevalences but perhaps slightly different.
+
+    - Is there some other interpretation that would be more accurate?
+
+  - In addition to the ENN and LNN prevalences from GBD, can the modelers give
+    us the prevalences *at* 7 days and 28 days, since the above description
+    indicates that these point prevalences were computed as well?
+
+
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
