@@ -330,8 +330,8 @@ Validation and Verification Criteria
 
   List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
 
-Validation of Mortality Rates, Relative Risks, and Exposure
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Validation of Mortality Rates, Relative Risks, and Change in Exposure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Here is a validation that can be run in isolation prior to putting the LBWSG model into a full simulation with other model components:
 
@@ -348,10 +348,17 @@ Here is a validation that can be run in isolation prior to putting the LBWSG mod
     the person time to compute the person-time-weighted average prevalence of
     each LBWSG catgory in each age group as
 
-      average = (person-time in category for age group) / (total person time for age group),
+    .. math::
 
-    and compare the simulated prevalences
-    with the ENN and LNN category prevalences pulled from GBD.
+      \left(\genfrac{}{}{0}{}
+        {\text{person-time-weighted}}
+        {\text{average prevalence}}\right)
+      = \frac
+        {\text{person-time in category for age group}}
+        {\text{total person time for age group}},
+
+    and compare the simulated prevalences with the ENN and LNN category
+    prevalences pulled from GBD.
 
 #.  Record deaths in the ENN and LNN age groups, and compare the mortality
     rates with the corresponding all-cause mortality rates in GBD. Deaths could
@@ -385,18 +392,6 @@ independent of any specific project we're working on, and do the (c) validation
 for each project that uses LBWSG, depending on which causes are modeled.
 
 .. note::
-
-  It would be worth checking with the GBD modelers to see whether it is accurate
-  to interpret the ENN exposure and LNN exposure as person-time-weighted average
-  LBWSG category prevalences for the 0-7 day period and 7-28 day period (or
-  perhaps the point prevalence at the midpoint of each interval, which
-  approximates the average prevalence using the midpoint rule with one
-  rectangle).
-
-  Also, it would be worth finding out whether the modelers have data on the
-  LBWSG category prevalences **at** 7 days and 28 days, as the risk appendix
-  indicates that these point prevalences were estimated as part of the analysis.
-  If so, these would provide additional data to validate against.
 
   We should ask the GBD modelers exactly how to interpret the ENN and LNN
   prevalences pulled from GBD. According to
@@ -437,6 +432,9 @@ for each project that uses LBWSG, depending on which causes are modeled.
   - In addition to the ENN and LNN prevalences from GBD, can the modelers give
     us the prevalences *at* 7 days and 28 days, since the above description
     indicates that these point prevalences were computed as well?
+
+  The answers to these questions may dictate some adjuststments to the
+  validation strategy outlined above.
 
 
 
