@@ -7,6 +7,19 @@ Protein Energy Malnutrition
 GBD 2019 Modeling Strategy
 --------------------------
 
+PEM is responsible for both fatal and nonfatal outcomes within the GBD 
+framework. GBD maintains a cause of death model called "Nutritional 
+deficiencies" that is split into *PEM* and *Other Nutritional Deficiencies* that 
+estimates PEM mortality. Nonfatal PEM cases are modelled independently, using 
+the case definition moderate and severe malnutrition, defined in terms of 
+weight-for-height Z-scores (WHZ). All PEM cases are attributed to the GBD Child 
+Growth Failure risk factor.
+
+.. todo::
+   
+   Finish filling in details
+
+
 Protein Energy Malnutrition (PEM) in GBD 2019
 +++++++++++++++++++++++++++++++++++++++++++++
 
@@ -42,6 +55,40 @@ Data Description
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
+
+.. list-table:: State Data
+   :widths: 5 10 10 20
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - MAM
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for MAM
+   * - SAM
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for SAM
+
+.. list-table:: Data Sources and Definitions
+   :widths: 10 10 20 20
+   :header-rows: 1
+
+   * - Variable
+     - Source
+     - Description
+     - Notes
+   * - MAM sequelae
+   	 - 
+   	 - {s198, s2033}
+   	 - Moderate wasting with edema, moderate wasting without edema
+   * - SAM sequelae
+   	 - 
+   	 - {s199, s2036}
+   	 - Severe wasting with edema, severe wasting without edema
    
 Validation Criteria
 -------------------
