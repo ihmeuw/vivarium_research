@@ -61,7 +61,7 @@ data from population surveys, scientific literature, and hospital/claims
 records. The modelers first adjust survey data for seasonality; then all input 
 data with a non-reference case definition is adjusted using correction factors 
 estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days, 
-which corresponds with a remission rate of 36.5 cases / person-year. 
+which corresponds with a remission rate of 36.5 recoveries / person-year. 
 LRI severity splits are obtained from a meta-analysis, and then the 
 DisMod outputs are split according to severity before disablility weights for 
 YLD calculation are applied. [GBD-2019-Capstone-Appendix]_
