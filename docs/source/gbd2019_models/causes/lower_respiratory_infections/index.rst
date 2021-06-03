@@ -173,7 +173,7 @@ Data Description
      -
    * - S
      - prevalence
-     - 1-prevalence_c322
+     - 1-prevalence_calculated
      -
    * - S
      - excess mortality rate
@@ -193,7 +193,7 @@ Data Description
      -
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_c322}}`
+     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_calculated}}`
      -
    * - I
      - disability weights
@@ -216,7 +216,7 @@ Data Description
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_c322})}`
+     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_calculated})}`
      - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
    * - r
      - I
