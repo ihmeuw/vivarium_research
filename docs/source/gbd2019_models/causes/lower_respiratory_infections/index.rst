@@ -61,14 +61,14 @@ data from population surveys, scientific literature, and hospital/claims
 records. The modelers first adjust survey data for seasonality; then all input 
 data with a non-reference case definition is adjusted using correction factors 
 estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days, 
-which corresponds with a remission 36.5. The comprise the inputs for a DisMod 
-model. LRI severity splits are obtained from a meta-analysis, and then the 
+which corresponds with a remission rate of 36.5 cases / person-year. 
+LRI severity splits are obtained from a meta-analysis, and then the 
 DisMod outputs are split according to severity before disablility weights for 
 YLD calculation are applied. [GBD-2019-Capstone-Appendix]_
 
 .. todo::
 
-   ask sim science, and then gbd team, what "model-MR" is. different from dismod?
+   Ask sim science, and then gbd team, what "model-MR" is. Different from dismod?
 
 LRI viral etiologies include influenza and respiratory syncytial virus (RSV), 
 and bacterial etiologies include Streptococcus pneumoniae and Haemophilus 
@@ -169,7 +169,7 @@ Data Description
      - Notes
    * - S
      - birth prevalence
-     - 1-birth_prevalence_meid1258
+     - 0
      -
    * - S
      - prevalence
@@ -185,11 +185,11 @@ Data Description
      -
    * - I
      - birth prevalence
-     - birth_prevalence_meid1258
+     - 0
      -
    * - I
      - prevalence
-     - prevalence_c322
+     - prevalence_calculated
      -
    * - I
      - excess mortality rate
@@ -231,13 +231,13 @@ Data Description
      - Sources
      - Description
      - Notes
-   * - birth_prevalence_meid1258
-     - epi
-     - Birth Prevalence of LRI
-     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step='step4', status = 'best') #double check that it isn't measure_id=6
-   * - prevalence_c322
+   * - birth_prevalence_c322
      - como
-     - Prevalence of LRI
+     - 0
+     - No birth prevalence
+   * - prevalence_calculated
+     - incidence_c322 * 10/365
+     - Duration-based calculation of LRI Prevalence
      -
    * - deaths_c322
      - codcorrect
@@ -299,7 +299,6 @@ Validation Criteria
 -------------------
 Baseline vivarium model results should compare to GBD artifact data with respect to age-, sex-, location-, and year-specific LRI:
 
-- Birth prevalence
 - Prevalence
 - Incidence rate
 - Remission rate
