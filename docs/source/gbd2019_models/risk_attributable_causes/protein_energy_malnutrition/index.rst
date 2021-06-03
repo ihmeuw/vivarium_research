@@ -91,4 +91,8 @@ State and Transition Data Tables
      - {s199, s2036}
      - Severe wasting with edema, severe wasting without edema
 
-Validatio
+Validation Criteria
+-------------------
+
+References
+----------
