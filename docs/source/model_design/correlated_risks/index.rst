@@ -1,16 +1,16 @@
 .. _2017_risk_models:
 
-====================
+=========================
 Risk Correlation Proposal
-====================
+=========================
 
 Background and motivation
-----------------------
+-------------------------
 
 At the individual level, exposure to risk factors are likely to be correlated. Several examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, and childhood height and weight. Vivarium takes population exposure prevalence estimates by age/sex/year/location and determines the if a simulant is exposed to the risk factor such that the prevalence within the simulation matches the GBD estimate. The exposure status for multiple risk factors of the individuals within Vivarium should be adjusted so that they are correlated across those risks.
 
 
-Although correlated risk factor exposure may be important in a variety of contexts, we are proposing using childhood height and weight as a testing and motivating example. Childhood growth is an important metric for how children are developing. Children with low height and weight for their age are at higher risk of getting and dying from infectious diseases like diarrhea, lower respiratory infections, and measles. Height and weight should be correlated between children and each child should have dynamic but correlated height and weight over time as they age.  
+Although correlated risk factor exposure may be important in a variety of contexts, we are proposing using childhood height and weight as a testing and motivating example. Childhood growth is an important metric for how children are developing. Children with low height and weight for their age are at higher risk of getting and dying from infectious diseases like diarrhea, lower respiratory infections, and measles. Height and weight should be correlated between children and each child should have dynamic but correlated height and weight over time as they age.
 
 Risk exposure correlation
 ------------------------------
@@ -19,51 +19,51 @@ The proposed method to introduce correlation in risk factor exposure is by findi
 
 .. image:: gaussian_copulae.jpg
 
-Please see the ipynb Notebook for an example of how we intend to code this. 
-												 
+Please see the ipynb Notebook for an example of how we intend to code this.
+
 Attributable fraction correlation
 -------------------------------------
-Suppose that we introduce correlation in risk exposure but don’t properly adjust for the changes this causes in the combined attributable fractions between the two or more risks. The rate of disease among individuals and in aggregate will be wrong and the amount of error increases with larger values of the combined attributable fractions. 
+Suppose that we introduce correlation in risk exposure but don’t properly adjust for the changes this causes in the combined attributable fractions between the two or more risks. The rate of disease among individuals and in aggregate will be wrong and the amount of error increases with larger values of the combined attributable fractions.
 
 With some testing and simulation, we are able to show that the population attributable fraction for multiple risk factors depends on the correlation in those risks. To date, Vivarium has been using a risk deleted rate (e.g. incidence or mortality) based on an assumption that the risk exposures are independent. However, the more correlated the risks exposures, the more wrong this assumption will be. The overall idea is to take GBD rates and remove the combined contribution of risk factor attributable fractions (PAFs):
- 
+
 .. math::
 	i_0 = \left(1-\text{PAF}\right) \cdot i_{\text{GBD}}
- 
-Where i_0 is the risk-deleted rate, PAF is the population attributable fraction for a single or multiple risk factors, and  i_GBDis the rate from GBD. A combined PAF for multiple risk factors is the product of 1 minus the independent PAFs. 
- 
+
+Where i_0 is the risk-deleted rate, PAF is the population attributable fraction for a single or multiple risk factors, and  i_GBDis the rate from GBD. A combined PAF for multiple risk factors is the product of 1 minus the independent PAFs.
+
 .. math::
 	1 - \text{PAF}_{\text{Multiplicative}} = \left(1 - \text{PAF}_{\text{Risk1}}\right)\cdot\left(1 - \text{PAF}_{\text{Risk2}}\right)
-	
+
 This can be written in a slightly different way for each individual in the simulation and what we are calling the Multiplicative approach to combined PAFs:
- 
+
 .. math::
 	PAF_{multiplicative} = 1 - (1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n}RR_1^{e1_i}}) \cdot (1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n}RR_2^{e2_i}})
-	
-Where RR is a relative risk and e1 & e2 are indicators {0,1} for exposure status to each risk factor for each individual. We are proposing a slight variation on this formulation, what we are calling the Joint approach to combined PAFs: 
- 
+
+Where RR is a relative risk and e1 & e2 are indicators {0,1} for exposure status to each risk factor for each individual. We are proposing a slight variation on this formulation, what we are calling the Joint approach to combined PAFs:
+
 .. math::
 	PAF_{joint} = 1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n} RR_1^{e1_i} \cdot RR_2^{e2_i}}
-	
-These two approaches give nearly the same value for the attributable fraction when the exposure to each risk is independent. However, when the exposures to the risk factors are correlated, the so-called Joint approach gives a higher value of the attributable fraction than the Multiplicative (current Vivarium) approach. 
+
+These two approaches give nearly the same value for the attributable fraction when the exposure to each risk is independent. However, when the exposures to the risk factors are correlated, the so-called Joint approach gives a higher value of the attributable fraction than the Multiplicative (current Vivarium) approach.
 We have conducted some simple tests to determine how this impacts the final rate of events among individuals. In this test, we calculate a risk deleted rate as:
- 
+
 .. math::
 	i_0 = \left(1-\text{PAF}\right) \cdot i_{\text{GBD}}
- 
-And calculate the attributable fraction in the two ways described above, as a multiplicative and a joint PAF that we compared. 
- 
+
+And calculate the attributable fraction in the two ways described above, as a multiplicative and a joint PAF that we compared.
+
 .. math::
-	i_{multi,0} = (1-{PAF_{multi}}) \cdot i_{{GBD}}  
+	i_{multi,0} = (1-{PAF_{multi}}) \cdot i_{{GBD}}
 .. math::
 	i_{joint,0} = (1-{PAF_{joint}}) \cdot i_{{GBD}}
-	
-	
-Each individual then has a rate of event defined by 
- 
+
+
+Each individual then has a rate of event defined by
+
 .. math::
 	i_{e_1, e_2} = i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
- 
+
 Where i is the rate for an individual, i0 is the risk deleted rate, RR is a relative risk and e is an indicator {0,1} denoting if the individual is exposed to that risk factor.
 
 Our simple tests show that when evaluating these attributable fractions on individuals with a known rate of event, the joint PAFs return rates nearly identical to the known rate of events. In contrast, the multiplicative PAFs return rates that are too high when the risk exposures are correlated (rate here is 0.5).
@@ -72,9 +72,9 @@ Our simple tests show that when evaluating these attributable fractions on indiv
 
 Proposal to test
 -----------------------
-We would like to test these two changes for exposures and attributable fractions in the Balanced Energy Protein model as sensitivity analyses supplementing the primary analysis. The risks that we want to test are childhood growth failure: stunting, underweight, and wasting. We are proposing using correlation structures for these exposures from analyses of individual-level data. 
+We would like to test these two changes for exposures and attributable fractions in the Balanced Energy Protein model as sensitivity analyses supplementing the primary analysis. The risks that we want to test are childhood growth failure: stunting, underweight, and wasting. We are proposing using correlation structures for these exposures from analyses of individual-level data.
 
-Also in the BEP model, we would like to attempt creating correlated changes to propensity scores for stunting, underweight, and wasting within individuals over time. This would involve implementing multiple samples for these risk factors to determine propensity and risk exposure for each simulant. There would not be any changes to the attributable fractions for these risks, the only change would be in allowing these propensity values to change at defined time points, corresponding with GBD age groups. 
+Also in the BEP model, we would like to attempt creating correlated changes to propensity scores for stunting, underweight, and wasting within individuals over time. This would involve implementing multiple samples for these risk factors to determine propensity and risk exposure for each simulant. There would not be any changes to the attributable fractions for these risks, the only change would be in allowing these propensity values to change at defined time points, corresponding with GBD age groups.
 
 Illustrative code example
 -----------------------
@@ -116,12 +116,12 @@ multivariate normal distribution. All we need is correlation
 .. code:: ipython3
 
     # Simulate for testing purposes
-    
+
     N = 10_000  # number of individuals
-    
+
     # set random seed for reproducibility
     np.random.seed(12345)
-    
+
     # simulate data (to be replaced with real data, e.g. from NHANES, eventually)
     df = pd.DataFrame(index=range(N))
     df['SBP'] = np.random.normal(130, 20, size=N)
@@ -138,11 +138,11 @@ multivariate normal distribution. All we need is correlation
         .dataframe tbody tr th:only-of-type {
             vertical-align: middle;
         }
-    
+
         .dataframe tbody tr th {
             vertical-align: top;
         }
-    
+
         .dataframe thead th {
             text-align: right;
         }
@@ -306,20 +306,20 @@ rho:
 
     # HACK: instead of loading marginals from GBD, I'm going to re-use the ones
     # I synthesized above
-    
+
     exposure1_vals = df['SBP'].sort_values().values
     exposure2_vals = df['LDL-C'].sort_values().values
-    
+
     def exposure1_from_propensity(p):
         p = np.array(p)
         i = np.array(np.floor(p*len(exposure1_vals)), dtype=int)
         return exposure1_vals[i]
-    
+
     def exposure2_from_propensity(p):
         p = np.array(p)
         i = np.array(np.floor(p*len(exposure2_vals)), dtype=int)
         return exposure2_vals[i]
-    
+
 
 .. code:: ipython3
 
@@ -339,11 +339,11 @@ rho:
         .dataframe tbody tr th:only-of-type {
             vertical-align: middle;
         }
-    
+
         .dataframe tbody tr th {
             vertical-align: top;
         }
-    
+
         .dataframe thead th {
             text-align: right;
         }
@@ -506,10 +506,10 @@ Dividing through and cancelling terms yields a solution:
     # there are lots of ways to approximate this integral, but here is a cool one:
     rr_1 = 1.5
     rr_2 = 3
-    
-    e1 = np.clip((df['SBP'] - 120)/10, 0, np.inf)  # rescale exposures 
+
+    e1 = np.clip((df['SBP'] - 120)/10, 0, np.inf)  # rescale exposures
     e2 = np.clip((df['LDL-C'] - 4), 0, np.inf)
-    
+
     one_over_one_minus_paf = np.mean(rr_1**e1 * rr_2**e2)
     paf = 1 - 1/(one_over_one_minus_paf)
     paf
@@ -528,10 +528,10 @@ Dividing through and cancelling terms yields a solution:
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**e1)
     paf_1 = 1 - 1/ooomp_1
-    
+
     ooomp_2 = np.mean(rr_2**e2)
     paf_2 = 1 - 1/ooomp_2
-    
+
     1 - (1 - paf_1) * (1 - paf_2)
 
 
@@ -555,14 +555,14 @@ Here is an example of categorial risk exposures
 
     # simulate categorical data (to be replaced with real data, e.g. from MALED/Surveys, eventually)
     df = pd.DataFrame(index=range(N))
-    # Uncorrelated, binomial 
+    # Uncorrelated, binomial
     df['bin_a'] = np.random.binomial(1, 0.3, size=N)
-    df['bin_b'] = np.random.binomial(1, 0.1, size=N)  
-    
+    df['bin_b'] = np.random.binomial(1, 0.1, size=N)
+
     rr_1 = 2.5
     rr_2 = 5
-    
-    
+
+
 
 Define what we will call a joint PAF:
 
@@ -598,10 +598,10 @@ And also what we will call a multiplicative PAF:
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**df['bin_a'])
     paf_1 = 1 - 1/ooomp_1
-    
+
     ooomp_2 = np.mean(rr_2**df['bin_b'])
     paf_2 = 1 - 1/ooomp_2
-    
+
     1 - (1 - paf_1) * (1 - paf_2)
 
 
@@ -634,23 +634,23 @@ based on the height-for-age z-score definitions of stunting (stunted is
     # Uncorrelated, continuous normal
     mean_a = 0
     sd_a = 1.3
-    
+
     mean_b = -0.5
     sd_b = 1
-    
+
     rho = 0.8
-    
+
     df['nml_a'] = np.random.normal(mean_a, sd_a, size=N)
     df['nml_b'] = np.random.normal(mean_b, sd_b, size=N)
-    
+
     # Correlated continuous normal
     cor_nml = np.random.multivariate_normal([mean_a,mean_b], [[sd_a**2, rho],[rho, sd_b**2]], size=N)
     #cor_nml
     df['cor_a'] = cor_nml[:,0]
     df['cor_b'] = cor_nml[:,1]
-    
+
     # For this example, I am thinking about HAZ, so I will set 'exposed' to less than -2
-    
+
     ## Does this work how I am expecting it to in Python?!
     df['exp_na'] = 0
     df['exp_nb'] = 0
@@ -667,28 +667,28 @@ based on the height-for-age z-score definitions of stunting (stunted is
         if(df['cor_b'][i] < (-2)):
             df['exp_cb'][i] = 1
     df
-    
+
 
 
 .. parsed-literal::
 
-    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:28: SettingWithCopyWarning: 
+    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:28: SettingWithCopyWarning:
     A value is trying to be set on a copy of a slice from a DataFrame
-    
+
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:35: SettingWithCopyWarning: 
+    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:35: SettingWithCopyWarning:
     A value is trying to be set on a copy of a slice from a DataFrame
-    
+
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:33: SettingWithCopyWarning: 
+    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:33: SettingWithCopyWarning:
     A value is trying to be set on a copy of a slice from a DataFrame
-    
+
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:31: SettingWithCopyWarning: 
+    C:\Users\ctroeger\AppData\Local\Continuum\miniconda3\lib\site-packages\ipykernel_launcher.py:31: SettingWithCopyWarning:
     A value is trying to be set on a copy of a slice from a DataFrame
-    
+
     See the caveats in the documentation: https://pandas.pydata.org/pandas-docs/stable/user_guide/indexing.html#returning-a-view-versus-a-copy
-    
+
 
 
 
@@ -699,11 +699,11 @@ based on the height-for-age z-score definitions of stunting (stunted is
         .dataframe tbody tr th:only-of-type {
             vertical-align: middle;
         }
-    
+
         .dataframe tbody tr th {
             vertical-align: top;
         }
-    
+
         .dataframe thead th {
             text-align: right;
         }
@@ -885,13 +885,13 @@ based on the height-for-age z-score definitions of stunting (stunted is
 .. parsed-literal::
 
     0.0573 0.069 0.0611 0.0721
-    
+
 
 .. code:: ipython3
 
     # Compare just to make sure I got what I expected
     sns.jointplot(df['nml_a'], df['nml_b'])
-    
+
 
 
 
@@ -947,10 +947,10 @@ When the exposures are independent, it seems that the PAFs from the multiplicati
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**df['exp_na'])
     paf_1 = 1 - 1/ooomp_1
-    
+
     ooomp_2 = np.mean(rr_2**df['exp_nb'])
     paf_2 = 1 - 1/ooomp_2
-    
+
     paf_m_ind = 1 - (1 - paf_1) * (1 - paf_2)
     paf_m_ind
 
@@ -987,10 +987,10 @@ However, when the exposures are correlated, it seems that the PAFs from the the 
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**df['exp_ca'])
     paf_1 = 1 - 1/ooomp_1
-    
+
     ooomp_2 = np.mean(rr_2**df['exp_cb'])
     paf_2 = 1 - 1/ooomp_2
-    
+
     paf_m_cor = 1 - (1 - paf_1) * (1 - paf_2)
     paf_m_cor
 
@@ -1020,7 +1020,7 @@ multiplicative and joint:
 .. math::
 
 
-   i_{multi,0} = (1-{PAF_{multi}}) \cdot i_{{GBD}}  
+   i_{multi,0} = (1-{PAF_{multi}}) \cdot i_{{GBD}}
 
 .. math::
 
@@ -1037,19 +1037,19 @@ And we can continue to find an individual’s rate the same way:
 .. code:: ipython3
 
     rate = 0.8
-    
+
     # Independent draws
     multi_rate0 = (1-paf_m_ind) * rate
     joint_rate0 = (1-paf_j_ind) * rate
     df['ind_multi_rate'] = multi_rate0 * rr_1**df['exp_na'] * rr_2**df['exp_nb']
     df['ind_joint_rate'] = joint_rate0 * rr_1**df['exp_na'] * rr_2**df['exp_nb']
-    
+
     # Correlated draws
     multi_rate0 = (1-paf_m_cor) * rate
     joint_rate0 = (1-paf_j_cor) * rate
     df['cor_multi_rate'] = multi_rate0 * rr_1**df['exp_ca'] * rr_2**df['exp_cb']
     df['cor_joint_rate'] = joint_rate0 * rr_1**df['exp_ca'] * rr_2**df['exp_cb']
-    
+
 
 .. code:: ipython3
 
@@ -1117,80 +1117,80 @@ Apply this same structure in R to produce a function that can be used to test di
     # library(ggplot2)
     # library(reshape2)
     # library(data.table)
-    # 
-    # run_paf_testing <- function(n, mean_a, mean_b, sd_a, sd_b, rho, rate, rr_1, rr_2){    
+    #
+    # run_paf_testing <- function(n, mean_a, mean_b, sd_a, sd_b, rho, rate, rr_1, rr_2){
     #   df <- data.frame(id = 1:n)
     #   df$nml_a = rnorm(n = n, mean_a, sd_a)
     #   df$nml_b = rnorm(n, mean_b, sd_b)
-    #   
+    #
     #   # Correlated continuous normal
     #   sigma <- matrix(c(sd_a^2,rho,rho,sd_b^2), ncol=2)
     #   cor_nml <- mvrnorm(n= n, mu = c(mean_a, mean_b), Sigma=sigma)
-    #   
+    #
     #   #cor_nml
     #   df$cor_a = cor_nml[,1]
     #   df$cor_b = cor_nml[,2]
-    #   
+    #
     #   # For this example, I am thinking about HAZ, so I will set 'exposed' to less than -2
     #   for(l in c("nml_a","nml_b","cor_a","cor_b")){
     #     y <- ifelse(df[,l] < (-2), 1, 0)
     #     df[,paste0("exp_",l)] <- y
     #   }
-    #   
+    #
     #   # What is the value of the joint risk approach?
     #   one_over_one_minus_paf = mean(rr_1^df$exp_nml_a * rr_2^df$exp_nml_b)
     #   paf_j_ind = 1 - 1/(one_over_one_minus_paf)
-    #   
+    #
     #   ooomp_1 = mean(rr_1^df$exp_nml_a)
     #   paf_1 = 1 - 1/ooomp_1
-    #   
+    #
     #   ooomp_2 = mean(rr_2^df$exp_nml_b)
     #   paf_2 = 1 - 1/ooomp_2
-    #   
+    #
     #   paf_m_ind = 1 - (1 - paf_1) * (1 - paf_2)
-    #   
+    #
     #   # What is the value of the joint risk approach?
     #   one_over_one_minus_paf = mean(rr_1^df$exp_cor_a * rr_2^df$exp_cor_b)
     #   paf_j_cor = 1 - 1/(one_over_one_minus_paf)
-    #   
+    #
     #   # how does this compare to multiplicative approx of paf?
     #   ooomp_1 = mean(rr_1^df$exp_cor_a)
     #   paf_1 = 1 - 1/ooomp_1
-    #   
+    #
     #   ooomp_2 = mean(rr_2^df$exp_cor_b)
     #   paf_2 = 1 - 1/ooomp_2
-    #   
+    #
     #   paf_m_cor = 1 - (1 - paf_1) * (1 - paf_2)
-    #   
+    #
     #   # Finally test rates
     #   # Independent draws
     #   multi_rate0 = (1-paf_m_ind) * rate
     #   joint_rate0 = (1-paf_j_ind) * rate
     #   df$ind_multi_rate = multi_rate0 * rr_1^df$exp_nml_a * rr_2^df$exp_nml_b
     #   df$ind_joint_rate = joint_rate0 * rr_1^df$exp_nml_a * rr_2^df$exp_nml_b
-    #   
+    #
     #   # Correlated draws
     #   multi_rate0 = (1-paf_m_cor) * rate
     #   joint_rate0 = (1-paf_j_cor) * rate
     #   df$cor_multi_rate = multi_rate0 * rr_1^df$exp_cor_a * rr_2^df$exp_cor_b
     #   df$cor_joint_rate = joint_rate0 * rr_1^df$exp_cor_a * rr_2^df$exp_cor_b
-    #   
-    #   output <- data.frame(rate, rr_1, rr_2, mean_a, mean_b, rho, n, paf_j_cor, paf_m_cor, paf_j_ind, paf_m_ind, 
+    #
+    #   output <- data.frame(rate, rr_1, rr_2, mean_a, mean_b, rho, n, paf_j_cor, paf_m_cor, paf_j_ind, paf_m_ind,
     #                        ind_multi_rate = mean(df$ind_multi_rate),
     #                        ind_joint_rate = mean(df$ind_joint_rate),
     #                        cor_joint_rate = mean(df$cor_joint_rate),
     #                        cor_multi_rate = mean(df$cor_multi_rate))
-    #   return(output)                     
+    #   return(output)
     # }
-    # 
+    #
     # loop_df <- data.frame()
     # for(i in seq(0.02, 1, 0.02)){
     #   p <- run_paf_testing(n=1000, mean_a = (-1), mean_b = mean_b, sd_a = 1.2, sd_b, rate=0.5, rho=i, rr_1 = 2, rr_2 = 4)
     #   loop_df <- rbind(loop_df, p)
     # }
-    # 
+    #
     # ggplot(subset(melt_df, variable %like% "cor_"), aes(x=rho, y=value, col=variable)) + geom_point(size=3) + ylab("Rate") +
-    #   xlab("Covariance") + theme_minimal() + ggtitle("Correlated Exposures") + 
+    #   xlab("Covariance") + theme_minimal() + ggtitle("Correlated Exposures") +
     #   scale_color_manual("Approach", values = c("purple","red"), labels=c("Joint PAF",
     #                                                                       "Multiplicative PAF"))
 
