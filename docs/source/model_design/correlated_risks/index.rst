@@ -77,7 +77,7 @@ We would like to test these two changes for exposures and attributable fractions
 Also in the BEP model, we would like to attempt creating correlated changes to propensity scores for stunting, underweight, and wasting within individuals over time. This would involve implementing multiple samples for these risk factors to determine propensity and risk exposure for each simulant. There would not be any changes to the attributable fractions for these risks, the only change would be in allowing these propensity values to change at defined time points, corresponding with GBD age groups.
 
 Illustrative code example
------------------------
+-------------------------
 
 This file is a practical example and test of approaches to change the population attributable fraction (PAF) for risk factors in Vivarium such that they account for observed correlation in exposure between risks.
 ====================================================================================================================================================================================================================
@@ -617,7 +617,7 @@ The approaches give nearly the same estimate of the combined PAF when
 the exposures are independent.
 
 Now we are making it a bit more complicated, sim some data for continuous exposures
----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------
 
 We have made two pairs of random distributions with the same means and
 standard deviations. First, sim without correlation (nml_a, nml_b).
