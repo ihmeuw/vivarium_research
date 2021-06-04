@@ -333,6 +333,16 @@ March 2021.
     \times [0,4500\text{g}]`, starting with the values
     :math:`\mathit{RR}(x_\text{cat},y_\text{cat})` at the 58 category midpoints.
 
+    .. note::
+
+      One could consider using points other than the category midpoints to
+      anchor the RRs. For example, perhaps it would be better to assign the GBD
+      relative risk to the "average location of the category" with respect to
+      prevalence, or to choose a point so that the average RR for the category
+      matches the RR from GBD. However, this would (1) require using exposure
+      data as well as RR data, which varies by location, and would (2) require
+      more time on the parts of the human and the computer to implement.
+
 #.  **Take logarithms:** Since the LBWSG relative risks vary widely between
     categories (from 1.0 in the TMREL up to more than 1600 in the highest risk
     category in some draws), we will do the interpolation in log space to keep
