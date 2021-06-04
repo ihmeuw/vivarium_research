@@ -474,6 +474,17 @@ March 2021.
         if it would actually be better to keep the interpolated RRs even though
         they are greater than 1 in some regions of the TMREL categories.
 
+        Another option would be to add grid points at the corners of the TMREL
+        categories, and set the RRs of these points to 1 before interpolating.
+        This would force the the interpolated RRs to be 1 on the entire TMREL
+        region while keeping the RR function continuous. This strategy would
+        introduce 2 new :math:`x`-coordinates and 2 new :math:`y`-coordinates,
+        increasing the grid size to :math:`15\times 13 = 195` and the number of
+        interpolation rectangles to :math:`14\times 12 = 168`. This may or may
+        not slow down the interpolation by a noticeable amount. Some care should
+        be taken if using this approach, as it's possible that the interpolated
+        RR values near the TMREL categories could change in undesirable ways.
+
 .. _large-scale food fortification project: https://github.com/ihmeuw/vivarium_research_lsff
 
 .. _convex set: https://en.wikipedia.org/wiki/Convex_set
