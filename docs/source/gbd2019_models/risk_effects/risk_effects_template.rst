@@ -106,7 +106,7 @@ GBD 2019 Modeling Strategy
 
 .. todo::
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix]_ is a good source for this information in addition to the GBD risk modeler.
+	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]_ is a good source for this information in addition to the GBD risk modeler.
 
 .. todo::
 
@@ -227,11 +227,15 @@ References
 
 .. todo::
 
+  Update the GBD 2019 Risk Factor Methods appendix citation to be unique to your
+  risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk
+  Name}-Effects')
+
   Update the appropriate page numbers in the GBD risk factors methods appendix below
 
   Add additional references as necessary
 
-.. [GBD-2019-Risk-Factors-Appendix]
+.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]
 
   Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
 
