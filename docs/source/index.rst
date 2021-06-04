@@ -39,7 +39,7 @@ Descriptions of what goes into building all the pieces of a Vivarium model.
 Concept model documents for Vivarium simulations, which may rely on GBD 2017 or GBD 2019 cause and risk models.
 
 :ref:`Intervention Models for Vivarium Simulations <intervention_models>`
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 Intervention model documents for Vivarium simulations, which are incorporated into simulation concept model documents.
 

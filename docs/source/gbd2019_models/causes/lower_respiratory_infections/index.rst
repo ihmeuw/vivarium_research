@@ -61,14 +61,14 @@ data from population surveys, scientific literature, and hospital/claims
 records. The modelers first adjust survey data for seasonality; then all input 
 data with a non-reference case definition is adjusted using correction factors 
 estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days, 
-which corresponds with a remission 36.5. The comprise the inputs for a DisMod 
-model. LRI severity splits are obtained from a meta-analysis, and then the 
+which corresponds with a remission rate of 36.5 recoveries / person-year. 
+LRI severity splits are obtained from a meta-analysis, and then the 
 DisMod outputs are split according to severity before disablility weights for 
 YLD calculation are applied. [GBD-2019-Capstone-Appendix]_
 
 .. todo::
 
-   ask sim science, and then gbd team, what "model-MR" is. different from dismod?
+   Ask sim science, and then gbd team, what "model-MR" is. Different from dismod?
 
 LRI viral etiologies include influenza and respiratory syncytial virus (RSV), 
 and bacterial etiologies include Streptococcus pneumoniae and Haemophilus 
@@ -132,12 +132,6 @@ effects of Guillain-Barré syndrome (which can include paralysis, for example).
 However, since the prevalence of GBS is so low, there would likely not be great 
 benefit in capturing its long-term YLDs in addition to its short-term YLDs.
 
-
-.. note::
-
-	Birth prevalence of LRI was allowed in the DisMod modeling process for LRI. However, it was not reported as a final result in GBD 2019. LRI birth prevalence must therefore be retreieved using get_model_results('epi', 1258, age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step = 'step4', status = 'best') or get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step = 'step4'). (Todo: this
-  was the case in GBD2017. Check that it's not measure_id=6 instead of 5?)
-
 .. todo::
 
    Describe more assumptions and limitations of the model.
@@ -169,11 +163,11 @@ Data Description
      - Notes
    * - S
      - birth prevalence
-     - 1-birth_prevalence_meid1258
+     - 0
      -
    * - S
      - prevalence
-     - 1-prevalence_c322
+     - 1-prevalence_calculated
      -
    * - S
      - excess mortality rate
@@ -185,15 +179,15 @@ Data Description
      -
    * - I
      - birth prevalence
-     - birth_prevalence_meid1258
+     - 0
      -
    * - I
      - prevalence
-     - prevalence_c322
+     - prevalence_calculated
      -
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_c322}}`
+     - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_calculated}}`
      -
    * - I
      - disability weights
@@ -216,7 +210,7 @@ Data Description
    * - i
      - S
      - I
-     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_c322})}`
+     - :math:`\frac{\text{incidence_rate_c322}}{(1-\text{prevalence_calculated})}`
      - Incidence in GBD are estimated for the total population. Here we transform incidence to be a rate within the susceptible population.
    * - r
      - I
@@ -231,13 +225,13 @@ Data Description
      - Sources
      - Description
      - Notes
-   * - birth_prevalence_meid1258
-     - epi
-     - Birth Prevalence of LRI
-     - get_draws('modelable_entity_id', 1258, source='epi', age_group_id=164, measure_id=5, gbd_round_id=6, year_id=2019, decomp_step='step4', status = 'best') #double check that it isn't measure_id=6
-   * - prevalence_c322
+   * - birth_prevalence_c322
      - como
-     - Prevalence of LRI
+     - 0
+     - No birth prevalence
+   * - prevalence_calculated
+     - incidence_c322 * 10/365
+     - Duration-based calculation of LRI Prevalence
      -
    * - deaths_c322
      - codcorrect
@@ -299,7 +293,6 @@ Validation Criteria
 -------------------
 Baseline vivarium model results should compare to GBD artifact data with respect to age-, sex-, location-, and year-specific LRI:
 
-- Birth prevalence
 - Prevalence
 - Incidence rate
 - Remission rate
