@@ -485,13 +485,25 @@ principles as a double integral (below :math:`p_{e_1,e_2}` denotes the
 joint probability density of exposure level :math:`(e_1,e_2)` in the
 population:
 
-:raw-latex:`\begin{align*}
-i_{\text{GBD}} &= \int_{e_1} \int_{e_2} i_{e_1, e_2} p_{e_1,e_2} de_1 de_2\\
-&= \int_{e_1} \int_{e_2} i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
-p_{e_1,e_2} de_1 de_2\\
-&= \int_{e_1} \int_{e_2} \left(1-\text{PAF}\right) \cdot i_{\text{GBD}} \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
-p_{e_1,e_2} de_1 de_2\\
-\end{align*}`
+..
+  :raw-latex:`\begin{align*}
+  i_{\text{GBD}} &= \int_{e_1} \int_{e_2} i_{e_1, e_2} p_{e_1,e_2} de_1 de_2\\
+  &= \int_{e_1} \int_{e_2} i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
+  p_{e_1,e_2} de_1 de_2\\
+  &= \int_{e_1} \int_{e_2} \left(1-\text{PAF}\right) \cdot i_{\text{GBD}} \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
+  p_{e_1,e_2} de_1 de_2\\
+  \end{align*}`
+
+.. math::
+  :nowrap:
+
+  \begin{align*}
+  i_{\text{GBD}} &= \int_{e_1} \int_{e_2} i_{e_1, e_2} p_{e_1,e_2} de_1 de_2\\
+  &= \int_{e_1} \int_{e_2} i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
+  p_{e_1,e_2} de_1 de_2\\
+  &= \int_{e_1} \int_{e_2} \left(1-\text{PAF}\right) \cdot i_{\text{GBD}} \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
+  p_{e_1,e_2} de_1 de_2
+  \end{align*}
 
 Dividing through and cancelling terms yields a solution:
 
