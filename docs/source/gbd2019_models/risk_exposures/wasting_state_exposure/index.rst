@@ -503,7 +503,7 @@ The code used to solve this system of equations is here:
 Finite state machine 1x4 + death
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo:: include correct wasting diagram with death from nicole
+.. image:: wasting_state_1x4_plus_death.svg
 
 To solve the transition pobabilities, we use a Markov Chain transition matrix **T**. 
 
