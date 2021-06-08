@@ -78,14 +78,14 @@ Treatment and management for acute malnutrition
     - Blanket Supplementary Feeding Programme
   * - IYCF
     - Infant and young child feeding
-  * - 
-    - 
-  * - 
-    - 
-  * - 
-    - 
-  * - 
-    - 
+  * - WFL (used in EMOH guideline)
+    - weight-for-length z-score
+  * - WFH (used in EMOH guideline)
+    - weight-for-height z-score
+  * - WLZ (used in GBD)
+    - weight-for-length z-score
+  * - WHZ (used in GBD)
+    - weight-for-height z-score
   * - 
     - 
   * - 
@@ -455,4 +455,16 @@ Affected Outcome #1
 
   Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
 
-Assumptions an
+Assumptions and Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Validation and Verification Criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+References
+----------
+
+.. [EMOH] Government of Ethiopia, Federal Ministry of Health. 2019. 
+   National Guideline for the Management of Acute
+   Malnutrition. Addis Ababa: FMOH.
+
