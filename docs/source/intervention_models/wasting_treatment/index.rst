@@ -78,14 +78,14 @@ Treatment and management for acute malnutrition
     - Blanket Supplementary Feeding Programme
   * - IYCF
     - Infant and young child feeding
-  * - WFL (used in EMOH guideline)
-    - weight-for-length z-score
-  * - WFH (used in EMOH guideline)
-    - weight-for-height z-score
-  * - WLZ (used in GBD)
-    - weight-for-length z-score
-  * - WHZ (used in GBD)
-    - weight-for-height z-score
+  * - WFL 
+    - weight-for-length z-score (used in EMOH guideline)
+  * - WFH 
+    - weight-for-height z-score (used in EMOH guideline)
+  * - WLZ 
+    - weight-for-length z-score (used in GBD)
+  * - WHZ 
+    - weight-for-height z-score (used in GBD)
   * - 
     - 
   * - 
@@ -168,7 +168,7 @@ In infants 0-6 months
 :underline:`Classify SAM with or without medical complications`
 
 * Any grade of bilateral pitting oedema (+, ++ or +++) OR
-* WFL < -3 zscore OR
+* WHZ < -3 zscore OR
 * Recent weight loss or failure to gain weight OR
 * Ineffective feeding (attachment, positioning and suckling) directly observed for 15-20, minutes, ideally in supervised separate area OR
 * Presence of any of the following medical complications:
@@ -203,7 +203,7 @@ NOTE: All infants 0-6 months of age with SAM with or without medical complicatio
 :underline:`Classify MAM`
 
 * MUAC of lactatating mother of infant 0-6 months <23.0 cm
-* WFH ≥-3 to <-2 zscores AND 
+* WHZ ≥-3 to <-2 zscores AND 
 * No bilateral pitting oedema AND 
 * No medical complications
 * Clinically well and alert
@@ -215,7 +215,7 @@ breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, 
 
 :underline:`Classify no acute malnutrition`
 
-* WFH ≥-2 zscores AND 
+* WHZ ≥-2 zscores AND 
 * No bilateral pitting oedema
 
 **Treatment** 
@@ -230,7 +230,7 @@ In children 6-59 months
 :underline:`Classify SAM with medical complications`
 
 * Any grade of bilateral pitting oedema (+, ++, +++) OR 
-* WFH < -3 zscore OR
+* WHZ < -3 zscore OR
 * Presence of any of the following medical complications:
 
   - Poor appetite
@@ -255,7 +255,7 @@ Admit to SC
 :underline:`Classify SAM without medical complications`
 
 * Bilateral pitting oedema + or ++ OR 
-* WFH <-3 z-scores AND 
+* WHZ <-3 z-scores AND 
 * Appetite test passed
 * No medical complications
 * Clinically well and alert
@@ -266,7 +266,7 @@ Admit in OTP
 
 :underline:`Classify MAM`
 
-* WFH ≥ -3 to <-2 z scores AND
+* WHZ ≥ -3 to <-2 z scores AND
 * No bilateral pitting oedema 
 * No medical complications
 * Clinically well and alert
@@ -277,7 +277,7 @@ Admit in TSFP and counsel on appropriate IYCF practices.
 
 :underline:`Classify no acute malnutrition`
 
-* WFH ≥ -2 z score AND 
+* WHZ ≥ -2 z score AND 
 * No bilateral pitting oedema
 
 **Treatment**
@@ -311,14 +311,14 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-Let us assume program coverage is a stand-in value of 40%. C = 0.4; 1-C = 0.6 (This will be updated). 
+Let us assume program coverage is a stand-in value of 40%. Cmam and Csam = 0.4; 1-Cmam and 1-Csam = 0.6 (This will be updated). 
 
 .. todo::
 
   We have been in contact with EMOH but seems like they only have DHIS data which does not give us coverage rate. We will dig a bit more into the literature, or reach out to CIFF/UNICEF since UNICEF is the implementation partner for treatment in Ethiopia. 
 
 .. list-table:: Baseline coverage data
-  :widths: 15 15 15 15 15
+  :widths: 10 15 20 10 15
   :header-rows: 1
 
   * - Location
@@ -326,11 +326,31 @@ Let us assume program coverage is a stand-in value of 40%. C = 0.4; 1-C = 0.6 (T
     - Coverage parameter
     - Value
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
+  * - Ethiopia
+    - Kids 0-6 months with MAM 
+    - Cmam_0_6
+    - 0.4 ~ currently stand-in until we find better data
+    - Coverage of TSFP for breastfeeding mothers among 0-6 month kids with MAM
+  * - Ethiopia
+    - Kids 0-6 months with any SAM 
+    - Csam_0-6
+    - 0.4 ~ currently stand-in until we find better data
+    - Coverage of SC for kids 0-6 months with any SAM
+  * - Ethiopia
+    - Kids 6-59 months with MAM 
+    - Cmam_6_59
+    - 0.4 ~ currently stand-in until we find better data
+    - Coverage of TSFP for kids 6-59 months with MAM
+  * - Ethiopia
+    - Kids 6-59 months with SAM with oedema
+    - Csam_6_59_sc 
+    - 0.4 ~ Currently stand-in until we find better data
+    - Coverage of SC for SAM kids with medical complications (oedema)
+  * - Ethiopia
+    - Kids 6-59 months with SAM without complications (no oedema)
+    - Csam_6_59_otp 
+    - 0.4 ~ currently stand-in until we find better data
+    - Coverage of SC for kids with un-complicated SAM
 
 .. _3.0:
 
@@ -340,18 +360,36 @@ Vivarium Modeling Strategy
 .. image:: treatment_diagram.svg
    :alt: Compartmental diagram with treatment
 
-For MAM 
 
-  - :math:`r3 =  r3_{ux}\times(1-C) + r3_{tx}\times(C)`
-  - :math:`d2 =  d2_{ux}\times(1-C) + d2_{tx}\times(C)`
-  - :math:`i1 =  i1_{ux}\times(1-C) + i1_{tx}\times(C)`
+For **MAM** 0-6 months
 
-For SAM
+ - :math:`r3 =  r3_{ux}\times(1-C_{mam_0-6}) + r3_{tx}\times(C_{mam_0-6})`
+ - :math:`d2 =  d2_{ux}\times(1-C_{mam_0-6}) + d2_{tx}\times(C_{mam_0-6})`
+ - :math:`i1 =  i1_{ux}\times(1-C_{mam_0-6}) + i1_{tx}\times(C_{mam_0-6})`
 
- - :math:`r2 =  r2_{ux}\times(1-C) + r2_{tx}\times(C)`
- - :math:`d1 =  d1_{ux}\times(1-C) + d1_{tx}\times(C)`
+For **SAM** 0-6 months
+
+ - :math:`r2 =  r2_{ux}\times(1-C_{sam_0-6}) + r2_{tx}\times(C_{sam_0-6})`
+ - :math:`d1 =  d1_{ux}\times(1-C_{sam_0-6}) + d1_{tx}\times(C_{sam_0-6})`
+
+For **MAM** 6-59 months
+
+ - :math:`r3 =  r3_{ux}\times(1-C_{mam_6-59}) + r3_{tx}\times(C_{mam_6-59})`
+ - :math:`d2 =  d2_{ux}\times(1-C_{mam_6-59}) + d2_{tx}\times(C_{mam_6-59})`
+ - :math:`i1 =  i1_{ux}\times(1-C_{mam_6-59}) + i1_{tx}\times(C_{mam_6-59})`
+
+For **SAM** 6-59 months
+
+Let O be the proportion of complicated SAM (with oedema) among those with SAM
+
+ - :math:`r2_{ux} =  r2_{ux-un}\times(1-O) + r2_{ux-comp}\times(O)`
+ - :math:`d1_{ux} =  d1_{ux-un}\times(1-O) + d1_{ux-comp}\times(O)`
+ - :math:`r2_{tx} =  r2_{tx-un}\times(1-O) + r2_{tx-comp}\times(O)`
+ - :math:`d1_{tx} =  d1_{tx-un}\times(1-O) + d1_{tx-comp}\times(O)`
 
 
+ - :math:`r2 =  r2_{ux}\times(1-C_{sam_6-59}) + r2_{tx}\times(C_{sam_6-59})`
+ - :math:`d1 =  d1_{ux}\times(1-C_{sam_6-59}) + d1_{tx}\times(C_{sam_6-59})`
 
 
 
