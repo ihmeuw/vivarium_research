@@ -266,7 +266,7 @@ T =
 | p4 | p3 | p2 | p1 |
 +----+----+----+----+
 
-:math:`π_{T}` is the eigenvector at equilibriuum
+:math:`π_{T}` is the eigenvector at equilibrium
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
@@ -275,82 +275,522 @@ T =
 
 Solving a)
 
-  1)  p4xs4 + p3xr4 = p4 
-  2)  p4xi3 + p3xs3 + p2xr3 = p3
-  3)  p3xi2 + p2xs2 + p1xr2 = p2
-  4)  p2xi1 + p1xs1 = p1
+  1)  :math:`p_4s_4 + p_3r_4 = p_4` 
+  2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 = p_3`
+  3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 = p_2`
+  4)  :math:`p_2i_1 + p_1xs_1 = p_1`
+
 
 Rows of the P matrix sums to 1
 
-  5)  s4 + i3 =1
-  6)  r4 + s3 + i2 = 1
-  7)  r3 + s2 + i1 =1
-  8)  r2 + s1 = 1
+  5)  :math:`s_4 + i_3 = 1`
+  6)  :math:`r_4 + s_3 + i_2 = 1`
+  7)  :math:`r_3 + s_2 + i_1 = 1`
+  8)  :math:`r_2 + s_1 = 1`
 
 We have duration of treated and untreated sam and mam as well as coverage from the literature :   
 
-  9)  r2 = 1/Dsam   
-  10) r3 + i1  = 1/Dmam
-  11) Eq 11 is defined in terms of i3 or duration of MILD (cat3); we write the solution in terms of cat3 duration or i3   
+  9)  :math:`r_2 = 1/Dsam`   
+  10) :math:`r_3 + i_1  = 1/Dmam`
+  11) :math:`i_2 + r_4 = 1/dur\_cat3`
 
 where
 
  - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
  - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
+ - Duration of cat 3: :math:`1 / (i_2 + r_4)`. We still need more values from the literature to solve for this.
  - tx is treated
  - ux is untreated
  - C is treatment coverage proportion
 
-We solve for the unknowns using the matrix solution
+
+
+We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
+for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
+find values from the literature with which to update this.
+
+Solving in terms of :math:`i_3`, we get:
+
+.. list-table:: Transition rates solved in terms of :math:`i_3`
+   :widths: 10 25
+   :header-rows: 1
+
+   * - Variable
+     - Value
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - -i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3)/p3
+   * - s4
+     - 1.0 - i3
+   * - r2
+     - 0.025
+   * - r3
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p2
+   * - r4
+     - i3*p4/p3
+   * - i1
+     - 0.025*p1/p2
+   * - i2
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p3
+
+
+Solving in terms of :math:`dur\_cat3`, we get:
+
+.. list-table:: Transition rates solved in terms of :math:`dur\_cat3`
+   :widths: 10 25
+   :header-rows: 1
+
+   * - Variable
+     - Value
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - (dur_cat3 - 1.0)/dur_cat3
+   * - s4
+     - 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 - 280.0*p3)/(dur_cat3*p4)
+   * - r2
+     - 0.025
+   * - r3
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p2
+   * - r4
+     - 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 + 280.0*p3)/(dur_cat3*p3)
+   * - i1
+     - 0.025*p1/p2
+   * - i2
+     - 0.00357142857142857*(-7.0*p1 + 4.0*p2)/p3
+   * - i3
+     - 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 + 280.0*p3)/(dur_cat3*p4)
+
+The code used to solve this system of equations is here:
 
 .. code-block:: python
 
-  import pandas as pd, numpy as np, matplotlib.pyplot as pyplot
+  import numpy as np, pandas as pd
+  import sympy as sym
+  from sympy import symbols, Matrix, solve, simplify
 
-  p4 =  sex/age-specific GBD prevalence of wasting cat 4 
-  p3 =  sex/ge-specific GBD prevalence of wasting cat 3 
-  p2 =  sex/age-specific GBD prevalence of wasting cat 2 
-  p1 =  sex/age-specific GBD prevalence of wasting cat 1 
+  # define symbols / unknowns
+  s4, i3 = symbols('s4 i3')
+  r4, s3, i2 = symbols('r4 s3 i2')
+  r3, s2, i1 = symbols('r3 s2 i1')
+  r2, s1 = symbols('r2 s1')
+  p4, p3, p2, p1 = symbols('p4 p3 p2 p1')
 
-  # row order from equation 1 - 10;
-  # column order is s1, s2, s3, s4, r2, r3, r4, i1, i2, i3
+  # # uncomment these if don't want to solve in terms of p_is
+  # sex/age-specific GBD prevalence of wasting cat 1-4
+  # p4 = 0.7
+  # p3 = 0.2
+  # p2 = 0.07 
+  # p1 = 0.03
+
+  unknowns = [s1,s2,s3,s4,r2,r3,r4,i1,i2,i3]
+
+  def add_eq(terms, y, i, A, v):
+    """
+    For input equation y = sum([coeff*var for var:coeff in {terms}])
+    adds right side of equation to to row i of matrix A
+    
+    adds y to row i of vector v
+    """
+    for x in terms.keys():
+        A[x][i] = terms[x]
+    v.iloc[i] = y
+
+  # define equations
+  # 1) p4*s4 + p3*r4 = p4 
+  eq1 = [{s4:p4, r4:p3}, p4]
+
+  # 2) p4*i3 + p3*s3 +p2*r3 = p3
+  eq2 = [{i3:p4, s3:p3, r3:p2}, p3]
+
+  # 3) p3*i2 + p2*s2 + p1*r2 = p2
+  eq3 = [{i2:p3, s2:p2, r2:p1}, p2]
+
+  # 4) p2*i1 + p1*s1 = p1
+  eq4 = [{i1:p2, s1:p1}, p1]
+
+  # 5) s4 + i3 =1
+  eq5 = [{s4:1, i3:1}, 1]
+
+  # 6) r4 + s3 + i2 = 1
+  eq6 = [{r4:1, s3:1, i2:1}, 1]
+
+  # 7) r3 + s2 + i1 =1
+  eq7 = [{r3:1, s2:1, i1:1}, 1]
+
+  # 8) r2 + s1 = 1
+  eq8 = [{r2:1, s1:1}, 1]
+
+  # 9) r2 = 1/Dsam
+  eq9 = [{r2:1}, 1/40]
+
+  # 10) r3 + i1  = 1/Dmam
+  eq10 = [{r3:1, i1:1}, 1/70]
+
+  # 1/dur_cat3 = i2 + r4
+  dur_cat3 = sym.Symbol('dur_cat3')
+
+  eq11 = [{i2:1, r4:1}, 1/dur_cat3]
+
+  def build_matrix(eqns, unknowns):
+    """
+    INPUT
+    ----
+    eqns: a list of sympy equations
+    unknowns: a list of sympy unknowns
+    ----
+    OUTPUT
+    ----
+    A:  a matrix containing the coefficients of LHS of all eq in eqns.
+        nrows = number of equations
+        rcols = number of unknowns
+    b: an nx1 matrix containing the RHS of all the eqns
+    x: a sympy matrix of the unknowns
+    """
+    n_eqns = len(eqns)
+    n_unknowns = len(unknowns)
+
+    # frame for matrix/LHS equations.
+    # nrows = n_eqns, ncols = n_unknowns
+    A = pd.DataFrame(
+        index = range(n_eqns),
+        columns = unknowns,
+        data = np.zeros([n_eqns,n_unknowns])
+    )
+    
+    # frame for RHS of equations
+    b = pd.DataFrame(index = range(n_eqns), columns = ['val'])
+    
+    # populate LHS/RHS
+    i = 0
+    for eq in eqns:
+        add_eq(eq[0], eq[1], i, A, b)
+        i += 1
+    
+    # convert to sympy matrices
+    A = sym.Matrix(A)
+    b = sym.Matrix(b)
+    x = sym.Matrix(unknowns) #vars to solve for
+    
+    return A, x, b
+
+  # solve in terms of p1, p2, p3, p4, and one dependent unknown:
+  A0, x0, b0 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10],
+                           unknowns)
 
 
-  a = np.array([[0,0,0,p4,0,0,p3,0,0,0],
-                [0,0,p3,0,0,p2,0,p4,0,0],
-                [0,p2,0,0,p1,0,0,0,p3,0],
-                [p1,0,0,0,0,0,0,p2,0,0],
-                [0,0,0,1,0,0,0,0,0,1],
-                [0,0,1,0,0,0,1,0,1,0],
-                [0,1,0,0,0,1,0,1,0,0],
-                [1,0,0,0,1,0,0,0,0,0],
-                [0,0,0,0,1,0,0,0,0,0],
-                [0,0,0,0,0,1,0,1,0,0]])
+  result_0 = sym.solve(A0 * x0 - b0, x0)
 
-  #write b in terms of i3 and the ps
-  b =np.array([[p4],
-               [p3],
-               [p2],
-               [p1],
-               [1],
-               [1],
-               [1],
-               [1],
-               [0.0250],
-               [0.0143]])
+  # solve in terms of duration of cat3 instead of i3:
+  A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11],
+                         unknowns)
+  result_1 = sym.solve(A1 * x1 - b1, x1)
 
-  x = np.linalg.solve(a,b)
-
-  # checking that ax=b
-
-  np.allclose(np.dot(a,x),b)
 
 
 
 
 .. todo::
-    - Beatrix will update the above to write the solution x in terms of the p and i3 or duration of MILD (cat3)
+    - Beatrix will add a table of solutions that holds values for p1,p2,p3,p4
     - We also need the closed form graph theory solution
+
+
+Finite state machine 1x4 + death
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. image:: wasting_state_1x4_plus_death.svg
+
+In the above section we calculated the transition probabilities assuming that 
+all simulants exist in one of the four wasting categories. The transition 
+probabilities are thus incorrect, because simulants never die. In reality, we 
+expect children to age into the four wasting categories, and to die out of SAM 
+at a higher rate than out of MAM or not-wasted. Thus in the above model, we 
+expect simulants who ought to be dying to instead be remitting to MAM.
+
+Here we correct this by allowing simulants to die into **CAT 0** at differential 
+rates. However, as we still need to assume equilibrium across the wasting states 
+over time, we allow sims to age in to the four wasting categories out of 
+**CAT 0**, our "reincarnation pool". We then set the transition probabilies 
+:math:`f_i` equal to the prevalence of the four wasting categories.
+
+It is important here to note first that *f_i* don't represent fertility rates, 
+but rather that we only allow enough sims to age in each timestep necessary to 
+replenish those that died. Second, we emphasize that we utilize this method in 
+order to calculate transition rates between the different wasting categories. 
+However, the final Vivarium model of wasting will not include a reincarnation 
+pool.
+
+As in the previous section, we then solve our transition probabilities using a 
+Markov Chain transition matrix **T**. 
+
+T = 
+
+.. csv-table:: 
+   :file: wasting_state_1x4_death.csv
+   :widths: 5, 5, 5, 5, 5, 5
+
+
+:math:`π_{T}` = 
+
++----+----+----+----+----+
+| p4 | p3 | p2 | p1 | p0 |
++----+----+----+----+----+
+
+:math:`π_{T}` is the eigenvector at equilibrium
+
+  a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
+  b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of people who die in a timestep
+
+
+Solving a)
+
+  1)  :math:`p_4s_4 + p_3r_4 + p_0f_4 = p_4` 
+  2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 + p_0f_3 = p_3`
+  3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 + p_0f_2 = p_2`
+  4)  :math:`p_2i_1 + p_1s_1 + p_0f_1 = p_1`
+  5)  :math:`p_4d_4 + p_3d_3 + p_2d_2 + p_1d_1=p_0`
+
+Rows of the P matrix sums to 1
+
+  6)  :math:`s_4 + i_3 + d-4 = 1`
+  7)  :math:`r_4 + s_3 + i_2 + d_3 = 1`
+  8)  :math:`r_3 + s_2 + i_1 + d_2 = 1`
+  9)  :math:`r_2 + s_1 + d_1 = 1`
+  10) :math:`f_4+f_3+f_2+f_1=1`
+
+We have duration of treated and untreated sam and mam as well as coverage from the literature :   
+
+  11) :math:`r_2 + d_1 = 1/Dsam`
+  12) :math:`r_3 + i_1 + d_2 = 1/Dmam`
+  13) :math:`i_2 + r_4 + d_3 = 1/dur\_cat3`
+
+where
+
+ - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
+ - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
+ - Duration of cat 3: :math:`1 / (i_2 + r_4)`. We still need more values from the literature to solve for this.
+ - tx is treated
+ - ux is untreated
+ - C is treatment coverage proportion
+
+
+.. todo::
+    Check with Chris Troeger about the duration of cat3. Also see if Gates 
+    Foundation has a way to calculate this from their KI database.
+
+We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
+for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
+find values from the literature with which to update this. Note that the below
+equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`.
+These are calculable from GBD data, but as these vary per age/sex category, we 
+leave them as variables here.
+
+.. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
+
+Solving in terms of :math:`i_3`, we get:
+
+.. list-table:: Transition rates solved in terms of :math:`i_3`
+   :widths: 10 25
+   :header-rows: 1
+
+   * - Variable
+     - Value
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - d2*p2/p3 + f2*p0/p3 + f4*p0/p3 - i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3 - 280.0*p0)/p3
+   * - s4
+     - -d4 - i3 + 1.0
+   * - r2
+     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*p0)/p1
+   * - r3
+     - -d2 - f2*p0/p2 - f3*p0/p2 - f4*p0/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p2
+   * - r4
+     - d4*p4/p3 - f4*p0/p3 + i3*p4/p3
+   * - i1
+     - f2*p0/p2 + f3*p0/p2 + f4*p0/p2 + 0.025*(p1 - 40.0*p0)/p2
+   * - i2
+     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*p0/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p3
+   * - d1
+     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + p0/p1
+   * - f1
+     - -f2 - f3 - f4 + 1.0
+
+
+Solving in terms of :math:`dur\_cat3`, we get:
+
+.. list-table:: Transition rates solved in terms of :math:`dur\_cat3`
+   :widths: 10 25
+   :header-rows: 1
+
+   * - Variable
+     - Value
+   * - s1
+     - 0.975
+   * - s2
+     - 0.985714285714286
+   * - s3
+     - (dur_cat3 - 1.0)/dur_cat3
+   * - s4
+     - -d2*p2/p4 - d4 - f2*p0/p4 - f4*p0/p4 + 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 + 280.0*dur_cat3*p0 - 280.0*p3)/(dur_cat3*p4)
+   * - r2
+     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*p0)/p1
+   * - r3
+     - -d2 - f2*p0/p2 - f3*p0/p2 - f4*p0/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p2
+   * - r4
+     - d2*p2/p3 + d4*p4/p3 + f2*p0/p3 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*p0 + 280.0*p3)/(dur_cat3*p3)
+   * - i1
+     - f2*p0/p2 + f3*p0/p2 + f4*p0/p2 + 0.025*(p1 - 40.0*p0)/p2
+   * - i2
+     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*p0/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p3
+   * - i3
+     - d2*p2/p4 + f2*p0/p4 + f4*p0/p4 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*p0 + 280.0*p3)/(dur_cat3*p4)
+   * - d1
+     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + p0/p1
+   * - f1
+     - -f2 - f3 - f4 + 1.0
+
+
+The code used to solve this system of equations is here:
+
+.. code-block:: python
+
+  import numpy as np, pandas as pd
+  import sympy as sym
+  from sympy import symbols, Matrix, solve, simplify
+
+  # define symbols
+  s4, i3 = symbols('s4 i3')
+  r4, s3, i2 = symbols('r4 s3 i2')
+  r3, s2, i1 = symbols('r3 s2 i1')
+  r2, s1 = symbols('r2 s1')
+  d4, d3, d2, d1, sld = symbols('d4 d3 d2 d1 sld')
+  f4, f3, f2, f1 = symbols('f4 f3 f2 f1')
+
+  p4, p3, p2, p1, p0 = symbols('p4 p3 p2 p1 p0')
+
+  dur_cat3 = sym.Symbol('dur_cat3')  
+
+  unknowns = [s1,s2,s3,s4,r2,r3,r4,i1,i2,i3,d1,d2,d3,d4,f1,f2,f3,f4]
+
+  def add_eq(terms, y, i, A, v):
+    """
+    For input equation y = sum([coeff*var for var:coeff in {terms}])
+    adds right side of equation to to row i of matrix A
+    
+    adds y to row i of vector v
+    """
+    for x in terms.keys():
+        A[x][i] = terms[x]
+    v.iloc[i] = y
+
+
+  # # assuming equilibrium:
+  # p4*s4 + p3*r4 + p0*f4 = p4
+  eq1 = [{s4:p4, r4:p3, f4:p0}, p4]
+
+  # p4*i3 + p3*s3 + p2*r3 + p0*f3 = p3
+  eq2 = [{i3:p4, s3:p3, r3:p2, f3:p0}, p3]
+
+  # p3*i2 + p2*s2 + p1*r2 + p0*f2 = p2
+  eq3 = [{i2:p3, s2:p2, r2:p1, f2:p0}, p2]
+
+  # p2*i1 + p1*s1 + p0*f1 = p1
+  eq4 = [{i1:p2, s1:p1, f1:p0}, p1]
+
+  # p4*d4 + p3*d3 + p2*d2 + p1*d1 + p0*sld = p0
+  eq5 = [{d4:p4, d3:p3, d2:p2, d1:p1}, p0]
+
+
+  # # rows sum to one:
+  # s4 + i3 + d4 = 1
+  eq6 = [{s4:1, i3:1, d4:1}, 1]
+
+  # r4 + s3 + i2 + d3 = 1
+  eq7 = [{r4:1, s3:1, i2:1, d3:1}, 1]
+
+  # r3 + s2 + i1 + d2 = 1
+  eq8 = [{r3:1, s2:1, i1:1, d2:1}, 1]
+
+  # r2 + s1 + d1 = 1
+  eq9 = [{r2:1, s1:1, d1:1}, 1]
+
+  # f4 + f3 + f2 + f1 + sld = 1
+  eq10 = [{f4:1, f3:1, f2:1, f1:1}, 1]
+
+
+  # # adding durations of states
+  # r2 + d1 = 1/Dsam = 1/40
+  eq11 = [{r2:1, d1:1}, 1/40]
+
+  # r3 + i1 + d2 = 1/Dmam = 1/70
+  eq12 = [{r3:1, i1:1, d2:1}, 1/70]
+
+  # i2 + r4 + d3 = 1/dur_cat3 = currently unknown
+  eq13 = [{i2:1, r4:1, d3:1}, 1/dur_cat3]
+
+  def build_matrix(eqns, unknowns):
+    """
+    INPUT
+    ----
+    eqns: a list of sympy equations
+    unknowns: a list of sympy unknowns
+    ----
+    OUTPUT
+    ----
+    A:  a matrix containing the coefficients of LHS of all eq in eqns.
+        nrows = number of equations
+        rcols = number of unknowns
+    b: an nx1 matrix containing the RHS of all the eqns
+    x: a sympy matrix of the unknowns
+    """
+    n_eqns = len(eqns)
+    n_unknowns = len(unknowns)
+
+    # frame for matrix/LHS equations.
+    # nrows = n_eqns, ncols = n_unknowns
+    A = pd.DataFrame(
+        index = range(n_eqns),
+        columns = unknowns,
+        data = np.zeros([n_eqns,n_unknowns])
+    )
+    
+    # frame for RHS of equations
+    b = pd.DataFrame(index = range(n_eqns), columns = ['val'])
+    
+    # populate LHS/RHS
+    i = 0
+    for eq in eqns:
+
+        add_eq(eq[0], eq[1], i, A, b)
+        i += 1
+    
+    # convert to sympy matrices
+    A = sym.Matrix(A)
+    b = sym.Matrix(b)
+    x = sym.Matrix(unknowns) #vars to solve for
+    
+    return A, x, b
+
+  # solve in terms of i3 
+  A0, x0, b0 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11,eq12],
+                           unknowns)
+
+  result_0 = sym.solve(A0 * x0 - b0, x0)
+
+  # solve in terms of duration of cat3 instead of i3:
+  A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11,eq12,eq13],
+                         unknowns)
+  result_1 = sym.solve(A1 * x1 - b1, x1)
+
 
 .. _2.2.2: 
 
@@ -367,36 +807,4 @@ Data Description Tables
 +++++++++++++++++++++++
 
 As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
-
-Validation Criteria
-+++++++++++++++++++
-
-..	todo::
-	Fill in directives for this section
-
-References
-----------
+below. If we discover it's not ge
