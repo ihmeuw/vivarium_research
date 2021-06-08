@@ -505,7 +505,28 @@ Finite state machine 1x4 + death
 
 .. image:: wasting_state_1x4_plus_death.svg
 
-To solve the transition pobabilities, we use a Markov Chain transition matrix **T**. 
+In the above section we calculated the transition probabilities assuming that 
+all simulants exist in one of the four wasting categories. The transition 
+probabilities are thus incorrect, because simulants never die. In reality, we 
+expect children to age into the four wasting categories, and to die out of SAM 
+at a higher rate than out of MAM or not-wasted. Thus in the above model, we 
+expect simulants who ought to be dying to instead be remitting to MAM.
+
+Here we correct this by allowing simulants to die into **CAT 0** at differential 
+rates. However, as we still need to assume equilibrium across the wasting states 
+over time, we allow sims to age in to the four wasting categories out of 
+**CAT 0**, our "reincarnation pool". We then set the transition probabilies 
+:math:`f_i` equal to the prevalence of the four wasting categories.
+
+It is important here to note first that *f_i* don't represent fertility rates, 
+but rather that we only allow enough sims to age in each timestep necessary to 
+replenish those that died. Second, we emphasize that we utilize this method in 
+order to calculate transition rates between the different wasting categories. 
+However, the final Vivarium model of wasting will not include a reincarnation 
+pool.
+
+As in the previous section, we then solve our transition probabilities using a 
+Markov Chain transition matrix **T**. 
 
 T = 
 
@@ -526,14 +547,13 @@ T =
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
   c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of people who die in a timestep
 
-.. todo:: add info on the the concept of the life/death box, and how 'f' isn't really fertility
 
 Solving a)
 
   1)  :math:`p_4s_4 + p_3r_4 + p_0f_4 = p_4` 
   2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 + p_0f_3 = p_3`
   3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 + p_0f_2 = p_2`
-  4)  :math:`p_2i_1 + p_1xs_1 + p_0f_1 = p_1`
+  4)  :math:`p_2i_1 + p_1s_1 + p_0f_1 = p_1`
   5)  :math:`p_4d_4 + p_3d_3 + p_2d_2 + p_1d_1=p_0`
 
 Rows of the P matrix sums to 1
@@ -567,8 +587,9 @@ where
 We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
 for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
 find values from the literature with which to update this. Note that the below
-equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`; 
-however, we are able to calculate these values from GBD data per age/sex.
+equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`.
+These are calculable from GBD data, but as these vary per age/sex category, we 
+leave them as variables here.
 
 .. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
 
@@ -786,36 +807,4 @@ Data Description Tables
 +++++++++++++++++++++++
 
 As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
-
-Validation Criteria
-+++++++++++++++++++
-
-..	todo::
-	Fill in directives for this section
-
-References
-----------
+below. If we discover it's not ge
