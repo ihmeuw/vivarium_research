@@ -91,6 +91,15 @@ State and Transition Data Tables
      - {s199, s2036}
      - Severe wasting with edema, severe wasting without edema
 
+Note: we pull the above sequelae by using:
+
+.. code-block:: python
+
+  from db_queries import get_sequela_metadata
+  
+  hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
+  hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
+
 Validation Criteria
 -------------------
 
