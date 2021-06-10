@@ -91,7 +91,7 @@ State and Transition Data Tables
      - {s199, s2036}
      - Severe wasting with eodema, severe wasting without oedema
 
-Note: we pull the above sequelae by using:
+Note we pull the above sequelae by using:
 
 .. code-block:: python
 
