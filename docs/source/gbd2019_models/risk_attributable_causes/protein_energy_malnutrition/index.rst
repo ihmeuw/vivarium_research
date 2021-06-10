@@ -85,10 +85,10 @@ State and Transition Data Tables
    * - MAM sequelae
      - 
      - {s198, s2033}
-     - Moderate wasting with edema, moderate wasting without edema
+     - Moderate wasting with eodema, moderate wasting without oedema
    * - SAM sequelae
      - 
      - {s199, s2036}
-     - Severe wasting with edema, severe wasting without edema
+     - Severe wasting with eodema, severe wasting without oedema
 
 Validatio
