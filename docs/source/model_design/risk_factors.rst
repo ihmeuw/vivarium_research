@@ -257,7 +257,7 @@ the trivial probability distribution assigning everyone in the population to the
 TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
 [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]_
 
-Recall from the `causality section <What is a causal relationship?_>`_ that
+As discussed in the :ref:`causality section <causal_relationships>` of the :ref:`general research page <general_research>`,
 counterfactual analysis is used to describe the causal relationship between a
 risk factor and an outcome. **The TMRED is a particular choice of counterfactual
 exposure distribution** used for the causal attribution of disease burden to a
