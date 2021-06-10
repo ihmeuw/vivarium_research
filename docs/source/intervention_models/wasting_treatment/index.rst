@@ -222,6 +222,9 @@ breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, 
 
 Congratulate and counsel the mother on appropriate IYCF practices.
 
+.. todo::
+    What about MAM with oedema? Are they treated as SAM or MAM?
+
 .. _2.1:
 
 In children 6-59 months
@@ -275,6 +278,9 @@ Admit in OTP
 
 Admit in TSFP and counsel on appropriate IYCF practices.
 
+.. todo::
+    What about MAM with oedema? Are they treated as SAM or MAM?! Unclear...
+
 :underline:`Classify no acute malnutrition`
 
 * WHZ ≥ -2 z score AND 
@@ -311,46 +317,46 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-Let us assume program coverage is a stand-in value of 40%. Cmam and Csam = 0.4; 1-Cmam and 1-Csam = 0.6 (This will be updated). 
+Let us assume program coverage is a stand-in value of 40%. This will be updated. 
 
 .. todo::
 
-  We have been in contact with EMOH but seems like they only have DHIS data which does not give us coverage rate. We will dig a bit more into the literature, or reach out to CIFF/UNICEF since UNICEF is the implementation partner for treatment in Ethiopia. 
+  We have been in contact with EMOH but seems like they only have DHIS data which does not give us coverage rate. We will dig a bit more into the literature, or reach out to CIFF/UNICEF since UNICEF is the implementation partner for treatment in Ethiopia. I think we should also send an input data to CIFF to make sure they agree with our model inputs. 
 
 .. list-table:: Baseline coverage data
-  :widths: 10 15 20 10 15
+  :widths: 10 10 5 15 20
   :header-rows: 1
 
   * - Location
     - Subpopulation
-    - Coverage parameter
+    - Coverage
     - Value
     - Note
   * - Ethiopia
     - Kids 0-6 months with MAM 
-    - Cmam_0_6
+    - :math:`C_{MAM_{0-6}}`
     - 0.4 ~ currently stand-in until we find better data
     - Coverage of TSFP for breastfeeding mothers among 0-6 month kids with MAM
   * - Ethiopia
     - Kids 0-6 months with any SAM 
-    - Csam_0-6
+    - :math:`C_{SAM_{0-6}}`
     - 0.4 ~ currently stand-in until we find better data
     - Coverage of SC for kids 0-6 months with any SAM
   * - Ethiopia
     - Kids 6-59 months with MAM 
-    - Cmam_6_59
+    - :math:`C_{MAM_{6-59}}`
     - 0.4 ~ currently stand-in until we find better data
     - Coverage of TSFP for kids 6-59 months with MAM
   * - Ethiopia
     - Kids 6-59 months with SAM with oedema
-    - Csam_6_59_sc 
+    - :math:`C_{SAM_{6-59_{SC}}}` 
     - 0.4 ~ Currently stand-in until we find better data
     - Coverage of SC for SAM kids with medical complications (oedema)
   * - Ethiopia
     - Kids 6-59 months with SAM without complications (no oedema)
-    - Csam_6_59_otp 
+    - :math:`C_{SAM_{6-59_{OTP}}}`
     - 0.4 ~ currently stand-in until we find better data
-    - Coverage of SC for kids with un-complicated SAM
+    - Coverage of OTP for kids with un-complicated SAM
 
 .. _3.0:
 
@@ -363,35 +369,41 @@ Vivarium Modeling Strategy
 
 For **MAM** 0-6 months
 
- - :math:`r3 =  r3_{ux}\times(1-C_{mam_0-6}) + r3_{tx}\times(C_{mam_0-6})`
- - :math:`d2 =  d2_{ux}\times(1-C_{mam_0-6}) + d2_{tx}\times(C_{mam_0-6})`
- - :math:`i1 =  i1_{ux}\times(1-C_{mam_0-6}) + i1_{tx}\times(C_{mam_0-6})`
+ - :math:`r3 =  r3_{ux}\times(1-C_{MAM_{0-6}}) + r3_{tx}\times(C_{MAM_{0-6}})`
+ - :math:`d2 =  d2_{ux}\times(1-C_{MAM_{0-6}}) + d2_{tx}\times(C_{MAM_{0-6}})`
+ - :math:`i1 =  i1_{ux}\times(1-C_{MAM_{0-6}}) + i1_{tx}\times(C_{MAM_{0-6}})`
 
 For **SAM** 0-6 months
 
- - :math:`r2 =  r2_{ux}\times(1-C_{sam_0-6}) + r2_{tx}\times(C_{sam_0-6})`
- - :math:`d1 =  d1_{ux}\times(1-C_{sam_0-6}) + d1_{tx}\times(C_{sam_0-6})`
+ - :math:`r2 =  r2_{ux}\times(1-C_{SAM_{0-6}}) + r2_{tx}\times(C_{SAM_{0-6}})`
+ - :math:`d1 =  d1_{ux}\times(1-C_{SAM_{0-6}}) + d1_{tx}\times(C_{SAM_{0-6}})`
 
 For **MAM** 6-59 months
 
- - :math:`r3 =  r3_{ux}\times(1-C_{mam_6-59}) + r3_{tx}\times(C_{mam_6-59})`
- - :math:`d2 =  d2_{ux}\times(1-C_{mam_6-59}) + d2_{tx}\times(C_{mam_6-59})`
- - :math:`i1 =  i1_{ux}\times(1-C_{mam_6-59}) + i1_{tx}\times(C_{mam_6-59})`
+ - :math:`r3 =  r3_{ux}\times(1-C_{MAM_{6-59}}) + r3_{tx}\times(C_{MAM_{6-59}})`
+ - :math:`d2 =  d2_{ux}\times(1-C_{MAM_{6-59}}) + d2_{tx}\times(C_{MAM_{6-59}})`
+ - :math:`i1 =  i1_{ux}\times(1-C_{MAM_{6-59}}) + i1_{tx}\times(C_{MAM_{6-59}})`
 
 For **SAM** 6-59 months
 
-Let O be the proportion of complicated SAM (with oedema) among those with SAM
+Let s199 be the proportion of SAM with oedema among those with SAM
 
- - :math:`r2_{ux} =  r2_{ux-un}\times(1-O) + r2_{ux-comp}\times(O)`
- - :math:`d1_{ux} =  d1_{ux-un}\times(1-O) + d1_{ux-comp}\times(O)`
- - :math:`r2_{tx} =  r2_{tx-un}\times(1-O) + r2_{tx-comp}\times(O)`
- - :math:`d1_{tx} =  d1_{tx-un}\times(1-O) + d1_{tx-comp}\times(O)`
+*with and without complications*
 
+- :math:`r2_{com} = r2\times s199`
+- :math:`r2_{uncom} = r2\times(1-s199)`
+- :math:`d1_{com} = d1\times s199`
+- :math:`d1_{uncom} = d1\times(1-s199)`
 
- - :math:`r2 =  r2_{ux}\times(1-C_{sam_6-59}) + r2_{tx}\times(C_{sam_6-59})`
- - :math:`d1 =  d1_{ux}\times(1-C_{sam_6-59}) + d1_{tx}\times(C_{sam_6-59})`
+- :math:`r2_{uncom} =  r2_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}}) + r2_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}`
+- :math:`d1_{uncom} =  d1_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}}) + d1_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}`
+- :math:`r2_{com} =  r2_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}}) + r2_{tx_{com}}\times C_{SAM_{6-59_{SC}}}`
+- :math:`d1_{com} =  d1_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}}) + d1_{tx_{com}}\times C_{SAM_{6-59_{SC}}}`
 
-
+- :math:`r2_{ux_{com}} = r2_{ux}\times s199`
+- :math:`d1_{ux_{com}} = d1_{ux}\times s199`
+- :math:`r2_{ux_{uncom}} = r2_{ux}\times(1-s199)`
+- :math:`d1_{ux_{uncom}} = d1_{ux}\times(1-s199)`
 
 .. todo::
 
@@ -406,24 +418,278 @@ Let O be the proportion of complicated SAM (with oedema) among those with SAM
 
   Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
 
-.. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
+.. list-table:: Modeled Outcomes **Table 1** MAM 0-6 months
+  :widths: 5 5 20 15 15 15 15
   :header-rows: 1
 
   * - Outcome
     - Outcome type
-    - Outcome ID
-    - Affected measure
-    - Effect size measure
+    - Outcome definition
     - Effect size
+    - Effect size application
+    - Value, source
     - Note
-  * - Lung cancer
-    - GBD cause
-    - c426
-    - Preclinical incidence rate
-    - Relative risk
-    - 0.8 (95% CI: 0.7, 1.01)
+  * - :math:`r3_{ux}`
+    - transition probability
+    - recovery probability of untreated MAM among 0-6 months
     - 
+    - 
+    - 
+    - 
+  * - :math:`r3_{tx}`
+    - transition probability
+    - recovery probability of treated MAM among 0-6 months
+    - :math:`E_{r3_{0-6}}` recovery efficacy of MAM among 0-6 (>1)
+    - :math:`r3_{ux}\times(E_{r3_{0-6}}) = r3_{tx}`
+    -
+    - May get :math:`E_{r3_{0-6}}` from programmatic data/studies
+  * - :math:`d2_{ux}`
+    - mortality probability
+    - probability of death of untreated MAM among 0-6 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`d2_{tx}`
+    - mortality probability
+    - probability of death of treated MAM among 0-6 months
+    - :math:`E_{d2_{0-6}}` mortality efficacy of MAM among 0-6 (<1)
+    - :math:`d2_{ux}\times(E_{d2_{0-6}}) = d2_{tx}`
+    -
+    - May get :math:`E_{d2_{0-6}}` from programmatic data/studies
+  * - :math:`i1_{ux}`
+    - transition probability
+    - probability of deterioration to SAM of untreated MAM among 0-6 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`i1_{tx}`
+    - transition probability
+    - probability of deterioration to SAM of treated MAM among 0-6 months
+    - :math:`E_{i1_{0-6}}` prevention to SAM efficacy of MAM among 0-6 (<1)
+    - :math:`i1_{ux}\times(E_{i1_{0-6}}) = i1_{tx}`
+    -
+    - May get :math:`E_{i1_{0-6}}` from programmatic data/studies
+
+:underline:`Durations`
+
+| :math:`Dur_{MAM_{ux}} = \frac{1}{r3_{ux} + d2_{ux} + i1_{ux}}` 
+| :math:`Dur_{MAM_{tx}} = \frac{1}{r3_{tx} + d2_{tx} + i1_{tx}}` 
+
+
+
+.. list-table:: Modeled Outcomes **Table 2** SAM 0-6 months
+  :widths: 5 5 20 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Outcome type
+    - Outcome definition
+    - Effect size
+    - Effect size application
+    - Value, source
+    - Note
+  * - :math:`r2_{ux}`
+    - transition probability
+    - recovery probability of untreated SAM among 0-6 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`r2_{tx}`
+    - transition probability
+    - recovery probability of treated SAM among 0-6 months
+    - :math:`E_{r2_{0-6}}` recovery efficacy of SC for SAM among 0-6 (>1)
+    - :math:`r2_{ux}\times(E_{r2_{0-6}}) = r2_{tx}`
+    -
+    - May get :math:`E_{r2_{0-6}}` from programmatic data/studies
+  * - :math:`d1_{ux}`
+    - mortality probability
+    - probability of death of untreated SAM among 0-6 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`d1_{tx}`
+    - mortality probability
+    - probability of death of treated SAM among 0-6 months
+    - :math:`E_{d1_{0-6}}` mortality efficacy of SC for SAM among 0-6 (<1)
+    - :math:`d2_{ux}\times(E_{d1_{0-6}}) = d1_{tx}`
+    -
+    - May get :math:`E_{d1_{0-6}}` from programmatic data/studies
+
+:underline:`Durations`
+
+| :math:`Dur_{SAM_{ux}} = \frac{1}{r2_{ux} + d1_{ux}}` 
+| :math:`Dur_{SAM_{tx}} = \frac{1}{r2_{tx} + d1_{tx}}` 
+
+
+.. list-table:: Modeled Outcomes **Table 3** MAM 6-59 months
+  :widths: 5 5 20 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Outcome type
+    - Outcome definition
+    - Effect size
+    - Effect size application
+    - Value, source
+    - Note
+  * - :math:`r3_{ux}`
+    - transition probability
+    - recovery probability of untreated MAM among 6-59 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`r3_{tx}`
+    - transition probability
+    - recovery probability of treated MAM among 6-59 months
+    - :math:`E_{r3_{6-59}}` recovery efficacy of TSFP for MAM among 6-59 (>1)
+    - :math:`r3_{ux}\times(E_{r3_{6-59}}) = r3_{tx}`
+    -
+    - May get :math:`E_{r3_{6-59}}` from programmatic data/studies
+  * - :math:`d2_{ux}`
+    - mortality probability
+    - probability of death of untreated MAM among 6-59 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`d2_{tx}`
+    - mortality probability
+    - probability of death of treated MAM among 6-59 months
+    - :math:`E_{d2_{0-6}}` mortality efficacy of TSFP for MAM among 6-59 (<1)
+    - :math:`d2_{ux}\times(E_{d2_{6-59}}) = d2_{tx}`
+    -
+    - May get :math:`E_{d2_{6-59}}` from programmatic data/studies
+  * - :math:`i1_{ux}`
+    - transition probability
+    - probability of deterioration to SAM of untreated MAM among 6-59 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`i1_{tx}`
+    - transition probability
+    - probability of deterioration to SAM of treated MAM among 6-59 months
+    - :math:`E_{i1_{6-59}}` prevention to SAM efficacy of TSFP for MAM among 6-59 (<1)
+    - :math:`i1_{ux}\times(E_{i1_{6-59}}) = i1_{tx}`
+    -
+    - May get :math:`E_{i1_{6-59}}` from programmatic data/studies
+
+:underline:`Durations`
+
+| :math:`Dur_{MAM_{ux}} = \frac{1}{r3_{ux} + d2_{ux} + i1_{ux}}` 
+| :math:`Dur_{MAM_{tx}} = \frac{1}{r3_{tx} + d2_{tx} + i1_{tx}}` 
+
+We need coverage rate and efficacy rate to solve for all the variables stratified by coverage
+
+  | d2 = (d2_ux x 0.4) + (d2_ux x mortality efficacy x 0.6), where d2 is what we solved for in our mortality equations
+  | r3 = (r3_ux x 0.4) + (r3_ux x recovery efficacy x 0.6), where r3 is what we solved for in our matrix
+  | i1 = (i1_ux x 0.4) + (i1_ux x prevention efficacy x 0.6), where i1 is what we solved for in our matrix
+
+.. note:: 
+  
+  Thinking out loud...
+
+  our calculated mortality probability from MAM is d2 = 0.001874, 2 orders of magnitude higher than the MAM death rate of untreated in the James study...hence I don't think we can use transition probabilities from the literature. We can only get the relative probabilities (like relative risks or treatment efficacy)...I reckon we'd have to make assumption of programme coverage, then programme efficacy and then calculate back calculate the transition probabilities with and without treatment. We can then compare our calculated values to the literature? 
+
+  :underline:`Recover probability among untreated MAM 6-59 months` from James et al
+
+  :math:`rate of recovery among untreated MAM 6-59 months = \frac{479}{5230}` per child-month 
+  :math:`rate of recovery among untreated MAM 6-59 months = \frac{479}{5230\times 30} = 0.00305` per child-day
+  :math:`r3_{ux} = 1-e^(-0.00305) = 0.00305` 
+
+  :underline:`Death probability among untreated MAM 6-59 months` from James et al
+
+  :math:`rate of recovery among untreated MAM 6-59 months = \frac{4}{5230}` per child-month 
+  :math:`death rate among untreated MAM 6-59 months = \frac{4}{5230\times 30} = 0.000025` per child-day
+  :math:`d2_{ux} = 1-e^(-0.000025) = 0.000025` 
+
+  :underline:`Deterioration to SAM probability among untreated MAM 6-59 months` from James et al
+
+  :math:`rate of deterioration among untreated MAM 6-59 months = \frac{82}{5230}` per child-month
+  :math:`death rate among untreated MAM 6-59 months = \frac{82}{5230\times 30} = 0.00052` per child-day
+  :math:`d2_{ux} = 1-e^(-0.00052) = 0.00052` 
+
+
+
+.. list-table:: Modeled Outcomes **Table 4** SAM 6-59 months
+  :widths: 5 5 20 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Outcome type
+    - Outcome definition
+    - Effect size
+    - Effect size application
+    - Value, source
+    - Note
+  * - :math:`r2_{ux_{uncom}}`
+    - transition probability
+    - recovery probability of untreated uncomplicated SAM among 6-59 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`r2_{tx_{uncom}}`
+    - transition probability
+    - recovery probability of treated uncomplicated SAM among 6-59 months
+    - :math:`E_{r2_{6-59_{otp}}}` recovery efficacy of OTP for uncomplicated SAM among 6-59 months (>1)
+    - :math:`r2_{ux_{uncom}}\times(E_{r2_{6-59_{OTP}}}) = r2_{tx_{uncom}}`
+    -
+    - May get :math:`r2_{tx_{uncom}}` from programmatic data/studies
+  * - :math:`d1_{ux_{uncom}}`
+    - mortality probability
+    - probability of death of untreated uncomplicated SAM among 6-59 months 
+    - 
+    - 
+    - 
+    - 
+  * - :math:`d1_{tx_{uncom}}`
+    - mortality probability
+    - probability of death of treated uncomplicated SAM among 0-6 months
+    - :math:`E_{d1_{6-59_{otp}}}` mortality efficacy of OTP for SAM among 6-59 months (<1)
+    - :math:`d2_{ux_{uncom}}\times(E_{d1_{6-59_{OTP}}}) = d1_{tx_{uncom}}`
+    -
+    - May get :math:`d1_{tx_{uncom}}` from programmatic data/studies
+  * - :math:`r2_{ux_{com}}`
+    - transition probability
+    - recovery probability of untreated complicated SAM among 6-59 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`r2_{tx_{com}}`
+    - transition probability
+    - recovery probability of treated complicated SAM among 6-59 months 
+    - :math:`E_{r2_{6-59_{sc}}}` recovery efficacy of SC for complicated SAM among 6-59 months (>1)
+    - :math:`r2_{ux_{com}}\times(E_{r2_{6-59_{SC}}}) = r2_{tx_{com}}`
+    -
+    - May get :math:`r2_{tx_{com}}` from programmatic data/studies
+  * - :math:`d1_{ux_{com}}`
+    - mortality probability
+    - probability of death of untreated complicated SAM among 6-59 months
+    - 
+    - 
+    - 
+    - 
+  * - :math:`d1_{tx_{com}}`
+    - mortality probability
+    - probability of death of treated complicated SAM among 0-6 months
+    - :math:`E_{d1_{6-59_{sc}}}` mortality efficacy of SC for SAM among 6-59 months(<1)
+    - :math:`d2_{ux_{com}}\times(E_{d1_{6-59_{SC}}}) = d1_{tx_{uncom}}`
+    -
+    - May get :math:`d1_{tx_{com}}` from programmatic data/studies
+
+:underline:`Durations`
+
+| :math:`Dur_{SAM_{ux_{uncom}}} = \frac{1}{r2_{ux_{uncom}} + d1_{ux_{uncom}}}` 
+| :math:`Dur_{SAM_{tx_{uncom}}} = \frac{1}{r2_{tx_{uncom}} + d1_{tx_{uncom}}}` 
+| :math:`Dur_{SAM_{ux_{com}}} = \frac{1}{r2_{ux_{com}} + d1_{ux_{com}}}` 
+| :math:`Dur_{SAM_{ux_{com}}} = \frac{1}{r2_{ux_{com}} + d1_{ux_{com}}}` 
 
 Affected Outcome #1
 +++++++++++++++++++++
