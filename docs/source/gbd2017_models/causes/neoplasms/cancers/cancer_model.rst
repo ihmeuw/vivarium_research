@@ -122,9 +122,198 @@ The following table helps to identify cause id and associated sequelae ids for e
 Restrictions
 ++++++++++++
 
-.. todo::
+The restrictions table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
 
-   Add restrictions table.
+For some of the cancer causes in this document, the restrictions differ. 
+So, different tables are used to specify restrictions that are different from others.
+
+The following table describes restrictions of the following cancers:
+
+- Esophageal cancer
+- Stomach cancer
+- Tracheal, bronchus and lung cancer 
+- Lip and oral cavity cancer 
+- Other pharynx cancer
+- Gallbladder and biliary tract cancer 
+- Pancreatic cancer 
+- Multiple myeloma
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of the following cancers:
+
+- Cervical cancer
+- Uterine cancer
+- Ovarian cancer 
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - True
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of the following cancers:
+
+- Kidney cancer
+- Non-hodgkin lymphoma
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - Early Neonatal
+     - GBD age group id 2
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 1 to 4
+     - GBD age group id 5
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of **Nasopharynx cancer**:
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 5 to 9
+     - GBD age group id 6
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 5 to 9
+     - GBD age group id 6
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
+
+The following table describes restrictions of **Thyroid cancer**:
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 10 to 14
+     - GBD age group id 7
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 10 to 14
+     - GBD age group id 7
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
 
 
 Vivarium Modeling Strategy
@@ -210,7 +399,7 @@ State and Transition Data Tables
    * - I
      - disability weights
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c{cid}}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - average disability weight over all sequelae corresponding to the cancer
+     - total disability weight over all sequelae corresponding to the cancer
    * - ALL
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_c{cid}}}{\text{population}}`
@@ -230,7 +419,7 @@ State and Transition Data Tables
      - S
      - I
      - :math:`\frac{\text{incidence_rate_c{cid}}}{\text{1 - prevalence_c{cid}}}`
-     - Incidence rate in total population is divided by 1-prevalence_c{cid} to get incidence rate among the recovered and susceptible population.
+     - Incidence rate in total population is divided by 1-prevalence_c{cid} to get incidence rate among the susceptible population.
 
 
 .. list-table:: Data Sources
@@ -266,15 +455,6 @@ State and Transition Data Tables
      - Prevalence of each sequelae
      - 
 
-
-
-
-Model Assumptions and Limitations
-+++++++++++++++++++++++++++++++++
-
-.. todo::
-
-   Add model assumptions and limitations.
 
 Validation Criteria
 +++++++++++++++++++

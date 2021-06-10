@@ -33,7 +33,7 @@ total prevalence for breast cancer is split into
    #. Controlled phase of breast cancer, without mastectomy
 #. Metastatic phase
 #. Terminal phase
-
+#. Mastectomy from breast cancer, beyond 10 years
 
 .. todo::
 
@@ -42,15 +42,66 @@ total prevalence for breast cancer is split into
 Cause Hierarchy
 ++++++++++++++++
 
+  +-------------------------------------------------------------------------------------------------------------+
+  | GBD breast cancer cause hierarchy                                                                           |
+  +===============+======================+=======+=================================+============================+    
+  | Cause name    | GBD cause id         | Level | Sequaelae                       |                            |    
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | All causes    | c_294                | 0     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | All NCDs      | c_409                | 1     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | Neoplasms     | C_410                | 2     |                                 |                            |
+  +---------------+----------------------+-------+---------------------------------+----------------------------+
+  | Breast cancer | C_429                | 3     | diagnosis_and_primary_therapy_phase_of_breast_cancer (s_277) |
+  |               |                      |       | metastatic_phase_of_breast_cancer (s_279)                    |
+  |               |                      |       | terminal_phase_of_breast_cancer (s_280)                      |
+  |               |                      |       | controlled_phase_of_breast_cancer_with_mastectomy (s_5486)   |
+  |               |                      |       | controlled_phase_of_breast_cancer_without_mastectomy (s_5489)| 
+  |               |                      |       | mastectomy_from_breast_cancer_beyond_ten_years (s_5492)      |
+  +---------------+----------------------+-------+--------------------------------------------------------------+
+
 .. image:: breast_cancer_hierarchy.svg
 
 
 Restrictions
 ++++++++++++
 
-.. todo::
+The following table describes any restrictions on the effects of this cause
+(such as being only fatal or only nonfatal), as well as restrictions on the age
+and sex of simulants to which different aspects of the cause model apply.
 
-   Add restrictions table.
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLL age group end
+     - 95 plus
+     - GBD age group id 235
+   * - YLD age group start
+     - 15 to 19
+     - GBD age group id 8
+   * - YLD age group end
+     - 95 plus
+     - GBD age group id 235
 
 
 Vivarium Modeling Strategy
@@ -79,7 +130,7 @@ might over estimate deaths in that scenario.
 
 
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
 Within GBD 2017 data, the remission rate is not available which makes it difficult to transition through the states. So, due to data limitations we are simplifying the model.
  
@@ -89,7 +140,7 @@ Note: This simpliflication might over estimate the number of deaths. See Model A
 
 
 State and Transition Data Tables
---------------------------------
+++++++++++++++++++++++++++++++++
 
 .. list-table:: Definitions
    :widths: 15 20 30
@@ -137,7 +188,7 @@ State and Transition Data Tables
    * - I
      - disability weights
      - :math:`\displaystyle{\sum_{s\in \text{sequelae_c429}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - average disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
+     - total disability weight over all sequelae with ids s_277, s_5486, s_5489, s_279, s_280, s_5492
    * - ALL
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_c429}}{\text{population}}`
@@ -157,7 +208,7 @@ State and Transition Data Tables
      - S
      - I
      - :math:`\frac{\text{incidence_rate_c429}}{\text{1 - prevalence_c429}}`
-     - Incidence rate in total population is divided by 1-prevalence_c429 to get incidence rate among the recovered and susceptible population.
+     - Incidence rate in total population is divided by 1-prevalence_c429 to get incidence rate among the susceptible population.
 
 
 .. list-table:: Data Sources
@@ -196,7 +247,7 @@ State and Transition Data Tables
 
 
 Validation Criteria
--------------------
++++++++++++++++++++
 
 .. todo::
 

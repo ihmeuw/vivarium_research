@@ -1,15 +1,11 @@
-.. _2017_risk_effect_models:
+.. _2017_risk_effects_models:
 
-================================
-Risk Outcome Relationship Models
-================================
-
-.. todo::
-
-   Describe how to model risk outcome relationships here.
+====================
+Risk Effects Models
+====================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :glob:
 
    *

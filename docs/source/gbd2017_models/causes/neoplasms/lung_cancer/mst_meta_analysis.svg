@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- This is a Stata 15.1 generated SVG file (http://www.stata.com) -->
+
+<svg version="1.1" width="5.50in" height="4.00in" viewBox="0 0 3960 2880" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<desc>Stata Graph - Graph</desc>
+	<rect x="0" y="0" width="3960" height="2880" style="fill:#EAF2F3;stroke:none"/>
+	<rect x="0.00" y="0.00" width="3959.88" height="2880.00" style="fill:#EAF2F3"/>
+	<rect x="2.88" y="2.88" width="3954.12" height="2874.24" style="fill:none;stroke:#EAF2F3;stroke-width:5.76"/>
+	<rect x="130.80" y="972.95" width="3728.22" height="907.49" style="fill:#FFFFFF"/>
+	<rect x="133.68" y="975.83" width="3722.46" height="901.73" style="fill:none;stroke:#FFFFFF;stroke-width:5.76"/>
+	<line x1="130.80" y1="1394.21" x2="3859.02" y2="1394.21" style="stroke:#C0C0C0;stroke-width:5.76"/>
+	<rect x="2716.70" y="1601.51" width="39.33" height="39.33" style="fill:#B4B4B4"/>
+	<rect x="2721.01" y="1605.83" width="30.69" height="30.69" style="fill:none;stroke:#B4B4B4;stroke-width:8.64"/>
+	<rect x="2279.86" y="1472.81" width="37.60" height="37.60" style="fill:#B4B4B4"/>
+	<rect x="2284.18" y="1477.13" width="28.96" height="28.96" style="fill:none;stroke:#B4B4B4;stroke-width:8.64"/>
+	<line x1="2654.68" y1="1621.18" x2="2802.32" y2="1621.18" style="stroke:#000000;stroke-width:8.64"/>
+	<line x1="2082.47" y1="1491.48" x2="2532.05" y2="1491.48" style="stroke:#000000;stroke-width:8.64"/>
+	<line x1="2530.93" y1="1815.59" x2="2530.93" y2="1792.57" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1772.40" x2="2530.93" y2="1749.38" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1729.21" x2="2530.93" y2="1706.19" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1686.02" x2="2530.93" y2="1663.00" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1642.83" x2="2530.93" y2="1619.81" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1599.64" x2="2530.93" y2="1576.62" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1556.45" x2="2530.93" y2="1533.43" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1513.26" x2="2530.93" y2="1490.12" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1470.07" x2="2530.93" y2="1446.93" style="stroke:#90353B;stroke-width:5.76"/>
+	<line x1="2530.93" y1="1426.76" x2="2530.93" y2="1426.63" style="stroke:#90353B;stroke-width:5.76"/>
+	<path d=" M2027.03 1880.44 L2027.03 1394.33" stroke-linecap="round" stroke-linejoin="round" style="fill:none;stroke:#000000;stroke-width:5.76"/>
+	<defs>
+		<path id="path_SYSfotBN" d="M2102.76 1750.75 L2102.76 1750.75 L2530.93 1698.89 L2959.11 1750.75 L2959.11 1750.75 L2530.93 1802.60 L2102.76 1750.75 L2102.76 1750.75 Z" stroke-linecap="round"/>
+	</defs>
+	<use xlink:href="#path_SYSfotBN" style="fill:none;stroke:#000064;stroke-width:8.64"/>
+	<polygon points="2719.61,1621.18 2736.36,1604.42 2753.11,1621.18 2736.36,1637.93" style="fill:#000000"/>
+	<polygon points="2725.72,1621.18 2736.36,1610.53 2747.00,1621.18 2736.36,1631.82" style="fill:none;stroke:#000000;stroke-width:8.64"/>
+	<polygon points="2281.90,1491.61 2298.66,1474.85 2315.41,1491.61 2298.66,1508.36" style="fill:#000000"/>
+	<polygon points="2288.01,1491.61 2298.66,1480.96 2309.30,1491.61 2298.66,1502.25" style="fill:none;stroke:#000000;stroke-width:8.64"/>
+	<text x="152.83" y="1766.11" style="fill:#000000">
+		<tspan style="font-family:'Helvetica';font-size:43.81px">Overall, DL (I</tspan>
+		<tspan dy="-22.95px" style="font-family:'Helvetica';font-size:25.54px">2</tspan>
+		<tspan dy="22.95px" style="font-family:'Helvetica';font-size:43.81px"> = 92.4%, p = 0.000)</tspan>
+	</text>
+	<text x="152.83" y="1636.54" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">Gonzalz Maldonado et al. 2020</text>
+	<text x="152.83" y="1506.85" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">Chien and Chen 2008</text>
+	<text x="152.83" y="1247.58" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">Study</text>
+	<text x="3019.01" y="1766.11" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">3.82 (0.57, 7.07)</text>
+	<text x="3019.01" y="1636.54" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">5.38 (4.76, 5.88)</text>
+	<text x="3019.01" y="1506.85" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">2.06 (0.42, 3.83)</text>
+	<text x="3019.01" y="1247.58" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">Effect (95% CI)</text>
+	<text x="3597.54" y="1766.11" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">100.00</text>
+	<text x="3635.28" y="1636.54" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">53.06</text>
+	<text x="3635.28" y="1506.85" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">46.94</text>
+	<text x="3593.70" y="1247.58" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">Weight</text>
+	<text x="3744.92" y="1117.89" style="font-family:'Helvetica';font-size:43.81px;fill:#000000">%</text>
+	<line x1="130.80" y1="1880.44" x2="3859.02" y2="1880.44" style="stroke:#000000;stroke-width:5.76"/>
+	<line x1="1367.81" y1="1880.44" x2="1367.81" y2="1920.41" style="stroke:#000000;stroke-width:5.76"/>
+	<text x="1367.81" y="1971.06" style="font-family:'Helvetica';font-size:43.81px;fill:#000000" text-anchor="middle">-5</text>
+	<line x1="2027.03" y1="1880.44" x2="2027.03" y2="1920.41" style="stroke:#000000;stroke-width:5.76"/>
+	<text x="2027.03" y="1971.06" style="font-family:'Helvetica';font-size:43.81px;fill:#000000" text-anchor="middle">0</text>
+	<line x1="2686.36" y1="1880.44" x2="2686.36" y2="1920.41" style="stroke:#000000;stroke-width:5.76"/>
+	<text x="2686.36" y="1971.06" style="font-family:'Helvetica';font-size:43.81px;fill:#000000" text-anchor="middle">5</text>
+	<text x="148.13" y="2054.40" style="font-family:'Helvetica';font-size:32.92px;fill:#000000">NOTE: Weights are from random-effects model</text>
+	<text x="1994.97" y="913.58" style="font-family:'Helvetica';font-size:139.96px;fill:#1E2D53" text-anchor="middle">Mean Sojourn Time</text>
+</svg>

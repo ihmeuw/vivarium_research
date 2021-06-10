@@ -142,6 +142,21 @@ Full Name of Cause in GBD 2017
    :local:
    :depth: 1
 
+.. list-table:: Abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Fill out table with any abbreviations and their definitions used in this document.
+
 Disease Overview
 ----------------
 
