@@ -255,7 +255,7 @@ exposure distribution (TMRED)**, which is the distribution of risk exposure that
 would yield the lowest possible population risk. For smoking, the TMRED would be
 the trivial probability distribution assigning everyone in the population to the
 TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
-[GBD-2017-Risk-Appendix]_
+[GBD-2017-Risk-Appendix-Modeling-Risk-Factors]_
 
 Recall from the `causality section <What is a causal relationship?_>`_ that
 counterfactual analysis is used to describe the causal relationship between a
@@ -297,7 +297,7 @@ risk factors:
 However, neither of these conditions is necessary. In some cases, particularly
 for continuous risk exposure variables, the TMREL may be a nonzero exposure
 level. Moreover, there may be multiple TMRELs experienced by different members
-of the population. For example, in GBD 2017 [GBD-2017-Risk-Appendix]_:
+of the population. For example, in GBD 2017 [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]_:
 
 1.  The TMREL for radon exposure is taken to be 10 `Bq
     <https://en.wikipedia.org/wiki/Becquerel>`_/m\ :superscript:`3`, which is
@@ -937,7 +937,7 @@ References
   Risk Factors`. World Health Organization. 2004.
   http://www9.who.int/publications/cra/en/
 
-.. [GBD-2017-Risk-Appendix]
+.. [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]
 
   `Supplementary appendix 1 <Risk appendix on ScienceDirect_>`_ to the **GBD
   2017 Risk Factors Capstone**: GBD 2017 Risk Factor Collaborators. Global,
