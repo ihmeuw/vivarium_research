@@ -466,9 +466,9 @@ Validation Criteria
    * - disease_state
      - indication of health status 
    * - t_start
-     - start time since entrance of simulantion (months)
+     - start time since entrance of specified disease state (months)
    * - t_end
-     - end time since entrance of simulantion (months)
+     - end time since entrance of specified disease state (months)
    * - deaths
      - count of deaths among simulants with specified disease state for a given 
        period of (t_end - t_start) months
