@@ -20,12 +20,12 @@ From 2010 to 2019, MM incident cases increased by 25%, and deaths increased by 2
 
 With the development of better therapies, myeloma has changed from an untreatable ailment to one that is still not curable but treatable with mostly outpatient therapy. 
 Although several new treatment options for multiple myeloma are now available, there is no cure for this disease. And almost all patient with multiple myeloma develop relapse/refractory.
-Relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments. Relapse is the return of a cancer, multiple myeloma here, after a clinically disease-free interval. The term relapse is usually used to describe the return of a leukemia, lymphoma, or other hematopoietic malignancy, rather than the return of a carcinoma, according to National Cancer Institute's Surveillance, Epidemiology, and End Results Program (SEER)_. 
+Relapse is an inevitable feature of multiple myeloma, resulting in a continued need for new active treatments. Relapse is the return of a cancer, multiple myeloma here, after a clinically disease-free interval. The term relapse is usually used to describe the return of a leukemia, lymphoma, or other hematopoietic malignancy, rather than the return of a carcinoma, according to National Cancer Institute's Surveillance, Epidemiology, and End Results Program [SEER]_. 
 
 Refractory multiple myeloma is multiple myeloma that is not responsive to usual therapies. Patients are considered to have relapsed/ refractory multiple myeloma if they have achieved a minor response or better to treatment relapse and then progress on salvage therapy, or experience progression within 60 days of their last therapy.
 
 The combination of pomalidomide and low-dose dexamethasone is an approved and established option for the treatment of relapsed and refractory myeloma in
-patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal et al. 2019]
+patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal-et-al-2019]_
 was taken to compare isatuximab plus pomalidomide and dexamethasone with pomalidomide and dexamethasone in patients with relapsed and refractory multiple myeloma. Result shows that the addition of isatuximab to pomalidomide and dexamethasone was associated with a significant and
 clinically meaningful benefit in progression-free survival in heavily treated patients with relapsed and refractory multiple myeloma with results from both the investigators
 and an independent response committee being consistent.
@@ -151,6 +151,13 @@ Model Assumptions and Limitations
    condition.
 4. YLLs are substantially larger than YLDs for this cause. For now, we will not 
    build a disability component to capture those secondary outcomes.
+5. Based on available data, the most advanced disease state in cause model is 
+   fourth or higher relapse of RRMM. We intended to track deaths from simulants 
+   who have developed fourth relapse and received fifth-line of treatment but ignore 
+   the incident cases from fourth relapse to higher relapse of RRMM. As a result, 
+   we will not calculate progress-free survival among simulants with fourth or 
+   higher relapse of RRMM.
+
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -173,10 +180,18 @@ State and Transition Data Tables
    * - MM
      - Multiple myeloma
      - With symptomatic condition
-   * - RRMM
-     - Relpased/refractory multiple myeloma
-     - Myeloma returns after initial treatment and can include multiple bouts of 
-       relapse before mortality
+   * - MM_first_relapse
+     - Multiple myeloma in first relapse
+     - Myeloma returns after first-line treatment
+   * - MM_second_relapse
+     - Multiple myeloma in second relapse
+     - Myeloma returns after second-line treatment
+   * - MM_third_relapse
+     - Multiple myeloma in third relapse
+     - Myeloma returns after third-line treatment
+   * - MM_fourth_or_higher_relapse
+     - Multiple myeloma in fourth or higher relapse
+     - Myeloma returns after fourth-line treatment
 
 .. list-table:: State Data
    :widths: 1, 5, 15, 15
@@ -196,20 +211,46 @@ State and Transition Data Tables
      - 
    * - MM
      - prevalence
-     - prev_c486 * prevalence ratio of MM to RRMM
-     - The prevalence ratio is based on literature evidence
+     - Derived from "burn-in" method
+     - 
    * - MM
      - excess mortality rate
-     - Derived from survival regression analysis
-     - 
-   * - RRMM
+     - data_dir/mortality First-line.csv
+     - Derived from overall survival of first-line therapy in Braunlin et al.
+   * - MM_first_relapse
      - prevalence
-     - prev_c486 * (1 - prevalence ratio of MM to RRMM)
-     - The prevalence ratio is based on literature evidence
-   * - RRMM
-     - excess mortality rate
-     - Derived from survival regression analysis
+     - Derived from "burn-in" method
      - 
+   * - MM_first_relapse
+     - excess mortality rate
+     - data_dir/mortality Second-line.csv
+     - Derived from overall survival of second-line therapy in Braunlin et al.
+   * - MM_second_relapse
+     - prevalence
+     - Derived from "burn-in" method
+     - 
+   * - MM_second_relapse
+     - excess mortality rate
+     - data_dir/mortality Third-line.csv
+     - Derived from overall survival of Third-line therapy in Braunlin et al.
+   * - MM_third_relapse
+     - prevalence
+     - Derived from "burn-in" method
+     - 
+   * - MM_third_relapse
+     - excess mortality rate
+     - data_dir/mortality Fourth-line.csv
+     - Derived from overall survival of fourth-line therapy in Braunlin et al.
+   * - MM_fourth_or_higher_relapse
+     - prevalence
+     - Derived from "burn-in" method
+     - 
+   * - MM_fourth_or_higher_relapse
+     - excess mortality rate
+     - data_dir/mortality Fifth-line.csv
+     - Derived from overall survival of Fifth-line+ therapy in Braunlin et al.
+
+data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
 
 .. list-table:: Transition Data
    :widths: 1, 1, 1, 10, 10
@@ -225,16 +266,28 @@ State and Transition Data Tables
      - MM
      - :math:`\frac{\text{incidence_c486}}{1-\text{prev_c486}}`
      - incidence of MM among susceptible population
-   * - incidence_RRMM
+   * - incidence_MM_first_relapse
      - MM
-     - RRMM
-     - Derived from survival regression analysis
-     - 
-   * - incidence_relapse
-     - (N-1)th relapse
-     - Nth relapse
-     - Derived from survival regression analysis
-     - 
+     - MM_first_relapse
+     - data_dir/incidence First-line.csv
+     - Derived from progress-free survival of first-line therapy in Braunlin et al.
+   * - incidence_MM_second_relapse
+     - MM_first_relapse
+     - MM_second_relapse
+     - data_dir/incidence Second-line.csv
+     - Derived from progress-free survival of second-line therapy in Braunlin et al.
+   * - incidence_MM_third_relapse
+     - MM_second_relapse
+     - MM_third_relapse
+     - data_dir/incidence Third-line.csv
+     - Derived from progress-free survival of third-line therapy in Braunlin et al.
+   * - incidence_MM_fourth_or_higher_relapse
+     - MM_third_relapse
+     - MM_fourth_or_higher_relapse
+     - data_dir/incidence Fourth-line.csv
+     - Derived from progress-free survival of fourth-line therapy in Braunlin et al.
+
+data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
 
 .. list-table:: Data sources
    :widths: 5 10 10
@@ -249,28 +302,40 @@ State and Transition Data Tables
    * - incidence_c486
      - GBD 2019
      - 
+   * - prev_MM
+     - Derived from "burn-in" method
+     - 
+   * - prev_MM_{Nth}_relapse
+     - Derived from "burn-in" method
+     - 
    * - emr_MM
-     - Derived from survival regression analysis
+     - Derived from overall survival of first-line therapy in Braunlin et al.
      - Don't use emr_c486
-   * - prev_RRMM
-     - GBD 2019 and literature review
-     - Calculated from prev_c486 and prevalence ratio of MM to RRMM
+   * - emr_MM_{Nth}_relapse
+     - Derived from overall survival of {(N+1)th}-line therapy in Braunlin et al.
+     - 
+   * - incidence_MM_{Nth}_relapse
+     - Derived from progress-free survival of {Nth}-line therapy in Braunlin et al.
+     - 
    * - prevalence ratio of MM to RRMM
      - literature review
      - 
-   * - incidence_RRMM
-     - Derived from survival regression analysis
-     - 
-   * - emr_RRMM
-     - Derived from survival regression analysis
-     - 
-   * - incidence_relapse
-     - Derived from survival regression analysis
-     - 
 
-.. todo::
 
-   Describe methods for splitting the RRMM prevalene by relapse stage.
+Estimate MM Prevalene by Disease Stage
+++++++++++++++++++++++++++++++++++++++
+
+Burn-in method: current proposal is to assume the prevalence of MM from GBD 
+estimates evenly distributed across different stages of this disease. We let 
+simulation starts from 10 years prior to 2021-01-01 in order to correct the 
+distirbution of prevalence of MM by disease stage in 2021. Mathematically, the 
+distribution of MM prevalence in 2021 will be like :math:`m \times P^{n}`. Where 
+m is initial distribution of MM prevalence, P is transition probability matrix, 
+and n is burn-in period. To exam the estimated prevalence of MM and RRMM, we will 
+compare prevalence ratio of MM to RRMM (sum over prevalence of all MM relapse 
+stages) against ratio from SEER data in US. At the end, we expect that prev_MM > 
+prev_MM_first_relapse > prev_MM_second_relapse > ... > 
+prev_MM_fourth_or_higher_relapse in 2021.
 
 Survival Regression Model
 -------------------------
@@ -385,24 +450,87 @@ Input Data Table
 Validation Criteria
 +++++++++++++++++++
 
-.. todo::
+ - Model 1 (Susceptible to MM): compare simulation baseline results of MM prevalence, 
+   MM incidence, and MM cause-specific mortality stratified by age, sex, and year to 
+   GBD 2019 age-/sex-specific MM estimates.
+ - Model 2 (MM to MM_{Nth}_relapse): compare simulation baseline results of overall 
+   survival and progression-free survival by disease state to line-specific survival 
+   outcomes obtained from [Braunlin-et-al-2020]_.
 
-   Describe tests for model validation.
+.. list-table:: Count measures from simulation stratified by disease state and time
+   :widths: 1 10
+   :header-rows: 1
+   
+   * - Measure
+     - Definition
+   * - disease_state
+     - indication of health status 
+   * - t_start
+     - start time since entrance of simulantion (months)
+   * - t_end
+     - end time since entrance of simulantion (months)
+   * - deaths
+     - count of deaths among simulants with specified disease state for a given 
+       period of (t_end - t_start) months
+   * - progression
+     - count of incident cases to new line of treatment among simulants with 
+       specified disease state for a given period of (t_end - t_start) months
+   * - person_time
+     - count of person time among simulants with specified disease state contributed 
+       to a given period of (t_end - t_start) months
+
+.. list-table:: OS and PFS from simulation stratified by line of treatment
+   :header-rows: 1
+
+   * - state
+     - line_of_tx
+     - outcome
+     - measure
+     - numerator
+     - denominator
+   * - MM
+     - first
+     - OS
+     - excess mortality
+     - mm_deaths_count
+     - mm_state_person_time
+   * - MM
+     - first
+     - PFS
+     - progression
+     - mm_to_mm_first_relapse_incidence_count
+     - mm_state_person_time
+   * - MM_{Nth}_relapse
+     - N+1
+     - OS
+     - excess mortality
+     - mm_{Nth}_relapse_deaths_count
+     - mm_{Nth}_relapse_state_person_time
+   * - MM_{Nth}_relapse
+     - N+1
+     - PFS
+     - progression
+     - mm_{Nth}_relapse_to_mm_{(N+1)th}_relapse_incidence_count
+     - mm_{Nth}_relapse_state_person_time
+
+Formula to calculate OS or PFS by line of treatment = 
+:math:`\prod \limits_{t=0}^{t<=n} (1 - \frac{numerator}{denominator} \times duration)`
+
 
 References
 ----------
 
-..[Attal et al. 2019]
+.. [Attal-et-al-2019]
    Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and low-dose 
    dexamethasone versus pomalidomide and low-dose dexamethasone in patients with relapsed 
    and refractory multiple myeloma (ICARIA-MM): a randomised, multicentre, open-label, phase 
    3 study. Lancet 2019; 394: 2096–107.
    
-..[Cowan et al. 2018]
+.. [Cowan-et-al-2018]
    Cowan AJ, Allen C, Barac A, et al. Global Burden of Multiple Myeloma: A Systematic 
    Analysis for the Global Burden of Disease Study 2016. JAMA Oncol 2018; 4: 1221–7.
 
-..[GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]
+.. [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]
    Supplement to: `GBD 2019 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries
@@ -410,4 +538,10 @@ References
    Disease Study 2017. Lancet 2018; 392: 1789–858`
    (pp. 803-811)
 
-.. (SEER): https://seer.cancer.gov/seertools/seerrx/rx/53c44b1e102c1290262dd895/?regimen_field=name&rx_type=regimen&drug_offset=0&regimen_offset=125&q=&limit=100&drug_field=name&search_mode=&drug_direction=UP&regimen_direction=UP&mode=
+.. [Braunlin-et-al-2020]
+   Braunlin M, Belani R, Buchanan J, Wheeling T, Kim C. Trends in the multiple myeloma 
+   treatment landscape and survival: a U.S. analysis using 2011–2019 oncology clinic 
+   electronic health record data. Leukemia & Lymphoma 2021; 62: 377–86.
+
+.. [SEER]
+   https://seer.cancer.gov/seertools/seerrx/rx/53c44b1e102c1290262dd895/?regimen_field=name&rx_type=regimen&drug_offset=0&regimen_offset=125&q=&limit=100&drug_field=name&search_mode=&drug_direction=UP&regimen_direction=UP&mode=
