@@ -589,6 +589,12 @@ Each treatment category has a hazard ratio associated with it both for progressi
 
 The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
 
+*Observers*:
+
+We would like to stratify simulations outputs on treatment category (residual/isa, not retreated/isa, retreated/dara, not retreated/dara, retreated).
+
+Additionally, we would like the *number* of simulants assigned to each treatment category at time of diagnosis or relapse for each line of treatment.
+
 .. _5.3.4:
 
 5.3.4 Patient registry model
