@@ -460,7 +460,7 @@ The treatment algorithm is described in this :download:`word document found here
 
 			:math:`p_\text{resid} = 1 - p_\text{isa} - p_\text{dara}`
 
-			Where :math:`c` indicates the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep and :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep.
+			Where :math:`c` indicates the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep and :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep (set to zero if simulant's current line of treatment is the first line of treatment).
 
 			This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time. Notably, these assumptions will cause biases in opposite directions.
 
