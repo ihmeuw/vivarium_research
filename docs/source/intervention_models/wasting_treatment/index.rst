@@ -388,22 +388,9 @@ For **SAM** 6-59 months
 
 Let s199 be the proportion of SAM with oedema among those with SAM
 
-*with and without complications*
+ - :math:`r2 = r2_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}})\times(1-s199) + r2_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}})\times s199 + r2_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}\times(1-s199) + r2_{tx_{com}}\times(C_{SAM_{6-59_{SC}}})\times s199`
 
-- :math:`r2_{com} = r2\times s199`
-- :math:`r2_{uncom} = r2\times(1-s199)`
-- :math:`d1_{com} = d1\times s199`
-- :math:`d1_{uncom} = d1\times(1-s199)`
-
-- :math:`r2_{uncom} =  r2_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}}) + r2_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}`
-- :math:`d1_{uncom} =  d1_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}}) + d1_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}`
-- :math:`r2_{com} =  r2_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}}) + r2_{tx_{com}}\times C_{SAM_{6-59_{SC}}}`
-- :math:`d1_{com} =  d1_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}}) + d1_{tx_{com}}\times C_{SAM_{6-59_{SC}}}`
-
-- :math:`r2_{ux_{com}} = r2_{ux}\times s199`
-- :math:`d1_{ux_{com}} = d1_{ux}\times s199`
-- :math:`r2_{ux_{uncom}} = r2_{ux}\times(1-s199)`
-- :math:`d1_{ux_{uncom}} = d1_{ux}\times(1-s199)`
+ - :math:`d1 = d1_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}})\times(1-s199) + d1_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}})\times s199 + d1_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}\times(1-s199) + d1_{tx_{com}}\times(C_{SAM_{6-59_{SC}}})\times s199`
 
 .. todo::
 
