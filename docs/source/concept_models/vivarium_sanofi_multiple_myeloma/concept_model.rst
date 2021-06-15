@@ -422,9 +422,72 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
 Treatment Modeling Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The treatment algorithm is described in this :download:`word document found here <treatment_algorithm.docx>`. Specific implementation details are discussed below.
+The treatment algorithm is described in this :download:`word document found here <treatment_algorithm.docx>`. We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
 
 **How to assign treatment category to a simulant:**
+
+*Treatment Coverage Proportions*:
+
+The table below shows the treatment category coverage proportions for the isatuxamib- and daratumumab-containing categories in 2021 (Jan 1. 2021) and 2025 (Dec. 31 2025) in the baseline and alternative scenarios. The residual treatment category coverage proportion is not shown, but covers the remaining proportion of patients. We will assume that coverage of each treatment category changes *linearly* from the 2021 value to the 2025 for each line of treatment.
+
+.. list-table:: Treatment category coverage proportions
+   :header-rows: 1
+
+   * - Line of treatment
+     - Treatment category
+     - 2021 (baseline and alternative)
+     - 2025 (baseline)
+     - 2025 (alternative)
+   * - 1
+     - Isatuxamib-containing
+     - 0
+     - 0
+     - 10
+   * - 1
+     - Daratumuab-containing
+     - 1.6%
+     - 2.9%
+     - 2.9%
+   * - 2
+     - Isatuxamib-containing
+     - 0.8%
+     - 10%
+     - 10%
+   * - 2
+     - Daratumuab-containing
+     - 16.9%
+     - 30.6%
+     - 30.6%
+   * - 3
+     - Isatuxamib-containing
+     - 1.3%
+     - 10%
+     - 10%
+   * - 3
+     - Daratumuab-containing
+     - 25.6%
+     - 46.3%
+     - 46.3%
+   * - 4
+     - Isatuxamib-containing
+     - 1.5%
+     - 10%
+     - 10%
+   * - 4
+     - Daratumuab-containing
+     - 29.7%
+     - 53.7%
+     - 53.7%
+   * - 5+
+     - Isatuxamib-containing
+     - 0.9%
+     - 10%
+     - 10%
+   * - 5+
+     - Daratumuab-containing
+     - 17.1%
+     - 30.9%
+     - 30.9%
 
 *Initialization*:
 
@@ -477,6 +540,72 @@ The treatment algorithm is described in this :download:`word document found here
 			If a simulant is assigned an isa- or dara-containing treatment regimen, set :code:`eligible_for_anticd38_retreatment = True`; otherwise, keep :code:`eligible_for_anticd38_retreatment = NaN`.
 
 **How to assign treatment effects:**
+
+Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. There are separate hazard ratios for the first line of treatment and later lines of treatment for each treatment category. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`retreatment == True`). The hazard ratios are shown in the tables below.
+
+.. list-table:: First line of treatment hazard ratios
+   :header-rows: 1
+
+   * - Treatment category
+     - Progression free survival HR (95% UI)
+     - Overall survival HR (95% UI)
+   * - All categories combined
+     - 1 (reference)
+     - 1 (reference)
+   * - Isatuxamib-containing treatment category
+     - 0.429 (0.368, 0.495)
+     - 0.760 (0.645, 0.895)
+   * - Daratumumab-containing treatment category
+     - 0.429 (0.368, 0.495)
+     - 0.760 (0.645, 0.895)
+   * - Residual treatment category
+     - 1.00581 (1.0051, 1.0064)
+     - 1.0024 (1.0011, 1.0036)
+
+.. list-table:: Second and later lines of treatment hazard ratios
+   :header-rows: 1
+
+   * - Treatment category
+     - Progression free survival HR (95% UI)
+     - Overall survival HR (95% UI)
+   * - All categories combined
+     - 1 (reference)
+     - 1 (reference)
+   * - Isatuxamib-containing treatment category, :code:`retreated != True`
+     - 0.530 (0.356, 0.803)
+     - 1.116 (1.044, 1.185)
+   * - Isatuxamib-containing treatment category, :code:`retreated == True`
+     - 0.765 (0.678, 0.902)
+     - 1.232 (1.088, 1.37)
+   * - Daratumumab-containing treatment category, :code:`retreated != True`
+     - 0.217 (0.203, 0.231)
+     - 0.572 (0.551, 0.594)
+   * - Daratumumab-containing treatment category, :code:`retreated == True`
+     - 0.609 (0.601, 0.616)
+     - 0.786 (0.776, 0.797)
+   * - Residual treatment category
+     - 1.331 (1.324, 1.337)
+     - 1.181 (1.171, 1.190)
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
+
+.. code-block:: python
+
+	from numpy import log
+	from scipy.stats import norm, lognorm
+
+	q_975_stdnorm = norm().ppf(0.975)
+	mu = log(hr)
+	sigma = (log(hr_upper) - mu) / q_975_stdnorm
+	hr_distribution = lognorm(s=sigma, scale=hr)
+
+The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
+
+*Observers*:
+
+We would like to stratify simulations outputs on treatment category (residual/isa, not retreated/isa, retreated/dara, not retreated/dara, retreated).
+
+Additionally, we would like the *number* of simulants assigned to each treatment category at time of diagnosis or relapse for each line of treatment.
 
 .. _5.3.4:
 
