@@ -573,10 +573,10 @@ Each treatment category has a hazard ratio associated with it both for progressi
      - 1 (reference)
    * - Isatuxamib-containing treatment category, :code:`retreated != True`
      - 0.530 (0.356, 0.803)
-     - 1.159 (1.044, 1.185)
+     - 1.116 (1.044, 1.185)
    * - Isatuxamib-containing treatment category, :code:`retreated == True`
      - 0.765 (0.678, 0.902)
-     - 1.318 (1.088, 1.37)
+     - 1.232 (1.088, 1.37)
    * - Daratumumab-containing treatment category, :code:`retreated != True`
      - 0.217 (0.203, 0.231)
      - 0.572 (0.551, 0.594)
@@ -586,6 +586,18 @@ Each treatment category has a hazard ratio associated with it both for progressi
    * - Residual treatment category
      - 1.331 (1.324, 1.337)
      - 1.181 (1.171, 1.190)
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
+
+.. code-block:: python
+
+	from numpy import log
+	from scipy.stats import norm, lognorm
+
+	q_975_stdnorm = norm().ppf(0.975)
+	mu = log(hr)
+	sigma = (log(hr_upper) - mu) / q_975_stdnorm
+	hr_distribution = lognorm(s=sigma, scale=hr)
 
 The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
 
