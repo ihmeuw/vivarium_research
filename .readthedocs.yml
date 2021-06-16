@@ -7,8 +7,7 @@ version: 2
 python:
   version: 3.8
   install:
-    - method: pip
-      path: requirements.txt
+    requirements: requirements.txt
 
 # Doc builds will fail if there are any warnings
 sphinx:
