@@ -30,13 +30,7 @@ jobs:
           python -m pip install --upgrade pip
       - name: Install dependencies
         run: |
-          pip install .[dev]
-      - name: Test
-        run: |
-          pytest ./tests
+          pip install requirements.txt
       - name: Doc build
         run: |
           make html -C docs/ SPHINXOPTS="-W --keep-going -n"
-      - name: Doctest
-        run: |
-          make doctest -C docs/
