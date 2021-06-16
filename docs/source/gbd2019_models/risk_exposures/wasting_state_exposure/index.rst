@@ -67,7 +67,7 @@ Wasting as finite state machines
 
 
 
-.. _1.0:
+.. _waste_exp1.0:
 
 Risk Exposure Overview
 ++++++++++++++++++++++
@@ -79,12 +79,12 @@ Malnutrition is an imbalance between the body’s needs and its use and intake o
 .. note::
   Include here a clinical background and overview of the risk exposure you're modeling. Note that this is only for the exposure; you will include information on the relative risk of the relevant outcomes, and the cause models for those outcomes, in a different document.
 
-.. _1.1:
+.. _waste_exp1.1:
 
 Risk Exposures Description in GBD
 +++++++++++++++++++++++++++++++++
 
-.. _1.1.1:
+.. _waste_exp1.1.1:
 
 Case definition
 ---------------
@@ -103,7 +103,7 @@ Wasting, a sub-compoonent indicator of child growth failure (CGF), is based on a
 | SAM   |  < -3 Z score                        |
 +-------+--------------------------------------+
 
-.. _1.1.2:
+.. _waste_exp1.1.2:
 
 Input data
 ----------
@@ -115,7 +115,7 @@ Two types of input data are used in CGF estimation:
   2. **Microdata**. This data does have individual anthropometric measurements. From these datasources, GBD can see entire distributions of CGF, while also collapsing them down to point prevalences like moderate and severe CGF. 
 
 
-.. _1.1.3:
+.. _waste_exp1.1.3:
 
 Exposure estimation
 ------------------- 
@@ -130,7 +130,7 @@ Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores be
   In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right now, he presents the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
 
 
-.. _1.1.4:
+.. _waste_exp1.1.4:
 
 Outcomes affected by wasting
 ----------------------------
@@ -164,7 +164,7 @@ CGF burden does not start until *after* neonatal age groups (from 1mo onwards). 
 +-------+-------+-----------------------+--------------------------+
 
 
-.. _2.0: 
+.. _waste_exp2.0:
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
@@ -209,7 +209,7 @@ As a rule for the finiate state machines, the numerator of the prevalence of a s
   This section will become the methods section in the manuscript. 
 
 
-.. _2.1: 
+.. _waste_exp2.1:
 
 Restrictions
 ------------
@@ -238,12 +238,12 @@ Restrictions
 
 	Determine if there's something analogous to "YLL/YLD only" for this section
 
-.. _2.2: 
+.. _waste_exp2.2:
 
 Risk Exposure Model Diagram
 ---------------------------
 
-.. _2.2.1: 
+.. _waste_exp2.2.1:
 
 Finite state machine 1x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -792,7 +792,7 @@ The code used to solve this system of equations is here:
   result_1 = sym.solve(A1 * x1 - b1, x1)
 
 
-.. _2.2.2: 
+.. _waste_exp2.2.2:
 
 Finite state machine 2x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~~

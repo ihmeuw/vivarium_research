@@ -20,4 +20,3 @@ This documentation is generated collaboratively during weekly
    :glob:
 
    *
-   */index

@@ -4,7 +4,7 @@
 Chronic Kidney Disease (CKD)
 ============================
 
-Chronic kidney disease (CKD) is defined by NIH as kidneys that are damaged and can’t filter blood the way they should. The main risk factors for developing kidney disease are diabetes, high blood pressure, heart disease, and a family history of kidney failure. National Kidney Foundation (NKF) adds that CKD is also known as chronic renal disease. You may develop complications like high blood pressure, anemia (low blood count), weak bones, poor nutritional health and nerve damage. Also, kidney disease increases your risk of having heart and blood vessel disease. These problems may happen slowly over a long period of time. Early detection and treatment can often keep chronic kidney disease from getting worse. When kidney disease progresses, it may eventually lead to kidney failure, which requires dialysis or a kidney transplant to maintain life. [National-Institute-Of-Diabetes-And-Digestive-And-Kidney-Diseases]_, [National-Kidney-Foundation]_
+Chronic kidney disease (CKD) is defined by NIH as kidneys that are damaged and can’t filter blood the way they should. The main risk factors for developing kidney disease are diabetes, high blood pressure, heart disease, and a family history of kidney failure. National Kidney Foundation (NKF) adds that CKD is also known as chronic renal disease. You may develop complications like high blood pressure, anemia (low blood count), weak bones, poor nutritional health and nerve damage. Also, kidney disease increases your risk of having heart and blood vessel disease. These problems may happen slowly over a long period of time. Early detection and treatment can often keep chronic kidney disease from getting worse. When kidney disease progresses, it may eventually lead to kidney failure, which requires dialysis or a kidney transplant to maintain life. [National-Institute-Of-Diabetes-And-Digestive-And-Kidney-Diseases-CKD-2019]_, [National-Kidney-Foundation-CKD-2019]_
 
 GBD 2019 Modeling Strategy
 --------------------------
@@ -361,10 +361,10 @@ Validation Criteria
 References
 ----------
 
-.. [National-Institute-Of-Diabetes-And-Digestive-And-Kidney-Diseases]
+.. [National-Institute-Of-Diabetes-And-Digestive-And-Kidney-Diseases-CKD-2019]
     Retrieved 7 Feb 2020.
     https://www.niddk.nih.gov/health-information/kidney-disease/chronic-kidney-disease-ckd
   
-.. [National-Kidney-Foundation]
+.. [National-Kidney-Foundation-CKD-2019]
     Retrieved 7 Feb 2020.
     https://www.kidney.org/atoz/content/about-chronic-kidney-disease

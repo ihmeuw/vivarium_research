@@ -8,5 +8,5 @@ GBD 2019 Models
    :maxdepth: 2
    :glob:
 
-   *
+
    */index

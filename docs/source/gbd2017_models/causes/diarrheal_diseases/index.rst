@@ -46,6 +46,7 @@ Noninfectious diarrhea etiologies are far less common, but are more likely among
 chronic cases of diarrhea. Causes of noninfectious diarrhea include ischemic 
 colitis, inflammatory bowl disease, among others ([UpToDate_2]_).
 
+[CDC]_, [Wikipedia]_
 
 
 Modeling Diarrheal Diseases in GBD 2017

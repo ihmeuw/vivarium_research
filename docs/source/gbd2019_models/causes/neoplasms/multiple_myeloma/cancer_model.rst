@@ -25,10 +25,12 @@ Relapse is an inevitable feature of multiple myeloma, resulting in a continued n
 Refractory multiple myeloma is multiple myeloma that is not responsive to usual therapies. Patients are considered to have relapsed/ refractory multiple myeloma if they have achieved a minor response or better to treatment relapse and then progress on salvage therapy, or experience progression within 60 days of their last therapy.
 
 The combination of pomalidomide and low-dose dexamethasone is an approved and established option for the treatment of relapsed and refractory myeloma in
-patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal-et-al-2019]_
+patients who have received at least two previous therapies. A randomised, multicentre, open-label, phase 3 study [Attal-et-al-2019-mm]_
 was taken to compare isatuximab plus pomalidomide and dexamethasone with pomalidomide and dexamethasone in patients with relapsed and refractory multiple myeloma. Result shows that the addition of isatuximab to pomalidomide and dexamethasone was associated with a significant and
 clinically meaningful benefit in progression-free survival in heavily treated patients with relapsed and refractory multiple myeloma with results from both the investigators
 and an independent response committee being consistent.
+
+Other info: [Cowan-et-al-2018]_
 
 GBD 2019 Modeling Strategy
 --------------------------
@@ -378,7 +380,8 @@ From the survival regression model, we expect to output the survival/hazard as a
 function of time to tell when an event will happen and its likelihood, in a 
 baseline survival model and a model with different values of covariates. In general, 
 We will create two survival regression models:
- 1. Mortality hazard model to predict time to death from MM and time to death from 
+
+ 1. Mortality hazard model to predict time to death from MM and time to death from
     each of relapse states. 
  2. Transition hazard model to predict time from MM to RRMM, and time between last 
     relapse and next relapse within RRMM state. 
@@ -520,7 +523,7 @@ Formula to calculate OS or PFS by line of treatment =
 References
 ----------
 
-.. [Attal-et-al-2019]
+.. [Attal-et-al-2019-mm]
    Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and low-dose 
    dexamethasone versus pomalidomide and low-dose dexamethasone in patients with relapsed 
    and refractory multiple myeloma (ICARIA-MM): a randomised, multicentre, open-label, phase 

@@ -60,7 +60,7 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 +-------+----------------------------+
 
 
-.. _1.0:
+.. _mm1.0:
 
 1.0 Background
 ++++++++++++++
@@ -82,14 +82,14 @@ Key sub-populations agreed upon include:
 
 In the absence of data on treatment effects for sub-groups we will need to make assumptions with client guidance. A strength of this project is that we will be able to iteratively update such assumptions as we get real world data from registries and re-run the simulation. 
 
-.. _1.1:
+.. _mm1.1:
 
 1.1 Project overview
 --------------------
 This project intends to model the impact of a new treatment option for myeloma disease, Isatuximab, from 2021 to 2026 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States, which are dependent on disease status, age, eligibility for stem cell transplantation, risk category, history of malignancy, and duration of previous treatment response. 
 
 
-.. _1.2:
+.. _mm1.2:
 
 1.2 Literature review
 ---------------------
@@ -107,7 +107,7 @@ There is one randomized controlled trial on Isatuximab treatment that is current
      - Eligible population
      - Length of follow-up
    * - Multinational Clinical Study Comparing Isatuximab, Pomalidomide, and Dexamethasone to Pomalidomide and Dexamethasone in Refractory or Relapsed and Refractory Multiple Myeloma Patients (ICARIA-MM)
-     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019 
+     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019 [Dimopoulos-et-al-2020]_
      - 102 sites in 24 countries
      - IPd (isatuximab + pomalidomide + dexamethasone)
      - Pd (pomalidomide + dexamethasone)
@@ -117,7 +117,7 @@ There is one randomized controlled trial on Isatuximab treatment that is current
 
 
 
-.. _2.0:
+.. _mm2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -126,12 +126,12 @@ The primary objective of this project is to answer the following question: what 
 
 To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our own survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2026 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk. 
 
-.. _3.0:
+.. _mm3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _mm3.1:
 
 3.1 Causal diagram
 ------------------
@@ -158,7 +158,7 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 **Mediators (M)**:
 
 
-.. _3.2:
+.. _mm3.2:
 
 3.2 Effect sizes
 ----------------
@@ -174,7 +174,7 @@ Among MM and RRMM patients, they expect to have:
  - Other (non Isa-based) treatment with constant coverage rates across 5 years 
    of the simulation
 
-.. _4.1:
+.. _mm4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -222,12 +222,12 @@ In the absence of data from Flatiron, we made following assumptions:
  2026) So, the endpoint coverage could reach 45% If we set the initial coverage 
  2027) of Isatuximab to be 10% in 2021.
 
-.. _5.0:
+.. _mm5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _mm5.1:
 
 5.1 Vivarium concept model 
 --------------------------
@@ -241,12 +241,12 @@ The simulation concept model consists of five main components:
  4. Health system (multiple lines of treatment for MM and RRMM population) 
  5. Patient registry 
 
-.. _5.2:
+.. _mm5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _mm5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,31 +258,32 @@ The simulation concept model consists of five main components:
   - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
 
 
-.. _5.2.2:
+.. _mm5.2.2:
 
 5.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **General US population** and **Registry population** stratified by 
 sub-population groups of following:
- - Black/African American population 
+
+ - Black/African American population
  - Population with high-risk cytogenetics (abnormality includes Del(17p) t(14;16) t(14;20) Del(1p))
  - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
  - Elder population (aged > 75 years) 
 
-.. _5.3:
+.. _mm5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _mm5.3.1:
 
 5.3.1 Disease model
 ~~~~~~~~~~~~~~~~~~~
 
 See :ref:`multiple myeloma cause model<2019_cancer_model_multiple_myeloma>`
 
-.. _5.3.2:
+.. _mm5.3.2:
 
 5.3.2 Risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -297,6 +298,7 @@ the choice of therapy is based on their GFR and cytogenetic risk.
 **eGFR** has a continuous risk exposure by age, sex, and race/ethnicity. 
 Simulants will be assigned to a CKD stage based on their eGFR value. We consider 
 5 stages of CKD:
+
  - Stage 1: eGFR > 90 ml/min/1.73m^2
  - Stage 2: eGFR 60 to 90 ml/min/1.73m^2
  - Stage 3: eGFR 30 to 60 ml/min/1.73m^2
@@ -335,7 +337,7 @@ of high-risk cytogenetics among adults in the US population with multiple myelom
  abnormalities as described above. No abnormalities detected on fluorescence in 
  situ hybridization (FISH) is considered 'standard-risk' as well. 
 
-.. _5.3.3:
+.. _mm5.3.3:
 
 5.3.3 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
@@ -607,7 +609,7 @@ We would like to stratify simulations outputs on treatment category (residual/is
 
 Additionally, we would like the *number* of simulants assigned to each treatment category at time of diagnosis or relapse for each line of treatment.
 
-.. _5.3.4:
+.. _mm5.3.4:
 
 5.3.4 Patient registry model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -621,6 +623,7 @@ they will be included in a registry. The registry is running for RRMM patients
 (any newly incident RRMM cases developed from multiple myeloma and the pre-existing 
 RRMM cases at the start of the simulation). In general, we will use the criteria 
 listed below to decide who is eligible to be enrolled in the registry.
+
   - 18 years and older
   - With relapsed/refractory multiple myeloma (RRMM according to IMWG definition)
   - First time using Isa (never received Isa for treatment of disease other than RRMM)
@@ -656,12 +659,12 @@ Where,
    malignancy other than RRMM in the past three years
 
 
-.. _5.4:
+.. _mm5.4:
 
 5.4 Input data sources
 ----------------------
 
-.. _5.5:
+.. _mm5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -750,13 +753,13 @@ Where,
 - Median OS (months): median length of time-to-death in months
 - One-year OS (%): proportion of patients survival without death during a one-year period
 
-.. _6.0:
+.. _mm6.0:
 
 6.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
 
-.. _7.0:
+.. _mm7.0:
 
 7.0 Limitations
 +++++++++++++++
@@ -799,10 +802,10 @@ Where,
    impairment: ICARIA-MM subgroup analysis. Leukemia 2021; 35: 562–72.
 
 .. [FDA-prescribing-information-dara-2021]
-	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`_
+	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`__
 
 .. [FDA-prescribing-information-isa-2021]
-	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`_
+	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`__
 
 .. [Goto-et-al-2019]
 	Goto, Daisuke, et al. "Utilization of novel systemic therapies for multiple myeloma: A retrospective study of front‐line regimens using the SEER‐Medicare data." Cancer medicine 9.2 (2020): 626-639.

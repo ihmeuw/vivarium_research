@@ -66,7 +66,7 @@ The theoretical minimum risk exposure was defined as a range between 110 to 115 
    * - High systolic blood pressure
      - Chronic kidney disease due to diabetes mellitus type 2
 
-[GBD-2019-Capstone-Appendix]_
+[GBD-2019-Capstone-Appendix-SBP]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -149,7 +149,7 @@ References
 	Retrieved 19 April 2021.
 	https://www.jacc.org/doi/full/10.1016/j.jacc.2019.03.507
 
-.. [GBD-2019-Capstone-Appendix]
+.. [GBD-2019-Capstone-Appendix-SBP]
   Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249` 
   
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf

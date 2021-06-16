@@ -52,12 +52,12 @@ Vivarium CSU Lung Cancer Simulation
    * - CXR
      - Chest x-ray
 
-.. _1.0:
+.. _swlc1.0:
 
 1.0 Background
 ++++++++++++++
 
-.. _1.1:
+.. _swlc1.1:
 
 For this project, we are interested in the expected impact of increases in lung cancer screening coverage on the rates of detected lung cancer over the next 20 years among the insured population in select areas in China. 
 
@@ -66,12 +66,12 @@ For this project, we are interested in the expected impact of increases in lung 
 
 This project intends to model the impact of increased lung cancer screening coverage on lung cancer detection forecasted from 2020 to 2040 among the insured population in select areas of China. The model will make use of the current lung cancer screening guidelines, which are dependent on age, smoking status, and cumulative smoking history. Screening will affect the timing of dection for some lung cancers (in the preclinical rather than clinical phase) as well as whether indolent cancers are detected or not.
 
-.. _1.2:
+.. _swlc1.2:
 
 1.2 Literature review
 ---------------------
 
-.. _2.0:
+.. _swlc2.0:
 
 There is a concensus that lung cancer screening programs do not significantly affect smoking behaviors among the screened population, as supported by a systemtatic review [Slatore-et-al-2014]_. However, this conclusion is limited in that it included studies from Europe and the United States only. It is therefore possible that lung cancer screening programs could either *increase* smoking behaviors by providing a sense of safety or *decrease* smoking behaviors by drawing attention to the risks of smoking in our population of interest that was not studied by the systematic review. 
 
@@ -154,14 +154,14 @@ There are several randomized controlled trials on LDCT lung cancer screening pro
 
 The main outcome of this model is lung cancer *detections*, diagnosed either via screening or symptomatic presentation. This outcome will be assessed yearly in a baseline scenario with no lung cancer screening scale-up and an alternative scenario in which lung cancer screening coverage is scaled up. NOTE: deaths with undetected lung cancer is not a relevant model outcome.
 
-.. _3.0:
+.. _swlc3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
 .. image:: causal_framework_diagram.svg
 
-.. _3.1:
+.. _swlc3.1:
 
 3.1 Causal variables
 --------------------
@@ -190,12 +190,12 @@ Additional considerations:
 
   Age was not shown in this diagram because it is inherently controlled for by the age-specific estimates inherent to GBD. However, age affects screening eligibility and therefore there are still potential downstream impacts. Particularly, age affects the probability that lung cancer will be indolent. Therefore, age is a potential effect modifier in the relationship between lung cancer screening and lung cancer detection. 
  
-.. _4.0:
+.. _swlc4.0:
 
 4.0 Intervention
 ++++++++++++++++
 
-.. _4.1:
+.. _swlc4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -208,12 +208,12 @@ Additional considerations:
 
   Refine this... also, see section below
 
-.. _5.0:
+.. _swlc5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _swlc5.1:
 
 5.1 Vivarium concept model 
 --------------------------
@@ -224,7 +224,7 @@ Note that we are not modeling an effect of lung cancer screening coverage on lun
 
 Note that we are using mortality due to chronic obstructive pulmonary disease (COPD) and ischemic heart disease (IHD) as a proxy for smoking-related mortality other than lung cancer (more details below).
 
-.. _5.2:
+.. _swlc5.2:
 
 5.2 Demographics
 ----------------
@@ -232,12 +232,12 @@ Note that we are using mortality due to chronic obstructive pulmonary disease (C
 The demographic model for this project should follow the same demographic model for the existing SwissRe models, as defined in the 
 :ref:`Vivarium CSU Breast Cancer Screening Concept Model Documentation <2017_concept_model_vivarium_swissre_breastcancer>`, both in terms of the population and location descriptions.
 
-.. _5.3:
+.. _swlc5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _swlc5.3.1:
 
 5.3.1 Core Lung Cancer Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -246,25 +246,25 @@ The lung cancer cause model that should be used for this project is documented o
 
 Additionally, the effect of the smoking risk factor on this model is documented on the :ref:`2017 Smoking Risk Effects page <2017_risk_effect_smoking>`.
 
-.. _5.3.2:
+.. _swlc5.3.2:
 
 5.3.2 Smoking-Related Mortality Model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The smoking-related mortaltiy model will be incorporated into this project in order to capture the excess mortality attributable to the smoking risk factor from causes other than lung cancer. This is a mortality-only model that considers mortality due to chronic obstructive pulmonary disease and ischemic heart disease only. The mortality component of this model is documented on the :ref:`2017 Smoking-Related Mortality Model <2017_smoking_related_mortality>`. Additionally, the effect of the smoking risk factor on this model is documented on the :ref:`2017 Smoking Risk Effects page <2017_risk_effect_smoking>`.
 
-.. _5.3.3:
+.. _swlc5.3.3:
 
 5.3.3 Smoking model
 ~~~~~~~~~~~~~~~~~~~
 
-The smoking risk exposure model to be used for this project is documented on the :ref:`Forecasted Smoking Risk Exposure Page <2017_risk_exposure_smoking_forecasted>`.
+The smoking risk exposure model to be used for this project is documented on the :ref:`Forecasted Smoking Risk Exposure Page <2017_risk_smoking_forecasted>`.
 
 The smoking risk factor will affect lung cancer incidence, as described in the :ref:`smoking risk effects page <2017_risk_effect_smoking>`.
 
-The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `5.3.4`_ Screening and detection model.
+The smoking risk exposure should also be used to determine the lung cancer screening model algorithm, as described in section `swlc5.3.4`_ Screening and detection model.
 
-.. _5.3.4:
+.. _swlc5.3.4:
 
 5.3.4 Screening and Detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -324,7 +324,7 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 
     - Simulant is in the PC or I states of the lung cancer cause model
     - Simulant attends a scheduled lung cancer screening
-    - Lung cancer is detected according to sensitivity parameters defined below in `5.3.4.3`_
+    - Lung cancer is detected according to sensitivity parameters defined below in `swlc5.3.4.3`_
 
   Detection via symptomatic presentation occurs when:
 
@@ -334,6 +334,8 @@ Lung cancers may be detected in one of two ways in this simulation: either via s
 .. note::
 
   We may want to eventually incorporate some lag period here between when simulant begins to experience symptoms and when lung cancer is actually formally diagnosed.
+
+.. _swlc5.3.4.3:
 
 5.3.4.3 Screening Sensitivity and Specificity
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -467,12 +469,12 @@ The following provides code to calculate sex-specific screening coverate rates w
 
   male_coverage_rate = c / (c + d)
 
-.. _5.4:
+.. _swlc5.4:
 
 5.4 Input data sources
 ----------------------
 
-.. _5.5:
+.. _swlc5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -481,12 +483,12 @@ The following provides code to calculate sex-specific screening coverate rates w
   :file: output_table_shell.csv
   :header-rows: 1
 
-.. _6.0:
+.. _swlc6.0:
 
 6.0 Validation and verification
 +++++++++++++++++++++++++++++++
 
-.. _7.0:
+.. _swlc7.0:
 
 7.0 Limitations
 +++++++++++++++
@@ -501,44 +503,44 @@ The following provides code to calculate sex-specific screening coverate rates w
 - We assumed that deaths that occur with undetected indolent or preclinical lung cancer remain undetected upon death (note there are no deaths due to indolent or preclinical lung cancer in our model because they are by definition asymptomatic). it is possible that some previously undetected indolent or preclinical lung cancers may be detected upon death at autoposy, in which case we may slightly underestimate lung cancer detection rates.
 - We assumed that the lung cancer mean sojourn time parameter applied to the duration of the preclinical lung cancer state for all simulants in the model and did not consider variation in the preclinical state duration at the individual simulant level. Further, we assumed that lung cancer was detected via symptomatic presentation at the moment of symptom onset (i.e. upon transition to the clinical lung cancer state) and did not consider a distribution of lead time delays between symptom onset and detection via symptomatic presentation. The failure to consider variation in the MST at the individual level (which would likely be right skewed) may cause us to underestimate the impact of screening on lung cancer detection rates in the youngest age groups.
 
-.. _8.0:
+.. _swlc8.0:
 
 8.0 References
 ++++++++++++++
 
 .. [Blom-et-al-2019]
 
-  Blom EF, Ten Haaf K, Arenberg DA, de Koning HJ. Treatment capacity required for full-scale implementation of lung cancer screening in the United States. Cancer. 2019 Jun 15;125(12):2039-2048. doi: 10.1002/cncr.32026. Epub 2019 Feb 27. PMID: 30811590; PMCID: PMC6541509. `Available here <https://pubmed.ncbi.nlm.nih.gov/30811590/>`_.
+  Blom EF, Ten Haaf K, Arenberg DA, de Koning HJ. Treatment capacity required for full-scale implementation of lung cancer screening in the United States. Cancer. 2019 Jun 15;125(12):2039-2048. doi: 10.1002/cncr.32026. Epub 2019 Feb 27. PMID: 30811590; PMCID: PMC6541509. `<https://pubmed.ncbi.nlm.nih.gov/30811590/>`_.
 
 .. [Jemal-and-Fedewa-2017]
 
-  Jemal A, Fedewa SA. Lung Cancer Screening With Low-Dose Computed Tomography in the United States-2010 to 2015. JAMA Oncol. 2017 Sep 1;3(9):1278-1281. doi: 10.1001/jamaoncol.2016.6416. PMID: 28152136; PMCID: PMC5824282. `Available here <https://pubmed.ncbi.nlm.nih.gov/28152136/>`_.
+  Jemal A, Fedewa SA. Lung Cancer Screening With Low-Dose Computed Tomography in the United States-2010 to 2015. JAMA Oncol. 2017 Sep 1;3(9):1278-1281. doi: 10.1001/jamaoncol.2016.6416. PMID: 28152136; PMCID: PMC5824282. `<https://pubmed.ncbi.nlm.nih.gov/28152136/>`_.
 
 .. [Li-et-al-2018]
 
-  Li X, Zhou Q, Wang X, Su S, Zhang M, Jiang H, Wang J, Liu M. The effect of low insurance reimbursement on quality of care for non-small cell lung cancer in China: a comprehensive study covering diagnosis, treatment, and outcomes. BMC Cancer. 2018 Jun 25;18(1):683. doi: 10.1186/s12885-018-4608-y. PMID: 29940893; PMCID: PMC6019825. `Available here <https://pubmed.ncbi.nlm.nih.gov/29940893/>`_.
+  Li X, Zhou Q, Wang X, Su S, Zhang M, Jiang H, Wang J, Liu M. The effect of low insurance reimbursement on quality of care for non-small cell lung cancer in China: a comprehensive study covering diagnosis, treatment, and outcomes. BMC Cancer. 2018 Jun 25;18(1):683. doi: 10.1186/s12885-018-4608-y. PMID: 29940893; PMCID: PMC6019825. `<https://pubmed.ncbi.nlm.nih.gov/29940893/>`_.
 
 .. [Lin-et-al-2019]
 
-  Lin Y, Ma J, Feng J, Zhang Q, Huang Y. [Results of Lung Cancer Screening among Urban Residents in Kunming]. Zhongguo Fei Ai Za Zhi. 2019 Jul 20;22(7):413-418. Chinese. doi: 10.3779/j.issn.1009-3419.2019.07.02. PMID: 31315779; PMCID: PMC6712263. `Available here <https://pubmed.ncbi.nlm.nih.gov/31315779/>`_.
+  Lin Y, Ma J, Feng J, Zhang Q, Huang Y. [Results of Lung Cancer Screening among Urban Residents in Kunming]. Zhongguo Fei Ai Za Zhi. 2019 Jul 20;22(7):413-418. Chinese. doi: 10.3779/j.issn.1009-3419.2019.07.02. PMID: 31315779; PMCID: PMC6712263. `<https://pubmed.ncbi.nlm.nih.gov/31315779/>`_.
 
 
 .. [Guo-et-al-2020]
 
-  Guo LW, Zhang SK, Liu SZ, Yang FN, Wu Y, Zheng LY, Chen Q, Cao XQ, Sun XB, Zhang JG. [Compliance of lung cancer screening with low-dose computed tomography and influencing factors in urban area of Henan province]. Zhonghua Liu Xing Bing Xue Za Zhi. 2020 Jul 10;41(7):1076-1080. Chinese. doi: 10.3760/cma.j.cn112338-20190730-00564. PMID: 32741174. `Available here <https://pubmed.ncbi.nlm.nih.gov/32741174/>`_.
+  Guo LW, Zhang SK, Liu SZ, Yang FN, Wu Y, Zheng LY, Chen Q, Cao XQ, Sun XB, Zhang JG. [Compliance of lung cancer screening with low-dose computed tomography and influencing factors in urban area of Henan province]. Zhonghua Liu Xing Bing Xue Za Zhi. 2020 Jul 10;41(7):1076-1080. Chinese. doi: 10.3760/cma.j.cn112338-20190730-00564. PMID: 32741174. `<https://pubmed.ncbi.nlm.nih.gov/32741174/>`_.
 
 .. [Slatore-et-al-2014]
 
-  Slatore CG, Baumann C, Pappas M, Humphrey LL. Smoking behaviors among patients receiving computed tomography for lung cancer screening. Systematic review in support of the U.S. preventive services task force. Ann Am Thorac Soc. 2014 May;11(4):619-27. doi: 10.1513/AnnalsATS.201312-460OC. PMID: 24701999. `Available here <https://pubmed.ncbi.nlm.nih.gov/24701999/>`_.
+  Slatore CG, Baumann C, Pappas M, Humphrey LL. Smoking behaviors among patients receiving computed tomography for lung cancer screening. Systematic review in support of the U.S. preventive services task force. Ann Am Thorac Soc. 2014 May;11(4):619-27. doi: 10.1513/AnnalsATS.201312-460OC. PMID: 24701999. `<https://pubmed.ncbi.nlm.nih.gov/24701999/>`_.
 
 .. [Smith-et-al-2019]
 
-  Smith RA, Andrews KS, Brooks D, Fedewa SA, Manassaram-Baptiste D, Saslow D, Wender RC. Cancer screening in the United States, 2019: A review of current American Cancer Society guidelines and current issues in cancer screening. CA Cancer J Clin. 2019 May;69(3):184-210. doi: 10.3322/caac.21557. Epub 2019 Mar 15. PMID: 30875085. `Available here <https://pubmed.ncbi.nlm.nih.gov/30875085/>`_.
+  Smith RA, Andrews KS, Brooks D, Fedewa SA, Manassaram-Baptiste D, Saslow D, Wender RC. Cancer screening in the United States, 2019: A review of current American Cancer Society guidelines and current issues in cancer screening. CA Cancer J Clin. 2019 May;69(3):184-210. doi: 10.3322/caac.21557. Epub 2019 Mar 15. PMID: 30875085. `<https://pubmed.ncbi.nlm.nih.gov/30875085/>`_.
 
-.. [Qian-et-al-2020]
+.. [Qiao-et-al-2020]
 
-  Qiao L, Zhou P, Li B, Liu XX, Li LN, Chen YY, Ma J, Zhao YQ, Li TY, Li Q. Performance of low-dose computed tomography on lung cancer screening in high-risk populations: The experience over five screening rounds in Sichuan, China. Cancer Epidemiol. 2020 Oct 2;69:101801. doi: 10.1016/j.canep.2020.101801. Epub ahead of print. PMID: 33017728. `Available here <https://pubmed.ncbi.nlm.nih.gov/33017728/>`_.
+  Qiao L, Zhou P, Li B, Liu XX, Li LN, Chen YY, Ma J, Zhao YQ, Li TY, Li Q. Performance of low-dose computed tomography on lung cancer screening in high-risk populations: The experience over five screening rounds in Sichuan, China. Cancer Epidemiol. 2020 Oct 2;69:101801. doi: 10.1016/j.canep.2020.101801. Epub ahead of print. PMID: 33017728. `<https://pubmed.ncbi.nlm.nih.gov/33017728/>`_.
 
 .. [Wei-et-al-2020]
 
-  Wei MN, Su Z, Wang JN, Gonzalez Mendez MJ, Yu XY, Liang H, Zhou QH, Fan YG, Qiao YL. Performance of lung cancer screening with low-dose CT in Gejiu, Yunnan: A population-based, screening cohort study. Thorac Cancer. 2020 May;11(5):1224-1232. doi: 10.1111/1759-7714.13379. Epub 2020 Mar 20. PMID: 32196998; PMCID: PMC7180575. `Available here <https://pubmed.ncbi.nlm.nih.gov/32196998/>`_.
+  Wei MN, Su Z, Wang JN, Gonzalez Mendez MJ, Yu XY, Liang H, Zhou QH, Fan YG, Qiao YL. Performance of lung cancer screening with low-dose CT in Gejiu, Yunnan: A population-based, screening cohort study. Thorac Cancer. 2020 May;11(5):1224-1232. doi: 10.1111/1759-7714.13379. Epub 2020 Mar 20. PMID: 32196998; PMCID: PMC7180575. `<https://pubmed.ncbi.nlm.nih.gov/32196998/>`_.

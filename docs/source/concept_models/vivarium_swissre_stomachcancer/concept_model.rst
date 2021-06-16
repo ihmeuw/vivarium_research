@@ -71,7 +71,7 @@ Vivarium CSU Stomach Cancer Screening
 +-------+----------------------------+
 
 
-.. _1.0:
+.. _swsc1.0:
 
 1.0 Background
 ++++++++++++++
@@ -92,33 +92,33 @@ Stomach cancers tend to develop slowly over many years. Before a true cancer dev
 
 .. image:: stomachcancer_lifehistory.svg
 
-.. _1.1:
+.. _swsc1.1:
 
 1.1 Project overview
 --------------------
 
 This project aims to compare gastric cancer detected symptomatically without a population wide endoscopy screening programme vs. gastric cancer detected with a population endoscopic screening programme that would be able to detect pre-clinical (asymptomatic) stomach cancers. We want to quantify how many more cancers the screening programme will detect. 
 
-.. _1.2:
+.. _swsc1.2:
 
 1.2 Literature review
 ---------------------
 
 
 
-.. _2.0:
+.. _swsc2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
 To estimate the yearly number of cases of stomach cancer detected under specific screening practices in order to identify pay-out trends for critical insurance claims (CII).  
 
-.. _3.0:
+.. _swsc3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _swsc3.1:
 
 3.1 Causal diagram
 ------------------
@@ -133,21 +133,21 @@ To estimate the yearly number of cases of stomach cancer detected under specific
 
 
 
-.. _3.2:
+.. _swsc3.2:
 
 3.2 Effect and impact size
 --------------------------
 
 See below risk factor model 2
 
-.. _4.0:
+.. _swsc4.0:
 
 4.0 Intervention
 ++++++++++++++++
 
 Scale-up of stomach cancer screening using ABC method with endoscopic surveillance among insured population from 5% in 2020 to 30% in 2030 and hold constant until 2040. 
 
-.. _4.1:
+.. _swsc4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -164,24 +164,24 @@ In the alternative scenario, there will be a scale up of ABC screening starting 
 .. image:: stomach_cancer_screening_coverage.svg
  
 
-.. _5.0:
+.. _swsc5.0:
 
 5.0 Vivarium modelling strategy
 +++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _swsc5.1:
 
 5.1 Vivarium concept model 
 --------------------------
 
 .. image:: vivarium_concept_model_diagram_stomachcancer.svg
 
-.. _5.2:
+.. _swsc5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _swsc5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -191,7 +191,7 @@ In the alternative scenario, there will be a scale up of ABC screening starting 
 * Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps. 
 * Currently assume the sim population buys insurance on the first day of sim start. This means no one has prior insurance and were paid out for their cancers before sim start. 
 
-.. _5.2.2:
+.. _swsc5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -229,11 +229,13 @@ file paths for 2019 forecast data:
  - See column **noised_forecast** for output value.
 
 
-.. _5.3:
+.. _swsc5.3:
+
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _swsc5.3.1:
+
 5.3.1 Core stomach cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -273,7 +275,8 @@ Assumptions and limitations
   - We shifted the lower bound of the MST to 1.78 which is 1.6 months shorter for lower bound of the population ~approximately 5%. This means that these simulants in the lower bound stay in the PC state shorter than the Bae distribution suggests. Since the shortest screening interval is 1 year (1.6 months/12 months ~ 0.13) for the highest risk branch (H+, A-), this would only affect a very small fraction of the simulation. 
 
 
-.. _5.3.2:
+.. _swsc5.3.2:
+
 5.3.2 H. pylori risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -282,7 +285,7 @@ Assumptions and limitations
 
 - Let H. pylori infection be denoted by the subscript hp
 - Let the true prevalence of H. pylori be :math:`P_{hp_{true}}`
-- Let i_pc be the overall incidence from S state to PC state (:ref:`see stomach cancer model for i_pc value <2017_cancer_model_stomachcancer>`)
+- Let i_pc be the overall incidence from S state to PC state (:ref:`see stomach cancer model for i_pc value <2017_stomach_cancer>`)
 - Let incidence among those with H. pylori be  :math:`i_{pc{|hp+}}`
 - Let incidence among those without H. pylori be :math:`i_{pc{|hp-}}`
 - Let PAF be the population attributable fraction of H. pylori for gastric cancer
@@ -380,7 +383,8 @@ Assumptions and limitations
   - We use an adjusted relative risk and this may bias the estimation of our PAF when using the proportion of total population exposed to HP in the PAF equation. 
   - The prevalence of HP could be different in different regions, or rural/urban areas. We are applying the prevalence of HP from a meta-analysis of studies from 12 provinces to our blended population. 
 
-.. _5.3.3:
+.. _swsc5.3.3:
+
 5.3.3 Prevalence of atrophy stratified by H. pylori status
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -477,7 +481,7 @@ To derive f_atrophy+ and f_atrophy- for the above table with uncertainty interva
 (8) f_atrophy- = b/(b+d)
 (9) use normal distribution uncertainty ranges ``standard_error = (upper_CI_limit - lower_CI_limit)/3.92``
 
-.. code-block:: python
+.. code-block::
  
  To solve for the variables a, b, c, d, let 
 
@@ -555,7 +559,8 @@ Assumptions and limitations:
   - We assume that the OR is generalisable to a different population.
 
 
-.. _5.3.4:
+.. _swsc5.3.4:
+
 5.3.4 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -669,12 +674,14 @@ Validation and verification:
 
 
 Assumptions and limitations:
+
  - We initialized the simulation without PC simulants having higher probability of endoscopy which would detect their PC cancer. This would underestimate the detection of PC cancers that were initialized into the sim. However, this population is very small and is a minor limitation.
  
 
 
-.. _5.3.4:
-5.3.4 Gastic cancer incidence after ABC screening among susceptible population
+.. _swsc5.3.5:
+
+5.3.5 Gastic cancer incidence after ABC screening among susceptible population
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Meta-analysis of 14 studies by Lee 2016 showed reduction in the incidence rate ratio of gastric cancer among asymptomatic individuals with H. pylori eradication of 0.62 (95%CI: 0.49-0.79). We apply this rate ratio to H. pylori +ve simulants who recieve successful eradication. This meta-analysis supports no differential efficacy among pre-cancer states. 
@@ -699,14 +706,14 @@ References:
 
   - Lee Y-C, Chiang T-H, Chou C-K, et al. Association Between Helicobacter pylori Eradication and Gastric Cancer Incidence: A Systematic Review and Meta-analysis. Gastroenterology 2016; 150: 1113-1124.e5
 
-.. _5.4:
+.. _swsc5.4:
 
 5.4 Input Data Sources
 -----------------------
 
 See relevant sections
 
-.. _5.5:
+.. _swsc5.5:
 
 5.5 Desired outputs
 -------------------
@@ -716,7 +723,7 @@ See relevant sections
   - Number of PC and C cases detected per 100,000 in alternative scenario
 
 
-.. _5.6:
+.. _swsc5.6:
 
 5.6 Output meta-table shell
 ---------------------------
@@ -724,19 +731,19 @@ See relevant sections
 :download:`output table shell<output_table_shell_stomach_cancer.csv>`
 
 
-.. _5.7:
+.. _swsc5.7:
 
 5.7 Validation and verification
 -------------------------------
 
 See relevant section
 
-.. _6.0:
+.. _swsc6.0:
 
 6.0 Back-of-envelope calculations
 +++++++++++++++++++++++++++++++++
 
-.. _7.0:
+.. _swsc7.0:
 
 7.0 Limitations
 +++++++++++++++
