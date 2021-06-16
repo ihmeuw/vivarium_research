@@ -75,14 +75,14 @@ The estimation of COPD burden has two distinct steps. In the first step, prevale
      - This person has cough, wheezing, and shortness of breath all the time. The person has great difficulty walking even short distances or climbing any stairs, feels tired when at rest, and is anxious. 
      - 0.408 (0.273–0.556)
 
-[GBD-2019-Capstone-Appendix]_
+[GBD-2019-Capstone-Appendix-COPD]_
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
 Vital registration and surveillance data were included in a standard CODEm modeling approach to generate estimates of cause-specific mortality from COPD. 
 
-[GBD-2019-Capstone-Appendix]_
+[GBD-2019-Capstone-Appendix-COPD]_
 
 Cause Hierarchy
 +++++++++++++++
@@ -282,7 +282,7 @@ References
 	Retrieved 25 March 2021.
 	https://www.mayoclinic.org/diseases-conditions/copd/symptoms-causes/syc-20353679.
 
-.. [GBD-2019-Capstone-Appendix]
+.. [GBD-2019-Capstone-Appendix-COPD]
   Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
 
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf

@@ -46,9 +46,11 @@ Risk Overview
 GBD 2017 Modeling Strategy
 --------------------------
 
+[GBD-2017-Risk-Factors-Appendix-Smoking-Effects]_
+
 .. note::
 
-  This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
+  This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_smoking_forecasted>` page.
 
 The smoking risk factor affects *several* outcomes in GBD, including tuberculosis, lower respiratory tract infections, oesophageal cancer, stomach cancer, bladder cancer, liver cancer, laryngeal cancer, lung cancer, breast cancer, cervical cancer, colorectal cancer, lip and oral cancer, nasopharyngeal cancer, other pharyngeal cancer, pancreatic cancer, kidney cancer, leukaemia, ischaemic heart disease, ischaemic stroke, haemorrhagic stroke, subarachnoid haemorrhage, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic obstructive pulmonary disease, other chronic respiratory diseases, asthma, peptic ulcer disease, gallbladder and biliary tract diseases, Alzheimer disease and other dementias, Parkinson disease (protective), multiple sclerosis, type‐II diabetes, rheumatoid arthritis, low back pain, cataracts, macular degeneration, and fracture.
 
@@ -262,7 +264,7 @@ Vivarium Modeling Strategy
 
 .. note::
 
-  This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_exposure_smoking_forecasted>` page.
+  This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2017_risk_smoking_forecasted>` page.
 
 .. list-table:: Risk Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
@@ -282,18 +284,20 @@ Vivarium Modeling Strategy
      - 493
      - Cause-specific mortality rate
      - For the :ref:`smoking related mortality model <2017_smoking_related_mortality>`
+     -
    * - Chronic obstructive pulmonary disease
      - 509
      - Cause-specific mortality rate
      - For the :ref:`smoking related mortality model <2017_smoking_related_mortality>`
+     -
 
 Lung Cancer Incidence
 +++++++++++++++++++++
 
-See the relevant documentation for the :ref:`lung cancer cause model <2017_lung_cancer>` and the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
+See the relevant documentation for the :ref:`lung cancer cause model <2017_lung_cancer>` and the :ref:`forecasted smoking risk exposure model <2017_risk_smoking_forecasted>`.
 
-Relative Risk Data
-~~~~~~~~~~~~~~~~~~
+Incidence Relative Risk Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The lung cancer relative risks cannot be pulled using get_draws or other standard tools.
 
@@ -340,8 +344,8 @@ The following code demonstrates how to assign relative risk values to individual
 
     rr_i = former_rr_function_i(years_since_quitting_exposure_i)  
 
-PAF Calculation
-~~~~~~~~~~~~~~~
+Incidence PAF Calculation
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The lung cancer PAF specific to an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
 
@@ -388,10 +392,10 @@ Where,
      - As defined in :ref:`the lung cancer cause model document <2017_lung_cancer>`
    * - :math:`PAF_\text{a,s,l,y}`
      - Lung cancer PAF for smoking for simulant's demographic group
-     - As calculated in the `PAF Calculation`_ section
+     - As calculated in the `Incidence PAF Calculation`_ section
    * - :math:`rr_i`
      - Individual simulant's relative risk value
-     - Assigned as described in the `Relative Risk Data`_ section
+     - Assigned as described in the `Incidence Relative Risk Data`_ section
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -405,7 +409,7 @@ This model is limited in that it relies on the GBD relative risk structure that 
 
 This model is limited in that it assumes the relative risk for smoking and lung cancer applies to preclinical and indolent lung cancer incidence rates equally. However, there is data that suggests that while indolent lung cancers occur at higher rates among smokers than nonsmokers, lung cancers are more likely to be indolent among non-smokers than among smokers, as tumor growth rates tend to be higher in smokers than never smokers [Mackintosh-et-al-2014]_. 
 
-As described in the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`, some age groups will have unassigned smoking status exposures which we are assuming have a relative risk value of one. For groups with unassigned smoking status exposures, the smoking risk factor will not have an affect on lung cancer incidence. 
+As described in the :ref:`forecasted smoking risk exposure model <2017_risk_smoking_forecasted>`, some age groups will have unassigned smoking status exposures which we are assuming have a relative risk value of one. For groups with unassigned smoking status exposures, the smoking risk factor will not have an affect on lung cancer incidence. 
 
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -417,12 +421,12 @@ As noted in the `Population Attributable Fraction` section of the :ref:`Modeling
   Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
 
 Smoking-Related Mortality
-++++++++++++++++++++++++++++++++++++++++++++++++
++++++++++++++++++++++++++
 
-See the relevant documentation for the :ref:`smoking related mortality model <2017_smoking_related_mortality>` and the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
+See the relevant documentation for the :ref:`smoking related mortality model <2017_smoking_related_mortality>` and the :ref:`forecasted smoking risk exposure model <2017_risk_smoking_forecasted>`.
 
-Relative Risk Data
-~~~~~~~~~~~~~~~~~~
+Mortality Relative Risk Data
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Relative risks for the causes included in the :ref:`smoking related mortality model <2017_smoking_related_mortality>` model are located at the filepath :code:`/home/j/WORK/05_risk/risks/TEAM/sub_risks/tobacco/raw_data/metadata/rr/systematic_review_extraction_sheets/draws_for_PAF/` (unless otherwise specified, as for COPD) and the subfolder specified in the table below.
 
@@ -487,8 +491,8 @@ The following code demonstrates how to assign relative risk values for a single 
 
     rr_i = former_rr_function_i(years_since_quitting_exposure_i)  
 
-PAF Calculation
-~~~~~~~~~~~~~~~
+Mortality PAF Calculation
+~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The PAF specific to a cause for an age, sex, location, and year demographic group for smoking should be calculated according to the following equation:
 
@@ -523,10 +527,10 @@ Where,
      - Should use forecasted rates from 2020-2040 as documented on the  :ref:`smoking related mortality model document <2017_smoking_related_mortality>`
    * - :math:`PAF_\text{c,a,s,l,y}`
      - PAF for smoking and cause c for simulant's demographic group
-     - As calculated in the `PAF Calculation`_ section
+     - As calculated in the `Mortality PAF Calculation`_ section
    * - :math:`rr(c)_i`
      - Individual simulant's relative risk value for cause c
-     - Assigned as described in the `Relative Risk Data`_ section
+     - Assigned as described in the `Mortality Relative Risk Data`_ section
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -538,7 +542,7 @@ Assumptions and Limitations
 
 This model is limited in that it relies on the GBD relative risk structure that does not differentiate relative risks of former smokers by pack-year history so that current smokers with low pack-year histories who become former smokers may increase their risk of lung cancer by doing so, according to the GBD relative risk curves.
 
-As described in the :ref:`forecasted smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`, some age groups will have unassigned smoking status exposures which we are assuming have a relative risk value of one. For groups with unassigned smoking status exposures, the smoking risk factor will not have an affect on smoking-related mortality due to the causes covered in this document. 
+As described in the :ref:`forecasted smoking risk exposure model <2017_risk_smoking_forecasted>`, some age groups will have unassigned smoking status exposures which we are assuming have a relative risk value of one. For groups with unassigned smoking status exposures, the smoking risk factor will not have an affect on smoking-related mortality due to the causes covered in this document.
 
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -564,7 +568,7 @@ References
 
   Add additional references as necessary 
 
-.. [GBD-2017-Risk-Factors-Appendix-Risk-Effects-Model-Template]
+.. [GBD-2017-Risk-Factors-Appendix-Smoking-Effects]
 
    Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
 

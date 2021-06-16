@@ -64,7 +64,7 @@ What is latent TB?
 ++++++++++++++++++
 Latent tuberculosis infection (LTBI) is defined as a state of persistent 
 immune response to stimulation by Mycobacterium tuberculosis antigens with 
-no evidence of clinically manifested active TB. [WHO]_
+no evidence of clinically manifested active TB. [WHO-LTBI]_
 
 What is active TB?
 ++++++++++++++++++
@@ -111,7 +111,7 @@ from a meta-analysis. To split MDR-TB into MDR-TB with and without extensive dru
 resistance, GBD pooled the notification and survey data on the proportion of 
 MDR-TB cases with extensive drug resistance by super-region, and applied these 
 proportions to MDR-TB cases among HIV-negative and HIV-positive individuals, 
-respectively. [GBD-2017-YLD-Capstone-Appendix-1]_
+respectively. [GBD-2017-YLD-Capstone-Appendix-1-LTBI]_
 
 Cause hierarchy
 +++++++++++++++
@@ -120,7 +120,8 @@ Cause hierarchy
 
 - {Anemia} = [no_anemia, mild_anemia, moderate_anemia, severe_anemia]
 - {HIV/AIDS} = [early_hiv, symptomatic_hiv, hiv_aids_with_art, aids]
-The causes in the GBD at any level of hierarchy are mutually exclusive 
+
+The causes in the GBD at any level of hierarchy are mutually exclusive
 and collectively exhaustive. 
 
 Restrictions
@@ -387,7 +388,7 @@ State and transition data tables
      - codcorrect
      -
    * - Disability weight
-     - [GBD-2017-YLD-Capstone-Appendix-1]_
+     - [GBD-2017-YLD-Capstone-Appendix-1-LTBI]_
      -
 
 Modeling strategy for non-standard data sources
@@ -427,13 +428,18 @@ Internal
 V&V strategy
 ~~~~~~~~~~~~
 Model validation
+
  - Check the logical structure and input data for cause model,
    make sure
+
     - the theories and assumptions underlying the cause model are correct.
     - the data to build, evaluate, and test model are correct.
+
 Model verification
+
  - Check the translation from cause model document to Vivarium scripts,
    make sure
+
     - the computer programming and implementation of the cause model is correct.
     - the output of the model can be calibrated against GBD results.
 
@@ -441,11 +447,13 @@ GBD post-processing steps
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 GBD starts from All-form TB results, then they stratify the results by following 
 the steps described below:
+
     1. Find proportion of HIV+ cases among all TB cases
     2. Disaggregate all TB cases into HIV+ TB and HIV- TB
     3. Find proportion of drug-resistant cases among HIV+ TB cases
        and HIV- TB cases
     4. Breakdown those cases into:
+
         - drug-susceptible TB, multidrug-resistant TB, and extensively
           drug-resistant TB
         - HIV+ drug-susceptible TB, HIV+ multidrug-resistant TB,
@@ -454,10 +462,13 @@ the steps described below:
 Formula
 ~~~~~~~
 For certain location-/age-/sex-
+
     - Deaths due to all causes equal to sum of:
+
         - Deaths due to all-form TB (aggregate all child active TB causes)
         - Deaths due to HIV resulting in other diseases
         - Deaths due to other causes
+
 Apply the formula to other measures (e.g., DALYs)
 
 Steps of model verification
@@ -487,6 +498,7 @@ Steps of model verification
       model outcomes match with GBD 2017 results.
 
 Measures to exam in verification:
+
  - Compare (disease person time / total person time) to prevalence in GBD
  - Compare (disease counts / total person time) to incidence in GBD
  - CSMR
@@ -497,9 +509,11 @@ Back-envelope calculation for concept model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 We can roughly calculate the expected value of averted active TB Deaths (or DALYs) 
 by TB preventive therapy (TPT) if given following values:
+
  - X: deaths due to active TB in certain location and year
  - Y: percent reduction in active TB incidence if received and adherent to TPT (TPT per-protocol efficacy)
  - Z: change in TPT coverage between baseline and alternative scenarios
+
 Then, active TB deaths averted = X * Y * Z
 
 
@@ -509,16 +523,16 @@ References
    Retrieved Dec 23, 2019.
    https://www.uptodate.com/contents/tuberculosis-beyond-the-basics
 
-.. [WHO] Latent tuberculosis infection (LTBI).
+.. [WHO-LTBI] Latent tuberculosis infection (LTBI).
    Retrieved Dec 23, 2019.
    https://www.who.int/tb/areas-of-work/preventive-care/ltbi_faqs/en/
 
-.. [GBD-2017-YLD-Capstone-Appendix-1] Supplementary Appendix 1:
+.. [Global-TB-Burden-2018] Methods used by WHO to estimate the global burden of TB disease
+   https://www.who.int/tb/publications/global_report/gtbr2018_online_technical_appendix_global_disease_burden_estimation.pdf
+
+.. [GBD-2017-YLD-Capstone-Appendix-1-LTBI] Supplementary Appendix 1:
    James SL, Abate D, Abate KH, et al. Global, regional, and national
    incidence, prevalence, and years lived with disability for 354 diseases and injuries for 195 countries and territories, 1990–2017: a systematic analysis
    for the Global Burden of Disease Study 2017. The Lancet 2018; 392: 1789–858.
    (pp. 65-74)
    https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
-
-.. [Global-TB-Burden-2018] Methods used by WHO to estimate the global burden of TB disease
-   https://www.who.int/tb/publications/global_report/gtbr2018_online_technical_appendix_global_disease_burden_estimation.pdf

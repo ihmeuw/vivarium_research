@@ -14,20 +14,20 @@ caused by four pathogens - Streptococcus pneumoniae (*pneumococcal
 pneumonia*), Haemophilus influenzae type B (*Hib*), influenza, and respiratory
 syncytial virus (*RCV*). Those pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
-mortality. [Wikipedia]_, [GBD-2019-Capstone-Appendix]_
+mortality. [Wikipedia-LRI-2019]_, [GBD-2019-Capstone-Appendix-LRI]_
 
 The lower respiratory tract or lower airway is derived from the developing foregut
 and consists of the trachea, bronchi (primary, secondary and tertiary),
 bronchioles (including terminal and respiratory), and lungs (including alveoli).
-It also sometimes includes the larynx. [Wikipedia]_
+It also sometimes includes the larynx. [Wikipedia-LRI-2019]_
 
 Transmission of LRI may occur via several pathways, including direct physical contact,
 fomites, direct droplet spread, and suspended small particles. Intermingling of
-large numbers of people can facilitate transmission of respiratory pathogens. [CDC]_
+large numbers of people can facilitate transmission of respiratory pathogens. [CDC-LRI-2019]_
 
 In GBD 2016, malnutrition was identified as a leading risk factor for lower respiratory infection
 mortality among children younger than 5 years and, together with air pollution (both household and ambient)
-and increased antibiotic use, was identified as a focus for targeted intervention measures. [Lancet]_
+and increased antibiotic use, was identified as a focus for targeted intervention measures. [Lancet-LRI]_
 
 .. todo::
 
@@ -45,7 +45,7 @@ LRI deaths are estimated using separate CODEm models for children under 5 and
 persons aged 5-95+, due to the significant difference in fatality patterns. These 
 models run using CoD data from vital registration systems, surveillance 
 systems, and verbal autopsy, along with a set of covariates updated slightly 
-from those used in GBD 2017. [GBD-2019-Capstone-Appendix]_
+from those used in GBD 2017. [GBD-2019-Capstone-Appendix-LRI]_
 
 .. todo:: 
 
@@ -64,9 +64,13 @@ estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days,
 which corresponds with a remission rate of 36.5 recoveries / person-year. 
 LRI severity splits are obtained from a meta-analysis, and then the 
 DisMod outputs are split according to severity before disablility weights for 
+<<<<<<< HEAD
 YLD calculation are applied. [GBD-2019-Capstone-Appendix]_ Note that as DisMod 
 estimates an unrealistically high birth prevalence, after discussions with Theo 
 and Nick, the modelers decided to set birth prevalence to zero.  
+=======
+YLD calculation are applied. [GBD-2019-Capstone-Appendix-LRI]_
+>>>>>>> main
 
 .. todo::
 
@@ -77,7 +81,7 @@ and bacterial etiologies include Streptococcus pneumoniae and Haemophilus
 influenzae type B (Hib). The two types of etiologies are modeled using two different 
 counterfactual strategies, and then for each etiology a PAF is calculated. Note 
 that as LRI pathogens can co-infect, these PAFs can overlap. Due to a lack of 
-data, the modelers did not map neonatal deaths to etiologies. [GBD-2019-Capstone-Appendix]_
+data, the modelers did not map neonatal deaths to etiologies. [GBD-2019-Capstone-Appendix-LRI]_
 
 
 The viral etiologies were modeled using the following formula:
@@ -90,7 +94,7 @@ Here, *Proportion* is the proportion of LRI cases that test positive for
 influenza or LRI, and *OR* is defined to be the odds ratio of LRI given the 
 presence of the pathogen. The odds ratios were obtained from a log-linear 
 interpolation model, and the proportion data for each etiology was modeled 
-using DisMod. [GBD-2019-Capstone-Appendix]_
+using DisMod. [GBD-2019-Capstone-Appendix-LRI]_
 
 
 The bacterial etiologies were modeled using a vaccine probe design: the
@@ -100,7 +104,7 @@ vaccine coverage and exoected vaccine performance to generate country- and year-
 specific PAFs. DisMod was used to model an age pattern, resulting in the final
 location- year- and age- specific PAF estimates. Due to a lack of vaccine
 efficacy data for children over two years old, the modelers did not map LRI in 
-over-5 year olds to Hib. [GBD-2019-Capstone-Appendix]_
+over-5 year olds to Hib. [GBD-2019-Capstone-Appendix-LRI]_
 
 
 GBD hierarchy
@@ -338,19 +342,19 @@ Baseline vivarium model results should compare to GBD artifact data with respect
 
 References
 ----------
-.. [Wikipedia] Lower respiratory tact infection. From Wikipedia, the Free Encyclopedia.
+.. [Wikipedia-LRI-2019] Lower respiratory tact infection. From Wikipedia, the Free Encyclopedia.
    Retrieved 22 Nov 2019.
    https://en.wikipedia.org/wiki/Lower_respiratory_tract_infection
 
-.. [CDC] Respiratory Infections (*The Yellow Book*). Centers for Disease Control and Prevention, 2019. Retrieved 20 Dec 2019.
+.. [CDC-LRI-2019] Respiratory Infections (*The Yellow Book*). Centers for Disease Control and Prevention, 2019. Retrieved 20 Dec 2019.
    https://wwwnc.cdc.gov/travel/yellowbook/2020/posttravel-evaluation/respiratory-infections
 
-.. [Lancet] The Global Burden of Lower Respiratory Infections: Making Progress, but We Need to Do Better (*Volume 18*).
+.. [Lancet-LRI] The Global Burden of Lower Respiratory Infections: Making Progress, but We Need to Do Better (*Volume 18*).
    The Lancet Infectious Diseases, 2018. Retrieved 20 Dec 2019.
    https://www.sciencedirect.com/science/article/pii/S1473309918304079?via%3Dihub
 
-.. [GBD-2019-Capstone-Appendix]
-  Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 
+.. [GBD-2019-Capstone-Appendix-LRI]
+  Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 

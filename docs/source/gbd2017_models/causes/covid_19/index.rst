@@ -34,7 +34,7 @@ IHME's existing covid-19 models have fit covariate estimates for **population de
 
 .. note::
 
-	The list of covariates used in the IHME model evolves over time and the coviariates available for use in our modeling strategy will need to be cross referenced with the currently available coviates in the IHME forecast model.
+   The list of covariates used in the IHME model evolves over time and the coviariates available for use in our modeling strategy will need to be cross referenced with the currently available coviates in the IHME forecast model.
 
 The steps that the SEIR component of the forecast model follows are:
 
@@ -52,7 +52,7 @@ The steps that the SEIR component of the forecast model follows are:
 
 Notably, the IHME forecast SEIR component includes a dual infectious state, :math:`I_{1}` and :math:`I_{2}`. The following equations represent the differential equations for each state in the SEIR component used in the IHME forecast model:
 
-			:math:`S` --> :math:`E` --> :math:`I_1` --> :math:`I_2` --> :math:`R`
+    :math:`S` --> :math:`E` --> :math:`I_1` --> :math:`I_2` --> :math:`R`
 
 :math:`dS/dt = -(\beta(t)S(I_1+I_2)^\alpha + \theta)/N`
 
@@ -185,7 +185,7 @@ Simulants will be initialized into covid-19 disease model states based on the fo
 
 .. todo::
 
-	Detail specific data source and values
+   Detail specific data source and values
 
 Transitions
 ^^^^^^^^^^^
@@ -311,7 +311,7 @@ Transitions
 
 .. todo::
 
-	Provide values for XXX placeholders
+   Provide values for XXX placeholders
 
 Susceptible to Exposed Transition
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -322,7 +322,7 @@ The transition from the :math:`S` state to the :math:`E` state in our model will
 
 .. note::
 
-  This mixing scheme may be incompatible with Abie's methodology and should be revisited
+   This mixing scheme may be incompatible with Abie's methodology and should be revisited
 
 Where,
 
@@ -353,12 +353,12 @@ Where,
 
 .. note::
 
-	This method assumes random mixing of the UW population (except for as determined by the :math:`\alpha` parameter) and assumes homogeneous transmission probability across all demographic groups within the UW population.
+   This method assumes random mixing of the UW population (except for as determined by the :math:`\alpha` parameter) and assumes homogeneous transmission probability across all demographic groups within the UW population.
 
 Mortality
 ^^^^^^^^^
 
-We will model covid-19 mortality using an age-dependent infection fatality ratio (IFR), as consistent with the IHME forecast model. There will be two steps to this piece of the model, the first being the determination of if an individual dies due to covid-19 (described here), and the second being determining *when* they exit their current model state (decribed in the Transition_ section).
+We will model covid-19 mortality using an age-dependent infection fatality ratio (IFR), as consistent with the IHME forecast model. There will be two steps to this piece of the model, the first being the determination of if an individual dies due to covid-19 (described here), and the second being determining *when* they exit their current model state (decribed in the Transitions_ section).
 
 In the same time-step for which a simulant is initialized into the :math:`E`, :math:`I_Q`, :math:`I_A`, :math:`I_1`, or :math:`I_2` model states or transitions into the :math:`E` model state, the age-specific IFR should be used to determine if that simulant will die of covid-19, such that the IFR shown in the table below represents the probability that an infected individual dies from covid-19. 
 

@@ -140,7 +140,7 @@ and the limitations these assumptions impose on the applicability of the
 model.
 
 Risk Exposure Model Diagram
-++++++++++++++++++++++
++++++++++++++++++++++++++++
 
 Include diagram of Vivarium risk exposure model.
 

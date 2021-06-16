@@ -1,8 +1,8 @@
 .. _2017_cancer_model_multiple_myeloma:
 
-=============
+================
 Multiple Myeloma
-=============
+================
 
 Disease Overview
 ----------------
@@ -35,7 +35,7 @@ GBD 2017 Modeling Strategy
 --------------------------
 
 Multiple myeloma in GBD 2017
-++++++++++++++++++++++++++
+++++++++++++++++++++++++++++
 
 The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2017-YLD-Capstone-Appendix-1-Multiple-Myeloma]_.
 
@@ -275,17 +275,17 @@ Validation Criteria
 References
 ----------
 
-..[Attal et al. 2019]
+.. [Attal et al. 2019]
    Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and low-dose 
    dexamethasone versus pomalidomide and low-dose dexamethasone in patients with relapsed 
    and refractory multiple myeloma (ICARIA-MM): a randomised, multicentre, open-label, phase 
    3 study. Lancet 2019; 394: 2096–107.
 
-..[Cowan et al. 2018]
+.. [Cowan et al. 2018]
    Cowan AJ, Allen C, Barac A, et al. Global Burden of Multiple Myeloma: A Systematic 
    Analysis for the Global Burden of Disease Study 2016. JAMA Oncol 2018; 4: 1221–7.
 
-..[GBD-2017-YLD-Capstone-Appendix-1-Multiple-Myeloma]
+.. [GBD-2017-YLD-Capstone-Appendix-1-Multiple-Myeloma]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries

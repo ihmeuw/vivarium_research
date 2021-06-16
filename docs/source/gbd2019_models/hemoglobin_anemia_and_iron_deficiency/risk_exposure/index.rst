@@ -11,6 +11,8 @@ Iron Deficiency Risk Exposure
 Risk Exposure Description in GBD 2019
 -------------------------------------
 
+[Kassebaum-et-al-2016-iron-deficiency-rf-2019]_
+
 Iron deficiency in the GBD risk factors is defined as **inadequate iron to meet the body's needs** and is quantified in terms of mean hemoglobin concentration at the population level from the cumulative effect of all causes that lead to iron deficiency, including dietary iron deficiency (GBD *cause* of inadequate intake of elemental iron) as well as other causes that manifest as iron deficiency (eg, maternal hemorrhage, uterine fibroids, menstrual disorders, hookworm, schistosomiasis, gastritis and duodenitis, inflammatory bowel disease, etc.).
 
 Notably, there are two different approaches to the estimation of the iron deficiency risk exposure in GBD 2019. We will refer to these as *Global TMREL exposure estimation* and *location-specific TMREL exposure estimation*. Of note, the *Global TMREL exposure estimation* approach was used for the calculation of the iron deficiency exposure in GBD 2019, although the *location-specific TMREL exposure estimation* approach is described in the GBD 2019 Risk Factor methods appendix. Each approach is described below.
@@ -22,17 +24,17 @@ Regardless of the exposure estimation approach, the iron deficiency risk factor 
 Global TMREL Exposure Estimation
 ++++++++++++++++++++++++++++++++
 
-This estimation approach is not described in the GBD 2019 Risk Factor Methods Appendix, but is documented in the IHME stash repo for the iron deficiency risk factor, `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency>`_, specifically in the `calculate_normal_hgb.py` and `nutrition_iron_exposure.py` files. For the GBD 2019 estimation of the iron deficiency risk factor exposure, the following was performed:
+This estimation approach is not described in the GBD 2019 Risk Factor Methods Appendix, but is documented in the IHME stash repo for the iron deficiency risk factor, `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency>`__, specifically in the `calculate_normal_hgb.py` and `nutrition_iron_exposure.py` files. For the GBD 2019 estimation of the iron deficiency risk factor exposure, the following was performed:
 
 #. Estimate the TMREL
 
-	The iron deficiency TMREL was estimated as the 95th percentile of mean population hemoglobin concentration among all GBD locations for each year-, sex-, and age-specific demographic group. If the observed mean population hemoglobin concentration for a given location was greater than the 95th percentile, then the observed population hemoglobin concentration was used as the TMREL for that location. See the specific code `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency/calculate_normal_hgb.py>`_.
+	The iron deficiency TMREL was estimated as the 95th percentile of mean population hemoglobin concentration among all GBD locations for each year-, sex-, and age-specific demographic group. If the observed mean population hemoglobin concentration for a given location was greater than the 95th percentile, then the observed population hemoglobin concentration was used as the TMREL for that location. See the specific code `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency/calculate_normal_hgb.py>`__.
 
 	This value is stored as the TMREL for the iron deficiency risk factor in GBD 2019.
 
 #. Calculate iron deficiency risk exposure
 
-	The iron deficiency risk factor is calculated according to the following equation, as documented `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency/nutrition_iron_exposure.py>`_ and externally validated `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/custom_paf_calculations.ipynb>`_.
+	The iron deficiency risk factor is calculated according to the following equation, as documented `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/iron_deficiency/nutrition_iron_exposure.py>`__ and externally validated `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/custom_paf_calculations.ipynb>`__.
 
 	:math:`exposure = TMREL - p_* * (TMREL - mean_\text{Hgb})`
 
@@ -66,9 +68,9 @@ The location-specific TMREL exposure estimation approach has the following steps
 
 	Where, :math:`\sum_{c=1}^{n} p_c * shift_c` represents the sum of the cause-specific prevalence multiplied by the cause-specific hemoglobin shift for all causes of iron deficiency and :math:`mean_\text{Hgb}` is the observed mean population hemoglobin concentration (MEID 10487).
 
-	An estimation of the TMREL using this method can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/custom_paf_calculations.ipynb>`_.
+	An estimation of the TMREL using this method can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/custom_paf_calculations.ipynb>`__.
 
-	The cause-specific hemoglobin shifts represent the average difference in hemoglobin concentration among individuals afflicted with that cause and the general population (from the literature) and can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/hb_shifts.csv>`_. Note that these shifts are sex-specific but do not vary by age. 
+	The cause-specific hemoglobin shifts represent the average difference in hemoglobin concentration among individuals afflicted with that cause and the general population (from the literature) and can be found `here <https://github.com/ihmeuw/sim_sci_maternal_anemia/blob/master/data_validation/maternal_disorders_burden/hb_shifts.csv>`__. Note that these shifts are sex-specific but do not vary by age.
 
 	The following table lists the relevant IDs for the diseases that cause iron deficiency that should be used for this analysis.
 
@@ -168,7 +170,7 @@ NOTE: It is likely not necessary to model iron deficiency risk exposure for Viva
 References
 ----------
 
-.. [Kassebaum-et-al-2016]
+.. [Kassebaum-et-al-2016-iron-deficiency-rf-2019]
 
   View `Kassebaum et al. 2016`_
 

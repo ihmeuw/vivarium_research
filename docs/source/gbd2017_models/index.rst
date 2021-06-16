@@ -8,5 +8,5 @@ GBD 2017 Models
    :maxdepth: 2
    :glob:
 
-   *
    */index
+   concept_models/vivarium_conceptmodel_template/concept_model

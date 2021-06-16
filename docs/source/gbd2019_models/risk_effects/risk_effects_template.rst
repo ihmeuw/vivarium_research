@@ -98,11 +98,13 @@ GBD 2019 Modeling Strategy
 
 .. note::
 
-	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_page_link>` page.
+   This section will describe the Vivarium modeling strategy for risk effects.
+   For a description of Vivarium modeling strategy for risk exposure, see the
+   {RISK_EXPOSURE_PAGE_LINK} page.
 
 .. todo::
 
-	Replace '2019_risk_exposure_page_link' with a reference to the appropriate risk exposure page in the above note.
+	Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
 
 .. todo::
 
@@ -132,15 +134,17 @@ Vivarium Modeling Strategy
 
 .. note::
 
-	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_page_link>` page.
+   This section will describe the Vivarium modeling strategy for risk effects.
+   For a description of Vivarium modeling strategy for risk exposure, see the
+   {RISK_EXPOSURE_PAGE_LINK} page.
 
 .. todo::
 
-	Replace '2019_risk_exposure_page_link' with a reference to the appropriate risk exposure page in the above note.
+   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
 
 .. todo::
 
-  List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
+   List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
 
 .. list-table:: Risk Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
