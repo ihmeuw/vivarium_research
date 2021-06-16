@@ -243,7 +243,6 @@ age group is approximately 3.5 days (not accounting for deaths).
 
    * - Measure
      - Sources
-     - Age Group
      - Description
      - Notes
    * - birth_prevalence_c322
