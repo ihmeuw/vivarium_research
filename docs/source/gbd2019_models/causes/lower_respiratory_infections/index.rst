@@ -248,47 +248,34 @@ age group is approximately 3.5 days (not accounting for deaths).
      - Notes
    * - birth_prevalence_c322
      - como
-     -
      - 0
      - No birth prevalence
    * - prevalence_calculated
-     - incidence_c322 * 10/365
-     - i != 'Early Neonatal'
+     - Calculated from incidence (como) and duration (literature/gbd)
      - Duration-based calculation of LRI Prevalence
-     - Justification included below
-   * - prevalence_calculated
-     - incidence_c322 * 3.5
-     - 'Early Neonatal'
-     - Duration-based calculation of LRI Prevalence
-     - Justification included below
+     -
    * - deaths_c322
      - codcorrect
-     -
      - Deaths from LRI
      -
    * - population
      - demography
-     -
      - Mid-year population for given age/sex/year/location
      -
    * - incidence_rate_c322
      - como
-     -
      - Incidence rate of LRI within the entire population
      -
    * - remission_rate_m1258
      - dismod-mr
-     -
      - Remission rate of LRI within the infected population
      -
    * - disability_weight_s{sid}
      - YLD Appendix
-     -
      - Disability weights associated with each sequela
      - Note Guillain-Barre due to LRI is included in sequelae.
    * - prevalence_s{sid}
      - como
-     -
      - Prevalence of each sequela with id 'sid'
      -
 
