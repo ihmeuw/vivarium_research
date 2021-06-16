@@ -25,7 +25,7 @@ about = {
 # -- Project information -----------------------------------------------------
 
 project = about['__title__']
-copyright = f'2018, {about["__author__"]}'
+copyright = f'2021, {about["__author__"]}'
 author = about["__author__"]
 
 # The short X.Y version.
@@ -38,13 +38,21 @@ release = about["__version__"]
 
 # If your documentation needs a minimal Sphinx version, state it here.
 
-needs_sphinx = '2.1'
+needs_sphinx = '4.0'
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
 extensions = [
+    'sphinx.ext.autodoc',
+    'sphinx.ext.intersphinx',
+    'sphinx.ext.doctest',
     'sphinx.ext.todo',
+    'sphinx.ext.coverage',
+    'sphinx.ext.mathjax',
+    'sphinx.ext.napoleon',
+    'sphinx.ext.viewcode',
+    'matplotlib.sphinxext.plot_directive',
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -176,5 +184,9 @@ texinfo_documents = [
      'Miscellaneous'),
 ]
 
-# Example configuration for intersphinx: refer to the Python standard library.
-# intersphinx_mapping = {'https://docs.python.org/': None}
+# Other docs we can link to
+intersphinx_mapping = {'python': ('https://docs.python.org/3.8', None),
+                       'pandas': ('https://pandas.pydata.org/pandas-docs/stable/', None),
+                       'tables': ('https://www.pytables.org/', None),
+                       'numpy': ('https://numpy.org/doc/stable/', None)}
+
