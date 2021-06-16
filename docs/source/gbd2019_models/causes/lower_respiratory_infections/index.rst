@@ -277,6 +277,10 @@ age group is approximately 3.5 days (not accounting for deaths).
      - como
      - Prevalence of each sequela with id 'sid'
      -
+   * - duration_mean_c322
+     - YLD appendix + calculation
+     - The duration of LRI used in our LRI prevalence calculation. 
+     - Note that we use a different duration for early neonatal, as the early neonatal period is shorter than the average duration of LRI.
 
 .. list-table:: Restrictions
    :widths: 15 15 20
