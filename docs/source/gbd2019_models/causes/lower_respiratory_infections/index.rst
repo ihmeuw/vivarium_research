@@ -64,7 +64,9 @@ estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days,
 which corresponds with a remission rate of 36.5 recoveries / person-year. 
 LRI severity splits are obtained from a meta-analysis, and then the 
 DisMod outputs are split according to severity before disablility weights for 
-YLD calculation are applied. [GBD-2019-Capstone-Appendix]_
+YLD calculation are applied. [GBD-2019-Capstone-Appendix]_ Note that as DisMod 
+estimates an unrealistically high birth prevalence, after discussions with Theo 
+and Nick, the modelers decided to set birth prevalence to zero.  
 
 .. todo::
 
@@ -117,6 +119,10 @@ Cause Model Diagram
 
 Model Assumptions and Limitations
 ---------------------------------
+Because DisMod estimated an unrealistically high birth prevalence, the modelers 
+set birth prevalence to zero. Consequently, the birth prevalence, incidence, 
+and prevalence available from get_outputs are incongruous with one another.
+
 This model is designed to be used for estimating DALYs due to LRI that are 
 averted from a country-level intervention(e.g. food fortification or 
 supplementation given to a percentage of the population) that can reduce LRI 
@@ -223,40 +229,65 @@ Data Description
 
    * - Measure
      - Sources
+     - Age Group
      - Description
      - Notes
    * - birth_prevalence_c322
      - como
+     - 
      - 0
      - No birth prevalence
    * - prevalence_calculated
      - incidence_c322 * 10/365
+     - i != 'Early Neonatal'
      - Duration-based calculation of LRI Prevalence
-     -
+     - Justification included below
+   * - prevalence_calculated
+     - incidence_c322 * 3.5
+     - 'Early Neonatal'
+     - Duration-based calculation of LRI Prevalence
+     - Justification included below
    * - deaths_c322
      - codcorrect
+     - 
      - Deaths from LRI
      -
    * - population
      - demography
+     - 
      - Mid-year population for given age/sex/year/location
      -
    * - incidence_rate_c322
      - como
+     - 
      - Incidence rate of LRI within the entire population
      -
    * - remission_rate_m1258
      - dismod-mr
+     - 
      - Remission rate of LRI within the infected population
      -
    * - disability_weight_s{sid}
      - YLD Appendix
+     - 
      - Disability weights associated with each sequela
      - Note Guillain-Barre due to LRI is included in sequelae.
    * - prevalence_s{sid}
      - como
+     - 
      - Prevalence of each sequela with id 'sid'
      -
+
+We calculate prevalence using the equation prevalence = incidence * duration. 
+(See assumptions and limitations for the need to replace GBD's prevalence).
+This is appropriate because LRI has a short and relatively uniform duration of 
+10 (5,15) days. Note that 10 days is longer than the Early Neonatal period (7 
+days). It follows that any incident LRI case in the early neonatal age group 
+will not remit before either dying or aging out. As an early neonate is 
+uniformly likely to become an incident LRI case on any of the 7 days of 'Early 
+Neonatal', it follows that the average duraiton of LRI in the early neonatal 
+age group is approximately 3.5 days (not accounting for deaths).
+
 .. list-table:: Restrictions
    :widths: 15 15 20
    :header-rows: 1
