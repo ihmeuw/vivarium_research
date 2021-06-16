@@ -33,4 +33,4 @@ jobs:
           pip install requirements.txt
       - name: Doc build
         run: |
-          make html -C docs/
+          make html -C docs/ SPHINXOPTS="-W --keep-going -n"
