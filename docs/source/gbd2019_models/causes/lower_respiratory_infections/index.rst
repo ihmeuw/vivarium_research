@@ -234,7 +234,7 @@ Data Description
      - Notes
    * - birth_prevalence_c322
      - como
-     - 
+     -
      - 0
      - No birth prevalence
    * - prevalence_calculated
@@ -249,32 +249,32 @@ Data Description
      - Justification included below
    * - deaths_c322
      - codcorrect
-     - 
+     -
      - Deaths from LRI
      -
    * - population
      - demography
-     - 
+     -
      - Mid-year population for given age/sex/year/location
      -
    * - incidence_rate_c322
      - como
-     - 
+     -
      - Incidence rate of LRI within the entire population
      -
    * - remission_rate_m1258
      - dismod-mr
-     - 
+     -
      - Remission rate of LRI within the infected population
      -
    * - disability_weight_s{sid}
      - YLD Appendix
-     - 
+     -
      - Disability weights associated with each sequela
      - Note Guillain-Barre due to LRI is included in sequelae.
    * - prevalence_s{sid}
      - como
-     - 
+     -
      - Prevalence of each sequela with id 'sid'
      -
 
