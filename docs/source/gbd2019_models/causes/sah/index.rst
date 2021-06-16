@@ -291,11 +291,11 @@ Data Sources
      - Deaths from subarachnoid hemorrhage
      - This is all deaths, regardless of whether the people are in the acute or chronic state
    * - acute_csmr_c497
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_acute_subarachnoid_csmr_2021-05-20.csv'
      - Deaths from subarachnoid hemorrhage during the acute period 
      - Custom CSMR calculation
    * - chronic_csmr_c497
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_chronic_subarachnoid_csmr_2021-05-20.csv'
      - Deaths from subarachnoid hemorrhage during the chronic period 
      - Custom CSMR calculation
    * - incidence_c497

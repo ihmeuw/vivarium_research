@@ -107,12 +107,15 @@ There is one randomized controlled trial on Isatuximab treatment that is current
      - Eligible population
      - Length of follow-up
    * - Multinational Clinical Study Comparing Isatuximab, Pomalidomide, and Dexamethasone to Pomalidomide and Dexamethasone in Refractory or Relapsed and Refractory Multiple Myeloma Patients (ICARIA-MM)
-     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019  [Dimopoulos-et-al-2020]_
+     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019 [Dimopoulos-et-al-2020]_
      - 102 sites in 24 countries
      - IPd (isatuximab + pomalidomide + dexamethasone)
      - Pd (pomalidomide + dexamethasone)
      - Adult patients with relapsed and refractory multiple myeloma who had received at least two previous lines of treatment, including lenalidomide and a proteasome inhibitor.
      - 28-day treatment cycle
+
+
+
 
 .. _mm2.0:
 
@@ -209,15 +212,15 @@ In the absence of data from Flatiron, we made following assumptions:
 
 .. note::
 
-   According to IQVIA sales data, the total sales of Isatuximab equal to
-   113 million dollars in 2021. The unit cost for a 12-month Isatuximab treatment
-   is about 145,600 dollars, that yields a total of 776 patients in year 2021 could
-   be treated with Isatuximab. In GBD 2019 summary, there were 89,566 prevalent MM
-   cases in 2019 for all ages and both sexes. As a result, the initial coverage of
-   Isatuximab is calculated to be 1% in 2021, and expect to reach 5% in 2026 based
-   on the slope derived from IQVIA sales projection. (~350% increase from 2021 to
-   2026) So, the endpoint coverage could reach 45% If we set the initial coverage
-   2027) of Isatuximab to be 10% in 2021.
+ According to IQVIA sales data, the total sales of Isatuximab equal to 
+ 113 million dollars in 2021. The unit cost for a 12-month Isatuximab treatment 
+ is about 145,600 dollars, that yields a total of 776 patients in year 2021 could 
+ be treated with Isatuximab. In GBD 2019 summary, there were 89,566 prevalent MM 
+ cases in 2019 for all ages and both sexes. As a result, the initial coverage of 
+ Isatuximab is calculated to be 1% in 2021, and expect to reach 5% in 2026 based 
+ on the slope derived from IQVIA sales projection. (~350% increase from 2021 to 
+ 2026) So, the endpoint coverage could reach 45% If we set the initial coverage 
+ 2027) of Isatuximab to be 10% in 2021.
 
 .. _mm5.0:
 
@@ -366,19 +369,25 @@ Treatment guidelines for multiple myeloma are complex and varied. [Rajkumar-and-
 The treatment indications with FDA approval for isatuxamib [FDA-prescribing-information-isa-2021]_ are listed below: 
 
 - in combination with pomalidomide (PI) and dexamethasone, for the treatment of adult patients with multiple myeloma who have received at least two prior therapies including lenalidomide (IMiD) and a proteasome inhibitor (PI)
+
 - in combination with carfilzomib (PI) and dexamethasone, for the treatment of adult patients with relapsed or refractory multiple myeloma who have received 1 to 3 prior lines of therapy
 
 .. note::
 
-   Clinical trial efficacy data exists for isatuxamib + pomalidomide + dexamethasone treatment relative to pomalidomide + dexamethasone alone [Attal-et-al-2019]_. A clinical trial comparing isatuxamib + carfilzomib + dexamethasone relative to carfilzomib + dexamethasone is ongoing [Moreau-et-al-2019]_.
+	Clinical trial efficacy data exists for isatuxamib + pomalidomide + dexamethasone treatment relative to pomalidomide + dexamethasone alone [Attal-et-al-2019]_. A clinical trial comparing isatuxamib + carfilzomib + dexamethasone relative to carfilzomib + dexamethasone is ongoing [Moreau-et-al-2019]_.
 
 The treatment indications with FDA approval for DARZALEX FASPRO [FDA-prescribing-information-dara-2021]_, a monoclonal antibody competitor to isatuxamib, include:
 
 - in combination with lenalidomide (PI) and dexamethasone in newly diagnosed patients ineligible for autologous stem cell transplant (ASCT)
+
 - in combination with lenalidomide (PI) and dexamethasone in newly diagnosed patients ineligible for ASCT *and* in patients with replased or refractory multiple myeloma who have received at least one prior therapy
+
 - in combination with bortezomib (PI), thalidomide (IMiD), and dexamethasone in newly diagnosed patients who are eligible for ASCT
+
 - in combination with bortezomib (PI) and dexamethasone in patients who have received at least one prior therapy
+
 - as monotherapy in patients who have received at least three prior lines of therapy including a PI and an IMiD or who are double-refractory to a PI and an IMiD
+
 - in combination with bortezomib (PI), cyclophosphamide, and dexamethasome in newly diagnosed patients 
 
 [Braulin-et-al-2021]_ summarized the multiple myeloma treatment landscape among recent years using Flatiron registry data. [Goto-et-al-2019]_ and [Jagannath-et-al-2016]_ published similar, but less recent, studies using SEER and International Oncology Netword data, respectively.
@@ -415,117 +424,190 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
 Treatment Modeling Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**Scope**:
-
-This modeling strategy allows us to track the proportion of MM/RRMM simulants that receive isatuxamib as part of their regimen for a given treatment line. We assume that the scale-up of isatuxamib coverage will result in isatuxamib incorporation as an additional drug added to an existing treatment regimen that would have been delivered in the absence of an isatuxamib coverage scale-up. It also allows for coherent assignment of isatuxamib-containing treatments at the simulant level so that any given simulant is not assigned an isatuxamib-containing treatment an illogical amount of times, which will reduce noise in our estimations.
-
-This model strategy does NOT consider:
-
-- Differences between isatuxamib-containing treatment regimens (ex: isatuxamib + pomalidomide + dexamethasone versus isatuxamib + carfilzomib + dexamethasone)
-- Differences between existing treatment regimens that would be eligible/ineligible for the addition of isatuxamib (For instance, isatuxamib logically would not be added to a treatment regimen that already contains dara. Additionally, isatuxamib is more likely to be added to a doublet treatment regimen than a triplet regimen.)
-- Differences between the numerous treatment regimens that do NOT contain isatuxamib 
-- Eligibility requirements for isatuxamib-containing treatments other than previous treatment with isatuxamib. Specifically, 
-
-	- We do not directly consider the requirement of previous treatment with lenalidomide and a PI, although this is likely minimally impactful as these are very common treatment regimens and "almost all" patients with myeloma develop disease that is eventually refracotory to lenalidomide and PIs, [Attal-et-al-2019]_.
-	- We do not consider previous treatment with other monoclonal antibody drugs such as daratumumab, which may impact probability of receiving an isa-containing treatment
-
-We will consider the following treatment categories in our treatment model:
-
-- Isa-containing treatment regimen
-- Non-isa-containing treatment regimen
-
-.. note::
-
-	Other treatment categories to consider tracking include: daratumumab-containing regimens
-
-Importantly, we will assume that a given percentage of patients who receive isa-containing regimen for a specific line of treatment will not receive an isa-containing regimen at a later line of treatment.
-
-	Currently, we will assume that 100% of patients who receive isa-containing regimens will not receive isa-containing regimens at a later line of treatment.
-
-.. todo::
-	
-	Confirm use of probability 1.0 for ineligibility for future isa-containing treatment regimen based on past treatment with isa.
-
-	Alternative approach: make ineligible if simulant progresses on or within 60 days seven months time OR with a probability of 60% if simulant progresses within seven months. This was chosen because the ISA trial defined non-response as progression on or within 60 days or progression within 6 months after achieving at least a partial response and reported at least partial response in 60% of subjects and a median time to response among this group was 35 days).
-
-.. note::
-
-	Consider similarly assuming that patients who recieve dara-containing regimens will not receive isa-containing regimens at later lines of treatment.
-
-The overall proportion of incident cases that receive isa-containing treatment regimens upon diagnosis of MM or RRMM at each line of treatment and in each scenario is shown in the table below.
-
-.. list-table:: Isatuximab treatment coverage assumptions
-   :header-rows: 1
-
-   * - Treatment line
-     - 2021 coverage (Baseline and Alternative)
-     - 2025 coverage (Baseline)
-     - 2025 coverage (Alternative)
-   * - 1st
-     - 0%
-     - 0%
-     - 20%
-   * - 2nd
-     - 0%
-     - 20%
-     - 20%
-   * - 3rd 
-     - XXX
-     - 20%
-     - 20%
-   * - 4th+
-     - XXX
-     - 20%
-     - 20%
-
-.. todo::
-
-	Describe linear scale-up
-
-	Finalize numbers currently marked as "XXX" based on commercial team input
-
-Notably, for the scale-up of isatuxamib coverage, we will assume that coverage of all other treatment regimens will remain constant from 2021 to 2025 and that isatuxamib will be incorporated into treatment coverage as an additional drug in the existing regimen for a given line of treatment. For example, if a given patient were to receive a doublet regimen for their second line of treatment (pomalidamide + dexamethasone, for example) in the absence of an isatuxamib scale-up, then we assume they would receive an isatuxamib-containing triplet regimen for their second line of treatment (isatuxamib + pomalidamide + dexamethasone, for example). This modeling strategy has the following important implications:
-
-- In the absence of available data to inform alternate strategies, we will assume that the addition of isatuxamib to the doublet pomalidomide + dexamethasone reigmen will have the same relative effect on progression free survival and overall survival as the addition of isatuxamib to all other multiple myeloma treatment regimens, as obtained from [Attal-et-al-2019]_
-- This strategy assumes that isatuxamib will be *added* to existing treatment regimens so that monotherapies become doublet therapies, doublets become triplets, and so on, rather than assuming that isatuxamib will replace a drug in an existing treatment regimen. This may or may not accurately reflect clinical practice as the number of drugs administered in a given line of treatment is a clinical decision based on patient frailty and triplet therapies are generally preferred in the absence of frailty.
-- This strategy currently does not (yet) consider that isatuxamib logically would not be added to treatment regimens that already contain monoclonal antibody drugs such as dara and does not consider that such treatments already are benefitting from the additional clinical impact of an anti-C38 MoAB drug as part of the treatment regimen and therefore would likely not see an additional clinical benefit from an isatuxamib scale-up.
-
-.. todo::
-
-	Consider tracking this treatment category as part of baseline coverage so that it can be appropriately considered in the baseline calibration strategy.
+The treatment algorithm is described in this :download:`word document found here <treatment_algorithm.docx>`. We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
 
 **How to assign treatment category to a simulant:**
 
+*Treatment Coverage Proportions*:
+
+The table below shows the treatment category coverage proportions for the isatuxamib- and daratumumab-containing categories in 2021 (Jan 1. 2021) and 2025 (Dec. 31 2025) in the baseline and alternative scenarios. The residual treatment category coverage proportion is not shown, but covers the remaining proportion of patients. We will assume that coverage of each treatment category changes *linearly* from the 2021 value to the 2025 for each line of treatment.
+
+.. list-table:: Treatment category coverage proportions
+   :header-rows: 1
+
+   * - Line of treatment
+     - Treatment category
+     - 2021 (baseline and alternative)
+     - 2025 (baseline)
+     - 2025 (alternative)
+   * - 1
+     - Isatuxamib-containing
+     - 0
+     - 0
+     - 10
+   * - 1
+     - Daratumuab-containing
+     - 1.6%
+     - 2.9%
+     - 2.9%
+   * - 2
+     - Isatuxamib-containing
+     - 0.8%
+     - 10%
+     - 10%
+   * - 2
+     - Daratumuab-containing
+     - 16.9%
+     - 30.6%
+     - 30.6%
+   * - 3
+     - Isatuxamib-containing
+     - 1.3%
+     - 10%
+     - 10%
+   * - 3
+     - Daratumuab-containing
+     - 25.6%
+     - 46.3%
+     - 46.3%
+   * - 4
+     - Isatuxamib-containing
+     - 1.5%
+     - 10%
+     - 10%
+   * - 4
+     - Daratumuab-containing
+     - 29.7%
+     - 53.7%
+     - 53.7%
+   * - 5+
+     - Isatuxamib-containing
+     - 0.9%
+     - 10%
+     - 10%
+   * - 5+
+     - Daratumuab-containing
+     - 17.1%
+     - 30.9%
+     - 30.9%
+
 *Initialization*:
 
-	Each simulant initialized into a multiple myeloma state should be assigned to a treatment category. They should be assigned to the isa-containing treatment category or non-isa-containing treatment category with the probability of the isa-containing treatment category equal to the isatuxamib treatment coverage values for 2021 in the table above, specific to the cause model state that the simulant occupies.
+	Each simulant initialized into a multiple myeloma state should be assigned to a treatment category. The probability of being assigned to a given category should be equal to the coverage for that category in 2021 that is specific to the line of treatment corresponding to the MM cause model state that the simulant occupies. We will assume that at initialization, no simulants in the isa/dara-containing treatment categories have been retreated with an anti-CD38 monoclonal antibody treatment.
 
-	For simulants assigned to the isatuxamib-containing treatment category, assign the attribute :code:`ineligible_for_future_isa = True` with a probability of 1. For all other simulants, set :code:`ineligible_for_future_isa` to :code:`False`.
+	If a simulant is assigned to the isatuxamib-containing treatment category or the daratumumab-containing treatment category, they should be assigned the attribute :code:`eligible_for_anticd38_retreatment = True`; otherwise, set :code:`eligible_for_anticd38_retreatment = NaN`.
 
-		NOTE: This strategy makes several assumptions, including:
+	NOTE: This strategy makes several assumptions, including:
 
-			- Incident treatment coverage is equal to prevalent treatment coverage of isatuxamib. In other words, it assumes that there is similar progression-free survival among patients who have been treated with isatuxamib and those not treated with isatuxamib.
-			- Isatuxamib treatment coverage at the time of most recent relapse was equal to isatuxamib treatment coverage in 2021.
+		- Incident treatment coverage is equal to prevalent treatment coverage of isatuxamib. In other words, it assumes that there is similar progression-free survival across treatment categories.
+
+		- Treatment coverage at the time of most recent relapse was equal to isatuxamib treatment coverage in 2021.
 
 *Later time-steps*:
 
-	When a simulant progresses through the cause model states of the MM cause model diagram, they should be assigned to a treatment category for that state in the following manner:
+	If a simulant does not progress to the next cause model state at a given timestep, their assigned treatment category and the value for :code:`eligible_for_anticd38_retreatment` should remain the same.
 
-		If :code:`ineligible_for_future_isa = True`, assign the non-isa-containing treatment category.
+	When a simulant progresses through the cause model states of the MM cause model diagram, they should be assigned to a new treatment category for that state in the following manner:
 
-		If :code:`ineligible_for_future_isa = False`, assign the isa-containing treatment category with the probability of the isatuxamib treatment coverage defined above *divided by the proportion of simulants in the preeceding cause model state with the attribute* :code:`ineligible_for_future_isa = False`.
+		If :code:`eligible_for_anticd38_retreatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%. 
 
-			NOTE: this is an approximation that assumes similar progression free survival rates among :code:`ineligible_for_future_isa` states, which will cause a slightly greater number of simulants to be assigned to the isa treatment category than specified in the above table, especially for earlier lines of treatment -- consider a transformation based on the Isa HR?
+			If it is determined that they will be retreated, determine if they will receive an isa-containing treatment or dara-containing treatment, with the probability of isa-containing treatment equal to :math:`\frac{c_\text{isa}}{c_\text{isa} + c_\text{dara}}`, where :math:`c` represents the coverage proportion for the respective treatment categories at the current timestep for the line of treatment that the simulant occupies. Set :code:`retreated = True` and keep :code:`eligible_for_anticd38_retreatment = True`.
 
-	If a simulant is assigned an isa-containing treatment regimen, assign them an attribute :code:`ineligible_for_future_isa = True` with a probability of 1. Otherwise, this attribute should be set to False.
+			If it is determined that they will not be retreated (probability 85%), assign them to the residual treatment category and set :code:`eligible_for_anticd38_retreatment = False`.
 
-.. note::
+		If :code:`eligible_for_anticd38_retreatment == False`, assign them to the residual treatment category. Keep :code:`eligible_for_anticd38_retreatment = False` for these simulants.
 
-   The multiple myeloma cause model does not differentiate between the fourth relapse and any subsequent relapses. However, **treatment lines** should continue to be tracked in the same way as described above for all relapses after the fourth. For example, if a simulant is treated with an isa-containing regimen at fourth relapse and becomes ineligible for future isa-containing treatment regimens, that simulant should not receive isa-containing treatment regimens at subsequent relapses. Further, if a simulant remains eligible for isa-containing treatment through the fourth relapse, they can be assigned an isa-containing treatment at the fifth relapse.
+		If :code:`eligible_for_anticd38_retreatment == NaN`, assign treatment categories with the probabilities equal to:
 
-.. todo::
+			:math:`p_\text{isa} = \frac{c_\text{isa} - (c*_\text{isa} + c*_\text{dara}) \times 0.15 \times \frac{c_\text{isa}}{(c_\text{dara} + c_\text{isa})}}{c*_\text{resid}}`
 
-   Confirm use of probability 1.0 for ineligibility for future isa-containing treatment regimen based on past treatment with isa.
+			:math:`p_\text{dara} = \frac{c_\text{dara} - (c*_\text{isa} + c*_\text{dara}) \times 0.15 \times \frac{c_\text{dara}}{(c_\text{dara} + c_\text{isa})}}{c*_\text{resid}}`
+
+			:math:`p_\text{resid} = 1 - p_\text{isa} - p_\text{dara}`
+
+			Where :math:`c` indicates the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep and :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep (set to zero if simulant's current line of treatment is the first line of treatment).
+
+			This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time. Notably, these assumptions will cause biases in opposite directions.
+
+			.. note::
+
+				It is possible that :math:`p_\text{isa} + p_\text{dara} > 1`. In that case, use the following probabilities:
+
+				:math:`p_\text{isa} = \frac{c_\text{isa}}{c_\text{dara} + c_\text{isa}}`
+
+				:math:`p_\text{dara} = \frac{c_\text{dara}}{c_\text{dara} + c_\text{isa}}`
+
+				:math:`p_\text{resid} = 0`
+
+			If a simulant is assigned an isa- or dara-containing treatment regimen, set :code:`eligible_for_anticd38_retreatment = True`; otherwise, keep :code:`eligible_for_anticd38_retreatment = NaN`.
+
+**How to assign treatment effects:**
+
+Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. There are separate hazard ratios for the first line of treatment and later lines of treatment for each treatment category. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`retreatment == True`). The hazard ratios are shown in the tables below.
+
+.. list-table:: First line of treatment hazard ratios
+   :header-rows: 1
+
+   * - Treatment category
+     - Progression free survival HR (95% UI)
+     - Overall survival HR (95% UI)
+   * - All categories combined
+     - 1 (reference)
+     - 1 (reference)
+   * - Isatuxamib-containing treatment category
+     - 0.429 (0.368, 0.495)
+     - 0.760 (0.645, 0.895)
+   * - Daratumumab-containing treatment category
+     - 0.429 (0.368, 0.495)
+     - 0.760 (0.645, 0.895)
+   * - Residual treatment category
+     - 1.00581 (1.0051, 1.0064)
+     - 1.0024 (1.0011, 1.0036)
+
+.. list-table:: Second and later lines of treatment hazard ratios
+   :header-rows: 1
+
+   * - Treatment category
+     - Progression free survival HR (95% UI)
+     - Overall survival HR (95% UI)
+   * - All categories combined
+     - 1 (reference)
+     - 1 (reference)
+   * - Isatuxamib-containing treatment category, :code:`retreated != True`
+     - 0.530 (0.356, 0.803)
+     - 1.116 (1.044, 1.185)
+   * - Isatuxamib-containing treatment category, :code:`retreated == True`
+     - 0.765 (0.678, 0.902)
+     - 1.232 (1.088, 1.37)
+   * - Daratumumab-containing treatment category, :code:`retreated != True`
+     - 0.217 (0.203, 0.231)
+     - 0.572 (0.551, 0.594)
+   * - Daratumumab-containing treatment category, :code:`retreated == True`
+     - 0.609 (0.601, 0.616)
+     - 0.786 (0.776, 0.797)
+   * - Residual treatment category
+     - 1.331 (1.324, 1.337)
+     - 1.181 (1.171, 1.190)
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
+
+.. code-block:: python
+
+	from numpy import log
+	from scipy.stats import norm, lognorm
+
+	q_975_stdnorm = norm().ppf(0.975)
+	mu = log(hr)
+	sigma = (log(hr_upper) - mu) / q_975_stdnorm
+	hr_distribution = lognorm(s=sigma, scale=hr)
+
+The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
+
+*Observers*:
+
+We would like to stratify simulations outputs on treatment category (residual/isa, not retreated/isa, retreated/dara, not retreated/dara, retreated).
+
+Additionally, we would like the *number* of simulants assigned to each treatment category at time of diagnosis or relapse for each line of treatment.
 
 .. _mm5.3.4:
 
@@ -720,10 +802,10 @@ Where,
    impairment: ICARIA-MM subgroup analysis. Leukemia 2021; 35: 562–72.
 
 .. [FDA-prescribing-information-dara-2021]
-	`FDA Dara <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`_
+	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`__
 
 .. [FDA-prescribing-information-isa-2021]
-	`FDA Isa <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`_
+	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`__
 
 .. [Goto-et-al-2019]
 	Goto, Daisuke, et al. "Utilization of novel systemic therapies for multiple myeloma: A retrospective study of front‐line regimens using the SEER‐Medicare data." Cancer medicine 9.2 (2020): 626-639.
