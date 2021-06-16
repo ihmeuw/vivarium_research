@@ -15,7 +15,7 @@ Low-density lipoprotein (LDL) is one of the five major groups of lipoprotein whi
 
 Blood tests commonly report LDL-C: the amount of cholesterol which is estimated to be contained with LDL particles, on average, using a formula, the Friedewald equation. In clinical context, mathematically calculated estimates of LDL-C are commonly used as an estimate of how much low density lipoproteins are driving progression of atherosclerosis.
 
-It should be emphasized that LDL-C is not a measurement of actual LDL particles. LDL-C is only an estimate (not measured from the individual's blood sample) of how much cholesterol is being transported by all LDL particles, which is either a smaller concentration of large particles or a high concentration of small particles. [Wikipedia]_, [Centers-For-Disease-Control-And-Prevention]_
+It should be emphasized that LDL-C is not a measurement of actual LDL particles. LDL-C is only an estimate (not measured from the individual's blood sample) of how much cholesterol is being transported by all LDL particles, which is either a smaller concentration of large particles or a high concentration of small particles. [Wikipedia-LDLC]_, [Centers-For-Disease-Control-And-Prevention]_
 
 Modeling High LDL-c in GBD 2017
 -------------------------------
@@ -112,7 +112,7 @@ Validation Criteria
 References
 ----------
 
-.. [Wikipedia] Low-density lipoprotein. From Wikipedia, the Free Encyclopedia.
+.. [Wikipedia-LDLC] Low-density lipoprotein. From Wikipedia, the Free Encyclopedia.
    Retrieved 29 Jan 2020.
    https://en.wikipedia.org/wiki/Low-density_lipoprotein
 

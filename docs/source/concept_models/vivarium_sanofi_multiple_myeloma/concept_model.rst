@@ -60,7 +60,7 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 +-------+----------------------------+
 
 
-.. _1.0:
+.. _mm1.0:
 
 1.0 Background
 ++++++++++++++
@@ -82,14 +82,14 @@ Key sub-populations agreed upon include:
 
 In the absence of data on treatment effects for sub-groups we will need to make assumptions with client guidance. A strength of this project is that we will be able to iteratively update such assumptions as we get real world data from registries and re-run the simulation. 
 
-.. _1.1:
+.. _mm1.1:
 
 1.1 Project overview
 --------------------
 This project intends to model the impact of a new treatment option for myeloma disease, Isatuximab, from 2021 to 2026 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States, which are dependent on disease status, age, eligibility for stem cell transplantation, risk category, history of malignancy, and duration of previous treatment response. 
 
 
-.. _1.2:
+.. _mm1.2:
 
 1.2 Literature review
 ---------------------
@@ -107,17 +107,14 @@ There is one randomized controlled trial on Isatuximab treatment that is current
      - Eligible population
      - Length of follow-up
    * - Multinational Clinical Study Comparing Isatuximab, Pomalidomide, and Dexamethasone to Pomalidomide and Dexamethasone in Refractory or Relapsed and Refractory Multiple Myeloma Patients (ICARIA-MM)
-     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019 
+     - (1.) Dimopoulos, M.A., Leleu, X., Moreau, P. et al. 2020; (2.) Attal, Richardson, Rajkumar, San-Miguel, Beksac, Spicka, et al. 2019  [Dimopoulos-et-al-2020]_
      - 102 sites in 24 countries
      - IPd (isatuximab + pomalidomide + dexamethasone)
      - Pd (pomalidomide + dexamethasone)
      - Adult patients with relapsed and refractory multiple myeloma who had received at least two previous lines of treatment, including lenalidomide and a proteasome inhibitor.
      - 28-day treatment cycle
 
-
-
-
-.. _2.0:
+.. _mm2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -126,12 +123,12 @@ The primary objective of this project is to answer the following question: what 
 
 To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our own survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2026 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk. 
 
-.. _3.0:
+.. _mm3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _mm3.1:
 
 3.1 Causal diagram
 ------------------
@@ -158,7 +155,7 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 **Mediators (M)**:
 
 
-.. _3.2:
+.. _mm3.2:
 
 3.2 Effect sizes
 ----------------
@@ -174,7 +171,7 @@ Among MM and RRMM patients, they expect to have:
  - Other (non Isa-based) treatment with constant coverage rates across 5 years 
    of the simulation
 
-.. _4.1:
+.. _mm4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -212,22 +209,22 @@ In the absence of data from Flatiron, we made following assumptions:
 
 .. note::
 
- According to IQVIA sales data, the total sales of Isatuximab equal to 
- 113 million dollars in 2021. The unit cost for a 12-month Isatuximab treatment 
- is about 145,600 dollars, that yields a total of 776 patients in year 2021 could 
- be treated with Isatuximab. In GBD 2019 summary, there were 89,566 prevalent MM 
- cases in 2019 for all ages and both sexes. As a result, the initial coverage of 
- Isatuximab is calculated to be 1% in 2021, and expect to reach 5% in 2026 based 
- on the slope derived from IQVIA sales projection. (~350% increase from 2021 to 
- 2026) So, the endpoint coverage could reach 45% If we set the initial coverage 
- 2027) of Isatuximab to be 10% in 2021.
+   According to IQVIA sales data, the total sales of Isatuximab equal to
+   113 million dollars in 2021. The unit cost for a 12-month Isatuximab treatment
+   is about 145,600 dollars, that yields a total of 776 patients in year 2021 could
+   be treated with Isatuximab. In GBD 2019 summary, there were 89,566 prevalent MM
+   cases in 2019 for all ages and both sexes. As a result, the initial coverage of
+   Isatuximab is calculated to be 1% in 2021, and expect to reach 5% in 2026 based
+   on the slope derived from IQVIA sales projection. (~350% increase from 2021 to
+   2026) So, the endpoint coverage could reach 45% If we set the initial coverage
+   2027) of Isatuximab to be 10% in 2021.
 
-.. _5.0:
+.. _mm5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _mm5.1:
 
 5.1 Vivarium concept model 
 --------------------------
@@ -241,12 +238,12 @@ The simulation concept model consists of five main components:
  4. Health system (multiple lines of treatment for MM and RRMM population) 
  5. Patient registry 
 
-.. _5.2:
+.. _mm5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _mm5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,31 +255,32 @@ The simulation concept model consists of five main components:
   - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
 
 
-.. _5.2.2:
+.. _mm5.2.2:
 
 5.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **General US population** and **Registry population** stratified by 
 sub-population groups of following:
- - Black/African American population 
+
+ - Black/African American population
  - Population with high-risk cytogenetics (abnormality includes Del(17p) t(14;16) t(14;20) Del(1p))
  - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
  - Elder population (aged > 75 years) 
 
-.. _5.3:
+.. _mm5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _mm5.3.1:
 
 5.3.1 Disease model
 ~~~~~~~~~~~~~~~~~~~
 
 See :ref:`multiple myeloma cause model<2019_cancer_model_multiple_myeloma>`
 
-.. _5.3.2:
+.. _mm5.3.2:
 
 5.3.2 Risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -297,6 +295,7 @@ the choice of therapy is based on their GFR and cytogenetic risk.
 **eGFR** has a continuous risk exposure by age, sex, and race/ethnicity. 
 Simulants will be assigned to a CKD stage based on their eGFR value. We consider 
 5 stages of CKD:
+
  - Stage 1: eGFR > 90 ml/min/1.73m^2
  - Stage 2: eGFR 60 to 90 ml/min/1.73m^2
  - Stage 3: eGFR 30 to 60 ml/min/1.73m^2
@@ -335,7 +334,7 @@ of high-risk cytogenetics among adults in the US population with multiple myelom
  abnormalities as described above. No abnormalities detected on fluorescence in 
  situ hybridization (FISH) is considered 'standard-risk' as well. 
 
-.. _5.3.3:
+.. _mm5.3.3:
 
 5.3.3 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
@@ -367,25 +366,19 @@ Treatment guidelines for multiple myeloma are complex and varied. [Rajkumar-and-
 The treatment indications with FDA approval for isatuxamib [FDA-prescribing-information-isa-2021]_ are listed below: 
 
 - in combination with pomalidomide (PI) and dexamethasone, for the treatment of adult patients with multiple myeloma who have received at least two prior therapies including lenalidomide (IMiD) and a proteasome inhibitor (PI)
-
 - in combination with carfilzomib (PI) and dexamethasone, for the treatment of adult patients with relapsed or refractory multiple myeloma who have received 1 to 3 prior lines of therapy
 
 .. note::
 
-	Clinical trial efficacy data exists for isatuxamib + pomalidomide + dexamethasone treatment relative to pomalidomide + dexamethasone alone [Attal-et-al-2019]_. A clinical trial comparing isatuxamib + carfilzomib + dexamethasone relative to carfilzomib + dexamethasone is ongoing [Moreau-et-al-2019]_.
+   Clinical trial efficacy data exists for isatuxamib + pomalidomide + dexamethasone treatment relative to pomalidomide + dexamethasone alone [Attal-et-al-2019]_. A clinical trial comparing isatuxamib + carfilzomib + dexamethasone relative to carfilzomib + dexamethasone is ongoing [Moreau-et-al-2019]_.
 
 The treatment indications with FDA approval for DARZALEX FASPRO [FDA-prescribing-information-dara-2021]_, a monoclonal antibody competitor to isatuxamib, include:
 
 - in combination with lenalidomide (PI) and dexamethasone in newly diagnosed patients ineligible for autologous stem cell transplant (ASCT)
-
 - in combination with lenalidomide (PI) and dexamethasone in newly diagnosed patients ineligible for ASCT *and* in patients with replased or refractory multiple myeloma who have received at least one prior therapy
-
 - in combination with bortezomib (PI), thalidomide (IMiD), and dexamethasone in newly diagnosed patients who are eligible for ASCT
-
 - in combination with bortezomib (PI) and dexamethasone in patients who have received at least one prior therapy
-
 - as monotherapy in patients who have received at least three prior lines of therapy including a PI and an IMiD or who are double-refractory to a PI and an IMiD
-
 - in combination with bortezomib (PI), cyclophosphamide, and dexamethasome in newly diagnosed patients 
 
 [Braulin-et-al-2021]_ summarized the multiple myeloma treatment landscape among recent years using Flatiron registry data. [Goto-et-al-2019]_ and [Jagannath-et-al-2016]_ published similar, but less recent, studies using SEER and International Oncology Netword data, respectively.
@@ -494,9 +487,7 @@ The overall proportion of incident cases that receive isa-containing treatment r
 Notably, for the scale-up of isatuxamib coverage, we will assume that coverage of all other treatment regimens will remain constant from 2021 to 2025 and that isatuxamib will be incorporated into treatment coverage as an additional drug in the existing regimen for a given line of treatment. For example, if a given patient were to receive a doublet regimen for their second line of treatment (pomalidamide + dexamethasone, for example) in the absence of an isatuxamib scale-up, then we assume they would receive an isatuxamib-containing triplet regimen for their second line of treatment (isatuxamib + pomalidamide + dexamethasone, for example). This modeling strategy has the following important implications:
 
 - In the absence of available data to inform alternate strategies, we will assume that the addition of isatuxamib to the doublet pomalidomide + dexamethasone reigmen will have the same relative effect on progression free survival and overall survival as the addition of isatuxamib to all other multiple myeloma treatment regimens, as obtained from [Attal-et-al-2019]_
-
-- This strategy assumes that isatuxamib will be *added* to existing treatment regimens so that monotherapies become doublet therapies, doublets become triplets, and so on, rather than assuming that isatuxamib will replace a drug in an existing treatment regimen. This may or may not accurately reflect clinical practice as the number of drugs administered in a given line of treatment is a clinical decision based on patient frailty and triplet therapies are generally preferred in the absence of frailty. 
-
+- This strategy assumes that isatuxamib will be *added* to existing treatment regimens so that monotherapies become doublet therapies, doublets become triplets, and so on, rather than assuming that isatuxamib will replace a drug in an existing treatment regimen. This may or may not accurately reflect clinical practice as the number of drugs administered in a given line of treatment is a clinical decision based on patient frailty and triplet therapies are generally preferred in the absence of frailty.
 - This strategy currently does not (yet) consider that isatuxamib logically would not be added to treatment regimens that already contain monoclonal antibody drugs such as dara and does not consider that such treatments already are benefitting from the additional clinical impact of an anti-C38 MoAB drug as part of the treatment regimen and therefore would likely not see an additional clinical benefit from an isatuxamib scale-up.
 
 .. todo::
@@ -514,7 +505,6 @@ Notably, for the scale-up of isatuxamib coverage, we will assume that coverage o
 		NOTE: This strategy makes several assumptions, including:
 
 			- Incident treatment coverage is equal to prevalent treatment coverage of isatuxamib. In other words, it assumes that there is similar progression-free survival among patients who have been treated with isatuxamib and those not treated with isatuxamib.
-
 			- Isatuxamib treatment coverage at the time of most recent relapse was equal to isatuxamib treatment coverage in 2021.
 
 *Later time-steps*:
@@ -531,13 +521,13 @@ Notably, for the scale-up of isatuxamib coverage, we will assume that coverage o
 
 .. note::
 
-	The multiple myeloma cause model does not differentiate between the fourth relapse and any subsequent relapses. However, **treatment lines** should continue to be tracked in the same way as described above for all relapses after the fourth. For example, if a simulant is treated with an isa-containing regimen at fourth relapse and becomes ineligible for future isa-containing treatment regimens, that simulant should not receive isa-containing treatment regimens at subsequent relapses. Further, if a simulant remains eligible for isa-containing treatment through the fourth relapse, they can be assigned an isa-containing treatment at the fifth relapse.
+   The multiple myeloma cause model does not differentiate between the fourth relapse and any subsequent relapses. However, **treatment lines** should continue to be tracked in the same way as described above for all relapses after the fourth. For example, if a simulant is treated with an isa-containing regimen at fourth relapse and becomes ineligible for future isa-containing treatment regimens, that simulant should not receive isa-containing treatment regimens at subsequent relapses. Further, if a simulant remains eligible for isa-containing treatment through the fourth relapse, they can be assigned an isa-containing treatment at the fifth relapse.
 
 .. todo::
 
-	Confirm use of probability 1.0 for ineligibility for future isa-containing treatment regimen based on past treatment with isa.
+   Confirm use of probability 1.0 for ineligibility for future isa-containing treatment regimen based on past treatment with isa.
 
-.. _5.3.4:
+.. _mm5.3.4:
 
 5.3.4 Patient registry model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -551,6 +541,7 @@ they will be included in a registry. The registry is running for RRMM patients
 (any newly incident RRMM cases developed from multiple myeloma and the pre-existing 
 RRMM cases at the start of the simulation). In general, we will use the criteria 
 listed below to decide who is eligible to be enrolled in the registry.
+
   - 18 years and older
   - With relapsed/refractory multiple myeloma (RRMM according to IMWG definition)
   - First time using Isa (never received Isa for treatment of disease other than RRMM)
@@ -586,12 +577,12 @@ Where,
    malignancy other than RRMM in the past three years
 
 
-.. _5.4:
+.. _mm5.4:
 
 5.4 Input data sources
 ----------------------
 
-.. _5.5:
+.. _mm5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -680,13 +671,13 @@ Where,
 - Median OS (months): median length of time-to-death in months
 - One-year OS (%): proportion of patients survival without death during a one-year period
 
-.. _6.0:
+.. _mm6.0:
 
 6.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
 
-.. _7.0:
+.. _mm7.0:
 
 7.0 Limitations
 +++++++++++++++
@@ -729,10 +720,10 @@ Where,
    impairment: ICARIA-MM subgroup analysis. Leukemia 2021; 35: 562–72.
 
 .. [FDA-prescribing-information-dara-2021]
-	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`_
+	`FDA Dara <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761145s002lbl.pdf>`_
 
 .. [FDA-prescribing-information-isa-2021]
-	`See label here <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`_
+	`FDA Isa <https://www.accessdata.fda.gov/drugsatfda_docs/label/2021/761113s003lbl.pdf>`_
 
 .. [Goto-et-al-2019]
 	Goto, Daisuke, et al. "Utilization of novel systemic therapies for multiple myeloma: A retrospective study of front‐line regimens using the SEER‐Medicare data." Cancer medicine 9.2 (2020): 626-639.

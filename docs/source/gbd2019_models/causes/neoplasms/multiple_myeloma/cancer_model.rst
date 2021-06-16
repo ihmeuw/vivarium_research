@@ -313,7 +313,8 @@ From the survival regression model, we expect to output the survival/hazard as a
 function of time to tell when an event will happen and its likelihood, in a 
 baseline survival model and a model with different values of covariates. In general, 
 We will create two survival regression models:
- 1. Mortality hazard model to predict time to death from MM and time to death from 
+
+ 1. Mortality hazard model to predict time to death from MM and time to death from
     each of relapse states. 
  2. Transition hazard model to predict time from MM to RRMM, and time between last 
     relapse and next relapse within RRMM state. 
@@ -392,17 +393,17 @@ Validation Criteria
 References
 ----------
 
-..[Attal et al. 2019]
+.. [Attal et al. 2019]
    Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and low-dose 
    dexamethasone versus pomalidomide and low-dose dexamethasone in patients with relapsed 
    and refractory multiple myeloma (ICARIA-MM): a randomised, multicentre, open-label, phase 
    3 study. Lancet 2019; 394: 2096–107.
    
-..[Cowan et al. 2018]
+.. [Cowan et al. 2018]
    Cowan AJ, Allen C, Barac A, et al. Global Burden of Multiple Myeloma: A Systematic 
    Analysis for the Global Burden of Disease Study 2016. JAMA Oncol 2018; 4: 1221–7.
 
-..[GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]
+.. [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]
    Supplement to: `GBD 2019 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries

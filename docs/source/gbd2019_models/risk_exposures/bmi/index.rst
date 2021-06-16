@@ -9,7 +9,7 @@ Risk Exposure Overview
 ----------------------
 
 Body mass index (BMI) is a person’s weight in kilograms divided by the square of height in meters (weight (kg) / [height (m)]\ :sup:`2`\). BMI is an inexpensive and easy screening method; values are frequently divided into categories: underweight (<18.5 kg/m\ :sup:`2`\), healthy weight (18.5 to 24.9 kg/m\ :sup:`2`\), overweight (25.0 to 29.9 kg/m\ :sup:`2`\), and obese (>=30.0 kg/m\ :sup:`2`\). BMI does not measure body fat directly, but it is moderately correlated with more direct measures of body fat. BMI has also been shown to be correlated with various metabolic and disease outcomes. BMI can be a screening tool, but it does not diagnose the body fatness or health of an individual.
-[CDC]_
+[CDC-BMI]_
 
 Risk Exposures Description in GBD
 ---------------------------------
@@ -123,7 +123,7 @@ For adults (ages 20+), the theoretical minimum risk exposure level (TMREL) of BM
    * - High Body-Mass Index
      - Osteoarthritis knee
 
-[GBD-2019-Capstone-Appendix]_
+[GBD-2019-Capstone-Appendix-BMI]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -199,12 +199,12 @@ Does the standard deviation in the model match the standard deviation of the GBD
 References
 ----------
 
-.. [CDC] About Adult BMI. Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 17 Sept. 2020.
+.. [CDC-BMI] About Adult BMI. Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 17 Sept. 2020.
 	Retrieved 19 April 2021.
 	https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html 
 
-.. [GBD-2019-Capstone-Appendix]
-  Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249` 
+.. [GBD-2019-Capstone-Appendix-BMI]
+   Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249`
   
 
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf

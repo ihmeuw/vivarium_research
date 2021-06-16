@@ -1,2 +1,15 @@
-build:
-  image: latest
+# This is the version for the readthedocs configuration. Version 2 ignores
+# web-based configuration and uses everything from this file.
+version: 2
+
+# Configure the python version and environment construction run before
+# docs are built.
+python:
+  version: 3.8
+  install:
+    - method: pip
+      path: requirements.txt
+
+# Doc builds will fail if there are any warnings
+sphinx:
+  fail_on_warning: true

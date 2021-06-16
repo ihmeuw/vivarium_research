@@ -13,6 +13,8 @@ Impairment Description in GBD 2019
 
 The anemia impairment in GBD 2019 represents the total burden due to anemia across *all* GBD causes with anemia sequelae. For instance, mild anemia due to dietary iron deficiency, mild anemia due to hookworm disease, and mild anemia due to maternal hemorrhage all contribute to the mild anemia *impairment* in GBD. See the REI IDs for the anemia impairments in the table below.
 
+[Kassebaum-et-al-2016-anemia]_
+
 .. _`Anemia Impairment REI IDs Table`:
 
 .. list-table:: Anemia Impairment REI IDs
@@ -39,7 +41,7 @@ The anemia envelope refers to the total prevalence and burden due to anemia in a
 
 Once the hemoglobin concentration distribution is estimated, the anemia envelope is calculated by evaluating the area under the distribution curve below the severity-specific hemoglobin thresholds for anemia. GBD 2019 uses the WHO thresholds shown in the table below.
 
-.. _`WHO hemoglobin tresholds table`:
+.. _`WHO hemoglobin thresholds table`:
 
 .. list-table:: WHO Hemoglobin Thresholds (g/L)
   :widths: 15, 15, 15, 15
@@ -102,9 +104,7 @@ Once severity-specific anemia prevalence is estimated, years lived with disabili
 Causal Attribution
 ++++++++++++++++++
 
-While the anemia envelope represents the total prevalence of anemia, the causal attribution process allows for estimation of what conditions *cause* that anemia. With some exceptions (see below_), two inputs were required for each cause included in the causal attribution process, 1) the cause prevalence (generated from other GBD processes), and 2) the cause-specific hemoglobin shift. Cause-specific hemoglobin shifts were derived from published studies that compared hemoglobin concentrations among diseased and non-diseased populations; these shifts were meta-analyzed for use in GBD 2019.
-
-.. _below:
+While the anemia envelope represents the total prevalence of anemia, the causal attribution process allows for estimation of what conditions *cause* that anemia. With some exceptions (see below), two inputs were required for each cause included in the causal attribution process, 1) the cause prevalence (generated from other GBD processes), and 2) the cause-specific hemoglobin shift. Cause-specific hemoglobin shifts were derived from published studies that compared hemoglobin concentrations among diseased and non-diseased populations; these shifts were meta-analyzed for use in GBD 2019.
 
 Notably, there were several causes that were not assigned specific hemoglobin shifts, including dietary iron deficiency; other infectious diseases; other neglected tropical diseases; other endocrine, nutrition, blood, and immune disorders; and other hemoglobinopathies and hemolytic anemias. Instead, the residual anemia envelope (with an enforced minimum 10%) were assigned to these causes in a manner analogous to fixed proportion redistribution.
 
@@ -121,7 +121,7 @@ The following table displays the cause- and sex-specific hemoglobin shifts used 
 Iron Responsive Causes
 ^^^^^^^^^^^^^^^^^^^^^^
 
-A list of which causes of anemia are iron responsive can be found in the excel sheet hosted `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/in_out_meid_map.xlsx>`_.
+A list of which causes of anemia are iron responsive can be found in the excel sheet hosted at `<https://stash.ihme.washington.edu/projects/MNCH/repos/anemia_causal_attribution/browse/in_out_meid_map.xlsx>`_.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -129,7 +129,23 @@ Vivarium Modeling Strategy
 Scope
 ++++++++
 
-The Vivarium modeling strategy for the anemia impairment will first rely on the :ref:`Hemoglobin Distribution Model <2019_hemoglobin_distribution>`. Vivarium simulants should first be assigned a hemoglobin value and then their anemia status can be evaluated by the hemoglobin thresholds shown on this page (thresholds are pregnancy-specific for women of reproductive age; see the pregnancy hemoglobin adjustment documentation on the :ref:`Hemoglobin Distribution Model documentation page <2019_hemoglobin_distribution>`. YLDs should be accrued according to the severity-specific disability weights listed in this document. Specific causes (or groups of causes, for example iron-responsive causes) of anemia can also be assigned to individual simulants if relevant/necessary for the project (this could be done by using the cause-specific hemoglobin shifts, but this process is not yet described in this document).
+The Vivarium modeling strategy for the anemia impairment will first rely
+on the {RISK_EXPOSURE_PAGE_LINK}. Vivarium simulants should first be
+assigned a hemoglobin value and then their anemia status can be evaluated
+by the hemoglobin thresholds shown on this page (thresholds are
+pregnancy-specific for women of reproductive age; see the pregnancy
+hemoglobin adjustment documentation on the {RISK_EXPOSURE_PAGE_LINK}. YLDs
+should be accrued according to the severity-specific disability weights
+listed in this document. Specific causes (or groups of causes, for
+example iron-responsive causes) of anemia can also be assigned to
+individual simulants if relevant/necessary for the project (this could
+be done by using the cause-specific hemoglobin shifts, but this process
+is not yet described in this document).
+
+.. todo::
+
+   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk
+   exposure page in the above note.
 
 Restrictions
 ++++++++++++
@@ -173,7 +189,7 @@ Prevalence of severity-specific anemia as calculated in the Vivarium simulation 
 References
 ----------
 
-.. [Kassebaum-et-al-2016]
+.. [Kassebaum-et-al-2016-anemia]
 
   View `Kassebaum et al. 2016`_
 

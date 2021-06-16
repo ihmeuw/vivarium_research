@@ -36,6 +36,8 @@ Vivarium Versus Other Types of Models
   - What can (and should) we use vivarium for? 
     - Versus decision tree or other types of models?
     - Different types of agent-based models
+
       - Strengths/weaknesses
       - Where does Vivarium fit in?
+
     - What differential equations underly these different types of models?

@@ -63,13 +63,13 @@ Vivarium CSU Breast Cancer Screening
 +-------+----------------------------+
 
 
-.. _1.0:
+.. _swbc1.0:
 
 1.0 Background
 ++++++++++++++
 
 
-.. _1.1:
+.. _swbc1.1:
 
 1.1 Project overview
 --------------------
@@ -85,7 +85,7 @@ The health insurance provider is interested in estimating the yearly number of d
   - add more project Background
   - Is the provider also interested in mortality/morb from breast cancer? if not, then we can delete the mortality/morb dag?
 
-.. _1.2:
+.. _swbc1.2:
 
 1.2 Literature review
 ---------------------
@@ -105,19 +105,19 @@ The health insurance provider is interested in estimating the yearly number of d
   - predictors of breast cancer screening
   - types of breast cancer screening 
 
-.. _2.0:
+.. _swbc2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
 To estimate the yearly number of cases of breast cancer detected under specific screening practices and the yearly number of deaths from undetected breast cancer (both in unit of per 100,000 insured person-years) in order to identify pay-out trends for critical insurance claims (CII).  
 
-.. _3.0:
+.. _swbc3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _swbc3.1:
 
 3.1 Causal diagram
 ------------------
@@ -148,19 +148,19 @@ To estimate the yearly number of cases of breast cancer detected under specific 
 
   - N/A
 
-.. _3.2:
+.. _swbc3.2:
 
 3.2 Effect sizes
 ----------------
 
-.. _4.0:
+.. _swbc4.0:
 
 4.0 Intervention
 ++++++++++++++++
 
 Scale-up of breast cancer screening coverage among insured population 
 
-.. _4.1:
+.. _swbc4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -194,24 +194,24 @@ Scale-up of breast cancer screening coverage among insured population
  - The target screening coverage is fixed to 75% based on UK setting. 
   
 
-.. _5.0:
+.. _swbc5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _swbc5.1:
 
 5.1 Vivarium concept model 
 --------------------------
 
 .. image:: viviarium_concept_model_vcm.svg
 
-.. _5.2:
+.. _swbc5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _swbc5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -221,7 +221,7 @@ Scale-up of breast cancer screening coverage among insured population
 * Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps. 
 * Currently assume the sim population buys insurance on the first day of sim start. This means no one has prior insurance and were paid out for their cancers before sim start. 
 
-.. _5.2.2:
+.. _swbc5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -258,21 +258,22 @@ file paths for 2019 forecast data:
  - Multiply acmr, csmr and incidence by 100,000 to get cases per 100,000 person-years.
  - See column **noised_forecast** for output value.  
 
-.. _5.3:
+.. _swbc5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _swbc5.3.1:
 
 5.3.1 Core breast cancer model 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 see :ref:`breast cancer model with stage 0<2017_cancer_model_breast_cancer_with_stage_0>`
 
-Click here to download notebook exploring the forecasted data .nc files: :download:`forecast data <sw breast cancer forecasted data.ipynb>`   
+Click here to download notebook exploring the forecasted data .nc files:
+`forecast data <sw breast cancer forecasted data.ipynb>`
 
-.. _5.3.2:
+.. _swbc5.3.2:
 
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -410,7 +411,7 @@ The date of the first screening appointment (T_appt) for females at age between 
 
 
 
-.. _5.3.3:
+.. _swbc5.3.3:
 
 5.3.3 Alternative screening scenarios model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -425,7 +426,7 @@ The date of the first screening appointment (T_appt) for females at age between 
 .. todo:: 
   -More work needs to be done to finalize a baseline screening uptake value. Right now the 30% comes from a 22.5% screening uptake in the general population by Bao et a 2018. We believe the insured population would have a higher screening uptake than the general population.     
 
-.. _5.3.4:
+.. _swbc5.3.4:
 
 5.3.4 Family history model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -501,7 +502,7 @@ We assume family history does not affect incidence rates from DCIS to breast can
 We assume family history does not affect incidence rates from LCIS to breast cancer among the DCIS population. The RR of breast cancer among those with family history vs. those without family history is 1. 
 
 
-.. _5.3.5:
+.. _swbc5.3.5:
 
 5.3.5 DCIS and LCIS treatment model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -585,7 +586,7 @@ We assume family history does not affect incidence rates from LCIS to breast can
 
 As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger proportion of simulants will have incidence :math:`i_{BC|DCIS{tx1}}` or :math:`i_{BC|LCIS{tx1}}`. 
 
-.. _5.4:
+.. _swbc5.4:
 
 5.4 Input Data Sources
 -----------------------
@@ -672,13 +673,13 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
      - Use normal distribution: **normal(mean=0.3, SD=0.003)**
 
 
-.. _5.5:
+.. _swbc5.5:
 
 5.5 Desired outputs
 -------------------
 
 
-.. _5.6:
+.. _swbc5.6:
 
 5.6 Output meta-table shell
 ---------------------------
@@ -689,7 +690,7 @@ As screening coverage increases, so does :math:`P_{tx1}`. Therefore, a larger pr
   any special stratifications?
 
 
-.. _5.7:
+.. _swbc5.7:
 
 5.7 Validation and verification
 -------------------------------
@@ -714,7 +715,7 @@ Compare prevalence and relative risk of family history from simulation to extrac
 
 After we adjust the treatment coverage for DCIS and LCIS to a value not equal to 100%, we should compare relative risk of treatment for DCIS yield from simulation to literature evidence, and also repeat the comparison for LCIS.  
 
-.. _6.0:
+.. _swbc6.0:
 
 6.0 Back-of-envelope calculations
 +++++++++++++++++++++++++++++++++
@@ -733,7 +734,7 @@ In 2040, the averted breast cancer deaths in China among female at all ages = 1.
   What would we expect for breast cancer detection rate at the end of simulation? 
 
 
-.. _7.0:
+.. _swbc7.0:
 
 7.0 Limitations
 +++++++++++++++

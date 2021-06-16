@@ -1,11 +1,11 @@
 .. _2017_risk_models:
 
-====================
+=========================
 Risk Correlation Proposal
-====================
+=========================
 
 Background and motivation
-----------------------
+-------------------------
 
 At the individual level, exposure to risk factors are likely to be correlated. Several examples include high body mass index and high fasting plasma glucose, tobacco smoking and alcohol use, and childhood height and weight. Vivarium takes population exposure prevalence estimates by age/sex/year/location and determines the if a simulant is exposed to the risk factor such that the prevalence within the simulation matches the GBD estimate. The exposure status for multiple risk factors of the individuals within Vivarium should be adjusted so that they are correlated across those risks.
 
@@ -77,7 +77,7 @@ We would like to test these two changes for exposures and attributable fractions
 Also in the BEP model, we would like to attempt creating correlated changes to propensity scores for stunting, underweight, and wasting within individuals over time. This would involve implementing multiple samples for these risk factors to determine propensity and risk exposure for each simulant. There would not be any changes to the attributable fractions for these risks, the only change would be in allowing these propensity values to change at defined time points, corresponding with GBD age groups. 
 
 Illustrative code example
------------------------
+-------------------------
 
 This file is a practical example and test of approaches to change the population attributable fraction (PAF) for risk factors in Vivarium such that they account for observed correlation in exposure between risks.
 ====================================================================================================================================================================================================================
@@ -485,13 +485,15 @@ principles as a double integral (below :math:`p_{e_1,e_2}` denotes the
 joint probability density of exposure level :math:`(e_1,e_2)` in the
 population:
 
-:raw-latex:`\begin{align*}
-i_{\text{GBD}} &= \int_{e_1} \int_{e_2} i_{e_1, e_2} p_{e_1,e_2} de_1 de_2\\
-&= \int_{e_1} \int_{e_2} i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
-p_{e_1,e_2} de_1 de_2\\
-&= \int_{e_1} \int_{e_2} \left(1-\text{PAF}\right) \cdot i_{\text{GBD}} \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
-p_{e_1,e_2} de_1 de_2\\
-\end{align*}`
+.. raw:: latex
+
+   \begin{align*}
+   i_{\text{GBD}} &= \int_{e_1} \int_{e_2} i_{e_1, e_2} p_{e_1,e_2} de_1 de_2\\
+   &= \int_{e_1} \int_{e_2} i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
+   p_{e_1,e_2} de_1 de_2\\
+   &= \int_{e_1} \int_{e_2} \left(1-\text{PAF}\right) \cdot i_{\text{GBD}} \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
+   p_{e_1,e_2} de_1 de_2\\
+   \end{align*}`
 
 Dividing through and cancelling terms yields a solution:
 
@@ -617,7 +619,7 @@ The approaches give nearly the same estimate of the combined PAF when
 the exposures are independent.
 
 Now we are making it a bit more complicated, sim some data for continuous exposures
----------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------
 
 We have made two pairs of random distributions with the same means and
 standard deviations. First, sim without correlation (nml_a, nml_b).

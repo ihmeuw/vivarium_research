@@ -1,6 +1,20 @@
 .. role:: underline
     :class: underline
 
+..
+  RST needs unique labels for its reference targets (the things you make with
+  ".. my_link_name:").  This document has several pre-defined reference target
+  templates you should do a find and replace on when you copy this document.
+  They are {YOUR_MODEL_TITLE} which you should replace with a title-case version
+  of your model name, {YOUR_MODEL_UNDERSCORE} which you should replace with an
+  underscore-separated all lowercase version of your model name, and
+  {YOUR_MODEL_SHORT_NAME} which you should replace with an abbreviation of your
+  model title.  For instance, if you were doing a model of severe acute malnutrition
+  for the Children's Investment Fund Foundation based on GBD 2019, we might have
+
+    YOUR_MODEL_TITLE = Vivarium CIFF Severe Acute Malnutrition
+    YOUR_MODEL_UNDERSCORE = 2019_concept_model_vivarium_ciff_sam
+    YOUR_MODEL_SHORT_NAME = ciff_sam
 
 ..
   Section title decorators for this document:
@@ -31,11 +45,13 @@
   And then add it to the list of decorators above.
 
 
-.. _concept_model_template:
 
-======================
-Concept model template
-======================
+
+.. _{YOUR_MODEL_UNDERSCORE}:
+
+==================
+{YOUR_MODEL_TITLE}
+==================
 
 .. contents::
   :local:
@@ -46,37 +62,37 @@ Concept model template
 |       |                            |
 +-------+----------------------------+
 
-.. _1.0:
+.. _{YOUR_MODEL_SHORT_NAME}1.0:
 
 1.0 Background
 ++++++++++++++
 
 
-.. _1.1:
+.. _{YOUR_MODEL_SHORT_NAME}1.1:
 
 1.1 Project overview
 --------------------
 
 
 
-.. _1.2:
+.. _{YOUR_MODEL_SHORT_NAME}1.2:
 
 1.2 Literature review
 ---------------------
 
 
-.. _2.0:
+.. _{YOUR_MODEL_SHORT_NAME}2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
 
-.. _3.0:
+.. _{YOUR_MODEL_SHORT_NAME}3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _{YOUR_MODEL_SHORT_NAME}3.1:
 
 3.1 Causal diagram
 ------------------
@@ -103,7 +119,7 @@ Concept model template
 **Mediators (M)**:
 
 
-.. _3.2:
+.. _{YOUR_MODEL_SHORT_NAME}3.2:
 
 3.2 Effect sizes
 ----------------
@@ -115,18 +131,18 @@ Concept model template
 
 
 
-.. _4.1:
+.. _{YOUR_MODEL_SHORT_NAME}4.1:
 
 4.1 Simulation scenarios
 ------------------------
 
 
-.. _5.0:
+.. _{YOUR_MODEL_SHORT_NAME}5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _{YOUR_MODEL_SHORT_NAME}5.1:
 
 5.1 Vivarium concept model 
 --------------------------
@@ -134,12 +150,12 @@ Concept model template
 .. note::
   This is our standard vivarium concept model diagram we are used to seeing
 
-.. _5.2:
+.. _{YOUR_MODEL_SHORT_NAME}5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _{YOUR_MODEL_SHORT_NAME}5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -152,14 +168,14 @@ Concept model template
   - stratifications 
 
 
-.. _5.2.2:
+.. _{YOUR_MODEL_SHORT_NAME}5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
-.. _5.3:
+.. _{YOUR_MODEL_SHORT_NAME}5.3:
 
 5.3 Models
 ----------
@@ -168,7 +184,7 @@ Concept model template
   here we use the compartmental (SEIR) models with squares
   
 
-.. _5.3.1:
+.. _{YOUR_MODEL_SHORT_NAME}5.3.1:
 
 5.3.1 Model 1
 ~~~~~~~~~~~~~
@@ -178,7 +194,7 @@ Concept model template
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _5.3.2:
+.. _{YOUR_MODEL_SHORT_NAME}5.3.2:
 
 5.3.2 Model 2
 ~~~~~~~~~~~~~
@@ -188,7 +204,7 @@ Concept model template
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _5.3.3:
+.. _{YOUR_MODEL_SHORT_NAME}5.3.3:
 
 5.3.3 Model 3
 ~~~~~~~~~~~~~
@@ -198,7 +214,7 @@ Concept model template
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _5.3.4:
+.. _{YOUR_MODEL_SHORT_NAME}5.3.4:
 
 5.3.4 Model 4
 ~~~~~~~~~~~~~
@@ -209,12 +225,12 @@ Concept model template
   - add python-style pseudo code to summarize model algorithm if necessary
 
 
-.. _5.4:
+.. _{YOUR_MODEL_SHORT_NAME}5.4:
 
 5.4 Desired outputs
 -------------------
 
-.. _5.5:
+.. _{YOUR_MODEL_SHORT_NAME}5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -222,13 +238,13 @@ Concept model template
 .. todo::
   - add special stratifications if necessary
 
-.. _6.0:
+.. _{YOUR_MODEL_SHORT_NAME}6.0:
 
 6.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
 
-.. _7.0:
+.. _{YOUR_MODEL_SHORT_NAME}7.0:
 
 7.0 Limitations
 +++++++++++++++
