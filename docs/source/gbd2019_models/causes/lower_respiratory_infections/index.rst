@@ -190,7 +190,7 @@ Data Description
    * - I
      - prevalence
      - incidence_rate_c322 * duration_mean
-     -
+     - Justification included below
    * - I
      - duration_mean
      - 3.5/365 if age_group=='Early Neonatal' else 10/365
