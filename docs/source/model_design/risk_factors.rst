@@ -265,27 +265,58 @@ given risk factor in a population (see `Population Attributable Fraction
 (PAF)`_). Other choices of counterfactual include the *plausible* minimum risk,
 *feasible* minimum risk, and *cost-effective* minimum risk, each of which can
 obviously depend on specific attributes of the population under consideration.
-On the other hand, Murray et al. state
-[Comparative-quantification-health-risks]_:
+On the other hand, Murray et al. state in
+[Comparative-quantification-health-risks-2003]_:
 
-  Biological principles as well as considerations of equity would necessitate
+  "Biological principles as well as considerations of equity would necessitate
   that, **although the exposure distribution for theoretical minimum risk may
   depend on age and sex, it should in general be independent of geographical
-  region or population.**
+  region or population.**"
 
-However, they go on to add:
+However, the authors go on to add:
 
-  Exceptions to this are however unavoidable. An example would be the case of
+  "Exceptions to this are however unavoidable. An example would be the case of
   alcohol consumption, which in limited quantities and certain patterns, has
   beneficial effects on cardiovascular mortality, but is always harmful for
   other diseases such as cancers and accidents. In this case, the composition of
   the causes of death as well as drinking patterns in a region would determine
-  the theoretical minimum distribution.
+  the theoretical minimum distribution."
 
-.. todo::
+.. note::
 
-  Is there an updated/better example of TMRED depending on population, since the
-  latest research says that that there is no safe amount of alcohol?
+  The above quote from [Comparative-quantification-health-risks-2003]_ is
+  included to illustrate the subtleties in conceptualizing the TMREL as
+  described by an original source advocating its use. **However, the description
+  of the beneficial effects of alcohol is outdated**, as the latest research
+  from `IHME <IHME alcohol study Lancet_>`_ and `Oxford <Oxford alcohol study
+  preprint_>`_ shows that there is `no safe level of alcohol consumption`_.
+
+  Based on more current research, here are some examples of risk factors with
+  TMRELs that may depend on geography or population:
+
+  - :ref:`Hemoglobin levels <2019_hemoglobin_anemia_and_iron_deficiency>` in
+    the blood increase at high altitude, so the TMREL for hemoglobin
+    concentration would be geography-dependent, with populations living at
+    higher altitudes having a higher TMREL than those living at lower altitudes.
+    GBD handles this situation not by explicitly defining different TMRELs, but
+    rather by using altitude-adjusted hemoglobin data to estimate anemia
+    prevalence.
+
+  - High :ref:`Body Mass Index (BMI) <2019_risk_bmi>` is associated with
+    increased risk of death in the general population, but it may be protective
+    agianst some cancers and other chronic diseases (this phenomenon is termed
+    the "`obseity paradox <obesity paradox cancer PubMed_>`_"). Thus, the
+    optimal BMI (for minimizing overall risk) in a given population may depend
+    on the leading causes of death or exposure to other risk factors in the
+    population.
+
+.. _IHME alcohol study Lancet: https://doi.org/10.1016/S0140-6736(18)31310-2
+
+.. _Oxford alcohol study preprint: https://www.medrxiv.org/content/10.1101/2021.05.10.21256931v1
+
+.. _no safe level of alcohol consumption: http://www.healthdata.org/news-release/new-scientific-study-no-safe-level-alcohol
+
+.. _obesity paradox cancer PubMed: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5830139/
 
 The smoking example `above <Theoretical Minimum Risk Exposure Level/Distribution
 (TMREL/D)_>`_ illustrates two features of the TMREL that are typical of many
@@ -920,7 +951,7 @@ References
   to selected major risks`. World Health Organization. 2009.
   https://www.who.int/healthinfo/global_burden_disease/global_health_risks/en/
 
-.. [Comparative-quantification-health-risks]
+.. [Comparative-quantification-health-risks-2003]
 
   Murray, C.J., Ezzati, M., Lopez, A.D. et al. Comparative quantification of
   health risks: Conceptual framework and methodological issues. :title:`Popul
