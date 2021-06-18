@@ -1,0 +1,7 @@
+﻿Parameter,OS HR,PFS HR,Exposed group,Percent exposed,Reference Group,Adjustment variables,Note
+Sex,1.8 (1.3 – 2.5),1.3 (1.04 – 1.6),Male,0.539,Female,"Age, not diff by race; confounding by renal function?",
+Age,2.2 (1.6 – 3.0),1.7 (1.4 – 2.1),65 +,0.647,<65,None,
+Race,1.7 (1.2 – 2.4),1.4 (1.1 – 1.8),Black,0.177,White,Age,Reallocated ‘Missing’ and are not incorporated additional race at this time.
+Cytogenetic risk |white,1.6 (1.1 – 2.1) wrong,1.2 (0.97 – 1.5) (wrong),1+ HRCA,0.704,0 HRCA,Age,
+Cytogenetic risk | black,1,1,,0.704,,,
+Renal function,1.9 (1.4 – 2.6),1.4 (1.1 – 1.7),<60,0.081,>60,"Age, no diff by race; may be confounded by sex, cytogenetic risk",
