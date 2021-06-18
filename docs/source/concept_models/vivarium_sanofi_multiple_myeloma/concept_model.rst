@@ -287,111 +287,67 @@ See :ref:`multiple myeloma cause model<2019_cancer_model_multiple_myeloma>`
 
 5.3.2 Risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~
-.. note::
 
- In our model, we are using survival hazard rates that are unadjusted for ASCT or treatment difference. Additionally, We are using rates that are adjusted for other covariates, listed below.
-  
-1.	Calculate the variables below using the following equations and table below.
+In this model, we implement risk exposures for simulants upon entry to the MM state of the multiple myeloma cause model. Simulants in the susceptible state will not have risk exposure values (aside from sex and age) or risk effects. The risk exposure and effects for the risks included in this model (sex, age, race, cytogenetic risk, renal impairment) are described below. 
 
-:math:`HR = h_exposed / h_unexposed (what we have from table below)`
+Risk Factor Exposure Initialization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-:math:`h_flatiron = p_exposed * h_exposed + (1- p_exposed) * h_unexposed (Braunlin gives us h_flatiron and p_exposed)`
+Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. Notably, age and sex are included in this table for use in calculations described later in this document, but they do not need to be assigned to a simulant upon initialization, as each simulant already has a value for age and sex. For now, we will assume that each of the attributes are independent of one another. 
 
-2.	Solve for h_exposed (e.g. hazard rate of males)
-3.	Use covariate-specific hazard rate to solve for hazard ratio of each covariate exposure relative to the overall flatiron hazard rate
+.. csv-table:: Risk Factor Exposure Distributions
+		:file: covariate_distribution.csv
+		:header-rows: 1
 
-:math:`HR_(desired) = h_covariate / h_flatiron`
+Risk Factor Effects
+^^^^^^^^^^^^^^^^^^^^
 
+The table below reports hazard ratios for overall survival and progression free survival for each covariate exposed group relative to the unexposed group. Notably, the effect of cytogenetic risk is modified by race exposure status. These hazard ratios are adjusted for age only. We chose hazard ratios unadjusted for treatment differences that we are not directly modeling (particularly ASCT) so that differences in prescribing practices by these risk exposures would be captured in these risk effects. However, these hazard ratios are *not* adjusted for each of the other risk factors that we are directly modeling aside from age, it is possible that these effects are confounded (for instance, the effect of sex on survival may be confounded by renal impairment). Since the joint distributions of these risk exposures are unknown, we are unaware of the direction that this potential bias may impact our model.
 
-.. todo::
-  Fill in the following table with ‘h_flatiron’ dataset that RT member Yongquan is working on.
+.. csv-table:: Risk Factor Hazard Ratios
+		:file: covariate_effects.csv
+		:header-rows: 1
 
-.. list-table:: PFS and OS HR relative to Flatiron (Braunlin et al. 2021)
-   :header-rows: 1
+Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution.
 
-   * - Attribute
-     - PFS HR relative to FLATIRON
-     - OS HR relative to FLATIRON
-   * - Female
-     - (just a single estimate without uncertainty for now)
-     - 
-   * - Male
-     - 
-     - 
-   * - High risk cytogenetic
-     - 
-     - 
-   * - Renal function
-     - 
-     - 
-   * - Black
-     - 
-     - 
-   * - White
-     - 
-     - 
-   * - Cytogenetic risk | white
-     - 
-     - 
-   * - Cytogenetic risk | black
-     - 
-     - 
+For implementation in the model, each dichotomous risk factor exposure level will need a PFS and OS hazard ratio relative to the time-varying baseline hazard rate, obtained from the multiple myeloma cause model (rather than the opposite risk factor exposure level as shown above). The following steps describe how to derive these hazard ratios and how to appropriately apply them to a simulant's baseline hazard.
 
+1.	For each covariate, calculate :math:`h_\text{exposed}` and :math:`h_\text{exposed}` using the equations below, a sampled value from the hazard ratio uncertainty distributions from the table above, and the exposure prevalence from the risk exposure section above. Do this separately for overall survival and progression free survival.
 
-4. 4.	Software engineers can implement simulant-specific hazard rates, using the following equation.
+:math:`HR = \frac{h_\text{exposed}}{h_\text{unexposed}}`
 
-:math:`h_simulant = h_flatiron * HR_sex * HR_race * HR_hrca * HR_kidney * HR_age`
+:math:`h_\text{baseline} = p_\text{exposed} * h_\text{exposed} + (1 - p_\text{exposed}) * h_\text{unexposed}`
 
-.. note::
+2.	Use covariate exposure level-specific hazard rate to solve for hazard ratio of each covariate exposure relative to the overall baseline hazard rate from the multiple myeloma cause model.
 
- In our model, for now, assume independence between all covariates. Use the table below (Braunlin et al. 2021) to assign covariate exposures to simulants upon diagnosis with MM according to exposure prevalence found in the literature.
+:math:`HR_\text{exposed or unexposed} = \frac{h_\text{exposed or unexposed}}{h_\text{baseline}}`
 
-Limitations
-~~~~~~~~~~~
+3. Apply the hazard ratios specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for PFS and OS, as shown in the equation below.
 
-Background mortality differences of race and kidney function are not considered here. Additionally, joint distributions are not currently considered. There is evidence that there is no correlation between race and other covariates from Derman et al. 2020, but we don’t know about the other variables.
+:math:`h_\text{simulant} = h_\text{baseline} * HR_\text{sex(i)} * HR_\text{age(i)}  * HR_\text{race(i)} * HR_\text{cytogenetic risk(i), conditional on race(i)} * HR_\text{renal impairment(i)}`
+
+Assumptions and Limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Background all cause mortality differences due to race and kidney function are not considered here. We may overestimate the prevalence of simulants with MM/RRMM who are Black and renally impaired, although we expect this overestimation to be small given that excess mortality due to MM is greater than excess mortality due to all other causes among MM patients.
 
 .. todo::
+
+		Investigate expected impact, especially with renal impairment through CVD.
+
+The assumption of independence between risk exposures in this model ignores the joint distribution of these risks. There is evidence that there is no significant correlation between race and other covariates from Derman et al. 2020, but we don’t know about the other variables. This could be improved with access to Flatiron microdata.
+
+We assume that the racial distribution of newly diagnosed MM patients does not vary by age or sex. 
+
+.. todo::
+
   Review literature to address how racial distribution of NDMM is modified by age/sex
 
+We do not consider how renal function exposure may change over time as a result of disease progression.
+
 .. todo::
+
   Check Mohty et al. 2019 for reference to consider how renal function changes over time
-
-.. todo::
-  Decide how do we initialize these characteristics into later lines of treatment, by incorporating a burn in period.
-
-.. todo::
-  Decide if/how to incorporate uncertainty, by either generated by RT or ask SEs.
-
-For now, we will calculate covariate HR at the mean level with just a single estimate without uncertainty for now.
-
-.. list-table:: Braunlin et al. 2021 table for covariates
-   :header-rows: 1
-
-   * - Parameter
-     - OS HR
-     - PFS HR
-     - Exposed group
-     - Percent exposed
-     - Percent exposed
-   * - Immunomodulatory agents
-     - IMiDs
-     - Thalidomide, lenalidomide, pomalidomide
-   * - Proteasome inhibitors
-     - PIs
-     - Bortezomib, carfilzomib, ixazomib, marizomib, oprozomib
-   * - Monoclonal antibodies
-     - MoABs
-     - isatuximab (anti-CD38), daratumumab (anti-CD38), MOR202 (anti-CD38), elotuzamab (anti-CS1/anti-SLAM7), denosumab (anti-RANKL), siltuximab (anti-IL6), IPH2101 (anti-KIR2DL1/2/3)
-   * - Corticosteroids
-     - 
-     - Dexamethasone, prednisone
-
-
-.. csv-table:: Table 2: Braunlin et al. 2021 table for covariates
-   :file: braunlin_covariate_table.csv
-   :widths: 20, 10, 10, 10, 10, 10, 10, 10
-   :header-rows: 1
 
 .. _mm5.3.3:
 
