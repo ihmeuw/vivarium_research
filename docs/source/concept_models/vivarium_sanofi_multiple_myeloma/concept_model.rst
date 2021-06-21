@@ -295,20 +295,100 @@ Risk Factor Exposure Initialization
 
 Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. Notably, age and sex are included in this table for use in calculations described later in this document, but they do not need to be assigned to a simulant upon initialization, as each simulant already has a value for age and sex. For now, we will assume that each of the attributes are independent of one another. 
 
-.. csv-table:: Risk Factor Exposure Distributions
-		:file: covariate_distribution.csv
-		:header-rows: 1
+.. list-table:: Risk Factor Exposure Distribution
+	:header-rows: 1
+
+   * - Parameter
+     - Exposed group
+     - Unexposed group
+     - Probability
+     - Note
+   * - Gender
+     - Male
+     - Female
+     - 0.539
+     - 
+   * - Age
+     - 65+ years
+     - <65 years
+     - 0.647
+     - 
+   * - Race
+     - Black
+     - White
+     - 0.177
+     - We reallocated missing observations assuming lack of non-response bias. Due to lack of risk effects data for racial groups other than Black and white, we treated Black as the exposed group and assumed all others were unexposed, as defined by our risk effects data (white)
+   * - Cytogenetic risk
+     - High
+     - Standard
+     - 0.872
+     - We reallocated missing observations assuming lack of non-response bias. High risk defined as the presence of at least one high risk cytogenetic abnormality.
+   * - Renal function
+     - Impaired
+     - Not impaired
+     - 0.081
+     - 
 
 Risk Factor Effects
 ^^^^^^^^^^^^^^^^^^^^
 
 The table below reports hazard ratios for overall survival and progression free survival for each covariate exposed group relative to the unexposed group. Notably, the effect of cytogenetic risk is modified by race exposure status. These hazard ratios are adjusted for age only. We chose hazard ratios unadjusted for treatment differences that we are not directly modeling (particularly ASCT) so that differences in prescribing practices by these risk exposures would be captured in these risk effects. However, these hazard ratios are *not* adjusted for each of the other risk factors that we are directly modeling aside from age, it is possible that these effects are confounded (for instance, the effect of sex on survival may be confounded by renal impairment). Since the joint distributions of these risk exposures are unknown, we are unaware of the direction that this potential bias may impact our model.
 
-.. csv-table:: Risk Factor Hazard Ratios
-		:file: covariate_effects.csv
-		:header-rows: 1
+.. list-table:: Risk Factor Exposure Distribution
+	:header-rows: 1
 
-Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution.
+   * - Parameter
+     - OS HR
+     - PFS HR
+     - Exposed group
+     - Unexposed group
+     - Adjustment variables
+     - Note
+   * - Sex
+     - 1.8 (1.3, 2.5)
+     - 1.3 (1.04, 1.6)
+     - Male
+     - Female
+     - Age
+     - No suspected confounding by race
+   * - Age
+     - 2.2 (1.6, 3.0)
+     - 1.7 (1.4, 2.1)
+     - 65+
+     - <65
+     - None
+     - No suspected confounding by race
+   * - Race
+     - 1.7 (1.2, 2.4)
+     - 1.4 (1.1, 1.8)
+     - Black
+     - White
+     - Age
+     - 
+   * - Cytogenetic risk | white
+     - 1.8 (1.3, 2.7)
+     - 1.3 (1.0, 1.6)
+     - High
+     - Standard
+     - Age
+     - Effect modified by race. High risk defined as the presence of at least one cytogenetic abnoramlity.
+   * - Cytogenetic risk | black
+     - 1
+     - 1
+     - High
+     - Standard
+     - Age
+     - Effect modified by race. High risk defined as the presence of at least one cytogenetic abnoramlity.
+   * - Renal function
+     - 1.9 (1.4, 2.6)
+     - 1.4 (1.1, 1.7)
+     - Impaired
+     - Not impaired
+     - Age
+     - Effect modified by race. Impairment defined as eGFR less than 60. No suspected confounding by race
+
+
+Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the Treatment Modeling Strategy section for instructions on how to sample from this distribution.
 
 For implementation in the model, each dichotomous risk factor exposure level will need a PFS and OS hazard ratio relative to the time-varying baseline hazard rate, obtained from the multiple myeloma cause model (rather than the opposite risk factor exposure level as shown above). The following steps describe how to derive these hazard ratios and how to appropriately apply them to a simulant's baseline hazard.
 
@@ -333,7 +413,7 @@ Background all cause mortality differences due to race and kidney function are n
 
 .. todo::
 
-		Investigate expected impact, especially with renal impairment through CVD.
+	Investigate expected impact, especially with renal impairment through CVD.
 
 The assumption of independence between risk exposures in this model ignores the joint distribution of these risks. There is evidence that there is no significant correlation between race and other covariates from Derman et al. 2020, but we don’t know about the other variables. This could be improved with access to Flatiron microdata.
 

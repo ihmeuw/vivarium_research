@@ -1,7 +1,0 @@
-Parameter,OS HR,PFS HR,Exposed group,Unexposed Group,Adjustment variables,Note
-Sex,1.8 (1.3 – 2.5),1.3 (1.04 – 1.6),Male,Female,Age,No suspected confounding by race
-Age,2.2 (1.6 – 3.0),1.7 (1.4 – 2.1),65 +,<65,None,No suspected confounding by race
-Race,1.7 (1.2 – 2.4),1.4 (1.1 – 1.8),Black,White,Age,
-Cytogenetic risk |white race,1.8 (1.3 - 2.7) ,1.3 (1.0 – 1.6),1+ HRCA,0 HRCA,Age,Effect modified by race. High risk defined as the presence of at least one cytogenetic abnoramlity.
-Cytogenetic risk | Black race,1,1,1+ HRCA,0 HRCA,Age,Effect modified by race. High risk defined as the presence of at least one cytogenetic abnoramlity.
-Renal function,1.9 (1.4 – 2.6),1.4 (1.1 – 1.7),Impaired,Not imapired,Age,Impairment defined as eGFR less than 60. No suspected confounding by race

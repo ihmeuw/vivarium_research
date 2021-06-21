@@ -1,6 +1,0 @@
-Parameter,Exposed Value,Unexposed Value,Probability of exposure,Note
-Gender,Male,Female,0.539,
-Age,65+ years,<65 years,0.647,
-Race,Black,White,0.177,"We reallocated missing observations assuming lack of non-response bias. Due to lack of risk effects data for racial groups other than Black and white, we treated Black as the exposed group and assumed all others were unexposed, as defined by our risk effects data (white)"
-Cytogenetic risk,High,Standard,0.872,We reallocated missing observations assuming lack of non-response bias. High risk defined as the presence of at least one high risk cytogenetic abnormality.
-Renal function,Impaired,Not impaired,0.081,
