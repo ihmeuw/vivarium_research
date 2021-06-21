@@ -911,10 +911,6 @@ Where,
 .. [Nijhof-et-al-2017]
 	Nijhof, Inger S., et al. "Current and new therapeutic strategies for relapsed and refractory multiple myeloma: an update." Drugs 78.1 (2018): 19-37.
 
-.. [Rajan-and-Rajkumar-et-al-2015]
-   Rajan AM, Rajkumar SV. Interpretation of cytogenetic results in multiple 
-   myeloma for clinical practice. Blood Cancer J 2015; 5: e365.
-
 .. [Rajkumar-and-Kumar-2020]
 	Rajkumar, S. Vincent, and Shaji Kumar. "Multiple myeloma current treatment algorithms." Blood cancer journal 10.9 (2020): 1-10.
 
