@@ -589,7 +589,13 @@ for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/
 find values from the literature with which to update this. Note that the below
 equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`.
 These are calculable from GBD data, but as these vary per age/sex category, we 
-leave them as variables here.
+leave them as variables here, noting that they are calculated as follows:
+
+.. math::
+
+   d_{cat 1&2}: acmr + sum([(emr_i*prev_i - cmsr_i) for i in diar,lri,msl]) + (emr_pem*1 - cmsr_pem)
+   d_{cat 3&4}: acmr + sum([(emr_i*prev_i - cmsr_i) for i in diar,lri,msl]) - (cmsr_pem)
+
 
 .. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
 
