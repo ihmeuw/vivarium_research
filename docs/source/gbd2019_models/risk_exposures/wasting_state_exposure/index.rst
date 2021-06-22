@@ -589,12 +589,50 @@ for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/
 find values from the literature with which to update this. Note that the below
 equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`.
 These are calculable from GBD data, but as these vary per age/sex category, we 
-leave them as variables here, noting that they are calculated as follows:
+leave them as variables here. Below we include equations for how these are calculated, and a link to a notebook implementing these equations.
 
 .. math::
 
    d_{cat 1&2}: acmr + sum([(emr_i*prev_i - cmsr_i) for i in diar,lri,msl]) + (emr_pem*1 - cmsr_pem)
    d_{cat 3&4}: acmr + sum([(emr_i*prev_i - cmsr_i) for i in diar,lri,msl]) - (cmsr_pem)
+
+Notebook: https://github.com/ihmeuw/vivarium_research_ciff/blob/main/wasting_transitions/2021_06_16_cat_specific_mortality.ipynb
+
+Our :math:`p` values are normalized to include our reincarnation pool (CAT 0), such 
+that all of our ps sum to one. We calcuate this as follows:
+
+.. code-block:: python
+
+  def set_ps(sex_id, age_group_id, time_step):
+    acmr = float(acmr_df.loc[(acmr_df.age_group_id==age_group_id) &
+                             (acmr_df.sex_id==sex_id)].val)
+    p0 = 1 - np.exp(-acmr*time_step/365)
+    Z = 1 + p0 #normalize prevalences of wasting exposures by reincarnation pool prev
+    
+    f1, f2, f3, f4 = set_fs(sex_id, age_group_id)
+
+    return p0, f1/Z, f2/Z, f3/Z, f4/Z
+
+ 	# pull acmr
+    acmr_df = go(
+        "cause", 
+        cause_id=294, #all causes
+        location_id=179,
+        metric_id=3, 
+        year_id=2019, 
+        age_group_id=[4,5], 
+        measure_id=1, 
+        sex_id=[1,2,3], 
+        gbd_round_id = 6,
+        decomp_step='step5',
+        version='latest',
+    )
+
+    acmr_df = acmr_df[
+        ['cause_id','cause_name','age_group_id',
+         'metric_name','sex_id','val','upper','lower']
+    ].sort_values(
+        ['metric_name','cause_id','cause_name','sex_id','age_group_id'])
 
 
 .. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
