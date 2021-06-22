@@ -634,9 +634,6 @@ that all of our ps sum to one. We calcuate this as follows:
     ].sort_values(
         ['metric_name','cause_id','cause_name','sex_id','age_group_id'])
 
-
-.. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
-
 Solving in terms of :math:`i_3`, we get:
 
 .. list-table:: Transition rates solved in terms of :math:`i_3`
