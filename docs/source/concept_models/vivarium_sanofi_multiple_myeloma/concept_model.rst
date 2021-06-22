@@ -290,6 +290,16 @@ See :ref:`multiple myeloma cause model<2019_cancer_model_multiple_myeloma>`
 
 In this model, we implement risk exposures for simulants upon entry to the MM state of the multiple myeloma cause model. Simulants in the susceptible state will not have risk exposure values (aside from sex and age) or risk effects. The risk exposure and effects for the risks included in this model (sex, age, race, cytogenetic risk, renal impairment) are described below. 
 
+.. note::
+
+  This risk factor model assigns race as an attribute upon diagnosis of multiple myeloma according to the racial distribution of newly diagnosed patients rather than tracking race as an attribute throughout the simulation and applying differential probability of MM incidence by race. This was done in order to avoid the complexities of modeling differential background mortality rates by race throughout our simulation.
+
+  However, a simulation output of interest is age-, sex-, and race-specific multiple myeloma incidence rates per person year in the general population for that demographic group. Because we do not track race-specific person time in the general population in our simulation, we will not be able to directly compute this measure from our simulation results.
+
+  Instead, we will calculate race-specific multiple myeloma incidence rates post-hoc using the multiple myeloma incidence rates from our simulation, the racial distribution of the US population (to be obtained from census/NHANES/other data sources), and the incidence rate ratio of multiple myeloma by racial groups. This will be performed as part of our simulation output processing rather than a feature built into the simulation.
+
+  More details will be forthcoming.
+
 .. _mm5.3.2.1:
 
 5.3.2.1 Risk Factor Exposure Initialization
