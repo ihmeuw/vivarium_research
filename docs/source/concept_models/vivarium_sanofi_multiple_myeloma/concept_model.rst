@@ -1,5 +1,4 @@
-
- - Stage 4: eGFR 15 to 30 ml/min/1.73m^2.. role:: underline
+.. role:: underline
     :class: underline
 
 
@@ -398,7 +397,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Age
     - Impairment defined as eGFR less than 60. No suspected confounding by race
 
-Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution. For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
+Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution. For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
 
 For implementation in the model, each dichotomous risk factor exposure level will need a PFS and OS hazard ratio relative to the time-varying baseline hazard rate, obtained from the multiple myeloma cause model (rather than the opposite risk factor exposure level as shown above). The following steps describe how to derive these hazard ratios and how to appropriately apply them to a simulant's baseline hazard.
 
@@ -477,8 +476,10 @@ We assume that the hazard ratios for PFS and OS among Black individuals relative
 5.3.3 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
 
-Research Background
-^^^^^^^^^^^^^^^^^^^^
+.. _mm5.3.3.1:
+
+5.3.3.1 Research Background
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Treatment guidelines for multiple myeloma are complex and varied. [Rajkumar-and-Kumar-2020]_ and [Nijhof-et-al-2017]_ published recent reviews on multiple myeloma treatment options and guidelines. Important classes of anti-myeloma drugs are summarized (non-exhaustively) below, according to [Nijhof-et-al-2017]_:
 
@@ -556,8 +557,10 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
      - High
      - VRd: bortezomib + lenalidomide + dexamethasone
 
-Treatment Modeling Strategy
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _mm5.3.3.2:
+
+5.3.3.2 Treatment Modeling Strategy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The treatment algorithm is described in this :download:`word document found here <treatment_algorithm.docx>`. We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
 
