@@ -137,6 +137,14 @@ RRMM incidence, RRMM progression, as well as the mortality from MM and RRMM. The
 inputs for this cause model come from GBD 2019 estimates, scientific literature, 
 and survival regression analysis supported by Flatiron data.
 
+Notably, the survival regression anlaysis supported by Flatiron data provides 
+data on the time to death *from any cause* among multiple myeloma patients and 
+does not present data on the time to death due to multiple myeloma, specifically.
+Therefore, the excess mortality defined in this document will be the only source 
+of mortality among simulants with multiple myeloma and excess mortality among
+simulants with multiple myeloma for "other causes," as typically defined by the 
+cause-deleted all-cause mortality rate, should be zero.
+
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
 
@@ -322,10 +330,51 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
    * - prevalence ratio of MM to RRMM
      - literature review
      - 
+   * - deaths_c486
+     - GBD 2019
+     - codcorrect, decomp step 5
+   * - population
+     - GBD 2019
+     - decomp step 4
+   * - csmr_c486
+     - GBD 2019
+     - deaths_c486 / population
 
+Multiple Myeloma Mortality Details
++++++++++++++++++++++++++++++++++++
 
-Estimate MM Prevalene by Disease Stage
-++++++++++++++++++++++++++++++++++++++
+As previously mentioned, the excess mortality rates defined in the tables above
+represent mortality rates represent *all-cause* mortality rates among patients 
+with multiple myeloma. For simplicity, in our simulation, deaths that occur among 
+simulants in any of the multiple myeloma cause model states other than susceptible
+should be recorded as deaths due to multiple myeloma. While deaths due to other
+causes are typically modeled in Vivarium cause models among simulants with a given
+cause, simulants in multiple myeloma cause model states other than the susceptible 
+state should have zero probability of death due to other causes. Simulants without
+multiple myeloma (in the susceptible cause model state) should die due to causes
+other than multiple myeloma ("other causes") at a rate equal to the multiple
+myeloma-deleted all cause mortality rate. Details are shown in the table below.
+
+.. list-table:: MM State-Stpecitfic Mortality Hazard Rates and Causes of Death
+   :header-rows: 1
+   
+   * - Cause model state
+     - Mortality hazard
+     - Probability of death due to multiple myeloma
+     - Probability of death due to other causes
+   * - S
+     - acmr - csmr_c486
+     - 0
+     - 1
+   * - All MM states
+     - state-specific EMR from state table data
+     - 1
+     - 0
+
+Notably, the multiple myeloma mortality rate used to model excess mortality among simulants with multiple myeloma is informed by Flatiron data and the multiple myeloma mortality rate to inform the multiple myeloma-deleted all cause mortality rate among simulants without multiple myeloma is informed by GBD. Mortality rates informed by Flatiron and GBD should be similar in order to accurately model all-cause mortality rates in our simulation; this should be evaluated in model verification and validation.
+
+Estimate MM Prevalence by Disease Stage
++++++++++++++++++++++++++++++++++++++++
 
 Burn-in method: current proposal is to assume the prevalence of MM from GBD 
 estimates evenly distributed across different stages of this disease. We let 
