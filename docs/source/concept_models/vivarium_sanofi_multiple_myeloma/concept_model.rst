@@ -574,11 +574,21 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
 
 The treatment algorithm is described in this :download:`word document found here <treatment_algorithm.docx>`. We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
 
+Notably, because retreatment with anti-CD38 monoclonal antibodies (daratumumab and isatuxamib) is a critical component of the effect of these drugs, we aim to model a "burn-in" period prior to the start of the official simulation timeframe (2021-2026) beginning at the first introduction of daratumumab as an anti-myeloma treatment in 2016. Modeling the scale-up of daratumumab and isatuxamib from this period will allow us to start our official simulation timeframe with the expected distribution of RRMM patients with prior anti-CD8 exposure in each RRMM state. A similar "burn-in" strategy was utilized to model the appropriate prevalence of each RRMM state in the multiple myeloma cause model, which is described in the :ref:`multiple myeloma cause model document <2019_cancer_model_multiple_myeloma>`.
+
 **How to assign treatment category to a simulant:**
 
 *Treatment Coverage Proportions*:
 
 The table below shows the treatment category coverage proportions for the isatuxamib- and daratumumab-containing categories in 2021 (Jan 1. 2021) and 2025 (Dec. 31 2025) in the baseline and alternative scenarios. The residual treatment category coverage proportion is not shown, but covers the remaining proportion of patients. We will assume that coverage of each treatment category changes *linearly* from the 2021 value to the 2025 for each line of treatment.
+
+For the burn-in period (both scenarios):
+
+- Assume that daratumumab-containing treatment category coverage begins at 0% for the second and later lines of treatment on Jan. 1, 2016 and scales up linearly to the line-specific coverage levels listed for 2021.
+
+- Assume that daratumumab-containing treatment category coverage for the first line of treatment begins at 0% on Jan. 1, 2019 and scales up linearly to the first line of treatment coverage level listed for 2021.
+
+- Assume that isatuxamib-containing treatment category coverage begins at 0% for the second and later lines of treatment on Jan. 1, 2020 and scales up linearly to the line-specific coverage levels listed for 2021.
 
 .. list-table:: Treatment category coverage proportions
    :header-rows: 1
@@ -639,9 +649,15 @@ The table below shows the treatment category coverage proportions for the isatux
      - 30.9%
      - 30.9%
 
-*Initialization*:
+*Burn-in period initialization*:
 
-	Each simulant initialized into a multiple myeloma state should be assigned to a treatment category. The probability of being assigned to a given category should be equal to the coverage for that category in 2021 that is specific to the line of treatment corresponding to the MM cause model state that the simulant occupies. We will assume that at initialization, no simulants in the isa/dara-containing treatment categories have been retreated with an anti-CD38 monoclonal antibody treatment.
+	Initialization should occur prior to the introduction of anti-CD38 monoclonal antibody treatments on Jan. 1, 2016. Each simulant should be initialized to the residual treatment category. Each simulant should be initialized to `retreated = False`. Initialization on Jan. 1, 2016 should include patients in all of the relapsed and refractory states, not only simulants in the newly diagnosed MM state.
+
+*Post-burn in period initialization*:
+
+  Each simulant initialized into a multiple myeloma state should be assigned to a treatment category. The probability of being assigned to a given category should be equal to the coverage for that category in 2021 that is specific to the line of treatment corresponding to the MM cause model state that the simulant occupies. 
+
+  Simulants should be assigned a retreatment status according to the retreated prevalence estimated from the burn-in period XXXX - more details.
 
 	If a simulant is assigned to the isatuxamib-containing treatment category or the daratumumab-containing treatment category, they should be assigned the attribute :code:`eligible_for_anticd38_retreatment = True`; otherwise, set :code:`eligible_for_anticd38_retreatment = NaN`.
 
