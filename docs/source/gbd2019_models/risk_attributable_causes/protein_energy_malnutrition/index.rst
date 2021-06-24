@@ -4,10 +4,6 @@
 Protein Energy Malnutrition
 ===========================
 
-Disease Description
--------------------
-
-
 GBD 2019 Modeling Strategy
 --------------------------
 
