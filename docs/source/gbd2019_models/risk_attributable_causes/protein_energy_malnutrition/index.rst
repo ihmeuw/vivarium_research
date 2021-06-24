@@ -18,10 +18,12 @@ estimates PEM mortality. Nonfatal PEM cases are modelled independently, using
 the case definition moderate and severe acute malnutrition, defined in terms of 
 weight-for-height Z-scores (WHZ). All PEM cases are attributed to the GBD Child 
 Growth Failure risk factor, which is not detailed here. We include specifics on 
-the PEM cause models below.
+the PEM cause models below. [GBD-2019-Capstone-Appendix-PEM]_
 
 
-GBD runs a parent CODEm model to estimate deaths attributable to nutritional deficiency, using vital registration and verbal autopsy data as inputs. The applicable ICD codes are as follows:
+GBD runs a parent CODEm model to estimate deaths attributable to nutritional 
+deficiency, using vital registration and verbal autopsy data as inputs. The 
+applicable ICD codes are as follows: [GBD-2019-Capstone-Appendix-PEM]_
 
 .. list-table:: PEM CoD ICD-10 Codes
   :widths: 10 20
@@ -48,12 +50,21 @@ GBD runs a parent CODEm model to estimate deaths attributable to nutritional def
   * - Garbage code
     - D50, D50.0 and D50.9 (unspecified anaemia)
 
-They then run (1) an under-5 PEM model, (2) a 5-and-over PEM model, and (3) an other nutritional deficiencies model. These models are scaled using CODCorrect to fit the parent nutriional deficiency model.
+They then run (1) an under-5 PEM model, (2) a 5-and-over PEM model, and (3) an 
+other nutritional deficiencies model. These models are scaled using CODCorrect 
+to fit the parent nutriional deficiency model. [GBD-2019-Capstone-Appendix-PEM]_
 
-Note that as PEM is defined as "a lack of dietary protein and/or energy", it includes famines and severe droughts. These result in discontinuities in PEM estimation, which the GBD team accounts for. The appendix specifically mentions using the Tombstone report to estimate deaths due to the famine during the Great Leap Forward in the 1960s in China.
+Note that as PEM is defined as "a lack of dietary protein and/or energy", it 
+includes famines and severe droughts. These result in discontinuities in PEM 
+estimation, which the GBD team accounts for. The appendix specifically mentions 
+using the Tombstone report to estimate deaths due to the famine during the Great 
+Leap Forward in the 1960s in China. [GBD-2019-Capstone-Appendix-PEM]_
 
 GBD's nonfatal PEM model takes as its case definition "moderate and severe acute 
-malnutrition", defined in terms of distance from the mean WHZ score given by the WHO 2006 growth standard for children. The relevant ICD 10 codes are E40-E46.9, E64.0, and ICD 9 codes are 260-263.9. PEM is partitioned into the following four sequelae:
+malnutrition", defined in terms of distance from the mean WHZ score given by the 
+WHO 2006 growth standard for children. The relevant ICD 10 codes are E40-E46.9, 
+E64.0, and ICD 9 codes are 260-263.9. PEM is partitioned into the following four 
+sequelae: [GBD-2019-Capstone-Appendix-PEM]_
 
 .. list-table:: Nonfatal PEM Sequelae
   :widths: 15 15
@@ -123,24 +134,31 @@ with nutrition experts. The current modelers (as of June 2021 no longer have
 documentation of these conversations, which took place sometime before 2015). 
 They used a remission rate of 0.25 - 1.25 (remitted cases of PEM per person-year 
 of illness). Note this is a rather wide interval that allowed DisMod to choose a 
-remission rate within the given bounds based on other input data.
+remission rate within the given bounds based on other input data. [GBD-2019-Capstone-Appendix-PEM]_
 
 From the all-age model, they then derived (1) a prevalence:incidence ratio that 
 was applied across all categories of non-fatal PEM, and (2) a moderate:severe 
-wasting ratio for both under and over 5.
+wasting ratio for both under and over 5. [GBD-2019-Capstone-Appendix-PEM]_
 
 .. todo::
   What do the modelers do with this mod:sev ratio? How do they get estimates for 5+?
 
 The modelers then assumed that there is zero prevalence of oedema in anyone over 
-5.
+5. [GBD-2019-Capstone-Appendix-PEM]_
 
 Additionally, they calculated the fraction of wasting attributable to severe 
 worm infestation and subtracted this out of all wasting, attributing the 
 remainder to PEM. They assumed no oedema due to worms, and the 
-prevalence:incidence ratio derived from the all-age PEM model.
+prevalence:incidence ratio derived from the all-age PEM model. [GBD-2019-Capstone-Appendix-PEM]_
 
-The modelers used child anthropometry data from health surveys, literature, and national reports, from which they estimated the WHZ SDs that correspond with the case definitions. They additionally used SMART datasets to estiamte the proportion under 5 with oedema. In the GBD 2019 Appendix, they note, "Future work in systematically evaluating longitudinal datasets on nutrition and growth failure will allow us to improve the empirical basis for PEM incidence estimates, including improved resolution for the component categories."
+The modelers used child anthropometry data from health surveys, literature, 
+and national reports, from which they estimated the WHZ SDs that correspond with 
+the case definitions. They additionally used SMART datasets to estiamte the 
+proportion under 5 with oedema. In the GBD 2019 Appendix, they note, "Future 
+work in systematically evaluating longitudinal datasets on nutrition and growth 
+failure will allow us to improve the empirical basis for PEM incidence 
+estimates, including improved resolution for the component 
+categories." [GBD-2019-Capstone-Appendix-PEM]_
 
 
 Protein Energy Malnutrition (PEM) in GBD 2019
@@ -228,3 +246,8 @@ Validation Criteria
 
 References
 ----------
+.. [GBD-2019-Capstone-Appendix-PEM]
+  Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
+  369 diseases and injuries in 204 countries and territories, 1990–2019: a 
+  systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
+  17 Oct 2020;396:1204-1222` 
