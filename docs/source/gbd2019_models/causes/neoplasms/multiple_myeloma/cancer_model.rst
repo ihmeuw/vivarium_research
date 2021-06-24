@@ -355,7 +355,7 @@ multiple myeloma (in the susceptible cause model state) should die due to causes
 other than multiple myeloma ("other causes") at a rate equal to the multiple
 myeloma-deleted all cause mortality rate. Details are shown in the table below.
 
-.. list-table:: MM State-Stpecitfic Mortality Hazard Rates and Causes of Death
+.. list-table:: MM State-Specitfic Mortality Hazard Rates and Causes of Death
    :header-rows: 1
    
    * - Cause model state
