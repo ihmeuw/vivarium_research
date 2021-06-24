@@ -63,7 +63,7 @@ E64.0, and ICD 9 codes are 260-263.9. PEM is partitioned into the following four
 sequelae: [GBD-2019-Capstone-Appendix-PEM]_
 
 .. list-table:: Nonfatal PEM Sequelae
-  :widths: 15 15
+  :widths: 10 15 15 15 
   :header-rows: 1
   
   * - Sequela Name
