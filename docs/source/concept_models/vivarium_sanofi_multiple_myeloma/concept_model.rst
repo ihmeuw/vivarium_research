@@ -661,7 +661,7 @@ For the burn-in period (both scenarios):
 
 *At each time step post-initialization (burn in and otherwise)*:
 
-  Simulants should have their treatment category exposure updated at each time-step for which they change multiple myeloma cause model states. Otherwise, their tretament exposures should not change. Simulants should be assigned treatment exposures in the following manner:
+  Simulants should have their treatment category exposure updated at each time-step for which they change multiple myeloma cause model states. Otherwise, their treatment exposures should not change. Simulants should be assigned treatment exposures in the following manner:
 
   For simulants with prior exposure to isa or dara:
 
