@@ -375,7 +375,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - 65+
     - <65
     - None
-    - No suspected confounding by race. Age exposure from Derman et al. is defined at diagnosis. We assume this applies to
+    - No suspected confounding by race. 
   * - Race
     - 1.7 (1.2, 2.4)
     - 1.4 (1.1, 1.8)
@@ -460,7 +460,7 @@ We assume that the racial distribution of newly diagnosed MM patients does not v
 
   Review literature to address how racial distribution of NDMM is modified by age/sex
 
-We assume that the risk effects of each of the risk factors we model are independent of one another with the exception of cytogenetic risk and race.
+We are limited in that the hazard ratios for our risk effects are adjusted for age only, so the effects of one risk factor in our model may be confounded by another. Since we lack information on the joint distributions of these risk exposures, we are unable to inform the direction this may bias our model. Additionally, we assume that the risk effects of each of the risk factors we model are independent of one another with the exception of cytogenetic risk and race.
 
 We are limited in that the hazard ratios obtained from [Derman-et-al-2020]_ were evaluated among newly diagnosed multiple myeloma patients and assessed using exposures assessed at baseline. We assume that these risk effects based on patients' baseline risk exposures do not vary with disease progression, which is particularly limited in the case of enal function, which may change over time.
 
