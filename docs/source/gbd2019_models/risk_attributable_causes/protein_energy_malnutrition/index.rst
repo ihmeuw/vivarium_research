@@ -26,6 +26,8 @@ Protein Energy Malnutrition (PEM) in GBD 2019
 Cause Hierarchy
 +++++++++++++++
 
+.. image:: pem_cause_hierarchy.svg
+
 Restrictions
 ++++++++++++
 
