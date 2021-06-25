@@ -640,7 +640,7 @@ For the burn-in period (both scenarios):
      - 53.7%
    * - 5+
      - Isatuxamib-containing
-     - 3.39%
+     - 3.3%
      - 7%
      - 7%
    * - 5+
