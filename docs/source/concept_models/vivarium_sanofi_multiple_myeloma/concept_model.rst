@@ -305,13 +305,11 @@ In this model, we implement risk exposures for simulants upon entry to the MM st
 5.3.2.1 Risk Factor Exposure Initialization
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. The probability of these exposures were obtained from Flatiron data reported by [Braunlin-et-al-2021]_. Notably, age and sex are included in this table for use in calculations described later in this document, but they do not need to be assigned to a simulant upon initialization, as each simulant already has a value for age and sex. For now, we will assume that each of the attributes are independent of one another. 
+Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. The probability of these exposures were obtained from Flatiron data reported by [Braunlin-et-al-2021]_. Notably, age and sex are included in this table for use in calculations described later in this document, but they do not need to be assigned to a simulant upon initialization, as each simulant already has a value for age and sex. However, **the age risk exposure should be operationalized as a dichotomous risk exposure of <65 or 65+ based on the simulant's age at the time they are initialized into or transition into the MM state.** For now, we will assume that each of the attributes are independent of one another and do not change over time. 
 
-Notably, we only have risk factor exposure distribution data among newly diagnosed patients. Due to the differential survival rates among the different risk exposure groups, we do not expect that the risk exposure distribution among relapsed and refractory multiple myeloma patients to be the same as among newly diagnosed patients. Due to our lack of data to inform risk exposure initialization probabilities among RRMM patients at the beginning of the simulation, we will model a "burn-in" period prior to the official time-frame of the simulation (2021-2026) in which all MM patients are initialized to the first MM state, allowing these risk exposure distributions to shift along with disease progression according to the risk effects described in the next section.
+Notably, we only have risk factor exposure distribution data among newly diagnosed patients. Due to the differential survival rates among the different risk exposure groups, we do not expect that the risk exposure distribution among relapsed and refractory multiple myeloma patients to be the same as among newly diagnosed patients. Due to our lack of data to inform risk exposure initialization probabilities among RRMM patients at the beginning of the simulation, we will model a "burn-in" period prior to the official time-frame of the simulation (2021-2026) in which all MM patients are initialized to the first MM state, allowing these risk exposure distributions to shift along with disease progression according to the risk effects described in the next section. Details are described in the :ref:`multiple myeloma cause model document<2019_cancer_model_multiple_myeloma>`. 
 
-.. todo::
-
-  Add more details on the burn-in period... to be expanded upon in the retreatment section
+After the initial 10 burn-in period run, prevalent risk exposure distributions for race, cytogenetic risk, and renal function should be recorded for each MM cause model state. In order to achieve this, person-time stratified by risk exposure and multiple myeloma cause model state is required as a simulation output. Given our assumpiton of independence of risk exposures, the prevalent risk exposure distributions should be evaluated at the population level; however, the age risk exposure distribution should be stratified by GBD 5 year-age group. For future runs in which a burn-in period is not run and simulants are initialized into RRMM states rather than solely the first MM state, simulants should be assigned with risk exposures for race/cytogenetic risk/renal function at diagnosis with probabilities corresponding to the recorded risk exposure distribution specific to the MM cause model state that the simulant is initialized into. 
 
 .. list-table:: Risk Factor Exposure Distribution
   :header-rows: 1
@@ -326,7 +324,7 @@ Notably, we only have risk factor exposure distribution data among newly diagnos
     - Female
     - 0.539
     - Exposure probability used for calculation of treatment effect only, not to be assigned to simulants
-  * - Age
+  * - Age at diagnosis
     - 65+ years
     - <65 years
     - 0.647
@@ -341,7 +339,7 @@ Notably, we only have risk factor exposure distribution data among newly diagnos
     - Standard
     - 0.872
     - We reallocated missing observations assuming lack of non-response bias. High risk defined as the presence of at least one high risk cytogenetic abnormality.
-  * - Renal function
+  * - Renal function at diagnosis
     - Impaired
     - Not impaired
     - 0.081
@@ -371,13 +369,13 @@ The table below reports hazard ratios for overall survival and progression free 
     - Female
     - Age
     - No suspected confounding by race
-  * - Age
+  * - Age at diagnosis
     - 2.2 (1.6, 3.0)
     - 1.7 (1.4, 2.1)
     - 65+
     - <65
     - None
-    - No suspected confounding by race
+    - No suspected confounding by race. Age exposure from Derman et al. is defined at diagnosis. We assume this applies to
   * - Race
     - 1.7 (1.2, 2.4)
     - 1.4 (1.1, 1.8)
@@ -399,7 +397,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Standard
     - Age
     - Effect modified by race. High risk defined as the presence of at least one cytogenetic abnormality.
-  * - Renal function
+  * - Renal function at diagnosis
     - 1.9 (1.4, 2.6)
     - 1.4 (1.1, 1.7)
     - Impaired
@@ -454,12 +452,6 @@ and
 5.3.2.3 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Background all cause mortality differences due to race and kidney function are not considered here. We may overestimate the prevalence of simulants with MM/RRMM who are Black and renally impaired, although we expect this overestimation to be small given that excess mortality due to MM is greater than excess mortality due to all other causes among MM patients.
-
-.. todo::
-
-    Investigate expected impact, especially with renal impairment through CVD.
-
 The assumption of independence between risk exposures in this model ignores the joint distribution of these risks. There is evidence that there is no significant correlation between race and other covariates from Derman et al. 2020, but we don’t know about the other variables. This could be improved with access to Flatiron microdata.
 
 We assume that the racial distribution of newly diagnosed MM patients does not vary by age or sex. 
@@ -468,18 +460,19 @@ We assume that the racial distribution of newly diagnosed MM patients does not v
 
   Review literature to address how racial distribution of NDMM is modified by age/sex
 
-We do not consider how renal function exposure may change over time as a result of disease progression.
+We assume that the risk effects of each of the risk factors we model are independent of one another with the exception of cytogenetic risk and race.
 
-.. todo::
+We are limited in that the hazard ratios obtained from [Derman-et-al-2020]_ were evaluated among newly diagnosed multiple myeloma patients and assessed using exposures assessed at baseline. We assume that these risk effects based on patients' baseline risk exposures do not vary with disease progression, which is particularly limited in the case of enal function, which may change over time.
 
-  Check Mohty et al. 2019 for reference to consider how renal function changes over time
+.. note::
 
-We assume that the hazard ratios for PFS and OS among Black individuals relative to white individuals reported in [Derman-et-al-2020]_ is similar to those among Black individuals relative to non-Black individuals. We make this assumption in the absence of reported hazard ratios adjusted for treatment for additional racial groups. Additionally, we assume that the effect of cytogenetic risk on PFS and OS among white individuals is similar to that among non-Black individuals. While the majority of the non-Black population in the US is white, this remains a limitation of our analysis that could potentially be address through access to Flatiron microdata.
+  For model validation, compare the change in renal function risk exposure by line of treatment to that reported in [Mohty-et-al-2019]_ to evaluate the potential impact of this limitation. Use the age distribution at death by line of treatment in [Mohty-et-al-2019]_ for an additional validation step.
+
+We assume that the hazard ratios for PFS and OS among Black individuals relative to white individuals reported in [Derman-et-al-2020]_ is similar to those among Black individuals relative to non-Black individuals. We make this assumption in the absence of reported hazard ratios adjusted for treatment for additional racial groups. Additionally, we assume that the effect of cytogenetic risk on PFS and OS among white individuals is similar to that among non-Black individuals. While [Derman-et-al-2020]_ did include the patients who reported being Hispanic/Latino in the white category and the majority of the non-Black population in the US is white, this remains a limitation of our analysis that could potentially be address through access to Flatiron microdata.
 
 .. note::
 
   Previous information on cytogenetic risk and renal function was removed from the risk factors section, but a record of this information remains in https://github.com/ihmeuw/vivarium_research/pull/516
-
 
 .. _mm5.3.3:
 
@@ -963,6 +956,9 @@ Where,
 
 .. [Jagannath-et-al-2016]
 	Jagannath, Sundar, et al. "Real-world treatment patterns and associated progression-free survival in relapsed/refractory multiple myeloma among US community oncology practices." Expert review of hematology 9.7 (2016): 707-717.
+
+.. [Mohty-et-al-2019]
+  Mohty, M., Cavo, M., Fink, L., Gonzalez‐McQuire, S., Leleu, H., Mateos, M. V., ... & Yong, K. (2019). Understanding mortality in multiple myeloma: Findings of a European retrospective chart review. European journal of haematology, 103(2), 107-115.
 
 .. [Moreau-et-al-2019]
 	Moreau P, Dimopoulos MA, Yong K, Mikhael J, Risse ML, Asset G, Martin T. Isatuximab plus carfilzomib/dexamethasone versus carfilzomib/dexamethasone in patients with relapsed/refractory multiple myeloma: IKEMA Phase III study design. Future Oncol. 2020 Jan;16(2):4347-4358. doi: 10.2217/fon-2019-0431. Epub 2019 Dec 13. PMID: 31833394.
