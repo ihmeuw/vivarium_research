@@ -31,7 +31,7 @@
 
 
 
-.. _2019_risk_exposure_child_stunting:
+.. _2020_risk_exposure_child_stunting:
 
 ==============
 Child stunting
@@ -125,7 +125,7 @@ We also take the microdata sources and fit ensemble distributions to the shapes 
   
   Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores between -4 and +4, we will be excluding a lot of kids.
 
-  In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right now, he presents the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
+  In the paper that Ryan Fitzgeral (GBD 2020 modeller for CGF and LWBSG) is working on right now, he presents the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
 
 
 
@@ -331,6 +331,8 @@ Validation Criteria
 
 1. age, sex distribution of stunting prevalence categories matches GBD 2020
 2. age, sex, mean z-scores matches GBD 2020
+3. correlation between stunting and wasting matches GBD 2020
+4. RRs for cause incidence matches GBD 2020
 
 
 ..  todo::
