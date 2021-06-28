@@ -84,7 +84,7 @@ Risk Exposures Description in GBD
 Case definition
 ---------------
 
-Stunting, a sub-compoonent indicator of child growth failure (CGF), is based on a categorical definition using the WHO 2006 growth standards for children 0-59 months. Definitions are based on Z-cores from the growth standards, which were derived from an international reference population. Mild, moderate and severe categorical prevalences were estimated for each of the three indicators. Theoretical minimum risk exposure level (TMREL) for stunting was assigned to be greater than or equal to one standard deviation below the mean (-1 SD) of the WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
+Stunting, a sub-component indicator of child growth failure (CGF), is based on a categorical definition using the WHO 2006 growth standards for children 0-59 months. Definitions are based on Z-cores from the growth standards, which were derived from an international reference population. Mild, moderate and severe categorical prevalences were estimated for each of the three indicators. Theoretical minimum risk exposure level (TMREL) for stunting was assigned to be greater than or equal to one standard deviation below the mean (-1 SD) of the WHO 2006 standard **height-for-age (HAZ)** z-score curve. This has not changed since GBD 2010.
 
 +----------------------------------------------+
 | Stunting category definition (range -7 to +7)|
@@ -334,4 +334,7 @@ Validation Criteria
 
 
 ..  todo::
-  Fill i
+  Fill in directives for this section
+
+References
+----------
