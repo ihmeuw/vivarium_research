@@ -53,6 +53,11 @@ Tried and tested models for diseases, risks, and interventions from the 2017 Glo
 
 Tried and tested models for disease, risks, and interventions from the 2019 Global Burden of Disease Study.
 
+:ref:`Existing Models for GBD 2019 <2020_models>`
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tried and tested models for disease, risks, and interventions from the 2020 Global Burden of Disease Study.
+
 Contributing
 ------------
 
