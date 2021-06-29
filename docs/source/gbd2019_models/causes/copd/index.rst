@@ -267,8 +267,8 @@ Data Sources
      - 
    * - sequelae
      - sequelae definition
-     - {s929, s421, s422, s983, s5774, s980, s981, s982}
-     - Includes HF due to severe COPD sequelae
+     - {s929, s421, s422, s983}
+     - 
 
 Validation Criteria
 +++++++++++++++++++
