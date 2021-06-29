@@ -291,18 +291,20 @@ Data Description Tables
 
 The following code can be used to access draw-level exposure data for the child_stunting risk factor, after additionally specifying desired location, age_group, and sex IDs. Exposure category cat 1,2,3 is severe, moderate and mild and exposure category cat4 is the TMREL.
 
+The following code can be used to access the category prevalences (2020).
+
 .. code-block:: python
 
-  get_draws(gbd_id_type='rei_id',
+ get_draws(gbd_id_type='rei_id',
     gbd_id=241,
     source='exposure',
-    year_id=2019,
-    gbd_round_id=6,
+    year_id=2020,
+    gbd_round_id=7,
     status='best',
     location_id = [179],
-    decomp_step ='step4')
+    decomp_step = 'iterative')
 
-The following code can be used to access the summary-exposure value.
+The following code can be used to access the summary-exposure value (2019).
 
 .. code-block:: python
   
