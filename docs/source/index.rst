@@ -71,5 +71,6 @@ To get started adding new documentation, check out our
    intervention_models/index
    gbd2017_models/index
    gbd2019_models/index
+   gbd2020_models/index
    contributing
    glossary

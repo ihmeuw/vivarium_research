@@ -12,5 +12,4 @@ Risk Exposure Models
    :maxdepth: 1
    :glob:
 
-   *
    */index
