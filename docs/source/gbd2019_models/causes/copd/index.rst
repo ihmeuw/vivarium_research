@@ -87,7 +87,7 @@ Vital registration and surveillance data were included in a standard CODEm model
 Cause Hierarchy
 +++++++++++++++
 
-.. image:: cause_hierarchy_copd.svg
+.. image:: cause_hierarchy_copd_NO_HF.svg
 
 Restrictions
 ++++++++++++
