@@ -1,8 +1,8 @@
 .. _2019_cause_diabetes:
 
-=================
-Diabetes Mellitus
-=================
+=====================================
+Diabetes Mellitus (PAF of 1 with FPG)
+=====================================
 
 .. contents::
    :local:
