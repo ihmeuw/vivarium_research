@@ -599,7 +599,7 @@ in terms of the following variables:
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
    * - :math:`duration\_cat_i`
      - Average duration of :math:`cat_i`
-     -
+     - (!temporary) cat_1:60 days, cat2:80 days, cat3:365 days
      -
 
 
@@ -640,7 +640,11 @@ in terms of the following variables:
 
 We now detail how the above wasting rate transition equations were derived.
 
-As in the previous section, we then solve our transition probabilities using a 
+.. todo::
+  Consider adding all code for calculating above eqns.
+
+
+As in the previous section, we solve our transition probabilities using a 
 Markov Chain transition matrix **T**. 
 
 T = 
