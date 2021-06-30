@@ -503,13 +503,11 @@ The code used to solve this system of equations is here:
 Finite state machine 1x4 + death
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. image:: wasting_state_1x4_plus_death.svg
-
 In the above section we calculated the transition probabilities assuming that 
 all simulants exist in one of the four wasting categories. The transition 
 probabilities are thus incorrect, because simulants never die. In reality, we 
 expect children to age into the four wasting categories, and to die out of SAM 
-at a higher rate than out of MAM or not-wasted. Thus in the above model, we 
+at a higher rate than out of MAM, mild wasting, or the TMREL. Thus in the above model, we 
 expect simulants who ought to be dying to instead be remitting to MAM.
 
 Here we correct this by allowing simulants to die into **CAT 0** at differential 
@@ -518,14 +516,135 @@ over time, we allow sims to age in to the four wasting categories out of
 **CAT 0**, our "reincarnation pool". We then set the transition probabilies 
 :math:`f_i` equal to the prevalence of the four wasting categories.
 
-It is important here to note first that *f_i* don't represent fertility rates, 
+.. image:: wasting_state_1x4_plus_death.svg
+
+It is important here to note first that :math:`f_i` don't represent fertility rates, 
 but rather that we only allow enough sims to age in each timestep necessary to 
 replenish those that died. Second, we emphasize that we utilize this method in 
 order to calculate transition rates between the different wasting categories. 
 However, the final Vivarium model of wasting will not include a reincarnation 
 pool.
 
-As in the previous section, we then solve our transition probabilities using a 
+Here we include equations for the transition probabilities, and in the section 
+that follows we will detail how to calculate all the variables used
+
+.. list-table:: Wasting transition rate equations
+   :widths: 5 15 20
+   :header-rows: 1
+
+   * - Variable
+     - Equation
+     - Description
+   * - s1
+     - (dur_cat1 - 1)/dur_cat1
+     - Rate of remaining in cat1 (SAM)
+   * - s2
+     - (dur_cat2 - 1)/dur_cat2
+     - Rate of remaining in cat2 (MAM)
+   * - s3
+     - (dur_cat3 - 1)/dur_cat3
+     - Rate of remaining in cat3 (Mild wasting)
+   * - s4
+     - -ap0*f2/ap4 - ap0*f4/ap4 - ap2*d2/ap4 - d4 + (ap0*dur_cat1*dur_cat2*dur_cat3 - ap1*dur_cat2*dur_cat3 + ap2*dur_cat1*dur_cat3 - ap3*dur_cat1*dur_cat2 + ap4*dur_cat1*dur_cat2*dur_cat3)/(ap4*dur_cat1*dur_cat2*dur_cat3)
+     - Rate of remaining in cat4 (wasting TMREL)
+   * - r2
+     - ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0*dur_cat1 + ap1)/(ap1*dur_cat1)
+     - Remission rate into cat2 (MAM)
+   * - r3
+     - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - d2 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap2*dur_cat1*dur_cat2)
+     - Remission rate into cat3 (Mild wasting)
+   * - r4
+     - ap0*f2/ap3 + ap2*d2/ap3 + ap4*d4/ap3 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap3*dur_cat1*dur_cat2*dur_cat3)
+     - Remission rate into cat4 (wasting TMREL)
+   * - i1
+     - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + (-ap0*dur_cat1 + ap1)/(ap2*dur_cat1)
+     - Incidence rate into cat1 (SAM)
+   * - i2
+     - -ap0*f2/ap3 - ap2*d2/ap3 - d3 - ap4*d4/ap3 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap3*dur_cat1*dur_cat2)
+     - Incidence rate into cat2 (MAM)
+   * - i3
+     - ap0*f2/ap4 + ap0*f4/ap4 + ap2*d2/ap4 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap4*dur_cat1*dur_cat2*dur_cat3)
+     - Incidence rate into cat3 (Mild wasting)
+
+
+in terms of the following variables:
+
+.. list-table:: Variables for transition probabilities
+   :widths: 10 10 10 10
+   :header-rows: 1
+
+   * - Variable
+     - Description
+     - Equation
+     - Notes
+   * - :math:`d_i` for :math:`i\in \{1,2\}`
+     - Death rate out of MAM (cat 2) or SAM (cat 1)
+     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})` :math:`+ emr_{pem}*1 - csmr_{pem}`
+     - 
+   * - :math:`d_i` for :math:`i\in \{3,4\}`
+     - Death rate out of Mild wasting (cat 3) or wasting TMREL (cat 4)
+     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})`
+     -
+   * - :math:`f_i`
+     - "Age-in" rate into :math:`cat_i`
+     - Prevalence of wasting category i, pulled from GBD
+     - These rates were chosen to maintain equilibrium of our system
+   * - :math:`ap_0`
+     - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
+     - 1 - exp(-acmr * 1 / 365)
+     - We set this equal to the number of simulants that die each time step
+   * - :math:`ap_i` for :math:`i\in \{1,2,3,4\}`
+     - Adjusted prevalence of :math:`cat_i`
+     - :math:`f_i/(ap_0 + 1)`
+     - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
+   * - :math:`duration\_cat_i`
+     - Average duration of :math:`cat_i`
+     - (!temporary) cat_1:60 days, cat2:80 days, cat3:365 days
+     -
+
+
+.. list-table:: Calculations for variables in transition equations
+   :widths: 6 10 10
+   :header-rows: 1
+
+   * - Variable
+     - Description
+     - Equation
+   * - :math:`prevalence_{ci}`
+     - The prevalence of cause c among wasting category i
+     - :math:`incidence_{ci} * duration_c`
+   * - :math:`duration_c`
+     - The average duration of cause c
+     - 10 days (for measles, diarrhea, and lri)
+   * - :math:`incidence_{ci}`
+     - incidence rate of cause c among wasting category i
+     - :math:`incidence_{c}*(1-paf_{c})*rr_{ci}`
+   * - :math:`incidence_c`
+     - population-level incidence rate of cause c 
+     - Pulled from GBD
+   * - :math:`paf_{c}`
+     - The PAF of cause c attributable to wasting
+     - :math:`\frac{(\sum_{i} prevalence_{i} * rr_{ci})-1}{\sum_{i} prevalence_{i} * rr_{ci}}`
+   * - :math:`rr_{ci}`
+     - The relative risk for incidence of cause c given wasting category i
+     -
+   * - :math:`prevalence_{i}`
+     - the prevalence of wasting category i 
+     - Pulled from GBD
+   * - :math:`acmr`
+     - All-cause mortality rate
+     - Pulled from GBD
+   * - :math:`emr_c`
+     - Excess mortality rate of cause c
+     - Pulled from GBD
+
+We now detail how the above wasting rate transition equations were derived.
+
+.. todo::
+  Consider adding all code for calculating above eqns.
+
+
+As in the previous section, we solve our transition probabilities using a 
 Markov Chain transition matrix **T**. 
 
 T = 
@@ -550,11 +669,11 @@ T =
 
 Solving a)
 
-  1)  :math:`p_4s_4 + p_3r_4 + p_0f_4 = p_4` 
-  2)  :math:`p_4i_3 + p_3s_3 + p_2r_3 + p_0f_3 = p_3`
-  3)  :math:`p_3i_2 + p_2s_2 + p_1r_2 + p_0f_2 = p_2`
-  4)  :math:`p_2i_1 + p_1s_1 + p_0f_1 = p_1`
-  5)  :math:`p_4d_4 + p_3d_3 + p_2d_2 + p_1d_1=p_0`
+  1)  :math:`ap_4s_4 + ap_3r_4 + ap_0f_4 = ap_4` 
+  2)  :math:`ap_4i_3 + ap_3s_3 + ap_2r_3 + ap_0f_3 = ap_3`
+  3)  :math:`ap_3i_2 + ap_2s_2 + ap_1r_2 + ap_0f_2 = ap_2`
+  4)  :math:`ap_2i_1 + ap_1s_1 + ap_0f_1 = ap_1`
+  5)  :math:`ap_4d_4 + ap_3d_3 + ap_2d_2 + ap_1d_1=ap_0`
 
 Rows of the P matrix sums to 1
 
@@ -566,15 +685,15 @@ Rows of the P matrix sums to 1
 
 We have duration of treated and untreated sam and mam as well as coverage from the literature :   
 
-  11) :math:`r_2 + d_1 = 1/Dsam`
-  12) :math:`r_3 + i_1 + d_2 = 1/Dmam`
-  13) :math:`i_2 + r_4 + d_3 = 1/dur\_cat3`
+  11) :math:`r_2 + d_1 = 1/duration\_cat_1`
+  12) :math:`r_3 + i_1 + d_2 = 1/duration\_cat_2`
+  13) :math:`i_2 + r_4 + d_3 = 1/duration\_cat_3`
 
 where
 
  - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
  - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
- - Duration of cat 3: :math:`1 / (i_2 + r_4)`. We still need more values from the literature to solve for this.
+ - Duration of cat 3: :math:`1 / (i_2 + r_4)`. ~ 365 days (will refine)
  - tx is treated
  - ux is untreated
  - C is treatment coverage proportion
@@ -583,83 +702,6 @@ where
 .. todo::
     Check with Chris Troeger about the duration of cat3. Also see if Gates 
     Foundation has a way to calculate this from their KI database.
-
-We solve this system of equations in terms of :math:`p_1,p_2,p_3,p_4` and one unknown;
-for now, this unknown is :math:`dur\_cat3`, which we will assume to be :math:`1/365` until we
-find values from the literature with which to update this. Note that the below
-equations also contain unknowns for :math:`d_1, d_2, d_3, d_4, f_1, f_2, f_3, f_4, p_0`.
-These are calculable from GBD data, but as these vary per age/sex category, we 
-leave them as variables here.
-
-.. todo:: fill in the :math:`f_i` and :math:`d_i` vars with values/eqns
-
-Solving in terms of :math:`i_3`, we get:
-
-.. list-table:: Transition rates solved in terms of :math:`i_3`
-   :widths: 10 25
-   :header-rows: 1
-
-   * - Variable
-     - Value
-   * - s1
-     - 0.975
-   * - s2
-     - 0.985714285714286
-   * - s3
-     - d2*p2/p3 + f2*p0/p3 + f4*p0/p3 - i3*p4/p3 + 0.00357142857142857*(7.0*p1 - 4.0*p2 + 280.0*p3 - 280.0*p0)/p3
-   * - s4
-     - -d4 - i3 + 1.0
-   * - r2
-     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*p0)/p1
-   * - r3
-     - -d2 - f2*p0/p2 - f3*p0/p2 - f4*p0/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p2
-   * - r4
-     - d4*p4/p3 - f4*p0/p3 + i3*p4/p3
-   * - i1
-     - f2*p0/p2 + f3*p0/p2 + f4*p0/p2 + 0.025*(p1 - 40.0*p0)/p2
-   * - i2
-     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*p0/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p3
-   * - d1
-     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + p0/p1
-   * - f1
-     - -f2 - f3 - f4 + 1.0
-
-
-Solving in terms of :math:`dur\_cat3`, we get:
-
-.. list-table:: Transition rates solved in terms of :math:`dur\_cat3`
-   :widths: 10 25
-   :header-rows: 1
-
-   * - Variable
-     - Value
-   * - s1
-     - 0.975
-   * - s2
-     - 0.985714285714286
-   * - s3
-     - (dur_cat3 - 1.0)/dur_cat3
-   * - s4
-     - -d2*p2/p4 - d4 - f2*p0/p4 - f4*p0/p4 + 0.00357142857142857*(-7.0*dur_cat3*p1 + 4.0*dur_cat3*p2 + 280.0*dur_cat3*p4 + 280.0*dur_cat3*p0 - 280.0*p3)/(dur_cat3*p4)
-   * - r2
-     - d2*p2/p1 + d3*p3/p1 + d4*p4/p1 + 0.025*(p1 - 40.0*p0)/p1
-   * - r3
-     - -d2 - f2*p0/p2 - f3*p0/p2 - f4*p0/p2 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p2
-   * - r4
-     - d2*p2/p3 + d4*p4/p3 + f2*p0/p3 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*p0 + 280.0*p3)/(dur_cat3*p3)
-   * - i1
-     - f2*p0/p2 + f3*p0/p2 + f4*p0/p2 + 0.025*(p1 - 40.0*p0)/p2
-   * - i2
-     - -d2*p2/p3 - d3 - d4*p4/p3 - f2*p0/p3 + 0.00357142857142857*(-7.0*p1 + 4.0*p2 + 280.0*p0)/p3
-   * - i3
-     - d2*p2/p4 + f2*p0/p4 + f4*p0/p4 + 0.00357142857142857*(7.0*dur_cat3*p1 - 4.0*dur_cat3*p2 - 280.0*dur_cat3*p0 + 280.0*p3)/(dur_cat3*p4)
-   * - d1
-     - -d2*p2/p1 - d3*p3/p1 - d4*p4/p1 + p0/p1
-   * - f1
-     - -f2 - f3 - f4 + 1.0
-
-
-The code used to solve this system of equations is here:
 
 .. code-block:: python
 
@@ -672,12 +714,14 @@ The code used to solve this system of equations is here:
   r4, s3, i2 = symbols('r4 s3 i2')
   r3, s2, i1 = symbols('r3 s2 i1')
   r2, s1 = symbols('r2 s1')
-  d4, d3, d2, d1, sld = symbols('d4 d3 d2 d1 sld')
+  d4, d3, d2, d1 = symbols('d4 d3 d2 d1')
   f4, f3, f2, f1 = symbols('f4 f3 f2 f1')
 
-  p4, p3, p2, p1, p0 = symbols('p4 p3 p2 p1 p0')
+  ap4, ap3, ap2, ap1, ap0 = symbols('ap4 ap3 ap2 ap1 ap0')
 
-  dur_cat3 = sym.Symbol('dur_cat3')  
+  acmr = sym.Symbol('acmr')
+
+  dur_cat1, dur_cat2, dur_cat3, dur_cat4 = symbols('dur_cat1 dur_cat2 dur_cat3 dur_cat4')
 
   unknowns = [s1,s2,s3,s4,r2,r3,r4,i1,i2,i3,d1,d2,d3,d4,f1,f2,f3,f4]
 
@@ -728,14 +772,15 @@ The code used to solve this system of equations is here:
 
 
   # # adding durations of states
-  # r2 + d1 = 1/Dsam = 1/40
-  eq11 = [{r2:1, d1:1}, 1/40]
+  # r2 + d1 = 1/Dsam
+  eq11 = [{r2:1, d1:1}, (1/dur_cat1)]
 
-  # r3 + i1 + d2 = 1/Dmam = 1/70
-  eq12 = [{r3:1, i1:1, d2:1}, 1/70]
+  # r3 + i1 + d2 = 1/Dmam
+  eq12 = [{r3:1, i1:1, d2:1}, (1/dur_cat2)]
 
-  # i2 + r4 + d3 = 1/dur_cat3 = currently unknown
-  eq13 = [{i2:1, r4:1, d3:1}, 1/dur_cat3]
+  # r4 + i2 + d3 = 1/Dmild
+  eq13 = [{r4:1, i2:1, d3:1}, 1/dur_cat3]
+
 
   def build_matrix(eqns, unknowns):
     """
