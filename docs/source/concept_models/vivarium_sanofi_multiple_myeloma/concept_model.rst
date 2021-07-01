@@ -41,6 +41,8 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 +-------+----------------------------+
 | CKD   | Chronic kidney disease     |
 +-------+----------------------------+
+| Dara  | Daratumumab                |
++-------+----------------------------+
 | eGFR  | Estimated glomerular       |
 |       | filtration rate            |
 +-------+----------------------------+
@@ -86,7 +88,7 @@ In the absence of data on treatment effects for sub-groups we will need to make 
 
 1.1 Project overview
 --------------------
-This project intends to model the impact of a new treatment option for myeloma disease, Isatuximab, from 2021 to 2026 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States, which are dependent on disease status, age, eligibility for stem cell transplantation, risk category, history of malignancy, and duration of previous treatment response. 
+This project intends to model the impact of a new treatment option for myeloma disease, Isatuximab, from 2021 to 2025 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States. The choice of treatment is dependent on disease status only. 
 
 
 .. _mm1.2:
@@ -124,7 +126,7 @@ There is one randomized controlled trial on Isatuximab treatment that is current
 
 The primary objective of this project is to answer the following question: what can we expect the incidence, prevalence, mortality, and survival of MM to be overall and among a registry population in the United States, and in key sub-populations, under a business-as-usual treatment scenario and an Isatuximab treatment scenario over 5 years? The key sub-populations include the Black/African American population, population with high-risk cytogenetics, population with renal impairment and the elderly population (age > 75 years).  
 
-To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our own survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2026 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk. 
+To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our own survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2025 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk. 
 
 .. _mm3.0:
 
@@ -169,10 +171,12 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 ++++++++++++++++
 
 Among MM and RRMM patients, they expect to have:
- - Isatuximab treatment with coverage scale-up from 10% to 45% across 5 years 
-   of the simulation. Or
- - Other (non Isa-based) treatment with constant coverage rates across 5 years 
-   of the simulation
+ - Isatuximab treatment with coverage rates informed by Sanofi's commercial 
+   team; Or
+ - Daratummumab treatment with coverage rates derived from IQVIA sales 
+   projection; OR
+ - Residual (non Isa or Dara-based) treatment with coverage rates calculated 
+   by (1 - Isa_coverage - Dara_coverage).
 
 .. _mm4.1:
 
@@ -186,28 +190,30 @@ that each simulant is treated will be dependent on the coverage stated in that
 scenario. 
 
 `We might stratify the treatment covearge rates by simulant’s cytogenetic risk 
-level, age, sex, and race/ethnicity if Flatiron data support us to do so.`
+level, renal function, age, sex, and race/ethnicity if Flatiron data support us 
+to do so.`
 
 **Baseline** The baseline scenario will project GBD 2019 demographic and disease 
-trends out from 2021 to 2026. For any simulated population, the coverage rates 
-for all regimens except Isatuximab will be held constant across the 5 years of 
-the simulation; Isatuximab will start to be available to simulants as a second-line 
-regimen and ramp up to 45% coverage by 2026 to simulate a business-as-usual 
-treatment scenario.
+trends out from 2021 to 2025. For the US general population, registry population, 
+and key sub-populations, Isatuximab will start to be available to simulants as a 
+second and later lines of regimen and ramp up to a coverage rate differ by line 
+of treatment in 2025 to simulate a business-as-usual treatment scenario.
 
 **Alternative** Most aspects of the alternative scenario will be the same as the 
 baseline scenario: it will project GBD 2019 demographic and disease trends out 
-from 2021 to 2026 and apply the same coverage rates (or ramp up) for all regimens 
-specified in the baseline. In contrast to the baseline scenario, Isatuximab in 
-the alternative scenario will start to be available to simulants as a first-line 
-regimen among all simulated population.
+from 2021 to 2025 and apply the same coverage rates of Isatuximab regimen (as 2+ 
+line treatment) specified in the baseline. In contrast to the baseline scenario, 
+Isatuximab in the alternative scenario will start to be available to simulants 
+as a frontline regimen and ramp up to 10% coverage at frontline in 2025 among 
+all simulated population.
 
 
 In the absence of data from Flatiron, we made following assumptions:
- 1. The initial treatment coverage of Isatuximab is set to be 10% in 2021.
- 2. The probability of simulants treated with Isatuximab is the same across 
-    different lines of treatment.
- 3. The coverage scale-up of Isatuximab follows the same trend from IQVIA sales 
+ 1. The initial treatment coverage of Isatuximab is informed by Sanofi's 
+    commercial team.
+ 2. The probability of simulants treated with Isatuximab is differ by lines of 
+    treatment and capped to not exceed 10% in 2025.
+ 3. The coverage scale-up of Daratummumab follows the trend from IQVIA sales 
     projection.
 
 .. note::
@@ -219,8 +225,7 @@ In the absence of data from Flatiron, we made following assumptions:
  cases in 2019 for all ages and both sexes. As a result, the initial coverage of 
  Isatuximab is calculated to be 1% in 2021, and expect to reach 5% in 2026 based 
  on the slope derived from IQVIA sales projection. (~350% increase from 2021 to 
- 2026) So, the endpoint coverage could reach 45% If we set the initial coverage 
- 2027) of Isatuximab to be 10% in 2021.
+ 2026)
 
 .. _mm5.0:
 
@@ -252,10 +257,12 @@ The simulation concept model consists of five main components:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Location: United States
-  - Cohort type: Prospective closed cohort of individuals 15 years and older
+  - Cohort type: Prospective **open** cohort of individuals 15 years and older
   - Size of largest starting population: 100,000 simulants
-  - Time span: Jan 1, 2011 to Dec 31, 2025
-  - Time step: 28 days to capture the duration of treatment, and time to response. (Time step may be revised after further model development.)
+  - Time span: Jan 1, 2011 to Dec 31, 2025 (Jan 1, 2011 to Jan 1, 2021 is a 
+    10-year long burn-in period)
+  - Time step: 28 days to capture the duration of treatment, and time to 
+    response. (Time step may be revised after further model development.)
 
 
 .. _mm5.2.2:
@@ -776,15 +783,12 @@ listed below to decide who is eligible to be enrolled in the registry.
   - 18 years and older
   - With relapsed/refractory multiple myeloma (RRMM according to IMWG definition)
   - First time using Isa (never received Isa for treatment of disease other than RRMM)
-  - No personal history of other malignant cancers in the past 3 years
 
-Besides age and disease status, there are two additional factors we need to 
-consider for making a simulant (with RRMM) a registry candidate. First, eligibility 
-for Isatuximab treatment, which means this RRMM patient must have had at least 
-one previous line of treatment and was never previously treated with Isatuximab 
-for diseases other than RRMM.  Second, personal history of malignancy. We will 
-exclude any RRMM patients who have been diagnosed and/or treated for another 
-malignant neoplasm within three years from the registry.
+Besides age and disease status, there is another factor we need to consider for 
+making a simulant (with RRMM) a registry candidate. The eligibility for Isatuximab 
+treatment, which means this RRMM patient must have had at least one previous line 
+of treatment and was never previously treated with Isatuximab for diseases other 
+than RRMM.
 
 .. note::
  
@@ -794,18 +798,19 @@ Power calculation
 ^^^^^^^^^^^^^^^^^
 
 To calculate the number of simulants in the registry for each calendar year from 
-2021 to 2026, we will use the equation presented below: 
+2021 to 2025, we will use the equation presented below: 
 
-:math:`N_{enroll}(t) = N_{0} + Prev_{RRMM}(t) \times F_{Isa} \times (1 - F_{other malignancy})`
+:math:`N_{enroll}(t) = N_{0} + Prev_{RRMM}(t) \times F_{Isa} \times P`
 
 Where,
  - :math:`N_{enroll}(t)` is the number of simulants in the registry in year t
  - :math:`N_{0}` is the number of simulants in the registry at the beginning of 
    the simulation (e.g., 2021-01-01)
- - :math:`Prev_{RRMM}(t)` is the number of prevalent RRMM cases in year t
+ - :math:`Prev_{RRMM}(t)` is the number of adult (15+ in our sim) prevalent RRMM 
+   cases in year t
  - :math:`F_{Isa}` is the proportion of population eligible for Isatuximab treatment
- - :math:`F_{other malignancy}` is the proportion of population with another 
-   malignancy other than RRMM in the past three years
+ - :math: `P` is the proportion of registry candidates that will be selected into 
+   the registry. We assume P is a constant number equal to **5%** over time.  
 
 
 .. _mm5.4:
@@ -856,7 +861,7 @@ Where,
      - Population with RI
      - 
      - 
-     - Death (per person-year)
+     - Deaths (per person-year)
    * - 
      - 2024
      - ...
@@ -865,7 +870,7 @@ Where,
      - Elder population
      - 
      - 
-     - Median PFS (months)
+     - Median PFS (weeks)
    * - 
      - 2025
      - 95 plus
@@ -883,7 +888,7 @@ Where,
      - 
      - 
      - 
-     - Median OS (months)
+     - Median OS (weeks)
    * - 
      - 
      - 
@@ -896,10 +901,10 @@ Where,
 
 - High-risk cytogenetics: abnormalities of Del(17p) t(14;16) t(14;20) Del(1p)
 - Renal impairment (RI): eGFR < 60 ml/min/1.73m^2
-- Elder: aged > 75 years
-- Median PFS (months): median length of time-to-progression in months
+- Elder: aged 75 years and older
+- Median PFS (weeks): median length of time-to-progression in weeks
 - One-year PFS (%): proportion of patients survival without progression during a one-year period
-- Median OS (months): median length of time-to-death in months
+- Median OS (weeks): median length of time-to-death in weeks
 - One-year OS (%): proportion of patients survival without death during a one-year period
 
 .. _mm6.0:
@@ -928,9 +933,11 @@ Where,
     cases.
  3. Guided by Sanofi’s RRMM patient registry protocol, patients who had previous 
     malignancy in the past 3 years are not eligible to be enrolled in the registry. 
-    That means some RRMM patients will be excluded based on their personal history 
-    of malignancy. We will use literature evidence or SEER data to inform the 
-    proportion of RRMM patients with other malignancy in the past 3 years.
+    That means some RRMM patients will be excluded from registry based on their 
+    personal history of malignancy. Due to the fact that there is only a small 
+    proportion (less than 5%) of RRMM patietns with malignancy in the past 3 
+    years, we don't use the history of malignancy as a determinant factor in our 
+    list of inclusion criteria.  
 
 
 8.0 References
@@ -985,3 +992,4 @@ Where,
     Retrieved 9 April 2021.
     https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
 
+                                                                  
