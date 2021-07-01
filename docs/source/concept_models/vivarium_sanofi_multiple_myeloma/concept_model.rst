@@ -258,7 +258,7 @@ The simulation concept model consists of five main components:
 
   - Location: United States
   - Cohort type: Prospective **closed** cohort of individuals aged 15 years and 
-    older (open cohort if we only examine on age 50+ popualtion)
+    older (open cohort if we only examine on age 50+ population)
   - Size of largest starting population: 100,000 simulants
   - Time span: Jan 1, 2011 to Dec 31, 2025 (Jan 1, 2011 to Jan 1, 2021 is a 
     10-year long burn-in period)
