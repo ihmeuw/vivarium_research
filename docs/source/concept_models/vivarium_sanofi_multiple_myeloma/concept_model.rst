@@ -172,7 +172,7 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 
 Among MM and RRMM patients, they expect to have:
  - Isatuximab treatment with coverage rates informed by Sanofi's commercial 
-   team; Or
+   team; OR
  - Daratummumab treatment with coverage rates derived from IQVIA sales 
    projection; OR
  - Residual (non Isa or Dara-based) treatment with coverage rates calculated 
@@ -803,14 +803,14 @@ To calculate the number of simulants in the registry for each calendar year from
 :math:`N_{enroll}(t) = N_{0} + Prev_{RRMM}(t) \times F_{Isa} \times P`
 
 Where,
- - :math:`N_{enroll}(t)` is the number of simulants in the registry in year t
+ - :math:`N_{enroll}(t)` is the number of simulants in the registry in year t.
  - :math:`N_{0}` is the number of simulants in the registry at the beginning of 
-   the simulation (e.g., 2021-01-01)
+   the simulation. (2021-01-01)
  - :math:`Prev_{RRMM}(t)` is the number of adult (15+ in our sim) prevalent RRMM 
-   cases in year t
- - :math:`F_{Isa}` is the proportion of population eligible for Isatuximab treatment
- - :math: `P` is the proportion of registry candidates that will be selected into 
-   the registry. We assume P is a constant number equal to **5%** over time.  
+   cases in year t.
+ - :math:`F_{Isa}` is the proportion of population eligible for Isatuximab treatment.
+ - :math:`P` is the proportion of registry candidates that will be selected into 
+   the registry. We assume P is a constant number equal to **5%** over time.
 
 
 .. _mm5.4:
@@ -992,4 +992,3 @@ Where,
     Retrieved 9 April 2021.
     https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
 
-                                                                  
