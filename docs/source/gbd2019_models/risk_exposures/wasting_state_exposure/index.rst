@@ -528,7 +528,64 @@ pool.
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used
 
-.. list-table:: Wasting transition rate equations
+.. list-table:: NEW WASTING TRANSITION RATE EQNS
+   :widths: 5 15 10 10
+   :header-rows: 1
+
+   * - Variable
+     - Equation
+     - Description
+     - Source
+   * - r2
+     - -ap0*f2/ap1 - ap0*f3/ap1 - ap0*f4/ap1 - t1 + ap2*d2/ap1 + ap2*i1/ap1 + ap3*d3/ap1 + ap4*d4/ap1
+     - Remission into cat 2 from cat 1
+     - System of equations
+   * - r3
+     - 0.005 - t2
+     - Remission into cat 3 from cat 2
+     - James et al.
+   * - r4
+     - 0
+     - Remission into cat 4 from cat 3
+     - Assumption that r4 is small
+   * - t1
+     - (2/365)*.43*.7
+     - Remission from cat 1 to cat 3 due to treatment
+     - Calculated from DIHS + adjustment
+   * - t2
+     - (2/365)*.43*.7
+     - Remission from cat 2 to cat 3 due to treatment
+     - Calculated from DIHS + adjustment
+   * - i1
+     - .001
+     - Incidence into cat 1 from cat 2
+     - James et al. (.0007) + upward adjustment (to be replaced)
+   * - i2
+     - ap0*f3/ap3 + ap0*f4/ap3 + ap1*t1/ap3 + ap2*r3/ap3 - d3 - ap4*d4/ap3
+     - Incidence into cat 2 from cat 3
+     - System of equations
+   * - i3
+     - 0
+     - Incidence into cat 3 from cat 4
+     - Assumption that i3 is small
+   * - s1
+     - ap0*f2/ap1 + ap0*f3/ap1 + ap0*f4/ap1 - ap2*i1/ap1 + (-ap0 + ap1)/ap1
+     - Probability of staying in cat 1
+     - System of equations
+   * - s2
+     - -d2 - i1 - r3 + 1
+     - Probability of staying in cat 2
+     - System of equations
+   * - s3
+     - -ap0*f3/ap3 - ap1*t1/ap3 - ap2*r3/ap3 + 1 - ap4*i3/ap3
+     - Probability of staying in cat 3
+     - System of equations
+   * - s4
+     - -d4 - i3 + 1
+     - Probability of staying in cat 4
+     - System of equations
+
+.. list-table:: OLD WASTING TRANSITION RATE EQNS
    :widths: 5 15 20
    :header-rows: 1
 
@@ -835,7 +892,6 @@ where
   A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11,eq12,eq13],
                          unknowns)
   result_1 = sym.solve(A1 * x1 - b1, x1)
-
 
 .. _waste_exp2.2.2:
 
