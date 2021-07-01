@@ -579,11 +579,11 @@ in terms of the following variables:
      - Notes
    * - :math:`d_i` for :math:`i\in \{1,2\}`
      - Death rate out of MAM (cat 2) or SAM (cat 1)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})` :math:`+ emr_{pem}*1 - csmr_{pem}`
+     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci} - csmr_{c})` :math:`+ emr_{pem}*1 - csmr_{pem}`
      - 
    * - :math:`d_i` for :math:`i\in \{3,4\}`
      - Death rate out of Mild wasting (cat 3) or wasting TMREL (cat 4)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})`
+     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci} - csmr_{c})`
      -
    * - :math:`f_i`
      - "Age-in" rate into :math:`cat_i`
@@ -636,6 +636,9 @@ in terms of the following variables:
      - Pulled from GBD
    * - :math:`emr_c`
      - Excess mortality rate of cause c
+     - Pulled from GBD
+   * - :math:`csmr_c`
+     - Cause-specific mortality rate of cause c
      - Pulled from GBD
 
 We now detail how the above wasting rate transition equations were derived.
