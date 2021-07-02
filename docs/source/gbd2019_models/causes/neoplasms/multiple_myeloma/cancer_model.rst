@@ -344,7 +344,7 @@ Multiple Myeloma Mortality Details
 +++++++++++++++++++++++++++++++++++
 
 As previously mentioned, the excess mortality rates defined in the tables above
-represent mortality rates represent *all-cause* mortality rates among patients 
+represent *all-cause* mortality rates among patients 
 with multiple myeloma. For simplicity, in our simulation, deaths that occur among 
 simulants in any of the multiple myeloma cause model states other than susceptible
 should be recorded as deaths due to multiple myeloma. While deaths due to other
