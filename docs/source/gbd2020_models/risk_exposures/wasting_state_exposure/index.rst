@@ -811,11 +811,11 @@ Finite state machine 2x4
 Data Description Tables
 +++++++++++++++++++++++
 
-Note that as we are building this model before the completion of GBD 2020, we 
+As we are building this model before the completion of GBD 2020, we 
 will need to calculate the PAFs ourselves, using the following equation:
 
 .. math::
-  \frac{(\sum_{wasting\_category_i} prevalence_{i} * rr_{ci})-1}{\sum_{i} prevalence_{i} * rr_{ci}}
+  \frac{(\sum_{wasting\_category_i} prevalence_{i} * rr_{ci})-1}{\sum_{wasting\_category_i} prevalence_{i} * rr_{ci}}
 
 .. list-table:: PAF equation variable descriptions
    :widths: 6 10 10
