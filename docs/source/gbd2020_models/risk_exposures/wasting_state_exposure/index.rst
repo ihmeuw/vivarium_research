@@ -66,9 +66,6 @@ Wasting as finite state machines
 +-------+-----------------------------------------+
 
 
-
-.. _waste_exp1.0:
-
 Risk Exposure Overview
 ++++++++++++++++++++++
 
@@ -82,12 +79,8 @@ Malnutrition is an imbalance between the body’s needs and its use and intake o
   on the relative risk of the relevant outcomes, and the cause models for those 
   outcomes, in a different document.
 
-.. _waste_exp1.1:
-
 Risk Exposures Description in GBD
 +++++++++++++++++++++++++++++++++
-
-.. _waste_exp1.1.1:
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
@@ -137,8 +130,6 @@ As a rule for the finiate state machines, the numerator of the prevalence of a s
   This section will become the methods section in the manuscript. 
 
 
-.. _waste_exp2.1:
-
 Restrictions
 ------------
 
@@ -166,12 +157,8 @@ Restrictions
 
 	Determine if there's something analogous to "YLL/YLD only" for this section
 
-.. _waste_exp2.2:
-
 Risk Exposure Model Diagram
 ---------------------------
-
-.. _waste_exp2.2.1:
 
 Finite state machine 1x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -764,8 +751,6 @@ where
                          unknowns)
   result_1 = sym.solve(A1 * x1 - b1, x1)
 
-
-.. _waste_exp2.2.2:
 
 Finite state machine 2x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
