@@ -731,7 +731,7 @@ For the burn-in period (both scenarios):
 
 **How to assign treatment effects:**
 
-Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. There are separate hazard ratios for the first line of treatment and later lines of treatment for each treatment category. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`prior_anticd38_treatment == True`). The hazard ratios are shown in the tables below.
+Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. There are separate hazard ratios for the first line of treatment and later lines of treatment for each treatment category. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`prior_anticd38_treatment == True`). The hazard ratios, separated by line of treatent, are shown in the tables below.
 
 .. list-table:: First line of treatment hazard ratios
    :header-rows: 1
@@ -743,14 +743,14 @@ Each treatment category has a hazard ratio associated with it both for progressi
      - 1 (reference)
      - 1 (reference)
    * - Isatuxamib-containing treatment category
-     - 0.429 (0.368, 0.495)
-     - 0.760 (0.645, 0.895)
+     - 0.547 (0.387, 0.765)
+     - 0.971 (0.627, 1.488)
    * - Daratumumab-containing treatment category
-     - 0.429 (0.368, 0.495)
-     - 0.760 (0.645, 0.895)
+     - 0.547 (0.387, 0.765)
+     - 0.971 (0.627, 1.488)
    * - Residual treatment category
-     - 1.00581 (1.0051, 1.0064)
-     - 1.0024 (1.0011, 1.0036)
+     - 1.013 (1.007, 1.018)
+     - 1.001 (0.986, 1.011)
 
 .. list-table:: Second and later lines of treatment hazard ratios
    :header-rows: 1
@@ -761,21 +761,21 @@ Each treatment category has a hazard ratio associated with it both for progressi
    * - All categories combined
      - 1 (reference)
      - 1 (reference)
-   * - Isatuxamib-containing treatment category, :code:`retreated != True`
-     - 0.530 (0.356, 0.803)
-     - 1.116 (1.044, 1.185)
+   * - Isatuxamib-containing treatment category, :code:`retreated == False`
+     - 0.633 (0.243, 1.886)
+     - 0.906 (0.554, 1.178)
    * - Isatuxamib-containing treatment category, :code:`retreated == True`
-     - 0.765 (0.678, 0.902)
-     - 1.232 (1.088, 1.37)
-   * - Daratumumab-containing treatment category, :code:`retreated != True`
-     - 0.217 (0.203, 0.231)
-     - 0.572 (0.551, 0.594)
+     - 0.817 (0.622, 2.329)
+     - 0.953 (0.777, 1.267)
+   * - Daratumumab-containing treatment category, :code:`retreated == False`
+     - 0.807 (0.460, 1.886)
+     - 0.906 (0.554, 1.178)
    * - Daratumumab-containing treatment category, :code:`retreated == True`
-     - 0.609 (0.601, 0.616)
-     - 0.786 (0.776, 0.797)
+     - 0.904 (0.730, 2.329)
+     - 0.953 (0.777, 1.267)
    * - Residual treatment category
-     - 1.331 (1.324, 1.337)
-     - 1.181 (1.171, 1.190)
+     - 1.323 (1.156, 1.413)
+     - 1.204 (1.100, 1.258)
 
 A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
 
