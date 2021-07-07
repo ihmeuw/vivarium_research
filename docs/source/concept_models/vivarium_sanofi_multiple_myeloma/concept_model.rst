@@ -970,9 +970,9 @@ Where,
      - Count of simulants without death or progression at the end of the simulation 
        at `period` days since they entered `treatment_line`. 
 
-Time frame for survival observer period (timestep = 28 days):
- 1. 2021-01-01 (period = 0) to 2025-12-31
- 2. 2024-01-01 (period = 0) to 2025-12-31
+Time frame for survival observer (timestep = 28 days):
+ 1. start_date = 2021-01-01, end_date = 2025-12-31
+ 2. start_date = 2025-01-01, end_date = 2025-12-31
 
 .. note::
  
