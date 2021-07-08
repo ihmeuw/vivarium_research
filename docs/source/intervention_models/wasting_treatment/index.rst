@@ -147,73 +147,44 @@ Interventions for wasting treatment are delivered through different levels of th
 Assessing and classifying acute malnutrition
 --------------------------------------------
 
-The classification of SAM and MAM cases is derived from the 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
+The classification and management of SAM and MAM comes from the 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
+which are based on the 2013 WHO guidelines on management of SAM in children and infant [WHO_2013_SAM_guidelines]_
 
 :download:`2019 guidelines<guidelines_2019.pdf>`
 
+
 .. note:: 
   
-  - Based on the guideline, we will need to make some modelling decisions on how we classifiy SAM, MAM, NONE and think about how it may bias our results. 
-
-  - The ORs and ANDs in the classifications are not very clear or consistent in the guideline. It would be useful if we can clarify with a clinician when it should be OR/AND? 
-
-  - I think for our model we will probably classify according to the WHZ scores, but it would be good to get an idea if that over-estimates or under-estimates SAM and MAM compared to classification criteria in the guideline. 
-
+    - In GBD, SAM and MAM are classified as using WHZ score. In reality, GBD-MAM kids with oedema are treated as SAM kids. We need to check the proportion (sequelae) of GBD-MAM kids to see if we need to make this adjustment in our model.    
 
 .. _2.1:
 
 In infants 0-6 months
 +++++++++++++++++++++
 
-:underline:`Classify SAM with or without medical complications`
+:underline:`Classify SAM in infants`
 
 * Any grade of bilateral pitting oedema (+, ++ or +++) OR
-* WHZ < -3 zscore OR
-* Recent weight loss or failure to gain weight OR
-* Ineffective feeding (attachment, positioning and suckling) directly observed for 15-20, minutes, ideally in supervised separate area OR
-* Presence of any of the following medical complications:
-
-  - Poor appetite
-  - Intractable vomiting
-  - Convulsions
-  - Lethargy, not alert
-  - Unconsciousness
-  - High fever (≥38.5 °C)
-  - Pneumonia (Chest indrawing, fast breathing)
-  - Dehydration
-  - Persistent diarrhoea
-  - Severe anaemia
-  - Hypoglycaemia
-  - Hypothermia
-  - Severe skin lesions
-  - Eye signs of vitamin A deficiency
+* WHZ < -3 zscore 
 
 **Treatment**
 
 NOTE: All infants 0-6 months of age with SAM with or without medical complications should be referred to the SC.
 
-.. note::
-
-  The WHO classification criteria for infants 0-6mo is 
-
-    1) weight-for-length <–3 Z-scores of the WHO Child Growth Standards median, or
-    2) presence of bilateral pitting oedema 
-
-
-:underline:`Classify MAM`
+:underline:`Classify MAM in infants`
 
 * MUAC of lactatating mother of infant 0-6 months <23.0 cm
-* WHZ ≥-3 to <-2 zscores AND 
-* No bilateral pitting oedema AND 
-* No medical complications
-* Clinically well and alert
+* WHZ ≥-3 to <-2 AND 
+  * No bilateral pitting oedema AND 
+  * No medical complications
+  * Clinically well and alert
 
 **Treatment** 
 
 Assess the infant’s feeding and counsel the mother or caregiver on appropriate IYCF practices. Emphasize on establishing effective exclusive
 breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, follow up in 30 days. Admit the mother to TSFP. Refer the mother for Productive Safety Net Programme (PSNP).
 
-:underline:`Classify no acute malnutrition`
+:underline:`Classify no acute malnutrition in infants`
 
 * WHZ ≥-2 zscores AND 
 * No bilateral pitting oedema
@@ -221,9 +192,6 @@ breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, 
 **Treatment** 
 
 Congratulate and counsel the mother on appropriate IYCF practices.
-
-.. todo::
-    What about MAM with oedema? Are they treated as SAM or MAM?
 
 .. _2.1:
 
@@ -234,52 +202,34 @@ In children 6-59 months
 
 * Any grade of bilateral pitting oedema (+, ++, +++) OR 
 * WHZ < -3 zscore OR
-* Presence of any of the following medical complications:
-
-  - Poor appetite
-  - Intractable vomiting
-  - Convulsions
-  - Lethargy, not alert
-  - Unconsciousness
-  - High fever (≥38.5 °C)
-  - Pneumonia (Chest indrawing, fast breathing)
-  - Dehydration
-  - Persistent diarrhoea
-  - Severe anaemia
-  - Hypoglycaemia
-  - Hypothermia
-  - Severe skin lesions
-  - Eye signs of vitamin A deficiency
+* Presence of any medical complications (see guideline for full list)
 
 **Treatment**
 
-Admit to SC
+Admit to SC (inpatient)
 
 :underline:`Classify SAM without medical complications`
 
 * Bilateral pitting oedema + or ++ OR 
 * WHZ <-3 z-scores AND 
-* Appetite test passed
-* No medical complications
-* Clinically well and alert
+  * Appetite test passed
+  * No medical complications
+  * Clinically well and alert
 
 **Treatment**
 
-Admit in OTP
+Admit in OTP (outpatient)
 
 :underline:`Classify MAM`
 
 * WHZ ≥ -3 to <-2 z scores AND
-* No bilateral pitting oedema 
-* No medical complications
-* Clinically well and alert
+  * No bilateral pitting oedema 
+  * No medical complications
+  * Clinically well and alert
 
 **Treatment**
 
-Admit in TSFP and counsel on appropriate IYCF practices.
-
-.. todo::
-    What about MAM with oedema? Are they treated as SAM or MAM?! Unclear...
+Admit in TSFP (preferably with RUSF) and counsel on appropriate IYCF practices.
 
 :underline:`Classify no acute malnutrition`
 
@@ -298,30 +248,40 @@ Congratulate and counsel the mother on appropriate IYCF practices.
   The table below provides example entries for large scale food fortification with iron.
 
 .. list-table:: Affected Outcomes
-  :widths: 15 15 15 15
+  :widths: 15 15 15 30
   :header-rows: 1
 
   * - Outcome
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Hemoglobin concentration
-    - Increases population mean
+  * - Median time-to-recovery
+    - Decreases 
     - Yes
-    - 
-  * - Malaria
-    - Increases incidence rate
+    - Direct relationship
+  * - Death rate
+    - Decreases death rate among the treated
     - No
-    - 
+    - Currently we do not have the relative risk of death of treated/untreated. We will capture some of the effect of tx on death by having the simulants recover faster, therefore leave the high risk state faster. However, by assigning utx simulants the mean death rate when they should have a higher death rate, we might overestimate the protective effect of tx on death.
+  * - Proportion recovered within programme treatment length
+    - Increases
+    - No (but we can)
+    - We assume that all treatment covered will recover within the time-to-recovery if they had not died. We can modify the treatment coverage by multiplying it by the 'cure rate' giving us the 'met-need' instead. 1 - 'met-need' will be the 'utx' population. 
+  * - Proportion defaulted during programme
+    - Decreases
+    - We can capture this by using 'met-need'
+    - This will decrease as 'met-need' increases.
+
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-Let us assume program coverage is a stand-in value of 40%. This will be updated. 
+| SAM programme coverage: 48.8% (37.4 - 60.4) (point coverage, assumes programmes are not good at case finding) [Isanaka_2021]_
+| MAM programme coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
 
 .. todo::
 
-  We have been in contact with EMOH but seems like they only have DHIS data which does not give us coverage rate. We will dig a bit more into the literature, or reach out to CIFF/UNICEF since UNICEF is the implementation partner for treatment in Ethiopia. I think we should also send an input data to CIFF to make sure they agree with our model inputs. 
+  Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
 
 .. list-table:: Baseline coverage data
   :widths: 10 10 5 15 20
@@ -333,30 +293,26 @@ Let us assume program coverage is a stand-in value of 40%. This will be updated.
     - Value
     - Note
   * - Ethiopia
-    - Kids 0-6 months with MAM 
+    - Tx for infants 0-6 months with MAM 
     - :math:`C_{MAM_{0-6}}`
-    - 0.4 ~ currently stand-in until we find better data
+    - Use post-natal care coverage  
     - Coverage of TSFP for breastfeeding mothers among 0-6 month kids with MAM
   * - Ethiopia
-    - Kids 0-6 months with any SAM 
+    - Tx for infants 0-6 months with any SAM 
     - :math:`C_{SAM_{0-6}}`
-    - 0.4 ~ currently stand-in until we find better data
+    - Use post-natal care coverage 
     - Coverage of SC for kids 0-6 months with any SAM
   * - Ethiopia
-    - Kids 6-59 months with MAM 
+    - Tx for kids 6-59 months with MAM 
     - :math:`C_{MAM_{6-59}}`
-    - 0.4 ~ currently stand-in until we find better data
+    - 48.8% (37.4 - 60.4) ~ stand-in until we find updated data
     - Coverage of TSFP for kids 6-59 months with MAM
   * - Ethiopia
-    - Kids 6-59 months with SAM with oedema
-    - :math:`C_{SAM_{6-59_{SC}}}` 
-    - 0.4 ~ Currently stand-in until we find better data
-    - Coverage of SC for SAM kids with medical complications (oedema)
-  * - Ethiopia
-    - Kids 6-59 months with SAM without complications (no oedema)
-    - :math:`C_{SAM_{6-59_{OTP}}}`
-    - 0.4 ~ currently stand-in until we find better data
-    - Coverage of OTP for kids with un-complicated SAM
+    - Tx for kids 6-59 months with SAM
+    - :math:`C_{SAM_{6-59}}` 
+    - 48.8% (37.4 - 60.4)
+    - Coverage of SC or OTP for SAM kids
+
 
 .. _3.0:
 
@@ -367,43 +323,21 @@ Vivarium Modeling Strategy
    :alt: Compartmental diagram with treatment
 
 
-For **MAM** 0-6 months
+For **MAM** 0-6 months infants
 
- - :math:`r3 =  r3_{ux}\times(1-C_{MAM_{0-6}}) + r3_{tx}\times(C_{MAM_{0-6}})`
- - :math:`d2 =  d2_{ux}\times(1-C_{MAM_{0-6}}) + d2_{tx}\times(C_{MAM_{0-6}})`
- - :math:`i1 =  i1_{ux}\times(1-C_{MAM_{0-6}}) + i1_{tx}\times(C_{MAM_{0-6}})`
+ - :math:`r3 = r3_{ux}\times(1-C_{MAM_{0-6}}) + t2_{mam}\times(C_{MAM_{0-6}})`
 
-For **SAM** 0-6 months
+For **MAM** 6-59 months kids
 
- - :math:`r2 =  r2_{ux}\times(1-C_{SAM_{0-6}}) + r2_{tx}\times(C_{SAM_{0-6}})`
- - :math:`d1 =  d1_{ux}\times(1-C_{SAM_{0-6}}) + d1_{tx}\times(C_{SAM_{0-6}})`
+ - :math:`r3 =  r3_{ux}\times(1-C_{MAM_{6-59}}) + t2_{mam}\times(C_{MAM_{6-59}})`
 
-For **MAM** 6-59 months
+For **SAM** 6-59 months kids
 
- - :math:`r3 =  r3_{ux}\times(1-C_{MAM_{6-59}}) + r3_{tx}\times(C_{MAM_{6-59}})`
- - :math:`d2 =  d2_{ux}\times(1-C_{MAM_{6-59}}) + d2_{tx}\times(C_{MAM_{6-59}})`
- - :math:`i1 =  i1_{ux}\times(1-C_{MAM_{6-59}}) + i1_{tx}\times(C_{MAM_{6-59}})`
-
-For **SAM** 6-59 months
-
-Let s199 be the proportion of SAM with oedema among those with SAM
-
- - :math:`r2 = r2_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}})\times(1-s199) + r2_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}})\times s199 + r2_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}\times(1-s199) + r2_{tx_{com}}\times(C_{SAM_{6-59_{SC}}})\times s199`
-
- - :math:`d1 = d1_{ux_{uncom}}\times(1-C_{SAM_{6-59_{OTP}}})\times(1-s199) + d1_{ux_{com}}\times(1-C_{SAM_{6-59_{SC}}})\times s199 + d1_{tx_{uncom}}\times C_{SAM_{6-59_{OTP}}}\times(1-s199) + d1_{tx_{com}}\times(C_{SAM_{6-59_{SC}}})\times s199`
-
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
-  - We have r3, d2, i1, r2 and d1 from solving the wasting compartmental modeling (missing duration of cat3 as constraint)
-  - Need to find programmatic data to obtain r3tx, d2tx, i1tx, r2tx and d1tx
-  - Get coverage rate (currently use 0.4 as stand-in)
-  - We can then derive r3ux, d2ux, i1ux, r2ux and d1ux
 
 
 .. todo::
 
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
+  THE FOLLOWING HAVE NOT BEEN FULLY UPDATED! 
 
 .. list-table:: Modeled Outcomes **Table 1** MAM 0-6 months
   :widths: 5 5 20 15 15 15 15
@@ -418,53 +352,18 @@ Let s199 be the proportion of SAM with oedema among those with SAM
     - Note
   * - :math:`r3_{ux}`
     - transition probability
-    - recovery probability of untreated MAM among 0-6 months
+    - Daily recovery probability of untx MAM 
+    - :math:`\frac{1}{\text{median time-to-recovery of utx MAM}}` 
     - 
     - 
     - 
-    - 
-  * - :math:`r3_{tx}`
+  * - :math:`t2_{mam}`
     - transition probability
-    - recovery probability of treated MAM among 0-6 months
-    - :math:`E_{r3_{0-6}}` recovery efficacy of MAM among 0-6 (>1)
-    - :math:`r3_{ux}\times(E_{r3_{0-6}}) = r3_{tx}`
+    - Daily recovery probability of tx MAM 
+    - :math:`\frac{1}{\text{median time-to-recovery of tx MAM}}` 
+    - 
     -
-    - May get :math:`E_{r3_{0-6}}` from programmatic data/studies
-  * - :math:`d2_{ux}`
-    - mortality probability
-    - probability of death of untreated MAM among 0-6 months
     - 
-    - 
-    - 
-    - 
-  * - :math:`d2_{tx}`
-    - mortality probability
-    - probability of death of treated MAM among 0-6 months
-    - :math:`E_{d2_{0-6}}` mortality efficacy of MAM among 0-6 (<1)
-    - :math:`d2_{ux}\times(E_{d2_{0-6}}) = d2_{tx}`
-    -
-    - May get :math:`E_{d2_{0-6}}` from programmatic data/studies
-  * - :math:`i1_{ux}`
-    - transition probability
-    - probability of deterioration to SAM of untreated MAM among 0-6 months
-    - 
-    - 
-    - 
-    - 
-  * - :math:`i1_{tx}`
-    - transition probability
-    - probability of deterioration to SAM of treated MAM among 0-6 months
-    - :math:`E_{i1_{0-6}}` prevention to SAM efficacy of MAM among 0-6 (<1)
-    - :math:`i1_{ux}\times(E_{i1_{0-6}}) = i1_{tx}`
-    -
-    - May get :math:`E_{i1_{0-6}}` from programmatic data/studies
-
-:underline:`Durations`
-
-| :math:`Dur_{MAM_{ux}} = \frac{1}{r3_{ux} + d2_{ux} + i1_{ux}}` 
-| :math:`Dur_{MAM_{tx}} = \frac{1}{r3_{tx} + d2_{tx} + i1_{tx}}` 
-
-
 
 .. list-table:: Modeled Outcomes **Table 2** SAM 0-6 months
   :widths: 5 5 20 15 15 15 15
@@ -479,37 +378,18 @@ Let s199 be the proportion of SAM with oedema among those with SAM
     - Note
   * - :math:`r2_{ux}`
     - transition probability
-    - recovery probability of untreated SAM among 0-6 months
+    - Daily recovery prbability of untx SAM
+    - :math:`\frac{1}{\text{median time-to-recovery of utx SAM}}`
     - 
     - 
     - 
-    - 
-  * - :math:`r2_{tx}`
+  * - :math:`t1_{sam}`
     - transition probability
-    - recovery probability of treated SAM among 0-6 months
-    - :math:`E_{r2_{0-6}}` recovery efficacy of SC for SAM among 0-6 (>1)
-    - :math:`r2_{ux}\times(E_{r2_{0-6}}) = r2_{tx}`
+    - Daily recovery probability of tx SAM 
+    - :math:`\frac{1}{\text{median time-to-recovery of tx SAM}}`
+    - 
     -
-    - May get :math:`E_{r2_{0-6}}` from programmatic data/studies
-  * - :math:`d1_{ux}`
-    - mortality probability
-    - probability of death of untreated SAM among 0-6 months
     - 
-    - 
-    - 
-    - 
-  * - :math:`d1_{tx}`
-    - mortality probability
-    - probability of death of treated SAM among 0-6 months
-    - :math:`E_{d1_{0-6}}` mortality efficacy of SC for SAM among 0-6 (<1)
-    - :math:`d2_{ux}\times(E_{d1_{0-6}}) = d1_{tx}`
-    -
-    - May get :math:`E_{d1_{0-6}}` from programmatic data/studies
-
-:underline:`Durations`
-
-| :math:`Dur_{SAM_{ux}} = \frac{1}{r2_{ux} + d1_{ux}}` 
-| :math:`Dur_{SAM_{tx}} = \frac{1}{r2_{tx} + d1_{tx}}` 
 
 
 .. list-table:: Modeled Outcomes **Table 3** MAM 6-59 months
@@ -525,82 +405,18 @@ Let s199 be the proportion of SAM with oedema among those with SAM
     - Note
   * - :math:`r3_{ux}`
     - transition probability
-    - recovery probability of untreated MAM among 6-59 months
+    - Daily recovery probability of untx MAM 
+    - :math:`\frac{1}{\text{median time-to-recovery of utx MAM}}` 
     - 
     - 
     - 
-    - 
-  * - :math:`r3_{tx}`
+  * - :math:`t2_{mam}`
     - transition probability
-    - recovery probability of treated MAM among 6-59 months
-    - :math:`E_{r3_{6-59}}` recovery efficacy of TSFP for MAM among 6-59 (>1)
-    - :math:`r3_{ux}\times(E_{r3_{6-59}}) = r3_{tx}`
+    - Daily recovery probability of tx MAM 
+    - :math:`\frac{1}{\text{median time-to-recovery of tx MAM}}` 
+    - 
     -
-    - May get :math:`E_{r3_{6-59}}` from programmatic data/studies
-  * - :math:`d2_{ux}`
-    - mortality probability
-    - probability of death of untreated MAM among 6-59 months
     - 
-    - 
-    - 
-    - 
-  * - :math:`d2_{tx}`
-    - mortality probability
-    - probability of death of treated MAM among 6-59 months
-    - :math:`E_{d2_{0-6}}` mortality efficacy of TSFP for MAM among 6-59 (<1)
-    - :math:`d2_{ux}\times(E_{d2_{6-59}}) = d2_{tx}`
-    -
-    - May get :math:`E_{d2_{6-59}}` from programmatic data/studies
-  * - :math:`i1_{ux}`
-    - transition probability
-    - probability of deterioration to SAM of untreated MAM among 6-59 months
-    - 
-    - 
-    - 
-    - 
-  * - :math:`i1_{tx}`
-    - transition probability
-    - probability of deterioration to SAM of treated MAM among 6-59 months
-    - :math:`E_{i1_{6-59}}` prevention to SAM efficacy of TSFP for MAM among 6-59 (<1)
-    - :math:`i1_{ux}\times(E_{i1_{6-59}}) = i1_{tx}`
-    -
-    - May get :math:`E_{i1_{6-59}}` from programmatic data/studies
-
-:underline:`Durations`
-
-| :math:`Dur_{MAM_{ux}} = \frac{1}{r3_{ux} + d2_{ux} + i1_{ux}}` 
-| :math:`Dur_{MAM_{tx}} = \frac{1}{r3_{tx} + d2_{tx} + i1_{tx}}` 
-
-We need coverage rate and efficacy rate to solve for all the variables stratified by coverage
-
-  | d2 = (d2_ux x 0.4) + (d2_ux x mortality efficacy x 0.6), where d2 is what we solved for in our mortality equations
-  | r3 = (r3_ux x 0.4) + (r3_ux x recovery efficacy x 0.6), where r3 is what we solved for in our matrix
-  | i1 = (i1_ux x 0.4) + (i1_ux x prevention efficacy x 0.6), where i1 is what we solved for in our matrix
-
-.. note:: 
-  
-  Thinking out loud...
-
-  our calculated mortality probability from MAM is d2 = 0.001874, 2 orders of magnitude higher than the MAM death rate of untreated in the James study...hence I don't think we can use transition probabilities from the literature. We can only get the relative probabilities (like relative risks or treatment efficacy)...I reckon we'd have to make assumption of programme coverage, then programme efficacy and then calculate back calculate the transition probabilities with and without treatment. We can then compare our calculated values to the literature? 
-
-  :underline:`Recover probability among untreated MAM 6-59 months` from James et al
-
-  :math:`rate of recovery among untreated MAM 6-59 months = \frac{479}{5230}` per child-month 
-  :math:`rate of recovery among untreated MAM 6-59 months = \frac{479}{5230\times 30} = 0.00305` per child-day
-  :math:`r3_{ux} = 1-e^(-0.00305) = 0.00305` 
-
-  :underline:`Death probability among untreated MAM 6-59 months` from James et al
-
-  :math:`rate of recovery among untreated MAM 6-59 months = \frac{4}{5230}` per child-month 
-  :math:`death rate among untreated MAM 6-59 months = \frac{4}{5230\times 30} = 0.000025` per child-day
-  :math:`d2_{ux} = 1-e^(-0.000025) = 0.000025` 
-
-  :underline:`Deterioration to SAM probability among untreated MAM 6-59 months` from James et al
-
-  :math:`rate of deterioration among untreated MAM 6-59 months = \frac{82}{5230}` per child-month
-  :math:`death rate among untreated MAM 6-59 months = \frac{82}{5230\times 30} = 0.00052` per child-day
-  :math:`d2_{ux} = 1-e^(-0.00052) = 0.00052` 
-
 
 
 .. list-table:: Modeled Outcomes **Table 4** SAM 6-59 months
@@ -614,69 +430,20 @@ We need coverage rate and efficacy rate to solve for all the variables stratifie
     - Effect size application
     - Value, source
     - Note
-  * - :math:`r2_{ux_{uncom}}`
+  * - :math:`r2_{ux}`
     - transition probability
-    - recovery probability of untreated uncomplicated SAM among 6-59 months
+    - Daily recovery prbability of untx SAM
+    - :math:`\frac{1}{\text{median time-to-recovery of utx SAM}}`
     - 
     - 
     - 
-    - 
-  * - :math:`r2_{tx_{uncom}}`
+  * - :math:`t1_{sam}`
     - transition probability
-    - recovery probability of treated uncomplicated SAM among 6-59 months
-    - :math:`E_{r2_{6-59_{otp}}}` recovery efficacy of OTP for uncomplicated SAM among 6-59 months (>1)
-    - :math:`r2_{ux_{uncom}}\times(E_{r2_{6-59_{OTP}}}) = r2_{tx_{uncom}}`
+    - Daily recovery probability of tx SAM 
+    - :math:`\frac{1}{\text{median time-to-recovery of tx SAM}}`
+    - 
     -
-    - May get :math:`r2_{tx_{uncom}}` from programmatic data/studies
-  * - :math:`d1_{ux_{uncom}}`
-    - mortality probability
-    - probability of death of untreated uncomplicated SAM among 6-59 months 
     - 
-    - 
-    - 
-    - 
-  * - :math:`d1_{tx_{uncom}}`
-    - mortality probability
-    - probability of death of treated uncomplicated SAM among 0-6 months
-    - :math:`E_{d1_{6-59_{otp}}}` mortality efficacy of OTP for SAM among 6-59 months (<1)
-    - :math:`d2_{ux_{uncom}}\times(E_{d1_{6-59_{OTP}}}) = d1_{tx_{uncom}}`
-    -
-    - May get :math:`d1_{tx_{uncom}}` from programmatic data/studies
-  * - :math:`r2_{ux_{com}}`
-    - transition probability
-    - recovery probability of untreated complicated SAM among 6-59 months
-    - 
-    - 
-    - 
-    - 
-  * - :math:`r2_{tx_{com}}`
-    - transition probability
-    - recovery probability of treated complicated SAM among 6-59 months 
-    - :math:`E_{r2_{6-59_{sc}}}` recovery efficacy of SC for complicated SAM among 6-59 months (>1)
-    - :math:`r2_{ux_{com}}\times(E_{r2_{6-59_{SC}}}) = r2_{tx_{com}}`
-    -
-    - May get :math:`r2_{tx_{com}}` from programmatic data/studies
-  * - :math:`d1_{ux_{com}}`
-    - mortality probability
-    - probability of death of untreated complicated SAM among 6-59 months
-    - 
-    - 
-    - 
-    - 
-  * - :math:`d1_{tx_{com}}`
-    - mortality probability
-    - probability of death of treated complicated SAM among 0-6 months
-    - :math:`E_{d1_{6-59_{sc}}}` mortality efficacy of SC for SAM among 6-59 months(<1)
-    - :math:`d2_{ux_{com}}\times(E_{d1_{6-59_{SC}}}) = d1_{tx_{uncom}}`
-    -
-    - May get :math:`d1_{tx_{com}}` from programmatic data/studies
-
-:underline:`Durations`
-
-| :math:`Dur_{SAM_{ux_{uncom}}} = \frac{1}{r2_{ux_{uncom}} + d1_{ux_{uncom}}}` 
-| :math:`Dur_{SAM_{tx_{uncom}}} = \frac{1}{r2_{tx_{uncom}} + d1_{tx_{uncom}}}` 
-| :math:`Dur_{SAM_{ux_{com}}} = \frac{1}{r2_{ux_{com}} + d1_{ux_{com}}}` 
-| :math:`Dur_{SAM_{ux_{com}}} = \frac{1}{r2_{ux_{com}} + d1_{ux_{com}}}` 
 
 Affected Outcome #1
 +++++++++++++++++++++
@@ -758,4 +525,20 @@ References
 .. [EMOH] Government of Ethiopia, Federal Ministry of Health. 2019. 
    National Guideline for the Management of Acute
    Malnutrition. Addis Ababa: FMOH.
+
+.. [WHO_2013_SAM_guidelines] 
+  
+  View `WHO 2013 SAM guideline`_
+
+    Updates on the management of severe acute malnutrition in infants and children
+
+.. _`WHO 2013 SAM guidelines`: https://www.who.int/publications/i/item/9789241506328
+
+.. [Isanaka_2021]
+
+  View `Isanaka 2021`_
+
+    Improving estimates of the burden of severe wasting: analysis of secondary prevalence and incidence data from 352 sites
+
+.. _`Isanaka 2021`: https://gh.bmj.com/content/6/3/e004342
 
