@@ -733,51 +733,7 @@ For the burn-in period (both scenarios):
 
 Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`prior_anticd38_treatment == True`). The hazard ratios are shown in the tables below.
 
-We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence. The treatment effect hazard ratios for each of these data sources are summarized in the following tables.
-
-.. list-table:: Clinical Trial Progression Free Survival Hazard Ratios
-  :header-rows: 1
-
-  * - Line of Treatment
-    - Isatuximab, not retreated
-    - Isatuximab, retreated
-    - Daratumumab, not retreated
-    - Daratumumab, retreated
-    - Residual
-  * - First
-    - 0.506 (0.402, 0.620)
-    - N/A
-    - 0.506 (0.402, 0.620)
-    - N/A
-    - 1.015 (1.011, 1.018)
-  * - Second, Third, Fourth
-    - 0.814 (0.593, 1.056)
-    - 0.927 (0.714, 1.077)
-    - 0.949 (0.581, 1.681)
-    - 0.987 (0.892, 1.207)
-    - 1.023 (0.627, 1.272)
-
-.. list-table:: Clinical Trial Overall Survival Hazard Ratios
-  :header-rows: 1
-
-  * - Line of Treatment
-    - Isatuximab, not retreated
-    - Isatuximab, retreated
-    - Daratumumab, not retreated
-    - Daratumumab, retreated
-    - Residual
-  * - First
-    - 0.760 (0.645, 0.895)
-    - N/A
-    - 0.760 (0.645, 0.895)
-    - N/A
-    - 1.015 (1.011, 1.018)
-  * - Second, Third, Fourth, Fifth+
-    - 1.031 (0.960, 1.105)
-    - 1.056 (0.928, 1.181)
-    - 1.031 (0.960, 1.105)
-    - 1.056 (0.928, 1.181)
-    - 0.984 (0.929, 1.020)
+We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. The population-based real world evidence treatment effect sizes should be used for the primary runs of the simulation (both for the baseline and alternative scenarios); the clinical trial effect sizes should be used for separate supplementary runs of the simulation (for the bsaeline and alternative scenarios) if/when time allows.
 
 .. list-table:: Population-Based Progression Free Survival Hazard Ratios
   :header-rows: 1
@@ -852,6 +808,50 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - 1.217 (0.976, 1.467)
     - 1.427 (0.834, 2.410)
     - 0.952 (0.744, 1.145)
+
+.. list-table:: Clinical Trial Progression Free Survival Hazard Ratios
+  :header-rows: 1
+
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.506 (0.402, 0.620)
+    - N/A
+    - 0.506 (0.402, 0.620)
+    - N/A
+    - 1.015 (1.011, 1.018)
+  * - Second, Third, Fourth
+    - 0.814 (0.593, 1.056)
+    - 0.927 (0.714, 1.077)
+    - 0.949 (0.581, 1.681)
+    - 0.987 (0.892, 1.207)
+    - 1.023 (0.627, 1.272)
+
+.. list-table:: Clinical Trial Overall Survival Hazard Ratios
+  :header-rows: 1
+
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.760 (0.645, 0.895)
+    - N/A
+    - 0.760 (0.645, 0.895)
+    - N/A
+    - 1.015 (1.011, 1.018)
+  * - Second, Third, Fourth, Fifth+
+    - 1.031 (0.960, 1.105)
+    - 1.056 (0.928, 1.181)
+    - 1.031 (0.960, 1.105)
+    - 1.056 (0.928, 1.181)
+    - 0.984 (0.929, 1.020)
 
 A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
 
