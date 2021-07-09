@@ -33,11 +33,11 @@
 
 
 
-.. _2019_risk_exposure_wasting_state_exposure:
+.. _2020_risk_exposure_wasting_state_exposure:
 
-=======
-Wasting
-=======
+================================
+Wasting as finite state machines
+================================
 
 .. contents::
   :local:
@@ -66,9 +66,6 @@ Wasting
 +-------+-----------------------------------------+
 
 
-
-.. _waste_exp1.0:
-
 Risk Exposure Overview
 ++++++++++++++++++++++
 
@@ -77,14 +74,13 @@ Malnutrition is an imbalance between the body’s needs and its use and intake o
 **Acute malnutrition (AM)**, also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate severe acute malnutrition (SAM). WHZ z-scores range from -7 to +7. Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. AM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, AM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children. 
 
 .. note::
-  Include here a clinical background and overview of the risk exposure you're modeling. Note that this is only for the exposure; you will include information on the relative risk of the relevant outcomes, and the cause models for those outcomes, in a different document.
-
-.. _waste_exp1.1:
+  Include here a clinical background and overview of the risk exposure you're 
+  modeling. Note that this is only for the exposure; you will include information 
+  on the relative risk of the relevant outcomes, and the cause models for those 
+  outcomes, in a different document.
 
 Risk Exposures Description in GBD
 +++++++++++++++++++++++++++++++++
-
-.. _waste_exp1.1.1:
 
 Case definition
 ---------------
@@ -103,8 +99,6 @@ Wasting, a sub-compoonent indicator of child growth failure (CGF), is based on a
 | SAM   |  < -3 Z score                        |
 +-------+--------------------------------------+
 
-.. _waste_exp1.1.2:
-
 Input data
 ----------
 
@@ -113,9 +107,6 @@ Two types of input data are used in CGF estimation:
   1. **Tabulated report data**. This data does not report individual anthropometric measurements. It only reports the prevalence of forms of CGF in a sample size. For example, this data would may report a 15% prevalence of moderate stunting out of a nationally representative sample of 5,000 children.
 
   2. **Microdata**. This data does have individual anthropometric measurements. From these datasources, GBD can see entire distributions of CGF, while also collapsing them down to point prevalences like moderate and severe CGF. 
-
-
-.. _waste_exp1.1.3:
 
 Exposure estimation
 ------------------- 
@@ -130,51 +121,66 @@ Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores be
   In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right now, he presents the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
 
 
-.. _waste_exp1.1.4:
-
 Outcomes affected by wasting
 ----------------------------
 
 CGF burden does not start until *after* neonatal age groups (from 1mo onwards). In the neonatal age groups (0-1mo), burden comes from LBWSG. From post-neonatal (1mo+) age onwards, CGF outcomes affected include lower-respiratory disease (LRI), diarrheal disease (DD), measles, and protein energy malnutrition (PEM). The literature on interventions for wasting target age groups 6mo onwards. This coincides with the timing of supplementary food introduction. Prior to 6mo, interventions to reduce DALYs focus on breastfeeding and reduction of LBWSG. 
 
-+------------------------------------------------------------------+
-|Adjusted RR for each risk-outcome pair for wasting                |
-+=======+=======+=======================+==========================+
-|       | TMREL |  >= -1                | 1                        |            
-+-------+-------+-----------------------+--------------------------+
-| DD    | MILD  | < -1 to -2 Z score    | 6.601 (2.158-11.243)     |
-|       +-------+-----------------------+--------------------------+
-|       | MAM   | < -2 to -3 Z score    | 23.261 (9.02-35.845)     |
-|       +-------+-----------------------+--------------------------+
-|       | SAM   | < -3 Z score          | 105.759 (42.198-157.813) |
-+-------+-------+-----------------------+--------------------------+
-| LRI   | MILD  | < -1 to -2 Z score    | 5.941 (1.972-11.992)     |
-|       +-------+-----------------------+--------------------------+
-|       | MAM   | < -2 to -3 Z score    | 20.455 (70.84-37.929)    |
-|       +-------+-----------------------+--------------------------+
-|       | SAM   | < -3 Z score          | 47.67 (15.923-94.874)    |
-+-------+-------+-----------------------+--------------------------+
-| MSLS  | MILD  | < -1 to -2 Z score    | 1.833 (0.569-8.965)      |
-|       +-------+-----------------------+--------------------------+
-|       | MAM   | < -2 to -3 Z score    | 8.477 (1.33-42.777)      |
-|       +-------+-----------------------+--------------------------+
-|       | SAM   | < -3 Z score          | 37.936 (5.088-199.126)   |
-+-------+-------+-----------------------+--------------------------+
-| PEM   |       |                       | 100% PAF                 |
-+-------+-------+-----------------------+--------------------------+
-
-
-.. _waste_exp2.0:
+.. todo::
+  Put RRs here(?)
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-.. _waste_exp2.1:
+We will build a duration based Markov chain finite state state transition model 
+for progression and recovery of acute malnutrition calibrated to GBD 2020 
+prevalence of wasting. We do this progressively from a wasting only model to one 
+with causes and disease feedback. The arrows in the model diagram figures 
+represent the transition probabilities into and out of each state which 
+determines the movement of children in and out of each state. 
+
+We first build
+
+  1. 1x4 state model with wasting only
+  2. 2x4 state model with 2 disease states and 4 wasting states
+  3. 2x4 state model with 2 disease states and 4 wasting states with death and fertility (tbd)
+
+
+Assumptions and Limitations
++++++++++++++++++++++++++++
+
+Describe the clinical and mathematical assumptions made for this cause model,
+and the limitations these assumptions impose on the applicability of the
+model.
+
+Markov chains
+-------------
+
+.. todo::
+  add some detail about markov chains, define mathematic notations 
+
+Equilibirum
+-----------
+
+.. todo::
+  add some detail about equilirium
+
+Arborescence
+------------
+
+.. todo::
+  add some detail about graph theory and the process we did to discover the pattern in our markov chains
+
+As a rule for the finiate state machines, the numerator of the prevalence of a state is the sum of the product of all edges in every unique anti-arborescence (graph theory).
+
+.. note::
+  This section will become the methods section in the manuscript. 
+
 
 Restrictions
 ------------
 
-.. list-table:: GBD 2019 Risk Exposure Restrictions
+.. list-table:: GBD 2020 Risk Exposure Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
@@ -188,22 +194,18 @@ Restrictions
      - False
      -
    * - Age group start
-     - post-neonatal 1mo to 1 year, id 4 
-     - exclude neonatal age groups
+     -
+     -
    * - Age group end
-     - 1yr to 4yr id 5
-     - 
+     -
+     -
 
 ..	todo::
 
 	Determine if there's something analogous to "YLL/YLD only" for this section
 
-.. _waste_exp2.2:
-
 Risk Exposure Model Diagram
 ---------------------------
-
-.. _waste_exp2.2.1:
 
 Finite state machine 1x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~
@@ -230,7 +232,7 @@ T =
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2020 age/sex/location/year-specific prevalence for wasting categories 1-4
 
 
 Solving a)
@@ -271,7 +273,7 @@ find values from the literature with which to update this.
 
 Solving in terms of :math:`i_3`, we get:
 
-.. list-table:: Transition rates solved in terms of :math:`i_3`
+.. list-table:: Transition probabilities solved in terms of :math:`i_3`
    :widths: 10 25
    :header-rows: 1
 
@@ -299,7 +301,7 @@ Solving in terms of :math:`i_3`, we get:
 
 Solving in terms of :math:`dur\_cat3`, we get:
 
-.. list-table:: Transition rates solved in terms of :math:`dur\_cat3`
+.. list-table:: Transition probabilities solved in terms of :math:`dur\_cat3`
    :widths: 10 25
    :header-rows: 1
 
@@ -481,14 +483,14 @@ over time, we allow sims to age in to the four wasting categories out of
 It is important here to note first that :math:`f_i` don't represent fertility rates, 
 but rather that we only allow enough sims to age in each timestep necessary to 
 replenish those that died. Second, we emphasize that we utilize this method in 
-order to calculate transition rates between the different wasting categories. 
+order to calculate transition probabilities between the different wasting categories. 
 However, the final Vivarium model of wasting will not include a reincarnation 
 pool.
 
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used
 
-.. list-table:: Wasting transition rate equations
+.. list-table:: Wasting transition probability equations
    :widths: 5 15 20
    :header-rows: 1
 
@@ -497,34 +499,34 @@ that follows we will detail how to calculate all the variables used
      - Description
    * - s1
      - (dur_cat1 - 1)/dur_cat1
-     - Rate of remaining in cat1 (SAM)
+     - Probability of remaining in cat1 (SAM)
    * - s2
      - (dur_cat2 - 1)/dur_cat2
-     - Rate of remaining in cat2 (MAM)
+     - Probability of remaining in cat2 (MAM)
    * - s3
      - (dur_cat3 - 1)/dur_cat3
-     - Rate of remaining in cat3 (Mild wasting)
+     - Probability of remaining in cat3 (Mild wasting)
    * - s4
      - -ap0*f2/ap4 - ap0*f4/ap4 - ap2*d2/ap4 - d4 + (ap0*dur_cat1*dur_cat2*dur_cat3 - ap1*dur_cat2*dur_cat3 + ap2*dur_cat1*dur_cat3 - ap3*dur_cat1*dur_cat2 + ap4*dur_cat1*dur_cat2*dur_cat3)/(ap4*dur_cat1*dur_cat2*dur_cat3)
-     - Rate of remaining in cat4 (wasting TMREL)
+     - Probability of remaining in cat4 (wasting TMREL)
    * - r2
      - ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0*dur_cat1 + ap1)/(ap1*dur_cat1)
-     - Remission rate into cat2 (MAM)
+     - Remission probability into cat2 (MAM)
    * - r3
      - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - d2 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap2*dur_cat1*dur_cat2)
-     - Remission rate into cat3 (Mild wasting)
+     - Remission probability into cat3 (Mild wasting)
    * - r4
      - ap0*f2/ap3 + ap2*d2/ap3 + ap4*d4/ap3 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap3*dur_cat1*dur_cat2*dur_cat3)
-     - Remission rate into cat4 (wasting TMREL)
+     - Remission probability into cat4 (wasting TMREL)
    * - i1
      - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + (-ap0*dur_cat1 + ap1)/(ap2*dur_cat1)
-     - Incidence rate into cat1 (SAM)
+     - Incidence probability into cat1 (SAM)
    * - i2
      - -ap0*f2/ap3 - ap2*d2/ap3 - d3 - ap4*d4/ap3 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap3*dur_cat1*dur_cat2)
-     - Incidence rate into cat2 (MAM)
+     - Incidence probability into cat2 (MAM)
    * - i3
      - ap0*f2/ap4 + ap0*f4/ap4 + ap2*d2/ap4 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap4*dur_cat1*dur_cat2*dur_cat3)
-     - Incidence rate into cat3 (Mild wasting)
+     - Incidence probability into cat3 (Mild wasting)
 
 
 in terms of the following variables:
@@ -538,17 +540,17 @@ in terms of the following variables:
      - Equation
      - Notes
    * - :math:`d_i` for :math:`i\in \{1,2\}`
-     - Death rate out of MAM (cat 2) or SAM (cat 1)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci} - csmr_{c})` :math:`+ emr_{pem}*1 - csmr_{pem}`
+     - Death probability out of MAM (cat 2) or SAM (cat 1)
+     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})` :math:`+ emr_{pem}*1 - csmr_{pem}`
      - 
    * - :math:`d_i` for :math:`i\in \{3,4\}`
-     - Death rate out of Mild wasting (cat 3) or wasting TMREL (cat 4)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci} - csmr_{c})`
+     - Death probability out of Mild wasting (cat 3) or wasting TMREL (cat 4)
+     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})`
      -
    * - :math:`f_i`
-     - "Age-in" rate into :math:`cat_i`
+     - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
-     - These rates were chosen to maintain equilibrium of our system
+     - These probabilities were chosen to maintain equilibrium of our system
    * - :math:`ap_0`
      - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
      - 1 - exp(-acmr * 1 / 365)
@@ -577,10 +579,10 @@ in terms of the following variables:
      - The average duration of cause c
      - 10 days (for measles, diarrhea, and lri)
    * - :math:`incidence_{ci}`
-     - incidence rate of cause c among wasting category i
+     - incidence probability of cause c among wasting category i
      - :math:`incidence_{c}*(1-paf_{c})*rr_{ci}`
    * - :math:`incidence_c`
-     - population-level incidence rate of cause c 
+     - population-level incidence probability of cause c 
      - Pulled from GBD
    * - :math:`paf_{c}`
      - The PAF of cause c attributable to wasting
@@ -592,16 +594,13 @@ in terms of the following variables:
      - the prevalence of wasting category i 
      - Pulled from GBD
    * - :math:`acmr`
-     - All-cause mortality rate
+     - All-cause mortality probability
      - Pulled from GBD
    * - :math:`emr_c`
-     - Excess mortality rate of cause c
-     - Pulled from GBD
-   * - :math:`csmr_c`
-     - Cause-specific mortality rate of cause c
+     - Excess mortality probability of cause c
      - Pulled from GBD
 
-We now detail how the above wasting rate transition equations were derived.
+We now detail how the above wasting probability transition equations were derived.
 
 .. todo::
   Consider adding all code for calculating above eqns.
@@ -627,7 +626,7 @@ T =
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of people who die in a timestep
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2020 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of people who die in a timestep
 
 
 Solving a)
@@ -800,8 +799,6 @@ where
   result_1 = sym.solve(A1 * x1 - b1, x1)
 
 
-.. _waste_exp2.2.2:
-
 Finite state machine 2x4 
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -814,5 +811,40 @@ Finite state machine 2x4
 Data Description Tables
 +++++++++++++++++++++++
 
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not ge
+As we are building this model before the completion of GBD 2020, we 
+will need to calculate the PAFs ourselves, using the following equation:
+
+.. math::
+  \frac{(\sum_{wasting\_category_i} prevalence_{i} * rr_{ci})-1}{\sum_{wasting\_category_i} prevalence_{i} * rr_{ci}}
+
+.. list-table:: PAF equation variable descriptions
+   :widths: 6 10 10
+   :header-rows: 1
+
+   * - Variable
+     - Description
+     - Equation
+   * - :math:`rr_{ci}`
+     - The relative risk for incidence of cause c given wasting category i
+     -
+   * - :math:`prevalence_{i}`
+     - the prevalence of wasting category i 
+     - Pulled from GBD
+
+
+Note the RRs should be pulled as follows:
+
+
+.. code-block:: python
+
+  from get_draws.api import get_draws
+  get_draws(
+    gbd_id_type='rei_id',
+    gbd_id=240,
+    source='rr',
+    location_id=179,
+    sex_id=[1,2],
+    age_group_id=[2, 3, 388, 389, 34],
+    decomp_step='iterative',
+    status='best'
+  )
