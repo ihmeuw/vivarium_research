@@ -233,12 +233,23 @@ For GBD 2020, the RRs were updated. This text is from unpublished GBD 2020:
 +-------+-------+-----------------------+--------------------+
 
 
+.. code-block:: Python
+
+  get_draws("rei_id",
+     gbd_id = 241,
+     source = "rr", 
+     gbd_round_id = 7, 
+     decomp_step = "iterative", 
+     year_id = 2020)
+
+  #make sure you have the right version of get_draws package: pip install -U get_draws==3.1.3 (latest is 4.0.2)
+
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
 Child stunting in GBD has an **ordered polytomous variable**. It has rei_id 241
 
-We will use a 'propensity exposure model' for child stunting, in which each simulant is initialized with a “propensity” for a stunting category, and the simulant’s stunting category is determined by comparing this propensity to the overall stunting exposure/prevalence in the population. 
+We will use a 'propensity exposure model' for child stunting, in which each simulant is initialized with a “propensity” for a stunting category (cat 1,2,3,4), and the simulant’s stunting category is determined by comparing this propensity to the overall stunting exposure prevalence distributions in the population. This propensity determines at what percentile of the risk exposure they are. To obtain the propensity, assign each simulant a random number using  uniform distribution between 0 and 1 ``np.random.uniform()``. 
 
 .. todo::
 
@@ -248,7 +259,7 @@ We will use a 'propensity exposure model' for child stunting, in which each simu
 Restrictions
 ------------
 
-.. list-table:: GBD 2019 Risk Exposure Restrictions
+.. list-table:: GBD 2020 Risk Exposure Restrictions
    :widths: 15 15 20
    :header-rows: 1
 
@@ -269,14 +280,23 @@ Restrictions
      -
    * - YLL age group start
      - post-neonatal 
-     - 28d - 1y, age_group_id = 4 
+     - 1 - 5 month, age_group_id = 388 
    * - YLL age group end
-     - 1y - 4y
-     - 1yr - 5yr age_group_id = 5
+     - 2y - 4y
+     - 2 - 5 year age_group_id = 34
 
-..	todo::
+.. code-block:: Python
+	  
+    GBD 2020 age-group ids
 
-	discuss if we want to use 2020 restrictions or 2019 restrictions? The age groups differ? 
+    early nn = 2
+    late nn = 3
+    1m-5m = 388
+    6m-11m = 389
+    12m-23m = 238
+    2y-4y = 34
+
+
 
 .. _stunting2.2:
 
@@ -304,7 +324,7 @@ The following code can be used to access the category prevalences (2020).
     location_id = [179],
     decomp_step = 'iterative')
 
-The following code can be used to access the summary-exposure value (2019).
+The following code can be used to access the summary-exposure value (2020).
 
 .. code-block:: python
   
@@ -314,13 +334,13 @@ The following code can be used to access the summary-exposure value (2019).
               rei_id= [241], 
               measure_id=29, #summary exposure value
               metric_id=3, #rate
-              gbd_round_id=6, 
+              gbd_round_id=7, 
               location_id=[179], 
-              year_id=2019, #need to find the exposures for 2020
-              decomp_step = 'step5')
+              year_id=2020, #need to find the exposures for 2020
+              decomp_step = 'iterative')
   stunting_sev.head()
 
-  #all ages, both sexes: 0.249026 (0.279422, 0.172527)
+  
 
 .. todo:: 
   need to get these for 2020 
