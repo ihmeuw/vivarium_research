@@ -478,7 +478,7 @@ over time, we allow sims to age in to the four wasting categories out of
 **CAT 0**, our "reincarnation pool". We then set the transition probabilies 
 :math:`f_i` equal to the prevalence of the four wasting categories.
 
-.. image:: wasting_state_1x4_plus_death.svg
+.. image:: wasting_diagram_with_treatment.svg
 
 It is important here to note first that :math:`f_i` don't represent fertility rates, 
 but rather that we only allow enough sims to age in each timestep necessary to 
