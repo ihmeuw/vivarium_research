@@ -454,7 +454,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Age
     - Impairment defined as eGFR less than 60. No suspected confounding by race
 
-Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution. For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
+Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution (`sampling instructions`_). For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
 
 For implementation in the model, each dichotomous risk factor exposure level will need a PFS and OS hazard ratio relative to the time-varying baseline hazard rate, obtained from the multiple myeloma cause model (rather than the opposite risk factor exposure level as shown above). The following steps describe how to derive these hazard ratios and how to appropriately apply them to a simulant's baseline hazard.
 
@@ -777,17 +777,28 @@ Each treatment category has a hazard ratio associated with it both for progressi
      - 1.331 (1.324, 1.337)
      - 1.181 (1.171, 1.190)
 
-A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
+.. _`sampling instructions`:
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. Additionally, each time a value for a progression free survival hazard ratio is sampled for a given parameter (including each treatment, covariate, and risk factor effect), the same percentile within the distribution of uncertainty should be sampled for overall survival hazard ratio for that parameter. This dependent sampling strategy was chosen because PFS and OS hazard ratios are not independent of each other given that PFS is inclusive of OS.
+
+The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
 
 .. code-block:: python
 
-	from numpy import log
-	from scipy.stats import norm, lognorm
+  from numpy import log
+  from scipy.stats import norm, lognorm
+  import random
 
-	q_975_stdnorm = norm().ppf(0.975)
-	mu = log(hr)
-	sigma = (log(hr_upper) - mu) / q_975_stdnorm
-	hr_distribution = lognorm(s=sigma, scale=hr)
+  def sample_paired_pfs_and_os_hazard_ratio_values(pfs_mid, 
+                                                   pfs_upper, 
+                                                   os_mid, 
+                                                   os_upper, 
+                                                   seed):
+    random.seed(seed)
+    pfs_value = lognorm(s=(log(pfs_upper) - log(pfs_mid)) / q_975_stdnorm, scale=pfs_mid).ppf(random.random())
+    random.seed(seed)
+    os_value = lognorm(s=(log(os_upper) - log(os_mid)) / q_975_stdnorm, scale=os_mid).ppf(random.random())
+    return pfs_value, os_value
 
 The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
 
