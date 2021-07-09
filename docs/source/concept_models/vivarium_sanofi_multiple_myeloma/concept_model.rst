@@ -738,120 +738,120 @@ We will run two separate simulations, one using the treatment effect sizes from 
 .. list-table:: Clinical Trial Progression Free Survival Hazard Ratios
   :header-rows: 1
 
-   * - Line of Treatment
-     - Isatuximab, not retreated
-     - Isatuximab, retreated
-     - Daratumumab, not retreated
-     - Daratumumab, retreated
-     - Residual
-   * - First
-     - 0.506 (0.402, 0.620)
-     - N/A
-     - 0.506 (0.402, 0.620)
-     - N/A
-     - 1.015 (1.011, 1.018)
-   * - Second, Third, Fourth
-     - 0.814 (0.593, 1.056)
-     - 0.927 (0.714, 1.077)
-     - 0.949 (0.581, 1.681)
-     - 0.987 (0.892, 1.207)
-     - 1.023 (0.627, 1.272)
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.506 (0.402, 0.620)
+    - N/A
+    - 0.506 (0.402, 0.620)
+    - N/A
+    - 1.015 (1.011, 1.018)
+  * - Second, Third, Fourth
+    - 0.814 (0.593, 1.056)
+    - 0.927 (0.714, 1.077)
+    - 0.949 (0.581, 1.681)
+    - 0.987 (0.892, 1.207)
+    - 1.023 (0.627, 1.272)
 
 .. list-table:: Clinical Trial Overall Survival Hazard Ratios
   :header-rows: 1
 
-   * - Line of Treatment
-     - Isatuximab, not retreated
-     - Isatuximab, retreated
-     - Daratumumab, not retreated
-     - Daratumumab, retreated
-     - Residual
-   * - First
-     - 0.760 (0.645, 0.895)
-     - N/A
-     - 0.760 (0.645, 0.895)
-     - N/A
-     - 1.015 (1.011, 1.018)
-   * - Second, Third, Fourth, Fifth+
-     - 1.031 (0.960, 1.105)
-     - 1.056 (0.928, 1.181)
-     - 1.031 (0.960, 1.105)
-     - 1.056 (0.928, 1.181)
-     - 0.984 (0.929, 1.020)
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.760 (0.645, 0.895)
+    - N/A
+    - 0.760 (0.645, 0.895)
+    - N/A
+    - 1.015 (1.011, 1.018)
+  * - Second, Third, Fourth, Fifth+
+    - 1.031 (0.960, 1.105)
+    - 1.056 (0.928, 1.181)
+    - 1.031 (0.960, 1.105)
+    - 1.056 (0.928, 1.181)
+    - 0.984 (0.929, 1.020)
 
 .. list-table:: Population-Based Progression Free Survival Hazard Ratios
   :header-rows: 1
 
-   * - Line of Treatment
-     - Isatuximab, not retreated
-     - Isatuximab, retreated
-     - Daratumumab, not retreated
-     - Daratumumab, retreated
-     - Residual
-   * - First
-     - 0.932 (0.647, 1.365)
-     - N/A
-     - 0.932 (0.647, 1.365)
-     - N/A
-     - 1.002 (0.989, 1.018)
-   * - Second
-     - 1.283 (0.878, 1.178)
-     - 1.632 (0.905, 2.733)
-     - 1.146 (1.000, 1.318)
-     - 1.333 (0.995, 1.702)
-     - 0.962 (0.920, 1.000)
-   * - Third
-     - 1.405 (0.924, 2.020)
-     - 1.883 (0.974, 3.100)
-     - 1.133 (0.977, 1.296)
-     - 1.345 (0.993, 1.747)
-     - 0.930 (0.852, 1.001)
-   * - Fourth
-     - 0.736 (0.394, 1.265)
-     - 0.878 (0.653, 1.583)
-     - 1.098 (0.877, 1.327)
-     - 1.275 (0.981, 1.843)
-     - 0.955 (0.822, 1.081)
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.932 (0.647, 1.365)
+    - N/A
+    - 0.932 (0.647, 1.365)
+    - N/A
+    - 1.002 (0.989, 1.018)
+  * - Second
+    - 1.283 (0.878, 1.178)
+    - 1.632 (0.905, 2.733)
+    - 1.146 (1.000, 1.318)
+    - 1.333 (0.995, 1.702)
+    - 0.962 (0.920, 1.000)
+  * - Third
+    - 1.405 (0.924, 2.020)
+    - 1.883 (0.974, 3.100)
+    - 1.133 (0.977, 1.296)
+    - 1.345 (0.993, 1.747)
+    - 0.930 (0.852, 1.001)
+  * - Fourth
+    - 0.736 (0.394, 1.265)
+    - 0.878 (0.653, 1.583)
+    - 1.098 (0.877, 1.327)
+    - 1.275 (0.981, 1.843)
+    - 0.955 (0.822, 1.081)
 
 .. list-table:: Population-Based Overall Survival Hazard Ratios
   :header-rows: 1
 
-   * - Line of Treatment
-     - Isatuximab, not retreated
-     - Isatuximab, retreated
-     - Daratumumab, not retreated
-     - Daratumumab, retreated
-     - Residual
-   * - First
-     - 0.971 (0.627, 1.488)
-     - N/A
-     - 0.971 (0.627, 1.488)
-     - N/A
-     - 1.001 (0.986, 1.011)
-   * - Second
-     - 1.517 (0.939, 2.349)
-     - 2.085 (0.946, 3.634)
-     - 1.225 (1.035, 1.443)
-     - 1.502 (1.051, 1.944)
-     - 0.941 (0.887, 0.987)
-   * - Third
-     - 1.453 (0.896, 2.407)
-     - 2.008 (0.975, 3.790)
-     - 1.265 (1.078, 1.457)
-     - 1.685 (1.231, 2.152)
-     - 0.865 (0.773, 0.951)
-   * - Fourth
-     - 1.627 (0.948, 2.628)
-     - 2.333 (1.031, 4.074)
-     - 1.217 (0.976, 1.467)
-     - 1.620 (1.008, 2.210)
-     - 0.834 (0.702, 0.969)
-   * - Fifth+
-     - 0.592 (0.103, 1.947)
-     - 0.914 (0.493, 2.643)
-     - 1.217 (0.976, 1.467)
-     - 1.427 (0.834, 2.410)
-     - 0.952 (0.744, 1.145)
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.971 (0.627, 1.488)
+    - N/A
+    - 0.971 (0.627, 1.488)
+    - N/A
+    - 1.001 (0.986, 1.011)
+  * - Second
+    - 1.517 (0.939, 2.349)
+    - 2.085 (0.946, 3.634)
+    - 1.225 (1.035, 1.443)
+    - 1.502 (1.051, 1.944)
+    - 0.941 (0.887, 0.987)
+  * - Third
+    - 1.453 (0.896, 2.407)
+    - 2.008 (0.975, 3.790)
+    - 1.265 (1.078, 1.457)
+    - 1.685 (1.231, 2.152)
+    - 0.865 (0.773, 0.951)
+  * - Fourth
+    - 1.627 (0.948, 2.628)
+    - 2.333 (1.031, 4.074)
+    - 1.217 (0.976, 1.467)
+    - 1.620 (1.008, 2.210)
+    - 0.834 (0.702, 0.969)
+  * - Fifth+
+    - 0.592 (0.103, 1.947)
+    - 0.914 (0.493, 2.643)
+    - 1.217 (0.976, 1.467)
+    - 1.427 (0.834, 2.410)
+    - 0.952 (0.744, 1.145)
 
 A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
 
