@@ -301,10 +301,6 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
 
   As described in the table above, because the progression free survival/treatment duration hazard rates informed from Flatiron health data represent the rate of progression/treatment cessation due to progression *in addition to* the rate of death, we will model the rate of progression to the next disease state independent mortality by subtracting the overall survival hazard rate from the progression free survival/treatment duration hazard rate.
 
-.. todo::
-
-  Confirm that the overall survival hazard rate is always less than the progression free survival/treatment duration hazard rate at the draw level for the data currently used to inform these measures in our simulation.
-
 data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
 
 .. list-table:: Data sources
