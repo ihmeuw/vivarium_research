@@ -273,7 +273,7 @@ find values from the literature with which to update this.
 
 Solving in terms of :math:`i_3`, we get:
 
-.. list-table:: Transition rates solved in terms of :math:`i_3`
+.. list-table:: Transition probabilities solved in terms of :math:`i_3`
    :widths: 10 25
    :header-rows: 1
 
@@ -301,7 +301,7 @@ Solving in terms of :math:`i_3`, we get:
 
 Solving in terms of :math:`dur\_cat3`, we get:
 
-.. list-table:: Transition rates solved in terms of :math:`dur\_cat3`
+.. list-table:: Transition probabilities solved in terms of :math:`dur\_cat3`
    :widths: 10 25
    :header-rows: 1
 
@@ -483,14 +483,14 @@ over time, we allow sims to age in to the four wasting categories out of
 It is important here to note first that :math:`f_i` don't represent fertility rates, 
 but rather that we only allow enough sims to age in each timestep necessary to 
 replenish those that died. Second, we emphasize that we utilize this method in 
-order to calculate transition rates between the different wasting categories. 
+order to calculate transition probabilities between the different wasting categories. 
 However, the final Vivarium model of wasting will not include a reincarnation 
 pool.
 
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used
 
-.. list-table:: Wasting transition rate equations
+.. list-table:: Wasting transition probability equations
    :widths: 5 15 20
    :header-rows: 1
 
@@ -499,34 +499,34 @@ that follows we will detail how to calculate all the variables used
      - Description
    * - s1
      - (dur_cat1 - 1)/dur_cat1
-     - Rate of remaining in cat1 (SAM)
+     - Probability of remaining in cat1 (SAM)
    * - s2
      - (dur_cat2 - 1)/dur_cat2
-     - Rate of remaining in cat2 (MAM)
+     - Probability of remaining in cat2 (MAM)
    * - s3
      - (dur_cat3 - 1)/dur_cat3
-     - Rate of remaining in cat3 (Mild wasting)
+     - Probability of remaining in cat3 (Mild wasting)
    * - s4
      - -ap0*f2/ap4 - ap0*f4/ap4 - ap2*d2/ap4 - d4 + (ap0*dur_cat1*dur_cat2*dur_cat3 - ap1*dur_cat2*dur_cat3 + ap2*dur_cat1*dur_cat3 - ap3*dur_cat1*dur_cat2 + ap4*dur_cat1*dur_cat2*dur_cat3)/(ap4*dur_cat1*dur_cat2*dur_cat3)
-     - Rate of remaining in cat4 (wasting TMREL)
+     - Probability of remaining in cat4 (wasting TMREL)
    * - r2
      - ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0*dur_cat1 + ap1)/(ap1*dur_cat1)
-     - Remission rate into cat2 (MAM)
+     - Remission probability into cat2 (MAM)
    * - r3
      - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - d2 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap2*dur_cat1*dur_cat2)
-     - Remission rate into cat3 (Mild wasting)
+     - Remission probability into cat3 (Mild wasting)
    * - r4
      - ap0*f2/ap3 + ap2*d2/ap3 + ap4*d4/ap3 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap3*dur_cat1*dur_cat2*dur_cat3)
-     - Remission rate into cat4 (wasting TMREL)
+     - Remission probability into cat4 (wasting TMREL)
    * - i1
      - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + (-ap0*dur_cat1 + ap1)/(ap2*dur_cat1)
-     - Incidence rate into cat1 (SAM)
+     - Incidence probability into cat1 (SAM)
    * - i2
      - -ap0*f2/ap3 - ap2*d2/ap3 - d3 - ap4*d4/ap3 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap3*dur_cat1*dur_cat2)
-     - Incidence rate into cat2 (MAM)
+     - Incidence probability into cat2 (MAM)
    * - i3
      - ap0*f2/ap4 + ap0*f4/ap4 + ap2*d2/ap4 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap4*dur_cat1*dur_cat2*dur_cat3)
-     - Incidence rate into cat3 (Mild wasting)
+     - Incidence probability into cat3 (Mild wasting)
 
 
 in terms of the following variables:
@@ -540,17 +540,17 @@ in terms of the following variables:
      - Equation
      - Notes
    * - :math:`d_i` for :math:`i\in \{1,2\}`
-     - Death rate out of MAM (cat 2) or SAM (cat 1)
+     - Death probability out of MAM (cat 2) or SAM (cat 1)
      - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})` :math:`+ emr_{pem}*1 - csmr_{pem}`
      - 
    * - :math:`d_i` for :math:`i\in \{3,4\}`
-     - Death rate out of Mild wasting (cat 3) or wasting TMREL (cat 4)
+     - Death probability out of Mild wasting (cat 3) or wasting TMREL (cat 4)
      - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})`
      -
    * - :math:`f_i`
-     - "Age-in" rate into :math:`cat_i`
+     - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
-     - These rates were chosen to maintain equilibrium of our system
+     - These probabilities were chosen to maintain equilibrium of our system
    * - :math:`ap_0`
      - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
      - 1 - exp(-acmr * 1 / 365)
@@ -579,10 +579,10 @@ in terms of the following variables:
      - The average duration of cause c
      - 10 days (for measles, diarrhea, and lri)
    * - :math:`incidence_{ci}`
-     - incidence rate of cause c among wasting category i
+     - incidence probability of cause c among wasting category i
      - :math:`incidence_{c}*(1-paf_{c})*rr_{ci}`
    * - :math:`incidence_c`
-     - population-level incidence rate of cause c 
+     - population-level incidence probability of cause c 
      - Pulled from GBD
    * - :math:`paf_{c}`
      - The PAF of cause c attributable to wasting
@@ -594,13 +594,13 @@ in terms of the following variables:
      - the prevalence of wasting category i 
      - Pulled from GBD
    * - :math:`acmr`
-     - All-cause mortality rate
+     - All-cause mortality probability
      - Pulled from GBD
    * - :math:`emr_c`
-     - Excess mortality rate of cause c
+     - Excess mortality probability of cause c
      - Pulled from GBD
 
-We now detail how the above wasting rate transition equations were derived.
+We now detail how the above wasting probability transition equations were derived.
 
 .. todo::
   Consider adding all code for calculating above eqns.
