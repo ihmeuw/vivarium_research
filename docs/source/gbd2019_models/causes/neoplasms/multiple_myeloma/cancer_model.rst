@@ -279,23 +279,31 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
    * - incidence_MM_first_relapse
      - MM
      - MM_first_relapse
-     - data_dir/incidence First-line.csv
+     - data_dir/incidence First-line.csv - data_dir/mortality First-line.csv
      - Derived from progress-free survival of first-line therapy in Braunlin et al.
    * - incidence_MM_second_relapse
      - MM_first_relapse
      - MM_second_relapse
-     - data_dir/incidence Second-line.csv
+     - data_dir/incidence Second-line.csv - data_dir/mortality Second-line.csv
      - Derived from progress-free survival of second-line therapy in Braunlin et al.
    * - incidence_MM_third_relapse
      - MM_second_relapse
      - MM_third_relapse
-     - data_dir/incidence Third-line.csv
+     - data_dir/incidence Third-line.csv - data_dir/mortality Third-line.csv
      - Derived from progress-free survival of third-line therapy in Braunlin et al.
    * - incidence_MM_fourth_or_higher_relapse
      - MM_third_relapse
      - MM_fourth_or_higher_relapse
-     - data_dir/incidence Fourth-line.csv
+     - data_dir/incidence Fourth-line.csv - data_dir/mortality Fourth-line.csv
      - Derived from progress-free survival of fourth-line therapy in Braunlin et al.
+
+.. note::
+
+  As described in the table above, because the progression free survival/treatment duration hazard rates informed from Flatiron health data represent the rate of progression/treatment cessation due to progression *in addition to* the rate of death, we will model the rate of progression to the next disease state independent mortality by subtracting the overall survival hazard rate from the progression free survival/treatment duration hazard rate.
+
+.. todo::
+
+  Confirm that the overall survival hazard rate is always less than the progression free survival/treatment duration hazard rate at the draw level for the data currently used to inform these measures in our simulation.
 
 data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
 

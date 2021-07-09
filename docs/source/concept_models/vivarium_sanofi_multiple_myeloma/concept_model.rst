@@ -496,6 +496,16 @@ and
 
   h_\text{simulant} = h_\text{baseline} * HR_\text{sex(i)} * HR_\text{age(i)}  * HR_\text{race(i)} * HR_\text{cytogenetic risk(i), conditional on race(i)} * HR_\text{renal impairment(i)}
 
+.. note::
+
+  The relapse hazard rate is equal to the progression free survival hazard rate *minus* the overall survival hazard rate. Therefore, the hazard ratios specific to a simulant should be applied to the relapse (incidence to next MM cause model state) and mortality hazards should be as follows:
+
+  .. math::
+
+    h_\text{mortality(i)} = h_\text{OS} * HR_\text{OS(i)}
+
+    h_\text{relapse(i)} = h_\text{PFS} * HR_\text{PFS(i)} - h_\text{mortality(i)}
+
 .. 5.3.2.3:
 
 5.3.2.3 Assumptions and Limitations
@@ -790,6 +800,16 @@ A lognormal distribution of uncertainty within the uncertainty intervals reporte
 	hr_distribution = lognorm(s=sigma, scale=hr)
 
 The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
+
+.. note::
+
+  The relapse hazard rate is equal to the progression free survival hazard rate *minus* the overall survival hazard rate. Therefore, the hazard ratios specific to a simulant should be applied to the relapse (incidence to next MM cause model state) and mortality hazards should be as follows:
+
+  .. math::
+
+    h_\text{mortality(i)} = h_\text{OS} * HR_\text{OS(i)}
+
+    h_\text{relapse(i)} = h_\text{PFS} * HR_\text{PFS(i)} - h_\text{mortality(i)}
 
 *Observers*:
 
