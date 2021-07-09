@@ -16,12 +16,12 @@ hemoglobin concentrations below a defined threshold that varies by age and sex.
 Severity of anemia is similarly classified according to ranges of hemoglobin
 concentrations. Anemia is associated with increased morbidity and mortality and
 symptoms of anemia often include weakness, fatigue, and difficulty
-concentrating [Kassebaum-et-al-2016]_.
+concentrating [Kassebaum-et-al-2016-iron-deficiency-2019]_.
 
  Notably, anemia may be caused by many diverse factors. Examples of factors
  that may cause anemia include genetic mutations in hemoglobin genes, acute or
  chronic blood loss, altered red blood cell morphology, inadequate nutritional
- intake, and others [Kassebaum-et-al-2016]_.
+ intake, and others [Kassebaum-et-al-2016-iron-deficiency-2019]_.
 
 **Iron deficiency anemia** is a type of anemia that is due to insufficient
 iron levels, which lead to a deficiency of hemoglobin in the blood. Notably,
@@ -40,7 +40,6 @@ The hemoglobin, anemia, and iron deficiency estimates in GBD 2019 are complex an
    :maxdepth: 1
    :glob:
 
-   *
    */index
 
 Hemoglobin Model
@@ -76,7 +75,7 @@ The iron deficiency risk factor exposure model should be utilized when the popul
 References
 ----------
 
-.. [Kassebaum-et-al-2016]
+.. [Kassebaum-et-al-2016-iron-deficiency-2019]
 
   View `Kassebaum et al. 2016`_
 

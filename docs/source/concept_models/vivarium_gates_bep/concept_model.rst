@@ -60,7 +60,7 @@ Vivarium Gates Balanced Energy Protein
 | CGF   | child-growth failure       |
 +-------+----------------------------+
 
-.. _1.0:
+.. _bep1.0:
 
 1.0 Background
 ++++++++++++++
@@ -74,7 +74,7 @@ Multi-micronutrients (MMN): Vitamin A deficiency is measured in night blindness 
 Balanced energy protein (BEP): Under-nourished women are negatively associated with fetal growth and have increased risk of preterm birth. Balanced protein (where protein content provides less than 25% of total energy content) supplementation during pregnancy may help with gestational weight gain and subsequently avert adverse pregnancy outcomes, but the benefits are unclear. WHO recommends BEP for populations or settings with a high prevalence of undernourished pregnant women (not for individual pregnant women identified as being undernourished) to reduce the risk of stillbirths and small for-gestational-age neonates. Undernourishment is usually defined by a low BMI (i.e. being underweight BMI<18.5). For adults, a 20–39% prevalence of underweight women is considered a high prevalence of underweight and 40% or higher is considered a very high prevalence. MUAC may also be useful to identify protein–energy malnutrition in individual pregnant women and to determine its prevalence in this population. However, the optimal cut-off points may need to be determined for individual countries based on context-specific cost–benefit analyses. 
 
 
-.. _1.1:
+.. _bep1.1:
 
 1.1 Project overview
 --------------------
@@ -82,13 +82,13 @@ Balanced energy protein (BEP): Under-nourished women are negatively associated w
 There is belief that benefits of BEP supplementation are currently underestimated and that targeting individual pregnant women with low BMI may be more cost beneficial. There are currently on-going Gates funded clinical trials evaluating the impact of BEP in India, Pakistan, Mali and Tanzania. This simulation project aims to estimate the cost benefits of universal or targeted offer of BEP if the anticipated improvement in infant outcomes are achieved. 
 
 
-.. _1.2:
+.. _bep1.2:
 
 1.2 Literature review
 ---------------------
 
 
-.. _2.0:
+.. _bep2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -102,12 +102,12 @@ To understand the cost-effectiveness of BEP and MMN supplementation for pregnant
 .. important::
  note that there is now a set of current evidence scenarios (objective 1). Objective 2 (hopes-n-dreams) were the scenarios we modelled in our feb_2020 model using Gates provided aspirational effect sizes.
 
-.. _3.0:
+.. _bep3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _bep3.1:
 
 3.1 Causal diagram
 ------------------
@@ -148,7 +148,7 @@ To understand the cost-effectiveness of BEP and MMN supplementation for pregnant
 
 Here is a memo describing the rationale underlying the causal structure of this model: :download:`causal_dag_memo.docx`
 
-.. _3.2:
+.. _bep3.2:
 
 3.2 Effect sizes
 ----------------
@@ -255,7 +255,8 @@ Each of these entities produce a ∆effect size as follows:
   - Infant outcomes affected: reduces preterm births (<37 weeks)-CIs slightly spans 1, reduces low birth weight, increases birthweight(g), reduces small-for gestational age 
 
  .. note:: 
-   The intervention MMN inherently contains IFA. The trials looking at the effect size of MMN compares the intervention groups (MMN) with an IFA supplemented control groups. Hence the effect size we use coming out of these trials give us ∆ oMMN, the effect of those *other* minerals and vitamins. 
+
+    The intervention MMN inherently contains IFA. The trials looking at the effect size of MMN compares the intervention groups (MMN) with an IFA supplemented control groups. Hence the effect size we use coming out of these trials give us ∆ oMMN, the effect of those *other* minerals and vitamins.
 
 :underline:`∆ BEP_mal and ∆ BEP_norm: balanced energy protein supplementation vs. control or placebo`
 
@@ -263,66 +264,77 @@ Each of these entities produce a ∆effect size as follows:
   - The trials investigating the effect size of BEP starts supplementing anywhere between first trimester to third trimester. 
   - Infant outcomes affected:  increases birthweight(g), reduces small for gestational age
   
-  .. note:: 
-    The trials from Ota 2015 Cochrane review report no standard forumla for BEP. BEP can come in the form of a pre-fabricated nutrient bar/goo/drink that contains calories, proteins, and fat, and additionally may contain minerals or vitamins OR it can be food vouchers for milk, oil, nuts. The intervention vs control groups from these trials give us the added benefit of energy + protein only :download:`see memo <bep_controlgroup_memo.docx>`. Hence, the ∆ BEP_mal and ∆ BEP_norm coming from these trials refers to the effect of energy and protein only. 
+.. note::
 
-.. _4.0:
+   The trials from Ota 2015 Cochrane review report no standard forumla for BEP. BEP can come in the form of a pre-fabricated nutrient bar/goo/drink that contains calories, proteins, and fat, and additionally may contain minerals or vitamins OR it can be food vouchers for milk, oil, nuts. The intervention vs control groups from these trials give us the added benefit of energy + protein only :download:`see memo <bep_controlgroup_memo.docx>`. Hence, the ∆ BEP_mal and ∆ BEP_norm coming from these trials refers to the effect of energy and protein only.
+
+.. _bep4.0:
 
 4.0 Intervention
 ++++++++++++++++
 
 We have three tiers of **interventions** and we assume the effects are additive: 
 
-1) :underline:`Basic: iron and folic acid only`
- - this is present in the basline. 
- - Women recieve a ∆IFA effect if they are covered
+#. :underline:`Basic: iron and folic acid only`
 
-2) :underline:`Basic+ (iron and folic acid + other multi-micronutrients)`
- - This is not present in baseline and only in the scenarios
- - women who are covered by basic+ recieve ∆IFA & ∆oMMN 
+   - this is present in the basline.
+   - Women recieve a ∆IFA effect if they are covered
 
-3) :underline:`Basic++ (iron and folic acid + other multi-micronutrients + energy and protein)`
- - this is also not present in baseline and only in the scenarios
- - women who are covered by basic++ recieve  ∆IFA & ∆oMMN & [∆BEP_mal | ∆BEP_norm]
+#. :underline:`Basic+ (iron and folic acid + other multi-micronutrients)`
+
+   - This is not present in baseline and only in the scenarios
+   - women who are covered by basic+ recieve ∆IFA & ∆oMMN
+
+#. :underline:`Basic++ (iron and folic acid + other multi-micronutrients + energy and protein)`
+
+   - this is also not present in baseline and only in the scenarios
+   - women who are covered by basic++ recieve  ∆IFA & ∆oMMN & [∆BEP_mal | ∆BEP_norm]
 
 
-.. _4.1:
+.. _bep4.1:
 
 4.1 Simulation scenarios
 ------------------------
 
-A.  **Scenario A (baseline)**: Offering basic (IFA) to any women attending ANC at empirical baseline coverage of IFA at ANC.
-  - among the general population: this is the % who attends ANC x % of IFA coverage at ANC
+A. **Scenario A (baseline)**: Offering basic (IFA) to any women attending ANC at empirical baseline coverage of IFA at ANC.
 
-B.  **Scenario B**: Offering basic+ (IFA + oMMN) to any women attending ANC at 90% coverage at ANC.
-  - Those who receive basic+ among the general population = % who attends ANC x 90% coverge at ANC
+    - among the general population: this is the % who attends ANC x % of IFA coverage at ANC
 
-C.  **Scenario C**: Offering basic++ (IFA + oMMN + BEP_universal), using current-evidence effect size for BEP, to 90% of women attending ANC. 
-  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC
+B. **Scenario B**: Offering basic+ (IFA + oMMN) to any women attending ANC at 90% coverage at ANC.
 
-D.  **Scenario D**: Offering basic++ (IFA + oMMN + BEP_targeted), using current-evidence effect size for BEP, to 90% of undernourished women attending ANC, and basic+ (IFA + MMN) to 90% of normal BMI women attending ANC.
-  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC X % undernourished population 
-  - Those who receive basic+ among the general population = % who attends ANC x 90% coverage at ANC X % normal population 
+   - Those who receive basic+ among the general population = % who attends ANC x 90% coverge at ANC
 
-E.  **Scenario E**: Offering basic++ (IFA + oMMN + BEP_universal), using hopes-and-dreams effect size for BEP, to any women attending ANC at 90% coverage at ANC.
-  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC
+C. **Scenario C**: Offering basic++ (IFA + oMMN + BEP_universal), using current-evidence effect size for BEP, to 90% of women attending ANC.
 
-F.  **Scenario F**: Offering basic++(IFA + MMN + BEP_targeted), using hopes-and-dreams effect size for BEP, to 90% of undernourished women attending ANC, and basic+ (IFA + oMMN) to 90% of normal BMI women attending ANC. 
-  - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC X % undernourished population 
-  - Those who receive basic+ among the general population = % who attends ANC x 90% coverage at ANC X % normal population 
+   - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC
+
+D. **Scenario D**: Offering basic++ (IFA + oMMN + BEP_targeted), using current-evidence effect size for BEP, to 90% of undernourished women attending ANC, and basic+ (IFA + MMN) to 90% of normal BMI women attending ANC.
+
+   - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC X % undernourished population
+   - Those who receive basic+ among the general population = % who attends ANC x 90% coverage at ANC X % normal population
+
+E. **Scenario E**: Offering basic++ (IFA + oMMN + BEP_universal), using hopes-and-dreams effect size for BEP, to any women attending ANC at 90% coverage at ANC.
+
+   - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC
+
+F. **Scenario F**: Offering basic++(IFA + MMN + BEP_targeted), using hopes-and-dreams effect size for BEP, to 90% of undernourished women attending ANC, and basic+ (IFA + oMMN) to 90% of normal BMI women attending ANC.
+
+   - Those who receive basic++ among the general population = % who attends ANC x 90% coverage at ANC X % undernourished population
+   - Those who receive basic+ among the general population = % who attends ANC x 90% coverage at ANC X % normal population
 
 .. image:: bep_scenarios_vis.svg
 
 
 .. important::
-  note there are now scenarios C and D which uses current-evidence effect sizes for BEP_targeted
 
-.. _5.0:
+   note there are now scenarios C and D which uses current-evidence effect sizes for BEP_targeted
+
+.. _bep5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _bep5.1:
 
 5.1 Vivarium concept model 
 --------------------------
@@ -331,7 +343,7 @@ F.  **Scenario F**: Offering basic++(IFA + MMN + BEP_targeted), using hopes-and-
 
 Green arrow indicates target effect sizes given by Gates TPP targets; dotted arrows indicate a correlation 
 
-.. _5.2:
+.. _bep5.2:
 
 5.2 Demographics
 ----------------
@@ -347,14 +359,14 @@ Green arrow indicates target effect sizes given by Gates TPP targets; dotted arr
 • Other: % of women who are thin according to BMI at baseline
  
 
-.. _5.3:
+.. _bep5.3:
 
 5.3 Models
 ----------
 
 
 
-.. _5.3.1:
+.. _bep5.3.1:
 
 5.3.1 model 1: Baseline (scenario A)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -428,7 +440,7 @@ Method for how to calculate the shift in LAZ score from a risk ratio not shown
 Method for how to calculate the shift in WLZ score from a risk ratio not shown
 
 
-.. _5.3.2:
+.. _bep5.3.2:
 
 5.3.2 model 2: Interventions 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -439,34 +451,34 @@ Apply the following intervention shifts according to interventions recieved in e
 
 
 
-.. _5.4:
+.. _bep5.4:
 
 5.4 Desired outputs
 -------------------
 
 
-.. _5.5:
+.. _bep5.5:
 
 5.5 Output meta-table shell
 ---------------------------
 
 :download:`output table shell<BEP_output_shell_metadata_24July2020.xlsx>`
 
-*added cgf z-score outputs by timepoint 29 days and 366 days
+\*added cgf z-score outputs by timepoint 29 days and 366 days
 
-.. _5.6:
+.. _bep5.6:
 
 5.6 Validation and verification
 -------------------------------
 
 
 
-.. _6.0:
+.. _bep6.0:
 
 6.0 Back-of-envelope calculations
 +++++++++++++++++++++++++++++++++
 
-.. _7.0:
+.. _bep7.0:
 
 7.0 Limitations
 +++++++++++++++

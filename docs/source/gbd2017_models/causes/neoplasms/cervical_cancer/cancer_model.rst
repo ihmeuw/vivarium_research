@@ -259,7 +259,7 @@ State and Transition Data Tables
      - :math:`\frac{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{disability_weight}_s\,\times\,\text{prev}_s}}{\displaystyle{\sum_{s\in\text{s_c432}}}\scriptstyle{\text{prev}_s}}`
      - weighted average of cervical cancer disability weight over all sequelae including ids s_282, s_283, s_284, s_285
 
-S_ = susceptible; C_ = with condition
+S = susceptible; C = with condition
 
 .. list-table:: Transition Data
    :widths: 5 5 5 30 30
@@ -331,7 +331,7 @@ S_ = susceptible; C_ = with condition
      - 0.1 per person-years regardless of age
      - remission rate from ICC to R = 1 divided by duration of cervical cancer (10 years) = 0.1 per person-years regardless of age
 
-prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = population attributable fraction
+prev = prevalence; i = incidence; r = remission; RR = relative risk; PAF = population attributable fraction
 
 .. list-table:: Data sources
    :widths: 30 30 30
@@ -347,7 +347,7 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - derived from incidence_c432 and duration of BCC
      - prev_BCC(age) = incidence_c432(age) * duration_BCC
    * - duration_BCC
-     - extracted from [Burger-et-al-2020]_
+     - extracted from [Burger-et-al-2020-cause]_
      - 10 years
    * - incidence_BCC
      - derived from incidence_c432
@@ -383,7 +383,7 @@ prev_ = prevalence; i_ = incidence; r_ = remission; RR_ = relative risk; PAF = p
      - derived from Abie's dismod
      - /ihme/costeffectiveness/vivarium_csu_cancer
    * - RR_hrHPV
-     - extracted from [Naucler-et-al-2007]_
+     - extracted from [Naucler-et-al-2007-cause]_
      - relative risk of HPV 16/18 causing CIN2+ = 27.4 (95%CI 19.7 to 38.0)
    * - PAF
      - derived from prev_hrHPV and RR_hrHPV
@@ -496,11 +496,11 @@ References
    Sun Z-R, Ji Y-H, Zhou W-Q, Zhang S-L, Jiang W-G, Ruan Q. Characteristics of HPV 
    prevalence among women in Liaoning province, China. International Journal of 
    Gynecology & Obstetrics 2010; 109: 105–9.
-.. [Burger-et-al-2020]
+.. [Burger-et-al-2020-cause]
    Burger EA, de Kok IMCM, Groene E, et al. Estimating the Natural History of 
    Cervical Carcinogenesis Using Simulation Models: A CISNET Comparative Analysis. 
    J Natl Cancer Inst 2020; 112: 955–63.
-.. [Naucler-et-al-2007]
+.. [Naucler-et-al-2007-cause]
    Naucler P, Ryd W, Törnberg S, et al. HPV type-specific risks of high-grade CIN 
    during 4 years of follow-up: a population-based prospective study. Br J Cancer 
    2007; 97: 129–32.

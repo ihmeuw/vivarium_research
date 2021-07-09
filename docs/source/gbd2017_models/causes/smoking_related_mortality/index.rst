@@ -4,7 +4,7 @@
 Smoking Related Mortality (Excluding Lung Cancer)
 =================================================
 
-Mortality among smokers is much higher than mortality among non-smokers. Therefore, it can be important to consider increased mortality attributable to smoking when smoking is included in a model, even if specific causes affected by smoking are not necessary to explicitly include in the model. See the causal framework section in the :ref:`Vivarium CSU Lung Cancer Screening Concept Model Documentation <2017_concept_model_vivarium_swissre_lungcancer>` for an example of when this is important. 
+Mortality among smokers is much higher than mortality among non-smokers. Therefore, it can be important to consider increased mortality attributable to smoking when smoking is included in a model, even if specific causes affected by smoking are not necessary to explicitly include in the model. See the causal framework section in the :ref:`Vivarium CSU Lung Cancer Screening Concept Model Documentation <lung_cancer_cancer_concept_model>` for an example of when this is important.
 
 The purpose of this cause model document is to represent the increased mortality risk associated with smoking exposure by combining the causes affected by the smoking risk factor. This specific cause model document was created to exclude lung cancer so that it can be used in a model that models the lung cancer cause directly.
 
@@ -48,6 +48,8 @@ The smoking risk factor in GBD 2017 has the following outcome pairs:
   peripheral arterial disease, chronic obstructive pulmonary disease, other chronic respiratory diseases,
   asthma, peptic ulcer disease, gallbladder and biliary tract diseases, Alzheimer disease and other
   dementias, Parkinson disease (protective), multiple sclerosis, type‐II diabetes, rheumatoid arthritis, low back pain, cataracts, macular degeneration, and fracture.
+
+[GBD-2017-CoD-Appendix-Smoking]_, [GBD-2017-YLD-Appendix-Smoking]_
 
 .. note::
 
@@ -298,7 +300,7 @@ Cause Hierarchy
 
   The starting age group IDs were extracted according to the YLL start, not the YLD start.
 
-  The :ref:`Vivarium CSU Lung Cancer Screening  Model  <2017_concept_model_vivarium_swissre_lungcancer>` only models simulants 15 years (age group ID 8) and older, so notes were made for causes with age group starts older than 15 years only.
+  The :ref:`Vivarium CSU Lung Cancer Screening  Model  <lung_cancer_cancer_concept_model>` only models simulants 15 years (age group ID 8) and older, so notes were made for causes with age group starts older than 15 years only.
 
 Restrictions
 ++++++++++++
@@ -311,7 +313,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The Vivarium modeling strategy outlined in this document will be a **mortality only** model that utilizes forecasted cause-specific mortality rates for ischemic heart disease (IHD) and chronic obstructive pulmomary disease (COPD) from 2020 to 2040. These causes were selected because they represent a large share of all smoking-related mortality without needing to model several additional causes with smaller contributions. This model is intended to be pair with the :ref:`smoking risk exposure model <2017_risk_exposure_smoking_forecasted>`.
+The Vivarium modeling strategy outlined in this document will be a **mortality only** model that utilizes forecasted cause-specific mortality rates for ischemic heart disease (IHD) and chronic obstructive pulmomary disease (COPD) from 2020 to 2040. These causes were selected because they represent a large share of all smoking-related mortality without needing to model several additional causes with smaller contributions. This model is intended to be pair with the :ref:`smoking risk exposure model <2017_risk_smoking_forecasted>`.
 
 This model was designed for use in the :ref:`Lung Cancer Screening model <lung_cancer_cancer_concept_model>`, which uses data forecasted from 2020 to 2040. 
 
@@ -407,7 +409,7 @@ When simulation output is stratified on smoking status, never smokers should hav
 References
 ----------
 
-.. [GBD-2017-YLD-Appendix-Cause-Model-Template]
+.. [GBD-2017-YLD-Appendix-Smoking]
 
    Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
    appendix on ScienceDirect_>`_:
@@ -423,7 +425,7 @@ References
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
 
 
-.. [GBD-2017-CoD-Appendix-Cause-Model-Template]
+.. [GBD-2017-CoD-Appendix-Smoking]
 
    Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 CoD Capstone <CoD
    appendix on ScienceDirect_>`_:

@@ -103,7 +103,7 @@ Malnutrition (SAM) in 2007, and the Guideline for the Management of Moderate Acu
 in 2012. This is the latest National Guideline for the Management of Acute Malnutrition in Ethiopia (2019). It includes the latest World Health Organisation (WHO) guidelines and recommendations, and emerging national and international evidence. It is also aligned to the National Nutrition Programme (NNP) II 2016-2020, the National Food and Nutrition Policy and the Health Sector Transformation Plan (HSTP) 2015/16 - 2019/20.
 
 
-.. _1.0:
+.. _waste_tx1.0:
 
 Intervention Overview
 ---------------------
@@ -118,7 +118,7 @@ routine health system.
 
    Add a general narrative overview of the intervention, including what it is, what outcomes it affects, if/how/when/where it has been used, etc.
 
-.. _1.1:
+.. _waste_tx1.1:
 
 Health system delivery
 ++++++++++++++++++++++
@@ -142,7 +142,7 @@ Interventions for wasting treatment are delivered through different levels of th
 
  Woreda, Zonal, Regional and referral Hospitals provide higher level referral points where further care can be provided to patients with SAM and more complex medical complications. The referral Hospitals have the facilities and expertise to manage situations that may require administration of oxygen, blood transfusion, and other critical care.
 
-.. _2.0:
+.. _waste_tx2.0:
 
 Assessing and classifying acute malnutrition
 --------------------------------------------
@@ -157,7 +157,7 @@ which are based on the 2013 WHO guidelines on management of SAM in children and 
   
     - In GBD, SAM and MAM are classified as using WHZ score. In reality, GBD-MAM kids with oedema are treated as SAM kids. We need to check the proportion (sequelae) of GBD-MAM kids to see if we need to make this adjustment in our model.    
 
-.. _2.1:
+.. _waste_tx2.1:
 
 In infants 0-6 months
 +++++++++++++++++++++
@@ -192,8 +192,6 @@ breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, 
 **Treatment** 
 
 Congratulate and counsel the mother on appropriate IYCF practices.
-
-.. _2.1:
 
 In children 6-59 months
 ++++++++++++++++++++++++
@@ -314,7 +312,7 @@ Baseline Coverage Data
     - Coverage of SC or OTP for SAM kids
 
 
-.. _3.0:
+.. _waste_tx3.0:
 
 Vivarium Modeling Strategy
 --------------------------

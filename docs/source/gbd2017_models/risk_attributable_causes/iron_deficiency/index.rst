@@ -56,8 +56,8 @@ of the anemia impairment for a given population is the first step in modeling
 anemia in GBD 2017. This is done by fitting a distribution of hemoglobin levels
 for that population from primary input data based on the population's
 hemoclobin concentration mean and standard deviation. For GBD 2017, an ensemble
-distribution was used, which was 40% gamma and 60% mirror gumbel. Source code
-for this process is available `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
+distribution was used, which was 40% gamma and 60% mirror gumbel.
+`Envelope source code <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_.
 
 Once a distribution is fit to hemoglobin levels for a particular age-,
 sex-, and location-specific demographic group, the prevalence of anemia (by
@@ -454,7 +454,9 @@ non-iron responsive (0) according to the following rules:
 
 .. note::
 
-	Final else statement indicates that we assume all individuals without anemia will be iron responsive. See calculations that investigate this assumption `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`_.
+   Final else statement indicates that we assume all individuals without anemia
+   will be iron responsive. See calculations that investigate this assumption
+   `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`__.
 
 Where:
 
@@ -527,7 +529,12 @@ is as follows:
     estimates from the post-neonatal age group
 
 2.  The GBD modelers warned us that there might be problems with this
-    approach (anemia impairment prevalence will likely not agree with anemia prevalence calculated from hemoglobin distribution). Based on an initial investigation, the anemia prevalence for the neonatal age groups do not validate to GBD anemia impairment prevalence as well as for the other under five age groups (see `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Hemoglobin%20distribution%20code.ipynb>`_)
+    approach (anemia impairment prevalence will likely not agree with
+    anemia prevalence calculated from hemoglobin distribution). Based
+    on an initial investigation, the anemia prevalence for the neonatal
+    age groups do not validate to GBD anemia impairment prevalence as
+    well as for the other under five age groups (see
+    `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Hemoglobin%20distribution%20code.ipynb>`__)
 
 3.  We are currently using this model of iron responsive anemia to estimate
     the effect of large-scale food fortification with iron, and we so far
@@ -577,7 +584,8 @@ We assume that all individuals who are not anemic are iron responsive. This
 assumption is based on two additional assumptions, including a) asymptomatic 
 individuals with non-iron-responsive causes will remain asymptomatic, and b) 
 the prevalence of individuals with non-iron-responsive causes without anemia 
-is neglible (see a notebook investigating the prevalence of these groups `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`_). 
+is neglible (see a notebook investigating the prevalence of these groups
+`here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Iron%20responsiveness%20among%20the%20non-anemic.ipynb>`__).
 
 	These assumptions may cause our model to improve the hemoglobin status via 
 	an iron supplementaion/foritifaction intervention among simulants who may 
@@ -647,7 +655,7 @@ defined in the `WHO hemoglobin tresholds table`_ and using the parameters define
 	The following code has been validated for the age groups and locations 
 	relevant to the Large Scale Food fortification project (1 month - 5 years (
 	age group IDs 4 and 5) in India, Ethiopia, and Nigeria). See the relevant 
-	notebook `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Hemoglobin%20distribution%20code.ipynb>`_. 
+	notebook `here <https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/iron_deficiency_risk_factor/Hemoglobin%20distribution%20code.ipynb>`__.
 	However, it requires further validation before application to additional 
 	demographic groups, as this method did not validate for all age groups or 
 	locations. 
