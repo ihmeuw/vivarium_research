@@ -86,12 +86,12 @@ Treatment and management for acute malnutrition
     - weight-for-length z-score (used in GBD)
   * - WHZ 
     - weight-for-height z-score (used in GBD)
-  * - 
-    - 
-  * - 
-    - 
-  * - 
-    - 
+  * - SQUEAC
+    - Simplified Lot Quality Assurance Sampling Evaluation of Access and Coverage
+  * - tx
+    - Treated or treatment
+  * - utx
+    - Not treated
 
 This documentation focuses on treatment and management of acute malnutrition in Ethiopia based on 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
 
@@ -276,12 +276,33 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-| SAM programme coverage: 48.8% (37.4 - 60.4) (point coverage, assumes programmes are not good at case finding) [Isanaka_2021]_
-| MAM programme coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
+The aim and priority in community-based services for the management of acute malnutrition is to reach as many of those affected as possible and to access acutely malnourished children in the *early stages* of their disease. Achieving these goals will maximise impact and the capacity of the service to meet need. Good coverage is a key determinant in **meeting need**. It is important therefore to evaluate coverage, not just  to  assess  the  degree  to  which  need  is  being  met,  but  also  to  understand  what  factors  affect  access and  uptake  of  services,  in  order  to  initiate  action  to  ensure  the  greatest  number  of  people  needing treatment are able to benefit from it. **Coverage can  be  defined  as  the  proportion  of  all  people  needing  or  eligible  to  receive  a  service  who actually  receive  that  service**. [CMAM_Forum_coverage]_
 
-.. todo::
+  Treatment coverage = :math:`\frac{\text{Children with MAM/SAM recieving treatment}}{\text{Total number of MAM/SAM kids}}`
 
-  Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
+Treatment coverage should not be confused with geographical coverage. 
+
+
+  Geogpraphical coverage = :math:`\frac{\text{Healthcare facilities/communities delivering MAM/SAM treatments}}{\text{Total number of facilities/communities}}`
+
+Geographic coverage attempts to measure the *availability* of services which does not equate with the *service access* and *uptate*. 
+
+**Met need** is the product of the coverage and the cure-rate (proportion of the treated who were cured).
+
+  Met-need = :math:`\text{treatment coverage}\times\text{cure-rate}`
+
+For example, a service with treatment coverage of 50%, and a cure-rate of 90% is meeting 50% x 90% = 45% of need. 
+
+| SAM programme treatment coverage: 48.8% (37.4 - 60.4) (point coverage, assumes programmes are not good at case finding) [Isanaka_2021]_
+| MAM programme treatment coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
+
+
+.. note::
+
+  1) For now, we will use the tx coverage in hopes we will update this to a 'met-need'. 
+  2) Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
+  3) Make sure that SQUEAC measures tx. coverage and not met-need coverage)
+
 
 .. list-table:: Baseline coverage data
   :widths: 10 10 5 15 20
@@ -295,13 +316,13 @@ Baseline Coverage Data
   * - Ethiopia
     - Tx for infants 0-6 months with MAM 
     - :math:`C_{MAM_{0-6}}`
-    - Use post-natal care coverage  
-    - Coverage of TSFP for breastfeeding mothers among 0-6 month kids with MAM
+    - 48.8% (37.4 - 60.4) for now  
+    - Update this value to post-natal care coverage
   * - Ethiopia
     - Tx for infants 0-6 months with any SAM 
     - :math:`C_{SAM_{0-6}}`
-    - Use post-natal care coverage 
-    - Coverage of SC for kids 0-6 months with any SAM
+    - 48.8% (37.4 - 60.4) for now  
+    - Update this value to post-natal care coverage
   * - Ethiopia
     - Tx for kids 6-59 months with MAM 
     - :math:`C_{MAM_{6-59}}`
@@ -314,6 +335,12 @@ Baseline Coverage Data
     - Coverage of SC or OTP for SAM kids
 
 
+.. note::
+  I think this 'coverage proportion' should be updated to a more realistic 'met-need' proportion which is treatment coverage proportion x programme cure rate. The programme cure rate is the proportion 'recovered' during the time-to-recovery within the programme (studies report the time-to-recovery of those who recover during the programme; those who do not would be classified as 'non-responders'). 1-(tx coverage x cute-rate) would be the proportion who would recover with the untreated time-to-recovery duration. The assumption is that if they do not die, they will eventually recover. 
+
+  I would like to understand from SWEs what happens when they change age groups, do they spontaneously recover? I guess that would make sense...those who survive are stronger than those who died; also prevalence doesn't change that much between 28day-5 years.
+
+
 .. _3.0:
 
 Vivarium Modeling Strategy
@@ -323,21 +350,33 @@ Vivarium Modeling Strategy
    :alt: Compartmental diagram with treatment
 
 
+For MAM, **r3** is the daily probability of recovering from MAM state given the MAM tx coverage.
+
 For **MAM** 0-6 months infants
 
- - :math:`r3 = r3_{ux}\times(1-C_{MAM_{0-6}}) + t2_{mam}\times(C_{MAM_{0-6}})`
+ - :math:`r3 = r3_{ux} + t2_{mam}`
+ - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-C_{MAM_{0-6}}`
+ - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`C_{MAM_{0-6}}`
 
 For **MAM** 6-59 months kids
 
- - :math:`r3 =  r3_{ux}\times(1-C_{MAM_{6-59}}) + t2_{mam}\times(C_{MAM_{6-59}})`
+ - :math:`r3 = r3_{ux} + t2_{mam}`
+ - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-C_{MAM_{6-59}}`
+ - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`C_{MAM_{6-59}}`
+
+For **SAM** 0-6 months infants
+
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-C_{SAM{0-6}}`
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`C_{SAM{0-6}}`
 
 For **SAM** 6-59 months kids
 
-
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-C_{SAM{6-59}}`
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`C_{SAM{6-59}}`
 
 .. todo::
 
-  THE FOLLOWING HAVE NOT BEEN FULLY UPDATED! 
+  THE FOLLOWING NEEDS MORE DETAIL! 
 
 .. list-table:: Modeled Outcomes **Table 1** MAM 0-6 months
   :widths: 5 5 20 15 15 15 15
@@ -353,46 +392,19 @@ For **SAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery of utx MAM}}` 
-    - 
-    - 
-    - 
+    - :math:`\frac{1-C_{MAM_{0-6}}}{\text{median time-to-recovery (days) of utx MAM}}`
+    - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
+    - James et al 2016 (Ethiopia)
+    - They used MUAC definition of malnutrition; stand-in, need to update value for 0-6m
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery of tx MAM}}` 
-    - 
-    -
-    - 
+    - :math:`\frac{C_{MAM_{0-6}}}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
+    - Ackatia-Armah 2015 (Mali)
+    - recovery time using RUSF; stand-in, need to update value for 0-6m
 
-.. list-table:: Modeled Outcomes **Table 2** SAM 0-6 months
-  :widths: 5 5 20 15 15 15 15
-  :header-rows: 1
-
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
-    - Note
-  * - :math:`r2_{ux}`
-    - transition probability
-    - Daily recovery prbability of untx SAM
-    - :math:`\frac{1}{\text{median time-to-recovery of utx SAM}}`
-    - 
-    - 
-    - 
-  * - :math:`t1_{sam}`
-    - transition probability
-    - Daily recovery probability of tx SAM 
-    - :math:`\frac{1}{\text{median time-to-recovery of tx SAM}}`
-    - 
-    -
-    - 
-
-
-.. list-table:: Modeled Outcomes **Table 3** MAM 6-59 months
+.. list-table:: Modeled Outcomes **Table 2** MAM 6-59 months
   :widths: 5 5 20 15 15 15 15
   :header-rows: 1
 
@@ -406,18 +418,44 @@ For **SAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery of utx MAM}}` 
-    - 
-    - 
-    - 
+    - :math:`\frac{1-C_{MAM_{6-59}}}{\text{median time-to-recovery (days) of utx MAM}}`
+    - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
+    - James et al 2016 (Ethiopia)
+    - They used MUAC definition of malnutrition
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery of tx MAM}}` 
-    - 
-    -
-    - 
+    - :math:`\frac{C_{MAM_{6-59}}}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
+    - Ackatia-Armah 2015 (Mali)
+    - recovery time using RUSF
 
+
+.. list-table:: Modeled Outcomes **Table 3** SAM 0-6 months
+  :widths: 5 5 20 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Outcome type
+    - Outcome definition
+    - Effect size
+    - Effect size application
+    - Value, source
+    - Note
+  * - :math:`r2_{ux}`
+    - transition probability
+    - Daily recovery prbability of untx SAM
+    - :math:`\frac{1-C_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - time-to-recovery 60.5 days (derived)
+    - Derived 
+    - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
+  * - :math:`t1_{sam}`
+    - transition probability
+    - Daily recovery probability of tx SAM 
+    - :math:`\frac{C_{SAM_{0-6}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
+    - Zw 2020
+    - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
 
 .. list-table:: Modeled Outcomes **Table 4** SAM 6-59 months
   :widths: 5 5 20 15 15 15 15
@@ -433,17 +471,38 @@ For **SAM** 6-59 months kids
   * - :math:`r2_{ux}`
     - transition probability
     - Daily recovery prbability of untx SAM
-    - :math:`\frac{1}{\text{median time-to-recovery of utx SAM}}`
-    - 
-    - 
-    - 
+    - :math:`\frac{1-C_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - time-to-recovery 60.5 days (derived)
+    - Derived 
+    - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{1}{\text{median time-to-recovery of tx SAM}}`
-    - 
-    -
-    - 
+    - :math:`\frac{C_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
+    - Zw 2020
+    - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
+
+.. todo::
+
+  Fully describe how r2_ux is derived. In brief: 
+
+  1) From Isanaka 2021, the incidence correction factor K = 6.7 
+  2) K = 1 year/duration (in years) = 54.5 days
+  3) I assume 54.5 days is the time-to-recovery of the population who is SAM granted they did not die. 
+  4) Therefore 54.5 = [time-to-recovery of tx X Coverage] + [time-to-recovery of utx X 1-Coverage]
+  5) 54.5 = [48.3 X 0.488] + [time-to-recovery of utx X 0.512]
+  6) time-to-recovery of utx = 60.5 days
+
+  The duration calculated from the K incidence correction factor from Isanaka 2021 is the duration of 'episode'
+  Duration of episode = [duration-to-death X %died] + [duration-to-recovery of tx X %survived&treated] + [duration-to-recovery of utx X %survived&untreated] 
+  ... which might be a bit more complicated to calculate because we need to know the duration to death. Duration-to-death can be further divided into tx/utx.
+
+  Hence, for simplicify, I have assumed the duration of disease in Isanaka 2020 is the one to recovery for now for simplicity. 
+
+
+
+
 
 Affected Outcome #1
 +++++++++++++++++++++
@@ -541,4 +600,12 @@ References
     Improving estimates of the burden of severe wasting: analysis of secondary prevalence and incidence data from 352 sites
 
 .. _`Isanaka 2021`: https://gh.bmj.com/content/6/3/e004342
+
+.. [CMAM_Forum_coverage]
+
+  View `CMAM Forum coverage`_ 
+
+    Assessment of Coverage of Community-based Management of Acute Malnutrition
+
+.._`CMAM Forum coverage`: https://www.ennonline.net/assessmentofcmamcoveragev2
 
