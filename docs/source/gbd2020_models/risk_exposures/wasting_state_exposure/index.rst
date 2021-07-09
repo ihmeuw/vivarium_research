@@ -490,7 +490,66 @@ pool.
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used
 
-.. list-table:: Wasting transition probability equations
+.. list-table:: NEW WASTING TRANSITION PROBABILITY EQNS
+   :widths: 5 15 10 10
+   :header-rows: 1
+
+   * - Variable
+     - Equation
+     - Description
+     - Source
+   * - r2
+     - -ap0*f2/ap1 - ap0*f3/ap1 - ap0*f4/ap1 - t1 + ap2*d2/ap1 + ap2*i1/ap1 + ap3*d3/ap1 + ap4*d4/ap1
+     - Probability of remission into cat 2 from cat 1
+     - System of equations
+   * - i1
+     - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + ap1*r2/ap2 + ap1*t1/ap2 - d2 - ap3*d3/ap2 - ap4*d4/ap2
+     - Probability of incidence into cat 1 from cat 2
+     - System of equations
+   * - i2
+     - ap0*f3/ap3 + ap0*f4/ap3 + ap1*t1/ap3 + ap2*r3/ap3 - d3 - ap4*d4/ap3
+     - Probability of incidence into cat 2 from cat 1
+     - System of equations
+   * - i3
+     - ap0*f4/ap4 + ap3*r4/ap4 - d4
+     - Probability of incidence into cat 3 from cat 4
+     - System of equations
+   * - r2
+     - 0.512/60.5
+     - Probability of remission into cat 2 from cat 1 (untreated)
+     - Nicole's calculations; also referred to as r2ux (get lit source!)
+   * - r3
+     - 0.512/63 + 0.488/41.3
+     - Probability of remission from cat 2 into cat 3 (treated or untreated)
+     - Nicole's calculations (get lit source!)
+   * - r4
+     - 0.001
+     - Probability of remission from cat 3 into cat 4
+     - Assumed to be small
+   * - t1
+     - 0.488/48.3
+     - Probability of remission into cat 3 from cat 1 (treated)
+     - Nicole's calculations (get lit source!)
+   * - s1
+     - -r2 - t1 + ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0 + ap1)/ap1
+     - Probability of staying in cat 1
+     - System of equations
+   * - s2
+     - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - ap1*r2/ap2 - ap1*t1/ap2 - r3 + 1 + ap3*d3/ap2 + ap4*d4/ap2
+     - Probability of staying in cat 2
+     - System of equations
+   * - s3
+     - -ap0*f3/ap3 - ap0*f4/ap3 - ap1*t1/ap3 - ap2*r3/ap3 - r4 + 1 + ap4*d4/ap3
+     - Probability of staying in cat 3
+     - System of equations
+   * - s4
+     - -ap0*f4/ap4 - ap3*r4/ap4 + 1
+     - Probability of staying in cat 4
+     - System of equations
+
+
+
+.. list-table:: OLD WASTING TRANSITION PROBABILITY EQNS
    :widths: 5 15 20
    :header-rows: 1
 
