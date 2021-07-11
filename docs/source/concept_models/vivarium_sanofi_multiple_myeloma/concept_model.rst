@@ -647,9 +647,9 @@ For the burn-in period (both scenarios):
      - 10
    * - 1
      - Daratumuab-containing
-     - 1.6%
      - 2.9%
-     - 2.9%
+     - 34%
+     - 34%
    * - 2
      - Isatuxamib-containing
      - 0.5%
@@ -657,9 +657,9 @@ For the burn-in period (both scenarios):
      - 10%
    * - 2
      - Daratumuab-containing
-     - 16.9%
-     - 30.6%
-     - 30.6%
+     - 19.8%
+     - 34%
+     - 34%
    * - 3
      - Isatuxamib-containing
      - 1.0%
@@ -667,9 +667,9 @@ For the burn-in period (both scenarios):
      - 9%
    * - 3
      - Daratumuab-containing
-     - 25.6%
-     - 46.3%
-     - 46.3%
+     - 32.3%
+     - 34%
+     - 34%
    * - 4
      - Isatuxamib-containing
      - 3.3%
@@ -677,9 +677,9 @@ For the burn-in period (both scenarios):
      - 7%
    * - 4
      - Daratumuab-containing
-     - 29.7%
-     - 53.7%
-     - 53.7%
+     - 36.5%
+     - 34%
+     - 34%
    * - 5+
      - Isatuxamib-containing
      - 3.3%
@@ -687,9 +687,9 @@ For the burn-in period (both scenarios):
      - 7%
    * - 5+
      - Daratumuab-containing
-     - 17.1%
-     - 30.9%
-     - 30.9%
+     - 30.11%
+     - 34%
+     - 34%
 
 *Burn-in period initialization*:
 
