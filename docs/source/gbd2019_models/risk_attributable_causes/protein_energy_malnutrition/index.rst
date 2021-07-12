@@ -14,7 +14,7 @@ estimates PEM mortality. Nonfatal PEM cases are modelled independently, using
 the case definition moderate and severe acute malnutrition, defined in terms of 
 weight-for-height Z-scores (WHZ). All PEM cases are attributed to the GBD Child 
 Growth Failure risk factor, which is not detailed here. We include specifics on 
-the PEM cause models below. [GBD-2019-Capstone-Appendix-PEM]_
+the PEM cause models below. [GBD-2019-Capstone-Appendix-PEM]_, p789.
 
 
 GBD runs a parent CODEm model to estimate deaths attributable to nutritional 
@@ -85,7 +85,7 @@ sequelae: [GBD-2019-Capstone-Appendix-PEM]_
   * - Severe wasting with oedema
     - {WHZ_i | WHZ_i < -3SD}
     - Is very tired and irritable and has diarrhoea. Is extremely skinny and has no energy.
-    - 0.051 (0.031–0.079); 0.128 (0.082–0.183)
+    - 0.051 (0.031–0.079); 0.128 (0.082–0.183). Applied multiplicatively.
 
 These are mapped onto clinically-defined wasting states as follows:
 
@@ -148,7 +148,7 @@ remainder to PEM. They assumed no oedema due to worms, and the
 prevalence:incidence ratio derived from the all-age PEM model. [GBD-2019-Capstone-Appendix-PEM]_
 
 The modelers used child anthropometry data from health surveys, literature, 
-and national reports, from which they estimated the WHZ SDs that correspond with 
+and national reports, from which they estimate the WHZ SDs that correspond with 
 the case definitions. They additionally used SMART datasets to estiamte the 
 proportion under 5 with oedema. In the GBD 2019 Appendix, they note, "Future 
 work in systematically evaluating longitudinal datasets on nutrition and growth 
