@@ -598,14 +598,10 @@ in terms of the following variables:
      - Description
      - Equation
      - Notes
-   * - :math:`d_i` for :math:`i\in \{1,2\}`
-     - Death probability out of MAM (cat 2) or SAM (cat 1)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})` :math:`+ emr_{pem}*1 - csmr_{pem}`
+   * - :math:`d_i`
+     - Death probability out of wasting category :math:`i`
+     - :math:`acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c`
      - 
-   * - :math:`d_i` for :math:`i\in \{3,4\}`
-     - Death probability out of Mild wasting (cat 3) or wasting TMREL (cat 4)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci})`
-     -
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
