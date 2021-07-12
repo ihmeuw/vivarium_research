@@ -102,6 +102,39 @@ Note we pull the above sequelae by using:
   hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
   hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
 
+.. list-table:: Restrictions
+   :widths: 10 10 20
+   :header-rows: 1
+
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     - 
+   * - Female only
+     - False
+     - 
+   * - YLL only
+     - False
+     - 
+   * - YLD only
+     - False
+     - 
+   * - YLL age group start
+     - Post Neonatal
+     - age_group_id = 4
+   * - YLL age group end
+     - 95 plus
+     - age_group_id = 235
+   * - YLD age group start
+     - Early Neonatal
+     - age_group_id = 2
+   * - YLD age group end
+     - 95 plus
+     - age_group_id = 235
+
+
 Validation Criteria
 -------------------
 
