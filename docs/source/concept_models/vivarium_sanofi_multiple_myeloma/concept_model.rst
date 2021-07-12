@@ -259,11 +259,10 @@ The simulation concept model consists of five main components:
   - Location: United States
   - Cohort type: Prospective **closed** cohort of individuals aged 15 years and 
     older (open cohort if we only examine on age 50+ population)
-  - Size of largest starting population: 100,000 simulants
+  - Size of largest starting population: 200,000 simulants
   - Time span: Jan 1, 2011 to Dec 31, 2025 (Jan 1, 2011 to Jan 1, 2021 is a 
     10-year long burn-in period)
-  - Time step: 28 days to capture the duration of treatment, and time to 
-    response. (Time step may be revised after further model development.)
+  - Time step: 28 days
 
 
 .. _mm5.2.2:
@@ -1045,6 +1044,49 @@ Where,
 - One-year PFS (%): proportion of patients survival without progression during a one-year period
 - Median OS (weeks): median length of time-to-death in weeks
 - One-year OS (%): proportion of patients survival without death during a one-year period
+
+.. _mm5.6:
+
+5.6 Survival output table
+-------------------------
+
+.. list-table:: Survival observer metrics
+   :header-rows: 1
+
+   * - Variable
+     - Definition
+   * - input_draw
+     - Input draw number. len(input_draw) = 30
+   * - scenario
+     - Intervention scenario. Choose from ['baseline', 'alternative']
+   * - treatment_line
+     - Treatment line/disease state a simulant is in. If a simulant is in state 
+       `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose 
+       from [1, 2, 3, 4, 5+]
+   * - period
+     - The number of days since the entrance into the `treatment_line` that the 
+       count measure was evaluated on.
+   * - alive_at
+     - Count of at-risk simulants alive at 'period' days since they entered `treatment_line`.
+   * - died_by
+     - Count of simulants who died at `period` days since they entered `treatment_line`.
+   * - progress_by
+     - Count of simulants who progressed to next line of treatment/disease state 
+       at `period` days since they entered `treatment_line`.
+   * - sim_end_on
+     - Count of simulants without death or progression at the end of the simulation 
+       at `period` days since they entered `treatment_line`. 
+
+Time frame for survival observer (timestep = 28 days):
+ 1. start_date = 2021-01-01, end_date = 2025-12-31
+ 2. start_date = 2025-01-01, end_date = 2025-12-31
+
+.. note::
+ 
+   Currently, there is no stratification of treatmnet category by line of treatmnet. 
+   If time allows, we will add this stratification to survival observer metrics so 
+   that we can compare survival outcomes for simulants treated with Isa/Dara to 
+   residual category.
 
 .. _mm6.0:
 
