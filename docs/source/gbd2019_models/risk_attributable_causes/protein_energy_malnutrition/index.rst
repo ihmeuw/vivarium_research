@@ -99,6 +99,9 @@ PEM is also categorized into severe acute malnutrition (SAM) and moderate acute 
 GBD 2019 Modeling Strategy
 --------------------------
 
+Protein Energy Malnutrition (PEM) in GBD 2019
++++++++++++++++++++++++++++++++++++++++++++++
+
 PEM is responsible for both fatal and nonfatal outcomes within the GBD 
 framework. GBD maintains a cause of death model called "Nutritional 
 deficiencies" that is split into *PEM* and *Other Nutritional Deficiencies* that 
@@ -249,11 +252,10 @@ estimates, including improved resolution for the component
 categories." [GBD-2019-Capstone-Appendix-PEM]_
 
 
-Protein Energy Malnutrition (PEM) in GBD 2019
-+++++++++++++++++++++++++++++++++++++++++++++
-
 Cause Hierarchy
 +++++++++++++++
+
+.. image:: pem_cause_hierarchy.svg
 
 Restrictions
 ++++++++++++
@@ -329,6 +331,40 @@ Note we pull the above sequelae by using:
   hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
   hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
 
+
+.. list-table:: Restrictions
+   :widths: 10 10 20
+   :header-rows: 1
+
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     - 
+   * - Female only
+     - False
+     - 
+   * - YLL only
+     - False
+     - 
+   * - YLD only
+     - False
+     - 
+   * - YLL age group start
+     - Post Neonatal
+     - age_group_id = 4
+   * - YLL age group end
+     - 95 plus
+     - age_group_id = 235
+   * - YLD age group start
+     - Early Neonatal
+     - age_group_id = 2
+   * - YLD age group end
+     - 95 plus
+     - age_group_id = 235
+
+     
 Validation Criteria
 -------------------
 
@@ -347,7 +383,7 @@ References
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 
-  
+
 .. [PCRM-PEM]
     Retrieved 25 June 2021.
     https://nutritionguide.pcrm.org/nutritionguide/view/Nutrition_Guide_for_Clinicians/1342068/all/Protein_Energy_Malnutrition
