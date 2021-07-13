@@ -706,15 +706,35 @@ For the burn-in period (both scenarios):
 
   For simulants with no prior exposure to isa or dara:
 
-    If :code:`eligible_for_retreatment == False`, assign treatment categories with the probabilities equal to:
+    If :code:`eligible_for_retreatment == False`, assign treatment categories according to the steps below.
 
-    :math:`p_\text{isa} = \frac{c_\text{isa} - (c*_\text{isa} + c*_\text{dara}) \times 0.15 \times \frac{c_\text{isa}}{(c_\text{dara} + c_\text{isa})}}{c*_\text{resid}}`
+    First, calculate proportion with ever exposure to isa and/or dara:
 
-    :math:`p_\text{dara} = \frac{c_\text{dara} - (c*_\text{isa} + c*_\text{dara}) \times 0.15 \times \frac{c_\text{dara}}{(c_\text{dara} + c_\text{isa})}}{c*_\text{resid}}`
-    
-    :math:`p_\text{resid} = 1 - p_\text{isa} - p_\text{dara}`
+    .. math::
 
-    Where :math:`c` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestepand :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep (set to zero if simulant's current line of treatment is the first line of treatment).
+      ever_0 = 0
+
+      ever_1 = c_1 
+
+      ever_2 = ever_1 + (c_2 - 0.15 * ever_1)
+
+      ever_3 = ever_2 + (c_3 - 0.15 * ever_2)
+
+      ever_4 = ever_3 + (c_4 - 0.15 * ever_3)
+
+      ever_5 = ever_4 + (c_5 - 0.15 * ever_4)
+
+    Where, :math:`c_\text{x}` is equal to the **combined** coverage or isa and dara at the Xth line of treatment.
+
+    Then, the probability of treatment category exposure for each treatment category at treatment line :math:`x` is as follows:
+
+    :math:`p_\text{x,isa} = \frac{(c_\text{x,isa} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,isa}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+
+    :math:`p_\text{x,dara} = \frac{(c_\text{x,dara} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,dara}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+
+    :math:`p_\text{x,resid} = 1 - p_\text{x,isa} - p_\text{x,dara}`
+
+    Where :math:`c_x` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep and :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep (set to zero if simulant's current line of treatment is the first line of treatment).
 
     This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time (lagged by average time of progression). Notably, these assumptions will cause biases in opposite directions.
 
