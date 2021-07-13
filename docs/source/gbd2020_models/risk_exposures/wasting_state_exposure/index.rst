@@ -35,12 +35,33 @@
 
 .. _2020_risk_exposure_wasting_state_exposure:
 
-================================
-Wasting as finite state machines
-================================
+=======
+Wasting
+=======
 
 .. contents::
   :local:
+
+Overview
+++++++++
+
+This page contains information pertaining to the joint risk-cause wasting model. 
+We note that this model is built on the GBD 2020 risk exposure model for wasting, and the 
+GBD 2020 protein energy malnutrition (PEM) cause model. GBD stratifies wasting 
+into four categories: TMREL, mild, moderate, and severe wasting. All PEM cases 
+are attributed to moderate and severe wasting, making PEM a PAF-of-1 model. Under the GBD framework, wasting is additionally a risk for measles, diarrheal diseases, and lower respiratory infections. These relationships are detailed under a risk effects page for wasting.
+
+.. todo::
+  Link to more info on PAF-of-1 models. Does this exist?
+
+.. todo::
+  Link to risk effects page for wasting.
+
+In the sections that follow we describe wasting and PEM: both as understood by
+the literature, and in the context of GBD 2020. We then include information on 
+how we will model wasting and PEM in vivarium for the CIFF-SAM project.
+
+
 
 +-------------------------------------------------+
 | List of abbreviations                           |
@@ -66,26 +87,116 @@ Wasting as finite state machines
 +-------+-----------------------------------------+
 
 
-Risk Exposure Overview
-++++++++++++++++++++++
+Wasting background
+++++++++++++++++++
 
-Malnutrition is an imbalance between the body’s needs and its use and intake of nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, disease states, lack of knowledge, and cultural practices, among others. Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies are all forms of malnutrition. 
+Malnutrition is an imbalance between the body’s needs and its use and intake of
+nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, 
+disease states, lack of knowledge, and cultural practices, among others. 
+Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies 
+are all forms of malnutrition. 
 
-**Acute malnutrition (AM)**, also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate severe acute malnutrition (SAM). WHZ z-scores range from -7 to +7. Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. AM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, AM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children. 
+**Acute malnutrition (AM)**, also referred to as wasting, is recent rapid weight 
+loss or a failure to gain weight that results from illness, lack of appropriate
+foods, or other underlying causes. Wasting is mostly typically classified in 
+terms of a weight-for-height z-score. Other forms of under or malnutrition 
+include stunting (low height for age), underweight (low weight for age), and 
+micronutrient deficiencies (a lack of key vitamins or minerals).
 
-.. note::
-  Include here a clinical background and overview of the risk exposure you're 
-  modeling. Note that this is only for the exposure; you will include information 
-  on the relative risk of the relevant outcomes, and the cause models for those 
-  outcomes, in a different document.
+For an individual, AM is not a chronic condition: children with AM either 
+recover or die and recovered children can relapse to AM. It is measured in 
+weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from 
+the median value of the global reference population. A z-score between -2 to 
+-3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate 
+severe acute malnutrition (SAM). WHZ z-scores range from -7 to +7. Although MAM 
+is less severe, it affects a greater number of children and is associated with 
+more nutrition-related deaths than SAM. 
 
-Risk Exposures Description in GBD
-+++++++++++++++++++++++++++++++++
+Protein-energy malnutrition (PEM) is defined to be moderate or severe acute 
+malnutrition, and takes the form of either marasmus, kwashiorkor, or marasmic 
+kwashiorkor. These conditions are diagnosed by **clinical** findings, with 
+oedema being the primary marker of kwashiorkor. We note that the precise 
+definitions of Marasmus and Kwashiorkor are debated: Kwashiorkor is typically 
+defined to be any form of wasting with oedema, but definitions of Marasmus 
+include (1) WHZ score :math:`i<3`, and (2) WHZ score :math:`i<3` and NO oedema. 
+We include a further clinical details below. [UpToDate-malnutrition]_ 
+[WHO-Malnutrition]_ [Dipasquale-et-al]_
+
+Marasmus is characterized by a low weight-for-height and reduced mid-upper arm 
+circumference (MUAC). Signs and symptoms include: [UpToDate-malnutrition]_
+
+  * Head that appears large relative to the body, with staring eyes
+
+  * Emaciated and weak appearance
+  
+  * Irritable and fretful affect
+
+  * Bradycardia, hypotension, and hypothermia
+
+  * Thin, dry skin
+
+  * Shrunken arms, thighs, and buttocks, with redundant skin folds caused by loss of subcutaneous fat
+
+  * Thin, sparse hair
+
+Kwashiorkor is characterized by symmetric peripheral pitting oedema that begins 
+in the lower parts of teh body and moves upwards, often affecting the presacral 
+area, genitalia, and periorbital area, with or without anasarca (severe 
+generalized oedema). There is marked muscle atrophy with normal or even 
+increased body fat. Malnutrition is considered severe if any oedema is present, 
+regardless of other anthropometric values. Other signs and symptoms include: 
+[UpToDate-malnutrition]_
+
+  * Apathetic, listless affect
+
+  * Rounded prominence of the cheeks ("moon face")
+
+  * Pursed appearance of the mouth
+
+  * Thin, dry, peeling skin with confluent areas of hyperkeratosis and hyperpigmentation
+
+  * Dry, dull, hypopigmented hair that falls out or is easily plucked
+
+  * Hepatomegaly (from fatty liver infiltrates)
+
+  * Distended abdomen with dilated intestinal loops
+
+  * Bradycardia, hypotension, and hypothermia
+
+  * Despite generalized edema, most children have loose inner inguinal skin folds
+
+Systems with mis- or impaired function due to severe acute malnutrition include: 
+cardiovascular, liver, kidney, gastrointestinal tract, immune, endocrine, 
+central nervous system, metabolism, circulation, and skin. 
+[UpToDate-malnutrition]_
+
+Due to the breadth of organ systems affected by PEM, persons suffering from PEM 
+are at increased risk for other micronutrient deficiencies, dehydration, 
+infection, and sepsis. [PCRM-PEM]_
+
+Marasmus is caused by inadequate intake of all nutrients, but particularly total 
+calories. The particular cause or nutrient deficit responsible for oedematous 
+malnutrition is still debated. [UpToDate-malnutrition]_
+
+Children with acute malnutrition are at greater risk of death from diarrhea and 
+other infectious diseases than well-nourished children. They also face greater 
+risk of morbidity from infectious diseases and delayed physical and cognitive 
+development. AM tends to peak during seasonal hunger, disease outbreaks, or 
+during food security ‘shocks’ (e.g. economic or climatic crises) and stresses 
+including humanitarian crises. However, AM is a problem that not only occurs in 
+emergencies, but also can be endemic in development contexts. When untreated, 
+MAM can deteriorate to SAM and possible death. Furthermore, evidence is emerging 
+that repeated episodes of MAM can have a significant impact on stunting; 
+prevention of wasting could potentially increase height in children. 
+
+
+Wasting Exposure in GBD 2020
+++++++++++++++++++++++++++++
 
 Case definition
 ---------------
 
-Wasting, a sub-compoonent indicator of child growth failure (CGF), is based on a categorical definition using the WHO 2006 growth standards for children 0-59 months. Definitions are based on Z-cores from the growth standards, which were derived from an international reference population. Mild, moderate and severe categorical prevalences were estimated for each of the three indicators. Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be greater than or equal to one standard deviation below the mean (-1 SD) of the WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
+Wasting, a sub-component indicator of child growth failure (CGF), is based on a categorical definition using the WHO 2006 growth standards for children 0-59 months. Definitions are based on Z-cores from the growth standards, which were derived from an international reference population. Mild, moderate and severe categorical prevalences were estimated for each of the three indicators. Theoretical minimum risk exposure level (TMREL) for wasting was assigned to be greater than or equal to one standard deviation below the mean (-1 SD) of the WHO 2006 standard weight-for-height curve. This has not changed since GBD 2010.
 
 +----------------------------------------------+
 | Wasting category definition (range -7 to +7) |
@@ -126,8 +237,9 @@ Outcomes affected by wasting
 
 CGF burden does not start until *after* neonatal age groups (from 1mo onwards). In the neonatal age groups (0-1mo), burden comes from LBWSG. From post-neonatal (1mo+) age onwards, CGF outcomes affected include lower-respiratory disease (LRI), diarrheal disease (DD), measles, and protein energy malnutrition (PEM). The literature on interventions for wasting target age groups 6mo onwards. This coincides with the timing of supplementary food introduction. Prior to 6mo, interventions to reduce DALYs focus on breastfeeding and reduction of LBWSG. 
 
-.. todo::
-  Put RRs here(?)
+
+Protein Energy Malnutrition in GBD 2020
++++++++++++++++++++++++++++++++++++++++
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
