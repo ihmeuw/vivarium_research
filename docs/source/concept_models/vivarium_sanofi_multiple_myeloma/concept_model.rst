@@ -734,7 +734,7 @@ For the burn-in period (both scenarios):
 
     :math:`p_\text{x,resid} = 1 - p_\text{x,isa} - p_\text{x,dara}`
 
-    Where :math:`c_x` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep and :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep (set to zero if simulant's current line of treatment is the first line of treatment).
+    Where :math:`c_x` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep.
 
     This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time (lagged by average time of progression). Notably, these assumptions will cause biases in opposite directions.
 
