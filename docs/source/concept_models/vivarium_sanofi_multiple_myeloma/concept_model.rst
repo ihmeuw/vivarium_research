@@ -760,7 +760,7 @@ For the burn-in period (both scenarios):
 
 **How to assign treatment effects:**
 
-Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`prior_anticd38_treatment == True`). The hazard ratios are shown in the tables below.
+Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (if a simulant is in the isa or dara treatment category and :code:`eligible_for_retreatment_i == True`, they should be assigned the retreated hazard ratios). The hazard ratios are shown in the tables below.
 
 We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. The population-based real world evidence treatment effect sizes should be used for the primary runs of the simulation (both for the baseline and alternative scenarios); the clinical trial effect sizes should be used for separate supplementary runs of the simulation (for the bsaeline and alternative scenarios) if/when time allows.
 
