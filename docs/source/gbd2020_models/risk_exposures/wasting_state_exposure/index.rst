@@ -132,28 +132,24 @@ CGF burden does not start until *after* neonatal age groups (from 1mo onwards). 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-To determine the transition rates from 
+.. image:: vivarium_wasting_model.svg
 
-We will build a duration based Markov chain finite state state transition model 
-for progression and recovery of acute malnutrition calibrated to GBD 2020 
-prevalence of wasting. We do this progressively from a wasting only model to one 
-with causes and disease feedback. The arrows in the model diagram figures 
-represent the transition probabilities into and out of each state which 
-determines the movement of children in and out of each state. 
+We will model wasting in four compartments: TMREL, Mild, Moderate, and Severe.
+In a given timestep a simulant will either stay put, transition to an adjacent 
+wasting category, or die. In this case of "CAT 1: severe wasting", simulants can 
+also transition to "CAT 3: Mild wasting" via a treatment arrow, t1.
 
-We first build
-
-  1. 1x4 state model with wasting only
-  2. 2x4 state model with 2 disease states and 4 wasting states
-  3. 2x4 state model with 2 disease states and 4 wasting states with death and fertility (tbd)
-
+We will use the GBD 2020 wasting and PEM models to inform this model, in 
+addition to data found in the literature. We will derive the remaining 
+transition rates from a Markov chain model, described in further detail below.
 
 Assumptions and Limitations
-+++++++++++++++++++++++++++
+---------------------------
 
 Describe the clinical and mathematical assumptions made for this cause model,
 and the limitations these assumptions impose on the applicability of the
-model.
+model. Describe why a Markov chain assumption is flawed (remission / incidence
+isn't constant over time / memoryless).
 
 Restrictions
 ------------
@@ -182,33 +178,28 @@ Restrictions
 
 	Determine if there's something analogous to "YLL/YLD only" for this section
 
-Risk Exposure Model Diagram
----------------------------
+Markov chain model
+------------------
 
 Finite state machine 1x4 + death
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In the above section we calculated the transition probabilities assuming that 
-all simulants exist in one of the four wasting categories. The transition 
-probabilities are thus incorrect, because simulants never die. In reality, we 
-expect children to age into the four wasting categories, and to die out of SAM 
-at a higher rate than out of MAM, mild wasting, or the TMREL. Thus in the above model, we 
-expect simulants who ought to be dying to instead be remitting to MAM.
-
-Here we correct this by allowing simulants to die into **CAT 0** at differential 
-rates. However, as we still need to assume equilibrium across the wasting states 
-over time, we allow sims to age in to the four wasting categories out of 
-**CAT 0**, our "reincarnation pool". We then set the transition probabilies 
-:math:`f_i` equal to the prevalence of the four wasting categories.
-
 .. image:: wasting_state_1x4_plus_death.svg
 
-It is important here to note first that :math:`f_i` don't represent fertility rates, 
-but rather that we only allow enough sims to age in each timestep necessary to 
-replenish those that died. Second, we emphasize that we utilize this method in 
-order to calculate transition probabilities between the different wasting categories. 
-However, the final Vivarium model of wasting will not include a reincarnation 
-pool.
+This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
+Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
+the TMREL, it is necessary to include death to correctly derive our transition 
+rates. Thus we allow simulants to die into CAT 0. However, because we need to 
+assume equilibrium of our system over time, we allow simulants to "age in" to 
+CATs 1-4, out of CAT 0. We thus set the transition probabilies :math:`f_i` equal 
+to the prevalence of the four wasting categories, obtained from GBD. 
+
+It is important here to note first that :math:`f_i` don't represent fertility rates: 
+rather, if :math:`k_i` sims died in timestep :math:`k`, we allow :math:`k_i` sims to
+age in in timestep :math:`k+1`, to replenish those that died. Second, we 
+emphasize that we utilize this method in order to calculate transition 
+probabilities between the different wasting categories. However, the final 
+Vivarium model of wasting will not include a reincarnation pool.
 
 Here we include equations for the transition probabilities, and in the section 
 that follows we will detail how to calculate all the variables used
@@ -332,7 +323,7 @@ We now detail how the above wasting probability transition equations were derive
   Consider adding all code for calculating above eqns.
 
 
-As in the previous section, we solve our transition probabilities using a 
+We solve our transition probabilities using a 
 Markov Chain transition matrix **T**. 
 
 T = 
@@ -352,7 +343,7 @@ T =
 
   a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
   b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2020 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of people who die in a timestep
+  c) :math:`π_{i}` ≥ 0 , these are GBD 2020 age/sex/location/year-specific prevalence for wasting categories 1-4, plus :math:`p0`, which will equal the number of sims who die in a timestep
 
 
 Solving a)
@@ -371,25 +362,6 @@ Rows of the P matrix sums to 1
   9)  :math:`r_2 + s_1 + d_1 = 1`
   10) :math:`f_4+f_3+f_2+f_1=1`
 
-We have duration of treated and untreated sam and mam as well as coverage from the literature :   
-
-  11) :math:`r_2 + d_1 = 1/duration\_cat_1`
-  12) :math:`r_3 + i_1 + d_2 = 1/duration\_cat_2`
-  13) :math:`i_2 + r_4 + d_3 = 1/duration\_cat_3`
-
-where
-
- - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
- - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
- - Duration of cat 3: :math:`1 / (i_2 + r_4)`. ~ 365 days (will refine)
- - tx is treated
- - ux is untreated
- - C is treatment coverage proportion
-
-
-.. todo::
-    Check with Chris Troeger about the duration of cat3. Also see if Gates 
-    Foundation has a way to calculate this from their KI database.
 
 .. code-block:: python
 
@@ -404,14 +376,12 @@ where
   r2, s1 = symbols('r2 s1')
   d4, d3, d2, d1 = symbols('d4 d3 d2 d1')
   f4, f3, f2, f1 = symbols('f4 f3 f2 f1')
-
   ap4, ap3, ap2, ap1, ap0 = symbols('ap4 ap3 ap2 ap1 ap0')
-
   acmr = sym.Symbol('acmr')
 
-  dur_cat1, dur_cat2, dur_cat3, dur_cat4 = symbols('dur_cat1 dur_cat2 dur_cat3 dur_cat4')
 
-  unknowns = [s1,s2,s3,s4,r2,r3,r4,i1,i2,i3,d1,d2,d3,d4,f1,f2,f3,f4]
+  # for k linearly independent eqns, sympy will solve the first k unknowns
+  unknowns = [i2,s1,s2,s3,s4,r3,i1,i3,t1,r4,r2,d1,d2,d3,d4,f1,f2,f3,f4]
 
   def add_eq(terms, y, i, A, v):
     """
@@ -457,17 +427,6 @@ where
 
   # f4 + f3 + f2 + f1 + sld = 1
   eq10 = [{f4:1, f3:1, f2:1, f1:1}, 1]
-
-
-  # # adding durations of states
-  # r2 + d1 = 1/Dsam
-  eq11 = [{r2:1, d1:1}, (1/dur_cat1)]
-
-  # r3 + i1 + d2 = 1/Dmam
-  eq12 = [{r3:1, i1:1, d2:1}, (1/dur_cat2)]
-
-  # r4 + i2 + d3 = 1/Dmild
-  eq13 = [{r4:1, i2:1, d3:1}, 1/dur_cat3]
 
 
   def build_matrix(eqns, unknowns):
@@ -520,7 +479,7 @@ where
   result_0 = sym.solve(A0 * x0 - b0, x0)
 
   # solve in terms of duration of cat3 instead of i3:
-  A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10,eq11,eq12,eq13],
+  A1, x1, b1 = build_matrix([eq1,eq2,eq3,eq4,eq5,eq6,eq7,eq8,eq9,eq10],
                          unknowns)
   result_1 = sym.solve(A1 * x1 - b1, x1)
 
