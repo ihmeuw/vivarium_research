@@ -155,30 +155,6 @@ Describe the clinical and mathematical assumptions made for this cause model,
 and the limitations these assumptions impose on the applicability of the
 model.
 
-Markov chains
--------------
-
-.. todo::
-  add some detail about markov chains, define mathematic notations 
-
-Equilibirum
------------
-
-.. todo::
-  add some detail about equilirium
-
-Arborescence
-------------
-
-.. todo::
-  add some detail about graph theory and the process we did to discover the pattern in our markov chains
-
-As a rule for the finiate state machines, the numerator of the prevalence of a state is the sum of the product of all edges in every unique anti-arborescence (graph theory).
-
-.. note::
-  This section will become the methods section in the manuscript. 
-
-
 Restrictions
 ------------
 
