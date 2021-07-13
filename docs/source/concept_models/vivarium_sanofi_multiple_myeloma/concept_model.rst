@@ -711,6 +711,7 @@ For the burn-in period (both scenarios):
     :math:`p_\text{isa} = \frac{c_\text{isa} - (c*_\text{isa} + c*_\text{dara}) \times 0.15 \times \frac{c_\text{isa}}{(c_\text{dara} + c_\text{isa})}}{c*_\text{resid}}`
 
     :math:`p_\text{dara} = \frac{c_\text{dara} - (c*_\text{isa} + c*_\text{dara}) \times 0.15 \times \frac{c_\text{dara}}{(c_\text{dara} + c_\text{isa})}}{c*_\text{resid}}`
+    
     :math:`p_\text{resid} = 1 - p_\text{isa} - p_\text{dara}`
 
     Where :math:`c` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestepand :math:`c*` indicates the coverage of a particular treatment category for a simulant's previous line of treatment at the current timestep (set to zero if simulant's current line of treatment is the first line of treatment).
