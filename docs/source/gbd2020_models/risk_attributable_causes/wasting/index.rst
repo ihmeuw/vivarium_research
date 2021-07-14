@@ -859,6 +859,82 @@ Wasting x Disease model
 Data Description Tables
 +++++++++++++++++++++++
 
+.. list-table:: PEM State Data
+   :widths: 5 10 10 20
+   :header-rows: 1
+
+   * - State
+     - Measure
+     - Value
+     - Notes
+   * - MAM
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for MAM
+   * - SAM
+     - disability weight
+     - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - disability weight for SAM
+
+
+.. list-table:: PEM Data Sources and Definitions
+   :widths: 10 10 20 20
+   :header-rows: 1
+
+   * - Variable
+     - Source
+     - Description
+     - Notes
+   * - MAM sequelae
+     - 
+     - {s198, s2033}
+     - Moderate wasting with eodema, moderate wasting without oedema
+   * - SAM sequelae
+     - 
+     - {s199, s2036}
+     - Severe wasting with eodema, severe wasting without oedema
+
+.. list-table:: PEM Restrictions
+   :widths: 10 10 20
+   :header-rows: 1
+
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     - 
+   * - Female only
+     - False
+     - 
+   * - YLL only
+     - False
+     - 
+   * - YLD only
+     - False
+     - 
+   * - YLL age group start
+     -
+     -
+   * - YLL age group end
+     -
+     -
+   * - YLD age group start
+     -
+     -
+   * - YLD age group end
+     -
+     -
+
+Note we pull the above sequelae by using:
+
+.. code-block:: python
+
+  from db_queries import get_sequela_metadata
+  
+  hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
+  hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
+
 As we are building this model before the completion of GBD 2020, we 
 will need to calculate the PAFs ourselves, using the following equation:
 
