@@ -392,7 +392,7 @@ References
     Retrieved 25 June 2021.
     https://www-uptodate-com.offcampus.lib.washington.edu/contents/malnutrition-in-children-in-resource-limited-countries-clinical-assessment
 
-.. [WHO-Malnutrition]
+.. [WHO-Malnutrition-PEM]
     Retrieved 25 June 2021.
     https://www.who.int/news-room/q-a-detail/malnutrition
     
