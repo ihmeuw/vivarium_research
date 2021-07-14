@@ -12,7 +12,7 @@ specifically to an acute (as opposed to chronic) disorder that results in
 wasting, and is classified as either marasmus, kwashiorkor, or some 
 combination of these. These disorders are diagnosed by **clinical** 
 findings, with oedema being the primary marker of kwashiorkor, distinguishing it 
-from marasmus. [UpToDate-malnutrition]_ [WHO-Malnutrition]_ [Dipasquale-et-al]_
+from marasmus. [UpToDate-malnutrition-PEM]_ [WHO-Malnutrition-PEM]_ [Dipasquale-et-al-PEM]_
 
 Marasmus is characterized by a low weight-for-height and reduced mid-upper arm 
 circumference (MUAC). 
@@ -24,9 +24,9 @@ circumference (MUAC).
    body tissues, particularly muscles and subcutaneous fat, and is usually a 
    result of severe restrictions in energy intake. Children younger than five 
    years are the most commonly involved because of their increased caloric 
-   requirements and increased susceptibility to infections." [Dipasquale-et-al]_
+   requirements and increased susceptibility to infections." [Dipasquale-et-al-PEM]_
 
-Signs and symptoms include: [UpToDate-malnutrition]_
+Signs and symptoms include: [UpToDate-malnutrition-PEM]_
 
   * Head that appears large relative to the body, with staring eyes
 
@@ -50,7 +50,7 @@ increased body fat. Malnutrition is considered severe if any oedema is present,
 regardless of other anthropometric values.
 
 Other signs and symptoms include: 
-[UpToDate-malnutrition]_
+[UpToDate-malnutrition-PEM]_
 
   * Apathetic, listless affect
 
@@ -73,7 +73,7 @@ Other signs and symptoms include:
 Systems with mis- or impaired function due to severe acute malnutrition include: 
 cardiovascular, liver, kidney, gastrointestinal tract, immune, endocrine, 
 central nervous system, metabolism, circulation, and skin. 
-[UpToDate-malnutrition]_
+[UpToDate-malnutrition-PEM]_
 
 Due to the breadth of organ systems affected by PEM, persons suffering from PEM 
 are at increased risk for other micronutrient deficiencies, dehydration, 
@@ -81,7 +81,7 @@ infection, and sepsis. [PCRM-PEM]_
 
 Marasmus is caused by inadequate intake of all nutrients, but particularly total 
 calories. The particular cause or nutrient deficit responsible for oedematous 
-malnutrition is still debated. [UpToDate-malnutrition]_
+malnutrition is still debated. [UpToDate-malnutrition-PEM]_
 
 PEM is also categorized into severe acute malnutrition (SAM) and moderate acute malnutrition (MAM), typically defined in terms of weight-for-height scores, as follows:
 

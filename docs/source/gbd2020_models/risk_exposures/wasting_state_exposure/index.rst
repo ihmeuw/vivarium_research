@@ -119,11 +119,11 @@ oedema being the primary marker of kwashiorkor. We note that the precise
 definitions of Marasmus and Kwashiorkor are debated: Kwashiorkor is typically 
 defined to be any form of wasting with oedema, but definitions of Marasmus 
 include (1) WHZ score :math:`i<3`, and (2) WHZ score :math:`i<3` and NO oedema. 
-We include a further clinical details below. [UpToDate-malnutrition]_ 
-[WHO-Malnutrition]_ [Dipasquale-et-al]_
+We include a further clinical details below. [UpToDate-malnutrition-Wasting]_ 
+[WHO-Malnutrition-Wasting]_ [Dipasquale-et-al-Wasting]_
 
 Marasmus is characterized by a low weight-for-height and reduced mid-upper arm 
-circumference (MUAC). Signs and symptoms include: [UpToDate-malnutrition]_
+circumference (MUAC). Signs and symptoms include: [UpToDate-malnutrition-Wasting]_
 
   * Head that appears large relative to the body, with staring eyes
 
@@ -145,7 +145,7 @@ area, genitalia, and periorbital area, with or without anasarca (severe
 generalized oedema). There is marked muscle atrophy with normal or even 
 increased body fat. Malnutrition is considered severe if any oedema is present, 
 regardless of other anthropometric values. Other signs and symptoms include: 
-[UpToDate-malnutrition]_
+[UpToDate-malnutrition-Wasting]_
 
   * Apathetic, listless affect
 
@@ -168,15 +168,15 @@ regardless of other anthropometric values. Other signs and symptoms include:
 Systems with mis- or impaired function due to severe acute malnutrition include: 
 cardiovascular, liver, kidney, gastrointestinal tract, immune, endocrine, 
 central nervous system, metabolism, circulation, and skin. 
-[UpToDate-malnutrition]_
+[UpToDate-malnutrition-Wasting]_
 
 Due to the breadth of organ systems affected by PEM, persons suffering from PEM 
 are at increased risk for other micronutrient deficiencies, dehydration, 
-infection, and sepsis. [PCRM-PEM]_
+infection, and sepsis. [PCRM-Wasting]_
 
 Marasmus is caused by inadequate intake of all nutrients, but particularly total 
 calories. The particular cause or nutrient deficit responsible for oedematous 
-malnutrition is still debated. [UpToDate-malnutrition]_
+malnutrition is still debated. [UpToDate-malnutrition-Wasting]_
 
 Children with acute malnutrition are at greater risk of death from diarrhea and 
 other infectious diseases than well-nourished children. They also face greater 
@@ -248,12 +248,12 @@ estimates PEM mortality. Nonfatal PEM cases are modelled independently, using
 the case definition moderate and severe acute malnutrition, defined in terms of 
 weight-for-height Z-scores (WHZ). All PEM cases are attributed to the GBD Child 
 Growth Failure risk factor, which is not detailed here. We include specifics on 
-the PEM cause models below. [GBD-2019-Capstone-Appendix-PEM]_, p789.
+the PEM cause models below. [GBD-2019-Capstone-Appendix-Wasting]_, p789.
 
 
 GBD runs a parent CODEm model to estimate deaths attributable to nutritional 
 deficiency, using vital registration and verbal autopsy data as inputs. The 
-applicable ICD codes are as follows: [GBD-2019-Capstone-Appendix-PEM]_
+applicable ICD codes are as follows: [GBD-2019-Capstone-Appendix-Wasting]_
 
 .. list-table:: PEM CoD ICD-10 Codes
   :widths: 10 20
@@ -282,19 +282,19 @@ applicable ICD codes are as follows: [GBD-2019-Capstone-Appendix-PEM]_
 
 They then run (1) an under-5 PEM model, (2) a 5-and-over PEM model, and (3) an 
 other nutritional deficiencies model. These models are scaled using CODCorrect 
-to fit the parent nutriional deficiency model. [GBD-2019-Capstone-Appendix-PEM]_
+to fit the parent nutriional deficiency model. [GBD-2019-Capstone-Appendix-Wasting]_
 
 Note that as PEM is defined as "a lack of dietary protein and/or energy", it 
 includes famines and severe droughts. These result in discontinuities in PEM 
 estimation, which the GBD team accounts for. The appendix specifically mentions 
 using the Tombstone report to estimate deaths due to the famine during the Great 
-Leap Forward in the 1960s in China. [GBD-2019-Capstone-Appendix-PEM]_
+Leap Forward in the 1960s in China. [GBD-2019-Capstone-Appendix-Wasting]_
 
 GBD's nonfatal PEM model takes as its case definition "moderate and severe acute 
 malnutrition", defined in terms of distance from the mean WHZ score given by the 
 WHO 2006 growth standard for children. The relevant ICD 10 codes are E40-E46.9, 
 E64.0, and ICD 9 codes are 260-263.9. PEM is partitioned into the following four 
-sequelae: [GBD-2019-Capstone-Appendix-PEM]_
+sequelae: [GBD-2019-Capstone-Appendix-Wasting]_
 
 .. list-table:: Nonfatal PEM Sequelae
   :widths: 10 15 15 15 
@@ -364,22 +364,22 @@ with nutrition experts. The current modelers (as of June 2021 no longer have
 documentation of these conversations, which took place sometime before 2015). 
 They used a remission rate of 0.25 - 1.25 (remitted cases of PEM per person-year 
 of illness). Note this is a rather wide interval that allowed DisMod to choose a 
-remission rate within the given bounds based on other input data. [GBD-2019-Capstone-Appendix-PEM]_
+remission rate within the given bounds based on other input data. [GBD-2019-Capstone-Appendix-Wasting]_
 
 From the all-age model, they then derived (1) a prevalence:incidence ratio that 
 was applied across all categories of non-fatal PEM, and (2) a moderate:severe 
-wasting ratio for both under and over 5. [GBD-2019-Capstone-Appendix-PEM]_
+wasting ratio for both under and over 5. [GBD-2019-Capstone-Appendix-Wasting]_
 
 .. todo::
   What do the modelers do with this mod:sev ratio? How do they get estimates for 5+?
 
 The modelers then assumed that there is zero prevalence of oedema in anyone over 
-5. [GBD-2019-Capstone-Appendix-PEM]_
+5. [GBD-2019-Capstone-Appendix-Wasting]_
 
 Additionally, they calculated the fraction of wasting attributable to severe 
 worm infestation and subtracted this out of all wasting, attributing the 
 remainder to PEM. They assumed no oedema due to worms, and the 
-prevalence:incidence ratio derived from the all-age PEM model. [GBD-2019-Capstone-Appendix-PEM]_
+prevalence:incidence ratio derived from the all-age PEM model. [GBD-2019-Capstone-Appendix-Wasting]_
 
 The modelers used child anthropometry data from health surveys, literature, 
 and national reports, from which they estimate the WHZ SDs that correspond with 
@@ -388,7 +388,7 @@ proportion under 5 with oedema. In the GBD 2019 Appendix, they note, "Future
 work in systematically evaluating longitudinal datasets on nutrition and growth 
 failure will allow us to improve the empirical basis for PEM incidence 
 estimates, including improved resolution for the component 
-categories." [GBD-2019-Capstone-Appendix-PEM]_
+categories." [GBD-2019-Capstone-Appendix-Wasting]_
 
 
 Cause Hierarchy
