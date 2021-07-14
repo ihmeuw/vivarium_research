@@ -807,28 +807,28 @@ Note the RRs should be pulled as follows:
 References
 ++++++++++
 
-.. [Dipasquale-et-al]
+.. [Dipasquale-et-al-Wasting]
     Dipasquale et al. Acute Malnutrition in Children:
     Pathophysiology, Clinical Effects and Treatment.
     Nutrients 2020, 12, 2413;
     doi:10.3390/nu12082413,
     https://www.mdpi.com/2072-6643/12/8/2413
 
-.. [GBD-2019-Capstone-Appendix-PEM]
+.. [GBD-2019-Capstone-Appendix-Wasting]
   Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 
 
-.. [PCRM-PEM]
+.. [PCRM-Wasting]
     Retrieved 25 June 2021.
     https://nutritionguide.pcrm.org/nutritionguide/view/Nutrition_Guide_for_Clinicians/1342068/all/Protein_Energy_Malnutrition
 
-.. [UpToDate-malnutrition]
+.. [UpToDate-malnutrition-Wasting]
     Retrieved 25 June 2021.
     https://www-uptodate-com.offcampus.lib.washington.edu/contents/malnutrition-in-children-in-resource-limited-countries-clinical-assessment
 
-.. [WHO-Malnutrition]
+.. [WHO-Malnutrition-Wasting]
     Retrieved 25 June 2021.
     https://www.who.int/news-room/q-a-detail/malnutrition
     

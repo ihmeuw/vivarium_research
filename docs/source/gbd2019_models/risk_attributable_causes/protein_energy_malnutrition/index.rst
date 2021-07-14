@@ -364,14 +364,14 @@ Note we pull the above sequelae by using:
      - 95 plus
      - age_group_id = 235
 
-     
+
 Validation Criteria
 -------------------
 
 References
 ----------
 
-.. [Dipasquale-et-al]
+.. [Dipasquale-et-al-PEM]
     Dipasquale et al. Acute Malnutrition in Children:
     Pathophysiology, Clinical Effects and Treatment.
     Nutrients 2020, 12, 2413;
@@ -388,7 +388,7 @@ References
     Retrieved 25 June 2021.
     https://nutritionguide.pcrm.org/nutritionguide/view/Nutrition_Guide_for_Clinicians/1342068/all/Protein_Energy_Malnutrition
 
-.. [UpToDate-malnutrition]
+.. [UpToDate-malnutrition-PEM]
     Retrieved 25 June 2021.
     https://www-uptodate-com.offcampus.lib.washington.edu/contents/malnutrition-in-children-in-resource-limited-countries-clinical-assessment
 
