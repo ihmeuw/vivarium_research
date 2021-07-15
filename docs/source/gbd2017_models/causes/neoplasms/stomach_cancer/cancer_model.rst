@@ -69,25 +69,32 @@ Stomach cancers tend to develop slowly over many years. Before a true cancer dev
 GBD 2017 Modeling Strategy
 --------------------------
 
-The following information was obtained from the GBD 2017 fatal and non-fatal methods appendices [GBD-2017-YLD-Appendix]_, [GBD-2017-CoD-Appendix]_.
+The following information was obtained from the GBD 2017 fatal and non-fatal methods appendices [GBD-2017-YLD-Appendix-Stomach-Cancer]_, [GBD-2017-CoD-Appendix-Stomach-Cancer]_.
 
 As with the majority of neoplasm causes in GBD, a remission rate for stomach cancer is not explicitly modeled. Prevalence for all cancers is estimated for a maximum of ten years after incidence meaning if a person survives for more than 10 years, he/she is considered 'cured'. In other words, a surviving person will no longer be a prevalent case 10 years after incidence and does not have excess mortality and morbidity/disability from stomach cancer.
 
 Total yearly prevalence of stomach cancer is split into four sequelae (see page 310-312 of YLD appendix): 
 
 #. :underline:`Diagnosis and primary therapy`: 
-  - time from onset of symptoms through to the end of treatment 
+
+  - time from onset of symptoms through to the end of treatment
   - assumed 5.2 month duration for stomach cancer 
   - Disability weight of 0.288 (0.193, 0.399)
-#. :underline:`Controlled phase`: 
+
+#. :underline:`Controlled phase`:
+
  - time between end of primary treatment and earlist of either:  cure (defined as recurrence- and progression-free survival after ten years), death from another cause, or progression to the metastatic phase
  - duration calculated based on remainder of time after attributing other sequelae. 
  - Disability weight of 0.049 (0.031, 0.072)
-#. :underline:`Metastatic phase`: 
+
+#. :underline:`Metastatic phase`:
+
  - time period of intensive treatment for metastatic disease
  - assumed 3.88 month duration for stomach cancer
  - Disability weight of 0.451 (0.307, 0.600)
-#. :underline:`Terminal phase`: 
+
+#. :underline:`Terminal phase`:
+
  - 1 month prior to death
  - Disability weight of 0.540 (0.377, 0.687)
 
@@ -178,7 +185,7 @@ Assumptions and Limitations
 
 2. This model assumes that the GBD incidence rate corresponds to the incidence of all pre-clinical asymptomatic stomach cancer (PC state) rather than symptomatic clinical stomach cancer arising from symptomatic presentation at the doctor's office. This assumption has a few notable downstream limitations, including:
 
-	- simulation incidence of *clinical* stomach cancer will lag slightly behind forecasted incidence of stomach cancer due to the mean sojourn time period delay
+  - simulation incidence of *clinical* stomach cancer will lag slightly behind forecasted incidence of stomach cancer due to the mean sojourn time period delay
   - this should not cause too much trouble for stomach cancer as we assume a short mean sojourn time (<1 year)
 
 .. todo::
@@ -309,7 +316,7 @@ State and Transition Data Tables
      - S
      - PC
      - :math:`\frac{\text{i_c414*}}{\text{(1 - prev_c414)}}`
-     - *draw at age 'current age + MST'   
+     - \*draw at age 'current age + MST'
    * - i_c
      - PC
      - C
@@ -406,7 +413,7 @@ References
 ++++++++++
 
 
-.. [GBD-2017-YLD-Appendix]
+.. [GBD-2017-YLD-Appendix-Stomach-Cancer]
 
    Pages 310-317 in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
    appendix on ScienceDirect_>`_:
@@ -422,7 +429,7 @@ References
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
 
 
-.. [GBD-2017-CoD-Appendix]
+.. [GBD-2017-CoD-Appendix-Stomach-Cancer]
 
    Pages 190-198 in `Supplementary appendix 1 to the GBD 2017 CoD Capstone <CoD
    appendix on ScienceDirect_>`_:

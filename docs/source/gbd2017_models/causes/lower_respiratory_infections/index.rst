@@ -15,16 +15,16 @@ caused by four pathogens - Streptococcus pneumoniae (*pneumococcal
 pneumonia*), Haemophilus influenzae type B (*Hib*), influenza, and respiratory
 syncytial virus (*RCV*). Those pathogens may co-infect.
 Pneumococcal pneumonia is the largest cause of LRI
-mortality. [Wikipedia]_, [GBD-2017-YLD-Capstone-Appendix-1-lri]_
+mortality. [Wikipedia-LRI]_, [GBD-2017-YLD-Capstone-Appendix-1-lri]_
 
 The lower respiratory tract or lower airway is derived from the developing foregut
 and consists of the trachea, bronchi (primary, secondary and tertiary),
 bronchioles (including terminal and respiratory), and lungs (including alveoli).
-It also sometimes includes the larynx. [Wikipedia]_
+It also sometimes includes the larynx. [Wikipedia-LRI]_
 
 Transmission of LRI may occur via several pathways, including direct physical contact,
 fomites, direct droplet spread, and suspended small particles. Intermingling of
-large numbers of people can facilitate transmission of respiratory pathogens. [CDC]_
+large numbers of people can facilitate transmission of respiratory pathogens. [CDC-LRI]_
 
 In GBD 2016, malnutrition was identified as a leading risk factor for lower respiratory infection
 mortality among children younger than 5 years and, together with air pollution (both household and ambient)
@@ -253,11 +253,11 @@ Baseline vivarium model results should compare to GBD artifact data with respect
 References
 ----------
 
-.. [Wikipedia] Lower respiratory tact infection. From Wikipedia, the Free Encyclopedia.
+.. [Wikipedia-LRI] Lower respiratory tact infection. From Wikipedia, the Free Encyclopedia.
    Retrieved 22 Nov 2019.
    https://en.wikipedia.org/wiki/Lower_respiratory_tract_infection
 
-.. [CDC] Respiratory Infections (*The Yellow Book*). Centers for Disease Control and Prevention, 2019. Retrieved 20 Dec 2019.
+.. [CDC-LRI] Respiratory Infections (*The Yellow Book*). Centers for Disease Control and Prevention, 2019. Retrieved 20 Dec 2019.
    https://wwwnc.cdc.gov/travel/yellowbook/2020/posttravel-evaluation/respiratory-infections
 
 .. [Lancet] The Global Burden of Lower Respiratory Infections: Making Progress, but We Need to Do Better (*Volume 18*).

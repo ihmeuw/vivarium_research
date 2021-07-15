@@ -46,6 +46,8 @@ Risk Overview
 GBD 2019 Modeling Strategy
 --------------------------
 
+[GBD-2019-Risk-Factors-Appendix-Zinc-Deficiency-Risk-Effects]_
+
 .. note::
 
 	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_zinc_deficiency>` page.
@@ -78,7 +80,8 @@ Vivarium Modeling Strategy
 
 .. note::
 
-	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_page_link>` page.
+   This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium
+   modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_zinc_deficiency>` page.
 
 .. list-table:: Risk Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5

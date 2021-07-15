@@ -35,9 +35,9 @@
 
 .. _2019_risk_exposure_wasting_state_exposure:
 
-================================
-Wasting as finite state machines
-================================
+=======
+Wasting
+=======
 
 .. contents::
   :local:
@@ -67,7 +67,7 @@ Wasting as finite state machines
 
 
 
-.. _1.0:
+.. _waste_exp1.0:
 
 Risk Exposure Overview
 ++++++++++++++++++++++
@@ -79,12 +79,12 @@ Malnutrition is an imbalance between the body’s needs and its use and intake o
 .. note::
   Include here a clinical background and overview of the risk exposure you're modeling. Note that this is only for the exposure; you will include information on the relative risk of the relevant outcomes, and the cause models for those outcomes, in a different document.
 
-.. _1.1:
+.. _waste_exp1.1:
 
 Risk Exposures Description in GBD
 +++++++++++++++++++++++++++++++++
 
-.. _1.1.1:
+.. _waste_exp1.1.1:
 
 Case definition
 ---------------
@@ -103,7 +103,7 @@ Wasting, a sub-compoonent indicator of child growth failure (CGF), is based on a
 | SAM   |  < -3 Z score                        |
 +-------+--------------------------------------+
 
-.. _1.1.2:
+.. _waste_exp1.1.2:
 
 Input data
 ----------
@@ -115,7 +115,7 @@ Two types of input data are used in CGF estimation:
   2. **Microdata**. This data does have individual anthropometric measurements. From these datasources, GBD can see entire distributions of CGF, while also collapsing them down to point prevalences like moderate and severe CGF. 
 
 
-.. _1.1.3:
+.. _waste_exp1.1.3:
 
 Exposure estimation
 ------------------- 
@@ -130,7 +130,7 @@ Note that the z-score ranges from -7 to +7. If we limit ourselves to Z-scores be
   In the paper that Ryan (GBD modeller for CGF and LWBSG) is working on right now, he presents the first results ever for "extreme" stunting which we define as kids with stunting Z scores below -4. For Ethiopia, that's about 7% of kids. So it's non-trivial!
 
 
-.. _1.1.4:
+.. _waste_exp1.1.4:
 
 Outcomes affected by wasting
 ----------------------------
@@ -164,52 +164,12 @@ CGF burden does not start until *after* neonatal age groups (from 1mo onwards). 
 +-------+-------+-----------------------+--------------------------+
 
 
-.. _2.0: 
+.. _waste_exp2.0:
 
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-We will build a duration based Markov chain finite state state transition model for progression and recovery of acute malnutrition calibrated to GBD 2019 prevalence of wasting. We do this progressively frrom a wasting only model to one with causes and disease feedback. The arrows in the model diagram figures represent the transition probabilities into and out of each state which determines the movement of children in and out of each state. 
-
-We first build
-
-  1. 1x4 state model with wasting only
-  2. 2x4 state model with 2 disease states and 4 wasting states
-  3. 2x4 state model with 2 disease states and 4 wasting states with death and fertility (tbd)
-
-
-Assumptions and Limitations
-+++++++++++++++++++++++++++
-
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
-
-Markov chains
--------------
-
-.. todo::
-  add some detail about markov chains, define mathematic notations 
-
-Equilibirum
------------
-
-.. todo::
-  add some detail about equilirium
-
-Arborescence
-------------
-
-.. todo::
-  add some detail about graph theory and the process we did to discover the pattern in our markov chains
-
-As a rule for the finiate state machines, the numerator of the prevalence of a state is the sum of the product of all edges in every unique anti-arborescence (graph theory).
-
-.. note::
-  This section will become the methods section in the manuscript. 
-
-
-.. _2.1: 
+.. _waste_exp2.1:
 
 Restrictions
 ------------
@@ -238,165 +198,3 @@ Restrictions
 
 	Determine if there's something analogous to "YLL/YLD only" for this section
 
-.. _2.2: 
-
-Risk Exposure Model Diagram
----------------------------
-
-.. _2.2.1: 
-
-Finite state machine 1x4 
-~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-.. image:: wasting_state_1x4.svg
-
-To solve the 10 transition pobabilities, we use a Markov Chain transition matrix **T**. 
-
-T = 
-
-.. csv-table:: 
-   :file: wasting_state_1x4.csv
-   :widths: 5, 5, 5, 5, 5
-
-
-:math:`π_{T}` = 
-
-+----+----+----+----+
-| p4 | p3 | p2 | p1 |
-+----+----+----+----+
-
-:math:`π_{T}` is the eigenvector at equilibriuum
-
-  a) :math:`π_{T}\times\text{T} = π_{T}` (the T means transposed, this is a 1 row vector)
-  b) :math:`\sum_{\text{i=p}}` = :math:`π_{T}`
-  c) :math:`π_{i}` ≥ 0 , these are GBD 2019 age/sex/location/year-specific prevalence for wasting categories 1-4
-
-
-Solving a)
-
-  1)  p4xs4 + p3xr4 = p4 
-  2)  p4xi3 + p3xs3 + p2xr3 = p3
-  3)  p3xi2 + p2xs2 + p1xr2 = p2
-  4)  p2xi1 + p1xs1 = p1
-
-Rows of the P matrix sums to 1
-
-  5)  s4 + i3 =1
-  6)  r4 + s3 + i2 = 1
-  7)  r3 + s2 + i1 =1
-  8)  r2 + s1 = 1
-
-We have duration of treated and untreated sam and mam as well as coverage from the literature :   
-
-  9)  r2 = 1/Dsam   
-  10) r3 + i1  = 1/Dmam
-  11) Eq 11 is defined in terms of i3 or duration of MILD (cat3); we write the solution in terms of cat3 duration or i3   
-
-where
-
- - Duration of cat 1: Dsam = C x Dsam_tx + (1-C)Dsam_ux ~ 40 days stand in value (will refine)
- - Duration of cat 2: Dmam = C x Dmam_tx + (1-C)Dmam_ux ~ 70 days stand in value (will refine)
- - tx is treated
- - ux is untreated
- - C is treatment coverage proportion
-
-We solve for the unknowns using the matrix solution
-
-.. code-block:: python
-
-  import pandas as pd, numpy as np, matplotlib.pyplot as pyplot
-
-  p4 =  sex/age-specific GBD prevalence of wasting cat 4 
-  p3 =  sex/ge-specific GBD prevalence of wasting cat 3 
-  p2 =  sex/age-specific GBD prevalence of wasting cat 2 
-  p1 =  sex/age-specific GBD prevalence of wasting cat 1 
-
-  # row order from equation 1 - 10;
-  # column order is s1, s2, s3, s4, r2, r3, r4, i1, i2, i3
-
-
-  a = np.array([[0,0,0,p4,0,0,p3,0,0,0],
-                [0,0,p3,0,0,p2,0,p4,0,0],
-                [0,p2,0,0,p1,0,0,0,p3,0],
-                [p1,0,0,0,0,0,0,p2,0,0],
-                [0,0,0,1,0,0,0,0,0,1],
-                [0,0,1,0,0,0,1,0,1,0],
-                [0,1,0,0,0,1,0,1,0,0],
-                [1,0,0,0,1,0,0,0,0,0],
-                [0,0,0,0,1,0,0,0,0,0],
-                [0,0,0,0,0,1,0,1,0,0]])
-
-  #write b in terms of i3 and the ps
-  b =np.array([[p4],
-               [p3],
-               [p2],
-               [p1],
-               [1],
-               [1],
-               [1],
-               [1],
-               [0.0250],
-               [0.0143]])
-
-  x = np.linalg.solve(a,b)
-
-  # checking that ax=b
-
-  np.allclose(np.dot(a,x),b)
-
-
-
-
-.. todo::
-    - Beatrix will update the above to write the solution x in terms of the p and i3 or duration of MILD (cat3)
-    - We also need the closed form graph theory solution
-
-.. _2.2.2: 
-
-Finite state machine 2x4 
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. image:: wasting_state_2x4.svg
-
-
-
-
-
-Data Description Tables
-+++++++++++++++++++++++
-
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
-	:widths: 10, 5, 15
-	:header-rows: 1
-
-	* - Constant
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  - 
-
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
-
-Validation Criteria
-+++++++++++++++++++
-
-..	todo::
-	Fill in directives for this section
-
-References
-----------

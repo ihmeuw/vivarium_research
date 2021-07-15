@@ -1497,7 +1497,7 @@ Where,
 
 See the proofs for this approach below.
 
-.. image:: baseline_calibration_proofs.png
+.. image:: baseline_calibration_proofs.PNG
 
 .. todo::
 

@@ -8,5 +8,4 @@ Risk Effects Models
    :maxdepth: 1
    :glob:
 
-   *
    */index

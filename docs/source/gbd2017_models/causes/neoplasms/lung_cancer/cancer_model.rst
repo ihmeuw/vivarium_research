@@ -606,7 +606,7 @@ References
 
 .. [Blom-et-al-2020]
 
-  Blom EF, Ten Haaf K, de Koning HJ. Trends in lung cancer risk and screening eligibility affect overdiagnosis estimates. Lung Cancer. 2020 Jan;139:200-206. doi: 10.1016/j.lungcan.2019.11.024. Epub 2019 Nov 28. PMID: 31816564. `Available here <https://pubmed.ncbi.nlm.nih.gov/31816564/>`_.
+  Blom EF, Ten Haaf K, de Koning HJ. Trends in lung cancer risk and screening eligibility affect overdiagnosis estimates. Lung Cancer. 2020 Jan;139:200-206. doi: 10.1016/j.lungcan.2019.11.024. Epub 2019 Nov 28. PMID: 31816564. `<https://pubmed.ncbi.nlm.nih.gov/31816564/>`_.
 
 .. [Broderson-et-al-2020]
 
@@ -614,19 +614,19 @@ References
 
 .. [Carter-et-al-2015]
 
-  Carter, J. L., Coletti, R. J., & Harris, R. P. (2015). Quantifying and monitoring overdiagnosis in cancer screening: A systematic review of methods. BMJ (Clinical Research Ed.), 350, g7773. `Available here <https://doi.org/10.1136/bmj.g7773>`_.
+  Carter, J. L., Coletti, R. J., & Harris, R. P. (2015). Quantifying and monitoring overdiagnosis in cancer screening: A systematic review of methods. BMJ (Clinical Research Ed.), 350, g7773. `<https://doi.org/10.1136/bmj.g7773>`_.
 
 .. [Chien-and-Chen-2008]
 
-  Chien, Chun‐Ru, and Tony Hsiu‐Hsi Chen. "Mean sojourn time and effectiveness of mortality reduction for lung cancer screening with computed tomography." International journal of cancer 122.11 (2008): 2594-2599. `Available here <https://pubmed.ncbi.nlm.nih.gov/18302157/>`_
+  Chien, Chun‐Ru, and Tony Hsiu‐Hsi Chen. "Mean sojourn time and effectiveness of mortality reduction for lung cancer screening with computed tomography." International journal of cancer 122.11 (2008): 2594-2599. `<https://pubmed.ncbi.nlm.nih.gov/18302157/>`_
 
 .. [Criss-et-al-2018]
 
-  Criss SD, Sheehan DF, Palazzo L, Kong CY. Population impact of lung cancer screening in the United States: Projections from a microsimulation model. PLoS Med. 2018 Feb 7;15(2):e1002506. doi: 10.1371/journal.pmed.1002506. PMID: 29415013; PMCID: PMC5802442. `Available here <https://pubmed.ncbi.nlm.nih.gov/29415013/>`_.
+  Criss SD, Sheehan DF, Palazzo L, Kong CY. Population impact of lung cancer screening in the United States: Projections from a microsimulation model. PLoS Med. 2018 Feb 7;15(2):e1002506. doi: 10.1371/journal.pmed.1002506. PMID: 29415013; PMCID: PMC5802442. `<https://pubmed.ncbi.nlm.nih.gov/29415013/>`_.
 
 .. [de-Koning-et-al-2014]
 
-  de Koning et al. Benefits and harms of computed tomography lung cancer screening strategies: a comparative modeling study for the U.S. Preventive Services Task Force. Ann Intern Med. 2014 Mar 4;160(5):311-20. doi: 10.7326/M13-2316. `Available here <https://pubmed.ncbi.nlm.nih.gov/24379002/>`_.
+  de Koning et al. Benefits and harms of computed tomography lung cancer screening strategies: a comparative modeling study for the U.S. Preventive Services Task Force. Ann Intern Med. 2014 Mar 4;160(5):311-20. doi: 10.7326/M13-2316. `<https://pubmed.ncbi.nlm.nih.gov/24379002/>`_.
 
 .. [de-Koning-et-al-2020]
   
@@ -634,43 +634,43 @@ References
 
 .. [Deng-et-al-2020]
 
-  Deng, Yujiao, et al. "Epidemiological trends of tracheal, bronchus, and lung cancer at the global, regional, and national levels: a population-based study." Journal of hematology & oncology 13.1 (2020): 1-16. `Available here <https://pubmed.ncbi.nlm.nih.gov/32690044/>`_
+  Deng, Yujiao, et al. "Epidemiological trends of tracheal, bronchus, and lung cancer at the global, regional, and national levels: a population-based study." Journal of hematology & oncology 13.1 (2020): 1-16. `<https://pubmed.ncbi.nlm.nih.gov/32690044/>`_
 
 .. [Gonzalez-Maldonado-et-al-2020]
 
-  González Maldonado, Sandra, et al. "Overdiagnosis in lung cancer screening: Estimates from the German Lung Cancer Screening Intervention Trial." International Journal of Cancer (2020). `Available here <https://pubmed.ncbi.nlm.nih.gov/32930386/>`_
+  González Maldonado, Sandra, et al. "Overdiagnosis in lung cancer screening: Estimates from the German Lung Cancer Screening Intervention Trial." International Journal of Cancer (2020). `<https://pubmed.ncbi.nlm.nih.gov/32930386/>`_
 
 .. [Han-et-al-2017]
 
-  Han SS, Ten Haaf K, Hazelton WD, Munshi VN, Jeon J, Erdogan SA, Johanson C, McMahon PM, Meza R, Kong CY, Feuer EJ, de Koning HJ, Plevritis SK. The impact of overdiagnosis on the selection of efficient lung cancer screening strategies. Int J Cancer. 2017 Jun 1;140(11):2436-2443. doi: 10.1002/ijc.30602. PMID: 28073150; PMCID: PMC5516788. `Available here <https://pubmed.ncbi.nlm.nih.gov/28073150/>`_.
+  Han SS, Ten Haaf K, Hazelton WD, Munshi VN, Jeon J, Erdogan SA, Johanson C, McMahon PM, Meza R, Kong CY, Feuer EJ, de Koning HJ, Plevritis SK. The impact of overdiagnosis on the selection of efficient lung cancer screening strategies. Int J Cancer. 2017 Jun 1;140(11):2436-2443. doi: 10.1002/ijc.30602. PMID: 28073150; PMCID: PMC5516788. `<https://pubmed.ncbi.nlm.nih.gov/28073150/>`_.
 
 .. [Javidan-Nejad-2010]
 
-  Javidan-Nejad, Cylen. "MDCT of trachea and main bronchi." Radiologic Clinics 48.1 (2010): 157-176. `Available here <https://pubmed.ncbi.nlm.nih.gov/19995634/>`_
+  Javidan-Nejad, Cylen. "MDCT of trachea and main bronchi." Radiologic Clinics 48.1 (2010): 157-176. `<https://pubmed.ncbi.nlm.nih.gov/19995634/>`_
 
 .. [McMahon-et-al-2014]
 
-  McMahon PM, Meza R, Plevritis SK, Black WC, Tammemagi CM, Erdogan A, ten Haaf K, Hazelton W, Holford TR, Jeon J, Clarke L, Kong CY, Choi SE, Munshi VN, Han SS, van Rosmalen J, Pinsky PF, Moolgavkar S, de Koning HJ, Feuer EJ. Comparing benefits from many possible computed tomography lung cancer screening programs: extrapolating from the National Lung Screening Trial using comparative modeling. PLoS One. 2014 Jun 30;9(6):e99978. doi: 10.1371/journal.pone.0099978. PMID: 24979231; PMCID: PMC4076275. `Available here <https://pubmed.ncbi.nlm.nih.gov/24979231/>`_.
+  McMahon PM, Meza R, Plevritis SK, Black WC, Tammemagi CM, Erdogan A, ten Haaf K, Hazelton W, Holford TR, Jeon J, Clarke L, Kong CY, Choi SE, Munshi VN, Han SS, van Rosmalen J, Pinsky PF, Moolgavkar S, de Koning HJ, Feuer EJ. Comparing benefits from many possible computed tomography lung cancer screening programs: extrapolating from the National Lung Screening Trial using comparative modeling. PLoS One. 2014 Jun 30;9(6):e99978. doi: 10.1371/journal.pone.0099978. PMID: 24979231; PMCID: PMC4076275. `<https://pubmed.ncbi.nlm.nih.gov/24979231/>`_.
 
 .. [Nawa-et-al-2019]
 
-  Nawa, T., Fukui, K., Nakayama, T., Sagawa, M., Nakagawa, T., Ichimura, H., & Mizoue, T. (2019). A population-based cohort study to evaluate the effectiveness of lung cancer screening using low-dose CT in Hitachi city, Japan. Japanese Journal of Clinical Oncology, 49(2), 130–136. `Available here <https://doi.org/10.1093/jjco/hyy185>`_.
+  Nawa, T., Fukui, K., Nakayama, T., Sagawa, M., Nakagawa, T., Ichimura, H., & Mizoue, T. (2019). A population-based cohort study to evaluate the effectiveness of lung cancer screening using low-dose CT in Hitachi city, Japan. Japanese Journal of Clinical Oncology, 49(2), 130–136. `<https://doi.org/10.1093/jjco/hyy185>`_.
 
 .. [Patz-et-al-2014]
 
-  Patz, Edward F., et al. "Overdiagnosis in low-dose computed tomography screening for lung cancer." JAMA internal medicine 174.2 (2014): 269-274. `Available here <https://pubmed.ncbi.nlm.nih.gov/24322569/>`_
+  Patz, Edward F., et al. "Overdiagnosis in low-dose computed tomography screening for lung cancer." JAMA internal medicine 174.2 (2014): 269-274. `<https://pubmed.ncbi.nlm.nih.gov/24322569/>`_
 
 .. [Sherani-et-al-2015]
 
-  Sherani, Khalid, et al. "Malignant tracheal tumors: a review of current diagnostic and management strategies." Current Opinion in Pulmonary Medicine 21.4 (2015): 322-326. `Available here <https://journals.lww.com/co-pulmonarymedicine/Abstract/2015/07000/Malignant_tracheal_tumors__a_review_of_current.4.aspx>`_
+  Sherani, Khalid, et al. "Malignant tracheal tumors: a review of current diagnostic and management strategies." Current Opinion in Pulmonary Medicine 21.4 (2015): 322-326. `<https://journals.lww.com/co-pulmonarymedicine/Abstract/2015/07000/Malignant_tracheal_tumors__a_review_of_current.4.aspx>`_
 
 .. [Sone-et-al-2007]
 
-  Sone, S., Nakayama, T., Honda, T., Tsushima, K., Li, F., Haniuda, M., Takahashi, Y., Suzuki, T., Yamanda, T., Kondo, R., Hanaoka, T., Takayama, F., Kubo, K., & Fushimi, H. (2007). Long-term follow-up study of a population-based 1996–1998 mass screening programme for lung cancer using mobile low-dose spiral computed tomography. Lung Cancer, 58(3), 329–341. `Available here <https://doi.org/10.1016/j.lungcan.2007.06.022>`_.
+  Sone, S., Nakayama, T., Honda, T., Tsushima, K., Li, F., Haniuda, M., Takahashi, Y., Suzuki, T., Yamanda, T., Kondo, R., Hanaoka, T., Takayama, F., Kubo, K., & Fushimi, H. (2007). Long-term follow-up study of a population-based 1996–1998 mass screening programme for lung cancer using mobile low-dose spiral computed tomography. Lung Cancer, 58(3), 329–341. `<https://doi.org/10.1016/j.lungcan.2007.06.022>`_.
 
 .. [ten-Haaf-et-al-2015a]
 
-  ten Haaf, Kevin, Joost van Rosmalen, and Harry J. de Koning. "Lung cancer detectability by test, histology, stage, and gender: estimates from the NLST and the PLCO trials." Cancer Epidemiology and Prevention Biomarkers 24.1 (2015): 154-161. `Available here <https://pubmed.ncbi.nlm.nih.gov/25312998/>`_
+  ten Haaf, Kevin, Joost van Rosmalen, and Harry J. de Koning. "Lung cancer detectability by test, histology, stage, and gender: estimates from the NLST and the PLCO trials." Cancer Epidemiology and Prevention Biomarkers 24.1 (2015): 154-161. `<https://pubmed.ncbi.nlm.nih.gov/25312998/>`_
 
 .. [ten-Haaf-et-al-2015b]
 
@@ -678,11 +678,11 @@ References
 
 .. [ten-Haaf-et-al-2020]
 
-  Ten Haaf K, Jeon J, Tammemägi MC, Han SS, Kong CY, Plevritis SK, Feuer EJ, de Koning HJ, Steyerberg EW, Meza R. Risk prediction models for selection of lung cancer screening candidates: A retrospective validation study. PLoS Med. 2017 Apr 4;14(4):e1002277. doi: 10.1371/journal.pmed.1002277. Erratum in: PLoS Med. 2020 Sep 25;17(9):e1003403. PMID: 28376113; PMCID: PMC5380315. `Available here <https://pubmed.ncbi.nlm.nih.gov/28376113/>`_.
+  Ten Haaf K, Jeon J, Tammemägi MC, Han SS, Kong CY, Plevritis SK, Feuer EJ, de Koning HJ, Steyerberg EW, Meza R. Risk prediction models for selection of lung cancer screening candidates: A retrospective validation study. PLoS Med. 2017 Apr 4;14(4):e1002277. doi: 10.1371/journal.pmed.1002277. Erratum in: PLoS Med. 2020 Sep 25;17(9):e1003403. PMID: 28376113; PMCID: PMC5380315. `<https://pubmed.ncbi.nlm.nih.gov/28376113/>`_.
 
 .. [Veronesi-et-al-2012]
 
-  Veronesi, Giulia, et al. "Estimating overdiagnosis in low-dose computed tomography screening for lung cancer: a cohort study." Annals of internal medicine 157.11 (2012): 776-784. `Available here <https://pubmed.ncbi.nlm.nih.gov/23208167/>`_
+  Veronesi, Giulia, et al. "Estimating overdiagnosis in low-dose computed tomography screening for lung cancer: a cohort study." Annals of internal medicine 157.11 (2012): 776-784. `<https://pubmed.ncbi.nlm.nih.gov/23208167/>`_
 
 .. [GBD-2017-YLD-Appendix-TBL-cancer]
 

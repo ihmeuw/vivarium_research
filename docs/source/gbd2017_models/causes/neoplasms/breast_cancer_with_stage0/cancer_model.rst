@@ -18,6 +18,8 @@ Disease Overview
 GBD 2017 Modeling Strategy
 --------------------------
 
+[GBD-2017-YLD-Capstone-Appendix-1-Breast-Cancer-0]_
+
 Breast cancer stage 1+ in GBD 2017 and stage 0 not in GBD
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -384,7 +386,7 @@ Non-fatal outcomes
 References
 ----------
 
-.. [GBD-2017-YLD-Capstone-Appendix-1-Breast-Cancer]
+.. [GBD-2017-YLD-Capstone-Appendix-1-Breast-Cancer-0]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries

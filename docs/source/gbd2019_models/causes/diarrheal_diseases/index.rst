@@ -8,7 +8,7 @@ Disease Description
 -------------------
 
 Diarrhea is commonly defined as three or more loose stools in a 24-hour 
-period. [GBD-2019-Capstone-Appendix]_
+period. [GBD-2019-Capstone-Appendix-Diarrhea]_
 
 Diarrhea has various etiologies, with infectious diarrhea accounting for the 
 vast majority of global diarrheal disease burden. The top pathogens responsible 
@@ -17,18 +17,18 @@ Salmonella. Bacterial infections, and specifically species of Shigella,
 account for the majority of bloody diarrhea.
 
 Infection most commonly occurs via feces-contamined water, and can also spread 
-via contamined food and person-to-person contact. ([WHO]_)
+via contamined food and person-to-person contact. ([WHO-Diarrhea]_)
 
 The global prevalence of diarrhea thus varies considerably accoring to resource 
 access. In particular, resource-limited countries have a "baseline frequency... 
-superimposed with epidemic cases of diarrhea" ([UpToDate_1]_). The top risk 
+superimposed with epidemic cases of diarrhea" ([UpToDate_1-Diarrhea]_). The top risk 
 factors for diarrheal diseases thus include crowding (such as living in refugee 
 camps) and poor sanitation, in addition to immune system-compromising conditions, 
 such as living with HIV.
 
 The most significant outcomes of a nonfatal diarrhea episode are dehydration and 
 the loss of nutrition. In particular, in low-income countries, the high 
-prevalence of diarrhea is a major cause of child malnutrition ([WHO]_), which 
+prevalence of diarrhea is a major cause of child malnutrition ([WHO-Diarrhea]_), which 
 in turn makes such children more susceptible to future diarrheal episodes and 
 other negative sequelae.
 
@@ -43,7 +43,9 @@ The WHO-recommended measures for diarrhea prevention include:
 
 Noninfectious diarrhea etiologies are far less common, but are more likely among 
 chronic cases of diarrhea. Causes of noninfectious diarrhea include ischemic 
-colitis, inflammatory bowl disease, among others ([UpToDate_2]_).
+colitis, inflammatory bowl disease, among others ([UpToDate_2-Diarrhea]_).
+
+Other info: [CDC-Diarrhea]_, [Wikipedia-Diarrhea]_.
 
 
 Modeling Diarrheal Diseases in GBD 2019
@@ -146,6 +148,157 @@ time, and thus we assume this is a limitation of the GBD model.
 Data Description
 ----------------
 
+.. list-table:: State Definitions
+	:widths: 5 10 10
+	:header-rows: 1
+	
+	* - State
+	  - State name
+	  - Definition
+	* - S
+	  - **S**\ usceptible
+	  - Simulant currently has diarrheal disease
+	* - I
+	  - **I**\ nfected
+	  - Simulant does not currently have diarrheal disease
+
+.. list-table:: State Data
+	:widths: 5 10 10 20
+	:header-rows: 1
+	
+	* - State
+	  - Measure
+	  - Value
+	  - Notes
+	* - I
+	  - prevalence
+	  - prevalence_c302
+	  -
+	* - I
+	  - birth prevalence
+	  - 0
+	  - 
+	* - I
+	  - excess mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_c302}}`
+	  -
+	* - I
+	  - disability weight
+	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
+	  -
+	* - S
+	  - prevalence
+	  - 1-prevalence_c302
+	  -
+	* - S
+	  - birth prevalence
+	  - 1
+	  - 
+	* - S
+	  - emr
+	  - 0
+	  -
+	* - S
+	  - disability weight
+	  - 0
+	  -
+	* - All
+	  - cause-specific mortality rate
+	  - :math:`\frac{\text{deaths_c302}}{\text{population}}`
+	  -
+
+.. list-table:: Transition Data
+	:widths: 10 10 10 10 10
+	:header-rows: 1
+	
+	* - Transition
+	  - Source State
+	  - Sink State
+	  - Value
+	  - Notes
+	* - i
+	  - S
+	  - I
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
+	  - We transform incidence to be a rate within the susceptible population.
+	* - r
+	  - I
+	  - S
+	  - remission_rate_m1181
+	  - Already a rate within with-condition population
+
+	  
+.. list-table:: Data Sources and Definitions
+	:widths: 1 3 10 10
+	:header-rows: 1
+	
+	* - Value
+	  - Source
+	  - Description
+	  - Notes
+	* - prevalence_c302
+	  - como
+	  - Prevalence of diarrheal diseases
+	  -
+	* - deaths_c302
+	  - codcorrect
+	  - Deaths from diarrheal diseases
+	  -
+	* - incidence_rate_c302
+	  - como
+	  - Incidence of diarrheal disease within the entire population
+	  - 
+	* - remission_rate_m1181
+	  - dismod
+	  - Remission of diarrheal disease within the infected population
+	  -
+	* - population
+	  - demography
+	  - Mid-year population for given age/sex/year/location
+	  -
+	* - sequelae_c302
+	  - gbd_mapping
+	  - List of 4 sequelae for diarrheal diseases
+	  - Note Guillain-Barre due to diarrheal diseases is included in sequelae.
+	* - prevalence_s{`sid`}
+ 	  - como
+	  - Prevalence of sequela with id `sid`
+	  -
+	* - disability_weight_s{`sid`}
+	  - YLD appendix
+	  - Disability weight of sequela with id `sid`
+	  - 
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
+
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLL age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+	* - YLD age group start
+	  - Early neonatal
+	  - age_group_id = 2; [0-7 days)
+	* - YLD age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
 
 
 Validation Criteria
@@ -159,27 +312,27 @@ Validation Criteria
 References
 ----------
 
-.. [GBD-2019-Capstone-Appendix]
-  Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 
+.. [GBD-2019-Capstone-Appendix-Diarrhea]
+  Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 
 
-.. [WHO] Diarrheal disease Fact Sheet. World Health Organization, 2 May 2019.
+.. [WHO-Diarrhea] Diarrheal disease Fact Sheet. World Health Organization, 2 May 2019.
    Retrieved 14 Nov 2019.
    https://www.who.int/news-room/fact-sheets/detail/diarrhoeal-disease
 
-..	[UpToDate_1] Approach to the adult with acute diarrhea in resource-limited countries
+..	[UpToDate_1-Diarrhea] Approach to the adult with acute diarrhea in resource-limited countries
 	Retrieved 26 Dec 2019.
 	https://www.uptodate.com/contents/approach-to-the-adult-with-acute-diarrhea-in-resource-limited-countries
 
-..	[UpToDate_2] Approach to the adult with acute diarrhea in resource-rich countries
+..	[UpToDate_2-Diarrhea] Approach to the adult with acute diarrhea in resource-rich countries
 	Retrieved 26 Dec 2019.
 	https://www.uptodate.com/contents/approach-to-the-adult-with-acute-diarrhea-in-resource-rich-settings
 
-.. [CDC] Diarrhea: Common Illness, Global Killer.
+.. [CDC-Diarrhea] Diarrhea: Common Illness, Global Killer.
    https://www.cdc.gov/healthywater/global/diarrhea-burden.html
 
-.. [Wikipedia] Diarrhea. From Wikipedia, the Free Encyclopedia.
+.. [Wikipedia-Diarrhea] Diarrhea. From Wikipedia, the Free Encyclopedia.
    Retrieved 14 Nov 2019.
    https://en.wikipedia.org/wiki/Diarrhea
