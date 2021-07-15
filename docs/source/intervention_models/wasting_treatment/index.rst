@@ -476,7 +476,7 @@ For **SAM** 6-59 months kids
     - transition probability
     - Daily recovery prbability of untx SAM
     - :math:`\frac{1-C_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery 60.5 days (derived)
+    - time-to-recovery ~62 days (derived, see below)
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
   * - :math:`t1_{sam}`
@@ -487,24 +487,27 @@ For **SAM** 6-59 months kids
     - Zw 2020
     - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
 
-.. todo::
+.. note::
 
-  Fully describe how r2_ux is derived. In brief: 
+  Fully describe how r2_ux is derived: 
 
-  1) From Isanaka 2021, the incidence correction factor K = 6.7 
-  2) K = 1 year/duration (in years) = 54.5 days
-  3) I assume 54.5 days is the time-to-recovery of the population who is SAM granted they did not die. 
-  4) Therefore 54.5 = [time-to-recovery of tx X Coverage] + [time-to-recovery of utx X 1-Coverage]
-  5) 54.5 = [48.3 X 0.488] + [time-to-recovery of utx X 0.512]
-  6) time-to-recovery of utx = 60.5 days
+  1) From Isanaka 2021, the incidence correction factor K = 6.7 for a population SAM coverage of 48.8% 
+  2) K = 1 year/duration of SAM (in years) = 6.7
+  3) Duration of SAM in years = 1/6.7 = 0.149253 years = 54.5 days
+  4) 1/(r2_ux + t1_sam + d1) = 54.5 
+  5) 1/(r2_ux + [0.488/48.3] + [yearly rate of death/365]) = 54.5; using d1 = 0.015/365 for age_group 4 and sex 2
+  6) r2_ux = 0.0084
+  7) r2_ux = (1-Csam) X 1/Dsam_utx (1-Csam = 0.512)
+  8) Dsam_utx = 62 days (will need to recalculate by age and sex)
 
-  The duration calculated from the K incidence correction factor from Isanaka 2021 is the duration of 'episode'
-  Duration of episode = [duration-to-death X %died] + [duration-to-recovery of tx X %survived&treated] + [duration-to-recovery of utx X %survived&untreated] 
-  ... which might be a bit more complicated to calculate because we need to know the duration to death. Duration-to-death can be further divided into tx/utx.
+  note that 
 
-  Hence, for simplicify, I have assumed the duration of disease in Isanaka 2020 is the one to recovery for now for simplicity. 
+  r2_ux = untreated% x 1/Dsam_utx
+  t1_sam = treated% x 1/Dsam_tx
 
-
+  Also note that Dsam_tx < Dsam_utx (time to recovery of tx SAM is shorter than time to recovery of untreated SAM)
+  
+  Hence when we ramp up coverage (treated% increases), t1_sam also increases. Duration of SAM will decrease. Without changing incidence, our prevalence of SAM should also decrease (P = incidence x Duration). Our intervention could also work by decreasing the time to recovery, in which case t1_sam increases and prevalence will decrease (without changing incidence).
 
 
 
@@ -591,7 +594,7 @@ References
 
 .. [WHO_2013_SAM_guidelines] 
   
-  View `WHO 2013 SAM guideline`_
+  View `WHO 2013 SAM guidelines`_
 
     Updates on the management of severe acute malnutrition in infants and children
 
