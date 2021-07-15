@@ -923,10 +923,10 @@ Note we pull the above sequelae by using:
      -
    * - Prevalence age group start
      - Early Neonatal
-     - age_group_id = 2. Note this is the earliest age group for which the wasting risk exposure estimates nonzero prevalence.
+     - age_group_id = 2. This is the earliest age group for which the wasting risk exposure estimates nonzero prevalence.
    * - Burden age group start.
      - 28 days - 5 months
-     - age_group_id = 388. Note this is the earliest age group for which there exist wasting RRs.
+     - age_group_id = 388. This is the earliest age group for which there exist wasting RRs.
    * - Age group end
      - 2 to 4
      - age_group_id = 34
