@@ -450,7 +450,7 @@ For **SAM** 6-59 months kids
     - transition probability
     - Daily recovery prbability of untx SAM
     - :math:`\frac{1-C_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery 60.5 days (derived)
+    - time-to-recovery 62 days (derived)
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
   * - :math:`t1_{sam}`
@@ -614,5 +614,5 @@ References
 
     Assessment of Coverage of Community-based Management of Acute Malnutrition
 
-.._`CMAM Forum coverage`: https://www.ennonline.net/assessmentofcmamcoveragev2
+.. _`CMAM Forum coverage`: https://www.ennonline.net/assessmentofcmamcoveragev2
 
