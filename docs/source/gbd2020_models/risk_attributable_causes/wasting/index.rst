@@ -460,33 +460,6 @@ Assumptions and Limitations
 
  - Unclear if our input data that informs "time to recovery from SAM" ought to be "time to recovery or death from SAM"
 
-Restrictions
-------------
-
-.. list-table:: GBD 2020 Risk Exposure Restrictions
-   :widths: 15 15 20
-   :header-rows: 1
-
-   * - Restriction Type
-     - Value
-     - Notes
-   * - Male only
-     - False
-     -
-   * - Female only
-     - False
-     -
-   * - Age group start
-     -
-     -
-   * - Age group end
-     -
-     -
-
-..	todo::
-
-	Determine if there's something analogous to "YLL/YLD only" for this section
-
 Input data
 ----------
 
@@ -923,6 +896,26 @@ Data Description Tables
      -
      -
    * - YLD age group end
+     -
+     -
+
+.. list-table:: Wasting Restrictions
+   :widths: 10 10 20
+   :header-rows: 1
+
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - Age group start
+     -
+     -
+   * - Age group end
      -
      -
 
