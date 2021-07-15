@@ -887,17 +887,17 @@ Data Description Tables
      - False
      - 
    * - YLL age group start
-     -
-     -
+     - 388
+     - 1-5 months
    * - YLL age group end
-     -
-     -
+     - 235
+     - 95 plus
    * - YLD age group start
-     -
-     -
+     - 2
+     - Early Neonatal
    * - YLD age group end
-     -
-     -
+     - 235
+     - 95 Plus
 
 .. list-table:: Wasting Restrictions
    :widths: 10 10 20
@@ -913,11 +913,11 @@ Data Description Tables
      - False
      -
    * - Age group start
-     -
-     -
+     - 2
+     - Early Neonatal
    * - Age group end
-     -
-     -
+     - 34
+     - 2 to 4
 
 Note we pull the above sequelae by using:
 
