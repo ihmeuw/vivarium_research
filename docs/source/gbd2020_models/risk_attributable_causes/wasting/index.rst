@@ -867,6 +867,15 @@ Data Description Tables
      - {s199, s2036}
      - Severe wasting with eodema, severe wasting without oedema
 
+Note we pull the above sequelae by using:
+
+.. code-block:: python
+
+  from db_queries import get_sequela_metadata
+  
+  hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
+  hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
+
 .. list-table:: PEM Restrictions
    :widths: 10 10 20
    :header-rows: 1
@@ -887,17 +896,17 @@ Data Description Tables
      - False
      - 
    * - YLL age group start
-     - 388
      - 1-5 months
+     - age_group_id = 388
    * - YLL age group end
-     - 235
      - 95 plus
+     - age_group_id = 235
    * - YLD age group start
-     - 2
      - Early Neonatal
+     - age_group_id = 2
    * - YLD age group end
-     - 235
      - 95 Plus
+     - age_group_id = 235
 
 .. list-table:: Wasting Restrictions
    :widths: 10 10 20
@@ -913,20 +922,11 @@ Data Description Tables
      - False
      -
    * - Age group start
-     - 2
      - Early Neonatal
+     - age_group_id = 2
    * - Age group end
-     - 34
      - 2 to 4
-
-Note we pull the above sequelae by using:
-
-.. code-block:: python
-
-  from db_queries import get_sequela_metadata
-  
-  hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
-  hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
+     - age_group_id = 34
 
 As we are building this model before the completion of GBD 2020, we 
 will need to calculate the PAFs ourselves, using the following equation:
