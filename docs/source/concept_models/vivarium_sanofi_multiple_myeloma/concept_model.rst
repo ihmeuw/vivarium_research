@@ -259,11 +259,10 @@ The simulation concept model consists of five main components:
   - Location: United States
   - Cohort type: Prospective **closed** cohort of individuals aged 15 years and 
     older (open cohort if we only examine on age 50+ population)
-  - Size of largest starting population: 100,000 simulants
+  - Size of largest starting population: 200,000 simulants
   - Time span: Jan 1, 2011 to Dec 31, 2025 (Jan 1, 2011 to Jan 1, 2021 is a 
     10-year long burn-in period)
-  - Time step: 28 days to capture the duration of treatment, and time to 
-    response. (Time step may be revised after further model development.)
+  - Time step: 28 days
 
 
 .. _mm5.2.2:
@@ -454,7 +453,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Age
     - Impairment defined as eGFR less than 60. No suspected confounding by race
 
-Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution. For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
+Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution (`sampling instructions`_). For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
 
 For implementation in the model, each dichotomous risk factor exposure level will need a PFS and OS hazard ratio relative to the time-varying baseline hazard rate, obtained from the multiple myeloma cause model (rather than the opposite risk factor exposure level as shown above). The following steps describe how to derive these hazard ratios and how to appropriately apply them to a simulant's baseline hazard.
 
@@ -495,6 +494,16 @@ and
 .. math::
 
   h_\text{simulant} = h_\text{baseline} * HR_\text{sex(i)} * HR_\text{age(i)}  * HR_\text{race(i)} * HR_\text{cytogenetic risk(i), conditional on race(i)} * HR_\text{renal impairment(i)}
+
+.. note::
+
+  The relapse hazard rate is equal to the progression free survival hazard rate *minus* the overall survival hazard rate. Therefore, the hazard ratios specific to a simulant should be applied to the relapse (incidence to next MM cause model state) and mortality hazards should be as follows:
+
+  .. math::
+
+    h_\text{mortality(i)} = h_\text{OS} * HR_\text{OS(i)}
+
+    h_\text{relapse(i)} = h_\text{PFS} * HR_\text{PFS(i)} - h_\text{mortality(i)}
 
 .. 5.3.2.3:
 
@@ -637,9 +646,9 @@ For the burn-in period (both scenarios):
      - 10
    * - 1
      - Daratumuab-containing
-     - 1.6%
      - 2.9%
-     - 2.9%
+     - 34%
+     - 34%
    * - 2
      - Isatuxamib-containing
      - 0.5%
@@ -647,9 +656,9 @@ For the burn-in period (both scenarios):
      - 10%
    * - 2
      - Daratumuab-containing
-     - 16.9%
-     - 30.6%
-     - 30.6%
+     - 19.8%
+     - 34%
+     - 34%
    * - 3
      - Isatuxamib-containing
      - 1.0%
@@ -657,9 +666,9 @@ For the burn-in period (both scenarios):
      - 9%
    * - 3
      - Daratumuab-containing
-     - 25.6%
-     - 46.3%
-     - 46.3%
+     - 32.3%
+     - 34%
+     - 34%
    * - 4
      - Isatuxamib-containing
      - 3.3%
@@ -667,9 +676,9 @@ For the burn-in period (both scenarios):
      - 7%
    * - 4
      - Daratumuab-containing
-     - 29.7%
-     - 53.7%
-     - 53.7%
+     - 36.5%
+     - 34%
+     - 34%
    * - 5+
      - Isatuxamib-containing
      - 3.3%
@@ -677,17 +686,17 @@ For the burn-in period (both scenarios):
      - 7%
    * - 5+
      - Daratumuab-containing
-     - 17.1%
-     - 30.9%
-     - 30.9%
+     - 30.11%
+     - 34%
+     - 34%
 
 *Burn-in period initialization*:
 
-	Initialization for the treatment burn-in period should occur prior to the introduction of anti-CD38 monoclonal antibody treatments on Jan. 1, 2016. Each simulant should be initialized to the residual treatment category. Each simulant should be initialized to :code:`prior_anticd38_treatment = False`. Initialization on Jan. 1, 2016 should include patients in all of the relapsed and refractory states, not only simulants in the newly diagnosed MM state.
+	Initialization for the treatment burn-in period should occur prior to the introduction of anti-CD38 monoclonal antibody treatments on Jan. 1, 2016. Each simulant should be initialized to the residual treatment category. Each simulant should be initialized to :code:`eligible_for_retreatment = False`. Initialization on Jan. 1, 2016 should include patients in all of the relapsed and refractory states, not only simulants in the newly diagnosed MM state.
 
 *Post-burn in period initialization*:
 
-  Post-burn in period initialization should occur at the official start of the simulation time frame on Jan. 1, 2021. Simulants should be initialized according to the treatment line-specific treatment category prevalence and :code:`prior_anticd38_treatment` status prevalence on Jan. 1, 2021 from the burn-in period run as described above.
+  Post-burn in period initialization should occur at the official start of the simulation time frame on Jan. 1, 2021. Simulants should be initialized according to the treatment line-specific treatment category prevalence and :code:`eligible_for_retreatment` status prevalence on Jan. 1, 2021 from the burn-in period run as described above.
 
   The burn in period avoids the assumption that incident treatment coverage is equal to prevalent treatment coverage and also avoids the necessity of making a simple assumption about anti-CD38 exposure history among simulants at the start of our simulation time frame.
 
@@ -695,101 +704,218 @@ For the burn-in period (both scenarios):
 
   Simulants should have their treatment category exposure updated at each time-step for which they change multiple myeloma cause model states. Otherwise, their treatment exposures should not change. Simulants should be assigned treatment exposures in the following manner:
 
+  For simulants with no prior exposure to isa or dara:
+
+    If :code:`eligible_for_retreatment == False`, assign treatment categories according to the steps below.
+
+    First, calculate proportion with ever exposure to isa and/or dara:
+
+    .. math::
+
+      ever_0 = 0
+
+      ever_1 = c_1 
+
+      ever_2 = ever_1 + (c_2 - 0.15 * ever_1)
+
+      ever_3 = ever_2 + (c_3 - 0.15 * ever_2)
+
+      ever_4 = ever_3 + (c_4 - 0.15 * ever_3)
+
+      ever_5 = ever_4 + (c_5 - 0.15 * ever_4)
+
+    Where, :math:`c_\text{x}` is equal to the **combined** coverage or isa and dara at the Xth line of treatment.
+
+    Then, the probability of treatment category exposure for each treatment category at treatment line :math:`x` is as follows:
+
+    :math:`p_\text{x,isa} = \frac{(c_\text{x,isa} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,isa}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+
+    :math:`p_\text{x,dara} = \frac{(c_\text{x,dara} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,dara}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+
+    :math:`p_\text{x,resid} = 1 - p_\text{x,isa} - p_\text{x,dara}`
+
+    Where :math:`c_x` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep.
+
+    This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time (lagged by average time of progression). Notably, these assumptions will cause biases in opposite directions.
+
+    .. note::
+
+      It is possible that :math:`p_\text{isa} + p_\text{dara} > 1`. In that case, use the following probabilities:
+
+      :math:`p_\text{isa} = \frac{c_\text{isa}}{c_\text{dara} + c_\text{isa}}`
+
+      :math:`p_\text{dara} = \frac{c_\text{dara}}{c_\text{dara} + c_\text{isa}}`
+
+      :math:`p_\text{resid} = 0`
+
+    If a simulant is assigned an isa- or dara-containing treatment regimen, set :code:`eligible_for_retreatment = True`. If a simulant is assigned to the residual treatment category, do not change their value for :code:`eligible_for_retreatment` (keep as False).
+
   For simulants with prior exposure to isa or dara:
 
-		If :code:`prior_anticd38_treatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%. 
+		If :code:`eligible_for_retreatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%. 
 
 		If it is determined that they will be retreated, determine if they will receive an isa-containing treatment or dara-containing treatment, with the probability of isa-containing treatment equal to :math:`\frac{c_\text{isa}}{c_\text{isa} + c_\text{dara}}`, where :math:`c` represents the coverage proportion for the respective treatment categories at the current timestep for the line of treatment that the simulant occupies. 
 
-		If it is determined that they will not be retreated (probability 85%), assign them to the residual treatment category. Keep :code:`prior_anticd38_treatment = True`.
-
-  For simulants with no prior exposure to isa or dara:
-
-    If :code:`prior_anticd38_treatment == False`, assign treatment categories with the probabilities equal to:
-
-    :math:`p_\text{isa} = \frac{c_\text{isa} - p*_\text{prior treatment} \times 0.15 \times \frac{c_\text{isa}}{(c_\text{dara} + c_\text{isa})}}{p*_\text{no prior treatment}}`
-
-    :math:`p_\text{dara} = \frac{c_\text{dara} - p*_\text{prior treatment} \times 0.15 \times \frac{c_\text{dara}}{(c_\text{dara} + c_\text{isa})}}{p*_\text{no prior treatment}}`
-
-    :math:`p_\text{resid} = 1 - p_\text{isa} - p_\text{dara}`
-
-		Where :math:`c` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep. :math:`p*_\text{prior treatment}` represents the proportion of simulants in the multiple myeloma cause model state prior to the simulant's current state who have prior exposure to dara and/or isa at the current time-step and :math:`p*_\text{no prior treatment}` represents the same value for simulants without prior exposure. If the simulant's current line of treatment is the first line of treatment, set :math:`p*_\text{prior treatment} = 0` and :math:`p*_\text{no prior treatment} = 1`.
-
-		This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time. Notably, these assumptions will cause biases in opposite directions.
-
-		.. note::
-
-			It is possible that :math:`p_\text{isa} + p_\text{dara} > 1`. In that case, use the following probabilities:
-
-			:math:`p_\text{isa} = \frac{c_\text{isa}}{c_\text{dara} + c_\text{isa}}`
-
-			:math:`p_\text{dara} = \frac{c_\text{dara}}{c_\text{dara} + c_\text{isa}}`
-
-			:math:`p_\text{resid} = 0`
-
-		If a simulant is assigned an isa- or dara-containing treatment regimen, set :code:`prior_anticd38_treatment = True`. If a simulant is assigned to the residual treatment category, do not change their value for :code:`prior_anticd38_treatment`.
+		If it is determined that they will not be retreated (probability 85%), assign them to the residual treatment category. Keep :code:`eligible_for_retreatment = True`.
 
 **How to assign treatment effects:**
 
-Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. There are separate hazard ratios for the first line of treatment and later lines of treatment for each treatment category. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`prior_anticd38_treatment == True`). The hazard ratios are shown in the tables below.
+Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (if a simulant is in the isa or dara treatment category and :code:`eligible_for_retreatment_i == True`, they should be assigned the retreated hazard ratios). The hazard ratios are shown in the tables below.
 
-.. list-table:: First line of treatment hazard ratios
-   :header-rows: 1
+We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. The population-based real world evidence treatment effect sizes should be used for the primary runs of the simulation (both for the baseline and alternative scenarios); the clinical trial effect sizes should be used for separate supplementary runs of the simulation (for the bsaeline and alternative scenarios) if/when time allows.
 
-   * - Treatment category
-     - Progression free survival HR (95% UI)
-     - Overall survival HR (95% UI)
-   * - All categories combined
-     - 1 (reference)
-     - 1 (reference)
-   * - Isatuxamib-containing treatment category
-     - 0.429 (0.368, 0.495)
-     - 0.760 (0.645, 0.895)
-   * - Daratumumab-containing treatment category
-     - 0.429 (0.368, 0.495)
-     - 0.760 (0.645, 0.895)
-   * - Residual treatment category
-     - 1.00581 (1.0051, 1.0064)
-     - 1.0024 (1.0011, 1.0036)
+.. list-table:: Population-Based Progression Free Survival Hazard Ratios
+  :header-rows: 1
 
-.. list-table:: Second and later lines of treatment hazard ratios
-   :header-rows: 1
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.932 (0.647, 1.365)
+    - N/A
+    - 0.932 (0.647, 1.365)
+    - N/A
+    - 1.002 (0.989, 1.018)
+  * - Second
+    - 1.283 (0.878, 1.178)
+    - 1.632 (0.905, 2.733)
+    - 1.146 (1.000, 1.318)
+    - 1.333 (0.995, 1.702)
+    - 0.962 (0.920, 1.000)
+  * - Third
+    - 1.405 (0.924, 2.020)
+    - 1.883 (0.974, 3.100)
+    - 1.133 (0.977, 1.296)
+    - 1.345 (0.993, 1.747)
+    - 0.930 (0.852, 1.001)
+  * - Fourth
+    - 0.736 (0.394, 1.265)
+    - 0.878 (0.653, 1.583)
+    - 1.098 (0.877, 1.327)
+    - 1.275 (0.981, 1.843)
+    - 0.955 (0.822, 1.081)
 
-   * - Treatment category
-     - Progression free survival HR (95% UI)
-     - Overall survival HR (95% UI)
-   * - All categories combined
-     - 1 (reference)
-     - 1 (reference)
-   * - Isatuxamib-containing treatment category, :code:`retreated != True`
-     - 0.530 (0.356, 0.803)
-     - 1.116 (1.044, 1.185)
-   * - Isatuxamib-containing treatment category, :code:`retreated == True`
-     - 0.765 (0.678, 0.902)
-     - 1.232 (1.088, 1.37)
-   * - Daratumumab-containing treatment category, :code:`retreated != True`
-     - 0.217 (0.203, 0.231)
-     - 0.572 (0.551, 0.594)
-   * - Daratumumab-containing treatment category, :code:`retreated == True`
-     - 0.609 (0.601, 0.616)
-     - 0.786 (0.776, 0.797)
-   * - Residual treatment category
-     - 1.331 (1.324, 1.337)
-     - 1.181 (1.171, 1.190)
+.. list-table:: Population-Based Overall Survival Hazard Ratios
+  :header-rows: 1
 
-A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.971 (0.627, 1.488)
+    - N/A
+    - 0.971 (0.627, 1.488)
+    - N/A
+    - 1.001 (0.986, 1.011)
+  * - Second
+    - 1.517 (0.939, 2.349)
+    - 2.085 (0.946, 3.634)
+    - 1.225 (1.035, 1.443)
+    - 1.502 (1.051, 1.944)
+    - 0.941 (0.887, 0.987)
+  * - Third
+    - 1.453 (0.896, 2.407)
+    - 2.008 (0.975, 3.790)
+    - 1.265 (1.078, 1.457)
+    - 1.685 (1.231, 2.152)
+    - 0.865 (0.773, 0.951)
+  * - Fourth
+    - 1.627 (0.948, 2.628)
+    - 2.333 (1.031, 4.074)
+    - 1.217 (0.976, 1.467)
+    - 1.620 (1.008, 2.210)
+    - 0.834 (0.702, 0.969)
+  * - Fifth+
+    - 0.592 (0.103, 1.947)
+    - 0.914 (0.493, 2.643)
+    - 1.217 (0.976, 1.467)
+    - 1.427 (0.834, 2.410)
+    - 0.952 (0.744, 1.145)
+
+.. list-table:: Clinical Trial Progression Free Survival Hazard Ratios
+  :header-rows: 1
+
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.506 (0.402, 0.620)
+    - N/A
+    - 0.506 (0.402, 0.620)
+    - N/A
+    - 1.015 (1.011, 1.018)
+  * - Second, Third, Fourth
+    - 0.814 (0.593, 1.056)
+    - 0.927 (0.714, 1.077)
+    - 0.949 (0.581, 1.681)
+    - 0.987 (0.892, 1.207)
+    - 1.023 (0.627, 1.272)
+
+.. list-table:: Clinical Trial Overall Survival Hazard Ratios
+  :header-rows: 1
+
+  * - Line of Treatment
+    - Isatuximab, not retreated
+    - Isatuximab, retreated
+    - Daratumumab, not retreated
+    - Daratumumab, retreated
+    - Residual
+  * - First
+    - 0.760 (0.645, 0.895)
+    - N/A
+    - 0.760 (0.645, 0.895)
+    - N/A
+    - 1.015 (1.011, 1.018)
+  * - Second, Third, Fourth, Fifth+
+    - 1.031 (0.960, 1.105)
+    - 1.056 (0.928, 1.181)
+    - 1.031 (0.960, 1.105)
+    - 1.056 (0.928, 1.181)
+    - 0.984 (0.929, 1.020)
+
+.. _`sampling instructions`:
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported above should be assumed. Additionally, each time a value for a progression free survival hazard ratio is sampled for a given parameter (including each treatment, covariate, and risk factor effect), the same percentile within the distribution of uncertainty should be sampled for overall survival hazard ratio for that parameter. This dependent sampling strategy was chosen because PFS and OS hazard ratios are not independent of each other given that PFS is inclusive of OS.
+
+The code block below instructs how to construct a distribution for each hazard ratio so that it can be sampled from.
 
 .. code-block:: python
 
-	from numpy import log
-	from scipy.stats import norm, lognorm
+  from numpy import log
+  from scipy.stats import norm, lognorm
+  import random
 
-	q_975_stdnorm = norm().ppf(0.975)
-	mu = log(hr)
-	sigma = (log(hr_upper) - mu) / q_975_stdnorm
-	hr_distribution = lognorm(s=sigma, scale=hr)
+  def sample_paired_pfs_and_os_hazard_ratio_values(pfs_mid, 
+                                                   pfs_upper, 
+                                                   os_mid, 
+                                                   os_upper, 
+                                                   seed):
+    random.seed(seed)
+    pfs_value = lognorm(s=(log(pfs_upper) - log(pfs_mid)) / q_975_stdnorm, scale=pfs_mid).ppf(random.random())
+    random.seed(seed)
+    os_value = lognorm(s=(log(os_upper) - log(os_mid)) / q_975_stdnorm, scale=os_mid).ppf(random.random())
+    return pfs_value, os_value
 
 The PFS and OS hazard ratios specific to the simulant's current line of treatment, assigned treatment category, and retreatment status should be *multiplied* to the simulant's progression-free and overall survival hazard rates for the entire duration the simulant remains in those states. This should be updated each time the simulant progresses through the MM cause model states.
+
+.. note::
+
+  The relapse hazard rate is equal to the progression free survival hazard rate *minus* the overall survival hazard rate. Therefore, the hazard ratios specific to a simulant should be applied to the relapse (incidence to next MM cause model state) and mortality hazards should be as follows:
+
+  .. math::
+
+    h_\text{mortality(i)} = h_\text{OS} * HR_\text{OS(i)}
+
+    h_\text{relapse(i)} = h_\text{PFS} * HR_\text{PFS(i)} - h_\text{mortality(i)}
 
 *Observers*:
 
@@ -938,6 +1064,49 @@ Where,
 - One-year PFS (%): proportion of patients survival without progression during a one-year period
 - Median OS (weeks): median length of time-to-death in weeks
 - One-year OS (%): proportion of patients survival without death during a one-year period
+
+.. _mm5.6:
+
+5.6 Survival output table
+-------------------------
+
+.. list-table:: Survival observer metrics
+   :header-rows: 1
+
+   * - Variable
+     - Definition
+   * - input_draw
+     - Input draw number. len(input_draw) = 30
+   * - scenario
+     - Intervention scenario. Choose from ['baseline', 'alternative']
+   * - treatment_line
+     - Treatment line/disease state a simulant is in. If a simulant is in state 
+       `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose 
+       from [1, 2, 3, 4, 5+]
+   * - period
+     - The number of days since the entrance into the `treatment_line` that the 
+       count measure was evaluated on.
+   * - alive_at
+     - Count of at-risk simulants alive at 'period' days since they entered `treatment_line`.
+   * - died_by
+     - Count of simulants who died at `period` days since they entered `treatment_line`.
+   * - progress_by
+     - Count of simulants who progressed to next line of treatment/disease state 
+       at `period` days since they entered `treatment_line`.
+   * - sim_end_on
+     - Count of simulants without death or progression at the end of the simulation 
+       at `period` days since they entered `treatment_line`. 
+
+Time frame for survival observer (timestep = 28 days):
+ 1. start_date = 2021-01-01, end_date = 2025-12-31
+ 2. start_date = 2025-01-01, end_date = 2025-12-31
+
+.. note::
+ 
+   Currently, there is no stratification of treatmnet category by line of treatmnet. 
+   If time allows, we will add this stratification to survival observer metrics so 
+   that we can compare survival outcomes for simulants treated with Isa/Dara to 
+   residual category.
 
 .. _mm6.0:
 

@@ -640,6 +640,9 @@ in terms of the following variables:
    * - :math:`emr_c`
      - Excess mortality probability of cause c
      - Pulled from GBD
+   * - :math:`csmr_c`
+     - Cause-specific mortality rate of cause c
+     - Pulled from GBD
 
 We now detail how the above wasting probability transition equations were derived.
 

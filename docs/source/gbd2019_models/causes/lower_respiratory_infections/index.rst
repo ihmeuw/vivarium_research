@@ -64,7 +64,9 @@ estimated with MR-BRT. The modelers defined time to recovery as 10 (5-15) days,
 which corresponds with a remission rate of 36.5 recoveries / person-year. 
 LRI severity splits are obtained from a meta-analysis, and then the 
 DisMod outputs are split according to severity before disablility weights for 
-YLD calculation are applied. [GBD-2019-Capstone-Appendix-LRI]_
+YLD calculation are applied. [GBD-2019-Capstone-Appendix-LRI]_ Note that as DisMod 
+estimates an unrealistically high birth prevalence, after discussions with Theo 
+and Nick, the modelers decided to set birth prevalence to zero. 
 
 .. todo::
 
@@ -117,6 +119,10 @@ Cause Model Diagram
 
 Model Assumptions and Limitations
 ---------------------------------
+Because DisMod estimated an unrealistically high birth prevalence, the modelers 
+set birth prevalence to zero. Consequently, the birth prevalence, incidence, 
+and prevalence available from get_outputs are incongruous with one another.
+
 This model is designed to be used for estimating DALYs due to LRI that are 
 averted from a country-level intervention(e.g. food fortification or 
 supplementation given to a percentage of the population) that can reduce LRI 
@@ -182,9 +188,13 @@ Data Description
      - 0
      -
    * - I
-     - prevalence
      - prevalence_calculated
-     -
+     - incidence_rate_c322 * duration_mean
+     - Justification included below
+   * - I
+     - duration_mean
+     - 3.5/365 if age_group=='Early Neonatal' else 10/365
+     - Justification included below
    * - I
      - excess mortality rate
      - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_calculated}}`
@@ -197,6 +207,16 @@ Data Description
      - cause specific mortality rate
      - :math:`\frac{\text{deaths_c322}}{\text{population}}`
      -
+
+We calculate prevalence using the equation prevalence = incidence * duration. 
+(See assumptions and limitations for the need to replace GBD's prevalence).
+This is appropriate because LRI has a short and relatively uniform duration of 
+10 (5,15) days. Note that 10 days is longer than the Early Neonatal period (7 
+days). It follows that any incident LRI case in the early neonatal age group 
+will not remit before either dying or aging out. As an early neonate is 
+uniformly likely to become an incident LRI case on any of the 7 days of 'Early 
+Neonatal', it follows that the average duraiton of LRI in the early neonatal 
+age group is approximately 3.5 days (not accounting for deaths).
 
 .. list-table:: Transition Data
    :widths: 10 10 10 30 30
@@ -230,7 +250,7 @@ Data Description
      - 0
      - No birth prevalence
    * - prevalence_calculated
-     - incidence_c322 * 10/365
+     - Calculated from incidence (como) and duration (literature/gbd)
      - Duration-based calculation of LRI Prevalence
      -
    * - deaths_c322
@@ -257,6 +277,11 @@ Data Description
      - como
      - Prevalence of each sequela with id 'sid'
      -
+   * - duration_mean_c322
+     - YLD appendix + calculation
+     - The duration of LRI used in our LRI prevalence calculation. 
+     - Note that we use a different duration for early neonatal, as the early neonatal period is shorter than the average duration of LRI.
+
 .. list-table:: Restrictions
    :widths: 15 15 20
    :header-rows: 1
