@@ -487,8 +487,9 @@ order to calculate transition probabilities between the different wasting catego
 However, the final Vivarium model of wasting will not include a reincarnation 
 pool.
 
-Here we include equations for the transition probabilities, and in the section 
-that follows we will detail how to calculate all the variables used
+Here we include equations for the transition probabilities. These probabilities 
+are used to calculate transition rates in the Transition Data Table. In the 
+section that follows we will detail how to calculate all the variables used below.
 
 .. list-table:: Wasting transition probability equations
    :widths: 5 15 10 10
@@ -500,51 +501,51 @@ that follows we will detail how to calculate all the variables used
      - Source
    * - r2
      - -ap0*f2/ap1 - ap0*f3/ap1 - ap0*f4/ap1 - t1 + ap2*d2/ap1 + ap2*i1/ap1 + ap3*d3/ap1 + ap4*d4/ap1
-     - Probability of remission into cat 2 from cat 1
+     - Daily probability of remission into cat 2 from cat 1
      - System of equations
    * - i1
      - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + ap1*r2/ap2 + ap1*t1/ap2 - d2 - ap3*d3/ap2 - ap4*d4/ap2
-     - Probability of incidence into cat 1 from cat 2
+     - Daily probability of incidence into cat 1 from cat 2
      - System of equations
    * - i2
      - ap0*f3/ap3 + ap0*f4/ap3 + ap1*t1/ap3 + ap2*r3/ap3 - d3 - ap4*d4/ap3
-     - Probability of incidence into cat 2 from cat 1
+     - Daily probability of incidence into cat 2 from cat 1
      - System of equations
    * - i3
      - ap0*f4/ap4 + ap3*r4/ap4 - d4
-     - Probability of incidence into cat 3 from cat 4
+     - Daily probability of incidence into cat 3 from cat 4
      - System of equations
    * - r2
      - (1-sam_tx_coverage)*(1/time_to_sam_ux_recovery)
-     - Probability of remission into cat 2 from cat 1 (untreated)
+     - Daily probability of remission into cat 2 from cat 1 (untreated)
      - Nicole's calculations; also referred to as r2ux (get lit source!)
    * - r3
      - mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)
-     - Probability of remission from cat 2 into cat 3 (treated or untreated)
+     - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
      - Nicole's calculations (get lit source!)
    * - r4
      - 0.001
-     - Probability of remission from cat 3 into cat 4
+     - Daily probability of remission from cat 3 into cat 4
      - Assumed to be small
    * - t1
      - sam_tx_coverage * (1/time_to_sam_tx_recovery)
-     - Probability of remission into cat 3 from cat 1 (treated)
+     - Daily probability of remission into cat 3 from cat 1 (treated)
      - Nicole's calculations (get lit source!)
    * - s1
      - -r2 - t1 + ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0 + ap1)/ap1
-     - Probability of staying in cat 1
+     - Daily probability of staying in cat 1
      - System of equations
    * - s2
      - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - ap1*r2/ap2 - ap1*t1/ap2 - r3 + 1 + ap3*d3/ap2 + ap4*d4/ap2
-     - Probability of staying in cat 2
+     - Daily probability of staying in cat 2
      - System of equations
    * - s3
      - -ap0*f3/ap3 - ap0*f4/ap3 - ap1*t1/ap3 - ap2*r3/ap3 - r4 + 1 + ap4*d4/ap3
-     - Probability of staying in cat 3
+     - Daily probability of staying in cat 3
      - System of equations
    * - s4
      - -ap0*f4/ap4 - ap3*r4/ap4 + 1
-     - Probability of staying in cat 4
+     - Daily probability of staying in cat 4
      - System of equations
 
 
@@ -888,3 +889,100 @@ Note the RRs should be pulled as follows:
     decomp_step='iterative',
     status='best'
   )
+
+.. list-table:: Transition Data
+ :widths: 10 10 10 10 10
+ :header-rows: 1
+
+ * - Transition
+   - Source State
+   - Sink State
+   - Value
+   - Notes
+ * - ux_rem_rate_sam
+   - CAT 1
+   - CAT 2
+   - :math:`-log(1 - r2) * 365`
+   - Untreated remission rate (counts/person-year) from SAM to MAM
+ * - tx_rem_rate_sam
+   - CAT 1
+   - CAT 3
+   - :math:`-log(1 - t1) * 365`
+   - Treated remission rate (counts/person-year) from SAM to mild wasting
+ * - rem_rate_mam
+   - CAT 2
+   - CAT 3
+   - :math:`-log(1 - r3) * 365`
+   - Remission rate (counts/person-year) from MAM to mild wasting
+ * - rem_rate_mild
+   - CAT 3
+   - CAT 4
+   - :math:`-log(1 - r4) * 365`
+   - Remission rate (counts/person-year) from mild wasting to TMREL
+ * - inc_rate_sam
+   - CAT 2
+   - CAT 1
+   - :math:`-log(1 - i1) * 365`
+   - Incidence rate (counts/person-year) from MAM to SAM
+ * - inc_rate_mam
+   - CAT 3
+   - CAT 2
+   - :math:`-log(1 - i2) * 365`
+   - Incidence rate (counts/person-year) from mild wasting to MAM
+ * - inc_rate_mild
+   - CAT 2
+   - CAT 1
+   - :math:`-log(1 - i3) * 365`
+   - Incidence rate (counts/person-year) from TMREL to mild wasting
+
+..    :widths: 10 10 10 10
+..    :header-rows: 1
+
+..    * - Variable
+..      - Description
+..      - Equation
+..      - Notes
+..    * - :math:`d_i`
+..      - Death probability out of wasting category :math:`i`
+..      - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * time_step)`
+..      - 
+..    * - :math:`f_i`
+..      - "Age-in" probability into :math:`cat_i`
+..      - Prevalence of wasting category i, pulled from GBD
+..      - These probabilities were chosen to maintain equilibrium of our system
+..    * - :math:`ap_0`
+..      - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
+..      - 1 - exp(-acmr * 1 / 365)
+..      - We set this equal to the number of simulants that die each time step
+..    * - :math:`ap_i` for :math:`i\in \{1,2,3,4\}`
+..      - Adjusted prevalence of :math:`cat_i`
+..      - :math:`f_i/(ap_0 + 1)`
+..      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
+..    * - :math:`mam_tx_coverage`
+..      - Proportion of MAM (CAT 2) cases that have treatment coverage
+..      - 0.488
+..      - Potentially to be updated
+..    * - :math:`sam_tx_coverage`
+..      - Proportion of SAM (CAT 1) cases that have treatment coverage
+..      - 0.488
+..      - Potentially to be updated
+..    * - :math:`time_to_mam_ux_recovery`
+..      - Without treatment or death, average days spent in MAM before recovery
+..      - 63
+..      - Potentially to be updated
+..    * - :math:`time_to_mam_tx_recovery`
+..      - With treatment and without death, average days spent in MAM before recovery
+..      - 41.3
+..      - Potentially to be updated
+..    * - :math:`time_to_sam_ux_recovery`
+..      - Without treatment or death, average days spent in SAM before recovery
+..      - 60.5
+..      - Potentially to be updated
+..    * - :math:`time_to_sam_tx_recovery`
+..      - With treatment and without death, average days spent in SAM before recovery
+..      - 48.3
+..      - Potentially to be updated
+..    * - :math:`time_step`
+..      - Scalar time step conversion to days
+..      - 1
+..      -
