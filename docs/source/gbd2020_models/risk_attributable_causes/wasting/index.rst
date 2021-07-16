@@ -544,42 +544,61 @@ Here we include equations for the transition probabilities, and in the section
 that follows we will detail how to calculate all the variables used
 
 .. list-table:: Wasting transition probability equations
-   :widths: 5 15 20
+   :widths: 5 15 10 10
    :header-rows: 1
 
    * - Variable
      - Equation
      - Description
-   * - s1
-     - (dur_cat1 - 1)/dur_cat1
-     - Probability of remaining in cat1 (SAM)
-   * - s2
-     - (dur_cat2 - 1)/dur_cat2
-     - Probability of remaining in cat2 (MAM)
-   * - s3
-     - (dur_cat3 - 1)/dur_cat3
-     - Probability of remaining in cat3 (Mild wasting)
-   * - s4
-     - -ap0*f2/ap4 - ap0*f4/ap4 - ap2*d2/ap4 - d4 + (ap0*dur_cat1*dur_cat2*dur_cat3 - ap1*dur_cat2*dur_cat3 + ap2*dur_cat1*dur_cat3 - ap3*dur_cat1*dur_cat2 + ap4*dur_cat1*dur_cat2*dur_cat3)/(ap4*dur_cat1*dur_cat2*dur_cat3)
-     - Probability of remaining in cat4 (wasting TMREL)
+     - Source
    * - r2
-     - ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0*dur_cat1 + ap1)/(ap1*dur_cat1)
-     - Remission probability into cat2 (MAM)
-   * - r3
-     - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - d2 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap2*dur_cat1*dur_cat2)
-     - Remission probability into cat3 (Mild wasting)
-   * - r4
-     - ap0*f2/ap3 + ap2*d2/ap3 + ap4*d4/ap3 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap3*dur_cat1*dur_cat2*dur_cat3)
-     - Remission probability into cat4 (wasting TMREL)
+     - -ap0*f2/ap1 - ap0*f3/ap1 - ap0*f4/ap1 - t1 + ap2*d2/ap1 + ap2*i1/ap1 + ap3*d3/ap1 + ap4*d4/ap1
+     - Daily probability of remission into cat 2 from cat 1
+     - System of equations
    * - i1
-     - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + (-ap0*dur_cat1 + ap1)/(ap2*dur_cat1)
-     - Incidence probability into cat1 (SAM)
+     - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + ap1*r2/ap2 + ap1*t1/ap2 - d2 - ap3*d3/ap2 - ap4*d4/ap2
+     - Daily probability of incidence into cat 1 from cat 2
+     - System of equations
    * - i2
-     - -ap0*f2/ap3 - ap2*d2/ap3 - d3 - ap4*d4/ap3 + (ap0*dur_cat1*dur_cat2 - ap1*dur_cat2 + ap2*dur_cat1)/(ap3*dur_cat1*dur_cat2)
-     - Incidence probability into cat2 (MAM)
+     - ap0*f3/ap3 + ap0*f4/ap3 + ap1*t1/ap3 + ap2*r3/ap3 - d3 - ap4*d4/ap3
+     - Daily probability of incidence into cat 2 from cat 1
+     - System of equations
    * - i3
-     - ap0*f2/ap4 + ap0*f4/ap4 + ap2*d2/ap4 + (-ap0*dur_cat1*dur_cat2*dur_cat3 + ap1*dur_cat2*dur_cat3 - ap2*dur_cat1*dur_cat3 + ap3*dur_cat1*dur_cat2)/(ap4*dur_cat1*dur_cat2*dur_cat3)
-     - Incidence probability into cat3 (Mild wasting)
+     - ap0*f4/ap4 + ap3*r4/ap4 - d4
+     - Daily probability of incidence into cat 3 from cat 4
+     - System of equations
+   * - r2
+     - (1-sam_tx_coverage)*(1/time_to_sam_ux_recovery)
+     - Daily probability of remission into cat 2 from cat 1 (untreated)
+     - Nicole's calculations; also referred to as r2ux (get lit source!)
+   * - r3
+     - mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)
+     - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
+     - Nicole's calculations (get lit source!)
+   * - r4
+     - 0.001
+     - Daily probability of remission from cat 3 into cat 4
+     - Assumed to be small
+   * - t1
+     - sam_tx_coverage * (1/time_to_sam_tx_recovery)
+     - Daily probability of remission into cat 3 from cat 1 (treated)
+     - Nicole's calculations (get lit source!)
+   * - s1
+     - -r2 - t1 + ap2*d2/ap1 + ap3*d3/ap1 + ap4*d4/ap1 + (-ap0 + ap1)/ap1
+     - Daily probability of staying in cat 1
+     - System of equations
+   * - s2
+     - -ap0*f2/ap2 - ap0*f3/ap2 - ap0*f4/ap2 - ap1*r2/ap2 - ap1*t1/ap2 - r3 + 1 + ap3*d3/ap2 + ap4*d4/ap2
+     - Daily probability of staying in cat 2
+     - System of equations
+   * - s3
+     - -ap0*f3/ap3 - ap0*f4/ap3 - ap1*t1/ap3 - ap2*r3/ap3 - r4 + 1 + ap4*d4/ap3
+     - Daily probability of staying in cat 3
+     - System of equations
+   * - s4
+     - -ap0*f4/ap4 - ap3*r4/ap4 + 1
+     - Daily probability of staying in cat 4
+     - System of equations
 
 
 in terms of the following variables:
@@ -592,26 +611,50 @@ in terms of the following variables:
      - Description
      - Equation
      - Notes
-   * - :math:`d_i` for :math:`i\in \{1,2\}`
-     - Death probability out of MAM (cat 2) or SAM (cat 1)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci} - csmr_{c})` :math:`+ emr_{pem}*1 - csmr_{pem}`
+   * - :math:`d_i`
+     - Death probability out of wasting category :math:`i`
+     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * time_step)`
      - 
-   * - :math:`d_i` for :math:`i\in \{3,4\}`
-     - Death probability out of Mild wasting (cat 3) or wasting TMREL (cat 4)
-     - :math:`acmr + (\sum_{c\in diar,lri,msl} emr_c*prevalence_{ci} - csmr_{c})`
-     -
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
      - Prevalence of wasting category i, pulled from GBD
      - These probabilities were chosen to maintain equilibrium of our system
    * - :math:`ap_0`
      - Adjusted prevalence of :math:`cat_0` (the reincarnation pool)
-     - :math:`1 - exp(-acmr * 1 / 365)`
+     - 1 - exp(-acmr * 1 / 365)
      - We set this equal to the number of simulants that die each time step
    * - :math:`ap_i` for :math:`i\in \{1,2,3,4\}`
      - Adjusted prevalence of :math:`cat_i`
      - :math:`f_i/(ap_0 + 1)`
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
+   * - :math:`mam_tx_coverage`
+     - Proportion of MAM (CAT 2) cases that have treatment coverage
+     - 0.488
+     - Potentially to be updated
+   * - :math:`sam_tx_coverage`
+     - Proportion of SAM (CAT 1) cases that have treatment coverage
+     - 0.488
+     - Potentially to be updated
+   * - :math:`time_to_mam_ux_recovery`
+     - Without treatment or death, average days spent in MAM before recovery
+     - 63
+     - Potentially to be updated
+   * - :math:`time_to_mam_tx_recovery`
+     - With treatment and without death, average days spent in MAM before recovery
+     - 41.3
+     - Potentially to be updated
+   * - :math:`time_to_sam_ux_recovery`
+     - Without treatment or death, average days spent in SAM before recovery
+     - 60.5
+     - Potentially to be updated
+   * - :math:`time_to_sam_tx_recovery`
+     - With treatment and without death, average days spent in SAM before recovery
+     - 48.3
+     - Potentially to be updated
+   * - :math:`time_step`
+     - Scalar time step conversion to days
+     - 1
+     -
 
 
 
@@ -969,6 +1012,51 @@ Note the RRs should be pulled as follows:
     status='best'
   )
 
+
+.. list-table:: Transition Data
+ :widths: 10 10 10 10 10
+ :header-rows: 1
+
+ * - Transition
+   - Source State
+   - Sink State
+   - Value
+   - Notes
+ * - ux_rem_rate_sam
+   - CAT 1
+   - CAT 2
+   - :math:`-log(1 - r2) * 365`
+   - Untreated remission rate (counts/person-year) from SAM to MAM
+ * - tx_rem_rate_sam
+   - CAT 1
+   - CAT 3
+   - :math:`-log(1 - t1) * 365`
+   - Treated remission rate (counts/person-year) from SAM to mild wasting
+ * - rem_rate_mam
+   - CAT 2
+   - CAT 3
+   - :math:`-log(1 - r3) * 365`
+   - Remission rate (counts/person-year) from MAM to mild wasting
+ * - rem_rate_mild
+   - CAT 3
+   - CAT 4
+   - :math:`-log(1 - r4) * 365`
+   - Remission rate (counts/person-year) from mild wasting to TMREL
+ * - inc_rate_sam
+   - CAT 2
+   - CAT 1
+   - :math:`-log(1 - i1) * 365`
+   - Incidence rate (counts/person-year) from MAM to SAM
+ * - inc_rate_mam
+   - CAT 3
+   - CAT 2
+   - :math:`-log(1 - i2) * 365`
+   - Incidence rate (counts/person-year) from mild wasting to MAM
+ * - inc_rate_mild
+   - CAT 2
+   - CAT 1
+   - :math:`-log(1 - i3) * 365`
+   - Incidence rate (counts/person-year) from TMREL to mild wasting
 
 
 References
