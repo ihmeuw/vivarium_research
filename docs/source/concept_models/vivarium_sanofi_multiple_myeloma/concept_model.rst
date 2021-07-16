@@ -692,11 +692,11 @@ For the burn-in period (both scenarios):
 
 *Burn-in period initialization*:
 
-	Initialization for the treatment burn-in period should occur prior to the introduction of anti-CD38 monoclonal antibody treatments on Jan. 1, 2016. Each simulant should be initialized to the residual treatment category. Each simulant should be initialized to :code:`prior_anticd38_treatment = False`. Initialization on Jan. 1, 2016 should include patients in all of the relapsed and refractory states, not only simulants in the newly diagnosed MM state.
+	Initialization for the treatment burn-in period should occur prior to the introduction of anti-CD38 monoclonal antibody treatments on Jan. 1, 2016. Each simulant should be initialized to the residual treatment category. Each simulant should be initialized to :code:`eligible_for_retreatment = False`. Initialization on Jan. 1, 2016 should include patients in all of the relapsed and refractory states, not only simulants in the newly diagnosed MM state.
 
 *Post-burn in period initialization*:
 
-  Post-burn in period initialization should occur at the official start of the simulation time frame on Jan. 1, 2021. Simulants should be initialized according to the treatment line-specific treatment category prevalence and :code:`prior_anticd38_treatment` status prevalence on Jan. 1, 2021 from the burn-in period run as described above.
+  Post-burn in period initialization should occur at the official start of the simulation time frame on Jan. 1, 2021. Simulants should be initialized according to the treatment line-specific treatment category prevalence and :code:`eligible_for_retreatment` status prevalence on Jan. 1, 2021 from the burn-in period run as described above.
 
   The burn in period avoids the assumption that incident treatment coverage is equal to prevalent treatment coverage and also avoids the necessity of making a simple assumption about anti-CD38 exposure history among simulants at the start of our simulation time frame.
 
@@ -704,43 +704,63 @@ For the burn-in period (both scenarios):
 
   Simulants should have their treatment category exposure updated at each time-step for which they change multiple myeloma cause model states. Otherwise, their treatment exposures should not change. Simulants should be assigned treatment exposures in the following manner:
 
+  For simulants with no prior exposure to isa or dara:
+
+    If :code:`eligible_for_retreatment == False`, assign treatment categories according to the steps below.
+
+    First, calculate proportion with ever exposure to isa and/or dara:
+
+    .. math::
+
+      ever_0 = 0
+
+      ever_1 = c_1 
+
+      ever_2 = ever_1 + (c_2 - 0.15 * ever_1)
+
+      ever_3 = ever_2 + (c_3 - 0.15 * ever_2)
+
+      ever_4 = ever_3 + (c_4 - 0.15 * ever_3)
+
+      ever_5 = ever_4 + (c_5 - 0.15 * ever_4)
+
+    Where, :math:`c_\text{x}` is equal to the **combined** coverage or isa and dara at the Xth line of treatment.
+
+    Then, the probability of treatment category exposure for each treatment category at treatment line :math:`x` is as follows:
+
+    :math:`p_\text{x,isa} = \frac{(c_\text{x,isa} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,isa}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+
+    :math:`p_\text{x,dara} = \frac{(c_\text{x,dara} - ever_\text{x-1} \times 0.15  \times \frac{c_\text{x,dara}}{(c_\text{x,dara} + c_\text{x,isa})}}{1 - ever_\text{x-1}}`
+
+    :math:`p_\text{x,resid} = 1 - p_\text{x,isa} - p_\text{x,dara}`
+
+    Where :math:`c_x` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep.
+
+    This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time (lagged by average time of progression). Notably, these assumptions will cause biases in opposite directions.
+
+    .. note::
+
+      It is possible that :math:`p_\text{isa} + p_\text{dara} > 1`. In that case, use the following probabilities:
+
+      :math:`p_\text{isa} = \frac{c_\text{isa}}{c_\text{dara} + c_\text{isa}}`
+
+      :math:`p_\text{dara} = \frac{c_\text{dara}}{c_\text{dara} + c_\text{isa}}`
+
+      :math:`p_\text{resid} = 0`
+
+    If a simulant is assigned an isa- or dara-containing treatment regimen, set :code:`eligible_for_retreatment = True`. If a simulant is assigned to the residual treatment category, do not change their value for :code:`eligible_for_retreatment` (keep as False).
+
   For simulants with prior exposure to isa or dara:
 
-		If :code:`prior_anticd38_treatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%. 
+		If :code:`eligible_for_retreatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%. 
 
 		If it is determined that they will be retreated, determine if they will receive an isa-containing treatment or dara-containing treatment, with the probability of isa-containing treatment equal to :math:`\frac{c_\text{isa}}{c_\text{isa} + c_\text{dara}}`, where :math:`c` represents the coverage proportion for the respective treatment categories at the current timestep for the line of treatment that the simulant occupies. 
 
-		If it is determined that they will not be retreated (probability 85%), assign them to the residual treatment category. Keep :code:`prior_anticd38_treatment = True`.
-
-  For simulants with no prior exposure to isa or dara:
-
-    If :code:`prior_anticd38_treatment == False`, assign treatment categories with the probabilities equal to:
-
-    :math:`p_\text{isa} = \frac{c_\text{isa} - p*_\text{prior treatment} \times 0.15 \times \frac{c_\text{isa}}{(c_\text{dara} + c_\text{isa})}}{p*_\text{no prior treatment}}`
-
-    :math:`p_\text{dara} = \frac{c_\text{dara} - p*_\text{prior treatment} \times 0.15 \times \frac{c_\text{dara}}{(c_\text{dara} + c_\text{isa})}}{p*_\text{no prior treatment}}`
-
-    :math:`p_\text{resid} = 1 - p_\text{isa} - p_\text{dara}`
-
-		Where :math:`c` represents the coverage of a particular treatment category for the simulant's current line of treatment at the current timestep. :math:`p*_\text{prior treatment}` represents the proportion of simulants in the multiple myeloma cause model state prior to the simulant's current state who have prior exposure to dara and/or isa at the current time-step and :math:`p*_\text{no prior treatment}` represents the same value for simulants without prior exposure. If the simulant's current line of treatment is the first line of treatment, set :math:`p*_\text{prior treatment} = 0` and :math:`p*_\text{no prior treatment} = 1`.
-
-		This is an approximation that (1) assumes similar overall survival rates among treatment categories, and (2) does not consider the relative changes in the coverage of the treatment categories over time. Notably, these assumptions will cause biases in opposite directions.
-
-		.. note::
-
-			It is possible that :math:`p_\text{isa} + p_\text{dara} > 1`. In that case, use the following probabilities:
-
-			:math:`p_\text{isa} = \frac{c_\text{isa}}{c_\text{dara} + c_\text{isa}}`
-
-			:math:`p_\text{dara} = \frac{c_\text{dara}}{c_\text{dara} + c_\text{isa}}`
-
-			:math:`p_\text{resid} = 0`
-
-		If a simulant is assigned an isa- or dara-containing treatment regimen, set :code:`prior_anticd38_treatment = True`. If a simulant is assigned to the residual treatment category, do not change their value for :code:`prior_anticd38_treatment`.
+		If it is determined that they will not be retreated (probability 85%), assign them to the residual treatment category. Keep :code:`eligible_for_retreatment = True`.
 
 **How to assign treatment effects:**
 
-Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (:code:`prior_anticd38_treatment == True`). The hazard ratios are shown in the tables below.
+Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (if a simulant is in the isa or dara treatment category and :code:`eligible_for_retreatment_i == True`, they should be assigned the retreated hazard ratios). The hazard ratios are shown in the tables below.
 
 We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. The population-based real world evidence treatment effect sizes should be used for the primary runs of the simulation (both for the baseline and alternative scenarios); the clinical trial effect sizes should be used for separate supplementary runs of the simulation (for the bsaeline and alternative scenarios) if/when time allows.
 
