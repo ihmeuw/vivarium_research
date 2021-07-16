@@ -67,7 +67,7 @@ except for the USA, sex-specific data were combined to maximise sample size. The
 USA analyses were sex-specific.
 **Relative risks of all-cause mortality were calculated for each 500g and 2wk
 category of birthweight and gestational age.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. note::
 
@@ -114,7 +114,7 @@ regression and then converted into mortality risk.
 To calculate mortality relative risks, the risk of each joint two-week
 gestational age and 500-gram birthweight category were divided by the risk of
 mortality in the joint gestational age and birthweight category with the lowest
-mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. note::
 
@@ -139,7 +139,7 @@ across all available sources and selected outcomes based on criteria of
 biological plausibility. **Some causes, most notably congenital birth defects,
 haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria
 that reverse causality could not be excluded.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. list-table:: Entities Affected by LBWSG in GBD 2019
    :widths: 5 5 5 5 5
@@ -275,6 +275,57 @@ Restrictions
 
 Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
+
+Here is a plot `created by Kjell <kjell_lbwsg_category_rr_notebook_>`_ that
+shows the LBWSG exposure categories and the mean relative risk estimate in each
+category (the mean is taken across all all sexes, age groups, and draws):
+
+.. image:: LBWSG_with_RR.png
+
+Based on the GBD data as shown above, there are **four TMREL categories** where
+the relative risk is always at the minimum 1.0 regardless of sex, age group, or
+draw (recall that the relative risks are the same for all locations):
+
+- cat53 (38-40 weeks, 4000-4500 g)
+- cat54 (38-40 weeks, 3500-4000 g)
+- cat55 (40-42 weeks, 3500-4000 g)
+- cat56 (40-42 weeks, 4000-4500 g)
+
+Here is the description of the modeling procedure for the TMREL in
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 177):
+
+  For each of the country-derived relative risk surfaces, the 500-gram and
+  two-week gestational age joint bin with the lowest risk was identified. This
+  bin differed within each country dataset. To identify the universal 500-gram
+  and two-week gestational age category that would serve as the universal TMREL
+  for our analysis, we chose the bins that was identified to be the TMREL in
+  each country dataset to contribute to the universal TMREL. Therefore, the
+  joint categories that served as our universal TMREL for the LBWSG risk factor
+  were “38-40 weeks of gestation and 3500-4000 grams”, “38-40 weeks of gestation
+  and 4000-4500 grams”, and “40-42 weeks of gestation and 4000-4500 grams”. As
+  the joint TMREL, all three categories were assigned to a relative risk equal
+  to 1.
+
+.. note::
+
+  The above description from the risk appendix indicates that there are only
+  **three** universal TMREL categories (cat54, cat53, and cat56), whereas the RR
+  data in GBD 2019 indicates that cat55 is also a TMREL category.
+
+  Moreover, digging further into the RR data reveals that in addition to the 4 categories that have RR=1 for all sexes, age groups, and draws (cat53, cat54, cat55, cat56):
+
+  - There is one additional category (cat52) that has RR=1 for early neonatal
+    females for all draws;
+  - The two categories cat51 and cat52 have RR=1 in more than 75% of draws in
+    the early neonatal age group for both males and females;
+  - There are 4 additional categories (cat44, cat48, cat49, cat50) that have
+    RR=1 in at least one age/sex/draw combination.
+
+  Thus, it may be worth discussing with the GBD modeler whether using the four
+  categories cat53, cat54, cat55, cat56 as the TMREL regardless of sex, age
+  group, or draw is a reasonable approach.
+
+.. _kjell_lbwsg_category_rr_notebook: https://github.com/KjellSwedin/investigate_lbwsg_categories/blob/main/LSFF_Expose_RR.ipynb
 
 Vivarium Modeling Strategy
 --------------------------
