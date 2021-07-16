@@ -249,7 +249,6 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 
   Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
 
-  The table below provides example entries for large scale food fortification with iron.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 30
