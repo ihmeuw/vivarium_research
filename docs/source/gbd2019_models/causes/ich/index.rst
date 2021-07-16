@@ -15,8 +15,8 @@ Disease Overview
 A stroke occurs when the blood supply to part of your brain is interrupted or reduced, preventing brain tissue from getting oxygen and nutrients. There are two main causes of stroke: a blocked artery (ischemic stroke) or leaking or bursting of a blood vessel (intracerebral hemorrhage and subarachnoid hemorrhage (combination is referred to as hemorrhagic stroke)). Some people may have only a temporary disruption of blood flow to the brain. This is known as a transient ischemic attack (TIA); symptoms of a TIA last less than 24 hours. While there are no long term-effects of TIAs, they have been shown to increase the risk of subsequent strokes. 
 
 Intracerebral hemorrhage is a sudden leakage of blood into the brain, causing injury to the tissue and resulting in the symptoms of a stroke as described above.
-[Mayo-Clinic]_
-[UCLA-Health]_
+[Mayo-Clinic-ICH]_
+[UCLA-Health-ICH]_
 
 
 GBD 2019 Modeling Strategy
@@ -25,7 +25,7 @@ GBD 2019 Modeling Strategy
 GBD 2019 Non-Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
-Stroke was defined according to WHO criteria - rapidly developing clinical signs of focal (at times global) disturbance of cerebral function lasting more than 24 hours or leading to death with no apparent cause other than that of vascular origin. Data on transient ischemic attack (TIA) were not included. [WHO-Stroke-Definition]_. Intracerebral hemorrhage is defined by GBD as a focal collection of blood within the brain parenchyma or ventricular system that is not caused by trauma. We model first ever strokes as acute events; recurrent strokes are captured in the chronic phase of the modeling process. 
+Stroke was defined according to WHO criteria - rapidly developing clinical signs of focal (at times global) disturbance of cerebral function lasting more than 24 hours or leading to death with no apparent cause other than that of vascular origin. Data on transient ischemic attack (TIA) were not included. [WHO-Stroke-Definition-2019]_. Intracerebral hemorrhage is defined by GBD as a focal collection of blood within the brain parenchyma or ventricular system that is not caused by trauma. We model first ever strokes as acute events; recurrent strokes are captured in the chronic phase of the modeling process. 
 
 For intracerebral hemorrhage, data using alternate definitions of incidence and excess mortality were adjusted relative to the reference case definition using MR-BRT. The reference case definition for intracerebral hemorrhage is first ever, subtype-specific data which also includes subjects who did not survive to hospital admission. We incorporate data from scientific literature, registries, and administrative inpatient records in our analysis. 
 
@@ -80,13 +80,13 @@ See below for the details on the severity levels for acute and chronic intracere
      - MoCA<24 or MMSE<26 
      - 0.588 (0.411–0.744) 
 
-[GBD-2019-Capstone-Appendix]_
+[GBD-2019-Capstone-Appendix-ICH]_
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++
 
 Vital registration data were used as input data to model deaths from intracerebral hemorrhage in CODEm. 
-[GBD-2019-Capstone-Appendix]_ 
+[GBD-2019-Capstone-Appendix-ICH]_ 
 
 Cause Hierarchy
 +++++++++++++++
@@ -292,11 +292,11 @@ Data Sources
      - Deaths from intracerebral hemorrhage
      - This is all deaths, regardless of whether the people are in the acute or chronic state
    * - acute_csmr_c496
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_acute_intracerebral_csmr_2021-05-20.csv'
      - Deaths from intracerebral hemorrhage during the acute period 
      - Custom CSMR calculation
    * - chronic_csmr_c496
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_chronic_intracerebral_csmr_2021-05-20.csv'
      - Deaths from intracerebral hemorrhage during the chronic period 
      - Custom CSMR calculation
    * - incidence_c496
@@ -344,17 +344,17 @@ Compare CSMR experienced by simulants to CSMR from CoDCorrect in GBD
 References
 ----------
 
-.. [Mayo-Clinic] Stroke. Mayo Clinic, Mayo Foundation for Medical Education and Research, 9 Feb 2021.
+.. [Mayo-Clinic-ICH] Stroke. Mayo Clinic, Mayo Foundation for Medical Education and Research, 9 Feb 2021.
 	Retrieved 25 March 2021.
 	https://www.mayoclinic.org/diseases-conditions/stroke/symptoms-causes/syc-20350113
 
-.. [UCLA-Health] Intracerebral Hemorrhage. Intracerebral Hemorrhage - UCLA Neuorsurgery, Los Angeles, CA, UCLA Health.
+.. [UCLA-Health-ICH] Intracerebral Hemorrhage. Intracerebral Hemorrhage - UCLA Neuorsurgery, Los Angeles, CA, UCLA Health.
 	Retrieved 25 March 2021.
 	https://www.uclahealth.org/neurosurgery/intracerebral-hemorrhage
 
-.. [WHO-Stroke-Definition] Hatano S. Experience from a multicentre stroke register: a preliminary report. Bull WHO 54, 541- 553. 1976. 
+.. [WHO-Stroke-Definition-2019] Hatano S. Experience from a multicentre stroke register: a preliminary report. Bull WHO 54, 541- 553. 1976. 
 
-.. [GBD-2019-Capstone-Appendix]
+.. [GBD-2019-Capstone-Appendix-ICH]
 	Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
 
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf

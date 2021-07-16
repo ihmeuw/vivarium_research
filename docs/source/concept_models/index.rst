@@ -8,4 +8,4 @@ Simulation Concept Models
    :maxdepth: 2
    :glob:
 
-   */concept_model
+   */concept_model*

@@ -17,13 +17,13 @@ Glossary
       people and the components represent different attributes of those people.
       The software is organized around components representing
       attributes rather than components representing people.
-      [`Wikipedia article <https://en.wikipedia.org/wiki/Entity_component_system>`_]
+      [`Wikipedia article <https://en.wikipedia.org/wiki/Entity_component_system>`__]
 
    Global Burden of Disease
       The Global Burden of Disease Study (GBD) is a comprehensive regional and
       global research program of disease burden that assesses mortality and
       disability from major diseases, injuries, and risk factors.
-      [`Wikipedia article <https://en.wikipedia.org/wiki/Global_Burden_of_Disease_Study>`_]
+      [`Wikipedia article <https://en.wikipedia.org/wiki/Global_Burden_of_Disease_Study>`__]
 
    Internally Consistent Model
       A model whose rules and logical structure agree with the data used to

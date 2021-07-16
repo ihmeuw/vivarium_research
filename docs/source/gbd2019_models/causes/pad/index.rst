@@ -303,7 +303,7 @@ References
 ----------
 
 .. [PAD-Definition]
-Zemaitis MR, Boll JM, Dreyer MA. :title:`Peripheral Arterial Disease.` [Updated 2021 Mar 17]. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2021 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK430745/
+   Zemaitis MR, Boll JM, Dreyer MA. :title:`Peripheral Arterial Disease.` [Updated 2021 Mar 17]. In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2021 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK430745/
 
 .. [ABI-Definition]
-:title:`Ankle-Brachial Index.` Mayo Clinic, Mayo Foundation for Medical Education and Research, 13 Feb. 2020. Available from: https://www.mayoclinic.org/tests-procedures/ankle-brachial-index/about/pac-20392934 
+   :title:`Ankle-Brachial Index.` Mayo Clinic, Mayo Foundation for Medical Education and Research, 13 Feb. 2020. Available from: https://www.mayoclinic.org/tests-procedures/ankle-brachial-index/about/pac-20392934

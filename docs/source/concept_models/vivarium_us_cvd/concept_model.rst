@@ -40,26 +40,26 @@ Vivarium - US Health Disparities - CVD Interventions
 |       |                            |
 +-------+----------------------------+
 
-.. _1.0:
+.. _uscvd1.0:
 
 1.0 Background
 ++++++++++++++
 
 
-.. _1.1:
+.. _uscvd1.1:
 
 1.1 Project overview
 --------------------
 
 
 
-.. _1.2:
+.. _uscvd1.2:
 
 1.2 Literature review
 ---------------------
 
 
-.. _2.0:
+.. _uscvd2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -70,12 +70,12 @@ Initial efforts will focus on the 50 US states and Washington DC; when inputs ar
 
 Comparisons will be with the GBD results of incidence, prevalence, and mortality for the causes and risks included in the following sections. 
 
-.. _3.0:
+.. _uscvd3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _uscvd3.1:
 
 3.1 Causal diagram
 ------------------
@@ -102,7 +102,7 @@ Comparisons will be with the GBD results of incidence, prevalence, and mortality
 **Mediators (M)**:
 
 
-.. _3.2:
+.. _uscvd3.2:
 
 3.2 Effect sizes
 ----------------
@@ -112,7 +112,9 @@ Comparisons will be with the GBD results of incidence, prevalence, and mortality
 4.0 Intervention
 ++++++++++++++++
 
-.. _4.1:
+
+
+.. _uscvd4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -186,12 +188,12 @@ Variations on the above intervention increased support time or added meal replac
 	- Combination 0.5: Combination of outreach 0.5, polypill 0.5, and lifestyle 0.5 
 
 
-.. _5.0:
+.. _uscvd5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _uscvd5.1:
 
 5.1 Vivarium concept model 
 --------------------------
@@ -199,12 +201,12 @@ Variations on the above intervention increased support time or added meal replac
 .. note::
   This is our standard vivarium concept model diagram we are used to seeing
 
-.. _5.2:
+.. _uscvd5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _uscvd5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -217,14 +219,14 @@ Variations on the above intervention increased support time or added meal replac
   - stratifications 
 
 
-.. _5.2.2:
+.. _uscvd5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
-.. _5.3:
+.. _uscvd5.3:
 
 5.3 Models
 ----------
@@ -233,7 +235,7 @@ Variations on the above intervention increased support time or added meal replac
   here we use the compartmental (SEIR) models with squares
   
 
-.. _5.3.1:
+.. _uscvd5.3.1:
 
 5.3.1 Model 1
 ~~~~~~~~~~~~~
@@ -243,7 +245,7 @@ Variations on the above intervention increased support time or added meal replac
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _5.3.2:
+.. _uscvd5.3.2:
 
 5.3.2 Model 2
 ~~~~~~~~~~~~~
@@ -253,7 +255,7 @@ Variations on the above intervention increased support time or added meal replac
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _5.3.3:
+.. _uscvd5.3.3:
 
 5.3.3 Model 3
 ~~~~~~~~~~~~~
@@ -263,7 +265,7 @@ Variations on the above intervention increased support time or added meal replac
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _5.3.4:
+.. _uscvd5.3.4:
 
 5.3.4 Model 4
 ~~~~~~~~~~~~~
@@ -274,12 +276,12 @@ Variations on the above intervention increased support time or added meal replac
   - add python-style pseudo code to summarize model algorithm if necessary
 
 
-.. _5.4:
+.. _uscvd5.4:
 
 5.4 Desired outputs
 -------------------
 
-.. _5.5:
+.. _uscvd5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -287,20 +289,20 @@ Variations on the above intervention increased support time or added meal replac
 .. todo::
   - add special stratifications if necessary
 
-.. _6.0:
+.. _uscvd6.0:
 
 6.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
 
-.. _7.0:
+.. _uscvd7.0:
 
 7.0 Limitations
 +++++++++++++++
 
 
 
-.. _8.0:
+.. _uscvd8.0:
 
 8.0 References
 ++++++++++++++

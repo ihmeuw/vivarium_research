@@ -9,7 +9,7 @@ Risk Exposure Overview
 ----------------------
 
 Body mass index (BMI) is a person’s weight in kilograms divided by the square of height in meters (weight (kg) / [height (m)]\ :sup:`2`\). BMI is an inexpensive and easy screening method; values are frequently divided into categories: underweight (<18.5 kg/m\ :sup:`2`\), healthy weight (18.5 to 24.9 kg/m\ :sup:`2`\), overweight (25.0 to 29.9 kg/m\ :sup:`2`\), and obese (>=30.0 kg/m\ :sup:`2`\). BMI does not measure body fat directly, but it is moderately correlated with more direct measures of body fat. BMI has also been shown to be correlated with various metabolic and disease outcomes. BMI can be a screening tool, but it does not diagnose the body fatness or health of an individual.
-[CDC]_
+[CDC-BMI]_
 
 Risk Exposures Description in GBD
 ---------------------------------
@@ -123,12 +123,12 @@ For adults (ages 20+), the theoretical minimum risk exposure level (TMREL) of BM
    * - High Body-Mass Index
      - Osteoarthritis knee
 
-[GBD-2019-Capstone-Appendix]_
+[GBD-2019-Capstone-Appendix-BMI]_
 
 Vivarium Modeling Strategy
 --------------------------
 
-Include here an overview of the Vivarium modeling section
+Mean BMI is a continuous exposure modelled in GBD using an ensemble distribution. BMI will be a target of lifestyle interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
 Restrictions
 ++++++++++++
@@ -141,78 +141,70 @@ Restrictions
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
+     - False
      -
+   * - YLD only
+     - False
+     -
+   * - YLL only
+     - False
      -
    * - Age group start
-     -
-     -
+     - 9
+     - [20, 24 years)
    * - Age group end
-     -
-     -
-
-..	todo::
-
-	Determine if there's something analogous to "YLL/YLD only" for this section
+     - 235
+     - [95, 125 years)
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
+The quantity of interest is exposure to the mean BMI level; we assume full reversibility of risk and do not account for duration of exposure to BMI values above the range of the TMREL. 
 
-Risk Exposure Model Diagram
-++++++++++++++++++++++
 
-Include diagram of Vivarium risk exposure model.
+Data Description
+++++++++++++++++
 
-Data Description Tables
-+++++++++++++++++++++++
+The rei_id for BMI is 108
 
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied 
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking. 
-
-.. list-table:: Constants 
+.. list-table:: ID Table 
 	:widths: 10, 5, 15
 	:header-rows: 1
 
-	* - Constant
-	  - Value
-	  - Note
-	* - 
+	* - Component
+	  - ME_ID
+	  - Notes
+	* - Mean exposure
+	  - 2548
 	  - 
+	* - Standard deviation
+	  - 18706
 	  - 
+	* - Relative risk
+	  - 9031
+	  - Must be accessed with get_draws; adult values
 
-.. list-table:: Distribution Parameters
-	:widths: 15, 30, 10
-	:header-rows: 1
-
-	* - Parameter
-	  - Value
-	  - Note
-	* - 
-	  - 
-	  -
+The exposure and standard deviation values should be used to represent the distribution of mean BMI values that the simulants will be assigned in the model. 
 
 Validation Criteria
 +++++++++++++++++++
 
-..	todo::
-	Fill in directives for this section
+Does the mean in the model match the mean in GBD? 
+
+Does the standard deviation in the model match the standard deviation of the GBD model? 
 
 References
 ----------
 
-.. [CDC] About Adult BMI. Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 17 Sept. 2020.
+.. [CDC-BMI] About Adult BMI. Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 17 Sept. 2020.
 	Retrieved 19 April 2021.
 	https://www.cdc.gov/healthyweight/assessing/bmi/adult_bmi/index.html 
 
-.. [GBD-2019-Capstone-Appendix]
-  Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249` 
+.. [GBD-2019-Capstone-Appendix-BMI]
+   Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249`
   
 
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf

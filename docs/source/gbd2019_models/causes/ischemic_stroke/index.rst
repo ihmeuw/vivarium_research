@@ -21,7 +21,7 @@ GBD 2019 Modeling Strategy
 **Non-Fatal Modeling Strategy**
 
 Stroke was defined according to WHO criteria - rapidly developing clinical signs of focal (at times global) disturbance of cerebral function lasting more than 24 hours or leading to death with no apparent cause other than that of vascular origin. Data on transient ischemic attack (TIA) were not included. 
-[WHO-Stroke-Definition]_ 
+[WHO-Stroke-Definition-IS]_ 
 Ischemic stroke is defined by GBD as an episode of neurological dysfunction caused by focal cerebral, spinal, or retinal infarction. We model first ever strokes as acute events; recurrent strokes are captured in the chronic phase of the modeling process. 
 
 For ischemic stroke, data using alternate definitions of incidence and excess mortality were adjusted relative to the reference case definition using MR-BRT. The reference case definition for ischemic stroke is first ever, subtype-specific data which also includes subjects who did not survive to hospital admission. We incorporate data from the scientific literature, registries, and administrative inpatient records in our analysis. 
@@ -290,11 +290,11 @@ State and Transition Data Tables
      - Deaths from ischemic stroke
      - This is all deaths, regardless of whether people are in the acute or chronic state 
    * - acute_csmr_c495
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_acute_ischemic_csmr_2021-05-20.csv'
      - Deaths from ischemic stroke during the acute period 
      - Custom CSMR calculation
    * - chronic_csmr_c495
-     - custom csv
+     - custom csv saved here: '/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/stroke_CSMR_data/' as 'GBD2019_chronic_ischemic_csmr_2021-05-20.csv'
      - Deaths from ischemic stroke during the chronic period  
      - Custom CSMR calculation 
    * - incidence_c495
@@ -348,5 +348,5 @@ References
 .. [Mayo-Clinic-Stroke-Definition]
    `Stroke.` Mayo Clinic, Mayo Foundation for Medical Education and Research, 9 Feb. 2021, www.mayoclinic.org/diseases-conditions/stroke/symptoms-causes/syc-20350113. 
 
-.. [WHO-Stroke-Definition]
+.. [WHO-Stroke-Definition-IS]
    Hatano S. Experience from a multicentre stroke register: a preliminary report. Bull WHO 54, 541- 553. 1976. 

@@ -8,5 +8,4 @@ Risk-Attributable Cause Models
    :maxdepth: 0
    :glob:
 
-   *
    */index

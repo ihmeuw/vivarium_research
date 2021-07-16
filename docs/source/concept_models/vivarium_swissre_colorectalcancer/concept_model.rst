@@ -64,12 +64,12 @@ Vivarium CSU Colon and Rectum Cancer Simulation
    * - csmr_c441
      - Cause-specific mortality rate of colon and rectum cancer
 
-.. _1.0:
+.. _swcrc1.0:
 
 1.0 Background
 ++++++++++++++
 
-.. _1.1:
+.. _swcrc1.1:
 
 1.1 Project overview
 --------------------
@@ -84,7 +84,7 @@ forecasts and the expected impact of screening technologies. All forecasts will
 represent the Swiss Re’s insured population from the weighted blend of Chinese 
 provinces. Forecasts will be from year 2020 to 2040.
 
-.. _1.2:
+.. _swcrc1.2:
 
 1.2 Literature review
 ---------------------
@@ -94,7 +94,7 @@ provinces. Forecasts will be from year 2020 to 2040.
  add more literature background
 
 
-.. _2.0:
+.. _swcrc2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -105,12 +105,12 @@ screening and symptomatic presentation in a baseline with no screening scale-up
 and an alternativein in which screening scaled-up.
 
 
-.. _3.0:
+.. _swcrc3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _swcrc3.1:
 
 3.1 Causal variables
 --------------------
@@ -130,19 +130,20 @@ Mediators
  - N/A
 
 
-.. _4.0:
+.. _swcrc4.0:
 
 4.0 Intervention
 ++++++++++++++++
 Scale-up of colon and rectum cancer screening coverage among insured population.
 
-.. _4.1:
+.. _swcrc4.1:
 
 4.1 Simulation scenarios
 ------------------------
 Baseline: project existing level of colon and rectum cancer screening for 
 simulants aged 50 to 74 years, where:
- - Medium-risk group are provided with FOBT (fecal occult blood test) 
+
+ - Medium-risk group are provided with FOBT (fecal occult blood test)
    every year
  - High-risk group (with family history of colon and rectum cancer or 
    personal history of adenoma) are provided colonoscopy every 5 years
@@ -150,7 +151,8 @@ simulants aged 50 to 74 years, where:
 Alternative scenario: by 2040, linear ramp up colon and rectum cancer screening 
 to cover 60% of women aged 50 to 74 years in 2030, then keep 60% coverage till 
 2040, where:
- - Medium-risk group are provided with FOBT (fecal occult blood test) 
+
+ - Medium-risk group are provided with FOBT (fecal occult blood test)
    every year
  - High-risk group (with family history of colon and rectum cancer or 
    personal history of adenoma) are provided colonoscopy every 5 years
@@ -197,24 +199,24 @@ to cover 60% of women aged 50 to 74 years in 2030, then keep 60% coverage till
    2015. [de-Moor-et-al-2018]_
 
 
-.. _5.0:
+.. _swcrc5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _swcrc5.1:
 
 5.1 Vivarium concept model 
 --------------------------
 
 .. image:: colon_and_rectum_cancer_concept_model_diagram.svg
 
-.. _5.2:
+.. _swcrc5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _swcrc5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -225,7 +227,7 @@ to cover 60% of women aged 50 to 74 years in 2030, then keep 60% coverage till
  - Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps.
  - Location: blended with province-specific weight in China.
 
-.. _5.2.2:
+.. _swcrc5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -290,19 +292,19 @@ provinces.
 
 See column **noised_forecast** for output value.
 
-.. _5.3:
+.. _swcrc5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _swcrc5.3.1:
 
 5.3.1 Core colon and rectum cancer model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 see :ref:`colon and rectum cancer cause model<2017_cancer_model_colon_and_rectum_cancer>`
 
-.. _5.3.2:
+.. _swcrc5.3.2:
 
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -316,6 +318,7 @@ Colon and rectum cancer screening algorithm was determined by three variables:
 
 People met any of following criteria are considered high-risk for colon and 
 rectum cancer screening:
+
  - With family history of colon and rectum cancer
  - With personal history of adenoma
 
@@ -427,7 +430,7 @@ for simulants at any age above 65.
 
 .. image:: colon_and_rectum_cancer_screening_event_time.svg
 
-.. _5.3.3:
+.. _swcrc5.3.3:
 
 5.3.3 Risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -499,7 +502,7 @@ Relevant formulas
  exposed to `cat1`. The formula is described as follow: RR_cat1 = RR_family_history 
  * 0.25 + RR_nonadvanced_adenoma * 0.75 = 2.24 * 0.25 + 1.2 * 0.75 = 1.46.
 
-.. _5.4:
+.. _swcrc5.4:
 
 5.4 Input data sources
 ----------------------
@@ -550,7 +553,7 @@ Relevant formulas
      - [Butterworth-et-al-2006]_, [Wong-et-al-2018]_, and [Click-et-al-2018]_ 
      - We assume RR is independent from age and sex.
 
-.. _5.5:
+.. _swcrc5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -590,14 +593,14 @@ Relevant formulas
      - 
 
 
-.. _6.0:
+.. _swcrc6.0:
 
 6.0 Validation and verification
 +++++++++++++++++++++++++++++++
 TBD
 
 
-.. _7.0:
+.. _swcrc7.0:
 
 7.0 Limitations
 +++++++++++++++
@@ -616,7 +619,7 @@ TBD
     compare the evidence from China to studies conducted in other locations.
 
 
-.. _8.0:
+.. _swcrc8.0:
 
 8.0 References
 ++++++++++++++

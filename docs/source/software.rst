@@ -23,8 +23,8 @@ itself works as well as useful information about how a model is specified and
 tutorials for running simulations and exploring them interactively, among other
 things.
 
-- `Repository <https://github.com/ihmeuw/vivarium>`_
-- `Documentation <https://vivarium.readthedocs.io/en/latest/>`_
+- `Repository <https://github.com/ihmeuw/vivarium>`__
+- `Documentation <https://vivarium.readthedocs.io/en/latest/>`__
 
 
 Vivarium Public Health
@@ -36,8 +36,8 @@ we define things like SI or SIS epidemiological models, or fertility models
 for population growth. It also contains a useful tutorial on interacting with
 data artifacts.
 
-- `Repository <https://github.com/ihmeuw/vivarium_public_health>`_
-- `Documentation <https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/>`_
+- `Repository <https://github.com/ihmeuw/vivarium_public_health>`__
+- `Documentation <https://vivarium.readthedocs.io/projects/vivarium-public-health/en/latest/>`__
 
 
 Vivarium Inputs
@@ -50,8 +50,8 @@ contains useful functions for pulling raw GBD data as well as generating data as
 it is used in a simulation, which are vitally important for vetting. There is a
 helpful tutorial here for pulling data using these functions, too.
 
-- `Repository <https://github.com/ihmeuw/vivarium_inputs>`_
-- `Documentation <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/>`_
+- `Repository <https://github.com/ihmeuw/vivarium_inputs>`__
+- `Documentation <https://vivarium.readthedocs.io/projects/vivarium-inputs/en/latest/>`__
 
 
 Vivarium Cluster Tools
@@ -61,8 +61,8 @@ Vivarium Cluster Tools contains command line tools for running Vivarium
 simulations in parallel using IHME's cluster. It contains documentation
 describing how this is done, as well as how YAML files and branches files work.
 
-- `Repository <https://github.com/ihmeuw/vivarium_cluster_tools>`_
-- `Documentation <https://vivarium-cluster-tools.readthedocs.io/en/latest/>`_
+- `Repository <https://github.com/ihmeuw/vivarium_cluster_tools>`__
+- `Documentation <https://vivarium-cluster-tools.readthedocs.io/en/latest/>`__
 
 
 GBD Mapping
@@ -74,5 +74,5 @@ sequelae, as well as metadata about them. It's mainly interacted with by
 importing the package and exploring it, and it's used by other Vivarium
 repositories, especially Vivarium Inputs.
 
-- `Repository <https://github.com/ihmeuw/gbd_mapping>`_
-- `Documentation <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/gbd_mapping.html>`_
+- `Repository <https://github.com/ihmeuw/gbd_mapping>`__
+- `Documentation <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/gbd_mapping.html>`__
