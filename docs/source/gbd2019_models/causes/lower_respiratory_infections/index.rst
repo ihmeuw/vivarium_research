@@ -188,7 +188,7 @@ Data Description
      - 0
      -
    * - I
-     - prevalence
+     - prevalence_calculated
      - incidence_rate_c322 * duration_mean
      - Justification included below
    * - I

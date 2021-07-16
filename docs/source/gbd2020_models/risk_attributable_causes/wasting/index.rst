@@ -361,7 +361,7 @@ These are mapped onto clinically-defined wasting states as follows:
   * - Marasmus
     - {Severe wasting without oedema} + {Severe wasting with oedema}
 
-The above tabel represents GBD definitions. In the literature these definitions 
+The above table represents GBD definitions. In the literature these definitions 
 are highly debated, often defining marasmus as strictly "severe wasting without 
 oedema".
 
