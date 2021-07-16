@@ -360,6 +360,9 @@ These are mapped onto clinically-defined wasting states as follows:
     - {Moderate wasting with oedema} + {Severe wasting with oedema}
   * - Marasmus
     - {Severe wasting without oedema} + {Severe wasting with oedema}
+The above tabel represents GBD definitions. In the literature these definitions 
+are highly debated, often defining marasmus as strictly "severe wasting without 
+oedema".
 
 The nonfatal estimation pipeline comprises five models:
 
@@ -493,13 +496,13 @@ GBD and literature sources
      - Derived from GBD
    * - SAM mortality rate
      - Derived from GBD
-   * - Incidence of mild wasting
+   * - Incidence of mild wasting from TMREL
      - Derived using a Markov model 
-   * - Incidence of MAM
+   * - Incidence of MAM from mild wasting
      - Derived using a Markov model 
-   * - Incidence of SAM
+   * - Incidence of SAM from MAM
      - Derived using a Markov model 
-   * - Remission from mild wasting
+   * - Remission from mild wasting to TMREL
      - 
    * - Remission from MAM to mild wasting
      - 
@@ -907,7 +910,7 @@ Data Description Tables
      - Moderate wasting with eodema, moderate wasting without oedema
    * - SAM sequelae
      - 
-     - {s199, s2036}
+     - {s2036, s199}
      - Severe wasting with eodema, severe wasting without oedema
 
 Note we pull the above sequelae by using:
