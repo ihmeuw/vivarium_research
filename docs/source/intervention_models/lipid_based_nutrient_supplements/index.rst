@@ -35,6 +35,11 @@
 Small quantity lipid based nutrient supplements (SQ-LNS)
 ========================================================
 
+Ideally, infants are breastfed for two years or longer, with complementary
+food introduced at six months of age. Diets of infants and young children aged six to 23 months need to include a variety of nutrient-dense foods, preferably from local sources,
+to ensure their nutrient needs are met. However, children's diets are likely to be deficient in macronutrients and micronutrients, specifically essential fatty acids, when nutrient-rich
+diets are not available to them in resource-poor settings. Various interventions are recommended, or have been used, to improve child malnutrition. This document focuses on small quantity lipid based nutrient supplements (SQ-LNS) as an intervention to improve malnutrition, particularly child wasting and stunting. Particularly, it draws on the 2019 Cochrane Review by Das et. al. [DAS_Cochrane_Review_2019]_
+
 .. todo::
 
   Add a brief introductory paragraph for this document.
@@ -50,9 +55,21 @@ Small quantity lipid based nutrient supplements (SQ-LNS)
   * - Abbreviation
     - Definition
     - Note
-  * - 
+  * - LNS
+    - lipid-based nutrient supplements
     - 
+  * - SQ
+    - small quantity
     - 
+  * - FBF 
+    - fortified blended foods
+    -
+  * - CSB ++
+    - corn soy blend plus
+    -
+  * - MNP
+    - Multiple micronutrient powders
+    -
 
 .. todo::
 
@@ -60,6 +77,43 @@ Small quantity lipid based nutrient supplements (SQ-LNS)
 
 Intervention Overview
 -----------------------
+
+:underline:`Lipid-based nutrient supplements`
+
+Supplementary feeding is a strategy that includes provision of extra
+food to children beyond the normal ration of their home diets
+and is aimed at improving the nutritional status or preventing the
+nutritional deterioration of the target population. One of the nutritional
+interventions advocated to address malnutrition among children
+is **lipid-based nutrient supplements (LNS)**. LNS are a family of
+products designed to deliver nutrients to vulnerable people. They
+are considered 'lipid-based' because most of the energy provided
+by these products is from lipids (fats). All LNS provide a range of vitamins
+and minerals, but unlike most other micronutrient supplements,
+LNS also provide *energy, protein and essential fatty acids*. LNS recipes can include a variety of
+ingredients, but typically have included vegetable fat, peanut or
+groundnut paste, milk powder and sugar. Based on the energy content,
+LNS can be small quantity (SQ LNS) providing ˜ 110 to 120
+kcal/day (20 g dose), medium quantity (MQ LNS) providing ˜ 250 to
+500 kcal/day (45 g to 90 g dose) or large-quantity (LQ LNS) providing
+more than 280 kcal/day (> 90 g dose).LNS are nutrient dense, require no cooking before use, and can be
+stored for months even in warm conditions. [DAS_Cochrane_Review_2019]_
+
+:underline:`Alternative recipes and formulations, other than LNS`
+
+Alternative recipes and formulations, other than LNS, are currently
+being explored using cereals mixed with other ingredients, including
+whey, soy protein isolate, dried skimmed milk, and sesame,
+cashew and chickpea paste, among others. These are
+fortified with vitamins and minerals and are commonly called fortified
+blended foods (FBF). An example of a commonly used FBF
+is corn soy blend plus (CSB ++), which is a cooked blend of milled,
+heat-treated corn and soybeans that is fortified with a vitamin and
+mineral premix. Multiple micronutrient powders (MNP) are also an
+alternative way of providing micronutrients. These are single-dose
+packets of vitamins and minerals in powder form that can be sprinkled
+onto any ready to eat semi-solid food consumed at home,
+school or any other point of use. [DAS_Cochrane_Review_2019]_
 
 .. todo::
 
@@ -213,3 +267,15 @@ Assumptions and Limitations
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+References
+~~~~~~~~~~
+
+.. [DAS_Cochrane_Review_2019] 
+  
+  View `DAS_Cochrane_Review_2019`_
+
+    Preventive lipid‐based nutrient supplements given with complementary foods to infants and young children 6 to 23 months of age for health, nutrition, and developmental outcomes
+
+.. _`DAS_Cochrane_Review_2019`: https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD012611.pub3/full
