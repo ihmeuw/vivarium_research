@@ -41,6 +41,8 @@ GBD 2019 Fatal Modeling Strategy
 
 We included vital registration data in a standard CODEm approach to model hypertensive heart disease. 
 
+[GBD-2019-Capstone-Appendix-HHD]_
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -92,52 +94,24 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-.. todo::
-
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+Hypertensive heart disease should occur at the incidence of HF in the DisMod model multiplied by the proportion of heart failure that is due to HHD. Heart failure due to HHD is then a chronic state without remission. Transition from prevalent HF due to hypertensive heart disease to death should occur at the GBD EMR rate from the HF DisMod model. The transition rate from the susceptible state to the prevalent state should be modified by systolic blood pressure and LDL-C. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+The proportion splits for HHD are the same for incidence and prevalence 
 
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: cause_model_hhd.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
-
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
 
 Definitions
 """""""""""
 
-This table contains the definitions of all the states in **cause model diagram**. 
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
-
-**SIR Model**
-
 .. list-table:: State Definitions
    :widths: 5 5 20
    :header-rows: 1
@@ -146,45 +120,16 @@ For example, the *Definitions* table for *SIR* and *With-Condition and Free of C
      - State Name
      - Definition
    * - S
-     - Susceptible
-     - Susceptible to {cause name}
-   * - I
-     - Infected
-     - Infected with {cause name}
-   * - R
-     - Recovered
-     - Infected with {cause name}
+     - **S**\usceptible to HHD
+     - Simulant that has not been diagnosed with HF due to HHD
+   * - P
+     - **P**\revalent HF due to HHD
+     - Simulant with prevalent HF due to HHD
 
-
-**With-Condition and Free of Condition Model**
-
-.. list-table:: State Definitions
-   :widths: 1, 5, 10
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - C
-     - With **C**\ ondition
-     - Born with {cause name}
-   * - F
-     - **F**\ ree of Condition
-     - Born without {cause name}
-
-Include states, their names and definitions appropriate to your model.
 
 States Data
 """""""""""
 
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. The common measures in each state are prevalence, birth prevalence, excess mortality rate and disability weights. 
-Cause specific mortality rate is the common measure for all states. In most of the models either prevalence or birth prevalence is used. 
-But in some rare cases like neonatal models both prevalence and birth prevalence are used in model initialization. The Value column contains the formula to calculate 
-the measure in each state.
-
-The structure of the table is as below. For each state, the measures and values must be included.
-
 .. list-table:: States Data
    :widths: 20 25 30 30
    :header-rows: 1
@@ -193,84 +138,38 @@ The structure of the table is as below. For each state, the measures and values 
      - Measure
      - Value
      - Notes
-   * - State
-     - prevalence
-     - 
-     - 
-   * - State
-     - birth prevalence
-     - 
-     - 
-   * - State
-     - excess mortality rate
-     - 
-     - 
-   * - State
-     - disabilty weights
-     - 
-     -
-   * - ALL
-     - cause specific mortality rate
-     - 
-     - 
-
-An example of SI model with both prevalence and birth prevalence in the initialization is given below to explain better. 
-
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
-     - Value
-     - Notes
+   * - All
+     - cause-specific mortality (CSMR)
+     - :math:`\frac{\text{deaths_c498}}{\text{population}}`
+     - Post CoDCorrect cause-level CSMR
    * - S
      - prevalence
-     - 1-prevalence_cid
+     - 1-prevalence_c498
      - 
-   * - S
-     - birth prevalence
-     - 1-birth_prevalence_cid
-     - 
+   * - P
+     - prevalence
+     - :math:`\sum\limits_{s\in sequelae} \text{prevalence}_s`
+     - There are 4 sequelae
    * - S
      - excess mortality rate
      - 0
      - 
+   * - P
+     - excess mortality rate
+     - emr_m2412
+     - EMR from the HF envelope model
    * - S
-     - disabilty weights
+     - disabilty weight
      - 0
      -
-   * - I
-     - prevalence
-     - prevalence_cid
-     - 
-   * - I
-     - birth prevalence
-     - birth_prevalence_cid
-     - 
-   * - I
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population} \times \text{prevalence_cid}}`
-     - = (cause-specific mortality rate) / prevalence
-   * - I
-     - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_cid}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = total disability weight over all sequelae
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population}}`
+   * - P
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_c498}} \times \sum\limits_{s\in sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      - 
 
 Transition Data
 """""""""""""""
 
-This table contains the measures needed for transition from one state to other in the cause model. The common measures used are *incident rate* to 
-move from Susceptible to Infected and *remission rate* to move from Infected to Susceptible or Recovered states. Some times there may not be transition 
-between states as in Neonatal disorders.
-
-The structure of the table is as below. 
-
 .. list-table:: Transition Data
    :widths: 10 10 10 20 30
    :header-rows: 1
@@ -280,162 +179,77 @@ The structure of the table is as below.
      - Sink 
      - Value
      - Notes
-   * - i
+   * - 1
      - S
-     - I
-     - 
-     - 
-   * - r
-     - I
-     - R
-     -  
-     - 
- 
-
-An example, if the data is present in GBD,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
-     - S
-     - I
-     - :math:`\frac{\text{incidence_rate_cid}}{\text{1 - prevalence_cid}}`
-     - 
-   * - r
-     - I
-     - R
-     - remission_rate_cid
-     - 
-
-Sometimes, we might need to use *modelable entity id* to get data. Sometimes, we might need to calculate remission rate 
-based on average case duration. In that case, the row would look like,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - r
-     - I
-     - R
-     - remission_rate_cid :math:`= \frac{\text{365 person-days}}{\text{average case duration in days} \times \text{1 year}}`
-     - 
-   
+     - P
+     - :math:`{\text{incidence_m2412}} \times \text{propHHD}`
+     - This is the incidence of HF due to HHD, assuming that the split for incidence is the same as prevalence
 
 Data Sources
 """"""""""""
 
-This table contains the data sources for all the measures. The table structure and common measures are as below:
-
 .. list-table:: Data Sources
    :widths: 20 25 25 25
    :header-rows: 1
    
-   * - Measure
+   * - Value
      - Sources
      - Description
      - Notes
-   * - prevalence_cid
-     - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
-     - 
-   * - population
-     - 
-     - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_m1594
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
-     - 
-
-An example, that contains common sources for the measures,
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_cid
+   * - prevalence_c498
      - como
-     - Prevalence of cause
-     - 
-   * - birth_prevalence_cid
-     - como
-     - Birth prevalence of cause
-     -
-   * - deaths_cid
+     - Prevalence of HHD
+     - All HF-related sequelae
+   * - deaths_c498
      - codcorrect
-     - Deaths from cause
+     - Deaths from HHD
+     -
+   * - incidence_m2412
+     - como
+     - Incidence of overall HF
      - 
+   * - propHHD
+     - CVD Team
+     - Proportion of HF that is due to HHD
+     - Proportion file in /share/scratch
    * - population
      - demography
      - Mid-year population for given age/sex/year/location
      - 
-   * - sequelae_cid
-     - gbd_mapping
-     - List of sequelae
-     - 
-   * - incidence_rate_cid/mid
-     - como/dismod
-     - Incidence rate for cause
-     - 
-   * - remission_rate_cid/mid
-     - como/dismod
-     - Remission rate for cause
-     - 
-   * - disability_weight_s{`sid`}
-     - YLD appendix
-     - Disability weight of sequela with id `sid`
+   * - sequelae_c498
+     - gbd mapping
+     - List of 4 sequelae for HHD
      - 
    * - prevalence_s{`sid`}
      - como
      - Prevalence of sequela with id `sid`
      - 
-
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weight of sequela with id `sid`
+     - 
+   * - emr_m2412
+     - dismod-mr 2.1
+     - excess mortality rate of heart failure
+     - This is the EMR value for the overall HF envelope; not HHD-specific
+   * - sequelae
+     - sequelae definition
+     - {s5750, s406, s407, s408}
+     - 
 
 Validation Criteria
 +++++++++++++++++++
+
+1. Compare CSMR experienced by simulants to CSMR from CoDCorrect in GBD
+2. Compare prevalence experienced by simulants to post-COMO prevalence in GBD
 
 References
 ----------
 
 .. [NCBI] Tackling G, Borhade MB. Hypertensive Heart Disease. [Updated 2021 Feb 7]. 
   In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2021 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK539800/
+
+.. [GBD-2019-Capstone-Appendix-HHD]
+  Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
+
+.. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
