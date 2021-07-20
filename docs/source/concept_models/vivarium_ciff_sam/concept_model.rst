@@ -172,16 +172,16 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 5.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
 
-* Diarrheal Diseases (GBD 2019)
+* :ref:`Diarrheal Diseases (GBD 2019) <2019_cause_diarrhea>`
 
-* Lower Respiratory Infections (GBD 2019)
+* :ref:`Lower Respiratory Infections (GBD 2019) <2019_cause_lower_respiratory_infections>`
 
-* Measles (GBD 2019)
+* :ref:`Measles (GBD 2019) <2019_cause_measles>`
 
 5.1.2 Joint Cause-Risk Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Child Wasting / Protein Energy Malnutrition (GBD 2020)
+* :ref:`Child Wasting / Protein Energy Malnutrition (GBD 2020) <2020_risk_exposure_wasting_state_exposure>`
 
 5.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -190,19 +190,19 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 
 * Discontinued Breastfeeding
 
-* Child Stunting (GBD 2020)
+* :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
 
 * Low Birthweight and Short Gestation (GBD 2019)
 
 5.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Low Birthweight and Short Gestation Risk Effects (GBD 2019)
+* :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
 
 5.1.5 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Treatment and management for acute malnutrition
+* :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
 .. _5.2:
 
