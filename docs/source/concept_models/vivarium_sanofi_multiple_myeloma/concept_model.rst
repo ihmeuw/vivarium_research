@@ -461,7 +461,7 @@ For implementation in the model, each dichotomous risk factor exposure level wil
 
 .. math::
 
-  HR = \frac{h_\text{exposed}}{h_\text{unexposed}}
+  HR_\text{exposed:unexposed} = \frac{h_\text{exposed}}{h_\text{unexposed}}
 
 .. math::
 
@@ -471,29 +471,81 @@ So that,
 
 .. math::
 
-  h_\text{exposed} = \frac{h_\text{baseline}}{p_\text{exposed} + \frac{1 - p_\text{exposed}}{HR}}
+  h_\text{exposed} = \frac{h_\text{baseline}}{p_\text{exposed} + \frac{1 - p_\text{exposed}}{HR_\text{exposed:unexposed}}}
 
 and 
 
 .. math::
 
-  h_\text{unexposed} = \frac{h_\text{exposed}}{HR}
+  h_\text{unexposed} = \frac{h_\text{exposed}}{HR_\text{exposed:unexposed}}
 
 2.  Use covariate exposure level-specific hazard rate to solve for hazard ratio of each covariate exposure relative to the overall baseline hazard rate from the multiple myeloma cause model.
 
 .. math::
 
-  HR_\text{exposed} = \frac{h_\text{exposed}}{h_\text{baseline}}
+  HR_\text{exposed:baseline} = \frac{h_\text{exposed}}{h_\text{baseline}}
 
 .. math::
 
-  HR_\text{unexposed} = \frac{h_\text{unexposed}}{h_\text{baseline}}
+  HR_\text{unexposed:baseline} = \frac{h_\text{unexposed}}{h_\text{baseline}}
+
+The calculation described above, performed using the treatment duration and overall survival hazard rates for the first time period at the first line of treamtent referenced in the multiple myeloma cause model document for :math:`h_\text{baseline}`, the values in the *Risk Exposure Distributions for Risk Effects Calculation* table for :math:`p_\text{exposed}`, and the values in the *Risk Effects Table* for the :math:`HR_\text{exposed:unexposed}` values.
+
+.. list-table:: Risk Effects for Simulation Use
+  :header-rows: 1
+
+  * - Risk
+    - Risk exposure
+    - OS HR relative to baseline
+    - PFS HR relative to baseline
+  * - Age at diagnosis
+    - 65+ years
+    - 1.24 (1.16, 1.3)
+    - 1.17 (1.11, 1.23)
+  * - Age at diagnosis
+    - <65 years
+    - 0.57 (0.44, 0.71)
+    - 0.69 (0.59, 0.8)
+  * - Sex
+    - Male
+    - 1.26 (1.11, 1.38)
+    - 1.12 (1.02, 1.21)
+  * - Sex
+    - Female
+    - 0.7 (0.56, 0.87)
+    - 0.86 (0.76, 0.97)
+  * - Race/cytogenetic risk
+    - Black and high cytogenetic risk
+    - 1.52 (1.15, 1.91)
+    - 1.31 (1.06, 1.59)
+  * - Race/cytogenetic risk
+    - Black and standard cytogenetic risk
+    - 1.52 (1.15, 1.91)
+    - 1.31 (1.06, 1.59)
+  * - Race/cytogenetic risk
+    - Non-black and high cytogenetic risk
+    - 0.94 (0.85, 1.03)
+    - 0.96 (0.90, 1.02)
+  * - Race/cytogenetic risk
+    - Non-black and standard cytogenetic risk
+    - 0.53 (0.35, 0.79)
+    - 0.75 (0.62, 0.89)
+  * - Renal function
+    - Renal impaired
+    - 1.79 (1.36, 2.3)
+    - 1.37 (1.14, 1.61)
+  * - Renal function
+    - Not renal impaired
+    - 0.93 (0.89, 0.97)
+    - 0.97 (0.95, 0.99)
 
 3. Apply the hazard ratios specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for PFS and OS, as shown in the equation below.
 
+  for risk exposure(i) in under 65 at diagnosis/over 65 at diagnosis, male/female, Black and high cytogenetic risk/Black and low cytogenetic risk/non-Black and high cytogenetic risk/non-Black and low cytogenetic risk, renal impaired/not renal impaired:
+
 .. math::
 
-  h_\text{simulant} = h_\text{baseline} * HR_\text{sex(i)} * HR_\text{age(i)}  * HR_\text{race(i)} * HR_\text{cytogenetic risk(i), conditional on race(i)} * HR_\text{renal impairment(i)}
+  h_\text{simulant} = h_\text{baseline} * \prod HR_\text{risk exposure(i):baseline}
 
 .. note::
 
