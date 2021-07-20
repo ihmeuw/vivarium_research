@@ -527,8 +527,6 @@ Deriving wasting transition probabilities
 Wasting model
 ^^^^^^^^^^^^^
 
-.. image:: wasting_state_1x4_plus_death.svg
-
 This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
 Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
 the TMREL, it is necessary to include death to correctly derive our transition 
@@ -555,10 +553,6 @@ that follows we will detail how to calculate all the variables used
      - Equation
      - Description
      - Source
-   * - r2
-     - -ap0*f2/ap1 - ap0*f3/ap1 - ap0*f4/ap1 - t1 + ap2*d2/ap1 + ap2*i1/ap1 + ap3*d3/ap1 + ap4*d4/ap1
-     - Daily probability of remission into cat 2 from cat 1
-     - System of equations
    * - i1
      - ap0*f2/ap2 + ap0*f3/ap2 + ap0*f4/ap2 + ap1*r2/ap2 + ap1*t1/ap2 - d2 - ap3*d3/ap2 - ap4*d4/ap2
      - Daily probability of incidence into cat 1 from cat 2
