@@ -34,19 +34,17 @@ GBD 2019 Modeling Strategy
 GBD 2019 Non-Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  Add an overview of the GBD modeling section.
+In GBD, hypertensive heart disease is modeled as an outcome of the heart failure impairment envelope. Please see the Heart Failure non-fatal modeling section for details. 
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  Add an overview of the GBD modeling section.
+We included vital registration data in a standard CODEm approach to model hypertensive heart disease. 
 
 Cause Hierarchy
 +++++++++++++++
+
+.. image:: cause_hierarchy_hhd_reduced_HF.svg
 
 Restrictions
 ++++++++++++
@@ -63,29 +61,29 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - False
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
-     -
+     - 15
+     - [15, 19 years), age_group_id=8
    * - YLL age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235
    * - YLD age group start
-     -
-     -
+     - 15
+     - [15, 19 years), age_group_id=8
    * - YLD age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235
 
 
 Vivarium Modeling Strategy
