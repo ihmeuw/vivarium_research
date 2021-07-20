@@ -164,12 +164,45 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 
 .. _5.1:
 
-5.1 Vivarium concept model
---------------------------
+5.1 Vivarium concept model diagram
+----------------------------------
 
 .. image:: sam_concept_model_diagram.svg
 
+5.1.1 Cause Models
+~~~~~~~~~~~~~~~~~~
 
+* Diarrheal Diseases (GBD 2019)
+
+* Lower Respiratory Infections (GBD 2019)
+
+* Measles (GBD 2019)
+
+5.1.2 Joint Cause-Risk Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Child Wasting / Protein Energy Malnutrition (GBD 2020)
+
+5.1.3 Risk Exposure Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Non-exclusive Breastfeeding
+
+* Discontinued Breastfeeding
+
+* Child Stunting (GBD 2020)
+
+* Low Birthweight and Short Gestation (GBD 2019)
+
+5.1.4 Risk Effects Models
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Low Birthweight and Short Gestation Risk Effects (GBD 2019)
+
+5.1.5 Intervention Models
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Treatment and management for acute malnutrition
 
 .. _5.2:
 
