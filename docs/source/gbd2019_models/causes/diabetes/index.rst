@@ -18,6 +18,9 @@ Diabetes Mellitus (PAF of 1 with FPG)
   * - DM
     - Diabetes Mellitus
     - 
+  * - FPG
+    - Fasting Plasma Glucose
+    - 
 
 Disease Overview
 ----------------
@@ -35,19 +38,85 @@ GBD 2019 Modeling Strategy
 GBD 2019 Non-Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
-.. todo::
+**Diabetes prevalence and incidence**\
 
-  Add an overview of the GBD modeling section.
+.. list-table:: Diabetes Definitions
+   :widths: 12 28
+   :header-rows: 1
+
+   * - Diabetes Type
+     - Definition
+   * - Diabetes Mellitus parent
+     - Fasting plasma glucose (FPG) >= 126 mg/dL (7 mmol/L), or reporting to be on treatment with drugs or insulin for diabetes, or persons <15 years who are diagnosed by physicians and identified through a diabetic registry or hospital records
+   * - Diabetes Mellitus Type 1
+     - Cases of type 1 DM diagnosed by physicians and identified through a diabetic registry or hospital records
+   * - Diabetes Mellitus Type 2
+     - Fasting plasma glucose (FPG) >= 126 mg/dL (7 mmol/L) or reporting to be on drug or insulin treatment for type 2 diabetes
+
+We model overall DM and type 1 DM in DisMod-MR. Diabetes mellitus estimates are commonly not available by type. Furthermore, while sources will report their estimates as type 2, the diagnostic criteria in the methodological sections are often not sufficiently specific. We therefore calculated estimates of DM type 2 by subtracting the estimates of DM type 1 from the estimates for overall DM for each year, age, sex, and location. 
+
+**Diabetes Outcomes**\
+
+We estimated amputation due to DM, diabetic neuropathy, and diabetic foot for DM type 1 and DM type 2 using DisMod MR‐2.1. Vision loss due to DM is calculated as part of the vision impairment process. We then multiply all proportion draws from neuropathy/foot/amputation models by the parent diabetes model so that all estimates are in the same population‐space. The sum of all DM outcomes cannot exceed 90% of the prevalence of total prevalence for type 1 and type 2.  
+
+Disability weights are calculated for each of the diabetes sequela.  
+
+**Severity distributions**\
+
+We determined the disability weights for each sequela from the GBD disability weight survey. The table below illustrates the severity levels, lay descriptions, and associated disability weights applicable for outcomes related to DM type 1 and DM type 2: 
+
+.. list-table:: Severity distribution for diabetes
+   :widths: 15 25 12
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - DW (95% CI)
+   * - Uncomplicated Diabetes Mellitus
+     - Has a chronic disease that requires medication every day and causes some worry, but minimal interference with daily activities
+     - 0.049 (0.031 - 0.072)
+   * - Diabetic neuropathy
+     - Has pain, tingling, and numbness in the arms, legs, hands, and feet. The person sometimes gets cramps and muscle weakness. 
+     - 0.133 (0.089 - 0.187)
+   * - Diabetic neuropathy with diabetic foot
+     - Has a sore on the foot that is swollen and causes some difficulty in walking. 
+     - 0.15 (0.102 - 0.208)
+   * - Diabetic neuropathy with treated amputation
+     - Has lost part of one leg, leaving pain and tingling in the stump. The person has an artificial leg that helps in moving around. 
+     - 0.167 (0.114 - 0.229)
+   * - Diabetic neuropathy with untreated amputation   
+     - Has lost part of one leg, leaving pain and tingling in the stump. The person does not have an artificial leg, has frequent sores, and uses crutches. 
+     - 0.282 (0.198 - 0.379)
+   * - Moderate vision loss due to Diabetes Mellitus
+     - Has vision problems that make it difficult to recognize faces or objects across a room. 
+     - 0.031 (0.019 - 0.049)
+   * - Severe vision loss due to Diabetes Mellitus   
+     - Has severe vision loss, which causes difficulty in daily activities, some emotional impact (for example worry), and some difficulty going outside the home without assistance.  
+     - 0.184 (0.125 - 0.259)
+   * - Blindness due to Diabetes Mellitus
+     - Is completely blind, which causes great difficulty in some daily activities, worry and anxiety, and great difficulty going outside the home without assistance.
+     - 0.187 (0.124 - 0.26)
+
+[GBD-2019-Capstone-Appendix-diabetes]_
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
-.. todo::
+We included vital registration and verbal autopsy data in CODEm to model deaths directly attributed to DM for type 1 and type 2 combined. For verbal autopsy data, we outliered data points from sources where there were zero deaths estimated in an age group as this was not realistic for deaths due to diabetes and we determined that these data sources were unreliable. We outliered all vital registration data from the India Medical Certification of Cause of Death report since the source of the data was unreliable according to expert opinion. We also outliered vital registration data which used the ICD9BTL coding system and that were inconsistent with the rest of the data series and created unlikely time trends.  
 
-  Add an overview of the GBD modeling section.
+Type-specific diabetes mellitus mortality was estimated using deaths from vital registration sources in ICD-10 codes only. Diabetes type-specific information was not available in ICD-9 codes or deaths determined by verbal autopsy.  
+
+[GBD-2019-Capstone-Appendix-diabetes]_
+
+Fasting plasma glucose (FPG)
+++++++++++++++++++++++++++++
+
+The GBD study used an ensemble distribution methodology to estimate the prevalence of diabetes based on mean FPG values in locations where data on the prevalence of diabetes was not available. The same ensemble methodology was used to predict mean FPG from diabetes prevalence. 
 
 Cause Hierarchy
 +++++++++++++++
+
+.. image:: cause_hierarchy_diabetes_2.svg
 
 Restrictions
 ++++++++++++
@@ -56,7 +125,7 @@ The following table describes any restrictions in GBD 2019 on the effects of
 this cause (such as being only fatal or only nonfatal), as well as restrictions
 on the ages and sexes to which the cause applies.
 
-.. list-table:: GBD 2019 Cause Restrictions
+.. list-table:: GBD 2019 Cause Restrictions for DM type 2
    :widths: 15 15 20
    :header-rows: 1
 
@@ -64,29 +133,29 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - False
      -
    * - YLL only
-     -
+     - False
      -
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
-     -
+     - 15
+     - [15, 19 years), age_group_id=8
    * - YLL age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235
    * - YLD age group start
-     -
-     -
+     - 15
+     - [15, 19 years), age_group_id=8
    * - YLD age group end
-     -
-     -
+     - 125
+     - [95, 125 years), age_group_id=235
 
 
 Vivarium Modeling Strategy
@@ -443,3 +512,8 @@ References
 .. [NIDDK] What is Diabetes? National Institute of Diabetes and Digestive and Kidney Diseases, U.S. Department of Health and Human Services.
   Retrieved 22 June 2021.
   https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes.
+
+.. [GBD-2019-Capstone-Appendix-diabetes]
+  Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
+
+.. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
