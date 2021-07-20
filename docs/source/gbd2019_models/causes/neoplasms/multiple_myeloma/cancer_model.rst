@@ -380,20 +380,79 @@ Notably, the multiple myeloma mortality rate used to model excess mortality amon
 Estimate MM Prevalence by Disease Stage
 +++++++++++++++++++++++++++++++++++++++
 
-Burn-in method: current proposal is to assume the prevalence of MM from GBD 
-estimates evenly distributed across different stages of this disease. We let 
-simulation starts from 10 years prior to 2021-01-01 in order to correct the 
-distirbution of prevalence of MM by disease stage in 2021. Mathematically, the 
-distribution of MM prevalence in 2021 will be like :math:`m \times P^{n}`. Where 
-m is initial distribution of MM prevalence, P is transition probability matrix, 
-and n is burn-in period. To exam the estimated prevalence of MM and RRMM, we will 
-compare prevalence ratio of MM to RRMM (sum over prevalence of all MM relapse 
-stages) against ratio from SEER data in US. At the end, we expect that prev_MM > 
-prev_MM_first_relapse > prev_MM_second_relapse > ... > 
-prev_MM_fourth_or_higher_relapse in 2021.
+We used a ‘burn-in’ approach to estimate the prevalence of NDMM and the 
+prevalence of RRMM in a manner consistent with the incidence rates estimated 
+from GBD and the survival rates reported in Braunlin et al. To do this, we 
+started the simulation in 2011, 10 years prior to the start date of interest. 
+At this time point, a proportion of simulants equal to the age- and sex-specific 
+MM prevalence from GBD 2019 were initialized into the NDMM disease state; 
+no simulants were initialized into the RRMM disease state(s). We then let the 
+simulation run from 2011 to 2021, using an OS hazard and PFS hazard derived from 
+survival curves in Braunlin et al. (this analysis is described below) to inform 
+the probability that simulants died or progressed beyond the NDMM state and 
+updated the distribution of MM prevalence by disease states (NDMM, RRMM in first 
+relapse, RRMM in second relapse, etc.) accordingly.
 
-Survival Regression Model
--------------------------
+Mortality and Progression Hazard
+++++++++++++++++++++++++++++++++
+
+We used survival curves including overall survival and treatment duration that 
+differed by line of treatment from Braunlin et al. to estimate the time-varying 
+mortality and progression hazard for simulants at specific disease states and 
+corresponding lines of treatment. In short, a non-parametric Kaplan-Meier 
+estimator is used to calculate the baseline hazard rates. Mathematically:
+
+:math:`S_{t} = \prod_{j: \tau_{j} \leq t} \frac{N_{j} - D_{j}}{N_{j}}`
+
+Where,
+
+:math:`N_{j}` is the number of at-risk people at jth time; and
+:math:`D_{j}` is the number of event (e.g., death) at jth time.
+
+Based on the equation above, we can solve for D if N and S are given:
+
+:math:`S_{t} = S_{t-1} (1 - \frac{D_{t}}{N_{t}})`
+
+Then,
+
+:math:`D_{t} = N_{t} (1 - \frac{S_{t}}{S_{t-1}})`
+
+As survival probabilities were reported on a monthly basis in Braunlin et al., 
+we applied a piecewise constant interpolation to estimate single-day hazard to 
+be in accord with the simulation time step. 
+
+To incorporate stochastic uncertainty and apply different hazard rates for every 
+iteration of the simulation, we sampled many draws of :math:`S_{t}` based on its 
+variance derived from Greenwood’s formula, as describe below:
+
+:math:`Var(S_{t}) = S_{t}^2 \sum_{j: \tau_{j} \leq t} \frac{D_{j}}{(N_{j} - D_{j})N_{j}}`
+
+In the absence of progression-free survival from Flatiron Health data, we used 
+the treatment duration data reported in Braunlin et al. as a proxy for estimating 
+the progression free survival (PFS) hazard. For treatment duration, we associated 
+it with treatment cessation due to events of death and events of progression. 
+In other words, the event-free probabilities from treatment duration curves 
+accounted for both mortality and progression of MM. Therefore, the incidence of 
+relapse we implemented in our cause model is the consequence of subtracting the 
+OS hazard from the treatment duration hazard as a proxy measure for the PFS hazard.
+
+:math:`h(t)_{progression} = h(t)_{treatment\:duration} - h(t)_{overall\:survival}`
+
+Further, to be consistent with the consensus definition of OS, we used the hazard 
+rates derived from the OS data in Braunlin et al. to inform the `all-cause` 
+mortality rate among simulants with MM in our model. Therefore, deaths reported 
+in our model among MM patients may be due to causes other than MM. Notably, the 
+mortality and progression hazard rates estimated, as described in this section, 
+represent the population-level hazard rate of MM patients in the Flatiron Health 
+registry. We used these hazard rates to represent the population-level baseline 
+hazard rates for our model of the US population with MM. We then altered these 
+baseline hazard rates at the individual level according to individual simulant 
+characteristics including covariate and risk factor exposures as well as 
+treatment category.
+
+
+Survival Regression Model (unused)
+----------------------------------
 
 Model Overview
 ++++++++++++++
