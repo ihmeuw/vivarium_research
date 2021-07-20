@@ -214,11 +214,11 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - Location: Ethiopia
-  - Cohort type: Prospective open cohort of 0-5 years
-  - Size of largest starting population: 100,000 simulants
-  - Time span: Jan 1, 2022 to Dec 31, 2026
-  - Time step: 1 day
+- Location: Ethiopia
+- Cohort type: Prospective open cohort of 0-5 years
+- Size of largest starting population: 100,000 simulants
+- Time span: Jan 1, 2022 to Dec 31, 2026
+- Time step: 1 day
 
 
 .. _5.2.2:
