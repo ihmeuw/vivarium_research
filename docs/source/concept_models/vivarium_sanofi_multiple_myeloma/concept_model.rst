@@ -985,48 +985,75 @@ Additionally, we would like the *number* of simulants assigned to each treatment
 5.3.4 Patient registry model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+This simulation tracked which simulants were eligible for and included in a 
+registry. Inclusion criteria from Sanofi’s RRMM patient registry protocol was 
+used to determine who was eligible for inclusion. Of the individual simulants 
+eligible for inclusion, each had a 5% chance of being enrolled. 
+
 Inlcusion criteria
 ^^^^^^^^^^^^^^^^^^
 
-This model will track which simulants are included in a registry. To achieve this, 
-we need to know who is a registry candidate, and what factors affect the probability 
-they will be included in a registry. The registry is running for RRMM patients 
-(any newly incident RRMM cases developed from multiple myeloma and the pre-existing 
-RRMM cases at the start of the simulation). In general, we will use the criteria 
-listed below to decide who is eligible to be enrolled in the registry.
+According to Sanofi’s RRMM patient registry protocol, patients must meet all the 
+following criteria:
 
-  - 18 years and older
-  - With relapsed/refractory multiple myeloma (RRMM according to IMWG definition)
-  - First time using Isa (never received Isa for treatment of disease other than RRMM)
+ 1. 18 years and older
+ 2. With relapsed/refractory multiple myeloma (RRMM according to IMWG definition)
+ 3. First time using Isa (never received Isa for treatment of disease other than RRMM)
+ 4. No personal history of other malignant cancers in the past 3 years
 
-Besides age and disease status, there is another factor we need to consider for 
-making a simulant (with RRMM) a registry candidate. The eligibility for Isatuximab 
-treatment, which means this RRMM patient must have had at least one previous line 
-of treatment and was never previously treated with Isatuximab for diseases other 
-than RRMM.
+Criteria 1-3 above were included as criteria in the simulation. 1 and 2 
+were simulant characteristics based on the simulation design. 3 requires a 
+simulant with RRMM must have had at least one previous line of treatment but 
+have not been previously treated with isatuximab for diseases other than RRMM. 
+Based on discussion with Sanofi and our domain expert, we decided to not 
+incorporate 4, personal history of malignancy, as a determinant in registry 
+enrollment within the simulation as it introduced additional analytic complexity 
+and we expect this criterion to have a small impact on eligibility.  
 
 .. note::
  
- The eligibility of Isatuximab treatment might change based on the guidance from our clients.
+ We chose not to enforce inclusion criterion number 2 (with RRMM) for the 
+ alternative scenario in our simulation. The removal of this criterion allows us 
+ to demonstrate the potential additional number of eligible and enrolled patients 
+ if the registry were to accept NDMM patients at their first line of treatment in 
+ accordance with the modeled isatuximab scale-up in the first line of treatment 
+ in our alternative scenario.
 
 Power calculation
 ^^^^^^^^^^^^^^^^^
 
-To calculate the number of simulants in the registry for each calendar year from 
-2021 to 2025, we will use the equation presented below: 
+To calculate the number of simulants eligible for inclusion and the number of 
+simulants in the registry for each calendar year from 2021 to 2025, we used the 
+equation presented below: 
 
-:math:`N_{enroll}(t) = N_{0} + Prev_{RRMM}(t) \times F_{Isa} \times P`
+:math:`N_{candidate}(t) = Prev_{RRMM}(t) \times F_{Isa}`
+
+And,
+
+:math:`N_{enrollee}(t) = N_{candidate}(t) \times P`
 
 Where,
- - :math:`N_{enroll}(t)` is the number of simulants in the registry in year t.
- - :math:`N_{0}` is the number of simulants in the registry at the beginning of 
-   the simulation. (2021-01-01)
+ - :math:`N_{candidate}(t)` is the number of registry candidates in year t.
+ - :math:`N_{enrollee}(t)` is the number of simulants in the registry in year t.
  - :math:`Prev_{RRMM}(t)` is the number of adult (15+ in our sim) prevalent RRMM 
    cases in year t.
  - :math:`F_{Isa}` is the proportion of population eligible for Isatuximab treatment.
  - :math:`P` is the proportion of registry candidates that will be selected into 
    the registry. We assume P is a constant number equal to **5%** over time.
 
+Registry enrollment system
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We set January 1, 2021 as the start date of the registry and assumed that no 
+one was in the registry prior to the start date. At each simulation time step, 
+we looked at each simulant’s disease status and treatment history. If an 
+individual simulant met the inclusion criteria, they were eligible for inclusion. 
+Those eligible had a 5% chance of being enrolled, and they would stay in the 
+registry until death. The probability used to enroll eligible simulants into the 
+registry is a constant variable over the course of the simulation, independent 
+from simulant’s age, sex, race, cytogenetic risk, and renal function. We captured 
+two measures from the patient registry component: the cumulative number of eligible 
+simulants; and the cumulative number of living simulants in the registry.  
 
 .. _mm5.4:
 
