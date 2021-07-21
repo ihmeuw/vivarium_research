@@ -430,7 +430,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Black
     - Non-Black
     - Age
-    - Reference group from Derman et al. is white, which we are using as a proxy for the non-Black racial group due to the absence of more detailed data
+    - PENDING POTENTIAL UPDATE/ALTERNATVE VALUE. Reference group from Derman et al. is white, which we are using as a proxy for the non-Black racial group due to the absence of more detailed data
   * - Cytogenetic risk | non-Black
     - 1.8 (1.3, 2.7)
     - 1.3 (1.0, 1.6)
@@ -452,6 +452,11 @@ The table below reports hazard ratios for overall survival and progression free 
     - Not impaired
     - Age
     - Impairment defined as eGFR less than 60. No suspected confounding by race
+
+
+.. note::
+
+  The hazard ratios for race may be updated either to 1 or to a meta-analyzed value. This update may be intended to replace the existing value OR be run as an alternate value for comparison to the existing value.
 
 Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution (`sampling instructions`_). For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
 
