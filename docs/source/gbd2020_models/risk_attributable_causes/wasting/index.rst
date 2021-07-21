@@ -261,8 +261,12 @@ food introduction. Prior to 6mo, interventions to reduce DALYs focus on
 breastfeeding and reduction of LBWSG. 
 
 
-Protein Energy Malnutrition in GBD 2020
-+++++++++++++++++++++++++++++++++++++++
+Protein Energy Malnutrition in GBD 2019/2020
+++++++++++++++++++++++++++++++++++++++++++++
+
+.. important::
+  
+  We will use PEM 2019 model (with a 2020 wasting model) because PEM 2020 is not completed. Once PEM 2020 is completed (expected July 30th), we will update to a PEM 2020 model. 
 
 PEM is responsible for both fatal and nonfatal outcomes within the GBD 
 framework. GBD maintains a cause of death model called "Nutritional 
@@ -315,6 +319,7 @@ estimation, which the GBD team accounts for. The appendix specifically mentions
 using the Tombstone report to estimate deaths due to the famine during the Great 
 Leap Forward in the 1960s in China. [GBD-2019-Capstone-Appendix-Wasting]_
 
+
 PEM Nonfatal Model
 ------------------
 GBD's nonfatal PEM model takes as its case definition "moderate and severe acute 
@@ -323,7 +328,7 @@ WHO 2006 growth standard for children. The relevant ICD 10 codes are E40-E46.9,
 E64.0, and ICD 9 codes are 260-263.9. PEM is partitioned into the following four 
 sequelae: [GBD-2019-Capstone-Appendix-Wasting]_
 
-.. list-table:: Nonfatal PEM Sequelae
+.. list-table:: Nonfatal PEM Sequelae 2019/2020
   :widths: 10 15 15 15 
   :header-rows: 1
   
@@ -350,7 +355,7 @@ sequelae: [GBD-2019-Capstone-Appendix-Wasting]_
 
 These are mapped onto clinically-defined wasting states as follows:
 
-.. list-table:: Clinical definitions
+.. list-table:: Clinical definitions 2019/2020
   :widths: 5 10
   :header-rows: 1
   
@@ -367,7 +372,7 @@ oedema".
 
 The nonfatal estimation pipeline comprises five models:
 
-.. list-table:: Nonfatal PEM sub-models
+.. list-table:: Nonfatal PEM sub-models 2019/2020
   :widths: 15 5 5
   :header-rows: 1
   
@@ -867,9 +872,6 @@ Wasting x Disease model
 .. image:: wasting_state_2x4.svg
 
 
-
-
-
 Data Description Tables
 +++++++++++++++++++++++
 
@@ -889,6 +891,57 @@ Data Description Tables
      - disability weight
      - :math:`\frac{{\sum_{sequelae\in \text{SAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{SAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for SAM
+   * - MAM & SAM 
+     - excess mortality 
+     - :math:`\frac{\text{deaths_c387}}{\text{population} \times \text{prevalence_c387}}`
+     - death counts come from codecorrect
+   * - All
+     - cause specific mortality
+     - :math:`\frac{\text{deaths_c387}}{\text{population}}`
+     - death counts come from codecorrect
+
+.. note::
+  
+  The 2020 Codecorrect model for PEM is not yet completed. Check here on central machinary to see latest codecorrect modeling.
+  https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2020+CodCorrect+Tracking
+ 
+  and here for scheduled finishing time (currently scheduled to complete on july 30th- 12July2021)
+  https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2020+Release+1+Computation
+
+
+The following code can be used to access draw-level deaths for PEM
+
+.. code-block:: python
+    
+  # GBD 2019 (this is the version we will use for PEM for now)
+
+   get_draws(gbd_id_type = 'cause_id',
+          gbd_id = [387], #pem
+          source = "codcorrect",
+          metric_id = 1, #counts
+          measure_id = 1, #deaths
+          location_id = [179],
+          sex_id = [1,2],
+          age_group_id = [4,5],
+          gbd_round_id = 6,
+          year_id  =2019,
+          decomp_step = 'step5')
+
+
+  # GBD 2020 (not fully formed)
+
+  get_draws(gbd_id_type = 'cause_id',
+          gbd_id = [387], #pem
+          source = "codcorrect",
+          metric_id = 1, #counts
+          measure_id = 1, #deaths
+          location_id = [179],
+          sex_id = [1,2],
+          age_group_id = [388,389,238,34],
+          gbd_round_id = 7,
+          year_id  = 2020,
+          decomp_step = 'step3', #this is the latest decomp step,  will get updated
+          version_id = 260) #this is the latest version, will get updated
 
 
 .. list-table:: PEM Data Sources and Definitions
@@ -908,16 +961,80 @@ Data Description Tables
      - {s2036, s199}
      - Severe wasting with eodema, severe wasting without oedema
 
-Note we pull the above sequelae by using:
+.. note::
+  
+  The 2020 Como model for PEM is not yet completed, with only 100 draw. Check here on central machinary to see latest como modeling.
+  https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking
+
+
+To pull PEM sequelae prevalence, use the following code
 
 .. code-block:: python
+ 
+ #GBD 2019
+
+ get_draws(gbd_id_type = 'sequela_id',
+          gbd_id = [198,2033,2036,199],
+          source = "como",
+          location_id = [179],
+          sex_id = [1,2],
+          age_group_id = [2,3,4,5],
+          gbd_round_id = 6,
+          decomp_step = 'step5')
+
+
+ #GBD 2020 (currently only 100 draws)
+
+  get_draws(gbd_id_type = 'sequela_id',
+          gbd_id = [198,2033,2036,199],
+          source = "como",
+          location_id = [179],
+          sex_id = [1,2],
+          age_group_id = [2,3,388,389,238,34],
+          gbd_round_id = 7,
+          decomp_step = 'iterative')
+
+
+  #as well as from db_queries
 
   from db_queries import get_sequela_metadata
   
   hierarchy_2019 = get_sequela_metadata(sequela_set_id=2, gbd_round_id=6, decomp_step="step4")
-  hierarchy_2019.loc[(hierarchy_2019.cause_id==387)]
+  hierarchy_2019.loc[(hierarchy_2019.cause_id==387)] #2019
 
-.. list-table:: PEM Restrictions
+.. list-table:: PEM Restrictions 2019
+   :widths: 10 10 20
+   :header-rows: 1
+
+   * - Restriction type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     - 
+   * - Female only
+     - False
+     - 
+   * - YLL only
+     - False
+     - 
+   * - YLD only
+     - False
+     - 
+   * - YLL age group start
+     - Post Neonatal
+     - age_group_id = 4
+   * - YLL age group end
+     - 95 plus
+     - age_group_id = 235
+   * - YLD age group start
+     - Early Neonatal
+     - age_group_id = 2
+   * - YLD age group end
+     - 95 Plus
+     - age_group_id = 235
+
+.. list-table:: PEM Restrictions 2020
    :widths: 10 10 20
    :header-rows: 1
 
@@ -949,7 +1066,7 @@ Note we pull the above sequelae by using:
      - 95 Plus
      - age_group_id = 235
 
-.. list-table:: Wasting Restrictions
+.. list-table:: Wasting Restrictions 2020
    :widths: 10 10 20
    :header-rows: 1
 
@@ -971,6 +1088,19 @@ Note we pull the above sequelae by using:
    * - Age group end
      - 2 to 4
      - age_group_id = 34
+
+.. code-block:: python
+
+  #age group id differences between 2019 and 2020
+
+  #2020 age ids
+  early nn = 2 
+  late nn = 3
+  1m-5m = 388   #2019 it was 4 = postneonatal
+  6m-11m = 389  #2019 it was 4 = postneonatal
+  12m-23m = 238 #2019 it was 5 = 1-5
+  2y-4y = 34    #2019 it was 5 = 1-5
+
 
 As we are building this model before the completion of GBD 2020, we 
 will need to calculate the PAFs ourselves, using the following equation:
