@@ -665,7 +665,7 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
 5.3.3.2 Treatment Modeling Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The treatment algorithm is described in this :download:`word document found here <treatment_algorithm.docx>`. We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
+We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
 
 Notably, because retreatment with anti-CD38 monoclonal antibodies (daratumumab and isatuxamib) is a critical component of the effect of these drugs, we aim to model a "burn-in" period prior to the start of the official simulation timeframe (2021-2026) beginning at the first introduction of daratumumab as an anti-myeloma treatment in 2016. Modeling the scale-up of daratumumab and isatuxamib from this period will allow us to start our official simulation timeframe with the expected distribution of RRMM patients with prior anti-CD8 exposure in each RRMM state. A similar "burn-in" strategy was utilized to model the appropriate prevalence of each RRMM state in the multiple myeloma cause model, which is described in the :ref:`multiple myeloma cause model document <2019_cancer_model_multiple_myeloma>`.
 
@@ -832,7 +832,7 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - N/A
     - 1.002 (0.989, 1.018)
   * - Second
-    - 1.283 (0.878, 1.178)
+    - 1.283 (0.878, 1.718)
     - 1.632 (0.905, 2.733)
     - 1.146 (1.000, 1.318)
     - 1.333 (0.995, 1.702)
@@ -926,7 +926,7 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - N/A
     - 0.760 (0.645, 0.895)
     - N/A
-    - 1.015 (1.011, 1.018)
+    - 1.007 (1.003, 1.010)
   * - Second, Third, Fourth, Fifth+
     - 1.031 (0.960, 1.105)
     - 1.056 (0.928, 1.181)
