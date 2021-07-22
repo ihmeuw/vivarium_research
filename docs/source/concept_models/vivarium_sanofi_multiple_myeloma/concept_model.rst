@@ -166,7 +166,6 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 ----------------
 
 
-
 4.0 Intervention
 ++++++++++++++++
 
@@ -183,49 +182,34 @@ Among MM and RRMM patients, they expect to have:
 4.1 Simulation scenarios
 ------------------------
 
-To measure the impact of Isatuximab, we will simulate two scenarios, a baseline 
-scenario and an alternative scenario, outlined below. The underlying health state 
-of each simulant will be measured at each 28-day time step and the probability 
-that each simulant is treated will be dependent on the coverage stated in that 
-scenario. 
+To measure the impact of an isatuximab scale-up in the first line of treatment, we will simulate two scenarios, a baseline scenario and an alternative scenario, outlined below. The underlying health state of each simulant will be measured at each 28-day time step and the probability that each simulant is treated will be dependent on the coverage stated in that scenario. 
 
-`We might stratify the treatment covearge rates by simulant’s cytogenetic risk 
-level, renal function, age, sex, and race/ethnicity if Flatiron data support us 
-to do so.`
+**Baseline** Coverage of isatuximab in the first line of treatment will remain at its 2021 value of 0% for the duration of the simulation from 2021 to 2025.
 
-**Baseline** The baseline scenario will project GBD 2019 demographic and disease 
-trends out from 2021 to 2025. For the US general population, registry population, 
-and key sub-populations, Isatuximab will start to be available to simulants as a 
-second and later lines of regimen and ramp up to a coverage rate differ by line 
-of treatment in 2025 to simulate a business-as-usual treatment scenario.
+**Alternative** Coverage of isatuximab in the first line of treatment will scale-up linearly over the duration of the simulation from 0% in 2021 to 10% in 2025. 
 
-**Alternative** Most aspects of the alternative scenario will be the same as the 
-baseline scenario: it will project GBD 2019 demographic and disease trends out 
-from 2021 to 2025 and apply the same coverage rates of Isatuximab regimen (as 2+ 
-line treatment) specified in the baseline. In contrast to the baseline scenario, 
-Isatuximab in the alternative scenario will start to be available to simulants 
-as a frontline regimen and ramp up to 10% coverage at frontline in 2025 among 
-all simulated population.
+More details on treatment coverage in each simulation scenario can be found in the `5.3.3.2 Treatment Modeling Strategy`_ section.
 
+Additionally, we will perform several runs of the simulation baseline and alternative scenarios under different key parameter assumptions in order to perform sensitivity analyses that test the impact of different parameter values on simulation outcomes (the difference between scenarios). The two parameters and their respective assumed values we will include in this sensitivity analysis are listed below.
 
-In the absence of data from Flatiron, we made following assumptions:
- 1. The initial treatment coverage of Isatuximab is informed by Sanofi's 
-    commercial team.
- 2. The probability of simulants treated with Isatuximab is differ by lines of 
-    treatment and capped to not exceed 10% in 2025.
- 3. The coverage scale-up of Daratummumab follows the trend from IQVIA sales 
-    projection.
+1. Treatment effects (see the `5.3.3.2 Treatment Modeling Strategy`_ section for more detail)
 
-.. note::
+  1a. Flatiron Health based estimates
 
- According to IQVIA sales data, the total sales of Isatuximab equal to 
- 113 million dollars in 2021. The unit cost for a 12-month Isatuximab treatment 
- is about 145,600 dollars, that yields a total of 776 patients in year 2021 could 
- be treated with Isatuximab. In GBD 2019 summary, there were 89,566 prevalent MM 
- cases in 2019 for all ages and both sexes. As a result, the initial coverage of 
- Isatuximab is calculated to be 1% in 2021, and expect to reach 5% in 2026 based 
- on the slope derived from IQVIA sales projection. (~350% increase from 2021 to 
- 2026)
+  1b. Clinical trial based estimates
+
+2. Impact of race on survival outcomes (see the `5.3.2.2 Risk Factor Effects`_ section for more detail)
+
+  2a. Hazard ratios from the CoMMpass registry [Derman-et-al-2020]_
+
+  2b. Assumption of no impact of race on multiple myeloma survival outcomes
+
+Therefore, we will perform four different simulation runs of the alternative and baseline scenarios under each of the following conditions:
+
+- Run 1: 1a, 2a
+- Run 2: 1a, 2b
+- Run 3: 1b, 2a
+- Run 4: 1b, 2b
 
 .. _mm5.0:
 
@@ -398,9 +382,9 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
 5.3.2.2 Risk Factor Effects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The table below reports hazard ratios for overall survival and progression free survival for each covariate exposed group relative to the unexposed group. Notably, the effect of cytogenetic risk is modified by race exposure status. These hazard ratios are adjusted for age only. We chose hazard ratios unadjusted for treatment differences that we are not directly modeling (particularly ASCT) so that differences in prescribing practices by these risk exposures would be captured in these risk effects. However, these hazard ratios are *not* adjusted for each of the other risk factors that we are directly modeling aside from age, it is possible that these effects are confounded by one another (for instance, the effect of sex on survival may be confounded by renal impairment). Since the joint distributions of these risk exposures are unknown, we are unaware of the direction that this potential bias may impact our model. The hazard ratios shown in the table below were obtained from the data supplement in [Derman-et-al-2020]_.
+The table below reports hazard ratios for overall survival and progression free survival for each covariate exposed group relative to the unexposed group (excluding race and cytogenetic risk, which are presented in separate subsequent tables). These hazard ratios are adjusted for age only. We chose hazard ratios unadjusted for treatment differences that we are not directly modeling (particularly ASCT) so that differences in prescribing practices by these risk exposures would be captured in these risk effects. However, these hazard ratios are *not* adjusted for each of the other risk factors that we are directly modeling aside from age, it is possible that these effects are confounded by one another (for instance, the effect of sex on survival may be confounded by renal impairment). Since the joint distributions of these risk exposures are unknown, we are unaware of the direction that this potential bias may impact our model. The hazard ratios shown in the table below were obtained from the data supplement in [Derman-et-al-2020]_.
 
-.. list-table:: Risk Effects Table
+.. list-table:: Risk Effects Table (to inform all simulation runs)
   :header-rows: 1
 
   * - Parameter
@@ -424,13 +408,32 @@ The table below reports hazard ratios for overall survival and progression free 
     - <65
     - None
     - No suspected confounding by race. 
+  * - Renal function at diagnosis
+    - 1.9 (1.4, 2.6)
+    - 1.4 (1.1, 1.7)
+    - Impaired
+    - Not impaired
+    - Age
+    - Impairment defined as eGFR less than 60. No suspected confounding by race
+
+
+.. list-table:: Race and Cytogenetic Risk Effects Table (to inform 2a simulation runs)
+  :header-rows: 1
+
+  * - Parameter
+    - OS HR
+    - PFS HR
+    - Exposed group
+    - Unexposed group
+    - Adjustment variables
+    - Note
   * - Race
     - 1.7 (1.2, 2.4)
     - 1.4 (1.1, 1.8)
     - Black
     - Non-Black
     - Age
-    - PENDING POTENTIAL UPDATE/ALTERNATVE VALUE. Reference group from Derman et al. is white, which we are using as a proxy for the non-Black racial group due to the absence of more detailed data
+    - Reference group from Derman et al. is white, which we are using as a proxy for the non-Black racial group due to the absence of more detailed data
   * - Cytogenetic risk | non-Black
     - 1.8 (1.3, 2.7)
     - 1.3 (1.0, 1.6)
@@ -445,18 +448,31 @@ The table below reports hazard ratios for overall survival and progression free 
     - Standard
     - Age
     - Effect modified by race. High risk defined as the presence of at least one cytogenetic abnormality.
-  * - Renal function at diagnosis
-    - 1.9 (1.4, 2.6)
-    - 1.4 (1.1, 1.7)
-    - Impaired
-    - Not impaired
+
+.. list-table:: Race and Cytogenetic Risk Effects Table (to inform 2b simulation runs)
+  :header-rows: 1
+
+  * - Parameter
+    - OS HR
+    - PFS HR
+    - Exposed group
+    - Unexposed group
+    - Adjustment variables
+    - Note
+  * - Race
+    - 1
+    - 1
+    - Black
+    - Non-Black
+    - N/A
+    - Assumed effect size
+  * - Cytogenetic risk
+    - 1.6 (1.1, 2.1)
+    - 1.7 (1.3, 2.2)
+    - High
+    - Standard
     - Age
-    - Impairment defined as eGFR less than 60. No suspected confounding by race
-
-
-.. note::
-
-  The hazard ratios for race may be updated either to 1 or to a meta-analyzed value. This update may be intended to replace the existing value OR be run as an alternate value for comparison to the existing value.
+    - Effect from entire cohort in [Derman-et-al-2020]_, not stratified by race
 
 Assume a lognormal distribution of uncertainty within the confidence intervals reported in the table above. See the `5.3.3.2 Treatment Modeling Strategy`_ section for instructions on how to sample from this distribution (`sampling instructions`_). For the effect of cytogenetic risk among Black simulants (HR=1), sampling from a distribution is not required and a value of 1 should be used for all draws.
 
@@ -494,9 +510,11 @@ and
 
   HR_\text{unexposed:baseline} = \frac{h_\text{unexposed}}{h_\text{baseline}}
 
-The calculation described above, performed using the treatment duration and overall survival hazard rates for the first time period at the first line of treamtent referenced in the multiple myeloma cause model document for :math:`h_\text{baseline}`, the values in the *Risk Exposure Distributions for Risk Effects Calculation* table for :math:`p_\text{exposed}`, and the values in the *Risk Effects Table* for the :math:`HR_\text{exposed:unexposed}` values.
+The calculation described above, performed using the treatment duration and overall survival hazard rates for the first time period at the first line of treamtent referenced in the multiple myeloma cause model document for :math:`h_\text{baseline}`, the values in the *Risk Exposure Distributions for Risk Effects Calculation* table for :math:`p_\text{exposed}`, and the values in the *Risk Effects Table* for the :math:`HR_\text{exposed:unexposed}` values. 
 
-.. list-table:: Risk Effects for Simulation Use
+The values in the table below should be used for simulation implementation. Notably, different values for race/cytogenetic risk effects should be used dependening on the simulation run (2a or 2b, as described in the `4.1 Simulation scenarios`_ section). The same values for the age, sex, and renal function risk effects should be used for all simulation runs.
+
+.. list-table:: Final risk effects for simulation use (all simulation runs)
   :header-rows: 1
 
   * - Risk
@@ -519,6 +537,22 @@ The calculation described above, performed using the treatment duration and over
     - Female
     - 0.7 (0.56, 0.87)
     - 0.86 (0.76, 0.97)
+  * - Renal function
+    - Renal impaired
+    - 1.79 (1.36, 2.3)
+    - 1.37 (1.14, 1.61)
+  * - Renal function
+    - Not renal impaired
+    - 0.93 (0.89, 0.97)
+    - 0.97 (0.95, 0.99)
+
+.. list-table:: Final race/cytogenetic risk effects for 2a simulation use
+  :header-rows: 1
+
+  * - Risk
+    - Risk exposure
+    - OS HR relative to baseline
+    - PFS HR relative to baseline
   * - Race/cytogenetic risk
     - Black and high cytogenetic risk
     - 1.52 (1.15, 1.91)
@@ -535,14 +569,30 @@ The calculation described above, performed using the treatment duration and over
     - Non-black and standard cytogenetic risk
     - 0.53 (0.35, 0.79)
     - 0.75 (0.62, 0.89)
-  * - Renal function
-    - Renal impaired
-    - 1.79 (1.36, 2.3)
-    - 1.37 (1.14, 1.61)
-  * - Renal function
-    - Not renal impaired
-    - 0.93 (0.89, 0.97)
-    - 0.97 (0.95, 0.99)
+
+.. list-table:: Final race/cytogenetic risk effects for 2b simulation use
+  :header-rows: 1
+
+  * - Risk
+    - Risk exposure
+    - OS HR relative to baseline
+    - PFS HR relative to baseline
+  * - Race/cytogenetic risk
+    - Black and high cytogenetic risk
+    - 1.05 (1.02, 1.07)
+    - 1.06 (1.03, 1.08)
+  * - Race/cytogenetic risk
+    - Black and standard cytogenetic risk
+    - 0.66 (0.52, 0.84)
+    - 0.63 (0.49, 0.79)
+  * - Race/cytogenetic risk
+    - Non-black and high cytogenetic risk
+    - 1.05 (1.02, 1.07)
+    - 1.06 (1.03, 1.08)
+  * - Race/cytogenetic risk
+    - Non-black and standard cytogenetic risk
+    - 0.66 (0.52, 0.84)
+    - 0.63 (0.49, 0.79)
 
 3. Apply the hazard ratios specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for PFS and OS, as shown in the equation below.
 
@@ -819,9 +869,9 @@ For the burn-in period (both scenarios):
 
 Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (if a simulant is in the isa or dara treatment category and :code:`eligible_for_retreatment_i == True`, they should be assigned the retreated hazard ratios). The hazard ratios are shown in the tables below.
 
-We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. The population-based real world evidence treatment effect sizes should be used for the primary runs of the simulation (both for the baseline and alternative scenarios); the clinical trial effect sizes should be used for separate supplementary runs of the simulation (for the bsaeline and alternative scenarios) if/when time allows.
+We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence, as described in the `4.1 Simulation scenarios`_ section. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. 
 
-.. list-table:: Population-Based Progression Free Survival Hazard Ratios
+.. list-table:: Population-Based Progression Free Survival Hazard Ratios (1a simulation use)
   :header-rows: 1
 
   * - Line of Treatment
@@ -855,7 +905,7 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - 1.275 (0.981, 1.843)
     - 0.955 (0.822, 1.081)
 
-.. list-table:: Population-Based Overall Survival Hazard Ratios
+.. list-table:: Population-Based Overall Survival Hazard Ratios (1a simulation use)
   :header-rows: 1
 
   * - Line of Treatment
@@ -895,7 +945,7 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - 1.427 (0.834, 2.410)
     - 0.952 (0.744, 1.145)
 
-.. list-table:: Clinical Trial Progression Free Survival Hazard Ratios
+.. list-table:: Clinical Trial Progression Free Survival Hazard Ratios (1b simulation use)
   :header-rows: 1
 
   * - Line of Treatment
@@ -917,7 +967,7 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - 0.987 (0.892, 1.207)
     - 1.023 (0.627, 1.272)
 
-.. list-table:: Clinical Trial Overall Survival Hazard Ratios
+.. list-table:: Clinical Trial Overall Survival Hazard Ratios (1b simulation use)
   :header-rows: 1
 
   * - Line of Treatment
