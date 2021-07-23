@@ -222,6 +222,8 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 5.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* :ref:`Small quantity lipid based nutrient supplements (SQ-LNS) <lipid_based_nutrient_supplements>`
+
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
 .. _5.2:
