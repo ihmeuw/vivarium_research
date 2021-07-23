@@ -202,7 +202,7 @@ Additionally, we will perform several runs of the simulation baseline and altern
 
   2a. Hazard ratios from the CoMMpass registry [Derman-et-al-2020]_
 
-  2b. Assumption of no impact of race on multiple myeloma survival outcomes
+  2b. Assumption of no impact of race on multiple myeloma survival outcomes independent of age
 
 Therefore, we will perform four different simulation runs of the alternative and baseline scenarios under each of the following conditions:
 
@@ -465,7 +465,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Black
     - Non-Black
     - N/A
-    - Assumed effect size
+    - Assumed effect size pending confirmation from client feedback
   * - Cytogenetic risk
     - 1.6 (1.1, 2.1)
     - 1.7 (1.3, 2.2)
@@ -593,6 +593,10 @@ The values in the table below should be used for simulation implementation. Nota
     - Non-black and standard cytogenetic risk
     - 0.66 (0.52, 0.84)
     - 0.63 (0.49, 0.79)
+
+.. note::
+
+  The values in the *Final race/cytogenetic risk effects for 2b simulation use* table are pending confirmation and could change based on client feedback
 
 3. Apply the hazard ratios specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for PFS and OS, as shown in the equation below.
 
