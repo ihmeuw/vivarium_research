@@ -197,10 +197,32 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 5.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
+* Non-exclusive Breastfeeding Risk Effects
+
+* Discontinued Breastfeeding Risk Effects
+
+* Child Stunting Risk Effects
+
+* Child Wasting Risk Effects
+
 * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
 
-5.1.5 Intervention Models
+5.1.5 Risk-Risk Correlation Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* LBWSG-Stunting Correlation
+
+* LBWSG-Wasting Correlation
+
+5.1.6 Feedback Loop Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Fedback Between Wasting and Infectious Diseases (Diarrhea, LRI, Measles)
+
+5.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* :ref:`Small quantity lipid based nutrient supplements (SQ-LNS) <lipid_based_nutrient_supplements>`
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
