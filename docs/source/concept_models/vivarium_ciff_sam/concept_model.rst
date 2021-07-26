@@ -34,7 +34,7 @@
 .. _2019_concept_model_vivarium_ciff_sam:
 
 ===========================
-Vivarium ACUTE MALNUTRITION
+Vivarium acute malnutrition
 ===========================
 
 .. contents::
