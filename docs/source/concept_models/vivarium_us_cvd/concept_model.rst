@@ -221,8 +221,8 @@ Variations on the above intervention increased support time or added meal replac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Cohort type: 
-  	- Prospective open cohort of adults aged 25 and above. New agents should age into the population at age_start
-  	- Size of largest starting population: 100,000 simulants
+  	- Prospective closed cohort starting at age 3. Youngest simulants will be turning 25 when the simulation ends. Ages 3-25 will be modeled but not observed.
+  	- Size of largest tracked population: 100,000 simulants
   - Cohort length:
   	- year_start: January 1, 2019
   	- year_end: December 31, 2040
