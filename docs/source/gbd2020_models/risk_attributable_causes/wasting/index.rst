@@ -436,7 +436,7 @@ Cause Hierarchy
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-.. image:: vivarium_wasting_model.svg
+.. image:: vivarium_wasting_model_with_t1.svg
 
 We will model wasting in four compartments: TMREL, Mild, Moderate, and Severe.
 In a given timestep a simulant will either stay put, transition to an adjacent 
@@ -875,7 +875,7 @@ Wasting x Disease model
 Data Description Tables
 +++++++++++++++++++++++
 
-.. list-table:: PEM State Data
+.. list-table:: Wasting State Data
    :widths: 5 10 10 20
    :header-rows: 1
 
@@ -883,9 +883,36 @@ Data Description Tables
      - Measure
      - Value
      - Notes
+   * - TMREL, MOD, MAM, SAM
+     - birth prevalence
+     - :math:`prevalence_{240_{cat-1-4}}`
+     - Use prevalence of age_group_id = 2 (early neonatal)
+
+.. code-block:: python
+
+   #to pull GBD 2020 category specific prevalence of wasting
+
+    get_draws(gbd_id_type='rei_id',
+                    gbd_id=240,
+                    source='exposure',
+                    year_id=2020,
+                    gbd_round_id=7,
+                    status='best',
+                    location_id = [179],
+                    decomp_step = 'iterative')
+
+
+.. list-table:: Wasting State Data
+   :widths: 5 10 10 20
+   :header-rows: 1
+  
+   * - State
+     - Measure
+     - Value
+     - Notes
    * - MAM
      - disability weight
-     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in \text{MAM}} \scriptstyle{\text{prevalence}_s}}}`
+     - :math:`\frac{{\sum_{sequelae\in \text{MAM}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{{\sum_{sequelae\in xt{MAM}} \scriptstyle{\text{prevalence}_s}}}`
      - disability weight for MAM
    * - SAM
      - disability weight
@@ -1186,6 +1213,24 @@ Note the RRs should be pulled as follows:
    - :math:`-log(1 - i3) * 365`
    - Incidence rate (counts/person-year) from TMREL to mild wasting
 
+Validation 
+++++++++++
+
+Wasting model
+
+  - prevalence of cat 1-4
+  - the incidences and the recovery rates (with our calibration inputs, can be accessed in interative sim)
+  - death rates per category
+  - relative risks (this would be done in the cause model validation)
+  - SAM and MAM duration (including who recovered from t1 arrow vs. r2 arrow)
+  - fertility (total person-time vs. year)
+
+PEM model
+
+  - prevalences
+  - csmr 
+  - emr
+  - we are not validating against GBD incidence or remission
 
 References
 ++++++++++
@@ -1209,5 +1254,4 @@ References
 
 .. [WHO-Malnutrition-Wasting]
     Retrieved 25 June 2021.
-    https://www.who.int/news-room/q-a-detail/malnutrition
-    
+    https://www.who.int/news-room/q-a-detail/malnutri
