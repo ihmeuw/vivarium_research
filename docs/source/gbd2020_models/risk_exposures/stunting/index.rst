@@ -289,6 +289,12 @@ Restrictions
    * - YLL age group end
      - 2y - 4y
      - 2 - 5 year age_group_id = 34
+   * - YLD age group start
+     - post-neonatal 
+     - 1 - 5 month, age_group_id = 388 
+   * - YLD age group end
+     - 2y - 4y
+     - 2 - 5 year age_group_id = 34
 
 .. code-block:: Python
 	  
