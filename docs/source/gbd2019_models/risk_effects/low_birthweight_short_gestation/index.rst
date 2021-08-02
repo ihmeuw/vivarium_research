@@ -141,6 +141,8 @@ haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria
 that reverse causality could not be excluded.**
 [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
+.. _lbwsg_affected_causes_table_gbd_2019:
+
 .. list-table:: Entities Affected by LBWSG in GBD 2019
    :widths: 5 5 5 5 5
    :header-rows: 1
@@ -588,11 +590,34 @@ Implementation of RR Interpolation in SciPy
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
 
-.. todo::
+We will follow the same strategy detailed in the :ref:`GBD 2017 LBWSG
+documentation <riks_effects_vivarium_section>`, with modifications to account
+for the continuous relative risk function defined by the interpolation method
+described above. In particular, we will need to compute a PAF for the
+interpolated RRs rather than using the PAF from GBD.
 
-  List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
+The relative risk of each LBWSG category in GBD is for *all-cause mortality* in
+the early and late neonatal periods. However, GBD identifies only a *subset* of
+causes (not *all* causes) that are affected by LBWSG, listed in the
+:ref:`affected entities table above <lbwsg_affected_causes_table_gbd_2019>`.
+Therefore, despite the RR's being measured for *all*-cause mortality, **we are
+interested in applying the relative risks only to the cause-specific mortality
+rates of the causes that GBD considers to be affected by LBWSG.**
 
-.. list-table:: Risk Outcome Relationships for Vivarium
+First we decompose the all-cause mortality rate (ACMR) as the sum of:
+
+   - Mortality from causes **affected** by LBWSG and **modeled** in the sim
+   - Mortality from causes **affected** by LBWSG but **not modeled** in the sim
+   - Mortality from causes **unaffected** by LBWSG and **modeled** in the sim
+   - Mortality from causes **unaffected** by LBWSG but **not modeled** in the sim
+
+We want to apply the relative risk and PAF only to the causes in the first two
+categories above. Specifically, we will apply the relative risks to the *excess
+mortality rate* (EMR) of modeled affected causes, and to the *cause-specific
+mortality rate* (CSMR) of unmodeled affected causes, as indicated in the
+following table.
+
+.. list-table:: Risk-Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -601,10 +626,65 @@ Affected Outcomes in Vivarium
      - Outcome ID
      - Affected measure
      - Note
-   * -
+   * - Diarrheal diseases
+     - Cause
+     - 302
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Lower respiratory infections
+     - Cause
+     - 322
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Upper respiratory infections
+     - Cause
+     - 328
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Otitis media
+     - Cause
+     - 329
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Meningitis
+     - Cause
+     - 332
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Encephalitis
+     - Cause
+     - 337
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Neonatal preterm birth
+     - Cause (PAF-of-1)
+     - 381
+     - CSMR if unmodeled, EMR if modeled
+     - **Note:** Preterm birth may need to be handled differently if explicitly modeled
+   * - Neonatal encephalopathy due to birth asphyxia and trauma
+     - Cause
+     - 382
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Neonatal sepsis and other neonatal infections
+     - Cause
+     - 383
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Hemolytic disease and other neonatal jaundice
+     - Cause
+     - 384
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Other neonatal disorders
+     - Cause
+     - 385
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Sudden infant death syndrome
+     - Cause
+     - 686
+     - CSMR if unmodeled, EMR if modeled
      -
 
 Risk Outcome Pair #1
