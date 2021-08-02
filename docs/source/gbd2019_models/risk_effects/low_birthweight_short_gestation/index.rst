@@ -736,6 +736,118 @@ Validation and Verification Criteria
 
   List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
 
+Validation of Mortality Rates, Relative Risks, and Change in Exposure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here is a validation that can be run in isolation prior to putting the LBWSG model into a full simulation with other model components:
+
+#.  Initialize a birth cohort with birthweights and gestational ages
+    distributed according to the LBWSG exposure distribution at birth
+    (age_group_id=164).
+
+#.  Age the population to 7 days and to 28 days, subjecting the population to
+    the LBWSG relative risks of all-cause mortality based on their LBWSG
+    category.
+
+#.  Record the person-time in the early neonatal age group (0-7 days) and late
+    neonatal age group (7-28 days) **in each of the 58 LBWSG categories**. Use
+    the person time to compute the person-time-weighted average prevalence of
+    each LBWSG catgory in each age group as
+
+    .. math::
+
+      \left(\genfrac{}{}{0}{}
+        {\text{person-time-weighted}}
+        {\text{average prevalence}}\right)
+      = \frac
+        {\text{person-time in category for age group}}
+        {\text{total person time for age group}},
+
+    and compare the simulated prevalences with the ENN and LNN category
+    prevalences pulled from GBD.
+
+#.  Record deaths in the ENN and LNN age groups, and compare the mortality
+    rates with the corresponding all-cause mortality rates in GBD. Deaths could
+    also be stratified by LBWSG category to verify simulated RRs against the RR
+    input data.
+
+This validation could be run with increasing degrees of complexity:
+
+a.  Apply the RRs directly to the all-cause mortality rate of the simulants. (Or
+    did we already try this and decide it was a bad idea? See this :ref:`Todo
+    about different approaches <2017_risk_lbwsg_todo_alternative_approaches>`
+    and the :ref:`assumptions and limitations of our approach to applying the
+    relative risks <2017_risk_lbwsg_rr_strategy_assumptions_limitations>` in the
+    GBD 2017 LBWSG model.)
+
+b.  Do not explicitly model any causes, but distinguish between causes affected
+    by LBWSG vs. unaffected by LBWSG, and apply the RRs only to the CSMRs of the
+    affected causes.
+
+c.  Add in one or more explicitly modeled causes, and apply the the RRs to the
+    EMR or CSMR of the affected causes, depending on whether the cause is
+    explicitly modeled.
+
+d.  The validation could also be done by initializing a cohort in the ENN age
+    group or LNN age group based on GBD prevalences, to ensure that the LBWSG
+    relative risks will work correctly for simulants initialized into these age
+    groups in our models.
+
+This validation strategy requires recording outputs stratified by all 58 LBWSG
+exposure categories, so it would be best to do the validation with as few model
+components as possible, then remove the stratified outputs once satisfactory
+behavior has been verified. In fact, it would be worth writing a reusable
+simulation specifically to do the (a), (b), and (d) validations above,
+independent of any specific project we're working on, and do the (c) validation
+for each project that uses LBWSG, depending on which causes are modeled.
+
+.. note::
+
+  We should ask the GBD modelers exactly how to interpret the ENN and LNN
+  prevalences pulled from GBD. According to
+  [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 175), the final step
+  of modeling LBWSG exposure is:
+
+    **Step C: Model joint distributions from birth to the end of the neonatal period, by l/y/s**
+
+    Early neonatal prevalence and late neonatal prevalence were estimated using
+    life table approaches for each 500g and 2-week bin. Using the all-cause
+    early neonatal mortality rate for each location-year-sex, births per
+    location-year-sex-bin, and the relative risks for each location-year-sex-bin
+    in the early neonatal period, the all-cause early neonatal mortality rate
+    was calculated for each location-year-sex- bin. The early neonatal mortality
+    rate per bin was used to calculate the number of survivors at seven days and
+    prevalence in the early neonatal period. Using the same process, the
+    all-cause late neonatal mortality rate for each location-year-sex was paired
+    with the number of survivors at seven days and late neonatal relative risks
+    per bin to calculate late neonatal prevalence and survivors at 28 days.
+
+  Specifically, we should ask the following:
+
+  - How exactly were the ENN and LNN prevalences computed in the above life
+    table approach? In particular:
+
+    - Can we interpret the ENN and LNN prevalences as person-time-weighted
+      average LBWSG category prevalences for the 0-7 day period and 7-28 day
+      periods, as described in the validation strategy above?
+
+    - Should the ENN and LNN prevalences instead be interpreted as the point
+      prevalence at the *midpoint* of each interval? The point prevalence at the
+      midpoint approximates the person-time-weighted average prevalence using the
+      midpoint rule with one rectangle, so these should be close to the average
+      prevalences but perhaps slightly different.
+
+    - Is there some other interpretation that would be more accurate?
+
+  - In addition to the ENN and LNN prevalences from GBD, can the modelers give
+    us the prevalences *at* 7 days and 28 days, since the above description
+    indicates that these point prevalences were computed as well?
+
+  The answers to these questions may dictate some adjuststments to the
+  validation strategy outlined above.
+
+
+
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
