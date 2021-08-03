@@ -149,7 +149,10 @@ No baseline coverage of SQ-LNS
 Vivarium Modeling Strategy
 --------------------------
 
-:underline:`Outcome moderate wasting`
+Affected Outcomes
++++++++++++++++++
+
+:underline:`Outcome #1: moderate wasting`
 
 For the outcome moderate wasting, the review compared prevalence of **moderate wasting** at 18 or 24 months between intervention and control children. LNS plus complementary feeding reduced the prevalence of moderate wasting by 18% (RR 0.82, 95% CI 0.74 to 0.91; eight studies; 13,172 participants; moderate-quality evidence). There was *no impact* of LNS plus complementary feeding on **severe wasting** (RR 1.27, 95% CI 0.66 to 2.46; three studies, 2329 participants)
 
@@ -161,18 +164,24 @@ We will apply the relative risk ratio as a relative rate ratio on the incidence 
 
 .. todo::
   
-  Think about whether we want to apply the full reduction in incidence at 6 months or we have a gradual reduction in incidence, reaching full reduction at 18 months? 
+  Try this out in the nano-sim to see how the intervention affects moderate wasting prevalence when RR applied to i2. 
 
-:underline:`Outcome moderate and severe stunting`
+.. todo::
+  
+  Think about whether we want to apply the full reduction in incidence at 6 months or we have a gradual reduction in incidence, reaching full reduction at 18 months? 
+  Answer: we will start simple and apply immediately to 6 months. We can add complexity later. 
+
+:underline:`Outcome #2 and #3: moderate and severe stunting`
 
 LNS plus complementary feeding reduced the prevalence of **moderate stunting** by 7% (risk ratio (RR) 0.93, 95% confidence interval (CI) 0.88 to 0.98; nine studies, 13,372 participants; moderate-quality evidence), **severe stunting** by 15% (RR 0.85, 95% CI 0.74 to 0.98; five studies, 6151 participants; moderate-quality evidence), 
 
 We will apply the relative risk ratio on the propensity of stunting starting from the age-start of the intervention starts (6 months). See below example for male, age 6mo-11mo, 2020 stunting prevalence.
 
+
 .. image:: viviarium_strategy_stunting.svg
 
 
-.. list-table:: Modeled Outcomes
+.. list-table:: Modeled Outcomes and effect sizes
   :widths: 10 10 10 10 10 25 25
   :header-rows: 1
 
@@ -196,44 +205,17 @@ We will apply the relative risk ratio on the propensity of stunting starting fro
     - moderate stunting
     - relative risk
     - 0.93 (95% CI 0.88 to 0.98)
-    - We apply this to the propensity
+    - We apply this to the probability
   * - Severe stunting
     - prevalence
     - 241
     - moderate stunting
     - relative risk
     - 0.85 (95% CI 0.74 to 0.98)
-    - We apply this to the propensity
-
-.. note::
-
-    NOT SURE HOW TO BEST FILL OUR NEXT COUPLE SESSIONS. I think I have done it in the above descriptions. 
+    - We apply this to the probability
 
 
-Affected Outcome #1: Moderate wasting
-+++++++++++++++++++++++++++++++++++++
-
-.. important::
-
-  Copy and paste this section for each affected outcome included in this document
-
-.. todo::
-
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
+.. list-table:: Affected Outcome Restrictions
   :widths: 15 15 15
   :header-rows: 1
 
@@ -255,24 +237,6 @@ Affected Outcome #1: Moderate wasting
   * - Other
     - 
     - 
-
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15 
-  :header-rows: 1
-
-  * - Population
-    - Effect size
-    - Note
-  * - Malnourished women
-    - +50 g birthweight
-    - 
-  * - Adequately nourished women
-    - +10 g birthweight
-    - 
-
-.. todo::
-
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
 
 .. todo::
 
