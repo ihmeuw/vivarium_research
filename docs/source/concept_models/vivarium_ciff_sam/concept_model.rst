@@ -149,13 +149,69 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 ------------------------
 
 **Baseline**
-The baseline scenario will project GBD 2019 demographic and disease trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
+The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
 
 **Alternative scenario 1**
-Scale up the coverage of MAM management and MAM treatment interventions to 90%
+Scale up the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease  with a shorter duration (prevalence ~ incidence x duration).    
+
+| Effective coverage = treatment coverage x treatment efficacy
+| Not effectively covered = 1 - (treatment coverage x treatment efficacy)
+
+.. list-table:: Effective coverage of GAM treatment program
+  :widths: 10 10 10 15 15 15 20 
+  :header-rows: 1
+
+  * - Exposure 
+    - Treatment coverage
+    - Treatment efficacy
+    - Effectivey covered
+    - Not effectively covered
+    - Reference
+    - Note
+  * - SAM baseline 
+    - 48.8% (95% CI: 37.4, 60.4)
+    - 70% (95% CI: 64, 76)
+    - 0.488 x 0.7 = 0.34
+    - 1 - 0.34 = 0.66
+    - [Isanaka_2021]_ , [Zw_2020]_
+    - This is for SAM-OTP which is ~98% of SAM.  
+  * - SAM alternative 
+    - 90%
+    - 75% 
+    - 0.9 x 0.75 = 0.675
+    - 1 - 0.675 = 0.325
+    - Sphere standards
+    - Sphere guideline for efficacy only 
+  * - MAM baseline 
+    - 48.8% (95% CI: 37.4, 60.4)
+    - 73.1% for RUSF
+    - 0.488 x 0.731 = 0.34
+    - 1 - 0.34 = 0.66
+    - [Ackatia_Armah_2015]_
+    - Baseline coverage of MAM needs to be updated, efficacy comes from trial and may be too optimistic
+  * - MAM alternative 
+    - 90%
+    - 75% for RUSF
+    - 0.9 x 0.75 = 0.675
+    - 1 - 0.675 = 0.325
+    - Sphere standards
+    - Sphere guideline for efficacy only 
+ 
+
 
 **Alternative scenario 2**
-Scale up the coverage of treatment and prevention interventions to 90%.
+Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90%. 
+
+**Alternative scenario 3**
+Scale up of LBWSG interventions from baseline coverage % to 90%. 
+
+**Alternative scenario 4**
+Scale-up of vicious cycle interventions (breast-feeding) from baseline coverag % to 90%. 
+
+.. note:: 
+    
+    In the BEP paper reviewer comments, this 90% was deemed to be too optimistic and we are asked to do some sensitivity analysis around this. Hence, we could model a few coverages eg. 50%, 75%, 90%. 
+
 
 .. _5.0:
 
@@ -310,3 +366,28 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 
 8.0 References
 +++++++++++++++
+
+.. [Isanaka_2021]
+
+  View `Isanaka 2021`_
+
+    Improving estimates of the burden of severe wasting: analysis of secondary prevalence and incidence data from 352 sites
+
+.. _`Isanaka 2021`: https://gh.bmj.com/content/6/3/e004342
+
+
+.. [Zw_2020] 
+  
+  View `Zw et al 2020`_
+
+    Treatment outcomes of severe acute malnutrition and predictors of recovery in under-five children treated within outpatient therapeutic programs in Ethiopia: a systematic review and metaanalysis
+
+.. _`Zw et al 2020`: https://bmcpediatr.biomedcentral.com/articles/10.1186/s12887-020-02188-5
+
+.. [Ackatia_Armah_2015] 
+  
+  View `Ackatia-Armah et al 2015`_
+
+    Malian children with moderate acute malnutrition who are treated with lipid-based dietary supplements have greater weight gains and recovery rates than those treated with locally produced cereal-legume products: a community-based, cluster-randomized trial
+
+.. _`Ackatia-Armah et al 2015`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/25733649/
