@@ -198,9 +198,8 @@ Scale up the 'effective-coverage' of GAM treatment from baseline level of effect
     - Sphere guideline for efficacy only 
  
 
-
 **Alternative scenario 2**
-Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90%. 
+Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90%. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.   
 
 **Alternative scenario 3**
 Scale up of LBWSG interventions from baseline coverage % to 90%. 
@@ -223,7 +222,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverag %
 5.1 Vivarium concept model diagram
 ----------------------------------
 
-.. image:: sam_concept_model_diagram.svg
+.. image:: am_concept_model_diagram.svg
 
 5.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
