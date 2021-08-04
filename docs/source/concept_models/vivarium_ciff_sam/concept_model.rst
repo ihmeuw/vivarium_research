@@ -173,7 +173,7 @@ Scale up the 'effective-coverage' of GAM treatment from baseline level of effect
     - 70% (95% CI: 64, 76)
     - 0.488 x 0.7 = 0.34
     - 1 - 0.34 = 0.66
-    - [Isanaka_2021]_ , [Zw_2020]_
+    - [Isanaka_etal_2021]_ , [Zw_2020]_
     - This is for SAM-OTP which is ~98% of SAM.  
   * - SAM alternative 
     - 90%
@@ -202,10 +202,10 @@ Scale up the 'effective-coverage' of GAM treatment from baseline level of effect
 Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90%. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.   
 
 **Alternative scenario 3**
-Scale up of LBWSG interventions from baseline coverage % to 90%. 
+Scale up of LBWSG interventions from baseline coverage % (TBD) to 90%. 
 
 **Alternative scenario 4**
-Scale-up of vicious cycle interventions (breast-feeding) from baseline coverag % to 90%. 
+Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage % (TBD) to 90%. 
 
 .. note:: 
     
@@ -366,7 +366,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverag %
 8.0 References
 +++++++++++++++
 
-.. [Isanaka_2021]
+.. [Isanaka_etal_2021]
 
   View `Isanaka 2021`_
 
@@ -389,4 +389,4 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverag %
 
     Malian children with moderate acute malnutrition who are treated with lipid-based dietary supplements have greater weight gains and recovery rates than those treated with locally produced cereal-legume products: a community-based, cluster-randomized trial
 
-.. _`Ackatia-Armah et al 2015`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/25733649/
+.. _`Ackatia-Armah et al 2015`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu
