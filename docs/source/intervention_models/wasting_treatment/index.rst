@@ -270,7 +270,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
   * - Proportion recovered within programme treatment length
     - Increases
     - No (but we can)
-    - We assume that all treatment covered will recover within the time-to-recovery if they had not died. We can modify the treatment coverage by multiplying it by the 'cure rate' giving us the 'met-need' instead. 1 - 'met-need' will be the 'utx' population. 
+    - We assume that all treatment covered will recover within the time-to-recovery if they had not died. We can modify the treatment coverage by multiplying it by the 'treatment efficacy' giving us the 'effective coverage' instead. 1 - 'effective coverage' will be the 'utx' population. 
   * - Proportion defaulted during programme
     - Decreases
     - We can capture this by using 'met-need'
