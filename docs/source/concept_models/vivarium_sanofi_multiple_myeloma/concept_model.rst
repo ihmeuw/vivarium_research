@@ -309,25 +309,30 @@ Upon diagnosis with multiple myeloma, simulants should be assigned values for ea
   * - Male
     - Under 65
     - 0.211
-    - 0.872
-    - 0.081
+    - uniform distribution from 0.17 to 0.34
+    - 0.25
   * - Male
     - 65+
     - 0.159
-    - 0.872
-    - 0.081
+    - uniform distribution from 0.17 to 0.34
+    - 0.25
   * - Female
     - Under 65
     - 0.225
-    - 0.872
-    - 0.081
+    - uniform distribution from 0.17 to 0.34
+    - 0.25
   * - Female
     - 65+
     - 0.165
-    - 0.872
-    - 0.081
+    - uniform distribution from 0.17 to 0.34
+    - 0.25
 
-The probability of these high cytogenetic risk and renal insufficiency at diagnosis were obtained from Flatiron data reported by [Braunlin-et-al-2021]_. Given the lack of joint distributions reported by [Braunlin-et-al-2021]_, we assumed that the exposure distribution for cytogenetic risk and renal insufficiency were independent of each other as well as with age, sex, and race. Notably, we reallocated the observations with missing data on cytogenetic risk assuming a complete lack of non-response bias.
+The probability of high cytogenetic risk (uniform distribution between 17% and 30%) was obtained from [Rice-et-al-2020]_. The lower bound is the proportion of patients tested who had high cytogenetic risk, and the upper bound is the proportion if those who were tested and had undocumented/unknown cytogenetic risk and were reallocated assuming the same proportion of high:standard risk among those with documented/known cytogenetic risk.
+
+
+The probability of renal impairment (25%) was obtained from [Mikhael-et-al-2021]_. Notably, this paper defined renal impairment as eGFR <=50 ml/min/m^2, which will be an underestimate of the proportion of patients with renal impairment defined as eGFR <=50 ml/min/m^2, which is the definition of renal impairment used to inform our risk effect.
+
+Given the lack of joint distributions for renal impairment and cytogenetic risk available in the literature, we assumed that the exposure distribution for cytogenetic risk and renal insufficiency were independent of each other as well as with age, sex, and race. Notably, we reallocated the observations with missing data on cytogenetic risk assuming a complete lack of non-response bias.
 
 The proportion of Black multiple myeloma patients by sex and age at diagnosis +/- 65 years was calculated using SEER data.
 
@@ -370,12 +375,16 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
     - High
     - Standard
     - 0.872
-    - We reallocated missing observations assuming lack of non-response bias. High risk defined as the presence of at least one high risk cytogenetic abnormality.
+    - SANOFI BELIEVES THIS VALUE TO BE AN ERROR. We reallocated missing observations assuming lack of non-response bias. High risk defined as the presence of at least one high risk cytogenetic abnormality.
   * - Renal function at diagnosis
     - Impaired
     - Not impaired
     - 0.081
-    - 
+    - SANOFI BELIEVES THIS VALUE TO BE AN UNDERESTIMATE
+
+.. note::
+
+  If the prevalence of high cytogenetic risk from [Braunlin-et-al-2021] is believed to be a true typo and we replace it with a more realistic value, it will affect the cytogenetic risk effect as well as the clinical trial treatment effects in the first line of treatment.
 
 .. _mm5.3.2.2:
 
@@ -383,6 +392,10 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The table below reports hazard ratios for overall survival and progression free survival for each covariate exposed group relative to the unexposed group (excluding race and cytogenetic risk, which are presented in separate subsequent tables). These hazard ratios are adjusted for age only. We chose hazard ratios unadjusted for treatment differences that we are not directly modeling (particularly ASCT) so that differences in prescribing practices by these risk exposures would be captured in these risk effects. However, these hazard ratios are *not* adjusted for each of the other risk factors that we are directly modeling aside from age, it is possible that these effects are confounded by one another (for instance, the effect of sex on survival may be confounded by renal impairment). Since the joint distributions of these risk exposures are unknown, we are unaware of the direction that this potential bias may impact our model. The hazard ratios shown in the table below were obtained from the data supplement in [Derman-et-al-2020]_.
+
+.. note::
+
+  Sanofi is currently reviewing these risk effect values and may provide feedback that they should be updated.
 
 .. list-table:: Risk Effects Table (to inform all simulation runs)
   :header-rows: 1
@@ -407,7 +420,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - 65+
     - <65
     - None
-    - No suspected confounding by race. 
+    - THIS PARAMETER MAY CHANGE PENDING UPDATE FROM SANOFI
   * - Renal function at diagnosis
     - 1.9 (1.4, 2.6)
     - 1.4 (1.1, 1.7)
@@ -1314,6 +1327,9 @@ Time frame for survival observer (timestep = 28 days):
 .. [Jagannath-et-al-2016]
 	Jagannath, Sundar, et al. "Real-world treatment patterns and associated progression-free survival in relapsed/refractory multiple myeloma among US community oncology practices." Expert review of hematology 9.7 (2016): 707-717.
 
+.. [Mikhael-et-al-2021]
+  Mikhael, J., Singh, E. & Rice, M.S. Real-world renal function among patients with multiple myeloma in the United States. Blood Cancer J. 11, 99 (2021). https://doi.org/10.1038/s41408-021-00492-6
+
 .. [Moreau-et-al-2019]
 	Moreau P, Dimopoulos MA, Yong K, Mikhael J, Risse ML, Asset G, Martin T. Isatuximab plus carfilzomib/dexamethasone versus carfilzomib/dexamethasone in patients with relapsed/refractory multiple myeloma: IKEMA Phase III study design. Future Oncol. 2020 Jan;16(2):4347-4358. doi: 10.2217/fon-2019-0431. Epub 2019 Dec 13. PMID: 31833394.
 
@@ -1323,6 +1339,9 @@ Time frame for survival observer (timestep = 28 days):
 .. [Rajkumar-and-Kumar-2020]
 	Rajkumar, S. Vincent, and Shaji Kumar. "Multiple myeloma current treatment algorithms." Blood cancer journal 10.9 (2020): 1-10.
 
+.. [Rice-et-al-2020]
+  Rice, M., Hao, L., & Singh, E. Real-World Cytogenetic Testing Among Patients with Multiple Myeloma in the United States. Clinical Lymphoma, Myeloma & Leukemia (2020). https://www.clinical-lymphoma-myeloma-leukemia.com/article/S2152-2650(20)30935-6/pdf
+
 .. [Sanofi-2020] 	Sanofi : FDA approves Sarclisa® (isatuximab-irfc) for patients with relapsed refractory multiple myeloma. Sanofi. 2020; 2 March 2021.
     Retrieved 18 March 2021.
     https://www.sanofi.com/en/media-room/press-releases/2020/2020-03-02-19-51-16
@@ -1330,4 +1349,5 @@ Time frame for survival observer (timestep = 28 days):
 .. [Sanofi-2021] FDA approves Sarclisa® (isatuximab) in combination with carfilzomib and dexamethasone for patients with relapsed or refractory multiple myeloma. Sanofi. 2021; 31 March 2021.
     Retrieved 9 April 2021.
     https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
+
 
