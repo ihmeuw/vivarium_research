@@ -318,7 +318,7 @@ Upon diagnosis with multiple myeloma, simulants should be assigned values for ea
     - 0.40
   * - Female
     - Under 65
-    - 0.
+    - 0.225
     - 0.34
     - 0.40
   * - Female
