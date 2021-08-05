@@ -309,27 +309,27 @@ Upon diagnosis with multiple myeloma, simulants should be assigned values for ea
   * - Male
     - Under 65
     - 0.211
-    - uniform distribution from 0.17 to 0.34
-    - 0.25
+    - 0.34
+    - 0.40
   * - Male
     - 65+
     - 0.159
-    - uniform distribution from 0.17 to 0.34
-    - 0.25
+    - 0.34
+    - 0.40
   * - Female
     - Under 65
-    - 0.225
-    - uniform distribution from 0.17 to 0.34
-    - 0.25
+    - 0.
+    - 0.34
+    - 0.40
   * - Female
     - 65+
     - 0.165
-    - uniform distribution from 0.17 to 0.34
-    - 0.25
+    - 0.34
+    - 0.40
 
-The probability of high cytogenetic risk (uniform distribution between 17% and 30%) was obtained from [Rice-et-al-2020]_. The lower bound is the proportion of patients tested who had high cytogenetic risk, and the upper bound is the proportion if those who were tested and had undocumented/unknown cytogenetic risk and were reallocated assuming the same proportion of high:standard risk among those with documented/known cytogenetic risk.
+The probability of high cytogenetic risk (34%) was obtained from [Rice-et-al-2020]_, assuming that unknown/undocumented status was missing at random. This value was used instead of the value reported in [Braunlin-et-al-2021]_ because it was substantially higher than values reported in other data source, as discussed in correspondence with the client.
 
-The probability of renal impairment (25%) was obtained from [Mikhael-et-al-2021]_. Notably, this paper defined renal impairment as eGFR <=50 ml/min/m^2, which will be an underestimate of the proportion of patients with renal impairment defined as eGFR <=50 ml/min/m^2, which is the definition of renal impairment used to inform our risk effect.
+The probability of renal impairment (40%) was obtained from [Derman-et-al-2020]_. This value was chosen instead of the value reported in [Braunlin-et-al-2021]_, as it was consistent with values from serveral other sources, as discussed in correspondence with the client.
 
 Given the lack of joint distributions for renal impairment and cytogenetic risk available in the literature, we assumed that the exposure distribution for cytogenetic risk and renal insufficiency were independent of each other as well as with age, sex, and race. Notably, we reallocated the observations with missing data on cytogenetic risk assuming a complete lack of non-response bias.
 
@@ -373,13 +373,13 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
   * - Cytogenetic risk
     - High
     - Standard
-    - 0.17-0.34
-    - value from [Rice-et-al-2020]_
+    - 0.34
+    - value from [Rice-et-al-2020]_, assuming unknown/undocumented at random
   * - Renal function at diagnosis
     - Impaired
     - Not impaired
-    - 0.25
-    - Value from [Mikhael-et-al-2021]_
+    - 0.40
+    - Obtained from [Derman-et-al-2020]_. Value supported by multiple sources in correspondence with client
 
 .. _mm5.3.2.2:
 
@@ -387,10 +387,6 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The table below reports hazard ratios for overall survival and progression free survival for each covariate exposed group relative to the unexposed group (excluding race and cytogenetic risk, which are presented in separate subsequent tables). These hazard ratios are adjusted for age only. We chose hazard ratios unadjusted for treatment differences that we are not directly modeling (particularly ASCT) so that differences in prescribing practices by these risk exposures would be captured in these risk effects. However, these hazard ratios are *not* adjusted for each of the other risk factors that we are directly modeling aside from age, it is possible that these effects are confounded by one another (for instance, the effect of sex on survival may be confounded by renal impairment). Since the joint distributions of these risk exposures are unknown, we are unaware of the direction that this potential bias may impact our model. The hazard ratios shown in the table below were obtained from the data supplement in [Derman-et-al-2020]_.
-
-.. note::
-
-  Sanofi is currently reviewing these risk effect values and may provide feedback that they should be updated.
 
 .. list-table:: Risk Effects Table (to inform all simulation runs)
   :header-rows: 1
@@ -408,14 +404,14 @@ The table below reports hazard ratios for overall survival and progression free 
     - Male
     - Female
     - Age
-    - No suspected confounding by race
+    - Potential update from SEER data? No suspected confounding by race
   * - Age at diagnosis
     - 2.2 (1.6, 3.0)
     - 1.7 (1.4, 2.1)
     - 65+
     - <65
     - None
-    - THIS PARAMETER MAY CHANGE PENDING UPDATE FROM SANOFI
+    - 
   * - Renal function at diagnosis
     - 1.9 (1.4, 2.6)
     - 1.4 (1.1, 1.7)
@@ -547,12 +543,12 @@ The values in the table below should be used for simulation implementation. Nota
     - 0.86 (0.76, 0.97)
   * - Renal function
     - Renal impaired
-    - 1.55 (1.27, 1.87)
-    - 1.28 (1.12, 1.46)
+    - 1.40 (1.20, 1.59)
+    - 1.20 (1.09, 1.32)
   * - Renal function
     - Not renal impaired
-    - 0.82 (0.71, 0.91)
-    - 0.91 (0.85, 0.96)
+    - 0.74 (0.61, 0.86)
+    - 0.86 (0.79, 0.94)
 
 .. list-table:: Final race/cytogenetic risk effects for 2a simulation use
   :header-rows: 1
@@ -563,20 +559,20 @@ The values in the table below should be used for simulation implementation. Nota
     - PFS HR relative to baseline
   * - Race/cytogenetic risk
     - Black and high cytogenetic risk
-    - 1.51 (1.12, 1.91)
+    - 1.50 (1.14, 1.89)
     - 1.31 (1.07, 1.58)
   * - Race/cytogenetic risk
     - Black and standard cytogenetic risk
-    - 1.51 (1.12, 1.91)
+    - 1.50 (1.14, 1.89)
     - 1.31 (1.07, 1.58)
   * - Race/cytogenetic risk
     - Non-black and high cytogenetic risk
-    - 1.34 (1.01, 1.73)
-    - 1.13 (0.97, 1.31)
+    - 1.27 (0.98, 1.58)
+    - 1.10 (0.96, 1.25)
   * - Race/cytogenetic risk
     - Non-black and standard cytogenetic risk
-    - 0.73 (0.69, 0.86)
-    - 0.87 (0.79, 0.94)
+    - 0.70 (0.55, 0.85)
+    - 0.85 (0.76, 0.93)
 
 .. list-table:: Final race/cytogenetic risk effects for 2b simulation use
   :header-rows: 1
@@ -587,20 +583,20 @@ The values in the table below should be used for simulation implementation. Nota
     - PFS HR relative to baseline
   * - Race/cytogenetic risk
     - Black and high cytogenetic risk
-    - 1.39 (1.15, 1.63)
-    - 1.45 (1.24, 1.69)
+    - 1.33 (1.14, 1.53)
+    - 1.37 (1.19, 1.56)
   * - Race/cytogenetic risk
     - Black and standard cytogenetic risk
-    - 0.87 (0.78, 0.95)
-    - 0.85 (0.76, 0.92)
+    - 0.83 (0.73, 0.93)
+    - 0.81 (0.71, 0.90)
   * - Race/cytogenetic risk
     - Non-black and high cytogenetic risk
-    - 1.39 (1.15, 1.63)
-    - 1.45 (1.24, 1.69)
+    - 1.33 (1.14, 1.53)
+    - 1.37 (1.19, 1.56)
   * - Race/cytogenetic risk
     - Non-black and standard cytogenetic risk
-    - 0.87 (0.78, 0.95)
-    - 0.85 (0.76, 0.92)
+    - 0.83 (0.73, 0.93)
+    - 0.81 (0.71, 0.90)
 
 
 3. Apply the hazard ratios specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for PFS and OS, as shown in the equation below.
@@ -964,11 +960,11 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - Daratumumab, retreated
     - Residual
   * - First
-    - 0.436 (0.343, 0.525)
+    - 0.445 (0.356, 0.542)
     - N/A
-    - 0.436 (0.343, 0.525)
+    - 0.445 (0.356, 0.542)
     - N/A
-    - 1.017 (1.014, 1.020)
+    - 1.017 (1.014, 1.019)
   * - Second, Third, Fourth
     - 0.814 (0.593, 1.056)
     - 0.927 (0.714, 1.077)
@@ -986,11 +982,11 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - Daratumumab, retreated
     - Residual
   * - First
-    - 0.602 (0.575, 0.629)
+    - 0.632 (0.587, 0.683)
     - N/A
-    - 0.602 (0.575, 0.629)
+    - 0.632 (0.587, 0.683)
     - N/A
-    - 1.012 (1.011, 1.013)
+    - 1.011 (1.010, 1.012)
   * - Second, Third, Fourth, Fifth+
     - 1.031 (0.960, 1.105)
     - 1.056 (0.928, 1.181)
@@ -1000,7 +996,7 @@ We will run two separate simulations, one using the treatment effect sizes from 
 
 .. note::
 
-  For reference (to be included in technical report, but not simulation), the treatment duration hazard ratio for the isa/dara in first line of treatment was 0.369 (0.324, 0.411) and residual was 1.0103 (1.0096, 1.0110)
+  For reference (to be included in technical report, but not simulation), the treatment duration hazard ratio for the isa/dara in first line of treatment was 0.380 (0.336, 0.425) and residual was 1.019 (1.017, 1.020)
 
 .. _`sampling instructions`:
 
