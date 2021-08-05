@@ -1319,9 +1319,6 @@ Time frame for survival observer (timestep = 28 days):
 .. [Jagannath-et-al-2016]
 	Jagannath, Sundar, et al. "Real-world treatment patterns and associated progression-free survival in relapsed/refractory multiple myeloma among US community oncology practices." Expert review of hematology 9.7 (2016): 707-717.
 
-.. [Mikhael-et-al-2021]
-  Mikhael, J., Singh, E. & Rice, M.S. Real-world renal function among patients with multiple myeloma in the United States. Blood Cancer J. 11, 99 (2021). https://doi.org/10.1038/s41408-021-00492-6
-
 .. [Moreau-et-al-2019]
 	Moreau P, Dimopoulos MA, Yong K, Mikhael J, Risse ML, Asset G, Martin T. Isatuximab plus carfilzomib/dexamethasone versus carfilzomib/dexamethasone in patients with relapsed/refractory multiple myeloma: IKEMA Phase III study design. Future Oncol. 2020 Jan;16(2):4347-4358. doi: 10.2217/fon-2019-0431. Epub 2019 Dec 13. PMID: 31833394.
 
