@@ -404,7 +404,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Male
     - Female
     - Age
-    - Potential update from SEER data? No suspected confounding by race
+    - Not that the SEER analysis suggests this is a overestimate.
   * - Age at diagnosis
     - 2.2 (1.6, 3.0)
     - 1.7 (1.4, 2.1)
