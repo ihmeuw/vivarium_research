@@ -25,6 +25,9 @@ Ischemic Heart Disease
    * - AMI
      - Acute myocardial infarction
      - 
+   * - HF
+     - Heart failure
+     - 
 
 
 Disease Overview
@@ -57,7 +60,10 @@ GBD 2019 Non-Fatal Modeling Strategy
   
   a. Angina; clinically diagnosed stable exertional angina pectoris or definite angina pectoris according to the Rose Angina Questionnaire, physician diagnosis, or taking nitrate medication for the relief of chest pain.
   b. Asymptomatic ischaemic heart disease following myocardial infarction; survival to 28 days following incident MI. The GBD study does not use estimates based on ECG evidence for prior MI, due to its limited specificity and sensitivity.
+  c. Heart failure due to ischemic heart disease; The GBD case definition for heart failure impairment data sources includes studies in which heart failure was diagnosed clinically using structured criteria such as the Framingham_ or European Society of Cardiology_ criteria. Beginning in GBD 2016, we used ACC/AHA Stage C and above to capture both persons who are currently symptomatic and those who have been diagnosed with heart failure but are currently asymptomatic. 
 
+.. _Framingham: McKee et al. N Engl J Med 1971; 285:1441-1446.
+.. _Cardiology: Eur Heart J 2016; 37 (27): 2129-2200.
 
 **Input data:**\
 
@@ -66,6 +72,8 @@ Apart from inpatient hospital and inpatient claims data, we did not include any 
 The primary input for the asymptomatic ischaemic heart disease following myocardial infarction model are 28-day survivors calculated from the excess mortality estimates for the myocardial infarction model. We included data for excess mortality and standardised mortality ratio to inform the estimates of survival after myocardial infarction.
 
 For angina, the data sources used include literature data, survey data, and U.S. claims data (but we did not include inpatient hospital data from any locations). All outpatient data were excluded as they were implausibly low for all locations when compared with literature and claims data.
+
+For heart failure, the data sources used include literature data, survey data, and administrative hospital and claims data.
 
 **Severity split inputs:**\
 
@@ -119,6 +127,30 @@ Angina was split into asymptomatic, mild, moderate, and severe groups using info
    * - Severe angina
      - Has chest pain that occurs with minimal physical activity, such as walking only a short distance. After a brief rest, the pain goes away. The person avoids most physical activities because of the pain.
      - 0.167 (0.11–0.24)
+
+Heart failure estimates were split into asymptomatic, mild, moderate, and severe heart failure based on the standard GBD 2019 approach to  analysis of MEPS data, with the exception of Chagas disease. MEPS is the only available population-based source that links EQ5D to ICD codes, allowing the application of GBD’s standard disability methods. For Chagas, which is not represented in MEPS, we based the severity splits on a meta-analysis of NYHA class among persons diagnosed with heart failure due to Chagas disease in areas where Chagas is endemic_. Disability weights were established for these severities using the standard approach for GBD 2020.
+
+.. list-table:: Severity distribution for heart failure
+   :widths: 15 25 12
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - DW (95% CI)
+   * - Controlled, medically managed heart failure
+     - Has been diagnosed with clinical heart failure, a chronic disease that requires medication every day and causes some worry but minimal interference with daily activities.
+     - 0.049 (0.031-0.072)
+   * - Mild heart failure
+     - Is short of breath and easily tires with moderate physical activity, such as walking uphill or more than a quarter‐mile on level ground. The person feels comfortable at rest or during activities requiring less effort. 
+     - 0.041 (0.026–0.062)
+   * - Moderate heart failure
+     - Is short of breath and easily tires with minimal physical activity, such as walking only a short distance. The person feels comfortable at rest but avoids moderate activity.
+     - 0.072 (0.047–0.103)
+   * - Severe heart failure
+     - Is short of breath and feels tired when at rest. The person avoids any physical activity, for fear of worsening the breathing problems. 
+     - 0.179 (0.122–0.251)
+
+.. _endemic: Sabino EC, Ribeiro AL, et al, Ten-year incidence of Chagas cardiomyopathy among asymptomatic Trypanosoma cruzi-seropositive former blood donors. Circulation. 2013 Mar 12;127(10):1105-15. Ribeiro AL et al. Brain natriuretic peptide and left ventricular dysfunction in Chagas' disease.  Lancet. 2002 Aug 10;360(9331):461-2. Ribeiro AL, personal communication. NYHA Class Information in a Cohort of Chagas dilated cardiomyopathy; Hospital das Clínicas da UFMG. Ribeiro AL, personal communication. Cohort of patients  attending the Chagas’ disease outpatient clinic of Evandro Chagas Hospital (Oswaldo Cruz Foundation, Rio de Janeiro, Brazil).
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++
@@ -179,9 +211,10 @@ Scope
 
 The aspects of the disease this cause model is designed to simulate are the states, transitions, and sequelae. The Vivarium model of IHD has been of a similar design to GBD 2019 by modeling IHD using MI sequelae to estimate the prevalence of IHD. Like GBD 2019, Vivarium's design includes several states:
 
-  a) Acute myocardial infarction ('Acute MI' or AMI) is a GBD sequela and simulants should have myocardial infarction at the GBD incidence rate. Vivarium's design of 'Acute MI' is modeled exactly after GBD 2019's 'Acute MI' case definition and informed by the GBD 2019 "Myocardial infarction due to ischemic heart disease - EMR comparison"
-  b) Post-MI is a state entered by survivors of AMI. Vivarium's design of 'Post MI' is modeled exactly after GBD 2019's 'Chronic IHD' case definition, which is captured in GBD as the "Asymptomatic Ischemic Heart Disease following myocardial infarction" dismod model and sequelae.
-  c) Angina (stable coronary artery disease) is a state entered by individuals based on the incidence rate of the "angina due to ischemic heart disease" dismod model and sequelae.
+  a) Acute myocardial infarction ('Acute MI' or AMI) is captured by two GBD sequelae and simulants should have myocardial infarction at the GBD IHD cause-level incidence rate. Vivarium's design of 'Acute MI' is modeled exactly after GBD 2019's 'Acute MI' case definition and informed by the GBD 2019 "Myocardial infarction due to ischemic heart disease - EMR comparison" model.
+  b) Post-MI is a state entered by survivors of AMI. Vivarium's design of 'Post MI' is modeled after part B of GBD 2019's 'Chronic IHD' case definition, which is captured in GBD as the "Asymptomatic Ischemic Heart Disease following myocardial infarction" dismod model and sequelae.
+  c) Angina, or stable coronary artery disease, is modeled after part A of GBD 2019's 'Chronic IHD' case definition. It is a state entered by individuals based on the incidence rate of the "angina due to ischemic heart disease" dismod model and sequelae.
+  d) Heart failure due to IHD, also known as ischemic cardiomyopathy, is modeled after part C of GBD 2019's 'Chronic IHD' case definition. It is a state entered by individuals based on the incidence rate of the 'Heart failure impairment envelope' multiplied by the proportion of incidence of heart failure that is due to ischemic heart disease.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -194,12 +227,17 @@ Cause Model Diagram
 MI
 """""""""""
 
-.. image:: cause_model_mi.svg
+.. image:: cause_model_ami.svg
 
 Angina
 """""""""""
 
 .. image:: cause_model_angina.svg
+
+Heart Failure due to IHD
+"""""""""""""""""""""""""""""""""
+
+.. image:: cause_model_hf_ihd.svg
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -214,11 +252,11 @@ Definitions
    * - State
      - State Name
      - Definition
-   * - S
+   * - S1
      - **S**\ usceptible
-     - Susceptible to IHD
+     - Susceptible to IHD; S1 used in the AMI cause diagram, currently do not model natural history for IHD so do not track how people enter the AMI state (e.g. as first clinical event or following a diagnosis of angina)
    * - A
-     - **A**\ cute Myocardial Infarction (MI)
+     - **A**\ cute Myocardial Infarction (AMI)
      - Simulant that experiences acute MI symptoms
    * - P
      - **P**\ ost-MI IHD
@@ -227,10 +265,16 @@ Definitions
        incident MI
    * - S2
      - **S**\ usceptible
-     - Susceptible to IHD
-   * - A2
+     - Susceptible to IHD; S2 used in the angina cause diagram, currently do not model natural history for IHD so do not track how people enter the angina state (e.g. as first clinical diagnosis of stable coronary artery disease or following an AMI)
+   * - SA
      - **A**\ ngina
-     - Sequelae
+     - Simulant that experiences anginal symptoms
+   * - S3
+     - **S**\ usceptible
+     - Susceptible to IHD; S3 used in the HF due to IHD cause diagram, currently do not model natural history for IHD so do not track how people enter the HF state (e.g. as first clinical diagnosis of coronary artery disease or following an AMI)
+   * - HF\ :sub:`IHD`
+     - **H**\ eart **F**\ ailure
+     - Simulant that experiences symptoms of heart failure consistent with Framingham, European Society of Cardiology, or other structured criteria. This model is explicitly for HF due to IHD/coronary artery disease, also referred to as ischemic cardiomyopathy.
 
 States Data
 """""""""""
@@ -247,66 +291,66 @@ States Data
      - cause-specific mortality rate
      - :math:`\frac{\text{deaths_c493}}{\text{population}}`
      -
-   * - P
-     - excess mortality rate
-     - emr_m15755
-     -
-   * - A
+   * - S1
+     - prevalence
+     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040)}`
+     - Simulants without prevalent AMI or PostMI; may have other forms of acute or chronic IHD
+   * - AMI
+     - prevalence
+     - :math:`\sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
+     - There are two acute sequelae
+   * - AMI
      - excess mortality rate
      - emr_m24694
      -
-   * - S
-     - excess mortality rate
-     - 0
-     -
-   * - A2
-     - excess mortality rate
-     - emr_m1817
-     -
-   * - S2
-     - excess mortality rate
-     - 0
-     -
-   * - P
+   * - AMI
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s \in post-mi-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
-     -
-   * - A
-     - disability weight
-     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
-     -
-   * - S
-     - disability weight
-     - 0
-     -
-   * - A2
-     - disability weight
-     - :math:`\frac{1}{\text{prevalence_c493}} \times \sum\limits_{s\in angina-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
-     -
-   * - S2
-     - disability weight
-     - 0
+     - :math:`\frac{1}{\text{prevalence_s378 + prevalence_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      -
    * - P
      - prevalence
      - :math:`\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
+     - this is the prevalence generated after exclusivity adjustment for 
+   * - P
+     - excess mortality rate
+     - emr_m15755
      -
-   * - A
-     - prevalence
-     - :math:`\sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
-     -
-   * - S
-     - prevalence
-     - 1-prevalence_493
-     - simulants not prevalent with IHD
-   * - A2
-     - prevalence
-     - :math:`\sum\limits_{s\in angina-sequelae} \text{prevalence}_s`
+   * - P
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_s1040}} \cdot \sum\limits_{s\in post-AMI-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      -
    * - S2
      - prevalence
-     - 1-prevalence_493
-     - simulants not prevalent with IHD
+     - :math:`\text{1−(prevalence_s953 + prevalence_s380 + prevalence_s381 + prevalence_s382)}`
+     - Simulants without prevalent angina; may have other forms of acute or chronic IHD
+   * - SA
+     - prevalence
+     - :math:`\sum\limits_{s\in angina-sequelae} \text{prevalence}_s`
+     - sum of the angina sequelae
+   * - SA
+     - excess mortality rate
+     - emr_m1817
+     -
+   * - SA
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_s953 + prevalence_s380 + prevalence_s381 + prevalence_s382}} \cdot \sum\limits_{s\in angina-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - S3
+     - prevalence
+     - :math:`\text{1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)}`
+     - Simulants without prevalent heart failure; may have other forms of acute or chronic IHD
+   * - HF\ :sub:`IHD`
+     - prevalence
+     - :math:`\sum\limits_{s\in HF-sequelae} \text{prevalence}_s`
+     - sum of the HF due to IHD sequelae
+   * - HF\ :sub:`IHD`
+     - excess mortality rate
+     - emr_m2412
+     - assumption is that excess mortality is similar across etiologies
+   * - HF\ :sub:`IHD`
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385}} \cdot \sum\limits_{s\in HF-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -  
 
 Transition Data
 """""""""""""""
@@ -321,25 +365,30 @@ Transition Data
      - Value
      - Notes
    * - 1
-     - S
-     - A
-     - :math:`\frac{\text{incidence_m24694}}{(1-\text{prevalence_c493})}`
-     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
+     - S1
+     - AMI
+     - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379})}`
+     - 
    * - 2
-     - A
+     - AMI
      - P
      - 28 days
      - duration-based transition from acute state then progress into post state
    * - 3
      - P
-     - A
-     - :math:`\frac{\text{incidence_m24694}}{(1-\text{prevalence_c493})}`
-     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
+     - AMI
+     - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379})}`
+     - current assumption is that rates 1 and 3 are equal
    * - 4
      - S2
-     - A2
-     - :math:`\frac{\text{incidence_m1817}}{(1-\text{prevalence_c493})}`
-     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
+     - SA
+     - :math:`\frac{\text{incidence_m1817}}{1-\text{(prevalence_s953 + prevalence_s380 + prevalence_s381 + prevalence_s382)})}`
+     - 
+   * - 5
+     - S3
+     - HF\ :sub:`IHD`
+     - :math:`\frac{\text{incidence_m2412}}{(1-\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)})} \cdot` propHF\ :sub:`IHD`
+     - 
 
 Data Sources
 """"""""""""
@@ -372,14 +421,18 @@ Data Sources
      - YLD appendix
      - Disability weight of sequela with id {id}
      -
-   * - :math:`\frac{\text{incidence_m24694}}{(1-\text{prevalence_c493})}`
+   * - :math:`\frac{\text{incidence_m24694}}{(1-\text{(prevalence_s378 + prevalence_s379)})}`
      - dismod-mr, como
      - Incidence of MI due to ischemic heart disease
-     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
-   * - :math:`\frac{\text{incidence_m1817}}{(1-\text{prevalence_c493})}`
+     - 
+   * - :math:`\frac{\text{incidence_m1817}}{(1-\text{(prevalence_s953 + prevalence_s380 + prevalence_s381 + prevalence_s382)})}`
      - dismod-mr, como
      - Incidence of angina due to ischemic heart disease
-     - IHD is prevalent enough in older ages to warrant including the correction from "population rate" to "susceptible rate"
+     - 
+   * - :math:`\frac{\text{incidence_m2412}}{(1-\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)})} \cdot` propHF\ :sub:`IHD`
+     - dismod-mr, como
+     - Incidence of heart failure due to ischemic heart disease
+     - 
    * - emr_m15755
      - dismod-mr
      - excess-mortality rate of post-MI ischemic heart disease
@@ -392,19 +445,26 @@ Data Sources
      - dismod-mr
      - excess-mortality rate of angina due to ischemic heart disease
      -
-   * - acute-sequelae
+   * - emr_m2412
+     - dismod-mr
+     - excess-mortality rate of overal heart failure
+     -
+   * - AMI sequelae
      - model assumption
      - {s378, s379}
      -
-   * - post-mi-sequelae
+   * - PostMI sequelae
      - model assumption
-     - {s383, s384, s385, s1040, s5726}
+     - {s1040}
      -
-   * - angina-sequelae
+   * - Stable Angina sequelae
      - model assumption
      - {s380, s381, s382, s953}
      -
-
+   * - Heart failure due to IHD sequelae
+     - model assumption
+     - {s383, s384, s385, s5726}
+     -
 
 Validation Criteria
 +++++++++++++++++++
