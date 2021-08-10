@@ -48,15 +48,9 @@ GBD 2019 Modeling Strategy
 
 .. note::
 
-   This section will describe the GBD modeling strategy for risk effects.
-   For a description of GBD modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
-
-.. todo::
-
-   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk
-   exposure page in the above note.
-
+   This section will describe the GBD modeling strategy for risk effects. For a
+   description of GBD modeling strategy for risk exposure, see the :ref:`Low
+   Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>` page.
 
 **The available data for deriving relative risk was only for all-cause
 mortality.**
