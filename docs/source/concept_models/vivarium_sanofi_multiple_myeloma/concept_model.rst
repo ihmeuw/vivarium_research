@@ -309,25 +309,29 @@ Upon diagnosis with multiple myeloma, simulants should be assigned values for ea
   * - Male
     - Under 65
     - 0.211
-    - 0.872
-    - 0.081
+    - 0.34
+    - 0.40
   * - Male
     - 65+
     - 0.159
-    - 0.872
-    - 0.081
+    - 0.34
+    - 0.40
   * - Female
     - Under 65
     - 0.225
-    - 0.872
-    - 0.081
+    - 0.34
+    - 0.40
   * - Female
     - 65+
     - 0.165
-    - 0.872
-    - 0.081
+    - 0.34
+    - 0.40
 
-The probability of these high cytogenetic risk and renal insufficiency at diagnosis were obtained from Flatiron data reported by [Braunlin-et-al-2021]_. Given the lack of joint distributions reported by [Braunlin-et-al-2021]_, we assumed that the exposure distribution for cytogenetic risk and renal insufficiency were independent of each other as well as with age, sex, and race. Notably, we reallocated the observations with missing data on cytogenetic risk assuming a complete lack of non-response bias.
+The probability of high cytogenetic risk (34%) was obtained from [Rice-et-al-2020]_, assuming that unknown/undocumented status was missing at random. This value was used instead of the value reported in [Braunlin-et-al-2021]_ because it was substantially higher than values reported in other data source, as discussed in correspondence with the client.
+
+The probability of renal impairment (40%) was obtained from [Derman-et-al-2020]_. This value was chosen instead of the value reported in [Braunlin-et-al-2021]_, as it was consistent with values from serveral other sources, as discussed in correspondence with the client.
+
+Given the lack of joint distributions for renal impairment and cytogenetic risk available in the literature, we assumed that the exposure distribution for cytogenetic risk and renal insufficiency were independent of each other as well as with age, sex, and race. Notably, we reallocated the observations with missing data on cytogenetic risk assuming a complete lack of non-response bias.
 
 The proportion of Black multiple myeloma patients by sex and age at diagnosis +/- 65 years was calculated using SEER data.
 
@@ -369,13 +373,13 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
   * - Cytogenetic risk
     - High
     - Standard
-    - 0.872
-    - We reallocated missing observations assuming lack of non-response bias. High risk defined as the presence of at least one high risk cytogenetic abnormality.
+    - 0.34
+    - value from [Rice-et-al-2020]_, assuming unknown/undocumented at random
   * - Renal function at diagnosis
     - Impaired
     - Not impaired
-    - 0.081
-    - 
+    - 0.40
+    - Obtained from [Derman-et-al-2020]_. Value supported by multiple sources in correspondence with client
 
 .. _mm5.3.2.2:
 
@@ -400,14 +404,14 @@ The table below reports hazard ratios for overall survival and progression free 
     - Male
     - Female
     - Age
-    - No suspected confounding by race
+    - Note that the SEER analysis suggests this is a overestimate.
   * - Age at diagnosis
     - 2.2 (1.6, 3.0)
     - 1.7 (1.4, 2.1)
     - 65+
     - <65
     - None
-    - No suspected confounding by race. 
+    - 
   * - Renal function at diagnosis
     - 1.9 (1.4, 2.6)
     - 1.4 (1.1, 1.7)
@@ -465,7 +469,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Black
     - Non-Black
     - N/A
-    - Assumed effect size pending confirmation from client feedback
+    - 
   * - Cytogenetic risk
     - 1.6 (1.1, 2.1)
     - 1.7 (1.3, 2.2)
@@ -539,12 +543,12 @@ The values in the table below should be used for simulation implementation. Nota
     - 0.86 (0.76, 0.97)
   * - Renal function
     - Renal impaired
-    - 1.79 (1.36, 2.3)
-    - 1.37 (1.14, 1.61)
+    - 1.40 (1.20, 1.59)
+    - 1.20 (1.09, 1.32)
   * - Renal function
     - Not renal impaired
-    - 0.93 (0.89, 0.97)
-    - 0.97 (0.95, 0.99)
+    - 0.74 (0.61, 0.86)
+    - 0.86 (0.79, 0.94)
 
 .. list-table:: Final race/cytogenetic risk effects for 2a simulation use
   :header-rows: 1
@@ -555,20 +559,20 @@ The values in the table below should be used for simulation implementation. Nota
     - PFS HR relative to baseline
   * - Race/cytogenetic risk
     - Black and high cytogenetic risk
-    - 1.52 (1.15, 1.91)
-    - 1.31 (1.06, 1.59)
+    - 1.50 (1.14, 1.89)
+    - 1.31 (1.07, 1.58)
   * - Race/cytogenetic risk
     - Black and standard cytogenetic risk
-    - 1.52 (1.15, 1.91)
-    - 1.31 (1.06, 1.59)
+    - 1.50 (1.14, 1.89)
+    - 1.31 (1.07, 1.58)
   * - Race/cytogenetic risk
     - Non-black and high cytogenetic risk
-    - 0.94 (0.85, 1.03)
-    - 0.96 (0.90, 1.02)
+    - 1.27 (0.98, 1.58)
+    - 1.10 (0.96, 1.25)
   * - Race/cytogenetic risk
     - Non-black and standard cytogenetic risk
-    - 0.53 (0.35, 0.79)
-    - 0.75 (0.62, 0.89)
+    - 0.70 (0.55, 0.85)
+    - 0.85 (0.76, 0.93)
 
 .. list-table:: Final race/cytogenetic risk effects for 2b simulation use
   :header-rows: 1
@@ -579,24 +583,21 @@ The values in the table below should be used for simulation implementation. Nota
     - PFS HR relative to baseline
   * - Race/cytogenetic risk
     - Black and high cytogenetic risk
-    - 1.05 (1.02, 1.07)
-    - 1.06 (1.03, 1.08)
+    - 1.33 (1.14, 1.53)
+    - 1.37 (1.19, 1.56)
   * - Race/cytogenetic risk
     - Black and standard cytogenetic risk
-    - 0.66 (0.52, 0.84)
-    - 0.63 (0.49, 0.79)
+    - 0.83 (0.73, 0.93)
+    - 0.81 (0.71, 0.90)
   * - Race/cytogenetic risk
     - Non-black and high cytogenetic risk
-    - 1.05 (1.02, 1.07)
-    - 1.06 (1.03, 1.08)
+    - 1.33 (1.14, 1.53)
+    - 1.37 (1.19, 1.56)
   * - Race/cytogenetic risk
     - Non-black and standard cytogenetic risk
-    - 0.66 (0.52, 0.84)
-    - 0.63 (0.49, 0.79)
+    - 0.83 (0.73, 0.93)
+    - 0.81 (0.71, 0.90)
 
-.. note::
-
-  The values in the *Final race/cytogenetic risk effects for 2b simulation use* table are pending confirmation and could change based on client feedback
 
 3. Apply the hazard ratios specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for PFS and OS, as shown in the equation below.
 
@@ -959,11 +960,11 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - Daratumumab, retreated
     - Residual
   * - First
-    - 0.506 (0.402, 0.620)
+    - 0.445 (0.356, 0.542)
     - N/A
-    - 0.506 (0.402, 0.620)
+    - 0.445 (0.356, 0.542)
     - N/A
-    - 1.015 (1.011, 1.018)
+    - 1.017 (1.014, 1.019)
   * - Second, Third, Fourth
     - 0.814 (0.593, 1.056)
     - 0.927 (0.714, 1.077)
@@ -981,17 +982,21 @@ We will run two separate simulations, one using the treatment effect sizes from 
     - Daratumumab, retreated
     - Residual
   * - First
-    - 0.760 (0.645, 0.895)
+    - 0.632 (0.587, 0.683)
     - N/A
-    - 0.760 (0.645, 0.895)
+    - 0.632 (0.587, 0.683)
     - N/A
-    - 1.007 (1.003, 1.010)
+    - 1.011 (1.010, 1.012)
   * - Second, Third, Fourth, Fifth+
     - 1.031 (0.960, 1.105)
     - 1.056 (0.928, 1.181)
     - 1.031 (0.960, 1.105)
     - 1.056 (0.928, 1.181)
     - 0.984 (0.929, 1.020)
+
+.. note::
+
+  For reference (to be included in technical report, but not simulation), the treatment duration hazard ratio for the isa/dara in first line of treatment was 0.380 (0.336, 0.425) and residual was 1.019 (1.017, 1.020)
 
 .. _`sampling instructions`:
 
@@ -1323,6 +1328,9 @@ Time frame for survival observer (timestep = 28 days):
 .. [Rajkumar-and-Kumar-2020]
 	Rajkumar, S. Vincent, and Shaji Kumar. "Multiple myeloma current treatment algorithms." Blood cancer journal 10.9 (2020): 1-10.
 
+.. [Rice-et-al-2020]
+  Rice, M., Hao, L., & Singh, E. Real-World Cytogenetic Testing Among Patients with Multiple Myeloma in the United States. Clinical Lymphoma, Myeloma & Leukemia (2020). https://www.clinical-lymphoma-myeloma-leukemia.com/article/S2152-2650(20)30935-6/pdf
+
 .. [Sanofi-2020] 	Sanofi : FDA approves Sarclisa® (isatuximab-irfc) for patients with relapsed refractory multiple myeloma. Sanofi. 2020; 2 March 2021.
     Retrieved 18 March 2021.
     https://www.sanofi.com/en/media-room/press-releases/2020/2020-03-02-19-51-16
@@ -1330,4 +1338,5 @@ Time frame for survival observer (timestep = 28 days):
 .. [Sanofi-2021] FDA approves Sarclisa® (isatuximab) in combination with carfilzomib and dexamethasone for patients with relapsed or refractory multiple myeloma. Sanofi. 2021; 31 March 2021.
     Retrieved 9 April 2021.
     https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
+
 
