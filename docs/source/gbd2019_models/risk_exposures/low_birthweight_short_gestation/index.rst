@@ -7,30 +7,35 @@ Low Birthweight and Short Gestation
 Risk Exposure Overview
 ----------------------
 
-Include here a clinical background and overview of the risk exposure you're
-modeling. Note that this is only for the exposure; you will include information
-on the relative risk of the relevant outcomes, and the cause models for those
-outcomes, in a different document.
+.. todo::
 
+  Include here a clinical background and overview of the risk exposure you're
+  modeling. Note that this is only for the exposure; you will include
+  information on the relative risk of the relevant outcomes, and the cause
+  models for those outcomes, in a different document.
 
 Risk Exposures Description in GBD
 ---------------------------------
 
-Include a description of this risk exposure model in the context of GBD,
-involving but not limited to:
+.. todo::
 
-  - What type of statistical model? (categorical, continuous?)
+  Include a description of this risk exposure model in the context of GBD,
+  involving but not limited to:
 
-  - How is the exposure estimated? (DisMod, STGPR?)
+    - What type of statistical model? (categorical, continuous?)
 
-  - Which outcomes are affected by this risk?
+    - How is the exposure estimated? (DisMod, STGPR?)
 
-  - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
+    - Which outcomes are affected by this risk?
+
+    - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
 
 Vivarium Modeling Strategy
 --------------------------
 
-Include here an overview of the Vivarium modeling section
+.. todo::
+
+  Include here an overview of the Vivarium modeling section
 
 Restrictions
 ++++++++++++
@@ -62,21 +67,27 @@ Restrictions
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-Describe the clinical and mathematical assumptions made for this cause model,
-and the limitations these assumptions impose on the applicability of the
-model.
+.. todo::
+
+  Describe the clinical and mathematical assumptions made for this cause model,
+  and the limitations these assumptions impose on the applicability of the
+  model.
 
 Risk Exposure Model Diagram
 +++++++++++++++++++++++++++
 
-Include diagram of Vivarium risk exposure model.
+.. todo::
+
+  Include diagram of Vivarium risk exposure model.
 
 Data Description Tables
 +++++++++++++++++++++++
 
-As of 02/10/2020: follow the template created by Ali for Iron Deficiency, copied
-below. If we discover it's not general enough to accommodate all exposure types,
-we need to revise the format in coworking.
+.. todo::
+
+  As of 02/10/2020: follow the template created by Ali for Iron Deficiency,
+  copied below. If we discover it's not general enough to accommodate all
+  exposure types, we need to revise the format in coworking.
 
 .. list-table:: Constants
 	:widths: 10, 5, 15
