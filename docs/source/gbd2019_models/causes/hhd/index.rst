@@ -34,7 +34,9 @@ GBD 2019 Modeling Strategy
 GBD 2019 Non-Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
 
-In GBD, hypertensive heart disease is modeled as an outcome of the heart failure impairment envelope. Please see the Heart Failure non-fatal modeling section for details. 
+In GBD, hypertensive heart disease is modeled as an outcome of the heart failure impairment envelope. The case definition for heart failure is a clinical diagnosis using structured criteria such as the Framingham or European Society of Cardiology criteria. Beginning in GBD 2016, we used ACC/AHA Stage C and above to capture both persons who are currently symptomatic and those who have been diagnosed with heart failure but are currently asymptomatic.
+[McKee]_
+[European-society-cardiology]_
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++++++
@@ -46,7 +48,7 @@ We included vital registration data in a standard CODEm approach to model hypert
 Cause Hierarchy
 +++++++++++++++
 
-.. image:: cause_hierarchy_hhd_reduced_HF.svg
+.. image:: cause_hierarchy_hhd.svg
 
 Restrictions
 ++++++++++++
@@ -94,7 +96,7 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-Hypertensive heart disease should occur at the incidence of HF in the DisMod model multiplied by the proportion of heart failure that is due to HHD. Heart failure due to HHD is then a chronic state without remission. Transition from prevalent HF due to hypertensive heart disease to death should occur at the GBD EMR rate from the HF DisMod model. The transition rate from the susceptible state to the prevalent state should be modified by systolic blood pressure and LDL-C. 
+Hypertensive heart disease should occur at the incidence of HF in the DisMod model multiplied by the proportion of heart failure that is due to HHD. Heart failure due to HHD is then a chronic state without remission. Transition from prevalent HF due to hypertensive heart disease to death should occur at the GBD EMR rate from the HF DisMod model. The transition rate from the susceptible state to the prevalent state should be modified by systolic blood pressure and high body mass index. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -150,18 +152,10 @@ States Data
      - prevalence
      - :math:`\sum\limits_{s\in sequelae} \text{prevalence}_s`
      - There are 4 sequelae
-   * - S
-     - excess mortality rate
-     - 0
-     - 
    * - P
-     - excess mortality rate
+     - excess mortality
      - emr_m2412
      - EMR from the HF envelope model
-   * - S
-     - disabilty weight
-     - 0
-     -
    * - P
      - disability weight
      - :math:`\frac{1}{\text{prevalence_c498}} \times \sum\limits_{s\in sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
@@ -182,7 +176,7 @@ Transition Data
    * - 1
      - S
      - P
-     - :math:`{\text{incidence_m2412}} \times \text{propHHD}`
+     - :math:`{\text{incidence_m2412}} \times \text{propHF_HHD}`
      - This is the incidence of HF due to HHD, assuming that the split for incidence is the same as prevalence
 
 Data Sources
@@ -205,10 +199,10 @@ Data Sources
      - Deaths from HHD
      -
    * - incidence_m2412
-     - como
+     - dismod
      - Incidence of overall HF
      - 
-   * - propHHD
+   * - propHF_HHD
      - CVD Team
      - Proportion of HF that is due to HHD
      - Proportion file in /share/scratch
@@ -248,6 +242,12 @@ References
 
 .. [NCBI] Tackling G, Borhade MB. Hypertensive Heart Disease. [Updated 2021 Feb 7]. 
   In: StatPearls [Internet]. Treasure Island (FL): StatPearls Publishing; 2021 Jan-. Available from: https://www.ncbi.nlm.nih.gov/books/NBK539800/
+
+.. [McKee] McKee, P. A., Castelli, W. P., McNamara, P. M., & Kannel, W. B. (1971). 
+   The natural history of congestive heart failure: the Framingham study. New England Journal of Medicine, 285(26), 1441-1446.
+
+.. [European-society-cardiology] Ponikowski, P., Voors, A. A., Anker, S. D., Bueno, H., Cleland, J. G., Coats, A. J., ... & Van Der Meer, P. (2016). 
+   2016 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure. Eur Heart J, 37(27), 2129-2200.
 
 .. [GBD-2019-Capstone-Appendix-HHD]
   Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
