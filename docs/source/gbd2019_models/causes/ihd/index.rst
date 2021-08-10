@@ -28,18 +28,21 @@ Ischemic Heart Disease
    * - HF
      - Heart failure
      - 
+   * - SA
+     - Stable angina
+     - 
 
 
 Disease Overview
 ----------------
 
-Ischemic heart disease (IHD) is a non-communicable cardiovascular disease which occurs when the arteries of the heart cannot deliver enough oxygen-rich blood to the heart. Since 1990, this disease has been a leading cause of global Years of Life Lost (YLL). GBD 2019 listed IHD as the leading cause of YLLs globally, with a mean percentage increase of 4.19% in all-age YLL rate since 2007. According to NIH_, IHD is also known as Coronary Artery Disease, Coronary Heart Disease, and Coronary Microvascular Disease. Symptoms and complications can vary by person, even if they have the same type of ischemic heart disease. Reported symptoms vary whether a person is experiencing an acute coronary event, such as a heart attack, or has chronic IHD. Symptoms may get worse as the buildup of plague continues to narrow the coronary arteries. 
+Ischemic heart disease (IHD) is a non-communicable cardiovascular disease which occurs when the arteries of the heart cannot deliver enough oxygen-rich blood to the heart. IHD is also referred to as coronary artery disease or coronary heart disease and is often caused by the buildup of plaque, a waxy substance, inside the lining of larger coronary arteries. This buildup can partially or totally block blood flow in the large arteries of the heart. Some types of this condition may be caused by disease or injury affecting how the arteries work in the heart.
 
-Acute coronary events may cause symptoms such as angina, cold sweats, dizziness, nausea, neck pain, shortness of breath, sleep disturbances, or weakness. 
+Symptoms of coronary heart disease may be different from person to person even if they have the same type of coronary heart disease. Acute coronary events may cause symptoms such as angina, cold sweats, dizziness, nausea, neck pain, shortness of breath, sleep disturbances, or weakness. Chronic ischemic heart disease can cause signs and symptoms such as angina, anxiety or nervousness, fatigue, or neck pain. Symptoms may get worse as the buildup of plaque continues to narrow the coronary arteries. However, because many people have no symptoms, they do not know they have coronary heart disease until they have chest pain, a heart attack, or sudden cardiac arrest. 
 
-Chronic ischemic heart disease can cause signs and symptoms such as angina, anxiety or nervousness, fatigue, or neck pain. 
+Coronary microvascular disease is another type of coronary heart disease. It occurs when the heart’s tiny blood vessels do not work normally.
 
-.. _NIH: https://www.nhlbi.nih.gov/health-topics/ischemic-heart-disease
+[NIH_IHD]_
 
 GBD 2019 Modeling Strategy
 --------------------------
@@ -49,7 +52,7 @@ GBD 2019 Non-Fatal Modeling Strategy
 
 **Case definitions:**\
 
-1. Acute myocardial infarction (MI): Definite and possible MI according to the third universal definition of myocardial infarction:
+1. Acute myocardial infarction (MI): Definite and possible MI according to the fourth universal definition of myocardial infarction:
   
   a. When there is clinical evidence of myocardial necrosis in a clinical setting consistent with myocardial ischaemia or
   b. Detection of a rise and/or fall of cardiac biomarker values and with at least one of the following: i) symptoms of ischaemia, ii) new or presumed new ST-segment-T wave changes or new left bundle branch block, iii) development of pathological Q waves in the ECG, iv) imaging evidence of new loss of viable myocardium or new regional wall motion abnormality, or v) identification of an intracoronary thrombus by angiography or autopsy.
@@ -60,14 +63,14 @@ GBD 2019 Non-Fatal Modeling Strategy
   
   a. Angina; clinically diagnosed stable exertional angina pectoris or definite angina pectoris according to the Rose Angina Questionnaire, physician diagnosis, or taking nitrate medication for the relief of chest pain.
   b. Asymptomatic ischaemic heart disease following myocardial infarction; survival to 28 days following incident MI. The GBD study does not use estimates based on ECG evidence for prior MI, due to its limited specificity and sensitivity.
-  c. Heart failure due to ischemic heart disease; The GBD case definition for heart failure impairment data sources includes studies in which heart failure was diagnosed clinically using structured criteria such as the Framingham_ or European Society of Cardiology_ criteria. Beginning in GBD 2016, we used ACC/AHA Stage C and above to capture both persons who are currently symptomatic and those who have been diagnosed with heart failure but are currently asymptomatic. 
+  c. Heart failure due to ischemic heart disease; The GBD case definition for heart failure impairment data sources includes studies in which heart failure was diagnosed clinically using structured criteria such as the Framingham or European Society of Cardiology criteria. Beginning in GBD 2016, we used ACC/AHA Stage C and above to capture both persons who are currently symptomatic and those who have been diagnosed with heart failure but are currently asymptomatic. 
 
-.. _Framingham: McKee et al. N Engl J Med 1971; 285:1441-1446.
-.. _Cardiology: Eur Heart J 2016; 37 (27): 2129-2200.
+[Framingham]_
+[Cardiology]_
 
 **Input data:**\
 
-Apart from inpatient hospital and inpatient claims data, we did not include any data from sources other than the literature for myocardial infarction. 
+Other than inpatient hospital and inpatient claims data, we did not include any data from sources other than the literature for myocardial infarction. 
 
 The primary input for the asymptomatic ischaemic heart disease following myocardial infarction model are 28-day survivors calculated from the excess mortality estimates for the myocardial infarction model. We included data for excess mortality and standardised mortality ratio to inform the estimates of survival after myocardial infarction.
 
@@ -77,7 +80,7 @@ For heart failure, the data sources used include literature data, survey data, a
 
 **Severity split inputs:**\
 
-Acute myocardial infarction was split into two severity levels by length of time since the event – days 1 and 2 versus days 3 through 28. Disability weights were established for these two severities using the standard approach for GBD 2019. 
+Acute myocardial infarction was split into two severity levels by length of time since the event – days 1 and 2 versus days 3 through 28. Disability weights were established for these two severities using the standard approach for GBD. 
 
 .. list-table:: Severity distribution for acute myocardial infarction
    :widths: 15 25 12
@@ -128,7 +131,7 @@ Angina was split into asymptomatic, mild, moderate, and severe groups using info
      - Has chest pain that occurs with minimal physical activity, such as walking only a short distance. After a brief rest, the pain goes away. The person avoids most physical activities because of the pain.
      - 0.167 (0.11–0.24)
 
-Heart failure estimates were split into asymptomatic, mild, moderate, and severe heart failure based on the standard GBD 2019 approach to  analysis of MEPS data, with the exception of Chagas disease. MEPS is the only available population-based source that links EQ5D to ICD codes, allowing the application of GBD’s standard disability methods. For Chagas, which is not represented in MEPS, we based the severity splits on a meta-analysis of NYHA class among persons diagnosed with heart failure due to Chagas disease in areas where Chagas is endemic_. Disability weights were established for these severities using the standard approach for GBD 2020.
+Heart failure estimates were split into asymptomatic, mild, moderate, and severe heart failure based on the standard GBD 2019 approach to  analysis of MEPS data, with the exception of Chagas disease. MEPS is the only available population-based source that links EQ5D to ICD codes, allowing the application of GBD’s standard disability methods. For Chagas, which is not represented in MEPS, we based the severity splits on a meta-analysis of NYHA class among persons diagnosed with heart failure due to Chagas disease in areas where Chagas is endemic. Disability weights were established for these severities using the standard approach for GBD 2020.
 
 .. list-table:: Severity distribution for heart failure
    :widths: 15 25 12
@@ -150,7 +153,9 @@ Heart failure estimates were split into asymptomatic, mild, moderate, and severe
      - Is short of breath and feels tired when at rest. The person avoids any physical activity, for fear of worsening the breathing problems. 
      - 0.179 (0.122–0.251)
 
-.. _endemic: Sabino EC, Ribeiro AL, et al, Ten-year incidence of Chagas cardiomyopathy among asymptomatic Trypanosoma cruzi-seropositive former blood donors. Circulation. 2013 Mar 12;127(10):1105-15. Ribeiro AL et al. Brain natriuretic peptide and left ventricular dysfunction in Chagas' disease.  Lancet. 2002 Aug 10;360(9331):461-2. Ribeiro AL, personal communication. NYHA Class Information in a Cohort of Chagas dilated cardiomyopathy; Hospital das Clínicas da UFMG. Ribeiro AL, personal communication. Cohort of patients  attending the Chagas’ disease outpatient clinic of Evandro Chagas Hospital (Oswaldo Cruz Foundation, Rio de Janeiro, Brazil).
+[endemic]_
+
+[GBD-2019-Capstone-Appendix-IHD]_
 
 GBD 2019 Fatal Modeling Strategy
 ++++++++++++++++++++++++++++++++
@@ -158,6 +163,8 @@ GBD 2019 Fatal Modeling Strategy
 **Input data:**\
 
 Vital registration and verbal autopsy data were used to model ischaemic heart disease.
+
+[GBD-2019-Capstone-Appendix-IHD]_
 
 Cause Hierarchy
 +++++++++++++++
@@ -211,15 +218,15 @@ Scope
 
 The aspects of the disease this cause model is designed to simulate are the states, transitions, and sequelae. The Vivarium model of IHD has been of a similar design to GBD 2019 by modeling IHD using MI sequelae to estimate the prevalence of IHD. Like GBD 2019, Vivarium's design includes several states:
 
-  a) Acute myocardial infarction ('Acute MI' or AMI) is captured by two GBD sequelae and simulants should have myocardial infarction at the GBD IHD cause-level incidence rate. Vivarium's design of 'Acute MI' is modeled exactly after GBD 2019's 'Acute MI' case definition and informed by the GBD 2019 "Myocardial infarction due to ischemic heart disease - EMR comparison" model.
-  b) Post-MI is a state entered by survivors of AMI. Vivarium's design of 'Post MI' is modeled after part B of GBD 2019's 'Chronic IHD' case definition, which is captured in GBD as the "Asymptomatic Ischemic Heart Disease following myocardial infarction" dismod model and sequelae.
-  c) Angina, or stable coronary artery disease, is modeled after part A of GBD 2019's 'Chronic IHD' case definition. It is a state entered by individuals based on the incidence rate of the "angina due to ischemic heart disease" dismod model and sequelae.
+  a) Acute myocardial infarction ('Acute MI' or AMI) is captured by two GBD sequelae and simulants should have myocardial infarction at the GBD IHD cause-level incidence rate. Vivarium's design of 'Acute MI' is modeled exactly after GBD 2019's 'Acute MI' case definition and informed by the GBD 2019 "Myocardial infarction due to ischemic heart disease - EMR comparison" DisMod model and sequelae.
+  b) Post-MI is a state entered by survivors of AMI. Vivarium's design of 'Post MI' is modeled after part B of GBD 2019's 'Chronic IHD' case definition, which is captured in GBD as the "Asymptomatic Ischemic Heart Disease following myocardial infarction" DisMod model and sequelae.
+  c) Angina, or stable coronary artery disease, is modeled after part A of GBD 2019's 'Chronic IHD' case definition. It is a state entered by individuals based on the incidence rate of the "angina due to ischemic heart disease" DisMod model and sequelae.
   d) Heart failure due to IHD, also known as ischemic cardiomyopathy, is modeled after part C of GBD 2019's 'Chronic IHD' case definition. It is a state entered by individuals based on the incidence rate of the 'Heart failure impairment envelope' multiplied by the proportion of incidence of heart failure that is due to ischemic heart disease.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-The risk factors BMI, SBP, LDL-c, smoking, FPG, physical inactivity, total alcohol inactivity, diet high in processed meats, and diet high in sugar-sweetened beverage could all affect the transition rates 1, 3, and 4 listed below, through the GBD measure of incidence_c493.
+The risk factor of BMI, SBP, LDL cholesterol, smoking, FPG, physical inactivity, total alcohol intake, processed meats, and sugar sweetened beverage could all affect the transition rates 1, 3, and 4, listed below, through the measures of incidence described in the table.
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -255,8 +262,8 @@ Definitions
    * - S1
      - **S**\ usceptible
      - Susceptible to IHD; S1 used in the AMI cause diagram, currently do not model natural history for IHD so do not track how people enter the AMI state (e.g. as first clinical event or following a diagnosis of angina)
-   * - A
-     - **A**\ cute Myocardial Infarction (AMI)
+   * - AMI
+     - **A**\ cute **M**\ yocardial **I**\ nfarction (AMI)
      - Simulant that experiences acute MI symptoms
    * - P
      - **P**\ ost-MI IHD
@@ -290,7 +297,7 @@ States Data
    * - All
      - cause-specific mortality rate
      - :math:`\frac{\text{deaths_c493}}{\text{population}}`
-     -
+     - Post-CoDCorrect CSMR
    * - S1
      - prevalence
      - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040)}`
@@ -447,7 +454,7 @@ Data Sources
      -
    * - emr_m2412
      - dismod-mr
-     - excess-mortality rate of overal heart failure
+     - excess-mortality rate of overall heart failure
      -
    * - AMI sequelae
      - model assumption
@@ -477,6 +484,18 @@ At the IHD cause level:
 References
 ----------
 
-Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222` 
+.. [NIH_IHD] Coronary Heart Disease. National Health Lung and Blood Institute, U.S. Department of Health.
+   Retrieved 28 June 2021.
+   https://www.nhlbi.nih.gov/health-topics/coronary-heart-disease.
+
+.. [Framingham] McKee et al. N Engl J Med 1971; 285:1441-1446.
+
+.. [Cardiology] Eur Heart J 2016; 37 (27): 2129-2200.
+
+.. [endemic] Sabino EC, Ribeiro AL, et al, 
+   Ten-year incidence of Chagas cardiomyopathy among asymptomatic Trypanosoma cruzi-seropositive former blood donors. Circulation. 2013 Mar 12;127(10):1105-15. Ribeiro AL et al. Brain natriuretic peptide and left ventricular dysfunction in Chagas' disease.  Lancet. 2002 Aug 10;360(9331):461-2. Ribeiro AL, personal communication. NYHA Class Information in a Cohort of Chagas dilated cardiomyopathy; Hospital das Clínicas da UFMG. Ribeiro AL, personal communication. Cohort of patients  attending the Chagas’ disease outpatient clinic of Evandro Chagas Hospital (Oswaldo Cruz Foundation, Rio de Janeiro, Brazil).
+
+.. [GBD-2019-Capstone-Appendix-IHD]
+   Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222`
 
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
