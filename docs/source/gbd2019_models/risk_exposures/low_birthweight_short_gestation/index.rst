@@ -67,14 +67,14 @@ Converting GBD's categorical exposure distribution to a continuous exposure dist
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 In GBD 2019, LBWSG exposure is modeled as an ordered polytomous distribution
-specifying the prevalence of births in each 500g-2week birthweight-ga
-bin/category.  We first convert this discrete exposure distribution into a
-continuous joint exposure distribution of birthweight and gestational age by
-assuming a uniform distribution of birthweights and gestational ages within each
-bin/category. In this way, each simulant can be assigned a continuously
-distributed birthweight and gestational age, which can then be easily mapped
-back to the appropriate risk category in GBD. Example Python code for achieving
-these transformations can be found here:
+specifying the prevalence of births in each 500g x 2week
+birthweight--gestational-age bin/category. We first convert this discrete
+exposure distribution into a continuous joint exposure distribution of
+birthweight and gestational age by assuming a uniform distribution of
+birthweights and gestational ages within each bin/category. In this way, each
+simulant can be assigned a continuously distributed birthweight and gestational
+age, which can then be easily mapped back to the appropriate risk category in
+GBD. Example Python code for achieving these transformations can be found here:
 
 * `Abie's LBWSG cat-to-continuous notebook
   <abie_lbwsg_cat_to_continuous_notebook_>`_ in the ``vivarium_data_analysis``
@@ -85,7 +85,7 @@ these transformations can be found here:
   for a nanosim, using 3 propensities to assign each simulant's exposure.
 
 * The file `low_birth_weight_and_short_gestation.py`_ in the
-  ``vivarium_public_health`` repo implements the LBWSG risk for Vivarium.
+  ``vivarium_public_health`` repo implements the LBWSG risk factor for Vivarium.
 
 .. _abie_lbwsg_cat_to_continuous_notebook: https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb
 
@@ -95,10 +95,10 @@ these transformations can be found here:
 
 .. note::
 
-    This strategy is likely biasing towards overestimating extreme birthweights
-    or gestational ages. For example, in the 0-500g category, most babies are
-    probably pretty close to 500g, not equally likely to be <1 gram versus
-    499-500 grams.
+    The strategy of assuming a uniform distribution on each risk category is
+    likely biasing towards overestimating extreme birthweights or gestational
+    ages. For example, in the 0-500g category, most babies are probably pretty
+    close to 500g, not equally likely to be <1 gram versus 499-500 grams.
 
 Restrictions
 ++++++++++++
