@@ -82,11 +82,16 @@ these transformations can be found here:
 
 * `Nathaniel's LBWSGDistribution class <nathaniel_LBWSGDistribution_class_>`_ in
   the ``vivarium_research_lsff`` repo has an implementation for GBD 2019 data
-  for a nanosim.
+  for a nanosim, using 3 propensities to assign each simulant's exposure.
+
+* The file `low_birth_weight_and_short_gestation.py`_ in the
+  ``vivarium_public_health`` repo implements the LBWSG risk for Vivarium.
 
 .. _abie_lbwsg_cat_to_continuous_notebook: https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb
 
 .. _nathaniel_LBWSGDistribution_class: https://github.com/ihmeuw/vivarium_research_lsff/blob/919a68814a0b9bc838a7e74e424545b3d2b7e48c/nanosim_models/lbwsg.py#L462
+
+.. _low_birth_weight_and_short_gestation.py: https://github.com/ihmeuw/vivarium_public_health/blob/main/src/vivarium_public_health/risks/implementations/low_birth_weight_and_short_gestation.py
 
 .. note::
 
