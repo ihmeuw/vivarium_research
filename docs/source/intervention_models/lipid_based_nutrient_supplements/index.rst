@@ -271,6 +271,12 @@ Validation and Verification Criteria
   
   Did we say we can ramp up coverage to 100% in our scenarios and then we can look between 100% covered in scenario vs. 100% uncovered in baseline? Rather than within the scenario of 90% covered vs 10% uncovered?
 
+.. csv-table:: SQ-LNS intervention output table shell for v & v (Ethiopia)
+   :file: sqlns_vv_output_shell.csv
+   :widths: 20, 20, 10, 10, 10, 20, 20, 10
+   :header-rows: 1
+
+
 References
 ~~~~~~~~~~
 
