@@ -164,71 +164,32 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-.. todo::
+DM type 2 should occur at the incidence of overall DM from the DisMod model. Transition from prevalent DM to death should occur at the EMR rate calculated using DM type 2 specific CSMR and prevalence for DM type 2. Remission should occur at the value from the overall DM model. The transition rate from the susceptible state to the prevalent state should be modified by tobacco and high body mass index. There is a PAF of one for DM and FPG. 
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+Modeling Strategy for Fasting Plasma Glucose
+++++++++++++++++++++++++++++++++++++++++++++
+
+This cause model is designed to simulate the basic structure of the risk factor (FPG) continuous exposure ensemble distribution model. The FPG distribution will range from the theoretical minimum-risk exposure level (TMREL) of 4.5-5.4 mmol/L to the maximum FPG value for each location/sex/age group. For simulants that are in the “Susceptible” state in the vivarium model, the model will randomly draw a value of FPG that is equal to or greater than the TMREL and less than 7.0 mmol/L (case definition for overall DM). For simulants that are included in the prevalent diabetes state, the model will randomly draw a value of FPG that is equal to or greater than 7.0 mmol/L.  
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+- We assume that all incident cases of diabetes in ages 25+ are due to DM type 2.  
+- We do not correctly account for the disease burden due to “controlled” diabetes rather than true susceptible status. 
+- We do not account for the increased risk of death, ischemic heart disease, and other conditions associated with impaired fasting plasma glucose (between 5.6 and 6.9 mmol/L). 
+- We do not account for simulants to progress through increasing levels of severity of diabetes complications. 
+- The GBD estimates do not include gestational diabetes. 
 
 Cause Model Diagram
 +++++++++++++++++++
 
+.. image:: diabetes_cause_model_option_1.svg
+
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
-
 Definitions
 """""""""""
-
-This table contains the definitions of all the states in **cause model diagram**. 
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
-
-**SIR Model**
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - S
-     - Susceptible
-     - Susceptible to {cause name}
-   * - I
-     - Infected
-     - Infected with {cause name}
-   * - R
-     - Recovered
-     - Infected with {cause name}
-
-
-**With-Condition and Free of Condition Model**
 
 .. list-table:: State Definitions
    :widths: 1, 5, 10
@@ -237,26 +198,16 @@ For example, the *Definitions* table for *SIR* and *With-Condition and Free of C
    * - State
      - State Name
      - Definition
-   * - C
-     - With **C**\ ondition
-     - Born with {cause name}
-   * - F
-     - **F**\ ree of Condition
-     - Born without {cause name}
-
-Include states, their names and definitions appropriate to your model.
+   * - S
+     - **S**\usceptible to DM type 2
+     - Simulant that has not been diagnosed with DM type 2
+   * - P
+     - **P**\revalent DM type 2
+     - Simulant with prevalent DM type 2
 
 States Data
 """""""""""
 
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. The common measures in each state are prevalence, birth prevalence, excess mortality rate and disability weights. 
-Cause specific mortality rate is the common measure for all states. In most of the models either prevalence or birth prevalence is used. 
-But in some rare cases like neonatal models both prevalence and birth prevalence are used in model initialization. The Value column contains the formula to calculate 
-the measure in each state.
-
-The structure of the table is as below. For each state, the measures and values must be included.
-
 .. list-table:: States Data
    :widths: 20 25 30 30
    :header-rows: 1
@@ -265,84 +216,38 @@ The structure of the table is as below. For each state, the measures and values 
      - Measure
      - Value
      - Notes
-   * - State
-     - prevalence
-     - 
-     - 
-   * - State
-     - birth prevalence
-     - 
-     - 
-   * - State
-     - excess mortality rate
-     - 
-     - 
-   * - State
-     - disabilty weights
-     - 
-     -
-   * - ALL
-     - cause specific mortality rate
-     - 
-     - 
-
-An example of SI model with both prevalence and birth prevalence in the initialization is given below to explain better. 
-
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
-     - Value
-     - Notes
+   * - All
+     - cause-specific mortality rate (CSMR)
+     - :math:`\frac{\text{deaths_c976}}{\text{population}}`
+     - Post CoDCorrect cause-level CSMR, type 2 only
    * - S
      - prevalence
-     - 1-prevalence_cid
+     - 1-prevalence_c976
      - 
-   * - S
-     - birth prevalence
-     - 1-birth_prevalence_cid
-     - 
+   * - P
+     - prevalence
+     - :math:`\sum\limits_{s \in sequelae} \text{prevalence}_s`
+     - There are 8 sequelae
    * - S
      - excess mortality rate
      - 0
      - 
+   * - P
+     - excess mortality rate
+     - :math:`\frac{\text{csmr_976}}{\text{prevalence_976}}`
+     - Cannot use EMR from overall DM model as it represents combination of risk for type 1 and type 2
    * - S
      - disabilty weights
      - 0
      -
-   * - I
-     - prevalence
-     - prevalence_cid
-     - 
-   * - I
-     - birth prevalence
-     - birth_prevalence_cid
-     - 
-   * - I
-     - excess mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population} \times \text{prevalence_cid}}`
-     - = (cause-specific mortality rate) / prevalence
-   * - I
+   * - P
      - disability weights
-     - :math:`\displaystyle{\sum_{s\in \text{sequelae_cid}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
-     - = total disability weight over all sequelae
-   * - ALL
-     - cause specific mortality rate
-     - :math:`\frac{\text{deaths_cid}}{\text{population}}`
+     - :math:`\frac{1}{\text{prevalence_c976}} \times \sum\limits_{s \in sequelae} \text{disability_weight}_s \times \text{prevalence}_s`
      - 
 
 Transition Data
 """""""""""""""
 
-This table contains the measures needed for transition from one state to other in the cause model. The common measures used are *incident rate* to 
-move from Susceptible to Infected and *remission rate* to move from Infected to Susceptible or Recovered states. Some times there may not be transition 
-between states as in Neonatal disorders.
-
-The structure of the table is as below. 
-
 .. list-table:: Transition Data
    :widths: 10 10 10 20 30
    :header-rows: 1
@@ -352,64 +257,20 @@ The structure of the table is as below.
      - Sink 
      - Value
      - Notes
-   * - i
+   * - 1
      - S
-     - I
-     - 
-     - 
-   * - r
-     - I
-     - R
-     - 	
-     - 
- 
-
-An example, if the data is present in GBD,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
+     - P
+     - incidence_m2005
+     - This is the incidence from the overall DM model; assuming that incidence among people 25+ is almost entirely type 2
+   * - 2
+     - P
      - S
-     - I
-     - :math:`\frac{\text{incidence_rate_cid}}{\text{1 - prevalence_cid}}`
-     - 
-   * - r
-     - I
-     - R
-     - remission_rate_cid
-     - 
-
-Sometimes, we might need to use *modelable entity id* to get data. Sometimes, we might need to calculate remission rate 
-based on average case duration. In that case, the row would look like,
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
-   :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - r
-     - I
-     - R
-     - remission_rate_cid :math:`= \frac{\text{365 person-days}}{\text{average case duration in days} \times \text{1 year}}`
-     - 
-	 
+     - remission_m2005
+     - This is remission from the overall DM model; remission is only allowed among those 15+ and represents glucose control among persons with type 2 DM as remission is not possible for type 1
 
 Data Sources
 """"""""""""
 
-This table contains the data sources for all the measures. The table structure and common measures are as below:
-
 .. list-table:: Data Sources
    :widths: 20 25 25 25
    :header-rows: 1
@@ -418,93 +279,45 @@ This table contains the data sources for all the measures. The table structure a
      - Sources
      - Description
      - Notes
-   * - prevalence_cid
-     - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
-     - 
-   * - population
-     - 
-     - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_m1594
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
-     - 
-
-An example, that contains common sources for the measures,
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_cid
+   * - prevalence_c976
      - como
-     - Prevalence of cause
+     - Prevalence of DM type 2
      - 
-   * - birth_prevalence_cid
-     - como
-     - Birth prevalence of cause
-     -
-   * - deaths_cid
+   * - deaths_c976
      - codcorrect
-     - Deaths from cause
-     - 
+     - Deaths from DM type 2
+     -
+   * - incidence_m2005
+     - como
+     - Incidence of DM type 2
+     - Assuming that the vast majority of incident DM cases among those 25+ are type 2
    * - population
      - demography
      - Mid-year population for given age/sex/year/location
      - 
-   * - sequelae_cid
+   * - sequelae_c976
      - gbd_mapping
-     - List of sequelae
-     - 
-   * - incidence_rate_cid/mid
-     - como/dismod
-     - Incidence rate for cause
-     - 
-   * - remission_rate_cid/mid
-     - como/dismod
-     - Remission rate for cause
-     - 
-   * - disability_weight_s{`sid`}
-     - YLD appendix
-     - Disability weight of sequela with id `sid`
+     - List of 8 sequelae for DM type 2
      - 
    * - prevalence_s{`sid`}
      - como
      - Prevalence of sequela with id `sid`
      - 
+   * - disability_weight_s{`sid`}
+     - YLD appendix
+     - Disability weight of sequela with id `sid`
+     - 
+   * - sequelae
+     - sequelae definition
+     - {s5465, s5456, s5453, s5459, s5462, s5468, s5471, s5474}
+     - 
 
 
 Validation Criteria
 +++++++++++++++++++
+
+1. Compare CSMR explained by simulants to CSMR from CoDCorrect in GBD
+2. Compare prevalence experienced by simulants to post-COMO prevalence in GBD
 
 References
 ----------
