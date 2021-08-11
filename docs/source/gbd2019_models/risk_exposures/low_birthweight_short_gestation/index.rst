@@ -61,6 +61,8 @@ Risk Exposures Description in GBD
 Vivarium Modeling Strategy
 --------------------------
 
+Our strategy for modeling exposure will be the same as for the :ref:`GBD 2017 Low Birth Weight and Short Gestation Model <2017_risk_lbwsg>`.
+
 Converting GBD's categorical exposure distribution to a continuous exposure distribution
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
