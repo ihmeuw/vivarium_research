@@ -61,9 +61,27 @@ Risk Exposures Description in GBD
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
+Converting GBD's categorical exposure distribution to a continuous exposure distribution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  Include here an overview of the Vivarium modeling section
+In GBD 2019, LBWSG exposure is modeled as an ordered polytomous distribution
+specifying the prevalence of births in each 500g-2week birthweight-ga
+bin/category.  We first convert this discrete exposure distribution into a
+continuous joint exposure distribution of birthweight and gestational age by
+assuming a uniform distribution of birthweights and gestational ages within each
+bin/category. In this way, each simulant can be assigned a continuously
+distributed birthweight and gestational age, which can then be easily mapped
+back to the appropriate risk category in GBD. Python code for achieving these
+transformations can be found in `Abie's notebook
+<https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb>`_
+in the Vivarium Data Analysis repo.
+
+.. note::
+
+    This strategy is likely biasing towards overestimating extreme birthweights
+    or gestational ages. For example, in the 0-500g category, most babies are
+    probably pretty close to 500g, not equally likely to be <1 gram versus
+    499-500 grams.
 
 Restrictions
 ++++++++++++
