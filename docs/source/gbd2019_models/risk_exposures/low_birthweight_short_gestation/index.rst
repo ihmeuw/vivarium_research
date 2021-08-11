@@ -73,10 +73,20 @@ continuous joint exposure distribution of birthweight and gestational age by
 assuming a uniform distribution of birthweights and gestational ages within each
 bin/category. In this way, each simulant can be assigned a continuously
 distributed birthweight and gestational age, which can then be easily mapped
-back to the appropriate risk category in GBD. Python code for achieving these
-transformations can be found in `Abie's notebook
-<https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb>`_
-in the Vivarium Data Analysis repo.
+back to the appropriate risk category in GBD. Example Python code for achieving
+these transformations can be found here:
+
+* `Abie's LBWSG cat-to-continuous notebook
+  <abie_lbwsg_cat_to_continuous_notebook_>`_ in the ``vivarium_data_analysis``
+  repo has a simple implementation demonstrating what we want.
+
+* `Nathaniel's LBWSGDistribution class <nathaniel_LBWSGDistribution_class_>`_ in
+  the ``vivarium_research_lsff`` repo has an implementation for GBD 2019 data
+  for a nanosim.
+
+.. _abie_lbwsg_cat_to_continuous_notebook: https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb
+
+.. _nathaniel_LBWSGDistribution_class: https://github.com/ihmeuw/vivarium_research_lsff/blob/919a68814a0b9bc838a7e74e424545b3d2b7e48c/nanosim_models/lbwsg.py#L462
 
 .. note::
 
