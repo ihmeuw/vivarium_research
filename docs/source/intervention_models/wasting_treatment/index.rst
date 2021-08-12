@@ -195,6 +195,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 
 .. todo::
     What about MAM with oedema? Are they treated as SAM or MAM?
+    Answer: they are treated as MAM in GBD, but in reality, probably SAM. Mam with oedema is approximately 2% of MAM. 
 
 .. _waste_tx2.2:
 
@@ -269,7 +270,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
   * - Proportion recovered within programme treatment length
     - Increases
     - No (but we can)
-    - We assume that all treatment covered will recover within the time-to-recovery if they had not died. We can modify the treatment coverage by multiplying it by the 'cure rate' giving us the 'met-need' instead. 1 - 'met-need' will be the 'utx' population. 
+    - We assume that all treatment covered will recover within the time-to-recovery if they had not died. We can modify the treatment coverage by multiplying it by the 'treatment efficacy' giving us the 'effective coverage' instead. 1 - 'effective coverage' will be the 'utx' population. 
   * - Proportion defaulted during programme
     - Decreases
     - We can capture this by using 'met-need'
@@ -285,26 +286,31 @@ The aim and priority in community-based services for the management of acute mal
 
 Treatment coverage should not be confused with geographical coverage. 
 
-
   Geogpraphical coverage = :math:`\frac{\text{Healthcare facilities/communities delivering MAM/SAM treatments}}{\text{Total number of facilities/communities}}`
 
-Geographic coverage attempts to measure the *availability* of services which does not equate with the *service access* and *uptate*. 
+Geographic coverage attempts to measure the *availability* of services which does not equate with the *service access* and *uptake*. 
 
-**Met need** is the product of the coverage and the cure-rate (proportion of the treated who were cured).
+**Effectively covered** is the product of the treatment coverage and the treatment efficacy (proportion of the treated who were cured or 'cure-rate').
 
-  Met-need = :math:`\text{treatment coverage}\times\text{cure-rate}`
+  - Effective coverage ('met-need') = :math:`\text{treatment coverage}\times\text{treatment efficacy}`
 
-For example, a service with treatment coverage of 50%, and a cure-rate of 90% is meeting 50% x 90% = 45% of need. 
+  - Not effectively covered = 1 - effective coverage
 
-| SAM programme treatment coverage: 48.8% (37.4 - 60.4) (point coverage, assumes programmes are not good at case finding) [Isanaka_2021]_
+For example, a service with treatment coverage of 50%, and a cure-rate of 90% is meeting 50% x 90% = 45% of need (effective coverage of 45%). 
+
+.. image:: effective_coverage_figure.svg
+
+
+| SAM programme treatment coverage: 48.8% (37.4 - 60.4) (this is a point coverage; assumes programmes are not good at case finding) [Isanaka_2021]_
 | MAM programme treatment coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
 
 
 .. note::
 
-  1) For now, we will use the tx coverage in hopes we will update this to a 'met-need'. 
+  1) Add treatment efficacy for SAM and MAM programmes 
   2) Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
-  3) Make sure that SQUEAC measures tx. coverage and not met-need coverage)
+  3) Update coverage values to 'effective coverage' values
+
 
 
 .. list-table:: Baseline coverage data
@@ -339,9 +345,10 @@ For example, a service with treatment coverage of 50%, and a cure-rate of 90% is
 
 
 .. note::
-  I think this 'coverage proportion' should be updated to a more realistic 'met-need' proportion which is treatment coverage proportion x programme cure rate. The programme cure rate is the proportion 'recovered' during the time-to-recovery within the programme (studies report the time-to-recovery of those who recover during the programme; those who do not would be classified as 'non-responders'). 1-(tx coverage x cute-rate) would be the proportion who would recover with the untreated time-to-recovery duration. The assumption is that if they do not die, they will eventually recover. 
 
-  I would like to understand from SWEs what happens when they change age groups, do they spontaneously recover? I guess that would make sense...those who survive are stronger than those who died; also prevalence doesn't change that much between 28day-5 years.
+  Update coverage from treatment coverage to effective coverage 
+
+  I would like to understand from SWEs what happens when they change age groups, do those on the cusp spontaneously recover? I guess that would make sense...those who survive are stronger than those who died; also prevalence doesn't change that much between 28day-5 years.
 
 
 .. _waste_tx3.0:
