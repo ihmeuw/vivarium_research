@@ -34,7 +34,6 @@ Low Birthweight and Short Gestation
 
 .. contents::
    :local:
-   :depth: 2
 
 Risk Exposure Overview
 ----------------------
@@ -117,6 +116,9 @@ Risk Exposure Model Diagram
 Data Description Tables
 +++++++++++++++++++++++
 
+Pulling LBWSG exposure data from GBD 2019
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 You can pull GBD 2019 exposure data for Low Birthweight and Short Gestation
 using the following call to ``get_draws`` (replace :code:`ETHIOPIA_ID` with the
 appropriate location IDs for the model you're working on):
@@ -154,6 +156,9 @@ appropriate location IDs for the model you're working on):
     Vivarium will only need the conditional prevalences for males and females
     (sex_id=[1,2]) since we will be initializing our population using GBD's
     population data and stratifying by sex.
+
+Using LBWSG exposure data in Vivarium
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. todo::
 
