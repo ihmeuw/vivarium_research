@@ -162,6 +162,10 @@ We will apply the relative risk ratio as a relative rate ratio on the incidence 
 | = 0.82 x (prevalence_baseline_6mo) 
 | = 0.82 x (incidence_baseline_6mo) x Duration_baseline
 
+.. important::
+
+  Note that when we apply this incidence reduction to the incidence of MAM from Mild, we will inadvertently reduce SAM prevalence. This is because less people will be transitioning into SAM. Although the Das 2019 Cochrane Review says the intervention has no effect on SAM (in fact, it seems like it may increase SAM prevalence based on the mean prevalence RR!), we are assuming 'an absence of evidence is not evidence of absence' - quote Abie. Logically, it should reduce SAM prevalence. We should discuss this in our methods in the manuscript and see how much of SAM prevalence is decreased. 
+
 .. todo::
   
   Try this out in the nano-sim to see how the intervention affects moderate wasting prevalence when RR applied to i2. 
@@ -169,7 +173,7 @@ We will apply the relative risk ratio as a relative rate ratio on the incidence 
 .. todo::
   
   Think about whether we want to apply the full reduction in incidence at 6 months or we have a gradual reduction in incidence, reaching full reduction at 18 months? 
-  Answer: we will start simple and apply immediately to 6 months. We can add complexity later. 
+  Answer: we will start simple and apply immediately to 6 months (no gradual ramp-up). We can add complexity later. 
 
 :underline:`Outcome #2 and #3: moderate and severe stunting`
 
@@ -238,9 +242,19 @@ We will apply the relative risk ratio on the propensity of stunting starting fro
     - 
     - 
 
+.. note::
+ 
+  We apply the effect size according to the outcome restictions in the above table. This means that the intervention starts at 6 months and the effect is sustained throughout until they are 5 years old if covered. They are still covered even during episodes of SAM or MAM. However, for the costing, we will restrict supplementation from 6 months to 2 years old (add reference for this claim). I will add more research to the costing model. 
+
+
 .. todo::
 
   Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+
+
+Cost Model
+~~~~~~~~~~
+
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -248,8 +262,19 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- prevalence of stunting in supplemented vs non-supplemented group
-- incidence of moderate wasting from mild in supplemented vs non-supplemented group
+- verification: prevalence of stunting in supplemented vs non-supplemented group
+- verification: incidence of moderate wasting from mild in supplemented vs non-supplemented group
+- validation: check that the prevalence of moderate wasting in supplemented vs non-supplemented group agrees with the prevalence RR that we applied to the incidence instead. 
+- validation: check to see how much of SAM prevalence decreases from reduction in MAM incidence from MILD. 
+
+.. todo::
+  
+  Did we say we can ramp up coverage to 100% in our scenarios and then we can look between 100% covered in scenario vs. 100% uncovered in baseline? Rather than within the scenario of 90% covered vs 10% uncovered?
+
+.. csv-table:: SQ-LNS intervention output table shell for v & v (Ethiopia)
+   :file: sqlns_vv_output_shell.csv
+   :widths: 20, 20, 10, 10, 10, 20, 20, 10
+   :header-rows: 1
 
 
 References
