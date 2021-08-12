@@ -483,4 +483,13 @@ Apply the following intervention shifts according to interventions recieved in e
 7.0 Limitations
 +++++++++++++++
 
+.. _bep8.0:
+
+8.0 Journal reviewer comments
++++++++++++++++++++++++++++++
+
+We will do a sensitivity analysis on coverage for MMS, universal BEP and targeted BEP for a series of coverage points using one draw to explore relationship between the coverage proportion of the interventions and outcome (DALY's averted):
+
+  - 0.4, 0.45, 0.5, 0.55, 0.6, .65, 0.7, 0.75, 0.8, 0.85, 0.9
+  
 
