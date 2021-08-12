@@ -67,9 +67,46 @@ Risk Exposures Description in GBD
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
+Our strategy for modeling exposure will be the same as for the :ref:`GBD 2017 Low Birth Weight and Short Gestation Model <2017_risk_lbwsg>`.
 
-  Include here an overview of the Vivarium modeling section
+Converting GBD's categorical exposure distribution to a continuous exposure distribution
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+In GBD 2019, LBWSG exposure is modeled as an ordered polytomous distribution
+specifying the prevalence of births in each 500g x 2week
+birthweight--gestational-age bin/category. We first convert this discrete
+exposure distribution into a continuous joint exposure distribution of
+birthweight and gestational age by assuming a uniform distribution of
+birthweights and gestational ages within each bin/category. In this way, each
+simulant can be assigned a continuously distributed birthweight and gestational
+age, which can then be easily mapped back to the appropriate risk category in
+GBD. Example Python code for achieving these transformations can be found here:
+
+* `Abie's LBWSG cat-to-continuous notebook
+  <abie_lbwsg_cat_to_continuous_notebook_>`_ in the ``vivarium_data_analysis``
+  repo has a simple implementation demonstrating what we want.
+
+* `Nathaniel's LBWSGDistribution class <nathaniel_LBWSGDistribution_class_>`_ in
+  the ``vivarium_research_lsff`` repo has an implementation for GBD 2019 data
+  for a nanosim, using 3 propensities to assign each simulant's exposure.
+
+* The file `low_birth_weight_and_short_gestation.py`_ in the
+  ``vivarium_public_health`` repo implements the LBWSG risk factor for Vivarium.
+
+.. _abie_lbwsg_cat_to_continuous_notebook: https://github.com/ihmeuw/vivarium_data_analysis/blob/master/pre_processing/lbwsg/2019_03_19c_lbwsg_cat_to_continuous_abie.ipynb
+
+.. _nathaniel_LBWSGDistribution_class: https://github.com/ihmeuw/vivarium_research_lsff/blob/919a68814a0b9bc838a7e74e424545b3d2b7e48c/nanosim_models/lbwsg.py#L462
+
+.. _low_birth_weight_and_short_gestation.py: https://github.com/ihmeuw/vivarium_public_health/blob/main/src/vivarium_public_health/risks/implementations/low_birth_weight_and_short_gestation.py
+
+.. note::
+
+    The strategy of assuming a uniform distribution on each risk category is
+    likely biasing towards overestimating extreme birthweights or gestational
+    ages. For example, in the 0-500g category, most babies are probably pretty
+    close to 500g, not equally likely to be <1 gram versus 499-500 grams.
+    A limitation of this approach is therefore to overestimate the severity of the risk exposure distribution.  Since these extremely high risk categories are quite rare, we expect that the impact of this will be small.  In future work, we could use a more complex transformation to derive continuous values from the risk categories, but we should not pursue this until we have an application where it is clear that this limitation is a risk to the validity of our results.
+
 
 Restrictions
 ++++++++++++
