@@ -197,6 +197,23 @@ appropriate location IDs for the model you're working on):
 Correcting LBWSG exposure data pulled from GBD 2019
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. important::
+
+  **The GBD 2019 exposure data for Low Birthweight and Short Gestation is wrong!**
+
+  Namely, the prevalences of the LBWSG categories returned by ``get_draws`` do **not** add up to 1! To fix the problem, follow these steps:
+
+  1.  Drop rows of the exposure data with ``'parameter' == 'cat125'`` (these
+      are precisely the rows with ``'modelable_entity_id' == NaN``). cat125 is
+      not a modeled category but rather a residual category automatically added
+      by ``get_draws`` because the prevalences that the LBWSG modelers gave to
+      central comp did not add up to 1.
+
+  2.  For each draw, divide the prevalence of each of the 58 remaining LBWSG
+      exposure categories by the sum of the prevalences for that draw. This
+      rescales the prevalences to sum to 1 so that they correctly represent
+      probabilities.
+
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
