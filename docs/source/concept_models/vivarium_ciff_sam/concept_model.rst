@@ -192,7 +192,7 @@ Scale up the coverage of treatment and prevention interventions to 90%.
 
 * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
 
-* Low Birthweight and Short Gestation (GBD 2019)
+* :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
 
 5.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
