@@ -214,7 +214,7 @@ Correcting LBWSG exposure data pulled from GBD 2019
       rescales the prevalences to sum to 1 so that they correctly represent
       probabilities.
 
-  Here is Python code to perform these steps, assuming ``lbwsg_exposure`` has been pulled using ``get_draws`` as above:
+  Here is `Python code to perform these steps <rescale_prevalence_function_>`_ from Nathaniel's `lbwsg module`_ in the ``vivarium_research_lsff`` repo, assuming ``lbwsg_exposure`` has been pulled using ``get_draws`` as above:
 
   .. code-block:: Python
 
@@ -235,6 +235,10 @@ Correcting LBWSG exposure data pulled from GBD 2019
       return exposure
 
     lbwsg_exposure = rescale_prevalence(lbwsg_exposure)
+
+.. _rescale_prevalence_function: https://github.com/ihmeuw/vivarium_research_lsff/blob/919a68814a0b9bc838a7e74e424545b3d2b7e48c/nanosim_models/lbwsg.py#L220
+
+.. _lbwsg module: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py
 
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
