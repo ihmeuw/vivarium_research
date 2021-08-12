@@ -99,6 +99,8 @@ GBD. Example Python code for achieving these transformations can be found here:
     likely biasing towards overestimating extreme birthweights or gestational
     ages. For example, in the 0-500g category, most babies are probably pretty
     close to 500g, not equally likely to be <1 gram versus 499-500 grams.
+    A limitation of this approach is therefore to overestimate the severity of the risk exposure distribution.  Since these extremely high risk categories are quite rare, we expect that the impact of this will be small.  In future work, we could use a more complex transformation to derive continuous values from the risk categories, but we should not pursue this until we have an application where it is clear that this limitation is a risk to the validity of our results.
+
 
 Restrictions
 ++++++++++++
