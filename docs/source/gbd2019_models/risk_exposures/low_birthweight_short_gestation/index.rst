@@ -240,6 +240,11 @@ Correcting LBWSG exposure data pulled from GBD 2019
 
 .. _lbwsg module: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py
 
+.. note::
+
+  We should double-check with the LBWSG modelers that rescaling the prevalences
+  is a reasonable way to correct the GBD data.
+
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
