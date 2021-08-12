@@ -161,7 +161,7 @@ Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use the Low Birthweight and Short Gestation exposure data from GBD to initialize
-the risk exposure categories of simulants a follows:
+the risk exposure categories of simulants as follows:
 
 * Simulants initialized into age group 2 (Early Neonatal) or age group 3 (Late
   Neonatal) at the beginning of the simulation should be assigned an LBWSG
@@ -171,10 +171,11 @@ the risk exposure categories of simulants a follows:
 * Simulants born during the simulation should be assigned an LBWSG exposure
   category using the exposure data for age_group_id=164 (Birth).
 
-As discussed above, once a simulant is assigned an LBWSG exposure category, they
-should be assigned a birthweight and gestational age by assuming the joint
-distribution of birthweights and gestational ages is uniform within each
-category.
+The probability that a simulant's exposure category is ``cat_i`` should equal
+the prevalence of ``cat_i`` for the simulant's age group and sex. As discussed
+above, once a simulant is assigned an LBWSG exposure category, they should be
+assigned a birthweight and gestational age by assuming the joint distribution of
+birthweights and gestational ages is uniform within each category.
 
 .. todo::
 
