@@ -32,6 +32,10 @@
 Low Birthweight and Short Gestation
 ======================================
 
+.. contents::
+   :local:
+   :depth: 2
+
 Risk Exposure Overview
 ----------------------
 
@@ -57,6 +61,8 @@ Risk Exposures Description in GBD
     - Which outcomes are affected by this risk?
 
     - TMREL? (This should be a very high level overview. Namely, does the TMREL vary by outcome? The details of the TMREL will be included in the *Risk Outcome Relationship Model* section)
+
+  See [GBD-2019-Risk-Factors-Appendix-LBWSG]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -147,3 +153,15 @@ Validation Criteria
 
 References
 ----------
+
+.. [GBD-2019-Risk-Factors-Appendix-LBWSG]
+
+ Pages 167-177 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
+
+   **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
+   :title:`Global burden of 87 risk factors in 204 countries and territories,
+   1990–2019: a systematic analysis for the Global Burden of Disease Study
+   2019`. Lancet 2020; **396:** 1223–49. DOI:
+   https://doi.org/10.1016/S0140-6736(20)30752-2
+
+.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
