@@ -171,11 +171,18 @@ the risk exposure categories of simulants as follows:
 * Simulants born during the simulation should be assigned an LBWSG exposure
   category using the exposure data for age_group_id=164 (Birth).
 
+* Simulants initialized into age group 4 (Post Neonatal) or older at the
+  beginning of the simulation should have their LBWSG catgory declared "unknown"
+  unless there is a specific need to track birthweights and gestational ages for
+  older simulants *and* there is additional data beyond GBD to inform the
+  exposure distribution in older age groups.
+
 The probability that a simulant's exposure category is ``cat_i`` should equal
 the prevalence of ``cat_i`` for the simulant's age group and sex. As discussed
 above, once a simulant is assigned an LBWSG exposure category, they should be
 assigned a birthweight and gestational age by assuming the joint distribution of
 birthweights and gestational ages is uniform within each category.
+
 
 .. todo::
 
