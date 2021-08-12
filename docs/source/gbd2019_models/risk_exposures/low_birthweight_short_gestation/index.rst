@@ -160,6 +160,14 @@ appropriate location IDs for the model you're working on):
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+* Simulants initialized into age group 2 (Early Neonatal) or age group 3 (Late
+  Neonatal) at the beginning of the simulation should be assigned an LBWSG
+  exposure category using the exposure data for age_group_id 2 or 3,
+  respectively.
+
+* Simulants born during the simulation should be assigned an LBWSG exposure
+  category using the exposure data for age_group_id=164 (Birth).
+
 .. todo::
 
   As of 02/10/2020: follow the template created by Ali for Iron Deficiency,
