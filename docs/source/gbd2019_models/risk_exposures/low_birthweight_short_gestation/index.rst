@@ -194,6 +194,9 @@ appropriate location IDs for the model you're working on):
     (sex_id=[1,2]) since we will be initializing our population using GBD's
     population data and stratifying by sex.
 
+Correcting LBWSG exposure data pulled from GBD 2019
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
