@@ -140,6 +140,21 @@ appropriate location IDs for the model you're working on):
         decomp_step='step4',
   )
 
+.. note::
+
+  * If ``age_group_id`` is not specified, ``get_draws`` defaults to pulling
+    exposure data for all available age groups, which for LBWSG are **164
+    (Birth)**, **2 (Early Neonatal)**, and **3 (Late Neonatal)**. Typically
+    Vivarium will need exposure data for all three age groups.
+
+  * If ``sex_id`` is not specified, ``get_draws`` defaults to pulling exposure
+    data for sex IDs **1 (Male)** and **2 (Female)**. Exposure data is also
+    avaialble for sex ID 3 (Both), which takes into account the relative
+    populations of males and females in the specified location(s). Typically
+    Vivarium will only need the conditional prevalences for males and females
+    (sex_id=[1,2]) since we will be initializing our population using GBD's
+    population data and stratifying by sex.
+
 .. todo::
 
   As of 02/10/2020: follow the template created by Ali for Iron Deficiency,
