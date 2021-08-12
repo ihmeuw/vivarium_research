@@ -150,8 +150,8 @@ Risk Exposure Model Diagram
 
   Include diagram of Vivarium risk exposure model.
 
-Data Description Tables
-+++++++++++++++++++++++
+Data Description
+++++++++++++++++
 
 Pulling LBWSG exposure data from GBD 2019
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
