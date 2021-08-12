@@ -207,7 +207,7 @@ Correcting LBWSG exposure data pulled from GBD 2019
       are precisely the rows with ``'modelable_entity_id' == NaN``). cat125 is
       not a modeled category but rather a residual category automatically added
       by ``get_draws`` because the prevalences that the LBWSG modelers gave to
-      central comp did not add up to 1.
+      central comp did not add up to 1 in each draw.
 
   2.  For each draw, divide the prevalence of each of the 58 remaining LBWSG
       exposure categories by the sum of the prevalences for that draw. This
@@ -250,9 +250,9 @@ Using LBWSG exposure data in Vivarium
 
 The probability that a simulant's Low Birthweight and Short Gestation exposure
 category is ``cat_i`` should equal the prevalence of ``cat_i`` for the
-simulant's age group and sex according to GBD. Specifically, the LBWSG
-prevalence data from GBD should be used to initialize the exposure categories of
-simulants as follows:
+simulant's age group and sex according to GBD (after correcting the prevalences
+as indicated above). Specifically, the LBWSG prevalence data from GBD should be
+used to initialize the exposure categories of simulants as follows:
 
 * Simulants initialized into age group 2 (Early Neonatal) or age group 3 (Late
   Neonatal) **at the beginning of the simulation** should be assigned an LBWSG
