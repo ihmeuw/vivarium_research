@@ -117,6 +117,29 @@ Risk Exposure Model Diagram
 Data Description Tables
 +++++++++++++++++++++++
 
+You can pull GBD 2019 exposure data for Low Birthweight and Short Gestation
+using the following call to ``get_draws`` (replace :code:`ETHIOPIA_ID` with the
+appropriate location IDs for the model you're working on):
+
+.. code-block:: Python
+
+  LBWSG_REI_ID = 339
+  ETHIOPIA_ID = 179
+  GBD_2019_ROUND_ID = 6
+
+  lbwsg_exposure = get_draws(
+        gbd_id_type='rei_id',
+        gbd_id=LBWSG_REI_ID,
+        source='exposure',
+        location_id=ETHIOPIA_ID,
+        year_id=2019,
+  #       age_group_id = [164,2,3], # Pulls all three age groups by default
+  #       sex_id=[1,2], # Pulls sex_id=[1,2] by default, but data for sex_id=3 also exists
+        gbd_round_id=GBD_2019_ROUND_ID,
+        status='best',
+        decomp_step='step4',
+  )
+
 .. todo::
 
   As of 02/10/2020: follow the template created by Ali for Iron Deficiency,
