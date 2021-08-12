@@ -49,6 +49,10 @@ Vivarium acute malnutrition
 +-------+----------------------------+
 | SAM   | Severe acute malnutrition  |
 +-------+----------------------------+
+| OTP   | Outpatient therapeautic    |
+|       | programme                  |
++-------+----------------------------+
+
 
 1.0 Background
 ++++++++++++++
@@ -152,10 +156,14 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
 
 **Alternative scenario 1**
-Scale up the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease  with a shorter duration (prevalence ~ incidence x duration).    
+Scale up (immediate, not temporal) the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease  with a shorter duration (prevalence ~ incidence x duration).    
 
 | Effective coverage = treatment coverage x treatment efficacy
 | Not effectively covered = 1 - (treatment coverage x treatment efficacy)
+
+Note: we apply an immediate scale-up rather than a temporal scale-up for now.  
+
+See linked documentation for more information :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
 .. list-table:: Effective coverage of GAM treatment program
   :widths: 10 10 10 15 15 15 20 
@@ -344,6 +352,17 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 5.4 Desired outputs
 -------------------
+
+Final outputs to report in manuscript 
+
+.. csv-table:: Final outcomes table to report in manuscript
+   :file: final_outcomes_output_shell.csv
+   :widths: 20, 20, 10, 10, 10, 10, 10, 10, 10
+   :header-rows: 1
+
+.. note::
+  
+  draft table to be refined
 
 .. _5.5:
 
