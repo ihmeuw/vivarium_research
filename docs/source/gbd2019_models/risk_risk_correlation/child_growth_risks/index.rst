@@ -104,20 +104,105 @@ Wasting and Stunting
 Risk Exposures in GBD
 -----------------------
 
+GBD models the correlated joint distribution of gestational age and birthweight as a single low birth weight and short gestation (LBWSG) risk factor. However, GBD does not consider the joint distribution of other risk exposures related to child anthropometry. Therefore, we will model risk-risk correlation of GBD risk exposures between LBWSG with wasting (and others) separately from the GBD in Vivarium.
+
+Notably, in GBD, there are LBWSG risk exposures at birth and among the early and late neonatal age groups only. For the child growth failure risks (wasting, stunting, and underweight), there are risk exposures for all age groups under five years, although risk effects for these risks apply to the post-neonatal and 1-4 age groups only.
+
+Links to documentation for relevant risk exposure pages include:
+
+- :ref:`GBD 2019 Low birthweight short gestation risk exposure <2019_risk_exposure_lbwsg>`
+
+- :ref:`GBD 2020 Wasting risk exposure <2020_risk_exposure_wasting_state_exposure>`
+
+- :ref:`GBD 2020 Stunting risk exposure <2020_risk_exposure_child_stunting>`
+
+Vivarium Modeling Strategy
+----------------------------
+
+The strategy for modeling risk-risk correlations related to child anthropometry in this document was developed for the needs of the :ref:`acute malnutrition treatment and prevention simulation <2019_concept_model_vivarium_ciff_sam>`. Different strategies may be more appropriate for different project needs and should be reavaluated when necessary.
+
 Birthweight and Wasting
 ++++++++++++++++++++++++
+
+In GBD, the birthweight exposure distribution is tracked through the late neonatal age group (28 days after birth) and affects the risk of mortality during this period. For the :ref:`acute malnutrition treatment and prevention simulation <2019_concept_model_vivarium_ciff_sam>`, child wasting exposures are modeled as a dynamic transition model (:ref:`documented here <2020_risk_exposure_wasting_state_exposure>`) rather than a standard static propensity-based risk exposure model (:ref:`such as the stunting risk exposure model <2020_risk_exposure_child_stunting>`). Therefore, there will be two approaches to modeling the correlation and causal association between birthweight and wasting, including 1) the initialization of wasting risk exposure upon transition into the postneonatal age group based on a simulant's birthweight exposure value, and 2) the correlation between a simulant's propensity for wasting incidence over time ("x-factor") with their birth weight exposure.
+
+.. todo::
+
+   Link to x-factor documentation for wasting model when it is developed
 
 Correlation
 ^^^^^^^^^^^^
 
+Initialization
+~~~~~~~~~~~~~~~
+
+When simulants are initialized into the early or late neonatal age groups or born into the simulation, they will be assigned a birthweight exposure value. When they transition into the postneonatal age group, they should be initialized into a particular state in the wasting model (e.g. TMREL, mild wasting, moderate wasting, or severe wasting) *based on their birthweight percentile within their overall location- and sex-specific birthweight distribution among the late neonatal age group.*
+
+This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+
+.. todo::
+
+   Add more detail on the methodology here/as implemented in the BEP project
+
+.. note::
+
+   For simulants who are initialized into age groups older than the late neonatal age group, they will not be assigned a birthweight exposure, so they should be assigned a wasting exposure value that is independent of their birthweight.
+
+Transitions
+~~~~~~~~~~~~
+
+.. todo::
+
+   Add detail on how to correlate wasting x-factor propensity to birthweight exposure
+
 Causation
 ^^^^^^^^^^^
+
+For interventions that impact birthweight, there should be a corresponding change in a child's wasting risk exposure attributable *if the impact of the intervention on wasting is not modeled directly*.
+
+Initialization
+~~~~~~~~~~~~~~~~
+
+For each gram increase in a simulant's birthweight due to a simulation intervention, the category 1 (severe wasting) and category 2 (moderate wasting) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting is equal to 0.0115 / 200 = 0.00575. The exposure distribution of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.00575. The figure below demonstrates how to implement this change visually.
+
+.. image:: wasting_exposure_dist.svg
+
+Transitions
+~~~~~~~~~~~~
+
+.. todo::
+
+   Determine whether to causally link wasting x-factor propensity to birthweight exposure (magnitude of causal association is strongest earlier in life, so it may not be necessary to enforce at later ages)
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The application of the size from [McGovern-et-al-2019]_ makes the following assumptions:
+
+- The effect size is entirely causal and not subject to confounding
+
+- The effect between BW and wasting measured among children under five is applied at 28 days of age 
+
+- The effect of BW on wasting applies proportionately to moderate and severe wasting
+
+.. todo::
+
+   Detail additional assumptions and limitations
+
 Validation Criteria
 ^^^^^^^^^^^^^^^^^^^^^
+
+- The LBWSG and wasting risk exposures should continue to validate to the GBD risk exposures in the baseline scenario after the induction of correlation betwen the risk exposures
+
+.. todo::
+
+   Determine the outputs feasible to include in simulation stratification (ex: BW<2500 stratification, or select LBWSG categories) for verification purposes OR determine how to verify and validate through interactive simulations
+
+   Would be ideal to investigate:
+
+   - How the correlation between BW and wasting evolves as simulants age
+
+   - Compare OR of wasting by LBW status to external literature sources (OR~2.2-3.5 from [Christian-et-al-2013]_ as well as other sources)
 
 References
 -----------
