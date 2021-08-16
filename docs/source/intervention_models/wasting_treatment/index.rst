@@ -92,6 +92,8 @@ Treatment and management for acute malnutrition
     - Treated or treatment
   * - utx
     - Not treated
+  * - EPI 
+    - Expanded programme on immunization
 
 This documentation focuses on treatment and management of acute malnutrition in Ethiopia based on 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
 
@@ -152,26 +154,65 @@ which are based on the 2013 WHO guidelines on management of SAM in children and 
 
 :download:`2019 guidelines<guidelines_2019.pdf>`
 
-
 .. note:: 
   
-    - In GBD, SAM and MAM are classified as using WHZ score. In reality, GBD-MAM kids with oedema are treated as SAM kids. We need to check the proportion (sequelae) of GBD-MAM kids to see if we need to make this adjustment in our model.    
+    - In GBD, SAM and MAM are classified as using WHZ score. In reality, GBD-MAM kids with oedema are treated as SAM kids. The proportion (sequelae) of GBD-MAM kids with oedema is approximately 2%. In our model these will be classified as MAM. 
 
-.. _waste_tx2.1:
 
-In infants 0-6 months
-+++++++++++++++++++++
+Severe acute malnutrition (SAM)
++++++++++++++++++++++++++++++++
 
-:underline:`Classify SAM in infants`
+SAM in infants (0-6 months)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:underline:`1. Classify SAM in infants`
 
 * Any grade of bilateral pitting oedema (+, ++ or +++) OR
 * WHZ < -3 zscore 
 
-**Treatment**
+:underline:`Treatment of infants with SAM in the SC`
 
 NOTE: All infants 0-6 months of age with SAM with or without medical complications should be referred to the SC.
 
-:underline:`Classify MAM in infants`
+
+SAM in children (>6 months)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+:underline:`2. Classify SAM without medical complications`
+
+* Bilateral pitting oedema + or ++ OR 
+* WHZ <-3 z-scores AND 
+  * Appetite test passed
+  * No medical complications
+  * Clinically well and alert
+
+:underline:`Treatment of children with SAM in OTP`
+
+- Admit in OTP (outpatient) programme
+- Treatment and care are provided at home with weekly follow-up visits at a nearby health facility. 
+- Give routine medications.
+- OTP non-responder definition: Does not reach the SAM discharge criteria after 16 weeks (4 months) in treatment.
+
+:underline:`3. Classify SAM with medical complications`
+
+* Any grade of bilateral pitting oedema (+, ++, +++) OR 
+* WHZ < -3 zscore OR
+* Presence of any medical complications (see guideline for full list)
+* *We need to make an assumption on the % of SAM cases that are complicated*
+
+:underline:`Treatment of children with SAM in SC`
+
+- Admit to SC (inpatient)
+- Give antibiotics
+- Stabilisation phase: F-75 for 7 days
+- Transition phase: introduce RUTF gradually with F-75 or F-100 if cannot tolerate RUTF
+- Rehabilitation phase: Child transfers from SC to OTP and recieves RUTF in OTP
+
+
+MAM in infants (0-6 months)
++++++++++++++++++++++++++++
+
+:underline:`4. Classify MAM in infants`
 
 * MUAC of lactatating mother of infant 0-6 months <23.0 cm
 * WHZ ≥-3 to <-2 AND 
@@ -179,10 +220,38 @@ NOTE: All infants 0-6 months of age with SAM with or without medical complicatio
   * No medical complications
   * Clinically well and alert
 
-**Treatment** 
+:underline:`Treatment of infants with MAM`
 
-Assess the infant’s feeding and counsel the mother or caregiver on appropriate IYCF practices. Emphasize on establishing effective exclusive
-breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, follow up in 30 days. Admit the mother to TSFP. Refer the mother for Productive Safety Net Programme (PSNP).
+Assess the infant’s feeding and counsel the mother or caregiver on appropriate IYCF practices. Emphasize on establishing effective exclusive breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, follow up in 30 days. Admit the mother to TSFP. Refer the mother for Productive Safety Net Programme (PSNP).
+
+
+
+MAM in children >6 months
++++++++++++++++++++++++++
+
+:underline:`5. Classify MAM in children`
+
+* WHZ ≥ -3 to <-2 z scores AND
+  * No bilateral pitting oedema 
+  * No medical complications
+  * Clinically well and alert
+
+:underline:`Treatment of children with MAM`
+
+Admit in TSFP (preferably with RUSF) and counsel on appropriate IYCF practices.
+
+
+Costs
++++++
+
+1. Cost per child (>6 months) treated for SAM $165.12 2015 USD 
+2. Cost per child (>6 months) treated for MAM using RUSF $38.10 2015 USD
+
+Includes personnel, therapeutic food, medical supplies and materials, infrastructure and logistic support for outpatient care and inpatient care. Total costs of MAM treatment were calculated for 5 weeks of follow-up because the mean time to recovery was between 4 and 5 weeks. [Isanaka_cost_2019]_
+
+
+No acute malnutrition
++++++++++++++++++++++
 
 :underline:`Classify no acute malnutrition in infants`
 
@@ -197,58 +266,19 @@ Congratulate and counsel the mother on appropriate IYCF practices.
     What about MAM with oedema? Are they treated as SAM or MAM?
     Answer: they are treated as MAM in GBD, but in reality, probably SAM. Mam with oedema is approximately 2% of MAM. 
 
-.. _waste_tx2.2:
-
-
-In children 6-59 months
-++++++++++++++++++++++++
-
-:underline:`Classify SAM with medical complications`
-
-* Any grade of bilateral pitting oedema (+, ++, +++) OR 
-* WHZ < -3 zscore OR
-* Presence of any medical complications (see guideline for full list)
-
-**Treatment**
-
-Admit to SC (inpatient)
-
-:underline:`Classify SAM without medical complications`
-
-* Bilateral pitting oedema + or ++ OR 
-* WHZ <-3 z-scores AND 
-  * Appetite test passed
-  * No medical complications
-  * Clinically well and alert
-
-**Treatment**
-
-Admit in OTP (outpatient)
-
-:underline:`Classify MAM`
-
-* WHZ ≥ -3 to <-2 z scores AND
-  * No bilateral pitting oedema 
-  * No medical complications
-  * Clinically well and alert
-
-**Treatment**
-
-Admit in TSFP (preferably with RUSF) and counsel on appropriate IYCF practices.
-
-:underline:`Classify no acute malnutrition`
+:underline:`Classify no acute malnutritionin children`
 
 * WHZ ≥ -2 z score AND 
 * No bilateral pitting oedema
 
 **Treatment**
-
 Congratulate and counsel the mother on appropriate IYCF practices.
 
 
 .. todo::
 
   Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
+
 
 
 .. list-table:: Affected Outcomes
@@ -286,31 +316,27 @@ The aim and priority in community-based services for the management of acute mal
 
 Treatment coverage should not be confused with geographical coverage. 
 
-  Geogpraphical coverage = :math:`\frac{\text{Healthcare facilities/communities delivering MAM/SAM treatments}}{\text{Total number of facilities/communities}}`
+  Geogpraphical coverage (GC) = :math:`\frac{\text{Healthcare facilities/communities delivering MAM/SAM treatments}}{\text{Total number of facilities/communities}}`
 
 Geographic coverage attempts to measure the *availability* of services which does not equate with the *service access* and *uptake*. 
 
 **Effectively covered** is the product of the treatment coverage and the treatment efficacy (proportion of the treated who were cured or 'cure-rate').
 
-  - Effective coverage ('met-need') = :math:`\text{treatment coverage}\times\text{treatment efficacy}`
+  - Effective coverage (EC) = :math:`\text{treatment coverage}\times\text{treatment efficacy}`
 
   - Not effectively covered = 1 - effective coverage
 
-For example, a service with treatment coverage of 50%, and a cure-rate of 90% is meeting 50% x 90% = 45% of need (effective coverage of 45%). 
-
 .. image:: effective_coverage_figure.svg
-
 
 | SAM programme treatment coverage: 48.8% (37.4 - 60.4) (this is a point coverage; assumes programmes are not good at case finding) [Isanaka_2021]_
 | MAM programme treatment coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
 
 
-.. note::
+.. todo::
 
   1) Add treatment efficacy for SAM and MAM programmes 
   2) Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
   3) Update coverage values to 'effective coverage' values
-
 
 
 .. list-table:: Baseline coverage data
@@ -321,27 +347,32 @@ For example, a service with treatment coverage of 50%, and a cure-rate of 90% is
     - Subpopulation
     - Coverage
     - Value
+    - Reference
     - Note
   * - Ethiopia
-    - Tx for infants 0-6 months with MAM 
-    - :math:`C_{MAM_{0-6}}`
-    - 48.8% (37.4 - 60.4) for now  
-    - Update this value to post-natal care coverage
-  * - Ethiopia
     - Tx for infants 0-6 months with any SAM 
-    - :math:`C_{SAM_{0-6}}`
-    - 48.8% (37.4 - 60.4) for now  
-    - Update this value to post-natal care coverage
+    - :math:`EC_{SAM_{0-6}}`
+    - 48.8%(37.4 - 60.4) C x 70%(95% CI: 64, 76) E
+    -
+    - Update this value for infants
+  * - Ethiopia
+    - Tx for children 6-59 months with SAM
+    - :math:`EC_{SAM_{6-59}}` 
+    - 48.8%(37.4 - 60.4) C x 70%(95% CI: 64, 76) E
+    - 
+    - 
+  * - Ethiopia
+    - Tx for infants 0-6 months with MAM 
+    - :math:`EC_{MAM_{0-6}}`
+    - 48.8%(37.4 - 60.4) C x 73.1% (RUSF) E
+    -
+    - Update C value for MAM
   * - Ethiopia
     - Tx for kids 6-59 months with MAM 
-    - :math:`C_{MAM_{6-59}}`
-    - 48.8% (37.4 - 60.4) ~ stand-in until we find updated data
-    - Coverage of TSFP for kids 6-59 months with MAM
-  * - Ethiopia
-    - Tx for kids 6-59 months with SAM
-    - :math:`C_{SAM_{6-59}}` 
-    - 48.8% (37.4 - 60.4)
-    - Coverage of SC or OTP for SAM kids
+    - :math:`EC_{MAM_{6-59}}`
+    - 48.8%(37.4 - 60.4) C x 73.1% (RUSF) E
+    -
+    - Update C value for MAM
 
 
 .. note::
@@ -365,24 +396,24 @@ For MAM, **r3** is the daily probability of recovering from MAM state given the 
 For **MAM** 0-6 months infants
 
  - :math:`r3 = r3_{ux} + t2_{mam}`
- - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-C_{MAM_{0-6}}`
- - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`C_{MAM_{0-6}}`
+ - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-EC_{MAM_{0-6}}`
+ - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`EC_{MAM_{0-6}}`
 
 For **MAM** 6-59 months kids
 
  - :math:`r3 = r3_{ux} + t2_{mam}`
- - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-C_{MAM_{6-59}}`
- - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`C_{MAM_{6-59}}`
+ - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-EC_{MAM_{6-59}}`
+ - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`EC_{MAM_{6-59}}`
 
 For **SAM** 0-6 months infants
 
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-C_{SAM{0-6}}`
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`C_{SAM{0-6}}`
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{0-6}}`
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{0-6}}`
 
 For **SAM** 6-59 months kids
 
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-C_{SAM{6-59}}`
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`C_{SAM{6-59}}`
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{6-59}}`
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{6-59}}`
 
 .. todo::
 
@@ -402,14 +433,14 @@ For **SAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1-C_{MAM_{0-6}}}{\text{median time-to-recovery (days) of utx MAM}}`
+    - :math:`\frac{1-EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
     - James et al 2016 (Ethiopia)
     - They used MUAC definition of malnutrition; stand-in, need to update value for 0-6m
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{C_{MAM_{0-6}}}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - :math:`\frac{EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
     - Ackatia-Armah 2015 (Mali)
     - recovery time using RUSF; stand-in, need to update value for 0-6m
@@ -428,14 +459,14 @@ For **SAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1-C_{MAM_{6-59}}}{\text{median time-to-recovery (days) of utx MAM}}`
+    - :math:`\frac{1-EC_{MAM_{6-59}}}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
     - James et al 2016 (Ethiopia)
     - They used MUAC definition of malnutrition
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{C_{MAM_{6-59}}}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - :math:`\frac{EC_{MAM_{6-59}}}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
     - Ackatia-Armah 2015 (Mali)
     - recovery time using RUSF
@@ -455,14 +486,14 @@ For **SAM** 6-59 months kids
   * - :math:`r2_{ux}`
     - transition probability
     - Daily recovery prbability of untx SAM
-    - :math:`\frac{1-C_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - :math:`\frac{1-EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
     - time-to-recovery 62 days (derived)
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{C_{SAM_{0-6}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - :math:`\frac{EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of tx SAM}}`
     - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
     - Zw 2020
     - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
@@ -481,14 +512,14 @@ For **SAM** 6-59 months kids
   * - :math:`r2_{ux}`
     - transition probability
     - Daily recovery prbability of untx SAM
-    - :math:`\frac{1-C_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - :math:`\frac{1-EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
     - time-to-recovery ~62 days (derived, see below)
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{C_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - :math:`\frac{EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
     - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
     - Zw 2020
     - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
@@ -621,4 +652,12 @@ References
     Assessment of Coverage of Community-based Management of Acute Malnutrition
 
 .. _`CMAM Forum coverage`: https://www.ennonline.net/assessmentofcmamcoveragev2
+
+.. [Isanaka_cost_2019]
+
+  View `Isanaka 2019`_
+
+    Cost-effectiveness of community-based screening and treatment of moderate acute malnutrition in Mali
+
+.. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/31139441
 
