@@ -340,7 +340,7 @@ Geographic coverage attempts to measure the *availability* of services which doe
 
 
 .. list-table:: Baseline coverage data
-  :widths: 10 10 5 15 20
+  :widths: 10 10 5 15 20 20
   :header-rows: 1
 
   * - Location
@@ -659,5 +659,4 @@ References
 
     Cost-effectiveness of community-based screening and treatment of moderate acute malnutrition in Mali
 
-.. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/31139441
-
+.. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/3113944
