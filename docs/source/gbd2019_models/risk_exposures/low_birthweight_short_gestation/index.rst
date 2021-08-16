@@ -245,6 +245,35 @@ Correcting LBWSG exposure data pulled from GBD 2019
   We should double-check with the LBWSG modelers that rescaling the prevalences
   is a reasonable way to correct the GBD data.
 
+.. todo::
+
+  Add more details about this data issue, e.g.:
+
+  - Documentation from ``get_draws`` about how a residual category is added
+    when category prevalences don't sum to 1, under the assumption that the
+    TMREL is not explicitly modeled; this assumption is incorrect for LBWSG,
+    which *does* explicitly model the TMREL categories.
+
+  - Note that we confirmed with the LBWSG modelers that ``cat125`` is not a
+    real category, and we confirmed with central comp that ``cat125`` was in
+    fact being added by ``get_draws``.
+
+  - Note that the draws where ``sum(prevalence) > 1`` are precisely the draws
+    where ``prevalence('cat125') == 0``, and the draws where ``sum(prevalence)
+    == 1`` are precisely the draws where ``prevalence('cat125') > 0``. This
+    indicates that in the data the LBWSG modelers provided to central comp,
+    there were **no** draws in which the category prevalences summed to 1 like
+    they should have: Draws where the total prevalence was less than 1 had a
+    nonzero prevalence of ``'cat125'`` added to force the prevalences to sum to
+    1, and draws where the total prevalence was greater than 1 had the the
+    prevalence of ``'cat125'`` set to 0, leaving the sum of the category
+    prevalences greater than 1.
+
+  - Show some statistics of the category prevalence data for one or more
+    locations, e.g. how many draws have ``sum(prevalence) > 1``, what is the
+    distribution of prevalences of ``'cat125'``, what is the distribution of
+    ``sum(prevalence)`` with and without ``'cat125'`` included, etc.
+
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
