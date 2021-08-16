@@ -194,8 +194,8 @@ appropriate location IDs for the model you're working on):
     (sex_id=[1,2]) since we will be initializing our population using GBD's
     population data and stratifying by sex.
 
-Correcting LBWSG exposure data pulled from GBD 2019
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Rescaling LBWSG exposure data pulled from GBD 2019
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. important::
 
@@ -243,7 +243,7 @@ Correcting LBWSG exposure data pulled from GBD 2019
 .. note::
 
   We should double-check with the LBWSG modelers that rescaling the prevalences
-  is a reasonable way to correct the GBD data.
+  is a reasonable way to adjust the GBD data for use in our simulations.
 
 .. todo::
 
@@ -279,7 +279,7 @@ Using LBWSG exposure data in Vivarium
 
 The probability that a simulant's Low Birthweight and Short Gestation exposure
 category is ``cat_i`` should equal the prevalence of ``cat_i`` for the
-simulant's age group and sex according to GBD (after correcting the prevalences
+simulant's age group and sex according to GBD (after rescaling the prevalences
 as indicated above). Specifically, the LBWSG prevalence data from GBD should be
 used to initialize the exposure categories of simulants as follows:
 
