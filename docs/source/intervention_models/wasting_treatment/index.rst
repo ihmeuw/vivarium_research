@@ -659,4 +659,5 @@ References
 
     Cost-effectiveness of community-based screening and treatment of moderate acute malnutrition in Mali
 
-.. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/3113944
+.. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/31139441
+
