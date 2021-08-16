@@ -34,7 +34,6 @@ Low Birthweight and Short Gestation
 
 .. contents::
    :local:
-   :depth: 2
 
 Risk Exposure Overview
 ----------------------
@@ -153,6 +152,76 @@ Risk Exposure Model Diagram
 
 Data Description Tables
 +++++++++++++++++++++++
+
+Pulling LBWSG exposure data from GBD 2019
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can pull GBD 2019 exposure data for Low Birthweight and Short Gestation
+using the following call to ``get_draws`` (replace :code:`ETHIOPIA_ID` with the
+appropriate location IDs for the model you're working on):
+
+.. code-block:: Python
+
+  LBWSG_REI_ID = 339
+  ETHIOPIA_ID = 179
+  GBD_2019_ROUND_ID = 6
+
+  lbwsg_exposure = get_draws(
+        gbd_id_type='rei_id',
+        gbd_id=LBWSG_REI_ID,
+        source='exposure',
+        location_id=ETHIOPIA_ID,
+        year_id=2019,
+  #       age_group_id = [164,2,3], # Pulls all three age groups by default
+  #       sex_id=[1,2], # Pulls sex_id=[1,2] by default, but data for sex_id=3 also exists
+        gbd_round_id=GBD_2019_ROUND_ID,
+        status='best',
+        decomp_step='step4',
+  )
+
+.. note::
+
+  * If ``age_group_id`` is not specified, ``get_draws`` defaults to pulling
+    exposure data for all available age groups, which for LBWSG are **164
+    (Birth)**, **2 (Early Neonatal)**, and **3 (Late Neonatal)**. Typically
+    Vivarium will need exposure data for all three age groups.
+
+  * If ``sex_id`` is not specified, ``get_draws`` defaults to pulling exposure
+    data for sex IDs **1 (Male)** and **2 (Female)**. Exposure data is also
+    avaialble for sex ID 3 (Both), which takes into account the relative
+    populations of males and females in the specified location(s). Typically
+    Vivarium will only need the conditional prevalences for males and females
+    (sex_id=[1,2]) since we will be initializing our population using GBD's
+    population data and stratifying by sex.
+
+Using LBWSG exposure data in Vivarium
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The probability that a simulant's Low Birthweight and Short Gestation exposure
+category is ``cat_i`` should equal the prevalence of ``cat_i`` for the
+simulant's age group and sex according to GBD. Specifically, the LBWSG
+prevalence data from GBD should be used to initialize the exposure categories of
+simulants as follows:
+
+* Simulants initialized into age group 2 (Early Neonatal) or age group 3 (Late
+  Neonatal) **at the beginning of the simulation** should be assigned an LBWSG
+  exposure category using the exposure data for **age_group_id 2 or 3**,
+  respectively.
+
+* Simulants **born during the simulation** should be assigned an LBWSG exposure
+  category using the exposure data for **age_group_id=164 (Birth)**.
+
+* Simulants initialized into **age group 4 (Post Neonatal) or older at the
+  beginning of the simulation** should have their LBWSG catgory declared
+  **"unknown"** unless there is a specific need to track birthweights and
+  gestational ages for older simulants *and* there is additional data beyond GBD
+  to inform the exposure distribution in older age groups.
+
+As discussed above, once a simulant is assigned an LBWSG exposure category, they
+should be assigned a birthweight and gestational age by assuming the joint
+distribution of birthweights and gestational ages is uniform within each
+category. Once a simulant's LBWSG category, birthweight, and gestational age
+have been assigned, these values remain the same throughout the simulation.
 
 .. todo::
 
