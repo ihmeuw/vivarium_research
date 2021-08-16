@@ -199,7 +199,7 @@ Correcting LBWSG exposure data pulled from GBD 2019
 
 .. important::
 
-  **The GBD 2019 exposure data for Low Birthweight and Short Gestation is wrong!**
+  **The GBD 2019 exposure data for Low Birthweight and Short Gestation is potentially misleading as currently stored!**
 
   Namely, the prevalences of the LBWSG categories returned by ``get_draws`` do **not** add up to 1! To fix the problem, follow these steps:
 
