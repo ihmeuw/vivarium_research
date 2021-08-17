@@ -207,14 +207,17 @@ Rescaling LBWSG exposure data pulled from GBD 2019
       are precisely the rows with ``'modelable_entity_id' == NaN``). cat125 is
       not a modeled category but rather a residual category automatically added
       by ``get_draws`` because the prevalences that the LBWSG modelers gave to
-      central comp did not add up to 1 in each draw.
+      central comp did not add up to 1 in each draw (see details :ref:`below
+      <details of GBD 2019 LBWSG exposure data issue>`).
 
   2.  For each draw, divide the prevalence of each of the 58 remaining LBWSG
       exposure categories by the sum of the prevalences for that draw. This
       rescales the prevalences to sum to 1 so that they correctly represent
       probabilities.
 
-  Here is `Python code to perform these steps <rescale_prevalence_function_>`_ from Nathaniel's `lbwsg module`_ in the ``vivarium_research_lsff`` repo, assuming ``lbwsg_exposure`` has been pulled using ``get_draws`` as above:
+  Here is `Python code to perform these steps <rescale_prevalence_function_>`_
+  from Nathaniel's `lbwsg module`_ in the ``vivarium_research_lsff`` repo,
+  assuming ``lbwsg_exposure`` has been pulled using ``get_draws`` as above:
 
   .. code-block:: Python
 
@@ -244,6 +247,8 @@ Rescaling LBWSG exposure data pulled from GBD 2019
 
   We should double-check with the LBWSG modelers that rescaling the prevalences
   is a reasonable way to adjust the GBD data for use in our simulations.
+
+.. _details of GBD 2019 LBWSG exposure data issue:
 
 .. todo::
 
