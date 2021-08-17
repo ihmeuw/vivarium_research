@@ -477,7 +477,7 @@ For **MAM** 6-59 months kids
     - transition probability
     - Daily recovery probability of tx SAM 
     - :math:`\frac{EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
+    - time-to-recovery 6.9 weeks; 48.3 days (update to more accurate)
     - Zw 2020
     - Over 7 studies in Ethiopa
 
@@ -498,15 +498,15 @@ For **MAM** 6-59 months kids
     - Daily recovery probability of untx MAM 
     - :math:`\frac{1-EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
-    - James et al 2016 (Ethiopia)
-    - They used MUAC definition of malnutrition; need to update value for 0-6m
+    - [James_2016]_ (Ethiopia)
+    - They used MUAC definition of malnutrition; tx time to recovery for >6mo
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
     - :math:`\frac{EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of tx MAM}}` 
-    - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
-    - Ackatia-Armah 2015 (Mali)
-    - recovery time using RUSF; need to update value for 0-6m
+    - time-to-recovery (mean) 20.8 days
+    - [Woeltje_2020]_ (Malawi)
+    - recovery time using 75 kcal/kg/day
 
 .. list-table:: Modeled Outcomes **Table 4** MAM 6-59 months
   :widths: 5 5 20 15 15 15 15
@@ -524,15 +524,15 @@ For **MAM** 6-59 months kids
     - Daily recovery probability of untx MAM 
     - :math:`\frac{1-EC_{MAM_{6-59}}}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
-    - James et al 2016 (Ethiopia)
+    - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
     - :math:`\frac{EC_{MAM_{6-59}}}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
-    - Ackatia-Armah 2015 (Mali)
-    - recovery time using RUSF
+    - [Ackatia_Armah_2015tx]_ (Mali)
+    - recovery time using RUSF 
 
 
 .. note::
@@ -642,6 +642,10 @@ Scaling up the effective coverage of SAM and MAM, we will increase treatment cov
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- We are not applying a differential death rate to those effectively covered vs not effectively covered
+- We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country. 
+
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -740,4 +744,22 @@ References
 
     Treatment outcomes of severe acute malnutrition and predictors of recovery in under-five children treated within outpatient therapeutic programs in Ethiopia: a systematic review and meta-analysis
 
-.. _`Zw 2020tx`: https://pubmed.ncbi.nlm.nih.gov/3263126
+.. _`Zw 2020tx`: https://pubmed.ncbi.nlm.nih.gov/32631260
+
+
+.. [James_2016]
+
+  View `James 2016`_
+
+    Children with Moderate Acute Malnutrition with No Access to Supplementary Feeding Programmes Experience High Rates of Deterioration and No Improvement
+
+.. _`James 2016`: https://pubmed.ncbi.nlm.nih.gov/PMC4839581
+
+
+.. [Woeltje_2020]
+
+  View `Woeltje 2020`_
+
+    Community-Based Management of Acute Malnutrition in Infants Under 6 Months of Age
+
+.. _`Woeltje 2020`: https://academic.oup.com/cdn/article/4/Supplement_2/1102/5845720?login=true
