@@ -359,32 +359,32 @@ Geographic coverage attempts to measure the *availability* of services which doe
   * - Location
     - Subpopulation
     - Coverage
-    - Value
+    - Value (CxE)
     - Reference
     - Note
   * - Ethiopia
     - Tx for infants 0-6 months with any SAM 
     - :math:`EC_{SAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) C x 85% E
-    - [Vygen_2013]_
-    - Update C value for infants
+    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
+    - [Isanaka_2021]_ [Zw_2020tx]_
+    - Update C, E values for infants?
   * - Ethiopia
     - Tx for children 6-59 months with SAM
     - :math:`EC_{SAM_{6-59}}` 
-    - 48.8%(95%CI:37.4-60.4) C x 70%(95%CI:64-76) E
-    - 
+    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
+    - [Isanaka_2021]_ [Zw_2020tx]_
     - 
   * - Ethiopia
     - Tx for infants 0-6 months with MAM 
     - :math:`EC_{MAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) C x 73.1% (RUSF) E
-    -
+    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
+    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_
     - Update C and E value for MAM
   * - Ethiopia
     - Tx for kids 6-59 months with MAM 
     - :math:`EC_{MAM_{6-59}}`
-    - 48.8%(95%CI:37.4-60.4) C x 73.1% (RUSF) E
-    -
+    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
+    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_
     - Update C value for MAM
 
 
@@ -468,7 +468,7 @@ For **MAM** 6-59 months kids
     - Note
   * - :math:`r2_{ux}`
     - transition probability
-    - Daily recovery prbability of untx SAM
+    - Daily recovery probability of untx SAM
     - :math:`\frac{1-EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
     - time-to-recovery ~62 days (derived, see below)
     - Derived 
@@ -559,66 +559,78 @@ For **MAM** 6-59 months kids
 
 
 
-Affected Outcome #1
-+++++++++++++++++++++
+Affected Outcomes
++++++++++++++++++
 
-.. important::
+Scaling up the effective coverage of SAM and MAM, we will increase treatment coverage and also efficacy of the treatment programme to increase effective coverage (EC).
 
-  Copy and paste this section for each affected outcome included in this document
-
-.. todo::
-
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
-  :widths: 15 15 15
+.. list-table:: Scenario coverage data
+  :widths: 10 10 5 15 20 20 20
   :header-rows: 1
 
-  * - Restriction
-    - Value
+  * - Location
+    - Subpopulation
+    - Coverage
+    - Baseline value (CxE)
+    - Scenario value (CxE)
+    - Reference
     - Note
-  * - Male only
+  * - Ethiopia
+    - Tx for infants 0-6 months with any SAM 
+    - :math:`EC_{SAM_{0-6}}`
+    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
+    - 90% x 75%
+    - [Isanaka_2021]_ [Zw_2020tx]_ Sphere standards
+    - Update C, E values for infants?
+  * - Ethiopia
+    - Tx for children 6-59 months with SAM
+    - :math:`EC_{SAM_{6-59}}` 
+    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
+    - 90% x 75%
+    - [Isanaka_2021]_ [Zw_2020tx]_ Sphere standards
     - 
-    - 
-  * - Female only
-    - 
-    - 
-  * - Age group start
-    - 
-    - 
-  * - Age group end
-    - 
-    - 
-  * - Other
-    - 
-    - 
+  * - Ethiopia
+    - Tx for infants 0-6 months with MAM 
+    - :math:`EC_{MAM_{0-6}}`
+    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
+    - 90% x 75%
+    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_ Sphere standards
+    - Update C and E value for MAM 
+  * - Ethiopia
+    - Tx for kids 6-59 months with MAM 
+    - :math:`EC_{MAM_{6-59}}`
+    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
+    - 90% x 75%
+    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_ Sphere standards
+    - Update C value for MAM
 
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15 
+
+.. list-table:: How to apply recovery rate to coverage category
+  :widths: 30 20 20
   :header-rows: 1
 
-  * - Population
-    - Effect size
-    - Note
-  * - Malnourished women
-    - +50 g birthweight
-    - 
-  * - Adequately nourished women
-    - +10 g birthweight
-    - 
-
+  * - Subpopulation
+    - Coverage
+    - Recovery rate to apply
+  * - Tx uncovered with SAM 
+    - :math:`1 - C_{SAM_{age}}`
+    - :math:`r2_{ux}`
+  * - Tx covered but not cured with SAM
+    - :math:`C_{SAM_{age}} - EC_{SAM_{age}}`
+    - :math:`r2_{ux}`
+  * - Tx covered and cured with SAM
+    - :math:`EC_{SAM_{age}}`
+    - :math:`t1_{sam}`
+  * - Tx uncovered with MAM
+    - :math:`1 - C_{MAM_{age}}`
+    - :math:`r3_{ux}`
+  * - Tx covered but not cured with MAM
+    - :math:`C_{MAM_{age}} - EC_{MAM_{age}}`
+    - :math:`r3_{ux}`
+  * - Tx covered and cured with MAM
+    - :math:`EC_{MAM_{age}}`
+    - :math:`t2_{mam}`
+  
 .. todo::
 
   Describe exactly *how* to apply the effect sizes to the affected measures documented above
@@ -710,4 +722,22 @@ References
 
     Treatment of Severe Acute Malnutrition in Infants Aged <6 Months in Niger
 
-.. _`Vygen 2013`: https://pubmed.ncbi.nlm.nih.gov/33102783/
+.. _`Vygen 2013`: https://pubmed.ncbi.nlm.nih.gov/33102783
+
+
+.. [Ackatia_Armah_2015tx]
+
+  View `Ackatia Armah 2015tx`_
+
+    Malian children with moderate acute malnutrition who are treated with lipid-based dietary supplements have greater weight gains and recovery rates than those treated with locally produced cereal-legume products: a community-based, cluster-randomized trial
+
+.. _`Ackatia Armah 2015tx`: https://pubmed.ncbi.nlm.nih.gov/25733649
+
+
+.. [Zw_2020tx]
+
+  View `Zw 2020tx`_
+
+    Treatment outcomes of severe acute malnutrition and predictors of recovery in under-five children treated within outpatient therapeutic programs in Ethiopia: a systematic review and meta-analysis
+
+.. _`Zw 2020tx`: https://pubmed.ncbi.nlm.nih.gov/3263126
