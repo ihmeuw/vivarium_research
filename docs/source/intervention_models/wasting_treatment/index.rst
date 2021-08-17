@@ -169,12 +169,12 @@ Severe acute malnutrition (SAM)
 SAM in infants (0-6 months)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:underline:`1. Classify SAM in infants`
+:underline:`Classify SAM in infants`
 
 * Any grade of bilateral pitting oedema (+, ++ or +++) OR
 * WHZ < -3 zscore 
 
-:underline:`Treatment of infants with SAM in the SC`
+Treatment of infants with SAM in the SC
 
 NOTE: All infants 0-6 months of age with SAM with or without medical complications should be referred to the SC.
 
@@ -186,7 +186,7 @@ Since 2007, a new model of care called community-based therapetic care (CTC) or 
 
 Severely malnourished persons with medical complications and/or anorexia are treated in an inpatient stabilization center (SC) where they receive standard World Health Organization (WHO)- recommended initial care until they have enough appetite and are well enough to continue with outpatient care. Approximately 10-15% of children in CMAM programmes require inpatient care at the stabilisation centers and the average length-of-stay at an SC is 14 days before they are transferred out to an OTP. [Scott_2020]_ [Tekeste_2012]_ 
 
-:underline:`2. Classify SAM without medical complications`
+:underline:`Classify SAM without medical complications`
 
 * Bilateral pitting oedema + or ++ OR 
 * WHZ <-3 z-scores AND 
@@ -194,20 +194,19 @@ Severely malnourished persons with medical complications and/or anorexia are tre
   * No medical complications
   * Clinically well and alert
 
-:underline:`Treatment of children with SAM in OTP`
+Treatment of children with SAM in OTP
 
 - Admit in OTP (outpatient) programme
 - Treatment and care are provided at home with weekly follow-up visits at a nearby health facility. 
 - Give routine medications.
-- OTP non-responder definition: Does not reach the SAM discharge criteria after 16 weeks (4 months) in treatment.
-
-:underline:`3. Classify SAM with medical complications`
+- 
+:underline:`Classify SAM with medical complications`
 
 * Any grade of bilateral pitting oedema (+, ++, +++) OR 
 * WHZ < -3 zscore OR
 * Presence of any medical complications (see guideline for full list)
 
-:underline:`Treatment of children with SAM in SC`
+Treatment of children with SAM in SC
 
 - Admit to SC (inpatient)
 - Give antibiotics
@@ -215,12 +214,20 @@ Severely malnourished persons with medical complications and/or anorexia are tre
 - Transition phase: introduce RUTF gradually with F-75 or F-100 if cannot tolerate RUTF
 - Rehabilitation phase: Child transfers from SC to OTP and recieves RUTF in OTP
 
+Discharge criteria
+
+ - Cured = Has reached discharge criteria for SAM treatment: WHZ ≥ -2 z-scores, no bilateral pitting oedema, clinically alert and well. 
+ - Died = Dies while receiving treatment in the OTP.
+ - Defaulted = Absent for two consecutive visits.
+ - Non-responder = Does not reach the SAM discharge criteria after 16 weeks (4 months) in treatment.
+ - Transferred out = Condition has deteriorated or not responding to treatment according to action protocol and referred for treatment 
+   in the SC, or moved out to receive OTP in another facility
 
 
 MAM in infants (0-6 months)
 +++++++++++++++++++++++++++
 
-:underline:`4. Classify MAM in infants`
+:underline:`Classify MAM in infants`
 
 * MUAC of lactatating mother of infant 0-6 months <23.0 cm
 * WHZ ≥-3 to <-2 AND 
@@ -228,7 +235,7 @@ MAM in infants (0-6 months)
   * No medical complications
   * Clinically well and alert
 
-:underline:`Treatment of infants with MAM`
+Treatment of infants with MAM
 
 Assess the infant’s feeding and counsel the mother or caregiver on appropriate IYCF practices. Emphasize on establishing effective exclusive breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, follow up in 30 days. Admit the mother to TSFP. Refer the mother for Productive Safety Net Programme (PSNP).
 
@@ -236,14 +243,14 @@ Assess the infant’s feeding and counsel the mother or caregiver on appropriate
 MAM in children >6 months
 +++++++++++++++++++++++++
 
-:underline:`5. Classify MAM in children`
+:underline:`Classify MAM in children`
 
 * WHZ ≥ -3 to <-2 z scores AND
   * No bilateral pitting oedema 
   * No medical complications
   * Clinically well and alert
 
-:underline:`Treatment of children with MAM`
+Treatment of children with MAM
 
 Admit in TSFP (preferably with RUSF) and counsel on appropriate IYCF practices.
 
@@ -251,10 +258,13 @@ Admit in TSFP (preferably with RUSF) and counsel on appropriate IYCF practices.
 Costs
 +++++
 
-1. Cost per child (>6 months) treated for SAM $165.12 2015 USD [Isanaka_cost_2019]_
+A full literature review of costs for CMAM programme is in [Njuguna_2020]_.
+
+1. Cost per child (>6 months) treated for SAM $134.88 2007 USD [Tekeste_2012]_
 2. Cost per child (>6 months) treated for MAM using RUSF $38.10 2015 USD [Isanaka_cost_2019]_
 
-Includes personnel, therapeutic food, medical supplies and materials, infrastructure and logistic support for outpatient care and inpatient care. Total costs of MAM treatment were calculated for 5 weeks of follow-up because the mean time to recovery was between 4 and 5 weeks. [Isanaka_cost_2019]_
+For MAM, total costs of MAM treatment were calculated for 5 weeks of follow-up because the mean time to recovery was between 4 and 5 weeks. [Isanaka_cost_2019]_
+
 
 
 No acute malnutrition
@@ -271,7 +281,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 
 .. todo::
     What about MAM with oedema? Are they treated as SAM or MAM?
-    Answer: they are treated as MAM in GBD, but in reality, probably SAM. Mam with oedema is approximately 2% of MAM. 
+    Answer: they are treated as MAM in GBD, but in reality, probably SAM. MAM with oedema is approximately 2% of MAM. 
 
 :underline:`Classify no acute malnutritionin children`
 
@@ -313,7 +323,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 
 
 Baseline Coverage Data
-++++++++++++++++++++++++
+++++++++++++++++++++++
 
 The aim and priority in community-based services for the management of acute malnutrition is to reach as many of those affected as possible and to access acutely malnourished children in the *early stages* of their disease. Achieving these goals will maximise impact and the capacity of the service to meet need. Good coverage is a key determinant in **meeting need**. It is important therefore to evaluate coverage, not just  to  assess  the  degree  to  which  need  is  being  met,  but  also  to  understand  what  factors  affect  access and  uptake  of  services,  in  order  to  initiate  action  to  ensure  the  greatest  number  of  people  needing treatment are able to benefit from it. **Coverage can  be  defined  as  the  proportion  of  all  people  needing  or  eligible  to  receive  a  service  who actually  receive  that  service**. [CMAM_Forum_coverage]_
 
@@ -333,7 +343,7 @@ Geographic coverage attempts to measure the *availability* of services which doe
 
 .. image:: effective_coverage_figure.svg
 
-| SAM programme treatment coverage: 48.8% (37.4 - 60.4) (this is a point coverage; assumes programmes are not good at case finding) [Isanaka_2021]_
+| SAM programme treatment coverage: 48.8% (37.4-60.4) (this is a point coverage; assumes programmes are not good at case finding) [Isanaka_2021]_
 | MAM programme treatment coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
 
 
@@ -341,7 +351,6 @@ Geographic coverage attempts to measure the *availability* of services which doe
 
   Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
  
-
 
 .. list-table:: Baseline coverage data
   :widths: 10 10 5 15 20 20
@@ -356,25 +365,25 @@ Geographic coverage attempts to measure the *availability* of services which doe
   * - Ethiopia
     - Tx for infants 0-6 months with any SAM 
     - :math:`EC_{SAM_{0-6}}`
-    - 48.8%(37.4 - 60.4) C x 70%(95% CI: 64, 76) E
+    - 48.8%(95%CI:37.4-60.4) C x E
     -
     - Update this value for infants
   * - Ethiopia
     - Tx for children 6-59 months with SAM
     - :math:`EC_{SAM_{6-59}}` 
-    - 48.8%(37.4 - 60.4) C x 70%(95% CI: 64, 76) E
+    - 48.8%(95%CI:37.4-60.4) C x 70%(95%CI:64-76) E
     - 
     - 
   * - Ethiopia
     - Tx for infants 0-6 months with MAM 
     - :math:`EC_{MAM_{0-6}}`
-    - 48.8%(37.4 - 60.4) C x 73.1% (RUSF) E
+    - 48.8%(95%CI:37.4-60.4) C x 73.1% (RUSF) E
     -
-    - Update C value for MAM
+    - Update C and E value for MAM
   * - Ethiopia
     - Tx for kids 6-59 months with MAM 
     - :math:`EC_{MAM_{6-59}}`
-    - 48.8%(37.4 - 60.4) C x 73.1% (RUSF) E
+    - 48.8%(95%CI:37.4-60.4) C x 73.1% (RUSF) E
     -
     - Update C value for MAM
 
@@ -684,3 +693,12 @@ References
     Cost effectiveness of community-based and inpatient therapeutic feeding programs to treat severe acute malnutrition in Ethiopia
 
 .. _`Tekeste 2012`: http://www.ncbi.nlm.nih.gov/pubmed/PMC3323427
+
+
+.. [Njuguna_2020]
+
+  View `Njuguna 2020`_
+
+    Cost and cost-effectiveness analysis of treatment for child undernutrition in low- and middle-income countries: A systematic review
+
+.. _`Njuguna 2020`: http://www.ncbi.nlm.nih.gov/pubmed
