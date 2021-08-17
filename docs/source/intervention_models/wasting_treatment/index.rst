@@ -199,7 +199,7 @@ Treatment of children with SAM in OTP
 - Admit in OTP (outpatient) programme
 - Treatment and care are provided at home with weekly follow-up visits at a nearby health facility. 
 - Give routine medications.
-- 
+
 :underline:`Classify SAM with medical complications`
 
 * Any grade of bilateral pitting oedema (+, ++, +++) OR 
@@ -365,9 +365,9 @@ Geographic coverage attempts to measure the *availability* of services which doe
   * - Ethiopia
     - Tx for infants 0-6 months with any SAM 
     - :math:`EC_{SAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) C x E
-    -
-    - Update this value for infants
+    - 48.8%(95%CI:37.4-60.4) C x 85% E
+    - [Vygen_2013]_
+    - Update C value for infants
   * - Ethiopia
     - Tx for children 6-59 months with SAM
     - :math:`EC_{SAM_{6-59}}` 
@@ -401,6 +401,15 @@ Vivarium Modeling Strategy
 .. image:: treatment_diagram.svg
    :alt: Compartmental diagram with treatment
 
+For **SAM** 0-6 months infants
+
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{0-6}}`
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{0-6}}`
+
+For **SAM** 6-59 months kids
+
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{6-59}}`
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{6-59}}`
 
 For MAM, **r3** is the daily probability of recovering from MAM state given the MAM tx coverage.
 
@@ -416,21 +425,64 @@ For **MAM** 6-59 months kids
  - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-EC_{MAM_{6-59}}`
  - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`EC_{MAM_{6-59}}`
 
-For **SAM** 0-6 months infants
-
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{0-6}}`
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{0-6}}`
-
-For **SAM** 6-59 months kids
-
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{6-59}}`
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{6-59}}`
-
 .. todo::
 
   THE FOLLOWING NEEDS MORE DETAIL! 
 
-.. list-table:: Modeled Outcomes **Table 1** MAM 0-6 months
+.. list-table:: Modeled Outcomes **Table 1** SAM 0-6 months
+  :widths: 5 5 20 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Outcome type
+    - Outcome definition
+    - Effect size
+    - Effect size application
+    - Value, source
+    - Note
+  * - :math:`r2_{ux}`
+    - transition probability
+    - Daily recovery prbability of untx SAM
+    - :math:`\frac{1-EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - time-to-recovery 62 days (derived)
+    - Derived 
+    - Derived from Isanaka 2021 and tx time to recovery for >6mo
+  * - :math:`t1_{sam}`
+    - transition probability
+    - Daily recovery probability of tx SAM 
+    - :math:`\frac{EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - time-to-recovery (mean) 13.3 (SD 6.9) days 
+    - [Vygen_2013]_
+    - Recovery time for 0-6m in SC in Niger
+
+.. list-table:: Modeled Outcomes **Table 2** SAM 6-59 months
+  :widths: 5 5 20 15 15 15 15
+  :header-rows: 1
+
+  * - Outcome
+    - Outcome type
+    - Outcome definition
+    - Effect size
+    - Effect size application
+    - Value, source
+    - Note
+  * - :math:`r2_{ux}`
+    - transition probability
+    - Daily recovery prbability of untx SAM
+    - :math:`\frac{1-EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - time-to-recovery ~62 days (derived, see below)
+    - Derived 
+    - Derived from Isanaka 2021 and tx time to recovery
+  * - :math:`t1_{sam}`
+    - transition probability
+    - Daily recovery probability of tx SAM 
+    - :math:`\frac{EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
+    - Zw 2020
+    - Over 7 studies in Ethiopa
+
+
+.. list-table:: Modeled Outcomes **Table 3** MAM 0-6 months
   :widths: 5 5 20 15 15 15 15
   :header-rows: 1
 
@@ -447,16 +499,16 @@ For **SAM** 6-59 months kids
     - :math:`\frac{1-EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
     - James et al 2016 (Ethiopia)
-    - They used MUAC definition of malnutrition; stand-in, need to update value for 0-6m
+    - They used MUAC definition of malnutrition; need to update value for 0-6m
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
     - :math:`\frac{EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
     - Ackatia-Armah 2015 (Mali)
-    - recovery time using RUSF; stand-in, need to update value for 0-6m
+    - recovery time using RUSF; need to update value for 0-6m
 
-.. list-table:: Modeled Outcomes **Table 2** MAM 6-59 months
+.. list-table:: Modeled Outcomes **Table 4** MAM 6-59 months
   :widths: 5 5 20 15 15 15 15
   :header-rows: 1
 
@@ -482,58 +534,6 @@ For **SAM** 6-59 months kids
     - Ackatia-Armah 2015 (Mali)
     - recovery time using RUSF
 
-
-.. list-table:: Modeled Outcomes **Table 3** SAM 0-6 months
-  :widths: 5 5 20 15 15 15 15
-  :header-rows: 1
-
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
-    - Note
-  * - :math:`r2_{ux}`
-    - transition probability
-    - Daily recovery prbability of untx SAM
-    - :math:`\frac{1-EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery 62 days (derived)
-    - Derived 
-    - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
-  * - :math:`t1_{sam}`
-    - transition probability
-    - Daily recovery probability of tx SAM 
-    - :math:`\frac{EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
-    - Zw 2020
-    - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
-
-.. list-table:: Modeled Outcomes **Table 4** SAM 6-59 months
-  :widths: 5 5 20 15 15 15 15
-  :header-rows: 1
-
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
-    - Note
-  * - :math:`r2_{ux}`
-    - transition probability
-    - Daily recovery prbability of untx SAM
-    - :math:`\frac{1-EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery ~62 days (derived, see below)
-    - Derived 
-    - Derived from Isanaka 2021 and tx time to recovery; need to update value for 0-6m
-  * - :math:`t1_{sam}`
-    - transition probability
-    - Daily recovery probability of tx SAM 
-    - :math:`\frac{EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 6.9 weeks; 48.3 days (approximate stand-in)
-    - Zw 2020
-    - Over 7 studies in Ethiopa, need to do meta-analysis; need to update value for 0-6m
 
 .. note::
 
@@ -701,4 +701,13 @@ References
 
     Cost and cost-effectiveness analysis of treatment for child undernutrition in low- and middle-income countries: A systematic review
 
-.. _`Njuguna 2020`: http://www.ncbi.nlm.nih.gov/pubmed
+.. _`Njuguna 2020`: http://www.ncbi.nlm.nih.gov/pubmed/33102783
+
+
+.. [Vygen_2013]
+
+  View `Vygen 2013`_
+
+    Treatment of Severe Acute Malnutrition in Infants Aged <6 Months in Niger
+
+.. _`Vygen 2013`: https://pubmed.ncbi.nlm.nih.gov/33102783/
