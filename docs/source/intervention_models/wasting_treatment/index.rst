@@ -137,8 +137,7 @@ Interventions for wasting treatment are delivered through different levels of th
 
 :underline:`Health post level`
 
- The HPs provide primary health care services such as disease prevention and control, hygiene and environmental sanitation, family health services, and health education and communication. The service provider at the HP works closely with the network of the HDA/HDG to facilitate the management of SAM and MAM. The
- service provider diagnoses acute malnutrition and provides Outpatient Therapeutic Programme (OTP) and Targeted Supplementary Feeding Programme (TSFP) services. They also determine patients who have medical complications and refer them to the Stablisation Centre (SC).
+ The HPs provide primary health care services such as disease prevention and control, hygiene and environmental sanitation, family health services, and health education and communication. The service provider at the HP works closely with the network of the HDA/HDG to facilitate the management of SAM and MAM. The service provider diagnoses acute malnutrition and provides Outpatient Therapeutic Programme (OTP) and Targeted Supplementary Feeding Programme (TSFP) services. They also determine patients who have medical complications and refer them to the Stablisation Centre (SC).
 
 :underline:`Health center level`
 
@@ -266,7 +265,6 @@ A full literature review of costs for CMAM programme is in [Njuguna_2020]_.
 For MAM, total costs of MAM treatment were calculated for 5 weeks of follow-up because the mean time to recovery was between 4 and 5 weeks. [Isanaka_cost_2019]_
 
 
-
 No acute malnutrition
 +++++++++++++++++++++
 
@@ -312,14 +310,14 @@ Congratulate and counsel the mother on appropriate IYCF practices.
     - Decreases death rate among the treated
     - No
     - Currently we do not have the relative risk of death of treated/untreated. We will capture some of the effect of tx on death by having the simulants recover faster, therefore leave the high risk state faster. However, by assigning utx simulants the mean death rate when they should have a higher death rate, we might overestimate the protective effect of tx on death.
-  * - Proportion recovered within programme treatment length
+  * - Proportion 'effectively covered' within programme treatment length
     - Increases
-    - No (but we can)
-    - We assume that all treatment covered will recover within the time-to-recovery if they had not died. We can modify the treatment coverage by multiplying it by the 'treatment efficacy' giving us the 'effective coverage' instead. 1 - 'effective coverage' will be the 'utx' population. 
-  * - Proportion defaulted during programme
+    - Yes
+    - 'Effective treatment coverage (CE)' is the 'treatment coverage (C)' x 'treatment efficacy (E)'. 1-C is uncovered population. 
+  * - Proportion defaulted/unresponsive during programme
     - Decreases
-    - We can capture this by using 'met-need'
-    - This will decrease as 'met-need' increases.
+    - Yes
+    - (C-CE) The better the programme, the higher the efficacy (E)
 
 
 Baseline Coverage Data
