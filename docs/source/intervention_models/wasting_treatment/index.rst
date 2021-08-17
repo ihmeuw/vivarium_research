@@ -94,6 +94,10 @@ Treatment and management for acute malnutrition
     - Not treated
   * - EPI 
     - Expanded programme on immunization
+  * - CMAM
+    - Community-based management of acute malnutrition
+  * - CTC 
+    - Community-based therapeutic care
 
 This documentation focuses on treatment and management of acute malnutrition in Ethiopia based on 2019 National Guideline for the Management of Acute Malnutrition. [EMOH]_
 
@@ -178,6 +182,10 @@ NOTE: All infants 0-6 months of age with SAM with or without medical complicatio
 SAM in children (>6 months)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Since 2007, a new model of care called community-based therapetic care (CTC) or community-based management of acute malnutrition (CMAM) has been endorsed for the treatment of acute malnutrition which addresses the limitations of previous inpatient therapeutic feeding programmes. Patients with severe malnutrition, with good appetite and without medical complications are treated in the outpatient therapeutic programme (OTP) that provides ready-to-use therapeutic food (RUTF) and medicines to treat simple conditions. The food and medicines are taken home and patient attends OTP site weekly for monitoring and resupply. 
+
+Severely malnourished persons with medical complications and/or anorexia are treated in an inpatient stabilization center (SC) where they receive standard World Health Organization (WHO)- recommended initial care until they have enough appetite and are well enough to continue with outpatient care. Approximately 10-15% of children in CMAM programmes require inpatient care at the stabilisation centers and the average length-of-stay at an SC is 14 days before they are transferred out to an OTP. [Scott_2020]_ [Tekeste_2012]_ 
+
 :underline:`2. Classify SAM without medical complications`
 
 * Bilateral pitting oedema + or ++ OR 
@@ -198,7 +206,6 @@ SAM in children (>6 months)
 * Any grade of bilateral pitting oedema (+, ++, +++) OR 
 * WHZ < -3 zscore OR
 * Presence of any medical complications (see guideline for full list)
-* *We need to make an assumption on the % of SAM cases that are complicated*
 
 :underline:`Treatment of children with SAM in SC`
 
@@ -207,6 +214,7 @@ SAM in children (>6 months)
 - Stabilisation phase: F-75 for 7 days
 - Transition phase: introduce RUTF gradually with F-75 or F-100 if cannot tolerate RUTF
 - Rehabilitation phase: Child transfers from SC to OTP and recieves RUTF in OTP
+
 
 
 MAM in infants (0-6 months)
@@ -223,7 +231,6 @@ MAM in infants (0-6 months)
 :underline:`Treatment of infants with MAM`
 
 Assess the infant’s feeding and counsel the mother or caregiver on appropriate IYCF practices. Emphasize on establishing effective exclusive breastfeeding. If feeding problems, follow up in 5 days. If no feeding problem, follow up in 30 days. Admit the mother to TSFP. Refer the mother for Productive Safety Net Programme (PSNP).
-
 
 
 MAM in children >6 months
@@ -244,8 +251,8 @@ Admit in TSFP (preferably with RUSF) and counsel on appropriate IYCF practices.
 Costs
 +++++
 
-1. Cost per child (>6 months) treated for SAM $165.12 2015 USD 
-2. Cost per child (>6 months) treated for MAM using RUSF $38.10 2015 USD
+1. Cost per child (>6 months) treated for SAM $165.12 2015 USD [Isanaka_cost_2019]_
+2. Cost per child (>6 months) treated for MAM using RUSF $38.10 2015 USD [Isanaka_cost_2019]_
 
 Includes personnel, therapeutic food, medical supplies and materials, infrastructure and logistic support for outpatient care and inpatient care. Total costs of MAM treatment were calculated for 5 weeks of follow-up because the mean time to recovery was between 4 and 5 weeks. [Isanaka_cost_2019]_
 
@@ -278,8 +285,6 @@ Congratulate and counsel the mother on appropriate IYCF practices.
 .. todo::
 
   Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
-
-
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 30
@@ -334,9 +339,8 @@ Geographic coverage attempts to measure the *availability* of services which doe
 
 .. todo::
 
-  1) Add treatment efficacy for SAM and MAM programmes 
-  2) Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
-  3) Update coverage values to 'effective coverage' values
+  Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
+ 
 
 
 .. list-table:: Baseline coverage data
@@ -376,8 +380,6 @@ Geographic coverage attempts to measure the *availability* of services which doe
 
 
 .. note::
-
-  Update coverage from treatment coverage to effective coverage 
 
   I would like to understand from SWEs what happens when they change age groups, do those on the cusp spontaneously recover? I guess that would make sense...those who survive are stronger than those who died; also prevalence doesn't change that much between 28day-5 years.
 
@@ -629,6 +631,7 @@ References
    National Guideline for the Management of Acute
    Malnutrition. Addis Ababa: FMOH.
 
+
 .. [WHO_2013_SAM_guidelines] 
   
   View `WHO 2013 SAM guidelines`_
@@ -636,6 +639,7 @@ References
     Updates on the management of severe acute malnutrition in infants and children
 
 .. _`WHO 2013 SAM guidelines`: https://www.who.int/publications/i/item/9789241506328
+
 
 .. [Isanaka_2021]
 
@@ -645,6 +649,7 @@ References
 
 .. _`Isanaka 2021`: https://gh.bmj.com/content/6/3/e004342
 
+
 .. [CMAM_Forum_coverage]
 
   View `CMAM Forum coverage`_ 
@@ -652,6 +657,7 @@ References
     Assessment of Coverage of Community-based Management of Acute Malnutrition
 
 .. _`CMAM Forum coverage`: https://www.ennonline.net/assessmentofcmamcoveragev2
+
 
 .. [Isanaka_cost_2019]
 
@@ -661,3 +667,20 @@ References
 
 .. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/31139441
 
+
+.. [Scott_2020]
+
+  View `Scott 2020`_
+
+    Ending malnutrition in all its forms requires scaling up proven nutrition interventions and much more: a 129-country analysis
+
+.. _`Scott 2020`: http://www.ncbi.nlm.nih.gov/pubmed/33183301
+
+
+.. [Tekeste_2012]
+
+  View `Tekeste 2012`_
+
+    Cost effectiveness of community-based and inpatient therapeutic feeding programs to treat severe acute malnutrition in Ethiopia
+
+.. _`Tekeste 2012`: http://www.ncbi.nlm.nih.gov/pubmed/PMC3323427
