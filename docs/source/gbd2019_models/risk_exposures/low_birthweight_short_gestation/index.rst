@@ -150,8 +150,8 @@ Risk Exposure Model Diagram
 
   Include diagram of Vivarium risk exposure model.
 
-Data Description Tables
-+++++++++++++++++++++++
+Data Description
+++++++++++++++++
 
 Pulling LBWSG exposure data from GBD 2019
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -194,14 +194,99 @@ appropriate location IDs for the model you're working on):
     (sex_id=[1,2]) since we will be initializing our population using GBD's
     population data and stratifying by sex.
 
+Rescaling LBWSG exposure data pulled from GBD 2019
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. important::
+
+  **The GBD 2019 exposure data for Low Birthweight and Short Gestation is potentially misleading as currently stored!**
+
+  Namely, the prevalences of the LBWSG categories returned by ``get_draws`` do **not** add up to 1! To fix the problem, follow these steps:
+
+  1.  Drop rows of the exposure data with ``'parameter' == 'cat125'`` (these
+      are precisely the rows with ``'modelable_entity_id' == NaN``). cat125 is
+      not a modeled category but rather a residual category automatically added
+      by ``get_draws`` because the prevalences that the LBWSG modelers gave to
+      central comp did not add up to 1 in each draw (see details :ref:`below
+      <details of GBD 2019 LBWSG exposure data issue>`).
+
+  2.  For each draw, divide the prevalence of each of the 58 remaining LBWSG
+      exposure categories by the sum of the prevalences for that draw. This
+      rescales the prevalences to sum to 1 so that they correctly represent
+      probabilities.
+
+  Here is `Python code to perform these steps <rescale_prevalence_function_>`_
+  from Nathaniel's `lbwsg module`_ in the ``vivarium_research_lsff`` repo,
+  assuming ``lbwsg_exposure`` has been pulled using ``get_draws`` as above:
+
+  .. code-block:: Python
+
+    def rescale_prevalence(exposure):
+      """Rescales prevalences to add to 1 in LBWSG exposure data pulled from GBD 2019 by get_draws."""
+      # Drop residual 'cat125' parameter with meid==NaN, and convert meid col from float to int
+      exposure = exposure.dropna().astype({'modelable_entity_id': int})
+      # Define some categories of columns
+      draw_cols = exposure.filter(regex=r'^draw_\d{1,3}$').columns.to_list()
+      category_cols = ['modelable_entity_id', 'parameter']
+      index_cols = exposure.columns.difference(draw_cols)
+      sum_index = index_cols.difference(category_cols)
+      # Add prevalences over categories (indexed by meid and/or parameter) to get denominator for rescaling
+      prevalence_sum = exposure.groupby(sum_index.to_list())[draw_cols].sum()
+      # Divide prevalences by total to rescale them to add to 1, and reset index to put df back in original form
+      exposure = exposure.set_index(index_cols.to_list()) / prevalence_sum
+      exposure.reset_index(inplace=True)
+      return exposure
+
+    lbwsg_exposure = rescale_prevalence(lbwsg_exposure)
+
+.. _rescale_prevalence_function: https://github.com/ihmeuw/vivarium_research_lsff/blob/919a68814a0b9bc838a7e74e424545b3d2b7e48c/nanosim_models/lbwsg.py#L220
+
+.. _lbwsg module: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py
+
+.. note::
+
+  We should double-check with the LBWSG modelers that rescaling the prevalences
+  is a reasonable way to adjust the GBD data for use in our simulations.
+
+.. _details of GBD 2019 LBWSG exposure data issue:
+
+.. todo::
+
+  Add more details about this data issue, e.g.:
+
+  - Documentation from ``get_draws`` about how a residual category is added
+    when category prevalences don't sum to 1, under the assumption that the
+    TMREL is not explicitly modeled; this assumption is incorrect for LBWSG,
+    which *does* explicitly model the TMREL categories.
+
+  - Note that we confirmed with the LBWSG modelers that ``cat125`` is not a
+    real category, and we confirmed with central comp that ``cat125`` was in
+    fact being added by ``get_draws``.
+
+  - Note that the draws where ``sum(prevalence) > 1`` are precisely the draws
+    where ``prevalence('cat125') == 0``, and the draws where ``sum(prevalence)
+    == 1`` are precisely the draws where ``prevalence('cat125') > 0``. This
+    indicates that in the data the LBWSG modelers provided to central comp,
+    there were **no** draws in which the category prevalences summed to 1 like
+    they should have: Draws where the total prevalence was less than 1 had a
+    nonzero prevalence of ``'cat125'`` added to force the prevalences to sum to
+    1, and draws where the total prevalence was greater than 1 had the the
+    prevalence of ``'cat125'`` set to 0, leaving the sum of the category
+    prevalences greater than 1.
+
+  - Show some statistics of the category prevalence data for one or more
+    locations, e.g. how many draws have ``sum(prevalence) > 1``, what is the
+    distribution of prevalences of ``'cat125'``, what is the distribution of
+    ``sum(prevalence)`` with and without ``'cat125'`` included, etc.
+
 Using LBWSG exposure data in Vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The probability that a simulant's Low Birthweight and Short Gestation exposure
 category is ``cat_i`` should equal the prevalence of ``cat_i`` for the
-simulant's age group and sex according to GBD. Specifically, the LBWSG
-prevalence data from GBD should be used to initialize the exposure categories of
-simulants as follows:
+simulant's age group and sex according to GBD (after rescaling the prevalences
+as indicated above). Specifically, the LBWSG prevalence data from GBD should be
+used to initialize the exposure categories of simulants as follows:
 
 * Simulants initialized into age group 2 (Early Neonatal) or age group 3 (Late
   Neonatal) **at the beginning of the simulation** should be assigned an LBWSG
