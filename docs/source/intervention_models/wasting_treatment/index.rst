@@ -329,7 +329,7 @@ The aim and priority in community-based services for the management of acute mal
 
 Treatment coverage should not be confused with geographical coverage. 
 
-  Geogpraphical coverage (GC) = :math:`\frac{\text{Healthcare facilities/communities delivering MAM/SAM treatments}}{\text{Total number of facilities/communities}}`
+  Geographical coverage (GC) = :math:`\frac{\text{Healthcare facilities/communities delivering MAM/SAM treatments}}{\text{Total number of facilities/communities}}`
 
 Geographic coverage attempts to measure the *availability* of services which does not equate with the *service access* and *uptake*. 
 
@@ -544,6 +544,10 @@ For **MAM** 6-59 months kids
     - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
     - [Ackatia_Armah_2015tx]_ (Mali)
     - recovery time using RUSF 
+
+.. code-block:: python
+
+    #I need a little help with these distributions...some of the studies report a median with IQR and some with a mean ... what should we use?
 
 .. note::
 
