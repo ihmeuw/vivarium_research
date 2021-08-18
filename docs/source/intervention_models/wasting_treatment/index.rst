@@ -390,7 +390,7 @@ Geographic coverage attempts to measure the *availability* of services which doe
 
     #to get the distribution of the above values, use normal distribution with mean and SD 
 
-    SD = (95%UI upper - 95%UI lower) / 2*1.98
+    SD = (95%UI upper - 95%UI lower) / 2*1.96
 
 
 .. note::
