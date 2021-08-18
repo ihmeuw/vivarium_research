@@ -350,40 +350,47 @@ Geographic coverage attempts to measure the *availability* of services which doe
   Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
  
 
-.. list-table:: Baseline coverage data
-  :widths: 10 10 5 15 20 20
+.. list-table:: Baseline coverage data (Ethiopia)
+  :widths: 10 10 5 15 20 30
   :header-rows: 1
 
-  * - Location
-    - Subpopulation
-    - Coverage
-    - Value (CxE)
+  * - Subpop cov
+    - Value (C)
+    - Reference
+    - Value (E)
     - Reference
     - Note
-  * - Ethiopia
-    - Tx for infants 0-6 months with any SAM 
-    - :math:`EC_{SAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
-    - [Isanaka_2021]_ [Zw_2020tx]_
-    - Update C, E values for infants?
-  * - Ethiopia
-    - Tx for children 6-59 months with SAM
-    - :math:`EC_{SAM_{6-59}}` 
-    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
-    - [Isanaka_2021]_ [Zw_2020tx]_
-    - 
-  * - Ethiopia
-    - Tx for infants 0-6 months with MAM 
-    - :math:`EC_{MAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
-    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_
-    - Update C and E value for MAM
-  * - Ethiopia
-    - Tx for kids 6-59 months with MAM 
-    - :math:`EC_{MAM_{6-59}}`
-    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
-    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_
-    - Update C value for MAM
+  * - :math:`EC_{SAM_{0-6}}`
+    - 48.8%(95%CI:37.4-60.4) 
+    - [Isanaka_2021]_ 
+    - 70%(95%CI:64-76)
+    - [Zw_2020tx]_
+    - Using the C, E from 6-59mo
+  * - :math:`EC_{SAM_{6-59}}` 
+    - 48.8%(95%CI:37.4-60.4) 
+    - [Isanaka_2021]_ 
+    - 70%(95%CI:64-76)
+    - [Zw_2020tx]_
+    -
+  * - :math:`EC_{MAM_{0-6}}`
+    - 48.8%(95%CI:37.4-60.4) x 
+    - [Isanaka_2021]_ 
+    - 73.1% (95%CI:58.5-87.7) for RUSF
+    - [Ackatia_Armah_2015tx]_
+    - Using the C, E from 6-59mo, *approx 95%CI for E*
+  * - :math:`EC_{MAM_{6-59}}`
+    - 48.8%(95%CI:37.4-60.4)
+    - [Isanaka_2021]_ 
+    - 73.1% (95%CI:58.5-87.7) for RUSF
+    - [Ackatia_Armah_2015tx]_
+    - Update C value for MAM,  *approx 95%CI for E*
+
+
+.. code-block:: python
+
+    #to get the distribution of the above values, use normal distribution with mean and SD 
+
+    SD = (95%UI upper - 95%UI lower) / 2*1.98
 
 
 .. note::
@@ -401,31 +408,37 @@ Vivarium Modeling Strategy
 
 For **SAM** 0-6 months infants
 
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{0-6}}`
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{0-6}}`
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` 
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` 
 
 For **SAM** 6-59 months kids
 
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` X :math:`1-EC_{SAM{6-59}}`
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` X :math:`EC_{SAM{6-59}}`
-
-For MAM, **r3** is the daily probability of recovering from MAM state given the MAM tx coverage.
+ - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` 
+ - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
 
 For **MAM** 0-6 months infants
 
- - :math:`r3 = r3_{ux} + t2_{mam}`
- - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-EC_{MAM_{0-6}}`
- - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`EC_{MAM_{0-6}}`
+ - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` 
+ - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
 
 For **MAM** 6-59 months kids
 
- - :math:`r3 = r3_{ux} + t2_{mam}`
- - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` X :math:`1-EC_{MAM_{6-59}}`
- - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` X :math:`EC_{MAM_{6-59}}`
+ - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` 
+ - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
 
-.. todo::
+.. important::
 
-  THE FOLLOWING NEEDS MORE DETAIL! 
+   For model 2 (wasting exposure only with baseline coverage of treatment but treatment not tracked), we multiplied the above rates by the baseline treatment coverage of 0.488 (C): 
+
+   - r2_ux was multiplied by (1-C) 
+   - t1_sam was multiplied by C
+   - r3_ux was multipled by (1-C)
+   - t2_mam was multiplied by C
+
+   Additionally, for the recovery rate from MAM, we used r3 which was = r3_ux(1-C) + t2_mam(C)
+
+   Note also that we used the same recovery duration for 0-6 months as 6-59 months in model 2. We have now updated the recovery durations for effectively treated population to be specific for 0-6 months in this model.  
+
 
 .. list-table:: Modeled Outcomes **Table 1** SAM 0-6 months
   :widths: 5 5 20 15 15 15 15
@@ -440,15 +453,15 @@ For **MAM** 6-59 months kids
     - Note
   * - :math:`r2_{ux}`
     - transition probability
-    - Daily recovery prbability of untx SAM
-    - :math:`\frac{1-EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - Daily recovery probability of untx SAM
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx SAM}}`
     - time-to-recovery 62 days (derived)
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery for >6mo
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{EC_{SAM_{0-6}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
     - time-to-recovery (mean) 13.3 (SD 6.9) days 
     - [Vygen_2013]_
     - Recovery time for 0-6m in SC in Niger
@@ -467,14 +480,14 @@ For **MAM** 6-59 months kids
   * - :math:`r2_{ux}`
     - transition probability
     - Daily recovery probability of untx SAM
-    - :math:`\frac{1-EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of utx SAM}}`
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx SAM}}`
     - time-to-recovery ~62 days (derived, see below)
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{EC_{SAM_{6-59}}}{\text{median time-to-recovery (days) of tx SAM}}`
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
     - time-to-recovery 6.9 weeks; 48.3 days (update to more accurate)
     - Zw 2020
     - Over 7 studies in Ethiopa
@@ -494,14 +507,14 @@ For **MAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1-EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of utx MAM}}`
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
     - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition; tx time to recovery for >6mo
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{EC_{MAM_{0-6}}}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery (mean) 20.8 days
     - [Woeltje_2020]_ (Malawi)
     - recovery time using 75 kcal/kg/day
@@ -520,18 +533,17 @@ For **MAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1-EC_{MAM_{6-59}}}{\text{median time-to-recovery (days) of utx MAM}}`
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
     - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{EC_{MAM_{6-59}}}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
     - [Ackatia_Armah_2015tx]_ (Mali)
     - recovery time using RUSF 
-
 
 .. note::
 
@@ -556,78 +568,79 @@ For **MAM** 6-59 months kids
   Hence when we ramp up coverage (treated% increases), t1_sam also increases. Duration of SAM will decrease. Without changing incidence, our prevalence of SAM should also decrease (P = incidence x Duration). Our intervention could also work by decreasing the time to recovery, in which case t1_sam increases and prevalence will decrease (without changing incidence).
 
 
-
 Affected Outcomes
 +++++++++++++++++
 
 Scaling up the effective coverage of SAM and MAM, we will increase treatment coverage and also efficacy of the treatment programme to increase effective coverage (EC).
 
-.. list-table:: Scenario coverage data
-  :widths: 10 10 5 15 20 20 20
+.. list-table:: Scenario coverage data (Ethiopia)
+  :widths: 10 20 20 20 20 20 
   :header-rows: 1
 
-  * - Location
-    - Subpopulation
-    - Coverage
-    - Baseline value (CxE)
-    - Scenario value (CxE)
+  * - Subpop coverage
+    - Value (C)
+    - Reference
+    - Value (E)
     - Reference
     - Note
-  * - Ethiopia
-    - Tx for infants 0-6 months with any SAM 
-    - :math:`EC_{SAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
-    - 90% x 75%
-    - [Isanaka_2021]_ [Zw_2020tx]_ Sphere standards
-    - Update C, E values for infants?
-  * - Ethiopia
-    - Tx for children 6-59 months with SAM
-    - :math:`EC_{SAM_{6-59}}` 
-    - 48.8%(95%CI:37.4-60.4) x 70%(95%CI:64-76)
-    - 90% x 75%
-    - [Isanaka_2021]_ [Zw_2020tx]_ Sphere standards
+  * - :math:`EC_{SAM_{0-6}}`
+    - 90%
     - 
-  * - Ethiopia
-    - Tx for infants 0-6 months with MAM 
-    - :math:`EC_{MAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
-    - 90% x 75%
-    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_ Sphere standards
-    - Update C and E value for MAM 
-  * - Ethiopia
-    - Tx for kids 6-59 months with MAM 
-    - :math:`EC_{MAM_{6-59}}`
-    - 48.8%(95%CI:37.4-60.4) x 73.1% (RUSF)
-    - 90% x 75%
-    - [Isanaka_2021]_ [Ackatia_Armah_2015tx]_ Sphere standards
-    - Update C value for MAM
+    - 75%
+    - Sphere standards
+    - 
+  * - :math:`EC_{SAM_{6-59}}` 
+    - 90%
+    - 
+    - 75%
+    - Sphere standards
+    - 
+  * - :math:`EC_{MAM_{0-6}}`
+    - 90% 
+    - 
+    - 75%
+    - Sphere standards
+    - 
+  * - :math:`EC_{MAM_{6-59}}`
+    - 90% 
+    - 
+    - 75%
+    - Sphere standards
+    - 
 
 
 .. list-table:: How to apply recovery rate to coverage category
-  :widths: 30 20 20
+  :widths: 30 20 20 20
   :header-rows: 1
 
   * - Subpopulation
     - Coverage
     - Recovery rate to apply
+    - Cost to apply
   * - Tx uncovered with SAM 
     - :math:`1 - C_{SAM_{age}}`
     - :math:`r2_{ux}`
+    - None
   * - Tx covered but not cured with SAM
     - :math:`C_{SAM_{age}} - EC_{SAM_{age}}`
     - :math:`r2_{ux}`
+    - Cost of SAM treatment per child
   * - Tx covered and cured with SAM
     - :math:`EC_{SAM_{age}}`
     - :math:`t1_{sam}`
+    - Cost of SAM treatment per child
   * - Tx uncovered with MAM
     - :math:`1 - C_{MAM_{age}}`
     - :math:`r3_{ux}`
+    - None
   * - Tx covered but not cured with MAM
     - :math:`C_{MAM_{age}} - EC_{MAM_{age}}`
     - :math:`r3_{ux}`
+    - Cost of MAM treatment per child
   * - Tx covered and cured with MAM
     - :math:`EC_{MAM_{age}}`
     - :math:`t2_{mam}`
+    - Cost of MAM treatment per child
   
 .. todo::
 
@@ -646,6 +659,11 @@ Assumptions and Limitations
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. csv-table:: Treatment for SAM and MAM output table shell for v & v (Ethiopia)
+   :file: gam_treatment_outputshell_vv.csv
+   :widths: 20 20 20 20 20 20 20 20
+   :header-rows: 1
 
 References
 ----------
