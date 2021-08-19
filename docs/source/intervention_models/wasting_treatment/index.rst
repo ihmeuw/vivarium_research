@@ -309,7 +309,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
   * - Death rate
     - Decreases death rate among the treated
     - No
-    - Currently we do not have the relative risk of death of treated/untreated. We will capture some of the effect of tx on death by having the simulants recover faster, therefore leave the high risk state faster. However, by assigning utx simulants the mean death rate when they should have a higher death rate, we might overestimate the protective effect of tx on death.
+    - Currently we do not have the relative risk of death of treated/untreated. We will capture some of the effect of tx on death by having the simulants recover faster, therefore leave the high risk wasting states faster. However, by assigning tx simulants the mean death rate when they should have a lower death rate, we are killing more than we should in our sim, hence we might be under-estimating the effect of treatment. (For untreated ppl, we are assigning them the mean death rate when in reality they would have a higher death rate. We under-estimate the harm of not-treating)
   * - Proportion 'effectively covered' within programme treatment length
     - Increases
     - Yes
@@ -455,7 +455,7 @@ For **MAM** 6-59 months kids
     - transition probability
     - Daily recovery probability of untx SAM
     - :math:`\frac{1}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery 62 days (derived)
+    - time-to-recovery ~62 days
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery for >6mo
   * - :math:`t1_{sam}`
@@ -481,15 +481,15 @@ For **MAM** 6-59 months kids
     - transition probability
     - Daily recovery probability of untx SAM
     - :math:`\frac{1}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery ~62 days (derived, see below)
+    - time-to-recovery ~62 days
     - Derived 
     - Derived from Isanaka 2021 and tx time to recovery
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
     - :math:`\frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 6.9 weeks; 48.3 days (update to more accurate)
-    - Zw 2020
+    - time-to-recovery 48.3 days (update to more accurate)
+    - [Zw_2020tx]_
     - Over 7 studies in Ethiopa
 
 
@@ -508,7 +508,7 @@ For **MAM** 6-59 months kids
     - transition probability
     - Daily recovery probability of untx MAM 
     - :math:`\frac{1}{\text{median time-to-recovery (days) of utx MAM}}`
-    - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
+    - time-to-recovery 63 (IQR: 28-105) days 
     - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition; tx time to recovery for >6mo
   * - :math:`t2_{mam}`
@@ -517,7 +517,7 @@ For **MAM** 6-59 months kids
     - :math:`\frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery (mean) 20.8 days
     - [Woeltje_2020]_ (Malawi)
-    - recovery time using 75 kcal/kg/day
+    - Recovery time feeding 75 kcal/kg/day
 
 .. list-table:: Modeled Outcomes **Table 4** MAM 6-59 months
   :widths: 5 5 20 15 15 15 15
@@ -534,20 +534,25 @@ For **MAM** 6-59 months kids
     - transition probability
     - Daily recovery probability of untx MAM 
     - :math:`\frac{1}{\text{median time-to-recovery (days) of utx MAM}}`
-    - time-to-recovery 9 (IQR: 4–15) weeks; 63 (IQR: 28-105) days 
+    - time-to-recovery 63 (IQR: 28-105) days 
     - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
     - :math:`\frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
-    - time-to-recovery 5.9 (95%CI: 4.9, 7.0) weeks; 41.3 (95%CI: 34.4, 49) days
+    - time-to-recovery 41.3 (95%CI: 34.4, 49) days
     - [Ackatia_Armah_2015tx]_ (Mali)
     - recovery time using RUSF 
 
+.. important::
+
+  In this first run that Rajan is building (August-18-21), we are not modelling treatment in the first 28 days of life. If we do model treatment in this first 28 days, the prevalence of wasting by the time they reach post-neonatal age groups in the scale-up scenario will be different (reduced). We should think through the relationship between wasting and LBWSG in the neonatal age groups and see if we want to add treatment back into the first month of life. 
+
+
 .. code-block:: python
 
-    #I need a little help with these distributions...some of the studies report a median with IQR and some with a mean ... what should we use?
+    #I need a little help with these distributions for draw level uncertainty...some of the studies report a median with IQR and some with a mean? (For this run Rajan will not include draw level uncertainty and will use the point estimate in days for all draws.  
 
 .. note::
 
@@ -659,6 +664,7 @@ Assumptions and Limitations
 
 - We are not applying a differential death rate to those effectively covered vs not effectively covered
 - We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country. 
+- We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups. 
 
 
 Validation and Verification Criteria
