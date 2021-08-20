@@ -98,8 +98,6 @@ We will use data from the 2019 GBD and published literature to inform the parame
 While there are various well-studied risk factors that are associated with becoming wasted, we will only address those that have interventions with sufficient strength of evidence for effect. The risk factors we include in our model include birthweight and infectious diseases.
 
 
-
-
 .. _3.1:
 
 3.1 Causal diagram
@@ -108,23 +106,9 @@ While there are various well-studied risk factors that are associated with becom
 .. image:: DAG_acute_malnutrition.svg
 
 
-**Outcome (O)**:
+.. todo::
 
-
-
-**Most proximal determinant/exposure (E)**:
-
-
-
-**Confounders (C)**:
-
-
-
-**Effect modifiers**:
-
-
-**Mediators (M)**:
-
+  Add more details on causal diagrams with interventions/GBD risk exposures
 
 .. _3.2:
 
@@ -138,13 +122,12 @@ While there are various well-studied risk factors that are associated with becom
 
 Historically, prevention research has primarily focused on stunting, and, as a research outcome, wasting has been considered primarily within the context of humanitarian emergencies. Although the volume of studies related to wasting prevention through direct and indirect health-care sector areas has increased in recent years, this evidence base is mixed and often inconclusive. We reviewed the literature from the recent Keats et al 2021 update of effective interventions to address maternal and child malnutrition and selected interventions that have moderate or strong evidence for implementation5. We selected interventions that:
 
-1)	Directly prevent acute malnutrition, moderate or severe;
-2)	Treat or manage acute malnutrition, moderate or severe;
+1)	Directly prevent acute malnutrition (SQ-LNS), moderate or severe;
+2)	Treat or manage acute malnutrition (GAM treatment), moderate or severe;
 3)	Increase rates of exclusive or continued breastfeeding;
 4)	Increase birthweight;
 5)	Reduce incidence of infectious disease; or
 6)	Improve recovery from infectious disease.
-
 
 
 .. _4.1:
@@ -156,7 +139,7 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
 
 **Alternative scenario 1**
-Scale up (immediate, not temporal) the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease  with a shorter duration (prevalence ~ incidence x duration).    
+Scale up (immediate, not temporal) the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease with a shorter duration (prevalence ~ incidence x duration).    
 
 | Effective coverage = treatment coverage x treatment efficacy
 | Not effectively covered = 1 - (treatment coverage x treatment efficacy)
@@ -170,8 +153,8 @@ See linked documentation for more information :ref:`Treatment and management for
   :header-rows: 1
 
   * - Exposure 
-    - Treatment coverage
-    - Treatment efficacy
+    - Treatment coverage (c)
+    - Treatment efficacy (E)
     - Effectivey covered
     - Not effectively covered
     - Reference
@@ -309,7 +292,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 .. _5.2.2:
 
 5.2.2 Population of interest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
@@ -322,35 +305,73 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 .. _5.3.1:
 
-5.3.1 Model 1
-~~~~~~~~~~~~~
+5.3.1 Model 1 - Cause models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+Cause models and mortality models
 
 .. _5.3.2:
 
-5.3.2 Model 2
-~~~~~~~~~~~~~
+5.3.2 Model 2 - stunting and wasting risk exposure models
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
+Exposure model stunting and wasting without baseline treatment tracking. Baseline only. 
 
 .. _5.3.3:
 
-5.3.3 Model 3
-~~~~~~~~~~~~~
+5.3.3 Model 3 - SQ-LNS
+~~~~~~~~~~~~~~~~~~~~~~
 
-
+SQ-LNS baseline and intervention scale-up
 
 .. _5.3.4:
 
-5.3.4 Treatment model
-~~~~~~~~~~~~~~~~~~~~~
+5.3.4 Model 4 - Treatment model - GAM treatment
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+SAM and MAM treatment baseline and treatment scale-up
 
 
 
 .. _5.4:
 
-5.4 Desired outputs
+5.4 X-Factor
+------------
+
+**Risk exposure**
+
+We will use maternal undernutrition as the exposure prevalence for the X-factor. Maternal undernutrition is a proxy for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_
+
+The proportion of reproductive age women underweight is 0.188 for GBD 2020. 
+
+.. code-block:: python
+
+  #Age standardized covariate for underweight women of reproductive age (10-54) with underweight for women under age 20 defined by <-2 BMI z scores and for women over age 20 as <17 BMI
+
+  get_covariate_estimates(
+   gbd_round_id = 7,
+   covariate_id = 1252,
+   decomp_step ='iterative',
+   location_id = [179],
+   year_id = 2020)
+
+**Risk effect**
+
+We do not have direct evidence or data for the risk effect of maternal undernutrition on wasting incidence (from the previous source state) and stunting prevalence. From the [Na_2020]_, table 4 shows the odds of infant malnutrition (wasting, stunting and underweight) at 6 months of age in infants from food-insecure households as compared with infants from food-secure households (reference group). For rare outcomes, the prevalence risk ratio, incidence rate ratio and prevalence odds ratios approximate each other which is likely to be true for SAM (<5% prevalence), but not true for MAM and MILD wasting and stunting. Hence we model a range of risk effects as a sensitivity analysis. Below table is a suggested range of risk-effect values to model. We can discuss this more. 
+
+.. csv-table:: X-factor risk effect sensitivity analysis
+   :file: x_factor_risk_effect.csv
+   :widths: 20, 20, 20, 20
+   :header-rows: 1
+
+
+.. todo::
+
+  A more thorough literature review and support for use of this proxy should be done to strengthen are argument. 
+
+.. _5.5:
+
+5.5 Desired outputs
 -------------------
 
 Final outputs to report in manuscript 
@@ -364,9 +385,9 @@ Final outputs to report in manuscript
   
   draft table to be refined
 
-.. _5.5:
+.. _5.6:
 
-5.5 Output meta-table shell
+5.6 Output meta-table shell
 ---------------------------
 
 
@@ -409,3 +430,23 @@ Final outputs to report in manuscript
     Malian children with moderate acute malnutrition who are treated with lipid-based dietary supplements have greater weight gains and recovery rates than those treated with locally produced cereal-legume products: a community-based, cluster-randomized trial
 
 .. _`Ackatia-Armah et al 2015`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/25733649/
+
+
+.. [Na_2020] 
+  
+  View `Na 2020`_
+
+    Maternal nutritional status mediates the linkage between household food insecurity and mid-infancy size in rural Bangladesh
+
+.. _`Na 2020`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/32102702/
+
+
+.. [Mohammed_2018] 
+  
+  View `Mohammed 2018`_
+
+    Bayesian Gaussian regression analysis of malnutrition for children under five years of age in Ethiopia, EMDHS 2014
+
+.. _`Mohammed 2018`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/29636912/
+
+
