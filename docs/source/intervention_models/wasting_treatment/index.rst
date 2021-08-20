@@ -413,7 +413,7 @@ Vivarium Modeling Strategy
 For **SAM** 0-6 months infants
 
  - :math:`r2_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` 
+ - :math:`t1_{sam} = \frac{t}{\text{median time-to-recovery (days) of tx SAM}}` 
 
 For **SAM** 6-59 months kids
 
@@ -591,7 +591,7 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
 
 .. note::
 
-  How the value r2_ux was derived for model 2: 
+  How the value r2_ux was derived for model 2 (note we did use an efficacy (E) in model 2): 
 
   1) From Isanaka 2021, the incidence correction factor K = 6.7 for a population SAM coverage of 48.8% 
   2) K = 1 year/duration of SAM (in years) = 6.7
@@ -600,7 +600,7 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
   5) 365/(r2_ux + [0.488 x 365/48.3] + [yearly rate of death]) = 54.5; using d1 = 0.015 for age_group 4 and sex 2
   6) r2_ux = 2.9945
   7) r2_ux = (1-Csam) X 365/Dsam_utx (1-Csam = 0.512)
-  8) Dsam_utx ~ 62 days (will need to recalculate by age and sex)
+  8) Dsam_utx ~ 62 days (will need to recalculate by age and sex; this is sightly higher than model 4)
 
   Note that 
 
