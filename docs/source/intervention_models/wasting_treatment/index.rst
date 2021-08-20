@@ -408,36 +408,40 @@ Vivarium Modeling Strategy
 
 For **SAM** 0-6 months infants
 
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` 
+ - :math:`r2_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
  - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}` 
 
 For **SAM** 6-59 months kids
 
- - :math:`r2_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx SAM}}` 
- - :math:`t1_{sam} = \frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
+ - :math:`r2_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
+ - :math:`t1_{sam} = \frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
 
 For **MAM** 0-6 months infants
 
- - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` 
- - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
+ - :math:`r3_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx MAM}}` 
+ - :math:`t2_{mam} = \frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
 
 For **MAM** 6-59 months kids
 
- - :math:`r3_{ux} = \frac{1}{\text{median time-to-recovery (days) of utx MAM}}` 
- - :math:`t2_{mam} = \frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
+ - :math:`r3_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx MAM}}` 
+ - :math:`t2_{mam} = \frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
+
+where t is the period for which transition the is estimated (a year) eg. 365 days using days as the unit 
+
 
 .. important::
 
-   For model 2 (wasting exposure only with baseline coverage of treatment but treatment not tracked), we multiplied the above rates by the baseline treatment coverage of 0.488 (C): 
+   For model 2 (wasting exposure only with baseline coverage of treatment but treatment-not-tracked),the above reciprocal of durations were weighted by the baseline treatment coverage of 0.488 (C). Also note that the recovery durations we used for model 2 were slightly different than what we have here in model 4. In model 2, we used:
+  
+   - r2_ux (sam untreated) = (1-C) x 1/60.5 days 
+   - t1_sam = C x 1/48.3 days
+   - r3_ux (mam untreated) = (1-C) x 1/63 days
+   - t2_mam = C x 1/41.3 days
+   - where the rates are in per person-day; multiply by 356 to get per person-year
 
-   - r2_ux was multiplied by (1-C) 
-   - t1_sam was multiplied by C
-   - r3_ux was multipled by (1-C)
-   - t2_mam was multiplied by C
+   Additionally, for the recovery rate from MAM, we used r3 which was = r3_ux(1-C) + t2_mam(C). (See wasting exposure 2020 documentation for the use of these rates).
 
-   Additionally, for the recovery rate from MAM, we used r3 which was = r3_ux(1-C) + t2_mam(C)
-
-   Note also that we used the same recovery duration for 0-6 months as 6-59 months in model 2. We have now updated the recovery durations for effectively treated population to be specific for 0-6 months in this model.  
+   Note also that we used the same recovery duration for 0-6 months as 6-59 months in model 2. We have now updated the recovery durations for effectively treated population to be specific for 0-6 months in this model 4. 
 
 
 .. list-table:: Modeled Outcomes **Table 1** SAM 0-6 months
@@ -454,14 +458,14 @@ For **MAM** 6-59 months kids
   * - :math:`r2_{ux}`
     - transition probability
     - Daily recovery probability of untx SAM
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery ~62 days
-    - Derived 
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx SAM}}`
+    - See age, sex specific derivation below
+    - [Isanaka_2021]_ 
     - Derived from Isanaka 2021 and tx time to recovery for >6mo
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
     - time-to-recovery (mean) 13.3 (SD 6.9) days 
     - [Vygen_2013]_
     - Recovery time for 0-6m in SC in Niger
@@ -480,14 +484,14 @@ For **MAM** 6-59 months kids
   * - :math:`r2_{ux}`
     - transition probability
     - Daily recovery probability of untx SAM
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx SAM}}`
-    - time-to-recovery ~62 days
-    - Derived 
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx SAM}}`
+    - See age, sex specific derivation below
+    - [Isanaka_2021]_ 
     - Derived from Isanaka 2021 and tx time to recovery
   * - :math:`t1_{sam}`
     - transition probability
     - Daily recovery probability of tx SAM 
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx SAM}}`
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
     - time-to-recovery 48.3 days (update to more accurate)
     - [Zw_2020tx]_
     - Over 7 studies in Ethiopa
@@ -507,14 +511,14 @@ For **MAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx MAM}}`
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 63 (IQR: 28-105) days 
     - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition; tx time to recovery for >6mo
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery (mean) 20.8 days
     - [Woeltje_2020]_ (Malawi)
     - Recovery time feeding 75 kcal/kg/day
@@ -533,17 +537,44 @@ For **MAM** 6-59 months kids
   * - :math:`r3_{ux}`
     - transition probability
     - Daily recovery probability of untx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of utx MAM}}`
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx MAM}}`
     - time-to-recovery 63 (IQR: 28-105) days 
     - [James_2016]_ (Ethiopia)
     - They used MUAC definition of malnutrition
   * - :math:`t2_{mam}`
     - transition probability
     - Daily recovery probability of tx MAM 
-    - :math:`\frac{1}{\text{median time-to-recovery (days) of tx MAM}}` 
+    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
     - time-to-recovery 41.3 (95%CI: 34.4, 49) days
     - [Ackatia_Armah_2015tx]_ (Mali)
     - recovery time using RUSF 
+
+Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline treatment coverage (C):
+
+  The incidence correction factor k is = :math:`\frac{t}{\text{average duration of disease}}`
+  where t is the period for which incidence is estimated (a year) eg. 365 days using days as the unit 
+
+  k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations. 
+
+  Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
+
+  1) From Isanaka 2021, the incidence correction factor for Ethiopia is k = 6.7(95%CI:5.3-8.4) for a baseline population SAM treatment coverage of 48.8(95%CI 37.4 to 60.4)
+  2) k = 6.7(95%CI:5.3-8.4) =  :math:`\frac{365}{SAM\_duration (in days)}` 
+  3) SAM_duration =  :math:`\frac{365}{6.7}` = 54.5 days
+  4) :math:`54.5 = \frac{365}{r2_{ux} \times (1-CE) + t1_{sam} \times (CE) + death\_rate_{age|sex}}` 
+  5) Solve for :math:`r2_{ux}` for for each age/sex strata with age/sex specific death rate
+ 
+ where C = 48.8% (95%CI:37.4-60.4), E = 70% (95%CI:64-76)
+
+  For example, if 
+
+  - :math:`death\_rate_{age|sex}` = 0.015 per person year for age group 4 female 
+  - :math:`r2_{ux} \times (1 - 0.488  \times 0.7) = \frac{365}{54.5} - (\frac{365}{48.3}  \times 0.488  \times 0.7) - 0.015`
+  - :math:`r2_{ux} \times (1 - 0.488  \times 0.7) = 6.697 - 2.581 - 0.015`
+  - :math:`r2_{ux} \times (1 - 0.488  \times 0.7) = 4.101`
+  - :math:`r2_{ux} =  4.101 / 0.6584 = 6.2287`
+  - Duration of untreated SAM = 365 / 6.2287 = 58.6 days for age group 4 female
+
 
 .. important::
 
@@ -552,28 +583,30 @@ For **MAM** 6-59 months kids
 
 .. code-block:: python
 
-    #I need a little help with these distributions for draw level uncertainty...some of the studies report a median with IQR and some with a mean? (For this run Rajan will not include draw level uncertainty and will use the point estimate in days for all draws.  
+    #Nathaniel to add parameter uncertainty and distribution 
 
 .. note::
 
-  Fully describe how r2_ux is derived: 
+  How the value r2_ux was derived for model 2: 
 
   1) From Isanaka 2021, the incidence correction factor K = 6.7 for a population SAM coverage of 48.8% 
   2) K = 1 year/duration of SAM (in years) = 6.7
   3) Duration of SAM in years = 1/6.7 = 0.149253 years = 54.5 days
-  4) 1/(r2_ux + t1_sam + d1) = 54.5 
-  5) 1/(r2_ux + [0.488/48.3] + [yearly rate of death/365]) = 54.5; using d1 = 0.015/365 for age_group 4 and sex 2
-  6) r2_ux = 0.0084
-  7) r2_ux = (1-Csam) X 1/Dsam_utx (1-Csam = 0.512)
-  8) Dsam_utx = 62 days (will need to recalculate by age and sex)
+  4) 365/(r2_ux + t1_sam + d1) = 54.5 
+  5) 365/(r2_ux + [0.488 x 365/48.3] + [yearly rate of death]) = 54.5; using d1 = 0.015 for age_group 4 and sex 2
+  6) r2_ux = 2.9945
+  7) r2_ux = (1-Csam) X 365/Dsam_utx (1-Csam = 0.512)
+  8) Dsam_utx ~ 62 days (will need to recalculate by age and sex)
 
-  note that 
+  Note that 
 
-  r2_ux = untreated% x 1/Dsam_utx
-  t1_sam = treated% x 1/Dsam_tx
+  r2_ux = untreated% x 365/Dsam_utx
+  t1_sam = treated% x 365/Dsam_tx
 
   Also note that Dsam_tx < Dsam_utx (time to recovery of tx SAM is shorter than time to recovery of untreated SAM)
   
+  *We did not calculate a specific r2_ux value for each age and sex in model 2*
+
   Hence when we ramp up coverage (treated% increases), t1_sam also increases. Duration of SAM will decrease. Without changing incidence, our prevalence of SAM should also decrease (P = incidence x Duration). Our intervention could also work by decreasing the time to recovery, in which case t1_sam increases and prevalence will decrease (without changing incidence).
 
 
