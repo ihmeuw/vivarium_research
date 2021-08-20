@@ -189,9 +189,9 @@ Severely malnourished persons with medical complications and/or anorexia are tre
 
 * Bilateral pitting oedema + or ++ OR 
 * WHZ <-3 z-scores AND 
-  * Appetite test passed
-  * No medical complications
-  * Clinically well and alert
+* Appetite test passed
+* No medical complications
+* Clinically well and alert
 
 Treatment of children with SAM in OTP
 
@@ -230,9 +230,9 @@ MAM in infants (0-6 months)
 
 * MUAC of lactatating mother of infant 0-6 months <23.0 cm
 * WHZ ≥-3 to <-2 AND 
-  * No bilateral pitting oedema AND 
-  * No medical complications
-  * Clinically well and alert
+* No bilateral pitting oedema AND 
+* No medical complications
+* Clinically well and alert
 
 Treatment of infants with MAM
 
@@ -245,9 +245,9 @@ MAM in children >6 months
 :underline:`Classify MAM in children`
 
 * WHZ ≥ -3 to <-2 z scores AND
-  * No bilateral pitting oedema 
-  * No medical complications
-  * Clinically well and alert
+* No bilateral pitting oedema 
+* No medical complications
+* Clinically well and alert
 
 Treatment of children with MAM
 
@@ -302,7 +302,7 @@ Congratulate and counsel the mother on appropriate IYCF practices.
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Median time-to-recovery
+  * - Time-to-recovery
     - Decreases 
     - Yes
     - Direct relationship
@@ -310,14 +310,18 @@ Congratulate and counsel the mother on appropriate IYCF practices.
     - Decreases death rate among the treated
     - No
     - Currently we do not have the relative risk of death of treated/untreated. We will capture some of the effect of tx on death by having the simulants recover faster, therefore leave the high risk wasting states faster. However, by assigning tx simulants the mean death rate when they should have a lower death rate, we are killing more than we should in our sim, hence we might be under-estimating the effect of treatment. (For untreated ppl, we are assigning them the mean death rate when in reality they would have a higher death rate. We under-estimate the harm of not-treating)
-  * - Proportion 'effectively covered' within programme treatment length
+  * - Treatment coverage (C)
     - Increases
     - Yes
-    - 'Effective treatment coverage (CE)' is the 'treatment coverage (C)' x 'treatment efficacy (E)'. 1-C is uncovered population. 
+    - We increase from baseline to 90%.  1-C is uncovered population. (Can do more sensitivity analysis on this)
+  * - Efficacy of treatment (E)
+    - Increases
+    - Yes
+    - 'treatment coverage (C)' x 'treatment efficacy (E)' is the 'Effective treatment coverage (CE)'.
   * - Proportion defaulted/unresponsive during programme
     - Decreases
     - Yes
-    - (C-CE) The better the programme, the higher the efficacy (E)
+    - As E increases, the porportion not *effectively* covered (C-CE) decreases.
 
 
 Baseline Coverage Data
