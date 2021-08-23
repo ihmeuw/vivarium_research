@@ -64,11 +64,11 @@ Correlation
 
 Spearman correlation coefficients between birthweight and LAZ, WAZ, and WLZ among the first two years of age were estimated from the MAL-ED study [MAL-ED-investigators-2014]_, available in :download:`this spreadsheet <child_growth_birthweight_correlations.xlsx>` and presented in the figures below.
 
-.. image:: bw_laz_correlation_plot.png
+.. image:: bw_laz_correlation_plot.PNG
 
-.. image:: bw_waz_correlation_plot.png
+.. image:: bw_waz_correlation_plot.PNG
 
-.. image:: bw_wlz_correlation_plot.png
+.. image:: bw_wlz_correlation_plot.PNG
 
 .. note::
 
