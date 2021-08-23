@@ -57,22 +57,22 @@ Notably, these metrics tend to be highly correlated, with the magnitude of corre
 
 .. image:: dag_framework.png
 
-Notably, it is critical to distinguish between the correlation between these metrics attributable to shared common causes between them from correlation between these metrics attributable to direct causal relationships. However, the influence of confounding factors in the estimation of the causal relationship between these factors must be carefully considered due to the high correlation between them and the observational nature of child antropometry studies. Additionally, child age should be considered as an important effect modifier in the associations between each of these metrics, as discussed by [Alderman-and-Headey-2018]_.
+Notably, it is critical to distinguish between the correlation between these metrics attributable to shared common causes between them from correlation between these metrics attributable to direct causal relationships. However, the influence of confounding factors in the estimation of the causal relationship between these factors must be carefully considered due to the high correlation between them and the observational nature of child anthropometry studies. Additionally, child age should be considered as an important effect modifier in the associations between each of these metrics, as discussed by [Alderman-and-Headey-2018]_.
 
 Correlation
 ++++++++++++
 
 Spearman correlation coefficients between birthweight and LAZ, WAZ, and WLZ among the first two years of age were estimated from the MAL-ED study [MAL-ED-investigators-2014]_, available in :download:`this spreadsheet <child_growth_birthweight_correlations.xlsx>` and presented in the figures below.
 
-.. image:: bw_laz_correlation_plot.png
+.. image:: bw_laz_correlation_plot.PNG
 
-.. image:: bw_waz_correlation_plot.png
+.. image:: bw_waz_correlation_plot.PNG
 
-.. image:: bw_wlz_correlation_plot.png
+.. image:: bw_wlz_correlation_plot.PNG
 
 .. note::
 
-   These correlation coefficients were estimated by Chris for previous work on the :ref:`risk correlation proposal <2017_risk_models>` for the :ref:`Balanced Energy Protein simulation <2017_concept_model_vivarium_gates_bep>`.
+   These correlation coefficients were estimated by Chris Troeger for previous work on the :ref:`risk correlation proposal <2017_risk_models>` for the :ref:`Balanced Energy Protein simulation <2017_concept_model_vivarium_gates_bep>`.
 
 .. todo::
 
