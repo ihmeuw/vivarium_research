@@ -104,20 +104,119 @@ Wasting and Stunting
 Risk Exposures in GBD
 -----------------------
 
+GBD models the correlated joint distribution of gestational age and birthweight as a single low birth weight and short gestation (LBWSG) risk factor. However, GBD does not consider the joint distribution of other risk exposures related to child anthropometry. Therefore, we will model risk-risk correlation of GBD risk exposures between LBWSG with wasting (and others) separately from the GBD in Vivarium.
+
+Notably, in GBD, there are LBWSG risk exposures at birth and among the early and late neonatal age groups only. For the child growth failure risks (wasting, stunting, and underweight), there are risk exposures for all age groups under five years, although risk effects for these risks apply to the post-neonatal and 1-4 age groups only.
+
+Links to documentation for relevant risk exposure pages include:
+
+- :ref:`GBD 2019 Low birthweight short gestation risk exposure <2019_risk_exposure_lbwsg>`
+
+- :ref:`GBD 2020 Wasting risk exposure <2020_risk_exposure_wasting_state_exposure>`
+
+- :ref:`GBD 2020 Stunting risk exposure <2020_risk_exposure_child_stunting>`
+
+Vivarium Modeling Strategy
+----------------------------
+
+The strategy for modeling risk-risk correlations related to child anthropometry in this document was developed for the needs of the :ref:`acute malnutrition treatment and prevention simulation <2019_concept_model_vivarium_ciff_sam>`. Different strategies may be more appropriate for different project needs and should be reevaluated when necessary.
+
 Birthweight and Wasting
 ++++++++++++++++++++++++
+
+In GBD, the birthweight exposure distribution is tracked through the late neonatal age group (28 days after birth) and affects the risk of mortality during this period. For the :ref:`acute malnutrition treatment and prevention simulation <2019_concept_model_vivarium_ciff_sam>`, child wasting exposures are modeled as a dynamic transition model (:ref:`documented here <2020_risk_exposure_wasting_state_exposure>`) rather than a standard static propensity-based risk exposure model (:ref:`such as the stunting risk exposure model <2020_risk_exposure_child_stunting>`). Therefore, there will be two approaches to modeling the correlation and causal association between birthweight and wasting, including 1) the initialization of wasting risk exposure at birth (according to the early neonatal age group risk exposure distribution) based on a simulant's birthweight exposure value, and 2) the correlation between a simulant's propensity for wasting incidence over time ("x-factor"), discussed in the :ref:`acute malnutrition treatment and prevention concept model document <2019_concept_model_vivarium_ciff_sam>`, with their birth weight exposure.
 
 Correlation
 ^^^^^^^^^^^^
 
+Initialization
+~~~~~~~~~~~~~~~
+
+When simulants are initialized into the early or late neonatal age groups or born into the simulation, they will be assigned a birthweight exposure value associated with their LBWSG risk exposure. Additionally, when simulants are initialized into the early or late neonatal age group and when they are born into the simulation, they will be initialized into a particular state in the wasting model (e.g. TMREL, mild wasting, moderate wasting, or severe wasting) *based on their birthweight exposure value* according to the steps below. NOTE: simulants who are initialized into age groups older than the late neonatal age group will not be assigned a birthweight exposure, so they should be assigned a wasting exposure value that is independent of birthweight.
+
+1. Assign the simulant a birthweight exposure value specific to their age group
+
+2. Assess the percentile of a simulant's birthweight exposure value within the overall age, sex, location, and year-specific birthweight exposure distribution (also known as the simulant's birthweight propensity score value *for their age group*)
+
+.. todo::
+
+   Determine if the birthweight propensity score value should be assessed according to the birthweigtht distribution *at birth* or *among the current age group*. This will depend on how the correlation coefficients from the MAl-ED study were calculated by Chris Troeger.
+
+   For now, assume that the correlation coefficient is calculated among *living* children (because otherwise there would be no observed wasting values), which would suggest the use of the birthweight distribution of the current age group for calculation of the birthweight propensity score, as described above.
+
+3. Assign the simulant a wasting propensity score that is correlated to their birthweight propensity score value according to the spearman correlation coefficient of birthweight and wasting at one month of age (0.289376997). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+
+.. todo::
+
+   Add more detail on the methodology here/as implemented in the BEP project
+
+.. note::
+
+   The correlation coefficient of one month of age should be used for all simulants upon birth as well as those initialized into the early neonatal or late neonatal age groups because we do not have correlation coefficients specific to more detailed age ranges. 
+
+4. Assign the simulant a wasting exposure based on their propensity score value and their age/sex/location/year-specific wasting exposure distribution (the propensity score value should equal the percentile within the exposure distribution).
+
+Transitions
+~~~~~~~~~~~~
+
+.. todo::
+
+   Add detail on how to correlate wasting x-factor propensity to birthweight exposure
+
 Causation
 ^^^^^^^^^^^
+
+For interventions that impact birthweight, there should be a corresponding change in a child's wasting risk exposure attributable *if the impact of the intervention on wasting is not modeled directly*.
+
+Initialization
+~~~~~~~~~~~~~~~~
+
+For each gram increase in a simulant's birthweight due to a simulation intervention, the category 1 (severe wasting) and category 2 (moderate wasting) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting is equal to 0.0115 / 200 = 0.00575. The exposure distribution of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.00575. The figure below demonstrates how to implement this change visually. This change in the wasting expousure distribution thresholds attributbale to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's wasting initialization propensity score value correlated with their birthweight propensity score value, as described above.
+
+.. image:: wasting_exposure_dist.svg
+
+.. todo::
+
+   Detail how to appropriately manage existing coverage of interventions that act through this mechanism. Perhaps ignore it because the association due to correlation >>> the association due causation?
+
+Transitions
+~~~~~~~~~~~~
+
+.. todo::
+
+   Determine whether to causally link wasting x-factor propensity to birthweight exposure (magnitude of causal association is strongest earlier in life, so it may not be necessary to enforce at later ages)
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+The application of the size from [McGovern-et-al-2019]_ makes the following assumptions:
+
+- The effect size is entirely causal and not subject to confounding
+
+- The effect between BW and wasting measured among children under five is applied at 28 days of age 
+
+- The effect of BW on wasting applies proportionately to moderate and severe wasting
+
+We assume the correlation coefficient between birthweight and wasting does not vary significantly between birth and the first month of life.
+
+.. todo::
+
+   Detail additional assumptions and limitations
+
 Validation Criteria
 ^^^^^^^^^^^^^^^^^^^^^
+
+- The LBWSG and wasting risk exposures should continue to validate to the GBD risk exposures in the baseline scenario after the induction of correlation betwen the risk exposures
+
+.. todo::
+
+   Determine the outputs feasible to include in simulation stratification (ex: BW<2500 stratification, or select LBWSG categories) for verification purposes OR determine how to verify and validate through interactive simulations
+
+   Would be ideal to investigate:
+
+   - How the correlation between BW and wasting evolves as simulants age
+
+   - Compare OR of wasting by LBW status to external literature sources (OR~2.2-3.5 from [Christian-et-al-2013]_ as well as other sources)
 
 References
 -----------
