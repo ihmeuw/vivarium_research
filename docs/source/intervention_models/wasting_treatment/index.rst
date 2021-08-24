@@ -496,9 +496,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - transition probability
     - Daily recovery probability of tx SAM 
     - :math:`\frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 48.3 days (update to more accurate)
+    - time-to-recovery 48.3 days (get a better weighted average from table 1)
     - [Zw_2020tx]_
     - Over 7 studies in Ethiopa
+
+.. todo::
+
+    Try to update the weighted time-to-recovery for SAM children admitted to OTP. There are 7 studies from the Zw 2020 paper that reports median (IQR) time to recovery in table 1. The 48.3 days currently in the table is just a weighted average. It would be better to find a way to get the summary value (random effects?) with the uncertainty distribution. Nathanial might have a way to do this. 
 
 
 .. list-table:: Modeled Outcomes **Table 3** MAM 0-6 months
