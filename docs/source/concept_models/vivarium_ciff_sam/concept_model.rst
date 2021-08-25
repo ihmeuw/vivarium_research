@@ -340,9 +340,7 @@ SAM and MAM treatment baseline and treatment scale-up
 
 **Risk exposure**
 
-We will use maternal undernutrition as the exposure prevalence for the X-factor. Maternal undernutrition is a proxy for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_
-
-The proportion of reproductive age women underweight is 0.188 for GBD 2020. 
+We will use maternal undernutrition as the exposure prevalence for the X-factor. We are using maternal undernutrition as a **proxy** for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_ The proportion of reproductive age women underweight is 0.188 for GBD 2020. (Because this prevalence is lower than 20%, we will also use this exposure to target BEP for the maternal supplementation intervention). 
 
 .. code-block:: python
 
@@ -357,13 +355,25 @@ The proportion of reproductive age women underweight is 0.188 for GBD 2020.
 
 **Risk effect**
 
-We do not have direct evidence or data for the risk effect of maternal undernutrition on wasting incidence (from the previous source state) and stunting prevalence. From the [Na_2020]_, table 4 shows the odds of infant malnutrition (wasting, stunting and underweight) at 6 months of age in infants from food-insecure households as compared with infants from food-secure households (reference group). For rare outcomes, the prevalence risk ratio, incidence rate ratio and prevalence odds ratios approximate each other which is likely to be true for SAM (<5% prevalence), but not true for MAM and MILD wasting and stunting. Hence we model a range of risk effects as a sensitivity analysis. Below table is a suggested range of risk-effect values to model. We can discuss this more. 
+We do not have direct evidence or data for the risk effect of the x-factor *proxied by maternal undernutrition* on wasting incidence (from the previous source state). From the [Na_2020]_, table 4 shows the odds of infant malnutrition (wasting, stunting and underweight) at 6 months of age in infants from food-insecure households as compared with infants from food-secure households (reference group). For rare outcomes, the prevalence risk ratio, incidence rate ratio and prevalence odds ratios approximate each other which is likely to be true for SAM (<5% prevalence), but not true for MAM and MILD wasting. Hence we model a range of risk effects as a sensitivity analysis. Below table is a suggested range of risk-effect values to model. We have decided not to model the effect of x-factor on stunting as the effect of the x-factor on stunting would be captured by a direct effect of wasting on stunting which we will model. 
 
 .. csv-table:: X-factor risk effect sensitivity analysis
    :file: x_factor_risk_effect.csv
    :widths: 20, 20, 20, 20
    :header-rows: 1
 
+The risk effect (relative rate ratio) of incidence would be applied as such (breaking out the exposed vs non-exposed incidence from the exposure weighted overall incidence): 
+
+ - :math:`i_{x1} = i_{wasting} (1-PAF) \times rr_{x_{factor}}`
+ - :math:`i_{x0} = i_{wasting} \times (1-PAF)` 
+
+ where :math:`i_{wasting}` are the wasting transition incidences from the Markov calibration. And the PAF is calculated as
+
+ PAF = :math:`\frac{rr_{x_{factor}}-1}{rr_{x_{factor}}}`
+
+- Note diarrhea (vicious cycle) cycle have effects on wasting incidences. Hence the x-factor should be broken out for those with/without diarrhea. In our final model, we should end up with 4 sets (2 diarrhea states x 2 x-factor states) of 3 incidences (i1-3) for a total of 12 incidence rates. 
+- Note also that SQ-LNS affects wasting transition incidences. The protective effects of SQ-LNS (if covered) would be applied any of these 12 incidences corresponding to diarrhea and x-factor exposure. 
+- Let us assume that the 'x-factor' does not have differential effects on treatment recovery rates.   
 
 .. todo::
 
