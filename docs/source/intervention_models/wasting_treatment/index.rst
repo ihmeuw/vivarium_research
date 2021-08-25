@@ -572,7 +572,7 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
   4) :math:`54.5 = \frac{365}{r2_{ux} \times (1-CE) + t1_{sam} \times (CE) + death\_rate_{age|sex}}` 
   5) Solve for :math:`r2_{ux}` for for each age/sex strata with age/sex specific death rate
  
- where C = 48.8% (95%CI:37.4-60.4), E = 70% (95%CI:64-76)
+ where C = 48.8% (95%CI:37.4-60.4), E = 70% (95%CI:64-76). Note that k = 6.7 corresponds to the current treatment coverage estimate in Isanaka 2021 (see appendix) which is C = 48.8% (what we call baseline). We are further making an assumption that the baseline efficacy of the program is E = 70%. Hence from these baseline assumptions, we are able to derive a r2_ux. Also note that only the treatment coverage C is necessary to calculate the number of incidence cases.  
 
   For example, if 
 
@@ -614,8 +614,6 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
   Also note that Dsam_tx < Dsam_utx (time to recovery of tx SAM is shorter than time to recovery of untreated SAM)
   
   *We did not calculate a specific r2_ux value for each age and sex in model 2*
-
-  Hence when we ramp up coverage (treated% increases), t1_sam also increases. Duration of SAM will decrease. Without changing incidence, our prevalence of SAM should also decrease (P = incidence x Duration). Our intervention could also work by decreasing the time to recovery, in which case t1_sam increases and prevalence will decrease (without changing incidence).
 
 
 Affected Outcomes
