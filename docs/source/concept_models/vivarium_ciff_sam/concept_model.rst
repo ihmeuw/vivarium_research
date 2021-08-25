@@ -355,7 +355,7 @@ We will use maternal undernutrition as the exposure prevalence for the X-factor.
 
 **Risk effect**
 
-We do not have direct evidence or data for the risk effect of the x-factor *proxied by maternal undernutrition* on wasting incidence (from the previous source state). From the [Na_2020]_, table 4 shows the odds of infant malnutrition (wasting, stunting and underweight) at 6 months of age in infants from food-insecure households as compared with infants from food-secure households (reference group). For rare outcomes, the prevalence risk ratio, incidence rate ratio and prevalence odds ratios approximate each other which is likely to be true for SAM (<5% prevalence), but not true for MAM and MILD wasting. Hence we model a range of risk effects as a sensitivity analysis. Below table is a suggested range of risk-effect values to model. We have decided not to model the effect of x-factor on stunting as the effect of the x-factor on stunting would be captured by a direct effect of wasting on stunting which we will model. 
+We do not have direct evidence or data for the risk effect of the x-factor *proxied by maternal undernutrition* on wasting incidence (from the previous source state). From the [Na_2020]_, table 4 shows the odds of infant malnutrition (wasting, stunting and underweight) at 6 months of age in infants from food-insecure households as compared with infants from food-secure households (reference group). For rare outcomes, the prevalence risk ratio, incidence rate ratio and prevalence odds ratios approximate each other which is likely to be true for SAM (<5% prevalence), but not true for MAM and MILD wasting. Hence we model a range of risk effects as a sensitivity analysis. Below table is a suggested range of risk-effect values to model. 
 
 .. csv-table:: X-factor risk effect sensitivity analysis
    :file: x_factor_risk_effect.csv
@@ -364,20 +364,29 @@ We do not have direct evidence or data for the risk effect of the x-factor *prox
 
 The risk effect (relative rate ratio) of incidence would be applied as such (breaking out the exposed vs non-exposed incidence from the exposure weighted overall incidence): 
 
- - :math:`i_{x1} = i_{wasting} (1-PAF) \times rr_{x_{factor}}`
- - :math:`i_{x0} = i_{wasting} \times (1-PAF)` 
+ - :math:`i_{x1} = i_{wasting|markov} (1-PAF) \times rr_{x_{factor}}`
+ - :math:`i_{x0} = i_{wasting|markov} \times (1-PAF)` 
 
- where :math:`i_{wasting}` are the wasting transition incidences from the Markov calibration. And the PAF is calculated as
+ where :math:`i_{wasting}` are the wasting transition incidences from the Markov calibration (with vicious cycle in the final model). And the PAF is calculated as
 
- PAF = :math:`\frac{rr_{x_{factor}}-1}{rr_{x_{factor}}}`
+ PAF = :math:`\frac{(\sum_{x\_factor_{cat_i} prevalence_{i} * rr_{x_{factor}}})-1}{\sum_{x\_factor_{cat_i} prevalence_{i} * rr_{x_{factor}}}}`
 
-- Note diarrhea (vicious cycle) cycle have effects on wasting incidences. Hence the x-factor should be broken out for those with/without diarrhea. In our final model, we should end up with 4 sets (2 diarrhea states x 2 x-factor states) of 3 incidences (i1-3) for a total of 12 incidence rates. 
-- Note also that SQ-LNS affects wasting transition incidences. The protective effects of SQ-LNS (if covered) would be applied any of these 12 incidences corresponding to diarrhea and x-factor exposure. 
+
+- Note diarrhea (vicious cycle) cycle have effects on wasting incidences. Hence the x-factor should be broken out for the incidences with/without diarrhea calibrated from the Markov matrix. In our final model, we should end up with 4 sets (2 diarrhea states x 2 x-factor states) of 3 incidences (i1-3) for a total of 12 incidence rates. 
+- Note also that SQ-LNS affects wasting transition incidence from mild to mam. The protective effects of SQ-LNS (if covered) would be applied to the incidences from mild to mam corresponding to diarrhea and x-factor exposure. 
 - Let us assume that the 'x-factor' does not have differential effects on treatment recovery rates.   
 
 .. todo::
 
-  A more thorough literature review and support for use of this proxy should be done to strengthen are argument. 
+  - A more thorough literature review and support for use of this proxy should be done to strengthen are argument. 
+  - We have decided not to model the effect of x-factor on stunting for now. We will look more thoroughly on its effect on stunting and whether to model a direct effect of wasting on stunting as we do more research.
+  - may be helpful to put this in the concept model diagram to keep track of how different factors affect incidence rates
+
+      mam_incidence_i = mam_incidence_given_diarrheal_state_i * (1 - PAF_xfactor) * RR_xfactor_i * SQLNS_treatment_RR_i
+
+      sam_incidence_i = sam_incidence_given_diarrheal_state_i * (1 - PAF_xfactor) * RR_xfactor_i 
+  
+  - note that SQ-LNS only affects MILD to MAM incidence.
 
 .. _5.5:
 
