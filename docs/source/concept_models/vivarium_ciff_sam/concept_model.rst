@@ -369,7 +369,7 @@ The risk effect (relative rate ratio) of incidence would be applied as such (bre
 
  where :math:`i_{wasting}` are the wasting transition incidences from the Markov calibration (with vicious cycle in the final model). And the PAF is calculated as
 
- PAF = :math:`\frac{(\sum_{x\_factor_{cat_i} prevalence_{i} * rr_{x_{factor}}})-1}{\sum_{x\_factor_{cat_i} prevalence_{i} * rr_{x_{factor}}}}`
+ PAF = :math:`\frac{(\sum_{x\_factor_{cat_i} prevalence_{i} * rr_{x_{factor\_cat_i}}})-1}{\sum_{x\_factor_{cat_i} prevalence_{i} * rr_{x_{factor\_cat_i}}}}`
 
 
 - Note diarrhea (vicious cycle) cycle have effects on wasting incidences. Hence the x-factor should be broken out for the incidences with/without diarrhea calibrated from the Markov matrix. In our final model, we should end up with 4 sets (2 diarrhea states x 2 x-factor states) of 3 incidences (i1-3) for a total of 12 incidence rates. 
