@@ -44,13 +44,6 @@ Vivarium - US Health Disparities - CVD Interventions
 
 1.0 Background
 ++++++++++++++
-
-
-.. _uscvd1.1:
-
-1.1 Project overview
---------------------
-
 We have shown previously that geographic disparities in the burden of cardiovascular disease (CVD) are large and have persisted over the past 40 years. For example, the age-standardized death rate due to ischemic heart disease in Oklahoma remains more than twice that of Minnesota (144 vs. 63 per 100,000). Alarmingly, many states have seen no further decline in CVD since 2010 and the gap in CVD between states has not improved, as shown by our recent work estimating long-term trends in CVD mortality. In a global projection model of CVD risk factors and mortality through the year 2025, we found that over 2 million premature deaths would be prevented with expanded control of risk factors. These results indicate that reducing the burden of CVD is a public health imperative but varying levels and trends in CVD and its risk factors were likely to affect the impact of different strategies to reduce exposure to CVD risk factors. 
 
 Our research also estimated that, in the U.S., the absolute risk of premature CVD death would be reduced more than 4% if major risk factor targets are achieved by 2025. However, these national results have limited usefulness for reducing geographic disparities within the U.S., and a subnational evaluation of the impact of population-level evidence-based interventions is an important goal.  
@@ -59,8 +52,11 @@ The long-term trajectory for CVD at the state level in the U.S. is not known, an
 
 The NIH has recognized the importance of studying health disparities, as required by the Minority Health and Health Disparities Research and Education Act. In its strategic plan, NHLBI has encouraged the investigation of “strategies that effectively address these differences,” asking the question “how can cardiometabolic risk be managed to improve health trajectories in specific populations?” We distinguish between two areas of research needed to understand population-level CVD trajectories, a) population health projections and b) health policy models. Population health projections are the result of a particular set of assumptions on future health trends. Health policy models are a subtype of projection that project future changes in health due to interventions after the efficacy of the intervention is established. Previous health policy models developed with NIH support included the IMPACT model, the CVD Policy Model, the ARCHIMEDES and CORE diabetes models, and single risk models for tobacco and hypertension. All of these models operate only for only a single geographic region (usually the United States), and consider only a limited set of risks and outcomes.  
 
-The intent of this work is to develop new health policy models that use projections of CVD burden by state and race/ethnicity produced by population health models to quantify the impact of various CVD prevention strategies, contingent on each state’s current population characteristics, patterns of CVD risk, health care access, level of effective medication delivery, and differential effects of risk factor interventions by subgroups. 
+.. _uscvd1.1:
 
+1.1 Project overview
+--------------------
+The intent of this project is to model the effect of three different interventions on the development of cardiometabolic burden in the United States, contingent on each state’s current population characteristics, patterns of CVD risk, health care access, level of effective medication delivery, and differential effects of risk factor interventions by subgroups. 
 
 .. _uscvd1.2:
 
@@ -206,9 +202,7 @@ Variations on the above intervention increased support time or added meal replac
 
 5.1 Vivarium concept model 
 --------------------------
-
-.. note::
-  This is our standard vivarium concept model diagram we are used to seeing
+.. image:: concept_model.svg
 
 .. _uscvd5.2:
 
