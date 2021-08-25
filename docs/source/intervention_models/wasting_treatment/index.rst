@@ -496,9 +496,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - transition probability
     - Daily recovery probability of tx SAM 
     - :math:`\frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 48.3 days (update to more accurate)
+    - time-to-recovery 48.3 days (get a better weighted average from table 1)
     - [Zw_2020tx]_
     - Over 7 studies in Ethiopa
+
+.. todo::
+
+    Try to update the weighted time-to-recovery for SAM children admitted to OTP. There are 7 studies from the Zw 2020 paper that reports median (IQR) time to recovery in table 1. The 48.3 days currently in the table is just a weighted average. It would be better to find a way to get the summary value (random effects?) with the uncertainty distribution. Nathanial might have a way to do this. 
 
 
 .. list-table:: Modeled Outcomes **Table 3** MAM 0-6 months
@@ -568,7 +572,7 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
   4) :math:`54.5 = \frac{365}{r2_{ux} \times (1-CE) + t1_{sam} \times (CE) + death\_rate_{age|sex}}` 
   5) Solve for :math:`r2_{ux}` for for each age/sex strata with age/sex specific death rate
  
- where C = 48.8% (95%CI:37.4-60.4), E = 70% (95%CI:64-76)
+ where C = 48.8% (95%CI:37.4-60.4), E = 70% (95%CI:64-76). Note that k = 6.7 corresponds to the current treatment coverage estimate in Isanaka 2021 (see appendix) which is C = 48.8% (what we call baseline). We are further making an assumption that the baseline efficacy of the program is E = 70%. Hence from these baseline assumptions, we are able to derive a r2_ux. Also note that only the treatment coverage C is necessary to calculate the number of incidence cases.  
 
   For example, if 
 
@@ -610,8 +614,6 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
   Also note that Dsam_tx < Dsam_utx (time to recovery of tx SAM is shorter than time to recovery of untreated SAM)
   
   *We did not calculate a specific r2_ux value for each age and sex in model 2*
-
-  Hence when we ramp up coverage (treated% increases), t1_sam also increases. Duration of SAM will decrease. Without changing incidence, our prevalence of SAM should also decrease (P = incidence x Duration). Our intervention could also work by decreasing the time to recovery, in which case t1_sam increases and prevalence will decrease (without changing incidence).
 
 
 Affected Outcomes
@@ -695,6 +697,45 @@ Scaling up the effective coverage of SAM and MAM, we will increase treatment cov
 .. todo::
 
   Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+
+
+Restrictions
+++++++++++++
+
+For treatment of SAM and MAM, we model treatment starting in the post-neonatal age groups (after the first 28 days of life). This is true for both baseline and treatment scale-up scenarios. This is because in GBD, the burden (death, disability) in the neonatal age groups are all attributable to LBWSG. Hence, it is not very meaningful to 'treat' wasting in this age group as the treatment will not impove DALYs. 
+
+Note that for the exposure, we model a 'birth prevalence' which is the prevalence of wasting of the post-neontal age group extrapolated to the neonatal age groups. This is to ensure our post-neonatal age groups initialize at the correct prevalences to start the wasting transitions. 
+
+Also note that since wasting and LBWSG are correlated, those with more severe wasting will have higher likelihood to die in the first month as those with lower birthweights have higher risk of death. This might lead to a bias in our wasting exposures at the post-neonatal age groups to favour healthier babies. 
+
+.. list-table:: Affected outcomes restrictions
+  :widths: 20 20 20
+  :header-rows: 1
+
+  * - Restriction
+    - Value 
+    - Note 
+  * - Male only
+    - False
+    -
+  * - Female only
+    -
+    - False
+  * - Age group start
+    - Post-neonatal age_group_id = 388
+    - 1m-5m = 388 GBD 2020; 1m-12m = 4 GBD 2019
+  * - Age group end
+    - 2 - 4 years age_group_id = 34
+    - 2y-4y = 34 GBD 2020; 1y-5y = 5 GBD 2019 
+  * - Other
+    -
+    -
+  * - Note
+    -
+    -
+
+ 
+
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
