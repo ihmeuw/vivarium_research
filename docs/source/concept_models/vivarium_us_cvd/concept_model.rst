@@ -202,9 +202,7 @@ Variations on the above intervention increased support time or added meal replac
 
 5.1 Vivarium concept model 
 --------------------------
-
-.. note::
-  This is our standard vivarium concept model diagram we are used to seeing
+.. image:: concept_model.svg
 
 .. _uscvd5.2:
 
