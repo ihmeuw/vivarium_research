@@ -16,7 +16,7 @@ Household Tuberculosis Contact Risk Effects
      - Latent Tuberculosis Infection
    * - AcTB
      - Active Tuberculosis
-   * - HHC
+   * - HTC
      - Household Tuberculosis Contact
    * - TMREL
      - Theoretical Minimum Risk Exposure Level
@@ -28,7 +28,7 @@ Risk Overview
 
 .. todo::
 
-    Provide a brief description of the HHC risk.
+    Provide a brief description of the HTC risk.
 
 
 Vivarium Modeling Strategy
@@ -37,10 +37,10 @@ Vivarium Modeling Strategy
 .. note::
 
    This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   :ref:`Household Tuberculosis Contact <2019_risk_hh_tb_contact>` page.
+   For a description of Vivarium modeling strategy for risk exposure, see 
+   the :ref:`Household Tuberculosis Contact <2019_risk_hh_tb_contact>` page.
 
-.. list-table:: Entities Affected by HHC
+.. list-table:: Entities Affected by HTC
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -62,19 +62,19 @@ Document <2017_cause_latent_tb>`.
 Relative Risks
 ++++++++++++++
 We conducted a meta-analysis by reviewing over 200 papers to determine the 
-relative risk (RR) for HHC exposure, among the under 5 and the 5+ population. 
-The reference group was defined as indivudals without exposure to HHC. With 
-dicussion to TB expert, we selected 11 papers for inclusion in the under 5 
+relative risk (RR) for HTC exposure, among the under 5 and the 5+ population. 
+The reference group was defined as indivudals without exposure to HTC. After 
+discussion with a TB expert, we selected 11 papers for inclusion in the under 5 
 meta-analysis and approximately 20 papers for the 5+ meta-analysis (see References 
 for full list of cited works). Based on the evidence, the risk model incorporates 
-a RR of 4.72 (95%CI 3.87 to 5.76) for under 5 HHC population, and a RR of 1.75 
-(95%CI 1.6 to 1.91) for 5+ HHC population.
+a RR of 4.72 (95%CI 3.87 to 5.76) for under 5 HTC-exposed population, and a RR 
+of 1.75 (95%CI 1.6 to 1.91) for 5+ HTC-exposed population.
 
-Relative risk of HHC exposure for under 5 population
+Relative risk of HTC exposure for under 5 population
 
 .. image:: rr_under_5.png
 
-Relative risk of HHC exposure for 5+ population
+Relative risk of HTC exposure for 5+ population
 
 .. image:: rr_over_5.png
 
@@ -85,35 +85,35 @@ Relative risk of HHC exposure for 5+ population
    * - Exposure Category
      - Relative Risk
      - Note
-   * - Under 5 HHC
+   * - Under 5 HTC-exposed
      - 4.72 (95%CI 3.87 to 5.76)
-     - Specific to HHC popualtion ages less than 5 years, does not vary by sex 
-       and location
-   * - 5+ HHC
+     - Specific to individuals under age of 5 years who live in a household with 
+       AcTB case, does not vary by sex and location
+   * - 5+ HTC-exposed
      - 1.75 (95%CI 1.6 to 1.91)
-     - Specific to HHC population ages greater than 5 years, does not vary by 
-       sex and location 
-   * - non-HHC
+     - Specific to individuals above age of 5 years who live in a household with 
+       AcTB case, does not vary by sex and location 
+   * - HTC-unexposed
      - 1
      - TMREL
 
-The incidence of LTBI for individuals with exposure to HHC is:
+The incidence of LTBI for individuals with exposure to HTC is:
 
-:math:`i_{HHC} = i_{LTBI}\times (1 - PAF)\times RR_{HHC}`
+:math:`i_{HTC-exposed} = i_{LTBI}\times (1 - PAF)\times RR_{HTC}`
 
-The incidence of LTBI for individuals without exposure to HHC is:
+The incidence of LTBI for individuals without exposure to HTC is:
 
-:math:`i_{non\; HHC} = i_{LTBI}\times (1 - PAF)`
+:math:`i_{HTC-unexposed} = i_{LTBI}\times (1 - PAF)`
 
-The PAF is derived from the relative risk and risk exposure of HHC:
+The PAF is derived from the relative risk and risk exposure of HTC:
 
-:math:`PAF = \frac{p\times (RR_{HHC} - 1)}{p\times (RR_{HHC} - 1) + 1}`
+:math:`PAF = \frac{p\times (RR_{HTC} - 1)}{p\times (RR_{HTC} - 1) + 1}`
 
 Where:
  - :math:`i_{LTBI}` is the incidence of LTBI, calculated from DisMod-MR;
- - :math:`RR_{HHC}` is the age-dependent relative risk of developing LTBI for HHC 
-   versus non-HHC, developed by meta-analysis;
- - :math:`p` is the risk exposure/probability of HHC, deveried from prevalence 
+ - :math:`RR_{HTC}` is the age-dependent relative risk of developing LTBI for 
+   HTC-exposed versus HTC-unexposed, developed by meta-analysis;
+ - :math:`p` is the risk exposure/probability of HTC, deveried from prevalence 
    of AcTB and household structure data.
 
 Assumptions and Limitations
