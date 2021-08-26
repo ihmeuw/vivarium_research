@@ -147,7 +147,7 @@ through ahead of time, too.
 Examples of intervention model documents
 ----------------------------------------
 
-https://github.com/ihmeuw/vivarium_research/blob/main/docs/source/intervention_models/latent_tuberculosis_treatment/index.rst
+A library of intervention model documents used for Vivarium simulations can be found :ref:`here <intervention_models>`.
 
 
 Data sources for intervention models
