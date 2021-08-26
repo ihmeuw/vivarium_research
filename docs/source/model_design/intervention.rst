@@ -71,7 +71,7 @@ initialize the attributes added by the model when a new simulant is
 instantiated.  In the case of a Vitamin A Supplementation model, this
 could take the form a single coverage percentage, applied
 independently to each simulant.  Even this has some complexity,
-however, because the coverage percentage is not know precisely and its
+however, because the coverage percentage is not known precisely and its
 uncertainty might be quantified by some probability distribution; and
 it is sure to vary by location and over time.
 
@@ -88,7 +88,7 @@ multinomial regression fit to NHANES data.
 Vivarium Modeling Strategy
 ++++++++++++++++++++++++++
 
-This section will go into detail about to represent the intervention
+This section will go into detail about how to represent the intervention
 technology and the intervention implementation in Vivarium.  It can
 begin with a high-level summary of just one paragraph, e.g. "The
 treatment model links anti-hypertensive treatments to an additive
@@ -127,6 +127,9 @@ describing how the simulant's attributes are changed because of the
 treatment.  (Typically the changes are to the attributes added by this
 model, e.g. prescription and adherence, not the attributes required
 from other models.)
+
+Example: somebody goes to the doctor (start of treatment algorithm) ;
+treatment changes or doesn't change (end of treatment algorithm).
 
 Assumptions and limitations
 +++++++++++++++++++++++++++
