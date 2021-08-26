@@ -36,8 +36,7 @@ can help organize a complex model, and the remainder of this document
 describes what a researcher might include for each section when using
 :ref:`this template <intervention_model_template>`.
 
-Here is an example of a recent application of this template
-https://github.com/ihmeuw/vivarium_research/blob/main/docs/source/intervention_models/latent_tuberculosis_treatment/index.rst#treatment-algorithm
+Here is an example of a recent application of this template for the :ref:`latent tuberculosis treatment intervention <intervention_latent_tuberculosis_treatment>`.
 
 
 .. contents:
