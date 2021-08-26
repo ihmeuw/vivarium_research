@@ -34,8 +34,7 @@ the approach and how to verify and validate the results.
 We have developed a template for an intervention model document, which
 can help organize a complex model, and the remainder of this document
 describes what a researcher might include for each section when using
-this template
-https://github.com/ihmeuw/vivarium_research/blob/main/docs/source/intervention_models/intervention_model_template/index.rst
+:ref:`this template <intervention_model_template>`.
 
 Here is an example of a recent application of this template
 https://github.com/ihmeuw/vivarium_research/blob/main/docs/source/intervention_models/latent_tuberculosis_treatment/index.rst#treatment-algorithm
