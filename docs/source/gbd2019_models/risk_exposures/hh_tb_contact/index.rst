@@ -11,17 +11,17 @@ Household Tuberculosis Contact
    * - Label
      - Definition
    * - TB
-     - tuberculosis
+     - Tuberculosis
    * - LTBI
-     - latent tuberculosis infection
+     - Latent Tuberculosis Infection
    * - AcTB
-     - active tuberculosis
+     - Active Tuberculosis
    * - HHC
-     - Household tuberculosis contact
+     - Household Tuberculosis Contact
    * - TPT
-     - Tuberculosis preventive therapy
+     - Tuberculosis Preventive Therapy
    * - TMREL
-     - theoretical minimum risk exposure level
+     - Theoretical Minimum Risk Exposure Level
 
 Risk Exposure Overview
 ----------------------
