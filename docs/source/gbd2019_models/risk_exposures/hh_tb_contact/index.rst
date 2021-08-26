@@ -30,7 +30,8 @@ exposure is a dichotomous variable, exposure to this risk factor is associated
 with increased risk of progression to LTBI. HHC is not a risk factor included 
 in GBD; however, it is one of the factors that indicates the population eligible 
 for TPT. TPT is recommended by World Health Organization (WHO) for HHC living in 
-high-TB incidence countries.
+high-TB incidence countries. `Contact Investigation 
+<https://www.usaid.gov/sites/default/files/documents/PI_TBCI_For_Web_0.pdf>`_
 
 .. list-table:: Risk-Outcome Pairs for HHC
    :widths: 5 10
@@ -89,8 +90,8 @@ each GBD age and sex group, described as below:
 
 :math:`Pr_{no\; AcTB\; (age,\; sex)} = \frac{{}\sum_{i\in age,\; sex} Pr_{no\; AcTB\; in\; HH_i}}{total\; number\; of\; HH\; (age,\; sex)}`
 
-Lastly, we restrict our HHC population as individuals who living in a household 
-with AcTB but don't have AcTB themselves, and the fraction of HHC for a give 
+Lastly, we restrict our HHC population to individuals who live in a household 
+with AcTB but don't have AcTB themselves, and the fraction of HHC for a given 
 GBD age and sex group is calculated as:
 
 :math:`F_{HHC(age,\; sex)} = 1 - \frac{Pr_{no\; AcTB\; (age,\; sex)}}{1 - Prev_{AcTB(age,\; sex)}}`
@@ -99,8 +100,28 @@ Access the Python code solution `hh_tb_model <https://github.com/ihmeuw/vivarium
 
 Validation Criteria
 +++++++++++++++++++
-
+External validation by comparing to alternative derivation using other data sources.
 
 References
 ----------
 
+GBD 2019 TB prevalence
+ - Vos T, Lim SS, Abbafati C, et al. Global burden of 369 diseases and injuries 
+   in 204 countries and territories, 1990–2019: a systematic analysis for the 
+   Global Burden of Disease Study 2019. The Lancet 2020; 396: 1204-22.
+
+Household structure for 5 high TB incidence countries (Global Health Data Exchange)
+ - Central Statistical Agency (Ethiopia), ICF International. Ethiopia Demographic 
+   and Health Survey 2016. Fairfax, United States: ICF International, 2017.
+ - ICF International, International Institute for Population Sciences (India), 
+   Ministry of Health and Family Welfare (India). India Demographic and Health 
+   Survey 2015-2016. Fairfax, United States: ICF International, 2018.
+ - ICF International, Philippines Statistics Authority. Philippines Demographic 
+   and Health Survey 2013. Fairfax, United States: ICF International, 2014.
+ - Minnesota Population Center, Statistics South Africa. South Africa Population 
+   and Housing Census 2011 from the Integrated Public Use Microdata Series, 
+   International: [Machine-readable database]. Minneapolis: University of 
+   Minnesota, 2015.
+ - Macro International, Inc., National Institute of Statistics and Informatics 
+   (Peru). Peru Continuous Demographic and Health Survey 2012. Fairfax, 
+   United States: ICF International.
