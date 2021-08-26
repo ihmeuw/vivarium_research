@@ -134,9 +134,13 @@ Initialization
 
 When simulants are initialized into the early or late neonatal age groups or born into the simulation, they will be assigned a birthweight exposure value associated with their LBWSG risk exposure. Additionally, when simulants are initialized into the early or late neonatal age group and when they are born into the simulation, they will be initialized into a particular state in the wasting model (e.g. TMREL, mild wasting, moderate wasting, or severe wasting) *based on their birthweight exposure value* according to the steps below. NOTE: simulants who are initialized into age groups older than the late neonatal age group will not be assigned a birthweight exposure, so they should be assigned a wasting exposure value that is independent of birthweight.
 
+.. note::
+
+   Wasting exposures at birth and in the early and late neonatal age groups will be initialized using the wasting exposure distribution for the post neonatal age group (as described in the wasting exposure model document).
+
 1. Assign the simulant a birthweight exposure value specific to their age group
 
-2. Assess the percentile of a simulant's birthweight exposure value within the overall age, sex, location, and year-specific birthweight exposure distribution (also known as the simulant's birthweight propensity score value *for their age group*)
+2. Assess the percentile of a simulant's birthweight exposure value within the overall age, sex, location, and year-specific birthweight exposure distribution (also known as the simulant's birthweight propensity score value *at birth*)
 
 .. todo::
 
@@ -154,7 +158,15 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
    The correlation coefficient of one month of age should be used for all simulants upon birth as well as those initialized into the early neonatal or late neonatal age groups because we do not have correlation coefficients specific to more detailed age ranges. 
 
-4. Assign the simulant a wasting exposure based on their propensity score value and their age/sex/location/year-specific wasting exposure distribution (the propensity score value should equal the percentile within the exposure distribution).
+4. Assign the simulant a wasting exposure based on their propensity score value and their sex/location/year-specific wasting exposure distribution among the post neonatal age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity score value equals the percentile within the exposure distribution.
+
+.. warning::
+
+   Given that the post neonatal age group wasting exposure distribution is used to inform wasting exposures at birth and correlated with birthweight exposure, the wasting exposure distribution between birth and the post neontatal age group will shift towards the TMREL as a result of the higher mortality rates among simulants with lower birthweight (which also tend to have worse wasting exposures).
+
+   The magnitude of this bias should be evaluated upon implementation to determine if an alternative modeling strategy is necessary. Validation criteria for this evaluation will be comparing the wasting exposure distribution among the post neonatal age group in the simulation to GBD as well as evaluating the relative improvement in the wasting exposure distribution in the simulation across early to post neonatal age groups.
+
+   An alternative modeling strategy could be to not assign wasting exposures until the post neonatal age group and induce correlation with birthweight exposures at that point. (This stragey is more complicated to implement from an engineering standpoint given the unassigned exposure values for the birth/early neonatal/late neonatal age groups).
 
 Transitions
 ~~~~~~~~~~~~
