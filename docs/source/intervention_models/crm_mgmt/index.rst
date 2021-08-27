@@ -120,12 +120,12 @@ Vivarium Modeling Strategy
     - Effect size measure
     - Effect size
     - Note
-  * - Lung cancer
-    - GBD cause
-    - c426
-    - Preclinical incidence rate
-    - Relative risk
-    - 0.8 (95% CI: 0.7, 1.01)
+  * - 
+    - 
+    - 
+    - 
+    - 
+    - 
     - 
 
 Affected Outcome #1
