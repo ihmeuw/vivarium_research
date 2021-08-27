@@ -33,9 +33,22 @@ prescription initiation propensity, polypill initiation propensity
   * - Abbreviation
     - Definition
     - Note
-  * - 
-    - 
-    - 
+  * - BMI
+    - Body Mass Index
+    - GBD Risk Factor
+  * - FPG
+    - Fasting Plasma Glucose
+    - GBD Risk Factor
+  * - LDL-C
+    - Low Density Lipoprotein Cholesterol
+    - GBD Risk Factor
+  * - LLT
+    - Lipid Lowering Therapy
+    - Treatment for high LDL-C
+  * - SBP
+    - Systolic blood pressure
+    - GBD Risk Factor
+
 
 .. todo::
 
