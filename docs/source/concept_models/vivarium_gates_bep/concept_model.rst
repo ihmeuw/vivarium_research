@@ -500,7 +500,7 @@ Apply the following intervention shifts according to interventions recieved in e
 
   Determine why increasing coverage from 0.75 to 0.8 results in fewer DALYs averted for Tanzania in sensitivity analysis
 
-For an updated run of the BEP simulation model for the repsonse to reviewers, we plan to include the following:
+For an updated run of the BEP simulation model for the repsonse to reviewers, we plan to include the following (for the full 100 simulation draws):
 
  - updated hopes hopes-and-dreams effect size of BEP 
  - updated maternal undernourishment effect size on birthweight (update lit review)
