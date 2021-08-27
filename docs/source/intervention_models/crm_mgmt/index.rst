@@ -67,13 +67,13 @@ treatment, which is known to increase adherence.
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - Hemoglobin concentration
-    - Increases population mean
-    - Yes
+  * - 
     - 
-  * - Malaria
-    - Increases incidence rate
-    - No
+    - 
+    - 
+  * - 
+    - 
+    - 
     - 
 
 Baseline Coverage Data
