@@ -181,11 +181,11 @@ Affected Outcome #1
   * - Population
     - Effect size
     - Note
-  * - Malnourished women
-    - +50 g birthweight
+  * - 
     - 
-  * - Adequately nourished women
-    - +10 g birthweight
+    - 
+  * - 
+    - 
     - 
 
 .. todo::
