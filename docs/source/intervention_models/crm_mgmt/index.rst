@@ -68,9 +68,8 @@ treatment, which is known to increase adherence.
 
 .. todo::
 
-  Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
+  Add to the following table to include known outcomes affected by the intervention, which are **not** in the simulation model, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
 
-  The table below provides example entries for large scale food fortification with iron.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -80,21 +79,35 @@ treatment, which is known to increase adherence.
     - Effect
     - Modeled?
     - Note (ex: is this relationship direct or mediated?)
-  * - 
-    - 
-    - 
-    - 
-  * - 
-    - 
-    - 
-    - 
+  * - SBP
+    - additive shift
+    - yes
+    - there is a “ramp” of increasing intensity of treatments
+  * - LDL-C
+    - multiplicative shift
+    - yes
+    - only two values: on treatment or not on treatment
+  * - BMI
+    - additive?
+    - yes
+    - [[need more detail on this effect]]
+  * - FPG
+    - additive?
+    - yes
+    - [[need more detail on this effect]]
+  * - Tobacco
+    - ?
+    - yes
+    - [[need more detail on this effect]]
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
+Baseline coverage of treatments for LDL-C and SBP are substantial and expected to vary by age, sex, and time.  To initialize simulants, researchers will fit a multinomial or logistic regression (as appropriate) to NHANES data, and provide the results to the engineers to use as a prediction of the probability of each treatment for a simulant with a known age, sex, and measured LDL-C and SBP level.
 
-  Document known baseline coverage data, using the table below if appropriate
+This initialization scheme will require an empirical calibration phase, where the population mean LDL-C and SBP before and after initialization are compared and all simulants have an adjustment applied to their LDL-C and SBP to make sure that the (age, sex)-stratified means in the model with treatment matches the means in the model without treatment.
+
+Baseline coverage of polypill, medication outreach, and lifestyle modification education are all low, and we will assume that they are 0%.
 
 .. list-table:: Baseline coverage data
   :widths: 15 15 15 15 15
@@ -105,11 +118,32 @@ Baseline Coverage Data
     - Coverage parameter
     - Value
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
+  * - USA
+    - General Population
+    - Hypertension Treatment
+    - Ramp distribution from NHANES
+    - empirical calibration needed
+  * - USA
+    - General Population
+    - LLT
+    - Distribution from NHANES
+    - empirical calibration needed
+  * - USA
+    - General Population
+    - Polypill
+    - 0.0
+    - assumption
+  * - USA
+    - General Population
+    - Medication outreach
+    - 0.0
+    - assumption
+  * - USA
+    - General Population
+    - Lifestyle modification education
+    - 0.0
+    - assumption
+    
 
 Vivarium Modeling Strategy
 --------------------------
