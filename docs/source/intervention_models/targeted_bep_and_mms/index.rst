@@ -95,12 +95,9 @@ IFA is widely used as a prenatal supplement in most areas of the world and is re
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
-
-  Document known baseline coverage data, using the table below if appropriate
+Given the low utilization of MMS and BEP relative to IFA, we assume that baseline coverage of MMS and BEP are zero. Baseline coverage of IFA varies by location, and Demographic Health Surveys are good data sources for the proportion of pregnant women who took iron supplementation during pregnancy. 
 
 .. list-table:: Baseline coverage data
-  :widths: 15 15 15 15 15
   :header-rows: 1
 
   * - Location
@@ -108,22 +105,49 @@ Baseline Coverage Data
     - Coverage parameter
     - Value
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
+  * - Ethiopia
+    - General population
+    - Percent who took antenatal iron for 90+ days
+    - 10.6
+    - DHS 2019
+  * - India
+    - General population
+    - Percent who took antenatal iron for 90+ days
+    - 38.7
+    - DHS 2017
+  * - Mali
+    - General population
+    - Percent who took antenatal iron for 90+ days
+    - 28.0
+    - DHS 2017
+  * - Pakistan
+    - General population
+    - Percent who took antenatal iron for 90+ days
+    - 29.4
+    - DHS 2017
+  * - Tanzania
+    - General population
+    - Percent who took antenatal iron for 90+ days
+    - 21.4
+    - DHS 2017
+
+.. note::
+
+  DHS has coverage data specific to women who took iron tablets for <60 and 60-89 days too as well as stratified by age, residence, region, education, and wealth quintile.
+
 
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
+The maternal supplementation intervention is administered to mothers and impacts both the mother and infant. To model the impact of the intervention on either child or maternal outcomes, simulant attributes for maternal nourishment exposure (BMI/x-factor) and maternal ANC attendance exposure are required. Additionally, to model the impact on child growth, child growth exposures are required. To model the impact on maternal mortality, a maternal hemoglobin exposure value is required. This intervention model requires the additional simulant attribute of maternal supplement regimen.
 
-  Add an overview of the Vivarium modeling section.
+For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree.
 
-.. todo::
+.. note::
 
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
+  This decision tree assumes a complete transition from IFA to targeted BEP/MMS. Alternative intervention implementations may be considered.
+
+.. image:: coverage_decision_tree.svg
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
