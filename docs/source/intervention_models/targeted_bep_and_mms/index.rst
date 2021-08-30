@@ -42,7 +42,7 @@ Maternal supplementataion during the prenatal period is a critical intervention 
 
 - **Iron and Folic Acid (IFA):** IFA affects outcomes including maternal anemia (which is a risk factor for maternal mortality) and infant birthweight (a risk factor for infant mortality). Additionally, folic acid deficiency is associated with haematological consequences and congenital malformations, however the effect on congenital malformations is sensitive to timing of administration relative to conception. The latest cochrane review of IFA trials was performed by [Pena-Rosas-et-al-2015]_; notably, as IFA is considered the current standard of care, there are few studies that compare IFA to placebo or no treatment.
 
-- **Multiple Micronutrient Supplementation (MMS):** MMS is a combination of micronutrients that includes iron and folic acid as well as other nutrients such as vitamin A and zinc. The latest cochrane review on MMS (containing IFA) relative to IFA alone was performed by [Keats-et-al-2019]_.
+- **Multiple Micronutrient Supplementation (MMS):** MMS is a combination of micronutrients that includes iron and folic acid as well as other nutrients such as vitamin A and zinc. The latest cochrane review on MMS (containing IFA) relative to IFA alone was performed by [Keats-et-al-2019-maternal-supplementation]_.
 
 - **Balanced Energy Protein (BEP):** BEP is a type of supplement that provides macronutrients in addition to micronutrients provided by IFA and MMS. The macronutrients provided by BEP supplementation may aid in maternal weight gain, which may improve fetal outcomes, and may be particularly beneifcial to underweight pregnant women and their babies. Notably, there are several different formulations of BEP, which may vary in their effectiveness. The latest cochrane review on BEP supplementation was performed by [Ota-et-al-2015]_
 
@@ -221,7 +221,7 @@ Validation and Verification Criteria
 References
 ------------
 
-.. [Keats-et-al-2019]
+.. [Keats-et-al-2019-maternal-supplementation]
   Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
 
 .. [Ota-et-al-2015]
