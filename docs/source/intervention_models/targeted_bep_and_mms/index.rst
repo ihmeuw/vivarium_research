@@ -70,12 +70,12 @@ IFA is widely used as a prenatal supplement in most areas of the world and is re
     - IFA, MMS, BEP
     - Increases population mean
     - Yes
-    - Non-linear dose response likely. Differential effect by regimen.
+    - Differential effect by regimen. Effect modification by counterfactual birthweight (or proxy such as maternal nourishment)
   * - Maternal anemia
     - IFA, MMS, BEP
     - Increases population mean hemoglobin
     - Not yet
-    - Non-linear dose response likely. Differential effect by regimen.
+    - Non-linear dose response likely. Differential effect by regimen. Effect modification by baseline hemoglobin likely.
   * - Maternal nourishment (BMI)
     - BEP
     - TBD
