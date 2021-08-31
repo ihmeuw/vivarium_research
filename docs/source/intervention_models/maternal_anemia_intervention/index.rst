@@ -99,19 +99,16 @@ The scope of our simulation work is to estimate following measures in 4 focal co
     - Note
   * - Population mean hemoglobin
     - Additive
-    - non-PLW
-    - Effects are not stratified by intervention tiers
-  * - Population mean hemoglobin
-    - Additive and multiplicative combined
-    - PLW
-    - Effects are stratified by intervention tiers 
+    - General population/PLW/anemic PLW
+    - LSFF/supplementation/treatment effect sizes and target populations vary. 
+      Hemoglobin shift affects both anemia and maternal mortality
 
 Baseline Coverage Data
 ++++++++++++++++++++++
 
-.. note::
+.. todo::
 
-  No existing coverage of each intervention tier
+  Document intervention coverage for eligible population
 
 
 .. list-table:: Baseline coverage data
@@ -147,15 +144,16 @@ Baseline Coverage Data
 
 Vivarium Modeling Strategy
 --------------------------
-How to estimate maternal anemia burden in Vivarium:
- 1. Construct population hemoglobin distributions for each location-/age- group;
+How to model hemoglobin exposure in Vivarium:
+ 1. Construct hemoglobin distributions for each location-/age-/population- subgroup;
  2. Apply pregnancy adjustment factor to hemoglobin distributions for pregnant 
     and general populations;
- 3. Modify hemoglobin distributions based on intervention risk effects;
- 4. Calculate maternal anemia burden, measured by deaths, YLDS, and YLLs.
+ 3. Modify hemoglobin distributions based on intervention effects;
 
 Hemoglobin
 ++++++++++
+
+The hemoglobin model in GBD 2019 can be found :ref:`Here <2019_hemoglobin_model>`.
 
 .. list-table:: Modeled Outcomes
   :widths: 10 10 10 10 10 10 10
@@ -172,7 +170,7 @@ Hemoglobin
     - GBD risk
     - rei_92
     - Exposure prevalence
-    - Relative risk
+    - Risk difference
     - Detailed in table `Effect Size`
     - 
 
@@ -195,9 +193,12 @@ Hemoglobin
   * - Age group end
     - 49 years
     - 
-  * - Other
-    - 
-    - 
+
+.. note::
+
+  Reproductive age is defined as 10 to 54 years in GBD, we trimmed it for this 
+  project by request of BMGF.
+
 
 .. list-table:: Effect Size
   :widths: 10 10 10 10
@@ -226,15 +227,9 @@ Hemoglobin
 
 .. todo::
 
-  Describe exactly *how* to apply the effect sizes to the hemoglobin measure for PLW and non-PLW populations
+  Describe exactly *how* to apply the effect sizes to the hemoglobin measure for 
+  general, PLW, and anemic PLW populations
 
-Maternal Disorders Burden
-+++++++++++++++++++++++++
-
-.. todo::
-
-  Describe exactly *how* to calculate burden due to maternal disorders using PAF 
-  of iron deficiency anemia for maternal disorders and risk effects 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
