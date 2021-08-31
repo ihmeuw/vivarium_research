@@ -488,14 +488,46 @@ Apply the following intervention shifts according to interventions recieved in e
 8.0 Journal reviewer comments
 +++++++++++++++++++++++++++++
 
-We will do a sensitivity analysis on coverage for MMS, universal BEP and targeted BEP for a series of coverage points using one draw to explore relationship between the coverage proportion of the interventions and outcome (DALY's averted):
+.. note::
 
-  - 0.4, 0.45, 0.5, 0.55, 0.6, .65, 0.7, 0.75, 0.8, 0.85, 0.9
+  We have done a sensitivity analysis on coverage for MMS, universal BEP and targeted BEP for a series of coverage points using one draw to explore relationship between the coverage proportion of the interventions and outcome (DALY's averted):
 
-Addtionally, we will update the following: 
+  - 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9
 
- - hopes hopes-and-dreams effect size of BEP 
- - maternal undernourishment effect size on birthweight (update lit review)
+  Results are located here `/share/costeffectiveness/results/vivarium_gates_bep/sensitivity_analysis/`
+
+.. todo::
+
+  Determine why increasing coverage from 0.75 to 0.8 results in fewer DALYs averted for Tanzania in sensitivity analysis
+
+For an updated run of the BEP simulation model for the repsonse to reviewers, we plan to include the following (for the full 100 simulation draws):
+
+ - updated hopes hopes-and-dreams effect size of BEP 
+ - updated maternal undernourishment effect size on birthweight (update lit review)
+ - sex stratification of outputs
+ - updated intervention coverage targets
  - SD calculation from confidence interval calculation should be (upper limit - lower limit)/2x1.96, and not 1.98.
-  
 
+.. todo::
+
+  Determine if SD calculation applies to simulation runs or researcher post-processing only.
+
+The updated intervention coverage targets should be implemented as three separate runs of the simulation and the results should be stratified by these targets in the same way that they were for the sensitivity analysis runs.
+
+.. list-table:: Intervention coverage values as a proportion of women attending ANC
+   :header-rows: 1
+
+   * - Intervention coverage level
+     - Value
+     - Note
+   * - Low
+     - baseline IFA coverage / ANC proportion
+     - Location-specific. Should be calculated in simulation to be specific to draw-level values. Needs transformation to be specific to coverage among ANC attendees since baseline coverage is defined in terms of the general population.
+   * - Medium
+     - 0.6
+     - For all locations
+   * - High
+     - 0.9
+     - For all locations
+
+  
