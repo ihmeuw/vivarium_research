@@ -151,10 +151,84 @@ Vivarium Modeling Strategy
 .. todo::
 
   Add an overview of the Vivarium modeling section.
+  
+.. list-table:: Key parameters for intervention model
+  :widths: 15 15 15
+  :header-rows: 1
 
-.. todo::
+  * - Parameter
+    - Data Source
+    - Notes
+  * - Outpatient visit rate
+    - 
+    - 
+  * - Follow-up visit rate for cardiometabolic risk management 
+    - 
+    - 
+  * - SBP measurement error
+    - 
+    - 
+  * - SBP therapeutic inertia
+    - 
+    - 
+  * - SBP prescription initiation rate
+    - 
+    - 
+  * - SBP adherence rate
+    - 
+    - 
+  * - SBP treatment efficacy
+    - 
+    - 
+  * - SBP baseline coverage rate for each ramp position
+    - 
+    - 
+  * - LDL-C measurement error
+    - 
+    - 
+  * - LDL-C therapeutic inertia
+    - 
+    - 
+  * - LDL-C prescription initiation rate
+    - 
+    - 
+  * - LDL-C adherence rate
+    - 
+    - 
+  * - LDL-C treatment efficacy
+    - 
+    - 
+  * - LDL-C baseline coverage rate
+    - 
+    - 
+  * - Medication outreach effectiveness on prescription initiation
+    - 
+    - 
+  * - Medication outreach baseline coverage
+    - 
+    - 
+  * - Polypill effectiveness on medication adherence
+    - 
+    - 
+  * - Polypill baseline coverage rate
+    - 
+    - 
+  * - Lifestyle Modification Education effectiveness on BMI, FPG, and Tobacco Initiation/Cessation
+    - 
+    - 
+  * - Lifestyle Modification Education baseline coverage rate
+    - 
+    - 
 
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
+On time step, (a) does simulant interact with health system? Answer depends on outpatient visit rate, emergency visit if simulant had a heart attack, follow-up visit scheduled time and adherence rate.
+If (a) is yes, if visit is for an emergency, (b) does provider overcome therapeutic inertia?
+If (b) is yes, increase treatment for SBP and/or LDL-C
+If (b) is no, (c) does measured SBP and/or measured LDL-C exceed threshold for increased treatment?
+If (c) is yes, (d) does provider overcome therapeutic inertia?
+If (d) is yes, increase treatment for SBP and/or LDL-C
+If treatment was increased for SBP and/or LDL-C, (e) does patient initiate new prescription?
+If patient has initiated a prescription (on this timestep or previously), (f) does patient adhere to treatment?
+[[to add: schedule follow-up visit, give polypill instead of separate pills, refer to lifestyle medication education, enroll in medical outreach.]]
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
@@ -175,16 +249,9 @@ Vivarium Modeling Strategy
     - 
     - 
 
-Affected Outcome #1
-+++++++++++++++++++++
 
-.. important::
-
-  Copy and paste this section for each affected outcome included in this document
-
-.. todo::
-
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
+Affected Outcome #1 - SBP
++++++++++++++++++++++++++
 
 .. todo::
 
@@ -238,6 +305,232 @@ Affected Outcome #1
 .. todo::
 
   Describe exactly *how* to apply the effect sizes to the affected measures documented above
+
+
+Affected Outcome #2 - LDL-C
++++++++++++++++++++++++++++
+
+.. todo::
+
+  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+
+.. todo::
+
+  Describe exactly what measure the intervention will affect
+
+.. todo::
+
+  Fill out the tables below
+
+.. list-table:: Affected Outcome #2 Restrictions
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - False
+    - 
+  * - Female only
+    - False
+    - 
+  * - Age group start
+    - no restriction
+    - 
+  * - Age group end
+    - no restriction
+    - 
+  * - Other
+    - 
+    - 
+
+.. list-table:: Affected Outcome #2 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - Population
+    - Effect size
+    - Note
+  * - 
+    - 
+    - 
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+
+Affected Outcome #3 - BMI
++++++++++++++++++++++++++
+
+.. todo::
+
+  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+
+.. todo::
+
+  Describe exactly what measure the intervention will affect
+
+.. todo::
+
+  Fill out the tables below
+
+.. list-table:: Affected Outcome #3 Restrictions
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - 
+    - 
+  * - Female only
+    - 
+    - 
+  * - Age group start
+    - 
+    - 
+  * - Age group end
+    - 
+    - 
+  * - Other
+    - 
+    - 
+
+.. list-table:: Affected Outcome #3 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - Population
+    - Effect size
+    - Note
+  * - 
+    - 
+    - 
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+
+Affected Outcome #4 - FPG
++++++++++++++++++++++++++
+
+.. todo::
+
+  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+
+.. todo::
+
+  Describe exactly what measure the intervention will affect
+
+.. todo::
+
+  Fill out the tables below
+
+.. list-table:: Affected Outcome #4 Restrictions
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - False
+    - 
+  * - Female only
+    - False
+    - 
+  * - Age group start
+    - unrestricted
+    - 
+  * - Age group end
+    - unrestricted
+    - 
+  * - Other
+    - 
+    - 
+
+.. list-table:: Affected Outcome #4 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - Ramp position
+    - Effect size
+    - Note
+  * - 
+    - 
+    - 
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+
+Affected Outcome #5 - Smoking
++++++++++++++++++++++++++++++
+
+.. todo::
+
+  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+
+.. todo::
+
+  Describe exactly what measure the intervention will affect
+
+.. todo::
+
+  Fill out the tables below
+
+.. list-table:: Affected Outcome #5 Restrictions
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - 
+    - 
+  * - Female only
+    - 
+    - 
+  * - Age group start
+    - 
+    - 
+  * - Age group end
+    - 
+    - 
+  * - Other
+    - 
+    - 
+
+.. list-table:: Affected Outcome #5 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - Population
+    - Effect size
+    - Note
+  * - 
+    - 
+    - 
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+
 
 .. todo::
 
