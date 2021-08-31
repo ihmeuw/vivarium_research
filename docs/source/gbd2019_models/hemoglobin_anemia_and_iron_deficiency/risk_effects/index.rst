@@ -66,17 +66,13 @@ Iron deficiency in the GBD risk factors is defined as **inadequate iron to meet 
 Maternal Disorders
 ++++++++++++++++++
 
-The GBD 2019 Risk-Outcome pair relationship between iron deficiency and maternal disorders relies on the association between hemoglobin concentration and maternal mortality from the literature, specifically the CHERG iron report.
-
-.. todo::
-
-  Cite the CHERG iron report, GBD 2019 methods appendix
+The GBD 2019 Risk-Outcome pair relationship between iron deficiency and maternal disorders relies on the association between hemoglobin concentration and maternal mortality from the literature, specifically the CHERG iron report [GBD-2019-Risk-Factors-Appendix-Hemoglobin-Risk-Effects]_.
 
 .. note::
 
   According to a correspondence with Chris Murray, there is contraversy surrounding the inclusion of this risk-outcome pair in GBD because there is evidence supporting an association between iron supplementation and hemoglobin increases as well as evidence supporting an association between hemoglobin increases and maternal mortality, but no/little evidence to support an association between iron supplementation and maternal mortality directly.
 
-Notably, the *same* relative risks for this risk-outcome pair apply to both YLDs and YLLs and are constant for each age-group and each most-detailed cause within the maternal disorders cause heirarchy; assuming that changes in hemoglobin concentration affect each of the maternal disorders equally and also affect morbidity and mortality equally.
+Notably, the *same* relative risks for this risk-outcome pair apply to both YLDs and YLLs and are constant for each age-group and each most-detailed cause within the maternal disorders cause heirarchy. This approach makes the assumption that changes in hemoglobin concentration affect each of the maternal disorders equally and also affect morbidity and mortality equally.
 
   A limitation of this approach is that if changes in hemoglobin concentration affect a maternal disorder with a higher disability weight more or less than a maternal disorder with a lower disability weight, then our estimation of change in maternal disorder YLDs due to a change in hemoglobin concentration will be biased. 
 
@@ -86,7 +82,7 @@ Notably, the *same* relative risks for this risk-outcome pair apply to both YLDs
 
 The relative risks used for this risk outcome pair are scaled to units of hemoglobin concentration in g/dL. Because the iron deficiency exposure (and mean population hemoglobin concentration) in GBD 2019 are defined in g/L, the units will need to be converted.
 
-The PAF for this risk outcome pair is computed using the :code-block:`cont_paf_nocap` function found `here <https://stash.ihme.washington.edu/projects/RF/repos/paf/browse/math.R#9-10,30>`_, with the following parameter values:
+The PAF for this risk outcome pair is computed using the :code:`cont_paf_nocap` function shown in the code block below according to the parameter values defined at the beginning of the code block (function found at the 10/25/2019 version of the file found  `here <https://stash.ihme.washington.edu/projects/RF/repos/paf/browse/math.R#9-10,30>`_).
 
 .. code-block:: Python
   
@@ -96,9 +92,56 @@ The PAF for this risk outcome pair is computed using the :code-block:`cont_paf_n
   dist = 'normal'
   inv_exp = 1
 
+  # NOTE - used for iron only
+  cont_paf_nocap <- function(dt, lower, upper, rr_scalar, dist, inv_exp) {
+      calc_paf <- function(lower, upper, exp_mean, exp_sd, rr, tmrel, rr_scalar,
+                           dist, inv_exp) {
+          if (dist == "normal") {
+              bound <- qnorm(0.999999, exp_mean, exp_sd)
+              if (inv_exp == 0) {
+                  denom <- integrate(function(x) dnorm(x, exp_mean, exp_sd) * rr^((x - tmrel + abs(x - tmrel))/2/rr_scalar),
+                                     lower, bound, stop.on.error = FALSE)$value
+              } else if (inv_exp == 1) {
+                  denom <- integrate(function(x) dnorm(x, exp_mean, exp_sd) * rr^((tmrel - x + abs(tmrel - x))/2/rr_scalar),
+                                     lower, bound, stop.on.error = FALSE)$value
+              }
+          } else if (dist == "lognormal") {
+              mu <- log(exp_mean/sqrt(1 + (exp_sd^2/(exp_mean^2))))
+              exp_sd <- sqrt(log(1 + (exp_sd^2/exp_mean^2)))
+              exp_mean <- mu
+              bound <- qlnorm(0.999999, exp_mean, exp_sd)
+              if (inv_exp == 0) {
+                  denom <- integrate(function(x) dlnorm(x, exp_mean, exp_sd) * rr^((x - tmrel + abs(x - tmrel))/2/rr_scalar),
+                                     lower, bound, stop.on.error = FALSE)$value
+              } else if (inv_exp == 1) {
+                  denom <- integrate(function(x) dlnorm(x, exp_mean, exp_sd) * rr^((tmrel - x + abs(tmrel - x))/2/rr_scalar),
+                                     lower, bound, stop.on.error = FALSE)$value
+              }
+          } else {
+              stop("Distribution ", dist, " not currently implemented.")
+          }
+          return((denom-1)/denom)
+      }
+      dt[, paf := {
+          if (inherits(try(ans <- calc_paf(lower=lower,
+                                           upper=upper,
+                                           exp_mean=exp_mean,
+                                           exp_sd=exp_sd,
+                                           rr=rr,
+                                           tmrel=tmrel,
+                                           rr_scalar=rr_scalar,
+                                           dist=dist,
+                                           inv_exp=inv_exp),silent=TRUE),"try-error"))
+              as.numeric(NA)
+          else
+              ans
+      }, by=1:nrow(dt)]
+      return(dt)
+  }
+
 .. note::
 
-  According to a correspondence with Nick Kassebaum, a normal distribution is assumed for the PAF calculation in this risk outcome pair, although a potential methodological improvement for GBD 2020 will be to assume the ensemble distribution used in the hemoglobin model instead.
+  According to a correspondence with Nick Kassebaum, a normal distribution is assumed for the population hemoglobin concentration in the PAF calculation of this risk outcome pair, although a potential methodological improvement for GBD 2020 will be to assume the ensemble distribution used in the hemoglobin model instead.
 
 The GBD 2019 Population Attributable Fractions for maternal disorders rely on the iron deficiency exposure and TMREL as estimated in the *Global TMREL exposure estimation* approach outlined in the :ref:`Iron Deficiency Risk Exposure page <2019_risk_exposure_iron_deficiency>`. However, according to a correspondence with Nick Kassebaum, the *Location-specific TMREL exposure estimation approach* is more conceptually/clinically correct, although the results are expected to be similar.
 
@@ -111,11 +154,7 @@ Because the relative risks for maternal mortality are defined in terms of hemogl
 
 Chris Murray and Theo Vos suggested that this approach be used for estimating the impact of interventions that act on hemoglobin concentration on maternal disorders.
 
-Notably, this alternative approach was found to estimate similar (but slightly greater) intervention impact to the standard approach using the location-specific TMREL exposure estimation approach specific and exposure parameters specific to the pregnant and lactating population.
-
-.. todo::
-
-  Cite the maternal anemia project repo here.
+Notably, this alternative approach was found to estimate similar (but slightly greater) intervention impact to the standard approach using the location-specific TMREL exposure estimation approach specific and exposure parameters specific to the pregnant and lactating population in the project hosted in `this repository <https://github.com/ihmeuw/sim_sci_maternal_anemia>`_.
 
 Dietary Iron Deficiency
 +++++++++++++++++++++++
@@ -138,6 +177,10 @@ Instead, the relative risks should be applied to both the YLD (or incidence) and
 
     rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (Hgb_i - Hgb_\text{GBD})}
 
+.. todo::
+
+  Explain details of this equation and update formatting as requested by Nathaniel.
+
 Where, 
 
 .. list-table:: Parameter Definitions
@@ -149,10 +192,10 @@ Where,
      - Note
    * - :math:`Hgb_i`
      - Hemoglobin value for an individual pregnant simulant in g/dL
-     - Needs unit conversion! (Exposure typically defined in g/L)
+     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
    * - :math:`Hgb_\text{GBD}`
      - Mean hemoglobin value among the pregnant/lactating population from GBD in g/dL
-     - Needs unit conversion! (Exposure typically defined in g/L)
+     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
    * - :math:`rate_i`
      - Rate for an individual simulant
      - Rate can be incidence, EMR, CSMR, etc.
@@ -171,8 +214,12 @@ Where,
      - Relative Risk
      - Note
    * - Per unit deficit of hemoglobin (g/dL)
-     - 1.252472 (0.920269, 0.701621)
-     - Note unit change (exposure is typically in g/L)
+     - 1.252472 
+     - Note unit change (exposure is typically in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration
+
+.. todo::
+
+  Pull uncertainty interval around relative risks
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -190,7 +237,7 @@ If intervention causes increase in hemoglobin, the intervention scenario rate of
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Notably, anemia is a sequela of the maternal disorder, maternal hemorrhage. Therefore, if a simulation model of an intervention that affects hemoglobin concentration evaluates both the impact on burden due to maternal disorders and the impact of YLDs due to anemia, it is possible that the impact on YLDs for anemia due to maternal hemorrhage will be double counted. This is likely a relative small portion of DALYs, but should be investigated and considered prior to implementation.
+Notably, anemia is a sequela of maternal hemorrhage, which is a subcause of maternal disorders. Therefore, if a simulation model of an intervention that affects hemoglobin concentration evaluates both the impact on burden due to maternal disorders and the impact of YLDs due to anemia, it is possible that the impact on YLDs for anemia due to maternal hemorrhage will be double counted. This is likely a relative small portion of DALYs, but should be investigated and considered prior to implementation.
 
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -202,23 +249,11 @@ Bias in the Population Attributable Fraction
 References
 ----------
 
-.. todo::
+.. [GBD-2019-Risk-Factors-Appendix-Hemoglobin-Risk-Effects]
 
-  Update references to GBD 2019 once published
+   Pages 178-180 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
 
-.. todo::
+     **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factor Collaborators. :title:`Global burden of 87 risk factors in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019`. Lancet 2020; 396: 1223-1249. DOI:
+     https://doi.org/10.1016/S0140-6736(20)30752-2
 
-  Update the GBD 2017 Risk Factor Methods appendix citation to be unique to your risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk Name}-Effects')
-
-  Update the appropriate page numbers in the GBD risk factors methods appendix below
-
-  Add additional references as necessary 
-
-.. [GBD-2017-Risk-Factors-Appendix-Risk-Effects-Model-Template]
-
-   Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
-
-     **(GBD 2017 Risk Factors Capstone)** GBD 2017 Risk Factor Collaborators. :title:`Global, regional, and national comparative risk assessment of 84 behavioural, environmental and occupational, and metabolic risks or clusters of risks for 195 countries and territories, 1990–2017: a systematic analysis for the Global Burden of Disease Study 2017`. Lancet 2018; 392: 1923-1994. DOI:
-     https://doi.org/10.1016/S0140-6736(18)32225-6
-
-.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32225-6/attachment/be595013-2d8b-4552-86e3-6c622827d2e9/mmc1.pdf
+.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
