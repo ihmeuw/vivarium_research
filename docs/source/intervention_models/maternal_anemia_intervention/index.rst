@@ -100,11 +100,11 @@ The scope of our simulation work is to estimate following measures in 4 focal co
   * - Population mean hemoglobin
     - Additive
     - non-PLW
-    - Differential effect by intervention tier
+    - Effects are not stratified by intervention tiers
   * - Population mean hemoglobin
     - Additive and multiplicative combined
     - PLW
-    - Differential effect by intervention tier
+    - Effects are stratified by intervention tiers 
 
 Baseline Coverage Data
 ++++++++++++++++++++++
