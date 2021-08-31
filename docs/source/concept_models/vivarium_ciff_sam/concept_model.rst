@@ -274,7 +274,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * Insecticide treated nets
 
-* Intermittent preventive therapy for pregnant women
+* :ref:`Intermittent preventive therapy for pregnant women <maternal_malaria_prevention_therapy>`
 
 * Kangaroo care for preterm and low birthweight infants
 
