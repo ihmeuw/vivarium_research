@@ -169,7 +169,72 @@ For the implementation of the intervention in an alterative scenarios, we will m
     - 
 
 Birthweight
-++++++++++++++++
++++++++++++++++++++++
+
+.. important::
+
+  Copy and paste this section for each affected outcome included in this document
+
+.. todo::
+
+  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
+
+.. todo::
+
+  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+
+.. todo::
+
+  Describe exactly what measure the intervention will affect
+
+.. todo::
+
+  Fill out the tables below
+
+.. list-table:: Affected Outcome #1 Restrictions
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - 
+    - 
+  * - Female only
+    - 
+    - 
+  * - Age group start
+    - 
+    - 
+  * - Age group end
+    - 
+    - 
+  * - Other
+    - 
+    - 
+
+.. list-table:: Affected Outcome #1 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - Population
+    - Effect size
+    - Note
+  * - 
+    - 
+    - 
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+
+.. todo::
+
+  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
 
 
 Assumptions and Limitations
