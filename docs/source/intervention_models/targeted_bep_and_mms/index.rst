@@ -209,7 +209,7 @@ The maternal supplementation intervention (all regimens) affect child birthweigh
   * - IFA supplemented mothers (overall)
     - +57.73 g (7.66 to 107.79)
     - Relative to no supplementation 
-    - [Pena-Rosa-et-al-2015]_
+    - [Pena-Rosas-et-al-2015]_
   * - MMN supplemented mothers (overall)
     - +45.16 (32.31 to 58.02) 
     - Relative to IFA
