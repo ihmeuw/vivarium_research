@@ -84,7 +84,7 @@ The relative risks used for this risk outcome pair are scaled to units of hemogl
 
 The PAF for this risk outcome pair is computed using the :code:`cont_paf_nocap` function shown in the code block below according to the parameter values defined at the beginning of the code block (function found at the 10/25/2019 version of the file found  `here <https://stash.ihme.washington.edu/projects/RF/repos/paf/browse/math.R#9-10,30>`_).
 
-.. code-block:: Python
+.. code-block::
   
   lower = 0
   upper = 5_000
