@@ -142,6 +142,21 @@ Full Name of Cause in GBD 2019
    :local:
    :depth: 1
 
+.. list-table:: Abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * - 
+    - 
+    - 
+
+.. todo::
+
+  Fill out table with any abbreviations and their definitions used in this document.
+
 Disease Overview
 ----------------
 
@@ -592,7 +607,7 @@ References
 
   Update references to GBD 2019 once published
 
-.. [GBD-2017-YLD-Appendix-Cause-Model-Template]
+.. [GBD-2019-YLD-Appendix-Cause-Model-Template]
 
    Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 YLD Capstone <YLD
    appendix on ScienceDirect_>`_:
@@ -608,7 +623,7 @@ References
 .. _YLD appendix on Lancet.com: https://www.thelancet.com/cms/10.1016/S0140-6736(18)32279-7/attachment/6db5ab28-cdf3-4009-b10f-b87f9bbdf8a9/mmc1.pdf
 
 
-.. [GBD-2017-CoD-Appendix-Cause-Model-Template]
+.. [GBD-2019-CoD-Appendix-Cause-Model-Template]
 
    Pages ???-??? in `Supplementary appendix 1 to the GBD 2017 CoD Capstone <CoD
    appendix on ScienceDirect_>`_:
@@ -634,8 +649,8 @@ References
    <http://www.sphinx-doc.org/en/master/usage/restructuredtext/basics.html#citations>`_.
 
    You can follow the syntax above to add your own references, and you can cite
-   the references such as [GBD-2017-YLD-Appendix-Cause-Model-Template]_ and
-   [GBD-2017-CoD-Appendix-Cause-Model-Template]_ from within your text by
+   the references such as [GBD-2019-YLD-Appendix-Cause-Model-Template]_ and
+   [GBD-2019-CoD-Appendix-Cause-Model-Template]_ from within your text by
    enclosing the full citation name in brackets and adding a trailing
    underscore, like this: :code:`[Full-Citation-Name]_`.
 

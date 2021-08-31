@@ -4,12 +4,8 @@
 Hemoglobin, Anemia, and Iron Deficiency
 =======================================
 
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   *
-   */index
+.. contents::
+  :local:
 
 Topic Overview
 --------------
@@ -20,12 +16,12 @@ hemoglobin concentrations below a defined threshold that varies by age and sex.
 Severity of anemia is similarly classified according to ranges of hemoglobin
 concentrations. Anemia is associated with increased morbidity and mortality and
 symptoms of anemia often include weakness, fatigue, and difficulty
-concentrating [Kassebaum-et-al-2016]_.
+concentrating [Kassebaum-et-al-2016-iron-deficiency-2019]_.
 
  Notably, anemia may be caused by many diverse factors. Examples of factors
  that may cause anemia include genetic mutations in hemoglobin genes, acute or
  chronic blood loss, altered red blood cell morphology, inadequate nutritional
- intake, and others [Kassebaum-et-al-2016]_.
+ intake, and others [Kassebaum-et-al-2016-iron-deficiency-2019]_.
 
 **Iron deficiency anemia** is a type of anemia that is due to insufficient
 iron levels, which lead to a deficiency of hemoglobin in the blood. Notably,
@@ -40,6 +36,12 @@ GBD 2019 Hemoglobin, Anemia, and Iron Deficiency Overview
 
 The hemoglobin, anemia, and iron deficiency estimates in GBD 2019 are complex and related. This section will provide a brief overview of the different components relating to these topics in GBD 2019 for context.
 
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */index
+
 Hemoglobin Model
 ^^^^^^^^^^^^^^^^
 
@@ -52,7 +54,7 @@ This model will allow the assignment of specific hemoglobin concentration values
 Anemia Impaiment
 ^^^^^^^^^^^^^^^^
 
-The anemia impairment model in GBD 2019 uses the hemoglobin distribution model to evaluate the total prevalence of anemia ("anemia envelope") based on age- and sex-specific thresholds. The anemia impairment model also performs *causal attribution* in which specific causes of anemia (for example, dietary iron deficiency or maternal hemorrhage) are assigned to all of the cases in the anemia envelope. 
+The anemia impairment model in GBD 2019 uses the hemoglobin distribution model to evaluate the total prevalence of anemia ("anemia envelope") based on age- and sex-specific thresholds. The anemia impairment model also performs *causal attribution* in which specific causes of anemia (for example, dietary iron deficiency or maternal hemorrhage) are assigned to all of the cases in the anemia envelope (note: cases in the anemia envelope refers to all individuals with prevalent anemia). 
 
 This model should be used in order to model YLDs due to anemia directly.
 
@@ -73,7 +75,7 @@ The iron deficiency risk factor exposure model should be utilized when the popul
 References
 ----------
 
-.. [Kassebaum-et-al-2016]
+.. [Kassebaum-et-al-2016-iron-deficiency-2019]
 
   View `Kassebaum et al. 2016`_
 

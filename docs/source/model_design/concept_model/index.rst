@@ -33,5 +33,4 @@ The purpose of this page is to document information that is relevant to designin
    :maxdepth: 1
    :glob:
 
-   *
    */index

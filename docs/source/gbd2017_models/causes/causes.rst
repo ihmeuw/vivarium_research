@@ -33,7 +33,7 @@ counts, rates, and percentages
 Modeling causes of death
 ------------------------
 
-.. image:: fatal_flowchart.png
+.. image:: fatal_flowchart.PNG
    :width: 600
 
 **Modeling approach**

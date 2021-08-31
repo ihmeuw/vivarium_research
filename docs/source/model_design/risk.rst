@@ -13,6 +13,15 @@ Modeling Risk Exposure
 What is a risk factor?
 ----------------------
 
+What is a risk exposure?
+------------------------
+
+Risk exposures in GBD
++++++++++++++++++++++++
+
+Risk exposures in Vivarium
+++++++++++++++++++++++++++++
+
 What is a TMREL?
 ----------------
 

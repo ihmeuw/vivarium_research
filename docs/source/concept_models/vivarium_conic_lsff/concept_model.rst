@@ -99,7 +99,7 @@ Model Components
 Time
 ++++
 
-* Start and end year: **2020 -- 2025**
+* Start and end date: **January 1, 2020 -- December 31, 2024**
 * Simulation time step: **1 day** to capture short timeframe of diarrheal
   diseases and neonatal causes
 
@@ -113,10 +113,11 @@ Demographics
 * Exit age (at what age to stop tracking simulants): **5 years**
 * Fertility: **Crude birth rate**
 
-Stratification
-++++++++++++++
+Output Stratification
++++++++++++++++++++++
 
-Stratify by **location, age, sex, and year**.
+See the :ref:`Output Stratification Groups Table <stratification_groups_table>`
+and the :ref:`Raw Outputs Table <raw_outputs_table>`.
 
 Scenarios
 +++++++++
@@ -157,8 +158,17 @@ PAF-of-1 Cause/Risk Pairs
 Risk-Outcome Relationships
 ++++++++++++++++++++++++++
 
+Interventions
++++++++++++++
+
+* :ref:`Vitamin A Fortification <vitamin_a_intervention_section>`
+
+* :ref:`Iron Fortification <iron_intervention_section>`
+
+* :ref:`Folic Acid Fortification <folic_acid_intervention_section>`
+
 Stratifying Exposure Variables by Baseline Intervention Coverage
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+----------------------------------------------------------------
 
 .. todo::
 
@@ -320,7 +330,7 @@ certain situations. We discuss the dichotomous and continuous cases in separate
 sections below.
 
 Baseline Coverage Stratification -- Dichotomous Variables (Coverage Gap Framework)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This method applies to exposures with dichotomous measures such as Vitamin A deficiency or neural tube defects:
 
@@ -368,7 +378,7 @@ coverage of vitamin A fortified food, this value --> :math:`C_{vita}`, and
 shifts the amount of people who receive equation 1 to equation 2.
 
 Baseline Coverage Stratification -- Continuous Variables
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 This method applies to continuous exposure variables such as hemoglobin or birth
 weight.
@@ -393,7 +403,7 @@ below.
   strategy we pick.
 
 Model Randomness
-++++++++++++++++
+----------------
 
 Random samples drawn from distributions of **intervention effect sizes**
 should be identical across model locations for each draw.
@@ -407,14 +417,16 @@ This is to ensure that differences in intervention impact across model
 locations are attributable to disease burden in each model location rather
 than randomness in sampling from the effect size distribution.
 
-Interventions
-+++++++++++++
+Intervention Descriptions
+-------------------------
+
+.. _vitamin_a_intervention_section:
 
 Vitamin A Fortification
-~~~~~~~~~~~~~~~~~~~~~~~
++++++++++++++++++++++++
 
 Research Considerations
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In this model, the vitamin A fortification intervention affects the
 **prevalence of vitamin A deficiency**. The effect size for this intervention
@@ -520,7 +532,7 @@ onset of exposure to vitamin A fortification, including:
  	Add more detail regarding the time to response.
 
 Effect Size - Vitamin A
-^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~
 
 In our Vivarium simulation, the effect of exposure foods **not** fortified
 with vitamin A on the prevalence of vitamin A deficiency realtive to those
@@ -585,7 +597,7 @@ as follows:
 	via links.
 
 Time to Response
-^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~
 
 Further, the time-to-response to vitamin A fortification in years should also
 be sampled such that:
@@ -610,7 +622,7 @@ be sampled such that:
 	response_time_distribution = lognorm(s=sigma, scale=median)
 
 Population Coverage Data
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 The coverage algorithm for vitamin A fortification should follow the same approach described
 in this concept model document for folic acid fortification (see `Population Coverage Data - Iron and Folic Acid`_).
@@ -664,7 +676,7 @@ existing coverage of folic acid in Ethiopia).
 	Federal Democratic Republic of Ethiopia, 2011).
 
 Effect of Intervention on Simulants
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As described in the research considerations section, the
 intervention effect is dependent on age and time since intervention coverage.
@@ -730,7 +742,7 @@ Where,
 	- rr_i is the relative risk assigned to the individual simulant
 
 Summary of Vitamin A Intervention Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The pseudo-code used to implement the vitamin A intervention effect in Vivarium
 is shown below. This summary was written by James and sent to Ali and Nathaniel
@@ -780,11 +792,13 @@ via Slack on March 19, 2020.
 
 	Perhaps need to make coverage inclusive such that: qx_i > exposure*(t) and qx_i >= coverage*(t) for future model runs
 
+.. _iron_intervention_section:
+
 Iron Fortification
-~~~~~~~~~~~~~~~~~~
+++++++++++++++++++
 
 Population Coverage Data and Coverage Algorithm - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The baseline coverage for iron fortification is the same as the baseline
 coverage for folic acid fortification, as described below_. Additionally, the
@@ -809,7 +823,7 @@ the following scenarios:
 	vice versa.
 
 Effect Size - Iron
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 Iron fortification of staple food affects two outcomes in our simulation
 model. The first outcome is an individual's hemoglobin concentration following
@@ -818,7 +832,7 @@ simulant's birth weight following the *maternal* consumption of iron fortified
 foods.
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 The effect of iron fortified food consumption on children under 7 years of age
 was obtained from the [Keats-et-al-2019]_ systematic review. However, the
@@ -883,7 +897,7 @@ as follows:
 	confidence interval around the mean.
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 The effect of maternal consumption of iron fortified food on infant birth
 weight was obtained from [Haider-et-al-2013]_. According to this data
@@ -1050,10 +1064,10 @@ See the following section to see if/how to apply the *bw_shift_i* parameter to
 individual simulants.
 
 Determining Whether A Simulant is Affected - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 For the purposes of our simulation, we made a few assumptions:
 
@@ -1234,35 +1248,69 @@ Combining everything:
 
   # At the individual simulant level, at each time step (time = t)
 
+  # Determine whether simulant's household is receiving iron-fortified food,
+  # regardless of whether the simulant is iron-responsive
   household_covered_i(t)  = time_covered_i <= t
                           = p_i < coverage(t)
 
+  # Effect on Hb:
   # Only adjust Hb level for iron-responsive individuals
   if iron_responsive_i:
-    # Effect on Hb:
-    # #calibrate for baseline coverage, and take into account
-    # the age-dependent effect size and the 6 month lag time.
 
+    # Shift iron-responsive simulants' Hb levels down to calibrate for baseline coverage.
+    # Take into account the age-dependent effect size but not the 6-month time lag.
     hb_i = hb_gbd(age_i(t)) - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
 
-    # Clip value to be >=1 in case shifting made it negative
+    # Clip Hb value to be >=1 in case shifting made it negative
     hb_i = np.clip(hb_i, 1, np.inf)
 
+    # Only increase simulant's Hb if their household is covered
     if household_covered_i(t):
+
       # Fortification starts either when the household receives coverage, or when
       # the child turns 6 months old and starts eating solids, whichever is later.
       # Recall that if the child is covered in baseline, then time_covered_i =
       # float('-inf'), so coverage always starts at age 6 months in this case.
-      time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
+      time_since_fortified_i(t) = min(t - time_covered_i, age_i(t) - 0.5)
+
+      # Increase simulant's Hb level by the appropriate amount, taking into
+      # account both the age-dependent effect and the 6-month time lag.
       hb_i += (hb_lag_fraction(time_since_fortified_i(t))
                * hb_age_fraction(age_i(t))
                * hb_shift
               )
-
 .. todo::
 
   Edit the above code to define all variables, make it valid Python code, and
   comment appropriately.
+  Here are the relevant definitions from the :ref:`summary <iron_intervention_summary>` below:
+
+  .. code-block:: Python
+
+    ## Definitions:
+    t                         := current time in years (t=0 is start of simulation)
+    time_covered_i            := time at which simulant's household first receives iron-fortified food
+    household_covered_i(t)    := whether child's household is receiving iron-fortified food at time t
+    time_since_fortified_i(t) := amount of time since child started eating iron-fortified food
+    hb_i(t)                   := simulant's hemoglobin level after adjusting for fortification
+
+    ## Population level parameters:
+    hb_shift                = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
+    baseline_coverage(t)    = iron fortification coverage at time t in baseline scenario
+      # Note: If delta_coverage is defined to be 0 in the baseline scenario, then
+      # the below strategies should work in both baseline and intervention scenarios
+    delta_coverage(t)       = change in coverage from baseline
+    coverage(t)             = iron fortification coverage at time t
+                            = baseline_coverage(t) + delta_coverage(t)
+
+    ## Individual level attributes:
+    p_i                     = propensity of simulant and mother for exposure to lack of iron fortification (~uniform(0,1))
+    iron_responsive_i       = whether individual is responsive to iron fortification
+    age_i(t)                = the simulant's age at time t
+    hb_gbd(age_i(t))        = hemoglobin level drawn from GBD for simulant
+      # This time is float('-inf') if simulant is covered in baseline
+      # and float('inf') if simulant never gets covered
+    time_covered_i          = argmin_t(p_i < coverage(t) == True)
 
 See below for a visual representation:
 
@@ -1285,7 +1333,7 @@ See below for a visual representation:
     (quadratic concave up) between 1 year and 1.5 years.
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 Our model will apply the effect size of maternal consumption of iron fortified
 foods on infant birth weight under the following assumptions:
@@ -1302,14 +1350,7 @@ and birth weight after adjusting for dose; however, the minimum duration of
 iron consumption in the studies included in [Haider-et-al-2013]_ was seven
 weeks, so we used this as the lower bound of necessary duration for our model.
 
-2. We assumed that each simulant was born at 40 weeks of gestation.
-
-.. todo::
-
-	Update this assumption pending confirmation to model gestational age
-	(Nathaniel will follow-up).
-
-3. A simulant's birth weight will affect their all-cause mortality rate
+2. A simulant's birth weight will affect their all-cause mortality rate
 during the early and late neonatal periods only. This assumption is a
 product of assumptions made in the modeling of the low birth weight and
 short gestation (LBWSG) risk factor in GBD (see :ref:`Low Birth Weight and Short Gestation (LBWSG) <2017_risk_lbwsg>`)
@@ -1318,6 +1359,25 @@ Therefore, for our simulation, an infant's mother must have gained coverage
 to iron fortified foods at least **twenty weeks prior to the birth of the
 infant** in order for the iron fortification coverage to affect the infant's
 birth weight.
+
+.. todo::
+
+  The algorithm description below assumes each simulant was born at 40 weeks of
+  gestation. This needs to be updated to to use the actual gestational ages of
+  simulants.
+
+  Also, the below algorithm has an incorrect description of how to initialize
+  the variable `mother_ate_iron_fortified_food` at the beginning of the
+  simulatiton. Namely, `mother_ate_iron_fortified_food` should be initialized to
+  `Unknown` for **all** simulants at the beginning of the simulation because 1)
+  we do not know the joint distribution of fortification status and birthweight
+  for any age group other than at birth, and 2) the variable
+  `mother_ate_iron_fortified_food` is not needed for anything except adjusting
+  the birthweight of simulants when they are born.
+
+  For the algorithm to take actual gestational ages into account and to
+  correctly initialize the simulation, see the :ref:`iron intervention summary
+  <iron_intervention_summary>`.
 
 .. note::
 
@@ -1367,10 +1427,10 @@ the simulant's birth weight (in grams). This may then impact their LBWSG risk
 category.
 
 Application of Effect to Simulants - Iron
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Hemoglobin Level
-''''''''''''''''
+^^^^^^^^^^^^^^^^
 
 The age- and time-dependent effect of iron fortification on a simulant's
 hemoglobin level (as documented in the sections above) should be **additively**
@@ -1388,7 +1448,7 @@ should **not** be applied to that simulant.
   See Baseline Calibration section below for special considerations regarding baseline coverage
 
 Birth Weight
-''''''''''''
+^^^^^^^^^^^^
 
 The time-dependent effect of iron fortification on a simulant's birth weight
 (as documented in the sections above) should be **additively** applied to a
@@ -1406,7 +1466,7 @@ effect size will then be used to determine the simulant's LBWSG risk category.
 .. _baseline_calibration_hb_bw_section:
 
 Baseline Calibration -- Hemoglobin and Birth Weight
-'''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A simulant's individual hemoglobin/birthweight value *in the baseline scenario* should be assigned as follows:
 
@@ -1437,10 +1497,34 @@ Where,
 
 See the proofs for this approach below.
 
-.. image:: baseline_calibration_proofs.png
+.. image:: baseline_calibration_proofs.PNG
+
+.. todo::
+
+  Update the above description to reflect the slightly more complicated
+  situations we actually have for Hb and birthweight. Namely:
+
+  * The birthweight effect size is not constant but varies between simulants.
+    Therefore, when we down-shift to account for baseline coverage at the
+    population level, we use the **average** effect size for the population,
+    whereas when we up-shift individual birthweights based on coverage status,
+    we use each simulant's individual effect size.
+
+  * The effect size for Hb depends on the simulant's age and has a time lag
+    during which the effect scales up from zero to the full age-dependent effect
+    size. Therefore, when we down-shift to account for baseline coverage at the
+    population level, we use only the age-dependent effect size, whereas when we
+    up-shift individual Hb levels based on coverage status, we use both the
+    age-dependent effect size **and** the time lag for the individual simulant
+    based on when they got coverage.
+
+  For the algorithms to account for these complexities, see the :ref:`iron
+  intervention summary <iron_intervention_summary>` below.
+
+.. _iron_intervention_summary:
 
 Summary of Iron Intervention Algorithm
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following Python-style pseudocode summarizes all the pieces of the iron
 intervention algorithm (for both birthweight and hemoglobin) and is intended to
@@ -1451,9 +1535,10 @@ clarify the intent.
 
 .. code-block::
 
+  import numpy as np
+
   ## Definitions:
   t                         := current time in years (t=0 is start of simulation)
-  t_end                     := time when simulation ends, in years since start (e.g. 6 years)
   n_weeks                   := n weeks, measured in years (e.g. n*7/365.25)
   time_covered_i            := time at which simulant's household first receives iron-fortified food
   mother_fortified_i        := whether simulant's mother got sufficient iron fortification during pregnancy
@@ -1461,11 +1546,6 @@ clarify the intent.
   time_since_fortified_i(t) := amount of time since child started eating iron-fortified food
   birthweight_i             := simulant's birthweight after adjusting for mother's iron consumption
   hb_i(t)                   := simulant's hemoglobin level after adjusting for fortification
-    # Coverage groups are used only for stratification
-  iron_coverage_group       := population subgroup indicating in which scenario (if any) the child's
-                               household received iron-fortified food by the end of the simulation
-  mother_iron_group         := population subgroup indicating in which scenario (if any) the child's
-                               mother got sufficient iron-fortification during pregnancy
 
   ## Population level parameters:
   hb_shift                = effect size on hemoglobin (normally disributed, mean 3.0 g/L)
@@ -1498,21 +1578,12 @@ clarify the intent.
   iron_responsive_i       = whether individual is responsive to iron fortification
   age_i(t)                = the simulant's age at time t
   hb_gbd(age_i(t))        = hemoglobin level drawn from GBD for simulant
-    # These times are both float('-inf') if simulant is covered in baseline
+    # This time is float('-inf') if simulant is covered in baseline
     # and float('inf') if simulant never gets covered
-  time_covered_baseline_i = argmin_t(p_i < baseline_coverage(t) == True)
   time_covered_i          = argmin_t(p_i < coverage(t) == True)
-    # Stratification on child's iron coverage
-  iron_coverage_group     = ('baseline' if time_covered_baseline_i <= t_end else
-                             'intervention_not_baseline' if time_covered_i <= t_end else
-                             'uncovered')
-                          = ('baseline' if p_i < baseline_coverage(t_end) else
-                             'intervention_not_baseline' if p_i < coverage(t_end) else
-                             'uncovered')
 
   ## At beginning of simulation (t=0):
   mother_fortified_i    = 'unknown'
-  mother_iron_group     = 'unknown'
     # Use GBD birthweight distribution at start of sim, because we don't have
     # the need or the data to stratify by baseline coverage after birth.
   birthweight_i         = birthweight_gbd_i
@@ -1521,14 +1592,6 @@ clarify the intent.
   critical_time       = t - gestational_age_i + 20_weeks
   mother_fortified_i  = ((time_covered_i <= critical_time) and
                          (t-time_covered_i) >= 7_weeks)
-    # For stratification on mother's iron coverage
-  mother_fortified_baseline_i
-                      = ((time_covered_baseline_i <= critical_time) and
-                         (t-time_covered_baseline_i) >= 7_weeks)
-                      = p_i < baseline_coverage(0) # since baseline coverage is constant
-  mother_iron_group   = ('baseline' if mother_fortified_baseline_i else
-                         'intervention_not_baseline' if mother_fortified_i else
-                         'uncovered')
     # Effect on birthweight:
     # Shift everyone's birthweight down to calibrate for baseline coverage
   birthweight_i       = birthweight_gbd_i - baseline_coverage(t) * mean_bw_shift
@@ -1538,37 +1601,44 @@ clarify the intent.
                       = flour_consumption_dist.rvs()
     bw_shift_i        = birthweight shift Z given flour consumption Y
                       = bw_response * iron_concentration * daily_flour_i
-    birthweight_i     = birthweight_i + bw_shift_i
+    birthweight_i     += bw_shift_i
 
   ## At each simulation time step (including t=0 or when simulant is born):
-      # Only adjust Hb level for iron-responsive individuals
+    # Determine whether simulant's household is receiving iron-fortified food,
+    # regardless of whether the simulant is iron-responsive
+  household_covered_i(t)  = time_covered_i <= t
+                          = p_i < coverage(t)
+    # Effect on Hb:
+    # Only adjust Hb level for iron-responsive individuals
   if iron_responsive_i:
-    household_covered_i(t)    = time_covered_i <= t
-                              = p_i < coverage(t)
-      # Fortification starts either when the household receives coverage, or when
-      # the child turns 6 months old and starts eating solids, whichever is later.
-      # Recall that if the child is covered in baseline, then time_covered_i =
-      # float('-inf'), so coverage always starts at age 6 months in this case.
-    time_since_fortified_i(t) = min(t - time_covered_i, t - age(t) + 0.5)
-      # Effect on Hb:
-      # #calibrate for baseline coverage, and take into account
-      # the age-dependent effect size and the 6 month lag time.
-    hb_i(t)                   = (hb_gbd(age_i(t))
-                                 - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
-                                 + (household_covered_i(t)
-                                    * hb_lag_fraction(time_since_fortified_i(t))
-                                    * hb_age_fraction(age_i(t))
-                                    * hb_shift
-                                   )
-                                )
+      # Shift iron-responsive simulants' Hb levels down to calibrate for baseline coverage.
+      # Take into account the age-dependent effect size but not the 6-month time lag.
+    hb_i = hb_gbd(age_i(t)) - baseline_coverage(t) *  hb_age_fraction(age_i(t)) * hb_shift
+      # Clip Hb value to be >=1 in case shifting made it negative
+    hb_i = np.clip(hb_i, 1, np.inf)
+      # Only increase simulant's Hb if their household is covered
+    if household_covered_i(t):
+        # Fortification starts either when the household receives coverage, or when
+        # the child turns 6 months old and starts eating solids, whichever is later.
+        # Recall that if the child is covered in baseline, then time_covered_i =
+        # float('-inf'), so coverage always starts at age 6 months in this case.
+      time_since_fortified_i(t) = min(t - time_covered_i, age_i(t) - 0.5)
+        # Increase simulant's Hb level by the appropriate amount, taking into
+        # account both the age-dependent effect and the 6-month time lag.
+      hb_i += (hb_lag_fraction(time_since_fortified_i(t))
+               * hb_age_fraction(age_i(t))
+               * hb_shift
+              )
+
+.. _folic_acid_intervention_section:
 
 Folic Acid Fortification
-~~~~~~~~~~~~~~~~~~~~~~~~
+++++++++++++++++++++++++
 
 .. _below:
 
 Population Coverage Data - Iron and Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Our `coverage algorithm`_ for folic acid and iron will use three parameters,
 :math:`a`, :math:`b`, and :math:`c`, which describe the existing level of
@@ -1630,7 +1700,7 @@ between 53% and 55% of the wheat flour is fortifiable, based data from
 for :math:`b` and :math:`c` have a width of 10% (chosen arbitrarily).
 
 Marginal distributions of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **For Ethiopia parameter** :math:`a`, assume
 
@@ -1727,7 +1797,7 @@ Here are the graphs of the Beta distributions for India (Rajasthan), Nigeria
 .. image:: coverage_india_nigeria.svg
 
 Obtaining national estimates of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For **Ethiopia**, the estimates in the table are already at the national level.
 
@@ -1770,7 +1840,7 @@ from the same paper and therefore could have a similar bias.
   Also, draw histograms for the distributions.
 
 Joint distribution of :math:`a`, :math:`b`, and :math:`c`
-'''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To ensure that :math:`a\le b\le c` for each location, we will use the
 `comonotone coupling <comonotonicity_>`_ of the three random variables. That is,
@@ -1811,7 +1881,7 @@ the national estimate  obtained as described above.
 .. _coverage_algorithm_section:
 
 Coverage Algorithm
-^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~
 
 .. todo::
 
@@ -1879,7 +1949,7 @@ In words, our intervention algorithm does the following:
     vehicle.
 
 Determining Whether a Simulant Is Affected - Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Folic acid `reduces the birth prevalence <effect size - folic acid_>`_ of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. In order for a newborn to have
@@ -1921,7 +1991,7 @@ probability that the newborn has a neural tube defect. We will describe how to
 do this below.
 
 Effect Size - Folic Acid
-^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~
 
 Folic acid fortification reduces the birth prevalence of :ref:`neural tube
 defects (NTDs) <2017_cause_neural_tube_defects>`. The effect size is measured as
@@ -1975,7 +2045,7 @@ as follows:
 
 
 Determining Whether a Simulant Is Born with an NTD
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The procedure here uses the standard coverage gap framework:
 
@@ -2016,7 +2086,9 @@ Desired Model Outputs
   :widths: 1 1 1 1 1 1 1
   :header-rows: 1
 
-.. csv-table:: Stratification Groups
+.. _stratification_groups_table:
+
+.. csv-table:: Output Stratification Groups
   :file: stratification_groups.csv
   :widths: 1 1 1 1 1 1
   :header-rows: 1
@@ -2025,6 +2097,8 @@ Desired Model Outputs
   :file: final_outputs.csv
   :widths: 1 1 1 1 1 1
   :header-rows: 1
+
+.. _raw_outputs_table:
 
 .. csv-table:: Raw Outputs
   :file: raw_outputs.csv
@@ -2037,7 +2111,8 @@ Desired Model Outputs
   random variable :math:`Y` in the population (e.g. a risk exposure variable
   like hemoglobin level or birthweight), there are (at least) two possible
   options for the raw outputs to report in ``output.hdf``. Both options require
-  calculating the *mean* of :math:`Y` as well as the variance:
+  calculating the *mean* of :math:`Y` as well as the variance, as well as the
+  *size of the population* for which the mean and variance are computed:
 
   1.  Directly record the *mean* and *variance* of :math:`Y` for the population
       in each random seed, then use the `law of total variance
@@ -2047,15 +2122,21 @@ Desired Model Outputs
       the variance of the population in each draw when aggregating over random
       seeds. That is, compute the variance of the means of :math:`Y` over the
       random seeds and the mean of the variances of :math:`Y` over the random
-      seeds, and add these together.
+      seeds, and add these together. The mean of the variances and the variance
+      of the means are both weighted averages, so for each random seed we need
+      the *size of the population* for which the mean and variance are being
+      computed in order to weight the components appropriately.
 
   2.  Record the *first moment* :math:`\sum_i y_i` and *second moment*
       :math:`\sum_i y_i^2` of :math:`Y` with respect to population measure, then
       compute the variance of :math:`Y` using the formula
       :math:`\operatorname{Var}(Y) = \operatorname{E}(Y^2) -
       (\operatorname{E}Y)^2`. With this option, the first and second moments can
-      be aggregated over random seeds simply by summing. **Caution:** It is
-      possible that this method can become `numerically unstable
+      be aggregated over random seeds simply by summing. Again, for each random
+      seed we also need the *size of the population* for which the mean and
+      variance are being computed, as the population size appears in the
+      denominator. **Caution:** It is possible that this method can become
+      `numerically unstable
       <https://en.wikipedia.org/wiki/Algorithms_for_calculating_variance>`_ if
       the population is very large or the values of :math:`Y` are very large,
       though typically this should not be a problem.
@@ -2076,6 +2157,8 @@ Desired Model Outputs
     - Add "low birthweight proportion" to Final Outputs table, and add
       corresponding numerator and denominator to Raw Outputs
     - Add coverage person-time to Raw Outputs table and Output Summary table
+    - Add incidence and remission to Final Outputs table and corresponding
+      transition counts to Raw Outputs table
     - Add "Additional Stratification" variables to Raw Outputs table
     - Change definitions of stratification groups to match our actual
       outputs (which are defined at time of measurement rather than simulant
@@ -2090,6 +2173,8 @@ Desired Model Outputs
       who turned that age between the last timestep and the current timestep
     - Add note to clarify that all measures are for *live* simulants (i.e. make
       sure to filter to "alive" simulants when doing stratification)
+    - Similar to the note about variance, specify more carefully how to compute
+      means and how to either aggregate them as population-weighted averages or report raw moments and populations
 
   - Take into account Ali's feedback from PR 226:
 
@@ -2179,6 +2264,53 @@ Model Limitations
   fortified food is the same as their mother's. It may be better to model these
   propensities as positively correlated but not necessarily identical.
 
+* For the iron effect on birthweight:
+
+  - We are assuming that flour consumption is independent of birthweight as
+    sampled by GBD. Thus we are not accounting for confounding by overall
+    caloric intake, which is likely correlated with both flour consumption as
+    well as birthweight.
+
+  - We are also assuming that fortification is independent of flour
+    consumption, given whether or not you eat flour. Thus we are not accounting
+    for confounding due to factors like urban vs. rural settings, which could be
+    correlated with both flour consumption and fortification.
+
+  - Ideally, we would want to get correlations between birthweight, flour
+    consumption, and fortification in our populations, so that we could create a
+    joint distribution to appropriately sample all three variables at once.
+    Accounting for this correlation would likely reduce the impact from
+    increased birthweight.
+
+* GBD data for neural tube defects, particularly for India, is low relative to
+  estimates of NTD burden from other data sources such as
+  [Kancherla-et-al-2018-India]_, [Dixon-et-al-2019]_,
+  [Kancherla-et-al-2018-Global]_, [Kancherla-et-al-2019]_. Therefore, we are
+  likely underestimating the impact of folic acid fortification in our
+  simulation, which relies upon GBD data.
+
+* GBD does not model folate deficiency, so we need to be careful that our
+  populations are comparable to the Keats study populations when applying the
+  effect size of folic acid fortification directly to the birth prevalence of
+  neural tube defects. (E.g., could there be some reason besides lack of
+  folate-rich food for a high rate of neural tube defects?)
+
+* The fortification scale-up strategy is relatively simple and does not capture
+  the numerous complexities of actually implementing a large-scale fortification
+  program. This design is deliberate, as the model is intended to provide an
+  upper bound on the potential impact fortification could have, by providing a
+  flexible framework to specify the maximum possible population coverage one
+  could hope to achieve with a given fortification strategy. Estimating what
+  this maximum possible coverage would be for a particular fortification
+  strategy is outside the scope of this model.
+
+* The model does not currently track individual sequelae of any cause (except
+  for anemia severity in the Iron Deficiency model), only overall DALYs due to
+  each cause, averaging over all sequalae.
+
+* The model does not currently allow modeling iron fortification and vitamin A
+  fortification together, because of different strategies for tracking anemia due to vitamin A deficiency in the two interventions.
+
 References
 ----------
 
@@ -2240,6 +2372,17 @@ References
     20;12(4):e0175952. doi: 10.1371/journal.pone.0175952. eCollection 2017.
 
 .. _`Diana et al. 2016`: https://www.ncbi.nlm.nih.gov/pubmed/28426828
+
+.. [Dixon-et-al-2019]
+
+  View `Dixon et al. 2019`_
+
+    Dixon, M, Kancherla, V, Magana, T, Mulugeta, A, Oakley, GP. High potential
+    for reducing folic acid‐preventable spina bifida and anencephaly, and
+    related stillbirth and child mortality, in Ethiopia. Birth Defects Research.
+    2019; 111: 1513– 1519. https://doi.org/10.1002/bdr2.1584
+
+.. _Dixon et al. 2019: https://doi.org/10.1002/bdr2.1584
 
 .. [Dror-and-Allen-2018]
 
@@ -2342,6 +2485,38 @@ References
     Imdad A, Ahmed Z, Bhutta ZA. Vitamin A supplementation for the prevention of morbidity and mortality in infants one to six months of age. Cochrane Database of Systematic Reviews 2016, Issue 9. Art. No.: CD007480. DOI: 10.1002/14651858.CD007480.pub3.
 
 .. _`Imdad et al. 2016`: https://doi.org/10.1002/14651858.CD007480.pub3
+
+.. [Kancherla-et-al-2018-Global]
+
+  View `Kancherla et al. 2018 (Global)`_
+
+    Kancherla, V, Wagh, K, Johnson, Q, Oakley, GP. A 2017 global update on folic
+    acid‐preventable spina bifida and anencephaly. Birth Defects Research. 2018;
+    110: 1139– 1147. https://doi.org/10.1002/bdr2.1366
+
+.. _Kancherla et al. 2018 (Global): https://doi.org/10.1002/bdr2.1366
+
+.. [Kancherla-et-al-2018-India]
+
+  View `Kancherla et al. 2018 (India)`_
+
+    Kancherla, V, Oakley, GP. Total prevention of folic acid‐preventable spina
+    bifida and anencephaly would reduce child mortality in India: Implications
+    in achieving Target 3.2 of the Sustainable Development Goals. Birth Defects
+    Research. 2018; 110: 421– 428. https://doi.org/10.1002/bdr2.1175
+
+.. _Kancherla et al. 2018 (India): https://doi.org/10.1002/bdr2.1175
+
+.. [Kancherla-et-al-2019]
+
+  View `Kancherla et al. 2019`_
+
+    Kancherla, V., Carmichael, S.L., Feldkamp, M.L. and Berry, R.J. (2019),
+    Teratology society position statement on surveillance and prevalence
+    estimation of neural tube defects. Birth Defects Research, 111: 5-8.
+    https://doi.org/10.1002/bdr2.1434
+
+.. _Kancherla et al. 2019: https://doi.org/10.1002/bdr2.1434
 
 .. [Keats-et-al-2019]
 
