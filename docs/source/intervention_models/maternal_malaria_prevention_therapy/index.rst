@@ -68,9 +68,7 @@ This is considered to be a strong recommendation based on high quality evidence.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
-
-  Document known baseline coverage data, using the table below if appropriate
+As IPTp-SP is recommended by the WHO in Malaria endemic ares in Africa for all pregnant women as part of routine ANC, baseline coverage of this intervention exists at variable levels. [Van-Eijk-et-al-2013]_ performed a meta-analysis of coverage of IPTp-SP among various countries in Sub-Saharan Africa up to 2011.
 
 .. list-table:: Baseline coverage data
   :header-rows: 1
@@ -80,11 +78,11 @@ Baseline Coverage Data
     - Coverage parameter
     - Value
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
+  * - Ethiopia
+    - Pregnant women
+    - Proportion of pregnant women covered by IPTp-SP
+    - 0
+    - Not recommended by Ethiopian government due to low malaria burden, as discussed by [Ouedraogo-et-al-2019]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -92,10 +90,6 @@ Vivarium Modeling Strategy
 .. todo::
 
   Add an overview of the Vivarium modeling section.
-
-.. todo::
-
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
 
 .. list-table:: Modeled Outcomes
   :header-rows: 1
@@ -212,3 +206,9 @@ References
 
 .. [Radeva-Petrova-et-al-2014]
   Radeva‐Petrova  D, Kayentao  K, ter Kuile  FO, Sinclair  D, Garner  P. Drugs for preventing malaria in pregnant women in endemic areas: any drug regimen versus placebo or no treatment. Cochrane Database of Systematic Reviews 2014, Issue 10. Art. No.: CD000169. DOI: 10.1002/14651858.CD000169.pub3. Accessed 31 August 2021.
+
+.. [Van-Eijk-et-al-2013]
+  Van Eijk, A. M., Hill, J., Larsen, D. A., Webster, J., Steketee, R. W., Eisele, T. P., & ter Kuile, F. O. (2013). Coverage of intermittent preventive treatment and insecticide-treated nets for the control of malaria during pregnancy in sub-Saharan Africa: a synthesis and meta-analysis of national survey data, 2009–11. The Lancet infectious diseases, 13(12), 1029-1042.
+
+.. [Ouedraogo-et-al-2019]
+  Ouedraogo, M., Kurji, J., Abebe, L., Labonté, R., Morankar, S., Bedru, K. H., Bulcha, G., Abera, M., Potter, B. K., Roy-Gagnon, M. H., & Kulkarni, M. A. (2019). Utilization of key preventive measures for pregnancy complications and malaria among women in Jimma Zone, Ethiopia. BMC public health, 19(1), 1443. https://doi.org/10.1186/s12889-019-7727-8]
