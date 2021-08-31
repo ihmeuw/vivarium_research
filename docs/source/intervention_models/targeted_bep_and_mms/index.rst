@@ -106,27 +106,27 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Value
     - Note
   * - Ethiopia
-    - General population
+    - Pregnant population
     - Percent who took antenatal iron for 90+ days
     - 10.6
     - DHS 2019
   * - India
-    - General population
+    - Pregnant population
     - Percent who took antenatal iron for 90+ days
     - 38.7
     - DHS 2017
   * - Mali
-    - General population
+    - Pregnant population
     - Percent who took antenatal iron for 90+ days
     - 28.0
     - DHS 2017
   * - Pakistan
-    - General population
+    - Pregnant population
     - Percent who took antenatal iron for 90+ days
     - 29.4
     - DHS 2017
   * - Tanzania
-    - General population
+    - Pregnant population
     - Percent who took antenatal iron for 90+ days
     - 21.4
     - DHS 2017
