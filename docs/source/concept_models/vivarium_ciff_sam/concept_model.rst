@@ -256,14 +256,12 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 5.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* LBWSG-Stunting Correlation
-
-* LBWSG-Wasting Correlation
+* :ref:`Child growth risk risk correlation <2019_risk_correlation_child_growth>`
 
 5.1.6 Feedback Loop Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Fedback Between Wasting and Infectious Diseases (Diarrhea, LRI, Measles)
+* Fedback Between Wasting and Infectious Diseases (Diarrhea)
 
 5.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -271,6 +269,18 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 * :ref:`Small quantity lipid based nutrient supplements (SQ-LNS) <lipid_based_nutrient_supplements>`
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
+
+* :ref:`Maternal Supplementation: Targeted Balanced Energy Protein and Maternal Micronutrient Supplementation <maternal_supplementation_intervention>`
+
+* Insecticide treated nets
+
+* Intermittent preventive therapy for pregnant women
+
+* Kangaroo care for preterm and low birthweight infants
+
+* Breastfeeding promotion
+
+* Preventive and therapeutic zinc
 
 .. _5.2:
 
