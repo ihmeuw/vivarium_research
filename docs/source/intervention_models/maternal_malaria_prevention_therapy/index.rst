@@ -17,7 +17,6 @@ Pregnancy increases the risk of malaria infection and malaria infection is assoi
 This intervention model document details the third portion of this WHO recommendation to prevent malaria in pregnant women living in malraia endemic areas.
 
 .. list-table:: Abbreviations
-  :widths: 15 15 15
   :header-rows: 1
 
   * - Abbreviation
@@ -47,7 +46,6 @@ Additionally the WHO publication Guidelines for the treatment of malaria (2015) 
 This is considered to be a strong recommendation based on high quality evidence.
 
 .. list-table:: Affected Outcomes
-  :widths: 15 15 15 15
   :header-rows: 1
 
   * - Outcome
@@ -75,7 +73,6 @@ Baseline Coverage Data
   Document known baseline coverage data, using the table below if appropriate
 
 .. list-table:: Baseline coverage data
-  :widths: 15 15 15 15 15
   :header-rows: 1
 
   * - Location
@@ -101,7 +98,6 @@ Vivarium Modeling Strategy
   Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
 
 .. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
   :header-rows: 1
 
   * - Outcome
@@ -111,87 +107,105 @@ Vivarium Modeling Strategy
     - Effect size measure
     - Effect size
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+  * - Birthweight
+    - Risk exposure
+    - 339
+    - Population mean birthweight (as continuous measure)
+    - Mean difference
+    - +84.18 grams (95% CI: 40.1, 128.3)
+    - Assume no difference in gestational age
 
-Affected Outcome #1
+Birthweight
 +++++++++++++++++++++
 
-.. important::
+The IPTp-SP intervention affects child birthweight exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. The intervention should result in an **additive change to a simulant's continuous birthweight exposure value at birth (or upon initialization into the early or late neonatal age groups).** We assume there is no corresponding change in a simulant's gestational age exposure value at birth.
 
-  Copy and paste this section for each affected outcome included in this document
-
-.. todo::
-
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
-  :widths: 15 15 15
+.. list-table:: IPTp-SP Effect on Birthweight Restrictions
   :header-rows: 1
 
   * - Restriction
     - Value
     - Note
   * - Male only
-    - 
+    - False
     - 
   * - Female only
-    - 
+    - False
     - 
   * - Age group start
-    - 
+    - Birth
     - 
   * - Age group end
-    - 
+    - Late neonatal
     - 
   * - Other
     - 
     - 
 
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15 
+.. list-table:: IPTp-SP Effect on Birthweight Effect Size
   :header-rows: 1
 
   * - Population
     - Effect size
+    - Source
     - Note
-  * - 
-    - 
-    - 
-  * - 
-    - 
-    - 
+  * - Overall
+    - +84.18 grams (95% CI: 40.1, 128.3)
+    - [Radeva-Petrova-et-al-2014]_, summary of findings table 8 
+    - Shift in population mean birthweight
 
-.. todo::
+.. note::
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+  [Radeva-Petrova-et-al-2014]_ also reported a relative effect of IPTp-SP on low birthweight <2500 grams of RR=0.81 (95% CI: 0.67 - 0.99). We will not use this in our modeling strategy, but it is useful for validation/generalizability.
 
-.. todo::
+**How to sample and apply effect sizes:**
 
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+- Assume a normal distribution of uncertainty within the confidence interval of the effect size in the table above (the code block below describes how to sample from this distribution).
+
+- Birthweight exposure values need to be calibrated to baseline IPTp-SP coverage in the baseline scenario
+
+.. code-block::
+
+  from scipy.stats import norm
+  def sample_from_normal_distribution(mean, lower, upper):
+      """Instructions on how to sample from a normal distribution given a mean value and
+      95% confidence interval for a parameter"""
+      std = (upper - lower) / 2 / 1.96
+      dist = norm(mean, std)
+      return dist.rvs()
+
+  for i in simulants:
+    """In the baseline scenario, we need to calibrate baseline coverage 
+    so that the difference between covered and uncovered babies, on 
+    average, equals to the effect shift AND that the population mean birthweight value
+    from GBD is approximately unchanged.
+    * bw_{i} represents the assigned continuous birthweight exposure value for a 
+    simulant sampled from GBD, which may or may not have already been affected by other 
+    factors such as maternal BMI, etc. BEFORE consideration of the impact of 
+    this intervention
+    * baseline_ifa_coverage represents the baseline coverage proportion"""
+    if baseline_itpt_coverage_{i} == 'uncovered':
+          baseline_supplemented_bw_{i} = bw_{i} - baseline_itpt_coverage_{draw} * itpt_shift_{draw}
+          if alternative_itpt_coverage_{i} == 'uncovered':
+            alternative_supplemented_bw_{i} = baseline_supplemented_bw_{i}
+          elif alternative_itpt_coverage_{i} == 'covered':
+            alternative_supplemented_bw_{i} = baseline_supplemented_bw_{i} + itpt_shift_{draw}
+      elif baseline_itpt_coverage_ == 'covered':
+          baseline_supplemented_bw_{i} = bw_{i} + (1 - baseline_itpt_coverage_{draw}) * itpt_shift_{draw}
+          # makes assumption that all simulants covered in baseline scenario are also covered in alternative scenario
+          alternative_supplemented_bw_{i} = baseline_supplemented_bw_{i}
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- IPTp using malaria chemoprevention rather than SP was found to *decrease* population mean birthweight [Radeva-Petrova-et-al-2014]_. We make the assumption that IPTp is performed using SP instead of malaria chemoprevention in accordance with the WHO recommendation in our model. 
+
+- Assume that the impact of IPTp-SP on birthweight is not mediated through an additional impact in gestational age. As gestational age has an indepedent impact on infant outcomes, this is a conservative assumption.
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the baseline scenario, the exposure distribution of birthweight (mean birthweight, if available) as well as the mortality rates among the neonatal age groups should match that of GBD. 
 
 References
 -----------
