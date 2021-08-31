@@ -253,9 +253,11 @@ For example, the TMREL for smoking would be "has never smoked." The
 corresponding concept on the population level is the **theoretical minimum risk
 exposure distribution (TMRED)**, which is the distribution of risk exposure that
 would yield the lowest possible population risk. For smoking, the TMRED would be
-the trivial probability distribution assigning everyone in the population to the
-TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
+the `degenerate probability distribution`_ assigning everyone in the population
+to the TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
 [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]_
+
+.. _degenerate probability distribution: https://en.wikipedia.org/wiki/Degenerate_distribution
 
 As discussed in the :ref:`causality section <causal_relationships>` of the :ref:`general research page <general_research>`,
 counterfactual analysis is used to describe the causal relationship between a
