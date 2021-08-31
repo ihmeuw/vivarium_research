@@ -256,22 +256,26 @@ Risk effect in GBD
 The measure of risk effect in GBD is usually reported in relative term, namely
 relative risk. It describes the relative relationship between the risk of
 disease Y in the presence of agent X versus in absence of X. Mathematically,
-it's calculated by dividing the incidence rate of cause in exposed population
-by the incidence rate of cause in unexposed population for a certain risk factor.
+it's calculated by dividing the incidence rate (or other measure such as the
+excess mortality rate) of the cause in exposed population by the incidence rate
+(or other measure) of the cause in unexposed population for a certain risk factor.
 For example, if there are A incident cases and B person-years in exposed group;
 C incident cases and D person-years in unexposed group, then the relative risk
 (rate ratio) equals :math:`\frac{AD}{BC}`. Note that there are exceptions as in
 the low birth weight short gestation (LBWSG) risk factor where the relative risk
-is the ratio of all-cause mortality rate (ACMR) rather than incidence rate we mentioned above. Therefore, we'd better check with GBD modeller what relative
-risk they refer to before we model any risk-outcome pair in vivarium.  
+is the ratio of all-cause mortality rate (ACMR) rather than incidence rate we
+mentioned above. Therefore, we'd better check with GBD modeller what relative
+risk they refer to before we model any risk-outcome pair in vivarium.
 
 Risk effect in vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^
-In vivarium, we used to build the risk-outcomes component in order to study the impact of desired outcomes contributed by given risk exposure. The outcome might
+In vivarium, we used to build the risk-outcomes component in order to study the
+impact of desired outcomes contributed by given risk exposure. The outcome might
 be a cause (e.g. ischemic heart disease attributable to high body-mass index)
 or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
-For a risk-cause pair, simulation model would link the incidecen of that cause
-to the relative risk from GBD or external data sources like literature evidence.
+For a risk-cause pair, simulation model would link the incidecen (or other measure
+such as excess mortality rate) of that cause to the relative risk from GBD or
+external data sources like literature evidence.
 The mathematical expressions are mainly fall into two categories:
  - risk exposure is categorical distributed:
      - :math:`i_{exposed} = i \times (1-PAF) \times RR`
@@ -297,7 +301,11 @@ between BMI and IHD (:math:`\mu_{1}`) and the indirect effect is the product
 of risk effect between BMI and SBP (:math:`\mu_{2}`) and risk effect between
 SBP and IHD (:math:`\mu_{3}`). Therefore, the total risk effect is the sum of
 direct and indirect effect, namely :math:`\mu_{1} + \mu_{2} \times \mu_{3}`
-based on a linear approach.
+based on a linear approach. Note that we need to check with GBD modeler whether 
+the relative risk from GBD the direct, indirect or total effects and then choose 
+the appropriate one in our model.
+
+.. image:: mediation_example_bmi.svg
 
 Definitions
 -----------
