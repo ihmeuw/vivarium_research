@@ -13,21 +13,21 @@ the virus, and last 7-10 days. Symptoms include fever, cough, runny nose,
 conjunctivitis, characteristic white spots inside the cheek (called Koplik's
 spots), and a red, flat, blotchy skin rash that develops on average 14 days
 after exposure to the virus (range, 7-21 days) and lasts 5-6 days. Recovery from
-measles confers lifelong immunity. [WHO]_, [CDC]_, [Wikipedia]_,
-[GBD-2017-YLD-Capstone-Appendix-1]_
+measles confers lifelong immunity. [WHO-Measles-2019]_, [CDC-Measles-2019]_, [Wikipedia-Measles-2019]_,
+[GBD-2017-YLD-Capstone-Appendix-1-Measles-2019]_
 
 Most measles-related deaths are caused by complications associated with the
 disease. The most serious complications include blindness, encephalitis, severe
 diarrhea, ear infections, and pneumonia. Serious complications are more common
 in children under the age of 5 or adults over the age of 30, especially those
 with vitamin A deficiency or those whose immune systems have been weakened by
-HIV/AIDS or other diseases [WHO]_.
+HIV/AIDS or other diseases [WHO-Measles-2019]_.
 
 Measles is spread by coughing and sneezing, close personal contact, or direct
 contact with infected nasal or throat secretions. The virus remains active and
 contagious in the air or on infected surfaces for up to 2 hours. It can be
 transmitted by an infected person from 4 days prior to the onset of the rash to
-4 days after the rash erupts [WHO]_, [CDC]_, [Wikipedia]_.
+4 days after the rash erupts [WHO-Measles-2019]_, [CDC-Measles-2019]_, [Wikipedia-Measles-2019]_.
 
 Before the introduction of a measles vaccine in 1963 and widespread vaccination,
 major epidemics occurred approximately every 2–3 years, and measles caused an
@@ -36,10 +36,10 @@ approximately 110,000 people died from measles in 2017, mostly children under
 the age of 5 years. However, due to accelerated immunization activities, global
 measles deaths have decreased 80% during the period 2000–2017, from an estimated
 545,000 to  110,000, and measles vaccination prevented an estimated  21.1
-million deaths during 2000–2017 [WHO]_.
+million deaths during 2000–2017 [WHO-Measles-2019]_.
 
 The `ICD 10`_ codes for measles are B05-B05.9, Z24.4, and ICD 9 codes are
-055-055.9, 484.0, V04.2, V73.2 [GBD-2017-YLD-Capstone-Appendix-1]_.
+055-055.9, 484.0, V04.2, V73.2 [GBD-2017-YLD-Capstone-Appendix-1-Measles-2019]_.
 
 .. _measles: https://en.wikipedia.org/wiki/Measles
 .. _ICD 10: https://en.wikipedia.org/wiki/ICD-10
@@ -239,7 +239,7 @@ Data Description
    * - I
      - disability weights
      - disability_weight_s117 :math:`\times` prevalence_s117+ disability_weight_s118 :math:`\times` prevalence_s118
-     - GBD assumes 50% of measles cases as severe and other 50% as moderate [GBD-2017-YLD-Capstone-Appendix-1]_.
+     - GBD assumes 50% of measles cases as severe and other 50% as moderate [GBD-2017-YLD-Capstone-Appendix-1-Measles-2019]_.
    * - R
      - prevalence
      - See below
@@ -316,7 +316,7 @@ This approach makes the following assumptions:
      - I
      - R
      - remission_rate_c341 :math:`= \frac{\text{365 person-days}}{\text{10 person-days} \times \text{1 year}}` :math:`= \frac{\text{36.5}}{\text{year}}`
-     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1]_. So constant remission rate is approximated to this calculation. 
+     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1-Measles-2019]_. So constant remission rate is approximated to this calculation. 
 
 
 .. list-table:: Data Sources
@@ -352,7 +352,7 @@ This approach makes the following assumptions:
      - YLD appendix
      - n/a
      - Remission rate for measles
-     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1]_. So constant remission rate is calculated from this assumption. 
+     - GBD assumes average case duration as 10 days [GBD-2017-YLD-Capstone-Appendix-1-Measles-2019]_. So constant remission rate is calculated from this assumption. 
    * - disability_weight_s{`sid`}
      - YLD appendix
      - n/a
@@ -372,22 +372,26 @@ Simulation results should replicate the GBD 2019 cause-specific mortality rate, 
 References
 ----------
 
-.. [WHO] Measles Fact Sheet. World Health Organization, 9 May 2019.
+.. [WHO-Measles-2019] Measles Fact Sheet. World Health Organization, 9 May 2019.
    Retrieved 13 Nov 2019.
    https://www.who.int/news-room/fact-sheets/detail/measles
 
-.. [CDC] Chapter 13: Measles.
+.. [CDC-Measles-2019] Chapter 13: Measles.
    :title:`Epidemiology and Prevention of Vaccine-Preventable Diseases
    (The Pink Book, 13th Edition)`.
    Centers for Disease Control and Prevention, 2015.
    Retrieved 13 Nov 2019.
    https://www.cdc.gov/vaccines/pubs/pinkbook/meas.html
 
-.. [Wikipedia] Measles. From Wikipedia, the Free Encyclopedia.
+.. [Wikipedia-Measles-2019] Measles. From Wikipedia, the Free Encyclopedia.
    Retrieved 13 Nov 2019.
    https://en.wikipedia.org/wiki/Measles
 
-.. [GBD-2017-YLD-Capstone-Appendix-1]
+.. todo::
+
+   update this cite to 2019
+
+.. [GBD-2017-YLD-Capstone-Appendix-1-Measles-2019]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
    Collaborators. Global, regional, and national incidence, prevalence, and
    years lived with disability for 354 diseases and injuries for 195 countries

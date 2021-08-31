@@ -48,7 +48,9 @@ GBD 2019 Modeling Strategy
 
 .. note::
 
-	This section will describe the GBD modeling strategy for risk effects. For a description of GBD modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
+   This section will describe the GBD modeling strategy for risk effects. For a
+   description of GBD modeling strategy for risk exposure, see the :ref:`Low
+   Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>` page.
 
 **The available data for deriving relative risk was only for all-cause
 mortality.**
@@ -59,7 +61,7 @@ except for the USA, sex-specific data were combined to maximise sample size. The
 USA analyses were sex-specific.
 **Relative risks of all-cause mortality were calculated for each 500g and 2wk
 category of birthweight and gestational age.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. note::
 
@@ -106,7 +108,7 @@ regression and then converted into mortality risk.
 To calculate mortality relative risks, the risk of each joint two-week
 gestational age and 500-gram birthweight category were divided by the risk of
 mortality in the joint gestational age and birthweight category with the lowest
-mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+mortality risk. [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
 
 .. note::
 
@@ -131,7 +133,9 @@ across all available sources and selected outcomes based on criteria of
 biological plausibility. **Some causes, most notably congenital birth defects,
 haemoglobinopathies, malaria, and HIV/AIDS, were excluded based on the criteria
 that reverse causality could not be excluded.**
-[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 176)
+
+.. _lbwsg_affected_causes_table_gbd_2019:
 
 .. list-table:: Entities Affected by LBWSG in GBD 2019
    :widths: 5 5 5 5 5
@@ -268,12 +272,66 @@ Restrictions
 Risk Exposure Categories and TMREL
 ++++++++++++++++++++++++++++++++++
 
+Here is a plot `created by Kjell <kjell_lbwsg_category_rr_notebook_>`_ that
+shows the LBWSG exposure categories and the mean relative risk estimate in each
+category (the mean is taken across all all sexes, age groups, and draws):
+
+.. image:: LBWSG_with_RR.png
+
+Based on the GBD data as shown above, there are **four TMREL categories** where
+the relative risk is always at the minimum 1.0 regardless of sex, age group, or
+draw (recall that the relative risks are the same for all locations):
+
+- cat53 (38-40 weeks, 4000-4500 g)
+- cat54 (38-40 weeks, 3500-4000 g)
+- cat55 (40-42 weeks, 3500-4000 g)
+- cat56 (40-42 weeks, 4000-4500 g)
+
+Here is the description of the modeling procedure for the TMREL in
+[GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 177):
+
+  For each of the country-derived relative risk surfaces, the 500-gram and
+  two-week gestational age joint bin with the lowest risk was identified. This
+  bin differed within each country dataset. To identify the universal 500-gram
+  and two-week gestational age category that would serve as the universal TMREL
+  for our analysis, we chose the bins that was identified to be the TMREL in
+  each country dataset to contribute to the universal TMREL. Therefore, the
+  joint categories that served as our universal TMREL for the LBWSG risk factor
+  were “38-40 weeks of gestation and 3500-4000 grams”, “38-40 weeks of gestation
+  and 4000-4500 grams”, and “40-42 weeks of gestation and 4000-4500 grams”. As
+  the joint TMREL, all three categories were assigned to a relative risk equal
+  to 1.
+
+.. note::
+
+  The above description from the risk appendix indicates that there are only
+  **three** universal TMREL categories (cat54, cat53, and cat56), whereas the RR
+  data in GBD 2019 indicates that cat55 is also a TMREL category.
+
+  Moreover, digging further into the RR data reveals that in addition to the 4 categories that have RR=1 for all sexes, age groups, and draws (cat53, cat54, cat55, cat56):
+
+  - There is one additional category (cat52) that has RR=1 for early neonatal
+    females for all draws;
+  - The two categories cat51 and cat52 have RR=1 in more than 75% of draws in
+    the early neonatal age group for both males and females;
+  - There are 4 additional categories (cat44, cat48, cat49, cat50) that have
+    RR=1 in at least one age/sex/draw combination.
+
+  Thus, it may be worth discussing with the GBD modeler whether using the four
+  categories cat53, cat54, cat55, cat56 as the TMREL regardless of sex, age
+  group, or draw is a reasonable approach.
+
+.. _kjell_lbwsg_category_rr_notebook: https://github.com/KjellSwedin/investigate_lbwsg_categories/blob/main/LSFF_Expose_RR.ipynb
+
 Vivarium Modeling Strategy
 --------------------------
 
 .. note::
 
-	This section will describe the Vivarium modeling strategy for risk effects. For a description of Vivarium modeling strategy for risk exposure, see the :ref:`risk exposure <2019_risk_exposure_lbwsg>` page.
+   This section will describe the Vivarium modeling strategy for risk effects.
+   For a description of Vivarium modeling strategy for risk exposure, see the
+   :ref:`Low Birthweight and Short Gestation (GBD 2019)
+   <2019_risk_exposure_lbwsg>` page.
 
 Interpolation of LBWSG Relative Risks
 +++++++++++++++++++++++++++++++++++++
@@ -522,11 +580,34 @@ Implementation of RR Interpolation in SciPy
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
 
-.. todo::
+We will follow the same strategy detailed in the :ref:`GBD 2017 LBWSG
+documentation <riks_effects_vivarium_section>`, with modifications to account
+for the continuous relative risk function defined by the interpolation method
+described above. In particular, we will need to compute a PAF for the
+interpolated RRs rather than using the PAF from GBD.
 
-  List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
+The relative risk of each LBWSG category in GBD is for *all-cause mortality* in
+the early and late neonatal periods. However, GBD identifies only a *subset* of
+causes (not *all* causes) that are affected by LBWSG, listed in the
+:ref:`affected entities table above <lbwsg_affected_causes_table_gbd_2019>`.
+Therefore, despite the RR's being measured for *all*-cause mortality, **we are
+interested in applying the relative risks only to the cause-specific mortality
+rates of the causes that GBD considers to be affected by LBWSG.**
 
-.. list-table:: Risk Outcome Relationships for Vivarium
+First we decompose the all-cause mortality rate (ACMR) as the sum of:
+
+   - Mortality from causes **affected** by LBWSG and **modeled** in the sim
+   - Mortality from causes **affected** by LBWSG but **not modeled** in the sim
+   - Mortality from causes **unaffected** by LBWSG and **modeled** in the sim
+   - Mortality from causes **unaffected** by LBWSG but **not modeled** in the sim
+
+We want to apply the relative risk and PAF only to the causes in the first two
+categories above. Specifically, we will apply the relative risks to the *excess
+mortality rate* (EMR) of modeled affected causes, and to the *cause-specific
+mortality rate* (CSMR) of unmodeled affected causes, as indicated in the
+following table.
+
+.. list-table:: Risk-Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -535,10 +616,65 @@ Affected Outcomes in Vivarium
      - Outcome ID
      - Affected measure
      - Note
-   * -
+   * - Diarrheal diseases
+     - Cause
+     - 302
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Lower respiratory infections
+     - Cause
+     - 322
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Upper respiratory infections
+     - Cause
+     - 328
+     - CSMR if unmodeled, EMR if modeled
      -
+   * - Otitis media
+     - Cause
+     - 329
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Meningitis
+     - Cause
+     - 332
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Encephalitis
+     - Cause
+     - 337
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Neonatal preterm birth
+     - Cause (PAF-of-1)
+     - 381
+     - CSMR if unmodeled, EMR if modeled
+     - **Note:** Preterm birth may need to be handled differently if explicitly modeled
+   * - Neonatal encephalopathy due to birth asphyxia and trauma
+     - Cause
+     - 382
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Neonatal sepsis and other neonatal infections
+     - Cause
+     - 383
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Hemolytic disease and other neonatal jaundice
+     - Cause
+     - 384
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Other neonatal disorders
+     - Cause
+     - 385
+     - CSMR if unmodeled, EMR if modeled
+     -
+   * - Sudden infant death syndrome
+     - Cause
+     - 686
+     - CSMR if unmodeled, EMR if modeled
      -
 
 Risk Outcome Pair #1
@@ -589,6 +725,118 @@ Validation and Verification Criteria
 .. todo::
 
   List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
+
+Validation of Mortality Rates, Relative Risks, and Change in Exposure
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Here is a validation that can be run in isolation prior to putting the LBWSG model into a full simulation with other model components:
+
+#.  Initialize a birth cohort with birthweights and gestational ages
+    distributed according to the LBWSG exposure distribution at birth
+    (age_group_id=164).
+
+#.  Age the population to 7 days and to 28 days, subjecting the population to
+    the LBWSG relative risks of all-cause mortality based on their LBWSG
+    category.
+
+#.  Record the person-time in the early neonatal age group (0-7 days) and late
+    neonatal age group (7-28 days) **in each of the 58 LBWSG categories**. Use
+    the person time to compute the person-time-weighted average prevalence of
+    each LBWSG catgory in each age group as
+
+    .. math::
+
+      \left(\genfrac{}{}{0}{}
+        {\text{person-time-weighted}}
+        {\text{average prevalence}}\right)
+      = \frac
+        {\text{person-time in category for age group}}
+        {\text{total person time for age group}},
+
+    and compare the simulated prevalences with the ENN and LNN category
+    prevalences pulled from GBD.
+
+#.  Record deaths in the ENN and LNN age groups, and compare the mortality
+    rates with the corresponding all-cause mortality rates in GBD. Deaths could
+    also be stratified by LBWSG category to verify simulated RRs against the RR
+    input data.
+
+This validation could be run with increasing degrees of complexity:
+
+a.  Apply the RRs directly to the all-cause mortality rate of the simulants. (Or
+    did we already try this and decide it was a bad idea? See this :ref:`Todo
+    about different approaches <2017_risk_lbwsg_todo_alternative_approaches>`
+    and the :ref:`assumptions and limitations of our approach to applying the
+    relative risks <2017_risk_lbwsg_rr_strategy_assumptions_limitations>` in the
+    GBD 2017 LBWSG model.)
+
+b.  Do not explicitly model any causes, but distinguish between causes affected
+    by LBWSG vs. unaffected by LBWSG, and apply the RRs only to the CSMRs of the
+    affected causes.
+
+c.  Add in one or more explicitly modeled causes, and apply the the RRs to the
+    EMR or CSMR of the affected causes, depending on whether the cause is
+    explicitly modeled.
+
+d.  The validation could also be done by initializing a cohort in the ENN age
+    group or LNN age group based on GBD prevalences, to ensure that the LBWSG
+    relative risks will work correctly for simulants initialized into these age
+    groups in our models.
+
+This validation strategy requires recording outputs stratified by all 58 LBWSG
+exposure categories, so it would be best to do the validation with as few model
+components as possible, then remove the stratified outputs once satisfactory
+behavior has been verified. In fact, it would be worth writing a reusable
+simulation specifically to do the (a), (b), and (d) validations above,
+independent of any specific project we're working on, and do the (c) validation
+for each project that uses LBWSG, depending on which causes are modeled.
+
+.. note::
+
+  We should ask the GBD modelers exactly how to interpret the ENN and LNN
+  prevalences pulled from GBD. According to
+  [GBD-2019-Risk-Factors-Appendix-LBWSG-Risk-Effects]_ (p. 175), the final step
+  of modeling LBWSG exposure is:
+
+    **Step C: Model joint distributions from birth to the end of the neonatal period, by l/y/s**
+
+    Early neonatal prevalence and late neonatal prevalence were estimated using
+    life table approaches for each 500g and 2-week bin. Using the all-cause
+    early neonatal mortality rate for each location-year-sex, births per
+    location-year-sex-bin, and the relative risks for each location-year-sex-bin
+    in the early neonatal period, the all-cause early neonatal mortality rate
+    was calculated for each location-year-sex- bin. The early neonatal mortality
+    rate per bin was used to calculate the number of survivors at seven days and
+    prevalence in the early neonatal period. Using the same process, the
+    all-cause late neonatal mortality rate for each location-year-sex was paired
+    with the number of survivors at seven days and late neonatal relative risks
+    per bin to calculate late neonatal prevalence and survivors at 28 days.
+
+  Specifically, we should ask the following:
+
+  - How exactly were the ENN and LNN prevalences computed in the above life
+    table approach? In particular:
+
+    - Can we interpret the ENN and LNN prevalences as person-time-weighted
+      average LBWSG category prevalences for the 0-7 day period and 7-28 day
+      periods, as described in the validation strategy above?
+
+    - Should the ENN and LNN prevalences instead be interpreted as the point
+      prevalence at the *midpoint* of each interval? The point prevalence at the
+      midpoint approximates the person-time-weighted average prevalence using the
+      midpoint rule with one rectangle, so these should be close to the average
+      prevalences but perhaps slightly different.
+
+    - Is there some other interpretation that would be more accurate?
+
+  - In addition to the ENN and LNN prevalences from GBD, can the modelers give
+    us the prevalences *at* 7 days and 28 days, since the above description
+    indicates that these point prevalences were computed as well?
+
+  The answers to these questions may dictate some adjuststments to the
+  validation strategy outlined above.
+
+
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

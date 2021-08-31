@@ -177,11 +177,11 @@ State and Transition Data Tables
    * - Sev
      - excess mortality rate (EMR) for severe DM 
      - :math:`\frac{\text{CSMR*_c587}}{\text{prevalence_c587}}`
-     - cause-specific mortality rate of DM (*indicates calculated measure) / prevalence of DM
+     - cause-specific mortality rate of DM (\*indicates calculated measure) / prevalence of DM
    * - M
      - excess mortality rate (EMR) of moderate DM
      - :math:`\frac{\text{CSMR*_c587}}{\text{prevalence_c587}}`
-     - cause-specific mortality rate of DM (*indicates calculated measure) / prevalence of DM 
+     - cause-specific mortality rate of DM (\*indicates calculated measure) / prevalence of DM
    * - M
      - disability_weight
      - :math:`\frac{{\sum_{s\in \text{sequelae_mod}}} \scriptstyle{\text{disability_weight}_s \times\ \text{prevalence}_s}}{\text{prevalence_c587}}`

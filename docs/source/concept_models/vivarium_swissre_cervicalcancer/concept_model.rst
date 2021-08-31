@@ -71,14 +71,15 @@ Vivarium CSU Cervical Cancer Simulation
      - incidence of cervical cancer
    * - csmr_c432
      - cause-specific mortality rate of cervical cancer
+
 see :ref:`full disease state definition<2017_cancer_model_cervical_cancer>`
 
-.. _1.0:
+.. _swcc1.0:
 
 1.0 Background
 ++++++++++++++
 
-.. _1.1:
+.. _swcc1.1:
 
 1.1 Project overview
 --------------------
@@ -93,7 +94,7 @@ new screening technologies and vaccination. All forecasts will represent the Swi
 Re’s insured population from the weighted blend of Chinese provinces. Forecasts 
 run from year 2020 to 2040.
 
-.. _1.2:
+.. _swcc1.2:
 
 1.2 Literature review
 ---------------------
@@ -103,7 +104,7 @@ run from year 2020 to 2040.
  add more literature background
 
 
-.. _2.0:
+.. _swcc2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -114,12 +115,12 @@ insured person-years) in order to identify pay-out trends for cervical cancer
 claims.
 
 
-.. _3.0:
+.. _swcc3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _3.1:
+.. _swcc3.1:
 
 3.1 Causal variables
 --------------------
@@ -141,7 +142,7 @@ Mediators
  - N/A
 
 
-.. _4.0:
+.. _swcc4.0:
 
 4.0 Intervention
 ++++++++++++++++
@@ -152,12 +153,13 @@ strategic in nature. [WHO cervical cancer elimination strategy]_
 Based on SwissRe's interest, our simulation intervention combined the cervical 
 cancer screening and HPV vaccination to evaluate the cervical cancer detection 
 in following scenarios:
- - Baseline (status quo scenario): keep HPV vaccination and cervical cancer 
+
+ - Baseline (status quo scenario): keep HPV vaccination and cervical cancer
    screening coverage constant over time among insured female.
  - Alternative (expected future scenario): scale-up of both cervical cancer 
    screening and HPV vaccination over time among insured female.
 
-.. _4.1:
+.. _swcc4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -214,24 +216,24 @@ cervical cancer screening coverage remain constant in 2030 to 2040.
    guided by IHME and SwissRe's assumption for Chinese insured female.
 
 
-.. _5.0:
+.. _swcc5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _swcc5.1:
 
 5.1 Vivarium concept model 
 --------------------------
 
 .. image:: cervical_cancer_concept_model_diagram.svg
 
-.. _5.2:
+.. _swcc5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _swcc5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -241,7 +243,7 @@ cervical cancer screening coverage remain constant in 2030 to 2040.
  - Time span: Jan 1, 2020 to Dec 31, 2040 with 36.5-day time-steps.
  - Location: blended with province-specific weight in China.
 
-.. _5.2.2:
+.. _swcc5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -306,19 +308,19 @@ provinces.
 
 See column **noised_forecast** for output value.
 
-.. _5.3:
+.. _swcc5.3:
 
 5.3 Models
 ----------
 
-.. _5.3.1:
+.. _swcc5.3.1:
 
 5.3.1 Core cervical cancer model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 see :ref:`cervical cancer cause model<2017_cancer_model_cervical_cancer>`
 
-.. _5.3.2:
+.. _swcc5.3.2:
 
 5.3.2 Screening and detection model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -426,8 +428,10 @@ Cervical cancer screening algorithm was determined by three variables
    to be screened.
  - HPV- specificity value 94.1% is HPV test alone as a proxy for co-test HPV test 
    specificity ( `Reference paper <https://search.proquest.com/openview/73be186c328532400a3e69524aed0bf9/1?pq-origsite=gscholar&cbl=35707>`_ )
+
 In initialization, We assume that
- - No one has prior knowledge of their disease status (and HPV status) on day one 
+
+ - No one has prior knowledge of their disease status (and HPV status) on day one
    of the simulation.
  - All simulants are buying insurance on day one of the simulation.
  - For simulants in cervical cancer (CC) state regardless of detection, they have 
@@ -513,7 +517,7 @@ cervical cancer development, the mean sojourn time is around **4** years.
 
 .. image:: symptomatic_presentation.svg
 
-.. _5.3.3:
+.. _swcc5.3.3:
 
 5.3.3 HPV model
 ~~~~~~~~~~~~~~~
@@ -565,7 +569,7 @@ relevant formulas
  (8) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_with_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)`
  (9) :math:`\text{incidence_hrHPV_for_ICC_S_hrHPV_to_ICC_C_hrHPV_without_vaccine} =  \text{incidence_hrHPV}\times(1-PAF)\times\text{RR_no_vaccine_hrHPV}`
  
-.. _5.3.4:
+.. _swcc5.3.4:
 
 5.3.4 Treatment model
 ~~~~~~~~~~~~~~~~~~~~~
@@ -580,7 +584,7 @@ relevant formulas
    versus with treatment: use log-normal distribution **exp(normal(mean=log(4.86), SD=0.51))** 
    (Tai et al. 2018)
 
-.. _5.4:
+.. _swcc5.4:
 
 5.4 Input data sources
 ----------------------
@@ -643,7 +647,7 @@ relevant formulas
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific incidence data
    * - remission of HPV
      - /ihme/costeffectiveness/vivarium_csu_cancer/hpv_clearance_dismod.csv
-     - [kang-et-al-2014]_
+     - [Kang-et-al-2014]_
      - We used Abie's dismod 1.1.1 to generate draw-/age- specific remission data
    * - Relative risk of HPV
      - 27.4 (95%CI 19.7 to 38.0); use log-normal distribution **exp(normal( 
@@ -674,7 +678,7 @@ relevant formulas
        for inverse distribution
 
 
-.. _5.5:
+.. _swcc5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -734,21 +738,21 @@ relevant formulas
        baseline
 
 
-.. _6.0:
+.. _swcc6.0:
 
 6.0 Validation and verification
 +++++++++++++++++++++++++++++++
 TBD
 
 
-.. _7.0:
+.. _swcc7.0:
 
 7.0 Limitations
 +++++++++++++++
 TBD
 
 
-.. _8.0:
+.. _swcc8.0:
 
 8.0 References
 ++++++++++++++

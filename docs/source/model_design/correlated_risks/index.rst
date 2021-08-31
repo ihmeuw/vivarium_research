@@ -92,13 +92,13 @@ exposure probabilities from copulae. The second part of the file
 proposes our alternative formulation of a *joint* PAF. The last part of
 the file tests our assumptions in a very simple step by step model.
 
-.. code:: ipython3
+.. code:: python
 
     import numpy as np
     import matplotlib as matplot
     import pandas as pd
 
-.. code:: ipython3
+.. code:: python
 
     import seaborn as sns
     import scipy.stats
@@ -113,7 +113,7 @@ This part of our file shows how we can introduce correlation from a
 multivariate normal distribution. All we need is correlation
 (variance/covariance) in our exposures.
 
-.. code:: ipython3
+.. code:: python
 
     # Simulate for testing purposes
 
@@ -218,7 +218,7 @@ multivariate normal distribution. All we need is correlation
 
 
 
-.. code:: ipython3
+.. code:: python
 
     sns.jointplot(df['SBP'], df['LDL-C'])
 
@@ -238,7 +238,7 @@ multivariate normal distribution. All we need is correlation
 What we want from the microdata is simply the Spearman R value, which captures the correlation of SBP and LDL-C as continuous variables
 =======================================================================================================================================
 
-.. code:: ipython3
+.. code:: python
 
     rho, p_val = scipy.stats.spearmanr(df['SBP'], df['LDL-C'])
     rho
@@ -261,7 +261,7 @@ rho, and then use that to generate a distribution that in its margins
 matches the SPB and LDL-C from GBD, but also has Spearman correlation
 rho:
 
-.. code:: ipython3
+.. code:: python
 
     probit_propensity = np.random.multivariate_normal([0,0], [[1, rho],
                                                              [rho, 1]], size=N)
@@ -282,7 +282,7 @@ rho:
 .. image:: 2020_02_11a_correlation_and_paf_files/2020_02_11a_correlation_and_paf_9_1.png
 
 
-.. code:: ipython3
+.. code:: python
 
     propensity = scipy.stats.norm().cdf(probit_propensity)
     sns.jointplot(propensity[:,0], propensity[:,1])
@@ -302,7 +302,7 @@ rho:
 .. image:: 2020_02_11a_correlation_and_paf_files/2020_02_11a_correlation_and_paf_10_1.png
 
 
-.. code:: ipython3
+.. code:: python
 
     # HACK: instead of loading marginals from GBD, I'm going to re-use the ones
     # I synthesized above
@@ -321,7 +321,7 @@ rho:
         return exposure2_vals[i]
 
 
-.. code:: ipython3
+.. code:: python
 
     # now map from propensity to value
     df_synthetic = pd.DataFrame(index=range(N))
@@ -419,7 +419,7 @@ rho:
 
 
 
-.. code:: ipython3
+.. code:: python
 
     sns.jointplot(df_synthetic['SBP'], df_synthetic['LDL-C'])
     rho, p_val = scipy.stats.spearmanr(df_synthetic['SBP'], df_synthetic['LDL-C'])
@@ -513,7 +513,7 @@ Dividing through and cancelling terms yields a solution:
    \frac{1}{1-\text{PAF}} = \int_{e_1} \int_{e_2} \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
    p_{e_1,e_2} de_1 de_2,
 
-.. code:: ipython3
+.. code:: python
 
     # there are lots of ways to approximate this integral, but here is a cool one:
     rr_1 = 1.5
@@ -535,7 +535,7 @@ Dividing through and cancelling terms yields a solution:
 
 
 
-.. code:: ipython3
+.. code:: python
 
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**e1)
@@ -563,7 +563,7 @@ look at a simpler model of categorical risks.
 Here is an example of categorial risk exposures
 =======================================================
 
-.. code:: ipython3
+.. code:: python
 
     # simulate categorical data (to be replaced with real data, e.g. from MALED/Surveys, eventually)
     df = pd.DataFrame(index=range(N))
@@ -590,7 +590,7 @@ And also what we will call a multiplicative PAF:
 
    PAF_{multiplicative} = 1 - (1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n}RR_1^{e1_i}}) \cdot (1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n}RR_2^{e2_i}})
 
-.. code:: ipython3
+.. code:: python
 
     one_over_one_minus_paf = np.mean(rr_1**df['bin_a'] * rr_2**df['bin_b'])
     paf = 1 - 1/(one_over_one_minus_paf)
@@ -605,7 +605,7 @@ And also what we will call a multiplicative PAF:
 
 
 
-.. code:: ipython3
+.. code:: python
 
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**df['bin_a'])
@@ -641,7 +641,7 @@ for the correlated distributions. This is just intended as an exercise
 based on the height-for-age z-score definitions of stunting (stunted is
 <= -2 SD).
 
-.. code:: ipython3
+.. code:: python
 
     # Uncorrelated, continuous normal
     mean_a = 0
@@ -887,7 +887,7 @@ based on the height-for-age z-score definitions of stunting (stunted is
 
 
 
-.. code:: ipython3
+.. code:: python
 
     # Does this do what I expected it to?
     print(np.mean(df['exp_na']), np.mean(df['exp_nb']),
@@ -899,7 +899,7 @@ based on the height-for-age z-score definitions of stunting (stunted is
     0.0573 0.069 0.0611 0.0721
 
 
-.. code:: ipython3
+.. code:: python
 
     # Compare just to make sure I got what I expected
     sns.jointplot(df['nml_a'], df['nml_b'])
@@ -918,7 +918,7 @@ based on the height-for-age z-score definitions of stunting (stunted is
 .. image:: 2020_02_11a_correlation_and_paf_files/2020_02_11a_correlation_and_paf_29_1.png
 
 
-.. code:: ipython3
+.. code:: python
 
     sns.jointplot(df['cor_a'], df['cor_b'])
 
@@ -938,7 +938,7 @@ based on the height-for-age z-score definitions of stunting (stunted is
 When the exposures are independent, it seems that the PAFs from the multiplicative and joint risk approaches are similar.
 -------------------------------------------------------------------------------------------------------------------------
 
-.. code:: ipython3
+.. code:: python
 
     # What is the value of the joint risk approach?
     one_over_one_minus_paf = np.mean(rr_1**df['exp_na'] * rr_2**df['exp_nb'])
@@ -954,7 +954,7 @@ When the exposures are independent, it seems that the PAFs from the multiplicati
 
 
 
-.. code:: ipython3
+.. code:: python
 
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**df['exp_na'])
@@ -978,7 +978,7 @@ When the exposures are independent, it seems that the PAFs from the multiplicati
 However, when the exposures are correlated, it seems that the PAFs from the the joint risk approach are higher than the multiplicative approach which returns similar values to the independent exposures.
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-.. code:: ipython3
+.. code:: python
 
     # What is the value of the joint risk approach?
     one_over_one_minus_paf = np.mean(rr_1**df['exp_ca'] * rr_2**df['exp_cb'])
@@ -994,7 +994,7 @@ However, when the exposures are correlated, it seems that the PAFs from the the 
 
 
 
-.. code:: ipython3
+.. code:: python
 
     # how does this compare to multiplicative approx of paf?
     ooomp_1 = np.mean(rr_1**df['exp_ca'])
@@ -1046,7 +1046,7 @@ And we can continue to find an individual’s rate the same way:
 
    i_{e_1, e_2} = i_0 \cdot \left(\text{RR}_1\right)^{e_1}\cdot \left(\text{RR}_2\right)^{e_2}
 
-.. code:: ipython3
+.. code:: python
 
     rate = 0.8
 
@@ -1063,7 +1063,7 @@ And we can continue to find an individual’s rate the same way:
     df['cor_joint_rate'] = joint_rate0 * rr_1**df['exp_ca'] * rr_2**df['exp_cb']
 
 
-.. code:: ipython3
+.. code:: python
 
     np.mean(df['ind_multi_rate'])
 
@@ -1076,7 +1076,7 @@ And we can continue to find an individual’s rate the same way:
 
 
 
-.. code:: ipython3
+.. code:: python
 
     np.mean(df['ind_joint_rate'])
 
@@ -1089,7 +1089,7 @@ And we can continue to find an individual’s rate the same way:
 
 
 
-.. code:: ipython3
+.. code:: python
 
     np.mean(df['cor_multi_rate'])
 
@@ -1102,7 +1102,7 @@ And we can continue to find an individual’s rate the same way:
 
 
 
-.. code:: ipython3
+.. code:: python
 
     np.mean(df['cor_joint_rate'])
 
@@ -1121,7 +1121,7 @@ My interpretation of these results is that the *Joint PAF* approach produces (ne
 Apply this same structure in R to produce a function that can be used to test different values of the means, standard deviations, rate, correlation, and relative risks for two risk factors.
 ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-.. code:: ipython3
+.. code:: python
 
     ## Not run (in R):
     # set.seed(4)

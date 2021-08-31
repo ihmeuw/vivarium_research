@@ -28,7 +28,15 @@
 General Epidemiology Research Considerations and Best Practices
 ===============================================================
 
-The purpose of this page is to document information that is relevant to conducting research on the simulation science team as it relates to Vivarium simulation model design. This page contains information that does not directly apply to Vivarium models, but is useful to understand the factors that affect the design behind them. This page is arranged in no particular order and topics can be added as they are encountered. The sections may be filled in as simulation science team members investigate the issues in their own projects and can include text from or links to existing documents that may address the topic.
+The purpose of this page is to document information that is relevant to
+conducting research on the simulation science team as it relates to Vivarium
+simulation model design. This page contains information that does not
+directly apply to Vivarium models, but is useful to understand the
+factors that affect the design behind them. This page is arranged in no
+particular order and topics can be added as they are encountered.
+The sections may be filled in as simulation science team members investigate
+the issues in their own projects and can include text from or links to
+existing documents that may address the topic.
 
 .. contents::
 	:local:
@@ -146,7 +154,7 @@ In order for a factor to be a confounder (C), it must meet the following criteri
 
   1. Must be a risk factor, or a surrogate measure of the risk factor, for the outcome (O) of interest in those who are unexposed to the exposure (E) being investigated.
   2. Must be correlated, positively or negatively, with the exposure (E). If the study population is stratified into exposed and unexposed groups, this means that (C) has a differential distribution in the two groups.
-  3. In addition, (C) should not be an intermediate step on the causal pathway between the exposure (E) and outcome (O) being investigated. If this is the case, (C) may in fact be an :ref:`intermediate <intermediates>` or a :ref:`mediator <mediator>` . In other words, the exposure (E) should not cause the confounder (C).
+  3. In addition, (C) should not be an intermediate step on the causal pathway between the exposure (E) and outcome (O) being investigated. If this is the case, (C) may in fact be an `intermediate <intermediates>`_ or a `mediator <mediator>`_ . In other words, the exposure (E) should not cause the confounder (C).
 
 .. note::
 
@@ -490,9 +498,13 @@ In nonlinear models, the total effect is not generally equal to the sum of the d
 
 **Multiple risk factors**: non-independent risk case (aka: mediation). If MF is mediation factor if Risk 2 through Risk 1
 for a given cause
- .. math:: RR_2 = (RR_2 - 1)(1 - MF_{2/1}) + 1
+
+.. math:: RR_2 = (RR_2 - 1)(1 - MF_{2/1}) + 1
+
 Generalized for multiple pathways of R1 through other RFs
- .. math:: RR_i = (RR_i - 1)(1 - \prod_{j = 1}^n (1 - MF_{i/j})) + 1
+
+.. math:: RR_i = (RR_i - 1)(1 - \prod_{j = 1}^n (1 - MF_{i/j})) + 1
+
 This adjusted or non-mediated RR is then used to calculate a non-mediated PAF, with which we can assume independence across risk 
 factors when aggregating
 
@@ -570,7 +582,7 @@ of the relationship of the risk-outcome pair through MR-BRT analyses.
 .. note::
 
   This information was obtained from a science seminar presented by Ryan 
-  Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`_. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`_.
+  Barber and Chris Murray on March 11, 2020; a recording is available `here <https://hub.ihme.washington.edu/display/GBD2020/GBD+Science+Seminar+series>`__. Documentation for GBD's evidence scoring system is available `here <https://hub.ihme.washington.edu/display/GBD2020/Evidence+score>`__.
 
 Biases in Epidemiology Studies
 ++++++++++++++++++++++++++++++
@@ -674,7 +686,7 @@ design of these trials will be similar, they differ with respect to their
 *null hypotheses* and therefore will have different appropriate statistical 
 analytic protocols. Notably equivalence trials will use two-sided statistical 
 tests, whereas non-inferiority and superiority trials will use one-sided 
-statistical tests. See `here <https://pubmed.ncbi.nlm.nih.gov/18537788/>`_ 
+statistical tests. See `here <https://pubmed.ncbi.nlm.nih.gov/18537788/>`__
 for more reading. 
 
 Potential Biases
@@ -701,7 +713,7 @@ exposure groups to study subjects AND study administrators) RCTs are less
 subject to bias than non-blinded RCTs. The **placebo effect** (or lack 
 thereof) is an example of a phenomenon that can bias study results when study 
 subjects are not blinded to their treatment group. See 
-`here <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2947122/>`_ for more 
+`here <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2947122/>`__ for more
 reading. 
 
 Another concern with RCTs is the degree to which they can be generalized to 
@@ -926,13 +938,18 @@ Case-control design
 ~~~~~~~~~~~~~~~~~~~
 
   1. What is the study question? 
+
     *  The specific question the study is designed to answer must be clearly stated. It usually takes the form of “Is this exposure associated with this outcome?” Failure to do this can lead to poor design and problems in the interpretation of results.
-  2. Who are the **cases**? 
+
+  2. Who are the **cases**?
+
     * :underline:`Definition`: There needs to be a precise case definition that all cases fulfil. This may be histological, a clinical pattern or may be the result of a coding exercise (for example, death certificate diagnoses).
     * :underline:`Source`: The source of the cases needs to be clearly defined. In a population-based study, cases might be all possible individuals with the disease arising within a defined population within a fixed period of time. In this situation the ‘base’ is the defined population, and there might be multiple sources of cases - surveillance, death certificates, pathology records etc. Alternatively, the study may be hospital-based – the source of cases might be all patients fulfilling the case definition who attend one or more specific hospitals. In this example the cases in the study may arise from a more selective population, because cases who attend these hospitals may not be representative of all cases who fulfil the case definition in the study area: issues to consider include cases’ access to health services and referrals to specialist hospitals. In general, population-based studies are easier to interpret than hospital-based studies but are more difficult to conduct.
     * :underline:`Incident or prevalent cases`: An important distinction is whether only incident or also prevalent cases are included. Incident cases are new cases appearing with the condition within a fixed period of time, whereas prevalent cases are all patients with the condition at a specific point in time. Prevalent cases will include individuals who may have had the disease for some time and who have not died. If prevalent cases are studied then any associations identified in the study may not just be related to developing the disease but also to surviving with the disease. Also, prevalent cases who have had the disease for some time may have changed their exposure because of their disease, and this may lead to incorrect ascertainment of exposure information.
+
   3. Who are the **controls** (this is the most difficult decision in designing a case-control study)?
-    * :underline:`Definitions`: As a rule, the controls must fulfil all the eligibility criteria defined for the cases apart from those relating to the diagnosis of the disease. Further, the controls should represent the same population, from which the cases are drawn, i.e., they should provide an estimate of the exposure prevalence in the population from which the cases arise. If not, the results of the study are likely to be distorted because of selection bias. 
+
+    * :underline:`Definitions`: As a rule, the controls must fulfil all the eligibility criteria defined for the cases apart from those relating to the diagnosis of the disease. Further, the controls should represent the same population, from which the cases are drawn, i.e., they should provide an estimate of the exposure prevalence in the population from which the cases arise. If not, the results of the study are likely to be distorted because of selection bias.
     * :underline:`Source of controls`: Controls must be a representative sample of individuals without the disease of interest, taken from the population from which the cases arose. Therefore, the source of controls depends on the source of the cases. If the cases are a population-based sample of all incident cases over a specific time period then the most appropriate source of controls is a random sample of individuals without the disease from the same population during this time period. On the other hand, if the cases are ascertained through hospital admissions or other health facilities, the choice of controls is less straightforward. If all cases from a defined population end up in a specific hospital then the base is the defined population and a population sample of controls is best. However, if only selected cases reach the hospital (for example, those with greater access to health services), then the population that gave rise to the cases is less clear and it may be more appropriate to select controls who have undergone a similar selection process – from amongst other hospital patients who have diseases of similar severity to the cases. This presents another problem. The controls should not be biased in terms of the exposure of interest. For example, if you are studying the possibility that a disease is related to alcohol you would not want controls with conditions also related to alcohol (such as patients involved in accidents, who often have a higher level of alcohol consumption than the general population). The selection of controls presents problems of judgement, as well as the fact that appropriate selection is dependent on knowledge of the aetiology of other disease, which is probably incomplete. Alternative sources of controls are relatives, neighbours and people nominated by the case. Each of these may present problems – for example, they may be more similar to the case with respect to exposure than the population at large.
     * :underline:`Will the controls be matched to the case?`: Matching refers to the procedure whereby one or more controls are selected for each case on the basis of similarity for certain characteristics other than the factor under investigation. Common matching variables are age and sex, but others might be place of residence, socio-economic status or parity. The characteristics chosen for matching are those that are thought to be potential confounders. Cases may be individually matched to one (or more) controls or frequency matched to controls (i.e. during recruitment investigators ensure that there are equal number of cases and controls in each level of a matching variable, such as age). Matching is a way of increasing the efficiency of the study, but the controls selected are different from those who would have been selected in an unmatched study, and this must be taken into account by adjusting for the matching factors (e.g. age or gender) in the analysis of a frequency matched study or by carrying out a matched analysis in an individually matched study. In general, matching may offer some gain in efficiency by matching on a few variables but it becomes increasingly difficult to match on more and more variables. So, most studies limit it to age and sex.
     * :underline:`How many control groups?`: It may be tempting to include more than one control group. For example, if the cases are all dead then it may be unclear as to whether the controls should be dead or alive. However, if we choose two separate control groups and they produce different answers then it may be unclear which the correct answer is. On the other hand it may be possible to examine more than one hypothesis by choosing different control groups. For example, if we have a group of healthy controls and a group of cirrhotic controls in a study of liver cancer, it is possible to examine whether risk factors act by leading to cirrhosis or are independent of this pathway. However, this must be explicit in the hypotheses being tested.
@@ -1002,7 +1019,7 @@ implies that "the exposre is more common among those with disease". This "flip" 
 Rare-disease assumption
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-If the study is appropriately designed, in particularly, that sampling of cases and controls is independent of their exposure status, and the disease is rare (incidence of the outcome of interest is <10% in the study population, see :download:`Zhang (1998) What's the Relative Risk? <Zhang_1998_What_is_a_relative risk>` then the odds ratio provides an estimate of the risk ratio or the rate ratio. This is because when the disease is rare in the study population, the odds ratio, risk ratio and rate ratio are all very similar **numerically**.
+If the study is appropriately designed, in particularly, that sampling of cases and controls is independent of their exposure status, and the disease is rare (incidence of the outcome of interest is <10% in the study population, then the odds ratio provides an estimate of the risk ratio or the rate ratio. This is because when the disease is rare in the study population, the odds ratio, risk ratio and rate ratio are all very similar **numerically**.
 
 The risk ratio of a :underline:`cohort study` is given by the following 2x2 table
 
@@ -1039,7 +1056,9 @@ When the disease is common, which measure (risk ratio, rate ratio or odds ratio)
 Analysis for matched study
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- .. todo::
+.. todo::
+
+   All this
 
 
 PAF for unmatched case-controls
