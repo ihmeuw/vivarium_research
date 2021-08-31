@@ -171,6 +171,10 @@ For the implementation of the intervention in an alterative scenarios, we will m
 Birthweight
 +++++++++++++++++++++
 
+.. note::
+
+  Note to software engineers: BEP intervention on birthweight has previously been implemented and is hosted `here <https://github.com/ihmeuw/vivarium_gates_bep>`_. 
+
 The maternal supplementation intervention (all regimens) affect child birthweight exposures, :ref:`which are documented here <2019_risk_exposure_lbwsg>`. The intervention should result in an **additive change to a simulant's continuous birthweight exposure value at birth (or upon initialization into the early or late neonatal age groups).** We assume there is no corresponding change in a simulant's gestational age exposure value at birth.
 
 .. list-table:: Restrictions for intervention effect on birthweight
@@ -284,8 +288,18 @@ The code block below walks through how to implement the following considerations
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- We assume that the birthweight shifts of maternal supplementation interventions are equal across the counterfactual unsupplemented birthweight exposure distribution. In reality the impact may be greater among the lower end of the birthweight distribution. Because the same shift in the birthweight among the lower end of the distribution is associated with a greater magnitude of mortality risk reduction than among the higher end of the distribution, we may underestimate the effect of the intervention. 
+
+- We assume that the birthweight shift for BEP reported by [Ota-et-al-2015]_ is relative to MMN, although it is actually relative to a reference group with mixed supplementation regimens. Due to the belief that the effect size of BEP may be underestimated (see discussion in the :ref:`BEP concept model document and manuscript <2017_concept_model_vivarium_gates_bep>`), this may not be a problematic assumption.
+
+- We do not consider effect modification by maternal anemia status.
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the baseline scenario, the exposure distribution of birthweight (mean birthweight, if available) as well as the mortality rates among the neonatal age groups should match that of GBD. 
+
+If birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
 
 References
 ------------
