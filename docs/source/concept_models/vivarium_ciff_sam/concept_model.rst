@@ -274,7 +274,11 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * Insecticide treated nets
 
-* Intermittent preventive therapy for pregnant women
+.. warning::
+
+  :ref:`Intermittent malaria preventive therapy for pregnant women <maternal_malaria_prevention_therapy>`
+
+  We may not model the intermittent malaria preventive therapy for pregnant women given that this intervention is not recommended in Ethiopia. The decision to include/exclude this intervention is pending more investigation into the national recommendation and model builds for this intervention should not begin until the decision is finalized.
 
 * Kangaroo care for preterm and low birthweight infants
 
