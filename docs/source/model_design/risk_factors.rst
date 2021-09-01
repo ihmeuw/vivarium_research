@@ -259,6 +259,10 @@ to the TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
 
 .. _degenerate probability distribution: https://en.wikipedia.org/wiki/Degenerate_distribution
 
+.. todo::
+
+  Add formal mathematical definitions of TMREL and TMRED.
+
 As discussed in the :ref:`causality section <causal_relationships>` of the :ref:`general research page <general_research>`,
 counterfactual analysis is used to describe the causal relationship between a
 risk factor and an outcome. **The TMRED is a particular choice of counterfactual
@@ -357,6 +361,31 @@ positive radon exposure levels concentrated near the point 10 Bq/m\
 
   Also, say something about whether there should be different TMRELs for
   different risk-outcome pairs, and how GBD handles this.
+
+  Add some discussion of issues brought up in `PR 153
+  <https://github.com/ihmeuw/vivarium_research/pull/153>`_:
+
+  - More in-depth description of counterfactual scenario, where one risk is set
+    to the TMRED, but everything else is held constant, including exposure to
+    other risk factors. Note that causally affected risk exposures would also
+    change, as in the case of mediation (see BMI, SBP, mortality example in PR).
+
+  - Mention approaches other than TMREL/D, e.g. No observed adverse effect
+    level (NAOEL) and Lowest observed adverse effect level (LOAEL), and
+    methods from cost-analysis.
+
+  - Operationally, GBD only defines one TMRED for each risk factor, rather than
+    one for each risk-outcome pair.
+
+  - GBD assumes risks are monotonic (is that still true with splines in GBD
+    2019+?), but this is not necessarily true (for example: BMI, sodium).
+
+  - Clarify discussions of TMREL/D that depends on geography and/or biological
+    features of the population, and of definitions of TMREL/D for population vs.
+    individual (formal mathematical definitions should help with this).
+
+  Fix broken links in citations [WHO-Global-Health-Risks-Annex]_ and
+  [Estimating-Attributable-Burden]_.
 
 Relative Risk (RR)
 ++++++++++++++++++
