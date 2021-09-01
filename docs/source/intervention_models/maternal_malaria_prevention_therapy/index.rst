@@ -84,6 +84,12 @@ As IPTp-SP is recommended by the WHO in Malaria endemic ares in Africa for all p
     - 0
     - Not recommended by Ethiopian government due to low malaria burden, as discussed by [Ouedraogo-et-al-2019]_
 
+.. todo::
+
+  Determine if it is appropriate to model this intervention in Ethiopia given that it is not recommended (look into most recent recommendataion in more detail and if there are any subgroups for which the intervention is recommended).
+
+  Do not start model builds of this intervention for Ethiopia until this is confirmed.
+
 Vivarium Modeling Strategy
 --------------------------
 
