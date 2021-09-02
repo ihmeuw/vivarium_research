@@ -287,6 +287,7 @@ The mathematical expressions are mainly fall into two categories:
      - :math:`i = i \times (1-PAF) \times RR^{max(e−tmrel,0)/scalar}`
      - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
      - :math:`E(RRe) = \int_{lb}^{ub}RR^{max(e−tmrel,0)/scalar}p(e)de`
+
 For a risk-mediator outcome, simulation model would map a probability
 distribution of possible mediator exposure level to each measurement of
 associated risk factor (e.g. there is X% chance you will observe a SBP
