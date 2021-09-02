@@ -6,7 +6,7 @@ Insecticide Treated Bed Nets for Malaria Prevention
 
 .. contents::
    :local:
-   :depth: 1
+   :depth: 2
 
 Malaria is a major cause of preventable mortality in areas endemic to the disease such as Sub-Saharan Africa. Malaria is a mosquito-born disease and prevention of malaria transmission can include vector control measures (such as indoor residual spraying of insecticides and insecticide-treated bed nets) as well as drug-based prevention therapies (such as :ref:`intermittent prevention therapy during pregnancy <maternal_malaria_prevention_therapy>`). Vulnerable groups to malaria disease include children under five as well as pregnant women (malaria infection during pregnancy can lead to poor health outcomes in infants).
 
@@ -22,10 +22,18 @@ This intervention document focuses on insecicide treated bed nets for malaria pr
   * - ITN
     - Insecticide treated nets
     - 
+  * - ANC
+    - Antenatal care
+    - 
 
 Intervention Overview
 -----------------------
 
+Insecticide treated bed nets effectively reduce malaria incidence (and therefore its associated maladies) through the prevention/reduction of mosiquto bites. Children under five and pregnant women are identified as priority groups for the ITN intervention due to their vulnerability to malaria. Due to their high effectiveness and low cost, ITNs have been freely distributed through governmental/other campaigns, as discussed in [Belay-and-Deressa-2008]. However, despite attempts to distribute ITNs, access to the intervention remains limited in some area and a gap between ITN access and use remains [Deressa-et-al-2011]. ITN use during pregnancy has been associated with factors such as household wealth [Deressa-et-al-2014], education [Yitayew-et-al-2018], and ANC attendance [Ouedraogo-et-al-2019].
+
+.. todo::
+
+  Add greater discussion of successes and failures of ITN intervention programs
 
 .. list-table:: Affected Outcomes
   :header-rows: 1
@@ -50,28 +58,59 @@ Intervention Overview
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-.. todo::
+On September 1st, 2021 we performed a literature search on PubMed using the search terms "insecticide treated nets ethiopia pregnan*", which yielded 21 results. The results were screened and relevant studies are summarized in the below. (References are not yet linked on this page but can be found here: :code:`J:\Project\simulation_science\ciff_malnutrition\literature\itn_coverage`)
 
-  Document known baseline coverage data, using the table below if appropriate
-
-.. list-table:: Baseline coverage data
+.. list-table:: Ethiopia baseline coverage data: proportion of pregnant women sleeping under insecticide treated nets
+  :widths: 10 15 5 5 25 
   :header-rows: 1
 
-  * - Location
-    - Subpopulation
-    - Coverage parameter
+  * - Study
+    - Population
+    - Study year
     - Value
     - Note
-  * - 
+  * - [Belay-and-Deressa-2008]
+    - 814 pregnant women from northern Ethiopia
+    - 2006
+    - 0.345
+    - District purposely selected to represent amalrious areas of southern Tigray in northern Ethiopia. Seven rural and one urban sampling unit.
+  * - [Deressa-et-al-2014]
+    - 55 pregnant women from 1235 households from 16 randomly selected villages in southern Ethiopia
+    - 2008
+    - 0.60
+    - ITN use among pregnant women positively associated with household wealth index
+  * - [Yitayew-et-al-2018]
+    - 226 pregnant women who attended antenatal clinics at the Adis Zemen hospital
+    - 2018
+    - 0.708
+    - ITN use positively associated with maternal education and maternal age
+  * - [Fuge-et-al-2015]
+    - 398 pregnant women in Hadiya Zone, Shashogo District, Ethiopia
+    - 2014
+    - 0.082
     - 
+  * - [Graves-et-al-2011]
+    - X
+    - 2006-2007
+    - X
     - 
-    - 
-    - 
+  * - [Negash-et-al-2012]
+    - Six districts in Afar National Regional State in northeastern Ethiopia
+    - 2008
+    - 0.70
+    - Observed use (reported use was 79.1%)
+  * - [Ouedraogo-et-al-2019]
+    - 2784 women who had pregnancy outcome in the year preceding the survey
+    - 2016
+    - 0.264
+    - reported "always" sleeping under the net during their pregnancy. ITN use was positively associated with attending at least one ANC visit.
+
+.. todo::
+
+  Determine baseline coverage value to be used for Ethiopia, either by meta-analysis or by selection of large/representative recent study
 
 Vivarium Modeling Strategy
 --------------------------
-
-
 
 .. list-table:: Modeled Outcomes
   :header-rows: 1
@@ -138,18 +177,65 @@ The ITN intervention affects child birthweight exposures, :ref:`which are docume
 
   While there is evidence for effect modification of ITN on birthweight by maternal parity, we will model the overall effect until a maternal parity model is developed if/when needed
 
+**How to sample and apply effect sizes:**
 
+- Assume a normal distribution of uncertainty within the confidence interval of the effect size in the table above (the code block below describes how to sample from this distribution).
+
+- Birthweight exposure values need to be calibrated to baseline ITN coverage in the baseline scenario
+
+.. code-block::
+
+  from scipy.stats import norm
+  def sample_from_normal_distribution(mean, lower, upper):
+      """Instructions on how to sample from a normal distribution given a mean value and
+      95% confidence interval for a parameter"""
+      std = (upper - lower) / 2 / 1.96
+      dist = norm(mean, std)
+      return dist.rvs()
+
+  for i in simulants:
+    """In the baseline scenario, we need to calibrate baseline coverage
+    so that the difference between covered and uncovered babies, on
+    average, equals to the effect shift AND that the population mean birthweight value
+    from GBD is approximately unchanged.
+    * bw_{i} represents the assigned continuous birthweight exposure value for a
+    simulant sampled from GBD, which may or may not have already been affected by other
+    factors such as maternal BMI, etc. BEFORE consideration of the impact of
+    this intervention
+    * baseline_itn_coverage represents the baseline coverage proportion"""
+    if baseline_itn_coverage_{i} == 'uncovered':
+          baseline_supplemented_bw_{i} = bw_{i} - baseline_itn_coverage_{draw} * itn_shift_{draw}
+          if alternative_itn_coverage_{i} == 'uncovered':
+            alternative_supplemented_bw_{i} = baseline_supplemented_bw_{i}
+          elif alternative_itn_coverage_{i} == 'covered':
+            alternative_supplemented_bw_{i} = baseline_supplemented_bw_{i} + itn_shift_{draw}
+      elif baseline_itn_coverage_ == 'covered':
+          baseline_supplemented_bw_{i} = bw_{i} + (1 - baseline_itn_coverage_{draw}) * itn_shift_{draw}
+          # makes assumption that all simulants covered in baseline scenario are also covered in alternative scenario
+          alternative_supplemented_bw_{i} = baseline_supplemented_bw_{i}
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - We assume that the maternal parity distribution of the study population is similar to that of our modeled population. If the modeled population has a lower parity distribution than the study population, we will underestimate the effect of the distribution (and vise-versa).
 
+- Assume that the impact of ITN on birthweight is not mediated through an additional impact in gestational age. As gestational age has an indepedent impact on infant outcomes, this is a conservative assumption.
+
+- We are limited in that we do not assume a joint distribution of ITN coverage and malaria risk. Additionally, we do not consider correlation between baseline intervention coverage and other factors that may be associated with birthweight such as maternal education, maternal age, and ANC attendance.
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- In the baseline scenario, the exposure distribution of birthweight (mean birthweight, if available) as well as the mortality rates among the neonatal age groups should match that of GBD.
+
+- The coverage of the ITN intervention in the baseline and alternative scenarios should match the associated input values
 
 References
 ------------
 
 .. [Gamble-et-al-2007]
   Gamble, C., Ekwaru, P. J., Garner, P., & ter Kuile, F. O. (2007). Insecticide-treated nets for the prevention of malaria in pregnancy: a systematic review of randomised controlled trials. PLoS medicine, 4(3), e107. https://doi.org/10.1371/journal.pmed.0040107
+
+.. todo::
+
+  Add remaining citations into RST functionality
