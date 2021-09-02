@@ -42,6 +42,10 @@ Insecticide treated bed nets effectively reduce malaria incidence (and therefore
     - Effect
     - Modeled?
     - Note 
+  * - Malaria Incidence
+    - Decrease
+    - No
+    -
   * - Birthweight
     - Increase in population mean value
     - Yes
