@@ -276,6 +276,7 @@ or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
 For a risk-cause pair, simulation model would link the incidecen (or other measure
 such as excess mortality rate) of that cause to the relative risk from GBD or
 external data sources like literature evidence.
+
 The mathematical expressions are mainly fall into two categories:
  - risk exposure is categorical distributed:
      - :math:`i_{exposed} = i \times (1-PAF) \times RR`
