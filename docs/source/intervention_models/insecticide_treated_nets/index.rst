@@ -113,6 +113,8 @@ On September 1st, 2021 we performed a literature search on PubMed using the sear
 
   Determine baseline coverage value to be used for Ethiopia, either by meta-analysis or by selection of large/representative recent study
 
+  NOTE: GBD estimates ITN coverage. Use this value instad after discussion with modelers.
+
 Vivarium Modeling Strategy
 --------------------------
 
@@ -180,6 +182,10 @@ The ITN intervention affects child birthweight exposures, :ref:`which are docume
 .. note::
 
   While there is evidence for effect modification of ITN on birthweight by maternal parity, we will model the overall effect until a maternal parity model is developed if/when needed
+
+.. todo::
+
+  Use the distribution of 3rd or later birth order from Ethiopia 2019 DHS
 
 **How to sample and apply effect sizes:**
 
