@@ -397,8 +397,8 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Value
     - Note
   * - :math:`r2_{ux}`
-    - :math:`\frac{1 - C_\text{SAM} * E}{365/k - C_\text{SAM} * E * duration_\text{treated SAM}}`
-    - See constant values in table below and equation derivation below table
+    - :math:`\frac{k - 365 * t1_{SAM} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}/365`
+    - See constant values in table below and equation derivation below table. Ali to confirm and potentially update this equation.
   * - :math:`t1_{sam}`
     - :math:`1 / duration_\text{treated SAM}`
     - See constant values in table below
@@ -408,6 +408,12 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
   * - :math:`t2_{mam}`
     - :math:`1 / duration_\text{treated MAM}`
     - See constant values in table below
+
+.. warning::
+
+  The equation for :math:`r2_{ux}` defined in the table above along with the parameter values defined below results in negative values for :math:`r2_{ux}` in the 1 - 6 month age group (also the neonatal age groups, but we are not modeling treatment in these groups, so we can ignore these). This is likely due to the higher mortality rate in the younger age groups and the not age-specific wasting durations used in these calculations. The research teams needs to update these equations/values accordingly so that we have plausible numbers.
+
+  NOTE: Since we do not use a time-varying value of treatment coverage, it is possible that overestimating treatment coverage in early years in the data artifact will cause negative rates for :math:`r2_{ux}`. These can be ignored/overwritten in order to avoid build failures as long as there are positive rates for the years that will be used in the simulation (2019).
 
 .. _`parameter values table`:
 
@@ -473,7 +479,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 6.7(95% CI: 5.3-8.4)
     - lognormal
     - 
-    - 
+    - [Isanaka_2021]_
+  * - :math:`mortality_{SAM|a,s,l,y}`
+    - GBD demographic group
+    - Mortality rate among SAM wasting state
+    - N/A
+    - :ref:`defined on the wasting documentation <2020_risk_exposure_wasting_state_exposure>`
+    - GBD
 
 .. todo::
 
@@ -485,17 +497,17 @@ Deriving :math:`r2_{ux}` using the following three equations:
 
 #. :math:`r2_{ux} = 1 / duration_\text{untreated SAM}`
 
-#. :math:`duration_\text{overall SAM} = duration_\text{treated SAM} * C * E_\text{SAM} + duration_\text{untreated SAM} * (1 - C * E_\text{SAM})`
+#. :math:`duration_\text{overall SAM} = 365 / (365 * r2_{ux} * C * E_{SAM} + 365 * t1_{SAM} * C * E_{SAM} + mortality_{SAM|a,s,l,y}`
 
 #. :math:`duration_\text{overall SAM} = 365 / k`
 
 So...
 
-  :math:`365/k = duration_\text{treated SAM} * C * E_\text{SAM} + duration_\text{untreated SAM} * (1 - C * E_\text{SAM})`
+  :math:`k = 365 * r2_{ux} * C * E_{SAM} + 365 * t1_{SAM} + mortality _{SAM|a,s,l,y}`
 
   ...
 
-  :math:`duration_\text{untreated SAM} = \frac{365/k - duration_\text{treated SAM} * C * E_\text{SAM}}{1 - C * E_\text{SAM}}`
+  :math:`r2_{ux} = \frac{k - 365 * t1_{SAM} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}/365`
 
 .. note::
 
