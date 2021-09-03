@@ -369,12 +369,16 @@ Vivarium Modeling Strategy
 
 So, 
 
- - :math:`r2_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
- - :math:`t1_{sam} = \frac{t}{\text{median time-to-recovery (days) of tx SAM}}` 
- - :math:`r3_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx MAM}}` 
- - :math:`t2_{mam} = \frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
+ - :math:`r2_{ux} = r_{SAM,ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
+ - :math:`t1_{sam} = r_{SAM,tx} = \frac{t}{\text{median time-to-recovery (days) of tx SAM}}` 
+ - :math:`r3_{ux} = r_{MAM,ux} = \frac{t}{\text{median time-to-recovery (days) of utx MAM}}` 
+ - :math:`t2_{mam} = r_{MAM,tx} = \frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
 
-where t is the period for which transition the is estimated (a year) eg. 365 days using days as the unit and the duration of time-to-recovery is age-specific.
+where t is the period for which transition the is estimated (a year) eg. 365 days using days as the unit and the duration of time-to-recovery is age-specific and "treated" refers to *effective* treatment. 
+
+.. todo::
+
+  Update figure to new parameter names. Update was made to distinguish difference between these parameters (for wasting treatment model) and the related parameters for the wasting exposure model.
 
 .. important::
 
@@ -390,30 +394,34 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
    Note also that we used the same recovery duration for 0-6 months as 6-59 months in model 2. We have now updated the recovery durations for effectively treated population to be specific for 0-6 months in this model 4. 
 
-.. list-table:: Daily recovery rate equations
+.. list-table:: Annual recovery rate equations
   :header-rows: 1
 
   * - Parameter
     - Value
     - Note
-  * - :math:`r2_{ux}`
-    - :math:`\frac{k - 365 * t1_{SAM} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}/365`
-    - See constant values in table below and equation derivation below table. Ali to confirm and potentially update this equation.
-  * - :math:`t1_{sam}`
-    - :math:`1 / duration_\text{treated SAM}`
-    - See constant values in table below
-  * - :math:`r3_{ux}`
-    - :math:`1 / duration_\text{untreated MAM}`
-    - See constant values in table below
-  * - :math:`t2_{mam}`
-    - :math:`1 / duration_\text{treated MAM}`
-    - See constant values in table below
+  * - :math:`r_{SAM,ux}`
+    - :math:`\frac{k - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
+    - See constant values in table below and equation derivation below table. Ali to confirm and potentially update this equation. Previously referred to as :math:`r2_{ux}`
+  * - :math:`r_{SAM,tx}`
+    - :math:`365 / (duration_\text{treated SAM}`
+    - See constant values in table below. Previously referred to as :math:`t1_{SAM}`
+  * - :math:`r_{MAM,ux}`
+    - :math:`365 / duration_\text{untreated MAM}`
+    - See constant values in table below. Previously referred to as :math:`r2_{ux}`
+  * - :math:`r_{MAM,tx}`
+    - :math:`365 / duration_\text{treated MAM}`
+    - See constant values in table below. Previously referred to as :math:`t2_{MAM}`
 
 .. warning::
 
-  The equation for :math:`r2_{ux}` defined in the table above along with the parameter values defined below results in negative values for :math:`r2_{ux}` in the 1 - 6 month age group (also the neonatal age groups, but we are not modeling treatment in these groups, so we can ignore these). This is likely due to the higher mortality rate in the younger age groups and the not age-specific wasting durations used in these calculations. The research teams needs to update these equations/values accordingly so that we have plausible numbers.
+  The equation for the :math:`r_{SAM,ux}` defined in the table above along with the parameter values defined below results in negative values for :math:`r_{SAM,ux}` in the 1 - 6 month age group (also the neonatal age groups, but we are not modeling treatment in these groups, so we can ignore these). This is likely due to the higher mortality rate in the younger age groups and the not age-specific wasting durations used in these calculations. The research teams needs to update these equations/values accordingly so that we have plausible numbers.
 
-  NOTE: Since we do not use a time-varying value of treatment coverage, it is possible that overestimating treatment coverage in early years in the data artifact will cause negative rates for :math:`r2_{ux}`. These can be ignored/overwritten in order to avoid build failures as long as there are positive rates for the years that will be used in the simulation (2019).
+  To remove a model building road block, we are planning on the following temporary solution:
+
+    Initialize wasting exposure birth prevalence according to the exposure distribution among the 6 month to one year age group. Set all wasting transition rates to zero for all ages under 6 months.
+
+  NOTE: Since we do not use a time-varying value of treatment coverage, it is possible that overestimating treatment coverage in early years in the data artifact will cause negative rates for :math:`r_{SAM,ux}`. These can be ignored/overwritten in order to avoid build failures as long as there are positive rates for the years that will be used in the simulation (2019).
 
 .. _`parameter values table`:
 
@@ -493,21 +501,21 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
     Try to update the weighted time-to-recovery for SAM children admitted to OTP. There are 7 studies from the Zw 2020 paper that reports median (IQR) time to recovery in table 1. The 48.3 days currently in the table is just a weighted average. It would be better to find a way to get the summary value (random effects?) with the uncertainty distribution. Nathanial might have a way to do this. 
 
-Deriving :math:`r2_{ux}` using the following three equations:
+Deriving :math:`r_{SAM,ux}` using the following three equations:
 
-#. :math:`r2_{ux} = 1 / duration_\text{untreated SAM}`
+#. :math:`r_{SAM,ux} = 1 / duration_\text{untreated SAM}`
 
-#. :math:`duration_\text{overall SAM} = 365 / (365 * r2_{ux} * C * E_{SAM} + 365 * t1_{SAM} * C * E_{SAM} + mortality_{SAM|a,s,l,y}`
+#. :math:`1 / duration_\text{overall SAM} =  r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM}) + mortality_{SAM|a,s,l,y}`
 
 #. :math:`duration_\text{overall SAM} = 365 / k`
 
 So...
 
-  :math:`k = 365 * r2_{ux} * C * E_{SAM} + 365 * t1_{SAM} + mortality _{SAM|a,s,l,y}`
+  :math:`k / 365 = r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM}) + mortality_{SAM|a,s,l,y}`
 
   ...
 
-  :math:`r2_{ux} = \frac{k - 365 * t1_{SAM} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}/365`
+  :math:`r_{SAM,ux} = \frac{k/365 - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
 
 .. note::
 
@@ -524,9 +532,11 @@ So...
 
   In this first run that Rajan is building (August-18-21), we are not modelling treatment in the first 28 days of life. If we do model treatment in this first 28 days, the prevalence of wasting by the time they reach post-neonatal age groups in the scale-up scenario will be different (reduced). We should think through the relationship between wasting and LBWSG in the neonatal age groups and see if we want to add treatment back into the first month of life. 
 
-.. note::
+.. todo::
 
-  NOTE: Ali has updated Nicole's previous suggested implementation, shown here:
+  Ali: add more detail on incidence correction factor and find appropriate values for 1-6 month olds
+
+.. note::
 
   How the value r2_ux was derived for model 2 (note we did use an efficacy (E) in model 2): 
 
@@ -579,9 +589,9 @@ Rather than apply an effect size associated with the intervention to a particula
 
 #. Determine if a simulant is covered by treatment coverage with the scenario-specific probability :math:`C`
 
-#. If simulant is uncovered according to #1: apply untreated transition rates (:math:`r2_{ux}` and :math:`r3_{ux}`). If simulant is covered according to #1: determine if the simulant is "effectively" covered using the wasting state-specific probability :math:`E_{SAM}` or :math:`E_{MAM}` corresponding to the wasting state that they occupy at the current time step.
+#. If simulant is uncovered according to #1: apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If simulant is covered according to #1: determine if the simulant is "effectively" covered using the wasting state-specific probability :math:`E_{SAM}` or :math:`E_{MAM}` corresponding to the wasting state that they occupy at the current time step.
 
-#. If a simulant is not effectively covered according to #2, apply untreated transition rates (:math:`r2_{ux}` and :math:`r3_{ux}`). If a simulant is effectively covered according to #2, apply treated transition rates (:math:`t1_{SAM}` and :math:`t2_{MAM}`). 
+#. If a simulant is not effectively covered according to #2, apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If a simulant is effectively covered according to #2, apply treated transition rates (:math:`r_{SAM,tx}` and :math:`r_{MAM,tx}`). 
 
 Restrictions
 ++++++++++++
@@ -626,9 +636,12 @@ Assumptions and Limitations
 - We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country. 
 - We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups. 
 
-
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Ali: Update this section
 
 .. csv-table:: Treatment for SAM and MAM output table shell for v & v (Ethiopia)
    :file: gam_treatment_outputshell_vv.csv
