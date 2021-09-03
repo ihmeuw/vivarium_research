@@ -15,8 +15,8 @@ This model requires a simulant to have attributes of: age, sex, SBP,
 LDL-C, BMI, FPG, smoking.
 
 It adds attributes of: untreated SBP, untreated LDL-C, untreated BMI,
-untreated FPG, untreated smoking, polypill prescription, htn
-prescription ramp position, llt prescription, lifestyle modification
+untreated FPG, untreated smoking, polypill prescription, hypertension
+prescription ramp position, LLT prescription, lifestyle modification
 education status, medication outreach status, adherence propensity,
 adherence status, last measured SBP, last measured LDL-C, follow-up
 visit propensity, LDL-C prescription initiation propensity, SBP
@@ -49,10 +49,6 @@ prescription initiation propensity, polypill initiation propensity
     - Systolic blood pressure
     - GBD Risk Factor
 
-
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
 
 Intervention Overview
 -----------------------
@@ -90,7 +86,7 @@ treatment, which is known to increase adherence.
   * - BMI
     - additive?
     - yes
-    - [[need more detail on this effect]]
+    - [[need more detail on this effect; how to handle mediation]]
   * - FPG
     - additive?
     - yes
@@ -103,11 +99,11 @@ treatment, which is known to increase adherence.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-Baseline coverage of treatments for LDL-C and SBP are substantial and expected to vary by age, sex, and time.  To initialize simulants, researchers will fit a multinomial or logistic regression (as appropriate) to NHANES data, and provide the results to the engineers to use as a prediction of the probability of each treatment for a simulant with a known age, sex, and measured LDL-C and SBP level.
+Baseline coverage of treatments for LDL-C and SBP are substantial and expected to vary by age, sex, and time.  To initialize simulants, researchers will fit a multinomial or logistic regression (as appropriate) to NHANES data, and provide the results to the engineers to use as a prediction of the probability of each treatment for a simulant with a known age, sex, and measured LDL-C and SBP level.  [[Should this also predict which simulants are non-adherent to treatment?]] 
 
-This initialization scheme will require an empirical calibration phase, where the population mean LDL-C and SBP before and after initialization are compared and all simulants have an adjustment applied to their LDL-C and SBP to make sure that the (age, sex)-stratified means in the model with treatment matches the means in the model without treatment.
+This initialization scheme will also allow initialization of "untreated LDL-C" and "untreated SBP" attributes, which refer to what a simulants risk exposure would be, if they were not receiving treatment.   Individuals who are initialized to be receive treatment will also need to be initialized to have a follow-up visit date somehow.
 
-Baseline coverage of polypill, medication outreach, and lifestyle modification education are all low, and we will assume that they are 0%.
+Baseline coverage of polypill, medication outreach, and lifestyle modification education are all low, and we will assume that they are 0%. (This means that we will can initialize the untreated BMI, FPG, and smoking risk exposures to be equal to the actual BMI, FPG, and smoking exposures.)
 
 .. list-table:: Baseline coverage data
   :widths: 15 15 15 15 15
@@ -131,17 +127,17 @@ Baseline coverage of polypill, medication outreach, and lifestyle modification e
   * - USA
     - General Population
     - Polypill
-    - 0.0
+    - 0.0%
     - assumption
   * - USA
     - General Population
     - Medication outreach
-    - 0.0
+    - 0.0%
     - assumption
   * - USA
     - General Population
     - Lifestyle modification education
-    - 0.0
+    - 0.0%
     - assumption
     
 
@@ -160,7 +156,7 @@ Vivarium Modeling Strategy
     - Data Source
     - Notes
   * - Outpatient visit rate
-    - 
+    - [[Fill in info for all rows in this table]]
     - 
   * - Follow-up visit rate for cardiometabolic risk management 
     - 
@@ -220,7 +216,7 @@ Vivarium Modeling Strategy
     - 
     - 
 
-On time step, (a) does simulant interact with health system? Answer depends on outpatient visit rate, emergency visit if simulant had a heart attack, follow-up visit scheduled time and adherence rate.
+On each time step, follow this a decision tree to adjust the treatment for a simulant: (a) does simulant interact with health system? Answer depends on outpatient visit rate, emergency visit if simulant had a heart attack, follow-up visit scheduled time and adherence rate.
 If (a) is yes, if visit is for an emergency, (b) does provider overcome therapeutic inertia?
 If (b) is yes, increase treatment for SBP and/or LDL-C
 If (b) is no, (c) does measured SBP and/or measured LDL-C exceed threshold for increased treatment?
@@ -228,7 +224,7 @@ If (c) is yes, (d) does provider overcome therapeutic inertia?
 If (d) is yes, increase treatment for SBP and/or LDL-C
 If treatment was increased for SBP and/or LDL-C, (e) does patient initiate new prescription?
 If patient has initiated a prescription (on this timestep or previously), (f) does patient adhere to treatment?
-[[to add: schedule follow-up visit, give polypill instead of separate pills, refer to lifestyle medication education, enroll in medical outreach.]]
+[[to add: schedule follow-up visit, give polypill instead of separate pills, refer to lifestyle medication education, enroll in medical outreach. Also make sure to document data sources for all parameters, e.g. probability simulant has outpatient visit to help answer (a) in simulation.]]
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
@@ -241,7 +237,35 @@ If patient has initiated a prescription (on this timestep or previously), (f) do
     - Effect size measure
     - Effect size
     - Note
-  * - 
+  * - SBP
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  * - LDL-C
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  * - BMI
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  * - FPG
+    - 
+    - 
+    - 
+    - 
+    - 
+    - 
+  * - Tobacco
     - 
     - 
     - 
