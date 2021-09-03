@@ -408,20 +408,20 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - See constant values in table below. Previously referred to as :math:`t1_{SAM}`
   * - :math:`r_{MAM,ux}`
     - :math:`365 / duration_\text{untreated MAM}`
-    - See constant values in table below. Previously referred to as :math:`r2_{ux}`
+    - See constant values in table below. Previously referred to as :math:`r3_{ux}`
   * - :math:`r_{MAM,tx}`
     - :math:`365 / duration_\text{treated MAM}`
     - See constant values in table below. Previously referred to as :math:`t2_{MAM}`
 
 .. warning::
 
-  The equation for the :math:`r_{SAM,ux}` defined in the table above along with the parameter values defined below results in negative values for :math:`r_{SAM,ux}` in the 1 - 6 month age group (also the neonatal age groups, but we are not modeling treatment in these groups, so we can ignore these). This is likely due to the higher mortality rate in the younger age groups and the not age-specific wasting durations used in these calculations. The research teams needs to update these equations/values accordingly so that we have plausible numbers.
+  The equation for the :math:`r_{SAM,ux}` defined in the table above along with the parameter values defined below results in negative values for :math:`r_{SAM,ux}` in the 1 - 6 month age group (also the early and late neonatal age groups, but we are currently (9/3/21) not modeling treatment in these groups, so we can ignore these). This appears to be due to the assumption that our untreated and overall SAM durations do not vary by age but that the treated durations do.
 
   To remove a model building road block, we are planning on the following temporary solution:
 
     Initialize wasting exposure birth prevalence according to the exposure distribution among the 6 month to one year age group. Set all wasting transition rates to zero for all ages under 6 months.
 
-  NOTE: Since we do not use a time-varying value of treatment coverage, it is possible that overestimating treatment coverage in early years in the data artifact will cause negative rates for :math:`r_{SAM,ux}`. These can be ignored/overwritten in order to avoid build failures as long as there are positive rates for the years that will be used in the simulation (2019).
+  NOTE: This is not currently a problem, but recording that since we do not use a time-varying value of treatment coverage, it is possible that overestimating treatment coverage in early years in the data artifact *underestimate* the untreated SAM recovery rate and could potentially cause negative rates for :math:`r_{SAM,ux}`. These can be ignored since we only use the 2019 values for our simulation.
 
 .. _`parameter values table`:
 
