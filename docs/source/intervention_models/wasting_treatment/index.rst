@@ -348,54 +348,11 @@ Geographic coverage attempts to measure the *availability* of services which doe
 | SAM programme treatment coverage: 48.8% (37.4-60.4) (this is a point coverage; assumes programmes are not good at case finding) [Isanaka_2021]_
 | MAM programme treatment coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries 
 
-
 .. todo::
 
   Discuss how coverage is estimated (SQUEAC surveys). Discuss difference in point-coverage and period-coverage. 
  
-
-.. list-table:: Baseline coverage data (Ethiopia)
-  :widths: 10 10 5 15 20 30
-  :header-rows: 1
-
-  * - Subpop cov
-    - Value (C)
-    - Reference
-    - Value (E)
-    - Reference
-    - Note
-  * - :math:`EC_{SAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) 
-    - [Isanaka_2021]_ 
-    - 70%(95%CI:64-76)
-    - [Zw_2020tx]_
-    - Using the C, E from 6-59mo
-  * - :math:`EC_{SAM_{6-59}}` 
-    - 48.8%(95%CI:37.4-60.4) 
-    - [Isanaka_2021]_ 
-    - 70%(95%CI:64-76)
-    - [Zw_2020tx]_
-    -
-  * - :math:`EC_{MAM_{0-6}}`
-    - 48.8%(95%CI:37.4-60.4) x 
-    - [Isanaka_2021]_ 
-    - 73.1% (95%CI:58.5-87.7) for RUSF
-    - [Ackatia_Armah_2015tx]_
-    - Using the C, E from 6-59mo, *approx 95%CI for E*
-  * - :math:`EC_{MAM_{6-59}}`
-    - 48.8%(95%CI:37.4-60.4)
-    - [Isanaka_2021]_ 
-    - 73.1% (95%CI:58.5-87.7) for RUSF
-    - [Ackatia_Armah_2015tx]_
-    - Update C value for MAM,  *approx 95%CI for E*
-
-
-.. code-block:: python
-
-    #to get the distribution of the above values, use normal distribution with mean and SD 
-
-    SD = (95%UI upper - 95%UI lower) / 2*1.96
-
+See the `parameter values table`_ for coverage and effictiveness values for use in the model.
 
 .. note::
 
@@ -410,28 +367,14 @@ Vivarium Modeling Strategy
 .. image:: treatment_diagram.svg
    :alt: Compartmental diagram with treatment
 
-For **SAM** 0-6 months infants
+So, 
 
  - :math:`r2_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
  - :math:`t1_{sam} = \frac{t}{\text{median time-to-recovery (days) of tx SAM}}` 
-
-For **SAM** 6-59 months kids
-
- - :math:`r2_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx SAM}}` 
- - :math:`t1_{sam} = \frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
-
-For **MAM** 0-6 months infants
-
  - :math:`r3_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx MAM}}` 
  - :math:`t2_{mam} = \frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
 
-For **MAM** 6-59 months kids
-
- - :math:`r3_{ux} = \frac{t}{\text{median time-to-recovery (days) of utx MAM}}` 
- - :math:`t2_{mam} = \frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
-
-where t is the period for which transition the is estimated (a year) eg. 365 days using days as the unit 
-
+where t is the period for which transition the is estimated (a year) eg. 365 days using days as the unit and the duration of time-to-recovery is age-specific.
 
 .. important::
 
@@ -447,153 +390,131 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
    Note also that we used the same recovery duration for 0-6 months as 6-59 months in model 2. We have now updated the recovery durations for effectively treated population to be specific for 0-6 months in this model 4. 
 
-
-.. list-table:: Modeled Outcomes **Table 1** SAM 0-6 months
-  :widths: 5 5 20 15 15 15 15
+.. list-table:: Daily recovery rate equations
   :header-rows: 1
 
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
+  * - Parameter
+    - Value
     - Note
   * - :math:`r2_{ux}`
-    - transition probability
-    - Daily recovery probability of untx SAM
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx SAM}}`
-    - See age, sex specific derivation below
-    - [Isanaka_2021]_ 
-    - Derived from Isanaka 2021 and tx time to recovery for >6mo
+    - :math:`\frac{1 - C_\text{SAM} * E}{365/k - C_\text{SAM} * E * duration_\text{treated SAM}}`
+    - See constant values in table below and equation derivation below table
   * - :math:`t1_{sam}`
-    - transition probability
-    - Daily recovery probability of tx SAM 
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery (mean) 13.3 (SD 6.9) days 
-    - [Vygen_2013]_
-    - Recovery time for 0-6m in SC in Niger
+    - :math:`1 / duration_\text{treated SAM}`
+    - See constant values in table below
+  * - :math:`r3_{ux}`
+    - :math:`1 / duration_\text{untreated MAM}`
+    - See constant values in table below
+  * - :math:`t2_{mam}`
+    - :math:`1 / duration_\text{treated MAM}`
+    - See constant values in table below
 
-.. list-table:: Modeled Outcomes **Table 2** SAM 6-59 months
-  :widths: 5 5 20 15 15 15 15
+.. _`parameter values table`:
+
+.. list-table:: Parameter Values
   :header-rows: 1
 
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
+  * - Parameter
+    - Population
+    - Value
+    - Distribution
     - Note
-  * - :math:`r2_{ux}`
-    - transition probability
-    - Daily recovery probability of untx SAM
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx SAM}}`
-    - See age, sex specific derivation below
-    - [Isanaka_2021]_ 
-    - Derived from Isanaka 2021 and tx time to recovery
-  * - :math:`t1_{sam}`
-    - transition probability
-    - Daily recovery probability of tx SAM 
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx SAM}}`
-    - time-to-recovery 48.3 days (get a better weighted average from table 1)
+    - Source
+  * - :math:`duration_\text{treated SAM}`
+    - 0-6 months old
+    - mean: 13.3, sd: 6.9
+    - normal
+    - 
+    - [Vygen_2013]_; Niger
+  * - :math:`duration_\text{treated SAM}`
+    - 6-59 months old
+    - 48.3
+    - point value
+    - 
+    - [Zw_2020tx]_; Ethiopia
+  * - :math:`duration_\text{untreated MAM}`
+    - 0-59 months old
+    - 63
+    - point value
+    - IQR reported, but no uncertainty about median value. Used MUAC definition of malnutrition. Value specific to >6 month population, but assumed to generalize to <6 month population.
+    - [James_2016]_; Ethiopia
+  * - :math:`duration_\text{treated MAM}`
+    - 0-6 months old
+    - 20.8
+    - point value
+    - 
+    - [Woeltje_2020]_; Malawi
+  * - :math:`duration_\text{treated MAM}`
+    - 6-59 months old
+    - 41.3 (95% CI: 34.4, 49)
+    - normal
+    - 
+    - [Ackatia_Armah_2015tx]_; Mali
+  * - :math:`C`
+    - 0-59 months old
+    - 0.488 (95% CI:0.374-0.604)
+    - normal
+    - baseline scenario value. assumed to be the same for SAM and MAM and across age groups.
+    - Currently the same for SAM and MAM [Isanaka_2021]_
+  * - :math:`E_\text{MAM}`
+    - 0-59 months old
+    - 0.70 (95% CI:0.64-0.76)
+    - normal
+    - baseline scenario value. value from >6 months assumed to also apply to <6 months
     - [Zw_2020tx]_
-    - Over 7 studies in Ethiopa
+  * - :math:`E_\text{SAM}`
+    - 0-59 months old
+    - 0.731 (95% CI:0.585-0.877)
+    - normal
+    - baseline scenario value. value from >6 months assumed to also apply to <6 months
+    - [Ackatia_Armah_2015tx]_
+  * - :math:`k`
+    - 0-59 months old
+    - 6.7(95% CI: 5.3-8.4)
+    - lognormal
+    - 
+    - 
 
 .. todo::
 
+    Confirm validity of uncertainty distribution assumptions.
+
     Try to update the weighted time-to-recovery for SAM children admitted to OTP. There are 7 studies from the Zw 2020 paper that reports median (IQR) time to recovery in table 1. The 48.3 days currently in the table is just a weighted average. It would be better to find a way to get the summary value (random effects?) with the uncertainty distribution. Nathanial might have a way to do this. 
 
+Deriving :math:`r2_{ux}` using the following three equations:
 
-.. list-table:: Modeled Outcomes **Table 3** MAM 0-6 months
-  :widths: 5 5 20 15 15 15 15
-  :header-rows: 1
+#. :math:`r2_{ux} = 1 / duration_\text{untreated SAM}`
 
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
-    - Note
-  * - :math:`r3_{ux}`
-    - transition probability
-    - Daily recovery probability of untx MAM 
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx MAM}}`
-    - time-to-recovery 63 (IQR: 28-105) days 
-    - [James_2016]_ (Ethiopia)
-    - They used MUAC definition of malnutrition; tx time to recovery for >6mo
-  * - :math:`t2_{mam}`
-    - transition probability
-    - Daily recovery probability of tx MAM 
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
-    - time-to-recovery (mean) 20.8 days
-    - [Woeltje_2020]_ (Malawi)
-    - Recovery time feeding 75 kcal/kg/day
+#. :math:`duration_\text{overall SAM} = duration_\text{treated SAM} * C * E_\text{SAM} + duration_\text{untreated SAM} * (1 - C * E_\text{SAM})`
 
-.. list-table:: Modeled Outcomes **Table 4** MAM 6-59 months
-  :widths: 5 5 20 15 15 15 15
-  :header-rows: 1
+#. :math:`duration_\text{overall SAM} = 365 / k`
 
-  * - Outcome
-    - Outcome type
-    - Outcome definition
-    - Effect size
-    - Effect size application
-    - Value, source
-    - Note
-  * - :math:`r3_{ux}`
-    - transition probability
-    - Daily recovery probability of untx MAM 
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of utx MAM}}`
-    - time-to-recovery 63 (IQR: 28-105) days 
-    - [James_2016]_ (Ethiopia)
-    - They used MUAC definition of malnutrition
-  * - :math:`t2_{mam}`
-    - transition probability
-    - Daily recovery probability of tx MAM 
-    - :math:`\frac{t}{\text{median time-to-recovery (days) of tx MAM}}` 
-    - time-to-recovery 41.3 (95%CI: 34.4, 49) days
-    - [Ackatia_Armah_2015tx]_ (Mali)
-    - recovery time using RUSF 
+So...
 
-Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline treatment coverage (C):
+  :math:`365/k = duration_\text{treated SAM} * C * E_\text{SAM} + duration_\text{untreated SAM} * (1 - C * E_\text{SAM})`
 
-  The incidence correction factor k is = :math:`\frac{t}{\text{average duration of disease}}`
-  where t is the period for which incidence is estimated (a year) eg. 365 days using days as the unit 
+  ...
 
-  k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations. 
+  :math:`duration_\text{untreated SAM} = \frac{365/k - duration_\text{treated SAM} * C * E_\text{SAM}}{1 - C * E_\text{SAM}}`
 
-  Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
+.. note::
 
-  1) From Isanaka 2021, the incidence correction factor for Ethiopia is k = 6.7(95%CI:5.3-8.4) for a baseline population SAM treatment coverage of 48.8(95%CI 37.4 to 60.4)
-  2) k = 6.7(95%CI:5.3-8.4) =  :math:`\frac{365}{SAM\_duration (in days)}` 
-  3) SAM_duration =  :math:`\frac{365}{6.7}` = 54.5 days
-  4) :math:`54.5 = \frac{365}{r2_{ux} \times (1-CE) + t1_{sam} \times (CE) + death\_rate_{age|sex}}` 
-  5) Solve for :math:`r2_{ux}` for for each age/sex strata with age/sex specific death rate
- 
- where C = 48.8% (95%CI:37.4-60.4), E = 70% (95%CI:64-76). Note that k = 6.7 corresponds to the current treatment coverage estimate in Isanaka 2021 (see appendix) which is C = 48.8% (what we call baseline). We are further making an assumption that the baseline efficacy of the program is E = 70%. Hence from these baseline assumptions, we are able to derive a r2_ux. Also note that only the treatment coverage C is necessary to calculate the number of incidence cases.  
+  A note on the incidence correction factor, :math:`k`: 
 
-  For example, if 
 
-  - :math:`death\_rate_{age|sex}` = 0.015 per person year for age group 4 female 
-  - :math:`r2_{ux} \times (1 - 0.488  \times 0.7) = \frac{365}{54.5} - (\frac{365}{48.3}  \times 0.488  \times 0.7) - 0.015`
-  - :math:`r2_{ux} \times (1 - 0.488  \times 0.7) = 6.697 - 2.581 - 0.015`
-  - :math:`r2_{ux} \times (1 - 0.488  \times 0.7) = 4.101`
-  - :math:`r2_{ux} =  4.101 / 0.6584 = 6.2287`
-  - Duration of untreated SAM = 365 / 6.2287 = 58.6 days for age group 4 female
+    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit 
 
+    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations. 
+
+    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
 
 .. important::
 
   In this first run that Rajan is building (August-18-21), we are not modelling treatment in the first 28 days of life. If we do model treatment in this first 28 days, the prevalence of wasting by the time they reach post-neonatal age groups in the scale-up scenario will be different (reduced). We should think through the relationship between wasting and LBWSG in the neonatal age groups and see if we want to add treatment back into the first month of life. 
 
-
-.. code-block:: python
-
-    #Nathaniel to add parameter uncertainty and distribution 
-
 .. note::
+
+  NOTE: Ali has updated Nicole's previous suggested implementation, shown here:
 
   How the value r2_ux was derived for model 2 (note we did use an efficacy (E) in model 2): 
 
@@ -615,89 +536,40 @@ Deriving :math:`r2_{ux}` for each age and sex specific strata using the baseline
   
   *We did not calculate a specific r2_ux value for each age and sex in model 2*
 
-
 Affected Outcomes
 +++++++++++++++++
 
-Scaling up the effective coverage of SAM and MAM, we will increase treatment coverage and also efficacy of the treatment programme to increase effective coverage (EC).
+Rather than apply an effect size associated with the intervention to a particular outcome, effective coverage of this intervention directly determines your transition rates between wasting states. Coverage of the intervention is determined by parameters :math:`C`, :math:`E_{SAM}`, and :math:`E_{MAM}`. These parameters will be scale-up in the alternative scenario so that more simulants are covered by the intervention. Values for these parameters in each simulation scenario are shown in the table below. 
+
+.. note:: The baseline values in the table below are the same as the values in the above `parameter values table`_. These values should be used to calculate the wasting state transition rates. These rates should not be changed in the alternative scenario. Rather, only the number of simulants affected by treated vs. untreated rates (calculated according to baseline scenario values) will change in the alternative scenario, according to the approach outlined below.
 
 .. list-table:: Scenario coverage data (Ethiopia)
-  :widths: 10 20 20 20 20 20 
   :header-rows: 1
 
-  * - Subpop coverage
-    - Value (C)
-    - Reference
-    - Value (E)
-    - Reference
+  * - Parameter
+    - Baseline value
+    - Alternative Value
     - Note
-  * - :math:`EC_{SAM_{0-6}}`
-    - 90%
+  * - :math:`C`
+    - 0.488 (95% CI:0.374-0.604)
+    - 0.9
     - 
-    - 75%
+  * - :math:`E_{SAM}`
+    - 0.731 (95% CI:0.585-0.877), normal
+    - 0.75
     - Sphere standards
-    - 
-  * - :math:`EC_{SAM_{6-59}}` 
-    - 90%
-    - 
-    - 75%
+  * - :math:`E_{SAM}`
+    - 0.70 (95% CI:0.64-0.76), normal
+    - 0.75
     - Sphere standards
-    - 
-  * - :math:`EC_{MAM_{0-6}}`
-    - 90% 
-    - 
-    - 75%
-    - Sphere standards
-    - 
-  * - :math:`EC_{MAM_{6-59}}`
-    - 90% 
-    - 
-    - 75%
-    - Sphere standards
-    - 
 
+**How to determine which wasting state transition rates apply to a given simulant:**
 
-.. list-table:: How to apply recovery rate to coverage category
-  :widths: 30 20 20 20
-  :header-rows: 1
+#. Determine if a simulant is covered by treatment coverage with the scenario-specific probability :math:`C`
 
-  * - Subpopulation
-    - Coverage
-    - Recovery rate to apply
-    - Cost to apply
-  * - Tx uncovered with SAM 
-    - :math:`1 - C_{SAM_{age}}`
-    - :math:`r2_{ux}`
-    - None
-  * - Tx covered but not cured with SAM
-    - :math:`C_{SAM_{age}} - EC_{SAM_{age}}`
-    - :math:`r2_{ux}`
-    - Cost of SAM treatment per child
-  * - Tx covered and cured with SAM
-    - :math:`EC_{SAM_{age}}`
-    - :math:`t1_{sam}`
-    - Cost of SAM treatment per child
-  * - Tx uncovered with MAM
-    - :math:`1 - C_{MAM_{age}}`
-    - :math:`r3_{ux}`
-    - None
-  * - Tx covered but not cured with MAM
-    - :math:`C_{MAM_{age}} - EC_{MAM_{age}}`
-    - :math:`r3_{ux}`
-    - Cost of MAM treatment per child
-  * - Tx covered and cured with MAM
-    - :math:`EC_{MAM_{age}}`
-    - :math:`t2_{mam}`
-    - Cost of MAM treatment per child
-  
-.. todo::
+#. If simulant is uncovered according to #1: apply untreated transition rates (:math:`r2_{ux}` and :math:`r3_{ux}`). If simulant is covered according to #1: determine if the simulant is "effectively" covered using the wasting state-specific probability :math:`E_{SAM}` or :math:`E_{MAM}` corresponding to the wasting state that they occupy at the current time step.
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
-
+#. If a simulant is not effectively covered according to #2, apply untreated transition rates (:math:`r2_{ux}` and :math:`r3_{ux}`). If a simulant is effectively covered according to #2, apply treated transition rates (:math:`t1_{SAM}` and :math:`t2_{MAM}`). 
 
 Restrictions
 ++++++++++++
@@ -733,8 +605,6 @@ Also note that since wasting and LBWSG are correlated, those with more severe wa
   * - Note
     -
     -
-
- 
 
 
 Assumptions and Limitations
