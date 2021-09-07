@@ -85,7 +85,7 @@ Comparisons will be with the GBD results of incidence, prevalence, and mortality
 3.1 Causal diagram
 ------------------
  
-  .. note::
+ .. note::
     link to DAGs page
     use round circles with DAGs
 
