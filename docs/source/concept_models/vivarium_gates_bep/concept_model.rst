@@ -500,17 +500,39 @@ Apply the following intervention shifts according to interventions recieved in e
 
   Determine why increasing coverage from 0.75 to 0.8 results in fewer DALYs averted for Tanzania in sensitivity analysis
 
-For an updated run of the BEP simulation model for the repsonse to reviewers, we plan to include the following (for the full 100 simulation draws):
+For an updated run of the BEP simulation model for the repsonse to reviewers, we plan to include the following updates (for the full 100 simulation draws, all four locations, all scenarios):
 
- - updated hopes hopes-and-dreams effect size of BEP 
- - updated maternal undernourishment effect size on birthweight (update lit review)
- - sex stratification of outputs
- - updated intervention coverage targets
- - SD calculation from confidence interval calculation should be (upper limit - lower limit)/2x1.96, and not 1.98.
+**1. updated hopes hopes-and-dreams effect size of BEP**
 
-.. todo::
+.. list-table:: Previous and updated BEP hopes and dreams effect size on birthweight
+    :header-rows: 1
 
-  Determine if SD calculation applies to simulation runs or researcher post-processing only.
+   * - Parameter
+     - Previous value
+     - Updated value
+     - Note
+   * - BEP hopes and dreams effect size (g)
+     - +100 (point estimate)
+     - +136 (normal distribution with standard deviation of 29 g)
+     - Updated from assumption to value informed by Ceesay et al 1997 BMJ
+
+**2. updated maternal undernourishment effect size on birthweight**
+
+.. list-table:: Previous and updated maternal undernourishment effect size on birthweight
+    :header-rows: 1
+
+   * - Parameter
+     - Previous value
+     - Updated value
+     - Note
+   * - Maternal low BMI shift in birthweight (g)
+     - -147.71 (95% CI: -210.9, -84.52)
+     - -138.46 (95% CI: -174.68, -102.25)
+     - Normal distribution of uncertainty
+
+**3. sex stratification of outputs**
+
+**4. updated intervention coverage targets**
 
 The updated intervention coverage targets should be implemented as three separate runs of the simulation and the results should be stratified by these targets in the same way that they were for the sensitivity analysis runs.
 
@@ -530,4 +552,8 @@ The updated intervention coverage targets should be implemented as three separat
      - 0.9
      - For all locations
 
-  
+.. note::
+
+  Medium coverage level is a low priority and can be excluded to reduce computational load
+
+**5. SD calculation from confidence interval calculation should be (upper limit - lower limit)/2x1.96, and not 1.98.**
