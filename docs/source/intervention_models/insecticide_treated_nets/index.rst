@@ -63,7 +63,7 @@ Baseline Coverage Data
 ++++++++++++++++++++++++
 
 The :download:`2015 Ethiopia Malaria Indicator Survey <Ethiopia_MIS_2015.pdf>` is a nationally representative survey is a "large, nationally representative
-survey of coverage of key malaria control interventions, treatment-seeking behavior, and malaria prevalence" (p. 10). According to the survey, "in malarious areas:" 44% of pregnant women slept under an ITN the previous night and 70% of pregnant women who lived in households that owned at least one ITN slept under an ITN the previous night (Table 21). ITN use among pregnant women was higher in urban areas and among wealthier households. Estiamtes are also available by region.
+survey of coverage of key malaria control interventions, treatment-seeking behavior, and malaria prevalence" (p. 10). The Ethiopia MIS 2015 was cited as the most recent survey data in the `2018 Ethiopia WHO world malaria report <https://www.who.int/malaria/publications/country-profiles/profile_eth_en.pdf?ua=1>`_. According to the survey, "in malarious areas:" 44% of pregnant women slept under an ITN the previous night and 70% of pregnant women who lived in households that owned at least one ITN slept under an ITN the previous night (Table 21). ITN use among pregnant women was higher in urban areas and among wealthier households. Estiamtes are also available by region. 
 
 .. list-table:: ITN Baseline Coverage
   :header-rows: 1
