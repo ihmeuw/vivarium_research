@@ -83,6 +83,10 @@ survey of coverage of key malaria control interventions, treatment-seeking behav
 
   Because we do not currently model malarious areas in our simulations (but rather generalize the malaria burden to the entire population), we will assume that the coverage proportion of ITNs in malarious areas is representative of the general population of pregnant women as well.
 
+.. todo::
+
+  Improve the above assumption!
+
 Vivarium Modeling Strategy
 --------------------------
 
