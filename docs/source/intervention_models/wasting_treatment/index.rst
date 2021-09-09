@@ -636,7 +636,8 @@ Assumptions and Limitations
 #. We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country. 
 #. We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups. 
 #. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
-#. 
+#. We assume that MAM and SAM treatment effectivenesses are independent from one another.
+#. We assume that individual simulant's propensity to respond to wasting treatment is not auto-correlated.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
