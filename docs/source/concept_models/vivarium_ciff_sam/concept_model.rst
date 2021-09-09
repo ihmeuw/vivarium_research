@@ -272,7 +272,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Maternal Supplementation: Targeted Balanced Energy Protein and Maternal Micronutrient Supplementation <maternal_supplementation_intervention>`
 
-* Insecticide treated nets
+* :ref:`Insecticide treated nets <insecticide_treated_nets>`
 
 .. warning::
 

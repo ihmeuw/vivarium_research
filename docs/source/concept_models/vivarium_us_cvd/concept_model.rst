@@ -215,24 +215,32 @@ Variations on the above intervention increased support time or added meal replac
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Cohort type: 
-  	- Prospective closed cohort starting at age 3. Youngest simulants will be turning 25 when the simulation ends. Ages 3-25 will be modeled but not observed.
+  	- Prospective closed cohort. Youngest simulants will be age 3 at initiation of simulation and will be turning 25 when the simulation ends. Oldest simulants will be age 125 at initiation. Ages 3-25 will be modeled but not observed.
   	- Size of largest tracked population: 100,000 simulants
   - Cohort length:
   	- year_start: January 1, 2019
   	- year_end: December 31, 2040
   - Age and sex structure:
   	- Sex: male/female/both
-  	- Age range: age_start=25, age_end=125
+  	- Age range of initialized simulants: age_start=25, age_end=125
   - Time step:
   	- One month
   - Fertility:
   	- Not applicable
   - Stratifications:
+<<<<<<< HEAD
   	- P\ :sub:`1`\: healthy individuals
   	- P\ :sub:`2`\: new initiators, elevated risk factor detected at office
       visit
   	- P\ :sub:`3`\: new initiators, event (acute MI, acute stroke)
   	- P\ :sub:`4`\: previous diagnosis; change in medication
+=======
+  	- Intended to identify groups that we are interested in being able to track and compare in the simulation.
+  	- P\ :sub:`1`\: healthy individuals. These are simulants that are never eligible to recieve any intervention because they never develop elevated risk factors (do not cross the relevant prespecified thresholds for all prespecified risk factors) and never experience a qualifying event (AMI, acute ischemic stroke) during the course of the simulation.
+  	- P\ :sub:`2`\: new initiators, primary. Simulants in this group are enrolled in the intervention(s) based on findings of elevated risk factors (simulant crosses a relevant prespecified threshold for one or more prespecified risk factors) at a routine medical (also referred to as an office visit or screening) exam. This corresponds to "primary prevention". 
+  	- P\ :sub:`3`\: new initiators, secondary. Simulants in this group are enrolled in the intervention(s) based on experiencing an acute event (AMI/ischemic stroke) who were not previously identified as being at risk due to elevated risk factor levels. This may be due to either: 1) not having elevated risk factors at screening visits that occurred in time steps prior to the event; or, 2) not having a visit during any time step between intialization and event where the simulant was identified as having elevated risk factors and thus meeting eligibility criteria for enrollment in the intervention(s). This corresponds to "secondary prevention"
+  	- P\ :sub:`4`\: previous diagnosis. Simulants in this group meet treatment eligibility requirements at the start of the simulation and have been prescribed blood pressure or lipid-lowering medication and/or received guidance from their medical care provider about lifestyle modifications that they should implement in order to reduce their likelihood of developing disease according to standard practice of care. 
+>>>>>>> main
 
 
 .. _uscvd5.2.2:

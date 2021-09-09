@@ -18,6 +18,9 @@ Chronic Obstructive Pulmonary Disease
   * - COPD
     - Chronic obstructive pulmonary disease
     - 
+  * - HF
+    - Heart failure
+    - 
 
 Disease Overview
 ----------------
@@ -87,7 +90,7 @@ Vital registration and surveillance data were included in a standard CODEm model
 Cause Hierarchy
 +++++++++++++++
 
-.. image:: cause_hierarchy_copd_NO_HF.svg
+.. image:: cause_hierarchy_copd.svg
 
 Restrictions
 ++++++++++++
@@ -267,8 +270,8 @@ Data Sources
      - 
    * - sequelae
      - sequelae definition
-     - {s929, s421, s422, s983}
-     - 
+     - {s929, s421, s422, s983, s5774, s980, s981, s982}
+     - Includes HF due to severe COPD sequelae
 
 Validation Criteria
 +++++++++++++++++++

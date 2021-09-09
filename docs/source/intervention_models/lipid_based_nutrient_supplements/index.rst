@@ -262,6 +262,7 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- verification: coverage of SQ-LNS as a function of time in baseline and intervention scenario
 - verification: prevalence of stunting in supplemented vs non-supplemented group
 - verification: incidence of moderate wasting from mild in supplemented vs non-supplemented group
 - validation: check that the prevalence of moderate wasting in supplemented vs non-supplemented group agrees with the prevalence RR that we applied to the incidence instead. 
