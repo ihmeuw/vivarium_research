@@ -228,6 +228,10 @@ Variations on the above intervention increased support time or added meal replac
   - Fertility:
   	- Not applicable
   - Stratifications:
+  	- P\ :sub:`1`\: healthy individuals
+  	- P\ :sub:`2`\: new initiators, elevated risk factor detected at office visit
+  	- P\ :sub:`3`\: new initiators, event (acute MI, acute stroke)
+  	- P\ :sub:`4`\: previous diagnosis; change in medication
   	- Intended to identify groups that we are interested in being able to track and compare in the simulation.
   	- P\ :sub:`1`\: healthy individuals. These are simulants that are never eligible to recieve any intervention because they never develop elevated risk factors (do not cross the relevant prespecified thresholds for all prespecified risk factors) and never experience a qualifying event (AMI, acute ischemic stroke) during the course of the simulation.
   	- P\ :sub:`2`\: new initiators, primary. Simulants in this group are enrolled in the intervention(s) based on findings of elevated risk factors (simulant crosses a relevant prespecified threshold for one or more prespecified risk factors) at a routine medical (also referred to as an office visit or screening) exam. This corresponds to "primary prevention". 
