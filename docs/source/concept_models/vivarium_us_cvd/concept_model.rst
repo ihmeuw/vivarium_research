@@ -229,7 +229,8 @@ Variations on the above intervention increased support time or added meal replac
   	- Not applicable
   - Stratifications:
   	- P\ :sub:`1`\: healthy individuals
-  	- P\ :sub:`2`\: new initiators, elevated risk factor detected at office visit
+  	- P\ :sub:`2`\: new initiators, elevated risk factor detected at office
+      visit
   	- P\ :sub:`3`\: new initiators, event (acute MI, acute stroke)
   	- P\ :sub:`4`\: previous diagnosis; change in medication
 
