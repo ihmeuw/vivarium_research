@@ -468,7 +468,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 0-59 months old
     - 0.488 (95% CI:0.374-0.604)
     - normal
-    - baseline scenario value. assumed to be the same for SAM and MAM and across age groups.
+    - Baseline scenario value. Assumed to be the same for SAM and MAM and across age groups at the draw level.
     - Currently the same for SAM and MAM [Isanaka_2021]_
   * - :math:`E_\text{MAM}`
     - 0-59 months old
@@ -587,9 +587,9 @@ Rather than apply an effect size associated with the intervention to a particula
 
 **How to determine which wasting state transition rates apply to a given simulant:**
 
-#. Determine if a simulant is covered by treatment coverage with the scenario-specific probability :math:`C`
+#. Determine if a simulant is covered by treatment coverage with the scenario-specific probability :math:`C` (which applies to coverage of MAM and SAM equally at the draw level). Each simulant should have a single propensity value for :math:`C` for both MAM and SAM treatment (equally likely to be covered by SAM treatment as MAM treatment).
 
-#. If simulant is uncovered according to #1: apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If simulant is covered according to #1: determine if the simulant is "effectively" covered using the wasting state-specific probability :math:`E_{SAM}` or :math:`E_{MAM}` corresponding to the wasting state that they occupy at the current time step.
+#. If simulant is uncovered according to #1: apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If simulant is covered according to #1: determine if the simulant is "effectively" covered using the wasting state-specific probability :math:`E_{SAM}` or :math:`E_{MAM}` corresponding to the wasting state that they occupy at the current time step. NOTE: distributions of :math:`E_{SAM}` and :math:`E_{MAM}` should not be correlated at the draw level. Simulants should have random propensity values for :math:`E_{SAM}` and :math:`E_{MAM}` such that it is possible for them to be effectively covered for one course of MAM treatment and not effectively covered for the next and vice versa.
 
 #. If a simulant is not effectively covered according to #2, apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If a simulant is effectively covered according to #2, apply treated transition rates (:math:`r_{SAM,tx}` and :math:`r_{MAM,tx}`). 
 
@@ -632,9 +632,11 @@ Also note that since wasting and LBWSG are correlated, those with more severe wa
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- We are not applying a differential death rate to those effectively covered vs not effectively covered
-- We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country. 
-- We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups. 
+#. We are not applying a differential death rate to those effectively covered vs not effectively covered
+#. We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country. 
+#. We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups. 
+#. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
+#. 
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
