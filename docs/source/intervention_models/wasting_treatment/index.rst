@@ -637,7 +637,7 @@ Assumptions and Limitations
 #. We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups. 
 #. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
 #. We assume that MAM and SAM treatment effectivenesses are independent from one another.
-#. We assume that individual simulant's propensity to respond to wasting treatment is not auto-correlated.
+#. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Zw_2020tx]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Zw_2020tx]_. We chose to make this assumption given the non-deterministic nature of these factors.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
