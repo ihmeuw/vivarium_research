@@ -62,58 +62,30 @@ Insecticide treated bed nets effectively reduce malaria incidence (and therefore
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-On September 1st, 2021 we performed a literature search on PubMed using the search terms "insecticide treated nets ethiopia pregnan*", which yielded 21 results. The results were screened and relevant studies are summarized in the below. (References are not yet linked on this page but can be found here: :code:`J:\Project\simulation_science\ciff_malnutrition\literature\itn_coverage`)
+The :download:`2015 Ethiopia Malaria Indicator Survey <Ethiopia_MIS_2015.pdf>` is a nationally representative survey is a "large, nationally representative
+survey of coverage of key malaria control interventions, treatment-seeking behavior, and malaria prevalence" (p. 10). The Ethiopia MIS 2015 was cited as the most recent survey data in the `2018 Ethiopia WHO world malaria report <https://www.who.int/malaria/publications/country-profiles/profile_eth_en.pdf?ua=1>`_. According to the survey, "in malarious areas:" 44% of pregnant women slept under an ITN the previous night and 70% of pregnant women who lived in households that owned at least one ITN slept under an ITN the previous night (Table 21). ITN use among pregnant women was higher in urban areas and among wealthier households. Estiamtes are also available by region. 
 
-.. list-table:: Ethiopia baseline coverage data: proportion of pregnant women sleeping under insecticide treated nets
-  :widths: 10 15 5 5 25 
+.. list-table:: ITN Baseline Coverage
   :header-rows: 1
 
-  * - Study
-    - Population
-    - Study year
+  * - Location
+    - Subpopulation
+    - Coverage parameter
     - Value
     - Note
-  * - [Belay-and-Deressa-2008]
-    - 814 pregnant women from northern Ethiopia
-    - 2006
-    - 0.345
-    - District purposely selected to represent amalrious areas of southern Tigray in northern Ethiopia. Seven rural and one urban sampling unit.
-  * - [Deressa-et-al-2014]
-    - 55 pregnant women from 1235 households from 16 randomly selected villages in southern Ethiopia
-    - 2008
-    - 0.60
-    - ITN use among pregnant women positively associated with household wealth index
-  * - [Yitayew-et-al-2018]
-    - 226 pregnant women who attended antenatal clinics at the Adis Zemen hospital
-    - 2018
-    - 0.708
-    - ITN use positively associated with maternal education and maternal age
-  * - [Fuge-et-al-2015]
-    - 398 pregnant women in Hadiya Zone, Shashogo District, Ethiopia
-    - 2014
-    - 0.082
-    - 
-  * - [Graves-et-al-2011]
-    - X
-    - 2006-2007
-    - X
-    - 
-  * - [Negash-et-al-2012]
-    - Six districts in Afar National Regional State in northeastern Ethiopia
-    - 2008
-    - 0.70
-    - Observed use (reported use was 79.1%)
-  * - [Ouedraogo-et-al-2019]
-    - 2784 women who had pregnancy outcome in the year preceding the survey
-    - 2016
-    - 0.264
-    - reported "always" sleeping under the net during their pregnancy. ITN use was positively associated with attending at least one ANC visit.
+  * - Ethiopia
+    - Pregnant women in malarious areas
+    - Proportion sleeping under ITNs
+    - 0.44 (SD: 0.021)
+    - Assume normal distribution of uncertainty. SD of uncertainty distribution calculated from :math:`SE = \sqrt{p * (1 - p) / n}`. Data from Ethiopia MIS 2015.
+
+.. note::
+
+  Because we do not currently model malarious areas in our simulations (but rather generalize the malaria burden to the entire population), we will assume that the coverage proportion of ITNs in malarious areas is representative of the general population of pregnant women as well.
 
 .. todo::
 
-  Determine baseline coverage value to be used for Ethiopia, either by meta-analysis or by selection of large/representative recent study
-
-  NOTE: GBD estimates ITN coverage. Use this value instad after discussion with modelers.
+  Improve the above assumption!
 
 Vivarium Modeling Strategy
 --------------------------
