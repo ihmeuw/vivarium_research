@@ -572,7 +572,7 @@ The Vivarium modeling strategy above details how to solve for the transition rat
     - Note
   * - r3
     - Untreated/uncovered by :math:`C`
-    - :math:`r_{MAM,ux} / r_{MAM,tx}`
+    - :math:`\frac{r_{MAM,ux}}{r_{MAM,tx} * E_{MAM} + r_{MAM,ux} * (1 - E_{MAM})}`
     - 
   * - t1
     - Untreated/uncovered by :math:`C`
