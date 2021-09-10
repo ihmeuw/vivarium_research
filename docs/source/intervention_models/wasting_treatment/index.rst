@@ -561,9 +561,70 @@ So...
 Affected Outcomes
 +++++++++++++++++
 
-Rather than apply an effect size associated with the intervention to a particular outcome, effective coverage of this intervention directly determines your transition rates between wasting states. Coverage of the intervention is determined by parameters :math:`C`, :math:`E_{SAM}`, and :math:`E_{MAM}`. These parameters will be scale-up in the alternative scenario so that more simulants are covered by the intervention. Values for these parameters in each simulation scenario are shown in the table below. 
+The Vivarium modeling strategy above details how to solve for the transition rates among the covered uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
 
-.. note:: The baseline values in the table below are the same as the values in the above `parameter values table`_. These values should be used to calculate the wasting state transition rates. These rates should not be changed in the alternative scenario. Rather, only the number of simulants affected by treated vs. untreated rates (calculated according to baseline scenario values) will change in the alternative scenario, according to the approach outlined below.
+.. list-table:: Wasting transition rate relative risks for wasting treatment 
+  :header-rows: 1
+
+  * - Transition
+    - Treatment category
+    - Value
+    - Note
+  * - r3
+    - Untreated/uncovered by :math:`C`
+    - 1
+    - 
+  * - t1
+    - Untreated/uncovered by :math:`C`
+    - 0
+    - :math:`\frac{0 * r_{SAM,tx}}{E_{SAM} * r_{SAM,tx}}`
+  * - r2
+    - Untreated/uncovered by :math:`C`
+    - :math:`1 / (1 - E_{SAM})`
+    - :math:`\frac{r_{SAM,ux} * 1}{r_{SAM,ux} * (1 - E_{SAM})}`
+  * - r3
+    - Treated/covered by :math:`C`
+    - :math:`r_{MAM,tx} / r_{MAM,ux}`
+    - 
+  * - t1
+    - Treated/covered by :math:`C`
+    - 1
+    - 
+  * - r2
+    - Treated/covered by :math:`C`
+    - 1
+    - 
+
+**How to apply treatment effects at the simulant level**
+
+For rate, :math:`r`, in [r3, r2, t1]:
+
+.. math::
+
+  r_i = r * (1 - PAF_{r}) * RR_\text{r, i (given C_i)}
+
+Given,
+
+.. math::
+
+  PAF_{r3} = \frac{\overline{RR_{r3}} - 1}{\overline{RR_{r3}}}
+
+
+  PAF_{r2} = \frac{\overline{RR_{r2}} - 1}{\overline{RR_{r2}}}
+
+
+  PAF_{t1} = 0
+
+and (for :math:`r` in [r3, r2, t1]), 
+
+.. math::
+
+  \overline{RR_{r}} = C * RR_{r, treated} + (1 - C) * RR_{r, untreated}
+
+NOTE: Each simulant should have a single propensity value for :math:`C` for both MAM and SAM treatment (equally likely to be covered by SAM treatment as MAM treatment).
+
+Scenarios
++++++++++++
 
 .. list-table:: Scenario coverage data (Ethiopia)
   :header-rows: 1
@@ -585,13 +646,9 @@ Rather than apply an effect size associated with the intervention to a particula
     - 0.75
     - Sphere standards
 
-**How to determine which wasting state transition rates apply to a given simulant:**
+.. note::
 
-#. Determine if a simulant is covered by treatment coverage with the scenario-specific probability :math:`C` (which applies to coverage of MAM and SAM equally at the draw level). Each simulant should have a single propensity value for :math:`C` for both MAM and SAM treatment (equally likely to be covered by SAM treatment as MAM treatment).
-
-#. If simulant is uncovered according to #1: apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If simulant is covered according to #1: determine if the simulant is "effectively" covered using the wasting state-specific probability :math:`E_{SAM}` or :math:`E_{MAM}` corresponding to the wasting state that they occupy at the current time step. NOTE: distributions of :math:`E_{SAM}` and :math:`E_{MAM}` should not be correlated at the draw level. Simulants should have random propensity values for :math:`E_{SAM}` and :math:`E_{MAM}` such that it is possible for them to be effectively covered for one course of MAM treatment and not effectively covered for the next and vice versa.
-
-#. If a simulant is not effectively covered according to #2, apply untreated transition rates (:math:`r_{SAM,ux}` and :math:`r_{MAM,ux}`). If a simulant is effectively covered according to #2, apply treated transition rates (:math:`r_{SAM,tx}` and :math:`r_{MAM,tx}`). 
+  Changing the :math:`E_{SAM}` and :math:`E_{MAM}` rates between the baseline and alternative scenarios will change the rate of simulants covered by MAM/SAM treatment that transition through the treated and untreated pathways (the treated pathway transition rate will be greater and the untreated pathway transition rate will be lower in the alternative scenario relative to the the baseline scenario). This should be reflected in the implementation of the treatment model.
 
 Restrictions
 ++++++++++++
@@ -627,7 +684,6 @@ Also note that since wasting and LBWSG are correlated, those with more severe wa
   * - Note
     -
     -
-
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
