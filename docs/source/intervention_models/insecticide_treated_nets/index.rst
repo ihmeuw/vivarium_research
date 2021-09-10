@@ -49,21 +49,21 @@ Insecticide treated bed nets effectively reduce malaria incidence (and therefore
   * - Birthweight
     - Increase in population mean value
     - Yes
-    - Effect modified by parity in [Gamble-et-al-2007]_
+    - Effect modified by parity in [Gamble-et-al-2007]_. Effect entirely mediated through malaria incidence reduction.
   * - Preterm birth
     - Protective relative risk
     - No
-    - Statistically insigificant from [Gamble-et-al-2007]_
+    - Statistically insigificant from [Gamble-et-al-2007]_. Effect entirely mediated through malaria incidence reduction.
   * - Maternal hemoglobin
     - Increase in population mean value
     - No
-    - Statistically insignificant from [Gamble-et-al-2007]_
+    - Statistically insignificant from [Gamble-et-al-2007]_. Effect entirely mediated through malaria incidence reduction.
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
 The :download:`2015 Ethiopia Malaria Indicator Survey <Ethiopia_MIS_2015.pdf>` is a nationally representative survey is a "large, nationally representative
-survey of coverage of key malaria control interventions, treatment-seeking behavior, and malaria prevalence" (p. 10). The Ethiopia MIS 2015 was cited as the most recent survey data in the `2018 Ethiopia WHO world malaria report <https://www.who.int/malaria/publications/country-profiles/profile_eth_en.pdf?ua=1>`_. According to the survey, "in malarious areas:" 44% of pregnant women slept under an ITN the previous night and 70% of pregnant women who lived in households that owned at least one ITN slept under an ITN the previous night (Table 21). ITN use among pregnant women was higher in urban areas and among wealthier households. Estiamtes are also available by region. 
+survey of coverage of key malaria control interventions, treatment-seeking behavior, and malaria prevalence" (p. 10). The Ethiopia MIS 2015 was cited as the most recent survey data in the `2018 Ethiopia WHO world malaria report <https://www.who.int/malaria/publications/country-profiles/profile_eth_en.pdf?ua=1>`_. According to the survey, "in malarious areas:" 44% of pregnant women slept under an ITN the previous night and 70% of pregnant women who lived in households that owned at least one ITN slept under an ITN the previous night (Table 21). ITN use among pregnant women was higher in urban areas and among wealthier households. Estiamtes are also available by region. According to the Ethiopia MIS 2015, approximately 60% of the Ehtiopian population lives in Malarious areas.
 
 .. list-table:: ITN Baseline Coverage
   :header-rows: 1
@@ -78,14 +78,11 @@ survey of coverage of key malaria control interventions, treatment-seeking behav
     - Proportion sleeping under ITNs
     - 0.44 (SD: 0.021)
     - Assume normal distribution of uncertainty. SD of uncertainty distribution calculated from :math:`SE = \sqrt{p * (1 - p) / n}`. Data from Ethiopia MIS 2015.
-
-.. note::
-
-  Because we do not currently model malarious areas in our simulations (but rather generalize the malaria burden to the entire population), we will assume that the coverage proportion of ITNs in malarious areas is representative of the general population of pregnant women as well.
-
-.. todo::
-
-  Improve the above assumption!
+  * - Ethiopia
+    - Pregnant women
+    - Proportion sleeping under ITNs
+    - 0.6 :math:`\times` the proportion of pregnant women in malarious areas sleeping under ITNs 
+    - Use this value for baseline intervention coverage among the general pregnant population. NOTE: this strategy requires a maximum target intervention coverage level of 60% of the general population of pregnant women.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -106,7 +103,7 @@ Vivarium Modeling Strategy
     - Population mean birthweight
     - Mean difference
     - +33 grams (95% CI: 5, 62)
-    - 
+    - Effect entirely mediated through reduction in malaria incidence 
 
 Birthweight
 +++++++++++++++++++++
@@ -199,25 +196,27 @@ The ITN intervention affects child birthweight exposures, :ref:`which are docume
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- We assume that the maternal parity distribution of the study population is similar to that of our modeled population. If the modeled population has a lower parity distribution than the study population, we will underestimate the effect of the distribution (and vise-versa).
+#. We assume that the maternal parity distribution of the study population is similar to that of our modeled population. If the modeled population has a lower parity distribution than the study population, we will underestimate the effect of the distribution (and vise-versa).
 
-- Assume that the impact of ITN on birthweight is not mediated through an additional impact in gestational age. As gestational age has an indepedent impact on infant outcomes, this is a conservative assumption.
+#. Assume that the impact of ITN on birthweight is not mediated through an additional impact in gestational age. As gestational age has an indepedent impact on infant outcomes, this is a conservative assumption.
 
-- We are limited in that we do not assume a joint distribution of ITN coverage and malaria risk. Additionally, we do not consider correlation between baseline intervention coverage and other factors that may be associated with birthweight such as maternal education, maternal age, and ANC attendance.
+#. We are limited in that we do not consider correlation between baseline ITN use and other factors that may be associated with birthweight such as maternal education, maternal age, and ANC attendance.
+
+#. We assume that malaria burden among the study population in [Gamble-et-al-2007]_ is similar to the malaria burden among the model population. The [Gamble-et-al-2007]_ study population included trials performed in Kenya, Ghana, and Thailand in the 1990s. Notably, according to GBD 2019, Ethiopia had substantially lower malaria burden than Ghana, lower burden than Kenya, and substantially greater burden than Thailand at the national level.
+
+#. We assume that ITNs will impact birthweight among the population living in malarious areas only (60% of the population for Ethiopia). We do not consider differences in birthweight exposure distributions between the populations living in malarious and non-malarious areas.
+
+#. We assume that there is no effect modification of the ITN intervention by existing use of other malaria control measures such as indoor residual spraying.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- In the baseline scenario, the exposure distribution of birthweight (mean birthweight, if available) as well as the mortality rates among the neonatal age groups should match that of GBD.
+#. In the baseline scenario, the exposure distribution of birthweight (mean birthweight, if available) as well as the mortality rates among the neonatal age groups should match that of GBD.
 
-- The coverage of the ITN intervention in the baseline and alternative scenarios should match the associated input values
+#. The coverage of the ITN intervention in the baseline and alternative scenarios should match the associated input values
 
 References
 ------------
 
 .. [Gamble-et-al-2007]
   Gamble, C., Ekwaru, P. J., Garner, P., & ter Kuile, F. O. (2007). Insecticide-treated nets for the prevention of malaria in pregnancy: a systematic review of randomised controlled trials. PLoS medicine, 4(3), e107. https://doi.org/10.1371/journal.pmed.0040107
-
-.. todo::
-
-  Add remaining citations into RST functionality
