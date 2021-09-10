@@ -607,15 +607,9 @@ Given,
 
 .. math::
 
-  PAF_{r3} = \frac{\overline{RR_{r3}} - 1}{\overline{RR_{r3}}}
+  PAF_{r} = \frac{\overline{RR_{r}} - 1}{\overline{RR_{r}}}
 
-
-  PAF_{r2} = \frac{\overline{RR_{r2}} - 1}{\overline{RR_{r2}}}
-
-
-  PAF_{t1} = 0
-
-and (for :math:`r` in [r3, r2, t1]), 
+and
 
 .. math::
 
