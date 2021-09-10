@@ -650,6 +650,8 @@ Scenarios
 
   Changing the :math:`E_{SAM}` and :math:`E_{MAM}` rates between the baseline and alternative scenarios will change the rate of simulants covered by MAM/SAM treatment that transition through the treated and untreated pathways (the treated pathway transition rate will be greater and the untreated pathway transition rate will be lower in the alternative scenario relative to the the baseline scenario). This should be reflected in the implementation of the treatment model.
 
+  Also, :math:`E_{SAM}` and :math:`E_{MAM}` fractions may depend on diarrheal status in later model builds. 
+
 Restrictions
 ++++++++++++
 
