@@ -571,11 +571,11 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of incidence into cat 3 from cat 4
      - System of equations
    * - r2
-     - (1-sam_tx_coverage)*(1/time_to_sam_ux_recovery)
+     - 1 - e^(-(1-sam_tx_coverage)*(1/time_to_sam_ux_recovery))
      - Daily probability of remission into cat 2 from cat 1 (untreated)
      - Nicole's calculations; also referred to as r2ux (get lit source!)
    * - r3
-     - mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)
+     - 1 - e^(-(mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)))
      - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
      - Nicole's calculations (get lit source!)
    * - r4
@@ -583,7 +583,7 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of remission from cat 3 into cat 4
      - Assumed to be small
    * - t1
-     - sam_tx_coverage * (1/time_to_sam_tx_recovery)
+     - 1 - e^(-sam_tx_coverage * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
      - Nicole's calculations (get lit source!)
    * - s1
