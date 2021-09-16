@@ -190,13 +190,17 @@ See linked documentation for more information :ref:`Treatment and management for
  
 
 **Alternative scenario 2**
-Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90%. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.   
+Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.   
 
 **Alternative scenario 3**
-Scale up of LBWSG interventions from baseline coverage % (TBD) to 90%. 
+Scale up of LBWSG interventions from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 2. 
 
 **Alternative scenario 4**
-Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage % (TBD) to 90%. 
+Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 3.
+
+.. note::
+
+  Intervention coverage in alternative scenarios one through four should be implemented in an additive way such that the treatment intervention is introduced in scenario 1 and is also present for the remaining scenarios (2, 3, and 4), the SQ-LNS intervention is introduced in scenario 2 and is also present for the remaining scenarios 3 and 4, etc. 
 
 .. note:: 
     
