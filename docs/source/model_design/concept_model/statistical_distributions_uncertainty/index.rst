@@ -51,6 +51,16 @@ Common Statistical Distributions
 Log-normal distribution
 +++++++++++++++++++++++
 
+A random variable :math:`X` has a `log-normal distribution`_ with parameters
+:math:`\mu` and :math:`\sigma^2`, denoted :math:`X\sim \mathrm{Lognorm}(\mu,
+\sigma^2)`, if and only if its logarithm :math:`Y=\log(X)` has a normal
+distribution with mean :math:`\mu` and variance :math:`\sigma^2`. Equivalently,
+a random variable :math:`Y` satisfies :math:`Y\sim \mathcal{N}(\mu, \sigma^2)`
+if and only if its exponential :math:`X = \exp(Y)` satisfies :math:`X \sim
+\mathrm{Lognorm}(\mu, \sigma^2)`.
+
+.. _log-normal distribution: https://en.wikipedia.org/wiki/Log-normal_distribution
+
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
 
