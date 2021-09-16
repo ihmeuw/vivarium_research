@@ -129,6 +129,13 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 5)	Reduce incidence of infectious disease; or
 6)	Improve recovery from infectious disease.
 
+.. note::
+
+  Interventions that may improve wasting burden through these pathways that were not considered in our model include:
+
+    - Indoor residual spraying for malaria vector control
+    - Vitamin A supplementation
+    - Cash transfers
 
 .. _4.1:
 
