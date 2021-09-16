@@ -61,6 +61,9 @@ if and only if its exponential :math:`X = \exp(Y)` satisfies :math:`X \sim
 
 .. _log-normal distribution: https://en.wikipedia.org/wiki/Log-normal_distribution
 
+Defining a log-normal distribution to simulate parameter uncertainty
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
 
