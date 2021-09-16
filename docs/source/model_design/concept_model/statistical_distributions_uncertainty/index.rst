@@ -1,6 +1,6 @@
 ..
   Section title decorators for this document:
-  
+
   ==============
   Document Title
   ==============
@@ -48,6 +48,9 @@ Common Statistical Distributions
   - Ensemble
   - Etc.
 
+Log-normal distribution
++++++++++++++++++++++++
+
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
 
@@ -62,7 +65,7 @@ Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 Other Considerations
 --------------------
 
-.. todo:: 
+.. todo::
 
   - How to handle very asymmetric confidence intervals
   - How to handle uncertainty in data source(s) rather than statistical uncertainty from a single high quality data source?
