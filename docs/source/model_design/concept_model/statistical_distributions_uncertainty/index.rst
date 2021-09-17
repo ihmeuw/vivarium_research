@@ -48,6 +48,8 @@ Common Statistical Distributions
   - Ensemble
   - Etc.
 
+.. _lognormal_distribution_section:
+
 Log-normal distribution
 +++++++++++++++++++++++
 
@@ -60,6 +62,8 @@ if and only if its exponential :math:`X = \exp(Y)` satisfies :math:`X \sim
 \mathrm{Lognorm}(\mu, \sigma^2)`.
 
 .. _log-normal distribution: https://en.wikipedia.org/wiki/Log-normal_distribution
+
+.. _lognormal_parameter_uncertainty_section:
 
 Defining a log-normal distribution to simulate parameter uncertainty
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -85,6 +89,8 @@ the central 95% interval of the distribution if and only if :math:`v =
 
 .. _scipy.stats lognormal distribution: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
 
+.. _lognorm_from_median_lower_upper_code_block:
+
 .. code-block:: Python
 
   import numpy as np
@@ -95,7 +101,9 @@ the central 95% interval of the distribution if and only if :math:`v =
     the values (lower, upper) are approximately equal to the quantiles with ranks
     (quantile_ranks[0], quantile_ranks[1]). More precisely, if q0 and q1 are
     the quantiles of the returned distribution with ranks quantile_ranks[0]
-    and quantile_ranks[1], respectively, then q1/q0 = upper/lower.
+    and quantile_ranks[1], respectively, then q1/q0 = upper/lower. If the
+    quantile ranks are symmetric about 0.5, lower and upper will coincide with
+    q0 and q1 precisely when median^2 = lower*upper.
     """
     # Let Y ~ Norm(mu, sigma^2) and X = exp(Y), where mu = log(median)
     # so X ~ Lognorm(s=sigma, scale=exp(mu)) in scipy's notation.
