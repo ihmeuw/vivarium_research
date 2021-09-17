@@ -55,38 +55,29 @@ Reduction of LDL cholesterol has been causally associated with a decrease in ris
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. note::
+Risk exposure
++++++++++++++
 
-   This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
+:ref:`See risk exposure documentation for LDL <2019_risk_exposure_ldl>`
 
-.. todo::
+Relative risks
+++++++++++++++
 
-	Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
+After a systematic search, we were unable to find relative risks for LDL that were reported by age and level of LDL. Given this evidence that the relative risks for LDL and TC are very similar and the strong linear correlation between TC and LDL at the individual level, we used relative risks reported for TC to approximate the relative risks for LDL. We used DisMod-MR 2.1 to pool effect sizes from included studies and generate a dose-response curve for each of the outcomes associated with LDL. The tool enabled us to incorporate random effects across studies and include data with different age ranges. RRs were used universally for all countries and produce RRs with uncertainty and covariance across ages, considering the uncertainty of the data points.  
 
-.. todo::
+[wilson]_
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]_ is a good source for this information in addition to the GBD risk modeler.
+As in GBD 2017, RRs for IHD and ischaemic stroke are obtained from meta-regressions of pooled epidemiological studies: the Asia Pacific Cohort Studies Collaboration (APCSC) and the Prospective Studies Collaboration (PSC). RRs for IHD were modelled with log (RR) as the dependent variable and median age at event as the independent variable with an age intercept (RR equals 1) at age 110. For LDL and ischaemic stroke, a similar approach was used, except that there was no age intercept at age 110, due to the fact that there was no statistically significant relationship between LDL and stroke after age 70 with a mean RR less than one. We assumed that there is not a protective effect of LDL and therefore did not include an RR for ages 80+. 
 
-.. todo::
+[singh]_
 
-	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2019.
+Theoretical minimum-risk exposure level
++++++++++++++++++++++++++++++++++++++++
 
-.. list-table:: Affected Entities
-   :widths: 5 5 5 5 5
-   :header-rows: 1
+For GBD 2017, we reviewed the literature to select a TMREL for LDL. A meta-analysis of randomised trials has shown that outcomes can be improved even at low levels of LDL-cholesterol, below 1.3 mmol/L. Recent studies of PCSK-9 inhibitors support these results. We therefore used a TMREL with a uniform distribution between 0.7 and 1.3 mmol/L; this value remained unchanged for GBD 2019. 
 
-   * - Outcome
-     - Outcome type
-     - Outcome ID
-     - Affected measure
-     - Note
-   * -
-     -
-     -
-     -
-     -
+[boekholdt]_
+[sabatine-giugliano]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -205,3 +196,15 @@ References
 .. [mortensen] Mortensen, M. B., & Nordestgaard, B. G. (2020). 
 	Elevated LDL cholesterol and increased risk of myocardial infarction and atherosclerotic cardiovascular disease in individuals aged 70–100 years: a contemporary primary prevention cohort. The Lancet, 396(10263), 1644-1652.
 	https://doi.org/10.1016/S0140-6736(20)32233-9
+
+.. [wilson] Wilson PF, D'Agostino RB, Levy D, Belanger AM, Silbershatz H, Kannel WB. 
+	Prediction of Coronary Heart Disease Using Risk Factor Categories. Circulation. 1998; 97:1837-1847.
+
+.. [singh] Singh GM, Danaei G, Farzadfar F, et al. 
+	The age-specific quantitative effects of metabolic risk factors on cardiovascular diseases and diabetes: a pooled analysis. PloS One 2013; 8: e65174.
+
+.. [boekholdt] Boekholdt SM, Hovingh GK, Mora S, et al. 
+	Very Low Levels of Atherogenic Lipoproteins and the Risk for Cardiovascular EventsA Meta-Analysis of Statin Trials. J Am Coll Cardiol 2014; 64: 485–94.
+
+.. [sabatine-giugliano] Sabatine MS, Giugliano RP, Keech AC, et al. 
+	Evolocumab and Clinical Outcomes in Patients with Cardiovascular Disease. N Engl J Med. 2017; 376:1713-1722.
