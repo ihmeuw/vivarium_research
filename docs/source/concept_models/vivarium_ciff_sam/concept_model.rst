@@ -213,6 +213,11 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
     In the BEP paper reviewer comments, this 90% was deemed to be too optimistic and we are asked to do some sensitivity analysis around this. Hence, we could model a few coverages eg. 50%, 75%, 90%.
 
+.. _ciff_sam_intervention_timing:
+
+4.2 Simulation timeframe and intervention start times
+-----------------------------------------------------
+
 .. _5.0:
 
 5.0 Vivarium modelling components
