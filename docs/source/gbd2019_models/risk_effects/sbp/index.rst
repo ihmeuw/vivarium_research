@@ -77,7 +77,7 @@ No changes have been made to the relative risk estimates for blood pressure outc
 
 For cardiovascular disease, epidemiological studies have shown that the RR associated with SBP declines with age, with the log (RR) having an approximately linear relationship with age and reaching a value of 1 between the ages of 100 and 120. RRs were reported per 10 mmHg increase in SBP above the TMREL value (115 mmHg), calculated as in the equation below: 
 
-:math:`\text{RR(x)} = {\text{RR}_0}^{\frac{\text{(x-TMREL)}}{\text{10 mmHg}}}`
+:math:`\text{RR(x)} = {\text{RR}_0}^{\frac{\max\left((x-\text{TMREL}), 0\right)}{\text{10 mmHg}}}`
 
 Where RR(x) is the RR at exposure level x and RR\ :sub:`0`\  is the increase in RR for each 10 mmHg above the TMREL. We used DisMod-MR 2.1 to pool effect sizes from included studies and generate a dose-response curve for each of the outcomes associated with high SBP. The tool enabled us to incorporate random effects across studies and include data with different age ranges. RRs were used universally for all countries and the meta-regression only helped to pool the three major sources and produce RRs with uncertainty and covariance across ages taking into account the uncertainty of the data points. 
 
