@@ -132,6 +132,12 @@ distributions`_ for the :ref:`CIFF acute malnutrition project <2019_concept_mode
 
 .. _notebook investigating different lognormal distributions: https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/uncertainty/2021_09_03c_lognormal_distributions_for_k_sam.ipynb
 
+.. todo::
+
+  Investigate more fully what the above algorithm does when there is no
+  lognormal distribution matching the three parameters ``median``, ``lower`` and
+  ``upper`` for the specified quantile ranks.
+
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
 
