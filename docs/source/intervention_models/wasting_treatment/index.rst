@@ -497,7 +497,10 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
 .. note::
 
-  To define an appropriate lognormal distribution for the uncertainty in :math:`k`, we will assume that the distribution has geometric mean 6.7 with a central 95% confidence interval approximately equal to (5.3, 8.4). This is a reasonable assumption since
+  To define an appropriate lognormal distribution for the uncertainty in
+  :math:`k`, we will assume that the distribution has geometric mean 6.7 with a
+  central 95% confidence interval approximately equal to (5.3, 8.4). This is a
+  reasonable assumption since
 
   .. math::
     \sqrt{5.3 \times 8.4} = 6.672330927044911... \approx 6.7,
