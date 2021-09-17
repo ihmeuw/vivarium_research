@@ -92,8 +92,10 @@ the central 95% interval of the distribution if and only if :math:`v =
 
   def lognorm_from_median_lower_upper(median, lower, upper, quantile_ranks=(0.025,0.975)):
     """Returns a frozen lognormal distribution with the specified median, such that
-    (lower, upper) are approximately equal to the quantiles with ranks
-    (quantile_ranks[0], quantile_ranks[1]).
+    the values (lower, upper) are approximately equal to the quantiles with ranks
+    (quantile_ranks[0], quantile_ranks[1]). More precisely, if q0 and q1 are
+    the quantiles of the returned distribution with ranks quantile_ranks[0]
+    and quantile_ranks[1], respectively, then q1/q0 = upper/lower.
     """
     # Let Y ~ Norm(mu, sigma^2) and X = exp(Y), where mu = log(median)
     # so X ~ Lognorm(s=sigma, scale=exp(mu)) in scipy's notation.
@@ -137,6 +139,13 @@ distributions`_ for the :ref:`CIFF acute malnutrition project <2019_concept_mode
   Investigate more fully what the above algorithm does when there is no
   lognormal distribution matching the three parameters ``median``, ``lower`` and
   ``upper`` for the specified quantile ranks.
+
+  As noted in the docstring, here's a brief description of what the algorithm
+  does. Let :math:`v=` ``median``, :math:`a=` ``lower``, and :math:`b=`
+  ``upper``, and let :math:`(p_0, p_1) =` ``(quantile_ranks[0],
+  quantile_ranks[1])`` be the specified quantile ranks. Then the returned
+  lognormal distribution has median :math:`v` and quantiles :math:`a'` and
+  :math:`b'` of ranks :math:`p_0` and :math:`p_1` such that :math:`b'/a' = b/a`.
 
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
