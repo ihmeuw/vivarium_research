@@ -67,7 +67,7 @@ Defining a log-normal distribution to simulate parameter uncertainty
 A lognormal distribution may be an appropriate model of uncertainty for any
 positive, unbounded quantity :math:`X`. Rates and relative risks are common
 model parameters for which a lognormal distribution may be appropriate. If the
-literature reports a value :math:`v` for :math:`X` and a 95% confidence interval
+literature reports a value :math:`v` for :math:`X` and an asymmetric 95% confidence interval
 :math:`(a,b)` such that :math:`v` is close to the geometric mean of the
 endpoints (that is, :math:`v \approx \sqrt{ab}`, which is to the *left* of the
 interval's midpoint), this is a good indication that the uncertainty in
@@ -118,7 +118,19 @@ and :math:`\sigma`, specifying the distribution from the three parameters
 an overdetermined system if the specified median :math:`v` is not exactly equal
 to the geometric mean of :math:`a`, and :math:`b`. In ths case, the above code
 actually determines the distribution's two parameters from the median :math:`v`
-and the ratio :math:`b/a`.
+and the ratio :math:`b/a`, and the returned distribution's central 95% interval
+will only be approximately equal to :math:`(a,b)`.
+
+If the confidence interval :math:`(a,b)` was in fact generated from a log-normal
+distribution with the reported value :math:`v` being an estimate of the
+geometric mean :math:`e^\mu` of :math:`X`, then any discrepancy between
+:math:`v` and :math:`\sqrt{ab}` would be due to rounding errors. In this case,
+the above function incorporates all available data and generally results in a
+better fit than using only one of the two estimated quantiles :math:`a` or
+:math:`b`. See Nathaniel's `notebook investigating different lognormal
+distributions`_ for the :ref:`CIFF acute malnutrition project <2019_concept_model_vivarium_ciff_sam>`.
+
+.. _notebook investigating different lognormal distributions: https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/uncertainty/2021_09_03c_lognormal_distributions_for_k_sam.ipynb
 
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
