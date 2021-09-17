@@ -495,6 +495,22 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - :ref:`defined on the wasting documentation <2020_risk_exposure_wasting_state_exposure>`
     - GBD
 
+.. note::
+
+  To define an appropriate lognormal distribution for the uncertainty in :math:`k`, we will assume that the distribution has geometric mean 6.7 with a central 95% confidence interval approximately equal to (5.3, 8.4). This is a reasonable assumption since
+
+  .. math::
+    \sqrt{5.3 \times 8.4} = 6.672330927044911... \approx 6.7,
+
+  whereas :math:`(5.3+8.4)/2 = 6.85>6.7`, so the confidence interval is
+  asymmetric, with 6.7 being closer to the geometric mean of the endpoints than
+  to the arithmetic mean. To create an appropriate lognormal distribution, see
+  the :ref:`algorithm for fitting a lognormal distribution
+  <lognorm_from_median_lower_upper_code_block>` to a specified median and
+  confidence interval on the :ref:`Statistical Distributions of Uncertainty
+  <vivarium_best_practices_statistical_distributions>` page (note that the
+  median of a lognormal distribution equals its geometric mean).
+
 .. todo::
 
     Confirm validity of uncertainty distribution assumptions.
