@@ -112,6 +112,14 @@ the central 95% interval of the distribution if and only if :math:`v =
     # (s=sigma is the shape parameter; the scale parameter is exp(mu), which equals the median)
     return stats.lognorm(s=sigma, scale=median)
 
+Note that since the log-normal distribution has only two parameters :math:`\mu`
+and :math:`\sigma`, specifying the distribution from the three parameters
+:math:`v=` ``median``, :math:`a=` ``lower``, and :math:`b=` ``upper`` results in
+an overdetermined system if the specified median :math:`v` is not exactly equal
+to the geometric mean of :math:`a`, and :math:`b`. In ths case, the above code
+actually determines the distribution's two parameters from the median :math:`v`
+and the ratio :math:`b/a`.
+
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
 
