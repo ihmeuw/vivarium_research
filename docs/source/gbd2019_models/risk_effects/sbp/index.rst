@@ -61,38 +61,33 @@ High systolic blood pressure is associated with the strongest evidence for causa
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. note::
+Risk exposure
++++++++++++++
 
-   This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
+:ref:`See risk exposure documentation for SBP <2019_risk_sbp>`
 
-.. todo::
+Relative risks
+++++++++++++++
 
-	Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
+No changes have been made to the relative risk estimates for blood pressure outcomes used since GBD 2016. RRs for chronic kidney disease are from the Renal Risk Collaboration meta-analysis of 2.7 million individuals in 106 cohorts. For other outcomes, we used data from two pooled epidemiological studies: the Asia Pacific Cohort Studies Collaboration (APCSC) and the Prospective Studies Collaboration (PSC). Additional estimates of RR for cardiovascular outcomes were used from the CALIBER study, a health-record linkage cohort study from the UK.
 
-.. todo::
+[APCS]_
+[prospective]_
+[rapsomaniki]_
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]_ is a good source for this information in addition to the GBD risk modeler.
+For cardiovascular disease, epidemiological studies have shown that the RR associated with SBP declines with age, with the log (RR) having an approximately linear relationship with age and reaching a value of 1 between the ages of 100 and 120. RRs were reported per 10 mmHg increase in SBP above the TMREL value (115 mmHg), calculated as in the equation below: 
 
-.. todo::
+:math:`\text{RR(x)} = {\text{RR}_0}^{\frac{\text{(x-TMREL)}}{\text{10 mmHg}}}`
 
-	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2019.
+Where RR(x) is the RR at exposure level x and RR\ :sub:`0`\  is the increase in RR for each 10 mmHg above the TMREL. We used DisMod-MR 2.1 to pool effect sizes from included studies and generate a dose-response curve for each of the outcomes associated with high SBP. The tool enabled us to incorporate random effects across studies and include data with different age ranges. RRs were used universally for all countries and the meta-regression only helped to pool the three major sources and produce RRs with uncertainty and covariance across ages taking into account the uncertainty of the data points. 
 
-.. list-table:: Affected Entities
-   :widths: 5 5 5 5 5
-   :header-rows: 1
+Theoretical minimum-risk exposure level
++++++++++++++++++++++++++++++++++++++++
 
-   * - Outcome
-     - Outcome type
-     - Outcome ID
-     - Affected measure
-     - Note
-   * -
-     -
-     -
-     -
-     -
+No changes have been made to the TMREL used for systolic blood pressure since GBD 2015. We estimated that the TMREL of SBP ranges from 110 to 115 mmHg based on pooled prospective cohort studies that show risk of mortality increases for SBP above that level. Our selection of a TMREL of 110–115 mmHg is consistent with the GBD study approach of estimating all attributable health loss that could be prevented even if current interventions do not exist that can achieve such a change in exposure level, for example a tobacco smoking prevalence of zero percent. To include the uncertainty in the TMREL, we took a random draw from the uniform distribution of the interval between 110 mmHg and 115 mmHg each time the population attributable burden was calculated. 
+
+[APCS]_
+[singh-sbp]_
 
 Vivarium Modeling Strategy
 --------------------------
@@ -213,3 +208,15 @@ References
 .. [ettehad] Ettehad, D., Emdin, C. A., Kiran, A., Anderson, S. G., Callender, T., Emberson, J., ... & Rahimi, K. (2016). 
 	Blood pressure lowering for prevention of cardiovascular disease and death: a systematic review and meta-analysis. The Lancet, 387(10022), 957-967.
 	https://doi.org/10.1016/S0140-6736(15)01225-8
+
+.. [APCS] Collaboration APCS, others. 
+	Blood pressure and cardiovascular disease in the Asia Pacific region. J Hypertens 2003; 21: 707–16.
+
+.. [prospective] Prospective Studies Collaboration. 
+	Age-specific relevance of usual blood pressure to vascular mortality: a meta-analysis of individual data for one million adults in 61 prospective studies. The Lancet 2002; 360: 1903–13.
+
+.. [rapsomaniki] Rapsomaniki E, Timmis A, George J, et al. 
+	Blood pressure and incidence of twelve cardiovascular diseases: lifetime risks, healthy life-years lost, and age-specific associations in 1·25 million people. Lancet Lond Engl 2014; 383: 1899–911.
+
+.. [singh-sbp] Singh GM, Danaei G, Farzadfar F, et al. 
+	The age-specific quantitative effects of metabolic risk factors on cardiovascular diseases and diabetes: a pooled analysis. PloS One 2013; 8: e65174.
