@@ -52,7 +52,7 @@ Log-normal distribution
 +++++++++++++++++++++++
 
 A random variable :math:`X` has a `log-normal distribution`_ with parameters
-:math:`\mu` and :math:`\sigma^2`, denoted :math:`X\sim \mathrm{Lognorm}(\mu,
+:math:`\mu` and :math:`\sigma`, denoted :math:`X\sim \mathrm{Lognorm}(\mu,
 \sigma^2)`, if and only if its logarithm :math:`Y=\log(X)` has a normal
 distribution with mean :math:`\mu` and variance :math:`\sigma^2`. Equivalently,
 a random variable :math:`Y` satisfies :math:`Y\sim \mathcal{N}(\mu, \sigma^2)`
@@ -73,6 +73,17 @@ endpoints (that is, :math:`v \approx \sqrt{ab}`, which is to the *left* of the
 interval's midpoint), this is a good indication that the uncertainty in
 :math:`X` can be modeled by a lognormal distribution with geometric mean
 :math:`v` and central 95% interval :math:`(a,b)`.
+
+A lognormal distribution with parameters :math:`\mu` and :math:`\sigma` has
+geometric mean :math:`e^\mu`, which is also equal to the median of the
+distribution. Below is Python code to construct a `scipy.stats lognormal
+distribution`_ with a specified geometric mean (median) :math:`e^\mu = v =`
+``median`` and approximate central 95% interval :math:`(a,b)` (where :math:`a =`
+``lower`` and :math:`b =` ``upper``). The interval :math:`(a,b)` will be exactly
+the central 95% interval of the distribution if and only if :math:`v =
+\sqrt{ab}`.
+
+.. _scipy.stats lognormal distribution: https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats.lognorm.html
 
 Common Model Parameters and Their Possible Appropriate Uncertainty Distributions
 --------------------------------------------------------------------------------
