@@ -215,8 +215,28 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 .. _ciff_sam_intervention_timing:
 
-4.2 Simulation timeframe and intervention start times
+4.2 Simulation timeframe and intervention start dates
 -----------------------------------------------------
+
+.. list-table:: Simulation and intervention start and end dates
+  :widths: 3 3 10
+  :header-rows: 1
+
+  * - Description of time point
+    - Date
+    - Notes
+  * - Simulation start
+    - 2021-01-01
+    - We are running a 2-year "burn-in" period at baseline before starting any interventions. We increased the burn-in from 1 year to 2 years going from Model 3 to Model 4 to test whether smaller-than-expected incidence ratios in first year of SQLNS intervention were due to insufficient wasting model calibration
+  * - Simulation end
+    - 2026-12-31
+    - The simulation will run for a total of 6 years
+  * - Intervention start
+    - 2023-01-01
+    - All interventions in all alternative scenarios should start on the same date, 2 years after the simulation starts
+  * - Intervention end
+    - 2026-12-31
+    - All interventions should run until the end of the sim
 
 .. _5.0:
 
