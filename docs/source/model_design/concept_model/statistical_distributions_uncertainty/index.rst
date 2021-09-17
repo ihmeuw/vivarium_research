@@ -67,12 +67,12 @@ Defining a log-normal distribution to simulate parameter uncertainty
 A lognormal distribution may be an appropriate model of uncertainty for any
 positive, unbounded quantity :math:`X`. Rates and relative risks are common
 model parameters for which a lognormal distribution may be appropriate. If the
-literature reports a value :math:`v` for :math:`X` and an asymmetric 95% confidence interval
-:math:`(a,b)` such that :math:`v` is close to the geometric mean of the
-endpoints (that is, :math:`v \approx \sqrt{ab}`, which is to the *left* of the
-interval's midpoint), this is a good indication that the uncertainty in
-:math:`X` can be modeled by a lognormal distribution with geometric mean
-:math:`v` and central 95% interval :math:`(a,b)`.
+literature reports a value :math:`v` for :math:`X` and an asymmetric 95%
+confidence interval :math:`(a,b)` such that :math:`v` is close to the geometric
+mean of the endpoints (that is, :math:`v \approx \sqrt{ab}`, which is to the
+*left* of the interval's midpoint), this is a good indication that the
+uncertainty in :math:`X` can be modeled by a lognormal distribution with
+geometric mean :math:`v` and central 95% interval :math:`(a,b)`.
 
 A lognormal distribution with parameters :math:`\mu` and :math:`\sigma` has
 geometric mean :math:`e^\mu`, which is also equal to the median of the
