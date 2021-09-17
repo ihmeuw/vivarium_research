@@ -218,6 +218,15 @@ We will apply the relative risk ratio on the propensity of stunting starting fro
     - 0.85 (95% CI 0.74 to 0.98)
     - We apply this to the probability
 
+.. attention::
+
+  For all three effect sizes in the above table, we will use a **lognormal
+  distribution** to model parameter uncertainty, assuming the central value
+  represents the geometric mean (equivalently median) of the distribution. See
+  the :ref:`algorithm for fitting a lognormal distribution
+  <lognorm_from_median_lower_upper_code_block>` to a specified median and
+  confidence interval on the :ref:`Statistical Distributions of Uncertainty
+  <vivarium_best_practices_statistical_distributions>` page.
 
 .. list-table:: Affected Outcome Restrictions
   :widths: 15 15 15
