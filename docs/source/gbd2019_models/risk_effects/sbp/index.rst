@@ -92,21 +92,9 @@ No changes have been made to the TMREL used for systolic blood pressure since GB
 Vivarium Modeling Strategy
 --------------------------
 
-.. note::
+The risk-outcome pairs listed below are standard GBD relationships. The relative risks stored in the database are not location- or year-specific. They are age- and sex-specific. Exposure to SBP affects the likelihood of both morbidity and mortality from: ischemic heart disease, ischemic stroke, intracerebral hemorrhage, subarachnoid hemorrhage, hypertensive heart disease, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic kidney disease, and heart failure. We will model this in Vivarium such that exposure to SBP will impact the incidence rates of: ischemic heart disease, ischemic stroke, intracerebral hemorrhage, subarachnoid hemorrhage, hypertensive heart disease, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic kidney disease, and heart failure. The excess mortality rate for all outcomes will be unaffected. 
 
-   This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
-
-.. todo::
-
-   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
-
-.. todo::
-
-   List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
-
-.. list-table:: Risk Outcome Relationships for Vivarium
+.. list-table:: Entities affected by SBP in GBD
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -115,76 +103,218 @@ Vivarium Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * -
+   * - Ischemic heart disease
+     - Cause
+     - 493
+     - Mortality and Morbidity (GBD YLLS and YLDs)
      -
+   * - Ischemic stroke
+     - Cause
+     - 495
+     - Mortality and Morbidity (GBD YLLS and YLDs)
      -
+   * - Intracerebral hemorrhage
+     - Cause
+     - 496
+     - Mortality and Morbidity (GBD YLLS and YLDs)
      -
+   * - Subarachnoid hemorrhage
+     - Cause
+     - 497
+     - Mortality and Morbidity (GBD YLLS and YLDs)
      -
+   * - Hypertensive heart disease
+     - Cause
+     - 498
+     - Mortality and Morbidity (GBD YLLS and YLDs)
+     - PAF=1; do have RR for the association from GBD 2020
+   * - Atrial fibrillation and flutter
+     - Cause
+     - 500
+     - Mortality and Morbidity (GBD YLLS and YLDs)
+     -
+   * - Aortic aneurysm
+     - Cause
+     - 501
+     - Mortality only (GBD YLLs)
+     - No non-fatal component
+   * - Peripheral arterial disease
+     - Cause
+     - 502
+     - Mortality and Morbidity (GBD YLLS and YLDs)
+     -
+   * - Chronic kidney disease
+     - Cause
+     - 589
+     - Mortality and Morbidity (GBD YLLS and YLDs)
+     - Parent CKD; have RR for the association from GBD 2020; RR from GBD 2019 are essentially the same for all subtypes
+   * - Heart failure
+     - REI
+     - 196
+     - Morbidity (GBD YLDs)
+     - Impairement, no RR currently available for overall HF
+
+.. list-table:: Restrictions
+   :widths: 15 15 20
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - Age group start
+     - 10
+     - [25, 29)
+   * - Age group end
+     - 235
+     - [95, 125 years)
 
 Risk Outcome Pair #1
 ++++++++++++++++++++
 
-.. todo::
+:ref:`See ischemic heart disease documentation <2019_cause_ihd>`
 
-	Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
+The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c493`\) * RR\ :sub:`r107`\). The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. 
 
-.. todo::
+PAFs and relative risks can be pulled using the following code: 
 
-  Link to existing cause model document or other documentation of the outcome in the risk outcome pair.
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
-.. todo::
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
+Risk Outcome Pair #2
+++++++++++++++++++++
 
-  Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
+:ref:`See ischemic stroke documentation <2019_cause_ischemic_stroke>`
 
-.. todo::
+The relative risks apply to the incidence rates of acute ischemic stroke. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c495`\) * RR\ :sub:`r107`\). 
 
-  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable.
+PAFs and relative risks can be pulled using the following code: 
 
-  Relative risks for a risk factor may be pulled from GBD at the draw-level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`. You can then calculate the mean value as well as 2.5th, and 97.5th percentiles across draws.
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
-  The relative risks in the table below should be included for easy reference and should match the relative risks pulled from GBD using the above code. In this case, update the :code:`Note` below to include the appropriate :code:`{risk_name}`.
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-  If for any reason the modeling strategy uses non-GBD relative risks, update the :code:`Note` below to explain that the relative risks in the table are a custom, non-GBD data source and include a sampling strategy.
+Risk Outcome Pair #3
+++++++++++++++++++++
 
-.. note::
+:ref:`See intracerebral hemorrhage documentation <2019_cause_ich>`
 
-  The following relative risks are displayed below for convenient reference. The relative risks in the table below should match the relative risks that can be pulled at the draw level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`.
+The relative risks apply to the incidence rates of acute intracerebral hemorrhage. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c496`\) * RR\ :sub:`r107`\). 
 
-.. list-table:: Relative Risks
-   :widths: 5 5 5
-   :header-rows: 1
+PAFs and relative risks can be pulled using the following code: 
 
-   * - Exposure Category
-     - Relative Risk
-     - Note
-   * -
-     -
-     -
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 496], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Risk Outcome Pair #4
+++++++++++++++++++++
+
+:ref:`See subarachnoid hemorrhage documentation <2019_cause_sah>`
+
+The relative risks apply to the incidence rates of acute subarachnoid hemorrhage. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c497`\) * RR\ :sub:`r107`\). 
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 497], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Risk Outcome Pair #5
+++++++++++++++++++++
+
+:ref:`See hypertensive heart diease documentation <2019_cause_hhd>`
+
+Hypertensive heart disease has a PAF of 1 for SBP. There was no relative risk calculated for GBD 2019; however, there was a relative risk calculated for GBD 2020. 
+
+Relative risks can be pulled using the following code; please note that this will pull GBD 2020 Release 1 results: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=7, status='best', decomp_step='iterative') 
+
+Risk Outcome Pair #6
+++++++++++++++++++++
+
+:ref:`See atrial fibrillation and flutter documentation <2019_cause_afib>`
+
+The relative risks apply to the incidence rates of atrial fibrillation and flutter. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c500`\) * RR\ :sub:`r107`\). 
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 500], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Risk Outcome Pair #7
+++++++++++++++++++++
+
+:ref:`See aortic aneurysm documentation <2019_cause_aortic_aneurysm>`
+
+We do not model nonfatal aortic aneurysm for GBD; thus, there is no incidence rate that is modified by SBP level. Attributable burden is calculated for YLLs only. 
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 501], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Risk Outcome Pair #8
+++++++++++++++++++++
+
+:ref:`See peripheral arterial disease documentation <2019_cause_pad>`
+
+The relative risks apply to the incidence rates of peripheral arterial disease. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c502`\) * RR\ :sub:`r107`\). 
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 502], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Risk Outcome Pair #9
+++++++++++++++++++++
+
+:ref:`See chronic kidney disease documentation <2019_cause_ckd>`
+
+The relative risks apply to the incidence rates of chronic kidney disease. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c589`\) * RR\ :sub:`r107`\). This is the incidence at the parent cause level; we do not currently have independent relative risks for the etiologies of CKD (type 1 DM, type 2 DM, glomerulonephritis, hypertension, other). 
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+For relative risks, will need to subset to cause_id=592; this is CKD due to glomerulonephritis, but the RR estimates are almost identical across etiologies. 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 589], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Risk Outcome Pair #10
++++++++++++++++++++++
+
+:ref:`See heart failure documentation <2019_cause_heart_failure>`
+
+The relative risks apply to the incidence rates of residual heart failure. 
+
+GBD does not currently produce relative risk estimates for heart failure or calculate PAFs. These estimates will be extracted from the literature. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-  List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
-
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+The relative risk for IHD is calculated based on studies which use a variety of outcomes (AMI only, major adverse cardiovascular events, composite IHD outcome); most of these outcomes map imperfectly to the GBD case definition for IHD. 
 
-	List assumptions and limitations of this modeling strategy, including any potential issues regarding confounding, mediation, effect modification, and/or generalizability with the risk-outcome pair.
-
-Bias in the Population Attributable Fraction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-As noted in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias.
-
-.. todo::
-
-	Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+As noted in the Population Attributable Fraction section of the Modeling Risk Factors document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias. 
 
 References
 ----------
