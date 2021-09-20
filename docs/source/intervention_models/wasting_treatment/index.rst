@@ -694,14 +694,27 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+#. Verify the relative risks for MAM and SAM *recovery* rates by treatment coverage status in the *Wasting transition rate relative risks for wasting treatment* table. Note that the relative risks will vary between the baseline and alternative scenarios given the reliance of the relative risks on :math:`E_{MAM}` and :math:`E_{SAM}` values, which vary between simulation scenarios.
 
-  Ali: Update this section
 
-.. csv-table:: Treatment for SAM and MAM output table shell for v & v (Ethiopia)
-   :file: gam_treatment_outputshell_vv.csv
-   :widths: 20 20 20 20 20 20 20 20
-   :header-rows: 1
+#. Verify that the wasting *incidence* rates do not vary by treatment coverage. Incidence rates for this verification should be calculated as :math:`\frac{\text{incident MAM/SAM cases|treatment coverage status}}{\text{person time in mild/MAM wasting states|treatment coverage status}}` (note denominator is not total person time for treatment coverage status, which may differ between treatment coverage categories).
+
+
+#. Verify that MAM and SAM prevalence among simulants covered by wasting treatment is less than MAM and SAM prevalence among simulants not covered by wasting treatment, such that, separately for each simulation scenario:
+
+.. math::
+
+  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} ~ \frac{duration_\text{treated MAM} * E_\text{MAM} + duration_\text{untreated MAM} * (1 - E_{MAM})}{duration_\text{untreated MAM}}
+
+and
+
+.. math::
+
+  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} ~ \frac{duration_\text{treated SAM} * E_{SAM} + duration_\text{untreated SAM} * (1 - E_{SAM})}{duration_\text{untreated SAM}}
+
+.. note::
+
+  This verification criteria should be examined by age/sex/year strata as well as overall
 
 References
 ----------
