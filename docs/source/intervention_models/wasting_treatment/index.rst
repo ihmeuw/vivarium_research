@@ -438,13 +438,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 0-6 months olds
     - mean: 13.3, sd: 6.9
     - normal
-    -
+    - NOTE: this study reports mean duration of stay in the inpatient therapeutic feeding center rather than time to recovery. It is currently being implemented as time to recovery. Of note, 85% of participants were successfully discharged in this study.
     - [Vygen_2013]_; Niger
   * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
     - 6-59 months old
     - 48.3
     - point value
-    - Time to recovery among those who recovered. 48.3 value is as a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
+    - Studies censored participants who did not recovery in estimation of median time to recovery. 48.3 value is as a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
     - [Zw_2020tx]_; Ethiopia
   * - :math:`\text{time to recovery}_\text{untreated MAM}`
     - 0-59 months old
@@ -456,13 +456,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 0-6 months old
     - 20.8
     - point value
-    -
+    - NOTE: this study reports mean duration of therapy without specifying if this duration is conditional on recovery. It is currently being implemented as time to recovery. Of note, 81% of participants were successfully discharged in this study.
     - [Woeltje_2020]_; Malawi
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 6-59 months old
     - 41.3 (95% CI: 34.4, 49)
     - normal
-    -
+    - Censored participants who did not recovery in estimation of median time to recovery.
     - [Ackatia_Armah_2015tx]_; Mali
   * - :math:`C`
     - 0-59 months old
