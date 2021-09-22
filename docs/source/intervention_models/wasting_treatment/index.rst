@@ -486,7 +486,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 0-59 months old
     - 6.7(95% CI: 5.3-8.4)
     - lognormal
-    - :math:`k = 1 / duration_\text{overall SAM}`. :math:`duration_\text{overall SAM}` is the average duration of disease that is not conditional on survival of SAM (:math:`k` is *smaller* than it would be if it were conditional on those who recovered as is :math:`\text{time to recovery}_\text{treated SAM}`).
+    - See notes on uncertainty distribution and interpretation of this value below
     - [Isanaka_2021]_
   * - :math:`mortality_{SAM|a,s,l,y}`
     - GBD demographic group
@@ -513,6 +513,18 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
   confidence interval on the :ref:`Statistical Distributions of Uncertainty
   <vivarium_best_practices_statistical_distributions>` page (note that the
   median of a lognormal distribution equals its geometric mean).
+
+.. note::
+
+  A note on the incidence correction factor, :math:`k`:
+
+    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit. Note that the average duration of disease in this equation is **not** conditional on recovery from SAM, unlike the :math:`\text{time to recovery}` parameters. Therefore, the average duration of disease is *lower* and :math:`k` is greater than it would be if it were conditional on recovery from SAM in the same manner as the :math:`\text{time to recovery}` parameters.
+
+    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations.
+
+    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
+
+    Note: [Isanaka_2021]_ relies on estimates of SAM treatment coverage to estimate the incidence correction factor/average duration of disease in Ethiopia. SAM treatment coverage is a parameter that is difficult to estimate and measurement may be prone to bias. SAM treatment coverage in the [Isanaka_2021]_ is estimated through standardized surveys [SQUEAC-SLEAC]_
 
 .. todo::
 
@@ -543,19 +555,6 @@ So...
   ...
 
   :math:`r_{SAM,ux} = \frac{k/365 - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
-
-.. note::
-
-  A note on the incidence correction factor, :math:`k`:
-
-    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit. Note that the average duration of disease in this equation is **not** conditional on recovery from SAM, unlike the :math:`\text{time to recovery}` parameters. Therefore, the average duration of disease is *lower* and :math:`k` is greater than it would be if it were conditional on recovery from SAM in the same manner as the :math:`\text{time to recovery}` parameters.
-
-    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations.
-
-    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
-
-    Note: [Isanaka_2021]_ relies on estimates of SAM treatment coverage to estimate the incidence correction factor/average duration of disease in Ethiopia. SAM treatment coverage is a parameter that is difficult to estimate and measurement may be prone to bias. SAM treatment coverage in the [Isanaka_2021]_ is estimated through standardized surveys [SQUEAC-SLEAC]_
-
 
 Affected Outcomes
 +++++++++++++++++
@@ -690,6 +689,11 @@ Assumptions and Limitations
 #. We assume that MAM and SAM treatment effectivenesses are independent from one another.
 #. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Zw_2020tx]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Zw_2020tx]_. We chose to make this assumption given the non-deterministic nature of these factors.
 #. We assume that MAM and SAM treatment non-responders have the same time to recovery as untreated MAM and SAM cases.
+#. We are limited in that the estimate of the average duration of SAM in 6-59 month old children from the [Isanaka_2021]_ paper relies on survey estimates of SAM treatment coverage, which may be subject to bias.
+
+.. warning::
+
+  We are currently limited in that we do not have a valid modeling strategy of wasting treatment for infants <6 months of age. We are currently temporarily excluding this age group from our wasting treatment (and wasting exposure transitions) model until we find an appropriate modeling strategy.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
