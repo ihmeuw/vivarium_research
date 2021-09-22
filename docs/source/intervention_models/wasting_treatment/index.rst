@@ -470,13 +470,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - normal
     - Baseline scenario value. Assumed to be the same for SAM and MAM and across age groups at the draw level.
     - Currently the same for SAM and MAM [Isanaka_2021]_
-  * - :math:`E_\text{MAM}`
+  * - :math:`E_\text{SAM}`
     - 0-59 months old
     - 0.70 (95% CI:0.64-0.76)
     - normal
     - baseline scenario value. value from >6 months assumed to also apply to <6 months
     - [Zw_2020tx]_
-  * - :math:`E_\text{SAM}`
+  * - :math:`E_\text{MAM}`
     - 0-59 months old
     - 0.731 (95% CI:0.585-0.877)
     - normal
@@ -650,7 +650,7 @@ Scenarios
     - 0.488 (95% CI:0.374-0.604)
     - 0.9
     -
-  * - :math:`E_{SAM}`
+  * - :math:`E_{MAM}`
     - 0.731 (95% CI:0.585-0.877), normal
     - 0.75
     - Sphere standards
