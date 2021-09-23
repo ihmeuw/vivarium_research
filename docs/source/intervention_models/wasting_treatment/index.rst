@@ -435,10 +435,10 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Note
     - Source
   * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
-    - 0-6 months olds
+    - 0-6 months old
     - mean: 13.3, sd: 6.9
     - normal
-    - NOTE: this study reports mean duration of stay in the inpatient therapeutic feeding center rather than time to recovery. It is currently being implemented as time to recovery. Of note, 85% of participants were successfully discharged in this study.
+    - NOTE: this study reports mean duration of stay in the inpatient therapeutic feeding center rather than time to recovery. It is currently being implemented as time to recovery in our model. Of note, 85% of participants were successfully discharged in this study.
     - [Vygen_2013]_; Niger
   * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
     - 6-59 months old
@@ -456,7 +456,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 0-6 months old
     - 20.8
     - point value
-    - NOTE: this study reports mean duration of therapy without specifying if this duration is conditional on recovery. It is currently being implemented as time to recovery. Of note, 81% of participants were successfully discharged in this study.
+    - NOTE: this study reports mean duration of therapy without specifying if this duration is conditional on recovery. It is currently being implemented as time to recovery in our model. Of note, 81% of participants were successfully discharged in this study.
     - [Woeltje_2020]_; Malawi
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 6-59 months old
@@ -688,8 +688,9 @@ Assumptions and Limitations
 #. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
 #. We assume that MAM and SAM treatment effectivenesses are independent from one another.
 #. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Zw_2020tx]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Zw_2020tx]_. We chose to make this assumption given the non-deterministic nature of these factors.
-#. We assume that MAM and SAM treatment non-responders have the same time to recovery as untreated MAM and SAM cases.
+#. We assume that individuals who receive wasting treatment (according to parameter :math:`C`) but who do not respond to treatment according to parameters (according to parameter :math:`E_{SAM}` and :math:`E_{MAM}`) will exit the SAM state either through the :math:`r_{SAM,ux}` transition rate to the MAM state or the SAM-specific mortality rate and will exit the MAM state either through the :math:`r_{MAM,ux}` transition rate to mild wasting or the MAM-specific mortality rate. However, treatment non-responders (defined as not reaching recovery after two months of treatment) may represent especially complicated cases of MAM/SAM that may take longer to recovery and/or may have a higher mortality rate.
 #. We are limited in that the estimate of the average duration of SAM in 6-59 month old children from the [Isanaka_2021]_ paper relies on survey estimates of SAM treatment coverage, which may be subject to bias.
+#. The time to recovery of treated MAM and SAM among 0-6 month old infants in our model is informed by studies that reported mean duration of treatment without specifying if deaths/non-response to treatment/lost to follow-up were censored in the calculation [Vygen_2013]_, [Woeltje_2020]_. The structure of our model treats the time to recovery of treated MAM/SAM variables as the time to recovery *among individuals who recovered*. 15% and 19% of patients in the respective studies did not recover, which could cause duration of treatment among all treated individuals to differ from duration of treatment (time to recovery) among treated individuals who recovered, which would bias our model.
 
 .. warning::
 
@@ -708,13 +709,13 @@ Validation and Verification Criteria
 
 .. math::
 
-  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} ~ \frac{\text{time to response}_\text{effectively treated MAM} * E_\text{MAM} + \text{time to response}_\text{untreated MAM} * (1 - E_{MAM})}{\text{time to response}_\text{untreated MAM}}
+  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} ~ \frac{\text{time to recovery}_\text{effectively treated MAM} * E_\text{MAM} + \text{time to recovery}_\text{untreated MAM} * (1 - E_{MAM})}{\text{time to recovery}_\text{untreated MAM}}
 
 and
 
 .. math::
 
-  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} ~ \frac{\text{time to response}_\text{effectively treated SAM} * E_{SAM} + \text{time to response}_\text{untreated SAM} * (1 - E_{SAM})}{\text{time to response}_\text{untreated SAM}}
+  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} ~ \frac{\text{time to recovery}_\text{effectively treated SAM} * E_{SAM} + \text{time to recovery}_\text{untreated SAM} * (1 - E_{SAM})}{\text{time to recovery}_\text{untreated SAM}}
 
 .. note::
 
