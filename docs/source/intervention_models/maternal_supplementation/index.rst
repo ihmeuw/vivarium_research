@@ -84,18 +84,22 @@ IFA is widely used as a prenatal supplement in most areas of the world and is re
   * - Child wasting
     - BEP
     - Increases population mean WLZ
-    - Yes
-    - Possible mediation through birthweight. Low quality evidence.
+    - Yes (hypothesized effect in the :ref:`BEP simulation <2017_concept_model_vivarium_gates_bep>`). Should not be modeled in simulations using conservative evidence
+    - Possible mediation through birthweight. Low quality evidence. 
   * - Child stunting
     - BEP
     - Increases population mean LAZ
-    - Yes
+    - Yes (hypothesized effect in the :ref:`BEP simulation <2017_concept_model_vivarium_gates_bep>`). Should not be modeled in simulations using conservative evidence
     - Possible mediation through birthweight/wasting. Low quality evidence.
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
 Given the low utilization of MMS and BEP relative to IFA, we assume that baseline coverage of MMS and BEP are zero. Baseline coverage of IFA varies by location, and Demographic Health Surveys are good data sources for the proportion of pregnant women who took iron supplementation during pregnancy. 
+
+.. warning::
+
+  Maternal supplementation interventions are typically delivered through antenatal care (ANC) visits. Therefore, maximum alternative scenario coverage should be considered to be equal to the proportion of pregnant women who attend ANC visits in the absence of an intervention to increase ANC attendance or an alternative maternal supplementation delivery program. 
 
 .. list-table:: Baseline coverage data
   :header-rows: 1
@@ -107,47 +111,61 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Note
   * - Ethiopia
     - Pregnant population
-    - Percent who took antenatal iron for 90+ days
-    - 10.6
+    - Proportion who took *any* antenatal iron
+    - 0.598 (0.583, 0.613), normal distribution of uncertainty clipped between zero and one
+    - Use this value for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`; DHS 2019
+  * - Ethiopia
+    - Pregnant population
+    - Proportion who took antenatal iron for 90+ days
+    - 0.106
     - DHS 2019
   * - India
     - Pregnant population
-    - Percent who took antenatal iron for 90+ days
-    - 38.7
+    - Proportion who took antenatal iron for 90+ days
+    - 0.387
     - DHS 2017
   * - Mali
     - Pregnant population
-    - Percent who took antenatal iron for 90+ days
-    - 28.0
+    - Proportion who took antenatal iron for 90+ days
+    - 0.28
     - DHS 2017
   * - Pakistan
     - Pregnant population
-    - Percent who took antenatal iron for 90+ days
-    - 29.4
+    - Proportion who took antenatal iron for 90+ days
+    - 0.294
     - DHS 2017
   * - Tanzania
     - Pregnant population
-    - Percent who took antenatal iron for 90+ days
-    - 21.4
+    - Proportion who took antenatal iron for 90+ days
+    - 0.214
     - DHS 2017
 
 .. note::
 
   DHS has coverage data specific to women who took iron tablets for <60 and 60-89 days too as well as stratified by age, residence, region, education, and wealth quintile.
 
+  The baseline percent of women taking any antenatal iron during pregnancy (59.8%) was chosen instead of the percent of women who took antenatal iron during pregnancy for 90 or more days (10.6%) to be conservative and due to the following finding in [Pena-Rosas-et-al-2015]_: 
+
+    "Overall, for women receiving *any* intermittent iron regimen (with or without other vitamins and minerals) compared with a daily regimen there was no clear evidence of differences between groups for any infant primary outcomes: low birthweight (average risk ratio (RR) 0.82; 95% confidence interval (CI) 0.55 to 1.22; participants = 1898; studies = eight; low quality evidence), infant birthweight (mean difference (MD) 5.13 g; 95% CI ‐29.46 to 39.72; participants = 1939; studies = nine; low quality evidence), premature birth (average RR 1.03; 95% CI 0.76 to 1.39; participants = 1177; studies = five; low quality evidence), or neonatal death (average RR 0.49; 95% CI 0.04 to 5.42; participants = 795; studies = one; very low quality). None of the studies reported congenital anomalies." (Abstract)
+
+  Note that the :ref:`BEP simulation <2017_concept_model_vivarium_gates_bep>` used the proportion of women who took antenatal iron for 90+ days for baseline coverage.
+
+  The confidence interval was calculated using the formula :math:`1.96 \times \sqrt{\frac{p \times (1 - p)}{n}}`.
 
 Vivarium Modeling Strategy
 --------------------------
 
 The maternal supplementation intervention is administered to mothers and impacts both the mother and infant. To model the impact of the intervention on either child or maternal outcomes, simulant attributes for maternal nourishment exposure (BMI/x-factor) and maternal ANC attendance exposure are required. Additionally, to model the impact on child growth, child growth exposures are required. To model the impact on maternal mortality, a maternal hemoglobin exposure value is required. This intervention model requires the additional simulant attribute of maternal supplement regimen.
 
-For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree.
+For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree. 
+
+The "undernourished" and "adequately nourished" decision node should be based on the x-factor exposure for the acute malnutrition simulation, :ref:`documented here <2019_concept_model_vivarium_ciff_sam>`; however, other risk exposure definitions such as pre-pregnancy body mass index of less than 18.5 should be considered for other models.
+
+.. image:: coverage_decision_tree.svg
 
 .. note::
 
-  This decision tree assumes a complete transition from IFA to targeted BEP/MMS. Alternative intervention implementations may be considered.
-
-.. image:: coverage_decision_tree.svg
+  This decision tree assumes a complete transition from IFA to targeted BEP/MMS. Alternative intervention implementations may be considered. 
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
@@ -160,13 +178,13 @@ For the implementation of the intervention in an alterative scenarios, we will m
     - Effect size measure
     - Effect size
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
-    - 
-    - 
+  * - Birthweight
+    - Risk exposure
+    - 339
+    - Population mean birthweight (as continuous measure)
+    - Mean difference
+    - Varies by supplement regimen
+    - Assume no difference in gestational age
 
 Birthweight
 +++++++++++++++++++++
@@ -225,7 +243,7 @@ The maternal supplementation intervention (all regimens) affect child birthweigh
 
 .. note::
 
-  Adequately nourished BEP supplemented mothers relative to MMN supplemented mothers birthweight shift is +15.93 grams (-20.83 to 52.69) according to [Ota-et-al-2015]_, but this value should not be used for targeted BEP scenarios given that BEP is only recommneded for undernourished mothers
+  Adequately nourished BEP supplemented mothers relative to MMN supplemented mothers birthweight shift is +15.93 grams (-20.83 to 52.69) according to [Ota-et-al-2015]_, but this value should not be used for targeted BEP scenarios given that BEP is only recommended for undernourished mothers
 
 **How to sample and apply effect sizes:**
 
@@ -293,6 +311,10 @@ Assumptions and Limitations
 - We assume that the birthweight shift for BEP reported by [Ota-et-al-2015]_ is relative to MMN, although it is actually relative to a reference group with mixed supplementation regimens. Due to the belief that the effect size of BEP may be underestimated (see discussion in the :ref:`BEP concept model document and manuscript <2017_concept_model_vivarium_gates_bep>`), this may not be a problematic assumption.
 
 - We do not consider effect modification by maternal anemia status.
+
+- For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` that uses the baseline coverage value of women that took any antenatal iron: We assume that taking any iron supplement is equally as effective as taking daily a iron supplement in the baseline scenario. If it is in fact less effective, we will overestimate the impact of the baseline IFA coverage and therefore underestimate the impact of the MMS and BEP interventions.
+
+- For the :ref:`BEP simulation <2017_concept_model_vivarium_gates_bep>` that uses the baseline coverage value of women that took antenatal iron for 90+ days: We assume that taking antenatal iron for <90 days in the baseline scenario has no impact on birthweight. This assumption may cause us to underestimate (partial) baseline coverage of IFA and therefore overestimate the impact of the MMS and BEP interventions. 
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
