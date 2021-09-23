@@ -404,13 +404,13 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - :math:`\frac{k - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
     - See constant values in table below and equation derivation below table. Ali to confirm and potentially update this equation. Previously referred to as :math:`r2_{ux}`
   * - :math:`r_{SAM,tx}`
-    - :math:`365 / (duration_\text{treated SAM}`
+    - :math:`365 / \text{time to recovery}_\text{effectively treated SAM}`
     - See constant values in table below. Previously referred to as :math:`t1_{SAM}`
   * - :math:`r_{MAM,ux}`
-    - :math:`365 / duration_\text{untreated MAM}`
+    - :math:`365 / \text{time to recovery}_\text{untreated MAM}`
     - See constant values in table below. Previously referred to as :math:`r3_{ux}`
   * - :math:`r_{MAM,tx}`
-    - :math:`365 / duration_\text{treated MAM}`
+    - :math:`365 / \text{time to recovery}_\text{effectively treated MAM}`
     - See constant values in table below. Previously referred to as :math:`t2_{MAM}`
 
 .. warning::
@@ -434,35 +434,35 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Distribution
     - Note
     - Source
-  * - :math:`duration_\text{treated SAM}`
+  * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
     - 0-6 months old
     - mean: 13.3, sd: 6.9
     - normal
-    -
+    - NOTE: this study reports mean duration of stay in the inpatient therapeutic feeding center rather than time to recovery. It is currently being implemented as time to recovery in our model. Of note, 85% of participants were successfully discharged in this study.
     - [Vygen_2013]_; Niger
-  * - :math:`duration_\text{treated SAM}`
+  * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
     - 6-59 months old
     - 48.3
     - point value
-    -
+    - Studies censored participants who did not recover in estimation of median time to recovery. 48.3 value is a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
     - [Zw_2020tx]_; Ethiopia
-  * - :math:`duration_\text{untreated MAM}`
+  * - :math:`\text{time to recovery}_\text{untreated MAM}`
     - 0-59 months old
     - 63
     - point value
     - IQR reported, but no uncertainty about median value. Used MUAC definition of malnutrition. Value specific to >6 month population, but assumed to generalize to <6 month population.
     - [James_2016]_; Ethiopia
-  * - :math:`duration_\text{treated MAM}`
+  * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 0-6 months old
     - 20.8
     - point value
-    -
+    - NOTE: this study reports mean duration of therapy without specifying if this duration is conditional on recovery. It is currently being implemented as time to recovery in our model. Of note, 81% of participants were successfully discharged in this study.
     - [Woeltje_2020]_; Malawi
-  * - :math:`duration_\text{treated MAM}`
+  * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 6-59 months old
     - 41.3 (95% CI: 34.4, 49)
     - normal
-    -
+    - Censored participants who did not recover in estimation of median time to recovery.
     - [Ackatia_Armah_2015tx]_; Mali
   * - :math:`C`
     - 0-59 months old
@@ -486,7 +486,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 0-59 months old
     - 6.7(95% CI: 5.3-8.4)
     - lognormal
-    -
+    - See notes on uncertainty distribution and interpretation of this value below
     - [Isanaka_2021]_
   * - :math:`mortality_{SAM|a,s,l,y}`
     - GBD demographic group
@@ -514,68 +514,47 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
   <vivarium_best_practices_statistical_distributions>` page (note that the
   median of a lognormal distribution equals its geometric mean).
 
+.. note::
+
+  A note on the incidence correction factor, :math:`k`:
+
+    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit. Note that the average duration of disease in this equation is **not** conditional on recovery from SAM, unlike the :math:`\text{time to recovery}` parameters. Therefore, the average duration of disease is *lower* and :math:`k` is greater than it would be if it were conditional on recovery from SAM in the same manner as the :math:`\text{time to recovery}` parameters.
+
+    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations.
+
+    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
+
+    Note: [Isanaka_2021]_ relies on estimates of SAM treatment coverage to estimate the incidence correction factor/average duration of disease in Ethiopia. SAM treatment coverage is a parameter that is difficult to estimate and measurement may be prone to bias. SAM treatment coverage in the [Isanaka_2021]_ is estimated through standardized surveys [SQUEAC-SLEAC]_
+
 .. todo::
 
     Confirm validity of uncertainty distribution assumptions.
 
     Try to update the weighted time-to-recovery for SAM children admitted to OTP. There are 7 studies from the Zw 2020 paper that reports median (IQR) time to recovery in table 1. The 48.3 days currently in the table is just a weighted average. It would be better to find a way to get the summary value (random effects?) with the uncertainty distribution. Nathanial might have a way to do this.
 
-Deriving :math:`r_{SAM,ux}` using the following three equations:
+Deriving :math:`r_{SAM,ux}` using the following equations:
 
-#. :math:`r_{SAM,ux} = 1 / duration_\text{untreated SAM}`
+#. :math:`r_{SAM,ux} = 1 / \text{time to recovery}_\text{untreated SAM}`
 
-#. :math:`1 / duration_\text{overall SAM} =  r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM}) + mortality_{SAM|a,s,l,y}`
+#. :math:`r_{SAM,tx} = 1 / \text{time to recovery}_\text{effectively treated SAM}`
+
+#. :math:`1 / \text{time to recovery}_\text{overall SAM} =  1 / \text{time to recovery}_\text{effectively treated SAM} * C * E_{SAM} + 1 / \text{time to recovery}_\text{untreated SAM} * (1 - C * E_{SAM})`
+
+#. :math:`1 / duration_\text{overall SAM} = 1 / \text{time to recovery}_\text{overall SAM} + mortality_{SAM|a,s,l,y}`
 
 #. :math:`duration_\text{overall SAM} = 365 / k`
 
 So...
+
+  :math:`1 / duration_\text{overall SAM} - mortality_{SAM|a,s,l,y} = r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM})`
+
+  ...
 
   :math:`k / 365 = r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM}) + mortality_{SAM|a,s,l,y}`
 
   ...
 
   :math:`r_{SAM,ux} = \frac{k/365 - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
-
-.. note::
-
-  A note on the incidence correction factor, :math:`k`:
-
-
-    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit
-
-    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations.
-
-    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
-
-.. important::
-
-  In this first run that Rajan is building (August-18-21), we are not modelling treatment in the first 28 days of life. If we do model treatment in this first 28 days, the prevalence of wasting by the time they reach post-neonatal age groups in the scale-up scenario will be different (reduced). We should think through the relationship between wasting and LBWSG in the neonatal age groups and see if we want to add treatment back into the first month of life.
-
-.. todo::
-
-  Ali: add more detail on incidence correction factor and find appropriate values for 1-6 month olds
-
-.. note::
-
-  How the value r2_ux was derived for model 2 (note we did use an efficacy (E) in model 2):
-
-  1) From Isanaka 2021, the incidence correction factor K = 6.7 for a population SAM coverage of 48.8%
-  2) K = 1 year/duration of SAM (in years) = 6.7
-  3) Duration of SAM in years = 1/6.7 = 0.149253 years = 54.5 days
-  4) 365/(r2_ux + t1_sam + d1) = 54.5
-  5) 365/(r2_ux + [0.488 x 365/48.3] + [yearly rate of death]) = 54.5; using d1 = 0.015 for age_group 4 and sex 2
-  6) r2_ux = 2.9945
-  7) r2_ux = (1-Csam) X 365/Dsam_utx (1-Csam = 0.512)
-  8) Dsam_utx ~ 62 days (will need to recalculate by age and sex; this is sightly higher than model 4)
-
-  Note that
-
-  r2_ux = untreated% x 365/Dsam_utx
-  t1_sam = treated% x 365/Dsam_tx
-
-  Also note that Dsam_tx < Dsam_utx (time to recovery of tx SAM is shorter than time to recovery of untreated SAM)
-
-  *We did not calculate a specific r2_ux value for each age and sex in model 2*
 
 Affected Outcomes
 +++++++++++++++++
@@ -709,6 +688,13 @@ Assumptions and Limitations
 #. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
 #. We assume that MAM and SAM treatment effectivenesses are independent from one another.
 #. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Zw_2020tx]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Zw_2020tx]_. We chose to make this assumption given the non-deterministic nature of these factors.
+#. We assume that individuals who receive wasting treatment (according to parameter :math:`C`) but who do not respond to treatment according to parameters (according to parameter :math:`E_{SAM}` and :math:`E_{MAM}`) will exit the SAM state either through the :math:`r_{SAM,ux}` transition rate to the MAM state or the SAM-specific mortality rate and will exit the MAM state either through the :math:`r_{MAM,ux}` transition rate to mild wasting or the MAM-specific mortality rate. However, treatment non-responders (defined as not reaching recovery after two months of treatment) may represent especially complicated cases of MAM/SAM that may take longer to recovery and/or may have a higher mortality rate.
+#. We are limited in that the estimate of the average duration of SAM in 6-59 month old children from the [Isanaka_2021]_ paper relies on survey estimates of SAM treatment coverage, which may be subject to bias.
+#. The time to recovery of treated MAM and SAM among 0-6 month old infants in our model is informed by studies that reported mean duration of treatment without specifying if deaths/non-response to treatment/lost to follow-up were censored in the calculation [Vygen_2013]_, [Woeltje_2020]_. The structure of our model treats the time to recovery of treated MAM/SAM variables as the time to recovery *among individuals who recovered*. 15% and 19% of patients in the respective studies did not recover, which could cause duration of treatment among all treated individuals to differ from duration of treatment (time to recovery) among treated individuals who recovered, which would bias our model.
+
+.. warning::
+
+  We are currently limited in that we do not have a valid modeling strategy of wasting treatment for infants <6 months of age. We are currently temporarily excluding this age group from our wasting treatment (and wasting exposure transitions) model until we find an appropriate modeling strategy.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -723,13 +709,13 @@ Validation and Verification Criteria
 
 .. math::
 
-  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} ~ \frac{duration_\text{treated MAM} * E_\text{MAM} + duration_\text{untreated MAM} * (1 - E_{MAM})}{duration_\text{untreated MAM}}
+  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} ~ \frac{\text{time to recovery}_\text{effectively treated MAM} * E_\text{MAM} + \text{time to recovery}_\text{untreated MAM} * (1 - E_{MAM})}{\text{time to recovery}_\text{untreated MAM}}
 
 and
 
 .. math::
 
-  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} ~ \frac{duration_\text{treated SAM} * E_{SAM} + duration_\text{untreated SAM} * (1 - E_{SAM})}{duration_\text{untreated SAM}}
+  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} ~ \frac{\text{time to recovery}_\text{effectively treated SAM} * E_{SAM} + \text{time to recovery}_\text{untreated SAM} * (1 - E_{SAM})}{\text{time to recovery}_\text{untreated SAM}}
 
 .. note::
 
@@ -849,3 +835,14 @@ References
     Community-Based Management of Acute Malnutrition in Infants Under 6 Months of Age
 
 .. _`Woeltje 2020`: https://academic.oup.com/cdn/article/4/Supplement_2/1102/5845720?login=true
+
+.. [SQUEAC-SLEAC]
+
+  View `SQUEAC-SLEAC Technical Reference`_ 
+
+  Myatt M, Guevarra E, Fieschi L. Semi-Quantitative Evaluation of
+  Access and Coverage (SQUEAC)/ Simplified Lot Quality Assurance
+  Sampling Evaluation of Access and Coverage (SLEAC) Technical
+  Reference. USAID Food and Nutrition Technical Assistance III 2012.
+
+.. _`SQUEAC-SLEAC Technical Reference`: https://www.spring-nutrition.org/publications/tool-summaries/semi-quantitative-evaluation-access-and-coverage-squeacsimplified-lot#:~:text=Brief%20Description%3A%20The%20semi%2Dquantitative,essential%20determinants%20of%20quality%20community%2D
