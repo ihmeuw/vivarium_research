@@ -462,7 +462,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 6-59 months old
     - 41.3 (95% CI: 34.4, 49)
     - normal
-    - Censored participants who did not recovery in estimation of median time to recovery.
+    - Censored participants who did not recover in estimation of median time to recovery.
     - [Ackatia_Armah_2015tx]_; Mali
   * - :math:`C`
     - 0-59 months old
