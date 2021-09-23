@@ -444,7 +444,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 6-59 months old
     - 48.3
     - point value
-    - Studies censored participants who did not recovery in estimation of median time to recovery. 48.3 value is as a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
+    - Studies censored participants who did not recover in estimation of median time to recovery. 48.3 value is a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
     - [Zw_2020tx]_; Ethiopia
   * - :math:`\text{time to recovery}_\text{untreated MAM}`
     - 0-59 months old
@@ -462,7 +462,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 6-59 months old
     - 41.3 (95% CI: 34.4, 49)
     - normal
-    - Censored participants who did not recovery in estimation of median time to recovery.
+    - Censored participants who did not recover in estimation of median time to recovery.
     - [Ackatia_Armah_2015tx]_; Mali
   * - :math:`C`
     - 0-59 months old
