@@ -1,4 +1,4 @@
-.. _2019_risk_exposure_maternal_underweight:
+.. _2019_risk_exposure_maternal_bmi:
 
 ======================================
 Maternal Body Mass Index
