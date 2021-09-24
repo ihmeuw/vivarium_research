@@ -368,7 +368,7 @@ Vivarium Modeling Strategy
 
 .. todo::
 
-  Consider sensitivity analysis that includes infants less than 6 months of age in wasting treatment episode. Due to sparce data on wasting treatment in this age group, this sensitivity analysis will require assumptions such as "what if" wasting treatment were half as effective among infants less than six months of age as it is among children 6-59 months and could be run as an additional simulation scenario.
+  Consider sensitivity analysis that includes infants less than 6 months of age in wasting treatment episode. Due to sparse data on wasting treatment in this age group, this sensitivity analysis will require assumptions such as "what if" wasting treatment were half as effective among infants less than six months of age as it is among children 6-59 months and could be run as an additional simulation scenario.
 
 .. image:: treatment_diagram.svg
    :alt: Compartmental diagram with treatment
