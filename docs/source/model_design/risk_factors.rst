@@ -247,6 +247,146 @@ Definitions
 Theoretical Minimum Risk Exposure Level/Distribution (TMREL/D)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+The **theoretical minimum risk exposure level (TMREL)** is the level of risk
+exposure that would minimize the risk of an adverse outcome for an individual.
+For example, the TMREL for smoking would be "has never smoked." The
+corresponding concept on the population level is the **theoretical minimum risk
+exposure distribution (TMRED)**, which is the distribution of risk exposure that
+would yield the lowest possible population risk. For smoking, the TMRED would be
+the `degenerate probability distribution`_ assigning everyone in the population
+to the TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
+[GBD-2017-Risk-Appendix-Modeling-Risk-Factors]_
+
+.. _degenerate probability distribution: https://en.wikipedia.org/wiki/Degenerate_distribution
+
+.. todo::
+
+  Add formal mathematical definitions of TMREL and TMRED.
+
+As discussed in the :ref:`causality section <causal_relationships>` of the :ref:`general research page <general_research>`,
+counterfactual analysis is used to describe the causal relationship between a
+risk factor and an outcome. **The TMRED is a particular choice of counterfactual
+exposure distribution** used for the causal attribution of disease burden to a
+given risk factor in a population (see `Population Attributable Fraction
+(PAF)`_). Other choices of counterfactual include the *plausible* minimum risk,
+*feasible* minimum risk, and *cost-effective* minimum risk, each of which can
+obviously depend on specific attributes of the population under consideration.
+On the other hand, Murray et al. state in
+[Comparative-quantification-health-risks-2003]_:
+
+  "Biological principles as well as considerations of equity would necessitate
+  that, **although the exposure distribution for theoretical minimum risk may
+  depend on age and sex, it should in general be independent of geographical
+  region or population.**"
+
+However, the authors go on to add:
+
+  "Exceptions to this are however unavoidable. An example would be the case of
+  alcohol consumption, which in limited quantities and certain patterns, has
+  beneficial effects on cardiovascular mortality, but is always harmful for
+  other diseases such as cancers and accidents. In this case, the composition of
+  the causes of death as well as drinking patterns in a region would determine
+  the theoretical minimum distribution."
+
+.. note::
+
+  The above quote from [Comparative-quantification-health-risks-2003]_ is
+  included to illustrate the subtleties in conceptualizing the TMREL as
+  described by an original source advocating its use. **However, the description
+  of the beneficial effects of alcohol is outdated**, as the latest research
+  from `IHME <IHME alcohol study Lancet_>`_ and `Oxford <Oxford alcohol study
+  preprint_>`_ shows that there is `no safe level of alcohol consumption`_.
+
+  Based on more current research, here are some examples of risk factors with
+  TMRELs that may depend on geography or population:
+
+  - :ref:`Hemoglobin levels <2019_hemoglobin_anemia_and_iron_deficiency>` in
+    the blood increase at high altitude, so the TMREL for hemoglobin
+    concentration would be geography-dependent, with populations living at
+    higher altitudes having a higher TMREL than those living at lower altitudes.
+    GBD handles this situation not by explicitly defining different TMRELs, but
+    rather by using altitude-adjusted hemoglobin data to estimate anemia
+    prevalence.
+
+  - High :ref:`Body Mass Index (BMI) <2019_risk_bmi>` is associated with
+    increased risk of death in the general population, but it may be protective
+    agianst some cancers and other chronic diseases (this phenomenon is termed
+    the "`obseity paradox <obesity paradox cancer PubMed_>`_"). Thus, the
+    optimal BMI (for minimizing overall risk) in a given population may depend
+    on the leading causes of death or exposure to other risk factors in the
+    population.
+
+.. _IHME alcohol study Lancet: https://doi.org/10.1016/S0140-6736(18)31310-2
+
+.. _Oxford alcohol study preprint: https://www.medrxiv.org/content/10.1101/2021.05.10.21256931v1
+
+.. _no safe level of alcohol consumption: http://www.healthdata.org/news-release/new-scientific-study-no-safe-level-alcohol
+
+.. _obesity paradox cancer PubMed: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5830139/
+
+The smoking example `above <Theoretical Minimum Risk Exposure Level/Distribution
+(TMREL/D)_>`_ illustrates two features of the TMREL that are typical of many
+risk factors:
+
+1. We imagine that everyone in the population has the same TMREL
+2. The TMREL is *zero* or *no exposure*
+
+However, neither of these conditions is necessary. In some cases, particularly
+for continuous risk exposure variables, the TMREL may be a nonzero exposure
+level. Moreover, there may be multiple TMRELs experienced by different members
+of the population. For example, in GBD 2017 [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]_:
+
+1.  The TMREL for radon exposure is taken to be 10 `Bq
+    <https://en.wikipedia.org/wiki/Becquerel>`_/m\ :superscript:`3`, which is
+    equivalent to the average outdoor concentration of radon [ICRP]_.
+2.  The :ref:`Low Birth Weight and Short Gestation <2017_risk_lbwsg>` risk
+    factor has multiple TMREL categories since healthy babies have many
+    different birth weights and gestational ages.
+
+These examples illustrate some complexities in defining the TMREL and TMRED for
+a given risk factor. For continuous risk exposure variables --- such as radon
+exposure, or hemoglobin concentration, or systolic blood pressure --- it may be
+impossible to define a single TMREL for the population, as we expect different
+individuals to have different radon exposure levels or hemoglobin levels or
+blood pressures, even in a theoretical population where risk is minimized. In
+this case the TMRED will be a nontrivial probability distribution. For example,
+a plausible TMRED for radon exposure would be some probability distribution of
+positive radon exposure levels concentrated near the point 10 Bq/m\
+:superscript:`3`. We will further discuss this point below.
+
+.. todo::
+
+  Add a more in-depth discussion of TMREDs for continuous exposure variables,
+  based on systolic blood pressure example in [Estimating-Attributable-Burden]_.
+
+  Also, say something about whether there should be different TMRELs for
+  different risk-outcome pairs, and how GBD handles this.
+
+  Add some discussion of issues brought up in `PR 153
+  <https://github.com/ihmeuw/vivarium_research/pull/153>`_:
+
+  - More in-depth description of counterfactual scenario, where one risk is set
+    to the TMRED, but everything else is held constant, including exposure to
+    other risk factors. Note that causally affected risk exposures would also
+    change, as in the case of mediation (see BMI, SBP, mortality example in PR).
+
+  - Mention approaches other than TMREL/D, e.g. No observed adverse effect
+    level (NAOEL) and Lowest observed adverse effect level (LOAEL), and
+    methods from cost-analysis.
+
+  - Operationally, GBD only defines one TMRED for each risk factor, rather than
+    one for each risk-outcome pair.
+
+  - GBD assumes risks are monotonic (is that still true with splines in GBD
+    2019+?), but this is not necessarily true (for example: BMI, sodium).
+
+  - Clarify discussions of TMREL/D that depends on geography and/or biological
+    features of the population, and of definitions of TMREL/D for population vs.
+    individual (formal mathematical definitions should help with this).
+
+  Fix broken links in citations [WHO-Global-Health-Risks-Annex]_ and
+  [Estimating-Attributable-Burden]_.
+
 Relative Risk (RR)
 ++++++++++++++++++
 
@@ -833,3 +973,45 @@ References
 .. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
    Retrieved 11 March 2020.
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
+
+.. [WHO-Global-Health-Risks-Annex]
+
+  `Annex A: Data and methods
+  <https://www.who.int/healthinfo/global_burden_disease/GlobalHealthRisks_report_annex.pdf>`_
+  in :title:`Global Health Risks: Mortality and burden of disease attributable
+  to selected major risks`. World Health Organization. 2009.
+  https://www.who.int/healthinfo/global_burden_disease/global_health_risks/en/
+
+.. [Comparative-quantification-health-risks-2003]
+
+  Murray, C.J., Ezzati, M., Lopez, A.D. et al. Comparative quantification of
+  health risks: Conceptual framework and methodological issues. :title:`Popul
+  Health Metrics` 1, 1 (2003). https://doi.org/10.1186/1478-7954-1-1
+
+.. [Estimating-Attributable-Burden]
+
+  `Chapter 25: Estimating attributable burden of disease from exposure and
+  hazard data
+  <http://www9.who.int/publications/cra/chapters/volume2/2129-2140.pdf>`_ by
+  Stephen Vander Hoorn, Majid Ezzati, Anthony Rodgers, Alan D. Lopez and
+  Christopher J.L. Murray. In :title:`Comparative Quantification of Health
+  Risks: Global and Regional Burden of Disease Attribution to Selected Major
+  Risk Factors`. World Health Organization. 2004.
+  http://www9.who.int/publications/cra/en/
+
+.. [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]
+
+  `Supplementary appendix 1 <Risk appendix on ScienceDirect_>`_ to the **GBD
+  2017 Risk Factors Capstone**: GBD 2017 Risk Factor Collaborators. Global,
+  regional, and national comparative risk assessment of 84 behavioural,
+  environmental and occupational, and metabolic risks or clusters of risks for
+  195 countries and territories, 1990–2017: a systematic analysis for the Global
+  Burden of Disease Study 2017. :title:`The Lancet`. 8 Nov 2018; 392: 1923-94.
+  doi: http://dx.doi.org/10.1016/S0140-6736(18)32225-6.
+
+.. _Risk appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322256-mmc1.pdf
+
+.. [ICRP]
+
+  `Radon: Units of Measure <http://icrpaedia.org/Radon:_Units_of_Measure>`_.
+  International Commission on Radiological Protection.
