@@ -364,6 +364,8 @@ See the `parameter values table`_ for coverage and effictiveness values for use 
 Vivarium Modeling Strategy
 --------------------------
 
+**Wasting treatment will be modeled among children aged 6 months to five years of age.**
+
 .. image:: treatment_diagram.svg
    :alt: Compartmental diagram with treatment
 
@@ -379,20 +381,6 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 .. todo::
 
   Update figure to new parameter names. Update was made to distinguish difference between these parameters (for wasting treatment model) and the related parameters for the wasting exposure model.
-
-.. important::
-
-   For model 2 (wasting exposure only with baseline coverage of treatment but treatment-not-tracked),the above reciprocal of durations were weighted by the baseline treatment coverage of 0.488 (C). Also note that the recovery durations we used for model 2 were slightly different than what we have here in model 4. In model 2, we used:
-
-   - r2_ux (sam untreated) = (1-C) x 1/60.5 days
-   - t1_sam = C x 1/48.3 days
-   - r3_ux (mam untreated) = (1-C) x 1/63 days
-   - t2_mam = C x 1/41.3 days
-   - where the rates are in per person-day; multiply by 356 to get per person-year
-
-   Additionally, for the recovery rate from MAM, we used r3 which was = r3_ux(1-C) + t2_mam(C). (See wasting exposure 2020 documentation for the use of these rates).
-
-   Note also that we used the same recovery duration for 0-6 months as 6-59 months in model 2. We have now updated the recovery durations for effectively treated population to be specific for 0-6 months in this model 4.
 
 .. list-table:: Annual recovery rate equations
   :header-rows: 1
@@ -413,16 +401,6 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - :math:`365 / \text{time to recovery}_\text{effectively treated MAM}`
     - See constant values in table below. Previously referred to as :math:`t2_{MAM}`
 
-.. warning::
-
-  The equation for the :math:`r_{SAM,ux}` defined in the table above along with the parameter values defined below results in negative values for :math:`r_{SAM,ux}` in the 1 - 6 month age group (also the early and late neonatal age groups, but we are currently (9/3/21) not modeling treatment in these groups, so we can ignore these). This appears to be due to the assumption that our untreated and overall SAM durations do not vary by age but that the treated durations do.
-
-  To remove a model building road block, we are planning on the following temporary solution:
-
-    Initialize wasting exposure birth prevalence according to the exposure distribution among the 6 month to one year age group. Set all wasting transition rates to zero for all ages under 6 months.
-
-  NOTE: This is not currently a problem, but recording that since we do not use a time-varying value of treatment coverage, it is possible that overestimating treatment coverage in early years in the data artifact *underestimate* the untreated SAM recovery rate and could potentially cause negative rates for :math:`r_{SAM,ux}`. These can be ignored since we only use the 2019 values for our simulation.
-
 .. _`parameter values table`:
 
 .. list-table:: Parameter Values
@@ -435,29 +413,17 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Note
     - Source
   * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
-    - 0-6 months old
-    - mean: 13.3, sd: 6.9
-    - normal
-    - NOTE: this study reports mean duration of stay in the inpatient therapeutic feeding center rather than time to recovery. It is currently being implemented as time to recovery in our model. Of note, 85% of participants were successfully discharged in this study.
-    - [Vygen_2013]_; Niger
-  * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
     - 6-59 months old
     - 48.3
     - point value
     - Studies censored participants who did not recover in estimation of median time to recovery. 48.3 value is a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
     - [Zw_2020tx]_; Ethiopia
   * - :math:`\text{time to recovery}_\text{untreated MAM}`
-    - 0-59 months old
+    - 6-59 months old
     - 63
     - point value
-    - IQR reported, but no uncertainty about median value. Used MUAC definition of malnutrition. Value specific to >6 month population, but assumed to generalize to <6 month population.
+    - IQR reported, but no uncertainty about median value. Used MUAC definition of malnutrition.
     - [James_2016]_; Ethiopia
-  * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
-    - 0-6 months old
-    - 20.8
-    - point value
-    - NOTE: this study reports mean duration of therapy without specifying if this duration is conditional on recovery. It is currently being implemented as time to recovery in our model. Of note, 81% of participants were successfully discharged in this study.
-    - [Woeltje_2020]_; Malawi
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 6-59 months old
     - 41.3 (95% CI: 34.4, 49)
@@ -465,25 +431,25 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Censored participants who did not recover in estimation of median time to recovery.
     - [Ackatia_Armah_2015tx]_; Mali
   * - :math:`C`
-    - 0-59 months old
+    - 6-59 months old
     - 0.488 (95% CI:0.374-0.604)
     - normal
     - Baseline scenario value. Assumed to be the same for SAM and MAM and across age groups at the draw level.
     - Currently the same for SAM and MAM [Isanaka_2021]_
   * - :math:`E_\text{MAM}`
-    - 0-59 months old
+    - 6-59 months old
     - 0.70 (95% CI:0.64-0.76)
     - normal
-    - baseline scenario value. value from >6 months assumed to also apply to <6 months
+    - baseline scenario value
     - [Zw_2020tx]_
   * - :math:`E_\text{SAM}`
-    - 0-59 months old
+    - 6-59 months old
     - 0.731 (95% CI:0.585-0.877)
     - normal
-    - baseline scenario value. value from >6 months assumed to also apply to <6 months
+    - baseline scenario value
     - [Ackatia_Armah_2015tx]_
   * - :math:`k`
-    - 0-59 months old
+    - 6-59 months old
     - 6.7(95% CI: 5.3-8.4)
     - lognormal
     - See notes on uncertainty distribution and interpretation of this value below
@@ -555,6 +521,35 @@ So...
   ...
 
   :math:`r_{SAM,ux} = \frac{k/365 - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
+
+.. note::
+
+  A note about modeling wasting treatment in infants under six months of age.
+
+  The following parameter values were identified prior to the decision to exclude infants under six months of age from the wasting treatment model and are included below for reference.
+
+  .. list-table:: Parameter Values Among Infants <6 months (not modeled)
+    :header-rows: 1
+
+    * - Parameter
+      - Population
+      - Value
+      - Distribution
+      - Note
+      - Source  
+    * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
+      - 0-6 months old
+      - mean: 13.3, sd: 6.9
+      - normal
+      - NOTE: this study reports mean duration of stay in the inpatient therapeutic feeding center rather than time to recovery. It is currently being implemented as time to recovery in our model. Of note, 85% of participants were successfully discharged in this study.
+      - [Vygen_2013]_; Niger
+    * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
+      - 0-6 months old
+      - 20.8
+      - point value
+      - NOTE: this study reports mean duration of therapy without specifying if this duration is conditional on recovery. It is currently being implemented as time to recovery in our model. Of note, 81% of participants were successfully discharged in this study.
+      - [Woeltje_2020]_; Malawi
+
 
 Affected Outcomes
 +++++++++++++++++
@@ -647,11 +642,11 @@ Scenarios
 Restrictions
 ++++++++++++
 
-For treatment of SAM and MAM, we model treatment starting in the post-neonatal age groups (after the first 28 days of life). This is true for both baseline and treatment scale-up scenarios. This is because in GBD, the burden (death, disability) in the neonatal age groups are all attributable to LBWSG. Hence, it is not very meaningful to 'treat' wasting in this age group as the treatment will not impove DALYs.
+For treatment of SAM and MAM, we model treatment starting at six months of age. This is true for both baseline and treatment scale-up scenarios. 
 
-Note that for the exposure, we model a 'birth prevalence' which is the prevalence of wasting of the post-neontal age group extrapolated to the neonatal age groups. This is to ensure our post-neonatal age groups initialize at the correct prevalences to start the wasting transitions.
+Note that for the exposure, we model a 'birth prevalence' which is the prevalence of wasting of the XXX age group extrapolated to the neonatal age groups. This is to ensure our XXX age groups initialize at the correct prevalences to start the wasting transitions.
 
-Also note that since wasting and LBWSG are correlated, those with more severe wasting will have higher likelihood to die in the first month as those with lower birthweights have higher risk of death. This might lead to a bias in our wasting exposures at the post-neonatal age groups to favour healthier babies.
+Also note that since wasting and LBWSG are correlated, those with more severe wasting will have higher likelihood to die in the six months of life as those with lower birthweights have higher risk of death. This might lead to a bias in our wasting exposures at the post-neonatal age groups to favour healthier babies and should be investigated in model results.
 
 .. list-table:: Affected outcomes restrictions
   :widths: 20 20 20
@@ -667,11 +662,11 @@ Also note that since wasting and LBWSG are correlated, those with more severe wa
     -
     - False
   * - Age group start
-    - Post-neonatal age_group_id = 388
-    - 1m-5m = 388 GBD 2020; 1m-12m = 4 GBD 2019
+    - 6-11 months, age_group_id = 389
+    - (GBD 2019 does not have age_group_id=389. Use six months of age within the postneontal age group (1 month - 1 year) when using GBD 2019 results rather than GBD 2020)
   * - Age group end
     - 2 - 4 years age_group_id = 34
-    - 2y-4y = 34 GBD 2020; 1y-5y = 5 GBD 2019
+    - 2y-4y = 34 GBD 2020; 1y-4y = 5 GBD 2019
   * - Other
     -
     -
@@ -684,17 +679,16 @@ Assumptions and Limitations
 
 #. We are not applying a differential death rate to those effectively covered vs not effectively covered
 #. We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country.
-#. We do not have the durations of untreated SAM and MAM for 0-6 age groups hence we are using the durations from 6-59 age groups.
 #. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
 #. We assume that MAM and SAM treatment effectivenesses are independent from one another.
 #. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Zw_2020tx]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Zw_2020tx]_. We chose to make this assumption given the non-deterministic nature of these factors.
 #. We assume that individuals who receive wasting treatment (according to parameter :math:`C`) but who do not respond to treatment according to parameters (according to parameter :math:`E_{SAM}` and :math:`E_{MAM}`) will exit the SAM state either through the :math:`r_{SAM,ux}` transition rate to the MAM state or the SAM-specific mortality rate and will exit the MAM state either through the :math:`r_{MAM,ux}` transition rate to mild wasting or the MAM-specific mortality rate. However, treatment non-responders (defined as not reaching recovery after two months of treatment) may represent especially complicated cases of MAM/SAM that may take longer to recovery and/or may have a higher mortality rate.
 #. We are limited in that the estimate of the average duration of SAM in 6-59 month old children from the [Isanaka_2021]_ paper relies on survey estimates of SAM treatment coverage, which may be subject to bias.
-#. The time to recovery of treated MAM and SAM among 0-6 month old infants in our model is informed by studies that reported mean duration of treatment without specifying if deaths/non-response to treatment/lost to follow-up were censored in the calculation [Vygen_2013]_, [Woeltje_2020]_. The structure of our model treats the time to recovery of treated MAM/SAM variables as the time to recovery *among individuals who recovered*. 15% and 19% of patients in the respective studies did not recover, which could cause duration of treatment among all treated individuals to differ from duration of treatment (time to recovery) among treated individuals who recovered, which would bias our model.
+#. We assume that there is no MAM or SAM treatment among infants less than six months.
 
-.. warning::
+.. note::
 
-  We are currently limited in that we do not have a valid modeling strategy of wasting treatment for infants <6 months of age. We are currently temporarily excluding this age group from our wasting treatment (and wasting exposure transitions) model until we find an appropriate modeling strategy.
+  Additional assumption if we were to model wasting treatment among infants under six months of age given currently available and identified data: The time to recovery of treated MAM and SAM among 0-6 month old infants in our model is informed by studies that reported mean duration of treatment without specifying if deaths/non-response to treatment/lost to follow-up were censored in the calculation [Vygen_2013]_, [Woeltje_2020]_. The structure of our model treats the time to recovery of treated MAM/SAM variables as the time to recovery *among individuals who recovered*. 15% and 19% of patients in the respective studies did not recover, which could cause duration of treatment among all treated individuals to differ from duration of treatment (time to recovery) among treated individuals who recovered, which would bias our model.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -709,13 +703,13 @@ Validation and Verification Criteria
 
 .. math::
 
-  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} ~ \frac{\text{time to recovery}_\text{effectively treated MAM} * E_\text{MAM} + \text{time to recovery}_\text{untreated MAM} * (1 - E_{MAM})}{\text{time to recovery}_\text{untreated MAM}}
+  \frac{prevalence_\text{MAM|covered}}{prevalence_\text{MAM|uncovered}} \approx \frac{\text{time to recovery}_\text{effectively treated MAM} * E_\text{MAM} + \text{time to recovery}_\text{untreated MAM} * (1 - E_{MAM})}{\text{time to recovery}_\text{untreated MAM}}
 
 and
 
 .. math::
 
-  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} ~ \frac{\text{time to recovery}_\text{effectively treated SAM} * E_{SAM} + \text{time to recovery}_\text{untreated SAM} * (1 - E_{SAM})}{\text{time to recovery}_\text{untreated SAM}}
+  \frac{prevalence_\text{SAM|covered}}{prevalence_\text{SAM|uncovered}} \approx \frac{\text{time to recovery}_\text{effectively treated SAM} * E_{SAM} + \text{time to recovery}_\text{untreated SAM} * (1 - E_{SAM})}{\text{time to recovery}_\text{untreated SAM}}
 
 .. note::
 
