@@ -7,12 +7,12 @@ Cardiometabolic Risk Management Intervention Model
 This model includes behavioral and pharmaceutical interventions aimed
 at: 1) improving blood pressure and LDL-cholesterol control, 2)
 increasing exercise, 3) decreasing BMI/weight, 4) improving control of
-fasting plasma glucose, and 5) decreasing tobacco use. Intervening to
-change an individual's risk factor exposures will improve outcomes for
-many GBD causes.
+fasting plasma glucose, and 5) decreasing tobacco use. Altering an individual's 
+risk factor exposures is expect to improve outcomes for many cardiometabolic
+conditions.
 
 This model requires a simulant to have attributes of: age, sex, SBP,
-LDL-C, BMI, FPG, smoking.
+LDL-C, BMI, FPG, cigarette smoking.
 
 It adds attributes of: untreated SBP, untreated LDL-C, untreated BMI,
 untreated FPG, untreated smoking, polypill prescription, hypertension
@@ -35,27 +35,22 @@ prescription initiation propensity, polypill initiation propensity
     - Note
   * - BMI
     - Body Mass Index
-    - GBD Risk Factor
+    - Risk Factor
   * - FPG
     - Fasting Plasma Glucose
-    - GBD Risk Factor
+    - Risk Factor
   * - LDL-C
     - Low Density Lipoprotein Cholesterol
-    - GBD Risk Factor
-  * - LLT
-    - Lipid Lowering Therapy
-    - Treatment for high LDL-C
+    - Risk Factor
   * - SBP
     - Systolic blood pressure
     - GBD Risk Factor
 
-
 Intervention Overview
 -----------------------
 
-Vivarium has been used in several cardiovascular disease simulations
-to date, and in this version, we will include pharmaceutical treatment
-of high SBP and high LDL Cholesterol with individual and polypill
+The interventions included in this model include treatment of 
+high SBP and high LDL Cholesterol with individual and polypill
 therapies, as well as education to support lifestyle
 modification. Alternative scenarios will consider expanded
 implementation of medical outreach, which is known to increase
@@ -78,23 +73,23 @@ treatment, which is known to increase adherence.
   * - SBP
     - additive shift
     - yes
-    - there is a “ramp” of increasing intensity of treatments
+    - there is a “ramp” of increasing intensity of treatments; CJ: ramp to be implemented later
   * - LDL-C
     - multiplicative shift
     - yes
-    - only two values: on treatment or not on treatment
+    - options include not on treatment, low-intensity statin, high-intensity statin; CJ: options to be implemented later
   * - BMI
-    - additive?
+    - multiplicative (% BMI lost)
     - yes
     - [[need more detail on this effect; how to handle mediation]]
   * - FPG
-    - additive?
+    - additive
     - yes
-    - [[need more detail on this effect]]
+    - 
   * - Tobacco
     - ?
     - yes
-    - [[need more detail on this effect]]
+    - 
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
@@ -117,11 +112,11 @@ Baseline coverage of polypill, medication outreach, and lifestyle modification e
   * - USA
     - General Population
     - Hypertension Treatment
-    - Ramp distribution from NHANES
+    - Distribution from NHANES
     - empirical calibration needed
   * - USA
     - General Population
-    - LLT
+    - Lipid lowering therapy
     - Distribution from NHANES
     - empirical calibration needed
   * - USA
@@ -147,7 +142,94 @@ Vivarium Modeling Strategy
 .. todo::
 
   Add an overview of the Vivarium modeling section.
+
+Decision tree and algorithm for outreach intervention
+-----------------------------------------------------
+.. image:: decision_tree_outreach_emergency.svg
+.. image:: decision_tree_outreach_followup.svg
+.. image:: decision_tree_outreach_screening.svg
+.. image:: decision_tree_outreach_none.svg
+
+
+A.  Visit type
+
+   1.  Experienced an AMI/IS in previous time step -> emergency visit
+   2.  Subject was scheduled for follow-up due to existing tx  - > follow-up
+   3.  P(screening visit)=1-e-t, where  is the rate of health care utilization for this type of visit. Type of visit is only to include “check-ups” – e.g., well adult visits/wellness physical with primary care provider. We are explicitly excluding urgent care visits for illness or injury or emergency visits for illness or injury (handling of emergency visit for AMI/IS noted above). Sample to determine Screening or None
+   4.  None: no visit
+
+B.  SBP elevated
+
+   1.  SBP >=140
+   2.  Assume everyone has their BP measured at every visit
+   3.  Includes measurement error (+/- X mmHg) [Code snippet that shows what the distribution should be (normal, truncated normal, log-normal commonly used]
+   
+       a.  Mean = actual blood pressure
+       b.  SD = variation around this (10 mm Hg)
+       c.  Assume normal distribution
+
+C.  LDL-C tested 
+   
+   1.  if follow-up | emergency, everyone 
+   2.  if screening, ASCVD risk score >threshold (sbp, age, sex)
+
+D.  LDL-C elevated
+   
+   1.  Thresholds: https://www.ccjm.org/content/87/4/231
+   2.  Measurement of LDL-C determined by LDL-C tested algorithm in C
+   3.  Includes measurement error (+/- X mmol/L) [Code snippet that shows what the distribution should be (normal, truncated normal, log-normal commonly used]
+       
+       a.  Mean = actual blood pressure
+       b.  SD = variation around this (10 mmol/L)
+       c.  Assume normal distribution
+
+E.  SBP controlled
+   
+   1.  SBP <140 mm Hg after treatment
+
+F.  LDL-C goal achieved
+   
+   1.  Dependent on ASCVD score; https://www.ccjm.org/content/87/4/231
+
+G.  Prescribed treatment
+   
+   1.  SBP above threshold; LDL-C not above threshold
+
+       a.  Start on BP ramp
+              1.  Assign specific medications(s) and dosage(s) based on algorithm 
+              2.  Change in medication(s) and/or dosage(s) determined by whether SBP controlled at follow-up visit (E) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
+       b.  Therapeutic inertia
+              1.  Probability of being prescribed treatment = 0.85 [Flipping a weighted coin; heads 85% of the time]
+              2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
+       c.  If prescribed meds, schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine time step for next visit
   
+  2.  SBP not above threshold; LDL-C above threshold
+
+       a.  Start on statin; decision between low-, moderate-, and high-intensity statin depending on ASCVD risk; https://www.ccjm.org/content/87/4/231
+              1.  Change in medication(s) and/or dosage(s) determined by whether LDL-C controlled at follow-up visit (F) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
+       b.  Therapeutic inertia
+              1.  Probability of being prescribed treatment = 0.85 [Flipping a weighted coin; heads 85% of the time]
+              2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
+       c.  Schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine timestep for next visit
+  
+   3.  SBP above threshold; LDL-C above threshold
+       
+       a.  Start on BP ramp
+              1.  Assign specific medications(s) and dosage(s) based on algorithm 
+              2.  Change in medication(s) and/or dosage(s) determined by whether SBP controlled at follow-up visit (E) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
+       b.  Start on statin; decision between low-, moderate-, and high-intensity statin depending on ASCVD risk;  https://www.ccjm.org/content/87/4/231
+              1.  Change in medication(s) and/or dosage(s) determined by whether LDL-C controlled at follow-up visit (F) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
+       c.  Therapeutic inertia
+              1.  Probability of being prescribed treatment = 0.85 [Flipping a weighted coin; heads 85% of the time]
+              2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
+       d.  Schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine timestep for next visit
+
+Medication initiation:
+All simulants enrolled in the intervention initiate treatment (defined as initial fill of prescription(s))
+
+Adherence:
+All simulants get number from 0 to 1 drawn from non-uniform distribution of adherence in the general population [need to find]. Simulants with values >=0.8 are considered adherent and receive the full benefit of their medication.
+
 .. list-table:: Key parameters for intervention model
   :widths: 15 15 15
   :header-rows: 1
