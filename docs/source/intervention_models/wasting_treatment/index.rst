@@ -366,6 +366,10 @@ Vivarium Modeling Strategy
 
 **Wasting treatment will be modeled among children aged 6 months to five years of age.**
 
+.. todo::
+
+  Consider sensitivity analysis that includes infants less than 6 months of age in wasting treatment episode. Due to sparce data on wasting treatment in this age group, this sensitivity analysis will require assumptions such as "what if" wasting treatment were half as effective among infants less than six months of age as it is among children 6-59 months and could be run as an additional simulation scenario.
+
 .. image:: treatment_diagram.svg
    :alt: Compartmental diagram with treatment
 
@@ -684,7 +688,7 @@ Assumptions and Limitations
 #. We assume that individual simulant's propensity to respond to wasting treatment is independent of their previous response/non-response to treatment. According to [Zw_2020tx]_, SAM treatment response rates are associated with diarrhea, oedema, and use of antibiotics in the treament course in Ethiopia. Additionally, vitamin A supplementation and distance from the treatment center may be associated with SAM treatment response rates, although direct evidence was not provided [Zw_2020tx]_. We chose to make this assumption given the non-deterministic nature of these factors.
 #. We assume that individuals who receive wasting treatment (according to parameter :math:`C`) but who do not respond to treatment according to parameters (according to parameter :math:`E_{SAM}` and :math:`E_{MAM}`) will exit the SAM state either through the :math:`r_{SAM,ux}` transition rate to the MAM state or the SAM-specific mortality rate and will exit the MAM state either through the :math:`r_{MAM,ux}` transition rate to mild wasting or the MAM-specific mortality rate. However, treatment non-responders (defined as not reaching recovery after two months of treatment) may represent especially complicated cases of MAM/SAM that may take longer to recovery and/or may have a higher mortality rate.
 #. We are limited in that the estimate of the average duration of SAM in 6-59 month old children from the [Isanaka_2021]_ paper relies on survey estimates of SAM treatment coverage, which may be subject to bias.
-#. We assume that there is no MAM or SAM treatment among infants less than six months.
+#. We assume that there is no MAM or SAM treatment among infants less than six months. (Potential sensitivity analysis to follow)
 
 .. note::
 
