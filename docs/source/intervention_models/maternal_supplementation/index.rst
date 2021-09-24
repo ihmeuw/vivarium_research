@@ -159,7 +159,11 @@ The maternal supplementation intervention is administered to mothers and impacts
 
 For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree. 
 
-The "undernourished" and "adequately nourished" decision node should be based on the x-factor exposure for the acute malnutrition simulation, :ref:`documented here <2019_concept_model_vivarium_ciff_sam>`; however, other risk exposure definitions such as pre-pregnancy body mass index of less than 18.5 should be considered for other models.
+The "undernourished" and "adequately nourished" decision node should be based on the maternal nourishment risk exposure.
+
+.. todo::
+
+  Link risk exposure page for maternal nourishment
 
 .. image:: coverage_decision_tree.svg
 
