@@ -44,17 +44,17 @@ prescription initiation propensity, polypill initiation propensity
     - Risk Factor
   * - SBP
     - Systolic blood pressure
-    - GBD Risk Factor
+    - Risk Factor
 
 Intervention Overview
 -----------------------
 
 The interventions included in this model include treatment of 
-high SBP and high LDL Cholesterol with individual and polypill
-therapies, as well as education to support lifestyle
+high SBP and high LDL Cholesterol with individual medications, polypill
+therapies, and education and outreach to support lifestyle
 modification. Alternative scenarios will consider expanded
 implementation of medical outreach, which is known to increase
-treatment initiation, as well as expanded access to polypill
+treatment adherence, as well as expanded access to polypill
 treatment, which is known to increase adherence.
 
 .. todo::
@@ -73,11 +73,11 @@ treatment, which is known to increase adherence.
   * - SBP
     - additive shift
     - yes
-    - there is a “ramp” of increasing intensity of treatments; CJ: ramp to be implemented later
+    - there is a “ramp” of increasing intensity of treatments
   * - LDL-C
     - multiplicative shift
     - yes
-    - options include not on treatment, low-intensity statin, high-intensity statin; CJ: options to be implemented later
+    - options include not on treatment, low-intensity statin, high-intensity statin;
   * - BMI
     - multiplicative (% BMI lost)
     - yes
@@ -94,11 +94,16 @@ treatment, which is known to increase adherence.
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-Baseline coverage of treatments for LDL-C and SBP are substantial and expected to vary by age, sex, and time.  To initialize simulants, researchers will fit a multinomial or logistic regression (as appropriate) to NHANES data, and provide the results to the engineers to use as a prediction of the probability of each treatment for a simulant with a known age, sex, and measured LDL-C and SBP level.  [[Should this also predict which simulants are non-adherent to treatment?]] 
+Baseline coverage of treatments for LDL-C and SBP are substantial and expected to vary by age, sex, and time.  To initialize simulants, researchers will fit a multinomial or logistic regression (as appropriate) to NHANES data, and provide the results to the engineers to use as a prediction of the probability of each treatment for a simulant with a known age, sex, and measured LDL-C and SBP level. [[Should this also predict which simulants are non-adherent to treatment?]] 
 
 This initialization scheme will also allow initialization of "untreated LDL-C" and "untreated SBP" attributes, which refer to what a simulants risk exposure would be, if they were not receiving treatment.   Individuals who are initialized to be receive treatment will also need to be initialized to have a follow-up visit date somehow.
 
 Baseline coverage of polypill, medication outreach, and lifestyle modification education are all low, and we will assume that they are 0%. (This means that we will can initialize the untreated BMI, FPG, and smoking risk exposures to be equal to the actual BMI, FPG, and smoking exposures.)
+
+Weighted means of treatment (not specific to drug class) by age, sex, and SBP category (in 10 mm Hg groups) are here: /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/sbp_tx_info.csv
+
+.. todo:: add link to stash repo with collapse code 
+.. todo:: update with file for LDL 
 
 .. list-table:: Baseline coverage data
   :widths: 15 15 15 15 15
@@ -229,6 +234,11 @@ All simulants enrolled in the intervention initiate treatment (defined as initia
 
 Adherence:
 All simulants get number from 0 to 1 drawn from non-uniform distribution of adherence in the general population [need to find]. Simulants with values >=0.8 are considered adherent and receive the full benefit of their medication.
+
+ASCVD Risk score
+score = -19.5 + 0.043 * sbp + 0.266 * age + 2.32 * sex
+
+Implementation in previous code found here: https://github.com/ihmeuw/vivarium_csu_zenon/blob/7a1ba2a0eef46d8184bc4a38926224b95bebf58a/src/vivarium_csu_zenon/components/cvd.py#L57
 
 .. list-table:: Key parameters for intervention model
   :widths: 15 15 15
