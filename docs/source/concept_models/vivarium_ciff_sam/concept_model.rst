@@ -350,36 +350,33 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 5.3 Models
 ----------
 
+.. list-table:: Model Versions
+   :header-rows: 1
 
+   * - Model number
+     - Description
+     - Note
+   * - 1
+     - Cause and mortality models
+     - 
+   * - 2
+     - Exposure model stunting and wasting without baseline treatment tracking. Baseline only.
+     - 
+   * - 3
+     - SQ-LNS baseline and intervention scale-up
+     - 
+   * - 4
+     - SAM and MAM treatment baseline and treatment scale-up
+     - Excluded wasting transitions among simulants under 6 months of age
+   * - 4.5
+     - X-factor 
+     - x-factor exposure based on GBD maternal underweight in this model version (to be updated to maternal BMI risk exposure eventually)
 
-.. _5.3.1:
+.. note::
 
-5.3.1 Model 1 - Cause models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  Multiple iterations of numbered model versions were performed with incremental model improvements and may not be reflected in the table above.
 
-Cause models and mortality models
-
-.. _5.3.2:
-
-5.3.2 Model 2 - stunting and wasting risk exposure models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Exposure model stunting and wasting without baseline treatment tracking. Baseline only.
-
-.. _5.3.3:
-
-5.3.3 Model 3 - SQ-LNS
-~~~~~~~~~~~~~~~~~~~~~~
-
-SQ-LNS baseline and intervention scale-up
-
-.. _5.3.4:
-
-5.3.4 Model 4 - Treatment model - GAM treatment
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-SAM and MAM treatment baseline and treatment scale-up
-
+  Model status is tracked and updated on the project HUB page, `found here <https://hub.ihme.washington.edu/display/COS/Severe+Acute+Malnutrition+GBD+2019+Simulation>`_.
 
 .. _5.4:
 
