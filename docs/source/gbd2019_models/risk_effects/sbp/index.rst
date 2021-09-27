@@ -225,7 +225,7 @@ Risk Outcome Pair #4: Subarachnoid hemorrhage
 
 :ref:`See subarachnoid hemorrhage documentation <2019_cause_sah>`
 
-The relative risks apply to the incidence rates of acute subarachnoid hemorrhage. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c497`\) * RR\ :sub:`r107`\). 
+The relative risks apply to the incidence rates of acute subarachnoid hemorrhage. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. 
 
 PAFs and relative risks can be pulled using the following code: 
 
