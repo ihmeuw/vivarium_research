@@ -82,21 +82,9 @@ For GBD 2017, we reviewed the literature to select a TMREL for LDL. A meta-analy
 Vivarium Modeling Strategy
 --------------------------
 
-.. note::
+The risk-outcome pairs listed below are standard GBD relationships. The relative risks stored in the database are not location- or year-specific. They are age- and sex-specific. The LDL risk factor affects the likelihood of both morbidity and mortality from ischemic stroke and ischemic heart disease. We will model this in Vivarium such that exposure to LDL will impact the incidence rate of ischemic stroke and the incidence of acute myocardial infarction and stable angina. The excess mortality rate for both outcomes will be unaffected. 
 
-   This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
-
-.. todo::
-
-   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
-
-.. todo::
-
-   List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
-
-.. list-table:: Risk Outcome Relationships for Vivarium
+.. list-table:: Entities affected by LDL-C in GBD
    :widths: 5 5 5 5 5
    :header-rows: 1
 
@@ -105,76 +93,80 @@ Vivarium Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * -
-     -
-     -
-     -
-     -
+   * - Ischemic heart disease
+     - Cause
+     - 493
+     - Mortality and Morbidity (GBD YLLs and YLDs)
+     - Cause-level is mortality only
+   * - Ischemic stroke
+     - Cause
+     - 495
+     - Mortality and Morbidity (GBD YLLs and YLDs)
+     - 
 
-Risk Outcome Pair #1
-++++++++++++++++++++
-
-.. todo::
-
-	Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing cause model document or other documentation of the outcome in the risk outcome pair.
-
-.. todo::
-
-  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
-
-  Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
-
-.. todo::
-
-  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable.
-
-  Relative risks for a risk factor may be pulled from GBD at the draw-level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`. You can then calculate the mean value as well as 2.5th, and 97.5th percentiles across draws.
-
-  The relative risks in the table below should be included for easy reference and should match the relative risks pulled from GBD using the above code. In this case, update the :code:`Note` below to include the appropriate :code:`{risk_name}`.
-
-  If for any reason the modeling strategy uses non-GBD relative risks, update the :code:`Note` below to explain that the relative risks in the table are a custom, non-GBD data source and include a sampling strategy.
-
-.. note::
-
-  The following relative risks are displayed below for convenient reference. The relative risks in the table below should match the relative risks that can be pulled at the draw level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`.
-
-.. list-table:: Relative Risks
-   :widths: 5 5 5
+.. list-table:: Restrictions
+   :widths: 15 15 20
    :header-rows: 1
 
-   * - Exposure Category
-     - Relative Risk
-     - Note
-   * -
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
      -
+   * - Female only
+     - False
      -
+   * - YLL only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - Age group start
+     - 10
+     - [25, 29)
+   * - Age group end
+     - 235
+     - [95, 125 years)
+
+Risk Outcome Pair #1: Ischemic heart disease
+++++++++++++++++++++++++++++++++++++++++++++
+
+:ref:`See ischemic heart disease documentation <2019_cause_ihd>`
+
+The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((LDL-C_i - TMREL),0)}. The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. 
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=367, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[367, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+
+Risk Outcome Pair #2: Ischemic stroke
++++++++++++++++++++++++++++++++++++++
+
+:ref:`See ischemic stroke documentation <2019_cause_ischemic_stroke>`
+
+The relative risks apply to the incidence rates of acute ischemic stroke. They should be applied using the formula They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((LDL-C_i - TMREL),0)}.
+
+PAFs and relative risks can be pulled using the following code: 
+
+rrs = get_draws(gbd_id_type='rei_id', gbd_id=367, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+
+pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[367, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-  List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
-
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+The relative risk for IHD is calculated based on studies which use a variety of outcomes (AMI only, major adverse cardiovascular events, composite IHD outcome); most of these outcomes map imperfectly to the GBD case definition for IHD. 
 
-	List assumptions and limitations of this modeling strategy, including any potential issues regarding confounding, mediation, effect modification, and/or generalizability with the risk-outcome pair.
-
-Bias in the Population Attributable Fraction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-As noted in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias.
-
-.. todo::
-
-	Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+As noted in the Population Attributable Fraction section of the Modeling Risk Factors document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias. 
 
 References
 ----------
