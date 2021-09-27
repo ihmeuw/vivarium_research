@@ -130,12 +130,12 @@ The risk-outcome pairs listed below are standard GBD relationships. The relative
      - 235
      - [95, 125 years)
 
-Risk Outcome Pair #1
-++++++++++++++++++++
+Risk Outcome Pair #1: Ischemic heart disease
+++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See ischemic heart disease documentation <2019_cause_ihd>`
 
-The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r367,c493`\) * RR\ :sub:`r367`\). The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. 
+The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((LDL-C_i - TMREL),0)}. The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. 
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -144,12 +144,12 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=367, source='rr', year_id=2019, gbd
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[367, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
 
-Risk Outcome Pair #2
-++++++++++++++++++++
+Risk Outcome Pair #2: Ischemic stroke
++++++++++++++++++++++++++++++++++++++
 
 :ref:`See ischemic stroke documentation <2019_cause_ischemic_stroke>`
 
-The relative risks apply to the incidence rates of acute ischemic stroke. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r367,c495`\) * RR\ :sub:`r367`\). 
+The relative risks apply to the incidence rates of acute ischemic stroke. They should be applied using the formula They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((LDL-C_i - TMREL),0)}.
 
 PAFs and relative risks can be pulled using the following code: 
 
