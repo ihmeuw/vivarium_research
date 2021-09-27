@@ -180,12 +180,12 @@ The risk-outcome pairs listed below are standard GBD relationships. The relative
      - 235
      - [95, 125 years)
 
-Risk Outcome Pair #1
-++++++++++++++++++++
+Risk Outcome Pair #1: Ischemic heart disease
+++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See ischemic heart disease documentation <2019_cause_ihd>`
 
-The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c493`\) * RR\ :sub:`r107`\). The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. 
+The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg.
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -193,12 +193,12 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #2
-++++++++++++++++++++
+Risk Outcome Pair #2: Ischemic stroke
++++++++++++++++++++++++++++++++++++++
 
 :ref:`See ischemic stroke documentation <2019_cause_ischemic_stroke>`
 
-The relative risks apply to the incidence rates of acute ischemic stroke. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c495`\) * RR\ :sub:`r107`\). 
+The relative risks apply to the incidence rates of acute ischemic stroke. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. 
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -206,12 +206,13 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #3
-++++++++++++++++++++
+Risk Outcome Pair #3: Intracerebral hemorrhage
+++++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See intracerebral hemorrhage documentation <2019_cause_ich>`
 
-The relative risks apply to the incidence rates of acute intracerebral hemorrhage. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c496`\) * RR\ :sub:`r107`\). 
+The relative risks apply to the incidence rates of acute intracerebral hemorrhage. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. 
+
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -219,12 +220,12 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 496], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #4
-++++++++++++++++++++
+Risk Outcome Pair #4: Subarachnoid hemorrhage
++++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See subarachnoid hemorrhage documentation <2019_cause_sah>`
 
-The relative risks apply to the incidence rates of acute subarachnoid hemorrhage. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c497`\) * RR\ :sub:`r107`\). 
+The relative risks apply to the incidence rates of acute subarachnoid hemorrhage. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. 
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -232,8 +233,8 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 497], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #5
-++++++++++++++++++++
+Risk Outcome Pair #5: Hypertensive heart disease
+++++++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See hypertensive heart diease documentation <2019_cause_hhd>`
 
@@ -243,12 +244,12 @@ Relative risks can be pulled using the following code; please note that this wil
 
 rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd_round_id=7, status='best', decomp_step='iterative') 
 
-Risk Outcome Pair #6
-++++++++++++++++++++
+Risk Outcome Pair #6: Atrial fibrillation and flutter
++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See atrial fibrillation and flutter documentation <2019_cause_afib>`
 
-The relative risks apply to the incidence rates of atrial fibrillation and flutter. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c500`\) * RR\ :sub:`r107`\). 
+The relative risks apply to the incidence rates of atrial fibrillation and flutter. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. 
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -256,8 +257,8 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 500], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #7
-++++++++++++++++++++
+Risk Outcome Pair #7: Aortic aneurysm
++++++++++++++++++++++++++++++++++++++
 
 :ref:`See aortic aneurysm documentation <2019_cause_aortic_aneurysm>`
 
@@ -269,12 +270,12 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 501], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #8
-++++++++++++++++++++
+Risk Outcome Pair #8: Peripheral arterial disease
++++++++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See peripheral arterial disease documentation <2019_cause_pad>`
 
-The relative risks apply to the incidence rates of peripheral arterial disease. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c502`\) * RR\ :sub:`r107`\). 
+They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. 
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -282,12 +283,12 @@ rrs = get_draws(gbd_id_type='rei_id', gbd_id=107, source='rr', year_id=2019, gbd
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 502], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #9
-++++++++++++++++++++
+Risk Outcome Pair #9: Chronic kidney disease
+++++++++++++++++++++++++++++++++++++++++++++
 
 :ref:`See chronic kidney disease documentation <2019_cause_ckd>`
 
-The relative risks apply to the incidence rates of chronic kidney disease. They should be applied using the formula affected_measure*(1 – PAF\ :sub:`r107,c589`\) * RR\ :sub:`r107`\). This is the incidence at the parent cause level; we do not currently have independent relative risks for the etiologies of CKD (type 1 DM, type 2 DM, glomerulonephritis, hypertension, other). 
+The relative risks apply to the incidence rates of chronic kidney disease. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg. This is the incidence at the parent cause level; we do not currently have independent relative risks for the etiologies of CKD (type 1 DM, type 2 DM, glomerulonephritis, hypertension, other). 
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -297,8 +298,8 @@ For relative risks, will need to subset to cause_id=592; this is CKD due to glom
 
 pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 589], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-Risk Outcome Pair #10
-+++++++++++++++++++++
+Risk Outcome Pair #10: Heart failure
+++++++++++++++++++++++++++++++++++++
 
 :ref:`See heart failure documentation <2019_cause_heart_failure>`
 
