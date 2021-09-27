@@ -150,7 +150,7 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
 
   Note that the :ref:`BEP simulation <2017_concept_model_vivarium_gates_bep>` used the proportion of women who took antenatal iron for 90+ days for baseline coverage.
 
-  For the proportion of women who took *any* antenatal iron in Ethiopia, the confidence interval was calculated using the formula :math:`1.96 \times \sqrt{\frac{p \times (1 - p)}{n}}`. Confidence intervals could/should be estimated in a similar way for the remaining estimates using the reported samply size of the survey if/when necessary.
+  For the proportion of women who took *any* antenatal iron in Ethiopia, the confidence interval was calculated using the formula :math:`1.96 \times \sqrt{\frac{p \times (1 - p)}{n}}`. Confidence intervals could/should be estimated in a similar way for the remaining estimates using the reported sample size of the survey if/when necessary.
 
 Vivarium Modeling Strategy
 --------------------------
