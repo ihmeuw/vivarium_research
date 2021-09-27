@@ -74,7 +74,7 @@ When modeling children, the exposure should be assigned at birth or upon initial
      - Exposed (BMI<18.5)
      - 0.224 (95% CI: 0.217, 0.231)
      - Assume normal distribution of uncertainty clipped at 0 and 1. Confidence interval calculated as :math:`\pm 1.96 \times \sqrt{\frac{p \times (1 - p)}{n}}`
-     - Ethiopia 2016 DHS
+     - `Ethiopia 2016 DHS <https://dhsprogram.com/methodology/survey/survey-display-478.cfm>`_; Table 11.10.1: Nutritional status of women
 
 .. list-table:: Risk Exposure Restrictions: Children
    :widths: 15 15 20
