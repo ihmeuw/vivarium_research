@@ -115,9 +115,9 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 2. Assess the percentile of a simulant's birthweight exposure value (after application of all birthweight-affecting variables in the baseline scenario but before the application of *new* intervention coverage in the alternative scenario) within the overall sex, location, and year-specific birthweight exposure distribution *at birth*.
 
-3. Assign the simulant a wasting propensity score that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.2225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+3. Assign the simulant a wasting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.2225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
 
-4. Assign the simulant a wasting exposure based on their propensity score value and their sex/location/year-specific wasting exposure distribution among the 6-11 month age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity score value equals the percentile within the exposure distribution.
+4. Assign the simulant a wasting exposure based on their wasting propensity and their sex/location/year-specific wasting exposure distribution among the 6-11 month age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity is equal to the percentile within the exposure distribution.
 
 .. warning::
 
@@ -144,7 +144,7 @@ For interventions that impact birthweight, there should be a corresponding chang
 Initialization
 ^^^^^^^^^^^^^^^
 
-For each gram increase in a simulant's birthweight due to a simulation intervention, the category 1 (severe wasting/SAM) and category 2 (moderate wasting/MAM) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting exposure prevalence is equal to 0.0115 / 200 = 0.00575. The exposure prevalence of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.00575. The figure below demonstrates how to implement this change visually. This change in the wasting expousure distribution thresholds attributable to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's wasting initialization propensity score value correlated with their birthweight percentile, as described above.
+For each gram increase in a simulant's birthweight due to a simulation intervention, the category 1 (severe wasting/SAM) and category 2 (moderate wasting/MAM) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting exposure prevalence is equal to 0.0115 / 200 = 0.00575. The exposure prevalence of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.00575. The figure below demonstrates how to implement this change visually. This change in the wasting expousure distribution thresholds attributable to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's wasting initialization propensity correlated with their birthweight percentile, as described above.
 
 .. image:: wasting_exposure_dist.svg
 
