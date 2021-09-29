@@ -199,6 +199,10 @@ See linked documentation for more information :ref:`Treatment and management for
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.
 
+.. todo::
+
+  Consider targeting SQ-LNS coverage to simulants in SAM treatment.
+
 **Alternative scenario 3**
 Scale up of LBWSG interventions from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 2.
 
