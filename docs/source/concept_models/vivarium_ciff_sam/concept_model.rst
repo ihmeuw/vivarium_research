@@ -226,8 +226,8 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
     - Date
     - Notes
   * - Simulation start
-    - 2021-01-01
-    - We are running a 2-year "burn-in" period at baseline before starting any interventions. We increased the burn-in from 1 year to 2 years going from Model 3 to Model 4 to test whether smaller-than-expected incidence ratios in first year of SQLNS intervention were due to insufficient wasting model calibration
+    - 2022-01-01
+    - We are running a 1-year "burn-in" period at baseline before starting any interventions. 
   * - Simulation end
     - 2026-12-31
     - The simulation will run for a total of 6 years
@@ -339,8 +339,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 - Cohort type: Prospective open cohort of 0-5 years
 - Size of largest starting population: 100,000 simulants
 - Time span: Jan 1, 2022 to Dec 31, 2026
-- Time step: 1 day
-
+- Time step: 0.5 days
 
 .. _5.2.2:
 
