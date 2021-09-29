@@ -182,7 +182,7 @@ See linked documentation for more information :ref:`Treatment and management for
     - Sphere guideline for efficacy only
   * - MAM baseline
     - 48.8% (95% CI: 37.4, 60.4)
-    - 73.1% for RUSF
+    - 73.1% (95% CI:58.5-87.7) for RUSF
     - 0.488 x 0.731 = 0.34
     - 1 - 0.34 = 0.66
     - [Ackatia_Armah_2015]_
