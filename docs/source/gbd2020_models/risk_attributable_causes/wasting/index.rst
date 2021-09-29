@@ -534,25 +534,15 @@ Wasting model
 
 .. important::
 
-  We will model wasting transitions **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 6-11 month age group (age_group_id=389, or postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2020).
+  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2020). 
 
-  All wasting transition rates should equal zero among all ages under 6 months.
+  All wasting transition rates should equal zero among all ages under 6 months. The relative risks for each wasting risk exposure category and each risk/outcome pair should equal one for all ages under 6 months.
 
-  Wasting transition rates should be informed by the data tables below for ages over 6 months.
+  Wasting transition rates should be informed by the data tables below for ages over 6 months. Wasting risk effects for ages over 6 months should be informed by the standard GBD wasting relative risks.
 
-  Related assumptions/limitations: 
+  NOTE: When the birthweight and wasting risk exposure at birth correlation is implemented, it will cause simulants with a greater neonatal mortality (due to brithweight exposure) to be initialized into more severe wasting states. This will cause the wasting exposure distribution to shift to less severe wasting states over the neonatal period as simulants with lower birthweights (and more severe wasting states due to the birthweight and wasting exposure correlation) die. The magnitude of the bias introduced by this modeling strategy should be investigated upon implementation to determine if different modeling strategies are necessary. This should be done by comparing the wasting exposure and wasting-affected outcomes in the simulation output to the GBD inputs by age group.
 
-  #. We will apply the wasting exposure distribution among the 6-11 month age group to the 1-5 month age group. Because wasting risk effects are present among the 1-5 month age group, this may cause lack of validation to the outcomes affected by wasting for this age group, including measles/diarrheal diseases/PEM DALYs. 
-
-  #. When the birthweight and wasting risk exposure at birth correlation is implemented, it will cause simulants with a greater neonatal mortality (due to brithweight exposure) to be initialized into more severe wasting states. This will cause the wasting exposure distribution to shift to less severe wasting states over the neonatal period as simulants with lower birthweights (and more severe wasting states due to the birthweight and wasting exposure correlation) die. 
-
-  The magnitude of the bias introduced by this modeling strategy due to the two points above should be investigated upon implementation to determine if different modeling strategies are necessary. This should be done by comparing the wasting exposure and wasting-affected outcomes in the simulation output to the GBD inputs by age group.
-
-  NOTE:
-
-  - The modeling decision not to model wasting transitions among simulants less than six months of age is due to the reliance of the wasting model transition rates on the wasting treatment model and the lack of data to inform treatment-related transition rates among this age group. Note that a sensitivity analysis scenario that includes infants less than six months of age in the treatment model may be performed in the future.
-
-  - The decision to initialize simulants with the birth prevalence of the 6-11 month age group with all wasting transition rates equal to zero before six months of age rather than have a static wasting exposure model among simulants less than six months of age (similar to the stunting exposure model) was chosen due to the ease of engineering implementation and will be revisited if it introduces a large bias.
+  NOTE: The modeling decision not to model wasting transitions among simulants less than six months of age is due to the reliance of the wasting model transition rates on the wasting treatment model and the lack of data to inform treatment-related transition rates among this age group. Note that a sensitivity analysis scenario that includes infants less than six months of age in the treatment model may be performed in the future.
 
 This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
 Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
@@ -907,7 +897,7 @@ Data Description Tables
    * - TMREL, MOD, MAM, SAM
      - birth prevalence
      - :math:`prevalence_{240_{cat-1-4}}`
-     - Use prevalence of age_group_id = 389 (six to 11 months)
+     - Use prevalence of age_group_id = 388 (1 to 5 months)
 
 .. code-block:: python
 
