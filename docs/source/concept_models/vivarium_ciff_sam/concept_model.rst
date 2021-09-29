@@ -275,6 +275,8 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
 
+* :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
+
 5.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -393,18 +395,7 @@ The x-factor is a risk exposure that tries to capture the differential risk expe
 
 **Risk exposure**
 
-We will use maternal undernutrition as the exposure prevalence for the X-factor. We are using maternal undernutrition as a **proxy** for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_ The proportion of reproductive age women underweight is 0.188 for GBD 2020. (Because this prevalence is lower than 20%, we will also use this exposure to target BEP for the maternal supplementation intervention).
-
-.. code-block:: python
-
-  #Age standardized covariate for underweight women of reproductive age (10-54) with underweight for women under age 20 defined by <-2 BMI z scores and for women over age 20 as <17 BMI
-
-  get_covariate_estimates(
-   gbd_round_id = 7,
-   covariate_id = 1252,
-   decomp_step ='iterative',
-   location_id = [179],
-   year_id = 2020)
+As we do not have a precise definition of the x-factor risk exposure, we will model the exposure to be equal to and perfectly correlated with the :ref:`maternal BMI risk exposure <2019_risk_exposure_maternal_bmi>`. We are using maternal undernutrition as a **proxy** for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_ 
 
 **Risk effect**
 
