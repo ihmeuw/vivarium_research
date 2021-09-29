@@ -650,7 +650,7 @@ For treatment of SAM and MAM, we model treatment starting at six months of age. 
 
 Note that for the exposure, we model a 'birth prevalence' which is the prevalence of wasting of the XXX age group extrapolated to the neonatal age groups. This is to ensure our XXX age groups initialize at the correct prevalences to start the wasting transitions.
 
-Also note that since wasting and LBWSG are correlated, those with more severe wasting will have higher likelihood to die in the six months of life as those with lower birthweights have higher risk of death. This might lead to a bias in our wasting exposures at the post-neonatal age groups to favour healthier babies and should be investigated in model results.
+Also note that since wasting and LBWSG are correlated, those with more severe wasting will have higher likelihood to die in the first six months of life as those with lower birthweights have higher risk of death. This might lead to a bias in our wasting exposures at the post-neonatal age groups to favour healthier babies and should be investigated in model results.
 
 .. list-table:: Affected outcomes restrictions
   :widths: 20 20 20
