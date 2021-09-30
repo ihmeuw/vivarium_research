@@ -251,8 +251,8 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - [[Fill in info for all rows in this table]]
     - 
   * - Follow-up visit rate for cardiometabolic risk management 
-    - 
-    - 
+    - AHA/ACC recommendations
+    - uniform distribution from 3 to 6 months
   * - SBP measurement error
     - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884
     - 85%: uniform distribution +/- 3 mm Hg; 15% uniform distribution =/- 4-9 mm Hg
