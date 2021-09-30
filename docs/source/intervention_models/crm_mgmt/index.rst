@@ -248,38 +248,38 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - Data Source
     - Notes
   * - Outpatient visit rate
-    - [[Fill in info for all rows in this table]]
-    - 
+    - GBD
+    - Outpatient utilization envelope
   * - Follow-up visit rate for cardiometabolic risk management 
-    - 
-    - 
+    - AHA/ACC recommendations
+    - uniform distribution from 3 to 6 months
   * - SBP measurement error
-    - 
-    - 
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884
+    - 85%: uniform distribution +/- 3 mm Hg; 15% uniform distribution =/- 4-9 mm Hg
   * - SBP therapeutic inertia
-    - 
-    - 
+    - Hypertension. 2006 Mar;47(3):345-51. doi: 10.1161/01.HYP.0000200702.76436.4b., J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783
+    - 19% of the variance in SBP
   * - SBP prescription initiation rate
-    - 
-    - 
+    - Assumption for current run; will reevaluate in future
+    - 100 %
   * - SBP adherence rate
-    - 
-    - 
+    - Medical Expenditure Panel Survey, 2014
+    - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/pdc_meps_2014.csv
   * - SBP treatment efficacy
-    - 
-    - 
+    - BMJ 2009 May 19;338:b1665. doi: 10.1136/bmj.b1665.
+    - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp.csv
   * - SBP baseline coverage rate for each ramp position
     - 
     - 
   * - LDL-C measurement error
-    - 
-    - 
+    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149
+    - uniform distribution from 2 to 5%
   * - LDL-C therapeutic inertia
-    - 
-    - 
+    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028
+    - 0.194
   * - LDL-C prescription initiation rate
-    - 
-    - 
+    - Assumption; will revisit later
+    - 100%
   * - LDL-C adherence rate
     - 
     - 
@@ -289,12 +289,12 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
   * - LDL-C baseline coverage rate
     - 
     - 
-  * - Medication outreach effectiveness on prescription initiation
-    - 
-    - 
+  * - Medication outreach effectiveness on medication adherence
+    - Circulation. 2005;111(10):1298-1304. doi:10.1161/01.CIR.0000157734.97351.B2
+    - OR 2.3 (95% CI 1.39-3.88) 
   * - Medication outreach baseline coverage
-    - 
-    - 
+    - Assumption
+    - 0%
   * - Polypill effectiveness on medication adherence
     - 
     - 
