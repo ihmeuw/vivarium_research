@@ -109,7 +109,7 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 .. note::
 
-   Wasting exposures at birth and in the early and late neonatal age groups will be initialized using the wasting exposure distribution for 1-5 month age group, as described in the :ref:`wasting exposure model document <2020_risk_exposure_wasting_state_exposure>`.
+   Wasting exposures at birth and in the early and late neonatal age groups will be initialized using the wasting exposure distribution for 6-11 month age group, as described in the :ref:`wasting exposure model document <2020_risk_exposure_wasting_state_exposure>`.
 
 1. Assign the simulant a birthweight exposure value specific to their age group and additional attributes that affect birthweight (i.e. intervention coverage, maternal BMI risk exposure, etc.)
 
@@ -117,11 +117,11 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 3. Assign the simulant a wasting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.2225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
 
-4. Assign the simulant a wasting exposure based on their wasting propensity and their sex/location/year-specific wasting exposure distribution among the 1-5 month age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity is equal to the percentile within the exposure distribution.
+4. Assign the simulant a wasting exposure based on their wasting propensity and their sex/location/year-specific wasting exposure distribution among the 6-11 month age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity is equal to the percentile within the exposure distribution.
 
 .. warning::
 
-   Given that the 1-5 month age group wasting exposure distribution is used to inform wasting exposures at birth and correlated with birthweight exposure, the wasting exposure distribution between birth and the the 6-11 month age group will shift towards the TMREL as a result of the higher mortality rates among simulants with lower birthweight (which also tend to have worse wasting exposures).
+   Given that the 6-11 month age group wasting exposure distribution is used to inform wasting exposures at birth and correlated with birthweight exposure, the wasting exposure distribution between birth and the the 6-11 month age group will shift towards the TMREL as a result of the higher mortality rates among simulants with lower birthweight (which also tend to have worse wasting exposures).
 
    The magnitude of this bias should be evaluated upon implementation to determine if an alternative modeling strategy is necessary. Validation criteria for this evaluation will be comparing the wasting exposure distribution among the post neonatal age group in the simulation to GBD as well as evaluating the relative improvement in the wasting exposure distribution in the simulation across early to post neonatal age groups.
 
@@ -130,7 +130,11 @@ When simulants are initialized into the early or late neonatal age groups or bor
 Transitions
 ^^^^^^^^^^^^^
 
-We will not model a correlation between birthweight exposure and wasting incidence rates directly. However, these measures will be positively correlated in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` as a result of the correlation between birthweight and maternal BMI risk exposures (:ref:`described here <2019_risk_correlation_maternal_bmi_birthweight>`), the perfect correlation between the x-factor and maternal BMI risk expousre, and the impact of the x-factor on wasting incidence rates (note: x-factor documentation can be found in the :ref:`acute malnutrition concept model document <2019_concept_model_vivarium_ciff_sam>`).
+.. todo::
+
+   Add detail on how to correlate wasting x-factor propensity to birthweight exposure
+
+   This will be done through the correlation between maternal BMI (proxy measure for x-factor risk exposure) and birthweight
 
 Causation
 ++++++++++++
