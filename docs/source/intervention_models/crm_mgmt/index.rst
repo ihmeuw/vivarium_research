@@ -248,8 +248,8 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - Data Source
     - Notes
   * - Outpatient visit rate
-    - [[Fill in info for all rows in this table]]
-    - 
+    - GBD
+    - Outpatient utilization envelope
   * - Follow-up visit rate for cardiometabolic risk management 
     - AHA/ACC recommendations
     - uniform distribution from 3 to 6 months
@@ -266,8 +266,8 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - Medical Expenditure Panel Survey, 2014
     - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/pdc_meps_2014.csv
   * - SBP treatment efficacy
-    - 
-    - 
+    - BMJ 2009 May 19;338:b1665. doi: 10.1136/bmj.b1665.
+    - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp.csv
   * - SBP baseline coverage rate for each ramp position
     - 
     - 
