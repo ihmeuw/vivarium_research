@@ -104,7 +104,7 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 2. Assess the percentile of a simulant's birthweight exposure value (after application of all birthweight-affecting variables in the baseline scenario but before the application of *new* intervention coverage in the alternative scenario) within the overall sex, location, and year-specific birthweight exposure distribution *at birth*.
 
-3. Assign the simulant a stunting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3939393, standard deviation: 0.02035630, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+3. Assign the simulant a stunting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at one month of age (0.56461806). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
 
 4. Assign the simulant a stunting exposure based on their stunting propensity and their sex/location/year-specific stunting exposure distribution such that the propensity is equal to the percentile within the exposure distribution.
 
@@ -135,6 +135,8 @@ For each gram increase in a simulant's birthweight due to a simulation intervent
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++++
+
+We are limited in that we will use the correlation between birthweight and stunting to initialize simulant stunting exposures at birth through the first month of life. However, as shown in the [MAL-ED-investigators-2014-stunting-bw]_ study, the correlation between these factors decreases with age. Since we do not model birthweight exposure values after one month of life, we cannot consider this evolving correlation. Additionally, we assume that the correlation coefficient between birthweight and stunting does not significantly vary within the first month of life.
 
 The application of the size from [McGovern-et-al-2019-stunting-bw]_ makes the following assumptions:
 
