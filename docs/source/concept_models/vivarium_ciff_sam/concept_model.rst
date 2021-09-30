@@ -182,7 +182,7 @@ See linked documentation for more information :ref:`Treatment and management for
     - Sphere guideline for efficacy only
   * - MAM baseline
     - 48.8% (95% CI: 37.4, 60.4)
-    - 73.1% for RUSF
+    - 73.1% (95% CI:58.5-87.7) for RUSF
     - 0.488 x 0.731 = 0.34
     - 1 - 0.34 = 0.66
     - [Ackatia_Armah_2015]_
@@ -198,6 +198,10 @@ See linked documentation for more information :ref:`Treatment and management for
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.
+
+.. todo::
+
+  Consider targeting SQ-LNS coverage to simulants in SAM treatment.
 
 **Alternative scenario 3**
 Scale up of LBWSG interventions from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 2.
@@ -226,8 +230,8 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
     - Date
     - Notes
   * - Simulation start
-    - 2021-01-01
-    - We are running a 2-year "burn-in" period at baseline before starting any interventions. We increased the burn-in from 1 year to 2 years going from Model 3 to Model 4 to test whether smaller-than-expected incidence ratios in first year of SQLNS intervention were due to insufficient wasting model calibration
+    - 2022-01-01
+    - We are running a 1-year "burn-in" period at baseline before starting any interventions. 
   * - Simulation end
     - 2026-12-31
     - The simulation will run for a total of 6 years
@@ -339,8 +343,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 - Cohort type: Prospective open cohort of 0-5 years
 - Size of largest starting population: 100,000 simulants
 - Time span: Jan 1, 2022 to Dec 31, 2026
-- Time step: 1 day
-
+- Time step: 0.5 days
 
 .. _5.2.2:
 
