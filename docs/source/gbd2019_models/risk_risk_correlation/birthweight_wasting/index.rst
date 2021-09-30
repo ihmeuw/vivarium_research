@@ -109,7 +109,7 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 .. note::
 
-   Wasting exposures at birth and in the early and late neonatal age groups will be initialized using the wasting exposure distribution for 6-11 month age group, as described in the :ref:`wasting exposure model document <2020_risk_exposure_wasting_state_exposure>`.
+   Wasting exposures at birth and in the early and late neonatal age groups will be initialized using the wasting exposure distribution for the 6-11 month age group, as described in the :ref:`wasting exposure model document <2020_risk_exposure_wasting_state_exposure>`.
 
 1. Assign the simulant a birthweight exposure value specific to their age group and additional attributes that affect birthweight (i.e. intervention coverage, maternal BMI risk exposure, etc.)
 
