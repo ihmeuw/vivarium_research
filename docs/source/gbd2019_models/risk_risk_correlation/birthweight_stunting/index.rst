@@ -35,29 +35,19 @@ Birthweight and Child Stunting
 Risk Exposures Overview
 ------------------------
 
-Child anthropometry is measured through several different correlated metrics, generally related to length/height, weight, and age. Relevant metrics include:
+Child anthropometry is measured through several different correlated metrics, generally related to length/height, weight, and age. Relevant metrics to this document include:
 
 .. list-table:: Child Anthropometry Metrics
    :header-rows: 1
 
    * - Metric
      - Typical threshold value
-   * - Gestational age
-     - Preterm birth: <37 weeks
    * - Birthweight
      - Low birthweight: <2500 grams
    * - Length/height for age (LAZ/HAZ)
      - Stunted: 2+ standard deviations below mean
-   * - Weight for length/height (WLZ/WHZ)
-     - Wasted: 2+ standard deviations below mean
-   * - Weight for age (WAZ)
-     - Underweight: 2+ standard deviations below mean
 
-Notably, these metrics tend to be highly correlated, with the magnitude of correlation varying with age. The metrics are related both through common causes as well as through suspected direct causal influences in some cases. The below diagram represents a causal framework for child growth metrics at birth as they relate to child growth metrics throughout the pre- and post-natal periods, as presented by [Na-et-al-2020-stunting-bw]_.
-
-.. image:: dag_framework.png
-
-Notably, it is critical to distinguish between the correlation between these metrics attributable to shared common causes between them from correlation between these metrics attributable to direct causal relationships. However, the influence of confounding factors in the estimation of the causal relationship between these factors must be carefully considered due to the high correlation between them and the observational nature of child anthropometry studies. Additionally, child age should be considered as an important effect modifier in the associations between each of these metrics, as discussed by [Alderman-and-Headey-2018-stunting-bw]_.
+Child anthropometry metrics tend to be highly correlated, with the magnitude of correlation varying with age. The metrics are related both through common causes as well as through suspected direct causal influences in some cases. It is critical to distinguish between the correlation between these metrics attributable to shared common causes between them from correlation between these metrics attributable to direct causal relationships. However, the influence of confounding factors in the estimation of the causal relationship between these factors must be carefully considered due to the high correlation between them and the observational nature of child anthropometry studies. Additionally, child age should be considered as an important effect modifier in the associations between each of these metrics, as discussed by [Alderman-and-Headey-2018-stunting-bw]_. For more discussion, see the :ref:`birthweight and wasting risk-risk correlation document <2019_risk_correlation_birthweight_stunting>`.
 
 Correlation
 ++++++++++++
@@ -174,9 +164,6 @@ References
 
 .. [McGovern-et-al-2019-stunting-bw]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
-
-.. [Na-et-al-2020-stunting-bw]
-  Na M, Shamim AA, Mehra S, Labrique A, Ali H, Wu LS, Shaikh S, Klemm R, Christian P, West KP. Maternal nutritional status mediates the linkage between household food insecurity and mid-infancy size in rural Bangladesh. Br J Nutr. 2020 Jun 28;123(12):1415-1425. doi: 10.1017/S0007114520000707. Epub 2020 Feb 27. PMID: 32102702. `https://pubmed.ncbi.nlm.nih.gov/32102702 <https://pubmed.ncbi.nlm.nih.gov/32102702/>`_.
 
 .. [Richard-et-al-2012-stunting-bw]
   Richard SA, Black RE, Gilman RH, Guerrant RL, Kang G, Lanata CF, Mølbak K, Rasmussen ZA, Sack RB, Valentiner-Branth P, Checkley W; Childhood Infection and Malnutrition Network. Wasting is associated with stunting in early childhood. J Nutr. 2012 Jul;142(7):1291-6. doi: 10.3945/jn.111.154922. Epub 2012 May 23. PMID: 22623393; PMCID: PMC3374667.
