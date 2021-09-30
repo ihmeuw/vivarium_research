@@ -115,7 +115,7 @@ When simulants are initialized into the early or late neonatal age groups or bor
 
 2. Assess the percentile of a simulant's birthweight exposure value (after application of all birthweight-affecting variables in the baseline scenario but before the application of *new* intervention coverage in the alternative scenario) within the overall sex, location, and year-specific birthweight exposure distribution *at birth*.
 
-3. Assign the simulant a wasting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.2225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+3. Assign the simulant a wasting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.02225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
 
 4. Assign the simulant a wasting exposure based on their wasting propensity and their sex/location/year-specific wasting exposure distribution among the 1-5 month age group (for all age groups including birth, early neonatal and late neonatal) such that the propensity is equal to the percentile within the exposure distribution.
 

@@ -1,4 +1,4 @@
-.. _2019_risk_correlation_stunting:
+.. _2019_risk_correlation_birthweight_stunting:
 
 ..
   Section title decorators for this document:
@@ -29,7 +29,7 @@
   And then add it to the list of decorators above.
 
 =================================================
-Child Stunting
+Birthweight and Child Stunting
 =================================================
 
 Risk Exposures Overview
@@ -53,47 +53,27 @@ Child anthropometry is measured through several different correlated metrics, ge
    * - Weight for age (WAZ)
      - Underweight: 2+ standard deviations below mean
 
-Notably, these metrics tend to be highly correlated, with the magnitude of correlation varying with age. The metrics are related both through common causes as well as through suspected direct causal influences in some cases. The below diagram represents a causal framework for child growth metrics at birth as they relate to child growth metrics throughout the pre- and post-natal periods, as presented by [Na-et-al-2020]_.
+Notably, these metrics tend to be highly correlated, with the magnitude of correlation varying with age. The metrics are related both through common causes as well as through suspected direct causal influences in some cases. The below diagram represents a causal framework for child growth metrics at birth as they relate to child growth metrics throughout the pre- and post-natal periods, as presented by [Na-et-al-2020-stunting-bw]_.
 
 .. image:: dag_framework.png
 
-Notably, it is critical to distinguish between the correlation between these metrics attributable to shared common causes between them from correlation between these metrics attributable to direct causal relationships. However, the influence of confounding factors in the estimation of the causal relationship between these factors must be carefully considered due to the high correlation between them and the observational nature of child anthropometry studies. Additionally, child age should be considered as an important effect modifier in the associations between each of these metrics, as discussed by [Alderman-and-Headey-2018]_.
+Notably, it is critical to distinguish between the correlation between these metrics attributable to shared common causes between them from correlation between these metrics attributable to direct causal relationships. However, the influence of confounding factors in the estimation of the causal relationship between these factors must be carefully considered due to the high correlation between them and the observational nature of child anthropometry studies. Additionally, child age should be considered as an important effect modifier in the associations between each of these metrics, as discussed by [Alderman-and-Headey-2018-stunting-bw]_.
 
 Correlation
 ++++++++++++
 
-Stunting and Birthweight
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Spearman correlation coefficients between birthweight and LAZ/HAZ among the first two years of age were estimated from the MAL-ED study [MAL-ED-investigators-2014-stunting-bw]_, available in :download:`this spreadsheet <child_growth_birthweight_correlations.xlsx>` and presented in the figure below.
 
-Spearman correlation coefficients between birthweight and LAZ/HAZ among the first two years of age were estimated from the MAL-ED study [MAL-ED-investigators-2014]_, available in :download:`this spreadsheet <child_growth_birthweight_correlations.xlsx>` and presented in the figure below.
-
-.. image:: bw_wlz_correlation_plot.PNG
+.. image:: bw_laz_correlation_plot.PNG
 
 .. note::
 
    These correlation coefficients were estimated by Chris Troeger for previous work on the :ref:`risk correlation proposal <2017_risk_models>` for the :ref:`Balanced Energy Protein simulation <2017_concept_model_vivarium_gates_bep>`.
 
-Stunting and Wasting
-^^^^^^^^^^^^^^^^^^^^^^
-
-.. todo::
-
-  Summarize info from 2021 systematic review
-
 Causation
 +++++++++++
 
-Stunting and Birthweight
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-[McGovern-et-al-2019]_ reports that **the marginal effect of a 200g increase in birthweight (at 2500g) is associated with a 2.0 (SD: 0.6) to 2.3 (SD: 0.5) percentage point decrease in the probability of stunting,** depending on if imputation was included in the model. [McGovern-et-al-2019]_ was selected as a desireable data source as it is an analysis of twins and sibling pairs, a study design that is particularly advantageous for the control for confounding due to familial influence, and also provides continous estimates of the association between birthweight and stunting status. While this analysis was not confounded by gestational age due to the study design of evaluating twins, effect modification by gestational age was not considered. Additionally, the effect of birthweight on stunting was measured among a population of children five years of age and younger, although [McGovern-et-al-2019]_ reports that the association was strongest among younger children. Due to the heterogenety of effects by age as well as the mortality selection bias, the effect of birthweight on wasting obtained from [McGovern-et-al-2019]_ may be an underestimate, particularly as it applies to the youngest age groups. Further, [McGovern-et-al-2019]_ modeled a quadratic term for birthweight and reported the marginal effect at 2500g.
-
-Stunting and Wasting
-^^^^^^^^^^^^^^^^^^^^^^
-
-.. todo::
-
-  Summarize info from 2021 systematic review
+[McGovern-et-al-2019-stunting-bw]_ reports that **the marginal effect of a 200g increase in birthweight (at 2500g) is associated with a 2.0 (SD: 0.6) to 2.3 (SD: 0.5) percentage point decrease in the probability of stunting,** depending on if imputation was included in the model. [McGovern-et-al-2019-stunting-bw]_ was selected as a desireable data source as it is an analysis of twins and sibling pairs, a study design that is particularly advantageous for the control for confounding due to familial influence, and also provides continous estimates of the association between birthweight and stunting status. While this analysis was not confounded by gestational age due to the study design of evaluating twins, effect modification by gestational age was not considered. Additionally, the effect of birthweight on stunting was measured among a population of children five years of age and younger, although [McGovern-et-al-2019-stunting-bw]_ reports that the association was strongest among younger children. Due to the heterogenety of effects by age as well as the mortality selection bias, the effect of birthweight on wasting obtained from [McGovern-et-al-2019-stunting-bw]_ may be an underestimate, particularly as it applies to the youngest age groups. Further, [McGovern-et-al-2019-stunting-bw]_ modeled a quadratic term for birthweight and reported the marginal effect at 2500g.
 
 Risk Exposures in GBD
 -----------------------
@@ -118,34 +98,36 @@ In GBD, the birthweight exposure distribution is tracked through the late neonat
 Correlation
 +++++++++++++
 
-Initialization
-^^^^^^^^^^^^^^^^
-
 When simulants are initialized into the early or late neonatal age groups or born into the simulation, they will be assigned a birthweight exposure value associated with their LBWSG risk exposure. Additionally, when simulants are initialized into the early or late neonatal age group and when they are born into the simulation, they will be initialized into a particular stunting exposure category (e.g. TMREL, mild stunting, moderate stunting, or severe stunting) *based on their birthweight exposure value* according to the steps below. NOTE: simulants who are initialized into age groups older than the late neonatal age group will not be assigned a birthweight exposure, so they should be assigned a stunting exposure value that is independent of birthweight.
 
 1. Assign the simulant a birthweight exposure value specific to their age group and additional attributes that affect birthweight (i.e. intervention coverage, maternal BMI risk exposure, etc.)
 
 2. Assess the percentile of a simulant's birthweight exposure value (after application of all birthweight-affecting variables in the baseline scenario but before the application of *new* intervention coverage in the alternative scenario) within the overall sex, location, and year-specific birthweight exposure distribution *at birth*.
 
-3. Assign the simulant a stunting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3083092, standard deviation: 0.2225747, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
+3. Assign the simulant a stunting propensity that is correlated to their birthweight percentile according to the spearman correlation coefficient of birthweight and wasting at six months of age (mean: 0.3939393, standard deviation: 0.02035630, normal distribution of uncertainty). This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`.
 
 4. Assign the simulant a stunting exposure based on their stunting propensity and their sex/location/year-specific stunting exposure distribution such that the propensity is equal to the percentile within the exposure distribution.
 
 Causation
 ++++++++++++
 
-For interventions that impact birthweight, there should be a corresponding change in a child's stunting risk exposure attributable *if the impact of the intervention on stunting is not modeled directly*.
+For interventions that impact birthweight, there should be a corresponding change in a child's stunting risk exposure attributable *if the impact of the intervention on stunting is not modeled directly*. This change in stunting risk exposure should persist among all age groups five years and under.
 
-Initialization
-^^^^^^^^^^^^^^^
+For each gram increase in a simulant's birthweight due to a simulation intervention, the category 1 (severe stunting) and category 2 (moderate stunting) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe stunting exposure prevalence is equal to :math:`Y` (defined in the table below). The exposure prevalence of category 3 (mild stunting) should be increased by :math:`Y`. The figure below demonstrates how to implement this change visually. This change in the stunting expousure distribution thresholds attributable to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's stunting initialization propensity correlated with their birthweight percentile, as described above.
 
-For each gram increase in a simulant's birthweight due to a simulation intervention, the category 1 (severe stunting) and category 2 (moderate stunting) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe stunting exposure prevalence is equal to 0.0115 / 200 = 0.00575. The exposure prevalence of category 3 (mild stunting) should be increased by 0.0115 / 200 = 0.00575. The figure below demonstrates how to implement this change visually. This change in the stunting expousure distribution thresholds attributable to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's stunting initialization propensity correlated with their birthweight percentile, as described above.
+.. list-table:: Child Anthropometry Metrics
+   :header-rows: 1
 
-.. image:: wasting_exposure_dist.svg
+   * - Parameter
+     - Value
+     - Note
+     - Source
+   * - :math:`Y`
+     - 0.0001 (SD: 0.00003)
+     - Assume a normal distribution of uncertainty.
+     - [McGovern-et-al-2019-stunting-bw]_; 200g increase in birthweight associated with a 2.0 (SD: 0.6) percentage decrease in stunting exposure, scaled to a a single gram increase in birthweight. 2.0 was selected instead of 2.3 in order to be conservative.
 
-.. todo::
-
-  Update diagram to be stunting specific
+.. image:: stunting_exposure_dist.svg
 
 .. note::
 
@@ -154,15 +136,13 @@ For each gram increase in a simulant's birthweight due to a simulation intervent
 Assumptions and Limitations
 +++++++++++++++++++++++++++++
 
-The application of the size from [McGovern-et-al-2019]_ makes the following assumptions:
+The application of the size from [McGovern-et-al-2019-stunting-bw]_ makes the following assumptions:
 
 - The effect size is entirely causal and not subject to confounding
 
 - The effect of BW on stunting applies proportionately to moderate and severe stunting
 
-.. todo::
-
-  Rework following limitation: - The effect between BW and stunting measured among children under five is applied to prevalent wasting status at one months of age only and does not affect future wasting exposure trajectories (aside from any associated vicious cycle effects). 
+- We apply the average effect of birthweight on stunting exposure for all ages under 5 years and do not consider effect modification by age, although [McGovern-et-al-2019-stunting-bw]_ suggests that the effect is likely larger among younger ages.
 
 Validation Criteria
 +++++++++++++++++++++
@@ -179,19 +159,22 @@ Validation Criteria
 
    - How the correlation between BW and stunting evolves as simulants age
 
-   - The magnitude of wasting and stunting correlation that results through correlating each of these variables through birthweight (cite Richard 2012)
+   - The magnitude of wasting and stunting correlation that results through correlating each of these variables through birthweight, as reported in [Richard-et-al-2012-stunting-bw]_
 
 References
 -----------
 
-.. [Alderman-and-Headey-2018]
+.. [Alderman-and-Headey-2018-stunting-bw]
   Alderman H, Headey D. The timing of growth faltering has important implications for observational analyses of the underlying determinants of nutrition outcomes. PLoS One. 2018 Apr 25;13(4):e0195904. doi: 10.1371/journal.pone.0195904. PMID: 29694431; PMCID: PMC5919068. `https://pubmed.ncbi.nlm.nih.gov/29694431 <https://pubmed.ncbi.nlm.nih.gov/29694431/>`_.
 
-.. [MAL-ED-investigators-2014]
+.. [MAL-ED-investigators-2014-stunting-bw]
   The MAL-ED Network Investigators, The MAL-ED Study: A Multinational and Multidisciplinary Approach to Understand the Relationship Between Enteric Pathogens, Malnutrition, Gut Physiology, Physical Growth, Cognitive Development, and Immune Responses in Infants and Children Up to 2 Years of Age in Resource-Poor Environments, Clinical Infectious Diseases, Volume 59, Issue suppl_4, November 2014, Pages S193–S206, `https://doi.org/10.1093/cid/ciu653 <https://doi.org/10.1093/cid/ciu653/>`_
 
-.. [McGovern-et-al-2019]
+.. [McGovern-et-al-2019-stunting-bw]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
 
-.. [Na-et-al-2020]
+.. [Na-et-al-2020-stunting-bw]
   Na M, Shamim AA, Mehra S, Labrique A, Ali H, Wu LS, Shaikh S, Klemm R, Christian P, West KP. Maternal nutritional status mediates the linkage between household food insecurity and mid-infancy size in rural Bangladesh. Br J Nutr. 2020 Jun 28;123(12):1415-1425. doi: 10.1017/S0007114520000707. Epub 2020 Feb 27. PMID: 32102702. `https://pubmed.ncbi.nlm.nih.gov/32102702 <https://pubmed.ncbi.nlm.nih.gov/32102702/>`_.
+
+.. [Richard-et-al-2012-stunting-bw]
+  Richard SA, Black RE, Gilman RH, Guerrant RL, Kang G, Lanata CF, Mølbak K, Rasmussen ZA, Sack RB, Valentiner-Branth P, Checkley W; Childhood Infection and Malnutrition Network. Wasting is associated with stunting in early childhood. J Nutr. 2012 Jul;142(7):1291-6. doi: 10.3945/jn.111.154922. Epub 2012 May 23. PMID: 22623393; PMCID: PMC3374667.
