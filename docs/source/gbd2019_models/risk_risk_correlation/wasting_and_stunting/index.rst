@@ -54,9 +54,9 @@ As reported by [Thurstans-et-al-2021]_, wasting and stunting were historically c
 Correlation
 ++++++++++++
 
-An analysis by [Myatt-et-al-2018]_ found a significant and positive association between wasting and stunting in 37 of 51 countries analyzed. [Myatt-et-al-2018]_ reports the cross-sectional association between wasting and stunting as odds ratios for being stunted given wastedness (which is equivalent to the odds ratio for being wasted given stuntedness).
+An analysis by [Myatt-et-al-2018]_ found a significant and positive association between wasting and stunting in 37 of 51 countries analyzed. [Myatt-et-al-2018]_ reports the cross-sectional association between wasting and stunting as odds ratios for being stunted given wastedness (which is equivalent to the odds ratio for being wasted given stuntedness). As the relationship between wasting and stunting will vary by context-specific burdens of micro- and macro-nutritional deficiencies, the association between these two factors varied by location.
 
-Additionally, [Richard-et-al-2012]_ reports the cross-sectional correlation coefficient between LAZ and WLZ, and found that the magnitude of this association was modified by age. There was no positive correlation before six months of age, but wasting and stunting were positively correlated among children between 6 and 23 months of age with the magnitude of association increasing with age (see the figure below).
+Additionally, [Richard-et-al-2012]_ reports the cross-sectional correlation coefficient between LAZ and WLZ among a pooled analysis of eight cohort studies, and found that the magnitude of this association was modified by age. There was no positive correlation before six months of age, but wasting and stunting were positively correlated among children between 6 and 23 months of age with the magnitude of association increasing with age (see the figure below).
 
 .. image:: wasting_stunting_correlation_by_age_figure.png
 
