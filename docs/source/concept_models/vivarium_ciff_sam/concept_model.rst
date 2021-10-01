@@ -303,6 +303,15 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
 
+The following diagram represents the resulting model correlation structure in our simulation (including the x-factor which is described later in this document and is perfectly correlated with maternal BMI exposure and affects wasting incidence rates). The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
+
+.. image:: correlation_structure.svg
+
+For correlated risks that affect the same outcomes in our simulation (just wasting and stunting in this model), the joint PAF calculation rather than multiplicative PAF calculation should be used for outcomes affected by wasting and stunting (see the :ref:`risk correlation proposal document <2017_risk_models>` for details). The joint PAF equation is shown below for convenient reference.
+
+.. math::
+  PAF_{joint} = 1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n} RR_1^{e1_i} \cdot RR_2^{e2_i}}
+
 5.1.6 Feedback Loop Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
