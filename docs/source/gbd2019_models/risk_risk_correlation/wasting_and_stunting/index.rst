@@ -58,7 +58,7 @@ An analysis by [Myatt-et-al-2018]_ found a significant and positive association 
 
 Additionally, [Richard-et-al-2012]_ reports the cross-sectional correlation coefficient between LAZ and WLZ among a pooled analysis of eight cohort studies, and found that the magnitude of this association was modified by age. There was no positive correlation before six months of age, but wasting and stunting were positively correlated among children between 6 and 23 months of age with the magnitude of association increasing with age (see the figure below).
 
-.. image:: wasting_stunting_correlation_by_age_figure.png
+.. image:: wasting_stunting_correlation_by_age_figure.PNG
 
 Causation
 +++++++++++
