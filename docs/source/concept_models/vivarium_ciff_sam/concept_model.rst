@@ -299,6 +299,8 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
 
+* :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
+
 * :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
 
 5.1.6 Feedback Loop Models
