@@ -303,7 +303,9 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
 
-The following diagram represents the resulting model correlation structure in our simulation (including the x-factor which is described later in this document and is perfectly correlated with maternal BMI exposure and affects wasting incidence rates). The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
+* :ref:`Maternal BMI and x-factor <2019_risk_correlation_maternal_bmi_x_factor>`
+
+The following diagram represents the resulting model correlation structure in our simulation (including the x-factor risk effect on wasting incidence rates, which is described in the next section of this document). The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
 
 .. image:: correlation_structure.svg
 
@@ -409,7 +411,9 @@ The x-factor is a risk exposure that tries to capture the differential risk expe
 
 **Risk exposure**
 
-As we do not have a precise definition of the x-factor risk exposure, we will model the exposure to be equal to and perfectly correlated with the :ref:`maternal BMI risk exposure <2019_risk_exposure_maternal_bmi>`. We are using maternal undernutrition as a **proxy** for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_ 
+As we do not have a precise definition of the x-factor risk exposure, we will model the exposure to be equal to the :ref:`maternal BMI risk exposure <2019_risk_exposure_maternal_bmi>`. We are using maternal undernutrition as a **proxy** for household food insecurity and other factors that have been suggested determinants of child malnutrition. [Na_2020]_ [Mohammed_2018]_ 
+
+Additionally, we will correlate the x-factor risk exposure with the maternal BMI risk exposure according to :ref:`this document <2019_risk_correlation_maternal_bmi_x_factor>`. NOTE: we chose to model a high (but not perfect) degree of correlation between the x-factor and maternal BMI risk exposures to demonstrate that these are indeed distinct concepts in our simulation. Revisiting this approach after discussion with domain experts may be desired!
 
 **Risk effect**
 
