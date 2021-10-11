@@ -437,10 +437,15 @@ The risk effect (relative rate ratio) of incidence would be applied as such (bre
  - rr_x_factor_cati is the relative rate ratio for exposed (i = 1) or unexposed (i = 0).
  - Note that there are 4 wasting states so there should be a PAF between every wasting state transition where the susceptible population is the source wasting state, the exposure is the 'x-factor' and the outcome is the sink wasting state.
 
-
 - Note diarrhea (vicious cycle) cycle have effects on wasting incidences. Hence the x-factor should be broken out for the incidences with/without diarrhea calibrated from the Markov matrix. In our final model, we should end up with 4 sets (2 diarrhea states x 2 x-factor states) of 3 incidences (i1-3) for a total of 12 incidence rates.
 - Note also that SQ-LNS affects wasting transition incidence from mild to mam. The protective effects of SQ-LNS (if covered) would be applied to the incidences from mild to mam corresponding to diarrhea and x-factor exposure.
 - Let us assume that the 'x-factor' does not have differential effects on treatment recovery rates.
+
+.. note::
+
+  **Risk initialization**
+
+  For simulants initialized into the simulation at the simulation start date on 1/1/2022, we assume that the year of simulation run time prior to the implementation of intervention coverage on 1/1/2023 is a sufficient "burn-in" period to reflect the greater wasting exposure among simulants exposed to the x-factor than those unexposed to the x-factor. For simulants born into the simulation, while we do not initialize their wasting exposure state according to their x-factor exposure state explicitly, we assume that the correlation between these two risks through their individual correlations with birthweight will be adequate.
 
 .. todo::
 
