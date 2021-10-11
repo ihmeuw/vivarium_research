@@ -445,7 +445,17 @@ The risk effect (relative rate ratio) of incidence would be applied as such (bre
 
   **Risk initialization**
 
-  For simulants initialized into the simulation at the simulation start date on 1/1/2022, we assume that the year of simulation run time prior to the implementation of intervention coverage on 1/1/2023 is a sufficient "burn-in" period to reflect the greater wasting exposure among simulants exposed to the x-factor than those unexposed to the x-factor. For simulants born into the simulation, while we do not initialize their wasting exposure state according to their x-factor exposure state explicitly, we assume that the correlation between these two risks through their individual correlations with birthweight will be adequate.
+  For simulants initialized into the simulation at the simulation start date on 1/1/2022, we assume that the year of simulation run time prior to the implementation of intervention coverage on 1/1/2023 is a sufficient "burn-in" period to reflect the greater wasting exposure among simulants exposed to the x-factor than those unexposed to the x-factor. One year is assumed to be adequate given that the average time to recovery of MAM/SAM is near 60 days (:ref:`<>`), indicating that simulants who were initialized into wasted exposure states will have transitioned out of those states and the simulants who occupy the wasted exposure states at the time of intervention implementation will have transitioned into those states according to their wasting incidence rates that are affected by the x-factor.
+
+  For simulants born into the simulation, while we do not initialize their wasting exposure state according to their x-factor exposure state explicitly, we assume that the correlation between these two risks through their individual correlations with birthweight will be adequate.
+
+**Validation criteria**
+
+- Exposure distribution should match :ref:`maternal BMI risk exposure <2019_risk_exposure_maternal_bmi>` 
+- Decrease in exposure distribution over time should be small (given that the x-factor risk exposure is assigned once at initialization or birth and that x-factor risk exposure is associated with a higher mortality rate, the x-factor exposure will decrease slightly over time/with age in our simulation)
+- The ratio between wasting incidence rates among those exposed and unexposed to the x-factor should match the given x-factor effect size
+- There should be no difference in wasting state remission rates by x-factor exposure status
+- Wasting exposure should be greater among those exposed to the x-factor than those unexposed
 
 .. todo::
 
