@@ -240,6 +240,89 @@ complexity into the exposure component.
 
 What is a risk effect?
 ++++++++++++++++++++++
+In epidemiological studies, risk effect is used to study the relationship
+between risk exposures and outcomes. We are not only interested in whether
+a link between a given risk exposure (e.g. smoking) and certain outcome
+(e.g. lung cancer) is statistically meaningful, but also the magnitude of
+this relationship. The effect of exposure can be measured both in relative
+and absolute terms. The risk ratio, the rate ratio, and the odds ratio are
+relative measures of effect. Risk difference is an absolute measure of effect
+and it is calculated by subtracting the risk of the outcome in exposed group
+from unexposed. [Measure_of_effect]_
+
+Risk effect in GBD
+^^^^^^^^^^^^^^^^^^
+The measure of risk effect in GBD is usually reported in relative term, namely
+relative risk. It describes the relative relationship between the risk of
+disease Y in the presence of agent X versus in absence of X. Mathematically,
+it's calculated by dividing the incidence rate (or other measure such as the
+excess mortality rate) of the cause in exposed population by the incidence rate
+(or other measure) of the cause in unexposed population for a certain risk factor.
+For example, if there are A incident cases and B person-years in exposed group;
+C incident cases and D person-years in unexposed group, then the relative risk
+(rate ratio) equals :math:`\frac{AD}{BC}`. Note that there are exceptions as in
+the low birth weight short gestation (LBWSG) risk factor where the relative risk
+is the ratio of all-cause mortality rate (ACMR) rather than incidence rate we
+mentioned above. Therefore, we'd better check with GBD modeller what relative
+risk they refer to before we model any risk-outcome pair in vivarium.
+
+Risk effect in vivarium
+^^^^^^^^^^^^^^^^^^^^^^^
+In vivarium, we used to build the risk-outcomes component in order to study the
+impact of desired outcomes contributed by given risk exposure. The outcome might
+be a cause (e.g. ischemic heart disease attributable to high body-mass index)
+or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
+For a risk-cause pair, simulation model would link the incidence (or other measure
+such as excess mortality rate) of that cause to the relative risk from GBD or
+external data sources like literature evidence.
+
+The mathematical expressions are mainly fall into two categories:
+ - risk exposure is categorical distributed:
+     - :math:`i_{exposed} = i \times (1-PAF) \times RR`
+     - :math:`i_{unexposed} = i \times (1-PAF)`
+     - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+     - :math:`E(RR_e) = p \times RR + (1-p)`
+ - risk exposure is continuous distributed:
+     - :math:`i = i \times (1-PAF) \times rr^{max(e−tmrel,0)/scalar}`
+     - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+     - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e−tmrel,0)/scalar}p(e)de`
+
+Where,
+ - :math:`e` stands for risk exposure level
+ - :math:`i` stands for incidence rate
+ - :math:`p` stands for proportion of exposed population
+ - :math:`RR` stands for relative risk or incidence rate ratio
+ - :math:`PAF` stands for population attributable fraction
+ - :math:`E(RR_e)` stands for expected relatiev risk at risk exposure level e 
+ - :math:`tmrel` stands for theoretical minimum risk exposure level
+ - :math:`lower` stands for minimum exposure value
+ - :math:`upper` stands for maximum exposure value
+ - :math:`rr` is the base of the exponent in an exponential relative risk model
+ - :math:`scalar` is a numeric variable used to convert risk exposure level to 
+   a desired unit
+ - :math:`p(e)` is probability density function used to calculate the probability 
+   of given risk exposure level e
+
+For a risk-mediator outcome, simulation model would map a probability
+distribution of possible mediator exposure level to each measurement of
+associated risk factor (e.g. there is X% chance you will observe a SBP
+>= 100 mm Hg for given BMI of 25 in adults).
+
+Direct and indirect risk effect
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+In general, we would model the risk-outcomes that is directly correlated
+(e.g. BMI -> IHD), but sometimes we consider add mediator to account for
+indirect relationship between a risk-cause pair. (e.g. BMI -> SBP -> IHD)
+In the example shown above, the direct effect is determined by risk effect
+between BMI and IHD (:math:`\mu_{1}`) and the indirect effect is the product
+of risk effect between BMI and SBP (:math:`\mu_{2}`) and risk effect between
+SBP and IHD (:math:`\mu_{3}`). Therefore, the total risk effect is the sum of
+direct and indirect effect, namely :math:`\mu_{1} + \mu_{2} \times \mu_{3}`
+based on a linear approach. Note that we need to check with GBD modeler whether 
+the relative risk from GBD the direct, indirect or total effects and then choose 
+the appropriate one in our model.
+
+.. image:: mediation_example_bmi.svg
 
 Definitions
 -----------
@@ -973,6 +1056,10 @@ References
 .. [Exposure_definition_and_measurement] Developing a Protocol for Observational Comparative Effectiveness Research: A User's Guide.Agency for Healthcare Research and Quality (US), Jan 2013
    Retrieved 11 March 2020.
    https://www.ncbi.nlm.nih.gov/books/NBK126190/
+
+.. [Measure_of_effect] Measures of Effect: Relative Risks, Odds Ratios, Risk Difference, and 'Number Needed to Treat'
+   Retrived 19 March 2020.
+   https://pubmed.ncbi.nlm.nih.gov/17653136/
 
 .. [WHO-Global-Health-Risks-Annex]
 
