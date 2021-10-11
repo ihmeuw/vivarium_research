@@ -272,7 +272,7 @@ In vivarium, we used to build the risk-outcomes component in order to study the
 impact of desired outcomes contributed by given risk exposure. The outcome might
 be a cause (e.g. ischemic heart disease attributable to high body-mass index)
 or a intermediate outcome (e.g. systolic blood pressure associated with BMI).
-For a risk-cause pair, simulation model would link the incidecen (or other measure
+For a risk-cause pair, simulation model would link the incidence (or other measure
 such as excess mortality rate) of that cause to the relative risk from GBD or
 external data sources like literature evidence.
 
@@ -280,12 +280,27 @@ The mathematical expressions are mainly fall into two categories:
  - risk exposure is categorical distributed:
      - :math:`i_{exposed} = i \times (1-PAF) \times RR`
      - :math:`i_{unexposed} = i \times (1-PAF)`
-     - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
-     - :math:`E(RRe) = p \times RR + (1-p)`
+     - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+     - :math:`E(RR_e) = p \times RR + (1-p)`
  - risk exposure is continuous distributed:
      - :math:`i = i \times (1-PAF) \times RR^{max(e−tmrel,0)/scalar}`
-     - :math:`PAF = \frac{E(RRe)-1}{E(RRe)}`
-     - :math:`E(RRe) = \int_{lb}^{ub}RR^{max(e−tmrel,0)/scalar}p(e)de`
+     - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
+     - :math:`E(RR_e) = \int_{lb}^{ub}RR^{max(e−tmrel,0)/scalar}p(e)de`
+
+Where,
+ - :math:`e` stands for risk exposure level
+ - :math:`i` stands for incidence rate
+ - :math:`p` stands for proportion of exposed population
+ - :math:`RR` stands for relative risk or incidence rate ratio
+ - :math:`PAF` stands for population attributable fraction
+ - :math:`E(RR_e)` stands for expected relatiev risk at risk exposure level e 
+ - :math:`tmrel` stands for theoretical minimum risk exposure level
+ - :math:`lb` stands for lower bound (2.5%)
+ - :math:`ub` stands for upper bound (97.5%)
+ - :math:`scalar` is a numeric variable used to convert risk exposure level to 
+   a desired unit
+ - :math:`p(e)` is probability density function used to calculate the probability 
+   of given risk exposure level e
 
 For a risk-mediator outcome, simulation model would map a probability
 distribution of possible mediator exposure level to each measurement of
