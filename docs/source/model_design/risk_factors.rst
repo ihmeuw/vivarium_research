@@ -283,9 +283,9 @@ The mathematical expressions are mainly fall into two categories:
      - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
      - :math:`E(RR_e) = p \times RR + (1-p)`
  - risk exposure is continuous distributed:
-     - :math:`i = i \times (1-PAF) \times RR^{max(e−tmrel,0)/scalar}`
+     - :math:`i = i \times (1-PAF) \times rr^{max(e−tmrel,0)/scalar}`
      - :math:`PAF = \frac{E(RR_e)-1}{E(RR_e)}`
-     - :math:`E(RR_e) = \int_{lb}^{ub}RR^{max(e−tmrel,0)/scalar}p(e)de`
+     - :math:`E(RR_e) = \int_{lower}^{upper}rr^{max(e−tmrel,0)/scalar}p(e)de`
 
 Where,
  - :math:`e` stands for risk exposure level
@@ -295,8 +295,9 @@ Where,
  - :math:`PAF` stands for population attributable fraction
  - :math:`E(RR_e)` stands for expected relatiev risk at risk exposure level e 
  - :math:`tmrel` stands for theoretical minimum risk exposure level
- - :math:`lb` stands for lower bound (2.5%)
- - :math:`ub` stands for upper bound (97.5%)
+ - :math:`lower` stands for minimum exposure value
+ - :math:`upper` stands for maximum exposure value
+ - :math:`rr` is the base of the exponent in an exponential relative risk model
  - :math:`scalar` is a numeric variable used to convert risk exposure level to 
    a desired unit
  - :math:`p(e)` is probability density function used to calculate the probability 
