@@ -207,29 +207,81 @@ The hemoglobin model in GBD 2019 can be found :ref:`Here <2019_hemoglobin_model>
   * - Intervention
     - Effect size
     - Relative to
-    - Note
+    - Effect size Label
   * - DFS
-    - 
-    - 
-    - 
-  * - MMS
-    - 
-    - 
-    - 
+    - 3.3 (95%CI 1.8-4.8)
+    - No DFS intervention
+    - A
+  * - MMS (or IFA)
+    - 7.8 (95%CI 4.08-11.52)
+    - No iron in pregnancy
+    - B
   * - BEP
-    - 
-    - 
-    - 
+    - 3.7 (95%CI 1.9-5.6)
+    - IFA
+    - C
   * - IV iron
-    - 
-    - 
-    - 
+    - 23 (95%CI TBD)
+    - No IV iron intervention
+    - D
 
-.. todo::
+.. list-table:: Changes in population hemoglobin
+  :widths: 10 10 10
+  :header-rows: 1
 
-  Describe exactly *how* to apply the effect sizes to the hemoglobin measure for 
-  general, PLW, and anemic PLW populations
+  * - Tier
+    - **Addition** to non-PLW population hemoglobin
+    - **Addition** to PLW population hemoglobin
+  * - 1
+    - :math:`+ A`
+    - :math:`+ A`
+  * - 2
+    - :math:`+ A`
+    - :math:`+ A + P_{anc1} * [P_{underweight} * (P_{IFA} * C + (1 - P_{IFA}) * (B + C)) + (1 - P_{underweight}) * (1 - P_{IFA}) * B]`
+  * - 3
+    - :math:`+ A`
+    - Average of :math:`+ A + P_{anc1} * [P_{underweight} * (P_{IFA} * C + (1 - P_{IFA}) * (B + C)) + (1 - P_{underweight}) * (1 - P_{IFA}) * B + P_{low\; hb} * D]` and :math:`+ A + P_{anc1} * [(1 - P_{low\; hb}) * (P_{underweight} * (P_{IFA} * C + (1 - P_{IFA}) * (B + C)) + (1 - P_{underweight}) * (1 - P_{IFA}) * B) + P_{low\; hb} * D]`
 
+Where,
+ - :math:`P_{anc1}` = proportion of pregnant women have one time antenatal care 
+   visit within a year
+ - :math:`P_{underweight}` = proportion of pregnant women with BMI less than 
+   18.5 kg/m^2
+ - :math:`P_{IFA}` = proportion of pregnant women have already received iron-folic acid 
+ - :math:`P_{low\; hb}` = proportion of pregnant women with hemoglobin concentrations 
+   less than 100 g/L
+
+Objective 1: Eligible population sizes
+++++++++++++++++++++++++++++++++++++++
+
+.. list-table:: Equations
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Population description
+    - Calculation
+  * - Women of reproductive age (15 to 49 years)
+    - :math:`pop`
+  * - PLW at ANC
+    - :math:`pop * (asfr + sbr) * P_{anc1}`
+  * - Pregnant women in 2nd/3rd trimester with moderate/severe anemia referred 
+      from ANC to higher level facility
+    - :math:`pop * (asfr + sbr) * P_{anc1} * P_{low\; hb}`
+
+Where,
+ - :math:`pop` = GBD 2019 population size of female aged 15 to 49 years
+ - :math:`P_{asfr}` = GBD 2019 age-specific fertility rate, pulled using 
+   `get_covariate_estimates` with `covariate_id = 13`
+ - :math:`P_{sbr}` = GBD 2019 still birth rate (still birth to live birth ratio), 
+   pulled using `get_covariate_estimates` with `covariate_id = 2267` 
+ - :math:`P_{anc1}` = proportion of pregnant women have one time antenatal care 
+   visit within a year, pulled using `get_covariate_estimates` with `covariate_id = 7`
+ - :math:`P_{low\; hb}` = proportion of pregnant women with hemoglobin concentrations 
+   less than 100 g/L
+
+Objective 2: Anemia and Maternal Disorders Burden
++++++++++++++++++++++++++++++++++++++++++++++++++
+:ref:`Effects of hemoglobin on anemia and maternal disorders can be found here <2019_hemoglobin_anemia_and_iron_deficiency>`.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++

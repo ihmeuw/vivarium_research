@@ -532,6 +532,18 @@ Deriving wasting transition probabilities
 Wasting model
 ^^^^^^^^^^^^^
 
+.. important::
+
+  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2020). 
+
+  All wasting transition rates should equal zero among all ages under 6 months. The relative risks for each wasting risk exposure category and each risk/outcome pair should equal one for all ages under 6 months.
+
+  Wasting transition rates should be informed by the data tables below for ages over 6 months. Wasting risk effects for ages over 6 months should be informed by the standard GBD wasting relative risks.
+
+  NOTE: When the birthweight and wasting risk exposure at birth correlation is implemented, it will cause simulants with a greater neonatal mortality (due to brithweight exposure) to be initialized into more severe wasting states. This will cause the wasting exposure distribution to shift to less severe wasting states over the neonatal period as simulants with lower birthweights (and more severe wasting states due to the birthweight and wasting exposure correlation) die. The magnitude of the bias introduced by this modeling strategy should be investigated upon implementation to determine if different modeling strategies are necessary. This should be done by comparing the wasting exposure and wasting-affected outcomes in the simulation output to the GBD inputs by age group.
+
+  NOTE: The modeling decision not to model wasting transitions among simulants less than six months of age is due to the reliance of the wasting model transition rates on the wasting treatment model and the lack of data to inform treatment-related transition rates among this age group. Note that a sensitivity analysis scenario that includes infants less than six months of age in the treatment model may be performed in the future.
+
 This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
 Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
 the TMREL, it is necessary to include death to correctly derive our transition 
@@ -571,11 +583,11 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of incidence into cat 3 from cat 4
      - System of equations
    * - r2
-     - (1-sam_tx_coverage)*(1/time_to_sam_ux_recovery)
+     - 1 - e^(-(1-sam_tx_coverage)*(1/time_to_sam_ux_recovery))
      - Daily probability of remission into cat 2 from cat 1 (untreated)
      - Nicole's calculations; also referred to as r2ux (get lit source!)
    * - r3
-     - mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)
+     - 1 - e^(-(mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)))
      - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
      - Nicole's calculations (get lit source!)
    * - r4
@@ -583,7 +595,7 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of remission from cat 3 into cat 4
      - Assumed to be small
    * - t1
-     - sam_tx_coverage * (1/time_to_sam_tx_recovery)
+     - 1 - e^(-sam_tx_coverage * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
      - Nicole's calculations (get lit source!)
    * - s1
@@ -871,7 +883,6 @@ Wasting x Disease model
 
 .. image:: wasting_state_2x4.svg
 
-
 Data Description Tables
 +++++++++++++++++++++++
 
@@ -886,7 +897,7 @@ Data Description Tables
    * - TMREL, MOD, MAM, SAM
      - birth prevalence
      - :math:`prevalence_{240_{cat-1-4}}`
-     - Use prevalence of age_group_id = 2 (early neonatal)
+     - Use prevalence of age_group_id = 388 (1 to 5 months)
 
 .. code-block:: python
 
@@ -900,7 +911,6 @@ Data Description Tables
                     status='best',
                     location_id = [179],
                     decomp_step = 'iterative')
-
 
 .. list-table:: Wasting State Data
    :widths: 5 10 10 20
