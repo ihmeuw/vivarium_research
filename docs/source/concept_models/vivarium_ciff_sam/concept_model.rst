@@ -424,6 +424,10 @@ We do not have direct evidence or data for the risk effect of the x-factor *prox
    :widths: 30, 10, 10, 10, 10
    :header-rows: 1
 
+.. note::
+
+  For model runs following validation of model #4.5, use x-factor risk effect = 1.3 until consensus is reached on x-factor effect magnitude or the model is ready for simulation results for the full range of sensitivity analysis values.
+
 The risk effect (relative rate ratio) of incidence would be applied as such (breaking out the exposed vs non-exposed incidence from the exposure weighted overall incidence):
 
  - :math:`i_{x1} = i_{wasting|markov} (1-PAF) \times rr_{x_{factor}}`
