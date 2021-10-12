@@ -481,10 +481,12 @@ Final outputs to report in manuscript
 
 .. _5.6:
 
-5.6 Output meta-table shell
+5.6 Simulation output table
 ---------------------------
 
-
+.. csv-table:: Simulation output table
+   :file: simulation_output_table.csv
+   :header-rows: 0
 
 .. _6.0:
 
