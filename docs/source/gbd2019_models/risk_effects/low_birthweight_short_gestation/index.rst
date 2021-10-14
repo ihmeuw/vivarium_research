@@ -808,22 +808,31 @@ using ``get_draws``:
   pop = generate_uniformly_random_population(10_000)
   rr_for_pop = interpolate_lbwsg_rr_for_population(pop, log_rr_interpolator, cat_df)
 
-.. todo::
+.. Note::
 
-  Show Python code that implements the above procedure. In the meantime, here
-  are the original notebooks where I figured out how to do it (with pictures!):
+  For reference, here are the original notebooks in the `Vivarium Data Analysis
+  repo`_ where I figured out how to do the RR interpolation (with pictures!):
 
-  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_09b_plot_lbwsg_rr_interpolation_using_griddata.ipynb
-  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
-  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
+  - `Interpolate and plot LBWSG RRs using SciPy's griddata function <Notebook for LBWSG RR interpolation with griddata_>`_
+  - `Try 2-step interpolation with an intermediate grid, illustrating some potential pitfalls <Notebook for 2-step interpolation and pitfalls_>`_
+  - `Compare 2-step interpolations using different SciPy interpolators <Notebook comparing 2-step interpolations_>`_
 
   Here's a link to Jupyter nbviewer in case GitHub sucks:
 
   - https://nbviewer.jupyter.org/
 
-  And here's my implementation of RR interpolation for a nanosim:
+  And here's my implementation of RR interpolation for a nanosim (the
+  interpolation step is quite slow; the above Python code from the
+  `self-contained notebook <Self-contained code for LBWSG RR interpolation by
+  age and sex_>`_ should be faster):
 
-  - https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
+  - `LBWSGRiskEffectRBVSpline class`_
+
+.. _Vivarium Data Analysis repo: https://github.com/ihmeuw/vivarium_data_analysis
+.. _Notebook for LBWSG RR interpolation with griddata: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_09b_plot_lbwsg_rr_interpolation_using_griddata.ipynb
+.. _Notebook for 2-step interpolation and pitfalls: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
+.. _Notebook comparing 2-step interpolations: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
+.. _LBWSGRiskEffectRBVSpline class: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
