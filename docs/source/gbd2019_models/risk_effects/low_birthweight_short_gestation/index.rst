@@ -560,6 +560,22 @@ March 2021.
 Implementation of RR Interpolation in SciPy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Here are two Jupyter notebooks in the `Vivarium Research LSFF repo`_ that
+demonstrate how to implement the above interpolation steps using
+``scipy.interpolate``:
+
+- `Step-by-step demonstration of LBWSG RR interpolation`_
+- `Self-contained code for LBWSG RR interpolation by age and sex`_
+
+The self contained notebook requires this :download:`LBWSG category data .csv
+<lbwsg_category_data.csv>`, as well as the `lbwsg_plots module`_ if you want to
+plot the interpolated RRs.
+
+.. _Vivarium Research LSFF repo: https://github.com/ihmeuw/vivarium_research_lsff
+.. _Step-by-step demonstration of LBWSG RR interpolation: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/2021_06_04a_lbwsg_rr_interpolation_step_by_step.ipynb
+.. _Self-contained code for LBWSG RR interpolation by age and sex: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/2021_06_25a_lbwsg_rr_interpolation_by_age_sex.ipynb
+.. _lbwsg_plots module: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg_plots.py
+
 .. todo::
 
   Show Python code that implements the above procedure. In the meantime, here
