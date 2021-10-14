@@ -35,7 +35,7 @@ Maternal BMI and X-factor Risk Exposure Correlation
 Risk Exposures Overview
 ------------------------
 
-In the :ref:`acute malnutrition simulation model <2019_concept_model_vivarium_ciff_sam>`, a "x-factor" risk factor to represent an increased trajectory for wasting incidence was developed. In the absence of a well-defined risk expousre for this parameter, we are using the :ref:`maternal BMI risk exposure <2019_risk_exposure_maternal_bmi>` as a proxy exposure value (described in the :ref:`acute malnutrition concept model document <2019_concept_model_vivarium_ciff_sam>`).
+In the :ref:`acute malnutrition simulation model <2019_concept_model_vivarium_ciff_sam>`, an "x-factor" risk factor to represent an increased trajectory for wasting incidence was developed (see the :ref:`wasting x-factor risk effects page <2019_risk_effect_x_factor>`). In the absence of a well-defined risk expousre for this parameter, we are using the :ref:`maternal BMI risk exposure <2019_risk_exposure_maternal_bmi>` as a proxy exposure value for the :ref:`wasting x-factor risk exposure <2019_risk_exposure_x_factor>`.
 
 We are choosing to model the x-factor and maternal BMI risk exposures as highly, but not perfectly, correlated in this simulation. We will not model a causal relationship between these two factors. 
 
@@ -48,7 +48,7 @@ When simulants are initialized or born into the the simulation, they should be a
 
 2. Assign the simulant a x-factor propensity that is correlated to their maternal BMI propensity according to the spearman correlation coefficient of :math:`0.9`. This should be done according to the methodology described in the :ref:`risk-risk correlation proposal page <2017_risk_models>`
 
-3. Assign the simulant an x-factor risk exposure value based on their assigned x-factor propensity and the x-factor risk exposure distribution (equal to the :ref:`maternal BMI risk exposure distribution <2019_risk_exposure_maternal_bmi>`)
+3. Assign the simulant an x-factor risk exposure value based on their assigned x-factor propensity and the :ref:`x-factor risk exposure distribution<2019_risk_exposure_x_factor>`
 
 .. note::
 
