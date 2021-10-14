@@ -568,12 +568,14 @@ demonstrate how to implement the above interpolation steps using
 - `Self-contained code for LBWSG RR interpolation by age and sex`_
 
 The self contained notebook requires this :download:`LBWSG category data .csv
-<lbwsg_category_data.csv>` for input, as well as the `lbwsg_plots module`_ if
-you want to plot the interpolated RRs.
+<lbwsg_category_data.csv>` for input (viewable `online here <lbwsg_category_data
+online_>`__), as well as the `lbwsg_plots module`_ if you want to plot the
+interpolated RRs.
 
 .. _Vivarium Research LSFF repo: `large-scale food fortification project`_
 .. _Step-by-step demonstration of LBWSG RR interpolation: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/2021_06_04a_lbwsg_rr_interpolation_step_by_step.ipynb
 .. _Self-contained code for LBWSG RR interpolation by age and sex: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/2021_06_25a_lbwsg_rr_interpolation_by_age_sex.ipynb
+.. _lbwsg_category_data online: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/lbwsg_category_data.csv
 .. _lbwsg_plots module: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg_plots.py
 
 Omitting some of the helper functions, here is the relevant interpolation code
@@ -791,7 +793,8 @@ using ``get_draws``:
         return rr_for_pop
 
   # Step 0: Get input data
-  draw = 29 # Pick a draw
+  # Pick a draw in the range 0-999, or 'mean' for mean RR over all draws
+  draw = 29
   # Create a DataFrame of LBWSG RRs for the specified draw, indexed by
   # age_group_id, sex_id, with LBWSG categories as columns.
   rr = get_rr_data('get_draws', draw=draw, preprocess=True)
