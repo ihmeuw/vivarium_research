@@ -441,6 +441,10 @@ The risk effect (relative rate ratio) of incidence would be applied as such (bre
 - Note also that SQ-LNS affects wasting transition incidence from mild to mam. The protective effects of SQ-LNS (if covered) would be applied to the incidences from mild to mam corresponding to diarrhea and x-factor exposure.
 - Let us assume that the 'x-factor' does not have differential effects on treatment recovery rates.
 
+.. todo::
+
+  Investigate potential effect of x-factor on recovery rates.
+
 .. note::
 
   **Risk initialization**
