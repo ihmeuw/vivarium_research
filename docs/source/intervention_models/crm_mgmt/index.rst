@@ -163,15 +163,19 @@ Decision tree and algorithm for outreach intervention
 Visit type: emergency
 
 .. image:: decision_tree_outreach_emergency.svg
+
 Visit type: follow-up
 
 .. image:: decision_tree_outreach_followup.svg
+
 Visit type: screening
 
 .. image:: decision_tree_outreach_screening.svg
+
 Visit type: none
 
 .. image:: decision_tree_outreach_none.svg
+
 Blood pressure ramp
 
 .. image:: sbp_ramp.svg
