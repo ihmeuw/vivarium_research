@@ -110,7 +110,7 @@ This initialization scheme will also allow initialization of "untreated LDL-C" a
 
 Baseline coverage of polypill, medication outreach, and lifestyle modification education are all low, and we will assume that they are 0%. (This means that we will can initialize the untreated BMI, FPG, and smoking risk exposures to be equal to the actual BMI, FPG, and smoking exposures.)
 
-Weighted means of treatment (not specific to drug class) by age, sex, and SBP category (in 10 mm Hg groups) are here: /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/sbp_tx_info.csv
+Weighted means of treatment (not specific to drug class) by age, sex, and SBP category (in 10 mm Hg groups) are here: /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/nhanes_sbp_tx_info.csv
 
 .. todo:: add link to stash repo with collapse code 
 .. todo:: update with file for LDL 
@@ -160,11 +160,25 @@ Vivarium Modeling Strategy
 
 Decision tree and algorithm for outreach intervention
 -----------------------------------------------------
+Visit type: emergency
+
 .. image:: decision_tree_outreach_emergency.svg
+
+Visit type: follow-up
+
 .. image:: decision_tree_outreach_followup.svg
+
+Visit type: screening
+
 .. image:: decision_tree_outreach_screening.svg
+
+Visit type: none
+
 .. image:: decision_tree_outreach_none.svg
 
+Blood pressure ramp
+
+.. image:: sbp_ramp.svg
 
 A.  Visit type
 
@@ -239,6 +253,30 @@ G.  Prescribed treatment
               2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
        d.  Schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine timestep for next visit
 
+Blood pressure ramp and LDL-C treatment algorithms
+  SBP target: 130 mm Hg
+  LDL target: depends on ASCVD risk
+
+  Treatment prescribed (BP)
+    1)  Is therapeutic inertia overcome y/n
+    2)  If therapeutic inertia is overcome AND BP measurement is within 20 mm Hg of target
+        a.  Assume monotherapy initiated: Proportions by drug class in /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_initialization_percentages.csv
+        b.  Follow-up scheduled (uniform distribution 3-6 months)
+    3)  If therapeutic inertia is overcome AND BP reading is more than 20 mm Hg from target
+        a.  Either monotherapy OR combination therapy is initiated
+        b.  Proportion assigned to combination therapy: 0.45 (parameter table)
+        c.  Proportions of initial prescriptions by drug class in /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_initialization_percentages.csv
+
+   Treatment Changed (BP)
+    1)  If monotherapy initiated for hypertension: If blood pressure not controlled at follow up (control defined as being below threshold), 50/50 choice between increasing dosage of current medication and adding new class of medication
+    2)  If combination therapy initiated for hypertension: If blood pressure not controlled at follow up (control defined as being below threshold), 50/50 choice between increasing dosage of current medication and adding new class of medication (medication cannot be in current class). Proportions of combinations in /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/meps_drug_combinations.csv
+
+    Treatment Prescribed (LDL)
+
+    Treatment Changed (LDL)
+
+
+
 Medication initiation:
 All simulants enrolled in the intervention initiate treatment (defined as initial fill of prescription(s))
 
@@ -270,7 +308,7 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884
     - Normal distribution, mean=0, SD=2.9
     - 85% measurements within +/- 3 mm Hg; 15% within +/- 4-9 mm Hg
-  * - SBP therapeutic inertia
+  * - SBP therapeutic inertia [TO UPDATE]
     - Hypertension. 2006 Mar;47(3):345-51. doi: 10.1161/01.HYP.0000200702.76436.4b., J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783
     - 19% of the variance in SBP; 90% of the time there is therapeutic inertia
     - 
@@ -290,6 +328,10 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - 
     - 
     -
+  * - Proportion of Group 2 from SBP ramp algorithm receiving combination therapy
+    - Byrd et al Am Heart J 2011;162:340-6.
+    - 45%
+    - Represents non-compliance with guidelines  
   * - LDL-C measurement error
     - BMJ 2020;368:m149 doi: 10.1136/bmj.m149
     - normal distribution from 2 to 5%; mean and standard deviation
