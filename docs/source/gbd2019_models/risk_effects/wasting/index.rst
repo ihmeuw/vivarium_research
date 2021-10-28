@@ -44,6 +44,12 @@ Child wasting, defined as low weight for heigh/length, is a measure of acute mal
 GBD Modeling Strategy
 ----------------------
 
+The GBD 2019 risk effects of child wasting are informed by [Olofin-et-al-2013]_, which evauated the relative risk of cause-specific mortaltiy by child wasting categories [GBD-2019-Risk-Factors-Appendix-Child-Wasting-Risk-Effects]_. Notably, given that :math:`cause-specific mortality rate = excess mortality rate * prevalence`, the relative risks may be attributable to increased disease incidence (increases prevalence), duration (increases prevalence), or severity (increases excess mortality rate), or some comination of these factors. The 2019 GBD applies the child wasting risk effects equally to both morbidity and mortality estimates (YLDs and YLLs).
+
+.. note::
+
+   The :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` uses GBD 2020 relative risks for child wasting. The data source for these potentially updated relative risks needs to be investigated.
+
 
 Vivarium Modeling Strategy
 --------------------------
@@ -54,17 +60,24 @@ Vivarium Modeling Strategy
    For a description of Vivarium modeling strategy for risk exposure, see the
    :ref:`wasting risk exposure model document <2020_risk_exposure_wasting_state_exposure>`.
 
+For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, we will make different assumptions about how to apply the child wasting risk effects for diarrheal diseases than for measles and lower respiratory infections due to the inclusion of diarrheal diseases in the "vicious cycle"/positive feedback model with child wasting, which required this change to solve for the steady state model (:ref:`discussed here <2019_risk_effect_diarrheal_diseases>`). 
+
 Diarrheal diseases
 +++++++++++++++++++++++++
 
 For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the relaive risks for wasting on diarrheal diseases should be applied to the diarrheal diseases excess mortality rate and not the diarrheal diseases incidence rate in the following manner: 
 
-.. code-block:: python
+.. math::
 
-   incidence_diarrheal_diseases_i = incidence_diarrheal_diseases
-   excess_mortality_diarrheal_diseases_i = (excess_mortality_diarrheal_diseases 
-                                             * (1 - PAF_wasting_diarrheal_diseases) 
-                                             * RR_wasting_diarrheal_diseases_i)
+   incidence rate_\text{diarrheal diseases,i} = incidence rate_\text{diarrheal diseases} 
+
+.. math:: 
+
+   excess mortality rate_\text{diarrheal diseases,i} = excess mortality rate_\text{diarrheal diseases} * (1 - PAF_\text{wasting,diarrheal diseases}) * RR_\text{wasting,diarrheal diseases,i}
+
+.. note::
+
+   The GBD 2020 wasting relative risks should be used in tandem with the :ref:`GBD 2020 wasting risk exposure <2020_risk_exposure_wasting_state_exposure>`
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -79,10 +92,26 @@ Validation and Verification Criteria
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. todo::
+
+   List assumptions and limitations
+
 Lower respiratory infections and measles
 +++++++++++++++++++++++++++++++++++++++++++
 
+For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the relaive risks for wasting on lower respiratory infections and measles should be applied to the diarrheal diseases excess mortality rate and not the diarrheal diseases incidence rate in the following manner:
 
+.. math::
+
+   incidence rate_\text{cause,i} = incidence rate_\text{cause} * (1 - PAF_\text{wasting,cause}) * RR_\text{wasting,cause,i}
+
+.. math:: 
+
+   excess mortality rate_\text{cause,i} = excess mortality rate_\text{cause}
+
+.. note::
+
+   The GBD 2020 wasting relative risks should be used in tandem with the :ref:`GBD 2020 wasting risk exposure <2020_risk_exposure_wasting_state_exposure>`
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -97,7 +126,23 @@ Validation and Verification Criteria
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. todo::
+
+   List assumptions and limitations
 
 References
 ----------
 
+.. [GBD-2019-Risk-Factors-Appendix-Child-Wasting-Risk-Effects]
+
+   Pages 157-161 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
+
+     **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factor Collaborators. :title:`Global burden of 87 risk factors in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019`. Lancet 2020; 396: 1223-1249. DOI:
+     https://doi.org/10.1016/S0140-6736(20)30752-2
+
+.. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
+
+.. [Olofin-et-al-2013]
+   Olofin I, McDonald CM, Ezzati M, et al. Associations of Suboptimal Growth with All‐Cause and Cause‐
+   Specific Mortality in Children under Five Years: A Pooled Analysis of Ten Prospective Studies. PLOS ONE
+   2013; 8: e64636

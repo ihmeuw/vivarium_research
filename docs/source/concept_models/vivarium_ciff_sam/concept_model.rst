@@ -296,11 +296,7 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * Child Stunting Risk Effects
 
-* Child Wasting Risk Effects
-
-.. todo::
-
-  Develop risk effects document for child wasting that changes the risk effect from diarrheal diseases incidence rate to the diarrheal diseases excess mortality rate
+* :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>`
 
 * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
 
