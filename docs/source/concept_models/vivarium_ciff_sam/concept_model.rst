@@ -259,6 +259,10 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Diarrheal Diseases (GBD 2019) <2019_cause_diarrhea>`
 
+.. todo::
+
+  The diarrheal diseases remission rate for Ethiopia in GBD 2019 is greater than the incidence rate. Consider adjusting this and/or at least noting the implications and limitations.
+
 * :ref:`Lower Respiratory Infections (GBD 2019) <2019_cause_lower_respiratory_infections>`
 
 * :ref:`Measles (GBD 2019) <2019_cause_measles>`
@@ -292,11 +296,13 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * Child Stunting Risk Effects
 
-* Child Wasting Risk Effects
+* :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>`
 
 * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
 
 * :ref:`Wasting X-Factor Risk Effects <2019_risk_effect_x_factor>`
+
+* :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>`
 
 5.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -321,7 +327,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 5.1.6 Feedback Loop Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Fedback Between Wasting and Infectious Diseases (Diarrhea)
+* See :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>`
 
 5.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
