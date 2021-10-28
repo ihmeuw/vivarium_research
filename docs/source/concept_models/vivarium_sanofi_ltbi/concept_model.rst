@@ -153,24 +153,28 @@ Scale-up of TPT coverage among two high-risk groups: U5 HHC and PLHIV.
 ------------------------
 The project compared the health outcomes in three scenarios:
 
- - *Baseline (6H as projected):* The baseline scenario projects GBD country-specific 
+ - **Baseline (6H as projected):** The baseline scenario projects GBD country-specific 
    demographic and disease trends into the future, as well as the historic coverage 
    of 6H treatment for U5 HHC and PLHIV, thus simulating what would happen if 
    these trends continue “business as usual.”
 
- - *Intervention scenario 1 (6H scale up):* This scenario is identical to the baseline 
+ - **Intervention scenario 1 (6H scale up):** This scenario is identical to the baseline 
    scenario but scales up 6H to reach 95% coverage for U5 HHC and PLHIV by 2025. 
    Thus, this scenario compares what would happen if countries were to increase 
    coverage, utilizing the same treatment regimen (6H) as seen in the baseline scenario.
 
- - *Intervention scenario 2 (3HP scale up):* This scenario is identical to the baseline 
+ - **Intervention scenario 2 (3HP scale up):** This scenario is identical to the baseline 
    scenario but scales up 3HP to reach 95% coverage for U5 HHC and PLHIV by 2025. 
    Thus, this scenario compares what would happen if countries were to increase 
    coverage and utilize a new treatment regimen (3HP).
 
-.. todo::
+Treatment coverage in baseline and intervention scenarios:
+ - `Baseline coverage data <https://github.com/ihmeuw/vivarium_csu_ltbi/blob/main/src/vivarium_csu_ltbi/data/baseline_coverage.csv>`_
+ - `Intervention coverage data shift <https://github.com/ihmeuw/vivarium_csu_ltbi/blob/main/src/vivarium_csu_ltbi/data/intervention_coverage_shift.csv>`_
+ - `Python code for adjusting coverage data <https://github.com/ihmeuw/vivarium_csu_ltbi/blob/main/src/vivarium_csu_ltbi/data/adjust_coverage_shift_data.py>`_
 
- Add treatment coverage scale up table for three simulation scenarios
+The country- and risk-group-specific TPT coverage data is informed by 
+country-specific National Strategic Plan and WHO global tuberculosis report.
 
 
 .. _ltbi5.0:
@@ -229,9 +233,97 @@ see :ref:`LTBI treatment model model<intervention_latent_tuberculosis_treatment>
 5.4 Desired outputs
 -------------------
 
-.. todo::
+.. list-table:: Output shell table
+   :header-rows: 1
 
- Add output metadata table
+   * - Location
+     - Year
+     - Age group
+     - Sex
+     - Risk group
+     - Scenario
+     - Treatment group
+     - Outcome
+   * - Ethiopia
+     - 2019
+     - 0 to 4
+     - Female
+     - General population
+     - Baseline (6H as projected)
+     - 6H adherent
+     - Active TB Incidence count (cases)
+   * - India
+     - 2020
+     - 5 to 14
+     - Male
+     - PLHIV
+     - Intervention 1 (6H scale up)
+     - 6H non-adherent
+     - Active TB Incidence rate (cases per 100,000 person-years)
+   * - Peru
+     - 2021
+     - 15 to 59
+     - Both
+     - U5 HHC
+     - Intervention 2 (3HP scale up)
+     - 3HP adherent
+     - DALYs due to Active TB (per 100,000 person-years)
+   * - Philippines
+     - 2022
+     - 60 plus
+     - 
+     - 
+     - 
+     - 3HP non-adherent
+     - DALYs due to HIV resulting in other diseases (per 100,000 person-years)
+   * - South Africa
+     - 2023
+     - All ages
+     - 
+     - 
+     - 
+     - Untreated
+     - Deaths due to Active TB (per 100,000 person-years)
+   * - 
+     - 2024
+     - 
+     - 
+     - 
+     - 
+     - All
+     - Deaths due to HIV resulting in other diseases (per 100,000 person-years)
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - Deaths due to other causes (per 100,000 person-years)
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - Person-Years
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - Treatment Coverage (proportion)
+   * - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - 
+     - Ylls due to other causes (per 100,000 person-years)
 
 
 .. _ltbi6.0:
@@ -248,10 +340,22 @@ see :ref:`LTBI treatment model model<intervention_latent_tuberculosis_treatment>
 
 7.0 Limitations
 +++++++++++++++
-
-.. todo::
-
- Add model assumptions and limitations
+ - We assume same efficacy for 6H and 3HP as literature evidence shows that 6HP 
+   is non-inferior to 3HP on protecting patients progress from LTBI to active TB.
+ - We assume perfect screening for active TB, which may not be the case in 
+   reality (e.g., some individuals eligible for treatment may not receive it, 
+   while others that have already progressed to active TB may receive treatment 
+   for LTBI, depending on quality of screening).
+ - We assume same TB disease duration for both HIV-positive population and 
+   HIV-negative population.
+ - We do not account for the reduced risk of onward TB transmission by people 
+   treated for LTBI (“transmission dynamics”), which likely leads to a more 
+   conservative estimate of treatment impact.
+ - The relative risk of hosuehold contact exposure does not quantify the 
+   relationship between TB risk, household size, and income.
+ - Treatment for active TB is not assessed in this simulation.
+ - Adverse events are not captured in this simulation.
+ - Cost effectiveness analysis is not included in this simulation. 
 
 
 .. _ltbi8.0:
@@ -268,3 +372,17 @@ see :ref:`LTBI treatment model model<intervention_latent_tuberculosis_treatment>
    Global Tuberculosis Programme. Latent tuberculosis infection: updated and 
    consolidated guidelines for programmatic management. 2018 
    http://www.ncbi.nlm.nih.gov/books/NBK531235/ (accessed Jan 8, 2020).
+
+Country-specific TPT coverage sources:
+ - **[Ethiopia]** Federal Democratic Republic of Ethiopia National Strategic Plan 
+   Tuberculosis and Leprosy Control 2006-2013 EC (2013/14-2020). Ministry of Health.
+ - **[India]** National Strategic Plan for Tuberculosis Elimination 2017-2025. 
+   Revised National Tuberculosis Control Programme. Central TB Division, 
+   Directorate General of Health Services, Ministry of Health with Family 
+   Welfare, Nirman Bhavan, New Delhi, India. 2017.
+ - **[South_Africa]** South Africa’s National Strategic Plan for HIV, TB and STIs 
+   2017-2022. South African National AIDS Council.
+ - **[Peru]** Tuberculosis in the Americas 2018. Pan American Health Association 
+   and World Health Organization; 2018.
+ - **[Philippines]** 2017-2022 Philippine Strategic TB Elimination Plan: Phase 1 
+   (PhilSTEP1). Department of Health, Philippines.
