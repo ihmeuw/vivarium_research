@@ -33,9 +33,9 @@
 
 .. _latent_tuberculosis_infection_concept_model:
 
-========================================================
-Vivarium Sanofi Latent Tuberculosis Infection Simulation
-========================================================
+=====================================================
+Vivarium CSU Latent Tuberculosis Infection Simulation
+=====================================================
 
 .. contents::
   :local:
@@ -94,9 +94,9 @@ LTBI to AcTB is important not only at the individual level but also at the popul
 level in order to achieve TB elimination per the WHO End TB Strategy. WHO recommends 
 that high-risk populations, such as children under 5 who are household contacts 
 of persons with AcTB and people living with HIV, should receive TPT. [Global-Tuberculosis-Programme-2018]_ 
-Sanofi has a long history in TB control and offers programmatic support with 
+Our client has a long history in TB control and offers programmatic support with 
 partners from the global Stop TB initiative. As part of its commitment to reduce 
-the burden of TB, Sanofi developed 3HP which may increase adherence and treatment 
+the burden of TB, the client developed 3HP which may increase adherence and treatment 
 completion rates compared to 6H.
 
 
