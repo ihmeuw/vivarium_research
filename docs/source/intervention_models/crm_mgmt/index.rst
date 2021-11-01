@@ -176,9 +176,13 @@ Visit type: none
 
 .. image:: decision_tree_outreach_none.svg
 
-Blood pressure ramp
+Blood pressure ramp: initial prescription
 
-.. image:: sbp_ramp.svg
+.. image:: sbp_ramp_initial.svg
+
+Blood pressure ramp: follow-up
+
+.. image:: sbp_ramp_followup.svg
 
 A.  Visit type
 
