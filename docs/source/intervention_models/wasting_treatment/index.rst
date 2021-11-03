@@ -438,12 +438,14 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 6-59 months old
     - 0.488 (95% CI:0.374-0.604)
     - normal
-    - Baseline scenario value ([Isanaka_2021]_); defined as the number in the program / number that should be in the program 
+    - Baseline scenario value; defined as the number in the program / number that should be in the program 
+    - [Isanaka_2021]_
   * - :math:`C_{MAM}`
     - 6-59 months old
     - 0.15 (95% CI: 0.1, 0.2)
     - normal
-    - Baseline scenario value. Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
+    - Baseline scenario value. 
+    - Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
   * - :math:`E_\text{SAM}`
     - 6-59 months old
     - 0.70 (95% CI:0.64-0.76)
