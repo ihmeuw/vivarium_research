@@ -616,7 +616,16 @@ and
 
   \overline{RR_{r}} = C * RR_{r, treated} + (1 - C) * RR_{r, untreated}
 
-NOTE: Each simulant should have a single propensity value for the :math:`C_{MAM}` and :math:`C_{SAM}` parameters (equally likely to be covered by SAM treatment as MAM treatment if they had the same coverage rates).
+Coverage Propensities
+++++++++++++++++++++++
+
+.. todo::
+
+  Detail strategy for assigning :math:`C` and :math:`E` parameter propensity values to simulants so that:
+
+  1) coverage among the MAM and SAM states is equal to :math:`C_{MAM}` and :math:`C_{SAM}`
+
+  2) simulants who are treated for MAM or SAM once are likely to be treated again and vise versa.
 
 Scenarios
 +++++++++++
