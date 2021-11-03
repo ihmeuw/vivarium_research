@@ -185,8 +185,8 @@ See linked documentation for more information :ref:`Treatment and management for
     - 73.1% (95% CI:58.5-87.7) for RUSF
     - 15 x 0.731 = 0.11
     - 1 - 0.11 = 0.89
-    - [Ackatia_Armah_2015]_
-    - Baseline coverage of MAM needs to be updated, efficacy comes from trial and may be too optimistic
+    - Efficacy: [Ackatia_Armah_2015]_, Coverage: assumption from CIFF/UNICEF
+    - Efficacy comes from trial and may be too optimistic
   * - MAM alternative
     - 70%
     - 75% for RUSF
