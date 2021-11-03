@@ -346,7 +346,7 @@ Geographic coverage attempts to measure the *availability* of services which doe
 .. image:: effective_coverage_figure.svg
 
 | SAM programme treatment coverage: 48.8% (37.4-60.4) (this is a point coverage; assumes programmes are not good at case finding) [Isanaka_2021]_
-| MAM programme treatment coverage: same as SAM for now until this website is updated https://acutemalnutrition.org/en/countries
+| MAM programme treatment coverage: Per discussion with CIFF/UNICEF, there is not reliable data avilable for this parameter, but it may be between 10 and 20 percent and often scales-up in response to emergencies. Note: this website tracks measures related to SAM coverage: https://acutemalnutrition.org/en/countries
 
 .. todo::
 
@@ -393,7 +393,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Value
     - Note
   * - :math:`r_{SAM,ux}`
-    - :math:`\frac{k - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
+    - :math:`\frac{k - r_{SAM,tx} * C_{SAM} * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C_{SAM} * E_{SAM}}`
     - See constant values in table below and equation derivation below table. Ali to confirm and potentially update this equation. Previously referred to as :math:`r2_{ux}`
   * - :math:`r_{SAM,tx}`
     - :math:`365 / \text{time to recovery}_\text{effectively treated SAM}`
@@ -434,12 +434,16 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - normal
     - Censored participants who did not recover in estimation of median time to recovery.
     - [Ackatia_Armah_2015tx]_; Mali
-  * - :math:`C`
+  * - :math:`C_{SAM}`
     - 6-59 months old
     - 0.488 (95% CI:0.374-0.604)
     - normal
-    - Baseline scenario value. Assumed to be the same for SAM and MAM and across age groups at the draw level.
-    - Currently the same for SAM and MAM [Isanaka_2021]_
+    - Baseline scenario value ([Isanaka_2021]_); defined as the number in the program / number that should be in the program 
+  * - :math:`C_{MAM}`
+    - 6-59 months old
+    - 0.15 (95% CI: 0.1, 0.2)
+    - normal
+    - Baseline scenario value. Informed through discussion with CIFF/UNICEF that reported there is not reliable data on this parameter, but that this appeared to be a plausible range
   * - :math:`E_\text{SAM}`
     - 6-59 months old
     - 0.70 (95% CI:0.64-0.76)
@@ -508,7 +512,7 @@ Deriving :math:`r_{SAM,ux}` using the following equations:
 
 #. :math:`r_{SAM,tx} = 1 / \text{time to recovery}_\text{effectively treated SAM}`
 
-#. :math:`1 / \text{time to recovery}_\text{overall SAM} =  1 / \text{time to recovery}_\text{effectively treated SAM} * C * E_{SAM} + 1 / \text{time to recovery}_\text{untreated SAM} * (1 - C * E_{SAM})`
+#. :math:`1 / \text{time to recovery}_\text{overall SAM} =  1 / \text{time to recovery}_\text{effectively treated SAM} * C_{SAM} * E_{SAM} + 1 / \text{time to recovery}_\text{untreated SAM} * (1 - C_{SAM} * E_{SAM})`
 
 #. :math:`1 / duration_\text{overall SAM} = 1 / \text{time to recovery}_\text{overall SAM} + mortality_{SAM|a,s,l,y}`
 
@@ -516,15 +520,15 @@ Deriving :math:`r_{SAM,ux}` using the following equations:
 
 So...
 
-  :math:`1 / duration_\text{overall SAM} - mortality_{SAM|a,s,l,y} = r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM})`
+  :math:`1 / duration_\text{overall SAM} - mortality_{SAM|a,s,l,y} = r_{SAM,tx} * C_{SAM} * E_{SAM} + r_{SAM,ux} * (1 - C_{SAM} * E_{SAM})`
 
   ...
 
-  :math:`k / 365 = r_{SAM,tx} * C * E_{SAM} + r_{SAM,ux} * (1 - C * E_{SAM}) + mortality_{SAM|a,s,l,y}`
+  :math:`k / 365 = r_{SAM,tx} * C_{SAM} * E_{SAM} + r_{SAM,ux} * (1 - C_{SAM} * E_{SAM}) + mortality_{SAM|a,s,l,y}`
 
   ...
 
-  :math:`r_{SAM,ux} = \frac{k/365 - r_{SAM,tx} * C * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C * E_{SAM}}`
+  :math:`r_{SAM,ux} = \frac{k/365 - r_{SAM,tx} * C_{SAM} * E_{SAM} - mortality_{SAM|a,s,l,y}}{1 - C_{SAM} * E_{SAM}}`
 
 .. note::
 
@@ -568,27 +572,27 @@ The Vivarium modeling strategy above details how to solve for the transition rat
     - Value
     - Note
   * - r3
-    - Untreated/uncovered by :math:`C`
+    - Untreated/uncovered by :math:`C_{MAM}`
     - :math:`\frac{r_{MAM,ux}}{r_{MAM,tx} * E_{MAM} + r_{MAM,ux} * (1 - E_{MAM})}`
     -
   * - t1
-    - Untreated/uncovered by :math:`C`
+    - Untreated/uncovered by :math:`C_{SAM}`
     - 0
     - :math:`\frac{0 * r_{SAM,tx}}{E_{SAM} * r_{SAM,tx}}`
   * - r2
-    - Untreated/uncovered by :math:`C`
+    - Untreated/uncovered by :math:`C_{SAM}`
     - :math:`1 / (1 - E_{SAM})`
     - :math:`\frac{r_{SAM,ux} * 1}{r_{SAM,ux} * (1 - E_{SAM})}`
   * - r3
-    - Treated/covered by :math:`C`
+    - Treated/covered by :math:`C_{MAM}`
     - 1
     -
   * - t1
-    - Treated/covered by :math:`C`
+    - Treated/covered by :math:`C_{SAM}`
     - 1
     -
   * - r2
-    - Treated/covered by :math:`C`
+    - Treated/covered by :math:`C_{SAM}`
     - 1
     -
 
@@ -612,7 +616,7 @@ and
 
   \overline{RR_{r}} = C * RR_{r, treated} + (1 - C) * RR_{r, untreated}
 
-NOTE: Each simulant should have a single propensity value for :math:`C` for both MAM and SAM treatment (equally likely to be covered by SAM treatment as MAM treatment).
+NOTE: Each simulant should have a single propensity value for the :math:`C_{MAM}` and :math:`C_{SAM}` parameters (equally likely to be covered by SAM treatment as MAM treatment if they had the same coverage rates).
 
 Scenarios
 +++++++++++
@@ -624,9 +628,13 @@ Scenarios
     - Baseline value
     - Alternative Value
     - Note
-  * - :math:`C`
+  * - :math:`C_{MAM}`
+    - 0.15 (95% CI: 0.1, 0.2)
+    - 0.7
+    -
+  * - :math:`C_{SAM}`
     - 0.488 (95% CI:0.374-0.604)
-    - 0.9
+    - 0.7
     -
   * - :math:`E_{MAM}`
     - 0.731 (95% CI:0.585-0.877), normal

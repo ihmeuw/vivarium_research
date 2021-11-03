@@ -593,7 +593,7 @@ that follows we will detail how to calculate all the variables used
    * - r4
      - 0.001
      - Daily probability of remission from cat 3 into cat 4
-     - Assumed to be small
+     - TO BE UPDATED FOLLOWING MODEL CALIBRATION
    * - t1
      - 1 - e^(-sam_tx_coverage * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
@@ -644,34 +644,32 @@ in terms of the following variables:
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
    * - :math:`mam_tx_coverage`
      - Proportion of MAM (CAT 2) cases that have treatment coverage
-     - 0.488
+     - 0.15 (95% CI: 0.1, 0.2)
      - Potentially to be updated
    * - :math:`sam_tx_coverage`
      - Proportion of SAM (CAT 1) cases that have treatment coverage
-     - 0.488
+     - 0.488 (95% CI: 0.374, 0.604)
      - Potentially to be updated
    * - :math:`time_to_mam_ux_recovery`
      - Without treatment or death, average days spent in MAM before recovery
      - 63
-     - Potentially to be updated
+     - 
    * - :math:`time_to_mam_tx_recovery`
      - With treatment and without death, average days spent in MAM before recovery
-     - 41.3
-     - Potentially to be updated
+     - 41.3 (95% CI: 34.4, 49)
+     - 
    * - :math:`time_to_sam_ux_recovery`
      - Without treatment or death, average days spent in SAM before recovery
-     - 60.5
-     - Potentially to be updated
+     - See the definition on the :ref:`wasting treatment intervention document <intervention_wasting_treatment>`
+     - 
    * - :math:`time_to_sam_tx_recovery`
      - With treatment and without death, average days spent in SAM before recovery
      - 48.3
-     - Potentially to be updated
+     - 
    * - :math:`time_step`
      - Scalar time step conversion to days
      - 1
      -
-
-
 
 .. list-table:: Calculations for variables in transition equations
    :widths: 6 10 10

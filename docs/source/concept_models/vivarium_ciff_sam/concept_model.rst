@@ -160,7 +160,7 @@ See linked documentation for more information :ref:`Treatment and management for
   :header-rows: 1
 
   * - Exposure
-    - Treatment coverage (c)
+    - Treatment coverage (C)
     - Treatment efficacy (E)
     - Effectivey covered
     - Not effectively covered
@@ -174,27 +174,26 @@ See linked documentation for more information :ref:`Treatment and management for
     - [Isanaka_etal_2021]_ , [Zw_2020]_
     - This is for SAM-OTP which is ~98% of SAM.
   * - SAM alternative
-    - 90%
+    - 70%
     - 75%
-    - 0.9 x 0.75 = 0.675
-    - 1 - 0.675 = 0.325
+    - 0.7 x 0.75 = 0.53
+    - 1 - 0.53 = 0.47
     - Sphere standards
     - Sphere guideline for efficacy only
   * - MAM baseline
-    - 48.8% (95% CI: 37.4, 60.4)
+    - 15% (95% CI: 10, 20)
     - 73.1% (95% CI:58.5-87.7) for RUSF
-    - 0.488 x 0.731 = 0.34
-    - 1 - 0.34 = 0.66
+    - 15 x 0.731 = 0.11
+    - 1 - 0.11 = 0.89
     - [Ackatia_Armah_2015]_
     - Baseline coverage of MAM needs to be updated, efficacy comes from trial and may be too optimistic
   * - MAM alternative
-    - 90%
+    - 70%
     - 75% for RUSF
-    - 0.9 x 0.75 = 0.675
-    - 1 - 0.675 = 0.325
+    - 0.9 x 0.75 = 0.53
+    - 1 - 0.53 = 0.47
     - Sphere standards
     - Sphere guideline for efficacy only
-
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.
@@ -202,6 +201,10 @@ Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the i
 .. todo::
 
   Consider targeting SQ-LNS coverage to simulants in SAM treatment.
+
+.. todo::
+
+  Consider if 90% intervention coverage is too aspirational
 
 **Alternative scenario 3**
 Scale up of LBWSG interventions from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 2.
