@@ -312,10 +312,10 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884
     - Normal distribution, mean=0, SD=2.9
     - 85% measurements within +/- 3 mm Hg; 15% within +/- 4-9 mm Hg
-  * - SBP therapeutic inertia [TO UPDATE]
-    - Hypertension. 2006 Mar;47(3):345-51. doi: 10.1161/01.HYP.0000200702.76436.4b., J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783
-    - 19% of the variance in SBP; 90% of the time there is therapeutic inertia
-    - 
+  * - SBP therapeutic inertia
+    - Hypertension. J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783; https://doi. org/10.1371/journal.pone.0182807
+    - 0.4176
+    - 48% uncontrolled htn (NHANES); 87% of the time this is due to therapeutic inertia
   * - SBP prescription initiation rate
     - Assumption for current run; will reevaluate in future
     - 100 %
@@ -329,13 +329,17 @@ Implementation in previous code found here: https://github.com/ihmeuw/vivarium_c
     - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp.csv
     - 
   * - SBP baseline coverage rate for each ramp position
-    - 
-    - 
+    - Egan et al. Hypertension. 2012;59:1124- 1131.
+    - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/tx_percent_initialize.csv
     -
   * - Proportion of Group 2 from SBP ramp algorithm receiving combination therapy
     - Byrd et al Am Heart J 2011;162:340-6.
     - 45%
     - Represents non-compliance with guidelines  
+  * - SBP drug combinations
+    - Medical Expenditure Panel Survey, 2014
+    - 
+    - 
   * - LDL-C measurement error
     - BMJ 2020;368:m149 doi: 10.1136/bmj.m149
     - normal distribution from 2 to 5%; mean and standard deviation
