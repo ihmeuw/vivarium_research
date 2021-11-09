@@ -12,32 +12,15 @@ The x-factor is a risk exposure that tries to capture the differential risk expe
 Vivarium Modeling Strategy
 --------------------------
 
-See the :ref:`easting x-factor risk effects document <2019_risk_effect_x_factor>` for details on the risk effects of the wasting x-factor. Given that the x-factor risk-effects are measured through comparison of a population recently recovered from SAM treatment relative to healthy controls, we will assign x-factor risk exposure according to the :ref:`child wasting exposure state <2020_risk_exposure_wasting_state_exposure>` that they are initialized into as a proxy for these respective populations.
+See the :ref:`wasting x-factor risk effects document <2019_risk_effect_x_factor>` for details on the risk effects of the wasting x-factor. Given that the x-factor risk-effects are measured through comparison of a population recently recovered from SAM treatment relative to healthy controls, we will assign x-factor risk exposure according to the :ref:`child wasting exposure state <2020_risk_exposure_wasting_state_exposure>` that they are initialized into as a proxy for these respective populations.
 
 .. note::
    
    The exact exposure distribution conditional on wasting exposure state will be calibrated/validated using the interactive simulation context. Therefore, these exposure values should be engineered to be configurable. 
 
-The x-factor risk exposure is dichotomous and should be assigned according to the following exposure values conditional on the wasting state that simulants are initialized into (at the start of the simulation or at birth).
+The x-factor risk exposure is dichotomous and should be assigned **using the same propensity that is used to initialize simulants into a wasting risk exposure category/state** according to the :ref:`child wasting exposure model <2020_risk_exposure_wasting_state_exposure>`.
 
-.. list-table:: X-factor exposure values
-   :header-rows: 1
-
-   * - Wasting state
-     - X-factor exposure value
-     - Notes
-   * - cat4 (TMREL)
-     - [TBD from interactive sim model calibration]
-     - 
-   * - cat3 (Mild child wasting)
-     - [TBD from interactive sim model calibration]
-     - 
-   * - cat2 (MAM)
-     - [TBD from interactive sim model calibration]
-     - 
-   * - cat1 (SAM)
-     - [TBD from interactive sim model calibration]
-     - 
+The default x-factor exposure value should be equal to 0.32 (although it should be configurable until finalization of the model calibration).
 
 Restrictions
 ++++++++++++
