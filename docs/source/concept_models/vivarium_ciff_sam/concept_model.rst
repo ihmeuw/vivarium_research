@@ -326,6 +326,10 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 
 * :ref:`Maternal BMI and x-factor <2019_risk_correlation_maternal_bmi_x_factor>`
 
+.. todo::
+
+  Update to reflect x-factor correlation with wasting exposure rather than with maternal BMI
+
 The following diagram represents the resulting model correlation structure in our simulation (including the x-factor risk effect on wasting incidence rates, which is described in the next section of this document). The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
 
 .. image:: correlation_structure.svg
