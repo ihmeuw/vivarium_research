@@ -1,4 +1,4 @@
-.. _2019_risk_sbp:
+.. _2019_risk_exposure_sbp:
 
 ======================================
 Systolic Blood Pressure
