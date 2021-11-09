@@ -39,32 +39,34 @@ Wasting X-Factor
 Risk Overview
 -------------
 
-The x-factor is a risk exposure that tries to capture the differential risk experienced by some children who may experience more relapses of wasting. We believe this is an important component of wasting epidemiology to capture [see Brain Trust notes with Chris Murray for discussion of adding this component to the model]. There are many risk factors that have been described in the literature that pre-dispose children to wasting including maternal education, household food insecurity, family size, water and sanitation. However, we have not found any conclusive evidence yet of a single x-factor is or its effect size.
+The x-factor is a risk exposure that tries to capture the differential risk experienced by some children who may experience more relapses of wasting. We believe this is an important component of wasting epidemiology to capture [see Brain Trust notes with Chris Murray for discussion of adding this component to the model]. There are many risk factors that have been described in the literature that pre-dispose children to wasting including maternal education, household food insecurity, family size, water and sanitation. 
+
+Differential relapse rate literature overview
++++++++++++++++++++++++++++++++++++++++++++++++
+
+[Stobaugh-et-al-2019]_ conducted a systematic literature review on relapse of SAM following treatment and found that "the proportion of children who relapsed after SAM treatment varied greatly from 0% to 37% across varying lengths of time following discharge" (p. 1). Generally, relapse was defined as presenting with SAM at least once following SAM treatment, but some studies defined relapse as inclusive of MAM as well. Additionally, no standard length of follow-up was used and the period ranged from 1 week to 18 months. [Stobaugh-et-al-2019]_ reported that relapse tended to occur more frequently in the first 6 months following discharge.
+
+According to [Stobaugh-et-al-2019]_, an unpublished longitudinal study in Ethiopia (Tsineal et al. 2015/Jimma University) reported the probability of experiencing a new episode of SAM or MAM was 26% for 6 months and 7.5% for 12 months (we are interpreting the latter probability as the probability of a new episode in 6-12 months). Tsineal et al. 2015 also reportedly found a relapse rate of 15% for SAM and 44% for MAM over 12 months. Further, this study was the only one identified by [Stobaugh-et-al-2019]_ that included a true control group of non-malnourished counterparts: Tsineal et al. 2015 reportedly followed children after SAM treatement as well as non-wasted matched community controls for one year. They reportedly found that 15% of the SAM-treated group developd SAM in the year of follow-up while only 1.2% of control children did in the same period for respective incidence rates of 1.27 and 0.09 per 100 person months.
+
+Since the time of this review, two additional studies were identified that compared wasting episode relapse rates betwen children who were recently treated for acute malnutrition and children who were not. 
+
+[Abitew-et-al-2020]_ conducted a cross-sectional study in South Gondar
+Zone, Amhara Region, Ethiopia of children discharged from community management of acute malnutrition (CMAM) programs and aged-matched children who were never treated for acute malnutrition. The study found that 34.2% of children discharged from CMAM programs were wasted compared to 26.7% of the control group. More specifically, 22.3% and 12.0% of the children discharged from CMAM were classified as having MAM and SAM, respectively, compared to 17.2% and 9.5% of the control population. Notably, the difference in wasting burden between these study populations found by [Abitew-et-al-2020]_ is of lower magnitude than other data sources that investigated the same measure. This may be because of the cross-sectional rather than longitudinal study design which measures prevalence rather than cumulative incidence. Further, the inclusion criteria for control subjects was based on whether they had previously received CMAM treatment without consideration of CMAM treatment need. Additionally, the prevalence of SAM in this population is quite high, indicating that there is a high background risk of acute malnutrition in the population that may not be generalizable to other populations with lower SAM prevalence.
+
+[Adegok-et-al-2020]_ performed a prospective matched cohort study of SAM recurrance in Northern Nigeria. The study recruited children discharged from OTP treatment and matched community controls and followed them for 6 months. At the end of follow-up 24% of the OTP discharged children relapsed to SAM and 0.6% of community controls developed SAM.
 
 .. note::
 
-  See Nicole's zotero library folder 'Relapse' and 'Determinants' to see studies on this topic.
+   Given the limitations associated with the cross-sectional nature of the [Abitew-et-al-2020]_ study and the study location of Nigeria rather than Ethiopia for the [Adegok-et-al-2020]_ study, we decided to use the Jimma University study reported in [Stobaugh-et-al-2019]_ as the main data source to inform differential relapse rates by x-factor exposure status in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
 
+Additional literature on relapse rates
++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
+[Lambebo-et-al-2021]_ conducted a retrospective records review of children under five years of age who were admitted and discharged for SAM in 20 selected health posts in Hadiya zone, SNNPR, Ethiopia from 2014/2015 to 2019/2020. Notably, treatment defaulters and non-responders were not excluded from the cohort. Additionally, the cohort was open and children were not followed for relapse after the age of 60 months. They reported a relapse/readmission rate of 9.6% (95% CI: 7.7, 11.7) within the five year study period. 
 
-  - A more thorough literature review and support for use of this proxy should be done to strengthen our argument.
-  - We have decided not to model the effect of x-factor on stunting for now. We will look more thoroughly on its effect on stunting and whether to model a direct effect of wasting on stunting as we do more research.
-  - may be helpful to put this in the concept model diagram to keep track of how different factors affect incidence rates
+[Abitew-et-al-2020b]_ conducted a study of children 6-59 months of age who were discharged from community-based management of acute malnutrition (CMAM) for MAM and uncomplicated SAM in the South Gonda Zone of Amhara region, Ethiopia. The study reported that after an average of 5.2 months of recovery, 445 of 1,273 children (35%) had relapsed. [Abitew-et-al-2020b]_ also found higher odds of relapse among children who were male, received pre-lacteal feeding, lived in food insecure households, and were not given vitamin A supplements. 
 
-      mam_incidence_i = mam_incidence_given_diarrheal_state_i * (1 - PAF_xfactor) * RR_xfactor_i * SQLNS_treatment_RR_i
-
-      sam_incidence_i = sam_incidence_given_diarrheal_state_i * (1 - PAF_xfactor) * RR_xfactor_i
-
-  - note that SQ-LNS only affects MILD to MAM incidence.
-
-.. todo::
-
-  Be careful of what the 'x-factor' effect size represents. While being proxied by m undernourishment exposure, it is **not** the only causal effect of m undernourishment on wasting. That's why we are using a series of RR to test out this effect since we can't find it directly in the literature. (although the Na paper has the ORs). We might need to think through how to appropriately use proxies, especially since we are also modelling m undernourishment as a risk exposure as well. So m undernourishment is acting as a risk exposure for itself AND also proxy for other risks. Perhaps we need to be specific and say the x-factor effect is all the 'other-stuff' without m undernourishment and we model m nourishment effect in addition to x-factor?
-
-  We would need to think through carefully this web of relationships that includes x-factor, m undernourishment (m undernourishment and x-factor will be perfectly correlated), lbwsg, wasting and stunting. We need to be specific and careful about when we are referring to m undernourishment as risk exposure for itself or m nourishment as proxy for other risks (the x-factor) and use the appropriate effect sizes.
-
-  Nathaniel asked if we should have a causal arrow from mm undernourishment to wasting. My thinking is that we need to think through what we are capturing through an indirect effect (through mediator), a direct effect and what the total effect is. For example, we are capturing this mediated effect through lbwsg [mm undernourishment (a)--> lbwsg (b)--> wasting]. So if we also have a direct effect, [mm undernourishment (c)--> wasting], we will end up with [Total effect of mm undernourishment on wasting = ab + c].  Not sure if the literature will have sufficient information for us to figure out all these effect pathways. So maybe we just use the effect of (a) and (b)?
+[Chang-et-al-2013]_ found that 63% of children successfully treated for MAM in Malawi remained well nourished during 12 months of follow-up (7% were lost to follow-up and 10% progressed to SAM). [Stobaugh-et-al-2018]_ found that 58% of children sucessfully treated for MAM in Malawi reamined well nourished during 12 months of follow-up. [Trehan-et-al-2015]_ found that 71% and 63% of children treated for MAM (defined as 12 weeks of treatment and until WHZ>-2, respectively) in Malawi did not relapse during 12 months of follow-up.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -72,37 +74,68 @@ Vivarium Modeling Strategy
 Wasting Incidence Rates
 ++++++++++++++++++++++++
 
-We do not have direct evidence or data for the risk effect of the x-factor *proxied by maternal undernutrition* on wasting incidence (from the previous source state). From the [Na_2020-x-factor-risk-effect]_, table 4 shows the odds of infant malnutrition (wasting, stunting and underweight) at 6 months of age in infants from food-insecure households as compared with infants from food-secure households (reference group). For rare outcomes, the prevalence risk ratio, incidence rate ratio and prevalence odds ratios approximate each other which is likely to be true for SAM (<5% prevalence), but not true for MAM and MILD wasting. Hence we model a range of risk effects as a sensitivity analysis with the scale of the effect informed by [Na_2020-x-factor-risk-effect]_. Below table is a suggested range of risk-effect values to model.
+Given the evidence from the Tsineal et al. 2015/Jimma University study reported in [Stobaugh-et-al-2019]_ that children who have recently recovered from SAM experience future episodes of SAM at ~10 times the rate of children who were at a healthy weight without a recent SAM episode, we selected the following risk effects values. We make the assumption that applied in a compound manner equally from the transition from mild child wasting to MAM (i2) and from MAM to SAM (i1).
 
-.. csv-table:: X-factor risk effect sensitivity analysis
-   :file: x_factor_risk_effect.csv
-   :widths: 30, 10, 10, 10, 10
+.. list-table:: X-factor risk effects
    :header-rows: 1
+
+   * - Affected parameter
+     - Exposure category
+     - Risk effect type
+     - Risk effect
+     - Note
+   * - i1
+     - Exposed (cat1)
+     - Relative risk (RR)
+     - :math:`\sqrt{10}`
+     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+   * - i1
+     - Unexposed (cat2)
+     - Relative risk (RR)
+     - :math:`1`
+     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+   * - i2
+     - Exposed (cat1)
+     - Relative risk (RR)
+     - :math:`\sqrt{10}`
+     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+   * - i2
+     - Unexposed (cat2)
+     - Relative risk (RR)
+     - :math:`1`
+     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+   * - i3
+     - Exposed (cat1)
+     - Relative risk (RR)
+     - :math:`1`
+     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+   * - i3
+     - Unexposed (cat2)
+     - Relative risk (RR)
+     - :math:`1`
+     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+
+.. todo::
+   
+   Incorporate uncertainty about x-factor risk effect values?
+
+For each incidence rate :math:`i(n)` in the dynamic wasting exposure model (i1, i2, and i3), the simulant-specific rate should be determined as follows:
+
+.. math::
+
+   i(n)_i = i(n) \times (1 - PAF_\text{i(n)}) \times RR_\text{i(n),i}
+
+.. math::
+
+   PAF_\text{i(n)} = \frac{RR_\text{i(n),cat1} * p_\text{cat1} + RR_\text{i(n),cat2} * (1 - p_\text{cat1}) - 1}{RR_\text{i(n),cat1} * p_\text{cat1} + RR_\text{i(n),cat2} * (1 - p_\text{cat1})}
+
+Where:
+
+- :math:`p_\text{cat1}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>`
 
 .. note::
 
-  For model runs following validation of model #4.5, use x-factor risk effect = 1.3 until consensus is reached on x-factor effect magnitude or the model is ready for simulation results for the full range of sensitivity analysis values.
-
-The risk effect (relative rate ratio) of incidence would be applied as such (breaking out the exposed vs non-exposed incidence from the exposure weighted overall incidence):
-
- - :math:`i_{x1} = i_{wasting|markov} (1-PAF) \times rr_{x_{factor}}`
- - :math:`i_{x0} = i_{wasting|markov} \times (1-PAF)`
-
- where :math:`i_{wasting|markov}` are the wasting transition incidences from the Markov calibration (with vicious cycle in the final model). And the PAF is calculated as
-
- PAF = :math:`\frac{(\sum_{x\_factor_{cat_i} prevalence * rr_{x_{factor\_cat_i}}})-1}{\sum_{x\_factor_{cat_i} prevalence * rr_{x_{factor\_cat_i}}}}`
-
- - where x_factor_cati_prevalence is the x-factor exposure category prevalence for exposed (i = 1) or unexposed (i = 0)
- - rr_x_factor_cati is the relative rate ratio for exposed (i = 1) or unexposed (i = 0).
- - Note that there are 4 wasting states so there should be a PAF between every wasting state transition where the susceptible population is the source wasting state, the exposure is the 'x-factor' and the outcome is the sink wasting state.
-
-- Note diarrhea (vicious cycle) cycle have effects on wasting incidences. Hence the x-factor should be broken out for the incidences with/without diarrhea calibrated from the Markov matrix. In our final model, we should end up with 4 sets (2 diarrhea states x 2 x-factor states) of 3 incidences (i1-3) for a total of 12 incidence rates.
-- Note also that SQ-LNS affects wasting transition incidence from mild to mam. The protective effects of SQ-LNS (if covered) would be applied to the incidences from mild to mam corresponding to diarrhea and x-factor exposure.
-- Let us assume that the 'x-factor' does not have differential effects on treatment recovery rates.
-
-.. todo::
-
-  Investigate potential effect of x-factor on recovery rates.
+   Additional factors will affect wasting incidence rates i1, i2, and i3 in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, including diarrheal diseases and SQ-LNS. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -110,21 +143,51 @@ Validation and Verification Criteria
 - The ratio between wasting incidence rates among those exposed and unexposed to the x-factor should match the given x-factor effect size
 - There should be no difference in wasting state remission rates by x-factor exposure status
 - Wasting exposure should be greater among those exposed to the x-factor than those unexposed
+- Wasting exposure should continue to validate to GBD
+
+.. todo::
+
+   Link interactive sim validation notebooks and describe targets
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-   Detail assumptions and limitations related to the x-factor risk effect 
+- We assume wasting recovery rates are not affected by the x-factor
+- In the absence of more detailed evidence, we assume that the increased risk of SAM incidence observed in the Jimma university study attributable to the "x-factor" risk is applied in a compound manner equally from the transition from mild child wasting to MAM (i2) and from MAM to SAM (i1).
+- We are limited in that few studies have evaluated the epidemiology of SAM relapse and even fewer with a true control population that we are using to inform this risk factor in our simulation.
+- We do not model a direct causal effect of an episode of wasting on future episodes of wasting
 
 References
 ----------
 
-.. [Na_2020-x-factor-risk-effect]
+.. [Abitew-et-al-2020]
+   Abitew DB, Worku A, Mulugeta A, Bazzano AN. Rural children remain more at risk of acute malnutrition following exit from community based management of acute malnutrition program in South Gondar Zone, Amhara Region, Ethiopia: a comparative cross-sectional study. PeerJ. 2020 Feb 7;8:e8419. doi: 10.7717/peerj.8419. PMID: 32071802; PMCID: PMC7008819. 
+   `Abitew et al 2020 available here <https://pubmed.ncbi.nlm.nih.gov/32071802/>`_
 
-  View `Na 2020`_
+.. [Abitew-et-al-2020b]
+   Abitew DB, Yalew AW, Bezabih AM, Bazzano AN. Predictors of relapse of acute malnutrition following exit from community-based management program in Amhara region, Northwest Ethiopia: An unmatched case-control study. PLoS One. 2020 Apr 22;15(4):e0231524. doi: 10.1371/journal.pone.0231524. PMID: 32320426; PMCID: PMC7176369. 
+   `Abitew et al 2020b available here <https://pubmed.ncbi.nlm.nih.gov/32320426/>`_
 
-    Maternal nutritional status mediates the linkage between household food insecurity and mid-infancy size in rural Bangladesh
+.. [Adegok-et-al-2020]
+   Adegoke O, Arif S, Bahwere P, Harb J, Hug J, Jasper P, Mudzongo P, Nanama S, Olisenekwu G, Visram A. Incidence of severe acute malnutrition after treatment: A prospective matched cohort study in Sokoto, Nigeria. Matern Child Nutr. 2021 Jan;17(1):e13070. doi: 10.1111/mcn.13070. Epub 2020 Aug 5. PMID: 32761792; PMCID: PMC7729648.
+   `Adegok et al 2020 available here <https://pubmed.ncbi.nlm.nih.gov/32761792/>`_
 
-.. _`Na 2020`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/32102702/
+.. [Chang-et-al-2013]
+   Chang CY, Trehan I, Wang RJ, Thakwalakwa C, Maleta K, Deitchler M, Manary MJ. Children successfully treated for moderate acute malnutrition remain at risk for malnutrition and death in the subsequent year after recovery. J Nutr. 2013 Feb;143(2):215-20. doi: 10.3945/jn.112.168047. Epub 2012 Dec 19. PMID: 23256140; PMCID: PMC3735907.
+   `Chang et al 2013 available here <https://pubmed.ncbi.nlm.nih.gov/23256140/>`_
+
+.. [Lambebo-et-al-2021]
+   Lambebo A, Temiru D, Belachew T. Frequency of relapse for severe acute malnutrition and associated factors among under five children admitted to health facilities in Hadiya Zone, South Ethiopia. PLoS One. 2021 Mar 25;16(3):e0249232. doi: 10.1371/journal.pone.0249232. PMID: 33765081; PMCID: PMC7993841.
+   `Lambebo et al 2021 available here <https://pubmed.ncbi.nlm.nih.gov/33765081/>`_
+
+.. [Stobaugh-et-al-2018]
+   Stobaugh HC, Rogers BL, Webb P, Rosenberg IH, Thakwalakwa C, Maleta KM, Trehan I, Manary MJ. Household-level factors associated with relapse following discharge from treatment for moderate acute malnutrition. Br J Nutr. 2018 May;119(9):1039-1046. doi: 10.1017/S0007114518000363. Epub 2018 Mar 5. PMID: 29502542.
+   `Stobaugh et al 2018 available here <https://pubmed.ncbi.nlm.nih.gov/29502542/>`_
+
+.. [Stobaugh-et-al-2019]
+   Stobaugh HC, Mayberry A, McGrath M, Bahwere P, Zagre NM, Manary MJ, Black R, Lelijveld N. Relapse after severe acute malnutrition: A systematic literature review and secondary data analysis. Matern Child Nutr. 2019 Apr;15(2):e12702. doi: 10.1111/mcn.12702. Epub 2018 Oct 18. PMID: 30246929; PMCID: PMC6587999.
+   `Stobaugh et al 2019 available here <https://pubmed.ncbi.nlm.nih.gov/30246929/>`_
+   
+.. [Trehan-et-al-2015]
+   Trehan I, Banerjee S, Murray E, Ryan KN, Thakwalakwa C, Maleta KM, Manary MJ. Extending supplementary feeding for children younger than 5 years with moderate acute malnutrition leads to lower relapse rates. J Pediatr Gastroenterol Nutr. 2015 Apr;60(4):544-9. doi: 10.1097/MPG.0000000000000639. PMID: 25419681; PMCID: PMC4380557.
+   `Trehan et al 2015 available here <https://pubmed.ncbi.nlm.nih.gov/25419681/>`_
