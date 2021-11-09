@@ -153,6 +153,10 @@ Scale up (immediate, not temporal) the 'effective-coverage' of GAM treatment fro
 
 Note: we apply an immediate scale-up rather than a temporal scale-up for now.
 
+.. todo::
+
+  Update to reflect linear scale-up over three years.
+
 See linked documentation for more information :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
 .. list-table:: Effective coverage of GAM treatment program
