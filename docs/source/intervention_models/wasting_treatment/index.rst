@@ -386,6 +386,8 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
   Update figure to new parameter names. Update was made to distinguish difference between these parameters (for wasting treatment model) and the related parameters for the wasting exposure model.
 
+.. _untreated-sam-time-to-recovery-reference-label:
+
 .. list-table:: Annual recovery rate equations
   :header-rows: 1
 
