@@ -142,20 +142,20 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 4.1 Simulation scenarios
 ------------------------
 
+.. note::
+
+  For all alternative scenarios, intervention coverage and/or efficacy parameters should scale according to the following algorithm: 
+
+    Intervention parameters should start at the baseline level at the beginning of the simulation on 1/1/2022 and remain at that level until 12/31/2022, at which point they should begin to scale linearly to the alternative scenario values over the course of three years from 1/1/2023, reaching the alternative scenario values on 12/31/2025 and should be held constant at this level until the end of the simulation on 12/31/2026.
+
 **Baseline**
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
 
 **Alternative scenario 1**
-Scale up (immediate, not temporal) the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease with a shorter duration (prevalence ~ incidence x duration).
+Scale up of the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease with a shorter duration (prevalence ~ incidence x duration).
 
 | Effective coverage = treatment coverage x treatment efficacy
 | Not effectively covered = 1 - (treatment coverage x treatment efficacy)
-
-Note: we apply an immediate scale-up rather than a temporal scale-up for now.
-
-.. todo::
-
-  Update to reflect linear scale-up over three years.
 
 See linked documentation for more information :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
