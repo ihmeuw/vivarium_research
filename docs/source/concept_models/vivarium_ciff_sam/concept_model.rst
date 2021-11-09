@@ -421,10 +421,13 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Investigate (may be same issue as diarrheal diseases)
    * - `Underestimation of wasting treatment coverage among wasted states <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/2021_10_29a_ciff_sam_v4.1_vv_wasting_treatment_coverage.ipynb>`_
      - Fixed treatment coverage associated with less wasting, so coverage becomes lower among wasted states, which is inconsitent with definition of treatment coverage from the literature
-     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration (PR to follow)
+     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration (PR to follow). This should not be done until the x-factor updates are made and the wasting relapse rate validation is finalized.
    * - Wasting relapse rates/calibration issues/MAM exposure underestimation
      - X-factor PAF calculation bug (resolved, but not yet run) and age-dependent x-factor exposure intialization issue
      - [1] Ali to update x-factor exposure documentation to avoid age-dependent exposure and select calibration values, [2] Rajan to rerun sim with these updates.
+   * - Intervention scale-up and coverage targets out of date
+     - After discussion with CIFF/UNICEF, we would like to update our intervention scale-up dynamics and target intervention parameters.
+     - Update simulation according to the `changes in this PR <https://github.com/ihmeuw/vivarium_research/pull/678>`_ after the updates to the x-factor and wasting model calibration are made and finalized.
 
 .. todo::
 
