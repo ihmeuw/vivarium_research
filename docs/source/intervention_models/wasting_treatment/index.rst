@@ -514,11 +514,19 @@ Deriving :math:`r_{SAM,ux}` using the following equations:
 
 #. :math:`r_{SAM,tx} = 1 / \text{time to recovery}_\text{effectively treated SAM}`
 
-#. :math:`1 / \text{time to recovery}_\text{overall SAM} =  1 / \text{time to recovery}_\text{effectively treated SAM} * C_{SAM} * E_{SAM} + 1 / \text{time to recovery}_\text{untreated SAM} * (1 - C_{SAM} * E_{SAM})`
+#. 
 
-#. :math:`1 / duration_\text{overall SAM} = 1 / \text{time to recovery}_\text{overall SAM} + mortality_{SAM|a,s,l,y}`
+.. math::
 
-#. :math:`duration_\text{overall SAM} = 365 / k`
+  1 / \text{time to recovery}_\text{overall SAM} =  
+
+  1 / \text{time to recovery}_\text{effectively treated SAM} * C_{SAM} * E_{SAM} 
+
+  + 1 / \text{time to recovery}_\text{untreated SAM} * (1 - C_{SAM} * E_{SAM})
+
+4. :math:`1 / duration_\text{overall SAM} = 1 / \text{time to recovery}_\text{overall SAM} + mortality_{SAM|a,s,l,y}`
+
+5. :math:`duration_\text{overall SAM} = 365 / k`
 
 So...
 

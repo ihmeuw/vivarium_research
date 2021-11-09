@@ -171,15 +171,15 @@ See linked documentation for more information :ref:`Treatment and management for
     - 70% (95% CI: 64, 76)
     - 0.488 x 0.7 = 0.34
     - 1 - 0.34 = 0.66
-    - [Isanaka_etal_2021]_ , [Zw_2020]_
+    - coverage: [Isanaka_etal_2021]_ , efficacy: [Zw_2020]_
     - This is for SAM-OTP which is ~98% of SAM.
   * - SAM alternative
     - 70%
     - 75%
     - 0.7 x 0.75 = 0.53
     - 1 - 0.53 = 0.47
-    - Sphere standards
-    - Sphere guideline for efficacy only
+    - Sphere standards for efficacy; discussion with CIFF/UNICEF for coverage
+    - 
   * - MAM baseline
     - 15% (95% CI: 10, 20)
     - 73.1% (95% CI:58.5-87.7) for RUSF
@@ -192,8 +192,8 @@ See linked documentation for more information :ref:`Treatment and management for
     - 75% for RUSF
     - 0.7 x 0.75 = 0.53
     - 1 - 0.53 = 0.47
-    - Sphere standards
-    - Sphere guideline for efficacy only
+    - Sphere standards for efficacy; discussion with CIFF/UNICEF for coverage
+    - 
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.

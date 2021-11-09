@@ -660,8 +660,8 @@ in terms of the following variables:
      - 
    * - :math:`time_to_sam_ux_recovery`
      - Without treatment or death, average days spent in SAM before recovery
-     - See the definition on the :ref:`wasting treatment intervention document <intervention_wasting_treatment>`
-     - 
+     - :math:`365 / r_{SAM,ux}`
+     - :math:`r_{SAM,ux}` defined in the "Annual recovery rate equations" table in the :ref:`wasting treatment intervention document <intervention_wasting_treatment>`
    * - :math:`time_to_sam_tx_recovery`
      - With treatment and without death, average days spent in SAM before recovery
      - 48.3
