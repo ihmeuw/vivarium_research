@@ -190,7 +190,7 @@ See linked documentation for more information :ref:`Treatment and management for
   * - MAM alternative
     - 70%
     - 75% for RUSF
-    - 0.9 x 0.75 = 0.53
+    - 0.7 x 0.75 = 0.53
     - 1 - 0.53 = 0.47
     - Sphere standards
     - Sphere guideline for efficacy only
