@@ -142,16 +142,24 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 4.1 Simulation scenarios
 ------------------------
 
+.. note::
+
+  For all alternative scenarios, intervention coverage and/or efficacy parameters should scale according to the following algorithm: 
+
+    Intervention parameters should start at the baseline level at the beginning of the simulation on 1/1/2022 and remain at that level until 12/31/2022.
+    
+    Intervention parameters should then begin to scale linearly from the baseline level to the alternative scenario values over the course of three years starting on 1/1/2023 and  reaching the alternative scenario values on 12/31/2025.
+    
+    Intervention parameters should then be held constant at the alternative scenario values from 1/1/2026 until the end of the simulation on 12/31/2026.
+
 **Baseline**
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
 
 **Alternative scenario 1**
-Scale up (immediate, not temporal) the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease with a shorter duration (prevalence ~ incidence x duration).
+Scale up of the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease with a shorter duration (prevalence ~ incidence x duration).
 
 | Effective coverage = treatment coverage x treatment efficacy
 | Not effectively covered = 1 - (treatment coverage x treatment efficacy)
-
-Note: we apply an immediate scale-up rather than a temporal scale-up for now.
 
 See linked documentation for more information :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
@@ -160,7 +168,7 @@ See linked documentation for more information :ref:`Treatment and management for
   :header-rows: 1
 
   * - Exposure
-    - Treatment coverage (c)
+    - Treatment coverage (C)
     - Treatment efficacy (E)
     - Effectivey covered
     - Not effectively covered
@@ -171,30 +179,29 @@ See linked documentation for more information :ref:`Treatment and management for
     - 70% (95% CI: 64, 76)
     - 0.488 x 0.7 = 0.34
     - 1 - 0.34 = 0.66
-    - [Isanaka_etal_2021]_ , [Zw_2020]_
+    - coverage: [Isanaka_etal_2021]_ , efficacy: [Zw_2020]_
     - This is for SAM-OTP which is ~98% of SAM.
   * - SAM alternative
-    - 90%
+    - 70%
     - 75%
-    - 0.9 x 0.75 = 0.675
-    - 1 - 0.675 = 0.325
-    - Sphere standards
-    - Sphere guideline for efficacy only
+    - 0.7 x 0.75 = 0.53
+    - 1 - 0.53 = 0.47
+    - Sphere standards for efficacy; discussion with CIFF/UNICEF for coverage
+    - 
   * - MAM baseline
-    - 48.8% (95% CI: 37.4, 60.4)
+    - 15% (95% CI: 10, 20)
     - 73.1% (95% CI:58.5-87.7) for RUSF
-    - 0.488 x 0.731 = 0.34
-    - 1 - 0.34 = 0.66
-    - [Ackatia_Armah_2015]_
-    - Baseline coverage of MAM needs to be updated, efficacy comes from trial and may be too optimistic
+    - 0.15 x 0.731 = 0.11
+    - 1 - 0.11 = 0.89
+    - Efficacy: [Ackatia_Armah_2015]_, Coverage: assumption from CIFF/UNICEF
+    - Efficacy comes from trial and may be too optimistic
   * - MAM alternative
-    - 90%
+    - 70%
     - 75% for RUSF
-    - 0.9 x 0.75 = 0.675
-    - 1 - 0.675 = 0.325
-    - Sphere standards
-    - Sphere guideline for efficacy only
-
+    - 0.7 x 0.75 = 0.53
+    - 1 - 0.53 = 0.47
+    - Sphere standards for efficacy; discussion with CIFF/UNICEF for coverage
+    - 
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.
@@ -202,6 +209,10 @@ Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the i
 .. todo::
 
   Consider targeting SQ-LNS coverage to simulants in SAM treatment.
+
+.. todo::
+
+  Consider if 90% intervention coverage is too aspirational
 
 **Alternative scenario 3**
 Scale up of LBWSG interventions from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 2.
