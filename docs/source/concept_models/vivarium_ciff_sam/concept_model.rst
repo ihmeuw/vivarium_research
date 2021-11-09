@@ -146,7 +146,11 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 
   For all alternative scenarios, intervention coverage and/or efficacy parameters should scale according to the following algorithm: 
 
-    Intervention parameters should start at the baseline level at the beginning of the simulation on 1/1/2022 and remain at that level until 12/31/2022, at which point they should begin to scale linearly to the alternative scenario values over the course of three years from 1/1/2023, reaching the alternative scenario values on 12/31/2025 and should be held constant at this level until the end of the simulation on 12/31/2026.
+    Intervention parameters should start at the baseline level at the beginning of the simulation on 1/1/2022 and remain at that level until 12/31/2022.
+    
+    Intervention parameters should then begin to scale linearly from the baseline level to the alternative scenario values over the course of three years starting on 1/1/2023 and  reaching the alternative scenario values on 12/31/2025.
+    
+    Intervention parameters should then be held constant at the alternative scenario values from 1/1/2026 until the end of the simulation on 12/31/2026.
 
 **Baseline**
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
