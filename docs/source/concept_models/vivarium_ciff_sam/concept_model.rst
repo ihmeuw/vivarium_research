@@ -440,7 +440,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - On hold
    * - `Underestimation of wasting treatment coverage among wasted states <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/2021_10_29a_ciff_sam_v4.1_vv_wasting_treatment_coverage.ipynb>`_
      - Fixed treatment coverage associated with less wasting, so coverage becomes lower among wasted states, which is inconsitent with definition of treatment coverage from the literature
-     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration (PR to follow). This should not be done until the x-factor updates are made and the wasting relapse rate validation is finalized.
+     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration `as described in this PR <https://github.com/ihmeuw/vivarium_research/pull/685>`_. This should not be done until the x-factor updates are made and the wasting relapse rate validation is finalized.
      - Following x-factor/wasting relapse calibration resolution, but before moving to next model version (LBWSG risk effects)
    * - X-factor/Wasting relapse rates/calibration issues/MAM exposure underestimation
      - X-factor PAF calculation bug (resolved, but not yet run) and age-dependent x-factor exposure intialization issue
