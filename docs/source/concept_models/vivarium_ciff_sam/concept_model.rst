@@ -417,7 +417,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - [1] GBD `risk <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cgf_exposure.pdf>`_ validation lookin good and `cause <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_ validation looking the same as model 4.0. [2] Still issues with definition of treatment coverage (too low in MAM/SAM states). [3] Treatment coverage still underestimated [4] Relapse to MAM/SAM still too high (still need to calibrate to mild->TMREL remission rate and x-factor).
    * - 4.5.3: x-factor targeted exposure
      - mild->TMREL recovery rate updated from 1/1000 to 1/27. x-factor effects: i3=1, i2=3.16, i1=3.16. X-factor exposure dependent on wasting state at initialization: sam=0.6, mam=0.5, mild=0.25, tmrel=0.01
-     - [1] `Underestimating MAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4_calibration_test_exposure.pdf>`_. [2] `GBD cause model validation similar to previous models <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4_calibration_test_cause_verification.pdf>`_. [3] treatment coverage still underestimated [4] Relapse to MAM/SAM more reasonable, still too high from TMREL/mild categories (link to interactive sim notebook). [5] Update made interventions `slightly more effective <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_model_4_calibration_test.ipynb>`_ than `model 4 <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_4.1.ipynb>`_.
+     - [1] `Underestimating MAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4_calibration_test_exposure.pdf>`_... this is likely due to (a) an issue with the code for the x-factor PAF which caused it to not be calculated based on the updated x-factor exposure, and/or (b) the x-factor exposure initialization based on simulants' wasting state at initialization (which will vary by age), causing the exposure to vary by the age at which a simulant was initialized into the model, `as shown here <https://github.com/ihmeuw/vivarium_research_ciff_sam/pull/58>`_ [2] `GBD cause model validation similar to previous models <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4_calibration_test_cause_verification.pdf>`_. [3] treatment coverage still underestimated [4] Relapse to MAM/SAM more reasonable, still too high from TMREL/mild categories (link to interactive sim notebook). [5] Update made interventions `slightly more effective <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_model_4_calibration_test.ipynb>`_ than `model 4 <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_4.1.ipynb>`_.
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -425,21 +425,31 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - Issue
      - Explanation
      - Action plan
+     - Timeline
    * - `Underestimation of female PEM CSMR <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_
      - Due to discepancies between GBD 2020 wasting exposure model and GBD 2019 PEM mortality model
      - Update PEM mortality model to GBD 2020 when available
+     - On hold
    * - `Underestimation of diarrheal diseases prevalence <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_
      - GBD diarrheal diseases remission rate divided by prevalence is greater than GBD diarrheal diseases incidence rate
      - Calculate alternative diarrheal diseases remission rate that is consistent with disease duration and mortality rate and update artifact (low priority)
+     - On hold
    * - `Underestimation of lower respiratory infections prevalence <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_
      - Unconfirmed
      - Investigate (may be same issue as diarrheal diseases)
+     - On hold
    * - `Underestimation of wasting treatment coverage among wasted states <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/2021_10_29a_ciff_sam_v4.1_vv_wasting_treatment_coverage.ipynb>`_
      - Fixed treatment coverage associated with less wasting, so coverage becomes lower among wasted states, which is inconsitent with definition of treatment coverage from the literature
-     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration (PR to follow)
-   * - Wasting relapse rates/calibration issues/MAM exposure underestimation
-     - Unconfirmed
-     - Investigate
+     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration (PR to follow). This should not be done until the x-factor updates are made and the wasting relapse rate validation is finalized.
+     - Following x-factor/wasting relapse calibration resolution, but before moving to next model version (LBWSG risk effects)
+   * - X-factor/Wasting relapse rates/calibration issues/MAM exposure underestimation
+     - X-factor PAF calculation bug (resolved, but not yet run) and age-dependent x-factor exposure intialization issue
+     - [1] Ali to select calibration values, [2] Rajan to rerun sim with the `updated x-factor exposure documentation <https://github.com/ihmeuw/vivarium_research/pull/682>`_ and selected calibration values
+     - Immediate before moving on to next model version
+   * - Intervention scale-up and coverage targets out of date
+     - After discussion with CIFF/UNICEF, we would like to update our intervention scale-up dynamics and target intervention parameters.
+     - Update simulation according to the `changes in this PR <https://github.com/ihmeuw/vivarium_research/pull/678>`_ after the updates to the x-factor and wasting model calibration are made and finalized.
+     - Following x-factor/wasting relapse calibration resolution, but before moving to next model version (LBWSG risk effects)
 
 .. todo::
 
