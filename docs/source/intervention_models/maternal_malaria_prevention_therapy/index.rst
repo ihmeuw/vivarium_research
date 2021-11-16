@@ -65,6 +65,8 @@ This is considered to be a strong recommendation based on high quality evidence.
     - Yes
     - [Radeva-Petrova-et-al-2014]_. Statistically insignificant reduction in preterm birth
 
+.. _`iptp-baseline-parameters`:
+
 Baseline Coverage Data
 ++++++++++++++++++++++++
 

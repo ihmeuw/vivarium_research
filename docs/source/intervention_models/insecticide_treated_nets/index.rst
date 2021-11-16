@@ -59,6 +59,8 @@ Insecticide treated bed nets effectively reduce malaria incidence (and therefore
     - No
     - Statistically insignificant from [Gamble-et-al-2007]_. Effect entirely mediated through malaria incidence reduction.
 
+.. _`itn-baseline-parameters`:
+
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
@@ -69,20 +71,15 @@ survey of coverage of key malaria control interventions, treatment-seeking behav
   :header-rows: 1
 
   * - Location
-    - Subpopulation
-    - Coverage parameter
-    - Value
+    - :math:`C_\text{malarious areas}`
+    - :math:`p_\text{malarious areas}`
+    - :math:`C_\text{overall}`
     - Note
   * - Ethiopia
-    - Pregnant women in malarious areas
-    - Proportion sleeping under ITNs
-    - 0.44 (SD: 0.021)
-    - Assume normal distribution of uncertainty. SD of uncertainty distribution calculated from :math:`SE = \sqrt{p * (1 - p) / n}`. Data from Ethiopia MIS 2015.
-  * - Ethiopia
-    - Pregnant women
-    - Proportion sleeping under ITNs
-    - 0.6 :math:`\times` the proportion of pregnant women in malarious areas sleeping under ITNs 
-    - Use this value for baseline intervention coverage among the general pregnant population. NOTE: this strategy requires a maximum target intervention coverage level of 60% of the general population of pregnant women.
+    - **0.44 (SD: 0.021), normal distribution of uncertainty.** (SD of uncertainty distribution calculated from :math:`SE = \sqrt{p * (1 - p) / n}`. Data from Ethiopia MIS 2015)
+    - **0.6** (data from Ethiopia MIS 2015)
+    - :math:`C_\text{malarious areas} \times p_\text{malarious areas}`
+    - Use :math:`C_\text{overall}` for simulation coverage proportion
 
 Vivarium Modeling Strategy
 --------------------------
