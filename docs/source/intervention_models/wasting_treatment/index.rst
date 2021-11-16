@@ -631,7 +631,7 @@ and
 Coverage Propensities
 ++++++++++++++++++++++
 
-The coverage propensity for wasting treatment parameters :math:`C` and :math:`E` for any given simulant should update upon each transition between wasting states. 
+The coverage propensity for wasting treatment parameters :math:`C` and :math:`E` for any given simulant should update upon each transition between wasting states (in other words: a new propensity should be drawn from a independent uniform distribution). There should be no correlation between MAM and SAM treatment parameter propensity values.
 
 .. note::
 
