@@ -140,11 +140,12 @@ Please see this memo for a summary of the studies and the effect sizes :download
     - Direct
 
 
+.. _`sqlns-baseline-parameters`:
+
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
-No baseline coverage of SQ-LNS
-
+No baseline coverage of SQ-LNS (0%)
 
 Vivarium Modeling Strategy
 --------------------------
