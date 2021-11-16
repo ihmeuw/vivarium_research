@@ -418,9 +418,6 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 4.5.3: x-factor targeted exposure
      - mild->TMREL recovery rate updated from 1/1000 to 1/27. x-factor effects: i3=1, i2=3.16, i1=3.16. X-factor exposure dependent on wasting state at initialization: sam=0.6, mam=0.5, mild=0.25, tmrel=0.01
      - [1] `Underestimating MAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4_calibration_test_exposure.pdf>`_... this is likely due to (a) an issue with the code for the x-factor PAF which caused it to not be calculated based on the updated x-factor exposure, and/or (b) the x-factor exposure initialization based on simulants' wasting state at initialization (which will vary by age), causing the exposure to vary by the age at which a simulant was initialized into the model, `as shown here <https://github.com/ihmeuw/vivarium_research_ciff_sam/pull/58>`_ [2] `GBD cause model validation similar to previous models <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4_calibration_test_cause_verification.pdf>`_. [3] treatment coverage still underestimated [4] Relapse to MAM/SAM more reasonable, still too high from TMREL/mild categories (link to interactive sim notebook). [5] Update made interventions `slightly more effective <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_model_4_calibration_test.ipynb>`_ than `model 4 <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_4.1.ipynb>`_.
-   * - 4.5.4: x-factor PAF calculation fix and exposure implementation change
-     - mild->TMREL recovery rate updated from 1/27 to 1/75. X-factor exposure refactored to have same propesnity as wasting state initialization propensity and exposure set to 0.32. x-factor effects: i3=1, i2=3.16, i1=3.16. 
-     - [1] `overestimating SAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.4_exposure.pdf>`_. [2] `GBD cause model verification similar to previous models <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.4_cause_verification.pdf>`_. (remaining verification and validation checks have not yet been performed)
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -445,14 +442,14 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Fixed treatment coverage associated with less wasting, so coverage becomes lower among wasted states, which is inconsitent with definition of treatment coverage from the literature
      - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration `as described in this PR <https://github.com/ihmeuw/vivarium_research/pull/685>`_. This should not be done until the x-factor updates are made and the wasting relapse rate validation is finalized.
      - Following x-factor/wasting relapse calibration resolution, but before moving to next model version (LBWSG risk effects)
+   * - X-factor/Wasting relapse rates/calibration issues/MAM exposure underestimation
+     - X-factor PAF calculation bug (resolved, but not yet run) and age-dependent x-factor exposure intialization issue
+     - [1] Ali to select calibration values, [2] Rajan to rerun sim with the `updated x-factor exposure documentation <https://github.com/ihmeuw/vivarium_research/pull/682>`_ and selected calibration values
+     - Immediate before moving on to next model version
    * - Intervention scale-up and coverage targets out of date
      - After discussion with CIFF/UNICEF, we would like to update our intervention scale-up dynamics and target intervention parameters.
      - Update simulation according to the `changes in this PR <https://github.com/ihmeuw/vivarium_research/pull/678>`_ after the updates to the x-factor and wasting model calibration are made and finalized.
      - Following x-factor/wasting relapse calibration resolution, but before moving to next model version (LBWSG risk effects)
-   * - SAM exposure overestimation
-     - Unknown
-     - Investigate
-     - TBD
 
 .. todo::
 
