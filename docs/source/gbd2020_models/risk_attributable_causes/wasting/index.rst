@@ -628,7 +628,7 @@ in terms of the following variables:
      - Notes
    * - :math:`d_i`
      - Death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * time_step)`
+     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * timestep)`
      - 
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
@@ -646,7 +646,7 @@ in terms of the following variables:
      - Proportion of MAM (CAT 2) cases that have treatment coverage
      - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{MAM}`
      - 
-   * - :math:`sam_tx_coverage`
+   * - sam_tx_coverage
      - Proportion of SAM (CAT 1) cases that have treatment coverage
      - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{SAM}`
      - 
