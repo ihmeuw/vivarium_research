@@ -92,6 +92,8 @@ IFA is widely used as a prenatal supplement in most areas of the world and is re
     - Yes (hypothesized effect in the :ref:`BEP simulation <2017_concept_model_vivarium_gates_bep>`). Should not be modeled in simulations using conservative evidence
     - Possible mediation through birthweight/wasting. Low quality evidence.
 
+.. _`maternal-supplementation-baseline-parameters`:
+
 Baseline Coverage Data
 ++++++++++++++++++++++++
 

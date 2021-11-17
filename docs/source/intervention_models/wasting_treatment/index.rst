@@ -409,6 +409,8 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
 .. _`parameter values table`:
 
+.. _`wasting-treatment-baseline-parameters`:
+
 .. list-table:: Parameter Values
   :header-rows: 1
 
@@ -576,6 +578,12 @@ Affected Outcomes
 
 The Vivarium modeling strategy above details how to solve for the transition rates among the covered uncovered populations. However, the wasting treatment intervention will be implemented as a variable that affects the relative risk of certain transition rates between wasting states in the :ref:`dynamic wasting model <2020_risk_exposure_wasting_state_exposure>`. The following table details the relative risks for each dynamic wasting model transition rate that is affected by wasting treatment based on a given treatment category.
 
+.. warning::
+
+  The :math:`E_{SAM}` and :math:`E_{MAM}` parameters vary between baseline and alterantive scenarios for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` (see the :ref:`alternative scenario values here <wasting-treatment-alterative-scenario-values>`). This will cause the rate at which simulants covered by MAM/SAM treatment transition through the treated and untreated pathways to vary by scenario (the treated pathway transition rate will be greater and the untreated pathway transition rate will be lower in the alternative scenario relative to the the baseline scenario). This should be reflected in the implementation of the treatment model (such as separate intervention "risk factor" components for baseline and alternative treatments).
+
+  Also, :math:`E_{SAM}` and :math:`E_{MAM}` fractions may depend on diarrheal status in later model builds.
+
 .. list-table:: Wasting transition rate relative risks for wasting treatment
   :header-rows: 1
 
@@ -638,39 +646,6 @@ Coverage Propensities
   1) coverage among the MAM and SAM states is equal to :math:`C_{MAM}` and :math:`C_{SAM}`
 
   2) simulants who are treated for MAM or SAM once are likely to be treated again and vise versa.
-
-Scenarios
-+++++++++++
-
-.. list-table:: Scenario coverage data (Ethiopia)
-  :header-rows: 1
-
-  * - Parameter
-    - Baseline value
-    - Alternative Value
-    - Note
-  * - :math:`C_{MAM}`
-    - 0.15 (95% CI: 0.1, 0.2)
-    - 0.7
-    -
-  * - :math:`C_{SAM}`
-    - 0.488 (95% CI:0.374-0.604)
-    - 0.7
-    -
-  * - :math:`E_{MAM}`
-    - 0.731 (95% CI:0.585-0.877), normal
-    - 0.75
-    - Sphere standards
-  * - :math:`E_{SAM}`
-    - 0.70 (95% CI:0.64-0.76), normal
-    - 0.75
-    - Sphere standards
-
-.. note::
-
-  Changing the :math:`E_{SAM}` and :math:`E_{MAM}` rates between the baseline and alternative scenarios will change the rate of simulants covered by MAM/SAM treatment that transition through the treated and untreated pathways (the treated pathway transition rate will be greater and the untreated pathway transition rate will be lower in the alternative scenario relative to the the baseline scenario). This should be reflected in the implementation of the treatment model.
-
-  Also, :math:`E_{SAM}` and :math:`E_{MAM}` fractions may depend on diarrheal status in later model builds.
 
 Restrictions
 ++++++++++++

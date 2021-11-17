@@ -644,12 +644,12 @@ in terms of the following variables:
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
    * - :math:`mam_tx_coverage`
      - Proportion of MAM (CAT 2) cases that have treatment coverage
-     - 0.15 (95% CI: 0.1, 0.2)
-     - Potentially to be updated
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{MAM}`
+     - 
    * - :math:`sam_tx_coverage`
      - Proportion of SAM (CAT 1) cases that have treatment coverage
-     - 0.488 (95% CI: 0.374, 0.604)
-     - Potentially to be updated
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{SAM}`
+     - 
    * - :math:`time_to_mam_ux_recovery`
      - Without treatment or death, average days spent in MAM before recovery
      - 63
