@@ -206,6 +206,10 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
     - 0.75
     - Informed by Sphere standards
 
+.. note::
+
+  Rather than scale linearly from between the baseline and alternative scenario values for the :math:`E` parameters, we will instead scale linearly so that 100% of the intervention coverage at the beginning of the scale-up period has efficacy equal to the baseline values (and 0% equal to the alternative scenario values) and 100% of the intervention coverage at the end of the scale-up period has efficacy equal to the alternative scenario values (and 0% equal to the baseline values).
+
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 1. 
 
