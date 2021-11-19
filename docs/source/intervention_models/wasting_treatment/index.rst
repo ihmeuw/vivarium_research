@@ -639,13 +639,13 @@ and
 Coverage Propensities
 ++++++++++++++++++++++
 
-.. todo::
+The coverage propensity for wasting treatment parameter :math:`C` for any given simulant should update upon each transition between wasting states (in other words: a new propensity should be drawn from a independent uniform distribution). There should be no correlation between MAM and SAM treatment parameter propensity values.
 
-  Detail strategy for assigning :math:`C` and :math:`E` parameter propensity values to simulants so that:
+.. note::
 
-  1) coverage among the MAM and SAM states is equal to :math:`C_{MAM}` and :math:`C_{SAM}`
+  This strategy was desgined to avoid the lower wasting treatment coverage among SAM/MAM states than among mild/TMREL states, `as shown here with fixed wasting treatment coverage propensities <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/2021_10_29a_ciff_sam_v4.1_vv_wasting_treatment_coverage.ipynb>`_.
 
-  2) simulants who are treated for MAM or SAM once are likely to be treated again and vise versa.
+  This strategy assumes that simulants who are treated for MAM and SAM once are no more likely to be treated again than simulants who have never been treated for SAM or MAM (despite need).
 
 Restrictions
 ++++++++++++

@@ -152,6 +152,17 @@ Historically, prevention research has primarily focused on stunting, and, as a r
     
     Intervention parameters should then be held constant at the alternative scenario values from 1/1/2026 until the end of the simulation on 12/31/2026.
 
+    The coverage scale-up has been implemented according to the following scheme:
+
+      c_b = baseline coverage
+      c_a = alternative coverage
+      0 <= t <= 1 represents the proportion of time elapsed to total scale-up duration
+      total_coverage(t) = (1-t)*c_b + t*c_a = t*(c_a - c_b) + c_b
+
+      uncovered(t) = 1 - total_coverage(t)
+      baseline_covered(t) = (1-t) * total_coverage(t)
+      alternative_coverage(t) = t * total_coverage(t)
+
 **Baseline**
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario. Baseline coverage/efficacy values for each of the modeled interventions can be found in the following locations:
 
@@ -194,6 +205,10 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
   * - :math:`E_{SAM}`
     - 0.75
     - Informed by Sphere standards
+
+.. note::
+
+  Rather than scale linearly from between the baseline and alternative scenario values for the :math:`E` parameters, we will instead scale linearly so that 100% of the intervention coverage at the beginning of the scale-up period has efficacy equal to the baseline values (and 0% equal to the alternative scenario values) and 100% of the intervention coverage at the end of the scale-up period has efficacy equal to the alternative scenario values (and 0% equal to the baseline values).
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 1. 
