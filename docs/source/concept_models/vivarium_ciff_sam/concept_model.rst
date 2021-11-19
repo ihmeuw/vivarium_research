@@ -164,58 +164,50 @@ Historically, prevention research has primarily focused on stunting, and, as a r
       alternative_coverage(t) = t * total_coverage(t)
 
 **Baseline**
-The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
+The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario. Baseline coverage/efficacy values for each of the modeled interventions can be found in the following locations:
+
+- :ref:`Acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>`: see the :math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}` parameters
+
+- :ref:`Small quantity lipid based nutrient supplements (SQ-LNS) baseline parameters <sqlns-baseline-parameters>`
+
+- :ref:`Maternal Supplementation baseline parameters <maternal-supplementation-baseline-parameters>`: see the value for the proportion of the pregnant population who took *any* antenatal iron in Ethiopia.
+
+- :ref:`Insecticide treated nets baseline parameters <itn-baseline-parameters>`
+
+- :ref:`Intermittent malaria preventive therapy for pregnant women baseline parameters <iptp-baseline-parameters>`: PENDING DECISION TO INCLUDE IN SIMULATION
+
+- Kangaroo care for preterm and low birthweight infants baseline parameters
+
+- Breastfeeding promotion baseline parameters
+
+- Preventive and therapeutic zinc baseline parameters
 
 **Alternative scenario 1**
-Scale up of the 'effective-coverage' of GAM treatment from baseline level of effective-coverage to scenario level of effective-coverage. Those who are 'effectively covered' have a shorter duration of SAM and MAM episodes. In this first alternative scenario, a larger proportion of simulants will be effectivey covered than baseline. Keeping incidence of MAM (i2) and SAM (i1) the same as baseline, we expect the prevalence of SAM and MAM to decrease with a shorter duration (prevalence ~ incidence x duration).
+Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effctive* coverage (:math:`E \times C`) should be greater for all draws in the alterative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
 
-| Effective coverage = treatment coverage x treatment efficacy
-| Not effectively covered = 1 - (treatment coverage x treatment efficacy)
+.. _`wasting-treatment-alterative-scenario-values`:
 
-See linked documentation for more information :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
-
-.. list-table:: Effective coverage of GAM treatment program
-  :widths: 10 10 10 15 15 15 20
+.. list-table:: Wasting treatment and management alterative scenario intervention parameter values
   :header-rows: 1
 
-  * - Exposure
-    - Treatment coverage (C)
-    - Treatment efficacy (E)
-    - Effectivey covered
-    - Not effectively covered
-    - Reference
+  * - Parameter
+    - Alternative scenario value
     - Note
-  * - SAM baseline
-    - 48.8% (95% CI: 37.4, 60.4)
-    - 70% (95% CI: 64, 76)
-    - 0.488 x 0.7 = 0.34
-    - 1 - 0.34 = 0.66
-    - coverage: [Isanaka_etal_2021]_ , efficacy: [Zw_2020]_
-    - This is for SAM-OTP which is ~98% of SAM.
-  * - SAM alternative
-    - 70%
-    - 75%
-    - 0.7 x 0.75 = 0.53
-    - 1 - 0.53 = 0.47
-    - Sphere standards for efficacy; discussion with CIFF/UNICEF for coverage
-    - 
-  * - MAM baseline
-    - 15% (95% CI: 10, 20)
-    - 73.1% (95% CI:58.5-87.7) for RUSF
-    - 0.15 x 0.731 = 0.11
-    - 1 - 0.11 = 0.89
-    - Efficacy: [Ackatia_Armah_2015]_, Coverage: assumption from CIFF/UNICEF
-    - Efficacy comes from trial and may be too optimistic
-  * - MAM alternative
-    - 70%
-    - 75% for RUSF
-    - 0.7 x 0.75 = 0.53
-    - 1 - 0.53 = 0.47
-    - Sphere standards for efficacy; discussion with CIFF/UNICEF for coverage
-    - 
+  * - :math:`C_{MAM}`
+    - 0.7
+    - Informed by discussion with CIFF/UNICEF
+  * - :math:`C_{SAM}`
+    - 0.7
+    - Informed by discussion with CIFF/UNICEF
+  * - :math:`E_{MAM}`
+    - 0.75
+    - Informed by Sphere standards
+  * - :math:`E_{SAM}`
+    - 0.75
+    - Informed by Sphere standards
 
 **Alternative scenario 2**
-Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the intervention coverage in alternative scenario 1. The SQ-LNS intervention will decrease the **incidence rate of MAM** (i2), without affecting duration (assumption). This is expected to further decrease the prevalence of MAM and SAM.
+Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 1. 
 
 .. todo::
 
@@ -226,10 +218,26 @@ Scale up the SQ-LNS for 6 month+ from 0% at baseline to 90% in addition to the i
   Consider if 90% intervention coverage is too aspirational
 
 **Alternative scenario 3**
-Scale up of LBWSG interventions from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 2.
+Scale up of LBWSG intervention parameters (see table below) from baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 2.
+
+.. list-table:: Alternative scenario 3 intervention coverage values
+  :header-rows: 1
+
+  * - Intervention
+    - Coverage value
+    - Note
+  * - :ref:`maternal supplementation <maternal_supplementation_intervention>`
+    - 0.9
+    - Applies to joint coverage of MMS/BEP
+  * - :ref:`insecticide treated nets <insecticide_treated_nets>`
+    - :math:`C_\text{malarious areas} = 0.9`
+    - Overall ITN intervention coverage (:math:`C_\text{overall}`) calculated as :math:`C_\text{malarious areas} \times p_\text{malarious areas}`
+  * - :ref:`intermittent malaria preventive therapy for pregnant women <maternal_malaria_prevention_therapy>`
+    - 0.9
+    - Pending decision to include intervention in simulation
 
 **Alternative scenario 4**
-Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage % (TBD) to 90% in addition to the intervention coverage in alternative scenario 3.
+Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion, and preventive and therapeutic zinc) from baseline coverage to 90% in addition to the intervention coverage in alternative scenario 3.
 
 .. note::
 
@@ -238,6 +246,8 @@ Scale-up of vicious cycle interventions (breast-feeding) from baseline coverage 
 .. note::
 
     In the BEP paper reviewer comments, this 90% was deemed to be too optimistic and we are asked to do some sensitivity analysis around this. Hence, we could model a few coverages eg. 50%, 75%, 90%.
+
+    Consider 70% target for all interventions.
 
 .. _ciff_sam_intervention_timing:
 
@@ -516,29 +526,4 @@ Final outputs to report in manuscript
 
 8.0 References
 +++++++++++++++
-
-.. [Isanaka_etal_2021]
-
-  View `Isanaka 2021`_
-
-    Improving estimates of the burden of severe wasting: analysis of secondary prevalence and incidence data from 352 sites
-
-.. _`Isanaka 2021`: https://gh.bmj.com/content/6/3/e004342
-
-
-.. [Zw_2020]
-
-  View `Zw et al 2020`_
-
-    Treatment outcomes of severe acute malnutrition and predictors of recovery in under-five children treated within outpatient therapeutic programs in Ethiopia: a systematic review and metaanalysis
-
-.. _`Zw et al 2020`: https://bmcpediatr.biomedcentral.com/articles/10.1186/s12887-020-02188-5
-
-.. [Ackatia_Armah_2015]
-
-  View `Ackatia-Armah et al 2015`_
-
-    Malian children with moderate acute malnutrition who are treated with lipid-based dietary supplements have greater weight gains and recovery rates than those treated with locally produced cereal-legume products: a community-based, cluster-randomized trial
-
-.. _`Ackatia-Armah et al 2015`: https://pubmed-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/25733649/
 

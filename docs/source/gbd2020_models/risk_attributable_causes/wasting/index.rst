@@ -583,11 +583,11 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of incidence into cat 3 from cat 4
      - System of equations
    * - r2
-     - 1 - e^(-(1-sam_tx_coverage)*(1/time_to_sam_ux_recovery))
+     - 1 - e^(-(1-sam_tx_coverage*sam_tx_efficacy)*(1/time_to_sam_ux_recovery))
      - Daily probability of remission into cat 2 from cat 1 (untreated)
      - Nicole's calculations; also referred to as r2ux (get lit source!)
    * - r3
-     - 1 - e^(-(mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)))
+     - 1 - e^(-(mam_tx_coverage*mam_tx_efficacy * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage*mam_tx_efficacy)*(1/time_to_mam_ux_recovery)))
      - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
      - Nicole's calculations (get lit source!)
    * - r4
@@ -595,7 +595,7 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of remission from cat 3 into cat 4
      - TO BE UPDATED FOLLOWING MODEL CALIBRATION
    * - t1
-     - 1 - e^(-sam_tx_coverage * (1/time_to_sam_tx_recovery))
+     - 1 - e^(-sam_tx_coverage*sam_tx_efficacy * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
      - Nicole's calculations (get lit source!)
    * - s1
@@ -628,7 +628,7 @@ in terms of the following variables:
      - Notes
    * - :math:`d_i`
      - Death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * time_step)`
+     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * timestep)`
      - 
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
@@ -642,31 +642,39 @@ in terms of the following variables:
      - Adjusted prevalence of :math:`cat_i`
      - :math:`f_i/(ap_0 + 1)`
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
-   * - :math:`mam_tx_coverage`
+   * - mam_tx_coverage
      - Proportion of MAM (CAT 2) cases that have treatment coverage
-     - 0.15 (95% CI: 0.1, 0.2)
-     - Potentially to be updated
-   * - :math:`sam_tx_coverage`
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{MAM}`
+     - 
+   * - sam_tx_coverage
      - Proportion of SAM (CAT 1) cases that have treatment coverage
-     - 0.488 (95% CI: 0.374, 0.604)
-     - Potentially to be updated
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{SAM}`
+     - 
+   * - sam_tx_efficacy
+     - Proportion of children treated for SAM who successfully respond to treatment
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{SAM}`
+     - Baseline scenario value
+   * - mam_tx_efficacy
+     - Proportion of children treated for MAM who successfully respond to treatment
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{MAM}`
+     - Baseline scenario value
    * - :math:`time_to_mam_ux_recovery`
      - Without treatment or death, average days spent in MAM before recovery
-     - 63
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{untreated MAM}`
      - 
-   * - :math:`time_to_mam_tx_recovery`
+   * - time_to_mam_tx_recovery
      - With treatment and without death, average days spent in MAM before recovery
-     - 41.3 (95% CI: 34.4, 49)
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{treated MAM}`
      - 
-   * - :math:`time_to_sam_ux_recovery`
+   * - time_to_sam_ux_recovery
      - Without treatment or death, average days spent in SAM before recovery
      - :math:`365 / r_{SAM,ux}`
      - :math:`r_{SAM,ux}` defined in the :ref:`untreated-sam-time-to-recovery-reference-label` table in the :ref:`wasting treatment intervention document <intervention_wasting_treatment>` 
-   * - :math:`time_to_sam_tx_recovery`
+   * - time_to_sam_tx_recovery
      - With treatment and without death, average days spent in SAM before recovery
-     - 48.3
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{treated SAM}`
      - 
-   * - :math:`time_step`
+   * - time_step
      - Scalar time step conversion to days
      - 1
      -
