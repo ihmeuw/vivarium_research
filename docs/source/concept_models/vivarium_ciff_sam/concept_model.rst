@@ -152,6 +152,17 @@ Historically, prevention research has primarily focused on stunting, and, as a r
     
     Intervention parameters should then be held constant at the alternative scenario values from 1/1/2026 until the end of the simulation on 12/31/2026.
 
+    The coverage scale-up has been implemented according to the following scheme:
+
+      c_b = baseline coverage
+      c_a = alternative coverage
+      0 <= t <= 1 represents the proportion of time elapsed to total scale-up duration
+      total_coverage(t) = (1-t)*c_b + t*c_a = t*(c_a - c_b) + c_b
+
+      uncovered(t) = 1 - total_coverage(t)
+      baseline_covered(t) = (1-t) * total_coverage(t)
+      alternative_coverage(t) = t * total_coverage(t)
+
 **Baseline**
 The baseline scenario will project GBD 2019 demographic and disease trends and GBD 2020 exposure trends out from 2022 to 2027 and coverage rates for all preventive and therapeutic interventions will be held constant across the 5 years of the microsimulation to simulate a business-as-usual treatment scenario.
 
