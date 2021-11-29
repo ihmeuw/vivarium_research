@@ -213,4 +213,81 @@ Discontinued breastfeeding is an ordered polytomous variable, with a rei_id=137.
 Restrictions
 ++++++++++++
 
-.. list-table:: Non-exclusive Breastfeedi
+.. list-table:: Non-exclusive Breastfeeding Exposure Restrictions
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - Age group start
+     - 3
+     - 7-27 days
+   * - Age group end
+     - 389
+     - 6-11 months
+
+.. list-table:: Discontinued Breastfeeding Exposure Restrictions
+   :header-rows: 1
+
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - False
+     -
+   * - YLD only
+     - False
+     -
+   * - YLL only
+     - False
+     -
+   * - Age group start
+     - age_group_id = 388
+     - age_group_name = 1-5 months
+   * - Age group end
+     - age_group_id = 34
+     - age_group_name = 2-4 years
+
+Risk Exposure Model Diagram
++++++++++++++++++++++++++++
+
+.. image:: breastfeeding_risk_hierarchy.svg
+
+Assumptions and Limitations
++++++++++++++++++++++++++++
+
+.. todo::
+   Fill this section
+
+Validation Criteria
++++++++++++++++++++
+
+.. todo::
+   Fill this section
+
+
+References
+----------
+
+.. [GBD-2019-Capstone-Appendix-Breastfeeding]
+   Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249`
+   https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
+
+.. [WHO-Breastfeeding]
+   Horta, B., Voctora, C. (2013) Short-term effects of breastfeeding: a systematic review on the benefits of breastfeeding on diarrhoea and pneumonia mortality. The World Health Organization.
+   https://apps.who.int/iris/bitstream/handle/10665/95585/9789241506120_eng.pdf?sequence=1&isAllowed=y
