@@ -64,14 +64,15 @@ GBD built 6 models to produce each of breastfeeding categories:
 Theoretical minimum risk exposure level
 +++++++++++++++++++++++++++++++++++++++
 For non-exclusive breastfeeding, children aged 0-6 months who received no source 
-of nourishment other than breastmilk (“exclusively breastfed”) were considered to 
+of nourishment other than breastmilk ("exclusively breastfed") were considered to 
 be at the lowest risk of any of the disease outcomes. For discontinued 
 breastfeeding, children aged 6 to 23 months who received any breastmilk as a 
-source of nourishment (“continued breastfed”) were considered to be at the 
+source of nourishment ("any breastfed") were considered to be at the 
 lowest risk of disease outcome.
 
 Assment of risk-outcome pairs
 +++++++++++++++++++++++++++++
+
 .. list-table:: Risk-Outcome Pairs for Suboptimal Breastfeeding
    :header-rows: 1
 
@@ -88,7 +89,89 @@ Relative risk
 +++++++++++++
 GBD estimated relative risks for both non-exclusive and discontinued breastfeeding 
 in a meta-analysis using relative risks from studies compiled in a published 
-review by WHO. [WHO-Breastfeeding]_
+review by WHO. [WHO-Breastfeeding]_ These estimates were produced using the 
+"metareg" package in Stata. They did not estimate separate relative risk for 
+morbidity and mortality. The values are detailed in table below.
+
+.. list-table:: GBD 2020 Non-exclusive Breastfeeding Relative Risk Estimates
+   :header-rows: 1
+
+   * - Outcome
+     - Exposure category
+     - Morbidity/Mortality
+     - Sex
+     - Age
+     - Value
+   * - Diarrheal disease
+     - Exclusive breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 1.0 (1.0-1.0)
+   * - Lower respiratory infection
+     - Exclusive breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 1.0 (1.0-1.0)
+   * - Diarrheal disease
+     - Predominant breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 2.35 (1.67-3.23)
+   * - Lower respiratory infection
+     - Predominant breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 1.37 (1.06-1.80)
+   * - Diarrheal disease
+     - Partial breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 2.63 (1.94-3.48)
+   * - Lower respiratory infection
+     - Partial breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 1.48 (1.21-1.79)
+   * - Diarrheal disease
+     - No breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 3.60 (2.72-4.70)
+   * - Lower respiratory infection
+     - No breastfeeding
+     - Both
+     - Both
+     - 0-5 months
+     - 1.74 (1.49-2.03)
+
+.. list-table:: GBD 2020 Discontinued Breastfeeding Relative Risk Estimates
+   :header-rows: 1
+
+   * - Outcome
+     - Exposure category
+     - Morbidity/Mortality
+     - Sex
+     - Age
+     - Value
+   * - Diarrheal disease
+     - Any breastfeeding
+     - Both
+     - Both
+     - 6-23 months
+     - 1.0 (1.0-1.0)
+   * - Diarrheal disease
+     - Discontinued breastfeeding
+     - Both
+     - Both
+     - 6-23 months
+     - 1.31 (1.11-1.55)
 
 .. code-block:: Python
 
@@ -130,80 +213,4 @@ Discontinued breastfeeding is an ordered polytomous variable, with a rei_id=137.
 Restrictions
 ++++++++++++
 
-.. list-table:: Non-exclusive Breastfeeding Exposure Restrictions
-   :header-rows: 1
-
-   * - Restriction Type
-     - Value
-     - Notes
-   * - Male only
-     - False
-     -
-   * - Female only
-     - False
-     -
-   * - YLD only
-     - False
-     -
-   * - YLL only
-     - False
-     -
-   * - Age group start
-     - 3
-     - 7-27 days
-   * - Age group end
-     - 389
-     - 6-11 months
-
-.. list-table:: Discontinued Breastfeeding Exposure Restrictions
-   :header-rows: 1
-
-   * - Restriction Type
-     - Value
-     - Notes
-   * - Male only
-     - False
-     -
-   * - Female only
-     - False
-     -
-   * - YLD only
-     - False
-     -
-   * - YLL only
-     - False
-     -
-   * - Age group start
-     - age_group_id = 388
-     - age_group_name = 1-5 months
-   * - Age group end
-     - age_group_id = 34
-     - age_group_name = 2-4 years
-
-Risk Exposure Model Diagram
-+++++++++++++++++++++++++++
-
-.. image:: breastfeeding_risk_hierarchy.svg
-
-Assumptions and Limitations
-+++++++++++++++++++++++++++
-
-.. todo::
-   Fill this section
-
-Validation Criteria
-+++++++++++++++++++
-
-.. todo::
-   Fill this section
-
-
-References
-----------
-
-.. [GBD-2019-Capstone-Appendix-Breastfeeding]
-   Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249`
-   https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
-
-.. [WHO-Breastfeeding]
-   Horta, B., Voctora, C. (2013) Short-term effects of breastfeeding: a systematic review on the benefits of breastfeeding on diarrhoea and pneumonia mortality. The World Health Organ
+.. list-table:: Non-exclusive Breastfeedi
