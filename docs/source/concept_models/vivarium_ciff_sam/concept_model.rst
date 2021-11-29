@@ -446,6 +446,9 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 4.5.4: x-factor PAF calculation fix and exposure implementation change
      - mild->TMREL recovery rate updated from 1/27 to 1/75. X-factor exposure refactored to have same propesnity as wasting state initialization propensity and exposure set to 0.32. x-factor effects: i3=1, i2=3.16, i1=3.16. 
      - [1] `overestimating SAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.4_exposure.pdf>`_. [2] `GBD cause model verification similar to previous models <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.4_cause_verification.pdf>`_. [3] `X-factor among the SAM state is lower than expected based on updated x-factor exposure parameterization <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/2021_11_15b_v4.5.4_vv_x_factor_prevalence.ipynb>`_. [4] treatment coverage still underestimated [5] Relapse to MAM/SAM more reasonable, still too high from TMREL/mild categories (link to interactive sim notebook). 
+   * - 4.5.5
+     - mild->TMREL recovery rate updated from 1/75 to 1/30, x-factor exposure updated from 0.32 to 0.5, x-factor effects: i3=1, i2=3.16, i1=3.16. X-factor exposure among SAM state bugfix from model 4.5.4. Treatment coverage propensity updated to reset upon each wasting transition in accordance with `this  PR <https://github.com/ihmeuw/vivarium_research/pull/685>`_. `Treatment coverage values <https://github.com/ihmeuw/vivarium_research/pull/678>`_ and `scale-up <https://github.com/ihmeuw/vivarium_research/pull/683/files>`_.
+     - [1] `overestimating SAM and underestimating MAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_exposure.pdf>`_, although `less than in model 4.5.4 <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.4_exposure.pdf>`_. [2] `GBD cause model verification for 4.5.5 similar to previous models <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_cause_verification.pdf>`_. [3] `x-factor exposure now validating <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/995932712e89769a14187490bf9047c5f94ca178/model_validation/model4/2021_11_24b_v4.5.5_vv_x_factor_prevalence.ipynb>`_. [4] `x-factor effect to SAM slightly overestimated <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/995932712e89769a14187490bf9047c5f94ca178/model_validation/model4/2021_11_24a_v4.5.5_vv_x_factor_wasting_incidence_rate_ratio.ipynb>`_. [5] treatment coverage validation TBD (link to validation notebook). [6] Relapse to MAM/SAM TBD (link to interactive sim notebook). 
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -466,18 +469,14 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Unconfirmed
      - Investigate (may be same issue as diarrheal diseases)
      - On hold
-   * - `Underestimation of wasting treatment coverage among wasted states <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/2021_10_29a_ciff_sam_v4.1_vv_wasting_treatment_coverage.ipynb>`_
-     - Fixed treatment coverage associated with less wasting, so coverage becomes lower among wasted states, which is inconsitent with definition of treatment coverage from the literature
-     - Update treatment coverage propensity strategy to reset upon each transition to MAM or SAM following updates related to x-factor and calibration (PR to follow). This should not be done until the x-factor updates are made and the wasting relapse rate validation is finalized.
-     - Implemented, but not yet run
-   * - Intervention scale-up and coverage targets out of date
-     - After discussion with CIFF/UNICEF, we would like to update our intervention scale-up dynamics and target intervention parameters.
-     - Update simulation according to the `changes in this PR <https://github.com/ihmeuw/vivarium_research/pull/678>`_ after the updates to the x-factor and wasting model calibration are made and finalized.
-     - Implemented, but not yet run
-   * - Overestimation of SAM exposure
-     - X-factor exposure for the SAM state was not updated fully from the previous model iteration (update from model 4.5.3 to 4.5.4)
-     - Rajan implement bugfix
-     - Implemented, but not yet run
+   * - `Overestimating SAM and underestimation of MAM exposure <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_exposure.pdf>`_ 
+     - Unconfirmed
+     - Investigate
+     - TBD
+   * - `Overestimating x-factor effect to SAM <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/995932712e89769a14187490bf9047c5f94ca178/model_validation/model4/2021_11_24a_v4.5.5_vv_x_factor_wasting_incidence_rate_ratio.ipynb>`_ 
+     - Unconfirmed
+     - Investigate
+     - TBD
 
 .. todo::
 
