@@ -150,12 +150,14 @@ Where:
      - 
    * - i3
      - susceptible to child wasting
-     - 0.47
+     - 0.45
      - Since the relative risk for this transition is equal to one, the impact of this value should be inconsequential 
 
-.. todo::
+.. note::
 
-   add description of why we chose this strategy that links to appropriate notebooks and implications of strategy.
+   This custom PAF calculation strategy was chosen due to the `underestimation of MAM and overestimation of SAM child wasting exposure states in model version 4.5.5 of the acute malnutrition simulation <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_exposure.pdf>`_. This appeared to be a result of an overestimation of the transition rate between MAM to SAM (i1) as a result of the higher x-factor exposure present in the MAM wasting state than the general population, `as shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/4.5.5_v_4.5.6_wasting_transition_rates.ipynb>`_.
+
+   The values in the table below are the x-factor exposures specific to the source wasting state for each wasting transition, as calculated among ages 6 months to 5 years after the first "burn-in" year of the simulation run.
 
 .. note::
 
