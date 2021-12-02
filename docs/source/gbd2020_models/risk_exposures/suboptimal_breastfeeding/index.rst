@@ -12,6 +12,7 @@ non-exclusive breastfeeding and discontinued breastfeeding.
 **Non-exclusive breastfeeding** is defined as the proportion of children under 6 
 months of age who are not exclusively breastfed. GBD divides those not exclusively 
 breastfed into three categories: predominant, partial, and no breastfeeding.
+
  - Predominant breastfeeding is the proportion of children whose predominant 
    source of nourishment is breastmilk but also receive other liquids.
  - Partial breastfeeding is the proportion of children who receive breastmilk 
@@ -54,6 +55,7 @@ of new under-5 age groups, they incorporated the three age groups into a single
 model of “any breastfeeding.” This allowed them to borrow additional strength 
 over space, age, and time by incorporating data from all sources in one model. 
 GBD built 6 models to produce each of breastfeeding categories:
+
  1. proportion of currently breastfeeding infants 0-5 months
  2. proportion of currently breastfeeding infants 6-11 months
  3. proportion of currently breastfeeding infants 12-23 months
@@ -285,7 +287,7 @@ References
 ----------
 
 .. [GBD-2019-Capstone-Appendix-Breastfeeding]
-   Appendix_ to: `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249`
+   Appendix to `GBD 2019 Risk Factors Collaborators. Global burden of 87 risk factors in 204 countries and territories, 1990–2019; a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1223-1249`
    https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
 
 .. [WHO-Breastfeeding]
