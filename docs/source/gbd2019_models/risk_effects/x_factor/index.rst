@@ -88,32 +88,32 @@ Given the evidence from the Tsineal et al. 2015/Jimma University study reported 
      - Exposed (cat1)
      - Relative risk (RR)
      - :math:`\sqrt{10}`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i1
      - Unexposed (cat2)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i2
      - Exposed (cat1)
      - Relative risk (RR)
      - :math:`\sqrt{10}`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i2
      - Unexposed (cat2)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i3
      - Exposed (cat1)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i3
      - Unexposed (cat2)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
 
 .. todo::
    
@@ -127,11 +127,35 @@ For each incidence rate :math:`i(n)` in the dynamic wasting exposure model (i1, 
 
 .. math::
 
-   PAF_\text{i(n)} = \frac{RR_\text{i(n),cat1} * p_\text{cat1} + RR_\text{i(n),cat2} * (1 - p_\text{cat1}) - 1}{RR_\text{i(n),cat1} * p_\text{cat1} + RR_\text{i(n),cat2} * (1 - p_\text{cat1})}
+   PAF_\text{i(n)} = \frac{RR_\text{i(n),cat1} * p_\text{cat1|source wasting state} + RR_\text{i(n),cat2} * (1 - p_\text{cat1|source wasting state}) - 1}{RR_\text{i(n),cat1} * p_\text{cat1|source wasting state} + RR_\text{i(n),cat2} * (1 - p_\text{cat1|source wasting state})}
 
 Where:
 
-- :math:`p_\text{cat1}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>`
+- :math:`p_\text{cat1|source wasting state}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>` among the source state for the relevant transition. Values shown in the table below:
+
+.. list-table:: X-factor risk effects
+   :header-rows: 1
+
+   * - Transition
+     - Source wasting state
+     - :math:`p_\text{cat1}` value
+     - Note
+   * - i1
+     - moderate acute malnutrition
+     - 0.78
+     - 
+   * - i2
+     - mild child wasting
+     - 0.54
+     - 
+   * - i3
+     - susceptible to child wasting
+     - 0.47
+     - Since the relative risk for this transition is equal to one, the impact of this value should be inconsequential 
+
+.. todo::
+
+   add description of why we chose this strategy that links to appropriate notebooks and implications of strategy.
 
 .. note::
 
