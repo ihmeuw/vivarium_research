@@ -474,12 +474,12 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - On hold
    * - `Overestimating SAM and underestimation of MAM exposure in runs with x-factor present <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_exposure.pdf>`_ 
      - Related to higher x-factor exposure among MAM state than among the general population which is used for the PAF calculation, causing inflated incidence rate from MAM to SAM. `Details shown in the notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/4.5.5_v_4.5.6_wasting_transition_rates.ipynb>`_.
-     - Update x-factor exposure for PAF calculation of the i1 incidence rate to 0.777 (MAM-specific x-factor exposure) rather than 0.5 (population exposure)
-     - ASAP
+     - Update x-factor exposure for PAF calculation of the i1 incidence rate to 0.78 (MAM-specific x-factor exposure) and the i2 incidence rate to 0.54 (mild-specific x-factor exposure) rather than 0.5 (population exposure), `as described in this PR <https://github.com/ihmeuw/vivarium_research/pull/695>`_
+     - ASAP (to be implemented in model 4.5.7)
    * - `Overestimating x-factor effect to SAM <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/995932712e89769a14187490bf9047c5f94ca178/model_validation/model4/2021_11_24a_v4.5.5_vv_x_factor_wasting_incidence_rate_ratio.ipynb>`_ 
-     - Unconfirmed -- could be a result of the above issue?
-     - Investigate
-     - TBD
+     - Unconfirmed. Unclear if the magnitude is within acceptable range. 
+     - Revaluate after model 4.5.7 results
+     - On hold
 
 .. todo::
 
