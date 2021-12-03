@@ -333,6 +333,8 @@ Vivarium Modeling Strategy
    :ref:`Low Birthweight and Short Gestation (GBD 2019)
    <2019_risk_exposure_lbwsg>` page.
 
+.. _lbwsg_2019_rr_interpolation_section:
+
 Interpolation of LBWSG Relative Risks
 +++++++++++++++++++++++++++++++++++++
 
@@ -837,11 +839,14 @@ using ``get_draws``:
 PAF Calculation for Interpolated Relative Risks
 +++++++++++++++++++++++++++++++++++++++++++++++
 
-Since the interpolated relative risk function is different from the piecewise
-constant relative risk function used by GBD, we will need to compute our own
-population attributable fraction (PAF) for the interpolated relative risks
-rather than using the PAF calculated by GBD. As always, the formula for the PAF
-is
+The Population Attributable Fraction (PAF) is used to compute "risk-deleted"
+transiton rates in our simulations. In the present context, the deleted risk
+will be LBWSG, and the affected rate will be the simulants' mortality hazard.
+Since the interpolated relative risk function described :ref:`above
+<lbwsg_2019_rr_interpolation_section>` is different from the piecewise constant
+relative risk function used by GBD, we will need to compute our own PAF for the
+interpolated relative risks rather than using the PAF calculated by GBD. As
+always, the formula for the PAF is
 
 .. math::
 
