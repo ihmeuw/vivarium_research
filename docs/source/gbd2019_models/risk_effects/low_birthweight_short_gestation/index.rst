@@ -837,6 +837,36 @@ using ``get_draws``:
 PAF Calculation for Interpolated Relative Risks
 +++++++++++++++++++++++++++++++++++++++++++++++
 
+Since the interpolated relative risk function is different from the piecewise
+constant relative risk function used by GBD, we will need to compute our own
+population attributable fraction (PAF) for the interpolated relative risks
+rather than using the PAF calculated by GBD. As always, the formula for the PAF
+is
+
+.. math::
+
+  \mathrm{PAF}
+  = \frac{E(\mathit{RR}) - 1}{E(\mathit{RR})}
+  = 1 - \frac{1}{E(\mathit{RR})}
+  = 1 - \frac{1}{\int \mathit{RR}\, d\rho},
+
+where :math:`\textit{RR}` is the relative risk function, :math:`\rho` is the
+risk exposure distribution, and :math:`E` is expectation with respect to the
+probability measure :math:`\rho`. Thus the PAF computation comes down to
+computing an integral representing the average relative risk in the population.
+In our case the relevant integral is
+
+.. math::
+
+  \int \mathit{RR}\, d\rho
+  = \int_{\mathrm{GA}\times \mathrm{BW}}
+    \mathit{RR}(x,y)\, d\rho(x,y),
+
+where :math:`\mathrm{GA} = [0,42\text{wk}]` and :math:`\mathrm{BW} =
+[0,4500\text{g}]`, and :math:`\mathit{RR}(x,y)` is the interpolated relative
+risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
+\mathrm{BW}`.
+
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
 
