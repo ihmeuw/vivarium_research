@@ -834,6 +834,9 @@ using ``get_draws``:
 .. _Notebook comparing 2-step interpolations: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
 .. _LBWSGRiskEffectRBVSpline class: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
 
+PAF Calculation for Interpolated Relative Risks
++++++++++++++++++++++++++++++++++++++++++++++++
+
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
 
