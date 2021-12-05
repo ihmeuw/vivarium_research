@@ -871,7 +871,12 @@ In our case the relevant integral is
 where :math:`\mathrm{GA} = [0,42\text{wk}]` and :math:`\mathrm{BW} =
 [0,4500\text{g}]`, :math:`\mathit{RR}(x,y)` is the interpolated relative
 risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
-\mathrm{BW}`, and :math:`d\rho(x,y) / dx\,dy` is the probability density of the point :math:`(x,y)\in \mathrm{GA}\times \mathrm{BW}`. That is,
+\mathrm{BW}`, and :math:`\rho` is the LBWSG exposure distribution.
+
+Note that the above formula employs the notation ":math:`d\rho`" from measure
+theory. To compute the integral, we can rewrite :math:`d\rho(x,y)` in terms of
+the probability density function for the LBWSG exposure distribution
+:math:`\rho`:
 
 .. math::
 
@@ -879,7 +884,9 @@ risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
   = \frac{d\rho(x,y)}{dx\, dy}\, dx\, dy
   = p(x,y)\, dx\, dy,
 
-where :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability density function for the LBWSG exposure distribution :math:`\rho`.
+where :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability density of the
+point :math:`(x,y)\in \mathrm{GA}\times \mathrm{BW}`, according to the LBWSG
+exposure distibution from GBD.
 
 Computing the PAF via Monte Carlo Integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
