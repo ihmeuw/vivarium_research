@@ -845,8 +845,9 @@ will be LBWSG, and the affected rate will be the simulants' mortality hazard.
 Since the interpolated relative risk function described :ref:`above
 <lbwsg_2019_rr_interpolation_section>` is different from the piecewise constant
 relative risk function used by GBD, we will need to compute our own PAF for the
-interpolated relative risks rather than using the PAF calculated by GBD. As
-always, the formula for the PAF is
+interpolated relative risks rather than using the PAF calculated by GBD.
+
+As always, the formula for the PAF is
 
 .. math::
 
@@ -868,9 +869,20 @@ In our case the relevant integral is
     \mathit{RR}(x,y)\, d\rho(x,y),
 
 where :math:`\mathrm{GA} = [0,42\text{wk}]` and :math:`\mathrm{BW} =
-[0,4500\text{g}]`, and :math:`\mathit{RR}(x,y)` is the interpolated relative
+[0,4500\text{g}]`, :math:`\mathit{RR}(x,y)` is the interpolated relative
 risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
-\mathrm{BW}`.
+\mathrm{BW}`, and :math:`d\rho(x,y) / dx\,dy` is the probability density of the point :math:`(x,y)\in \mathrm{GA}\times \mathrm{BW}`. That is,
+
+.. math::
+
+  d\rho(x,y)
+  = \frac{d\rho(x,y)}{dx\, dy}\, dx\, dy
+  = p(x,y)\, dx\, dy,
+
+where :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability density function for the LBWSG exposure distribution :math:`\rho`.
+
+Computing the PAF via Monte Carlo Integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
