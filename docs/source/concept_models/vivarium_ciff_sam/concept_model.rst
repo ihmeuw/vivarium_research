@@ -349,13 +349,9 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 
 * :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
 
-* :ref:`Maternal BMI and x-factor <2019_risk_correlation_maternal_bmi_x_factor>`
+* Correlation between x-factor and child wasting exposure, described on the :ref:`x-factor exposure page <2019_risk_exposure_x_factor>`
 
-.. todo::
-
-  Update to reflect x-factor correlation with wasting exposure rather than with maternal BMI
-
-The following diagram represents the resulting model correlation structure in our simulation (including the x-factor risk effect on wasting incidence rates, which is described in the next section of this document). The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
+The following diagram represents the resulting model correlation structure in our simulation. The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
 
 .. image:: correlation_structure.svg
 
@@ -484,19 +480,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 
 .. _5.4:
 
-5.4 X-Factor
-------------
-
-As noted on the :ref:`wasting x-factor risk effects page <2019_risk_effect_x_factor>`, the risk effect value of 1.3 should be used for simulation model runs until consensus is reached on x-factor effect magnitude or the model is ready for simulation results for the full range of sensitivity analysis values.
-
-.. todo::
-
-  Perform data-driven calibration of the x-factor effect size according to this strategy: (1) identify one or more measurable quantities that vary when effect size varies (e.g. average number of SAM treatments per unique children with SAM during a single year period); (2) compare measurements of quantity/quantities to value(s) estimated by simulation for a grid of x-factor effect size values; and choose effect size that makes simulation produce quantity/quantities most similar to empirical measurement(s).
-
-
-.. _5.5:
-
-5.5 Desired outputs
+5.4 Desired outputs
 -------------------
 
 Final outputs to report in manuscript
@@ -510,9 +494,9 @@ Final outputs to report in manuscript
 
   draft table to be refined
 
-.. _5.6:
+.. _5.5:
 
-5.6 Simulation output table
+5.5 Simulation output table
 ---------------------------
 
 .. csv-table:: Simulation output table
