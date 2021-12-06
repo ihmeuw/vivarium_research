@@ -72,8 +72,8 @@ breastfeeding, children aged 6 to 23 months who received any breastmilk as a
 source of nourishment ("any breastfed") were considered to be at the 
 lowest risk of disease outcome.
 
-Assment of risk-outcome pairs
-+++++++++++++++++++++++++++++
+Assessment of risk-outcome pairs
+++++++++++++++++++++++++++++++++
 
 .. list-table:: Risk-Outcome Pairs for Suboptimal Breastfeeding
    :header-rows: 1
@@ -206,11 +206,29 @@ using exposure estimates, TMREL, and relative risks.
 
 Vivarium Modeling Strategy
 --------------------------
-Non-exclusive breastfeeding is an ordered polytomous variable, with a rei_id=136; 
-Discontinued breastfeeding is an ordered polytomous variable, with a rei_id=137.
+Non-exclusive breastfeeding exposure (rei_id=136) is a categorical variable with 
+4 categories: exclusive, predominant, partial, and no breastfeeding. Discontinued 
+breastfeeding exposure (rei_id=137) is a binary variable with only two categories: 
+any breastfeeding or discontinued breastfeeding. For non-exclusive breastfeeding 
+risk factor, we will assign a simulant to an exposure category (cat 1, 2, 3, or 4 
+specified in `Risk Exposure Model Diagram`) using the "randomness" approach, 
+in which each simulant is given an exposure category drawn from 
+``np.random.choice(['cat1', 'cat2', 'cat3', 'cat4'], p=[p1, p1, p3, p4])``, where 
+p is a location-/year-/age-/sex-specific probability determined by draw-level 
+GBD exposure data. The Vivarium implementation of decision between a set of 
+choices can be found at `Vivarium random choice <https://github.com/ihmeuw/vivarium/blob/43cb0165e6d5da3b8653b51a965da842ed56ea07/src/vivarium/framework/randomness.py#L268>`_. 
+We will apply the same approach for modeling the discontinued breastfeeding exposure 
+category.
 
-.. todo::
-   Describe how we model categorical variable in Vivarium
+The risk-outcome pairs listed in `Assessment of risk-outcome pairs` are standard 
+GBD relationships. The relative risks produced by GBD are identical across location 
+and year, but varies by age and sex. Exposure to suboptimal breastfeeding affects 
+the likelihood of both morbidity and mortality from lower respiratory infection 
+(gbd_cause_id=322) and diarrheal disease (gbd_cause_id=302). We will model this 
+in Vivarium such that exposure to non-exclusive breastfeeding will impact the 
+incidence rates of both lower respiratory infection and diarrheal disease, and 
+exposure to discontinued breastfeeding will impact the incidence rates of diarrheal 
+disease only.
 
 Restrictions
 ++++++++++++
@@ -273,14 +291,19 @@ Risk Exposure Model Diagram
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-   Fill this section
+1. The distinct age groups in suboptimal breastfeeding risk model are 7-27 days, 
+   1-5 months, 6-11 months, 12-23 months, and 2-4 years.
+2. The PAFs for non-exclusive breastfeeding and discontinued breastfeeding are 
+   not available from GBD 2020, we will use equation specified in `Population 
+   attributable fraction` to calculate it.
 
 Validation Criteria
 +++++++++++++++++++
 
-.. todo::
-   Fill this section
+1. Does the location-/year-/age-/sex-specific exposure distribution in the 
+   Vivarium model match GBD 2020?
+2. Does the age-/sex-specific relative risk for cause incidence in the Vivarium 
+   model match GBD 2020?
 
 
 References
