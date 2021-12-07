@@ -222,14 +222,13 @@ We will apply the same approach for modeling the discontinued breastfeeding expo
 category.
 
 The risk-outcome pairs listed in `Assessment of risk-outcome pairs` are standard 
-GBD relationships. The relative risks pulled from ``get_draws()`` for non-exclusive 
-breastfeeding are identical across location and year, but vary by age and sex. 
-The relative risks pulled from ``get_draws()`` for discontinued breastfeeding are 
-the same for all location, year, age, and sex subgroups. Exposure to suboptimal 
-breastfeeding affects the likelihood of both morbidity and mortality from lower 
-respiratory infection (gbd_cause_id=322) and diarrheal disease (gbd_cause_id=302). 
-We will model this in Vivarium such that exposure to non-exclusive breastfeeding 
-will impact the incidence rates of both lower respiratory infection and diarrheal 
+GBD relationships. The relative risks pulled from ``get_draws()`` for both 
+non-exclusive breastfeeding and discontinued breastfeeding are the same for all 
+location, year, age, and sex subgroups. Exposure to suboptimal breastfeeding 
+affects the likelihood of both morbidity and mortality from lower respiratory 
+infection (gbd_cause_id=322) and diarrheal disease (gbd_cause_id=302). We will 
+model this in Vivarium such that exposure to non-exclusive breastfeeding will 
+impact the incidence rates of both lower respiratory infection and diarrheal 
 disease, and exposure to discontinued breastfeeding will impact the incidence 
 rates of diarrheal disease only.
 
@@ -299,8 +298,8 @@ Assumptions and Limitations
 2. The PAFs for non-exclusive breastfeeding and discontinued breastfeeding are 
    not available from GBD 2020, we will use equation specified in `Population 
    attributable fraction` to calculate it.
-3. The relative risks for discontinued breastfeeding did not vary by location, 
-   year, age, and sex.
+3. The relative risk does not vary by location, year, age, and sex for both 
+   non-exclusive breastfeeding and discontinued breastfeeding.
 
 Data Description
 ++++++++++++++++
