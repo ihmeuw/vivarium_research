@@ -215,8 +215,9 @@ specified in `Risk Exposure Model Diagram`) using the "randomness" approach,
 in which each simulant is given an exposure category drawn from 
 ``np.random.choice(['cat1', 'cat2', 'cat3', 'cat4'], p=[p1, p1, p3, p4])``, where 
 p is a location-/year-/age-/sex-specific probability determined by draw-level 
-GBD exposure data. The Vivarium implementation of decision between a set of 
-choices can be found at `Vivarium random choice <https://github.com/ihmeuw/vivarium/blob/43cb0165e6d5da3b8653b51a965da842ed56ea07/src/vivarium/framework/randomness.py#L268>`_. 
+GBD exposure data and :math:`\sum_{p_{category_i}} = 1`. The Vivarium implementation 
+of decision between a set of choices can be found at `Vivarium random choice 
+<https://github.com/ihmeuw/vivarium/blob/43cb0165e6d5da3b8653b51a965da842ed56ea07/src/vivarium/framework/randomness.py#L268>`_. 
 We will apply the same approach for modeling the discontinued breastfeeding exposure 
 category.
 
