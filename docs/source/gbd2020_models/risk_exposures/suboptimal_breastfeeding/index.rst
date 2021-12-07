@@ -302,6 +302,37 @@ Assumptions and Limitations
 3. The relative risks for discontinued breastfeeding did not vary by location, 
    year, age, and sex.
 
+Data Description
+++++++++++++++++
+
+.. list-table:: ID Table (under `custom` type in epi-viz)
+  :header-rows: 1
+
+  * - Component
+    - Modelable Entity IDs
+    - Notes
+  * - No breastfeeding exposure (0-5 months)
+    - 9598
+    - 
+  * - Partial breastfeeding exposure (0-5 months)
+    - 8904
+    - 
+  * - Predominant breastfeeding exposure (0-5 months)
+    - 8905
+    - 
+  * - Exclusive breastfeeding exposure (0-5 months)
+    - 20417
+    - 
+  * - Discontinued breastfeeding exposure (6-23 months)
+    - 8907
+    - 
+  * - Non-exclusive breastfeeding relative risks (0-5 months)
+    - 9052
+    - 
+  * - Discontinued breastfeeding relative risks (6-23 months)
+    - 9053
+    - 
+
 Validation Criteria
 +++++++++++++++++++
 
