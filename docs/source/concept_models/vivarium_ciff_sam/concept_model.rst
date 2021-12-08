@@ -448,6 +448,12 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 4.5.6: x-factor removed
      - Same as model 4.5.5 except x-factor component removed from this model build. Intended as a test run of x-factor effect in comparison to model 4.5.5
      - [1] `wasting exposure prevalence validating to GBD <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.6_exposure.pdf>`_. [2] `impact of interventions is slightly greater, but similar, to model 4.5.5 <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/results/results_processing_4.5.5_versus_4.5.6.ipynb>`_.
+   * - 4.5.7: x-factor custom paf
+     - Implemented custom x-factor PAF calculation to reflect x-factor exposure in source state of x-factor-affected transition rather than exposure in the general population (`implementation PR linked here <https://github.com/ihmeuw/vivarium_ciff_sam/pull/75>`_ and `documentation PR linked here <https://github.com/ihmeuw/vivarium_research/pull/695>`_), in an attempt to fix the overestimation of SAM from model 4.5.5 
+     - `Results are exactly the same to model 4.5.5 <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/4.5.5_v_4.5.7_wasting_transition_rates.ipynb>`_, indicating that the update was not properly implemented (simulation was launched from the incorrect branch of vivarium public health)
+   * - 4.5.8: x-factor custom paf bugfix
+     - Same as model 4.5.7, but launched from the correct branch to correctly implement the custom x-factor PAF calculation
+     - TBD
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -471,7 +477,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - `Overestimating SAM and underestimation of MAM exposure in runs with x-factor present <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_exposure.pdf>`_ 
      - Related to higher x-factor exposure among MAM state than among the general population which is used for the PAF calculation, causing inflated incidence rate from MAM to SAM. `Details shown in the notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/4.5.5_v_4.5.6_wasting_transition_rates.ipynb>`_.
      - Update x-factor exposure for PAF calculation of the i1 incidence rate to 0.78 (MAM-specific x-factor exposure) and the i2 incidence rate to 0.54 (mild-specific x-factor exposure) rather than 0.5 (population exposure), `as described in this PR <https://github.com/ihmeuw/vivarium_research/pull/695>`_
-     - ASAP (to be implemented in model 4.5.7)
+     - Implemented, but ran on wrong branch, which caused fix not to be implemented in model results. Rerunning on correct branch, results to be investigated.
    * - `Overestimating x-factor effect to SAM <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/995932712e89769a14187490bf9047c5f94ca178/model_validation/model4/2021_11_24a_v4.5.5_vv_x_factor_wasting_incidence_rate_ratio.ipynb>`_ 
      - Unconfirmed. Unclear if the magnitude is within acceptable range. 
      - Revaluate after model 4.5.7 results
