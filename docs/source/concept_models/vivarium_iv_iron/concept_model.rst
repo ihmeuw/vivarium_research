@@ -44,140 +44,109 @@ Vivarium Intravenous Iron
 1.0 Background
 ++++++++++++++
 
-.. _1.1:
+.. _iviron1.1:
 
 1.1 Project overview
 --------------------
 
 
-.. _1.2:
-
-1.2 Literature review
----------------------
-
-
-
-.. _2.0:
+.. _iviron2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
 
+.. _iviron3.0:
 
-.. _3.0:
-
-3.0 Causal framework
-++++++++++++++++++++
-
-
-.. _3.1:
-
-3.1 Causal diagram
-------------------
+3.0 Interventions
++++++++++++++++++
 
 
-.. _3.2:
+.. _iviron3.1:
 
-3.2 Effect sizes
-----------------
-
-
-
-4.0 Intervention
-++++++++++++++++
-
-
-.. _4.1:
-
-4.1 Simulation scenarios
+3.1 Simulation scenarios
 ------------------------
 
+.. _iviron3.2:
 
-
-4.2 Simulation timeframe and intervention start dates
+3.2 Simulation timeframe and intervention start dates
 -----------------------------------------------------
 
 
-.. _5.0:
+.. _ivron4.0:
 
-5.0 Vivarium modelling components
+4.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _iviron4.1:
 
-5.1 Vivarium concept model diagram
+4.1 Vivarium concept model diagram
 ----------------------------------
 
-
-5.1.1 Cause Models
+4.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
 
-
-5.1.2 Joint Cause-Risk Models
+4.1.2 Joint Cause-Risk Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-5.1.3 Risk Exposure Models
+4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-5.1.4 Risk Effects Models
+4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5.1.5 Risk-Risk Correlation Models
+4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-5.1.6 Feedback Loop Models
+4.1.6 Feedback Loop Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
-5.1.7 Intervention Models
+4.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _5.2:
+.. _iviron4.2:
 
-5.2 Demographics
+4.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _iviron4.2.1:
 
-5.2.1 Population description
+4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-.. _5.2.2:
+.. _iviron4.2.2:
 
-5.2.2 Population of interest
+4.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _5.3:
+.. _iviron4.3:
 
-5.3 Models
+4.3 Models
 ----------
 
 
-.. _5.4:
+.. _iviron4.4:
 
-5.4 Desired outputs
+4.4 Desired outputs
 -------------------
 
 
-.. _5.5:
+.. _iviron4.5:
 
-5.5 Simulation output table
+4.5 Simulation output table
 ---------------------------
 
-.. _6.0:
+.. _iviron5.0:
 
-6.0 Back of the envelope calculations
+5.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
+.. _iviron6.0:
 
-.. _7.0:
-
-7.0 Limitations
+6.0 Limitations
 +++++++++++++++
 
-8.0 References
+7.0 References
 +++++++++++++++
 
