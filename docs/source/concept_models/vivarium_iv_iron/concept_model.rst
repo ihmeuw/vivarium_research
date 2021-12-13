@@ -142,6 +142,11 @@ Where,
 3.2 Simulation timeframe and intervention start dates
 -----------------------------------------------------
 
+We will model an *immediate* scale-up of intervention coverage from the baseline level to the target level rather than a gradual scale-up over time.
+
+Date of simulation start: January 1, 2022
+Date of intervention scale-up: Janary 1, 2023
+Date of intervention end: December 31, 2024
 
 .. _ivron4.0:
 
