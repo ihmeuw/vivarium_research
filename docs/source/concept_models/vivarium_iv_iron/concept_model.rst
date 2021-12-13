@@ -67,6 +67,76 @@ Vivarium Intravenous Iron
 3.1 Simulation scenarios
 ------------------------
 
+#. **Baseline:** baseline IFA coverage
+#. **Oral iron:** MMS/BEP scale-up
+#. **Antenatal IV iron:** MMS/BEP + antenatal IV iron scale-up
+#. **Postpartum IV iron:** MMS/BEP + postpartum IV iron scale-up
+#. **Antenatal and postpartum IV iron:** MMS/BEP + antenatal and postpartum IV iron scale-up
+
+.. note::
+
+  Scenario comparisons of interest to BMGF will be IV iron scenarios (antenatal IV iron, postpartum IV iron, antenatal + postpartum IV iron) relative to the oral iron scenario. However, all interventions will scale-up from baseline levels of intervention coverage.
+
+.. list-table:: Intervention coverage by scenario
+  :header-rows: 1
+
+  * - Scenario
+    - IFA coverage
+    - MMS/BEP coverage
+    - Antenatal IV iron coverage
+    - Postpartum IV iron coverage
+  * - Baseline
+    - To be defined for locations of interest on the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
+    - 0
+    - 0
+    - 0
+  * - Oral iron scale-up
+    - 0
+    - :math:`T * ANC`
+    - 0
+    - 0
+  * - Antenatal IV iron scale-up
+    - 0
+    - :math:`T * ANC`
+    - :math:`T * ANC`
+    - 0
+  * - Postpartum IV iron scale-up
+    - 0
+    - :math:`T * ANC`
+    - 0
+    - :math:`T * IFD`
+  * - Antenatal and postpartum IV iron scale-up
+    - 0
+    - :math:`T * ANC`
+    - :math:`T * ANC`
+    - :math:`T * IFD`
+
+Where,
+
+.. list-table:: Intervention coverage parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Description  
+    - Value
+    - Note
+  * - :math:`T`
+    - Target coverage
+    - 0.9
+    - Subject to change after confirmation with BMGF. Not location-specific.
+  * - :math:`ANC`
+    - Coverage of single antenatal care visit
+    - GBD covariate*
+    - Location-specific
+  * - :math:`IFD`
+    - In-facility delivery proportion
+    - GBD covariate*
+    - Location-specific
+
+.. todo::
+
+  Detail strategy to weight national-level GBD covariates estimates to regional locations of interest
+
 .. _iviron3.2:
 
 3.2 Simulation timeframe and intervention start dates
