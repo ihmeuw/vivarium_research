@@ -70,7 +70,7 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-**Objective:** Using the optomistic assumptions for the target product profiles from the Bill and Melinda Gates Foundation, estimate the cost effectiveness of a) IV iron use during pregnancy and b) IV iron use immediately postpartum under the following assumptions:
+**Objective:** Using the optimistic assumptions for the target product profiles from the Bill and Melinda Gates Foundation, estimate the cost effectiveness of a) IV iron use during pregnancy and b) IV iron use immediately postpartum under the following assumptions:
 
 - Impact measured in terms of a) maternal anemia DALYs averted, and b) infant outcomes and stillbirths
 - Assume no large-scale food fortification intervention. Comparator = routine anemia prevention/treatment in pregnancy and postpartum.
