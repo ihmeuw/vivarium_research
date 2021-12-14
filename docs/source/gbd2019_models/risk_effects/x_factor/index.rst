@@ -88,32 +88,32 @@ Given the evidence from the Tsineal et al. 2015/Jimma University study reported 
      - Exposed (cat1)
      - Relative risk (RR)
      - :math:`\sqrt{10}`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i1
      - Unexposed (cat2)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i2
      - Exposed (cat1)
      - Relative risk (RR)
      - :math:`\sqrt{10}`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i2
      - Unexposed (cat2)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i3
      - Exposed (cat1)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
    * - i3
      - Unexposed (cat2)
      - Relative risk (RR)
      - :math:`1`
-     - PENDING CONFIRMATION IN INTERACTIVE SIM MODEL CALIBRATION
+     - 
 
 .. todo::
    
@@ -127,11 +127,37 @@ For each incidence rate :math:`i(n)` in the dynamic wasting exposure model (i1, 
 
 .. math::
 
-   PAF_\text{i(n)} = \frac{RR_\text{i(n),cat1} * p_\text{cat1} + RR_\text{i(n),cat2} * (1 - p_\text{cat1}) - 1}{RR_\text{i(n),cat1} * p_\text{cat1} + RR_\text{i(n),cat2} * (1 - p_\text{cat1})}
+   PAF_\text{i(n)} = \frac{RR_\text{i(n),cat1} * p_\text{cat1|source wasting state} + RR_\text{i(n),cat2} * (1 - p_\text{cat1|source wasting state}) - 1}{RR_\text{i(n),cat1} * p_\text{cat1|source wasting state} + RR_\text{i(n),cat2} * (1 - p_\text{cat1|source wasting state})}
 
 Where:
 
-- :math:`p_\text{cat1}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>`
+- :math:`p_\text{cat1|source wasting state}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>` among the source state for the relevant transition. Values shown in the table below:
+
+.. list-table:: X-factor risk effects
+   :header-rows: 1
+
+   * - Transition
+     - Source wasting state
+     - :math:`p_\text{cat1}` value
+     - Note
+   * - i1
+     - moderate acute malnutrition
+     - 0.78
+     - 
+   * - i2
+     - mild child wasting
+     - 0.54
+     - 
+   * - i3
+     - susceptible to child wasting
+     - 0.45
+     - Since the relative risk for this transition is equal to one, the impact of this value should be inconsequential 
+
+.. note::
+
+   This custom PAF calculation strategy was chosen due to the `underestimation of MAM and overestimation of SAM child wasting exposure states in model version 4.5.5 of the acute malnutrition simulation <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.5.5_exposure.pdf>`_. This appeared to be a result of an overestimation of the transition rate between MAM to SAM (i1) as a result of the higher x-factor exposure present in the MAM wasting state than the general population, `as shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/4.5.5_v_4.5.6_wasting_transition_rates.ipynb>`_.
+
+   The values in the table below are the x-factor exposures specific to the source wasting state for each wasting transition, as calculated among ages 6 months to 5 years after the first "burn-in" year of the simulation run.
 
 .. note::
 
