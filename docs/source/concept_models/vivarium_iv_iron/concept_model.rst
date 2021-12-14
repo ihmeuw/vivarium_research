@@ -109,16 +109,58 @@ Vivarium Intravenous Iron
 4.2 Demographics
 ----------------
 
+4.2.1 Locations
+~~~~~~~~~~~~~~~
+
+Locations of interest to this project: 
+
+- Sub-Saharn Africa (location_type=superregion; location_id=166)
+- South Asia (location_type=region; location_id=159)
+- All low and middle income countries
+
+.. todo::
+
+  Compile all national location IDs included in each of these regional locations of interest using the GBD shared function :code:`get_location_metadata`, `documented here <https://scicomp-docs.ihme.washington.edu/db_queries/current/get_location_metadata.html>`_.
+
 .. _iviron4.2.1:
 
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**Model 1:**
 
-.. _iviron4.2.2:
+.. list-table:: Population Restrictions
+   :header-rows: 1
 
-4.2.2 Population of interest
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   * - Restriction Type
+     - Value
+     - Notes
+   * - Male only
+     - False
+     -
+   * - Female only
+     - True
+     -
+   * - Age group start
+     - 10 to 14
+     - age_group_id=7
+   * - Age group end
+     - 50 to 54
+     - age_group_id=15
+
+.. todo::
+
+  The GBD defines reproductive age as 10 to 54 years of age. However, many other data sources define reproductive age as 15 to 49 years of age. 
+
+  We should confirm with the BMGF that they would like to model the GBD definition rather than standard definition from other data sources. 
+
+**Later model versions:**
+
+Additionally include children under five in the simulation population. Maternal/child pairs should be explcitly linked in this demographic model to allow for direct correlation between maternal and child risks and causes.
+
+.. todo::
+
+  Add more detail 
 
 .. _iviron4.3:
 
