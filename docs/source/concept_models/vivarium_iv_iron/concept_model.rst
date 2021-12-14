@@ -78,9 +78,49 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 
 .. _iviron3.0:
 
-3.0 Interventions
+3.0 Concept model
 +++++++++++++++++
 
+.. image:: concept_model.svg
+
+This simulation will be built in a series of subgroups of model components that are summarized below.
+
+.. list-table:: Concept model component subgroups
+  :widths: 5 5 20 10
+  :header-rows: 1
+
+  * - Priority order
+    - Color
+    - Subgroup
+    - Note
+  * - 1
+    - Green
+    - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
+    - Women of reproductive age (WRA) population model only
+  * - 2.0
+    - Purple
+    - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
+    - Includes children under five in population model as well as WRA
+  * - 2.1
+    - N/A
+    - Fertility component to familially link WRA to children under five.
+    - May be swapped in implementation order with model 2.0.
+  * - 3
+    - Blue
+    - Postpartum depression and breastfeeding behaviors
+    - 
+  * - 4
+    - Yellow
+    - Non-standard outcomes, including stillbirths, infertility, and cognition
+    - 
+  * - 5
+    - Orange
+    - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
+    - 
+  * - 6
+    - Red
+    - a) fertility model that includes birth interval information, b) access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
+    - 
 
 .. _iviron3.1:
 
@@ -91,7 +131,6 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 
 3.2 Simulation timeframe and intervention start dates
 -----------------------------------------------------
-
 
 .. _ivron4.0:
 
