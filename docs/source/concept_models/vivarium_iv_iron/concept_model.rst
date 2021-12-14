@@ -297,10 +297,6 @@ For later model versions:
 * Antenatal IV iron
 * Postpartum IV iron
 
-.. todo::
-
-  Move hemoglobin outcomes of maternal supplmentation to the linked page from :ref:`this current page <maternal_anemia_intervention>`
-
 For later model versions:
 
   * :ref:`Acute malnutrition management and treatment <intervention_wasting_treatment>` (NOTE: will need to be updated to locations of interest)
