@@ -281,8 +281,10 @@ For later model versions:
   * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
   * :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
 
-4.1.6 Non-standard outcomes
+4.1.6 Non-standard Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* :ref:`Pregnancy model <other_models_pregnancy>`
 
 For later model versions:
 
