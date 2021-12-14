@@ -53,6 +53,16 @@ Tried and tested models for diseases, risks, and interventions from the 2017 Glo
 
 Tried and tested models for disease, risks, and interventions from the 2019 Global Burden of Disease Study.
 
+:ref:`Existing Models for GBD 2020 <2020_models>`
++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Tried and tested models for disease, risks, and interventions from the 2020 Global Burden of Disease Study.
+
+:ref:`Other Vivarium model components <other_models>`
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+Non-standard Vivarium model components such as fertility or covariate models.
+
 Contributing
 ------------
 
@@ -72,5 +82,6 @@ To get started adding new documentation, check out our
    gbd2017_models/index
    gbd2019_models/index
    gbd2020_models/index
+   other_models/index
    contributing
    glossary
