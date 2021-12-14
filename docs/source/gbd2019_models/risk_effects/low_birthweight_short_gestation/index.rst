@@ -874,8 +874,8 @@ risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
 \mathrm{BW}`, and :math:`\rho` is the LBWSG exposure distribution.
 
 Note that the above formula employs the notation ":math:`d\rho`" from measure
-theory. To compute the integral, we can rewrite :math:`d\rho(x,y)` in terms of
-the probability density function for the LBWSG exposure distribution
+theory. To use more familiar notation, we can rewrite :math:`d\rho(x,y)` in
+terms of the probability density function for the LBWSG exposure distribution
 :math:`\rho`:
 
 .. math::
@@ -884,12 +884,80 @@ the probability density function for the LBWSG exposure distribution
   = \frac{d\rho(x,y)}{dx\, dy}\, dx\, dy
   = p(x,y)\, dx\, dy,
 
-where :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability density of the
-point :math:`(x,y)\in \mathrm{GA}\times \mathrm{BW}`, according to the LBWSG
-exposure distibution from GBD.
+where :math:`dx\, dy` represents two-dimensional Lebesgue measure, and the
+Radon-Nikodym derivative :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability
+density function of the LBWSG exposure distibution at the point :math:`(x,y)\in
+\mathrm{GA}\times \mathrm{BW}`.
 
 Computing the PAF via Monte Carlo Integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+One way to compute the average relative risk :math:`\int \mathit{RR}\, d\rho`
+for the PAF calculation is to use `Monte Carlo integration`_. We can implement a
+simple version of Monte Carlo integration by leveraging the Vivarium
+microsimulation framework. Namely, we can initialize a population of simulants
+according to the LBWSG risk exposure distribution :math:`\rho`, then compute the
+average relative risk and the PAF for the simulated population. Here is Python
+(pseudo-)code to achieve this, using the same Relative risk functions as above:
+
+.. code-block:: Python
+
+  def initialize_population_from_lbwsg_exposure(
+    pop_size: int,
+    age_group_id: int,
+    sex_id: int,
+    draw: int,
+    lbwsg_exposure: pd.DataFrame, # e.g. rescaled prevalence data from get_draws
+    ) -> pd.DataFrame:
+    """
+    Initializes a population of size pop_size according to the given LBWSG exposure distribution,
+    with attribute columns 'age_group_id', 'sex_id', 'gestational_age', 'birthweight'.
+    """
+    # This function can be implemented using the Vivarium Framework
+    # if we already have a component for initializing a population with
+    # LBWSG exposure data from GBD.
+    # The main thing it needs to do is convet the categorical LBWSG
+    # distribution from GBD into a continuous joint distribution of
+    # (birthweight, gestational_age). See the GBD 2019 LBWSG Risk Exposure
+    # documentation here:
+    # https://vivarium-research.readthedocs.io/en/latest/gbd2019_models/risk_exposures/low_birthweight_short_gestation/index.html
+    ...
+
+  def paf_from_mean_rr(mean_rr: float)->float:
+    """Calculates the PAF from the mean relative risk."""
+    return 1 - 1/mean_rr
+
+  def standard_error_of_the_mean(values: pd.Series)->float:
+    """Returns sample esimate of the standard error of the mean for a Series of sample values."""
+    return np.sqrt(values.var()/len(values))
+
+  # variables and functions defined previously:
+  # pd, np
+  # draw, log_rr_interpolator, cat_df
+  # interpolate_lbwsg_rr_for_population
+
+  # Sample code to calculate the LBWSG PAF for Early Neonatal Females
+  EARLY_NEONATAL_ID = 2
+  FEMALE_ID = 2
+  pop_size = 100_000 # Choose a sufficiently large population size
+
+  lbwsg_exposure = ... # e.g., call get_draws for desired location, then rescale prevalence
+  enn_female_pop = initialize_population_from_lbwsg_exposure(
+    pop_size, EARLY_NEONATAL_ID, FEMALE_ID, draw, lbwsg_exposure
+  )
+  assert set(['age_group_id', 'sex_id', 'gestational_age', 'birthweight']
+    ).issubset(enn_female_pop.columns), \
+    "Insufficient attribute columns to interpolate LBWSG RRs for population!"
+  assert (enn_female_pop['age_group_id'] == EARLY_NEONATAL_ID).all() \
+    and (enn_female_pop['sex_id'] == FEMALE_ID).all(), \
+    "Population has simulants of the wrong age or sex!"
+
+  enn_female_lbwsg_rrs = interpolate_lbwsg_rr_for_population(
+    enn_female_pop, log_rr_interpolator, cat_df
+  )
+  enn_female_paf = paf_from_mean_rr(enn_female_lbwsg_rrs.mean())
+
+.. _Monte Carlo integration: https://en.wikipedia.org/wiki/Monte_Carlo_integration
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
