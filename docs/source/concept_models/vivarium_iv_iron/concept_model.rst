@@ -60,7 +60,7 @@ Vivarium Intravenous Iron
     - Iron and folic acid
     - 
   * - MMS
-    - Multimicronutrient supplementation
+    - Multiple micronutrient supplementation
     - 
   * - BEP
     - Balanced energy protein
