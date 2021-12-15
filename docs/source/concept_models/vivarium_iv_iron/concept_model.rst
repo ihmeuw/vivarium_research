@@ -39,7 +39,6 @@ Vivarium Intravenous Iron
   :local:
 
 .. list-table:: Abbreviations
-  :widths: 15 15 15
   :header-rows: 1
 
   * - Abbreviation
@@ -50,6 +49,33 @@ Vivarium Intravenous Iron
     - 
   * - IDA
     - Iron deficiency anemia
+    - 
+  * - WRA
+    - Women of reproductive age
+    - 
+  * - PLW
+    - Pregnant and lactating women
+    - 
+  * - IFA
+    - Iron and folic acid
+    - 
+  * - MMS
+    - Multiple micronutrient supplementation
+    - 
+  * - BEP
+    - Balanced energy protein
+    - 
+  * - BMGF
+    - Bill and Melinda Gates Foundation
+    - 
+  * - ANC
+    - Antenatal care
+    - 
+  * - IFD
+    - In-facility delivery
+    - 
+  * - LMICs
+    - Low and middle income countries
     - 
 
 1.0 Background
@@ -85,26 +111,26 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 
 This simulation will be built in a series of subgroups of model components that are summarized below.
 
-.. list-table:: Concept model component subgroups
+.. list-table:: Concept model versions
   :widths: 5 5 20 10
   :header-rows: 1
 
-  * - Priority order
+  * - Model version
     - Color
-    - Subgroup
+    - Description
     - Note
   * - 1
     - Green
     - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
     - Women of reproductive age (WRA) population model only
-  * - 2.0
+  * - 2a
     - Purple
     - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
     - Includes children under five in population model as well as WRA
-  * - 2.1
+  * - 2b
     - N/A
     - Fertility component to familially link WRA to children under five.
-    - May be swapped in implementation order with model 2.0.
+    - May be swapped in implementation order with model 2a
   * - 3
     - Blue
     - Postpartum depression and breastfeeding behaviors
@@ -117,9 +143,13 @@ This simulation will be built in a series of subgroups of model components that 
     - Orange
     - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
     - 
-  * - 6
+  * - 6a
     - Red
-    - a) fertility model that includes birth interval information, b) access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
+    - Fertility model that includes birth interval information
+    - 
+  * - 6b
+    - Red
+    - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
     - 
 
 .. _iviron3.1:
@@ -228,7 +258,7 @@ Date of intervention end: December 31, 2024
 * Maternal disorders
 * Maternal hemorrhage incidence
 
-For later model versions: 
+For model versions 2+: 
 
   * :ref:`Diarrheal diseases <2019_cause_diarrhea>`
   * :ref:`Lower respiratory infections <2019_cause_lower_respiratory_infections>`
@@ -244,16 +274,16 @@ For later model versions:
 
   Add more detail on exactly which components/strategies to include in this simulation specifically
 
-For later model versions:
+For model versions 2+:
 
-  * Child wasting and protein energy malnutrition (NOTE: static propensity model for subgroups 2-4, :ref:`dynamic transition model for subgroups 5+ <2020_risk_exposure_wasting_state_exposure>`)
+  * Child wasting and protein energy malnutrition (NOTE: static propensity model verions 2-4, :ref:`dynamic transition model for versions 5+ <2020_risk_exposure_wasting_state_exposure>`)
 
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
 
-For later model versions:
+For model versions 2+:
 
   * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
   * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
@@ -266,9 +296,9 @@ For later model versions:
 * :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>`
 * Maternal hemorrhage risk effects
 
-For later model versions:
+For model versions 2+:
 
-  * :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: consider affected measure for diarrheal diseases for model versions before and after subgroup 5/vicious cycle implementation)
+  * :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: consider affected measure for diarrheal diseases for model versions before and after 5/vicious cycle implementation)
   * Child stunting risk effects
   * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
   * :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>`
@@ -279,7 +309,7 @@ For later model versions:
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For later model versions:
+For model versions 2+:
 
   * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
   * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
@@ -288,7 +318,7 @@ For later model versions:
 4.1.6 Non-standard outcomes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For later model versions:
+For model versions 2+:
 
   * Stillbirth
   * Infertility
@@ -305,7 +335,7 @@ For later model versions:
 
   Move hemoglobin outcomes of maternal supplmentation to the linked page from :ref:`this current page <maternal_anemia_intervention>`
 
-For later model versions:
+For model versions 2+:
 
   * :ref:`Acute malnutrition management and treatment <intervention_wasting_treatment>` (NOTE: will need to be updated to locations of interest)
   * Childhood vaccinations
@@ -377,6 +407,16 @@ Additionally include children under five in the simulation population. Maternal/
 4.3 Models
 ----------
 
+.. list-table:: Model verification and validation tracking
+   :widths: 3 10 20
+   :header-rows: 1
+
+   * - Model
+     - Description
+     - V&V summary
+   * - 1.0
+     - 
+     - 
 
 .. _iviron4.4:
 
