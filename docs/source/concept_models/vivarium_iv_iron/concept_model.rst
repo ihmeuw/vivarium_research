@@ -137,7 +137,7 @@ This simulation will be built in a series of subgroups of model components that 
 
   Scenario comparisons of interest to BMGF will be IV iron scenarios (antenatal IV iron, postpartum IV iron, antenatal + postpartum IV iron) relative to the oral iron scenario. However, all interventions will scale-up from baseline levels of intervention coverage.
 
-.. list-table:: Intervention coverage by scenario
+.. list-table:: Intervention coverage of eligible individuals by scenario
   :header-rows: 1
 
   * - Scenario
@@ -196,6 +196,10 @@ Where,
 .. todo::
 
   Detail strategy to weight national-level GBD covariates estimates to regional locations of interest
+
+.. note::
+
+  The coverage values in the table above are meant to represent the probability that a patient who is *eligible* for the intervention, as determined by the restrictions table on the relevant intervention model document, will receive the intervention.
 
 .. _iviron3.2:
 
@@ -294,8 +298,8 @@ For later model versions:
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Maternal supplementation <maternal_supplementation_intervention>`
-* Antenatal IV iron
-* Postpartum IV iron
+* :ref:`Antenatal IV iron <intervention_iv_iron_antenatal>`
+* :ref:`Postpartum IV iron <intervention_iv_iron_postpartum>`
 
 .. todo::
 
