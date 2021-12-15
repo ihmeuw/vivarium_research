@@ -58,7 +58,7 @@ GBD 2019 Modeling Strategy
 
 .. todo::
 
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]_ is a good source for this information in addition to the GBD risk modeler.
+	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Maternal-Hemorrhage]_ is a good source for this information in addition to the GBD risk modeler.
 
 .. todo::
 
