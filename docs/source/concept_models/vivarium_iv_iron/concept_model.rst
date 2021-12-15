@@ -294,7 +294,7 @@ For model versions 2+:
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>`
-* Maternal hemorrhage risk effects
+* :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
 
 For model versions 2+:
 
