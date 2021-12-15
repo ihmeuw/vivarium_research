@@ -189,7 +189,7 @@ References
 
   Add additional references as necessary
 
-.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Model-Template]
+.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Maternal-Hemorrhage]
 
   Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
 
