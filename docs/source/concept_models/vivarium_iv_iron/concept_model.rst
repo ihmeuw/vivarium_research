@@ -134,7 +134,7 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 
 Locations of interest to this project: 
 
-- Sub-Saharn Africa (location_type=superregion; location_id=166)
+- Sub-Saharan Africa (location_type=superregion; location_id=166)
 - South Asia (location_type=region; location_id=159)
 - All low and middle income countries
 
