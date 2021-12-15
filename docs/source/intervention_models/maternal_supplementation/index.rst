@@ -254,7 +254,7 @@ All regimens in the maternal supplementation interventions affect the hemoglobin
 
 **How to sample and apply effect sizes:**
 
-The intervention hemoglobin shifts should be applied *after* at the start of pregnancy, after the application of the pregnancy hemoglobin adjustment factor. The intervention hemoglobin shift should persist until six weeks postpartum, at which point the simulant's hemoglobin level should return to the pre-pregnancy value, as illustrated in the figure below.
+The intervention hemoglobin shifts should be applied at the start of pregnancy, *after* the application of the pregnancy hemoglobin adjustment factor. The intervention hemoglobin shift should persist until six weeks postpartum, at which point the simulant's hemoglobin level should return to the pre-pregnancy value, as illustrated in the figure below.
 
 .. image:: hemoglobin_figure.png
 
@@ -318,7 +318,7 @@ Assumptions and Limitations
 
 - We assume that the full effect of the intervention occurs immediately at conception. This is to align with BMGF targets of beginning maternal supplementation product as soon as possible, but is still overly optomistic and may be updated.
 - We assume that the effect of the intervention persists for six weeks postpartum at which point hemoglobin returns to its pre-pregnancy value
-- We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those we are anemic at baseline.
+- We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
 
 Verification and validation criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
