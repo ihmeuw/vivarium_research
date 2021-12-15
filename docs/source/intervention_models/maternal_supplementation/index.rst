@@ -74,7 +74,7 @@ IFA is widely used as a prenatal supplement in most areas of the world and is re
   * - Maternal anemia
     - IFA, MMS, BEP
     - Increases population mean hemoglobin
-    - Not yet
+    - Yes
     - Non-linear dose response likely. Differential effect by regimen. Effect modification by baseline hemoglobin likely.
   * - Maternal nourishment (BMI)
     - BEP
@@ -161,12 +161,6 @@ The maternal supplementation intervention is administered to mothers and impacts
 
 For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree. The :ref:`maternal body mass index risk exposure <2019_risk_exposure_maternal_bmi>` should be used to determine maternal nourishment status for this intervention model (exposed=undernourished).
 
-The "undernourished" and "adequately nourished" decision node should be based on the maternal nourishment risk exposure.
-
-.. todo::
-
-  Link risk exposure page for maternal nourishment
-
 .. image:: coverage_decision_tree.svg
 
 .. note::
@@ -183,7 +177,14 @@ The "undernourished" and "adequately nourished" decision node should be based on
     - Affected measure
     - Effect size measure
     - Effect size
-    - Note
+    - Note 
+  * - Hemoglobin
+    - Modelable entity
+    - 10487
+    - Population mean hemoglobin concentration (as continuous measure)
+    - Mean difference
+    - Varies by supplement regimen
+    - Related effect on anemia reduction
   * - Birthweight
     - Risk exposure
     - 339
@@ -191,6 +192,146 @@ The "undernourished" and "adequately nourished" decision node should be based on
     - Mean difference
     - Varies by supplement regimen
     - Assume no difference in gestational age
+
+Maternal Hemoglobin
++++++++++++++++++++++
+
+All regimens in the maternal supplementation interventions affect the hemoglobin concentration of pregnant and lactating women who are covered by them. Notably, the intervention will not affect the hemoglobin level of women of reproductive age who are not pregnant or lactating because they will not be covered by this specific intervention. :ref:`The hemoglobin model document can be found here <2019_hemoglobin_model>`.
+
+.. list-table:: Restrictions for intervention effect on hemoglobin
+  :header-rows: 1
+
+  * - Restriction
+    - Value
+    - Note
+  * - Male only
+    - False
+    - 
+  * - Female only
+    - True
+    - 
+  * - Age group start
+    - 10 to 14
+    - Age group ID 7
+  * - Age group end
+    - 50 to 54
+    - Age group ID 15
+  * - Other
+    - Pregnant and lactating women only
+    - (see fertility model)
+
+.. todo:: 
+
+  Link fertility model doc
+
+.. list-table:: Supplementation effect on hemoglobin
+  :header-rows: 1
+
+  * - Population
+    - Effect size (95% CI)
+    - Note
+    - Source
+  * - IFA
+    - +7.8 g/L (4.08, 11.52)
+    - Relative to no supplementation 
+    - Oh et al. reference
+  * - MMS
+    - +0 g/L
+    - Relative to IFA
+    - 
+  * - BEP
+    - +3.7 g/L (1.9, 5.6)
+    - Relative to IFA/MMS
+    - Gates Trials
+
+.. todo::
+
+  Add formal citations for effect sizes when we hear back from Laura
+
+.. note::
+
+  While IFA and MMS have the same effect on hemoglobin level, it is useful to implement them as separate interventions to accomodate updated assumptions around this point if desired.
+
+**How to sample and apply effect sizes:**
+
+The intervention hemoglobin shifts should be applied at the start of pregnancy, *after* the application of the pregnancy hemoglobin adjustment factor. The intervention hemoglobin shift should persist until six weeks postpartum, at which point the simulant's hemoglobin level should return to the pre-pregnancy value, as illustrated in the figure below.
+
+.. image:: hemoglobin_figure.png
+
+Additionally, the code block below walks through how to implement the following considerations:
+
+- Assume a normal distribution of uncertainty when sampling from the effect size parameter confidence intervals
+- Hemoglobin exposure values among PLW need to be calibrated to baseline IFA coverage in the baseline scenario
+- Effect sizes in the table above are NOT relative to no supplementation and are assumed to be *additive* to one another. It is important that they are implemented in the method described below due to their overlapping confidence intervals to ensure that the effect of BEP>MMS/IFA in all draws.
+- The effect of MMS and BEP in the alternative scenario depends on IFA coverage status in the baseline scenario
+
+.. code-block:: python
+
+  from scipy.stats import norm
+
+  def sample_from_normal_distribution(mean, lower, upper):
+      """Instructions on how to sample from a normal distribution given a mean value and
+      95% confidence interval for a parameter"""
+      std = (upper - lower) / 2 / 1.96
+      dist = norm(mean, std)
+      return dist.rvs()
+
+  """A hemoglobin shift for each supplement regimen should be sampled independently
+  for each simulation draw assuming a normal distribution of uncertainty"""
+  for draw in draws:    
+      for supplement in ['ifa','mmn','bep']:
+          {supplement}_shift_draw = sample_from_normal_distribution({supplement}_mean, 
+                                                                    {supplement}_lower, 
+                                                                    {supplement}_upper)
+      
+      for i in simulants:
+
+      """In the baseline scenario, we need to calibrate baseline coverage of IFA
+      so that the difference between IFA supplemented and unsupplemented babies, on 
+      average, equals to the ifa_shift AND that the population mean hemoglobin value
+      among PLW from GBD is approximately unchanged.
+
+      * hgb_{i} represents the assigned continuous hemoglobin exposure value for a 
+      simulant sampled from GBD, after the application of the pregnancy adjustment factor
+      and BEFORE consideration of the impact of maternal supplementation.
+
+      * baseline_ifa_coverage represents the coverage proportion of IFA for a location and
+      specific simulation draw"""
+          if baseline_maternal_supplement_{i} == 'none':
+              baseline_supplemented_hgb_{i} = hgb_{i} - baseline_ifa_coverage_draw * ifa_shift_draw
+          elif baseline_maternal_supplement_i == 'ifa':
+              baseline_supplemented_hgb_{i} = hgb_{i} + (1 - baseline_ifa_coverage_draw) * ifa_shift_draw
+
+      """In the alternative scenario, the amount to shift a simulant's hemoglobin (if they are
+      covered by MMS or BEP in the alternative scenario) depends on if they were already covered 
+      by IFA in the baseline scenario"""
+          alternative_supplemented_hgb_{i} = baseline_supplemented_hgb_{i}
+          if alternative_maternal_supplement_{i} is in ['ifa', 'mmn', 'bep'] and baseline_maternal_supplement_{i} == 'none':
+              alternative_supplemented_hgb_{i} =+ ifa_shift_draw
+          if alternative_maternal_supplement_{i} is in ['mmn', 'bep']:
+              alternative_supplemented_hgb_{i} =+ mmn_shift_draw
+          if alternative_maternal_supplement_{i} == 'bep':
+              alternative_supplemented_hgb_{i} =+ bep_shift_draw
+
+Assumptions and Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- We assume that the full effect of the intervention occurs immediately at conception. This is to align with BMGF targets of beginning maternal supplementation product as soon as possible, but is still overly optomistic and may be updated.
+- We assume that the effect of the intervention persists for six weeks postpartum at which point hemoglobin returns to its pre-pregnancy value
+- We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
+
+Verification and validation criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+In the baseline scenario, the exposure distribution of hemoglobin and anemia among PLW and WRA as well as the maternal disorders cause model should match that of GBD. 
+
+Hemoglobin exposures stratified by supplementation regimen should match supplementation effect sizes.
+
+The relative risk of anemia by supplmentation regimen should validate to external sources.
+
+.. todo::
+
+  Cite external sources for these validations.
 
 Birthweight
 +++++++++++++++++++++
