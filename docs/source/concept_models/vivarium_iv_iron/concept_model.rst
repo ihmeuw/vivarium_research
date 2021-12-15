@@ -141,6 +141,10 @@ Locations of interest to this project:
 .. todo::
 
   Compile all national location IDs included in each of these regional locations of interest using the GBD shared function :code:`get_location_metadata`, `documented here <https://scicomp-docs.ihme.washington.edu/db_queries/current/get_location_metadata.html>`_.
+  
+.. todo::
+
+    Determine wich location ID and hierarchy to use for LMICs (commonwealth versus world bank classifications... need to determine which have GBD outcomes of interest) 
 
 .. _iviron4.2.1:
 
