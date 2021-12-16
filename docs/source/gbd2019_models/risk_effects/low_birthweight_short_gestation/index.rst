@@ -874,8 +874,11 @@ risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
 \mathrm{BW}`, and :math:`\rho` is the LBWSG exposure distribution.
 
 Note that the above formula employs the notation ":math:`d\rho`" from measure
-theory. To use more familiar notation, we can rewrite :math:`d\rho(x,y)` in
-terms of the probability density function for the LBWSG exposure distribution
+theory. If the exposure distribution :math:`\rho` is absolutely continuous with
+density function :math:`p` (e.g., if :math:`\rho` is defined by the piecewise
+constant density function described on the :ref:`GBD 2019 LBWSG exposure page
+<2019_risk_exposure_lbwsg>`), we can rewrite :math:`d\rho(x,y)` in terms of the
+probability density function :math:`p` for the LBWSG exposure distribution
 :math:`\rho`:
 
 .. math::
@@ -887,7 +890,10 @@ terms of the probability density function for the LBWSG exposure distribution
 where :math:`dx\, dy` represents two-dimensional Lebesgue measure, and the
 Radon-Nikodym derivative :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability
 density function of the LBWSG exposure distibution at the point :math:`(x,y)\in
-\mathrm{GA}\times \mathrm{BW}`.
+\mathrm{GA}\times \mathrm{BW}`. On the other hand, if :math:`\rho` is a discrete
+distribution (e.g., the polytomous LBWSG distribution described by GBD), then
+the integral with respect to :math:`d\rho` is by definition a sum over the
+discrete exposure categories.
 
 Computing the PAF via Monte Carlo Integration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
