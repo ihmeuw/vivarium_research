@@ -193,7 +193,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
    A note on locations for the :ref:`IV Iron simulation <2019_concept_model_vivarium_iv_iron>`:
 
-      The ASFR covariate is available for Sub-Saharan Afric (location_id=166) and South Asia (location_id=159). The SBR covariate is not available for regional estimates.
+      The ASFR covariate is available for Sub-Saharan Africa (location_id=166) and South Asia (location_id=159). The SBR covariate is not available for regional estimates.
 
       For locations of interest that do not have available covariate estimates, aggregate esimates will need to be calculated according to the estimates for each of the component national-level location_ids.
 
