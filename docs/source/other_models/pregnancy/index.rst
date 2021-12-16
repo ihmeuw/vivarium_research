@@ -146,8 +146,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - p
     - :math:`(ASFR + ASFR * SBR) * 40 / 52`
     - 
-  * - np
-    - :math:`1 - (ASFR + ASFR * SBR) * 6 / 52`
+  * - pp
+    - :math:`(ASFR + ASFR * SBR) * 6 / 52`
     -  
 
 .. list-table:: State transition data
