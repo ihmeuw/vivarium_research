@@ -98,7 +98,7 @@ The effect of the IV iron intervention on maternal hemoglobin should be applied 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- We assume the effect of the intervntion persists through the end of the postpartum period at which point the woman's hemoglobin concentration returns to its pre-pregnancy level. In reality, it may persist beyond the end of the postpartum period, in which case we may underestimate the intervention impact.
+- We assume the effect of the intervention persists through the end of the postpartum period at which point the woman's hemoglobin concentration returns to its pre-pregnancy level. In reality, it may persist beyond the end of the postpartum period, in which case we may underestimate the intervention impact.
 
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
 
