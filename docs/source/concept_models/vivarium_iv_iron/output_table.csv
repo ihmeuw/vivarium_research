@@ -1,0 +1,10 @@
+Measure,Model version,Age/sex/year stratification,Pregnancy state,Maternal hemorrahge incidence,Maternal supplementation coverage,Antenatal IV iron coverage,Postpartum IV iron coverage,Maternal BMI exposure
+Pregnancy state transition counts,1,TRUE,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
+Pregnancy state person-time,1,TRUE,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
+Deaths due to maternal disorders,1,TRUE,CONDITIONAL (for validation only and then can be removed),TRUE,TRUE,TRUE,TRUE,FALSE
+Maternal disorder incident case count,1,TRUE,CONDITIONAL (for validation only and then can be removed),TRUE,TRUE,TRUE,TRUE,FALSE
+Maternal disorder YLLs and YLDs,1,TRUE,CONDITIONAL (for validation only and then can be removed),TRUE,TRUE,TRUE,TRUE,FALSE
+Maternal hemorrhage incident case count,1,TRUE,CONDITIONAL (for validation only and then can be removed),N/A,TRUE,TRUE,TRUE,FALSE
+Sum of maternal hemoglobin exposure values,1,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE
+Anemia state person-time,1,TRUE,TRUE,TRUE,TRUE,TRUE,TRUE,FALSE
+Maternal supplementation regimen,1,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,CONDITIONAL (for validation only and then can be removed)

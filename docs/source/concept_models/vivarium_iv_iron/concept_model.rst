@@ -201,6 +201,10 @@ This simulation will be built in a series of subgroups of model components that 
     - :math:`T * ANC`
     - :math:`T * IFD`
 
+.. todo::
+
+  Consider using skilled birth attendance rather than in-facility delivery proportion for this parameter.
+
 Where,
 
 .. list-table:: Intervention coverage parameter definitions
@@ -421,11 +425,21 @@ Additionally include children under five in the simulation population. Maternal/
 4.4 Desired outputs
 -------------------
 
+For model version 1:
+
+#. DALYs (YLLs and YLDs) due to a) maternal disorders, and b) anemia among a) pregnant, b) postpartum, and c) women of reproductive age
+#. Severity-specific anemia prevalence during a) pregnancy, and b) the postpartum period
+#. Average hemoglobin level among during a) pregnancy, and b) the postpartum period
+#. Numbers of intervention regimens administered per a) 100,000 births, and b) 100,000 person years of women of reproductive age
 
 .. _iviron4.5:
 
 4.5 Simulation output table
 ---------------------------
+
+.. csv-table:: Simulation output table
+   :file: output_table.csv
+   :header-rows: 1
 
 .. _iviron5.0:
 
