@@ -249,6 +249,10 @@ Bias in the Population Attributable Fraction
 Maternal hemorrhage incidence
 +++++++++++++++++++++++++++++++
 
+.. note::
+
+  This risk outcome pair is not included in GBD.
+
 Hemoglobin level will act as a risk factor for :ref:`maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>`. For the implementation of this risk effect, hemoglobin risk exposure will be defined as **dichotomous** based on a threshold of 70 grams per liter (severe anemia among pregnant women).
 
 The relative risk for this risk factor will apply to the probability of experiencing an incident case of maternal hemorrhage at birth such that:
