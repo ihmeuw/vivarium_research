@@ -58,7 +58,7 @@ We will model the following eligibility for the postpartum IV iron intervention:
 
   A potential future eligibility criterion for this intervention may be in-facility delivery and/or skilled birth attendance if we include them as modeled parameters
 
-We assume that IV iron intervention coverage takes place at the start of pregnancy (i.e. upon transition into the pregnant state).
+We assume that IV iron intervention coverage takes place immediately following birth (i.e. upon transition into the postpartum state). Importantly, the intervention eligibility should be assessed following any birth-related changes to hemoglobin levels such as those related to maternal hemorrhage incidence.
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
