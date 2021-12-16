@@ -93,7 +93,7 @@ Pregnancy and births are not explicit outcomes in the GBD study. However, there 
     - 2363
     - 
 
-GBD has estimated the prevalence of pregnancy (as in itermediate variable for the estimation of various outcomes) as:
+GBD has estimated the prevalence of pregnancy (as an intermediate variable for the estimation of various outcomes) as:
 
 .. math::
 
