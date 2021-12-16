@@ -4,10 +4,6 @@
 Maternal hemorrhage incidence
 ==============================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
-
 .. contents::
    :local:
    :depth: 1
@@ -23,26 +19,53 @@ Maternal hemorrhage incidence
     - 
     - 
 
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
-
 Disease Overview
 ----------------
 
-.. todo::
+Maternal hemorrhage is defined as bleeding during pregnancy (antenatal hemorrhage), during birth (peripartum hemorrhage), or postpartum (postpartum hemorrhage). The threshold of maternal hemorrhage is often defined by at least 500 mL of blood lost or 1 liter of blood lost in the case of a cesarean section. Severe hemorrhage is often categorized as 1 liter of blood lost in non-cesarean section cases. Postpartum hemorrhage comprises the majority of maternal hemorrhage cases.
 
-   Add a general clinical overview of the cause.
+Maternal hemorrhage is the leading cause of maternal mortality worldwide. Major risk factors for maternal hemorrhage include maternal anemia and delivery in a non-facility setting. Interventions for the prevention of postpartum hemorrhage include the active management of the third stage of labor: a series of preventative steps that include the use of prophylactic uterotonic drugs (such as oxytocin), uterine massage, etc.
+
+Measurement of the burden of maternal hemorrhage can be difficult due to the difficulty in estimating the amount of blood lost.
+
+Maternal hemorrhage can result in adverse outcomes including anemia, blood transfusion, hysterectomy, and death.
 
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. todo::
+Covariates for the estimation of the maternal hemorrhage fatal model include:
 
-  Add an overview of the GBD modeling section.
+- In-facility delivery (proportion)
+- Skilled birth attendance (proportion)
+- Age- and sex-specific SEV for unsafe sanitation
+- Neonatal mortality ratio (log-transformed)
+- Maternal education
+- Healthcare access and quality index
+
+Anemia due to maternal hemorrhage is estimated as part of the :ref:`GBD 2019 anemia impairment and causal attribution process <2019_anemia_impairment>`.
 
 Cause Hierarchy
 +++++++++++++++
+
+- All causes (c_294)
+
+  - Communicable, maternal, neonatal, and nutritional diseases (c_295)
+
+    - Maternal disorders and neonatal disorders (c_962)
+
+      - **Maternal disorders (c_366)**
+
+        - Maternal hemorrhage (c_367)
+
+          - Mild anemia due to maternal hemorrhage (s_182)
+
+          - Moderate anemia due to maternal hemorrhage (s_183)
+
+          - Severe anemia due to maternal hemorrhage (s_184)
+
+          - Maternal hemorrhage with less than 1 liter blood loss (s_180)
+
+          - Maternal hemorrhage with greater than 1 liter blood loss (s_181)
 
 Restrictions
 ++++++++++++
@@ -59,30 +82,29 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - True
      -
    * - YLL only
-     -
-     -
+     - False
+     - False
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
+     - 10 to 14 (ID=7)
      -
    * - YLL age group end
-     -
+     - 50 to 54 (ID=15)
      -
    * - YLD age group start
-     -
+     - 10 to 14 (ID=7)
      -
    * - YLD age group end
+     - 50 to 54 (ID=15)
      -
-     -
-
 
 Vivarium Modeling Strategy
 --------------------------
