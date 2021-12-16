@@ -186,222 +186,111 @@ Vivarium Modeling Strategy
 
 We will convert the maternal disorders deaths and disability as estimated by GBD in terms of an annual rate among women of reproductive age to events *per birth* (including stillbirths) for use in our :ref:`simulation of IV iron <2019_concept_model_vivarium_iv_iron>`. Births among women of reproductive age in our simulation will be informed by the the :ref:`pregnancy model document <other_models_pregnancy>`.
 
-We will need to pay particular attention to our strategy and assumptions regarding:
-
-- Abortion and miscarriage and ectopic pregnancies (which are not included in our estimation of pregnancy since they are not defined as stillbirths)
-- Late maternal deaths (for which modeling death at birth may not be appropriate)
-- Disability associated with conditions that persist for greater than one year
-
 Scope
 +++++
 
-.. todo::
+We will model maternal disorders a single cause related to birth as informed through the :ref:`pregnancy model document <other_models_pregnancy>`. This model will not distinguish between morbidity and mortality related to specific subcauses or sequelae of maternal disorders. This cause model will be affected by the :ref:`iron deficiency risk factor <2019_risk_effect_iron_deficiency>`, which is assumed to affect maternal disorders mortality and morbidity equally.
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+We will not model maternal disorders as a dynamic transition model, but rather as discrete events that occur at birth. The probability of maternal disorder deaths will be informed by a maternal mortality ratio derived from GBD data; YLLs will be measured based on the mother's age at birth. The rate of YLDs due to maternal disorders will be based on a ratio of incident maternal disorders per birth and assigned the annual value of YLDs per incidence maternal disorder case.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
+- We assume that all maternal disorders deaths occur at birth. For deaths due to late maternal disorders, this will result in earlier maternal deaths in our model than in reality, which may overestimate the impact of maternal mortality on infant outcomes such as breastfeeding behaviors/orphanhood when we model maternal-child dyads. We may overestimate YLLs due to late maternal deaths and underestimate YLLs due to abortions, miscarriages, and ectopic pregnancies.
+
+- We assume that all maternal disorders morbidity *begins* at birth and persists for one year after birth. For morbidity due to hypertensive disorders and maternal sepsis may occur prior to when we model it. For sequelae that persist for longer than one year (ex: long term sequelae of eclampsia, infertility, fistula), we will underestimate YLDs.
+
+- We will assume that mothers experience mortality due to maternal disorders also experience associated morbidity. This may not be a logical assumption for subcauses with long term sequelae, including maternal hemorrhage, maternal hypertensive disorders, and obstructed labor and uterine rupture; however, it is likely a logical assumption for other maternal disorders subcauses including maternal sepsis, abortion and miscarriage, and acute sequelae of the other maternal disorder subcauses.
+
+- We are limited in that abortions, miscarriages, and ectopic pregnancies that occur prior to 24 weeks gestation are not included in our model of pregnancy and we therefore may overestimate the rate at which they occur among pregnant women in our simulation.
+
 .. todo::
 
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+  Consider adding the incident rate of these outcomes to the pregnancy model.
 
 Cause Model Diagram
 +++++++++++++++++++
 
-State and Transition Data Tables
+Not applicable.
+
+Data Tables
 ++++++++++++++++++++++++++++++++
 
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
+Ratios of maternal disorder mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a death or incident case of maternal disorders at birth in our simulation. Notably, **the same propensity** should be used to determine incidence maternal disorder cases as deaths due to maternal disorders such that each simulant who experiences deaths due to maternal disorders also experiences an incidence case of maternal disorders.
 
-Definitions
-"""""""""""
-
-This table contains the definitions of all the states in **cause model diagram**. 
-
-.. list-table:: State Definitions
+.. list-table:: Ratios per birth
    :widths: 5 5 20
    :header-rows: 1
 
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
-
-**SIR Model**
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - S
-     - Susceptible
-     - Susceptible to {cause name}
-   * - I
-     - Infected
-     - Infected with {cause name}
-   * - R
-     - Recovered
-     - Infected with {cause name}
-
-
-**With-Condition and Free of Condition Model**
-
-.. list-table:: State Definitions
-   :widths: 1, 5, 10
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - C
-     - With **C**\ ondition
-     - Born with {cause name}
-   * - F
-     - **F**\ ree of Condition
-     - Born without {cause name}
-
-Include states, their names and definitions appropriate to your model.
-
-States Data
-"""""""""""
-
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. The common measures in each state are prevalence, birth prevalence, excess mortality rate and disability weights. 
-Cause specific mortality rate is the common measure for all states. In most of the models either prevalence or birth prevalence is used. 
-But in some rare cases like neonatal models both prevalence and birth prevalence are used in model initialization. The Value column contains the formula to calculate 
-the measure in each state.
-
-The structure of the table is as below. For each state, the measures and values must be included.
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
+   * - Event
      - Value
-     - Notes
-   * - State
-     - prevalence
+     - Note
+   * - Maternal disorder deaths
+     - csmr_c366 / (ASFR + ASFR * SBR)
      - 
-     - 
-   * - State
-     - birth prevalence
-     - 
-     - 
-   * - State
-     - excess mortality rate
-     - 
-     - 
-   * - State
-     - disabilty weights
-     - 
-     -
-   * - ALL
-     - cause specific mortality rate
-     - 
+   * - Incident maternal disorders
+     - incidence_rate_c366 / (ASFR + ASFR * SBR)
      - 
 
+The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
 
-
-Transition Data
-"""""""""""""""
-
-This table contains the measures needed for transition from one state to other in the cause model. The common measures used are *incident rate* to 
-move from Susceptible to Infected and *remission rate* to move from Infected to Susceptible or Recovered states. Some times there may not be transition 
-between states as in Neonatal disorders.
-
-The structure of the table is as below. 
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
+.. list-table:: Data values
    :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
-     - S
-     - I
-     - 
-     - 
-   * - r
-     - I
-     - R
-     - 	
-     - 
 
-
-Data Sources
-""""""""""""
-
-This table contains the data sources for all the measures. The table structure and common measures are as below:
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_cid
+   * - Parameter
+     - Definition
+     - Value or source
+     - Note
+   * - csmr_c366
+     - Maternal disorder cause-specific mortality rate
+     - deaths_c366 / population
      - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
+   * - deaths_c366
+     - count of deaths due to maternal disorders
+     - codcorrect, decomp_step='step5'
      - 
    * - population
+     - population count
+     - get_population, decomp_step='step5'
+     - Specific to a/s/l/y demographic group
+   * - incidence_rate_c366
+     - incidence rate of maternal disorders
+     - como, decomp_step='step5'
      - 
+   * - ylds_c366
+     - Annual rate of maternal disorder YLDs among WRA
+     - como, decomp_step='step5'
      - 
+   * - ASFR
+     - Age-specific fertility rate
+     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_m1594
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
+   * - SBR
+     - Stillbirth to livebirth ratio
+     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
 
+Years of life lost
+"""""""""""""""""""
+
+Years of life lost (YLLs) should be assigned to simulants who experience a death due to maternal disorders based on their age and theoretical minimum risk life expectancy at the time of death.
+
+Years lived with disability
+""""""""""""""""""""""""""""
+
+Years lived with disability (YLDs) should be assigned to simulants who experience an incidence case of maternal disorders. Rather than accumulate YLDs according to time spent in a particular cause model state and the disability weight associated with that state (as done for standard cause models), we will assign YLDs to an individual simulant all at once according to the average amount of YLDs exerpienced in a single maternal disorder incident case.
+
+The value of YLDs to assign to a simulant who experienced an incident case of maternal disorders is as follows:
+
+.. math::
+
+  \text{ylds}_{c366} / \text{incidence_rate}_{c366}
 
 Validation Criteria
 +++++++++++++++++++
+
+- The maternal disorders incidence, mortality, YLL, and YLD rate per person-year among women of reproductive age in the simulation should validate to estimates from GBD
+- Maternal disorders deaths and incidnece should occur among pregnant women only
 
 References
 ----------
