@@ -293,7 +293,7 @@ For model versions 2+:
 4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>`
+* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
 * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
 
 For model versions 2+:
