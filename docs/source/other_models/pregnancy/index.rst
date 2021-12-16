@@ -65,7 +65,7 @@ Overview
 GBD Modeling Strategy
 ----------------------
 
-Pregnancy and births are not explit outcomes in the GBD study. However, there are location- and year-specfic GBD covariates related to fertility and births, including:
+Pregnancy and births are not explicit outcomes in the GBD study. However, there are location- and year-specfic GBD covariates related to fertility and births, including:
 
 .. list-table:: Covariates
   :widths: 15 15 15
