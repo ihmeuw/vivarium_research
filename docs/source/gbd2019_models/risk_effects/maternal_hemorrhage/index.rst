@@ -39,62 +39,26 @@ Maternal Hemorrhage
 Risk Overview
 -------------
 
-.. todo::
+.. note::
 
-	Provide a brief description of the risk, including potential opportunities for confounding (factors that may cause or be associated with the risk exposure), effect modification/generalizability, etc. by any relevant variables. Note that literature reviews and speaking with the GBD risk modeler will be good resources for this.
+   This section will describe the Vivarium modeling strategy for risk effects.
+   For a description of Vivarium modeling strategy for risk exposure (in this case a cause model document), see the
+   :ref:`maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>` page.
+
 
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. note::
+GBD does not explicitly model maternal hemorrhage as a risk factor. However, GBD models a hemoglobin shift associated with maternal hemorrhage in the :ref:`anemia causal attribution process <2019_anemia_impairment>`, which was derived from a meta-analysis performed for GBD 2019. 
 
-   This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
+GBD assumes that a case of **maternal hemorrhage is associated with a decrease of 6.8 grams per liter hemoglobin concentration**, on average. There is no uncertainty interval around this value considered in the GBD anemia causal attribution process (this value is not published, but was obtained from the anemia modelers).
 
 .. todo::
 
-	Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
-
-.. todo::
-
-	Provide a brief overview of how the risk affects different outcomes, including data sources used by GBD, GBD assumptions, etc. Note that the [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Maternal-Hemorrhage]_ is a good source for this information in addition to the GBD risk modeler.
-
-.. todo::
-
-	Fill out the following table so that it reflects *all* entities affected by the risk in GBD 2019.
-
-.. list-table:: Affected Entities
-   :widths: 5 5 5 5 5
-   :header-rows: 1
-
-   * - Outcome
-     - Outcome type
-     - Outcome ID
-     - Affected measure
-     - Note
-   * -
-     -
-     -
-     -
-     -
+  Reach out to anemia modelers to see if there is an uncertainty interval from the systematic review that just isn't used in the causal attribution code.
 
 Vivarium Modeling Strategy
 --------------------------
-
-.. note::
-
-   This section will describe the Vivarium modeling strategy for risk effects.
-   For a description of Vivarium modeling strategy for risk exposure, see the
-   {RISK_EXPOSURE_PAGE_LINK} page.
-
-.. todo::
-
-   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk exposure page in the above note.
-
-.. todo::
-
-   List the risk-outcome relationships that will be included in the risk effects model for this risk factor. Note whether the outcome in a risk-outcome relationship is a standard GBD risk-outcome relationship or is a custom relationship we are modeling for our simulation.
 
 .. list-table:: Risk Outcome Relationships for Vivarium
    :widths: 5 5 5 5 5
@@ -105,98 +69,37 @@ Vivarium Modeling Strategy
      - Outcome ID
      - Affected measure
      - Note
-   * -
-     -
-     -
-     -
-     -
+   * - Postpartum hemoglobin concentration
+     - Modelable entity
+     - 10487
+     - Hemoglobin concentration
+     - During the :ref:`postpartum period <other_models_pregnancy>` only
 
-Risk Outcome Pair #1
-++++++++++++++++++++
+Postpartum hemoglobin
++++++++++++++++++++++
 
-.. todo::
+**Hemoglobin_shift == 6.8 grams per liter**
 
-	Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
-
-.. todo::
-
-  Link to existing cause model document or other documentation of the outcome in the risk outcome pair.
-
-.. todo::
-
-  Describe which entitity the relative risks apply to (incidence rate, prevalence, excess mortality rate, etc.) and *how* to apply them (e.g. :code:`affected_measure * (1 - PAF) * RR`).
-
-  Be sure to specify the exact PAF that should be used in the above equation and either how to calculate it (see the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document) or pull it (:code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'population_attributable_fraction')`, noting which affected entity and measure should be used)
-
-.. todo::
-
-  Complete the following table to list the relative risks for each risk exposure category on the outcome. Note that if there are many exposure categories, another format may be preferable.
-
-  Relative risks for a risk factor may be pulled from GBD at the draw-level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`. You can then calculate the mean value as well as 2.5th, and 97.5th percentiles across draws.
-
-  The relative risks in the table below should be included for easy reference and should match the relative risks pulled from GBD using the above code. In this case, update the :code:`Note` below to include the appropriate :code:`{risk_name}`.
-
-  If for any reason the modeling strategy uses non-GBD relative risks, update the :code:`Note` below to explain that the relative risks in the table are a custom, non-GBD data source and include a sampling strategy.
-
-.. note::
-
-  The following relative risks are displayed below for convenient reference. The relative risks in the table below should match the relative risks that can be pulled at the draw level using :code:`vivarium_inputs.interface.get_measure(risk_factor.{risk_name}, 'relative_risk')`.
-
-.. list-table:: Relative Risks
-   :widths: 5 5 5
-   :header-rows: 1
-
-   * - Exposure Category
-     - Relative Risk
-     - Note
-   * -
-     -
-     -
+For simulants who experience an incident case of maternal hemorrhage as determined in the  :ref:`maternal hemorrhage incidence cause mode document<2019_cause_maternal_hemorrhage_incidence>`, their :ref:`hemoglobin concentration exposure <2019_hemoglobin_model>` should be decreased by the hemoglobin_shift from the time of birth for the duration of the postpartum period as defined by the :ref:`pregnancy model <other_models_pregnancy>`. At the end of the postpartum period, the simulants' hemoglobin concentration should increase by the hemoglobin_shift prior the removal of the pregnancy adjustment factor to the simulant's hemoglobin level.
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+The hemoglobin concentration stratified by maternal hemorrhage incidence (also stratified by anemia status in pregnancy to avoid confounding by this factor) should differ by the magnitude of the maternal hemorrhage hemoglobin shift.
 
-  List validation and verification criteria, including a list of variables that will need to be tracked and reported in the Vivarium simulation to ensure that the risk outcome relationship is modeled correctly
+.. note::
+
+  We may slightly underestimate the hemoglobin exposure distribution as a result of the implementation of this modeling strategy.
 
 Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-	List assumptions and limitations of this modeling strategy, including any potential issues regarding confounding, mediation, effect modification, and/or generalizability with the risk-outcome pair.
-
-Bias in the Population Attributable Fraction
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-As noted in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document, using a relative risk adjusted for confounding to compute a population attributable fraction at the population level will introduce bias.
+- This modeling strategy does not consider that the impact of maternal hemorrhage is already reflected in the pregnancy adjustment factor used for the :ref:`hemoglobin model <2019_hemoglobin_model>` and therefore we may slightly underestimate hemoglobin concentration (and therefore overestimate anemia prevalence) on average during the pregnancy and lactation period by applying an additional negative hemoglobin shift associated with maternal hemorrhage.
 
 .. todo::
 
-	Outline the potential direction and magnitude of the potential PAF bias in GBD based on what is understood about the relationship of confounding between the risk and outcome pair using the framework discussed in the `Population Attributable Fraction` section of the :ref:`Modeling Risk Factors <models_risk_factors>` document.
+  Consider a modeling strategy that calibrates the pregnancy-specific hemoglobin exposure to the baseline level of maternal hemorrhage in the population
 
 References
 ----------
 
-.. todo::
-
-  Update the GBD 2019 Risk Factor Methods appendix citation to be unique to your
-  risk effects page (replace 'Risk-Effects-Model-Template' with '{Risk
-  Name}-Effects')
-
-  Update the appropriate page numbers in the GBD risk factors methods appendix below
-
-  Add additional references as necessary
-
-.. [GBD-2019-Risk-Factors-Appendix-Risk-Effects-Maternal-Hemorrhage]
-
-  Pages ???-??? in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
-
-    **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
-    :title:`Global burden of 87 risk factors in 204 countries and territories,
-    1990–2019: a systematic analysis for the Global Burden of Disease Study
-    2019`. Lancet 2020; **396:** 1223–49. DOI:
-    https://doi.org/10.1016/S0140-6736(20)30752-2
-
-.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
