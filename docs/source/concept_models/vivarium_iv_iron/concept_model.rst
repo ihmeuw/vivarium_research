@@ -255,8 +255,8 @@ Date of intervention end: December 31, 2024
 4.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
 
-* Maternal disorders
-* Maternal hemorrhage incidence
+* :ref:`Maternal disorders <2019_cause_maternal_disorders>`
+* :ref:`Maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>`
 
 For model versions 2+: 
 
