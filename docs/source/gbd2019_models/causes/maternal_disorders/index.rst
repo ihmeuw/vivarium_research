@@ -296,7 +296,7 @@ Validation Criteria
 +++++++++++++++++++
 
 - The maternal disorders incidence, mortality, YLL, and YLD rate per person-year among women of reproductive age in the simulation should validate to estimates from GBD
-- Maternal disorders deaths and incidnece should occur among pregnant women only
+- Maternal disorders deaths and incidence should occur among pregnant women only
 
 References
 ----------
