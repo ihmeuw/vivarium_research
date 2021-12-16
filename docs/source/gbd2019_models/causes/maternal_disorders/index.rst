@@ -202,6 +202,12 @@ Assumptions and Limitations
 
 - We will assume that mothers experience mortality due to maternal disorders also experience associated morbidity. This may not be a logical assumption for subcauses with long term sequelae, including maternal hemorrhage, maternal hypertensive disorders, and obstructed labor and uterine rupture; however, it is likely a logical assumption for other maternal disorders subcauses including maternal sepsis, abortion and miscarriage, and acute sequelae of the other maternal disorder subcauses.
 
+- If we are separately modeling disability due to anemia, then we will double count disability due to anemia due to postpartum hemorrhage in our model.
+
+.. todo::
+   
+   Consider strategy to remove this burden from estimation of disability attributable to maternal disorders
+
 - We are limited in that abortions, miscarriages, and ectopic pregnancies that occur prior to 24 weeks gestation are not included in our model of pregnancy and we therefore may overestimate the rate at which they occur among pregnant women in our simulation.
 
 .. todo::
