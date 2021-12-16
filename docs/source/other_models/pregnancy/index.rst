@@ -103,7 +103,7 @@ Where :math:`ASFR` is the age-specific fertility rate, :math:`SBR` is the stillb
 
 .. todo::
 
-   Determine the treshold of gestational age at which a loss of pregnancy is classified as a stillbirth rather than miscarriage for the GBD covariate. Standard thresholds are 20 or 24 weeks.
+   Determine the threshold of gestational age at which a loss of pregnancy is classified as a stillbirth rather than miscarriage for the GBD covariate. Standard thresholds are 20 or 24 weeks.
 
 Vivarium Modeling Strategy
 ----------------------------
