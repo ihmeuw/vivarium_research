@@ -4,10 +4,6 @@
 Postpartum Intravenous Iron
 ==============================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
-
 .. contents::
    :local:
    :depth: 1
@@ -23,22 +19,10 @@ Postpartum Intravenous Iron
     - 
     - 
 
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
-
 Intervention Overview
 -----------------------
 
-.. todo::
-
-   Add a general narrative overview of the intervention, including what it is, what outcomes it affects, if/how/when/where it has been used, etc.
-
-.. todo::
-
-  Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
-
-  The table below provides example entries for large scale food fortification with iron.
+The postpartum IV iron intervention is intended to be administered to women with a hemoglobin level less than 100 grams per liter immediately following birth. Birthing women will be screened for low hemoglobin level immediately following birth if they delivered in a facility setting and/or if a skilled birth attendant was present for the birth.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -52,10 +36,6 @@ Intervention Overview
     - Increases population mean
     - Yes
     - 
-  * - Birthweight
-    - Increases population mean
-    - Yes
-    - 
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
@@ -65,13 +45,20 @@ Assume no baseline coverage in low and middle income countries.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
+We will model the following eligibility for the postpartum IV iron intervention:
 
-  Add an overview of the Vivarium modeling section.
+#. Pregnant women at birth (i.e. the transition from the pregnant to postpartum states) according to the :ref:`pregnancy model document <other_models_pregnancy>`
+#. Hemoglobin level of less than 100 grams per liter according to the :ref:`hemoglobin model document <2019_hemoglobin_model>` *after* the application of the pregnancy adjustment factor and any other factors that affect hemoglobin level such as pre-birth intervention coverage or maternal hemorrhage shift.
 
-.. todo::
+.. note::
 
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
+  Women who receive IV iron should continue to be covered by the :ref:`maternal supplementation intervention <maternal_supplementation_intervention>` 
+
+  Coverage by :ref:`antenatal IV iron <intervention_iv_iron_postpartum>` is not an exclusion criteria for coverage by postpartum IV iron
+
+  A potential future eligibility criterion for this intervention may be in-facility delivery and/or skilled birth attendance if we include them as modeled parameters
+
+We assume that IV iron intervention coverage takes place at the start of pregnancy (i.e. upon transition into the pregnant state).
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
@@ -83,52 +70,17 @@ Vivarium Modeling Strategy
     - Affected measure
     - Effect size measure
     - Effect size
-    - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
-    - 
+    - Note 
+  * - Hemoglobin
+    - Modelable entity
+    - 10487
+    - Population mean hemoglobin concentration (as continuous measure)
+    - Mean difference
+    - +10 g/L
     - 
 
 Hemoglobin level among pregnant and lactating women
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Maternal hemoglobin restrictions
-  :widths: 15 15 15
-  :header-rows: 1
-
-  * - Restriction
-    - Value
-    - Note
-  * - Male only
-    - 
-    - 
-  * - Female only
-    - 
-    - 
-  * - Age group start
-    - 
-    - 
-  * - Age group end
-    - 
-    - 
-  * - Other
-    - 
-    - 
 
 .. list-table:: Maternal hemoglobin effect size
   :widths: 15 15 15 
@@ -137,84 +89,27 @@ Hemoglobin level among pregnant and lactating women
   * - Population
     - Effect size
     - Note
-  * - 
-    - 
-    - 
-.. todo::
+  * - Immediately post-birth women with hemoglobin levels less than 100 g/L
+    - +10 g/L 
+    - Effect is present two weeks after birth through the end of the postpartum period. Effect size is from the BMGF optomistic target product profile 
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure *two weeks following birth birth*. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Validation and Verification Criteria
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- We assume the effect of the intervntion persists through the end of the postpartum period at which point the woman's hemoglobin concentration returns to its pre-pregnancy level. In reality, it may persist beyond the end of the postpartum period, in which case we may underestimate the intervention impact.
 
-Infant birthweight
-+++++++++++++++++++++++++++++++++++++++++++++++++++++
+- We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
 
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Birthweight restrictions
-  :widths: 15 15 15
-  :header-rows: 1
-
-  * - Restriction
-    - Value
-    - Note
-  * - Male only
-    - 
-    - 
-  * - Female only
-    - 
-    - 
-  * - Age group start
-    - 
-    - 
-  * - Age group end
-    - 
-    - 
-  * - Other
-    - 
-    - 
-
-.. list-table:: Birthweight effect size
-  :widths: 15 15 15 
-  :header-rows: 1
-
-  * - Population
-    - Effect size
-    - Note
-  * - 
-    - 
-    - 
-.. todo::
-
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
-
-Assumptions and Limitations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- We do not consider alternative intervention to IV iron such as blood transfusions, which may be preferable in the case of low post-birth hemoglobin level due to maternal hemorrhage.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Intervention coverage among the eligible population should verify to the scenario-specific level
+- Intervention coverage should be zero among the non-eligible populations
+- Hemoglobin level stratified by intervention coverage should reflect the intervention effect size
 
 References
 ------------
