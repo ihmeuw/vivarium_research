@@ -165,8 +165,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - pp
     - Informed by gestational age (see below section)
     - Duration-based transition
-  * - np
-    - n
+  * - pp
+    - np
     - 6 weeks (42 days) duration
     - Duration-based transition
 
