@@ -80,7 +80,7 @@ Postpartum hemoglobin
 
 **Hemoglobin_shift == 6.8 grams per liter**
 
-For simulants who experience an incident case of maternal hemorrhage as determined in the  :ref:`maternal hemorrhage incidence cause mode document<2019_cause_maternal_hemorrhage_incidence>`, their :ref:`hemoglobin concentration exposure <2019_hemoglobin_model>` should be decreased by the hemoglobin_shift from the time of birth for the duration of the postpartum period as defined by the :ref:`pregnancy model <other_models_pregnancy>`. At the end of the postpartum period, the simulants' hemoglobin concentration should increase by the hemoglobin_shift prior the removal of the pregnancy adjustment factor to the simulant's hemoglobin level.
+For simulants who experience an incident case of maternal hemorrhage as determined in the  :ref:`maternal hemorrhage incidence cause mode document<2019_cause_maternal_hemorrhage_incidence>`, their :ref:`hemoglobin concentration exposure <2019_hemoglobin_model>` should be decreased by the hemoglobin_shift from the time of birth for the duration of the postpartum period as defined by the :ref:`pregnancy model <other_models_pregnancy>`. At the end of the postpartum period, the simulants' hemoglobin concentration should increase by the hemoglobin_shift prior to the removal of the pregnancy adjustment factor to the simulant's hemoglobin level.
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
