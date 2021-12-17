@@ -306,7 +306,7 @@ Validation and Verification Criteria
 Assumptions and limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-- This modeling strategy assumes that maternal hemorrhage case fatal is not assoicated with hemoglobin level.
+- This modeling strategy assumes that maternal hemorrhage case fatality rate is not associated with hemoglobin level.
 - We are limited in our use of a dichotomous exposure for hemoglobin. There are suspected differences in maternal hemoglobin risk by hemoglobin levels above 70, although we are limited by data quality to inform this relationship.
 
 References
