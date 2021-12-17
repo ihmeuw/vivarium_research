@@ -93,7 +93,7 @@ Hemoglobin level among pregnant and lactating women
     - +10 g/L 
     - Effect is present two weeks after birth through the end of the postpartum period. Effect size is from the BMGF optomistic target product profile 
 
-The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure *two weeks following birth birth*. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
+The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure *two weeks following birth*. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
