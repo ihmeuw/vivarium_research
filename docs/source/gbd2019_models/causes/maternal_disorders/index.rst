@@ -184,7 +184,7 @@ on the ages and sexes to which the cause applies.
 Vivarium Modeling Strategy
 --------------------------
 
-We will convert the maternal disorders deaths and disability as estimated by GBD in terms of an annual rate among women of reproductive age to events *per birth* (including stillbirths) for use in our :ref:`simulation of IV iron <2019_concept_model_vivarium_iv_iron>`. Births among women of reproductive age in our simulation will be informed by the the :ref:`pregnancy model document <other_models_pregnancy>`.
+We will convert the maternal disorders deaths and disability as estimated by GBD in terms of an annual rate among women of reproductive age to events *per birth* (including stillbirths) for use in our :ref:`simulation of IV iron <2019_concept_model_vivarium_iv_iron>`. Births among women of reproductive age in our simulation will be informed by the :ref:`pregnancy model document <other_models_pregnancy>`.
 
 We will need to pay particular attention to our strategy and assumptions regarding:
 
