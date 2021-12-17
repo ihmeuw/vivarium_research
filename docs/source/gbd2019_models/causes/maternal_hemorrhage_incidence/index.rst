@@ -4,10 +4,6 @@
 Maternal hemorrhage incidence
 ==============================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
-
 .. contents::
    :local:
    :depth: 1
@@ -23,26 +19,55 @@ Maternal hemorrhage incidence
     - 
     - 
 
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
-
 Disease Overview
 ----------------
 
-.. todo::
+Maternal hemorrhage is defined as bleeding during pregnancy (antenatal hemorrhage), during birth (peripartum hemorrhage), or postpartum (postpartum hemorrhage). The threshold of maternal hemorrhage is often defined by at least 500 mL of blood lost or 1 liter of blood lost in the case of a cesarean section. Severe hemorrhage is often categorized as 1 liter of blood lost in non-cesarean section cases. Postpartum hemorrhage comprises the majority of maternal hemorrhage cases.
 
-   Add a general clinical overview of the cause.
+Maternal hemorrhage is the leading cause of maternal mortality worldwide. Major risk factors for maternal hemorrhage include maternal anemia and delivery in a non-facility setting. Interventions for the prevention of postpartum hemorrhage include the active management of the third stage of labor: a series of preventative steps that include the use of prophylactic uterotonic drugs (such as oxytocin), uterine massage, etc.
+
+Measurement of the burden of maternal hemorrhage can be difficult due to the difficulty in estimating the amount of blood lost.
+
+Maternal hemorrhage can result in adverse outcomes including anemia, blood transfusion, hysterectomy, and death.
 
 GBD 2019 Modeling Strategy
 --------------------------
 
-.. todo::
+Covariates for the estimation of the maternal hemorrhage fatal model include:
 
-  Add an overview of the GBD modeling section.
+- In-facility delivery (proportion)
+- Skilled birth attendance (proportion)
+- Age- and sex-specific SEV for unsafe sanitation
+- Neonatal mortality ratio (log-transformed)
+- Maternal education
+- Healthcare access and quality index
+
+Anemia due to maternal hemorrhage is estimated as part of the :ref:`GBD 2019 anemia impairment and causal attribution process <2019_anemia_impairment>`.
+
+[GBD-2019-Capstone-Appendix-Maternal-Hemorrhage]_
 
 Cause Hierarchy
 +++++++++++++++
+
+- All causes (c_294)
+
+  - Communicable, maternal, neonatal, and nutritional diseases (c_295)
+
+    - Maternal disorders and neonatal disorders (c_962)
+
+      - Maternal disorders (c_366)
+
+        - **Maternal hemorrhage (c_367)**
+
+          - Mild anemia due to maternal hemorrhage (s_182)
+
+          - Moderate anemia due to maternal hemorrhage (s_183)
+
+          - Severe anemia due to maternal hemorrhage (s_184)
+
+          - Maternal hemorrhage with less than 1 liter blood loss (s_180)
+
+          - Maternal hemorrhage with greater than 1 liter blood loss (s_181)
 
 Restrictions
 ++++++++++++
@@ -59,248 +84,126 @@ on the ages and sexes to which the cause applies.
      - Value
      - Notes
    * - Male only
-     -
+     - False
      -
    * - Female only
-     -
+     - True
      -
    * - YLL only
-     -
-     -
+     - False
+     - False
    * - YLD only
-     -
+     - False
      -
    * - YLL age group start
-     -
+     - 10 to 14 (ID=7)
      -
    * - YLL age group end
-     -
+     - 50 to 54 (ID=15)
      -
    * - YLD age group start
-     -
+     - 10 to 14 (ID=7)
      -
    * - YLD age group end
+     - 50 to 54 (ID=15)
      -
-     -
-
 
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
+Similar to the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`, we will convert the maternal hemorrhage incidence rate as estimated by GBD in terms of an annual rate among women of reproductive age to events *per birth* (including stillbirths) for use in our :ref:`simulation of IV iron <2019_concept_model_vivarium_iv_iron>`. Births among women of reproductive age in our simulation will be informed by the the :ref:`pregnancy model document <other_models_pregnancy>`.
 
 Scope
 +++++
 
-.. todo::
+This cause model document was developed for the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`. It is intended to be a DALY-free cause model in order to model in impact on postpartum hemoglobin levels. This cause model will also be affected by maternal anemia level during pregnancy.
 
-  Describe which aspects of the disease this cause model is designed to
-  simulate, and which aspects it is **not** designed to simulate.
+We will not model maternal hemorrhage incidence as a dynamic transition model, but rather as a discrete event that occurs at birth. The probability of maternal hemorrhage incidence will be informed by a ratio per birth derived from GBD data.
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-.. todo::
-
-  Describe the clinical and mathematical assumptions made for this cause model,
-  and the limitations these assumptions impose on the applicability of the
-  model.
+- We will assume that all causes of maternal hemorrhage occur at the time of birth.
+- Our model of maternal hemorrhage incidence will be measured as cases that do not die due to maternal hemorrhage.
+- We will assume that incidence cases of maternal hemorrhage (as defined in the above bullet point) also do not die due to other maternal disorder causes. This may cause us to overestimate the number of maternal hemorrhage incident cases that survive through childbirth. 
 
 Cause Model Diagram
 +++++++++++++++++++
 
-State and Transition Data Tables
+Not applicable.
+
+Data Tables
 ++++++++++++++++++++++++++++++++
 
-This section gives necessary information to software engineers for building the model. 
-This section usually contains four tables: Definitions, State Data, Transition Data and Data Sources.
+Ratios of maternal hemorrhage mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a death or incident case of maternal hemorrhage at birth in our simulation. 
 
-Definitions
-"""""""""""
+The propensity used to determine maternal hemorrhage events should equal **1 minus the propensity used for the** :ref:`maternal disorders <2019_cause_maternal_disorders>` **events**, such that no simulant who experiences an incident case of maternal hemorrhage will also die due to maternal disorders.
 
-This table contains the definitions of all the states in **cause model diagram**. 
-
-.. list-table:: State Definitions
+.. list-table:: Ratios per birth
    :widths: 5 5 20
    :header-rows: 1
 
-   * - State
-     - State Name
-     - Definition
-   * - 
-     - 
-     - 
-   * - 
-     - 
-     - 
-
-For example, the *Definitions* table for *SIR* and *With-Condition and Free of Condition Model* models are as below:
-
-**SIR Model**
-
-.. list-table:: State Definitions
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - S
-     - Susceptible
-     - Susceptible to {cause name}
-   * - I
-     - Infected
-     - Infected with {cause name}
-   * - R
-     - Recovered
-     - Infected with {cause name}
-
-
-**With-Condition and Free of Condition Model**
-
-.. list-table:: State Definitions
-   :widths: 1, 5, 10
-   :header-rows: 1
-
-   * - State
-     - State Name
-     - Definition
-   * - C
-     - With **C**\ ondition
-     - Born with {cause name}
-   * - F
-     - **F**\ ree of Condition
-     - Born without {cause name}
-
-Include states, their names and definitions appropriate to your model.
-
-States Data
-"""""""""""
-
-This table contains the **measures** and their **values** for each state in cause-model diagram. This information is used to 
-initialize the model. The common measures in each state are prevalence, birth prevalence, excess mortality rate and disability weights. 
-Cause specific mortality rate is the common measure for all states. In most of the models either prevalence or birth prevalence is used. 
-But in some rare cases like neonatal models both prevalence and birth prevalence are used in model initialization. The Value column contains the formula to calculate 
-the measure in each state.
-
-The structure of the table is as below. For each state, the measures and values must be included.
-
-.. list-table:: States Data
-   :widths: 20 25 30 30
-   :header-rows: 1
-   
-   * - State
-     - Measure
+   * - Event
      - Value
-     - Notes
-   * - State
-     - prevalence
-     - 
-     - 
-   * - State
-     - birth prevalence
-     - 
-     - 
-   * - State
-     - excess mortality rate
-     - 
-     - 
-   * - State
-     - disabilty weights
-     - 
-     -
-   * - ALL
-     - cause specific mortality rate
-     - 
+     - Note
+   * - Deaths due to maternal hemorrhage
+     - 0
+     - Captured in the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
+   * - Incident maternal hemorrhage cases
+     - (incidence_rate_c367 - csmr_c367) / (ASFR + ASFR * SBR)
      - 
 
+The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
 
-
-Transition Data
-"""""""""""""""
-
-This table contains the measures needed for transition from one state to other in the cause model. The common measures used are *incident rate* to 
-move from Susceptible to Infected and *remission rate* to move from Infected to Susceptible or Recovered states. Some times there may not be transition 
-between states as in Neonatal disorders.
-
-The structure of the table is as below. 
-
-.. list-table:: Transition Data
-   :widths: 10 10 10 20 30
+.. list-table:: Data values
    :header-rows: 1
-   
-   * - Transition
-     - Source 
-     - Sink 
-     - Value
-     - Notes
-   * - i
-     - S
-     - I
-     - 
-     - 
-   * - r
-     - I
-     - R
-     - 	
-     - 
 
-
-Data Sources
-""""""""""""
-
-This table contains the data sources for all the measures. The table structure and common measures are as below:
-
-.. list-table:: Data Sources
-   :widths: 20 25 25 25
-   :header-rows: 1
-   
-   * - Measure
-     - Sources
-     - Description
-     - Notes
-   * - prevalence_cid
+   * - Parameter
+     - Definition
+     - Value or source
+     - Note
+   * - csmr_c367
+     - Maternal hemorrhage cause-specific mortality rate
+     - deaths_c367 / population
      - 
-     - 
-     - 
-   * - birth_prevalence_cid
-     - 
-     - 
-     -
-   * - deaths_cid
-     - 
-     - 
+   * - deaths_c367
+     - count of deaths due to maternal hemorrhage
+     - codcorrect, decomp_step='step5'
      - 
    * - population
+     - population count
+     - get_population, decomp_step='step5'
+     - Specific to a/s/l/y demographic group
+   * - incidence_rate_c367
+     - incidence rate of maternal hemorrhage
+     - como, decomp_step='step5'
      - 
+   * - ASFR
+     - Age-specific fertility rate
+     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
-     - 
-   * - sequelae_cid
-     - 
-     - 
-     - 
-   * - incidence_rate_cid
-     - 
-     - 
-     - 
-   * - remission_rate_m1594
-     - 
-     - 
-     - 
-   * - disability_weight_s{`sid`}
-     - 
-     - 
-     - 
-   * - prevalence_s{`sid`}
-     - 
-     - 
+   * - SBR
+     - Stillbirth to livebirth ratio
+     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
 
+Disability adjusted life years
+"""""""""""""""""""""""""""""""""""
+
+No years lived with disability (YLDs) or years of life lost (YLLs) should be assigned to any simulants in relation to this model of maternal hemorrhage incidence.
 
 Validation Criteria
-+++++++++++++++++++
+++++++++++++++++++++
+
+- The maternal hemorrhage incidence rate per person-year among women of reproductive age in the simulation should validate to estimates from GBD
+- Maternal hemorrhage incident cases should occur among pregnant women only
 
 References
 ----------
+
+.. [GBD-2019-Capstone-Appendix-Maternal-Hemorrhage]
+  Appendix to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of
+  369 diseases and injuries in 204 countries and territories, 1990–2019: a 
+  systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
+  17 Oct 2020;396:1204-1222` 
+
