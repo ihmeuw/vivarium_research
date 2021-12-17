@@ -63,6 +63,10 @@ We will model the following eligibility for the antenatal IV iron intervention:
   Women who receive IV iron should continue to be covered by the :ref:`maternal supplementation intervention <maternal_supplementation_intervention>` 
 
   A potential future eligibility criterion for this intervention may be antenatal care visit attendance if we include it as a modeled parameter
+  
+.. todo::
+
+  Consider adding a component to incorporate measurement error in maternal hemoglobin level to assess eligibility.
 
 We assume that IV iron intervention coverage takes place at the start of pregnancy (i.e. upon transition into the pregnant state).
 
@@ -110,7 +114,7 @@ The effect of the IV iron intervention on maternal hemoglobin should be applied 
 
 .. note::
 
-  The impact of antenatal IV iron should persist despite other changes to the materna hemoglobin level due to the maternal supplementation intervention, maternal hemorrhage incidence, or postpartum IV iron.
+  The impact of antenatal IV iron should persist despite other changes to the maternal hemoglobin level due to the maternal supplementation intervention, maternal hemorrhage incidence, or postpartum IV iron.
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -124,6 +128,8 @@ Assumptions and Limitations
 - We assume the effect of the intervntion persists through the end of the postpartum period at which point the woman's hemoglobin concentration returns to its pre-pregnancy level.
 
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
+
+- We currently assume no measurement error in maternal hemoglobin level
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
