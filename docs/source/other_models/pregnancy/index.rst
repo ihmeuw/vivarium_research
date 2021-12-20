@@ -155,18 +155,22 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
   * - Source state
     - Sink state  
+    - Transition name
     - Transition rate
     - Note
   * - np
     - p
+    - incidence_p
     - :math:`\frac{ASFR + ASFR * SBR}{prevalence_\text{np}}`
     - 
   * - p
     - pp
+    - duration_p
     - Informed by gestational age (see below section)
     - Duration-based transition
   * - pp
     - np
+    - duration_pp
     - 6 weeks (42 days) duration
     - Duration-based transition
 
