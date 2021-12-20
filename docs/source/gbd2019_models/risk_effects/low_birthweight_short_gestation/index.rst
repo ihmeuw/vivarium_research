@@ -857,7 +857,7 @@ As always, the formula for the PAF is
   = 1 - \frac{1}{\int \mathit{RR}\, d\rho},
 
 where :math:`\textit{RR}` is the relative risk function, :math:`\rho` is the
-risk exposure distribution, and :math:`E` is expectation with respect to the
+risk exposure distribution, and :math:`E` is expectation_ with respect to the
 probability measure :math:`\rho`. Thus the PAF computation comes down to
 computing an integral representing the average relative risk in the population.
 In our case the relevant integral is
@@ -904,8 +904,8 @@ simple version of Monte Carlo integration by leveraging the Vivarium
 microsimulation framework. Namely, we can initialize a population of simulants
 according to the LBWSG risk exposure distribution :math:`\rho`, then compute the
 average relative risk and the PAF for the simulated population. Here is Python
-(pseudo-)code to achieve this, using the relative risk interpolation code from
-above:
+(pseudo-)code to achieve this, continuing from the relative risk interpolation
+code above:
 
 .. code-block:: Python
 
@@ -989,6 +989,22 @@ simulants gets larger.
   sufficiently large population size for a desired level of precision if we deem
   that the original population size was insufficient.
 
+.. todo::
+
+  Describe a strategy for choosing a large enouth population size for the Monte
+  Carlo calculation.
+
+.. todo::
+
+  Determine if any alternative sampling strategies for the Monte Carlo
+  calculation may be more efficient.
+
+.. todo::
+
+  Try using SciPy's integration tools to compute the PAF as an alernative to the
+  Monte Carlo approach.
+
+.. _expectation: https://en.wikipedia.org/wiki/Expected_value
 .. _Monte Carlo integration: https://en.wikipedia.org/wiki/Monte_Carlo_integration
 .. _standard error: https://en.wikipedia.org/wiki/Standard_error
 
