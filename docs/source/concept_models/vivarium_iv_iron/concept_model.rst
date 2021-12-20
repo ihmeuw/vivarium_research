@@ -375,7 +375,7 @@ For GBD outcomes that do not have regional-level estimates (e.g. covariates), th
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * **Population size:** 100,000
-* **Cohort type:** open
+* **Cohort type:** closed
 
 **Model 1:**
 
@@ -392,11 +392,11 @@ For GBD outcomes that do not have regional-level estimates (e.g. covariates), th
      - True
      -
    * - Age group start
-     - 10 to 14
-     - age_group_id=7
+     - 10 minus the number of simulation years = 7
+     - 
    * - Age group end
-     - 50 to 54
-     - age_group_id=15
+     - 55 to 59
+     - age_group_id=16. NOTE: while reproductive age defined by GBD has an age group end of 54, it is possible that a simulant may get pregnant at 54 and give birth or remain in the postpartum period into the 55-59 age group.
 
 .. todo::
 
@@ -406,7 +406,7 @@ For GBD outcomes that do not have regional-level estimates (e.g. covariates), th
 
 .. note::
 
-  The overall fertility rate among women of reproductive age is 0.055 for South Asia and 0.105 for Sub-Saharan Africa (not including stillbirths). Therefore, approximately these fractions of the total population of WRA will enter the population of interest of PLW in our simulation. 
+  The overall fertility rate among women of reproductive age is 0.055 for South Asia and 0.105 for Sub-Saharan Africa (not including stillbirths). Therefore, approximately these fractions of the total population multiplied by the number of simulation years of WRA will enter the population of interest of PLW in our simulation. 
 
 **Later model versions:**
 
