@@ -194,16 +194,12 @@ This simulation will be built in a series of subgroups of model components that 
     - 0
     - :math:`T * ANC`
     - 0
-    - :math:`T * IFD`
+    - :math:`T * SBA`
   * - Antenatal and postpartum IV iron scale-up
     - 0
     - :math:`T * ANC`
     - :math:`T * ANC`
-    - :math:`T * IFD`
-
-.. todo::
-
-  Consider using skilled birth attendance rather than in-facility delivery proportion for this parameter.
+    - :math:`T * SBA`
 
 Where,
 
@@ -220,16 +216,12 @@ Where,
     - Subject to change after confirmation with BMGF. Not location-specific.
   * - :math:`ANC`
     - Coverage of single antenatal care visit
-    - GBD covariate*
+    - GBD covariate ID=7, decomp_step='step4', normal distribution of uncertainty
     - Location-specific
-  * - :math:`IFD`
-    - In-facility delivery proportion
-    - GBD covariate*
+  * - :math:`SBA`
+    - Skilled birth attendance proportion
+    - GBD covariate ID=143, decomp_step='step4', normal distribution of uncertainty
     - Location-specific
-
-.. todo::
-
-  Detail strategy to weight national-level GBD covariates estimates to regional locations of interest
 
 .. note::
 
@@ -242,9 +234,10 @@ Where,
 
 We will model an *immediate* scale-up of intervention coverage from the baseline level to the target level rather than a gradual scale-up over time.
 
-Date of simulation start: January 1, 2022
-Date of intervention scale-up: Janary 1, 2023
-Date of intervention end: December 31, 2024
+* **Date of simulation start:** January 1, 2022
+* **Date of intervention scale-up:** Janary 1, 2023
+* **Date of intervention end:** December 31, 2024
+* **Simulation time step:** 1 week
 
 .. _ivron4.0:
 
@@ -274,9 +267,11 @@ For model versions 2+:
 
 * :ref:`Hemoglobin, anemia, and iron deficiency model <2019_hemoglobin_anemia_and_iron_deficiency>`
 
-.. todo::
+Including, 
 
-  Add more detail on exactly which components/strategies to include in this simulation specifically
+  * :ref:`Hemoglobin exposure model <2019_hemoglobin_model>`
+
+  * :ref:`Anemia impairment model <2019_anemia_impairment>`
 
 For model versions 2+:
 
@@ -354,20 +349,33 @@ Locations of interest to this project:
 
 - Sub-Saharan Africa (location_type=superregion; location_id=166)
 - South Asia (location_type=region; location_id=159)
-- All low and middle income countries
+- All low and middle income countries:
 
-.. todo::
+  - World bank lower middle income (location_type=region; location_id=44577)
+  - World bank low income (location_type=region; location_id=44578)
 
-  Compile all national location IDs included in each of these regional locations of interest using the GBD shared function :code:`get_location_metadata`, `documented here <https://scicomp-docs.ihme.washington.edu/db_queries/current/get_location_metadata.html>`_.
-  
-.. todo::
+National-level locations included in each of these locations of interest `can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/locations>`_.
 
-    Determine wich location ID and hierarchy to use for LMICs (commonwealth versus world bank classifications... need to determine which have GBD outcomes of interest) 
+Location aggregation
+^^^^^^^^^^^^^^^^^^^^^^
+
+For GBD outcomes that do not have regional-level estimates (e.g. covariates), the following strategy should be followed:
+
+#. Pull estimates specific to each national-level location_id included in the region of interest (can be found in csv files linked above)
+#. Pull population estimates for each national-level location_id included in the region of interest
+#. At the draw-level, caclulate a population-weighted average estimate across all national locations within the region of interest, like so:
+
+.. math::
+
+  estimate_\text{regional} = \frac{\sum_{n=1}^{n} population_\text{national} * estimate_\text{national}}{\sum_{n=1}^{n} population_\text{national}}
 
 .. _iviron4.2.1:
 
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* **Population size:** 100,000
+* **Cohort type:** closed
 
 **Model 1:**
 
@@ -384,17 +392,21 @@ Locations of interest to this project:
      - True
      -
    * - Age group start
-     - 10 to 14
-     - age_group_id=7
+     - 10 minus the number of simulation years = 7
+     - 
    * - Age group end
-     - 50 to 54
-     - age_group_id=15
+     - 55 to 59
+     - age_group_id=16. NOTE: while reproductive age defined by GBD has an age group end of 54, it is possible that a simulant may get pregnant at 54 and give birth or remain in the postpartum period into the 55-59 age group.
 
 .. todo::
 
   The GBD defines reproductive age as 10 to 54 years of age. However, many other data sources define reproductive age as 15 to 49 years of age. 
 
   We should confirm with the BMGF that they would like to model the GBD definition rather than standard definition from other data sources. 
+
+.. note::
+
+  The overall fertility rate among women of reproductive age is 0.055 for South Asia and 0.105 for Sub-Saharan Africa (not including stillbirths). Therefore, approximately these fractions of the total population multiplied by the number of simulation years of WRA will enter the population of interest of PLW in our simulation. 
 
 **Later model versions:**
 
