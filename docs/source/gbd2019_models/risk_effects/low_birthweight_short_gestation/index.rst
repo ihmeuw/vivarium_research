@@ -868,9 +868,9 @@ In our case the relevant integral is
   = \int_{\mathrm{GA}\times \mathrm{BW}}
     \mathit{RR}(x,y)\, d\rho(x,y),
 
-where :math:`\mathrm{GA} = [0,42\text{wk}]` and :math:`\mathrm{BW} =
-[0,4500\text{g}]`, :math:`\mathit{RR}(x,y)` is the interpolated relative
-risk at gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
+where :math:`\mathrm{GA} = [0,42\text{wk}]`, :math:`\mathrm{BW} =
+[0,4500\text{g}]`, :math:`\mathit{RR}(x,y)` is the interpolated relative risk at
+gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
 \mathrm{BW}`, and :math:`\rho` is the LBWSG exposure distribution.
 
 Note that the above formula employs the notation ":math:`d\rho`" from measure
@@ -904,7 +904,8 @@ simple version of Monte Carlo integration by leveraging the Vivarium
 microsimulation framework. Namely, we can initialize a population of simulants
 according to the LBWSG risk exposure distribution :math:`\rho`, then compute the
 average relative risk and the PAF for the simulated population. Here is Python
-(pseudo-)code to achieve this, using the same Relative risk functions as above:
+(pseudo-)code to achieve this, using the relative risk interpolation code from
+above:
 
 .. code-block:: Python
 
@@ -933,16 +934,14 @@ average relative risk and the PAF for the simulated population. Here is Python
     """Calculates the PAF from the mean relative risk."""
     return 1 - 1/mean_rr
 
-  def standard_error_of_the_mean(values: pd.Series)->float:
-    """Returns sample esimate of the standard error of the mean for a Series of sample values."""
-    return np.sqrt(values.var()/len(values))
-
-  # variables and functions defined previously:
+  # Variables and functions defined previously:
+  # -------------------------------------------
   # pd, np
   # draw, log_rr_interpolator, cat_df
   # interpolate_lbwsg_rr_for_population
 
   # Sample code to calculate the LBWSG PAF for Early Neonatal Females
+  # -----------------------------------------------------------------
   EARLY_NEONATAL_ID = 2
   FEMALE_ID = 2
   pop_size = 100_000 # Choose a sufficiently large population size
@@ -951,8 +950,8 @@ average relative risk and the PAF for the simulated population. Here is Python
   enn_female_pop = initialize_population_from_lbwsg_exposure(
     pop_size, EARLY_NEONATAL_ID, FEMALE_ID, draw, lbwsg_exposure
   )
-  assert set(['age_group_id', 'sex_id', 'gestational_age', 'birthweight']
-    ).issubset(enn_female_pop.columns), \
+  assert set(['age_group_id', 'sex_id', 'gestational_age', 'birthweight']) \
+    .issubset(enn_female_pop.columns), \
     "Insufficient attribute columns to interpolate LBWSG RRs for population!"
   assert (enn_female_pop['age_group_id'] == EARLY_NEONATAL_ID).all() \
     and (enn_female_pop['sex_id'] == FEMALE_ID).all(), \
@@ -962,6 +961,26 @@ average relative risk and the PAF for the simulated population. Here is Python
     enn_female_pop, log_rr_interpolator, cat_df
   )
   enn_female_paf = paf_from_mean_rr(enn_female_lbwsg_rrs.mean())
+
+As the number of simulants gets larger, the Law of Large Numbers implies that
+the mean RR of the simulated population will converge to the mean RR of a
+population with LBWSG exposure distribution :math:`\rho` (represented by the
+``lbwsg_exposure`` DataFrame in the above code). Therefore, the PAF computed by the above
+code will converge to the true PAF of the population as the number of simulants
+gets larger.
+
+In order to get an idea of how large of a population we need to get a mean RR
+and PAF close enough to the right value, we can estimate the standard error of
+the mean RR from the simulated population, and use it to compute the population
+size for a desired tolerance as follows:
+
+.. code-block:: Python
+
+  def standard_error_of_the_mean(values: pd.Series)->float:
+    """Returns sample esimate of the standard error of the mean for a Series of sample values."""
+    return np.sqrt(values.var()/len(values))
+
+  enn_female_standard_error = standard_error_of_the_mean(enn_female_lbwsg_rrs)
 
 .. _Monte Carlo integration: https://en.wikipedia.org/wiki/Monte_Carlo_integration
 
