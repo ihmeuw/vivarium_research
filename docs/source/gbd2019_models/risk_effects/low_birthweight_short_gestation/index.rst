@@ -965,24 +965,32 @@ above:
 As the number of simulants gets larger, the Law of Large Numbers implies that
 the mean RR of the simulated population will converge to the mean RR of a
 population with LBWSG exposure distribution :math:`\rho` (represented by the
-``lbwsg_exposure`` DataFrame in the above code). Therefore, the PAF computed by the above
-code will converge to the true PAF of the population as the number of simulants
-gets larger.
+``lbwsg_exposure`` DataFrame in the above code). Therefore, the PAF computed by
+the above code will converge to the true PAF of the population as the number of
+simulants gets larger.
 
-In order to get an idea of how large of a population we need to get a mean RR
-and PAF close enough to the right value, we can estimate the standard error of
-the mean RR from the simulated population, and use it to compute the population
-size for a desired tolerance as follows:
+.. important::
 
-.. code-block:: Python
+  In order to get an idea of how large of a population we need to get a mean RR
+  and PAF close enough to the right value, we should do the Monte Carlo PAF
+  calculation for several small population sizes (e.g., 10, 100, 1000, 10,000),
+  and record some descriptive statistics for each calculation. Namely, it will
+  be useful to record the **mean RR**, the **sample standard deviation of the
+  RRs**, and the `standard error`_ **of the mean RR** for each simulation:
 
-  def standard_error_of_the_mean(values: pd.Series)->float:
-    """Returns sample esimate of the standard error of the mean for a Series of sample values."""
-    return np.sqrt(values.var()/len(values))
+  .. code-block:: Python
 
-  enn_female_standard_error = standard_error_of_the_mean(enn_female_lbwsg_rrs)
+    enn_female_rr_mean = enn_female_lbwsg_rrs.mean()
+    enn_female_rr_std_dev = np.sqrt(enn_female_lbwsg_rrs.var())
+    enn_female_rr_standard_error = enn_female_rr_std_dev / np.sqrt(len(enn_female_lbwsg_rrs))
+
+  These statisics will help us evaluate whether the PAF we get for a given
+  simulation is likely to be close to the true PAF, and will help us choose a
+  sufficiently large population size for a desired level of precision if we deem
+  that the original population size was insufficient.
 
 .. _Monte Carlo integration: https://en.wikipedia.org/wiki/Monte_Carlo_integration
+.. _standard error: https://en.wikipedia.org/wiki/Standard_error
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
