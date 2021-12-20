@@ -204,12 +204,6 @@ Assumptions and Limitations
 
 - Our strategy of subtracting anemia sequelae YLDs from maternal disorders YLDs assumes no comorbidity status between anemia due to maternal hemorrhage and other sequelae of maternal disorders. This assumption will result in an underestimation of maternal disorder YLDs other than anemia due to maternal hemorrhage.
 
-- We are limited in that abortions, miscarriages, and ectopic pregnancies that occur prior to 24 weeks gestation are not included in our model of pregnancy and we therefore may overestimate the rate at which they occur among pregnant women in our simulation.
-
-.. todo::
-
-  Consider adding the incident rate of these outcomes to the pregnancy model.
-
 Cause Model Diagram
 +++++++++++++++++++
 

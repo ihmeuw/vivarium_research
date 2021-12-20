@@ -141,13 +141,13 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Value
     - Note
   * - np
-    - :math:`1 - (ASFR + ASFR * SBR) * 46 / 52`
+    - 1 - prevalence_p - prevalence_pp
     - 
   * - p
-    - :math:`(ASFR + ASFR * SBR) * 40 / 52`
-    - 
+    - incidence_p * 40 / 52
+    - Consider updating to reflect average gestational age for location of interest rather than 40 weeks
   * - pp
-    - :math:`(ASFR + ASFR * SBR) * 6 / 52`
+    - incidence_p * 6 / 52
     -  
 
 .. list-table:: State transition data
@@ -161,7 +161,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - np
     - p
     - incidence_p
-    - :math:`\frac{ASFR + ASFR * SBR}{prevalence_\text{np}}`
+    - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{374}}{prevalence_\text{np}}`
     - 
   * - p
     - pp
@@ -182,22 +182,32 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Data ID
     - Source
     - Note
-  * - :math:`ASFR`
+  * - ASFR
     - Covariate
     - 13
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
-    - Assume normal distribution of uncertainty
-  * - :math:`SBR`
+    - Assume normal distribution of uncertainty. Regional-level estimates available.
+  * - SBR
     - Covariate
     - 1106
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
-    - No uncertainty in this estimate: use mean_value as point value for this parameter
+    - No uncertainty in this estimate: use mean_value as point value for this parameter. Regional-level estimates not available.
+  * - incidence_c995
+    - Incidence rate of abortion and miscarriage cause
+    - c995
+    - como; decomp_step='step5'
+    - Abortion defined as elective or medically-indicated termination of pregnancy at any gestational age and miscarriage defined as spontaneous loss of pregnancy before 24 weeks gestation
+  * - incidence_c374
+    - Incidence rate of ectopic pregnancy
+    - c374
+    - como; decomp_step='step5'
+    - 
 
 .. note::
 
    A note on locations for the :ref:`IV Iron simulation <2019_concept_model_vivarium_iv_iron>`:
 
-      The ASFR covariate is available for Sub-Saharan Africa (location_id=166) and South Asia (location_id=159). The SBR covariate is not available for regional estimates.
+      The ASFR covariate is available for regional ocation IDs. The SBR covariate is not available for regional estimates.
 
       For locations of interest that do not have available covariate estimates, aggregate esimates will need to be calculated according to the estimates for each of the component national-level location_ids.
 
@@ -246,13 +256,13 @@ For simulants who are initialized into the pregnancy state at the start of the s
 Assumptions and limitations
 ++++++++++++++++++++++++++++
 
-- We assume that the gestational age distribution of stillbirths is equal to the gestational age distribution of live births. This is a limitation of our analysis given the lack of data on the distribution of gestational age at stillbirth. Given that the gestation for stillbirths is likely shorter than gestation for live births on average, we are likely overestimating the average duration of pregnancy among mothers who experience stillbirths.
-- We do not consider pregnancies that result in miscarriages prior to XX weeks gestation at which point they are classified as stillbirths.
+- We assume that the gestational age distribution of stillbirths, abortions, miscarriages, and ectopic pregnancies is equal to the gestational age distribution of live births. This is a limitation of our analysis given the lack of data on the distribution of gestational ages for which these outcomes occur. Given that the gestation for these outcomes is likely shorter than gestation for live births on average, we are likely overestimating the average duration of pregnancy for outcomes other than live births.
+- We assume that abortions that occur after 24 weeks are not considered stillbirths for estimation of the stillbirth to livebirth ratio. We may overestimate the incidence rate of pregnancy due to this assumption.
 - We are limited in the assumption that the stillbirth to livebirth ratio does not vary by maternal age and does not incorporate an uncertainty distribution.
 - We do not model any morbidity (YLDs) associated directly with pregnancy.
 - We do not distiguish between intended and unintended pregnancies.
 - We do not consider the impact of birth interval timing or family size in our model of pregnancy.
-- We assume that a new pregnancy cannot occur during the postpartum period but can occur immediately afterward.
+- We assume that a new pregnancy cannot occur during the postpartum period but can occur immediately afterward. We do not model any difference in the fertility rate by recent pregnancy status.
 - We do not consider the impact of singleton versus non-singleton pregnancies.
 
 Verification and validation criteria
