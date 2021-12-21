@@ -202,11 +202,7 @@ Assumptions and Limitations
 
 - We will assume that mothers experience mortality due to maternal disorders also experience associated morbidity. This may not be a logical assumption for subcauses with long term sequelae, including maternal hemorrhage, maternal hypertensive disorders, and obstructed labor and uterine rupture; however, it is likely a logical assumption for other maternal disorders subcauses including maternal sepsis, abortion and miscarriage, and acute sequelae of the other maternal disorder subcauses.
 
-- If we are separately modeling disability due to anemia, then we will double count disability due to anemia due to postpartum hemorrhage in our model.
-
-.. todo::
-   
-   Consider strategy to remove this burden from estimation of disability attributable to maternal disorders
+- Our strategy of subtracting anemia sequelae YLDs from maternal disorders YLDs assumes no comorbidity status between anemia due to maternal hemorrhage and other sequelae of maternal disorders. This assumption will result in an underestimation of maternal disorder YLDs other than anemia due to maternal hemorrhage.
 
 - We are limited in that abortions, miscarriages, and ectopic pregnancies that occur prior to 24 weeks gestation are not included in our model of pregnancy and we therefore may overestimate the rate at which they occur among pregnant women in our simulation.
 
@@ -222,7 +218,7 @@ Not applicable.
 Data Tables
 ++++++++++++++++++++++++++++++++
 
-Ratios of maternal disorder mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a death or incident case of maternal disorders at birth in our simulation. Notably, **the same propensity** should be used to determine incidence maternal disorder cases as deaths due to maternal disorders such that each simulant who experiences deaths due to maternal disorders also experiences an incidence case of maternal disorders.
+Ratios of maternal disorder mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a death or incident case of maternal disorders at birth in our simulation. This cause model should be implemented such that each simulant who experiences deaths due to maternal disorders also experiences an incident case of maternal disorders.
 
 .. list-table:: Ratios per birth
    :widths: 5 5 20
@@ -232,10 +228,10 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - Value
      - Note
    * - Maternal disorder deaths
-     - csmr_c366 / (ASFR + ASFR * SBR)
+     - csmr_c366 / incidence_p
      - 
    * - Incident maternal disorders
-     - incidence_rate_c366 / (ASFR + ASFR * SBR)
+     - incidence_rate_c366 / incidence_p
      - 
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
@@ -267,12 +263,12 @@ The following table defines the parameters used in the calculation of maternal d
      - Annual rate of maternal disorder YLDs among WRA
      - como, decomp_step='step5'
      - 
-   * - ASFR
-     - Age-specific fertility rate
-     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
+   * - ylds_{s182,s183,s184}
+     - Annual rate of YLDs attributable to anemia due to maternal hemorrhage among WRA
+     - como, decomp_step='step5'
      - 
-   * - SBR
-     - Stillbirth to livebirth ratio
+   * - incidence_p
+     - Pregnancy incidence rate
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
 
@@ -284,18 +280,30 @@ Years of life lost (YLLs) should be assigned to simulants who experience a death
 Years lived with disability
 """"""""""""""""""""""""""""
 
-Years lived with disability (YLDs) should be assigned to simulants who experience an incidence case of maternal disorders. Rather than accumulate YLDs according to time spent in a particular cause model state and the disability weight associated with that state (as done for standard cause models), we will assign YLDs to an individual simulant all at once according to the average amount of YLDs exerpienced in a single maternal disorder incident case.
+Years lived with disability (YLDs) should be assigned to simulants who experience an incident case of maternal disorders. Rather than accumulate YLDs according to time spent in a particular cause model state and the disability weight associated with that state (as done for standard cause models), we will assign YLDs to an individual simulant all at once according to the average amount of YLDs exerpienced in a single maternal disorder incident case.
 
-The value of YLDs to assign to a simulant who experienced an incident case of maternal disorders is as follows:
+For simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia.
+
+Therefore, the value of YLDs to assign to a simulant who experienced an incident case of maternal disorders is as follows:
 
 .. math::
 
-  \text{ylds}_{c366} / \text{incidence_rate}_{c366}
+  (\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}) / \text{incidence_rate}_{c366}
+
+.. note::
+
+  Implementation of YLDs due to maternal disorders should ensure that the sum of YLDs across maternal disorder YLDs and YLDs due to other simultaneous prevalent causes that a simulant may be afflicted with (such as anemia or postpartum depression), reflects the strategy of calculating joint disability weights of multiple comorbid conditions as shown in the equation below:
+
+  .. math::
+
+    DW_\text{overall} = 1 - \prod_{n=1}^{n} 1 - DW_n
+
+  A potential stratgey is to calculate a maternal disorders disability weight equal to :math:`\frac{(\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}) / \text{incidence_rate}_{c366}}{365}` and creating a cause model state of maternal disorder disability that a simulant occupies for one year. Notably, this strategy assumes that no simulants in this state will die in the year following birth and may result in a slight underestimation of YLDs due to maternal disorders.
 
 Validation Criteria
 +++++++++++++++++++
 
-- The maternal disorders incidence, mortality, YLL, and YLD rate per person-year among women of reproductive age in the simulation should validate to estimates from GBD
+- The maternal disorders incidence, mortality, YLL, and YLD rate per person-year among women of reproductive age in the simulation should validate to estimates from GBD (the simulation may slightly underestimate YLDs due to the removal of anemia sequlae from maternal disorder YLDs as they are counted separately).
 - Maternal disorders deaths and incidence should occur among pregnant women only
 
 References

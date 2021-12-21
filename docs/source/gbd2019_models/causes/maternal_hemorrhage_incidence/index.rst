@@ -113,6 +113,12 @@ Vivarium Modeling Strategy
 
 Similar to the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`, we will convert the maternal hemorrhage incidence rate as estimated by GBD in terms of an annual rate among women of reproductive age to events *per birth* (including stillbirths) for use in our :ref:`simulation of IV iron <2019_concept_model_vivarium_iv_iron>`. Births among women of reproductive age in our simulation will be informed by the the :ref:`pregnancy model document <other_models_pregnancy>`.
 
+.. note::
+
+  We have chosen to design this model of maternal hemorrhage incidence to be decoupled from YLLs/YLDs due to maternal hemorrhage (which will instead be captured in the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`) because the :ref:`risk effects for hemoglobin <2019_risk_effect_iron_deficiency>` are different for maternal mortality/morbidity (as informed by GBD) than they are for maternal hemorrhage incidence.
+
+  This strategy allows us to remain consistent with the GBD model of the relationship between hemoglobin/iron deficiency and maternal disorder DALYs (which is not specific to subcauses of maternal disorders) while also incorporating additional detail regarding the specific relationship between hemoglobin, maternal hemorrhage incidence, and its relationship on postpartum hemoglobin levels.
+
 Scope
 +++++
 
@@ -123,9 +129,9 @@ We will not model maternal hemorrhage incidence as a dynamic transition model, b
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
-- We will assume that all causes of maternal hemorrhage occur at the time of birth.
+- We will assume that all causes of maternal hemorrhage occur at the time of birth (although a small portion of them will occur during pregnancy or well into the postpartum period).
 - Our model of maternal hemorrhage incidence will be measured as cases that do not die due to maternal hemorrhage.
-- We will assume that incidence cases of maternal hemorrhage (as defined in the above bullet point) also do not die due to other maternal disorder causes. This may cause us to overestimate the number of maternal hemorrhage incident cases that survive through childbirth. 
+- We will assume that incidence cases of maternal hemorrhage (as defined in the above bullet point) are not correlated with incidence cases of maternal disorders. 
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -137,7 +143,11 @@ Data Tables
 
 Ratios of maternal hemorrhage mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a death or incident case of maternal hemorrhage at birth in our simulation. 
 
-The propensity used to determine maternal hemorrhage events should equal **1 minus the propensity used for the** :ref:`maternal disorders <2019_cause_maternal_disorders>` **events**, such that no simulant who experiences an incident case of maternal hemorrhage will also die due to maternal disorders.
+There should be no correlation between maternal hemorrhage events and :ref:`maternal disorders <2019_cause_maternal_disorders>` events. In other words, simulants who experience an incident case of maternal hemorrhage should be equally likely to experience an incident case of maternal disorders as those who do not.
+
+.. todo::
+  
+  Consider the implications of this assumption.
 
 .. list-table:: Ratios per birth
    :widths: 5 5 20
@@ -150,7 +160,7 @@ The propensity used to determine maternal hemorrhage events should equal **1 min
      - 0
      - Captured in the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
    * - Incident maternal hemorrhage cases
-     - (incidence_rate_c367 - csmr_c367) / (ASFR + ASFR * SBR)
+     - (incidence_rate_c367 - csmr_c367) / incidence_p
      - 
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
@@ -178,12 +188,8 @@ The following table defines the parameters used in the calculation of maternal d
      - incidence rate of maternal hemorrhage
      - como, decomp_step='step5'
      - 
-   * - ASFR
-     - Age-specific fertility rate
-     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
-     - 
-   * - SBR
-     - Stillbirth to livebirth ratio
+   * - incidence_p
+     - Pregnancy incidence rate
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
 
