@@ -107,7 +107,7 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 3.0 Concept model
 +++++++++++++++++
 
-.. image:: concept_model.svg
+.. image:: concept_model_full.svg
 
 This simulation will be built in a series of subgroups of model components that are summarized below.
 
@@ -151,6 +151,10 @@ This simulation will be built in a series of subgroups of model components that 
     - Red
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
     - 
+
+**Model Version 1 Detail:**
+
+.. image:: concept_model_version_1.svg
 
 .. _iviron3.1:
 
