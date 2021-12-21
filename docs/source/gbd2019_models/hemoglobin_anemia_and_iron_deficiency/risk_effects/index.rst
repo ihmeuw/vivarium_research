@@ -239,6 +239,10 @@ Assumptions and Limitations
 
 Notably, anemia is a sequela of maternal hemorrhage, which is a subcause of maternal disorders. Therefore, if a simulation model of an intervention that affects hemoglobin concentration evaluates both the impact on burden due to maternal disorders and the impact of YLDs due to anemia, it is possible that the impact on YLDs for anemia due to maternal hemorrhage will be double counted. This is likely a relative small portion of DALYs, but should be investigated and considered prior to implementation.
 
+- We assume that the risk effect applies equally to YLDs as they do to YLLs (as does GBD). Given that the relative risks were measured according to mortality (not incidence or disability). Therefore, this modeling strategy assumes that hemoglobin decreases maternal disorder mortality entirely through a reduction of incidence with no effect on the case fatality rate without direct evidence to support this assumption. In fact, it could be possible that improvement in the risk exposure (shifting the distribution closer to the TMREL) would in fact *increase* YLDs due to an averted death due to maternal disorders that leads to living with maternal disorder disability.
+
+- Application of the relative risks to maternal disorder YLDs assumes that the risk affects each subcause of maternal disorders equally. However, if the risk affects a subcause with low disability weights more than a cause with high disability weights, then we will be overestimating the effect of the risk on YLDs and vice versa.
+
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

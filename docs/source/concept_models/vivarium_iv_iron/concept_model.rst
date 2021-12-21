@@ -463,6 +463,12 @@ For model version 1:
 6.0 Limitations
 +++++++++++++++
 
+In addition to the assumptions and limitations listed in each of the pages included in the `4.1 Vivarium concept model diagram components`_ section, our simulation is also subject to the following assumptions and limitations:
+
+#. Our simulation is run at the regional level and does not consider sub-regional heterogeneity.
+#. We do not model a distinction between iron-deficiency anemia and other types of anemia. Therefore, we may overestimate the number of individuals whose hemoglobin levels respond to our interventions, which may also vary by modeled location.
+#. We do not directly model access to care among our simulated population nor any of its correlates.
+
 7.0 References
 +++++++++++++++
 
