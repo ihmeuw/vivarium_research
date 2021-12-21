@@ -468,6 +468,7 @@ In addition to the assumptions and limitations listed in each of the pages inclu
 #. Our simulation is run at the regional level and does not consider sub-regional heterogeneity.
 #. We do not model a distinction between iron-deficiency anemia and other types of anemia. Therefore, we may overestimate the number of individuals whose hemoglobin levels respond to our interventions, which may also vary by modeled location.
 #. We do not directly model access to care among our simulated population nor any of its correlates.
+#. We do not consider outcomes affected by the intervention other than those that act through maternal hemoglobin and infant birthweight. However, the maternal supplementation intervention may also have impacts on additional outcomes that we do not consider such as maternal malnourishment (including micronutrient deficiencies as well as maternal underweight). This may cause us to overestimate DALYs in our alternative scenarios.
 
 7.0 References
 +++++++++++++++
