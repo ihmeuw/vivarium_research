@@ -147,13 +147,56 @@ Data Description Tables
     - 0.6
     - 
 
-Below is R code written to randomly sample hemoglobin concentration values from the hemoglobin distribution parameters and constants defined in the tables above. Additionally, the code block contains functions that will evaluate the proportion of the distribution below a given threshold. This code was adapted from the GBD stash code found `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`__, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files.
-
 **Code to sample from the hemoglobin exposure distribution in python has been developed and hosted in a notebook hosted** `here <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`__. The functions that should be used for sampling from the hemoglobin distribution include :code:`mirrored_gumbel_ppf` (*not* mirroed_gumbel_ppf_2017, which is an implementation that did not validate to GBD) and :code:`viv_calc_iron_nbs` (*not* viv_calc_iron or viv_calc_iron_2017, which implement the incorrect strategy for :ref:`sampling from an ensemble distribution <vivarium_best_practices_ensemble_distributions>`).
 
 .. note::
 
 	While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers. The probability of sampling a negative value is small, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 1.
+
+Below is R code written to randomly sample hemoglobin concentration values from the hemoglobin distribution parameters and constants defined in the tables above. Additionally, the code block contains functions that will evaluate the proportion of the distribution below a given threshold. This code was adapted from the GBD stash code found `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`__, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files.
+
+.. code-block:: R
+
+  # define constants
+  XMAX = 220
+  EULERS_CONSTANT = 0.57721566490153286060651209008240243104215933593992
+  w = c(0.4,0.6)
+
+  # import standard R functions for the gamma distributions (pgamma and rgamma)
+  pacman::p_load(data.table,actuar)
+
+  # function to calculate gamma distribution parameters from mean and variance
+  gamma_mv2p = function(mn, vr){
+    list(shape = mn^2/vr,rate = mn/vr)}
+
+  # function to calculate mirror gumbel distribution parameters from mean and variance 
+  mgumbel_mv2p = function(mn, vr){
+    list(
+      alpha = XMAX - mn - EULERS_CONSTANT*sqrt(vr)*sqrt(6)/pi,
+      scale = sqrt(vr)*sqrt(6)/pi)}
+      
+  # function to calculate area under curve below threshold q for mirror gumbel distribution
+  pmgumbel = function(q, alpha, scale, lower.tail){ 
+    #NOTE: with mirroring, take the other tail
+    pgumbel(XMAX-q, alpha, scale, lower.tail=ifelse(lower.tail,FALSE,TRUE))}
+
+  # function to calculate area under curve of hemoglobin ensemble distribution using the functions defined above
+    # q = hemoglobin threshold
+    # mn = mean hemoglobin concentration
+    # vr = hemoglobin variance (standard deviation squared)
+    # w = list of ensemble distribution weights c(gamma_weight, mirror_gumbel_weight)
+  ens_mv2prev <- function(q, mn, vr, w){
+    x = q
+
+    ##parameters
+    params_gamma = gamma_mv2p(mn, vr)
+    params_mgumbel = mgumbel_mv2p(mn, vr)
+
+    ##weighting
+    prev = sum(
+      w[1] * pgamma(x, params_gamma$shape, params_gamma$rate), 
+      w[2] * pmgumbel(x, params_mgumbel$alpha, params_mgumbel$scale, lower.tail=T))
+    prev}
 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
