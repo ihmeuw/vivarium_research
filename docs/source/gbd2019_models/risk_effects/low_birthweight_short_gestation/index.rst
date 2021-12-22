@@ -991,13 +991,22 @@ simulants gets larger.
 
 .. todo::
 
-  Describe a strategy for choosing a large enouth population size for the Monte
-  Carlo calculation.
+  Describe a strategy for choosing a large enough population size for the Monte
+  Carlo calculation. See this `post in Slack
+  <https://ihme.slack.com/archives/C018BLX2JKT/p1639696957071600?thread_ts=1639685855.069100&cid=C018BLX2JKT>`_.
+
+.. todo::
+
+  Add link to Nathaniel's nanosim for LSFF as an example of working code that
+  performs the Monte Carlo PAF calculation.
 
 .. todo::
 
   Determine if any alternative sampling strategies for the Monte Carlo
-  calculation may be more efficient.
+  calculation may be more efficient. For example, rather than sampling the
+  continuous LBWSG distribution directly, it may be better to estimate the mean
+  RR in each category separately, then take a weighted average of the mean RR in
+  each category, weighting by the category prevalences.
 
 .. todo::
 
