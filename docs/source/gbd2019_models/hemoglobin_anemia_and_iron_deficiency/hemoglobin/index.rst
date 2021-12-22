@@ -51,42 +51,17 @@ The hemoglobin distribution was modeled in three steps:
 
     And :math:`F_1(x)` is a mirror gumbel distribution parameterized by :math:`\mu` and :math:`\sigma`
 
+:ref:`More details on ensemble distributions can be found here <vivarium_best_practices_ensemble_distributions>`.
+
 .. todo::
 
 	Include mathematical formulas for the gamma and mirror Gumbel distributions. For now, see the R code in the `Data Description Tables`_ section for details.
-
-	Link to ensemble distribution page that Nathaniel is in the process of making.
-
-.. note::
-
-	As summarized by Nathaniel, for context (details perhaps to be moved to a separate documentation page), the steps for finding an ensemble distribution are:
-
-	1). Each of the two-parameter distributions is "fit" to the data in each location/year/age/sex group using the "method of moments." I.e. you just choose the distribution that has the same mean and standard deviation as the data in each group, so there's not actually any complicated curve fitting going on here.
-
-	2). The distribution F of hemoglobin is assumed to be a mixture distribution that also comes from a 2-parameter family (GBD calls this an ensemble), of the form
-	
-	F(x; m_i,s_i) = w_1 F_1(x; m_i,s_i) + ... + w_k F_k(x; m_i,s_i),
-
-	where
-
-	m_i = mean Hb in group i
-
-	s_i = standard deviation of Hb in group i
-
-	F_1,...,F_k are the distributions in the list above (gamma, mirror gamma,etc.), parameterized by mean m and standard deviation s
-	F is the mixture distribution for Hb, also parameterized by mean m and standard deviation s
-
-	w_1,...,w_k are the global weights of the distributions in the mixture, used in all groups
-
-	(I think the important thing to note here is that the distribution weights are global, not depending on the location/year/age/sex, whereas it is only the mean and standard deviation that vary across groups. This is not totally clear from your description above.)
-
-	3). The global weights w_1,...,w_k are found by solving an optimization problem that somehow chooses the "best" weights that match the data in all the groups simultaneously. According to the YLD appendix, this "best fit" is defined by taking anemia prevalence data into account. Whatever they did to solve this optimization problem, the weights they came up with are w_1 = 0.4 (for F_1 = gamma distribution) and w_2 = 0.6 (for F_2 = mirror gumbel distribution), with w_j = 0 for all the other distributions.
 
 3. Generation of ensemble distributions for each location/year/age/sex group
 
     Because anemia thresholds depend on pregnancy status, hemoglobin distributions were modeled separately for pregnant and non-pregnant females. The pregnancy model was identical to the non-pregnancy model except that the mean and variance were adjusted by the adjustment factor. The prevalence of anemia in pregnant women and non-pregnant women were then weighted by the pregnancy rate and combined to estimate population anemia prevalence. See the table below for the exact adjustment factors used.
 
-	The pregnancy rate was represented as :math:`(ASFR + SB) \times 46/52`, where :math:`ASFR` is the location- and age-specific fertility rate, :math:`SB` is the location-specific stillbirth rate, and :math:`46/52` represents 40 weeks of preganancy and 6 weeks of post-pregnancy lactation out of 52 weeks in one year.
+	The pregnancy prevalence was represented as :math:`(ASFR + SB) \times 46/52`, where :math:`ASFR` is the location- and age-specific fertility rate, :math:`SB` is the location-specific stillbirth rate, and :math:`46/52` represents 40 weeks of preganancy and 6 weeks of post-pregnancy lactation out of 52 weeks in one year.
 
 .. list-table:: Hemoglobin Distribution Pregnancy Adjustment Factors
    :widths: 15 15
@@ -174,11 +149,7 @@ Data Description Tables
 
 Below is R code written to randomly sample hemoglobin concentration values from the hemoglobin distribution parameters and constants defined in the tables above. Additionally, the code block contains functions that will evaluate the proportion of the distribution below a given threshold. This code was adapted from the GBD stash code found `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`__, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files.
 
-**Code to sample from the hemoglobin exposure distribution in python has been developed and hosted in a notebook hosted** `here <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`__.
-
-.. todo::
-
-  Determine if this code follows the protocol to appropriately sample from an ensemble distribution, as identified by Nathaniel.
+**Code to sample from the hemoglobin exposure distribution in python has been developed and hosted in a notebook hosted** `here <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`__. The functions that should be used for sampling from the hemoglobin distribution include :code:`mirrored_gumbel_ppf` (*not* mirroed_gumbel_ppf_2017, which is an implementation that did not validate to GBD) and :code:`viv_calc_iron_nbs` (*not* viv_calc_iron or viv_calc_iron_2017, which implement the incorrect strategy for :ref:`sampling from an ensemble distribution <vivarium_best_practices_ensemble_distributions>`).
 
 .. note::
 
@@ -187,7 +158,7 @@ Below is R code written to randomly sample hemoglobin concentration values from 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
 
-To sample hemoglobin values for pregnant/lactating women, use the same functions as above, but multiply the hemoglobin mean and standard deviation parameters used for those functions by the respective pregnancy adjustment factors listed below. Notably, the GBD 2019 assumes that the pregnancy adjustment factor applies to 40 weeks of gestation and 6 weeks post-gestation.
+To sample hemoglobin values for :ref:`pregnant and postpartum women <other_models_pregnancy>`, use the same functions as above, but multiply the hemoglobin mean and standard deviation parameters used for those functions by the respective pregnancy adjustment factors listed below. Notably, the GBD 2019 assumes that the pregnancy adjustment factor applies to 40 weeks of gestation and 6 weeks post-gestation.
 
 .. list-table:: Pregnancy Adjustment Factors
   :widths: 15, 30, 10
