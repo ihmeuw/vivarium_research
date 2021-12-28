@@ -147,13 +147,63 @@ Data Description Tables
     - 0.6
     - 
 
-**Code to sample from the hemoglobin exposure distribution in python has been developed and hosted in a notebook hosted** `here <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`__. The functions that should be used for sampling from the hemoglobin distribution include :code:`mirrored_gumbel_ppf` (*not* mirroed_gumbel_ppf_2017, which is an implementation that did not validate to GBD) and :code:`viv_calc_iron_nbs` (*not* viv_calc_iron or viv_calc_iron_2017, which implement the incorrect strategy for :ref:`sampling from an ensemble distribution <vivarium_best_practices_ensemble_distributions>`).
+**The following python code provides functions to accurately sample from the ensemble distribution with the hemoglobin-specific parameters defined above** 
+
+.. code-block:: python
+
+  import numpy as np
+  import pandas as pd
+  import scipy
+
+  def _gamma_ppf(propensity, mean, sd):
+  """Returns the quantile for the given quantile rank (`propensity`) of a Gamma
+  distribution with the specified mean and standard deviation.
+  """
+      shape = (mean / sd)**2
+      scale = sd**2 / mean
+      return scipy.stats.gamma(a=shape, scale=scale).ppf(propensity)
+
+  def _mirrored_gumbel_ppf(propensity, mean, sd):
+  """Returns the quantile for the given quantile rank (`propensity`) of a mirrored Gumbel
+  distribution with the specified mean and standard deviation.
+  """
+      x_max = 220 # data_values.HEMOGLOBIN_DISTRIBUTION.EXPOSURE_MAX
+      _alpha = x_max - mean - (sd * np.euler_gamma * np.sqrt(6) / np.pi)
+      scale = sd * np.sqrt(6) / np.pi
+      tmp = _alpha + (scale*np.euler_gamma)
+      alpha = _alpha + x_max - (2*tmp)
+      return scipy.stats.gumbel_r(alpha, scale=scale).ppf(propensity)
+
+  # Called `viv_calc_iron_nbs` in Kjell's notebook
+  def sample_from_hemoglobin_distribution(prop_dist, propensity, exposure_parameters):
+  """
+  Returns a sample from an ensemble distribution with the specified mean and
+  standard deviation (stored in `exposure_parameters`) that is 40% Gamma and
+  60% mirrored Gumbel. The sampled value is a function of the two propensities
+  `prop_dist` (used to choose whether to sample from the Gamma distribution or
+  the mirrored Gumbel distribution) and `propensity` (used as the quantile rank
+  for the selected distribution).
+  """
+      #propensity = clip(propensity)
+      exposure_data = exposure_parameters
+      mean = exposure_data['mean']
+      sd = exposure_data['sd']
+
+      gamma = prop_dist < 0.4
+      gumbel = ~gamma
+      ret_val = pd.Series(index=prop_dist.index, name='value')
+      ret_val.loc[gamma] = _gamma_ppf(propensity.loc[gamma], mean, sd)
+      ret_val.loc[gumbel] = _mirrored_gumbel_ppf(propensity.loc[gumbel], mean, sd)
+      return ret_val
 
 .. note::
 
 	While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers. The probability of sampling a negative value is small, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 1.
 
-Below is R code written to randomly sample hemoglobin concentration values from the hemoglobin distribution parameters and constants defined in the tables above. Additionally, the code block contains functions that will evaluate the proportion of the distribution below a given threshold. This code was adapted from the GBD stash code found `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`__, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files.
+  `This notebook <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`_ validates these functions included in the code block above compared to the R code utilized by the GBD anemia team (included below) and across ensemble distribution sampling strategies. Notably, the updated ensemble distribution sampling strategy (shown in the code block above and in the :code:`viv_calc_iron_nbs` function in the linked notebook) follow the correct strategy for :ref:`sampling from an ensemble distribution <vivarium_best_practices_ensemble_distributions>`, which has already been incorporated into Vivarium's :code:`risk_distributions` module in the `.ppf method of the EnsembleDistribution class <https://github.com/ihmeuw/risk_distributions/blob/6d374a4d506c315422338946010c2612fdac5413/src/risk_distributions/risk_distributions.py#L495>`_ (which is misleadingly named because this sampling method is not the same thing as the quantile function...).
+
+
+Below is R code written to randomly sample hemoglobin concentration values from the hemoglobin distribution parameters and constants defined in the tables above. Additionally, the code block contains functions that will evaluate the proportion of the distribution below a given threshold. This code was adapted from the GBD stash code found `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`__, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files. 
 
 .. code-block:: R
 
