@@ -264,6 +264,7 @@ Assumptions and limitations
 - We do not consider the impact of birth interval timing or family size in our model of pregnancy.
 - We assume that a new pregnancy cannot occur during the postpartum period but can occur immediately afterward. We do not model any difference in the fertility rate by recent pregnancy status.
 - We do not consider the impact of singleton versus non-singleton pregnancies.
+- We are limited in that we apply the age-specific fertility rate to the *beginning* of pregnancy when it is actually measured at the *end* of pregnancy (birth). Therefore, maternal age at birth in our simulation will be overestimated due to simulants becoming pregnant in one age group and giving birth in the next.
 
 Verification and validation criteria
 ++++++++++++++++++++++++++++++++++++++
