@@ -226,7 +226,7 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - 
    * - Incident maternal disorders
      - incidence_rate_c366 / incidence_p
-     - 
+     - **Post-maternal disorder state persists for one year or until death**; whichever is sooner. Occupying the post-maternal disorder state does not prevent simulant from experiencing a subsequent incidence maternal disorder case.
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
 
@@ -253,6 +253,10 @@ The following table defines the parameters used in the calculation of maternal d
      - incidence rate of maternal disorders
      - como, decomp_step='step5'
      - 
+   * - disability_weight_c366
+     - Summary maternal disorders disability weight
+     - See `Years lived with disability`_ section
+     - 
    * - ylds_c366
      - Annual rate of maternal disorder YLDs among WRA
      - como, decomp_step='step5'
@@ -266,6 +270,7 @@ The following table defines the parameters used in the calculation of maternal d
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
 
+
 Years of life lost
 """""""""""""""""""
 
@@ -274,25 +279,21 @@ Years of life lost (YLLs) should be assigned to simulants who experience a death
 Years lived with disability
 """"""""""""""""""""""""""""
 
-Years lived with disability (YLDs) should be assigned to simulants who experience an incident case of maternal disorders. Rather than accumulate YLDs according to time spent in a particular cause model state and the disability weight associated with that state (as done for standard cause models), we will assign YLDs to an individual simulant all at once according to the average amount of YLDs exerpienced in a single maternal disorder incident case.
-
-For simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia.
-
-Therefore, the value of YLDs to assign to a simulant who experienced an incident case of maternal disorders is as follows:
+Simulants who experience an incident case of maternal disorders and occupy the post-maternal disorders state following the incident case (they remain in this state for one year or until death; whichever comes first) will accrue YLDs due to maternal disorders according to the summary maternal disorders disability weight (:math:`DW_\text{c366}`, defined below. Notably, for simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia (this is reflected in the equation below).
 
 .. math::
 
-  (\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}) / \text{incidence_rate}_{c366}
+  DW_\text{c366} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
 
 .. note::
 
-  Implementation of YLDs due to maternal disorders should ensure that the sum of YLDs across maternal disorder YLDs and YLDs due to other simultaneous prevalent causes that a simulant may be afflicted with (such as anemia or postpartum depression), reflects the strategy of calculating joint disability weights of multiple comorbid conditions as shown in the equation below:
+  Implementation of YLDs due to maternal disorders should follow the standard vivarium procedure that ensures the sum of YLDs across maternal disorder YLDs and YLDs due to other simultaneous prevalent causes that a simulant may be afflicted with (such as anemia or postpartum depression), reflects the strategy of calculating joint disability weights of multiple comorbid conditions as shown in the equation below:
 
   .. math::
 
     DW_\text{overall} = 1 - \prod_{n=1}^{n} 1 - DW_n
 
-  A potential stratgey is to calculate a maternal disorders disability weight equal to :math:`\frac{(\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}) / \text{incidence_rate}_{c366}}{365}` and creating a cause model state of maternal disorder disability that a simulant occupies for one year. Notably, this strategy assumes that no simulants in this state will die in the year following birth and may result in a slight underestimation of YLDs due to maternal disorders.
+  **If a simulant occupies the post-maternal disorder state and then enters it again with a subsequent birth while they still occupy the post-maternal disorder state from the prior birth, the disability weight for both episodes of maternal disorders should be calculated in this same manner.**
 
 Validation Criteria
 +++++++++++++++++++
