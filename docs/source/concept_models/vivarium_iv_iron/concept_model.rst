@@ -378,29 +378,30 @@ For GBD outcomes that do not have regional-level estimates (e.g. covariates), th
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* **Population size:** 100,000
-* **Cohort type:** closed
-
-**Model 1:**
-
-.. list-table:: Population Restrictions
+.. list-table:: Simulation population parameters
    :header-rows: 1
 
-   * - Restriction Type
+   * - Parameter
      - Value
-     - Notes
-   * - Male only
-     - False
-     -
-   * - Female only
-     - True
-     -
-   * - Age group start
-     - 10 minus the number of simulation years = 7
+     - Note
+   * - Population size
+     - 100,000
+     - per draw
+   * - Cohort type
+     - Closed
      - 
-   * - Age group end
-     - 55 to 59
-     - age_group_id=16. NOTE: while reproductive age defined by GBD has an age group end of 54, it is possible that a simulant may get pregnant at 54 and give birth or remain in the postpartum period into the 55-59 age group.
+   * - Age start
+     - 7 years
+     - Minimum age at initialization. Chosen by subtracting number of simulation run years from 10 years of age (minimum fertile age in GBD)
+   * - Age end
+     - 54 years
+     - Maximum age at initialization
+   * - Exit age
+     - 57 years (track through the 56th year until the start of the 57th year)
+     - Maximum age of tracking in simulation. Allows capture of potential events for pregnancies that occur at the end of the 54th year, including maximum gestation period and 1 year post-maternal disorder state.
+   * - Sex restrictions
+     - Female only
+     - 
 
 .. todo::
 
