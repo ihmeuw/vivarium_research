@@ -119,42 +119,42 @@ This simulation will be built in a series of subgroups of model components that 
     - Color
     - Description
     - Note
-  * - 1
+  * - I
     - Green
     - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
     - Women of reproductive age (WRA) population model only
-  * - 2a
+  * - IIa
     - Purple
     - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
     - Includes children under five in population model as well as WRA
-  * - 2b
+  * - IIb
     - N/A
     - Fertility component to familially link WRA to children under five.
     - May be swapped in implementation order with model 2a
-  * - 3
+  * - III
     - Blue
     - Postpartum depression and breastfeeding behaviors
     - 
-  * - 4
+  * - IV
     - Yellow
     - Non-standard outcomes, including stillbirths, infertility, and cognition
     - 
-  * - 5
+  * - V
     - Orange
     - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
     - 
-  * - 6a
+  * - VIa
     - Red
     - Fertility model that includes birth interval information
     - 
-  * - 6b
+  * - VIb
     - Red
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
     - 
 
-**Model Version 1 Detail:**
+**Model Version I Detail:**
 
-.. image:: concept_model_version_1.svg
+.. image:: concept_model_version_i.svg
 
 .. _iviron3.1:
 
@@ -259,7 +259,7 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 * :ref:`Maternal disorders <2019_cause_maternal_disorders>`
 * :ref:`Maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>`
 
-For model versions 2+: 
+For model versions II+: 
 
   * :ref:`Diarrheal diseases <2019_cause_diarrhea>`
   * :ref:`Lower respiratory infections <2019_cause_lower_respiratory_infections>`
@@ -277,7 +277,7 @@ Including,
 
   * :ref:`Anemia impairment model <2019_anemia_impairment>`
 
-For model versions 2+:
+For model versions II+:
 
   * Child wasting and protein energy malnutrition (NOTE: static propensity model verions 2-4, :ref:`dynamic transition model for versions 5+ <2020_risk_exposure_wasting_state_exposure>`)
 
@@ -286,7 +286,7 @@ For model versions 2+:
 
 * :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
   * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
@@ -299,7 +299,7 @@ For model versions 2+:
 * :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
 * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: consider affected measure for diarrheal diseases for model versions before and after 5/vicious cycle implementation)
   * Child stunting risk effects
@@ -312,7 +312,7 @@ For model versions 2+:
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
   * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
@@ -323,7 +323,7 @@ For model versions 2+:
 
 * :ref:`Pregnancy model <other_models_pregnancy>`
 
-For model versions 2+:
+For model versions II+:
 
   * Stillbirth
   * Infertility
@@ -336,7 +336,7 @@ For model versions 2+:
 * :ref:`Antenatal IV iron <intervention_iv_iron_antenatal>`
 * :ref:`Postpartum IV iron <intervention_iv_iron_postpartum>`
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Acute malnutrition management and treatment <intervention_wasting_treatment>` (NOTE: will need to be updated to locations of interest)
   * Childhood vaccinations
@@ -441,7 +441,7 @@ Additionally include children under five in the simulation population. Maternal/
 4.4 Desired outputs
 -------------------
 
-For model version 1:
+For model version II:
 
 #. DALYs (YLLs and YLDs) due to a) maternal disorders, and b) anemia among a) pregnant, b) postpartum, and c) women of reproductive age
 #. Severity-specific anemia prevalence during a) pregnancy, and b) the postpartum period
