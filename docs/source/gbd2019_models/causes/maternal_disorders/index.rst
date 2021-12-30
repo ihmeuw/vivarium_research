@@ -173,13 +173,17 @@ on the ages and sexes to which the cause applies.
      -
    * - YLL age group end
      - 50 to 54 (ID=15)
-     -
+     - (See the AgeGroupNote_ for how to handle births that occur in the 55-59 age group)
    * - YLD age group start
      - 10 to 14 (ID=7)
      -
    * - YLD age group end
      - 50 to 54 (ID=15)
-     -
+     - (See the AgeGroupNote_ for how to handle births that occur in the 55-59 age group)
+
+.. note::
+
+  GBD defines both the fertile age range and the age range of maternal disorders as 10 to 54 years. This implicitly assumes that there are no cases of someone becoming pregnant at age 54 and experiencing a maternal disorder death or disability at the age of 55 years or older.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -269,7 +273,12 @@ The following table defines the parameters used in the calculation of maternal d
      - Pregnancy incidence rate
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
+     
+.. _AgeGroupNote:
 
+.. note::
+
+  In our simulation, a simulant may become pregnant at the age of 54 and give birth at the age of 55. However, there are not GBD data for the 55-59 age group for maternal disorders. Therefore, for simulants who become pregnant in the 50-54 year age group and give birth in the 55-59 age group, the maternal disorder rates specific to the 50-54 year age group should be used.
 
 Years of life lost
 """""""""""""""""""
