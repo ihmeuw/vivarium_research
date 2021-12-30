@@ -286,6 +286,12 @@ For model versions II+:
 
 * :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
 
+.. todo::
+
+  Ali to update this risk exposure to be specific to BMI < 18.5 using the GBD estimates of continuous BMI exposure using modelable entity IDs 2548 and 18706. 
+
+  For now, use covariate ID 1253 (age-specific proportion of women with BMI < 17)
+
 For model versions II+:
 
   * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
@@ -353,25 +359,133 @@ Locations of interest to this project:
 
 - Sub-Saharan Africa (location_type=superregion; location_id=166)
 - South Asia (location_type=region; location_id=159)
-- All low and middle income countries:
+- All low and middle income countries (LMICs)
 
-  - World bank lower middle income (location_type=region; location_id=44577)
-  - World bank low income (location_type=region; location_id=44578)
+  - This simulation location does not have a corresponding GBD location ID. Rather, there are two location IDs that fall within this location of interest and together will make up the overall LMIC location (shown in the bullets below). We will need to calculate weighted average estimates across these two locations (and/or the national-level locations that comprise them) for use in the simulation of the LMIC location.
+
+    - World bank lower middle income (location_type=region; location_id=44577)
+    - World bank low income (location_type=region; location_id=44578)
 
 National-level locations included in each of these locations of interest `can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/locations>`_.
 
 Location aggregation
 ^^^^^^^^^^^^^^^^^^^^^^
 
-For GBD outcomes that do not have regional-level estimates (e.g. covariates), the following strategy should be followed:
+For GBD outcomes that do not have estimates available for the locations of interest, we will calculate aggregate weighted average estimates from the national estimates included in the regional locations of interest. Notably, for some parameters, we will want to weight to the size of the population of women of reproductive age and for others we will want to weight to the size of the pregnant population. Generally, the following steps should be followed:
 
-#. Pull estimates specific to each national-level location_id included in the region of interest (can be found in csv files linked above)
-#. Pull population estimates for each national-level location_id included in the region of interest
-#. At the draw-level, caclulate a population-weighted average estimate across all national locations within the region of interest, like so:
+#. Pull estimates specific to each national-level location_id included in the region of interest (can be found in .csv files linked above)
+#. Pull estimates of the relevant weighting unit for each national-level location_id included in the region of interest (weighting unit for each parameter is shown in the table below)
+#. At the draw-level, caclulate a weighted average estimate across all national locations within the region of interest, like so:
 
 .. math::
 
-  estimate_\text{regional} = \frac{\sum_{n=1}^{n} population_\text{national} * estimate_\text{national}}{\sum_{n=1}^{n} population_\text{national}}
+  estimate_\text{regional} = \frac{\sum_{n=1}^{n} \text{weighting unit value}_\text{national} * estimate_\text{national}}{\sum_{n=1}^{n} \text{weighting unit value}_\text{national}}
+
+Details on how to calculate weighted averages for specific simulation parameters are shown in the tables below.
+
+.. list-table:: Weighted average calculation instructions
+   :header-rows: 1
+
+   * - Parameter
+     - Parameter ID
+     - Available location IDs
+     - Weighting unit
+     - Age-specific?
+     - Note
+   * - Population size
+     - N/A (use *get_population*)
+     - 159, 166
+     - N/A: sum across sub-regional population size values for aggregate value
+     - Yes
+     - Can sum across location IDs 44577 and 44578 to get population size for the LMIC simulation location
+   * - Age-specific fertility rate (ASFR)
+     - covariate_id 13
+     - 159, 166
+     - WRA
+     - Yes
+     - 
+   * - Cause and sequela data
+     - c366, c367, s182, s183, s184
+     - 159, 166
+     - PLW
+     - Yes
+     - Also available for location IDs 44577 and 44578, but should be weighted from national-level values for the LMIC simulation location
+   * - Hemoglobin modelable entity IDs
+     - MEIDs 10487 and 10488
+     - 159, 166
+     - WRA
+     - Yes
+     - Would be good validation of weighting strategy to perform weighting for location IDs 159 and 166 to compare to GBD estimates for these parameters
+   * - BMI modelable entity IDs
+     - MEIDs 2548 and 18706
+     - 159, 166
+     - WRA
+     - Yes
+     - Not yet incorporated into maternal BMI exposure model
+   * - Stillbirth to live birth ratio (SBR)
+     - covariate ID 2267
+     - None (national only)
+     - ASFR
+     - No
+     - 
+   * - Antenatal care visit attendance (ANC)
+     - covariate ID 7
+     - None (national only)
+     - PLW
+     - No
+     - 
+   * - Skilled birth attendance (SBA)
+     - covariate ID 143
+     - None (national only)
+     - PLW
+     - No
+     - 
+   * - Maternal low BMI exposure
+     - covariate ID 1253
+     - None (national only)
+     - PLW
+     - No
+     - Current covariate for BMI exposure model, but to be updated to the BMI modelable entity IDs
+   * - Anemia impariment
+     - REIDs 192, 205, 206, 207
+     - 159, 166, 44577 and 44578
+     - WRA
+     - Yes
+     - Parameter used for validation, but not for model building
+
+Where,
+
+.. list-table:: Parameter values for weighted average calculations
+   :header-rows: 1
+
+   * - Parameter
+     - Description   
+     - Value
+     - Note
+   * - WRA
+     - National population size of women of reproductive age (ages 10 to 54)
+     - *get_population*, decomp_step='step4', age_group_id=[7,8,9,10,11,12,13,14,15], sex_id=2
+     - Either age-specific or summed across age groups if not age-specific
+   * - PLW
+     - National number of women who become pregnant within one year   
+     - WRA :math:`\times` (ASFR + (ASFR * SBR) + incidence_c996 + incidence_c374)
+     - Calculate at the age-specific level and sum the result across age groups if not age-specific
+   * - ASFR
+     - Age-specific fertility rate   
+     - covariate_id=13, decomp_step='step4'
+     - Assume normal distribution of uncertainty  
+   * - SBR
+     - Stillbirth to live birth ratio   
+     - covariate_id=1106, decomp_step='step4'
+     - Not age-specific; no uncertainty 
+   * - incidence_c996
+     - Incidence rate of abortion and miscarriage cause   
+     - cause_id=996, source=como, decomp_step=’step5’, measure_id=
+     - 
+   * - incidence_c374
+     - Incidence rate of ectopic pregnancy
+     - cause_id=374, source=como, decomp_step=’step5’, measure_id=
+     - 
 
 .. _iviron4.2.1:
 
