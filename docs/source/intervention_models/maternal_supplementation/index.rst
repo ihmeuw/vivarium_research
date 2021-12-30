@@ -218,11 +218,7 @@ All regimens in the maternal supplementation interventions affect the hemoglobin
     - Age group ID 15
   * - Other
     - Pregnant and lactating women only
-    - (see fertility model)
-
-.. todo:: 
-
-  Link fertility model doc
+    - (see the :ref:`pregnancy model document <other_models_pregnancy>`)
 
 .. list-table:: Supplementation effect on hemoglobin
   :header-rows: 1
