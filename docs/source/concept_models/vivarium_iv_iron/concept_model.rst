@@ -119,42 +119,42 @@ This simulation will be built in a series of subgroups of model components that 
     - Color
     - Description
     - Note
-  * - 1
+  * - I
     - Green
     - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
     - Women of reproductive age (WRA) population model only
-  * - 2a
+  * - IIa
     - Purple
     - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
     - Includes children under five in population model as well as WRA
-  * - 2b
+  * - IIb
     - N/A
     - Fertility component to familially link WRA to children under five.
     - May be swapped in implementation order with model 2a
-  * - 3
+  * - III
     - Blue
     - Postpartum depression and breastfeeding behaviors
     - 
-  * - 4
+  * - IV
     - Yellow
     - Non-standard outcomes, including stillbirths, infertility, and cognition
     - 
-  * - 5
+  * - V
     - Orange
     - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
     - 
-  * - 6a
+  * - VIa
     - Red
     - Fertility model that includes birth interval information
     - 
-  * - 6b
+  * - VIb
     - Red
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
     - 
 
-**Model Version 1 Detail:**
+**Model Version I Detail:**
 
-.. image:: concept_model_version_1.svg
+.. image:: concept_model_version_i.svg
 
 .. _iviron3.1:
 
@@ -259,7 +259,7 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 * :ref:`Maternal disorders <2019_cause_maternal_disorders>`
 * :ref:`Maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>`
 
-For model versions 2+: 
+For model versions II+: 
 
   * :ref:`Diarrheal diseases <2019_cause_diarrhea>`
   * :ref:`Lower respiratory infections <2019_cause_lower_respiratory_infections>`
@@ -277,7 +277,7 @@ Including,
 
   * :ref:`Anemia impairment model <2019_anemia_impairment>`
 
-For model versions 2+:
+For model versions II+:
 
   * Child wasting and protein energy malnutrition (NOTE: static propensity model verions 2-4, :ref:`dynamic transition model for versions 5+ <2020_risk_exposure_wasting_state_exposure>`)
 
@@ -286,7 +286,13 @@ For model versions 2+:
 
 * :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
 
-For model versions 2+:
+.. todo::
+
+  Ali to update this risk exposure to be specific to BMI < 18.5 using the GBD estimates of continuous BMI exposure using modelable entity IDs 2548 and 18706. 
+
+  For now, use covariate ID 1253 (age-specific proportion of women with BMI < 17)
+
+For model versions II+:
 
   * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
   * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
@@ -299,7 +305,7 @@ For model versions 2+:
 * :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
 * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: consider affected measure for diarrheal diseases for model versions before and after 5/vicious cycle implementation)
   * Child stunting risk effects
@@ -312,7 +318,7 @@ For model versions 2+:
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
   * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
@@ -323,7 +329,7 @@ For model versions 2+:
 
 * :ref:`Pregnancy model <other_models_pregnancy>`
 
-For model versions 2+:
+For model versions II+:
 
   * Stillbirth
   * Infertility
@@ -336,7 +342,7 @@ For model versions 2+:
 * :ref:`Antenatal IV iron <intervention_iv_iron_antenatal>`
 * :ref:`Postpartum IV iron <intervention_iv_iron_postpartum>`
 
-For model versions 2+:
+For model versions II+:
 
   * :ref:`Acute malnutrition management and treatment <intervention_wasting_treatment>` (NOTE: will need to be updated to locations of interest)
   * Childhood vaccinations
@@ -353,54 +359,163 @@ Locations of interest to this project:
 
 - Sub-Saharan Africa (location_type=superregion; location_id=166)
 - South Asia (location_type=region; location_id=159)
-- All low and middle income countries:
+- All low and middle income countries (LMICs)
 
-  - World bank lower middle income (location_type=region; location_id=44577)
-  - World bank low income (location_type=region; location_id=44578)
+  - This simulation location does not have a corresponding GBD location ID. Rather, there are two location IDs that fall within this location of interest and together will make up the overall LMIC location (shown in the bullets below). We will need to calculate weighted average estimates across these two locations (and/or the national-level locations that comprise them) for use in the simulation of the LMIC location.
+
+    - World bank lower middle income (location_type=region; location_id=44577)
+    - World bank low income (location_type=region; location_id=44578)
 
 National-level locations included in each of these locations of interest `can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/locations>`_.
 
 Location aggregation
 ^^^^^^^^^^^^^^^^^^^^^^
 
-For GBD outcomes that do not have regional-level estimates (e.g. covariates), the following strategy should be followed:
+For GBD outcomes that do not have estimates available for the locations of interest, we will calculate aggregate weighted average estimates from the national estimates included in the regional locations of interest. Notably, for some parameters, we will want to weight to the size of the population of women of reproductive age and for others we will want to weight to the size of the pregnant population. Generally, the following steps should be followed:
 
-#. Pull estimates specific to each national-level location_id included in the region of interest (can be found in csv files linked above)
-#. Pull population estimates for each national-level location_id included in the region of interest
-#. At the draw-level, caclulate a population-weighted average estimate across all national locations within the region of interest, like so:
+#. Pull estimates specific to each national-level location_id included in the region of interest (can be found in .csv files linked above)
+#. Pull estimates of the relevant weighting unit for each national-level location_id included in the region of interest (weighting unit for each parameter is shown in the table below)
+#. At the draw-level, caclulate a weighted average estimate across all national locations within the region of interest, like so:
 
 .. math::
 
-  estimate_\text{regional} = \frac{\sum_{n=1}^{n} population_\text{national} * estimate_\text{national}}{\sum_{n=1}^{n} population_\text{national}}
+  estimate_\text{regional} = \frac{\sum_{n=1}^{n} \text{weighting unit value}_\text{national} * estimate_\text{national}}{\sum_{n=1}^{n} \text{weighting unit value}_\text{national}}
+
+Details on how to calculate weighted averages for specific simulation parameters are shown in the tables below.
+
+.. list-table:: Weighted average calculation instructions
+   :header-rows: 1
+
+   * - Parameter
+     - Parameter ID
+     - Available location IDs
+     - Weighting unit
+     - Age-specific?
+     - Note
+   * - Population size
+     - N/A (use *get_population*)
+     - 159, 166
+     - N/A: sum across sub-regional population size values for aggregate value
+     - Yes
+     - Can sum across location IDs 44577 and 44578 to get population size for the LMIC simulation location
+   * - Age-specific fertility rate (ASFR)
+     - covariate_id 13
+     - 159, 166
+     - WRA
+     - Yes
+     - 
+   * - Cause and sequela data
+     - c366, c367, s182, s183, s184
+     - 159, 166
+     - PLW
+     - Yes
+     - Also available for location IDs 44577 and 44578, but should be weighted from national-level values for the LMIC simulation location
+   * - Hemoglobin modelable entity IDs
+     - MEIDs 10487 and 10488
+     - 159, 166
+     - WRA
+     - Yes
+     - Would be good validation of weighting strategy to perform weighting for location IDs 159 and 166 to compare to GBD estimates for these parameters
+   * - BMI modelable entity IDs
+     - MEIDs 2548 and 18706
+     - 159, 166
+     - WRA
+     - Yes
+     - Not yet incorporated into maternal BMI exposure model
+   * - Stillbirth to live birth ratio (SBR)
+     - covariate ID 2267
+     - None (national only)
+     - ASFR
+     - No
+     - 
+   * - Antenatal care visit attendance (ANC)
+     - covariate ID 7
+     - None (national only)
+     - PLW
+     - No
+     - 
+   * - Skilled birth attendance (SBA)
+     - covariate ID 143
+     - None (national only)
+     - PLW
+     - No
+     - 
+   * - Maternal low BMI exposure
+     - covariate ID 1253
+     - None (national only)
+     - PLW
+     - No
+     - Current covariate for BMI exposure model, but to be updated to the BMI modelable entity IDs
+   * - Anemia impariment
+     - REIDs 192, 205, 206, 207
+     - 159, 166, 44577 and 44578
+     - WRA
+     - Yes
+     - Parameter used for validation, but not for model building
+
+Where,
+
+.. list-table:: Parameter values for weighted average calculations
+   :header-rows: 1
+
+   * - Parameter
+     - Description   
+     - Value
+     - Note
+   * - WRA
+     - National population size of women of reproductive age (ages 10 to 54)
+     - *get_population*, decomp_step='step4', age_group_id=[7,8,9,10,11,12,13,14,15], sex_id=2
+     - Either age-specific or summed across age groups if not age-specific
+   * - PLW
+     - National number of women who become pregnant within one year   
+     - WRA :math:`\times` (ASFR + (ASFR * SBR) + incidence_c996 + incidence_c374)
+     - Calculate at the age-specific level and sum the result across age groups if not age-specific
+   * - ASFR
+     - Age-specific fertility rate   
+     - covariate_id=13, decomp_step='step4'
+     - Assume normal distribution of uncertainty  
+   * - SBR
+     - Stillbirth to live birth ratio   
+     - covariate_id=1106, decomp_step='step4'
+     - Not age-specific; no uncertainty 
+   * - incidence_c996
+     - Incidence rate of abortion and miscarriage cause   
+     - cause_id=996, source=como, decomp_step=’step5’, measure_id=
+     - 
+   * - incidence_c374
+     - Incidence rate of ectopic pregnancy
+     - cause_id=374, source=como, decomp_step=’step5’, measure_id=
+     - 
 
 .. _iviron4.2.1:
 
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* **Population size:** 100,000
-* **Cohort type:** closed
-
-**Model 1:**
-
-.. list-table:: Population Restrictions
+.. list-table:: Simulation population parameters
    :header-rows: 1
 
-   * - Restriction Type
+   * - Parameter
      - Value
-     - Notes
-   * - Male only
-     - False
-     -
-   * - Female only
-     - True
-     -
-   * - Age group start
-     - 10 minus the number of simulation years = 7
+     - Note
+   * - Population size
+     - 100,000
+     - per draw
+   * - Cohort type
+     - Closed
      - 
-   * - Age group end
-     - 55 to 59
-     - age_group_id=16. NOTE: while reproductive age defined by GBD has an age group end of 54, it is possible that a simulant may get pregnant at 54 and give birth or remain in the postpartum period into the 55-59 age group.
+   * - Age start
+     - 7 years
+     - Minimum age at initialization. Chosen by subtracting number of simulation run years from 10 years of age (minimum fertile age in GBD)
+   * - Age end
+     - 54 years
+     - Maximum age at initialization
+   * - Exit age
+     - 57 years (track through the 56th year until the start of the 57th year)
+     - Maximum age of tracking in simulation. Allows capture of potential events for pregnancies that occur at the end of the 54th year, including maximum gestation period and 1 year post-maternal disorder state.
+   * - Sex restrictions
+     - Female only
+     - 
 
 .. todo::
 
@@ -441,7 +556,7 @@ Additionally include children under five in the simulation population. Maternal/
 4.4 Desired outputs
 -------------------
 
-For model version 1:
+For model version II:
 
 #. DALYs (YLLs and YLDs) due to a) maternal disorders, and b) anemia among a) pregnant, b) postpartum, and c) women of reproductive age
 #. Severity-specific anemia prevalence during a) pregnancy, and b) the postpartum period
@@ -466,6 +581,13 @@ For model version 1:
 
 6.0 Limitations
 +++++++++++++++
+
+In addition to the assumptions and limitations listed in each of the pages included in the `4.1 Vivarium concept model diagram components`_ section, our simulation is also subject to the following assumptions and limitations:
+
+#. Our simulation is run at the regional level and does not consider sub-regional heterogeneity.
+#. We do not model a distinction between iron-deficiency anemia and other types of anemia. Therefore, we may overestimate the number of individuals whose hemoglobin levels respond to our interventions, which may also vary by modeled location.
+#. We do not directly model access to care among our simulated population nor any of its correlates.
+#. We do not consider outcomes affected by the intervention other than those that act through maternal hemoglobin and infant birthweight. However, the maternal supplementation intervention may also have impacts on additional outcomes that we do not consider such as maternal malnourishment (including micronutrient deficiencies as well as maternal underweight). This may cause us to overestimate DALYs in our alternative scenarios.
 
 7.0 References
 +++++++++++++++
