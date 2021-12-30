@@ -288,7 +288,7 @@ For model versions 2+:
 
 .. todo::
 
-  Ali to update this risk exposure to be specific to BMI < 18.5 using the GBD estimates of continuous BMI exposure using modelable entity IDs 2548 and 2548. 
+  Ali to update this risk exposure to be specific to BMI < 18.5 using the GBD estimates of continuous BMI exposure using modelable entity IDs 2548 and 18706. 
 
   For now, use covariate ID 1253 (age-specific proportion of women with BMI < 17)
 
