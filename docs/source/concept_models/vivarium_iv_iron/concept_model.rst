@@ -425,7 +425,7 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Stillbirth to live birth ratio (SBR)
      - covariate ID 2267
      - None (national only)
-     - ASFR
+     - ASFR :math:`\times` WRA
      - No
      - 
    * - Antenatal care visit attendance (ANC)
