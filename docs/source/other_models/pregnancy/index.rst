@@ -144,10 +144,10 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 1 - prevalence_p - prevalence_pp
     - 
   * - p
-    - incidence_p * 40 / 52
+    - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 40 / 52`
     - Consider updating to reflect average gestational age for location of interest rather than 40 weeks
   * - pp
-    - incidence_p * 6 / 52
+    - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 6 / 52`
     -  
 
 .. list-table:: State transition data
@@ -161,7 +161,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - np
     - p
     - incidence_p
-    - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{374}}{prevalence_\text{np}}`
+    - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}}{prevalence_\text{np}}`
     - 
   * - p
     - pp
@@ -207,9 +207,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
    A note on locations for the :ref:`IV Iron simulation <2019_concept_model_vivarium_iv_iron>`:
 
-      The ASFR covariate is available for regional ocation IDs. The SBR covariate is not available for regional estimates.
-
-      For locations of interest that do not have available covariate estimates, aggregate esimates will need to be calculated according to the estimates for each of the component national-level location_ids.
+      The ASFR covariate is available for regional location IDs. The SBR covariate is not available for regional estimates. Follow the location aggregation instructions on the concept model document to calculate regional-level values for these parameters.
 
 
 .. list-table:: Restrictions

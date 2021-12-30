@@ -251,7 +251,7 @@ Below is R code written to randomly sample hemoglobin concentration values from 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
 
-To sample hemoglobin values for :ref:`pregnant and postpartum women <other_models_pregnancy>`, use the same functions as above, but multiply the hemoglobin mean and standard deviation parameters used for those functions by the respective pregnancy adjustment factors listed below. Notably, the GBD 2019 assumes that the pregnancy adjustment factor applies to 40 weeks of gestation and 6 weeks post-gestation.
+To sample hemoglobin values for pregnant/lactating women, use the same functions as above, but multiply the hemoglobin mean and standard deviation parameters used for those functions by the respective pregnancy adjustment factors listed below. Hemoglobin exposure values for pregnant women should be sampled from this adjusted distribution using the same propensity that was used to sample from the unadjusted distribution prior to the pregnancy. The adjusted pregnancy hemoglobin exposure should persist throughout pregnancy and the postpartum period for a given simulant, at which point another value should be sampled from the (age-appropriate, which could be different than the pre-pregnancy age group) unadjusted hemoglobin exposure distribution using the same propensity value.
 
 .. list-table:: Pregnancy Adjustment Factors
   :widths: 15, 30, 10
@@ -261,11 +261,11 @@ To sample hemoglobin values for :ref:`pregnant and postpartum women <other_model
     - Value
     - Note
   * - Mean hemoglobin adjustment factor
-    - 0.919325
-    - No uncertainty is used in the GBD 2019 code, although a UI is listed in methods appendix as (0.86 - 0.98)
+    - 0.919325 (95% UI: 0.86, 0.98)
+    - Assume a normal distribution of uncertainty within uncertainty interval (No uncertainty was used in the GBD 2019 code, but the uncerainty interval was reported in the methods appendix).
   * - Hemoglobin standard deviation adjustment factor
     - 1.032920188
-    - No uncertainty is used in the GBD 2019 code
+    - Assume no uncertainty distribution. (No uncertainty is used in the GBD 2019 code or listed in the methods appendix).
 
 Validation Criteria
 +++++++++++++++++++
