@@ -198,7 +198,7 @@ Data Description Tables
 
 .. note::
 
-	While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers. The probability of sampling a negative value is small, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 1.
+  While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers and should also be biologically plausible. The lowest recorded hemoglobin value observed following massive blood loss [Spiess-2015]_ was 6 g/L and the lowest hemoglobin value observed in a hemodynamically stable patient not requiring cardiac or supplemental oxygen support was 14 g/L [Chai-et-al-2021]_). **The probability of sampling a hemoglobin value less than 6 g/L is low, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 6 grams per liter.**
 
   `This notebook <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`_ validates these functions included in the code block above compared to the R code utilized by the GBD anemia team (included below) and across ensemble distribution sampling strategies. Notably, the updated ensemble distribution sampling strategy (shown in the code block above and in the :code:`viv_calc_iron_nbs` function in the linked notebook) follow the correct strategy for :ref:`sampling from an ensemble distribution <vivarium_best_practices_ensemble_distributions>`, which has already been incorporated into Vivarium's :code:`risk_distributions` module in the `.ppf method of the EnsembleDistribution class <https://github.com/ihmeuw/risk_distributions/blob/6d374a4d506c315422338946010c2612fdac5413/src/risk_distributions/risk_distributions.py#L495>`_ (which is misleadingly named because this sampling method is not the same thing as the quantile function...).
 
@@ -296,3 +296,9 @@ References
     Kassebaum NJ, GBD 2013 Anemia Collaborators. The Global Burden of
     Anemia. Hematol Oncol Clin North Am. 2016 Apr;30(2):247-308. doi: https://doi.org/10.1016/j.hoc.2015.11.002
 .. _`Kassebaum et al. 2016`: https://www.clinicalkey.com/service/content/pdf/watermarked/1-s2.0-S0889858815001896.pdf?locale=en_US&searchIndex=
+
+.. [Chai-et-al-2021]
+  Chai, A. L., Huang, O. Y., Rakočević, R., & Chung, P. (2021). Critical iron deficiency anemia with record low hemoglobin: a case report. Journal of medical case reports, 15(1), 472. https://doi.org/10.1186/s13256-021-03024-9
+
+.. [Spiess-2015]
+  Spiess B. (2015). Editorial Comment: Recovery from Extreme Hemodilution (Hemoglobin Level of 0.6 g/dL) in Cadaveric Liver Transplantation and Management of a Jehovah's Witness Patient with Sepsis and Profuse Bleeding After Emergency Coronary Artery Bypass Graft Surgery: Rethinking the Critical Threshold of Oxygen Delivery. A & A case reports, 4(10), 137–139. https://doi.org/10.1213/XAA.0000000000000153
