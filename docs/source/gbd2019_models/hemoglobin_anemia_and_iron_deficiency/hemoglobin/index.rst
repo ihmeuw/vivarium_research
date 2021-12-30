@@ -240,7 +240,7 @@ Below is R code written to randomly sample hemoglobin concentration values from 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
 
-To sample hemoglobin values for pregnant/lactating women, use the same functions as above, but multiply the hemoglobin mean and standard deviation parameters used for those functions by the respective pregnancy adjustment factors listed below. Notably, the GBD 2019 assumes that the pregnancy adjustment factor applies to 40 weeks of gestation and 6 weeks post-gestation.
+To sample hemoglobin values for pregnant/lactating women, use the same functions as above, but multiply the hemoglobin mean and standard deviation parameters used for those functions by the respective pregnancy adjustment factors listed below. Hemoglobin exposure values for pregnant women should be sampled from this adjusted distribution using the same propensity that was used to sample from the unadjusted distribution prior to the pregnancy. The adjusted pregnancy hemoglobin exposure should persist throughout pregnancy and the postpartum period for a given simulant, at which point another value should be sampled from the (age-appropriate, which could be different than the pre-pregnancy age group) unadjusted hemoglobin exposure distribution using the same propensity value.
 
 .. list-table:: Pregnancy Adjustment Factors
   :widths: 15, 30, 10
