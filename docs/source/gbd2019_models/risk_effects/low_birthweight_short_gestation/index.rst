@@ -333,6 +333,8 @@ Vivarium Modeling Strategy
    :ref:`Low Birthweight and Short Gestation (GBD 2019)
    <2019_risk_exposure_lbwsg>` page.
 
+.. _lbwsg_2019_rr_interpolation_section:
+
 Interpolation of LBWSG Relative Risks
 +++++++++++++++++++++++++++++++++++++
 
@@ -833,6 +835,187 @@ using ``get_draws``:
 .. _Notebook for 2-step interpolation and pitfalls: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
 .. _Notebook comparing 2-step interpolations: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
 .. _LBWSGRiskEffectRBVSpline class: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
+
+PAF Calculation for Interpolated Relative Risks
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The Population Attributable Fraction (PAF) is used to compute "risk-deleted"
+transiton rates in our simulations. In the present context, the deleted risk
+will be LBWSG, and the affected rate will be the simulants' mortality hazard.
+Since the interpolated relative risk function described :ref:`above
+<lbwsg_2019_rr_interpolation_section>` is different from the piecewise constant
+relative risk function used by GBD, we will need to compute our own PAF for the
+interpolated relative risks rather than using the PAF calculated by GBD.
+
+As always, the formula for the PAF is
+
+.. math::
+
+  \mathrm{PAF}
+  = \frac{E(\mathit{RR}) - 1}{E(\mathit{RR})}
+  = 1 - \frac{1}{E(\mathit{RR})}
+  = 1 - \frac{1}{\int \mathit{RR}\, d\rho},
+
+where :math:`\textit{RR}` is the relative risk function, :math:`\rho` is the
+risk exposure distribution, and :math:`E` is expectation_ with respect to the
+probability measure :math:`\rho`. Thus the PAF computation comes down to
+computing an integral representing the average relative risk in the population.
+In our case the relevant integral is
+
+.. math::
+
+  \int \mathit{RR}\, d\rho
+  = \int_{\mathrm{GA}\times \mathrm{BW}}
+    \mathit{RR}(x,y)\, d\rho(x,y),
+
+where :math:`\mathrm{GA} = [0,42\text{wk}]`, :math:`\mathrm{BW} =
+[0,4500\text{g}]`, :math:`\mathit{RR}(x,y)` is the interpolated relative risk at
+gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
+\mathrm{BW}`, and :math:`\rho` is the LBWSG exposure distribution.
+
+Note that the above formula employs the notation ":math:`d\rho`" from measure
+theory. If the exposure distribution :math:`\rho` is absolutely continuous with
+density function :math:`p` (e.g., if :math:`\rho` is defined by the piecewise
+constant density function described on the :ref:`GBD 2019 LBWSG exposure page
+<2019_risk_exposure_lbwsg>`), we can rewrite :math:`d\rho(x,y)` in terms of the
+probability density function :math:`p` for the LBWSG exposure distribution
+:math:`\rho`:
+
+.. math::
+
+  d\rho(x,y)
+  = \frac{d\rho(x,y)}{dx\, dy}\, dx\, dy
+  = p(x,y)\, dx\, dy,
+
+where :math:`dx\, dy` represents two-dimensional Lebesgue measure, and the
+Radon-Nikodym derivative :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability
+density function of the LBWSG exposure distibution at the point :math:`(x,y)\in
+\mathrm{GA}\times \mathrm{BW}`. On the other hand, if :math:`\rho` is a discrete
+distribution (e.g., the polytomous LBWSG distribution described by GBD), then
+the integral with respect to :math:`d\rho` is by definition a sum over the
+discrete exposure categories.
+
+Computing the PAF via Monte Carlo Integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+One way to compute the average relative risk :math:`\int \mathit{RR}\, d\rho`
+for the PAF calculation is to use `Monte Carlo integration`_. We can implement a
+simple version of Monte Carlo integration by leveraging the Vivarium
+microsimulation framework. Namely, we can initialize a population of simulants
+according to the LBWSG risk exposure distribution :math:`\rho`, then compute the
+average relative risk and the PAF for the simulated population. Here is Python
+(pseudo-)code to achieve this, continuing from the relative risk interpolation
+code above:
+
+.. code-block:: Python
+
+  def initialize_population_from_lbwsg_exposure(
+    pop_size: int,
+    age_group_id: int,
+    sex_id: int,
+    draw: int,
+    lbwsg_exposure: pd.DataFrame, # e.g. rescaled prevalence data from get_draws
+    ) -> pd.DataFrame:
+    """
+    Initializes a population of size pop_size according to the given LBWSG exposure distribution,
+    with attribute columns 'age_group_id', 'sex_id', 'gestational_age', 'birthweight'.
+    """
+    # This function can be implemented using the Vivarium Framework
+    # if we already have a component for initializing a population with
+    # LBWSG exposure data from GBD.
+    # The main thing it needs to do is convet the categorical LBWSG
+    # distribution from GBD into a continuous joint distribution of
+    # (birthweight, gestational_age). See the GBD 2019 LBWSG Risk Exposure
+    # documentation here:
+    # https://vivarium-research.readthedocs.io/en/latest/gbd2019_models/risk_exposures/low_birthweight_short_gestation/index.html
+    ...
+
+  def paf_from_mean_rr(mean_rr: float)->float:
+    """Calculates the PAF from the mean relative risk."""
+    return 1 - 1/mean_rr
+
+  # Variables and functions defined previously:
+  # -------------------------------------------
+  # pd, np
+  # draw, log_rr_interpolator, cat_df
+  # interpolate_lbwsg_rr_for_population
+
+  # Sample code to calculate the LBWSG PAF for Early Neonatal Females
+  # -----------------------------------------------------------------
+  EARLY_NEONATAL_ID = 2
+  FEMALE_ID = 2
+  pop_size = 100_000 # Choose a sufficiently large population size
+
+  lbwsg_exposure = ... # e.g., call get_draws for desired location, then rescale prevalence
+  enn_female_pop = initialize_population_from_lbwsg_exposure(
+    pop_size, EARLY_NEONATAL_ID, FEMALE_ID, draw, lbwsg_exposure
+  )
+  assert set(['age_group_id', 'sex_id', 'gestational_age', 'birthweight']) \
+    .issubset(enn_female_pop.columns), \
+    "Insufficient attribute columns to interpolate LBWSG RRs for population!"
+  assert (enn_female_pop['age_group_id'] == EARLY_NEONATAL_ID).all() \
+    and (enn_female_pop['sex_id'] == FEMALE_ID).all(), \
+    "Population has simulants of the wrong age or sex!"
+
+  enn_female_lbwsg_rrs = interpolate_lbwsg_rr_for_population(
+    enn_female_pop, log_rr_interpolator, cat_df
+  )
+  enn_female_paf = paf_from_mean_rr(enn_female_lbwsg_rrs.mean())
+
+As the number of simulants gets larger, the Law of Large Numbers implies that
+the mean RR of the simulated population will converge to the mean RR of a
+population with LBWSG exposure distribution :math:`\rho` (represented by the
+``lbwsg_exposure`` DataFrame in the above code). Therefore, the PAF computed by
+the above code will converge to the true PAF of the population as the number of
+simulants gets larger.
+
+.. important::
+
+  In order to get an idea of how large of a population we need to get a mean RR
+  and PAF close enough to the right value, we should do the Monte Carlo PAF
+  calculation for several small population sizes (e.g., 10, 100, 1000, 10,000),
+  and record some descriptive statistics for each calculation. Namely, it will
+  be useful to record the **mean RR**, the **sample standard deviation of the
+  RRs**, and the `standard error`_ **of the mean RR** for each simulation:
+
+  .. code-block:: Python
+
+    enn_female_rr_mean = enn_female_lbwsg_rrs.mean()
+    enn_female_rr_std_dev = np.sqrt(enn_female_lbwsg_rrs.var())
+    enn_female_rr_standard_error = enn_female_rr_std_dev / np.sqrt(len(enn_female_lbwsg_rrs))
+
+  These statisics will help us evaluate whether the PAF we get for a given
+  simulation is likely to be close to the true PAF, and will help us choose a
+  sufficiently large population size for a desired level of precision if we deem
+  that the original population size was insufficient.
+
+.. todo::
+
+  Describe a strategy for choosing a large enough population size for the Monte
+  Carlo calculation. See this `post in Slack
+  <https://ihme.slack.com/archives/C018BLX2JKT/p1639696957071600?thread_ts=1639685855.069100&cid=C018BLX2JKT>`_.
+
+.. todo::
+
+  Add link to Nathaniel's nanosim for LSFF as an example of working code that
+  performs the Monte Carlo PAF calculation.
+
+.. todo::
+
+  Determine if any alternative sampling strategies for the Monte Carlo
+  calculation may be more efficient. For example, rather than sampling the
+  continuous LBWSG distribution directly, it may be better to estimate the mean
+  RR in each category separately, then take a weighted average of the mean RR in
+  each category, weighting by the category prevalences.
+
+.. todo::
+
+  Try using SciPy's integration tools to compute the PAF as an alernative to the
+  Monte Carlo approach.
+
+.. _expectation: https://en.wikipedia.org/wiki/Expected_value
+.. _Monte Carlo integration: https://en.wikipedia.org/wiki/Monte_Carlo_integration
+.. _standard error: https://en.wikipedia.org/wiki/Standard_error
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++
