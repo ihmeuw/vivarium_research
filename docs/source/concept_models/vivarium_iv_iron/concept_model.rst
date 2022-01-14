@@ -142,15 +142,15 @@ This simulation will be built in a series of subgroups of model components that 
   * - V
     - Orange
     - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
-    - On hold
+    - On hold - not shown in diagram
   * - VIa
     - Red
     - Fertility model that includes birth interval information
-    - On hold
+    - On hold - not shown in diagram
   * - VIb
     - Red
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
-    - On hold
+    - On hold - not shown in diagram
 
 **Model Version I Detail:**
 
@@ -245,7 +245,7 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 
 .. note::
 
-  For final simulation results, BMGF is interested in modeling an intervention update curve over time. We will model an immediate scale-up throughout model development and plan to incorporate the scale-up following model valiation and prior to the generation of final results.
+  For final simulation results, BMGF is interested in modeling an intervention uptake curve over time. We will model an immediate scale-up throughout model development and plan to incorporate the scale-up following model valiation and prior to the generation of final results.
 
 .. _ivron4.0:
 
