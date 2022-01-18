@@ -547,9 +547,9 @@ Additionally include children under five in the simulation population. Maternal/
    * - Model
      - Description
      - V&V summary
-   * - 1.0
-     - 
-     - 
+   * - I.0
+     - Demography for Sub-Saharan Africa and South Asia
+     - `Notebook for validation can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/model0/model_0_gbd_validation.ipynb>`_. All-cause mortality rates look good. Age fraction looks reasonable, but slightly off for boundary age groups, likely a result of the assumption of uniform distribution of ages within a five year age group -- ok to proceed.
 
 .. _iviron4.4:
 
