@@ -174,6 +174,22 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 6 weeks (42 days) duration
     - Duration-based transition
 
+.. list-table:: Pregnancy outcomes
+  :header-rows: 1
+
+  * - Outcome
+    - Probability
+    - Note
+  * - Live birth
+    - ASFR / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
+    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The probability of a livebirth outcome will increase as a result of the reduction in the probability of a stillbirth associated with iron interventions during pregnancy (to be implemented in model version III).
+  * - Stillbirth
+    - (ASFR * SBR) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
+    - The probability of a stillbirth outcome will decrease as a result of iron interventions during pregnancy in the IV iron simulation (to be implemented in model version III)
+  * - Abortion/miscarriage
+    - (incidence_c995 + incidence_c374) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
+    -     
+
 .. list-table:: Data values
   :header-rows: 1
 
@@ -240,6 +256,10 @@ Gestational age
 ~~~~~~~~~~~~~~~~~
 
 Upon transition into the pregnancy state, each simulant should be assigned a gestational age according to the process described on the :ref:`low birthweight short gestation risk exposure document <2019_risk_exposure_lbwsg>`. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state. Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
+
+.. todo::
+
+  Detail strategy to assign gestational age so that it is compatible with the corresponding birthweight exposure, which will be dependent on maternal BMI and/or maternal hemoglobin exposures.
 
 For simulants who are initialized into the pregnancy state at the start of the simulation:
 
