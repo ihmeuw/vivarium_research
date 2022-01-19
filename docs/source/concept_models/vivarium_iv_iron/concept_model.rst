@@ -504,6 +504,12 @@ Where,
      - Note
    * - Population size
      - 100,000
+     - per draw (10,000 per random seed/draw combination)
+   * - Number of draws
+     - 66
+     - 
+   * - Number of random seeds
+     - 10
      - per draw
    * - Cohort type
      - Closed
@@ -551,9 +557,9 @@ Additionally include children under five in the simulation population. Maternal/
    * - Model
      - Description
      - V&V summary
-   * - 1.0
-     - 
-     - 
+   * - I.0
+     - Demography for Sub-Saharan Africa and South Asia
+     - `Notebook for validation can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/model0/model_0_gbd_validation.ipynb>`_. All-cause mortality rates look good. Age fraction looks reasonable, but slightly off for boundary age groups, likely a result of the assumption of uniform distribution of ages within a five year age group -- ok to proceed.
 
 .. _iviron4.4:
 
