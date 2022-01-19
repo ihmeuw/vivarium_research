@@ -137,20 +137,20 @@ This simulation will be built in a series of subgroups of model components that 
     - 
   * - IV
     - Yellow
-    - Non-standard outcomes, including stillbirths, infertility, and cognition
-    - 
+    - Non-standard outcomes, including stillbirths and cognition
+    - Inclusion of cognition outcome on hold until BMGF trial results are received
   * - V
     - Orange
     - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
-    - 
+    - On hold - not shown in diagram
   * - VIa
     - Red
     - Fertility model that includes birth interval information
-    - 
+    - On hold - not shown in diagram
   * - VIb
     - Red
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
-    - 
+    - On hold - not shown in diagram
 
 **Model Version I Detail:**
 
@@ -216,7 +216,7 @@ Where,
     - Note
   * - :math:`T`
     - Target coverage
-    - 0.9
+    - 0.8
     - Subject to change after confirmation with BMGF. Not location-specific.
   * - :math:`ANC`
     - Coverage of single antenatal care visit
@@ -242,6 +242,10 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 * **Date of intervention scale-up:** Janary 1, 2023
 * **Date of intervention end:** December 31, 2024
 * **Simulation time step:** 1 week
+
+.. note::
+
+  For final simulation results, BMGF is interested in modeling an intervention uptake curve over time. We will model an immediate scale-up throughout model development and plan to incorporate the scale-up following model valiation and prior to the generation of final results.
 
 .. _ivron4.0:
 
@@ -500,6 +504,12 @@ Where,
      - Note
    * - Population size
      - 100,000
+     - per draw (10,000 per random seed/draw combination)
+   * - Number of draws
+     - 66
+     - 
+   * - Number of random seeds
+     - 10
      - per draw
    * - Cohort type
      - Closed
@@ -547,9 +557,9 @@ Additionally include children under five in the simulation population. Maternal/
    * - Model
      - Description
      - V&V summary
-   * - 1.0
-     - 
-     - 
+   * - I.0
+     - Demography for Sub-Saharan Africa and South Asia
+     - `Notebook for validation can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/model0/model_0_gbd_validation.ipynb>`_. All-cause mortality rates look good. Age fraction looks reasonable, but slightly off for boundary age groups, likely a result of the assumption of uniform distribution of ages within a five year age group -- ok to proceed.
 
 .. _iviron4.4:
 

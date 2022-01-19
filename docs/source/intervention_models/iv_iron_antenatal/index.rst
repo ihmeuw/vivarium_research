@@ -62,7 +62,9 @@ We will model the following eligibility for the antenatal IV iron intervention:
 
   Women who receive IV iron should continue to be covered by the :ref:`maternal supplementation intervention <maternal_supplementation_intervention>` 
 
-  A potential future eligibility criterion for this intervention may be antenatal care visit attendance if we include it as a modeled parameter
+  A potential future eligibility criterion for this intervention may be antenatal care visit attendance if we include it as a modeled parameter.
+
+  Women can recieve only one dose of IV iron during pregnancy.
   
 .. todo::
 
@@ -86,7 +88,7 @@ We assume that IV iron intervention coverage takes place at the start of pregnan
     - 10487
     - Population mean hemoglobin concentration (as continuous measure)
     - Mean difference
-    - +10 g/L
+    - +23 g/L
     - 
   * - Birthweight
     - Risk exposure
@@ -107,10 +109,12 @@ Hemoglobin level among pregnant and lactating women
     - Effect size
     - Note
   * - Pregnant women with hemoglobin levels less than 100 g/L
-    - +10 g/L 
-    - Effect is present two weeks after start of pregnancy through the end of the postpartum period. Effect size is from the BMGF optomistic target product profile relative to oral iron supplementation
+    - +23 g/L, SD=14 g/L, assume normal distribution of uncertainty 
+    - Effect applied at 15 weeks gestation (two weeks after start of the second trimester) through the end of the postpartum period. Effect size is from the BMGF ongoing trials relative to oral iron supplementation. Note that lower bound of effect size crosses the null value-- intervention will decrease hemoglobin levels in some draws.
 
-The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure value two weeks after the start of pregnancy after the application of the pregnancy adjustment factor. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
+The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure value two weeks after the start of the second trimester of pregnancy, or **at 15 weeks gestation**, after the application of the pregnancy adjustment factor. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
+
+Notably, the intervention will be *administered* at 13 weeks gestation, and the effect of the intervention on maternal hemoglobin will occur two weeks later at 15 weeks gestation. Mothers that receive a IV iron at 13 weeks gestation and give birth (or experience a miscarriage/etc.) prior to 15 weeks (rare, but possible) should *not* be eligible for at additional dose of postpartum IV iron at birth. The effect of the antenatal IV iron dose on maternal hemoglobin should still occur two weeks following administration and persist through the end of the postpartum period.
 
 .. note::
 
@@ -119,13 +123,13 @@ The effect of the IV iron intervention on maternal hemoglobin should be applied 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- To align with the optomistic target profile from the BMGF, we assume that IV iron is administered at the very start of pregnancy. This will overestimate the impact of the intervention given this is unrealistically early for most women.
+- To align with the optomistic target profile from the BMGF, we assume that IV iron is administered at the start of the second trimester. This will overestimate the impact of the intervention given that not all women will receive the intervention at the earliest eligible timepoint.
 
 .. todo::
 
   Consider updating this assumption
 
-- We assume the effect of the intervntion persists through the end of the postpartum period at which point the woman's hemoglobin concentration returns to its pre-pregnancy level.
+- We assume the effect of the intervention persists through the end of the postpartum period at which point the woman's hemoglobin concentration returns to its pre-pregnancy level.
 
 - We do not consider effect modification by baseline hemoglobin status. In reality, the effect of IV iron may be greater among women with lower baseline hemoglobin levels.
 
