@@ -35,6 +35,17 @@
 Vivarium Intravenous Iron
 ===========================
 
+This document is the overall page for the Intravenous Iron Intervention simulation and links to the following subpages included within the project:
+
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   */concept_model*
+
+Overview
++++++++++
+
 .. contents::
   :local:
 
@@ -152,14 +163,12 @@ This simulation will be built in a series of subgroups of model components that 
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
     - On hold - not shown in diagram
 
-**Model Version I Detail:**
-
-.. image:: concept_model_version_i.svg
-
 .. _iviron3.1:
 
 3.1 Simulation scenarios
 ------------------------
+
+The following simulation scenarios apply to both the :ref:`women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` and the :ref:`children under five simulation <2019_concept_model_vivarium_iv_iron_child_sim>`.
 
 #. **Baseline:** baseline IFA coverage
 #. **Oral iron:** MMS/BEP scale-up
@@ -236,18 +245,9 @@ Where,
 3.2 Simulation timeframe and intervention start dates
 -----------------------------------------------------
 
-We will model an *immediate* scale-up of intervention coverage from the baseline level to the target level rather than a gradual scale-up over time.
+Detailed in the :ref:`women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` and the :ref:`children under five simulation <2019_concept_model_vivarium_iv_iron_child_sim>` pages.
 
-* **Date of simulation start:** January 1, 2022
-* **Date of intervention scale-up:** Janary 1, 2023
-* **Date of intervention end:** December 31, 2024
-* **Simulation time step:** 1 week
-
-.. note::
-
-  For final simulation results, BMGF is interested in modeling an intervention uptake curve over time. We will model an immediate scale-up throughout model development and plan to incorporate the scale-up following model valiation and prior to the generation of final results.
-
-.. _ivron4.0:
+.. _iviron4.0:
 
 4.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
@@ -257,99 +257,7 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 4.1 Vivarium concept model diagram components
 ----------------------------------------------
 
-4.1.1 Cause Models
-~~~~~~~~~~~~~~~~~~
-
-* :ref:`Maternal disorders <2019_cause_maternal_disorders>`
-* :ref:`Maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>`
-
-For model versions II+: 
-
-  * :ref:`Diarrheal diseases <2019_cause_diarrhea>`
-  * :ref:`Lower respiratory infections <2019_cause_lower_respiratory_infections>`
-  * :ref:`Measles <2019_cause_measles>`
-  * Postpartum depression
-
-4.1.2 Joint Cause-Risk Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :ref:`Hemoglobin, anemia, and iron deficiency model <2019_hemoglobin_anemia_and_iron_deficiency>`
-
-Including, 
-
-  * :ref:`Hemoglobin exposure model <2019_hemoglobin_model>`
-
-  * :ref:`Anemia impairment model <2019_anemia_impairment>`
-
-For model versions II+:
-
-  * Child wasting and protein energy malnutrition (NOTE: static propensity model verions 2-4, :ref:`dynamic transition model for versions 5+ <2020_risk_exposure_wasting_state_exposure>`)
-
-4.1.3 Risk Exposure Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
-
-.. todo::
-
-  Ali to update this risk exposure to be specific to BMI < 18.5 using the GBD estimates of continuous BMI exposure using modelable entity IDs 2548 and 18706. 
-
-  For now, use covariate ID 1253 (age-specific proportion of women with BMI < 17)
-
-For model versions II+:
-
-  * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
-  * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
-  * :ref:`Suboptimal breastfeeding <2020_risk_suboptimal_breastfeeding>`
-  * Orphanhood
-
-4.1.4 Risk Effects Models
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
-* :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
-
-For model versions II+:
-
-  * :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: consider affected measure for diarrheal diseases for model versions before and after 5/vicious cycle implementation)
-  * Child stunting risk effects
-  * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
-  * :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>`
-  * Suboptimal breastfeeding risk effects (note: separate risk exposure and effects model)
-  * Postpartum depression risk effects
-  * Orphanhood risk effects
-
-4.1.5 Risk-Risk Correlation Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-For model versions II+:
-
-  * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
-  * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
-  * :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
-
-4.1.6 Non-standard Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :ref:`Pregnancy model <other_models_pregnancy>`
-
-For model versions II+:
-
-  * Stillbirth
-  * Infertility
-  * Cognition
-
-4.1.7 Intervention Models
-~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :ref:`Maternal supplementation <maternal_supplementation_intervention>`
-* :ref:`Antenatal IV iron <intervention_iv_iron_antenatal>`
-* :ref:`Postpartum IV iron <intervention_iv_iron_postpartum>`
-
-For model versions II+:
-
-  * :ref:`Acute malnutrition management and treatment <intervention_wasting_treatment>` (NOTE: will need to be updated to locations of interest)
-  * Childhood vaccinations
+Detailed in the :ref:`women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` and the :ref:`children under five simulation <2019_concept_model_vivarium_iv_iron_child_sim>` pages.
 
 .. _iviron4.2:
 
@@ -385,203 +293,7 @@ For GBD outcomes that do not have estimates available for the locations of inter
 
   estimate_\text{regional} = \frac{\sum_{n=1}^{n} \text{weighting unit value}_\text{national} * estimate_\text{national}}{\sum_{n=1}^{n} \text{weighting unit value}_\text{national}}
 
-Details on how to calculate weighted averages for specific simulation parameters are shown in the tables below.
-
-.. list-table:: Weighted average calculation instructions
-   :header-rows: 1
-
-   * - Parameter
-     - Parameter ID
-     - Available location IDs
-     - Weighting unit
-     - Age-specific?
-     - Note
-   * - Population size
-     - N/A (use *get_population*)
-     - 159, 166
-     - N/A: sum across sub-regional population size values for aggregate value
-     - Yes
-     - Can sum across location IDs 44577 and 44578 to get population size for the LMIC simulation location
-   * - Age-specific fertility rate (ASFR)
-     - covariate_id 13
-     - 159, 166
-     - WRA
-     - Yes
-     - 
-   * - Cause and sequela data
-     - c366, c367, s182, s183, s184
-     - 159, 166
-     - PLW
-     - Yes
-     - Also available for location IDs 44577 and 44578, but should be weighted from national-level values for the LMIC simulation location
-   * - Hemoglobin modelable entity IDs
-     - MEIDs 10487 and 10488
-     - 159, 166
-     - WRA
-     - Yes
-     - Would be good validation of weighting strategy to perform weighting for location IDs 159 and 166 to compare to GBD estimates for these parameters
-   * - BMI modelable entity IDs
-     - MEIDs 2548 and 18706
-     - 159, 166
-     - WRA
-     - Yes
-     - Not yet incorporated into maternal BMI exposure model
-   * - Stillbirth to live birth ratio (SBR)
-     - covariate ID 2267
-     - None (national only)
-     - ASFR :math:`\times` WRA
-     - No
-     - 
-   * - Antenatal care visit attendance (ANC)
-     - covariate ID 7
-     - None (national only)
-     - PLW
-     - No
-     - 
-   * - Skilled birth attendance (SBA)
-     - covariate ID 143
-     - None (national only)
-     - PLW
-     - No
-     - 
-   * - Maternal low BMI exposure
-     - covariate ID 1253
-     - None (national only)
-     - PLW
-     - No
-     - Current covariate for BMI exposure model, but to be updated to the BMI modelable entity IDs
-   * - Anemia impariment
-     - REIDs 192, 205, 206, 207
-     - 159, 166, 44577 and 44578
-     - WRA
-     - Yes
-     - Parameter used for validation, but not for model building
-
-Where,
-
-.. list-table:: Parameter values for weighted average calculations
-   :header-rows: 1
-
-   * - Parameter
-     - Description   
-     - Value
-     - Note
-   * - WRA
-     - National population size of women of reproductive age (ages 10 to 54)
-     - *get_population*, decomp_step='step4', age_group_id=[7,8,9,10,11,12,13,14,15], sex_id=2
-     - Either age-specific or summed across age groups if not age-specific
-   * - PLW
-     - National number of women who become pregnant within one year   
-     - WRA :math:`\times` (ASFR + (ASFR * SBR) + incidence_c996 + incidence_c374)
-     - Calculate at the age-specific level and sum the result across age groups if not age-specific
-   * - ASFR
-     - Age-specific fertility rate   
-     - covariate_id=13, decomp_step='step4'
-     - Assume normal distribution of uncertainty  
-   * - SBR
-     - Stillbirth to live birth ratio   
-     - covariate_id=1106, decomp_step='step4'
-     - Not age-specific; no uncertainty 
-   * - incidence_c996
-     - Incidence rate of abortion and miscarriage cause   
-     - cause_id=996, source=como, decomp_step=’step5’, measure_id=
-     - 
-   * - incidence_c374
-     - Incidence rate of ectopic pregnancy
-     - cause_id=374, source=como, decomp_step=’step5’, measure_id=
-     - 
-
-.. _iviron4.2.1:
-
-4.2.1 Population description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. list-table:: Simulation population parameters
-   :header-rows: 1
-
-   * - Parameter
-     - Value
-     - Note
-   * - Population size
-     - 100,000
-     - per draw (10,000 per random seed/draw combination)
-   * - Number of draws
-     - 66
-     - 
-   * - Number of random seeds
-     - 10
-     - per draw
-   * - Cohort type
-     - Closed
-     - 
-   * - Age start
-     - 7 years
-     - Minimum age at initialization. Chosen by subtracting number of simulation run years from 10 years of age (minimum fertile age in GBD)
-   * - Age end
-     - 54 years
-     - Maximum age at initialization
-   * - Exit age
-     - 57 years (track through the 56th year until the start of the 57th year)
-     - Maximum age of tracking in simulation. Allows capture of potential events for pregnancies that occur at the end of the 54th year, including maximum gestation period and 1 year post-maternal disorder state.
-   * - Sex restrictions
-     - Female only
-     - 
-
-.. todo::
-
-  The GBD defines reproductive age as 10 to 54 years of age. However, many other data sources define reproductive age as 15 to 49 years of age. 
-
-  We should confirm with the BMGF that they would like to model the GBD definition rather than standard definition from other data sources. 
-
-.. note::
-
-  The overall fertility rate among women of reproductive age is 0.055 for South Asia and 0.105 for Sub-Saharan Africa (not including stillbirths). Therefore, approximately these fractions of the total population multiplied by the number of simulation years of WRA will enter the population of interest of PLW in our simulation. 
-
-**Later model versions:**
-
-Additionally include children under five in the simulation population. Maternal/child pairs should be explcitly linked in this demographic model to allow for direct correlation between maternal and child risks and causes.
-
-.. todo::
-
-  Add more detail 
-
-.. _iviron4.3:
-
-4.3 Models
-----------
-
-.. list-table:: Model verification and validation tracking
-   :widths: 3 10 20
-   :header-rows: 1
-
-   * - Model
-     - Description
-     - V&V summary
-   * - I.0
-     - Demography for Sub-Saharan Africa and South Asia
-     - `Notebook for validation can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/model0/model_0_gbd_validation.ipynb>`_. All-cause mortality rates look good. Age fraction looks reasonable, but slightly off for boundary age groups, likely a result of the assumption of uniform distribution of ages within a five year age group -- ok to proceed.
-
-.. _iviron4.4:
-
-4.4 Desired outputs
--------------------
-
-For model version I:
-
-#. DALYs (YLLs and YLDs) due to a) maternal disorders, and b) anemia among a) pregnant, b) postpartum, and c) women of reproductive age
-#. Severity-specific anemia prevalence during a) pregnancy, and b) the postpartum period
-#. Average hemoglobin level among during a) pregnancy, and b) the postpartum period
-#. Numbers of intervention regimens administered per a) 100,000 births, and b) 100,000 person years of women of reproductive age
-#. Rates of each pregnancy outcome (live birth, stillbirth, abortion/miscarriage)
-
-.. _iviron4.5:
-
-4.5 Simulation output table
----------------------------
-
-.. csv-table:: Simulation output table
-   :file: output_table.csv
-   :header-rows: 1
+Details on how to calculate weighted averages for specific simulation parameters are shown on the :ref:`women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` and the :ref:`children under five simulation <2019_concept_model_vivarium_iv_iron_child_sim>` pages.
 
 .. _iviron5.0:
 
