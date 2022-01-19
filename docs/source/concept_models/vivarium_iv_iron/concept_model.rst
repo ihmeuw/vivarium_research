@@ -137,20 +137,20 @@ This simulation will be built in a series of subgroups of model components that 
     - 
   * - IV
     - Yellow
-    - Non-standard outcomes, including stillbirths, infertility, and cognition
-    - 
+    - Non-standard outcomes, including stillbirths and cognition
+    - Inclusion of cognition outcome on hold until BMGF trial results are received
   * - V
     - Orange
     - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
-    - 
+    - On hold - not shown in diagram
   * - VIa
     - Red
     - Fertility model that includes birth interval information
-    - 
+    - On hold - not shown in diagram
   * - VIb
     - Red
     - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
-    - 
+    - On hold - not shown in diagram
 
 **Model Version I Detail:**
 
@@ -216,7 +216,7 @@ Where,
     - Note
   * - :math:`T`
     - Target coverage
-    - 0.9
+    - 0.8
     - Subject to change after confirmation with BMGF. Not location-specific.
   * - :math:`ANC`
     - Coverage of single antenatal care visit
@@ -242,6 +242,10 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 * **Date of intervention scale-up:** Janary 1, 2023
 * **Date of intervention end:** December 31, 2024
 * **Simulation time step:** 1 week
+
+.. note::
+
+  For final simulation results, BMGF is interested in modeling an intervention uptake curve over time. We will model an immediate scale-up throughout model development and plan to incorporate the scale-up following model valiation and prior to the generation of final results.
 
 .. _ivron4.0:
 
