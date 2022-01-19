@@ -500,6 +500,12 @@ Where,
      - Note
    * - Population size
      - 100,000
+     - per draw (10,000 per random seed/draw combination)
+   * - Number of draws
+     - 66
+     - 
+   * - Number of random seeds
+     - 10
      - per draw
    * - Cohort type
      - Closed
