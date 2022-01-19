@@ -122,7 +122,7 @@ This simulation will be built in a series of subgroups of model components that 
   * - I
     - Green
     - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
-    - Women of reproductive age (WRA) population model only 
+    - Women of reproductive age (WRA) population model only
   * - IIa
     - Purple
     - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
@@ -556,13 +556,12 @@ Additionally include children under five in the simulation population. Maternal/
 4.4 Desired outputs
 -------------------
 
-For model version I:
+For model version II:
 
 #. DALYs (YLLs and YLDs) due to a) maternal disorders, and b) anemia among a) pregnant, b) postpartum, and c) women of reproductive age
 #. Severity-specific anemia prevalence during a) pregnancy, and b) the postpartum period
 #. Average hemoglobin level among during a) pregnancy, and b) the postpartum period
 #. Numbers of intervention regimens administered per a) 100,000 births, and b) 100,000 person years of women of reproductive age
-#. Rates of each pregnancy outcome (live birth, stillbirth, abortion/miscarriage)
 
 .. _iviron4.5:
 
