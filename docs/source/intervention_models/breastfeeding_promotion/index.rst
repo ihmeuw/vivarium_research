@@ -52,7 +52,7 @@ According to its website, the `World Breastfeeding Trends Initiative (WTBi) <htt
 infant and young child feeding [were] available within the
 health/nutrition care system or through community outreach ... **to some degree**" (p 23). 
 
-Given the landscape of breastfeeding education and support in Ethiopia as described by [Abdulahi-et-al-2021]_ and the proposed changes to teh protocol in the intervention arm of this study, we will model **zero baseline coverage of the improved breastfeeding support intervention** (as the intervention arm in [Abdulahi-et-al-2021]_) and 100% coverage of routine care (control arm in [Abdulahi-et-al-2021]_) in Ethiopia.
+Given the landscape of breastfeeding education and support in Ethiopia as described by [Abdulahi-et-al-2021]_ and the proposed changes to teh protocol in the intervention arm of this study, we will model **zero baseline coverage of the improved breastfeeding support intervention** (as the intervention arm in [Abdulahi-et-al-2021]_) and 100% coverage of routine care (control arm in [Abdulahi-et-al-2021]_) in Ethiopia and use the implied effect size associated with the transition from existing routine care to the improved intervention protocol from [Abdulahi-et-al-2021]_.
 
 Vivarium Modeling Strategy
 ---------------------------
