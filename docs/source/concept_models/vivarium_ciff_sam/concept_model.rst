@@ -178,7 +178,7 @@ The baseline scenario will project GBD 2019 demographic and disease trends and G
 
 - Kangaroo care for preterm and low birthweight infants baseline parameters
 
-- Breastfeeding promotion baseline parameters
+- :ref:`Breastfeeding support baseline parameters <breastfeeding_intervention_baseline_data>`
 
 - Preventive and therapeutic zinc baseline parameters
 
@@ -311,9 +311,7 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 5.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Non-exclusive Breastfeeding
-
-* Discontinued Breastfeeding
+* :ref:`Suboptimal Breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>`
 
 * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
 
@@ -326,13 +324,11 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 5.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Non-exclusive Breastfeeding Risk Effects
+* :ref:`Suboptimal Breastfeeding Risk Effects (GBD 2020) <2020_risk_suboptimal_breastfeeding>`
 
-* Discontinued Breastfeeding Risk Effects
+* Child Stunting Risk Effects (GBD 2020)
 
-* Child Stunting Risk Effects
-
-* :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>`
+* :ref:`Child Wasting Risk Effects (GBD 2020) <2019_risk_effect_wasting>`
 
 * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
 
@@ -384,7 +380,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 
 * Kangaroo care for preterm and low birthweight infants
 
-* Breastfeeding promotion
+* :ref:`Breastfeeding promotion <breastfeeding_promotion>`
 
 * Preventive and therapeutic zinc
 

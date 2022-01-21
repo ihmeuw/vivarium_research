@@ -45,6 +45,8 @@ The study conducted by [Abdulahi-et-al-2021]_ evaluated a community-based peer-l
     - Yes
     - Different effects for exclusive and continued breastfeeding risk factors
 
+.. _breastfeeding_intervention_baseline_data:
+
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
