@@ -98,7 +98,6 @@ Vivarium Intravenous Iron - Children under five
 
   Fill out information on simulation timeframe and timestep
 
-
 * Date of simulation start: TBD
 
 * Date of intervention scale-up: N/A (simulation coverage modeled in WRA simulation)
@@ -120,48 +119,43 @@ Vivarium Intravenous Iron - Children under five
 4.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
 
-* :ref:`Diarrheal diseases <2019_cause_diarrhea>`
-* :ref:`Lower respiratory infections <2019_cause_lower_respiratory_infections>`
-* :ref:`Measles <2019_cause_measles>`
+* :ref:`Diarrheal diseases (GBD 2019) <2019_cause_diarrhea>`
+* :ref:`Lower respiratory infections (GBD 2019) <2019_cause_lower_respiratory_infections>`
+* :ref:`Measles (GBD 2019) <2019_cause_measles>`
 
 4.1.2 Joint Cause-Risk Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* Child wasting and protein energy malnutrition (NOTE: static propensity model verions 2-4, :ref:`dynamic transition model for versions 5+ <2020_risk_exposure_wasting_state_exposure>`)
-
-.. todo::
-
-  Determine whether to move forward with dynamic transition model of child wasting for this project
+* :ref:`Static child wasting risk exposure and protein energy malnutrition (GBD 2020) <2020_risk_exposure_static_wasting>`
 
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
-* :ref:`Suboptimal breastfeeding <2020_risk_suboptimal_breastfeeding>`
+* :ref:`Suboptimal breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>`
 
 .. note::
 
-  :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>` risk exposure will be modeled as part of the :ref:`IV iron women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>`.
+  :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>` risk exposure will be modeled as part of the :ref:`IV iron women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` and subsequently assigned to simulants in the child simulation.
 
 
 4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: consider affected measure for diarrheal diseases for model versions before and after 5/vicious cycle implementation)
+* :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: use the modeling strategy specific to LRI and measles on this document for all affected causes, including diarrheal diseases)
 * Child stunting risk effects
 * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
-* Suboptimal breastfeeding risk effects (note: separate risk exposure and effects model)
-
-.. todo::
-
-  Determine whether to include the :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>` along with the dynamic model of child wasting or not.
-
+* :ref:`Suboptimal breastfeeding <2020_risk_suboptimal_breastfeeding>`
 
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
 * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
+
+.. note::
+
+  *Causation* portion of these risk correlation models should be prioritized over the correlation portion.
 
 4.1.6 Non-standard Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -170,6 +164,8 @@ Vivarium Intravenous Iron - Children under five
 
 4.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Intervention models modeled as part of the :ref:`IV iron women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>`
 
 .. _ivironU54.2:
 
@@ -224,8 +220,7 @@ Location aggregation
 
 .. todo::
 
-  Detail duration of simulation strategy so that we have observation periods for entire under five population. Clarify if BMGF is interested in U5 or U2 population.
-
+  Clarify if BMGF is interested in U5 or U2 population. Expand strategy regarding open vs. closed cohort.
 
 .. _ivironU54.3:
 
