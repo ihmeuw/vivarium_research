@@ -141,20 +141,13 @@ Including,
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
-
-.. todo::
-
-  Ali to update this risk exposure to be specific to BMI < 18.5 using the GBD estimates of continuous BMI exposure using modelable entity IDs 2548 and 18706. 
-
-  For now, use covariate ID 1253 (age-specific proportion of women with BMI < 17)
+* :ref:`Maternal Body Mass Index conditional on hemoglobin status <2019_risk_exposure_maternal_bmi_hgb>`
 
 * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
 
-.. todo::
-  
-  Develop strategy to assign LBWSG exposure that is consistent with maternal BMI and/or hemoglobin exposure values.
+.. note::
 
+  These risk exposures will be correlated, as discussed in the risk-risk correlation model section.
 
 4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -166,13 +159,7 @@ Including,
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
-* Hemoglobin and birthweight
-* Hemoglobin and BMI
-
-.. todo::
-
-  Determine optimal correlation structure between maternal BMI, maternal hemoglobin, and infant birthweight
+* :ref:`Maternal BMI, maternal hemoglobin, and infant birthweight <2019_risk_correlation_maternal_bmi_hgb_birthweight>`
 
 4.1.6 Non-standard Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
