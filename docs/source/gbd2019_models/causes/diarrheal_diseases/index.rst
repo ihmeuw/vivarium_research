@@ -225,7 +225,7 @@ Data Description
 	  - I
 	  - S
 	  - 1 / (duration_c302 / 365)
-	  - Use the emr_c302 as calculated for the **I** state in the above table. Use incidence_rate_c302 from GBD (total population incidence rate), not the incidence rate for the i transition above (at-risk population incidence rate).
+	  - 
 
 .. note::
 
