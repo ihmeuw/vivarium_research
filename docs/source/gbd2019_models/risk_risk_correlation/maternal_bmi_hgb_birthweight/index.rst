@@ -101,17 +101,21 @@ Given that,
 
 .. math::
 
-   \overline{BW}_{GBD} = \sum_{cat}^{n} p_\text{cat} * \overline{BW}_\text{cat}
+   \overline{BW}_{population} = \sum_{cat}^{n} p_\text{cat} * \overline{BW}_\text{cat}
 
-Then the difference between maternal BMI strata and the population mean from GBD can be represented as:
+Then the difference between maternal BMI strata and the population mean can be represented as:
 
 .. math::
 
-   BW_\text{cat4 - GBD} = p_\text{cat1} * BW_\text{cat1 - cat4}
+   BW_\text{cat4 - population} = p_\text{cat1} * BW_\text{cat1 - cat4}
                            + p_\text{cat2} * BW_\text{cat2 - cat4}
                            + p_\text{cat3} * BW_\text{cat3 - cat4}
 
 Where :math:`p_\text{cat}` represents the exposure prevalence of a given maternal BMI/hemoglobin category.
+
+.. todo::
+
+   Tailor this section to exact structure of data we get from BMGF... may make more sense to calculate difference from population mean BW from BMGF data directly rather than from GBD population mean.
 
 Therefore, the association between maternal BMI/hemoglobin joint risk exposure and birthweight risk exposure should be implemented according to the following steps:
 
