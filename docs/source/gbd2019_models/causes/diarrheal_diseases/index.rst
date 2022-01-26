@@ -224,7 +224,7 @@ Data Description
 	* - r
 	  - I
 	  - S
-	  - (incidence_rate_c302 - (4.3 / 365) * (ACMR - csmr_c302 + emr_c302)) / prevalence_c302
+	  - (incidence_rate_c302 - duration_c302 / 365 * (ACMR - csmr_c302 + emr_c302)) / prevalence_c302
 	  - Use the emr_c302 as calculated for the **I** state in the above table.
 
 .. note::
@@ -247,6 +247,10 @@ Data Description
 	  - codcorrect
 	  - Deaths from diarrheal diseases
 	  -
+	* - duration_c302
+	  - 4.3 (95% CI: 4.2, 4.4), assume normal distribution of uncertainty
+	  - Average duration of a diarrheal disease episode in days among children under five
+	  - From [Troeger-et-al-2018-Diarrhea]_ 
 	* - incidence_rate_c302
 	  - como
 	  - Incidence of diarrheal disease within the entire population
