@@ -150,7 +150,7 @@ Where,
 
 .. note::
 
-   These LBWSG exposure values may be later modified by intervention coverage and/or other factors. Note that a shift in continuous LBWSG exposure values may cause a simulant's going LBWSG exposure values to no longer fall within a valid GBD LBWSG exposure category. However, relative risks for the shifted exposure can still be calculated according ot the :ref:`LBWSG risk effects modeling strategy <2019_risk_effect_lbwsg>`.
+   These LBWSG exposure values may be later modified by intervention coverage and/or other factors. Note that a shift in continuous LBWSG exposure values may cause a simulant's LBWSG exposure value to no longer fall within a valid GBD LBWSG exposure category. However, relative risks for the shifted exposure can still be calculated according to the :ref:`LBWSG risk effects modeling strategy <2019_risk_effect_lbwsg>`.
 
    The gestational age assigned to the mother should be used to determine the duration of her pregnancy.
 
