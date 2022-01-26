@@ -219,8 +219,8 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_c302}*(\text{duration_c302} / 365)`
-	  - We transform incidence to be a rate within the susceptible population.
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)`
+	  - We transform incidence to be a rate within the susceptible population under the assumption that prevalence ~= incidence * duration.
 	* - r
 	  - I
 	  - S
