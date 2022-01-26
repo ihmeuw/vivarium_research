@@ -185,7 +185,7 @@ The following code block provides equations to solve for the relative risks attr
 .. list-table:: Intermediate variable notation: transitions
    :header-rows: 1
 
-   *  - Parmeter
+   *  - Parameter
       - Definition
       - Notation
       - Note
