@@ -31,19 +31,7 @@ Additionally, a randomized controlled trial on breastfeeding education and suppo
 
 The study conducted by [Abdulahi-et-al-2021]_ evaluated a community-based peer-led breastfeeding education and support intervention delivered during the prenatal and postnatal period through the established Women Development Army system in comparison to routine care. The study was conducted in Manna district located in Jimma Zone in southwest Ethiopia in rural setting. Allocation of study arms was conducted at the sub-district level among 36 sub-districts in the study location. Women were recruited during their second or third trimester of pregnancy. Peer-supporters made visits to women in the intervention arm twice in the last trimester of pregnancy (during the 8th and 9th month); on the 1st or 2nd, 6th or 7th, and 15th day after delivery; and thereafter monthly until the infant was five months old. Women in the control arm received routine care from health extension workers (described above).
 
-[Abdulahi-et-al-2021]_ found that 68.3% of women in the intervention arm and 54.8% in the control arm were practicing exclusive breastfeeding at six months postpartum and reported a 14.6% (95% CI: 3.77, 25.5) adjusted risk difference. The implied relative risk is equal to 1.25 (calculated as 0.683 / 0.548).
-
-.. list-table:: Affected Outcomes
-  :header-rows: 1
-
-  * - Outcome
-    - Effect
-    - Modeled?
-    - Note 
-  * - Suboptimal breastfeeding
-    - Dependent on timepoint
-    - Yes
-    - Different effects for exclusive and continued breastfeeding risk factors
+[Abdulahi-et-al-2021]_ found that 68.3% of women in the intervention arm and 54.8% in the control arm were practicing exclusive breastfeeding at six months postpartum and reported a 14.6% (95% CI: 3.77, 25.5) adjusted risk difference. The implied relative risk is equal to 1.25 (calculated as 0.683 / 0.548). Notably, the rates of exclusive breastfeeding among infants under six months of age as estimated by the 2020 GBD in Ethiopia is approximately 61%, which is similar to although slightly higher than the estimate of exclusive breastfeeding rates among the population receiving routine care in this study.
 
 .. _breastfeeding_intervention_baseline_data:
 
@@ -59,41 +47,80 @@ Given the landscape of breastfeeding education and support in Ethiopia as descri
 Vivarium Modeling Strategy
 ---------------------------
 
-.. list-table:: Modeled Outcomes
+Suboptimal breastfeeding
+++++++++++++++++++++++++++
+
+Given the lack of evidence of breastfeeding education and support interventions on rates of continued breastfeeding between six and 24 months, we will model an impact of the breastfeeding education and support intervention on rates of exclusive breastfeeding in the first six months of life only. We will inform the intervention effect size from [Abdulahi-et-al-2021]_ and apply it from birth until six months postpartum. Since intervention impact is measured in terms of exclusive breastfeeding rates only with no consideration of predominant/partial/or no breastfeeding types of nonexclusive breastfeeding, we will conservatively assume that the increase in exclusive breastfeeding rates results in a reduction in the rates of predominant breastfeeding first followed by partial and no breastfeeding as appropriate.
+
+.. note::
+
+  From Abie: If it turns out that the relative impact of BFP is small, we might want to flip these assumptions to the most generous (rather than the most conservative) so that we can say that even with the most generous assumptions, BFP does not have much impact. 
+
+The effect shift of the breastfeeding intervention is an **additive increase of 0.146 (95% CI: 0.0377, 0.255; assume normal distribution of uncertainty) in the exposure value of cat4 of the nonexclusive breastfeeding risk exposure (REI ID = 136)**. 
+
+.. todo::
+
+  Convert effect from risk difference to relative risk
+
+For simulants covered by the intervention, their breastfeeding exposure propensity should not change, but the exposure threshold values used to determine the exposure category for that simulant should change according to the code block below. This strategy should be followed for all eligible age groups. Simulants who are not covered by the intervention should use the same exposure category threshold values as implied from the GBD risk exposure. A table of the risk exposure categories for the exclusive breastfeeding risk factor (REI ID 136) is included below for reference.
+
+.. note::
+
+  The exposure prevalence of cat3/predominant breastfeeding in Ethiopia is approximately equal to 28% and therefore the effect shift should be less than the exposure prevalence of cat3. However, in the event that is not true for a specific draw, the following strategy should be followed:
+
+.. code-block:: python
+
+  exposure_cat4_intervention = exposure_cat4_gbd + effect_shift
+
+  if effect_shift > exposure_cat3_gbd:
+    exposure_cat3_intervention = 0
+    
+    if effect_shift > exposure_cat3_gbd + exposure_cat2_gbd:
+      exposure_cat2_intervention = 0
+      exposure_cat1_intervention = exposure_cat1_gbd - (effect_shift - exposure_cat3_gbd - exposure_cat2_gbd)
+
+    else:
+      exposure_cat2_intervention = exposure_cat2_gbd - (effect_shift - exposure_cat3_gbd)
+      exposure_cat1_intervention = exposure_cat1_gbd
+
+  else:
+    exposure_cat3_intervention = exposure_cat3_gbd - effect_shift
+    exposure_cat2_intervention = exposure_cat2_gbd
+    exposure_cat1_intervention = exposure_cat1_gbd
+
+.. list-table:: Exclusive breastfeeding (REI ID 136) exposure categories
   :header-rows: 1
 
-  * - Outcome
-    - Outcome type
-    - Outcome ID
-    - Affected measure
-    - Effect size measure
-    - Effect size
+  * - Category
+    - Definition
     - Note
-  * - 
+  * - cat4
+    - Exclusive breastfeeding
+    - TMREL
+  * - cat3
+    - Predominant breastfeeding
     - 
+  * - cat2
+    - Partial breastfeeding
     - 
+  * - cat1
+    - No breastfeeding
     -
-    -
-    - 
-    - 
-
-Suboptimal breastfeeding: (non-) exclusive breastfeeding
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+  
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+#. Effect size taken from [Abdulahi-et-al-2021]_ was not evaluated in a nationally representative study population.
+#. We conservatively assume that an increase in exclusive breastfeeding is paired with a decrease in the next-lowest risk exposure category (ordered as predominant, partial, and no breastfeeding). In other words, the intervention will not have an impact on the rates of no breastfeeding.
+#. We assume the intervention effect is constant from birth until six months postpartum.
+#. We are limited by lack of data regarding interventions on rates of continued breastfeeding.
+#. We are limited in using a risk difference as reported by [Abdulahi-et-al-2021]_ specific to a control population that has slightly lower rates of exclusive breastfeeding than the simulated population as estimated by GBD.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Suboptimal breastfeeding: (dis-) continued breastfeeding
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-Assumptions and Limitations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-Validation and Verification Criteria
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Suboptimal breastfeeding risk exposure should continue to validate to GBD in the baseline scenario
+- Rates of exclusive breastfeeding among those covered by the intervention should increase by the effect size. Remaining exposure categories should change according to the expected pattern.
 
 References
 ------------
