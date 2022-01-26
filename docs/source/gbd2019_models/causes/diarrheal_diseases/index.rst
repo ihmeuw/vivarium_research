@@ -219,17 +219,17 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_c302}*(\text{duration_c302} / 365)`
 	  - We transform incidence to be a rate within the susceptible population.
 	* - r
 	  - I
 	  - S
-	  - (incidence_rate_c302 - duration_c302 / 365 * (ACMR - csmr_c302 + emr_c302)) / prevalence_c302
+	  - 1 / (duration_c302 / 365)
 	  - Use the emr_c302 as calculated for the **I** state in the above table. Use incidence_rate_c302 from GBD (total population incidence rate), not the incidence rate for the i transition above (at-risk population incidence rate).
 
 .. note::
 
-	We are using a custom remission rate for diarrheal diseases because after scaling to the total population, the remission rate was greater than the incidence rate for children under five in Ethiopia, which is implausible. Therefore, we propose calculating the remission rate among the total population as the number of incident cases minus the expected number of deaths that will occur prior to remission assuming an average duration of a diarrheal disease episode of 4.3 days, as estimated by [Troeger-et-al-2018-Diarrhea]_. This approach does not consider the correlation betweeen diarrheal diseases and eleveted mortality from other infectious diseases through their common causes of child growth failure risks.
+	We are using a custom remission rate for diarrheal diseases based on the estimated duration of disease because after scaling to the total population using the estimated prevalence of diarrheal diseases, the remission rate was greater than the incidence rate for children under five in Ethiopia, which is implausible. We assume an average duration of a diarrheal disease episode of 4.3 days, as estimated by [Troeger-et-al-2018-Diarrhea]_. 
 	  
 .. list-table:: Data Sources and Definitions
 	:widths: 1 3 10 10
