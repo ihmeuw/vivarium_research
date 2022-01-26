@@ -195,22 +195,22 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Note
    * - Population size
      - N/A (use *get_population*)
-     - 159, 166
-     - N/A: sum across sub-regional population size values for aggregate value
+     - 159, 166, 44577, 44578
+     - N/A
      - Yes
-     - Can sum across location IDs 44577 and 44578 to get population size for the LMIC simulation location
+     - 
    * - Age-specific fertility rate (ASFR)
      - covariate_id 13
-     - 159, 166
+     - 159, 166, XXXXXXx
      - WRA
      - Yes
      - 
    * - Cause and sequela data
      - c366, c367, s182, s183, s184
-     - 159, 166
+     - 159, 166, 44577, 44578
      - PLW
      - Yes
-     - Also available for location IDs 44577 and 44578, but should be weighted from national-level values for the LMIC simulation location
+     - 
    * - Hemoglobin modelable entity IDs
      - MEIDs 10487 and 10488
      - 159, 166
