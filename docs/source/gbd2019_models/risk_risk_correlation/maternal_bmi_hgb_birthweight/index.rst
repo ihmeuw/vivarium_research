@@ -113,7 +113,7 @@ Then the difference between maternal BMI strata and the population mean from GBD
 
 Where :math:`p_\text{cat}` represents the exposure prevalence of a given maternal BMI/hemoglobin category.
 
-Therefore, the association bewteen maternal BMI/hemoglobin joint risk exposure and birthweight risk exposure should be implemented according to the following steps:
+Therefore, the association between maternal BMI/hemoglobin joint risk exposure and birthweight risk exposure should be implemented according to the following steps:
 
 #. Assign maternal hemoglobin risk exposure values as described on the :ref:`hemoglobin exposure document <2019_hemoglobin_model>`
 
