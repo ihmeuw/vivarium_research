@@ -102,7 +102,7 @@ We will model an *immediate* scale-up of intervention coverage from the baseline
 
 * Date of intervention scale-up: Janary 1, 2023
 
-* Date of intervention end: December 31, 2024
+* Date of simulation end: December 31, 2024
 
 * Simulation time step: 1 week
 
