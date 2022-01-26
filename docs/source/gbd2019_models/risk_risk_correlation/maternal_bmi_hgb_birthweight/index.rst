@@ -58,7 +58,7 @@ Correlation
 
    The strategy for modeling these risk-risk correlations related was developed for the needs of the :ref:`Intravenous Iron Intervention simulation <2019_concept_model_vivarium_iv_iron>`. Different strategies may be more appropriate for different project needs and should be reevaluated when necessary.
 
-We will model an association between a joint categorical distribution of maternal BMI and hemoglobin with infant birthweight. The asssoication between maternal BMI/hemoglobin categories will be measured in continuous shifts in infant birthweight. The magnitude of these shifts will be informed from BMGF trial data, shown below:
+We will model an association between a joint categorical distribution of maternal BMI and hemoglobin with infant birthweight. The association between maternal BMI/hemoglobin categories will be measured in continuous shifts in infant birthweight. The magnitude of these shifts will be informed from BMGF trial data, shown below:
 
 .. note::
 
