@@ -94,17 +94,17 @@ Vivarium Intravenous Iron - Children under five
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
 
-.. todo::
-
-  Fill out information on simulation timeframe and timestep
-
-* Date of simulation start: TBD
+* Date of simulation start: January 1, 2022
 
 * Date of intervention scale-up: N/A (simulation coverage modeled in WRA simulation)
 
-* Date of simulation end: TBD
+* Date of simulation end: December 31, 2024
 
 * Simulation time step: 0.5 days
+
+.. note::
+
+  We will likely increase the duration of simulation run time for final results of this model, but a shorter timeframe should be used throughout model development and validation.
 
 .. _ivironU54.0:
 
@@ -203,7 +203,7 @@ Location aggregation
      - Informed from WRA simulation outputs
      - 
    * - Cohort type
-     - Closed
+     - Open
      - 
    * - Age start
      - 0
@@ -217,10 +217,6 @@ Location aggregation
    * - Sex restrictions
      - None
      - 
-
-.. todo::
-
-  Clarify if BMGF is interested in U5 or U2 population. Expand strategy regarding open vs. closed cohort.
 
 .. _ivironU54.3:
 
