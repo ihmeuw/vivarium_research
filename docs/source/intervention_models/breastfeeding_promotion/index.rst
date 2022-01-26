@@ -50,9 +50,17 @@ Vivarium Modeling Strategy
 Suboptimal breastfeeding
 ++++++++++++++++++++++++++
 
-Given the lack of evidence of breastfeeding education and support interventions on rates of continued breastfeeding between six and 24 months, we will model an impact of the breastfeeding education and support intervention on rates of exclusive breastfeeding in the first six months of life only. We will inform the intervention effect size from [Abdulahi-et-al-2021]_ and apply it from birth until six months postpartum. Since intervention impact is measured in terms of exclusive breastfeeding rates only with no consideration of predominant/partial/or no breastfeeding types of nonexclusive breastfeeding, we will conservatively assume that the increase in exclusive breastfeeding rates results in a reduction in the rates of predominant breastfeeding first followed by partial and no breastfeeding as appropriate. 
+Given the lack of evidence of breastfeeding education and support interventions on rates of continued breastfeeding between six and 24 months, we will model an impact of the breastfeeding education and support intervention on rates of exclusive breastfeeding in the first six months of life only. We will inform the intervention effect size from [Abdulahi-et-al-2021]_ and apply it from birth until six months postpartum. Since intervention impact is measured in terms of exclusive breastfeeding rates only with no consideration of predominant/partial/or no breastfeeding types of nonexclusive breastfeeding, we will conservatively assume that the increase in exclusive breastfeeding rates results in a reduction in the rates of predominant breastfeeding first followed by partial and no breastfeeding as appropriate.
+
+.. note::
+
+  From Abie: If it turns out that the relative impact of BFP is small, we might want to flip these assumptions to the most generous (rather than the most conservative) so that we can say that even with the most generous assumptions, BFP does not have much impact. 
 
 The effect shift of the breastfeeding intervention is an **additive increase of 0.146 (95% CI: 0.0377, 0.255; assume normal distribution of uncertainty) in the exposure value of cat4 of the nonexclusive breastfeeding risk exposure (REI ID = 136)**. 
+
+.. todo::
+
+  Convert effect from risk difference to relative risk
 
 For simulants covered by the intervention, their breastfeeding exposure propensity should not change, but the exposure threshold values used to determine the exposure category for that simulant should change according to the code block below. This strategy should be followed for all eligible age groups. Simulants who are not covered by the intervention should use the same exposure category threshold values as implied from the GBD risk exposure. A table of the risk exposure categories for the exclusive breastfeeding risk factor (REI ID 136) is included below for reference.
 
