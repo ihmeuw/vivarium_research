@@ -168,6 +168,8 @@ Assumptions and Limitations
 
 #. We assume that neither maternal BMI or anemia status is correlated with baseline intervention coverage (specifically IFA).
 
+#. We apply an estimate of population level mean difference as an additive shift to individual simulants in our population rather than sampling from LBWSG exposuredistributions specific to maternal BMI/hemoglobin strata. This approach assumes that the shape of the LBWSG exposure distribution does not vary between maternal BMI/hemoglobin strata and is in inherent limitation in this approach due to limited data availability.
+
 Validation Criteria
 +++++++++++++++++++++
 
