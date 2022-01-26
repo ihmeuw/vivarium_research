@@ -119,13 +119,13 @@ The prevalence ratios used in the calculation of the risk effects are listed in 
       - defined on the :ref:`child wasting exposure page <2020_risk_exposure_wasting_state_exposure>`
       - 
    *  - prevalence_diarrheal_diseases
-      - prevalence of diarrheal diseases
-      - defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - incidence_rate_c302 * duration_c302 / 365
+      - incidence_rate_c302 and duration_c302 are defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
       - 
    *  - remission_diarrheal_diseases
       - *total population* diarrheal diseases remission rate
-      - incidence_rate_c302 - (duration_c302 / 365 * (ACMR - csmr_c302 + emr_c302))
-      - Note that this is scaled to total population person time as the denominator (not infected population person time as it is for the I to S transition in the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`). duration_c302, csmr_c302, and emr_c302 defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - 1 / (duration_c302 / 365) * prevalence_diarrheal_diseases
+      - Note that this is scaled to total population person time as the denominator (not infected population person time as it is for the I to S transition in the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
    *  - incidence_diarrheal_diseases
       - *total population* diarrheal diseases incidence rate
       - incidence_rate_c302 (defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
