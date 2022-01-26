@@ -224,9 +224,12 @@ Data Description
 	* - r
 	  - I
 	  - S
-	  - remission_rate_m1181
-	  - Already a rate within with-condition population
+	  - (incidence_rate_c302 - (4.3 / 365) * (ACMR - csmr_c302 + emr_c302)) / prevalence_c302
+	  - Use the emr_c302 as calculated for the **I** state in the above table.
 
+.. note::
+
+	We are using a custom remission rate for diarrheal diseases because after scaling to the total population, the remission rate was greater than the incidence rate for children under five in Ethiopia, which is implausible. Therefore, we propose calculating the remission rate among the total population as the number of incident cases minus the expected number of deaths that will occur prior to remission assuming an average duration of a diarrheal disease episode of 4.3 days, as estimated by [Troeger-et-al-2018-Diarrhea]_. This approach does not consider the correlation betweeen diarrheal diseases and eleveted mortality from other infectious diseases through their common causes of child growth failure risks.
 	  
 .. list-table:: Data Sources and Definitions
 	:widths: 1 3 10 10
@@ -248,10 +251,6 @@ Data Description
 	  - como
 	  - Incidence of diarrheal disease within the entire population
 	  - 
-	* - remission_rate_m1181
-	  - dismod
-	  - Remission of diarrheal disease within the infected population
-	  -
 	* - population
 	  - demography
 	  - Mid-year population for given age/sex/year/location
@@ -317,6 +316,9 @@ References
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 
+
+.. [Troeger-et-al-2018-Diarrhea]
+   Troeger C, Colombara DV, Rao PC, Khalil IA, Brown A, Brewer TG, Guerrant RL, Houpt ER, Kotloff KL, Misra K, Petri WA Jr, Platts-Mills J, Riddle MS, Swartz SJ, Forouzanfar MH, Reiner RC Jr, Hay SI, Mokdad AH. Global disability-adjusted life-year estimates of long-term health burden and undernutrition attributable to diarrhoeal diseases in children younger than 5 years. Lancet Glob Health. 2018 Mar;6(3):e255-e269. doi: 10.1016/S2214-109X(18)30045-7. PMID: 29433665; PMCID: PMC5861379. `Troeger et al 2018 available here <https://pubmed.ncbi.nlm.nih.gov/29433665/>`_
 
 .. [WHO-Diarrhea] Diarrheal disease Fact Sheet. World Health Organization, 2 May 2019.
    Retrieved 14 Nov 2019.
