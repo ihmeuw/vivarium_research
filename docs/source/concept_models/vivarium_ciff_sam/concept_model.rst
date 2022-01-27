@@ -462,6 +462,13 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 5.2.1 maternal BMI
      - Add maternal BMI risk exposure and risk effect
      - `Validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/39d6bc256ec99eb1c5c0cf4717ffbb50a9f5d62f/model_validation/model5/model_5.2.0_gbd_verification.ipynb>`_: maternal BMI risk exposure and risk effects look as expected, no changes in wasting/stunting risk exposure or cause model validation from model 5.1.2. LBWSG interactive simulation V&V to follow.
+   * - 5.3.0 maternal supplementation intervention
+     - Add LBWSG scenario with maternal supplementation intervention. Also, the birthweight exposure bug for the late neonatal age group (identified and discussed in model 5.1.2 notes) was fixed.
+     - `Intervention implementation looks as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.0_maternal_supplementation_intervention.ipynb>`_. Still need to do interactive sim to double check that the late neonatal BW exposure bug is resolved.
+   * - 5.3.1 insecticide treated nets intervention
+     - Add insecticide treated nets to the LBWSG scenario 
+     - Validation notebook can be found here. [1] ITN target coverage is as expected, but it does not appear to scale-up and rather is implemented at target coverage for entire simulation. [2] BW shift for ITN coverage is a bit high in baseline scenario (40g) and a bit low in intervention scenario (29g), when expected value is 23 g - we also would not expect a different shift magnitude for the intervention across different scenarios.
+
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -477,15 +484,23 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - `Underestimation of diarrheal diseases prevalence <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_
      - GBD diarrheal diseases remission rate divided by prevalence is greater than GBD diarrheal diseases incidence rate
      - Calculate alternative diarrheal diseases remission rate that is consistent with disease duration and mortality rate and update artifact (low priority)
-     - On hold
+     - Implemented, needs to be carefully validated.
    * - `Underestimation of lower respiratory infections prevalence <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_
      - Unconfirmed
-     - Investigate (may be same issue as diarrheal diseases)
-     - On hold
+     - Investigate (may be same issue as diarrheal diseases). Implement updated duration/remission rate?
+     - On hold?
    * - LBWSG exposure issue on transition from early to late neonatal age groups
      - LBWSG exposure changes for some simulants upon transition from the early to late neonatal age group. This should not affect model mortality rates given that the relative risk value during the late neonatal age group is appropriately assigned according to exposure at birth. However, the issue will cause errors in the birthweight observers in the simulation.
-     - Rajan to investigate and fix
-     - Eventually.
+     - Implemented and run. Needs interactive sim validation
+     - Soon
+   * - Insectide treated net intervention coverage immediate rather than linear scale-up
+     - `See coverage plots in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.1_lbwsg_interventions.ipynb>`_
+     - SWEs to investigate?
+     - Soon
+   * - Insectide treated net intervention birthweight shift varies by scenario and is not of expected magnitude
+     - `See effect size estimation in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.1_lbwsg_interventions.ipynb>`_
+     - SWEs to investigate?
+     - Soon
 
 .. todo::
 
