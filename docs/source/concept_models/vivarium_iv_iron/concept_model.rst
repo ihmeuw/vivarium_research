@@ -273,7 +273,7 @@ Locations of interest to this project:
 - South Asia (location_type=region; location_id=159)
 - All low and middle income countries (LMICs)
 
-  - This simulation location does not have a corresponding GBD location ID. Rather, there are two location IDs that fall within this location of interest and together will make up the overall LMIC location (shown in the bullets below). We will need to calculate weighted average estimates across these two locations (and/or the national-level locations that comprise them) for use in the simulation of the LMIC location.
+  - This simulation location does not have a corresponding GBD location ID. Rather, there are two location IDs that fall within this location of interest and together will make up the overall LMIC location (shown in the bullets below). We will run separate simulations for the following two location IDs and use the results from these simulations to produce summary level results during post-processing.
 
     - World bank lower middle income (location_type=region; location_id=44577)
     - World bank low income (location_type=region; location_id=44578)

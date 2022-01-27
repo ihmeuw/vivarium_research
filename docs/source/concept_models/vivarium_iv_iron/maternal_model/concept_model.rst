@@ -201,7 +201,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - 
    * - Age-specific fertility rate (ASFR)
      - covariate_id 13
-     - 159, 166, XXXXXXx
+     - 159, 166 (not available for 44577 or 44578)
      - WRA
      - Yes
      - 
@@ -216,13 +216,13 @@ Details on how to calculate weighted averages for specific simulation parameters
      - 159, 166
      - WRA
      - Yes
-     - Would be good validation of weighting strategy to perform weighting for location IDs 159 and 166 to compare to GBD estimates for these parameters
+     - Not available for location IDs 44577 or 44578. NOTE: Ali may update to custom weighting strategy in a nano-sim.
    * - BMI modelable entity IDs
      - MEIDs 2548 and 18706
-     - 159, 166
+     - 159, 166 (not available for 44577 or 44578)
      - WRA
      - Yes
-     - Not yet incorporated into maternal BMI exposure model
+     - Not available for location IDs 44577 or 44578. Parameter not yet incorporated into maternal BMI exposure model
    * - Stillbirth to live birth ratio (SBR)
      - covariate ID 2267
      - None (national only)
@@ -253,6 +253,13 @@ Details on how to calculate weighted averages for specific simulation parameters
      - WRA
      - Yes
      - Parameter used for validation, but not for model building
+   * - LBWSG exposure
+     - REI ID 339
+     - 159, 166 (not available for 44577 or 44578)
+     - ASFR :math:`\times` WRA
+     - No, but sex-specific
+     - Weight each exposure category prevalence separately
+
 
 Where,
 

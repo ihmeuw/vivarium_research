@@ -178,9 +178,46 @@ Intervention models modeled as part of the :ref:`IV iron women of reproductive a
 Location aggregation
 ^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+Details on how to calculate weighted averages for specific simulation parameters are shown in the tables below.
 
-  Detail startegy for location aggregation of GBD parameters used in the child simulation
+.. list-table:: Weighted average calculation instructions
+   :header-rows: 1
+
+   * - Parameter
+     - Parameter ID
+     - Available location IDs
+     - Weighting unit
+     - Age-specific?
+     - Sex-specific?
+     - Note
+   * - Categorical risk exposures
+     - REI IDs 240 (wasting), 241 (stunting), 136 (non-exclusive breastfeeding), 137 (discontinued breastfeeding)
+     - 159, 166 (get_draws not available for 44577 or 44578)
+     - population
+     - Yes
+     - Yes
+     - Weight each exposure category within a risk factor exposure distribution separately
+   * - Relative risks
+     - REI IDs 240 (wasting), 241 (stunting), 136 (non-exclusive breastfeeding), 137 (discontinued breastfeeding)
+     - Not location-specific
+     - N/A
+     - Yes
+     - Yes
+     - 
+   * - Risk factor PAFs
+     - REI IDs 240 (wasting), 241 (stunting), 136 (non-exclusive breastfeeding), 137 (discontinued breastfeeding)
+     - 159, 166, 44577, 44578)
+     - N/A
+     - Yes
+     - Yes
+     -  
+   * - Cause parameters
+     - Cause IDs 302 (diarrheal diseases), 341 (measles), 322 (lower respiratory infections), 387 (protein energy malnutrition)
+     - 159, 166, 44577, 44578)
+     - N/A
+     - Yes
+     - Yes
+     - 
 
 .. _ivironU54.2.1:
 
