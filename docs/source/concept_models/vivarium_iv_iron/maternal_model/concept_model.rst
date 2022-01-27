@@ -213,16 +213,16 @@ Details on how to calculate weighted averages for specific simulation parameters
      - 
    * - Hemoglobin modelable entity IDs
      - MEIDs 10487 and 10488
-     - 159, 166
+     - 159, 166 (not available for 44577 or 44578)
      - WRA
      - Yes
-     - Not available for location IDs 44577 or 44578. NOTE: Ali may update to custom weighting strategy in a nano-sim.
+     - NOTE: Ali may update to custom weighting strategy in a nano-sim.
    * - BMI modelable entity IDs
      - MEIDs 2548 and 18706
      - 159, 166 (not available for 44577 or 44578)
      - WRA
      - Yes
-     - Not available for location IDs 44577 or 44578. Parameter not yet incorporated into maternal BMI exposure model
+     - Parameter not currently incorporated into maternal BMI exposure model
    * - Stillbirth to live birth ratio (SBR)
      - covariate ID 2267
      - None (national only)
@@ -246,18 +246,24 @@ Details on how to calculate weighted averages for specific simulation parameters
      - None (national only)
      - PLW
      - No
-     - Current covariate for BMI exposure model, but to be updated to the BMI modelable entity IDs
+     - Current covariate for BMI exposure model, but may eventually be updated.
    * - Anemia impariment
      - REIDs 192, 205, 206, 207
      - 159, 166, 44577 and 44578
      - WRA
      - Yes
      - Parameter used for validation, but not for model building
-   * - LBWSG exposure
-     - REI ID 339
+   * - LBWSG exposure at birth among males
+     - REI ID 339, sex_id=1, age_group_id=164
      - 159, 166 (not available for 44577 or 44578)
-     - ASFR :math:`\times` WRA :math:`\times` sex ratio
-     - No, but sex-specific -- Ali to provide more detail on this
+     - ASFR :math:`\times` WRA :math:`\times` male_sex_ratio
+     - No
+     - Weight each exposure category prevalence separately
+   * - LBWSG exposure at birth among females
+     - REI ID 339, sex_id=2, age_group_id=164
+     - 159, 166 (not available for 44577 or 44578)
+     - ASFR :math:`\times` WRA :math:`\times` (1 - male_sex_ratio)
+     - No
      - Weight each exposure category prevalence separately
 
 Where,
@@ -280,18 +286,22 @@ Where,
    * - ASFR
      - Age-specific fertility rate   
      - covariate_id=13, decomp_step='step4'
-     - Assume normal distribution of uncertainty  
+     - For use in weighting -- either: [1] Assume normal distribution of uncertainty and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
    * - SBR
      - Stillbirth to live birth ratio   
      - covariate_id=1106, decomp_step='step4'
      - Not age-specific; no uncertainty 
    * - incidence_c996
      - Incidence rate of abortion and miscarriage cause   
-     - cause_id=996, source=como, decomp_step=’step5’, measure_id=
+     - cause_id=996, source=como, decomp_step=’step5’, measure_id=6
      - 
    * - incidence_c374
      - Incidence rate of ectopic pregnancy
-     - cause_id=374, source=como, decomp_step=’step5’, measure_id=
+     - cause_id=374, source=como, decomp_step=’step5’, measure_id=6
+     - 
+   * - male_sex_ratio
+     - Ratio of male births to all live births
+     - :ref:`Defined for each modeled location on the pregnancy model document <sex_ratio_table>`
      - 
 
 .. _ivironWRA4.2.1:

@@ -248,6 +248,8 @@ Sex of infant
 
 For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_.
 
+.. _sex_ratio_table:
+
 .. list-table:: Probability of male birth
     :header-rows: 1
 
