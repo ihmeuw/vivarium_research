@@ -206,7 +206,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - 
    * - Risk factor PAFs
      - REI IDs 240 (wasting), 241 (stunting), 136 (non-exclusive breastfeeding), 137 (discontinued breastfeeding)
-     - 159, 166, 44577, 44578)
+     - 159, 166, 44577, 44578
      - N/A
      - Yes
      - Yes
