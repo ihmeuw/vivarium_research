@@ -256,10 +256,9 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - LBWSG exposure
      - REI ID 339
      - 159, 166 (not available for 44577 or 44578)
-     - ASFR :math:`\times` WRA
-     - No, but sex-specific
+     - ASFR :math:`\times` WRA :math:`\times` sex ratio
+     - No, but sex-specific -- Ali to provide more detail on this
      - Weight each exposure category prevalence separately
-
 
 Where,
 
