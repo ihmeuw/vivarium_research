@@ -235,7 +235,7 @@ age group is approximately 3.5 days (not accounting for deaths).
    * - r
      - I
      - S
-     - remission_rate_c322
+     - 1 / duration_mean
      -
 .. list-table:: Data Sources
    :widths: 20 25 25 25
