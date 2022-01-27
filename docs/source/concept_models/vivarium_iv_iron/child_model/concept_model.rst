@@ -213,7 +213,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      -  
    * - Cause parameters
      - Cause IDs 302 (diarrheal diseases), 341 (measles), 322 (lower respiratory infections), 387 (protein energy malnutrition)
-     - 159, 166, 44577, 44578)
+     - 159, 166, 44577, 44578
      - N/A
      - Yes
      - Yes
