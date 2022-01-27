@@ -195,34 +195,34 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Note
    * - Population size
      - N/A (use *get_population*)
-     - 159, 166
-     - N/A: sum across sub-regional population size values for aggregate value
+     - 159, 166, 44577, 44578
+     - N/A
      - Yes
-     - Can sum across location IDs 44577 and 44578 to get population size for the LMIC simulation location
+     - 
    * - Age-specific fertility rate (ASFR)
      - covariate_id 13
-     - 159, 166
+     - 159, 166 (not available for 44577 or 44578)
      - WRA
      - Yes
      - 
    * - Cause and sequela data
      - c366, c367, s182, s183, s184
-     - 159, 166
+     - 159, 166, 44577, 44578
      - PLW
      - Yes
-     - Also available for location IDs 44577 and 44578, but should be weighted from national-level values for the LMIC simulation location
+     - 
    * - Hemoglobin modelable entity IDs
      - MEIDs 10487 and 10488
      - 159, 166
      - WRA
      - Yes
-     - Would be good validation of weighting strategy to perform weighting for location IDs 159 and 166 to compare to GBD estimates for these parameters
+     - Not available for location IDs 44577 or 44578. NOTE: Ali may update to custom weighting strategy in a nano-sim.
    * - BMI modelable entity IDs
      - MEIDs 2548 and 18706
-     - 159, 166
+     - 159, 166 (not available for 44577 or 44578)
      - WRA
      - Yes
-     - Not yet incorporated into maternal BMI exposure model
+     - Not available for location IDs 44577 or 44578. Parameter not yet incorporated into maternal BMI exposure model
    * - Stillbirth to live birth ratio (SBR)
      - covariate ID 2267
      - None (national only)
@@ -253,6 +253,12 @@ Details on how to calculate weighted averages for specific simulation parameters
      - WRA
      - Yes
      - Parameter used for validation, but not for model building
+   * - LBWSG exposure
+     - REI ID 339
+     - 159, 166 (not available for 44577 or 44578)
+     - ASFR :math:`\times` WRA :math:`\times` sex ratio
+     - No, but sex-specific -- Ali to provide more detail on this
+     - Weight each exposure category prevalence separately
 
 Where,
 
