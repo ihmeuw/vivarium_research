@@ -1,7 +1,7 @@
-Measure,Model version,Age/sex/year stratification,Pregnancy state,Maternal hemorrahge incidence,Maternal supplementation coverage,Antenatal IV iron coverage,Postpartum IV iron coverage,Maternal BMI exposure
+Measure,Model version,Maternal age/sex/year stratification,Pregnancy state,Maternal hemorrahge incidence,Maternal supplementation coverage,Antenatal IV iron coverage,Postpartum IV iron coverage,Maternal BMI exposure
 Pregnancy state transition counts,I,TRUE,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
 Pregnancy state person-time,I,TRUE,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
-Count of pregnancy outcomes,I,TRUE,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
+"Count of pregnancy outcomes (live, still, other)",I,TRUE,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
 Deaths due to maternal disorders,I,TRUE,CONDITIONAL (for validation only and then can be removed),TRUE,TRUE,TRUE,TRUE,FALSE
 Maternal disorder incident case count,I,TRUE,CONDITIONAL (for validation only and then can be removed),TRUE,TRUE,TRUE,TRUE,FALSE
 Maternal disorder YLLs and YLDs,I,TRUE,CONDITIONAL (for validation only and then can be removed),TRUE,TRUE,TRUE,TRUE,FALSE

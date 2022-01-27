@@ -55,13 +55,6 @@ Pregnancy
 
 Overview
 -------------
-
-.. warning::
-
-   The current version of this document details a strategy to model pregnancy in a simulation with a population of women of reproductive age only and does not yet detail a strategy to pair maternal child dyads.
-
-   Such a strategy will need to distinguish bewteen stillbirths and live births and assign the child's LBWSG exposure category in a way that is consistent with the mother's duration of pregnancy.
-
 GBD Modeling Strategy
 ----------------------
 
@@ -174,22 +167,6 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 6 weeks (42 days) duration
     - Duration-based transition
 
-.. list-table:: Pregnancy outcomes
-  :header-rows: 1
-
-  * - Outcome
-    - Probability
-    - Note
-  * - Live birth
-    - ASFR / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
-    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The probability of a livebirth outcome will increase as a result of the reduction in the probability of a stillbirth associated with iron interventions during pregnancy (to be implemented in model version III).
-  * - Stillbirth
-    - (ASFR * SBR) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
-    - The probability of a stillbirth outcome will decrease as a result of iron interventions during pregnancy in the IV iron simulation (to be implemented in model version III)
-  * - Abortion/miscarriage
-    - (incidence_c995 + incidence_c374) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
-    -     
-
 .. list-table:: Data values
   :header-rows: 1
 
@@ -219,13 +196,6 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - como; decomp_step='step5'
     - 
 
-.. note::
-
-   A note on locations for the :ref:`IV Iron simulation <2019_concept_model_vivarium_iv_iron>`:
-
-      The ASFR covariate is available for regional location IDs. The SBR covariate is not available for regional estimates. Follow the location aggregation instructions on the concept model document to calculate regional-level values for these parameters.
-
-
 .. list-table:: Restrictions
    :widths: 15 15 20
    :header-rows: 1
@@ -252,29 +222,69 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
    We may restrict to ages 15 to 49 pending input from the BMGF.
 
-Gestational age
-~~~~~~~~~~~~~~~~~
+Pregnancy outcome
+~~~~~~~~~~~~~~~~~~
 
-Upon transition into the pregnancy state, each simulant should be assigned a gestational age according to the process described on the :ref:`low birthweight short gestation risk exposure document <2019_risk_exposure_lbwsg>`. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state. Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
+A pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) abortion/miscarriage. The probability of each pregnancy outcome is defined in the table below. The outcome of each pregnancy should be determined at the start of pregnancy in our simulation (upon transition from the np to p states). 
 
-.. todo::
+.. list-table:: Pregnancy outcomes
+  :header-rows: 1
 
-  Detail strategy to assign gestational age so that it is compatible with the corresponding birthweight exposure, which will be dependent on maternal BMI and/or maternal hemoglobin exposures.
+  * - Outcome
+    - Probability
+    - Note
+  * - Live birth
+    - ASFR / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
+    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The probability of a livebirth outcome will increase as a result of the reduction in the probability of a stillbirth associated with iron interventions during pregnancy (to be implemented in model version III).
+  * - Stillbirth
+    - (ASFR * SBR) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
+    - The probability of a stillbirth outcome will decrease as a result of iron interventions during pregnancy in the IV iron simulation (to be implemented in model version III)
+  * - Other (abortion, miscarriage, ectopic pregnancy)
+    - (incidence_c995 + incidence_c374) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
+    -     
+
+Sex of infant
+~~~~~~~~~~~~~~~
+
+For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_.
+
+.. list-table:: Probability of male birth
+    :header-rows: 1
+
+    *   - Location
+        - Location ID
+        - Value
+    *   - South Asia
+        - 159
+        - 0.522171
+    *   - Sub-Saharan Africa
+        - 166
+        - 0.509677
+    *   - World bank lower middle income
+        - 44577
+        - 0.513906
+    *   - World bank low income
+        - 44578
+        - 0.512684
+
+Duration of pregnancy
+~~~~~~~~~~~~~~~~~~~~~~~~
+
+A duration of pregnancy value will need to be assigned to all pregnancies regardless of the pregnancy outcome. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state.
+
+For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a duration of pregnancy of 24 weeks.
+
+For pregnancies that result in live births or stillbirths, duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
 
 For simulants who are initialized into the pregnancy state at the start of the simulation:
 
-   Assign the simulant a gestational age value and then sample a random value from a uniform distribution between zero and the assigned gestational age value. The randomly sampled value will represent the current gestational duration of that pregnancy. The simulant should remain in the pregnancy state prior to transitioning to the postpartum state for the duration equal to the assigned gestational age value *minus* the randomly sampled value.
-
-.. note::
-
-   When we model maternal child dyads, the LBWSG exposure value assigned to the mother will be the exposure value assigned to the child in the dyad.
-
-   Notably, maternal characteristics such as age and BMI are associated with infant outcomes including LBWSG. Careful attention should be paid to ensure consistent relationships bewteen maternal factors and the joint distribution between BW and GA. 
+   Assign the simulant a duration of pregnancy/gestational age value and then sample a random value from a uniform distribution between zero and the assigned gestational age value. The randomly sampled value will represent the current gestational duration of that pregnancy. The simulant should remain in the pregnancy state prior to transitioning to the postpartum state for the duration equal to the assigned gestational age value *minus* the randomly sampled value.
 
 Assumptions and limitations
 ++++++++++++++++++++++++++++
 
-- We assume that the gestational age distribution of stillbirths, abortions, miscarriages, and ectopic pregnancies is equal to the gestational age distribution of live births. This is a limitation of our analysis given the lack of data on the distribution of gestational ages for which these outcomes occur. Given that the gestation for these outcomes is likely shorter than gestation for live births on average, we are likely overestimating the average duration of pregnancy for outcomes other than live births.
+- We assume that the gestational age distribution of stillbirths is equal to the gestational age distribution of live births. This is a limitation of our analysis given the lack of data on the distribution of gestational ages for which these outcomes occur. Given that the gestation for these outcomes is likely shorter than gestation for live births on average, we are likely overestimating the average duration of pregnancy for outcomes other than live births.
+- We assume that all abortions, miscarriages and ectopic pregnancies occur at 24 weeks gestatation. 
 - We assume that abortions that occur after 24 weeks are not considered stillbirths for estimation of the stillbirth to livebirth ratio. We may overestimate the incidence rate of pregnancy due to this assumption.
 - We are limited in the assumption that the stillbirth to livebirth ratio does not vary by maternal age and does not incorporate an uncertainty distribution.
 - We do not model any morbidity (YLDs) associated directly with pregnancy.

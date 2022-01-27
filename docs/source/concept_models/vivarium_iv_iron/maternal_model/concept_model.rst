@@ -382,7 +382,7 @@ For model version I:
 
 The following ouputs should be 
 
-#. Number of live births
+#. Number of live births (sex-specific)
 #. LBWSG exposure (continuous values for birthweight and gestational age)
 
   For later model versions:
