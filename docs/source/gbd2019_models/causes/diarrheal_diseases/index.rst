@@ -219,14 +219,17 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{prevalence_c302}}`
-	  - We transform incidence to be a rate within the susceptible population.
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)`
+	  - We transform incidence to be a rate within the susceptible population under the assumption that prevalence ~= incidence * duration.
 	* - r
 	  - I
 	  - S
-	  - remission_rate_m1181
-	  - Already a rate within with-condition population
+	  - 1 / (duration_c302 / 365)
+	  - 
 
+.. note::
+
+	We are using a custom remission rate for diarrheal diseases based on the estimated duration of disease because after scaling to the total population using the estimated prevalence of diarrheal diseases, the remission rate was greater than the incidence rate for children under five in Ethiopia, which is implausible. We assume an average duration of a diarrheal disease episode of 4.3 days, as estimated by [Troeger-et-al-2018-Diarrhea]_. 
 	  
 .. list-table:: Data Sources and Definitions
 	:widths: 1 3 10 10
@@ -244,14 +247,14 @@ Data Description
 	  - codcorrect
 	  - Deaths from diarrheal diseases
 	  -
+	* - duration_c302
+	  - 4.3 (95% CI: 4.2, 4.4), assume normal distribution of uncertainty
+	  - Average duration of a diarrheal disease episode in days among children under five
+	  - From [Troeger-et-al-2018-Diarrhea]_ 
 	* - incidence_rate_c302
 	  - como
 	  - Incidence of diarrheal disease within the entire population
 	  - 
-	* - remission_rate_m1181
-	  - dismod
-	  - Remission of diarrheal disease within the infected population
-	  -
 	* - population
 	  - demography
 	  - Mid-year population for given age/sex/year/location
@@ -317,6 +320,9 @@ References
   369 diseases and injuries in 204 countries and territories, 1990–2019: a 
   systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 
   17 Oct 2020;396:1204-1222` 
+
+.. [Troeger-et-al-2018-Diarrhea]
+   Troeger C, Colombara DV, Rao PC, Khalil IA, Brown A, Brewer TG, Guerrant RL, Houpt ER, Kotloff KL, Misra K, Petri WA Jr, Platts-Mills J, Riddle MS, Swartz SJ, Forouzanfar MH, Reiner RC Jr, Hay SI, Mokdad AH. Global disability-adjusted life-year estimates of long-term health burden and undernutrition attributable to diarrhoeal diseases in children younger than 5 years. Lancet Glob Health. 2018 Mar;6(3):e255-e269. doi: 10.1016/S2214-109X(18)30045-7. PMID: 29433665; PMCID: PMC5861379. `Troeger et al 2018 available here <https://pubmed.ncbi.nlm.nih.gov/29433665/>`_
 
 .. [WHO-Diarrhea] Diarrheal disease Fact Sheet. World Health Organization, 2 May 2019.
    Retrieved 14 Nov 2019.
