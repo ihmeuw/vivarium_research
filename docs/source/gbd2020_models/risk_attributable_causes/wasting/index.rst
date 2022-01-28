@@ -690,8 +690,8 @@ in terms of the following variables:
      - The prevalence of cause c among wasting category i
      - :math:`incidence_{ci} * duration_c`
    * - :math:`duration_c`
-     - The average duration of cause c
-     - 10 days (for measles, diarrhea, and lri)
+     - The average duration of cause c, in years
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`
    * - :math:`incidence_{ci}`
      - incidence probability of cause c among wasting category i
      - :math:`incidence_{c}*(1-paf_{c})*rr_{ci}`
