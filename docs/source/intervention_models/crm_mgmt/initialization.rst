@@ -6,18 +6,17 @@ This section provides additional details about hypertension and hypercholesterol
 Links to documentation for relevant risk pages
 
 * :ref:`See SBP risk exposure documentation <2019_risk_sbp>`
-* :ref:`See LDL-c risk exposure documentation <2019_risk_ldl>`
+* :ref:`See LDL-c risk exposure documentation <2019_risk_exposure_ldl>`
 * :ref:`See BMI risk exposure documentation <2019_risk_bmi>`
-* :ref:`See FPG risk exposure documentation <2019_risk_fpg>`
+* :ref:`See FPG risk exposure documentation <2019_risk_exposure_fpg>`
 
 * :ref:`See SBP risk effect documentation <2019_risk_effect_sbp>`
 * :ref:`See LDL-c risk effect documentation <2019_risk_effect_ldl>`
-* :ref:`See BMI risk effect documentation <2019_risk_effect_bmi>`
-* :ref:`See FPG risk effect documentation <2019_risk_effect_fpg>`
-
 
 .. todo:: add tobacco risk exposure
 .. todo:: add tobacco risk effect 
+.. todo:: add bmi risk effect
+.. todo:: add fpg risk effect
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
