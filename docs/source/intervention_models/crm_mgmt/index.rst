@@ -105,7 +105,7 @@ The lifestyle modification intervention is aimed at lowering FPG/HbA1c values an
   Add to the following table to include known outcomes affected by the intervention, which are **not** in the simulation model, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
 
 Baseline Coverage Data
-++++++++++++++++++++++++
+--------------------------
 
 Baseline coverage of treatments for LDL-C and SBP are substantial and expected to vary by age, sex, and time.  To initialize simulants, researchers will fit a multinomial regression to NHANES data to use as a prediction of the probability of each treatment for a simulant with a known age, sex, and measured LDL-C and SBP level. [[Should this also predict which simulants are non-adherent to treatment?]] 
 
@@ -225,7 +225,7 @@ Vivarium Modeling Strategy
     - 
 
 Affected Outcomes
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
 
 .. toctree::
    :maxdepth: 1
@@ -234,10 +234,10 @@ Affected Outcomes
 
 
 Assumptions and Limitations
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------
 
 Validation and Verification Criteria
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+------------------------------------
 
 References
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+--------------------------
