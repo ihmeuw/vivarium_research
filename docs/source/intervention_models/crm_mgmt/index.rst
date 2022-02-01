@@ -225,7 +225,7 @@ Vivarium Modeling Strategy
     - 
 
 Affected Outcomes
-*****************
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. toctree::
    :maxdepth: 1
