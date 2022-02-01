@@ -218,8 +218,8 @@ Data Description
      - Notes
    * - S
      - prevalence
-     - 1 - prevalence_c341 - prevalence_R
-     - 
+     - 1 - prevalence_I - prevalence_R
+     - Use prevalence_I calculated in this table
    * - S
      - excess mortality rate
      - 0
@@ -230,12 +230,12 @@ Data Description
      -
    * - I
      - prevalence
-     - prevalence_c341
+     - incidence_rate_c341 * (10 / 365)
      - 
    * - I
      - excess mortality rate
-     - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_c341}}`
-     - 
+     - :math:`\frac{\text{deaths_c341}}{\text{population} \times \text{prevalence_I}}`
+     - Use prevalence_I calculated in row above
    * - I
      - disability weights
      - disability_weight_s117 :math:`\times` prevalence_s117+ disability_weight_s118 :math:`\times` prevalence_s118
