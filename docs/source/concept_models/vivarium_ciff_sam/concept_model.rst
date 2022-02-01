@@ -487,7 +487,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - On hold
    * - `Underestimation of diarrheal diseases CSMR <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_cause_verification.pdf>`_
      - In the updates made to the diarrheal diseases cause model made in vivarium research PR #752 (for model version 5.3.2), I missed updating the excess mortality rate which is causing an underestimation of the EMR and therefore CSMR.
-     - Update diarrheal diseases cause model in accordance with this pull request
+     - `Update diarrheal diseases cause model in accordance with this pull request <https://github.com/ihmeuw/vivarium_research/pull/759>`_
      - For next model run
    * - `Underestimation of lower respiratory infections burden in early neonatal age groups <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_cause_verification.pdf>`_
      - Unconfirmed
