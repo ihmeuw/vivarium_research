@@ -172,7 +172,7 @@ Data Description
 	  - Notes
 	* - I
 	  - prevalence
-	  - prevalence_c302
+	  - incidence_rate_c302 * duration_c302 / 365
 	  -
 	* - I
 	  - birth prevalence
@@ -180,16 +180,16 @@ Data Description
 	  - 
 	* - I
 	  - excess mortality rate
-	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_c302}}`
-	  -
+	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_I}}`
+	  - Use prevalence calculated for the I state in the row above
 	* - I
 	  - disability weight
 	  - :math:`\displaystyle{\sum_{s\in \text{sequelae_c302}}} \scriptstyle{\text{disability_weight}_s \,\times\, \text{prevalence}_s}`
 	  -
 	* - S
 	  - prevalence
-	  - 1-prevalence_c302
-	  -
+	  - 1-prevalence_I
+	  - Use prevalence calculated for the I state in the first row
 	* - S
 	  - birth prevalence
 	  - 1
