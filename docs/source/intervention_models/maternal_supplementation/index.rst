@@ -236,23 +236,13 @@ All regimens in the maternal supplementation interventions affect the hemoglobin
     - Relative to IFA
     - 
   * - BEP
-    - +3.7 g/L (1.9, 5.6)
+    - 0 g/L
     - Relative to IFA/MMS
     - Gates Trials
 
-.. todo::
-
-  Add formal citations for effect sizes when we hear back from Laura
-
-.. note::
-
-  While IFA and MMS have the same effect on hemoglobin level, it is useful to implement them as separate interventions to accomodate updated assumptions around this point if desired.
-
 **How to sample and apply effect sizes:**
 
-The intervention hemoglobin shifts should be applied at the start of pregnancy, *after* the application of the pregnancy hemoglobin adjustment factor. The intervention hemoglobin shift should persist until six weeks postpartum, at which point the simulant's hemoglobin level should return to the pre-pregnancy value, as illustrated in the figure below.
-
-.. image:: hemoglobin_figure.png
+The intervention hemoglobin shifts should be applied at **eight weeks gestataion** (assume pregnancy identification occurs at six weeks, intervention coverage begins at the time of pregnnacy identification, and intervention effect on hemoglobin occurs two weeks after initiation of the intervention). The intervention hemoglobin shift should persist until six weeks postpartum, at which point the simulant's hemoglobin level should return to the pre-pregnancy value.
 
 Additionally, the code block below walks through how to implement the following considerations:
 
@@ -312,7 +302,7 @@ Additionally, the code block below walks through how to implement the following 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- We assume that the full effect of the intervention occurs immediately at conception. This is to align with BMGF targets of beginning maternal supplementation product as soon as possible, but is still overly optomistic and may be updated.
+- We assume that pregnant women begin taking the supplementation intervention six weeks into their pregnancy. In reality, the average person may begin taking oral iron supplementation closer to the start of the second trimester. However, we have chosen six weeks in order to be conservative as the comparison intervention for the assessment of the impact of the intravenous iron intervention.
 - We assume that the effect of the intervention persists for six weeks postpartum at which point hemoglobin returns to its pre-pregnancy value
 - We assume no effect modification by baseline hemoglobin level. In reality, the individual hemoglobin shifts are likely greater among those who are anemic at baseline.
 
