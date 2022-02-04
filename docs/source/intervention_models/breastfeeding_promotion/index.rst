@@ -99,6 +99,8 @@ So, the resulting relative risk and confidence interval are equal to **0.702 (95
 
   Update vivarium modeling strategy to use this relative risk rather than the risk difference
 
+  Add assumptions/limitations of this relative risk estimation approach.
+
 .. _breastfeeding_intervention_baseline_data:
 
 Baseline Coverage Data
