@@ -87,7 +87,7 @@ The resulting estimate is: 0.702 (95% CI: 0.606, 0.813).
   Lower bound:
 
   - lower bound difference: 0.702 - 0.606 = 0.096 
-  - inflated lower bound difference: 0.960 * 1.2 = 0.115
+  - inflated lower bound difference: 0.096 * 1.2 = 0.115
   - updated lower bound: 0.702 - 0.115 = 0.587
 
   Upper bound:
