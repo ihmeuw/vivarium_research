@@ -235,8 +235,8 @@ Details on how to calculate weighted averages for specific simulation parameters
      - PLW
      - No
      - 
-   * - Skilled birth attendance (SBA)
-     - covariate ID 143
+   * - In-facility delivery proportion (IFD)
+     - covariate ID 51
      - None (national only)
      - PLW
      - No
