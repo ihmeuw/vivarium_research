@@ -207,12 +207,12 @@ The following simulation scenarios apply to both the :ref:`women of reproductive
     - 0
     - :math:`T * ANC`
     - 0
-    - :math:`T * SBA`
+    - :math:`T * IFD`
   * - Antenatal and postpartum IV iron scale-up
     - 0
     - :math:`T * ANC`
     - :math:`T * ANC`
-    - :math:`T * SBA`
+    - :math:`T * IFD`
 
 Where,
 
@@ -231,9 +231,9 @@ Where,
     - Coverage of single antenatal care visit
     - GBD covariate ID=7, decomp_step='step4', normal distribution of uncertainty
     - Location-specific
-  * - :math:`SBA`
-    - Skilled birth attendance proportion
-    - GBD covariate ID=143, decomp_step='step4', normal distribution of uncertainty
+  * - :math:`IFD`
+    - In-facility delivery proportion
+    - GBD covariate ID=51, decomp_step='step4', normal distribution of uncertainty
     - Location-specific
 
 .. note::
