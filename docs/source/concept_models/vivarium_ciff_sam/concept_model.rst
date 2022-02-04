@@ -397,8 +397,12 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 - Location: Ethiopia
 - Cohort type: Prospective open cohort of 0-5 years
 - Size of largest starting population: 100,000 simulants
-- Time span: Jan 1, 2022 to Dec 31, 2026
+- Time span: July 1, 2021 to December 31, 2026 (Observation time of interest: January 1, 2022 to December 31, 2026)
 - Time step: 0.5 days
+
+.. note::
+
+  The simulation start date was set to run six months earlier in order to run a "burn-in" period to accomodate the increased wasting burden associated with the x-factor initialization strategy. The strategy of initializing simulants x-factor exposure and child wasting exposure using the same propensity causes an initial increase in SAM burden as all simulants in the MAM state will transition to the SAM state at an increased rate. The burn-in period of six months was chosen so that the x-factor and wasting joint exposure distribution will stabilize prior to the period of simulation observation.
 
 .. _5.2.2:
 
