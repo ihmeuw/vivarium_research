@@ -48,20 +48,17 @@ For use in our simulation, we are interested in estimating the relative risk of 
   * - Study arm
     - EBF (proportion)
     - EBF (n)
-    - NEBF (n)
     - Total (n)
   * - Intervention
     - p1 = 0.683
     - x1 = 170
-    - 79
     - n1 = 249
   * - Control
     - p2 = 0.548
     - x2 = 120
-    - 99
-    - n2 219
+    - n2 = 219
 
-(1). Estimate risk difference and confidence interval without clustering adjustment to compare to adjusted estimate:
+**(1).** Estimate risk difference and confidence interval without clustering adjustment to compare to adjusted estimate:
 
 .. math::
 
@@ -73,25 +70,31 @@ Given z=1.96, the resulting unadjusted risk difference equals 13.5 percent (95% 
 
   The magnitude of the calculated risk difference is slightly less than that of the reported risk difference adjusted for clustering. This is a limitation of our approach that will conservatively underestimate the impact of the intervention.
 
-(2). Calculate the relative risk and confidence interval of *non*-exclusive breastfeeding among the intervention relative to control arms of the study:
+**(2).** Calculate the relative risk and confidence interval of *non*-exclusive breastfeeding among the intervention relative to control arms of the study:
 
 .. math::
 
   RR = \frac{1-p_1}{1-p_2}
 
+.. math::
+
   ln(RR) \pm z * \sqrt{\frac{(n_1-x_1)/x_1}{n_1}+\frac{(n_2-x_2)/x_2}{n_2}} 
 
 The resulting estimate is: 0.702 (95% CI: 0.606, 0.813).
 
-(3). Inflate the estimated confidence interval about the calculated relative risk by 20% in either direction in accordance with the inflated magnitude of the confidence interval in the comparison in step (1).
+**(3).** Inflate the estimated confidence interval about the calculated relative risk by 20% in either direction in accordance with the inflated magnitude of the confidence interval in the comparison in step (1).
 
-  lower bound difference: 0.702 - 0.606 = 0.960 
-  inflated lower bound difference: 0.960 * 1.2 = 0.115
-  updated lower bound: 0.702 - 0.115 = 0.587
+  Lower bound:
 
-  upper bound difference: 0.813 - 0.702 = 0.111
-  inflated upper bound difference = 0.111 * 1.2 = 0.133
-  updated upper bound: 0.702 + 0.133 = 0.835
+  - lower bound difference: 0.702 - 0.606 = 0.960 
+  - inflated lower bound difference: 0.960 * 1.2 = 0.115
+  - updated lower bound: 0.702 - 0.115 = 0.587
+
+  Upper bound:
+
+  - upper bound difference: 0.813 - 0.702 = 0.111
+  - inflated upper bound difference = 0.111 * 1.2 = 0.133
+  - updated upper bound: 0.702 + 0.133 = 0.835
 
 So, the resulting relative risk and confidence interval are equal to **0.702 (95% CI: 0.587, 0.835)**.
 
