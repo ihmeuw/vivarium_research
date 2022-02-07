@@ -183,7 +183,7 @@ The baseline scenario will project GBD 2019 demographic and disease trends and G
 - Preventive and therapeutic zinc baseline parameters
 
 **Alternative scenario 1**
-Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for SAM (:math:`C_{SAM}`and :math:`E_{SAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effctive* coverage (:math:`E \times C`) should be greater for all draws in the alterative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
+Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for SAM (:math:`C_{SAM}`and :math:`E_{SAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effective* coverage (:math:`E \times C`) should be greater for all draws in the alternative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
 
 .. _`wasting-treatment-alterative-scenario-values`:
 
