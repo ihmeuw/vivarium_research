@@ -183,7 +183,7 @@ The baseline scenario will project GBD 2019 demographic and disease trends and G
 - Preventive and therapeutic zinc baseline parameters
 
 **Alternative scenario 1**
-Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effctive* coverage (:math:`E \times C`) should be greater for all draws in the alterative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
+Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for SAM (:math:`C_{SAM}`and :math:`E_{SAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effective* coverage (:math:`E \times C`) should be greater for all draws in the alternative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
 
 .. _`wasting-treatment-alterative-scenario-values`:
 
@@ -193,22 +193,19 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
   * - Parameter
     - Alternative scenario value
     - Note
-  * - :math:`C_{MAM}`
+  * - :math:`C`
     - 0.7
     - Informed by discussion with CIFF/UNICEF
-  * - :math:`C_{SAM}`
-    - 0.7
-    - Informed by discussion with CIFF/UNICEF
-  * - :math:`E_{MAM}`
-    - 0.75
-    - Informed by Sphere standards
-  * - :math:`E_{SAM}`
+  * - :math:`E`
     - 0.75
     - Informed by Sphere standards
 
 .. note::
 
   Rather than scale linearly from between the baseline and alternative scenario values for the :math:`E` parameters, we will instead scale linearly so that 100% of the intervention coverage at the beginning of the scale-up period has efficacy equal to the baseline values (and 0% equal to the alternative scenario values) and 100% of the intervention coverage at the end of the scale-up period has efficacy equal to the alternative scenario values (and 0% equal to the baseline values).
+
+**Alternative scenario 1.5**
+Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for both SAM and MAM (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the same alternative scenario values shown in the table below. 
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 1. 
