@@ -174,13 +174,18 @@ The baseline scenario will project GBD 2019 demographic and disease trends and G
 
 - :ref:`Insecticide treated nets baseline parameters <itn-baseline-parameters>`
 
-- :ref:`Intermittent malaria preventive therapy for pregnant women baseline parameters <iptp-baseline-parameters>`: PENDING DECISION TO INCLUDE IN SIMULATION
-
-- Kangaroo care for preterm and low birthweight infants baseline parameters
-
-- :ref:`Breastfeeding support baseline parameters <breastfeeding_intervention_baseline_data>`
-
 - Preventive and therapeutic zinc baseline parameters
+
+.. note::
+
+  The following interventions have been removed from the scope of this simulation
+
+  - :ref:`Intermittent malaria preventive therapy for pregnant women baseline parameters <iptp-baseline-parameters>`: PENDING DECISION TO INCLUDE IN SIMULATION
+
+  - Kangaroo care for preterm and low birthweight infants baseline parameters
+
+  - :ref:`Breastfeeding support baseline parameters <breastfeeding_intervention_baseline_data>`
+
 
 **Alternative scenario 1**
 Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for SAM (:math:`C_{SAM}`and :math:`E_{SAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effective* coverage (:math:`E \times C`) should be greater for all draws in the alternative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
@@ -238,7 +243,7 @@ Scale up of LBWSG intervention parameters (see table below) from baseline covera
     - Pending decision to include intervention in simulation
 
 **Alternative scenario 4**
-Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion, and preventive and therapeutic zinc) from baseline coverage to 90% in addition to the intervention coverage in alternative scenario 3.
+Scale-up of vicious cycle interventions (preventive and therapeutic zinc) from baseline coverage to 90% in addition to the intervention coverage in alternative scenario 3.
 
 .. note::
 
@@ -292,10 +297,6 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 
 * :ref:`Diarrheal Diseases (GBD 2019) <2019_cause_diarrhea>`
 
-.. todo::
-
-  The diarrheal diseases remission rate for Ethiopia in GBD 2019 is greater than the incidence rate. Consider adjusting this and/or at least noting the implications and limitations.
-
 * :ref:`Lower Respiratory Infections (GBD 2019) <2019_cause_lower_respiratory_infections>`
 
 * :ref:`Measles (GBD 2019) <2019_cause_measles>`
@@ -308,8 +309,6 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 5.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Suboptimal Breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>`
-
 * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
 
 * :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
@@ -318,10 +317,12 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 
 * :ref:`Wasting X-Factor Risk Exposure <2019_risk_exposure_x_factor>`
 
+.. note::
+
+  :ref:`Suboptimal Breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>` has been removed from this simulation.
+
 5.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* :ref:`Suboptimal Breastfeeding Risk Effects (GBD 2020) <2020_risk_suboptimal_breastfeeding>`
 
 * Child Stunting Risk Effects (GBD 2020)
 
@@ -333,8 +334,16 @@ Scale-up of vicious cycle interventions (kangaroo care, breastfeeding promotion,
 
 * :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>`
 
+.. note::
+
+  :ref:`Suboptimal Breastfeeding Risk Effects (GBD 2020) <2020_risk_suboptimal_breastfeeding>` have been removed from this simulation.
+
 5.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. warning::
+
+  We are currently not planning on implementing the following risk correlation scheme as part of the scope of this simulation, with the exception of :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>` as well as the correlation between x-factor and child wasting exposure, described on the :ref:`x-factor exposure page <2019_risk_exposure_x_factor>`.
 
 * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
 
@@ -351,6 +360,7 @@ The following diagram represents the resulting model correlation structure in ou
 For correlated risks that affect the same outcomes in our simulation (just wasting and stunting in this model), the joint PAF calculation rather than multiplicative PAF calculation should be used for outcomes affected by wasting and stunting (see the :ref:`risk correlation proposal document <2017_risk_models>` for details). The joint PAF equation is shown below for convenient reference.
 
 .. math::
+
   PAF_{joint} = 1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n} RR_1^{e1_i} \cdot RR_2^{e2_i}}
 
 5.1.6 Feedback Loop Models
@@ -369,17 +379,15 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 
 * :ref:`Insecticide treated nets <insecticide_treated_nets>`
 
-.. warning::
-
-  :ref:`Intermittent malaria preventive therapy for pregnant women <maternal_malaria_prevention_therapy>`
-
-  We may not model the intermittent malaria preventive therapy for pregnant women given that this intervention is not recommended in Ethiopia. The decision to include/exclude this intervention is pending more investigation into the national recommendation and model builds for this intervention should not begin until the decision is finalized.
-
-* Kangaroo care for preterm and low birthweight infants
-
-* :ref:`Breastfeeding promotion <breastfeeding_promotion>`
-
 * Preventive and therapeutic zinc
+
+.. note::
+
+  The following interventions have been removed from the scope of this simulation:
+
+  * :ref:`Intermittent malaria preventive therapy for pregnant women <maternal_malaria_prevention_therapy>`: We may not model the intermittent malaria preventive therapy for pregnant women given that this intervention is not recommended in Ethiopia. The decision to include/exclude this intervention is pending more investigation into the national recommendation and model builds for this intervention should not begin until the decision is finalized.
+
+  * Kangaroo care for preterm and low birthweight infants and :ref:`Breastfeeding promotion <breastfeeding_promotion>`: These interventions are hypothesized to affect child wasting burden via their improvements in exclusive breastfeeding rates and the associated reduction in infectious disease burden that occurs in the first six months of life. However, we are not currently modeling wasting transition rates among infants younger than six months of age. Therefore, we are excluding them from the simulation as they will not affect any modeled wasting transition rates among children aged 6-59.
 
 .. _5.2:
 
