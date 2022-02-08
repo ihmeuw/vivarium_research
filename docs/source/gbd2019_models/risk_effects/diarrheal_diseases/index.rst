@@ -271,15 +271,19 @@ The age- and sex-specific values for RR_{i3, i2, i1} calculated as described abo
 
 .. math::
 
-   \text{prevalence_diarrheal_diseases{x}} = \frac{\text{p_D{x}}}{\text{p_D{x}}+\text{p_S{x}}}
+   \text{prevalence_diarrheal_diseases{x-1}} = \frac{\text{p_D{x-1}}}{\text{p_D{x-1}}+\text{p_S{x-1}}}
 
 .. math::
 
-   PAF_\text{i{x}} = \frac{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x}} + (1 - \text{prevalence_diarrheal_diseases{x}}) - 1}{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x}} + (1 - \text{prevalence_diarrheal_diseases{x}})}
+   PAF_\text{i{x}} = \frac{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x-1}} + (1 - \text{prevalence_diarrheal_diseases{x-1}}) - 1}{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x-1}} + (1 - \text{prevalence_diarrheal_diseases{x-1}})}
 
 .. math::
 
    \text{i{x}}_i = \text{i{x}} * (1 - PAF) * \text{RR_i{x}}_i
+
+.. note::
+
+   This proposed strategy uses wasting state-specific diarrheal prevalence in the source state for each wasting transition in calculation of the PAF for that wasting transition in order to avoid bias in the PAF estimation by using the exposure in the "at-risk" population for the affected transition.
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
