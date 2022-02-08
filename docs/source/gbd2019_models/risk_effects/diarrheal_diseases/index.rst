@@ -271,15 +271,15 @@ The age- and sex-specific values for RR_{i3, i2, i1} calculated as described abo
 
 .. math::
 
-   \text{prevalence_diarrheal_diseases{x+1}} = \frac{\text{p_D{x+1}}}{\text{p_D{x+1}}+\text{p_S{x+1}}}
+   \text{p_diarrhea}_\text{{x+1}} = \frac{p_\text{D{x+1}}}{p_\text{D{x+1}}+p_\text{S{x+1}}}
 
 .. math::
 
-   PAF_\text{i{x}} = \frac{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x+1}} + (1 - \text{prevalence_diarrheal_diseases{x+1}}) - 1}{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x+1}} + (1 - \text{prevalence_diarrheal_diseases{x+1}})}
+   PAF_\text{i{x}} = \frac{RR_\text{i{x}} * \text{p_diarrhea}_\text{{x+1}} + (1 - \text{p_diarrhea}_\text{{x+1}}) - 1}{RR_\text{i{x}} * \text{p_diarrhea}_\text{{x+1}} + (1 - \text{p_diarrhea}_\text{{x+1}})}
 
 .. math::
 
-   \text{i{x}}_i = \text{i{x}} * (1 - PAF) * \text{RR_i{x}}_i
+   \text{i{x}}_i = \text{i{x}} * (1 - PAF_\text{i{x}}) * RR_\text{i{x}_i}
 
 .. note::
 
