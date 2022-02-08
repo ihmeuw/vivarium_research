@@ -21,6 +21,12 @@ Breastfeeding Promotion and Education
   * - WBTi
     - World Breastfeeding Trend Initiative
     - 
+  * - EBF
+    - Exclusive breastfeeding
+    - 
+  * - NEBF
+    - Non-exclusive breastfeeding
+    - 
 
 Intervention Overview
 -----------------------
@@ -70,7 +76,7 @@ Given z=1.96, the resulting unadjusted risk difference equals 13.5 percent (95% 
 
   The magnitude of the calculated risk difference is slightly less than that of the reported risk difference adjusted for clustering. This is a limitation of our approach that will conservatively underestimate the impact of the intervention.
 
-**(2).** Calculate the relative risk and confidence interval of *non*-exclusive breastfeeding among the intervention relative to control arms of the study:
+**(2).** Calculate the relative risk and confidence interval of *non*-exclusive breastfeeding among the intervention relative to control arms of the study (note that non-exclusive breastfeeding is selected as the outcome of interest rather than exclusive breastfeeding so that the relative risk is <1 so that the application of the risk effect may never result in a risk exposure greater than one):
 
 .. math::
 
@@ -98,12 +104,6 @@ The resulting estimate is: 0.702 (95% CI: 0.606, 0.813).
 
 So, the resulting relative risk and confidence interval are equal to **0.702 (95% CI: 0.587, 0.835)**.
 
-.. todo::
-
-  Update vivarium modeling strategy to use this relative risk rather than the risk difference
-
-  Add assumptions/limitations of this relative risk estimation approach.
-
 .. _breastfeeding_intervention_baseline_data:
 
 Baseline Coverage Data
@@ -127,13 +127,17 @@ Given the lack of evidence of breastfeeding education and support interventions 
 
   From Abie: If it turns out that the relative impact of BFP is small, we might want to flip these assumptions to the most generous (rather than the most conservative) so that we can say that even with the most generous assumptions, BFP does not have much impact. 
 
-The effect shift of the breastfeeding intervention is an **additive increase of 0.146 (95% CI: 0.0377, 0.255; assume normal distribution of uncertainty) in the exposure value of cat4 of the nonexclusive breastfeeding risk exposure (REI ID = 136)**. 
+The effect of the breastfeeding promotion intervention should be applied in order to measure a decrease in the combined risk exposure of NEBF categories other than the TMREL (exclusive breastfeeding/cat4) as shown below, where RR_nebf = 0.702 (95% CI: 0.587, 0.835; lognormal distribution of uncertainty):
 
-.. todo::
+.. code-block:: python
 
-  Convert effect from risk difference to relative risk
+  NEBF_exposure_uncovered = exposure_cat1_gbd + exposure_cat2_gbd + exposure_cat3_gbd
+  NEBF_exposure_covered = NEBF_exposure_uncovered * RR_nebf
+  NEBF_exposure_reduction = NEBF_exposure_uncovered - NEBF_exposure_covered
 
-For simulants covered by the intervention, their breastfeeding exposure propensity should not change, but the exposure threshold values used to determine the exposure category for that simulant should change according to the code block below. This strategy should be followed for all eligible age groups. Simulants who are not covered by the intervention should use the same exposure category threshold values as implied from the GBD risk exposure. A table of the risk exposure categories for the exclusive breastfeeding risk factor (REI ID 136) is included below for reference.
+Changes to individual simulant NEBF risk exposures should then be made in the following fashion:
+
+  For simulants covered by the intervention, their breastfeeding exposure propensity should not change, but the exposure threshold values used to determine the exposure category for that simulant should change according to the code block below. This strategy should be followed for all eligible age groups. Simulants who are not covered by the intervention should use the same exposure category threshold values as implied from the GBD risk exposure. A table of the risk exposure categories for the exclusive breastfeeding risk factor (REI ID 136) is included below for reference.
 
 .. note::
 
@@ -141,6 +145,8 @@ For simulants covered by the intervention, their breastfeeding exposure propensi
 
 .. code-block:: python
 
+
+  effect_shift = NEBF_exposure_reduction
   exposure_cat4_intervention = exposure_cat4_gbd + effect_shift
 
   if effect_shift > exposure_cat3_gbd:
@@ -186,6 +192,7 @@ Assumptions and Limitations
 #. We assume the intervention effect is constant from birth until six months postpartum.
 #. We are limited by lack of data regarding interventions on rates of continued breastfeeding.
 #. We are limited in using a risk difference as reported by [Abdulahi-et-al-2021]_ specific to a control population that has slightly lower rates of exclusive breastfeeding than the simulated population as estimated by GBD.
+#. We are limited in that we cannot estimate the intervention relative risk on exclusive breastfeeding in a way that considers the impact of clustering of exclusive breastfeeding rates among study subjects by sub-district. However, we have attempted to inflate the uncertainty about our calculated relative risk in order to account for this limitation. Additionally, given that the crude risk difference was lower in magnitude than the clustering-adjusted risk difference reported by [Abdulahi-et-al-2021]_, bias introduced by this limitation is likely conservative in terms of the estimation of intervention impact (biased towards the null).
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
