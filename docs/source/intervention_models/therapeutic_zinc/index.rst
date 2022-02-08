@@ -1,7 +1,7 @@
 .. _zinc_supplementation:
 
 ====================================================
-Zinc supplementation
+Zinc Supplementation
 ====================================================
 
 .. contents::
@@ -15,6 +15,9 @@ Zinc supplementation
   * - Abbreviation
     - Definition
     - Note
+  * - 
+    - 
+    - 
 
 Intervention Overview
 -----------------------
@@ -76,7 +79,7 @@ Baseline Coverage Data
     - Note
   * - Ethiopia
     - Children under five years with recent episode of diarrhea
-    - 0.499 (SD=0.143)
+    - 0.499 (SD=0.143, normal distribution of uncertainty truncated at 0 and 1)
     - Ethiopia DHS 2016
     - Standard deviation calculated based on n=1227
 
@@ -180,7 +183,7 @@ Where,
   * - MD_hours 
     - Mean difference in diarrhea duration for therapeutic zinc in hours
     - -11.46 (95% CI: -19.72, -3.19; lognormal distribution of uncertainty)
-    - [Lazzerini-and-Wanzira-2016]_
+    - From [Lazzerini-and-Wanzira-2016]_
   * - MD
     - Mean difference in diarrhea duration for therapeutic zinc in years
     - MD_hours / 24 / 365
@@ -189,13 +192,17 @@ Where,
     - Average duration of diarrhea in years
     - :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
     - Will need to be converted to years (defined in days)
+  * - RR_i
+    - Diarrheal disease remission rate relative risk for an individual simulant dependant on their therapeutic zinc intervention coverage
+    - RR as calculated above if covered by therapeutic zinc intervention; otherwise 1
+    - 
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. The average duration of a diarrhea episode used in GBD is not estimated at the location-specific level. Therefore, if coverage of therapeutic zinc is greater in the modeled location than the global average, we may 
+#. The average duration of a diarrhea episode used in GBD is not estimated at the location-specific level.
 
-#. We do not consider effect modification by baseline burden of zinc deficiency. Notably, the PAF for zinc deficiency and diarrheal diseases in Ethiopia as estimated by GBD 2019 among children under five years of age is quite low. However, challenges around the definition and measurement of zinc deficiency may explain this finding. We chose to rather model the directly measured effect of zinc supplementation on diarrheal disease incidence, for which there may be an effect even among those who do not meet the criteria for zinc deficiency.
+#. We do not consider effect modification by baseline burden of zinc deficiency, level of zinc intake, or zinc fortification coverage. Notably, the PAF for zinc deficiency and diarrheal diseases in Ethiopia as estimated by GBD 2019 among children under five years of age is quite low. However, challenges around the definition and measurement of zinc deficiency may explain this finding. We chose to rather model the directly measured effect of zinc supplementation on diarrheal disease incidence, for which there may be an effect even among those who do not meet the criteria for zinc deficiency.
 
 #. We do not consider the impact of zinc supplementation on diarrheal disease severity, including excess mortality rate or disability weights.
 

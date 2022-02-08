@@ -120,7 +120,7 @@ While there are various well-studied risk factors that are associated with becom
 4.0 Intervention
 ++++++++++++++++
 
-Historically, prevention research has primarily focused on stunting, and, as a research outcome, wasting has been considered primarily within the context of humanitarian emergencies. Although the volume of studies related to wasting prevention through direct and indirect health-care sector areas has increased in recent years, this evidence base is mixed and often inconclusive. We reviewed the literature from the recent Keats et al 2021 update of effective interventions to address maternal and child malnutrition and selected interventions that have moderate or strong evidence for implementation5. We selected interventions that:
+Historically, prevention research has primarily focused on stunting, and, as a research outcome, wasting has been considered primarily within the context of humanitarian emergencies. Although the volume of studies related to wasting prevention through direct and indirect health-care sector areas has increased in recent years, this evidence base is mixed and often inconclusive. We reviewed the literature from the recent Keats et al 2021 update of effective interventions to address maternal and child malnutrition and selected interventions that have moderate or strong evidence for implementation. We selected interventions that:
 
 1)	Directly prevent acute malnutrition (SQ-LNS), moderate or severe;
 2)	Treat or manage acute malnutrition (GAM treatment), moderate or severe;
@@ -174,7 +174,7 @@ The baseline scenario will project GBD 2019 demographic and disease trends and G
 
 - :ref:`Insecticide treated nets baseline parameters <itn-baseline-parameters>`
 
-- Preventive and therapeutic zinc baseline parameters
+- :ref:`Preventive and therapeutic zinc baseline parameters <zinc-baseline-parameters>`
 
 .. note::
 
@@ -379,7 +379,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 
 * :ref:`Insecticide treated nets <insecticide_treated_nets>`
 
-* Preventive and therapeutic zinc
+* :ref:`Preventive and therapeutic zinc <zinc_supplementation>`
 
 .. note::
 
