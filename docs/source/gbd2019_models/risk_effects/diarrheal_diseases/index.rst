@@ -271,15 +271,15 @@ The age- and sex-specific values for RR_{i3, i2, i1} calculated as described abo
 
 .. math::
 
-   PAF_\text{i{x}} = \frac{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases} + (1 - \text{prevalence_diarrheal_diseases}) - 1}{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases} + (1 - \text{prevalence_diarrheal_diseases})}
+   \text{prevalence_diarrheal_diseases{x}} = \frac{\text{p_D{x}}}{\text{p_D{x}}+\text{p_S{x}}}
+
+.. math::
+
+   PAF_\text{i{x}} = \frac{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x}} + (1 - \text{prevalence_diarrheal_diseases{x}}) - 1}{\text{RR_i{x}} * \text{prevalence_diarrheal_diseases{x}} + (1 - \text{prevalence_diarrheal_diseases{x}})}
 
 .. math::
 
    \text{i{x}}_i = \text{i{x}} * (1 - PAF) * \text{RR_i{x}}_i
-
-.. note::
-
-   We assume that the prevalence of diarrheal diseases does not vary by wasting state for the calculation of this custom PAF. The application of the risk effect of child wasting to the diarrheal diseases excess mortality rate rather than incidence rate avoids bias in this assumption. However, this assumption ignores the impact of diarrheal diseases on wasting transition rates. Therefore, we will slightly overestimate the PAF of i3 and underestimate the PAF of i2 and i1. This will result in slight overestimation of the i3 incidence rates and underestimation of i2 and i1 incidence rates. However, the magnitude of this bias is expected to be small given the small magnitude of effect of diarrheal diseases on child wasting.
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
