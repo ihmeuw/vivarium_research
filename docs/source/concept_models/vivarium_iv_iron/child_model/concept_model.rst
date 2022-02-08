@@ -288,9 +288,9 @@ For model version II:
 4.5 Simulation output table
 ---------------------------
 
-.. todo::
-
-  Create simulation output table for model II child sim
+.. csv-table:: Child simulation output table
+   :file: output_table.csv
+   :header-rows: 1
 
 5.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
