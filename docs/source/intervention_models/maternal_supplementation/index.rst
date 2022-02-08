@@ -467,14 +467,14 @@ The modeling strategy for the causal impact of maternal supplementation during p
   
   Reasons that studies of maternal supplementation interventions have not shown evidence of an impact on child growth failure exposure include smaller sample sizes that required to measure small effects and lack of sufficient follow-up periods in maternal supplementation trials with primary outcomes of interest involving birth outcomes. Therefore, we will model the impact of maternal supplementation interventions mediated through birthweight for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` despite lack of evidence of this association in the literature.
 
-For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the impact of maternal supplementation interventions on CGF exposures can be implemented for simulants born into the simulation only given the six month burn-in period.
-
 Child wasting
 ~~~~~~~~~~~~~
 
 This modeling strategy is intended to work in tandem with the :ref:`dynamic transition model of child wasting <2020_risk_exposure_wasting_state_exposure>`. The effect of birthweight improvements due to maternal supplementation on child wasting exposure will be applied to the wasting state that the simulant is initialized into. We will conservatively assume that birthweight improvements due to maternal supplementation does not have an impact on x-factor exposure status and/or wasting exposure transition rates.
 
 For each gram increase in a simulant's birthweight due to a maternal supplementation intervention (:math:`S`), the category 1 (severe wasting/SAM) and category 2 (moderate wasting/MAM) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting exposure prevalence is equal to 0.0115 / 200 = 0.0000575. The exposure prevalence of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.0000575. The figure below demonstrates how to implement this change visually. 
+
+For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the impact of maternal supplementation interventions on CGF exposures can be implemented for simulants born into the simulation only given the six month burn-in period.
 
 .. note::
 
@@ -513,12 +513,54 @@ Verification and validation criteria
 Child stunting
 ~~~~~~~~~~~~~~
 
+For each gram increase in a simulant's birthweight due to a maternal supplementation intervention (including the lack of baseline IFA coverage), the category 1 (severe stunting) and category 2 (moderate stunting) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe stunting exposure prevalence is equal to :math:`Y` (defined in the table below). The exposure prevalence of category 3 (mild stunting) should be increased by :math:`Y`. The figure below demonstrates how to implement this change visually. This change in the stunting expousure distribution thresholds attributable to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's stunting initialization propensity correlated with their birthweight percentile, as described above.
+
+.. list-table:: Child Anthropometry Metrics
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+     - Source
+   * - :math:`Y`
+     - 0.0001 (SD: 0.00003)
+     - Assume a normal distribution of uncertainty.
+     - [McGovern-et-al-2019-maternal-supplementation]_; 200g increase in birthweight associated with a 2.0 (SD: 0.6) percentage decrease in stunting exposure, scaled to a a single gram increase in birthweight. 2.0 was selected instead of 2.3 in order to be conservative.
+
+
+.. note::
+
+  Similar to child wasting, for baseline calibration of IFA coverage and wasting initialization state:
+
+    The :math:`S` shift applied to the stunting risk exposure probabilities according to baseline IFA coverage should be the following:
+
+      uncovered = -(IFA_bw_shift * baseline_IFA_coverage)
+
+      uncovered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
+
+  Then, the :math:`S` shift in the intervention scenario should be equal to the sum of all maternal supplementation intervention impacts on birthweight.
+
+.. image:: stunting_exposure_dist.svg
+
 Assumptions and limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The application of the size from [McGovern-et-al-2019-maternal-supplementation]_ makes the following assumptions:
+
+- The effect size is entirely causal and not subject to confounding
+
+- The effect of BW on stunting applies proportionately to moderate and severe stunting
+
+- We apply the average effect of birthweight on stunting exposure for all ages under 5 years and do not consider effect modification by age, although [McGovern-et-al-2019-maternal-supplementation]_ suggests that the effect is likely larger among younger ages.
 
 Verification and validation criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+- Verification and validation criteria for the :ref:`child stunting risk exposure <2020_risk_exposure_child_stunting>` component should continue to be met in the baseline scenario
+
+- The effect of the maternal supplementation intervention on birthweight (described in the above section) should continue to meet its validation and verification crtiera
+
+- Stunting exposure state in all age groups stratified by maternal supplementation regimen should match the expected effect sizes
 
 References
 ------------
