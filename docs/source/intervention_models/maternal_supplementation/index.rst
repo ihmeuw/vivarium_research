@@ -472,6 +472,10 @@ Child wasting
 
 This modeling strategy is intended to work in tandem with the :ref:`dynamic transition model of child wasting <2020_risk_exposure_wasting_state_exposure>`. The effect of birthweight improvements due to maternal supplementation on child wasting exposure will be applied to the wasting state that the simulant is initialized into. We will conservatively assume that birthweight improvements due to maternal supplementation does not have an impact on x-factor exposure status and/or wasting exposure transition rates.
 
+.. note::
+
+  We may eventually revisit the modeling strategy to follow less conservative assumptions
+
 For each gram increase in a simulant's birthweight due to a maternal supplementation intervention (:math:`S`), the category 1 (severe wasting/SAM) and category 2 (moderate wasting/MAM) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting exposure prevalence is equal to 0.0115 / 200 = 0.0000575. The exposure prevalence of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.0000575. The figure below demonstrates how to implement this change visually. 
 
 For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the impact of maternal supplementation interventions on CGF exposures can be implemented for simulants born into the simulation only given the six month burn-in period.
