@@ -6,7 +6,7 @@ Maternal Prenatal Supplementation: Iron-Folic Acid/Targeted Balanced Energy Prot
 
 .. contents::
    :local:
-   :depth: 1
+   :depth: 2
 
 .. list-table:: Abbreviations
   :widths: 15 15 15
@@ -456,11 +456,124 @@ In the baseline scenario, the exposure distribution of birthweight (mean birthwe
 
 If birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
 
+Child Growth Failure (CGF)
++++++++++++++++++++++++++++
+
+While there is little to no evidence that maternal supplementation interventions during pregnancy have a direct effect on CGF exposure, there is evidence that birthweight is causally related to CGF, as discussed on the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>`. Therefore maternal supplementation interventions during pregnancy may influence CGF exposures through the pathway 100% mediated through birthweight. Notably, it is possible that BEP supplementation *during lactation* (rather than pregnancy) is directly causally related to CGF exposure, although there is little available evidence on this association (although there are expected measures of association in currently unpublished BMGF trials), but we will not consider this pathway in our simulation until more evidence is available.
+
+The modeling strategy for the causal impact of maternal supplementation during pregnancy on child growth failure will be informed entirely through the impact on infant birthweight (described above) and the evidence of the impact of birthweight on child growth failure, as informed from [McGovern-et-al-2019-maternal-supplementation]_ (see the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>` for more details on the literature evidence and research background).
+
+.. note::
+  
+  Reasons that studies of maternal supplementation interventions have not shown evidence of an impact on child growth failure exposure include smaller sample sizes that required to measure small effects and lack of sufficient follow-up periods in maternal supplementation trials with primary outcomes of interest involving birth outcomes. Therefore, we will model the impact of maternal supplementation interventions mediated through birthweight for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` despite lack of evidence of this association in the literature.
+
+Child wasting
+~~~~~~~~~~~~~
+
+This modeling strategy is intended to work in tandem with the :ref:`dynamic transition model of child wasting <2020_risk_exposure_wasting_state_exposure>`. The effect of birthweight improvements due to maternal supplementation on child wasting exposure will be applied to the wasting state that the simulant is initialized into. We will conservatively assume that birthweight improvements due to maternal supplementation does not have an impact on x-factor exposure status and/or wasting exposure transition rates.
+
+.. note::
+
+  We may eventually revisit the modeling strategy to follow less conservative assumptions
+
+For each gram increase in a simulant's birthweight due to a maternal supplementation intervention (:math:`S`), the category 1 (severe wasting/SAM) and category 2 (moderate wasting/MAM) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe wasting exposure prevalence is equal to 0.0115 / 200 = 0.0000575. The exposure prevalence of category 3 (mild wasting) should be increased by 0.0115 / 200 = 0.0000575. The figure below demonstrates how to implement this change visually. 
+
+For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the impact of maternal supplementation interventions on CGF exposures can be implemented for simulants born into the simulation only given the six month burn-in period.
+
+.. note::
+
+  For baseline calibration of IFA coverage and wasting initialization state:
+
+    The :math:`S` shift applied to the wasting initialization probabilities according to baseline IFA coverage should be the following:
+
+      uncovered = -(IFA_bw_shift * baseline_IFA_coverage)
+
+      covered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
+
+  Then, the :math:`S` shift in the intervention scenario should be equal to the sum of all maternal supplementation intervention impacts on birthweight.
+
+.. image:: wasting_exposure_dist.svg
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The application of the size from [McGovern-et-al-2019-maternal-supplementation]_ makes the following assumptions:
+
+- The effect size is entirely causal and not subject to confounding
+
+- The effect between BW and wasting measured among children under five is applied to prevalent wasting status at six months of age only and does not affect future wasting exposure trajectories (aside from any associated vicious cycle effects). This is a conservative underestimation of the impact of birthweight on child wasting burden.
+
+- The effect of BW on wasting applies proportionately to moderate and severe wasting
+
+Verification and validation criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Verification and validation criteria for the :ref:`dynamic transition model of child wasting <2020_risk_exposure_wasting_state_exposure>` should continue to be met in the baseline scenario
+
+- The effect of the maternal supplementation intervention on birthweight (described in the above section) should continue to meet its validation and verification crtiera
+
+- Wasting exposure state prevalence in the age groups less than six months of age (which should be reflective of initialization wasting state) stratified by maternal supplementation regimen should match the expected effect sizes
+
+Child stunting
+~~~~~~~~~~~~~~
+
+For each gram increase in a simulant's birthweight due to a maternal supplementation intervention (including the lack of baseline IFA coverage), the category 1 (severe stunting) and category 2 (moderate stunting) exposures used to determine the probability of initialization into those states should be reduced proportionately such that the total reduction in moderate and severe stunting exposure prevalence is equal to :math:`Y` (defined in the table below). The exposure prevalence of category 3 (mild stunting) should be increased by :math:`Y`. The figure below demonstrates how to implement this change visually. This change in the stunting expousure distribution thresholds attributable to a change in birthweight should be implemented **at birth**, after the calculation of the simulant's stunting initialization propensity correlated with their birthweight percentile, as described above.
+
+.. list-table:: Child Anthropometry Metrics
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+     - Source
+   * - :math:`Y`
+     - 0.0001 (SD: 0.00003)
+     - Assume a normal distribution of uncertainty.
+     - [McGovern-et-al-2019-maternal-supplementation]_; 200g increase in birthweight associated with a 2.0 (SD: 0.6) percentage decrease in stunting exposure, scaled to a a single gram increase in birthweight. 2.0 was selected instead of 2.3 in order to be conservative.
+
+
+.. note::
+
+  Similar to child wasting, for baseline calibration of IFA coverage and wasting initialization state:
+
+    The :math:`S` shift applied to the stunting risk exposure probabilities according to baseline IFA coverage should be the following:
+
+      uncovered = -(IFA_bw_shift * baseline_IFA_coverage)
+
+      covered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
+
+  Then, the :math:`S` shift in the intervention scenario should be equal to the sum of all maternal supplementation intervention impacts on birthweight.
+
+.. image:: stunting_exposure_dist.svg
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The application of the size from [McGovern-et-al-2019-maternal-supplementation]_ makes the following assumptions:
+
+- The effect size is entirely causal and not subject to confounding
+
+- The effect of BW on stunting applies proportionately to moderate and severe stunting
+
+- We apply the average effect of birthweight on stunting exposure for all ages under 5 years and do not consider effect modification by age, although [McGovern-et-al-2019-maternal-supplementation]_ suggests that the effect is likely larger among younger ages.
+
+Verification and validation criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Verification and validation criteria for the :ref:`child stunting risk exposure <2020_risk_exposure_child_stunting>` component should continue to be met in the baseline scenario
+
+- The effect of the maternal supplementation intervention on birthweight (described in the above section) should continue to meet its validation and verification crtiera
+
+- Stunting exposure state in all age groups stratified by maternal supplementation regimen should match the expected effect sizes
+
 References
 ------------
 
 .. [Keats-et-al-2019-maternal-supplementation]
   Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
+
+.. [McGovern-et-al-2019-maternal-supplementation]
+  McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
 
 .. [Oh-et-al-2020]
   Oh, C., Keats, E. C., & Bhutta, Z. A. (2020). Vitamin and Mineral Supplementation During Pregnancy on Maternal, Birth, Child Health and Development Outcomes in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 491. https://doi.org/10.3390/nu12020491
