@@ -384,20 +384,27 @@ For model version I:
 4.5 Simulation output table
 ---------------------------
 
-.. csv-table:: Simulation output table
+.. csv-table:: Maternal simulation output table
    :file: output_table.csv
    :header-rows: 1
 
 **Outputs needed to inform the children under five simulation:**
 
-The following ouputs should be 
+The following ouputs should be a table including the following data for each live birth that occurs in the maternal simulation:
 
-#. Number of live births (sex-specific)
-#. LBWSG exposure (continuous values for birthweight and gestational age)
+  - Date of birth
+  - Infant sex
+  - Birthweight exposure
+  - Gestational age exposure
 
-  For later model versions:
+.. note::
+  
+  Additional information to include in this table for later model versions may include:
 
-  * Time-specific maternal vital status and postpartum depression disease state
+  - Date of maternal death (if it occurs)
+  - Maternal post-partum depression (yes/no)
+  - Suboptimal breastfeeding exposure (may be included in child sim rather than maternal sim)
+  - Maternal intervention coverage (for stratification of child simulation outputs, if desired)
 
 .. _ivironWRA5.0:
 
