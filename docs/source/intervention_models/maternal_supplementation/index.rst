@@ -459,7 +459,7 @@ If birthweight exposures are stratified by supplementation regimen and maternal 
 Child Growth Failure (CGF)
 +++++++++++++++++++++++++++
 
-While there is little to no evidence that maternal supplementation interventions during pregnancy have a direct effect on CGF exposure, there is evidence that birthweight is causally related to CGF, as discussed on the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>`. Therefore maternal supplementation interventions during pregnancy may influence CGF exposures through the a pathway 100% mediated through birthweight. Notably, it is possible that BEP supplementation *during lactation* (rather than pregnancy) is directly causally related to CGF exposure, although there is little available evidence on this association (although there are expected measures of association in currently unpublished BMGF trials), but we will not consider this pathway in our simulation until more evidence is available.
+While there is little to no evidence that maternal supplementation interventions during pregnancy have a direct effect on CGF exposure, there is evidence that birthweight is causally related to CGF, as discussed on the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>`. Therefore maternal supplementation interventions during pregnancy may influence CGF exposures through the pathway 100% mediated through birthweight. Notably, it is possible that BEP supplementation *during lactation* (rather than pregnancy) is directly causally related to CGF exposure, although there is little available evidence on this association (although there are expected measures of association in currently unpublished BMGF trials), but we will not consider this pathway in our simulation until more evidence is available.
 
 The modeling strategy for the causal impact of maternal supplementation during pregnancy on child growth failure will be informed entirely through the impact on infant birthweight (described above) and the evidence of the impact of birthweight on child growth failure, as informed from [McGovern-et-al-2019-maternal-supplementation]_ (see the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>` for more details on the literature evidence and research background).
 
@@ -484,7 +484,7 @@ For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sa
 
       uncovered = -(IFA_bw_shift * baseline_IFA_coverage)
 
-      uncovered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
+      covered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
 
   Then, the :math:`S` shift in the intervention scenario should be equal to the sum of all maternal supplementation intervention impacts on birthweight.
 
@@ -536,7 +536,7 @@ For each gram increase in a simulant's birthweight due to a maternal supplementa
 
       uncovered = -(IFA_bw_shift * baseline_IFA_coverage)
 
-      uncovered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
+      covered = -(IFA_bw_shift * baseline_IFA_coverage) + IFA_bw_shift
 
   Then, the :math:`S` shift in the intervention scenario should be equal to the sum of all maternal supplementation intervention impacts on birthweight.
 
