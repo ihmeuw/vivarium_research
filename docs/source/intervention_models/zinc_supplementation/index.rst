@@ -182,7 +182,7 @@ Where,
     - 
   * - MD_hours 
     - Mean difference in diarrhea duration for therapeutic zinc in hours
-    - -11.46 (95% CI: -19.72, -3.19; lognormal distribution of uncertainty)
+    - -11.46 (95% CI: -19.72, -3.19; normal distribution of uncertainty)
     - From [Lazzerini-and-Wanzira-2016]_
   * - MD
     - Mean difference in diarrhea duration for therapeutic zinc in years
