@@ -260,7 +260,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Note
    * - Population size
      - TBD
-     - NOTE: for initialization, we will need to match the relative population sizes of WRA to children U5 (or run a six year burn-in period)
+     - NOTE: for initialization, we will need to match the relative population sizes of WRA to children U5
    * - Number of draws
      - Informed from WRA simulation outputs
      - 
@@ -269,7 +269,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - 
    * - Cohort type
      - Open
-     - 
+     - Births into cohort are informed by births from maternal simulation output
    * - Age start
      - 0
      - 
@@ -282,6 +282,10 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Sex restrictions
      - None
      - 
+
+.. todo::
+
+  Determine appropriate population size for initialization so that relative population size between WRA and children U5 is consistent with GBD population structure
 
 .. _ivironU54.3:
 

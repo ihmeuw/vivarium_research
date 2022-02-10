@@ -122,10 +122,6 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Postpartum
     - 
 
-.. note::
-
-   We will use the simplifying assumption of 40 weeks gestation and six weeks postpartum for pregnancy state *intialization* in our cause model only. We could improve this assumption by using location-specific mean gestational age rather than 40 weeks as the assumed duration of pregnancy.
-
 .. list-table:: State prevalence table
   :widths: 15 15 15
   :header-rows: 1
@@ -137,8 +133,8 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 1 - prevalence_p - prevalence_pp
     - If using a burn-in strategy, initialize all simulants to np state
   * - p
-    - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 40 / 52`
-    - Consider updating to reflect average gestational age for location of interest rather than 40 weeks
+    - :math:`(ASFR + ASFR * SBR) * 40 / 52 + (incidence_\text{c995} + incidence_\text{c374}) * 24 /52`
+    - Consider updating to reflect average gestational age for location of interest rather than 40 weeks (Ali will need to perform weighting calculation from LBWSG exposure distributions)
   * - pp
     - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 6 / 52`
     -  
@@ -218,22 +214,23 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
 .. note::
 
-   The ASFR covariate has estimates for all GBD age and sex groups that are equal to zero for the "restricted" sex and ages.
+   At initialization:
 
-   We may restrict to ages 15 to 49 pending input from the BMGF.
+    1. Assign pregnancy state according to state prevalence values
+    2. Assign pregnancy outcome according to pregnancy outcome table probabilities
+    3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
+    4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
+    5. Determine the amount of time remaining in pregnancy from the duration of pregnancy
+    6. Begin simulation
 
-.. note::
+  During simulation:
 
-  The strategy of initializing simulants into a given pregnancy model state according to the state-specific prevalence values and then determining a pregnancy outcome as described below is limited in that it ignores the differing duration of pregnancy according to pregnancy outcome, which will result in different incidence:prevalence ratios by pregnancy outcome and will result in oversampling prevalent abortion/miscarriage/ectopic pregnancy outcomes at initialization. 
-
-  An alternative strategy is to model a burn-in period in which all simulants are initialized into the np state and become pregnant according to the pregnancy incidence rate. Note that this will slightly overestimate the number of incident pregnancies at the start of the burn-in period given the overestimated prevalence of the np state at initialization. 1-2 years should be an adequate burn-in period for this approach (2 years if maternal disorders are also included in the model since maternal disorders YLDs will be accumulated up to one year following birth).
-
-  For the :ref:`IV iron maternal simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>`, use the burn-in approach with a burn-in period of two years (this strategy should be used throughout model development and may be shorted to one year for final model results).
+    Determine pregnancy model state according to state at initialization and state transition rates. Upon transition from the np to p state, follow steps 2-4 described above.
 
 Pregnancy outcome
 ~~~~~~~~~~~~~~~~~~
 
-A pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) abortion/miscarriage. The probability of each pregnancy outcome is defined in the table below. The outcome of each pregnancy should be determined at the start of pregnancy in our simulation (upon transition from the np to p states). 
+A pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) abortion/miscarriage. The probability of each pregnancy outcome is defined in the table below. The outcome of each pregnancy should be determined at the start of pregnancy in our simulation (upon transition from the np to p states or upon initialization into the p state). 
 
 .. list-table:: Pregnancy outcomes
   :header-rows: 1
@@ -254,7 +251,7 @@ A pregnancy outcome must be determined for each pregnancy as either a 1) live bi
 Sex of infant
 ~~~~~~~~~~~~~~~
 
-For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_.
+For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). This should be performed at the start of pregnancy (transition from np to p states) or upon initialization into the p state. These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_. 
 
 .. _sex_ratio_table:
 
@@ -286,7 +283,7 @@ For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a 
 
 For pregnancies that result in live births or stillbirths, duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
 
-For simulants who are initialized into the pregnancy state at the start of the simulation (NOTE: this is not necessary if using a burn-in strategy instead):
+For simulants who are initialized into the pregnancy state at the start of the simulation:
 
    Assign the simulant a duration of pregnancy/gestational age value and then sample a random value from a uniform distribution between zero and the assigned gestational age value. The randomly sampled value will represent the current gestational duration of that pregnancy. The simulant should remain in the pregnancy state prior to transitioning to the postpartum state for the duration equal to the assigned gestational age value *minus* the randomly sampled value.
 

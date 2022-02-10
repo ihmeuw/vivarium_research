@@ -104,7 +104,7 @@ Vivarium Intravenous Iron - Women of reproductive age
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - January 1, 2020 (two years to accomodate ~1 year of pregnancy duration and 1 year post-birth disability)
+    - N/A (no burn-in). NOTE: may need to perform burn-in period to properly assign maternal disorders YLDs.
   * - Date of simulation observation period start
     - January 1, 2022
   * - Date of intervention scale-up start
@@ -112,9 +112,13 @@ Vivarium Intravenous Iron - Women of reproductive age
   * - Date of simulation end
     - December 31, 2024
   * - Simulation time step
-    - 1 week
+    - 2 weeks
   * - Intervention scale-up rate
     - Immediate jump to target coverage level
+
+.. todo::
+
+  Detail strategy for initializing maternal disorders YLDs (perhaps burn-in period?)
 
 **For final model results:**
 
@@ -124,7 +128,7 @@ Vivarium Intravenous Iron - Women of reproductive age
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - January 1, 2023 (two years to accomodate ~1 year of pregnancy duration and 1 year post-birth disability)
+    - N/A (no burn-in). NOTE: may need to perform burn-in period to properly assign maternal disorders YLDs.
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start
@@ -132,7 +136,7 @@ Vivarium Intravenous Iron - Women of reproductive age
   * - Date of simulation end
     - December 31, 2040
   * - Simulation time step
-    - 1 week
+    - 2 weeks
   * - Intervention scale-up rate
     - See table below
 
@@ -369,7 +373,9 @@ Where,
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. list-table:: Simulation population parameters
+**Throughout model development and verification/validation:**
+
+.. list-table:: Maternal simulation model development population parameters
    :header-rows: 1
 
    * - Parameter
@@ -409,6 +415,39 @@ Where,
 .. note::
 
   The overall fertility rate among women of reproductive age is 0.055 for South Asia and 0.105 for Sub-Saharan Africa (not including stillbirths). Therefore, approximately these fractions of the total population multiplied by the number of simulation years of WRA will enter the population of interest of PLW in our simulation. 
+
+**For final model results:**
+
+.. list-table:: Maternal simulation final model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 100,000
+     - per draw (10,000 per random seed/draw combination)
+   * - Number of draws
+     - 66
+     - 
+   * - Number of random seeds
+     - 10
+     - per draw
+   * - Cohort type
+     - **Open**
+     - 
+   * - Age start
+     - 10
+     - Minimum age at initialization
+   * - Age end
+     - 57
+     - Maximum age at initialization
+   * - Exit age
+     - 57
+     - 
+   * - Sex restrictions
+     - Female only
+     - 
 
 .. _ivironWRA4.3:
 
