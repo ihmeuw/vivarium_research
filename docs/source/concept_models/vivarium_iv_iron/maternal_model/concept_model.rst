@@ -96,19 +96,83 @@ Vivarium Intravenous Iron - Women of reproductive age
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
 
-We will model an *immediate* scale-up of intervention coverage from the baseline level to the target level rather than a gradual scale-up over time.
+**Throughout model development and verification/validation:**
 
-* Date of simulation start: January 1, 2022
+.. list-table:: Developmental model maternal simulation timeframe and intervention dates
+  :header-rows: 1
 
-* Date of intervention scale-up: Janary 1, 2023
+  * - Parameter
+    - Value
+  * - Date of simulation burn-in period start
+    - N/A (no burn-in). NOTE: may need to perform burn-in period to properly assign maternal disorders YLDs.
+  * - Date of simulation observation period start
+    - January 1, 2022
+  * - Date of intervention scale-up start
+    - Janary 1, 2023
+  * - Date of simulation end
+    - December 31, 2024
+  * - Simulation time step
+    - 2 weeks
+  * - Intervention scale-up rate
+    - Immediate jump to target coverage level
 
-* Date of simulation end: December 31, 2024
+.. todo::
 
-* Simulation time step: 1 week
+  Detail strategy for initializing maternal disorders YLDs (perhaps burn-in period?)
+
+**For final model results:**
+
+.. list-table:: Final model maternal simulation timeframe and intervention dates
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+  * - Date of simulation burn-in period start
+    - N/A (no burn-in). NOTE: may need to perform burn-in period to properly assign maternal disorders YLDs.
+  * - Date of simulation observation period start
+    - January 1, 2025
+  * - Date of intervention scale-up start
+    - Janary 1, 2025
+  * - Date of simulation end
+    - December 31, 2040
+  * - Simulation time step
+    - 2 weeks
+  * - Intervention scale-up rate
+    - See table below
+
+.. list-table:: Intervention scale-up for final model results
+  :header-rows: 1
+
+  * - Year
+    - Percent of target coverage reached on January 1
+  * - 2025
+    - 0%
+  * - 2026
+    - 2%
+  * - 2027
+    - 5%
+  * - 2028
+    - 10%
+  * - 2029
+    - 20%
+  * - 2030
+    - 36%
+  * - 2031
+    - 55%
+  * - 2032
+    - 73%
+  * - 2033
+    - 86%
+  * - 2034
+    - 93%
+  * - 2035
+    - 97%
+  * - 2036+
+    - 100%
 
 .. note::
-
-  The BMGF is interested in modeling a scale-up of intervention coverage over time. However, we will plan to model an immediate intervention scale-up throughout model development and validation and implement the scale-up at the end of model development prior to results finalization.
+  
+  This scale-up curve comes from BMGF's internal product analytics group that develop these curves based on market dynamics and product characteristics compared to other like products on the market.
 
 .. _ivironWRA4.0:
 
@@ -309,7 +373,9 @@ Where,
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. list-table:: Simulation population parameters
+**Throughout model development and verification/validation:**
+
+.. list-table:: Maternal simulation model development population parameters
    :header-rows: 1
 
    * - Parameter
@@ -349,6 +415,39 @@ Where,
 .. note::
 
   The overall fertility rate among women of reproductive age is 0.055 for South Asia and 0.105 for Sub-Saharan Africa (not including stillbirths). Therefore, approximately these fractions of the total population multiplied by the number of simulation years of WRA will enter the population of interest of PLW in our simulation. 
+
+**For final model results:**
+
+.. list-table:: Maternal simulation final model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 100,000
+     - per draw (10,000 per random seed/draw combination)
+   * - Number of draws
+     - 66
+     - 
+   * - Number of random seeds
+     - 10
+     - per draw
+   * - Cohort type
+     - **Open**
+     - 
+   * - Age start
+     - 10
+     - Minimum age at initialization
+   * - Age end
+     - 57
+     - Maximum age at initialization
+   * - Exit age
+     - 57
+     - 
+   * - Sex restrictions
+     - Female only
+     - 
 
 .. _ivironWRA4.3:
 

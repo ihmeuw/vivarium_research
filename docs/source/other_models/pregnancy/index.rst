@@ -122,23 +122,19 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Postpartum
     - 
 
-.. note::
-
-   We will use the simplifying assumption of 40 weeks gestation and six weeks postpartum for pregnancy state *intialization* in our cause model only. We could improve this assumption by using location-specific mean gestational age rather than 40 weeks as the assumed duration of pregnancy.
-
 .. list-table:: State prevalence table
   :widths: 15 15 15
   :header-rows: 1
 
-  * - Exposure category
+  * - State
     - Value
     - Note
   * - np
     - 1 - prevalence_p - prevalence_pp
-    - 
+    - If using a burn-in strategy, initialize all simulants to np state
   * - p
-    - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 40 / 52`
-    - Consider updating to reflect average gestational age for location of interest rather than 40 weeks
+    - :math:`(ASFR + ASFR * SBR) * 40 / 52 + (incidence_\text{c995} + incidence_\text{c374}) * 24 /52`
+    - Consider updating to reflect average gestational age for location of interest rather than 40 weeks (Ali will need to perform weighting calculation from LBWSG exposure distributions)
   * - pp
     - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 6 / 52`
     -  
@@ -218,14 +214,27 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
 .. note::
 
-   The ASFR covariate has estimates for all GBD age and sex groups that are equal to zero for the "restricted" sex and ages.
+  **Pregnancy modeling steps:**
 
-   We may restrict to ages 15 to 49 pending input from the BMGF.
+  *At initialization:*
+
+  1. Assign pregnancy state according to state prevalence values
+  2. Assign pregnancy outcome according to pregnancy outcome table probabilities
+  3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
+  4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
+  5. Determine the amount of time remaining in pregnancy from the duration of pregnancy
+  6. Begin simulation
+
+  *During simulation:*
+
+    Determine pregnancy model state according to state at initialization and state transition rates. Upon transition from the np to p state, follow steps 2-4 described above.
+
+  (Specific instructions for each of these steps described in the following sections.)
 
 Pregnancy outcome
 ~~~~~~~~~~~~~~~~~~
 
-A pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) abortion/miscarriage. The probability of each pregnancy outcome is defined in the table below. The outcome of each pregnancy should be determined at the start of pregnancy in our simulation (upon transition from the np to p states). 
+A pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) abortion/miscarriage. The probability of each pregnancy outcome is defined in the table below. The outcome of each pregnancy should be determined at the start of pregnancy in our simulation (upon transition from the np to p states or upon initialization into the p state). 
 
 .. list-table:: Pregnancy outcomes
   :header-rows: 1
@@ -246,7 +255,7 @@ A pregnancy outcome must be determined for each pregnancy as either a 1) live bi
 Sex of infant
 ~~~~~~~~~~~~~~~
 
-For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_.
+For pregnancies that result in live birth or stillbirth outcomes, infant sex should be determined and recorded acording to the probability of male sex shown in the table below (probability of female birth is equal to 1 minus the probability of male birth). This should be performed at the start of pregnancy (transition from np to p states) or upon initialization into the p state. These sex ratios were calculated using the live births by sex 2020 GBD covariate (ID 1106), `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/sex_ratio_calculation.ipynb>`_. 
 
 .. _sex_ratio_table:
 
