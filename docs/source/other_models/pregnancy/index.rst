@@ -126,7 +126,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   :widths: 15 15 15
   :header-rows: 1
 
-  * - Exposure category
+  * - State
     - Value
     - Note
   * - np
@@ -214,18 +214,22 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
 .. note::
 
-   At initialization:
+  **Pregnancy modeling steps:**
 
-    1. Assign pregnancy state according to state prevalence values
-    2. Assign pregnancy outcome according to pregnancy outcome table probabilities
-    3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
-    4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
-    5. Determine the amount of time remaining in pregnancy from the duration of pregnancy
-    6. Begin simulation
+  *At initialization:*
 
-  During simulation:
+  1. Assign pregnancy state according to state prevalence values
+  2. Assign pregnancy outcome according to pregnancy outcome table probabilities
+  3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
+  4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
+  5. Determine the amount of time remaining in pregnancy from the duration of pregnancy
+  6. Begin simulation
+
+  *During simulation:*
 
     Determine pregnancy model state according to state at initialization and state transition rates. Upon transition from the np to p state, follow steps 2-4 described above.
+
+  (Specific instructions for each of these steps described in the following sections.)
 
 Pregnancy outcome
 ~~~~~~~~~~~~~~~~~~
