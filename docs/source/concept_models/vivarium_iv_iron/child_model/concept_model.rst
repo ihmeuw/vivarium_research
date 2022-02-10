@@ -94,17 +94,45 @@ Vivarium Intravenous Iron - Children under five
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
 
-* Date of simulation start: January 1, 2022
+**Throughout model development and verification/validation:**
 
-* Date of intervention scale-up: N/A (simulation coverage modeled in WRA simulation)
+.. list-table:: Developmental model child simulation timeframe and intervention dates
+  :header-rows: 1
 
-* Date of simulation end: December 31, 2024
+  * - Parameter
+    - Value
+  * - Date of simulation burn-in period start
+    - N/A: no burn-in period
+  * - Date of simulation observation period start
+    - January 1, 2022 (only model births that occur on or after this date)
+  * - Date of intervention scale-up start
+    - N/A: defined for maternal simulation
+  * - Date of simulation end
+    - December 31, 2026 (run beyond end of maternal simulation so we can see impact of older children covered by intervention)
+  * - Simulation time step
+    - 0.5 days
+  * - Intervention scale-up rate
+    - N/A: defined for maternal simulation
 
-* Simulation time step: 0.5 days
+**For final model results:**
 
-.. note::
+.. list-table:: Final model child simulation timeframe and intervention dates
+  :header-rows: 1
 
-  We will likely increase the duration of simulation run time for final results of this model, but a shorter timeframe should be used throughout model development and validation.
+  * - Parameter
+    - Value
+  * - Date of simulation burn-in period start
+    - January 1, 2019 (so that we have children aged 5 years by the time of intervention start date)
+  * - Date of simulation observation period start
+    - N/A: defined for maternal simulation
+  * - Date of intervention scale-up start
+    -  N/A: defined for maternal simulation
+  * - Date of simulation end
+    - December 31, 2040
+  * - Simulation time step
+    - 0.5 days
+  * - Intervention scale-up rate
+    - N/A: defined for maternal simulation
 
 .. _ivironU54.0:
 
