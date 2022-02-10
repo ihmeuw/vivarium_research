@@ -222,6 +222,14 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
    We may restrict to ages 15 to 49 pending input from the BMGF.
 
+.. note::
+
+  The strategy of initializing simulants into a given pregnancy model state according to the state-specific prevalence values and then determining a pregnancy outcome as described below is limited in that it ignores the differing duration of pregnancy according to pregnancy outcome, which will result in different incidence:prevalence ratios by pregnancy outcome and will result in oversampling prevalent abortion/miscarriage/ectopic pregnancy outcomes at initialization. 
+
+  An alternative strategy is to model a burn-in period in which all simulants are initialized into the np state and become pregnant according to the pregnancy incidence rate. Note that this will slightly overestimate the number of incident pregnancies at the start of the burn-in period given the overestimated prevalence of the np state at initialization. 1-2 years should be an adequate burn-in period for this approach (2 years if maternal disorders are also included in the model since maternal disorders YLDs will be accumulated up to one year following birth).
+
+  For the :ref:`IV iron maternal simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>`, use the burn-in approach with a burn-in period of two years (this strategy should be used throughout model development and may be shorted to one year for final model results).
+
 Pregnancy outcome
 ~~~~~~~~~~~~~~~~~~
 
