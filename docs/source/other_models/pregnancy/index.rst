@@ -135,7 +135,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Note
   * - np
     - 1 - prevalence_p - prevalence_pp
-    - 
+    - If using a burn-in strategy, initialize all simulants to np state
   * - p
     - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 40 / 52`
     - Consider updating to reflect average gestational age for location of interest rather than 40 weeks
@@ -278,7 +278,7 @@ For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a 
 
 For pregnancies that result in live births or stillbirths, duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
 
-For simulants who are initialized into the pregnancy state at the start of the simulation:
+For simulants who are initialized into the pregnancy state at the start of the simulation (NOTE: this is not necessary if using a burn-in strategy instead):
 
    Assign the simulant a duration of pregnancy/gestational age value and then sample a random value from a uniform distribution between zero and the assigned gestational age value. The randomly sampled value will represent the current gestational duration of that pregnancy. The simulant should remain in the pregnancy state prior to transitioning to the postpartum state for the duration equal to the assigned gestational age value *minus* the randomly sampled value.
 
