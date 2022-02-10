@@ -124,7 +124,7 @@ Vivarium Intravenous Iron - Women of reproductive age
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - January 1, 2019 (so that we have children aged 5 years by the time of intervention start date)
+    - January 1, 2023 (two years to accomodate ~1 year of pregnancy duration and 1 year post-birth disability)
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start

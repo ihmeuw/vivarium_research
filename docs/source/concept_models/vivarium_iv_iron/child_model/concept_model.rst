@@ -122,9 +122,9 @@ Vivarium Intravenous Iron - Children under five
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - January 1, 2019 (so that we have children aged 5 years by the time of intervention start date)
-  * - Date of simulation observation period start
     - N/A: defined for maternal simulation
+  * - Date of simulation observation period start
+    - January 1, 2025
   * - Date of intervention scale-up start
     -  N/A: defined for maternal simulation
   * - Date of simulation end
@@ -259,8 +259,8 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Value
      - Note
    * - Population size
-     - Informed from WRA simulation outputs
-     - 
+     - TBD
+     - NOTE: for initialization, we will need to match the relative population sizes of WRA to children U5 (or run a six year burn-in period)
    * - Number of draws
      - Informed from WRA simulation outputs
      - 
