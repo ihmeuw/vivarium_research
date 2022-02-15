@@ -240,10 +240,10 @@ The following code block provides equations to solve for the relative risks attr
    di_2 = (incidence_diarrheal_diseases * p_S2/(1-prevalence_diarrheal_diseases))
    di_3 = (incidence_diarrheal_diseases * p_S3/(1-prevalence_diarrheal_diseases))
    di_4 = (incidence_diarrheal_diseases * p_S4/(1-prevalence_diarrheal_diseases))
-   dr_1 = remission_diarrheal_diseases  * p_D1 # note these are not divided by prevalence_diarrheal_diseases because remission_diarrheal_diseases{total_pop} = remission_diarrheal_diseases * prevalence_diarrheal_diseases
-   dr_2 = remission_diarrheal_diseases  * p_D2 
-   dr_3 = remission_diarrheal_diseases  * p_D3
-   dr_4 = remission_diarrheal_diseases  * p_D4
+   dr_1 = remission_diarrheal_diseases  * p_D1/prevalence_diarrheal_diseases 
+   dr_2 = remission_diarrheal_diseases  * p_D2/prevalence_diarrheal_diseases
+   dr_3 = remission_diarrheal_diseases  * p_D3/prevalence_diarrheal_diseases
+   dr_4 = remission_diarrheal_diseases  * p_D4/prevalence_diarrheal_diseases
    b_D1 = ACMR * p_D1
    b_D2 = ACMR * p_D2
    b_D3 = ACMR * p_D3
