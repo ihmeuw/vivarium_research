@@ -482,7 +482,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - [1] `Cause model parameters look as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_cause_verification.pdf>`_, with the exception of [a] still underestimating of LRI burden in the neonatal age groups, and [b] slight underestimation of diarrheal disease mortality for all age groups (new problem). [2] `Wasting exposures look as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_exposure.pdf>`_. [3] `Wasting risk effects appear to have been updated as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/model_5.3.2_risk_effects_verification.ipynb>`_. [4] `still seeing issues with the ITN intervention as identified above <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.2_lbwsg_interventions.ipynb>`_.
    * - 5.3.3 sensitivity analysis for SAM k value, updates to diarrheal diseases cause model
      - Sensitivity analysis run on sam k value from the wasting treatment intervention model such that baseline value = 6.7 (95% CI: 5.3, 8.4) and the alternative value = 3.5 (95% CI: 3.1, 3.9). Also, updates to the diarrheal diseases prevalence and excess mortality rate `in accordance with this pull request <https://github.com/ihmeuw/vivarium_research/pull/759>`_
-     - [1] `Cause model parameters look good <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_cause_verification.pdf>`_ with the exception of some early neonatal age groups, which should have minimal impact on our model [2] `Wasting exposures look as expected for both SAM K scenarios <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_exposure.pdf>`_. Still need to look into the ITN bugs as identified above
+     - [1] `Cause model parameters look good <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_cause_verification.pdf>`_ with the exception of some early neonatal age groups, which should have minimal impact on our model [2] `Wasting exposures look as expected for both SAM K scenarios <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_exposure.pdf>`_. [3] still seeing the issues with the ITN intervention as previously identified. Also, it appears that we are now overestimating the impact of MMS relative to IFA, which is a new problem. `Notebook for the LBWSG intervention validations found here <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.3_lbwsg_interventions.ipynb>`_ 
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -504,12 +504,12 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Implemented and run. Needs interactive sim validation
      - Soon
    * - Insectide treated net intervention coverage immediate rather than linear scale-up
-     - `See coverage plots in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.1_lbwsg_interventions.ipynb>`_
-     - Implemented -- Ali needs to review
+     - `See coverage plots in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.3_lbwsg_interventions.ipynb>`_
+     - TBD
      - Soon
    * - Insectide treated net intervention birthweight shift varies by scenario and is not of expected magnitude
-     - `See effect size estimation in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.1_lbwsg_interventions.ipynb>`_
-     - Implemented -- Ali needs to review
+     - `See effect size estimation in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.3_lbwsg_interventions.ipynb>`_
+     - TBD
      - Soon
 
 .. todo::
