@@ -480,8 +480,9 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 5.3.2 cause model updates and wasting/diarrheal diseases affected entity update
      - Made updates to infectious disease durations, including diarrheal diseases and lower respiratory infections. These updates affected infectious disease remission rates as well as wasting state-specific mortality rates used in the wasting transition model and are detailed in the following PRs: https://github.com/ihmeuw/vivarium_research/pull/756/ and https://github.com/ihmeuw/vivarium_research/pull/752/. Additionally, updated the affected entity for the wasting on diarrheal diseases risk outcome pair from the incidence rate to the excess mortality rate, as discussed on the :ref:`wasting risk effects document <2019_risk_effect_wasting>`.
      - [1] `Cause model parameters look as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_cause_verification.pdf>`_, with the exception of [a] still underestimating of LRI burden in the neonatal age groups, and [b] slight underestimation of diarrheal disease mortality for all age groups (new problem). [2] `Wasting exposures look as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_exposure.pdf>`_. [3] `Wasting risk effects appear to have been updated as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/model_5.3.2_risk_effects_verification.ipynb>`_. [4] `still seeing issues with the ITN intervention as identified above <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.2_lbwsg_interventions.ipynb>`_.
-
-
+   * - 5.3.3 sensitivity analysis for SAM k value, updates to diarrheal diseases cause model
+     - Sensitivity analysis run on sam k value from the wasting treatment intervention model such that baseline value = 6.7 (95% CI: 5.3, 8.4) and the alternative value = 3.5 (95% CI: 3.1, 3.9). Also, updates to the diarrheal diseases prevalence and excess mortality rate `in accordance with this pull request <https://github.com/ihmeuw/vivarium_research/pull/759>`_
+     - [1] `Cause model parameters look good <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_cause_verification.pdf>`_ with the exception of some early neonatal age groups, which should have minimal impact on our model [2] `Wasting exposures look as expected for both SAM K scenarios <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_exposure.pdf>`_. Still need to look into the ITN bugs as identified above
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -493,13 +494,9 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - `Underestimation of female PEM CSMR <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model4/alibow_gbd_verification/model_4.0.1_cause_verification.pdf>`_
      - Due to discepancies between GBD 2020 wasting exposure model and GBD 2019 PEM mortality model
      - Update PEM mortality model to GBD 2020 when available
-     - On hold
-   * - `Underestimation of diarrheal diseases CSMR <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_cause_verification.pdf>`_
-     - In the updates made to the diarrheal diseases cause model made in vivarium research PR #752 (for model version 5.3.2), I missed updating the excess mortality rate which is causing an underestimation of the EMR and therefore CSMR.
-     - `Update diarrheal diseases cause model in accordance with this pull request <https://github.com/ihmeuw/vivarium_research/pull/759>`_
-     - For next model run
-   * - `Underestimation of lower respiratory infections burden in early neonatal age groups <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.2_cause_verification.pdf>`_
-     - Unconfirmed
+     - As soon as it's ready
+   * - `Underestimation of lower respiratory infections and diarrheal diseases burden in early neonatal age groups <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_cause_verification.pdf>`_
+     - Likely has to do with prevalence~incidence * duration in early neonatal age group given the short duration of the early neonatal age group
      - Investigate 
      - On hold because it should not make a large impact on model age groups of interest.
    * - LBWSG exposure issue on transition from early to late neonatal age groups
@@ -508,11 +505,11 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Soon
    * - Insectide treated net intervention coverage immediate rather than linear scale-up
      - `See coverage plots in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.1_lbwsg_interventions.ipynb>`_
-     - Ali to meet with Rajan to review.
+     - Implemented -- Ali needs to review
      - Soon
    * - Insectide treated net intervention birthweight shift varies by scenario and is not of expected magnitude
      - `See effect size estimation in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.1_lbwsg_interventions.ipynb>`_
-     - Ali to meet with Rajan to review.
+     - Implemented -- Ali needs to review
      - Soon
 
 .. todo::
