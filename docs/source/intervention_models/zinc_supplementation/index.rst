@@ -94,6 +94,8 @@ Vivarium Modeling Strategy
 
   It is likely most appropriate to implement preventative and therapeutic zinc supplementation as separate interventions in Vivarium given that there are different values for baseline coverage of each intervention. However, since they use the same product, they should be considered the same product or the costing model.
 
+  For the scale-up of therapuetic supplementation interventions for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, therapuetic and preventative zinc should each scale-up from their respective baseline to target coverage values over the specified period described on the concept model document. However, **the same propensity should be used for coverage of both therapeutic and preventative zinc interventions** such that a simulant covered by the intervention with the lower coverage is guarenteed to be covered by the intervention with the higher coverage at any given time.
+
 .. list-table:: Modeled Outcomes
   :header-rows: 1
 
@@ -207,6 +209,8 @@ Assumptions and Limitations
 #. We do not consider the impact of zinc supplementation on diarrheal disease severity, including excess mortality rate or disability weights.
 
 #. We do not consider effect modification of zinc supplementation by malnutrition status (nor do we consider the impact of malnutrition of diarrheal diseases remission or duration). This may underestimate the impact of the intervention of wasting in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+
+#. We assume a simple model of zinc supplementation uptake.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
