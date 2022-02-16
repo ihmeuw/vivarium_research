@@ -1,124 +1,28 @@
 Vivarium Modeling Strategy - Outreach Intervention 
---------------------------------------------------
+**************************************************
 
-.. todo::
+Overview
+++++++++
 
-  Add an overview of the Vivarium modeling section.
+Adherence to SBP-lowering and LDL-c lowering therapies would increase through patient outreach. Methods for outreach would include options such as regular phone calls between provider and patient, a mobile app with reminders and guidance about the importance of taking medications, or a patient support clinic.
 
-Decision tree and algorithm for outreach intervention
+All patients with an SBP level >=130 mmHg and/or LDL-c level >=2.6 mmol/L or who have had an acute qualifying event are eligible for enrollment into this intervention. Acute qualifying events include an acute myocardial infarction or acute ischemic stroke during the preceeding time step.
 
-Visit type: emergency
+When a simulant is enrolled in the outreach intervention, the initial medication fill rate is increased 2x and the medication adherence each month is increased 2x for each prescription.
 
-.. image:: decision_tree_outreach_emergency.svg
+Details of the drug classes and dosage options for both blood pressure and lipid-lowering can be found in the treatment documentation linked below.
 
-Visit type: follow-up
+.. toctree::
+   :maxdepth: 1
 
-.. image:: decision_tree_outreach_followup.svg
+   visit
+   tx
 
-Visit type: screening
+**Source information:**
 
-.. image:: decision_tree_outreach_screening.svg
+Black patients, when prescribed statin as a new medication within the past 1 year, receive automated phone calls and letters starting 1-2 weeks after prescribing, which encourages them to fill the prescription (primary adherence). Receiving this intervention increases fill and initiation of statin from 26% to 42% of patients. OR for intervention vs control was 2.16 (1.91-2.43). Effectively, patients were twice as likely to initiate medication during the first 30 days if intervention was delivered.  
+[Derose-2013]_
 
-Visit type: none
-
-.. image:: decision_tree_outreach_none.svg
-
-Blood pressure ramp: initial prescription
-
-.. image:: sbp_ramp_initial.svg
-
-Blood pressure ramp: follow-up
-
-.. image:: sbp_ramp_followup.svg
-
-A.  Visit type
-
-   1.  Experienced an AMI/IS in previous time step -> emergency visit
-   2.  Subject was scheduled for follow-up due to existing tx  - > follow-up
-   3.  P(screening visit)=1-e-t, where  is the rate of health care utilization for this type of visit. Type of visit is only to include “check-ups” – e.g., well adult visits/wellness physical with primary care provider. We are explicitly excluding urgent care visits for illness or injury or emergency visits for illness or injury (handling of emergency visit for AMI/IS noted above). Sample to determine Screening or None
-   4.  None: no visit
-
-B.  SBP elevated
-
-   1.  SBP >=130 mm Hg
-   2.  Assume everyone has their BP measured at every visit
-   3.  Includes measurement error (see parameter table below)
-   
-C.  LDL-C tested 
-   
-   1.  if visit type is follow up or emergency, everyone is tested
-   2.  if screening, ASCVD risk score >threshold (sbp, age, sex)
-
-D.  LDL-C elevated
-   
-   1.  Thresholds: https://www.ccjm.org/content/87/4/231
-   2.  Measurement of LDL-C determined by LDL-C tested algorithm in C
-   3.  Includes measurement error (+/- X mmol/L) [Code snippet that shows what the distribution should be (normal, truncated normal, log-normal commonly used]
-       
-       a.  Mean = actual blood pressure
-       b.  SD = variation around this (10 mmol/L)
-       c.  Assume normal distribution
-
-E.  SBP controlled
-   
-   1.  SBP <140 mm Hg after treatment
-
-F.  LDL-C goal achieved
-   
-   1.  Dependent on ASCVD score; https://www.ccjm.org/content/87/4/231
-
-G.  Prescribed treatment
-   
-   1.  SBP above threshold; LDL-C not above threshold
-
-       a.  Start on BP ramp
-              1.  Assign specific medications(s) and dosage(s) based on algorithm 
-              2.  Change in medication(s) and/or dosage(s) determined by whether SBP controlled at follow-up visit (E) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
-       b.  Therapeutic inertia
-              1.  Probability of being prescribed treatment = 0.85 [Flipping a weighted coin; heads 85% of the time]
-              2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
-       c.  If prescribed meds, schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine time step for next visit
-  
-  2.  SBP not above threshold; LDL-C above threshold
-
-       a.  Start on statin; decision between low-, moderate-, and high-intensity statin depending on ASCVD risk; https://www.ccjm.org/content/87/4/231
-              1.  Change in medication(s) and/or dosage(s) determined by whether LDL-C controlled at follow-up visit (F) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
-       b.  Therapeutic inertia
-              1.  Probability of being prescribed treatment = 0.85 [Flipping a weighted coin; heads 85% of the time]
-              2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
-       c.  Schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine timestep for next visit
-  
-   3.  SBP above threshold; LDL-C above threshold
-       
-       a.  Start on BP ramp
-              1.  Assign specific medications(s) and dosage(s) based on algorithm 
-              2.  Change in medication(s) and/or dosage(s) determined by whether SBP controlled at follow-up visit (E) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
-       b.  Start on statin; decision between low-, moderate-, and high-intensity statin depending on ASCVD risk;  https://www.ccjm.org/content/87/4/231
-              1.  Change in medication(s) and/or dosage(s) determined by whether LDL-C controlled at follow-up visit (F) [potential future work: add impact of side effects [initiated tx, return for FU, reports problems -> diff med; attributes can change w/out returning to MD office][impact on adherence; affect whether controlled at next visit; may be able to include in adherence]
-       c.  Therapeutic inertia
-              1.  Probability of being prescribed treatment = 0.85 [Flipping a weighted coin; heads 85% of the time]
-              2.  Current assumption is that this is the same for anti-hypertensive and lipid-lowering medications
-       d.  Schedule for follow-up in 3-6 months to check on response to medication; sample from uniform distribution to determine timestep for next visit
-
-Blood pressure ramp and LDL-C treatment algorithms
-  SBP target: 130 mm Hg
-  LDL target: depends on ASCVD risk
-
-  Treatment prescribed (BP)
-    1)  Is therapeutic inertia overcome y/n
-    2)  If therapeutic inertia is overcome AND BP measurement is within 20 mm Hg of target
-        a.  Assume monotherapy initiated: Proportions by drug class in /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_initialization_percentages.csv
-        b.  Follow-up scheduled (uniform distribution 3-6 months)
-    3)  If therapeutic inertia is overcome AND BP reading is more than 20 mm Hg from target
-        a.  Either monotherapy OR combination therapy is initiated
-        b.  Proportion assigned to combination therapy: 0.45 (parameter table)
-        c.  Proportions of initial prescriptions by drug class in /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_initialization_percentages.csv
-
-   Treatment Changed (BP)
-    1)  If monotherapy initiated for hypertension: If blood pressure not controlled at follow up (control defined as being below threshold), 50/50 choice between increasing dosage of current medication and adding new class of medication
-    2)  If combination therapy initiated for hypertension: If blood pressure not controlled at follow up (control defined as being below threshold), 50/50 choice between increasing dosage of current medication and adding new class of medication (medication cannot be in current class). Proportions of combinations in /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/meps_drug_combinations.csv
-
-    Treatment Prescribed (LDL)
-
-    Treatment Changed (LDL)
+Patients, age 30-60 without IHD, but who met any of the following criteria: current tobacco smoker, LDL-c > 3.37 mmol/L, or SBP >140 mmHg, received access to a non-clinical community health center with nurse-practitioner counseling on diet, tobacco use, and exercise. Telephone follow-up and free YMCA exercise sessions were offered. The comparison group received standard of care. Both groups had medication copays covered. At 1 year, statin adherence had a relative odds of 2.2 (95% CI 1.11-4.2) and blood pressure medication adherence had a relative odds of 2.3 (95% CI 1.39-3.88) compared to the control group. 
+[Becker-2005]_
 

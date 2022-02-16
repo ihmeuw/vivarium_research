@@ -3,6 +3,14 @@ Affected Outcomes
 
 Affected outcome - Outreach effect on adherence
 
+A simulant receiving the outreach intervention is twice as likely to be adherent. [Describe the distribution; introduce uncertainty]
+.. todo:: 
+insert link to adeherence attribute documentation.
+age/year/sex specific adherence [VITAMIN A DEFICIENCY; prepping the data]
+Compare propensity to X
+If enrolled 
+***From their starting propensity double the probability that they are 80% adherent***
+
 We assume that all simulants, if prescribed medication, will begin taking it (initiation = 100%). Not all simulants will be be adherent (defined as PDC>=80%). We further assume that all simulants who are adherent will receive the full effect of their medication and that non-adherent simulants will receive no benefit from the medication that they do take. 
 
 For each level in the hypertension treatment ramp
