@@ -123,15 +123,15 @@ The prevalence ratios used in the calculation of the risk effects are listed in 
    *  - prevalence_diarrheal_diseases
       - prevalence of diarrheal diseases
       - Defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
-      - 
+      - prevalence of state I
    *  - remission_diarrheal_diseases
       - diarrheal diseases remission rate (per person-year in the population infected with diarrheal diseases)
-      - 1 / (duration_c302 / 365) * prevalence_diarrheal_diseases
-      - Note that this is scaled to total population person time as the denominator (not infected population person time as it is for the I to S transition in the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
+      - Defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - Transition rate from state I to state S
    *  - incidence_diarrheal_diseases
       - *susceptible* diarrheal diseases incidence rate (per person-year in the population susceptible to diarrheal diseases)
-      - incidence_rate_c302 (defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
-      - Note that this is scaled to total population person time as the denominator as it is from GBD (not suspectible poulation person time as it is for the transition from I to S in the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
+      - Defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - Transition rate from state S to state I
    *  - csmr_{diarrheal_diseases, pem, lri, measles}
       - cause-specific mortality rate 
       - Defined for respective causes on the :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`protein energy malnutrition <2020_risk_exposure_wasting_state_exposure>`, :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`measles <2019_cause_measles>` documents
