@@ -1,7 +1,7 @@
 Health care visit types 
 ***********************
 
-There are four main types of interactions with the health care system that we are accounting for in this simulation.
+There are four possible types of interactions with the health care system that we are accounting for in this simulation.
 
 1) No visit: no visit occurs for the simulant for this time step. 
 
