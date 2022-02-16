@@ -12,8 +12,6 @@ This model requires a simulant to have attributes of: age, sex, SBP, LDL-C, BMI,
 
 It adds attributes of: untreated SBP, untreated LDL-C, untreated BMI, untreated FPG, untreated smoking, polypill prescription, hypertension prescription ramp position, prescription for lipid-lowering therapies, lifestyle modification, education status, medication outreach status, adherence propensity, adherence status, last measured SBP, last measured LDL-C, follow-up, visit propensity, LDL-C prescription initiation propensity, SBP prescription initiation propensity, polypill initiation propensity.
 
-*[group types of variables]*
-
 This document contains an overview of the interventions and the simulation design; for specifics, please see the sections linked in the table of contents below.
 
 .. list-table:: Definitions of terms and abbreviations
@@ -80,18 +78,11 @@ This document contains an overview of the interventions and the simulation desig
     - ?
     - yes
     - 
-  * - Adherence
-    - 
-    - 
-    - which interventions affect this
-
-
 
 Intervention Overview
 -----------------------
 
 The interventions included in this model include
-  
   1) Outreach
   2) Polypill (fixed dose combination)
   3) Lifestyle modification  
@@ -130,12 +121,54 @@ Parameter tables and additional information can be found in the initialization d
 
    initialization
    
+Weighted means of treatment (not specific to drug class) by age, sex, and SBP category (in 10 mm Hg groups) are here: /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/nhanes_sbp_tx_info.csv
+
+.. list-table:: Baseline coverage data
+  :widths: 15 15 15 15 15
+  :header-rows: 1
+
+  * - Location
+    - Subpopulation
+    - Coverage parameter
+    - Value
+    - Note
+  * - USA
+    - General Population
+    - Hypertension Treatment
+    - Distribution from NHANES
+    - empirical calibration needed
+  * - USA
+    - General Population
+    - Lipid lowering therapy
+    - Distribution from NHANES
+    - empirical calibration needed
+  * - USA
+    - General Population
+    - Polypill
+    - 0.0%
+    - assumption
+  * - USA
+    - General Population
+    - Medication outreach
+    - 0.0%
+    - assumption
+  * - USA
+    - General Population
+    - Lifestyle modification education
+    - 0.0%
+    - assumption
+
+.. todo:: add link to stash repo with collapse code 
+.. todo:: update with file for LDL 
+
+    
 
 Vivarium Modeling Strategy
 --------------------------
-The purpose of this simulation is to assess the impact of three interventions on cardiometabolic outcomes. The three interventions are: outreach, and polypill, and lifestyle. [Additional detail useful here?]
 
-Detailed information for each intervention can be found in the three sections linked below.
+.. todo::
+
+  Add an overview of the Vivarium modeling section.
 
 .. toctree::
    :maxdepth: 1
