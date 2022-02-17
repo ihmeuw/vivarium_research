@@ -212,8 +212,20 @@ Validation and Verification Criteria
 
 #. The coverage of the ITN intervention in the baseline and alternative scenarios should match the associated input values
 
+Child Growth Failure (CGF)
++++++++++++++++++++++++++++
+
+There is little to no evidence that use of ITNs during pregnancy have a direct impact of child growth failure exposure later in life (eg 6-59 months of age), largely due to the logistical challenges of long duration of follow-up. However, there is evidence that birthweight (a directly measured outcome of ITN use during pregnancy) is causally associated with child growth failure exposure later in life. Therefore, we can model an impact of ITN used during pregnancy on child growth failure entirely mediated by its impact on birthweight. We will model this association in the exact same way as described in the child growth failure section of the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>` such that the :math:`S` shift in birthweight is equal to the total effect of all intervention coverage (or lack of baseline intervention coverage) on birthweight.
+
+.. note::
+
+  ITNs are also recommended for use among children under five in some high burden-malaria settings. While there is evidence that use of ITNs among children under five is associated with decreased malaria burden among this group, there is little to no evidence that there is a direct impact on CGF exposures [Salam-et-al-2014]_. Notably, reductions in malaria burden may be associated with reductions in CGF exposure due to a vicious cycle-like pathway between infectious disease and CGF risk; however, we have not included these pathways in our model.
+
 References
 ------------
 
 .. [Gamble-et-al-2007]
   Gamble, C., Ekwaru, P. J., Garner, P., & ter Kuile, F. O. (2007). Insecticide-treated nets for the prevention of malaria in pregnancy: a systematic review of randomised controlled trials. PLoS medicine, 4(3), e107. https://doi.org/10.1371/journal.pmed.0040107
+
+.. [Salam-et-al-2014]
+  Salam, R. A., Das, J. K., Lassi, Z. S., & Bhutta, Z. A. (2014). Impact of community-based interventions for the prevention and control of malaria on intervention coverage and health outcomes for the prevention and control of malaria. Infectious diseases of poverty, 3, 25. https://doi.org/10.1186/2049-9957-3-25
