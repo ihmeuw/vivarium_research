@@ -411,6 +411,10 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
 
 .. _`wasting-treatment-baseline-parameters`:
 
+.. note::
+
+  We may increase the :math:`\text{time to recovery}` parameters to reflect some amount of time it takes to access MAM and SAM treatment after meeting the clinical criteria for each respective condition. This will be done in tandem with validation of the wasting transition rates from our simulation with those observed in the KI database (from BMGF).
+
 .. list-table:: Parameter Values
   :header-rows: 1
 
@@ -464,9 +468,9 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - [Ackatia_Armah_2015tx]_
   * - :math:`k`
     - 6-59 months old
-    - 6.7(95% CI: 5.3-8.4)
+    - 3.5 (95% CI: 3.1-3.9)
     - lognormal
-    - See notes on uncertainty distribution and interpretation of this value below
+    - See notes on uncertainty distribution and interpretation of this value below. 
     - [Isanaka_2021]_
   * - :math:`mortality_{SAM|a,s,l,y}`
     - GBD demographic group
@@ -474,6 +478,20 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - N/A
     - :ref:`defined on the wasting documentation <2020_risk_exposure_wasting_state_exposure>`
     - GBD
+
+.. note::
+
+  A note on the incidence correction factor, :math:`k`:
+
+    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit. Note that the average duration of disease in this equation is **not** conditional on recovery from SAM, unlike the :math:`\text{time to recovery}` parameters. Therefore, the average duration of disease is *lower* and :math:`k` is greater than it would be if it were conditional on recovery from SAM in the same manner as the :math:`\text{time to recovery}` parameters.
+
+    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations.
+
+    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
+
+    Note: [Isanaka_2021]_ relies on estimates of SAM treatment coverage to estimate the incidence correction factor/average duration of disease in Ethiopia. SAM treatment coverage is a parameter that is difficult to estimate and measurement may be prone to bias. SAM treatment coverage in the [Isanaka_2021]_ is estimated through standardized surveys [SQUEAC-SLEAC]_
+
+    **We have chosen to use the global average value of 3.5 (95% CI: 3.1-3.9) rather than the value specific to Ethiopia of 6.7(95% CI: 5.3-8.4) for this parameter from [Isanaka_2021]_ given that it results in wasting transition rates that are more similar to those observed in the KI database in a sensitivity analysis for model validation, `shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_**
 
 .. note::
 
@@ -493,18 +511,6 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
   confidence interval on the :ref:`Statistical Distributions of Uncertainty
   <vivarium_best_practices_statistical_distributions>` page (note that the
   median of a lognormal distribution equals its geometric mean).
-
-.. note::
-
-  A note on the incidence correction factor, :math:`k`:
-
-    The incidence correction factor :math:`k` is = :math:`\frac{t}{\text{average duration of disease}}`, where :math:`t` is the period for which incidence is estimated (a year) eg. 365 days using days as the unit. Note that the average duration of disease in this equation is **not** conditional on recovery from SAM, unlike the :math:`\text{time to recovery}` parameters. Therefore, the average duration of disease is *lower* and :math:`k` is greater than it would be if it were conditional on recovery from SAM in the same manner as the :math:`\text{time to recovery}` parameters.
-
-    k = :math:`\frac{\text{number of incident cases}}{\text{number of prevalent cases}}` see [Isanaka_2021]_ for full proof and equations.
-
-    Number of incident cases = :math:`\frac{\text{annual programme admissions}}{\text{treatment coverage}}`
-
-    Note: [Isanaka_2021]_ relies on estimates of SAM treatment coverage to estimate the incidence correction factor/average duration of disease in Ethiopia. SAM treatment coverage is a parameter that is difficult to estimate and measurement may be prone to bias. SAM treatment coverage in the [Isanaka_2021]_ is estimated through standardized surveys [SQUEAC-SLEAC]_
 
 .. todo::
 
