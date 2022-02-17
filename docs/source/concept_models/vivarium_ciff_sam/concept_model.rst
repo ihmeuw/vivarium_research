@@ -210,7 +210,7 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
   Rather than scale linearly from between the baseline and alternative scenario values for the :math:`E` parameters, we will instead scale linearly so that 100% of the intervention coverage at the beginning of the scale-up period has efficacy equal to the baseline values (and 0% equal to the alternative scenario values) and 100% of the intervention coverage at the end of the scale-up period has efficacy equal to the alternative scenario values (and 0% equal to the baseline values).
 
 **Alternative scenario 1.5**
-Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for both SAM and MAM (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the same alternative scenario values shown in the table below. 
+Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for both SAM and MAM (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the same alternative scenario values shown in the table above (in the alternative scneario 1 section). 
 
 **Alternative scenario 2**
 Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 1. 
