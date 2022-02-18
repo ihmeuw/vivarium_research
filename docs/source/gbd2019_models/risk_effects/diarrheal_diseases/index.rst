@@ -75,6 +75,8 @@ Using the resulting equations from the processes described above, the incidence 
 Calculation of risk effects
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+**Calculation of risk effects should be performed for simulants aged six to 59 months.**
+
 The prevalence ratios used in the calculation of the risk effects are listed in the table below. The excess risk in these ratios (PR - 1) represents the portion of the population afflicted with diarrheal diseases that occupies that wasting state as a result of the diarrheal disease episode. In other words, the PR represents the multiplicative likelihood that an individual will occupy a specific child wasting category if they experienced a diarrheal diasease epidsode relative to if they had not experienced a diarrheal disease episode.
 
 .. list-table:: Prevalence ratio values
@@ -119,17 +121,17 @@ The prevalence ratios used in the calculation of the risk effects are listed in 
       - defined on the :ref:`child wasting exposure page <2020_risk_exposure_wasting_state_exposure>`
       - 
    *  - prevalence_diarrheal_diseases
-      - incidence_rate_c302 * duration_c302 / 365
-      - incidence_rate_c302 and duration_c302 are defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
-      - 
+      - prevalence of diarrheal diseases
+      - Defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - prevalence of state I
    *  - remission_diarrheal_diseases
-      - *total population* diarrheal diseases remission rate
-      - 1 / (duration_c302 / 365) * prevalence_diarrheal_diseases
-      - Note that this is scaled to total population person time as the denominator (not infected population person time as it is for the I to S transition in the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
+      - diarrheal diseases remission rate (per person-year in the population infected with diarrheal diseases)
+      - Defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - Transition rate from state I to state S
    *  - incidence_diarrheal_diseases
-      - *total population* diarrheal diseases incidence rate
-      - incidence_rate_c302 (defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
-      - Note that this is scaled to total population person time as the denominator as it is from GBD (not suspectible poulation person time as it is for the transition from I to S in the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`)
+      - *susceptible* diarrheal diseases incidence rate (per person-year in the population susceptible to diarrheal diseases)
+      - Defined on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`
+      - Transition rate from state S to state I
    *  - csmr_{diarrheal_diseases, pem, lri, measles}
       - cause-specific mortality rate 
       - Defined for respective causes on the :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`protein energy malnutrition <2020_risk_exposure_wasting_state_exposure>`, :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`, and :ref:`measles <2019_cause_measles>` documents
@@ -150,6 +152,10 @@ The prevalence ratios used in the calculation of the risk effects are listed in 
       - All-cause mortality rate
       - All-cause mortality rate for a given age/sex/location/year group from GBD
       -
+   *  - i1, i2, i3, r4, r3, r2, t1
+      - Wasting transition rates 
+      - Defined on the :ref:`child wasting exposure page <2020_risk_exposure_wasting_state_exposure>`
+      - (defined in terms of transitions per person-year in the source state)
 
 The following code block provides equations to solve for the relative risks attributable to diarrheal disease infection for each of the wasting state incidence rates according to the prevalence ratio values defined above and artifact data. For reference, the tables below outline the notation of the intermediate variables included in the equations.
 
@@ -180,7 +186,7 @@ The following code block provides equations to solve for the relative risks attr
 
 .. note::
 
-   All transition rates are defined in terms of the count of transitions per person-time unit in the entire model system (**not** specific to person-time in the source state).
+   All of the transition rates in the table below are defined in terms of the count of transitions per person-time unit in the entire model system (**not** specific to person-time in the source state).
 
 .. list-table:: Intermediate variable notation: transitions
    :header-rows: 1
@@ -236,14 +242,14 @@ The following code block provides equations to solve for the relative risks attr
            - csmr_pem
            - csmr_lri + csmr_lri * (1 - paf_wasting_lri) * RR_wasting_lri_cat3
            - csmr_measles + csmr_measles * (1 - paf_wasting_measles) * RR_wasting_measles_cat3) * p_D3
-   di_1 = (incidence_diarrheal_diseases * p_S1/(1-prevalence_diarrheal_diseases))
-   di_2 = (incidence_diarrheal_diseases * p_S2/(1-prevalence_diarrheal_diseases))
-   di_3 = (incidence_diarrheal_diseases * p_S3/(1-prevalence_diarrheal_diseases))
-   di_4 = (incidence_diarrheal_diseases * p_S4/(1-prevalence_diarrheal_diseases))
-   dr_1 = remission_diarrheal_diseases  * p_D1 # note these are not divided by prevalence_diarrheal_diseases because remission_diarrheal_diseases{total_pop} = remission_diarrheal_diseases * prevalence_diarrheal_diseases
-   dr_2 = remission_diarrheal_diseases  * p_D2 
-   dr_3 = remission_diarrheal_diseases  * p_D3
-   dr_4 = remission_diarrheal_diseases  * p_D4
+   di_1 = incidence_diarrheal_diseases * p_S1
+   di_2 = incidence_diarrheal_diseases * p_S2
+   di_3 = incidence_diarrheal_diseases * p_S3
+   di_4 = incidence_diarrheal_diseases * p_S4
+   dr_1 = remission_diarrheal_diseases * p_D1
+   dr_2 = remission_diarrheal_diseases * p_D2
+   dr_3 = remission_diarrheal_diseases * p_D3
+   dr_4 = remission_diarrheal_diseases * p_D4
    b_D1 = ACMR * p_D1
    b_D2 = ACMR * p_D2
    b_D3 = ACMR * p_D3
