@@ -431,7 +431,7 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - 147 
     - point value
     - Used MUAC definition of malnutrition.
-    - Transition rate of 1/21 weeks derived from [James_2016]_ (Ethiopia) `in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/Calculation%20of%20James%20paper%20MAM%20to%20mild%20rate.ipynb>`
+    - Transition rate of 1/21 weeks derived from [James_2016]_ (Ethiopia) `in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/Calculation%20of%20James%20paper%20MAM%20to%20mild%20rate.ipynb>`_
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 6-59 months old
     - 41.3 (95% CI: 34.4, 49) + 14 = **55.3 (95% CI: 48.4, 63)**

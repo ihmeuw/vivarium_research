@@ -593,7 +593,7 @@ that follows we will detail how to calculate all the variables used
    * - r4
      - 6-12 months: 0.000018 (90% UI: 0.000003, 0.000033); 1-4 years: 0.000014 (90% UI: 0.000003, 0.000046)
      - Daily probability of remission from cat 3 into cat 4
-     - From `implied transition rate from the KI data <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`. Assume a normal distribution of uncertainty.
+     - From `implied transition rate from the KI data <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_. Assume a normal distribution of uncertainty.
    * - t1
      - 1 - e^(-sam_tx_coverage*sam_tx_efficacy * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
