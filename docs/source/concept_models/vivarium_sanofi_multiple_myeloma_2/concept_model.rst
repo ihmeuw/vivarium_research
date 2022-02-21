@@ -25,7 +25,7 @@
 
   Section Level 1 (#.0)
   +++++++++++++++++++++
-  
+
   Section Level 2 (#.#)
   ---------------------
 
@@ -96,7 +96,7 @@
 
 3.1 Causal diagram
 ------------------
- 
+
  .. note::
     link to DAGs page
     use round circles with DAGs
@@ -106,7 +106,7 @@
 
 
 **Most proximal determinant/exposure (E)**:
-  
+
 
 
 **Confounders (C)**:
@@ -144,7 +144,7 @@
 
 .. _{YOUR_MODEL_SHORT_NAME}5.1:
 
-5.1 Vivarium concept model 
+5.1 Vivarium concept model
 --------------------------
 
 .. note::
@@ -165,7 +165,7 @@
   - age and sex structure
   - time step
   - fertility
-  - stratifications 
+  - stratifications
 
 
 .. _{YOUR_MODEL_SHORT_NAME}5.2.2:
@@ -182,7 +182,7 @@
 
 .. note::
   here we use the compartmental (SEIR) models with squares
-  
+
 
 .. _{YOUR_MODEL_SHORT_NAME}5.3.1:
 
@@ -248,4 +248,3 @@
 
 7.0 Limitations
 +++++++++++++++
-
