@@ -9,7 +9,7 @@
   ==============
   Section Level 1 (#.0)
   +++++++++++++++++++++
-  
+
   Section Level 2 (#.#)
   ---------------------
   Section Level 3 (#.#.#)
@@ -66,29 +66,29 @@ Vivarium - CSU - Simulating Multiple Myeloma registries
 
 1.0 Background
 ++++++++++++++
-In March of 2020, the United States (US) Food and Drug Administration approved the use of a new drug, Isatuximab, in combination with pomalidomide and dexamethasone for the treatment of relapsed/refractory multiple myeloma (RRMM) in adults who had previously received at least two prior therapies including lenalidomide and a proteasome inhibitor. ([Sanofi-2020]_) A phase 3 clinical study has shown Isatuximab, in addition to pomalidomide-dexamethasone, to significantly improve progression-free survival in patients with RRMM. ([Attal-et-al-2019]_) Since the introduction of Isatuximab on the US drug market, Sanofi has started a clinical registry in the US to observe the use of Isatuximab in patients with RRMM in a real-world setting.  
+In March of 2020, the United States (US) Food and Drug Administration approved the use of a new drug, Isatuximab, in combination with pomalidomide and dexamethasone for the treatment of relapsed/refractory multiple myeloma (RRMM) in adults who had previously received at least two prior therapies including lenalidomide and a proteasome inhibitor. ([Sanofi-2020]_) A phase 3 clinical study has shown Isatuximab, in addition to pomalidomide-dexamethasone, to significantly improve progression-free survival in patients with RRMM. ([Attal-et-al-2019]_) Since the introduction of Isatuximab on the US drug market, Sanofi has started a clinical registry in the US to observe the use of Isatuximab in patients with RRMM in a real-world setting.
 
-As Isatuximab is still relatively new and the clinical registry is in early stages of enrollment, Sanofi is interested in using simulation to further understand Isatuximab’s potential impact and aid in registry design. Simulation is a general method that allows the incorporation of inter-related and dynamic factors and processes to predict health outcomes over time. In this project, we employ customized agent-based simulation software in which thousands of simulated individuals (“simulants”) with individual characteristics and health backgrounds experience MM including treatment, progression, and survival in a realistic way. This project is currently planned out in three phases including, 1) simulating the general population in one location and a registry population in the same location, 2) updating input data parameters using real registry data and rerunning the microsimulation from phase 1 iteratively to calibrate with real-world evidence and 3) expanding the microsimulation to other locations of interest. This document will outline the current analysis plan for phase 1 of this project. 
+As Isatuximab is still relatively new and the clinical registry is in early stages of enrollment, Sanofi is interested in using simulation to further understand Isatuximab’s potential impact and aid in registry design. Simulation is a general method that allows the incorporation of inter-related and dynamic factors and processes to predict health outcomes over time. In this project, we employ customized agent-based simulation software in which thousands of simulated individuals (“simulants”) with individual characteristics and health backgrounds experience MM including treatment, progression, and survival in a realistic way. This project is currently planned out in three phases including, 1) simulating the general population in one location and a registry population in the same location, 2) updating input data parameters using real registry data and rerunning the microsimulation from phase 1 iteratively to calibrate with real-world evidence and 3) expanding the microsimulation to other locations of interest. This document will outline the current analysis plan for phase 1 of this project.
 
 FDA just approved isatuximab in combination with carfilzomib and dexamethasone (Kd), for the treatment of adult patients with RRMM who have received one to three prior lines of therapy.([Sanofi-2021]_)
 
-Key sub-populations agreed upon include: 
+Key sub-populations agreed upon include:
 
-* Black/African American population 
+* Black/African American population
 
-* Population with high-risk cytogenetics 
+* Population with high-risk cytogenetics
 
 * Population with renal impairment/CKD (eGFR < 60 ml/min/1.73m^2)
 
-* Elder population (aged > 75 years) 
+* Elder population (aged > 75 years)
 
-In the absence of data on treatment effects for sub-groups we will need to make assumptions with client guidance. A strength of this project is that we will be able to iteratively update such assumptions as we get real world data from registries and re-run the simulation. 
+In the absence of data on treatment effects for sub-groups we will need to make assumptions with client guidance. A strength of this project is that we will be able to iteratively update such assumptions as we get real world data from registries and re-run the simulation.
 
 .. _mm1.1:
 
 1.1 Project overview
 --------------------
-This project intends to model the impact of a new treatment option for myeloma disease, Isatuximab, from 2021 to 2025 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States. The choice of treatment is dependent on disease status only. 
+This project intends to model the impact of a new treatment option for myeloma disease, Isatuximab, from 2021 to 2025 among the general population, key subpopulations listed above, and a registry population within the United States. The model will make use of the current multiple myeloma treatment guidelines in the United States. The choice of treatment is dependent on disease status only.
 
 
 .. _mm1.2:
@@ -124,9 +124,9 @@ There is one randomized controlled trial on Isatuximab treatment that is current
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
-The primary objective of this project is to answer the following question: what can we expect the incidence, prevalence, mortality, and survival of MM to be overall and among a registry population in the United States, and in key sub-populations, under a business-as-usual treatment scenario and an Isatuximab treatment scenario over 5 years? The key sub-populations include the Black/African American population, population with high-risk cytogenetics, population with renal impairment and the elderly population (age > 75 years).  
+The primary objective of this project is to answer the following question: what can we expect the incidence, prevalence, mortality, and survival of MM to be overall and among a registry population in the United States, and in key sub-populations, under a business-as-usual treatment scenario and an Isatuximab treatment scenario over 5 years? The key sub-populations include the Black/African American population, population with high-risk cytogenetics, population with renal impairment and the elderly population (age > 75 years).
 
-To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our own survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2025 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk. 
+To answer this question, we will gather data from the 2019 Global Burden of Disease Study (GBD), SEER, literature, and Flatiron Health and run our own survival regression to inform the parameters for our simulation. We will simulate the changes in MM and RRMM disease incidence, prevalence and survival from 2021 to 2025 in response to an Isatuximab treatment intervention scenario in the US population and simulated registry population. These outcomes will be stratified by age, sex, calendar year, race/ethnicity, renal impairment and cytogenetic risk.
 
 .. _mm3.0:
 
@@ -170,11 +170,11 @@ To answer this question, we will gather data from the 2019 Global Burden of Dise
 ++++++++++++++++
 
 Among MM and RRMM patients, they expect to have:
- - Isatuximab treatment with coverage rates informed by Sanofi's commercial 
+ - Isatuximab treatment with coverage rates informed by Sanofi's commercial
    team; OR
- - Daratummumab treatment with coverage rates derived from IQVIA sales 
+ - Daratummumab treatment with coverage rates derived from IQVIA sales
    projection; OR
- - Residual (non Isa or Dara-based) treatment with coverage rates calculated 
+ - Residual (non Isa or Dara-based) treatment with coverage rates calculated
    by (1 - Isa_coverage - Dara_coverage).
 
 .. _mm4.1:
@@ -182,11 +182,11 @@ Among MM and RRMM patients, they expect to have:
 4.1 Simulation scenarios
 ------------------------
 
-To measure the impact of an isatuximab scale-up in the first line of treatment, we will simulate two scenarios, a baseline scenario and an alternative scenario, outlined below. The underlying health state of each simulant will be measured at each 28-day time step and the probability that each simulant is treated will be dependent on the coverage stated in that scenario. 
+To measure the impact of an isatuximab scale-up in the first line of treatment, we will simulate two scenarios, a baseline scenario and an alternative scenario, outlined below. The underlying health state of each simulant will be measured at each 28-day time step and the probability that each simulant is treated will be dependent on the coverage stated in that scenario.
 
 **Baseline** Coverage of isatuximab in the first line of treatment will remain at its 2021 value of 0% for the duration of the simulation from 2021 to 2025.
 
-**Alternative** Coverage of isatuximab in the first line of treatment will scale-up linearly over the duration of the simulation from 0% in 2021 to 10% in 2025. 
+**Alternative** Coverage of isatuximab in the first line of treatment will scale-up linearly over the duration of the simulation from 0% in 2021 to 10% in 2025.
 
 More details on treatment coverage in each simulation scenario can be found in the `5.3.3.2 Treatment Modeling Strategy`_ section.
 
@@ -218,17 +218,17 @@ Therefore, we will perform four different simulation runs of the alternative and
 
 .. _mm5.1:
 
-5.1 Vivarium concept model 
+5.1 Vivarium concept model
 --------------------------
 
 .. image:: concept_model_diagram.svg
 
-The simulation concept model consists of five main components: 
- 1. Covariates (age, sex, race/ethnicity) 
- 2. Risk factors (eGFR and cytogenetics) 
- 3. Causes (progression of multiple myeloma) 
- 4. Health system (multiple lines of treatment for MM and RRMM population) 
- 5. Patient registry 
+The simulation concept model consists of five main components:
+ 1. Covariates (age, sex, race/ethnicity)
+ 2. Risk factors (eGFR and cytogenetics)
+ 3. Causes (progression of multiple myeloma)
+ 4. Health system (multiple lines of treatment for MM and RRMM population)
+ 5. Patient registry
 
 .. _mm5.2:
 
@@ -241,10 +241,10 @@ The simulation concept model consists of five main components:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
   - Location: United States
-  - Cohort type: Prospective **closed** cohort of individuals aged 15 years and 
+  - Cohort type: Prospective **closed** cohort of individuals aged 15 years and
     older (open cohort if we only examine on age 50+ population)
   - Size of largest starting population: 200,000 simulants
-  - Time span: Jan 1, 2011 to Dec 31, 2025 (Jan 1, 2011 to Jan 1, 2021 is a 
+  - Time span: Jan 1, 2011 to Dec 31, 2025 (Jan 1, 2011 to Jan 1, 2021 is a
     10-year long burn-in period)
   - Time step: 28 days
 
@@ -254,13 +254,13 @@ The simulation concept model consists of five main components:
 5.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**General US population** and **Registry population** stratified by 
+**General US population** and **Registry population** stratified by
 sub-population groups of following:
 
  - Black/African American population
  - Population with high-risk cytogenetics (abnormality includes Del(17p) t(14;16) t(14;20) Del(1p))
- - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2) 
- - Elder population (aged > 75 years) 
+ - Population with Renal Impairment (RI) (eGFR < 60 ml/min/1.73m2)
+ - Elder population (aged > 75 years)
 
 .. _mm5.3:
 
@@ -279,7 +279,7 @@ See :ref:`multiple myeloma cause model<2019_cancer_model_multiple_myeloma>`
 5.3.2 Risk factor model
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-In this model, we implement risk exposures for simulants upon entry to the MM state of the multiple myeloma cause model. Simulants in the susceptible state will not have risk exposure values (aside from sex and age) or risk effects. The risk exposure and effects for the risks included in this model (sex, age, race, cytogenetic risk, renal impairment) are described below. 
+In this model, we implement risk exposures for simulants upon entry to the MM state of the multiple myeloma cause model. Simulants in the susceptible state will not have risk exposure values (aside from sex and age) or risk effects. The risk exposure and effects for the risks included in this model (sex, age, race, cytogenetic risk, renal impairment) are described below.
 
 .. note::
 
@@ -339,9 +339,9 @@ The proportion of Black multiple myeloma patients by sex and age at diagnosis +/
 
   Cite SEER data source.
 
-Notably, we only have risk factor exposure distribution data among newly diagnosed patients. Due to the differential survival rates among the different risk exposure groups, we do not expect that the risk exposure distribution among relapsed and refractory multiple myeloma patients to be the same as among newly diagnosed patients. Due to our lack of data to inform risk exposure initialization probabilities among RRMM patients at the beginning of the simulation, we will model a "burn-in" period prior to the official time-frame of the simulation (2021-2026) in which all MM patients are initialized to the first MM state, allowing these risk exposure distributions to shift along with disease progression according to the risk effects described in the next section. Details are described in the :ref:`multiple myeloma cause model document<2019_cancer_model_multiple_myeloma>`. 
+Notably, we only have risk factor exposure distribution data among newly diagnosed patients. Due to the differential survival rates among the different risk exposure groups, we do not expect that the risk exposure distribution among relapsed and refractory multiple myeloma patients to be the same as among newly diagnosed patients. Due to our lack of data to inform risk exposure initialization probabilities among RRMM patients at the beginning of the simulation, we will model a "burn-in" period prior to the official time-frame of the simulation (2021-2026) in which all MM patients are initialized to the first MM state, allowing these risk exposure distributions to shift along with disease progression according to the risk effects described in the next section. Details are described in the :ref:`multiple myeloma cause model document<2019_cancer_model_multiple_myeloma>`.
 
-After the initial 10 burn-in period run, prevalent risk exposure distributions for race, cytogenetic risk, and renal function should be recorded for each MM cause model state. In order to achieve this, person-time stratified by risk exposure and multiple myeloma cause model state is required as a simulation output. Given our assumpiton of independence of risk exposures, the prevalent risk exposure distributions should be evaluated at the population level; however, the age risk exposure distribution should be stratified by GBD 5 year-age group. For future runs in which a burn-in period is not run and simulants are initialized into RRMM states rather than solely the first MM state, simulants should be assigned with risk exposures for race/cytogenetic risk/renal function at diagnosis with probabilities corresponding to the recorded risk exposure distribution specific to the MM cause model state that the simulant is initialized into. 
+After the initial 10 burn-in period run, prevalent risk exposure distributions for race, cytogenetic risk, and renal function should be recorded for each MM cause model state. In order to achieve this, person-time stratified by risk exposure and multiple myeloma cause model state is required as a simulation output. Given our assumpiton of independence of risk exposures, the prevalent risk exposure distributions should be evaluated at the population level; however, the age risk exposure distribution should be stratified by GBD 5 year-age group. For future runs in which a burn-in period is not run and simulants are initialized into RRMM states rather than solely the first MM state, simulants should be assigned with risk exposures for race/cytogenetic risk/renal function at diagnosis with probabilities corresponding to the recorded risk exposure distribution specific to the MM cause model state that the simulant is initialized into.
 
 .. note::
 
@@ -359,7 +359,7 @@ After the initial 10 burn-in period run, prevalent risk exposure distributions f
     - Male
     - Female
     - 0.539
-    - 
+    -
   * - Age at diagnosis
     - 65+ years
     - <65 years
@@ -411,7 +411,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - 65+
     - <65
     - None
-    - 
+    -
   * - Renal function at diagnosis
     - 1.9 (1.4, 2.6)
     - 1.4 (1.1, 1.7)
@@ -469,7 +469,7 @@ The table below reports hazard ratios for overall survival and progression free 
     - Black
     - Non-Black
     - N/A
-    - 
+    -
   * - Cytogenetic risk
     - 1.6 (1.1, 2.1)
     - 1.7 (1.3, 2.2)
@@ -482,7 +482,7 @@ Assume a lognormal distribution of uncertainty within the confidence intervals r
 
 For implementation in the model, each dichotomous risk factor exposure level will need a PFS and OS hazard ratio relative to the time-varying baseline hazard rate, obtained from the multiple myeloma cause model (rather than the opposite risk factor exposure level as shown above). The following steps describe how to derive these hazard ratios and how to appropriately apply them to a simulant's baseline hazard.
 
-1.  For each covariate, calculate :math:`h_\text{exposed}` and :math:`h_\text{unexposed}` using the equations below, a sampled value from the hazard ratio uncertainty distributions from the table above, and the exposure prevalence from the risk exposure section above. Do this separately for overall survival and progression free survival. This process should also be performed separately for cytogenetic risk|Black and cytogenetic risk|non-Black. 
+1.  For each covariate, calculate :math:`h_\text{exposed}` and :math:`h_\text{unexposed}` using the equations below, a sampled value from the hazard ratio uncertainty distributions from the table above, and the exposure prevalence from the risk exposure section above. Do this separately for overall survival and progression free survival. This process should also be performed separately for cytogenetic risk|Black and cytogenetic risk|non-Black.
 
 .. math::
 
@@ -498,7 +498,7 @@ So that,
 
   h_\text{exposed} = \frac{h_\text{baseline}}{p_\text{exposed} + \frac{1 - p_\text{exposed}}{HR_\text{exposed:unexposed}}}
 
-and 
+and
 
 .. math::
 
@@ -514,7 +514,7 @@ and
 
   HR_\text{unexposed:baseline} = \frac{h_\text{unexposed}}{h_\text{baseline}}
 
-The calculation described above, performed using the treatment duration and overall survival hazard rates for the first time period at the first line of treamtent referenced in the multiple myeloma cause model document for :math:`h_\text{baseline}`, the values in the *Risk Exposure Distributions for Risk Effects Calculation* table for :math:`p_\text{exposed}`, and the values in the *Risk Effects Table* for the :math:`HR_\text{exposed:unexposed}` values. 
+The calculation described above, performed using the treatment duration and overall survival hazard rates for the first time period at the first line of treamtent referenced in the multiple myeloma cause model document for :math:`h_\text{baseline}`, the values in the *Risk Exposure Distributions for Risk Effects Calculation* table for :math:`p_\text{exposed}`, and the values in the *Risk Effects Table* for the :math:`HR_\text{exposed:unexposed}` values.
 
 The values in the table below should be used for simulation implementation. Notably, different values for race/cytogenetic risk effects should be used dependening on the simulation run (2a or 2b, as described in the `4.1 Simulation scenarios`_ section). The same values for the age, sex, and renal function risk effects should be used for all simulation runs.
 
@@ -662,10 +662,10 @@ Treatment guidelines for multiple myeloma are complex and varied. [Rajkumar-and-
      - MoABs
      - isatuximab (anti-CD38), daratumumab (anti-CD38), MOR202 (anti-CD38), elotuzamab (anti-CS1/anti-SLAM7), denosumab (anti-RANKL), siltuximab (anti-IL6), IPH2101 (anti-KIR2DL1/2/3)
    * - Corticosteroids
-     - 
+     -
      - Dexamethasone, prednisone
 
-The treatment indications with FDA approval for isatuxamib [FDA-prescribing-information-isa-2021]_ are listed below: 
+The treatment indications with FDA approval for isatuxamib [FDA-prescribing-information-isa-2021]_ are listed below:
 
 - in combination with pomalidomide (PI) and dexamethasone, for the treatment of adult patients with multiple myeloma who have received at least two prior therapies including lenalidomide (IMiD) and a proteasome inhibitor (PI)
 
@@ -687,7 +687,7 @@ The treatment indications with FDA approval for DARZALEX FASPRO [FDA-prescribing
 
 - as monotherapy in patients who have received at least three prior lines of therapy including a PI and an IMiD or who are double-refractory to a PI and an IMiD
 
-- in combination with bortezomib (PI), cyclophosphamide, and dexamethasome in newly diagnosed patients 
+- in combination with bortezomib (PI), cyclophosphamide, and dexamethasome in newly diagnosed patients
 
 [Braunlin-et-al-2021]_ summarized the multiple myeloma treatment landscape among recent years using Flatiron registry data. [Goto-et-al-2019]_ and [Jagannath-et-al-2016]_ published similar, but less recent, studies using SEER and International Oncology Netword data, respectively.
 
@@ -697,7 +697,7 @@ A figure of the multiple myeloma treatment regimens by line of treatment from [B
 
 Notably, [Braunlin-et-al-2021]_ reported that 90.7 percent of all patients received at least one treatment. As shown by [Goto-et-al-2019]_, older patients are significantly more likely to receive no treatment than younger patients.
 
-As discussed in treatment guideline reviews, in general triplet regimens are preferred, but doublet regimens should be considered if patients are frail [Rajkumar-and-Kumar-2020]_. Additionally, for relapsed multiple myeloma, at least two new drugs that the patient is not refractory to, and preferably from a different class, should be considered [Rajkumar-and-Kumar-2020]_. [Rajkumar-and-Kumar-2020]_ notes that "patients refractory to a drug are likely to be reractory to different drug[s] in the same class"; although, two important exceptions exist, including pomalidomide for patients refractory to lenalidomide and carfilzombib in patients refractory to bortezomib (p. 6). 
+As discussed in treatment guideline reviews, in general triplet regimens are preferred, but doublet regimens should be considered if patients are frail [Rajkumar-and-Kumar-2020]_. Additionally, for relapsed multiple myeloma, at least two new drugs that the patient is not refractory to, and preferably from a different class, should be considered [Rajkumar-and-Kumar-2020]_. [Rajkumar-and-Kumar-2020]_ notes that "patients refractory to a drug are likely to be reractory to different drug[s] in the same class"; although, two important exceptions exist, including pomalidomide for patients refractory to lenalidomide and carfilzombib in patients refractory to bortezomib (p. 6).
 
 [Rajkumar-and-Kumar-2020]_ provide treatment recommendations for first line therapy based on ASCT eligibility and cytogenetic risk-stratification, summarized in the table below. Notably, ASCT improves median overall survival and can be delayed until first relapse, primarily based on patient choice (overall survival is similar whether ASCT was performed early or delayed until relapse) [Rajkumar-and-Kumar-2020]_.
 
@@ -712,7 +712,7 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
      - VRd: bortezomib + lenalidomide + dexamethasone
    * - Eligible
      - High
-     - VRd: bortezomib + lenalidomide + dexamethasone; OR dara-VRD: daratumumab + bortezomib + lenalidomide + dexamethasone 
+     - VRd: bortezomib + lenalidomide + dexamethasone; OR dara-VRD: daratumumab + bortezomib + lenalidomide + dexamethasone
    * - Ineligible
      - Standard
      - VRd: bortezomib + lenalidomide + dexamethasone; OR DRd: daratumumab, lenalidomide, dexamethasone
@@ -725,7 +725,7 @@ As discussed in treatment guideline reviews, in general triplet regimens are pre
 5.3.3.2 Treatment Modeling Strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below. 
+We will have three possible treatment categories in our model, an isatuxamib-containing treatment category, a daratumumab-containing treatment category, and a residual treatment category that consists of all treatments that do not contain isatuxamib or daratumumab, including mono/doublet/triplet/quartet/etc. therapies. Specific implementation details are discussed below.
 
 Notably, because retreatment with anti-CD38 monoclonal antibodies (daratumumab and isatuxamib) is a critical component of the effect of these drugs, we aim to model a "burn-in" period prior to the start of the official simulation timeframe (2021-2026) beginning at the first introduction of daratumumab as an anti-myeloma treatment in 2016. Modeling the scale-up of daratumumab and isatuxamib from this period will allow us to start our official simulation timeframe with the expected distribution of RRMM patients with prior anti-CD8 exposure in each RRMM state. A similar "burn-in" strategy was utilized to model the appropriate prevalence of each RRMM state in the multiple myeloma cause model, which is described in the :ref:`multiple myeloma cause model document <2019_cancer_model_multiple_myeloma>`.
 
@@ -826,7 +826,7 @@ For the burn-in period (both scenarios):
 
       ever_0 = 0
 
-      ever_1 = c_1 
+      ever_1 = c_1
 
       ever_2 = ever_1 + (c_2 - 0.15 * ever_1)
 
@@ -864,9 +864,9 @@ For the burn-in period (both scenarios):
 
   For simulants with prior exposure to isa or dara:
 
-		If :code:`eligible_for_retreatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%. 
+		If :code:`eligible_for_retreatment == True`, determine if they will be retreated with an anti-CD38 antimonoclonal antibody treatment with a probability of 15%.
 
-		If it is determined that they will be retreated, determine if they will receive an isa-containing treatment or dara-containing treatment, with the probability of isa-containing treatment equal to :math:`\frac{c_\text{isa}}{c_\text{isa} + c_\text{dara}}`, where :math:`c` represents the coverage proportion for the respective treatment categories at the current timestep for the line of treatment that the simulant occupies. 
+		If it is determined that they will be retreated, determine if they will receive an isa-containing treatment or dara-containing treatment, with the probability of isa-containing treatment equal to :math:`\frac{c_\text{isa}}{c_\text{isa} + c_\text{dara}}`, where :math:`c` represents the coverage proportion for the respective treatment categories at the current timestep for the line of treatment that the simulant occupies.
 
 		If it is determined that they will not be retreated (probability 85%), assign them to the residual treatment category. Keep :code:`eligible_for_retreatment = True`.
 
@@ -874,7 +874,7 @@ For the burn-in period (both scenarios):
 
 Each treatment category has a hazard ratio associated with it both for progression-free survival and overall survival relative to the overall progression-free survival and overall survival of their demographic group as a whole. Additionally, the hazard ratios for the isatuxamib- and daratumumab-containing treatment categories vary based on retreatment status (if a simulant is in the isa or dara treatment category and :code:`eligible_for_retreatment_i == True`, they should be assigned the retreated hazard ratios). The hazard ratios are shown in the tables below.
 
-We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence, as described in the `4.1 Simulation scenarios`_ section. The treatment effect hazard ratios for each of these data sources are summarized in the following tables. 
+We will run two separate simulations, one using the treatment effect sizes from clinical trial data and another using the treatment effect sizes from the population-based real world evidence, as described in the `4.1 Simulation scenarios`_ section. The treatment effect hazard ratios for each of these data sources are summarized in the following tables.
 
 .. list-table:: Population-Based Progression Free Survival Hazard Ratios (1a simulation use)
   :header-rows: 1
@@ -1010,10 +1010,10 @@ The code block below instructs how to construct a distribution for each hazard r
   from scipy.stats import norm, lognorm
   import random
 
-  def sample_paired_pfs_and_os_hazard_ratio_values(pfs_mid, 
-                                                   pfs_upper, 
-                                                   os_mid, 
-                                                   os_upper, 
+  def sample_paired_pfs_and_os_hazard_ratio_values(pfs_mid,
+                                                   pfs_upper,
+                                                   os_mid,
+                                                   os_upper,
                                                    seed):
     random.seed(seed)
     pfs_value = lognorm(s=(log(pfs_upper) - log(pfs_mid)) / q_975_stdnorm, scale=pfs_mid).ppf(random.random())
@@ -1044,15 +1044,15 @@ Additionally, we would like the *number* of simulants assigned to each treatment
 5.3.4 Patient registry model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This simulation tracked which simulants were eligible for and included in a 
-registry. Inclusion criteria from Sanofi’s RRMM patient registry protocol was 
-used to determine who was eligible for inclusion. Of the individual simulants 
-eligible for inclusion, each had a 5% chance of being enrolled. 
+This simulation tracked which simulants were eligible for and included in a
+registry. Inclusion criteria from Sanofi’s RRMM patient registry protocol was
+used to determine who was eligible for inclusion. Of the individual simulants
+eligible for inclusion, each had a 5% chance of being enrolled.
 
 Inlcusion criteria
 ^^^^^^^^^^^^^^^^^^
 
-According to Sanofi’s RRMM patient registry protocol, patients must meet all the 
+According to Sanofi’s RRMM patient registry protocol, patients must meet all the
 following criteria:
 
  1. 18 years and older
@@ -1060,30 +1060,30 @@ following criteria:
  3. First time using Isa (never received Isa for treatment of disease other than RRMM)
  4. No personal history of other malignant cancers in the past 3 years
 
-Criteria 1-3 above were included as criteria in the simulation. 1 and 2 
-were simulant characteristics based on the simulation design. 3 requires a 
-simulant with RRMM must have had at least one previous line of treatment but 
-have not been previously treated with isatuximab for diseases other than RRMM. 
-Based on discussion with Sanofi and our domain expert, we decided to not 
-incorporate 4, personal history of malignancy, as a determinant in registry 
-enrollment within the simulation as it introduced additional analytic complexity 
-and we expect this criterion to have a small impact on eligibility.  
+Criteria 1-3 above were included as criteria in the simulation. 1 and 2
+were simulant characteristics based on the simulation design. 3 requires a
+simulant with RRMM must have had at least one previous line of treatment but
+have not been previously treated with isatuximab for diseases other than RRMM.
+Based on discussion with Sanofi and our domain expert, we decided to not
+incorporate 4, personal history of malignancy, as a determinant in registry
+enrollment within the simulation as it introduced additional analytic complexity
+and we expect this criterion to have a small impact on eligibility.
 
 .. note::
- 
- We chose not to enforce inclusion criterion number 2 (with RRMM) for the 
- alternative scenario in our simulation. The removal of this criterion allows us 
- to demonstrate the potential additional number of eligible and enrolled patients 
- if the registry were to accept NDMM patients at their first line of treatment in 
- accordance with the modeled isatuximab scale-up in the first line of treatment 
+
+ We chose not to enforce inclusion criterion number 2 (with RRMM) for the
+ alternative scenario in our simulation. The removal of this criterion allows us
+ to demonstrate the potential additional number of eligible and enrolled patients
+ if the registry were to accept NDMM patients at their first line of treatment in
+ accordance with the modeled isatuximab scale-up in the first line of treatment
  in our alternative scenario.
 
 Power calculation
 ^^^^^^^^^^^^^^^^^
 
-To calculate the number of simulants eligible for inclusion and the number of 
-simulants in the registry for each calendar year from 2021 to 2025, we used the 
-equation presented below: 
+To calculate the number of simulants eligible for inclusion and the number of
+simulants in the registry for each calendar year from 2021 to 2025, we used the
+equation presented below:
 
 :math:`N_{candidate}(t) = Prev_{RRMM}(t) \times F_{Isa}`
 
@@ -1094,25 +1094,25 @@ And,
 Where,
  - :math:`N_{candidate}(t)` is the number of registry candidates in year t.
  - :math:`N_{enrollee}(t)` is the number of simulants in the registry in year t.
- - :math:`Prev_{RRMM}(t)` is the number of adult (15+ in our sim) prevalent RRMM 
+ - :math:`Prev_{RRMM}(t)` is the number of adult (15+ in our sim) prevalent RRMM
    cases in year t.
  - :math:`F_{Isa}` is the proportion of population eligible for Isatuximab treatment.
- - :math:`P` is the proportion of registry candidates that will be selected into 
+ - :math:`P` is the proportion of registry candidates that will be selected into
    the registry. We assume P is a constant number equal to **5%** over time.
 
 Registry enrollment system
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We set January 1, 2021 as the start date of the registry and assumed that no 
-one was in the registry prior to the start date. At each simulation time step, 
-we looked at each simulant’s disease status and treatment history. If an 
-individual simulant met the inclusion criteria, they were eligible for inclusion. 
-Those eligible had a 5% chance of being enrolled, and they would stay in the 
-registry until death. The probability used to enroll eligible simulants into the 
-registry is a constant variable over the course of the simulation, independent 
-from simulant’s age, sex, race, cytogenetic risk, and renal function. We captured 
-two measures from the patient registry component: the cumulative number of eligible 
-simulants; and the cumulative number of living simulants in the registry.  
+We set January 1, 2021 as the start date of the registry and assumed that no
+one was in the registry prior to the start date. At each simulation time step,
+we looked at each simulant’s disease status and treatment history. If an
+individual simulant met the inclusion criteria, they were eligible for inclusion.
+Those eligible had a 5% chance of being enrolled, and they would stay in the
+registry until death. The probability used to enroll eligible simulants into the
+registry is a constant variable over the course of the simulation, independent
+from simulant’s age, sex, race, cytogenetic risk, and renal function. We captured
+two measures from the patient registry component: the cumulative number of eligible
+simulants; and the cumulative number of living simulants in the registry.
 
 .. _mm5.4:
 
@@ -1145,7 +1145,7 @@ simulants; and the cumulative number of living simulants in the registry.
      - Baseline
      - Multiple myeloma
      - Incidence (cases per person-year)
-   * - 
+   * -
      - 2022
      - 20 to 24
      - Male
@@ -1154,50 +1154,50 @@ simulants; and the cumulative number of living simulants in the registry.
      - Alternative
      - Relapsed/refractory multiple myeloma
      - Prevalence (cases per person-year)
-   * - 
+   * -
      - 2023
      - 25 to 29
-     - 
-     - 
+     -
+     -
      - Population with RI
-     - 
-     - 
+     -
+     -
      - Deaths (per person-year)
-   * - 
+   * -
      - 2024
      - ...
-     - 
-     - 
+     -
+     -
      - Elder population
-     - 
-     - 
+     -
+     -
      - Median PFS (weeks)
-   * - 
+   * -
      - 2025
      - 95 plus
-     - 
-     - 
-     - 
-     - 
-     - 
+     -
+     -
+     -
+     -
+     -
      - One-year PFS (%)
-   * - 
-     - 
-     - 
-     - 
-     - 
-     - 
-     - 
-     - 
+   * -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
      - Median OS (weeks)
-   * - 
-     - 
-     - 
-     - 
-     - 
-     - 
-     - 
-     - 
+   * -
+     -
+     -
+     -
+     -
+     -
+     -
+     -
      - One-year OS (%)
 
 - High-risk cytogenetics: abnormalities of Del(17p) t(14;16) t(14;20) Del(1p)
@@ -1223,32 +1223,32 @@ simulants; and the cumulative number of living simulants in the registry.
    * - scenario
      - Intervention scenario. Choose from ['baseline', 'alternative']
    * - treatment_line
-     - Treatment line/disease state a simulant is in. If a simulant is in state 
-       `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose 
+     - Treatment line/disease state a simulant is in. If a simulant is in state
+       `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose
        from [1, 2, 3, 4, 5+]
    * - period
-     - The number of days since the entrance into the `treatment_line` that the 
+     - The number of days since the entrance into the `treatment_line` that the
        count measure was evaluated on.
    * - alive_at
      - Count of at-risk simulants alive at 'period' days since they entered `treatment_line`.
    * - died_by
      - Count of simulants who died at `period` days since they entered `treatment_line`.
    * - progress_by
-     - Count of simulants who progressed to next line of treatment/disease state 
+     - Count of simulants who progressed to next line of treatment/disease state
        at `period` days since they entered `treatment_line`.
    * - sim_end_on
-     - Count of simulants without death or progression at the end of the simulation 
-       at `period` days since they entered `treatment_line`. 
+     - Count of simulants without death or progression at the end of the simulation
+       at `period` days since they entered `treatment_line`.
 
 Time frame for survival observer (timestep = 28 days):
  1. start_date = 2021-01-01, end_date = 2025-12-31
  2. start_date = 2025-01-01, end_date = 2025-12-31
 
 .. note::
- 
-   Currently, there is no stratification of treatmnet category by line of treatmnet. 
-   If time allows, we will add this stratification to survival observer metrics so 
-   that we can compare survival outcomes for simulants treated with Isa/Dara to 
+
+   Currently, there is no stratification of treatmnet category by line of treatmnet.
+   If time allows, we will add this stratification to survival observer metrics so
+   that we can compare survival outcomes for simulants treated with Isa/Dara to
    residual category.
 
 .. _mm6.0:
@@ -1262,35 +1262,35 @@ Time frame for survival observer (timestep = 28 days):
 7.0 Limitations
 +++++++++++++++
 
- 1. The incorporation of ASCT into the treatment model of the simulation is 
-    dependent on data availability. If it is not incorporated we may underestimate 
-    the duration to first relapse among MM patients (though because it would not 
-    be incorporated in either the baseline or alternative scenarios, we do not 
-    expect the proportional difference between the two scenarios would be significantly 
-    impacted). To model the effect of ASCT along with the first-line treatment 
-    for MM patients, we need additional information on how long patients wait 
-    before they can get the transplant. We may overestimate the hazard of not 
-    receiving a transplant if we assume any patient who dies before receiving a 
-    transplant is a non-transplant patient. We do not intend to incorporate an 
+ 1. The incorporation of ASCT into the treatment model of the simulation is
+    dependent on data availability. If it is not incorporated we may underestimate
+    the duration to first relapse among MM patients (though because it would not
+    be incorporated in either the baseline or alternative scenarios, we do not
+    expect the proportional difference between the two scenarios would be significantly
+    impacted). To model the effect of ASCT along with the first-line treatment
+    for MM patients, we need additional information on how long patients wait
+    before they can get the transplant. We may overestimate the hazard of not
+    receiving a transplant if we assume any patient who dies before receiving a
+    transplant is a non-transplant patient. We do not intend to incorporate an
     option for “delayed transplant” in which transplant occurs at first relapse.
- 2. We assume the incidence of MM from GBD is the detection rate of symptomatic 
+ 2. We assume the incidence of MM from GBD is the detection rate of symptomatic
     cases.
- 3. Guided by Sanofi’s RRMM patient registry protocol, patients who had previous 
-    malignancy in the past 3 years are not eligible to be enrolled in the registry. 
-    That means some RRMM patients will be excluded from registry based on their 
-    personal history of malignancy. Due to the fact that there is only a small 
-    proportion (less than 5%) of RRMM patietns with malignancy in the past 3 
-    years, we don't use the history of malignancy as a determinant factor in our 
-    list of inclusion criteria.  
+ 3. Guided by Sanofi’s RRMM patient registry protocol, patients who had previous
+    malignancy in the past 3 years are not eligible to be enrolled in the registry.
+    That means some RRMM patients will be excluded from registry based on their
+    personal history of malignancy. Due to the fact that there is only a small
+    proportion (less than 5%) of RRMM patietns with malignancy in the past 3
+    years, we don't use the history of malignancy as a determinant factor in our
+    list of inclusion criteria.
 
 
 8.0 References
 +++++++++++++++
 
 .. [Attal-et-al-2019]
-   Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and 
-   low-dose dexamethasone versus pomalidomide and low-dose dexamethasone in patients 
-   with relapsed and refractory multiple myeloma (ICARIA-MM): a randomised, 
+   Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and
+   low-dose dexamethasone versus pomalidomide and low-dose dexamethasone in patients
+   with relapsed and refractory multiple myeloma (ICARIA-MM): a randomised,
    multicentre, open-label, phase 3 study. Lancet 2019; 394: 2096–107.
 
 .. [Braunlin-et-al-2021]
@@ -1300,8 +1300,8 @@ Time frame for survival observer (timestep = 28 days):
   Derman, B. A., Jasielec, J., Langerman, S. S., Zhang, W., Jakubowiak, A. J., & Chiu, B. C. H. (2020). Racial differences in treatment and outcomes in multiple myeloma: a multiple myeloma research foundation analysis. Blood cancer journal, 10(8), 1-7.
 
 .. [Dimopoulos-et-al-2020]
-   Dimopoulos MA, Leleu X, Moreau P, et al. Isatuximab plus pomalidomide and 
-   dexamethasone in relapsed/refractory multiple myeloma patients with renal 
+   Dimopoulos MA, Leleu X, Moreau P, et al. Isatuximab plus pomalidomide and
+   dexamethasone in relapsed/refractory multiple myeloma patients with renal
    impairment: ICARIA-MM subgroup analysis. Leukemia 2021; 35: 562–72.
 
 .. [Dimopoulos-et-al-2008]
@@ -1338,5 +1338,3 @@ Time frame for survival observer (timestep = 28 days):
 .. [Sanofi-2021] FDA approves Sarclisa® (isatuximab) in combination with carfilzomib and dexamethasone for patients with relapsed or refractory multiple myeloma. Sanofi. 2021; 31 March 2021.
     Retrieved 9 April 2021.
     https://www.sanofi.com/en/media-room/press-releases/2021/2021-03-31-23-15-00-2202919
-
-
