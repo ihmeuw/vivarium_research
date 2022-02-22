@@ -27,7 +27,7 @@
 .. _2019_concept_model_vivarium_sanofi_multiple_myeloma:
 
 =======================================================
-Vivarium - CSU - Simulating Multiple Myeloma registries
+Vivarium CSU Multiple Myeloma Registries Phase 1
 =======================================================
 
 .. contents::
