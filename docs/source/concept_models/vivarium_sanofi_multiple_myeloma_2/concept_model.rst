@@ -12,9 +12,9 @@
   model title.  For instance, if you were doing a model of severe acute malnutrition
   for the Children's Investment Fund Foundation based on GBD 2019, we might have
 
-    YOUR_MODEL_TITLE = Vivarium CIFF Severe Acute Malnutrition
-    YOUR_MODEL_UNDERSCORE = 2019_concept_model_vivarium_ciff_sam
-    YOUR_MODEL_SHORT_NAME = ciff_sam
+    YOUR_MODEL_TITLE = Vivarium CSU Multiple Myeloma Registries Phase 2
+    YOUR_MODEL_UNDERSCORE = 2019_concept_model_vivarium_sanofi_multiple_myeloma_phase_2
+    YOUR_MODEL_SHORT_NAME = mm2_
 
 ..
   Section title decorators for this document:
@@ -47,11 +47,11 @@
 
 
 
-.. _{YOUR_MODEL_UNDERSCORE}:
+.. _2019_concept_model_vivarium_sanofi_multiple_myeloma_phase_2:
 
-==================
-{YOUR_MODEL_TITLE}
-==================
+======================================================
+Vivarium CSU Multiple Myeloma Registries Phase 2
+======================================================
 
 .. contents::
   :local:
@@ -62,37 +62,37 @@
 |       |                            |
 +-------+----------------------------+
 
-.. _{YOUR_MODEL_SHORT_NAME}1.0:
+.. _mm2_1.0:
 
 1.0 Background
 ++++++++++++++
 
 
-.. _{YOUR_MODEL_SHORT_NAME}1.1:
+.. _mm2_1.1:
 
 1.1 Project overview
 --------------------
 
 
 
-.. _{YOUR_MODEL_SHORT_NAME}1.2:
+.. _mm2_1.2:
 
 1.2 Literature review
 ---------------------
 
 
-.. _{YOUR_MODEL_SHORT_NAME}2.0:
+.. _mm2_2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
 
 
-.. _{YOUR_MODEL_SHORT_NAME}3.0:
+.. _mm2_3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
 
-.. _{YOUR_MODEL_SHORT_NAME}3.1:
+.. _mm2_3.1:
 
 3.1 Causal diagram
 ------------------
@@ -119,7 +119,7 @@
 **Mediators (M)**:
 
 
-.. _{YOUR_MODEL_SHORT_NAME}3.2:
+.. _mm2_3.2:
 
 3.2 Effect sizes
 ----------------
@@ -131,18 +131,18 @@
 
 
 
-.. _{YOUR_MODEL_SHORT_NAME}4.1:
+.. _mm2_4.1:
 
 4.1 Simulation scenarios
 ------------------------
 
 
-.. _{YOUR_MODEL_SHORT_NAME}5.0:
+.. _mm2_5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _{YOUR_MODEL_SHORT_NAME}5.1:
+.. _mm2_5.1:
 
 5.1 Vivarium concept model
 --------------------------
@@ -150,12 +150,12 @@
 .. note::
   This is our standard vivarium concept model diagram we are used to seeing
 
-.. _{YOUR_MODEL_SHORT_NAME}5.2:
+.. _mm2_5.2:
 
 5.2 Demographics
 ----------------
 
-.. _{YOUR_MODEL_SHORT_NAME}5.2.1:
+.. _mm2_5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -168,14 +168,14 @@
   - stratifications
 
 
-.. _{YOUR_MODEL_SHORT_NAME}5.2.2:
+.. _mm2_5.2.2:
 
 5.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 
-.. _{YOUR_MODEL_SHORT_NAME}5.3:
+.. _mm2_5.3:
 
 5.3 Models
 ----------
@@ -184,7 +184,7 @@
   here we use the compartmental (SEIR) models with squares
 
 
-.. _{YOUR_MODEL_SHORT_NAME}5.3.1:
+.. _mm2_5.3.1:
 
 5.3.1 Model 1
 ~~~~~~~~~~~~~
@@ -194,7 +194,7 @@
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _{YOUR_MODEL_SHORT_NAME}5.3.2:
+.. _mm2_5.3.2:
 
 5.3.2 Model 2
 ~~~~~~~~~~~~~
@@ -204,7 +204,7 @@
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _{YOUR_MODEL_SHORT_NAME}5.3.3:
+.. _mm2_5.3.3:
 
 5.3.3 Model 3
 ~~~~~~~~~~~~~
@@ -214,7 +214,7 @@
   - add verification and validation strategy
   - add python-style pseudo code to summarize model algorithm if necessary
 
-.. _{YOUR_MODEL_SHORT_NAME}5.3.4:
+.. _mm2_5.3.4:
 
 5.3.4 Model 4
 ~~~~~~~~~~~~~
@@ -225,12 +225,12 @@
   - add python-style pseudo code to summarize model algorithm if necessary
 
 
-.. _{YOUR_MODEL_SHORT_NAME}5.4:
+.. _mm2_5.4:
 
 5.4 Desired outputs
 -------------------
 
-.. _{YOUR_MODEL_SHORT_NAME}5.5:
+.. _mm2_5.5:
 
 5.5 Output meta-table shell
 ---------------------------
@@ -238,13 +238,13 @@
 .. todo::
   - add special stratifications if necessary
 
-.. _{YOUR_MODEL_SHORT_NAME}6.0:
+.. _mm2_6.0:
 
 6.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
 
-.. _{YOUR_MODEL_SHORT_NAME}7.0:
+.. _mm2_7.0:
 
 7.0 Limitations
 +++++++++++++++
