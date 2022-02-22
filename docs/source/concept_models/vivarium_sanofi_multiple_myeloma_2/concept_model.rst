@@ -2,21 +2,6 @@
     :class: underline
 
 ..
-  RST needs unique labels for its reference targets (the things you make with
-  ".. my_link_name:").  This document has several pre-defined reference target
-  templates you should do a find and replace on when you copy this document.
-  They are {YOUR_MODEL_TITLE} which you should replace with a title-case version
-  of your model name, {YOUR_MODEL_UNDERSCORE} which you should replace with an
-  underscore-separated all lowercase version of your model name, and
-  {YOUR_MODEL_SHORT_NAME} which you should replace with an abbreviation of your
-  model title.  For instance, if you were doing a model of severe acute malnutrition
-  for the Children's Investment Fund Foundation based on GBD 2019, we might have
-
-    YOUR_MODEL_TITLE = Vivarium CSU Multiple Myeloma Registries Phase 2
-    YOUR_MODEL_UNDERSCORE = 2019_concept_model_vivarium_sanofi_multiple_myeloma_phase_2
-    YOUR_MODEL_SHORT_NAME = mm2_
-
-..
   Section title decorators for this document:
 
   ==============
@@ -43,9 +28,6 @@
   choose a new decorator symbol from the list here:
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
-
-
-
 
 .. _2019_concept_model_vivarium_sanofi_multiple_myeloma_phase_2:
 
