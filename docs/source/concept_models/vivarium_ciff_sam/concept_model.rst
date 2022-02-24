@@ -483,6 +483,9 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 5.3.3 sensitivity analysis for SAM k value, updates to diarrheal diseases cause model
      - Sensitivity analysis run on sam k value from the wasting treatment intervention model such that baseline value = 6.7 (95% CI: 5.3, 8.4) and the alternative value = 3.5 (95% CI: 3.1, 3.9). Also, updates to the diarrheal diseases prevalence and excess mortality rate `in accordance with this pull request <https://github.com/ihmeuw/vivarium_research/pull/759>`_
      - [1] `Cause model parameters look good <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_cause_verification.pdf>`_ with the exception of some early neonatal age groups, which should have minimal impact on our model [2] `Wasting exposures look as expected for both SAM K scenarios <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_exposure.pdf>`_. [3] still seeing the issues with the ITN intervention as previously identified. Also, it appears that we are now overestimating the impact of MMS relative to IFA, which is a new problem. `Notebook for the LBWSG intervention validations found here <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.3_lbwsg_interventions.ipynb>`_ 
+   * - 6.0.0 diarrheal diseases risk effects
+     - Applied risk effects of diarrheal diseases on wasting transition rates
+     - [1] `appears that there are wasting transition rates to more severe wasting states occuring among simulants under six months of age <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_. This is a new problem that appears to be a result of the diarrheal diseases risk effects implementation. [2] the previous problem is resulting in an `overestimation of SAM in the first year of life and an overestimation of associated morbidity/mortality due to causes affected by the wasting risk factor. However, the wasting exposure distribution appears to be validating to GBD in the older age groups <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_gbd_verification.ipynb>`_, implying that the issue may be driven by the wasting transitions in the under six month population rather than an issue with the diarrheal diseases risk effects in the population above six months of age. [3] there is a slight `overestimation of the wasting risk effects on mortality due to diarrheal diseases <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_risk_effects_verification.ipynb>`_. This is likely due to a bias in the PAF equation due to a difference in the wasting risk exposure distribution among the general population and the population at risk of the diarrheal diseases mortality outcome (those infected with diarrheal diseases) due to the correlation induced bewteen these factor through the implmenetation of the effect of diarrheal disease incidence on wasting transition rates. [4] ITN intervention coverage and effect size looking as expected now.
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -503,14 +506,14 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - LBWSG exposure changes for some simulants upon transition from the early to late neonatal age group. This should not affect model mortality rates given that the relative risk value during the late neonatal age group is appropriately assigned according to exposure at birth. However, the issue will cause errors in the birthweight observers in the simulation.
      - Implemented and run. Needs interactive sim validation
      - Soon
-   * - Insectide treated net intervention coverage immediate rather than linear scale-up
-     - `See coverage plots in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.3_lbwsg_interventions.ipynb>`_
+   * - Wasting transition rates among simulants younger than six months of age
+     - `As seen in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_
+     - Rajan implemented and launched. Ali to validate.
+     - ASAP 
+   * - Biased PAF for risk effect of wasting on diarrheal diseases excess mortality rate
+     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_risk_effects_verification.ipynb>`_
+     - Evaluate results with updated vicious cycle bugfix implementation to see if update is still necessary. If so, update to a `custom PAF calculation defined in this PR <https://github.com/ihmeuw/vivarium_research/pull/786>`_
      - TBD
-     - Soon
-   * - Insectide treated net intervention birthweight shift varies by scenario and is not of expected magnitude
-     - `See effect size estimation in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/5.3.3_lbwsg_interventions.ipynb>`_
-     - TBD
-     - Soon
 
 .. todo::
 
