@@ -591,7 +591,7 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
      - Nicole's calculations (get lit source!)
    * - r4
-     - 1 - e^(rate). 6-12 months: rate = 0.006140 (SD: 0.003015, normal distribution of uncertainty). 1-4 years: rate = 0.005043  (SD: 0.002428, normal distribution of uncertainty)
+     - 1 - e^{-rate}. 6-12 months: rate = 0.006140 (SD: 0.003015, normal distribution of uncertainty). 1-4 years: rate = 0.005043  (SD: 0.002428, normal distribution of uncertainty)
      - Daily probability of remission from cat 3 into cat 4
      - From `implied transition rate from the KI data <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_. Assume a normal distribution of uncertainty.
    * - t1
