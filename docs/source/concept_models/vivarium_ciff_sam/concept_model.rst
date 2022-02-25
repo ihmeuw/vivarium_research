@@ -486,6 +486,9 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 6.0.0 diarrheal diseases risk effects
      - Applied risk effects of diarrheal diseases on wasting transition rates
      - [1] `appears that there are wasting transition rates to more severe wasting states occuring among simulants under six months of age <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_. This is a new problem that appears to be a result of the diarrheal diseases risk effects implementation. [2] the previous problem is resulting in an `overestimation of SAM in the first year of life and an overestimation of associated morbidity/mortality due to causes affected by the wasting risk factor. However, the wasting exposure distribution appears to be validating to GBD in the older age groups <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_gbd_verification.ipynb>`_, implying that the issue may be driven by the wasting transitions in the under six month population rather than an issue with the diarrheal diseases risk effects in the population above six months of age. [3] there is a slight `overestimation of the wasting risk effects on mortality due to diarrheal diseases <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_risk_effects_verification.ipynb>`_. This is likely due to a bias in the PAF equation due to a difference in the wasting risk exposure distribution among the general population and the population at risk of the diarrheal diseases mortality outcome (those infected with diarrheal diseases) due to the correlation induced bewteen these factor through the implmenetation of the effect of diarrheal disease incidence on wasting transition rates. [4] ITN intervention coverage and effect size looking as expected now.
+   * - 6.0.1 bugfix for wasting transitions under six months of age
+     - Fixed a bug identified in the last model run that caused incident wasting transitions in simulants younger than six months of age
+     - [1] `There are no longer wasting transitions among simulants younger than six months of age <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_. [2] `Wasting and GBD cause model validation looks reasonable <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.1_gbd_verification.ipynb>`_. [3] `still an overestimation of wasting risk effects on diarrheal disease mortality <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.1_risk_effects_verification.ipynb>`_ [4] `we are overestimating the expected wasting state prevalence ratio by diarrheal disease status <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -506,14 +509,14 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - LBWSG exposure changes for some simulants upon transition from the early to late neonatal age group. This should not affect model mortality rates given that the relative risk value during the late neonatal age group is appropriately assigned according to exposure at birth. However, the issue will cause errors in the birthweight observers in the simulation.
      - Implemented and run. Needs interactive sim validation
      - Soon
-   * - Wasting transition rates among simulants younger than six months of age
-     - `As seen in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_
-     - Rajan implemented and launched. Ali to validate.
-     - ASAP 
-   * - Biased PAF for risk effect of wasting on diarrheal diseases excess mortality rate
-     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_risk_effects_verification.ipynb>`_
-     - Evaluate results with updated vicious cycle bugfix implementation to see if update is still necessary. If so, update to a `custom PAF calculation defined in this PR <https://github.com/ihmeuw/vivarium_research/pull/786>`_
-     - TBD
+   * - Overestimation of wasting effect on diarrheal diseases mortality
+     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_risk_effects_verification.ipynb>`_. Perhaps due to biased PAF by using the population level wasting risk exposure for the PAF calculation rather than the wasting risk exposure specific to the population with diarrheal diseases.
+     - Update to a `custom PAF calculation defined in this PR <https://github.com/ihmeuw/vivarium_research/pull/786>`_
+     - Soon
+   * - Overestimation of wasting state prevalence ratios by diarrheal disease status
+     - `Shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_. Unsure of reason
+     - Discuss with Abie. Potential ideas include: long tail of time spent in diarrheal disease infected state due to the assumption of a constant hazard. Correlation between stunting and wasting (prevalence ratios are exaggerated in sqlns scenario), which due to stunting effect on diarrhea will exaggerate wasting and diarrhea correlation. 
+     - Soon
 
 .. todo::
 
