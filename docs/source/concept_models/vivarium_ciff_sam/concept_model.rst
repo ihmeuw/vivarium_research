@@ -510,11 +510,11 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Implemented and run. Needs interactive sim validation
      - Soon
    * - Overestimation of wasting effect on diarrheal diseases mortality
-     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_risk_effects_verification.ipynb>`_. Perhaps due to biased PAF by using the population level wasting risk exposure for the PAF calculation rather than the wasting risk exposure specific to the population with diarrheal diseases.
+     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.1_risk_effects_verification.ipynb>`_. Perhaps due to biased PAF by using the population level wasting risk exposure for the PAF calculation rather than the wasting risk exposure specific to the population with diarrheal diseases.
      - Update to a `custom PAF calculation defined in this PR <https://github.com/ihmeuw/vivarium_research/pull/786>`_
      - Soon
    * - Overestimation of wasting state prevalence ratios by diarrheal disease status
-     - `Shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.0_vicious_cycle_effect_verification.ipynb>`_. Unsure of reason
+     - `Shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.1_vicious_cycle_effect_verification.ipynb>`_. Unsure of reason
      - Discuss with Abie. Potential ideas include: long tail of time spent in diarrheal disease infected state due to the assumption of a constant hazard. Correlation between stunting and wasting (prevalence ratios are exaggerated in sqlns scenario), which due to stunting effect on diarrhea will exaggerate wasting and diarrhea correlation. 
      - Soon
 
