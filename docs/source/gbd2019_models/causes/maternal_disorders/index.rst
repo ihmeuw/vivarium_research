@@ -230,7 +230,7 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - 
    * - Incident maternal disorders
      - incidence_rate_c366 / incidence_p
-     - **Post-maternal disorder state persists for one year or until death**; whichever is sooner. Occupying the post-maternal disorder state does not prevent simulant from experiencing a subsequent incidence maternal disorder case.
+     - **Post-maternal disorder state persists for one timestep**
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
 
