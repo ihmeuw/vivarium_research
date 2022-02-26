@@ -202,6 +202,10 @@ Including,
 
   * :ref:`Anemia impairment model <2019_anemia_impairment>`
 
+.. todo::
+
+  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs.
+
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -229,6 +233,11 @@ Including,
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Pregnancy model <other_models_pregnancy>`
+
+.. todo::
+
+  Document updates to pregnancy model that were made to accomodate the accrual of maternal disorders YLDs (a timestep long post-maternal disorders state in which anemia YLDs are not accrued?)
+
 * Cognition
 
 4.1.7 Intervention Models

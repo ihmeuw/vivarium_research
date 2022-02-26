@@ -257,8 +257,8 @@ The following table defines the parameters used in the calculation of maternal d
      - incidence rate of maternal disorders
      - como, decomp_step='step5'
      - 
-   * - disability_weight_c366
-     - Summary maternal disorders disability weight
+   * - ylds_non_fatal_maternal_disorder_case
+     - Number of YLDs attributable to a single non-fatal maternal disorder case
      - See `Years lived with disability`_ section
      - 
    * - ylds_c366
@@ -288,21 +288,20 @@ Years of life lost (YLLs) should be assigned to simulants who experience a death
 Years lived with disability
 """"""""""""""""""""""""""""
 
-Simulants who experience an incident case of maternal disorders and occupy the post-maternal disorders state following the incident case (they remain in this state for one year or until death; whichever comes first) will accrue YLDs due to maternal disorders according to the summary maternal disorders disability weight (:math:`DW_\text{c366}`, defined below. Notably, for simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia (this is reflected in the equation below).
+Simulants who experience an incident case of maternal disorders and occupy the post-maternal disorders state following the incident case and will remain there for a single timestep. The disability weight for the post-maternal disorders time-step long state will then be the number of YLDs per case (defined below) multiplied by :math:`\text{time step duration in days} / 365`. Notably, for simulations that evaluate disability due to anemia through the :ref:`hemoglobin/anemia model <2019_hemoglobin_anemia_and_iron_deficiency>` such as the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, the disability due to anemia sequelae should not be counted as part of YLDs due to maternal disorders as they will be tracked separately as YLDs due to anemia (this is reflected in the equation below).
 
 .. math::
 
-  DW_\text{c366} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
+  YLDs per non-fatal maternal disorders case = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
 
-.. note::
 
-  Implementation of YLDs due to maternal disorders should follow the standard vivarium procedure that ensures the sum of YLDs across maternal disorder YLDs and YLDs due to other simultaneous prevalent causes that a simulant may be afflicted with (such as anemia or postpartum depression), reflects the strategy of calculating joint disability weights of multiple comorbid conditions as shown in the equation below:
+.. todo::
 
-  .. math::
+  Because these YLDs are assigned in a unique manner, special consideration should be paid to the estimation of YLDs due to multiple causes (ex: YLDs due to maternal disorders and anemia concurrently). 
 
-    DW_\text{overall} = 1 - \prod_{n=1}^{n} 1 - DW_n
+    Reminder: :math:`DW_\text{overall} = 1 - \prod_{n=1}^{n} 1 - DW_n`
 
-  **If a simulant occupies the post-maternal disorder state and then enters it again with a subsequent birth while they still occupy the post-maternal disorder state from the prior birth, the disability weight for both episodes of maternal disorders should be calculated in this same manner.**
+  Since we are attributing all maternal disorder YLDs to a single timestep rather than over an annual period, we will need to quantify and document the bias introduced in the overestimation of total YLDs among the population with concurrent maternal disorders and anemia for the :ref:`IV iron maternal simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` (todo item for Ali).
 
 Validation Criteria
 +++++++++++++++++++
