@@ -236,7 +236,7 @@ Including,
 
 .. todo::
 
-  Document updates to pregnancy model that were made to accomodate the accrual of maternal disorders YLDs (a timestep long post-maternal disorders state in which anemia YLDs are not accrued?)
+  Clarify with software engineers if updates were made to the pregnancy model to accomodate the accrual of maternal disorders YLDs (a timestep long post-maternal disorders state in which anemia YLDs are not accrued?). If so, then add these updates to the pregnancy model documentation.
 
 * Cognition
 
