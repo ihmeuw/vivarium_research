@@ -426,22 +426,22 @@ where t is the period for which transition the is estimated (a year) eg. 365 day
     - Source
   * - :math:`\text{time to recovery}_\text{effectively treated SAM}`
     - 6-59 months old
-    - 48.3
+    - 48.3 + 14 = **62.3**
     - point value
-    - Studies censored participants who did not recover in estimation of median time to recovery. 48.3 value is a weighted average between seven studies reported by [Zw_2020tx]_. Random effects meta analysis would improve this estimate (see todo note below).
+    - Studies censored participants who did not recover in estimation of median time to recovery. 48.3 value is a weighted average between seven studies reported by [Zw_2020tx]_. Assume an average two week treatment delay. Random effects meta analysis would improve this estimate (see todo note below).
     - [Zw_2020tx]_; Ethiopia
   * - :math:`\text{time to recovery}_\text{untreated MAM}`
     - 6-59 months old
-    - 63
+    - 147 
     - point value
-    - IQR reported, but no uncertainty about median value. Used MUAC definition of malnutrition.
-    - [James_2016]_; Ethiopia
+    - Used MUAC definition of malnutrition.
+    - Transition rate of 1/21 weeks derived from [James_2016]_ (Ethiopia) `in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/Calculation%20of%20James%20paper%20MAM%20to%20mild%20rate.ipynb>`_
   * - :math:`\text{time to recovery}_\text{effectively treated MAM}`
     - 6-59 months old
-    - 41.3 (95% CI: 34.4, 49)
+    - 41.3 (95% CI: 34.4, 49) + 14 = **55.3 (95% CI: 48.4, 63)**
     - normal
     - Censored participants who did not recover in estimation of median time to recovery.
-    - [Ackatia_Armah_2015tx]_; Mali
+    - [Ackatia_Armah_2015tx]_ (Mali). Added an assumed average 2 week time to treatment delay.
   * - :math:`C_{SAM}`
     - 6-59 months old
     - 0.488 (95% CI:0.374-0.604)
