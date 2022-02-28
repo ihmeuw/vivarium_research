@@ -9,4 +9,3 @@ GBD 2017 Models
    :glob:
 
    */index
-   concept_models/vivarium_conceptmodel_template/concept_model
