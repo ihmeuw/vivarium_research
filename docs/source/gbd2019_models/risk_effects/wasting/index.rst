@@ -44,7 +44,7 @@ Child wasting, defined as low weight for heigh/length, is a measure of acute mal
 GBD Modeling Strategy
 ----------------------
 
-The GBD 2019 risk effects of child wasting are informed by [Olofin-et-al-2013]_, which evauated the relative risk of cause-specific mortaltiy by child wasting categories [GBD-2019-Risk-Factors-Appendix-Child-Wasting-Risk-Effects]_. Notably, given that :math:`cause-specific mortality rate = excess mortality rate * prevalence`, the relative risks may be attributable to increased disease incidence (increases prevalence), duration (increases prevalence), or severity (increases excess mortality rate), or some comination of these factors. The 2019 GBD applies the child wasting risk effects equally to both morbidity and mortality estimates (YLDs and YLLs).
+The GBD 2019 risk effects of child wasting are informed by [Olofin-et-al-2013]_, which evauated the relative risk of cause-specific mortality rate (CSMR) by child wasting categories [GBD-2019-Risk-Factors-Appendix-Child-Wasting-Risk-Effects]_. Notably, given that :math:`CSMR = EMR * prevalence`, the relative risks may be attributable to increased disease incidence (increases prevalence), duration (increases prevalence), or severity (increases excess mortality rate (EMR)), or some comination of these factors. The 2019 GBD applies the child wasting risk effects equally to both morbidity and mortality estimates (YLDs and YLLs).
 
 .. note::
 
@@ -69,15 +69,29 @@ For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sa
 
 .. math::
 
-   incidence rate_\text{diarrheal diseases,i} = incidence rate_\text{diarrheal diseases} 
+   \text{incidence rate}_\text{diarrheal diseases,i} = \text{incidence rate}_\text{diarrheal diseases} 
 
 .. math:: 
 
-   excess mortality rate_\text{diarrheal diseases,i} = excess mortality rate_\text{diarrheal diseases} * (1 - PAF_\text{wasting,diarrheal diseases}) * RR_\text{wasting,diarrheal diseases,i}
+   EMR_\text{diarrheal diseases,i} = EMR_\text{diarrheal diseases} * (1 - PAF_\text{wasting,diarrheal diseases}) * RR_\text{wasting,diarrheal diseases,i}
+
+Where, for wasting state :math:`X` in wasting states cat1, cat2, cat3, and cat4:
+
+.. math::
+
+   PAF_\text{wasting,diarrheal diseases} = \frac{(\sum exposure_X \times RR_X) - 1}{\sum exposure_X \times RR_X}
+
+.. math::
+
+   exposure_X = \frac{p_{DX}}{p_{D1} + p_{D2} + p_{D3} + p_{D4}} = \frac{p_{DX}}{\text{prevalence diarrheal diseases}}
 
 .. note::
 
+   Parameters :math:`p_{D1}, p_{D2}, p_{D3}, p_{D4}` are defined on the :ref:`diarrheal diseases risk effects document <2019_risk_effect_diarrheal_diseases>`
+
    The GBD 2020 wasting relative risks should be used in tandem with the :ref:`GBD 2020 wasting risk exposure <2020_risk_exposure_wasting_state_exposure>`
+
+   NOTE: we use a custom PAF calculation rather than the GBD PAF that uses the wasting risk exposure distribution specific to those infected with diarrheal diseases to avoid bias in our application of the PAF to the population at-risk for diarrheal diseases mortality
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
