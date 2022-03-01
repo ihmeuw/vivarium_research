@@ -71,42 +71,6 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 
 .. _mm2_3.0:
 
-3.0 Causal framework
-++++++++++++++++++++
-
-.. _mm2_3.1:
-
-3.1 Causal diagram
-------------------
-
- .. note::
-    link to DAGs page
-    use round circles with DAGs
-
-**Outcome (O)**:
-
-
-
-**Most proximal determinant/exposure (E)**:
-
-
-
-**Confounders (C)**:
-
-
-
-**Effect modifiers**:
-
-
-**Mediators (M)**:
-
-
-.. _mm2_3.2:
-
-3.2 Effect sizes
-----------------
-
-
 
 4.0 Intervention
 ++++++++++++++++
