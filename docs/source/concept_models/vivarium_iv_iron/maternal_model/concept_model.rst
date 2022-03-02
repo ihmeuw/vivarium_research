@@ -500,19 +500,17 @@ For model version I:
 
 The following ouputs should be a table including the following data for each live birth that occurs in the maternal simulation:
 
+  - Input draw
+  - Scenario
+  - Random seed
   - Date of birth
   - Infant sex
-  - Birthweight exposure
+  - Birthweight exposure 
   - Gestational age exposure
-
-.. note::
-  
-  Additional information to include in this table for later model versions may include:
-
-  - Date of maternal death (if it occurs)
-  - Maternal post-partum depression (yes/no)
-  - Suboptimal breastfeeding exposure (may be included in child sim rather than maternal sim)
-  - Maternal intervention coverage (for stratification of child simulation outputs, if desired)
+  - Maternal supplementation coverage
+  - Maternal antenatal IV iron coverage
+  - Maternal postpartum IV iron coverage
+  - Birthweight shift due to intervention coverage (NOTE: alternatively, this may be calculated in the child simulation from reported maternal intervention coverage values)
 
 .. _ivironWRA5.0:
 
