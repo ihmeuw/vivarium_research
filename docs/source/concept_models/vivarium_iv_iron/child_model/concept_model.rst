@@ -160,11 +160,12 @@ Vivarium Intravenous Iron - Children under five
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
-* :ref:`Suboptimal breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>`
 
 .. note::
 
   :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>` risk exposure will be modeled as part of the :ref:`IV iron women of reproductive age simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` and subsequently assigned to simulants in the child simulation.
+
+  :ref:`Suboptimal breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>` will not be modeled for now
 
 
 4.1.4 Risk Effects Models
@@ -173,10 +174,17 @@ Vivarium Intravenous Iron - Children under five
 * :ref:`Child Wasting Risk Effects <2019_risk_effect_wasting>` (NOTE: use the modeling strategy specific to LRI and measles on this document for all affected causes, including diarrheal diseases)
 * Child stunting risk effects
 * :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
-* :ref:`Suboptimal breastfeeding <2020_risk_suboptimal_breastfeeding>`
+
+.. note::
+
+  :ref:`Suboptimal breastfeeding <2020_risk_suboptimal_breastfeeding>` risk effects will not be modeled for now
 
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Update this section to reflect the documentation of the causal effect of BW and CGF as described on the maternal supplementation intervention document
 
 * :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
 * :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
@@ -184,11 +192,6 @@ Vivarium Intravenous Iron - Children under five
 .. note::
 
   *Causation* portion of these risk correlation models should be prioritized over the correlation portion.
-
-4.1.6 Non-standard Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-* Cognition
 
 4.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -252,7 +255,42 @@ Details on how to calculate weighted averages for specific simulation parameters
 4.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. list-table:: Simulation population parameters
+.. list-table:: Simulation population parameters throughout model development
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 100,000
+     - 
+   * - Number of draws
+     - 66
+     - 
+   * - Number of random seeds
+     - 10
+     - 
+   * - Cohort type
+     - Open
+     - 
+   * - Age start
+     - 0
+     - 
+   * - Age end
+     - 5 years
+     - 
+   * - Exit age
+     - 5 years
+     - 
+   * - Sex restrictions
+     - None
+     - 
+
+.. todo::
+
+  Determine if it is necessary to have an initialized population of U5 year olds at the start of the simulation. Doing so will be helpful to maintain continuity in the way that we assign LBWSG exposure for simulants who are born into the sim and those who are initialized into the sim, but would require post-processing transformations to measure total DALYs among children under five in the beginning years of the simulation (although we would have an accurate measure of DALYs averted). Alternative strategies include a five year burn-in period (long) or discontinitous assignment of LBWSG among the initialized population (which would be harder for the software engineers, but especially with a month long burn-in period would seem to have a small impact on model results).
+
+.. list-table:: Simulation population parameters for final model version
    :header-rows: 1
 
    * - Parameter
