@@ -473,6 +473,33 @@ Where,
    * - I.0
      - Demography for Sub-Saharan Africa and South Asia
      - `Notebook for validation can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/model0/model_0_gbd_validation.ipynb>`_. All-cause mortality rates look good. Age fraction looks reasonable, but slightly off for boundary age groups, likely a result of the assumption of uniform distribution of ages within a five year age group -- ok to proceed.
+   * - I.1
+     - Pregnancy model for Sub-Saharan Africa and South Asia
+     - `Validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model1/sim_v_and_v.ipynb>`_. [1] ASFR covariate has negative values in the youngest age group for some draws... perhaps should update to truncated normal distribution. [2] duration of postpartum period appears to be too long... closer to 7 weeks than 6. [3] Request to have pregnancy person time stratified by pregnancy outcome in order to evaluate approximate differential duration of pregnancy. [4] Request to have all pregnancy transition counts rather than just np->p.
+
+.. list-table:: Outstanding verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - ASFR covariate has negative values in the youngest age group for some draws
+    - LCL is close to zero so it is possible to have negative draws assuming a normal distribution
+    - Update to a truncated normal distribution instead (Ali to document and SWEs to implement)
+    - Low priority since it hasn't broken anything yet (we're not selecting the negative draws)
+  * - Duration of postpartum period appears to be too long
+    - Unsure
+    - Investigate (both Ali and SWEs)
+    - Soon
+  * - Pregnancy person time not stratified by pregnancy outcome
+    - Not previously requested
+    - Ali to add to docuementation and then SWEs to implement once it's added
+    - Soon, may help with diagnosing postpartum issue?
+  * - Only np->p transition counts recorded in count data
+    - 
+    - SWEs to add, please
+    - Soon, but not urgent
 
 .. _ivironWRA4.4:
 
