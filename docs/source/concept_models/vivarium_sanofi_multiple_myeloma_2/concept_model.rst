@@ -52,14 +52,14 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 
 .. _mm2_1.1:
 
-1.1 Project overview
+1.1 Project Overview
 --------------------
 
 
 
 .. _mm2_1.2:
 
-1.2 Literature review
+1.2 Literature Review
 ---------------------
 
 
@@ -75,20 +75,32 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 4.0 Model Components
 ++++++++++++++++++++
 
+4.1 Cause Models
+----------------
+
+4.2 Risk Exposure Models
+------------------------
+
+4.3 Risk Effects Models
+-----------------------
+
+4.4 Intervention Models
+-----------------------
+
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
 
 6.0 Simulation Parameters
 +++++++++++++++++++++++++
 
-Locations
----------
+6.1 Locations
+-------------
 
-Population and randomness
--------------------------
+6.2 Population and Randomness
+-----------------------------
 
-Timeframe and intervention start dates
---------------------------------------
+6.3 Timeframe and Intervention Start Dates
+------------------------------------------
 
 7.0 Model Builds and Validation Tracking
 ++++++++++++++++++++++++++++++++++++++++
@@ -96,11 +108,11 @@ Timeframe and intervention start dates
 8.0 Desired Outputs
 +++++++++++++++++++
 
-Final outputs for client
-------------------------
+8.1 Final Outputs for Client
+----------------------------
 
-Requested outputs from Vivarium
--------------------------------
+8.2 Requested Outputs from Vivarium
+-----------------------------------
 
 9.0 Back of the Envelope Calculations
 +++++++++++++++++++++++++++++++++++++
