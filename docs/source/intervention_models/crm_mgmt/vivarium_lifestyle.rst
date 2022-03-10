@@ -39,10 +39,8 @@ reference for DDPOS: Diabetes Prevention Program Research Group. 10-year follow-
 SBP difference (mm Hg)=−0.981+0.921 (mean weight difference [kg]). 
 
 .. image:: weight_sbp.jpeg
-   :scale: 75 %
 
 .. image:: ddpos_sbp_ldl.png
-   :scale: 75 %
 
 reference for meta-analysis: https://www.ahajournals.org/doi/full/10.1161/HYPERTENSIONAHA.109.135178
 
