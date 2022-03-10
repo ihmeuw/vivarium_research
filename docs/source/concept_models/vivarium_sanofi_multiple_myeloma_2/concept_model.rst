@@ -38,11 +38,15 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 .. contents::
   :local:
 
-+------------------------------------+
-| List of abbreviations              |
-+=======+============================+
-|       |                            |
-+-------+----------------------------+
+.. list-table:: Abbreviations
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * -
+    -
+    -
 
 .. _mm2_1.0:
 
