@@ -115,12 +115,13 @@ also include attributes capturing race/ethnicity (:ref:`2
 <census_prl_age_sex_etc>`). To better name individuals we will also
 include an attribute for their relationship to a reference person
 (:ref:`5 <census_prl_age_sex_etc>`). Due to the complex interplay of
-these attributes we will need an enhanced fertility model (6).  We can
-use our standard mortality model (7), but will need a totally new
-model of migration (8) that accounts for moves by household and
-individual simulants and allows migration in to and out of the tracked
-population, as well as changes to geographic location and
-household id.
+these attributes we will need an enhanced fertility model (:ref:`6
+<census_prl_fertility>`).  We can use our standard mortality model
+(:ref:`7 <census_prl_mortality>`), but will need a totally new model
+of migration (:ref:`8 <census_prl_migration>`) that accounts for moves
+by household and individual simulants and allows migration in to and
+out of the tracked population, as well as changes to geographic
+location and household id.
 
 On top of this, we will layer attributes relevant to PRL: mailing
 addresses for each household (9); first, middle, and last names for
@@ -325,58 +326,173 @@ relationships are logical --- every household should have a reference
 person, and at most one spouse/partner; there should be no group
 quarters population.
 
-.. _{census_prl}5.3.2:
+.. _census_prl_fertility:
 
-5.3.2 Model 2
-~~~~~~~~~~~~~
+2.3.2 Component 6: Fertility
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+This component will follow the basic approach of the age-specific
+fertility model that we have had for a long time, but never used
+seriously. But because of the data and the application, we will apply
+fertility at the household level, instead of the individual simulant
+level. Each household will have a probability of adding a newborn
+simulant at each time step, derived from the age- and
+race/ethnicity-specific fertility rates calculated from ACS. (By
+calculating from ACS instead of taking from GBD we can represent
+race/ethnicity and perhaps in the future also include twin-ship, and
+geographic variation at the PUMA level).
 
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
+The race/ethnicity of the simulants added by the fertility model will
+be derived from the race/ethnicity of the household members; the
+household id, geography attribute, street address, and surname will
+also be derived from the parents.
 
-.. _{census_prl}5.3.3:
+Code for calculating age-, race/ethnicity-specific fertility rate:
 
-5.3.3 Model 3
-~~~~~~~~~~~~~
+.. sourcecode:: python
 
-.. todo::
+    # make household-level fertility rates
+    def extract_household_info(df):
+        assert np.all(df.household_id == df.household_id.iloc[0])
+        t = df.query('relshipp == 20').iloc[0]
 
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
+        result = {}
+        result['hh_age'] = t.age
+        result['hh_race_eth'] = t.race_eth
 
-.. _{census_prl}5.3.4:
+        result['age_zero_present'] = np.any(df.age == 0)
+        result['hh_size'] = len(df)
+        result['weight'] = t.weight # FIXME: load and use household weights here, instead of this
 
-5.3.4 Model 4
-~~~~~~~~~~~~~
+        return pd.Series(result)
 
-.. todo::
+    df_hh = acs_hh_only.query(location_str).groupby('household_id').apply(extract_household_info)
+    def weighted_mean(df, col):
+        return (df[col]*df.weight).sum() / df.weight.sum()
+    
+    df_hh.groupby(['age_group', 'hh_race_eth']).apply(weighted_mean, col='age_zero_present')
 
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
+A stretch goal would be a fertility model that included additional
+household parameters in the probability; number of children, ages of
+children, structure of adult household members (including relationship
+structure might be helpful in this, too). We will return to this in
+the future, perhaps.
+
+Multiparity --- make twins with probability from ACS, about 2.5%, to
+be computed more precisely.  See Section (16) for additional details.
+
+**Verification and validation strategy**: to verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+new simulants are being added at the expected rate.
+
+.. _census_prl_mortality:
+
+2.3.3 Component 7: Mortality
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This component will use the standard approach from our Vivarium Public
+Health sims, and take data from the age-/sex-specific forecast of
+all-cause mortality for USA as produced by the FBD team.
+
+In the future, we may wish to switch to something derived from the
+work of the US County BoD team, which is preparing race/ethnicity
+specific estimates of all-cause mortality at the county level.
+
+https://vivarium-research.readthedocs.io/en/latest/model_design/cause.html#all-cause-mortality
+
+GBD has state-level all-cause mortality, does FBD forecast at the US
+state level yet? Not necessary right now, but good to know for the
+future.
+
+**Verification and validation strategy**: to verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+simulants are dying at the expected rates.
+
+.. _census_prl_migration:
+
+2.3.4 Component 8: Migration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A construct that will help think through the migration component is
+"directed tripartite graph" showing arcs from simulants (part A) to
+households (part B) as well as arcs from households to housing units
+(part C).
+
+This construct allows us to distinguish between and easily represent
+household migration and individual migration where the whole household
+does not move.
+
+In our simplest version, we will have a rate for changing an arc from
+a simulant in A to a different household in B, and an independent rate
+for changing an arc from a household in B to a new housing unit in C.
+
+I could imagine making these rates quite complex someday, to take into
+account the age, sex, race/ethnicity, household structure, and even
+past migration history.  But at this point, it is not clear how
+complex is necessary to have a successful synthetic data set for
+testing PRL algorithms, so we will keep it quite simple.
+
+These notes on ACS data sources on migration could be useful for the
+more complex rates in the future.  For now, let's make both households
+and simulants move at a rate of 15 moves per 100 person-years
+(independently).
+
+ACS notes: Based on age, sex, race/ethnicity, and geography, can
+calculate the probability of moving from ACS, as the weighted average
+of MIGPUM.isnull(); Could also determine if they moved within the
+PUMAs represented in the sim or from outside those PUMAs.
+
+Note that each housing unit in C should be associated with a unique
+mailing address, as described in Section (8).
+
+At some point, I could imagine creating new housing units during the
+sim, but to keep it simple for now, perhaps we don't have to.
+
+At some point, I could imagine also explicitly modeling that some
+persons and/or households move out of the simulation tracking area,
+but I'm not sure how to decide how many.  Maybe they should stay
+tracked, so that they can move back later, e.g. after some years
+overseas.
+
+At some point, I could imagine having new people and families move
+into the sim, but for our minimal model, let's leave this out.
+
+Schema for the 6 types of migration we eventually might include:
+
+#. Existing household moves 
+
+   #. To another house in simulation
+
+   #. Outside of simulation catchment area
+
+#. New household moves into simulation
+
+#. Existing person moves
+
+   #. To another house in simulation 
+
+   #. Outside of simulation catchment area
+
+#. New person moves into simulation (could be considered together with (2), using ACS data)
+
+When we reach that point, we might also want to think about the change
+in relationship type when people move, and also change surnames
+sometimes.
+
+**Verification and validation strategy**: to verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+simulants are moving at the expected rates.
 
 
-.. _{census_prl}5.4:
-
-5.4 Desired outputs
--------------------
-
-.. _{census_prl}5.5:
-
-5.5 Output meta-table shell
----------------------------
-
-.. todo::
-  - add special stratifications if necessary
-
-.. _{census_prl}6.0:
-
-6.0 Back of the envelope calculations
-+++++++++++++++++++++++++++++++++++++
+2.3.5 Component 9+
+~~~~~~~~~~~~~~~~~~
+To Come (TK)
 
 
-.. _{census_prl}7.0:
+.. _census_prl_limitations:
 
 7.0 Limitations
 +++++++++++++++
+
+TK
 
