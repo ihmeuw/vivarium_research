@@ -34,3 +34,13 @@ Multiple Myeloma Risk Factor Effects
 
 .. contents::
    :local:
+
+We will follow the same strategy for risk factor effects as in the
+:ref:`Multiple Myeloma Phase 1 concept model
+<2019_concept_model_vivarium_sanofi_multiple_myeloma>`. However, we will likely
+handle race differently, perhaps omitting it entirely as a risk factor.
+
+.. todo::
+
+ Fill in details, referring to the :ref:`Risk factor model <mm5.3.2>` and
+ :ref:`Risk factor effects <mm5.3.2.2>` sections in the Phase 1 concept model.
