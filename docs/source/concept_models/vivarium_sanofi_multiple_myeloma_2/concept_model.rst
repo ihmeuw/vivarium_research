@@ -38,11 +38,15 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 .. contents::
   :local:
 
-+------------------------------------+
-| List of abbreviations              |
-+=======+============================+
-|       |                            |
-+-------+----------------------------+
+.. list-table:: Abbreviations
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * -
+    -
+    -
 
 .. _mm2_1.0:
 
@@ -52,181 +56,73 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 
 .. _mm2_1.1:
 
-1.1 Project overview
+1.1 Project Overview
 --------------------
 
 
 
 .. _mm2_1.2:
 
-1.2 Literature review
+1.2 Literature Review
 ---------------------
 
 
 .. _mm2_2.0:
 
-2.0 Modeling aims and objectives
+2.0 Modeling Aims and Objectives
 ++++++++++++++++++++++++++++++++
 
 
-.. _mm2_3.0:
+3.0 Concept Model Diagram
++++++++++++++++++++++++++
 
-3.0 Causal framework
-++++++++++++++++++++
+4.0 Vivarium Model Components
++++++++++++++++++++++++++++++
 
-.. _mm2_3.1:
-
-3.1 Causal diagram
-------------------
-
- .. note::
-    link to DAGs page
-    use round circles with DAGs
-
-**Outcome (O)**:
-
-
-
-**Most proximal determinant/exposure (E)**:
-
-
-
-**Confounders (C)**:
-
-
-
-**Effect modifiers**:
-
-
-**Mediators (M)**:
-
-
-.. _mm2_3.2:
-
-3.2 Effect sizes
+4.1 Cause Models
 ----------------
 
-
-
-4.0 Intervention
-++++++++++++++++
-
-
-
-.. _mm2_4.1:
-
-4.1 Simulation scenarios
+4.2 Risk Exposure Models
 ------------------------
 
+4.3 Risk Effects Models
+-----------------------
 
-.. _mm2_5.0:
+4.4 Intervention Models
+-----------------------
 
-5.0 Vivarium modelling components
-+++++++++++++++++++++++++++++++++
+5.0 Simulation Scenarios
+++++++++++++++++++++++++
 
-.. _mm2_5.1:
+6.0 Simulation Parameters
++++++++++++++++++++++++++
 
-5.1 Vivarium concept model
---------------------------
+6.1 Locations
+-------------
 
-.. note::
-  This is our standard vivarium concept model diagram we are used to seeing
+6.2 Population and Randomness
+-----------------------------
 
-.. _mm2_5.2:
+6.3 Timeframe and Intervention Start Dates
+------------------------------------------
 
-5.2 Demographics
-----------------
+7.0 Model Builds and Validation Tracking
+++++++++++++++++++++++++++++++++++++++++
 
-.. _mm2_5.2.1:
+8.0 Desired Outputs
++++++++++++++++++++
 
-5.2.1 Population description
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+8.1 Final Outputs for Client
+----------------------------
 
-  - cohort type
-  - cohort length
-  - age and sex structure
-  - time step
-  - fertility
-  - stratifications
+8.2 Requested Outputs from Vivarium
+-----------------------------------
 
-
-.. _mm2_5.2.2:
-
-5.2.2 Location description
-~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-
-.. _mm2_5.3:
-
-5.3 Models
-----------
-
-.. note::
-  here we use the compartmental (SEIR) models with squares
-
-
-.. _mm2_5.3.1:
-
-5.3.1 Model 1
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _mm2_5.3.2:
-
-5.3.2 Model 2
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _mm2_5.3.3:
-
-5.3.3 Model 3
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _mm2_5.3.4:
-
-5.3.4 Model 4
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-
-.. _mm2_5.4:
-
-5.4 Desired outputs
--------------------
-
-.. _mm2_5.5:
-
-5.5 Output meta-table shell
----------------------------
-
-.. todo::
-  - add special stratifications if necessary
-
-.. _mm2_6.0:
-
-6.0 Back of the envelope calculations
+9.0 Back of the Envelope Calculations
 +++++++++++++++++++++++++++++++++++++
 
+10.0 Limitations
+++++++++++++++++
 
-.. _mm2_7.0:
-
-7.0 Limitations
+11.0 References
 +++++++++++++++
