@@ -95,6 +95,8 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 4.2 Risk Exposure Models
 ------------------------
 
+* :ref:`Multiple Myeloma Risk Factor Exposures <2019_multiple_myeloma_risk_factor_exposures>`
+
 4.3 Risk Effects Models
 -----------------------
 
