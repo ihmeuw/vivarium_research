@@ -76,8 +76,8 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 3.0 Concept Model Diagram
 +++++++++++++++++++++++++
 
-4.0 Model Components
-++++++++++++++++++++
+4.0 Vivarium Model Components
++++++++++++++++++++++++++++++
 
 4.1 Cause Models
 ----------------
