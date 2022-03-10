@@ -90,6 +90,8 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 4.1 Cause Models
 ----------------
 
+* :ref:`Multiple Myeloma <2019_cancer_model_multiple_myeloma>`
+
 4.2 Risk Exposure Models
 ------------------------
 
