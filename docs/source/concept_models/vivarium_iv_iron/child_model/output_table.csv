@@ -1,0 +1,12 @@
+Measure,Child age/sex/year stratification
+Child stunting state person time,TRUE
+Child wasting state person time,TRUE
+Cause model state transition count,TRUE
+Cause model state person time,TRUE
+Cause-specific YLDs,TRUE
+Cause-specific YLLs,TRUE
+Cause-specific deaths,TRUE
+Sum of birthweight at birth,TRUE
+Sum of gestational age at birth,TRUE
+Count of live births,TRUE
+Count of live births with birthweight less than 2500 g,TRUE

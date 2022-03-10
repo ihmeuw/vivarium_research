@@ -144,14 +144,19 @@ Baseline Coverage Data
 
 Vivarium Modeling Strategy
 --------------------------
-How to model hemoglobin exposure in Vivarium:
- 1. Construct hemoglobin distributions for each location-/age-/population- subgroup;
- 2. Apply pregnancy adjustment factor to hemoglobin distributions for pregnant 
-    and general populations;
- 3. Modify hemoglobin distributions based on intervention effects;
+
+.. warning::
+
+  This document summarizes the modeling strategy to calculate the impact of these interventions among PLW for a multiplication model. For the *Vivarium* microsimulation modeling strategy of the maternal supplementation strategy on maternal hemoglobin levels, see :ref:`this document <maternal_supplementation_intervention>`.
 
 Hemoglobin
 ++++++++++
+
+How to model hemoglobin exposure in Vivarium:
+ 1. Construct hemoglobin distributions for each location-/age-/population- subgroup
+ 2. Apply pregnancy adjustment factor to hemoglobin distributions for pregnant 
+    and general populations
+ 3. Modify hemoglobin distributions based on intervention effects
 
 The hemoglobin model in GBD 2019 can be found :ref:`Here <2019_hemoglobin_model>`.
 
@@ -167,9 +172,9 @@ The hemoglobin model in GBD 2019 can be found :ref:`Here <2019_hemoglobin_model>
     - Effect size
     - Note
   * - Hemoglobin
-    - GBD risk
-    - rei_92
-    - Exposure prevalence
+    - MEID
+    - 10487
+    - Mean hemoglobin concentration
     - Risk difference
     - Detailed in table `Effect Size`
     - 
@@ -188,10 +193,10 @@ The hemoglobin model in GBD 2019 can be found :ref:`Here <2019_hemoglobin_model>
     - True
     - 
   * - Age group start
-    - 15 years
+    - 15 years (ID 8)
     - 
   * - Age group end
-    - 49 years
+    - 49 years (ID 14)
     - 
 
 .. note::

@@ -78,6 +78,8 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
 
 .. note::
 
+  GBD uses the hemoglobin thresholds specific to *Males and Females 5-14 years* for pregnant females in this age group (as opposed to the pregnancy-specific thresholds).
+
   GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any international guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
 
 Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered a direct cause of death in GBD 2019.
@@ -130,11 +132,11 @@ Scope
 ++++++++
 
 The Vivarium modeling strategy for the anemia impairment will first rely
-on the {RISK_EXPOSURE_PAGE_LINK}. Vivarium simulants should first be
+on the :ref:`hemoglobin model <2019_hemoglobin_model>`. Vivarium simulants should first be
 assigned a hemoglobin value and then their anemia status can be evaluated
 by the hemoglobin thresholds shown on this page (thresholds are
 pregnancy-specific for women of reproductive age; see the pregnancy
-hemoglobin adjustment documentation on the {RISK_EXPOSURE_PAGE_LINK}. YLDs
+hemoglobin adjustment documentation on the :ref:`hemoglobin model <2019_hemoglobin_model>`. YLDs
 should be accrued according to the severity-specific disability weights
 listed in this document. Specific causes (or groups of causes, for
 example iron-responsive causes) of anemia can also be assigned to
@@ -142,10 +144,11 @@ individual simulants if relevant/necessary for the project (this could
 be done by using the cause-specific hemoglobin shifts, but this process
 is not yet described in this document).
 
-.. todo::
+.. note:: 
 
-   Replace {RISK_EXPOSURE_PAGE_LINK} with a reference to the appropriate risk
-   exposure page in the above note.
+  The male and female aged 5 to 14 hemoglobin thresholds should be used for pregnant females less than 15 years of age.
+
+  Women who are pregnant and in the postpartum period (according to the :ref:`pregnancy model document <other_models_pregnancy>` should be evaluated for anemia according to the pregnancy-specific thresholds.
 
 Restrictions
 ++++++++++++

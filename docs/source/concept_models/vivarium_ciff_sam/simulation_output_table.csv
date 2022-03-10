@@ -1,0 +1,9 @@
+Measure,Model version,Age/sex/year stratification (Model 1+),Wasting state stratification (Model 2+),Stunting state stratification (Model 2+),SQ-LNS coverage stratification (Model 3+),MAM and SAM treatment stratification (Model 4+),X-factor exposure stratification (Model 4.5+),Note
+Count of live births,1+,TRUE (age N/A),FALSE,FALSE,FALSE,FALSE,TRUE,"Will eventually be stratified by maternal BMI, BW intervention coverage"
+"State person time for each state in the [1: measles, diarrhea, LRI; 2: PEM, wasting, and stunting] models",1+/2+,TRUE,TRUE,CONDITIONAL (TRUE for model 2 only) ,TRUE,TRUE,TRUE,
+"Transition counts for each transition in the [1: measeles, diarrhea, LRI; 2: wasting] models",1+/2+,TRUE,TRUE,CONDITIONAL (TRUE for model 2 only) ,TRUE,TRUE,TRUE,
+"Count of deaths due to [1: measles, diarrhea, LRI, other causes; 2: PEM]",1+/2+,TRUE,TRUE,CONDITIONAL (TRUE for model 2 only) ,TRUE,TRUE,TRUE,
+"Count of YLDs due to [1: measles, diarrhea, LRI; 2: PEM]",1+/2+,TRUE,TRUE,CONDITIONAL (TRUE for model 2 only) ,TRUE,TRUE,TRUE,
+"Count of YLLs due to [1: measles, diarrhea, LRI, other causes; 2: PEM]",1+/2+,TRUE,TRUE,CONDITIONAL (TRUE for model 2 only) ,TRUE,TRUE,TRUE,
+Sum of birthweights of simulants at birth,5+,TRUE (age N/A),FALSE,FALSE,FALSE,FALSE,FALSE,"Will eventually be stratified by maternal BMI, BW intervention coverage"
+Count of live births with birthweight less than 2500 grams,5+,TRUE (age N/A),FALSE,FALSE,FALSE,FALSE,FALSE,"Will eventually be stratified by maternal BMI, BW intervention coverage"

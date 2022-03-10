@@ -532,6 +532,18 @@ Deriving wasting transition probabilities
 Wasting model
 ^^^^^^^^^^^^^
 
+.. important::
+
+  We will model wasting transitions and risk effects **only** among simulants at least six months of age. Simulants should be initialized into a wasting model state at birth with a birth prevalence equal to the wasting risk exposure among the 1-5 month age group (age_group_id=388, or the postneonatal age_group_id=4 if using GBD 2019 instead of GBD 2020). 
+
+  All wasting transition rates should equal zero among all ages under 6 months. The relative risks for each wasting risk exposure category and each risk/outcome pair should equal one for all ages under 6 months.
+
+  Wasting transition rates should be informed by the data tables below for ages over 6 months. Wasting risk effects for ages over 6 months should be informed by the standard GBD wasting relative risks.
+
+  NOTE: When the birthweight and wasting risk exposure at birth correlation is implemented, it will cause simulants with a greater neonatal mortality (due to brithweight exposure) to be initialized into more severe wasting states. This will cause the wasting exposure distribution to shift to less severe wasting states over the neonatal period as simulants with lower birthweights (and more severe wasting states due to the birthweight and wasting exposure correlation) die. The magnitude of the bias introduced by this modeling strategy should be investigated upon implementation to determine if different modeling strategies are necessary. This should be done by comparing the wasting exposure and wasting-affected outcomes in the simulation output to the GBD inputs by age group.
+
+  NOTE: The modeling decision not to model wasting transitions among simulants less than six months of age is due to the reliance of the wasting model transition rates on the wasting treatment model and the lack of data to inform treatment-related transition rates among this age group. Note that a sensitivity analysis scenario that includes infants less than six months of age in the treatment model may be performed in the future.
+
 This Markov model comprises 5 compartments: four wasting categories, plus CAT 0.
 Because we need simulants to die at a higher rate out of CAT 1 than CAT 2, 3, or
 the TMREL, it is necessary to include death to correctly derive our transition 
@@ -571,19 +583,19 @@ that follows we will detail how to calculate all the variables used
      - Daily probability of incidence into cat 3 from cat 4
      - System of equations
    * - r2
-     - 1 - e^(-(1-sam_tx_coverage)*(1/time_to_sam_ux_recovery))
+     - 1 - e^(-(1-sam_tx_coverage*sam_tx_efficacy)*(1/time_to_sam_ux_recovery))
      - Daily probability of remission into cat 2 from cat 1 (untreated)
      - Nicole's calculations; also referred to as r2ux (get lit source!)
    * - r3
-     - 1 - e^(-(mam_tx_coverage * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage)*(1/time_to_mam_ux_recovery)))
+     - 1 - e^(-(mam_tx_coverage*mam_tx_efficacy * 1/time_to_mam_tx_recovery + (1-mam_tx_coverage*mam_tx_efficacy)*(1/time_to_mam_ux_recovery)))
      - Daily probability of remission from cat 2 into cat 3 (treated or untreated)
      - Nicole's calculations (get lit source!)
    * - r4
-     - 0.001
+     - 1 - e^{-rate}. 6-12 months: rate = 0.006140 (SD: 0.003015, normal distribution of uncertainty). 1-4 years: rate = 0.005043  (SD: 0.002428, normal distribution of uncertainty)
      - Daily probability of remission from cat 3 into cat 4
-     - Assumed to be small
+     - From `implied transition rate from the KI data <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_ki_database_rates/KI_rates_5.3.3.ipynb>`_. Assume a normal distribution of uncertainty.
    * - t1
-     - 1 - e^(-sam_tx_coverage * (1/time_to_sam_tx_recovery))
+     - 1 - e^(-sam_tx_coverage*sam_tx_efficacy * (1/time_to_sam_tx_recovery))
      - Daily probability of remission into cat 3 from cat 1 (treated)
      - Nicole's calculations (get lit source!)
    * - s1
@@ -616,7 +628,7 @@ in terms of the following variables:
      - Notes
    * - :math:`d_i`
      - Death probability out of wasting category :math:`i`
-     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * time_step)`
+     - :math:`1 - exp(-1 * (acmr + (\sum_{c\in diar,lri,msl,pem} emr_c*prevalence_{ci}) - csmr_c) * timestep)`
      - 
    * - :math:`f_i`
      - "Age-in" probability into :math:`cat_i`
@@ -630,36 +642,42 @@ in terms of the following variables:
      - Adjusted prevalence of :math:`cat_i`
      - :math:`f_i/(ap_0 + 1)`
      - All category "prevalences" are scaled down, such that the prevalence of cat 0 (the reincarnation pool) and the prevalences of the wasting categories sum to 1
-   * - :math:`mam_tx_coverage`
+   * - mam_tx_coverage
      - Proportion of MAM (CAT 2) cases that have treatment coverage
-     - 0.488
-     - Potentially to be updated
-   * - :math:`sam_tx_coverage`
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{MAM}`
+     - 
+   * - sam_tx_coverage
      - Proportion of SAM (CAT 1) cases that have treatment coverage
-     - 0.488
-     - Potentially to be updated
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`C_{SAM}`
+     - 
+   * - sam_tx_efficacy
+     - Proportion of children treated for SAM who successfully respond to treatment
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{SAM}`
+     - Baseline scenario value
+   * - mam_tx_efficacy
+     - Proportion of children treated for MAM who successfully respond to treatment
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`E_{MAM}`
+     - Baseline scenario value
    * - :math:`time_to_mam_ux_recovery`
      - Without treatment or death, average days spent in MAM before recovery
-     - 63
-     - Potentially to be updated
-   * - :math:`time_to_mam_tx_recovery`
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{untreated MAM}`
+     - 
+   * - time_to_mam_tx_recovery
      - With treatment and without death, average days spent in MAM before recovery
-     - 41.3
-     - Potentially to be updated
-   * - :math:`time_to_sam_ux_recovery`
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{treated MAM}`
+     - 
+   * - time_to_sam_ux_recovery
      - Without treatment or death, average days spent in SAM before recovery
-     - 60.5
-     - Potentially to be updated
-   * - :math:`time_to_sam_tx_recovery`
+     - :math:`365 / r_{SAM,ux}`
+     - :math:`r_{SAM,ux}` defined in the :ref:`untreated-sam-time-to-recovery-reference-label` table in the :ref:`wasting treatment intervention document <intervention_wasting_treatment>` 
+   * - time_to_sam_tx_recovery
      - With treatment and without death, average days spent in SAM before recovery
-     - 48.3
-     - Potentially to be updated
-   * - :math:`time_step`
+     - :ref:`defined here <wasting-treatment-baseline-parameters>` as :math:`\text{time to recovery}_\text{treated SAM}`
+     - 
+   * - time_step
      - Scalar time step conversion to days
      - 1
      -
-
-
 
 .. list-table:: Calculations for variables in transition equations
    :widths: 6 10 10
@@ -672,8 +690,8 @@ in terms of the following variables:
      - The prevalence of cause c among wasting category i
      - :math:`incidence_{ci} * duration_c`
    * - :math:`duration_c`
-     - The average duration of cause c
-     - 10 days (for measles, diarrhea, and lri)
+     - The average duration of cause c, in years
+     - Defined on the respective cause model documents for :ref:`diarrheal diseases <2019_cause_diarrhea>`, :ref:`measles <2019_cause_measles>`, and :ref:`lower respiratory infections <2019_cause_lower_respiratory_infections>`
    * - :math:`incidence_{ci}`
      - incidence probability of cause c among wasting category i
      - :math:`incidence_{c}*(1-paf_{c})*rr_{ci}`
@@ -871,7 +889,6 @@ Wasting x Disease model
 
 .. image:: wasting_state_2x4.svg
 
-
 Data Description Tables
 +++++++++++++++++++++++
 
@@ -886,7 +903,7 @@ Data Description Tables
    * - TMREL, MOD, MAM, SAM
      - birth prevalence
      - :math:`prevalence_{240_{cat-1-4}}`
-     - Use prevalence of age_group_id = 2 (early neonatal)
+     - Use prevalence of age_group_id = 388 (1 to 5 months)
 
 .. code-block:: python
 
@@ -900,7 +917,6 @@ Data Description Tables
                     status='best',
                     location_id = [179],
                     decomp_step = 'iterative')
-
 
 .. list-table:: Wasting State Data
    :widths: 5 10 10 20

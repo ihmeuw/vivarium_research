@@ -230,7 +230,7 @@ Data Description
      -
    * - I
      - prevalence
-     - prevalence_c341
+     - prevalence_c341 
      - 
    * - I
      - excess mortality rate

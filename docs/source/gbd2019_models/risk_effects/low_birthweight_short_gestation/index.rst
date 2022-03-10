@@ -333,6 +333,8 @@ Vivarium Modeling Strategy
    :ref:`Low Birthweight and Short Gestation (GBD 2019)
    <2019_risk_exposure_lbwsg>` page.
 
+.. _lbwsg_2019_rr_interpolation_section:
+
 Interpolation of LBWSG Relative Risks
 +++++++++++++++++++++++++++++++++++++
 
@@ -560,22 +562,460 @@ March 2021.
 Implementation of RR Interpolation in SciPy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+Here are two Jupyter notebooks in the `Vivarium Research LSFF repo`_ that
+demonstrate how to implement the above interpolation steps using
+`scipy.interpolate`_:
 
-  Show Python code that implements the above procedure. In the meantime, here
-  are the original notebooks where I figured out how to do it (with pictures!):
+- `Step-by-step demonstration of LBWSG RR interpolation`_
+- `Self-contained code for LBWSG RR interpolation by age and sex`_
 
-  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_09b_plot_lbwsg_rr_interpolation_using_griddata.ipynb
-  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
-  - https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
+The self contained notebook requires this :download:`LBWSG category data .csv
+<lbwsg_category_data.csv>` for input (viewable `online here <lbwsg_category_data
+online_>`__), as well as the `lbwsg_plots module`_ if you want to plot the
+interpolated RRs.
+
+.. _Vivarium Research LSFF repo: `large-scale food fortification project`_
+.. _Step-by-step demonstration of LBWSG RR interpolation: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/2021_06_04a_lbwsg_rr_interpolation_step_by_step.ipynb
+.. _Self-contained code for LBWSG RR interpolation by age and sex: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/2021_06_25a_lbwsg_rr_interpolation_by_age_sex.ipynb
+.. _lbwsg_category_data online: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/notebooks/lbwsg_category_data.csv
+.. _lbwsg_plots module: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg_plots.py
+
+Omitting some of the helper functions, here is the relevant interpolation code
+from the self-contained notebook, including the correct call to pull LBWSG RRs
+using ``get_draws``:
+
+.. code-block:: Python
+
+  import pandas as pd, numpy as np
+  from get_draws.api import get_draws
+  from scipy.interpolate import griddata, RectBivariateSpline
+
+  # `read_cat_df` requires `cats_to_ordered_categorical` and
+  # `string_to_interval` helper functions from the notebook
+  def read_cat_df(filename: str) -> pd.DataFrame:
+    """Reads in the LBWSG category data .csv as a DataFrame, and converts the category column into a
+    pandas ordered Categorical and the GA and BW interval columns into Series of pandas Interval objects.
+    """
+    cat_df = pd.read_csv(filename)
+    cat_df['lbwsg_category'] = cats_to_ordered_categorical(cat_df['lbwsg_category'])
+    cat_df['ga_interval'] = string_to_interval(cat_df['ga_interval'])
+    cat_df['bw_interval'] = string_to_interval(cat_df['bw_interval'])
+    return cat_df
+
+  # `get_rr_data` requires `cats_to_ordered_categorical`
+  # helper function from the notebook
+  def get_rr_data(source='get_draws', rr_key=None, draw=None, preprocess=False) -> pd.DataFrame:
+    """Reads GBD's LBWSG relative risk data from an HDF store or DataFrame or pulls it using get_draws,
+    and, if preprocess is True, reformats the RRs into a DataFrame containing a single RR value for
+    each age group, sex, and category.
+    The DataFrame is indexed by age_group_id and sex_id, and the columns are the LBWSG categories.
+    The single RR value will be from the specified draw, or the mean of all draws if draw=='mean'.
+    If preprocess is False, the raw GBD data will be returned instead.
+    """
+    if isinstance(source, pd.DataFrame):
+        # Assume source is raw rr data from GBD
+        rr = source
+    elif source == 'get_draws':
+        # Call get draws
+        LBWSG_REI_ID = 339
+        DIARRHEAL_DISEASES_CAUSE_ID = 302 # Can be any most-detailed cause affected by LBWSG
+        GLOBAL_LOCATION_ID = 1 # Passing any location will return RRs for Global
+        GBD_2019_ROUND_ID = 6
+        rr = get_draws(
+            gbd_id_type=('rei_id','cause_id'),
+            gbd_id=(LBWSG_REI_ID, DIARRHEAL_DISEASES_CAUSE_ID),
+            source='rr',
+            location_id=GLOBAL_LOCATION_ID,
+            year_id=2019,
+            gbd_round_id=GBD_2019_ROUND_ID,
+            status='best',
+            decomp_step='step4',
+        )
+    else:
+        # Assume source is a string representing a filepath, a Path object,
+        # or an HDFStore object. Will raise an error if rr_key is None and
+        # source hdf contains more than one pandas object.
+        rr = pd.read_hdf(source, rr_key)
+
+    if preprocess:
+        draw_cols = rr.filter(like='draw').columns
+        rr = rr.assign(lbwsg_category=lambda df: cats_to_ordered_categorical(df['parameter'])) \
+               .set_index(['age_group_id', 'sex_id', 'lbwsg_category'])[draw_cols]
+
+        if draw is None:
+            raise ValueError("draw must be specified if preprocess is True")
+        elif draw == 'mean':
+            rr = rr.mean(axis=1)
+        else:
+            rr = rr[f'draw_{draw}']
+        # After unstacking, each row is one age group and sex, columns are categories
+        # Categories will be sorted in natural sort order because they're stored in an ordered Categorical
+        rr = rr.unstack('lbwsg_category')
+    return rr
+
+  def get_tmrel_mask(
+      ga_coordinates: np.ndarray, bw_coordinates: np.ndarray, cat_df: pd.DataFrame, grid: bool
+  ) -> np.ndarray:
+      """Returns a boolean mask indicating whether each pair of (ga,bw) coordinates is in a TMREL category.
+
+      The calling convention using the `grid` parameter is the same as for the scipy.interpolate classes:
+
+          If grid is True, the 1d arrays ga_coordinates and bw_coordinates are interpreted as lists of
+          x-axis and y-axis coordinates defining a 2d grid, i.e. the coordinates to look up are the pairs
+          in the Carteian product ga_coordinates x bw_coordinates, and the returned mask will have shape
+          (len(ga_coordinates), len(bw_coordinates)).
+
+          If grid is False, the 1d arrays ga_coordinates and bw_coordinates must have the same length and are
+          interpreted as listing pairs of coordinates, i.e. the coordinates to look up are the pairs in
+          zip(ga_coordinates, bw_coordinates), and the returned mask will have shape (n,), where n is the
+          common length of ga_coordinates and bw_coordinates.
+      """
+      TMREL_CATEGORIES = ('cat53', 'cat54', 'cat55', 'cat56')
+
+      # Set index of cat_df to a MultiIndex of pandas IntervalIndex objects to enable
+      # looking up LBWSG categories by (GA,BW) coordinates via DataFrame.reindex
+      cat_data_by_interval = cat_df.set_index(['ga_interval', 'bw_interval'])
+
+      # Create a MultiIndex of (GA,BW) coordinates to look up,
+      # one row for each interpolation point
+      if grid:
+          # Interpret GA and BW coordinates as the x and y coordinates of a grid
+          # (take Cartesian product)
+          ga_bw_coordinates = pd.MultiIndex.from_product(
+              (ga_coordinates, bw_coordinates), names=('ga_coordinate', 'bw_coordinate')
+          )
+      else:
+          # Interpret GA and BW coordinates as a sequence of points (zip the coordinate arrays)
+          ga_bw_coordinates = pd.MultiIndex.from_arrays(
+              (ga_coordinates, bw_coordinates), names=('ga_coordinate', 'bw_coordinate')
+          )
+
+      # Create a DataFrame to store category data for each (GA,BW) coordinate in the grid
+      ga_bw_cat_data = pd.DataFrame(index=ga_bw_coordinates)
+
+      # Look up category for each (GA,BW) coordinate and check whether it's a TMREL category
+      ga_bw_cat_data['lbwsg_category'] = (
+        cat_data_by_interval['lbwsg_category'].reindex(ga_bw_coordinates))
+      ga_bw_cat_data['in_tmrel'] = ga_bw_cat_data['lbwsg_category'].isin(TMREL_CATEGORIES)
+
+      # Pull the TMREL mask out of the DataFrame and convert to a numpy array,
+      # reshaping into a 2D grid if necessary
+      tmrel_mask = ga_bw_cat_data['in_tmrel'].to_numpy()
+      if grid:
+          # Make a 2D mask the same shape as the grid,
+          tmrel_mask = tmrel_mask.reshape((len(ga_coordinates), len(bw_coordinates)))
+      return tmrel_mask
+
+  def make_lbwsg_log_rr_interpolator(rr: pd.DataFrame, cat_df: pd.DataFrame) -> pd.Series:
+    """Returns a length-4 Series of RectBivariateSpline interpolators for the logarithms of
+    the given set of LBWSG RRs, indexed by age_group_id and sex_id.
+    """
+    # Step 1: Get coordinates of LBWSG category midpoints, indexed by category
+    # Category index will be in natural sort order
+    interval_data_by_cat = cat_df.set_index('lbwsg_category')
+    ga_midpoints = interval_data_by_cat['ga_midpoint']
+    bw_midpoints = interval_data_by_cat['bw_midpoint']
+
+    # Step 2: Take logs of LBWSG relative risks
+    # Each row of RR is one age group and sex, columns are LBWSG categories
+    # Categories (columns) are in natural sort order because they're stored
+    # in an ordered Categorical
+    log_rr = np.log(rr)
+
+    # Make sure z values are correctly aligned with x and y values
+    # (should hold because categories are ordered)
+    assert ga_midpoints.index.equals(log_rr.columns)\
+      and bw_midpoints.index.equals(log_rr.columns),\
+      "Interpolation (ga,bw)-points and rr-values are misaligned!"
+
+    # Step 3: Define intermediate grid $G$ for nearest neighbor interpolation
+    # Intermediate grid G = Category midpoints plus boundary points
+    ga_min, bw_min = interval_data_by_cat[['ga_start', 'bw_start']].min()
+    ga_max, bw_max = interval_data_by_cat[['ga_end', 'bw_end']].max()
+
+    ga_grid = np.append(np.unique(ga_midpoints), [ga_min, ga_max]); ga_grid.sort()
+    bw_grid = np.append(np.unique(bw_midpoints), [bw_min, bw_max]); bw_grid.sort()
+
+    # Steps 4 and 5a: Create an interpolator for each age_group and sex
+    # (4 interpolators total)
+    def make_interpolator(log_rr_for_age_sex: pd.Series) -> RectBivariateSpline:
+        # Step 4: Use `griddata` to extrapolate to $G$ via nearest neighbor interpolation
+        logrr_grid_nearest = griddata(
+            (ga_midpoints, bw_midpoints),
+            log_rr_for_age_sex,
+            (ga_grid[:,None], bw_grid[None,:]),
+            method='nearest',
+            rescale=True
+        )
+        # Step 5a: Create a `RectBivariateSpline` object from the extrapolated values on G
+        return RectBivariateSpline(ga_grid, bw_grid, logrr_grid_nearest, kx=1, ky=1)
+
+    # Apply make_interpolator function to each of the 4 rows of log_rr
+    log_rr_interpolator = log_rr.apply(
+      make_interpolator, axis='columns').rename('lbwsg_log_rr_interpolator')
+    return log_rr_interpolator
+
+  # Step 5: Interpolate log(RR) to the rectangle [0,42wk]x[0,4500g]
+  # via bilinear interpolation
+
+  # First create a test population to which we'll assign relative risks
+  def generate_uniformly_random_population(pop_size, seed=12345):
+      """Generate a uniformly random test population of size pop_size, with attribute columns
+      'age_group_id', 'sex_id', 'gestational_age', 'birthweight'.
+      """
+      rng=np.random.default_rng(seed)
+      pop = pd.DataFrame(
+          {
+              'age_group_id': rng.choice([2,3], size=pop_size),
+              'sex_id': rng.choice([1,2], size=pop_size),
+              'gestational_age': rng.uniform(0,42, size=pop_size),
+              'birthweight': rng.uniform(0,4500, size=pop_size),
+          }
+      ).rename_axis(index='simulant_id')
+      return pop
+
+  # Step 5b: Interpolate log(RR) to (GA,BW) coordinates for a simulated population
+
+  def interpolate_lbwsg_rr_for_population(
+        pop: pd.DataFrame, log_rr_interpolator: pd.Series, cat_df: pd.DataFrame) -> pd.Series:
+        """Return the interpolated RR for each simulant in a population."""
+        # Initialize log(RR) to 0, and mask out points in TMREL when we interpolate (Step 7)
+        logrr_for_pop = pd.Series(0, index=pop.index, dtype=float)
+        tmrel = get_tmrel_mask(pop['gestational_age'], pop['birthweight'], cat_df, grid=False)
+
+        # Step 5b: Interpolate log(RR) to (GA,BW) coordinates for a simulated population
+        for age, sex in log_rr_interpolator.index:
+            to_interpolate = (pop['age_group_id']==age) & (pop['sex_id']==sex) & (~tmrel)
+            subpop = pop.loc[to_interpolate]
+            logrr_for_pop.loc[to_interpolate] = log_rr_interpolator[age, sex](
+                subpop['gestational_age'], subpop['birthweight'], grid=False)
+
+        # Step 6: Exponentiate to recover the relative risks
+        rr_for_pop = np.exp(logrr_for_pop).rename("lbwsg_relative_risk")
+        return rr_for_pop
+
+  # Step 0: Get input data
+  # Pick a draw in the range 0-999, or 'mean' for mean RR over all draws
+  draw = 29
+  # Create a DataFrame of LBWSG RRs for the specified draw, indexed by
+  # age_group_id, sex_id, with LBWSG categories as columns.
+  rr = get_rr_data('get_draws', draw=draw, preprocess=True)
+  # Read the .csv and convert LBWSG categories to ordered pandas Categorical
+  # and string representations of intervals to pandas Interval objects.
+  cat_df = read_cat_df('lbwsg_category_data.csv')
+
+  # Steps 1 - 5a: Create interpolators by age/sex for log(RR)
+  log_rr_interpolator = make_lbwsg_log_rr_interpolator(rr, cat_df)
+  # Steps 5b - 7: Interpolate RRs on a population
+  pop = generate_uniformly_random_population(10_000)
+  rr_for_pop = interpolate_lbwsg_rr_for_population(pop, log_rr_interpolator, cat_df)
+
+.. Note::
+
+  For reference, here are the original notebooks in the `Vivarium Data Analysis
+  repo`_ where I figured out how to do the RR interpolation (with pictures!):
+
+  - `Interpolate and plot LBWSG RRs using SciPy's griddata function <Notebook for LBWSG RR interpolation with griddata_>`_
+  - `Try 2-step interpolation with an intermediate grid, illustrating some potential pitfalls <Notebook for 2-step interpolation and pitfalls_>`_
+  - `Compare 2-step interpolations using different SciPy interpolators <Notebook comparing 2-step interpolations_>`_
 
   Here's a link to Jupyter nbviewer in case GitHub sucks:
 
   - https://nbviewer.jupyter.org/
 
-  And here's my implementation of RR interpolation for a nanosim:
+  And here's my implementation of RR interpolation for a nanosim (the
+  interpolation step is quite slow; the above Python code from the
+  `self-contained notebook <Self-contained code for LBWSG RR interpolation by
+  age and sex_>`_ should be faster):
 
-  - https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
+  - `LBWSGRiskEffectRBVSpline class`_
+
+.. _Vivarium Data Analysis repo: https://github.com/ihmeuw/vivarium_data_analysis
+.. _Notebook for LBWSG RR interpolation with griddata: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_09b_plot_lbwsg_rr_interpolation_using_griddata.ipynb
+.. _Notebook for 2-step interpolation and pitfalls: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_10a_plot_two_step_interpolated_rrs_for_lbwsg.ipynb
+.. _Notebook comparing 2-step interpolations: https://github.com/ihmeuw/vivarium_data_analysis/blob/main/pre_processing/lbwsg/2021_03_16a_lbwsg_compare_two_step_interpolation_plots.ipynb
+.. _LBWSGRiskEffectRBVSpline class: https://github.com/ihmeuw/vivarium_research_lsff/blob/main/nanosim_models/lbwsg.py#L722
+
+PAF Calculation for Interpolated Relative Risks
++++++++++++++++++++++++++++++++++++++++++++++++
+
+The Population Attributable Fraction (PAF) is used to compute "risk-deleted"
+transiton rates in our simulations. In the present context, the deleted risk
+will be LBWSG, and the affected rate will be the simulants' mortality hazard.
+Since the interpolated relative risk function described :ref:`above
+<lbwsg_2019_rr_interpolation_section>` is different from the piecewise constant
+relative risk function used by GBD, we will need to compute our own PAF for the
+interpolated relative risks rather than using the PAF calculated by GBD.
+
+As always, the formula for the PAF is
+
+.. math::
+
+  \mathrm{PAF}
+  = \frac{E(\mathit{RR}) - 1}{E(\mathit{RR})}
+  = 1 - \frac{1}{E(\mathit{RR})}
+  = 1 - \frac{1}{\int \mathit{RR}\, d\rho},
+
+where :math:`\textit{RR}` is the relative risk function, :math:`\rho` is the
+risk exposure distribution, and :math:`E` is expectation_ with respect to the
+probability measure :math:`\rho`. Thus the PAF computation comes down to
+computing an integral representing the average relative risk in the population.
+In our case the relevant integral is
+
+.. math::
+
+  \int \mathit{RR}\, d\rho
+  = \int_{\mathrm{GA}\times \mathrm{BW}}
+    \mathit{RR}(x,y)\, d\rho(x,y),
+
+where :math:`\mathrm{GA} = [0,42\text{wk}]`, :math:`\mathrm{BW} =
+[0,4500\text{g}]`, :math:`\mathit{RR}(x,y)` is the interpolated relative risk at
+gestational age :math:`x \in \mathrm{GA}` and birthweight :math:`y \in
+\mathrm{BW}`, and :math:`\rho` is the LBWSG exposure distribution.
+
+Note that the above formula employs the notation ":math:`d\rho`" from measure
+theory. If the exposure distribution :math:`\rho` is absolutely continuous with
+density function :math:`p` (e.g., if :math:`\rho` is defined by the piecewise
+constant density function described on the :ref:`GBD 2019 LBWSG exposure page
+<2019_risk_exposure_lbwsg>`), we can rewrite :math:`d\rho(x,y)` in terms of the
+probability density function :math:`p` for the LBWSG exposure distribution
+:math:`\rho`:
+
+.. math::
+
+  d\rho(x,y)
+  = \frac{d\rho(x,y)}{dx\, dy}\, dx\, dy
+  = p(x,y)\, dx\, dy,
+
+where :math:`dx\, dy` represents two-dimensional Lebesgue measure, and the
+Radon-Nikodym derivative :math:`p(x,y) = d\rho(x,y) / dx\,dy` is the probability
+density function of the LBWSG exposure distibution at the point :math:`(x,y)\in
+\mathrm{GA}\times \mathrm{BW}`. On the other hand, if :math:`\rho` is a discrete
+distribution (e.g., the polytomous LBWSG distribution described by GBD), then
+the integral with respect to :math:`d\rho` is by definition a sum over the
+discrete exposure categories.
+
+Computing the PAF via Monte Carlo Integration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+One way to compute the average relative risk :math:`\int \mathit{RR}\, d\rho`
+for the PAF calculation is to use `Monte Carlo integration`_. We can implement a
+simple version of Monte Carlo integration by leveraging the Vivarium
+microsimulation framework. Namely, we can initialize a population of simulants
+according to the LBWSG risk exposure distribution :math:`\rho`, then compute the
+average relative risk and the PAF for the simulated population. Here is Python
+(pseudo-)code to achieve this, continuing from the relative risk interpolation
+code above:
+
+.. code-block:: Python
+
+  def initialize_population_from_lbwsg_exposure(
+    pop_size: int,
+    age_group_id: int,
+    sex_id: int,
+    draw: int,
+    lbwsg_exposure: pd.DataFrame, # e.g. rescaled prevalence data from get_draws
+    ) -> pd.DataFrame:
+    """
+    Initializes a population of size pop_size according to the given LBWSG exposure distribution,
+    with attribute columns 'age_group_id', 'sex_id', 'gestational_age', 'birthweight'.
+    """
+    # This function can be implemented using the Vivarium Framework
+    # if we already have a component for initializing a population with
+    # LBWSG exposure data from GBD.
+    # The main thing it needs to do is convet the categorical LBWSG
+    # distribution from GBD into a continuous joint distribution of
+    # (birthweight, gestational_age). See the GBD 2019 LBWSG Risk Exposure
+    # documentation here:
+    # https://vivarium-research.readthedocs.io/en/latest/gbd2019_models/risk_exposures/low_birthweight_short_gestation/index.html
+    ...
+
+  def paf_from_mean_rr(mean_rr: float)->float:
+    """Calculates the PAF from the mean relative risk."""
+    return 1 - 1/mean_rr
+
+  # Variables and functions defined previously:
+  # -------------------------------------------
+  # pd, np
+  # draw, log_rr_interpolator, cat_df
+  # interpolate_lbwsg_rr_for_population
+
+  # Sample code to calculate the LBWSG PAF for Early Neonatal Females
+  # -----------------------------------------------------------------
+  EARLY_NEONATAL_ID = 2
+  FEMALE_ID = 2
+  pop_size = 100_000 # Choose a sufficiently large population size
+
+  lbwsg_exposure = ... # e.g., call get_draws for desired location, then rescale prevalence
+  enn_female_pop = initialize_population_from_lbwsg_exposure(
+    pop_size, EARLY_NEONATAL_ID, FEMALE_ID, draw, lbwsg_exposure
+  )
+  assert set(['age_group_id', 'sex_id', 'gestational_age', 'birthweight']) \
+    .issubset(enn_female_pop.columns), \
+    "Insufficient attribute columns to interpolate LBWSG RRs for population!"
+  assert (enn_female_pop['age_group_id'] == EARLY_NEONATAL_ID).all() \
+    and (enn_female_pop['sex_id'] == FEMALE_ID).all(), \
+    "Population has simulants of the wrong age or sex!"
+
+  enn_female_lbwsg_rrs = interpolate_lbwsg_rr_for_population(
+    enn_female_pop, log_rr_interpolator, cat_df
+  )
+  enn_female_paf = paf_from_mean_rr(enn_female_lbwsg_rrs.mean())
+
+As the number of simulants gets larger, the Law of Large Numbers implies that
+the mean RR of the simulated population will converge to the mean RR of a
+population with LBWSG exposure distribution :math:`\rho` (represented by the
+``lbwsg_exposure`` DataFrame in the above code). Therefore, the PAF computed by
+the above code will converge to the true PAF of the population as the number of
+simulants gets larger.
+
+.. important::
+
+  In order to get an idea of how large of a population we need to get a mean RR
+  and PAF close enough to the right value, we should do the Monte Carlo PAF
+  calculation for several small population sizes (e.g., 10, 100, 1000, 10,000),
+  and record some descriptive statistics for each calculation. Namely, it will
+  be useful to record the **mean RR**, the **sample standard deviation of the
+  RRs**, and the `standard error`_ **of the mean RR** for each simulation:
+
+  .. code-block:: Python
+
+    enn_female_rr_mean = enn_female_lbwsg_rrs.mean()
+    enn_female_rr_std_dev = np.sqrt(enn_female_lbwsg_rrs.var())
+    enn_female_rr_standard_error = enn_female_rr_std_dev / np.sqrt(len(enn_female_lbwsg_rrs))
+
+  These statisics will help us evaluate whether the PAF we get for a given
+  simulation is likely to be close to the true PAF, and will help us choose a
+  sufficiently large population size for a desired level of precision if we deem
+  that the original population size was insufficient.
+
+.. todo::
+
+  Describe a strategy for choosing a large enough population size for the Monte
+  Carlo calculation. See this `post in Slack
+  <https://ihme.slack.com/archives/C018BLX2JKT/p1639696957071600?thread_ts=1639685855.069100&cid=C018BLX2JKT>`_.
+
+.. todo::
+
+  Add link to Nathaniel's nanosim for LSFF as an example of working code that
+  performs the Monte Carlo PAF calculation.
+
+.. todo::
+
+  Determine if any alternative sampling strategies for the Monte Carlo
+  calculation may be more efficient. For example, rather than sampling the
+  continuous LBWSG distribution directly, it may be better to estimate the mean
+  RR in each category separately, then take a weighted average of the mean RR in
+  each category, weighting by the category prevalences.
+
+.. todo::
+
+  Try using SciPy's integration tools to compute the PAF as an alernative to the
+  Monte Carlo approach.
+
+.. _expectation: https://en.wikipedia.org/wiki/Expected_value
+.. _Monte Carlo integration: https://en.wikipedia.org/wiki/Monte_Carlo_integration
+.. _standard error: https://en.wikipedia.org/wiki/Standard_error
 
 Affected Outcomes in Vivarium
 +++++++++++++++++++++++++++++

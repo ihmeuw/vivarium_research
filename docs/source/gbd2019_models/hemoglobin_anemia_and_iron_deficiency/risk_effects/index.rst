@@ -239,12 +239,79 @@ Assumptions and Limitations
 
 Notably, anemia is a sequela of maternal hemorrhage, which is a subcause of maternal disorders. Therefore, if a simulation model of an intervention that affects hemoglobin concentration evaluates both the impact on burden due to maternal disorders and the impact of YLDs due to anemia, it is possible that the impact on YLDs for anemia due to maternal hemorrhage will be double counted. This is likely a relative small portion of DALYs, but should be investigated and considered prior to implementation.
 
+- We assume that the risk effect applies equally to YLDs as they do to YLLs (as does GBD). Given that the relative risks were measured according to mortality (not incidence or disability). Therefore, this modeling strategy assumes that hemoglobin decreases maternal disorder mortality entirely through a reduction of incidence with no effect on the case fatality rate without direct evidence to support this assumption. In fact, it could be possible that improvement in the risk exposure (shifting the distribution closer to the TMREL) would in fact *increase* YLDs due to an averted death due to maternal disorders that leads to living with maternal disorder disability.
+
+- Application of the relative risks to maternal disorder YLDs assumes that the risk affects each subcause of maternal disorders equally. However, if the risk affects a subcause with low disability weights more than a cause with high disability weights, then we will be overestimating the effect of the risk on YLDs and vice versa.
+
 Bias in the Population Attributable Fraction
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. note::
 
   This section is not applicable because this modelling strategy does not depend on PAFs.
+
+Maternal hemorrhage incidence
++++++++++++++++++++++++++++++++
+
+.. note::
+
+  This risk outcome pair is not included in GBD.
+
+Hemoglobin level will act as a risk factor for :ref:`maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>`. For the implementation of this risk effect, hemoglobin risk exposure will be defined as **dichotomous** based on a threshold of 70 grams per liter (severe anemia among pregnant women).
+
+The relative risk for this risk factor will apply to the probability of experiencing an incident case of maternal hemorrhage at birth such that:
+
+.. math::
+
+  ratio_\text{hgb>70} = ratio_{overall} * (1 - PAF)
+
+  ratio_\text{hgb<=70} = ratio_{overall} * (1 - PAF) * RR
+
+Where,
+
+.. list-table:: Intervention coverage parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Description  
+    - Value
+    - Note
+  * - :math:`ratio_{overall}`
+    - Overall ratio of incident maternal hemorrhage per birth
+    - Defined on the :ref:`maternal hemorrhage incidence page <2019_cause_maternal_hemorrhage_incidence>`
+    - 
+  * - :math:`PAF`
+    - PAF of maternal hemorrhage incidence attributable to hemoglobin
+    - :math:`\frac{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70}) - 1}{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70})}`
+    - 
+  * - :math:`RR`
+    - Relative risk of maternal hemorrhage incidence for hemoglobin < 70 g/L
+    - 3.54 (95% CI: 1.2, 10.4)
+    - Lognormal distribution of uncertainty, [Omotayo-et-al-2021]_
+  * - :math:`p_\text{hgb<=70}`
+    - Proportion of pregnant women with hemoglobin less than 70 g/L
+    - As informed by GBD... needs external calculation
+    - Ali to perform calculation and update
+
+.. todo::
+
+  Ali to calculate proportion of pregnant women with severe anemia for each model location of interest
+
+.. note::
+
+  This strategy ignores the impact of hemoglobin on the case fatality rate of maternal hemorrhage 
+
+Validation and Verification Criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- :ref:`Maternal hemorrhage incidence <2019_cause_maternal_hemorrhage_incidence>` should continue to meet validation and verification criteria
+- The relative risk of maternal hemorrhage incidence stratified by the hemoglobin level of 70 g/L should verify to the magnitude of the relative risk
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- This modeling strategy assumes that maternal hemorrhage case fatality rate is not associated with hemoglobin level.
+- We are limited in our use of a dichotomous exposure for hemoglobin. There are suspected differences in maternal hemoglobin risk by hemoglobin levels above 70, although we are limited by data quality to inform this relationship.
 
 References
 ----------
@@ -257,3 +324,8 @@ References
      https://doi.org/10.1016/S0140-6736(20)30752-2
 
 .. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
+
+
+.. [Omotayo-et-al-2021]
+
+    Omotayo, M. O., Abioye, A. I., Kuyebi, M., & Eke, A. C. (2021). Prenatal anemia and postpartum hemorrhage risk: A systematic review and meta‐analysis. Journal of Obstetrics and Gynaecology Research, 47(8), 2565–2576. https://doi.org/10.1111/jog.14834

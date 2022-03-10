@@ -193,7 +193,7 @@ Data Description
      - Justification included below
    * - I
      - duration_mean
-     - 3.5/365 if age_group=='Early Neonatal' else 10/365
+     - 3.5/365 if age_group=='Early Neonatal' else (7.79 days; 95% CI 6.2–9.64; normal distribution of uncertainty)/365
      - Justification included below
    * - I
      - excess mortality rate
@@ -211,7 +211,7 @@ Data Description
 We calculate prevalence using the equation prevalence = incidence * duration. 
 (See assumptions and limitations for the need to replace GBD's prevalence).
 This is appropriate because LRI has a short and relatively uniform duration of 
-10 (5,15) days. Note that 10 days is longer than the Early Neonatal period (7 
+7.79 days (95% CI 6.2–9.64) days [GBD-2019-Capstone-Appendix-LRI]_. Note that this duration is longer than the Early Neonatal period (7 
 days). It follows that any incident LRI case in the early neonatal age group 
 will not remit before either dying or aging out. As an early neonate is 
 uniformly likely to become an incident LRI case on any of the 7 days of 'Early 
@@ -235,7 +235,7 @@ age group is approximately 3.5 days (not accounting for deaths).
    * - r
      - I
      - S
-     - remission_rate_c322
+     - 1 / duration_mean
      -
 .. list-table:: Data Sources
    :widths: 20 25 25 25
