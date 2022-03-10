@@ -105,6 +105,9 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 4.4 Intervention Models
 -----------------------
 
+* Multiple Myeloma Treatment (add a page in the :ref:`Intervention Models
+  <intervention_models>` section)
+
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
 
