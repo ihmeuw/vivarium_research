@@ -24,7 +24,7 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2019_concept_model_vivarium_sanofi_multiple_myeloma:
+.. _2019_concept_model_vivarium_csu_multiple_myeloma:
 
 =======================================================
 Vivarium CSU Multiple Myeloma Registries Phase 1
