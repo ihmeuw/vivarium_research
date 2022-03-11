@@ -117,11 +117,18 @@ set of treatment categories based on treatment guidelines from the `NCCN
 4.2 Risk Exposure Models
 ------------------------
 
+* :ref:`Multiple Myeloma Risk Factor Exposures <2019_multiple_myeloma_risk_factor_exposures>`
+
 4.3 Risk Effects Models
 -----------------------
 
+* :ref:`Multiple Myeloma Risk Factor Effects <2019_multiple_myeloma_risk_factor_effects>`
+
 4.4 Intervention Models
 -----------------------
+
+* Multiple Myeloma Treatment (add a page in the :ref:`Intervention Models
+  <intervention_models>` section)
 
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++

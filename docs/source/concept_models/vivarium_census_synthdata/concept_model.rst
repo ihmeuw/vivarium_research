@@ -56,86 +56,75 @@ Vivarium Census PRL Synthetic Data
 .. contents::
   :local:
 
-+------------------------------------+
-| List of abbreviations              |
-+=======+============================+
-|       |                            |
-+-------+----------------------------+
++--------------------------------------+
+| List of abbreviations                |
++=======+==============================+
+| ACS   | American Communities Survey  |
++-------+------------------------------+
+| PRL   | Probabilistic Record Linkage |
++-------+------------------------------+
+| USCB  | United States Census Bureau  |
++-------+------------------------------+
 
 .. _{census_prl}1.0:
 
 1.0 Background
 ++++++++++++++
 
+Probabilistic Record Linkage (PRL) typically uses sensitive data
+containing information such as name, address, date of birth, and
+sometimes even social security number, and the restrictions on access
+to such data has been a barrier to developing and testing new methods
+and software for PRL.  By simulating realistic, but synthetic, data
+which includes these attributes, we can make PRL research and
+development easier for ourselves and others.
+
+We are certainly not the first to attempt such a data synthesis
+project.  Prior approaches include FEBRL, GeCO from UQ, and UALR's
+synthetic occupancy generator (SOG) approach.  There is also relevant
+work from Chris Dibben, who developed `an R package for producing
+synthetic data <https://www.synthpop.org.uk/index.html>`_, and from Robin Linacre, who developed `synthetic data for testing splink <http://github.com/moj-analytical-services/splink_synthetic_data>`_.
+
+The unique elements of our work will rely on Vivarium: our synthetic
+data will be informed by the United States Census Burea (USCB) needs
+and publicly released USCB data (such as the American Communities
+Survey [ACS]).  By using Vivarium, we will represent some realistic
+dynamics of household and family structure at large scale and with
+relevant geographies.  In the longer term, I hope that this work will
+also be easily extendable because of our modular framework, for
+example, I hope it will be somewhat straightforward to have a mash-up
+of the PRL sim with the with cancer detection models we completed a
+year ago, to help PRL researchers in cancer surveillance space.
 
 .. _{census_prl}1.1:
 
 1.1 Project overview
 --------------------
 
+All simulants will have age and sex (1), following our standard
+approach.  We will also include attributes capturing race/ethnicity
+(2), geographic location (3), and household id (4). To better name
+individuals we will also include an attribute for their relationship
+to a reference person (5). Due to the complex interplay of these
+attributes we will need an enhanced fertility model (6).  We can use
+our standard mortality model (7), but will need a totally new model of
+migration (8) that accounts for moves by household and individual
+simulants and allows migration in to and out of the tracked
+population, as well as changes to geographic location and
+household id.
 
+On top of this, we will layer attributes relevant to PRL: mailing
+addresses for each household (9); first, middle, and last names for
+each simulant (10); date of birth (11); intended-to-be-unique
+identification number modeling SSN that is missing for some and not
+actually unique for others (12); and periodic observations of these
+attributes through survey, census, and registry with realistic noise
+(13).
 
-.. _{census_prl}1.2:
-
-1.2 Literature review
----------------------
-
-
-.. _{census_prl}2.0:
-
-2.0 Modeling aims and objectives
-++++++++++++++++++++++++++++++++
-
-
-.. _{census_prl}3.0:
-
-3.0 Causal framework
-++++++++++++++++++++
-
-.. _{census_prl}3.1:
-
-3.1 Causal diagram
-------------------
- 
- .. note::
-    link to DAGs page
-    use round circles with DAGs
-
-**Outcome (O)**:
-
-
-
-**Most proximal determinant/exposure (E)**:
-  
-
-
-**Confounders (C)**:
-
-
-
-**Effect modifiers**:
-
-
-**Mediators (M)**:
-
-
-.. _{census_prl}3.2:
-
-3.2 Effect sizes
-----------------
-
-
-
-4.0 Intervention
-++++++++++++++++
-
-
-
-.. _{census_prl}4.1:
-
-4.1 Simulation scenarios
-------------------------
-
+Additional components we might want: time-dependent changes to
+observers of sex, based on gender assigned at birth (14); multiple
+households for individuals, leading to double counting in census (15);
+twins and multiparous births in fertility model (16).
 
 .. _{census_prl}5.0:
 
@@ -150,7 +139,8 @@ Vivarium Census PRL Synthetic Data
 .. note::
   This is our standard vivarium concept model diagram we are used to seeing
 
-.. _{census_prl}5.2:
+
+.. _age-sex-etc:
 
 5.2 Demographics
 ----------------
