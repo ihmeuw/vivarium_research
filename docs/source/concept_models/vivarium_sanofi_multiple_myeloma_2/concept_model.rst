@@ -76,11 +76,21 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 3.0 Concept Model Diagram
 +++++++++++++++++++++++++
 
+.. note::
+
+  This is the concept model diagram from :ref:`Phase 1
+  <2019_concept_model_vivarium_sanofi_multiple_myeloma>`. It may need to be
+  updated for Phase 2.
+
+.. image:: ../vivarium_sanofi_multiple_myeloma/concept_model_diagram.svg
+
 4.0 Vivarium Model Components
 +++++++++++++++++++++++++++++
 
 4.1 Cause Models
 ----------------
+
+* :ref:`Multiple Myeloma <2019_cancer_model_multiple_myeloma>`
 
 4.2 Risk Exposure Models
 ------------------------
