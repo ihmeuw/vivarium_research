@@ -53,12 +53,12 @@ Vivarium CSU Multiple Myeloma Registries Phase 2
 1.0 Background
 ++++++++++++++
 
-This page describes Phase 2 our multiple myeloma simulation project for Sanofi.
-:ref:`Phase 1 <2019_concept_model_vivarium_sanofi_multiple_myeloma>` initially
-focused on a planned multiple myeloma patient registry, but registry enrollment
-has been much lower than expected, so it is no longer a current focus of the
-client. Instead, we will use our microsimulation to help Sanofi answer various
-business questions about their new drug SARCLISA (isatuximab).
+This page describes Phase 2 our multiple myeloma simulation project. :ref:`Phase
+1 <2019_concept_model_vivarium_sanofi_multiple_myeloma>` initially focused on a
+planned multiple myeloma patient registry, but registry enrollment has been much
+lower than expected, so it is no longer a current focus of the client. Instead,
+we will use our microsimulation to help the client answer various business
+questions about their new drug isatuximab.
 
 * Phase 1 :ref:`concept model
   <2019_concept_model_vivarium_sanofi_multiple_myeloma>` and `HUB page
