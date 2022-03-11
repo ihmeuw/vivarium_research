@@ -117,7 +117,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
   <2019_concept_model_vivarium_sanofi_multiple_myeloma>`. It may need to be
   updated for Phase 2.
 
-.. image:: ../vivarium_sanofi_multiple_myeloma/concept_model_diagram.svg
+.. image:: ../vivarium_csu_multiple_myeloma/concept_model_diagram.svg
 
 4.0 Vivarium Model Components
 +++++++++++++++++++++++++++++
