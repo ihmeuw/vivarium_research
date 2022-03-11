@@ -73,7 +73,7 @@ asked us to expand our simulation in the following ways:
 
 3. Expand the modeled locations beyond the USA.
 
-We gave a `presentation to Sanofi on January 20, 2022 <slides_20220120_>`_
+We gave a `presentation to the CSU client on January 20, 2022 <slides_20220120_>`_
 proposing some potential business questions for Phase 2, along with an expanded
 set of treatment categories based on treatment guidelines from the `NCCN
 <https://www.nccn.org/>`_ as `suggested by Manoj Menon in Sep-Oct 2021
