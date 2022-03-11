@@ -1,45 +1,7 @@
-.. _intervention_model_template:
-
-----------------------------
-Intervention Model Template
-----------------------------
-
-.. important::
-
-   To begin documenting an intervention for a Vivarium simulation, start by
-   following these steps (after you have :ref:`created a new git branch
-   <contributing>` to work in):
-
-   #. Make a subdirectory :file:`{intervention_name}/` in the folder
-      :file:`intervention_models` , where :file:`{intervention_name}` is replaced with the
-      (potentially shortened) name of the intervention you are modeling.  This
-      subdirectory is where you will put all the files for your model
-      documentation, including this document, image files, .csv files, etc.
-
-   #. Copy this template into your subdirectory and rename
-      it :code:`index.rst`.
-
-   #. Replace the `internal hyperlink target
-      <https://docutils.sourceforge.io/docs/user/rst/quickref.html#internal-hyperlink-targets>`_
-      :code:`.. _intervention_model_template:` at the top of this file with a
-      unique reference label for your cause. The reference label should have the
-      form :samp:`.. _intervention_{\{intervention_name\}}:`, where
-      :samp:`{\{intervention_name\}}` is replaced with a unique descriptive name or
-      abbreviation for your cause, e.g. :code:`.. _intervention_bep:`.
-
-   #. Delete this document's title above:
-
-      .. code:: reStructuredText
-
-         ----------------------------
-         Intervention Model Template
-         ----------------------------
-
-      Once the above title is deleted, all the other section titles will be
-      promoted up one level.
+.. _multiple_myeloma_treatment:
 
 ==============================
-Full Name of Intervention
+Multiple Myeloma Treatment
 ==============================
 
 .. todo::
