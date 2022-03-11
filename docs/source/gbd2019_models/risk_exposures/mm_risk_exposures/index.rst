@@ -37,7 +37,7 @@ Multiple Myeloma Risk Factor Exposures
 
 We will follow the same strategy for risk factor exposures as in the
 :ref:`Multiple Myeloma Phase 1 concept model
-<2019_concept_model_vivarium_sanofi_multiple_myeloma>`. However, we will likely
+<2019_concept_model_vivarium_csu_multiple_myeloma>`. However, we will likely
 handle race differently, perhaps omitting it entirely as a risk factor.
 
 .. todo::
