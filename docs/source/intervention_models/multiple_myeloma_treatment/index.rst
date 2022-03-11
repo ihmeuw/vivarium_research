@@ -10,7 +10,6 @@ Multiple Myeloma Treatment
 
 .. contents::
    :local:
-   :depth: 1
 
 .. list-table:: Abbreviations
   :widths: 15 15 15
@@ -47,14 +46,10 @@ Intervention Overview
   * - Outcome
     - Effect
     - Modeled?
-    - Note (ex: is this relationship direct or mediated?)
-  * - Hemoglobin concentration
-    - Increases population mean
-    - Yes
+    - Note
+  * -
     -
-  * - Malaria
-    - Increases incidence rate
-    - No
+    -
     -
 
 Baseline Coverage Data
@@ -101,12 +96,12 @@ Vivarium Modeling Strategy
     - Effect size measure
     - Effect size
     - Note
-  * - Lung cancer
-    - GBD cause
-    - c426
-    - Preclinical incidence rate
-    - Relative risk
-    - 0.8 (95% CI: 0.7, 1.01)
+  * -
+    -
+    -
+    -
+    -
+    -
     -
 
 Affected Outcome #1
@@ -162,11 +157,8 @@ Affected Outcome #1
   * - Population
     - Effect size
     - Note
-  * - Malnourished women
-    - +50 g birthweight
+  * -
     -
-  * - Adequately nourished women
-    - +10 g birthweight
     -
 
 .. todo::
