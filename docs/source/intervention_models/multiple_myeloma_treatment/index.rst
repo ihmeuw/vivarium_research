@@ -245,6 +245,13 @@ categories:
     -
     -
 
+.. todo::
+
+  Verify the definitions of the treatment regimen categories with Manoj after
+  checking what drugs show up in Flatiron data. That is, exactly which drugs
+  should we include in each drug class (IMiD, PI, chemo, etc.), and what will be
+  the consequences of lumping everything else into "Other"?
+
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
 
