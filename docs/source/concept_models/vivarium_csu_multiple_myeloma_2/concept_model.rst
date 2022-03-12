@@ -142,8 +142,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
 4.4 Intervention Models
 -----------------------
 
-* Multiple Myeloma Treatment (add a page in the :ref:`Intervention Models
-  <intervention_models>` section)
+* :ref:`Multiple Myeloma Treatment <multiple_myeloma_treatment>`
 
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
