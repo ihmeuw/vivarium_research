@@ -40,14 +40,32 @@ Multiple Myeloma Treatment
    :local:
 
 .. list-table:: Abbreviations
-  :widths: 15 15 15
+  :widths: 5 5 10
   :header-rows: 1
 
   * - Abbreviation
     - Definition
     - Note
-  * -
+  * - ASCT
+    - autologous stem cell transplantation
     -
+  * - IMiD
+    - immunomodulatory imide drug
+    -
+  * - PI
+    - proteasome inhibitor
+    -
+  * - MoAB
+    - monoclonal antibody
+    -
+  * - Isa
+    - isatuximab
+    -
+  * - Dara
+    - daratumumab
+    -
+  * - Dex
+    - dexamethasone
     -
 
 .. todo::
@@ -81,16 +99,16 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
      - Abbreviation
      - Drugs
    * - Immunomodulatory imide drugs
-     - IMiD
+     - IMiDs
      - thalidomide, lenalidomide, pomalidomide
    * - Proteasome inhibitors
-     - PI
-     - Bortezomib, carfilzomib, ixazomib, marizomib, oprozomib
+     - PIs
+     - bortezomib, carfilzomib, ixazomib, marizomib, oprozomib
    * - Monoclonal antibodies
-     - MoAB
+     - MoABs
      - isatuximab (anti-CD38), daratumumab (anti-CD38), MOR202 (anti-CD38), elotuzamab (anti-CS1/anti-SLAM7), denosumab (anti-RANKL), siltuximab (anti-IL6), IPH2101 (anti-KIR2DL1/2/3)
    * - Corticosteroids
-     - steroid
+     - steroids
      - dexamethasone, prednisone
 
 
