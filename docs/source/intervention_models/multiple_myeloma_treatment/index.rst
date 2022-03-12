@@ -144,13 +144,17 @@ We plan to use Flatiron to inform baseline coverage of each treatment regimen.
 Vivarium Modeling Strategy
 --------------------------
 
-The Phase 1 simulation only considered three categories of treatment: isatuximab-containing, daratumumab-containing, and other. Based on conversations with the client and with our clinical expert Manoj Menon, we propose expanding the modeled treatment categories to the following set of 16 mutually-exclusive categories:
+The Phase 1 simulation only considered three categories of treatment:
+isatuximab-containing, daratumumab-containing, and other. Based on conversations
+with the client and with our clinical expert Manoj Menon, we propose expanding
+the modeled treatment categories to the following set of 16 mutually exclusive
+categories:
 
-.. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15
+.. list-table:: Modeled Treatment Categories
+  :widths: 5 10 8 15
   :header-rows: 1
 
-  * - Category number
+  * - Enumeration
     - Treatment category
     - Supercategory
     - Notes
@@ -158,71 +162,63 @@ The Phase 1 simulation only considered three categories of treatment: isatuximab
     - PI/Dex
     -
     -
-  * - 2​​
-    - IMID/Dex​​
+  * - 2
+    - IMID/Dex
     -
     -
-  * - 3​​
-    - PI/IMID/Dex​​
+  * - 3
+    - PI/IMID/Dex
     -
     -
-  * - 4​​
-    - Chemo/PI/Dex​​
+  * - 4
+    - Chemo/PI/Dex
     -
     -
-  * - 5​​
-    - Chemo/IMID/Dex​​
+  * - 5
+    - Chemo/IMID/Dex
     -
     -
-  * - 6​​
-    - Dara/PI/Dex​​
+  * - 6
+    - Dara/bortezomib/Dex
+    - Dara/PI/Dex
+    -
+  * - 7
+    - Dara/carfilzomib/Dex
+    - Dara/PI/Dex
+    -
+  * - 8
+    - Dara/ixazomib/Dex
+    - Dara/PI/Dex
+    -
+  * - 9
+    - Dara/lenalidomide/Dex
+    - Dara/IMID/Dex
+    -
+  * - 10
+    - Dara/pomalidomide/Dex
+    - Dara/IMID/Dex
+    -
+  * - 11
+    - Dara/thalidomide/Dex
+    - Dara/IMID/Dex
+    -
+  * - 12
+    - Isa/PI/Dex
     -
     -
-  * - 6a​​
-    - Dara/bortezomib/Dex​​
+  * - 13
+    - Isa/IMID/Dex
     -
     -
-  * - 6b​​
-    - Dara/carfilzomib/Dex​​
+  * - 14
+    - Dara/PI/Chemo/Dex
     -
     -
-  * - 6c​​
-    - Dara/ixazomib/Dex​​
+  * - 15
+    - Dara/PI/IMID/Dex
     -
     -
-  * - 7​​
-    - Dara/IMID/Dex​​
-    -
-    -
-  * - 7a​​
-    - Dara/lenalidomide/Dex​​
-    -
-    -
-  * - 7b​​
-    - Dara/pomalidomide/Dex​​
-    -
-    -
-  * - 7c​​
-    - Dara/thalidomide/Dex​​
-    -
-    -
-  * - 8​​
-    - Isa/PI/Dex​​
-    -
-    -
-  * - 9​​
-    - Isa/IMID/Dex​​
-    -
-    -
-  * - 10​​
-    - Dara/PI/Chemo/Dex​​
-    -
-    -
-  * - 11​​
-    - Dara/PI/IMID/Dex​​
-    -
-    -
-  * - 12​​
+  * - 16
     - Other
     -
     -
