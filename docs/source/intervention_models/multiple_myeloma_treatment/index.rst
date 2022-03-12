@@ -57,6 +57,48 @@ Multiple Myeloma Treatment
 Intervention Overview
 -----------------------
 
+The multiple myeloma treatment model for :ref:`Phase 2 of the project
+<2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>` will incorporate
+much of the information and strategy from the :ref:`Multiple Myeloma Phase 1
+Treatment Model <mm5.3.3>`. The main differences are that we are expanding the
+set of mutually exclusive treatment categories, and we will be supplementing
+data from literature and expert opinion with patient-level data from Flatiron to
+inform our treatment algorithm.
+
+Background Research
++++++++++++++++++++
+
+Treatment guidelines for multiple myeloma are complex and varied.
+[Rajkumar-and-Kumar-2020]_ and [Nijhof-et-al-2017]_ published recent reviews on
+multiple myeloma treatment options and guidelines. Important classes of
+anti-myeloma drugs are summarized (non-exhaustively) below, according to
+[Nijhof-et-al-2017]_:
+
+.. list-table:: Select anti-myeloma drug classes
+   :header-rows: 1
+
+   * - Class
+     - Abbreviation
+     - Drugs
+   * - Immunomodulatory imide drugs
+     - IMiD
+     - thalidomide, lenalidomide, pomalidomide
+   * - Proteasome inhibitors
+     - PI
+     - Bortezomib, carfilzomib, ixazomib, marizomib, oprozomib
+   * - Monoclonal antibodies
+     - MoAB
+     - isatuximab (anti-CD38), daratumumab (anti-CD38), MOR202 (anti-CD38), elotuzamab (anti-CS1/anti-SLAM7), denosumab (anti-RANKL), siltuximab (anti-IL6), IPH2101 (anti-KIR2DL1/2/3)
+   * - Corticosteroids
+     - steroid
+     - dexamethasone, prednisone
+
+Treatment Modeling Strategy
++++++++++++++++++++++++++++
+
+The Phase 1 simulation only considered three categories of treatment: isatuximab-containing, daratumumab-containing, and other. Based on conversations with the client and with our clinical expert Manoj Menon, we propose expanding the modeled treatment categories to the following set of 16 mutually-exclusive categories:
+
+
 .. todo::
 
    Add a general narrative overview of the intervention, including what it is, what outcomes it affects, if/how/when/where it has been used, etc.
