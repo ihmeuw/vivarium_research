@@ -68,10 +68,6 @@ Multiple Myeloma Treatment
     - dexamethasone
     -
 
-.. todo::
-
-  Fill out table with any abbreviations and their definitions used in this document.
-
 Intervention Overview
 -----------------------
 
@@ -111,16 +107,12 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
      - steroids
      - dexamethasone, prednisone
 
-
-.. todo::
-
-   Add a general narrative overview of the intervention, including what it is, what outcomes it affects, if/how/when/where it has been used, etc.
+Affected Outcomes
++++++++++++++++++
 
 .. todo::
 
   Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
-
-  The table below provides example entries for large scale food fortification with iron.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -162,10 +154,17 @@ We plan to use Flatiron to inform baseline coverage of each treatment regimen.
 Vivarium Modeling Strategy
 --------------------------
 
-The Phase 1 simulation only considered three categories of treatment:
+.. todo::
+
+  Add an overview of the Vivarium modeling section.
+
+Treatment Categories
+++++++++++++++++++++
+
+The Phase 1 simulation only considered three categories of treatment regimen:
 isatuximab-containing, daratumumab-containing, and other. Based on conversations
-with the client and with our clinical expert Manoj Menon, we propose expanding
-the modeled treatment categories to the following set of 16 mutually exclusive
+with the client and with our clinical expert Manoj Menon, we plan to expand the
+modeled treatment categories to the following set of 16 mutually exclusive
 categories:
 
 .. list-table:: Modeled Treatment Categories
@@ -241,12 +240,8 @@ categories:
     -
     -
 
-
-
-
-.. todo::
-
-  Add an overview of the Vivarium modeling section.
+Modeled Affected Outcomes
++++++++++++++++++++++++++
 
 .. todo::
 
