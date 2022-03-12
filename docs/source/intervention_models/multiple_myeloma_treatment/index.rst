@@ -93,11 +93,6 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
      - steroid
      - dexamethasone, prednisone
 
-Treatment Modeling Strategy
-+++++++++++++++++++++++++++
-
-The Phase 1 simulation only considered three categories of treatment: isatuximab-containing, daratumumab-containing, and other. Based on conversations with the client and with our clinical expert Manoj Menon, we propose expanding the modeled treatment categories to the following set of 16 mutually-exclusive categories:
-
 
 .. todo::
 
@@ -125,6 +120,8 @@ The Phase 1 simulation only considered three categories of treatment: isatuximab
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
+We plan to use Flatiron to inform baseline coverage of each treatment regimen.
+
 .. todo::
 
   Document known baseline coverage data, using the table below if appropriate
@@ -146,6 +143,92 @@ Baseline Coverage Data
 
 Vivarium Modeling Strategy
 --------------------------
+
+The Phase 1 simulation only considered three categories of treatment: isatuximab-containing, daratumumab-containing, and other. Based on conversations with the client and with our clinical expert Manoj Menon, we propose expanding the modeled treatment categories to the following set of 16 mutually-exclusive categories:
+
+.. list-table:: Modeled Outcomes
+  :widths: 15 15 15 15
+  :header-rows: 1
+
+  * - Category number
+    - Treatment category
+    - Supercategory
+    - Notes
+  * - 1
+    - PI/Dex
+    -
+    -
+  * - 2​​
+    - IMID/Dex​​
+    -
+    -
+  * - 3​​
+    - PI/IMID/Dex​​
+    -
+    -
+  * - 4​​
+    - Chemo/PI/Dex​​
+    -
+    -
+  * - 5​​
+    - Chemo/IMID/Dex​​
+    -
+    -
+  * - 6​​
+    - Dara/PI/Dex​​
+    -
+    -
+  * - 6a​​
+    - Dara/bortezomib/Dex​​
+    -
+    -
+  * - 6b​​
+    - Dara/carfilzomib/Dex​​
+    -
+    -
+  * - 6c​​
+    - Dara/ixazomib/Dex​​
+    -
+    -
+  * - 7​​
+    - Dara/IMID/Dex​​
+    -
+    -
+  * - 7a​​
+    - Dara/lenalidomide/Dex​​
+    -
+    -
+  * - 7b​​
+    - Dara/pomalidomide/Dex​​
+    -
+    -
+  * - 7c​​
+    - Dara/thalidomide/Dex​​
+    -
+    -
+  * - 8​​
+    - Isa/PI/Dex​​
+    -
+    -
+  * - 9​​
+    - Isa/IMID/Dex​​
+    -
+    -
+  * - 10​​
+    - Dara/PI/Chemo/Dex​​
+    -
+    -
+  * - 11​​
+    - Dara/PI/IMID/Dex​​
+    -
+    -
+  * - 12​​
+    - Other
+    -
+    -
+
+
+
 
 .. todo::
 
