@@ -67,11 +67,6 @@ questions about their new drug isatuximab.
 * `Phase 2 HUB page
   <https://hub.ihme.washington.edu/display/COS/Multiple+Myeloma+Registries+Sim+Phase+2>`_
 
-.. _mm2_1.1:
-
-1.1 Project Overview
---------------------
-
 Our :ref:`Phase 1 multiple myeloma simulation
 <2019_concept_model_vivarium_csu_multiple_myeloma>` focused on a scale-up of
 isatuximab as a first-line treatment in the USA. For Phase 2, the client has
@@ -90,11 +85,18 @@ We gave a `presentation to the CSU client on January 20, 2022 <slides_20220120_>
 proposing some potential business questions for Phase 2, along with an expanded
 set of treatment categories based on treatment guidelines from the `NCCN
 <https://www.nccn.org/>`_ as `suggested by Manoj Menon in Sep-Oct 2021
-<slides_Manoj_20210924_>`_.
+<recommendations_from_Manoj_>`_.
 
 .. _slides_20220120: https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7BB3EB4DE8-7E6A-4E81-9A4E-F3C4A5F2D6AB%7D&file=20220120%20IHME%20Multiple%20Myeloma%20Simulation%20-%20Phase%202%20Next%20Steps.pptx&action=edit&mobileredirect=true
 
 .. _slides_Manoj_20210924: https://uwnetid.sharepoint.com/:p:/r/sites/ihme_simulation_science_team/_layouts/15/Doc.aspx?sourcedoc=%7B2AC8C5F2-CFE6-4458-93AD-4B378953EED3%7D&file=Simulation_MM_Sept%2024.pptx&action=edit&mobileredirect=true
+
+.. _recommendations_from_Manoj: https://uwnetid.sharepoint.com/:f:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/CSU_Multiple%20Myeloma/Phase%202/05_Concept%20model%20development/Recommendations%20from%20Manoj%20Menon?csf=1&web=1&e=7UwzUz
+
+.. _mm2_1.1:
+
+1.1 Project Overview
+--------------------
 
 .. _mm2_1.2:
 
