@@ -72,6 +72,13 @@ inform our treatment algorithm.
     - dexamethasone
     -
 
+Links to Related Models
+-----------------------
+
+* :ref:`Multiple Myeloma Cause Model <2019_cancer_model_multiple_myeloma>`
+* :ref:`Multiple Myeloma Phase 1 Concept Model <2019_concept_model_vivarium_csu_multiple_myeloma>`
+* :ref:`Multiple Myeloma Phase 2 Concept Model <2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>`
+
 Intervention Overview
 -----------------------
 
