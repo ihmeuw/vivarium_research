@@ -112,6 +112,17 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
      - steroids
      - dexamethasone, prednisone
 
+Treatment Algorithm Flowcharts
+++++++++++++++++++++++++++++++
+
+.. figure:: Rajkumar_2020_Fig1_line_1_treatment.webp
+
+  Approach to the treatment of newly diagnosed myeloma in transplant-eligible
+  **(a)** and transplant-ineligible **(b)** patients. VRd, Bortezomib,
+  lenalidomide, dexamethasone; DRd, daratumumab, lenalidomide, dexamethasone;
+  Dara-VRd, daratumumab, bortezomib, lenalidomide, dexamethasone; ASCT,
+  autologous stem cell transplantation.
+
 Affected Outcomes
 +++++++++++++++++
 
