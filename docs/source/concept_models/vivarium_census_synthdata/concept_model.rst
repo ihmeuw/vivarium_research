@@ -479,14 +479,266 @@ When we reach that point, we might also want to think about the change
 in relationship type when people move, and also change surnames
 sometimes.
 
+We might also put a "demographic" model on the housing units in (C);
+according to `ACS: America's Data At Risk
+(p. 21) <https://censusproject.files.wordpress.com/2022/03/census_white-paper_final_march_2022.pdf>`_,
+"Between 2000 and 2019, the number of housing units increased by 23.8
+million or almost 21%."
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are moving at the expected rates.
 
 
-2.3.5 Component 9+
-~~~~~~~~~~~~~~~~~~
-To Come (TK)
+2.3.5 Component 9: Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Each household id should be associated with a postal address, and when
+people move, they should often move into previously vacated
+households, so that there are collisions between residential
+addresses.
+
+It is not clear how important it is to have housing unit address
+correspond to geography, and I am trying to gauge how much effort to
+put into having geographically realistic addresses.  This is also a
+sensitive area for privacy and personal information --- even if the
+data is synthetic, it might refer to a real location.  The risks of
+this are unclear.
+
+A generator that can generate street address and zip code is the
+Python package faker: https://github.com/joke2k/faker
+
+.. sourcecode:: python
+
+    # addresses stay with households, can start with faker python library
+    import faker
+    fake = faker.Faker()
+
+    def my_fake_address():
+        orig_address = fake.unique.address()
+        address = orig_address.split('\n')[0]
+        return address
+
+    address_dict = {hh_id: my_fake_address() for hh_id in df_population.household_id.unique()}
+
+    zip_dict = {hh_id: provider.postcode_in_state('FL') for hh_id in df_population.household_id.unique()}
+
+    df_population['address'] = df_population.household_id.map(address_dict)
+    df_population['zip'] = df_population.household_id.map(zip_dict)
+
+Some additional libraries that function similarly to ``faker`` are https://github.com/ropensci/charlatan
+and https://github.com/paulhendricks/generator
+
+
+It would be cool to have geographically plausible addresses, for
+example by reversing the process of libpostal, based on the PUMA
+geocoords. (it turns out that libpostal is an address parser, and does
+not map the parsed value to a lat/lon coordinate; an updated attempt
+has packaged libpostal training data conveniently:
+https://github.com/GRAAL-Research/deepparse-address-data)
+
+It would be responsible to avoid putting real addresses in the
+synthetic database, perhaps by checking the synthetic data against
+libpostal and rejecting the generated addresses that seem real.
+Census Bureau might appreciate this and might even be able to provide
+USPS data on what real addresses are and we can avoid them (although
+there is an obscure potential privacy issue with that, too!).  We
+could potentially use business addresses as residential addresses as a
+backup plan.
+
+2.3.6 Component 10: Names
+~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Last names**
+
+Last names in USA by race
+https://www2.census.gov/topics/genealogy/2010surnames/surnames.pdf
+https://www.census.gov/topics/population/genealogy/data/2010_surnames.html
+
+Note: RAND used something like this for their BISG project
+https://www.rand.org/pubs/external_publications/EP20090611.html
+https://www.rand.org/health-care/tools-methods/bisg.html
+
+.. sourcecode:: python
+
+    # last name can be race/ethnicity specific
+    df_census_names = pd.read_csv('/home/j/Project/simulation_science/prl/data/Names_2010Census.csv', na_values=['(S)'])
+
+    # fill missing values with equal amounts of what is left
+    n_missing = df_census_names.filter(like='pct').isnull().sum(axis=1)
+    pct_total = df_census_names.filter(like='pct').sum(axis=1)
+
+    pct_fill = (100 - pct_total) / n_missing
+    for col in df_census_names.filter(like='pct').columns:
+        df_census_names[col] = df_census_names[col].fillna(pct_fill)
+
+    def random_last_name(race_eth):
+        p = df_census_names['count'].copy()
+
+        if race_eth == 1:
+            p *= .01 * df_census_names.pctwhite
+        elif race_eth == 2:
+            p *= .01 * df_census_names.pctblack
+        elif race_eth == 3:
+            p *= .01 * df_census_names.pcthispanic
+        else:
+            p *= .01 * (100 - (df_census_names.pctwhite + df_census_names.pctblack + df_census_names.pcthispanic))
+
+        # make zero probabilities go away
+        s_name_pr = pd.Series(np.array(p), index=df_census_names.name)
+        s_name_pr = s_name_pr[s_name_pr > 0]
+        s_name_pr /= s_name_pr.sum()
+        return np.random.choice(s_name_pr.index, p=s_name_pr).capitalize()
+
+    # should everyone in a household have the same last name?  seems overly normative, but what is smarter?
+    for hh_id, dfg in df_population.groupby(['household_id']):
+        last_name = random_last_name(dfg.race_eth.value_counts().iloc[0])  # HACK: use most common race/eth in household
+        df_population.loc[dfg.index, 'last_name'] = last_name
+        # TODO: for rows with relshipp value of 22, 24, 31, 32, 34, 35, 36, give different last name
+
+**First and middle names**
+
+First names from babies:
+https://www.ssa.gov/oact/babynames/limits.html ; this page links to a
+data file of State-specific birth certificate frequencies for first
+names https://www.ssa.gov/oact/babynames/state/namesbystate.zip
+
+How to get realistic race/ethnicity for first and middle names?  And
+is that important? We could use ecological approach to back out
+race/ethnicity from state-to-state variation in first names.  To test,
+we would take (for example) a traditionally Black first name and see
+if the state-to-state rate is correlated with the percent of Black
+babies --- can use state random effects to include data from multiple
+years to be increase predictive validity.
+
+Use middle names from same distribution as first names (?). It would
+be nice to get some of the national/ethnic challenges right, like
+people from South America with many names getting their middle names
+used as different last names.
+
+We might want to eventually include nicknames and suffixes like Jr. and III.
+
+.. sourcecode:: python
+
+    # first and middle names
+    # strategy: calculate year of birth based on age, use it with sex and state to find a representative name
+    df_ssn_names = pd.read_csv('/home/j/Project/simulation_science/prl/data/ssn_names/FL.TXT',
+                               names=['state', 'sex', 'yob', 'name', 'freq'])
+    df_ssn_names['age'] = 2020 - df_ssn_names.yob
+    df_ssn_names['sex'] = df_ssn_names.sex.map({'M':1, 'F':2})
+    g_ssn_names = df_ssn_names.groupby(['age', 'sex'])
+    def random_names(age, sex, size):
+        t = g_ssn_names.get_group((age, sex))
+        p = t.freq / t.freq.sum()
+        return np.random.choice(t.name, size=size, replace=True, p=p)
+    for (age,sex), df_age in df_population.groupby(['age', 'sex']):
+        df_population.loc[df_age.index, 'first_name'] = random_names(age, sex, len(df_age))
+        df_population.loc[df_age.index, 'middle_name'] = random_names(age, sex, len(df_age))
+
+
+2.3.7 Component 11: Date of Birth
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To create a date-of-birth column in the synthetic output data, each
+simulant should have a uniformly random date of birth which is
+consistent with their age.
+
+.. sourcecode:: python
+
+    # random date of birth for 2019 ACS data
+
+    data_date = pd.Timestamp('2019-06-01')
+    age = 365.25 * df_population.age
+    age += np.random.uniform(low=0, high=365, size=len(df_population))
+    dob = data_date - pd.to_timedelta(np.round(age), unit='days')
+    df_population['dob'] = dob
+
+2.3.8 Component 12: Social Security Number
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Eventually, this should be missing for some and not actually unique
+for others.  I need to do some research into how we represent this,
+and how important it is.
+
+There is a python library that includes a detailed SSN generation
+module, but it doesn't have a reference, so I would also like to do some
+research to check if it is right:
+https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222
+
+It is also possible that it will be annoying to Census Bureau if we
+have realistic SSN values, even if they are randomly generated, and we
+may wish to change to numeric format for this to a synthetic SSN-like
+(SSSN) value
+
+
+.. sourcecode:: python
+
+    # give everyone a unique fake ssn (for now)
+    df_population['ssn'] = [fake.unique.ssn() for _ in range(len(df_population))]
+
+
+2.3.9 Component 13: Periodic observations of attributes through survey, census, and registry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For inspiration, here is the list of files that Census Bureau
+routinely links:
+https://www2.census.gov/about/linkage/data-file-inventory.pdf
+
+Each of these observers must include a "unique simulant id" column so
+that users can see how well they have done.
+
+The decennial census simulator will be an important part of this,
+capturing everyone in the sim with a probability to be determined from
+a careful read of census quality assessment documentation.
+
+A master SSN list will be another important part of this, and perhaps
+the largest of these files, including name, address, DOB, and SSN.
+(Or should this list be a linkage output, derived from annually
+simulated tax return documents?)
+
+Surveys and registries capturing a simple random sample of the
+population or some otherwise identified special subset (e.g. everyone
+who gets cancer from a disease model that we layer on to this, at some
+point down the road).
+
+Adding noise to the fields in these observers will be another
+important part of the art, but this can happen _after_ simulation.
+Some existing projects with noisy include
+https://github.com/pinformatics/rlErrorGeneratoR and GeCo.
+
+GeCO distinguishes keyboard, transcription, and OCR error, and despite
+being unsupported for 10 years, it seems to be the standard approach
+among methods researchers, so we might aim for replicating it. The
+fastLink article (APSR 2019) has five dimensions of data error: degree
+of overlap, size balance, missingness mechanism, amount of missing
+data, and measurement error. Some duplicates would be realistic too.
+
+I also have an idea for audio distortion based on text-to-speech; use
+Tacotron to generate spectragrams of names and then identify the names
+that are similar in speech-space.  This could also be useful to run
+backwards, as an update to metaphone and other algs.
+
+Cancer surveillance registry -- there is an association that has
+identified all common data elements used in cancer surveillance
+linkage, this could provide some structure for data output:
+https://www.naaccr.org/ ;
+http://datadictionary.naaccr.org/default.aspx?c=10&Version=22#2350 is
+an example entry in their ontology. As is
+http://datadictionary.naaccr.org/default.aspx?c=10&Version=22#1830
+
+Florida Cancer Registry uses https://www.accurint.com/ to confirm
+potential matches. And this pdf shows the data elements they maintain:
+https://fcds.med.miami.edu/downloads/datarequest/LinkageExample.pdf
+
+
+2.3.10 Additional Components (14-16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+
+We don't need these components for our minimal model, but we might
+eventually want: time-dependent changes to observers of sex, based on
+gender assigned at birth (14); multiple households for individuals,
+leading to double counting in census (15); twins and multiparous
+births in fertility model (16).
 
 
 .. _census_prl_limitations:
@@ -494,5 +746,5 @@ To Come (TK)
 7.0 Limitations
 +++++++++++++++
 
-TK
+To Come (TK)
 
