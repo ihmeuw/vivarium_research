@@ -494,7 +494,7 @@ Where,
     - Soon
   * - Pregnancy person time not stratified by pregnancy outcome
     - Not previously requested
-    - Ali to add to docuementation and then SWEs to implement once it's added
+    - Ali to add to documentation and then SWEs to implement once it's added
     - Soon, may help with diagnosing postpartum issue?
   * - Only np->p transition counts recorded in count data
     - 
