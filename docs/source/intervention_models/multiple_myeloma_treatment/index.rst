@@ -32,40 +32,92 @@
 Multiple Myeloma Treatment
 ==============================
 
-.. todo::
-
-  Add a brief introductory paragraph for this document.
+The multiple myeloma treatment model for :ref:`Phase 2 of the project
+<2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>` will incorporate
+much of the information and strategy from the :ref:`Multiple Myeloma Phase 1
+Treatment Model <mm5.3.3>`. The main differences are that we are expanding the
+set of mutually exclusive treatment categories, and we will be supplementing
+data from literature and expert opinion with patient-level data from Flatiron to
+inform our treatment algorithm.
 
 .. contents::
    :local:
 
 .. list-table:: Abbreviations
-  :widths: 15 15 15
+  :widths: 5 5 10
   :header-rows: 1
 
   * - Abbreviation
     - Definition
     - Note
-  * -
+  * - ASCT
+    - autologous stem cell transplantation
     -
+  * - IMiD
+    - immunomodulatory imide drug
+    -
+  * - PI
+    - proteasome inhibitor
+    -
+  * - MoAB
+    - monoclonal antibody
+    -
+  * - Isa
+    - isatuximab
+    -
+  * - Dara
+    - daratumumab
+    -
+  * - Dex
+    - dexamethasone
     -
 
-.. todo::
+Links to Related Models
+-----------------------
 
-  Fill out table with any abbreviations and their definitions used in this document.
+* :ref:`Multiple Myeloma Cause Model <2019_cancer_model_multiple_myeloma>`
+* :ref:`Multiple Myeloma Phase 1 Concept Model <2019_concept_model_vivarium_csu_multiple_myeloma>`
+* :ref:`Multiple Myeloma Phase 2 Concept Model <2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>`
 
 Intervention Overview
 -----------------------
 
-.. todo::
+Treatment guidelines for multiple myeloma are complex and varied.
+[Rajkumar-and-Kumar-2020]_ and [Nijhof-et-al-2017]_ published recent reviews on
+multiple myeloma treatment options and guidelines.
 
-   Add a general narrative overview of the intervention, including what it is, what outcomes it affects, if/how/when/where it has been used, etc.
+Classes of Drugs for Treating Multiple Myeloma
+++++++++++++++++++++++++++++++++++++++++++++++
+
+Important classes of
+anti-myeloma drugs are summarized (non-exhaustively) below, according to
+[Nijhof-et-al-2017]_:
+
+.. list-table:: Select anti-myeloma drug classes
+   :header-rows: 1
+
+   * - Class
+     - Abbreviation
+     - Drugs
+   * - Immunomodulatory imide drugs
+     - IMiDs
+     - thalidomide, lenalidomide, pomalidomide
+   * - Proteasome inhibitors
+     - PIs
+     - bortezomib, carfilzomib, ixazomib, marizomib, oprozomib
+   * - Monoclonal antibodies
+     - MoABs
+     - isatuximab (anti-CD38), daratumumab (anti-CD38), MOR202 (anti-CD38), elotuzamab (anti-CS1/anti-SLAM7), denosumab (anti-RANKL), siltuximab (anti-IL6), IPH2101 (anti-KIR2DL1/2/3)
+   * - Corticosteroids
+     - steroids
+     - dexamethasone, prednisone
+
+Affected Outcomes
++++++++++++++++++
 
 .. todo::
 
   Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
-
-  The table below provides example entries for large scale food fortification with iron.
 
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
@@ -82,6 +134,8 @@ Intervention Overview
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
+
+We plan to use Flatiron to inform baseline coverage of each treatment regimen.
 
 .. todo::
 
@@ -108,6 +162,98 @@ Vivarium Modeling Strategy
 .. todo::
 
   Add an overview of the Vivarium modeling section.
+
+Treatment Regimen Categories
+++++++++++++++++++++++++++++
+
+The Phase 1 simulation only considered three categories of treatment regimen:
+isatuximab-containing, daratumumab-containing, and other. Based on conversations
+with the client and with our clinical expert Manoj Menon, we plan to expand the
+modeled treatment categories to the following set of 16 mutually exclusive
+categories:
+
+.. list-table:: Modeled Treatment Regimen Categories
+  :widths: 5 10 8 15
+  :header-rows: 1
+
+  * - Enumeration
+    - Treatment category
+    - Supercategory
+    - Notes
+  * - 1
+    - PI/Dex
+    -
+    -
+  * - 2
+    - IMID/Dex
+    -
+    -
+  * - 3
+    - PI/IMID/Dex
+    -
+    -
+  * - 4
+    - Chemo/PI/Dex
+    -
+    -
+  * - 5
+    - Chemo/IMID/Dex
+    -
+    -
+  * - 6
+    - Dara/bortezomib/Dex
+    - Dara/PI/Dex
+    -
+  * - 7
+    - Dara/carfilzomib/Dex
+    - Dara/PI/Dex
+    -
+  * - 8
+    - Dara/ixazomib/Dex
+    - Dara/PI/Dex
+    -
+  * - 9
+    - Dara/lenalidomide/Dex
+    - Dara/IMID/Dex
+    -
+  * - 10
+    - Dara/pomalidomide/Dex
+    - Dara/IMID/Dex
+    -
+  * - 11
+    - Dara/thalidomide/Dex
+    - Dara/IMID/Dex
+    -
+  * - 12
+    - Isa/PI/Dex
+    -
+    -
+  * - 13
+    - Isa/IMID/Dex
+    -
+    -
+  * - 14
+    - Dara/PI/Chemo/Dex
+    -
+    -
+  * - 15
+    - Dara/PI/IMID/Dex
+    -
+    -
+  * - 16
+    - Other
+    -
+    -
+
+.. todo::
+
+  Verify the definitions of the treatment regimen categories with Manoj after
+  checking what drugs show up in Flatiron data. That is, exactly which drugs
+  should we include in each drug class (IMiD, PI, chemo, etc.), and what will be
+  the consequences of lumping everything else into "Other"?
+
+Modeled Affected Outcomes
++++++++++++++++++++++++++
 
 .. todo::
 
