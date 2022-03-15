@@ -219,7 +219,7 @@ Data Description
 	* - i
 	  - S
 	  - I
-	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)`
+	  - :math:`\frac{\text{incidence_rate_c302}}{1-\text{incidence_rate_c302}*(\text{duration_c302} / 365)}`
 	  - We transform incidence to be a rate within the susceptible population under the assumption that prevalence ~= incidence * duration.
 	* - r
 	  - I
@@ -248,9 +248,9 @@ Data Description
 	  - Deaths from diarrheal diseases
 	  -
 	* - duration_c302
-	  - 4.3 (95% CI: 4.2, 4.4), assume normal distribution of uncertainty
-	  - Average duration of a diarrheal disease episode in days among children under five
-	  - From [Troeger-et-al-2018-Diarrhea]_ 
+	  - 4.04485 (95% CI: 3.94472, 4.144975), assume normal distribution of uncertainty
+	  - Average duration of a diarrheal disease episode in days among children under five (defined in the note column) TRANSFORMED to accomodate a short timestep of 0.5 days, `as discussed in this slack thread <https://ihme.slack.com/archives/C018BLX2JKT/p1646183763054739>`_. See the note below for more information.
+	  - True duration of 4.3 (95% CI: 4.2, 4.4) obtained from [Troeger-et-al-2018-Diarrhea]_: this value should be used for verification and validation of the model.
 	* - incidence_rate_c302
 	  - como
 	  - Incidence of diarrheal disease within the entire population
@@ -302,6 +302,28 @@ Data Description
 	* - YLD age group end
 	  - 95 plus
 	  - age_group_id = 235; 95 years +
+
+.. note::
+
+	We implemented a remission rate of diarrheal diseases equal to 1/the average duration of diarrheal diseases = 1/4.3 days. However, the remission rate output from our simulation was slower than the artifact value, approximating 1/4.55 days. 
+
+	As identified by Nathaniel, this appeared to be due to the fact that the product of the remission rate r=1/4.3 times the time step dt=0.5 was too large for the approximation 1-exp(-r*dt) ~= r*dt to be sufficiently good for the rates to match.
+
+	What's going on is that we're thinking of the duration of diarrhea as a continuous random variable, exponentially distributed with rate r=1/4.3, but in Vivarium this random variable gets discretized into a geometric random variable, I believe with parameter p=1-exp(-r*dt) . The mean of the exponential random variable is 1/r = 4.3 days, whereas the mean of the geometric random variable, converted from time steps back to days, is dt/p ~= 4.55 days . This same issue will arise whenever we have a transition rate that is large relative to the simulation time step. You could always solve it by making the time steps even smaller, but of course that adds a lot of computation time.
+
+	To deal with this, solved for the mean rate (in days) to input to vivarium that would produce the desired output of the a remission rate equal to 1/4.3 days using the following equation for r'
+
+	.. math::
+
+		r' = (-1/dt)*log(1-dt*r)
+
+			= (-1/0.5)*log(1-0.5/4.3)
+
+			= 0.24722791193435328
+
+		1 / r' = 4.044850729740949 days
+
+	We then also solved for the upper and lower bound estimates using the same methodology.
 
 
 Validation Criteria
