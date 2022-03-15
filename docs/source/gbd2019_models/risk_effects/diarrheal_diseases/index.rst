@@ -88,19 +88,19 @@ The prevalence ratios used in the calculation of the risk effects are listed in 
     - Note
   * - PR_1
     - Males and females 0.5-5 years
-    - 1.095396
+    - 1.060416
     - Wasting cat1 (SAM)
   * - PR_2
     - Males and females 0.5-5 years
-    - 1.085606
+    - 1.061946
     - Wasting cat2 (MAM)
   * - PR_3
     - Males and females 0.5-5 years
-    - 1.051678
+    - 1.044849
     - Wasting cat3 (mild child wasting)
   * - PR_4
     - Males and females 0.5-5 years
-    - 0.988263
+    - 0.990530
     - Wasting cat4 (susceptible to child wasting)
 
 .. todo::
