@@ -115,6 +115,9 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
 Treatment Algorithm Flowcharts
 ++++++++++++++++++++++++++++++
 
+Treatment of Newly Diagnosed Myeloma
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 .. figure:: Rajkumar_2020_Fig1_line_1_treatment.webp
 
   Approach to the treatment of newly diagnosed myeloma in transplant-eligible
@@ -122,6 +125,20 @@ Treatment Algorithm Flowcharts
   lenalidomide, dexamethasone; DRd, daratumumab, lenalidomide, dexamethasone;
   Dara-VRd, daratumumab, bortezomib, lenalidomide, dexamethasone; ASCT,
   autologous stem cell transplantation.
+
+Treatment of Relapsed Myeloma
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. figure:: Rajkumar_2020_Fig2_line_2plus_treatment.webp
+
+  Approach to the treatment of relapsed multiple myeloma in first relapse
+  **(a)** and second or higher relapse **(b)**. DRd daratumumab, lenalidomide,
+  dexamethasone; KRd carfilozomib, lenalidomide, dexamethasone; IRd ixazomib,
+  lenalidomide, dexamethasone; ERd elotuzumab, lenalidomide, dexamethasone; DVd
+  daratumumab, bortezomib, dexamethasone; DPd daratumumab, pomalidomide,
+  dexamethasone; KPd carfilzomib, pomalidomide, dexamethasone; VCd bortezomib,
+  cyclophosphamide; DKd daratumumab, carfilzomib, dexamethasone; IPd ixazomib,
+  pomalidomide, dexamethasone.
 
 Affected Outcomes
 +++++++++++++++++
