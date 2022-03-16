@@ -85,10 +85,12 @@ development easier for ourselves and others.
 
 We are certainly not the first to attempt such a data synthesis
 project.  Prior approaches include FEBRL, GeCO from UQ, and UALR's
-synthetic occupancy generator (SOG) approach.  There is also relevant
-work from Chris Dibben, who developed `an R package for producing
-synthetic data <https://www.synthpop.org.uk/index.html>`_, and from
-Robin Linacre, who developed `synthetic data for testing splink
+`synthetic occupancy generator (SOG) approach
+<https://www.researchgate.net/profile/John-Talburt/publication/215991472_SOG_A_Synthetic_Occupancy_Generator_to_Support_Entity_Resolution_Instruction_and_Research/links/5546986d0cf23ff71686d81f/SOG-A-Synthetic-Occupancy-Generator-to-Support-Entity-Resolution-Instruction-and-Research.pdf?origin=publication_detail>`_.
+There is also relevant work from Chris Dibben, who developed `an R
+package for producing synthetic data
+<https://www.synthpop.org.uk/index.html>`_, and from Robin Linacre,
+who developed `synthetic data for testing splink
 <http://github.com/moj-analytical-services/splink_synthetic_data>`_.
 
 The unique elements of our work will rely on Vivarium: our synthetic
@@ -495,8 +497,9 @@ simulants are moving at the expected rates.
 
 Each household id should be associated with a postal address, and when
 people move, they should often move into previously vacated
-households, so that there are collisions between residential
-addresses.
+households, so that there are distinct households which have had the
+same residential address at different times.  We hypothesize that this
+will present a relevant challenge for PRL methods in practice.
 
 It is not clear how important it is to have housing unit address
 correspond to geography, and I am trying to gauge how much effort to
@@ -529,7 +532,6 @@ Python package faker: https://github.com/joke2k/faker
 Some additional libraries that function similarly to ``faker`` are https://github.com/ropensci/charlatan
 and https://github.com/paulhendricks/generator
 
-
 It would be cool to have geographically plausible addresses, for
 example by reversing the process of libpostal, based on the PUMA
 geocoords. (it turns out that libpostal is an address parser, and does
@@ -545,6 +547,20 @@ USPS data on what real addresses are and we can avoid them (although
 there is an obscure potential privacy issue with that, too!).  We
 could potentially use business addresses as residential addresses as a
 backup plan.
+
+A relevant disparity in linkage accuracy might arise from the
+challenging nature of linking rural addresses; there is some
+information in `this report
+<https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_
+which shows (p. 31) how people in rural counties are hard to match
+(presumably due mostly to address issues).
+
+
+**Verification and validation strategy**: to verify this approach, we
+can manually inspect a sample of 10-100 addresses; features to
+examine: does everyone in a household have the same address?  does the
+zip code match the state?  does the street conform to typical
+expectations?
 
 2.3.6 Component 10: Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -635,6 +651,13 @@ We might want to eventually include nicknames and suffixes like Jr. and III.
         df_population.loc[df_age.index, 'first_name'] = random_names(age, sex, len(df_age))
         df_population.loc[df_age.index, 'middle_name'] = random_names(age, sex, len(df_age))
 
+**Verification and validation strategy**: to verify this approach, we
+can manually inspect a sample of 10-100 names; we can also look at the
+frequency of common first and last names, as well as the frequency of
+common last names stratified by race/ethnicity.  There will likely be
+funny combinations of first and last names for certain race groups
+(e.g. South Asian first names with East Asian last names) but we are
+not expecting to get that right.
 
 2.3.7 Component 11: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -653,17 +676,43 @@ consistent with their age.
     dob = data_date - pd.to_timedelta(np.round(age), unit='days')
     df_population['dob'] = dob
 
+We could enhance this by using an empirical distribution of
+birthdates, since they are not uniformly distributed.  There might
+even be relevant determinants of date of birth (parents' educational
+attainment, perhaps?) that we could introduce in this model.  But we
+will keep this simple for now, on the assumption that it does not make
+a difference in how well PRL methods perform.
+
+
+**Verification and validation strategy**: to verify this approach, we
+can bin DOB by day of week, month, and year, and see if the DOBs are
+uniformly distributed across bins.  We can assess this manually by
+visual inspection and quantitatively using an appropriate statistical
+test (would that be a Chi-Square test?).
+
+
 2.3.8 Component 12: Social Security Number
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Eventually, this should be missing for some and not actually unique
 for others.  I need to do some research into how we represent this,
-and how important it is.
+and how important it is.  According to `this report
+<https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_,
+"There were 308.7 million persons in the 2010 Census, and 279.2
+million were assigned a protected identification key"
 
 There is a python library that includes a detailed SSN generation
-module, but it doesn't have a reference, so I would also like to do some
-research to check if it is right:
+module:
 https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222
+
+Zeb found some documentation from SSA confirming that ``faker`` has an
+accurate algorithm for SSN generation:
+https://www.ssa.gov/kc/SSAFactSheet--IssuingSSNs.pdf
+
+In this investigation, he also noted that before 2011, SSNs
+corresponded to location: https://www.ssa.gov/employer/stateweb.htm We
+might want to integrate this in the future, although I'm not sure if
+any PRL methods rely on the link between SSN and location.
 
 It is also possible that it will be annoying to Census Bureau if we
 have realistic SSN values, even if they are randomly generated, and we
@@ -676,6 +725,10 @@ may wish to change to numeric format for this to a synthetic SSN-like
     # give everyone a unique fake ssn (for now)
     df_population['ssn'] = [fake.unique.ssn() for _ in range(len(df_population))]
 
+**Verification and validation strategy**: to verify this approach, we
+can manually inspect a sample of 10-100 SSNs, confirm that the
+expected number are missing and that the duplication count follows the
+intended distribution.
 
 2.3.9 Component 13: Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -743,7 +796,7 @@ births in fertility model (16).
 
 .. _census_prl_limitations:
 
-7.0 Limitations
+3.0 Limitations
 +++++++++++++++
 
 To Come (TK)
