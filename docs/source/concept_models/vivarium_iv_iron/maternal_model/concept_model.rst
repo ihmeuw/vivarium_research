@@ -476,6 +476,13 @@ Where,
    * - I.1
      - Pregnancy model for Sub-Saharan Africa and South Asia
      - `Validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model1/sim_v_and_v.ipynb>`_. [1] ASFR covariate has negative values in the youngest age group for some draws... perhaps should update to truncated normal distribution. [2] duration of postpartum period appears to be too long... closer to 7 weeks than 6. [3] Request to have pregnancy person time stratified by pregnancy outcome in order to evaluate approximate differential duration of pregnancy. [4] Request to have all pregnancy transition counts rather than just np->p.
+   * - I.2
+     - Maternal disorders
+     - `Validation notebooks are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model2%2C%20maternal%20disorders>`_. [1] mortality rate due to other causes overestimated by a factor of approximately 50 (this is a new problem that was not present in model I.1). [2] rates (among women of reproductive age) AND ratios (per pregnancy) for both maternal disorders incidence AND mortality all overestimated. [3] Ratio of fatal to incident maternal disorders cases looks off for Sub-Saharan Africa, but is underestimated for South Asia. [4] previous issues appear to remain unresolved.
+
+.. todo::
+
+  Add V&V tracking for artifact as well as simulation results
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -488,18 +495,26 @@ Where,
     - LCL is close to zero so it is possible to have negative draws assuming a normal distribution
     - Update to a truncated normal distribution instead (Ali to document and SWEs to implement)
     - Low priority since it hasn't broken anything yet (we're not selecting the negative draws)
-  * - Duration of postpartum period appears to be too long
-    - Unsure
-    - Investigate (both Ali and SWEs)
-    - Soon
   * - Pregnancy person time not stratified by pregnancy outcome
     - Not previously requested
-    - Ali to add to documentation and then SWEs to implement once it's added
+    - SWEs to implement (ticket MIC-2943)
     - Soon, may help with diagnosing postpartum issue?
   * - Only np->p transition counts recorded in count data
     - 
-    - SWEs to add, please
-    - Soon, but not urgent
+    - SWEs to implement
+    - Soon (ticket MIC-2910)
+  * - Mortality due to other causes overestimated
+    - Unknown
+    - SWEs to investigate (part of ticket  MIC-2944)
+    - Soon
+  * - Maternal disorder incidence and mortality rates and ratios overestimated
+    - Unknown
+    - SWEs to investigate (part of ticket  MIC-2944), Ali to be available to chat
+    - Soon
+  * - Age group issues (underestimation of births in young ages and overestimation in older ages)
+    - Related to start versus end of pregnancy timing
+    - Ali to think through if we need to do anything about this
+    - Soon
 
 .. _ivironWRA4.4:
 
