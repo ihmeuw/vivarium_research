@@ -112,8 +112,16 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
      - steroids
      - dexamethasone, prednisone
 
-Treatment Algorithm Flowcharts
-++++++++++++++++++++++++++++++
+Myeloma Treatment Algorithm Flowcharts
+++++++++++++++++++++++++++++++++++++++
+
+The following flowcharts illustrate the current treatment algorithms for
+multiple myeloma recommended in [Rajkumar-and-Kumar-2020]_. For more details,
+see the original reference and the description from the :ref:`Multiple Myeloma
+Phase 1 Treatment Model <mm5.3.3>`. The images are shared under the `Creative
+Commons license <creative_commons_license_>`_.
+
+.. _creative_commons_license: https://creativecommons.org/licenses/by/4.0/
 
 Treatment of Newly Diagnosed Myeloma
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
