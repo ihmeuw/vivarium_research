@@ -757,7 +757,10 @@ point down the road).
 Adding noise to the fields in these observers will be another
 important part of the art, but this can happen _after_ simulation.
 Some existing projects with noisy include
-https://github.com/pinformatics/rlErrorGeneratoR and GeCo.
+https://github.com/pinformatics/rlErrorGeneratoR and GeCo.  Or should
+it perhaps be part of the simulation, since there are aspects of noise
+that are better included during simulation (e.g. a child splitting
+time between two households being reported at both addresses)?
 
 GeCO distinguishes keyboard, transcription, and OCR error, and despite
 being unsupported for 10 years, it seems to be the standard approach
