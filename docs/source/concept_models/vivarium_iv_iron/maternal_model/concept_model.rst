@@ -497,7 +497,7 @@ Where,
     - Low priority since it hasn't broken anything yet (we're not selecting the negative draws)
   * - Pregnancy person time not stratified by pregnancy outcome
     - Not previously requested
-    - SWEs to implement (added to documentation of output table shell)
+    - SWEs to implement (ticket MIC-2943)
     - Soon, may help with diagnosing postpartum issue?
   * - Only np->p transition counts recorded in count data
     - 
@@ -505,11 +505,11 @@ Where,
     - Soon (ticket MIC-2910)
   * - Mortality due to other causes overestimated
     - Unknown
-    - SWEs to investigate
+    - SWEs to investigate (part of ticket  MIC-2944)
     - Soon
   * - Maternal disorder incidence and mortality rates and ratios overestimated
     - Unknown
-    - SWEs to investigate (Ali to be available to chat)
+    - SWEs to investigate (part of ticket  MIC-2944), Ali to be available to chat
     - Soon
   * - Age group issues (underestimation of births in young ages and overestimation in older ages)
     - Related to start versus end of pregnancy timing
