@@ -148,13 +148,21 @@ Commons license <creative_commons_license_>`_.
 Treatment of Newly Diagnosed Myeloma
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+According to [Rajkumar-and-Kumar-2020]_, the two main factors driving their
+approach to treating newly diagnosed MM are (1) eligibility for autologous stem
+cell transplantation (ASCT) and (2) risk stratification. *Risk stratification*
+refers to the presence (high risk) or absence (standard risk) of certain
+cytogenetic abnormalities, which are screened for upon diagnosis of MM. The
+current algorithm for the treatment of symptomatic newly diagnosed MM based on
+transplant eligibility and cytogenetic risk is shown in Fig. 1.
+
 .. figure:: Rajkumar_2020_Fig1_line_1_treatment.webp
 
-  Approach to the treatment of newly diagnosed myeloma in transplant-eligible
-  **(a)** and transplant-ineligible **(b)** patients. VRd, Bortezomib,
-  lenalidomide, dexamethasone; DRd, daratumumab, lenalidomide, dexamethasone;
-  Dara-VRd, daratumumab, bortezomib, lenalidomide, dexamethasone; ASCT,
-  autologous stem cell transplantation.
+  Fig. 1: Approach to the treatment of newly diagnosed myeloma in
+  transplant-eligible **(a)** and transplant-ineligible **(b)** patients. VRd,
+  Bortezomib, lenalidomide, dexamethasone; DRd, daratumumab, lenalidomide,
+  dexamethasone; Dara-VRd, daratumumab, bortezomib, lenalidomide, dexamethasone;
+  ASCT, autologous stem cell transplantation.
 
 Treatment of Relapsed Myeloma
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
