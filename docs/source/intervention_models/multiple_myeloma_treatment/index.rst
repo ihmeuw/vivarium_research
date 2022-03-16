@@ -112,6 +112,28 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
      - steroids
      - dexamethasone, prednisone
 
+Autologous Stem Cell Transplantation (ASCT)
++++++++++++++++++++++++++++++++++++++++++++
+
+.. todo::
+
+  Add a description of ASCT and when it is used. In particular:
+
+  * What factors determine whether a patient is eligible for ASCT?
+  * When in the treatment cycle does ASCT usually occur? (According to the
+    treatment algorithm in [Rajkumar-and-Kumar-2020]_, ASCT is usually done in
+    the first line, but sometimes after the first relapse. How often is ASCT
+    done more than once?)
+  * How does eligibility for ASCT affect choice of treatment regimens?
+  * How does ASCT affect survival rates and progression rates in the first line
+    and in later lines? (E.g., if ASCT is done in the first line, (a) does it
+    delay the onset of the first relapse, and (b) does it have a detectable
+    effect on survival or progression after the first relapse?)
+
+  The answers to these questions may affect how we implement the MM treatment
+  algorithm in Vivarium, and they may also affect how we implement the survival
+  regression of Flatiron data to get transition rates for the MM cause model.
+
 Myeloma Treatment Algorithm Flowcharts
 ++++++++++++++++++++++++++++++++++++++
 
