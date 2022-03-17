@@ -115,11 +115,34 @@ anti-myeloma drugs are summarized (non-exhaustively) below, according to
 Autologous Stem Cell Transplantation (ASCT)
 +++++++++++++++++++++++++++++++++++++++++++
 
+The standard of care for fit multiple myeloma patients is to receive high-dose
+chemotherapy (HDT) with autologous stem cell rescue — otherwise known as
+autologous stem cell transplant (ASCT) — after completion of induction therapy.
+Autologous stem cell transplant can provide significant remission that is both
+long and deep, extending survival.
+
+**Autologous vs. Allogeneic:** "Autologous" refers to the blood-making stem
+cells that are harvested from the patient to be a source of new blood cells
+after high-dose chemotherapy with melphalan. "Allogeneic" transplant, in which
+donor stem cells are used instead of the patient's own cells, is not performed
+in myeloma outside the context of a clinical trial.
+[https://www.myeloma.org/autologous-stem-cell-transplant]
+
 .. todo::
 
-  Add a description of ASCT and when it is used. In particular:
+  Look into some questions about ASCT. For example:
 
   * What factors determine whether a patient is eligible for ASCT?
+
+    - According to [Rajkumar-and-Kumar-2020]_, "In general, eligibility for ASCT
+      is affected by age, `performance status`_, and comorbidities."
+    - According to https://www.myeloma.org/autologous-stem-cell-transplant,
+      transplant eligibility also depends on disease-related factors including
+      "the type and the stage of the disease, its aggressiveness and
+      responsiveness to treatment, the levels of serum albumin and beta-2
+      microglobulin, and the presence or absence of certain chromosomal
+      abnormalities in the patient’s myeloma cells."
+
   * When in the treatment cycle does ASCT usually occur? (According to the
     treatment algorithm in [Rajkumar-and-Kumar-2020]_, ASCT is usually done in
     the first line, but sometimes after the first relapse. How often is ASCT
@@ -134,6 +157,21 @@ Autologous Stem Cell Transplantation (ASCT)
   algorithm in Vivarium, and they may also affect how we implement the survival
   regression of Flatiron data to get transition rates for the MM cause model.
 
+.. _performance status: https://ecog-acrin.org/resources/ecog-performance-status/
+
+Maintenance Therapy and Continuous Therapy
+++++++++++++++++++++++++++++++++++++++++++
+
+**Maintenance therapy** refers to treatment given to patients after high-dose
+chemotherapy with autologous stem cell transplant (ASCT), while **continuous
+therapy** refers to treatment given to patients who do not go on to transplant
+after frontline therapy.
+
+While maintenance and continuous therapy with Revlimid® (lenalidomide) is the
+standard of care for treatment of multiple myeloma, there is currently no set
+time period for the optimal duration of maintenance.
+[https://www.myeloma.org/maintenance-therapy]
+
 Myeloma Treatment Algorithm Flowcharts
 ++++++++++++++++++++++++++++++++++++++
 
@@ -143,19 +181,30 @@ see the original reference and the description from the :ref:`Multiple Myeloma
 Phase 1 Treatment Model <mm5.3.3>`. The images are shared under the `Creative
 Commons license <creative_commons_license_>`_.
 
+Note that capital letters in the abbreviations for treatment regimens in the
+figures below refer to the brand names of the drugs, not the generic names. For
+example, VRd stands for Velcade® (bortezomib), Revlimid® (lenalidomide),
+dexamethasone.
+
 .. _creative_commons_license: https://creativecommons.org/licenses/by/4.0/
 
 Treatment of Newly Diagnosed Myeloma
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-According to [Rajkumar-and-Kumar-2020]_, the two main factors driving their
-approach to treating newly diagnosed MM are (1) eligibility for autologous stem
-cell transplantation (ASCT) and (2) risk stratification. *Risk stratification*
-refers to the presence (high risk) or absence (standard risk) of certain
-cytogenetic abnormalities, which are screened for upon diagnosis of MM. The
-current recommended algorithm for the treatment of symptomatic newly diagnosed
-MM based on transplant eligibility and cytogenetic risk is shown in :ref:`Fig. 1
+According to [Rajkumar-and-Kumar-2020]_, the two main factors driving the
+authors' approach to treating newly diagnosed MM are (1) eligibility for
+autologous stem cell transplantation (ASCT) and (2) risk stratification. *Risk
+stratification* refers to the presence (high risk) or absence (standard risk) of
+certain cytogenetic abnormalities, which are screened for upon diagnosis of MM.
+The current recommended algorithm for the treatment of symptomatic newly
+diagnosed MM based on transplant eligibility and cytogenetic risk is shown in
+:ref:`Fig. 1
 <mm_treatment_fig_1_treatment_of_newly_diagnosed_multiple_myeloma>`.
+
+See also:
+
+* https://www.myeloma.org/frontline-treatment-options
+* https://www.seattlecca.org/diseases/multiple-myeloma/treatment
 
 .. _mm_treatment_fig_1_treatment_of_newly_diagnosed_multiple_myeloma:
 
@@ -178,11 +227,16 @@ duration in relapsed MM decreases with each regimen.
 
 The choice of treatment at each relapse is affected by many factors, including
 the timing of the relapse, response to prior therapy, aggressiveness of the
-relapse, and performance status. In general, a triplet regimen is preferred. At
-each relapse, a regimen that contains at least two new drugs that the patient is
-not refractory to should be considered. The recommended algorithm for the
+relapse, and `performance status`_. In general, a triplet regimen is preferred.
+At each relapse, a regimen that contains at least two new drugs that the patient
+is not refractory to should be considered. The recommended algorithm for the
 treatment of relapsed MM is given in :ref:`Fig. 2
 <mm_treatment_fig_2_treatment_of_relapsed_multiple_myeloma>`.
+
+See also:
+
+* https://www.myeloma.org/relapsed-multiple-myeloma
+* https://www.myeloma.org/treatments-subsequent-relapse
 
 .. _mm_treatment_fig_2_treatment_of_relapsed_multiple_myeloma:
 
