@@ -153,8 +153,11 @@ approach to treating newly diagnosed MM are (1) eligibility for autologous stem
 cell transplantation (ASCT) and (2) risk stratification. *Risk stratification*
 refers to the presence (high risk) or absence (standard risk) of certain
 cytogenetic abnormalities, which are screened for upon diagnosis of MM. The
-current algorithm for the treatment of symptomatic newly diagnosed MM based on
-transplant eligibility and cytogenetic risk is shown in Fig. 1.
+current recommended algorithm for the treatment of symptomatic newly diagnosed
+MM based on transplant eligibility and cytogenetic risk is shown in :ref:`Fig. 1
+<mm_treatment_fig_1_treatment_of_newly_diagnosed_multiple_myeloma>`.
+
+.. _mm_treatment_fig_1_treatment_of_newly_diagnosed_multiple_myeloma:
 
 .. figure:: Rajkumar_2020_Fig1_line_1_treatment.webp
 
@@ -167,16 +170,32 @@ transplant eligibility and cytogenetic risk is shown in Fig. 1.
 Treatment of Relapsed Myeloma
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+According to [Rajkumar-and-Kumar-2020]_, with modern therapy, the first relapse
+of MM occurs after ~3–4 years following initial diagnosis. Each subsequent
+remission is of shorter duration. Many patients with MM receive five or more
+lines of therapy in a sequential manner over several years. The remission
+duration in relapsed MM decreases with each regimen.
+
+The choice of treatment at each relapse is affected by many factors, including
+the timing of the relapse, response to prior therapy, aggressiveness of the
+relapse, and performance status. In general, a triplet regimen is preferred. At
+each relapse, a regimen that contains at least two new drugs that the patient is
+not refractory to should be considered. The recommended algorithm for the
+treatment of relapsed MM is given in :ref:`Fig. 2
+<mm_treatment_fig_2_treatment_of_relapsed_multiple_myeloma>`.
+
+.. _mm_treatment_fig_2_treatment_of_relapsed_multiple_myeloma:
+
 .. figure:: Rajkumar_2020_Fig2_line_2plus_treatment.webp
 
-  Approach to the treatment of relapsed multiple myeloma in first relapse
-  **(a)** and second or higher relapse **(b)**. DRd daratumumab, lenalidomide,
-  dexamethasone; KRd carfilozomib, lenalidomide, dexamethasone; IRd ixazomib,
-  lenalidomide, dexamethasone; ERd elotuzumab, lenalidomide, dexamethasone; DVd
-  daratumumab, bortezomib, dexamethasone; DPd daratumumab, pomalidomide,
-  dexamethasone; KPd carfilzomib, pomalidomide, dexamethasone; VCd bortezomib,
-  cyclophosphamide; DKd daratumumab, carfilzomib, dexamethasone; IPd ixazomib,
-  pomalidomide, dexamethasone.
+  Fig. 2: Approach to the treatment of relapsed multiple myeloma in first
+  relapse **(a)** and second or higher relapse **(b)**. DRd daratumumab,
+  lenalidomide, dexamethasone; KRd carfilozomib, lenalidomide, dexamethasone;
+  IRd ixazomib, lenalidomide, dexamethasone; ERd elotuzumab, lenalidomide,
+  dexamethasone; DVd daratumumab, bortezomib, dexamethasone; DPd daratumumab,
+  pomalidomide, dexamethasone; KPd carfilzomib, pomalidomide, dexamethasone; VCd
+  bortezomib, cyclophosphamide; DKd daratumumab, carfilzomib, dexamethasone; IPd
+  ixazomib, pomalidomide, dexamethasone.
 
 Affected Outcomes
 +++++++++++++++++
