@@ -296,18 +296,7 @@ Simulants who experience an incident case of maternal disorders and occupy the p
 
 .. math::
 
-  \text{YLDs per non-fatal maternal disorders case} = 
-
-  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
-
-.. warning::
-
-  The above equation yielded a negative value in initial attempts. We've implementated the following placeholder (which may result in an underestimation of maternal disorder YLDs):
-
-  .. math::
-
-    \text{YLDs per non-fatal maternal disorders case} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366}}
-
+  YLDs per non-fatal maternal disorders case = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
 
 .. todo::
 
