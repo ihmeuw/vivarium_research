@@ -288,7 +288,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - MEIDs 10487 and 10488
      - 159, 166 (not available for 44577 or 44578)
      - CUSTOM (see below)
-     - Yes
+     - No
      - 
    * - BMI modelable entity IDs
      - MEIDs 2548 and 18706
