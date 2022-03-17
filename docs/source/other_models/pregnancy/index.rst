@@ -118,6 +118,9 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - p
     - Pregnant
     - 
+  * - md
+    - Maternal disorders 
+    - Simulated state that lasts for single timestep in order to accrue maternal disorders YLDs - not representative of biological state. Can be with (infected/md_i) or without (susceptible/md_s) maternal disorders while within this state according to the maternal disorders cause model document.
   * - pp
     - Postpartum
     - 
@@ -133,11 +136,17 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 1 - prevalence_p - prevalence_pp
     - If using a burn-in strategy, initialize all simulants to np state
   * - p
-    - :math:`(ASFR + ASFR * SBR) * 40 / 52 + (incidence_\text{c995} + incidence_\text{c374}) * 24 /52`
+    - (ASFR + ASFR * SBR) * 40 / 52 + (incidence_c995 + incidence_c374) * 24 /52`
     - Consider updating to reflect average gestational age for location of interest rather than 40 weeks (Ali will need to perform weighting calculation from LBWSG exposure distributions)
   * - pp
-    - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 6 / 52`
+    - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_pp / 52
     -  
+  * - md_i
+    - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_md / 52 * incident_maternal_disorders_ratio
+    - incident_maternal_disorders_ratio defined on the :ref:`maternal disorders cause model document <2019_cause_maternal_disorders>`
+  * - md_s
+    - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_md / 52 * (1-incident_maternal_disorders_ratio)
+    - incident_maternal_disorders_ratio defined on the :ref:`maternal disorders cause model document <2019_cause_maternal_disorders>`
 
 .. list-table:: State transition data
   :header-rows: 1
@@ -153,14 +162,19 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}}{prevalence_\text{np}}`
     - 
   * - p
-    - pp
+    - md
     - duration_p
-    - Informed by gestational age (see below section)
+    - Duration informed by gestational age (see below section)
+    - Duration-based transition
+  * - md
+    - pp
+    - duration_md
+    - 1 timestep
     - Duration-based transition
   * - pp
     - np
     - duration_pp
-    - 6 weeks (42 days) duration
+    - 6 weeks (42 days) - duration_md
     - Duration-based transition
 
 .. list-table:: Data values
