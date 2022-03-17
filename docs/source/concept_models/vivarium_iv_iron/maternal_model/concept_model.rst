@@ -204,7 +204,7 @@ Including,
 
 .. todo::
 
-  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs.
+  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs and postpartum depression YLDs.
 
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -220,9 +220,14 @@ Including,
 4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
+* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>`, including the impact on:
+
+  * Maternal disorders,
+  * Maternal hemorrhage incidence,
+  * Birth outcomes, and
+  * Postpartum depression
+
 * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
-* Postpartum depression risk effects
 
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -236,7 +241,7 @@ Including,
 
 .. todo::
 
-  Clarify with software engineers if updates were made to the pregnancy model to accomodate the accrual of maternal disorders YLDs (a timestep long post-maternal disorders state in which anemia YLDs are not accrued?). If so, then add these updates to the pregnancy model documentation.
+  Add update to the pregnancy model to represent the "post-birth maternal disorders states" implemented by the software engineers
 
 * Cognition
 
