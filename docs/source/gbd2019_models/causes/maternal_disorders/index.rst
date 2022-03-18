@@ -226,10 +226,10 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - Value
      - Note
    * - Maternal disorder deaths
-     - csmr_c366 / incidence_p
+     - csmr_c366 / (incidence_p * prevalence_np)
      - 
    * - Incident maternal disorders
-     - incidence_rate_c366 / incidence_p
+     - incidence_rate_c366 / (incidence_p * prevalence_np)
      - **Post-maternal disorder state persists for one timestep**
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
@@ -273,6 +273,10 @@ The following table defines the parameters used in the calculation of maternal d
      - Pregnancy incidence rate
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
+   * - prevalence_np
+     - Prevalence of the non-pregnant state
+     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
+     - 
      
 .. _AgeGroupNote:
 
@@ -293,7 +297,6 @@ Simulants who experience an incident case of maternal disorders and occupy the p
 .. math::
 
   YLDs per non-fatal maternal disorders case = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
-
 
 .. todo::
 

@@ -160,7 +160,7 @@ There should be no correlation between maternal hemorrhage events and :ref:`mate
      - 0
      - Captured in the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
    * - Incident maternal hemorrhage cases
-     - (incidence_rate_c367 - csmr_c367) / incidence_p
+     - (incidence_rate_c367 - csmr_c367) / (incidence_p * prevalence_np)
      - 
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
@@ -190,6 +190,10 @@ The following table defines the parameters used in the calculation of maternal d
      - 
    * - incidence_p
      - Pregnancy incidence rate
+     - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
+     - 
+   * - prevalence_np
+     - Prevalence of non-pregnant state
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
      - 
 
