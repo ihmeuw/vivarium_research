@@ -297,16 +297,25 @@ Simulants who experience an incident case of maternal disorders and occupy the p
 .. math::
 
   \text{YLDs per non-fatal maternal disorders case} = 
+  
 
-  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / incidence_\text{c366})}
+  \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366}) * \text{incidence_rate}_\text{c366} - csmr_\text{c366}}
 
 .. warning::
 
-  The above equation yielded a negative value in initial attempts. We've implementated the following placeholder (which may result in an underestimation of maternal disorder YLDs):
+  A previous version of the above equation yielded a negative value in initial attempts. We've implementated the following placeholder (which may result in an underestimation of maternal disorder YLDs):
 
   .. math::
 
     \text{YLDs per non-fatal maternal disorders case} = \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366}}
+
+  The equation may eventually be updated to the resolved version in the main section above, although it is approximately 98-99% of the temporary fix, so it is a low priority for implementation.
+
+  For reference, the previous version of the equation that yielded a negative rate was as follows:
+
+  .. math::
+
+    \frac{\text{ylds}_{c366} - \text{ylds}_\text{s182,s183,s184}}{\text{incidence_rate}_{c366} - (ACMR - csmr_\text{c366} + csmr_\text{c366} / \text{incidence_rate}_\text{c366})}
 
 .. todo::
 
