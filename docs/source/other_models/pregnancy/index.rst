@@ -120,7 +120,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 
   * - md
     - Maternal disorders 
-    - Simulated state that lasts for single timestep in order to accrue maternal disorders YLDs - not representative of biological state. Can be with (infected/md_i) or without (susceptible/md_s) maternal disorders while within this state according to the maternal disorders cause model document.
+    - Simulated state that lasts for single timestep in order to accrue maternal disorders YLDs - not representative of biological state. Can be with (md_w) or without (md_wo) maternal disorders while within this state according to the maternal disorders cause model document. Referred to as "prepostpartum" state in software implementation.
   * - pp
     - Postpartum
     - 
@@ -141,10 +141,10 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - pp
     - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_pp / 52
     -  
-  * - md_i
+  * - md_w
     - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_md / 52 * incident_maternal_disorders_ratio
     - incident_maternal_disorders_ratio defined on the :ref:`maternal disorders cause model document <2019_cause_maternal_disorders>`
-  * - md_s
+  * - md_wo
     - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_md / 52 * (1-incident_maternal_disorders_ratio)
     - incident_maternal_disorders_ratio defined on the :ref:`maternal disorders cause model document <2019_cause_maternal_disorders>`
 
