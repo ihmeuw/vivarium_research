@@ -309,6 +309,32 @@ Assumptions and limitations
 - This modeling strategy assumes that maternal hemorrhage case fatality rate is not associated with hemoglobin level.
 - We are limited in our use of a dichotomous exposure for hemoglobin. There are suspected differences in maternal hemoglobin risk by hemoglobin levels above 70, although we are limited by data quality to inform this relationship.
 
+Birth outcome
++++++++++++++++
+
+.. todo::
+
+  Complete this section
+
+Validation and verification criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Postpartum depression
++++++++++++++++++++++++
+
+.. todo::
+
+  Complete this section
+
+Validation and verification criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 References
 ----------
 

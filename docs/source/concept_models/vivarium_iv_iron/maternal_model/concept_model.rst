@@ -204,7 +204,7 @@ Including,
 
 .. todo::
 
-  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs.
+  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs and postpartum depression YLDs.
 
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -220,9 +220,14 @@ Including,
 4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
+* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>`, including the impact on:
+
+  * Maternal disorders,
+  * Maternal hemorrhage incidence,
+  * Birth outcomes, and
+  * Postpartum depression
+
 * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
-* Postpartum depression risk effects
 
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -236,7 +241,7 @@ Including,
 
 .. todo::
 
-  Clarify with software engineers if updates were made to the pregnancy model to accomodate the accrual of maternal disorders YLDs (a timestep long post-maternal disorders state in which anemia YLDs are not accrued?). If so, then add these updates to the pregnancy model documentation.
+  Add update to the pregnancy model to represent the "post-birth maternal disorders states" implemented by the software engineers
 
 * Cognition
 
@@ -287,9 +292,9 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Hemoglobin modelable entity IDs
      - MEIDs 10487 and 10488
      - 159, 166 (not available for 44577 or 44578)
-     - WRA
-     - Yes
-     - NOTE: Ali may update to custom weighting strategy in a nano-sim.
+     - CUSTOM (see below)
+     - No
+     - 
    * - BMI modelable entity IDs
      - MEIDs 2548 and 18706
      - 159, 166 (not available for 44577 or 44578)
@@ -376,6 +381,35 @@ Where,
      - Ratio of male births to all live births
      - :ref:`Defined for each modeled location on the pregnancy model document <sex_ratio_table>`
      - 
+
+Hemoglobin distribution weighting strategy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For the continuous hemoglobin distribution parameters, rather than population-weight the mean and standard deviation of the continuous distribution and then sample from those summary statistics, we will instead **sample individual simulant hemoglobin exposures from the national-level distributions with a probability equal to the population weight of that nation within the modeled region among all women of reproductive age.** Although the hemoglobin distribution and population size parameters are age-specific, we will calculate the population weights among women of reproductive age overall rather than at the age specific level to allow us to sample from the same national-level distribution for the same simulant as they age so that we can maintain logical hemoglobin exposure trajectories at the simulant level. 
+
+Specifically, at the simulant level, the country from which the hemoglobin exposure is sampled should be determined at initialization or entrance into the simulation and should not change for the duration of the simulation. Notably, although simulants' sampling country and hemoglobin exposure propensities will not change throughout the simulation, their hemoglobin exposure values may change as they progress to the next age group (as described in the :ref:`hemoglobin document <2019_hemoglobin_model>`). The sampling probabilities for each country within the modeled regions are defined below.
+
+Probability of sampling from a given country's hemoglobin distribution using the mean and standard deviation hemoglobin parameters for that country:
+
+.. math::
+
+  \frac{population_\text{country}}{population_\text{region}}
+
+.. list-table:: Parameter definitions for hemoglobin distribution weighting
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`population_\text{country}`
+    - Population size of women of reproductive age (10-54) for a given national location
+    - See definition of WRA in table above
+    - Summed across all age groups
+  * - :math:`population_\text{region}`
+    - Population size of women of reproductive age (10-54) for a given regional location
+    - :math:`\sum_{country=1}^{n} population_\text{country}`
+    - For all countries within the region
 
 .. _ivironWRA4.2.1:
 
