@@ -290,12 +290,8 @@ Where,
     - Lognormal distribution of uncertainty, [Omotayo-et-al-2021]_
   * - :math:`p_\text{hgb<=70}`
     - Proportion of pregnant women with hemoglobin less than 70 g/L
-    - As informed by GBD... needs external calculation
-    - Ali to perform calculation and update
-
-.. todo::
-
-  Ali to calculate proportion of pregnant women with severe anemia for each model location of interest
+    - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_.
 
 .. note::
 
