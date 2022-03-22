@@ -364,7 +364,7 @@ Where,
    * - ASFR
      - Age-specific fertility rate   
      - covariate_id=13, decomp_step='step4'
-     - For use in weighting -- either: [1] Assume normal distribution of uncertainty and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
+     - For use in weighting -- either: [1] Assume normal distribution of uncertainty truncated at [0,1] and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
    * - SBR
      - Stillbirth to live birth ratio   
      - covariate_id=1106, decomp_step='step4'
