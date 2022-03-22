@@ -531,8 +531,8 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Timeline
   * - ASFR covariate has negative values in the youngest age group for some draws
     - LCL is close to zero so it is possible to have negative draws assuming a normal distribution
-    - Update to a truncated normal distribution instead (Ali to document and SWEs to implement)
-    - Low priority since it hasn't broken anything yet (we're not selecting the negative draws)
+    - SWEs implemented, Ali to validate
+    - For next model run
   * - Pregnancy person time not stratified by pregnancy outcome
     - Not previously requested
     - SWEs to implement (ticket MIC-2943)
