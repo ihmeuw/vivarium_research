@@ -367,7 +367,7 @@ Where,
      - For use in weighting -- either: [1] Assume normal distribution of uncertainty truncated at [0,1] and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
    * - SBR
      - Stillbirth to live birth ratio   
-     - covariate_id=1106, decomp_step='step4'
+     - covariate_id=2267, decomp_step='step4'
      - Not age-specific; no uncertainty 
    * - incidence_c996
      - Incidence rate of abortion and miscarriage cause   
