@@ -364,7 +364,7 @@ Where,
    * - ASFR
      - Age-specific fertility rate   
      - covariate_id=13, decomp_step='step4'
-     - For use in weighting -- either: [1] Assume normal distribution of uncertainty and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
+     - For use in weighting -- either: [1] Assume normal distribution of uncertainty truncated at [0,1] and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
    * - SBR
      - Stillbirth to live birth ratio   
      - covariate_id=2267, decomp_step='step4'
@@ -531,8 +531,8 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Timeline
   * - ASFR covariate has negative values in the youngest age group for some draws
     - LCL is close to zero so it is possible to have negative draws assuming a normal distribution
-    - Update to a truncated normal distribution instead (Ali to document and SWEs to implement)
-    - Low priority since it hasn't broken anything yet (we're not selecting the negative draws)
+    - SWEs implemented, Ali to validate
+    - For next model run
   * - Pregnancy person time not stratified by pregnancy outcome
     - Not previously requested
     - SWEs to implement (ticket MIC-2943)

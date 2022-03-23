@@ -189,7 +189,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Covariate
     - 13
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
-    - Assume normal distribution of uncertainty. Regional-level estimates available.
+    - Assume normal distribution of uncertainty truncated at 0 and 1. Regional-level estimates available.
   * - SBR
     - Covariate
     - 2267
