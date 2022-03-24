@@ -297,7 +297,7 @@ Duration of pregnancy
 
 A duration of pregnancy value will need to be assigned to all pregnancies regardless of the pregnancy outcome. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state.
 
-For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a duration of pregnancy of 24 weeks.
+For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks.
 
 For pregnancies that result in live births or stillbirths, duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
 
@@ -309,7 +309,7 @@ Assumptions and limitations
 ++++++++++++++++++++++++++++
 
 - We assume that the gestational age distribution of stillbirths is equal to the gestational age distribution of live births. This is a limitation of our analysis given the lack of data on the distribution of gestational ages for which these outcomes occur. Given that the gestation for these outcomes is likely shorter than gestation for live births on average, we are likely overestimating the average duration of pregnancy for outcomes other than live births.
-- We assume that all abortions, miscarriages and ectopic pregnancies occur at 24 weeks gestatation. 
+- We assume that all abortions, miscarriages and ectopic pregnancies occur uniformly between six and 24 weeks gestatation. Six weeks was chosen as a reasonable earliest possible time of pregnancy detection (prior to which miscarriages would be undiagnosed) and 24 weeks was chosen as the threshold between miscarriage and stillbirth. 
 - We assume that abortions that occur after 24 weeks are not considered stillbirths for estimation of the stillbirth to livebirth ratio. We may overestimate the incidence rate of pregnancy due to this assumption.
 - We are limited in the assumption that the stillbirth to livebirth ratio does not vary by maternal age and does not incorporate an uncertainty distribution.
 - We do not model any morbidity (YLDs) associated directly with pregnancy.
