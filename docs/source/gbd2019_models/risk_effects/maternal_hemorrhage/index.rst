@@ -51,11 +51,7 @@ GBD 2019 Modeling Strategy
 
 GBD does not explicitly model maternal hemorrhage as a risk factor. However, GBD models a hemoglobin shift associated with maternal hemorrhage in the :ref:`anemia causal attribution process <2019_anemia_impairment>`, which was derived from a meta-analysis performed for GBD 2019. 
 
-GBD assumes that a case of **maternal hemorrhage is associated with a decrease of 6.8 grams per liter hemoglobin concentration**, on average. There is no uncertainty interval around this value considered in the GBD anemia causal attribution process (this value is not published, but was obtained from the anemia modelers).
-
-.. todo::
-
-  Reach out to anemia modelers to see if there is an uncertainty interval from the systematic review that just isn't used in the causal attribution code.
+GBD assumes that a case of **maternal hemorrhage is associated with a decrease of 6.8 grams per liter hemoglobin concentration**, on average. There is no uncertainty interval around this value considered in the GBD anemia causal attribution process (this value is not published, but was obtained from the anemia modelers). Notably, according to Nick K., this shift is representative of the longer-term impact of hemorrhage on hemoglobin after some duration of follow-up on the scale of months.
 
 Vivarium Modeling Strategy
 --------------------------
