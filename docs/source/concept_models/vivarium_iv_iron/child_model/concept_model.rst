@@ -337,9 +337,29 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Model
      - Description
      - V&V summary
-   * - II.0
-     - 
-     - 
+   * - II.1
+     - Cause models (infectious diseases)
+     - `Simulation validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation.ipynb>`_. [1] underestimation of diarrheal diseases and lower respiratory infections remission rates. [2] underestimation of lower respiratory infections burden in neonatal age groups. [3] GBD 2019 age groups (does not include new GBD 2020 age groups). NOTE: still need to validate DALYs, YLLs, YLDs once environment issue is solved.
+
+.. list-table:: Outstaning model verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - Underestimation of diarrheal diseases and LRI remission rates
+    - Potential timestep issue, as identified with CIFF
+    - Researchers to investigate solutions
+    - TBD
+  * - Underestimation of LRI burden in neonatal age groups
+    - Appears to be a result of incompatible incidence, remission, and prevalence as estimated by GBD. There was birth prevalence of LRI in GBD 2017 that was removed for GBD 2019. Including a birth prevalence in our model would allow us to validate to GBD metrics, but would be inconsistent with GBD assumptions.
+    - Researchers to determine which validation targets are most important to hit and strategize how to achieve that.
+    - TBD
+  * - GBD 2019 age groups
+    - Model is using GBD 2019 age groups rather than GBD 2020 age groups, which will be needed if we plan to use GBD 2020 CGF risk factors
+    - Researchers to determine if we would like to update to GBD 2020 or stick with GBD 2019
+    - TBD
 
 .. _ivironU54.4:
 
