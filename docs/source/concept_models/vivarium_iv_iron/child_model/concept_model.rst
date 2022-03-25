@@ -341,7 +341,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Cause models (infectious diseases)
      - `Simulation validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation.ipynb>`_. [1] underestimation of diarrheal diseases and lower respiratory infections remission rates. [2] underestimation of lower respiratory infections burden in neonatal age groups. [3] GBD 2019 age groups (does not include new GBD 2020 age groups). NOTE: still need to validate DALYs, YLLs, YLDs once environment issue is solved.
 
-.. list-table:: Outstaning model verification and validation issues
+.. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
 
   * - Issue
