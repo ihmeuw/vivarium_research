@@ -309,18 +309,71 @@ Assumptions and limitations
 - This modeling strategy assumes that maternal hemorrhage case fatality rate is not associated with hemoglobin level.
 - We are limited in our use of a dichotomous exposure for hemoglobin. There are suspected differences in maternal hemoglobin risk by hemoglobin levels above 70, although we are limited by data quality to inform this relationship.
 
-Birth outcome
+Birth outcomes
 +++++++++++++++
 
-.. todo::
+.. note::
 
-  Complete this section
+  This risk outcome pair is not included in GBD.
+
+Hemoglobin level will act as a risk factor for stillbirth, as described in the :ref:`pregnancy model document <other_models_pregnancy>`. For the implementation of this risk effect, hemoglobin risk exposure will be defined as **dichotomous** based on a threshold of 70 grams per liter (severe anemia among pregnant women). Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+
+The relative risk for this risk factor will apply to the probability of experiencing still birth such that:
+
+.. math::
+
+  \text{stillbirth probability}_\text{hgb>70} = \text{stillbirth probability}_{overall} * (1 - PAF)
+
+  \text{stillbirth probability}_\text{hgb<=70} = \text{stillbirth probability}_{overall} * (1 - PAF) * RR
+
+And the probabilities of experiencing the remaining birth outcomes are as follows:
+
+.. math:: 
+
+  \text{other probability}_\text{hgb>70} = \text{other probability}_{overall}
+
+  \text{other probability}_\text{hgb<=70} = \text{other probability}_{overall} 
+
+  \text{live birth probability}_\text{hgb>70} = 1 - \text{stillbirth probability}_\text{hgb>70} - \text{other probability}_{overall}
+
+  \text{live birth probability}_\text{hgb<=70} = 1 - \text{stillbirth probability}_\text{hgb<=70} - \text{other probability}_{overall}
+
+Where,
+
+.. list-table:: Intervention coverage parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Description  
+    - Value
+    - Note
+  * - :math:`\text{stillbirth probability}_{overall}`
+    - Overall probability of a pregnancy resulting in a stillbirth
+    - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
+    - 
+  * - :math:`PAF`
+    - PAF of stillbirth probability attributable to hemoglobin
+    - :math:`\frac{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70}) - 1}{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70})}`
+    - 
+  * - :math:`RR`
+    - Relative risk of stillbirth for hemoglobin < 70 g/L
+    - 3.87 (95% CI: 1.88, 8.06)
+    - Lognormal distribution of uncertainty, [Young-et-al-2019]_
+  * - :math:`p_\text{hgb<=70}`
+    - Proportion of pregnant women with hemoglobin less than 70 g/L
+    - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_.
 
 Validation and verification criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+- The rate of each birth outcome should continue to validate to input data in the baseline scenario
+- Birth outcome rates stratified by the hemoglobin level of 70 g/L (severe anemia during pregnancy) should verify to the magnitude of the risk effect
+
 Assumptions and limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- We assume there is only an association between severe anemia and stillbirth and not an association between mild or moderate anemia and stillbirth. This assumption is a result of data limitations as highlighted in [Young-et-al-2019]_
 
 Postpartum depression
 +++++++++++++++++++++++
@@ -351,3 +404,6 @@ References
 .. [Omotayo-et-al-2021]
 
     Omotayo, M. O., Abioye, A. I., Kuyebi, M., & Eke, A. C. (2021). Prenatal anemia and postpartum hemorrhage risk: A systematic review and meta‐analysis. Journal of Obstetrics and Gynaecology Research, 47(8), 2565–2576. https://doi.org/10.1111/jog.14834
+
+.. [Young-et-al-2019]
+
