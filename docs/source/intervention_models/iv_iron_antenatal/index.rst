@@ -204,5 +204,10 @@ Assumptions and Limitations
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Child Growth Failure
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+We will model the impact of the antenatal IV iron intervention on child growth failure mediated through birthweight in the exact same way as described in the child growth failure section of the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>` such that the :math:`S` shift in birthweight is equal to the total effect of all intervention coverage (or lack of baseline intervention coverage) on birthweight.
+
 References
 ------------
