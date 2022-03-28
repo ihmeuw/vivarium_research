@@ -87,30 +87,7 @@ Additionally we will assume blood loss of 0.75 L for moderate hemorrhage (0.5 - 
 
 For simulants who experience an incident case of maternal hemorrhage as determined in the :ref:`maternal hemorrhage incidence cause mode document<2019_cause_maternal_hemorrhage_incidence>`:
 
-  1. Determine if they experienced a moderate or severe case, according to the following probabilities
-
-  .. list-table:: Probability of moderate and severe hemorrhage by location
-    :header-rows: 1
-
-    * - Location
-      - Moderate probability
-      - Severe probability
-    * - South asia
-      - 
-      - 
-    * - Sub-Saharan Africa
-      - 
-      - 
-    * - Low middle income countries
-      - 
-      - 
-    * - Low income countries
-      - 
-      - 
-
-  .. todo::
-
-    Ali to fill in these values weighted appropriately and link to calculation
+  1. Determine if they experienced a moderate or severe case of hemorrhage. The probability of moderate hemorrhage is equal to **0.85 (95% CI: 0.81, 0.89; normal distribution of uncertainty truncated at zero and one)**. The probability of severe hemorrhage is equal to one minus the probability of moderate hemorrhage. These probabilities are not age- or location-specific and were `calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/hemorrhage%20severity%20proportions.ipynb>`_.
 
   2. Scale the simulant's :ref:`hemoglobin concentration exposure <2019_hemoglobin_model>` by a factor of 0.9 for moderate hemorrhage and 0.833 for severe hemorrhage, applied as a multiplicative factor to the continuous exposure distribution. This effect should be applied **at birth** and persist until the end of the postpartum period as defined by the :ref:`pregnancy model <other_models_pregnancy>`. At the end of the postpartum period, the simulants' hemoglobin concentration should increase by the 1/the severity-specific multiplicative factor prior to the removal of the pregnancy adjustment factor to the simulant's hemoglobin level.
 
