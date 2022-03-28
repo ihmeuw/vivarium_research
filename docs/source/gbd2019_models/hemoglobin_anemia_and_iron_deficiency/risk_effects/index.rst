@@ -407,3 +407,4 @@ References
 
 .. [Young-et-al-2019]
 
+  Young, M. F., Oaks, B. M., Tandon, S., Martorell, R., Dewey, K. G., & Wendt, A. S. (2019). Maternal hemoglobin concentrations across pregnancy and maternal and child health: A systematic review and meta‐analysis. Annals of the New York Academy of Sciences, 1450(1), 47–68. https://doi.org/10.1111/nyas.14093
