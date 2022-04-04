@@ -517,6 +517,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.2
      - Maternal disorders
      - `Validation notebooks are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model2%2C%20maternal%20disorders>`_. [1] mortality rate due to other causes overestimated by a factor of approximately 50 (this is a new problem that was not present in model I.1). [2] seeing age trend in maternal disorders burden attributable to differences bewteen rate of conception and rate of birth within each age group. [3] Underestimating maternal disorders burden relative to GBD overall [4] previous issues appear to remain unresolved.
+   * - I.3
+     - Maternal hemorrhage incidence (not yet severity-specific), hemoglobin/anemia exposure model (with known bug in anemia state person time observer)
+     - [1] `Overestimation of ACMR from model I.2 now resolved <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_. [2] `Overestimation of total maternal disorders burden <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_ (underestimation from model I.2 now resolved) [3] `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_. [4] `Apparent long duration of no maternal disorders pregnancy state and duration of pregnancy state does not appear to be shorter for "other" pregnancy outcome relative to live and still births <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/sim_v_and_v.ipynb>`_. [5] `Issue of negative draws for ASFR from previous models now resolved <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/sim_v_and_v.ipynb>`_. [6] `Mean hemoglobin estimates not realistic <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_.
 
 .. todo::
 
@@ -529,31 +532,22 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Explanation
     - Action plan
     - Timeline
-  * - ASFR covariate has negative values in the youngest age group for some draws
-    - LCL is close to zero so it is possible to have negative draws assuming a normal distribution
-    - SWEs implemented, Ali to validate
-    - For next model run
-  * - Pregnancy person time not stratified by pregnancy outcome
-    - Not previously requested
-    - SWEs to implement (ticket MIC-2943)
-    - Soon, may help with diagnosing postpartum issue?
-  * - Only np->p transition counts recorded in count data
-    - 
-    - SWEs to implement
-    - Soon (ticket MIC-2910)
-  * - Mortality due to other causes overestimated
-    - Issue between weekly and annual rates
-    - SWEs addressed, Ali to validate implementation in next results
-    - For next model run
-  * - Age group issues (underestimation of births in young ages and overestimation in older ages)
-    - Related to start versus end of pregnancy timing
-    - Ali to think through if we need to do anything about this
+  * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
+    - Related to start versus end of pregnancy timing -- appears to be driving overall overestimation of maternal disorders burden
+    - Ali to think through what to do about this
     - Soon
-  * - Underestimation of maternal disorders burden
-    - Perhaps a result of the `equation error that was fixed in this PR <https://github.com/ihmeuw/vivarium_research/pull/818/files>`_
-    - SWEs to update maternal disorders incidence and mortality equations, Ali to validate implementation and come up with next steps if necessary
-    - For next model run
-
+  * - `Unrealistic mean hemoglobin estimates <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - Potentially related to observer bug for anemia state person-time? 
+    - Ali to check bug-fix count data and revisit
+    - Soon
+  * - `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
+    - Unknown
+    - SWEs to investigate
+    - Soon
+  * - `Issues with duration of pregnancy states: [A] long duration of no maternal disorders post-pregnancy state, [B] duration of pregnancy state by pregnancy outcome does not appear to be differentiated <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/sim_v_and_v.ipynb>`_
+    - Unknown
+    - SWEs to investigate
+    - Soon
 
 .. _ivironWRA4.4:
 
