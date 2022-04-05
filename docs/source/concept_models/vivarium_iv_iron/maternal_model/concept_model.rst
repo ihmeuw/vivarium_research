@@ -536,9 +536,21 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Related to start versus end of pregnancy timing -- appears to be driving overall overestimation of maternal disorders burden
     - Ali to think through what to do about this
     - Soon
-  * - `Unrealistic mean hemoglobin estimates <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
-    - Potentially related to observer bug for anemia state person-time? 
-    - Ali to check bug-fix count data and revisit
+  * - `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - 
+    - SWEs to update
+    - Low priority since Ali can adjust for this on the back-end
+  * - `Underestimation of population mean hemoglobin among the non-pregnant population <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - Perhaps due to weighting to PLW (in sim) rather than WRA (for GBD)
+    - Consider updating weighting unit at least for validation
+    - Discuss as a group
+  * - `Hemoglobin pregnancy adjustment factor does not appear to be functioning as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - Hemoglobin appears to slightly increase upon transition to pregnant state
+    - SWEs to investigate, Ali to investigate in interactive sim?
+    - Soon
+  * - `Anemia prevalence not validating <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - Could be a result of the above issues
+    - Revisit after pregnancy adjustment factor is fixed, Ali to investigate in interactive sim?
     - Soon
   * - `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Unknown
@@ -548,6 +560,10 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Unknown
     - SWEs to investigate
     - Soon
+  * - Need pregnancy state person time stratified by maternal hemorrhage status
+    - Not previously requested (sorrry!)
+    - SWEs to implement
+    - Can discuss as a group :) 
 
 .. _ivironWRA4.4:
 
