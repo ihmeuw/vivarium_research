@@ -542,8 +542,8 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Low priority since Ali can adjust for this on the back-end
   * - `Underestimation of population mean hemoglobin among the non-pregnant population <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - Perhaps due to weighting to PLW (in sim) rather than WRA (for GBD)
-    - Updating weighting unit at least for validation
-    - For next model run (currently documented)
+    - Updating weighting unit at least for validation: Ali to document, SWEs to implement
+    - For next model run 
   * - `Hemoglobin pregnancy adjustment factor does not appear to be functioning as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - Hemoglobin appears to slightly increase upon transition to pregnant state
     - SWEs to investigate, Ali to investigate in interactive sim?
