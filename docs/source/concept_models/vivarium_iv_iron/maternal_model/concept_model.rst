@@ -385,7 +385,7 @@ Where,
 Hemoglobin distribution weighting strategy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For the continuous hemoglobin distribution parameters, rather than population-weight the mean and standard deviation of the continuous distribution and then sample from those summary statistics, we will instead **sample individual simulant hemoglobin exposures from the national-level distributions with a probability equal to the population weight of that nation within the modeled region among all women of reproductive age (WRA).** 
+For the continuous hemoglobin distribution parameters, rather than population-weight the mean and standard deviation of the continuous distribution and then sample from those summary statistics, we will instead **sample individual simulant hemoglobin exposures from the national-level distributions with a probability equal to the population weight of that nation within the modeled region among the age-specific population size of women of reproductive age (WRA).** 
 
 Specifically, at the simulant level, the country from which the hemoglobin exposure is sampled should be determined at initialization or entrance into the simulation and should not change for the duration of the simulation. Notably, although simulants' sampling country and hemoglobin exposure propensities will not change throughout the simulation, their hemoglobin exposure values may change as they progress to the next age group (as described in the :ref:`hemoglobin document <2019_hemoglobin_model>`). The sampling probabilities for each country within the modeled regions are defined below.
 
@@ -403,11 +403,11 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Value
     - Note
   * - :math:`population_\text{country}`
-    - Population size of women of reproductive age for a given national location
+    - Age-specific population size of women of reproductive age for a given national location
     - See definition of WRA in table above
     - Summed across all age groups
   * - :math:`population_\text{region}`
-    - Population size of women of reproductive age for a given regional location
+    - Age-specific population size of women of reproductive age for a given regional location
     - :math:`\sum_{country=1}^{n} population_\text{country}`
     - For all countries within the region
 
