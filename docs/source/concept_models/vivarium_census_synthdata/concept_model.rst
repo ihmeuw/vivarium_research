@@ -553,7 +553,13 @@ challenging nature of linking rural addresses; there is some
 information in `this report
 <https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_
 which shows (p. 31) how people in rural counties are hard to match
-(presumably due mostly to address issues).
+(presumably due mostly to address issues).  According to `this page
+from 2010 Decennial Census
+<https://www.census.gov/newsroom/blogs/director/2010/02/the-four-principal-ways-we-conduct-the-census.html>`_
+there is 9% of the US population where the mail is not delivered to
+the residence uniformly.  For these households, we might want capture
+different addresses in the decennial census simulated output and the
+tax return simulated output.
 
 
 **Verification and validation strategy**: to verify this approach, we
@@ -746,8 +752,11 @@ a careful read of census quality assessment documentation.
 
 A master SSN list will be another important part of this, and perhaps
 the largest of these files, including name, address, DOB, and SSN.
-(Or should this list be a linkage output, derived from annually
-simulated tax return documents?)
+This list should be a linkage output, derived from annually simulated
+tax return documents, which include accurate SSN values year over year
+(but perhaps only for people who have household income over a certain
+threshold?).  The decennial census simulator will have a different
+address than the tax return data for 9% of the population.
 
 Surveys and registries capturing a simple random sample of the
 population or some otherwise identified special subset (e.g. everyone
