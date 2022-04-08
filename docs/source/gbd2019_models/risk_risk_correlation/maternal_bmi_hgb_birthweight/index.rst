@@ -58,7 +58,7 @@ Correlation
 
    The strategy for modeling these risk-risk correlations related was developed for the needs of the :ref:`Intravenous Iron Intervention simulation <2019_concept_model_vivarium_iv_iron>`. Different strategies may be more appropriate for different project needs and should be reevaluated when necessary.
 
-We will model an association between a joint categorical distribution of maternal BMI and hemoglobin with infant birthweight. The association between maternal BMI/hemoglobin categories will be measured in continuous shifts in infant birthweight. The magnitude of these shifts will be informed from BMGF trial data, shown below:
+We will model an association between a joint categorical distribution of maternal BMI and hemoglobin with infant birthweight. The association between maternal BMI/hemoglobin categories will be measured in continuous shifts in infant birthweight. The magnitude of these shifts were informed from [Woman-First-Trial-Shifts]_ data as provided by the BMGF (this data is also used to inform the :ref:`pregnancy BMI risk exposure conditional on hemoglobin levels <2019_risk_exposure_maternal_bmi_hgb>` and is discussed in more detail on that page). :download:`A summary of the data is available here <BMGF trial data.docx>`. :download:`Mean differences and associated confidence intervals were calculated in this document <md calculations.xlsx>`.
 
 .. note::
 
@@ -80,17 +80,17 @@ We will model an association between a joint categorical distribution of materna
    *  - cat3
       - <18.5
       - >=10
-      - TBD
+      - 182 (95% CI: 42, 321; normal distribution of uncertainty)
       - Relative to cat4
    *  - cat2
       - >=18.5
       - <10
-      - TBD
+      - 94 (95% CI: -4, 191; normal distribution of uncertainty)
       - Relative to cat4
    *  - cat1
       - <18.5
       - <10
-      - TBD
+      - 274 (95% CI: 213, 336; normal distribution of uncertainty)
       - Relative to cat4
    
 Given that,
@@ -174,6 +174,8 @@ Assumptions and Limitations
 
 #. We apply an estimate of population level mean difference as an additive shift to individual simulants in our population rather than sampling from LBWSG exposuredistributions specific to maternal BMI/hemoglobin strata. This approach assumes that the shape of the LBWSG exposure distribution does not vary between maternal BMI/hemoglobin strata and is in inherent limitation in this approach due to limited data availability.
 
+#. We use data from trial populations that are not representative of our simulated populations.
+
 Validation Criteria
 +++++++++++++++++++++
 
@@ -183,3 +185,6 @@ Validation Criteria
 
 References
 -----------
+
+.. [Woman-First-Trial-Shifts]
+  Hambidge KM, Westcott JE, Garcés A, Figueroa L, Goudar SS, Dhaded SM, Pasha O, Ali SA, Tshefu A, Lokangaka A, Derman RJ, Goldenberg RL, Bose CL, Bauserman M, Koso-Thomas M, Thorsten VR, Sridhar A, Stolka K, Das A, McClure EM, Krebs NF; Women First Preconception Trial Study Group. A multicountry randomized controlled trial of comprehensive maternal nutrition supplementation initiated before conception: the Women First trial. Am J Clin Nutr. 2019 Feb 1;109(2):457-469. doi: 10.1093/ajcn/nqy228. PMID: 30721941; PMCID: PMC6367966.
