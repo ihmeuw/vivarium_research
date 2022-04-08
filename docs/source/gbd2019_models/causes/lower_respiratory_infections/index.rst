@@ -169,7 +169,7 @@ Data Description
      - Notes
    * - S
      - birth prevalence
-     - 0
+     - 1 - birth_prevalence_I
      -
    * - S
      - prevalence
@@ -185,8 +185,8 @@ Data Description
      -
    * - I
      - birth prevalence
-     - 0
-     -
+     - Male: 0.0014, female: 0.0015
+     - `Calculated in a nanosim <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_nano_sim.ipynb>`_ in order to `better validate to CSMR <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation.ipynb>`_ in the early neonatal age group.
    * - I
      - prevalence_calculated
      - incidence_rate_c322 * duration_mean

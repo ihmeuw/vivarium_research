@@ -176,8 +176,8 @@ Data Description
 	  -
 	* - I
 	  - birth prevalence
-	  - 0
-	  - 
+	  - Male: 0.0165, female: 0.0178
+	  - `Calculated in a nanosim <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_nano_sim.ipynb>`_ in order to `better validate to CSMR <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation.ipynb>`_ in the early neonatal age group.
 	* - I
 	  - excess mortality rate
 	  - :math:`\frac{\text{deaths_c302}}{\text{population} \,\times\, \text{prevalence_I}}`
@@ -192,7 +192,7 @@ Data Description
 	  - Use prevalence calculated for the I state in the first row
 	* - S
 	  - birth prevalence
-	  - 1
+	  - 1 - birth_prevalence_I
 	  - 
 	* - S
 	  - emr
