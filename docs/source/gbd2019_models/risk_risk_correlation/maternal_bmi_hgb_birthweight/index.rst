@@ -80,17 +80,17 @@ We will model an association between a joint categorical distribution of materna
    *  - cat3
       - <18.5
       - >=10
-      - 182 (95% CI: 42, 321; normal distribution of uncertainty)
+      - -182 (95% CI: -321, -42; normal distribution of uncertainty)
       - Relative to cat4
    *  - cat2
       - >=18.5
       - <10
-      - 94 (95% CI: -4, 191; normal distribution of uncertainty)
+      - -94 (95% CI: -191, 4; normal distribution of uncertainty)
       - Relative to cat4
    *  - cat1
       - <18.5
       - <10
-      - 274 (95% CI: 213, 336; normal distribution of uncertainty)
+      - -275 (95% CI: -336, -213; normal distribution of uncertainty)
       - Relative to cat4
    
 Given that,
