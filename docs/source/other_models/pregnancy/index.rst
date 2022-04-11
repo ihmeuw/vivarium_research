@@ -118,6 +118,9 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - p
     - Pregnant
     - 
+  * - md
+    - Maternal disorders 
+    - Simulated state that lasts for single timestep in order to accrue maternal disorders YLDs - not representative of biological state. Can be with (md_w) or without (md_wo) maternal disorders while within this state according to the maternal disorders cause model document. Referred to as "prepostpartum" state in software implementation.
   * - pp
     - Postpartum
     - 
@@ -133,11 +136,17 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - 1 - prevalence_p - prevalence_pp
     - If using a burn-in strategy, initialize all simulants to np state
   * - p
-    - :math:`(ASFR + ASFR * SBR) * 40 / 52 + (incidence_\text{c995} + incidence_\text{c374}) * 24 /52`
+    - (ASFR + ASFR * SBR) * 40 / 52 + (incidence_c995 + incidence_c374) * 24 /52`
     - Consider updating to reflect average gestational age for location of interest rather than 40 weeks (Ali will need to perform weighting calculation from LBWSG exposure distributions)
   * - pp
-    - :math:`(ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}) * 6 / 52`
+    - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_pp / 52
     -  
+  * - md_w
+    - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_md / 52 * incident_maternal_disorders_ratio
+    - incident_maternal_disorders_ratio defined on the :ref:`maternal disorders cause model document <2019_cause_maternal_disorders>`
+  * - md_wo
+    - (ASFR + ASFR * SBR + incidence_c995 + incidence_c374) * duration_md / 52 * (1-incident_maternal_disorders_ratio)
+    - incident_maternal_disorders_ratio defined on the :ref:`maternal disorders cause model document <2019_cause_maternal_disorders>`
 
 .. list-table:: State transition data
   :header-rows: 1
@@ -153,14 +162,19 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - :math:`\frac{ASFR + ASFR * SBR + incidence_\text{c995} + incidence_\text{c374}}{prevalence_\text{np}}`
     - 
   * - p
-    - pp
+    - md
     - duration_p
-    - Informed by gestational age (see below section)
+    - Duration informed by gestational age (see below section)
+    - Duration-based transition
+  * - md
+    - pp
+    - duration_md
+    - 1 timestep
     - Duration-based transition
   * - pp
     - np
     - duration_pp
-    - 6 weeks (42 days) duration
+    - 6 weeks (42 days) - duration_md
     - Duration-based transition
 
 .. list-table:: Data values
@@ -175,10 +189,10 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Covariate
     - 13
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
-    - Assume normal distribution of uncertainty. Regional-level estimates available.
+    - Assume normal distribution of uncertainty truncated at 0 and 1. Regional-level estimates available.
   * - SBR
     - Covariate
-    - 1106
+    - 2267
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
     - No uncertainty in this estimate: use mean_value as point value for this parameter. Regional-level estimates not available.
   * - incidence_c995
@@ -283,7 +297,7 @@ Duration of pregnancy
 
 A duration of pregnancy value will need to be assigned to all pregnancies regardless of the pregnancy outcome. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state.
 
-For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a duration of pregnancy of 24 weeks.
+For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks.
 
 For pregnancies that result in live births or stillbirths, duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
 
@@ -295,7 +309,7 @@ Assumptions and limitations
 ++++++++++++++++++++++++++++
 
 - We assume that the gestational age distribution of stillbirths is equal to the gestational age distribution of live births. This is a limitation of our analysis given the lack of data on the distribution of gestational ages for which these outcomes occur. Given that the gestation for these outcomes is likely shorter than gestation for live births on average, we are likely overestimating the average duration of pregnancy for outcomes other than live births.
-- We assume that all abortions, miscarriages and ectopic pregnancies occur at 24 weeks gestatation. 
+- We assume that all abortions, miscarriages and ectopic pregnancies occur uniformly between six and 24 weeks gestatation. Six weeks was chosen as a reasonable earliest possible time of pregnancy detection (prior to which miscarriages would be undiagnosed) and 24 weeks was chosen as the threshold between miscarriage and stillbirth. 
 - We assume that abortions that occur after 24 weeks are not considered stillbirths for estimation of the stillbirth to livebirth ratio. We may overestimate the incidence rate of pregnancy due to this assumption.
 - We are limited in the assumption that the stillbirth to livebirth ratio does not vary by maternal age and does not incorporate an uncertainty distribution.
 - We do not model any morbidity (YLDs) associated directly with pregnancy.
