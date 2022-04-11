@@ -557,7 +557,7 @@ which shows (p. 31) how people in rural counties are hard to match
 from 2010 Decennial Census
 <https://www.census.gov/newsroom/blogs/director/2010/02/the-four-principal-ways-we-conduct-the-census.html>`_
 there is 9% of the US population where the mail is not delivered to
-the residence uniformly.  For these households, we might want capture
+the residence uniformly.  For these households, we might want to capture
 different addresses in the decennial census simulated output and the
 tax return simulated output.
 
