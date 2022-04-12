@@ -216,7 +216,7 @@ If a simulant is in wasting risk exposure :code:`cat1` or :code:`cat2`, they sho
     - source='exposure', decomp_step='step4', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='rei', gbd_id=240
     - 
   * - deaths_c387
-    - source='codcorrect', decomp_step='step5', version_id=260, gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387
+    - source='codcorrect', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387
     - 
   * - prevalence_c387
     - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387, measure_id=5
