@@ -127,7 +127,7 @@ PEM is a PAF-of-1 cause with child wasting in GBD 2019 among the unrestricted ag
 
 .. image:: pem_cause_hierarchy.svg
 
-.. list-table:: PEM Restrictions 2020
+.. list-table:: PEM Restrictions 2019
    :widths: 10 10 20
    :header-rows: 1
 
