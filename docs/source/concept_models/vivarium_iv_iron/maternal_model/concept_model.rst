@@ -547,9 +547,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - SWEs to update weighting unit (as documented above) from PLW to WRA
     - For next model run 
   * - `Hemoglobin pregnancy adjustment factor does not appear to be functioning as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
-    - Hemoglobin appears to slightly increase upon transition to pregnant state
-    - SWEs to investigate, Ali to investigate in interactive sim?
-    - Soon
+    - NOTE: it looks ok in the interactive sim... maybe it will be better once we fix pregnancy rate stuff.
+    - Revisit for next model run to see if it's still an issue
+    - On hold for now
   * - `Anemia prevalence not validating <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - Could be a result of the above issues
     - Revisit after pregnancy adjustment factor is fixed, Ali to investigate in interactive sim?
@@ -558,10 +558,14 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Unknown
     - SWEs to investigate
     - Soon
-  * - `Issues with duration of pregnancy states: [A] long duration of no maternal disorders post-pregnancy state, [B] duration of pregnancy state by pregnancy outcome does not appear to be differentiated <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/sim_v_and_v.ipynb>`_
-    - Unknown
-    - SWEs to investigate
-    - Soon
+  * - Incident pregnancy not restricted to those in the not pregnant state
+    - `See interactive sim <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Interactive%20simulation%20April%207%2C%202022.ipynb>`_
+    - SWEs to investigate and implement fix
+    - For next model run
+  * - Birth outcomes not assigned to simulants initialized into the pregnant state
+    - `See interactive sim <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Interactive%20simulation%20April%207%2C%202022.ipynb>`_
+    - SWEs to implement fix
+    - For next model run
   * - Need pregnancy state person time stratified by maternal hemorrhage status
     - Not previously requested (sorrry!)
     - SWEs to implement
