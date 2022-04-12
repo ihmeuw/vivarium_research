@@ -213,17 +213,17 @@ If a simulant is in wasting risk exposure :code:`cat1` or :code:`cat2`, they sho
     - Source
     - Note
   * - Wasting risk exposure, rei_id=240
-    - source='exposure', decomp_step='step4', status='best', gbd_round_id=6, year='2019'
+    - source='exposure', decomp_step='step4', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='rei', gbd_id=240
     - 
   * - deaths_c387
-    - source='codcorrect', decomp_step='step5', version_id=260, gbd_round_id=6, year_id=2019
-    - Need to confirm most recently updated version with GBD
+    - source='codcorrect', decomp_step='step5', version_id=260, gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387
+    - 
   * - prevalence_c387
-    - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019
-    - Need to confirm most recently updated version with GBD
+    - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387, measure_id=5
+    - 
   * - prevalence_s{198,199,2033,2036}
-    - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019
-    - Need to confirm most recently updated version with GBD
+    - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='sequela', gbd_id=[198,199,2033,2036], metric_id=5
+    - 
   * - dw_s198
     - 0.051 (0.031–0.079)
     - Moderate wasting with edema (from the GBD 2019 risk appendix table S13)
