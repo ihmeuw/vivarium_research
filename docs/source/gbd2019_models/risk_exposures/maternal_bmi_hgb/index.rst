@@ -19,7 +19,7 @@ BMI is modeled as a risk factor with a continuous ensemble distribution in GBD a
 Research background
 ---------------------
 
-We have received trial data from the BMGF on the joint distribution of anemia and low BMI during pregnancy in LMICs, :download:`summarized in this word document <BMGF trial data.docx>`. We decided to inform this joint risk exposure distribution for our simulation with the [Woman-First-Trial]_, a multicountry randomized controlled trial of comprehensive maternal nutrition supplementation initiated before conception, including sites rural locations of the Democratic Republic of the Congo (DRC), Guatemala, India, and Pakistan. While data from additional studies were provided, they were not used to inform our simulation as they were not designed specifically to measure these outcomes and had smaller sample sizes. BMI exposure was measured pre-pregnancy closest to conception or during the first trimester if the former was unavailable. Timing of hemoglobin exposure assessment was prioritized during second, followed by first, and then third trimesters of pregnancy.
+We have received trial data from the BMGF on the joint distribution of anemia and low BMI during pregnancy in LMICs, :download:`summarized in this word document <BMGF trial data.docx>`. We decided to inform this joint risk exposure distribution for our simulation with the [Woman-First-Trial]_, a multicountry randomized controlled trial of comprehensive maternal nutrition supplementation initiated before conception, including sites in rural locations of the Democratic Republic of the Congo (DRC), Guatemala, India, and Pakistan. While data from additional studies were provided, they were not used to inform our simulation as they were not designed specifically to measure these outcomes and had smaller sample sizes. BMI exposure was measured pre-pregnancy closest to conception or during the first trimester if the former was unavailable. Timing of hemoglobin exposure assessment was prioritized during second, followed by first, and then third trimesters of pregnancy.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -29,7 +29,7 @@ Vivarium Modeling Strategy
 Exposures should be assigned according to the following steps:
 
 #. Assign a hemoglobin exposure value according to the :ref:`hemoglobin exposure document <2019_hemoglobin_model>`.
-#. Assess which categorical hemoglobin exposure level (<100 g/L or >= 100g/L) the assigned continuous hemoglobin exposure value falls within. This should be down based on the continuous hemoglobin exposure level at the start of pregnancy, *after* the pregnancy adjustment factor is applied to the simulant's hemoglobin exposure (in other words, use the pregnant hemoglobin exposure rather than non-pregnant hemoglobin exposure).
+#. Assess which categorical hemoglobin exposure level (<100 g/L or >= 100g/L) the assigned continuous hemoglobin exposure value falls within. This should be done based on the continuous hemoglobin exposure level at the start of pregnancy, *after* the pregnancy adjustment factor is applied to the simulant's hemoglobin exposure (in other words, use the pregnant hemoglobin exposure rather than non-pregnant hemoglobin exposure).
 #. Assign a maternal BMI exposure value according to the maternal BMI exposure distribution specific to the relevant maternal hemoglobin exposure stratum.
 
 .. list-table:: Exposure distribution
