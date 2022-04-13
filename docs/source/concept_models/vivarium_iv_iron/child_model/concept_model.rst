@@ -154,7 +154,7 @@ Vivarium Intravenous Iron - Children under five
 4.1.2 Joint Cause-Risk Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Static child wasting risk exposure and protein energy malnutrition <2020_risk_exposure_static_wasting>`: use GBD 2019 data, but follow modeling strategy on this 2020 risk exposure page
+* :ref:`Static child wasting risk exposure and protein energy malnutrition <2019_risk_exposure_static_wasting>`
 
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
