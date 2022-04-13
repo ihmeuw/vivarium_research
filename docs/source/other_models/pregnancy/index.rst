@@ -185,7 +185,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Data ID
     - Source
     - Vivarium age start
-    - Vivarium age start
+    - Vivarium age end
     - Note
   * - ASFR
     - Covariate
