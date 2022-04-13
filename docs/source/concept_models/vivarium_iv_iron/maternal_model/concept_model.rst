@@ -522,6 +522,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3
      - Maternal hemorrhage incidence (not yet severity-specific), hemoglobin/anemia exposure model (with known bug in anemia state person time observer)
      - [1] `Overestimation of ACMR from model I.2 now resolved <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_. [2] `Overestimation of total maternal disorders burden <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_ (underestimation from model I.2 now resolved) [3] `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_. [4] `Apparent long duration of no maternal disorders pregnancy state and duration of pregnancy state does not appear to be shorter for "other" pregnancy outcome relative to live and still births <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/pregnancy%20model.ipynb>`_. [5] `Issue of negative draws for ASFR from previous models now resolved <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/pregnancy%20model.ipynb>`_. [6] `Mean hemoglobin estimates scaled to week timestep rather than annual <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_. [7] `Appear to underestimate pregnancy outcome counts <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/pregnancy%20model.ipynb>`_.
+   * - I.3updates
+     - Updated hemoglobin weighting from WRA to PLW, fixed birth outcome initialization issue, fixed pregnancy transition from all states issue, fixed some person-time issues. 
+     - `Notebooks are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3%20with%20first%20round%20fixes>`_ [1] Underestimation of maternal hemorrhage incidence remains (note: does not vary by year so likely not related to intiailization and also the ratio between moderate and severe looks as expected). [2] Hemoglobin/anemia still not totally validating. [3] The following issues were resolved: pregnancy state durations look good, birth outcome rates look good, hemoglobin pregnancy adjustment factor looks good. [4] Birth outcome counts are equal to transitions out of pregnancy state, which is appropriate (need to check and make sure it's possible for death due to maternal disorders to result in birth outcome!). Ali to investigate hemoglobin and anemia thresholds look as they should in an interactive sim.
 
 .. todo::
 
@@ -542,34 +545,14 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - 
     - SWEs to update
     - Low priority since Ali can adjust for this on the back-end
-  * - `Underestimation of population mean hemoglobin among the non-pregnant population <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
-    - Perhaps due to weighting to PLW (in sim) rather than WRA (for GBD)
-    - SWEs to update weighting unit (as documented above) from PLW to WRA
-    - For next model run 
-  * - `Hemoglobin pregnancy adjustment factor does not appear to be functioning as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
-    - NOTE: it looks ok in the interactive sim... maybe it will be better once we fix pregnancy rate stuff.
-    - Revisit for next model run to see if it's still an issue
-    - On hold for now
-  * - `Anemia prevalence not validating <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
-    - Could be a result of the above issues
-    - Revisit after pregnancy adjustment factor is fixed, Ali to investigate in interactive sim?
-    - Following hemoglobin and pregnancy adjustment factor bugfix
+  * - `Underestimation of population mean hemoglobin among the non-pregnant population <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_ and `Anemia prevalence not validating <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - Possibly related to our weighting strategy?
+    - Launch a test run with 100% country weight to Nigeria for SSA and Bangladesh for South Asia to test that hypothesis (because we've previously validated these countries for GBD 2019 for the maternal anemia project)
+    - For next model run
   * - `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Unknown
     - SWEs to investigate
     - Soon
-  * - Incident pregnancy not restricted to those in the not pregnant state
-    - `See interactive sim <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Interactive%20simulation%20April%207%2C%202022.ipynb>`_
-    - SWEs to investigate and implement fix
-    - For next model run
-  * - Birth outcomes not assigned to simulants initialized into the pregnant state
-    - `See interactive sim <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/interactive_simulations/Interactive%20simulation%20April%207%2C%202022.ipynb>`_
-    - SWEs to implement fix
-    - For next model run
-  * - Need pregnancy state person time stratified by maternal hemorrhage status
-    - Not previously requested (sorrry!)
-    - SWEs to implement
-    - For next model run
 
 .. _ivironWRA4.4:
 
