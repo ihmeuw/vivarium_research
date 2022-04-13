@@ -184,27 +184,45 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Data type  
     - Data ID
     - Source
+    - Vivarium age start
+    - Vivarium age start
     - Note
   * - ASFR
     - Covariate
     - 13
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
-    - Assume normal distribution of uncertainty truncated at 0 and 1. Regional-level estimates available.
+    - gbd_age_group_start - 40/52
+    - gbd_age_group_end - 40/52
+    - Assume normal distribution of uncertainty truncated at 0 and 1. Regional-level estimates available. Age-shifting based on assumption of 40 week duration of pregnancy for live births.
   * - SBR
     - Covariate
     - 2267
     - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
-    - No uncertainty in this estimate: use mean_value as point value for this parameter. Regional-level estimates not available.
+    - gbd_age_group_start - 40/52
+    - gbd_age_group_end - 40/52
+    - No uncertainty in this estimate: use mean_value as point value for this parameter. Regional-level estimates not available. Age-shifting based on assumption of 40 week duration of preganncy for stillbirths.
   * - incidence_c995
     - Incidence rate of abortion and miscarriage cause
     - c995
     - como; decomp_step='step5'
-    - Abortion defined as elective or medically-indicated termination of pregnancy at any gestational age and miscarriage defined as spontaneous loss of pregnancy before 24 weeks gestation
+    - gbd_age_group_start - 15/52
+    - gbd_age_group_end - 15/52
+    - Abortion defined as elective or medically-indicated termination of pregnancy at any gestational age and miscarriage defined as spontaneous loss of pregnancy before 24 weeks gestation. Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome.
   * - incidence_c374
     - Incidence rate of ectopic pregnancy
     - c374
     - como; decomp_step='step5'
-    - 
+    - gbd_age_group_start - 15/52
+    - gbd_age_group_end - 15/52
+    - Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome.
+
+.. note::
+
+  **Vivarium age start** and **Vivarium age end** in the table above indicate how to shift the GBD age groups before using the data in the simulation.
+
+    For example, if the ASFR value for the 20 to 25 age group according to the GBD covariate is 0.05, then this value should apply to ages 19.23 to 24.23 in Vivarium (19.23 = 20 - 40/52).
+
+  This shift of age groups is intended to account for the fact that the GBD pregnancy parameters are measured by age *at birth*, but we are using them to inform age *at conception* in our simulation. Therefore, we will shift the GBD age ranges *down* by the average duration of pregnancy to ensure that the age-specific *birth* rate in our simulation will match the age-specific GBD parameters.
 
 .. list-table:: Restrictions
    :widths: 15 15 20
