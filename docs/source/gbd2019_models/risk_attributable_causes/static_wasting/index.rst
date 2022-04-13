@@ -224,22 +224,32 @@ If a simulant is in wasting risk exposure :code:`cat1` or :code:`cat2`, they sho
   * - prevalence_s{198,199,2033,2036}
     - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='sequela', gbd_id=[198,199,2033,2036], measure_id=5
     - 
-  * - dw_s198
-    - 0.051 (0.031–0.079)
-    - Moderate wasting with edema (from the GBD 2019 risk appendix table S13)
-  * - dw_s2033
-    - 0
-    - Moderate wasting without edema (from the GBD 2019 risk appendix table S13)
-  * - dw_s199
-    - 0.128 (0.082–0.183)
-    - Severe wasting without edema (from the GBD 2019 risk appendix table S13)
-  * - dw_s2036
-    - 0.172 (0.115-0.238)
-    - Severe wasting with edema (from the GBD 2019 risk appendix table S13)
+  * - dw_s{198,199,2033,2036}
+    - Pull from GBD 2019
+    - Listed in the note below for easy reference
 
 .. note::
 
-  It looks like these sequelae descriptions are mislabeled if logical numbering patterns were followed, but I have confirmed they are correct despite this suspicion.
+  .. list-table:: PEM sequelae disability weights from GBD
+    :header-rows: 1
+
+    * - Disability weight
+      - Value
+      - Note
+    * - dw_s198
+      - 0.051 (0.031–0.079)
+      - Moderate wasting with edema (from the GBD 2019 risk appendix table S13)
+    * - dw_s2033
+      - 0
+      - Moderate wasting without edema (from the GBD 2019 risk appendix table S13)
+    * - dw_s199
+      - 0.128 (0.082–0.183)
+      - Severe wasting without edema (from the GBD 2019 risk appendix table S13)
+    * - dw_s2036
+      - 0.172 (0.115-0.238)
+      - Severe wasting with edema (from the GBD 2019 risk appendix table S13)
+
+  NOTE: It looks like these sequelae descriptions are mislabeled if logical numbering patterns were followed, but I have confirmed they are correct despite this suspicion.
 
 Validation 
 ++++++++++
