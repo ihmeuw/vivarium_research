@@ -181,11 +181,11 @@ If a simulant is in wasting risk exposure :code:`cat1` or :code:`cat2`, they sho
     - excess mortality rate
     - :math:`\frac{\text{deaths_c387}}{\text{population} * \text{prevalence_c387}}`
     - Assumed same excess mortality rate as cat2 moderate PEM
-  * - cat2 (moderate wasting, severe PEM)
+  * - cat2 (moderate wasting, moderate PEM)
     - disability weight
     - :math:`\frac{\text{dw_s198} * \text{prevalence_s198} + \text{dw_s2033} * \text{prevalence_s2033}}{\text{prevalence_s198} + \text{prevalence_s2033}}`
     - 
-  * - cat2 (moderate wasting, severe PEM)
+  * - cat2 (moderate wasting, moderate PEM)
     - excess mortality rate
     - :math:`\frac{\text{deaths_c387}}{\text{population} * \text{prevalence_c387}}`
     - Assumed same excess mortality rate as cat1 severe PEM
