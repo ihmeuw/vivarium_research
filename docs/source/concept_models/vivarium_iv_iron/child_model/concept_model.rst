@@ -340,6 +340,9 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - II.1
      - Cause models (infectious diseases)
      - `Simulation validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation.ipynb>`_. [1] underestimation of diarrheal diseases and lower respiratory infections remission rates. [2] underestimation of lower respiratory infections burden in neonatal age groups. [3] GBD 2019 age groups (does not include new GBD 2020 age groups). NOTE: still need to validate DALYs, YLLs, YLDs once environment issue is solved.
+   * - II.2
+     - Wasting and stunting, without PEM. Results stratified by stunting
+     - [1] `Overstimation of excess mortality rates due to diarrheal diseases, LRI, and mealses <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation_with_cgf_no_pem.ipynb>`_. [2] `Stunting risk exposure looks good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/stunting_validation.ipynb>`_. [3] `Stunting risk effects on incidence rates look good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/stunting_validation.ipynb>`_. Need to verify that stunting is *not* affecting diarrheal diseases excess mortality (hard to tell given stocastic variation). **Can now remove stunting stratification of disease transitions and state person time**.
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -356,10 +359,10 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Appears to be a result of incompatible incidence, remission, and prevalence as estimated by GBD. There was birth prevalence of LRI in GBD 2017 that was removed for GBD 2019. Including a birth prevalence in our model would allow us to validate to GBD metrics, but would be inconsistent with GBD assumptions.
     - Researchers to determine which validation targets are most important to hit and strategize how to achieve that.
     - TBD
-  * - GBD 2019 age groups
-    - Model is using GBD 2019 age groups rather than GBD 2020 age groups, which will be needed if we plan to use GBD 2020 CGF risk factors
-    - Researchers to determine if we would like to update to GBD 2020 or stick with GBD 2019
-    - TBD
+  * - Overestimation of excess mortality rates for diarrhea, LRI, and measles
+    - Unknown. Was introduced with the addition of wasting and stunting risks to the model. Does not appear to be due to stunting risk effects.
+    - SWEs to investigate, researchers to see if we can identify source of bug in next model results that are stratified by wasting.
+    - Soon
 
 .. _ivironU54.4:
 
