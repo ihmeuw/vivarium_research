@@ -204,7 +204,7 @@ Including,
 
 .. todo::
 
-  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs.
+  Detail strategy for accruing anemia YLDs that is compatible with the strategy for accruing maternal disorders YLDs and postpartum depression YLDs.
 
 4.1.3 Risk Exposure Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -220,9 +220,14 @@ Including,
 4.1.4 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>` (including impact on maternal disorders as well as maternal hemorrhage incidence)
+* :ref:`Hemoglobin/Iron deficiency risk effects <2019_risk_effect_iron_deficiency>`, including the impact on:
+
+  * Maternal disorders,
+  * Maternal hemorrhage incidence,
+  * Birth outcomes, and
+  * Postpartum depression
+
 * :ref:`Maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
-* Postpartum depression risk effects
 
 4.1.5 Risk-Risk Correlation Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -236,7 +241,7 @@ Including,
 
 .. todo::
 
-  Clarify with software engineers if updates were made to the pregnancy model to accomodate the accrual of maternal disorders YLDs (a timestep long post-maternal disorders state in which anemia YLDs are not accrued?). If so, then add these updates to the pregnancy model documentation.
+  Add update to the pregnancy model to represent the "post-birth maternal disorders states" implemented by the software engineers
 
 * Cognition
 
@@ -287,9 +292,9 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Hemoglobin modelable entity IDs
      - MEIDs 10487 and 10488
      - 159, 166 (not available for 44577 or 44578)
-     - WRA
-     - Yes
-     - NOTE: Ali may update to custom weighting strategy in a nano-sim.
+     - CUSTOM (see below)
+     - No
+     - 
    * - BMI modelable entity IDs
      - MEIDs 2548 and 18706
      - 159, 166 (not available for 44577 or 44578)
@@ -359,10 +364,10 @@ Where,
    * - ASFR
      - Age-specific fertility rate   
      - covariate_id=13, decomp_step='step4'
-     - For use in weighting -- either: [1] Assume normal distribution of uncertainty and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
+     - For use in weighting -- either: [1] Assume normal distribution of uncertainty truncated at [0,1] and sample draw-level values for each location using different random seeds, or [2] use the mean_value point estimate
    * - SBR
      - Stillbirth to live birth ratio   
-     - covariate_id=1106, decomp_step='step4'
+     - covariate_id=2267, decomp_step='step4'
      - Not age-specific; no uncertainty 
    * - incidence_c996
      - Incidence rate of abortion and miscarriage cause   
@@ -376,6 +381,41 @@ Where,
      - Ratio of male births to all live births
      - :ref:`Defined for each modeled location on the pregnancy model document <sex_ratio_table>`
      - 
+
+Hemoglobin distribution weighting strategy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For the continuous hemoglobin distribution parameters, rather than population-weight the mean and standard deviation of the continuous distribution and then sample from those summary statistics, we will instead **sample individual simulant hemoglobin exposures from the national-level distributions with a probability equal to the population weight of that nation within the modeled region among the age-specific population size of women of reproductive age (WRA).** 
+
+Specifically, at the simulant level, the country from which the hemoglobin exposure is sampled should be determined at initialization or entrance into the simulation and should not change for the duration of the simulation. Notably, although simulants' sampling country and hemoglobin exposure propensities will not change throughout the simulation, their hemoglobin exposure values may change as they progress to the next age group (as described in the :ref:`hemoglobin document <2019_hemoglobin_model>`). The sampling probabilities for each country within the modeled regions are defined below.
+
+Probability of sampling from a given country's hemoglobin distribution using the mean and standard deviation hemoglobin parameters for that country:
+
+.. math::
+
+  \frac{population_\text{country}}{population_\text{region}}
+
+.. list-table:: Parameter definitions for hemoglobin distribution weighting
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - :math:`population_\text{country}`
+    - Age-specific population size of women of reproductive age for a given national location
+    - See definition of WRA in table above
+    - Summed across all age groups
+  * - :math:`population_\text{region}`
+    - Age-specific population size of women of reproductive age for a given regional location
+    - :math:`\sum_{country=1}^{n} population_\text{country}`
+    - For all countries within the region
+
+.. note:: 
+
+  We may update the weighting unit to pregnant and lactating women (PLW) rather than WRA once we have confirmed that our hemoglobin exposure model is functioning properly by validating to GBD. Although the hemoglobin exposure distribution is specific to women of reproductive age, we have chosen to weight the hemoglobin exposure distribution to the population size of pregnant and lactating women due to our explicit project focus on PLW. This prioritization of hemoglobin exposures among PLW may cause slight differences in our location-aggregated estimates of anemia among non-pregnant or postpartum simulants among WRA compared to the regional estimates from GBD.
+
+  Although the hemoglobin distribution and population size parameters are age-specific, we will calculate the population weights among PLW overall rather than at the age specific level to allow us to sample from the same national-level distribution for the same simulant as they age so that we can maintain logical hemoglobin exposure trajectories at the simulant level. 
 
 .. _ivironWRA4.2.1:
 
@@ -392,7 +432,7 @@ Where,
      - Note
    * - Population size
      - 100,000
-     - per draw (10,000 per random seed/draw combination)
+     - per random seed/draw combination
    * - Number of draws
      - 66
      - 
@@ -434,8 +474,8 @@ Where,
      - Value
      - Note
    * - Population size
-     - 100,000
-     - per draw (10,000 per random seed/draw combination)
+     - 2,000,000
+     - per random seed/draw combination
    * - Number of draws
      - 66
      - 
@@ -473,6 +513,46 @@ Where,
    * - I.0
      - Demography for Sub-Saharan Africa and South Asia
      - `Notebook for validation can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/model0/model_0_gbd_validation.ipynb>`_. All-cause mortality rates look good. Age fraction looks reasonable, but slightly off for boundary age groups, likely a result of the assumption of uniform distribution of ages within a five year age group -- ok to proceed.
+   * - I.1
+     - Pregnancy model for Sub-Saharan Africa and South Asia
+     - `Validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model1/sim_v_and_v.ipynb>`_. [1] ASFR covariate has negative values in the youngest age group for some draws... perhaps should update to truncated normal distribution. [2] duration of postpartum period appears to be too long... closer to 7 weeks than 6. [3] Request to have pregnancy person time stratified by pregnancy outcome in order to evaluate approximate differential duration of pregnancy. [4] Request to have all pregnancy transition counts rather than just np->p.
+   * - I.2
+     - Maternal disorders
+     - `Validation notebooks are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model2%2C%20maternal%20disorders>`_. [1] mortality rate due to other causes overestimated by a factor of approximately 50 (this is a new problem that was not present in model I.1). [2] seeing age trend in maternal disorders burden attributable to differences bewteen rate of conception and rate of birth within each age group. [3] Underestimating maternal disorders burden relative to GBD overall [4] previous issues appear to remain unresolved.
+   * - I.3
+     - Maternal hemorrhage incidence (not yet severity-specific), hemoglobin/anemia exposure model (with known bug in anemia state person time observer)
+     - [1] `Overestimation of ACMR from model I.2 now resolved <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_. [2] `Overestimation of total maternal disorders burden <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_ (underestimation from model I.2 now resolved) [3] `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_. [4] `Apparent long duration of no maternal disorders pregnancy state and duration of pregnancy state does not appear to be shorter for "other" pregnancy outcome relative to live and still births <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/pregnancy%20model.ipynb>`_. [5] `Issue of negative draws for ASFR from previous models now resolved <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/pregnancy%20model.ipynb>`_. [6] `Mean hemoglobin estimates scaled to week timestep rather than annual <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_. [7] `Appear to underestimate pregnancy outcome counts <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/pregnancy%20model.ipynb>`_.
+   * - I.3updates
+     - Updated hemoglobin weighting from WRA to PLW, fixed birth outcome initialization issue, fixed pregnancy transition from all states issue, fixed some person-time issues. 
+     - `Notebooks are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3%20with%20first%20round%20fixes>`_ [1] Underestimation of maternal hemorrhage incidence remains (note: does not vary by year so likely not related to intiailization and also the ratio between moderate and severe looks as expected). [2] Hemoglobin/anemia still not totally validating. [3] The following issues were resolved: pregnancy state durations look good, birth outcome rates look good, hemoglobin pregnancy adjustment factor looks good. [4] Birth outcome counts are equal to transitions out of pregnancy state, which is appropriate (need to check and make sure it's possible for death due to maternal disorders to result in birth outcome!). Ali to investigate hemoglobin and anemia thresholds look as they should in an interactive sim.
+
+.. todo::
+
+  Add V&V tracking for artifact as well as simulation results
+
+.. list-table:: Outstanding verification and validation issues
+  :header-rows: 1
+
+  * - Issue
+    - Explanation
+    - Action plan
+    - Timeline
+  * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
+    - Related to start versus end of pregnancy timing -- appears to be driving overall overestimation of maternal disorders burden
+    - Ali to add documentation on this issue
+    - Soon
+  * - `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - 
+    - SWEs to update
+    - Low priority since Ali can adjust for this on the back-end
+  * - `Underestimation of population mean hemoglobin among the non-pregnant population <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_ and `Anemia prevalence not validating <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+    - Possibly related to our weighting strategy?
+    - Launch a test run with 100% country weight to Nigeria for SSA and Bangladesh for South Asia to test that hypothesis (because we've previously validated these countries for GBD 2019 for the maternal anemia project)
+    - For next model run
+  * - `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
+    - Unknown
+    - SWEs to investigate
+    - Soon
 
 .. _ivironWRA4.4:
 
