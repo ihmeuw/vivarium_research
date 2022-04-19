@@ -34,11 +34,41 @@ Vivarium - US Health Disparities - CVD Interventions
 .. contents::
   :local:
 
-+------------------------------------+
-| List of abbreviations              |
-+=======+============================+
-|       |                            |
-+-------+----------------------------+
+.. list-table:: Definitions of terms and abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Term or Abbreviation
+    - Definition
+    - Note
+  * - BMI
+    - Body Mass Index
+    - Risk Factor
+  * - FPG
+    - Fasting Plasma Glucose
+    - Risk Factor
+  * - HbA1c
+    - Hemoglobin A1c
+    - Measures blood glucose control over the last 2-3 months
+  * - LDL-C
+    - Low Density Lipoprotein Cholesterol
+    - Risk Factor
+  * - SBP
+    - Systolic blood pressure
+    - Risk Factor
+  * - DBP
+    - Diastolic blood pressure
+    - Risk Factor; not currently modeled as part of GBD, but used clinically to define hypertension
+  * - Stage 1 hypertension
+    - SBP 130-139 OR DBP 80-89
+    - American Heart Association/American College of Cardiology guidelines
+  * - Stage 2 hypertension
+    - SBP 140 or higher OR DBP 90 or higher
+    - American Heart Association/American College of Cardiology guidelines
+  * - PDC
+    - Percent days covered
+    - :math:`\frac{Number\ of\ days\ in\ period\ medication\ taken}{Number\ of\ days\ in\ period}`
+
 
 .. _uscvd1.0:
 
@@ -75,42 +105,42 @@ Initial efforts will focus on the 50 US states and Washington DC; when inputs ar
 
 Comparisons will be with the GBD results of incidence, prevalence, and mortality for the causes and risks included in the following sections. 
 
-.. _uscvd3.0:
+.. .. _uscvd3.0:
 
-3.0 Causal framework
-++++++++++++++++++++
+.. 3.0 Causal framework
+.. ++++++++++++++++++++
 
-.. _uscvd3.1:
+.. .. _uscvd3.1:
 
-3.1 Causal diagram
-------------------
+.. 3.1 Causal diagram
+.. ------------------
  
- .. note::
-    link to DAGs page
-    use round circles with DAGs
+..  .. note::
+..     link to DAGs page
+..     use round circles with DAGs
 
-**Outcome (O)**:
+.. **Outcome (O)**:
 
 
 
-**Most proximal determinant/exposure (E)**:
+.. **Most proximal determinant/exposure (E)**:
   
 
 
-**Confounders (C)**:
+.. **Confounders (C)**:
 
 
 
-**Effect modifiers**:
+.. **Effect modifiers**:
 
 
-**Mediators (M)**:
+.. **Mediators (M)**:
 
 
-.. _uscvd3.2:
+.. .. _uscvd3.2:
 
-3.2 Effect sizes
-----------------
+.. 3.2 Effect sizes
+.. ----------------
 
 
 
@@ -202,7 +232,7 @@ Variations on the above intervention increased support time or added meal replac
 
 5.1 Vivarium concept model 
 --------------------------
-.. image:: concept_model.svg
+.. image:: concept_model_v2.svg
 
 .. _uscvd5.2:
 
@@ -250,52 +280,31 @@ Variations on the above intervention increased support time or added meal replac
 
 5.3 Models
 ----------
+`Simulation Results <https://shiny.ihme.washington.edu/content/416/>`_
 
-.. note::
-  here we use the compartmental (SEIR) models with squares
+ .. note::
+    validation notebooks and results are stored in /mnt/team/cvd/pub/usa_re/sim_science/validation/
+    
+.. list-table:: Model verification and validation tracking
+  :widths: 3 10 20
+  :header-rows: 1
+
+  * - Model
+    - Description
+    - V&V summary
+  * - 1.0
+    - Alabama; IHD, ischemic stroke
+    - All-cause mortality results look reasonable; issue with angina CSMR
+  * - 2.0
+    - 
+    - 
+  * - 3.0
+    - 
+    - 
+  * - 4.0
+    - 
+    - 
   
-
-.. _uscvd5.3.1:
-
-5.3.1 Model 1
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _uscvd5.3.2:
-
-5.3.2 Model 2
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _uscvd5.3.3:
-
-5.3.3 Model 3
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-.. _uscvd5.3.4:
-
-5.3.4 Model 4
-~~~~~~~~~~~~~
-
-.. todo::
-
-  - add verification and validation strategy
-  - add python-style pseudo code to summarize model algorithm if necessary
-
-
 .. _uscvd5.4:
 
 5.4 Desired outputs
