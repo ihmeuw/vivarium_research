@@ -337,12 +337,18 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Model
      - Description
      - V&V summary
-   * - II.1
+   * - 1.0.0
      - Cause models (infectious diseases)
-     - `Simulation validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation.ipynb>`_. [1] underestimation of diarrheal diseases and lower respiratory infections remission rates. [2] underestimation of lower respiratory infections burden in neonatal age groups. [3] GBD 2019 age groups (does not include new GBD 2020 age groups). NOTE: still need to validate DALYs, YLLs, YLDs once environment issue is solved.
-   * - II.2
+     - `Simulation validation notebook can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_1/model_1.0.0_cause_data_validation.ipynb>`_. [1] underestimation of diarrheal diseases and lower respiratory infections remission rates. [2] underestimation of lower respiratory infections burden in neonatal age groups. [3] GBD 2019 age groups (does not include new GBD 2020 age groups). NOTE: still need to validate DALYs, YLLs, YLDs once environment issue is solved.
+   * - 2.0.0
+     - Wasting and stunting, without PEM and without stratification by wasting or stunting
+     - `Overestimating excess mortality rates for all causes <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.0.0_cause_data_validation.ipynb>`_
+   * - 2.0.1
      - Wasting and stunting, without PEM. Results stratified by stunting
-     - [1] `Overstimation of excess mortality rates due to diarrheal diseases, LRI, and mealses <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/cause_data_validation_with_cgf_no_pem.ipynb>`_. [2] `Stunting risk exposure looks good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/stunting_validation.ipynb>`_. [3] `Stunting risk effects on incidence rates look good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/stunting_validation.ipynb>`_. Need to verify that stunting is *not* affecting diarrheal diseases excess mortality (hard to tell given stocastic variation). **Can now remove stunting stratification of disease transitions and state person time**.
+     - [1] `Overstimation of excess mortality rates due to diarrheal diseases, LRI, and mealses <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.0.1_cause_data_validation.ipynb>`_. [2] `Stunting risk exposure looks good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/stunting_validation_model_2.0.1.ipynb>`_. [3] `Stunting risk effects on incidence rates look good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/stunting_validation_model_2.0.1.ipynb>`_. Need to verify that stunting is *not* affecting diarrheal diseases excess mortality (hard to tell given stocastic variation). **Can now remove stunting stratification of disease transitions and state person time**.
+   * - 2.1.0
+     - Wasting and stunting, with PEM. Results stratified by wasting
+     - [1] Still have the `overstimation of excess mortality rates due to diarrheal diseases, LRI, and mealses <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.0_cause_model_validation.ipynb>`_. [2] `Wasting risk exposure and PEM prevalence looks good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.0_cause_model_validation.ipynb>`_. [3] `Wasting risk effects on incidence rates look good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/wasting_validation_model_2.1.0.ipynb>`_. [4] No deaths due to PEM in deaths count data... also wasn't expecting outputs of PEM transition counts. **Keep stratification by wasting for now until we finish validating PEM deaths**
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -359,10 +365,14 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Appears to be a result of incompatible incidence, remission, and prevalence as estimated by GBD. There was birth prevalence of LRI in GBD 2017 that was removed for GBD 2019. Including a birth prevalence in our model would allow us to validate to GBD metrics, but would be inconsistent with GBD assumptions.
     - Researchers to determine which validation targets are most important to hit and strategize how to achieve that.
     - TBD
-  * - Overestimation of excess mortality rates for diarrhea, LRI, and measles
-    - Unknown. Was introduced with the addition of wasting and stunting risks to the model. Does not appear to be due to stunting risk effects.
-    - SWEs to investigate, researchers to see if we can identify source of bug in next model results that are stratified by wasting.
-    - Soon
+  * - Overestimation of excess mortality rates for diarrhea, LRI, and measles by ~5 times
+    - Unknown. Was introduced with model 2.0.0 (not present in model 1.0.0 or 1.0.1). Does not appear to be due to stunting or wasting risk effects. Does not appear to affect YLLs.
+    - SWEs to continue to investigate (maybe have figured it out... launched a new run to check)
+    - In progress
+  * - PEM is not included as a cause in the deaths.csv count data file for model v2.1.0
+    - I think this is likely a results processing bug rather than a model bug?
+    - SWEs to continue to investigate.
+    - Soon, but lower priority than excess mortality
 
 .. _ivironU54.4:
 
