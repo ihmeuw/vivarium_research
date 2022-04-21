@@ -82,6 +82,10 @@ Once the hemoglobin concentration distribution is estimated, the anemia envelope
 
   GBD 2019 used a different threshold for the neonatal period than the rest of the <5 age group, although there are not any international guidelines on appropriate thresholds of anemia in neonates. The thresholds chosen were "a blend" of those recommended by the WHO for 6 to 59 months and the higher hemoglobin levels typically seen in newborns.
 
+.. warning::
+
+  The GBD 2019 anemia impairment estimates among women of reproductive age are underestimated (particularly among locations/ages with high fertility rates) due to erroneously applying the inverse of the pregnancy adjustment factor in the estimation of the anemia envelope, described on the :ref:`hemoglobin document <2019_hemoglobin_model>` and `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
+
 Once severity-specific anemia prevalence is estimated, years lived with disability due to anemia can be estimated using the following severity-specific disability weights. NOTE: the anemia impairment is a YLD-only impairment and anemia is not considered a direct cause of death in GBD 2019.
 
 .. _`Anemia Disability Weights`:
@@ -183,7 +187,7 @@ Additionally, the GBD 2019 causal attribution process assumes no change in hemog
 Validation Criteria
 +++++++++++++++++++
 
-Prevalence of severity-specific anemia as calculated in the Vivarium simulation should be approximately equal to the GBD 2019 severity-specific anemia impairment prevalence (REI IDs listed in the `Anemia Impairment REI IDs Table`_).
+Prevalence of severity-specific anemia as calculated in the Vivarium simulation should be approximately equal to the GBD 2019 severity-specific anemia impairment prevalence (REI IDs listed in the `Anemia Impairment REI IDs Table`_) among demographic groups that do not include women of reproductive age. The `custom validation targets <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/hgb_validation_targets>`_ should be used for women of reproductive age due to the underestimation of GBD 2019 anemia imairment prevalence among this group caused by erroneously applying the inverse of the pregnancy adjustment factor, described on the :ref:`hemoglobin document <2019_hemoglobin_model>` and `shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
 
 0 < severity-specific anemia prevalence < 1
 
