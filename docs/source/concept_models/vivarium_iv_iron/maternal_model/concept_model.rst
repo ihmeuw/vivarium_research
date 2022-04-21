@@ -93,6 +93,51 @@ Vivarium Intravenous Iron - Women of reproductive age
 
 .. image:: concept_model_version_i.svg
 
+3.1 Additional figures
+-----------------------
+
+Since there are several components that affect hemoglobin during pregnancy, including in multiplicative (for the hemoglobin pregnancy adjustment factor) and additive (for the :ref:`antenatal supplementation <maternal_supplementation_intervention>`, :ref:`antenatal IV iron <intervention_iv_iron_antenatal>`, and :ref:`postpartum IV iron <intervention_iv_iron_postpartum>` interventions as well as :ref:`maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`) manners, we must be careful to follow order of operations in the applications of these effects to hemoglobin exposure throughout this period. The figures below visually represent these changes and the following equations represent them mathematically. 
+
+.. image:: hgb_figure_antenatal_intervention.png
+
+.. image:: hgb_figure_antenatal_intervention.png
+
+.. image:: hgb_figure_antenatal_intervention.png
+
+.. math::
+
+  hgb_\text{pregnancy&postpartum} = (hgb_\text{pre-pregnancy} \times AF_\text{pregnancy}) + \text{sum(additive effects)}
+
+  hgb_\text{post-pregnancy} = (hgb_\text{pregnancy&postpartum} / AF_\text{pregnancy}) - \text{sum(additive effects)}
+
+Where,
+
+.. list-table::
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Note
+  * - :math:`hgb_\text{pregnancy&postpartum}`
+    - Hemoglobin exposure during the pregnancy, maternal disorder, and postpartum states
+    - 
+  * - :math:`hgb_\text{pre-pregnancy}`
+    - Hemoglobin exposure while in the not_pregnant state prior to transitioning into the pregnant state
+    - 
+  * - :math:`hgb_\text{post-pregnancy}`
+    - Hemoglobin exposure while in the not-pregnant state after transitioning out of the postpartum state
+    - 
+  * - :math:`AF_\text{pregnancy}`
+    - Hemoglobin mean pregnancy adjustment factor
+    - Defined on the :ref:`hemoglobin model document <2019_hemoglobin_model>`
+  * - :math:`\text{sum(additive effects)}`
+    - Sum of effect sizes of components that affect hemoglobin during pregnancy/postpartum in an additive manner, including the :ref:`antenatal supplementation <maternal_supplementation_intervention>`, :ref:`antenatal IV iron <intervention_iv_iron_antenatal>`, and :ref:`postpartum IV iron <intervention_iv_iron_postpartum>` interventions as well as :ref:`maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`
+    - Note, these effects may be applied at various points during pregnancy/postpartum as documented in their individual model documents. The effects for each of these components should all be removed at the end of the postpartum period.
+
+.. note::
+
+  The depiction of this strategy represented here assumes that the simulant does not change age groups during the time spent in the pregnant/postpartum states. In vivarium, the :math:`hgb` value for a simulant used to inform hgb_\text{pre-pregnancy}, hgb_\text{pregnancy&postpartum}, and hgb_\text{post-pregnancy} should update according to the age-specific distribution and constant propensity method when a simulant changes age groups, which may cause their hemoglobin exposure to change slightly at that point (not depicted in the figures).
+
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
 

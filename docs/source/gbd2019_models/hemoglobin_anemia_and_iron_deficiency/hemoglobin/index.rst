@@ -194,6 +194,18 @@ To sample hemoglobin values for pregnant/lactating women, use the same functions
     - 1.032920188
     - Assume no uncertainty distribution. (No uncertainty is used in the GBD 2019 code or listed in the methods appendix).
 
+.. note::
+
+  For the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, instead of sampling from a separate distribution with an adjusted mean and standard devaition with a constant propensity when a simulant becomes pregnant, we will instead multiplicatively apply the draw-level value of the pregnancy adjustment factor to the simulant's hemoglobin exposure value upon transition to the pregnancy state and divide the exposure value by the pregnancy adjustment factor when they exit the postpartum state (NOTE: order of operations will need to be followed when considering additional components that may affect a simulant's hemoglobin exposure values during pregnancy such as interventions and/or :ref:`maternal hemorrhage incidence <2019_risk_effect_maternal_hemorrhage>`, as discussed on the :ref:`IV iron maternal simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>`, section 3.1).
+
+  Therefore, a simulants hemoglobin exposure during pregnancy/postpartum (:math:`hgb_\text{pregnant}`) will rely on their non-pregnant hemoglobin exposure (:math:`hgb_\text{not pregnant}`), as follows:
+
+    :math:`hgb_\text{pregnant} = hgb_\text{not pregnant} \times \text{pregnancy adjustment factor}`
+
+  If a simulant changes age groups while not pregnant, their hemoglobin exposure value should change according to their constant propensity value and the hemoglobin distribution for the new age group. If a simulant changes age groups while pregnant or in the postpartum period, their hemoglobin exposure should update in a simular way, where the value for :math:`hgb_\text{not pregnant}` updates according to the :math:`hgb_\text{not pregnant}` distribution of the new age group and the equation above.
+
+  Notably, this strategy is limited in that it does not consider the increased standard deviation of the hemoglobin distribution among the pregnant population relative to the non-pregnant population. While this is a limitation, it is expected to have a minor impact on estimated anemia prevalence (TODO: post a comparison of these strategies).
+
 Validation Criteria
 +++++++++++++++++++
 
