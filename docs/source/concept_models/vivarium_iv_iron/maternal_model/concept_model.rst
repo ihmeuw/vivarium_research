@@ -136,7 +136,7 @@ Where,
 
 .. note::
 
-  The depiction of this strategy represented here assumes that the simulant does not change age groups during the time spent in the pregnant/postpartum states. In vivarium, the :math:`hgb` value for a simulant used to inform hgb_\text{pre-pregnancy}, hgb_\text{pregnancy&postpartum}, and hgb_\text{post-pregnancy} should update according to the age-specific distribution and constant propensity method when a simulant changes age groups, which may cause their hemoglobin exposure to change slightly at that point (not depicted in the figures).
+  The depiction of this strategy represented here assumes that the simulant does not change age groups during the time spent in the pregnant/postpartum states. In vivarium, the :math:`hgb` value for a simulant used to inform :math:`hgb_\text{pre-pregnancy}`, :math:`hgb_\text{pregnancy&postpartum}`, and :math:`hgb_\text{post-pregnancy}` should update according to the age-specific distribution and constant propensity method when a simulant changes age groups, which may cause their hemoglobin exposure to change slightly at that point (not depicted in the figures).
 
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
