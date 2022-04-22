@@ -204,7 +204,7 @@ To sample hemoglobin values for pregnant/lactating women, use the same functions
 
   If a simulant changes age groups while not pregnant, their hemoglobin exposure value should change according to their constant propensity value and the hemoglobin distribution for the new age group. If a simulant changes age groups while pregnant or in the postpartum period, their hemoglobin exposure should update in a simular way, where the value for :math:`hgb_\text{not pregnant}` updates according to the :math:`hgb_\text{not pregnant}` distribution of the new age group and the equation above.
 
-  Notably, this strategy is limited in that it does not consider the increased standard deviation of the hemoglobin distribution among the pregnant population relative to the non-pregnant population. While this is a limitation, it is expected to have a minor impact on estimated anemia prevalence, `as shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/Plots%20for%20std%20adjustment%20factor.ipynb>`_.
+  Notably, this strategy is limited in that it does not consider the increased standard deviation of the hemoglobin distribution among the pregnant population relative to the non-pregnant population. While this is a limitation, it is expected to have a minor impact on estimated anemia prevalence, `as shown in these plots <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/Plots%20for%20std%20adjustment%20factor.ipynb>`_.
 
 Validation Criteria
 +++++++++++++++++++
