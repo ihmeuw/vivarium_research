@@ -570,6 +570,12 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3updates
      - Updated hemoglobin weighting from WRA to PLW, fixed birth outcome initialization issue, fixed pregnancy transition from all states issue, fixed some person-time issues. 
      - `Notebooks are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3%20with%20first%20round%20fixes>`_ [1] Underestimation of maternal hemorrhage incidence remains (note: does not vary by year so likely not related to intiailization and also the ratio between moderate and severe looks as expected). [2] Hemoglobin/anemia still not totally validating. [3] The following issues were resolved: pregnancy state durations look good, birth outcome rates look good, hemoglobin pregnancy adjustment factor looks good. [4] Birth outcome counts are equal to transitions out of pregnancy state, which is appropriate (need to check and make sure it's possible for death due to maternal disorders to result in birth outcome!). Ali to investigate hemoglobin and anemia thresholds look as they should in an interactive sim.
+   * - I.3 hemorrhage fix
+     - Fixed issues of maternal hemorrhage incidence using GBD incidence rate rather than the probability listed :ref:`on this page <2019_cause_maternal_hemorrhage_incidence>` and observers counting multiple outcomes.
+     - `Maternal hemorrhage incidence looks good! Now only off by the age-group trend previously identified <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20hemorrhage%20fix/maternal%20disorders%20cause%20model.ipynb>`_.
+   * - I.3 hemoglobin weighted to single national location
+     - Weighted 100% of simulants to the hemoglobin distributions of Nigeria for the Sub-Saharan Africa location and to Bangladesh for the South Asia location to see if our validation issues were caused by our location aggregation strategy.
+     - `Mean hemoglobin is validating well now. Anemia prevalence still very off. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20and%20anemia.ipynb>`_
 
 .. todo::
 
@@ -584,20 +590,17 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Timeline
   * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Related to start versus end of pregnancy timing -- appears to be driving overall overestimation of maternal disorders burden
-    - Ali to add documentation on this issue
+    - SWEs to implement (ticket already made)
     - Soon
   * - `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - 
     - SWEs to update
     - Low priority since Ali can adjust for this on the back-end
-  * - `Underestimation of population mean hemoglobin among the non-pregnant population <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_ and `Anemia prevalence not validating <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
-    - Possibly related to our weighting strategy?
-    - Launch a test run with 100% country weight to Nigeria for SSA and Bangladesh for South Asia to test that hypothesis (because we've previously validated these countries for GBD 2019 for the maternal anemia project)
-    - For next model run
-  * - `Underestimation of maternal hemorrhage incidence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
-    - Unknown
-    - SWEs to investigate
-    - Soon
+  * - `Hemoglobin ensemble distribution function resulting in lack of validation to anemia prevalence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20and%20anemia.ipynb>`_
+    - `Using custom function that does not replicate GBD methodology well <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Distribution%20comparisons.ipynb>`_
+    - SWEs to ensemble function to `risk_distributions.EnsembleDistribution`, which should replicate GBD methodology (ticket already made)
+    - In progress
+
 
 .. _ivironWRA4.4:
 
