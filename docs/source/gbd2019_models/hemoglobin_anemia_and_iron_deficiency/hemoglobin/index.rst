@@ -200,7 +200,7 @@ To sample hemoglobin values for pregnant/lactating women, use the same functions
 
   Therefore, a simulants hemoglobin exposure during pregnancy/postpartum (:math:`hgb_\text{pregnant}`) will rely on their non-pregnant hemoglobin exposure (:math:`hgb_\text{not pregnant}`), as follows:
 
-    :math:`hgb_\text{pregnant} = hgb_\text{not pregnant} \times \text{pregnancy adjustment factor}`
+    :math:`hgb_\text{pregnant} = hgb_\text{not pregnant} \times \text{pregnancy adjustment factor}_\text{mean}`
 
   If a simulant changes age groups while not pregnant, their hemoglobin exposure value should change according to their constant propensity value and the hemoglobin distribution for the new age group. If a simulant changes age groups while pregnant or in the postpartum period, their hemoglobin exposure should update in a simular way, where the value for :math:`hgb_\text{not pregnant}` updates according to the :math:`hgb_\text{not pregnant}` distribution of the new age group and the equation above.
 
