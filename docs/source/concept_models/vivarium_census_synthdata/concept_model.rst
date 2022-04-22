@@ -136,7 +136,12 @@ attributes through survey, census, and registry with realistic noise
 Additional components we might want: time-dependent changes to
 observers of sex, based on gender assigned at birth (14); multiple
 households for individuals, leading to double counting in census (15);
-twins and multiparous births in fertility model (16).
+twins and multiparous births in fertility model (16).  To capture an
+additional dimension of heterogeneity and also to enable a periodic
+observer that simulates tax returns we will also need a component
+representing income (14), which will look a lot like a risk factor
+exposure.
+
 
 .. _census_prl_components:
 
@@ -206,7 +211,7 @@ race/ethnicity into the following partition:
 * Non-Latino American Indian and Alaskan Native (AIAN) alone
 * Non-Latino Asian alone
 * Non-Latino Native Hawaiian and Other Pacific Islander (NHOPI) alone
-* Non-Latino Multiracial
+* Non-Latino Multiracial or Some Other Race
 * Latino
 
 This is basically compatible with the surname data we will use in Section (10).
@@ -221,7 +226,7 @@ initial population:
     # load some ACS data
     columns = ['household_id', 'location', 'fips code', 'puma', 
                'weight', 'age', 'sex', 'race_eth', 'relshipp',
-               'mig', 'migpuma', 'migsp']
+              ]
     acs = pd.read_csv('/home/j/Project/Models/VEHSS/prepped/acs_2019_pums.csv', low_memory=False, usecols=columns)
     acs_hh_only = acs[acs.household_id.str.contains('HU')]  # subset of rows for "household" sample, meaning those _not_ in group quarters
 
@@ -436,8 +441,12 @@ testing PRL algorithms, so we will keep it quite simple.
 
 These notes on ACS data sources on migration could be useful for the
 more complex rates in the future.  For now, let's make both households
-and simulants move at a rate of 15 moves per 100 person-years
-(independently).
+and simulants (who are not the reference person) move at a rate of 15
+moves per 100 person-years (independently).  To further keep things
+simple, we will for now not have the reference person every move in a
+non-household migration.  When a non-reference person moves, we will
+update their relationship to the reference person to be 36 - Other
+non-relative (for simplicity, for now).
 
 ACS notes: Based on age, sex, race/ethnicity, and geography, can
 calculate the probability of moving from ACS, as the weighted average
@@ -487,6 +496,15 @@ according to `ACS: America's Data At Risk
 "Between 2000 and 2019, the number of housing units increased by 23.8
 million or almost 21%."
 
+Another complex type of movement that could be useful to capture is
+moving into and out of Group Quarters; it is useful to think of four
+broad types of GQ for PRL purposes: college, military, carceral, and
+nursing homes.  College is likely to be the tough one in Census
+applications (Census will have SSN for most military and incarcerated,
+Medicare for most nursing home, but people living in dorms, especially
+who don't file their own tax returns might not be PIK-able.)  We will
+not include GQ in our initial (sub-minimal) migration model.
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are moving at the expected rates.
@@ -495,7 +513,7 @@ simulants are moving at the expected rates.
 2.3.5 Component 9: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each household id should be associated with a postal address, and when
+Each household id should be associated with a residential address, and when
 people move, they should often move into previously vacated
 households, so that there are distinct households which have had the
 same residential address at different times.  We hypothesize that this
@@ -557,9 +575,24 @@ which shows (p. 31) how people in rural counties are hard to match
 from 2010 Decennial Census
 <https://www.census.gov/newsroom/blogs/director/2010/02/the-four-principal-ways-we-conduct-the-census.html>`_
 there is 9% of the US population where the mail is not delivered to
-the residence uniformly.  For these households, we might want to capture
-different addresses in the decennial census simulated output and the
-tax return simulated output.
+the residence uniformly.  For these households, we might want to
+capture different addresses in the decennial census simulated output
+and the tax return simulated output.  We can represent this by
+mantaining a *mailing address* for each household that is sometimes
+different from residential address for the household's housing unit.
+A simple distinction would be to make the mailing address a P.O. Box
+for 9% of the households, although it would be great to have this vary
+with location, age, sex, race/ethincity, and income.  When households
+move, this would always result in a new residential address (because
+of the new housing unit), but sometimes not make a change to the PO
+Box (especially if the move was not far, e.g. within the same PUMA).
+For our minimal model, we will not include this, however, and I will
+try to get more info about how important this challenge to matching is
+in Census Bureau applications.  I believe that I will learn it is
+important, however, because decennial census will know a residential
+address but IRS and Medicare will know a mailing address, which will
+making linking hard for the population without mail delivery to
+residence.
 
 
 **Verification and validation strategy**: to verify this approach, we
@@ -656,6 +689,16 @@ We might want to eventually include nicknames and suffixes like Jr. and III.
     for (age,sex), df_age in df_population.groupby(['age', 'sex']):
         df_population.loc[df_age.index, 'first_name'] = random_names(age, sex, len(df_age))
         df_population.loc[df_age.index, 'middle_name'] = random_names(age, sex, len(df_age))
+
+It could be valuable to include correlation between first and last
+names.  There will be a little from the strategy described above, but
+we could develop a strategy to more explicitly model it.  One approach
+is outlined here, but we will not use it in our minimal model.  With a
+large corpus of full names, (1) derive an empirical correlation matrix
+of soundex of first name and soundex of last name; and then use the
+sources described above to create conditional samplers for first name
+and last name based on soundex.  Perhaps measure of success is to look
+at entropy of character n-gram distribution.
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 names; we can also look at the
@@ -778,6 +821,13 @@ fastLink article (APSR 2019) has five dimensions of data error: degree
 of overlap, size balance, missingness mechanism, amount of missing
 data, and measurement error. Some duplicates would be realistic too.
 
+GeCO also has some capacity for including nicknames, which seems
+relevant.  A NORC report titled *Assessment of the U.S. Census
+Bureau's Person Identification Validation System* includes some common
+non-names in an appendix, which would be good to use in simulated
+survey responses and perhaps in the decennial census simulation as
+well.
+
 I also have an idea for audio distortion based on text-to-speech; use
 Tacotron to generate spectragrams of names and then identify the names
 that are similar in speech-space.  This could also be useful to run
@@ -794,6 +844,16 @@ http://datadictionary.naaccr.org/default.aspx?c=10&Version=22#1830
 Florida Cancer Registry uses https://www.accurint.com/ to confirm
 potential matches. And this pdf shows the data elements they maintain:
 https://fcds.med.miami.edu/downloads/datarequest/LinkageExample.pdf
+
+Speaking of the Florida Cancer Registry experience, Alexandersson
+suggests a mechanism for adding SSN noise: 1% of entries have some
+transposed digits (e.g. wrongly typing 12 instead of 21 or 65 instead
+of 56); 0.5% use wrong (e.g. spouse) SSN.
+
+Anders Alexandersson suggests addresses with typographic errors would
+be good (or is it phonetic errors?) A study of exact linkage on some
+large databases relevant to voting in Texas identified address numeric
+data as more accurate than the street name part.
 
 
 2.3.10 Additional Components (14-16)
