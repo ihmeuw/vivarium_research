@@ -349,6 +349,10 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 2.1.0
      - Wasting and stunting, with PEM. Results stratified by wasting
      - [1] Still have the `overstimation of mortality rates of our causes <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.0_cause_model_validation.ipynb>`_. [2] `Wasting risk exposure and PEM prevalence looks good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.0_cause_model_validation.ipynb>`_. [3] `Wasting risk effects on incidence rates look good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/wasting_validation_model_2.1.0.ipynb>`_. [4] No deaths due to PEM in deaths count data... also wasn't expecting outputs of PEM transition counts. **Keep stratification by wasting for now until we finish validating PEM deaths**
+   * - 2.1.1
+     - Experimental fixes to the excess mortality issue
+     - [1] `Overestimation of EMR fixed! <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.1_cause_model_validation.ipynb>`_ For both locations. [2] PEM CSMR is underestimated relative to artifact, although YLDs/YLLs/DALYs are validating to GBD, so seems to be ok. **Can remove wasting stratification moving forward**
+
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -361,18 +365,10 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Potential timestep issue, as identified with CIFF
     - Researchers to investigate solutions
     - TBD
-  * - Underestimation of LRI burden in neonatal age groups
+  * - Underestimation of LRI burden in neonatal age groups and other issues for diarrheal diseases
     - Appears to be a result of incompatible incidence, remission, and prevalence as estimated by GBD. There was birth prevalence of LRI in GBD 2017 that was removed for GBD 2019. Including a birth prevalence in our model would allow us to validate to GBD metrics, but would be inconsistent with GBD assumptions.
     - Researchers to determine which validation targets are most important to hit and strategize how to achieve that.
     - TBD
-  * - Overestimation of excess mortality rates for diarrhea, LRI, and measles by ~5 times
-    - Unknown. Was introduced with model 2.0.0 (not present in model 1.0.0 or 1.0.1). Does not appear to be due to stunting or wasting risk effects. Does not appear to affect YLLs.
-    - SWEs to continue to investigate (maybe have figured it out... launched a new run to check)
-    - In progress
-  * - PEM is not included as a cause in the deaths.csv count data file for model v2.1.0
-    - I think this is likely a results processing bug rather than a model bug?
-    - SWEs to continue to investigate.
-    - Soon, but lower priority than excess mortality
 
 .. _ivironU54.4:
 
