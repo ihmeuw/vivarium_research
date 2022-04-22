@@ -15,15 +15,19 @@ The hemoglobin model in GBD 2019 serves as the underlying basis for both the ane
 
 [Kassebaum-et-al-2016-hemoglobin-2019]_
 
-The hemoglobin distribution is estimated from a variety of sources reported as either anemia prevalence and/or mean and standard deviation hemoglobin concentration; altitude adjustments were made when appropriate and possible, although no smoking adjustments were performed. For data sources that *only* included pregnant women, data were crosswalked to the general population using MR-BRT such that pregnant women were matched to non-pregnant women in the same age and location group and the ratios of their hemoglobin concentrations were assessed. The resulting adjustment factor was 0.92 (95% CI: 0.86 - 0.98), such that the hemoglobin level of pregnant women is 0.92 times that of women in the general population. 
+The hemoglobin distribution is estimated from a variety of sources reported as either anemia prevalence and/or mean and standard deviation hemoglobin concentration; altitude adjustments were made when appropriate and possible, although no smoking adjustments were performed. See notes on estimation among women of reproductive age below.
 
-.. note:: 
+.. note::
 
-	The pregnancy adjustment factor was used to crosswalk between the pregnant population and the general population in GBD (both for transformation of input data specific to pregnant women and for calculation of pregnancy-specific anemia prevalence using pregnancy-specific thresholds), however, the pregnancy adjustment factor appears to be derived from comparisons of pregnant women to non-pregnant women, which may be a limiation of this approach in that it does not account for differences in the prevalence of pregnancy in different populations; however, because this prevalence is generally low, it is likely minimally impactful.
+  Estimates of mean and standard deviation hemoglobin among women of reproductive age are specific to the *non-pregnant* population rather than women of reproductive age as a whole inclusive of the pregnant and lactating population.
+
+  This is because pregnancy/lactation is very influential to hemoglobin and most input data sources will exclude pregnant/lactating individuals. Input data sources that are specific to PLW were crosswalked to the reference population of non-pregnant WRA using the pregnancy adjustment factor (defined below) and then included in the model.
+
+  Then, the hemoglobin distribution among PLW is modeled separately, compared to the pregnancy-specific anemia thresholds, and paired with the estimates among non-pregnant women in a weighted average for the final estimates of anemia impairment among all WRA.
 
 The hemoglobin distribution was modeled in three steps:
 
-1. ST-GPR models of mean and standard deviation hemoglobin concentration (including pregnancy adjustments as described above). 
+1. ST-GPR models of mean and standard deviation hemoglobin concentration 
 
     Covariates for the mean model included Age-specific Fertility Rate, HIV Prevalence, SEV for Child underweight, SEV for Child wasting, Malaria Incidence, Haemoglobin C (sickle type C) trait (all ages), Haemoglobin S (sickle type S) trait (all ages), Sociodemographic Index, SEV for Impaired kidney function, Healthcare Access and Quality index, Modern contraception prevalence, and 50th percentile of haemoglobin (pooled across all microdata sources). 
 
@@ -59,7 +63,7 @@ The hemoglobin distribution was modeled in three steps:
 
 3. Generation of ensemble distributions for each location/year/age/sex group
 
-    Because anemia thresholds depend on pregnancy status, hemoglobin distributions were modeled separately for pregnant and non-pregnant females. The pregnancy model was identical to the non-pregnancy model except that the mean and variance were adjusted by the adjustment factor. The prevalence of anemia in pregnant women and non-pregnant women were then weighted by the pregnancy rate and combined to estimate population anemia prevalence. See the table below for the exact adjustment factors used.
+    Because anemia thresholds depend on pregnancy status, hemoglobin distributions were modeled separately for pregnant and non-pregnant females. The pregnancy model was identical to the non-pregnancy model except that the mean and variance were adjusted by the adjustment factor. The prevalence of anemia in pregnant women and non-pregnant women were then weighted by the pregnancy rate and combined to estimate population anemia prevalence among all women of reproductive age. See the table below for the exact adjustment factors used.
 
 	The pregnancy prevalence was represented as :math:`(ASFR + SB) \times 46/52`, where :math:`ASFR` is the location- and age-specific fertility rate, :math:`SB` is the location-specific stillbirth rate, and :math:`46/52` represents 40 weeks of preganancy and 6 weeks of post-pregnancy lactation out of 52 weeks in one year.
 
@@ -74,9 +78,17 @@ The hemoglobin distribution was modeled in three steps:
    * - Hemoglobin standard deviation
      - 1.032920188
 
+.. warning:: 
+
+  It appears that there was an error in the GBD 2019 code to estimate the anemia impairment envelope from the ensemble distribution of hemoglobin concentration that applied the *inverse* of the pregnancy adjustment factor to mean hemoglobin of PLW. It appears that this error was incorporated in the estimates of anemia impairment prevalence among women of reproductive age. This results in an overestimation of hemoglobin and an underestimation of anemia prevalence among PLW and WRA, particularly for age/location groups with high fertility rates.
+
+  `A demonstration of this finding is shown for select countries here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/R%20code%20comparisons/R%20code%20prevalence%20plotting.ipynb>`_.
+
 .. note::
 
   These adjustment factors were obtained from the hemoglobin code hosted `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope/fit_ensemblemv2p_parallel.R>`__. The code here does not utilize uncertainty around these adjustment factors, although the methods appendix reports the pregnancy adjustment factor as 0.92 (0.86 - 0.98)
+
+  Additionally, the GBD code does *not* utilize the pregnancy adjustment factor for hemoglobin standard deviation in their estimation of anemia prevalence among women of reproductive age.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -121,6 +133,14 @@ Assumptions and Limitations
 Data Description Tables
 +++++++++++++++++++++++
 
+Hemoglobin values should be sampled from the vivarium `risk distribution.EnsembleDistribution` function according to the parameter values defined in the table below. 
+
+.. note::
+
+  **Not necessary for success...**
+
+  Hemoglobin values should be non-zero positive numbers and should also be biologically plausible. The lowest recorded hemoglobin value observed following massive blood loss [Spiess-2015]_ was 6 g/L and the lowest hemoglobin value observed in a hemodynamically stable patient not requiring cardiac or supplemental oxygen support was 14 g/L [Chai-et-al-2021]_). **The probability of sampling a hemoglobin value less than 6 g/L is low, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 6 grams per liter.**
+
 .. list-table:: Distribution Parameters
   :widths: 15, 30, 10
   :header-rows: 1
@@ -147,106 +167,13 @@ Data Description Tables
     - 0.6
     - 
 
-**The following python code provides functions to accurately sample from the ensemble distribution with the hemoglobin-specific parameters defined above** 
-
-.. code-block:: python
-
-  import numpy as np
-  import pandas as pd
-  import scipy
-
-  def _gamma_ppf(propensity, mean, sd):
-  """Returns the quantile for the given quantile rank (`propensity`) of a Gamma
-  distribution with the specified mean and standard deviation.
-  """
-      shape = (mean / sd)**2
-      scale = sd**2 / mean
-      return scipy.stats.gamma(a=shape, scale=scale).ppf(propensity)
-
-  def _mirrored_gumbel_ppf(propensity, mean, sd):
-  """Returns the quantile for the given quantile rank (`propensity`) of a mirrored Gumbel
-  distribution with the specified mean and standard deviation.
-  """
-      x_max = 220 # data_values.HEMOGLOBIN_DISTRIBUTION.EXPOSURE_MAX
-      _alpha = x_max - mean - (sd * np.euler_gamma * np.sqrt(6) / np.pi)
-      scale = sd * np.sqrt(6) / np.pi
-      tmp = _alpha + (scale*np.euler_gamma)
-      alpha = _alpha + x_max - (2*tmp)
-      return scipy.stats.gumbel_r(alpha, scale=scale).ppf(propensity)
-
-  # Called `viv_calc_iron_nbs` in Kjell's notebook
-  def sample_from_hemoglobin_distribution(prop_dist, propensity, exposure_parameters):
-  """
-  Returns a sample from an ensemble distribution with the specified mean and
-  standard deviation (stored in `exposure_parameters`) that is 40% Gamma and
-  60% mirrored Gumbel. The sampled value is a function of the two propensities
-  `prop_dist` (used to choose whether to sample from the Gamma distribution or
-  the mirrored Gumbel distribution) and `propensity` (used as the quantile rank
-  for the selected distribution).
-  """
-      #propensity = clip(propensity)
-      exposure_data = exposure_parameters
-      mean = exposure_data['mean']
-      sd = exposure_data['sd']
-
-      gamma = prop_dist < 0.4
-      gumbel = ~gamma
-      ret_val = pd.Series(index=prop_dist.index, name='value')
-      ret_val.loc[gamma] = _gamma_ppf(propensity.loc[gamma], mean, sd)
-      ret_val.loc[gumbel] = _mirrored_gumbel_ppf(propensity.loc[gumbel], mean, sd)
-      return ret_val
-
 .. note::
 
-  While not explicitly enforced by the code above, all hemoglobin values should be non-zero positive numbers and should also be biologically plausible. The lowest recorded hemoglobin value observed following massive blood loss [Spiess-2015]_ was 6 g/L and the lowest hemoglobin value observed in a hemodynamically stable patient not requiring cardiac or supplemental oxygen support was 14 g/L [Chai-et-al-2021]_). **The probability of sampling a hemoglobin value less than 6 g/L is low, but if it occurs, the value should be resampled until it is a positive number or clipped to a value of 6 grams per liter.**
+  In the iterative process of validating our hemoglobin model, there was concern that the vivarium `risk_distributions.EnsembleDistribution` python function did not properly replicate the ensemble distribution R function used by GBD (`hosted here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`_, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files). 
 
-  `This notebook <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`_ validates these functions included in the code block above compared to the R code utilized by the GBD anemia team (included below) and across ensemble distribution sampling strategies. Notably, the updated ensemble distribution sampling strategy (shown in the code block above and in the :code:`viv_calc_iron_nbs` function in the linked notebook) follow the correct strategy for :ref:`sampling from an ensemble distribution <vivarium_best_practices_ensemble_distributions>`, which has already been incorporated into Vivarium's :code:`risk_distributions` module in the `.ppf method of the EnsembleDistribution class <https://github.com/ihmeuw/risk_distributions/blob/6d374a4d506c315422338946010c2612fdac5413/src/risk_distributions/risk_distributions.py#L495>`_ (which is misleadingly named because this sampling method is not the same thing as the quantile function...).
+  We tried to re-define the python distribution in `this notebook <https://github.com/ihmeuw/vivarium_gates_lsff/blob/main/tests/lsff_iron_exposure.ipynb>`_.
 
-
-Below is R code written to randomly sample hemoglobin concentration values from the hemoglobin distribution parameters and constants defined in the tables above. Additionally, the code block contains functions that will evaluate the proportion of the distribution below a given threshold. This code was adapted from the GBD stash code found `here <https://stash.ihme.washington.edu/projects/MNCH/repos/anemia/browse/model/envelope>`__, specifically the *DistList_mv2p.R* and *fit_ensemblemv2p_parallel.R* files. 
-
-.. code-block:: R
-
-  # define constants
-  XMAX = 220
-  EULERS_CONSTANT = 0.57721566490153286060651209008240243104215933593992
-  w = c(0.4,0.6)
-
-  # import standard R functions for the gamma distributions (pgamma and rgamma)
-  pacman::p_load(data.table,actuar)
-
-  # function to calculate gamma distribution parameters from mean and variance
-  gamma_mv2p = function(mn, vr){
-    list(shape = mn^2/vr,rate = mn/vr)}
-
-  # function to calculate mirror gumbel distribution parameters from mean and variance 
-  mgumbel_mv2p = function(mn, vr){
-    list(
-      alpha = XMAX - mn - EULERS_CONSTANT*sqrt(vr)*sqrt(6)/pi,
-      scale = sqrt(vr)*sqrt(6)/pi)}
-      
-  # function to calculate area under curve below threshold q for mirror gumbel distribution
-  pmgumbel = function(q, alpha, scale, lower.tail){ 
-    #NOTE: with mirroring, take the other tail
-    pgumbel(XMAX-q, alpha, scale, lower.tail=ifelse(lower.tail,FALSE,TRUE))}
-
-  # function to calculate area under curve of hemoglobin ensemble distribution using the functions defined above
-    # q = hemoglobin threshold
-    # mn = mean hemoglobin concentration
-    # vr = hemoglobin variance (standard deviation squared)
-    # w = list of ensemble distribution weights c(gamma_weight, mirror_gumbel_weight)
-  ens_mv2prev <- function(q, mn, vr, w){
-    x = q
-
-    ##parameters
-    params_gamma = gamma_mv2p(mn, vr)
-    params_mgumbel = mgumbel_mv2p(mn, vr)
-
-    ##weighting
-    prev = sum(
-      w[1] * pgamma(x, params_gamma$shape, params_gamma$rate), 
-      w[2] * pmgumbel(x, params_mgumbel$alpha, params_mgumbel$scale, lower.tail=T))
-    prev}
+  However, it appears that the functions from the above notebook do not in  fact validate to the functions used in GBD after all and that the `risk_distribution.EnsembleDistribution` function did, `as shown in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Distribution%20comparisons.ipynb>`_. We have verified in a nano-sim that using the vivarium `risk_distribution.EnsembleDistribution` python function *and* the erroneous inverse pregnancy adjustment factor used by GBD acceptably validates to the GBD anemia impairment prevalence among women of reproductive age (`as shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Inverse%20adjustment%20factor.ipynb>`_), indicating that using the vivarium `risk_distributions.EnsembleDistribution` python function to model the hemoglobin ensemble distribution is appropriate.
 
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
@@ -281,12 +208,18 @@ When the pregnancy adjustment is applied:
 - mean(pregnant_population_samples) / mean(general_population_samples) ~= 0.92
 - standard_deviation(pregnant_population_samples) / standard_deviation(general_population_samples) ~= 1.03
 
+.. note::
+
+  Given the error in the application of the pregnancy adjustment factor in the estimation of anemia impairment prevalence among WRA for GBD 2019, we will *not* use GBD 2019 estimates as validation targets. Rather, we have calculated custom validation targets using the same methodology as GBD 2019, but with the appropriate application of the pregnancy adjustment factor. `These custom validation targets are hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/hgb_validation_targets>`_ (currently targets are saved for the locations in the IV iron simulation, but code to generate targets for additional locations is also available in this folder.)
+
 At the population distribution level:
 
-- ens_mv2prev(upper_mild_threshold) ~= total anemia impairment prevalence
-- ens_mv2prev(upper_mild_threshold) - ens_mv2prev(lower_mild_threshold) ~= mild anemia impairment prevalence
-- ens_mv2prev(upper_moderate_threshold) - ens_mv2prev(lower_moderate_threshold) ~= moderate anemia impairment prevalence
-- ens_mv2prev(upper_severe_threshold) - ens_mv2prev(lower_severe_threshold) ~= severe anemia impairment prevalence
+  For each population group in [PLW, non-pregnant WRA, all WRA including PLW]:
+
+  - percent of population below mild threshold ~= custom total anemia impairment prevalence
+  - percent of population between mild and moderate thresholds ~= custom mild anemia impairment prevalence
+  - percent of population between moderate and severe thresholds ~= custom moderate anemia impairment prevalence
+  - percent of population below severe threshold - ens_mv2prev(lower_severe_threshold) ~= custom severe anemia impairment prevalence
 
 References
 ----------
