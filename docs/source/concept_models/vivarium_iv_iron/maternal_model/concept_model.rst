@@ -128,7 +128,7 @@ Vivarium Intravenous Iron - Women of reproductive age
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A (no burn-in). NOTE: may need to perform burn-in period to properly assign maternal disorders YLDs.
+    - January 1, 2020 (note: burn-in is to track birth data for the child sim, not for maternal outcomes)
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start
@@ -238,12 +238,6 @@ Including,
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 * :ref:`Pregnancy model <other_models_pregnancy>`
-
-.. todo::
-
-  Add update to the pregnancy model to represent the "post-birth maternal disorders states" implemented by the software engineers
-
-* Cognition
 
 4.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -588,7 +582,8 @@ The following ouputs should be a table including the following data for each liv
   - Random seed
   - Date of birth
   - Infant sex
-  - Birthweight exposure 
+  - :ref:`Joint categorical maternal BMI/anemia exposure <2019_risk_exposure_maternal_bmi_hgb>`
+  - Birthweight exposure (either as sampled from GBD or post-adjustment due to the :ref:`correlation between maternal anemia/BMI and birhtweight <2019_risk_correlation_maternal_bmi_hgb_birthweight>`, in which case we would not need the joint categorical maternal BMI/anemia exposure above)
   - Gestational age exposure
   - Maternal supplementation coverage
   - Maternal antenatal IV iron coverage
