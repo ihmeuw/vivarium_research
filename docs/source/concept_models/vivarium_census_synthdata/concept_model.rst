@@ -340,57 +340,29 @@ quarters population.
 
 This component will follow the basic approach of the age-specific
 fertility model that we have had for a long time, but never used
-seriously. But because of the data and the application, we will apply
-fertility at the household level, instead of the individual simulant
-level. Each household will have a probability of adding a newborn
-simulant at each time step, derived from the age- and
-race/ethnicity-specific fertility rates calculated from ACS. (By
-calculating from ACS instead of taking from GBD we can represent
-race/ethnicity and perhaps in the future also include twin-ship, and
-geographic variation at the PUMA level).
+seriously. But because of the data and the application, we will also
+propagate information from the household.  Each simulant will have a
+probability of adding a newborn simulant at each time step, derived
+from the age-specific fertility rate for USA.
 
 The race/ethnicity of the simulants added by the fertility model will
-be derived from the race/ethnicity of the household members; the
-household id, geography attribute, street address, and surname will
-also be derived from the parents.
+be derived from the race/ethnicity of parent; the household id,
+geography attribute, street address, and surname will also be derived
+from the parent.  (This approach identifies only one parent, and that
+might be sufficient for now, although as I learn more about the
+specific challenges of Census PRL, I will find out if we need to
+revisit this and keep track of dad as well as moms).
 
-Code for calculating age-, race/ethnicity-specific fertility rate:
-
-.. sourcecode:: python
-
-    # make household-level fertility rates
-    def extract_household_info(df):
-        assert np.all(df.household_id == df.household_id.iloc[0])
-        t = df.query('relshipp == 20').iloc[0]
-
-        result = {}
-        result['hh_age'] = t.age
-        result['hh_race_eth'] = t.race_eth
-
-        result['age_zero_present'] = np.any(df.age == 0)
-        result['hh_size'] = len(df)
-        result['weight'] = t.weight # FIXME: load and use household weights here, instead of this
-
-        return pd.Series(result)
-
-    df_hh = acs_hh_only.query(location_str).groupby('household_id').apply(extract_household_info)
-    def weighted_mean(df, col):
-        return (df[col]*df.weight).sum() / df.weight.sum()
-    
-    df_hh.groupby(['age_group', 'hh_race_eth']).apply(weighted_mean, col='age_zero_present')
-
-A stretch goal would be a fertility model that included additional
-household parameters in the probability; number of children, ages of
-children, structure of adult household members (including relationship
-structure might be helpful in this, too). We will return to this in
-the future, perhaps.
+Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
+<https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
 Multiparity --- make twins with probability from ACS, about 2.5%, to
 be computed more precisely.  See Section (16) for additional details.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
-new simulants are being added at the expected rate.
+new simulants are being added at the expected rate, and with
+attributes that match the parent.
 
 .. _census_prl_mortality:
 
