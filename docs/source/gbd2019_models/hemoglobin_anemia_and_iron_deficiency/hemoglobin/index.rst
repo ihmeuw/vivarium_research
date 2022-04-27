@@ -175,6 +175,8 @@ Hemoglobin values should be sampled from the vivarium `risk distribution.Ensembl
 
   However, it appears that the functions from the above notebook do not in  fact validate to the functions used in GBD after all and that the `risk_distribution.EnsembleDistribution` function did, `as shown in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Distribution%20comparisons.ipynb>`_. We have verified in a nano-sim that using the vivarium `risk_distribution.EnsembleDistribution` python function *and* the erroneous inverse pregnancy adjustment factor used by GBD acceptably validates to the GBD anemia impairment prevalence among women of reproductive age (`as shown here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Inverse%20adjustment%20factor.ipynb>`_), indicating that using the vivarium `risk_distributions.EnsembleDistribution` python function to model the hemoglobin ensemble distribution is appropriate.
 
+  HOWEVER, due to runtime issues with the `risk_distribution.EnsembleDistribution` function, we will instead use the :code:`_mirrored_gumbel_ppf_2017` function `defined in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Distribution%20comparisons.ipynb>`_ for the :ref:`IV iron maternal simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>`.
+
 Pregnancy Adjustment
 ^^^^^^^^^^^^^^^^^^^^
 
