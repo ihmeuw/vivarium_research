@@ -325,12 +325,12 @@ Vivarium needs to know the population size that it will initialize
 before a simulation starts running. Because we would like to set a
 number of households and then sample them, we don't have a total
 population count to give to Vivarium.  As a work-around solution we
-will fix a target number of people, sample households until we get
-within 17 of this number (17 is the largest household size in ACS),
-and then mark the last 1-17 people as untracked -- which isn't so much
-memory to drag around. Drawback this leaves both the number of
-households and the number of simulants as variable (but not that
-variable).
+will fix a target number of people, sample households until we exceed
+this number, discare the last household (which will have at most 17
+people, since that is the largest household size in ACS), and then
+mark the last 1-17 people as untracked -- which isn't so much memory
+to drag around. Drawback this leaves both the number of households and
+the number of simulants as variable (but not that variable).
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -422,13 +422,14 @@ complex is necessary to have a successful synthetic data set for
 testing PRL algorithms, so we will keep it quite simple.
 
 These notes on ACS data sources on migration could be useful for the
-more complex rates in the future.  For now, let's make both households
-and simulants (who are not the reference person) move at a rate of 15
-moves per 100 person-years (independently).  To further keep things
-simple, we will for now not have the reference person every move in a
-non-household migration.  When a non-reference person moves, we will
-update their relationship to the reference person to be 36 - Other
-non-relative (for simplicity, for now).
+more complex rates in the future.  For now, let's make households move
+at a rate of 15 moves per 100 household-year and simulants who are not
+the reference person move at a rate of 15 per 100 person-years
+(independently).  To further keep things simple, we will for now not
+have the reference person ever move in a non-household migration.
+When a non-reference person moves, we will update their relationship
+to the reference person to be 36 - Other non-relative (for simplicity,
+for now).
 
 ACS notes: Based on age, sex, race/ethnicity, and geography, can
 calculate the probability of moving from ACS, as the weighted average
@@ -512,11 +513,12 @@ simulants are moving at the expected rates.
 2.3.5 Component 9: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each household id should be associated with a residential address, and when
-people move, they should often move into previously vacated
-households, so that there are distinct households which have had the
-same residential address at different times.  We hypothesize that this
-will present a relevant challenge for PRL methods in practice.
+Each household id should be associated with a residential address, and
+(in a future, more complicated model) when people move, they should
+often move into previously vacated households, so that there are
+distinct households which have had the same residential address at
+different times.  We hypothesize that this will present a relevant
+challenge for PRL methods in practice.
 
 It is not clear how important it is to have housing unit address
 correspond to geography, and I am trying to gauge how much effort to
@@ -576,22 +578,22 @@ from 2010 Decennial Census
 there is 9% of the US population where the mail is not delivered to
 the residence uniformly.  For these households, we might want to
 capture different addresses in the decennial census simulated output
-and the tax return simulated output.  We can represent this by
-mantaining a *mailing address* for each household that is sometimes
-different from residential address for the household's housing unit.
-A simple distinction would be to make the mailing address a P.O. Box
-for 9% of the households, although it would be great to have this vary
-with location, age, sex, race/ethincity, and income.  When households
-move, this would always result in a new residential address (because
-of the new housing unit), but sometimes not make a change to the PO
-Box (especially if the move was not far, e.g. within the same PUMA).
-For our minimal model, we will not include this, however, and I will
-try to get more info about how important this challenge to matching is
-in Census Bureau applications.  I believe that I will learn it is
-important, however, because decennial census will know a residential
-address but IRS and Medicare will know a mailing address, which will
-making linking hard for the population without mail delivery to
-residence.
+and the tax return simulated output.  We can (in a future, more
+complicated model) represent this by mantaining a *mailing address*
+for each household that is sometimes different from residential
+address for the household's housing unit.  A simple distinction would
+be to make the mailing address a P.O. Box for 9% of the households,
+although it would be great to have this vary with location, age, sex,
+race/ethincity, and income.  When households move, this would always
+result in a new residential address (because of the new housing unit),
+but sometimes not make a change to the PO Box (especially if the move
+was not far, e.g. within the same PUMA).  For our minimal model, we
+will not include this, however, and I will try to get more info about
+how important this challenge to matching is in Census Bureau
+applications.  I believe that I will learn it is important, however,
+because decennial census will know a residential address but IRS and
+Medicare will know a mailing address, which will making linking hard
+for the population without mail delivery to residence.
 
 
 **Verification and validation strategy**: to verify this approach, we
