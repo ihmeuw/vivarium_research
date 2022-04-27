@@ -487,6 +487,23 @@ Medicare for most nursing home, but people living in dorms, especially
 who don't file their own tax returns might not be PIK-able.)  We will
 not include GQ in our initial (sub-minimal) migration model.
 
+But to summarize, for our initial implementation, here are the
+simplifying assumptions that we have included:
+
+#. each household will have one address
+
+#. when a household moves, we will create a new address for them. no
+   one will move back into that old address.
+
+#. each time an individual moves, they move into an existing household
+   / household id. this household is chosen at random out of all
+   households excluding their current one
+
+#. each time an individual moves into an existing household, they gain
+   the relationship to head of household "Other nonrelative"
+
+#. the head of household cannot move to a new household
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are moving at the expected rates.
