@@ -156,6 +156,11 @@ Chris Murray and Theo Vos suggested that this approach be used for estimating th
 
 Notably, this alternative approach was found to estimate similar (but slightly greater) intervention impact to the standard approach using the location-specific TMREL exposure estimation approach specific and exposure parameters specific to the pregnant and lactating population in the project hosted in `this repository <https://github.com/ihmeuw/sim_sci_maternal_anemia>`_.
 
+Details on the CHERG iron report
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The CHERG iron report (available at :code:`J:\DATA\Incoming Data\MULTINATIONAL_REPORTS\CHERG_IRON_REPORT\cherg_iron.pdf`) is a meta-analysis of the association between iron deficiency and maternal mortality ratio. Since radomized trial evidence was lacking or weak, prospective observational studies provided the best data available and were included in the meta-analysis. Hemoglobin was selected as the exposure since "hardly any" studies assessed other measures of iron deficiency (p. 14). They only included studies with a hemoglobin range between 5-12 g/dL. After searching/screening, 10 articles were included in the meta-analysis, including studies from Malaysia, Nigeria, India (n=3), Nigeria (n=3), Ghana, and Indonesia.
+
 Dietary Iron Deficiency
 +++++++++++++++++++++++
 
@@ -168,6 +173,10 @@ Vivarium Modeling Strategy
 
 Maternal Disorders
 ++++++++++++++++++++
+
+.. todo::
+
+  Update this strategy so that the TMREL is equal to a hemoglobin level of 120 g/L or greater. This will require a custom PAF calculation -- we should be able to use the PAF calculation code above and update it to an ensemble distribution. 
 
 The recommended approach for modeling the relationship between hemoglobin and maternal disorders is described in the `Alternative Approach`_ section in this document. Therefore, there is no need to use the PAF in order to apply the relative risks.
 
