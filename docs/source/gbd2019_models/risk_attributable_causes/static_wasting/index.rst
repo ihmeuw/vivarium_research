@@ -29,11 +29,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _2020_risk_exposure_static_wasting:
+.. _2019_risk_exposure_static_wasting:
 
-===========================================================
-Static Child Wasting Model and Protein Energy Malnutrition
-===========================================================
+====================================================================
+GBD 2019 Static Child Wasting Model and Protein Energy Malnutrition
+====================================================================
 
 .. contents::
   :local:
@@ -41,10 +41,9 @@ Static Child Wasting Model and Protein Energy Malnutrition
 Overview
 ++++++++
 
-This page contains information pertaining to the *static* joint risk-cause wasting model. An :ref:`alternative dynamic transition model of wasting exposure is described elsewhere <2020_risk_exposure_wasting_state_exposure>`. Given that wasting is generally considered an acute rather than chronic condition, it is more appropriate to model it as a dynamic transition model. However, a dynamic exposure model of child wasting is not modeled by GBD and is complex and data intensive. As a simplication to the :ref:`dynamic transition wasting model <2020_risk_exposure_wasting_state_exposure>` used for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, this document will describe a propensity-based *static* child wasting exposure modeling strategy similar to the modeling strategy for :ref:`child stunting exposure <2020_risk_exposure_child_stunting>`.
+This page contains information pertaining to the *static* joint risk-cause wasting model. An :ref:`alternative dynamic transition model of wasting exposure (specific to GBD 2020) is described elsewhere <2020_risk_exposure_wasting_state_exposure>`. Given that wasting is generally considered an acute rather than chronic condition, it is more appropriate to model it as a dynamic transition model. However, a dynamic exposure model of child wasting is not modeled by GBD and is complex and data intensive. As a simplication to the :ref:`dynamic transition wasting model <2020_risk_exposure_wasting_state_exposure>` used for the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, this document will describe a propensity-based *static* child wasting exposure modeling strategy for 2019 similar to the modeling strategy for :ref:`GBD 2020 child stunting exposure <2020_risk_exposure_child_stunting>`.
 
-We note that this model is built on the GBD 2020 risk exposure model for wasting, and the 
-GBD 2020 protein energy malnutrition (PEM) cause model. GBD stratifies wasting 
+GBD stratifies wasting 
 into four categories: TMREL, mild, moderate, and severe wasting. All PEM cases 
 are attributed to moderate and severe wasting, making PEM a PAF-of-1 model. 
 Under the GBD framework, wasting is additionally a risk for measles, diarrheal diseases, 
@@ -69,12 +68,12 @@ Wasting background
 
 See description on the :ref:`dynamic transition wasting exposure model document <2020_risk_exposure_wasting_state_exposure>`.
 
-Wasting Exposure in GBD 2020
+Wasting Exposure in GBD 2019
 ++++++++++++++++++++++++++++
 
 Child wasting REI ID = 240
 
-.. list-table:: Wasting categories in GBD 2020
+.. list-table:: Wasting categories in GBD 2019
   :header-rows: 1
 
   * - Category
@@ -98,7 +97,7 @@ Child wasting REI ID = 240
     - Greater than -1 WHZ
     - TMREL
 
-.. list-table:: Wasting Restrictions 2020
+.. list-table:: Wasting Restrictions 2019
    :widths: 10 10 20
    :header-rows: 1
 
@@ -111,24 +110,24 @@ Child wasting REI ID = 240
    * - Female only
      - False
      -
-   * - Prevalence age group start
+   * - Risk exposure age group start
      - Early Neonatal
      - age_group_id = 2. This is the earliest age group for which the wasting risk exposure estimates nonzero prevalence.
-   * - Burden age group start
-     - 28 days - 5 months
-     - age_group_id = 388. This is the earliest age group for which there exist wasting RRs.
-   * - Age group end
-     - 2 to 4
-     - age_group_id = 34
+   * - Risk effects age group start
+     - Post neonatal
+     - age_group_id = 4. This is the earliest age group for which there exist wasting RRs.
+   * - Age group end (risk exposure and effects)
+     - 1 to 4
+     - age_group_id = 5
 
-Protein Energy Malnutrition in GBD 2020
+Protein Energy Malnutrition in GBD 2019
 ++++++++++++++++++++++++++++++++++++++++++++
 
-PEM is a PAF-of-1 cause with child wasting in GBD 2020 among the unrestricted ages for child wasting. There are fatal and non-fatal components.
+PEM is a PAF-of-1 cause with child wasting in GBD 2019 among the unrestricted ages for child wasting. There are fatal and non-fatal components.
 
 .. image:: pem_cause_hierarchy.svg
 
-.. list-table:: PEM Restrictions 2020
+.. list-table:: PEM Restrictions 2019
    :widths: 10 10 20
    :header-rows: 1
 
@@ -148,8 +147,8 @@ PEM is a PAF-of-1 cause with child wasting in GBD 2020 among the unrestricted ag
      - False
      - 
    * - YLL age group start
-     - 1-5 months
-     - age_group_id = 388
+     - Post neonatal
+     - age_group_id = 4
    * - YLL age group end
      - 95 plus
      - age_group_id = 235
@@ -214,51 +213,43 @@ If a simulant is in wasting risk exposure :code:`cat1` or :code:`cat2`, they sho
     - Source
     - Note
   * - Wasting risk exposure, rei_id=240
-    - source='exposure', decomp_step='iterative', status='best', gbd_round_id=7, year='2020'
+    - source='exposure', decomp_step='step4', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='rei', gbd_id=240
     - 
   * - deaths_c387
-    - source='codcorrect', decomp_step='step3', version_id=260, gbd_round_id=7, year_id=2020
-    - Need to confirm most recently updated version with GBD
+    - source='codcorrect', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387
+    - 
   * - prevalence_c387
-    - source='como', decomp_step='iterative', status='best', gbd_round_id=7, year_id=2020
-    - Need to confirm most recently updated version with GBD
+    - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='cause', gbd_id=387, measure_id=5
+    - 
   * - prevalence_s{198,199,2033,2036}
-    - source='como', decomp_step='iterative', status='best', gbd_round_id=7, year_id=2020
-    - Need to confirm most recently updated version with GBD
-  * - population
-    - get_population, decomp_step='iterative', status='best', gbd_round_id=7, year_id=2020
-    - Need to confirm most recently updated version with GBD
-
-.. note::
-  
-  The 2020 Codecorrect model for PEM is not yet completed. Check here on central machinary to see latest codecorrect modeling.
-  https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2020+CodCorrect+Tracking
- 
-  and here for scheduled finishing time (currently scheduled to complete on july 30th- 12July2021)
-  https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2020+Release+1+Computation
-
-.. note::
-  
-  The 2020 Como model for PEM is not yet completed, with only 100 draw. Check here on central machinary to see latest como modeling.
-  https://hub.ihme.washington.edu/display/GBD2020/COMO+tracking
+    - source='como', decomp_step='step5', status='best', gbd_round_id=6, year_id=2019, gbd_id_type='sequela', gbd_id=[198,199,2033,2036], measure_id=5
+    - 
+  * - dw_s{198,199,2033,2036}
+    - Pull from GBD 2019
+    - Listed in the note below for easy reference
 
 .. note::
 
-  Note the following age group id differences between 2019 and 2020 for reference
+  .. list-table:: PEM sequelae disability weights from GBD
+    :header-rows: 1
 
-  **GBD 2020 age group ids:**
+    * - Disability weight
+      - Value
+      - Note
+    * - dw_s198
+      - 0.051 (0.031–0.079)
+      - Moderate wasting with edema (from the GBD 2019 risk appendix table S13)
+    * - dw_s2033
+      - 0
+      - Moderate wasting without edema (from the GBD 2019 risk appendix table S13)
+    * - dw_s199
+      - 0.128 (0.082–0.183)
+      - Severe wasting without edema (from the GBD 2019 risk appendix table S13)
+    * - dw_s2036
+      - 0.172 (0.115-0.238)
+      - Severe wasting with edema (from the GBD 2019 risk appendix table S13)
 
-    - early neonatal = 2 
-
-    - late neonataln = 3
-
-    - 1-5 months = 388 (previously 4 = postneonatal)
-
-    - 6-11 months = 389 (previously 4 = postneonatal)
-
-    - 12-23 months = 238 (previously 5 = 1-5 years)
-
-    - 2-4 years = 34 (previously 5 = 1-5 years)
+  NOTE: It looks like these sequelae descriptions are mislabeled if logical numbering patterns were followed, but I have confirmed they are correct despite this suspicion.
 
 Validation 
 ++++++++++

@@ -145,19 +145,7 @@ Validation and Verification Criteria
 Infant birthweight
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
-
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
-
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Birthweight restrictions
+.. list-table:: Restrictions for the effect of intervention on birthweight
   :widths: 15 15 15
   :header-rows: 1
 
@@ -165,17 +153,17 @@ Infant birthweight
     - Value
     - Note
   * - Male only
-    - 
+    - False
     - 
   * - Female only
-    - 
+    - False
     - 
   * - Age group start
-    - 
-    - 
+    - 164
+    - Birth
   * - Age group end
-    - 
-    - 
+    - 3
+    - Post-neonatal
   * - Other
     - 
     - 
@@ -187,22 +175,28 @@ Infant birthweight
   * - Population
     - Effect size
     - Note
-  * - 
-    - 
-    - 
-.. todo::
+  * - Infants
+    - +50 grams
+    - From BMGF optomistic target produt profile assumptions
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+The effect of antenatal IV iron on infant birthweight should be applied as an *additive shift* to a simulant's :ref:`low birthweight short gestation exposure value <2019_risk_exposure_lbwsg>` at birth.
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. todo::
+
+  List assumptions and limitations
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The mean birthweight stratified by intervention coverage (and additionally stratified by maternal anemia and BMI exposure that will confound the association, :ref:`as described here <2019_risk_correlation_maternal_bmi_hgb_birthweight>`) should replicate the expected effect size
+
+Child Growth Failure
++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+We will model the impact of the antenatal IV iron intervention on child growth failure mediated through birthweight in the exact same way as described in the child growth failure section of the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>` such that the :math:`S` shift in birthweight is equal to the total effect of all intervention coverage (or lack of baseline intervention coverage) on birthweight.
 
 References
 ------------

@@ -120,48 +120,7 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 
 .. image:: concept_model_full.svg
 
-This simulation will be built in a series of subgroups of model components that are summarized below.
-
-.. list-table:: Concept model versions
-  :widths: 5 5 20 10
-  :header-rows: 1
-
-  * - Model version
-    - Color
-    - Description
-    - Note
-  * - I
-    - Green
-    - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
-    - Women of reproductive age (WRA) population model only 
-  * - IIa
-    - Purple
-    - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
-    - Includes children under five in population model as well as WRA
-  * - IIb
-    - N/A
-    - Fertility component to familially link WRA to children under five.
-    - May be swapped in implementation order with model 2a
-  * - III
-    - Blue
-    - Postpartum depression and breastfeeding behaviors
-    - 
-  * - IV
-    - Yellow
-    - Non-standard outcomes, including stillbirths and cognition
-    - Inclusion of cognition outcome on hold until BMGF trial results are received
-  * - V
-    - Orange
-    - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
-    - On hold - not shown in diagram
-  * - VIa
-    - Red
-    - Fertility model that includes birth interval information
-    - On hold - not shown in diagram
-  * - VIb
-    - Red
-    - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
-    - On hold - not shown in diagram
+The green components in the concept model represent those specific to the maternal population and the purple components represent those specific to the population of children under five.
 
 .. _iviron3.1:
 

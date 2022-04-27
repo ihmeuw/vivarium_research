@@ -175,7 +175,7 @@ Instead, the relative risks should be applied to both the YLD (or incidence) and
 
 .. math:: 
 
-    rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (Hgb_i - Hgb_\text{GBD})}
+    rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (hgb_i - hgb_\text{GBD})/10}
 
 .. todo::
 
@@ -190,18 +190,18 @@ Where,
    * - Parameter
      - Definition
      - Note
-   * - :math:`Hgb_i`
-     - Hemoglobin value for an individual pregnant simulant in g/dL
-     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
-   * - :math:`Hgb_\text{GBD}`
-     - Mean hemoglobin value among the pregnant/lactating population from GBD in g/dL
-     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
+   * - :math:`hgb_i`
+     - Hemoglobin value for an individual pregnant simulant in g/L
+     - 
+   * - :math:`hgb_\text{GBD}`
+     - Mean hemoglobin value among the pregnant/lactating population from GBD in g/L
+     - 
    * - :math:`rate_i`
-     - Rate for an individual simulant
-     - Rate can be incidence, EMR, CSMR, etc.
+     - Probability of incident maternal disorder at birth for an individual simulant
+     - 
    * - :math:`rate_\text{GBD}`
-     - Rate from GBD 
-     - Rate can be incidence, EMR, CSMR; consider whether this should be among total population or pregnant population in maternal disorders cause document
+     - Population-level probability of incident maternal disorder at birth for a simulant's demographic group
+     - 
    * - :math:`RR`
      - Relative risks for iron deficiency and maternal disorders
      - Should be constant for all age-groups and causes within maternal disorders group, can choose any
@@ -214,12 +214,8 @@ Where,
      - Relative Risk
      - Note
    * - Per unit deficit of hemoglobin (g/dL)
-     - 1.252472 
-     - Note unit change (exposure is typically in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration
-
-.. todo::
-
-  Pull uncertainty interval around relative risks
+     - 1.25 (95% UI: 1.09, 1.43)
+     - Note unit change (exposure is defined in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration. Included here for reference, but should be pulled directly from GBD for use in vivarium (rei_id=95, decomp_step='step4').
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -290,12 +286,8 @@ Where,
     - Lognormal distribution of uncertainty, [Omotayo-et-al-2021]_
   * - :math:`p_\text{hgb<=70}`
     - Proportion of pregnant women with hemoglobin less than 70 g/L
-    - As informed by GBD... needs external calculation
-    - Ali to perform calculation and update
-
-.. todo::
-
-  Ali to calculate proportion of pregnant women with severe anemia for each model location of interest
+    - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_. NOTE: these values were updated on 4/22/2022 to based on the custom validation targets rather than GBD impairment prevalence.
 
 .. note::
 
@@ -313,6 +305,85 @@ Assumptions and limitations
 - This modeling strategy assumes that maternal hemorrhage case fatality rate is not associated with hemoglobin level.
 - We are limited in our use of a dichotomous exposure for hemoglobin. There are suspected differences in maternal hemoglobin risk by hemoglobin levels above 70, although we are limited by data quality to inform this relationship.
 
+Birth outcomes
++++++++++++++++
+
+.. note::
+
+  This risk outcome pair is not included in GBD.
+
+Hemoglobin level will act as a risk factor for stillbirth, as described in the :ref:`pregnancy model document <other_models_pregnancy>`. For the implementation of this risk effect, hemoglobin risk exposure will be defined as **dichotomous** based on a threshold of 70 grams per liter (severe anemia among pregnant women). Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+
+The relative risk for this risk factor will apply to the probability of experiencing still birth such that:
+
+.. math::
+
+  \text{stillbirth probability}_\text{hgb>70} = \text{stillbirth probability}_{overall} * (1 - PAF)
+
+  \text{stillbirth probability}_\text{hgb<=70} = \text{stillbirth probability}_{overall} * (1 - PAF) * RR
+
+And the probabilities of experiencing the remaining birth outcomes are as follows:
+
+.. math:: 
+
+  \text{other probability}_\text{hgb>70} = \text{other probability}_{overall}
+
+  \text{other probability}_\text{hgb<=70} = \text{other probability}_{overall} 
+
+  \text{live birth probability}_\text{hgb>70} = 1 - \text{stillbirth probability}_\text{hgb>70} - \text{other probability}_{overall}
+
+  \text{live birth probability}_\text{hgb<=70} = 1 - \text{stillbirth probability}_\text{hgb<=70} - \text{other probability}_{overall}
+
+Where,
+
+.. list-table:: Intervention coverage parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Description  
+    - Value
+    - Note
+  * - :math:`\text{stillbirth probability}_{overall}`
+    - Overall probability of a pregnancy resulting in a stillbirth
+    - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
+    - 
+  * - :math:`PAF`
+    - PAF of stillbirth probability attributable to hemoglobin
+    - :math:`\frac{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70}) - 1}{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70})}`
+    - 
+  * - :math:`RR`
+    - Relative risk of stillbirth for hemoglobin < 70 g/L
+    - 3.87 (95% CI: 1.88, 8.06)
+    - Lognormal distribution of uncertainty, [Young-et-al-2019]_
+  * - :math:`p_\text{hgb<=70}`
+    - Proportion of pregnant women with hemoglobin less than 70 g/L
+    - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_.
+
+Validation and verification criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- The rate of each birth outcome should continue to validate to input data in the baseline scenario
+- Birth outcome rates stratified by the hemoglobin level of 70 g/L (severe anemia during pregnancy) should verify to the magnitude of the risk effect
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- We assume there is only an association between severe anemia and stillbirth and not an association between mild or moderate anemia and stillbirth. This assumption is a result of data limitations as highlighted in [Young-et-al-2019]_
+
+Postpartum depression
++++++++++++++++++++++++
+
+.. todo::
+
+  Complete this section
+
+Validation and verification criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 References
 ----------
 
@@ -329,3 +400,7 @@ References
 .. [Omotayo-et-al-2021]
 
     Omotayo, M. O., Abioye, A. I., Kuyebi, M., & Eke, A. C. (2021). Prenatal anemia and postpartum hemorrhage risk: A systematic review and meta‐analysis. Journal of Obstetrics and Gynaecology Research, 47(8), 2565–2576. https://doi.org/10.1111/jog.14834
+
+.. [Young-et-al-2019]
+
+  Young, M. F., Oaks, B. M., Tandon, S., Martorell, R., Dewey, K. G., & Wendt, A. S. (2019). Maternal hemoglobin concentrations across pregnancy and maternal and child health: A systematic review and meta‐analysis. Annals of the New York Academy of Sciences, 1450(1), 47–68. https://doi.org/10.1111/nyas.14093
