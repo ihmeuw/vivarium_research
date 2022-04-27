@@ -326,11 +326,11 @@ before a simulation starts running. Because we would like to set a
 number of households and then sample them, we don't have a total
 population count to give to Vivarium.  As a work-around solution we
 will fix a target number of people, sample households until we exceed
-this number, discare the last household (which will have at most 17
+this number, discard the last household (which will have at most 17
 people, since that is the largest household size in ACS), and then
 mark the last 1-17 people as untracked -- which isn't so much memory
-to drag around. Drawback this leaves both the number of households and
-the number of simulants as variable (but not that variable).
+to drag around. Drawback: this leaves both the number of households
+and the number of simulants as variable (but not that variable).
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
