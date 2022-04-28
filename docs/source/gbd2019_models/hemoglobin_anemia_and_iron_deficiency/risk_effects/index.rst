@@ -263,13 +263,14 @@ The PAF for this continuous risk factor exposure can be calculated with the foll
 
   def calculate_paf(mean, sd):
   """NOTE: the mean and sd inputs for this function 
-  should be specific to the pregnant population"""
+  should be specific to the pregnant population
+  and in g/L"""
 
     tmrel = 120 # as defined in the table above
     rr_scalar = 10 # as defined in the table above
     lower = 0 # lower bound of integration
     upper = 300 # upper bound of integration. greater than x_max value to be safe
-    gamma_weight = 0.4 # # from hemoglobin distribution document
+    gamma_weight = 0.4 # from hemoglobin distribution document
     mgumbel_weight = 1 - gamma_weight
 
     mean_rr = integrate.quad(lambda x: ((_mirrored_gumbel_pdf(x, mean, sd)*mgumbel_weight
