@@ -161,6 +161,12 @@ Details on the CHERG iron report
 
 The CHERG iron report (available at :code:`J:\DATA\Incoming Data\MULTINATIONAL_REPORTS\CHERG_IRON_REPORT\cherg_iron.pdf`) is a meta-analysis of the association between iron deficiency and maternal mortality ratio. Since radomized trial evidence was lacking or weak, prospective observational studies provided the best data available and were included in the meta-analysis. Hemoglobin was selected as the exposure since "hardly any" studies assessed other measures of iron deficiency (p. 14). They only included studies with a hemoglobin range between 5-12 g/dL. After searching/screening, 10 articles were included in the meta-analysis, including studies from Malaysia, Nigeria, India (n=3), Nigeria (n=3), Ghana, and Indonesia.
 
+Notably, the CHERG iron report cites the odds ratio associated with an increase in hemoglobin concentration of 1 g/dL to be equal to 0.713 (95% CI: 0.596, 0.852). However, the relative risks used by GBD are equal to 1.25 (95% UI: 1.09, 1.43), the inverse of which is 0.8 (95% UI: 0.70, 0.91). The difference in these values cannot be attributed to the conversion between ORs and RRs.
+
+.. todo::
+
+  Determine why the GBD relative risks are different than the CHERG report. GBD re-did meta-analysis?
+
 Dietary Iron Deficiency
 +++++++++++++++++++++++
 
