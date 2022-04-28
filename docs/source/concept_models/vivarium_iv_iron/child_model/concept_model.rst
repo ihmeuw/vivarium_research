@@ -381,6 +381,10 @@ For model version II:
    :file: output_table.csv
    :header-rows: 1
 
+.. note::
+  
+  Stratification by IFA coverage should be done in the baseline scenario for validation and verification and then can be removed once we confirm that it is working correctly.
+
 5.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 

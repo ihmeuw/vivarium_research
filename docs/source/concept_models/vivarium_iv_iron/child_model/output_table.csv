@@ -1,12 +1,12 @@
-Measure,Child age/sex/year stratification,IFA coverage in baseline scenario
-Child stunting state person time,TRUE,TRUE
-Child wasting state person time,TRUE,TRUE
+Measure,Child age/sex/year stratification,IFA coverage stratification 
+Child stunting state person time,TRUE,TRUE (for baseline scneario only)
+Child wasting state person time,TRUE,TRUE (for baseline scneario only)
 Cause model state transition count,TRUE,FALSE
 Cause model state person time,TRUE,FALSE
 Cause-specific YLDs,TRUE,FALSE
 Cause-specific YLLs,TRUE,FALSE
 Cause-specific deaths,TRUE,FALSE
-Sum of birthweight at birth,TRUE,TRUE
-Sum of gestational age at birth,TRUE,TRUE
-Count of live births,TRUE,TRUE
-Count of live births with birthweight less than 2500 g,TRUE,TRUE
+Sum of birthweight at birth,TRUE,TRUE (for baseline scneario only)
+Sum of gestational age at birth,TRUE,TRUE (for baseline scneario only)
+Count of live births,TRUE,TRUE (for baseline scneario only)
+Count of live births with birthweight less than 2500 g,TRUE,TRUE (for baseline scneario only)
