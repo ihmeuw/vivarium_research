@@ -161,11 +161,18 @@ Details on the CHERG iron report
 
 The CHERG iron report (available at :code:`J:\DATA\Incoming Data\MULTINATIONAL_REPORTS\CHERG_IRON_REPORT\cherg_iron.pdf`) is a meta-analysis of the association between iron deficiency and maternal mortality ratio. Since radomized trial evidence was lacking or weak, prospective observational studies provided the best data available and were included in the meta-analysis. Hemoglobin was selected as the exposure since "hardly any" studies assessed other measures of iron deficiency (p. 14). They only included studies with a hemoglobin range between 5-12 g/dL. After searching/screening, 10 articles were included in the meta-analysis, including studies from Malaysia, Nigeria, India (n=3), Nigeria (n=3), Ghana, and Indonesia.
 
-Notably, the CHERG iron report cites the odds ratio associated with an increase in hemoglobin concentration of 1 g/dL to be equal to 0.713 (95% CI: 0.596, 0.852). However, the relative risks used by GBD are equal to 1.25 (95% UI: 1.09, 1.43), the inverse of which is 0.8 (95% UI: 0.70, 0.91). The difference in these values cannot be attributed to the conversion between ORs and RRs.
+Notably, the CHERG iron report cites the odds ratio associated with an increase in hemoglobin concentration of 1 g/dL to be equal to 0.713 (95% CI: 0.596, 0.852). However, the relative risks used by GBD are equal to 1.25 (95% UI: 1.09, 1.43), the inverse of which is 0.8 (95% UI: 0.70, 0.91). The GBD iron deficiency risk factor modeler for GBD 2019 reported the following:
 
-.. todo::
+  *The relative risk values date back to GBD 2013*. The source is the CHERG iron report& Murray-Kolb LE, Chen L, Chen P, Shapiro M, Caulfield L. CHERG Iron Report: Maternal Mortality, Child Mortality, Perinatal Mortality, Child Cognition, and Estimates of Prevalence of Anemia due to Iron Deficiency. Baltimore, USA: CHERG, 2012. *However there appears to have been some post-processing done that was not recorded*   
+  *From emails between Hmwe and Nick K, it seems that in GBD 2013 the odds ratio was converted to a relative risk*. 
+  *If the outcome were rare in the population you could assume the RR and OR to be roughly equal, but when it is common (as iron is thought to be) more assumptions are needed*. 
+  *The exact process of this conversion is unknown and assumptions made in order to do it are unknown*.
 
-  Determine why the GBD relative risks are different than the CHERG report. GBD re-did meta-analysis?
+The email thread referenced above can be found here: :code:`J:\temp\hkl1\Documentation\Offboarding\Iron\previous_documentation\iron_rr_emails.docx`.
+
+.. note::
+
+  In the email thread referenced above, they discuss performing the calculation of OR to RR using https://www.epigear.com/Products/EpigearXL/epigearxl.html and the equation on this page: https://www.epigear.com/index_files/or2rr.html; however, the definitions of the "p" and "s" variables in this equation are not clearly labeled. These values were presumed to be calculated using global values for iron deficiency risk factor prevalence and maternal mortality outcome rates from GBD. A test calculation of this equation can be found in :download:`the excel file here <or_to_rr_test_calculation.xlsx>`.
 
 Dietary Iron Deficiency
 +++++++++++++++++++++++
@@ -195,7 +202,7 @@ Instead, the relative risks should be applied to both the YLD (or incidence) and
 .. todo::
 
   Explain details of this equation and update formatting as requested by Nathaniel.
-
+ 
 Where, 
 
 .. list-table:: Parameter Definitions
