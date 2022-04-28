@@ -93,6 +93,22 @@ Vivarium Intravenous Iron - Women of reproductive age
 
 .. image:: concept_model_version_i.svg
 
+3.1 Additional figures
+-----------------------
+
+There are several components that affect hemoglobin during pregnancy, including in multiplicative (for the hemoglobin pregnancy adjustment factor) and additive (for the :ref:`antenatal supplementation <maternal_supplementation_intervention>`, :ref:`antenatal IV iron <intervention_iv_iron_antenatal>`, and :ref:`postpartum IV iron <intervention_iv_iron_postpartum>` interventions as well as :ref:`maternal hemorrhage risk effects <2019_risk_effect_maternal_hemorrhage>`) manners. The figures below visually represent these changes.
+
+.. image:: hgb_figure_antenatal_intervention.png
+
+.. image:: hgb_figure_antenatal_intervention.png
+
+.. image:: hgb_figure_antenatal_intervention.png
+
+.. note::
+
+  The depiction here does not represent hemoglobin exposure value changes due to changing age groups, which will happen in the vivarium simulation.
+
+
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
 
@@ -525,6 +541,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3 hemoglobin weighted to single national location
      - Weighted 100% of simulants to the hemoglobin distributions of Nigeria for the Sub-Saharan Africa location and to Bangladesh for the South Asia location to see if our validation issues were caused by our location aggregation strategy.
      - `Mean hemoglobin is validating well now. Anemia prevalence still very off. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20and%20anemia.ipynb>`_
+   * - I.3 hemoglobin distribution code update
+     - Updated to mirrored_gumbel_ppf_2017 function
+     - `Anemia prevalence is validating!! :) :) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20and%20anemia%20distribution%20code%20update.ipynb>`_
 
 .. todo::
 
@@ -539,16 +558,12 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Timeline
   * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Related to start versus end of pregnancy timing -- appears to be driving overall overestimation of maternal disorders burden
-    - SWEs to implement (ticket already made)
+    - In progress
     - Soon
   * - `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - 
     - SWEs to update
     - Low priority since Ali can adjust for this on the back-end
-  * - `Hemoglobin ensemble distribution function resulting in lack of validation to anemia prevalence <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20and%20anemia.ipynb>`_
-    - `Using custom function that does not replicate GBD methodology well <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20exposure%20nano%20sims/Distribution%20comparisons.ipynb>`_
-    - SWEs to ensemble function to `risk_distributions.EnsembleDistribution`, which should replicate GBD methodology (ticket already made)
-    - In progress
 
 
 .. _ivironWRA4.4:

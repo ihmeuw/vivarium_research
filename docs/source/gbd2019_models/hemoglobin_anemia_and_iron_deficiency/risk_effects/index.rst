@@ -175,7 +175,7 @@ Instead, the relative risks should be applied to both the YLD (or incidence) and
 
 .. math:: 
 
-    rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (Hgb_i - Hgb_\text{GBD})}
+    rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (hgb_i - hgb_\text{GBD})/10}
 
 .. todo::
 
@@ -190,18 +190,18 @@ Where,
    * - Parameter
      - Definition
      - Note
-   * - :math:`Hgb_i`
-     - Hemoglobin value for an individual pregnant simulant in g/dL
-     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
-   * - :math:`Hgb_\text{GBD}`
-     - Mean hemoglobin value among the pregnant/lactating population from GBD in g/dL
-     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
+   * - :math:`hgb_i`
+     - Hemoglobin value for an individual pregnant simulant in g/L
+     - 
+   * - :math:`hgb_\text{GBD}`
+     - Mean hemoglobin value among the pregnant/lactating population from GBD in g/L
+     - 
    * - :math:`rate_i`
-     - Rate for an individual simulant
-     - Rate can be incidence, EMR, CSMR, etc.
+     - Probability of incident maternal disorder at birth for an individual simulant
+     - 
    * - :math:`rate_\text{GBD}`
-     - Rate from GBD 
-     - Rate can be incidence, EMR, CSMR; consider whether this should be among total population or pregnant population in maternal disorders cause document
+     - Population-level probability of incident maternal disorder at birth for a simulant's demographic group
+     - 
    * - :math:`RR`
      - Relative risks for iron deficiency and maternal disorders
      - Should be constant for all age-groups and causes within maternal disorders group, can choose any
@@ -214,12 +214,8 @@ Where,
      - Relative Risk
      - Note
    * - Per unit deficit of hemoglobin (g/dL)
-     - 1.252472 
-     - Note unit change (exposure is typically in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration
-
-.. todo::
-
-  Pull uncertainty interval around relative risks
+     - 1.25 (95% UI: 1.09, 1.43)
+     - Note unit change (exposure is defined in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration. Included here for reference, but should be pulled directly from GBD for use in vivarium (rei_id=95, decomp_step='step4').
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -291,7 +287,7 @@ Where,
   * - :math:`p_\text{hgb<=70}`
     - Proportion of pregnant women with hemoglobin less than 70 g/L
     - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
-    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_. NOTE: these values were updated on 4/22/2022 to based on the custom validation targets rather than GBD impairment prevalence.
 
 .. note::
 
