@@ -187,9 +187,101 @@ Vivarium Modeling Strategy
 Maternal Disorders
 ++++++++++++++++++++
 
-.. todo::
+Primary approach
+^^^^^^^^^^^^^^^^^^
 
-  Update this strategy so that the TMREL is equal to a hemoglobin level of 120 g/L or greater. This will require a custom PAF calculation -- we should be able to use the PAF calculation code above and update it to an ensemble distribution. 
+This section will describe the modeling strategy for the effect of :ref:`hemoglobin exposure <2019_hemoglobin_model>` at the time of birth on :ref:`incident maternal disorders <2019_cause_maternal_disorders>`.
+
+The risk exposure will be continuous. Given that the CHERG iron report included only studies with hemoglobin concentration ranges from 5-12 g/dL, we will assume a TMREL of 12 g/dL in the risk-outcome relationship between hemoglobin and maternal disorders. However, since the risk exposure used in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` (hemoglobin) is different than the GBD definition (iron deficiency), we cannot use the GBD PAFs. Therefore, we will calculate our own PAFs.
+
+The outcome in this risk-outcome pair relationship is the probability of experiencing an incident maternal disorder case at birth, with the simulant-specific value represented by the variable *mdir_i* and defined in the table below based on the simulant's hemoglobin exposure value.
+
+.. list-table:: Parameter values and definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - tmrel
+    - TMREL for hemoglobin on maternal disorders
+    - 120
+    - For all age/location groups
+  * - hgb_i
+    - Simulant hemoglobin exposure value **at the time of birth** in g/L
+    - As determined by the :ref:`hemoglobin document <2019_hemoglobin_model>`
+    - 
+  * - rr_scalar
+    - Conversion factor between hgb_i units (g/L) and RR units (g/dL)
+    - 10
+    - 
+  * - exposure_i
+    - Simulant risk exposure value
+    - (tmrel - hgb_i + abs(tmrel - hgb_i))/2/rr_scalar
+    - abs() is absolute value function. Exposure should be 0 if simulant hemoglobin exposure is greater than or equal to 120 g/L
+  * - rr
+    - Relative risk associated with one g/dL decrease in hemoglobin concentration below 12 g/dL 
+    - get_draws(gbd_id_type='rei_id', gbd_id=95, gbd_round_id=6, year_id=2019, sex_id=2, source='rr', decomp_step='step4', status='best')
+    - This call will return cause-specific values for each subcause within the maternal disorders cause, but the values do not vary by subcause, so we can select any singular subcause (ex: cause_id=367) to use for application to the overall maternal disorders cause (cause_id=366). The values also do not vary by age_group. Additionally, relative risks do not vary by location and therefore cannot be pulled for a specific location_id.
+  * - rr_i
+    - Simulant relative risk relative to TMREL
+    - rr ** exposure_i
+    - ** is exponentiation
+  * - PAF
+    - PAF for impact of hemoglobin on maternal disorders
+    - TODO: link to calculated values for IV iron locations
+    - See code to calculate PAF based on population mean and standard deviation hemoglobin values (g/L) among the pregnant population
+  * - mdir
+    - Maternal disorders incidence ratio: population ratio of maternal disorders per birth
+    - As determined by the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
+    - Use **Ratios per birth** values, NOT the rate among all WRA from GBD. Values are age and location specific.
+  * - mdir_i
+    - Simulant specific probability of experiencing incident maternal disorder
+    - IFELSE(mdir * (1 - PAF) * rr_i < 1, mdir * (1 - PAF) * rr_i, 1)
+    - Is possible to be greater than one, so clipped at one.
+
+**Details on the PAF calculation.**
+
+The PAF for this continuous risk factor exposure can be calculated with the following code.
+
+.. code-block:: python
+
+  import scipy.stats as sp
+  import scipy.integrate as integrate
+  import numpy as np
+
+  def _gamma_pdf(x, mean, sd):
+    shape = (mean**2)/(sd**2)
+    rate = mean / (sd**2)
+    return sp.gamma(shape, scale=1/rate).pdf(x)
+
+  def _mirrored_gumbel_pdf(x, mean, sd):
+    x_max = 220 
+    alpha = x_max - mean - (sd * np.euler_gamma * np.sqrt(6) / np.pi)
+    scale = sd * np.sqrt(6) / np.pi
+    return sp.gumbel_r(alpha, scale=scale).pdf(x_max - x)
+
+  def calculate_paf(mean, sd):
+  """NOTE: the mean and sd inputs for this function 
+  should be specific to the pregnant population"""
+
+    tmrel = 120 # as defined in the table above
+    rr_scalar = 10 # as defined in the table above
+    lower = 0 # lower bound of integration
+    upper = 300 # upper bound of integration. greater than x_max value to be safe
+    gamma_weight = 0.4 # # from hemoglobin distribution document
+    mgumbel_weight = 1 - gamma_weight
+
+    mean_rr = integrate.quad(lambda x: ((_mirrored_gumbel_pdf(x, mean, sd)*mgumbel_weight
+                                         + _gamma_pdf(x, mean, sd)*gamma_weight)                                     
+                                            * rr**((tmrel - x + abs(tmrel - x))/2/rr_scalar)),
+                                                        lower, upper)[0]
+    paf = (mean_rr - 1)/mean_rr
+
+    return paf
+
+Archived approach for reference
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The recommended approach for modeling the relationship between hemoglobin and maternal disorders is described in the `Alternative Approach`_ section in this document. Therefore, there is no need to use the PAF in order to apply the relative risks.
 
