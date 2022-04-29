@@ -122,11 +122,11 @@ Vivarium Intravenous Iron - Children under five
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A: defined for maternal simulation
+    - N/A: defined for maternal simulation (5 year burn-in period)
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start
-    -  N/A: defined for maternal simulation
+    - N/A: defined for maternal simulation
   * - Date of simulation end
     - December 31, 2040
   * - Simulation time step
@@ -297,8 +297,8 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Value
      - Note
    * - Population size
-     - TBD
-     - NOTE: for initialization, we will need to match the relative population sizes of WRA to children U5
+     - Informed from maternal sim
+     - 
    * - Number of draws
      - Informed from WRA simulation outputs
      - 
@@ -320,10 +320,6 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Sex restrictions
      - None
      - 
-
-.. todo::
-
-  Determine appropriate population size for initialization so that relative population size between WRA and children U5 is consistent with GBD population structure
 
 .. _ivironU54.3:
 
@@ -390,6 +386,10 @@ For model version II:
 .. csv-table:: Child simulation output table
    :file: output_table.csv
    :header-rows: 1
+
+.. note::
+  
+  Stratification by IFA coverage should be done in the baseline scenario for validation and verification and then can be removed once we confirm that it is working correctly.
 
 5.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
