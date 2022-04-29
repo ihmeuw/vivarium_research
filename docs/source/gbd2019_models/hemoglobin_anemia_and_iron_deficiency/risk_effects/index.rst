@@ -156,6 +156,26 @@ Chris Murray and Theo Vos suggested that this approach be used for estimating th
 
 Notably, this alternative approach was found to estimate similar (but slightly greater) intervention impact to the standard approach using the location-specific TMREL exposure estimation approach specific and exposure parameters specific to the pregnant and lactating population in the project hosted in `this repository <https://github.com/ihmeuw/sim_sci_maternal_anemia>`_.
 
+Details on the CHERG iron report
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The CHERG iron report (available at :code:`J:\DATA\Incoming Data\MULTINATIONAL_REPORTS\CHERG_IRON_REPORT\cherg_iron.pdf`) is a meta-analysis of the association between iron deficiency and maternal mortality ratio. Since radomized trial evidence was lacking or weak, prospective observational studies provided the best data available and were included in the meta-analysis. Hemoglobin was selected as the exposure since "hardly any" studies assessed other measures of iron deficiency (p. 14). They only included studies with a hemoglobin range between 5-12 g/dL. After searching/screening, 10 articles were included in the meta-analysis, including studies from Malaysia, India (n=3), Nigeria (n=3), Ghana, and Indonesia.
+
+Notably, the CHERG iron report cites the odds ratio associated with an increase in hemoglobin concentration of 1 g/dL to be equal to 0.713 (95% CI: 0.596, 0.852). However, the relative risks used by GBD are equal to 1.25 (95% UI: 1.09, 1.43), the inverse of which is 0.8 (95% UI: 0.70, 0.91). The GBD iron deficiency risk factor modeler for GBD 2019 reported the following:
+
+  *The relative risk values date back to GBD 2013*. The source is the CHERG iron report& Murray-Kolb LE, Chen L, Chen P, Shapiro M, Caulfield L. CHERG Iron Report: Maternal Mortality, Child Mortality, Perinatal Mortality, Child Cognition, and Estimates of Prevalence of Anemia due to Iron Deficiency. Baltimore, USA: CHERG, 2012. *However there appears to have been some post-processing done that was not recorded*   
+  *From emails between Hmwe and Nick K, it seems that in GBD 2013 the odds ratio was converted to a relative risk*. 
+  *If the outcome were rare in the population you could assume the RR and OR to be roughly equal, but when it is common (as iron is thought to be) more assumptions are needed*. 
+  **The exact process of this conversion is unknown and assumptions made in order to do it are unknown**.
+
+The email thread referenced above can be found here: :code:`J:\temp\hkl1\Documentation\Offboarding\Iron\previous_documentation\iron_rr_emails.docx`.
+
+.. note::
+
+  In the email thread referenced above, they discuss performing the calculation of OR to RR using https://www.epigear.com/Products/EpigearXL/epigearxl.html and the equation on this page: https://www.epigear.com/index_files/or2rr.html where p=the prevalence of the risk factor and s=the outcome rate. These values were presumed to be calculated using global values for iron deficiency risk factor prevalence and maternal mortality outcome rates from GBD. 
+
+  Notably, according ot my test calculation of this equation :download:`found in this excel file <or_to_rr_test_calculation.xlsx>`, given that pregnancy-related mortality is a rare outcome, the OR and RRs approximate each other. However, if the definitions of "p" and "s" are switched, given that iron deficiency is a prevalent risk factor, that could erroneously lead to a difference between the OR and RR on the magnitude of the difference seen between the CHERG OR and GBD RR.
+
 Dietary Iron Deficiency
 +++++++++++++++++++++++
 
@@ -169,6 +189,10 @@ Vivarium Modeling Strategy
 Maternal Disorders
 ++++++++++++++++++++
 
+.. todo::
+
+  Update this strategy so that the TMREL is equal to a hemoglobin level of 120 g/L or greater. This will require a custom PAF calculation -- we should be able to use the PAF calculation code above and update it to an ensemble distribution. 
+
 The recommended approach for modeling the relationship between hemoglobin and maternal disorders is described in the `Alternative Approach`_ section in this document. Therefore, there is no need to use the PAF in order to apply the relative risks.
 
 Instead, the relative risks should be applied to both the YLD (or incidence) and YLL (CSMR or EMR) rate for maternal disorders (or a specific modeled individual maternal disorder), such that:
@@ -180,7 +204,7 @@ Instead, the relative risks should be applied to both the YLD (or incidence) and
 .. todo::
 
   Explain details of this equation and update formatting as requested by Nathaniel.
-
+ 
 Where, 
 
 .. list-table:: Parameter Definitions
