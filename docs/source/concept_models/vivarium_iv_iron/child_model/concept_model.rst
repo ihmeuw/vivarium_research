@@ -122,11 +122,11 @@ Vivarium Intravenous Iron - Children under five
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A: defined for maternal simulation
+    - N/A: defined for maternal simulation (5 year burn-in period)
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start
-    -  N/A: defined for maternal simulation
+    - N/A: defined for maternal simulation
   * - Date of simulation end
     - December 31, 2040
   * - Simulation time step
@@ -297,8 +297,8 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Value
      - Note
    * - Population size
-     - TBD
-     - NOTE: for initialization, we will need to match the relative population sizes of WRA to children U5
+     - Informed from maternal sim
+     - 
    * - Number of draws
      - Informed from WRA simulation outputs
      - 
@@ -320,10 +320,6 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - Sex restrictions
      - None
      - 
-
-.. todo::
-
-  Determine appropriate population size for initialization so that relative population size between WRA and children U5 is consistent with GBD population structure
 
 .. _ivironU54.3:
 
@@ -351,7 +347,7 @@ Details on how to calculate weighted averages for specific simulation parameters
      - [1] Still have the `overstimation of mortality rates of our causes <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.0_cause_model_validation.ipynb>`_. [2] `Wasting risk exposure and PEM prevalence looks good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.0_cause_model_validation.ipynb>`_. [3] `Wasting risk effects on incidence rates look good <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/wasting_validation_model_2.1.0.ipynb>`_. [4] No deaths due to PEM in deaths count data... also wasn't expecting outputs of PEM transition counts. **Keep stratification by wasting for now until we finish validating PEM deaths**
    * - 2.1.1
      - Experimental fixes to the excess mortality issue
-     - [1] `Overestimation of EMR fixed! <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.1_cause_model_validation.ipynb>`_ For both locations. [2] PEM CSMR is underestimated relative to artifact, although YLDs/YLLs/DALYs are validating to GBD, so seems to be ok. **Can remove wasting stratification moving forward**
+     - [1] `Overestimation of EMR fixed! <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.1_cause_model_validation.ipynb>`_ For both locations. [2] PEM model looks good. **Can remove wasting stratification moving forward**
 
 
 .. list-table:: Outstanding model verification and validation issues
@@ -366,7 +362,7 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Researchers to investigate solutions
     - TBD
   * - Underestimation of LRI burden in neonatal age groups and other issues for diarrheal diseases
-    - Appears to be a result of incompatible incidence, remission, and prevalence as estimated by GBD. There was birth prevalence of LRI in GBD 2017 that was removed for GBD 2019. Including a birth prevalence in our model would allow us to validate to GBD metrics, but would be inconsistent with GBD assumptions.
+    - Unknown
     - Researchers to determine which validation targets are most important to hit and strategize how to achieve that.
     - TBD
 
@@ -390,6 +386,10 @@ For model version II:
 .. csv-table:: Child simulation output table
    :file: output_table.csv
    :header-rows: 1
+
+.. note::
+  
+  Stratification by IFA coverage should be done in the baseline scenario for validation and verification and then can be removed once we confirm that it is working correctly.
 
 5.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++

@@ -147,8 +147,6 @@ Comparisons will be with the GBD results of incidence, prevalence, and mortality
 4.0 Intervention
 ++++++++++++++++
 
-
-
 .. _uscvd4.1:
 
 4.1 Simulation scenarios
@@ -156,9 +154,22 @@ Comparisons will be with the GBD results of incidence, prevalence, and mortality
 
 .. _4.1.1:
 
+4.1.1 Baseline
+~~~~~~~~~~~~~~
+In the baseline scenario, no one is enrolled in any of the interventions. Simulants not enrolled in an intervention may be prescribed medications to lower their blood pressure or lipid levels but will not recieve an adherence boost that occurs with the either the outreach or polypill intervention (outlined below).
+
 4.1.1 Outreach
 ~~~~~~~~~~~~~~
-Under this scenario, the effectiveness of the delivery of SBP-lowering and LDL-c lowering therapies would increase through methods such as a phone call, app, or support clinic. 
+In the outreach scenario, adherence to SBP-lowering and LDL-c lowering therapies would increase through patient outreach. Methods for outreach would include options such as regular phone calls between provider and patient, a mobile app with reminders and guidance about the importance of taking medications, or a patient support clinic.
+
+All patients with an SBP level >=130 mmHg and/or LDL-c level >=2.6 mmol/L or who have had an acute qualifying event are eligible for enrollment into this intervention. Acute qualifying events include an acute myocardial infarction or acute ischemic stroke during the preceeding time step.
+
+**Scenarios:**
+
+  - Outreach 1.0: Following a prescription of new lipid- and/or blood pressure-lowering medication(s), all eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 100% at the end of Year 1.  
+  
+  - Outreach 0.5: Following a prescription of new lipid- and/or blood pressure-lowering medication(s), 50% of eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 50% at the end of Year 1.
+
 
 **Source information:**
 
@@ -168,39 +179,51 @@ Black patients, when prescribed statin as a new medication within the past 1 yea
 Patients, age 30-60 without IHD, but who met any of the following criteria: current tobacco smoker, LDL-c > 3.37 mmol/L, or SBP >140 mmHg, received access to a non-clinical community health center with nurse-practitioner counseling on diet, tobacco use, and exercise. Telephone follow-up and free YMCA exercise sessions were offered. The comparison group received standard of care. Both groups had medication copays covered. At 1 year, statin adherence had a relative odds of 2.2 (95% CI 1.11-4.2) and blood pressure medication adherence had a relative odds of 2.3 (95% CI 1.39-3.88) compared to the control group. 
 [Becker-2005]_
 
-**Implementation:**
+.. **Implementation:**
 
-For the first 30 days, new statin and blood pressure prescription adherence is increased according to Derose 2013. Adherence to the medications over 1 year after initiation should be increased according to Becker 2005. Effect can persist beyond the length of study.  
-
-**Scenarios:**
-	- Outreach 1.0: Following a prescription of new statin or blood pressure-lowering medication, the initial medication fill rate is increased by 2x and the medication adherence each month is increased 2x.  
-	- Outreach 0.5: Outreach at 50% efficacy and coverage (1.5x increase in the initial medication fill rate for a random 50% of simulants receiving new prescribed medication, 1.5x increase in the medication adherence for the same 50% of simulants on medications) 
+.. For the first 30 days, new statin and blood pressure prescription adherence is increased according to Derose 2013. Adherence to the medications over 1 year after initiation should be increased according to Becker 2005. Effect can persist beyond the length of study.  
 
 .. _4.1.2:
 
 4.1.2 Polypill
 ~~~~~~~~~~~~~~
-This scenario involves fixed dose combination medication (blood pressure lowering and lipid lowering), which lead to an expected reduction in SPB and LDL-c.  
+In the polypill scenario, simulants receive fixed dose combinations of anti-hypertensive medications for reducing systolic blood pressure.
 
-**Source information:**
+All patients with an SBP level >=130 mmHg are eligible for enrollment into this intervention.
 
-Individuals with prevalent IHD, past ischemic stroke, prevalent PAD, or 5-year CVD risk of 15% or greater received a free 6-month-at-a-time supply of a polypill of either version 1 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and atenolol, 50 mg) or version 2 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and hydrochlorothiazide, 12.5 mg). Compared with usual care, at 12 months, the polypill group was more likely to be adherent with medications (adjRR 1.13, 95% CI 1.08-1.18). 
-[Thom-2013]_ 
+**Scenarios**
 
-**Implementation:**
+  - Polypill 1.0: Following a prescription of new blood pressure-lowering medication(s), all eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 100% at the end of Year 1.  
+  
+  - Polypill 0.5: Following a prescription of new blood pressure-lowering medication(s), 50% of eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 50% at the end of Year 1.
 
-Adherence to blood pressure lowering and statin medications over 1 year after initiation should be increased according to the above study, though in this scenario we will actually deliver the following combination: atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg). Effect can persist beyond the length of the study.  
-[Munoz-NEJM]_ 
+.. **Source information:**
 
-**Scenarios:**
-	- Polypill 1.0: All individuals with IHD, past ischemic stroke, or prevalent PAD (who are not already on medications) receive atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg) regardless of SBP or LDL-c levels. Medications lead to expected reduction in SBP and LDL-c. Adherence is increased 13% following receipt of those medications.  
-	- Polypill 0.5: Above scenario with, but a reduction to 50% of individuals meeting criteria receiving prescription for atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg) regardless of SBP or LDL-c levels). Medications lead to expected reduction in SBP and LDL-c. Adherence among individuals receiving therapy is increased 13% following receipt of those medications. 
+.. Individuals with prevalent IHD, past ischemic stroke, prevalent PAD, or 5-year CVD risk of 15% or greater received a free 6-month-at-a-time supply of a polypill of either version 1 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and atenolol, 50 mg) or version 2 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and hydrochlorothiazide, 12.5 mg). Compared with usual care, at 12 months, the polypill group was more likely to be adherent with medications (adjRR 1.13, 95% CI 1.08-1.18). 
+.. [Thom-2013]_ 
+
+.. **Implementation:**
+
+.. Adherence to blood pressure lowering and statin medications over 1 year after initiation should be increased according to the above study, though in this scenario we will actually deliver the following combination: atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg). Effect can persist beyond the length of the study.  
+.. [Munoz-NEJM]_ 
+
+.. **Scenarios:**
+.. 	- Polypill 1.0: All individuals with IHD, past ischemic stroke, or prevalent PAD (who are not already on medications) receive atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg) regardless of SBP or LDL-c levels. Medications lead to expected reduction in SBP and LDL-c. Adherence is increased 13% following receipt of those medications.  
+.. 	- Polypill 0.5: Above scenario with, but a reduction to 50% of individuals meeting criteria receiving prescription for atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg) regardless of SBP or LDL-c levels). Medications lead to expected reduction in SBP and LDL-c. Adherence among individuals receiving therapy is increased 13% following receipt of those medications. 
 
 .. _4.1.3:
 
 4.1.3 Lifestyle modification education
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-Under this scenario, lifestyle modification education regarding physical activity, healthy eating, weight loss, and tobacco cessation is utilized.  
+In the lifestyle scenario, eligible simulants recieve education and support to make lifestyle modifications to improve physical activity, healthy eating, weight loss, and tobacco cessation.  
+
+Individuals are eligible for the lifestyle intervention if their BMI>=25 kg/m2, with no known DM2, but elevated FPG/HbA1C (100-125mg/dl or 5.7-6.4, respectively)
+
+
+**Scenarios**
+  - Lifestyle 1.0: Enrollment will occur following a routine health facility or primary care visit. Eligible individuals enrolled in the intervention will receive weekly sessions for 6 months followed by monthly sessions for 6 months. Each session attended will result in 0.3% loss of body weight (initially represented as BMI, but eventually to use weight when available). Adherence will decline in a linear fashion, with 50% of individuals continuing sessions at 6 months and all completing sessions by 1 year.  
+  
+  - Lifestyle 0.5: Scenario described above but with 50% of adherence at initiation; adherence will decline in a linear fashion from that point. 
 
 **Source information:**
 
@@ -209,11 +232,6 @@ Individuals were enrolled in the diabetes prevention program if their BMI was >=
 
 Variations on the above intervention increased support time or added meal replacements for the first month or full year  
 [Metz-et-al-2000]_ 
-
-**Scenarios:**
-	- Lifestyle 1.0: Enrollment will occur following a routine health facility or primary care visit. Individuals with BMI >= 25 or FPG 100-125 mg/dl at the time of the visit will receive weekly sessions for 6 months followed by monthly sessions for 6 months. Each session attended will result in 0.3% loss of body weight (initially represented as BMI, but eventually to use weight when available). Adherence will decline in a linear fashion, with 50% of individuals continuing sessions at 6 months and all completing sessions by 1 year.  
-	- Lifestyle 0.5: Scenario described above but with 50% of adherence at initiation; adherence will decline in a linear fashion from that point. 
-
 
 .. _4.1.4:
 
