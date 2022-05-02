@@ -115,12 +115,12 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Pregnant population **at ANC**
     - Proportion who took *any* antenatal iron 
     - 0.83 (0.79, 0.87), assume normal distribution of uncertainty
-    - `Calculated from GBD covariate data from the CIFF grant as provided by Nat Henry <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/parameter_aggregation>`_: estimation excludes Bhutan (location ID=162), which is only 0.04 percent of total PLW in South Asia
+    - `Calculated from GBD covariate data from the CIFF grant as provided by Nat Henry <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/parameter_aggregation>`_: estimation excludes Bhutan (location ID=162), which is only 0.04 percent of total PLW in South Asia. Do not use this value for the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, rather, use the values in the .csv file.
   * - Sub-Saharan Africa (location ID 166)
     - Pregnant population **at ANC**
     - Proportion who took *any* antenatal iron
     - 0.74 (0.70, 0.78), assume normal distribution of uncertainty
-    - `Calculated from same GBD covariate data as above <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/parameter_aggregation>`_ regional aggregation was performed using a subset of countries with available data, representing approximately 60% of all PLW in SSA
+    - `Calculated from same GBD covariate data as above <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/parameter_aggregation>`_ regional aggregation was performed using a subset of countries with available data, representing approximately 60% of all PLW in SSA. Do not use this value for the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`, rather, use the values in the .csv file.
   * - Ethiopia
     - Pregnant population
     - Proportion who took *any* antenatal iron
