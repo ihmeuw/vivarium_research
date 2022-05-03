@@ -117,6 +117,13 @@ Initialization parameters
     - 
     - 
 
+Visit types
++++++++++++
+.. toctree::
+   :maxdepth: 1
+
+   visit
+
 Baseline Coverage Data
 ++++++++++++++++++++++++
 
