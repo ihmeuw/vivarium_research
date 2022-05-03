@@ -120,48 +120,7 @@ Iron supplementation during pregnancy can help meet the increased iron demands d
 
 .. image:: concept_model_full.svg
 
-This simulation will be built in a series of subgroups of model components that are summarized below.
-
-.. list-table:: Concept model versions
-  :widths: 5 5 20 10
-  :header-rows: 1
-
-  * - Model version
-    - Color
-    - Description
-    - Note
-  * - I
-    - Green
-    - Interventions and impacts on maternal morbidity and mortality due to maternal disorders and anemia
-    - Women of reproductive age (WRA) population model only 
-  * - IIa
-    - Purple
-    - Infant birthweight and its efect on child morbidity and mortality directly as well as through child growth failure and infectious diseases (without the positive feedback loop of infectious diseases on child growth failure)
-    - Includes children under five in population model as well as WRA
-  * - IIb
-    - N/A
-    - Fertility component to familially link WRA to children under five.
-    - May be swapped in implementation order with model 2a
-  * - III
-    - Blue
-    - Postpartum depression and breastfeeding behaviors
-    - 
-  * - IV
-    - Yellow
-    - Non-standard outcomes, including stillbirths and cognition
-    - Inclusion of cognition outcome on hold until BMGF trial results are received
-  * - V
-    - Orange
-    - Orphanhood, care-seeking behaviors, and positive feedback loop between infectious diseases and child wasting
-    - On hold - not shown in diagram
-  * - VIa
-    - Red
-    - Fertility model that includes birth interval information
-    - On hold - not shown in diagram
-  * - VIb
-    - Red
-    - Access to care parameters (antenatal care and in-facility delivery) and correlation with other model components
-    - On hold - not shown in diagram
+The green components in the concept model represent those specific to the maternal population and the purple components represent those specific to the population of children under five.
 
 .. _iviron3.1:
 
@@ -180,65 +139,13 @@ The following simulation scenarios apply to both the :ref:`women of reproductive
 
   Scenario comparisons of interest to BMGF will be IV iron scenarios (antenatal IV iron, postpartum IV iron, antenatal + postpartum IV iron) relative to the oral iron scenario. However, all interventions will scale-up from baseline levels of intervention coverage.
 
-.. list-table:: Intervention coverage of eligible individuals by scenario
-  :header-rows: 1
-
-  * - Scenario
-    - IFA coverage
-    - MMS/BEP coverage
-    - Antenatal IV iron coverage
-    - Postpartum IV iron coverage
-  * - Baseline
-    - To be defined for locations of interest on the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
-    - 0
-    - 0
-    - 0
-  * - Oral iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - 0
-    - 0
-  * - Antenatal IV iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - :math:`T * ANC`
-    - 0
-  * - Postpartum IV iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - 0
-    - :math:`T * IFD`
-  * - Antenatal and postpartum IV iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - :math:`T * ANC`
-    - :math:`T * IFD`
-
-Where,
-
-.. list-table:: Intervention coverage parameter definitions
-  :header-rows: 1
-
-  * - Parameter
-    - Description  
-    - Value
-    - Note
-  * - :math:`T`
-    - Target coverage
-    - 0.8
-    - Subject to change after confirmation with BMGF. Not location-specific.
-  * - :math:`ANC`
-    - Coverage of single antenatal care visit
-    - GBD covariate ID=7, decomp_step='step4', normal distribution of uncertainty
-    - Location-specific
-  * - :math:`IFD`
-    - In-facility delivery proportion
-    - GBD covariate ID=51, decomp_step='step4', normal distribution of uncertainty
-    - Location-specific
+`Intervention coverage for the Sub-Saharan Africa and South Asia locations for each scenario can be found in the CSV file <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/simulation_intervention_coverage.csv>`_. NOTE: these values represent coverage of all *eligible* pregnancies (as described by each intervention model document) and are already scaled to the proportion of eligible pregnancies who attend ANC or IFD. For instance, for BEP coverage, the eligible population is pregnancies with a BMI < 18.5; therefore, the value in this file for BEP represents the proportion of all pregnancies under 18.5 that recieve BEP supplementation (which is a function of BEP coverage at ANC and the current rate of ANC coverage).
 
 .. note::
 
-  The coverage values in the table above are meant to represent the probability that a patient who is *eligible* for the intervention, as determined by the restrictions table on the relevant intervention model document, will receive the intervention.
+  NOTE: these values may be updated if/when we recieve forecasted estimates for ANC and IFD values.
+
+  The rate of intervention scale-up was determined by the intervention uptake curve from BMGF and supplemental input from Laura.
 
 .. _iviron3.2:
 

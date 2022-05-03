@@ -156,6 +156,26 @@ Chris Murray and Theo Vos suggested that this approach be used for estimating th
 
 Notably, this alternative approach was found to estimate similar (but slightly greater) intervention impact to the standard approach using the location-specific TMREL exposure estimation approach specific and exposure parameters specific to the pregnant and lactating population in the project hosted in `this repository <https://github.com/ihmeuw/sim_sci_maternal_anemia>`_.
 
+Details on the CHERG iron report
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The CHERG iron report (available at :code:`J:\DATA\Incoming Data\MULTINATIONAL_REPORTS\CHERG_IRON_REPORT\cherg_iron.pdf`) is a meta-analysis of the association between iron deficiency and maternal mortality ratio. Since radomized trial evidence was lacking or weak, prospective observational studies provided the best data available and were included in the meta-analysis. Hemoglobin was selected as the exposure since "hardly any" studies assessed other measures of iron deficiency (p. 14). They only included studies with a hemoglobin range between 5-12 g/dL. After searching/screening, 10 articles were included in the meta-analysis, including studies from Malaysia, India (n=3), Nigeria (n=3), Ghana, and Indonesia.
+
+Notably, the CHERG iron report cites the odds ratio associated with an increase in hemoglobin concentration of 1 g/dL to be equal to 0.713 (95% CI: 0.596, 0.852). However, the relative risks used by GBD are equal to 1.25 (95% UI: 1.09, 1.43), the inverse of which is 0.8 (95% UI: 0.70, 0.91). The GBD iron deficiency risk factor modeler for GBD 2019 reported the following:
+
+  *The relative risk values date back to GBD 2013*. The source is the CHERG iron report& Murray-Kolb LE, Chen L, Chen P, Shapiro M, Caulfield L. CHERG Iron Report: Maternal Mortality, Child Mortality, Perinatal Mortality, Child Cognition, and Estimates of Prevalence of Anemia due to Iron Deficiency. Baltimore, USA: CHERG, 2012. *However there appears to have been some post-processing done that was not recorded*   
+  *From emails between Hmwe and Nick K, it seems that in GBD 2013 the odds ratio was converted to a relative risk*. 
+  *If the outcome were rare in the population you could assume the RR and OR to be roughly equal, but when it is common (as iron is thought to be) more assumptions are needed*. 
+  **The exact process of this conversion is unknown and assumptions made in order to do it are unknown**.
+
+The email thread referenced above can be found here: :code:`J:\temp\hkl1\Documentation\Offboarding\Iron\previous_documentation\iron_rr_emails.docx`.
+
+.. note::
+
+  In the email thread referenced above, they discuss performing the calculation of OR to RR using https://www.epigear.com/Products/EpigearXL/epigearxl.html and the equation on this page: https://www.epigear.com/index_files/or2rr.html where p=the prevalence of the risk factor and s=the outcome rate. These values were presumed to be calculated using global values for iron deficiency risk factor prevalence and maternal mortality outcome rates from GBD. 
+
+  Notably, according ot my test calculation of this equation :download:`found in this excel file <or_to_rr_test_calculation.xlsx>`, given that pregnancy-related mortality is a rare outcome, the OR and RRs approximate each other. However, if the definitions of "p" and "s" are switched, given that iron deficiency is a prevalent risk factor, that could erroneously lead to a difference between the OR and RR on the magnitude of the difference seen between the CHERG OR and GBD RR.
+
 Dietary Iron Deficiency
 +++++++++++++++++++++++
 
@@ -169,18 +189,115 @@ Vivarium Modeling Strategy
 Maternal Disorders
 ++++++++++++++++++++
 
+Primary approach
+^^^^^^^^^^^^^^^^^^
+
+This section will describe the modeling strategy for the effect of :ref:`hemoglobin exposure <2019_hemoglobin_model>` at the time of birth on :ref:`incident maternal disorders <2019_cause_maternal_disorders>`.
+
+The risk exposure will be continuous. Given that the CHERG iron report included only studies with hemoglobin concentration ranges from 5-12 g/dL, we will assume a TMREL of 12 g/dL in the risk-outcome relationship between hemoglobin and maternal disorders. However, since the risk exposure used in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` (hemoglobin) is different than the GBD definition (iron deficiency), we cannot use the GBD PAFs. Therefore, we will calculate our own PAFs.
+
+The outcome in this risk-outcome pair relationship is the probability of experiencing an incident maternal disorder case at birth, with the simulant-specific value represented by the variable *mdir_i* and defined in the table below based on the simulant's hemoglobin exposure value.
+
+.. list-table:: Parameter values and definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Definition
+    - Value
+    - Note
+  * - tmrel
+    - TMREL for hemoglobin on maternal disorders
+    - 120
+    - For all age/location groups
+  * - hgb_i
+    - Simulant hemoglobin exposure value **at the time of birth** in g/L
+    - As determined by the :ref:`hemoglobin document <2019_hemoglobin_model>`
+    - 
+  * - rr_scalar
+    - Conversion factor between hgb_i units (g/L) and RR units (g/dL)
+    - 10
+    - 
+  * - exposure_i
+    - Simulant risk exposure value
+    - (tmrel - hgb_i + abs(tmrel - hgb_i))/2/rr_scalar
+    - abs() is absolute value function. Exposure should be 0 if simulant hemoglobin exposure is greater than or equal to 120 g/L
+  * - rr
+    - Relative risk associated with one g/dL decrease in hemoglobin concentration below 12 g/dL 
+    - get_draws(gbd_id_type='rei_id', gbd_id=95, gbd_round_id=6, year_id=2019, sex_id=2, source='rr', decomp_step='step4', status='best')
+    - This call will return cause-specific values for each subcause within the maternal disorders cause, but the values do not vary by subcause, so we can select any singular subcause (ex: cause_id=367) to use for application to the overall maternal disorders cause (cause_id=366). The values also do not vary by age_group. Additionally, relative risks do not vary by location and therefore cannot be pulled for a specific location_id.
+  * - rr_i
+    - Simulant relative risk relative to TMREL
+    - rr ** exposure_i
+    - ** is exponentiation
+  * - PAF
+    - PAF for impact of hemoglobin on maternal disorders
+    - PAFs for the locations and draws used in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` `can be found in a .csv file here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/hemoglobin_maternal_disorder_pafs/hemoglobin_and_maternal_disorders_pafs.csv>`_ (TODO: calculate for all draws and LMIC locations)
+    - See code to calculate PAF based on population mean and standard deviation hemoglobin values (g/L) among the pregnant population
+  * - mdir
+    - Maternal disorders incidence ratio: population ratio of maternal disorders per birth
+    - As determined by the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
+    - Use **Ratios per birth** values, NOT the rate among all WRA from GBD. Values are age and location specific.
+  * - mdir_i
+    - Simulant specific probability of experiencing incident maternal disorder
+    - IFELSE(mdir * (1 - PAF) * rr_i < 1, mdir * (1 - PAF) * rr_i, 1)
+    - Is possible to be greater than one, so clipped at one.
+
+**Details on the PAF calculation.**
+
+The PAF for this continuous risk factor exposure can be calculated with the following code.
+
+.. code-block:: python
+
+  import scipy.stats as sp
+  import scipy.integrate as integrate
+  import numpy as np
+
+  def _gamma_pdf(x, mean, sd):
+    shape = (mean**2)/(sd**2)
+    rate = mean / (sd**2)
+    return sp.gamma(shape, scale=1/rate).pdf(x)
+
+  def _mirrored_gumbel_pdf(x, mean, sd):
+    x_max = 220 
+    alpha = x_max - mean - (sd * np.euler_gamma * np.sqrt(6) / np.pi)
+    scale = sd * np.sqrt(6) / np.pi
+    return sp.gumbel_r(alpha, scale=scale).pdf(x_max - x)
+
+  def calculate_paf(mean, sd):
+  """NOTE: the mean and sd inputs for this function 
+  should be specific to the pregnant population
+  and in g/L"""
+
+    tmrel = 120 # as defined in the table above
+    rr_scalar = 10 # as defined in the table above
+    lower = 0 # lower bound of integration
+    upper = 300 # upper bound of integration. greater than x_max value to be safe
+    gamma_weight = 0.4 # from hemoglobin distribution document
+    mgumbel_weight = 1 - gamma_weight
+
+    mean_rr = integrate.quad(lambda x: ((_mirrored_gumbel_pdf(x, mean, sd)*mgumbel_weight
+                                         + _gamma_pdf(x, mean, sd)*gamma_weight)                                     
+                                            * rr**((tmrel - x + abs(tmrel - x))/2/rr_scalar)),
+                                                        lower, upper)[0]
+    paf = (mean_rr - 1)/mean_rr
+
+    return paf
+
+Archived approach for reference
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 The recommended approach for modeling the relationship between hemoglobin and maternal disorders is described in the `Alternative Approach`_ section in this document. Therefore, there is no need to use the PAF in order to apply the relative risks.
 
 Instead, the relative risks should be applied to both the YLD (or incidence) and YLL (CSMR or EMR) rate for maternal disorders (or a specific modeled individual maternal disorder), such that:
 
 .. math:: 
 
-    rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (Hgb_i - Hgb_\text{GBD})}
+    rate_i = rate_\text{GBD} * 1 / e^{\text{ln(RR)} * (hgb_i - hgb_\text{GBD})/10}
 
 .. todo::
 
   Explain details of this equation and update formatting as requested by Nathaniel.
-
+ 
 Where, 
 
 .. list-table:: Parameter Definitions
@@ -190,18 +307,18 @@ Where,
    * - Parameter
      - Definition
      - Note
-   * - :math:`Hgb_i`
-     - Hemoglobin value for an individual pregnant simulant in g/dL
-     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
-   * - :math:`Hgb_\text{GBD}`
-     - Mean hemoglobin value among the pregnant/lactating population from GBD in g/dL
-     - Needs unit conversion! Hgb exposure values pulled from GBD are in g/L, so divide them by 10
+   * - :math:`hgb_i`
+     - Hemoglobin value for an individual pregnant simulant in g/L
+     - 
+   * - :math:`hgb_\text{GBD}`
+     - Mean hemoglobin value among the pregnant/lactating population from GBD in g/L
+     - 
    * - :math:`rate_i`
-     - Rate for an individual simulant
-     - Rate can be incidence, EMR, CSMR, etc.
+     - Probability of incident maternal disorder at birth for an individual simulant
+     - 
    * - :math:`rate_\text{GBD}`
-     - Rate from GBD 
-     - Rate can be incidence, EMR, CSMR; consider whether this should be among total population or pregnant population in maternal disorders cause document
+     - Population-level probability of incident maternal disorder at birth for a simulant's demographic group
+     - 
    * - :math:`RR`
      - Relative risks for iron deficiency and maternal disorders
      - Should be constant for all age-groups and causes within maternal disorders group, can choose any
@@ -214,12 +331,8 @@ Where,
      - Relative Risk
      - Note
    * - Per unit deficit of hemoglobin (g/dL)
-     - 1.252472 
-     - Note unit change (exposure is typically in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration
-
-.. todo::
-
-  Pull uncertainty interval around relative risks
+     - 1.25 (95% UI: 1.09, 1.43)
+     - Note unit change (exposure is defined in g/L). Defined as relative risk of maternal disorder morbidity/mortality associated with a 1 g/dL decrease in hemoglobin concentration. Included here for reference, but should be pulled directly from GBD for use in vivarium (rei_id=95, decomp_step='step4').
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -290,12 +403,8 @@ Where,
     - Lognormal distribution of uncertainty, [Omotayo-et-al-2021]_
   * - :math:`p_\text{hgb<=70}`
     - Proportion of pregnant women with hemoglobin less than 70 g/L
-    - As informed by GBD... needs external calculation
-    - Ali to perform calculation and update
-
-.. todo::
-
-  Ali to calculate proportion of pregnant women with severe anemia for each model location of interest
+    - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_. NOTE: these values were updated on 4/22/2022 to based on the custom validation targets rather than GBD impairment prevalence.
 
 .. note::
 
@@ -313,6 +422,85 @@ Assumptions and limitations
 - This modeling strategy assumes that maternal hemorrhage case fatality rate is not associated with hemoglobin level.
 - We are limited in our use of a dichotomous exposure for hemoglobin. There are suspected differences in maternal hemoglobin risk by hemoglobin levels above 70, although we are limited by data quality to inform this relationship.
 
+Birth outcomes
++++++++++++++++
+
+.. note::
+
+  This risk outcome pair is not included in GBD.
+
+Hemoglobin level will act as a risk factor for stillbirth, as described in the :ref:`pregnancy model document <other_models_pregnancy>`. For the implementation of this risk effect, hemoglobin risk exposure will be defined as **dichotomous** based on a threshold of 70 grams per liter (severe anemia among pregnant women). Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+
+The relative risk for this risk factor will apply to the probability of experiencing still birth such that:
+
+.. math::
+
+  \text{stillbirth probability}_\text{hgb>70} = \text{stillbirth probability}_{overall} * (1 - PAF)
+
+  \text{stillbirth probability}_\text{hgb<=70} = \text{stillbirth probability}_{overall} * (1 - PAF) * RR
+
+And the probabilities of experiencing the remaining birth outcomes are as follows:
+
+.. math:: 
+
+  \text{other probability}_\text{hgb>70} = \text{other probability}_{overall}
+
+  \text{other probability}_\text{hgb<=70} = \text{other probability}_{overall} 
+
+  \text{live birth probability}_\text{hgb>70} = 1 - \text{stillbirth probability}_\text{hgb>70} - \text{other probability}_{overall}
+
+  \text{live birth probability}_\text{hgb<=70} = 1 - \text{stillbirth probability}_\text{hgb<=70} - \text{other probability}_{overall}
+
+Where,
+
+.. list-table:: Intervention coverage parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Description  
+    - Value
+    - Note
+  * - :math:`\text{stillbirth probability}_{overall}`
+    - Overall probability of a pregnancy resulting in a stillbirth
+    - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
+    - 
+  * - :math:`PAF`
+    - PAF of stillbirth probability attributable to hemoglobin
+    - :math:`\frac{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70}) - 1}{RR * p_\text{hgb<=70} + (1 - p_\text{hgb<=70})}`
+    - 
+  * - :math:`RR`
+    - Relative risk of stillbirth for hemoglobin < 70 g/L
+    - 3.87 (95% CI: 1.88, 8.06)
+    - Lognormal distribution of uncertainty, [Young-et-al-2019]_
+  * - :math:`p_\text{hgb<=70}`
+    - Proportion of pregnant women with hemoglobin less than 70 g/L
+    - Age-specific draw-level values for the locations in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>` available in `the CSV file hosted here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_70_age_specific.csv>`_.
+    - Estimation of these values `performed in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_.
+
+Validation and verification criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- The rate of each birth outcome should continue to validate to input data in the baseline scenario
+- Birth outcome rates stratified by the hemoglobin level of 70 g/L (severe anemia during pregnancy) should verify to the magnitude of the risk effect
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- We assume there is only an association between severe anemia and stillbirth and not an association between mild or moderate anemia and stillbirth. This assumption is a result of data limitations as highlighted in [Young-et-al-2019]_
+
+Postpartum depression
++++++++++++++++++++++++
+
+.. todo::
+
+  Complete this section
+
+Validation and verification criteria
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Assumptions and limitations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 References
 ----------
 
@@ -329,3 +517,7 @@ References
 .. [Omotayo-et-al-2021]
 
     Omotayo, M. O., Abioye, A. I., Kuyebi, M., & Eke, A. C. (2021). Prenatal anemia and postpartum hemorrhage risk: A systematic review and meta‐analysis. Journal of Obstetrics and Gynaecology Research, 47(8), 2565–2576. https://doi.org/10.1111/jog.14834
+
+.. [Young-et-al-2019]
+
+  Young, M. F., Oaks, B. M., Tandon, S., Martorell, R., Dewey, K. G., & Wendt, A. S. (2019). Maternal hemoglobin concentrations across pregnancy and maternal and child health: A systematic review and meta‐analysis. Annals of the New York Academy of Sciences, 1450(1), 47–68. https://doi.org/10.1111/nyas.14093
