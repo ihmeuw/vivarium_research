@@ -131,11 +131,7 @@ There are several components that affect hemoglobin during pregnancy, including 
     - 2 weeks
   * - Intervention scale-up rate
     - Immediate jump to target coverage level
-
-.. todo::
-
-  Detail strategy for initializing maternal disorders YLDs (perhaps burn-in period?)
-
+    
 **For final model results:**
 
 .. list-table:: Final model maternal simulation timeframe and intervention dates
@@ -154,41 +150,7 @@ There are several components that affect hemoglobin during pregnancy, including 
   * - Simulation time step
     - 2 weeks
   * - Intervention scale-up rate
-    - See table below
-
-.. list-table:: Intervention scale-up for final model results
-  :header-rows: 1
-
-  * - Year
-    - Percent of target coverage reached on January 1
-  * - 2025
-    - 0%
-  * - 2026
-    - 2%
-  * - 2027
-    - 5%
-  * - 2028
-    - 10%
-  * - 2029
-    - 20%
-  * - 2030
-    - 36%
-  * - 2031
-    - 55%
-  * - 2032
-    - 73%
-  * - 2033
-    - 86%
-  * - 2034
-    - 93%
-  * - 2035
-    - 97%
-  * - 2036+
-    - 100%
-
-.. note::
-  
-  This scale-up curve comes from BMGF's internal product analytics group that develop these curves based on market dynamics and product characteristics compared to other like products on the market.
+    - See the .csv file on the :ref:`IV iron simulation landing page <2019_concept_model_vivarium_iv_iron>`
 
 .. _ivironWRA4.0:
 

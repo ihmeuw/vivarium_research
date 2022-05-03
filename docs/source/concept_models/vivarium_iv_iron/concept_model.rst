@@ -139,65 +139,13 @@ The following simulation scenarios apply to both the :ref:`women of reproductive
 
   Scenario comparisons of interest to BMGF will be IV iron scenarios (antenatal IV iron, postpartum IV iron, antenatal + postpartum IV iron) relative to the oral iron scenario. However, all interventions will scale-up from baseline levels of intervention coverage.
 
-.. list-table:: Intervention coverage of eligible individuals by scenario
-  :header-rows: 1
-
-  * - Scenario
-    - IFA coverage
-    - MMS/BEP coverage
-    - Antenatal IV iron coverage
-    - Postpartum IV iron coverage
-  * - Baseline
-    - To be defined for locations of interest on the :ref:`maternal supplementation intervention document <maternal_supplementation_intervention>`
-    - 0
-    - 0
-    - 0
-  * - Oral iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - 0
-    - 0
-  * - Antenatal IV iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - :math:`T * ANC`
-    - 0
-  * - Postpartum IV iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - 0
-    - :math:`T * IFD`
-  * - Antenatal and postpartum IV iron scale-up
-    - 0
-    - :math:`T * ANC`
-    - :math:`T * ANC`
-    - :math:`T * IFD`
-
-Where,
-
-.. list-table:: Intervention coverage parameter definitions
-  :header-rows: 1
-
-  * - Parameter
-    - Description  
-    - Value
-    - Note
-  * - :math:`T`
-    - Target coverage
-    - 0.8
-    - Subject to change after confirmation with BMGF. Not location-specific.
-  * - :math:`ANC`
-    - Coverage of single antenatal care visit
-    - GBD covariate ID=7, decomp_step='step4', normal distribution of uncertainty
-    - Location-specific
-  * - :math:`IFD`
-    - In-facility delivery proportion
-    - GBD covariate ID=51, decomp_step='step4', normal distribution of uncertainty
-    - Location-specific
+`Intervention coverage for the Sub-Saharan Africa and South Asia locations for each scenario can be found in the CSV file <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/simulation_intervention_coverage.csv>`_. NOTE: these values represent coverage of all *eligible* pregnancies (as described by each intervention model document) and are already scaled to the proportion of eligible pregnancies who attend ANC or IFD. For instance, for BEP coverage, the eligible population is pregnancies with a BMI < 18.5; therefore, the value in this file for BEP represents the proportion of all pregnancies under 18.5 that recieve BEP supplementation (which is a function of BEP coverage at ANC and the current rate of ANC coverage).
 
 .. note::
 
-  The coverage values in the table above are meant to represent the probability that a patient who is *eligible* for the intervention, as determined by the restrictions table on the relevant intervention model document, will receive the intervention.
+  NOTE: these values may be updated if/when we recieve forecasted estimates for ANC and IFD values.
+
+  The rate of intervention scale-up was determined by the intervention uptake curve from BMGF and supplemental input from Laura.
 
 .. _iviron3.2:
 
