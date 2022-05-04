@@ -189,12 +189,8 @@ Data Description
      -
    * - I
      - prevalence_calculated
-     - incidence_rate_c322 * duration_mean
-     - Justification included below
-   * - I
-     - duration_mean
-     - 3.5/365 if age_group=='Early Neonatal' else (7.79 days; 95% CI 6.2–9.64; normal distribution of uncertainty)/365
-     - Justification included below
+     - **For early neonatal age group:** (birth_prevalence_I + (incidence_rate_c322 * duration_c322))/2. **For all other age groups:** incidence_rate_c322 * duration_c322
+     - Justification included below. Early neonatal age group exception due to non-steady state dynamics in this age group given birth prevalence of zero causes increasing prevalence within age group and short duration of age group. `Citation on these dynamics and approximations here for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
    * - I
      - excess mortality rate
      - :math:`\frac{\text{deaths_c322}}{\text{population} \,\times\,\text{prevalence_calculated}}`
@@ -211,12 +207,7 @@ Data Description
 We calculate prevalence using the equation prevalence = incidence * duration. 
 (See assumptions and limitations for the need to replace GBD's prevalence).
 This is appropriate because LRI has a short and relatively uniform duration of 
-7.79 days (95% CI 6.2–9.64) days [GBD-2019-Capstone-Appendix-LRI]_. Note that this duration is longer than the Early Neonatal period (7 
-days). It follows that any incident LRI case in the early neonatal age group 
-will not remit before either dying or aging out. As an early neonate is 
-uniformly likely to become an incident LRI case on any of the 7 days of 'Early 
-Neonatal', it follows that the average duraiton of LRI in the early neonatal 
-age group is approximately 3.5 days (not accounting for deaths).
+7.79 days (95% CI 6.2–9.64) days [GBD-2019-Capstone-Appendix-LRI]_. This assumption is valid under steady state conditions. However, the prevalence of LRI is not in steady state for the early neonatal age group given a birth prevalence of 0 and a short duration of the age group (prevalence will increase as the population ages within the age group). Therefore, we calculate the prevalence in the early neonatal age group as an average of the birth prevalence and the approximated prevalence under a steady state transition (incidence * duration). This is approach is `discussed in this citation for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
 
 .. list-table:: Transition Data
    :widths: 10 10 10 30 30
@@ -235,8 +226,9 @@ age group is approximately 3.5 days (not accounting for deaths).
    * - r
      - I
      - S
-     - 1 / duration_mean
-     -
+     - (-1/time_step)*log(1-time_step/duration_c322)
+     - Where time_step is the duration of the simulation time_step in years. Use the :code:`np.log()` function. See discussion of this equation on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`.
+
 .. list-table:: Data Sources
    :widths: 20 25 25 25
    :header-rows: 1
@@ -276,11 +268,11 @@ age group is approximately 3.5 days (not accounting for deaths).
    * - prevalence_s{sid}
      - como
      - Prevalence of each sequela with id 'sid'
-     -
-   * - duration_mean_c322
-     - YLD appendix + calculation
-     - The duration of LRI used in our LRI prevalence calculation. 
-     - Note that we use a different duration for early neonatal, as the early neonatal period is shorter than the average duration of LRI.
+     - 
+   * - duration_c322
+     - (7.79 days; 95% CI 6.2–9.64; normal distribution of uncertainty)/365
+     - Mean duration of an LRI case (in years). From the YLD appendix
+     - Do not adjust this value for the early neonatal age group despite that the duration is longer than the length of the age group.
 
 .. list-table:: Restrictions
    :widths: 15 15 20
