@@ -348,6 +348,10 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 2.1.1
      - Experimental fixes to the excess mortality issue
      - [1] `Overestimation of EMR fixed! <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_2/model_2.1.1_cause_model_validation.ipynb>`_ For both locations. [2] PEM model looks good. **Can remove wasting stratification moving forward**
+   * - 3.0.1
+     - LBWSG implementation. Using PAFs for Ethiopia.
+     - `Implementation of LBWSG risk effects on cause models in the neonatal age groups looks as expected given the reliance on Ethiopia PAFs <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.0.1_cause_model_validation.ipynb>`_. ACMR and diarrheal diseases CSMR look good for Ethiopia (save the diarrheal diseases CSMR in the ENN age group, as expected) and are closer to validation targets for Sub-Saharan Africa than for South Asia, which is expected given that the LBWSG PAF for Ethiopia is more similar to that for Sub-Saharan Africa than South Asia. Additionally, `the proportion under 2500 grams is slightly underestimated in our simulation relative to the artifact, but by an acceptable margin <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.0.1_lbwsg_exposure.ipynb>`_.
+
 
 
 .. list-table:: Outstanding model verification and validation issues
