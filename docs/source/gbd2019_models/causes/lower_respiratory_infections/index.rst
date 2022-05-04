@@ -207,7 +207,7 @@ Data Description
 We calculate prevalence using the equation prevalence = incidence * duration. 
 (See assumptions and limitations for the need to replace GBD's prevalence).
 This is appropriate because LRI has a short and relatively uniform duration of 
-7.79 days (95% CI 6.2–9.64) days [GBD-2019-Capstone-Appendix-LRI]_. This assumption is valid under steady state conditions. However, the prevalence of LRI is not in stead state for the early neonatal age group given a birth prevalence of 0 and a short duration of the age group (prevalence will increase as the population ages within the age group). Therefore, we calculate the prevalence in the early neonatal age group as an average of the birth prevalence and the approximated prevalence under a stead state transition (incidence * duration). This is approach is `discussed in this citation for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
+7.79 days (95% CI 6.2–9.64) days [GBD-2019-Capstone-Appendix-LRI]_. This assumption is valid under steady state conditions. However, the prevalence of LRI is not in steady state for the early neonatal age group given a birth prevalence of 0 and a short duration of the age group (prevalence will increase as the population ages within the age group). Therefore, we calculate the prevalence in the early neonatal age group as an average of the birth prevalence and the approximated prevalence under a steady state transition (incidence * duration). This is approach is `discussed in this citation for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
 
 .. list-table:: Transition Data
    :widths: 10 10 10 30 30
