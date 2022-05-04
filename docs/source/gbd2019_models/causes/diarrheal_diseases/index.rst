@@ -157,10 +157,10 @@ Data Description
 	  - Definition
 	* - S
 	  - **S**\ usceptible
-	  - Simulant currently has diarrheal disease
+	  - Simulant does not currently have diarrheal disease
 	* - I
 	  - **I**\ nfected
-	  - Simulant does not currently have diarrheal disease
+	  - Simulant currently has diarrheal disease
 
 .. list-table:: State Data
 	:widths: 5 10 10 20
