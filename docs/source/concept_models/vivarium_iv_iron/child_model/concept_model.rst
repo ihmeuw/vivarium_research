@@ -358,13 +358,18 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Action plan
     - Timeline
   * - Underestimation of diarrheal diseases and LRI remission rates
-    - Potential timestep issue, as identified with CIFF
-    - Researchers to investigate solutions
-    - TBD
+    - Due to timestep issue as identified by Nathaniel 
+    - SWEs to implement changes in this PR: https://github.com/ihmeuw/vivarium_research/pull/867.
+    - Soon
   * - Underestimation of LRI burden in neonatal age groups and other issues for diarrheal diseases
-    - Unknown
-    - Researchers to determine which validation targets are most important to hit and strategize how to achieve that.
-    - TBD
+    - Appears to be due to prevalence calculation in early neonatal age group.
+    - SWEs to implement changes in this PR: https://github.com/ihmeuw/vivarium_research/pull/867.
+    - Soon
+  * - Adjusted diarrheal diseases duration affecting prevalence and EMR instead of just remission rate
+    - Unclear documentation from Ali (sorry!)
+    - SWEs to implement changes in this PR: https://github.com/ihmeuw/vivarium_research/pull/867.
+    - Soon
+
 
 .. _ivironU54.4:
 
