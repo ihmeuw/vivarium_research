@@ -172,8 +172,8 @@ Data Description
 	  - Notes
 	* - I
 	  - prevalence
-	  - incidence_rate_c302 * duration_c302 / 365
-	  -
+	  - **For early neonatal age group:** (birth_prevalence_I + (incidence_rate_c302 * duration_c302))/2. **For all other age groups:** incidence_rate_c302 * duration_c302
+	  - Early neonatal age group exception due to non-steady state dynamics in this age group given birth prevalence of zero causes increasing prevalence within age group and short duration of age group. `Citation on these dynamics and approximations here for reference <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3465772/>`_.
 	* - I
 	  - birth prevalence
 	  - 0
@@ -224,8 +224,8 @@ Data Description
 	* - r
 	  - I
 	  - S
-	  - 1 / (duration_c302 / 365)
-	  - 
+	  - (-1/time_step)*log(1-time_step/duration_c302)
+	  - Where time_step is the simulation time_step in years. See notes below on adjusted duration. Use :code:`np.log()` function. The above is equivalent to 1/adjusted_duration_c302.
 
 .. note::
 
@@ -248,9 +248,13 @@ Data Description
 	  - Deaths from diarrheal diseases
 	  -
 	* - duration_c302
+	  - (4.3 days; 95% CI: 4.2, 4.4; normal distribution of uncertainty)/365
+	  - Mean duration of diarrheal disease episode (in years). Obtained from [Troeger-et-al-2018-Diarrhea]_ and the GBD YLD appendix.
+	  - NOTE: do not adjust this value for the early neonatal age group
+	* - adjusted_duration_c302
 	  - 4.04485 (95% CI: 3.94472, 4.144975), assume normal distribution of uncertainty
 	  - Average duration of a diarrheal disease episode in days among children under five (defined in the note column) TRANSFORMED to accomodate a short timestep of 0.5 days, `as discussed in this slack thread <https://ihme.slack.com/archives/C018BLX2JKT/p1646183763054739>`_. See the note below for more information.
-	  - True duration of 4.3 (95% CI: 4.2, 4.4) obtained from [Troeger-et-al-2018-Diarrhea]_: this value should be used for verification and validation of the model.
+	  - 
 	* - incidence_rate_c302
 	  - como
 	  - Incidence of diarrheal disease within the entire population
@@ -324,7 +328,6 @@ Data Description
 		1 / r' = 4.044850729740949 days
 
 	We then also solved for the upper and lower bound estimates using the same methodology.
-
 
 Validation Criteria
 -------------------
