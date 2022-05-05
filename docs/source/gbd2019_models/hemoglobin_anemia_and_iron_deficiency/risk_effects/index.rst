@@ -232,6 +232,7 @@ The outcome in this risk-outcome pair relationship is the probability of experie
   * - PAF
     - PAF for impact of hemoglobin on maternal disorders
     - 1,000 draws of PAFs for the locations used in the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron_maternal_sim>` `can be found in a .csv file here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/hemoglobin_maternal_disorder_pafs/hemoglobin_and_maternal_disorders_pafs.csv>`_ 
+    - 
   * - mdir
     - Maternal disorders incidence ratio: population ratio of maternal disorders per birth
     - As determined by the :ref:`maternal disorders cause model <2019_cause_maternal_disorders>`
