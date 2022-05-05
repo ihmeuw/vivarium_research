@@ -250,11 +250,11 @@ Data Description
 	* - duration_c302
 	  - (4.3 days; 95% CI: 4.2, 4.4; normal distribution of uncertainty)/365
 	  - Mean duration of diarrheal disease episode (in years). Obtained from [Troeger-et-al-2018-Diarrhea]_ and the GBD YLD appendix.
-	  - NOTE: do not adjust this value for the early neonatal age group
+	  - This value should not vary by age group
 	* - adjusted_duration_c302
 	  - 4.04485 (95% CI: 3.94472, 4.144975), assume normal distribution of uncertainty
 	  - Average duration of a diarrheal disease episode in days among children under five (defined in the note column) TRANSFORMED to accomodate a short timestep of 0.5 days, `as discussed in this slack thread <https://ihme.slack.com/archives/C018BLX2JKT/p1646183763054739>`_. See the note below for more information.
-	  - 
+	  - This value does not necessarily need to be stored -- included here for reference.
 	* - incidence_rate_c302
 	  - como
 	  - Incidence of diarrheal disease within the entire population
