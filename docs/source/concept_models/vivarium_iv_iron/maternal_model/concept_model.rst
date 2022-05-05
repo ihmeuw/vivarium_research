@@ -102,7 +102,7 @@ There are several components that affect hemoglobin during pregnancy, including 
 
 .. note::
 
-  The depiction here does not represent hemoglobin exposure value changes due to changing age groups, which will happen in the vivarium simulation. The following figure shows how changing age groups may change simulant hemoglobin exposure.
+  The depiction above does not represent hemoglobin exposure value changes due to changing age groups, which will happen in the vivarium simulation. The following figure shows how changing age groups may change simulant hemoglobin exposure.
 
   .. image:: simulant_hemoglobin_trajectory.png
 
