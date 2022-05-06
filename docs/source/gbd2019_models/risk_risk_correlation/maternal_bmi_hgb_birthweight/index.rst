@@ -111,11 +111,43 @@ Then the difference between maternal BMI strata and the population mean can be r
                            + p_\text{cat2} * BW_\text{cat2 - cat4}
                            + p_\text{cat3} * BW_\text{cat3 - cat4}
 
-Where :math:`p_\text{cat}` represents the exposure prevalence of a given maternal BMI/hemoglobin category.
+Where :math:`p_\text{cat}` represents the exposure prevalence of a given maternal BMI/hemoglobin category, defined below:
 
-.. todo::
+.. list-table:: Category prevalence values
+   :header-rows: 1
 
-   Tailor this section to exact structure of data we get from BMGF... may make more sense to calculate difference from population mean BW from BMGF data directly rather than from GBD population mean.
+   *  - Parameter
+      - Definition
+      - Value
+      - Note
+   *  - :math:`p_\text{cat1}`
+      - Prevalence of hemoglobin < 10 g/dL and BMI < 18.5
+      - p_low_hgb :math:`\times` p_low_bmi_given_low_hgb
+      - 
+   *  - :math:`p_\text{cat2}`
+      - Prevalence of hemoglobin < 10 g/dL and BMI >= 18.5
+      - p_low_hgb :math:`\times` (1 - p_low_bmi_given_low_hgb)
+      - 
+   *  - :math:`p_\text{cat3}`
+      - Prevalence of hemoglobin >= 10 g/dL and BMI < 18.5
+      - (1 - p_low_hgb) :math:`\times` p_low_bmi_given_high_hgb
+      - 
+   *  - :math:`p_\text{cat4}`
+      - Prevalence of hemoglobin >= 10 g/dL and BMI >= 18.5
+      - (1 - p_low_hgb) :math:`\times` (1 - p_low_bmi_given_high_hgb)
+      - 
+   *  - p_low_hgb
+      - Prevalence of hemoglobin less than 10 g/L
+      - `Available at the location/age/draw-specific level here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+      - `Calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_100.ipynb>`_
+   *  - p_low_bmi_given_low_hgb
+      - Prevalence of BMI < 18.5 given hemoglobin < 10 g/L
+      - Defined on the :ref:`hemoglobin and BMI exposure document <2019_risk_exposure_maternal_bmi_hgb>`
+      - 
+   *  - p_low_bmi_given_high_hgb
+      - Prevalence of BMI < 18.5 given hemoglobin >= 10 g/L
+      - Defined on the :ref:`hemoglobin and BMI exposure document <2019_risk_exposure_maternal_bmi_hgb>`
+      - 
 
 Therefore, the association between maternal BMI/hemoglobin joint risk exposure and birthweight risk exposure should be implemented according to the following steps:
 
