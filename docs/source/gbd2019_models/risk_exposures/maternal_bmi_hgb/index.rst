@@ -14,12 +14,18 @@ Maternal BMI is discussed in more detail on the :ref:`maternal BMI risk exposure
 Risk Exposures Description in GBD
 ----------------------------------------
 
-BMI is modeled as a risk factor with a continuous ensemble distribution in GBD and BMI-related measures are also available as several GBD covariates. Hemoglobin distribution and anemia status are also estimated in GBD. However, the correlation/joint distribution between these exposures are not considered in GBD.
+:ref:`BMI is modeled as a risk factor with a continuous ensemble distribution in GBD <2019_risk_bmi>` and BMI-related measures are also available as several GBD covariates. Hemoglobin distribution and anemia status are also estimated in GBD. However, the correlation/joint distribution between these exposures are not considered in GBD.
 
 Research background
 ---------------------
 
 We have received trial data from the BMGF on the joint distribution of anemia and low BMI during pregnancy in LMICs, :download:`summarized in this word document <BMGF trial data.docx>`. We decided to inform this joint risk exposure distribution for our simulation with the [Woman-First-Trial]_, a multicountry randomized controlled trial of comprehensive maternal nutrition supplementation initiated before conception, including sites in rural locations of the Democratic Republic of the Congo (DRC), Guatemala, India, and Pakistan. While data from additional studies were provided, they were not used to inform our simulation as they were not designed specifically to measure these outcomes and had smaller sample sizes. BMI exposure was measured pre-pregnancy closest to conception or during the first trimester if the former was unavailable. Timing of hemoglobin exposure assessment was prioritized during second, followed by first, and then third trimesters of pregnancy.
+
+We used this data to derive a crude relative risk of BMI below 18.5 among those with hemoglobin < 10 g/dL relative to those with hemoglobin >= 10 g/dL. :download:`The spreadsheet used to perform this calculation can be found here <relative_risk_calculation.xlsx>`, which was estimated to be equal to 2.07 (95% CI: 1.79, 2.39).
+
+.. note::
+
+  We calculated the hemoglobin stratum-specific prevalence of low BMI using the GBD BMI distribution and the relative risk from the Woman First Trial, `as shown in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BMI%20and%20anemia%20exposure.ipynb>`_.
 
 Vivarium Modeling Strategy
 --------------------------
@@ -35,27 +41,25 @@ Exposures should be assigned according to the following steps:
 .. list-table:: Exposure distribution
   :header-rows: 1
 
-  * - Location
-    - Hemoglobin stratum
+  * - Hemoglobin stratum
     - BMI < 18.5 exposure value
     - Note
-  * - All LMIC locations
-    - < 10 g/dL
-    - 0.34 (95% CI: 0.31, 0.38; lognormal distribution of uncertainty)
-    - Informed from [Woman-First-Trial]_ data provided by BMGF
-  * - All LMIC locations
-    - >= 10 g/dL
-    - 0.17 (95% CI: 0.15, 0.18; lognormal distribution of uncertainty)
-    - Informed from [Woman-First-Trial]_ data provided by BMGF
+  * - < 10 g/dL
+    - `Low hemoglobin draw/location/age-specific values available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10.csv>`_
+    - Informed from [Woman-First-Trial]_ data provided by BMGF and the GBD BMI exposure distribution. `Calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BMI%20and%20anemia%20exposure.ipynb>`_
+  * - >= 10 g/dL
+    - `High hemoglobin draw/location/age-specific values available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+    - Estimated in the same way as the above row
 
-.. todo::
-
-  Derive a "relative risk" of low BMI by hemoglobin level from this data and use it to transform location- and/or age-specific exposure estimates of low BMI rather than informing directly from trial data for all simulated populations.
+.. note::
+  
+  I could calculate non age-specific values if that would be easier for the SWEs
 
 Assumptions and limitations
 ++++++++++++++++++++++++++++
 
-- The prevalence of low pre-pregnancy/first trimester BMI is not location-specific
+- The crude association between BMI and hemoglobin does not vary by location or age group
+- We assume the GBD BMI distribution among all women of reproductive age does not differ with the pre-pregnancy BMI of those who become pregnant
 
 Validation Criteria
 +++++++++++++++++++
