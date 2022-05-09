@@ -272,7 +272,7 @@ This is appropriate because LRI has a short and relatively uniform duration of
    * - duration_c322
      - (7.79 days; 95% CI 6.2–9.64; normal distribution of uncertainty)/365
      - Mean duration of an LRI case (in years). From the YLD appendix
-     - Do not adjust this value for the early neonatal age group despite that the duration is longer than the length of the age group.
+     - This value should not vary by age group despite the fact that the duration is longer than the length of the early neonatal age group.
 
 .. list-table:: Restrictions
    :widths: 15 15 20
