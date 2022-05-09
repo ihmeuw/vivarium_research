@@ -147,6 +147,12 @@ The following simulation scenarios apply to both the :ref:`women of reproductive
 
   The rate of intervention scale-up was determined by the intervention uptake curve from BMGF and supplemental input from Laura.
 
+Figures representing intervention coverage among the eligible populations at point of care and among all pregnancies are shown in the figure panels below, respectively.
+
+.. image:: intervention_coverage_at_point_of_care.PNG
+
+.. image:: intervention_coverage_all_pregnancies.PNG
+
 .. _iviron3.2:
 
 3.2 Simulation timeframe and intervention start dates
