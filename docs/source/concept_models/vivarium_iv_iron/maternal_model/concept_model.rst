@@ -144,7 +144,7 @@ There are several components that affect hemoglobin during pregnancy, including 
   * - Date of intervention scale-up start
     - Janary 1, 2025
   * - Date of simulation end
-    - December 31, 2040
+    - December 31, 2039
   * - Simulation time step
     - 2 weeks
   * - Intervention scale-up rate

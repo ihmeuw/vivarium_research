@@ -128,7 +128,7 @@ Vivarium Intravenous Iron - Children under five
   * - Date of intervention scale-up start
     - N/A: defined for maternal simulation
   * - Date of simulation end
-    - December 31, 2040
+    - December 31, 2039
   * - Simulation time step
     - 0.5 days
   * - Intervention scale-up rate
