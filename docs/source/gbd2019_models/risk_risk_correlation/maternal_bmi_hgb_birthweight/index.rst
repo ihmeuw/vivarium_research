@@ -143,11 +143,11 @@ Where :math:`p_\text{cat}` represents the exposure prevalence of a given materna
    *  - p_low_bmi_given_low_hgb
       - Prevalence of BMI < 18.5 given hemoglobin < 10 g/L
       - Defined on the :ref:`hemoglobin and BMI exposure document <2019_risk_exposure_maternal_bmi_hgb>`
-      - 
+      - NOTE: current simulation implementation and current documentation for this parameter are out of date as of 5/9/2022. When this is implemented, either a) update simulation impementation of low BMI exposure to the currently documented values and proceed, or b) use the low BMI exposure value consistent with the existing implementation in the simulation (distribution that does not vary by age or location) for this parameter. Ask Ali if confused!!
    *  - p_low_bmi_given_high_hgb
       - Prevalence of BMI < 18.5 given hemoglobin >= 10 g/L
       - Defined on the :ref:`hemoglobin and BMI exposure document <2019_risk_exposure_maternal_bmi_hgb>`
-      - 
+      - NOTE: current simulation implementation and current documentation for this parameter are out of date as of 5/9/2022. When this is implemented, either a) update simulation impementation of low BMI exposure to the currently documented values and proceed, or b) use the low BMI exposure value consistent with the existing implementation in the simulation (distribution that does not vary by age or location) for this parameter. Ask Ali if confused!!
 
 Therefore, the association between maternal BMI/hemoglobin joint risk exposure and birthweight risk exposure should be implemented according to the following steps:
 
