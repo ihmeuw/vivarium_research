@@ -509,7 +509,7 @@ Probability of sampling from a given country's hemoglobin distribution using the
      - `Validation notebooks for model 3.5.0 are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.0>`_. Maternal disorders and hemorrhage cause model, hemoglobin/anemia model, and pregnancy model are largely looking good. I noticed the following issues [1] postpartum duration in the outputs looks like it's just one week even though in the interactive sim it was consistently 5 weeks, [2] I had an issue with my validation code and we are actually *not* systematically overestimating pregnancy/maternal disorders at the population level, which means that the age shift implementation is not necessarily necessary for success, [3] it looks like the YLDs count data may not be properly stratified by cause... it looks like maternal disorders and anemia YLDs may be combined and labeled as maternal disorders only.
    * - I.3.5.1 code refactor with LBWSG gestational age
      - LBWSG exposure used to inform duration of pregnancy
-     - `Validation notebooks for model 3.5.0 are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1>`_. It appears that the duration of pregnancy, which used to be ~36 weeks, is now ~4 weeks. This is causing us to overestimate pregnancy incidence and outcomes related to it (like maternal disorders). 
+     - `Validation notebooks for model 3.5.1 are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1>`_. It appears that the duration of pregnancy, which used to be ~36 weeks, is now ~4 weeks. This is causing us to overestimate pregnancy incidence and outcomes related to it (like maternal disorders). 
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -522,7 +522,7 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Not sure 
     - SWEs to investigate
     - High priority/soon
-  * - `Anemia YLDs attributed to maternal disorders YLDs in count data results <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3.5.0/check%20dalys.ipynb>`_
+  * - `Anemia YLDs attributed to maternal disorders YLDs in count data results <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3.5.0/check%20dalys.ipynb>`_. Also, can anemia YLDs please be stratified by pregnancy state? (Sorry I didn't initially ask for this, but it's added to the output table shell in this PR)
     - Hopefully just a results processing issue?
     - SWEs to investigate
     - High priority/soon

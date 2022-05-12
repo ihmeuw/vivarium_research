@@ -7,5 +7,6 @@ Maternal disorder incident case count,I,TRUE,CONDITIONAL (for validation only an
 Maternal disorder YLLs and YLDs,I,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
 Severity-specific maternal hemorrhage incident case count,I,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,N/A,TRUE,TRUE,TRUE,FALSE
 Sum of maternal hemoglobin exposure values,I,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE
-Anemia state person-time,I,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE
+Anemia state person-time,I,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE
+Anemia YLDs,I,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
 Maternal supplementation regimen,I,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,CONDITIONAL (for validation only and then can be removed)
