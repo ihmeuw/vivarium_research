@@ -30,13 +30,18 @@ We used this data to derive a crude relative risk of BMI below 18.5 among those 
 Vivarium Modeling Strategy
 --------------------------
 
-:ref:`Hemoglobin exposure <2019_hemoglobin_model>` will be assigned as a continuous risk exposure that varies as simulants age and move through pregnancy model states. Maternal BMI exposure is a categorical risk exposure conditional on hemoglobin status at the start of pregnancy. The maternal BMI risk exposure should be assigned at the start of each pregnancy. In the instance of multiple pregnancies for a given simulant, maternal BMI exposure should be re-assigned according to the simulant's hemoglobin exposure value at the time of the second pregnancy, although the same propensity for maternal BMI exposure should be used for that simulant throughout the simulation.
+This risk exposure is meant to represent the joint exposure between pre-pregnancy/first trimester BMI and early pregnancy hemoglobin. This risk exposure is included in order to :correlate maternal risk exposures that are used for intervention targeting with child risk exposures (namely LBWSG), as described in the :ref:`BMI, hemoglobin, and birth weight correlation document <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. Since this risk exposure is meant to enforce risk *correlation* rather than *causation*, it should not vary in response to intervention effects, but rather be reflective of "untreated" exposures (as detailed in the modeling strategy description below).
+
+:ref:`Hemoglobin exposure <2019_hemoglobin_model>` will be assigned as a continuous risk exposure that varies as simulants age and move through pregnancy model states. For the joint BMI/hemoglobin exposure, we will convert this to a categorical exposure stratified by hemoglobin level above/below 100 g/L at the start of pregnancy (after the application of the hemoglobin adjustment factor), but *before* the application of any intervention or risk effects (in other words, "untreated" pregnancy hemoglobin).
+
+Maternal BMI exposure is a categorical risk exposure conditional on hemoglobin status at the start of pregnancy. The maternal BMI risk exposure should be assigned at the start of each pregnancy and the exposure value should not vary throughout pregnancy. In the instance of multiple pregnancies for a given simulant, maternal BMI exposure should be re-assigned according to the simulant's hemoglobin exposure value at the time of the second pregnancy, although the same propensity for maternal BMI exposure should be used for that simulant throughout the simulation.
 
 Exposures should be assigned according to the following steps:
 
 #. Assign a hemoglobin exposure value according to the :ref:`hemoglobin exposure document <2019_hemoglobin_model>`.
-#. Assess which categorical hemoglobin exposure level (<100 g/L or >= 100g/L) the assigned continuous hemoglobin exposure value falls within. This should be done based on the continuous hemoglobin exposure level at the start of pregnancy, *after* the pregnancy adjustment factor is applied to the simulant's hemoglobin exposure (in other words, use the pregnant hemoglobin exposure rather than non-pregnant hemoglobin exposure).
-#. Assign a maternal BMI exposure value according to the maternal BMI exposure distribution specific to the relevant maternal hemoglobin exposure stratum.
+#. Assess which categorical hemoglobin exposure level (<100 g/L or >= 100g/L) the assigned continuous hemoglobin exposure value falls within. This should be done based on the continuous hemoglobin exposure level at the start of pregnancy, *after* the pregnancy adjustment factor is applied to the simulant's hemoglobin exposure (in other words, use the pregnant hemoglobin exposure rather than non-pregnant hemoglobin exposure) and *before* any intervention and/or risk effects are applied ("untreated" pregnancy hemoglobin exposure).
+#. Assign a maternal BMI exposure value according to the maternal BMI exposure distribution specific to the relevant maternal hemoglobin exposure stratum (defined in the table below).
+#. Assign a categorical risk exposure value for the pregnancy that will not vary for the remainder of that pregnancy (categories are defined in the table below).
 
 .. list-table:: Exposure distribution
   :header-rows: 1
@@ -55,6 +60,25 @@ Exposures should be assigned according to the following steps:
   
   I could calculate non age-specific values if that would be easier for the SWEs
 
+.. list-table:: Joint pre-pregnancy BMI and early pregnancy hemoglobin exposure categories
+  :header-rows: 1
+
+  * - Category
+    - Pre-pregnancy/first trimester BMI exposure
+    - Early pregnancy "untreated" hemoglobin exposure
+  * - cat4
+    - >=18.5
+    - >=10
+  * - cat3
+    - <18.5
+    - >=10
+  * - cat2
+    - >=18.5
+    - <10
+  * - cat1
+    - <18.5
+    - <10
+
 Assumptions and limitations
 ++++++++++++++++++++++++++++
 
@@ -65,7 +89,7 @@ Validation Criteria
 +++++++++++++++++++
 
 - We should continue to meet validation criteria for the :ref:`hemoglobin exposure model <2019_hemoglobin_model>`
-- Low BMI exposure during pregnancy stratified by hemoglobin thresholds should validate to the input data above
+- Low BMI exposure during pregnancy stratified by hemoglobin thresholds should validate to the input data above *for all simulated scenarios* (exposure should not vary with intervention coverage).
 
 References
 -----------
