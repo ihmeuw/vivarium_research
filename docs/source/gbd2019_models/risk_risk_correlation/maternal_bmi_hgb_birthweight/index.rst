@@ -64,12 +64,12 @@ We will model an association between a joint categorical distribution of materna
 
    Modeling strategy may be adapted if BMGF data is available for proportion born with low BW (<2500g) only (rather than mean birthweight). Briefly, in this case, we will use the probability born low birth weight for each maternal BMI/hemoglobin category to sample from LBWSG exposure categories with BW<2500 grams or from categories with BW>=2500g rather than apply shifts to birthweight values sampled from the overall LBWSG exposure distribution.
 
-.. list-table:: Maternal BMI/Hemoglobin category unadjusted birthweight shifts
+.. list-table:: Joint pre-pregnancy BMI and early pregnancy hemoglobin category **unadjusted** birthweight shifts
    :header-rows: 1 
 
    *  - Category
-      - Maternal BMI exposure
-      - Maternal Hemoglobin exposure
+      - Pre-pregnancy/first trimester BMI exposure
+      - Early pregnancy "untreated" hemoglobin exposure
       - Birthweight shift
       - Note
    *  - cat4
