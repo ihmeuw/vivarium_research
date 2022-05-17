@@ -64,12 +64,12 @@ We will model an association between a joint categorical distribution of materna
 
    Modeling strategy may be adapted if BMGF data is available for proportion born with low BW (<2500g) only (rather than mean birthweight). Briefly, in this case, we will use the probability born low birth weight for each maternal BMI/hemoglobin category to sample from LBWSG exposure categories with BW<2500 grams or from categories with BW>=2500g rather than apply shifts to birthweight values sampled from the overall LBWSG exposure distribution.
 
-.. list-table:: Maternal BMI/Hemoglobin category unadjusted birthweight shifts
+.. list-table:: Joint pre-pregnancy BMI and early pregnancy hemoglobin category **unadjusted** birthweight shifts
    :header-rows: 1 
 
    *  - Category
-      - Maternal BMI exposure
-      - Maternal Hemoglobin exposure
+      - Pre-pregnancy/first trimester BMI exposure
+      - Early pregnancy "untreated" hemoglobin exposure
       - Birthweight shift
       - Note
    *  - cat4
@@ -143,11 +143,11 @@ Where :math:`p_\text{cat}` represents the exposure prevalence of a given materna
    *  - p_low_bmi_given_low_hgb
       - Prevalence of BMI < 18.5 given hemoglobin < 10 g/L
       - Defined on the :ref:`hemoglobin and BMI exposure document <2019_risk_exposure_maternal_bmi_hgb>`
-      - 
+      - NOTE: current simulation implementation and current documentation for this parameter are out of date as of 5/9/2022. When this is implemented, either a) update simulation impementation of low BMI exposure to the currently documented values and proceed, or b) use the low BMI exposure value consistent with the existing implementation in the simulation (distribution that does not vary by age or location) for this parameter. Ask Ali if confused!!
    *  - p_low_bmi_given_high_hgb
       - Prevalence of BMI < 18.5 given hemoglobin >= 10 g/L
       - Defined on the :ref:`hemoglobin and BMI exposure document <2019_risk_exposure_maternal_bmi_hgb>`
-      - 
+      - NOTE: current simulation implementation and current documentation for this parameter are out of date as of 5/9/2022. When this is implemented, either a) update simulation impementation of low BMI exposure to the currently documented values and proceed, or b) use the low BMI exposure value consistent with the existing implementation in the simulation (distribution that does not vary by age or location) for this parameter. Ask Ali if confused!!
 
 Therefore, the association between maternal BMI/hemoglobin joint risk exposure and birthweight risk exposure should be implemented according to the following steps:
 

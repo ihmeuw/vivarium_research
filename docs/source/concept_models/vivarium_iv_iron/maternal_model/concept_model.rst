@@ -144,7 +144,7 @@ There are several components that affect hemoglobin during pregnancy, including 
   * - Date of intervention scale-up start
     - Janary 1, 2025
   * - Date of simulation end
-    - December 31, 2040
+    - December 31, 2039
   * - Simulation time step
     - 2 weeks
   * - Intervention scale-up rate
@@ -504,10 +504,12 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3 hemoglobin distribution code update
      - Updated to mirrored_gumbel_ppf_2017 function
      - `Anemia prevalence is validating!! :) :) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20fixed%20hemoglobin%20weight%20experiment/hemoglobin%20and%20anemia%20distribution%20code%20update.ipynb>`_
-
-.. todo::
-
-  Add V&V tracking for artifact as well as simulation results
+   * - I.3.5.0 code refactor
+     - Refactoring of model by James, need to check nothing broke.
+     - `Validation notebooks for model 3.5.0 are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.0>`_. Maternal disorders and hemorrhage cause model, hemoglobin/anemia model, and pregnancy model are largely looking good. I noticed the following issues [1] postpartum duration in the outputs looks like it's just one week even though in the interactive sim it was consistently 5 weeks, [2] I had an issue with my validation code and we are actually *not* systematically overestimating pregnancy/maternal disorders at the population level, which means that the age shift implementation is not necessarily necessary for success, [3] it looks like the YLDs count data may not be properly stratified by cause... it looks like maternal disorders and anemia YLDs may be combined and labeled as maternal disorders only.
+   * - I.3.5.1 code refactor with LBWSG gestational age
+     - LBWSG exposure used to inform duration of pregnancy
+     - `Validation notebooks for model 3.5.1 are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1>`_. It appears that the duration of pregnancy, which used to be ~36 weeks, is now ~4 weeks. This is causing us to overestimate pregnancy incidence and outcomes related to it (like maternal disorders). 
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -516,15 +518,26 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Explanation
     - Action plan
     - Timeline
+  * - `Shorter than expected duration of pregnancy <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3.5.1/pregnancy%20model.ipynb>`_ (approximately 4 weeks when expected to be >30)
+    - Not sure 
+    - SWEs to investigate
+    - High priority/soon
+  * - `Anemia YLDs attributed to maternal disorders YLDs in count data results <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3.5.0/check%20dalys.ipynb>`_. Also, can anemia YLDs please be stratified by pregnancy state? (Sorry I didn't initially ask for this, but it's added to the output table shell in this PR)
+    - Hopefully just a results processing issue?
+    - SWEs to investigate
+    - High priority/soon
   * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
-    - Related to start versus end of pregnancy timing -- appears to be driving overall overestimation of maternal disorders burden
-    - In progress
-    - Soon
+    - Related to start versus end of pregnancy timing 
+    - Ticket made
+    - Lower priority -- nice to have, but not necessary for success
   * - `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - 
     - SWEs to update
     - Low priority since Ali can adjust for this on the back-end
-
+  * - Duration of postpartum state in count data looks lower than it should
+    - Not sure -- it looks ok in the interactive sim
+    - SWEs to investigate
+    - Low priority because it does not appear to be affecting results
 
 .. _ivironWRA4.4:
 
