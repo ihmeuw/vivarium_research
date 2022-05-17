@@ -363,6 +363,9 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 3.2.0 updated LBWSG PAFs
      - Calculated and used custom LBWSG PAFs for Sub-Saharan Africa and South Asia rather than rely on Ethiopia PAF values
      - `Validation notebook for model 3.2.0 is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.2.0_cause_model_validation.ipynb>`_. Diarrheal diseases CSMR now validating for all locations rather than just Ethiopia (yay). Still seeing the underestimation of LRI EMR in the early and late neonatal age groups. Will try running sim with only early neonates to see if this is an issue of stocastic variation or something else.
+   * - 3.2.1 ENN only
+     - Reran simulation with early neonates only to test hypothesis that we were underestimating LRI EMR due to stochastic variation.
+     - We are still underestimating LRI EMR to the same degree in this run. We think that the underestimation may instead be caused by the equation used to convert rates into probabilities on a given timestep, for which the values do not approximate each other well when the rate is high relative to the duration of the timestep. This problem is exacerbated by the implementation of the LBWSG risk factor, which makes the LRI EMR very high for simulants in high risk LBWSG categories, causing us to significantly underestimate the probability of death on a given timestep. We wil run a test run of the simulation with a timestep of 0.1 days rather than 0.5 days to investigate this hypothesis. 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -372,8 +375,8 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Action plan
     - Timeline
   * - Underestimation of LRI EMR in neonatal age groups 
-    - Unclear - stochastic variation?
-    - SWEs currently running simulation with early neonates only to test this hypothesis
+    - Unclear - timestep too long?
+    - SWEs currently running simulation with timestep of 0.1 days to test this hypothesis.
     - In progress
 
 .. _ivironU54.4:
