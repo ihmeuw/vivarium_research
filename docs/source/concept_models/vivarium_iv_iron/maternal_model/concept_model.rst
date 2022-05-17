@@ -246,7 +246,7 @@ Including,
 
   Simulants should have the same propensity value for all modeled interventions (if coverage of all modeled interventions is 50%, then the same 50% of simulants will be getting each intevention). Additionally, treatment propensity is fixed throughout the simulation and does not update between multiple pregnancies.
 
-  Also, the same parameter uncertainty effect size on hemoglobin should be used for both the antenatal and postpartum IV iron interventions (referenced below) for each draw of the simulation. 
+  Also, the same propensity should be used for the effect size on of both the antenatal and postpartum IV iron interventions (referenced below) on hemoglobin.
 
 * :ref:`Maternal supplementation <maternal_supplementation_intervention>`
 * :ref:`Antenatal IV iron <intervention_iv_iron_antenatal>`
