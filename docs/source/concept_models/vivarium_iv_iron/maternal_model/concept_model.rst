@@ -110,7 +110,11 @@ There are several components that affect hemoglobin during pregnancy, including 
 3.2 Simulation timeframe and intervention start dates
 ------------------------------------------------------
 
-**Throughout model development and verification/validation:**
+.. note::
+
+  The simulation timestep is documented to be two weeks in these tables, but as of 5/17/2021 it is set to one week and has not yet been updated to two.
+
+**Throughout model development and verification/validation prior to intervention implementation:**
 
 .. list-table:: Developmental model maternal simulation timeframe and intervention dates
   :header-rows: 1
@@ -118,7 +122,7 @@ There are several components that affect hemoglobin during pregnancy, including 
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A (no burn-in). NOTE: may need to perform burn-in period to properly assign maternal disorders YLDs.
+    - N/A (no burn-in)
   * - Date of simulation observation period start
     - January 1, 2022
   * - Date of intervention scale-up start
@@ -129,6 +133,26 @@ There are several components that affect hemoglobin during pregnancy, including 
     - 2 weeks
   * - Intervention scale-up rate
     - Immediate jump to target coverage level
+    
+**Throughout model development and verification/validation with intervention implementation:**
+
+.. list-table:: Developmental model maternal simulation timeframe and intervention dates
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+  * - Date of simulation burn-in period start
+    - N/A (no burn-in)
+  * - Date of simulation observation period start
+    - January 1, 2022
+  * - Date of intervention scale-up start
+    - Janary 1, 2023
+  * - Date of simulation end
+    - December 31, 2027
+  * - Simulation time step
+    - 2 weeks
+  * - Intervention scale-up rate
+    - Same scale-up pace as the .csv file on the :ref:`IV iron simulation landing page <2019_concept_model_vivarium_iv_iron>` over the four-year scale-up and then held constant at maximum coverage value for one year.
     
 **For final model results:**
 
@@ -217,6 +241,12 @@ Including,
 
 4.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+  Simulants should have the same propensity value for all modeled interventions (if coverage of all modeled interventions is 50%, then the same 50% of simulants will be getting each intevention). Additionally, treatment propensity is fixed throughout the simulation and does not update between multiple pregnancies.
+
+  Also, the same parameter uncertainty effect size on hemoglobin should be used for both the antenatal and postpartum IV iron interventions (referenced below) for each draw of the simulation. 
 
 * :ref:`Maternal supplementation <maternal_supplementation_intervention>`
 * :ref:`Antenatal IV iron <intervention_iv_iron_antenatal>`
