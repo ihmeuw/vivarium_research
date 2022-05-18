@@ -540,6 +540,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3.5.1 code refactor with LBWSG gestational age
      - LBWSG exposure used to inform duration of pregnancy
      - `Validation notebooks for model 3.5.1 are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1>`_. It appears that the duration of pregnancy, which used to be ~36 weeks, is now ~4 weeks. This is causing us to overestimate pregnancy incidence and outcomes related to it (like maternal disorders). 
+   * - I.3.5.1: Bugfix and BMI
+     - Fixes to pregnancy state durations and YLDs as well as implementation of BMI/Hemoglobin exposure
+     - `Validation notebooks for model 3.5.1_bugfix are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1_james_bugfix_and_bmi>`_. Postpartum duration now five weeks as expected. Pregnancy duration approximately equal to mean gestational age, as expected (but can be followed up with a more detailed validation in interactive simulation). YLDs behaving as expected. Joint BMI/hemoglobin exposure functioning as expected (although verification that exposure does not change with intervention scenarios should be done when ready).
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -548,14 +551,6 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Explanation
     - Action plan
     - Timeline
-  * - `Shorter than expected duration of pregnancy <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3.5.1/pregnancy%20model.ipynb>`_ (approximately 4 weeks when expected to be >30)
-    - Not sure 
-    - SWEs to investigate
-    - High priority/soon
-  * - `Anemia YLDs attributed to maternal disorders YLDs in count data results <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3.5.0/check%20dalys.ipynb>`_. Also, can anemia YLDs please be stratified by pregnancy state? (Sorry I didn't initially ask for this, but it's added to the output table shell in this PR)
-    - Hopefully just a results processing issue?
-    - SWEs to investigate
-    - High priority/soon
   * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Related to start versus end of pregnancy timing 
     - Ticket made
@@ -564,10 +559,6 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - 
     - SWEs to update
     - Low priority since Ali can adjust for this on the back-end
-  * - Duration of postpartum state in count data looks lower than it should
-    - Not sure -- it looks ok in the interactive sim
-    - SWEs to investigate
-    - Low priority because it does not appear to be affecting results
 
 .. _ivironWRA4.4:
 
