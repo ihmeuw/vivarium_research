@@ -351,8 +351,21 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 3.0.1
      - LBWSG implementation. Using PAFs for Ethiopia.
      - `Implementation of LBWSG risk effects on cause models in the neonatal age groups looks as expected given the reliance on Ethiopia PAFs <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.0.1_cause_model_validation.ipynb>`_. ACMR and diarrheal diseases CSMR look good for Ethiopia (save the diarrheal diseases CSMR in the ENN age group, as expected) and are closer to validation targets for Sub-Saharan Africa than for South Asia, which is expected given that the LBWSG PAF for Ethiopia is more similar to that for Sub-Saharan Africa than South Asia. Additionally, `the proportion under 2500 grams is slightly underestimated in our simulation relative to the artifact, but by an acceptable margin <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.0.1_lbwsg_exposure.ipynb>`_.
-
-
+   * - 3.1.1
+     - Update diarrheal diseases and LRI duration values and prevalence calculation in an effort to fix underestimation of CSMRs in the early neonatal age group (updated values will result in higher calculated EMR)
+     - `Validation notebook for model 3.1.1 is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.1.1_cause_model_validation.ipynb>`_. Note that the artifact values have been overwritten with an updated version of the artifact. We realized that while the duration and prevalence values were updated, the artifact EMR values were not updated, so there was not an associated change in CSMR.
+   * - 3.1.2
+     - Update EMR artifact values based on changes to duration and remission above and rerun.
+     - `Validation notebook for model 3.1.2 is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.1.2_cause_model_validation.ipynb>`_. Diarrheal diseases CSMR now looking as expected in the early neonatal age group - validating for Ethiopia (compatible PAF being used), and more off for South Asia than Sub-Saharan Africa (as expected due to more similar PAF of SSA to Ethiopia than SA to Ethiopia). However, for LRI, we realized we were using a high value for birth prevalence in the calculation of early neonatal prevalence when we actualy wanted to use zero, so we're still off there.
+   * - 3.1.3
+     - Fix LRI birth prevalence value and re-run
+     - `Validation notebook for model 3.1.3 is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.1.3_cause_model_validation.ipynb>`_. Underestimating LRI EMR in the early and late neonatal age group. Not exactly sure why... could it be stochastic variation? Abie has verified in the interactive simulation that the pipeline value matches the artifact and that the simulant-level values average out to the pipeline value when the correct LBWSG PAF value is used.
+   * - 3.2.0 updated LBWSG PAFs
+     - Calculated and used custom LBWSG PAFs for Sub-Saharan Africa and South Asia rather than rely on Ethiopia PAF values
+     - `Validation notebook for model 3.2.0 is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_3/model_3.2.0_cause_model_validation.ipynb>`_. Diarrheal diseases CSMR now validating for all locations rather than just Ethiopia (yay). Still seeing the underestimation of LRI EMR in the early and late neonatal age groups. Will try running sim with only early neonates to see if this is an issue of stocastic variation or something else.
+   * - 3.2.1 ENN only
+     - Reran simulation with early neonates only to test hypothesis that we were underestimating LRI EMR due to stochastic variation.
+     - We are still underestimating LRI EMR to the same degree in this run. We think that the underestimation may instead be caused by the equation used to convert rates into probabilities on a given timestep, for which the values do not approximate each other well when the rate is high relative to the duration of the timestep. This problem is exacerbated by the implementation of the LBWSG risk factor, which makes the LRI EMR very high for simulants in high risk LBWSG categories, causing us to significantly underestimate the probability of death on a given timestep. We wil run a test run of the simulation with a timestep of 0.1 days rather than 0.5 days to investigate this hypothesis. 
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -361,19 +374,10 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Explanation
     - Action plan
     - Timeline
-  * - Underestimation of diarrheal diseases and LRI remission rates
-    - Due to timestep issue as identified by Nathaniel 
-    - SWEs to implement changes in this PR: https://github.com/ihmeuw/vivarium_research/pull/867.
-    - Soon
-  * - Underestimation of LRI burden in neonatal age groups and other issues for diarrheal diseases
-    - Appears to be due to prevalence calculation in early neonatal age group.
-    - SWEs to implement changes in this PR: https://github.com/ihmeuw/vivarium_research/pull/867.
-    - Soon
-  * - Adjusted diarrheal diseases duration affecting prevalence and EMR instead of just remission rate
-    - Unclear documentation from Ali (sorry!)
-    - SWEs to implement changes in this PR: https://github.com/ihmeuw/vivarium_research/pull/867.
-    - Soon
-
+  * - Underestimation of LRI EMR in neonatal age groups 
+    - Unclear - timestep too long?
+    - SWEs currently running simulation with timestep of 0.1 days to test this hypothesis.
+    - In progress
 
 .. _ivironU54.4:
 
