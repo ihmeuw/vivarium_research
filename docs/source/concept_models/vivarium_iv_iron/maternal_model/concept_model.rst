@@ -543,6 +543,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3.5.1: Bugfix and BMI
      - Fixes to pregnancy state durations and YLDs as well as implementation of BMI/Hemoglobin exposure
      - `Validation notebooks for model 3.5.1_bugfix are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1_james_bugfix_and_bmi>`_. Postpartum duration now five weeks as expected. Pregnancy duration approximately equal to mean gestational age, as expected (but can be followed up with a more detailed validation in interactive simulation). YLDs behaving as expected. Joint BMI/hemoglobin exposure functioning as expected (although verification that exposure does not change with intervention scenarios should be done when ready).
+   * - I.8 Intervention coverage
+     - Implemented intervention coverage and scenarios
+     - `Validation notebook for intervention coverage is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8/intervention%20coverage.ipynb>`_. Issues added to the table below. BEP/MMS targeting looks good. Rate of scale-up looks good.
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -551,11 +554,39 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Explanation
     - Action plan
     - Timeline
-  * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
+  * - [1] No output of intervention administration counts. Nice to have, but not explicitly necessary for success is output of the count of simulants who reach pregnancy duration of eligibility for each intervention.
+    - Not yet included in outputs
+    - SWEs to implement
+    - Soon!
+  * - [2] Five times expected person-time for the IV iron interventions in the intervention_person_time dataframe (see proof in notebook linked for model 8 validation).
+    - Appears to be mostly due to the "{antenatal/postpartum}_iv_iron_invalid" categories
+    - SWEs to investigate
+    - Soon!
+  * - [3] There is a lot of person-time in the "invalid" bmi_category AND pregnant state in the intervention_person_time dataframe 
+    - Unknown, but this is not an issue with the bmi_person_time dataframe and only is an issue for the antenatal and postpartum intervention categories (is not an issue with the maternal supplementation intervention categories). See proof in notebook linked for model 8 validation.
+    - SWEs to investigate
+    - Soon!
+  * - [4] IV iron interventions not targeted towards those with hemoglobin exposures < 100 g/L *at the time of administration* (following effects of interventions previously administered)
+    - Hasn't yet been incorporated
+    - SWEs to implement
+    - Soon!
+  * - [5] Baseline IFA coverage decreases from 2022 to 2023, expected to remain constant over this period
+    - Unknown
+    - SWEs to investigate
+    - Soon!
+  * - [6] IFA coverage seems to vary by BMI/anemia category
+    - Unknown -- could be a small counts issue, but want to confirm that it doesn't depend on these variables
+    - SWEs to investigate and confirm
+    - Soon!
+  * - [7] Coverage is generally lower than expected
+    - Unknown -- perhaps related to above persontime issues?
+    - SWEs to investigate
+    - Soon!
+  * - [8] `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Related to start versus end of pregnancy timing 
     - Ticket made
     - Lower priority -- nice to have, but not necessary for success
-  * - `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
+  * - [9] `Hemoglobin exposure summed at the weekly rather than annual level <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/hemoglobin%20and%20anemia.ipynb>`_
     - 
     - SWEs to update
     - Low priority since Ali can adjust for this on the back-end
