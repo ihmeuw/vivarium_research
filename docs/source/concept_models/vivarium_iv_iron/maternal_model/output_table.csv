@@ -1,12 +1,11 @@
-Measure,Model version,Maternal age/sex/year stratification,Pregnancy state,Pregnancy outcome,Severity-specific maternal hemorrahge incidence,Maternal supplementation coverage,Antenatal IV iron coverage,Postpartum IV iron coverage,Maternal BMI exposure
-Pregnancy state transition counts,I,TRUE,N/A,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE
-Pregnancy state person-time,I,TRUE,N/A,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE
-"Count of pregnancy outcomes (live, still, other)",I,TRUE,N/A,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
-Deaths due to maternal disorders,I,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
-Maternal disorder incident case count,I,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
-Maternal disorder YLLs and YLDs,I,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
-Severity-specific maternal hemorrhage incident case count,I,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,N/A,TRUE,TRUE,TRUE,FALSE
-Sum of maternal hemoglobin exposure values,I,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE
-Anemia state person-time,I,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE
-Anemia YLDs,I,TRUE,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE
-Maternal supplementation regimen,I,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,CONDITIONAL (for validation only and then can be removed)
+Measure,Maternal age/sex/year stratification,Pregnancy state,Pregnancy outcome,Severity-specific maternal hemorrahge incidence,Maternal supplementation coverage,Antenatal IV iron coverage,Postpartum IV iron coverage,Maternal BMI exposure
+Pregnancy state transition counts,TRUE,N/A,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE
+Pregnancy state person-time,TRUE,N/A,TRUE,FALSE,TRUE,TRUE,TRUE,FALSE
+"Count of pregnancy outcomes (live, still, other)",TRUE,N/A,N/A,FALSE,TRUE,TRUE,TRUE,FALSE
+Deaths (cause-specific),TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
+Maternal disorder incident case count,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
+YLLs and YLDs (cause-specific),TRUE,TRUE,FALSE,FALSE,TRUE,TRUE,TRUE,FALSE
+Severity-specific maternal hemorrhage incident case count,TRUE,CONDITIONAL (for validation only and then can be removed),FALSE,N/A,TRUE,TRUE,TRUE,FALSE
+Sum of maternal hemoglobin exposure values,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,FALSE
+Anemia state person-time,TRUE,TRUE,FALSE,TRUE,TRUE,TRUE,TRUE,TRUE
+Maternal intervention counts,TRUE,FALSE,FALSE,FALSE,FALSE,FALSE,FALSE,CONDITIONAL (for validation only and then can be removed)
