@@ -147,6 +147,10 @@ Vivarium Intravenous Iron - Children under five
 4.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
 
+.. note::
+
+  For this simulation, we want to implement custom age restrictions for the LRI cause model so that age start for the cause model is the postneonatal age group (age_group_id=4) and the age end is the 1-4 year age group (age_group_id=5). For the early and late neonatal age groups (age_group_id=[2,3]), LRI should be included as an unmodeled cause affected by the LBWSG risk factor.
+
 * :ref:`Diarrheal diseases (GBD 2019) <2019_cause_diarrhea>`
 * :ref:`Lower respiratory infections (GBD 2019) <2019_cause_lower_respiratory_infections>`
 * :ref:`Measles (GBD 2019) <2019_cause_measles>`
@@ -366,6 +370,9 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 3.2.1 ENN only
      - Reran simulation with early neonates only to test hypothesis that we were underestimating LRI EMR due to stochastic variation.
      - We are still underestimating LRI EMR to the same degree in this run. We think that the underestimation may instead be caused by the equation used to convert rates into probabilities on a given timestep, for which the values do not approximate each other well when the rate is high relative to the duration of the timestep. This problem is exacerbated by the implementation of the LBWSG risk factor, which makes the LRI EMR very high for simulants in high risk LBWSG categories, causing us to significantly underestimate the probability of death on a given timestep. We wil run a test run of the simulation with a timestep of 0.1 days rather than 0.5 days to investigate this hypothesis. 
+   * - 3.2.1.1 ENN only, 0.1 day timestep
+     - Reran simulation with early neonates only and 0.1 rather than 0.5 day timestep to test hypothesis that we were underestimating LRI EMR due to bad approximation between rates and probabilities when rates are very high relative to timestep duration (which is excacerbated by LBWSG risk effects).
+     - LRI EMR was still significantly underestimated, although it increased from 50.1 to 54.6 for early neonatal males in South Asia.
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -375,9 +382,9 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Action plan
     - Timeline
   * - Underestimation of LRI EMR in neonatal age groups 
-    - Unclear - timestep too long?
-    - SWEs currently running simulation with timestep of 0.1 days to test this hypothesis.
-    - In progress
+    - We suspect it is because the timestep is too long relative to the rate of LRI EMR in the highest risk LBWSG categories
+    - Update the current LRI cause model to be restricted to the post-neonatal and 1-4 year age groups (exclude the early and late neonatal age groups) and add LRI to the "unmodeled affected" cause list for the LBWSG risk factor.
+    - Circle back to this once we get all other model functionality working.
 
 .. _ivironU54.4:
 
