@@ -373,6 +373,10 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 3.2.1.1 ENN only, 0.1 day timestep
      - Reran simulation with early neonates only and 0.1 rather than 0.5 day timestep to test hypothesis that we were underestimating LRI EMR due to bad approximation between rates and probabilities when rates are very high relative to timestep duration (which is excacerbated by LBWSG risk effects).
      - LRI EMR was still significantly underestimated, although it increased from 50.1 to 54.6 for early neonatal males in South Asia.
+   * - 4.0 Line list demography from maternal outputs
+     - Simulation run from line list demography fertility component from maternal model 8.0 simulation outputs
+     - [1] `Mean birthweight underestimated/proportion born low birthweight overestimated for Sub-Saharan Africa. Looks ok for South Asia, though. Also, gestational age exposure looks as expected. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_lbwsg_exposure.ipynb>`_ [2] `Probability of male at birth is slightly underestimated and does not significantly vary by location. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_population_structure.ipynb>`_ [3] `Population age structure looks as expected by the sixth year of the simulation (as expected). <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_population_structure.ipynb>`_ [4] `Cause models look off, as expected due to LBWSG calibration issues. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_cause_model_validation.ipynb>`_
+
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -381,6 +385,14 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Explanation
     - Action plan
     - Timeline
+  * - Underestimation of mean birthweight (and overestimation of proportion born low birthweight) for Sub-Saharan Africa
+    - Unknown, but birthweight exposure distribution looks suspiciously similar to South Asia
+    - SWEs to investigate
+    - Soon
+  * - Probability of male birth underestimated
+    - Unknown... maybe we're just using 50% instead of the input parameter value?
+    - SWEs to investigate
+    - Low priority to update
   * - Underestimation of LRI EMR in neonatal age groups 
     - We suspect it is because the timestep is too long relative to the rate of LRI EMR in the highest risk LBWSG categories
     - Update the current LRI cause model to be restricted to the post-neonatal and 1-4 year age groups (exclude the early and late neonatal age groups) and add LRI to the "unmodeled affected" cause list for the LBWSG risk factor.
