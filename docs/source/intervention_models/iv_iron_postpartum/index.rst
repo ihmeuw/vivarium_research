@@ -83,7 +83,6 @@ Hemoglobin level among pregnant and lactating women
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table:: Maternal hemoglobin effect size
-  :widths: 15 15 15 
   :header-rows: 1
 
   * - Population
@@ -96,7 +95,7 @@ Hemoglobin level among pregnant and lactating women
     - None (for now)
     - Sample from a normal distribution with a mean=23, SD=14. If sampled value is less than 0 g/L, replace sampled value with 0 (aka, rectified normal distribution with lower bound of zero).
     - Effect is present two weeks after birth through the end of the postpartum period. Effect size is from the BMGF ongoing trials. Lower bound of zero chosen for biologic plausibility of non-response.
-    
+
 The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure *two weeks following birth*. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
 
 Assumptions and Limitations

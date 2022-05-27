@@ -102,7 +102,6 @@ Hemoglobin level among pregnant and lactating women
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table:: Maternal hemoglobin effect size
-  :widths: 15 15 15 
   :header-rows: 1
 
   * - Population
