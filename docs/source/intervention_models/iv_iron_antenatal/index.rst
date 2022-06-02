@@ -102,15 +102,18 @@ Hemoglobin level among pregnant and lactating women
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 .. list-table:: Maternal hemoglobin effect size
-  :widths: 15 15 15 
   :header-rows: 1
 
   * - Population
     - Effect size
+    - Parameter uncertainty
+    - Stochastic uncertainty
     - Note
   * - Pregnant women with hemoglobin levels less than 100 g/L
-    - +23 g/L, SD=14 g/L, assume normal distribution of uncertainty and apply as individual-level heterogeneity (no parameter uncertainty for this value).
-    - Effect applied at 15 weeks gestation (two weeks after start of the second trimester) through the end of the postpartum period. Effect size is from the BMGF ongoing trials relative to oral iron supplementation. Note that lower bound of effect size crosses the null value-- intervention will decrease hemoglobin levels in some draws.
+    - +23 g/L
+    - None (for now)
+    - Sample from a normal distribution with a mean=23, SD=14. If sampled value is less than 0 g/L, replace sampled value with 0 (aka, rectified normal distribution with lower bound of zero).
+    - Effect applied at 15 weeks gestation (two weeks after start of the second trimester) through the end of the postpartum period. Effect size is from the BMGF ongoing trials relative to oral iron supplementation. Lower bound of zero chosen for biologic plausibility of non-response.
 
 The effect of the IV iron intervention on maternal hemoglobin should be applied as an additive shift to the simulant's continuous hemoglobin exposure value two weeks after the start of the second trimester of pregnancy, or **at 15 weeks gestation**, after the application of the pregnancy adjustment factor. The effect of the intervention should be removed (subtracted from the hemoglobin exposure level) at the end of the postpartum period prior to the removal of the pregnancy adjustment factor.
 
