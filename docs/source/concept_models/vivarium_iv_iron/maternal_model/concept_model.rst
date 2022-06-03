@@ -549,6 +549,11 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.8 Intervention coverage, bugfix
      - Run to fix issues identified with the previous run
      - `Validation notebooks for the intervention coverage bugfix run are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model8_coverage_bugfix>`_. All issues appear resolved, with the exception of the request for output of intervention administration counts. Also of note, the "antenatal_iv_iron_invalid" and "postpartum_iv_iron_invalid" person time categories are inclusive of simulants with hemoglobin levels greater than 10 g/dL at the time of administration -- this makes direct V&V of the intervention targeting difficult, and it should be doublechecked when intervention administration counts are provided as an output and/or in the interactive simulation.
+   * - I.8 intervention effects
+     - Implement intervention effects and add intervention administration count outputs.
+     - [1] `Maternal disorders deaths not equal between baseline and alternative scenarios. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [2] `Anemia YLDs not equal in baseline and alternative scenarios in the not pregnant state. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [3] `Anemia YLDs not varying by scenario as expected in the pregnant state, even though anemia person time does. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [4] Would like hemoglobin sum and person time output files stratified by intervention coverage to verify intervention effect sizes, please. [5] Still need to verify intervention administration count outputs.
+
+
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
@@ -557,10 +562,6 @@ Probability of sampling from a given country's hemoglobin distribution using the
     - Explanation
     - Action plan
     - Timeline
-  * - No output of intervention administration counts. Nice to have, but not explicitly necessary for success is output of the count of simulants who reach pregnancy duration of eligibility for each intervention.
-    - Not yet included in outputs
-    - SWEs to implement
-    - Soon!
   * - `Age group issues (underestimation of births in young ages and overestimation in older ages) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model3%2C%20anemia%2C%20etc/maternal%20disorders%20cause%20model.ipynb>`_
     - Related to start versus end of pregnancy timing 
     - Ticket made
