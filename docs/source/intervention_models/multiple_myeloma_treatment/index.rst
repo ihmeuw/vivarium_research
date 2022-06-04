@@ -36,7 +36,7 @@ The multiple myeloma treatment model for :ref:`Phase 2 of the project
 <2019_concept_model_vivarium_csu_multiple_myeloma_phase_2>` will incorporate
 much of the information and strategy from the :ref:`Multiple Myeloma Phase 1
 Treatment Model <mm5.3.3>`. The main differences are that we are expanding the
-set of mutually exclusive treatment categories, and we will be supplementing
+set of mutually exclusive treatment regimen categories, and we will be supplementing
 data from literature and expert opinion with patient-level data from Flatiron to
 inform our treatment algorithm.
 
@@ -298,24 +298,80 @@ We plan to use Flatiron to inform baseline coverage of each treatment regimen.
 Vivarium Modeling Strategy
 --------------------------
 
-.. todo::
+The Phase 1 simulation only considered three categories of treatment regimen:
+isatuximab-containing, daratumumab-containing, and other. Transitions between
+these were determined only by coverage proportions, unaffected by prior treatment
+for the simulant or covariates.
 
-  Add an overview of the Vivarium modeling section.
+In Phase 2, we are expanding the treatment regimen categories considerably, to a
+total of 24, and making transitions dependent on prior treatment and covariates.
+
+Treatment Regimen Category Components
++++++++++++++++++++++++++++++++++++++
+
+These are the components that make up our modelled treatment regimen categories.
+They are drug classes, individual drugs, and ASCT.
+
+.. note::
+
+  Not every combination of these components is a valid treatment regimen category; those
+  are enumerated in the next section.
+
+.. list-table:: Modeled Treatment Regimen Category Components
+  :widths: 1 1 5 10
+  :header-rows: 1
+
+  * - Drug class
+    - Abbreviation
+    - Drugs
+    - Notes
+  * - Proteasome inhibitors
+    - PI
+    - bortezomib, carfilzomib, ixazomib
+    -
+  * - Immunomodulatory drugs
+    - IMID
+    - lenalidomide, pomalidomide, thalidomide
+    -
+  * - Chemotherapy drugs
+    - Chemo
+    - bendamustine, cyclophosphamide, doxorubicin
+    -
+  * - Daratumumab
+    - Dara
+    - daratumumab
+    -
+  * - Isatuximab
+    - Isa
+    - isatuximab
+    -
+  * - Autologous stem cell transplant
+    - ASCT
+    - N/A
+    - While ASCT is a subsequent step after induction therapy, we consider it
+      part of the same line and it is included in the treatment regimen category as if it
+      were at the time of induction. We restrict it to only appear in NDMM (while later transplants
+      do occur in real life, they are relatively uncommon, and we do not model them.)
+
+.. note::
+
+  The drug class components represent *exactly one* drug from
+  that class. If there is more than one, the treatment regimen will always fall
+  into one of the Other treatment regimen categories described in the next section.
 
 Treatment Regimen Categories
 ++++++++++++++++++++++++++++
 
-The Phase 1 simulation only considered three categories of treatment regimen:
-isatuximab-containing, daratumumab-containing, and other. Based on conversations
-with the client and with our clinical expert Manoj Menon, we plan to expand the
-modeled treatment categories to the following set of 12 mutually exclusive
+Based on conversations
+with the client and with our clinical expert Manoj Menon, we are expanding the
+modeled treatment regimen categories to the following set of 24 mutually exclusive and exhaustive
 categories:
 
 .. list-table:: Modeled Treatment Regimen Categories
   :widths: 5 10
   :header-rows: 1
 
-  * - Treatment category
+  * - Treatment regimen category
     - Notes
   * - PI+Dex
     -
@@ -340,29 +396,43 @@ categories:
   * - Dara+PI+IMID+Dex
     -
   * - Other
-    -
-
-**Additionally, there is another NDMM treatment category for every one listed above,
-which is that treatment category with '+ASCT' at the end.**
-
-.. todo::
-
-  Verify the definitions of the treatment regimen categories with Manoj after
-  checking what drugs show up in Flatiron data. That is, exactly which drugs
-  should we include in each drug class (IMiD, PI, chemo, etc.), and what will be
-  the consequences of lumping everything else into "Other"?
+    - Covers all other combinations of *non-ASCT components* in the absence of ASCT.
+  * - PI+Dex+ASCT
+    - NDMM only
+  * - IMID+Dex+ASCT
+    - NDMM only
+  * - PI+IMID+Dex+ASCT
+    - NDMM only
+  * - Chemo+PI+Dex+ASCT
+    - NDMM only
+  * - Chemo+IMID+Dex+ASCT
+    - NDMM only
+  * - Dara+PI+Dex+ASCT
+    - NDMM only
+  * - Dara+IMID+Dex+ASCT
+    - NDMM only
+  * - Isa+PI+Dex+ASCT
+    - NDMM only
+  * - Isa+IMID+Dex+ASCT
+    - NDMM only
+  * - Dara+PI+Chemo+Dex+ASCT
+    - NDMM only
+  * - Dara+PI+IMID+Dex+ASCT
+    - NDMM only
+  * - Other+ASCT
+    - Covers all other combinations of *non-ASCT components* in the presence of ASCT.
 
 Treatment Assignment
 ++++++++++++++++++++
 
-The Phase 1 simulation had fixed coverage percentages for each treatment category
+The Phase 1 simulation had fixed coverage percentages for each treatment regimen category
 in each line. In Phase 2, we will implement a more sophisticated model that takes
 into account covariates and prior treatment in a patient's history, informed by Flatiron
 data.
 
 Because the model needs to be trained within Foundry, it has to be passed from
 Foundry to Vivarium in a serialized format. While a human-readable and interoperable
-format would be ideal, for now we will use :code:`joblib.dump` to output a :code:`.pkl` file. The pickled
+format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output a :code:`.pkl` file. The pickled
 form of the model may depend on the version of Python, :code:`sklearn`,
 and possibly sklearn subdependencies it was trained with. We will need to align
 these between the Vivarium environment and the Foundry environment and verify
@@ -377,26 +447,65 @@ that outputs are what we expect.
     - 3.8.13
   * - scikit-learn
     - 1.1.1
+  * - pandas
+    - 0.25.3
+  * - numpy
+    - 1.19.5
 
-.. todo::
-  Once models are finalized, share a set of predictions made within Foundry to use
-  for verifying that the models as loaded in the Vivarium environment predict the same thing.
+.. note::
+
+  As of now, there is a bug in Foundry that does not allow us to download the pickle
+  file. So, as a workaround, we are printing the file as hex bytes and using this script
+  to generate the binary file:
+
+  .. literalinclude:: hex_to_binary.py
+    :language: python
+    :linenos:
 
 To be precise, there will be two models: one that predicts the
 first line of treatment (the treatment a simulant receives at the time of incidence of MM)
 and another that predicts later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
-pickled object will be an sklearn Classifier, implemented by an sklearn Pipeline.
-This object will have a :code:`predict_proba` method which takes a pandas DataFrame
+pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
+This object has a :code:`predict_proba` method which takes a pandas DataFrame
 of covariates and returns a 2d numpy array of probabilities. That returned array
 can be transformed into a DataFrame with meaningful column names like so:
 
-.. sourcecode:: python
+.. code-block:: python
 
-  predictions = pd.DataFrame(model.predict_proba(covariates_dataframe), columns=model.classes_)
+  ndmm_predictions = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
 
-Then, the actual treatment class is sampled with those probabilities.
+.. note::
 
-The covariates and format of those covariates are listed below.
+  The :code:`.classes_` array may not contain all the treatment regimen categories in the model.
+  Any treatment regimen categories missing should have probability 0 of being selected.
+
+.. todo::
+  These models are not finalized! These are just first versions to allow testing
+  the format of pickle files, predictions, etc.
+
+.. list-table:: Pickle file paths
+  :widths: 1 10
+  :header-rows: 1
+
+  * - Name
+    - Path
+  * - NDMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model.pkl
+  * - RRMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model.pkl
+
+Then:
+
+* In the baseline scenario, the simulated treatment regimen category is sampled with the predicted probabilities.
+* In the alternative scenarios, the probabilities are adjusted according to business rules
+  before sampling.
+
+.. todo::
+
+  These business rules need to be worked out.
+
+Model Covariates
+~~~~~~~~~~~~~~~~
 
 .. todo::
   These are not finalized!
@@ -411,7 +520,7 @@ The covariates and format of those covariates are listed below.
     - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
     -
   * - Sex
-    - The simulant's sex.
+    - The simulant's sex. Binary because our source data does not distinguish between intersex and not recorded.
     - 'M' or 'F'
   * - IsBlack
     - Whether or not the simulant is Black.
@@ -435,22 +544,43 @@ The covariates and format of those covariates are listed below.
     - The type of practice where the simulant is being treated (not currently included in sim!).
     - 'COMMUNITY' or 'ACADEMIC'
 
-.. list-table:: **Additional** covariates for RRMM treatment prediction
+.. list-table:: Covariates for RRMM treatment prediction
   :header-rows: 1
 
   * - Column name
     - Description
     - Allowed values
+  * - FirstTreatmentAge
+    - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
+    -
+  * - Sex
+    - The simulant's sex. Binary because our source data does not distinguish between intersex and not recorded.
+    - 'M' or 'F'
+  * - IsBlack
+    - Whether or not the simulant is Black.
+    - 0 or 1
+  * - RenalImpairment
+    - Whether or not the simulant had renal impairment **at the time of incidence**.
+    - 0 or 1
+  * - RiskType
+    - Cytogenetic risk category **at the time of incidence**.
+    - 'Standard risk' or 'High risk'
+  * - Year
+    - Current (unrounded) year - 2000. e.g. 22.5 for halfway through 2022.
+    -
+  * - PracticeType
+    - The type of practice where the simulant is being treated (not currently included in sim!).
+    - 'COMMUNITY' or 'ACADEMIC'
   * - RegimenClass_previous
-    - The treatment category used in the previous line (e.g. 'PI+IMID+Dex').
-    - Any treatment category in the treatment model. In some cases, it may be
-      a treatment category that we have never seen precede another treatment in
+    - The treatment regimen category used in the previous line (e.g. 'PI+IMID+Dex').
+    - Any treatment regimen category in the treatment model. In some cases, it may be
+      a treatment regimen category that we have never seen precede another treatment in
       our training data, in which case we essentially ignore this variable.
   * - Duration_previous
     - Time since the previous relapse in days / 30.4.
     -
   * - {component}_flag_previous
-    - For each component part of a valid treatment category (e.g. 'PI', 'IMID', 'ASCT')
+    - For each component part of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
       a binary flag indicating whether it was present in the previous line of treatment.
     -
   * - LineNumber
@@ -467,6 +597,16 @@ The covariates and format of those covariates are listed below.
     - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
       *ever* been treated with *in lines lasting < 3 \* 30.4 days*.
     -
+
+Model Transfer Verification
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+The following script verifies that predictions for a certain set of covariates
+match those generated within Foundry.
+
+.. literalinclude:: verify_model_predictions.py
+  :language: python
+  :linenos:
 
 
 Modeled Affected Outcomes
