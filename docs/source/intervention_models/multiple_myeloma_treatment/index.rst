@@ -308,81 +308,42 @@ Treatment Regimen Categories
 The Phase 1 simulation only considered three categories of treatment regimen:
 isatuximab-containing, daratumumab-containing, and other. Based on conversations
 with the client and with our clinical expert Manoj Menon, we plan to expand the
-modeled treatment categories to the following set of 16 mutually exclusive
+modeled treatment categories to the following set of 12 mutually exclusive
 categories:
 
 .. list-table:: Modeled Treatment Regimen Categories
-  :widths: 5 10 8 15
+  :widths: 5 10
   :header-rows: 1
 
-  * - Enumeration
-    - Treatment category
-    - Supercategory
+  * - Treatment category
     - Notes
-  * - 1
-    - PI/Dex
+  * - PI+Dex
     -
+  * - IMID+Dex
     -
-  * - 2
-    - IMID/Dex
+  * - PI+IMID+Dex
     -
+  * - Chemo+PI+Dex
     -
-  * - 3
-    - PI/IMID/Dex
+  * - Chemo+IMID+Dex
     -
+  * - Dara+PI+Dex
     -
-  * - 4
-    - Chemo/PI/Dex
+  * - Dara+IMID+Dex
     -
+  * - Isa+PI+Dex
     -
-  * - 5
-    - Chemo/IMID/Dex
+  * - Isa+IMID+Dex
     -
+  * - Dara+PI+Chemo+Dex
     -
-  * - 6
-    - Dara/bortezomib/Dex
-    - Dara/PI/Dex
+  * - Dara+PI+IMID+Dex
     -
-  * - 7
-    - Dara/carfilzomib/Dex
-    - Dara/PI/Dex
+  * - Other
     -
-  * - 8
-    - Dara/ixazomib/Dex
-    - Dara/PI/Dex
-    -
-  * - 9
-    - Dara/lenalidomide/Dex
-    - Dara/IMID/Dex
-    -
-  * - 10
-    - Dara/pomalidomide/Dex
-    - Dara/IMID/Dex
-    -
-  * - 11
-    - Dara/thalidomide/Dex
-    - Dara/IMID/Dex
-    -
-  * - 12
-    - Isa/PI/Dex
-    -
-    -
-  * - 13
-    - Isa/IMID/Dex
-    -
-    -
-  * - 14
-    - Dara/PI/Chemo/Dex
-    -
-    -
-  * - 15
-    - Dara/PI/IMID/Dex
-    -
-    -
-  * - 16
-    - Other
-    -
-    -
+
+**Additionally, there is another NDMM treatment category for every one listed above,
+which is that treatment category with '+ASCT' at the end.**
 
 .. todo::
 
@@ -390,6 +351,123 @@ categories:
   checking what drugs show up in Flatiron data. That is, exactly which drugs
   should we include in each drug class (IMiD, PI, chemo, etc.), and what will be
   the consequences of lumping everything else into "Other"?
+
+Treatment Assignment
+++++++++++++++++++++
+
+The Phase 1 simulation had fixed coverage percentages for each treatment category
+in each line. In Phase 2, we will implement a more sophisticated model that takes
+into account covariates and prior treatment in a patient's history, informed by Flatiron
+data.
+
+Because the model needs to be trained within Foundry, it has to be passed from
+Foundry to Vivarium in a serialized format. While a human-readable and interoperable
+format would be ideal, for now we will use :code:`joblib.dump` to output a :code:`.pkl` file. The pickled
+form of the model may depend on the version of Python, :code:`sklearn`,
+and possibly sklearn subdependencies it was trained with. We will need to align
+these between the Vivarium environment and the Foundry environment and verify
+that outputs are what we expect.
+
+.. list-table:: Python and package versions
+  :header-rows: 1
+
+  * - Package
+    - Version
+  * - Python
+    - 3.8.13
+  * - scikit-learn
+    - 1.1.1
+
+.. todo::
+  Once models are finalized, share a set of predictions made within Foundry to use
+  for verifying that the models as loaded in the Vivarium environment predict the same thing.
+
+To be precise, there will be two models: one that predicts the
+first line of treatment (the treatment a simulant receives at the time of incidence of MM)
+and another that predicts later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
+pickled object will be an sklearn Classifier, implemented by an sklearn Pipeline.
+This object will have a :code:`predict_proba` method which takes a pandas DataFrame
+of covariates and returns a 2d numpy array of probabilities. That returned array
+can be transformed into a DataFrame with meaningful column names like so:
+
+.. sourcecode:: python
+
+  predictions = pd.DataFrame(model.predict_proba(covariates_dataframe), columns=model.classes_)
+
+Then, the actual treatment class is sampled with those probabilities.
+
+The covariates and format of those covariates are listed below.
+
+.. todo::
+  These are not finalized!
+
+.. list-table:: Covariates for NDMM treatment prediction
+  :header-rows: 1
+
+  * - Column name
+    - Description
+    - Allowed values
+  * - FirstTreatmentAge
+    - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
+    -
+  * - Sex
+    - The simulant's sex.
+    - 'M' or 'F'
+  * - IsBlack
+    - Whether or not the simulant is Black.
+    - 0 or 1
+  * - RenalImpairment
+    - Whether or not the simulant has renal impairment.
+    - 0 or 1
+  * - RiskType
+    - Cytogenetic risk category.
+    - 'Standard risk' or 'High risk'
+  * - EcogValue
+    - ECOG performance status (not currently included in sim!).
+    - 0, 1, 2, 3, or 4
+  * - EligibilityProxy
+    - Derived from already-listed covariates: 1 if FirstTreatmentAge < 76 years and EcogValue <= 2, 0 otherwise.
+    - 0 or 1
+  * - Year
+    - Current (unrounded) year - 2000. e.g. 22.5 for halfway through 2022.
+    -
+  * - PracticeType
+    - The type of practice where the simulant is being treated (not currently included in sim!).
+    - 'COMMUNITY' or 'ACADEMIC'
+
+.. list-table:: **Additional** covariates for RRMM treatment prediction
+  :header-rows: 1
+
+  * - Column name
+    - Description
+    - Allowed values
+  * - RegimenClass_previous
+    - The treatment category used in the previous line (e.g. 'PI+IMID+Dex').
+    - Any treatment category in the treatment model. In some cases, it may be
+      a treatment category that we have never seen precede another treatment in
+      our training data, in which case we essentially ignore this variable.
+  * - Duration_previous
+    - Time since the previous relapse in days / 30.4.
+    -
+  * - {component}_flag_previous
+    - For each component part of a valid treatment category (e.g. 'PI', 'IMID', 'ASCT')
+      a binary flag indicating whether it was present in the previous line of treatment.
+    -
+  * - LineNumber
+    - Line of treatment. Equal to the number of relapses + 1.
+    - Unbounded (linear extrapolation), but capped by our cause model at 5.
+  * - TimeSinceFirstTreatment
+    - Time elapsed since first treatment (a.k.a. incidence of MM) in unrounded years.
+    -
+  * - PrecedingUnique
+    - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
+      *ever* been treated with.
+    -
+  * - PrecedingShortUnique
+    - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
+      *ever* been treated with *in lines lasting < 3 \* 30.4 days*.
+    -
+
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
