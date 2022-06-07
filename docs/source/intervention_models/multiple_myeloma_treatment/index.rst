@@ -368,7 +368,7 @@ Treatment Regimen Categories
 ++++++++++++++++++++++++++++
 
 Based on conversations
-with the client and with our clinical expert Manoj Menon, we are expanding the
+with the client and with our clinical expert, we are expanding the
 modeled treatment regimen categories to the following set of 24 mutually exclusive and exhaustive
 categories:
 
