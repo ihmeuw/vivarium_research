@@ -454,9 +454,13 @@ HR is applied to it.
   :file: mortality_hrs.csv
   :header-rows: 1
 
+:download:`mortality_hrs.csv`
+
 .. csv-table:: Relapse hazard ratios
   :file: relapse_hrs.csv
   :header-rows: 1
+
+:download:`relapse_hrs.csv`
 
 A lognormal distribution of uncertainty within the uncertainty intervals reported
 above should be assumed (for the purposes of the placeholder values, the point
