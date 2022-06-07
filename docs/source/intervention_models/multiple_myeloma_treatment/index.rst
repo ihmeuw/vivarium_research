@@ -254,10 +254,6 @@ See also:
 Affected Outcomes
 +++++++++++++++++
 
-.. todo::
-
-  Fill out the following table with a list of known outcomes affected by the intervention, regardless of if they will be included in the simulation model or not, as it is important to recognize potential unmodeled effects of the intervention and note them as limitations as applicable.
-
 .. list-table:: Affected Outcomes
   :widths: 15 15 15 15
   :header-rows: 1
@@ -266,9 +262,21 @@ Affected Outcomes
     - Effect
     - Modeled?
     - Note
-  * -
+  * - Mortality
+    - Various
+    - Yes
     -
+  * - Relapse
+    - Various
+    - Yes
     -
+  * - Response to future therapy
+    - Decreases efficacy of similar therapy
+    - No
+    -
+  * - Quality of life/disability weight
+    - Various
+    - No
     -
 
 Baseline Coverage Data
@@ -310,12 +318,8 @@ Treatment Regimen Category Components
 +++++++++++++++++++++++++++++++++++++
 
 These are the components that make up our modelled treatment regimen categories.
-They are drug classes, individual drugs, and ASCT.
-
-.. note::
-
-  Not every combination of these components is a valid treatment regimen category; those
-  are enumerated in the next section.
+They are drug classes, individual drugs, and ASCT. Not every combination of these
+components is a valid treatment regimen category; those are enumerated in the next section.
 
 .. list-table:: Modeled Treatment Regimen Category Components
   :widths: 1 1 5 10
@@ -350,8 +354,9 @@ They are drug classes, individual drugs, and ASCT.
     - N/A
     - While ASCT is a subsequent step after induction therapy, we consider it
       part of the same line and it is included in the treatment regimen category as if it
-      were at the time of induction. We restrict it to only appear in NDMM (while later transplants
-      do occur in real life, they are relatively uncommon, and we do not model them.)
+      were at the time of induction. We restrict it to only appear in NDMM; while
+      later transplants do occur in real life, they are relatively uncommon, and
+      we do not model them.
 
 .. note::
 
@@ -462,9 +467,9 @@ that outputs are what we expect.
     :language: python
     :linenos:
 
-To be precise, there will be two models: one that predicts the
+To be precise, there will be two models: one that assigns the
 first line of treatment (the treatment a simulant receives at the time of incidence of MM)
-and another that predicts later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
+and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
 pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
 This object has a :code:`predict_proba` method which takes a pandas DataFrame
 of covariates and returns a 2d numpy array of probabilities. That returned array
@@ -472,7 +477,7 @@ can be transformed into a DataFrame with meaningful column names like so:
 
 .. code-block:: python
 
-  ndmm_predictions = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
+  ndmm_assignment_probs = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
 
 .. note::
 
@@ -481,7 +486,7 @@ can be transformed into a DataFrame with meaningful column names like so:
 
 .. todo::
   These models are not finalized! These are just first versions to allow testing
-  the format of pickle files, predictions, etc.
+  the format of pickle files, output probabilities, etc.
 
 .. list-table:: Pickle file paths
   :widths: 1 10
@@ -496,7 +501,7 @@ can be transformed into a DataFrame with meaningful column names like so:
 
 Then:
 
-* In the baseline scenario, the simulated treatment regimen category is sampled with the predicted probabilities.
+* In the baseline scenario, the simulated treatment regimen category is assigned according to the output probabilities.
 * In the alternative scenarios, the probabilities are adjusted according to business rules
   before sampling.
 
@@ -510,7 +515,7 @@ Model Covariates
 .. todo::
   These are not finalized!
 
-.. list-table:: Covariates for NDMM treatment prediction
+.. list-table:: Covariates for NDMM treatment assignment
   :header-rows: 1
 
   * - Column name
@@ -544,7 +549,7 @@ Model Covariates
     - The type of practice where the simulant is being treated (not currently included in sim!).
     - 'COMMUNITY' or 'ACADEMIC'
 
-.. list-table:: Covariates for RRMM treatment prediction
+.. list-table:: Covariates for RRMM treatment assignment
   :header-rows: 1
 
   * - Column name
@@ -601,10 +606,10 @@ Model Covariates
 Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The following script verifies that predictions for a certain set of covariates
+The following script verifies that assignment probabilities for a certain set of covariates
 match those generated within Foundry.
 
-.. literalinclude:: verify_model_predictions.py
+.. literalinclude:: verify_model_probabilities.py
   :language: python
   :linenos:
 

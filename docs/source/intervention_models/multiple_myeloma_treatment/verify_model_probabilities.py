@@ -17,15 +17,15 @@ ndmm_X_to_predict = pd.DataFrame(pd.Series({
   'Year': 16.0,
   'PracticeType': 'COMMUNITY',
 })).T
-ndmm_predictions = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
-print(ndmm_predictions)
+ndmm_assignment_probs = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
+print(ndmm_assignment_probs)
 
 ndmm_verification_output = pd.read_csv(StringIO("""Chemo+IMID+Dex,Chemo+PI+Dex,Chemo+PI+Dex+ASCT,Dara+IMID+Dex,Dara+PI+Chemo+Dex,Dara+PI+Chemo+Dex+ASCT,Dara+PI+IMID+Dex,Dara+PI+IMID+Dex+ASCT,IMID+Dex,PI+Dex,PI+IMID+Dex,PI+IMID+Dex+ASCT
 0.0016129339451798135,0.0815282882581773,0.05122207967923396,0.005591987927010277,0.001806580204131534,0.00017568989775983544,0.015702210347912037,0.0013803719276894802,0.023314521312768833,0.03288373934781868,0.4359901755263417,0.3487914216259764"""))
 
 print(ndmm_verification_output)
 
-assert np.allclose(ndmm_predictions, ndmm_verification_output)
+assert np.allclose(ndmm_assignment_probs, ndmm_verification_output)
 
 # RRMM
 
@@ -56,12 +56,12 @@ rrmm_X_to_predict = pd.DataFrame(pd.Series({
     'PrecedingUnique': 3,
     'PrecedingShortUnique': 0,
 })).T
-rrmm_predictions = pd.DataFrame(rrmm_model.predict_proba(rrmm_X_to_predict), columns=rrmm_model.classes_)
-print(rrmm_predictions)
+rrmm_assignment_probs = pd.DataFrame(rrmm_model.predict_proba(rrmm_X_to_predict), columns=rrmm_model.classes_)
+print(rrmm_assignment_probs)
 
 rrmm_verification_output = pd.read_csv(StringIO("""Chemo+PI+Dex,Dara+IMID+Dex,Dara+PI+Dex,IMID+Dex,Isa+IMID+Dex,Isa+PI+Dex,Other,PI+Dex,PI+IMID+Dex
 0.05367936880522077,0.1853413945827947,0.12856948577873328,0.10565003215944607,0.0,0.00022166903745851111,0.09619608476678124,0.16987234340968332,0.26046962145988195"""))
 
 print(rrmm_verification_output)
 
-assert np.allclose(rrmm_predictions, rrmm_verification_output)
+assert np.allclose(rrmm_assignment_probs, rrmm_verification_output)
