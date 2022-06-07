@@ -325,7 +325,7 @@ components is a valid treatment regimen category; those are enumerated in the ne
   :widths: 1 1 5 10
   :header-rows: 1
 
-  * - Drug class
+  * - Component
     - Abbreviation
     - Drugs
     - Notes
