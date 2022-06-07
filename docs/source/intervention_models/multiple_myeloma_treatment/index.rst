@@ -483,6 +483,10 @@ Assumptions and Limitations
    is truly random.
 #. We assume a linear effect of line number/number of previous relapses on
    treatment assignment (in log-probability space).
+#. We only model ASCT in NDMM.
+#. We assume all conditioning regimens for ASCT have identical effects.
+#. We assume all maintenance therapies, or the lack of maintenance therapy, have
+   identical effects.
 #. We assume that all regimens within a regimen category have identical effects.
 #. We assume that treatment regimen categories have proportional hazards; that is,
    their hazard ratios do not change depending on time since incidence/relapse.
