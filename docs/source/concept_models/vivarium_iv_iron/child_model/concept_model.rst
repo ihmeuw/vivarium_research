@@ -373,6 +373,10 @@ Details on how to calculate weighted averages for specific simulation parameters
    * - 3.2.1.1 ENN only, 0.1 day timestep
      - Reran simulation with early neonates only and 0.1 rather than 0.5 day timestep to test hypothesis that we were underestimating LRI EMR due to bad approximation between rates and probabilities when rates are very high relative to timestep duration (which is excacerbated by LBWSG risk effects).
      - LRI EMR was still significantly underestimated, although it increased from 50.1 to 54.6 for early neonatal males in South Asia.
+   * - 4.0 Line list demography from maternal outputs
+     - Simulation run from line list demography fertility component from maternal model 8.0 simulation outputs
+     - [1] `LBWSG exposure data for South Asia from the maternal outputs was used for both SA and SSA in this run, so the exposure does not validate for SSA but looks good for SA, as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_lbwsg_exposure.ipynb>`_ [2] `Probability of male at birth is slightly underestimated and does not significantly vary by location (appears to just be 50/50... follow-up with maternal sim request). <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_population_structure.ipynb>`_ [3] `Population age structure looks as expected by the sixth year of the simulation (as expected). <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_population_structure.ipynb>`_ [4] `Cause models look off, as expected due to LBWSG calibration issues. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_cause_model_validation.ipynb>`_
+
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1

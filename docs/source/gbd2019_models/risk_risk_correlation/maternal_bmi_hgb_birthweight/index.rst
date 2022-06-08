@@ -64,6 +64,10 @@ We will model an association between a joint categorical distribution of materna
 
    Modeling strategy may be adapted if BMGF data is available for proportion born with low BW (<2500g) only (rather than mean birthweight). Briefly, in this case, we will use the probability born low birth weight for each maternal BMI/hemoglobin category to sample from LBWSG exposure categories with BW<2500 grams or from categories with BW>=2500g rather than apply shifts to birthweight values sampled from the overall LBWSG exposure distribution.
 
+.. warning::
+
+   Do not use these *unadjusted* shifts in the simulation directly. They need to be adjusted according to the steps that come below this table before they are used in the simulation.
+
 .. list-table:: Joint pre-pregnancy BMI and early pregnancy hemoglobin category **unadjusted** birthweight shifts
    :header-rows: 1 
 
@@ -80,12 +84,12 @@ We will model an association between a joint categorical distribution of materna
    *  - cat3
       - <18.5
       - >=10
-      - -182 (95% CI: -321, -42; normal distribution of uncertainty)
+      - -182 (95% CI: -239, -125; normal distribution of uncertainty)
       - Relative to cat4
    *  - cat2
       - >=18.5
       - <10
-      - -94 (95% CI: -191, 4; normal distribution of uncertainty)
+      - -94 (95% CI: -142, -46; normal distribution of uncertainty)
       - Relative to cat4
    *  - cat1
       - <18.5
@@ -138,7 +142,7 @@ Where :math:`p_\text{cat}` represents the exposure prevalence of a given materna
       - 
    *  - p_low_hgb
       - Prevalence of hemoglobin less than 10 g/L
-      - `Available at the location/age/draw-specific level here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+      - `Available at the location/age/draw-specific level here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_. `Non-age-specific values (for use in the child sim) can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100.csv>`_
       - `Calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_100.ipynb>`_
    *  - p_low_bmi_given_low_hgb
       - Prevalence of BMI < 18.5 given hemoglobin < 10 g/L
