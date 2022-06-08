@@ -142,7 +142,7 @@ Where :math:`p_\text{cat}` represents the exposure prevalence of a given materna
       - 
    *  - p_low_hgb
       - Prevalence of hemoglobin less than 10 g/L
-      - `Available at the location/age/draw-specific level here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+      - `Available at the location/age/draw-specific level here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_. `Non-age-specific values (for use in the child sim) can be found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100.csv>`_
       - `Calculated in this notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_100.ipynb>`_
    *  - p_low_bmi_given_low_hgb
       - Prevalence of BMI < 18.5 given hemoglobin < 10 g/L
