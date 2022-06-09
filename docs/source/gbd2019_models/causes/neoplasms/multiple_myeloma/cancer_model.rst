@@ -257,7 +257,7 @@ State and Transition Data Tables
      - data_dir/mortality_fifth_line.csv
      -
 
-data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
+data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2
 
 .. list-table:: Transition Data
    :widths: 1, 1, 1, 10, 10
