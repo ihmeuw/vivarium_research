@@ -25,6 +25,12 @@ Multiple Myeloma
     - Relapsed and/or refractory multiple myeloma
     - Multiple myeloma that has ever relapsed. "Refractory"
       refers to relapse that happens during or shortly after termination of treatment.
+  * - ASCT
+    - Autologous stem cell transplantation
+    - A preferred treatment for multiple myeloma in which a patient has stem cells extracted,
+      is given high-dose chemotherapy, and then receives an infusion of their own stem cells.
+      Not every patient with multiple myeloma is eligible for ASCT, and treatment strategy varies significantly
+      between eligible and ineligible patients.
 
 Disease Overview
 ----------------
