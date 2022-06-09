@@ -418,7 +418,7 @@ Endpoints
       occurs at death or initiation of next treatment or loss to progression and/or treatment follow-up
 
 Mortality and Progression Hazard (outdated Braunlin version)
-++++++++++++++++++++++++++++++++
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 We used survival curves including overall survival and treatment duration that 
 differed by line of treatment from Braunlin et al. to estimate the time-varying 
