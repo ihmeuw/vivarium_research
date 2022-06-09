@@ -391,31 +391,39 @@ Endpoints
 +++++++++
 
 .. list-table:: Endpoints
-  :widths: 5 5 10
+  :widths: 1 1 2 4 5
   :header-rows: 1
 
   * - Abbreviation
     - Full name
-    - Definition
+    - Event
+    - Censored at
+    - Reporting
   * - OS
     - Overall survival
-    - Endpoint of survival analysis in which the event is death and censoring occurs at loss to mortality follow-up
+    - Death
+    - Loss to mortality follow-up
+    - Frequently a secondary outcome of trials, sometimes a primary outcome
   * - PFS
     - Progression-free survival
-    - Endpoint of survival analysis in which the event is progressive disease or death and censoring
-      occurs at loss to progression and/or mortality follow-up
+    - Progressive disease or death
+    - Loss to progression and/or mortality follow-up
+    - Frequently a primary outcome of trials, sometimes a secondary outcome
   * - TTP
     - Time to progression
-    - Endpoint of survival analysis in which the event is progressive disease and censoring
-      occurs at death or loss to progression follow-up
+    - Progressive disease
+    - Death or loss to progression follow-up
+    - Sometimes a secondary outcome of trials
   * - TTNT
     - Time to next treatment
-    - Endpoint of survival analysis in which the event is initiation of next treatment and censoring
-      occurs at death or loss to treatment follow-up
+    - Initiation of next treatment
+    - Death or loss to treatment follow-up
+    - Sometimes a secondary outcome of trials
   * - TTD
     - Time to death
-    - Endpoint of survival analysis in which the event is death and censoring
-      occurs at death or initiation of next treatment or loss to progression and/or treatment follow-up
+    - Death
+    - Death or initiation of next treatment or loss to progression and/or treatment follow-up
+    - We invented this; never reported in trials
 
 Mortality and Progression Hazard (outdated Braunlin version)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
