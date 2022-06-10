@@ -176,7 +176,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
     - Expanded treatment categories and hazard ratios (likely placeholder values)
     -
   * - Model 2
-    - Split NDMM survival curve by ASCT, use directly instead of subtraction between relapse and death
+    - Split NDMM survival curve by ASCT, use TTNT directly instead of subtraction between PFS and OS
     -
   * - Model 3
     - Sophisticated treatment prediction model as a scenario and business-rule-modified alternative scenarios
