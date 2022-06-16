@@ -543,6 +543,17 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.3.5.1: Bugfix and BMI
      - Fixes to pregnancy state durations and YLDs as well as implementation of BMI/Hemoglobin exposure
      - `Validation notebooks for model 3.5.1_bugfix are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model3.5.1_james_bugfix_and_bmi>`_. Postpartum duration now five weeks as expected. Pregnancy duration approximately equal to mean gestational age, as expected (but can be followed up with a more detailed validation in interactive simulation). YLDs behaving as expected. Joint BMI/hemoglobin exposure functioning as expected (although verification that exposure does not change with intervention scenarios should be done when ready).
+   * - I.8 Intervention coverage
+     - Implemented intervention coverage and scenarios
+     - `Validation notebook for intervention coverage is available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8/intervention%20coverage.ipynb>`_. Issues added to the table below. BEP/MMS targeting looks good. Rate of scale-up looks good.
+   * - I.8 Intervention coverage, bugfix
+     - Run to fix issues identified with the previous run
+     - `Validation notebooks for the intervention coverage bugfix run are available here <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model8_coverage_bugfix>`_. All issues appear resolved, with the exception of the request for output of intervention administration counts. Also of note, the "antenatal_iv_iron_invalid" and "postpartum_iv_iron_invalid" person time categories are inclusive of simulants with hemoglobin levels greater than 10 g/dL at the time of administration -- this makes direct V&V of the intervention targeting difficult, and it should be doublechecked when intervention administration counts are provided as an output and/or in the interactive simulation.
+   * - I.8 intervention effects
+     - Implement intervention effects and add intervention administration count outputs.
+     - [1] `Deaths due to maternal disorders not equal between baseline and alternative scenarios. Deaths due to other causes vary between all scenarios <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [2] `Anemia YLDs not equal in baseline and alternative scenarios in the not pregnant state. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [3] `Anemia YLDs not varying by scenario as expected in the pregnant state, even though anemia person time does. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [4] Would like hemoglobin sum and person time output files stratified by intervention coverage to verify intervention effect sizes, please. [5] `Intervention count outputs and coverage looks good :) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention%20coverage%20from%20counts.ipynb>`_ 
+
+
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1

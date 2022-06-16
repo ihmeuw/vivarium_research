@@ -366,8 +366,8 @@ revisit this and keep track of dad as well as moms).
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
-Multiparity --- make twins with probability from ACS, about 2.5%, to
-be computed more precisely.  See Section (16) for additional details.
+Multiparity --- make twins with probability from ACS, about 2.5%.  See
+Section (16) for additional details.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -857,14 +857,34 @@ large databases relevant to voting in Texas identified address numeric
 data as more accurate than the street name part.
 
 
-2.3.10 Additional Components (14-16)
+2.3.10 Twins and multiparous births (16)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+There is a lot we can potentially add to the model to represent how
+hard it is to link twins and other multiples.  Individuals with the
+same day of birth and last name will be a challenge, and if they have
+the same address and same first letter of their first name, that is
+even harder. For now, we will take a simple approach to this model,
+with the plan to develop more complexity in the future if we determine
+that it is an important part of the record linkage challenges we wish
+to address.
+
+I was planning to identify the twin rate from ACS, but I'm actually
+not sure how to do it, because I can only tell if two kids have the
+same age, not the same date of birth.  So for a simple model, until we
+find something better let us (1) select each birth to be twins with
+probablity 4\%; (2) ensure that for these births there are two
+simulants added to the same household, with the same date of birth,
+and the same last name.
+
+
+2.3.11 Additional Components (14-15)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 We don't need these components for our minimal model, but we might
 eventually want: time-dependent changes to observers of sex, based on
 gender assigned at birth (14); multiple households for individuals,
-leading to double counting in census (15); twins and multiparous
-births in fertility model (16).
+leading to double counting in census (15).
 
 
 .. _census_prl_limitations:
