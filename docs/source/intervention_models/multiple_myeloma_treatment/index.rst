@@ -617,89 +617,82 @@ match those generated within Foundry.
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
 
-.. todo::
-
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
-
 .. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
   :header-rows: 1
 
   * - Outcome
-    - Outcome type
-    - Outcome ID
     - Affected measure
     - Effect size measure
     - Effect size
     - Note
-  * -
-    -
-    -
-    -
-    -
-    -
-    -
+  * - Mortality
+    - Hazard rate of death
+    - Hazard ratio
+    - Various
+    - HRs relative to mix of treatment observed in Flatiron survival data
+  * - Relapse
+    - Hazard rate of relapse
+    - Hazard ratio
+    - Various
+    - HRs relative to mix of treatment observed in Flatiron survival data
 
-Affected Outcome #1
-+++++++++++++++++++++
 
-.. important::
+Mortality and Relapse Effects
++++++++++++++++++++++++++++++
 
-  Copy and paste this section for each affected outcome included in this document
+.. note::
+
+  For more about how we model relapse, see :ref:`the Multiple Myeloma
+  cause model <2019_cancer_model_multiple_myeloma>`.
+
+For each multiple myeloma setting (NDMM, RRMM) in which it can be used,
+each regimen category has a hazard ratio (HR) for mortality and an HR for relapse.
+These hazard ratios are relative to the regimen category mix in the base survival curve.
+Therefore, the hazard at time :math:`t` after incidence/relapse for a simulant
+with covariates :math:`x` being treated with regimen category :math:`r` is:
+
+.. math::
+
+  h(t|x,r) = h(t|x) * HR_r
+
+**Note that even though there are only two settings -- NDMM and RRMM -- there are
+three base survival curves.** This is because HRs between ASCT
+and non-ASCT NDMM regimen categories cannot be estimated. In NDMM,
+the correct base curve is selected according to the treatment assigned, and then the
+HR is applied to it.
 
 .. todo::
 
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
+  Explain how HRs were estimated, including both NMA and making them relative to
+  Flatiron regimen category mix.
 
 .. todo::
 
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+  These are placeholder values pending completion of network meta-analysis! The
+  final files may not have values for *every* setting-category combination listed here, but
+  they are guaranteed not to be missing any combinations that are possible outputs
+  of the relevant treatment assignment model.
 
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
-  :widths: 15 15 15
+.. csv-table:: Mortality hazard ratios
+  :file: mortality_hrs.csv
   :header-rows: 1
 
-  * - Restriction
-    - Value
-    - Note
-  * - Male only
-    -
-    -
-  * - Female only
-    -
-    -
-  * - Age group start
-    -
-    -
-  * - Age group end
-    -
-    -
-  * - Other
-    -
-    -
+:download:`mortality_hrs.csv`
 
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15
+.. csv-table:: Relapse hazard ratios
+  :file: relapse_hrs.csv
   :header-rows: 1
 
-  * - Population
-    - Effect size
-    - Note
-  * -
-    -
-    -
+:download:`relapse_hrs.csv`
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported
+above should be assumed (for the purposes of the placeholder values, the point
+estimate can be ignored).
 
 .. todo::
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+  Should there be correlation between mortality hazard ratio and relapse hazard ratio,
+  similar to the correlation between OS and PFS in Phase 1?
 
 .. todo::
 
@@ -707,6 +700,25 @@ Affected Outcome #1
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Add an assumption about time trend, once we determine which assumption we will make.
+
+#. We assume that treatment assignment depends only on the selected covariates and
+   characteristics of the preceding treatment, and that the remaining variation
+   is truly random.
+#. We assume a linear effect of line number/number of previous relapses on
+   treatment assignment (in log-probability space).
+#. We only model ASCT in NDMM.
+#. We assume all conditioning regimens for ASCT have identical effects.
+#. We assume all maintenance therapies, or the lack of maintenance therapy, have
+   identical effects.
+#. We assume that all regimens within a regimen category have identical effects.
+#. We assume that treatment regimen categories have proportional hazards; that is,
+   their hazard ratios do not change depending on time since incidence/relapse.
+#. We assume that treatment regimen categories do not have interaction effects
+   with any covariates.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
