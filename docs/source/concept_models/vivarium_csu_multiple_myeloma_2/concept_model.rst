@@ -162,6 +162,26 @@ set of treatment categories based on treatment guidelines from the `NCCN
 7.0 Model Builds and Validation Tracking
 ++++++++++++++++++++++++++++++++++++++++
 
+.. list-table:: Model verification and validation tracking
+  :widths: 3 10 20
+  :header-rows: 1
+
+  * - Model
+    - Description
+    - V&V summary
+  * - Model 0
+    - Phase 1 model re-run
+    -
+  * - Model 1
+    - Expanded treatment categories and hazard ratios (likely placeholder values)
+    -
+  * - Model 2
+    - Split NDMM survival curve by ASCT, use TTNT directly instead of subtraction between PFS and OS
+    -
+  * - Model 3
+    - Sophisticated treatment prediction model as a scenario and business-rule-modified alternative scenarios
+    -
+
 8.0 Desired Outputs
 +++++++++++++++++++
 
@@ -170,6 +190,77 @@ set of treatment categories based on treatment guidelines from the `NCCN
 
 8.2 Requested Outputs from Vivarium
 -----------------------------------
+
+8.2.1 Treatment output table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+  This should be similar to the treatment output table from Phase 1, with an added stratification
+  by age.
+
+.. list-table:: Treatment observer metrics
+  :header-rows: 1
+
+  * - Variable
+    - Definition
+  * - input_draw
+    - Input draw number. len(input_draw) = 30
+  * - scenario
+    - Intervention scenario. Choose from ['naive', 'baseline', ...]
+  * - year
+    - Calendar year
+  * - treatment_line
+    - Treatment line/disease state a simulant is in. If a simulant is in state
+      `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose
+      from [1, 2, 3, 4, 5+]
+  * - treatment_category
+    - Treatment regimen category a simulant is in. For example, `IMID+PI+Dex`.
+  * - age
+    - Age group a simulant is in.
+  * - value
+    - Count of simulants in age group `age` who initiated the `treatment_category` in `treatment_line` during `year`.
+
+8.2.2 Survival output table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+  This is very similar to :ref:`the survival output table from Phase 1 <mm5.6>`, with an added
+  stratification by treatment category.
+
+.. list-table:: Survival observer metrics
+  :header-rows: 1
+
+  * - Variable
+    - Definition
+  * - input_draw
+    - Input draw number. len(input_draw) = 30
+  * - scenario
+    - Intervention scenario. Choose from ['naive', 'baseline', ...]
+  * - treatment_line
+    - Treatment line/disease state a simulant is in. If a simulant is in state
+      `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose
+      from [1, 2, 3, 4, 5+]
+  * - treatment_category
+    - Treatment regimen category a simulant is in. For example, `IMID+PI+Dex`.
+  * - period
+    - The number of days since the entrance into the `treatment_line` that the
+      count measures were evaluated on.
+  * - alive_at_start
+    - Count of at-risk simulants alive at `period` - 28 days since they entered `treatment_line`.
+  * - died_by_end
+    - Count of `alive_at_start` simulants who died between `period` - 28 and `period` days since they entered `treatment_line`.
+  * - progressed_by_end
+    - Count of `alive_at_start` simulants who progressed to next line of treatment/disease state
+      between `period` - 28 and `period` days since they entered `treatment_line`.
+  * - sim_end_on
+    - Count of `alive_at_start` simulants without death or progression at the end of the simulation
+      between `period` - 28 and `period` days since they entered `treatment_line`.
+
+Time frame for survival observer (timestep = 28 days):
+ 1. start_date = 2021-01-01, end_date = 2025-12-31
+ 2. start_date = 2025-01-01, end_date = 2025-12-31
 
 9.0 Back of the Envelope Calculations
 +++++++++++++++++++++++++++++++++++++
