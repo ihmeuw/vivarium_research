@@ -726,19 +726,19 @@ Validation and Verification Criteria
 Treatment Assignment
 ^^^^^^^^^^^^^^^^^^^^
 
-In each year, we will calculate the proportions of initiated treatments that were in each treatment regimen category
-in each line using the output of the treatment observer.
+In each year, line, and age group, we will calculate the proportions of initiated treatments that were in each treatment
+regimen category using the output of the treatment observer.
 
 When the simulation is using a naive treatment assignment scheme, these should approximately equal the proportions of the relevant (NDMM or RRMM) naive scheme, in every year and line. In practice, we will bin later lines to have sufficient
 sample size to verify this.
 
-When the simulation is using a sophisticated treatment assignment scheme, we will verify that:
+When the simulation is using a sophisticated treatment assignment scheme, NDMM treatment proportions should be similar to the naive proportions, except that:
 
-#. NDMM treatment proportions should still be approximately the same as the naive proportions. Any major discrepancies
-   should be investigated to determine if they can be explained by a risk exposure difference (e.g. the Flatiron cohort
-   being younger than the data source we use to inform age-at-diagnosis).
-#. Treatments with a positive time trend according to our model outputs in Foundry have higher proportions in later
-   simulation years, and vice versa.
+ #. Treatments with a positive time trend according to our model outputs in Foundry have higher proportions in the
+    first year. They should have even higher proportions in later simulation years. Both of these effects will be
+    reversed for treatments with negative time trends.
+ #. Treatments with a positive age trend according to our model outputs in Foundry have higher proportions in older
+    age groups, and vice versa.
 
 .. todo::
 
