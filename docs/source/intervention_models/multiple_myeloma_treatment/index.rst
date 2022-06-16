@@ -279,30 +279,6 @@ Affected Outcomes
     - No
     -
 
-Baseline Coverage Data
-++++++++++++++++++++++++
-
-We plan to use Flatiron to inform baseline coverage of each treatment regimen.
-
-.. todo::
-
-  Document known baseline coverage data, using the table below if appropriate
-
-.. list-table:: Baseline coverage data
-  :widths: 15 15 15 15 15
-  :header-rows: 1
-
-  * - Location
-    - Subpopulation
-    - Coverage parameter
-    - Value
-    - Note
-  * -
-    -
-    -
-    -
-    -
-
 Vivarium Modeling Strategy
 --------------------------
 
@@ -426,6 +402,14 @@ categories:
     - NDMM only
   * - Other+ASCT
     - Covers all other combinations of *non-ASCT components* in the presence of ASCT.
+
+Baseline Coverage Data
+++++++++++++++++++++++++
+
+If any simulants are initialized into the NDMM state in the multiple myeloma cause model
+(this is TBD according to what is easier to implement), they will all be initialized
+to PI+IMID+Dex. The 10-year burn-in period of running the treatment assignment scheme
+described below will make this initialization almost entirely inconsequential.
 
 Treatment Assignment
 ++++++++++++++++++++
