@@ -722,3 +722,39 @@ Assumptions and Limitations
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Treatment Assignment
+^^^^^^^^^^^^^^^^^^^^
+
+In each year, we will calculate the proportions of initiated treatments that were in each treatment regimen category
+in each line using the output of the treatment observer.
+
+When the simulation is using a naive treatment assignment scheme, these should approximately equal the proportions of the relevant (NDMM or RRMM) naive scheme, in every year and line. In practice, we will bin later lines to have sufficient
+sample size to verify this.
+
+When the simulation is using a sophisticated treatment assignment scheme, we will verify that:
+
+#. NDMM treatment proportions should still be approximately the same as the naive proportions. Any major discrepancies
+   should be investigated to determine if they can be explained by a risk exposure difference (e.g. the Flatiron cohort
+   being younger than the data source we use to inform age-at-diagnosis).
+#. Treatments with a positive time trend according to our model outputs in Foundry have higher proportions in later
+   simulation years, and vice versa.
+
+.. todo::
+
+  How do we verify RRMM treatment assignment once we are using a sophisticated treatment assignment scheme?
+
+Treatment Effects
+^^^^^^^^^^^^^^^^^
+
+In each timestep, we will calculate the death risk and relapse risk in each treatment regimen category.
+The death risk is :code:`died_by_end` divided by :code:`alive_at_start`, while the relapse risk is :code:`progressed_by_end` divided by :code:`alive_at_start`.
+All of these values are recorded by the survival observer.
+
+When the simulation is using a naive treatment assignment scheme, the relative risk of death or relapse between treatment :math:`t1` and treatment :math:`t2` in a timestep, :math:`risk_{t1} / risk_{t2}`,
+should approximately equal the ratio of the corresponding HRs, :math:`HR_{t1} / HR_{t2}`. In practice,
+we will bin groups of adjacent timesteps in order to have sufficient sample size to verify this.
+
+.. todo::
+
+  How do we verify treatment effects once we are using a sophisticated treatment assignment scheme?
