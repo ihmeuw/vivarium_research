@@ -1,0 +1,37 @@
+Setting,Base survival curve,Regimen category,Hazard ratio,Lower bound,Upper bound
+NDMM,NDMM without transplant,PI+Dex,3.0,2.9,3.1
+NDMM,NDMM without transplant,IMID+Dex,3.0,2.9,3.1
+NDMM,NDMM without transplant,PI+IMID+Dex,0.5,0.4,0.6
+NDMM,NDMM without transplant,Chemo+PI+Dex,0.5,0.4,0.6
+NDMM,NDMM without transplant,Chemo+IMID+Dex,0.5,0.4,0.6
+NDMM,NDMM without transplant,Dara+PI+Dex,0.2,0.1,0.3
+NDMM,NDMM without transplant,Dara+IMID+Dex,0.2,0.1,0.3
+NDMM,NDMM without transplant,Isa+PI+Dex,0.2,0.1,0.3
+NDMM,NDMM without transplant,Isa+IMID+Dex,0.2,0.1,0.3
+NDMM,NDMM without transplant,Dara+PI+Chemo+Dex,0.2,0.1,0.3
+NDMM,NDMM without transplant,Dara+PI+IMID+Dex,0.2,0.1,0.3
+NDMM,NDMM without transplant,Other,1.7,1.6,1.9
+NDMM,NDMM with transplant,PI+Dex+ASCT,3.0,2.9,3.1
+NDMM,NDMM with transplant,IMID+Dex+ASCT,3.0,2.9,3.1
+NDMM,NDMM with transplant,PI+IMID+Dex+ASCT,0.5,0.4,0.6
+NDMM,NDMM with transplant,Chemo+PI+Dex+ASCT,0.5,0.4,0.6
+NDMM,NDMM with transplant,Chemo+IMID+Dex+ASCT,0.5,0.4,0.6
+NDMM,NDMM with transplant,Dara+PI+Dex+ASCT,0.2,0.1,0.3
+NDMM,NDMM with transplant,Dara+IMID+Dex+ASCT,0.2,0.1,0.3
+NDMM,NDMM with transplant,Isa+PI+Dex+ASCT,0.2,0.1,0.3
+NDMM,NDMM with transplant,Isa+IMID+Dex+ASCT,0.2,0.1,0.3
+NDMM,NDMM with transplant,Dara+PI+Chemo+Dex+ASCT,0.2,0.1,0.3
+NDMM,NDMM with transplant,Dara+PI+IMID+Dex+ASCT,0.2,0.1,0.3
+NDMM,NDMM with transplant,Other+ASCT,1.7,1.6,1.9
+RRMM,RRMM,PI+Dex,3.0,2.9,3.1
+RRMM,RRMM,IMID+Dex,3.0,2.9,3.1
+RRMM,RRMM,PI+IMID+Dex,0.5,0.4,0.6
+RRMM,RRMM,Chemo+PI+Dex,0.5,0.4,0.6
+RRMM,RRMM,Chemo+IMID+Dex,0.5,0.4,0.6
+RRMM,RRMM,Dara+PI+Dex,0.2,0.1,0.3
+RRMM,RRMM,Dara+IMID+Dex,0.2,0.1,0.3
+RRMM,RRMM,Isa+PI+Dex,0.2,0.1,0.3
+RRMM,RRMM,Isa+IMID+Dex,0.2,0.1,0.3
+RRMM,RRMM,Dara+PI+Chemo+Dex,0.2,0.1,0.3
+RRMM,RRMM,Dara+PI+IMID+Dex,0.2,0.1,0.3
+RRMM,RRMM,Other,1.7,1.6,1.9
