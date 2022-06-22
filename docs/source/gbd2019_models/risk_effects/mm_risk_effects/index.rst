@@ -47,6 +47,10 @@ It is important to note what these risk effects are and are not adjusted for. In
 
 In Phase 2, some of these risk factors will become correlated with treatment in our simulation, which means we need to use risk effects adjusted for treatment for those factors. (Our treatment effects, which originate from RCTs, are already adjusted for all risk factors.) The best source for treatment-adjusted risk effects are RCTs where treatment was assigned randomly and not correlated with risk factors, as it would be in regular clinical practice.
 
+.. note::
+
+  Flatiron allows us to estimate the correlation of risk factors, but we would need effect sizes adjusted for the other risk effects (and nothing else). Since we are not using Flatiron for the risk effects, there is no good way to obtain these. Due to the lack of risk effects, we do not model the correlations, except for those between each risk factor and treatment as described above, and between age, sex, and race.
+
 .. todo::
 
   Fill in this table.
@@ -59,6 +63,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - PFS HR
     - Exposed group
     - Unexposed group
+    - Directly correlated with (in simulation)
     - Adjustment variables
     - Source
     - Note
@@ -67,6 +72,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     -
     - Male
     - Female
+    - Age, race
     -
     -
     -
@@ -75,6 +81,16 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     -
     - 65+
     - <65
+    - Sex, race, treatment
+    -
+    -
+    -
+  * - Race
+    -
+    -
+    - Black
+    - Non-Black
+    - Age, sex
     -
     -
     -
@@ -83,22 +99,16 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     -
     - Impaired
     - Not impaired
+    - Treatment
     -
     -
     - Impairment defined as eGFR less than 60
-  * - Race
-    -
-    -
-    - Black
-    - Non-Black
-    -
-    -
-    -
   * - Cytogenetic risk
     -
     -
     - High
     - Standard
+    - Treatment(?)
     -
     -
     -
