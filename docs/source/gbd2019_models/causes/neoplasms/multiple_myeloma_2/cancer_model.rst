@@ -1,4 +1,4 @@
-.. _2019_cancer_model_multiple_myeloma_2:
+.. _2019_cancer_model_multiple_myeloma:
 
 ==========================
 Multiple Myeloma - Phase 2
@@ -6,7 +6,25 @@ Multiple Myeloma - Phase 2
 
 .. contents::
    :local:
-   :depth: 1
+   :depth: 2
+
+.. list-table:: Abbreviations
+  :widths: 5 5 10
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * - MM
+    - Multiple myeloma
+    -
+  * - NDMM
+    - Newly-diagnosed multiple myeloma
+    - Multiple myeloma that has not yet relapsed.
+  * - RRMM
+    - Relapsed and/or refractory multiple myeloma
+    - Multiple myeloma that has ever relapsed. "Refractory"
+      refers to relapse that happens during or shortly after termination of treatment.
 
 Disease Overview
 ----------------
@@ -14,7 +32,7 @@ Disease Overview
 Multiple myeloma (MM) is a clonal plasma cell neoplasm with substantial morbidity and mortality, characterized by end organ damage—renal 
 impairment, hypercalcemia, lytic bony lesions, and anemia. 
 
-According to GBD 2019, there were 27 thousand incident cases (95%UI 23-33), 18 thousand deaths (95%UI 16-21), and 350 thousand (95%UI 326–431) disability adjusted life years (DALYs) due to multiple myeloma in the US in 2019.
+According to GBD 2019, there were 27 thousand incident cases (95% UI 23-33), 18 thousand deaths (95% UI 16-21), and 350 thousand (95% UI 326-431) disability adjusted life years (DALYs) due to multiple myeloma in the US in 2019.
 
 From 2010 to 2019, MM incident cases increased by 25%, and deaths increased by 27% for both sexes in the US.
 
@@ -38,7 +56,7 @@ GBD 2019 Modeling Strategy
 Multiple Myeloma in GBD 2019
 ++++++++++++++++++++++++++++
 
-In GBD 2019, MM includes death and disability resulting from malignant neoplasms of plasma cells, including ICD-10 codes such as C90.0. The GBD modelling strategy can be found in the GBD YLD Capstone Appendix [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]_. 
+In GBD 2019, MM includes death and disability resulting from malignant neoplasms of plasma cells, including ICD-10 codes such as C90.0. The GBD modeling strategy can be found in the GBD YLD Capstone Appendix [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]_.
 
 There is nothing custom about how MM is modeled in GBD compared to the other cancer causes that go through our standard fatal and non-fatal modeling pipelines.
 
@@ -125,54 +143,33 @@ This cause's restrictions have not changed since GBD 2017.
 Vivarium Modeling Strategy
 --------------------------
 
-Scope
-+++++
-
-To study the impact of different lines of treament for myeloma patients, we 
-split multiple myeloma into two disease states: active multiple myeloma (MM); 
-and relapsed and refractory multiple myeloma (RRMM). The RRMM state consists of 
-multiple relpase stages. Each relapse stage is subsequent outcome corresponding 
-to each line of treatment. This MM cause model is intended to simulate MM incidence, 
-RRMM incidence, RRMM progression, as well as the mortality from MM and RRMM. The 
-inputs for this cause model come from GBD 2019 estimates, scientific literature, 
-and survival regression analysis supported by Flatiron data.
-
-Notably, the survival regression anlaysis supported by Flatiron data provides 
-data on the time to death *from any cause* among multiple myeloma patients and 
-does not present data on the time to death due to multiple myeloma, specifically.
-Therefore, the excess mortality defined in this document will be the only source 
-of mortality among simulants with multiple myeloma and excess mortality among
-simulants with multiple myeloma for "other causes," as typically defined by the 
-cause-deleted all-cause mortality rate, should be zero.
-
-Model Assumptions and Limitations
-+++++++++++++++++++++++++++++++++
-
-1. This cause model assumes no recovery from MM and RRMM since myeloma is an 
-   incurable disease. Patients with MM will inevitably develop relapse and the 
-   health outcomes worsen with every relapse and line of treatment.
-2. This cause model assumes that the GBD incidence rate corresponding to the incidence 
-   of symptomatic MM. That's said, we are comfortable using GBD incidence of MM 
-   as the detection rate of symptomatic MM cases. The incidence of RRMM will be 
-   calculated from survival regression analysis using Cox's proportional hazard model.
-3. The asymptomatic/idolent state (smoldering MM) is excluded from this cause 
-   model because we are not interested in the screening and early managment for 
-   MM. As a result, the simulation will not track/model simulants with asymptomatic 
-   condition.
-4. YLLs are substantially larger than YLDs for this cause. For now, we will not 
-   build a disability component to capture those secondary outcomes.
-5. Based on available data, the most advanced disease state in cause model is 
-   fourth or higher relapse of RRMM. We intended to track deaths from simulants 
-   who have developed fourth relapse and received fifth-line of treatment but ignore 
-   the incident cases from fourth relapse to higher relapse of RRMM. As a result, 
-   we will not calculate progress-free survival among simulants with fourth or 
-   higher relapse of RRMM.
-
-
 Cause Model Diagram
 +++++++++++++++++++
 
 .. image:: cause_model_diagram.svg
+
+Overview
+++++++++
+
+To study the impact of different lines of treament for myeloma patients, we
+split multiple myeloma into two disease states: newly-diagnosed multiple myeloma (NDMM);
+and relapsed and/or refractory multiple myeloma (RRMM). The RRMM state consists of
+multiple relapse stages. This MM cause model is intended to simulate MM incidence,
+relapse, and mortality. The inputs for this cause model come from GBD 2019 estimates,
+scientific literature, and survival analysis supported by Flatiron data.
+
+In our model, treatment and relapse perfectly correspond; that is,
+a simulant in the NDMM state is receiving Line 1 treatment, a simulant in the MM_first_relapse state
+is receiving Line 2 treatment, etc. New treatment assignment is therefore performed only at the time of
+relapse.
+
+Notably, the OS and TTD survival analyses supported by Flatiron data provide
+data on death *from any cause* among multiple myeloma patients and
+not death due to multiple myeloma specifically.
+Therefore, the excess mortality defined in this document will be the only source
+of mortality among simulants with multiple myeloma and excess mortality among
+simulants with multiple myeloma for "other causes," as typically defined by the
+cause-deleted all-cause mortality rate, should be zero.
 
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
@@ -187,8 +184,8 @@ State and Transition Data Tables
    * - S
      - Susceptible
      - Susceptible to MM, without condition
-   * - MM
-     - Multiple myeloma
+   * - NDMM
+     - Newly-diagnosed multiple myeloma
      - With symptomatic condition
    * - MM_first_relapse
      - Multiple myeloma in first relapse
@@ -219,48 +216,48 @@ State and Transition Data Tables
      - excess mortality rate
      - 0
      - 
-   * - MM
+   * - NDMM
      - prevalence
      - Derived from "burn-in" method
      - 
-   * - MM
+   * - NDMM
      - excess mortality rate
-     - data_dir/mortality First-line.csv
-     - Derived from overall survival of first-line therapy in Braunlin et al.
+     - data_dir/mortality_first_line.csv
+     -
    * - MM_first_relapse
      - prevalence
      - Derived from "burn-in" method
      - 
    * - MM_first_relapse
      - excess mortality rate
-     - data_dir/mortality Second-line.csv
-     - Derived from overall survival of second-line therapy in Braunlin et al.
+     - data_dir/mortality_second_line.csv
+     -
    * - MM_second_relapse
      - prevalence
      - Derived from "burn-in" method
      - 
    * - MM_second_relapse
      - excess mortality rate
-     - data_dir/mortality Third-line.csv
-     - Derived from overall survival of Third-line therapy in Braunlin et al.
+     - data_dir/mortality_third_line.csv
+     -
    * - MM_third_relapse
      - prevalence
      - Derived from "burn-in" method
      - 
    * - MM_third_relapse
      - excess mortality rate
-     - data_dir/mortality Fourth-line.csv
-     - Derived from overall survival of fourth-line therapy in Braunlin et al.
+     - data_dir/mortality_fourth_line.csv
+     -
    * - MM_fourth_or_higher_relapse
      - prevalence
      - Derived from "burn-in" method
      - 
    * - MM_fourth_or_higher_relapse
      - excess mortality rate
-     - data_dir/mortality Fifth-line.csv
-     - Derived from overall survival of Fifth-line+ therapy in Braunlin et al.
+     - data_dir/mortality_fifth_line.csv
+     -
 
-data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
+data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2
 
 .. list-table:: Transition Data
    :widths: 1, 1, 1, 10, 10
@@ -273,35 +270,31 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
      - Notes
    * - incidence_MM
      - S
-     - MM
+     - NDMM
      - :math:`\frac{\text{incidence_c486}}{1-\text{prev_c486}}`
      - incidence of MM among susceptible population
    * - incidence_MM_first_relapse
-     - MM
+     - NDMM
      - MM_first_relapse
-     - data_dir/incidence First-line.csv - data_dir/mortality First-line.csv
-     - Derived from progress-free survival of first-line therapy in Braunlin et al.
+     - data_dir/relapse_first_line.csv
+     -
    * - incidence_MM_second_relapse
      - MM_first_relapse
      - MM_second_relapse
-     - data_dir/incidence Second-line.csv - data_dir/mortality Second-line.csv
-     - Derived from progress-free survival of second-line therapy in Braunlin et al.
+     - data_dir/relapse_second_line.csv
+     -
    * - incidence_MM_third_relapse
      - MM_second_relapse
      - MM_third_relapse
-     - data_dir/incidence Third-line.csv - data_dir/mortality Third-line.csv
-     - Derived from progress-free survival of third-line therapy in Braunlin et al.
+     - data_dir/relapse_third_line.csv
+     -
    * - incidence_MM_fourth_or_higher_relapse
      - MM_third_relapse
      - MM_fourth_or_higher_relapse
-     - data_dir/incidence Fourth-line.csv - data_dir/mortality Fourth-line.csv
-     - Derived from progress-free survival of fourth-line therapy in Braunlin et al.
+     - data_dir/relapse_fourth_line.csv
+     -
 
-.. note::
-
-  As described in the table above, because the progression free survival/treatment duration hazard rates informed from Flatiron health data represent the rate of progression/treatment cessation due to progression *in addition to* the rate of death, we will model the rate of progression to the next disease state independent mortality by subtracting the overall survival hazard rate from the progression free survival/treatment duration hazard rate.
-
-data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
+data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2
 
 .. list-table:: Data sources
    :widths: 5 10 10
@@ -312,28 +305,31 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
      - Notes
    * - prev_c486
      - GBD 2019
-     - 
+     -
    * - incidence_c486
      - GBD 2019
-     - 
+     -
    * - prev_MM
      - Derived from "burn-in" method
-     - 
+     -
    * - prev_MM_{Nth}_relapse
      - Derived from "burn-in" method
-     - 
-   * - emr_MM
-     - Derived from overall survival of first-line therapy in Braunlin et al.
+     -
+   * - emr_NDMM
+     - Derived from time to death (TTD) survival analysis of Flatiron data in Line 1
      - Don't use emr_c486
-   * - emr_MM_{Nth}_relapse
-     - Derived from overall survival of {(N+1)th}-line therapy in Braunlin et al.
-     - 
-   * - incidence_MM_{Nth}_relapse
-     - Derived from progress-free survival of {Nth}-line therapy in Braunlin et al.
-     - 
-   * - prevalence ratio of MM to RRMM
-     - literature review
-     - 
+   * - emr_MM_{first-third}_relapse
+     - Derived from time to death (TTD) survival analysis of Flatiron data in RRMM, with covariate for line number
+     -
+   * - emr_MM_fourth_or_higher_relapse
+     - Derived from overall survival (OS) survival analysis of Flatiron data in RRMM, with covariate for line number
+     -
+   * - incidence_MM_first_relapse
+     - Derived from time to next treatment (TTNT) survival analysis of Flatiron data in Line 1
+     -
+   * - incidence_MM_{second-fourth_or_higher}_relapse
+     - Derived from time to next treatment (TTNT) survival analysis of Flatiron data in RRMM, with covariate for line number
+     -
    * - deaths_c486
      - GBD 2019
      - codcorrect, decomp step 5
@@ -359,7 +355,7 @@ multiple myeloma (in the susceptible cause model state) should die due to causes
 other than multiple myeloma ("other causes") at a rate equal to the multiple
 myeloma-deleted all cause mortality rate. Details are shown in the table below.
 
-.. list-table:: MM State-Specitfic Mortality Hazard Rates and Causes of Death
+.. list-table:: MM State-Specific Mortality Hazard Rates and Causes of Death
    :header-rows: 1
    
    * - Cause model state
@@ -380,21 +376,57 @@ Notably, the multiple myeloma mortality rate used to model excess mortality amon
 Estimate MM Prevalence by Disease Stage
 +++++++++++++++++++++++++++++++++++++++
 
-We used a ‘burn-in’ approach to estimate the prevalence of NDMM and the 
-prevalence of RRMM in a manner consistent with the incidence rates estimated 
-from GBD and the survival rates reported in Braunlin et al. To do this, we 
-started the simulation in 2011, 10 years prior to the start date of interest. 
-At this time point, a proportion of simulants equal to the age- and sex-specific 
-MM prevalence from GBD 2019 were initialized into the NDMM disease state; 
-no simulants were initialized into the RRMM disease state(s). We then let the 
-simulation run from 2011 to 2021, using an OS hazard and PFS hazard derived from 
-survival curves in Braunlin et al. (this analysis is described below) to inform 
-the probability that simulants died or progressed beyond the NDMM state and 
-updated the distribution of MM prevalence by disease states (NDMM, RRMM in first 
+We used a ‘burn-in’ approach to estimate the prevalence of NDMM and the
+prevalence of RRMM in a manner consistent with the incidence rates estimated
+from GBD and the survival rates reported in Braunlin et al. To do this, we
+started the simulation in 2011, 10 years prior to the start date of interest.
+At this time point, a proportion of simulants equal to the age- and sex-specific
+MM prevalence from GBD 2019 were initialized into the NDMM disease state;
+no simulants were initialized into the RRMM disease state(s). We then let the
+simulation run from 2011 to 2021 using our transition and mortality rates and
+updated the distribution of MM prevalence by disease states (NDMM, RRMM in first
 relapse, RRMM in second relapse, etc.) accordingly.
 
-Mortality and Progression Hazard
-++++++++++++++++++++++++++++++++
+Endpoints
++++++++++
+
+.. list-table:: Endpoints
+  :widths: 1 1 2 4 5
+  :header-rows: 1
+
+  * - Abbreviation
+    - Full name
+    - Event
+    - Censored at
+    - Reporting
+  * - OS
+    - Overall survival
+    - Death
+    - Loss to mortality follow-up
+    - Frequently a secondary outcome of trials, sometimes a primary outcome
+  * - PFS
+    - Progression-free survival
+    - Progressive disease or death
+    - Loss to progression and/or mortality follow-up
+    - Frequently a primary outcome of trials, sometimes a secondary outcome
+  * - TTP
+    - Time to progression
+    - Progressive disease
+    - Death or loss to progression follow-up
+    - Sometimes a secondary outcome of trials
+  * - TTNT
+    - Time to next treatment
+    - Initiation of next treatment
+    - Death or loss to treatment follow-up
+    - Sometimes a secondary outcome of trials
+  * - TTD
+    - Time to death
+    - Death
+    - Death or initiation of next treatment or loss to progression and/or treatment follow-up
+    - We invented this; never reported in trials
+
+Mortality and Progression Hazard (outdated Braunlin version)
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 We used survival curves including overall survival and treatment duration that 
 differed by line of treatment from Braunlin et al. to estimate the time-varying 
@@ -450,117 +482,30 @@ baseline hazard rates at the individual level according to individual simulant
 characteristics including covariate and risk factor exposures as well as 
 treatment category.
 
+Model Assumptions and Limitations
++++++++++++++++++++++++++++++++++
 
-Survival Regression Model (unused)
-----------------------------------
-
-Model Overview
-++++++++++++++
-
-The rates for RRMM are unknown from GBD. So we plan to use the `time-varying Cox's 
-proportional hazard model` to predict the transition from MM to RRMM, the transition 
-between relapses within RRMM, the mortality from MM, and the mortality from RRMM 
-(every relapse). These rates are assumed to be dependent on covariates such as 
-age, sex, race/ethnicity, renal function, cytogenetic risk, and different lines 
-of therapy. Our survival regression aims to model the rates as a function of hazard 
-that is determined by time and a series of covariates. Moreover, time-varying 
-regression model will allow us to model individuals' covariate (e.g., age) that 
-changes over time. The idea behind this model is that the log-hazard of an individual 
-is a linear function of their covariates and a population-level baseline that 
-changes over time. Mathematically: 
-
-:math:`h(t|x) = b_{0}(t) \times \exp\left(\sum \limits_{i=1}^n \beta_{i}(x_{i}(t)-\bar{x_{i}})\right)`
-
-Where,
- - :math:`t` is the survival time
- - :math:`x` is the covariate
- - :math:`h(t|x)` is the hazard function determined by a set of covariates
- - :math:`b_{0}(t)` is the baseline hazard
- - :math:`\beta_{i}` is the coefficient that measures the impact of covariate
- - :math:`\sum \limits_{i=1}^n \beta_{i}(x_{i}(t)-\bar{x_{i}})` is the time-variant log partial hazard
-
-This survival model consists of two parts: the underlying baseline hazard function, 
-often denoted as :math:`b_{0}(t)`, describing how the risk of event per time unit 
-changes over time at baseline levels of covariates; and the effect parameters, 
-describing how the hazard varies in response to explanatory covariates. The baseline 
-hazard function is consistent across time, calculated from the start when all 
-covariates are set to zero. It could be parametric or non-parametric depending 
-on what data are available in Flatiron. We hope that the coefficient of effect 
-for all relevant covariates can be guided by Flatiron data as well.
-
-From the survival regression model, we expect to output the survival/hazard as a 
-function of time to tell when an event will happen and its likelihood, in a 
-baseline survival model and a model with different values of covariates. In general, 
-We will create two survival regression models:
-
- 1. Mortality hazard model to predict time to death from MM and time to death from
-    each of relapse states. 
- 2. Transition hazard model to predict time from MM to RRMM, and time between last 
-    relapse and next relapse within RRMM state. 
-
-Model Assumptions
-+++++++++++++++++
-
- - The proportional hazard model assumes that `all` individuals have the same hazard 
-   function, but a unique scaling factor infront. So the `shape` of the hazard function 
-   is the same for all individuals, and only a scalar multiple changes per individual.
- - Another key assumption is that each covariate has a multiplicative effect in 
-   the hazard function that is constant over time.
-
-Diagnostics for the Cox Model
-+++++++++++++++++++++++++++++
-
- - Testing the proportional hazards assumption (Schoenfeld residual)
- - Detecting nonlinearity for continous variables (Martingale residual)
- - Examining influential observations (Deviance residual)
-
-We will perform certain diagnostic tests for the Cox’s proportional hazard model. 
-To check the model assumptions, residual methods are intended to be used in our 
-survival analysis. In principle, the Schoenfeld residuals are independent of time. 
-A plot that shows a non-random pattern against time is evidence of a violation of 
-the PH assumption. By plotting event time against the Schoenfeld residual for each 
-covariate, we except to see a non-significant relationship between Schoenfeld 
-residuals and time. Often, we assume that continuous covariates have a linear form. 
-However, this assumption should be checked. We can detect the nonlinearity between 
-log hazard and the covariates by plotting the Martingale residual against continuous 
-covariates. In addition, we plan to use the Deviance residual (a normalized 
-transform of the martingale residual) to examine any influential observations 
-or outliers.
-
-To check the performance of Cox's model, we will include goodness of fit in our 
-survival analysis results. Specifically, Cox-Snell residuals will be used to assess 
-a model's goodness-of-fit. By plotting the Cox-Snell residual against the cumulative 
-hazard function a model's fit can be assessed. We might modify the standard Cox-Snell 
-residuals to account for the censored observations.
-
-Input Data Table
-++++++++++++++++
-
-.. list-table:: Combination of different observations
-   :header-rows: 1
-   
-   * - Age
-     - Sex
-     - Race
-     - CKD
-     - Cytogenetic risk
-     - Transplantation
-     - Treatment
-     - Duration
-     - Event
-   * - 15 to 95 plus with 5-year age bin
-     - ['Male', 'Female']
-     - ['Black/African', 'Non-Black/African']
-     - ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4', 'Stage 5']
-     - ['High-risk', 'Standard-risk']
-     - ['Eligible', 'Ineligible']
-     - ['First line not Isa', 'Second line not Isa', 'Third or later line not Isa', 'Isatuximab']
-     - ['Duration from MM to RRMM', 'Duration from MM to death', 'Duration from Nth relapse to (N+1)th relapse', 'Duration from Nth relapse to death']
-     - ['Event of transition from MM to RRMM', 'Event of transition from Nth relapse to (N+1)th relapse', 'Event of death from MM', 'Event of death from Nth relapse']
-
-.. todo::
-
-   Add more details
+#. This cause model assumes no recovery from MM and RRMM since myeloma is an
+   incurable disease. Patients with MM will inevitably develop relapse and the
+   health outcomes worsen with every relapse and line of treatment.
+#. This cause model assumes that relapse and new treatment lines always correspond and
+   occur simultaneously.
+#. This cause model assumes that the GBD incidence rate corresponds to the incidence
+   of symptomatic MM. That said, we are comfortable using GBD incidence of MM
+   as the detection rate of symptomatic MM cases. The incidence of RRMM will be
+   calculated from survival regression analysis based on Flatiron data.
+#. The asymptomatic/idolent state (smoldering MM) is excluded from this cause
+   model because we are not interested in the screening and early managment for
+   MM. As a result, the simulation will not track/model simulants with asymptomatic
+   condition.
+#. YLLs are substantially larger than YLDs for this cause. For now, we will not
+   build a disability component to capture those secondary outcomes.
+#. Based on available data, the most advanced disease state in cause model is
+   fourth or higher relapse of RRMM. We intend to track deaths from simulants
+   who have developed fourth relapse and received fifth-line of treatment but ignore
+   the incident cases from fourth relapse to higher relapse of RRMM. As a result,
+   we will not calculate progress-free survival among simulants with fourth or
+   higher relapse of RRMM.
 
 Validation Criteria
 +++++++++++++++++++
