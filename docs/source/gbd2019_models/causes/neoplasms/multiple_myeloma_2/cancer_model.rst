@@ -630,33 +630,3 @@ Validation Criteria
 
 Formula to calculate OS or PFS by line of treatment = 
 :math:`\prod \limits_{t=0}^{t<=n} (1 - \frac{numerator}{denominator} \times duration)`
-
-
-References
-----------
-
-.. [Attal-et-al-2019-mm]
-   Attal M, Richardson PG, Rajkumar SV, et al. Isatuximab plus pomalidomide and low-dose 
-   dexamethasone versus pomalidomide and low-dose dexamethasone in patients with relapsed 
-   and refractory multiple myeloma (ICARIA-MM): a randomised, multicentre, open-label, phase 
-   3 study. Lancet 2019; 394: 2096–107.
-   
-.. [Cowan-et-al-2018]
-   Cowan AJ, Allen C, Barac A, et al. Global Burden of Multiple Myeloma: A Systematic 
-   Analysis for the Global Burden of Disease Study 2016. JAMA Oncol 2018; 4: 1221–7.
-
-.. [GBD-2019-YLD-Capstone-Appendix-1-Neoplasms]
-   Supplement to: `GBD 2019 Disease and Injury Incidence and Prevalence
-   Collaborators. Global, regional, and national incidence, prevalence, and
-   years lived with disability for 354 diseases and injuries for 195 countries
-   and territories, 1990–2017: a systematic analysis for the Global Burden of
-   Disease Study 2017. Lancet 2018; 392: 1789–858`
-   (pp. 803-811)
-
-.. [Braunlin-et-al-2020]
-   Braunlin M, Belani R, Buchanan J, Wheeling T, Kim C. Trends in the multiple myeloma 
-   treatment landscape and survival: a U.S. analysis using 2011–2019 oncology clinic 
-   electronic health record data. Leukemia & Lymphoma 2021; 62: 377–86.
-
-.. [SEER]
-   https://seer.cancer.gov/seertools/seerrx/rx/53c44b1e102c1290262dd895/?regimen_field=name&rx_type=regimen&drug_offset=0&regimen_offset=125&q=&limit=100&drug_field=name&search_mode=&drug_direction=UP&regimen_direction=UP&mode=
