@@ -415,19 +415,54 @@ Treatment Assignment
 ++++++++++++++++++++
 
 The Phase 1 simulation had fixed coverage percentages for each treatment regimen category
-in each line. In Phase 2, we will implement a more sophisticated model that takes
-into account covariates and prior treatment in a patient's history, informed by Flatiron
-data.
+in each line, which varied between scenarios. In Phase 2, we will assign treatment regimen categories
+according to these three schemes:
 
-Because the model needs to be trained within Foundry, it has to be passed from
+#. In the naive-model scenario (Model 1), we use naive models that always predict the same probabilities
+   regardless of covariates. This will be even simpler than Phase 1 because it has no time trend.
+#. In the baseline scenario, we use more sophisticated models that take into account covariates and prior
+   treatment in a patient's history.
+#. In the alternative scenarios, we will extend the sophisticated models by adding business rules that
+   modify their predicted probabilities. The exact definition of these business rules is TBD.
+
+All three schemes are informed by Flatiron data.
+
+To be precise, in each scheme there will be two models: one that assigns the
+first line of treatment (the treatment a simulant receives at the time of incidence of MM)
+and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). All models output probabilities;
+the simulation will then randomly sample a treatment regimen category according to these probabilities and assign
+it to the simulant.
+
+Naive Models
+~~~~~~~~~~~~
+
+The naive models can be summarized very easily. They are provided as CSV
+files where the first row contains treatment regimen categories and the second contains corresponding
+(invariant) probabilities of assignment.
+
+.. list-table:: Naive probabilities CSV paths
+  :widths: 1 10
+  :header-rows: 1
+
+  * - Name
+    - Path
+  * - NDMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive_proba.csv
+  * - RRMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive_proba.csv
+
+Sophisticated Models
+~~~~~~~~~~~~~~~~~~~~
+
+The sophisticated models require a more complex approach. Because they need to be trained within Foundry, they have to be passed from
 Foundry to Vivarium in a serialized format. While a human-readable and interoperable
-format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output a :code:`.pkl` file. The pickled
-form of the model may depend on the version of Python, :code:`sklearn`,
-and possibly sklearn subdependencies it was trained with. We will need to align
+format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output :code:`.pkl` files. The pickled
+form of the models may depend on the version of Python, :code:`sklearn`,
+and possibly sklearn subdependencies they were trained with. We will need to align
 these between the Vivarium environment and the Foundry environment and verify
-that outputs are what we expect.
+that outputs are what we expect. For this last task, see the verification script below.
 
-.. list-table:: Python and package versions
+.. list-table:: Python and package versions at model training time
   :header-rows: 1
 
   * - Package
@@ -451,10 +486,7 @@ that outputs are what we expect.
     :language: python
     :linenos:
 
-To be precise, there will be two models: one that assigns the
-first line of treatment (the treatment a simulant receives at the time of incidence of MM)
-and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
-pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
+Each pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
 This object has a :code:`predict_proba` method which takes a pandas DataFrame
 of covariates and returns a 2d numpy array of probabilities. That returned array
 can be transformed into a DataFrame with meaningful column names like so:
@@ -482,16 +514,11 @@ can be transformed into a DataFrame with meaningful column names like so:
     - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model.pkl
   * - RRMM
     - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model.pkl
+  * - NDMM naive model
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive.pkl
+  * - RRMM naive model
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive.pkl
 
-Then:
-
-* In the baseline scenario, the simulated treatment regimen category is assigned according to the output probabilities.
-* In the alternative scenarios, the probabilities are adjusted according to business rules
-  before sampling.
-
-.. todo::
-
-  These business rules need to be worked out.
 
 Model Covariates
 ~~~~~~~~~~~~~~~~
@@ -591,7 +618,8 @@ Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry.
+match those generated within Foundry. It requires access to all the files in the data_dir previously
+specified.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
