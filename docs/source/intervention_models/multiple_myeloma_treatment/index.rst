@@ -279,30 +279,6 @@ Affected Outcomes
     - No
     -
 
-Baseline Coverage Data
-++++++++++++++++++++++++
-
-We plan to use Flatiron to inform baseline coverage of each treatment regimen.
-
-.. todo::
-
-  Document known baseline coverage data, using the table below if appropriate
-
-.. list-table:: Baseline coverage data
-  :widths: 15 15 15 15 15
-  :header-rows: 1
-
-  * - Location
-    - Subpopulation
-    - Coverage parameter
-    - Value
-    - Note
-  * -
-    -
-    -
-    -
-    -
-
 Vivarium Modeling Strategy
 --------------------------
 
@@ -427,23 +403,66 @@ categories:
   * - Other+ASCT
     - Covers all other combinations of *non-ASCT components* in the presence of ASCT.
 
+Baseline Coverage Data
+++++++++++++++++++++++++
+
+If any simulants are initialized into the NDMM state in the multiple myeloma cause model
+(this is TBD according to what is easier to implement), they will all be initialized
+to PI+IMID+Dex. The 10-year burn-in period of running the treatment assignment scheme
+described below will make this initialization almost entirely inconsequential.
+
 Treatment Assignment
 ++++++++++++++++++++
 
 The Phase 1 simulation had fixed coverage percentages for each treatment regimen category
-in each line. In Phase 2, we will implement a more sophisticated model that takes
-into account covariates and prior treatment in a patient's history, informed by Flatiron
-data.
+in each line, which varied between scenarios. In Phase 2, we will assign treatment regimen categories
+according to these three schemes:
 
-Because the model needs to be trained within Foundry, it has to be passed from
+#. In the naive-model scenario (Model 1), we use naive models that always predict the same probabilities
+   regardless of covariates. This will be even simpler than Phase 1 because it has no time trend.
+#. In the baseline scenario, we use more sophisticated models that take into account covariates and prior
+   treatment in a patient's history.
+#. In the alternative scenarios, we will extend the sophisticated models by adding business rules that
+   modify their predicted probabilities. The exact definition of these business rules is TBD.
+
+All three schemes are informed by Flatiron data.
+
+To be precise, in each scheme there will be two models: one that assigns the
+first line of treatment (the treatment a simulant receives at the time of incidence of MM)
+and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). All models output probabilities;
+the simulation will then randomly sample a treatment regimen category according to these probabilities and assign
+it to the simulant.
+
+Naive Models
+~~~~~~~~~~~~
+
+The naive models can be summarized very easily. They are provided as CSV
+files where the first row contains treatment regimen categories and the second contains corresponding
+(invariant) probabilities of assignment.
+
+.. list-table:: Naive probabilities CSV paths
+  :widths: 1 10
+  :header-rows: 1
+
+  * - Name
+    - Path
+  * - NDMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive_proba.csv
+  * - RRMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive_proba.csv
+
+Sophisticated Models
+~~~~~~~~~~~~~~~~~~~~
+
+The sophisticated models require a more complex approach. Because they need to be trained within Foundry, they have to be passed from
 Foundry to Vivarium in a serialized format. While a human-readable and interoperable
-format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output a :code:`.pkl` file. The pickled
-form of the model may depend on the version of Python, :code:`sklearn`,
-and possibly sklearn subdependencies it was trained with. We will need to align
+format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output :code:`.pkl` files. The pickled
+form of the models may depend on the version of Python, :code:`sklearn`,
+and possibly sklearn subdependencies they were trained with. We will need to align
 these between the Vivarium environment and the Foundry environment and verify
-that outputs are what we expect.
+that outputs are what we expect. For this last task, see the verification script below.
 
-.. list-table:: Python and package versions
+.. list-table:: Python and package versions at model training time
   :header-rows: 1
 
   * - Package
@@ -467,10 +486,7 @@ that outputs are what we expect.
     :language: python
     :linenos:
 
-To be precise, there will be two models: one that assigns the
-first line of treatment (the treatment a simulant receives at the time of incidence of MM)
-and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
-pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
+Each pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
 This object has a :code:`predict_proba` method which takes a pandas DataFrame
 of covariates and returns a 2d numpy array of probabilities. That returned array
 can be transformed into a DataFrame with meaningful column names like so:
@@ -498,16 +514,11 @@ can be transformed into a DataFrame with meaningful column names like so:
     - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model.pkl
   * - RRMM
     - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model.pkl
+  * - NDMM naive model
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive.pkl
+  * - RRMM naive model
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive.pkl
 
-Then:
-
-* In the baseline scenario, the simulated treatment regimen category is assigned according to the output probabilities.
-* In the alternative scenarios, the probabilities are adjusted according to business rules
-  before sampling.
-
-.. todo::
-
-  These business rules need to be worked out.
 
 Model Covariates
 ~~~~~~~~~~~~~~~~
@@ -607,7 +618,8 @@ Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry.
+match those generated within Foundry. It requires access to all the files in the data_dir previously
+specified.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
@@ -617,89 +629,82 @@ match those generated within Foundry.
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
 
-.. todo::
-
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
-
 .. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
   :header-rows: 1
 
   * - Outcome
-    - Outcome type
-    - Outcome ID
     - Affected measure
     - Effect size measure
     - Effect size
     - Note
-  * -
-    -
-    -
-    -
-    -
-    -
-    -
+  * - Mortality
+    - Hazard rate of death
+    - Hazard ratio
+    - Various
+    - HRs relative to mix of treatment observed in Flatiron survival data
+  * - Relapse
+    - Hazard rate of relapse
+    - Hazard ratio
+    - Various
+    - HRs relative to mix of treatment observed in Flatiron survival data
 
-Affected Outcome #1
-+++++++++++++++++++++
 
-.. important::
+Mortality and Relapse Effects
++++++++++++++++++++++++++++++
 
-  Copy and paste this section for each affected outcome included in this document
+.. note::
+
+  For more about how we model relapse, see :ref:`the Multiple Myeloma
+  cause model <2019_cancer_model_multiple_myeloma>`.
+
+For each multiple myeloma setting (NDMM, RRMM) in which it can be used,
+each regimen category has a hazard ratio (HR) for mortality and an HR for relapse.
+These hazard ratios are relative to the regimen category mix in the base survival curve.
+Therefore, the hazard at time :math:`t` after incidence/relapse for a simulant
+with covariates :math:`x` being treated with regimen category :math:`r` is:
+
+.. math::
+
+  h(t|x,r) = h(t|x) * HR_r
+
+**Note that even though there are only two settings -- NDMM and RRMM -- there are
+three base survival curves.** This is because HRs between ASCT
+and non-ASCT NDMM regimen categories cannot be estimated. In NDMM,
+the correct base curve is selected according to the treatment assigned, and then the
+HR is applied to it.
 
 .. todo::
 
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
+  Explain how HRs were estimated, including both NMA and making them relative to
+  Flatiron regimen category mix.
 
 .. todo::
 
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+  These are placeholder values pending completion of network meta-analysis! The
+  final files may not have values for *every* setting-category combination listed here, but
+  they are guaranteed not to be missing any combinations that are possible outputs
+  of the relevant treatment assignment model.
 
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
-  :widths: 15 15 15
+.. csv-table:: Mortality hazard ratios
+  :file: mortality_hrs.csv
   :header-rows: 1
 
-  * - Restriction
-    - Value
-    - Note
-  * - Male only
-    -
-    -
-  * - Female only
-    -
-    -
-  * - Age group start
-    -
-    -
-  * - Age group end
-    -
-    -
-  * - Other
-    -
-    -
+:download:`mortality_hrs.csv`
 
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15
+.. csv-table:: Relapse hazard ratios
+  :file: relapse_hrs.csv
   :header-rows: 1
 
-  * - Population
-    - Effect size
-    - Note
-  * -
-    -
-    -
+:download:`relapse_hrs.csv`
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported
+above should be assumed (for the purposes of the placeholder values, the point
+estimate can be ignored).
 
 .. todo::
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+  Should there be correlation between mortality hazard ratio and relapse hazard ratio,
+  similar to the correlation between OS and PFS in Phase 1?
 
 .. todo::
 
@@ -707,6 +712,25 @@ Affected Outcome #1
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+  Add an assumption about time trend, once we determine which assumption we will make.
+
+#. We assume that treatment assignment depends only on the selected covariates and
+   characteristics of the preceding treatment, and that the remaining variation
+   is truly random.
+#. We assume a linear effect of line number/number of previous relapses on
+   treatment assignment (in log-probability space).
+#. We only model ASCT in NDMM.
+#. We assume all conditioning regimens for ASCT have identical effects.
+#. We assume all maintenance therapies, or the lack of maintenance therapy, have
+   identical effects.
+#. We assume that all regimens within a regimen category have identical effects.
+#. We assume that treatment regimen categories have proportional hazards; that is,
+   their hazard ratios do not change depending on time since incidence/relapse.
+#. We assume that treatment regimen categories do not have interaction effects
+   with any covariates.
 
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

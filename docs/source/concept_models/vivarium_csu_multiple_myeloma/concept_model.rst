@@ -1246,7 +1246,7 @@ Time frame for survival observer (timestep = 28 days):
 
 .. note::
 
-   Currently, there is no stratification of treatmnet category by line of treatmnet.
+   Currently, there is no stratification of treatment category by line of treatmnet.
    If time allows, we will add this stratification to survival observer metrics so
    that we can compare survival outcomes for simulants treated with Isa/Dara to
    residual category.
