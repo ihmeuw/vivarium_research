@@ -49,7 +49,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
 
 .. note::
 
-  Flatiron allows us to estimate the correlation of risk factors, but we would need effect sizes adjusted for the other risk effects (and nothing else). Since we are not using Flatiron for the risk effects, there is no good way to obtain these. Due to the lack of risk effects, we do not model the correlations, except for those between each risk factor and treatment as described above, and between age, sex, and race.
+  Flatiron allows us to estimate the correlation of risk factors, but we would need effect sizes adjusted for treatment and the other risk effects (and nothing else). Since we are not using Flatiron for the risk effects, there is no good way to obtain these. Due to the lack of risk effects, we do not model the correlations, except for those between each risk factor and treatment as described above, and between age and sex.
 
 .. todo::
 
@@ -72,7 +72,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     -
     - Male
     - Female
-    - Age, race
+    - Age, treatment(?)
     -
     -
     -
@@ -81,16 +81,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     -
     - 65+
     - <65
-    - Sex, race, treatment
-    -
-    -
-    -
-  * - Race
-    -
-    -
-    - Black
-    - Non-Black
-    - Age, sex
+    - Sex, treatment
     -
     -
     -
@@ -178,14 +169,6 @@ Final risk effects
     - Female
     - 0.7 (0.56, 0.87)
     - 0.86 (0.76, 0.97)
-  * - Race
-    - Black
-    - 1 (no uncertainty)
-    - 1 (no uncertainty)
-  * - Race
-    - non-Black
-    - 1 (no uncertainty)
-    - 1 (no uncertainty)
   * - Renal function
     - Renal impaired
     - 1.40 (1.20, 1.59)
