@@ -127,7 +127,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
 4.1 Cause Models
 ----------------
 
-* :ref:`Multiple Myeloma <2019_cancer_model_multiple_myeloma>`
+* :ref:`Multiple Myeloma <2019_cancer_model_multiple_myeloma_2>`
 
 4.2 Risk Exposure Models
 ------------------------
