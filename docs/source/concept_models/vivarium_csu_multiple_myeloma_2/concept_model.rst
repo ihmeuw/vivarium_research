@@ -212,14 +212,14 @@ set of treatment categories based on treatment guidelines from the `NCCN
     - Calendar year
   * - treatment_line
     - Treatment line/disease state a simulant is in. If a simulant is in state
-      `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose
+      :code:`multiple_myeloma_{x}`, assign this simulant :code:`treatment_line {x}`. Choose
       from [1, 2, 3, 4, 5+]
   * - treatment_category
-    - Treatment regimen category a simulant is in. For example, `IMID+PI+Dex`.
+    - Treatment regimen category a simulant initiated. For example, IMID+PI+Dex.
   * - age
     - Age group a simulant is in.
   * - value
-    - Count of simulants in age group `age` who initiated the `treatment_category` in `treatment_line` during `year`.
+    - Count of simulants in age group :code:`age` who initiated the :code:`treatment_category` in :code:`treatment_line` during :code:`year`.
 
 8.2.2 Survival output table
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -240,23 +240,23 @@ set of treatment categories based on treatment guidelines from the `NCCN
     - Intervention scenario. Choose from ['naive', 'baseline', ...]
   * - treatment_line
     - Treatment line/disease state a simulant is in. If a simulant is in state
-      `multiple_myeloma_{x}`, assign this simulant `treatment_line {x}`. Choose
+      :code:`multiple_myeloma_{x}`, assign this simulant :code:`treatment_line {x}`. Choose
       from [1, 2, 3, 4, 5+]
   * - treatment_category
-    - Treatment regimen category a simulant is in. For example, `IMID+PI+Dex`.
+    - Treatment regimen category a simulant is in. For example, IMID+PI+Dex.
   * - period
-    - The number of days since the entrance into the `treatment_line` that the
+    - The number of days since the entrance into the :code:`treatment_line` that the
       count measures were evaluated on.
   * - alive_at_start
-    - Count of at-risk simulants alive at `period` - 28 days since they entered `treatment_line`.
+    - Count of at-risk simulants alive at :code:`period` - 28 days since they entered :code:`treatment_line`.
   * - died_by_end
-    - Count of `alive_at_start` simulants who died between `period` - 28 and `period` days since they entered `treatment_line`.
+    - Count of :code:`alive_at_start` simulants who died between :code:`period` - 28 and :code:`period` days since they entered :code:`treatment_line`.
   * - progressed_by_end
-    - Count of `alive_at_start` simulants who progressed to next line of treatment/disease state
-      between `period` - 28 and `period` days since they entered `treatment_line`.
+    - Count of :code:`alive_at_start` simulants who progressed to next line of treatment/disease state
+      between :code:`period` - 28 and :code:`period` days since they entered :code:`treatment_line`.
   * - sim_end_on
-    - Count of `alive_at_start` simulants without death or progression at the end of the simulation
-      between `period` - 28 and `period` days since they entered `treatment_line`.
+    - Count of :code:`alive_at_start` simulants without death or progression at the end of the simulation
+      between :code:`period` - 28 and :code:`period` days since they entered :code:`treatment_line`.
 
 Time frame for survival observer (timestep = 28 days):
  1. start_date = 2021-01-01, end_date = 2025-12-31
