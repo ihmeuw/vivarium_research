@@ -495,17 +495,17 @@ Model Assumptions and Limitations
    as the detection rate of symptomatic MM cases. The incidence of RRMM will be
    calculated from survival regression analysis based on Flatiron data.
 #. The asymptomatic/idolent state (smoldering MM) is excluded from this cause
-   model because we are not interested in the screening and early managment for
+   model because we are not interested in the screening and early management for
    MM. As a result, the simulation will not track/model simulants with asymptomatic
    condition.
 #. YLLs are substantially larger than YLDs for this cause. For now, we will not
    build a disability component to capture those secondary outcomes.
-#. Based on available data, the most advanced disease state in cause model is
-   fourth or higher relapse of RRMM. We intend to track deaths from simulants
-   who have developed fourth relapse and received fifth-line of treatment but ignore
-   the incident cases from fourth relapse to higher relapse of RRMM. As a result,
-   we will not calculate progress-free survival among simulants with fourth or
-   higher relapse of RRMM.
+#. The most advanced disease state in this cause model is
+   fourth or higher relapse of RRMM. We track deaths from simulants
+   who have developed fourth relapse/received fifth-line treatment but do not specifically
+   track the number of relapses a simulant has had beyond four. We assume that risk factor and
+   treatment effects on mortality apply to both TTD (in other states) and OS (in this state).
+   We ignore risk factor and treatment effects on relapse after the fourth relapse.
 
 Validation Criteria
 +++++++++++++++++++
