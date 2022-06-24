@@ -52,7 +52,10 @@ inform our treatment algorithm.
     - Note
   * - ASCT
     - autologous stem cell transplantation
-    -
+    - A preferred treatment for multiple myeloma in which a patient has stem cells extracted,
+      is given high-dose chemotherapy, and then receives an infusion of their own stem cells.
+      Not every patient with multiple myeloma is eligible for ASCT, and treatment strategy varies significantly
+      between eligible and ineligible patients.
   * - IMiD
     - immunomodulatory imide drug
     -
@@ -667,16 +670,10 @@ with covariates :math:`x` being treated with regimen category :math:`r` is:
 
   h(t|x,r) = h(t|x) * HR_r
 
-**Note that even though there are only two settings -- NDMM and RRMM -- there are
-three base survival curves.** This is because HRs between ASCT
-and non-ASCT NDMM regimen categories cannot be estimated. In NDMM,
-the correct base curve is selected according to the treatment assigned, and then the
-HR is applied to it.
-
 .. todo::
 
-  Explain how HRs were estimated, including both NMA and making them relative to
-  Flatiron regimen category mix.
+  Explain how HRs were estimated, including NMA, making them relative to
+  Flatiron regimen category mix, and application of ASCT effect.
 
 .. todo::
 
