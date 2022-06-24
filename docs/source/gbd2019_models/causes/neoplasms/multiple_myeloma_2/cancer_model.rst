@@ -425,62 +425,12 @@ Endpoints
     - Death or initiation of next treatment or loss to progression and/or treatment follow-up
     - We invented this; never reported in trials
 
-Mortality and Progression Hazard (outdated Braunlin version)
+Calculation of Mortality and Progression Hazard
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-We used survival curves including overall survival and treatment duration that 
-differed by line of treatment from Braunlin et al. to estimate the time-varying 
-mortality and progression hazard for simulants at specific disease states and 
-corresponding lines of treatment. In short, a non-parametric Kaplan-Meier 
-estimator is used to calculate the baseline hazard rates. Mathematically:
+.. todo::
 
-:math:`S_{t} = \prod_{j: \tau_{j} \leq t} \frac{N_{j} - D_{j}}{N_{j}}`
-
-Where,
-
-:math:`N_{j}` is the number of at-risk people at jth time; and
-:math:`D_{j}` is the number of event (e.g., death) at jth time.
-
-Based on the equation above, we can solve for D if N and S are given:
-
-:math:`S_{t} = S_{t-1} (1 - \frac{D_{t}}{N_{t}})`
-
-Then,
-
-:math:`D_{t} = N_{t} (1 - \frac{S_{t}}{S_{t-1}})`
-
-As survival probabilities were reported on a monthly basis in Braunlin et al., 
-we applied a piecewise constant interpolation to estimate single-day hazard to 
-be in accord with the simulation time step. 
-
-To incorporate stochastic uncertainty and apply different hazard rates for every 
-iteration of the simulation, we sampled many draws of :math:`S_{t}` based on its 
-variance derived from Greenwood’s formula, as describe below:
-
-:math:`Var(S_{t}) = S_{t}^2 \sum_{j: \tau_{j} \leq t} \frac{D_{j}}{(N_{j} - D_{j})N_{j}}`
-
-In the absence of progression-free survival from Flatiron Health data, we used 
-the treatment duration data reported in Braunlin et al. as a proxy for estimating 
-the progression free survival (PFS) hazard. For treatment duration, we associated 
-it with treatment cessation due to events of death and events of progression. 
-In other words, the event-free probabilities from treatment duration curves 
-accounted for both mortality and progression of MM. Therefore, the incidence of 
-relapse we implemented in our cause model is the consequence of subtracting the 
-OS hazard from the treatment duration hazard as a proxy measure for the PFS hazard.
-
-:math:`h(t)_{progression} = h(t)_{treatment\:duration} - h(t)_{overall\:survival}`
-
-Further, to be consistent with the consensus definition of OS, we used the hazard 
-rates derived from the OS data in Braunlin et al. to inform the `all-cause` 
-mortality rate among simulants with MM in our model. Therefore, deaths reported 
-in our model among MM patients may be due to causes other than MM. Notably, the 
-mortality and progression hazard rates estimated, as described in this section, 
-represent the population-level hazard rate of MM patients in the Flatiron Health 
-registry. We used these hazard rates to represent the population-level baseline 
-hazard rates for our model of the US population with MM. We then altered these 
-baseline hazard rates at the individual level according to individual simulant 
-characteristics including covariate and risk factor exposures as well as 
-treatment category.
+  Fill this in with information on how we calculated curves from Flatiron.
 
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
