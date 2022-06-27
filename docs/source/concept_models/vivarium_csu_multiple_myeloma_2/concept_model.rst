@@ -113,13 +113,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
 3.0 Concept Model Diagram
 +++++++++++++++++++++++++
 
-.. note::
-
-  This is the concept model diagram from :ref:`Phase 1
-  <2019_concept_model_vivarium_csu_multiple_myeloma>`. It may need to be
-  updated for Phase 2.
-
-.. image:: ../vivarium_csu_multiple_myeloma/concept_model_diagram.svg
+.. image:: ./concept_model_diagram.svg
 
 4.0 Vivarium Model Components
 +++++++++++++++++++++++++++++
@@ -147,14 +141,34 @@ set of treatment categories based on treatment guidelines from the `NCCN
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
 
+We know that our scenarios will roughly correspond to:
+
+* Scenario 0: Naive treatment assignment
+* Scenario 1: baseline/low Isa uptake (e.g., 0% uptake of Isa following Dara frontline treatment)
+* Scenario 2: 5% uptake of Isa following Dara frontline treatment
+* Scenario 3: 5% uptake of Isa frontline treatment (e.g, instead of Dara frontline treatment, replacing a certain 'other' treatment regimen, etc.)
+
+.. todo::
+
+  Rigorously define these scenarios.
+
 6.0 Simulation Parameters
 +++++++++++++++++++++++++
 
 6.1 Locations
 -------------
 
+United States.
+
 6.2 Population and Randomness
 -----------------------------
+
+Population description:
+
+* Cohort type: Prospective closed cohort of individuals aged 15 years and older (open cohort if we only examine on age 50+ population)
+* Size of largest starting population: 100,000 simulants
+* Time span: Jan 1, 2013 to Dec 31, 2027 (Jan 1, 2013 to Jan 1, 2023 is a 10-year long burn-in period)
+* Time step: 90 days
 
 6.3 Timeframe and Intervention Start Dates
 ------------------------------------------
