@@ -170,7 +170,7 @@ Population description:
 * Cohort type: Prospective closed cohort of individuals aged 15 years and older (open cohort if we only examine on age 50+ population)
 * Size of largest starting population: 100,000 simulants
 * Time span: Jan 1, 2013 to Dec 31, 2027 (Jan 1, 2013 to Jan 1, 2023 is a 10-year long burn-in period)
-* Time step: 90 days
+* Time step: 28 days (final run) or 90 days (intermediate runs) -- the only input data that depends on the timestep is the time-varying hazard; we will have a copy of those CSVs for each of the two time step values
 
 6.3 Timeframe and Intervention Start Dates
 ------------------------------------------
