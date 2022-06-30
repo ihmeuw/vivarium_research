@@ -421,20 +421,21 @@ The Phase 1 simulation had fixed coverage percentages for each treatment regimen
 in each line, which varied between scenarios. In Phase 2, we will assign treatment regimen categories
 according to these three schemes:
 
-#. In the naive-model scenario (Model 1), we use naive models that always predict the same probabilities
-   regardless of covariates. This will be even simpler than Phase 1 because it has no time trend.
-#. In the baseline scenario, we use more sophisticated models that take into account covariates and prior
-   treatment in a patient's history.
-#. In the alternative scenarios, we will extend the sophisticated models by adding business rules that
-   modify their predicted probabilities. The exact definition of these business rules is TBD.
+#. In the baseline scenario, we use "sophisticated" models, which take into account covariates and prior
+   treatment in a patient's history, and some postprocessing "business rules" that modify their predicted
+   probabilities.
+#. In the naive-model scenario (Model 1; Model 3's alternative scenario 1), we use naive models that always predict the same probabilities
+   regardless of covariates, with the same postprocessing rules as the baseline scenario.
+   This will be even simpler than Phase 1 because it has no time trend.
+#. In the other alternative scenarios, we use sophisticated models (same as the baseline scenario) with modified
+   postprocessing rules.
 
-All three schemes are informed by Flatiron data.
+Both the naive and sophisticated models are informed by Flatiron data.
 
 To be precise, in each scheme there will be two models: one that assigns the
 first line of treatment (the treatment a simulant receives at the time of incidence of MM)
 and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). All models output probabilities;
-the simulation will then randomly sample a treatment regimen category according to these probabilities and assign
-it to the simulant.
+the simulation will apply the postprocessing rules and then randomly assign a treatment regimen category according to the final probabilities.
 
 Naive Models
 ~~~~~~~~~~~~
@@ -592,6 +593,132 @@ match those generated within Foundry. It requires access to all the files in J:\
   :language: python
   :linenos:
 
+Postprocessing rules
+~~~~~~~~~~~~~~~~~~~~
+
+Goals
+^^^^^
+
+Our postprocessing rules are designed so that:
+
+* We do not assign Isa or Dara regimen classes before those treatments were approved/in use.
+* We approximately match the Isa coverage (sum of all Isa-containing regimen classes) from our line- and year-specific projections.
+* The split between the Isa-containing regimen classes matches the split between the analogous Dara-containing classes.
+* Isa is associated with covariates -- besides line and year -- in the same way as Dara (they have the same patient profile), except that when it follows Dara in our Isa-after-Dara scenario, it is constant across these covariates.
+* The probability of interest for each of our alternative scenarios (probability of Isa after Dara, probability of Isa in the first line) approximates our specified probability in that scenario, and is zero in all other scenarios.
+* We use extrapolation from Flatiron data to project time trends of all non-Isa regimen classes into the future.
+
+Detailed description
+^^^^^^^^^^^^^^^^^^^^
+
+After getting the predicted probabilities from the model as described above, perform the following steps:
+
+#. If the date is before Jan. 1, 2016 and this is an RRMM assignment, set the probabilities of all Dara-containing classes to 0.
+#. If the date is before Jan. 1, 2019 and this is an NDMM assignment, set the probabilities of all Dara-containing classes to 0.
+#. For each of the regimen class pairs that only differ by substituting Isa with Dara, perform this step:
+    * Set the probability of the Isa-containing regimen to p_Dara * (isa_desired_coverage / projected_dara_isa_corresponding), where p_Dara is the probability of the corresponding Dara regimen, isa_desired_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Isa coverage" table below, and projected_dara_isa_corresponding is a linear interpolation or extrapolation by year of the line-specific value of "Dara % (Isa corresponding)" from the "Projected Dara coverage from Flatiron" table below.
+#. If the scenario is not alternative scenario 3 (Isa frontline) and this is an NDMM assignment, set the probabilities of all Isa-containing classes to 0.
+#. If this is an RRMM assignment and the previous line contained a Dara component (in other words, if the Dara_flag_previous in the model covariates table above is 1):
+    #. If the scenario is alternative scenario 2 (Isa-after-Dara) and the patient is in second line treatment (first relapse state), multiply the probabilities of all Isa-containing classes by (0.05 / the sum of the probabilities of all the Isa-containing classes).
+    #. Otherwise, set the probabilities of all Isa-containing classes to 0.
+#. Divide the probabilities of all classes that **do not** contain Isa by the sum of all probabilities that **do not** contain Isa.
+#. Multiply the probabilities of all classes that **do not** contain Isa by (1 - the sum of all probabilities that **do** contain Isa). The probabilities should now sum to 1, and the probabilities of Isa-containing classes should not have changed in the last two steps.
+#. Sample the assigned treatment.
+
+Example code
+^^^^^^^^^^^^
+
+Below is Python code implementing these rules in a non-Vivarium context, for use as a guide.
+
+.. code-block:: python
+
+  # Assumes a single Pandas DataFrame (NDMM and RRMM) with all covariates, joined with the regimen class
+  # probabilities from the relevant assignment model, where each row is a simulant.
+
+  all_regimen_classes = [
+    'PI+Dex',
+    'IMID+Dex',
+    'PI+IMID+Dex',
+    'Chemo+PI+Dex',
+    'Chemo+IMID+Dex',
+    'Dara+PI+Dex',
+    'Dara+IMID+Dex',
+    'Isa+PI+Dex',
+    'Isa+IMID+Dex',
+    'Dara+PI+Chemo+Dex',
+    'Dara+PI+IMID+Dex',
+    'Other',
+    'PI+Dex+ASCT',
+    'IMID+Dex+ASCT',
+    'PI+IMID+Dex+ASCT',
+    'Chemo+PI+Dex+ASCT',
+    'Chemo+IMID+Dex+ASCT',
+    'Dara+PI+Dex+ASCT',
+    'Dara+IMID+Dex+ASCT',
+    'Isa+PI+Dex+ASCT',
+    'Isa+IMID+Dex+ASCT',
+    'Dara+PI+Chemo+Dex+ASCT',
+    'Dara+PI+IMID+Dex+ASCT',
+    'Other+ASCT',
+  ]
+  dara_containing = [
+    'Dara+PI+Dex', 'Dara+IMID+Dex', 'Dara+PI+Chemo+Dex', 'Dara+PI+IMID+Dex',
+    'Dara+PI+Dex+ASCT', 'Dara+IMID+Dex+ASCT', 'Dara+PI+Chemo+Dex+ASCT', 'Dara+PI+IMID+Dex+ASCT',
+  ]
+  isa_containing = [
+    'Isa+PI+Dex', 'Isa+IMID+Dex',
+    'Isa+PI+Dex+ASCT', 'Isa+IMID+Dex+ASCT',
+  ]
+  isa_dara_pairs = [
+    ('Isa+PI+Dex', 'Dara+PI+Dex'),
+    ('Isa+IMID+Dex', 'Dara+IMID+Dex'),
+    ('Isa+PI+Dex+ASCT', 'Dara+PI+Dex+ASCT'),
+    ('Isa+IMID+Dex+ASCT', 'Dara+IMID+Dex+ASCT'),
+  ]
+
+  if date < datetime.date(2016, 1, 1):
+    probabilities_df.loc[probabilities_df.LineNumber > 1, dara_containing] = 0
+  if date < datetime.date(2019, 1, 1):
+    probabilities_df.loc[probabilities_df.LineNumber == 1, dara_containing] = 0
+  
+  # TODO: Both of these need to interpolate/extrapolate by year, however that is done in Vivarium
+  isa_desired_coverage = isa_desired.loc[(scenario, line, year)]
+  projected_dara_isa_corresponding = dara_isa_corresponding_coverage_projected.loc[(line, year)]
+
+  for isa_regimen_class, dara_regimen_class in isa_dara_pairs:
+    probabilities_df[isa_regimen_class] = probabilities_df[dara_regimen_class] * (isa_desired_coverage / projected_dara_isa_corresponding)
+
+  if scenario != 'alternative_3_isa_frontline':
+    probabilities_df.loc[probabilities_df.LineNumber == 1, isa_containing] = 0
+  if scenario == 'alternative_2_isa_after_dara':
+    probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] *= 0.05 / probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing].sum(axis=1)
+  else:
+    probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] = 0
+
+  # All scenarios: Isa after Dara in lines 3, 4, 5 never happens
+  probabilities_df.loc[(probabilities_df.LineNumber > 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] = 0
+
+  isa_probabilities_before_normalization = probabilities_df[isa_containing]
+  non_isa_containing = list(set(all_regimen_classes) - set(isa_containing))
+  probabilities_df.loc[:, non_isa_containing] /= probabilities_df.loc[:, non_isa_containing].sum(axis=1)
+  probabilities_df.loc[:, non_isa_containing] *= (1 - probabilities_df.loc[:, isa_containing].sum(axis=1))
+  assert np.allclose(probabilities_df.loc[:, all_regimen_classes].sum(axis=1), 1.0, atol=1e-10, rtol=0)
+  assert probabilities_df[isa_containing].equals(isa_probabilities_before_normalization)
+
+Coverage tables
+^^^^^^^^^^^^^^^
+
+.. csv-table:: Isa coverage
+  :file: isa_coverage.csv
+  :header-rows: 1
+
+.. todo::
+
+  The numbers in this Dara coverage table are not finalized!
+
+.. csv-table:: Projected Dara coverage from Flatiron
+  :file: dara_coverage_from_flatiron.csv
+  :header-rows: 1
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
