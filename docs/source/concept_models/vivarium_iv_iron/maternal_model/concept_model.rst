@@ -552,8 +552,15 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.8 intervention effects
      - Implement intervention effects and add intervention administration count outputs.
      - [1] `Deaths due to maternal disorders not equal between baseline and alternative scenarios. Deaths due to other causes vary between all scenarios <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [2] `Anemia YLDs not equal in baseline and alternative scenarios in the not pregnant state. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [3] `Anemia YLDs not varying by scenario as expected in the pregnant state, even though anemia person time does. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention_effects_check.ipynb>`_ [4] Would like hemoglobin sum and person time output files stratified by intervention coverage to verify intervention effect sizes, please. [5] `Intervention count outputs and coverage looks good :) <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model8_intervention_effects/intervention%20coverage%20from%20counts.ipynb>`_ 
-
-
+   * - `I.8 intervention effects bugfix <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model8_intervention_effects_bugfix>`_
+     - Fix results processing and other bugs causing issues from above model version
+     - Results look as expected :). No longer have unexpected differences in scenarios. Intervention effects on hemoglobin look good in the results outputs as well as in the interative sim.
+   * - `I.5 Hemoglobin effects on maternal disorders <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model5_hgb_on_maternal_disorders>`_
+     - All model 4 risk effects included now
+     - Results look as expected :)
+   * - I.8.2 2040 run
+     - Add fertility component, run out to 2040, with risk effects and intervention models
+     - `Results ran out to 2040 look as expected :) <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model8.2_2040_run>`_. No longer have unexpected differences in scenarios. Intervention effects on hemoglobin look good in the results outputs as well as in the interative sim.
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
