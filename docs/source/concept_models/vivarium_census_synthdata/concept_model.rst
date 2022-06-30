@@ -366,8 +366,56 @@ revisit this and keep track of dad as well as moms).
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
-Multiparity --- make twins with probability from ACS, about 2.5%.  See
-Section (16) for additional details.
+Multiparity --- make twins with probability 4%.  See Section (16) for
+additional details.
+
+Relationship -- the sim knows a parent-child dyad when the new
+simulant is initialized, and to come up with a consistent value for
+the "reference person" relationship field, we use the following
+mapping:
+
++--------------------------------------------------+----------------------------------------+
+| Parent relationship to reference person          | Child relationship to reference person |
++==================================================+========================================+
+| Reference Person                                 | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Opposite-sex husband/wife/spouse                 | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Opposite-sex unmarried partner                   | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Same-sex husband/wife/spouse                     | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Same-sex unmarried partner                       | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Biological son or daughter                       | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Adopted son or daughter                          | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Stepson or stepdaughter                          | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Brother or sister                                | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Father or mother                                 | Brother or sister                      |
++--------------------------------------------------+----------------------------------------+
+| Grandchild                                       | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Parent-in-law                                    | Other nonrelative                      |
++--------------------------------------------------+----------------------------------------+
+| Son-in-law or daughter-in-law                    | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Other relative                                   | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Roommate or housemate                            | Other nonrelative                      |
++--------------------------------------------------+----------------------------------------+
+| Foster child                                     | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Other nonrelative                                | Other nonrelative                      |
++--------------------------------------------------+----------------------------------------+
+| Institutionalized group quarters population      | Institutionalized GQ population        |
++--------------------------------------------------+----------------------------------------+
+| Noninstitutionalized group quarters population   | Noninstitutionalized GQ population     |
++--------------------------------------------------+----------------------------------------+
+
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
