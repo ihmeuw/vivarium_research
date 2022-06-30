@@ -23,18 +23,14 @@ ndmm_model = joblib.load('ndmm_model.pkl')
 ndmm_X_to_predict = pd.DataFrame(pd.Series({
   'FirstTreatmentAge': 67.0,
   'Sex': 'M',
-  'IsBlack': 0,
   'RenalImpairment': 0,
   'RiskType': 'Standard risk',
-  'EcogValue': 0,
-  'EligibilityProxy': 1,
   'Year': 16.0,
-  'PracticeType': 'COMMUNITY',
 })).T
 ndmm_assignment_probs = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
 print(ndmm_assignment_probs)
 
-ndmm_verification_output = pd.read_csv('ndmm_verification_output.csv'))
+ndmm_verification_output = pd.read_csv('ndmm_verification_output.csv')
 
 print(ndmm_verification_output)
 
@@ -60,17 +56,15 @@ rrmm_model = joblib.load('rrmm_model.pkl')
 
 rrmm_X_to_predict = pd.DataFrame(pd.Series({
     # Invariant patient characteristics
-    'FirstTreatmentAge': 67.0,
+    'FirstTreatmentAge': 68.2,
     'Sex': 'M',
-    'IsBlack': 0,
-    'RenalImpairment': 0,
-    'RiskType': 'Standard risk',
-    'PracticeType': 'COMMUNITY',
+    # 'RenalImpairment': 0,
+    # 'RiskType': 'Standard risk',
     # Things that change over time
-    'TimeSinceFirstTreatment': 1,
-    'Year': 17.0,
-    'Duration_previous': 12.0,
-    'RegimenClass_previous': 'PI+IMID+Dex',
+    'TimeSinceFirstTreatment': 1.25,
+    'Year': 17.25,
+    'Duration_previous': 15.0 * 30.4,
+    # 'RegimenClass_previous': 'PI+IMID+Dex+ASCT',
     'PI_flag_previous': 1,
     'IMID_flag_previous': 1,
     'Chemo_flag_previous': 0,
@@ -78,10 +72,11 @@ rrmm_X_to_predict = pd.DataFrame(pd.Series({
     'Dara_flag_previous': 0,
     'Dex_flag_previous': 1,
     'Other_flag_previous': 0,
-    'ASCT_flag_previous': 0,
+    'ASCT_flag_previous': 1,
+    'NumberOfComponents_previous': 4,
     'LineNumber': 2,
-    'PrecedingUnique': 3,
-    'PrecedingShortUnique': 0,
+    # 'PrecedingUnique': 4,
+    # 'PrecedingShortUnique': 0,
 })).T
 rrmm_assignment_probs = pd.DataFrame(rrmm_model.predict_proba(rrmm_X_to_predict), columns=rrmm_model.classes_)
 print(rrmm_assignment_probs)
