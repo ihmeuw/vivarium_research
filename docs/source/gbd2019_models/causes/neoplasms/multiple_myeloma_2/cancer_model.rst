@@ -174,6 +174,8 @@ cause-deleted all-cause mortality rate, should be zero.
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
+In the tables below, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2. The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
+
 .. list-table:: State Definitions
    :widths: 1, 5, 15
    :header-rows: 1
@@ -222,7 +224,7 @@ State and Transition Data Tables
      - 
    * - NDMM
      - excess mortality rate
-     - data_dir/mortality_first_line.csv
+     - data_dir/mortality_first_line_timestep_90.csv or data_dir/mortality_first_line_timestep_28.csv
      -
    * - MM_first_relapse
      - prevalence
@@ -230,7 +232,7 @@ State and Transition Data Tables
      - 
    * - MM_first_relapse
      - excess mortality rate
-     - data_dir/mortality_second_line.csv
+     - data_dir/mortality_second_line_timestep_90.csv or data_dir/mortality_second_line_timestep_28.csv
      -
    * - MM_second_relapse
      - prevalence
@@ -238,7 +240,7 @@ State and Transition Data Tables
      - 
    * - MM_second_relapse
      - excess mortality rate
-     - data_dir/mortality_third_line.csv
+     - data_dir/mortality_third_line_timestep_90.csv or data_dir/mortality_third_line_timestep_28.csv
      -
    * - MM_third_relapse
      - prevalence
@@ -246,7 +248,7 @@ State and Transition Data Tables
      - 
    * - MM_third_relapse
      - excess mortality rate
-     - data_dir/mortality_fourth_line.csv
+     - data_dir/mortality_fourth_line_timestep_90.csv or data_dir/mortality_fourth_line_timestep_28.csv
      -
    * - MM_fourth_or_higher_relapse
      - prevalence
@@ -254,10 +256,8 @@ State and Transition Data Tables
      - 
    * - MM_fourth_or_higher_relapse
      - excess mortality rate
-     - data_dir/mortality_fifth_line.csv
+     - data_dir/mortality_fifth_line_timestep_90.csv or data_dir/mortality_fifth_line_timestep_28.csv
      -
-
-data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2
 
 .. list-table:: Transition Data
    :widths: 1, 1, 1, 10, 10
@@ -276,25 +276,23 @@ data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input
    * - incidence_MM_first_relapse
      - NDMM
      - MM_first_relapse
-     - data_dir/relapse_first_line.csv
+     - data_dir/relapse_first_line_timestep_90.csv or data_dir/relapse_first_line_timestep_28.csv
      -
    * - incidence_MM_second_relapse
      - MM_first_relapse
      - MM_second_relapse
-     - data_dir/relapse_second_line.csv
+     - data_dir/relapse_second_line_timestep_90.csv or data_dir/relapse_second_line_timestep_28.csv
      -
    * - incidence_MM_third_relapse
      - MM_second_relapse
      - MM_third_relapse
-     - data_dir/relapse_third_line.csv
+     - data_dir/relapse_third_line_timestep_90.csv or data_dir/relapse_third_line_timestep_28.csv
      -
    * - incidence_MM_fourth_or_higher_relapse
      - MM_third_relapse
      - MM_fourth_or_higher_relapse
-     - data_dir/relapse_fourth_line.csv
+     - data_dir/relapse_fourth_line_timestep_90.csv or data_dir/relapse_fourth_line_timestep_28.csv
      -
-
-data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2
 
 .. list-table:: Data sources
    :widths: 5 10 10
