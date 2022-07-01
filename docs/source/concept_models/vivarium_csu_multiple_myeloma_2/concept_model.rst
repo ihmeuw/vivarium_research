@@ -113,13 +113,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
 3.0 Concept Model Diagram
 +++++++++++++++++++++++++
 
-.. note::
-
-  This is the concept model diagram from :ref:`Phase 1
-  <2019_concept_model_vivarium_csu_multiple_myeloma>`. It may need to be
-  updated for Phase 2.
-
-.. image:: ../vivarium_csu_multiple_myeloma/concept_model_diagram.svg
+.. image:: ./concept_model_diagram.svg
 
 4.0 Vivarium Model Components
 +++++++++++++++++++++++++++++
@@ -147,14 +141,36 @@ set of treatment categories based on treatment guidelines from the `NCCN
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
 
+Our scenarios differ in how treatment is assigned.
+
+We know that our scenarios will roughly correspond to:
+
+* Baseline scenario: Sophisticated treatment assignment, with postprocessing rules (modifying the prediction model's probabilities) about Isa and Dara by year, and a rule that there is probability 0 of Isa directly following Dara
+* Alternative scenario 1: Naive treatment assignment (not dependent on covariates) with the same postprocessing rules as baseline
+* Alternative scenario 2: Same as baseline, but with postprocessing rules modified such that there is 5% uptake of Isa in second line following Dara first-line treatment by 2028 -- need to define how this replaces other things
+* Alternative scenario 3: Same as baseline, but with postprocessing rules modified such that there is 5% uptake of Isa first-line treatment by 2028 -- need to define how this replaces other things
+
+.. todo::
+
+  Rigorously define these scenarios. In particular, the scenarios above say "Isa" when we will actually want some split between Isa+PI+Dex, Isa+IMID+Dex, etc.
+
 6.0 Simulation Parameters
 +++++++++++++++++++++++++
 
 6.1 Locations
 -------------
 
+United States.
+
 6.2 Population and Randomness
 -----------------------------
+
+Population description:
+
+* Cohort type: Prospective closed cohort of individuals aged 15 years and older. The sim duration is 15 years (see below), so results above age 30 will not be impacted by the open/closed distinction; essentially all multiple myeloma occurs at age 30+.
+* Size of largest starting population: 100,000 simulants
+* Time span: Jan 1, 2013 to Dec 31, 2027 (Jan 1, 2013 to Jan 1, 2023 is a 10-year long burn-in period)
+* Time step: 28 days (final run) or 90 days (intermediate runs) -- the only input data that depends on the timestep is the time-varying hazard; we will have a copy of those CSVs for each of the two time step values
 
 6.3 Timeframe and Intervention Start Dates
 ------------------------------------------

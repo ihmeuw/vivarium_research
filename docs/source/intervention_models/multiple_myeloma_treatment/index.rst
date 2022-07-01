@@ -526,9 +526,6 @@ can be transformed into a DataFrame with meaningful column names like so:
 Model Covariates
 ~~~~~~~~~~~~~~~~
 
-.. todo::
-  These are not finalized!
-
 .. list-table:: Covariates for NDMM treatment assignment
   :header-rows: 1
 
@@ -536,32 +533,20 @@ Model Covariates
     - Description
     - Allowed values
   * - FirstTreatmentAge
-    - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
+    - Age at time of first treatment/incidence of MM (for NDMM, this equals current age) in un-rounded years.
     -
   * - Sex
     - The simulant's sex. Binary because our source data does not distinguish between intersex and not recorded.
     - 'M' or 'F'
-  * - IsBlack
-    - Whether or not the simulant is Black.
-    - 0 or 1
   * - RenalImpairment
     - Whether or not the simulant has renal impairment.
     - 0 or 1
   * - RiskType
     - Cytogenetic risk category.
     - 'Standard risk' or 'High risk'
-  * - EcogValue
-    - ECOG performance status (not currently included in sim!).
-    - 0, 1, 2, 3, or 4
-  * - EligibilityProxy
-    - Derived from already-listed covariates: 1 if FirstTreatmentAge < 76 years and EcogValue <= 2, 0 otherwise.
-    - 0 or 1
   * - Year
-    - Current (unrounded) year - 2000. e.g. 22.5 for halfway through 2022.
+    - Current (unrounded) year minus 2000. e.g. 22.5 for halfway through 2022.
     -
-  * - PracticeType
-    - The type of practice where the simulant is being treated (not currently included in sim!).
-    - 'COMMUNITY' or 'ACADEMIC'
 
 .. list-table:: Covariates for RRMM treatment assignment
   :header-rows: 1
@@ -570,59 +555,38 @@ Model Covariates
     - Description
     - Allowed values
   * - FirstTreatmentAge
-    - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
+    - Age at time of first treatment/incidence of MM in un-rounded years.
     -
   * - Sex
     - The simulant's sex. Binary because our source data does not distinguish between intersex and not recorded.
     - 'M' or 'F'
-  * - IsBlack
-    - Whether or not the simulant is Black.
-    - 0 or 1
-  * - RenalImpairment
-    - Whether or not the simulant had renal impairment **at the time of incidence**.
-    - 0 or 1
-  * - RiskType
-    - Cytogenetic risk category **at the time of incidence**.
-    - 'Standard risk' or 'High risk'
   * - Year
-    - Current (unrounded) year - 2000. e.g. 22.5 for halfway through 2022.
+    - Current (unrounded) year minus 2000. e.g. 22.5 for halfway through 2022.
     -
-  * - PracticeType
-    - The type of practice where the simulant is being treated (not currently included in sim!).
-    - 'COMMUNITY' or 'ACADEMIC'
-  * - RegimenClass_previous
-    - The treatment regimen category used in the previous line (e.g. 'PI+IMID+Dex').
-    - Any treatment regimen category in the treatment model. In some cases, it may be
-      a treatment regimen category that we have never seen precede another treatment in
-      our training data, in which case we essentially ignore this variable.
   * - Duration_previous
-    - Time since the previous relapse in days / 30.4.
+    - Time since the **previous** relapse in days. In other words, the number of days the simulant spent in the cause model state they are transitioning out of.
     -
   * - {component}_flag_previous
     - For each component part of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
       a binary flag indicating whether it was present in the previous line of treatment.
     -
+  * - NumberOfComponents_previous
+    - **Number** of component parts of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
+      present in the previous line of treatment. Equivalently, the sum of {component}_flag_previous across
+      all components.
+    -
   * - LineNumber
     - Line of treatment. Equal to the number of relapses + 1.
-    - Unbounded (linear extrapolation), but capped by our cause model at 5.
+    - Less than or equal to 5.
   * - TimeSinceFirstTreatment
     - Time elapsed since first treatment (a.k.a. incidence of MM) in unrounded years.
-    -
-  * - PrecedingUnique
-    - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
-      *ever* been treated with.
-    -
-  * - PrecedingShortUnique
-    - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
-      *ever* been treated with *in lines lasting < 3 \* 30.4 days*.
     -
 
 Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry. It requires access to all the files in the data_dir previously
-specified.
+match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
