@@ -371,7 +371,7 @@ This approach makes the following assumptions:
 Validation Criteria
 -------------------
 
-Simulation results should replicate the GBD 2019 cause-specific mortality rate, incidence rate, and prevalence for all age/sex/location groups. Notably, these measures should be tracked over time in the simulation to ensure that simulation rates do not deviate from GBD rates as the simulation progresses.
+Simulation results should replicate the GBD 2020 cause-specific mortality rate, incidence rate, and prevalence for all age/sex/location groups. Notably, these measures should be tracked over time in the simulation to ensure that simulation rates do not deviate from GBD rates as the simulation progresses.
 
 References
 ----------
