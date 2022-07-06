@@ -62,13 +62,15 @@ The `ICD 10`_ codes for measles are B05-B05.9, Z24.4, and ICD 9 codes are
      `Measles Makes Your Immune System’s Memory Forget Defenses Against Other Illnesses <https://www.nytimes.com/2019/10/31/health/measles-vaccine-immune-system.html?action=click&amp;module=News&amp;pgtype=Homepage>`_:
      New research shows the virus can have devastating effects on the immune system that persist much longer than the illness itself.
 
+     Second reference for this: https://www-ncbi-nlm-nih-gov.offcampus.lib.washington.edu/pmc/articles/PMC8590458/ 
 
-Modeling Measles in GBD 2019
+
+Modeling Measles in GBD 2020
 ----------------------------
 
-The non-fatal measles model "primarily leverages the relationship between direct reports of measles case notifications annually released by the World Health Organization (WHO) in the Joint Reporting Form (JRF), modeled estimates of measles-containing-vaccine (MCV) vaccination coverage proportions for doses 1 and 2 (five year rolling mean coverage), and supplementary immunization campaign (SIA) coverage (lagged by 1, 2, 3, 4, and 5 years) to produce global estimates of measles cases" [GBD-2019-Capstone-Appendix-Measles_2020]_ (p. 721). GBD assumes that 50% of measles cases are moderate (disability weight 0.051, 95% CI: 0.032, 0.074) and that 50% are severe (disability weight 0.133, 95% CI: 0.088, 0.19); symptoms of the measles sequelae in GBD include fever, aches/pain, and weakness. GBD assumes a universal 95% attack rate in the absence of vaccination. Measles prevalence was estimated by multiplying incident case estimations by an average case duration of ten days [GBD-2019-Capstone-Appendix-Measles_2020]_.
+The non-fatal measles model "primarily leverages the relationship between direct reports of measles case notifications annually released by the World Health Organization (WHO) in the Joint Reporting Form (JRF), modelled estimates of measles-containing-vaccine (MCV) vaccination coverage proportions for doses 1 and 2, and supplementary immunisation campaign (SIA) coverage to produce global estimates of measles cases" [GBD-2019-Capstone-Appendix-Measles_2020]_ (p. 721). GBD assumes that 50% of measles cases are moderate (disability weight 0.051, 95% CI: 0.032, 0.074) and that 50% are severe (disability weight 0.133, 95% CI: 0.088, 0.19); symptoms of the measles sequelae in GBD include fever, aches/pain, and weakness. GBD assumes a universal 95% attack rate in the absence of vaccination. Measles prevalence was estimated by multiplying incident case estimations by an average case duration of ten days [GBD-2019-Capstone-Appendix-Measles_2020]_.
 
-The GBD 2019 fatal measles estimates were modeled in one of two ways depending on available data quality for a given country. For data-rich countries, the Cause of Death Ensemble model (CODEm) was used, with measles-containing vaccination dose one, healthcare access and quality (HAQ) index, socio-demographic index (SDI), and mean years of education per capita as covariates (NOTE: the maternal care and immunization covariate was used in place of HAQ and SDI covariates in previous GBD cycles). For data-poor countries, a natural history model was used that built off of the GBD non-fatal estimates. The natural history model estimated a case fatality ratio via a model informed by data from a systematic literature search that was updated in 2019. "With the available measles CFR input data, we make location- and year-specific death estimates using a negative binomial model with Socio-demographic Index (SDI) as a country-level covariate, additionally accounting for three indicators (hospital-based or not; outbreak or not; and rural or urban/mixed) as study-level covariates, with country random effects" [GBD-2019-Capstone-Appendix-Measles_2020]_ (page 177).
+The GBD 2020 fatal measles estimates were modeled in one of two ways depending on available data quality for a given country. For data-rich countries, the Cause of Death Ensemble model (CODEm) was used, with measles-containing vaccination dose one, healthcare access and quality (HAQ) index, socio-demographic index (SDI), and mean years of education per capita as covariates (NOTE: the maternal care and immunization covariate was used in place of HAQ and SDI covariates in GBD 2017 and prior). For data-poor countries, a natural history model was used that built off of the GBD non-fatal estimates. The natural history model estimated a case fatality ratio via a model informed by data from a systematic literature search that was updated in 2019. "With the available measles CFR input data, we make location- and year-specific death estimates using a negative binomial model with Socio-demographic Index (SDI) as a country-level covariate, additionally accounting for three indicators (hospital-based or not; outbreak or not; and rural or urban/mixed) as study-level covariates, with country random effects" [GBD-2019-Capstone-Appendix-Measles_2020]_ (page 177).
 
 .. todo::
 
@@ -120,7 +122,12 @@ outbreaks due to lack of vaccination in small communities.
 
 Some of the **assumptions** made in this model are:
 
-1. There is no data available for population in recovered state in GBD. Since the early and late neonatal age groups are not modeled in GBD, we made the assumption that there are no individuals in the recovered state at the start of the post-neonatal age group. We then calculated the proportion of the population in the recovered state in the 1-4 year age group using GBD measles incidence and mortality rates. Note that we performed this calculation only for the 1-4 age group because measles is most often of interest among the children under five population, but this assumption could be expanded to other older ages as well.
+1. There is no data available for population in recovered state in GBD. Since the early neonatal, late neonatal, and 1-5 month age groups are not modeled in GBD, we made the assumption that there are no individuals in the recovered state at the start of the 6-11 month age group (NOTE: prior GBD estimates started modeling at 28 days). We then calculated the proportion of the population in the recovered state in the 1-4 year age group using GBD measles incidence and mortality rates. Note that we performed this calculation only for the 1-4 age group because measles is most often of interest among the children under five population, but this assumption could be expanded to other older ages as well.
+
+.. todo::
+
+   Edit above for age group changes once modeling approach has been decided 
+
 
 2. There is no data avaialable for remission rate in GBD. So a constant remission rate is 
 calculated from average case duration assumption of 10 days [GBD-2019-Capstone-Appendix-Measles_2020]_.
@@ -145,17 +152,17 @@ calculated from average case duration assumption of 10 days [GBD-2019-Capstone-A
      - False
      - 
    * - YLL age group start
-     - Post Neonatal
-     - GBD age group id is 4
+     - 6-11 months
+     - GBD age group id is 389
    * - YLL age group end
      - 50 to 54 years
      - GBD age group id is 15
    * - YLD age group start
-     - Post Neonatal
-     - GBD age group id is 4
+     - 6-11 months
+     - GBD age group id is 389
    * - YLD age group end
      - 50 to 54 years
-     - GBD age group id is 
+     - GBD age group id is 15 
 
 Notably, our cause model as described accounts for the number of simulants that enter the recovered state by becoming infected with measles and recovering, but does not consider simulants who enter the recovered state by receiving the measles vaccine without becoming infected with measles. Therefore, we are underestimating the prevalence of the recovered state in our model. This strategy was employed so that the size of the susceptible and recovered populations at model initialization will remain stable as the simulation runs and simulants progress through the SIR cause model (this is an improvement from our previous assumption that there was zero prevalence of the recovered state upon model initialization, which caused an decrease in the susceptible population and an increase in the recovered population over time, which affected calibration of simulation incidence and mortality rates to GBD rates); see note below.
 
@@ -263,6 +270,11 @@ Data Description
 
 **Prevalence of recovered state**
 
+.. todo::
+
+   Edit below equations and text for age group changes once modeling approach has been decided 
+
+
 We will use a age-group-specific prevalence of the recovered state for this cause model. We assume that the prevalence of the recovered state among the post-neonatal age group (age group ID 4), the first modeled age group for measles, is zero. For all other age groups modeled for measles, the prevalence of the recovered state relies on information from the preceeding age group, as detailed below.
 
 For the post-neonatal age group:
@@ -300,7 +312,7 @@ This approach makes the following assumptions:
 
   - There is no difference in all cause mortality rates between the population susceptible to measles and the population recovered from measles
   - The prevalence of the recovered state for a given age group is equal to the average between the upper and lower bound of that age group
-  - There are no recovered cases of measles prior to an age of 28 days
+  - There are no recovered cases of measles prior to an age of 6 months
 
 .. list-table:: Transition Data
    :widths: 10 10 10 30 30
