@@ -52,7 +52,10 @@ inform our treatment algorithm.
     - Note
   * - ASCT
     - autologous stem cell transplantation
-    -
+    - A preferred treatment for multiple myeloma in which a patient has stem cells extracted,
+      is given high-dose chemotherapy, and then receives an infusion of their own stem cells.
+      Not every patient with multiple myeloma is eligible for ASCT, and treatment strategy varies significantly
+      between eligible and ineligible patients.
   * - IMiD
     - immunomodulatory imide drug
     -
@@ -279,30 +282,6 @@ Affected Outcomes
     - No
     -
 
-Baseline Coverage Data
-++++++++++++++++++++++++
-
-We plan to use Flatiron to inform baseline coverage of each treatment regimen.
-
-.. todo::
-
-  Document known baseline coverage data, using the table below if appropriate
-
-.. list-table:: Baseline coverage data
-  :widths: 15 15 15 15 15
-  :header-rows: 1
-
-  * - Location
-    - Subpopulation
-    - Coverage parameter
-    - Value
-    - Note
-  * -
-    -
-    -
-    -
-    -
-
 Vivarium Modeling Strategy
 --------------------------
 
@@ -427,23 +406,66 @@ categories:
   * - Other+ASCT
     - Covers all other combinations of *non-ASCT components* in the presence of ASCT.
 
+Baseline Coverage Data
+++++++++++++++++++++++++
+
+If any simulants are initialized into the NDMM state in the multiple myeloma cause model
+(this is TBD according to what is easier to implement), they will all be initialized
+to PI+IMID+Dex. The 10-year burn-in period of running the treatment assignment scheme
+described below will make this initialization almost entirely inconsequential.
+
 Treatment Assignment
 ++++++++++++++++++++
 
 The Phase 1 simulation had fixed coverage percentages for each treatment regimen category
-in each line. In Phase 2, we will implement a more sophisticated model that takes
-into account covariates and prior treatment in a patient's history, informed by Flatiron
-data.
+in each line, which varied between scenarios. In Phase 2, we will assign treatment regimen categories
+according to these three schemes:
 
-Because the model needs to be trained within Foundry, it has to be passed from
+#. In the naive-model scenario (Model 1), we use naive models that always predict the same probabilities
+   regardless of covariates. This will be even simpler than Phase 1 because it has no time trend.
+#. In the baseline scenario, we use more sophisticated models that take into account covariates and prior
+   treatment in a patient's history.
+#. In the alternative scenarios, we will extend the sophisticated models by adding business rules that
+   modify their predicted probabilities. The exact definition of these business rules is TBD.
+
+All three schemes are informed by Flatiron data.
+
+To be precise, in each scheme there will be two models: one that assigns the
+first line of treatment (the treatment a simulant receives at the time of incidence of MM)
+and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). All models output probabilities;
+the simulation will then randomly sample a treatment regimen category according to these probabilities and assign
+it to the simulant.
+
+Naive Models
+~~~~~~~~~~~~
+
+The naive models can be summarized very easily. They are provided as CSV
+files where the first row contains treatment regimen categories and the second contains corresponding
+(invariant) probabilities of assignment.
+
+.. list-table:: Naive probabilities CSV paths
+  :widths: 1 10
+  :header-rows: 1
+
+  * - Name
+    - Path
+  * - NDMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive_proba.csv
+  * - RRMM
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive_proba.csv
+
+Sophisticated Models
+~~~~~~~~~~~~~~~~~~~~
+
+The sophisticated models require a more complex approach. Because they need to be trained within Foundry, they have to be passed from
 Foundry to Vivarium in a serialized format. While a human-readable and interoperable
-format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output a :code:`.pkl` file. The pickled
-form of the model may depend on the version of Python, :code:`sklearn`,
-and possibly sklearn subdependencies it was trained with. We will need to align
+format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output :code:`.pkl` files. The pickled
+form of the models may depend on the version of Python, :code:`sklearn`,
+and possibly sklearn subdependencies they were trained with. We will need to align
 these between the Vivarium environment and the Foundry environment and verify
-that outputs are what we expect.
+that outputs are what we expect. For this last task, see the verification script below.
 
-.. list-table:: Python and package versions
+.. list-table:: Python and package versions at model training time
   :header-rows: 1
 
   * - Package
@@ -467,10 +489,7 @@ that outputs are what we expect.
     :language: python
     :linenos:
 
-To be precise, there will be two models: one that assigns the
-first line of treatment (the treatment a simulant receives at the time of incidence of MM)
-and another that assigns later lines (at time of 1st, 2nd, 3rd, etc relapse). Each
-pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
+Each pickled object is an sklearn Classifier, implemented by an sklearn Pipeline.
 This object has a :code:`predict_proba` method which takes a pandas DataFrame
 of covariates and returns a 2d numpy array of probabilities. That returned array
 can be transformed into a DataFrame with meaningful column names like so:
@@ -498,22 +517,14 @@ can be transformed into a DataFrame with meaningful column names like so:
     - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model.pkl
   * - RRMM
     - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model.pkl
+  * - NDMM naive model
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive.pkl
+  * - RRMM naive model
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive.pkl
 
-Then:
-
-* In the baseline scenario, the simulated treatment regimen category is assigned according to the output probabilities.
-* In the alternative scenarios, the probabilities are adjusted according to business rules
-  before sampling.
-
-.. todo::
-
-  These business rules need to be worked out.
 
 Model Covariates
 ~~~~~~~~~~~~~~~~
-
-.. todo::
-  These are not finalized!
 
 .. list-table:: Covariates for NDMM treatment assignment
   :header-rows: 1
@@ -522,32 +533,20 @@ Model Covariates
     - Description
     - Allowed values
   * - FirstTreatmentAge
-    - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
+    - Age at time of first treatment/incidence of MM (for NDMM, this equals current age) in un-rounded years.
     -
   * - Sex
     - The simulant's sex. Binary because our source data does not distinguish between intersex and not recorded.
     - 'M' or 'F'
-  * - IsBlack
-    - Whether or not the simulant is Black.
-    - 0 or 1
   * - RenalImpairment
     - Whether or not the simulant has renal impairment.
     - 0 or 1
   * - RiskType
     - Cytogenetic risk category.
     - 'Standard risk' or 'High risk'
-  * - EcogValue
-    - ECOG performance status (not currently included in sim!).
-    - 0, 1, 2, 3, or 4
-  * - EligibilityProxy
-    - Derived from already-listed covariates: 1 if FirstTreatmentAge < 76 years and EcogValue <= 2, 0 otherwise.
-    - 0 or 1
   * - Year
-    - Current (unrounded) year - 2000. e.g. 22.5 for halfway through 2022.
+    - Current (unrounded) year minus 2000. e.g. 22.5 for halfway through 2022.
     -
-  * - PracticeType
-    - The type of practice where the simulant is being treated (not currently included in sim!).
-    - 'COMMUNITY' or 'ACADEMIC'
 
 .. list-table:: Covariates for RRMM treatment assignment
   :header-rows: 1
@@ -556,58 +555,38 @@ Model Covariates
     - Description
     - Allowed values
   * - FirstTreatmentAge
-    - Age at time of first treatment (for NDMM, this = current age) in un-rounded years.
+    - Age at time of first treatment/incidence of MM in un-rounded years.
     -
   * - Sex
     - The simulant's sex. Binary because our source data does not distinguish between intersex and not recorded.
     - 'M' or 'F'
-  * - IsBlack
-    - Whether or not the simulant is Black.
-    - 0 or 1
-  * - RenalImpairment
-    - Whether or not the simulant had renal impairment **at the time of incidence**.
-    - 0 or 1
-  * - RiskType
-    - Cytogenetic risk category **at the time of incidence**.
-    - 'Standard risk' or 'High risk'
   * - Year
-    - Current (unrounded) year - 2000. e.g. 22.5 for halfway through 2022.
+    - Current (unrounded) year minus 2000. e.g. 22.5 for halfway through 2022.
     -
-  * - PracticeType
-    - The type of practice where the simulant is being treated (not currently included in sim!).
-    - 'COMMUNITY' or 'ACADEMIC'
-  * - RegimenClass_previous
-    - The treatment regimen category used in the previous line (e.g. 'PI+IMID+Dex').
-    - Any treatment regimen category in the treatment model. In some cases, it may be
-      a treatment regimen category that we have never seen precede another treatment in
-      our training data, in which case we essentially ignore this variable.
   * - Duration_previous
-    - Time since the previous relapse in days / 30.4.
+    - Time since the **previous** relapse in days. In other words, the number of days the simulant spent in the cause model state they are transitioning out of.
     -
   * - {component}_flag_previous
     - For each component part of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
       a binary flag indicating whether it was present in the previous line of treatment.
     -
+  * - NumberOfComponents_previous
+    - **Number** of component parts of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
+      present in the previous line of treatment. Equivalently, the sum of {component}_flag_previous across
+      all components.
+    -
   * - LineNumber
     - Line of treatment. Equal to the number of relapses + 1.
-    - Unbounded (linear extrapolation), but capped by our cause model at 5.
+    - Less than or equal to 5.
   * - TimeSinceFirstTreatment
     - Time elapsed since first treatment (a.k.a. incidence of MM) in unrounded years.
-    -
-  * - PrecedingUnique
-    - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
-      *ever* been treated with.
-    -
-  * - PrecedingShortUnique
-    - The number of unique components (e.g. 'PI', 'IMID', 'ASCT') this simulant has
-      *ever* been treated with *in lines lasting < 3 \* 30.4 days*.
     -
 
 Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry.
+match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
@@ -617,89 +596,76 @@ match those generated within Foundry.
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
 
-.. todo::
-
-  Fill out the following table with all of the affected measures that have vivarium modeling strategies documented
-
 .. list-table:: Modeled Outcomes
-  :widths: 15 15 15 15 15 15 15
   :header-rows: 1
 
   * - Outcome
-    - Outcome type
-    - Outcome ID
     - Affected measure
     - Effect size measure
     - Effect size
     - Note
-  * -
-    -
-    -
-    -
-    -
-    -
-    -
+  * - Mortality
+    - Hazard rate of death
+    - Hazard ratio
+    - Various
+    - HRs relative to mix of treatment observed in Flatiron survival data
+  * - Relapse
+    - Hazard rate of relapse
+    - Hazard ratio
+    - Various
+    - HRs relative to mix of treatment observed in Flatiron survival data
 
-Affected Outcome #1
-+++++++++++++++++++++
 
-.. important::
+Mortality and Relapse Effects
++++++++++++++++++++++++++++++
 
-  Copy and paste this section for each affected outcome included in this document
+.. note::
+
+  For more about how we model relapse, see :ref:`the Multiple Myeloma
+  cause model <2019_cancer_model_multiple_myeloma>`.
+
+For each multiple myeloma setting (NDMM, RRMM) in which it can be used,
+each regimen category has a hazard ratio (HR) for mortality and an HR for relapse.
+These hazard ratios are relative to the regimen category mix in the base survival curve.
+Therefore, the hazard at time :math:`t` after incidence/relapse for a simulant
+with covariates :math:`x` being treated with regimen category :math:`r` is:
+
+.. math::
+
+  h(t|x,r) = h(t|x) * HR_r
 
 .. todo::
 
-  Replace "Risk Outcome Pair #1" with the name of an affected entity for which a modeling strategy will be detailed. For additional risk outcome pairs, copy this section as many times as necessary and update the titles accordingly.
+  Explain how HRs were estimated, including NMA, making them relative to
+  Flatiron regimen category mix, and application of ASCT effect.
 
 .. todo::
 
-  Link to existing document of the affected outcome (ex: cause or risk exposure model document)
+  These are placeholder values pending completion of network meta-analysis! The
+  final files may not have values for *every* setting-category combination listed here, but
+  they are guaranteed not to be missing any combinations that are possible outputs
+  of the relevant treatment assignment model.
 
-.. todo::
-
-  Describe exactly what measure the intervention will affect
-
-.. todo::
-
-  Fill out the tables below
-
-.. list-table:: Affected Outcome #1 Restrictions
-  :widths: 15 15 15
+.. csv-table:: Mortality hazard ratios
+  :file: mortality_hrs.csv
   :header-rows: 1
 
-  * - Restriction
-    - Value
-    - Note
-  * - Male only
-    -
-    -
-  * - Female only
-    -
-    -
-  * - Age group start
-    -
-    -
-  * - Age group end
-    -
-    -
-  * - Other
-    -
-    -
+:download:`mortality_hrs.csv`
 
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15
+.. csv-table:: Relapse hazard ratios
+  :file: relapse_hrs.csv
   :header-rows: 1
 
-  * - Population
-    - Effect size
-    - Note
-  * -
-    -
-    -
+:download:`relapse_hrs.csv`
+
+A lognormal distribution of uncertainty within the uncertainty intervals reported
+above should be assumed (for the purposes of the placeholder values, the point
+estimate can be ignored).
 
 .. todo::
 
-  Describe exactly *how* to apply the effect sizes to the affected measures documented above
+  Should there be correlation between mortality hazard ratio and relapse hazard ratio,
+  similar to the correlation between OS and PFS in Phase 1?
 
 .. todo::
 
@@ -708,5 +674,60 @@ Affected Outcome #1
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. todo::
+
+  Add an assumption about time trend, once we determine which assumption we will make.
+
+#. We assume that treatment assignment depends only on the selected covariates and
+   characteristics of the preceding treatment, and that the remaining variation
+   is truly random.
+#. We assume a linear effect of line number/number of previous relapses on
+   treatment assignment (in log-probability space).
+#. We only model ASCT in NDMM.
+#. We assume all conditioning regimens for ASCT have identical effects.
+#. We assume all maintenance therapies, or the lack of maintenance therapy, have
+   identical effects.
+#. We assume that all regimens within a regimen category have identical effects.
+#. We assume that treatment regimen categories have proportional hazards; that is,
+   their hazard ratios do not change depending on time since incidence/relapse.
+#. We assume that treatment regimen categories do not have interaction effects
+   with any covariates.
+
 Validation and Verification Criteria
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Treatment Assignment
+^^^^^^^^^^^^^^^^^^^^
+
+In each year, line, and age group, we will calculate the proportions of initiated treatments that were in each treatment
+regimen category using the output of the treatment observer.
+
+When the simulation is using a naive treatment assignment scheme, these should approximately equal the proportions of the relevant (NDMM or RRMM) naive scheme, in every year and line. In practice, we will bin later lines to have sufficient
+sample size to verify this.
+
+When the simulation is using a sophisticated treatment assignment scheme, NDMM treatment proportions should be similar to the naive proportions, except that:
+
+ #. Treatments with a positive time trend according to our model outputs in Foundry have higher proportions in the
+    first year. They should have even higher proportions in later simulation years. Both of these effects will be
+    reversed for treatments with negative time trends.
+ #. Treatments with a positive age trend according to our model outputs in Foundry have higher proportions in older
+    age groups, and vice versa.
+
+.. todo::
+
+  How do we verify RRMM treatment assignment once we are using a sophisticated treatment assignment scheme?
+
+Treatment Effects
+^^^^^^^^^^^^^^^^^
+
+In each timestep, we will calculate the death risk and relapse risk in each treatment regimen category.
+The death risk is :code:`died_by_end` divided by :code:`alive_at_start`, while the relapse risk is :code:`progressed_by_end` divided by :code:`alive_at_start`.
+All of these values are recorded by the survival observer.
+
+When the simulation is using a naive treatment assignment scheme, the relative risk of death or relapse between treatment :math:`t1` and treatment :math:`t2` in a timestep, :math:`risk_{t1} / risk_{t2}`,
+should approximately equal the ratio of the corresponding HRs, :math:`HR_{t1} / HR_{t2}`. In practice,
+we will bin groups of adjacent timesteps in order to have sufficient sample size to verify this.
+
+.. todo::
+
+  How do we verify treatment effects once we are using a sophisticated treatment assignment scheme?

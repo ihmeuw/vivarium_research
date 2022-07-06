@@ -113,13 +113,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
 3.0 Concept Model Diagram
 +++++++++++++++++++++++++
 
-.. note::
-
-  This is the concept model diagram from :ref:`Phase 1
-  <2019_concept_model_vivarium_csu_multiple_myeloma>`. It may need to be
-  updated for Phase 2.
-
-.. image:: ../vivarium_csu_multiple_myeloma/concept_model_diagram.svg
+.. image:: ./concept_model_diagram.svg
 
 4.0 Vivarium Model Components
 +++++++++++++++++++++++++++++
@@ -127,7 +121,7 @@ set of treatment categories based on treatment guidelines from the `NCCN
 4.1 Cause Models
 ----------------
 
-* :ref:`Multiple Myeloma <2019_cancer_model_multiple_myeloma>`
+* :ref:`Multiple Myeloma <2019_cancer_model_multiple_myeloma_2>`
 
 4.2 Risk Exposure Models
 ------------------------
@@ -147,20 +141,68 @@ set of treatment categories based on treatment guidelines from the `NCCN
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
 
+Our scenarios differ in how treatment is assigned.
+
+We know that our scenarios will roughly correspond to:
+
+* Baseline scenario: Sophisticated treatment assignment, with postprocessing rules (modifying the prediction model's probabilities) about Isa and Dara by year, and a rule that there is probability 0 of Isa directly following Dara
+* Alternative scenario 1: Naive treatment assignment (not dependent on covariates) with the same postprocessing rules as baseline
+* Alternative scenario 2: Same as baseline, but with postprocessing rules modified such that there is 5% uptake of Isa in second line following Dara first-line treatment by 2028 -- need to define how this replaces other things
+* Alternative scenario 3: Same as baseline, but with postprocessing rules modified such that there is 5% uptake of Isa first-line treatment by 2028 -- need to define how this replaces other things
+
+.. todo::
+
+  Rigorously define these scenarios. In particular, the scenarios above say "Isa" when we will actually want some split between Isa+PI+Dex, Isa+IMID+Dex, etc.
+
 6.0 Simulation Parameters
 +++++++++++++++++++++++++
 
 6.1 Locations
 -------------
 
+United States.
+
 6.2 Population and Randomness
 -----------------------------
+
+Population description:
+
+* Cohort type: Prospective closed cohort of individuals aged 15 years and older. The sim duration is 15 years (see below), so results above age 30 will not be impacted by the open/closed distinction; essentially all multiple myeloma occurs at age 30+.
+* Size of largest starting population: 100,000 simulants
+* Time span: Jan 1, 2013 to Dec 31, 2027 (Jan 1, 2013 to Jan 1, 2023 is a 10-year long burn-in period)
+* Time step: 28 days (final run) or 90 days (intermediate runs) -- the only input data that depends on the timestep is the time-varying hazard; we will have a copy of those CSVs for each of the two time step values
 
 6.3 Timeframe and Intervention Start Dates
 ------------------------------------------
 
 7.0 Model Builds and Validation Tracking
 ++++++++++++++++++++++++++++++++++++++++
+
+.. list-table:: Model verification and validation tracking
+  :widths: 3 10 20
+  :header-rows: 1
+
+  * - Model
+    - Description
+    - V&V summary
+  * - Model 0
+    - Phase 1 Model 9 re-run
+    - `Round 1 without age stratification <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/pull/2>`_:
+        * `Found a bug <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_tx_coverage_verification.ipynb>`_ with the treatment observer in which all simulants are :code:`not_treated` in Line 1.
+        * Cannot meaningfully compare `RRMM prevalence <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_rrmm_prevalence.ipynb>`_ or `prevalence and incidence of MM overall <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_cause_vs_gbd.ipynb>`_ to Phase 1 (or in the case of the latter, GBD) without age stratification.
+        * `RRMM prevalence does not appear to converge in our burn-in period <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_rrmm_prevalence.ipynb>`_, accumulating simulants continuously in the fourth and higher relapse state -- I have confirmed that this issue was also present in Phase 1, but we did not know it. Not investigating this for now, in the hopes that the new survival curves we plan to use anyway will resolve this problem as well.
+        * `Treatment effects are unchanged from Phase 1 <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_tx_effect_verification.ipynb>`_ **but they do not look correct** -- it appears there was some regression between Model 6.5 and Model 9 in Phase 1. Not investigating this for now, in the hopes that the treatment changes we plan to make anyway will resolve this problem as well.
+        * `Survival curves are unchanged from Phase 1 <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_survival_curves_vs_braunlin.ipynb>`_, though they are systematically biased relative to input curves from Braunlin -- a limitation we accepted in Phase 1.
+        * Before completing the PR (do not have these versions of the notebooks), found a bug with :code:`make_results` putting information from many columns into the age column -- this was quickly fixed.
+  * - Model 1
+    - Expanded treatment categories and hazard ratios (likely placeholder values)
+    -
+  * - Model 2
+    - Use TTNT directly for hazard of relapse, instead of subtracting OS from PFS
+    -
+  * - Model 3
+    - Sophisticated treatment prediction model as a scenario and business-rule-modified alternative scenarios
+    -
 
 8.0 Desired Outputs
 +++++++++++++++++++
@@ -170,6 +212,77 @@ set of treatment categories based on treatment guidelines from the `NCCN
 
 8.2 Requested Outputs from Vivarium
 -----------------------------------
+
+8.2.1 Treatment output table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+  This should be similar to the treatment output table from Phase 1, with an added stratification
+  by age.
+
+.. list-table:: Treatment observer metrics
+  :header-rows: 1
+
+  * - Variable
+    - Definition
+  * - input_draw
+    - Input draw number. len(input_draw) = 30
+  * - scenario
+    - Intervention scenario. Choose from ['naive', 'baseline', ...]
+  * - year
+    - Calendar year
+  * - treatment_line
+    - Treatment line/disease state a simulant is in. If a simulant is in state
+      :code:`multiple_myeloma_{x}`, assign this simulant :code:`treatment_line {x}`. Choose
+      from [1, 2, 3, 4, 5+]
+  * - treatment_category
+    - Treatment regimen category a simulant initiated. For example, IMID+PI+Dex.
+  * - age
+    - Age group a simulant is in.
+  * - value
+    - Count of simulants in age group :code:`age` who initiated the :code:`treatment_category` in :code:`treatment_line` during :code:`year`.
+
+8.2.2 Survival output table
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+  This is very similar to :ref:`the survival output table from Phase 1 <mm5.6>`, with an added
+  stratification by treatment category.
+
+.. list-table:: Survival observer metrics
+  :header-rows: 1
+
+  * - Variable
+    - Definition
+  * - input_draw
+    - Input draw number. len(input_draw) = 30
+  * - scenario
+    - Intervention scenario. Choose from ['naive', 'baseline', ...]
+  * - treatment_line
+    - Treatment line/disease state a simulant is in. If a simulant is in state
+      :code:`multiple_myeloma_{x}`, assign this simulant :code:`treatment_line {x}`. Choose
+      from [1, 2, 3, 4, 5+]
+  * - treatment_category
+    - Treatment regimen category a simulant is in. For example, IMID+PI+Dex.
+  * - period
+    - The number of days since the entrance into the :code:`treatment_line` that the
+      count measures were evaluated on.
+  * - alive_at_start
+    - Count of at-risk simulants alive at :code:`period` - 28 days since they entered :code:`treatment_line`.
+  * - died_by_end
+    - Count of :code:`alive_at_start` simulants who died between :code:`period` - 28 and :code:`period` days since they entered :code:`treatment_line`.
+  * - progressed_by_end
+    - Count of :code:`alive_at_start` simulants who progressed to next line of treatment/disease state
+      between :code:`period` - 28 and :code:`period` days since they entered :code:`treatment_line`.
+  * - sim_end_on
+    - Count of :code:`alive_at_start` simulants without death or progression at the end of the simulation
+      between :code:`period` - 28 and :code:`period` days since they entered :code:`treatment_line`.
+
+Time frame for survival observer (timestep = 28 days):
+ 1. start_date = 2021-01-01, end_date = 2025-12-31
+ 2. start_date = 2025-01-01, end_date = 2025-12-31
 
 9.0 Back of the Envelope Calculations
 +++++++++++++++++++++++++++++++++++++
