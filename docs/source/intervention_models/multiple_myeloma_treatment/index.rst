@@ -679,9 +679,11 @@ Below is Python code implementing these rules in a non-Vivarium context, for use
 
   # This imagines that dara_target and isa_target are pd.Series with multi-indices of (line, year) and (scenario, line, year) respectively,
   # and that dara_coverage_projected is a pd.DataFrame with multi-index of (line, year) with columns Dara_all and Dara_isa_corresponding
+  probabilities_df['Year'] = year
+  probabilities_df['Scenario'] = scenario
   # TODO: Both of these need to interpolate/extrapolate by year, however that is done in Vivarium
-  dara_target_coverage = dara_target.loc[zip(probabilities_df.LineNumber, [year] * len(probabilities_df))]
-  projected_dara = dara_coverage_projected.loc[zip(probabilities_df.LineNumber, [year] * len(probabilities_df)), 'Dara_all']
+  dara_target_coverage = dara_target.loc[zip(probabilities_df.LineNumber, probabilities_df.Year))]
+  projected_dara = dara_coverage_projected.loc[zip(probabilities_df.LineNumber, probabilities_df.Year)), 'Dara_all']
 
   for dara_regimen_category in dara_containing:
     probabilities_df[dara_regimen_category] = probabilities_df[dara_regimen_category] * (dara_target_coverage / projected_dara)
@@ -692,8 +694,8 @@ Below is Python code implementing these rules in a non-Vivarium context, for use
     probabilities_df.loc[probabilities_df.LineNumber == 1, dara_containing] = 0
   
   # TODO: Both of these need to interpolate/extrapolate by year, however that is done in Vivarium
-  isa_target_coverage = isa_target.loc[zip([scenario] * len(probabilities_df), probabilities_df.LineNumber, [year] * len(probabilities_df))]
-  projected_dara_isa_corresponding = dara_coverage_projected.loc[zip(probabilities_df.LineNumber, [year] * len(probabilities_df)), 'Dara_isa_corresponding']
+  isa_target_coverage = isa_target.loc[zip(probabilities_df.Scenario, probabilities_df.LineNumber, probabilities_df.Year)]
+  projected_dara_isa_corresponding = dara_coverage_projected.loc[zip(probabilities_df.LineNumber, probabilities_df.Year), 'Dara_isa_corresponding']
 
   for isa_regimen_category, dara_regimen_category in isa_dara_pairs:
     probabilities_df[isa_regimen_category] = probabilities_df[dara_regimen_category] * (isa_target_coverage / (dara_target_coverage * (projected_dara_isa_corresponding / projected_dara)))
