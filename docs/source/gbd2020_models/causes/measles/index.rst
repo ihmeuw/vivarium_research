@@ -393,7 +393,7 @@ References
 
 .. todo::
 
-   update this cite to 2019
+   update this cite to 2020
 
 .. [GBD-2017-YLD-Capstone-Appendix-1-Measles-2020]
    Supplement to: `GBD 2017 Disease and Injury Incidence and Prevalence
