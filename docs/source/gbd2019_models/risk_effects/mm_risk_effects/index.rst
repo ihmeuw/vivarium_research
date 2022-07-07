@@ -60,7 +60,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - Exposed group
     - Unexposed group
     - Directly correlated with (in simulation)
-    - Adjustment variables
+    - Controlled variables
     - Source
     - Note
   * - Sex
