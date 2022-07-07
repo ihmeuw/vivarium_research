@@ -51,12 +51,8 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
 
   Flatiron allows us to estimate the correlation of risk factors, but we would need effect sizes adjusted for treatment and the other risk effects (and nothing else). Since we are not using Flatiron for the risk effects, there is no good way to obtain these. Due to the lack of risk effects, we do not model the correlations, except for those between each risk factor and treatment as described above, and between age and sex.
 
-.. todo::
-
-  Fill in this table.
-
 .. list-table:: Risk Effects Table
-  :header-rows: 1
+  :header-rows: 
 
   * - Parameter
     - OS HR
@@ -68,40 +64,40 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - Source
     - Note
   * - Sex
-    -
-    -
-    - Male
+    - 0.86 (0.68, 1.1)
+    - 0.83 (0.67, 1.03)
     - Female
+    - Male
     - Age, treatment(?)
-    -
-    -
-    -
+    - None 
+    - [van_de_Donk_2018]_
+    - 
   * - Age at diagnosis
-    -
-    -
-    - 65+
-    - <65
+    - 1.30 (1.15, 1.48)
+    - 1.17 (1.05, 1.31)
+    - 70+
+    - <70
     - Sex, treatment
-    -
-    -
+    - None 
+    - [Ailawadhi_2018]_
     -
   * - Renal function at diagnosis
-    -
-    -
+    - 1 (1, 1)
+    - 1 (1, 1)
     - Impaired
     - Not impaired
     - Treatment
-    -
-    -
+    - 
+    - [Dimopoulos_2010]_
     - Impairment defined as eGFR less than 60
   * - Cytogenetic risk
-    -
-    -
+    - 2.3 (1.4, 4)
+    - 1.5 (1, 2.3)
     - High
     - Standard
     - Treatment(?)
-    -
-    -
+    - None 
+    - [Mateos_2011]_
     -
 
 Changing the reference group
@@ -196,3 +192,18 @@ Apply the hazard ratios above specific to the exposure value a simulant possesse
 .. math::
 
   h_\text{simulant} = h_\text{baseline} * \prod HR_\text{risk exposure(i):baseline}
+
+References
+----------
+
+.. [van_de_Donk_2018] 
+    van de Donk NW, van der Holt B, Minnema MC, et al. Thalidomide before and after autologous stem cell transplantation in recently diagnosed multiple myeloma (HOVON-50): long-term results from the phase 3, randomised controlled trial. Lancet Haematol. 2018;5(10):e479-e492. doi:10.1016/S2352-3026(18)30149-2
+
+.. [Ailawadhi_2018] 
+    Ailawadhi S, Jacobus S, Sexton R, et al. Disease and outcome disparities in multiple myeloma: exploring the role of race/ethnicity in the Cooperative Group clinical trials. Blood Cancer J. 2018;8(7):67. doi:10.1038/s41408-018-0102-7
+
+.. [Dimopoulos_2010]
+    Dimopoulos MA, Christoulas D, Roussou M, et al. Lenalidomide and dexamethasone for the treatment of refractory/relapsed multiple myeloma: dosing of lenalidomide according to renal function and effect on renal impairment. Eur J Haematol. 2010;85(1):1-5. doi:10.1111/j.1600-0609.2010.01432.x 
+
+.. [Mateos_2011] 
+    Mateos MV, Gutiérrez NC, Martín-Ramos ML, et al. Outcome according to cytogenetic abnormalities and DNA ploidy in myeloma patients receiving short induction with weekly bortezomib followed by maintenance. Blood. 2011;118(17):4547-4553. doi:10.1182/blood-2011-04-345801
