@@ -122,7 +122,7 @@ outbreaks due to lack of vaccination in small communities.
 
 Some of the **assumptions** made in this model are:
 
-1. There is no data available for population in recovered state in GBD. Since the early neonatal, late neonatal, and 1-5 month age groups are not modeled in GBD, we made the assumption that there are no individuals in the recovered state at the start of the 6-11 month age group (NOTE: prior GBD estimates started modeling at 28 days). We then calculated the proportion of the population in the recovered state in the 1-4 year age group using GBD measles incidence and mortality rates. Note that we performed this calculation only for the 1-4 age group because measles is most often of interest among the children under five population, but this assumption could be expanded to other older ages as well.
+1. There is no data available for population in recovered state in GBD. Since the early neonatal, late neonatal, and 1-5 month age groups are not modeled in GBD, we made the assumption that there are no individuals in the recovered state at the start of the 6-11 month age group (NOTE: prior GBD estimates started modeling at 28 days). We then calculated the proportion of the population in the recovered state in the 12-23 month and 2-4 year age group using GBD measles incidence and mortality rates. Note that we performed this calculation only for these 2 age groups because measles is most often of interest among the children under five population, but this assumption could be expanded to other older ages as well.
 
 .. todo::
 
