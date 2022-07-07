@@ -69,7 +69,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - Female
     - Male
     - Age, treatment(?)
-    - No adjustments
+    - Treatment (randomized)
     - [van_de_Donk_2018]_
     - 
   * - Age at diagnosis
@@ -78,7 +78,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - 70+
     - <70
     - Sex, treatment
-    - No adjustments
+    - Treatment (randomized)
     - [Ailawadhi_2018]_
     -
   * - Renal function at diagnosis
@@ -88,7 +88,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - Not impaired
     - Treatment
     - No adjustments
-    - [Dimopoulos_2010]_
+    - [Dimopoulos_2010]_ There is low data availability at our cutoff for renal insufficiency. Existing data from RCTs suggests no effect, therefore 1 was adopted as a hazard ratio. 
     - Impairment defined as eGFR less than 60
   * - Cytogenetic risk
     - 2.3 (1.4, 4)
@@ -96,7 +96,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - High
     - Standard
     - Treatment(?)
-    - No adjustments
+    - Treatment (randomized)
     - [Mateos_2011]_
     -
 
