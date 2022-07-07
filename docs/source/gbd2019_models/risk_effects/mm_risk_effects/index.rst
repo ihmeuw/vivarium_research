@@ -52,7 +52,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
   Flatiron allows us to estimate the correlation of risk factors, but we would need effect sizes adjusted for treatment and the other risk effects (and nothing else). Since we are not using Flatiron for the risk effects, there is no good way to obtain these. Due to the lack of risk effects, we do not model the correlations, except for those between each risk factor and treatment as described above, and between age and sex.
 
 .. list-table:: Risk Effects Table
-  :header-rows: 
+  :header-rows: 1 
 
   * - Parameter
     - OS HR
@@ -69,7 +69,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - Female
     - Male
     - Age, treatment(?)
-    - None 
+    - No adjustments
     - [van_de_Donk_2018]_
     - 
   * - Age at diagnosis
@@ -78,7 +78,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - 70+
     - <70
     - Sex, treatment
-    - None 
+    - No adjustments
     - [Ailawadhi_2018]_
     -
   * - Renal function at diagnosis
@@ -87,7 +87,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - Impaired
     - Not impaired
     - Treatment
-    - 
+    - No adjustments
     - [Dimopoulos_2010]_
     - Impairment defined as eGFR less than 60
   * - Cytogenetic risk
@@ -96,7 +96,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - High
     - Standard
     - Treatment(?)
-    - None 
+    - No adjustments
     - [Mateos_2011]_
     -
 
