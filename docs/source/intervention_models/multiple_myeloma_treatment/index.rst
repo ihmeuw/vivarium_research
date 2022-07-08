@@ -328,6 +328,10 @@ components is a valid treatment regimen category; those are enumerated in the ne
     - Isa
     - isatuximab
     -
+  * - Dexamethasone
+    - Dex
+    - dexamethasone
+    -
   * - Autologous stem cell transplant
     - ASCT
     - N/A
@@ -451,9 +455,9 @@ files where the first row contains treatment regimen categories and the second c
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model_naive_proba.csv
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model_naive_proba.csv
 
 Sophisticated Models
 ~~~~~~~~~~~~~~~~~~~~
@@ -515,13 +519,13 @@ can be transformed into a DataFrame with meaningful column names like so:
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model.pkl
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model.pkl
   * - NDMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\ndmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model_naive.pkl
   * - RRMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\rrmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model_naive.pkl
 
 
 Model Covariates
@@ -570,7 +574,11 @@ Model Covariates
   * - {component}_flag_previous
     - For each component part of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
       a binary flag indicating whether it was present in the previous line of treatment.
-    -
+      The Isa_flag_previous and Dara_flag_previous flags are ignored by the treatment model, but used in the business rules.
+    - 0 or 1
+  * - IsaOrDara_flag_previous
+    - A binary flag indicating whether Dara **or** Isa was present in the previous line of treatment. They are assumed to affect future treatment identically.
+    - 0 or 1
   * - NumberOfComponents_previous
     - **Number** of component parts of a valid treatment regimen category (e.g. 'PI', 'IMID', 'ASCT')
       present in the previous line of treatment. Equivalently, the sum of {component}_flag_previous across
@@ -587,7 +595,7 @@ Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input.
+match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
@@ -624,6 +632,7 @@ After getting the predicted probabilities from the model as described above, per
 #. If this is an RRMM assignment and the previous line contained a Dara component (in other words, if the Dara_flag_previous in the model covariates table above is 1):
     #. If the scenario is alternative scenario 2 (Isa-after-Dara) and the patient is in second line treatment (first relapse state), multiply the probabilities of all Isa-containing categories by (0.05 / the sum of the probabilities of all the Isa-containing categories).
     #. Otherwise, set the probabilities of all Isa-containing categories to 0.
+#. If this is an RRMM assignment and the previous line contained Isa, set the probabilities of all Isa-containing and Dara-containing categories to 0.
 #. Split the probabilities into two sets: those that contain ASCT and those that do not. Within each set:
     #. Divide the probabilities of the categories that **do not contain Isa or Dara** by the sum of those probabilities.
     #. Multiply the probabilities of the categories that **do not contain Isa or Dara** by (1 - the sum of the probabilities that **do contain Isa or Dara**).
@@ -638,7 +647,8 @@ Below is Python code implementing these rules in a non-Vivarium context, for use
 .. code-block:: python
 
   # Assumes a single Pandas DataFrame (NDMM and RRMM) with all covariates, joined with the regimen category
-  # probabilities from the relevant assignment model, where each row is a simulant.
+  # probabilities from the relevant assignment model, where each row is a simulant. The RRMM-only covariates
+  # are assumed to be null for NDMM simulants.
 
   all_regimen_categories = [
     'PI+Dex',
@@ -679,7 +689,6 @@ Below is Python code implementing these rules in a non-Vivarium context, for use
 
   # This imagines that dara_target and isa_target are pd.Series with multi-indices of (line, year) and (scenario, line, year) respectively,
   # and that dara_coverage_projected is a pd.DataFrame with multi-index of (line, year) with columns Dara_all and Dara_isa_corresponding
-  probabilities_df['Year'] = year
   probabilities_df['Scenario'] = scenario
   # TODO: Both of these need to interpolate/extrapolate by year, however that is done in Vivarium
   dara_target_coverage = dara_target.loc[zip(probabilities_df.LineNumber, probabilities_df.Year))]
@@ -709,6 +718,10 @@ Below is Python code implementing these rules in a non-Vivarium context, for use
 
   # All scenarios: Isa after Dara in lines 3, 4, 5 never happens
   probabilities_df.loc[(probabilities_df.LineNumber > 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] = 0
+
+  # All scenarios: Dara after Isa or Isa after Isa never happens
+  probabilities_df.loc[probabilities_df.Isa_flag_previous == 1, dara_containing] = 0
+  probabilities_df.loc[probabilities_df.Isa_flag_previous == 1, isa_containing] = 0
 
   isa_dara_probabilities_before_normalization = probabilities_df[isa_containing + dara_containing]
   for category_set in (asct_containing, [c for c in all_regimen_categories if c not in asct_containing]):
