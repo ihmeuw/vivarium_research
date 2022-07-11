@@ -1,0 +1,17 @@
+"risk_factor","group","measure_hazard_ratio","hr","lb","ub"
+"Age at diagnosis","70+ years","Mortality",1.1261700112934,0.975346855736435,1.30031576651671
+"Age at diagnosis","<70 years","Mortality",0.866284624071849,0.808516586992198,0.928180153600914
+"Age at diagnosis","70+ years","Relapse",1.07373747877593,0.946548706524842,1.21801674375626
+"Age at diagnosis","<70 years","Relapse",0.917724340834127,0.863854921331257,0.974953021580892
+"Cytogenetic risk","High cytogenetic risk","Mortality",1.83744946532819,1.06687003402616,3.1646034005601
+"Cytogenetic risk","Standard cytogenetic risk","Mortality",0.798891071881822,0.693479870124457,0.920325120061445
+"Cytogenetic risk","High cytogenetic risk","Relapse",1.34495704623555,0.873798337795587,2.07016811313943
+"Cytogenetic risk","Standard cytogenetic risk","Relapse",0.896638030823701,0.801585916517003,1.00296143152404
+"Renal function","Renal impaired","Mortality",1,1,1
+"Renal function","Not renal impaired","Mortality",1,1,1
+"Renal function","Renal impaired","Relapse",1,1,1
+"Renal function","Not renal impaired","Relapse",1,1,1
+"Sex","Male","Mortality",1.07066715544068,0.960219590912293,1.1938187562392
+"Sex","Female","Mortality",0.920773753678981,0.707141271248453,1.19894615112374
+"Sex","Male","Relapse",1.08801732415949,0.987095777532066,1.19925717910664
+"Sex","Female","Relapse",0.903054379052379,0.713195370990095,1.1434555588794
