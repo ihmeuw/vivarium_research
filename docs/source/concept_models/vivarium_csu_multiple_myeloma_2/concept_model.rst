@@ -190,9 +190,15 @@ Population description:
         * `Treatment effects are unchanged from Phase 1 <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_tx_effect_verification.ipynb>`_ **but they do not look correct** -- it appears there was some regression between Model 6.5 and Model 9 in Phase 1. Not investigating this for now, in the hopes that the treatment changes we plan to make anyway will resolve this problem as well.
         * `Survival curves are unchanged from Phase 1 <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/08e2f3136c213b40609f32427fb6421639766ce1/verification/model_0/mm_survival_curves_vs_braunlin.ipynb>`_, though they are systematically biased relative to input curves from Braunlin -- a limitation we accepted in Phase 1.
         * Before completing the PR (do not have these versions of the notebooks), found a bug with :code:`make_results` putting information from many columns into the age column -- this was quickly fixed.
+      `Round 2 with age stratification <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/main/verification/model_0_age_stratified>`_:
+        * Same notes as above round one, except...
+        * Comparisons to GBD are as expected, deviating more significantly as age increases, similar to phase I 
   * - Model 1
-    - Expanded treatment categories and hazard ratios (likely placeholder values)
-    -
+    - Expanded treatment categories and hazard ratios (placeholder values)
+    - `Round 1 conclusions <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/main/verification/model_1>`_:
+        * `Underestimating survival and progression hazard rates, overestimating survival <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/main/verification/model_1/mm_survival_curves_vs_braunlin.ipynb>`_, and overestimating prevalence compared to model 0. Thought to be due to placeholder values for treatment effects hazard ratios and incompatible PAFs that have not yet been updated.
+        * `Issue found with treatment coverage algorithm <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/main/verification/model_1/mm_tx_coverage_verification.ipynb>`_ - all simulants initialized into PI-IMiD-Dex category for line one at start of sim and retreatment is not allowed, so underestimation of PI-IMiD-Dex treatment category in the early years of the sim. Otherwise, treatment coverage looks as expected and does not vary by year or age.
+        * `Treatment hazard ratios generaly reflect input values (when compared to PI-IMiD-Dex as reference<https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/main/verification/model_1/mm_tx_effect_verification_pi-imid-dex_reference.ipynb>`_, `systematically overestimated when compared to population rate, suspected to be a result of incompatible PAFs <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/main/verification/model_1/mm_tx_effect_verification_population_reference.ipynb>`_), but with high degree of uncertainty in some cases 
   * - Model 2
     - Use TTNT directly for hazard of relapse, instead of subtracting OS from PFS
     -
