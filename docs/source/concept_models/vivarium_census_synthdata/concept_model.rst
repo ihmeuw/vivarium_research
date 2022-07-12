@@ -906,12 +906,10 @@ data as more accurate than the street name part.
 
 To add noise to the DOB data, I will approximately follow the
 frequencies that Buzz Campbell measured in his BHDS unduplication
-work: Exact match for 96% of DOB, 2 of 3 fields exactly match for 3%,
-day and month fields transposed for 0.2%.  He found 0.24% missing, but
-I will leaving missing for outside of the DOB noise method for now,
-and perhaps make it a configurable option in the future.  Actually, it
-could be sensible to make all of these values configurable options in
-the future.
+work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
+3.20%, no match for 0.26%, missing for 0.24%, day and month fields
+transposed for 0.18%. For future flexibility, I make all of these
+values configurable options.
 
 2.3.10 Twins and multiparous births (16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
