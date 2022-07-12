@@ -141,18 +141,14 @@ set of treatment categories based on treatment guidelines from the `NCCN
 5.0 Simulation Scenarios
 ++++++++++++++++++++++++
 
-Our scenarios differ in how treatment is assigned.
+We have four scenarios that differ only in how treatment is assigned.
 
-We know that our scenarios will roughly correspond to:
+* Baseline scenario: Sophisticated treatment models with postprocessing rules
+* Alternative scenario 1 (Naive treatment): Naive treatment models with the same postprocessing rules as baseline
+* Alternative scenario 2 (Isa-after-Dara): Sophisticated treatment models with baseline postprocessing rules modified to allow Isa directly following Dara in Line 2
+* Alternative scenario 3 (Isa frontline): Sophisticated treatment models with baseline postprocessing rules modified to allow Isa in Line 1
 
-* Baseline scenario: Sophisticated treatment assignment, with postprocessing rules (modifying the prediction model's probabilities) about Isa and Dara by year, and a rule that there is probability 0 of Isa directly following Dara
-* Alternative scenario 1: Naive treatment assignment (not dependent on covariates) with the same postprocessing rules as baseline
-* Alternative scenario 2: Same as baseline, but with postprocessing rules modified such that there is 5% uptake of Isa in second line following Dara first-line treatment by 2028 -- need to define how this replaces other things
-* Alternative scenario 3: Same as baseline, but with postprocessing rules modified such that there is 5% uptake of Isa first-line treatment by 2028 -- need to define how this replaces other things
-
-.. todo::
-
-  Rigorously define these scenarios. In particular, the scenarios above say "Isa" when we will actually want some split between Isa+PI+Dex, Isa+IMID+Dex, etc.
+For the details of sophisticated vs naive treatment models and the postprocessing rules for each scenario, see the :ref:`treatment documentation <multiple_myeloma_treatment>`.
 
 6.0 Simulation Parameters
 +++++++++++++++++++++++++
