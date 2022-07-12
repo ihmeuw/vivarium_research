@@ -798,17 +798,25 @@ with covariates :math:`x` being treated with regimen category :math:`r` is:
 
   h(t|x,r) = h(t|x) * HR_r
 
-.. todo::
+Mortality and relapse hazard ratios for each regimen category, plus the major subcategories of the 'Other' category, in each setting were estimated using a
+network meta-analysis of published findings with study random effects. The majority of categories could
+be connected by a network of randomized controlled trials (RCTs). Other categories
+were connected using non-randomized evidence: two matched analyses between different RCTs,
+and two matched analyses comparing RCT evidence with claims data, were included. Assumptions
+of equivalence, with included uncertainty, were made between substantially similar
+categories, including those that differed only by substitution of Isa with Dara, and those that differed only
+by substitution of melphalan with cyclophosphamide and prednisone/prednisolone with dexamethasone. We assumed
+that adding drugs to a regimen could not decrease efficacy. After estimating HRs for each subcategory, the HR
+of the 'Other' category was calculated by weighting these subcategories according to the observed proportions
+of use in Flatiron data.
 
-  Explain how HRs were estimated, including NMA, making them relative to
-  Flatiron regimen category mix, and application of ASCT effect.
+The effect of ASCT was estimated separately with a small meta-analysis of two RCTs: [DETERMINATION]_ and [IFM_2009]_.
+ASCT and induction regimen were assumed not to modify each others' effects.
 
-.. todo::
-
-  These are placeholder values pending completion of network meta-analysis! The
-  final files may not have values for *every* setting-category combination listed here, but
-  they are guaranteed not to be missing any combinations that are possible outputs
-  of the relevant treatment assignment model.
+After estimating HRs relative to a common reference category by combination of induction regimen
+and ASCT effects, a HR relative to the common reference category was calculated for the population-level
+mix of treatments observed in Flatiron data, which informs the base hazard described above. All HRs were
+then modified to be relative to this population-level mix.
 
 .. csv-table:: Mortality hazard ratios
   :file: mortality_hrs.csv
@@ -822,18 +830,10 @@ with covariates :math:`x` being treated with regimen category :math:`r` is:
 
 :download:`relapse_hrs.csv`
 
-A lognormal distribution of uncertainty within the uncertainty intervals reported
-above should be assumed (for the purposes of the placeholder values, the point
-estimate can be ignored).
-
-.. todo::
-
-  Should there be correlation between mortality hazard ratio and relapse hazard ratio,
-  similar to the correlation between OS and PFS in Phase 1?
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+A log-normal distribution of uncertainty within the uncertainty intervals reported
+above should be assumed. The mortality and relapse hazard ratios for the same
+regimen category should be sampled with the same random percentile from their respective distributions,
+so that mortality and relapse effects are correlated.
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -895,3 +895,14 @@ we will bin groups of adjacent timesteps in order to have sufficient sample size
 .. todo::
 
   How do we verify treatment effects once we are using a sophisticated treatment assignment scheme?
+
+References
+~~~~~~~~~~
+
+.. [DETERMINATION] Triplet Therapy, Transplantation, and Maintenance until Progression in Myeloma
+   https://www.nejm.org/doi/full/10.1056/NEJMoa2204925
+   (accessed July 9, 2022)
+
+.. [IFM_2009] Early Versus Late Autologous Stem Cell Transplant in Newly Diagnosed Multiple Myeloma: Long-Term Follow-up Analysis of the IFM 2009 Trial
+   https://ash.confex.com/ash/2020/webprogram/Paper134538.html
+   (accessed July 9, 2022)
