@@ -68,15 +68,15 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - 0.83 (0.67, 1.03)
     - Female
     - Male
-    - Age, treatment(?)
+    - Age, treatment
     - Treatment (randomized)
     - [van_de_Donk_2018]_
     - 
   * - Age at diagnosis
     - 1.30 (1.15, 1.48)
     - 1.17 (1.05, 1.31)
-    - 70+
-    - <70
+    - 70+ years
+    - <70 years
     - Sex, treatment
     - Treatment (randomized)
     - [Ailawadhi_2018]_
@@ -95,7 +95,7 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
     - 1.5 (1, 2.3)
     - High
     - Standard
-    - Treatment(?)
+    - None (did not observe strong relationship to treatment)
     - Treatment (randomized)
     - [Mateos_2011]_
     -
@@ -103,91 +103,56 @@ In Phase 2, some of these risk factors will become correlated with treatment in 
 Changing the reference group
 ----------------------------
 
-1.  For each covariate, calculate :math:`h_\text{exposed}` and :math:`h_\text{unexposed}` using the equations below, a sampled value from the hazard ratio uncertainty distributions from the table above, and the exposure prevalence among patients included in the survival curve. Do this separately for relapse and mortality.
+The HRs above are relative to the reference exposure group (unexposed). For simulation inputs,
+they must be made relative to the hazard of the baseline survival curves in our cause model.
+
+Each hazard ratio is normally distributed in logarithmic space. That is, for each combination of risk factor and endpoint (mortality or relapse),
+each exposure group :math:`g` has a hazard ratio such that:
 
 .. math::
 
-  HR_\text{exposed:unexposed} = \frac{h_\text{exposed}}{h_\text{unexposed}}
+  ln(HR_\text{g:reference}) \sim N(\mu_g, \sigma_g^2)
+
+To obtain the survival curve baseline HR, we need the proportions of the Flatiron data informing that
+curve in each risk factor group. We get these proportions in terms of person-time included in the curve.
+Due to the Cox proportional-hazards source of the baseline curves, these proportions are invariant across
+lines. Note that for mortality HRs, we use Flatiron data informing the TTD curves, not the OS curve used for mortality in the last relapse state.
+
+The sum of the HR distributions weighted by group size in Flatiron gives the survival curve baseline HR relative to the reference group, assuming the weights :math:`w_g` have been normalized to sum to 1:
 
 .. math::
 
-  h_\text{baseline} = p_\text{exposed} * h_\text{exposed} + (1 - p_\text{exposed}) * h_\text{unexposed}
-
-So that,
+  ln(HR_\text{baseline:reference}) \sim \sum_{g \in groups}{w_g * N(\mu_g, \sigma_g^2)} \sim N(\mu_\text{baseline}, \sigma_\text{baseline}^2)
 
 .. math::
 
-  h_\text{exposed} = \frac{h_\text{baseline}}{p_\text{exposed} + \frac{1 - p_\text{exposed}}{HR_\text{exposed:unexposed}}}
-
-and
+  \mu_\text{baseline} = \sum_{g \in groups}{w_g * \mu_g}
 
 .. math::
 
-  h_\text{unexposed} = \frac{h_\text{exposed}}{HR_\text{exposed:unexposed}}
+  \sigma_\text{baseline}^2 = \sum_{g \in groups}{w_g^2 * \sigma_g^2}
 
-2.  Use covariate exposure level-specific hazard rate to solve for hazard ratio of each covariate exposure relative to the overall baseline hazard rate from the multiple myeloma cause model.
-
-.. math::
-
-  HR_\text{exposed:baseline} = \frac{h_\text{exposed}}{h_\text{baseline}}
+Finally, the HR of each group relative to the survival curve baseline is given by the ratio of its HR to the baseline HR:
 
 .. math::
 
-  HR_\text{unexposed:baseline} = \frac{h_\text{unexposed}}{h_\text{baseline}}
+  HR_\text{g:baseline} \sim \frac{e^{N(\mu_g, \sigma_g^2)}}{e^{N(\mu_\text{baseline}, \sigma_\text{baseline}^2)}} \sim e^{N(\mu_g, \sigma_g^2) - N(\mu_\text{baseline}, \sigma_\text{baseline}^2)}  \sim e^{N(\mu_g - \mu_\text{baseline}, \sigma_g^2 + \sigma_\text{baseline}^2)}
 
 Final risk effects
 ------------------
 
-.. todo::
-
-  Update this table. These are stand-in values from Phase 1.
-
-.. list-table:: Final risk effects for simulation use
+.. csv-table:: Final risk effects for simulation use
+  :file: final_risk_effects_docs.csv
   :header-rows: 1
 
-  * - Risk
-    - Risk exposure
-    - OS HR relative to baseline
-    - PFS HR relative to baseline
-  * - Age at diagnosis
-    - 65+ years
-    - 1.24 (1.16, 1.3)
-    - 1.17 (1.11, 1.23)
-  * - Age at diagnosis
-    - <65 years
-    - 0.57 (0.44, 0.71)
-    - 0.69 (0.59, 0.8)
-  * - Sex
-    - Male
-    - 1.26 (1.11, 1.38)
-    - 1.12 (1.02, 1.21)
-  * - Sex
-    - Female
-    - 0.7 (0.56, 0.87)
-    - 0.86 (0.76, 0.97)
-  * - Renal function
-    - Renal impaired
-    - 1.40 (1.20, 1.59)
-    - 1.20 (1.09, 1.32)
-  * - Renal function
-    - Not renal impaired
-    - 0.74 (0.61, 0.86)
-    - 0.86 (0.79, 0.94)
-  * - Cytogenetic risk
-    - High cytogenetic risk
-    - 1.33 (1.14, 1.53)
-    - 1.37 (1.19, 1.56)
-  * - Cytogenetic risk
-    - Standard cytogenetic risk
-    - 0.83 (0.73, 0.93)
-    - 0.81 (0.71, 0.90)
+:download:`Final risk effects in machine-readable format <final_risk_effects.csv>`
 
 Applying the risk effect
 ------------------------
 
 Apply the hazard ratios above specific to the exposure value a simulant possesses for each risk factor to the baseline hazard rate to get the simulant's individual hazard rate separately for relapse and mortality, as shown in the equation below.
 
-  for risk exposure(i) in under 65 at diagnosis/over 65 at diagnosis, male/female, Black/non-Black, high cytogenetic risk/standard cytogenetic risk, renal impaired/not renal impaired:
+  for risk exposure(i) in under 70 at diagnosis/over 70 at diagnosis, male/female, high cytogenetic risk/standard cytogenetic risk, renal impaired/not renal impaired:
 
 .. math::
 
