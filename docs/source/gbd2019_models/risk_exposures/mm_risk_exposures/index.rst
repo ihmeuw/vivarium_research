@@ -35,7 +35,7 @@ Multiple Myeloma Risk Factor Exposures
 
 We will follow the same strategy for risk factor exposures as in the :ref:`Multiple Myeloma Phase 1 concept model <2019_concept_model_vivarium_csu_multiple_myeloma>`, except that we are removing the race exposure, and we **may** change the age cutoff.
 
-Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. In addition, a dichotomous risk exposure value of <65 or 65+ (**we may change this age cutoff**) should be assigned to each simulant based on the simulant's age at the time they are initialized into or transition into the newly diagnosed MM state.
+Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. In addition, a dichotomous risk exposure value of <70 or 70+ should be assigned to each simulant based on the simulant's age at the time they are initialized into or transition into the newly diagnosed MM state.
 
 .. list-table:: Risk Exposure Distributions Simulant Initialization
   :header-rows: 1
