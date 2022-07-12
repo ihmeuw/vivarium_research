@@ -743,15 +743,13 @@ Coverage inputs
 
 The upward trend in Dara use observed in Flatiron is steep; a linear extrapolation (in logistic space) out to 2028 puts it at nearly 100%. A tree-based model such as a random forest creates a flat extrapolation, in which all future years are the same as the present.
 
-Notably, all Flatiron data (new and old LoT coding) points to higher Dara uptake than the projections we used in Phase 1.
+Notably, our models indicate higher Dara uptake than the projections we used in Phase 1, and in many cases already surpass those 2025 projections. As a middle ground, in consultation with our clinical expert,
+we made "best guess" projections of Dara, incorporating evidence on what we see so far, and knowledge that there is a "ceiling" on how many patients Dara will reach. We have set this ceiling at 45% in the NDMM
+setting and 55% in the RRMM setting. Our projections do not vary by line within RRMM.
 
 Data files:
 
 :download:`Target Isa coverage <target_isa_coverage.csv>`
-
-.. todo::
-
-  The numbers in both these Dara files are not finalized!
 
 :download:`Target Dara coverage <target_dara_coverage.csv>`
 
