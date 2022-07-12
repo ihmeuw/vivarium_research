@@ -139,7 +139,7 @@ households for individuals, leading to double counting in census (15);
 twins and multiparous births in fertility model (16).  To capture an
 additional dimension of heterogeneity and also to enable a periodic
 observer that simulates tax returns we will also need a component
-representing income (14), which will look a lot like a risk factor
+representing income (17), which will look a lot like a risk factor
 exposure.
 
 
@@ -366,8 +366,56 @@ revisit this and keep track of dad as well as moms).
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
-Multiparity --- make twins with probability from ACS, about 2.5%.  See
-Section (16) for additional details.
+Multiparity --- make twins with probability 4%.  See Section (16) for
+additional details.
+
+Relationship -- the sim knows a parent-child dyad when the new
+simulant is initialized, and to come up with a consistent value for
+the "reference person" relationship field, we use the following
+mapping:
+
++--------------------------------------------------+----------------------------------------+
+| Parent relationship to reference person          | Child relationship to reference person |
++==================================================+========================================+
+| Reference Person                                 | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Opposite-sex husband/wife/spouse                 | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Opposite-sex unmarried partner                   | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Same-sex husband/wife/spouse                     | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Same-sex unmarried partner                       | Biological child                       |
++--------------------------------------------------+----------------------------------------+
+| Biological son or daughter                       | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Adopted son or daughter                          | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Stepson or stepdaughter                          | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Brother or sister                                | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Father or mother                                 | Brother or sister                      |
++--------------------------------------------------+----------------------------------------+
+| Grandchild                                       | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Parent-in-law                                    | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Son-in-law or daughter-in-law                    | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Other relative                                   | Other relative                         |
++--------------------------------------------------+----------------------------------------+
+| Roommate or housemate                            | Other nonrelative                      |
++--------------------------------------------------+----------------------------------------+
+| Foster child                                     | Grandchild                             |
++--------------------------------------------------+----------------------------------------+
+| Other nonrelative                                | Other nonrelative                      |
++--------------------------------------------------+----------------------------------------+
+| Institutionalized group quarters population      | Institutionalized GQ population        |
++--------------------------------------------------+----------------------------------------+
+| Noninstitutionalized group quarters population   | Noninstitutionalized GQ population     |
++--------------------------------------------------+----------------------------------------+
+
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -798,8 +846,8 @@ A master SSN list will be another important part of this, and perhaps
 the largest of these files, including name, address, DOB, and SSN.
 This list should be a linkage output, derived from annually simulated
 tax return documents, which include accurate SSN values year over year
-(but perhaps only for people who have household income over a certain
-threshold?).  The decennial census simulator will have a different
+(but only for people who have household income over a certain
+threshold).  The decennial census simulator will have a different
 address than the tax return data for 9% of the population.
 
 Surveys and registries capturing a simple random sample of the
@@ -856,6 +904,14 @@ be good (or is it phonetic errors?) A study of exact linkage on some
 large databases relevant to voting in Texas identified address numeric
 data as more accurate than the street name part.
 
+To add noise to the DOB data, I will approximately follow the
+frequencies that Buzz Campbell measured in his BHDS unduplication
+work: Exact match for 96% of DOB, 2 of 3 fields exactly match for 3%,
+day and month fields transposed for 0.2%.  He found 0.24% missing, but
+I will leaving missing for outside of the DOB noise method for now,
+and perhaps make it a configurable option in the future.  Actually, it
+could be sensible to make all of these values configurable options in
+the future.
 
 2.3.10 Twins and multiparous births (16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -886,6 +942,18 @@ eventually want: time-dependent changes to observers of sex, based on
 gender assigned at birth (14); multiple households for individuals,
 leading to double counting in census (15).
 
+2.3.12 Income (16)
+~~~~~~~~~~~~~~~~~~
+
+Individual income will be implemented as a risk exposure.  Average
+income is basically equal to GDP per capita, so we could potentially
+use that GBD covariate as the mean, but I think it will be easier to
+make our own estimate of the mean and standard deviation of
+log(income) for individuals stratified by age group, sex, and
+race/ethnicity from ACS data. I think is it pretty common to assume
+that this value is normally distributed, but we could use the GBD
+ensemble risk exposure machinary if that assumption seems like a
+limitation.
 
 .. _census_prl_limitations:
 
