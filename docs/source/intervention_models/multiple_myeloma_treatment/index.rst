@@ -758,7 +758,7 @@ Data files:
 
 :download:`Target Dara coverage <target_dara_coverage.csv>`
 
-:download:`Dara coverage from Flatiron <dara_coverage_from_flatiron.csv>`
+Dara coverage from Flatiron can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\dara_coverage_from_flatiron.csv.
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
