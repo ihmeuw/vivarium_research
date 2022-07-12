@@ -455,14 +455,24 @@ files where the first row contains treatment regimen categories and the second c
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model_naive_proba.csv
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model_naive_proba.csv
 
 Sophisticated Models
 ~~~~~~~~~~~~~~~~~~~~
 
-The sophisticated models require a more complex approach. Because they need to be trained within Foundry, they have to be passed from
+The sophisticated models are random forests.
+To avoid over-fitting, the maximum number of leaf nodes permitted in each tree was selected by 5-fold stratified cross-validation,
+optimizing for log-loss of probabilistic predictions.
+Though tree-based approaches inherently involve selecting features, some feature selection had to be done manually because of missing data;
+we used a complete-case analysis, dropping records that were missing data in any necessary field.
+Therefore, there was a trade-off between using information available to us and losing statistical power and representativeness.
+Renal impairment was included as a predictor in NDMM because it showed strong feature importance in that model.
+Cytogenetic risk was not included in either model because it did not improve predictions and lead to smaller sample size.
+We tested alternative codings of previous-treatment covariates, but none improved predictions.
+
+The sophisticated models require a more complex simulation implementation approach. Because they need to be trained within Foundry, they have to be passed from
 Foundry to Vivarium in a serialized format. While a human-readable and interoperable
 format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output :code:`.pkl` files. The pickled
 form of the models may depend on the version of Python, :code:`sklearn`,
@@ -508,10 +518,6 @@ can be transformed into a DataFrame with meaningful column names like so:
   The :code:`.classes_` array may not contain all the treatment regimen categories in the model.
   Any treatment regimen categories missing should have probability 0 of being selected.
 
-.. todo::
-  These models are not finalized! These are just first versions to allow testing
-  the format of pickle files, output probabilities, etc.
-
 .. list-table:: Pickle file paths
   :widths: 1 10
   :header-rows: 1
@@ -519,13 +525,13 @@ can be transformed into a DataFrame with meaningful column names like so:
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model.pkl
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model.pkl
   * - NDMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model_naive.pkl
   * - RRMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model_naive.pkl
 
 
 Model Covariates
@@ -546,9 +552,6 @@ Model Covariates
   * - RenalImpairment
     - Whether or not the simulant has renal impairment.
     - 0 or 1
-  * - RiskType
-    - Cytogenetic risk category.
-    - 'Standard risk' or 'High risk'
   * - Year
     - Current (unrounded) year minus 2000. e.g. 22.5 for halfway through 2022.
     -
@@ -595,7 +598,7 @@ Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08.
+match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
@@ -753,7 +756,7 @@ Data files:
 
 :download:`Target Dara coverage <target_dara_coverage.csv>`
 
-:download:`Dara coverage from Flatiron <dara_coverage_from_flatiron.csv>`
+Dara coverage from Flatiron can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\dara_coverage_from_flatiron.csv.
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
@@ -836,15 +839,12 @@ so that mortality and relapse effects are correlated.
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-
-  Add an assumption about time trend, once we determine which assumption we will make.
-
 #. We assume that treatment assignment depends only on the selected covariates and
-   characteristics of the preceding treatment, and that the remaining variation
+   characteristics of the immediately preceding treatment, and that the remaining variation
    is truly random.
-#. We assume a linear effect of line number/number of previous relapses on
-   treatment assignment (in log-probability space).
+#. We assume that regimen categories not including Isa or Dara will not change
+   in relative proportion between the end of our data (roughly 2022) and the end
+   of our simulation (2028).
 #. We only model ASCT in NDMM.
 #. We assume all conditioning regimens for ASCT have identical effects.
 #. We assume all maintenance therapies, or the lack of maintenance therapy, have

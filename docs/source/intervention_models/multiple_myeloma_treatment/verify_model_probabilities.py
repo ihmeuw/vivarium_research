@@ -24,7 +24,7 @@ ndmm_X_to_predict = pd.DataFrame(pd.Series({
   'FirstTreatmentAge': 67.0,
   'Sex': 'M',
   'RenalImpairment': 0,
-  'RiskType': 'Standard risk',
+  # 'RiskType': 'Standard risk',
   'Year': 16.0,
 })).T
 ndmm_assignment_probs = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
@@ -65,8 +65,8 @@ rrmm_X_to_predict = pd.DataFrame(pd.Series({
     'PI_flag_previous': 1,
     'IMID_flag_previous': 1,
     'Chemo_flag_previous': 0,
-    'Isa_flag_previous': 0,
-    'Dara_flag_previous': 0,
+    # 'Isa_flag_previous': 0,
+    # 'Dara_flag_previous': 0,
     'IsaOrDara_flag_previous': 0,
     'Dex_flag_previous': 1,
     'Other_flag_previous': 0,
