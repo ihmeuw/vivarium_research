@@ -24,7 +24,7 @@ ndmm_X_to_predict = pd.DataFrame(pd.Series({
   'FirstTreatmentAge': 67.0,
   'Sex': 'M',
   'RenalImpairment': 0,
-  'RiskType': 'Standard risk',
+  # 'RiskType': 'Standard risk',
   'Year': 16.0,
 })).T
 ndmm_assignment_probs = pd.DataFrame(ndmm_model.predict_proba(ndmm_X_to_predict), columns=ndmm_model.classes_)
@@ -58,25 +58,21 @@ rrmm_X_to_predict = pd.DataFrame(pd.Series({
     # Invariant patient characteristics
     'FirstTreatmentAge': 68.2,
     'Sex': 'M',
-    # 'RenalImpairment': 0,
-    # 'RiskType': 'Standard risk',
     # Things that change over time
     'TimeSinceFirstTreatment': 1.25,
     'Year': 17.25,
     'Duration_previous': 15.0 * 30.4,
-    # 'RegimenClass_previous': 'PI+IMID+Dex+ASCT',
     'PI_flag_previous': 1,
     'IMID_flag_previous': 1,
     'Chemo_flag_previous': 0,
-    'Isa_flag_previous': 0,
-    'Dara_flag_previous': 0,
+    # 'Isa_flag_previous': 0,
+    # 'Dara_flag_previous': 0,
+    'IsaOrDara_flag_previous': 0,
     'Dex_flag_previous': 1,
     'Other_flag_previous': 0,
     'ASCT_flag_previous': 1,
     'NumberOfComponents_previous': 4,
     'LineNumber': 2,
-    # 'PrecedingUnique': 4,
-    # 'PrecedingShortUnique': 0,
 })).T
 rrmm_assignment_probs = pd.DataFrame(rrmm_model.predict_proba(rrmm_X_to_predict), columns=rrmm_model.classes_)
 print(rrmm_assignment_probs)
