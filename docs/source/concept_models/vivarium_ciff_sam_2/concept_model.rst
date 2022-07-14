@@ -31,10 +31,10 @@
   And then add it to the list of decorators above.
 
 
-.. _2019_concept_model_vivarium_ciff_sam:
+.. _2020_concept_model_vivarium_ciff_sam:
 
 ===================================
-Vivarium acute malnutrition Phase 1
+Vivarium acute malnutrition Phase 2
 ===================================
 
 .. contents::
@@ -186,8 +186,31 @@ The baseline scenario will project GBD 2019 demographic and disease trends and G
 
   - :ref:`Breastfeeding support baseline parameters <breastfeeding_intervention_baseline_data>`
 
-
 **Alternative scenario 1**
+Scale-up of vicious cycle interventions (preventive and therapeutic zinc) from baseline coverage to 90% in addition to the intervention coverage in alternative scenario 3.
+
+.. note::
+
+  Intervention coverage in alternative scenarios one through four should be implemented in an additive way such that the treatment intervention is introduced in scenario 1 and is also present for the remaining scenarios (2, 3, and 4), the SQ-LNS intervention is introduced in scenario 2 and is also present for the remaining scenarios 3 and 4, etc.
+
+.. note::
+
+    In the BEP paper reviewer comments, this 90% was deemed to be too optimistic and we are asked to do some sensitivity analysis around this. Hence, we could model a few coverages eg. 50%, 75%, 90%.
+
+    Consider 70% target for all interventions.
+
+**Alternative scenario 2**
+Scale up targeted SQ-LNS use for simulants who are previously treated for MAM or SAM from the baseline coverage to **90%** in addition to the intervention coverage in prior scenarios. 
+
+**Alternative scenario 3**
+Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in previous scenarios. 
+
+.. todo::
+
+  Consider if 90% intervention coverage is too aspirational
+
+
+**Alternative scenario 4**
 Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for SAM (:math:`C_{SAM}`and :math:`E_{SAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effective* coverage (:math:`E \times C`) should be greater for all draws in the alternative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
 
 .. _`wasting-treatment-alterative-scenario-values`:
@@ -209,55 +232,31 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
 
   Rather than scale linearly from between the baseline and alternative scenario values for the :math:`E` parameters, we will instead scale linearly so that 100% of the intervention coverage at the beginning of the scale-up period has efficacy equal to the baseline values (and 0% equal to the alternative scenario values) and 100% of the intervention coverage at the end of the scale-up period has efficacy equal to the alternative scenario values (and 0% equal to the baseline values).
 
-**Alternative scenario 1.5**
+**Alternative scenario 5**
 Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for both SAM and MAM (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the same alternative scenario values shown in the table above (in the alternative scneario 1 section). 
 
-**Alternative scenario 2**
-Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 1. 
 
-.. todo::
+.. _4.2:
 
-  Consider targeting SQ-LNS coverage to simulants in SAM treatment.
+4.2 Simulation scenarios test runs
+----------------------------------
 
-.. todo::
-
-  Consider if 90% intervention coverage is too aspirational
-
-**Alternative scenario 3**
-Scale up of LBWSG intervention parameters (see table below) from baseline coverage to **90%** in addition to the intervention coverage in alternative scenario 2.
-
-.. list-table:: Alternative scenario 3 intervention coverage values
+.. list-table:: Simulation and intervention test runs for differential ordering
   :header-rows: 1
 
-  * - Intervention
-    - Coverage value
-    - Note
-  * - :ref:`maternal supplementation <maternal_supplementation_intervention>`
-    - 0.9
-    - Applies to joint coverage of MMS/BEP
-  * - :ref:`insecticide treated nets <insecticide_treated_nets>`
-    - :math:`C_\text{malarious areas} = 0.9`
-    - Overall ITN intervention coverage (:math:`C_\text{overall}`) calculated as :math:`C_\text{malarious areas} \times p_\text{malarious areas}`
-  * - :ref:`intermittent malaria preventive therapy for pregnant women <maternal_malaria_prevention_therapy>`
-    - 0.9
-    - Pending decision to include intervention in simulation
+  * - Description of test run
+    - Scenario Order 
+  * - SQ-LNS before Increased MAM and SAM Coverage
+    - 1, 2, 3, 4, 5 
+  * - MAM and SAM Coverage before SQ-LNS 
+    - 1, 4, 5, 2, 3 
+  * - Targeted SQ-LNS Scale Up 
+    - 1, 2, 4, 5, 3  
 
-**Alternative scenario 4**
-Scale-up of vicious cycle interventions (preventive and therapeutic zinc) from baseline coverage to 90% in addition to the intervention coverage in alternative scenario 3.
-
-.. note::
-
-  Intervention coverage in alternative scenarios one through four should be implemented in an additive way such that the treatment intervention is introduced in scenario 1 and is also present for the remaining scenarios (2, 3, and 4), the SQ-LNS intervention is introduced in scenario 2 and is also present for the remaining scenarios 3 and 4, etc.
-
-.. note::
-
-    In the BEP paper reviewer comments, this 90% was deemed to be too optimistic and we are asked to do some sensitivity analysis around this. Hence, we could model a few coverages eg. 50%, 75%, 90%.
-
-    Consider 70% target for all interventions.
 
 .. _ciff_sam_intervention_timing:
 
-4.2 Simulation timeframe and intervention start dates
+4.3 Simulation timeframe and intervention start dates
 -----------------------------------------------------
 
 .. list-table:: Simulation and intervention start and end dates
@@ -311,12 +310,6 @@ Scale-up of vicious cycle interventions (preventive and therapeutic zinc) from b
 
 * :ref:`Child Stunting (GBD 2020) <2020_risk_exposure_child_stunting>`
 
-* :ref:`Low Birthweight and Short Gestation (GBD 2019) <2019_risk_exposure_lbwsg>`
-
-* :ref:`Maternal Body Mass Index <2019_risk_exposure_maternal_bmi>`
-
-* :ref:`Wasting X-Factor Risk Exposure <2019_risk_exposure_x_factor>`
-
 .. note::
 
   :ref:`Suboptimal Breastfeeding (GBD 2020) <2020_risk_suboptimal_breastfeeding>` has been removed from this simulation.
@@ -328,40 +321,11 @@ Scale-up of vicious cycle interventions (preventive and therapeutic zinc) from b
 
 * :ref:`Child Wasting Risk Effects (GBD 2020) <2019_risk_effect_wasting>`
 
-* :ref:`Low Birthweight and Short Gestation Risk Effects (GBD 2019) <2019_risk_effect_lbwsg>`
-
-* :ref:`Wasting X-Factor Risk Effects <2019_risk_effect_x_factor>`
-
 * :ref:`Diarrheal Diseases Risk Effects <2019_risk_effect_diarrheal_diseases>`
 
 .. note::
 
   :ref:`Suboptimal Breastfeeding Risk Effects (GBD 2020) <2020_risk_suboptimal_breastfeeding>` have been removed from this simulation.
-
-5.1.5 Risk-Risk Correlation Models
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. warning::
-
-  We are currently not planning on implementing the following risk correlation scheme as part of the scope of this simulation, with the exception of :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>` as well as the correlation between x-factor and child wasting exposure, described on the :ref:`x-factor exposure page <2019_risk_exposure_x_factor>`.
-
-* :ref:`Birthweight and child wasting risk-risk correlation <2019_risk_correlation_birthweight_wasting>`
-
-* :ref:`Birthweight and child stunting risk-risk correlation <2019_risk_correlation_birthweight_stunting>`
-
-* :ref:`Maternal BMI and birthweight <2019_risk_correlation_maternal_bmi_birthweight>`
-
-* Correlation between x-factor and child wasting exposure, described on the :ref:`x-factor exposure page <2019_risk_exposure_x_factor>`
-
-The following diagram represents the resulting model correlation structure in our simulation. The figure represents relationships that are explicitly modeled in our simulation. However, directly modeling these relationships will result in an induction of correlation between wasting and stunting through their respective correlations with birthweight. Additionally, lower birthweight and stunting will also be associated with greater wasting incidence rates through their correlations with the x-factor. The age-specific correlation between wasting and stunting risk exposures in our model should be evaluated in the model results and compared to external validation sources, described in the :ref:`wasting and stunting correlation document <2019_risk_correlation_wasting_stunting>`.
-
-.. image:: correlation_structure.svg
-
-For correlated risks that affect the same outcomes in our simulation (just wasting and stunting in this model), the joint PAF calculation rather than multiplicative PAF calculation should be used for outcomes affected by wasting and stunting (see the :ref:`risk correlation proposal document <2017_risk_models>` for details). The joint PAF equation is shown below for convenient reference.
-
-.. math::
-
-  PAF_{joint} = 1 - \frac{1}{\frac{1}{n}\sum_{i=1}^{n} RR_1^{e1_i} \cdot RR_2^{e2_i}}
 
 5.1.6 Feedback Loop Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -371,13 +335,11 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 5.1.7 Intervention Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
-* :ref:`Small quantity lipid based nutrient supplements (SQ-LNS) <lipid_based_nutrient_supplements>`
+* :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>`
+
+* Small quantity lipid based nutrient supplements targeted coverage (SQ-LNS) 
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
-
-* :ref:`Maternal Supplementation: Targeted Balanced Energy Protein and Maternal Micronutrient Supplementation <maternal_supplementation_intervention>`
-
-* :ref:`Insecticide treated nets <insecticide_treated_nets>`
 
 * :ref:`Preventive and therapeutic zinc <zinc_supplementation>`
 
@@ -418,6 +380,11 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 
 5.3 Models
 ----------
+
+.. todo::
+
+  Update table with models for Phase 2 following discussion
+
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
@@ -530,6 +497,11 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 5.4 Desired outputs
 -------------------
 
+.. todo::
+
+  Update table once finalized 
+
+
 Final outputs to report in manuscript
 
 .. csv-table:: Final outcomes table to report in manuscript
@@ -545,6 +517,11 @@ Final outputs to report in manuscript
 
 5.5 Simulation output table
 ---------------------------
+
+.. todo::
+
+  Update table once finalized 
+
 
 .. csv-table:: Simulation output table
    :file: simulation_output_table.csv
