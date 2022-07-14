@@ -213,7 +213,7 @@ Scale up the SQ-LNS for 6 month+ from the baseline coverage to **90%** in additi
 **Alternative scenario 4**
 Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for SAM (:math:`C_{SAM}`and :math:`E_{SAM}`) to the alternative scenario values in the table below. Note that intervention efficacy may *decrease* in the alternative scenario relative to the baseline scenario for some draws -- however, this may be a realistic effect of a dramatic increase in intervention coverage and *effective* coverage (:math:`E \times C`) should be greater for all draws in the alternative scenario. See the :ref:`treatment and management for acute malnutrition document<intervention_wasting_treatment>` for more information.
 
-.. _`wasting-treatment-alterative-scenario-values`:
+.. _ciff2_`wasting-treatment-alterative-scenario-values`:
 
 .. list-table:: Wasting treatment and management alterative scenario intervention parameter values
   :header-rows: 1
