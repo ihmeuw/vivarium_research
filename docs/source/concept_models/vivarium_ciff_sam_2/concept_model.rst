@@ -60,7 +60,7 @@ Vivarium acute malnutrition Phase 2
 Malnutrition is an imbalance between the body’s needs and its use and intake of nutrients. The imbalance can be caused by poor or lacking diet, poor hygiene, disease states, lack of knowledge, and cultural practices, among others. Underweight, stunting, wasting, obesity, and vitamin and mineral deficiencies are all forms of malnutrition. Acute malnutrition (AM), also referred to as wasting, is recent rapid weight loss or a failure to gain weight that results from illness, lack of appropriate foods, or other underlying causes. For an individual, AM is not a chronic condition: children with AM either recover or die and recovered children can relapse to AM1. It is measured in weight-for-height z-scores (WFH) which is a comparison of a child’s WFH from the median value of the global reference population. A z-score between -2 to -3 indicates moderate acute malnutrition (MAM) and a z-score below -3 indicate severe acute malnutrition (SAM). SAM and MAM together is referred to as global acute malnutrition (GAM). Although MAM is less severe, it affects a greater number of children and is associated with more nutrition-related deaths than SAM. Children with AM are at greater risk of death from diarrhea and other infectious diseases than well-nourished children. They also face greater risk of morbidity from infectious diseases and delayed physical and cognitive development. MAM tends to peak during seasonal hunger, disease outbreaks, or during food security ‘shocks’ (e.g. economic or climatic crises) and stresses including humanitarian crises. However, MAM is a problem that not only occurs in emergencies, but also can be endemic in development contexts. MAM should not be neglected, as untreated, it can deteriorate to SAM and possible death. Furthermore, evidence is emerging that repeated episodes of MAM can have a significant impact on stunting; prevention of wasting could potentially increase height in children.
 
 
-.. _1.1:
+.. _ciff2_1.1:
 
 1.1 Project overview
 --------------------
@@ -74,14 +74,14 @@ We will model wasting in an individual as a collection of distinct states, where
 This model will allow us to understand and quantify the impact of different combinations of preventive and treatment strategies on wasting and wasting attributable DALYs at the national level.
 
 
-.. _1.2:
+.. _ciff2_1.2:
 
 1.2 Literature review
 ---------------------
 
 
 
-.. _2.0:
+.. _ciff2_2.0:
 
 2.0 Modeling aims and objectives
 ++++++++++++++++++++++++++++++++
@@ -90,7 +90,7 @@ The primary objective of this project is to answer the following question: what 
 We will use data from the 2019 GBD and published literature to inform the parameters for our simulation. We will simulate the changes in MAM and SAM disease incidence, prevalence and mortality from 2022 to 2027 in response to a combination of preventive and therapeutic treatment interventions in Ethiopia.
 
 
-.. _3.0:
+.. _ciff2_3.0:
 
 3.0 Causal framework
 ++++++++++++++++++++
@@ -98,7 +98,7 @@ We will use data from the 2019 GBD and published literature to inform the parame
 While there are various well-studied risk factors that are associated with becoming wasted, we will only address those that have interventions with sufficient strength of evidence for effect. The risk factors we include in our model include birthweight and infectious diseases.
 
 
-.. _3.1:
+.. _ciff2_3.1:
 
 3.1 Causal diagram
 ------------------
@@ -110,7 +110,7 @@ While there are various well-studied risk factors that are associated with becom
 
   Add more details on causal diagrams with interventions/GBD risk exposures
 
-.. _3.2:
+.. _ciff2_3.2:
 
 3.2 Effect sizes
 ----------------
@@ -137,7 +137,7 @@ Historically, prevention research has primarily focused on stunting, and, as a r
     - Vitamin A supplementation
     - Cash transfers
 
-.. _4.1:
+.. _ciff2_4.1:
 
 4.1 Simulation scenarios
 ------------------------
@@ -236,7 +236,7 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
 Scale up the :ref:`acute malnutrition treatment and management baseline parameters <wasting-treatment-baseline-parameters>` for both SAM and MAM (:math:`C_{SAM}`, :math:`C_{MAM}`, :math:`E_{SAM}`, and :math:`E_{MAM}`) to the same alternative scenario values shown in the table above (in the alternative scneario 1 section). 
 
 
-.. _4.2:
+.. _ciff2_4.2:
 
 4.2 Simulation scenarios test runs
 ----------------------------------
@@ -254,7 +254,7 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
     - 1, 2, 4, 5, 3  
 
 
-.. _ciff_sam_intervention_timing:
+.. _ciff2_sam_intervention_timing:
 
 4.3 Simulation timeframe and intervention start dates
 -----------------------------------------------------
@@ -279,12 +279,12 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
     - 2026-12-31
     - All interventions should run until the end of the sim
 
-.. _5.0:
+.. _ciff2_5.0:
 
 5.0 Vivarium modelling components
 +++++++++++++++++++++++++++++++++
 
-.. _5.1:
+.. _ciff2_5.1:
 
 5.1 Vivarium concept model diagram
 ----------------------------------
@@ -351,12 +351,12 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
 
   * Kangaroo care for preterm and low birthweight infants and :ref:`Breastfeeding promotion <breastfeeding_promotion>`: These interventions are hypothesized to affect child wasting burden via their improvements in exclusive breastfeeding rates and the associated reduction in infectious disease burden that occurs in the first six months of life. However, we are not currently modeling wasting transition rates among infants younger than six months of age. Therefore, we are excluding them from the simulation as they will not affect any modeled wasting transition rates among children aged 6-59.
 
-.. _5.2:
+.. _ciff2_5.2:
 
 5.2 Demographics
 ----------------
 
-.. _5.2.1:
+.. _ciff2_5.2.1:
 
 5.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -371,12 +371,12 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
 
   The simulation start date was set to run six months earlier in order to run a "burn-in" period to accomodate the increased wasting burden associated with the x-factor initialization strategy. The strategy of initializing simulants x-factor exposure and child wasting exposure using the same propensity causes an initial increase in SAM burden as all simulants in the MAM state will transition to the SAM state at an increased rate. The burn-in period of six months was chosen so that the x-factor and wasting joint exposure distribution will stabilize prior to the period of simulation observation.
 
-.. _5.2.2:
+.. _ciff2_5.2.2:
 
 5.2.2 Population of interest
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. _5.3:
+.. _ciff2_5.3:
 
 5.3 Models
 ----------
@@ -492,7 +492,7 @@ Scale up the :ref:`acute malnutrition treatment and management baseline paramete
 
   Link to interactive simulation validation of relapse rates for each model version
 
-.. _5.4:
+.. _ciff2_5.4:
 
 5.4 Desired outputs
 -------------------
@@ -513,7 +513,7 @@ Final outputs to report in manuscript
 
   draft table to be refined
 
-.. _5.5:
+.. _ciff2_5.5:
 
 5.5 Simulation output table
 ---------------------------
@@ -527,13 +527,13 @@ Final outputs to report in manuscript
    :file: simulation_output_table.csv
    :header-rows: 0
 
-.. _6.0:
+.. _ciff2_6.0:
 
 6.0 Back of the envelope calculations
 +++++++++++++++++++++++++++++++++++++
 
 
-.. _7.0:
+.. _ciff2_7.0:
 
 7.0 Limitations
 +++++++++++++++
