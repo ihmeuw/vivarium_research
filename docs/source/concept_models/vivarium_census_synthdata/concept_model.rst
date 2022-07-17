@@ -134,9 +134,9 @@ attributes through survey, census, and registry with realistic noise
 (13).
 
 Additional components we might want: time-dependent changes to
-observers of sex, based on gender assigned at birth (14); multiple
-households for individuals, leading to double counting in census (15);
-twins and multiparous births in fertility model (16).  To capture an
+observers of sex, based on gender assigned at birth (15); multiple
+households for individuals, leading to double counting in census (16);
+twins and multiparous births in fertility model (14).  To capture an
 additional dimension of heterogeneity and also to enable a periodic
 observer that simulates tax returns we will also need a component
 representing income (17), which will look a lot like a risk factor
@@ -366,7 +366,7 @@ revisit this and keep track of dad as well as moms).
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
-Multiparity --- make twins with probability 4%.  See Section (16) for
+Multiparity --- make twins with probability 4%.  See Section (14) for
 additional details.
 
 Relationship -- the sim knows a parent-child dyad when the new
@@ -465,24 +465,41 @@ for changing an arc from a household in B to a new housing unit in C.
 
 I could imagine making these rates quite complex someday, to take into
 account the age, sex, race/ethnicity, household structure, and even
-past migration history.  But at this point, it is not clear how
-complex is necessary to have a successful synthetic data set for
-testing PRL algorithms, so we will keep it quite simple.
+past migration history.  At this point, it is clear that age is
+necessary to get the college dormatory migration right, so we might as
+well include sex and race/ethnicity stratification in the rates as
+well.
+
+A complex type of movement that we need to capture is moving into and
+out of Group Quarters; it is useful to think of six broad types of GQ
+for PRL purposes grouped into two categories: non-institutional
+(college, military, other non-institutional); and institutional
+(carceral, nursing homes, and other institutional).  College is likely
+to be the tough one in Census applications (Census will have SSN for
+most military and incarcerated, Medicare for most nursing home, but
+people living in dorms, especially who don't file their own tax
+returns might not be PIK-able.)
+
+To capture this, on the research side I will develop a migration rate
+file, with stratification columns for age group, sex, and
+race/ethnicity and data columns for the household move rate in moves
+per person year and individual move rate (also in moves per person
+year).  On the reseach side, I will also develop a migrates-to
+probability file, with the probability that an individual moves a
+different household or to each type GQ, also stratified by age, sex,
+and race/ethnicity (or should we approach this more like a disease
+model??).  To keep things simple, we will for now not have the
+reference person ever move in a non-household migration, and when a
+non-reference person moves to another household, we will update their
+relationship to the reference person to be 36 - Other non-relative
+(for simplicity, for now).
 
 These notes on ACS data sources on migration could be useful for the
-more complex rates in the future.  For now, let's make households move
-at a rate of 15 moves per 100 household-year and simulants who are not
-the reference person move at a rate of 15 per 100 person-years
-(independently).  To further keep things simple, we will for now not
-have the reference person ever move in a non-household migration.
-When a non-reference person moves, we will update their relationship
-to the reference person to be 36 - Other non-relative (for simplicity,
-for now).
-
-ACS notes: Based on age, sex, race/ethnicity, and geography, can
-calculate the probability of moving from ACS, as the weighted average
-of MIGPUM.isnull(); Could also determine if they moved within the
-PUMAs represented in the sim or from outside those PUMAs.
+more complex rates in the future.  Based on age, sex, race/ethnicity,
+and geography, can calculate the probability of moving from ACS, as
+the weighted average of MIGPUM.isnull(); Could also determine if they
+moved within the PUMAs represented in the sim or from outside those
+PUMAs.
 
 Note that each housing unit in C should be associated with a unique
 mailing address, as described in Section (8).
@@ -499,7 +516,7 @@ overseas.
 At some point, I could imagine having new people and families move
 into the sim, but for our minimal model, let's leave this out.
 
-Schema for the 6 types of migration we eventually might include:
+Schema for the types of migration we eventually might include:
 
 #. Existing household moves 
 
@@ -511,7 +528,11 @@ Schema for the 6 types of migration we eventually might include:
 
 #. Existing person moves
 
-   #. To another house in simulation 
+   #. To another place in simulation
+
+      #. To a household
+
+      #. To group quarters of specific GQ types, e.g. one of six mutually exclusive, collectively exhaustive categories
 
    #. Outside of simulation catchment area
 
@@ -526,15 +547,6 @@ according to `ACS: America's Data At Risk
 (p. 21) <https://censusproject.files.wordpress.com/2022/03/census_white-paper_final_march_2022.pdf>`_,
 "Between 2000 and 2019, the number of housing units increased by 23.8
 million or almost 21%."
-
-Another complex type of movement that could be useful to capture is
-moving into and out of Group Quarters; it is useful to think of four
-broad types of GQ for PRL purposes: college, military, carceral, and
-nursing homes.  College is likely to be the tough one in Census
-applications (Census will have SSN for most military and incarcerated,
-Medicare for most nursing home, but people living in dorms, especially
-who don't file their own tax returns might not be PIK-able.)  We will
-not include GQ in our initial (sub-minimal) migration model.
 
 But to summarize, for our initial implementation, here are the
 simplifying assumptions that we have included:
@@ -911,7 +923,7 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
 
-2.3.10 Twins and multiparous births (16)
+2.3.10 Twins and multiparous births (14)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There is a lot we can potentially add to the model to represent how
@@ -932,15 +944,15 @@ simulants added to the same household, with the same date of birth,
 and the same last name.
 
 
-2.3.11 Additional Components (14-15)
+2.3.11 Additional Components (15-16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 We don't need these components for our minimal model, but we might
 eventually want: time-dependent changes to observers of sex, based on
-gender assigned at birth (14); multiple households for individuals,
-leading to double counting in census (15).
+gender assigned at birth (15); multiple households for individuals,
+leading to double counting in census (16).
 
-2.3.12 Income (16)
+2.3.12 Income (17)
 ~~~~~~~~~~~~~~~~~~
 
 Individual income will be implemented as a risk exposure.  Average
@@ -952,6 +964,41 @@ race/ethnicity from ACS data. I think is it pretty common to assume
 that this value is normally distributed, but we could use the GBD
 ensemble risk exposure machinary if that assumption seems like a
 limitation.
+
+2.3.13 Employment (18)
+~~~~~~~~~~~~~~~~~~~~~~
+
+To represent businesses and employment dynamics we will use another
+directed tripartite graph (analogous to our migration component),
+showing arcs from simulants (part A) to employers (part B) as well as
+arcs from employers to their addresses (part C).
+
+This construct allows us to represent businesses that employ one or
+more people, as well as individuals who are employed by multiple
+businesses.  We will also be able to add business dynamics in the
+future, e.g. new businesses arriving, old businesses closing down, and
+even merges, as well as name changes and address changes.  All of this
+will go into our simulated tax return data, which we must make a
+scheme for before we access restricted tax data (since even the schema
+of this data is restricted information).
+
+To keep things simple for starters, we will give everyone over 18 a
+random edge to an employer, chosen from a skewed distribution to
+ensure that there are a few large employers and a "fat tail" of small
+employers. We will change employers randomly at the rate of 50 changes
+per 100 person years, and change employer addresses at a rate of 10
+changes per 100 person years.  For now, we will have distinct
+addresses for businesses and households, but eventually we might want
+to intentionally include duplicates, e.g. if someone operates a
+business out of their home.
+
+The data will will extract from this network for our simulated tax
+return is a list of businesses and their unique id numbers and for
+each simulant who files a tax return, a list of the businesses that
+they worked for during the calendar year.  We should also extract a
+list of "dependents" from the household structure and perhaps
+something about spouses, but let's leave thinking that through for
+later.
 
 .. _census_prl_limitations:
 
