@@ -455,14 +455,24 @@ files where the first row contains treatment regimen categories and the second c
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model_naive_proba.csv
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model_naive_proba.csv
 
 Sophisticated Models
 ~~~~~~~~~~~~~~~~~~~~
 
-The sophisticated models require a more complex approach. Because they need to be trained within Foundry, they have to be passed from
+The sophisticated models are random forests.
+To avoid over-fitting, the maximum number of leaf nodes permitted in each tree was selected by 5-fold stratified cross-validation,
+optimizing for log-loss of probabilistic predictions.
+Though tree-based approaches inherently involve selecting features, some feature selection had to be done manually because of missing data;
+we used a complete-case analysis, dropping records that were missing data in any necessary field.
+Therefore, there was a trade-off between using information available to us and losing statistical power and representativeness.
+Renal impairment was included as a predictor in NDMM because it showed strong feature importance in that model.
+Cytogenetic risk was not included in either model because it did not improve predictions and lead to smaller sample size.
+We tested alternative codings of previous-treatment covariates, but none improved predictions.
+
+The sophisticated models require a more complex simulation implementation approach. Because they need to be trained within Foundry, they have to be passed from
 Foundry to Vivarium in a serialized format. While a human-readable and interoperable
 format would be ideal, due to Foundry constraints we will use :code:`joblib.dump` to output :code:`.pkl` files. The pickled
 form of the models may depend on the version of Python, :code:`sklearn`,
@@ -508,10 +518,6 @@ can be transformed into a DataFrame with meaningful column names like so:
   The :code:`.classes_` array may not contain all the treatment regimen categories in the model.
   Any treatment regimen categories missing should have probability 0 of being selected.
 
-.. todo::
-  These models are not finalized! These are just first versions to allow testing
-  the format of pickle files, output probabilities, etc.
-
 .. list-table:: Pickle file paths
   :widths: 1 10
   :header-rows: 1
@@ -519,13 +525,13 @@ can be transformed into a DataFrame with meaningful column names like so:
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model.pkl
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model.pkl
   * - NDMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\ndmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model_naive.pkl
   * - RRMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08\\rrmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model_naive.pkl
 
 
 Model Covariates
@@ -546,9 +552,6 @@ Model Covariates
   * - RenalImpairment
     - Whether or not the simulant has renal impairment.
     - 0 or 1
-  * - RiskType
-    - Cytogenetic risk category.
-    - 'Standard risk' or 'High risk'
   * - Year
     - Current (unrounded) year minus 2000. e.g. 22.5 for halfway through 2022.
     -
@@ -595,7 +598,7 @@ Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_08.
+match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
@@ -743,19 +746,17 @@ Coverage inputs
 
 The upward trend in Dara use observed in Flatiron is steep; a linear extrapolation (in logistic space) out to 2028 puts it at nearly 100%. A tree-based model such as a random forest creates a flat extrapolation, in which all future years are the same as the present.
 
-Notably, all Flatiron data (new and old LoT coding) points to higher Dara uptake than the projections we used in Phase 1.
+Notably, our models indicate higher Dara uptake than the projections we used in Phase 1, and in many cases already surpass those 2025 projections. As a middle ground, in consultation with our clinical expert,
+we made "best guess" projections of Dara, incorporating evidence on what we see so far, and knowledge that there is a "ceiling" on how many patients Dara will reach. We have set this ceiling at 45% in the NDMM
+setting and 55% in the RRMM setting. Our projections do not vary by line within RRMM.
 
 Data files:
 
 :download:`Target Isa coverage <target_isa_coverage.csv>`
 
-.. todo::
-
-  The numbers in both these Dara files are not finalized!
-
 :download:`Target Dara coverage <target_dara_coverage.csv>`
 
-:download:`Dara coverage from Flatiron <dara_coverage_from_flatiron.csv>`
+Dara coverage from Flatiron can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\dara_coverage_from_flatiron.csv.
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
@@ -798,17 +799,25 @@ with covariates :math:`x` being treated with regimen category :math:`r` is:
 
   h(t|x,r) = h(t|x) * HR_r
 
-.. todo::
+Mortality and relapse hazard ratios for each regimen category, plus the major subcategories of the 'Other' category, in each setting were estimated using a
+network meta-analysis of published findings with study random effects. The majority of categories could
+be connected by a network of randomized controlled trials (RCTs). Other categories
+were connected using non-randomized evidence: two matched analyses between different RCTs,
+and two matched analyses comparing RCT evidence with claims data, were included. Assumptions
+of equivalence, with included uncertainty, were made between substantially similar
+categories, including those that differed only by substitution of Isa with Dara, and those that differed only
+by substitution of melphalan with cyclophosphamide and prednisone/prednisolone with dexamethasone. We assumed
+that adding drugs to a regimen could not decrease efficacy. After estimating HRs for each subcategory, the HR
+of the 'Other' category was calculated by weighting these subcategories according to the observed proportions
+of use in Flatiron data.
 
-  Explain how HRs were estimated, including NMA, making them relative to
-  Flatiron regimen category mix, and application of ASCT effect.
+The effect of ASCT was estimated separately with a small meta-analysis of two RCTs: [DETERMINATION]_ and [IFM_2009]_.
+ASCT and induction regimen were assumed not to modify each others' effects.
 
-.. todo::
-
-  These are placeholder values pending completion of network meta-analysis! The
-  final files may not have values for *every* setting-category combination listed here, but
-  they are guaranteed not to be missing any combinations that are possible outputs
-  of the relevant treatment assignment model.
+After estimating HRs relative to a common reference category by combination of induction regimen
+and ASCT effects, a HR relative to the common reference category was calculated for the population-level
+mix of treatments observed in Flatiron data, which informs the base hazard described above. All HRs were
+then modified to be relative to this population-level mix.
 
 .. csv-table:: Mortality hazard ratios
   :file: mortality_hrs.csv
@@ -822,31 +831,20 @@ with covariates :math:`x` being treated with regimen category :math:`r` is:
 
 :download:`relapse_hrs.csv`
 
-A lognormal distribution of uncertainty within the uncertainty intervals reported
-above should be assumed (for the purposes of the placeholder values, the point
-estimate can be ignored).
-
-.. todo::
-
-  Should there be correlation between mortality hazard ratio and relapse hazard ratio,
-  similar to the correlation between OS and PFS in Phase 1?
-
-.. todo::
-
-  Note research considerations related to generalizability of the effect sizes listed above as well as the strength of the causal criteria, as discussed on the :ref:`general research consideration document <general_research>`.
+A log-normal distribution of uncertainty within the uncertainty intervals reported
+above should be assumed. The mortality and relapse hazard ratios for the same
+regimen category should be sampled with the same random percentile from their respective distributions,
+so that mortality and relapse effects are correlated.
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-
-  Add an assumption about time trend, once we determine which assumption we will make.
-
 #. We assume that treatment assignment depends only on the selected covariates and
-   characteristics of the preceding treatment, and that the remaining variation
+   characteristics of the immediately preceding treatment, and that the remaining variation
    is truly random.
-#. We assume a linear effect of line number/number of previous relapses on
-   treatment assignment (in log-probability space).
+#. We assume that regimen categories not including Isa or Dara will not change
+   in relative proportion between the end of our data (roughly 2022) and the end
+   of our simulation (2028).
 #. We only model ASCT in NDMM.
 #. We assume all conditioning regimens for ASCT have identical effects.
 #. We assume all maintenance therapies, or the lack of maintenance therapy, have
@@ -895,3 +893,14 @@ we will bin groups of adjacent timesteps in order to have sufficient sample size
 .. todo::
 
   How do we verify treatment effects once we are using a sophisticated treatment assignment scheme?
+
+References
+~~~~~~~~~~
+
+.. [DETERMINATION] Triplet Therapy, Transplantation, and Maintenance until Progression in Myeloma
+   https://www.nejm.org/doi/full/10.1056/NEJMoa2204925
+   (accessed July 9, 2022)
+
+.. [IFM_2009] Early Versus Late Autologous Stem Cell Transplant in Newly Diagnosed Multiple Myeloma: Long-Term Follow-up Analysis of the IFM 2009 Trial
+   https://ash.confex.com/ash/2020/webprogram/Paper134538.html
+   (accessed July 9, 2022)
