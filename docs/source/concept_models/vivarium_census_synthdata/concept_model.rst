@@ -497,7 +497,7 @@ for PRL purposes grouped into two categories: non-institutional
 to be the tough one in Census applications (Census will have SSN for
 most military and incarcerated, Medicare for most nursing home, but
 people living in dorms, especially who don't file their own tax
-returns might not be PIK-able.)
+returns might not have a protected identification key [PIK].)
 
 To capture this, on the research side I will develop a migration rate
 file, with stratification columns for age group, sex, and
@@ -506,12 +506,18 @@ per person year and individual move rate (also in moves per person
 year).  On the reseach side, I will also develop a migrates-to
 probability file, with the probability that an individual moves a
 different household or to each type GQ, also stratified by age, sex,
-and race/ethnicity (or should we approach this more like a disease
-model??).  To keep things simple, we will for now not have the
+and race/ethnicity.  To keep things simple, we will for now not have the
 reference person ever move in a non-household migration, and when a
 non-reference person moves to another household, we will update their
 relationship to the reference person to be 36 - Other non-relative
 (for simplicity, for now).
+
+This will prevent toddlers from moving out of their parents houses. It
+will still have a mother moving out of a house and leaving an
+infant. We could add functionality such that children move with their
+mothers from birth up to some fixed age (or something similar), but
+for now we will have this limitation that our migration model does not
+take family structure into account.
 
 These notes on ACS data sources on migration could be useful for the
 more complex rates in the future.  Based on age, sex, race/ethnicity,
@@ -1010,7 +1016,7 @@ will go into our simulated tax return data, which we must make a
 scheme for before we access restricted tax data (since even the schema
 of this data is restricted information).
 
-To keep things simple for starters, we will give everyone over 18 a
+To keep things simple for starters, we will give everyone age 18 and over a
 random edge to an employer, chosen from a skewed distribution to
 ensure that there are a few large employers and a "fat tail" of small
 employers. We will change employers randomly at the rate of 50 changes
