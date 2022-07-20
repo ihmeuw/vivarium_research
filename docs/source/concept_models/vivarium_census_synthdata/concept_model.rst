@@ -1026,7 +1026,7 @@ addresses for businesses and households, but eventually we might want
 to intentionally include duplicates, e.g. if someone operates a
 business out of their home.
 
-The data will will extract from this network for our simulated tax
+The data we will extract from this network for our simulated tax
 return is a list of businesses and their unique id numbers and for
 each simulant who files a tax return, a list of the businesses that
 they worked for during the calendar year.  We should also extract a
