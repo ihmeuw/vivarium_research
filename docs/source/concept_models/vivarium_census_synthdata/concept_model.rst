@@ -416,6 +416,25 @@ mapping:
 | Noninstitutionalized group quarters population   | Noninstitutionalized GQ population     |
 +--------------------------------------------------+----------------------------------------+
 
+Birth spacing: When we initialize newborns during the sim, we choose their parent
+first and then we give the child things like the parents last name,
+the parents address, etc, then we make sure the parent doesn't have
+another child for at least 9 months.
+
+When we initialize all simulants at the start of the sim, some people
+are initialized as "biological child" of the reference person in terms
+of their "relationship to head of household". In this case we also
+give them the same last name, etc. (we do this for simulants
+initialized as the parent of reference person.)
+
+A related limitation/simplification in our current approach is that
+when we initialize a household at the start of the sim that includes a
+reference person who likely recently gave birth (e.g. an age 32 female
+reference person and an age 0 biological child) we currently don't
+mark the reference person as having had a child, and so they are
+eligible to give birth again the next month. We could make this more
+complicated in the future.
+
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -712,6 +731,15 @@ https://www.rand.org/health-care/tools-methods/bisg.html
         df_population.loc[dfg.index, 'last_name'] = last_name
         # TODO: for rows with relshipp value of 22, 24, 31, 32, 34, 35, 36, give different last name
 
+Last names sometimes also include spaces or hyphens, and I have come
+up with race/ethnicity specific space and hyphen probabilities from an
+analysis of voter registration data (from publicly available data from
+North Carolina, filename VR_Snapshot_20220101.txt; see
+2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
+for computation details.)
+
+
+	
 **First and middle names**
 
 First names from babies:
