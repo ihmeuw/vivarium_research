@@ -16,7 +16,7 @@ Eligibility and Initiation
 
 - SBP >=130 mmHg and/or LDL-c >= 2.6 mmol/L 
 - Must have an acute qualifying event (acute myocardial infarction or acute ishemic stroke) 
-- Enrollment in the intervention only happens during interactions with healthcare, as shown :ref:`here <_us_cvd_concept_model>`
+- Enrollment in the intervention only happens during interactions with healthcare, as shown :ref:`here <us_cvd_concept_model>`
 
 
 Affected Outcomes
