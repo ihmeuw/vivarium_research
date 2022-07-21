@@ -243,7 +243,7 @@ simultaneously. Scales linearly over 1 year such that there is 0% coverage at ba
 
 .. _4.1.3:
 
-4.1.2 Risk Effects Models
+4.1.3 Risk Effects Models
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 * :ref:`Systolic Blood Pressure <2019_risk_effect_sbp>`
 * :ref:`High LDL Cholesterol <2019_risk_effect_ldl>`
