@@ -1,3 +1,6 @@
+.. _intervention_crm_mgmt_affected_outcomes:
+
+
 Affected Outcomes
 *****************
 
