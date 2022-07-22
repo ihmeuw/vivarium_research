@@ -144,30 +144,34 @@ interventions by subgroups.
 #. **Combination of All Modifications 50% Coverage**
 #. **Combination of All Modifications 100% Coverage**
 
-**Baseline** is assumed to have no one is enrolled in any intervention. 
+**Baseline** is assumed to have no one enrolled in any intervention. 
 
 **Medical Outreach 50% Coverage** assumes 50% of eligible simulants are enrolled in the outreach intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. 
+linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
+the remainder of the simulation. 
 
 **Medical Outreach 100% Coverage** assumes all eligible simulants are enrolled in the intervention. Scales 
 linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
 
 **Polypill 50% Coverage** assumes 50% of eligible simulants receive the polypill intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1.
+linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
+the remainder of the simulation. 
 
 **Polypill 100% Coverage** assumes all eligible simulants receive the polypill intervention. Scales 
 linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
 
 **Lifestyle Modification 50% Coverage** assumes 50% of eligible simulants are enrolled in the lifestyle modification 
-intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% 
+coverage for the remainder of the simulation. 
 
 **Lifestyle Modification 100% Coverage** assumes all eligible simulants are enrolled in the lifestyle modeification 
 intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
 
 **Combination of All Modifications 50% Coverage** assumes 50% coverage for all interventions, implemented 
-simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1.
+simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. 
+Remain at 50% coverage for the remainder of the simulation. 
 
-**Combination of All Modifications 50% Coverage** assumes 100% coverage for all interventions, implemented 
+**Combination of All Modifications 100% Coverage** assumes 100% coverage for all interventions, implemented 
 simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
 
 .. todo::
@@ -190,7 +194,7 @@ simultaneously. Scales linearly over 1 year such that there is 0% coverage at ba
   * - Date of simulation burn-in period start
     - N/A (no burn-in)
   * - Date of simulation observation period start
-    - January 1, 2019
+    - January 1, 2023
   * - Date of intervention scale-up start
     - 
   * - Date of simulation end
