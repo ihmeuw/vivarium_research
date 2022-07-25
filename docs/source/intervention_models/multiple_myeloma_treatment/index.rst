@@ -455,9 +455,9 @@ files where the first row contains treatment regimen categories and the second c
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\ndmm_model_naive_proba.csv
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model_naive_proba.csv
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\rrmm_model_naive_proba.csv
 
 Sophisticated Models
 ~~~~~~~~~~~~~~~~~~~~
@@ -525,13 +525,13 @@ can be transformed into a DataFrame with meaningful column names like so:
   * - Name
     - Path
   * - NDMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\ndmm_model.pkl
   * - RRMM
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\rrmm_model.pkl
   * - NDMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\ndmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\ndmm_model_naive.pkl
   * - RRMM naive model
-    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\rrmm_model_naive.pkl
+    - J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\rrmm_model_naive.pkl
 
 
 Model Covariates
@@ -598,7 +598,7 @@ Model Transfer Verification
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The following script verifies that assignment probabilities for a certain set of covariates
-match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10.
+match those generated within Foundry. It requires access to all the files in J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16.
 
 .. literalinclude:: verify_model_probabilities.py
   :language: python
@@ -614,18 +614,20 @@ Our postprocessing rules are designed so that:
 
 * We do not assign Isa or Dara regimen categories before those treatments were approved/in use.
 * We approximately match the Isa coverage (sum of all Isa-containing regimen categories) from our line- and year-specific projections.
-* We approximately match the Dara coverage (sum of all Dara-containing regimen categories) from ? (data source TBD, for now we will use Phase 1 numbers but expect to update these). Though we do have the sample size to inform this from Flatiron, it is not clear how to extrapolate it (see coverage inputs section below).
+* We approximately match the Dara coverage (sum of all Dara-containing regimen categories) from our internal projections. Though we do have the sample size to inform this from Flatiron, it is not clear how to extrapolate it (see coverage inputs section below).
 * The split between the Isa-containing regimen categories matches the split between the analogous Dara-containing categories observed in Flatiron, conditional on covariates.
 * All non-Isa categories are associated with covariates according to the observed associations in Flatiron.
 * Isa is associated with covariates -- besides line and year -- in the same way as Dara (they have the same patient profile), except that when it follows Dara in our Isa-after-Dara scenario, it is constant across these covariates.
 * The probability of interest for each of our alternative scenarios (probability of Isa after Dara, probability of Isa in the first line) approximates our specified probability in that scenario, and is zero in all other scenarios. When Isa scales up in these scenarios, it selectively replaces Dara.
 * We use extrapolation from Flatiron data to project time trends of all regimen categories **that do not contain Isa or Dara** into the future. This may be a linear or flat (every future year is like the present) extrapolation, depending on treatment assignment model choices.
+* We do not change the model-predicted probability split between ASCT and non-ASCT treatment.
 
 Detailed description
 ^^^^^^^^^^^^^^^^^^^^
 
 After getting the predicted probabilities from the model as described above, perform the following steps:
 
+#. Before applying any rules, record the probability of ASCT and the probability of non-ASCT treatment. These should sum to 1 and will be used in the final re-normalization.
 #. Multiply the probability of each Dara-containing regimen category by :math:`\text{dara_target_coverage} / \text{projected_dara}`, where dara_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Dara coverage" data file, and projected_dara is a linear interpolation or extrapolation by year of the line-specific value of "Dara_all" from the "Projected Dara coverage from Flatiron" data file.
 #. If the date is before Jan. 1, 2016 and this is an RRMM assignment, set the probabilities of all Dara-containing categories to 0.
 #. If the date is before Jan. 1, 2019 and this is an NDMM assignment, set the probabilities of all Dara-containing categories to 0.
@@ -635,107 +637,12 @@ After getting the predicted probabilities from the model as described above, per
     #. If the scenario is alternative scenario 2 (Isa-after-Dara) and the patient is in second line treatment (first relapse state), multiply the probabilities of all Dara-containing categories by ((the sum of the probabilities of all the Isa- **or** Dara-containing categories - target Isa retreatment coverage) / the sum of all the Dara-containing categories), then multiply the probabilities of all Isa-containing categories by (target Isa retreatment coverage / the sum of the probabilities of all the Isa-containing categories), where "target Isa retreatment coverage" is 0.05 or the sum of all Isa- **or** Dara-containing categories, whichever is less.
     #. Otherwise, multiply the probabilities of all Dara-containing categories by (the sum of all the Isa- **or** Dara-containing categories / the sum of all the Dara-containing categories), then set the probabilities of all Isa-containing categories to 0.
 #. Split the probabilities into two sets: those that contain ASCT and those that do not. Within each set:
-    #. Divide the probabilities of the categories that **do not contain Isa or Dara** by the sum of those probabilities.
-    #. Multiply the probabilities of the categories that **do not contain Isa or Dara** by (1 - the sum of the probabilities that **do contain Isa or Dara**).
+    #. Determine the amount the non-Isa, non-Dara categories should be scaled to match. This is the original probability of this ASCT category from Step 1 minus the sum of the probabilities that **do contain Isa or Dara**, except in the rare case that this value would be negative, in which case it should be zero.
+    #. Multiply the probabilities of the categories that **do not contain Isa or Dara** by the quantity from the previous step divided by the sum of the probabilities that **do not contain Isa or Dara**.
+    #. In the rare case where the sum of the probabilities of the categories that **do contain Isa or Dara** is greater than the original probability of this ASCT category from Step 1, multiply these probabilities by that original ASCT category probability divided by the sum of the probabilities of the categories that **do contain Isa or Dara**.
+#. The probabilities of each ASCT category (ASCT or non-ASCT) should now match the corresponding probability in Step 1.
 #. The probabilities should now sum to 1, and the probabilities of Isa- and Dara-containing categories should not have changed in the last two steps.
 #. Sample the assigned treatment.
-
-Example code
-^^^^^^^^^^^^
-
-Below is Python code implementing these rules in a non-Vivarium context, for use as a guide.
-
-.. code-block:: python
-
-  # Assumes a single Pandas DataFrame (NDMM and RRMM) with all covariates, joined with the regimen category
-  # probabilities from the relevant assignment model, where each row is a simulant. The RRMM-only covariates
-  # are assumed to be null for NDMM simulants.
-
-  all_regimen_categories = [
-    'PI+Dex',
-    'IMID+Dex',
-    'PI+IMID+Dex',
-    'Chemo+PI+Dex',
-    'Chemo+IMID+Dex',
-    'Dara+PI+Dex',
-    'Dara+IMID+Dex',
-    'Isa+PI+Dex',
-    'Isa+IMID+Dex',
-    'Dara+PI+Chemo+Dex',
-    'Dara+PI+IMID+Dex',
-    'Other',
-    'PI+Dex+ASCT',
-    'IMID+Dex+ASCT',
-    'PI+IMID+Dex+ASCT',
-    'Chemo+PI+Dex+ASCT',
-    'Chemo+IMID+Dex+ASCT',
-    'Dara+PI+Dex+ASCT',
-    'Dara+IMID+Dex+ASCT',
-    'Isa+PI+Dex+ASCT',
-    'Isa+IMID+Dex+ASCT',
-    'Dara+PI+Chemo+Dex+ASCT',
-    'Dara+PI+IMID+Dex+ASCT',
-    'Other+ASCT',
-  ]
-
-  dara_containing = [c for c in all_regimen_categories if 'Dara' in c]
-  isa_containing = [c for c in all_regimen_categories if 'Isa' in c]
-  asct_containing = [c for c in all_regimen_categories if 'ASCT' in c]
-  isa_dara_pairs = [
-    ('Isa+PI+Dex', 'Dara+PI+Dex'),
-    ('Isa+IMID+Dex', 'Dara+IMID+Dex'),
-    ('Isa+PI+Dex+ASCT', 'Dara+PI+Dex+ASCT'),
-    ('Isa+IMID+Dex+ASCT', 'Dara+IMID+Dex+ASCT'),
-  ]
-
-  # This imagines that dara_target and isa_target are pd.Series with multi-indices of (scenario, line, year),
-  # and that dara_coverage_projected is a pd.DataFrame with multi-index of (line, year) with columns Dara_all and Dara_isa_corresponding
-  probabilities_df['Scenario'] = scenario
-  # TODO: Both of these need to interpolate/extrapolate by year, however that is done in Vivarium
-  dara_target_coverage = dara_target.loc[zip(probabilities_df.Scenario, probabilities_df.LineNumber, probabilities_df.Year)]
-  projected_dara = dara_coverage_projected.loc[zip(probabilities_df.LineNumber, probabilities_df.Year), 'Dara_all']
-
-  for dara_regimen_category in dara_containing:
-    probabilities_df[dara_regimen_category] = probabilities_df[dara_regimen_category] * (dara_target_coverage / projected_dara)
-
-  if date < datetime.date(2016, 1, 1):
-    probabilities_df.loc[probabilities_df.LineNumber > 1, dara_containing] = 0
-  if date < datetime.date(2019, 1, 1):
-    probabilities_df.loc[probabilities_df.LineNumber == 1, dara_containing] = 0
-  
-  # TODO: Both of these need to interpolate/extrapolate by year, however that is done in Vivarium
-  isa_target_coverage = isa_target.loc[zip(probabilities_df.Scenario, probabilities_df.LineNumber, probabilities_df.Year)]
-  projected_dara_isa_corresponding = dara_coverage_projected.loc[zip(probabilities_df.LineNumber, probabilities_df.Year), 'Dara_isa_corresponding']
-
-  for isa_regimen_category, dara_regimen_category in isa_dara_pairs:
-    probabilities_df[isa_regimen_category] = probabilities_df[dara_regimen_category] * (isa_target_coverage / (dara_target_coverage * (projected_dara_isa_corresponding / projected_dara)))
-
-  if scenario == 'alternative_2_isa_after_dara':
-    dara_containing_sum = probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), dara_containing].sum(axis=1)
-    isa_containing_sum = probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing].sum(axis=1)
-    target_isa_retreatment_coverage = np.minimum(0.05, dara_containing_sum + isa_containing_sum)
-    probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), dara_containing] *= ((dara_containing_sum + isa_containing_sum - target_isa_retreatment_coverage) / dara_containing_sum)
-    probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] *= target_isa_retreatment_coverage / isa_containing_sum
-  else:
-    dara_containing_sum = probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), dara_containing].sum(axis=1)
-    isa_containing_sum = probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing].sum(axis=1)
-    probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), dara_containing] *= ((dara_containing_sum + isa_containing_sum) / dara_containing_sum)
-    probabilities_df.loc[(probabilities_df.LineNumber == 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] = 0
-
-  # All scenarios: Isa after Dara in lines 3, 4, 5 never happens
-  dara_containing_sum = probabilities_df.loc[(probabilities_df.LineNumber > 2) & (probabilities_df.Dara_flag_previous == 1), dara_containing].sum(axis=1)
-  isa_containing_sum = probabilities_df.loc[(probabilities_df.LineNumber > 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing].sum(axis=1)
-  probabilities_df.loc[(probabilities_df.LineNumber > 2) & (probabilities_df.Dara_flag_previous == 1), dara_containing] *= ((dara_containing_sum + isa_containing_sum) / dara_containing_sum)
-  probabilities_df.loc[(probabilities_df.LineNumber > 2) & (probabilities_df.Dara_flag_previous == 1), isa_containing] = 0
-
-  isa_dara_probabilities_before_normalization = probabilities_df[isa_containing + dara_containing]
-  for category_set in (asct_containing, [c for c in all_regimen_categories if c not in asct_containing]):
-    dara_isa_containing = [c for c in category_set if c in dara_containing or c in isa_containing]
-    non_isa_dara_containing = [c for c in category_set if c not in dara_isa_containing]
-    probabilities_df.loc[:, non_isa_dara_containing] /= probabilities_df.loc[:, non_isa_dara_containing].sum(axis=1)
-    probabilities_df.loc[:, non_isa_dara_containing] *= (1 - probabilities_df.loc[:, dara_isa_containing].sum(axis=1))
-  assert np.allclose(probabilities_df.loc[:, all_regimen_categories].sum(axis=1), 1.0, atol=1e-10, rtol=0)
-  assert probabilities_df[isa_containing + dara_containing].equals(isa_dara_probabilities_before_normalization)
 
 Coverage inputs
 ^^^^^^^^^^^^^^^
@@ -756,7 +663,7 @@ Data files:
 
 :download:`Target Dara coverage <target_dara_coverage.csv>`
 
-Dara coverage from Flatiron can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_10\\dara_coverage_from_flatiron.csv.
+Dara coverage from Flatiron can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\dara_coverage_from_flatiron.csv.
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++

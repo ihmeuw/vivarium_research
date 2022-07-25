@@ -1,3 +1,6 @@
+.. _intervention_crm_mgmt_lifestyle:
+
+
 Vivarium Modeling Strategy - Lifestyle Intervention
 ---------------------------------------------------
 

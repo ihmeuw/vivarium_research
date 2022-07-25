@@ -74,235 +74,285 @@ Vivarium - US Health Disparities - CVD Interventions
 
 1.0 Background
 ++++++++++++++
-We have shown previously that geographic disparities in the burden of cardiovascular disease (CVD) are large and have persisted over the past 40 years. For example, the age-standardized death rate due to ischemic heart disease in Oklahoma remains more than twice that of Minnesota (144 vs. 63 per 100,000). Alarmingly, many states have seen no further decline in CVD since 2010 and the gap in CVD between states has not improved, as shown by our recent work estimating long-term trends in CVD mortality. In a global projection model of CVD risk factors and mortality through the year 2025, we found that over 2 million premature deaths would be prevented with expanded control of risk factors. These results indicate that reducing the burden of CVD is a public health imperative but varying levels and trends in CVD and its risk factors were likely to affect the impact of different strategies to reduce exposure to CVD risk factors. 
+We have shown that geographic disparities in cardiovascular disease (CVD) are large and have persisted over 
+the past 40 years. For example, the age-standardized death rate due to ischemic heart disease in Oklahoma 
+remains more than twice that of Minnesota (144 vs. 63 per 100,000). Alarmingly, many states have seen no 
+further decline in CVD since 2010 and the gap in CVD between states has not improved. 
 
-Our research also estimated that, in the U.S., the absolute risk of premature CVD death would be reduced more than 4% if major risk factor targets are achieved by 2025. However, these national results have limited usefulness for reducing geographic disparities within the U.S., and a subnational evaluation of the impact of population-level evidence-based interventions is an important goal.  
+In a projection of CVD risk factors and mortality, we found that over 2 million premature deaths would 
+be prevented with expanded control of risk factors. Our research also estimated that in the U.S., the 
+absolute risk of premature CVD death would be reduced more than 4% if major risk factor targets are 
+achieved by 2025. 
 
-The long-term trajectory for CVD at the state level in the U.S. is not known, and is likely to differ substantially between states. Prior efforts in projecting CVD have been limited only to the national level, which severely limits their relevance to reducing health disparities.  
+These results indicate that reducing risk factors would be very impactful in reducing CVD, however due to the 
+geographic disparities, these national results have limited usefulness. A subnational evaluation of the impact 
+of population-level evidence-based interventions is an important goal. 
 
-The NIH has recognized the importance of studying health disparities, as required by the Minority Health and Health Disparities Research and Education Act. In its strategic plan, NHLBI has encouraged the investigation of “strategies that effectively address these differences,” asking the question “how can cardiometabolic risk be managed to improve health trajectories in specific populations?” We distinguish between two areas of research needed to understand population-level CVD trajectories, a) population health projections and b) health policy models. Population health projections are the result of a particular set of assumptions on future health trends. Health policy models are a subtype of projection that project future changes in health due to interventions after the efficacy of the intervention is established. Previous health policy models developed with NIH support included the IMPACT model, the CVD Policy Model, the ARCHIMEDES and CORE diabetes models, and single risk models for tobacco and hypertension. All of these models operate only for only a single geographic region (usually the United States), and consider only a limited set of risks and outcomes.  
+The NIH has recognized the importance of studying health disparities, as required by the Minority Health and 
+Health Disparities Research and Education Act. In its strategic plan, NHLBI has encouraged the investigation 
+of “strategies that effectively address these differences,” asking the question “how can cardiometabolic risk 
+be managed to improve health trajectories in specific populations?” 
 
-.. _uscvd1.1:
-
-1.1 Project overview
---------------------
-The intent of this project is to model the effect of three different interventions on the development of cardiometabolic burden in the United States, contingent on each state’s current population characteristics, patterns of CVD risk, health care access, level of effective medication delivery, and differential effects of risk factor interventions by subgroups. 
-
-.. _uscvd1.2:
-
-1.2 Literature review
----------------------
-
+We distinguish between two areas of research needed to understand population-level CVD trajectories: 
+a) population health projections and b) health policy models. Population health projections are the result 
+of a particular set of assumptions on future health trends. Health policy models are a subtype of projection 
+that project future changes in health due to interventions after the efficacy of the intervention is 
+established. Previous health policy models developed with NIH support operate only for only a single 
+geographic region (usually the United States), and consider only a limited set of risks and outcomes.  
 
 .. _uscvd2.0:
 
-2.0 Modeling aims and objectives
+2.0 Modeling Aims and Objectives
 ++++++++++++++++++++++++++++++++
 
-The intent of this simulation is to determine the effect of various interventions aimed at: 1) improving blood pressure and LDL-cholesterol control, 2) increasing exercise, 3) decreasing BMI/weight, 4) improving control of fasting plasma glucose, and 5) decreasing tobacco use. 
+**Objective:** Model the effect of three different interventions on the development of cardiometabolic burden 
+in the United States, contingent on each state’s current population characteristics, patterns of CVD risk, 
+health care access, level of effective medication delivery, and differential effects of risk factor 
+interventions by subgroups. 
 
-Initial efforts will focus on the 50 US states and Washington DC; when inputs are available for simulations by race/ethnicity groups within the US subnationals, we will transition to that level. 
+- Intervetions are aimed at: 1) improving blood pressure and LDL-cholesterol control, 2) increasing exercise, 3) decreasing BMI/weight, and 4) improving control of fasting plasma glucose 
+- Initial efforts will focus on the 50 US states and Washington DC  
+- Comparisons will be with the GBD results of incidence, prevalence, and mortality for various causes and risks associated with CVD  
 
-Comparisons will be with the GBD results of incidence, prevalence, and mortality for the causes and risks included in the following sections. 
+.. _uscvd3.0:
 
-.. .. _uscvd3.0:
+3.0 Concept Model
++++++++++++++++++
 
-.. 3.0 Causal framework
-.. ++++++++++++++++++++
+.. image:: concept_model_v2.svg
 
-.. .. _uscvd3.1:
+.. todo::
+  - Add in legend 
+  - Add minimum viable model diagram 
 
-.. 3.1 Causal diagram
-.. ------------------
- 
-..  .. note::
-..     link to DAGs page
-..     use round circles with DAGs
+.. _uscvd3.1:
 
-.. **Outcome (O)**:
+3.1 Simulation Scenarios
+------------------------
 
+.. todo::
+  Lacking clarity on if these are implemented together or one at a time. I am coded them as separate and a final 
+  combined run currently but this is a lot of scenarios to run. Should consider limiting this list. 
 
+#. **Baseline**  
+#. **Medical Outreach 50% Coverage**  
+#. **Medical Outreach 100% Coverage**
+#. **Polypill 50% Coverage**  
+#. **Polypill 100% Coverage**
+#. **Lifestyle Modification 50% Coverage**
+#. **Lifestyle Modification 100% Coverage**
+#. **Combination of All Modifications 50% Coverage**
+#. **Combination of All Modifications 100% Coverage**
 
-.. **Most proximal determinant/exposure (E)**:
-  
+**Baseline** is assumed to have no one enrolled in any intervention. 
 
+**Medical Outreach 50% Coverage** assumes 50% of eligible simulants are enrolled in the outreach intervention. Scales 
+linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
+the remainder of the simulation. 
 
-.. **Confounders (C)**:
+**Medical Outreach 100% Coverage** assumes all eligible simulants are enrolled in the intervention. Scales 
+linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
 
+**Polypill 50% Coverage** assumes 50% of eligible simulants receive the polypill intervention. Scales 
+linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
+the remainder of the simulation. 
 
+**Polypill 100% Coverage** assumes all eligible simulants receive the polypill intervention. Scales 
+linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
 
-.. **Effect modifiers**:
+**Lifestyle Modification 50% Coverage** assumes 50% of eligible simulants are enrolled in the lifestyle modification 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% 
+coverage for the remainder of the simulation. 
 
+**Lifestyle Modification 100% Coverage** assumes all eligible simulants are enrolled in the lifestyle modeification 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
 
-.. **Mediators (M)**:
+**Combination of All Modifications 50% Coverage** assumes 50% coverage for all interventions, implemented 
+simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. 
+Remain at 50% coverage for the remainder of the simulation. 
 
+**Combination of All Modifications 100% Coverage** assumes 100% coverage for all interventions, implemented 
+simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
 
-.. .. _uscvd3.2:
+.. todo::
+  - Add link to DAGs (or place it on this page) 
 
-.. 3.2 Effect sizes
-.. ----------------
+.. _uscvd3.2:
 
+3.2 Simulation Timeframe and Intervention Start Dates
+-----------------------------------------------------
 
+.. todo::
+  Need to add intervention start date. 
+  Need to validate observation start date.  
 
-4.0 Intervention
-++++++++++++++++
+.. list-table:: Developmental model CVD simulation timeframe and intervention dates
+  :header-rows: 1
+
+  * - Parameter
+    - Value
+  * - Date of simulation burn-in period start
+    - N/A (no burn-in)
+  * - Date of simulation observation period start
+    - January 1, 2023
+  * - Date of intervention scale-up start
+    - 
+  * - Date of simulation end
+    - December 31, 2040
+  * - Simulation time step
+    - 1 month
+  * - Intervention scale-up rate
+    - Linear scale-up over 1 year
+
+.. _uscvd4.0:
+
+4.0 Vivarium Modeling Components
+++++++++++++++++++++++++++++++++
 
 .. _uscvd4.1:
 
-4.1 Simulation scenarios
-------------------------
+4.1 Vivarium Concept Model Diagram Components 
+---------------------------------------------
 
 .. _4.1.1:
 
-4.1.1 Baseline
-~~~~~~~~~~~~~~
-In the baseline scenario, no one is enrolled in any of the interventions. Simulants not enrolled in an intervention may be prescribed medications to lower their blood pressure or lipid levels but will not recieve an adherence boost that occurs with the either the outreach or polypill intervention (outlined below).
+4.1.1 Cause Models
+~~~~~~~~~~~~~~~~~~
+* :ref:`Hypertensive Heart Disease <2019_cause_hhd>`
+* :ref:`Ischemic Heart Disease <2019_cause_ihd>`
+* :ref:`Ischemic Stroke <2019_cause_Ischemic_Stroke>`
+* :ref:`Intracerebral Hemorrhage <2019_cause_ich>`
+* :ref:`Subarachnoid Hemorrhage <2019_cause_sah>`
+* :ref:`Diabetes Mellitus <2019_cause_diabetes>`
+* :ref:`Peripheral Arterial Disease <2019_cause_pad>`
+* :ref:`Aortic Aneurysm <2019_cause_Aortic_Aneurysm>`
+* :ref:`Atrial Fibrillation and Flutter <2019_cause_afib>`
+* :ref:`Heart Failure <2019_cause_Heart_Failure>`
+* :ref:`Chronic Obstructive Pulmonary Disease <2019_cause_copd>`
 
-4.1.1 Outreach
-~~~~~~~~~~~~~~
-In the outreach scenario, adherence to SBP-lowering and LDL-c lowering therapies would increase through patient outreach. Methods for outreach would include options such as regular phone calls between provider and patient, a mobile app with reminders and guidance about the importance of taking medications, or a patient support clinic.
-
-All patients with an SBP level >=130 mmHg and/or LDL-c level >=2.6 mmol/L or who have had an acute qualifying event are eligible for enrollment into this intervention. Acute qualifying events include an acute myocardial infarction or acute ischemic stroke during the preceeding time step.
-
-**Scenarios:**
-
-  - Outreach 1.0: Following a prescription of new lipid- and/or blood pressure-lowering medication(s), all eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 100% at the end of Year 1.  
-  
-  - Outreach 0.5: Following a prescription of new lipid- and/or blood pressure-lowering medication(s), 50% of eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 50% at the end of Year 1.
-
-
-**Source information:**
-
-Black patients, when prescribed statin as a new medication within the past 1 year, receive automated phone calls and letters starting 1-2 weeks after prescribing, which encourages them to fill the prescription (primary adherence). Receiving this intervention increases fill and initiation of statin from 26% to 42% of patients. OR for intervention vs control was 2.16 (1.91-2.43). Effectively, patients were twice as likely to initiate medication during the first 30 days if intervention was delivered.  
-[Derose-2013]_
-
-Patients, age 30-60 without IHD, but who met any of the following criteria: current tobacco smoker, LDL-c > 3.37 mmol/L, or SBP >140 mmHg, received access to a non-clinical community health center with nurse-practitioner counseling on diet, tobacco use, and exercise. Telephone follow-up and free YMCA exercise sessions were offered. The comparison group received standard of care. Both groups had medication copays covered. At 1 year, statin adherence had a relative odds of 2.2 (95% CI 1.11-4.2) and blood pressure medication adherence had a relative odds of 2.3 (95% CI 1.39-3.88) compared to the control group. 
-[Becker-2005]_
-
-.. **Implementation:**
-
-.. For the first 30 days, new statin and blood pressure prescription adherence is increased according to Derose 2013. Adherence to the medications over 1 year after initiation should be increased according to Becker 2005. Effect can persist beyond the length of study.  
+.. todo::
+  CKD does not currently exist in 2019 models, need to investigate and/or create 
 
 .. _4.1.2:
 
-4.1.2 Polypill
-~~~~~~~~~~~~~~
-In the polypill scenario, simulants receive fixed dose combinations of anti-hypertensive medications for reducing systolic blood pressure.
+4.1.2 Risk Exposure Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+* :ref:`Systolic Blood Pressure <2019_risk_sbp>`
+* :ref:`High LDL Cholesterol <2019_risk_exposure_ldl>`
+* :ref:`Body Mass Index <2019_risk_bmi>`
+* :ref:`Fasting Plasma Glucose <2019_risk_exposure_fpg>`
 
-All patients with an SBP level >=130 mmHg are eligible for enrollment into this intervention.
-
-**Scenarios**
-
-  - Polypill 1.0: Following a prescription of new blood pressure-lowering medication(s), all eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 100% at the end of Year 1.  
-  
-  - Polypill 0.5: Following a prescription of new blood pressure-lowering medication(s), 50% of eligible patients are enrolled. The coverage of the intervention should scale linearly over the first year such that there is 0% coverage at baseline and 50% at the end of Year 1.
-
-.. **Source information:**
-
-.. Individuals with prevalent IHD, past ischemic stroke, prevalent PAD, or 5-year CVD risk of 15% or greater received a free 6-month-at-a-time supply of a polypill of either version 1 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and atenolol, 50 mg) or version 2 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and hydrochlorothiazide, 12.5 mg). Compared with usual care, at 12 months, the polypill group was more likely to be adherent with medications (adjRR 1.13, 95% CI 1.08-1.18). 
-.. [Thom-2013]_ 
-
-.. **Implementation:**
-
-.. Adherence to blood pressure lowering and statin medications over 1 year after initiation should be increased according to the above study, though in this scenario we will actually deliver the following combination: atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg). Effect can persist beyond the length of the study.  
-.. [Munoz-NEJM]_ 
-
-.. **Scenarios:**
-.. 	- Polypill 1.0: All individuals with IHD, past ischemic stroke, or prevalent PAD (who are not already on medications) receive atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg) regardless of SBP or LDL-c levels. Medications lead to expected reduction in SBP and LDL-c. Adherence is increased 13% following receipt of those medications.  
-.. 	- Polypill 0.5: Above scenario with, but a reduction to 50% of individuals meeting criteria receiving prescription for atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg) regardless of SBP or LDL-c levels). Medications lead to expected reduction in SBP and LDL-c. Adherence among individuals receiving therapy is increased 13% following receipt of those medications. 
+.. todo::
+  Decide on inclusion of tobacco and create as needed  
 
 .. _4.1.3:
 
-4.1.3 Lifestyle modification education
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-In the lifestyle scenario, eligible simulants recieve education and support to make lifestyle modifications to improve physical activity, healthy eating, weight loss, and tobacco cessation.  
+4.1.3 Risk Effects Models
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+* :ref:`Systolic Blood Pressure <2019_risk_effect_sbp>`
+* :ref:`High LDL Cholesterol <2019_risk_effect_ldl>`
 
-Individuals are eligible for the lifestyle intervention if their BMI>=25 kg/m2, with no known DM2, but elevated FPG/HbA1C (100-125mg/dl or 5.7-6.4, respectively)
-
-
-**Scenarios**
-  - Lifestyle 1.0: Enrollment will occur following a routine health facility or primary care visit. Eligible individuals enrolled in the intervention will receive weekly sessions for 6 months followed by monthly sessions for 6 months. Each session attended will result in 0.3% loss of body weight (initially represented as BMI, but eventually to use weight when available). Adherence will decline in a linear fashion, with 50% of individuals continuing sessions at 6 months and all completing sessions by 1 year.  
-  
-  - Lifestyle 0.5: Scenario described above but with 50% of adherence at initiation; adherence will decline in a linear fashion from that point. 
-
-**Source information:**
-
-Individuals were enrolled in the diabetes prevention program if their BMI was >= 25, they had no known DM2, and their FPG was 100-125mg/dl (or HgbA1C 5.7-6.4). They attended a median of 14 community-based sessions over a median of 134 days. Sessions included lifestyle and behavior counselling with a focus on increasing moderate physical activity, healthy eating, and weight loss. Each additional session attended led to 0.31% loss of body weight.  
-[Ely-2017]_  
-
-Variations on the above intervention increased support time or added meal replacements for the first month or full year  
-[Metz-et-al-2000]_ 
+.. todo::
+  Create risk effect models for BMI and FPG 
 
 .. _4.1.4:
 
-4.1.4 Combined scenarios
-~~~~~~~~~~~~~~~~~~~~~~~~
-	- Combination 1.0: Combination of outreach 1.0, polypill 1.0, and lifestyle 1.0  
-	- Combination 0.5: Combination of outreach 0.5, polypill 0.5, and lifestyle 0.5 
+4.1.4 Intervention Models
+~~~~~~~~~~~~~~~~~~~~~~~~~
+.. note::
+  Main intervention page will be deleted once information is transferred to individual pages 
+  :ref:`Carbiometabolic Risk Management <intervention_crm_mgmt>`
+
+Individual intervention pages: 
+
+* :ref:`Outreach Intervention <intervention_crm_mgmt_outreach>`
+* :ref:`Polypill Intervention <intervention_crm_mgmt_polypill>`
+* :ref:`Lifestyle Modification Intervention <intervention_crm_mgmt_lifestyle>`
+
+.. _4.1.5:
+
+4.1.5 Other Models
+~~~~~~~~~~~~~~~~~~
+.. note::
+  I plan to integrate these into other pages and to delete all in the final version  
+
+  * :ref:`Health Care Visit Types <intervention_crm_mgmt_visit>`
+  * :ref:`Medications <intervention_crm_mgmt_tx>`
+  * :ref:`Affected Outcomes <intervention_crm_mgmt_affected_outcomes>`
+  * :ref:`Initialization <intervention_crm_mgmt_initialization>`
 
 
-.. _uscvd5.0:
+.. _uscvd4.2:
 
-5.0 Vivarium modelling components
-+++++++++++++++++++++++++++++++++
-
-.. _uscvd5.1:
-
-5.1 Vivarium concept model 
---------------------------
-.. image:: concept_model_v2.svg
-
-.. _uscvd5.2:
-
-5.2 Demographics
+4.2 Demographics 
 ----------------
 
-.. _uscvd5.2.1:
+.. _uscvd4.2.1:
 
-5.2.1 Population description
+4.2.1 Population Description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - Cohort type: 
-  	- Prospective closed cohort. Youngest simulants will be age 3 at initiation of simulation and will be turning 25 when the simulation ends. Oldest simulants will be age 125 at initiation. Ages 3-25 will be modeled but not observed.
-  	- Size of largest tracked population: 100,000 simulants
-  - Cohort length:
-  	- year_start: January 1, 2019
-  	- year_end: December 31, 2040
-  - Age and sex structure:
-  	- Sex: male/female/both
-  	- Age range of initialized simulants: age_start=25, age_end=125
-  - Time step:
-  	- One month
-  - Fertility:
-  	- Not applicable
-  - Stratifications:
-  	- P\ :sub:`1`\: healthy individuals
-  	- P\ :sub:`2`\: new initiators, elevated risk factor detected at office visit
-  	- P\ :sub:`3`\: new initiators, event (acute MI, acute stroke)
-  	- P\ :sub:`4`\: previous diagnosis; change in medication
-  	- Intended to identify groups that we are interested in being able to track and compare in the simulation.
-  	- P\ :sub:`1`\: healthy individuals. These are simulants that are never eligible to recieve any intervention because they never develop elevated risk factors (do not cross the relevant prespecified thresholds for all prespecified risk factors) and never experience a qualifying event (AMI, acute ischemic stroke) during the course of the simulation.
-  	- P\ :sub:`2`\: new initiators, primary. Simulants in this group are enrolled in the intervention(s) based on findings of elevated risk factors (simulant crosses a relevant prespecified threshold for one or more prespecified risk factors) at a routine medical (also referred to as an office visit or screening) exam. This corresponds to "primary prevention". 
-  	- P\ :sub:`3`\: new initiators, secondary. Simulants in this group are enrolled in the intervention(s) based on experiencing an acute event (AMI/ischemic stroke) who were not previously identified as being at risk due to elevated risk factor levels. This may be due to either: 1) not having elevated risk factors at screening visits that occurred in time steps prior to the event; or, 2) not having a visit during any time step between intialization and event where the simulant was identified as having elevated risk factors and thus meeting eligibility criteria for enrollment in the intervention(s). This corresponds to "secondary prevention"
-  	- P\ :sub:`4`\: previous diagnosis. Simulants in this group meet treatment eligibility requirements at the start of the simulation and have been prescribed blood pressure or lipid-lowering medication and/or received guidance from their medical care provider about lifestyle modifications that they should implement in order to reduce their likelihood of developing disease according to standard practice of care. 
+**Throughout model development and verification/validation:**
+
+.. list-table:: CVD simulation model development population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - 100,000
+     - per random seed/draw combination
+   * - Number of draws
+     - 
+     - 
+   * - Number of random seeds
+     - 
+     - per draw
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 3 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 3-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
+.. todo::
+  Discuss appropriate number of seeds and draws  
 
 
-.. _uscvd5.2.2:
+**Additional Stratification of Population:**
+Intended to identify groups that we are interested in being able to track and compare in the simulation.
 
-5.2.2 Location description
+  - P\ :sub:`1`\: healthy individuals: Simulants that never receive an intervention, develop risk factors, or experience a qualifying event 
+  - P\ :sub:`2`\: new initiators, primary: Simulants who receive an intervention following identification of elevated risk factors 
+  - P\ :sub:`3`\: new initiators, secondary: Simulants who receive an intervention following an acute qualifying event 
+  - P\ :sub:`4`\: previous diagnosis: Simulants who meet intervention eligibility at the start of the simulation. They have been prescribed medication and/or received guidance about lifestyle modifications according to standard practice of care. 
+
+.. _uscvd4.2.2:
+
+4.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Locations**: All 50 US states and District of Columbia
 
-.. _uscvd5.3:
+.. _uscvd4.3:
 
-5.3 Models
+4.3 Models
 ----------
 `Simulation Results <https://shiny.ihme.washington.edu/content/416/>`_
 
  .. note::
     validation notebooks and results are stored in /mnt/team/cvd/pub/usa_re/sim_science/validation/
     
+ .. todo::
+    Complete table with plan for the models in order of implementation 
+
 .. list-table:: Model verification and validation tracking
   :widths: 3 10 20
   :header-rows: 1
@@ -314,44 +364,63 @@ Variations on the above intervention increased support time or added meal replac
     - Alabama; IHD, ischemic stroke
     - All-cause mortality results look reasonable; issue with angina CSMR
   * - 2.0
-    - 
-    - 
+    - SBP and LDL-C 
+    - Validated 
   * - 3.0
-    - 
-    - 
+    - FPG and BMI 
+    - Validated 
   * - 4.0
-    - 
-    - 
+    - HF 
+    - Not validating 
+  * - 5.0
+    -  
+    -  
+  * - 6.0
+    -  
+    -  
   
-.. _uscvd5.4:
+.. _uscvd4.4:
 
-5.4 Desired outputs
+4.4 Desired outputs
 -------------------
+ .. todo::
+    Validate the below with project partners: 
 
-.. _uscvd5.5:
+    - Are DALYs cause specific or is total DALYs okay? 
+    - Is change in risk factor by state also important? (i.e., a XX drop in SBP)
+    - What is missing from the below? 
 
-5.5 Output meta-table shell
+Outputs:
+
+#. DALYs (YLLs and YLDs) due to cause specific mortality 
+#. Average values for risk factors by state and year (SBP, LDL, FPG, and BMI)
+#. Numbers of interventions administered per a) 100,000 population, and b) 100,000 person years 
+
+
+.. _uscvd4.5:
+
+4.5 Output meta-table shell
 ---------------------------
 
 .. todo::
-  - add special stratifications if necessary
+  - add table 
+
+
+.. _uscvd5.0:
+
+5.0 Back of the Envelope Calculations
++++++++++++++++++++++++++++++++++++++
+
 
 .. _uscvd6.0:
 
-6.0 Back of the envelope calculations
-+++++++++++++++++++++++++++++++++++++
+6.0 Limitations
++++++++++++++++
 
 
 .. _uscvd7.0:
 
-7.0 Limitations
-+++++++++++++++
-
-
-
-.. _uscvd8.0:
-
-8.0 References
+7.0 References
 ++++++++++++++
 
 .. [Derose-2013] Derose, Stephen F., et al. "Automated outreach to increase primary adherence to cholesterol-lowering medications." JAMA internal medicine 173.1 (2013): 38-43.
