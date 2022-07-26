@@ -203,7 +203,11 @@ Population description:
         * `Treatment hazard ratios generaly reflect input values (when compared to PI-IMiD-Dex as reference <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/main/verification/model_1/mm_tx_effect_verification_pi-imid-dex_reference.ipynb>`_, `systematically overestimated when compared to population rate, suspected to be a result of incompatible PAFs <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/main/verification/model_1/mm_tx_effect_verification_population_reference.ipynb>`_), but with high degree of uncertainty in some cases 
   * - Model 2
     - Use TTNT directly for hazard of relapse, instead of subtracting OS from PFS
-    -
+    - 
+        * `Prevalence overestimate increased relative to Model 1 <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_cause_vs_gbd.ipynb>`_.
+        * `More simulants in NDMM relative to Model 1 <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_rrmm_prevalence.ipynb>`_.
+        * `New hazard rates appear to be applied correctly <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_survival_curves_vs_input.ipynb>`_.
+        * No change in `treatment coverage <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_tx_coverage_verification.ipynb>`_ or `treatment effects <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_tx_effect_verification_pi-imid-dex_reference.ipynb>`_.
   * - Model 3
     - Sophisticated treatment prediction model as a scenario and business-rule-modified alternative scenarios
     -
