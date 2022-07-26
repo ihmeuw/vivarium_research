@@ -1,22 +1,48 @@
+.. _intervention_crm_mgmt_outreach:
+
 Vivarium Modeling Strategy - Outreach Intervention 
 **************************************************
 
 Overview
 ++++++++
 
-Adherence to SBP-lowering and LDL-c lowering therapies would increase through patient outreach. Methods for outreach would include options such as regular phone calls between provider and patient, a mobile app with reminders and guidance about the importance of taking medications, or a patient support clinic.
+Adherence to SBP and LDL-c lowering therapies would increase through patient outreach. Methods for outreach include 
+regular phone calls between provider and patient, a mobile app with reminders and guidance, or a patient support clinic.
 
-All patients with an SBP level >=130 mmHg and/or LDL-c level >=2.6 mmol/L or who have had an acute qualifying event are eligible for enrollment into this intervention. Acute qualifying events include an acute myocardial infarction or acute ischemic stroke during the preceeding time step.
+Today, few patients receive this support and adherence to medications is often low. This intervention will assess the 
+impact of an outreach intervention on risk factors and CVD. 
 
-When a simulant is enrolled in the outreach intervention, the initial medication fill rate is increased 2x and the medication adherence each month is increased 2x for each prescription.
 
-Details of the drug classes and dosage options for both blood pressure and lipid-lowering can be found in the treatment documentation linked below.
+Eligibility and Initiation
+++++++++++++++++++++++++++
 
-.. toctree::
-   :maxdepth: 1
+- SBP >=130 mmHg and/or LDL-c >= 2.6 mmol/L 
+- Must have an acute qualifying event (acute myocardial infarction or acute ishemic stroke) 
+- Enrollment in the intervention only happens during interactions with healthcare, as shown :ref:`here <us_cvd_concept_model>`
 
-   visit
-   tx
+
+Affected Outcomes
++++++++++++++++++
+
+This intervention affects adherence to medications, which in turn will affect the simulants exposure to SBP and LDL-c. 
+
+
+.. list-table:: Affected Outcome #1 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - OR for Adherence
+    - Source 
+    - Notes
+  * - 2.3 
+    - [Becker-2005]_ 
+    - 
+
+
+.. todo::
+
+  Is initiation assumed to be 100%?  
+
 
 **Source information:**
 

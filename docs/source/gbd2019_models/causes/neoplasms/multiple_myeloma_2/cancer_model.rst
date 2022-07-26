@@ -174,7 +174,7 @@ cause-deleted all-cause mortality rate, should be zero.
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-In the tables below, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2. The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
+In the tables below, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_07_09. The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
 
 .. list-table:: State Definitions
    :widths: 1, 5, 15
@@ -423,12 +423,27 @@ Endpoints
     - Death or initiation of next treatment or loss to progression and/or treatment follow-up
     - We invented this; never reported in trials
 
-Calculation of Mortality and Progression Hazard
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Calculation of Mortality and Relapse Hazard
++++++++++++++++++++++++++++++++++++++++++++
 
-.. todo::
+Hazards were calculated using Cox proportional hazards models fit to Flatiron data. These
+models allow the hazard to vary over time since treatment line initiation, and assume a linear effect of line number (each relapse
+increases hazard by the same multiplier). They do not include any other covariates.
 
-  Fill this in with information on how we calculated curves from Flatiron.
+In the model for relapse hazard in first through fourth lines (TTNT), the event is initiation of a new line of treatment. Patients are censored at
+the point that our line-of-therapy coding algorithm can no longer code their EHR data.
+
+In the model for mortality hazard in first through fourth lines (TTD), the event is death. Patients are censored at initiation of a new line of treatment,
+and also at the point that our line-of-therapy coding algorithm can no longer code their EHR data, except when this point
+precedes death by less than 60 days.
+
+The model for mortality hazard in the fifth line (OS) is like the previous lines, except that patients are not censored at initiation of a new treatment, only
+at loss to follow-up, defined as their last visit, if they do not have a death record. Patients with a death record are never censored.
+
+Line-specific predictions were made with models trained on 1,000 bootstrap resamples of the dataset to generate 1,000 draws of these predictions.
+
+To extrapolate these hazards into longer follow-up than is present in the source data, predictions are only used until the time since treatment line initiation of the fifth-to-last
+event in the data. After that point, the average hazard up to that point is continued as a constant hazard into the future.
 
 Model Assumptions and Limitations
 +++++++++++++++++++++++++++++++++
@@ -454,6 +469,9 @@ Model Assumptions and Limitations
    track the number of relapses a simulant has had beyond four. We assume that risk factor and
    treatment effects on mortality apply to both TTD (in other states) and OS (in this state).
    We ignore risk factor and treatment effects on relapse after the fourth relapse.
+#. The effect of line number/number of relapses on both relapse and mortality is not adjusted
+   for risk factor and treatment effects.
+#. We assume that hazards increase by a constant hazard ratio with each additional relapse.
 
 Validation Criteria
 +++++++++++++++++++
