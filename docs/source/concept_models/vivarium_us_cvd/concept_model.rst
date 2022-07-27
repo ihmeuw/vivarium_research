@@ -372,7 +372,7 @@ possible outcomes for simulants.
     - Scheduling of follow-up is pulled from uniform distribution ranging between 3 and 6 months 
   * - Emergency 
     - If simulant has an acute event during this time step, 100% will have an emergency visit 
-    - Acute events are ischemic stroke or acture myocardial infarction 
+    - Acute events are ischemic stroke or acute myocardial infarction 
 
 
 
@@ -421,7 +421,7 @@ possible outcomes for simulants.
     - Dependent on scenario, either 50% or 100%  
     - For 50% scenario, assignment is random 
   * - B
-    - If LDL-c>70mg/dL and patient is adherent 85% chance of increasing intensity 
+    - If LDL-c>70mg/dL and simulant is adherent 85% chance of increasing intensity 
     - Further details below. 85% is random chance.
   * - C
     - If simulant is eligible, either 50% or 100% depending on scenario  
@@ -456,7 +456,7 @@ possible outcomes for simulants.
 
 
 .. todo::
-  - Unclear how patients are assigned mono or combo therapy and probability of assignment 
+  - Unclear how simulants are assigned mono or combo therapy and probability of assignment 
   - Need to figure out how treatment effect works 
 
 
@@ -483,7 +483,7 @@ possible outcomes for simulants.
 
 
 .. todo::
-  - Unclear how patients are assigned mono or combo therapy and probability of assignment 
+  - Unclear how simulants are assigned mono or combo therapy and probability of assignment 
   - Need to figure out how treatment effect works 
 
 
@@ -496,27 +496,24 @@ possible outcomes for simulants.
 
 **LDL-C Treatments** 
 
-The decision to assign a patient treatment is completed in the healthcare visits above. All LDL-c treatments are 
-statins for simplicity in this model. The choice of intensity is determined by the patients ASCVD score and LDL-c. 
+The decision to assign a simulant treatment is completed in the healthcare visits above. All LDL-c treatments are 
+statins for simplicity in this model. The choice of intensity is determined by the simulants ASCVD score and LDL-c. 
 
-- ASCVD is between 5 and 7.5%, patient is assigned low intensity statin 
-- ASCVD is greater than 7% and less than 20%, patient is assigned medium intensity statin 
-- ASCVD is greater than 20% **OR** LDL-c is greater than 190md/dL, patient is assigned high intensity statin 
+- ASCVD is between 5 and 7.5%, simulant is assigned low intensity statin 
+- ASCVD is greater than 7% and less than 20%, simulant is assigned medium intensity statin 
+- ASCVD is greater than 20% **OR** LDL-c is greater than 190md/dL, simulant is assigned high intensity statin 
 
-For follow-up visits, statin increases will utilize below. Patient can only move up one intensity group at 
-each follow-up visit. 
-
-- If patient is on low intensity, will move to medium 
-- If patient is on medium intensity, will move to high 
-- If patient is on high intensity statin, no change is made 
+Statin intensity can increase at follow-up visits. **If** simulant is adherent to medication **AND** has elevated 
+LDL-c levels, they will move up one intensity group. If simulant is **NOT** adherent to medication, not treatment 
+changes will be made. 
 
 
 **Blood Pressure Treatments** 
 
-The decision to assign a patient treatment is completed in the healthcare visits above. 
+The decision to assign a simulant treatment is completed in the healthcare visits above. 
 
  .. todo::
-    Add information on what blood pressure medication is choosen  
+    Add information on what blood pressure medication is chosen  
 
 
 
@@ -530,8 +527,8 @@ LDL-c levels.
 LDL-c decrease = Initiation Rate * LDL-c treatment efficacy * Adherence
 
 - Initiation is assumed to be 100% currently 
-- Adherence is determined by PDC, or percent of days covered, is the number of days a patient takes their medication compared to days with a prescription. PAD values range between 0 and 1. They are randomly assigned from a XX distribution 
-- If adherence is less than 80%, PCD value will be redrawn after each healthcare interaction 
+- Adherence is determined by PDC, or percent of days covered, is the number of days a simulant takes their medication compared to days with a prescription. PDC values range between 0 and 1. They are randomly assigned from a XX distribution 
+- If adherence is less than 80%, PDC value will be redrawn after each healthcare interaction 
 - PDC 0-79%: adherence = 0
 - PDC 80%+: adherence = 1
 
@@ -550,8 +547,8 @@ SBP levels.
 SBP decrease = Initiation Rate * SBP treatment efficacy * Adherence
 
 - Initiation is assumed to be 100% currently 
-- Adherence is determined by PDC, or percent of days covered, is the number of days a patient takes their medication compared to days with a prescription. PAD values range between 0 and 1. They are randomly assigned from a XX distribution 
-- If adherence is less than 80%, PCD value will be redrawn after each healthcare interaction 
+- Adherence is determined by PDC, or percent of days covered, is the number of days a simulant takes their medication compared to days with a prescription. PDC values range between 0 and 1. They are randomly assigned from a XX distribution 
+- If adherence is less than 80%, PDC value will be redrawn after each healthcare interaction 
 - PDC 0-79%: adherence = 0
 - PDC 80%+: adherence = 1
 
