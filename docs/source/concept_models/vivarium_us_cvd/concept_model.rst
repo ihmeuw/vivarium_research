@@ -119,11 +119,16 @@ interventions by subgroups.
 3.0 Concept Model
 +++++++++++++++++
 
+
+**Ideal Concept Model**
+
 .. image:: concept_model_v2.svg
 
-.. todo::
-  - Add in legend 
-  - Add minimum viable model diagram 
+
+**Minimum Viable Model**
+
+.. image:: concept_model_v3.svg
+
 
 .. _uscvd3.1:
 
@@ -173,9 +178,6 @@ Remain at 50% coverage for the remainder of the simulation.
 
 **Combination of All Modifications 100% Coverage** assumes 100% coverage for all interventions, implemented 
 simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
-
-.. todo::
-  - Add link to DAGs (or place it on this page) 
 
 .. _uscvd3.2:
 
@@ -341,9 +343,223 @@ Intended to identify groups that we are interested in being able to track and co
 
 **Locations**: All 50 US states and District of Columbia
 
+
 .. _uscvd4.3:
 
-4.3 Models
+4.3 Healthcare System Modeling
+------------------------------
+
+Within this model, simulants move through the healthcare system. The initialization parameters for screening visits 
+are listed separately. Below are diagrams for each visit type, information on each decision point, and the 
+possible outcomes for simulants. 
+
+
+.. list-table:: Visit Interactions per Time Step 
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - Visit Type 
+    - Assignment to Visit  
+    - Notes
+  * - No Visit 
+    - Default assignment   
+    - 
+  * - Screening 
+    - If simulant does not have a follow-up or emergency visit, can have screening based on initialization parameters    
+    - 
+  * - Follow-up 
+    - Scheduled at time of medication prescription or emergency event 
+    - Scheduling of follow-up is pulled from uniform distribution ranging between 3 and 6 months 
+  * - Emergency 
+    - If simulant has an acute event during this time step, 100% will have an emergency visit 
+    - Acute events are ischemic stroke or acute myocardial infarction 
+
+
+
+**No Visit in Time Step**
+
+.. image:: decision_tree_none.svg
+
+
+**Screening Visit**
+
+.. image:: decision_tree_screening.svg
+
+.. list-table:: Screening Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - Dependent on scenario, either 50% or 100%  
+    - For 50% scenario, assignment is random 
+  * - B
+    - LDL-c is tested if ASCVD score >= 5% 
+    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex)
+  * - C
+    - If age>40 and LDL-c>70mg/dL, 85% receive treatment prescription 
+    - Type of treatment assignment below. 85% is random chance. 
+  * - D 
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
+
+
+**Follow-up Visit**
+
+.. image:: decision_tree_followup.svg
+
+.. list-table:: Followup Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - Dependent on scenario, either 50% or 100%  
+    - For 50% scenario, assignment is random 
+  * - B
+    - If LDL-c>70mg/dL and simulant is adherent 85% chance of increasing intensity 
+    - Further details below. 85% is random chance.
+  * - C
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
+
+
+**Emergency Visit**
+
+.. image:: decision_tree_emergency.svg
+
+
+**Blood Pressure Ramp - Initial Diagnosis**
+
+.. image:: sbp_ramp_initial.svg
+
+.. list-table:: Blood Pressure Ramp Initial Diagnosis 
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - NEEDED  
+    -  
+  * - B
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
+  * - C
+    - NEEDED  
+    -  
+
+
+.. todo::
+  - Unclear how simulants are assigned mono or combo therapy and probability of assignment 
+  - Need to figure out how treatment effect works 
+
+
+**Blood Pressure Ramp - Follow-up**
+
+.. image:: sbp_ramp_followup.svg
+
+.. list-table:: Blood Pressure Ramp Follow-up 
+  :widths: 3 15 15 
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - NEEDED  
+    -  
+  * - B
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
+  * - C
+    - NEEDED  
+    -  
+
+
+.. todo::
+  - Unclear how simulants are assigned mono or combo therapy and probability of assignment 
+  - Need to figure out how treatment effect works 
+
+
+.. _uscvd4.4:
+
+4.4 Treatment Assignment and Effect Modeling
+--------------------------------------------
+
+**Treatment Assignments** 
+
+**LDL-C Treatments** 
+
+The decision to assign a simulant treatment is completed in the healthcare visits above. All LDL-c treatments are 
+statins for simplicity in this model. The choice of intensity is determined by the simulants ASCVD score and LDL-c. 
+
+- ASCVD is between 5 and 7.5%, simulant is assigned low intensity statin 
+- ASCVD is greater than 7% and less than 20%, simulant is assigned medium intensity statin 
+- ASCVD is greater than 20% **OR** LDL-c is greater than 190md/dL, simulant is assigned high intensity statin 
+
+Statin intensity can increase at follow-up visits. **If** simulant is adherent to medication **AND** has elevated 
+LDL-c levels, they will move up one intensity group. If simulant is **NOT** adherent to medication, not treatment 
+changes will be made. 
+
+
+**Blood Pressure Treatments** 
+
+The decision to assign a simulant treatment is completed in the healthcare visits above. 
+
+ .. todo::
+    Add information on what blood pressure medication is chosen  
+
+
+
+**Treatment Effects** 
+
+**LDL-C Treatments** 
+
+Once a simulant is assigned a treatment, there are multiple factors that determine the affect on 
+LDL-c levels. 
+
+LDL-c decrease = Initiation Rate * LDL-c treatment efficacy * Adherence
+
+- Initiation is assumed to be 100% currently 
+- Adherence is determined by PDC, or percent of days covered, is the number of days a simulant takes their medication compared to days with a prescription. PDC values range between 0 and 1. They are randomly assigned from a XX distribution 
+- If adherence is less than 80%, PDC value will be redrawn after each healthcare interaction 
+- PDC 0-79%: adherence = 0
+- PDC 80%+: adherence = 1
+
+
+ .. todo::
+    Need to add in LDL-c treatment efficacy by intensity level 
+    Consider if adherence should be split into more buckets (0-50: 0 effect, 50-80: 50% effect, 80+: full effect)
+    Consider having initiation vary and have additional impact of outreach intervention   
+
+
+**Blood Pressure Treatments** 
+
+Once a simulant is assigned a treatment, there are multiple factors that determine the affect on 
+SBP levels. 
+
+SBP decrease = Initiation Rate * SBP treatment efficacy * Adherence
+
+- Initiation is assumed to be 100% currently 
+- Adherence is determined by PDC, or percent of days covered, is the number of days a simulant takes their medication compared to days with a prescription. PDC values range between 0 and 1. They are randomly assigned from a XX distribution 
+- If adherence is less than 80%, PDC value will be redrawn after each healthcare interaction 
+- PDC 0-79%: adherence = 0
+- PDC 80%+: adherence = 1
+
+
+ .. todo::
+    Need to add in SBP treatment efficacy by intensity level 
+
+
+.. _uscvd4.5:
+
+4.5 Models
 ----------
 `Simulation Results <https://shiny.ihme.washington.edu/content/416/>`_
 
@@ -379,9 +595,9 @@ Intended to identify groups that we are interested in being able to track and co
     -  
     -  
   
-.. _uscvd4.4:
+.. _uscvd4.6:
 
-4.4 Desired outputs
+4.6 Desired outputs
 -------------------
  .. todo::
     Validate the below with project partners: 
@@ -397,9 +613,9 @@ Outputs:
 #. Numbers of interventions administered per a) 100,000 population, and b) 100,000 person years 
 
 
-.. _uscvd4.5:
+.. _uscvd4.7:
 
-4.5 Output meta-table shell
+4.7 Output meta-table shell
 ---------------------------
 
 .. todo::
