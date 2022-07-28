@@ -207,7 +207,12 @@ Population description:
         * No change in `treatment coverage <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_tx_coverage_verification.ipynb>`_ or `treatment effects <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/fcb48a7cbe8f3a4d9058b5be9fc382b52cc9ed19/verification/model_2/mm_tx_effect_verification_pi-imid-dex_reference.ipynb>`_.
   * - Model 3
     - Sophisticated treatment prediction model as a scenario and business-rule-modified alternative scenarios
-    -
+    - After a few rounds of fixes:
+        * `Base hazard rates match input in interactive sim <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/2a0b7a0b3d824ae49c2af2b47f955e2ec2139c47/verification/interactive_simulations/hazard%20rate%20verification/Hazard%20rate%20verification%20-%20time%20since%20entry.ipynb>`_.
+        * `Risk factor hazard ratios match input in interactive sim <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/2a0b7a0b3d824ae49c2af2b47f955e2ec2139c47/verification/interactive_simulations/hazard%20rate%20verification/Hazard%20rate%20verification%20-%20risk%20factors.ipynb>`_.
+        * Due to component structure, unable to verify treatment effects in interactive sim -- but those have been verified in Model 2, before the interactive sim approach was necessary.
+        * `Isa and Dara coverage approximately matches the target values by year and scenario <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/2a0b7a0b3d824ae49c2af2b47f955e2ec2139c47/verification/model_3/scenario_verification_interactive_sim.ipynb>`_.
+        * Due to reduction in stratifications, not able to check for regressions since Model 2.
 
 8.0 Desired Outputs
 +++++++++++++++++++
