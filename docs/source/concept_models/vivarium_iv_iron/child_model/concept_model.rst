@@ -395,10 +395,11 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Single draw, all components, 0-5 year olds, 2024-2040
      - `Overall looks as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_6/Full%20CGF%20run%2C%20single%20draw.ipynb>`_. For SSA, inclusion of 1 month to 5 year olds represents and additional ~7 percent of averted burden in IV iron scenario relative to baseline. But relative to oral iron, effect is smaller at ~2%. (To continue to expand on explanation, as started in the `BOE notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BW%20on%20CGF%20BOE.ipynb>`_)
    * - `6.1 diarrhea neonatal split <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_6/NN%20diarrhea%20and%20timestep%20run.ipynb>`_
-     - All components, diarrheal diseases age_start changed to post_neonatal, 25 draws, 200 seeds. Testing multiple time-step durations: 0.5, 2, and 3 days.
+     - All components, diarrheal diseases age_start changed to post_neonatal, 25 draws, 200 seeds. Testing multiple time-step durations: 0.5, 2, 3, and 4 days.
      -  * For 0.5 day timestep, all looks as expected -- diarrheal diseases age restriction appears to be implemented correctly (NOTE: need make sure LBWSG is affecting LRI and DD mortality in interactive sim). 
         * Neonatal mortality is still validating with the 2 day timestep. However, LRI and diarrheal diseases remission rate calculation did not appear to update according to timestep change, causing an underestimation of the remission rate and an overestimation of prevalence and associated burden.
         * For 3 day timestep, fix was implemented to update diarrheal diseases and LRI remission rates, and cause models are now validating. Mortality in the neonatal ages also still validating, so will move on to 4 day timestep.
+        * For 4 day timestep, validation for South Asia looks good. For SSA, it's a bit farther off, but no farther than 0.5 day timestep. Will move forward with 4 day timestep for future runs.
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
