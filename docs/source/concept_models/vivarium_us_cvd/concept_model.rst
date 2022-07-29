@@ -202,7 +202,7 @@ simultaneously. Scales linearly over 1 year such that there is 0% coverage at ba
   * - Date of simulation end
     - December 31, 2040
   * - Simulation time step
-    - 1 month
+    - 28 days
   * - Intervention scale-up rate
     - Linear scale-up over 1 year
 
@@ -303,20 +303,20 @@ Individual intervention pages:
      - Value
      - Note
    * - Population size
-     - 100,000
+     - 50,000
      - per random seed/draw combination
    * - Number of draws
-     - 
+     - 10
      - 
    * - Number of random seeds
-     - 
+     - 15
      - per draw
    * - Cohort type
      - Closed
      - 
    * - Age start
-     - 3 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 3-25 will be modeled but not observed. 
+     - 7 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
@@ -492,6 +492,17 @@ possible outcomes for simulants.
 4.4 Treatment Assignment and Effect Modeling
 --------------------------------------------
 
+**Adherence**
+
+Adherence is categorized into three buckets: 
+
+#. Primary nonadherent - simulant never obtains medication 
+#. Secondary nonadherent - simulant obtains medication but has a percent of days covered (PDC) less than 0.8 
+#. Adherent - simulant has a PDC greater than or equal to 0.8 
+
+If a simulant is primary or secondary nonadherent, their adherence score in the model is 0. If they are 
+adherent, their adherence score is 1. 
+
 **Treatment Assignments** 
 
 **LDL-C Treatments** 
@@ -521,40 +532,73 @@ The decision to assign a simulant treatment is completed in the healthcare visit
 
 **LDL-C Treatments** 
 
-Once a simulant is assigned a treatment, there are multiple factors that determine the affect on 
-LDL-c levels. 
-
-LDL-c decrease = Initiation Rate * LDL-c treatment efficacy * Adherence
-
-- Initiation is assumed to be 100% currently 
-- Adherence is determined by PDC, or percent of days covered, is the number of days a simulant takes their medication compared to days with a prescription. PDC values range between 0 and 1. They are randomly assigned from a XX distribution 
-- If adherence is less than 80%, PDC value will be redrawn after each healthcare interaction 
-- PDC 0-79%: adherence = 0
-- PDC 80%+: adherence = 1
-
-
  .. todo::
     Need to add in LDL-c treatment efficacy by intensity level 
-    Consider if adherence should be split into more buckets (0-50: 0 effect, 50-80: 50% effect, 80+: full effect)
-    Consider having initiation vary and have additional impact of outreach intervention   
+
+LDL-c decrease = LDL-c treatment efficacy * Adherence score 
 
 
-**Blood Pressure Treatments** 
+.. list-table:: Adherence Score Values 
+  :widths: 10 10 10 
+  :header-rows: 1
 
-Once a simulant is assigned a treatment, there are multiple factors that determine the affect on 
-SBP levels. 
+  * - Category
+    - Percent of Simulants 
+    - Notes
+  * - Primary Non-adherence
+    - 25%
+    - [Cheen_2019]_
+  * - Secondary Non-adherence
+    - 22.8%
+    - 
+  * - Adherent
+    - 52.2%
+    - [Oung_2017]_
 
-SBP decrease = Initiation Rate * SBP treatment efficacy * Adherence
 
-- Initiation is assumed to be 100% currently 
-- Adherence is determined by PDC, or percent of days covered, is the number of days a simulant takes their medication compared to days with a prescription. PDC values range between 0 and 1. They are randomly assigned from a XX distribution 
-- If adherence is less than 80%, PDC value will be redrawn after each healthcare interaction 
-- PDC 0-79%: adherence = 0
-- PDC 80%+: adherence = 1
+.. list-table:: Treatment Efficacy  
+  :widths: 10 10 10 
+  :header-rows: 1
 
+  * - Category
+    - Efficacy 
+    - Notes
+  * - High Intensity
+    - 
+    - 
+  * - Medium Intensity 
+    - 
+    - 
+  * - Low Intensity
+    - 
+    - 
+
+ 
+
+**Blood Pressure Treatments**  
 
  .. todo::
-    Need to add in SBP treatment efficacy by intensity level 
+    Need to add in SBP treatment efficacy table 
+
+
+SBP decrease = SBP treatment efficacy * Adherence score
+
+.. list-table:: Adherence Score Values 
+  :widths: 10 10 10 
+  :header-rows: 1
+
+  * - Category
+    - Percent of Simulants 
+    - Notes
+  * - Primary Non-adherence
+    - 16%
+    - [Cheen_2019]_
+  * - Secondary Non-adherence
+    - 27.4%
+    - 
+  * - Adherent
+    - 56.6%
+    - [Oung_2017]_
 
 
 .. _uscvd4.5:
@@ -656,3 +700,9 @@ Outputs:
 
 .. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
 	https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
+
+.. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
+  https://doi.org/10.1111/ijcp.13350.
+
+.. [Oung_2017] Oung, Alvin B., Emily Kosirog, Benjamin Chavez, Jason Brunner, and Joseph J. Saseen. 2017. “Evaluation of Medication Adherence in Chronic Disease at a Federally Qualified Health Center.” Therapeutic Advances in Chronic Disease 8 (8–9): 113–20. 
+  https://doi.org/10.1177/2040622317714966.
