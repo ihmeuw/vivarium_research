@@ -110,7 +110,7 @@ Vivarium Intravenous Iron - Children under five
   * - Date of simulation end
     - December 31, 2026 (run beyond end of maternal simulation so we can see impact of older children covered by intervention)
   * - Simulation time step
-    - 0.5 days
+    - 4 days
   * - Intervention scale-up rate
     - N/A: defined for maternal simulation
 
@@ -122,15 +122,15 @@ Vivarium Intravenous Iron - Children under five
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A: defined for maternal simulation (5 year burn-in period)
+    - N/A: defined for maternal simulation (5 year burn-in period if age end == 5)
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start
     - N/A: defined for maternal simulation
   * - Date of simulation end
-    - December 31, 2039
+    - December 31, 2040
   * - Simulation time step
-    - 0.5 days
+    - 4 days
   * - Intervention scale-up rate
     - N/A: defined for maternal simulation
 
