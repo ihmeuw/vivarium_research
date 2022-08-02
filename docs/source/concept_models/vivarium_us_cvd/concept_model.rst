@@ -198,7 +198,7 @@ simultaneously. Scales linearly over 1 year such that there is 0% coverage at ba
   * - Date of simulation observation period start
     - January 1, 2023
   * - Date of intervention scale-up start
-    - 
+    - January 1, 2024
   * - Date of simulation end
     - December 31, 2040
   * - Simulation time step
@@ -354,6 +354,7 @@ are listed separately. Below are diagrams for each visit type, information on ea
 possible outcomes for simulants. 
 
 
+
 .. list-table:: Visit Interactions per Time Step 
   :widths: 3 15 15
   :header-rows: 1
@@ -365,8 +366,8 @@ possible outcomes for simulants.
     - Default assignment   
     - 
   * - Screening 
-    - If simulant does not have a follow-up or emergency visit, can have screening based on initialization parameters    
-    - 
+    - If simulant does not have a follow-up or emergency visit, use: outpatient_visits=HealthcareEntity (name='outpatient_visits', kind='healthcare_entity', gbd_id=me_id(19797), utilization=me_id(19797),)
+    - Outpatient utilization envelope from GBD; will want to update to use NHANES data in future
   * - Follow-up 
     - Scheduled at time of medication prescription or emergency event 
     - Scheduling of follow-up is pulled from uniform distribution ranging between 3 and 6 months 
@@ -375,11 +376,14 @@ possible outcomes for simulants.
     - Acute events are ischemic stroke or acute myocardial infarction 
 
 
+.. todo::
+  - Currently 100% of patients with a follow-up scheduled, go to that appointment. Is this an okay assumption?  
+
 
 **No Visit in Time Step**
 
 .. image:: decision_tree_none.svg
-
+ 
 
 **Screening Visit**
 
@@ -393,15 +397,24 @@ possible outcomes for simulants.
     - Decision Information 
     - Notes
   * - A
+    - FPG measurement uncertainty needed 
+    -  
+  * - B
     - Dependent on scenario, either 50% or 100%  
     - For 50% scenario, assignment is random 
-  * - B
-    - LDL-c is tested if ASCVD score >= 5% 
-    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex)
   * - C
-    - If age>40 and LDL-c>70mg/dL, 85% receive treatment prescription 
-    - Type of treatment assignment below. 85% is random chance. 
-  * - D 
+    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
+  * - D
+    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
+    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
+  * - E
+    - LDL-C is tested if ASCVD score >= 5% 
+    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex)
+  * - F
+    - If age>40 and LDL-C>70mg/dL, 19.4% will not receive medication due to theraputic inertia
+    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
+  * - G 
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
 
@@ -418,12 +431,21 @@ possible outcomes for simulants.
     - Decision Information 
     - Notes
   * - A
+    - FPG measurement uncertainty needed 
+    -  
+  * - B
     - Dependent on scenario, either 50% or 100%  
     - For 50% scenario, assignment is random 
-  * - B
-    - If LDL-c>70mg/dL and simulant is adherent 85% chance of increasing intensity 
-    - Further details below. 85% is random chance.
   * - C
+    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
+  * - D
+    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
+    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
+  * - E
+    - If simulant is adherent, 19.4% will not change medication due to theraputic inertia 
+    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
+  * - F
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
 
@@ -431,6 +453,20 @@ possible outcomes for simulants.
 **Emergency Visit**
 
 .. image:: decision_tree_emergency.svg
+
+.. list-table:: Followup Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
+  * - B
+    - No patients are primary nonadherent, rerun probability of secondary nonadherence 
+    - Assumes patient begins medication in the inpatient setting, removing primary nonaherence 
 
 
 **Blood Pressure Ramp - Initial Diagnosis**
@@ -445,14 +481,17 @@ possible outcomes for simulants.
     - Decision Information 
     - Notes
   * - A
+    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
+  * - B
     - NEEDED  
     -  
-  * - B
-    - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
   * - C
     - NEEDED  
     -  
+  * - D
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
 
 
 .. todo::
@@ -472,14 +511,23 @@ possible outcomes for simulants.
     - Decision Information 
     - Notes
   * - A
-    - NEEDED  
-    -  
+    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
   * - B
-    - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
+    - If simulant is adherent, 87% will not change medication due to theraputic inertia 
+    - Hypertension. J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783 
   * - C
     - NEEDED  
     -  
+  * - D
+    - NEEDED  
+    -  
+  * - E
+    - NEEDED  
+    -  
+  * - F
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
 
 
 .. todo::
@@ -492,7 +540,8 @@ possible outcomes for simulants.
 4.4 Treatment Assignment and Effect Modeling
 --------------------------------------------
 
-**Adherence**
+Adherence
++++++++++
 
 Adherence is categorized into three buckets: 
 
@@ -503,40 +552,7 @@ Adherence is categorized into three buckets:
 If a simulant is primary or secondary nonadherent, their adherence score in the model is 0. If they are 
 adherent, their adherence score is 1. 
 
-**Treatment Assignments** 
-
-**LDL-C Treatments** 
-
-The decision to assign a simulant treatment is completed in the healthcare visits above. All LDL-c treatments are 
-statins for simplicity in this model. The choice of intensity is determined by the simulants ASCVD score and LDL-c. 
-
-- ASCVD is between 5 and 7.5%, simulant is assigned low intensity statin 
-- ASCVD is greater than 7% and less than 20%, simulant is assigned medium intensity statin 
-- ASCVD is greater than 20% **OR** LDL-c is greater than 190md/dL, simulant is assigned high intensity statin 
-
-Statin intensity can increase at follow-up visits. **If** simulant is adherent to medication **AND** has elevated 
-LDL-c levels, they will move up one intensity group. If simulant is **NOT** adherent to medication, not treatment 
-changes will be made. 
-
-
-**Blood Pressure Treatments** 
-
-The decision to assign a simulant treatment is completed in the healthcare visits above. 
-
- .. todo::
-    Add information on what blood pressure medication is chosen  
-
-
-
-**Treatment Effects** 
-
-**LDL-C Treatments** 
-
- .. todo::
-    Need to add in LDL-c treatment efficacy by intensity level 
-
-LDL-c decrease = LDL-c treatment efficacy * Adherence score 
-
+**LDL-C Treatments**
 
 .. list-table:: Adherence Score Values 
   :widths: 10 10 10 
@@ -554,6 +570,65 @@ LDL-c decrease = LDL-c treatment efficacy * Adherence score
   * - Adherent
     - 52.2%
     - [Oung_2017]_
+
+
+**Blood Pressure Treatments**
+
+.. list-table:: Adherence Score Values 
+  :widths: 10 10 10 
+  :header-rows: 1
+
+  * - Category
+    - Percent of Simulants 
+    - Notes
+  * - Primary Non-adherence
+    - 16%
+    - [Cheen_2019]_
+  * - Secondary Non-adherence
+    - 27.4%
+    - 
+  * - Adherent
+    - 56.6%
+    - [Oung_2017]_
+
+
+Treatment Assignments
++++++++++++++++++++++
+
+**LDL-C Treatments** 
+
+The decision to assign a simulant treatment is completed in the healthcare visits above. All LDL-C treatments are 
+statins for simplicity in this model. The choice of intensity is determined by the simulants ASCVD score and LDL-C. 
+
+- ASCVD is between 5 and 7.5%, simulant is assigned low intensity statin 
+- ASCVD is greater than 7% and less than 20%, simulant is assigned medium intensity statin 
+- ASCVD is greater than 20% **OR** LDL-C is greater than 190md/dL, simulant is assigned high intensity statin 
+
+Statin intensity can increase at follow-up visits. **If** simulant is adherent to medication **AND** has elevated 
+LDL-C levels, they will move up one intensity group. If simulant is **NOT** adherent to medication, not treatment 
+changes will be made. 
+
+
+**Blood Pressure Treatments** 
+
+The decision to assign a simulant treatment is completed in the healthcare visits above. 
+
+ .. todo::
+    Add information on what blood pressure medication is chosen 
+    Medical Expenditure Panel Survey, 2014 was prior note 
+    Add in proportion of Group 2 from SBP ramp algorithm receiving combination therapy from Byrd et al Am Heart J 2011;162:340-6.
+    Was listed as 45 and represents non-compliance with guidelines  
+
+
+Treatment Effects
++++++++++++++++++
+
+**LDL-C Treatments** 
+
+ .. todo::
+    Need to add in LDL-C treatment efficacy by intensity level 
+
+LDL-C decrease = LDL-C treatment efficacy * Adherence score 
 
 
 .. list-table:: Treatment Efficacy  
@@ -574,7 +649,6 @@ LDL-c decrease = LDL-c treatment efficacy * Adherence score
     - 
 
  
-
 **Blood Pressure Treatments**  
 
  .. todo::
@@ -583,27 +657,47 @@ LDL-c decrease = LDL-c treatment efficacy * Adherence score
 
 SBP decrease = SBP treatment efficacy * Adherence score
 
-.. list-table:: Adherence Score Values 
-  :widths: 10 10 10 
-  :header-rows: 1
-
-  * - Category
-    - Percent of Simulants 
-    - Notes
-  * - Primary Non-adherence
-    - 16%
-    - [Cheen_2019]_
-  * - Secondary Non-adherence
-    - 27.4%
-    - 
-  * - Adherent
-    - 56.6%
-    - [Oung_2017]_
-
 
 .. _uscvd4.5:
 
-4.5 Models
+4.4 Initialization Parameters
+-----------------------------
+
+
+.. list-table:: Key parameters for initialization
+  :widths: 5 5 10 10
+  :header-rows: 1
+
+  * - Parameter
+    - Reference
+    - Data Source for Simulation
+    - Notes
+  * - SBP baseline coverage rate for each ramp position
+    - Egan et al. Hypertension. 2012;59:1124- 1131.
+    - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/tx_percent_initialize.csv
+    -
+  * - LDL-C baseline coverage rate
+    - 
+    - 
+    - 
+  * - History of ischemic heart disease at baseline 
+    - 
+    - 
+    - 
+  * - History of ischemic stroke at baseline 
+    - 
+    - 
+    - 
+  * - Follow-up visit initialization 
+    - 
+    - All simulants on SBP medication, LDL-C medication, or a history of an acute event will receive a follow-up visit 
+    - 
+
+
+
+.. _uscvd4.6:
+
+4.6 Models
 ----------
 `Simulation Results <https://shiny.ihme.washington.edu/content/416/>`_
 
@@ -639,9 +733,9 @@ SBP decrease = SBP treatment efficacy * Adherence score
     -  
     -  
   
-.. _uscvd4.6:
+.. _uscvd4.7:
 
-4.6 Desired outputs
+4.7 Desired outputs
 -------------------
  .. todo::
     Validate the below with project partners: 
@@ -653,13 +747,13 @@ SBP decrease = SBP treatment efficacy * Adherence score
 Outputs:
 
 #. DALYs (YLLs and YLDs) due to cause specific mortality 
-#. Average values for risk factors by state and year (SBP, LDL, FPG, and BMI)
+#. Average values for risk factors by state and year (SBP, LDL-C, FPG, and BMI)
 #. Numbers of interventions administered per a) 100,000 population, and b) 100,000 person years 
 
 
-.. _uscvd4.7:
+.. _uscvd4.8:
 
-4.7 Output meta-table shell
+4.8 Output meta-table shell
 ---------------------------
 
 .. todo::
