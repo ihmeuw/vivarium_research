@@ -128,7 +128,7 @@ Visit types
    visit
 
 Baseline Coverage Data
-++++++++++++++++++++++++
+++++++++++++++++++++++
 
 Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. Bask To initialize simulants, the research team has fit a multinomial regression to NHANES data. 
 
