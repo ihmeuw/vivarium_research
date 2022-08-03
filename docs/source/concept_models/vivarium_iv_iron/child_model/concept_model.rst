@@ -110,7 +110,7 @@ Vivarium Intravenous Iron - Children under five
   * - Date of simulation end
     - December 31, 2026 (run beyond end of maternal simulation so we can see impact of older children covered by intervention)
   * - Simulation time step
-    - 0.5 days
+    - 4 days
   * - Intervention scale-up rate
     - N/A: defined for maternal simulation
 
@@ -122,15 +122,15 @@ Vivarium Intravenous Iron - Children under five
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A: defined for maternal simulation (5 year burn-in period)
+    - N/A: defined for maternal simulation (5 year burn-in period if age end == 5)
   * - Date of simulation observation period start
     - January 1, 2025
   * - Date of intervention scale-up start
     - N/A: defined for maternal simulation
   * - Date of simulation end
-    - December 31, 2039
+    - December 31, 2040
   * - Simulation time step
-    - 0.5 days
+    - 4 days
   * - Intervention scale-up rate
     - N/A: defined for maternal simulation
 
@@ -371,12 +371,35 @@ Details on how to calculate weighted averages for specific simulation parameters
      - Reran simulation with early neonates only to test hypothesis that we were underestimating LRI EMR due to stochastic variation.
      - We are still underestimating LRI EMR to the same degree in this run. We think that the underestimation may instead be caused by the equation used to convert rates into probabilities on a given timestep, for which the values do not approximate each other well when the rate is high relative to the duration of the timestep. This problem is exacerbated by the implementation of the LBWSG risk factor, which makes the LRI EMR very high for simulants in high risk LBWSG categories, causing us to significantly underestimate the probability of death on a given timestep. We wil run a test run of the simulation with a timestep of 0.1 days rather than 0.5 days to investigate this hypothesis. 
    * - 3.2.1.1 ENN only, 0.1 day timestep
-     - Reran simulation with early neonates only and 0.1 rather than 0.5 day timestep to test hypothesis that we were underestimating LRI EMR due to bad approximation between rates and probabilities when rates are very high relative to timestep duration (which is excacerbated by LBWSG risk effects).
+     - Re-ran simulation with early neonates only and 0.1 rather than 0.5 day timestep to test hypothesis that we were underestimating LRI EMR due to bad approximation between rates and probabilities when rates are very high relative to timestep duration (which is excacerbated by LBWSG risk effects).
      - LRI EMR was still significantly underestimated, although it increased from 50.1 to 54.6 for early neonatal males in South Asia.
    * - 4.0 Line list demography from maternal outputs
      - Simulation run from line list demography fertility component from maternal model 8.0 simulation outputs
      - [1] `LBWSG exposure data for South Asia from the maternal outputs was used for both SA and SSA in this run, so the exposure does not validate for SSA but looks good for SA, as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_lbwsg_exposure.ipynb>`_ [2] `Probability of male at birth is slightly underestimated and does not significantly vary by location (appears to just be 50/50... follow-up with maternal sim request). <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_population_structure.ipynb>`_ [3] `Population age structure looks as expected by the sixth year of the simulation (as expected). <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_population_structure.ipynb>`_ [4] `Cause models look off, as expected due to LBWSG calibration issues. <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_4/model_4.0_cause_model_validation.ipynb>`_
-
+   * - `5.1 through 5.3 <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/child/model_5>`_
+     - Series of subruns, run with only maternal supplementation intervention effects (model 5.1), antenatal IV iron effects (model 5.2), joint pregnancy BMI/HGB effects (model 5.3) for select scenarios
+     - `Intervention effects <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_5/Intervention%20effects%20on%20BW%2C%205.1%2C%205.2%2C%20and%205.3.ipynb>`_ and coverage look as expected
+   * - `5.4.1 <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/child/model_5>`_
+     - Effect of BW on CGF for baseline and antenatal IV iron scenarios
+     - `Looks generally as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_5/bw_on_cgf_effect_5.4.1.ipynb>`_
+   * - `5.5.0 <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/child/model_5>`_
+     - All components, 2022-2027
+     - `Differences in DALYs between scenarios was looking less than expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_5/Deaths%20and%20dalys%20averted%20(pre%20LBWSG%20unmodeled%20affected%20cause%20addition).ipynb>`_. Realized that we had not included a cause for unmodeled causes affected by LBWSG in this model, so changes in BW were not impacting neonatal mortality as expected.
+   * - `5.5.1 <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/child/model_5>`_
+     - All components, with unmodeled affected LBWSG causes, 2022-2027
+     - Impacts of BW changes are matching expected magnitude now
+   * - 6.0 (neonatal only)
+     - All components, 2024 to 2040, neonatal ages only due to runtime constraints 
+     - `Looks as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_6/>`_
+   * - 6.0 .one_draw_full_model
+     - Single draw, all components, 0-5 year olds, 2024-2040
+     - `Overall looks as expected <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_6/Full%20CGF%20run%2C%20single%20draw.ipynb>`_. For SSA, inclusion of 1 month to 5 year olds represents and additional ~7 percent of averted burden in IV iron scenario relative to baseline. But relative to oral iron, effect is smaller at ~2%. (To continue to expand on explanation, as started in the `BOE notebook <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BW%20on%20CGF%20BOE.ipynb>`_)
+   * - `6.1 diarrhea neonatal split <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/child/model_6/NN%20diarrhea%20and%20timestep%20run.ipynb>`_
+     - All components, diarrheal diseases age_start changed to post_neonatal, 25 draws, 200 seeds. Testing multiple time-step durations: 0.5, 2, 3, and 4 days.
+     -  * For 0.5 day timestep, all looks as expected -- diarrheal diseases age restriction appears to be implemented correctly (NOTE: need make sure LBWSG is affecting LRI and DD mortality in interactive sim). 
+        * Neonatal mortality is still validating with the 2 day timestep. However, LRI and diarrheal diseases remission rate calculation did not appear to update according to timestep change, causing an underestimation of the remission rate and an overestimation of prevalence and associated burden.
+        * For 3 day timestep, fix was implemented to update diarrheal diseases and LRI remission rates, and cause models are now validating. Mortality in the neonatal ages also still validating, so will move on to 4 day timestep.
+        * For 4 day timestep, validation for South Asia looks good. For SSA, it's a bit farther off, but no farther than 0.5 day timestep. Will move forward with 4 day timestep for future runs.
 
 .. list-table:: Outstanding model verification and validation issues
   :header-rows: 1
@@ -385,10 +408,10 @@ Details on how to calculate weighted averages for specific simulation parameters
     - Explanation
     - Action plan
     - Timeline
-  * - Underestimation of LRI EMR in neonatal age groups 
-    - We suspect it is because the timestep is too long relative to the rate of LRI EMR in the highest risk LBWSG categories
-    - Update the current LRI cause model to be restricted to the post-neonatal and 1-4 year age groups (exclude the early and late neonatal age groups) and add LRI to the "unmodeled affected" cause list for the LBWSG risk factor.
-    - Circle back to this once we get all other model functionality working.
+  * -  
+    -  
+    -  
+    -  
 
 .. _ivironU54.4:
 
