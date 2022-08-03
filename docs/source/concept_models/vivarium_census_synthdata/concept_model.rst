@@ -785,6 +785,10 @@ We might want to eventually include nicknames and suffixes like Jr. and III.
         df_population.loc[df_age.index, 'first_name'] = random_names(age, sex, len(df_age))
         df_population.loc[df_age.index, 'middle_name'] = random_names(age, sex, len(df_age))
 
+Note that if someone is born after 2020, their first name is sampled
+from first names in 2020, while for individuals born earlier their
+name is sampled from first names of birth year.
+	
 It could be valuable to include correlation between first and last
 names.  There will be a little from the strategy described above, but
 we could develop a strategy to more explicitly model it.  One approach
@@ -802,6 +806,11 @@ common last names stratified by race/ethnicity.  There will likely be
 funny combinations of first and last names for certain race groups
 (e.g. South Asian first names with East Asian last names) but we are
 not expecting to get that right.
+
+Hyphenated last names are merged together from samples of random last
+names (by race/ethnicity). This likely creates some strange last
+names, so have a careful look at this in validation, and decide if
+refinement is needed.
 
 2.3.7 Component 11: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1025,6 +1034,15 @@ changes per 100 person years.  For now, we will have distinct
 addresses for businesses and households, but eventually we might want
 to intentionally include duplicates, e.g. if someone operates a
 business out of their home.
+
+To keep things simple, for now when businesses move to a new address,
+it will be a totally new address. No household or business will ever
+move into their old address.
+
+We have also included a special "employer" to indicate individuals who
+are *not* currently employed.  We assume that 58% of the population is
+employed, which leads to a lot of individual switching to being
+unemployed.  We might need to refine this in the future.
 
 The data we will extract from this network for our simulated tax
 return is a list of businesses and their unique id numbers and for
