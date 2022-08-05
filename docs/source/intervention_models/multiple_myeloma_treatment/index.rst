@@ -607,32 +607,71 @@ match those generated within Foundry. It requires access to all the files in J:\
 Postprocessing rules
 ~~~~~~~~~~~~~~~~~~~~
 
-Goals
-^^^^^
+Estimated population-level probabilities
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Our postprocessing rules are designed so that:
+In the postprocessing rules, there are several places where we'd like to rescale probabilities of a regimen category or a set of regimen categories to match some target probability.
+However, we only want to match the target value **at the population level**, without eliminating the individual variation in that probability.
+In other words, we want to rescale so that if there were a large enough population of simulants, they would transition to the category or categories with the target probability,
+but we also want the ratios of the probabilities between simulants to be unchanged by this rescaling.
+In the actual simulation, this "large population" is hypothetical, because for any specific line number on a specific timestep, the population will be
+small, and covariate distributions will be unstable from timestep to timestep. This means that we cannot directly observe the population-level probabilities.
+
+For naive treatment assignment models, this is not a problem in practice, because there is no individual variation. Therefore, the naive probabilities already represent probabilities in
+an arbitrarily large population. However, when using sophisticated treatment assignment models, we need a population large enough to have a representative distribution of covariates.
+
+We approximate the population by starting from all Flatiron patients receiving a new line of treatment in that setting (NDMM or RRMM) and assigning them the relevant line number
+and calendar year without changing any other attributes.
+This will differ from the true population in the simulation, but should be similar enough to make rescaling fairly accurate.
+We then estimate the population-level probabilities by aggregating treatment assignment model predictions for this dataset.
+
+The key is that, at each postprocessing step, we not only apply the step to the actual simulant-level probabilities for the timestep, but also to the estimated population-level probabilities.
+This means that they are kept in sync: at each point in the postprocessing algorithm, the estimated population-level probabilities are our best estimate of what a large population's mean probabilities
+would be **just before that step**.
+
+The estimated probabilities before any postprocessing steps are applied, calculated for each line number at the start of each calendar year, can be found at
+J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\dara_coverage_from_flatiron.csv.
+At each timestep, the probabilities used are a linear interpolation between the adjacent years according to the date at that timestep.
+
+.. todo::
+
+  Update this data file to be probabilities for each regimen.
+
+China adjustments
+^^^^^^^^^^^^^^^^^
+
+.. todo::
+
+  Fill in this section.
+
+Isa and Dara projection and scenarios
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Goals
+'''''
+
+Our Isa and Dara projection/scenario postprocessing rules are designed so that:
 
 * We do not assign Isa or Dara regimen categories before those treatments were approved/in use.
-* We approximately match the Isa coverage (sum of all Isa-containing regimen categories) from our line- and year-specific projections.
-* We approximately match the Dara coverage (sum of all Dara-containing regimen categories) from our internal projections. Though we do have the sample size to inform this from Flatiron, it is not clear how to extrapolate it (see coverage inputs section below).
-* The split between the Isa-containing regimen categories matches the split between the analogous Dara-containing categories observed in Flatiron, conditional on covariates.
-* All non-Isa categories are associated with covariates according to the observed associations in Flatiron.
+* We approximately match the Isa coverage (sum of all Isa-containing regimen categories) from our location-, line-, and year-specific projections.
+* We approximately match the Dara coverage (sum of all Dara-containing regimen categories) from our location-, line-, and year-specific projections. Though we do have the sample size to inform US values from Flatiron, we needed to extrapolate them in a custom, expert-opinion-informed way (see US projections section below).
+* The split between the Dara-containing regimen categories is unchanged.
+* The split between the Isa-containing regimen categories matches the split between the analogous Dara-containing categories, conditional on covariates.
+* The associations between all non-Isa categories and simulant-level covariates are unchanged.
 * Isa is associated with covariates -- besides line and year -- in the same way as Dara (they have the same patient profile), except that when it follows Dara in our Isa-after-Dara scenario, it is constant across these covariates.
 * The probability of interest for each of our alternative scenarios (probability of Isa after Dara, probability of Isa in the first line) approximates our specified probability in that scenario, and is zero in all other scenarios. When Isa scales up in these scenarios, it selectively replaces Dara.
-* We use extrapolation from Flatiron data to project time trends of all regimen categories **that do not contain Isa or Dara** into the future. This may be a linear or flat (every future year is like the present) extrapolation, depending on treatment assignment model choices.
-* We do not change the model-predicted probability split between ASCT and non-ASCT treatment.
+* Time trends of all regimen categories **that do not contain Isa or Dara** are unchanged. Because the sophisticated models are random forests, they use a flat (every future year is like the present) extrapolation.
+* The split between ASCT and non-ASCT treatment is unchanged **for each simulant**.
 
 Detailed description
-^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''
 
 After getting the predicted probabilities from the model as described above, perform the following steps:
 
-#. Before applying any rules, record the probability of ASCT and the probability of non-ASCT treatment. These should sum to 1 and will be used in the final re-normalization.
-#. Multiply the probability of each Dara-containing regimen category by :math:`\text{dara_target_coverage} / \text{projected_dara}`, where dara_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Dara coverage" data file, and projected_dara is a linear interpolation or extrapolation by year of the line-specific value of "Dara_all" from the "Projected Dara coverage from Flatiron" data file.
-#. If the date is before Jan. 1, 2016 and this is an RRMM assignment, set the probabilities of all Dara-containing categories to 0.
-#. If the date is before Jan. 1, 2019 and this is an NDMM assignment, set the probabilities of all Dara-containing categories to 0.
+#. Before applying any Isa/Dara rules, record the probability of ASCT and the probability of non-ASCT treatment. These should sum to 1 and will be used in the final re-normalization.
+#. Multiply the probability of each Dara-containing regimen category by :math:`\text{dara_target_coverage} / \text{population_dara}`, where dara_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Dara coverage" data file, and population_dara is the sum of the estimated population-level probabilities of Dara-containing regimen categories (see section above).
 #. For each of the regimen category pairs that only differ by substituting Isa with Dara, perform this step:
-    * Set the probability of the Isa-containing category to :math:`p_\text{dara} * \frac{\text{isa_target_coverage}}{\text{dara_target_coverage} * (\text{projected_dara_isa_corresponding} / \text{projected_dara})}`, where :math:`p_\text{dara}` is the probability of the corresponding Dara regimen category (after application of previous steps), isa_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Isa coverage" data file, dara_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Dara coverage" data file, projected_dara_isa_corresponding is a linear interpolation or extrapolation by year of the scenario- and line-specific value of "Dara_Isa_corresponding" from the "Dara coverage from Flatiron" data file, and projected_dara is a linear interpolation or extrapolation by year of the line-specific value of "Dara_all" from the "Projected Dara coverage from Flatiron" data file.
+    * Set the probability of the Isa-containing category to :math:`p_\text{dara} * \frac{\text{isa_target_coverage}}{\text{population_dara_isa_corresponding}}`, where :math:`p_\text{dara}` is the probability of the corresponding Dara regimen category (after application of previous steps), isa_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Isa coverage" data file, and population_dara_isa_corresponding is the sum of the estimated population-level probabilities of Dara regimen categories that only differ from an Isa regimen category by substituting Dara with Isa (see section above).
 #. If this is an RRMM assignment and the previous line contained a Dara component (in other words, if the Dara_flag_previous in the model covariates table above is 1):
     #. If the scenario is alternative scenario 2 (Isa-after-Dara) and the patient is in second line treatment (first relapse state), multiply the probabilities of all Dara-containing categories by ((the sum of the probabilities of all the Isa- **or** Dara-containing categories - target Isa retreatment coverage) / the sum of all the Dara-containing categories), then multiply the probabilities of all Isa-containing categories by (target Isa retreatment coverage / the sum of the probabilities of all the Isa-containing categories), where "target Isa retreatment coverage" is 0.05 or the sum of all Isa- **or** Dara-containing categories, whichever is less.
     #. Otherwise, multiply the probabilities of all Dara-containing categories by (the sum of all the Isa- **or** Dara-containing categories / the sum of all the Dara-containing categories), then set the probabilities of all Isa-containing categories to 0.
@@ -644,8 +683,8 @@ After getting the predicted probabilities from the model as described above, per
 #. The probabilities should now sum to 1, and the probabilities of Isa- and Dara-containing categories should not have changed in the last two steps.
 #. Sample the assigned treatment.
 
-Coverage inputs
-^^^^^^^^^^^^^^^
+US projections
+''''''''''''''
 
 .. image:: dara_coverage_plot.png
   :width: 800
@@ -659,11 +698,9 @@ setting and 55% in the RRMM setting. Our projections do not vary by line within 
 
 Data files:
 
-:download:`Target Isa coverage <target_isa_coverage.csv>`
+:download:`Target Isa coverage in the US <target_isa_coverage.csv>`
 
-:download:`Target Dara coverage <target_dara_coverage.csv>`
-
-Dara coverage from Flatiron can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\dara_coverage_from_flatiron.csv.
+:download:`Target Dara coverage in the US <target_dara_coverage.csv>`
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
