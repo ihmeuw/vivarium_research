@@ -162,9 +162,9 @@ There are several components that affect hemoglobin during pregnancy, including 
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - January 1, 2020 (note: burn-in is to track birth data for the child sim, not for maternal outcomes)
+    - January 1, 2019 (note: 1 year burn-in to initialize pregnancy, five year burn-in to initialize child population)
   * - Date of simulation observation period start
-    - January 1, 2025
+    - January 1, 2025 (NOTE: child outcomes should be tracked starting January 1, 2020)
   * - Date of intervention scale-up start
     - Janary 1, 2025
   * - Date of simulation end
@@ -474,13 +474,13 @@ Probability of sampling from a given country's hemoglobin distribution using the
      - Value
      - Note
    * - Population size
-     - 2,000,000
-     - per random seed/draw combination
+     - 10,000 
+     - per random seed
    * - Number of draws
-     - 66
+     - 50
      - 
    * - Number of random seeds
-     - 10
+     - 120
      - per draw
    * - Cohort type
      - **Open**
