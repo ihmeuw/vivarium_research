@@ -250,6 +250,10 @@ As new locations are added to this model, there are several data values that nee
 
   - `BMI exposure given high hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
 
+- Hemoglobin on maternal disorders PAF
+
+  - `Notebook for PAF calculation and PAF data available in this folder <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/parameter_aggregation/hemoglobin_maternal_disorder_pafs>`_. Note that this is a resource-intensive computation, but it has already been performed for each national location within the Sub-Saharan Africa and South Asia locations. Otherwise, a potential solution to reduce computational intensity is to perform the calculation for a subset of randomly selected draws to be used in the simulation.
+
 - ANC and IFD estimates (used in the calculation of intervention coverage below)
 
   - `Calculation performed here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/Aggregation%20of%20ANC%20and%20IFD.ipynb>`_
