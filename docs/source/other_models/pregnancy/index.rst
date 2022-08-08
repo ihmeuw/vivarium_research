@@ -241,7 +241,7 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   *At initialization:*
 
   1. Assign pregnancy state according to state prevalence values
-  2. Assign pregnancy outcome according to pregnancy outcome table probabilities
+  2. Assign partial or full term duration according to table in `Pregnancy term lengths`_ section
   3. Assign sex of infant if pregnancy outcome is a stillbirth or live birth
   4. Assign duration of pregnancy depending on pregnancy outcome and sex of the infant
   5. Determine the amount of time remaining in pregnancy from the duration of pregnancy
@@ -249,30 +249,35 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
 
   *During simulation:*
 
-    Determine pregnancy model state according to state at initialization and state transition rates. Upon transition from the np to p state, follow steps 2-4 described above.
+    - Determine pregnancy model state according to state at initialization and state transition rates. 
+
+    - Upon transition from the np to p state, follow steps 2-4 described above.
+
+    - Upon birth (transition out of p state), assign pregnancy outcome
+
+      - :code:`other` for partial duration pregnancies
+
+      - :code:`live_birth` or :code:`stillbirth` for full duration pregnancies, according to table in `Pregnancy outcomes`_ section
 
   (Specific instructions for each of these steps described in the following sections.)
 
-Pregnancy outcome
-~~~~~~~~~~~~~~~~~~
+Pregnancy term lengths
+~~~~~~~~~~~~~~~~~~~~~~~
 
-A pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) abortion/miscarriage. The probability of each pregnancy outcome is defined in the table below. The outcome of each pregnancy should be determined at the start of pregnancy in our simulation (upon transition from the np to p states or upon initialization into the p state). 
+At the beginning of pregnancy, it should be determined whether the pregnancy will be partial term or full term  according to the probabilities in the table below.
 
-.. list-table:: Pregnancy outcomes
+.. list-table:: Pregnancy term lengths probabilities
   :header-rows: 1
 
-  * - Outcome
+  * - Term length
     - Probability
     - Note
-  * - Live birth
-    - ASFR / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
-    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The probability of a livebirth outcome will increase as a result of the reduction in the probability of a stillbirth associated with iron interventions during pregnancy (to be implemented in model version III).
-  * - Stillbirth
-    - (ASFR * SBR) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
-    - The probability of a stillbirth outcome will decrease as a result of iron interventions during pregnancy in the IV iron simulation (to be implemented in model version III)
-  * - Other (abortion, miscarriage, ectopic pregnancy)
+  * - Partial term
     - (incidence_c995 + incidence_c374) / (ASFR + ASFR * SBR + incidence_c995 + incidence_c374)
-    -     
+    - 
+  * - Full term
+    - 1 - probability_partial_term
+    - 
 
 Sex of infant
 ~~~~~~~~~~~~~~~
@@ -299,19 +304,69 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
     *   - World bank low income
         - 44578
         - 0.512684
+    *   - India 
+        - 163
+        - 
+    *   - Nigeria
+        - 214
+        -
+    *   - Ethiopia
+        - 179
+        -
 
 Duration of pregnancy
 ~~~~~~~~~~~~~~~~~~~~~~~~
 
 A duration of pregnancy value will need to be assigned to all pregnancies regardless of the pregnancy outcome. This value will inform the duration that the simulant remains in the pregnancy state prior to transitioning to the postpartum state.
 
-For pregnancies that result in abortion/miscarriage/ectopic pregnancy, assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty).
+For partial term pregnancies (that result in abortion/miscarriage/ectopic pregnancy), assign a duration of pregnancy sampled from a uniform distribution beween 6 and 24 weeks (individual heterogeneity with no parameter uncertainty).
 
-For pregnancies that result in live births or stillbirths, duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
+For full term pregnancies (that result in live births or stillbirths), duration of pregnancy should be determined by gestational age exposure, which should be assigned according to the process for assigning LBWSG exposures described in the :ref:`risk correlation document between maternal BMI, maternal hemoglobin, and infant LBWSG exposure <2019_risk_correlation_maternal_bmi_hgb_birthweight>`. The LBWSG exposure distribution used to assign gestational age exposures should be specific to the sex of the infant for a given pregnancy (discussed in the above section). Note that the gestational age distribution is measured in weeks and will need to be converted to the equivalent simulation time measure.
 
 For simulants who are initialized into the pregnancy state at the start of the simulation:
 
    Assign the simulant a duration of pregnancy/gestational age value and then sample a random value from a uniform distribution between zero and the assigned gestational age value. The randomly sampled value will represent the current gestational duration of that pregnancy. The simulant should remain in the pregnancy state prior to transitioning to the postpartum state for the duration equal to the assigned gestational age value *minus* the randomly sampled value.
+
+Pregnancy outcomes
+~~~~~~~~~~~~~~~~~~
+
+At the time of birth, pregnancy outcome must be determined for each pregnancy as either a 1) live birth, 2) stillbirth, or 3) other (ectopic pregnancy, abortion/miscarriage). The probability of each pregnancy outcome dependent on the pregnancy term length and probabilities of each outcome conditional on pregnancy term are defined in the table below. 
+
+.. list-table:: Pregnancy outcome probabilities conditional on pregnancy term length
+  :header-rows: 1
+
+  * - Pregnancy term length
+    - Outcome
+    - Conditional probability
+    - Note
+  * - Partial term
+    - Live birth
+    - 0
+    - 
+  * - Partial term
+    - Stillbirth
+    - 0
+    - 
+  * - Partial term
+    - Other (abortion, miscarriage, ectopic pregnancy)
+    - 1
+    -     
+  * - Full term
+    - Live birth
+    - ASFR / (ASFR + ASFR * SBR)
+    - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The :ref:`probability of a livebirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
+  * - Fall term
+    - Stillbirth
+    - (ASFR * SBR) / (ASFR + ASFR * SBR)
+    - The :ref:`probability of a stillbirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
+  * - Partial term
+    - Other (abortion, miscarriage, ectopic pregnancy)
+    - 0
+    - 
+
+.. note::
+
+  The current modeling strategy is dependent on our assumption that live births and stillbirths have the same duration. There is ongoing work at IHME to estimate gestational age at birth distributions among stillbirths. If we were to incorporate this new data, we would need to devise a new modeling strategy that would allow for more flexibility in assigning pregnancy duration and pregnancy outcome, allowing *both* to vary by late-term hemoglobin concentration.
 
 Assumptions and limitations
 ++++++++++++++++++++++++++++
