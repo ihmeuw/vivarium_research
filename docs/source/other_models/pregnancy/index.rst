@@ -355,11 +355,11 @@ At the time of birth, pregnancy outcome must be determined for each pregnancy as
     - Live birth
     - ASFR / (ASFR + ASFR * SBR)
     - This outcome will be used to inform the demography model of children under 5 for the IV iron simulation. The :ref:`probability of a livebirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
-  * - Fall term
+  * - Full term
     - Stillbirth
     - (ASFR * SBR) / (ASFR + ASFR * SBR)
     - The :ref:`probability of a stillbirth outcome is modified by the hemoglobin risk factor <2019_risk_effect_iron_deficiency>`.
-  * - Partial term
+  * - Full term
     - Other (abortion, miscarriage, ectopic pregnancy)
     - 0
     - 
