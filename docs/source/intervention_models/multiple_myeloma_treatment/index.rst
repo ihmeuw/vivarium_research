@@ -607,6 +607,13 @@ match those generated within Foundry. It requires access to all the files in J:\
 Postprocessing rules
 ~~~~~~~~~~~~~~~~~~~~
 
+Postprocessing rules flowchart
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. image:: postprocessing_flowchart.svg
+  :width: 500
+  :alt: Flowchart of postprocessing rules
+
 Estimated population-level probabilities
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
