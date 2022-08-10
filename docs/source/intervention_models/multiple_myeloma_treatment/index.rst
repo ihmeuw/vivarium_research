@@ -613,7 +613,7 @@ Estimated population-level probabilities
 In the postprocessing rules, there are several places where we'd like to rescale probabilities of a regimen category or a set of regimen categories to match some target probability.
 However, we only want to match the target value **at the population level**, without eliminating the individual variation in that probability.
 In other words, we want to rescale so that if there were a large enough population of simulants, they would transition to the category or categories with the target probability,
-but we also want the ratios of the probabilities between simulants to be unchanged by this rescaling.
+but we also want the ratios of each probability *between* simulants to be unchanged by this rescaling.
 In the actual simulation, this "large population" is hypothetical, because for any specific line number on a specific timestep, the population will be
 small, and covariate distributions will be unstable from timestep to timestep. This means that we cannot directly observe the population-level probabilities.
 
@@ -630,19 +630,52 @@ This means that they are kept in sync: at each point in the postprocessing algor
 would be **just before that step**.
 
 The estimated probabilities before any postprocessing steps are applied, calculated for each line number at the start of each calendar year, can be found at
-J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_07_16\\dara_coverage_from_flatiron.csv.
+J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\2022_08_10\\population_level_probabilities.csv.
 At each timestep, the probabilities used are a linear interpolation between the adjacent years according to the date at that timestep.
-
-.. todo::
-
-  Update this data file to be probabilities for each regimen.
 
 China adjustments
 ^^^^^^^^^^^^^^^^^
 
-.. todo::
+Goals
+'''''
 
-  Fill in this section.
+Our China adjustment postprocessing rules are designed so that:
+
+* We approximately match our population-level NDMM induction coverage targets for each cytogenetic risk grouping. The target values are interpreted as proportions **among treatments except for Other and Other+ASCT** for lower-granularity groups of regimen categories: Dara quadruplets, Dara triplets, other triplets, doublets, and regimen categories not seen in China (always set to 0). Note that these induction targets are not stratified by ASCT.
+    * Dara quadruplets: Dara+PI+IMID+Dex and Dara+PI+Chemo+Dex, with and without ASCT
+    * Dara triplets: Dara+PI+Dex and Dara+IMID+Dex, with and without ASCT
+    * Other triplets: PI+IMID+Dex and Chemo+PI+Dex, with and without ASCT
+    * Doublets: PI+Dex and IMID+Dex, with and without ASCT
+    * Not seen in China (probabilities set to 0): Chemo+IMID+Dex, with and without ASCT 
+* We approximately match our population-level RRMM induction coverage targets, which are for the same groups of regimen categories, but not separated by cytogenetic risk.
+* We approximately match our population-level NDMM targets for the probability of treatment containing ASCT or not.
+* As much as possible, we do not change the probability ratios between simulants for each regimen category. In other words, if Simulant 1 was twice as likely as Simulant 2 to receive PI+IMID+Dex before these rules, that should still be the case after these steps. However, we are forced to compromise on this requirement when we normalize each simulant's probabilities to sum to 1.
+* Within any of the above groups of regimen categories, for a single ASCT value (e.g. Dara triplets with ASCT), we do not change the ratios of probabilities between the regimen categories within it. This is true not only for the population but also at the simulant level.
+
+The word "approximately" in the population-level constraints above refers to two limitations that prevent us from exactly meeting these targets:
+
+* Our sample size on any one timestep for treatment assignment is small, so we calibrate our rescaling factors to match the targets in a larger synthetic population. However, this population is derived from the Flatiron joint distribution of covariates, which can differ from the true simulation joint distribution.
+* The NDMM values have both induction and ASCT constraints, and both NDMM and RRMM probabilities must satisfy the constraint that they sum to 1 at the simulant level. In practice, there is no way to exactly satisfy all these constraints at the same time. We could use a technique like IPF to iteratively converge on the solution, but for now we do something even simpler: rescale to the marginals in a particular order (essentially one iteration of IPF). That means that the last marginal "wins" and is exactly matched. The order (currently) is: induction constraints, simulant probabilities sum to 1, ASCT/non-ASCT constraints (if present), simulant probabilities sum to 1.
+
+Detailed description
+''''''''''''''''''''
+
+Perform the following steps:
+
+#. If in NDMM, do this step separately for each cytogenetic risk group (high risk and standard risk); if in RRMM, do this step for the population overall:
+     #. **Note:** The input data for population-level probabilities are not stratified by cytogenetic risk. However, in the NDMM setting, there is no correlation between treatment and cytogenetic risk. Therefore, the correct population-level probabilities can be created by replicating the existing probabilities and assigning cytogenetic risk at random according to the exposure proportion.
+     #. For each coverage target (Dara quadruplets, Dara triplets, Other triplets, Doublets), scale the regimen categories within it to match the target coverage at the population level. Specifically, multiply the probabilities of the regimen categories within it by :math:`\frac{\text{coverage_target}}{\text{population_target_regimen_categories}}`, where coverage_target is the target coverage from the "China coverage targets" data file, and population_target_regimen_categories is the sum of probabilities of the regimen categories included in this coverage target at the population level **after filtering to the cytogenetic risk group** (see "Estimated population-level probabilities" section).
+#. Set the probabilities of all regimen categories in the "Not seen in China" list to 0.
+#. Re-normalize the probabilities to 1 without modifying the Other and Other+ASCT probabilities. Specifically, multiply the probabilities of the categories **besides Other and Other+ASCT** by :math:`\frac{1 - \text{other_simulant}}{\text{non_other_simulant}}`, where other_simulant is the sum of the probabilities of Other and Other+ASCT for that particular simulant, and non_other_simulant is the sum of the probabilities of the categories besides Other and Other+ASCT for that particular simulant.
+#. If in NDMM, for each ASCT coverage target (ASCT and non-ASCT), scale the regimen categories within it to match the target coverage at the population level. Specifically, multiply the probabilities of the regimen categories within it by :math:`\frac{\text{coverage_target}}{\text{population_target_regimen_categories}}`, where coverage_target is the target coverage from the "China coverage targets" data file, and population_target_regimen_categories is the sum of probabilities of the regimen categories included in this coverage target at the population level (see "Estimated population-level probabilities" section).
+#. Re-normalize the probabilities to 1. Specifically, multiply the probabilities by :math:`\frac{1}{\text{total_simulant}}`, where total_simulant is the sum of all probabilities for that particular simulant.
+
+Coverage targets
+''''''''''''''''
+
+**Note**: The coverage for Dara triplets in NDMM with high risk has been set to 0.01% instead of 0. This is because Dara triplets are the only regimen categories in our simulation that directly correspond to Isa triplets, and allow us to scale up Isa in NDMM using their individual variation, so we can't remove it completely. We do not have Isa quadruplets in our simulation.
+
+:download:`China coverage targets <china_coverage_targets.csv>`
 
 Isa and Dara projection and scenarios
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -666,13 +699,14 @@ Our Isa and Dara projection/scenario postprocessing rules are designed so that:
 Detailed description
 ''''''''''''''''''''
 
-After getting the predicted probabilities from the model as described above, perform the following steps:
+Perform the following steps:
 
 #. Before applying any Isa/Dara rules, record the probability of ASCT and the probability of non-ASCT treatment. These should sum to 1 and will be used in the final re-normalization.
-#. Multiply the probability of each Dara-containing regimen category by :math:`\text{dara_target_coverage} / \text{population_dara}`, where dara_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Dara coverage" data file, and population_dara is the sum of the estimated population-level probabilities of Dara-containing regimen categories (see section above).
+#. Multiply the probability of each Dara-containing regimen category by :math:`\text{dara_target_coverage} / \text{population_dara}`, where dara_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Dara coverage" data file, and population_dara is the sum of the estimated population-level probabilities of Dara-containing regimen categories (see "Estimated population-level probabilities" section).
 #. For each of the regimen category pairs that only differ by substituting Isa with Dara, perform this step:
-    * Set the probability of the Isa-containing category to :math:`p_\text{dara} * \frac{\text{isa_target_coverage}}{\text{population_dara_isa_corresponding}}`, where :math:`p_\text{dara}` is the probability of the corresponding Dara regimen category (after application of previous steps), isa_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Isa coverage" data file, and population_dara_isa_corresponding is the sum of the estimated population-level probabilities of Dara regimen categories that only differ from an Isa regimen category by substituting Dara with Isa (see section above).
+    * Set the probability of the Isa-containing category to :math:`p_\text{dara} * \frac{\text{isa_target_coverage}}{\text{population_dara_isa_corresponding}}`, where :math:`p_\text{dara}` is the probability of the corresponding Dara regimen category (after application of previous steps), isa_target_coverage is a linear interpolation or extrapolation by year of the scenario- and line-specific value in the "Target Isa coverage" data file, and population_dara_isa_corresponding is the sum of the estimated population-level probabilities of Dara regimen categories that only differ from an Isa regimen category by substituting Dara with Isa (see "Estimated population-level probabilities" section).
 #. If this is an RRMM assignment and the previous line contained a Dara component (in other words, if the Dara_flag_previous in the model covariates table above is 1):
+    #. **Note:** These operations cannot be performed on the population-level probabilities because they are not stratified by whether the previous line contained a Dara component. The population-level probabilities are not used in the remaining steps and can be discarded at this point.
     #. If the scenario is alternative scenario 2 (Isa-after-Dara) and the patient is in second line treatment (first relapse state), multiply the probabilities of all Dara-containing categories by ((the sum of the probabilities of all the Isa- **or** Dara-containing categories - target Isa retreatment coverage) / the sum of all the Dara-containing categories), then multiply the probabilities of all Isa-containing categories by (target Isa retreatment coverage / the sum of the probabilities of all the Isa-containing categories), where "target Isa retreatment coverage" is 0.05 or the sum of all Isa- **or** Dara-containing categories, whichever is less.
     #. Otherwise, multiply the probabilities of all Dara-containing categories by (the sum of all the Isa- **or** Dara-containing categories / the sum of all the Dara-containing categories), then set the probabilities of all Isa-containing categories to 0.
 #. Split the probabilities into two sets: those that contain ASCT and those that do not. Within each set:
@@ -701,6 +735,13 @@ Data files:
 :download:`Target Isa coverage in the US <target_isa_coverage.csv>`
 
 :download:`Target Dara coverage in the US <target_dara_coverage.csv>`
+
+China projections
+'''''''''''''''''
+
+.. todo::
+
+  Fill in this section.
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
