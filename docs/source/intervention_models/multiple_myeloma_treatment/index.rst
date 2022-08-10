@@ -741,9 +741,13 @@ Data files:
 China projections
 '''''''''''''''''
 
-.. todo::
+Data files:
 
-  Fill in this section.
+:download:`Target Isa coverage in China <target_isa_coverage_china.csv>`
+
+:download:`Target Dara coverage in China <target_dara_coverage_china.csv>`
+
+Details on the calculation of these values can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\China Projections.xlsx
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
