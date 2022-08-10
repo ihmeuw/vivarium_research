@@ -673,7 +673,9 @@ Perform the following steps:
 Coverage targets
 ''''''''''''''''
 
-**Note**: The coverage for Dara triplets in NDMM with high risk has been set to 0.01% instead of 0. This is because Dara triplets are the only regimen categories in our simulation that directly correspond to Isa triplets, and allow us to scale up Isa in NDMM using their individual variation, so we can't remove it completely. We do not have Isa quadruplets in our simulation.
+.. note::
+
+  The coverage for Dara triplets in NDMM with high risk has been set to 0.01% instead of 0. This is because triplets are the only Dara regimen categories in the simulation that directly correspond to Isa regimen categories; there are no Isa quadruplets in the simulation. We can only use the Dara triplets' individual variation to scale up Isa in NDMM if they are non-zero at the point in the algorithm where we scale to our Isa targets. Setting the target coverage for Dara triplets to 0.01% is a workaround to make this possible without restructuring our Isa rules.
 
 :download:`China coverage targets <china_coverage_targets.csv>`
 
