@@ -657,7 +657,7 @@ Our China adjustment postprocessing rules are designed so that:
 * We approximately match our population-level RRMM induction coverage targets, which are for the same groups of regimen categories, but not separated by cytogenetic risk.
 * We approximately match our population-level NDMM targets for the probability of treatment containing ASCT or not.
 * As much as possible, we do not change the probability ratios between simulants for each regimen category. In other words, if Simulant 1 was twice as likely as Simulant 2 to receive PI+IMID+Dex before these rules, that should still be the case after these steps. However, we are forced to compromise on this requirement when we normalize each simulant's probabilities to sum to 1.
-* Within any of the above groups of regimen categories, for a single ASCT value (e.g. Dara triplets with ASCT), we do not change the ratios of probabilities between the regimen categories within it. This is true not only for the population but also at the simulant level.
+* The probability ratios between regimen categories indistinguishable to these targets are unchanged. For example, PI+IMID+Dex and Chemo+PI+Dex are both Dara triplets, and they are both non-ASCT. Both at the population level and at the individual simulant level, the ratio between the probability of PI+IMID+Dex and the probability of Chemo+PI+Dex is the same after the China adjustments as it was before.
 
 The word "approximately" in the population-level constraints above refers to two limitations that prevent us from exactly meeting these targets:
 
