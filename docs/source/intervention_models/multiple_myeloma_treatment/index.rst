@@ -797,8 +797,7 @@ Mortality and relapse hazard ratios for each regimen category, plus the major su
 network meta-analysis of published findings with study random effects. The majority of categories could
 be connected by a network of randomized controlled trials (RCTs).
 
-Some categories
-were connected using non-randomized evidence:
+Some categories were connected using non-randomized evidence:
 
 * Two matched analyses between different RCTs.
 * Two matched analyses comparing RCT evidence with claims data.
@@ -814,7 +813,8 @@ We also assumed that adding drugs could not make a regimen *less* effective.
 
 After estimating HRs for each subcategory, the HR
 of the 'Other' category was calculated by weighting these subcategories according to the observed proportions
-of use in Flatiron data. This was used for the 'Other' category in both the US and China locations, in absence of
+of use in Flatiron data.
+This was used for the 'Other' category in both the US and China locations, in absence of
 evidence about 'Other' treatments used in China.
 
 Below are the networks used to calculate mortality HRs in the NDMM and RRMM setting respectively. The networks for relapse HRs
