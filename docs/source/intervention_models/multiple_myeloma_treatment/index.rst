@@ -818,7 +818,7 @@ of use in Flatiron data. This was used for the 'Other' category in both the US a
 evidence about 'Other' treatments used in China.
 
 Below are the networks used to calculate mortality HRs in the NDMM and RRMM setting respectively. The networks for relapse HRs
-were nearly identical to these, with only a few added links (RCTs that reported relapse outcomes but did not have mature mortality data).
+were nearly identical to these, the only difference being a few added links (RCTs that reported relapse outcomes but did not have mature mortality data).
 
 .. image:: ndmm_TTD_simple_network.png
   :width: 500
