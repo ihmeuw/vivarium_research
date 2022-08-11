@@ -33,11 +33,14 @@ Multiple Myeloma Risk Factor Exposures
 ======================================
 
 
-We will follow the same strategy for risk factor exposures as in the :ref:`Multiple Myeloma Phase 1 concept model <2019_concept_model_vivarium_csu_multiple_myeloma>`, except that we are removing the race exposure, and we **may** change the age cutoff.
+We will follow the same strategy for risk factor exposures as in the :ref:`Multiple Myeloma Phase 1 concept model <2019_concept_model_vivarium_csu_multiple_myeloma>`, except that we are removing the race exposure, and changing the age cutoff.
 
-Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the table below. In addition, a dichotomous risk exposure value of <70 or 70+ should be assigned to each simulant based on the simulant's age at the time they are initialized into or transition into the newly diagnosed MM state.
+Upon diagnosis with multiple myeloma, simulants should be assigned values for each of the following characteristics, with the probability shown in the tables below, depending on location. In addition, a dichotomous risk exposure value of <70 or 70+ should be assigned to each simulant based on the simulant's age at the time they are initialized into or transition into the newly diagnosed MM state.
 
-.. list-table:: Risk Exposure Distributions Simulant Initialization
+United States
+-------------
+
+.. list-table:: Risk Exposure Distributions Simulant Initialization in the US
   :header-rows: 1
 
   * - Risk factor
@@ -58,3 +61,24 @@ The probability of high cytogenetic risk (34%) was obtained from [Rice-et-al-202
 The probability of renal impairment (40%) was obtained from [Derman-et-al-2020]_. This value was chosen instead of the value reported in [Braunlin-et-al-2021]_, as it was consistent with values from several other sources, as discussed in correspondence with the client.
 
 Given the lack of effect sizes available for renal insufficiency and cytogenetic risk where the effects are adjusted for only treatment and each other, we have made them uncorrelated in our simulation and use unadjusted effect sizes, as described in :ref:`the MM risk effects documentation <2019_multiple_myeloma_risk_factor_effects>`.
+
+China
+-----
+
+.. list-table:: Risk Exposure Distributions Simulant Initialization in the US
+  :header-rows: 1
+
+  * - Risk factor
+    - Exposed group
+    - Unexposed group
+    - Proportion exposed
+  * - Cytogenetic risk at diagnosis
+    - High cytogenetic risk
+    - Standard cytogenetic risk
+    - 0.45
+  * - Renal insufficiency at diagnosis
+    - Renal insufficiency
+    - No renal insufficiency
+    - 0.50
+
+These probabilities were informed by expert assumptions. As in the US, they are uncorrelated with each other.
