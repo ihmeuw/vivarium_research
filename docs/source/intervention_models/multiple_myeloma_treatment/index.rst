@@ -811,24 +811,43 @@ ASCT and induction regimen were assumed not to modify each others' effects.
 After estimating HRs relative to a common reference category by combination of induction regimen
 and ASCT effects, a HR relative to the common reference category was calculated for the population-level
 mix of treatments observed in Flatiron data, which informs the base hazard described above. All HRs were
-then modified to be relative to this population-level mix.
-
-.. csv-table:: Mortality hazard ratios
-  :file: mortality_hrs.csv
-  :header-rows: 1
-
-:download:`mortality_hrs.csv`
-
-.. csv-table:: Relapse hazard ratios
-  :file: relapse_hrs.csv
-  :header-rows: 1
-
-:download:`relapse_hrs.csv`
+then modified to be relative to this population-level mix. For the China simulation, the "China adjustment"
+postprocessing rules were performed before calculating the population-level mix.
 
 A log-normal distribution of uncertainty within the uncertainty intervals reported
 above should be assumed. The mortality and relapse hazard ratios for the same
 regimen category should be sampled with the same random percentile from their respective distributions,
 so that mortality and relapse effects are correlated.
+
+US Hazard Ratios
+~~~~~~~~~~~~~~~~
+
+.. csv-table:: Mortality hazard ratios for the US
+  :file: mortality_hrs.csv
+  :header-rows: 1
+
+:download:`mortality_hrs.csv`
+
+.. csv-table:: Relapse hazard ratios for the US
+  :file: relapse_hrs.csv
+  :header-rows: 1
+
+:download:`relapse_hrs.csv`
+
+China Hazard Ratios
+~~~~~~~~~~~~~~~~~~~
+
+.. csv-table:: Mortality hazard ratios for China
+  :file: mortality_hrs_china.csv
+  :header-rows: 1
+
+:download:`mortality_hrs_china.csv`
+
+.. csv-table:: Relapse hazard ratios for China
+  :file: relapse_hrs_china.csv
+  :header-rows: 1
+
+:download:`relapse_hrs_china.csv`
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -113,12 +113,19 @@ each exposure group :math:`g` has a hazard ratio such that:
 
   ln(HR_\text{g:reference}) \sim N(\mu_g, \sigma_g^2)
 
-To obtain the survival curve baseline HR, we need the proportions of the Flatiron data informing that
-curve in each risk factor group. We get these proportions in terms of person-time included in the curve.
+To obtain the survival curve baseline HR, we need the proportions of the data informing that
+curve in each risk factor group.
+
+For the US, we get these proportions in terms of Flatiron person-time included in the curve.
 Due to the Cox proportional-hazards source of the baseline curves, these proportions are invariant across
 lines. Note that for mortality HRs, we use Flatiron data informing the TTD curves, not the OS curve used for mortality in the last relapse state.
 
-The sum of the HR distributions weighted by group size in Flatiron gives the survival curve baseline HR relative to the reference group, assuming the weights :math:`w_g` have been normalized to sum to 1:
+For China, we use the same proportions :ref:`used to assign risk proportions at diagnosis in the simulation <2019_multiple_myeloma_risk_factor_exposures>` -- the specified constants for renal impairment and cytogenetic risk,
+and GBD incidence population proportions for age and sex. We assume that data informing our survival curves is
+representative of the Chinese population with multiple myeloma.
+As in the US, these proportions are applied to all lines; they are at the time of diagnosis, which may cause some bias later in the disease course.
+
+The sum of the HR distributions weighted by group size gives the survival curve baseline HR relative to the reference group, assuming the weights :math:`w_g` have been normalized to sum to 1:
 
 .. math::
 
@@ -138,14 +145,23 @@ Finally, the HR of each group relative to the survival curve baseline is given b
 
   HR_\text{g:baseline} \sim \frac{e^{N(\mu_g, \sigma_g^2)}}{e^{N(\mu_\text{baseline}, \sigma_\text{baseline}^2)}} \sim e^{N(\mu_g, \sigma_g^2) - N(\mu_\text{baseline}, \sigma_\text{baseline}^2)}  \sim e^{N(\mu_g - \mu_\text{baseline}, \sigma_g^2 + \sigma_\text{baseline}^2)}
 
-Final risk effects
-------------------
+Final risk effects for the United States
+----------------------------------------
 
-.. csv-table:: Final risk effects for simulation use
+.. csv-table:: Final risk effects for simulation use in the United States
   :file: final_risk_effects_docs.csv
   :header-rows: 1
 
-:download:`Final risk effects in machine-readable format <final_risk_effects.csv>`
+:download:`Final risk effects in CSV format <final_risk_effects.csv>`
+
+Final risk effects for China
+----------------------------
+
+.. csv-table:: Final risk effects for simulation use in China
+  :file: final_risk_effects_docs_china.csv
+  :header-rows: 1
+
+:download:`Final risk effects in CSV format <final_risk_effects_china.csv>`
 
 Applying the risk effect
 ------------------------
