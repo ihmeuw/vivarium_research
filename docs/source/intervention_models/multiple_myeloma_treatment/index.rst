@@ -741,6 +741,10 @@ Data files:
 China projections
 '''''''''''''''''
 
+.. image:: isa_dara_china_projections.png
+  :width: 800
+  :alt: Dara and Isa projections in China
+
 Data files:
 
 :download:`Target Isa coverage in China <target_isa_coverage_china.csv>`
