@@ -65,7 +65,7 @@ Given the lack of effect sizes available for renal insufficiency and cytogenetic
 China
 -----
 
-.. list-table:: Risk Exposure Distributions Simulant Initialization in the US
+.. list-table:: Risk Exposure Distributions Simulant Initialization in China
   :header-rows: 1
 
   * - Risk factor
