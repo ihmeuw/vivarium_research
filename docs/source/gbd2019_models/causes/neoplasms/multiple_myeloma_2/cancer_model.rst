@@ -174,7 +174,12 @@ cause-deleted all-cause mortality rate, should be zero.
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-In the tables below, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_07_09. The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
+In the tables below, data_dir depends on the location:
+
+* If the simulation is running in the US location, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_07_09.
+* If the simulation is running in the China location, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_08_11_China.
+
+The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
 
 .. list-table:: State Definitions
    :widths: 1, 5, 15
