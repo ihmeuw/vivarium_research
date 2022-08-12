@@ -226,7 +226,7 @@ As new locations are added to this model, there are several data values that nee
 
 - Hemoglobin validation targets
  
-  - `Done for prevalence here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/hgb_validation_targets/Generate%20validation%20targets.ipynb>`_. Note that the anemia prevalence .csv file is too large to store in git, so it will have to be generated locally. Remeber to delete it before commiting changes in order to avoid annoying git issues.
+  - `Done for prevalence here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/hgb_validation_targets/Generate%20validation%20targets.ipynb>`_. Note that the anemia prevalence .csv file is too large to store in git, so it will have to be generated locally - this file has been added to .gitignore, but be sure not to commit similar files to avoid git issues.
  
   - `Done for YLDs here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/hgb_validation_targets/YLD%20validation%20targets.ipynb>`_
 
