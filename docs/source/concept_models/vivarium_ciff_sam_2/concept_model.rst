@@ -217,10 +217,10 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
   We may add/remove scenarios based on results of existing list
 
 2.3 Modelling components
------------------------------------
+------------------------------
 
 2.3.1 Concept model diagram
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 .. image:: am_concept_model_diagram.svg
 
@@ -271,14 +271,44 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
 
   Document details on how to target SQ-LNS
 
+  When can you start?? Before 24 months and then take for certain duration, or only take between ages of 6-24 months?
+
+  Consider sex-specific effects
+
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
 2.4 Outputs
 ----------------------
 
-.. todo::
+**Primary simulation outcomes** (for each scenario):
 
-  Fill out this section
+  - Number of incident MAM and SAM cases per 100,000 PY
+  - Number of *treated* MAM and SAM cases per 100,000 PY
+  - Person-time spent covered by SQ-LNS per 100,000 PY 
+  - Prevalence of wasting and stunting
+  - All-cause mortality rates
+  - All-cause YLL rates
+  - Cause-specific YLD rates
+
+**Requested outputs for primary outcomes** with minimum required stratification beyond default sex, age, and year strata (additional stratification requested below if needed for V&V):
+
+  - Stunting state person time
+
+  - Wasting transition counts
+
+    - Stratified by:
+
+      - MAM treatment coverage
+
+      - SAM treatment coverage
+
+  - Wasting state person time
+
+    - Stratified by:
+
+      - SQ-LNS coverage
+
+  - Cause-specific mortality, YLL, and YLD counts
 
 3.0 Models
 +++++++++++
