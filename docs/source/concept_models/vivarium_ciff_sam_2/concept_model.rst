@@ -42,7 +42,7 @@ Vivarium Acute Malnutrition Phase 2
 1.0 Project overview
 ++++++++++++++++++++
 
-This simulation will build on the :ref:`severe acute malnutrition elimination model, described here <2019_concept_model_vivarium_ciff_sam>`. 
+This simulation will build on :ref:`phase I of the severe acute malnutrition elimination model, described here <2019_concept_model_vivarium_ciff_sam>`. 
 
 The goal of this simulation is to investigate the question:
 
@@ -56,16 +56,12 @@ The goal of this simulation is to investigate the question:
 2.1 Default specifications
 ---------------------------
 
-.. todo::
-
-  Fill in placeholder "XXX" values
-
 .. list-table:: Default simulation specifications
   :header-rows: 1
 
   * - Parameter
     - Value
-    - 
+    - Note
   * - Location(s)
     - Ethiopia (ID: 179)
     - 
@@ -88,13 +84,13 @@ The goal of this simulation is to investigate the question:
     - 2 years
     - Consider increasing to 5?
   * - Simulation start date
-    - XXX
+    - 2021-07-01
     - 
   * - Simulation observation start date
-    - XXX
-    - Should be later than above start date to accomodate x-factor burn-in 
+    - 2022-01-01
+    - Starts six months after x-factor burn-in
   * - Simulation end date
-    - XXX
+    - 2026-12-31
     - 
   * - Timestep
     - 4 days
@@ -111,19 +107,12 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
 
   3. SQ-LNS
 
-    a. Targeted to those with mild wasting
+    * 3a. Targeted to those with mild wasting
+    * 3b. Targeted to those recovered from SAM treatment
+    * 3c. Targeted to those recovered from MAM treatment
+    * 3d. Universal
 
-    b. Targeted to those recovered from SAM treatment
-
-    c. Targeted to those recovered from MAM treatment
-
-    d. Universal
-
-.. todo::
-
-  Fill in below table
-
-.. list-table:: Intervention coverage
+.. list-table:: Intervention coverage and efficacy parameters
   :header-rows: 1
 
   * - Intervention
@@ -131,21 +120,27 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
     - Scale-up
     - Scale-down
   * - 1: SAM treatment
-    - 
-    - 
-    - 
+    - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
+    - :math:`C_{SAM} = 0.7`
+
+      :math:`E_{SAM} = 0.75`
+    - :math:`C_{SAM} = 0`
+      
+      :math:`E_{SAM} = \text{baseline value}`
   * - 2: MAM treatment
-    - 
-    - 
-    - 
+    - Baseline values for :math:`C_{MAM}` and :math:`E_{MAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
+    - :math:`C_{MAM} = 0.7`
+      
+      :math:`E_{MAM} = 0.75`
+    - :math:`C_{MAM} = 0`
+      
+      :math:`E_{MAM} = \text{baseline value}`
   * - 3: SQ-LNS (all sub-interventions)
-    - 
-    - 
-    - 
+    - :math:`C_{SQLNS} = 0`
+    - :math:`C_{SQLNS} = 0.7`
+    - :math:`C_{SQLNS} = 0`
 
-.. todo::
-
-  Describe scale-up and scale-down algorithms (as a function of time)
+For scenarios that feature a scale-up and/or scale-down of one of the above interventions, intervention parameters should scale between the baseline and the scale-up or scale-down values according to :ref:`the algorithm described here <ciff_scale_up_algorithm>` that was used for phase I of the acute malnutrition simulation.
 
 .. list-table:: Scenarios
   :header-rows: 1
@@ -271,6 +266,10 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 * :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>` 
+
+.. todo::
+
+  Document details on how to target SQ-LNS
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
