@@ -265,6 +265,10 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
 2.3.1.5 Intervention Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+.. todo::
+
+  Consider adding mortality impacts? Esp. for SAM tx
+
 * :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>` 
 
 .. todo::
@@ -290,6 +294,12 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
   - All-cause YLL rates
   - Cause-specific YLD rates
 
+  *Secondary simulation outcomes*:
+
+    - Relative risk for all-cause mortality by intervention coverage 
+
+      - For comparison with trial data
+
 **Requested outputs for primary outcomes** with minimum required stratification beyond default sex, age, and year strata (additional stratification requested below if needed for V&V):
 
   - Stunting state person time
@@ -306,9 +316,13 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
 
     - Stratified by:
 
-      - SQ-LNS coverage
+      - SQ-LNS coverage (and MAM/SAM treatment coverage for secondary outcome)
 
   - Cause-specific mortality, YLL, and YLD counts
+
+    - Stratified by:
+
+      - SQ-LNS, MAM treatment, and SAM treatment coverage (for secondary outcome only)
 
 3.0 Models
 +++++++++++
