@@ -189,6 +189,7 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
     - Baseline+
     - Baseline+
     - Scale-up to XXX
+    - 
   * - 8: SQ-LNS to SAM treatment
     - Scale-up
     - Baseline*
@@ -225,10 +226,6 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
 
 2.3.1 Concept model diagram
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-.. todo::
-
-  Update concept model diagram
 
 .. image:: am_concept_model_diagram.svg
 
