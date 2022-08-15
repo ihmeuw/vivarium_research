@@ -257,6 +257,10 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
 
 * :ref:`Child Wasting Risk Effects (GBD 2020) <2019_risk_effect_wasting>`
 
+.. todo::
+
+  Confirm/clarify impact of wasting on diarrhea (don't use vicious cycle-specific stuff)
+
 * :ref:`X-factor Risk Effects <2019_risk_effect_x_factor>`
 
 .. note::
