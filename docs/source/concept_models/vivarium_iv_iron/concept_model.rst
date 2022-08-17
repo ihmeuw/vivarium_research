@@ -153,9 +153,11 @@ Figures representing intervention coverage among the eligible populations at poi
 
 .. image:: intervention_coverage_all_pregnancies.PNG
 
-.. todo::
+.. image:: intervention_coverage_ethiopia.PNG
 
-  Add figures for national locations India, Ethiopia, and Nigeria
+.. image:: intervention_coverage_india.PNG
+
+.. image:: intervention_coverage_nigeria.PNG
 
 .. _iviron3.2:
 
