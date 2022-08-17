@@ -561,6 +561,15 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.8.2 2040 run
      - Add fertility component, run out to 2040, with risk effects and intervention models
      - `Results ran out to 2040 look as expected :) <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model8.2_2040_run>`_. No longer have unexpected differences in scenarios. Intervention effects on hemoglobin look good in the results outputs as well as in the interative sim.
+   * - I.9.1 Stillbirth
+     - `Stillbirth implementation <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model9_stillbirth/9.1%20stillbirth%20effect.ipynb>`_
+     - Magnitude of effect by severe anemia status looks good. Appears to result in increases to stillbirth, but not other births (as expected). However, there is a bug that results in all birth outcome counts for "no" anemia to be zero -- there should instead be counts for "none" anemia. This prevents us from comparing counts of birth outcomes across scenarios.
+   * - I.9.2
+     - `Stillbirth bugfix, single draw <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model9_stillbirth/9.2%20stillbirth%20effect.ipynb>`_
+     - There are now birth outcome counts for "none" anemia and differences in birth outcome counts are as expected across scenarios. Good to go!
+   * - I.9.3
+     - `Ethiopia test run: baseline scenario only, out to 2030 <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model9.3_national_locations>`_
+     - Hemoglobin, maternal disorders, pregnancy, and intervention coverage models all looking as expected :) 
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
