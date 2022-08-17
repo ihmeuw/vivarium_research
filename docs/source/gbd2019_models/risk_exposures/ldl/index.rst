@@ -31,8 +31,8 @@ alone or in combination and adjust these data points using statistical modeling 
 quantity of interest is exposure to the mean LDL-C level regardless of whether that level is naturally occurring or occurs via use of 
 medication; we assume full reversibility of risk and do not account for duration of exposure to elevated LDL-C.   
 
-LDL-C is commonly reported using two different units. To convert from mmol/L to mg/dL multiply by 88.57. To convert from mg/dL to mmol/L 
-multiply by 0.01129.  
+LDL-C is commonly reported using two different units. To convert from mmol/L to mg/dL multiply by 38.67. To convert from mg/dL to mmol/L 
+divide by 38.67.  
 
 The TMREL for LDL-C is 0.7 to 1.3 mmol/L. This is the same for all risk-outcome pairs. These are listed below. 
 
