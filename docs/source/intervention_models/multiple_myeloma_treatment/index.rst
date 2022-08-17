@@ -748,9 +748,17 @@ Data files:
 China projections
 '''''''''''''''''
 
-.. todo::
+.. image:: isa_dara_china_projections.png
+  :width: 800
+  :alt: Dara and Isa projections in China
 
-  Fill in this section.
+Data files:
+
+:download:`Target Isa coverage in China <target_isa_coverage_china.csv>`
+
+:download:`Target Dara coverage in China <target_dara_coverage_china.csv>`
+
+Details on the calculation of these values can be found at J:\\Project\\simulation_science\\multiple_myeloma\\data\\treatment_model_input\\China Projections.xlsx
 
 Modeled Affected Outcomes
 +++++++++++++++++++++++++
@@ -795,15 +803,38 @@ with covariates :math:`x` being treated with regimen category :math:`r` is:
 
 Mortality and relapse hazard ratios for each regimen category, plus the major subcategories of the 'Other' category, in each setting were estimated using a
 network meta-analysis of published findings with study random effects. The majority of categories could
-be connected by a network of randomized controlled trials (RCTs). Other categories
-were connected using non-randomized evidence: two matched analyses between different RCTs,
-and two matched analyses comparing RCT evidence with claims data, were included. Assumptions
-of equivalence, with included uncertainty, were made between substantially similar
-categories, including those that differed only by substitution of Isa with Dara, and those that differed only
-by substitution of melphalan with cyclophosphamide and prednisone/prednisolone with dexamethasone. We assumed
-that adding drugs to a regimen could not decrease efficacy. After estimating HRs for each subcategory, the HR
+be connected by a network of randomized controlled trials (RCTs).
+
+Some categories were connected using non-randomized evidence:
+
+* Two matched analyses between different RCTs.
+* Two matched analyses comparing RCT evidence with claims data.
+
+A few categories had to be connected with assumptions:
+
+* Assuming similarity (with some uncertainty) between substantially similar
+  categories, including those that differed only by substitution of Isa with Dara, and those that differed only
+  by substitution of melphalan with cyclophosphamide and prednisone/prednisolone with dexamethasone.
+* Assuming that the *HRs* were similar between analogous comparisons, for example the HR of adding Chemo to a regimen or the HR of adding Dara to a regimen.
+
+We also assumed that adding drugs could not make a regimen *less* effective.
+
+After estimating HRs for each subcategory, the HR
 of the 'Other' category was calculated by weighting these subcategories according to the observed proportions
 of use in Flatiron data.
+This was used for the 'Other' category in both the US and China locations, in absence of
+evidence about 'Other' treatments used in China.
+
+Below are the networks used to calculate mortality HRs in the NDMM and RRMM setting respectively. The networks for relapse HRs
+were nearly identical to these, the only difference being a few added links (RCTs that reported relapse outcomes but did not have mature mortality data).
+
+.. image:: ndmm_TTD_simple_network.png
+  :width: 500
+  :alt: Network used to calculate NDMM mortality HRs
+
+.. image:: rrmm_TTD_simple_network.png
+  :width: 500
+  :alt: Network used to calculate RRMM mortality HRs
 
 The effect of ASCT was estimated separately with a small meta-analysis of two RCTs: [DETERMINATION]_ and [IFM_2009]_.
 ASCT and induction regimen were assumed not to modify each others' effects.
