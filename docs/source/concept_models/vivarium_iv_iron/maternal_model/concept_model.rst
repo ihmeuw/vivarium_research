@@ -567,6 +567,9 @@ Probability of sampling from a given country's hemoglobin distribution using the
    * - I.9.2
      - `Stillbirth bugfix, single draw <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/validation/maternal/model9_stillbirth/9.2%20stillbirth%20effect.ipynb>`_
      - There are now birth outcome counts for "none" anemia and differences in birth outcome counts are as expected across scenarios. Good to go!
+   * - I.9.3
+     - `Ethiopia test run: baseline scenario only, out to 2030 <https://github.com/ihmeuw/vivarium_research_iv_iron/tree/main/validation/maternal/model9.3_national_locations>`_
+     - Hemoglobin, maternal disorders, pregnancy, and intervention coverage models all looking as expected :) 
 
 .. list-table:: Outstanding verification and validation issues
   :header-rows: 1
