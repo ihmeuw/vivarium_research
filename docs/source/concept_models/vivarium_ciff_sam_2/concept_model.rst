@@ -99,7 +99,7 @@ The goal of this simulation is to investigate the question:
 2.2 Scenarios
 -------------
 
-Simulated scenarios will involve some scale-up or scale-down of the following interventions, in combination or isolation:
+Simulated scenarios will involve some change of coverage/efficacy parameter values for the following interventions, in combination or isolation:
 
   1. SAM treatment
 
@@ -118,7 +118,7 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
   * - Intervention
     - Baseline
     - Scale-up
-    - Scale-down
+    - Zero coverage
   * - 1: SAM treatment
     - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
     - :math:`C_{SAM} = 0.7`
@@ -140,7 +140,7 @@ Simulated scenarios will involve some scale-up or scale-down of the following in
     - :math:`C_{SQLNS} = 0.7`
     - :math:`C_{SQLNS} = 0`
 
-For scenarios that feature a scale-up and/or scale-down of one of the above interventions, intervention parameters should scale between the baseline and the scale-up or scale-down values according to :ref:`the algorithm described here <ciff_scale_up_algorithm>` that was used for phase I of the acute malnutrition simulation.
+For scenarios that feature a scale-up of one of the above interventions, intervention parameters should scale between the baseline and the scale-up values according to :ref:`the algorithm described here <ciff_scale_up_algorithm>` that was used for phase I of the acute malnutrition simulation. For scenarios that feature "zero coverage" of one or more of the above interventions, intervention coverage should immediately change from the baseline to the zero coverage values at the date that the intervention scale-up would have occured according to the algorithm linked above. Intervention parameters should remain at the zero coverage values for the remainder of the simulation.
 
 .. list-table:: Scenarios
   :header-rows: 1
@@ -156,8 +156,8 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
     - Baseline (0%)
     - 
   * - 2: MAM and SAM treatment scale-down
-    - Scale-down
-    - Scale-down
+    - Zero coverage
+    - Zero coverage
     - Baseline (0%)
     - 
   * - 3: SAM treatment scale-up
@@ -210,7 +210,7 @@ For scenarios that feature a scale-up and/or scale-down of one of the above inte
 
   Add detail/strategy to scenario 7
 
-  Consider if cells marked with an asterisk (*) should be replaced with "scale-down" instead of "baseline"
+  Consider if cells marked with an asterisk (*) should be replaced with zero coverage instead of baseline
 
 .. note::
 
