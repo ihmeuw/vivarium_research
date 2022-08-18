@@ -443,7 +443,7 @@ possible outcomes for simulants.
     - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
     - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
   * - E
-    - If simulant is adherent, 19.4% will not change medication due to theraputic inertia 
+    - 19.4% will not change medication due to theraputic inertia 
     - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
   * - F
     - If simulant is eligible, either 50% or 100% depending on scenario  
@@ -465,7 +465,7 @@ possible outcomes for simulants.
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
   * - B
-    - No patients are primary nonadherent, rerun probability of secondary nonadherence 
+    - No patients are primary nonadherent, rerun probability of secondary nonadherence for new patients 
     - Assumes patient begins medication in the inpatient setting, removing primary nonaherence 
 
 
@@ -514,7 +514,7 @@ possible outcomes for simulants.
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
   * - B
-    - If simulant is adherent, 87% will not change medication due to theraputic inertia 
+    - 87% will not change medication due to theraputic inertia 
     - Hypertension. J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783 
   * - C
     - NEEDED  
@@ -541,16 +541,29 @@ possible outcomes for simulants.
 --------------------------------------------
 
 Adherence
-+++++++++
+~~~~~~~~~
+
+Adherence is a widely recognized issue both in the US and globally [Sabate_2003]_. Non-adherence to medication 
+costs the US an estimated $170 billion annually in healthcare expenses, and is a major cause of negative 
+patient outcomes [Fischer_2010]_. This can be especially pronounced in chronic conditions, such as hypertension and hyperlipidemia. 
+
+In our modeling, we categorize adherence into dichotomous outcomes, where adherent simulants receive the full 
+benefit of their medication and non-adherent simulants receive no benefit. The selection of an 80% cutoff matches 
+current literature standards, and has been validated for both hypertension and hyperlipidemia [Baumgartner_2018]_. 
 
 Adherence is categorized into three buckets: 
 
-#. Primary nonadherent - simulant never obtains medication 
-#. Secondary nonadherent - simulant obtains medication but has a percent of days covered (PDC) less than 0.8 
+#. Primary nonadherent - simulant never fills their prescription 
+#. Secondary nonadherent - simulant fills prescription for medication but has a percent of days covered (PDC) less than 0.8 
 #. Adherent - simulant has a PDC greater than or equal to 0.8 
 
 If a simulant is primary or secondary nonadherent, their adherence score in the model is 0. If they are 
 adherent, their adherence score is 1. 
+
+
+ .. Note::
+    This is an opportunity area for improvement in later models. Adherence can include partial benefit, and can be done at a state level with survey or Medicare data if there is available time. 
+
 
 **LDL-C Treatments**
 
@@ -565,10 +578,10 @@ adherent, their adherence score is 1.
     - 25%
     - [Cheen_2019]_
   * - Secondary Non-adherence
-    - 22.8%
+    - 35.85%
     - 
   * - Adherent
-    - 52.2%
+    - 39.15%
     - [Oung_2017]_
 
 
@@ -585,15 +598,17 @@ adherent, their adherence score is 1.
     - 16%
     - [Cheen_2019]_
   * - Secondary Non-adherence
-    - 27.4%
+    - 36.46%
     - 
   * - Adherent
-    - 56.6%
+    - 47.54%
     - [Oung_2017]_
 
 
+
+
 Treatment Assignments
-+++++++++++++++++++++
+~~~~~~~~~~~~~~~~~~~~~
 
 **LDL-C Treatments** 
 
@@ -621,7 +636,7 @@ The decision to assign a simulant treatment is completed in the healthcare visit
 
 
 Treatment Effects
-+++++++++++++++++
+~~~~~~~~~~~~~~~~~
 
 **LDL-C Treatments** 
 
@@ -660,7 +675,7 @@ SBP decrease = SBP treatment efficacy * Adherence score
 
 .. _uscvd4.5:
 
-4.4 Initialization Parameters
+4.5 Initialization Parameters
 -----------------------------
 
 
@@ -716,7 +731,7 @@ SBP decrease = SBP treatment efficacy * Adherence score
     - V&V summary
   * - 1.0
     - Alabama; IHD, ischemic stroke
-    - All-cause mortality results look reasonable; issue with angina CSMR
+    - Incidence of MI matches GBD but is overestimated in simulation compared to the artifact. Results appear sensitive to small sample sizes. 
   * - 2.0
     - SBP and LDL-C 
     - Validated 
@@ -800,3 +815,11 @@ Outputs:
 
 .. [Oung_2017] Oung, Alvin B., Emily Kosirog, Benjamin Chavez, Jason Brunner, and Joseph J. Saseen. 2017. “Evaluation of Medication Adherence in Chronic Disease at a Federally Qualified Health Center.” Therapeutic Advances in Chronic Disease 8 (8–9): 113–20. 
   https://doi.org/10.1177/2040622317714966.
+
+.. [Baumgartner_2018] Baumgartner, Pascal C., R. Brian Haynes, Kurt E. Hersberger, and Isabelle Arnet. 2018. “A Systematic Review of Medication Adherence Thresholds Dependent of Clinical Outcomes.” Frontiers in Pharmacology 9. 
+  https://www.frontiersin.org/articles/10.3389/fphar.2018.01290. 
+
+.. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
+  https://doi.org/10.1007/s11606-010-1253-9. 
+
+.. [Sabate_2003] Sabaté, Eduardo, and World Health Organization, eds. 2003. Adherence to Long-Term Therapies: Evidence for Action. Geneva: World Health Organization. 
