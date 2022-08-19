@@ -325,7 +325,7 @@ States Data
    * - P
      - disability weight
      - :math:`\frac{1}{\text{prevalence_s1040}} \cdot \sum\limits_{s\in post-AMI-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
-     -
+     - this is zero, per the GBD estimates
    * - S2
      - prevalence
      - :math:`\text{1−(prevalence_s953 + prevalence_s380 + prevalence_s381 + prevalence_s382)}`
