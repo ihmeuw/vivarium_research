@@ -350,10 +350,11 @@ Intended to identify groups that we are interested in being able to track and co
 ------------------------------
 
 Within this model, simulants move through the healthcare system. The initialization parameters for screening visits 
-are listed separately. Below are diagrams for each visit type, information on each decision point, and the 
-possible outcomes for simulants. 
+are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication are handled. 
+Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathway for both 
+conditions at each visit. 
 
-
+First, it is determined if the simulant will have a healthcare interaction in that time step. 
 
 .. list-table:: Visit Interactions per Time Step 
   :widths: 3 15 15
@@ -380,81 +381,11 @@ possible outcomes for simulants.
   - Currently 100% of patients with a follow-up scheduled, go to that appointment. Is this an okay assumption?  
 
 
-**No Visit in Time Step**
+**SBP Treatment Ramp**
 
-.. image:: decision_tree_none.svg
- 
+.. image:: sbp_ramp_all.svg
 
-**Screening Visit**
-
-.. image:: decision_tree_screening.svg
-
-.. list-table:: Screening Inputs
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Notes
-  * - A
-    - FPG measurement uncertainty needed 
-    -  
-  * - B
-    - Dependent on scenario, either 50% or 100%  
-    - For 50% scenario, assignment is random 
-  * - C
-    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
-  * - D
-    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
-    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
-  * - E
-    - LDL-C is tested if ASCVD score >= 5% 
-    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex)
-  * - F
-    - If age>40 and LDL-C>70mg/dL, 19.4% will not receive medication due to theraputic inertia
-    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
-  * - G 
-    - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
-
-
-**Follow-up Visit**
-
-.. image:: decision_tree_followup.svg
-
-.. list-table:: Followup Inputs
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Notes
-  * - A
-    - FPG measurement uncertainty needed 
-    -  
-  * - B
-    - Dependent on scenario, either 50% or 100%  
-    - For 50% scenario, assignment is random 
-  * - C
-    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
-  * - D
-    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
-    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
-  * - E
-    - 19.4% will not change medication due to theraputic inertia 
-    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
-  * - F
-    - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
-
-
-**Emergency Visit**
-
-.. image:: decision_tree_emergency.svg
-
-.. list-table:: Followup Inputs
+.. list-table:: SBP Treatment Inputs
   :widths: 3 15 15
   :header-rows: 1
 
@@ -463,76 +394,45 @@ possible outcomes for simulants.
     - Notes
   * - A
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
-  * - B
-    - No patients are primary nonadherent, rerun probability of secondary nonadherence for new patients 
-    - Assumes patient begins medication in the inpatient setting, removing primary nonaherence 
-
-
-**Blood Pressure Ramp - Initial Diagnosis**
-
-.. image:: sbp_ramp_initial.svg
-
-.. list-table:: Blood Pressure Ramp Initial Diagnosis 
-  :widths: 3 15 15
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Notes
-  * - A
-    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
-  * - B
-    - NEEDED  
-    -  
-  * - C
-    - NEEDED  
-    -  
-  * - D
-    - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
-
-
-.. todo::
-  - Unclear how simulants are assigned mono or combo therapy and probability of assignment 
-  - Need to figure out how treatment effect works 
-
-
-**Blood Pressure Ramp - Follow-up**
-
-.. image:: sbp_ramp_followup.svg
-
-.. list-table:: Blood Pressure Ramp Follow-up 
-  :widths: 3 15 15 
-  :header-rows: 1
-
-  * - ID
-    - Decision Information 
-    - Notes
-  * - A
-    - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884  
+    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884 
   * - B
     - 87% will not change medication due to theraputic inertia 
     - Hypertension. J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783 
   * - C
-    - NEEDED  
-    -  
+    - 45% will receive two drugs at half dose, remainder will move to monotherapy node 
+    - Byrd et al Am Heart J 2011;162:340-6.
   * - D
-    - NEEDED  
-    -  
-  * - E
-    - NEEDED  
-    -  
-  * - F
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
 
 
-.. todo::
-  - Unclear how simulants are assigned mono or combo therapy and probability of assignment 
-  - Need to figure out how treatment effect works 
+**LDL-C Treatment Ramp**
+
+.. image:: ldl_ramp_all.svg
+
+.. list-table:: LDL-C Treatment Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex)
+    -  
+  * - B
+    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
+    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
+  * - C
+    - 19.4% will not start medication; 14.2% will receive high intensity statin; 55.1% medium intensity; and 11.3% low intensity 
+    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 and [Arnett_2019]_
+  * - D
+    - 19.4% will not change medication due to theraputic inertia 
+    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
+  * - E
+    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - For 50% scenario, assignment is random 
+
 
 
 .. _uscvd4.4:
@@ -616,7 +516,8 @@ In general, blood pressure medication is prescribed "low and slow" where medicat
 and slowly increased over subsequent visits when a patient is not reaching targets. This approach can lead to under 
 medicating individuals, but is followed here to best simulate real world practice. [Arnett_2019]_
 
-Further details about treatment assignment to simulants can be found in the healthcare visits above. At a high level: 
+Further details about treatment assignment to simulants can be found in the healthcare visits above. At a high level, 
+for simulants where theraputic inertia is overcome: 
 
 - A new simulant with SBP >=130 and <140 is assigned to one medication at half dose 
 - A new simulant with SBP >=140: 
@@ -635,17 +536,14 @@ For all medication prescriptions and increases, theraputic inertia must be overc
 
 LDL-C treatments follow a similar pattern as the blood pressure ramp decribed above. The decision to assign a 
 simulant treatment is completed in the healthcare visits above. The choice of intensity is determined by the 
-simulant's ASCVD score and LDL-C. [Arnett_2019]_
+simulant's ASCVD score and LDL-C. For simulants where theraputic inertia is overcome, the treatment assignements
+are summarized below. [Arnett_2019]_
 
-- A new simulant with ASCVD between 5 and 7.5% is assigned a low intensity statin 
-- A new simulant with ASCVD greater than 7% and less than 20%:
+- A new simulant with ASCVD greater than 7.5% and LDL-C greater than 70 mg/dL:
   
-  - XX% are assigned a medium intensity statin 
-  - YY% are assigned a low intensity statin 
-- A new simulant with ASCVD greater than 20% **OR** LDL-C is greater than 190mg/dL:
-  
-  - XX% are assigned a high intensity statin 
-  - YY% are assigned a medium intensity statin 
+  - 17.7% are assigned a high intensity statin 
+  - 68.4% are assigned a medium intensity statin 
+  - 14.0% are assigned a low intensity statin 
 - A simulant already on medication with LDL-C > 70 mg/dL will move up one treatment category 
   
   - For example: a simulant receiving a high intensity statin will move to a low/medium intensity statin with a non-statin medication 
