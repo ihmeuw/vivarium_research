@@ -216,7 +216,7 @@ race/ethnicity into the following partition:
 
 This is basically compatible with the surname data we will use in Section (10).
 
-For initialization on simulation start, we will sample households from
+For initialization on simulation start, for the population living in households, we will sample households from
 ACS PUMS rows in the specified PUMAs with replacement, and with
 sampling weights given by ACS data; here is sample code for a nanosim
 initial population:
@@ -246,6 +246,10 @@ initial population:
         return dfg
     df_population = pd.concat([household(i, hh_id) for i, hh_id in enumerate(resampled_households)])
 
+Note that this approach will not initialize any simulants living in
+Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>`) below for details on
+how we will address this.
+    
 In the code above, there is a location string filter which we can use
 to focus our simulation on a single state or PUMA.  For our initial
 model, please focus on Florida, with
@@ -331,6 +335,47 @@ people, since that is the largest household size in ACS), and then
 mark the last 1-17 people as untracked -- which isn't so much memory
 to drag around. Drawback: this leaves both the number of households
 and the number of simulants as variable (but not that variable).
+
+.. _census_prl_gq_init:
+
+Initializing people living in group quarters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To initialize approximately N simulants total, including simulants
+residing in Group Quarters when initializing our simulation, we will
+first initialize K individuals in Group Quarters (in three steps,
+described below) and then initialize approximated (N-K) individuals
+into households as described above.
+
+The first step of this process is choosing K; ideally it would be
+sampled from a Binomial distribution, with a probability p_GQ of each
+simulant being in GQ, and p_GQ would itself be sampled from a Beta
+distribution based on the weighted fraction of the population in GQ
+for this geography, with a concentration parameter appropriate to the
+sample size from which the weighted fraction was calculated.  But for
+now, to keep things simple, we will use K = 0.03*N.
+
+Second, to generate K individuals living in group quarters, we will
+use a weighted sample of people in group quarters from the appropriate
+geography from ACS (sampled with replacement, analogously to
+household).  This will provide each simulant residing in GQ with an
+age, sex, race/ethnicity, and geographic location matching the joint
+distribution from ACS.  It does not identify *which* group quarters
+the individual resides in, however, and only provides information on
+whether it is Institutional or Non-institutional GQ (in the TYPE
+variable: 2 = Institutional; 3 = Non-institutional).
+
+The third and final step for initializing GQ simulants is to give each
+a (somewhat inappropriately named) household_id.  Eventually we shall
+accomplish this so that the distribution of GQ sizes match what is
+found in census, but as a simple stand-in for now we will include 6
+special "household_id" values for the six broad types of GQs that we
+wish to represent, and assign simulants to one of the categories
+consistent with their GQ TYPE uniformly at random.  The GQ subtypes of
+non-institutional are college, military, other non-institutional; and
+subtypes of institutional are carceral, nursing homes, and other
+institutional.
+
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
