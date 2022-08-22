@@ -1,0 +1,15 @@
+Setting,Cytogenetic risk,Category type,Category,Coverage
+NDMM,High,Induction,Dara quadruplets,0.10
+NDMM,High,Induction,Dara triplets,0.0001
+NDMM,High,Induction,Non-Dara triplets,0.85
+NDMM,High,Induction,Doublets,0.05
+NDMM,Standard,Induction,Dara quadruplets,0
+NDMM,Standard,Induction,Dara triplets,0
+NDMM,Standard,Induction,Non-Dara triplets,0.75
+NDMM,Standard,Induction,Doublets,0.25
+NDMM,All,Transplant,ASCT,0.4
+NDMM,All,Transplant,NSCT,0.6
+RRMM,All,Induction,Dara quadruplets,0.03
+RRMM,All,Induction,Dara triplets,0.06
+RRMM,All,Induction,Non-Dara triplets,0.83
+RRMM,All,Induction,Doublets,0.08
