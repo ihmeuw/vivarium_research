@@ -174,7 +174,12 @@ cause-deleted all-cause mortality rate, should be zero.
 State and Transition Data Tables
 ++++++++++++++++++++++++++++++++
 
-In the tables below, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_07_09. The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
+In the tables below, data_dir depends on the location:
+
+* If the simulation is running in the US location, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_07_09.
+* If the simulation is running in the China location, data_dir = J:/Project/simulation_science/multiple_myeloma/data/cause_model_input/phase_2/2022_08_11_China.
+
+The mortality and relapse inputs depend on the timestep size; input files are provided for 90-day and 28-day timesteps.
 
 .. list-table:: State Definitions
    :widths: 1, 5, 15
@@ -377,11 +382,11 @@ Estimate MM Prevalence by Disease Stage
 We used a ‘burn-in’ approach to estimate the prevalence of NDMM and the
 prevalence of RRMM in a manner consistent with the incidence rates estimated
 from GBD and the survival rates reported in Braunlin et al. To do this, we
-started the simulation in 2011, 10 years prior to the start date of interest.
+started the simulation in 2013, 10 years prior to the start date of interest.
 At this time point, a proportion of simulants equal to the age- and sex-specific
 MM prevalence from GBD 2019 were initialized into the NDMM disease state;
 no simulants were initialized into the RRMM disease state(s). We then let the
-simulation run from 2011 to 2021 using our transition and mortality rates and
+simulation run from 2013 to 2023 using our transition and mortality rates and
 updated the distribution of MM prevalence by disease states (NDMM, RRMM in first
 relapse, RRMM in second relapse, etc.) accordingly.
 
