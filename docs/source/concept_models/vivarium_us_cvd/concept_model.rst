@@ -610,68 +610,81 @@ adherent, their adherence score is 1.
 Treatment Assignments
 ~~~~~~~~~~~~~~~~~~~~~
 
-**LDL-C Treatments** 
-
-The decision to assign a simulant treatment is completed in the healthcare visits above. All LDL-C treatments are 
-statins for simplicity in this model. The choice of intensity is determined by the simulants ASCVD score and LDL-C. 
-
-- ASCVD is between 5 and 7.5%, simulant is assigned low intensity statin 
-- ASCVD is greater than 7% and less than 20%, simulant is assigned medium intensity statin 
-- ASCVD is greater than 20% **OR** LDL-C is greater than 190md/dL, simulant is assigned high intensity statin 
-
-Statin intensity can increase at follow-up visits. **If** simulant is adherent to medication **AND** has elevated 
-LDL-C levels, they will move up one intensity group. If simulant is **NOT** adherent to medication, not treatment 
-changes will be made. 
-
-
 **Blood Pressure Treatments** 
 
-The decision to assign a simulant treatment is completed in the healthcare visits above. 
+In general, blood pressure medication is prescribed "low and slow" where medication is started at a low level 
+and slowly increased over subsequent visits when a patient is not reaching targets. This approach can lead to under 
+medicating individuals, but is followed here to best simulate real world practice. [Arnett_2019]_
 
- .. todo::
-    Add information on what blood pressure medication is chosen 
-    Medical Expenditure Panel Survey, 2014 was prior note 
-    Add in proportion of Group 2 from SBP ramp algorithm receiving combination therapy from Byrd et al Am Heart J 2011;162:340-6.
-    Was listed as 45 and represents non-compliance with guidelines  
+Further details about treatment assignment to simulants can be found in the healthcare visits above. At a high level: 
+
+- A new simulant with SBP >=130 and <140 is assigned to one medication at half dose 
+- A new simulant with SBP >=140: 
+  
+  - 45% will receive two drugs at half dose 
+  - 55% will receive one drug at half dose 
+- A simulant already on medication with SBP >= 140 will move up one treatment category 
+  
+  - For example: a simulant receiving two drugs at standard dose will move to three drugs at half dose 
+  - Once a simulant is receiving three drugs at standard dose, they will remain in the treatment category permanently 
+
+For all medication prescriptions and increases, theraputic inertia must be overcome. 
+
+
+**LDL-C Treatments** 
+
+LDL-C treatments follow a similar pattern as the blood pressure ramp decribed above. The decision to assign a 
+simulant treatment is completed in the healthcare visits above. The choice of intensity is determined by the 
+simulant's ASCVD score and LDL-C. [Arnett_2019]_
+
+- A new simulant with ASCVD between 5 and 7.5% is assigned a low intensity statin 
+- A new simulant with ASCVD greater than 7% and less than 20%:
+  
+  - XX% are assigned a medium intensity statin 
+  - YY% are assigned a low intensity statin 
+- A new simulant with ASCVD greater than 20% **OR** LDL-C is greater than 190mg/dL:
+  
+  - XX% are assigned a high intensity statin 
+  - YY% are assigned a medium intensity statin 
+- A simulant already on medication with LDL-C > 70 mg/dL will move up one treatment category 
+  
+  - For example: a simulant receiving a high intensity statin will move to a low/medium intensity statin with a non-statin medication 
+  - Once a simulant is receiving a high intensity statin with a non-statin therapy, they will remain in the treatment category permanently 
+
+For all medication prescriptions and increases, theraputic inertia must be overcome. 
 
 
 Treatment Effects
 ~~~~~~~~~~~~~~~~~
 
-**LDL-C Treatments** 
-
- .. todo::
-    Need to add in LDL-C treatment efficacy by intensity level 
-
-LDL-C decrease = LDL-C treatment efficacy * Adherence score 
-
-
-.. list-table:: Treatment Efficacy  
-  :widths: 10 10 10 
-  :header-rows: 1
-
-  * - Category
-    - Efficacy 
-    - Notes
-  * - High Intensity
-    - 
-    - 
-  * - Medium Intensity 
-    - 
-    - 
-  * - Low Intensity
-    - 
-    - 
-
- 
 **Blood Pressure Treatments**  
 
- .. todo::
-    Need to add in SBP treatment efficacy table 
+Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
+/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
 
+Blood pressure treatment is split into 6 categories based on the number of medications and dosage. It 
+is assumed that different medications have a similar impact and therefore are not modeled individually. 
+The maximum number of medications a simulant can receive is 3 at standard dose. 
+
+SBP decrease for an individual simulant is based on both the medication impact and adherence score:  
 
 SBP decrease = SBP treatment efficacy * Adherence score
 
+
+**LDL-C Treatments** 
+
+LDL-C treatment efficacy is a percent reduction in LDL-C level. This means that simulants with higher 
+initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
+/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_ldl.csv [Hou_2009]_ [Goff_2014]_
+
+LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, and the inclusion 
+of additional treatments with statins. This assumes that the impact of different individual therapies is 
+similar and therefore they therefore are not modeled individually. The maximum amount of medications a 
+simulant can receive is high intensity statins with an additional non-statin medication. 
+
+LDL-C decrease for an individual simulant is based on both the medication impact and adherence score:  
+
+LDL-C decrease = LDL-C treatment efficacy * Adherence score 
 
 .. _uscvd4.5:
 
@@ -792,34 +805,46 @@ Outputs:
 7.0 References
 ++++++++++++++
 
+.. [Arnett_2019] Arnett, Donna K., Roger S. Blumenthal, Michelle A. Albert, Andrew B. Buroker, Zachary D. Goldberger, Ellen J. Hahn, Cheryl Dennison Himmelfarb, et al. 2019. “2019 ACC/AHA Guideline on the Primary Prevention of Cardiovascular Disease: Executive Summary: A Report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines.” Circulation 140 (11). 
+  https://doi.org/10.1161/CIR.0000000000000677  
+
+.. [Baumgartner_2018] Baumgartner, Pascal C., R. Brian Haynes, Kurt E. Hersberger, and Isabelle Arnet. 2018. “A Systematic Review of Medication Adherence Thresholds Dependent of Clinical Outcomes.” Frontiers in Pharmacology 9. 
+  https://www.frontiersin.org/articles/10.3389/fphar.2018.01290 
+
+.. [Becker-2005] Becker, Diane M., et al. "Impact of a community-based multiple risk factor intervention on cardiovascular risk in black families with a history of premature coronary disease." Circulation 111.10 (2005): 1298-1304.
+  https://www.ahajournals.org/doi/10.1161/01.CIR.0000157734.97351.B2
+
+.. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
+  https://doi.org/10.1111/ijcp.13350
+
 .. [Derose-2013] Derose, Stephen F., et al. "Automated outreach to increase primary adherence to cholesterol-lowering medications." JAMA internal medicine 173.1 (2013): 38-43.
 	https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1399850
 
-.. [Becker-2005] Becker, Diane M., et al. "Impact of a community-based multiple risk factor intervention on cardiovascular risk in black families with a history of premature coronary disease." Circulation 111.10 (2005): 1298-1304.
-	https://www.ahajournals.org/doi/10.1161/01.CIR.0000157734.97351.B2
+.. [Ely-2017] Ely, Elizabeth K., et al. "A national effort to prevent type 2 diabetes: participant-level evaluation of CDC’s National Diabetes Prevention Program." Diabetes care 40.10 (2017): 1331-1341.
+  https://care.diabetesjournals.org/content/40/10/1331
+
+.. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
+  https://doi.org/10.1007/s11606-010-1253-9 
+
+.. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
+  https://doi.org/10.1161/01.cir.0000437741.48606.98
+
+.. [Hou_2009] Hou, Runhua, and Anne Carol Goldberg. 2009. “Lowering Low-Density Lipoprotein Cholesterol: Statins, Ezetimibe, Bile Acid Sequestrants, and Combinations: Comparative Efficacy and Safety.” Endocrinology and Metabolism Clinics of North America, Lipids, 38 (1): 79–97. 
+  https://doi.org/10.1016/j.ecl.2008.11.007
+
+.. [Law_2009] Law, M. R., J. K. Morris, and N. J. Wald. 2009. “Use of Blood Pressure Lowering Drugs in the Prevention of Cardiovascular Disease: Meta-Analysis of 147 Randomised Trials in the Context of Expectations from Prospective Epidemiological Studies.” BMJ 338 (May): b1665. 
+  https://doi.org/10.1136/bmj.b1665
+
+.. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
+  https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
+
+.. [Munoz-NEJM] Muñoz, Daniel, et al. "Polypill for cardiovascular disease prevention in an underserved population." New England Journal of Medicine 381.12 (2019): 1114-1123.
+  https://www.nejm.org/doi/10.1056/NEJMoa1815359
+
+.. [Oung_2017] Oung, Alvin B., Emily Kosirog, Benjamin Chavez, Jason Brunner, and Joseph J. Saseen. 2017. “Evaluation of Medication Adherence in Chronic Disease at a Federally Qualified Health Center.” Therapeutic Advances in Chronic Disease 8 (8–9): 113–20. 
+  https://doi.org/10.1177/2040622317714966
+
+.. [Sabate_2003] Sabaté, Eduardo, and World Health Organization, eds. 2003. Adherence to Long-Term Therapies: Evidence for Action. Geneva: World Health Organization. 
 
 .. [Thom-2013] Thom, Simon, et al. "Effects of a fixed-dose combination strategy on adherence and risk factors in patients with or at high risk of CVD: the UMPIRE randomized clinical trial." Jama 310.9 (2013): 918-929.
 	https://jamanetwork.com/journals/jama/fullarticle/1734704
-
-.. [Munoz-NEJM] Muñoz, Daniel, et al. "Polypill for cardiovascular disease prevention in an underserved population." New England Journal of Medicine 381.12 (2019): 1114-1123.
-	https://www.nejm.org/doi/10.1056/NEJMoa1815359
-
-.. [Ely-2017] Ely, Elizabeth K., et al. "A national effort to prevent type 2 diabetes: participant-level evaluation of CDC’s National Diabetes Prevention Program." Diabetes care 40.10 (2017): 1331-1341.
-	https://care.diabetesjournals.org/content/40/10/1331
-
-.. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
-	https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
-
-.. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
-  https://doi.org/10.1111/ijcp.13350.
-
-.. [Oung_2017] Oung, Alvin B., Emily Kosirog, Benjamin Chavez, Jason Brunner, and Joseph J. Saseen. 2017. “Evaluation of Medication Adherence in Chronic Disease at a Federally Qualified Health Center.” Therapeutic Advances in Chronic Disease 8 (8–9): 113–20. 
-  https://doi.org/10.1177/2040622317714966.
-
-.. [Baumgartner_2018] Baumgartner, Pascal C., R. Brian Haynes, Kurt E. Hersberger, and Isabelle Arnet. 2018. “A Systematic Review of Medication Adherence Thresholds Dependent of Clinical Outcomes.” Frontiers in Pharmacology 9. 
-  https://www.frontiersin.org/articles/10.3389/fphar.2018.01290. 
-
-.. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
-  https://doi.org/10.1007/s11606-010-1253-9. 
-
-.. [Sabate_2003] Sabaté, Eduardo, and World Health Organization, eds. 2003. Adherence to Long-Term Therapies: Evidence for Action. Geneva: World Health Organization. 
