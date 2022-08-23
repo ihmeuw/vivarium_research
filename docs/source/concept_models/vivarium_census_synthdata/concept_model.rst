@@ -216,7 +216,7 @@ race/ethnicity into the following partition:
 
 This is basically compatible with the surname data we will use in Section (10).
 
-For initialization on simulation start, we will sample households from
+For initialization on simulation start, for the population living in households, we will sample households from
 ACS PUMS rows in the specified PUMAs with replacement, and with
 sampling weights given by ACS data; here is sample code for a nanosim
 initial population:
@@ -246,6 +246,10 @@ initial population:
         return dfg
     df_population = pd.concat([household(i, hh_id) for i, hh_id in enumerate(resampled_households)])
 
+Note that this approach will not initialize any simulants living in
+Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>`) below for details on
+how we will address this.
+    
 In the code above, there is a location string filter which we can use
 to focus our simulation on a single state or PUMA.  For our initial
 model, please focus on Florida, with
@@ -331,6 +335,47 @@ people, since that is the largest household size in ACS), and then
 mark the last 1-17 people as untracked -- which isn't so much memory
 to drag around. Drawback: this leaves both the number of households
 and the number of simulants as variable (but not that variable).
+
+.. _census_prl_gq_init:
+
+Initializing people living in group quarters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To initialize approximately N simulants total, including simulants
+residing in Group Quarters when initializing our simulation, we will
+first initialize K individuals in Group Quarters (in three steps,
+described below) and then initialize approximated (N-K) individuals
+into households as described above.
+
+The first step of this process is choosing K; ideally it would be
+sampled from a Binomial distribution, with a probability p_GQ of each
+simulant being in GQ, and p_GQ would itself be sampled from a Beta
+distribution based on the weighted fraction of the population in GQ
+for this geography, with a concentration parameter appropriate to the
+sample size from which the weighted fraction was calculated.  But for
+now, to keep things simple, we will use K = 0.03*N.
+
+Second, to generate K individuals living in group quarters, we will
+use a weighted sample of people in group quarters from the appropriate
+geography from ACS (sampled with replacement, analogously to
+household).  This will provide each simulant residing in GQ with an
+age, sex, race/ethnicity, and geographic location matching the joint
+distribution from ACS.  It does not identify *which* group quarters
+the individual resides in, however, and only provides information on
+whether it is Institutional or Non-institutional GQ (in the TYPE
+variable: 2 = Institutional; 3 = Non-institutional).
+
+The third and final step for initializing GQ simulants is to give each
+a (somewhat inappropriately named) household_id.  Eventually we shall
+accomplish this so that the distribution of GQ sizes match what is
+found in census, but as a simple stand-in for now we will include 6
+special "household_id" values for the six broad types of GQs that we
+wish to represent, and assign simulants to one of the categories
+consistent with their GQ TYPE uniformly at random.  The GQ subtypes of
+non-institutional are college, military, other non-institutional; and
+subtypes of institutional are carceral, nursing homes, and other
+institutional.
+
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -785,6 +830,10 @@ We might want to eventually include nicknames and suffixes like Jr. and III.
         df_population.loc[df_age.index, 'first_name'] = random_names(age, sex, len(df_age))
         df_population.loc[df_age.index, 'middle_name'] = random_names(age, sex, len(df_age))
 
+Note that if someone is born after 2020, their first name is sampled
+from first names in 2020, while for individuals born earlier their
+name is sampled from first names of birth year.
+	
 It could be valuable to include correlation between first and last
 names.  There will be a little from the strategy described above, but
 we could develop a strategy to more explicitly model it.  One approach
@@ -802,6 +851,11 @@ common last names stratified by race/ethnicity.  There will likely be
 funny combinations of first and last names for certain race groups
 (e.g. South Asian first names with East Asian last names) but we are
 not expecting to get that right.
+
+Hyphenated last names are merged together from samples of random last
+names (by race/ethnicity). This likely creates some strange last
+names, so have a careful look at this in validation, and decide if
+refinement is needed.
 
 2.3.7 Component 11: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1025,6 +1079,15 @@ changes per 100 person years.  For now, we will have distinct
 addresses for businesses and households, but eventually we might want
 to intentionally include duplicates, e.g. if someone operates a
 business out of their home.
+
+To keep things simple, for now when businesses move to a new address,
+it will be a totally new address. No household or business will ever
+move into their old address.
+
+We have also included a special "employer" to indicate individuals who
+are *not* currently employed.  We assume that 58% of the population is
+employed, which leads to a lot of individual switching to being
+unemployed.  We might need to refine this in the future.
 
 The data we will extract from this network for our simulated tax
 return is a list of businesses and their unique id numbers and for

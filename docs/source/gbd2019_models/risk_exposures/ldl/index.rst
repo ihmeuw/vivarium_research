@@ -97,6 +97,17 @@ Assumptions and Limitations
 As described above, LDL-C is a calculated value; there is measurement error inherent in the lipid panel 
 assays used to obtain values for the input into the formula. 
 
+Due to the nature of the GBD distributions, some simulants received LDL-C exposures that are impossible in 
+real life. To account for this, resistrictions have been created for the possible range of LDL-C values a 
+simulant can have. This range is designed to include all values seen in real life, while removing values 
+that are provided by pure math. **The minimum LDL-C value is 0 mmol/L nad the maximum is 10 mmol/L.**
+
+Any simulant whose exposure is found to be above 10 mmol/L will be assigned 10 mmol/L, and any simulant below 
+0 will be reassigned to 0 mmol/L. This reassignment occurs in approximately 0.05% of simulants. 
+
+The minimum is set at 0 as LDL-C is by definition always positive. The maximum of 10 was selected to include ~5 
+standard deviations above the mean for average LDL-C, as well as ~3.5 standard deviations above the mean for those 
+with genetic hyperlipidemia. This is designed to be inclusive of all possible values seen in real patients. [Huijgen_2012]_
 
 Data Description Tables
 +++++++++++++++++++++++
@@ -133,3 +144,6 @@ References
 
 .. [CDC-LDL-Definition]
 	`LDL & HDL: Good & Bad Cholesterol.` Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 31 Jan. 2020, www.cdc.gov/cholesterol/ldl_hdl.htm. 
+
+.. [Huijgen_2012] 
+  Huijgen, Roeland, et al. “Discriminative Ability of LDL-Cholesterol to Identify Patients with Familial Hypercholesterolemia.” Circulation: Cardiovascular Genetics, vol. 5, no. 3, 2012, pp. 354–359., https://doi.org/10.1161/circgenetics.111.962456. 

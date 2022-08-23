@@ -142,6 +142,8 @@ Historically, prevention research has primarily focused on stunting, and, as a r
 4.1 Simulation scenarios
 ------------------------
 
+.. _ciff_scale_up_algorithm:
+
 .. note::
 
   For all alternative scenarios, intervention coverage and/or efficacy parameters should scale according to the following algorithm: 
