@@ -394,13 +394,13 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - Notes
   * - A
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - Br J Gen Pract 2011; DOI: 10.3399/bjgp11X593884 
+    - [Wallace_2011]_
   * - B
-    - 87% will not change medication due to theraputic inertia 
-    - Hypertension. J Hypertens 39:1238–1245 DOI:10.1097/HJH.0000000000002783 
+    - 41.76% will not change medication due to theraputic inertia 
+    - [Ali_2021]_ [Liu_2017]_
   * - C
-    - 45% will receive two drugs at half dose, remainder will move to monotherapy node 
-    - Byrd et al Am Heart J 2011;162:340-6.
+    - 41.76% will not start medication; 26.25% will receive two drugs at half dose, remainder will receive one drug at half dose  
+    - [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
@@ -422,13 +422,13 @@ First, it is determined if the simulant will have a healthcare interaction in th
     -  
   * - B
     - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
-    - BMJ 2020;368:m149 doi: 10.1136/bmj.m149 
+    - [McCormack_2020]_
   * - C
     - 19.4% will not start medication; 14.2% will receive high intensity statin; 55.1% medium intensity; and 11.3% low intensity 
-    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 and [Arnett_2019]_
+    - [Morales_2018]_ [Arnett_2019]_
   * - D
     - 19.4% will not change medication due to theraputic inertia 
-    - https://pesquisa.bvsalud.org/portal/resource/fr/ibc-171028 
+    - [Morales_2018]_ 
   * - E
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
@@ -512,7 +512,7 @@ Treatment Assignments
 
 **Blood Pressure Treatments** 
 
-In general, blood pressure medication is prescribed "low and slow" where medication is started at a low level 
+In general, blood pressure medication is prescribed "start low and go slow" where medication is started at a low level 
 and slowly increased over subsequent visits when a patient is not reaching targets. This approach can lead to under 
 medicating individuals, but is followed here to best simulate real world practice. [Arnett_2019]_
 
@@ -577,7 +577,7 @@ initial LDL-C levels will see a higher total reduction. The full efficacy data i
 
 LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, and the inclusion 
 of additional treatments with statins. This assumes that the impact of different individual therapies is 
-similar and therefore they therefore are not modeled individually. The maximum amount of medications a 
+similar and they therefore are not modeled individually. The maximum amount of medications a 
 simulant can receive is high intensity statins with an additional non-statin medication. 
 
 LDL-C decrease for an individual simulant is based on both the medication impact and adherence score:  
@@ -703,6 +703,9 @@ Outputs:
 7.0 References
 ++++++++++++++
 
+.. [Ali_2021] Ali, Dalia H., Birsen Kiliç, Huberta E. Hart, Michiel L. Bots, Marion C. J. Biermans, Wilko Spiering, Frans H. Rutten, and Monika Hollander. 2021. “Therapeutic Inertia in the Management of Hypertension in Primary Care.” Journal of Hypertension 39 (6): 1238–45. 
+  https://doi.org/10.1097/HJH.0000000000002783.
+
 .. [Arnett_2019] Arnett, Donna K., Roger S. Blumenthal, Michelle A. Albert, Andrew B. Buroker, Zachary D. Goldberger, Ellen J. Hahn, Cheryl Dennison Himmelfarb, et al. 2019. “2019 ACC/AHA Guideline on the Primary Prevention of Cardiovascular Disease: Executive Summary: A Report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines.” Circulation 140 (11). 
   https://doi.org/10.1161/CIR.0000000000000677  
 
@@ -711,6 +714,9 @@ Outputs:
 
 .. [Becker-2005] Becker, Diane M., et al. "Impact of a community-based multiple risk factor intervention on cardiovascular risk in black families with a history of premature coronary disease." Circulation 111.10 (2005): 1298-1304.
   https://www.ahajournals.org/doi/10.1161/01.CIR.0000157734.97351.B2
+
+.. [Byrd_2011] Byrd, James B., Chan Zeng, Heather M. Tavel, David J. Magid, Patrick J. O’Connor, Karen L. Margolis, Joe V. Selby, and P. Michael Ho. 2011. “Combination Therapy as Initial Treatment for Newly Diagnosed Hypertension.” American Heart Journal 162 (2): 340–46. 
+  https://doi.org/10.1016/j.ahj.2011.05.010.
 
 .. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
   https://doi.org/10.1111/ijcp.13350
@@ -733,8 +739,16 @@ Outputs:
 .. [Law_2009] Law, M. R., J. K. Morris, and N. J. Wald. 2009. “Use of Blood Pressure Lowering Drugs in the Prevention of Cardiovascular Disease: Meta-Analysis of 147 Randomised Trials in the Context of Expectations from Prospective Epidemiological Studies.” BMJ 338 (May): b1665. 
   https://doi.org/10.1136/bmj.b1665
 
+.. [Liu_2017] Liu, Xuefeng, Tinghui Zhu, Milisa Manojlovich, Hillel W. Cohen, and Dennis Tsilimingras. 2017. “Racial/Ethnic Disparity in the Associations of Smoking Status with Uncontrolled Hypertension Subtypes among Hypertensive Subjects.” PloS One 12 (8): e0182807. 
+  https://doi.org/10.1371/journal.pone.0182807.
+
+.. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
+  https://doi.org/10.1136/bmj.m149.
+
 .. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
   https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
+
+.. [Morales_2018] Morales, Clotilde, Núria Plana, Anna Arnau, Laia Matas, Marta Mauri, Àlex Vila, Lluís Vila, et al. 2018. “Causas de no consecución del objetivo terapéutico del colesterol de las lipoproteínas de baja densidad en pacientes de alto y muy alto riesgo vascular controlados en Unidades de Lípidos y Riesgo Vascular. Estudio EROMOT.” Clín. investig. arterioscler. (Ed. impr.), 1–9.
 
 .. [Munoz-NEJM] Muñoz, Daniel, et al. "Polypill for cardiovascular disease prevention in an underserved population." New England Journal of Medicine 381.12 (2019): 1114-1123.
   https://www.nejm.org/doi/10.1056/NEJMoa1815359
@@ -746,3 +760,6 @@ Outputs:
 
 .. [Thom-2013] Thom, Simon, et al. "Effects of a fixed-dose combination strategy on adherence and risk factors in patients with or at high risk of CVD: the UMPIRE randomized clinical trial." Jama 310.9 (2013): 918-929.
 	https://jamanetwork.com/journals/jama/fullarticle/1734704
+
+.. [Wallace_2011] Wallace, Emma, and Tom Fahey. 2011. “Measuring Blood Pressure in Primary Care: Identifying ‘White Coat Syndrome’ and Blood Pressure Device Comparison.” The British Journal of General Practice 61 (590): 544–45.
+  https://doi.org/10.3399/bjgp11X593749. 
