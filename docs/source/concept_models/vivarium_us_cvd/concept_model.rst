@@ -519,6 +519,7 @@ medicating individuals, but is followed here to best simulate real world practic
 Further details about treatment assignment to simulants can be found in the healthcare visits above. At a high level, 
 for simulants where theraputic inertia is overcome: 
 
+
 - A new simulant with SBP >=130 and <140 is assigned to one medication at half dose 
 - A new simulant with SBP >=140: 
   
@@ -544,6 +545,7 @@ are summarized below. [Arnett_2019]_
   - 17.7% are assigned a high intensity statin 
   - 68.4% are assigned a medium intensity statin 
   - 14.0% are assigned a low intensity statin 
+
 - A simulant already on medication with LDL-C > 70 mg/dL will move up one treatment category 
   
   - For example: a simulant receiving a high intensity statin will move to a low/medium intensity statin with a non-statin medication 
