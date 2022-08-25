@@ -107,6 +107,10 @@ Assumptions and Limitations
 
 The quantity of interest is exposure to the mean blood pressure level regardless of whether that level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and do not account for duration of exposure to elevated SBP. 
 
+We assume a maximum and minimum systolic blood pressure limit to account for high variation in 
+randomly drawn numbers. These values are set to 50 as the minimum and 300 as the maximum. This 
+effects only about 0.05% of simulants. 
+
 Data Description
 ++++++++++++++++
 
