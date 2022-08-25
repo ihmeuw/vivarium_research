@@ -109,7 +109,8 @@ The quantity of interest is exposure to the mean blood pressure level regardless
 
 We assume a maximum and minimum systolic blood pressure limit to account for high variation in 
 randomly drawn numbers. These values are set to 50 as the minimum and 300 as the maximum. This 
-effects only about 0.05% of simulants. 
+effects only about 0.05% of simulants. Simulants that had values outside of the max and min are 
+reassigned to the max or min value automatically. 
 
 Data Description
 ++++++++++++++++
