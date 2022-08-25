@@ -194,7 +194,7 @@ simultaneously. Scales linearly over 1 year such that there is 0% coverage at ba
   * - Parameter
     - Value
   * - Date of simulation burn-in period start
-    - N/A (no burn-in)
+    - January 1, 2021
   * - Date of simulation observation period start
     - January 1, 2023
   * - Date of intervention scale-up start
@@ -600,27 +600,87 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Reference
     - Data Source for Simulation
     - Notes
+  * - Baseline Coverage Data for Medication of SBP or LDL-C 
+    - See below code and equations 
+    - Generated from NHANES data 
+    - 
   * - SBP baseline coverage rate for each ramp position
-    - Egan et al. Hypertension. 2012;59:1124- 1131.
-    - /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/tx_percent_initialize.csv
-    -
+    - [An_2021]_
+    - 43% receive two drugs at half dose; 57% one drug at half dose 
+    - Burn in period will allow some simulants to move to different medication buckets prior to sim start 
   * - LDL-C baseline coverage rate
-    - 
-    - 
-    - 
-  * - History of ischemic heart disease at baseline 
-    - 
-    - 
-    - 
-  * - History of ischemic stroke at baseline 
-    - 
-    - 
-    - 
+    - [Garcia-Gil_2016]_
+    - 3.82% receive low intensity; 71.94% medium intensity; 24.24 high intensity 
+    - Burn in period will allow some simulants to move to different medication buckets prior to sim start 
   * - Follow-up visit initialization 
     - 
-    - All simulants on SBP medication, LDL-C medication, or a history of an acute event will receive a follow-up visit 
+    - All simulants on SBP medication, LDL-C medication, or a history of an acute event will receive a follow-up visit (post myocaridal infarction or chronic stroke state) 
+    - Burn in period will allow some simulants to have appointments for hypertension or hyperlipidemia prior to sim start 
+  * - Follow-up visit time distribution  
     - 
+    - With burn in, all simulants can be assigned a follow-up from the normal uniform distribution 
+    - Burn in period will allow some simulants to have appointments on sim start time step 
 
+
+Baseline Coverage Data for Medication of SBP or LDL-C
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. Bask To initialize simulants, the research team has fit a multinomial regression to NHANES data. 
+
+ :math:`\ln(\frac{P(tx=SBPonly)}{P(tx=none)}) = b_{10} + b_{11}(SBP_{level}) + b_{12}(LDL_{level}) + b_{13}age_{(yrs)} + b_{14}sex`
+ :math:`\ln(\frac{P(tx=LDLonly)}{P(tx=none)}) = b_{20} + b_{21}(SBP_{level}) + b_{22}(LDL_{level}) + b_{23}age_{(yrs)} + b_{24}sex`
+ :math:`\ln(\frac{P(tx=Both)}{P(tx=none)}) = b_{30} + b_{31}(SBP_{level}) + b_{32}(LDL_{level}) + b_{33}age_{(yrs)} + b_{34}sex`
+
+ 
+ .. code-block:: R
+
+  ###### Setup ######
+  rm(list=ls())
+
+  suppressMessages(library(data.table))
+  library(ggplot2)
+  library(nnet)
+
+  ###### Files and paths ######
+  file_path <- "/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/nhanes/"
+
+  ###### Read in file ######
+  load(paste0(file_path, "nhanes_microdata.rdata"))
+
+  # Recode treatment variables to account for skip pattern
+  data[,sbptx:=ifelse(highbp==0 & is.na(bpmeds), 0, bpmeds)]
+  data[,choltx:=ifelse(highchol==0 & is.na(cholmeds), 0, cholmeds)]
+  data[,tx:=ifelse(sbptx==0 & choltx==0, "none", ifelse(sbptx==1 & choltx==0, "bponly", 
+      ifelse(sbptx==0 & choltx==1, "cholonly", ifelse(sbptx==1 & choltx==1, "both", NA))))]
+  data[,tx2:=factor(tx, levels=c("none", "bponly", "cholonly", "both"))]
+
+  meds <- multinom(tx2 ~ bpsys + lbdldl + sex_id + age_year, data=data)
+
+  # weights:  24 (15 variable)
+  initial  value 21425.179351 
+  iter  10 value 16793.908492
+  iter  20 value 14903.770849
+  final  value 14903.720511 
+  converged
+
+  summary(meds)
+  Call: multinom(formula = tx2 ~ bpsys + lbdldl + sex_id + age_year, 
+    data = data)
+
+  Coefficients:
+           (Intercept)        bpsys       lbdldl     sex_id   age_year
+  bponly     -6.746432  0.024905946 -0.004474287  0.1578084 0.05006270
+  cholonly   -4.234380 -0.002564668 -0.005063271 -0.1900133 0.06173726
+  both       -6.262507  0.018470096 -0.013548739  0.1326292 0.06909707
+
+  Std. Errors:
+           (Intercept)       bpsys       lbdldl     sex_id    age_year
+  bponly     0.1863489 0.001265926 0.0006439986 0.04686429 0.001632670
+  cholonly   0.2665387 0.001872484 0.0009045871 0.06485975 0.002270549
+  both       0.2067298 0.001371421 0.0007557389 0.05139671 0.001875866
+
+  Residual Deviance: 29807.44 
+  AIC: 29837.44 
 
 
 .. _uscvd4.6:
@@ -708,6 +768,9 @@ Outputs:
 .. [Ali_2021] Ali, Dalia H., Birsen Kiliç, Huberta E. Hart, Michiel L. Bots, Marion C. J. Biermans, Wilko Spiering, Frans H. Rutten, and Monika Hollander. 2021. “Therapeutic Inertia in the Management of Hypertension in Primary Care.” Journal of Hypertension 39 (6): 1238–45. 
   https://doi.org/10.1097/HJH.0000000000002783.
 
+.. [An_2021] An, Jaejin, Tiffany Luong, Lei Qian, Rong Wei, Ran Liu, Paul Muntner, Jeffrey Brettler, Marc G. Jaffe, Andrew E. Moran, and Kristi Reynolds. 2021. “Treatment Patterns and Blood Pressure Control With Initiation of Combination Versus Monotherapy Antihypertensive Regimens.” Hypertension 77 (1): 103–13. 
+  https://doi.org/10.1161/HYPERTENSIONAHA.120.15462.
+
 .. [Arnett_2019] Arnett, Donna K., Roger S. Blumenthal, Michelle A. Albert, Andrew B. Buroker, Zachary D. Goldberger, Ellen J. Hahn, Cheryl Dennison Himmelfarb, et al. 2019. “2019 ACC/AHA Guideline on the Primary Prevention of Cardiovascular Disease: Executive Summary: A Report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines.” Circulation 140 (11). 
   https://doi.org/10.1161/CIR.0000000000000677  
 
@@ -731,6 +794,9 @@ Outputs:
 
 .. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
   https://doi.org/10.1007/s11606-010-1253-9 
+
+.. [Garcia-Gil_2016] García-Gil, Maria, Jordi Blanch, Marc Comas-Cufí, Josep Daunis-i-Estadella, Bonaventura Bolíbar, Ruth Martí, Anna Ponjoan, Lia Alves-Cabratosa, and Rafel Ramos. 2016. “Patterns of Statin Use and Cholesterol Goal Attainment in a High-Risk Cardiovascular Population: A Retrospective Study of Primary Care Electronic Medical Records.” Journal of Clinical Lipidology 10 (1): 134–42. 
+  https://doi.org/10.1016/j.jacl.2015.10.007.
 
 .. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
   https://doi.org/10.1161/01.cir.0000437741.48606.98
