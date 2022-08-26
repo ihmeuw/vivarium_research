@@ -181,18 +181,23 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Baseline (0%)
     - 
   * - 6: Universal SQ-LNS
-    - Baseline*
-    - Baseline*
-    - Scale-up 3a
-    - 
+    - Baseline
+    - Baseline
+    - Scale-up 3a to XXX
+    - XXX coverage of existing health sector services
   * - 7: Universal SQ-LNS at CMAM
     - Baseline+
     - Baseline+
-    - Scale-up 3a to XXX
-    - 
-  * - 8: SQ-LNS to mildly wasted
+    - Scale-up 3a to YYY
+    - YYY coverage of baseline CMAM screenings.
+  * - 8: Universal SQ-LNS + treatment scale-up
     - Scale-up
-    - Baseline*
+    - Scale-up
+    - Scale-up 3a
+    - 
+  * - 9: SQ-LNS to mildly wasted
+    - Scale-up
+    - Scale-up
     - Scale-up 3b
     - [Second wave that requires x-factor inclusion]
   * - 9: SQ-LNS to SAM and MAM treatment
@@ -203,7 +208,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 .. todo::
 
-  Add detail/strategy to scenario 7
+  Add detail/strategy to scenarios 6 and 7
 
   Consider if cells marked with an asterisk (*) should be replaced with zero coverage instead of baseline
 
@@ -332,12 +337,12 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - None
     - No x-factor component
   * - 2: Alternative scenario to optimize draws and seeds
-    - 1, 5, 6
+    - 1, 5, 8
     - 50 draws, 50 seeds
     - Count data results stratified by random seed for optimization
     - No x-factor component
-  * - 3: All scenarios
-    - 1, 2, 3, 4, 5, 6, 7
+  * - 3: All wave 1 scenarios
+    - 1 though 8
     - draws and seeds TBD
     - None
     - No x-factor component
