@@ -95,7 +95,7 @@ The intervention is the supplementation of children from aged **6 months to 23 m
 
 There have been several recent meta-analyses on the effects of SQ-LNS, outlined below:
 
-- A cochrane systematic review and meta-analysis [DAS_Cochrane_Review_2019]_. Please see this memo for a summary of the studies and the effect sizes :download:`SQ-LNS interventions memo<sqlns_memo_das2019.docx>`
+- A Cochrane systematic review and meta-analysis [DAS_Cochrane_Review_2019]_. Please see this memo for a summary of the studies and the effect sizes :download:`SQ-LNS interventions memo<sqlns_memo_das2019.docx>`
 
 - A meta-analysis of RCTs on all-cause mortality [Stewart-et-al-2020]_
 
