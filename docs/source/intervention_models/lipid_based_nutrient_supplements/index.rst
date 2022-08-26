@@ -264,7 +264,7 @@ Mortality
 
 .. todo::
     
-  Determine if necessary to include in model
+  Determine if necessary to include in model... we think no, but this should be discussed in limitations/assumptions of the simulation
 
 Hemoglobin/Anemia
 ~~~~~~~~~~~~~~~~~~
