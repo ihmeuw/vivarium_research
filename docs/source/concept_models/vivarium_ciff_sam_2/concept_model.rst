@@ -166,18 +166,18 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Baseline (0%)
     - 
   * - 3: SAM treatment scale-up
-    - Scale-up to target
+    - Scale-up
     - Baseline*
     - Baseline (0%)
     - 
   * - 4: MAM treatment scale-up
     - Baseline*
-    - Scale-up to target
+    - Scale-up
     - Baseline (0%)
     - 
   * - 5: MAM and SAM treatment scale-up
-    - Scale-up to target
-    - Scale-up to target
+    - Scale-up
+    - Scale-up
     - Baseline (0%)
     - 
   * - 6: Universal SQ-LNS + treatment scale-up
