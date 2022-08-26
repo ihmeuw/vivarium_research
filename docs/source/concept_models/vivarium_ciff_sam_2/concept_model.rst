@@ -122,7 +122,7 @@ Simulated scenarios will involve some change of coverage/efficacy parameter valu
 
   * - Intervention
     - Baseline
-    - Scale-up
+    - Scale-up target
     - Zero coverage
   * - 1: SAM treatment
     - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
@@ -166,41 +166,31 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Baseline (0%)
     - 
   * - 3: SAM treatment scale-up
-    - Scale-up
+    - Scale-up to target
     - Baseline*
     - Baseline (0%)
     - 
   * - 4: MAM treatment scale-up
     - Baseline*
-    - Scale-up
+    - Scale-up to target
     - Baseline (0%)
     - 
   * - 5: MAM and SAM treatment scale-up
-    - Scale-up
-    - Scale-up
+    - Scale-up to target
+    - Scale-up to target
     - Baseline (0%)
     - 
-  * - 6: Universal SQ-LNS
-    - Baseline
-    - Baseline
-    - Scale-up 3a to XXX
-    - XXX coverage of existing health sector services
-  * - 7: Universal SQ-LNS at CMAM
-    - Baseline+
-    - Baseline+
-    - Scale-up 3a to YYY
-    - YYY coverage of baseline CMAM screenings.
-  * - 8: Universal SQ-LNS + treatment scale-up
+  * - 6: Universal SQ-LNS + treatment scale-up
     - Scale-up
     - Scale-up
     - Scale-up 3a
     - 
-  * - 9: SQ-LNS to mildly wasted
+  * - 7: SQ-LNS to mildly wasted
     - Scale-up
     - Scale-up
     - Scale-up 3b
     - [Second wave that requires x-factor inclusion]
-  * - 9: SQ-LNS to SAM and MAM treatment
+  * - 8: SQ-LNS to SAM and MAM treatment
     - Scale-up
     - Scale-up
     - Scale-up 3c
@@ -208,13 +198,13 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 .. todo::
 
-  Add detail/strategy to scenarios 6 and 7
-
   Consider if cells marked with an asterisk (*) should be replaced with zero coverage instead of baseline
 
 .. note::
 
   We may add/remove scenarios based on results of existing list
+
+  Additional scenarios to consider include one in which SQ-LNS coverage is scaled-up to baseline coverage of CMAM screenings (:math:`C_{SAM}`) and coverage of MAM and SAM treatment are increased by some magnitude as well. There is some evidence to suggest that administering SQ-LNS at CMAM screenings may increase screening coverage [Huybregts-et-al-2019]_; however, we chose not to model this scenario as the paper ultimately did not find an impact on *treatment* coverage. As more evidence on this topic becomes available, we may consider including this scenario in our model.
 
 2.3 Modelling components
 ------------------------------
@@ -337,12 +327,12 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - None
     - No x-factor component
   * - 2: Alternative scenario to optimize draws and seeds
-    - 1, 5, 8
+    - 1, 5, 6
     - 50 draws, 50 seeds
     - Count data results stratified by random seed for optimization
     - No x-factor component
   * - 3: All wave 1 scenarios
-    - 1 though 8
+    - 1 though 6
     - draws and seeds TBD
     - None
     - No x-factor component
@@ -369,3 +359,12 @@ For scenarios that feature a scale-up of one of the above interventions, interve
      -  
      -  
      -  
+
+References
+----------
+
+.. [Huybregts-et-al-2019]
+
+  View `Huybregts et al. 2019 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6711497/pdf/pmed.1002892.pdf>`_
+  
+    Huybregts L, Le Port A, Becquey E, Zongrone A, Barba FM, Rawat R, Leroy JL, Ruel MT. Impact on child acute malnutrition of integrating small-quantity lipid-based nutrient supplements into community-level screening for acute malnutrition: A cluster-randomized controlled trial in Mali. PLoS Med. 2019 Aug 27;16(8):e1002892. doi: 10.1371/journal.pmed.1002892. PMID: 31454356; PMCID: PMC6711497.
