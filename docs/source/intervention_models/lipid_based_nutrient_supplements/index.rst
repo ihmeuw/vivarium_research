@@ -99,7 +99,7 @@ There have been several recent meta-analyses on the effects of SQ-LNS, outlined 
 
 - A meta-analysis of RCTs on all-cause mortality [Stewart-et-al-2020]_
 
-  - All-cause mortality was significantly lower in the SQLNS arm than the non-SQLNS arm (RR: 0.73; 95% CI: 0.59, 0.89; 13 trials)
+  - All-cause mortality was significantly lower in the SQ-LNS arm than the non-SQ-LNS arm (RR: 0.73; 95% CI: 0.59, 0.89; 13 trials)
 
 - A series of individual participant data meta-analyses (with analysis of effect modification), as summarized by [Dewey-et-al-2021a]_. These papers included eligible studies from the review published by [DAS_Cochrane_Review_2019]_ as well as additional data published following the publication of the cochrane review. Minimum supplementation duration for inclusion was three months between the ages of six and 24 months of age. Most studies began supplementation at six months of age with intended supplementation duration of 6-18 months. The series included individual analyses on the following outcomes:
 
