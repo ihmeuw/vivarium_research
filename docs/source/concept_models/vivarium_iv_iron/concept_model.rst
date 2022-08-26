@@ -236,7 +236,9 @@ As new locations are added to this model, there are several data values that nee
 
   - `Hemoglobin fraction under 100 g/L calculation notebook found here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_100.ipynb>`_
 
-  - `Hemoglobin fraction under 100 g/L data avilable here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+  - For maternal model use: `Age-specific hemoglobin fraction under 100 g/L data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100_age_specific.csv>`_
+
+  - For child model use: `Non-age-specific hemoglobin fraction under 100 g/L data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/pregnant_proportion_with_hgb_below_100.csv>`_
 
 - Hemoglobin fraction under 70 g/L
 
@@ -248,9 +250,17 @@ As new locations are added to this model, there are several data values that nee
 
   - `BMI exposure calculation performed here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/BMI%20and%20anemia%20exposure.ipynb>`_. Note that the ensemble distribution functions take some time, so it is preferred not to rerun locations that have data generated already.
 
-  - `BMI exposure given low hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10.csv>`_
+  - Age-specific values for maternal model use: 
 
-  - `BMI exposure given high hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+    - `Age-specific BMI exposure given low hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10.csv>`_
+
+    - `Age-specific BMI exposure given high hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10.csv>`_
+
+  - Non-age-specific values for child model use: 
+
+    - `BMI exposure given low hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_below_10_age_weighted.csv>`_
+
+    - `BMI exposure given high hemoglobin data available here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/misc_investigations/prevalence_of_low_bmi_given_hemoglobin_above_10_age_weighted.csv>`_
 
 - Hemoglobin on maternal disorders PAF
 
