@@ -610,7 +610,7 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Burn in period will allow some simulants to move to different medication buckets prior to sim start 
   * - LDL-C baseline coverage rate
     - [Garcia-Gil_2016]_
-    - 3.82% receive low intensity; 71.94% medium intensity; 24.24 high intensity 
+    - 3.82% receive low intensity; 71.94% medium intensity; 24.24% high intensity 
     - Burn in period will allow some simulants to move to different medication buckets prior to sim start 
   * - Follow-up visit initialization 
     - 
@@ -625,7 +625,7 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
 Baseline Coverage Data for Medication of SBP or LDL-C
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. Bask To initialize simulants, the research team has fit a multinomial regression to NHANES data. 
+Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. 
 
  :math:`\ln(\frac{P(tx=SBPonly)}{P(tx=none)}) = b_{10} + b_{11}(SBP_{level}) + b_{12}(LDL_{level}) + b_{13}age_{(yrs)} + b_{14}sex`
  :math:`\ln(\frac{P(tx=LDLonly)}{P(tx=none)}) = b_{20} + b_{21}(SBP_{level}) + b_{22}(LDL_{level}) + b_{23}age_{(yrs)} + b_{24}sex`
