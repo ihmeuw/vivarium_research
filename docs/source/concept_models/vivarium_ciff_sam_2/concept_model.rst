@@ -275,7 +275,6 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   - All-cause mortality rates
   - All-cause YLL rates
   - Cause-specific YLD rates
-  - Relative
 
   *Secondary simulation outcomes*:
 
