@@ -52,7 +52,7 @@ The goal of this simulation is to investigate the question:
 
       1. Universal SQ-LNS coverage scale-up strategies (no x-factor)
 
-      2. Targeted SQ-LNS coverage scale-up strategies (untilizing x-factor)
+      2. Targeted SQ-LNS coverage scale-up strategies (utilizing x-factor)
 
 `Additional background on the project and resources for publication can be found here. <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_sim_science_collaborations/_layouts/15/Doc.aspx?sourcedoc=%7BFE3E9389-829B-4BEC-A425-7487A1A510A8%7D&file=Updated%20draft%20introduction%20outline.docx&action=default&mobileredirect=true>`_
 

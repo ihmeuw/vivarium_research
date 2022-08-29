@@ -65,7 +65,7 @@ For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sa
 Diarrheal diseases (to be used when the :ref:`risk effect of diarrheal diseases on wasting <2019_risk_effect_diarrheal_diseases>` is included in model)
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the relaive risks for wasting on diarrheal diseases should be applied to the diarrheal diseases excess mortality rate and not the diarrheal diseases incidence rate in the following manner: 
+For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the relative risks for wasting on diarrheal diseases should be applied to the diarrheal diseases excess mortality rate and not the diarrheal diseases incidence rate in the following manner: 
 
 .. math::
 
@@ -115,7 +115,7 @@ Assumptions and Limitations
 Lower respiratory infections and measles (and diarrheal diseases when :ref:`risk effect of diarrheal diseases on wasting <2019_risk_effect_diarrheal_diseases>` is not included in the model)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the relaive risks for wasting on lower respiratory infections and measles should be applied to the diarrheal diseases excess mortality rate and not the diarrheal diseases incidence rate in the following manner:
+For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`, the relative risks for wasting on lower respiratory infections and measles should be applied to the diarrheal diseases excess mortality rate and not the diarrheal diseases incidence rate in the following manner:
 
 .. math::
 
