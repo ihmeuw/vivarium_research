@@ -34,6 +34,22 @@
 Small quantity lipid based nutrient supplements (SQ-LNS)
 ========================================================
 
+.. note::
+
+  This page underwent a revision in August of 2021 to reflect desired modeling strategy of the :ref:`phase II acute malnutrition simulation <2020_concept_model_vivarium_ciff_sam>` updated from the strategy used for the :ref:`phase I acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+
+  The PRs associated with these updates are listed below.
+
+  - `https://github.com/ihmeuw/vivarium_research/pull/961 <https://github.com/ihmeuw/vivarium_research/pull/961>`_
+  - `https://github.com/ihmeuw/vivarium_research/pull/963 <https://github.com/ihmeuw/vivarium_research/pull/963>`_
+
+  A summary of the associated changes to modeling strategy includes:
+
+  - Reduction in the age end parameter from 5 years to 2 years
+  - Update of the effect size on child wasting in accordance with newly published literature
+  - New utilization algorithms
+  - Potential for new intervention effect on ACMR (not currently included in this document)
+
 Ideally, infants are breastfed for two years or longer, with complementary food introduced at six months of age. Diets of infants and young children aged six to 23 months need to include a variety of nutrient-dense foods, preferably from local sources, to ensure their nutrient needs are met. However, children's diets are likely to be deficient in macronutrients and micronutrients, specifically essential fatty acids, when nutrient-rich diets are not available to them in resource-poor settings. Various interventions are recommended, or have been used, to improve child malnutrition. This document focuses on small quantity lipid based nutrient supplements (SQ-LNS) as an intervention to improve malnutrition, particularly child wasting and stunting. Particularly, it draws on the 2019 Cochrane Review by Das et. al. [DAS_Cochrane_Review_2019]_
 
 .. contents::
