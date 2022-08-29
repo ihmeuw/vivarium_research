@@ -138,7 +138,7 @@ Coverage algorithms
 
 There are various SQ-LNS coverage algorithms that may be desired under differing scenarios. They include:
 
-- **Universal coverage:** All covered simulants begin recive effects starting at six months of age.
+- **Universal coverage:** All covered simulants recive effects starting at six months of age.
 - **Targeted to AM treatment:** Covered simulants who transition from MAM or SAM to mild wasting will receive intervention effects starting at that timestep.
 - **Targeted to mild wasting:** Covered simulants who are initialized into or transition into the mild wasting state will receive intervention effects starting at that timestep.
 
@@ -162,7 +162,7 @@ All effects will persist until 24 months of age.
     - intervention starts at 6 months
   * - Age group end (exclusive)
     - 34 (2-4yr)
-    - children >24 months of age **not** eligible to begin coverage
+    - Children >24 months of age **not** eligible
   * - Other
     -
     -
@@ -177,7 +177,7 @@ Wasting
 
 For the outcome moderate wasting, [DAS_Cochrane_Review_2019]_ compared prevalence of **moderate wasting** at 18 or 24 months between intervention and control children. LNS plus complementary feeding reduced the prevalence of moderate wasting by 18% (RR 0.82, 95% CI 0.74 to 0.91; eight studies; 13,172 participants; moderate-quality evidence). There was *no impact* of LNS plus complementary feeding on **severe wasting** (RR 1.27, 95% CI 0.66 to 2.46; three studies, 2329 participants)
 
-[Dewey-et-al-2021b]_ found a the prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes.
+[Dewey-et-al-2021b]_ found a prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes.
 
 We will apply the relative risk ratio as a relative rate ratio on the incidence of MAM from MILD (i2) starting from the age-start of the intervention starts (6 months). This is because we assume that the intervention does not affect the duration of disease and hence:
 
