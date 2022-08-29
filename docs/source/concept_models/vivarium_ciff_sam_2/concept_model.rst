@@ -48,6 +48,12 @@ The goal of this simulation is to investigate the question:
 
   - What is the required treatment volume of MAM (and SAM) under various scale-up and targeting strategies for joint community management of acute malnutrition (for SAM and/or MAM) and small quantity lipid-based nutrient supplementation (SQ-LNS). 
 
+    We will begin to investigate this question in two waves:
+
+      1. Universal SQ-LNS coverage scale-up strategies (no x-factor)
+
+      2. Targeted SQ-LNS coverage scale-up strategies (utilizing x-factor)
+
 `Additional background on the project and resources for publication can be found here. <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_sim_science_collaborations/_layouts/15/Doc.aspx?sourcedoc=%7BFE3E9389-829B-4BEC-A425-7487A1A510A8%7D&file=Updated%20draft%20introduction%20outline.docx&action=default&mobileredirect=true>`_
 
 2.0 Simulation design
@@ -78,11 +84,11 @@ The goal of this simulation is to investigate the question:
     - Six months
     - 
   * - Age end
-    - 2 years
-    - Consider increasing to 5?
+    - 5 years
+    - 
   * - Exit age
-    - 2 years
-    - Consider increasing to 5?
+    - 5 years
+    - 
   * - Simulation start date
     - 2021-07-01
     - 
@@ -107,17 +113,16 @@ Simulated scenarios will involve some change of coverage/efficacy parameter valu
 
   3. SQ-LNS
 
-    * 3a. Targeted to those with mild wasting
-    * 3b. Targeted to those recovered from SAM treatment
-    * 3c. Targeted to those recovered from MAM treatment
-    * 3d. Universal
+    * 3a. Universal
+    * 3b. Targeted to those with mild wasting
+    * 3c. Targeted to those recovered from SAM/MAM treatment
 
 .. list-table:: Intervention coverage and efficacy parameters
   :header-rows: 1
 
   * - Intervention
     - Baseline
-    - Scale-up
+    - Scale-up target
     - Zero coverage
   * - 1: SAM treatment
     - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
@@ -175,40 +180,23 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Scale-up
     - Baseline (0%)
     - 
-  * - 6: SQ-LNS to mildly wasted
-    - Baseline*
-    - Baseline*
+  * - 6: Universal SQ-LNS + treatment scale-up
+    - Scale-up
+    - Scale-up
     - Scale-up 3a
     - 
-  * - 7: SQ-LNS at CMAM
-    - Baseline+
-    - Baseline+
-    - Scale-up to XXX
-    - 
-  * - 8: SQ-LNS to SAM treatment
+  * - 7: SQ-LNS to mildly wasted
     - Scale-up
-    - Baseline*
+    - Scale-up
     - Scale-up 3b
-    - 
-  * - 9: SQ-LNS to SAM and MAM treatment
+    - [Second wave that requires x-factor inclusion]
+  * - 8: SQ-LNS to SAM and MAM treatment
     - Scale-up
     - Scale-up
-    - Scale-up 3b and 3c
-    - 
-  * - 10: SQ-LNS fully targeted
-    - Scale-up
-    - Scale-up
-    - Scale up 3a, 3b, 3c
-    - 
-  * - 11: SQ-LNS universal
-    - Scale-up
-    - Scale-up
-    - Scale-up 3d
-    - 
+    - Scale-up 3c
+    - [Second wave that requires x-factor inclusion]
 
 .. todo::
-
-  Add detail/strategy to scenario 7
 
   Consider if cells marked with an asterisk (*) should be replaced with zero coverage instead of baseline
 
@@ -216,11 +204,17 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
   We may add/remove scenarios based on results of existing list
 
+  Additional scenarios to consider include one in which SQ-LNS coverage is scaled-up to baseline coverage of CMAM screenings (:math:`C_{SAM}`) and coverage of MAM and SAM treatment are increased by some magnitude as well. There is some evidence to suggest that administering SQ-LNS at CMAM screenings may increase screening coverage [Huybregts-et-al-2019]_; however, we chose not to model this scenario as the paper ultimately did not find an impact on *treatment* coverage. As more evidence on this topic becomes available, we may consider including this scenario in our model.
+
 2.3 Modelling components
 ------------------------------
 
 2.3.1 Concept model diagram
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. note::
+
+  X-factor will be included in the second wave of model runs/scenarios only
 
 .. image:: am_concept_model_diagram.svg
 
@@ -250,13 +244,9 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 * Child Stunting Risk Effects (GBD 2020)
 
-* :ref:`Child Wasting Risk Effects (GBD 2020) <2019_risk_effect_wasting>`
+* :ref:`Child Wasting Risk Effects (GBD 2020) <2019_risk_effect_wasting>`, NOTE: use the :ref:`risk effect on diarrheal diseases described here <standard-wasting-effects>`
 
-.. todo::
-
-  Confirm/clarify impact of wasting on diarrhea (don't use vicious cycle-specific stuff)
-
-* :ref:`X-factor Risk Effects <2019_risk_effect_x_factor>`
+* :ref:`X-factor Risk Effects <2019_risk_effect_x_factor>`, for wave 2 model runs only
 
 .. note::
 
@@ -267,17 +257,9 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 .. todo::
 
-  Consider adding mortality impacts? Esp. for SAM tx
+  Consider adding mortality impacts? We're thinking no for now.
 
 * :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>` 
-
-.. todo::
-
-  Document details on how to target SQ-LNS
-
-  When can you start?? Before 24 months and then take for certain duration, or only take between ages of 6-24 months?
-
-  Consider sex-specific effects
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
 
@@ -327,19 +309,33 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 3.0 Models
 +++++++++++
 
+.. note::
+
+  Model run requests may be added to this table for iterative verification and validation processes
+
 .. list-table:: Model runs
   :header-rows: 1
 
   * - Run
     - Scenarios
     - Specification modifications
-    - Stratificaction
+    - Stratificaction modifications
     - Note
   * - 1: Baseline
     - 1
     - None
-    - XXX
-    - 
+    - None
+    - No x-factor component
+  * - 2: Alternative scenario to optimize draws and seeds
+    - 1, 5, 6
+    - 50 draws, 50 seeds
+    - Count data results stratified by random seed for optimization
+    - No x-factor component
+  * - 3: All wave 1 scenarios
+    - 1 though 6
+    - draws and seeds TBD
+    - None
+    - No x-factor component
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
@@ -363,3 +359,12 @@ For scenarios that feature a scale-up of one of the above interventions, interve
      -  
      -  
      -  
+
+References
+----------
+
+.. [Huybregts-et-al-2019]
+
+  View `Huybregts et al. 2019 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6711497/pdf/pmed.1002892.pdf>`_
+  
+    Huybregts L, Le Port A, Becquey E, Zongrone A, Barba FM, Rawat R, Leroy JL, Ruel MT. Impact on child acute malnutrition of integrating small-quantity lipid-based nutrient supplements into community-level screening for acute malnutrition: A cluster-randomized controlled trial in Mali. PLoS Med. 2019 Aug 27;16(8):e1002892. doi: 10.1371/journal.pmed.1002892. PMID: 31454356; PMCID: PMC6711497.
