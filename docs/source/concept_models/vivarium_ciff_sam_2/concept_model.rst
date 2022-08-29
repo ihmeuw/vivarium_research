@@ -284,29 +284,38 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
     - Person-time spent covered by SQ-LNS per 100,000 PY (:ref:`see difference between coverage and utilization here <utilization-definition>`)
 
-**Requested outputs for primary outcomes** with minimum required stratification beyond default sex, age, and year strata (additional stratification requested below if needed for V&V):
+**Requested outputs for primary outcomes** with minimum required stratification beyond defaults (additional stratification requested below if needed for V&V):
 
-  - Stunting state person time
+  Default strata:
 
-  - Wasting transition counts
+  - Age
+  - Sex
+  - Year
 
-    - Stratified by:
+.. list-table:: Requested Count Data Outputs and Stratifications
+  :header-rows: 1
 
-      - MAM treatment coverage
-
-      - SAM treatment coverage
-
-  - Wasting state person time
-
-    - Stratified by:
-
-      - SQ-LNS coverage and utilization status (and MAM/SAM treatment coverage for secondary outcome)
-
-  - Cause-specific mortality, YLL, and YLD counts
-
-    - Stratified by:
-
-      - MAM and SAM treatment coverage and SQ-LNS treatment utilization (for secondary outcome only)
+  * - Output
+    - Include strata
+    - Exclude strata
+  * - Stunting state person time
+    - 
+    - 
+  * - Wasting transition counts
+    - * MAM treatment coverage/efficacy
+      * SAM treatment coverage/efficacy
+    - 
+  * - Wasting state person time
+    - * SQ-LNS coverage/utilization 
+    - 
+  * - Mortality (cause-specific)
+    - * MAM treatment coverage/efficacy
+      * SAM treatment coverage/efficacy
+      * SQ-LNS coverage/utilization
+    - 
+  * - Morbidity
+    - 
+    - 
 
 3.0 Models
 +++++++++++
@@ -323,17 +332,17 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Specification modifications
     - Stratificaction modifications
     - Note
-  * - 1: Baseline
+  * - 1.0: Baseline
     - 1
     - None
     - None
     - No x-factor component
-  * - 2: Alternative scenario to optimize draws and seeds
+  * - 2.0: Alternative scenario to optimize draws and seeds
     - 1, 5, 6
     - 50 draws, 50 seeds
     - Count data results stratified by random seed for optimization
     - No x-factor component
-  * - 3: All wave 1 scenarios
+  * - 3.0: All wave 1 scenarios
     - 1 though 6
     - draws and seeds TBD
     - None
