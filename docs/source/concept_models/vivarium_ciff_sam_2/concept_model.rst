@@ -270,17 +270,20 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
   - Number of incident MAM and SAM cases per 100,000 PY
   - Number of *treated* MAM and SAM cases per 100,000 PY
-  - Person-time spent covered by SQ-LNS per 100,000 PY 
+  - Person-time spent utilizing SQ-LNS per 100,000 PY 
   - Prevalence of wasting and stunting
   - All-cause mortality rates
   - All-cause YLL rates
   - Cause-specific YLD rates
+  - Relative
 
   *Secondary simulation outcomes*:
 
     - Relative risk for all-cause mortality by intervention coverage 
 
       - For comparison with trial data
+
+    - Person-time spent covered by SQ-LNS per 100,000 PY (:ref:`see difference between coverage and utilization here <utilization-definition>`)
 
 **Requested outputs for primary outcomes** with minimum required stratification beyond default sex, age, and year strata (additional stratification requested below if needed for V&V):
 
@@ -298,13 +301,13 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
     - Stratified by:
 
-      - SQ-LNS coverage (and MAM/SAM treatment coverage for secondary outcome)
+      - SQ-LNS coverage and utilization status (and MAM/SAM treatment coverage for secondary outcome)
 
   - Cause-specific mortality, YLL, and YLD counts
 
     - Stratified by:
 
-      - SQ-LNS, MAM treatment, and SAM treatment coverage (for secondary outcome only)
+      - MAM and SAM treatment coverage and SQ-LNS treatment utilization (for secondary outcome only)
 
 3.0 Models
 +++++++++++

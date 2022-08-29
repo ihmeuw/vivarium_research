@@ -133,18 +133,26 @@ No baseline coverage of SQ-LNS (0%)
 Vivarium Modeling Strategy
 --------------------------
 
-Coverage algorithms
-+++++++++++++++++++
+.. _utilization-definition:
 
-There are various SQ-LNS coverage algorithms that may be desired under differing scenarios. They include:
+Utilization algorithms
+++++++++++++++++++++++++
 
-- **Universal coverage:** All covered simulants recive effects starting at six months of age.
+We will consider two concepts of SQ-LNS services, including:
+
+- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in 
+
+- **Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
+
+There are various SQ-LNS utilization algorithms that may be desired under differing scenarios. They include:
+
+- **Universal coverage:** All covered simulants receive effects starting at six months of age.
 - **Targeted to AM treatment:** Covered simulants who transition from MAM or SAM to mild wasting will receive intervention effects starting at that timestep.
 - **Targeted to mild wasting:** Covered simulants who are initialized into or transition into the mild wasting state will receive intervention effects starting at that timestep.
 
 All effects will persist until 24 months of age.
 
-.. list-table:: Affected Outcome Restrictions
+.. list-table:: SQ-LNS Utilization Restrictions
   :widths: 15 15 15
   :header-rows: 1
 
