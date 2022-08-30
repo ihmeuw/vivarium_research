@@ -282,8 +282,159 @@ As new locations are added to this model, there are several data values that nee
 
 .. _iviron5.0:
 
-5.0 Back of the envelope calculations
+5.0 Model run requests
 +++++++++++++++++++++++++++++++++++++
+
+.. list-table:: Model run plan as of August 30, 2022
+  :header-rows: 1
+
+  * - Number
+    - Run
+    - Status
+    - Priority
+    - Number of draws
+    - Population size per draw
+    - Note
+  * - 1
+    - Wave I India maternal
+    - Complete
+    - N/A
+    - 25
+    - 60
+    - 
+  * - 2
+    - Wave I Nigeria maternal
+    - Complete
+    - N/A
+    - 25
+    - 600,000
+    - 
+  * - 3
+    - Wave I Ethiopia maternal
+    - Complete
+    - N/A
+    - 25
+    - 600,000
+    - 
+  * - 4
+    - Wave I India child
+    - Complete
+    - N/A
+    - 25
+    - 600,000
+    - 
+  * - 5
+    - Wave I Ethiopia child
+    - Partially complete, remaining jobs in progress
+    - 1
+    - 25
+    - 600,000
+    - 
+  * - 6
+    - Wave I Nigeria child
+    - In progress
+    - 1
+    - 25
+    - 600,000
+    - 
+  * - 7
+    - Wave I SSA maternal
+    - Not yet started
+    - 2
+    - 25
+    - 600,000
+    - 
+  * - 8
+    - Wave I SA maternal
+    - Not yet started
+    - 2
+    - 25
+    - 600,000
+    - 
+  * - 9
+    - Wave I SSA child
+    - Not yet started
+    - 2
+    - 25
+    - 600,000
+    - 
+  * - 10
+    - Wave I SA child
+    - Not yet started
+    - 2
+    - 25
+    - 600,000
+    - 
+  * - 11
+    - Wave II India maternal
+    - Complete
+    - N/A
+    - ??
+    - ??
+    - Additional draws and/or seeds ran for this run. Will need to handle in results processing.
+  * - 12
+    - Wave II Nigeria maternal
+    - Not yet started
+    - 3
+    - 25
+    - 600,000
+    - 
+  * - 13
+    - Wave II Ethiopia maternal
+    - Not yet started
+    - 3
+    - 25
+    - 600,000
+    - 
+  * - 14
+    - Wave II India child
+    - Not yet started
+    - 3
+    - 25
+    - 600,000
+    - 
+  * - 15
+    - Wave II Ethiopia child
+    - Not yet started
+    - 3
+    - 25
+    - 600,000
+    - 
+  * - 16
+    - Wave II Nigeria child
+    - Not yet started
+    - 3
+    - 25
+    - 600,000
+    - 
+  * - 17
+    - Wave II SSA maternal
+    - Not yet started
+    - 4
+    - 25
+    - 600,000
+    - 
+  * - 18
+    - Wave II SA maternal
+    - Not yet started
+    - 4
+    - 25
+    - 600,000
+    - 
+  * - 19
+    - Wave II SSA child
+    - Not yet started
+    - 4
+    - 25
+    - 600,000
+    - 
+  * - 20 
+    - Wave II SA child
+    - Not yet started
+    - 4
+    - 25
+    - 600,000
+    - 
 
 .. _iviron6.0:
 
