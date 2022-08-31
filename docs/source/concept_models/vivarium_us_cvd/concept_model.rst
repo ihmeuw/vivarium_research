@@ -396,7 +396,7 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - [Wallace_2011]_
   * - B
-    - 41.76% will not change medication due to theraputic inertia 
+    - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia 
     - [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication; 26.25% will receive two drugs at half dose, remainder will receive one drug at half dose  
@@ -424,12 +424,18 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
     - [McCormack_2020]_
   * - C
-    - 19.4% will not start medication; 14.2% will receive high intensity statin; 55.1% medium intensity; and 11.3% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_
+    - 19.4% will not start medication; 33.9% will receive high intensity statin; 41.9% medium intensity; and 4.8% low intensity 
+    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - D
-    - 19.4% will not change medication due to theraputic inertia 
-    - [Morales_2018]_ 
+    - 19.4% will not start medication; 19.3% will receive high intensity statin; 53.2% medium intensity; and 8.1% low intensity 
+    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
+    - 19.4% will not start medication; 12.1% will receive high intensity statin; 57.2% medium intensity; and 11.3% low intensity 
+    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+  * - F
+    - Only adherent simulants will move up categories. 19.4% will not change medication due to theraputic inertia 
+    - [Morales_2018]_ 
+  * - G
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
 
@@ -462,7 +468,7 @@ adherent, their adherence score is 1.
 
 
  .. Note::
-    This is an opportunity area for improvement in later models. Adherence can include partial benefit, and can be done at a state level with survey or Medicare data if there is available time. 
+    The current adherence system is a placeholder for additional information to be added in later models. Ideally, we will utilize a first-hand dataset to create adherence by age, sex, and state. Adherence should be programmed in such a way that allowing for later changes is easy to implement. 
 
 
 **LDL-C Treatments**
@@ -478,11 +484,11 @@ adherent, their adherence score is 1.
     - 25%
     - [Cheen_2019]_
   * - Secondary Non-adherence
-    - 35.85%
+    - 34.5%
     - 
   * - Adherent
-    - 39.15%
-    - [Oung_2017]_
+    - 40.5%
+    - [Chowdhury_2013]_
 
 
 **Blood Pressure Treatments**
@@ -498,11 +504,11 @@ adherent, their adherence score is 1.
     - 16%
     - [Cheen_2019]_
   * - Secondary Non-adherence
-    - 36.46%
+    - 34.44%
     - 
   * - Adherent
-    - 47.54%
-    - [Oung_2017]_
+    - 49.56%
+    - [Chowdhury_2013]_
 
 
 
@@ -540,11 +546,7 @@ simulant treatment is completed in the healthcare visits above. The choice of in
 simulant's ASCVD score and LDL-C. For simulants where theraputic inertia is overcome, the treatment assignements
 are summarized below. [Arnett_2019]_
 
-- A new simulant with ASCVD greater than 7.5% and LDL-C greater than 70 mg/dL:
-  
-  - 17.7% are assigned a high intensity statin 
-  - 68.4% are assigned a medium intensity statin 
-  - 14.0% are assigned a low intensity statin 
+- LDL-C value, ASCVD risk and medical history all contribute to a simulants's statin prescription. 
 
 - A simulant already on medication with LDL-C > 70 mg/dL will move up one treatment category 
   
@@ -558,6 +560,9 @@ Treatment Effects
 ~~~~~~~~~~~~~~~~~
 
 **Blood Pressure Treatments**  
+
+.. todo::
+  - Add parameter variation if needed to SBP decreases 
 
 Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
@@ -575,12 +580,17 @@ SBP decrease = SBP treatment efficacy * Adherence score
 
 LDL-C treatment efficacy is a percent reduction in LDL-C level. This means that simulants with higher 
 initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
-/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_ldl.csv [Hou_2009]_ [Goff_2014]_
+/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+
+For each seed/draw, a parameter value for efficacy will be selected based on the mean and 95% confidence 
+interval provided in the table above. This average value for efficacy by category will be used for all 
+simulants. This accounts for parameter uncertainity only. Variation in the simulant response is assumed 
+to not affect the population measures used as outputs from this simulation. 
 
 LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, and the inclusion 
-of additional treatments with statins. This assumes that the impact of different individual therapies is 
+of ezetimibe with statins. This assumes that the impact of different individual therapies is 
 similar and they therefore are not modeled individually. The maximum amount of medications a 
-simulant can receive is high intensity statins with an additional non-statin medication. 
+simulant can receive is high intensity statins with ezetimibe. 
 
 LDL-C decrease for an individual simulant is based on both the medication impact and adherence score:  
 
@@ -614,7 +624,7 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Burn in period will allow some simulants to move to different medication buckets prior to sim start 
   * - Follow-up visit initialization 
     - 
-    - All simulants on SBP medication, LDL-C medication, or a history of an acute event will receive a follow-up visit (post myocaridal infarction or chronic stroke state) 
+    - All simulants on SBP medication, LDL-C medication, or a history of an  acute event will receive a follow-up visit (post myocaridal infarction or chronic stroke state) 
     - Burn in period will allow some simulants to have appointments for hypertension or hyperlipidemia prior to sim start 
   * - Follow-up visit time distribution  
     - 
@@ -687,13 +697,12 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
 
 4.6 Models
 ----------
-`Simulation Results <https://shiny.ihme.washington.edu/content/416/>`_
 
  .. note::
-    validation notebooks and results are stored in /mnt/team/cvd/pub/usa_re/sim_science/validation/
+    Simulation results in the R-Shiny below are from a prior version of the project and have not been updated with new data 
+
+`Simulation Results <https://shiny.ihme.washington.edu/content/416/>`_
     
- .. todo::
-    Complete table with plan for the models in order of implementation 
 
 .. list-table:: Model verification and validation tracking
   :widths: 3 10 20
@@ -703,22 +712,22 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
     - Description
     - V&V summary
   * - 1.0
-    - Alabama; IHD, ischemic stroke
-    - Incidence of MI matches GBD but is overestimated in simulation compared to the artifact. Results appear sensitive to small sample sizes. 
+    - Cause model for myocardial infarction and ischemic stroke in Alabama 
+    - `Validation workbook Model 1 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model1_VV-withMI.ipynb>`_ Incidence and prevalance match GBD and artifact values. CSMR, EMR and DALYs compared to GBD/the artifact are slightly off for MI, likely due to implementation of IHD data. ACMR is correctly, need to continue to confirm this as other IHD causes are added. Results appear sensitive to small sample sizes. 
   * - 2.0
-    - SBP and LDL-C 
-    - Validated 
+    - Adding SBP and LDL-C risk factors 
+    - `Validation workbook Model 2 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model2_VV_SBP.ipynb>`_ `And interactive sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model2_VV.ipynb>`_ Cause model is identical to Model 1 with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. 
   * - 3.0
-    - FPG and BMI 
-    - Validated 
+    - Adding angina as a cause    
+    - 
   * - 4.0
-    - HF 
-    - Not validating 
+    - Adding heart failure as a cause  
+    - 
   * - 5.0
-    -  
+    - Adding in healthcare system and medications for SBP and LDL-C  
     -  
   * - 6.0
-    -  
+    - Adding in the outreach intervention 
     -  
   
 .. _uscvd4.7:
@@ -786,6 +795,12 @@ Outputs:
 .. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
   https://doi.org/10.1111/ijcp.13350
 
+.. [Chowdhury_2013] Chowdhury, Rajiv, Hassan Khan, Emma Heydon, Amir Shroufi, Saman Fahimi, Carmel Moore, Bruno Stricker, et al. 2013. “Adherence to Cardiovascular Therapy: A Meta-Analysis of Prevalence and Clinical Consequences.” European Heart Journal 34 (38): 2940–48. 
+  https://doi.org/10.1093/eurheartj/eht295.
+
+.. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
+  https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
+
 .. [Derose-2013] Derose, Stephen F., et al. "Automated outreach to increase primary adherence to cholesterol-lowering medications." JAMA internal medicine 173.1 (2013): 38-43.
 	https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1399850
 
@@ -801,11 +816,11 @@ Outputs:
 .. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
   https://doi.org/10.1161/01.cir.0000437741.48606.98
 
-.. [Hou_2009] Hou, Runhua, and Anne Carol Goldberg. 2009. “Lowering Low-Density Lipoprotein Cholesterol: Statins, Ezetimibe, Bile Acid Sequestrants, and Combinations: Comparative Efficacy and Safety.” Endocrinology and Metabolism Clinics of North America, Lipids, 38 (1): 79–97. 
-  https://doi.org/10.1016/j.ecl.2008.11.007
-
 .. [Law_2009] Law, M. R., J. K. Morris, and N. J. Wald. 2009. “Use of Blood Pressure Lowering Drugs in the Prevention of Cardiovascular Disease: Meta-Analysis of 147 Randomised Trials in the Context of Expectations from Prospective Epidemiological Studies.” BMJ 338 (May): b1665. 
   https://doi.org/10.1136/bmj.b1665
+
+.. [Law_2003] Law, M. R., N. J. Wald, and A. R. Rudnicka. 2003. “Quantifying Effect of Statins on Low Density Lipoprotein Cholesterol, Ischaemic Heart Disease, and Stroke: Systematic Review and Meta-Analysis.” BMJ 326 (7404): 1423. 
+  https://doi.org/10.1136/bmj.326.7404.1423.
 
 .. [Liu_2017] Liu, Xuefeng, Tinghui Zhu, Milisa Manojlovich, Hillel W. Cohen, and Dennis Tsilimingras. 2017. “Racial/Ethnic Disparity in the Associations of Smoking Status with Uncontrolled Hypertension Subtypes among Hypertensive Subjects.” PloS One 12 (8): e0182807. 
   https://doi.org/10.1371/journal.pone.0182807.
@@ -821,8 +836,8 @@ Outputs:
 .. [Munoz-NEJM] Muñoz, Daniel, et al. "Polypill for cardiovascular disease prevention in an underserved population." New England Journal of Medicine 381.12 (2019): 1114-1123.
   https://www.nejm.org/doi/10.1056/NEJMoa1815359
 
-.. [Oung_2017] Oung, Alvin B., Emily Kosirog, Benjamin Chavez, Jason Brunner, and Joseph J. Saseen. 2017. “Evaluation of Medication Adherence in Chronic Disease at a Federally Qualified Health Center.” Therapeutic Advances in Chronic Disease 8 (8–9): 113–20. 
-  https://doi.org/10.1177/2040622317714966
+.. [Nguyen_2015] Nguyen, Vincent, Emil M. deGoma, Erik Hossain, and Douglas S. Jacoby. 2015. “Updated Cholesterol Guidelines and Intensity of Statin Therapy.” Journal of Clinical Lipidology 9 (3): 357–59. 
+  https://doi.org/10.1016/j.jacl.2014.12.009.
 
 .. [Sabate_2003] Sabaté, Eduardo, and World Health Organization, eds. 2003. Adherence to Long-Term Therapies: Evidence for Action. Geneva: World Health Organization. 
 
