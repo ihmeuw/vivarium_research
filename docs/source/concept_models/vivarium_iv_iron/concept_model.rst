@@ -300,7 +300,7 @@ As new locations are added to this model, there are several data values that nee
     - Complete
     - N/A
     - 25
-    - 60
+    - 60,000
     - 
   * - 2
     - Wave I Nigeria maternal
