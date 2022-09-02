@@ -327,15 +327,6 @@ Individual intervention pages:
 .. todo::
   Discuss appropriate number of seeds and draws  
 
-
-**Additional Stratification of Population:**
-Intended to identify groups that we are interested in being able to track and compare in the simulation.
-
-  - P\ :sub:`1`\: healthy individuals: Simulants that never receive an intervention, develop risk factors, or experience a qualifying event 
-  - P\ :sub:`2`\: new initiators, primary: Simulants who receive an intervention following identification of elevated risk factors 
-  - P\ :sub:`3`\: new initiators, secondary: Simulants who receive an intervention following an acute qualifying event 
-  - P\ :sub:`4`\: previous diagnosis: Simulants who meet intervention eligibility at the start of the simulation. They have been prescribed medication and/or received guidance about lifestyle modifications according to standard practice of care. 
-
 .. _uscvd4.2.2:
 
 4.2.2 Location description
@@ -396,7 +387,7 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - [Wallace_2011]_
   * - B
-    - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia 
+    - Only adherent simulants will move up categories. 41.76% will not change/start medication due to theraputic inertia 
     - [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication; 26.25% will receive two drugs at half dose, remainder will receive one drug at half dose  
@@ -418,24 +409,27 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - Decision Information 
     - Notes
   * - A
-    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex)
-    -  
+    - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex) where Sex=1 for males and Sex=0 for females 
+    - 
   * - B
-    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=3 mg/dL    
+    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L    
     - [McCormack_2020]_
   * - C
-    - 19.4% will not start medication; 33.9% will receive high intensity statin; 41.9% medium intensity; and 4.8% low intensity 
+    - If simulant is in the acute or post MI or stroke states  
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - D
-    - 19.4% will not start medication; 19.3% will receive high intensity statin; 53.2% medium intensity; and 8.1% low intensity 
+    - 19.4% will not start medication; 33.9% will receive high intensity statin; 41.9% medium intensity; and 4.8% low intensity 
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
-    - 19.4% will not start medication; 12.1% will receive high intensity statin; 57.2% medium intensity; and 11.3% low intensity 
+    - 19.4% will not start medication; 19.3% will receive high intensity statin; 53.2% medium intensity; and 8.1% low intensity 
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
-    - Only adherent simulants will move up categories. 19.4% will not change medication due to theraputic inertia 
-    - [Morales_2018]_ 
+    - 19.4% will not start medication; 12.1% will receive high intensity statin; 57.2% medium intensity; and 11.3% low intensity 
+    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
+    - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
+    - [Morales_2018]_ 
+  * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
 
@@ -484,11 +478,11 @@ adherent, their adherence score is 1.
     - 25%
     - [Cheen_2019]_
   * - Secondary Non-adherence
-    - 34.5%
+    - 9.75%
     - 
   * - Adherent
-    - 40.5%
-    - [Chowdhury_2013]_
+    - 65.25%
+    - Medicare Part D Data
 
 
 **Blood Pressure Treatments**
@@ -504,11 +498,11 @@ adherent, their adherence score is 1.
     - 16%
     - [Cheen_2019]_
   * - Secondary Non-adherence
-    - 34.44%
+    - 10.08%
     - 
   * - Adherent
-    - 49.56%
-    - [Chowdhury_2013]_
+    - 73.92%
+    - Medicare Part D Data
 
 
 
@@ -548,7 +542,7 @@ are summarized below. [Arnett_2019]_
 
 - LDL-C value, ASCVD risk and medical history all contribute to a simulants's statin prescription. 
 
-- A simulant already on medication with LDL-C > 70 mg/dL will move up one treatment category 
+- A simulant already on medication with LDL-C > 1.81 mmol/L will move up one treatment category 
   
   - For example: a simulant receiving a high intensity statin will move to a low/medium intensity statin with a non-statin medication 
   - Once a simulant is receiving a high intensity statin with a non-statin therapy, they will remain in the treatment category permanently 
@@ -567,6 +561,12 @@ Treatment Effects
 Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
 
+For each seed/draw, a parameter value for efficacy will be selected based on table above. While we plan 
+to add a more formal variation parameter to the table, please allow an up to 5% variation on value for each seed/draw. 
+This average value for efficacy by category will be used for all simulants. This accounts for 
+parameter uncertainity only. Variation in the simulant response is assumed to not affect 
+the population measures used as outputs from this simulation. 
+
 Blood pressure treatment is split into 6 categories based on the number of medications and dosage. It 
 is assumed that different medications have a similar impact and therefore are not modeled individually. 
 The maximum number of medications a simulant can receive is 3 at standard dose. 
@@ -578,7 +578,7 @@ SBP decrease = SBP treatment efficacy * Adherence score
 
 **LDL-C Treatments** 
 
-LDL-C treatment efficacy is a percent reduction in LDL-C level. This means that simulants with higher 
+LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
 initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
@@ -725,7 +725,7 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
     - 
   * - 5.0
     - Adding in healthcare system and medications for SBP and LDL-C  
-    -  
+    - Note: need to confirm if we are overmedicating the population 
   * - 6.0
     - Adding in the outreach intervention 
     -  
@@ -762,12 +762,42 @@ Outputs:
 5.0 Back of the Envelope Calculations
 +++++++++++++++++++++++++++++++++++++
 
+Workbook for the back of the envelope calculations is `here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/>`_.
+
+In general, the calculations seemed to show a relatively small impact from the outreach intervention. This is 
+likely because the intervention only affects primary adherence for folks on SBP or LDL-C medciations, which 
+is a small subset of folks. Assuming about 37.5% of people are medicated, 96% would not be affected 
+by this intervention. Making a stronger impact would require more folks to be affected. 
+
+However, this did show about 1 million heart attacks and 300 thousand strokes could be avoided 
+annually in the United States with this intervention, which is a considerable number. 
+
+Some limitations of this analysis include: 
+
+#. Once medicated your exposure decreases to the TMREL. This is not always the case (non-responders, minimal benefit folks) and would lead to an overestimation of the effect 
+#. Assumes that medication is randomly distributed across age/sex/starting SBP level. This is not true, the most in need would be more likely to receive medication which would lead to an underestimation of effect 
+#. Percent of folks are medicated today does not have good starting data 
 
 .. _uscvd6.0:
 
 6.0 Limitations
 +++++++++++++++
 
+**Treatments for SBP and LDL-C**
+
+#. We are using treatment categories only, not individual treatments as different types of treatments have similar efficacy values. This also means a patient cannot "switch" medications 
+#. There is no option for dicontinuation of medications or take fewer medications (i.e., "move down" treatment categories)
+#. All simulants receive the average efficacy from medications, there is no indiviual variation in response 
+
+**Adherence**
+
+#. All simulants receive an adherence that does not change, this means persistance is not simulanted (continued adherence)
+
+**Other Limitations**
+
+#. Not all causes of heart disease are modeled, many lifestyle factors contribute significantly but aren't included here 
+#. Outpatient visits does not have a well defined variation right now. It is likely that this is not normally distributed around the mean but rather is bimodal or another distribution. 
+#. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
 
 .. _uscvd7.0:
 
@@ -794,9 +824,6 @@ Outputs:
 
 .. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
   https://doi.org/10.1111/ijcp.13350
-
-.. [Chowdhury_2013] Chowdhury, Rajiv, Hassan Khan, Emma Heydon, Amir Shroufi, Saman Fahimi, Carmel Moore, Bruno Stricker, et al. 2013. “Adherence to Cardiovascular Therapy: A Meta-Analysis of Prevalence and Clinical Consequences.” European Heart Journal 34 (38): 2940–48. 
-  https://doi.org/10.1093/eurheartj/eht295.
 
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
