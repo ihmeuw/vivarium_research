@@ -556,7 +556,7 @@ Treatment Effects
 **Blood Pressure Treatments**  
 
 .. todo::
-  - Add parameter variation if needed to SBP decreases 
+  - Add parameter variation if needed to SBP  
 
 Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
@@ -634,6 +634,10 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
 
 Baseline Coverage Data for Medication of SBP or LDL-C
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+  - This code is not finalized, need to work on still  
+
 
 Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. 
 
