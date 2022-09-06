@@ -358,7 +358,7 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - Default assignment   
     - 
   * - Screening 
-    - If simulant does not have a follow-up or emergency visit, use: outpatient_visits=HealthcareEntity (name='outpatient_visits', kind='healthcare_entity', gbd_id=me_id(19797), utilization=me_id(19797),)
+    - If simulant does not have a follow-up scheduled or an emergency visit, use: outpatient_visits=HealthcareEntity (name='outpatient_visits', kind='healthcare_entity', gbd_id=me_id(19797), utilization=me_id(19797),)
     - Outpatient utilization envelope from GBD; will want to update to use NHANES data in future
   * - Follow-up 
     - Scheduled at time of medication prescription or emergency event 
@@ -415,8 +415,8 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L    
     - [McCormack_2020]_
   * - C
-    - If simulant is in the acute or post MI or stroke states  
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - If simulant is in the acute or post MI or stroke states 
+    - 
   * - D
     - 19.4% will not start medication; 33.9% will receive high intensity statin; 41.9% medium intensity; and 4.8% low intensity 
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
@@ -561,11 +561,11 @@ Treatment Effects
 Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
 
-For each seed/draw, a parameter value for efficacy will be selected based on table above. While we plan 
-to add a more formal variation parameter to the table, please allow an up to 5% variation on value for each seed/draw. 
-This average value for efficacy by category will be used for all simulants. This accounts for 
-parameter uncertainity only. Variation in the simulant response is assumed to not affect 
-the population measures used as outputs from this simulation. 
+For each draw, a parameter value for efficacy will be selected based on table above. While we plan 
+to add a more formal variation parameter to the table, please allow an up to 5% variation on value for 
+each draw, based on a normal distribution. This average value for efficacy by category will be used 
+for all simulants. This accounts for parameter uncertainity only. Variation in the simulant response 
+is assumed to not affect the population measures used as outputs from this simulation. 
 
 Blood pressure treatment is split into 6 categories based on the number of medications and dosage. It 
 is assumed that different medications have a similar impact and therefore are not modeled individually. 
@@ -582,9 +582,10 @@ LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means t
 initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
-For each seed/draw, a parameter value for efficacy will be selected based on the mean and 95% confidence 
-interval provided in the table above. This average value for efficacy by category will be used for all 
-simulants. This accounts for parameter uncertainity only. Variation in the simulant response is assumed 
+For each draw, a parameter value for efficacy will be selected based on the mean and 95% confidence 
+interval provided in the table above. Assume a normal distribution for the parameter value. 
+This average value for efficacy by category will be used for all simulants. This accounts 
+for parameter uncertainity only. Variation in the simulant response is assumed 
 to not affect the population measures used as outputs from this simulation. 
 
 LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, and the inclusion 
