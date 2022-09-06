@@ -21,6 +21,8 @@ The proposed method to introduce correlation in risk factor exposure is by findi
 
 Please see the ipynb Notebook for an example of how we intend to code this.
 
+For more information on how to best approach modeling strategy for correlated risks in a Vivarium simulation, :download:`please see this power point overview <Risk-Risk Correlation.pptx>`.
+
 Attributable fraction correlation
 -------------------------------------
 Suppose that we introduce correlation in risk exposure but don’t properly adjust for the changes this causes in the combined attributable fractions between the two or more risks. The rate of disease among individuals and in aggregate will be wrong and the amount of error increases with larger values of the combined attributable fractions.
