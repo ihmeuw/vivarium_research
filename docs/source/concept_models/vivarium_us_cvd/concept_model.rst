@@ -359,7 +359,7 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - 
   * - Screening 
     - If simulant does not have a follow-up scheduled or an emergency visit, use: outpatient_visits=HealthcareEntity (name='outpatient_visits', kind='healthcare_entity', gbd_id=me_id(19797), utilization=me_id(19797),)
-    - Outpatient utilization envelope from GBD; will want to update to use NHANES data in future
+    - Outpatient utilization envelope from GBD; will want to update to use NHANES data in future. This modelable entity only works for 2017, GBD round 5 
   * - Follow-up 
     - Scheduled at time of medication prescription or emergency event 
     - Scheduling of follow-up is pulled from uniform distribution ranging between 3 and 6 months 
@@ -734,6 +734,10 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
   * - 6.0
     - Adding in the outreach intervention 
     -  
+
+Model 3 V&V for the relative risk with angina showed a lot of variability: 
+    .. image:: Model3_VV_Angina.png
+
   
 .. _uscvd4.7:
 
