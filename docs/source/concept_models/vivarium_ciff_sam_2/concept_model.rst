@@ -74,15 +74,12 @@ The goal of this simulation is to investigate the question:
   * - Number of draws
     - 20
     - Needs to be refined based on test runs
-  * - Number of seeds (per draw)
-    - 10
-    - Needs to be refined based on test runs
-  * - Population size (per seed)
-    - 10,000
+  * - Population size per draw
+    - 100,000
     - Needs to be refined based on test runs
   * - Age start
     - Six months
-    - 
+    - Change from :ref:`phase I <2019_concept_model_vivarium_ciff_sam>`
   * - Age end
     - 5 years
     - 
@@ -100,7 +97,7 @@ The goal of this simulation is to investigate the question:
     - 
   * - Timestep
     - 4 days
-    - Needs to be validated
+    - Change from :ref:`phase I <2019_concept_model_vivarium_ciff_sam>`, needs to be validated
 
 2.2 Scenarios
 -------------
@@ -151,9 +148,9 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   :header-rows: 1
 
   * - Scenario
-    - Intervention 1
-    - Intervention 2
-    - Intervention 3
+    - 1. SAM treatment
+    - 2. MAM treatment
+    - 3. SQ-LNS
     - Note
   * - 1: Baseline
     - Baseline
