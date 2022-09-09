@@ -358,18 +358,27 @@ First, it is determined if the simulant will have a healthcare interaction in th
     - Default assignment   
     - 
   * - Screening 
-    - If simulant does not have a follow-up scheduled or an emergency visit, use: outpatient_visits=HealthcareEntity (name='outpatient_visits', kind='healthcare_entity', gbd_id=me_id(19797), utilization=me_id(19797),)
-    - Outpatient utilization envelope from GBD; will want to update to use NHANES data in future
+    - If simulant does not have a follow-up scheduled or an emergency visit, use: outpatient_visits=HealthcareEntity (name='outpatient_visits', kind='healthcare_entity', gbd_id=me_id(19797), utilization=me_id(19797),). If a patient has a follow-up or emergency appointment, they will not have a screening appointment. 
+    - Outpatient utilization envelope from GBD; will want to update to use NHANES data in future. This modelable entity only works for 2017, GBD round 5 
   * - Follow-up 
-    - Scheduled at time of medication prescription or emergency event 
-    - Scheduling of follow-up is pulled from uniform distribution ranging between 3 and 6 months 
+    - Scheduled at time of medication prescription or emergency event. If an emergency visit occurs, simulant will not have a follow-up appointment during that time step, even if one was previously scheduled. 
+    - Scheduling of follow-up is pulled from uniform distribution ranging between 3 and 6 months. 
   * - Emergency 
     - If simulant has an acute event during this time step, 100% will have an emergency visit 
     - Acute events are ischemic stroke or acute myocardial infarction 
 
 
-.. todo::
-  - Currently 100% of patients with a follow-up scheduled, go to that appointment. Is this an okay assumption?  
+**Missing Appointments** 
+For follow-up appointments only, a simulant has a probability of missing their appointment. For emergency 
+visits, it is assumed the patient seeks medical care. For screening visits, the chance to not attend 
+is covered by the probability of a visit. 
+
+The probability of missing a follow-up appointment is defined at the simulant level, and stays for 
+the duration of the sim. The probability is assigned to each sim based on a uniform distribution 
+between 5 and 35%. 
+
+When a simulant has a follow-up scheduled, they will have their assigned percent chance of missing that appointment. 
+[Parikh_2010]_ [Kheirkhah_2016]_ [Mohammadi_2018]_ [Denney_2019]_ [Kempny_2016]_ [McLeod_2005]_
 
 
 **SBP Treatment Ramp**
@@ -629,24 +638,41 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Burn in period will allow some simulants to have appointments for hypertension or hyperlipidemia prior to sim start 
   * - Follow-up visit time distribution  
     - 
-    - With burn in, all simulants can be assigned a follow-up from the normal uniform distribution 
+    - With burn in, all simulants can be assigned a follow-up from the same 3-6 month uniform distribution as is used for within model time steps 
     - Burn in period will allow some simulants to have appointments on sim start time step 
 
 
 Baseline Coverage Data for Medication of SBP or LDL-C
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
-  - This code is not finalized, need to work on still  
+Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. The code used to generate this data is below, but not needed for initialization. The system of equations provided gives the probabilities for each simulant being on the different types of medicaiton. 
+
+**Covariate Values:** 
+
+These covariate values are calculated for each simulant and are then plugged into the below equations to provide the individual probabilities. 
+
+ :math:`SBP_{i} = exp(-6.75 + 0.025 * SBP_{level} + -0.0045 * LDL_{level} + 0.05 * age_{(yrs)}) + 0.16 * sex)` 
+
+ :math:`LDL_{i} = exp(-4.23 + -0.0026 * SBP_{level} + -0.005 * LDL_{level} + 0.062 * age_{(yrs)}) + -0.19 * sex)` 
+
+ :math:`Both_{i} = exp(-6.26 + 0.018 * SBP_{level} + -0.014 * LDL_{level} + 0.069 * age_{(yrs)}) + 0.13 * sex)` 
+
+Where sex = 1 for men and 2 for women 
 
 
-Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. 
+**Calculating Probabilities:** 
 
- :math:`\ln(\frac{P(tx=SBPonly)}{P(tx=none)}) = b_{10} + b_{11}(SBP_{level}) + b_{12}(LDL_{level}) + b_{13}age_{(yrs)} + b_{14}sex`
- :math:`\ln(\frac{P(tx=LDLonly)}{P(tx=none)}) = b_{20} + b_{21}(SBP_{level}) + b_{22}(LDL_{level}) + b_{23}age_{(yrs)} + b_{24}sex`
- :math:`\ln(\frac{P(tx=Both)}{P(tx=none)}) = b_{30} + b_{31}(SBP_{level}) + b_{32}(LDL_{level}) + b_{33}age_{(yrs)} + b_{34}sex`
+ :math:`P(tx=SBPonly) = \frac{SBP_{i}}{SBP_{i} + LDL_{i} + Both_{i} + 1}`
 
- 
+ :math:`P(tx=LDLonly) = \frac{LDL_{i}}{SBP_{i} + LDL_{i} + Both_{i} + 1}`
+
+ :math:`P(tx=Both) = \frac{Both_{i}}{SBP_{i} + LDL_{i} + Both_{i} + 1}`
+
+ :math:`P(tx=none) = \frac{1}{SBP_{i} + LDL_{i} + Both_{i} + 1}`
+
+
+Code is below for reference 
+
  .. code-block:: R
 
   ###### Setup ######
@@ -734,6 +760,10 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
   * - 6.0
     - Adding in the outreach intervention 
     -  
+
+Model 3 V&V for the relative risk with angina showed a lot of variability: 
+    .. image:: Model3_VV_Angina.png
+
   
 .. _uscvd4.7:
 
@@ -747,11 +777,11 @@ Outputs:
 #. YLLs and YLDs
 #. Deaths 
 #. Transitions for each cause 
-#. Exposure by person time for all risk factors 
+#. Total exposure value * person time for all risk factors 
 #. Person time at or below target values for SBP and LDL-C 
 #. Healthcare appointments 
 #. Person time on medication 
-#. Medication effect 
+#. Medication effect - exposure levels stratified by medication time 
 #. Numbers of interventions 
 
 
@@ -796,10 +826,10 @@ Stratifications for All:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - 
+    - Split by medication category
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - 
+    - Split by medication category
   * - Mean BMI 
     - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
     - 
@@ -821,12 +851,6 @@ Stratifications for All:
   * - Population on LDL-C medication 
     - sum of person time on LDL-C medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
-  * - SBP medication effect 
-    - sum of change in SBP exposure * person time  
-    - Split by medication category 
-  * - LDL-C medication effect 
-    - sum of change in LDL-C exposure * person time  
-    - Split by medication category 
   * - Number of interventions 
     - sum of interventions given 
     - Split by intervention type 
@@ -904,6 +928,8 @@ Some limitations of this analysis include:
 .. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
   https://doi.org/10.1111/ijcp.13350
 
+.. [Denney_2019] Denney, Joseph, Samuel Coyne, and Sohail Rafiqi. 2019. “Machine Learning Predictions of No-Show Appointments in a Primary Care Setting” 2 (1): 33. 
+
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
 
@@ -922,6 +948,12 @@ Some limitations of this analysis include:
 .. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
   https://doi.org/10.1161/01.cir.0000437741.48606.98
 
+.. [Kempny_2016] Kempny, Aleksander, Gerhard-Paul Diller, Konstantinos Dimopoulos, Rafael Alonso-Gonzalez, Anselm Uebing, Wei Li, Sonya Babu-Narayan, Lorna Swan, Stephen J. Wort, and Michael A. Gatzoulis. 2016. “Determinants of Outpatient Clinic Attendance amongst Adults with Congenital Heart Disease and Outcome.” International Journal of Cardiology 203 (January): 245–50. 
+  https://doi.org/10.1016/j.ijcard.2015.10.081.
+
+.. [Kheirkhah_2016] Kheirkhah, Parviz, Qianmei Feng, Lauren M. Travis, Shahriar Tavakoli-Tabasi, and Amir Sharafkhaneh. 2016. “Prevalence, Predictors and Economic Consequences of No-Shows.” BMC Health Services Research 16 (1): 13. 
+  https://doi.org/10.1186/s12913-015-1243-z.
+
 .. [Law_2009] Law, M. R., J. K. Morris, and N. J. Wald. 2009. “Use of Blood Pressure Lowering Drugs in the Prevention of Cardiovascular Disease: Meta-Analysis of 147 Randomised Trials in the Context of Expectations from Prospective Epidemiological Studies.” BMJ 338 (May): b1665. 
   https://doi.org/10.1136/bmj.b1665
 
@@ -934,6 +966,12 @@ Some limitations of this analysis include:
 .. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
   https://doi.org/10.1136/bmj.m149.
 
+.. [McLeod_2005] McLeod, A L, L Brooks, V Taylor, A Wylie, P F Currie, and N G Dewhurst. 2005. “Non-Attendance at Secondary Prevention Clinics: The Effect on Lipid Management.” Scottish Medical Journal 50 (2): 54–56. 
+  https://doi.org/10.1177/003693300505000204.
+
+.. [Mohammadi_2018] Mohammadi, Iman, Huanmei Wu, Ayten Turkcan, Tammy Toscos, and Bradley N. Doebbeling. 2018. “Data Analytics and Modeling for Appointment No-Show in Community Health Centers.” Journal of Primary Care & Community Health 9 (January): 2150132718811692. 
+  https://doi.org/10.1177/2150132718811692.
+
 .. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
   https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
 
@@ -944,6 +982,9 @@ Some limitations of this analysis include:
 
 .. [Nguyen_2015] Nguyen, Vincent, Emil M. deGoma, Erik Hossain, and Douglas S. Jacoby. 2015. “Updated Cholesterol Guidelines and Intensity of Statin Therapy.” Journal of Clinical Lipidology 9 (3): 357–59. 
   https://doi.org/10.1016/j.jacl.2014.12.009.
+
+.. [Parikh_2010] Parikh, Amay, Kunal Gupta, Alan C. Wilson, Karrie Fields, Nora M. Cosgrove, and John B. Kostis. 2010. “The Effectiveness of Outpatient Appointment Reminder Systems in Reducing No-Show Rates.” The American Journal of Medicine 123 (6): 542–48. 
+  https://doi.org/10.1016/j.amjmed.2009.11.022. 
 
 .. [Sabate_2003] Sabaté, Eduardo, and World Health Organization, eds. 2003. Adherence to Long-Term Therapies: Evidence for Action. Geneva: World Health Organization. 
 
