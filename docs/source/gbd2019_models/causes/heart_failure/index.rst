@@ -146,8 +146,9 @@ Heart failure incidence rate will be from the heart failure envelope DisMod mode
 heart failure from any cause. Individuals will then experience the EMR from the heart failure envelope 
 model once they are in this state. They will receive the HF disability weights while in this state.  
 
-Heart failure incidence should be modified by SBP and LDL-c levels as per the following age-specific 
-pooled cohort analysis_.
+Heart failure incidence should be modified by SBP levels as per the following age-specific 
+pooled cohort analysis_. LDL-C level is assumed not to affect heart failure in this simulation. 
+
 
 .. _analysis: https://www.jacc.org/doi/full/10.1016/j.jacc.2019.03.529
 
@@ -173,30 +174,6 @@ The relative risks can be utilized by SBP/LDL-C group based on these tables:
      - 1.76 (1.43, 2.17) 
      - 
 
-
-.. list-table:: Relative risk of heart failure for LDL-C 
-   :widths: 5 5 20
-   :header-rows: 1
-
-   * - LDL-C Group 
-     - Relative Risk 
-     - Notes 
-   * - <2.59
-     - Reference group  
-     - 
-   * - 2.6-3.34 
-     - 0.92 (0.78, 1.09) 
-     - 
-   * - 3.35-4.11 
-     - 0.86 (0.71, 1.04) 
-     - 
-   * - 4.12+ 
-     - 0.85 (0.68, 1.06) 
-     - 
-
-
-.. todo::
-  This currently indicates a protective effect for higher LDL-C values, which seems incorrect. Need to investigate further 
 
 
 Assumptions and Limitations
