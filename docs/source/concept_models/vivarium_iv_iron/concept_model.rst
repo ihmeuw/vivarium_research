@@ -285,7 +285,7 @@ As new locations are added to this model, there are several data values that nee
 5.0 Model run requests
 +++++++++++++++++++++++++++++++++++++
 
-.. list-table:: Model run plan as of September 6, 2022
+.. list-table:: Model run plan as of September 9, 2022
   :header-rows: 1
 
   * - Number
