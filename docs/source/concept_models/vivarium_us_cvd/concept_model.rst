@@ -826,10 +826,10 @@ Stratifications for All:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - 
+    - Split by medication category
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - 
+    - Split by medication category
   * - Mean BMI 
     - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
     - 
@@ -851,12 +851,6 @@ Stratifications for All:
   * - Population on LDL-C medication 
     - sum of person time on LDL-C medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
-  * - SBP medication effect 
-    - SBP exposure level stratified by medication time 
-    - Split by medication category 
-  * - LDL-C medication effect 
-    - LDL-C exposure level stratified by medication time 
-    - Split by medication category 
   * - Number of interventions 
     - sum of interventions given 
     - Split by intervention type 
