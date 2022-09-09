@@ -724,7 +724,7 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
     - `Validation workbook Model 2 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model2_VV_SBP.ipynb>`_ `And interactive sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model2_VV.ipynb>`_ Cause model is identical to Model 1 with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. 
   * - 3.0
     - Adding angina as a cause    
-    - 
+    - `Validation workbook Model 3 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd>`_ Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. Seems that angina relative risk is highly susceptible to low n-size and leads to high variation. 
   * - 4.0
     - Adding heart failure as a cause  
     - 
@@ -739,27 +739,98 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
 
 4.7 Desired outputs
 -------------------
- .. todo::
-    Validate the below with project partners: 
-
-    - Are DALYs cause specific or is total DALYs okay? 
-    - Is change in risk factor by state also important? (i.e., a XX drop in SBP)
-    - What is missing from the below? 
 
 Outputs:
 
-#. DALYs (YLLs and YLDs) due to cause specific mortality 
-#. Average values for risk factors by state and year (SBP, LDL-C, FPG, and BMI)
-#. Numbers of interventions administered per a) 100,000 population, and b) 100,000 person years 
+#. Total population 
+#. Person-time 
+#. YLLs and YLDs
+#. Deaths 
+#. Transitions for each cause 
+#. Exposure by person time for all risk factors 
+#. Person time at or below target values for SBP and LDL-C 
+#. Healthcare appointments 
+#. Person time on medication 
+#. Medication effect 
+#. Numbers of interventions 
 
+
+Stratifications for All: 
+
+#. Year 
+#. Age-group 
+#. Sex 
+#. State (Alabama, Alaska, etc)
+#. Scenario 
+#. Race (note: not included in minimum viable model, to be added later)
 
 .. _uscvd4.8:
 
 4.8 Output meta-table shell
 ---------------------------
 
-.. todo::
-  - add table 
+.. list-table:: Model Outputs 
+  :widths: 5 15 15 
+  :header-rows: 1
+
+  * - Output 
+    - Notes
+    - Additional Stratifications Needed 
+  * - Population  
+    - 
+    -  
+  * - Person-time  
+    - sum of total person time
+    - By state for each cause (i.e., suscepitble vs acute for myocardial infarction)
+  * - YLLs  
+    - sum of YLLs for cause i 
+    - Stratify by cause 
+  * - YLDs  
+    - sum of YLDs for cause i 
+    - Stratify by cause 
+  * - Deaths 
+    - sum of deaths for cause i 
+    - Stratify by cause 
+  * - Transitions between states 
+    - sum of transitions between states within cause i 
+    - i.e., transition from susceptible to acute MI, stratified by cause 
+  * - Mean SBP 
+    - sum of SBP * person time
+    - 
+  * - Mean LDL-C
+    - sum of LDL-C * person time
+    - 
+  * - Mean BMI 
+    - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
+    - 
+  * - Mean FPG 
+    - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
+    - 
+  * - Population achieving target LDL-C
+    - sum of person time at or below 1.81 LDL-C 
+    - 
+  * - Population achieving target SBP
+    - sum of person time at or below 130 SBP  
+    - 
+  * - Healthcare appointments 
+    - sum of healthcare appointments 
+    - Split by type of appointment - follow-up vs emergency vs screening 
+  * - Population on SBP medication 
+    - sum of person time on SBP medication 
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
+  * - Population on LDL-C medication 
+    - sum of person time on LDL-C medication 
+    - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
+  * - SBP medication effect 
+    - sum of change in SBP exposure * person time  
+    - Split by medication category 
+  * - LDL-C medication effect 
+    - sum of change in LDL-C exposure * person time  
+    - Split by medication category 
+  * - Number of interventions 
+    - sum of interventions given 
+    - Split by intervention type 
+
 
 
 .. _uscvd5.0:
@@ -767,14 +838,14 @@ Outputs:
 5.0 Back of the Envelope Calculations
 +++++++++++++++++++++++++++++++++++++
 
-Workbook for the back of the envelope calculations is `here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/>`_.
+Workbook for the back of the envelope calculations is `here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Back_of_envelope.ipynb>`_.
 
 In general, the calculations seemed to show a relatively small impact from the outreach intervention. This is 
 likely because the intervention only affects primary adherence for folks on SBP or LDL-C medciations, which 
 is a small subset of folks. Assuming about 37.5% of people are medicated, 96% would not be affected 
 by this intervention. Making a stronger impact would require more folks to be affected. 
 
-However, this did show about 1 million heart attacks and 300 thousand strokes could be avoided 
+However, this did show about 2% of heart attacks and 1.5% of strokes could be avoided 
 annually in the United States with this intervention, which is a considerable number. 
 
 Some limitations of this analysis include: 
@@ -782,6 +853,7 @@ Some limitations of this analysis include:
 #. Once medicated your exposure decreases to the TMREL. This is not always the case (non-responders, minimal benefit folks) and would lead to an overestimation of the effect 
 #. Assumes that medication is randomly distributed across age/sex/starting SBP level. This is not true, the most in need would be more likely to receive medication which would lead to an underestimation of effect 
 #. Percent of folks are medicated today does not have good starting data 
+#. Some simulants might survive with the intervention when they would have died, or delay a heart attack/stroke but still ultimately experience one. These dynamic changes will be captured by the simulation but are not captured here. 
 
 .. _uscvd6.0:
 
@@ -800,9 +872,11 @@ Some limitations of this analysis include:
 
 **Other Limitations**
 
-#. Not all causes of heart disease are modeled, many lifestyle factors contribute significantly but aren't included here 
-#. Outpatient visits does not have a well defined variation right now. It is likely that this is not normally distributed around the mean but rather is bimodal or another distribution. 
+#. Not all causes of heart disease are modeled, there are additional causes such as hypertensive heart disease, COPD, etc and without them included, it will lead to a chronic underestimation of effect in our model 
+#. There are many lifestyle factors that contribute significantly to heart disease but aren't included here 
+#. Outpatient visits does not have a well defined variation right now. It is likely that this is not normally distributed around the mean but rather is bimodal or another distribution - this might lead to an over medication of the population compared to reality 
 #. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
+#. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 
 .. _uscvd7.0:
 
