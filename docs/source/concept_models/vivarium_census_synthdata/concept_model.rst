@@ -50,7 +50,7 @@
 .. _{vivarium_census_prl_synth_data}:
 
 ==================================
-Vivarium Census PRL Synthetic Data
+Vivarium Census PRL Simulated Data
 ==================================
 
 .. contents::
@@ -79,7 +79,7 @@ Probabilistic Record Linkage (PRL) typically uses sensitive data
 containing information such as name, address, date of birth, and
 sometimes even social security number, and the restrictions on access
 to such data has been a barrier to developing and testing new methods
-and software for PRL.  By simulating realistic, but synthetic, data
+and software for PRL.  By simulating realistic, but simulated, data
 which includes these attributes, we can make PRL research and
 development easier for ourselves and others.
 
@@ -93,7 +93,7 @@ package for producing synthetic data
 who developed `synthetic data for testing splink
 <http://github.com/moj-analytical-services/splink_synthetic_data>`_.
 
-The unique elements of our work will rely on Vivarium: our synthetic
+The unique elements of our work will rely on Vivarium: our simulated
 data will be informed by the United States Census Burea (USCB) needs
 and publicly released USCB data (such as the American Communities
 Survey [ACS]).  By using Vivarium, we will represent some realistic
@@ -654,7 +654,7 @@ It is not clear how important it is to have housing unit address
 correspond to geography, and I am trying to gauge how much effort to
 put into having geographically realistic addresses.  This is also a
 sensitive area for privacy and personal information --- even if the
-data is synthetic, it might refer to a real location.  The risks of
+data is simulated, it might refer to a real location.  The risks of
 this are unclear.
 
 A generator that can generate street address and zip code is the
@@ -689,7 +689,7 @@ has packaged libpostal training data conveniently:
 https://github.com/GRAAL-Research/deepparse-address-data)
 
 It would be responsible to avoid putting real addresses in the
-synthetic database, perhaps by checking the synthetic data against
+simulated database, perhaps by checking the simulated data against
 libpostal and rejecting the generated addresses that seem real.
 Census Bureau might appreciate this and might even be able to provide
 USPS data on what real addresses are and we can avoid them (although
@@ -860,7 +860,7 @@ refinement is needed.
 2.3.7 Component 11: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To create a date-of-birth column in the synthetic output data, each
+To create a date-of-birth column in the simulated output data, each
 simulant should have a uniformly random date of birth which is
 consistent with their age.
 
@@ -914,7 +914,7 @@ any PRL methods rely on the link between SSN and location.
 
 It is also possible that it will be annoying to Census Bureau if we
 have realistic SSN values, even if they are randomly generated, and we
-may wish to change to numeric format for this to a synthetic SSN-like
+may wish to change to numeric format for this to a simulated SSN-like
 (SSSN) value
 
 
