@@ -201,7 +201,7 @@ Wasting
 
 For the outcome moderate wasting, [DAS_Cochrane_Review_2019]_ compared prevalence of **moderate wasting** at 18 or 24 months between intervention and control children. LNS plus complementary feeding reduced the prevalence of moderate wasting by 18% (RR 0.82, 95% CI 0.74 to 0.91; eight studies; 13,172 participants; moderate-quality evidence). There was *no impact* of LNS plus complementary feeding on **severe wasting** (RR 1.27, 95% CI 0.66 to 2.46; three studies, 2329 participants)
 
-[Dewey-et-al-2021b]_ found a prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes. [Dewey-et-al-2021b]_ also found effect modification by child sex, with greater impacts among females than males, which we plan to incorporate into our simulation (shown in the table below).
+[Dewey-et-al-2021b]_ found a prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes. [Dewey-et-al-2021b]_ also found effect modification by child sex, with greater impacts among females than males, which we plan to incorporate into our simulation (shown in the table below). Possible mechanisms for sex differences in childhood nutrition are discussed by [Thompson-2021]_.
 
 We will apply the relative risk ratio as a relative rate ratio on the incidence of MAM from MILD (i2) starting from the age-start of the intervention starts (6 months). This is because we assume that the intervention does not affect the duration of disease and hence:
 
@@ -358,6 +358,12 @@ References
     E, Humphrey JH, Dewey KG. Lipid-based nutrient supplements and
     all-cause mortality in children 6–24 months of age: a meta-analysis of
     randomized controlled trials. Am J Clin Nutr 2020;111:207–18.
+
+.. [Thompson-2021]
+
+  View `Thompson 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9205267/pdf/nihms-1803160.pdf>`_
+
+    Thompson AL. Greater male vulnerability to stunting? Evaluating sex differences in growth, pathways and biocultural mechanisms. Ann Hum Biol. 2021 Sep;48(6):466-473. doi: 10.1080/03014460.2021.1998622. PMID: 35105202; PMCID: PMC9205267.
 
 .. [Wessells-et-al-2021]
 

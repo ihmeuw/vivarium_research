@@ -471,6 +471,8 @@ Child Growth Failure (CGF)
 
 While there is little to no evidence that maternal supplementation interventions during pregnancy have a direct effect on CGF exposure, there is evidence that birthweight is causally related to CGF, as discussed on the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>`. Therefore maternal supplementation interventions during pregnancy may influence CGF exposures through the pathway 100% mediated through birthweight. Notably, it is possible that BEP supplementation *during lactation* (rather than pregnancy) is directly causally related to CGF exposure, although there is little available evidence on this association (although there are expected measures of association in currently unpublished BMGF trials), but we will not consider this pathway in our simulation until more evidence is available.
 
+Existing evidence that antenatal supplementation is related to CGF exposure later in life includes a recent analysis that found IFA supplementation was associated with reduced risk of stunting among children less than two years of age [Nisar-et-al-2020]_ (RR: 0.92, 95% CI: 0.89, 0.95).
+
 The modeling strategy for the causal impact of maternal supplementation during pregnancy on child growth failure will be informed entirely through the impact on infant birthweight (described above) and the evidence of the impact of birthweight on child growth failure, as informed from [McGovern-et-al-2019-maternal-supplementation]_ (see the risk-risk correlation and causation pages for :ref:`birthweight and wasting <2019_risk_correlation_birthweight_wasting>` and :ref:`birthweight and stunting <2019_risk_correlation_birthweight_stunting>` for more details on the literature evidence and research background).
 
 .. note::
@@ -617,6 +619,8 @@ Verification and validation criteria
 
 - Stunting exposure state in all age groups stratified by maternal supplementation regimen should match the expected effect sizes
 
+- Model results should be compared to external validation criteria such as [Nisar-et-al-2020]_ and Christian et al. 2013 (discussed on the :ref:`child stunting risk exposure page <2020_risk_exposure_child_stunting>`)
+
 References
 ------------
 
@@ -625,6 +629,9 @@ References
 
 .. [McGovern-et-al-2019-maternal-supplementation]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
+
+.. [Nisar-et-al-2020]
+  Nisar YB, Aguayo VM, Billah SM, Dibley MJ. Antenatal Iron-Folic Acid Supplementation Is Associated with Improved Linear Growth and Reduced Risk of Stunting or Severe Stunting in South Asian Children Less than Two Years of Age: A Pooled Analysis from Seven Countries. Nutrients. 2020 Aug 28;12(9):2632. doi: 10.3390/nu12092632. `https://pubmed.ncbi.nlm.nih.gov/32872329/ <https://pubmed.ncbi.nlm.nih.gov/32872329/>`_
 
 .. [Oh-et-al-2020]
   Oh, C., Keats, E. C., & Bhutta, Z. A. (2020). Vitamin and Mineral Supplementation During Pregnancy on Maternal, Birth, Child Health and Development Outcomes in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 491. https://doi.org/10.3390/nu12020491

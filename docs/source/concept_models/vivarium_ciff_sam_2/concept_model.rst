@@ -56,6 +56,15 @@ The goal of this simulation is to investigate the question:
 
 `Additional background on the project and resources for publication can be found here. <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_sim_science_collaborations/_layouts/15/Doc.aspx?sourcedoc=%7BFE3E9389-829B-4BEC-A425-7487A1A510A8%7D&file=Updated%20draft%20introduction%20outline.docx&action=default&mobileredirect=true>`_
 
+1.1 Examples of similar analyses
+--------------------------------
+
+Existing models that utilize dynamic transition models of child wasting include:
+
+- Optima Nutrition Model, an adaptation of the Lives Saved Tool (LiST) [Optima-Nutrition-Model]_, utilized in an analysis by [Scott-et-al-2020]_
+
+- Work by the Institute for Disease Modeling (IDM), developed to investigate the potential impact of nutritional supplementation on childhood measles burden [Noori-et-al-2021]_
+
 2.0 Simulation design
 +++++++++++++++++++++++++++++
 
@@ -405,3 +414,16 @@ References
   View `Huybregts et al. 2019 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6711497/pdf/pmed.1002892.pdf>`_
   
     Huybregts L, Le Port A, Becquey E, Zongrone A, Barba FM, Rawat R, Leroy JL, Ruel MT. Impact on child acute malnutrition of integrating small-quantity lipid-based nutrient supplements into community-level screening for acute malnutrition: A cluster-randomized controlled trial in Mali. PLoS Med. 2019 Aug 27;16(8):e1002892. doi: 10.1371/journal.pmed.1002892. PMID: 31454356; PMCID: PMC6711497.
+
+.. [Noori-et-al-2021]
+  
+  View `Noori et al. 2021 <https://doi.org/10.1101/2021.09.10.21263402>`_
+
+    Navideh Noori, Laura A. Skrip, Assaf P. Oron, Kevin A. McCarthy, Benjamin M. Althouse, Indi Trehan, Kevin P.Q. Phelan. Potential Impacts of Mass Nutritional Supplementation on Dynamics of Measles: A Simulation Study. medRxiv 2021.09.10.21263402; doi: https://doi.org/10.1101/2021.09.10.21263402
+
+.. [Optima-Nutrition-Model]
+  Pearson R, Killedar M, Petravic J, Kakietek JJ, Scott N, Grantham KL, Stuart RM, Kedziora DJ, Kerr CC, Skordis-Worrall J, Shekar M, Wilson DP. Optima Nutrition: an allocative efficiency tool to reduce childhood stunting by better targeting of nutrition-related interventions. BMC Public Health. 2018 Mar 20;18(1):384. doi: 10.1186/s12889-018-5294-z. Erratum in: BMC Public Health. 2018 Apr 26;18(1):555. `https://pubmed.ncbi.nlm.nih.gov/29558915 <https://pubmed.ncbi.nlm.nih.gov/29558915>`_
+
+.. [Scott-et-al-2020]
+  Scott, N., Delport, D., Hainsworth, S. et al. Ending malnutrition in all its forms requires scaling up proven nutrition interventions and much more: a 129-country analysis. BMC Med 18, 356 (2020). `https://doi.org/10.1186/s12916-020-01786-5 <https://doi.org/10.1186/s12916-020-01786-5>`_
+
