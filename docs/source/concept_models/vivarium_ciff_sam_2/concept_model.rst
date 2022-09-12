@@ -369,7 +369,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - No x-factor component
   * - 3.0: All wave 1 scenarios
     - Full wave 1 scenarios
-    - 1 though 8
+    - 1 through 8
     - draws and seeds TBD
     - None
     - No x-factor component. May be run for additional locations.
