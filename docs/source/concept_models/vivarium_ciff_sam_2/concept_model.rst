@@ -157,45 +157,51 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Baseline
     - Baseline (0%)
     - 
-  * - 2: MAM and SAM treatment scale-down
+  * - 2: Zero coverage
     - Zero coverage
     - Zero coverage
     - Baseline (0%)
     - 
-  * - 3: SAM treatment scale-up
-    - Scale-up
-    - Baseline*
+  * - 3: SAM treatment scale-up from baseline
+    - Scale-up to target
+    - Baseline
     - Baseline (0%)
     - 
-  * - 4: MAM treatment scale-up
-    - Baseline*
-    - Scale-up
+  * - 4: SAM treatment scale-up from zero
+    - Scale-up to target
+    - Zero coverage
+    - Zero coverage
+    - 
+  * - 5: MAM treatment scale-up
+    - Baseline
+    - Scale-up to SAM baseline
     - Baseline (0%)
     - 
-  * - 5: MAM and SAM treatment scale-up
-    - Scale-up
-    - Scale-up
+  * - 6: Full scale-up to SAM baseline
+    - Baseline
+    - Scale-up to SAM baseline
+    - Scale-up 3a to SAM baseline
+    - 
+  * - 7: MAM and SAM treatment scale-up
+    - Scale-up to target
+    - Scale-up to target
     - Baseline (0%)
     - 
-  * - 6: Universal SQ-LNS + treatment scale-up
-    - Scale-up
-    - Scale-up
-    - Scale-up 3a
+  * - 8: Full scale-up to target
+    - Scale-up to target
+    - Scale-up to target
+    - Scale-up 3a to target
     - 
-  * - 7: SQ-LNS to mildly wasted
-    - Scale-up
-    - Scale-up
-    - Scale-up 3b
+  * - 9: SQ-LNS to mildly wasted
+    - Scale-up to target
+    - Scale-up to target
+    - Scale-up 3b to target
     - [Second wave that requires x-factor inclusion]
-  * - 8: SQ-LNS to SAM and MAM treatment
-    - Scale-up
-    - Scale-up
-    - Scale-up 3c
+  * - 10: SQ-LNS to SAM and MAM treatment
+    - Scale-up to target
+    - Scale-up to target
+    - Scale-up 3c to target
     - [Second wave that requires x-factor inclusion]
-
-.. todo::
-
-  Consider if cells marked with an asterisk (*) should be replaced with zero coverage instead of baseline
 
 .. note::
 
@@ -252,13 +258,17 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 2.3.1.5 Intervention Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+.. important::
 
-  Consider adding mortality impacts? We're thinking no for now.
+  Use the same coverage propensity for all modeled interventions (MAM treatment, SAM treatment, and SQ-LNS). In other words, at the same coverage level, the same simulants should be covered by all 3 interventions and the remaining simulants should be covered by zero interventions. 
 
 * :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>` 
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
+
+.. todo::
+
+  Consider adding mortality impacts? We're thinking no for now.
 
 2.4 Outputs
 ----------------------
@@ -317,6 +327,15 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 3.0 Models
 +++++++++++
 
+**Model development priorities:**
+
+#. Concept model updates (a: components, b: outputs, c: specifications)
+#. Assessment of single scenario computational resources, joint decision on feasibility of additional locations
+#. SQ-LNS age end parameter update
+#. SQ-LNS effect size update, sex-specific desired.
+#. Scenario implementation (for single location, then assess if we want to run full set for additional locations)
+#. SQ-LNS utilization algorithms and targeted scenarios (Phase II! For single location, following x-factor calibration by research team)
+
 .. note::
 
   Model run requests may be added to this table for iterative verification and validation processes
@@ -325,25 +344,35 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   :header-rows: 1
 
   * - Run
+    - Description
     - Scenarios
     - Specification modifications
     - Stratificaction modifications
     - Note
-  * - 1.0: Baseline
+  * - 1.0 Baseline concept model updates
+    - Includes relevant model components, updated outputs, updated model specs.
     - 1
     - None
     - None
     - No x-factor component
-  * - 2.0: Alternative scenario to optimize draws and seeds
-    - 1, 5, 6
+  * - 1.1 SQ-LNS updates
+    - Updates to SQ-LNS age-end parameter, sex-specific effect size
+    - 6
+    - None
+    - Wasting transition counts stratified by SQ-LNS coverage/utilization
+    - No x-factor component
+  * - 2.0: Alternative scenario runs, stratified by seed
+    - Subset of scenarios to determine desired number of draws and population sizes
+    - 1, 7, 8
     - 50 draws, 50 seeds
     - Count data results stratified by random seed for optimization
     - No x-factor component
   * - 3.0: All wave 1 scenarios
-    - 1 though 6
+    - Full wave 1 scenarios
+    - 1 through 8
     - draws and seeds TBD
     - None
-    - No x-factor component
+    - No x-factor component. May be run for additional locations.
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
