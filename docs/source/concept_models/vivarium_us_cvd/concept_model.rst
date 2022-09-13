@@ -607,11 +607,8 @@ Treatment Effects
 Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
 
-For each draw, a parameter value for efficacy will be selected based on table above. While we plan 
-to add a more formal variation parameter to the table, please allow an up to 5% variation on value for 
-each draw, based on a normal distribution. This average value for efficacy by category will be used 
-for all simulants. This accounts for parameter uncertainity only. Variation in the simulant response 
-is assumed to not affect the population measures used as outputs from this simulation. 
+Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
+**Please note that this is intentionally different than for LDL-C medication.** 
 
 Blood pressure treatment is split into 6 categories based on the number of medications and dosage. It 
 is assumed that different medications have a similar impact and therefore are not modeled individually. 
@@ -926,6 +923,7 @@ Some limitations of this analysis include:
 #. We are using treatment categories only, not individual treatments as different types of treatments have similar efficacy values. This also means a patient cannot "switch" medications 
 #. There is no option for dicontinuation of medications or take fewer medications (i.e., "move down" treatment categories)
 #. All simulants receive the average efficacy from medications, there is no indiviual variation in response 
+#. SBP does not have a parameter uncertainity value 
 
 **Adherence**
 
