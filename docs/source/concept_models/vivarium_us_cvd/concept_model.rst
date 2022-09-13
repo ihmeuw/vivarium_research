@@ -324,8 +324,37 @@ Individual intervention pages:
      - None 
      - 
 
-.. todo::
-  Discuss appropriate number of seeds and draws  
+
+**Final Model Run:**
+
+.. list-table:: CVD simulation model population parameters
+   :header-rows: 1
+
+   * - Parameter
+     - Value
+     - Note
+   * - Population size
+     - TBD
+     - per random seed/draw combination
+   * - Number of draws
+     - TBD
+     - 
+   * - Number of random seeds
+     - TBD
+     - per draw
+   * - Cohort type
+     - Closed
+     - 
+   * - Age start
+     - 7 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+   * - Age end
+     - 125 years
+     - Maximum age at initialization
+   * - Sex restrictions
+     - None 
+     - 
+
 
 .. _uscvd4.2.2:
 
@@ -366,6 +395,14 @@ First, it is determined if the simulant will have a healthcare interaction in th
   * - Emergency 
     - If simulant has an acute event during this time step, 100% will have an emergency visit 
     - Acute events are ischemic stroke or acute myocardial infarction 
+
+**Scheduling Appointments** 
+The only appointment type that can be scheduled is a follow-up. A simulant can have a maximum of 1 follow-up 
+scheduled at any time. If they have a follow-up previously scheduled and would be assigned a new follow-up 
+after a screening or emergency visit, ignore the new assignment. The original follow-up scheduled will remain. 
+
+If a simulant misses an appointment, they are assumed to be 'lost to follow-up' and will not have future 
+appointments until they have a screening or emergency visit. 
 
 
 **Missing Appointments** 
@@ -638,8 +675,8 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Burn in period will allow some simulants to have appointments for hypertension or hyperlipidemia prior to sim start 
   * - Follow-up visit time distribution  
     - 
-    - With burn in, all simulants can be assigned a follow-up from the same 3-6 month uniform distribution as is used for within model time steps 
-    - Burn in period will allow some simulants to have appointments on sim start time step 
+    - All simulants will be assigned a follow-up from a uniform distribution of 0-3 months 
+    - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
 
 
 Baseline Coverage Data for Medication of SBP or LDL-C
@@ -752,11 +789,11 @@ Code is below for reference
     - Adding angina as a cause    
     - `Validation workbook Model 3 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd>`_ Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. Seems that angina relative risk is highly susceptible to low n-size and leads to high variation. 
   * - 4.0
-    - Adding heart failure as a cause  
-    - 
+    - Adding in healthcare system visits 
+    - Planned V&V: stable rate of appointments per CVD case in the population; percent of simulants with a follow-up scheduled is reasonably stable; percent of appointments that are follow-up visits is stable. Source: [Rodgers_2009]_
   * - 5.0
-    - Adding in healthcare system and medications for SBP and LDL-C  
-    - Note: need to confirm if we are overmedicating the population 
+    - Adding medications for SBP and LDL-C  
+    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with publiched data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
   * - 6.0
     - Adding in the outreach intervention 
     -  
@@ -894,11 +931,15 @@ Some limitations of this analysis include:
 
 #. All simulants receive an adherence that does not change, this means persistance is not simulanted (continued adherence)
 
+**Healthcare Interactions**
+
+#. Data for screening appointments is pulled from GBD envelope "outpatient visits". It is not clear where this data was derived and while it does vary by age and sex, the trend is not continuous. This is an area for refinement. 
+#. Outpatient visits does not have a well defined variation right now. It is likely that this is not a true Poisson distribution, and is overdispersed and/or bimodal.  
+#. The "no-show" rate for appointments is based on multiple research papers and designed to allow some simulants to chronically miss more appointments. However, the choice to use a uniform distribution is based on variation across papers, not a single study. This is an area for refinement. 
+
 **Other Limitations**
 
-#. Not all causes of heart disease are modeled, there are additional causes such as hypertensive heart disease, COPD, etc and without them included, it will lead to a chronic underestimation of effect in our model 
 #. There are many lifestyle factors that contribute significantly to heart disease but aren't included here 
-#. Outpatient visits does not have a well defined variation right now. It is likely that this is not normally distributed around the mean but rather is bimodal or another distribution - this might lead to an over medication of the population compared to reality 
 #. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 
@@ -930,6 +971,9 @@ Some limitations of this analysis include:
 
 .. [Denney_2019] Denney, Joseph, Samuel Coyne, and Sohail Rafiqi. 2019. “Machine Learning Predictions of No-Show Appointments in a Primary Care Setting” 2 (1): 33. 
 
+.. [Derington_2020] Derington, Catherine G., Jordan B. King, Jennifer S. Herrick, Daichi Shimbo, Ian M. Kronish, Joseph J. Saseen, Paul Muntner, Andrew E. Moran, and Adam P. Bress. 2020. “Trends in Antihypertensive Medication Monotherapy and Combination Use Among US Adults, National Health and Nutrition Examination Survey 2005–2016.” Hypertension 75 (4): 973–81. 
+  https://doi.org/10.1161/HYPERTENSIONAHA.119.14360.
+
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
 
@@ -947,6 +991,9 @@ Some limitations of this analysis include:
 
 .. [Goff_2014] Goff, David C., Donald M. Lloyd-Jones, Glen Bennett, Sean Coady, Ralph B. D’Agostino, Raymond Gibbons, Philip Greenland, et al. 2014. “2013 ACC/AHA Guideline on the Assessment of Cardiovascular Risk.” Circulation 129 (25_suppl_2): S49–73. 
   https://doi.org/10.1161/01.cir.0000437741.48606.98
+
+.. [Gu_2012] Gu, Qiuping, Vicki L. Burt, Charles F. Dillon, and Sarah Yoon. 2012. “Trends in Antihypertensive Medication Use and Blood Pressure Control Among United States Adults  With Hypertension.” Circulation 126 (17): 2105–14. 
+  https://doi.org/10.1161/CIRCULATIONAHA.112.096156. 
 
 .. [Kempny_2016] Kempny, Aleksander, Gerhard-Paul Diller, Konstantinos Dimopoulos, Rafael Alonso-Gonzalez, Anselm Uebing, Wei Li, Sonya Babu-Narayan, Lorna Swan, Stephen J. Wort, and Michael A. Gatzoulis. 2016. “Determinants of Outpatient Clinic Attendance amongst Adults with Congenital Heart Disease and Outcome.” International Journal of Cardiology 203 (January): 245–50. 
   https://doi.org/10.1016/j.ijcard.2015.10.081.
@@ -985,6 +1032,9 @@ Some limitations of this analysis include:
 
 .. [Parikh_2010] Parikh, Amay, Kunal Gupta, Alan C. Wilson, Karrie Fields, Nora M. Cosgrove, and John B. Kostis. 2010. “The Effectiveness of Outpatient Appointment Reminder Systems in Reducing No-Show Rates.” The American Journal of Medicine 123 (6): 542–48. 
   https://doi.org/10.1016/j.amjmed.2009.11.022. 
+
+.. [Rodgers_2009] “ACC 2009 Survey Results and Recommendations: Addressing the Cardiology Workforce Crisis.” n.d. Accessed September 12, 2022. 
+  https://doi.org/10.1016/j.jacc.2009.08.001. 
 
 .. [Sabate_2003] Sabaté, Eduardo, and World Health Organization, eds. 2003. Adherence to Long-Term Therapies: Evidence for Action. Geneva: World Health Organization. 
 
