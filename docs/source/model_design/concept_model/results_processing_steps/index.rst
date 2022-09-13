@@ -31,7 +31,7 @@ Vivarium V&V and Results Processing Tips
    :local:
    :depth: 1
 
-These are some non-exhaustic tips and tricks!
+These are some non-exhaustive tips and tricks!
 
 General things to check/keep in mind
 -------------------------------------
