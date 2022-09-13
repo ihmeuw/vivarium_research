@@ -87,7 +87,7 @@ Simulated population size per draw will directly affect the impact of stochastic
 Interaction between random seeds and simulated population sizes
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Generally, a researcher should communicate to the engineers the desired simulated population size per draw for a given simulation (see below for how to select an appropriate value for this parameter). Then, the engineers (perhaps with input from the researchers!) will determine an appropriate number of subgroups to divide this population across to optimize the balancer between the amount of cluster nodes/memory as well as the run time duration that the simulation will take. 
+Generally, a researcher should communicate to the engineers the desired simulated population size per draw for a given simulation (see below for how to select an appropriate value for this parameter). Then, the engineers (perhaps with input from the researchers!) will determine an appropriate number of subgroups to divide this population across to optimize the balance between the amount of cluster nodes/memory as well as the simulation's run time. 
 
 Generally, as the number of random seeds increases and the associated population size per parallel cluster job decreases for a set population size per draw (say 10 random seeds with population size of 10,000 per draw as opposed to 1 random seed with population size of 100,000 per draw):
 
