@@ -46,6 +46,10 @@ General things to check/keep in mind
 
 - If something is not verifying, but is close to the target, it could be due to stochastic variation. Check and see if it gets closer when you pool across all scenarios, all ages, etc. If so, stoachstic variation could be to blame for the deviation from the target value. In this case, consider increasing the simulated population size and/or simulated number of draws. Also, try looking at the median value, which may be closer to the target value than the mean is when there are small counts.
 
+- Remember the distinction between model verification (Do model outputs accurately reflect model inputs? Did we make a mistake in *building* the model?) and model validation (Do model outputs accurately represent reality? Did we make a mistake in *designing* the model?). Be sure to validate model results, including to your own back-of-the-envelope calculation (:ref:`see this page for details <vivarium_best_practices_boe>`) as well as external data sources that may have evaluated similar research questions.
+
+- Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the `Interactive Simulation`_
+
 General list of things to verify
 -----------------------------------
 
@@ -75,7 +79,7 @@ Verification of these parameters compared to artifact and GBD values is generall
 
 Additionally, especially if simulating across several years, we should check not only that the parameters meet verification criteria across all simulated years, but also that there are no unacceptable/obvious trends in simulated outputs across simulated years (ex: some mortality rate increasing with time, etc.).
 
-Interactive simulations
+Interactive simulation
 ------------------------
 
 Some things may be easier to verify in interactive simulations rather than from count data outputs. Such parameters may include:
@@ -83,6 +87,8 @@ Some things may be easier to verify in interactive simulations rather than from 
 - Risk factors with many categories (ex: LBWSG) because stratifying simulation outcomes by many categories may be too much of a drain on computation time
 
 - Continuous risk factors. Mean exposure values and/or proportions below a given threshold may be included as simulation outputs (TODO: provide link/info), but otherwise interactive simulations may be helpful to verify risk exposure standard deviation or other measures.
+
+- Many risk effects on the same event. If it is not computationally feasible to stratify the event rate by all risk factors that affect it, the best way to verify these risk effects may be to re-calculate and verify the event *rate* at the simulant level.
 
 - Continuous risk effects. TODO: provide details or examples
 
