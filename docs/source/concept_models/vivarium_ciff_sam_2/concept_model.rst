@@ -373,7 +373,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   * - 2.0: Alternative scenario runs, stratified by seed
     - Subset of scenarios to determine desired number of draws and population sizes
     - 1, 7, 8
-    - 50 draws, 50 seeds
+    - 50 draws, 200,000 population size
     - Count data results stratified by random seed for optimization
     - No x-factor component
   * - 3.0: All wave 1 scenarios
