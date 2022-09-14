@@ -56,6 +56,15 @@ The goal of this simulation is to investigate the question:
 
 `Additional background on the project and resources for publication can be found here. <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_sim_science_collaborations/_layouts/15/Doc.aspx?sourcedoc=%7BFE3E9389-829B-4BEC-A425-7487A1A510A8%7D&file=Updated%20draft%20introduction%20outline.docx&action=default&mobileredirect=true>`_
 
+1.1 Examples of similar analyses
+--------------------------------
+
+Existing models that utilize dynamic transition models of child wasting include:
+
+- Optima Nutrition Model, an adaptation of the Lives Saved Tool (LiST) [Optima-Nutrition-Model]_, utilized in an analysis by [Scott-et-al-2020]_
+
+- Work by the Institute for Disease Modeling (IDM), developed to investigate the potential impact of nutritional supplementation on childhood measles burden [Noori-et-al-2021]_
+
 2.0 Simulation design
 +++++++++++++++++++++++++++++
 
@@ -157,45 +166,51 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Baseline
     - Baseline (0%)
     - 
-  * - 2: MAM and SAM treatment scale-down
+  * - 2: Zero coverage
     - Zero coverage
     - Zero coverage
     - Baseline (0%)
     - 
-  * - 3: SAM treatment scale-up
-    - Scale-up
-    - Baseline*
+  * - 3: SAM treatment scale-up from baseline
+    - Scale-up to target
+    - Baseline
     - Baseline (0%)
     - 
-  * - 4: MAM treatment scale-up
-    - Baseline*
-    - Scale-up
+  * - 4: SAM treatment scale-up from zero
+    - Scale-up to target
+    - Zero coverage
+    - Zero coverage
+    - 
+  * - 5: MAM treatment scale-up
+    - Baseline
+    - Scale-up to SAM baseline
     - Baseline (0%)
     - 
-  * - 5: MAM and SAM treatment scale-up
-    - Scale-up
-    - Scale-up
+  * - 6: Full scale-up to SAM baseline
+    - Baseline
+    - Scale-up to SAM baseline
+    - Scale-up 3a to SAM baseline
+    - 
+  * - 7: MAM and SAM treatment scale-up
+    - Scale-up to target
+    - Scale-up to target
     - Baseline (0%)
     - 
-  * - 6: Universal SQ-LNS + treatment scale-up
-    - Scale-up
-    - Scale-up
-    - Scale-up 3a
+  * - 8: Full scale-up to target
+    - Scale-up to target
+    - Scale-up to target
+    - Scale-up 3a to target
     - 
-  * - 7: SQ-LNS to mildly wasted
-    - Scale-up
-    - Scale-up
-    - Scale-up 3b
+  * - 9: SQ-LNS to mildly wasted
+    - Scale-up to target
+    - Scale-up to target
+    - Scale-up 3b to target
     - [Second wave that requires x-factor inclusion]
-  * - 8: SQ-LNS to SAM and MAM treatment
-    - Scale-up
-    - Scale-up
-    - Scale-up 3c
+  * - 10: SQ-LNS to SAM and MAM treatment
+    - Scale-up to target
+    - Scale-up to target
+    - Scale-up 3c to target
     - [Second wave that requires x-factor inclusion]
-
-.. todo::
-
-  Consider if cells marked with an asterisk (*) should be replaced with zero coverage instead of baseline
 
 .. note::
 
@@ -252,13 +267,17 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 2.3.1.5 Intervention Models
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. todo::
+.. important::
 
-  Consider adding mortality impacts? We're thinking no for now.
+  Use the same coverage propensity for all modeled interventions (MAM treatment, SAM treatment, and SQ-LNS). In other words, at the same coverage level, the same simulants should be covered by all 3 interventions and the remaining simulants should be covered by zero interventions. 
 
 * :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>` 
 
 * :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>`
+
+.. todo::
+
+  Consider adding mortality impacts? We're thinking no for now.
 
 2.4 Outputs
 ----------------------
@@ -317,6 +336,15 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 3.0 Models
 +++++++++++
 
+**Model development priorities:**
+
+#. Concept model updates (a: components, b: outputs, c: specifications)
+#. Assessment of single scenario computational resources, joint decision on feasibility of additional locations
+#. SQ-LNS age end parameter update
+#. SQ-LNS effect size update, sex-specific desired.
+#. Scenario implementation (for single location, then assess if we want to run full set for additional locations)
+#. SQ-LNS utilization algorithms and targeted scenarios (Phase II! For single location, following x-factor calibration by research team)
+
 .. note::
 
   Model run requests may be added to this table for iterative verification and validation processes
@@ -325,25 +353,35 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   :header-rows: 1
 
   * - Run
+    - Description
     - Scenarios
     - Specification modifications
     - Stratificaction modifications
     - Note
-  * - 1.0: Baseline
+  * - 1.0 Baseline concept model updates
+    - Includes relevant model components, updated outputs, updated model specs.
     - 1
     - None
     - None
     - No x-factor component
-  * - 2.0: Alternative scenario to optimize draws and seeds
-    - 1, 5, 6
+  * - 1.1 SQ-LNS updates
+    - Updates to SQ-LNS age-end parameter, sex-specific effect size
+    - 6
+    - None
+    - Wasting transition counts stratified by SQ-LNS coverage/utilization
+    - No x-factor component
+  * - 2.0: Alternative scenario runs, stratified by seed
+    - Subset of scenarios to determine desired number of draws and population sizes
+    - 1, 7, 8
     - 50 draws, 50 seeds
     - Count data results stratified by random seed for optimization
     - No x-factor component
   * - 3.0: All wave 1 scenarios
-    - 1 though 6
+    - Full wave 1 scenarios
+    - 1 through 8
     - draws and seeds TBD
     - None
-    - No x-factor component
+    - No x-factor component. May be run for additional locations.
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
@@ -376,3 +414,16 @@ References
   View `Huybregts et al. 2019 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6711497/pdf/pmed.1002892.pdf>`_
   
     Huybregts L, Le Port A, Becquey E, Zongrone A, Barba FM, Rawat R, Leroy JL, Ruel MT. Impact on child acute malnutrition of integrating small-quantity lipid-based nutrient supplements into community-level screening for acute malnutrition: A cluster-randomized controlled trial in Mali. PLoS Med. 2019 Aug 27;16(8):e1002892. doi: 10.1371/journal.pmed.1002892. PMID: 31454356; PMCID: PMC6711497.
+
+.. [Noori-et-al-2021]
+  
+  View `Noori et al. 2021 <https://doi.org/10.1101/2021.09.10.21263402>`_
+
+    Navideh Noori, Laura A. Skrip, Assaf P. Oron, Kevin A. McCarthy, Benjamin M. Althouse, Indi Trehan, Kevin P.Q. Phelan. Potential Impacts of Mass Nutritional Supplementation on Dynamics of Measles: A Simulation Study. medRxiv 2021.09.10.21263402; doi: https://doi.org/10.1101/2021.09.10.21263402
+
+.. [Optima-Nutrition-Model]
+  Pearson R, Killedar M, Petravic J, Kakietek JJ, Scott N, Grantham KL, Stuart RM, Kedziora DJ, Kerr CC, Skordis-Worrall J, Shekar M, Wilson DP. Optima Nutrition: an allocative efficiency tool to reduce childhood stunting by better targeting of nutrition-related interventions. BMC Public Health. 2018 Mar 20;18(1):384. doi: 10.1186/s12889-018-5294-z. Erratum in: BMC Public Health. 2018 Apr 26;18(1):555. `https://pubmed.ncbi.nlm.nih.gov/29558915 <https://pubmed.ncbi.nlm.nih.gov/29558915>`_
+
+.. [Scott-et-al-2020]
+  Scott, N., Delport, D., Hainsworth, S. et al. Ending malnutrition in all its forms requires scaling up proven nutrition interventions and much more: a 129-country analysis. BMC Med 18, 356 (2020). `https://doi.org/10.1186/s12916-020-01786-5 <https://doi.org/10.1186/s12916-020-01786-5>`_
+

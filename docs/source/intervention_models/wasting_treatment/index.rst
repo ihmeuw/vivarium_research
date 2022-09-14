@@ -161,6 +161,7 @@ which are based on the 2013 WHO guidelines on management of SAM in children and 
 
     - In GBD, SAM and MAM are classified as using WHZ score. In reality, GBD-MAM kids with oedema are treated as SAM kids. The proportion (sequelae) of GBD-MAM kids with oedema is approximately 2%. In our model these will be classified as MAM.
 
+Notably, recent evidence has emerged that a revised treatment protocol that does not distinguish between MAM and uncomplicated SAM may be more desireable than traditional treatment protocols with ready to use supplementary foods (RUSF) and ready to use therapeutic foods (RUTF) used for SAM [Cazes-et-al-2022]_. However, we have not updated the treatment modeling strategy accordingly, which would involve updating the time to response of treated MAM parameter to be slightly less than the existing value from [Ackatia_Armah_2015tx]_.
 
 Severe acute malnutrition (SAM)
 +++++++++++++++++++++++++++++++
@@ -691,7 +692,7 @@ Also note that since wasting and LBWSG are correlated, those with more severe wa
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#. We are not applying a differential death rate to those effectively covered vs not effectively covered
+#. We are not applying a differential death rate to those effectively covered vs not effectively covered. Potential excess mortality associated with untreated SAM relative to treated SAM is analyzed in an analysis by [Laillou-et-al-2022]_, which suggests it may be equal to 138.52 per 1,000 child-years. 
 #. We are generalizing across the whole country. There is likely to be a lot of heterogeneity within the country.
 #. We assume that MAM treatment coverage is equal to SAM treatment coverage. Given that SAM treatment is more intensive than MAM treatment, we may underestimate MAM treatment coverage as a result of this assumption.
 #. We assume that MAM and SAM treatment effectivenesses are independent from one another.
@@ -712,6 +713,7 @@ Validation and Verification Criteria
 
 #. Verify that the wasting *incidence* rates do not vary by treatment coverage. Incidence rates for this verification should be calculated as :math:`\frac{\text{incident MAM/SAM cases|treatment coverage status}}{\text{person time in mild/MAM wasting states|treatment coverage status}}` (note denominator is not total person time for treatment coverage status, which may differ between treatment coverage categories).
 
+#. Validate child mortality rates stratified by SAM treatment coverage to the external data source [Laillou-et-al-2022]_.
 
 #. Verify that MAM and SAM prevalence among simulants covered by wasting treatment is less than MAM and SAM prevalence among simulants not covered by wasting treatment, such that, separately for each simulation scenario:
 
@@ -755,6 +757,11 @@ References
 .. _`Isanaka 2021`: https://gh.bmj.com/content/6/3/e004342
 
 
+.. [Cazes-et-al-2022]
+  View `Cazes et al. 2022 <https://pubmed.ncbi.nlm.nih.gov/35303461/>`_
+
+  Cazes C, Phelan K, Hubert V, Boubacar H, Bozama LI, Sakubu GT, Tshiala BK, Tusuku T, Alitanou R, Kouamé A, Yao C, Gabillard D, Kinda M, Daures M, Augier A, Anglaret X, Shepherd S, Becquet R. Simplifying and optimising the management of uncomplicated acute malnutrition in children aged 6-59 months in the Democratic Republic of the Congo (OptiMA-DRC): a non-inferiority, randomised controlled trial. Lancet Glob Health. 2022 Apr;10(4):e510-e520. doi: 10.1016/S2214-109X(22)00041-9. Erratum in: Lancet Glob Health. 2022 May;10(5):e626. 
+
 .. [CMAM_Forum_coverage]
 
   View `CMAM Forum coverage`_
@@ -772,6 +779,12 @@ References
 
 .. _`Isanaka 2019`: http://www.ncbi.nlm.nih.gov/pubmed/31139441
 
+
+.. [Laillou-et-al-2022]
+
+  View `Laillou et al. 2022 <https://pubmed.ncbi.nlm.nih.gov/35349221/>`_
+
+    Laillou A, Baye K, Guerrero Oteyza SI, Abebe F, Daniel T, Getahun B, Chitekwe S. Estimating the number of deaths averted from 2008 to 2020 within the Ethiopian CMAM programme. Matern Child Nutr. 2022 Mar 29:e13349. doi: 10.1111/mcn.13349. Epub ahead of print. PMID: 35349221.
 
 .. [Scott_2020]
 
