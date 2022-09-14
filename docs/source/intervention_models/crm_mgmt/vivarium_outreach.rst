@@ -1,17 +1,61 @@
 .. _intervention_crm_mgmt_outreach:
 
-Vivarium Modeling Strategy - Outreach Intervention 
-**************************************************
+=====================
+Outreach Intervention
+=====================
 
-Overview
-++++++++
+.. contents::
+   :local:
+   :depth: 1
 
-Adherence to SBP and LDL-C lowering therapies would increase through patient outreach. Methods for outreach include 
+.. list-table:: Abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
+
+  * - Abbreviation
+    - Definition
+    - Note
+  * - SBP
+    - Systolic Blood Pressure
+    - 
+  * - LDL-C
+    - Low-Density Lipoprotein Cholesterol
+    - 
+  * - CVD
+    - Cardiovascular Disease 
+    - 
+
+
+Intervention Overview
+---------------------
+
+Primary adherence to SBP and LDL-C lowering therapies would increase through patient outreach. Methods for outreach include 
 regular phone calls between provider and patient, a mobile app with reminders and guidance, or a patient support clinic.
 
 Today, few patients receive this support and adherence to medications is often low. This intervention will assess the 
 impact of an outreach intervention on risk factors and CVD. 
 
+
+.. list-table:: Affected Outcome #1 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
+
+  * - OR for Primary Adherence
+    - Source 
+    - Notes
+  * - 2.16 
+    - [Derose-2013]_ 
+    - 
+
+
+Baseline Coverage Data
+++++++++++++++++++++++++
+
+Assume there is no coverage today. 
+
+
+Vivarium Modeling Strategy
+--------------------------
 
 Eligibility and Initiation
 ++++++++++++++++++++++++++
@@ -30,19 +74,7 @@ Affected Outcomes
 This intervention affects primary adherence to medications, which in turn will affect the simulants exposure to SBP and LDL-C. 
 
 
-.. list-table:: Affected Outcome #1 Effect Size
-  :widths: 15 15 15 
-  :header-rows: 1
-
-  * - OR for Primary Adherence
-    - Source 
-    - Notes
-  * - 2.16 
-    - [Derose-2013]_ 
-    - 
-
-
-This odds ratio will effectivly halve the number of simulants that are primary non-adherent. All simulants that 
+This odds ratio above will approximately halve the number of simulants that are primary non-adherent. All simulants that 
 are no longer primary non-adherent, are assumed to be adherent. This means that the new adherence rates for simulants 
 with the intervention are: 
 
@@ -86,11 +118,23 @@ with the intervention are:
     - Medicare Part D Data
 
 
+Assumptions and Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-**Source information:**
+- We assume that all those simulants who become primary adherent are then adherent to the medication moving forward. This is likely to overestimate the effect of the results. 
 
-Kaiser patients, when prescribed statin as a new medication within the past 1 year, receive automated phone calls and letters starting 1-2 weeks after prescribing, which encourages them to fill the prescription (primary adherence). Receiving this intervention increases fill and initiation of statin from 26% to 42% of patients. OR for intervention vs control was 2.16 (1.91-2.43). Effectively, patients were twice as likely to initiate medication during the first 30 days if intervention was delivered.  
-[Derose-2013]_
+- Currently the same probability of being adherent is used for all simulants. In future iterations, we will try to separate this by age, sex, race, or other simulant characteristics. 
 
 
-A trial by [Becker-2005]_ had similar results but did not report an effect on adherence. 
+Validation and Verification Criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Intervention coverage among the eligible population should verify to the scenario-specific level
+- Intervention coverage should be zero among the non-eligible populations
+- SBP or LDL-C effects stratified by intervention coverage should reflect the intervention effect size
+
+References
+------------
+
+.. [Derose-2013] Derose, Stephen F., et al. "Automated outreach to increase primary adherence to cholesterol-lowering medications." JAMA internal medicine 173.1 (2013): 38-43.
+  https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1399850
