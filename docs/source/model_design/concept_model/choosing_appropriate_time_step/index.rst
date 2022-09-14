@@ -39,8 +39,16 @@ Generally, a timestep should be as large as possible while meeting model verific
 Some modeling features that may impact timestep duration decisions include:
 
 - Modeled events between specified time intervals. For example, a monthly timestep may be desired if simulants attend monthly medication sessions
+
+  - This is because Vivarium simulants can only undergo one transition in each cause/intervention model per timestep. So if the timestep is very long, it's unrealistic that only one thing happened to them during that long timestep, because in all likelihood something else would have happened to them in between that first event and the end of the timestep.
+
 - Duration-based choices: if the average duration of a given condition is 10 days, a timestep longer than 10 days may not be appropriate
-- Rate-based choices (see below)
+
+  - This is because Vivarium person-time observers always work on the assumption that someone was in the same state for the entire timestep duration. If people in real life would be more quickly moving between states than the timestep allows, this assumption becomes highly inaccurate and V&V criteria may not be met.
+
+- Rate-based choices
+
+  - See below.
 
 Relationship between timesteps and modeled rates in Vivarium
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
