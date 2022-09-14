@@ -304,13 +304,10 @@ Individual intervention pages:
      - Note
    * - Population size
      - 50,000
-     - per random seed/draw combination
+     - per draw 
    * - Number of draws
      - 10
      - 
-   * - Number of random seeds
-     - 15
-     - per draw
    * - Cohort type
      - Closed
      - 
@@ -335,13 +332,10 @@ Individual intervention pages:
      - Note
    * - Population size
      - TBD
-     - per random seed/draw combination
+     - per draw
    * - Number of draws
      - TBD
      - 
-   * - Number of random seeds
-     - TBD
-     - per draw
    * - Cohort type
      - Closed
      - 
@@ -958,9 +952,6 @@ Some limitations of this analysis include:
 .. [Baumgartner_2018] Baumgartner, Pascal C., R. Brian Haynes, Kurt E. Hersberger, and Isabelle Arnet. 2018. “A Systematic Review of Medication Adherence Thresholds Dependent of Clinical Outcomes.” Frontiers in Pharmacology 9. 
   https://www.frontiersin.org/articles/10.3389/fphar.2018.01290 
 
-.. [Becker-2005] Becker, Diane M., et al. "Impact of a community-based multiple risk factor intervention on cardiovascular risk in black families with a history of premature coronary disease." Circulation 111.10 (2005): 1298-1304.
-  https://www.ahajournals.org/doi/10.1161/01.CIR.0000157734.97351.B2
-
 .. [Byrd_2011] Byrd, James B., Chan Zeng, Heather M. Tavel, David J. Magid, Patrick J. O’Connor, Karen L. Margolis, Joe V. Selby, and P. Michael Ho. 2011. “Combination Therapy as Initial Treatment for Newly Diagnosed Hypertension.” American Heart Journal 162 (2): 340–46. 
   https://doi.org/10.1016/j.ahj.2011.05.010.
 
@@ -974,9 +965,6 @@ Some limitations of this analysis include:
 
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
-
-.. [Derose-2013] Derose, Stephen F., et al. "Automated outreach to increase primary adherence to cholesterol-lowering medications." JAMA internal medicine 173.1 (2013): 38-43.
-	https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1399850
 
 .. [Ely-2017] Ely, Elizabeth K., et al. "A national effort to prevent type 2 diabetes: participant-level evaluation of CDC’s National Diabetes Prevention Program." Diabetes care 40.10 (2017): 1331-1341.
   https://care.diabetesjournals.org/content/40/10/1331
