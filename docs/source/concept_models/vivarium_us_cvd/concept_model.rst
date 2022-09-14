@@ -349,7 +349,6 @@ Individual intervention pages:
      - None 
      - 
 
-
 .. _uscvd4.2.2:
 
 4.2.2 Location description
