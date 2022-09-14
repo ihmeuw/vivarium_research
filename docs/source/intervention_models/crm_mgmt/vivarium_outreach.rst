@@ -74,9 +74,9 @@ Affected Outcomes
 This intervention affects primary adherence to medications, which in turn will affect the simulants exposure to SBP and LDL-C. 
 
 
-This odds ratio above will approximately halve the number of simulants that are primary non-adherent. All simulants that 
-are no longer primary non-adherent, are assumed to be adherent. This means that the new adherence rates for simulants 
-with the intervention are: 
+The 2.16 odds ratio listed above will approximately halve the number of simulants that are primary non-adherent 
+compared to those who are not receiving the intervention. All simulants that are no longer primary non-adherent, 
+are assumed to be adherent. This means that the new adherence rates for simulants with the intervention are: 
 
 **LDL-C Treatments**
 
