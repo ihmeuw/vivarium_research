@@ -34,9 +34,7 @@ Monte Carlo Uncertainty in Vivarium
 What is Monte Carlo Uncertainty
 --------------------------------
 
-.. todo::
-
-  Link to some good existing resources. Anybody know of any good ones?
+`See this resource for an overview of Monte Carlo Uncertainty Propagation <https://pubs.acs.org/doi/10.1021/acs.jchemed.0c00096#:~:text=Monte%20Carlo%20simulations%20for%20uncertainty,distributions%20of%20the%20input%20variables>`_
 
 Uncertainty Parameterization in Vivarium
 -----------------------------------------
@@ -44,16 +42,18 @@ Uncertainty Parameterization in Vivarium
 What is a draw?
 ++++++++++++++++
 
-We can think of a draw as a single iteration of some calculation or model run within a series of calculations or model runs that make up the summary estimates. 
+A draw is a sample from a probability distribution. We use the 1,000 draws/samples (or some other :math:`n` number of draws) to represent the distribution, instead of using a continuous density function from which each individual draw was sampled.
 
 Draws in GBD
 ~~~~~~~~~~~~~
 
-With the exception of covariate and population size estimates, the GBD calculates 1,000 draw-level estimates for each outcome value and then reports the mean, 2.5th percentile, and 97.5th percentile across those draw-level values as the final estimate and 95% uncertainty interval for each outcome. 
+With the exception of covariate and population size estimates, the GBD calculates 1,000 draw-level estimates for each outcome value and then reports the mean, 2.5th percentile, and 97.5th percentile across those draw-level values as the final estimate and 95% uncertainty interval for each outcome. The 1,000 draw-level estimates for each outcome are estimated by performing the calculation required to produce that estimate 1,000 times using 1,000 draws of each parameter used in that calculation.  
 
 .. todo::
 
   Provide some documentation on if there is any draw-level continuity in the GBD. I've never known but always wondered how this works! Are there any good GBD resources here?
+
+  Also, I believe that future GBD rounds may use 500 draws instead of 1,000. Need to confirm this.
 
 Draws for non-GBD parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
