@@ -304,13 +304,10 @@ Individual intervention pages:
      - Note
    * - Population size
      - 50,000
-     - per random seed/draw combination
+     - per draw 
    * - Number of draws
      - 10
      - 
-   * - Number of random seeds
-     - 15
-     - per draw
    * - Cohort type
      - Closed
      - 
@@ -335,13 +332,10 @@ Individual intervention pages:
      - Note
    * - Population size
      - TBD
-     - per random seed/draw combination
+     - per draw
    * - Number of draws
      - TBD
      - 
-   * - Number of random seeds
-     - TBD
-     - per draw
    * - Cohort type
      - Closed
      - 
@@ -354,7 +348,6 @@ Individual intervention pages:
    * - Sex restrictions
      - None 
      - 
-
 
 .. _uscvd4.2.2:
 
