@@ -34,7 +34,7 @@ Choosing an Appropriate Time Step
 General Considerations
 ----------------------
 
-Generally, a timestep should be as large as possible while meeting model verification criteria and producing all desired outputs. Larger timesteps are more desireable because they decrease computational time and resources required to run the model.
+Generally, a timestep should be as large as possible while meeting model verification criteria and producing all desired outputs. Larger timesteps are more desirable because they decrease computational time and resources required to run the model.
 
 Some modeling features that may impact timestep duration decisions include:
 
