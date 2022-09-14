@@ -46,7 +46,7 @@ Small quantity lipid based nutrient supplements (SQ-LNS)
   A summary of the associated changes to modeling strategy includes:
 
   - Reduction in the age end parameter from 5 years to 2 years
-  - Update of the effect size on child wasting in accordance with newly published literature
+  - Update of the effect size on child wasting in accordance with newly published literature, also now sex-specific
   - New utilization algorithms
   - Potential for new intervention effect on ACMR (not currently included in this document)
 
@@ -201,7 +201,7 @@ Wasting
 
 For the outcome moderate wasting, [DAS_Cochrane_Review_2019]_ compared prevalence of **moderate wasting** at 18 or 24 months between intervention and control children. LNS plus complementary feeding reduced the prevalence of moderate wasting by 18% (RR 0.82, 95% CI 0.74 to 0.91; eight studies; 13,172 participants; moderate-quality evidence). There was *no impact* of LNS plus complementary feeding on **severe wasting** (RR 1.27, 95% CI 0.66 to 2.46; three studies, 2329 participants)
 
-[Dewey-et-al-2021b]_ found a prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes.
+[Dewey-et-al-2021b]_ found a prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes. [Dewey-et-al-2021b]_ also found effect modification by child sex, with greater impacts among females than males, which we plan to incorporate into our simulation (shown in the table below). Possible mechanisms for sex differences in childhood nutrition are discussed by [Thompson-2021]_.
 
 We will apply the relative risk ratio as a relative rate ratio on the incidence of MAM from MILD (i2) starting from the age-start of the intervention starts (6 months). This is because we assume that the intervention does not affect the duration of disease and hence:
 
@@ -221,11 +221,6 @@ We will apply the relative risk ratio as a relative rate ratio on the incidence 
 
 The intervention effect in the table below should be applied to the :code:`i2` transition rate in the :ref:`dynamic wasting transition model <2020_risk_exposure_wasting_state_exposure>` between mild and moderate wasting states. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure.
 
-.. todo::
-
-  Decide if we should use sex-specific effects
-
-
 .. list-table:: Wasting outcome effect sizes
   :header-rows: 1
 
@@ -235,16 +230,12 @@ The intervention effect in the table below should be applied to the :code:`i2` t
     - Note
   * - i2 incidence rate from mild to moderate wasting
     - Relative risk
-    - 0.86 (95% CI 0.80 to 0.93), lognormal distribution of uncertainty
-    - Total population effect size from [Dewey-et-al-2021b]_
-  * - i2 incidence rate from mild to moderate wasting
-    - Relative risk
     - 0.91 (0.88, 0.95), lognormal distribution of uncertainty
-    - Male-specific effect size from [Dewey-et-al-2021b]_
+    - **Male**-specific effect size from [Dewey-et-al-2021b]_
   * - i2 incidence rate from mild to moderate wasting
     - Relative risk
     - 0.84 (0.80, 0.88), lognormal distribution of uncertainty
-    - Female-specific effect size from [Dewey-et-al-2021b]_
+    - **Female**-specific effect size from [Dewey-et-al-2021b]_
 
 Stunting
 ~~~~~~~~~
@@ -367,6 +358,12 @@ References
     E, Humphrey JH, Dewey KG. Lipid-based nutrient supplements and
     all-cause mortality in children 6–24 months of age: a meta-analysis of
     randomized controlled trials. Am J Clin Nutr 2020;111:207–18.
+
+.. [Thompson-2021]
+
+  View `Thompson 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9205267/pdf/nihms-1803160.pdf>`_
+
+    Thompson AL. Greater male vulnerability to stunting? Evaluating sex differences in growth, pathways and biocultural mechanisms. Ann Hum Biol. 2021 Sep;48(6):466-473. doi: 10.1080/03014460.2021.1998622. PMID: 35105202; PMCID: PMC9205267.
 
 .. [Wessells-et-al-2021]
 
