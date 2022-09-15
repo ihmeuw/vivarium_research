@@ -300,6 +300,16 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
     - Person-time spent covered by SQ-LNS per 100,000 PY (:ref:`see difference between coverage and utilization here <utilization-definition>`)
 
+    - Mean difference of time-to-recovery of MAM and SAM by wasting treatment status (coverage and efficacy)
+
+  *Simulation outcomes needed for verification and validation only:*
+
+    - Cause incidence, remission, and excess mortality rates
+
+    - Wasting and stunting risk effects
+
+    - Effect of SQ-LNS intervention
+
 **Requested outputs for primary outcomes** with minimum required stratification beyond defaults (additional stratification requested below if needed for V&V):
 
   Default strata:
@@ -318,18 +328,26 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - 
     - 
   * - Wasting transition counts
-    - * MAM treatment coverage/efficacy
-      * SAM treatment coverage/efficacy
+    - * MAM treatment coverage and efficacy (separately)
+      * SAM treatment coverage and efficacy (separately)
     - 
   * - Wasting state person time
     - * SQ-LNS coverage/utilization 
+      * MAM treatment coverage and efficacy (separately)
+      * SAM treatment coverage and efficacy (separately)
     - 
   * - Mortality (cause-specific)
-    - * MAM treatment coverage/efficacy
-      * SAM treatment coverage/efficacy
-      * SQ-LNS coverage/utilization
+    - * MAM treatment coverage and efficacy (separately)
+      * SAM treatment coverage and efficacy (separately)
+      * SQ-LNS coverage/utilization (separately if targeting)
     - 
   * - Morbidity
+    - 
+    - 
+  * - Cause state person time
+    - 
+    - 
+  * - Cause transition counts
     - 
     - 
 
@@ -362,13 +380,13 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Includes relevant model components, updated outputs, updated model specs.
     - 1
     - None
-    - None
+    - Stratify cause state person time and cause transition counts by wasting and stunting state person time (for V&V of risk effects)
     - No x-factor component
   * - 1.1 SQ-LNS updates
     - Updates to SQ-LNS age-end parameter, sex-specific effect size
     - 6
     - None
-    - Wasting transition counts stratified by SQ-LNS coverage/utilization
+    - Wasting transition counts stratified by SQ-LNS coverage/utilization (for V&V of SQ-LNS intervention effect)
     - No x-factor component
   * - 2.0: Alternative scenario runs, stratified by seed
     - Subset of scenarios to determine desired number of draws and population sizes
