@@ -808,6 +808,7 @@ Outputs:
 #. Total exposure value * person time for all risk factors 
 #. Person time at or below target values for SBP and LDL-C 
 #. Healthcare appointments 
+#. Missed appointments 
 #. Person time on medication 
 #. Medication effect - exposure levels stratified by medication time 
 #. Numbers of interventions 
@@ -872,7 +873,10 @@ Stratifications for All:
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
-    - Split by type of appointment - follow-up vs emergency vs screening 
+    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc.
+  * - Missed follow-up appointments 
+    - sum of missed follow-up appointments 
+    - 
   * - Population on SBP medication 
     - sum of person time on SBP medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
