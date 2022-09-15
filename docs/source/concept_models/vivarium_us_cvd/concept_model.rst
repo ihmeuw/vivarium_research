@@ -397,6 +397,7 @@ after a screening or emergency visit, ignore the new assignment. The original fo
 If a simulant misses an appointment, they are assumed to be 'lost to follow-up' and will not have future 
 appointments until they have a screening or emergency visit. 
 
+If a simulant misses an appointment, they can have a screening appointment in that time step. 
 
 **Missing Appointments** 
 For follow-up appointments only, a simulant has a probability of missing their appointment. For emergency 
@@ -783,7 +784,7 @@ Code is below for reference
     - Planned V&V: stable rate of appointments per CVD case in the population; percent of simulants with a follow-up scheduled is reasonably stable; percent of appointments that are follow-up visits is stable. Source: [Rodgers_2009]_
   * - 5.0
     - Adding medications for SBP and LDL-C  
-    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with publiched data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
   * - 6.0
     - Adding in the outreach intervention 
     -  
