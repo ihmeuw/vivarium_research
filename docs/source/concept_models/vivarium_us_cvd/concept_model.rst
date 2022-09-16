@@ -876,7 +876,7 @@ Stratifications for All:
     - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc.
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - 
+    - Split but age/sex/state/etc. 
   * - Population on SBP medication 
     - sum of person time on SBP medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
