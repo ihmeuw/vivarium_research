@@ -392,7 +392,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 3. Scenario implementation
 
-  * First run for a sub-set of scenarios with increased population size and number of draws to assess how many to use moving forward
+  * First run for a sub-set of scenarios with increased population size and number of draws to assess how many to use moving forward (detailed in model request table below)
 
   * Then, run all scenarios with determined population size and number of draws
 
