@@ -129,7 +129,7 @@ Simulated scenarios will involve some change of coverage/efficacy parameter valu
   * - Intervention
     - Baseline
     - Scale-up target
-    - Zero coverage
+    - Zero coverage (*)
   * - 1: SAM treatment
     - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
     - :math:`C_{SAM} = 0.7`
@@ -148,8 +148,12 @@ Simulated scenarios will involve some change of coverage/efficacy parameter valu
       :math:`E_{MAM} = \text{baseline value}`
   * - 3: SQ-LNS (all sub-interventions)
     - :math:`C_{SQLNS} = 0`
-    - :math:`C_{SQLNS} = 0.7`
+    - :math:`C_{SQLNS} = 0.7` (*)
     - :math:`C_{SQLNS} = 0`
+
+.. note::
+
+  (*) in the table above indicates a change from phase I
 
 For scenarios that feature a scale-up of one of the above interventions, intervention parameters should scale between the baseline and the scale-up values according to :ref:`the algorithm described here <ciff_scale_up_algorithm>` that was used for phase I of the acute malnutrition simulation. For scenarios that feature "zero coverage" of one or more of the above interventions, intervention coverage should immediately change from the baseline to the zero coverage values at the date that the intervention scale-up would have occured according to the algorithm linked above. Intervention parameters should remain at the zero coverage values for the remainder of the simulation.
 
@@ -171,25 +175,25 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Zero coverage
     - Baseline (0%)
     - 
-  * - 3: SAM treatment scale-up from baseline
+  * - 3: SAM treatment scale-up, baseline MAM treatment
     - Scale-up to target
     - Baseline
     - Baseline (0%)
     - 
-  * - 4: SAM treatment scale-up from zero
+  * - 4: SAM treatment scale-up, zero MAM treatment
     - Scale-up to target
     - Zero coverage
     - Zero coverage
-    - 
+    - Note: SAM treatment scale-up should still start from baseline. For this scenario we will primarily assess target coverage impact.
   * - 5: MAM treatment scale-up
     - Baseline
-    - Scale-up to SAM baseline
+    - Scale-up :math:`C_{MAM}` to baseline :math:`C_{SAM}`. No change in :math:`E_{MAM}` (keep at baseline value).
     - Baseline (0%)
     - 
   * - 6: Full scale-up to SAM baseline
     - Baseline
-    - Scale-up to SAM baseline
-    - Scale-up 3a to SAM baseline
+    - Scale-up :math:`C_{MAM}` to baseline :math:`C_{SAM}`. No change in :math:`E_{MAM}` (keep at baseline value).
+    - Scale-up 3a to baseline :math:`C_{MAM}`
     - 
   * - 7: MAM and SAM treatment scale-up
     - Scale-up to target
@@ -269,7 +273,13 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 .. important::
 
-  Use the same coverage propensity for all modeled interventions (MAM treatment, SAM treatment, and SQ-LNS). In other words, at the same coverage level, the same simulants should be covered by all 3 interventions and the remaining simulants should be covered by zero interventions. 
+  **A note on coverage propensities:**
+
+  We would ideally like to use the same coverage propensity for all modeled interventions (MAM treatment, SAM treatment, and SQ-LNS). In other words, at the same coverage level, the same simulants should be covered by all 3 interventions and the remaining simulants should be covered by zero interventions. 
+
+  However, we used non-fixed propensity values for the :ref:`Treatment and management for acute malnutrition <intervention_wasting_treatment>` model to avoid V&V issues as discussed on the intervention model document.
+
+  Given this model limitation, **we will model *independent* coverage propensities of the SQ-LNS intervention and MAM/SAM treatment.**
 
 * :ref:`Small quantity lipid based nutrient supplements universal coverage (SQ-LNS) <lipid_based_nutrient_supplements>` 
 
@@ -292,25 +302,19 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   - All-cause YLL rates
   - Cause-specific YLD rates
 
-  *Secondary simulation outcomes*:
+**Secondary simulation outcomes**
 
-    - Relative risk for all-cause mortality by intervention coverage 
+  - Relative risk for all-cause mortality by intervention coverage (for comparison with trial data)
+  - Person-time spent covered by SQ-LNS per 100,000 PY (:ref:`see difference between coverage and utilization here <utilization-definition>`)
+  - Mean difference of time-to-recovery of MAM and SAM by wasting treatment status (coverage and efficacy)
 
-      - For comparison with trial data
+*Simulation outcomes needed for verification and validation only:*
 
-    - Person-time spent covered by SQ-LNS per 100,000 PY (:ref:`see difference between coverage and utilization here <utilization-definition>`)
+  - Cause incidence, remission, and excess mortality rates
+  - Wasting and stunting risk effects
+  - Effect of SQ-LNS intervention
 
-    - Mean difference of time-to-recovery of MAM and SAM by wasting treatment status (coverage and efficacy)
-
-  *Simulation outcomes needed for verification and validation only:*
-
-    - Cause incidence, remission, and excess mortality rates
-
-    - Wasting and stunting risk effects
-
-    - Effect of SQ-LNS intervention
-
-**Requested outputs for primary outcomes** with minimum required stratification beyond defaults (additional stratification requested below if needed for V&V):
+**Requested outputs for primary and secondary outcomes** with minimum required stratification beyond defaults (additional stratification requested below if needed for V&V):
 
   Default strata:
 
@@ -356,12 +360,49 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 **Model development priorities:**
 
-#. Concept model updates (a: components, b: outputs, c: specifications)
-#. Assessment of single scenario computational resources, joint decision on feasibility of additional locations
-#. SQ-LNS age end parameter update
-#. SQ-LNS effect size update, sex-specific desired.
-#. Scenario implementation (for single location, then assess if we want to run full set for additional locations)
-#. SQ-LNS utilization algorithms and targeted scenarios (Phase II! For single location, following x-factor calibration by research team)
+1. Concept model updates
+  
+  1a. Updated model components
+  
+    * :underline:`Keep without changes:` SQ-LNS intervention, MAM treatment intervention, SAM treatment intervention, wasting transition risk factor, stunting risk factor, protein energy malnutrition cause, measles cause
+    
+    * :underline:`Change:` Diarrheal diseases and lower respiratory infections causes (to most recent versions used in IV iron), update risk effect of wasting to apply to diarrheal diseases incidence rate rather than excess mortality rate
+    
+    * :underline:`Remove from previous model:` LBWSG risk factor, maternal supplementation intervention, insecticide treated net intervention, zinc supplementation intervention, diarrheal diseases risk effects, x-factor risk factor (for now), maternal BMI risk factor
+
+  1b. Simulation outputs
+
+    * Update outputs and stratification to match tables above
+
+    * Update stratification by MAM and SAM treatment to include :code:`uncovered`/:code:`effectively_covered`/:code:`ineffectively_covered` from current stratification of :code:`covered`/:code:`uncovered`. 
+
+      Note that :code:`effectively_covered` will represent those who are covered by :math:`C_{MAM}`/:math:`C_{SAM}` parameters **and** :math:`E_{MAM}`/:math:`E_{SAM}` parameters. :code:`ineffectively_covered` will represent those who are covered by :math:`C_{MAM}`/:math:`C_{SAM}` parameters, but **not** :math:`E_{MAM}`/:math:`E_{SAM}` parameters. Currently, the :code:`covered` category contains both of these groups.
+
+  1c. Model specification changes
+
+    * Update simulation timestep from 0.5 days to 4 days
+
+    * Change simulation age start from birth to six months
+
+2. Update SQ-LNS intervention details (except for targeting implementation)
+
+  * Change age-end parameter from 5 to 2 years
+
+  * Update effect of SQ-LNS on wasting to new sex-specific values
+
+3. Scenario implementation
+
+  * First run for a sub-set of scenarios with increased population size and number of draws to assess how many to use moving forward
+
+  * Then, run all scenarios with determined population size and number of draws
+
+  * Assess computational resource requirements and joint decision about additional locations
+
+4. SQ-LNS utilization algorithms and targeted scenarios
+
+  * SQ-LNS targeting implementation (new code!)
+
+  * Include x-factor risk in model. Note that research team will need to pass off calibration values.
 
 .. note::
 
@@ -379,27 +420,27 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   * - 1.0 Baseline concept model updates
     - Includes relevant model components, updated outputs, updated model specs.
     - 1
-    - None
+    - Default (20 draws, 100,000 population size)
     - Stratify cause state person time and cause transition counts by wasting and stunting state person time (for V&V of risk effects)
-    - No x-factor component
-  * - 1.1 SQ-LNS updates
+    - No x-factor component. V&V baseline model before moving on (cause models, risk effects, MAM/SAM treatment effects)
+  * - 2.0 SQ-LNS updates
     - Updates to SQ-LNS age-end parameter, sex-specific effect size
     - 6
-    - None
+    - Default (20 draws, 100,000 population size)
     - Wasting transition counts stratified by SQ-LNS coverage/utilization (for V&V of SQ-LNS intervention effect)
-    - No x-factor component
-  * - 2.0: Alternative scenario runs, stratified by seed
+    - No x-factor component. V&V SQ-LNS effect and intervention scale-up before moving on.
+  * - 3.0: Alternative scenario runs, stratified by seed
     - Subset of scenarios to determine desired number of draws and population sizes
-    - 1, 7, 8
+    - 4, 7, 8
     - 50 draws, 200,000 population size
     - Count data results stratified by random seed for optimization
-    - No x-factor component
-  * - 3.0: All wave 1 scenarios
+    - No x-factor component. V&V zero coverage implementation before moving on.
+  * - 3.1: All wave 1 scenarios
     - Full wave 1 scenarios
     - 1 through 8
-    - draws and seeds TBD
-    - None
-    - No x-factor component. May be run for additional locations.
+    - Draws and seeds TBD
+    - Default
+    - No x-factor component. May be run for additional locations depending on computational resource requirements.
 
 .. list-table:: Model verification and validation tracking
    :widths: 3 10 20
@@ -423,6 +464,13 @@ For scenarios that feature a scale-up of one of the above interventions, interve
      -  
      -  
      -  
+
+Assumptions and Limitations
+----------------------------
+
+- We assume independent coverage propensities between our modeled interventions. Say someone has SAM and does not have access to treatment but spontaneously recovers to MAM -- it is possible for this person to then be treated for MAM in our model. While possible, this is probably unlikely in reality. Additionally, while we expect our modeled interventions to estimate impact on total incident wasting cases reasonably, we will likely underestimate the potential impact of SQ-LNS on *treated* wasting cases as SQ-LNS coverage will not be concentrated among those who are covered by CMAM services.
+
+- Our definition of MAM and SAM treatment coverage is probability rather than capacity based (probability of receiving treatment given that you need treatment does not change as the overall number of children who need treatment changes), which is likely not reflective of real-world resource availability/constraints. 
 
 References
 ----------
