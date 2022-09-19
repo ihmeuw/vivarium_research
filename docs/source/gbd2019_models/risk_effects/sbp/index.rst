@@ -151,8 +151,8 @@ The risk-outcome pairs listed below are standard GBD relationships. The relative
    * - Heart failure
      - REI
      - 196
-     - Morbidity (GBD YLDs)
-     - Impairement, no RR currently available for overall HF
+     - Mortality and Morbidity (GBD YLDs only, YLLs previously included in other causes)
+     - Impairement in GBD, RR is pulled from literature 
 
 .. list-table:: Restrictions
    :widths: 15 15 20
@@ -303,9 +303,34 @@ Risk Outcome Pair #10: Heart failure
 
 :ref:`See heart failure documentation <2019_cause_heart_failure>`
 
-The relative risks apply to the incidence rates of residual heart failure. 
+In GBD, heart failure is an impairment and does not have a mortality associated with it. For our model, 
+heart failure is a cause that simulants can have and die from. However, the effect of SBP is for incidence 
+rather than for mortality. Below are the relative risks, these are from the literature analysis_. 
 
-GBD does not currently produce relative risk estimates for heart failure or calculate PAFs. These estimates will be extracted from the literature. 
+.. _analysis: https://www.jacc.org/doi/full/10.1016/j.jacc.2019.03.529
+
+The relative risks can be utilized by SBP group based on these tables: 
+
+.. list-table:: Relative risk of heart failure for SBP 
+   :widths: 5 5 20
+   :header-rows: 1
+
+   * - SBP Group 
+     - Relative Risk 
+     - Notes 
+   * - <120
+     - Reference group  
+     - 
+   * - 120-129 
+     - 1.27 (1.13, 1.43) 
+     - 
+   * - 130-139 
+     - 1.5 (1.3, 1.73) 
+     - 
+   * - 140+ 
+     - 1.76 (1.43, 2.17) 
+     - 
+
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

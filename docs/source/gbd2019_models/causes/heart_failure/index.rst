@@ -152,7 +152,7 @@ pooled cohort analysis_. LDL-C level is assumed not to affect heart failure in t
 
 .. _analysis: https://www.jacc.org/doi/full/10.1016/j.jacc.2019.03.529
 
-The relative risks can be utilized by SBP/LDL-C group based on these tables: 
+The relative risks can be utilized by SBP group based on these tables: 
 
 .. list-table:: Relative risk of heart failure for SBP 
    :widths: 5 5 20
