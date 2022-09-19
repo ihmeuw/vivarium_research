@@ -343,9 +343,9 @@ Initializing people living in group quarters
 
 To initialize approximately N simulants total, including simulants
 residing in Group Quarters when initializing our simulation, we will
-first initialize K individuals in Group Quarters (in three steps,
-described below) and then initialize approximated (N-K) individuals
-into households as described above.
+first initialize (N-K) individuals into households as described above
+(where K is a little bit random due to the process) and then K
+individuals in Group Quarters (in three steps, described below).
 
 The first step of this process is choosing K; ideally it would be
 sampled from a Binomial distribution, with a probability p_GQ of each
@@ -635,6 +635,8 @@ simplifying assumptions that we have included:
 
 #. the head of household cannot move to a new household
 
+#. Group Quarters address and zip code do not change
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are moving at the expected rates.
@@ -923,6 +925,11 @@ may wish to change to numeric format for this to a synthetic SSN-like
     # give everyone a unique fake ssn (for now)
     df_population['ssn'] = [fake.unique.ssn() for _ in range(len(df_population))]
 
+As a simple mechanism to capture some of the complexity in SSNs, we
+will have 10% of newborn simulants not receive a SSN.  We will also
+have 10% of simulants initialized at the beginning of the simulation
+not receive a SSN.
+
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 SSNs, confirm that the
 expected number are missing and that the duplication count follows the
@@ -1096,6 +1103,13 @@ they worked for during the calendar year.  We should also extract a
 list of "dependents" from the household structure and perhaps
 something about spouses, but let's leave thinking that through for
 later.
+
+There is an additional piece of complexity that we need to develop
+further, because some group quarters types are also employers.  For
+now, we will have a special employer called "Military" and for
+simulants living in military group quarters we will set their employer
+to Military, and ensure that their address and zip code match their
+employer_address and employer_zipcode.
 
 .. _census_prl_limitations:
 
