@@ -1,31 +1,126 @@
 .. _intervention_crm_mgmt_polypill:
 
 
-Vivarium Modeling Strategy - Polypill Intervention 
---------------------------------------------------
+=====================
+Polypill Intervention
+=====================
 
-.. todo::
+.. contents::
+   :local:
+   :depth: 1
 
-  Add an overview of the Vivarium modeling section.
+.. list-table:: Abbreviations
+  :widths: 15 15 15
+  :header-rows: 1
 
-.. todo::
-  Address comment: I expect this to reference the hypertension treatment doc and describe how some ramp positions can be achieved by a polypill; it should say what the effect of polypill is on adherence, and who gets polypill (perhaps with reference to the scenarios.rst description of what the coverage of polypill is in your alternative scenarios.)
+  * - Abbreviation
+    - Definition
+    - Note
+  * - SBP
+    - Systolic Blood Pressure
+    - 
+  * - LDL-C
+    - Low-Density Lipoprotein Cholesterol
+    - 
+  * - CVD
+    - Cardiovascular Disease 
+    - 
 
-Decision tree and algorithm for polypill intervention
 
-.. toctree::
-   :maxdepth: 1
+Intervention Overview
+---------------------
 
-   visit
-   tx
+The polypill intervention combines multiple medications that would have been taken separately 
+into one prescription and a single pill. For this research, the polypill with include: 
+atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg). 
+All of these are hypertension medications, although there are trials that combine hypertension 
+medications and statins. 
+
+Today, few patients receive this option and adherence to medications is often low. This 
+intervention will assess the impact of a polypill on SBP and CVD. 
+
+Please note that as the polypill only includes hypertension medications, LDL-C adherence will
+NOT be affected. 
 
 
-**Source information:**
+.. list-table:: Affected Outcome #1 Effect Size
+  :widths: 15 15 15 
+  :header-rows: 1
 
-Individuals with prevalent IHD, past ischemic stroke, prevalent PAD, or 5-year CVD risk of 15% or greater received a free 6-month-at-a-time supply of a polypill of either version 1 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and atenolol, 50 mg) or version 2 (aspirin, 75 mg; simvastatin, 40 mg; lisinopril, 10 mg; and hydrochlorothiazide, 12.5 mg). Compared with usual care, at 12 months, the polypill group was more likely to be adherent with medications (adjRR 1.13, 95% CI 1.08-1.18). 
+  * - OR for  Adherence
+    - Source 
+    - Notes
+  * - 1.33 
+    - [Thom-2013]_ 
+    - 
+
+
+Baseline Coverage Data
+++++++++++++++++++++++++
+
+Assume there is no coverage today. 
+
+
+Vivarium Modeling Strategy
+--------------------------
+
+Eligibility and Initiation
+++++++++++++++++++++++++++
+
+- SBP >=130 mmHg 
+- Simulant has 2 or more hypertension drugs (e.g., simulant is in treatment category "two drugs at half dose" or above on the treatment ladder)
+- Enrollment in the intervention only happens during interactions with healthcare, as shown :ref:`here <us_cvd_concept_model>`
+
+
+Affected Outcomes
++++++++++++++++++
+
+This intervention affects overall adherence to hypertension medications, which in turn will affect the 
+simulants exposure to SBP. Adherence for LDL-C medications does not change. 
+
+The 1.33 odds ratio listed above will decrease the number of simulants that are  non-adherent compared to 
+those who are not receiving the intervention. The the new adherence rates for simulants with the intervention are: 
+
+
+**Blood Pressure Treatments**
+
+.. list-table:: Adherence Score Values 
+  :widths: 10 10 10 
+  :header-rows: 1
+
+  * - Category
+    - Percent of Simulants 
+    - Notes
+  * - Primary Non-adherence
+    - 16%
+    - [Cheen_2019]_ 
+  * - Secondary Non-adherence
+    - 4.9%
+    - 
+  * - Adherent
+    - 79.1%
+    - Medicare Part D Data [Thom-2013]_
+
+
+Please note that the intervention works on the overall level of adherence (% adherent in the table above). 
+The percents for primary and secondary nonadherence are now arbitrary.  
+
+Assumptions and Limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Currently the same probability of being adherent is used for all simulants. In future iterations, we will try to separate this by age, sex, race, or other simulant characteristics. 
+
+
+Validation and Verification Criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Intervention coverage among the eligible population should verify to the scenario-specific level
+- Intervention coverage should be zero among the non-eligible populations
+- SBP effects stratified by intervention coverage should reflect the intervention effect size
+
+References
+------------
+
 [Thom-2013]_ 
 
-**Implementation:**
-
-Adherence to blood pressure lowering and statin medications over 1 year after initiation should be increased according to the above study, though in this scenario we will actually deliver the following combination: atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg). Effect can persist beyond the length of the study.  
 [Munoz-NEJM]_ 
