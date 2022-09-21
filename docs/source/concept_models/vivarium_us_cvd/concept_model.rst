@@ -135,10 +135,6 @@ interventions by subgroups.
 3.1 Simulation Scenarios
 ------------------------
 
-.. todo::
-  Lacking clarity on if these are implemented together or one at a time. I am coded them as separate and a final 
-  combined run currently but this is a lot of scenarios to run. Should consider limiting this list. 
-
 #. **Baseline**  
 #. **Medical Outreach 50% Coverage**  
 #. **Medical Outreach 100% Coverage**
@@ -146,8 +142,6 @@ interventions by subgroups.
 #. **Polypill 100% Coverage**
 #. **Lifestyle Modification 50% Coverage**
 #. **Lifestyle Modification 100% Coverage**
-#. **Combination of All Modifications 50% Coverage**
-#. **Combination of All Modifications 100% Coverage**
 
 **Baseline** is assumed to have no one enrolled in any intervention. 
 
@@ -172,21 +166,10 @@ coverage for the remainder of the simulation.
 **Lifestyle Modification 100% Coverage** assumes all eligible simulants are enrolled in the lifestyle modeification 
 intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
 
-**Combination of All Modifications 50% Coverage** assumes 50% coverage for all interventions, implemented 
-simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. 
-Remain at 50% coverage for the remainder of the simulation. 
-
-**Combination of All Modifications 100% Coverage** assumes 100% coverage for all interventions, implemented 
-simultaneously. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
-
 .. _uscvd3.2:
 
 3.2 Simulation Timeframe and Intervention Start Dates
 -----------------------------------------------------
-
-.. todo::
-  Need to add intervention start date. 
-  Need to validate observation start date.  
 
 .. list-table:: Developmental model CVD simulation timeframe and intervention dates
   :header-rows: 1
@@ -279,7 +262,6 @@ Individual intervention pages:
   I plan to integrate these into other pages and to delete all in the final version  
 
   * :ref:`Health Care Visit Types <intervention_crm_mgmt_visit>`
-  * :ref:`Medications <intervention_crm_mgmt_tx>`
   * :ref:`Affected Outcomes <intervention_crm_mgmt_affected_outcomes>`
   * :ref:`Initialization <intervention_crm_mgmt_initialization>`
 
@@ -399,17 +381,15 @@ appointments until they have a screening or emergency visit.
 
 If a simulant misses an appointment, they can have a screening appointment in that time step. 
 
+If a simulant leaves a visit in the "no change" state but previously had a follow-up scheduled, they will 
+keep that follow-up appointment. 
+
 **Missing Appointments** 
 For follow-up appointments only, a simulant has a probability of missing their appointment. For emergency 
 visits, it is assumed the patient seeks medical care. For screening visits, the chance to not attend 
 is covered by the probability of a visit. 
 
-The probability of missing a follow-up appointment is defined at the simulant level, and stays for 
-the duration of the sim. The probability is assigned to each sim based on a uniform distribution 
-between 5 and 35%. 
-
-When a simulant has a follow-up scheduled, they will have their assigned percent chance of missing that appointment. 
-[Parikh_2010]_ [Kheirkhah_2016]_ [Mohammadi_2018]_ [Denney_2019]_ [Kempny_2016]_ [McLeod_2005]_
+The probability of missing a follow-up appointment is 8.68% for all simulants. [Hwang_2015]_ 
 
 
 **SBP Treatment Ramp**
@@ -427,13 +407,19 @@ When a simulant has a follow-up scheduled, they will have their assigned percent
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - [Wallace_2011]_
   * - B
-    - Only adherent simulants will move up categories. 41.76% will not change/start medication due to theraputic inertia 
+    - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
     - [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication; 26.25% will receive two drugs at half dose, remainder will receive one drug at half dose  
     - [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
-    - If simulant is eligible, either 50% or 100% depending on scenario  
+    - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
+    - [Ali_2021]_ [Liu_2017]_
+  * - E (outreach intervention scenarios)
+    - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
+    - For 50% scenario, assignment is random 
+  * - F (polypill intervention scenarios)
+    - If simulant is prescribed two drugs at half dose or higher on SBP ladder and is eligible, either 50% or 100% are enrolled depending on scenario  
     - For 50% scenario, assignment is random 
 
 
@@ -499,6 +485,10 @@ Adherence is categorized into three buckets:
 
 If a simulant is primary or secondary nonadherent, their adherence score in the model is 0. If they are 
 adherent, their adherence score is 1. 
+
+A simulant's adherence score **does NOT change** during the simulation and will be assigned at initialization. 
+The below table shows the percent chance of being assigned different buckets of adherence. Adherence is 
+randomly assigned to all simulants. 
 
 
  .. Note::
@@ -595,25 +585,51 @@ Treatment Effects
 
 **Blood Pressure Treatments**  
 
-.. todo::
-  - Add parameter variation if needed to SBP  
+Blood pressure treatments are split into 6 categories based on the number of medications and dosage. It 
+is assumed that different medications have a similar impact and therefore are not modeled individually. 
 
-Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
+.. list-table:: SBP Treatments 
+  :widths: 10 
+  :header-rows: 1
+
+  * - Medication Group 
+  * - One Drug at Half Dose 
+  * - One Drug at Standard Dose 
+  * - Two Drugs at Half Dose 
+  * - Two Drugs at Standard Dose 
+  * - Three Drugs at Half Dose 
+  * - Three Drugs at Standard Dose 
+
+
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
 
-Blood pressure treatment is split into 6 categories based on the number of medications and dosage. It 
-is assumed that different medications have a similar impact and therefore are not modeled individually. 
-The maximum number of medications a simulant can receive is 3 at standard dose. 
+SBP decrease for an individual simulant can be calculated as: 
 
-SBP decrease for an individual simulant is based on both the medication impact and adherence score:  
+ :math:`SBP Decrease = Treatment Efficacy * Adherence Score`
 
-SBP decrease = SBP treatment efficacy * Adherence score
-
+Where adherence score = 0 for primary or secondary nonadherent; and adherence score = 1 for adherent 
 
 **LDL-C Treatments** 
+
+LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, 
+and the inclusion of ezetimibe. This assumes that the impact of different therapies is 
+similar and therefore are not modeled individually. 
+
+.. list-table:: LDL-C Treatments 
+  :widths: 10 
+  :header-rows: 1
+
+  * - Medication Group 
+  * - Low Intensity Statins
+  * - Medium Intensity Statins 
+  * - Low/Medium Intensity Statins with ezetimibe 
+  * - High Intensity Statins
+  * - High Intensity Statins with ezetimibe 
+
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
 initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
@@ -625,14 +641,11 @@ This average value for efficacy by category will be used for all simulants. This
 for parameter uncertainity only. Variation in the simulant response is assumed 
 to not affect the population measures used as outputs from this simulation. 
 
-LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, and the inclusion 
-of ezetimibe with statins. This assumes that the impact of different individual therapies is 
-similar and they therefore are not modeled individually. The maximum amount of medications a 
-simulant can receive is high intensity statins with ezetimibe. 
+LDL-C decrease for an individual simulant can be calculated as: 
 
-LDL-C decrease for an individual simulant is based on both the medication impact and adherence score:  
+ :math:`LDL Decrease = Treatment Efficacy * Adherence Score` 
 
-LDL-C decrease = LDL-C treatment efficacy * Adherence score 
+Where adherence score = 0 for primary or secondary nonadherent; and adherence score = 1 for adherent 
 
 .. _uscvd4.5:
 
@@ -670,7 +683,7 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
 
 
-Baseline Coverage Data for Medication of SBP or LDL-C
+Medication Coverage of SBP or LDL-C at Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. The code used to generate this data is below, but not needed for initialization. The system of equations provided gives the probabilities for each simulant being on the different types of medicaiton. 
@@ -679,11 +692,11 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
 
 These covariate values are calculated for each simulant and are then plugged into the below equations to provide the individual probabilities. 
 
- :math:`SBP_{i} = exp(-6.75 + 0.025 * SBP_{level} + -0.0045 * LDL_{level} + 0.05 * age_{(yrs)}) + 0.16 * sex)` 
+ :math:`SBP_{i} = exp((-6.75) + (0.025 * SBP_{level}) + (-0.0045 * LDL_{level}) + (0.05 * age_{(yrs)}) + (0.16 * sex))` 
 
- :math:`LDL_{i} = exp(-4.23 + -0.0026 * SBP_{level} + -0.005 * LDL_{level} + 0.062 * age_{(yrs)}) + -0.19 * sex)` 
+ :math:`LDL_{i} = exp((-4.23) + (-0.0026 * SBP_{level}) + (-0.005 * LDL_{level}) + (0.062 * age_{(yrs)}) + (-0.19 * sex))` 
 
- :math:`Both_{i} = exp(-6.26 + 0.018 * SBP_{level} + -0.014 * LDL_{level} + 0.069 * age_{(yrs)}) + 0.13 * sex)` 
+ :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.014 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
 
 Where sex = 1 for men and 2 for women 
 
@@ -931,13 +944,14 @@ Some limitations of this analysis include:
 
 #. Data for screening appointments is pulled from GBD envelope "outpatient visits". It is not clear where this data was derived and while it does vary by age and sex, the trend is not continuous. This is an area for refinement. 
 #. Outpatient visits does not have a well defined variation right now. It is likely that this is not a true Poisson distribution, and is overdispersed and/or bimodal.  
-#. The "no-show" rate for appointments is based on multiple research papers and designed to allow some simulants to chronically miss more appointments. However, the choice to use a uniform distribution is based on variation across papers, not a single study. This is an area for refinement. 
+#. The "no-show" rate for appointments is based on multiple research papers and is an approximate value. This is an area for refinement. 
 
 **Other Limitations**
 
 #. There are many lifestyle factors that contribute significantly to heart disease but aren't included here 
 #. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
+#. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
 
 .. _uscvd7.0:
 
@@ -962,8 +976,6 @@ Some limitations of this analysis include:
 .. [Cheen_2019] Cheen, McVin Hua Heng, Yan Zhi Tan, Ling Fen Oh, Hwee Lin Wee, and Julian Thumboo. 2019. “Prevalence of and Factors Associated with Primary Medication Non-Adherence in Chronic Disease: A Systematic Review and Meta-Analysis.” International Journal of Clinical Practice 73 (6): e13350. 
   https://doi.org/10.1111/ijcp.13350
 
-.. [Denney_2019] Denney, Joseph, Samuel Coyne, and Sohail Rafiqi. 2019. “Machine Learning Predictions of No-Show Appointments in a Primary Care Setting” 2 (1): 33. 
-
 .. [Derington_2020] Derington, Catherine G., Jordan B. King, Jennifer S. Herrick, Daichi Shimbo, Ian M. Kronish, Joseph J. Saseen, Paul Muntner, Andrew E. Moran, and Adam P. Bress. 2020. “Trends in Antihypertensive Medication Monotherapy and Combination Use Among US Adults, National Health and Nutrition Examination Survey 2005–2016.” Hypertension 75 (4): 973–81. 
   https://doi.org/10.1161/HYPERTENSIONAHA.119.14360.
 
@@ -985,11 +997,8 @@ Some limitations of this analysis include:
 .. [Gu_2012] Gu, Qiuping, Vicki L. Burt, Charles F. Dillon, and Sarah Yoon. 2012. “Trends in Antihypertensive Medication Use and Blood Pressure Control Among United States Adults  With Hypertension.” Circulation 126 (17): 2105–14. 
   https://doi.org/10.1161/CIRCULATIONAHA.112.096156. 
 
-.. [Kempny_2016] Kempny, Aleksander, Gerhard-Paul Diller, Konstantinos Dimopoulos, Rafael Alonso-Gonzalez, Anselm Uebing, Wei Li, Sonya Babu-Narayan, Lorna Swan, Stephen J. Wort, and Michael A. Gatzoulis. 2016. “Determinants of Outpatient Clinic Attendance amongst Adults with Congenital Heart Disease and Outcome.” International Journal of Cardiology 203 (January): 245–50. 
-  https://doi.org/10.1016/j.ijcard.2015.10.081.
-
-.. [Kheirkhah_2016] Kheirkhah, Parviz, Qianmei Feng, Lauren M. Travis, Shahriar Tavakoli-Tabasi, and Amir Sharafkhaneh. 2016. “Prevalence, Predictors and Economic Consequences of No-Shows.” BMC Health Services Research 16 (1): 13. 
-  https://doi.org/10.1186/s12913-015-1243-z.
+.. [Hwang_2015] Hwang, Andrew S., Steven J. Atlas, Patrick Cronin, Jeffrey M. Ashburner, Sachin J. Shah, Wei He, and Clemens S. Hong. 2015. “Appointment ‘No-Shows’ Are an Independent Predictor of Subsequent Quality of Care and Resource Utilization Outcomes.” Journal of General Internal Medicine 30 (10): 1426–33. 
+  https://doi.org/10.1007/s11606-015-3252-3.
 
 .. [Law_2009] Law, M. R., J. K. Morris, and N. J. Wald. 2009. “Use of Blood Pressure Lowering Drugs in the Prevention of Cardiovascular Disease: Meta-Analysis of 147 Randomised Trials in the Context of Expectations from Prospective Epidemiological Studies.” BMJ 338 (May): b1665. 
   https://doi.org/10.1136/bmj.b1665
@@ -1003,12 +1012,6 @@ Some limitations of this analysis include:
 .. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
   https://doi.org/10.1136/bmj.m149.
 
-.. [McLeod_2005] McLeod, A L, L Brooks, V Taylor, A Wylie, P F Currie, and N G Dewhurst. 2005. “Non-Attendance at Secondary Prevention Clinics: The Effect on Lipid Management.” Scottish Medical Journal 50 (2): 54–56. 
-  https://doi.org/10.1177/003693300505000204.
-
-.. [Mohammadi_2018] Mohammadi, Iman, Huanmei Wu, Ayten Turkcan, Tammy Toscos, and Bradley N. Doebbeling. 2018. “Data Analytics and Modeling for Appointment No-Show in Community Health Centers.” Journal of Primary Care & Community Health 9 (January): 2150132718811692. 
-  https://doi.org/10.1177/2150132718811692.
-
 .. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
   https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
 
@@ -1019,9 +1022,6 @@ Some limitations of this analysis include:
 
 .. [Nguyen_2015] Nguyen, Vincent, Emil M. deGoma, Erik Hossain, and Douglas S. Jacoby. 2015. “Updated Cholesterol Guidelines and Intensity of Statin Therapy.” Journal of Clinical Lipidology 9 (3): 357–59. 
   https://doi.org/10.1016/j.jacl.2014.12.009.
-
-.. [Parikh_2010] Parikh, Amay, Kunal Gupta, Alan C. Wilson, Karrie Fields, Nora M. Cosgrove, and John B. Kostis. 2010. “The Effectiveness of Outpatient Appointment Reminder Systems in Reducing No-Show Rates.” The American Journal of Medicine 123 (6): 542–48. 
-  https://doi.org/10.1016/j.amjmed.2009.11.022. 
 
 .. [Rodgers_2009] “ACC 2009 Survey Results and Recommendations: Addressing the Cardiology Workforce Crisis.” n.d. Accessed September 12, 2022. 
   https://doi.org/10.1016/j.jacc.2009.08.001. 
