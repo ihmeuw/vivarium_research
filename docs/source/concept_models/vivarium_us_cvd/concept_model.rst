@@ -683,7 +683,7 @@ Where adherence score = 0 for primary or secondary nonadherent; and adherence sc
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
 
 
-Baseline Coverage Data for Medication of SBP or LDL-C
+Medication Coverage of SBP or LDL-C at Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. The code used to generate this data is below, but not needed for initialization. The system of equations provided gives the probabilities for each simulant being on the different types of medicaiton. 
