@@ -381,6 +381,9 @@ appointments until they have a screening or emergency visit.
 
 If a simulant misses an appointment, they can have a screening appointment in that time step. 
 
+If a simulant leaves a visit in the "no change" state but previously had a follow-up scheduled, they will 
+keep that follow-up appointment. 
+
 **Missing Appointments** 
 For follow-up appointments only, a simulant has a probability of missing their appointment. For emergency 
 visits, it is assumed the patient seeks medical care. For screening visits, the chance to not attend 
@@ -404,15 +407,18 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
     - [Wallace_2011]_
   * - B
-    - Only adherent simulants will move up categories. 41.76% will not change/start medication due to theraputic inertia 
+    - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
     - [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication; 26.25% will receive two drugs at half dose, remainder will receive one drug at half dose  
     - [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
-  * - D (outreach intervention scenarios)
+  * - D
+    - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
+    - [Ali_2021]_ [Liu_2017]_
+  * - E (outreach intervention scenarios)
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
-  * - E (polypill intervention scenarios)
+  * - F (polypill intervention scenarios)
     - If simulant is prescribed two drugs at half dose or higher on SBP ladder and is eligible, either 50% or 100% are enrolled depending on scenario  
     - For 50% scenario, assignment is random 
 
@@ -479,6 +485,10 @@ Adherence is categorized into three buckets:
 
 If a simulant is primary or secondary nonadherent, their adherence score in the model is 0. If they are 
 adherent, their adherence score is 1. 
+
+A simulant's adherence score **does NOT change** during the simulation and will be assigned at initialization. 
+The below table shows the percent chance of being assigned different buckets of adherence. Adherence is 
+randomly assigned to all simulants. 
 
 
  .. Note::
@@ -575,25 +585,51 @@ Treatment Effects
 
 **Blood Pressure Treatments**  
 
-.. todo::
-  - Add parameter variation if needed to SBP  
+Blood pressure treatments are split into 6 categories based on the number of medications and dosage. It 
+is assumed that different medications have a similar impact and therefore are not modeled individually. 
 
-Blood pressure treatment efficacy is dependent on a simulant's SBP value. Full efficacy data is here:
+.. list-table:: SBP Treatments 
+  :widths: 10 
+  :header-rows: 1
+
+  * - Medication Group 
+  * - One Drug at Half Dose 
+  * - One Drug at Standard Dose 
+  * - Two Drugs at Half Dose 
+  * - Two Drugs at Standard Dose 
+  * - Three Drugs at Half Dose 
+  * - Three Drugs at Standard Dose 
+
+
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is here:
 /share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
 
-Blood pressure treatment is split into 6 categories based on the number of medications and dosage. It 
-is assumed that different medications have a similar impact and therefore are not modeled individually. 
-The maximum number of medications a simulant can receive is 3 at standard dose. 
+SBP decrease for an individual simulant can be calculated as: 
 
-SBP decrease for an individual simulant is based on both the medication impact and adherence score:  
+ :math:`SBP Decrease = Treatment Efficacy * Adherence Score`
 
-SBP decrease = SBP treatment efficacy * Adherence score
-
+Where adherence score = 0 for primary or secondary nonadherent; and adherence score = 1 for adherent 
 
 **LDL-C Treatments** 
+
+LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, 
+and the inclusion of ezetimibe. This assumes that the impact of different therapies is 
+similar and therefore are not modeled individually. 
+
+.. list-table:: LDL-C Treatments 
+  :widths: 10 
+  :header-rows: 1
+
+  * - Medication Group 
+  * - Low Intensity Statins
+  * - Medium Intensity Statins 
+  * - Low/Medium Intensity Statins with ezetimibe 
+  * - High Intensity Statins
+  * - High Intensity Statins with ezetimibe 
+
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
 initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
@@ -605,14 +641,11 @@ This average value for efficacy by category will be used for all simulants. This
 for parameter uncertainity only. Variation in the simulant response is assumed 
 to not affect the population measures used as outputs from this simulation. 
 
-LDL-C treatment is split into 5 categories based on the intensity of statins prescribed, and the inclusion 
-of ezetimibe with statins. This assumes that the impact of different individual therapies is 
-similar and they therefore are not modeled individually. The maximum amount of medications a 
-simulant can receive is high intensity statins with ezetimibe. 
+LDL-C decrease for an individual simulant can be calculated as: 
 
-LDL-C decrease for an individual simulant is based on both the medication impact and adherence score:  
+ :math:`LDL Decrease = Treatment Efficacy * Adherence Score` 
 
-LDL-C decrease = LDL-C treatment efficacy * Adherence score 
+Where adherence score = 0 for primary or secondary nonadherent; and adherence score = 1 for adherent 
 
 .. _uscvd4.5:
 
@@ -650,7 +683,7 @@ LDL-C decrease = LDL-C treatment efficacy * Adherence score
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
 
 
-Baseline Coverage Data for Medication of SBP or LDL-C
+Medication Coverage of SBP or LDL-C at Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. The code used to generate this data is below, but not needed for initialization. The system of equations provided gives the probabilities for each simulant being on the different types of medicaiton. 
@@ -659,11 +692,11 @@ Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantia
 
 These covariate values are calculated for each simulant and are then plugged into the below equations to provide the individual probabilities. 
 
- :math:`SBP_{i} = exp(-6.75 + 0.025 * SBP_{level} + -0.0045 * LDL_{level} + 0.05 * age_{(yrs)}) + 0.16 * sex)` 
+ :math:`SBP_{i} = exp((-6.75) + (0.025 * SBP_{level}) + (-0.0045 * LDL_{level}) + (0.05 * age_{(yrs)}) + (0.16 * sex))` 
 
- :math:`LDL_{i} = exp(-4.23 + -0.0026 * SBP_{level} + -0.005 * LDL_{level} + 0.062 * age_{(yrs)}) + -0.19 * sex)` 
+ :math:`LDL_{i} = exp((-4.23) + (-0.0026 * SBP_{level}) + (-0.005 * LDL_{level}) + (0.062 * age_{(yrs)}) + (-0.19 * sex))` 
 
- :math:`Both_{i} = exp(-6.26 + 0.018 * SBP_{level} + -0.014 * LDL_{level} + 0.069 * age_{(yrs)}) + 0.13 * sex)` 
+ :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.014 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
 
 Where sex = 1 for men and 2 for women 
 
