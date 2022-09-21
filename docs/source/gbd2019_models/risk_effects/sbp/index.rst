@@ -152,7 +152,7 @@ The risk-outcome pairs listed below are standard GBD relationships. The relative
      - REI
      - 196
      - Mortality and Morbidity (GBD YLDs only, YLLs previously included in other causes)
-     - Impairement in GBD, RR is pulled from literature 
+     - Impairment in GBD, RR is pulled from literature 
 
 .. list-table:: Restrictions
    :widths: 15 15 20
@@ -309,7 +309,7 @@ rather than for mortality. Below are the relative risks, these are from the lite
 
 .. _analysis: https://www.jacc.org/doi/full/10.1016/j.jacc.2019.03.529
 
-The relative risks can be utilized by SBP group based on these tables: 
+The relative risks can be utilized by SBP group based on this tables: 
 
 .. list-table:: Relative risk of heart failure for SBP 
    :widths: 5 5 20

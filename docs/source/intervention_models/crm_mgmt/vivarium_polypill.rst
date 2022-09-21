@@ -31,7 +31,7 @@ Intervention Overview
 ---------------------
 
 The polypill intervention combines multiple medications that would have been taken separately 
-into one prescription and a single pill. For this research, the polypill with include: 
+into one prescription and a single pill. For this research, the polypill will include: 
 atorvastatin (10 mg), amlodipine (2.5 mg), losartan (25 mg), and hydrochlorothiazide (12.5 mg). 
 All of these are hypertension medications, although there are trials that combine hypertension 
 medications and statins. 
@@ -40,14 +40,16 @@ Today, few patients receive this option and adherence to medications is often lo
 intervention will assess the impact of a polypill on SBP and CVD. 
 
 Please note that as the polypill only includes hypertension medications, LDL-C adherence will
-NOT be affected. 
+NOT be affected. For those assigned to the polypill, adherence will be redrawn to have the 
+different percentages listed below. This adherence will then determine if the simulant 
+receives the benefit from their SBP medication. 
 
 
 .. list-table:: Affected Outcome #1 Effect Size
   :widths: 15 15 15 
   :header-rows: 1
 
-  * - OR for  Adherence
+  * - OR for Adherence
     - Source 
     - Notes
   * - 1.33 
@@ -78,7 +80,7 @@ Affected Outcomes
 This intervention affects overall adherence to hypertension medications, which in turn will affect the 
 simulants exposure to SBP. Adherence for LDL-C medications does not change. 
 
-The 1.33 odds ratio listed above will decrease the number of simulants that are  non-adherent compared to 
+The 1.33 odds ratio listed above will decrease the number of simulants that are non-adherent compared to 
 those who are not receiving the intervention. The the new adherence rates for simulants with the intervention are: 
 
 
