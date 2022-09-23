@@ -459,13 +459,13 @@ Model Assumptions and Limitations
 #. This cause model assumes that relapse and new treatment lines always correspond and
    occur simultaneously.
 #. This cause model assumes that the GBD incidence rate corresponds to the incidence
-   of symptomatic MM. That said, we are comfortable using GBD incidence of MM
-   as the detection rate of symptomatic MM cases. The incidence of RRMM will be
-   calculated from survival regression analysis based on Flatiron data.
-#. The asymptomatic/idolent state (smoldering MM) is excluded from this cause
+   of symptomatic MM.
+   The asymptomatic/idolent state (smoldering MM) is excluded from this cause
    model because we are not interested in the screening and early management for
    MM. As a result, the simulation will not track/model simulants with asymptomatic
    condition.
+#. We assume that Flatiron patients are representative of the US MM population with respect to mortality and
+   relapse outcomes.
 #. YLLs are substantially larger than YLDs for this cause. For now, we will not
    build a disability component to capture those secondary outcomes.
 #. The most advanced disease state in this cause model is
