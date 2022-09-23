@@ -463,9 +463,9 @@ eligible to give birth again the next month. We could make this more
 complicated in the future.
 
 Simulants initialized at the start of the sim with the "biological son or daughter" or "father or mother"
-relationship to the reference person are assigned the same last name as
+relationship to the reference person are assigned the same last name and race/ethnicity as
 the reference person. Simulants initialized with all other relationships
-have independently sampled last names. We could make this more complicated in the future.
+have independently sampled last names and race/ethnicities. We could make this more complicated in the future.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
