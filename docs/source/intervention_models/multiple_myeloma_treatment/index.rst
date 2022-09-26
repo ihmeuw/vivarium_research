@@ -888,7 +888,8 @@ Assumptions and Limitations
    is truly random.
 #. We assume that regimen categories not including Isa or Dara will not change
    in relative proportion between the end of our data (roughly 2022) and the end
-   of our simulation (2028).
+   of our simulation (2028), except that they all scale up or down by the same proportion according
+   to the time-varying projections of Isa and Dara.
 #. We only model ASCT in NDMM.
 #. We assume all conditioning regimens for ASCT have identical effects.
 #. We assume all maintenance therapies, or the lack of maintenance therapy, have
