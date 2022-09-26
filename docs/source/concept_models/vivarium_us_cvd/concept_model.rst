@@ -259,7 +259,7 @@ Individual intervention pages:
 4.1.5 Other Models
 ~~~~~~~~~~~~~~~~~~
 .. note::
-  I plan to integrate these into other pages and to delete all in the final version  
+  These are out of date and **should not be used** 
 
   * :ref:`Health Care Visit Types <intervention_crm_mgmt_visit>`
   * :ref:`Affected Outcomes <intervention_crm_mgmt_affected_outcomes>`
@@ -410,7 +410,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
     - [Ali_2021]_ [Liu_2017]_
   * - C
-    - 41.76% will not start medication; 26.25% will receive two drugs at half dose, remainder will receive one drug at half dose  
+    - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
     - [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
     - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
@@ -444,13 +444,13 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is in the acute or post MI or stroke states 
     - 
   * - D
-    - 19.4% will not start medication; 33.9% will receive high intensity statin; 41.9% medium intensity; and 4.8% low intensity 
+    - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
-    - 19.4% will not start medication; 19.3% will receive high intensity statin; 53.2% medium intensity; and 8.1% low intensity 
+    - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
-    - 19.4% will not start medication; 12.1% will receive high intensity statin; 57.2% medium intensity; and 11.3% low intensity 
+    - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
     - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
     - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
@@ -675,7 +675,7 @@ Where adherence score = 0 for primary or secondary nonadherent; and adherence sc
     - Burn in period will allow some simulants to move to different medication buckets prior to sim start 
   * - Follow-up visit initialization 
     - 
-    - All simulants on SBP medication, LDL-C medication, or a history of an  acute event will receive a follow-up visit (post myocaridal infarction or chronic stroke state) 
+    - All simulants initialized in the "acute" state will receive an appointment immediately. All other simulants that are either on SBP medication, LDL-C medication, or in "post myocaridal infarction" or "chronic stroke" states will receive a follow-up appointment scheduled. 
     - Burn in period will allow some simulants to have appointments for hypertension or hyperlipidemia prior to sim start 
   * - Follow-up visit time distribution  
     - 
