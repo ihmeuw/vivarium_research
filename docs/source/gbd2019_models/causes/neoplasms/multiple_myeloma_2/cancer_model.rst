@@ -460,7 +460,7 @@ Model Assumptions and Limitations
    occur simultaneously.
 #. This cause model assumes that the GBD incidence rate corresponds to the incidence
    of symptomatic MM.
-   The asymptomatic/idolent state (smoldering MM) is excluded from this cause
+   The asymptomatic/indolent state (smoldering MM) is excluded from this cause
    model because we are not interested in the screening and early management for
    MM. As a result, the simulation will not track/model simulants with asymptomatic
    condition.
