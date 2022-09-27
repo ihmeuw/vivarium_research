@@ -94,15 +94,15 @@ who developed `synthetic data for testing splink
 <http://github.com/moj-analytical-services/splink_synthetic_data>`_.
 
 The unique elements of our work will rely on Vivarium: our synthetic
-data will be informed by the United States Census Burea (USCB) needs
-and publicly released USCB data (such as the American Communities
+data will be informed by the United States Census Bureau (USCB) needs
+and publicly released USCB data (such as the American Community
 Survey [ACS]).  By using Vivarium, we will represent some realistic
 dynamics of household and family structure at large scale and with
 relevant geographies.  In the longer term, I hope that this work will
 also be easily extendable because of our modular framework, for
 example, I hope it will be somewhat straightforward to have a mash-up
-of the PRL sim with the with cancer detection models we completed a
-year ago, to help PRL researchers in cancer surveillance space.
+of the PRL sim with the cancer detection models we completed a
+year ago, to help PRL researchers in the cancer surveillance space.
 
 .. _{census_prl}1.1:
 
@@ -129,9 +129,8 @@ On top of this, we will layer attributes relevant to PRL: mailing
 addresses for each household (9); first, middle, and last names for
 each simulant (10); date of birth (11); intended-to-be-unique
 identification number modeling SSN that is missing for some and not
-actually unique for others (12); and periodic observations of these
-attributes through survey, census, and registry with realistic noise
-(13).
+actually unique for others (12); and periodic survey, census, and registry
+observations with realistic noise (13).
 
 Additional components we might want: time-dependent changes to
 observers of sex, based on gender assigned at birth (15); multiple
@@ -325,16 +324,20 @@ from ACS:
 | 38    | Noninstitutionalized group quarters population   |
 +-------+--------------------------------------------------+
 
-Vivarium needs to know the population size that it will initialize
-before a simulation starts running. Because we would like to set a
-number of households and then sample them, we don't have a total
-population count to give to Vivarium.  As a work-around solution we
-will fix a target number of people, sample households until we exceed
-this number, discard the last household (which will have at most 17
-people, since that is the largest household size in ACS), and then
-mark the last 1-17 people as untracked -- which isn't so much memory
-to drag around. Drawback: this leaves both the number of households
-and the number of simulants as variable (but not that variable).
+We need to choose how many people living in households to initialize (M)
+out of our total simulated population (N).
+Ideally, M would be
+sampled from a Binomial distribution, with a probability p_HH of each
+simulant being in a household (not GQ), and p_HH would itself be sampled from a Beta
+distribution based on the weighted fraction of the population not in GQ
+for this geography, with a concentration parameter appropriate to the
+sample size from which the weighted fraction was calculated.  But for
+now, to keep things simple, we will use M = 0.97*N.
+
+It's not straightforward to sample exactly M people while preserving household structure. Instead, we approximate
+M by sampling households until we have exceeded M, and then remove
+the last household. The largest household size in ACS is 17, so the number
+of simulants initialized in households will underestimate M by 1-16.
 
 .. _census_prl_gq_init:
 
@@ -342,20 +345,12 @@ Initializing people living in group quarters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To initialize approximately N simulants total, including simulants
-residing in Group Quarters when initializing our simulation, we will
-first initialize K individuals in Group Quarters (in three steps,
-described below) and then initialize approximated (N-K) individuals
-into households as described above.
+residing in group quarters when initializing our simulation, we will
+first initialize approximately M individuals into households as described above.
+Then, we initialize individuals in group quarters until the total population N
+is reached.
 
-The first step of this process is choosing K; ideally it would be
-sampled from a Binomial distribution, with a probability p_GQ of each
-simulant being in GQ, and p_GQ would itself be sampled from a Beta
-distribution based on the weighted fraction of the population in GQ
-for this geography, with a concentration parameter appropriate to the
-sample size from which the weighted fraction was calculated.  But for
-now, to keep things simple, we will use K = 0.03*N.
-
-Second, to generate K individuals living in group quarters, we will
+To generate individuals living in group quarters, we will
 use a weighted sample of people in group quarters from the appropriate
 geography from ACS (sampled with replacement, analogously to
 household).  This will provide each simulant residing in GQ with an
@@ -365,7 +360,7 @@ the individual resides in, however, and only provides information on
 whether it is Institutional or Non-institutional GQ (in the TYPE
 variable: 2 = Institutional; 3 = Non-institutional).
 
-The third and final step for initializing GQ simulants is to give each
+The final step for initializing GQ simulants is to give each
 a (somewhat inappropriately named) household_id.  Eventually we shall
 accomplish this so that the distribution of GQ sizes match what is
 found in census, but as a simple stand-in for now we will include 6
@@ -376,17 +371,14 @@ non-institutional are college, military, other non-institutional; and
 subtypes of institutional are carceral, nursing homes, and other
 institutional.
 
-
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
-the marginal distribution for each attribute looks as expected --- the
-age distribution should look like the Florida age pyramid; the sex
-ratio should match Florida as well.  The race/ethnicity distribution
-should, too, as well as the distribution of household sizes and
-relationship frequencies.  I will also verify that the household
+the marginal distribution for each attribute looks as expected: age, sex,
+race/ethnicity, household size, and relationship to reference person.
+The group quarters population should be approximately 3% of the total.
+I will also verify that the household
 relationships are logical --- every household should have a reference
-person, and at most one spouse/partner; there should be no group
-quarters population.
+person, and at most one spouse/partner.
 
 .. _census_prl_fertility:
 
@@ -461,25 +453,19 @@ mapping:
 | Noninstitutionalized group quarters population   | Noninstitutionalized GQ population     |
 +--------------------------------------------------+----------------------------------------+
 
-Birth spacing: When we initialize newborns during the sim, we choose their parent
-first and then we give the child things like the parents last name,
-the parents address, etc, then we make sure the parent doesn't have
+After initializing a newborn during the sim, we make sure the parent doesn't have
 another child for at least 9 months.
-
-When we initialize all simulants at the start of the sim, some people
-are initialized as "biological child" of the reference person in terms
-of their "relationship to head of household". In this case we also
-give them the same last name, etc. (we do this for simulants
-initialized as the parent of reference person.)
-
-A related limitation/simplification in our current approach is that
-when we initialize a household at the start of the sim that includes a
+However, when we initialize a household at the start of the sim that includes a
 reference person who likely recently gave birth (e.g. an age 32 female
 reference person and an age 0 biological child) we currently don't
 mark the reference person as having had a child, and so they are
 eligible to give birth again the next month. We could make this more
 complicated in the future.
 
+Simulants initialized at the start of the sim with the "biological son or daughter" or "father or mother"
+relationship to the reference person are assigned the same last name as
+the reference person. Simulants initialized with all other relationships
+have independently sampled last names. We could make this more complicated in the future.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -530,7 +516,7 @@ for changing an arc from a household in B to a new housing unit in C.
 I could imagine making these rates quite complex someday, to take into
 account the age, sex, race/ethnicity, household structure, and even
 past migration history.  At this point, it is clear that age is
-necessary to get the college dormatory migration right, so we might as
+necessary to get the college dormitory migration right, so we might as
 well include sex and race/ethnicity stratification in the rates as
 well.
 
@@ -548,7 +534,7 @@ To capture this, on the research side I will develop a migration rate
 file, with stratification columns for age group, sex, and
 race/ethnicity and data columns for the household move rate in moves
 per person year and individual move rate (also in moves per person
-year).  On the reseach side, I will also develop a migrates-to
+year).  On the research side, I will also develop a migrates-to
 probability file, with the probability that an individual moves a
 different household or to each type GQ, also stratified by age, sex,
 and race/ethnicity.  To keep things simple, we will for now not have the
@@ -566,8 +552,8 @@ take family structure into account.
 
 These notes on ACS data sources on migration could be useful for the
 more complex rates in the future.  Based on age, sex, race/ethnicity,
-and geography, can calculate the probability of moving from ACS, as
-the weighted average of MIGPUM.isnull(); Could also determine if they
+and geography, we can calculate the probability of moving from ACS, as
+the weighted average of MIGPUM.isnull(); could also determine if they
 moved within the PUMAs represented in the sim or from outside those
 PUMAs.
 
@@ -634,6 +620,8 @@ simplifying assumptions that we have included:
    the relationship to head of household "Other nonrelative"
 
 #. the head of household cannot move to a new household
+
+#. Group Quarters address and zip code do not change
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -709,12 +697,12 @@ there is 9% of the US population where the mail is not delivered to
 the residence uniformly.  For these households, we might want to
 capture different addresses in the decennial census simulated output
 and the tax return simulated output.  We can (in a future, more
-complicated model) represent this by mantaining a *mailing address*
+complicated model) represent this by maintaining a *mailing address*
 for each household that is sometimes different from residential
 address for the household's housing unit.  A simple distinction would
 be to make the mailing address a P.O. Box for 9% of the households,
 although it would be great to have this vary with location, age, sex,
-race/ethincity, and income.  When households move, this would always
+race/ethnicity, and income.  When households move, this would always
 result in a new residential address (because of the new housing unit),
 but sometimes not make a change to the PO Box (especially if the move
 was not far, e.g. within the same PUMA).  For our minimal model, we
@@ -923,6 +911,11 @@ may wish to change to numeric format for this to a synthetic SSN-like
     # give everyone a unique fake ssn (for now)
     df_population['ssn'] = [fake.unique.ssn() for _ in range(len(df_population))]
 
+As a simple mechanism to capture some of the complexity in SSNs, we
+will have 10% of newborn simulants not receive a SSN.  We will also
+have 10% of simulants initialized at the beginning of the simulation
+not receive a SSN.
+
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 SSNs, confirm that the
 expected number are missing and that the duplication count follows the
@@ -957,7 +950,7 @@ point down the road).
 
 Adding noise to the fields in these observers will be another
 important part of the art, but this can happen _after_ simulation.
-Some existing projects with noisy include
+Some existing projects with noise include
 https://github.com/pinformatics/rlErrorGeneratoR and GeCo.  Or should
 it perhaps be part of the simulation, since there are aspects of noise
 that are better included during simulation (e.g. a child splitting
@@ -1050,7 +1043,7 @@ make our own estimate of the mean and standard deviation of
 log(income) for individuals stratified by age group, sex, and
 race/ethnicity from ACS data. I think is it pretty common to assume
 that this value is normally distributed, but we could use the GBD
-ensemble risk exposure machinary if that assumption seems like a
+ensemble risk exposure machinery if that assumption seems like a
 limitation.
 
 2.3.13 Employment (18)
@@ -1086,16 +1079,23 @@ move into their old address.
 
 We have also included a special "employer" to indicate individuals who
 are *not* currently employed.  We assume that 58% of the population is
-employed, which leads to a lot of individual switching to being
+employed, which leads to a lot of individuals switching to being
 unemployed.  We might need to refine this in the future.
 
 The data we will extract from this network for our simulated tax
-return is a list of businesses and their unique id numbers and for
+return is a list of businesses and their unique ID numbers and for
 each simulant who files a tax return, a list of the businesses that
 they worked for during the calendar year.  We should also extract a
 list of "dependents" from the household structure and perhaps
 something about spouses, but let's leave thinking that through for
 later.
+
+There is an additional piece of complexity that we need to develop
+further, because some group quarters types are also employers.  For
+now, we will have a special employer called "Military" and for
+simulants living in military group quarters we will set their employer
+to Military, and ensure that their address and zip code match their
+employer_address and employer_zipcode.
 
 .. _census_prl_limitations:
 
