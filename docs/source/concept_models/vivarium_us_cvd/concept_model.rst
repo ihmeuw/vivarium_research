@@ -683,6 +683,53 @@ Where adherence score = 0 for primary or secondary nonadherent; and adherence sc
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
 
 
+Creation of "Untreated" SBP Values on Initializaiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GBD values for SBP which are used in this sim reflect the US distribution of SBP **including** medication benefits. 
+Therefore, by later applying treatment benefits to certain simulants, we are double counting the population level 
+benefit of treatment. To avoid this, we must add SBP at initialization to create an "untreated" SBP level. 
+
+To do this, we will add a percent increase in SBP to all simulants who are assigned SBP medication at 
+initialization. The section below includes details on who will receive medication. 
+
+In itialization simulants are also assigned to one drug or two drugs. Based on this assignment, a percent increase 
+in SBP level will be given to each. 
+
+.. list-table:: Percent Increase in SBP 
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Medication Assigned 
+    - Percent Decrease 
+  * - One Drug  
+    - 5.1% 
+  * - Two Drugs  
+    - 12%  
+
+
+Creation of "Untreated" LDL-C Values on Initializaiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Similar to SBP, GBD values for LDL-C reflect the US distribution of LDL-C **including** medication benefits. 
+Therefore, we again add LDL-C at initialization to create an "untreated" LDL-C level. To do this, we will 
+add a percent increase in LDL-C  to all simulants who are assigned medication at initialization. 
+
+In itialization simulants are also assigned to a statin intensity level. Based on this assignment, a percent 
+increase in LDL-C level will be given to each. 
+
+.. list-table:: Percent Increase in LDL-C 
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Medication Assigned 
+    - Percent Decrease 
+  * - Low Intensity
+    - 24.67% 
+  * - Medium Intensity
+    - 36.2% 
+  * - High Intensity
+    - 51.25% 
+
+
 Medication Coverage of SBP or LDL-C at Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
