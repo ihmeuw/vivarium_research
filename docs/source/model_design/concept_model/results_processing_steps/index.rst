@@ -50,6 +50,8 @@ General things to check/keep in mind
 
 - Vivarium has an "untracked" population that can cause confusing issues if it is set to something unexpected. This is something that may be investigated in the `Interactive Simulation`_
 
+- Pay attention to the implications of pooling age groups during results processing. It's worthwhile to examine how population demographic structure evolves over time in a simulation. If there are substantial changes over time, it may be preferable to do all calculations at the age-specific level and then age standardize the results.
+
 General list of things to verify
 -----------------------------------
 
