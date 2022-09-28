@@ -706,13 +706,34 @@ in SBP level will be given to each. The percent increase **only applies to adher
   * - Two Drugs  
     - 12%  
 
+.. list-table:: Example Implementation for Simulants 
+  :widths: 10 10 5 5 5 10 
+  :header-rows: 1
 
-Example of Implementation for a Single Simulant: 
-- Raw SBP value from GBD is 140 
-- Assigned to treatment 
-- Assigned to two therapies 
-- Is adherent 
-New "Untreated" SBP = Raw SBP * (1.12) = 140 * 1.12 = 156.8 
+  * - Simulant 
+    - Raw SBP (from GBD)
+    - Treatment?   
+    - Type of treatment? 
+    - Adherent? 
+    - Untreated SBP 
+  * - 1
+    - 140 
+    - Yes   
+    - Two drugs 
+    - Adherent 
+    - 140 * 1.12 = 156.8 
+  * - 2
+    - 130
+    - No    
+    - N/A 
+    - N/A
+    - 130 
+  * - 3 
+    - 150 
+    - Yes   
+    - One drug 
+    - Not adherent  
+    - 150 (does not change due to nonadherence) 
 
 As simulants move age categories and change SBP, the **same percent increase in SBP** from initialization 
 will be applied. For the example above, if this simulant above ages into a new category and their raw SBP 
@@ -743,12 +764,34 @@ increase in LDL-C level will be given to each.
   * - High Intensity
     - 51.25% 
 
-Example of Implementation for a Single Simulant: 
-- Raw LDL-C value from GBD is 2  
-- Assigned to treatment 
-- Assigned to medium intensity statin 
-- Is adherent 
-New "Untreated" LDL-C = Raw LDL-C * (1.362) = 2 * 1.362 = 2.724 
+.. list-table:: Example Implementation for Simulants 
+  :widths: 10 10 5 5 5 10 
+  :header-rows: 1
+
+  * - Simulant 
+    - Raw LDL-C (from GBD)
+    - Treatment?   
+    - Type of treatment? 
+    - Adherent? 
+    - Untreated LDL-C
+  * - 1
+    - 2
+    - Yes   
+    - Medium Intensity 
+    - Adherent 
+    - 2 * 1.362 = 2.724 
+  * - 2
+    - 1.9
+    - No    
+    - N/A 
+    - N/A
+    - 1.9 
+  * - 3 
+    - 2.3 
+    - Yes   
+    - High Intensity  
+    - Not adherent  
+    - 2.3 (does not change due to nonadherence) 
 
 As simulants move age categories and change LDL-C, the **same percent increase in LDL-C** from initialization 
 will be applied. For the example above, if this simulant above ages into a new category and their raw LDL-C 
