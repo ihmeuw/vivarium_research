@@ -916,7 +916,7 @@ test (would that be a Chi-Square test?).
 
 
 2.3.10 Component 14: Social Security Number
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Eventually, this should be missing for some and not actually unique
 for others.  I need to do some research into how we represent this,
@@ -960,7 +960,7 @@ expected number are missing and that the duplication count follows the
 intended distribution.
 
 2.3.11 Component 15: Periodic observations of attributes through survey, census, and registry
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
