@@ -924,16 +924,165 @@ intended distribution.
 2.3.9 Component 13: Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Census
+^^^^^^
+
+**When to Sample** 
+
+- The sample will be taken on the time step that includes April 1st of each decade (2010, 2020, 2030)
+- The sample will be taken on a single time steps 
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - Date of Birth 
+  * - Home Address 
+  * - Relationship to Person 1 (Head of Household)
+  * - Sex (binary)
+  * - Race/Ethnicity 
+
+**Who to Sample** 
+
+Based on race/ethnicity, age, and sex, simulants will be assigned a 
+probability of being missed in the census. Based on this 
+probability, simulants will be randomly selected for inclusion. 
+All data below is from the Census Post-Enumeration Survey. [Census_PES]_ 
+
+.. list-table:: Simulant Omission by Race/Ethnicity 
+  :widths: 20 10 10 
+  :header-rows: 1
+
+  * - Race/Ethnicity  
+    - Percent Omitted 
+    - Additive Risk of Omission (%)
+  * - US Total (all races) 
+    - 0.24
+    - 0 (reference)
+  * - White 
+    - -1.64
+    - -1.88
+  * - Black 
+    - 3.3
+    - 3.06
+  * - Asian 
+    - -2.62
+    - -2.86 
+  * - American Indian and Alaskan Native 
+    - 0.91
+    - 0.67
+  * - Native Hawaiian and Pacific Islander  
+    - -1.28
+    - -1.52 
+  * - Other Races or Multiracial  
+    - 4.34
+    - 4.1
+  * - Hispanic/Latino 
+    - 4.99
+    - 4.75 
+
+
+.. list-table:: Simulant Omission by Age/Sex 
+  :widths: 20 10 10 
+  :header-rows: 1
+
+  * - Age/Sex
+    - Percent Omitted 
+    - Additive Risk of Omission (%)
+  * - US Total (all ages and sexes) 
+    - 0.24
+    - 0 (reference)
+  * - 0-4, all sexes 
+    - 2.79
+    - 2.55
+  * - 5-9, all sexes 
+    - 0.1
+    - -0.14
+  * - 10-17, all sexes 
+    - 0.21
+    - -0.03
+  * - 18-29, male 
+    - 2.25
+    - 2.01
+  * - 18-29, female 
+    - 0.98
+    - 0.74
+  * - 30-49, male 
+    - 3.05
+    - 2.81
+  * - 30-49, female 
+    - -0.1
+    - -0.34
+  * - 50+, male 
+    - -0.55
+    - -0.79
+  * - 50+, female 
+    - -2.63
+    - -2.87
+
+Using the tables above, a probability of omission is calculated for 
+each simulant. The table below includes a few examples of this 
+process. 
+
+.. list-table:: Calculating Simulant Omission 
+  :widths: 10 10 10 20
+  :header-rows: 1
+
+  * - Simulant 
+    - Race/Ethnicity 
+    - Age/Sex
+    - Probability Risk of Omission (%)
+  * - 1
+    - White 
+    - 0-4, female 
+    - 0.24 + (-1.88) + (2.55) = **0.91%** 
+  * - 2
+    - Black 
+    - 30-49, male 
+    - 0.24 + (3.06) + (2.81) = **6.11%** 
+  * - 3
+    - Asian 
+    - 50+, female 
+    - 0.24 + (-2.86) + (-2.87) = -5.49 is < 0 so **0%** 
+
+Please note that for simulants with a net undercount less than 0, 
+they have a 0% chance of being missed. We are not including 
+duplicates at this time. 
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function decided to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age or DOB, and person swaps. 
+
+Some errors will be introduced within the simulation, such as 
+duplicate people or swapped people. Others will be introduced 
+at the time of sampling, such as name and address misspellings. 
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of the true census. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
+#. Our model will underestimate total census coverage as we are not including net overcounts for certain population segments 
+#. Here we model a net undercount rather than modeling duplications and omissions separately. In reality, simulants are both duplicated and omitted within each race/age/sex group which leads to additional noise in the data 
+#. There are multiple other factors that contribute to omission rate including: type of response (online, mail-in, etc.), tenure in a home, presence of non-citizen, state/geography and more [Elliot_2021]_. These are not currently included in our model 
+#. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_ 
+
+
 For inspiration, here is the list of files that Census Bureau
 routinely links:
 https://www2.census.gov/about/linkage/data-file-inventory.pdf
 
 Each of these observers must include a "unique simulant id" column so
 that users can see how well they have done.
-
-The decennial census simulator will be an important part of this,
-capturing everyone in the sim with a probability to be determined from
-a careful read of census quality assessment documentation.
 
 A master SSN list will be another important part of this, and perhaps
 the largest of these files, including name, address, DOB, and SSN.
@@ -1104,3 +1253,12 @@ employer_address and employer_zipcode.
 
 To Come (TK)
 
+.. _census_prl_references:
+
+4.0 References
++++++++++++++++
+.. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html. 
+
+.. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
+
+.. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
