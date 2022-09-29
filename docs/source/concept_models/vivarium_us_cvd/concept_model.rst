@@ -683,6 +683,123 @@ Where adherence score = 0 for primary or secondary nonadherent; and adherence sc
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
 
 
+Creation of "Untreated" SBP Values on Initializaiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+GBD values for SBP which are used in this sim reflect the US distribution of SBP **including** medication benefits. 
+Therefore, by later applying treatment benefits to certain simulants, we are double counting the population level 
+benefit of treatment. To avoid this, we must add SBP at initialization to create an "untreated" SBP level. 
+
+To do this, we will add a percent increase in SBP to all simulants who are assigned SBP medication at 
+initialization **AND** are adherent. The section below includes details on who will receive medication. 
+
+In initialization simulants are also assigned to one drug or two drugs. Based on this assignment, a percent increase 
+in SBP level will be given to each. The percent increase **only applies to adherent simulants**.
+
+.. list-table:: Percent Increase in SBP 
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Medication Assigned 
+    - Percent Increase in SBP  
+  * - One Drug  
+    - 5.1% 
+  * - Two Drugs  
+    - 12%  
+
+.. list-table:: Example Implementation for Simulants 
+  :widths: 10 10 5 5 5 10 
+  :header-rows: 1
+
+  * - Simulant 
+    - Raw SBP (from GBD)
+    - Treatment?   
+    - Type of treatment? 
+    - Adherent? 
+    - Untreated SBP 
+  * - 1
+    - 140 
+    - Yes   
+    - Two drugs 
+    - Adherent 
+    - 140 * 1.12 = 156.8 
+  * - 2
+    - 130
+    - No    
+    - N/A 
+    - N/A
+    - 130 
+  * - 3 
+    - 150 
+    - Yes   
+    - One drug 
+    - Not adherent  
+    - 150 (does not change due to nonadherence) 
+
+As simulants move age categories and change SBP, the **same percent increase in SBP** from initialization 
+will be applied. If simulant 1 in the table above ages into a new category and their raw SBP 
+is now 145, their untreated SBP will be 145 * 1.12 = 162.4 regardless of their current treatment category.  
+
+Sources: NHANES Data for Medication Initialization; [An_2021]_; [Law_2009]_ 
+
+
+Creation of "Untreated" LDL-C Values on Initializaiton
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Similar to SBP, GBD values for LDL-C reflect the US distribution of LDL-C **including** medication benefits. 
+Therefore, we again add LDL-C at initialization to create an "untreated" LDL-C level. To do this, we will 
+add a percent increase in LDL-C  to all simulants who are assigned medication at initialization. 
+
+In initialization simulants are also assigned to a statin intensity level. Based on this assignment, a percent 
+increase in LDL-C level will be given to each. 
+
+.. list-table:: Percent Increase in LDL-C 
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Medication Assigned 
+    - Percent Increase  
+  * - Low Intensity
+    - 24.67% 
+  * - Medium Intensity
+    - 36.2% 
+  * - High Intensity
+    - 51.25% 
+
+.. list-table:: Example Implementation for Simulants 
+  :widths: 10 10 5 5 5 10 
+  :header-rows: 1
+
+  * - Simulant 
+    - Raw LDL-C (from GBD)
+    - Treatment?   
+    - Type of treatment? 
+    - Adherent? 
+    - Untreated LDL-C
+  * - 1
+    - 2
+    - Yes   
+    - Medium Intensity 
+    - Adherent 
+    - 2 * 1.362 = 2.724 
+  * - 2
+    - 1.9
+    - No    
+    - N/A 
+    - N/A
+    - 1.9 
+  * - 3 
+    - 2.3 
+    - Yes   
+    - High Intensity  
+    - Not adherent  
+    - 2.3 (does not change due to nonadherence) 
+
+As simulants move age categories and change LDL-C, the **same percent increase in LDL-C** from initialization 
+will be applied. If simulant 1 in the table above ages into a new category and their raw LDL-C 
+is now 2.4, their untreated SBP will be 2.4 * 1.362 = 3.2688 regardless of their current treatment category.  
+
+Sources: NHANES Data for Medication Initialization; [Garcia-Gil_2016]_; [Law_2003]_ 
+
+
 Medication Coverage of SBP or LDL-C at Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -952,6 +1069,7 @@ Some limitations of this analysis include:
 #. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 #. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
+#. To create "untreated" SBP and LDL-C values, we addded an approximate treatment value to those simulants who were initialized to be on medication. This method did not create a blanket population "PAF" from medication, which is different than other simulations. This should be checked in V&V for possible side effects.  
 
 .. _uscvd7.0:
 
