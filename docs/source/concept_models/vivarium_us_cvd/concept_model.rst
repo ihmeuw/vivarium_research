@@ -1069,6 +1069,7 @@ Some limitations of this analysis include:
 #. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 #. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
+#. To create "untreated" SBP and LDL-C values, we addded an approximate treatment value to those simulants who were initialized to be on medication. This method did not create a blanket population "PAF" from medication, which is different than other simulations. This should be checked in V&V for possible side effects.  
 
 .. _uscvd7.0:
 
