@@ -930,7 +930,7 @@ Census
 **When to Sample** 
 
 - The sample will be taken on the time step that includes April 1st of each decade (2010, 2020, 2030)
-- The sample will be taken on a single time steps 
+- The sample will be taken on a single time step 
 
 **What to Sample** 
 
@@ -953,8 +953,10 @@ Census
 
 Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
-probability, simulants will be randomly selected for inclusion. 
-All data below is from the Census Post-Enumeration Survey. [Census_PES]_ 
+probability, simulants will be randomly selected for inclusion. We decided 
+to use additive effects rather than multiplicitive which is often used 
+in simulations. 
+All "Percent Omitted" data below is from the Census Post-Enumeration Survey. [Census_PES]_ 
 
 .. list-table:: Simulant Omission by Race/Ethnicity 
   :widths: 20 10 10 
@@ -962,7 +964,7 @@ All data below is from the Census Post-Enumeration Survey. [Census_PES]_
 
   * - Race/Ethnicity  
     - Percent Omitted 
-    - Additive Risk of Omission (%)
+    - Additive Risk Effect on Omission (% points)
   * - US Total (all races) 
     - 0.24
     - 0 (reference)
@@ -995,7 +997,7 @@ All data below is from the Census Post-Enumeration Survey. [Census_PES]_
 
   * - Age/Sex
     - Percent Omitted 
-    - Additive Risk of Omission (%)
+    - Additive Risk Effect on Omission (% points)
   * - US Total (all ages and sexes) 
     - 0.24
     - 0 (reference)
@@ -1038,7 +1040,7 @@ process.
   * - Simulant 
     - Race/Ethnicity 
     - Age/Sex
-    - Probability Risk of Omission (%)
+    - Probability of Omission (%)
   * - 1
     - White 
     - 0-4, female 
@@ -1058,12 +1060,12 @@ duplicates at this time.
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function decided to replicate 
+In the future, we will add a noise function designed to replicate 
 missed or incorrect data. This includes incorrect name spelling, 
 addresses, age or DOB, and person swaps. 
 
-Some errors will be introduced within the simulation, such as 
-duplicate people or swapped people. Others will be introduced 
+Some errors may be introduced within the simulation, such as 
+duplicate people or swapped people. Others may be introduced 
 at the time of sampling, such as name and address misspellings. 
 
 These are not currently modeled. 
@@ -1073,8 +1075,9 @@ These are not currently modeled.
 #. Sampling on a single time step is not representative of the true census. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
 #. Our model will underestimate total census coverage as we are not including net overcounts for certain population segments 
 #. Here we model a net undercount rather than modeling duplications and omissions separately. In reality, simulants are both duplicated and omitted within each race/age/sex group which leads to additional noise in the data 
-#. There are multiple other factors that contribute to omission rate including: type of response (online, mail-in, etc.), tenure in a home, presence of non-citizen, state/geography and more [Elliot_2021]_. These are not currently included in our model 
+#. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, and having a SSN (as a proxy for citizenship) [Elliot_2021]_. These are not currently included in our model 
 #. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_ 
+#. It is assumed that race and age/sex are independent, do not have interaction, and combine additively 
 
 
 For inspiration, here is the list of files that Census Bureau
