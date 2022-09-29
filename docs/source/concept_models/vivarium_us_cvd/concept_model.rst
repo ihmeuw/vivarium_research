@@ -692,7 +692,7 @@ benefit of treatment. To avoid this, we must add SBP at initialization to create
 To do this, we will add a percent increase in SBP to all simulants who are assigned SBP medication at 
 initialization **AND** are adherent. The section below includes details on who will receive medication. 
 
-In itialization simulants are also assigned to one drug or two drugs. Based on this assignment, a percent increase 
+In initialization simulants are also assigned to one drug or two drugs. Based on this assignment, a percent increase 
 in SBP level will be given to each. The percent increase **only applies to adherent simulants**.
 
 .. list-table:: Percent Increase in SBP 
@@ -736,7 +736,7 @@ in SBP level will be given to each. The percent increase **only applies to adher
     - 150 (does not change due to nonadherence) 
 
 As simulants move age categories and change SBP, the **same percent increase in SBP** from initialization 
-will be applied. For the example above, if this simulant above ages into a new category and their raw SBP 
+will be applied. If simulant 1 in the table above ages into a new category and their raw SBP 
 is now 145, their untreated SBP will be 145 * 1.12 = 162.4 regardless of their current treatment category.  
 
 Sources: NHANES Data for Medication Initialization; [An_2021]_; [Law_2009]_ 
@@ -748,7 +748,7 @@ Similar to SBP, GBD values for LDL-C reflect the US distribution of LDL-C **incl
 Therefore, we again add LDL-C at initialization to create an "untreated" LDL-C level. To do this, we will 
 add a percent increase in LDL-C  to all simulants who are assigned medication at initialization. 
 
-In itialization simulants are also assigned to a statin intensity level. Based on this assignment, a percent 
+In initialization simulants are also assigned to a statin intensity level. Based on this assignment, a percent 
 increase in LDL-C level will be given to each. 
 
 .. list-table:: Percent Increase in LDL-C 
@@ -794,7 +794,7 @@ increase in LDL-C level will be given to each.
     - 2.3 (does not change due to nonadherence) 
 
 As simulants move age categories and change LDL-C, the **same percent increase in LDL-C** from initialization 
-will be applied. For the example above, if this simulant above ages into a new category and their raw LDL-C 
+will be applied. If simulant 1 in the table above ages into a new category and their raw LDL-C 
 is now 2.4, their untreated SBP will be 2.4 * 1.362 = 3.2688 regardless of their current treatment category.  
 
 Sources: NHANES Data for Medication Initialization; [Garcia-Gil_2016]_; [Law_2003]_ 
