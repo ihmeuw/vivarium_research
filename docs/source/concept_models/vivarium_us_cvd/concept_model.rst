@@ -490,6 +490,8 @@ A simulant's adherence score **does NOT change** during the simulation and will 
 The below table shows the percent chance of being assigned different buckets of adherence. Adherence is 
 randomly assigned to all simulants. 
 
+Adherence is only tracked and observed for those prescribed a medication.
+
 
  .. Note::
     The current adherence system is a placeholder for additional information to be added in later models. Ideally, we will utilize a first-hand dataset to create adherence by age, sex, and state. Adherence should be programmed in such a way that allowing for later changes is easy to implement. 
@@ -707,7 +709,7 @@ in SBP level will be given to each. The percent increase **only applies to adher
     - 12%  
 
 .. list-table:: Example Implementation for Simulants 
-  :widths: 10 10 5 5 5 10 
+  :widths: 10 10 5 5 5 5 10 
   :header-rows: 1
 
   * - Simulant 
@@ -715,17 +717,20 @@ in SBP level will be given to each. The percent increase **only applies to adher
     - Treatment?   
     - Type of treatment? 
     - Adherent? 
+    - Multiplier 
     - Untreated SBP 
   * - 1
     - 140 
     - Yes   
     - Two drugs 
     - Adherent 
+    - 1.12 (12% increase)
     - 140 * 1.12 = 156.8 
   * - 2
     - 130
     - No    
     - N/A 
+    - N/A
     - N/A
     - 130 
   * - 3 
@@ -733,9 +738,10 @@ in SBP level will be given to each. The percent increase **only applies to adher
     - Yes   
     - One drug 
     - Not adherent  
+    - 1 (0% increase)
     - 150 (does not change due to nonadherence) 
 
-As simulants move age categories and change SBP, the **same percent increase in SBP** from initialization 
+As simulants move age categories and change SBP, the **same multiplier** from initialization 
 will be applied. If simulant 1 in the table above ages into a new category and their raw SBP 
 is now 145, their untreated SBP will be 145 * 1.12 = 162.4 regardless of their current treatment category.  
 
@@ -765,7 +771,7 @@ increase in LDL-C level will be given to each.
     - 51.25% 
 
 .. list-table:: Example Implementation for Simulants 
-  :widths: 10 10 5 5 5 10 
+  :widths: 10 10 5 5 5 5 10 
   :header-rows: 1
 
   * - Simulant 
@@ -773,27 +779,31 @@ increase in LDL-C level will be given to each.
     - Treatment?   
     - Type of treatment? 
     - Adherent? 
+    - Multiplier 
     - Untreated LDL-C
   * - 1
     - 2
     - Yes   
     - Medium Intensity 
     - Adherent 
+    - 1.362 (36.2% increase)
     - 2 * 1.362 = 2.724 
   * - 2
     - 1.9
     - No    
     - N/A 
     - N/A
+    - N/A
     - 1.9 
   * - 3 
     - 2.3 
     - Yes   
     - High Intensity  
-    - Not adherent  
+    - Not adherent 
+    - 1 (0% increase)
     - 2.3 (does not change due to nonadherence) 
 
-As simulants move age categories and change LDL-C, the **same percent increase in LDL-C** from initialization 
+As simulants move age categories and change LDL-C, the **same multiplier** from initialization 
 will be applied. If simulant 1 in the table above ages into a new category and their raw LDL-C 
 is now 2.4, their untreated SBP will be 2.4 * 1.362 = 3.2688 regardless of their current treatment category.  
 
@@ -804,6 +814,12 @@ Medication Coverage of SBP or LDL-C at Initialization
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Baseline coverage of treatment for elevated SBP and elevated LDL-c is substantial and expected to vary by age, sex, and time. To initialize simulants, the research team has fit a multinomial regression to NHANES data. The code used to generate this data is below, but not needed for initialization. The system of equations provided gives the probabilities for each simulant being on the different types of medicaiton. 
+
+Simulants can be assigned to medication regardless of their adherence status. If 
+a non-adherent simulant is assigned to medication: 
+
+#. They must be assigned to the lowest 'rung' - one drug at half dose for SBP or low intensity for LDL-C 
+#. They will not receive benefit from their medication, similar to other non-adherent simulants 
 
 **Covariate Values:** 
 
