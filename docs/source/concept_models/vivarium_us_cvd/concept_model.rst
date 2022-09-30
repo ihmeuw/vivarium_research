@@ -490,7 +490,7 @@ A simulant's adherence score **does NOT change** during the simulation and will 
 The below table shows the percent chance of being assigned different buckets of adherence. Adherence is 
 randomly assigned to all simulants. 
 
-Adherence is only tracked and observed for those prescribed a medication.
+Adherence is only observed for those prescribed a medication.
 
 
  .. Note::
@@ -689,7 +689,8 @@ Creation of "Untreated" SBP Values on Initializaiton
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 GBD values for SBP which are used in this sim reflect the US distribution of SBP **including** medication benefits. 
 Therefore, by later applying treatment benefits to certain simulants, we are double counting the population level 
-benefit of treatment. To avoid this, we must add SBP at initialization to create an "untreated" SBP level. 
+benefit of treatment. To avoid this, we must add SBP to all adherent simulants on medication upon initialization 
+in order to create an "untreated" baseline SBP level. 
 
 To do this, we will add a percent increase in SBP to all simulants who are assigned SBP medication at 
 initialization **AND** are adherent. The section below includes details on who will receive medication. 
