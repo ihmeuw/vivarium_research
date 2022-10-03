@@ -614,13 +614,16 @@ with the group quarters person as the reference person, and that GQ "household" 
 This means that group quarters people should only enter the US in a "household" move, and never as individuals;
 they will never immigrate into an existing residential household.
 
-The number of simulants who move to the US each year is informed by the ACS' "residence one year ago" question
-(all ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida).
+The number of simulants who move to the US each year is informed by the ACS' "residence one year ago" question.
 Specifically, a value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
 while any other value indicates that they lived within the US.
 We refer to respondents who were not living in the United States one year ago as "recent immigrants."
 Our assumption is that the number (and characteristics) of recent immigrants per year
 in the 2016-2020 ACS PUMS will be replicated in each future year.
+
+.. note::
+
+    All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
 
 We also assume that the proportions of recent immigrants by move type (household or non-reference-person) will remain constant.
 Though in reality not all moves into the US follow one of these two patterns, we assume that any new immigrant in a household
@@ -628,19 +631,47 @@ where the reference person is also a new immigrant was part of a household move,
 reference person is not a new immigrant moved to the US in a non-reference-person move.
 
 Specifically, the yearly rate at which simulants are added to the population by each move type is given by
-the (weighted) proportion of ACS PUMS persons that are recent immigrants consistent with that move type.
+the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
+Since immigration is likely unaffected by US population change over time, the number of immigrants for a move type
+is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
 At each time step:
 
-#. ACS PUMS households with reference people who are recent immigrants, after removing household members who are not recent immigrants, (as well as GQ "households" of recent immigrants)
-   are sampled using household weights (equal to person weights in the case of GQ) with replacement until the desired number of simulants added in household moves is reached.
-#. ACS PUMS recent immigrants living in residential households where the reference person is not a recent immigrant are sampled using person weights with replacement until the desired
-   number of simulants added in non-reference-person moves is reached.
+#. ACS PUMS households with reference people who are recent immigrants (as well as GQ "households" where the GQ person is a recent immigrant),
+   after removing any household members who are not recent immigrants,
+   are sampled using household weights (equal to person weights in the case of GQ).
+   This sampling continues with replacement until the desired number of simulants added in household moves is reached.
+#. ACS PUMS recent immigrants living in residential households where the reference person is not a recent immigrant are sampled using person weights.
+   This sampling continues with replacement until the desired number of simulants added in non-reference-person moves is reached.
 
-Added residential households are assigned a new household ID, as is done at population initialization.
+Added residential households are assigned a new household ID and a new address, as is done at population initialization.
 Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
-their institutional/non-institutional status, as is done at population initialization.
+their institutional/non-institutional status, as well as the corresponding shared address, as is done at population initialization.
 
-Simulants added by a non-reference-person move join a randomly-selected existing household matching their PUMA.
+Additionally, we perturb the PUMA attribute of the sampled person (in the case of a non-reference-person move) or household (in the case of a household move).
+This is intended to ensure a non-zero probability of immigration into all PUMAs,
+and to lower the chances of very similar simulants being sampled from the same ACS person/household.
+The perturbation process is as follows:
+**10%** of the time, replace the sampled person/household's PUMA with a PUMA selected at random according to the
+probabilities in the appropriate file below.
+(In the case of a household, all simulants in that household are assigned the same replacement PUMA.)
+The number **10%** should be considered a placeholder and will likely change in the future.
+
+These probabilities were created by first calculating the (weighted) proportions of immigrants corresponding to the move type
+in the 2016-2020 PUMS file.
+Then, all values below the 2.5th percentile (including values of 0) were increased to
+the 2.5th percentile value, and the proportions were re-normalized.
+
+:download:`PUMA probabilities for perturbation of households added in household moves <household_moves_puma_distribution.csv>`
+
+:download:`PUMA probabilities for perturbation of simulants added in non-reference-person moves <non_reference_person_moves_puma_distribution.csv>`
+
+.. note::
+
+    The values in each file were normalized to sum to 1 across the entire United States.
+    If simulating a subset of the US, it is necessary to re-normalize the values in that subset
+    before it is appropriate to interpret them as probabilities.
+
+Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
 Their relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
@@ -649,9 +680,6 @@ These changes are necessary to avoid impossible situations (more than two parent
 
     In the future, we may want to make some households more likely than others to receive non-reference-person immigrants.
     Also, the current approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
-
-Since immigration is likely unaffected by US population change over time, the number of immigrants for a move type
-is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
 
 All attributes of newly added households and simulants that are not sampled from the ACS PUMS (e.g. addresses, names) are set
 using the same method as population initialization for those attributes.
