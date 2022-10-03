@@ -420,7 +420,8 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   * - 1.0 Baseline concept model updates
     - Includes relevant model components, updated outputs, updated model specs.
     - 1
-    - Default (20 draws, 100,000 population size)
+    - * Simulation end date: 2023-12-31 (modified from 2026-12-31)
+      * Otherwise, default specs (20 draws, 100,000 population size)
     - Stratify cause state person time and cause transition counts by wasting and stunting state person time (for V&V of risk effects)
     - No x-factor component. V&V baseline model before moving on (cause models, risk effects, MAM/SAM treatment effects)
   * - 2.0 SQ-LNS updates
