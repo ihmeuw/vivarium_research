@@ -929,7 +929,7 @@ Census
 
 **When to Sample** 
 
-- The sample will be taken on the time step that includes April 1st of each decade (2010, 2020, 2030)
+- The sample will be taken on the first time step that hits April of each decade (2010, 2020, 2030)
 - The sample will be taken on a single time step 
 
 **What to Sample** 
