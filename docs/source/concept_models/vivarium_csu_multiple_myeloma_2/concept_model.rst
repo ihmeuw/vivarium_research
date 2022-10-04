@@ -213,6 +213,11 @@ Population description:
         * Due to component structure, unable to verify treatment effects in interactive sim -- but those have been verified in Model 2, before the interactive sim approach was necessary.
         * `Isa and Dara coverage approximately matches the target values by year and scenario <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/2a0b7a0b3d824ae49c2af2b47f955e2ec2139c47/verification/model_3/scenario_verification_interactive_sim.ipynb>`_.
         * Due to reduction in stratifications, not able to check for regressions since Model 2.
+  * - Model 3 - China location
+    - Change location to China and add China-specific treatment probability postprocessing rules 
+    - Ran updated code only in the China location:
+        * `No regressions from previous Model 3 run <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/tree/f230ed802e0a27dba1437e076337456e1a829898/verification/model_3_china>`_.
+        * `China-specific treatment targets roughly replicated in simulation, are modified by Isa/Dara projections as expected <https://github.com/ihmeuw/vivarium_research_multiple_myeloma/blob/f230ed802e0a27dba1437e076337456e1a829898/verification/model_3_china/scenario_verification_interactive_sim.ipynb>`_.
 
 8.0 Desired Outputs
 +++++++++++++++++++
