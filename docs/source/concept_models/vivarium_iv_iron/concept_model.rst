@@ -285,7 +285,7 @@ As new locations are added to this model, there are several data values that nee
 5.0 Model run requests
 +++++++++++++++++++++++++++++++++++++
 
-.. list-table:: Model run plan as of September 9, 2022
+.. list-table:: Model run plan as of September 28, 2022
   :header-rows: 1
 
   * - Number
@@ -381,8 +381,8 @@ As new locations are added to this model, there are several data values that nee
     - 
   * - 13
     - Wave II Ethiopia maternal
-    - Partially complete (failed jobs due to node issues restarted)
-    - 3
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
@@ -395,43 +395,43 @@ As new locations are added to this model, there are several data values that nee
     - 
   * - 15
     - Wave II Ethiopia child
-    - Not yet started
-    - 3
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
   * - 16
     - Wave II Nigeria child
-    - Started, not yet complete
-    - 3
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
   * - 17
     - Wave II SSA maternal
-    - Not yet started
-    - 4
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
   * - 18
     - Wave II SA maternal
-    - Not yet started
-    - 4
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
   * - 19
     - Wave II SSA child
-    - Not yet started
-    - 4
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
   * - 20 
     - Wave II SA child
-    - Not yet started
-    - 4
+    - Complete
+    - N/A
     - 25
     - 600,000
     - 
