@@ -1079,6 +1079,157 @@ These are not currently modeled.
 #. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_ 
 #. It is assumed that race and age/sex are independent, do not have interaction, and combine additively 
 
+Household Surveys
+^^^^^^^^^^^^^^^^^
+
+There are many different types of household surveys that we might want to include 
+in the model. Therefore, this documentation reflects a general framework for 
+household surveys. The research team would then be responsible for providing the 
+additional inputs for an individual survey. 
+
+**When to Sample** 
+
+There are two types of sampling plans: 
+
+1. A new random sample of the population at a defined time interval (e.g., sample 5% of the households each month for a year)
+
+- The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps 
+- The total duration of the survey will be specified 
+- Each subsequent sample is assumed to be independent of the prior samples 
+
+2. A longitudinal sample will sample the SAME population on defined time steps (e.g., sample the same 5% of households each month for 6 months) 
+
+- The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps 
+- The total duration of the survey will be specified 
+- Once there are stable addresses, the sample will be taken and kept the same at the address level. For now, when addresses are not stable, we can keep the same households instead. 
+
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - Home Address 
+
+**Who to Sample** 
+
+For surveys, there is a much more significant amount of non-response bias 
+compared to the annual census. Participation will be determined in a two 
+step process. 
+
+**Step 1:** Households will be randomly selected for participation at a rate 
+predetermined by the researcher. The selection should be stratified by state, 
+but no other variables. This will be a random sample. 
+
+**Step 2:** Households will be chosen to be non-responsonders and removed from 
+the sample. This step will vary significantly based on the mode of the survey. 
+There are three possible modes: mail/online (assumed to be the same for this 
+model), telephone, and personal visits. 
+
+The below table includes the percent of responses for each mode of survey by 
+race/ethnicity. These will be used to find the non-response based on the mode 
+of the survey. 
+
+
+.. list-table:: Simulant Response by Race/Ethnicity 
+  :widths: 20 10 10 10 
+  :header-rows: 1
+
+  * - Race/Ethnicity  
+    - Mail/Online Percent of Response 
+    - Telephone Percent of Response
+    - Personal Visit Percent of Response 
+  * - White 
+    - 62.5%
+    - 11.9%
+    - 25.6% 
+  * - Black 
+    - 29.7%
+    - 15.1%
+    - 55.2% 
+  * - Asian 
+    - 52.7%
+    - 9.7%
+    - 37.6%  
+  * - American Indian and Alaskan Native 
+    - 40.1% 
+    - 18.0% 
+    - 41.9% 
+  * - Native Hawaiian and Pacific Islander  
+    - 30.3%
+    - 14.2%
+    - 55.8% 
+  * - Other Races or Multiracial  
+    - 22.9% 
+    - 16.7% 
+    - 60.3% 
+  * - Hispanic/Latino 
+    - 25.9% 
+    - 15.1% 
+    - 60.3% 
+
+
+For surveys with mail, telephone, and personal visits, assume that 
+non-response bias matches the census, using the data in the section above. 
+
+.. list-table:: Calculating Simulant Non-Response 
+  :widths: 10 10 10 20
+  :header-rows: 1
+
+  * - Simulant 
+    - Race/Ethnicity 
+    - Survey Modes USed 
+    - Probability of Omission (%)
+  * - 1
+    - White 
+    - Mail/Online Only 
+    - 100% - 62.5% = 37.5% non-response 
+  * - 2
+    - Black  
+    - Mail/Online and Telephone  
+    - 100% - (29.7% + 15.1%) = 55.2% non-response 
+  * - 3
+    - Asian 
+    - Mail/Online, Telephone, and Personal Visits 
+    - Use census data above, dependent on age/sex
+
+For longitudinal surveys, assume that non-response is independent between 
+survey iterations. 
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some errors may be introduced within the simulation, such as 
+duplicate people or swapped people. Others may be introduced 
+at the time of sampling, such as name and address misspellings. 
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
+#. Our model does not include an option for double counting or duplicating people 
+#. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, age, and having a SSN (as a proxy for citizenship) [Jackson_2007]_. These are not currently included in our model 
+#. Simulants who do not respond to one time point in a longitudinal survey are probably more likely to not respond moving forward. We assume independence here. 
+
+**Initial Survey - American Community Survey** 
+
+The ACS will be used for V&V testing. It is deinfed as: 
+
+- Sample rate of (12,000 / 350 million)% 
+- Sample at each time step (approximates monthly) for 12 time steps 
+- NOT longitudinal (independent samples) 
+- Includes mail/online, telephone, and personal visits 
+
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
@@ -1263,5 +1414,7 @@ To Come (TK)
 .. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html. 
 
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
+
+.. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
