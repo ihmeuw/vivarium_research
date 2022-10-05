@@ -494,8 +494,15 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
    * - 6.2.1 zinc supplementation interventions
      - Implementation of preventative and therapeutic zinc interventions (coverage and effects)
      - [1] `gbd verification looks as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.2.1_gbd_verification.ipynb>`_. [2] `zinc coverage and intervention effects look as expected <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.2.1_zinc_intervention.ipynb>`_
+   * - 7.0.0 full model no x-factor
+     - Full model, no x-factor. Zinc supplementation coverage in children under six months of age.
+     - Issues with vicious cycle (described in outstanding V&V section below)
+   * - 7.1.0 full model diarrheal diseases remission bugfix
+     - Attempted fix to the diarrheal diseases remission rate that was not successful.
+     - Still slightly underestimating diarrheal diseases remission rate (average duration of 4.5 days instead of 4.3 days). This appears to be causing some downstream effects on vicious cycle implementation (see table below). However, we have re-calculated verification targets according to this updated diarrheal diseases duration and confirmed that we meet these targets and moved forward with this model version.
 
-.. list-table:: Outstanding verification and validation issues
+
+.. list-table:: Outstanding verification issues
    :header-rows: 1
 
    * - Issue
@@ -507,25 +514,27 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
      - Update PEM mortality model to GBD 2020 when available
      - As soon as it's ready
    * - `Underestimation of lower respiratory infections and diarrheal diseases burden in early neonatal age groups <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model5/plots/model_5.3.3%20alternative%20K_cause_verification.pdf>`_
-     - Likely has to do with prevalence~incidence * duration in early neonatal age group given the short duration of the early neonatal age group
-     - Investigate 
-     - On hold because it should not make a large impact on model age groups of interest.
-   * - LBWSG exposure issue on transition from early to late neonatal age groups
-     - LBWSG exposure changes for some simulants upon transition from the early to late neonatal age group. This should not affect model mortality rates given that the relative risk value during the late neonatal age group is appropriately assigned according to exposure at birth. However, the issue will cause errors in the birthweight observers in the simulation.
-     - Implemented and run. Needs interactive sim validation
-     - Soon
-   * - Overestimation of wasting effect on diarrheal diseases CSMR
-     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.1_risk_effects_verification.ipynb>`_. Appears to be due to application of RRs to EMR without consideration of increased prevalence of high risk wasting states among population infected with diarrheal diseases and therefore at risk of mortality
-     - This should become less significant when the updates fix the overestimation of the diarrheal diseases prevalence ratios are implemented. Will need to verify when those results come in.
-     - Soon
+     - Result of LBWSG risk effects causing EMRs to be quite large after multiplying by LBWSG relative risk values relative to the simulation timestep (see :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>` page for explanation). 
+     - This was not addressed for this simulation because it did not have a significant impact on wasting results. However, the `changes to the cause models made in this PR <https://github.com/ihmeuw/vivarium_research/pull/1006>`_ and implemented for the :ref:`IV iron child simulation <2019_concept_model_vivarium_iv_iron_child_sim>` should resolve the issue. 
+     - N/A
+   * - Overestimation of wasting cat2 effect on diarrheal diseases CSMR
+     - `As demonstrated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model7/model_7.1.1_risk_effects_verification.ipynb>`_. Appears to be due to application of RRs to EMR without consideration of increased prevalence of high risk wasting states among population infected with diarrheal diseases and therefore at risk of mortality
+     - This should become less significant when the updates fix the overestimation of the diarrheal diseases prevalence ratios (below) are implemented. Will need to verify when those results come in.
+     - On hold.
    * - Overestimation of wasting state prevalence ratios by diarrheal disease status
-     - `Shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model6/model_6.0.1_vicious_cycle_effect_verification.ipynb>`_. Appears to be due to excess time spent in diarrheal disease state due to small timestep issue that causes a slower remission rate than was used to calculate the diarrheal diseases risk effects (`investigated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_vicious_cycle/vicious_cycle_effect_estimation_and_investigation.ipynb>`_).
+     - `Shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/model_validation/model7/model_7.0.0_vicious_cycle_effect_verification-Copy1.ipynb>`_. Appears to be due to excess time spent in diarrheal disease state due to small timestep issue that causes a slower remission rate than was used to calculate the diarrheal diseases risk effects (`investigated in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_vicious_cycle/vicious_cycle_effect_estimation_and_investigation.ipynb>`_).
      - Update diarrheal diseases duration value `in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/793>`_
-     - ASAP
+     - Unsuccessful attempt was made for model 7.1.0, but it was successfully implemented in the :ref:`IV iron child simulation <2019_concept_model_vivarium_iv_iron_child_sim>`. On hold.
+   * - Zinc supplementation coverage issues among children under 6 months of age
+     - We intended to restrict the zinc supplementation intervention to children above six months of age only. However, this was accidentally implemented correctly for the baseline intervention and kept as all children under five for the scale-up intervention in the alternative scenarios.
+     - We've kept this as-is in the model and handled it during post-processing.
+     - N/A
 
-.. todo::
+**Model validation notes**
 
-  Link to interactive simulation validation of relapse rates for each model version
+- Impact of zinc supplementation on wasting incidence is not especially high quality, but has been studied by [Lassi-et-al-2020-ciff-sam]_. There was no significant difference in wasting incidence of zinc supplementation relative to placebo (RR: 0.78, 95% CI 0.48 to 1.26; 3 studies). However, the relative risk of zinc + riboflavin relative to riboflavin alone was equal to 0.59 (95% CI 0.37 to 0.96) based on one study. Notably, riboflavin is a B vitamin that can form a complex with zinc minerals and increase zinc absorption in the gut. Notably, relative to all other interventions, a complete scale-up of the zinc intervention resulted in just under a 10% decrease in incident wasting cases in our simulation, which is an underestimation of the impact implied from the results included in the Cochrane review.
+
+- Note that our current model scenario design may double count potential impacts of the SQ-LNS and zinc supplementation interventions given that SQ-LNS formulations may contain zinc.
 
 .. _5.4:
 
@@ -563,6 +572,12 @@ Final outputs to report in manuscript
 7.0 Limitations
 +++++++++++++++
 
+See project technical report.
+
+Additional important limitation: we may double count some potential impacts of the zinc and SQ-LNS interventions given that SQ-LNS products may contain zinc.
+
 8.0 References
 +++++++++++++++
 
+.. [Lassi-et-al-2020-ciff-sam]
+  Lassi ZS, Kurji J, Oliveira CS, Moin A, Bhutta ZA. Zinc supplementation for the promotion of growth and prevention of infections in infants less than six months of age. Cochrane Database Syst Rev. 2020 Apr 8;4(4):CD010205. doi: 10.1002/14651858.CD010205.pub2. 
