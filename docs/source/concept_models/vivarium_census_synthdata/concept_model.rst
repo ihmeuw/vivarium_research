@@ -1142,11 +1142,12 @@ This data is based on the ACS which uses all of these methods and tracks
 the percent of respondents to each. [Jackson_2007]_ Since the ACS has an order to 
 their survey modes (mail -> telephone -> personal visit), this data should 
 not be used out of that order (e.g., we can **not** assume that a telephone only 
-interview would have an 11.9% responce rate for white people). 
+interview would have an 11.9% response rate for white people). 
 
-For surveys with mail, telephone, and personal visits, the data below 
+For all surveys with mail, telephone, and personal visits, the data below 
 will add to 100%. Since this is unrealistic, we assume that non-response 
-bias for this case matches the census, using the data in the section above. 
+bias for this case matches the census, using the rates in the simulant 
+omission tables in the decennial census section above. 
 
 This data is available as a csv here: J:\Project\simulation_science\prl\data\survey_mode_percent.csv 
 
@@ -1207,7 +1208,7 @@ This data is available as a csv here: J:\Project\simulation_science\prl\data\sur
   * - 3
     - Asian 
     - Mail/Online, Telephone, and Personal Visits 
-    - Use census data above, dependent on age/sex
+    - Use census data above, for a 50+, female the non-response rate would be 0%, as seen above 
 
 For longitudinal surveys, assume that non-response is independent between 
 survey iterations. 
