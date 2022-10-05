@@ -234,17 +234,17 @@ Validation and Verification Criteria
 References
 ------------
 
-.. [Tam-et-al-2020]
-  Tam, E., Keats, E. C., Rind, F., Das, J. K., & Bhutta, A. (2020). Micronutrient Supplementation and Fortification Interventions on Health and Development Outcomes among Children Under-Five in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 289. https://doi.org/10.3390/nu12020289
+.. [Lassi-et-al-2020]
+  Lassi ZS, Kurji J, Oliveira CS, Moin A, Bhutta ZA. Zinc supplementation for the promotion of growth and prevention of infections in infants less than six months of age. Cochrane Database Syst Rev. 2020 Apr 8;4(4):CD010205. doi: 10.1002/14651858.CD010205.pub2. 
 
 .. [Lazzerini-and-Wanzira-2016]
   Lazzerini, M., & Wanzira, H. (2016). Oral zinc for treating diarrhoea in children. The Cochrane database of systematic reviews, 12(12), CD005436. https://doi.org/10.1002/14651858.CD005436.pub5
 
-.. [Lassi-et-al-2020]
-  Lassi ZS, Kurji J, Oliveira CS, Moin A, Bhutta ZA. Zinc supplementation for the promotion of growth and prevention of infections in infants less than six months of age. Cochrane Database Syst Rev. 2020 Apr 8;4(4):CD010205. doi: 10.1002/14651858.CD010205.pub2. 
+.. [Li-et-al-2022]
+  Li J, Cao D, Huang Y, Chen B, Chen Z, Wang R, Dong Q, Wei Q, Liu L. Zinc Intakes and Health Outcomes: An Umbrella Review. Front Nutr. 2022 Feb 8;9:798078. doi: 10.3389/fnut.2022.798078. 
 
 .. [Rouhani-et-al-2022]
   Rouhani P, Rezaei Kelishadi M, Saneei P. Effect of zinc supplementation on mortality in under 5-year children: a systematic review and meta-analysis of randomized clinical trials. Eur J Nutr. 2022 Feb;61(1):37-54. doi: 10.1007/s00394-021-02604-1. Epub 2021 Jun 13. 
 
-.. [Li-et-al-2022]
-  Li J, Cao D, Huang Y, Chen B, Chen Z, Wang R, Dong Q, Wei Q, Liu L. Zinc Intakes and Health Outcomes: An Umbrella Review. Front Nutr. 2022 Feb 8;9:798078. doi: 10.3389/fnut.2022.798078. 
+.. [Tam-et-al-2020]
+  Tam, E., Keats, E. C., Rind, F., Das, J. K., & Bhutta, A. (2020). Micronutrient Supplementation and Fortification Interventions on Health and Development Outcomes among Children Under-Five in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 289. https://doi.org/10.3390/nu12020289
