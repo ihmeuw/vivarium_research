@@ -1097,11 +1097,11 @@ There are two types of sampling plans:
 - The total duration of the survey will be specified 
 - Each subsequent sample is assumed to be independent of the prior samples 
 
-2. A longitudinal sample will sample the SAME population on defined time steps (e.g., sample the same 5% of households each month for 6 months) 
+2. A longitudinal sample will sample the **same** population on defined time steps (e.g., sample the same 5% of households each month for 6 months) 
 
 - The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps 
 - The total duration of the survey will be specified 
-- Once there are stable addresses, the sample will be taken and kept the same at the address level. For now, when addresses are not stable, we can keep the same households instead. 
+- The sample will be taken and kept the same for all households 
 
 
 **What to Sample** 
@@ -1115,7 +1115,9 @@ There are two types of sampling plans:
   * - Middle initial 
   * - Last name
   * - Age 
+  * - DOB 
   * - Home Address 
+  * - Home Zip Code 
 
 **Who to Sample** 
 
@@ -1127,7 +1129,7 @@ step process.
 predetermined by the researcher. The selection should be stratified by state, 
 but no other variables. This will be a random sample. 
 
-**Step 2:** Households will be chosen to be non-responsonders and removed from 
+**Step 2:** Households will be chosen to be non-responders and removed from 
 the sample. This step will vary significantly based on the mode of the survey. 
 There are three possible modes: mail/online (assumed to be the same for this 
 model), telephone, and personal visits. 
@@ -1136,6 +1138,17 @@ The below table includes the percent of responses for each mode of survey by
 race/ethnicity. These will be used to find the non-response based on the mode 
 of the survey. 
 
+This data is based on the ACS which uses all of these methods and tracks 
+the percent of respondents to each. [Jackson_2007]_ Since the ACS has an order to 
+their survey modes (mail -> telephone -> personal visit), this data should 
+not be used out of that order (e.g., we can **not** assume that a telephone only 
+interview would have an 11.9% responce rate for white people). 
+
+For surveys with mail, telephone, and personal visits, the data below 
+will add to 100%. Since this is unrealistic, we assume that non-response 
+bias for this case matches the census, using the data in the section above. 
+
+This data is available as a csv here: J:\Project\simulation_science\prl\data\survey_mode_percent.csv 
 
 .. list-table:: Simulant Response by Race/Ethnicity 
   :widths: 20 10 10 10 
@@ -1162,7 +1175,7 @@ of the survey.
     - 18.0% 
     - 41.9% 
   * - Native Hawaiian and Pacific Islander  
-    - 30.3%
+    - 30.0%
     - 14.2%
     - 55.8% 
   * - Other Races or Multiracial  
@@ -1172,11 +1185,8 @@ of the survey.
   * - Hispanic/Latino 
     - 25.9% 
     - 15.1% 
-    - 60.3% 
+    - 58.8% 
 
-
-For surveys with mail, telephone, and personal visits, assume that 
-non-response bias matches the census, using the data in the section above. 
 
 .. list-table:: Calculating Simulant Non-Response 
   :widths: 10 10 10 20
@@ -1184,8 +1194,8 @@ non-response bias matches the census, using the data in the section above.
 
   * - Simulant 
     - Race/Ethnicity 
-    - Survey Modes USed 
-    - Probability of Omission (%)
+    - Survey Modes Used 
+    - Probability of Non-Response (%)
   * - 1
     - White 
     - Mail/Online Only 
@@ -1216,18 +1226,19 @@ These are not currently modeled.
 
 **Limitations and Possible Future Adds** 
 
-#. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
+#. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the survey leading to additional noise not modeled here 
 #. Our model does not include an option for double counting or duplicating people 
-#. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, age, and having a SSN (as a proxy for citizenship) [Jackson_2007]_. These are not currently included in our model 
+#. There are multiple other factors that contribute to non-response including: tenure in a home, state/geography, age, and having a SSN (as a proxy for citizenship) based on ACS data [Jackson_2007]_. These are not currently included in our model 
 #. Simulants who do not respond to one time point in a longitudinal survey are probably more likely to not respond moving forward. We assume independence here. 
 
 **Initial Survey - American Community Survey** 
 
-The ACS will be used for V&V testing. It is deinfed as: 
+The ACS will be used for V&V testing. It is defined as: 
 
 - Sample rate of (12,000 / 350 million)% 
+- Sample will be stratified by state to ensure an even distribution 
 - Sample at each time step (approximates monthly) for 12 time steps 
-- NOT longitudinal (independent samples) 
+- **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
 
