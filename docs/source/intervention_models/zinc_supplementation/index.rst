@@ -24,11 +24,11 @@ Intervention Overview
 
 Zinc is a micronutrient important to child health. Zinc deficiency :ref:`exposure <2019_risk_exposure_zinc_deficiency>` and :ref:`effects <2019_risk_effect_zinc_deficiency>` are described on these respective pages. Zinc deficiency is most often a result of insufficient zinc consumption and can be prevented and addressed via zinc supplementation. Zinc supplementation can take the form of capsules, tablets, drops, syrups, or powders that either contain zinc alone or are packaged with additional micronutrients.
 
-Notably, a recent Cochrane Review found that while zinc had significant positive effects among children older than six months of age, there was insufficient evidence to support the recommendation of zinc supplementation among infants aged zero to six months [Lassi-et-al-2020]_. However, a more recent analysis reported potential important reductions in infant mortality associated with zinc supplementation [Rouhani-et-al-2022]_. Additionally, [Li-et-al-2022]_ published an "umbrella review" of health outcomes associated with zinc supplementation among all ages, including a dose-response analysis.
+Notably, a recent Cochrane Review found that while zinc had significant positive effects among children older than six months of age, there was insufficient evidence to support the recommendation of zinc supplementation among infants aged zero to six months [Lassi-et-al-2020-zinc-supplementation]_. However, a more recent analysis reported potential important reductions in infant mortality associated with zinc supplementation [Rouhani-et-al-2022]_. Additionally, [Li-et-al-2022]_ published an "umbrella review" of health outcomes associated with zinc supplementation among all ages, including a dose-response analysis.
 
 .. note::
 
-  For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` we initially modeled the zinc supplementation intervention among all children 0-5 years of age and then updated the model to include only children 6 months to 5 years of age ([Lassi-et-al-2020]_). However, this age restriction update was erroneously applied only to the baseline intervention and not to the intervention scale-up in the alternative scenarios, so we excluded zinc supplementation effects in our results via post-processing instead of the simulation implementation.
+  For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` we initially modeled the zinc supplementation intervention among all children 0-5 years of age and then updated the model to include only children 6 months to 5 years of age ([Lassi-et-al-2020-zinc-supplementation]_). However, this age restriction update was erroneously applied only to the baseline intervention and not to the intervention scale-up in the alternative scenarios, so we excluded zinc supplementation effects in our results via post-processing instead of the simulation implementation.
 
   Additionally, it is important to note that :ref:`small quantity lipid-based nutrient supplement <lipid_based_nutrient_supplements>` and formulations may contain zinc and therefore attention should be paid to ensure that effects of zinc supplementation are not double counted when included in the same model as SQ-LNS and other potentially similar interventions. 
 
@@ -234,7 +234,7 @@ Validation and Verification Criteria
 References
 ------------
 
-.. [Lassi-et-al-2020]
+.. [Lassi-et-al-2020-zinc-supplementation]
   Lassi ZS, Kurji J, Oliveira CS, Moin A, Bhutta ZA. Zinc supplementation for the promotion of growth and prevention of infections in infants less than six months of age. Cochrane Database Syst Rev. 2020 Apr 8;4(4):CD010205. doi: 10.1002/14651858.CD010205.pub2. 
 
 .. [Lazzerini-and-Wanzira-2016]
