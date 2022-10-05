@@ -654,6 +654,7 @@ The perturbation process is as follows:
 **10%** of the time, replace the sampled person/household's PUMA with a PUMA selected at random according to the
 probabilities in the appropriate file below.
 (In the case of a household, all simulants in that household are assigned the same replacement PUMA.)
+In the case of an individual, only PUMAs with an existing non-GQ household in the simulation should be selected.
 The number **10%** should be considered a placeholder and will likely change in the future.
 
 These probabilities were created by first calculating the (weighted) proportions of immigrants corresponding to the move type
@@ -672,7 +673,6 @@ the 2.5th percentile value, and the proportions were re-normalized.
     before it is appropriate to interpret them as probabilities.
 
 Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
-If there is no such household, the PUMA perturbation process described above is used to repeatedly assign a new PUMA until this is no longer true.
 The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
