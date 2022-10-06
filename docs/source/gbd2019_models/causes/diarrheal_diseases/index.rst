@@ -110,14 +110,16 @@ for severe cases. Note that as pathogens can co-infect, this yields PAFs that
 sum to greater than 100% of diarrhea cases. *Vibrio cholerae* and 
 *Clostridium difficile* cases were each modelled directly using DisMod.
 
-
 GBD Hierarchy
--------------
++++++++++++++
 
 .. image:: DD_cause_hierarchy.svg
 
+Vivarium Modeling Strategy
+--------------------------
+
 Cause Model Diagram
--------------------
++++++++++++++++++++
 
 .. image:: DD_cause_model.svg
 
@@ -126,9 +128,8 @@ S: **S**\ usceptible to diarrheal diseases
 
 I: **I**\ nfected and currently experiencing a diarrheal disease bout
 
-
 Model Assumptions and Limitations
----------------------------------
++++++++++++++++++++++++++++++++++
 
 Note that GBD has done extensive work to divide up diarrhea cases into their
 respective etiologies. For now, we omit this complexity. Further, GBD 
@@ -145,8 +146,8 @@ time, and thus we assume this is a limitation of the GBD model.
    verify that the modelers expect a more complex pattern.
 
 
-Data Description
-----------------
+Data Descriptions
++++++++++++++++++
 
 .. list-table:: State Definitions
 	:widths: 5 10 10
@@ -275,37 +276,6 @@ Data Description
 	  - YLD appendix
 	  - Disability weight of sequela with id `sid`
 	  - 
-.. list-table:: Restrictions
-	:widths: 15 15 20
-	:header-rows: 1
-
-	* - Restriction type
-	  - Value
-	  - Notes
-	* - Male only
-	  - False
-	  -
-	* - Female only
-	  - False
-	  -
-	* - YLL only
-	  - False
-	  -
-	* - YLD only
-	  - False
-	  -
-	* - YLL age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
-	* - YLL age group end
-	  - 95 plus
-	  - age_group_id = 235; 95 years +
-	* - YLD age group start
-	  - Early neonatal
-	  - age_group_id = 2; [0-7 days)
-	* - YLD age group end
-	  - 95 plus
-	  - age_group_id = 235; 95 years +
 
 .. note::
 
@@ -329,13 +299,72 @@ Data Description
 
 	We then also solved for the upper and lower bound estimates using the same methodology.
 
-Validation Criteria
--------------------
+	See the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>` page for more information.
 
-.. todo::
+.. list-table:: Restrictions
+	:widths: 15 15 20
+	:header-rows: 1
 
-   Describe tests for model validation.
+	* - Restriction type
+	  - Value
+	  - Notes
+	* - Male only
+	  - False
+	  -
+	* - Female only
+	  - False
+	  -
+	* - YLL only
+	  - False
+	  -
+	* - YLD only
+	  - False
+	  -
+	* - YLL age group start
+	  - Post neonatal (age group ID 4, 1 month to 1 year)
+	  - GBD age group start is early neonatal (age group ID 2, 0-6 days)
+	* - YLL age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
+	* - YLD age group start
+	  - Post neonatal (age group ID 4, 1 month to 1 year)
+	  - GBD age group start is early neonatal (age group ID 2, 0-6 days)
+	* - YLD age group end
+	  - 95 plus
+	  - age_group_id = 235; 95 years +
 
+.. note:: 
+
+	**A note on the diarrheal diseases age start parameter:**
+
+		This Vivarium modeling strategy sets the diarrheal diseases cause model age start to the post neonatal age group (1 month to 1 year) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). We exclude the early and late neonatal age groups from the diarrheal diseases cause model as a strategy that allows us to increase the timestep of our cause models.
+
+		The rationale behind this modeling decision is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>` that is exacerbated by the inclusion of the :ref:`low birth weight and short gestation risk factor <2019_risk_effect_lbwsg>` in the model. Essentially, because the LBWSG risk factor affects diarrheal diseases excess mortality rates in our models during the neonatal age groups and the LBWSG relative risk values for the highest risk categories are quite large (up to 700!), the inclusion of the LBWSG risk effects on diarrheal diseases causes individual-level diarrheal diseases excess mortality rates to be too large to accurately approximate in our models without a very small timestep, which leads to underestimation of neonatal diarrheal diseases mortality rates with a timestep on the order of 0.5 days.
+
+		Therefore, we employ the following strategy:
+
+			- Model the diarrheal diseases SI cause model as described in this document for ages older than late neonatal only, and
+
+			- Include diarrheal diseases as an **unmodeled** cause that is **affected** by the LBWSG risk factor (see the :ref:`LBSWG risk effects page <2019_risk_effect_lbwsg>` for details). This will allow us to model diarrheal diseases *CSMR* rather than *EMR* among the neonatal age groups, which is lower in magnitude and therefore less easier to approximate at larger simulation timesteps. Notably, this strategy does not allow us to model years lived with disability due to diarrheal diseases among the neonatal age groups.
+
+		This strategy allowed us to increase the simulation timestep to 4 days and still meet verification criteria.
+
+Verification and Validation Criteria
+++++++++++++++++++++++++++++++++++++
+
+**Verification:**
+
+- We should replicate the following parameters:
+
+	- GBD incidence rates among ages older than the late neonatal age group
+
+	- The custom input remission rate (~1/4.3 days) among ages older than the late neonatal age group
+
+	- GBD cause-specific mortality rates among all modeled ages
+
+**Validation:**
+
+- We should compare our estimates of diarrheal diseases prevalence to GBD estimates of diarrheal diseases prevalence (among age groups greater than the late neonatal age group). Our modeled estimates may deviate from the GBD estimates for this parameter given that we have chosen to prioritize estimates of incident and fatal cases of diarrheal diseases rather than prevalent cases.
 
 References
 ----------
