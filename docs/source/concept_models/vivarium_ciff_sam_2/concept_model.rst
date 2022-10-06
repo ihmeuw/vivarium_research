@@ -193,7 +193,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   * - 6: Full scale-up to SAM baseline
     - Baseline
     - Scale-up :math:`C_{MAM}` to baseline :math:`C_{SAM}`. No change in :math:`E_{MAM}` (keep at baseline value).
-    - Scale-up 3a to baseline :math:`C_{MAM}`
+    - Scale-up 3a to baseline :math:`C_{SAM}`
     - 
   * - 7: MAM and SAM treatment scale-up
     - Scale-up to target
