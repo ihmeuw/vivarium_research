@@ -1327,6 +1327,207 @@ The ACS will be used for V&V testing. It is defined as:
 - Includes mail/online, telephone, and personal visits 
 
 
+Taxes
+^^^^^
+
+Taxes, as we all know, can contain many different forms and processes. 
+For this model, we will split the tax information into two main sections: 
+W2/1099 forms from employers; and 1040 forms from simulants. We will look 
+at these separately, starting with W2 and 1099 forms. 
+
+
+W2 and 1099 Forms
+'''''''''''''''''
+
+**When to Sample** 
+
+- Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
+- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. 
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - DOB 
+  * - Mailing Address 
+  * - Social Security Number 
+  * - Income 
+  * - Employer ID 
+  * - Employer Address 
+  * - Employer Zip Code 
+  * - Type of Tax Form (W2 or 1099)
+
+**Who to Sample** 
+
+Everyone who has had an employer listed within the current calendar year 
+will receive either a W2 or a 1099 form. For those with multiple jobs during 
+the year, they will be duplicated and receive multiple forms. 
+
+
+The rate of the the types of forms are below. This data is 
+from a review of 2016 tax data by [Lim_2019]_ 
+
+.. list-table:: Percent W2 versus 1099  
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Form Type 
+    - Percent Receiving 
+  * - W2 
+    - 94.65% 
+  * - 1099 
+    - 5.35%
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some additional tax specific errors include: SSN randomly being filled 
+for those who are missing one, mailing address being different than the 
+home address, and issues with employer names, addresses, or IDs. 
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of how tax documents are compiled. 
+#. Errors are made in W2s and 1099s by companies frequently, due to employees moving or changing information without communicating changes. These W2s can be reissued which leads to duplicates, or employees might not adjust them leading to different information between W2/1099s and 1040 forms. This is not currently modeled. 
+#. 1099 forms are often used by self-employed people or those with small businesses. These can contain errors related in employer information. 
+#. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
+#. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
+#. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model. 
+
+
+1040 Form
+'''''''''
+
+**When to Sample** 
+
+- Sample compiled on the time step containing April 15th of each year 
+- Sample on a single time step for now 
+
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20 20 
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+    - Notes 
+  * - First name
+    - 
+  * - Middle initial 
+    - 
+  * - Last name
+    - 
+  * - Age
+    -  
+  * - DOB
+    -  
+  * - Mailing Address
+    -  
+  * - Social Security Number 
+    -
+  * - Income 
+    -
+  * - Employer ID
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address 
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Zip Code 
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Joint Filer or Dependent 
+    - Identify the below simulant as a joint filer or a dependent. Can have multiple rows if multiple simulants are included on the tax documents (e.g., for a simulant with a spouse and 2 children, there will be 1 joint filer and 2 dependents) 
+  * - First name 
+    - 
+  * - Middle initial 
+    - 
+  * - Last name 
+    - 
+  * - Age in years  
+    - 
+
+
+
+**Who to Sample** 
+
+Not everyone who receives a W2 or 1099 will end up filing taxes. 
+However, those who do not are concentrated in low incomes for whom 
+taxes are not required. Currently, we will chose to have all those 
+who are legally required to file taxes, file taxes. This is a 
+limitation and is listed below. 
+
+For simulants that receive below the minimum income, 42.14% will 
+still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
+income is based on the household structure and if listed in the table below. 
+
+.. list-table:: Minimum Income  
+  :widths: 20 20 
+  :header-rows: 0
+
+  * - Simulant Type 
+    - Minimum Income 
+  * - Single filing, under 65 
+    - $12,550 
+  * - Single filing, over 65 
+    - $14,250
+  * - Married joint filing, both under 65 
+    - $25,100
+  * - Married joint filing, one under 65 
+    - $26,450
+  * - Married joint filing, both over 65 
+    - $27,800
+  * - Married separate filing 
+    - $5
+
+
+Based on the household structure, the following rules can be applied 
+for who files taxes: 
+
+- Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately. 
+- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file independent of others in the household) 
+- If the reference person in the household is employed and filing taxes, they will claim all in the house that qualify as a dependent based on these rules: 
+    * Do not claim a "housemate/roommate" or "other nonrelative" as a dependent 
+    * The dependent must have lived with the reference person for greater than 1 year 
+    * The dependent's income must be below $4300 
+- If the reference person is unemployed or not filing taxes (low income), the highest earner in the household will claim dependents based on the same rules 
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some additional tax specific errors include: SSN randomly being filled 
+for those who are missing one, mailing address being different than the 
+home address, and issues with employer names, addresses, or IDs. 
+
+Furthermore, there are often complications with people being claimed as 
+dependents in different households, or claiming people from group quarters.
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of how tax documents are compiled. 
+#. In reality, there are other dependents that live outside of the home. This can include divorced parents, college students, elderly parents, etc. These relationships are not modeled and oversimplifed in this data. 
+#. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year. 
+#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. 
+#. As the reference person in a household is random, they might not be the one who should be claiming dependents. 
+#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both. 
+
+
+
+
 For inspiration, here is the list of files that Census Bureau
 routinely links:
 https://www2.census.gov/about/linkage/data-file-inventory.pdf
@@ -1509,8 +1710,14 @@ To Come (TK)
 +++++++++++++++
 .. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html. 
 
+.. [Cilke_1998] Cilke, Jim. n.d. “A PROFILE OF NON-FILERS,” 38. 
+
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
 
 .. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
+
+.. [Lim_2019] Lim, Katherine, Alicia Miller, Max Risch, and Eleanor Wilking. n.d. “Independent Contractors in the U.S.: New Trends from 15 Years of Administrative Tax Data,” 71. 
+
+.. [Nolo] https://www.nolo.com/legal-encyclopedia/should-married-people-always-file-jointly.html#:~:text=The%20vast%20majority%20of%20married,had%20no%20income%20or%20deductions. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
