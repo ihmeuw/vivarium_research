@@ -202,11 +202,13 @@ Assumptions and Limitations
 
 - We assume that all maternal disorders deaths occur at birth. For deaths due to late maternal disorders, this will result in earlier maternal deaths in our model than in reality, which may overestimate the impact of maternal mortality on infant outcomes such as breastfeeding behaviors/orphanhood when we model maternal-child dyads. We may overestimate YLLs due to late maternal deaths and underestimate YLLs due to abortions, miscarriages, and ectopic pregnancies.
 
-- We assume that all maternal disorders morbidity *begins* at birth and persists for one year after birth. For morbidity due to hypertensive disorders and maternal sepsis may occur prior to when we model it. For sequelae that persist for longer than one year (ex: long term sequelae of eclampsia, infertility, fistula), we will underestimate YLDs.
+- We assume that all maternal disorders morbidity *begins* at birth and persists for one year after birth (but is accured during a single week). For morbidity due to hypertensive disorders and maternal sepsis may occur prior to when we model it. For sequelae that persist for longer than one year (ex: long term sequelae of eclampsia, infertility, fistula), we will underestimate YLDs.
 
 - We will assume that mothers experience mortality due to maternal disorders also experience associated morbidity. This may not be a logical assumption for subcauses with long term sequelae, including maternal hemorrhage, maternal hypertensive disorders, and obstructed labor and uterine rupture; however, it is likely a logical assumption for other maternal disorders subcauses including maternal sepsis, abortion and miscarriage, and acute sequelae of the other maternal disorder subcauses.
 
 - Our strategy of subtracting anemia sequelae YLDs from maternal disorders YLDs assumes no comorbidity status between anemia due to maternal hemorrhage and other sequelae of maternal disorders. This assumption will result in an underestimation of maternal disorder YLDs other than anemia due to maternal hemorrhage.
+
+- See the note in the `Data Tables`_ section below for two additional important limitations.
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -230,7 +232,23 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
      - 
    * - Incident maternal disorders
      - incidence_rate_c366 / (incidence_p * prevalence_np)
-     - **Post-maternal disorder state persists for one timestep**
+     - **Post-maternal disorder state persists for one timestep** (one week, as implemented).
+
+.. note::
+
+  GBD incident cases of the maternal disorders parent cause is equal to the *sum* of the incident cases of each maternal disorders sub-causes rather than a count of individuals who experience at least one maternal disorder cause during gestation/birth/postpartum. Therefore, for some demographic groups with high maternal disorders burdens (particularly older age groups), it is possible that the above ratio is greater than one.
+
+  As currently implemented, the incident maternal disorders ratio per birth was not clipped at 1 in the input data and was used as-is in the simulation as it did not violate Vivarium processes to have values above one for this parameter.
+
+  Notably, this strategy has important implications:
+
+    - If there are particular demographic groups that have incident maternal disorders ratios per birth greater than one, then we will underestimate total incident maternal disorder cases (and associated YLDs) for that group in our simulation. For the IV iron simulation, while we underestimated incident maternal disorders cases for high risk groups (older ages), this did not have a large impact on the popuation-level incident maternal disorder cases because fertility rates were low in these groups.
+
+    - Our modeling strategy assumes that maternal disorders cases and YLDs are spread widely across the population of PLW rather than being more concentrated among a subset of individuals with other individuals experiencing little to no YLDs. Because of GBD COMO processes, our simulation should accurately estimate maternal disorder YLDs at the population level in the baseline scenario (in the absence of the above limitation) despite this limitation. Additionally, for not targeted interventions, this limitation should not substantially impact our estimation of intervention impact on maternal disorders cases and YLDs. However, for interventions that are targeted to high-risk groups, we will likely *underestimate* intervention impact as a result.s
+
+.. note::
+
+  The duration of the post-maternal disorder state in which maternal disorder YLDs are accrued was set to one week for the IV iron simulation. This state is currently a barrier to increasing the timestep of the maternal IV iron simulation from one week to two weeks.
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
 
