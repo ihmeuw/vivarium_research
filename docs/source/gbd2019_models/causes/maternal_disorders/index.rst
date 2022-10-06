@@ -202,7 +202,7 @@ Assumptions and Limitations
 
 - We assume that all maternal disorders deaths occur at birth. For deaths due to late maternal disorders, this will result in earlier maternal deaths in our model than in reality, which may overestimate the impact of maternal mortality on infant outcomes such as breastfeeding behaviors/orphanhood when we model maternal-child dyads. We may overestimate YLLs due to late maternal deaths and underestimate YLLs due to abortions, miscarriages, and ectopic pregnancies.
 
-- We assume that all maternal disorders morbidity *begins* at birth and persists for one year after birth (but is accured during a single week). For morbidity due to hypertensive disorders and maternal sepsis may occur prior to when we model it. For sequelae that persist for longer than one year (ex: long term sequelae of eclampsia, infertility, fistula), we will underestimate YLDs.
+- We assume that all maternal disorders morbidity *begins* at birth and persists for one year after birth (but is accrued during a single week). For morbidity due to hypertensive disorders and maternal sepsis may occur prior to when we model it. For sequelae that persist for longer than one year (ex: long term sequelae of eclampsia, infertility, fistula), we will underestimate YLDs.
 
 - We will assume that mothers experience mortality due to maternal disorders also experience associated morbidity. This may not be a logical assumption for subcauses with long term sequelae, including maternal hemorrhage, maternal hypertensive disorders, and obstructed labor and uterine rupture; however, it is likely a logical assumption for other maternal disorders subcauses including maternal sepsis, abortion and miscarriage, and acute sequelae of the other maternal disorder subcauses.
 
