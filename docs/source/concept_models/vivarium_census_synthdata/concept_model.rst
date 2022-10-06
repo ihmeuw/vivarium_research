@@ -1144,10 +1144,10 @@ their survey modes (mail -> telephone -> personal visit), this data should
 not be used out of that order (e.g., we can **not** assume that a telephone only 
 interview would have an 11.9% response rate for white people). 
 
-For all surveys with mail, telephone, and personal visits, the data below 
-will add to 100%. Since this is unrealistic, we assume that non-response 
-bias for this case matches the census, using the rates in the simulant 
-omission tables in the decennial census section above. 
+The data for modes below is for respondents. We assume that the non-response 
+bias for ACS matches the census. Therefore, we will apply an additional omission 
+rate using the rates in the simulant omission tables in the decennial census 
+section above. 
 
 This data is available as a csv here: J:\Project\simulation_science\prl\data\survey_mode_percent.csv 
 
@@ -1190,25 +1190,37 @@ This data is available as a csv here: J:\Project\simulation_science\prl\data\sur
 
 
 .. list-table:: Calculating Simulant Non-Response 
-  :widths: 10 10 10 20
+  :widths: 5 10 10 10 10 10 10 
   :header-rows: 1
 
-  * - Simulant 
+  * - Sim
     - Race/Ethnicity 
+    - Age and Sex 
     - Survey Modes Used 
+    - Census Omission Rate (%) 
     - Probability of Non-Response (%)
+    - Overall Missed Respondents (%)
   * - 1
     - White 
+    - 30-49, female
     - Mail/Online Only 
+    - 0%  
     - 100% - 62.5% = 37.5% non-response 
+    - 37.5%  + 0% = **37.5%**
   * - 2
-    - Black  
-    - Mail/Online and Telephone  
+    - Black 
+    - 18-29, male 
+    - Mail/Online and Telephone
+    - 5.31%
     - 100% - (29.7% + 15.1%) = 55.2% non-response 
+    - 55.2% + 5.31% = **60.51%**
   * - 3
     - Asian 
+    - 50+, female 
     - Mail/Online, Telephone, and Personal Visits 
-    - Use census data above, for a 50+, female the non-response rate would be 0%, as seen above 
+    - 0% 
+    - 100% - (52.7% + 9.7% + 37.6%) = 0% 
+    - 0% + 0% = **0%** 
 
 For longitudinal surveys, assume that non-response is independent between 
 survey iterations. 
@@ -1231,6 +1243,7 @@ These are not currently modeled.
 #. Our model does not include an option for double counting or duplicating people 
 #. There are multiple other factors that contribute to non-response including: tenure in a home, state/geography, age, and having a SSN (as a proxy for citizenship) based on ACS data [Jackson_2007]_. These are not currently included in our model 
 #. Simulants who do not respond to one time point in a longitudinal survey are probably more likely to not respond moving forward. We assume independence here. 
+#. The ACS data is for a survey that has an unusually high response rate. This data was used as it could give an estimate for mail only or mail and telephone only data. However, this has limitations. Other surveys might have lower response rates and should be handled separately. 
 
 **Initial Survey - American Community Survey** 
 
