@@ -673,6 +673,7 @@ the 2.5th percentile value, and the proportions were re-normalized.
     before it is appropriate to interpret them as probabilities.
 
 Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
+If there is no such household in the simulation, their PUMA is perturbed using the process described above, and then they are matched in the new PUMA.
 The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
