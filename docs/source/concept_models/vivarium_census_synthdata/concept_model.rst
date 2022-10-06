@@ -119,26 +119,25 @@ include an attribute for their relationship to a reference person
 (:ref:`5 <census_prl_age_sex_etc>`). Due to the complex interplay of
 these attributes we will need an enhanced fertility model (:ref:`6
 <census_prl_fertility>`).  We can use our standard mortality model
-(:ref:`7 <census_prl_mortality>`), but will need a totally new model
-of migration (:ref:`8 <census_prl_migration>`) that accounts for moves
-by household and individual simulants and allows migration in to and
-out of the tracked population, as well as changes to geographic
+(:ref:`7 <census_prl_mortality>`), but will need totally new models
+of domestic (:ref:`8 <census_prl_domestic_migration>`) and international (:ref:`9 <census_prl_international_immigration>`; :ref:`10 <census_prl_international_emigration>`) migration that account for moves
+by household and individual simulants, as well as changes to geographic
 location and household id.
 
 On top of this, we will layer attributes relevant to PRL: mailing
-addresses for each household (9); first, middle, and last names for
-each simulant (10); date of birth (11); intended-to-be-unique
+addresses for each household (11); first, middle, and last names for
+each simulant (12); date of birth (13); intended-to-be-unique
 identification number modeling SSN that is missing for some and not
-actually unique for others (12); and periodic survey, census, and registry
-observations with realistic noise (13).
+actually unique for others (14); and periodic survey, census, and registry
+observations with realistic noise (15).
 
 Additional components we might want: time-dependent changes to
-observers of sex, based on gender assigned at birth (15); multiple
-households for individuals, leading to double counting in census (16);
-twins and multiparous births in fertility model (14).  To capture an
+observers of sex, based on gender assigned at birth (17); multiple
+households for individuals, leading to double counting in census (18);
+twins and multiparous births in fertility model (16).  To capture an
 additional dimension of heterogeneity and also to enable a periodic
 observer that simulates tax returns we will also need a component
-representing income (17), which will look a lot like a risk factor
+representing income (19), which will look a lot like a risk factor
 exposure.
 
 
@@ -213,7 +212,7 @@ race/ethnicity into the following partition:
 * Non-Latino Multiracial or Some Other Race
 * Latino
 
-This is basically compatible with the surname data we will use in Section (10).
+This is basically compatible with the surname data we will use in Section (12).
 
 For initialization on simulation start, for the population living in households, we will sample households from
 ACS PUMS rows in the specified PUMAs with replacement, and with
@@ -403,7 +402,7 @@ revisit this and keep track of dad as well as moms).
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
-Multiparity --- make twins with probability 4%.  See Section (14) for
+Multiparity --- make twins with probability 4%.  See Section (16) for
 additional details.
 
 Relationship -- the sim knows a parent-child dyad when the new
@@ -495,12 +494,12 @@ future.
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are dying at the expected rates.
 
-.. _census_prl_migration:
+.. _census_prl_domestic_migration:
 
-2.3.4 Component 8: Migration
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.4 Component 8: Domestic Migration
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-A construct that will help think through the migration component is
+A construct that will help think through the domestic migration component is
 "directed tripartite graph" showing arcs from simulants (part A) to
 households (part B) as well as arcs from households to housing units
 (part C).
@@ -530,7 +529,7 @@ most military and incarcerated, Medicare for most nursing home, but
 people living in dorms, especially who don't file their own tax
 returns might not have a protected identification key [PIK].)
 
-To capture this, on the research side I will develop a migration rate
+To capture this, on the research side I will develop a domestic migration rate
 file, with stratification columns for age group, sex, and
 race/ethnicity and data columns for the household move rate in moves
 per person year and individual move rate (also in moves per person
@@ -556,45 +555,15 @@ and geography, we can calculate the probability of moving from ACS, as
 the weighted average of MIGPUM.isnull(); could also determine if they
 moved within the PUMAs represented in the sim or from outside those
 PUMAs.
+For now, we only model migration within the sim catchment area (this component)
+and to/from other countries (next two components).
+When the simulation only includes part of the US, there is no domestic
+migration into or out of this region.
 
 Note that each housing unit in C should be associated with a unique
 mailing address, as described in Section (8).
 
-At some point, I could imagine creating new housing units during the
-sim, but to keep it simple for now, perhaps we don't have to.
-
-At some point, I could imagine also explicitly modeling that some
-persons and/or households move out of the simulation tracking area,
-but I'm not sure how to decide how many.  Maybe they should stay
-tracked, so that they can move back later, e.g. after some years
-overseas.
-
-At some point, I could imagine having new people and families move
-into the sim, but for our minimal model, let's leave this out.
-
-Schema for the types of migration we eventually might include:
-
-#. Existing household moves 
-
-   #. To another house in simulation
-
-   #. Outside of simulation catchment area
-
-#. New household moves into simulation
-
-#. Existing person moves
-
-   #. To another place in simulation
-
-      #. To a household
-
-      #. To group quarters of specific GQ types, e.g. one of six mutually exclusive, collectively exhaustive categories
-
-   #. Outside of simulation catchment area
-
-#. New person moves into simulation (could be considered together with (2), using ACS data)
-
-When we reach that point, we might also want to think about the change
+We might also want to think about the change
 in relationship type when people move, and also change surnames
 sometimes.
 
@@ -627,9 +596,110 @@ simplifying assumptions that we have included:
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are moving at the expected rates.
 
+.. _census_prl_international_immigration:
 
-2.3.5 Component 9: Address
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.5 Component 9: International Immigration (In-Migration)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+New simulants are added by migration into the US from other countries.
+We simulate two kinds of immigration: household moves and non-reference-person moves.
+
+#. A **household move** is when an entire household (which may be a single-person residential household, or a GQ person's "household") enters from outside the country as a unit,
+   preserving relationships within the unit.
+#. A **non-reference-person move** is when a person enters from outside the country and joins an existing residential household.
+   Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
+
+For the purposes of immigration, a group quarters person should be considered to be a one-person "household",
+with the group quarters person as the reference person, and that GQ "household" having a weight equal to the GQ person's weight.
+This means that group quarters people should only enter the US in a "household" move, and never as individuals;
+they will never immigrate into an existing residential household.
+
+The number of simulants who move to the US each year is informed by the ACS' "residence one year ago" question.
+Specifically, a value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
+while any other value indicates that they lived within the US.
+We refer to respondents who were not living in the United States one year ago as "recent immigrants."
+Our assumption is that the number (and characteristics) of recent immigrants per year
+in the 2016-2020 ACS PUMS will be replicated in each future year.
+
+.. note::
+
+    All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
+
+We also assume that the proportions of recent immigrants by move type (household or non-reference-person) will remain constant.
+Though in reality not all moves into the US follow one of these two patterns, we assume that any new immigrant in a household
+where the reference person is also a new immigrant was part of a household move, while any new immigrant in a household where the
+reference person is not a new immigrant moved to the US in a non-reference-person move.
+
+Specifically, the yearly rate at which simulants are added to the population by each move type is given by
+the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
+Since immigration is likely unaffected by US population change over time, the number of immigrants for a move type
+is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
+At each time step:
+
+#. ACS PUMS households with reference people who are recent immigrants (as well as GQ "households" where the GQ person is a recent immigrant),
+   after removing any household members who are not recent immigrants,
+   are sampled using household weights (equal to person weights in the case of GQ).
+   This sampling continues with replacement until the desired number of simulants added in household moves is reached.
+#. ACS PUMS recent immigrants living in residential households where the reference person is not a recent immigrant are sampled using person weights.
+   This sampling continues with replacement until the desired number of simulants added in non-reference-person moves is reached.
+
+Added residential households are assigned a new household ID and a new address, as is done at population initialization.
+Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
+their institutional/non-institutional status, as well as the corresponding shared address, as is done at population initialization.
+
+Additionally, we perturb the PUMA attribute of the sampled person (in the case of a non-reference-person move) or household (in the case of a household move).
+This is intended to ensure a non-zero probability of immigration into all PUMAs,
+and to lower the chances of very similar simulants being sampled from the same ACS person/household.
+The perturbation process is as follows:
+**10%** of the time, replace the sampled person/household's PUMA with a PUMA selected at random according to the
+probabilities in the appropriate file below.
+(In the case of a household, all simulants in that household are assigned the same replacement PUMA.)
+The number **10%** should be considered a placeholder and will likely change in the future.
+
+These probabilities were created by first calculating the (weighted) proportions of immigrants corresponding to the move type
+in the 2016-2020 PUMS file.
+Then, all values below the 2.5th percentile (including values of 0) were increased to
+the 2.5th percentile value, and the proportions were re-normalized.
+
+:download:`PUMA probabilities for perturbation of households added in household moves <household_moves_puma_distribution.csv>`
+
+:download:`PUMA probabilities for perturbation of simulants added in non-reference-person moves <non_reference_person_moves_puma_distribution.csv>`
+
+.. note::
+
+    The values in each file were normalized to sum to 1 across the entire United States.
+    If simulating a subset of the US, it is necessary to re-normalize the values in that subset
+    before it is appropriate to interpret them as probabilities.
+
+Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
+If there is no such household, the PUMA perturbation process described above is used to repeatedly assign a new PUMA until this is no longer true.
+The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
+all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
+These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
+
+.. todo::
+
+    In the future, we may want to make some households more likely than others to receive non-reference-person immigrants.
+    Also, the current approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+
+All attributes of newly added households and simulants that are not sampled from the ACS PUMS (e.g. addresses, names) are set
+using the same method as population initialization for those attributes.
+
+All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
+All added simulants should have a unique seed for common random numbers.
+This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
+
+.. _census_prl_international_emigration:
+
+2.3.6 Component 10: International Emigration (Out-Migration)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+.. todo::
+
+    Describe this component.
+
+2.3.7 Component 11: Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Each household id should be associated with a residential address, and
 (in a future, more complicated model) when people move, they should
@@ -720,7 +790,7 @@ examine: does everyone in a household have the same address?  does the
 zip code match the state?  does the street conform to typical
 expectations?
 
-2.3.6 Component 10: Names
+2.3.8 Component 12: Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Last names**
@@ -845,7 +915,7 @@ names (by race/ethnicity). This likely creates some strange last
 names, so have a careful look at this in validation, and decide if
 refinement is needed.
 
-2.3.7 Component 11: Date of Birth
+2.3.9 Component 13: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To create a date-of-birth column in the synthetic output data, each
@@ -877,8 +947,8 @@ visual inspection and quantitatively using an appropriate statistical
 test (would that be a Chi-Square test?).
 
 
-2.3.8 Component 12: Social Security Number
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.10 Component 14: Social Security Number
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Eventually, this should be missing for some and not actually unique
 for others.  I need to do some research into how we represent this,
@@ -921,8 +991,8 @@ can manually inspect a sample of 10-100 SSNs, confirm that the
 expected number are missing and that the duplication count follows the
 intended distribution.
 
-2.3.9 Component 13: Periodic observations of attributes through survey, census, and registry
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.11 Component 15: Periodic observations of attributes through survey, census, and registry
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Census
 ^^^^^^
@@ -1333,7 +1403,7 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
 
-2.3.10 Twins and multiparous births (14)
+2.3.12 Twins and multiparous births (16)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There is a lot we can potentially add to the model to represent how
@@ -1354,15 +1424,15 @@ simulants added to the same household, with the same date of birth,
 and the same last name.
 
 
-2.3.11 Additional Components (15-16)
+2.3.13 Additional Components (17-18)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 We don't need these components for our minimal model, but we might
 eventually want: time-dependent changes to observers of sex, based on
-gender assigned at birth (15); multiple households for individuals,
-leading to double counting in census (16).
+gender assigned at birth (17); multiple households for individuals,
+leading to double counting in census (18).
 
-2.3.12 Income (17)
+2.3.14 Income (19)
 ~~~~~~~~~~~~~~~~~~
 
 Individual income will be implemented as a risk exposure.  Average
@@ -1375,7 +1445,7 @@ that this value is normally distributed, but we could use the GBD
 ensemble risk exposure machinery if that assumption seems like a
 limitation.
 
-2.3.13 Employment (18)
+2.3.15 Employment (20)
 ~~~~~~~~~~~~~~~~~~~~~~
 
 To represent businesses and employment dynamics we will use another
