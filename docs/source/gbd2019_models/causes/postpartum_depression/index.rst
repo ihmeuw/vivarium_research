@@ -130,7 +130,11 @@ The postpartum depression cause model restrictions are the same as the restricti
 Frequency
 """""""""
 
-Ratios of maternal hemorrhage mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a postpartum depression episode **at the time of birth** in our simulation (see the :ref:`pregnancy model <other_models_pregnancy>` for details).
+Ratios of maternal hemorrhage mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a postpartum depression episode **at the two weeks postpartum** (two weeks after the time of birth) in our simulation (see the :ref:`pregnancy model <other_models_pregnancy>` for details).
+
+.. note::
+
+  Two weeks postpartum was selected as the time of onset for PPD because :ref:`postpartum hemoglobin acts as a risk factor for PPD <2019_risk_effect_iron_deficiency>` and the :ref:`postpartum IV iron intervention <intervention_iv_iron_postpartum>` impacts postpartum hemoglobin two weeks following birth. This will allow the postpartum IV iron intervention to influence the frequency of PPD appropriately. However, other strategies may be considered if this model is being used for additional modeling aims.
 
 .. list-table:: Ratio per birth
    :header-rows: 1
