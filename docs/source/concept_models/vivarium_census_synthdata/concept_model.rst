@@ -1342,7 +1342,7 @@ W2 and 1099 Forms
 **When to Sample** 
 
 - Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
-- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. 
+- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. Jobs can be tracked for complete time steps, so through the last day of the time step containing Jan 1st. 
 
 **What to Sample** 
 
@@ -1368,7 +1368,8 @@ W2 and 1099 Forms
 
 Everyone who has had an employer listed within the current calendar year 
 will receive either a W2 or a 1099 form. For those with multiple jobs during 
-the year, they will be duplicated and receive multiple forms. 
+the year, they will be duplicated and receive multiple forms. We currently 
+will not model persistance from year to year on which type of form. 
 
 
 The rate of the the types of forms are below. This data is 
@@ -1405,6 +1406,7 @@ These are not currently modeled.
 #. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
 #. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
 #. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model. 
+#. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
 
 
 1040 Form
@@ -1439,23 +1441,47 @@ These are not currently modeled.
   * - Social Security Number 
     -
   * - Income 
-    -
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer ID
     - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
     - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Zip Code 
     - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Joint Filer or Dependent 
-    - Identify the below simulant as a joint filer or a dependent. Can have multiple rows if multiple simulants are included on the tax documents (e.g., for a simulant with a spouse and 2 children, there will be 1 joint filer and 2 dependents) 
+  * - Joint Filer 
+    - This row through 'dependent filer' are to be included if there is a joint filer ONLY 
   * - First name 
     - 
   * - Middle initial 
     - 
   * - Last name 
     - 
-  * - Age in years  
+  * - Age
     - 
+  * - DOB
+    -  
+  * - Mailing Address
+    -  
+  * - Social Security Number 
+    -
+  * - Income 
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer ID
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address 
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Zip Code 
+    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Dependent
+    - This row through the end are to be included for each dependent on the tax filing 
+  * - First name 
+    - 
+  * - Middle initial 
+    - 
+  * - Last name 
+    - 
+  * - Age 
+    -  
 
 
 
@@ -1470,6 +1496,9 @@ limitation and is listed below.
 For simulants that receive below the minimum income, 42.14% will 
 still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
 income is based on the household structure and if listed in the table below. 
+We will not model persistance year to year. 
+
+**In the current model, no one will be low income, this will be changed later.** 
 
 .. list-table:: Minimum Income  
   :widths: 20 20 
@@ -1495,12 +1524,15 @@ Based on the household structure, the following rules can be applied
 for who files taxes: 
 
 - Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately. 
+    * The only spouses we will recognize are [Reference person, Opp-sex spouse] and [Reference person, Same-sex spouse]. 
+    * The reference person will submit the form, the spouse will be listed as the joint filer. 
+    * There does not need to be persistance in who files jointly, it can be re-randomly drawn each year. 
 - All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file independent of others in the household) 
 - If the reference person in the household is employed and filing taxes, they will claim all in the house that qualify as a dependent based on these rules: 
     * Do not claim a "housemate/roommate" or "other nonrelative" as a dependent 
     * The dependent must have lived with the reference person for greater than 1 year 
     * The dependent's income must be below $4300 
-- If the reference person is unemployed or not filing taxes (low income), the highest earner in the household will claim dependents based on the same rules 
+- If the reference person is unemployed or not filing taxes (low income), the relative (not housemate or other non-relative) who is the highest earner in the household will claim dependents based on the same rules. If there are no relatives filing taxes in the household, no one will claim dependents. **For now when incomes are all the same, randomly assign to any relative earner**
 
 **Data Errors/Noise** 
 In the future, we will add a noise function designed to replicate 
@@ -1521,10 +1553,10 @@ These are not currently modeled.
 #. Sampling on a single time step is not representative of how tax documents are compiled. 
 #. In reality, there are other dependents that live outside of the home. This can include divorced parents, college students, elderly parents, etc. These relationships are not modeled and oversimplifed in this data. 
 #. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year. 
-#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. 
+#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses. 
 #. As the reference person in a household is random, they might not be the one who should be claiming dependents. 
 #. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both. 
-
+#. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
 
 
 
