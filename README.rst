@@ -95,7 +95,7 @@ in your browser.  Click on the ``Branches`` tab right above the directory tree.
 You should see a listing for your branch with a button that says
 ``Make pull request``.  Click that.  
 
-**Add reviewers**, then click the
+**Add reviewers and relevant labels**, then click the
 ``Create Pull Request`` button and notify the people you tagged that you
 have a documentation PR for review.
 
