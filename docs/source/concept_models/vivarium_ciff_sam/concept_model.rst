@@ -541,7 +541,7 @@ For correlated risks that affect the same outcomes in our simulation (just wasti
 5.4 Desired outputs
 -------------------
 
-Final outputs to report in manuscript
+Final outputs to report in manuscript :code:`I:\RTs_and_Projects\Sim_Science_RT\04_Projects\Archive\Severe Acute Malnutrition Sim (CIFF)\Deliverables\20220311_IHME simulation report.pdf`
 
 .. csv-table:: Final outcomes table to report in manuscript
    :file: final_outcomes_output_shell.csv
