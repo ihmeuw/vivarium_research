@@ -227,7 +227,7 @@ This is appropriate because LRI has a short and relatively uniform duration of
      - I
      - S
      - (-1/time_step)*log(1-time_step/duration_c322)
-     - Where time_step is the duration of the simulation time_step in years. Use the :code:`np.log()` function. See discussion of this equation on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>`.
+     - Where time_step is the duration of the simulation time_step in years. Use the :code:`np.log()` function. See discussion of this equation on the :ref:`diarrheal diseases cause model document <2019_cause_diarrhea>` and :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>` page for more information.
 
 .. list-table:: Data Sources
    :widths: 20 25 25 25
@@ -294,17 +294,33 @@ This is appropriate because LRI has a short and relatively uniform duration of
      - False
      -
    * - YLL age group start
-     - Early neonatal
-     - GBD age group id is 2
+     - Post neonatal (age group ID 4, 1 month to 1 year)
+     - GBD age group start is early neonatal (age group ID 2, 0-6 days)
    * - YLL age group end
      - Age 95+
      - GBD age group id is 235
    * - YLD age group start
-     - Early neonatal
-     - GBD age group id is 2
+     - Post neonatal (age group ID 4, 1 month to 1 year)
+     - GBD age group start is early neonatal (age group ID 2, 0-6 days)
    * - YLD age group end
      - Age 95+
      - GBD age group id is 235
+
+.. note:: 
+
+  **A note on the LRI age start parameter:**
+
+    This Vivarium modeling strategy sets the LRI cause model age start to the post neonatal age group (1 month to 1 year) despite the GBD age start parameter being the early neonatal age group (0 to 6 days). We exclude the early and late neonatal age groups from the cause model as a strategy that allows us to increase the timestep of our cause models.
+
+    The rationale behind this modeling decision is related to the *Relationship between timesteps and modeled rates in Vivarium* as described on the :ref:`Choosing an Appropriate Time Step page <vivarium_best_practices_time_steps>` that is exacerbated by the inclusion of the :ref:`low birth weight and short gestation risk factor <2019_risk_effect_lbwsg>` in the model. Essentially, because the LBWSG risk factor affects LRI excess mortality rates in our models during the neonatal age groups and the LBWSG relative risk values for the highest risk categories are quite large (up to 700!), the inclusion of the LBWSG risk effects on LRI causes individual-level LRI excess mortality rates to be too large to accurately approximate in our models without a very small timestep, which leads to underestimation of neonatal LRI mortality rates with a timestep on the order of 0.5 days.
+
+    Therefore, we employ the following strategy:
+
+      - Model the LRI SI cause model as described in this document for ages older than late neonatal only, and
+
+      - Include LRI as an **unmodeled** cause that is **affected** by the LBWSG risk factor (see the :ref:`LBSWG risk effects page <2019_risk_effect_lbwsg>` for details). This will allow us to model LRI *CSMR* rather than *EMR* among the neonatal age groups, which is lower in magnitude and therefore less easier to approximate at larger simulation timesteps. Notably, this strategy does not allow us to model years lived with disability due to LRI among the neonatal age groups.
+
+    This strategy allowed us to increase the simulation timestep to 4 days and still meet verification criteria.
 
 Validation Criteria
 -------------------
