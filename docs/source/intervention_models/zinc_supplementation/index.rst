@@ -22,9 +22,17 @@ Zinc Supplementation
 Intervention Overview
 -----------------------
 
-.. todo::
+Zinc is a micronutrient important to child health. Zinc deficiency :ref:`exposure <2019_risk_exposure_zinc_deficiency>` and :ref:`effects <2019_risk_effect_zinc_deficiency>` are described on these respective pages. Zinc deficiency is most often a result of insufficient zinc consumption and can be prevented and addressed via zinc supplementation. Zinc supplementation can take the form of capsules, tablets, drops, syrups, or powders that either contain zinc alone or are packaged with additional micronutrients.
 
-  Add detail to intervention overview... talk about zinc deficiency
+Notably, a recent Cochrane Review found that while zinc had significant positive effects among children older than six months of age, there was insufficient evidence to support the recommendation of zinc supplementation among infants aged zero to six months [Lassi-et-al-2020-zinc-supplementation]_. However, a more recent analysis reported potential important reductions in infant mortality associated with zinc supplementation [Rouhani-et-al-2022]_. Additionally, [Li-et-al-2022]_ published an "umbrella review" of health outcomes associated with zinc supplementation among all ages, including a dose-response analysis.
+
+.. note::
+
+  For the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` we initially modeled the zinc supplementation intervention among all children 0-5 years of age and then updated the model to include only children 6 months to 5 years of age ([Lassi-et-al-2020-zinc-supplementation]_). However, this age restriction update was erroneously applied only to the baseline intervention and not to the intervention scale-up in the alternative scenarios, so we excluded zinc supplementation effects in our results via post-processing instead of the simulation implementation.
+
+  Additionally, it is important to note that :ref:`small quantity lipid-based nutrient supplement <lipid_based_nutrient_supplements>` and formulations may contain zinc and therefore attention should be paid to ensure that effects of zinc supplementation are not double counted when included in the same model as SQ-LNS and other potentially similar interventions. 
+
+  This strategy may want to be revisited if this intervention will be included in future simulation projects!
 
 .. list-table:: Affected Outcomes
   :header-rows: 1
@@ -64,7 +72,7 @@ Baseline Coverage Data
     - Source
     - Note
   * - Ethiopia
-    - Children under five years 
+    - Children 6 to 59 months 
     - 0
     - Optomistic assumption
     - Optomistic assumption chosen to maximize impact of zinc supplementation intervention given that expected impact in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` is small
@@ -78,7 +86,7 @@ Baseline Coverage Data
     - Source
     - Note
   * - Ethiopia
-    - Children under five years with recent episode of diarrhea
+    - Children six to 59 months with recent episode of diarrhea
     - 0.499 (SD=0.143, normal distribution of uncertainty truncated at 0 and 1)
     - Ethiopia DHS 2016
     - Standard deviation calculated based on n=1227
@@ -116,7 +124,7 @@ Vivarium Modeling Strategy
   * - Diarrheal diseases
     - GBD cause
     - 302
-    - Duration/ remission rate
+    - Duration/remission rate
     - Mean difference in duration
     - Converted to a relative risk for remission rate
     - Note this will affect the diarrheal diseases cause model only and other outcomes assoicated with diarrheal disease remission rates/duration such as the wasting transition model, etc.
@@ -226,8 +234,17 @@ Validation and Verification Criteria
 References
 ------------
 
-.. [Tam-et-al-2020]
-  Tam, E., Keats, E. C., Rind, F., Das, J. K., & Bhutta, A. (2020). Micronutrient Supplementation and Fortification Interventions on Health and Development Outcomes among Children Under-Five in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 289. https://doi.org/10.3390/nu12020289
+.. [Lassi-et-al-2020-zinc-supplementation]
+  Lassi ZS, Kurji J, Oliveira CS, Moin A, Bhutta ZA. Zinc supplementation for the promotion of growth and prevention of infections in infants less than six months of age. Cochrane Database Syst Rev. 2020 Apr 8;4(4):CD010205. doi: 10.1002/14651858.CD010205.pub2. 
 
 .. [Lazzerini-and-Wanzira-2016]
   Lazzerini, M., & Wanzira, H. (2016). Oral zinc for treating diarrhoea in children. The Cochrane database of systematic reviews, 12(12), CD005436. https://doi.org/10.1002/14651858.CD005436.pub5
+
+.. [Li-et-al-2022]
+  Li J, Cao D, Huang Y, Chen B, Chen Z, Wang R, Dong Q, Wei Q, Liu L. Zinc Intakes and Health Outcomes: An Umbrella Review. Front Nutr. 2022 Feb 8;9:798078. doi: 10.3389/fnut.2022.798078. 
+
+.. [Rouhani-et-al-2022]
+  Rouhani P, Rezaei Kelishadi M, Saneei P. Effect of zinc supplementation on mortality in under 5-year children: a systematic review and meta-analysis of randomized clinical trials. Eur J Nutr. 2022 Feb;61(1):37-54. doi: 10.1007/s00394-021-02604-1. Epub 2021 Jun 13. 
+
+.. [Tam-et-al-2020]
+  Tam, E., Keats, E. C., Rind, F., Das, J. K., & Bhutta, A. (2020). Micronutrient Supplementation and Fortification Interventions on Health and Development Outcomes among Children Under-Five in Low- and Middle-Income Countries: A Systematic Review and Meta-Analysis. Nutrients, 12(2), 289. https://doi.org/10.3390/nu12020289
