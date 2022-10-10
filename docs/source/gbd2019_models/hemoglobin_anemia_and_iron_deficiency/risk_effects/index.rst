@@ -491,32 +491,78 @@ Assumptions and limitations
 Postpartum depression
 +++++++++++++++++++++++
 
-.. todo::
+**Research background:**
 
-  Complete this section
+Postpartum maternal hemoglobin will affect the odds of experiencing postpartum depression in our simulation. The magnitude of this effect in our simulation will be informed by evidence from [Kang-et-al-2020]_, which found that anemia was significantly associated with an increased risk of maternal depression (pooled OR/RR = 1.53, 95% CI 1.32–1.78). Notably, the hemoglobin threshold for the definition of anemia varied by study included in this meta-analysis, but was most often equal to 11 g/dL, which is the hemoglobin level we will use as the exposure of anemia to determine postpartum depression risk in our simulation. Further, while the set of adjustment variables varied by study in this meta-analysis, all studies adjusted for multiple confounding variables except a single study for which the adjustment variables were “unclear” (p. 91). 
+
+**Modeling strategy:** 
+
+Postpartum hemoglobin level will act as a risk factor for :ref:`postpartum depression <2019_cause_postpartum_depression>`. For the implementation of this risk effect, hemoglobin risk exposure will be defined as **dichotomous** based on a threshold of 110 grams per liter. This risk exposure should be assessed at **two weeks postpartum** (*after* the application of intervention effects related to :ref:`postpartum IV iron <intervention_iv_iron_postpartum>`).
+
+The relative risk for this risk factor will apply to the probability of experiencing an case of postpartum depression at birth such that:
+
+.. math::
+
+  ratio_\text{hgb>110} = ratio_{overall} * (1 - PAF)
+
+  ratio_\text{hgb<=110} = ratio_{overall} * (1 - PAF) * RR
+
+Where,
+
+.. list-table:: Intervention coverage parameter definitions
+  :header-rows: 1
+
+  * - Parameter
+    - Description  
+    - Value
+    - Note
+  * - :math:`ratio_{overall}`
+    - Overall ratio of postpartum depression per birth
+    - Defined on the :ref:`postpartum depression page <2019_cause_postpartum_depression>`
+    - 
+  * - :math:`PAF`
+    - PAF of postpartum depression attributable to hemoglobin
+    - :math:`\frac{RR * p_\text{hgb<=110} + (1 - p_\text{hgb<=110}) - 1}{RR * p_\text{hgb<=110} + (1 - p_\text{hgb<=110})}`
+    - 
+  * - :math:`RR`
+    - Relative risk of maternal hemorrhage incidence for hemoglobin < 110 g/L
+    - 1.53, 95% CI 1.32, 1.78)
+    - Lognormal distribution of uncertainty, [Kang-et-al-2020]_
+  * - :math:`p_\text{hgb<=110}`
+    - Proportion of pregnant women with hemoglobin less than 110 g/L
+    - Needs to be calculated for age-specific draw-level values for modeled locations, similar to those calculated for hemoglobin levels below 70 g/L `as calculated here <https://github.com/ihmeuw/vivarium_research_iv_iron/blob/main/parameter_aggregation/aggregated_hgb_below_70.ipynb>`_
+    - 
 
 Validation and verification criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+- We should continue to meet validation and verification criteria for the :ref:`postpartum depression model <2019_cause_postpartum_depression>`
+
+- The ratio of postpartum depression among those with hemoglobin less than 110 g/L relative to those with hemoglobin greater than 110 g/L should replicate the RR.
+
 Assumptions and limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- We are limited in that the relative risk information on hemoglobin and postpartum depression is available at the dichotomous rather than continuous level.
 
 References
 ----------
 
 .. [GBD-2019-Risk-Factors-Appendix-Hemoglobin-Risk-Effects]
 
-   Pages 178-180 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
+  Pages 178-180 in `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <risk_factors_methods_appendix_>`_:
 
-     **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factor Collaborators. :title:`Global burden of 87 risk factors in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019`. Lancet 2020; 396: 1223-1249. DOI:
-     https://doi.org/10.1016/S0140-6736(20)30752-2
+   **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factor Collaborators. :title:`Global burden of 87 risk factors in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019`. Lancet 2020; 396: 1223-1249. DOI: https://doi.org/10.1016/S0140-6736(20)30752-2
 
 .. _risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
 
+.. [Kang-et-al-2020]
+
+  Kang, S. Y., Kim, H.-B., & Sunwoo, S. (2020). Association between anemia and maternal depression: A systematic review and meta-analysis. Journal of Psychiatric Research, 122, 88–96. https://doi.org/10.1016/j.jpsychires.2020.01.001
 
 .. [Omotayo-et-al-2021]
 
-    Omotayo, M. O., Abioye, A. I., Kuyebi, M., & Eke, A. C. (2021). Prenatal anemia and postpartum hemorrhage risk: A systematic review and meta‐analysis. Journal of Obstetrics and Gynaecology Research, 47(8), 2565–2576. https://doi.org/10.1111/jog.14834
+  Omotayo, M. O., Abioye, A. I., Kuyebi, M., & Eke, A. C. (2021). Prenatal anemia and postpartum hemorrhage risk: A systematic review and meta‐analysis. Journal of Obstetrics and Gynaecology Research, 47(8), 2565–2576. https://doi.org/10.1111/jog.14834
 
 .. [Young-et-al-2019]
 
