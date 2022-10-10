@@ -248,7 +248,7 @@ Ratios of maternal disorder mortality and incidence are defined in the table bel
 
 .. note::
 
-  The duration of the post-maternal disorder state in which maternal disorder YLDs are accrued was set to one week for the IV iron simulation. This state is currently a barrier to increasing the timestep of the maternal IV iron simulation from one week to two weeks.
+  The duration of the post-maternal disorder state in which maternal disorder YLDs are accrued was set to one week for the IV iron simulation. This parameter is currently a barrier to increasing the timestep of the maternal IV iron simulation from one week to two weeks.
 
 The following table defines the parameters used in the calculation of maternal disorder ratios per birth.
 
