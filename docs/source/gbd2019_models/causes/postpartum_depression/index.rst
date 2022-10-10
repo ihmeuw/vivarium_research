@@ -130,7 +130,7 @@ The postpartum depression cause model restrictions are the same as the restricti
 Frequency
 """""""""
 
-Ratios of maternal hemorrhage mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a postpartum depression episode **at the time of birth** in our simulation (see the :ref:`pregnancy model <other_models_pregnancy>` for details).
+This incidence value should represent the probability that a simulant experiences a postpartum depression episode **at the time of birth** in our simulation (see the :ref:`pregnancy model <other_models_pregnancy>` for details).
 
 .. list-table:: Ratio per birth
    :header-rows: 1
