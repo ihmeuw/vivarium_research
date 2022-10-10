@@ -125,6 +125,10 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
     - Postpartum
     - 
 
+.. note::
+
+  The duration of the maternal disorders state for the IV iron simulation was set to one week. This parameter is currently a barrier to extending the maternal IV iron simulation timestep from 1 to 2 weeks.
+
 .. list-table:: State prevalence table
   :widths: 15 15 15
   :header-rows: 1
