@@ -176,7 +176,7 @@ Validation Criteria
 
 - Our simulation should replicate input data for PPD incidence and duration.
 
-- We do not have a validation target for postpartum depression YLDs specifically. However, prevalence should be compared to to values reportd in [Shorey-et-al-2018]_. Additionally, we should compare PPD YLDs per PPD case in our simulation to the implied value from GBD for the major depressive disoders cause. 
+- We do not have a validation target for postpartum depression YLDs specifically. However, prevalence should be compared to to values reported in [Shorey-et-al-2018]_. Additionally, we should compare PPD YLDs per PPD case in our simulation to the implied value from GBD for the major depressive disorders cause. 
 
 References
 ----------
