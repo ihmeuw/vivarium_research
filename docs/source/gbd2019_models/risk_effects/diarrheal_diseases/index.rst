@@ -291,6 +291,8 @@ The age- and sex-specific values for RR_{i3, i2, i1} calculated as described abo
 
    This proposed strategy uses wasting state-specific diarrheal prevalence in the source state for each wasting transition in calculation of the PAF for that wasting transition in order to avoid bias in the PAF estimation by using the exposure in the "at-risk" population for the affected transition.
 
+   **However,** the estimated impact of this strategy is small (`as shown in this notebook <https://github.com/ihmeuw/vivarium_research_ciff_sam/blob/main/wasting_transitions/alibow_vicious_cycle/vicious_cycle_effect_estimation_and_investigation.ipynb>`_), so it was not implemented. The implemented version of diarrheal diseases risk effects in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>` instead used the standard GBD PAFs for wasting on diarrheal diseases.
+
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 

@@ -34,9 +34,9 @@ GBD 2019 Modeling Strategy
 
 Postpartum depression is not specifically estimated by the GBD. Rather, we will inform the prevalence of postpartum depression from a recent review and meta-analysis performed by [Shorey-et-al-2018]_. This review focused on healthy mothers with no prior history of postpartum depression, but found similar results to previous evaluations of postpartum depression prevalence among the broader population. [Shorey-et-al-2018]_ reported that the incidence of postpartum depression was equal to 12% (95% CI 0.04–0.20).
 
-However, the GBD estimated that the average duration of major depressive disorder was 0.65 (95% UI: 0.59, 0.70) of one year (as informed through analysis of longitudinal studies on remission from major depressive disorder and the assumption that 40 years is the maximum duration of the condition), which we will use to inform the duration of postpartum depression in our simulation [GBD-2019-Capstone-Appendix-PPD]_ (page 1013). 
+While the GBD does not model PPD, it does model major depressive disorder. The GBD estimated that the average duration of major depressive disorder was 0.65 (95% UI: 0.59, 0.70) of one year (as informed through analysis of longitudinal studies on remission from major depressive disorder and the assumption that 40 years is the maximum duration of the condition), which we will use to inform the duration of postpartum depression in our simulation [GBD-2019-Capstone-Appendix-PPD]_ (page 1013). 
 
-Additionally, the GBD models severity distributions and associated disability weights for major depressive disorder, summarized in the table below [GBD-2019-Capstone-Appendix-PPD]_ (page 1013). Notably, the GBD defines major depressive disorder (MDD) as an episodic mood disorder involving the experience of one or more major depressive episode(s). Notably, the percent of case severity was determined from the US National Epidemiological Survey on Alchol and Related Conditions (conducted in two waves from 2001-2002 and 2004-2005) and the Australian National Survey of Mental Health and Wellbeing of Adults. Notably, burden due to major depressive disorder in GBD begins in the 1 to 4 year age group.
+Additionally, the GBD models severity distributions and associated disability weights for major depressive disorder, summarized in the table below [GBD-2019-Capstone-Appendix-PPD]_ (page 1013). Notably, the GBD defines major depressive disorder (MDD) as an episodic mood disorder involving the experience of one or more major depressive episode(s). The percent of case severity was determined from the US National Epidemiological Survey on Alchol and Related Conditions (conducted in two waves from 2001-2002 and 2004-2005) and the Australian National Survey of Mental Health and Wellbeing of Adults. Notably, burden due to major depressive disorder in GBD begins in the 1 to 4 year age group.
 
 .. list-table:: Major depressive disorder disability weights
   :header-rows: 1
@@ -76,11 +76,19 @@ Assumptions and Limitations
 
 - We are limited in that we assume all PPD cases persist for the same average duration of a single MDD episode. This is limited in the sense that duration may vary by MDD severity (for example, a longer duration for more severe cases), which could cause our estimation of YLDs to be biased. Additionally, we assume that duration of PPD is equal to the duration of all MDD episodes.
 
+- We assume that the GBD MDD severity distribution, which is based on analysis of high-resource settings, generalizes to the severity of PPD in our simulation population of interest.
+
+.. todo::
+
+  Reach out to the GBD modeler to get a sense of if the asymtomatic sequela for MDD should be applied to PPD, per `Abie's comment here <https://github.com/ihmeuw/vivarium_research/pull/1012#discussion_r990678992>`_
+
 - We assume that the onset of PPD occurs immediately following birth. However, the onset of PPD may peak around two or three months postpartum [Shorey-et-al-2018]_.
 
 .. todo::
 
   Consider adding a delay to PPD episode onset if it is included in a model where this delay may be consequential (PPD impacts on fertility in a model that considers birth intervals, for example).
+
+- We assume that there is no autocorrelation of PPD at the individual level across subsequent pregnancies independent of that introduced through the hemoglobin risk factor for PPD. This is likely not reflective of reality given that experiencing prior depressive episodes is a risk factor for PPD. This should have little impact on our estimates of PPD YLDs among women of reproductive age. However, this may be a limiting assumption if we were to model the impacts of PPD on child health (e.g. first sibling experiences maternal PPD episode at birth *and* at birth of second child).
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -130,7 +138,7 @@ The postpartum depression cause model restrictions are the same as the restricti
 Frequency
 """""""""
 
-Ratios of maternal hemorrhage mortality and incidence are defined in the table below. These values should represent the probability that a simulant experiences a postpartum depression episode **at the two weeks postpartum** (two weeks after the time of birth) in our simulation (see the :ref:`pregnancy model <other_models_pregnancy>` for details).
+This incidence value represent the probability that a simulant experiences a postpartum depression episode **at the two weeks postpartum** (two weeks after the time of birth) in our simulation (see the :ref:`pregnancy model <other_models_pregnancy>` for details). Simulant propensity for determining whether a PPD case occurs should not be fixed and should be independent for each pregnancy.
 
 .. note::
 
@@ -180,7 +188,7 @@ Validation Criteria
 
 - Our simulation should replicate input data for PPD incidence and duration.
 
-- We do not have a validation target for postpartum depression YLDs specifically. However, prevalence should be compared to to values reportd in [Shorey-et-al-2018]_. Additionally, we should compare PPD YLDs per PPD case in our simulation to the implied value from GBD for the major depressive disoders cause. 
+- We do not have a validation target for postpartum depression YLDs specifically. However, prevalence should be compared to to values reported in [Shorey-et-al-2018]_. Additionally, we should compare PPD YLDs per PPD case in our simulation to the implied value from GBD for the major depressive disorders cause. 
 
 References
 ----------
