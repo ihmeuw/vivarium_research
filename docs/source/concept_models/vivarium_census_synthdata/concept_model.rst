@@ -1369,11 +1369,11 @@ W2 and 1099 Forms
 Everyone who has had an employer listed within the current calendar year 
 will receive either a W2 or a 1099 form. For those with multiple jobs during 
 the year, they will be duplicated and receive multiple forms. We currently 
-will not model persistance from year to year on which type of form. 
+will not model persistence from year to year on which type of form. 
 
 
 The rate of the the types of forms are below. This data is 
-from a review of 2016 tax data by [Lim_2019]_ 
+from a review of 2016 tax data by [Lim_2019]_ . 
 
 .. list-table:: Percent W2 versus 1099  
   :widths: 10 10 
@@ -1422,10 +1422,12 @@ These are not currently modeled.
 
 .. list-table:: Simulant Attribute to Sample 
   :widths: 20 20 
-  :header-rows: 0
+  :header-rows: 1
 
-  * - Unique simulant ID (for PRL tracking)
+  * - Simulant Attribute 
     - Notes 
+  * - Unique simulant ID (for PRL tracking)
+    -  
   * - First name
     - 
   * - Middle initial 
@@ -1449,7 +1451,7 @@ These are not currently modeled.
   * - Employer Zip Code 
     - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Joint Filer 
-    - This row through 'dependent filer' are to be included if there is a joint filer ONLY 
+    - This row through 'dependent' are to be included if there is a joint filer ONLY 
   * - First name 
     - 
   * - Middle initial 
@@ -1495,8 +1497,8 @@ limitation and is listed below.
 
 For simulants that receive below the minimum income, 42.14% will 
 still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
-income is based on the household structure and if listed in the table below. 
-We will not model persistance year to year. 
+income is based on the household structure and is listed in the table below. 
+We will not model persistence year to year. 
 
 **In the current model, no one will be low income, this will be changed later.** 
 
@@ -1526,8 +1528,8 @@ for who files taxes:
 - Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately. 
     * The only spouses we will recognize are [Reference person, Opp-sex spouse] and [Reference person, Same-sex spouse]. 
     * The reference person will submit the form, the spouse will be listed as the joint filer. 
-    * There does not need to be persistance in who files jointly, it can be re-randomly drawn each year. 
-- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file independent of others in the household) 
+    * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
+- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
 - If the reference person in the household is employed and filing taxes, they will claim all in the house that qualify as a dependent based on these rules: 
     * Do not claim a "housemate/roommate" or "other nonrelative" as a dependent 
     * The dependent must have lived with the reference person for greater than 1 year 
