@@ -245,7 +245,7 @@ initial population:
     df_population = pd.concat([household(i, hh_id) for i, hh_id in enumerate(resampled_households)])
 
 Note that this approach will not initialize any simulants living in
-Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>`) below for details on
+Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>` below for details on
 how we will address this.
     
 In the code above, there is a location string filter which we can use
@@ -271,11 +271,6 @@ Here is a small example of what the code in this section will load from ACS:
 +---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
 | 801484  | 2             | 12703 | 82   | 20        | 1    | 1         | FL        | 12          |
 +---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-
-The fertility model and migration model will also add new simulants,
-who will need their attributes initialized carefully; I will put
-additional detail about how to do this in the fertility and migration
-sections of the documentation.
 
 The relationship field will be relevant to Last Name generation, and
 for easy reference, here are the meanings of the relationship codes
@@ -338,6 +333,9 @@ M by sampling households until we have exceeded M, and then remove
 the last household. The largest household size in ACS is 17, so the number
 of simulants initialized in households will underestimate M by 1-16.
 
+We perturb the PUMA and age attributes of the sampled households, as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
+
 .. _census_prl_gq_init:
 
 Initializing people living in group quarters
@@ -358,6 +356,9 @@ distribution from ACS.  It does not identify *which* group quarters
 the individual resides in, however, and only provides information on
 whether it is Institutional or Non-institutional GQ (in the TYPE
 variable: 2 = Institutional; 3 = Non-institutional).
+
+We perturb the PUMA and age attributes of the sampled GQ people, as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
 
 The final step for initializing GQ simulants is to give each
 a (somewhat inappropriately named) household_id.  Eventually we shall
@@ -615,7 +616,7 @@ This means that group quarters people should only enter the US in a "household" 
 they will never immigrate into an existing residential household.
 
 The number of simulants who move to the US each year is informed by the ACS' "residence one year ago" question.
-Specifically, a value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
+A value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
 while any other value indicates that they lived within the US.
 We refer to respondents who were not living in the United States one year ago as "recent immigrants."
 Our assumption is that the number (and characteristics) of recent immigrants per year
@@ -643,37 +644,18 @@ At each time step:
 #. ACS PUMS recent immigrants living in residential households where the reference person is not a recent immigrant are sampled using person weights.
    This sampling continues with replacement until the desired number of simulants added in non-reference-person moves is reached.
 
+We perturb the PUMA and age attributes of the sampled household (in the case of a household move)
+or person (in the case of a non-reference-person move), as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
+
 Added residential households are assigned a new household ID and a new address, as is done at population initialization.
 Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
 their institutional/non-institutional status, as well as the corresponding shared address, as is done at population initialization.
 
-Additionally, we perturb the PUMA attribute of the sampled person (in the case of a non-reference-person move) or household (in the case of a household move).
-This is intended to ensure a non-zero probability of immigration into all PUMAs,
-and to lower the chances of very similar simulants being sampled from the same ACS person/household.
-The perturbation process is as follows:
-**10%** of the time, replace the sampled person/household's PUMA with a PUMA selected at random according to the
-probabilities in the appropriate file below.
-(In the case of a household, all simulants in that household are assigned the same replacement PUMA.)
-In the case of an individual, only PUMAs with an existing non-GQ household in the simulation should be selected.
-The number **10%** should be considered a placeholder and will likely change in the future.
-
-These probabilities were created by first calculating the (weighted) proportions of immigrants corresponding to the move type
-in the 2016-2020 PUMS file.
-Then, all values below the 2.5th percentile (including values of 0) were increased to
-the 2.5th percentile value, and the proportions were re-normalized.
-
-:download:`PUMA probabilities for perturbation of households added in household moves <household_moves_puma_distribution.csv>`
-
-:download:`PUMA probabilities for perturbation of simulants added in non-reference-person moves <non_reference_person_moves_puma_distribution.csv>`
-
-.. note::
-
-    The values in each file were normalized to sum to 1 across the entire United States.
-    If simulating a subset of the US, it is necessary to re-normalize the values in that subset
-    before it is appropriate to interpret them as probabilities.
-
 Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
-If there is no such household in the simulation, their PUMA is perturbed using the process described above, and then they are matched in the new PUMA.
+If there is no such household in the simulation, their PUMA is perturbed using the PUMA replacement process described in the
+:ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
+Then, they are matched in the new PUMA.
 The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
@@ -1496,6 +1478,63 @@ now, we will have a special employer called "Military" and for
 simulants living in military group quarters we will set their employer
 to Military, and ensure that their address and zip code match their
 employer_address and employer_zipcode.
+
+.. _census_prl_perturbation:
+
+2.3.16 Perturbation
+~~~~~~~~~~~~~~~~~~~
+
+When we sample from the ACS PUMS to generate new simulants, we are using the
+empirical joint distribution of all attributes derived from ACS
+variables.
+This allows us to replicate correlations of arbitrary complexity, but also
+causes us to over-fit to sampling variation in the ACS PUMS, which would not
+be present in the full population.
+For example, just because there are no individuals in the ACS PUMS with a
+particular combination of demographic attributes, that does not mean we would
+expect to find 0 such people in the entire US.
+For PRL it is particularly important not to generate simulants that are more similar
+to one another than would be expected in a real population, which
+would make matching unrealistically difficult.
+
+To decrease similarity without assuming total independence between attributes,
+we perturb values at sampling time.
+Specifically, we perturb the age and PUMA columns.
+These are the columns with many possible values, where sampling noise is
+likely to be a significant concern even at the substantial sample size (>15 million)
+of the ACS PUMS.
+
+In different components of the simulation, we sample different entity types from the PUMS:
+households, group quarters people, or non-GQ people (individuals living in households).
+The perturbation process is similar no matter the entity type being sampled.
+
+To perturb PUMA, **50% of the time,** we replace the PUMA with a sample from
+an unconditional PUMA distribution; in other words, we use the PUMA value of
+a second independently sampled entity.
+If we are sampling from a subset of the ACS PUMS, for example recent immigrants
+consistent with a non-reference-person move, **80% of the perturbations**
+(40% of all entities sampled, including those without perturbed PUMA)
+sample a replacement PUMA value from the same subset.
+The remaining **20%** (10% of all entities sampled, including those without perturbed PUMA)
+receive a replacement PUMA value sampled from the entire ACS PUMS data.
+(If the primary sampling is already using the entire ACS PUMS, all
+replacement PUMA values are also sampled from the full dataset.)
+This PUMA sampling uses the same entity type, and the same weights, as the primary sampling.
+All simulants in a single sampled household should receive the same replacement PUMA value.
+
+To perturb age, we generate an age shift for each entity sampled.
+This is a random draw from a normal distribution with mean 0 and standard deviation
+10 years.
+This age shift is added to the simulant's age (if sampling individuals) or to the
+ages of all simulants in the household (if sampling households).
+Using a single age shift for an entire household helps prevent illogical combinations of
+age and relationship.
+Finally, all age values are clipped so that they are between 0 and 125 years, inclusive.
+
+We perform these perturbations when initializing the population, and when sampling simulants
+for addition from international immigration.
+Simulants added by the fertility model do not have their attributes perturbed, as they are
+not sampled from the ACS PUMS.
 
 .. _census_prl_limitations:
 
