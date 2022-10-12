@@ -1579,6 +1579,11 @@ Specifically:
 
 As in population initialization, if creating a new household, the entire household is assigned the replacement PUMA value.
 
+By including the 20% probability of sampling from the full dataset, we ensure that immigration may
+occur in any PUMA, even if no ACS respondents were recent immigrants to that PUMA.
+Additionally, we rely less on the age, sex, race/ethnicity, etc joint distribution of recent immigrants specific to the PUMA
+in PUMAs where immigration is rarer (and we likely have smaller sample size to inform this distribution).
+
 Age
 ^^^
 
