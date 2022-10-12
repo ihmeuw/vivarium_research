@@ -1508,33 +1508,116 @@ In different components of the simulation, we sample different entity types from
 households, group quarters people, or non-GQ people (individuals living in households).
 The perturbation process is similar no matter the entity type being sampled.
 
-To perturb PUMA, **50% of the time,** we replace the PUMA with a sample from
-an unconditional PUMA distribution; in other words, we use the PUMA value of
-a second independently sampled entity.
-If we are sampling from a subset of the ACS PUMS, for example recent immigrants
-consistent with a non-reference-person move, **80% of the perturbations**
-(40% of all entities sampled, including those without perturbed PUMA)
-sample a replacement PUMA value from the same subset.
-The remaining **20%** (10% of all entities sampled, including those without perturbed PUMA)
-receive a replacement PUMA value sampled from the entire ACS PUMS data.
-(If the primary sampling is already using the entire ACS PUMS, all
-replacement PUMA values are also sampled from the full dataset.)
-This PUMA sampling uses the same entity type, and the same weights, as the primary sampling.
-All simulants in a single sampled household should receive the same replacement PUMA value.
+All perturbation is performed completely at random; perturbation probabilities are constant
+across age, sex, race/ethnicity, etc.
 
-To perturb age, we generate an age shift for each entity sampled.
-This is a random draw from a normal distribution with mean 0 and standard deviation
-10 years.
-This age shift is added to the simulant's age (if sampling individuals) or to the
-ages of all simulants in the household (if sampling households).
-Using a single age shift for an entire household helps prevent illogical combinations of
-age and relationship.
-Finally, all age values are clipped so that they are between 0 and 125 years, inclusive.
+PUMA
+^^^^
 
-We perform these perturbations when initializing the population, and when sampling simulants
-for addition from international immigration.
-Simulants added by the fertility model do not have their attributes perturbed, as they are
-not sampled from the ACS PUMS.
+.. note::
+
+  For the purposes of this section, "PUMA" refers to the unique geographic area.
+  However, the "PUMA" column in the ACS data contains a PUMA code, which is only unique
+  **in combination with state.**
+  Since the simulation stores the PUMA code and state (which together identify the PUMA) separately,
+  "PUMA" in this section refers to the combination of both.
+
+**50% of the time,** we replace the PUMA with the PUMA value of
+another row in the data.
+How we select this replacement value depends on what we are currently sampling.
+
+Population initialization
+'''''''''''''''''''''''''
+
+When sampling households or GQ people from the entire ACS dataset for population initialization,
+all replacement values should be sampled from the same full ACS dataset, using the appropriate weights.
+
+For example, imagine we have just sampled a GQ person (Row A) to initialize as a new simulant, and this row
+was randomly determined (according to the 50% probability) to have a perturbed PUMA.
+Because Row A was selected for PUMA perturbation, we do not use Row A's PUMA value.
+Instead, we sample another GQ person (Row B) from the full ACS dataset, using person weighting.
+We assign Row B's PUMA value to the new simulant, which is now a combination of Row A's other attributes
+with Row B's PUMA.
+
+If initializing a household, the process works similarly, except that Row A and Row B are households (not individuals),
+and Row B is sampled using household weights.
+All simulants in the new household are assigned Row B's PUMA value.
+
+International immigration
+'''''''''''''''''''''''''
+
+When sampling for immigration, there are three cases:
+
+#. We are sampling households to add in household moves.
+#. We are sampling GQ people to add in GQ person moves.
+#. We are sampling people in non-GQ households to add in non-reference-person moves.
+
+The details of the initial sampling are described in the immigration component documentation;
+here, we only consider how to perturb the PUMA values of an already-sampled entity (Row A),
+which has already been selected according to the 50% probability to have a perturbed
+PUMA.
+
+**80% of the time** (this probability is constant) we sample a new PUMA value from the same "immigration subset"
+of the same entity type in the ACS PUMS data.
+Specifically:
+
+#. If performing a household move, we sample the PUMA of another household with a recent
+   immigrant reference person, using household weights.
+#. If performing a GQ person move, we sample the PUMA of another GQ person who is a recent
+   immigrant, using person weights.
+#. If performing a non-reference-person move, we sample the PUMA of another non-GQ person
+   who is a recent immigrant and resides in a household where the reference person is not a
+   recent immigrant, using person weights.
+
+**The remaining 20% of the time**, we sample a new PUMA value from the same entity type, but without
+regard to immigration characteristics.
+Specifically:
+
+#. If performing a household move, we sample the PUMA of any household in the full ACS data, using household weights.
+#. If performing a GQ person move, we sample the PUMA of any GQ person in the full ACS data, using person weights.
+#. If performing a non-reference-person move, we sample the PUMA of any non-GQ person in the full ACS data, using person weights.
+
+As in population initialization, if creating a new household, the entire household is assigned the replacement PUMA value.
+
+Age
+^^^
+
+Households
+''''''''''
+
+After sampling a household to add to the simulation, whether at population initialization or
+from international immigration in a household move, the following steps are **always** performed.
+
+#. An age shift is generated by taking a random draw from a normal distribution with mean 0
+   and standard deviation 10 years.
+#. The age shift is added to the age values of all individuals in the household.
+#. If any age values in the household exceed 125 years, they are set to 125 years.
+#. Any individuals with negative age values are removed from the household.
+
+Using a single age shift for a household makes it more likely that the age/relationship combinations
+are logical.
+
+Individuals (GQ or non-GQ)
+''''''''''''''''''''''''''
+
+We sample GQ individuals at population initialization.
+Additionally, individual GQ simulants can be added by international immigration in GQ person moves,
+and individual non-GQ simulants can be added in non-reference-person moves.
+In all these cases, the following steps are **always** performed after sampling an individual:
+
+#. An age shift is generated by taking a random draw from a truncated normal distribution with
+   mean 0, standard deviation 10 years, and truncation such that the age shift cannot be less than
+   or equal to -1 times the individual's age.
+   Equivalently, this can be thought of as repeating draws from a normal distribution until the first
+   draw that is greater than this lower bound.
+#. The age shift is added to the individual's age value. This should never result in a negative value,
+   due to the truncated distribution described in the previous step.
+#. If the individual's age value is greater than 125 years, it is set to 125 years.
+
+We do not consider relationship to reference person (for non-GQ people), GQ type (for GQ people),
+or initially sampled age when determining the age shift.
+This may lead to some strange combinations, but these will occur with some frequency anyway due to
+our methods for initializing GQ type, as well as for assigning household IDs in non-reference-person moves.
 
 .. _census_prl_limitations:
 
