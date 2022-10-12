@@ -72,7 +72,15 @@ RRs were reported per 5 kg/m\ :sup:`2`\  increase in BMI above the TMREL value
 
 :math:`\text{RR(x)} = {\text{RR}_0}^{\frac{\max\left((x-\text{TMREL}), 0\right)}{\text{5 kg/m2}}}`
 
-Where RR(x) is the RR at exposure level x and RR\ :sub:`0`\  is the increase in RR for each 5 kg/m\ :sup:`2`\ above the TMREL. We used DisMod-MR 2.1 to pool effect sizes from included studies and generate a dose-response curve for each of the outcomes associated with high SBP. The tool enabled us to incorporate random effects across studies and include data with different age ranges. RRs were used universally for all countries and the meta-regression only helped to pool the three major sources and produce RRs with uncertainty and covariance across ages taking into account the uncertainty of the data points. 
+Where RR(x) is the RR at exposure level x and RR\ :sub:`0`\  is the 
+increase in RR for each 5 kg/m\ :sup:`2`\ above the TMREL. GBD used 
+DisMod-MR 2.1 to pool effect sizes from included studies and generate 
+a dose-response curve for each of the outcomes associated with high SBP. 
+The tool enabled GBD to incorporate random effects across studies and 
+include data with different age ranges. RRs were used universally for 
+all countries and the meta-regression only helped to pool the three 
+major sources and produce RRs with uncertainty and covariance across 
+ages taking into account the uncertainty of the data points. 
 
 Theoretical minimum-risk exposure level
 +++++++++++++++++++++++++++++++++++++++
@@ -284,6 +292,14 @@ Assumptions and Limitations
 +++++++++++++++++++++++++++
 
 The quantity of interest is exposure to the mean BMI level; we assume full reversibility of risk and do not account for duration of exposure to BMI values above the range of the TMREL. 
+
+For this project, we are not including the mediation between BMI 
+and SBP/LDL-C. In the current model, we do not include any interventions 
+that affect both BMI and SBP/LDL-C simultaneously. Therefore, 
+modeling the effects separately should capture the needed 
+information. However, this limits the future scenarios we can run, 
+and any additional scenarios should be assessed to see if mediation 
+would be needed. 
 
 
 Validation Criteria
