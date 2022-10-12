@@ -1358,11 +1358,16 @@ W2 and 1099 Forms
   * - DOB 
   * - Mailing Address 
   * - Social Security Number 
-  * - Income 
+  * - Earnings (income from this job)
   * - Employer ID 
+  * - Employer Name 
   * - Employer Address 
   * - Employer Zip Code 
   * - Type of Tax Form (W2 or 1099)
+
+For this observer, a new row should be made for each **employment**, not 
+each simulant. This means that a simulant can have multiple rows of 
+data, or just one row of data. 
 
 **Who to Sample** 
 
@@ -1443,13 +1448,15 @@ These are not currently modeled.
   * - Social Security Number 
     -
   * - Income 
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer ID
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Zip Code 
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Joint Filer 
     - This row through 'dependent' are to be included if there is a joint filer ONLY 
   * - First name 
@@ -1467,15 +1474,17 @@ These are not currently modeled.
   * - Social Security Number 
     -
   * - Income 
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer ID
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Zip Code 
-    - Can have multiple rows if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Dependent
-    - This row through the end are to be included for each dependent on the tax filing 
+    - This columns through the end are to be included for each dependent on the tax filing 
   * - First name 
     - 
   * - Middle initial 
@@ -1484,10 +1493,30 @@ These are not currently modeled.
     - 
   * - Age 
     -  
+  * - Social Security Number 
+    -
 
+For this observer, we will have one row for each tax form filed. This 
+can be a bit complicated, so here are some examples: 
+
+- A single adult will have 1 row, regardless of the number of jobs they had 
+- Joint filers (a married couple) will have 1 row, regardless of the number of jobs 
+- A married couple with unemployed children will have 1 row for the whole family 
+- A married couple with an employed child might have 2 rows: one for the parents and child as a dependent, and a second for the child as an individual filing their own taxes 
+
+.. todo::
+
+    Define a maximum number of dependents that a simulant can have 
 
 
 **Who to Sample** 
+
+.. todo::
+
+    Need to allow dependents (and possibly joint filing) with people outside the household. Key cases are college students, divorced parents, etc. 
+
+    Also need to address complex family structures 
+
 
 Not everyone who receives a W2 or 1099 will end up filing taxes. 
 However, those who do not are concentrated in low incomes for whom 
@@ -1530,11 +1559,13 @@ for who files taxes:
     * The reference person will submit the form, the spouse will be listed as the joint filer. 
     * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
 - All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
-- If the reference person in the household is employed and filing taxes, they will claim all in the house that qualify as a dependent based on these rules: 
-    * Do not claim a "housemate/roommate" or "other nonrelative" as a dependent 
-    * The dependent must have lived with the reference person for greater than 1 year 
+- All simulants eligible to be dependents will be assigned to a relative within the household 
+    * If there someone listed as the dependent's parents and they are filing taxes, they will be assigned to their parent 
+    * If there is not a parent, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
+- A simulant eligble to be a dependent must: 
+    * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
+    * The dependent must have lived with the claiming adult for greater than 1 year 
     * The dependent's income must be below $4300 
-- If the reference person is unemployed or not filing taxes (low income), the relative (not housemate or other non-relative) who is the highest earner in the household will claim dependents based on the same rules. If there are no relatives filing taxes in the household, no one will claim dependents. **For now when incomes are all the same, randomly assign to any relative earner**
 
 **Data Errors/Noise** 
 In the future, we will add a noise function designed to replicate 
