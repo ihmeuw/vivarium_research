@@ -1321,9 +1321,9 @@ These are not currently modeled.
 
 The ACS will be used for V&V testing. It is defined as: 
 
-- Sample rate of (12,000 / 350 million)% 
+- Sample rate of 12,000 households nationwide  
 - Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly) for 12 time steps 
+- Sample at each time step (approximates monthly)
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
@@ -1336,9 +1336,9 @@ added here.
 
 To create this survey: 
 
-- Sample rate of (60,000 / 350 million)% 
+- Sample rate of 60,000 households nationwide 
 - Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly) for 12 time steps 
+- Sample at each time step (approximates monthly)  
 - **Not** longitudinal (independent samples) 
 - This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
 
