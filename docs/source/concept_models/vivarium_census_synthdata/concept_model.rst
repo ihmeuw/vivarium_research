@@ -1376,7 +1376,7 @@ data, or just one row of data.
 
 Here is an example: 
 
-.. image:: W2_example.png
+.. image:: W2_example.PNG
 
 **Who to Sample** 
 
@@ -1531,7 +1531,7 @@ can be a bit complicated, so here are some examples:
 Here is a photo showing how this might look. Note that the three tables 
 are just 2 really long rows for two simulants. 
 
-.. image:: 1044_example.png
+.. image:: 1044_example.PNG
 
 .. todo::
 
