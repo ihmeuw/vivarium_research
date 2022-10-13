@@ -1358,16 +1358,25 @@ W2 and 1099 Forms
   * - DOB 
   * - Mailing Address 
   * - Social Security Number 
-  * - Earnings (income from this job)
+  * - Wages (income from this job)
   * - Employer ID 
   * - Employer Name 
   * - Employer Address 
   * - Employer Zip Code 
   * - Type of Tax Form (W2 or 1099)
 
+If a simulant does not have a social security number but is 
+employed, please fill in the SSN column with a random number. 
+This is designed to reflect undocumented immigrants who might 
+use fake or no longer valid SSNs to obtain employment. 
+
 For this observer, a new row should be made for each **employment**, not 
 each simulant. This means that a simulant can have multiple rows of 
 data, or just one row of data. 
+
+Here is an example: 
+
+.. image:: W2_example.png
 
 **Who to Sample** 
 
@@ -1445,7 +1454,7 @@ These are not currently modeled.
     -  
   * - Mailing Address
     -  
-  * - Social Security Number 
+  * - Social Security Number or ITIN
     -
   * - Income 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -1456,6 +1465,8 @@ These are not currently modeled.
   * - Employer Address 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Zip Code 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Joint Filer 
     - This row through 'dependent' are to be included if there is a joint filer ONLY 
@@ -1471,7 +1482,7 @@ These are not currently modeled.
     -  
   * - Mailing Address
     -  
-  * - Social Security Number 
+  * - Social Security Number or ITIN
     -
   * - Income 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -1483,6 +1494,8 @@ These are not currently modeled.
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Zip Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Type of tax form (W2 or 1099)
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Dependent
     - This columns through the end are to be included for each dependent on the tax filing 
   * - First name 
@@ -1493,8 +1506,19 @@ These are not currently modeled.
     - 
   * - Age 
     -  
-  * - Social Security Number 
+  * - Social Security Number or ITIN
     -
+
+If a simulant does not have a SSN but is filing taxes, please 
+include an Individual Taxpayer Identification Number (ITIN) instead. 
+This is a 9 digit number that starts with 
+a 9. It can be randomly generated. This applies for all types of 
+filers (primary, joint, dependents). Do **NOT** include the fake 
+SSN from the employer tax forms. 
+
+This is designed to reflect undocumented immigrants, who primarily 
+file taxes under the ITIN system. 
+
 
 For this observer, we will have one row for each tax form filed. This 
 can be a bit complicated, so here are some examples: 
@@ -1503,6 +1527,11 @@ can be a bit complicated, so here are some examples:
 - Joint filers (a married couple) will have 1 row, regardless of the number of jobs 
 - A married couple with unemployed children will have 1 row for the whole family 
 - A married couple with an employed child might have 2 rows: one for the parents and child as a dependent, and a second for the child as an individual filing their own taxes 
+
+Here is a photo showing how this might look. Note that the three tables 
+are just 2 really long rows for two simulants. 
+
+.. image:: 1044_example.png
 
 .. todo::
 
