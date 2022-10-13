@@ -1328,15 +1328,36 @@ These are not currently modeled.
 #. The ACS data is for a survey that has an unusually high response rate. This data was used as it could give an estimate for mail only or mail and telephone only data. However, this has limitations. Other surveys might have lower response rates and should be handled separately. 
 #. By replicating the census omission rate for the ACS observer, we are limiting the non-response rate below what we might expect. This will lead to overcounting in the ACS. 
 
-**Initial Survey - American Community Survey** 
+**Initial Survey - American Community Survey (ACS)** 
 
 The ACS will be used for V&V testing. It is defined as: 
 
-- Sample rate of (12,000 / 350 million)% 
+- Sample rate of 12,000 households nationwide  
 - Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly) for 12 time steps 
+- Sample at each time step (approximates monthly)
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
+
+**Survey - Current Population Survey (CPS)** 
+
+The CPS is a survey run by the Census Bureau and gathers data about the 
+labor force, employment and unemployment, demographics, earnings, and 
+more information. It is an important survey and therefore is being 
+added here. 
+
+To create this survey: 
+
+- Sample rate of 60,000 households nationwide 
+- Sample will be stratified by state to ensure an even distribution 
+- Sample at each time step (approximates monthly)  
+- **Not** longitudinal (independent samples) 
+- This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
+
+[Household_Rates_2022]_
+
+Note/limitations: 
+
+- Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
 
 
 For inspiration, here is the list of files that Census Bureau
@@ -1524,5 +1545,7 @@ To Come (TK)
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
 
 .. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
+
+.. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
