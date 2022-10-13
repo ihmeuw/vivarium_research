@@ -848,7 +848,9 @@ North Carolina, filename VR_Snapshot_20220101.txt; see
 2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
 for computation details.)
 
-
+For now, assign all simulants within the same household the same last name. 
+This is an oversimplification as some might not be related, but will work 
+for the simple model. 
 	
 **First and middle names**
 
@@ -902,6 +904,15 @@ of soundex of first name and soundex of last name; and then use the
 sources described above to create conditional samplers for first name
 and last name based on soundex.  Perhaps measure of success is to look
 at entropy of character n-gram distribution.
+
+To simulate naming after a parent or family member, have 5% of children 
+born in the simulation be named after a parent that matches their 
+gender. If there is not a parent that matches their gender, or that 
+parent is not tracked, they will have the name from another relative 
+in the household that matches their gender. If this is also not 
+available, then they can be randomly assigned a different name. This 
+applies to first names only. 
+
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 names; we can also look at the
