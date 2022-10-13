@@ -848,9 +848,13 @@ North Carolina, filename VR_Snapshot_20220101.txt; see
 2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
 for computation details.)
 
-For now, assign all simulants within the same household the same last name. 
-This is an oversimplification as some might not be related, but will work 
-for the simple model. 
+For now, assign all simulants within the same household who are 
+relatives of the reference person with have the same last name. 
+This excludes "roommate/housemate" and "other nonrelative" to the 
+reference person. This is an oversimplification as some might have 
+different last names, but works for the initial model. 
+
+This will not be applied to anyone in a group quarter. 
 	
 **First and middle names**
 
@@ -905,13 +909,28 @@ sources described above to create conditional samplers for first name
 and last name based on soundex.  Perhaps measure of success is to look
 at entropy of character n-gram distribution.
 
-To simulate naming after a parent or family member, have 5% of children 
-born in the simulation be named after a relative that matches their 
-sex. To do this: 
+To simulate naming after a parent or family member, we would like 5% of 
+children to have the same name as a parent. This can be separated into two 
+groups: 
 
-#. If there is a tracked parent of the same sex, assign the same first name 
-#. If there is a relative of the same sex, assign the same first name. Note that this might be a relative of the reference person (i.e., a male child has a tracked mother, but that tracked mother has a tracked father) 
+**People born in the simulation**
+
+For 5% of simulants, they will be assigned a name based on these steps: 
+
+#. Female simulants will have the same last name as their mother (who is known) 
+#. Male simulants, if the mother is the reference person and has an opposite-sex spouse, they will receive that name 
+#. Otherwise, if the mother has a male relative known in the simulation (either the mother is the reference person or is related to the reference person), they will be assigned a males relative's name. The relative can be selected at random. 
 #. If none of these are available, assign a random name 
+
+**People initialized in the simulation**
+
+For 5% of simulants, they will be assigned a name based on these steps: 
+
+#. For anyone who has a parent of the same sex known in the simulation (this means: ["reference person", "biological child"], ["reference person", "adopted child"], ["reference person", "parent"]) they have a 5% chance of having the same name as that parent 
+#. Note that for same sex couples, whoever is the reference person will pass their name instead of their spouse 
+#. For anyone with a parent of the opposite sex known in the simulation (same pairings), if that parent has a spouse in the simulation of the child's sex (["reference person", "opposite sex spouse"]), they will receive the same name of the spouse 
+#. For anyone else, if their parent has a relative of the correct sex in the simulation (either the parent is the reference person or is related to the reference person), they will receive a relative's name. If there multiple relative's at random 
+#. For anyone without a parent or with a parent/relatives of the wrong sex, they will be assigned a random name 
 
 
 **Verification and validation strategy**: to verify this approach, we
