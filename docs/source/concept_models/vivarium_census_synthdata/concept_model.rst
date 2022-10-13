@@ -906,12 +906,12 @@ and last name based on soundex.  Perhaps measure of success is to look
 at entropy of character n-gram distribution.
 
 To simulate naming after a parent or family member, have 5% of children 
-born in the simulation be named after a parent that matches their 
-gender. If there is not a parent that matches their gender, or that 
-parent is not tracked, they will have the name from another relative 
-in the household that matches their gender. If this is also not 
-available, then they can be randomly assigned a different name. This 
-applies to first names only. 
+born in the simulation be named after a relative that matches their 
+sex. To do this: 
+
+#. If there is a tracked parent of the same sex, assign the same first name 
+#. If there is a relative of the same sex, assign the same first name. Note that this might be a relative of the reference person (i.e., a male child has a tracked mother, but that tracked mother has a tracked father) 
+#. If none of these are available, assign a random name 
 
 
 **Verification and validation strategy**: to verify this approach, we
