@@ -1366,9 +1366,12 @@ W2 and 1099 Forms
   * - Type of Tax Form (W2 or 1099)
 
 If a simulant does not have a social security number but is 
-employed, please fill in the SSN column with a random number. 
-This is designed to reflect undocumented immigrants who might 
-use fake or no longer valid SSNs to obtain employment. 
+employed, they will need this number to be filled in. If there 
+is a person in their household who has a SSN, use this number 
+instead. If there is not a person in their household with a SSN 
+then fill in a random number. This is designed to reflect 
+undocumented immigrants who might use fake or no longer 
+valid SSNs to obtain employment. 
 
 For this observer, a new row should be made for each **employment**, not 
 each simulant. This means that a simulant can have multiple rows of 
@@ -1516,6 +1519,10 @@ a 9. It can be randomly generated. This applies for all types of
 filers (primary, joint, dependents). Do **NOT** include the fake 
 SSN from the employer tax forms. 
 
+We do need to track the ITIN over time for simulants. But we do not want 
+to assign a ITIN on initialization, only on time steps when needed for tax 
+documents. 
+
 This is designed to reflect undocumented immigrants, who primarily 
 file taxes under the ITIN system. 
 
@@ -1593,8 +1600,11 @@ for who files taxes:
     * If there is not a parent, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
 - A simulant eligble to be a dependent must: 
     * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
-    * The dependent must have lived with the claiming adult for greater than 1 year 
     * The dependent's income must be below $4300 
+- For simulants outside of the household, they will be claimed as a dependent by their parent until age 19 OR age 24 if they are in group quarters for college 
+    * For simulants born in the simulation, they should have at least one parent tracked 
+    * For simulants not born in the simulantion, information on initializing parents is being added shortly 
+
 
 **Data Errors/Noise** 
 In the future, we will add a noise function designed to replicate 
