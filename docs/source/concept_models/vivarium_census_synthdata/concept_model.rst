@@ -831,7 +831,9 @@ North Carolina, filename VR_Snapshot_20220101.txt; see
 2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
 for computation details.)
 
-
+For now, assign all simulants within the same household the same last name. 
+This is an oversimplification as some might not be related, but will work 
+for the simple model. 
 	
 **First and middle names**
 
@@ -885,6 +887,15 @@ of soundex of first name and soundex of last name; and then use the
 sources described above to create conditional samplers for first name
 and last name based on soundex.  Perhaps measure of success is to look
 at entropy of character n-gram distribution.
+
+To simulate naming after a parent or family member, have 5% of children 
+born in the simulation be named after a relative that matches their 
+sex. To do this: 
+
+#. If there is a tracked parent of the same sex, assign the same first name 
+#. If there is a relative of the same sex, assign the same first name. Note that this might be a relative of the reference person (i.e., a male child has a tracked mother, but that tracked mother has a tracked father) 
+#. If none of these are available, assign a random name 
+
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 names; we can also look at the
@@ -1300,15 +1311,36 @@ These are not currently modeled.
 #. The ACS data is for a survey that has an unusually high response rate. This data was used as it could give an estimate for mail only or mail and telephone only data. However, this has limitations. Other surveys might have lower response rates and should be handled separately. 
 #. By replicating the census omission rate for the ACS observer, we are limiting the non-response rate below what we might expect. This will lead to overcounting in the ACS. 
 
-**Initial Survey - American Community Survey** 
+**Initial Survey - American Community Survey (ACS)** 
 
 The ACS will be used for V&V testing. It is defined as: 
 
-- Sample rate of (12,000 / 350 million)% 
+- Sample rate of 12,000 households nationwide  
 - Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly) for 12 time steps 
+- Sample at each time step (approximates monthly)
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
+
+**Survey - Current Population Survey (CPS)** 
+
+The CPS is a survey run by the Census Bureau and gathers data about the 
+labor force, employment and unemployment, demographics, earnings, and 
+more information. It is an important survey and therefore is being 
+added here. 
+
+To create this survey: 
+
+- Sample rate of 60,000 households nationwide 
+- Sample will be stratified by state to ensure an even distribution 
+- Sample at each time step (approximates monthly)  
+- **Not** longitudinal (independent samples) 
+- This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
+
+[Household_Rates_2022]_
+
+Note/limitations: 
+
+- Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
 
 
 For inspiration, here is the list of files that Census Bureau
@@ -1641,5 +1673,7 @@ To Come (TK)
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
 
 .. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
+
+.. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
