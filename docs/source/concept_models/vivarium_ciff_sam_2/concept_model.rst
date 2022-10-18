@@ -378,10 +378,6 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
     * Update outputs and stratification to match tables above
 
-    * Update stratification by MAM and SAM treatment to include :code:`uncovered`/:code:`effectively_covered`/:code:`ineffectively_covered` from current stratification of :code:`covered`/:code:`uncovered`. 
-
-      Note that :code:`effectively_covered` will represent those who are covered by :math:`C_{MAM}`/:math:`C_{SAM}` parameters **and** :math:`E_{MAM}`/:math:`E_{SAM}` parameters. :code:`ineffectively_covered` will represent those who are covered by :math:`C_{MAM}`/:math:`C_{SAM}` parameters, but **not** :math:`E_{MAM}`/:math:`E_{SAM}` parameters. Currently, the :code:`covered` category contains both of these groups.
-
   1c. Model specification changes
 
     * Update simulation timestep from 0.5 days to 4 days
