@@ -314,10 +314,17 @@ The relative risk for heart failure is per 1-unit increase in BMI.
 The relative risks are then adjusted to account for mediation through FPG. 
 To find the new relative risk, this equation can be used: 
 
-RR_adjusted = (1 - 0.4018318) * (RR_unadjusted - 1) + 1
+RR_adjusted = (1 - MF) * (RR_unadjusted - 1) + 1
 
 where the RR_unadjusted is 1.14 (1.12, 1.16) and the 
 RR_adjusted is what is used to find the risk of BMI on heart failure. 
+
+The MF is the mediation factor. This can be found in the table below. 
+
+.. csv-table:: Mediation Factor 
+  :file: heart_failure_MF.csv
+  :widths: 40 30 30 
+  :header-rows: 1 
 
 
 Assumptions and Limitations
