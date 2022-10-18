@@ -229,7 +229,8 @@ Risk Outcome Pair #1: Ischemic heart disease
 :ref:`See ischemic heart disease documentation <2019_cause_ihd>`
 
 The relative risks apply to the incidence rates of acute 
-myocardial infarction and stable angina. They should be 
+myocardial infarction and stable angina. These are arrows 
+1, 3, and 4 on the IHD cause diagram. They should be 
 applied using the formula: 
 
 incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)/5} 
@@ -239,11 +240,21 @@ associations should be applied to the incidence rates for
 both nonfatal components of ischemic heart disease. The 
 relative risk for GBD 2019 is for a 5-unit increase in BMI.
 
-PAFs and relative risks can be pulled using the following code: 
+PAFs and relative risks can be pulled using the following code::
 
-rrs = get_draws(gbd_id_type='rei_id', gbd_id=108, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+  rrs = get_draws(gbd_id_type='rei_id', gbd_id=370, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
-pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[108, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+  pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+**Mediation with FPG**
+
+The relative risks are then adjusted to account for mediation through FPG. 
+To find the new relative risk, this equation can be used: 
+
+RR_adjusted = (1 - 0.149278039) * (RR_unadjusted - 1) + 1
+
+where the RR_unadjusted is from the get_draws code above and the 
+RR_adjusted is what is used to find the risk of BMI on IHD. 
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -251,17 +262,28 @@ Risk Outcome Pair #2: Ischemic stroke
 :ref:`See ischemic stroke documentation <2019_cause_ischemic_stroke>`
 
 The relative risks apply to the incidence rates of acute 
-ischemic stroke. They should be applied using the formula: 
+ischemic stroke. These are arrows 1 and 3 on in the ischemic 
+stroke cause model. They should be applied using the formula: 
 
 incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)/5} 
 
 The relative risk for GBD 2019 is for a 5-unit increase in BMI. 
 
-PAFs and relative risks can be pulled using the following code: 
+PAFs and relative risks can be pulled using the following code:: 
 
-rrs = get_draws(gbd_id_type='rei_id', gbd_id=108, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
+  rrs = get_draws(gbd_id_type='rei_id', gbd_id=370, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
-pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[108, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+  pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+**Mediation with FPG**
+
+The relative risks are then adjusted to account for mediation through FPG. 
+To find the new relative risk, this equation can be used: 
+
+RR_adjusted = (1 - 0.216637902) * (RR_unadjusted - 1) + 1
+
+where the RR_unadjusted is from the get_draws code above and the 
+RR_adjusted is what is used to find the risk of BMI on ischemic stroke. 
 
 Risk Outcome Pair #10: Heart failure
 ++++++++++++++++++++++++++++++++++++
@@ -282,10 +304,20 @@ The relative risk for heart failure is 1.14 (1.12, 1.16).
 The relative risks apply to the incidence rates of heart failure.
 They should be applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)} 
+incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)} 
 
 The relative risk for heart failure is per 1-unit increase in BMI. 
 **Please note that this is different than the other relative risks.** 
+
+**Mediation with FPG**
+
+The relative risks are then adjusted to account for mediation through FPG. 
+To find the new relative risk, this equation can be used: 
+
+RR_adjusted = (1 - 0.4018318) * (RR_unadjusted - 1) + 1
+
+where the RR_unadjusted is 1.14 (1.12, 1.16) and the 
+RR_adjusted is what is used to find the risk of BMI on heart failure. 
 
 
 Assumptions and Limitations
