@@ -306,7 +306,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
   - Relative risk for all-cause mortality by intervention coverage (for comparison with trial data)
   - Person-time spent covered by SQ-LNS per 100,000 PY (:ref:`see difference between coverage and utilization here <utilization-definition>`)
-  - Mean difference of time-to-recovery of MAM and SAM by wasting treatment status (coverage and efficacy)
+  - Mean difference of time-to-recovery of MAM and SAM by wasting treatment status 
 
 *Simulation outcomes needed for verification and validation only:*
 
@@ -332,17 +332,17 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - 
     - 
   * - Wasting transition counts
-    - * MAM treatment coverage and efficacy (separately)
-      * SAM treatment coverage and efficacy (separately)
+    - * MAM treatment coverage* 
+      * SAM treatment coverage*
     - 
   * - Wasting state person time
     - * SQ-LNS coverage/utilization 
-      * MAM treatment coverage and efficacy (separately)
-      * SAM treatment coverage and efficacy (separately)
+      * MAM treatment coverage*
+      * SAM treatment coverage*
     - 
   * - Mortality (cause-specific)
-    - * MAM treatment coverage and efficacy (separately)
-      * SAM treatment coverage and efficacy (separately)
+    - * MAM treatment coverage*
+      * SAM treatment coverage*
       * SQ-LNS coverage/utilization (separately if targeting)
     - 
   * - Morbidity
@@ -354,6 +354,10 @@ For scenarios that feature a scale-up of one of the above interventions, interve
   * - Cause transition counts
     - 
     - 
+
+.. note::
+
+  For MAM and SAM treatment stratification, stratification by both coverage and efficacy is desired, but complicated to implement from the engineering side. We will proceed with stratification by treatment coverage only for now.
 
 3.0 Models
 +++++++++++
@@ -422,7 +426,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - 1
     - * Simulation end date: 2023-12-31 (modified from 2026-12-31)
       * Otherwise, default specs (20 draws, 100,000 population size)
-    - Stratify cause state person time and cause transition counts by wasting and stunting state person time (for V&V of risk effects)
+    - Stratify cause state person time and cause transition counts by wasting and stunting state (for V&V of risk effects)
     - No x-factor component. V&V baseline model before moving on (cause models, risk effects, MAM/SAM treatment effects)
   * - 2.0 SQ-LNS updates
     - Updates to SQ-LNS age-end parameter, sex-specific effect size
