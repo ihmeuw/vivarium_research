@@ -339,7 +339,7 @@ the last household. The largest household size in ACS is 17, so the number
 of simulants initialized in households will underestimate M by 1-16.
 
 .. _census_prl_gq_init:
-
+    
 Initializing people living in group quarters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -378,6 +378,72 @@ The group quarters population should be approximately 3% of the total.
 I will also verify that the household
 relationships are logical --- every household should have a reference
 person, and at most one spouse/partner.
+
+.. _census_prl_parents_init:
+
+Initializing parent/guardian for all simulants
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We want to initialize all simulants who could be claimed as a 
+dependent on tax forms to have a parent/guardian. This will 
+improve tracking for names, and dependent status on tax forms. 
+
+There are two groups that need to have parents/guardians initialized 
+and we will address those separately: children under the age of 18, and 
+those who are 18-24 and in GQ for college (defined above). 
+
+Note: "N/A" for the purposes of this simulation means that a parent/
+guardian cannot be identified. For tax purposes, no one will claim 
+this person as a dependent. 
+
+**For simulatnt under 18:**
+
+- Child is a biological or adopted child to reference person 
+    * Assign reference person 
+- Child is foster child 
+    * Assign reference person 
+- Child is step child 
+    * If there is a spouse / partner of reference person assign them 
+    * Otherwise assign the reference person 
+- Child is grandchild of reference person 
+    * If there is a child (biological, adopted, foster) of reference person, assign them (if multiple, assign at random) 
+    * If not assign reference person 
+- Child is brother/sister to reference person 
+    * If there is a parent of the reference person, assign them 
+    * If not assign the reference person 
+- Child is other relative to reference person 
+    * Assign a relative of the reference person who between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple assign at random. 
+    * If there is not other relatives of the appropriate age available, assign to reference person 
+- Child is non-relative (roommate or other nonrelative) to reference person 
+    * Assign another non-relative of the reference person who between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple assign at random. 
+    * If not other non-relatives of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
+    * If there are not any other non-relatives in the house, make "N/A"
+- Child is the reference person 
+    * Assign a parent, if available 
+    * Otherwise, assign another relative who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple assign at random.
+    * If there are no other relatives in the house, make "N/A"
+
+Once the parent/guardian is assigned, if there is a spouse for that 
+simulant (reference person and spouse ONLY), then include both as 
+parents/guardians. Otherwise only include the one as a parent/guardian. 
+
+**For a simulant who is 18-24 and in GQ at college:**
+
+Simulant will be randomly assigned to a parent/guardian based on the below rules: 
+
+- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_  
+- Match to a person 20 to 45 years older than the child 
+- If child is not mixed/other race, match parent's race. If child is mixed/other race, then assign to a parent of any race 
+- Assign to reference people source2_ 
+    * 23% female reference people without a listed spouse 
+    * 5% male reference people without a listed spouse 
+    * Remainder to people with spouses, include both parents 
+
+
+.. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
+
+.. _source2: https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
+
 
 .. _census_prl_fertility:
 
