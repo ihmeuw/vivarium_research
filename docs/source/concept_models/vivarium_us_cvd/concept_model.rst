@@ -833,7 +833,7 @@ These covariate values are calculated for each simulant and are then plugged int
  :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.014 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
 
 Where sex = 1 for men and 2 for women 
-
+and SBP and LDL level refer to the raw values from GBD 
 
 **Calculating Probabilities:** 
 
