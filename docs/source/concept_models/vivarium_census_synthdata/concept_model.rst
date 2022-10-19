@@ -427,6 +427,8 @@ Once the parent/guardian is assigned, if there is a spouse or unmarried partner
 for that simulant (reference person and spouse/unmarried partner ONLY), then 
 include both as parents/guardians. Otherwise only include the one as a parent/guardian. 
 
+(note to software engineers: if any of these rules turn out to be surprisingly hard to implement, please be in touch with research --- we have some flexibility in just how we do this!)
+
 **For a simulant who is below 24 and in GQ at college:**
 
 Simulant will be randomly assigned to a parent/guardian based on the below rules: 
