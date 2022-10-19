@@ -256,6 +256,9 @@ RR_adjusted = (1 - 0.149278039) * (RR_unadjusted - 1) + 1
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on IHD. 
 
+The mediation matrix is found on this `Hub page <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2021+Risk+factors+mediation>`_ 
+
+
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
 
@@ -284,6 +287,8 @@ RR_adjusted = (1 - 0.216637902) * (RR_unadjusted - 1) + 1
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on ischemic stroke. 
+
+The mediation matrix is found on this `Hub page <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2021+Risk+factors+mediation>`_ 
 
 Risk Outcome Pair #10: Heart failure
 ++++++++++++++++++++++++++++++++++++
@@ -326,6 +331,7 @@ The MF is the mediation factor. This can be found in the table below.
   :widths: 40 30 30 
   :header-rows: 1 
 
+This mediation factor is calculated in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risk_mediation.ipynb>`_ 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
