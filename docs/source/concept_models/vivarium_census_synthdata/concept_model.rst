@@ -818,6 +818,7 @@ Limitations
 #. We assume that relationship does not affect emigration rates.
    In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
    even after accounting for demographics.
+#. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
 2.3.7 Component 11: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
