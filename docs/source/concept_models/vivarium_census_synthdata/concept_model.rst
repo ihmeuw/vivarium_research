@@ -451,7 +451,7 @@ Simulant will be randomly assigned to a parent/guardian based on the below rules
 
 #. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
 #. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
-#. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track occupation so are not accounting for this. 
+#. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
 #. We assign GQ college folks to "parents" instead of "parents/guardians". Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
 
 .. _census_prl_fertility:
