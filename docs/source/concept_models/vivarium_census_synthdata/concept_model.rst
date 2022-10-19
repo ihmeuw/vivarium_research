@@ -725,6 +725,11 @@ PRL implications.
 Inspired by the methodology of the PopEst team at the Census Bureau,
 we further stratify emigration by assuming that **emigrants** have the same
 characteristics as **immigrants**.
+There are clear reasons why this assumption would not be correct
+(e.g. the fact that the US is one of the wealthiest countries in the world means
+it is unlikely to have symmetric characteristics of incoming and outgoing migration)
+but it does likely capture some of the ways in which people with different characteristics
+have different propensities for international migration, regardless of origin/destination.
 
 First, we distribute emigration by move type, replicating the distribution of
 move type in each broad race/ethnicity group (non-Hispanic White alone, Hispanic, all other)
