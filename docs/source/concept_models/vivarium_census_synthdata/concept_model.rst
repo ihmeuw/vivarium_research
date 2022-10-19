@@ -782,7 +782,7 @@ should be applied to sample simulants to emigrate.
 Non-reference-person moves
 ''''''''''''''''''''''''''
 
-The at-risk population for GQ person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
