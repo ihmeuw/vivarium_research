@@ -757,8 +757,9 @@ state and PUMA attributes should be set to a placeholder value that signifies th
 no longer in the US.
 Emigrating simulants should also have their address attribute removed, and they should terminate
 employment.
-In the future, we may want to sample some of these simulants for re-entry in the immigration component, but for now
-they will remain outside the US permanently.
+In the future, we may want some of these simulants to continue employment in the US or
+re-enter through the immigration component, but for now
+they will remain unemployed and outside the US permanently.
 
 Household moves
 '''''''''''''''
