@@ -805,6 +805,15 @@ Simulation inputs
 
 :download:`Non-reference-person emigration rates <non_reference_person_emigration_rates.csv>`
 
+Limitations
+^^^^^^^^^^^
+
+#. We assume that emigration is either whole-household or totally independent at the individual level.
+   In reality, it is likely that subfamilies emigrate together more frequently than would be expected under this assumption.
+#. We assume that relationship does not affect emigration rates.
+   In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
+   even after accounting for demographics.
+
 2.3.7 Component 11: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
