@@ -379,7 +379,7 @@ after a screening or emergency visit, ignore the new assignment. The original fo
 If a simulant misses an appointment, they are assumed to be 'lost to follow-up' and will not have future 
 appointments until they have a screening or emergency visit. 
 
-If a simulant misses an appointment, they can have a screening appointment in that time step. 
+If a simulant misses an appointment, they are NOT considered for a screening appointment in that time step. 
 
 If a simulant leaves a visit in the "no change" state but previously had a follow-up scheduled, they will 
 keep that follow-up appointment. 
