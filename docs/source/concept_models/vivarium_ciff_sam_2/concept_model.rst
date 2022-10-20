@@ -450,9 +450,9 @@ For scenarios that feature a scale-up of one of the above interventions, interve
    * - Model
      - Description
      - V&V summary
-   * -  
-     - 
-     -  
+   * - 1.0 
+     - Baseline concept model updates
+     - `V&V notebooks for model 1.0 can be found here <https://github.com/ihmeuw/vivarium_research_wasting/tree/main/verification_and_validation/model_1>`_. V&V criteria satisfied.
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
