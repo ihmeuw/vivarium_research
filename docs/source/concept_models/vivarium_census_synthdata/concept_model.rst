@@ -1529,6 +1529,17 @@ simulants living in military group quarters we will set their employer
 to Military, and ensure that their address and zip code match their
 employer_address and employer_zipcode.
 
+Speaking of the names for employers, we will generate names for
+employers based on a conditional random model that Abie developed and
+Jim refactored into the vivarium model.  It should have more details
+documented at some point.  Jim will ensure that all employer names are
+unique for now, although it would be interesting one day to add some
+duplicates.  Businesses can have the same name in real life but
+if/when we do have duplicate names we need to prevent duplicates for
+certain most common names.
+
+
+
 .. _census_prl_limitations:
 
 3.0 Limitations
