@@ -732,7 +732,7 @@ in SBP level will be given to each. The percent increase **only applies to adher
     - No    
     - N/A 
     - N/A
-    - N/A
+    - 1
     - 130 
   * - 3 
     - 150 
@@ -794,7 +794,7 @@ increase in LDL-C level will be given to each.
     - No    
     - N/A 
     - N/A
-    - N/A
+    - 1
     - 1.9 
   * - 3 
     - 2.3 
