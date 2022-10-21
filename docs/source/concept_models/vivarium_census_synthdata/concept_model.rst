@@ -758,13 +758,22 @@ Emigration events are modeled as happening to an at-risk population at a certain
 They are constant across time in the simulation.
 
 Households and individuals selected to have emigration events should remain in the simulation, but their
-state and PUMA attributes should be set to a placeholder value that signifies they are
+location attributes (US state, PUMA, and address) should be set to placeholder values that signify they are
 no longer in the US.
-Emigrating simulants should also have their address attribute removed, and they should terminate
-employment.
+Emigrating simulants should also terminate employment -- their employer ID and income are set
+to those used for unemployment.
 In the future, we may want some of these simulants to continue employment in the US or
 re-enter through the immigration component, but for now
 they will remain unemployed and outside the US permanently.
+All other simulant attributes should be unchanged by the emigration event.
+
+.. note::
+
+  Because simulants outside the US remain in the population table, it is important for all components
+  to carefully define whether or not they act on these simulants.
+  For example, the at-risk population for emigration in each type of move defined below is specified
+  to be **in the US**.
+  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
 
 Household moves
 '''''''''''''''
@@ -774,7 +783,9 @@ This at-risk population should be stratified by age group, sex, race/ethnicity, 
 **of the simulant's household's reference person**, as well as US state.
 On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
 a number of **simulants** to emigrate as part of household moves.
-Then, households within the stratum should be sampled at random for emigration until the desired number of simulants is reached.
+Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
+This means that in practice we will generally overshoot the desired number by a few, but this should have
+minimal effect.
 
 GQ person moves
 '''''''''''''''
