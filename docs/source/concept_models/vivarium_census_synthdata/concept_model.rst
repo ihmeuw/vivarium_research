@@ -810,11 +810,6 @@ rest of the household is unaffected by this event.
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-  These are placeholder files that I will finalize soon!
-  For now, these are an example of the format/structure.
-
 :download:`Household emigration rates <household_emigration_rates.csv>`
 
 :download:`GQ person emigration rates <group_quarters_person_emigration_rates.csv>`
