@@ -1630,7 +1630,13 @@ from international immigration in a household move, the following steps are **al
    and standard deviation 10 years.
 #. The age shift is added to the age values of all individuals in the household.
 #. If any age values in the household exceed 125 years, they are set to 125 years.
-#. Any individuals with negative age values are removed from the household.
+#. Any individuals with negative age values are set to have age 0.
+
+.. note::
+
+  Clipping age to 0 will create more newborns in the distribution than would normally be expected.
+  However, other (simple) approaches also change the distribution (e.g. dropping simulants with
+  negative age decreases the number of young people).
 
 Using a single age shift for a household makes it more likely that the age/relationship combinations
 are logical.
