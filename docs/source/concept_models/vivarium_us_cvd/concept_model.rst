@@ -405,7 +405,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Notes
   * - A
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - [Wallace_2011]_
+    - Measurements have a minimum value of 50 enforced [Wallace_2011]_
   * - B
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
     - [Ali_2021]_ [Liu_2017]_
@@ -603,8 +603,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is here:
-/mnt/share/homes/sbachmei/repos/vivarium_nih_us_cvd/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `here <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
@@ -972,10 +971,10 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - Split by medication category
+    - 
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - Split by medication category
+    - 
   * - Mean BMI 
     - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
     - 
@@ -1066,7 +1065,7 @@ Some limitations of this analysis include:
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 #. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
 #. To create "untreated" SBP and LDL-C values, we addded an approximate treatment value to those simulants who were initialized to be on medication. This method did not create a blanket population "PAF" from medication, which is different than other simulations. This should be checked in V&V for possible side effects.  
-#. For initialization of the model, we use the raw GBD values rather than the treatment adjusted values. Since treatment effects have not been applied yet, this is necessary and with the burn-in period it is unlikely to affect the outcomes. 
+#. During initialization of the model, we "take measurements" from the raw GBD values rather than the treatment adjusted values. This is only for simulants initialized in the emergency state. Since treatment effects have not been applied yet, this is necessary and with the burn-in period it is unlikely to affect the outcomes. 
 
 .. _uscvd7.0:
 
