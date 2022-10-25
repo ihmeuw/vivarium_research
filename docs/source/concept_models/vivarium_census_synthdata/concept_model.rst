@@ -191,8 +191,8 @@ as a single PUMA or collection of PUMAs.
 
 .. _census_prl_age_sex_etc:
 
-2.3.1 Components 1-5: Age, sex, race/ethnicity, geographic location, household id, and relationship
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.1 Components 1-5: Age, sex, race/ethnicity, nativity, geographic location, household id, and relationship
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 These attributes will be designed to follow closely the data available
 in the American Communities Survey Public Use Microdata Sample.
@@ -213,6 +213,10 @@ race/ethnicity into the following partition:
 * Latino
 
 This is basically compatible with the surname data we will use in Section (12).
+
+"Nativity" means whether or not someone was born in the United States.
+The PUMS has more information on the specific country of birth, but we do not use this level of granularity.
+The :code:`NATIVITY` column in PUMS provides the binary categorization.
 
 For initialization on simulation start, for the population living in households, we will sample households from
 ACS PUMS rows in the specified PUMAs with replacement, and with
@@ -245,7 +249,7 @@ initial population:
     df_population = pd.concat([household(i, hh_id) for i, hh_id in enumerate(resampled_households)])
 
 Note that this approach will not initialize any simulants living in
-Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>`) below for details on
+Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>` below for details on
 how we will address this.
     
 In the code above, there is a location string filter which we can use
@@ -271,11 +275,6 @@ Here is a small example of what the code in this section will load from ACS:
 +---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
 | 801484  | 2             | 12703 | 82   | 20        | 1    | 1         | FL        | 12          |
 +---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-
-The fertility model and migration model will also add new simulants,
-who will need their attributes initialized carefully; I will put
-additional detail about how to do this in the fertility and migration
-sections of the documentation.
 
 The relationship field will be relevant to Last Name generation, and
 for easy reference, here are the meanings of the relationship codes
@@ -338,6 +337,9 @@ M by sampling households until we have exceeded M, and then remove
 the last household. The largest household size in ACS is 17, so the number
 of simulants initialized in households will underestimate M by 1-16.
 
+We perturb the PUMA and age attributes of the sampled households, as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
+
 .. _census_prl_gq_init:
 
 Initializing people living in group quarters
@@ -358,6 +360,9 @@ distribution from ACS.  It does not identify *which* group quarters
 the individual resides in, however, and only provides information on
 whether it is Institutional or Non-institutional GQ (in the TYPE
 variable: 2 = Institutional; 3 = Non-institutional).
+
+We perturb the PUMA and age attributes of the sampled GQ people, as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
 
 The final step for initializing GQ simulants is to give each
 a (somewhat inappropriately named) household_id.  Eventually we shall
@@ -398,6 +403,10 @@ from the parent.  (This approach identifies only one parent, and that
 might be sufficient for now, although as I learn more about the
 specific challenges of Census PRL, I will find out if we need to
 revisit this and keep track of dad as well as moms).
+
+The nativity of children born in the sim is set according to where their
+parent is currently living; if their parent lives in the US they were born
+in the US, otherwise they were born outside the US.
 
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
@@ -536,12 +545,15 @@ per person year and individual move rate (also in moves per person
 year).  On the research side, I will also develop a migrates-to
 probability file, with the probability that an individual moves a
 different household or to each type GQ, also stratified by age, sex,
-and race/ethnicity.  To keep things simple, we will for now not have the
+and race/ethnicity.
+Rates of domestic migration are only applied to simulants who currently live
+in the US.
+
+To keep things simple, we will for now not have the
 reference person ever move in a non-household migration, and when a
 non-reference person moves to another household, we will update their
 relationship to the reference person to be 36 - Other non-relative
 (for simplicity, for now).
-
 This will prevent toddlers from moving out of their parents houses. It
 will still have a mother moving out of a house and leaving an
 infant. We could add functionality such that children move with their
@@ -602,33 +614,32 @@ simulants are moving at the expected rates.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 New simulants are added by migration into the US from other countries.
-We simulate two kinds of immigration: household moves and non-reference-person moves.
+We simulate three kinds of immigration: household moves, GQ person moves,
+and non-reference-person moves.
 
-#. A **household move** is when an entire household (which may be a single-person residential household, or a GQ person's "household") enters from outside the country as a unit,
+#. A **household move** is when an entire household (which may be a single-person residential household) enters from outside the country as a unit,
    preserving relationships within the unit.
-#. A **non-reference-person move** is when a person enters from outside the country and joins an existing residential household.
+#. A **GQ person move** is when a GQ person enters from outside the country and joins an existing GQ type.
+   These moves have no relationship structure, because GQ people do not have tracked relationships in PUMS or our simulation.
+#. A **non-reference-person move** is when a non-GQ person enters from outside the country and joins an existing non-GQ household.
    Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
 
-For the purposes of immigration, a group quarters person should be considered to be a one-person "household",
-with the group quarters person as the reference person, and that GQ "household" having a weight equal to the GQ person's weight.
-This means that group quarters people should only enter the US in a "household" move, and never as individuals;
-they will never immigrate into an existing residential household.
-
-The number of simulants who move to the US each year is informed by the ACS' "residence one year ago" question.
-Specifically, a value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
+The number of simulants who move to the US each year in each move type is informed by the ACS' "residence one year ago" question.
+A value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
 while any other value indicates that they lived within the US.
 We refer to respondents who were not living in the United States one year ago as "recent immigrants."
-Our assumption is that the number (and characteristics) of recent immigrants per year
+Our assumption is that the number and characteristics of recent immigrants per year
 in the 2016-2020 ACS PUMS will be replicated in each future year.
 
 .. note::
 
     All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
 
-We also assume that the proportions of recent immigrants by move type (household or non-reference-person) will remain constant.
-Though in reality not all moves into the US follow one of these two patterns, we assume that any new immigrant in a household
+We also assume that the proportions of recent immigrants by move type will remain constant.
+Though in reality not all moves into the US follow one of these patterns, we assume that any new immigrant in a household
 where the reference person is also a new immigrant was part of a household move, while any new immigrant in a household where the
 reference person is not a new immigrant moved to the US in a non-reference-person move.
+We assume that new immigrants living in GQ immigrated directly into GQ and not into a household first, and vice versa.
 
 Specifically, the yearly rate at which simulants are added to the population by each move type is given by
 the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
@@ -636,44 +647,27 @@ Since immigration is likely unaffected by US population change over time, the nu
 is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
 At each time step:
 
-#. ACS PUMS households with reference people who are recent immigrants (as well as GQ "households" where the GQ person is a recent immigrant),
+#. ACS PUMS households with reference people who are recent immigrants,
    after removing any household members who are not recent immigrants,
-   are sampled using household weights (equal to person weights in the case of GQ).
+   are sampled using household weights.
    This sampling continues with replacement until the desired number of simulants added in household moves is reached.
-#. ACS PUMS recent immigrants living in residential households where the reference person is not a recent immigrant are sampled using person weights.
+#. ACS PUMS GQ people who are recent immigrants are sampled using person weights with replacement until the desired number
+   of simulants added in GQ person moves is reached.
+#. ACS PUMS recent immigrants living in non-GQ households where the reference person is not a recent immigrant are sampled using person weights.
    This sampling continues with replacement until the desired number of simulants added in non-reference-person moves is reached.
+
+We perturb the PUMA and age attributes of the sampled household (in the case of a household move)
+or person (in the case of a GQ person or non-reference-person move), as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
 
 Added residential households are assigned a new household ID and a new address, as is done at population initialization.
 Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
 their institutional/non-institutional status, as well as the corresponding shared address, as is done at population initialization.
 
-Additionally, we perturb the PUMA attribute of the sampled person (in the case of a non-reference-person move) or household (in the case of a household move).
-This is intended to ensure a non-zero probability of immigration into all PUMAs,
-and to lower the chances of very similar simulants being sampled from the same ACS person/household.
-The perturbation process is as follows:
-**10%** of the time, replace the sampled person/household's PUMA with a PUMA selected at random according to the
-probabilities in the appropriate file below.
-(In the case of a household, all simulants in that household are assigned the same replacement PUMA.)
-In the case of an individual, only PUMAs with an existing non-GQ household in the simulation should be selected.
-The number **10%** should be considered a placeholder and will likely change in the future.
-
-These probabilities were created by first calculating the (weighted) proportions of immigrants corresponding to the move type
-in the 2016-2020 PUMS file.
-Then, all values below the 2.5th percentile (including values of 0) were increased to
-the 2.5th percentile value, and the proportions were re-normalized.
-
-:download:`PUMA probabilities for perturbation of households added in household moves <household_moves_puma_distribution.csv>`
-
-:download:`PUMA probabilities for perturbation of simulants added in non-reference-person moves <non_reference_person_moves_puma_distribution.csv>`
-
-.. note::
-
-    The values in each file were normalized to sum to 1 across the entire United States.
-    If simulating a subset of the US, it is necessary to re-normalize the values in that subset
-    before it is appropriate to interpret them as probabilities.
-
 Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
-If there is no such household in the simulation, their PUMA is perturbed using the process described above, and then they are matched in the new PUMA.
+If there is no such household in the simulation, their PUMA is perturbed using the PUMA replacement process described in the
+:ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
+Then, they are matched in the new PUMA.
 The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
@@ -695,9 +689,142 @@ This could be done by assigning unique (or practically unique, with very low pro
 2.3.6 Component 10: International Emigration (Out-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+Simulants may leave the US to live in other countries.
+As with immigration, there are three types of emigration events that can occur:
 
-    Describe this component.
+#. Household moves, when an entire household moves out of the US as a unit.
+#. GQ person moves, when a GQ person moves out of the US individually.
+#. Non-reference-person moves, when a single non-GQ person leaves their household to move out of the US.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We use the Net International Migration (NIM) estimates from the Census
+Bureau's Population and Housing Unit Estimates (PopEst) program to determine the
+number of emigrants per year. [Census_PopEst]_
+Specifically, we use the 2018-2019 annual estimates, in the assumption that this
+(pre-COVID) year's emigration can be applied to each future year in the simulation.
+
+We subtract out immigration, which we estimate from the ACS PUMS'
+migration question as described in the previous section, to isolate emigration.
+Specifically, these three quantities are related by the equation
+:math:`\text{NIM} = \text{immigration} - \text{emigration}`.
+
+The NIM estimates are made by the PopEst team by combining information
+about immigration from ACS with information about emigration from demographic analysis
+(for those born outside the US) and analysis of foreign censuses (for those born in
+the US). [Census_PopEst_Methodology]_
+Without access to the source data, we cannot replicate these methods, which is why we
+use the published NIM values instead of directly estimating emigration.
+
+The NIM values are not published fully stratified.
+Out of the available stratifications, we chose to use the values stratified
+by (broad categories of) race/ethnicity, because these are most likely to have
+PRL implications.
+
+Inspired by the methodology of the PopEst team at the Census Bureau,
+we further stratify emigration by assuming that **emigrants** have the same
+characteristics as **immigrants**.
+There are clear reasons why this assumption would not be correct
+(e.g. the fact that the US is one of the wealthiest countries in the world means
+it is unlikely to have symmetric characteristics of incoming and outgoing migration)
+but it does likely capture some of the ways in which people with different characteristics
+have different propensities for international migration, regardless of origin/destination.
+
+First, we distribute emigration by move type, replicating the distribution of
+move type in each broad race/ethnicity group (non-Hispanic White alone, Hispanic, all other)
+found in ACS PUMS recent immigrants.
+
+Then, we distribute emigration within each race/ethnicity and move type by further demographics,
+according to the distributions of these demographics in a resample of the corresponding ACS immigrant population,
+with perturbation as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+Note that in the case of household moves, these are the demographics **of the immigrant's household's reference person**,
+while for the other two types they are demographics of the immigrant themselves.
+
+Finally, we calculate the rates of people emigrating per year of person-time "at risk":
+
+* The "at risk" population for household moves is people living in non-GQ households.
+* The "at risk" population for GQ person moves is people living in GQ.
+* The "at risk" population for non-reference-person moves is people living in non-GQ households who
+  are not the reference person in their household.
+
+In order to mitigate the sampling noise in ACS PUMS stratified by all of these demographic characteristics,
+we calculate the denominator for the rate from a resample of the "at risk" population, with perturbation.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+Emigration events are modeled as happening to an at-risk population at a certain rate.
+They are constant across time in the simulation.
+
+Households and individuals selected to have emigration events should remain in the simulation, but their
+location attributes (US state, PUMA, and address) should be set to placeholder values that signify they are
+no longer in the US.
+Emigrating simulants should also terminate employment -- their employer ID and income are set
+to those used for unemployment.
+In the future, we may want some of these simulants to continue employment in the US or
+re-enter through the immigration component, but for now
+they will remain unemployed and outside the US permanently.
+All other simulant attributes should be unchanged by the emigration event.
+
+.. note::
+
+  Because simulants outside the US remain in the population table, it is important for all components
+  to carefully define whether or not they act on these simulants.
+  For example, the at-risk population for emigration in each type of move defined below is specified
+  to be **in the US**.
+  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
+
+Household moves
+'''''''''''''''
+
+The at-risk population for household moves is all simulants living in non-GQ households in the US.
+This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
+**of the simulant's household's reference person**, as well as US state.
+On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
+a number of **simulants** to emigrate as part of household moves.
+Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
+This means that in practice we will generally overshoot the desired number by a few, but this should have
+minimal effect.
+
+GQ person moves
+'''''''''''''''
+
+The at-risk population for GQ person moves is all simulants living in GQ in the US.
+This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
+and US state.
+On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
+should be applied to sample simulants to emigrate. 
+
+Non-reference-person moves
+''''''''''''''''''''''''''
+
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
+and US state.
+On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
+should be applied to sample simulants to emigrate.
+The simulant is removed from the household (they may be given a blank or placeholder household ID) and the
+rest of the household is unaffected by this event.
+
+Simulation inputs
+^^^^^^^^^^^^^^^^^
+
+:download:`Household emigration rates <household_emigration_rates.csv>`
+
+:download:`GQ person emigration rates <group_quarters_person_emigration_rates.csv>`
+
+:download:`Non-reference-person emigration rates <non_reference_person_emigration_rates.csv>`
+
+Limitations
+^^^^^^^^^^^
+
+#. We assume that emigration is either whole-household or totally independent at the individual level.
+   In reality, it is likely that subfamilies emigrate together more frequently than would be expected under this assumption.
+#. We assume that relationship does not affect emigration rates.
+   In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
+   even after accounting for demographics.
+#. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
 2.3.7 Component 11: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1055,6 +1182,7 @@ Census
 
 **Who to Sample** 
 
+Simulants currently living in the US are eligible for sampling.
 Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
 probability, simulants will be randomly selected for inclusion. We decided 
@@ -1225,6 +1353,7 @@ There are two types of sampling plans:
 
 **Who to Sample** 
 
+Simulants currently living in the US are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
@@ -1380,6 +1509,318 @@ To create this survey:
 Note/limitations: 
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
+
+
+Taxes
+^^^^^
+
+Taxes, as we all know, can contain many different forms and processes. 
+For this model, we will split the tax information into two main sections: 
+W2/1099 forms from employers; and 1040 forms from simulants. We will look 
+at these separately, starting with W2 and 1099 forms. 
+
+
+W2 and 1099 Forms
+'''''''''''''''''
+
+**When to Sample** 
+
+- Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
+- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. Jobs can be tracked for complete time steps, so through the last day of the time step containing Jan 1st. 
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - DOB 
+  * - Mailing Address 
+  * - Social Security Number 
+  * - Wages (income from this job)
+  * - Employer ID 
+  * - Employer Name 
+  * - Employer Address 
+  * - Employer Zip Code 
+  * - Type of Tax Form (W2 or 1099)
+
+If a simulant does not have a social security number but is 
+employed, they will need this number to be filled in. If there 
+is a person in their household who has a SSN, use this number 
+instead. If there are multiple people with a SSN, choose at random. 
+If there is not a person in their household with a SSN 
+then fill in a random number. This is designed to reflect 
+undocumented immigrants who might use fake or no longer 
+valid SSNs to obtain employment. 
+
+For this observer, a new row should be made for each **employment**, not 
+each simulant. This means that a simulant can have multiple rows of 
+data, or just one row of data. 
+
+Note that "wages" is used per the census team's request, but is the same 
+value as "income" in our simulation. 
+
+Here is an example: 
+
+.. image:: W2_example.PNG
+
+**Who to Sample** 
+
+Everyone who has had an employer listed within the current calendar year 
+will receive either a W2 or a 1099 form. For those with multiple jobs during 
+the year, they will be duplicated and receive multiple forms. We currently 
+will not model persistence from year to year on which type of form. The type 
+of form is selected per job, not per person. For a person with multiple jobs, 
+the form type is randomly selected each time. 
+
+
+The rate of the the types of forms are below. This data is 
+from a review of 2016 tax data by [Lim_2019]_ . 
+
+.. list-table:: Percent W2 versus 1099  
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Form Type 
+    - Percent Receiving 
+  * - W2 
+    - 94.65% 
+  * - 1099 
+    - 5.35%
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some additional tax specific errors include: SSN randomly being filled 
+for those who are missing one, mailing address being different than the 
+home address, and issues with employer names, addresses, or IDs. 
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of how tax documents are compiled. 
+#. Errors are made in W2s and 1099s by companies frequently, due to employees moving or changing information without communicating changes. These W2s can be reissued which leads to duplicates, or employees might not adjust them leading to different information between W2/1099s and 1040 forms. This is not currently modeled. 
+#. 1099 forms are often used by self-employed people or those with small businesses. These can contain errors related in employer information. 
+#. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
+#. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
+#. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model. 
+#. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
+
+
+1040 Form
+'''''''''
+
+**When to Sample** 
+
+- Sample compiled on the time step containing April 15th of each year 
+- Sample on a single time step for now 
+
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20 20 
+  :header-rows: 1
+
+  * - Simulant Attribute 
+    - Notes 
+  * - Unique simulant ID (for PRL tracking)
+    -  
+  * - First name
+    - 
+  * - Middle initial 
+    - 
+  * - Last name
+    - 
+  * - Age
+    -  
+  * - DOB
+    -  
+  * - Mailing Address
+    -  
+  * - Social Security Number or ITIN
+    -
+  * - Income 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer ID
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Zip Code 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Type of tax form (W2 or 1099)
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Joint Filer 
+    - This row through 'dependent' are to be included if there is a joint filer ONLY 
+  * - First name 
+    - 
+  * - Middle initial 
+    - 
+  * - Last name 
+    - 
+  * - Age
+    - 
+  * - DOB
+    -  
+  * - Mailing Address
+    -  
+  * - Social Security Number or ITIN
+    -
+  * - Income 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer ID
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Zip Code 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Type of tax form (W2 or 1099)
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Dependent
+    - This columns through the end are to be included for each dependent on the tax filing 
+  * - First name 
+    - 
+  * - Middle initial 
+    - 
+  * - Last name 
+    - 
+  * - Age 
+    -  
+  * - Social Security Number or ITIN
+    -
+
+If a simulant does not have a SSN but is filing taxes, please 
+include an Individual Taxpayer Identification Number (ITIN) instead. 
+This is a 9 digit number that starts with 
+a 9. It can be randomly generated. This applies for all types of 
+filers (primary, joint, dependents). Do **NOT** include the fake 
+SSN from the employer tax forms. 
+
+For now, we will randomly assign ITIN's, but not track them over time. 
+Since this makes them unhelpful for PRL work, we can also allow duplicates. 
+This might be refined later if it is important for PRL. 
+
+This is designed to reflect undocumented immigrants, who primarily 
+file taxes under the ITIN system. 
+
+
+For this observer, we will have one row for each tax form filed. This 
+can be a bit complicated, so here are some examples: 
+
+- A single adult will have 1 row, regardless of the number of jobs they had 
+- Joint filers (a married couple) will have 1 row, regardless of the number of jobs 
+- A married couple with unemployed children will have 1 row for the whole family 
+- A married couple with an employed child might have 2 rows: one for the parents and child as a dependent, and a second for the child as an individual filing their own taxes 
+
+Here is a photo showing how this might look. Note that the three tables 
+are just 2 really long rows for two simulants. 
+
+.. image:: 1044_example.PNG
+
+.. todo::
+
+    Define a maximum number of dependents that a simulant can have 
+
+
+**Who to Sample** 
+
+.. todo::
+
+    Need to allow dependents (and possibly joint filing) with people outside the household. Key cases are college students, divorced parents, etc. 
+
+    Also need to address complex family structures 
+
+
+Not everyone who receives a W2 or 1099 will end up filing taxes. 
+However, those who do not are concentrated in low incomes for whom 
+taxes are not required. Currently, we will chose to have all those 
+who are legally required to file taxes, file taxes. This is a 
+limitation and is listed below. 
+
+For simulants that receive below the minimum income, 42.14% will 
+still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
+income is based on the household structure and is listed in the table below. 
+We will not model persistence year to year. 
+
+**In the current model, no one will be low income, this will be changed later.** 
+
+.. list-table:: Minimum Income  
+  :widths: 20 20 
+  :header-rows: 0
+
+  * - Simulant Type 
+    - Minimum Income 
+  * - Single filing, under 65 
+    - $12,550 
+  * - Single filing, over 65 
+    - $14,250
+  * - Married joint filing, both under 65 
+    - $25,100
+  * - Married joint filing, one under 65 
+    - $26,450
+  * - Married joint filing, both over 65 
+    - $27,800
+  * - Married separate filing 
+    - $5
+
+
+Based on the household structure, the following rules can be applied 
+for who files taxes: 
+
+- Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately. 
+    * The only spouses we will recognize are [Reference person, Opp-sex spouse] and [Reference person, Same-sex spouse]. 
+    * The reference person will submit the form, the spouse will be listed as the joint filer. 
+    * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
+- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
+- All simulants eligible to be dependents will be assigned to a relative within the household 
+    * If there someone listed as the dependent's parents and they are filing taxes, they will be assigned to their parent 
+    * If there is not a parent, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
+- A simulant eligble to be a dependent must: 
+    * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
+    * The dependent's income must be below $4300 
+- For simulants outside of the household, they will be claimed as a dependent by their parent until age 19 OR age 24 if they are in group quarters for college 
+    * For simulants born in the simulation, they should have at least one parent/guardian tracked 
+    * For simulants not born in the simulantion, information on initializing parent/guardians is being added shortly 
+    * For simulatns with more than one parent/guardian tracked, assign the dependent randomly 
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some additional tax specific errors include: SSN randomly being filled 
+for those who are missing one, mailing address being different than the 
+home address, and issues with employer names, addresses, or IDs. 
+
+Furthermore, there are often complications with people being claimed as 
+dependents in different households, or claiming people from group quarters.
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of how tax documents are compiled. 
+#. In reality, there are other dependents that live outside of the home. This can include divorced parents, college students, elderly parents, etc. These relationships are not modeled and oversimplifed in this data. 
+#. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year. 
+#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses. 
+#. As the reference person in a household is random, they might not be the one who should be claiming dependents. 
+#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both. 
+#. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
+
 
 
 For inspiration, here is the list of files that Census Bureau
@@ -1551,6 +1992,157 @@ simulants living in military group quarters we will set their employer
 to Military, and ensure that their address and zip code match their
 employer_address and employer_zipcode.
 
+.. _census_prl_perturbation:
+
+2.3.16 Perturbation
+~~~~~~~~~~~~~~~~~~~
+
+When we sample from the ACS PUMS to generate new simulants, we are using the
+empirical joint distribution of all attributes derived from ACS
+variables.
+This allows us to replicate correlations of arbitrary complexity, but also
+causes us to over-fit to sampling variation in the ACS PUMS, which would not
+be present in the full population.
+For example, just because there are no individuals in the ACS PUMS with a
+particular combination of demographic attributes, that does not mean we would
+expect to find 0 such people in the entire US.
+For PRL it is particularly important not to generate simulants that are more similar
+to one another than would be expected in a real population, which
+would make matching unrealistically difficult.
+
+To decrease similarity without assuming total independence between attributes,
+we perturb values at sampling time.
+Specifically, we perturb the age and PUMA columns.
+These are the columns with many possible values, where sampling noise is
+likely to be a significant concern even at the substantial sample size (>15 million)
+of the ACS PUMS.
+
+In different components of the simulation, we sample different entity types from the PUMS:
+households, group quarters people, or non-GQ people (individuals living in households).
+The perturbation process is similar no matter the entity type being sampled.
+
+All perturbation is performed completely at random; perturbation probabilities are constant
+across age, sex, race/ethnicity, etc.
+
+PUMA
+^^^^
+
+.. note::
+
+  For the purposes of this section, "PUMA" refers to the unique geographic area.
+  However, the "PUMA" column in the ACS data contains a PUMA code, which is only unique
+  **in combination with state.**
+  Since the simulation stores the PUMA code and state (which together identify the PUMA) separately,
+  "PUMA" in this section refers to the combination of both.
+
+**50% of the time,** we replace the PUMA with the PUMA value of
+another row in the data.
+How we select this replacement value depends on what we are currently sampling.
+
+Population initialization
+'''''''''''''''''''''''''
+
+When sampling households or GQ people from the entire ACS dataset for population initialization,
+all replacement values should be sampled from the same full ACS dataset, using the appropriate weights.
+
+For example, imagine we have just sampled a GQ person (Row A) to initialize as a new simulant, and this row
+was randomly determined (according to the 50% probability) to have a perturbed PUMA.
+Because Row A was selected for PUMA perturbation, we do not use Row A's PUMA value.
+Instead, we sample another GQ person (Row B) from the full ACS dataset, using person weighting.
+We assign Row B's PUMA value to the new simulant, which is now a combination of Row A's other attributes
+with Row B's PUMA.
+
+If initializing a household, the process works similarly, except that Row A and Row B are households (not individuals),
+and Row B is sampled using household weights.
+All simulants in the new household are assigned Row B's PUMA value.
+
+International immigration
+'''''''''''''''''''''''''
+
+When sampling for immigration, there are three cases:
+
+#. We are sampling households to add in household moves.
+#. We are sampling GQ people to add in GQ person moves.
+#. We are sampling people in non-GQ households to add in non-reference-person moves.
+
+The details of the initial sampling are described in the immigration component documentation;
+here, we only consider how to perturb the PUMA values of an already-sampled entity (Row A),
+which has already been selected according to the 50% probability to have a perturbed
+PUMA.
+
+**80% of the time** (this probability is constant) we sample a new PUMA value from the same "immigration subset"
+of the same entity type in the ACS PUMS data.
+Specifically:
+
+#. If performing a household move, we sample the PUMA of another household with a recent
+   immigrant reference person, using household weights.
+#. If performing a GQ person move, we sample the PUMA of another GQ person who is a recent
+   immigrant, using person weights.
+#. If performing a non-reference-person move, we sample the PUMA of another non-GQ person
+   who is a recent immigrant and resides in a household where the reference person is not a
+   recent immigrant, using person weights.
+
+**The remaining 20% of the time**, we sample a new PUMA value from the same entity type, but without
+regard to immigration characteristics.
+Specifically:
+
+#. If performing a household move, we sample the PUMA of any household in the full ACS data, using household weights.
+#. If performing a GQ person move, we sample the PUMA of any GQ person in the full ACS data, using person weights.
+#. If performing a non-reference-person move, we sample the PUMA of any non-GQ person in the full ACS data, using person weights.
+
+As in population initialization, if creating a new household, the entire household is assigned the replacement PUMA value.
+
+By including the 20% probability of sampling from the full dataset, we ensure that immigration may
+occur in any PUMA, even if no ACS respondents were recent immigrants to that PUMA.
+Additionally, we rely less on the age, sex, race/ethnicity, etc joint distribution of recent immigrants specific to the PUMA
+in PUMAs where immigration is rarer (and we likely have smaller sample size to inform this distribution).
+
+Age
+^^^
+
+Households
+''''''''''
+
+After sampling a household to add to the simulation, whether at population initialization or
+from international immigration in a household move, the following steps are **always** performed.
+
+#. An age shift is generated by taking a random draw from a normal distribution with mean 0
+   and standard deviation 10 years.
+#. The age shift is added to the age values of all individuals in the household.
+#. If any age values in the household exceed 125 years, they are set to 125 years.
+#. Any individuals with negative age values are set to have age 0.
+
+.. note::
+
+  Clipping age to 0 will create more newborns in the distribution than would normally be expected.
+  However, other (simple) approaches also change the distribution (e.g. dropping simulants with
+  negative age decreases the number of young people).
+
+Using a single age shift for a household makes it more likely that the age/relationship combinations
+are logical.
+
+Individuals (GQ or non-GQ)
+''''''''''''''''''''''''''
+
+We sample GQ individuals at population initialization.
+Additionally, individual GQ simulants can be added by international immigration in GQ person moves,
+and individual non-GQ simulants can be added in non-reference-person moves.
+In all these cases, the following steps are **always** performed after sampling an individual:
+
+#. An age shift is generated by taking a random draw from a truncated normal distribution with
+   mean 0, standard deviation 10 years, and truncation such that the age shift cannot be less than
+   or equal to -1 times the individual's age.
+   Equivalently, this can be thought of as repeating draws from a normal distribution until the first
+   draw that is greater than this lower bound.
+#. The age shift is added to the individual's age value. This should never result in a negative value,
+   due to the truncated distribution described in the previous step.
+#. If the individual's age value is greater than 125 years, it is set to 125 years.
+
+We do not consider relationship to reference person (for non-GQ people), GQ type (for GQ people),
+or initially sampled age when determining the age shift.
+This may lead to some strange combinations, but these will occur with some frequency anyway due to
+our methods for initializing GQ type, as well as for assigning household IDs in non-reference-person moves.
+
 .. _census_prl_limitations:
 
 3.0 Limitations
@@ -1564,10 +2156,20 @@ To Come (TK)
 +++++++++++++++
 .. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html. 
 
+.. [Cilke_1998] Cilke, Jim. n.d. “A PROFILE OF NON-FILERS,” 38. 
+
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
 
 .. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
 
+.. [Lim_2019] Lim, Katherine, Alicia Miller, Max Risch, and Eleanor Wilking. n.d. “Independent Contractors in the U.S.: New Trends from 15 Years of Administrative Tax Data,” 71. 
+
+.. [Nolo] https://www.nolo.com/legal-encyclopedia/should-married-people-always-file-jointly.html#:~:text=The%20vast%20majority%20of%20married,had%20no%20income%20or%20deductions. 
+
 .. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
+
+.. [Census_PopEst] Bureau, US Census. n.d. “National Population by Characteristics: 2010-2019, Components of Change” Census.Gov. Accessed October 14, 2022. https://www.census.gov/data/tables/time-series/demo/popest/2010s-national-detail.html.
+
+.. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
