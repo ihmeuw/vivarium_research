@@ -507,12 +507,23 @@ All other simulants in the household are assigned a new relationship with these 
 
 :download:`reference_person_update_relationship_mapping.csv`
 
-This file is not exact, because there is not always sufficient information
-to uniquely determine a new relationship.
-For some combinations, it relies on the parent tracking in step 1, and assumes that
-after step 1 has been applied, simulants will primarily not have children relationships
-in situations where other relationships are possible.
-Some notes on the assumptions made are included in the CSV.
+This file is not exact:
+
+* There is not always sufficient information to uniquely determine a new relationship. We err
+  toward the most likely scenario.
+* We assume that any children of people with current partners or spouses are also children of
+  the partner or spouse, unless told otherwise.
+* For some combinations, we rely on the parent tracking in step 1, and assume that
+  after step 1 has been applied, simulants will primarily not have children relationships
+  in situations where other relationships are possible.
+* We use Census' definition that a relative
+  "is someone related... by birth, marriage, or adoption" and that this is a transitive property
+  (the relative of my relative is my relative).
+  Data quality note: these instructions are only available on the ACS website and as tooltips for
+  those taking ACS online, so different ACS respondents may have substantially different interpretations
+  of the relationship categories.
+
+More notes on the assumptions and specifically where they were used are included in the CSV.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
