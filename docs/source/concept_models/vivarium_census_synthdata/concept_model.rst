@@ -385,8 +385,11 @@ Initializing parent/guardian for all simulants
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We want to initialize all simulants who could be claimed as a 
-dependent on tax forms to have a parent/guardian. This will 
+dependent on tax forms to have a guardian. This will 
 improve tracking for names, and dependent status on tax forms. 
+
+This person will be listed as ["Guardian"]. By design, most will be 
+parents, but some may be a grandparent or other relative. 
 
 There are two groups that need to have parents/guardians initialized 
 and we will address those separately: children under the age of 18, and 
@@ -433,7 +436,7 @@ include both as parents/guardians. Otherwise only include the one as a parent/gu
 
 Simulant will be randomly assigned to a parent/guardian based on the below rules: 
 
-- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_  
+- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state parent/guardians can be ignored. 
 - Match to a person 20 to 45 years older than the child 
 - If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a parent of any race
 - Assign to reference people source2_ 
