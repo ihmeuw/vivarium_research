@@ -142,7 +142,7 @@ Parameters in results dataframes
   * - :code:`sub_entity`
     - string
     - Name of entity state or category
-    - * measles/susceptible_to_measles
+    - * susceptible/infected/recovered
       * cat1/cat2/cat3/cat4
   * - :code:`value`
     - float
