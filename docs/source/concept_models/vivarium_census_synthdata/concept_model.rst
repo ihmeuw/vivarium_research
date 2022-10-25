@@ -341,7 +341,7 @@ We perturb the PUMA and age attributes of the sampled households, as described i
 :ref:`perturbation section below <census_prl_perturbation>`.
 
 .. _census_prl_gq_init:
-
+    
 Initializing people living in group quarters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -383,6 +383,84 @@ The group quarters population should be approximately 3% of the total.
 I will also verify that the household
 relationships are logical --- every household should have a reference
 person, and at most one spouse/partner.
+
+.. _census_prl_parents_init:
+
+Initializing parent/guardian for all simulants
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We want to initialize all simulants who could be claimed as a 
+dependent on tax forms to have a guardian. This will 
+improve tracking for names, and dependent status on tax forms. 
+
+This person will be listed as ["Guardian"]. By design, most will be 
+parents, but some may be a grandparent or other relative. 
+
+There are two groups that need to have parents/guardians initialized 
+and we will address those separately: children under the age of 18, and 
+those who are below 24 and in GQ for college (defined above). 
+
+Note: "N/A" for the purposes of this simulation means that a parent/
+guardian cannot be identified. For tax purposes, no one will claim 
+this person as a dependent. 
+
+**For simulant under 18:**
+
+- Child is a biological or adopted child to reference person 
+    * Assign reference person 
+- Child is foster child 
+    * Assign reference person 
+- Child is step child 
+    * If there is a spouse / partner of reference person assign them 
+    * Otherwise assign the reference person 
+- Child is grandchild of reference person 
+    * If there is a child (biological, adopted, foster) of reference person, assign them (if multiple, assign at random) 
+    * Otherwise assign reference person 
+- Child is brother/sister to reference person 
+    * If there is a parent of the reference person, assign them 
+    * Otherwise assign the reference person 
+- Child is other relative to reference person 
+    * Assign a relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random. 
+    * If there is not a relative of the appropriate age available, assign the reference person 
+- Child is non-relative (roommate or other nonrelative) to reference person 
+    * Assign another non-relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple with the same race/ethnicity, assign at random.  
+    * If there is not a non-relative of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
+    * If there are not any other non-relatives in the house, make "N/A"
+- Child is the reference person 
+    * Assign a parent, if available 
+    * Otherwise, assign another relative who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random.
+    * If there are no other relatives in the house, make "N/A"
+
+Once the parent/guardian is assigned, if there is a spouse or unmarried partner 
+for that simulant (reference person and spouse/unmarried partner ONLY), then 
+include both as parents/guardians. Otherwise only include the one as a parent/guardian. 
+
+(note to software engineers: if any of these rules turn out to be surprisingly hard to implement, please be in touch with research --- we have some flexibility in just how we do this!)
+
+**For a simulant who is below 24 and in GQ at college:**
+
+Simulant will be randomly assigned to a parent/guardian based on the below rules: 
+
+- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state parent/guardians can be ignored. 
+- Match to a person 20 to 45 years older than the child 
+- If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a parent of any race
+- Assign to reference people source2_ 
+    * 23% female reference people without a listed spouse 
+    * 5% male reference people without a listed spouse 
+    * Remainder to people with spouses, include both parents 
+
+
+.. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
+
+.. _source2: https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
+
+
+**Limitations**
+
+#. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
+#. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
+#. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
+#. We assign GQ college folks to "parents" instead of "parents/guardians". Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
 
 .. _census_prl_fertility:
 
