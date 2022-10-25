@@ -9,9 +9,7 @@ Vivarium Research
 Here you'll find a variety of useful information about working on ``vivarium``
 research projects.
 
-The hosted documentation can be found at
-`https://vivarium-research.readthedocs.io/en/latest/
- <https://vivarium-research.readthedocs.io/en/latest/>`_.
+The hosted documentation can be found at https://vivarium-research.readthedocs.io/en/latest/.
 
 .. contents::
 
