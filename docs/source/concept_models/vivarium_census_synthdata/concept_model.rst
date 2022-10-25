@@ -191,8 +191,8 @@ as a single PUMA or collection of PUMAs.
 
 .. _census_prl_age_sex_etc:
 
-2.3.1 Components 1-5: Age, sex, race/ethnicity, geographic location, household id, and relationship
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.1 Components 1-5: Age, sex, race/ethnicity, nativity, geographic location, household id, and relationship
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 These attributes will be designed to follow closely the data available
 in the American Communities Survey Public Use Microdata Sample.
@@ -213,6 +213,10 @@ race/ethnicity into the following partition:
 * Latino
 
 This is basically compatible with the surname data we will use in Section (12).
+
+"Nativity" means whether or not someone was born in the United States.
+The PUMS has more information on the specific country of birth, but we do not use this level of granularity.
+The :code:`NATIVITY` column in PUMS provides the binary categorization.
 
 For initialization on simulation start, for the population living in households, we will sample households from
 ACS PUMS rows in the specified PUMAs with replacement, and with
@@ -400,6 +404,10 @@ might be sufficient for now, although as I learn more about the
 specific challenges of Census PRL, I will find out if we need to
 revisit this and keep track of dad as well as moms).
 
+The nativity of children born in the sim is set according to where their
+parent is currently living; if their parent lives in the US they were born
+in the US, otherwise they were born outside the US.
+
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
@@ -571,12 +579,15 @@ per person year and individual move rate (also in moves per person
 year).  On the research side, I will also develop a migrates-to
 probability file, with the probability that an individual moves a
 different household or to each type GQ, also stratified by age, sex,
-and race/ethnicity.  To keep things simple, we will for now not have the
+and race/ethnicity.
+Rates of domestic migration are only applied to simulants who currently live
+in the US.
+
+To keep things simple, we will for now not have the
 reference person ever move in a non-household migration, and when a
 non-reference person moves to another household, we will update their
 relationship to the reference person to be 36 - Other non-relative
 (for simplicity, for now).
-
 This will prevent toddlers from moving out of their parents houses. It
 will still have a mother moving out of a house and leaving an
 infant. We could add functionality such that children move with their
@@ -712,9 +723,142 @@ This could be done by assigning unique (or practically unique, with very low pro
 2.3.6 Component 10: International Emigration (Out-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+Simulants may leave the US to live in other countries.
+As with immigration, there are three types of emigration events that can occur:
 
-    Describe this component.
+#. Household moves, when an entire household moves out of the US as a unit.
+#. GQ person moves, when a GQ person moves out of the US individually.
+#. Non-reference-person moves, when a single non-GQ person leaves their household to move out of the US.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We use the Net International Migration (NIM) estimates from the Census
+Bureau's Population and Housing Unit Estimates (PopEst) program to determine the
+number of emigrants per year. [Census_PopEst]_
+Specifically, we use the 2018-2019 annual estimates, in the assumption that this
+(pre-COVID) year's emigration can be applied to each future year in the simulation.
+
+We subtract out immigration, which we estimate from the ACS PUMS'
+migration question as described in the previous section, to isolate emigration.
+Specifically, these three quantities are related by the equation
+:math:`\text{NIM} = \text{immigration} - \text{emigration}`.
+
+The NIM estimates are made by the PopEst team by combining information
+about immigration from ACS with information about emigration from demographic analysis
+(for those born outside the US) and analysis of foreign censuses (for those born in
+the US). [Census_PopEst_Methodology]_
+Without access to the source data, we cannot replicate these methods, which is why we
+use the published NIM values instead of directly estimating emigration.
+
+The NIM values are not published fully stratified.
+Out of the available stratifications, we chose to use the values stratified
+by (broad categories of) race/ethnicity, because these are most likely to have
+PRL implications.
+
+Inspired by the methodology of the PopEst team at the Census Bureau,
+we further stratify emigration by assuming that **emigrants** have the same
+characteristics as **immigrants**.
+There are clear reasons why this assumption would not be correct
+(e.g. the fact that the US is one of the wealthiest countries in the world means
+it is unlikely to have symmetric characteristics of incoming and outgoing migration)
+but it does likely capture some of the ways in which people with different characteristics
+have different propensities for international migration, regardless of origin/destination.
+
+First, we distribute emigration by move type, replicating the distribution of
+move type in each broad race/ethnicity group (non-Hispanic White alone, Hispanic, all other)
+found in ACS PUMS recent immigrants.
+
+Then, we distribute emigration within each race/ethnicity and move type by further demographics,
+according to the distributions of these demographics in a resample of the corresponding ACS immigrant population,
+with perturbation as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+Note that in the case of household moves, these are the demographics **of the immigrant's household's reference person**,
+while for the other two types they are demographics of the immigrant themselves.
+
+Finally, we calculate the rates of people emigrating per year of person-time "at risk":
+
+* The "at risk" population for household moves is people living in non-GQ households.
+* The "at risk" population for GQ person moves is people living in GQ.
+* The "at risk" population for non-reference-person moves is people living in non-GQ households who
+  are not the reference person in their household.
+
+In order to mitigate the sampling noise in ACS PUMS stratified by all of these demographic characteristics,
+we calculate the denominator for the rate from a resample of the "at risk" population, with perturbation.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+Emigration events are modeled as happening to an at-risk population at a certain rate.
+They are constant across time in the simulation.
+
+Households and individuals selected to have emigration events should remain in the simulation, but their
+location attributes (US state, PUMA, and address) should be set to placeholder values that signify they are
+no longer in the US.
+Emigrating simulants should also terminate employment -- their employer ID and income are set
+to those used for unemployment.
+In the future, we may want some of these simulants to continue employment in the US or
+re-enter through the immigration component, but for now
+they will remain unemployed and outside the US permanently.
+All other simulant attributes should be unchanged by the emigration event.
+
+.. note::
+
+  Because simulants outside the US remain in the population table, it is important for all components
+  to carefully define whether or not they act on these simulants.
+  For example, the at-risk population for emigration in each type of move defined below is specified
+  to be **in the US**.
+  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
+
+Household moves
+'''''''''''''''
+
+The at-risk population for household moves is all simulants living in non-GQ households in the US.
+This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
+**of the simulant's household's reference person**, as well as US state.
+On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
+a number of **simulants** to emigrate as part of household moves.
+Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
+This means that in practice we will generally overshoot the desired number by a few, but this should have
+minimal effect.
+
+GQ person moves
+'''''''''''''''
+
+The at-risk population for GQ person moves is all simulants living in GQ in the US.
+This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
+and US state.
+On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
+should be applied to sample simulants to emigrate. 
+
+Non-reference-person moves
+''''''''''''''''''''''''''
+
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
+and US state.
+On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
+should be applied to sample simulants to emigrate.
+The simulant is removed from the household (they may be given a blank or placeholder household ID) and the
+rest of the household is unaffected by this event.
+
+Simulation inputs
+^^^^^^^^^^^^^^^^^
+
+:download:`Household emigration rates <household_emigration_rates.csv>`
+
+:download:`GQ person emigration rates <group_quarters_person_emigration_rates.csv>`
+
+:download:`Non-reference-person emigration rates <non_reference_person_emigration_rates.csv>`
+
+Limitations
+^^^^^^^^^^^
+
+#. We assume that emigration is either whole-household or totally independent at the individual level.
+   In reality, it is likely that subfamilies emigrate together more frequently than would be expected under this assumption.
+#. We assume that relationship does not affect emigration rates.
+   In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
+   even after accounting for demographics.
+#. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
 2.3.7 Component 11: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1050,6 +1194,7 @@ Census
 
 **Who to Sample** 
 
+Simulants currently living in the US are eligible for sampling.
 Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
 probability, simulants will be randomly selected for inclusion. We decided 
@@ -1220,6 +1365,7 @@ There are two types of sampling plans:
 
 **Who to Sample** 
 
+Simulants currently living in the US are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
@@ -1717,5 +1863,9 @@ To Come (TK)
 .. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
+
+.. [Census_PopEst] Bureau, US Census. n.d. “National Population by Characteristics: 2010-2019, Components of Change” Census.Gov. Accessed October 14, 2022. https://www.census.gov/data/tables/time-series/demo/popest/2010s-national-detail.html.
+
+.. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997 
