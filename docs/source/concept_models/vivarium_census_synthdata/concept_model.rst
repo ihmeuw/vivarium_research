@@ -517,7 +517,7 @@ This file is not exact:
   after step 1 has been applied, simulants will primarily not have children relationships
   in situations where other relationships are possible.
 * We use Census' definition that a relative
-  "is someone related... by birth, marriage, or adoption" and that this is a transitive property
+  "is someone related... by birth, marriage, or adoption" [Census_ACS_Instructions]_ and that this is a transitive property
   (the relative of my relative is my relative).
   Data quality note: these instructions are only available on the ACS website and as tooltips for
   those taking ACS online, so different ACS respondents may have substantially different interpretations
@@ -1717,3 +1717,5 @@ To Come (TK)
 .. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
+
+.. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997 
