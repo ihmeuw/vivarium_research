@@ -1,31 +1,3 @@
-..
-  Section title decorators for this document:
-
-  ==============
-  Document Title
-  ==============
-
-  Section Level 1 (#.0)
-  +++++++++++++++++++++
-
-  Section Level 2 (#.#)
-  ---------------------
-
-  Section Level 3 (#.#.#)
-  ~~~~~~~~~~~~~~~~~~~~~~~
-
-  Section Level 4
-  ^^^^^^^^^^^^^^^
-
-  Section Level 5
-  '''''''''''''''
-
-  The depth of each section level is determined by the order in which each
-  decorator is encountered below. If you need an even deeper section level, just
-  choose a new decorator symbol from the list here:
-  https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
-  And then add it to the list of decorators above.
-
 =================
 Vivarium Research
 =================
@@ -137,7 +109,7 @@ Protocol for adding reviewers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 From the research team:
-^^^^^^^^^^^^^^^^^^^^^^^
+'''''''''''''''''''''''
 
 For pull requests that are project-specific, you should request review from 
 all members of the research team involved with that project. For more general 
@@ -145,7 +117,7 @@ pull requests that apply to overall Vivarium protocols and/or framework, etc.,
 you should request review from all members of the research team.
 
 From the engineering team:
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+''''''''''''''''''''''''''
 
 Always tag engineers working on a given project for pull requests related to 
 that project. This will allow the engineering team members to stay informed of 
