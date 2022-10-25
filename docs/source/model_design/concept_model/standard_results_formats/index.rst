@@ -128,7 +128,7 @@ Parameters in results dataframes
   * - :code:`entity`
     - string
     - Name of entity being measured
-    - :code:`gbd_{entity_type}_name.replace(" ","_").lower()`
+    - :code:`gbd_{entity_type}_name.replace(" ","_").lower()` if there is a corresponding GBD entity, otherwise agreed upon between research and engineering teams
       
       * measles
       * child_stunting
