@@ -1368,7 +1368,8 @@ W2 and 1099 Forms
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
 is a person in their household who has a SSN, use this number 
-instead. If there is not a person in their household with a SSN 
+instead. If there are multiple people with a SSN, choose at random. 
+If there is not a person in their household with a SSN 
 then fill in a random number. This is designed to reflect 
 undocumented immigrants who might use fake or no longer 
 valid SSNs to obtain employment. 
@@ -1376,6 +1377,9 @@ valid SSNs to obtain employment.
 For this observer, a new row should be made for each **employment**, not 
 each simulant. This means that a simulant can have multiple rows of 
 data, or just one row of data. 
+
+Note that "wages" is used per the census team's request, but is the same 
+value as "income" in our simulation. 
 
 Here is an example: 
 
@@ -1386,7 +1390,9 @@ Here is an example:
 Everyone who has had an employer listed within the current calendar year 
 will receive either a W2 or a 1099 form. For those with multiple jobs during 
 the year, they will be duplicated and receive multiple forms. We currently 
-will not model persistence from year to year on which type of form. 
+will not model persistence from year to year on which type of form. The type 
+of form is selected per job, not per person. For a person with multiple jobs, 
+the form type is randomly selected each time. 
 
 
 The rate of the the types of forms are below. This data is 
@@ -1519,9 +1525,9 @@ a 9. It can be randomly generated. This applies for all types of
 filers (primary, joint, dependents). Do **NOT** include the fake 
 SSN from the employer tax forms. 
 
-We do need to track the ITIN over time for simulants. But we do not want 
-to assign a ITIN on initialization, only on time steps when needed for tax 
-documents. 
+For now, we will randomly assign ITIN's, but not track them over time. 
+Since this makes them unhelpful for PRL work, we can also allow duplicates. 
+This might be refined later if it is important for PRL. 
 
 This is designed to reflect undocumented immigrants, who primarily 
 file taxes under the ITIN system. 
@@ -1602,8 +1608,9 @@ for who files taxes:
     * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
     * The dependent's income must be below $4300 
 - For simulants outside of the household, they will be claimed as a dependent by their parent until age 19 OR age 24 if they are in group quarters for college 
-    * For simulants born in the simulation, they should have at least one parent tracked 
-    * For simulants not born in the simulantion, information on initializing parents is being added shortly 
+    * For simulants born in the simulation, they should have at least one parent/guardian tracked 
+    * For simulants not born in the simulantion, information on initializing parent/guardians is being added shortly 
+    * For simulatns with more than one parent/guardian tracked, assign the dependent randomly 
 
 
 **Data Errors/Noise** 
