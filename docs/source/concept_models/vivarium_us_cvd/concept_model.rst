@@ -379,7 +379,7 @@ after a screening or emergency visit, ignore the new assignment. The original fo
 If a simulant misses an appointment, they are assumed to be 'lost to follow-up' and will not have future 
 appointments until they have a screening or emergency visit. 
 
-If a simulant misses an appointment, they can have a screening appointment in that time step. 
+If a simulant misses an appointment, they are NOT considered for a screening appointment in that time step. 
 
 If a simulant leaves a visit in the "no change" state but previously had a follow-up scheduled, they will 
 keep that follow-up appointment. 
@@ -732,7 +732,7 @@ in SBP level will be given to each. The percent increase **only applies to adher
     - No    
     - N/A 
     - N/A
-    - N/A
+    - 1
     - 130 
   * - 3 
     - 150 
@@ -794,7 +794,7 @@ increase in LDL-C level will be given to each.
     - No    
     - N/A 
     - N/A
-    - N/A
+    - 1
     - 1.9 
   * - 3 
     - 2.3 
@@ -833,7 +833,7 @@ These covariate values are calculated for each simulant and are then plugged int
  :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.014 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
 
 Where sex = 1 for men and 2 for women 
-
+and SBP and LDL level refer to the raw values from GBD 
 
 **Calculating Probabilities:** 
 
