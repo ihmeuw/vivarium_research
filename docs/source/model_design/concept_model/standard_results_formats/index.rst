@@ -88,17 +88,24 @@ Parameters in results dataframes
       * early_neonatal
       * 50_to_54
       * etc.
+
+      If age is not included as a stratifying variable in the simulation, the age parameter should still be specified in vivarium results data frames according to the simulation minimum and maximum age values.
+
+      If there is no corresponding GBD age group name, the value should be formatted as :code:`{age_min}_to_{age_max - 1}` if age units are years. If age units are in another unit (days/weeks/months), then the value should be formatted as :code:`{age_min}_to_{age_max - 1}_{units}`.
   * - :code:`sex`
     - string
     - Sex of stratum
     - * male
       * female
+      * both
   * - :code:`year`
-    - integer
+    - string
     - Simulated year
     - * 2022 
       * 2023
       * etc.
+
+      If year is not included as a stratifying variable in the simulation, the year parameter should still be specified in vivarium results data frames with a value of :code:`{start_year}_through_{end_year}`.
   * - :code:`{other_stratifying_variables}` (example: :code:`treatment`)
     - string
     - Some other variable by which to stratify values (in the same way as age, sex, year, etc.). Intervention coverage is a common example.
@@ -150,7 +157,7 @@ Parameters in results dataframes
 
     \text{First moment} = \sum_{i}Y_i \times \text{person time}_i
 
-    \text{Second moment} = \sum_{i}Y_i \times \text{person time}_i
+    \text{Second moment} = \sum_{i}Y_i^2 \times \text{person time}_i
 
   Using these measures, we can then calculate the population mean and standard deviation values for that continuous exposure by dividing the first and second moment (respectively) by the sum of person time within the population.
 
