@@ -491,6 +491,29 @@ GBD has state-level all-cause mortality, does FBD forecast at the US
 state level yet? Not necessary right now, but good to know for the
 future.
 
+When a simulant who is the reference person in a non-GQ household dies,
+the oldest remaining simulant in their household is assigned to be the reference person.
+All other simulants in the household are assigned a new relationship with these steps:
+
+#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+   the simulant is assigned 'Biological child.'
+#. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
+   column in the CSV data file below, from the row where the
+   :code:`relationship_to_old_reference_person` column matches this simulant's current relationship
+   attribute and the :code:`new_reference_person_relationship_to_old_reference_person` column
+   matches the previous relationship attribute of the new reference person.
+#. If there is no such row in the file (which would only happen with very strange combinations,
+   e.g. a person having two spouses), the simulant is assigned 'Other nonrelative.'
+
+:download:`reference_person_update_relationship_mapping.csv`
+
+This file is not exact, because there is not always sufficient information
+to uniquely determine a new relationship.
+For some combinations, it relies on the parent tracking in step 1, and assumes that
+after step 1 has been applied, simulants will primarily not have children relationships
+in situations where other relationships are possible.
+Some notes on the assumptions made are included in the CSV.
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are dying at the expected rates.
