@@ -1005,7 +1005,7 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - Split by intervention type 
 
 
-*Stratifications for All not included above: 
+Stratifications for All (not included above): 
 
 #. Year 
 #. Age-group 
