@@ -603,7 +603,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `here <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `at this link <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
