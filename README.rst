@@ -132,11 +132,11 @@ reviewers when a pull request contains any changes that:
 * Were requested by engineering, or
 * Affects modeling strategy that has already been implemented and therefore
   requires code changes by the engineers
-   * In this case, the research team member who made the pull request is
-     responsible for making a ticket on the
-     `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_
-     that outlines the requested code changes. The research team member should
-     then post a slack message in the project-specific channel that tags the
-     engineers and links to the new JIRA ticket.
+  * In this case, the research team member who made the pull request is
+    responsible for making a ticket on the
+    `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_
+    that outlines the requested code changes. The research team member should
+    then post a slack message in the project-specific channel that tags the
+    engineers and links to the new JIRA ticket.
 
 **TODO:** Post more details on best practice for making tickets when available.
