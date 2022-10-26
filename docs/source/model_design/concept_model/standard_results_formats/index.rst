@@ -92,6 +92,8 @@ Parameters in results dataframes
       If age is not included as a stratifying variable in the simulation, the age parameter should still be specified in vivarium results data frames according to the simulation minimum and maximum age values.
 
       If there is no corresponding GBD age group name, the value should be formatted as :code:`{age_min}_to_{age_max - 1}` if age units are years. If age units are in another unit (days/weeks/months), then the value should be formatted as :code:`{age_min}_to_{age_max - 1}_{units}`.
+
+      If there is no maximum age, the age age value should be specified as :code:`{age_min}_plus`. If there is no age minimum value, the age parameter value should be specified as :code:`0_to_{age_max - 1}`. Finally, if there is no minimum or maximum age, then the age parameter value should be specified as :code:`all_ages` (consistent with GBD age group ID 22). 
   * - :code:`sex`
     - string
     - Sex of stratum
