@@ -1944,7 +1944,7 @@ of Death".
 
 Here is an example: 
 
-.. image:: SSA_example.PNG
+.. image:: SSA_example.png
 
 Note that the top row is a simulate that received a SSN at birth. The 
 third row indicates someone who immigrated at age 5 and received their 
