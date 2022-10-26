@@ -27,12 +27,12 @@
 Vivarium Standard Results Format
 =========================================================
 
-.. contents::
-   :local:
-   :depth: 1
-
 The aim of this page is to outline a standard format for Vivarium model results 
 as they appear in the count data that the engineers pass off to the researchers.
+
+.. contents::
+   :local:
+   :depth: 2
 
 Motivation behind standard formatting
 -------------------------------------
