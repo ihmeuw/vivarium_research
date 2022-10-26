@@ -41,13 +41,13 @@ Standardized formatting of Vivarium model results may be beneficial in the
 following ways:
 
 - Predictability of results format allows researchers to write results 
-processing code in advance of receiving results
+  processing code in advance of receiving results
 
 - Results format consistency enables generalizable results processing code (for 
-researchers and engineers) and reduces the need to code exception cases
+  researchers and engineers) and reduces the need to code exception cases
 
 - Shared language and classification of terms may aid in communication between 
-researchers and engineers
+  researchers and engineers
 
 Formatting guide
 -----------------
@@ -139,10 +139,9 @@ Parameters in results dataframes
   * - :code:`{other_stratifying_variables}` (example: :code:`treatment`)
     - string
     - Some other variable by which to stratify values (in the same way as age, 
-    sex, year, etc.). Intervention coverage is a common example.
+      sex, year, etc.). Intervention coverage is a common example.
     - Name and values of {other_stratifying_variables} to be defined in advance 
-    of implementation by researchers.
-
+      of implementation by researchers.
 
       Example:
 
@@ -168,8 +167,8 @@ Parameters in results dataframes
     - string
     - Name of entity being measured
     - :code:`gbd_{entity_type}_name.replace(" ","_").lower()` if there is a 
-    corresponding GBD entity, otherwise agreed upon between research and 
-    engineering teams
+      corresponding GBD entity, otherwise agreed upon between research and 
+      engineering teams
       
       * measles
       * child_stunting
@@ -197,8 +196,8 @@ Parameters in results dataframes
     \text{Second moment} = \sum_{i}Y_i^2 \times \text{person time}_i
 
   Using these measures, we can then calculate the population mean and standard 
-  deviation values for that continuous exposure by dividing the first and second
-   moment (respectively) by the sum of person time within the population.
+  deviation values for that continuous exposure by dividing the first and second 
+  moment (respectively) by the sum of person time within the population.
 
 Some examples
 +++++++++++++
