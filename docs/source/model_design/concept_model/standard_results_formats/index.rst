@@ -126,13 +126,13 @@ Parameters in results dataframes
       * deaths
       * person_time
       * transition_count
-      * first_moment
-      * second_moment
+      * continuous_exposure
   * - :code:`entity_type`
     - string
     - Type of entity being measured
     - * cause
       * rei
+      * modelable_entity
       * {other}
   * - :code:`entity`
     - string
@@ -141,11 +141,13 @@ Parameters in results dataframes
       
       * measles
       * child_stunting
+      * hemoglobin
   * - :code:`sub_entity`
     - string
     - Name of entity state or category
     - * susceptible/infected/recovered
       * cat1/cat2/cat3/cat4
+      * first_moment/second_moment
   * - :code:`value`
     - float
     - Measured value
@@ -200,7 +202,7 @@ Some examples
     - child_stunting
     - cat1
   * - Hemoglobin first moment
-    - first_moment
-    - rei
+    - continuous_exposure
+    - modelable_entity
     - hemoglobin
-    - N/A
+    - first_moment
