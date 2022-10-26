@@ -1420,6 +1420,7 @@ There are two types of sampling plans:
   :widths: 20
   :header-rows: 0
 
+  * - Household number (random indicator for who is in the same household)
   * - Unique simulant ID (for PRL tracking)
   * - First name
   * - Middle initial 
@@ -1428,6 +1429,11 @@ There are two types of sampling plans:
   * - DOB 
   * - Home Address 
   * - Home Zip Code 
+
+Here is an example: 
+
+.. image:: survey_example.PNG
+
 
 **Who to Sample** 
 
@@ -1567,6 +1573,10 @@ The ACS will be used for V&V testing. It is defined as:
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
+For efficiency in modeling, bias selection can occur outside of the simulation. 
+Please select 3 times more households that are listed, to ensure that there are 
+different options for noise and changes in survey design. 
+
 **Survey - Current Population Survey (CPS)** 
 
 The CPS is a survey run by the Census Bureau and gathers data about the 
@@ -1583,6 +1593,10 @@ To create this survey:
 - This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
 
 [Household_Rates_2022]_
+
+For efficiency in modeling, bias selection can occur outside of the simulation. 
+Please select 3 times more households that are listed, to ensure that there are 
+different options for noise and changes in survey design. 
 
 Note/limitations: 
 
