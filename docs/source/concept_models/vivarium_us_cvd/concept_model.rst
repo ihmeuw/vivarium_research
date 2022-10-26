@@ -405,7 +405,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Notes
   * - A
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - [Wallace_2011]_
+    - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
     - [Ali_2021]_ [Liu_2017]_
@@ -436,10 +436,10 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Notes
   * - A
     - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex) where Sex=1 for males and Sex=0 for females 
-    - 
+    - This equation returns percentage values. It is okay if they are negative. 
   * - B
-    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L    
-    - [McCormack_2020]_
+    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L 
+    - Measurements have a minimum value of 0 enforced [McCormack_2020]_
   * - C
     - If simulant is in the acute or post MI or stroke states 
     - 
@@ -603,8 +603,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is here:
-/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `at this link <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
@@ -939,40 +938,10 @@ Code is below for reference
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
     .. image:: Model3_VV_Angina.png
 
-  
+
 .. _uscvd4.7:
 
-4.7 Desired outputs
--------------------
-
-Outputs:
-
-#. Total population 
-#. Person-time 
-#. YLLs and YLDs
-#. Deaths 
-#. Transitions for each cause 
-#. Total exposure value * person time for all risk factors 
-#. Person time at or below target values for SBP and LDL-C 
-#. Healthcare appointments 
-#. Missed appointments 
-#. Person time on medication 
-#. Medication effect - exposure levels stratified by medication time 
-#. Numbers of interventions 
-
-
-Stratifications for All: 
-
-#. Year 
-#. Age-group 
-#. Sex 
-#. State (Alabama, Alaska, etc)
-#. Scenario 
-#. Race (note: not included in minimum viable model, to be added later)
-
-.. _uscvd4.8:
-
-4.8 Output meta-table shell
+4.7 Output meta-table shell
 ---------------------------
 
 .. list-table:: Model Outputs 
@@ -981,7 +950,7 @@ Stratifications for All:
 
   * - Output 
     - Notes
-    - Additional Stratifications Needed 
+    - Additional Stratifications Needed* 
   * - Population  
     - 
     -  
@@ -1002,10 +971,10 @@ Stratifications for All:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - Split by medication category
+    - 
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - Split by medication category
+    - 
   * - Mean BMI 
     - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
     - 
@@ -1013,17 +982,17 @@ Stratifications for All:
     - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
     - 
   * - Population achieving target LDL-C
-    - sum of person time at or below 1.81 LDL-C 
+    - sum of person time at or below 1.81 LDL-C; can be included only in final models 
     - 
   * - Population achieving target SBP
-    - sum of person time at or below 130 SBP  
+    - sum of person time at or below 130 SBP; can be included only in final models 
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
     - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc.
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - Split by age/sex/state/etc. 
+    - 
   * - Population on SBP medication 
     - sum of person time on SBP medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
@@ -1034,6 +1003,15 @@ Stratifications for All:
     - sum of interventions given 
     - Split by intervention type 
 
+
+Stratifications for All (not included above): 
+
+#. Year 
+#. Age-group 
+#. Sex 
+#. State (Alabama, Alaska, etc)
+#. Scenario 
+#. Race (note: not included in minimum viable model, to be added later)
 
 
 .. _uscvd5.0:
@@ -1087,6 +1065,8 @@ Some limitations of this analysis include:
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 #. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
 #. To create "untreated" SBP and LDL-C values, we addded an approximate treatment value to those simulants who were initialized to be on medication. This method did not create a blanket population "PAF" from medication, which is different than other simulations. This should be checked in V&V for possible side effects.  
+#. During initialization of the model, we "take measurements" from the raw GBD values rather than the treatment adjusted values. This is only for simulants initialized in the emergency state. Since treatment effects have not been applied yet, this is necessary and with the burn-in period it is unlikely to affect the outcomes. 
+#. Maximum and minimum threshold values are enforced on the raw GDB data for SBP and LDL-C. These are not enforced for the "real" values with treatment adjustments. They are also not enforced for measured values EXCEPT that measurements cannot be negative (you cannot test and show -2 LDL-C for example). 
 
 .. _uscvd7.0:
 
