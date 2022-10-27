@@ -1906,11 +1906,12 @@ Social Security Observer
 Social security information is kept and tracked for a range 
 of different actions. For simplicity, we will limit this 
 section to only creation and dates of death. Others could be 
-added later, if desired. 
+added later (not in the minimum viable model), if desired. 
 
 **When to Sample** 
 
 - A sample of qualifying events is taken on every time step 
+- At initialization, an observer including everyone's SSN creation will be generated 
 
 **What to Sample** 
 
@@ -1936,7 +1937,11 @@ The creation of a SSN can be triggered by a birth or by immigration into
 the US. Both will be listed as "Creation" and are not differentiated. This 
 event is only recorded for simulates that receive a SSN. 
 The date of event is either the date of birth or the date of immigration. 
-If these values are unknown, any date within the time step can be recorded. 
+
+At initialization, a record of all SSNs creation will be generated. 
+Everyone who starts in the sim with a SSN will have a creation record made 
+with their date of birth. These records will match the structure of the 
+ones created on time steps. 
 
 The date of death is a recording of anyone who has died and has a SSN. The 
 date of the event is the date of death. This will be listed as "Date 
@@ -1957,10 +1962,13 @@ will be recorded.
 
 **Data Errors/Noise** 
 
-- The omission rate (currently 0%) should be parameterizable. 
-- Additional noise in names and dates will be added in a separate function, at a later date. 
+.. todo::
 
-**Limitations and Possible Future Adds** 
+  - The omission rate (currently 0%) should be parameterizable. 
+  - Additional noise functions on names and dates should be parameterizable. 
+
+
+**Items NOT Included in the Minimum Viable Model** 
 
 There are a significant number of other possible "events" that 
 could be included in the observer. These are either not implemented 
@@ -1969,13 +1977,13 @@ have not been included. These are:
 
 #. Name changes - either first names (trans folks or others) or last names (commonly marriage or divorce). Not included in larger simulation 
 #. Sex-coding changes - not included in larger simulation 
-#. Correction of incorrect information - not included in larger simulation 
-#. Social security benefits - this could be an easy add here if we add it in employment 
-#. Diability benefits - similarly, could be an easy add if it is added in employment 
-#. New employment - it's unclear what percent of new jobs are actually recorded. Also this leads to complications if someone shares a SSN. 
+#. Correction of incorrect information - we would need to have noise functions in place and then add events to "correct" the intentional mistakes. This would be quite challenging to add. 
+#. Receipt of social security benefits - this could be an easy add here if we add it in employment 
+#. Receipt of disability benefits - similarly, could be an easy add if it is added in employment 
+#. New employment - it's unclear what percent of new jobs are actually recorded. Also this leads to complications with the tax observer where simulants can "borrow" a SSN. 
 #. Change of address - only applies if you tell USPS that you moved, which not everyone does. This would be more complex and so is not included right now. 
 
-Other limitations: 
+**Limitations**
 
 #. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
 #. There are errors in SSN data, which are not modeled here. 
