@@ -1429,7 +1429,7 @@ There are two types of sampling plans:
 
 Here is an example: 
 
-.. image:: survey_example.PNG
+.. image:: survey_example.png
 
 
 **Who to Sample** 
