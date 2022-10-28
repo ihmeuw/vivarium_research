@@ -593,7 +593,7 @@ All other simulants in the household are assigned a new relationship with these 
 
 :download:`reference_person_update_relationship_mapping.csv`
 
-This file is not exact:
+Assumptions/limitations in the creation of this file:
 
 * There is not always sufficient information to uniquely determine a new relationship. We err
   toward the most likely scenario.
