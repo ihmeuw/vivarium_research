@@ -1370,15 +1370,12 @@ duplicates at this time.
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age or DOB, and person swaps. 
 
-Some errors may be introduced within the simulation, such as 
-duplicate people or swapped people. Others may be introduced 
-at the time of sampling, such as name and address misspellings. 
+.. todo::
+    Engineers: these things are not yet defined and might be edited later - they should be parameterizable 
 
-These are not currently modeled. 
+    - We currently have net undercounts, might want to have omissions and duplicates instead. Having a perfect census for now should be fine. 
+    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
 
 **Limitations and Possible Future Adds** 
 
@@ -1544,15 +1541,14 @@ survey iterations.
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age, and person swaps. 
 
-Some errors may be introduced within the simulation, such as 
-duplicate people or swapped people. Others may be introduced 
-at the time of sampling, such as name and address misspellings. 
+.. todo::
+    Engineers: these things are not yet defined and might be edited later - they should be parameterizable 
 
-These are not currently modeled. 
+    - Omission rates by survey, oversampling might be needed to avoid rerunning 
+    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
+    - Include person swaps or duplicates 
+    
 
 **Limitations and Possible Future Adds** 
 
@@ -1573,10 +1569,6 @@ The ACS will be used for V&V testing. It is defined as:
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
-For efficiency in modeling, bias selection can occur outside of the simulation. 
-Please select 3 times more households that are listed, to ensure that there are 
-different options for noise and changes in survey design. 
-
 **Survey - Current Population Survey (CPS)** 
 
 The CPS is a survey run by the Census Bureau and gathers data about the 
@@ -1593,10 +1585,6 @@ To create this survey:
 - This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
 
 [Household_Rates_2022]_
-
-For efficiency in modeling, bias selection can occur outside of the simulation. 
-Please select 3 times more households that are listed, to ensure that there are 
-different options for noise and changes in survey design. 
 
 Note/limitations: 
 
@@ -1890,18 +1878,14 @@ for who files taxes:
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age, and person swaps. 
 
-Some additional tax specific errors include: SSN randomly being filled 
-for those who are missing one, mailing address being different than the 
-home address, and issues with employer names, addresses, or IDs. 
+.. todo::
+    Engineers: these things are not yet defined and might be edited later - they should be parameterizable 
 
-Furthermore, there are often complications with people being claimed as 
-dependents in different households, or claiming people from group quarters.
-
-These are not currently modeled. 
+    - Omission rates, oversampling might be needed to avoid rerunning 
+    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
+    - Further refine "sharing" of SSN's 
+    - Include person swaps or duplicates - especially relevant for taxes if dependents should be double claimed sometimes 
 
 **Limitations and Possible Future Adds** 
 
