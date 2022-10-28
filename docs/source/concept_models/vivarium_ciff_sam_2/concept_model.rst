@@ -386,7 +386,7 @@ For scenarios that feature a scale-up of one of the above interventions, interve
 
 2. Update SQ-LNS intervention details (except for targeting implementation)
 
-  * Change age-end parameter from 5 to 2 years
+  * Change SQ-LNS coverage age-end parameter from 5 to 2 years
 
   * Update effect of SQ-LNS on wasting to new sex-specific values
 
@@ -453,6 +453,12 @@ For scenarios that feature a scale-up of one of the above interventions, interve
    * - 1.0 
      - Baseline concept model updates
      - `V&V notebooks for model 1.0 can be found here <https://github.com/ihmeuw/vivarium_research_wasting/tree/main/verification_and_validation/model_1>`_. V&V criteria satisfied.
+   * - 2.0
+     - SQ-LNS intervention updates
+     - * `SQ-LNS sex-specific effect size looks as expected <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_2.0/intervention_effect_verification.ipynb>`_
+       * `Intervention scale-ups look as expected <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_2.0/intervention_coverage_verification.ipynb>`_
+       * Cap of 2 years applied to entire simulation rather than to the SQ-LNS intervention eligibility
+
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -461,10 +467,10 @@ For scenarios that feature a scale-up of one of the above interventions, interve
      - Explanation
      - Action plan
      - Timeline
-   * -  
-     -  
-     -  
-     -  
+   * - Simulation age end 2 years instead of 5, need age end of 2 years for SQ-LNS intervention only.
+     - Misunderstanding in research team request
+     - Hussain to implement update
+     - For next model run
 
 Assumptions and Limitations
 ----------------------------
