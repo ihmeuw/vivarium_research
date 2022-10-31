@@ -408,13 +408,13 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
-    - [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
-    - [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
     - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
-    - [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
   * - E (outreach intervention scenarios)
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
@@ -445,16 +445,16 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - 
   * - D
     - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
     - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
     - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
     - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
-    - [Morales_2018]_ 
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
@@ -927,12 +927,33 @@ Code is below for reference
     - `Validation workbook Model 3 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd>`_ Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. Seems that angina relative risk is highly susceptible to low n-size and leads to high variation. 
   * - 4.0
     - Adding in healthcare system visits 
-    - Planned V&V: stable rate of appointments per CVD case in the population; percent of simulants with a follow-up scheduled is reasonably stable; percent of appointments that are follow-up visits is stable. Source: [Rodgers_2009]_
+    - `Validation workbook Model 4 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model4_VV.ipynb>`_  Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. It is difficult to properly V&V appointments as everyone gets a follow-up right now, but accounting for that it appeared stable. Check with: [Rodgers_2009]_ 
   * - 5.0
-    - Adding medications for SBP and LDL-C  
+    - Adding medications for SBP 
     - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
   * - 6.0
-    - Adding in the outreach intervention 
+    - Adding medications for LDL-C 
+    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+  * - 7.0
+    - Adding Heart Failure (might change)
+    -  
+  * - 8.0
+    - Adding Outreach Intervention (might change)
+    -  
+  * - 9.0
+    - Adding Polypill Intervention (might change)
+    -  
+  * - 10.0
+    - Scenarios 
+    -  
+  * - 11.0
+    - BMI  
+    -  
+  * - 12.0
+    - FPG 
+    -  
+  * - 13.0
+    - Lifestyle Intervention  
     -  
 
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
@@ -941,8 +962,8 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
 
 .. _uscvd4.7:
 
-4.7 Output meta-table shell
----------------------------
+4.7 Model Outputs
+-----------------
 
 .. list-table:: Model Outputs 
   :widths: 5 15 15 
@@ -971,16 +992,16 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - 
+    - Only needed for V&V 
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - 
+    - Only needed for V&V 
   * - Mean BMI 
     - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
-    - 
+    - Only needed for V&V 
   * - Mean FPG 
     - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
-    - 
+    - Only needed for V&V 
   * - Population achieving target LDL-C
     - sum of person time at or below 1.81 LDL-C; can be included only in final models 
     - 
@@ -989,10 +1010,10 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
-    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc.
+    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Only needed for V&V 
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - 
+    - Only needed for V&V 
   * - Population on SBP medication 
     - sum of person time on SBP medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 

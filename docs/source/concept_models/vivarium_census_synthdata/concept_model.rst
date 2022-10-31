@@ -577,6 +577,40 @@ GBD has state-level all-cause mortality, does FBD forecast at the US
 state level yet? Not necessary right now, but good to know for the
 future.
 
+When a simulant who is the reference person in a non-GQ household dies,
+the oldest remaining simulant in their household is assigned to be the reference person.
+All other simulants in the household are assigned a new relationship with these steps:
+
+#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+   the simulant is assigned 'Biological child.'
+#. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
+   column in the CSV data file below, from the row where the
+   :code:`relationship_to_old_reference_person` column matches this simulant's current relationship
+   attribute and the :code:`new_reference_person_relationship_to_old_reference_person` column
+   matches the previous relationship attribute of the new reference person.
+#. If there is no such row in the file (which would only happen with very strange combinations,
+   e.g. a person having two spouses), the simulant is assigned 'Other nonrelative.'
+
+:download:`reference_person_update_relationship_mapping.csv`
+
+Assumptions/limitations in the creation of this file:
+
+* There is not always sufficient information to uniquely determine a new relationship. We err
+  toward the most likely scenario.
+* We assume that any children of people with current partners or spouses are also children of
+  the partner or spouse, unless told otherwise.
+* For some combinations, we rely on the parent tracking in step 1, and assume that
+  after step 1 has been applied, simulants will primarily not have children relationships
+  in situations where other relationships are possible.
+* We use Census' definition that a relative
+  "is someone related... by birth, marriage, or adoption" [Census_ACS_Instructions]_ and that this is a transitive property
+  (the relative of my relative is my relative).
+  Data quality note: these instructions are only available on the ACS website and as tooltips for
+  those taking ACS online, so different ACS respondents may have substantially different interpretations
+  of the relationship categories.
+
+More notes on the assumptions and specifically where they were used are included in the CSV.
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are dying at the expected rates.
@@ -2339,3 +2373,5 @@ To Come (TK)
 .. [Census_PopEst] Bureau, US Census. n.d. “National Population by Characteristics: 2010-2019, Components of Change” Census.Gov. Accessed October 14, 2022. https://www.census.gov/data/tables/time-series/demo/popest/2010s-national-detail.html.
 
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
+
+.. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
