@@ -155,7 +155,9 @@ Parameters in results dataframes
       * deaths
       * person_time
       * transition_count
-      * continuous_exposure
+      * first_moment
+      * second_moment
+      * births
   * - :code:`entity_type`
     - string
     - Type of entity being measured
@@ -178,7 +180,9 @@ Parameters in results dataframes
     - Name of entity state or category
     - * susceptible/infected/recovered
       * cat1/cat2/cat3/cat4
-      * first_moment/second_moment
+      * For transition_count sub-entities: {source_state}__to__{sink_state} 
+        (example: infected__to__recovered)
+      * not_applicable
   * - :code:`value`
     - float
     - Measured value
@@ -196,8 +200,8 @@ Parameters in results dataframes
     \text{Second moment} = \sum_{i}Y_i^2 \times \text{person time}_i
 
   Using these measures, we can then calculate the population mean and standard 
-  deviation values for that continuous exposure by dividing the first and second 
-  moment (respectively) by the sum of person time within the population.
+  deviation values for that continuous exposure by using the sum of person time 
+  within the population.
 
 Some examples
 +++++++++++++
@@ -229,14 +233,34 @@ Some examples
     - transition_count
     - cause
     - measles
-    - infected_to_recovered
+    - infected__to__recovered
   * - Person time in severe child stunting (cat1)
     - person_time
     - rei
     - child_stunting
     - cat1
   * - Hemoglobin first moment
-    - continuous_exposure
+    - first_moment
     - modelable_entity
     - hemoglobin
+    - not_applicable
+  * - Stillbirths
+    - births
+    - fertility
+    - stillbirth
+    - not_applicable
+  * - Live births
+    - births
+    - fertility
+    - live_birth
+    - not_applicable
+  * - First moment of birth weight
     - first_moment
+    - rei
+    - birth_weight
+    - not_applicable
+  * - Live births with neural tube defects
+    - births
+    - cause
+    - neural_tube_defects
+    - infected
