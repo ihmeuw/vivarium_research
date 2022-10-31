@@ -405,16 +405,16 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Notes
   * - A
     - SBP measurement error pulled from a normal distribution with mean=0 and SD=2.9 mm Hg
-    - [Wallace_2011]_
+    - Measurements have a minimum value of 0 enforced [Wallace_2011]_
   * - B
     - 41.76% will not start medication due to theraputic inertia. The others will start on one drug at half dose. 
-    - [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
   * - C
     - 41.76% will not start medication. Of those that start medication: 45% will receive two drugs at half dose and 55% will receive one drug at half dose  
-    - [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Byrd_2011]_ [Ali_2021]_ [Liu_2017]_
   * - D
     - Only adherent simulants will move up categories. 41.76% will not change medication due to theraputic inertia. The remainder will move to the next treatment category on the ladder. If a simulant is in the highest category, there will be no change.  
-    - [Ali_2021]_ [Liu_2017]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Ali_2021]_ [Liu_2017]_
   * - E (outreach intervention scenarios)
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
@@ -436,25 +436,25 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Notes
   * - A
     - ASCVD = -19.5 + (0.043 * SBP) + (0.266 * Age) + (2.32 * Sex) where Sex=1 for males and Sex=0 for females 
-    - 
+    - This equation returns percentage values. It is okay if they are negative. 
   * - B
-    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L    
-    - [McCormack_2020]_
+    - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L 
+    - Measurements have a minimum value of 0 enforced [McCormack_2020]_
   * - C
     - If simulant is in the acute or post MI or stroke states 
     - 
   * - D
     - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - E
     - 19.4% will not start medication. Of those that start medication, 24% will receive high intensity statin; 66% medium intensity; and 10% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - F
     - 19.4% will not start medication. Of those that start medication, 15% will receive high intensity statin; 71% medium intensity; and 14% low intensity 
-    - [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ [Arnett_2019]_ [Nguyen_2015]_
   * - G
     - Only adherent simulants will move up categories. 19.4% will not move up medication categories due to theraputic inertia 
-    - [Morales_2018]_ 
+    - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - For 50% scenario, assignment is random 
@@ -603,8 +603,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is here:
-/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_sbp_new.csv [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `at this link <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
@@ -928,52 +927,43 @@ Code is below for reference
     - `Validation workbook Model 3 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd>`_ Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. Seems that angina relative risk is highly susceptible to low n-size and leads to high variation. 
   * - 4.0
     - Adding in healthcare system visits 
-    - Planned V&V: stable rate of appointments per CVD case in the population; percent of simulants with a follow-up scheduled is reasonably stable; percent of appointments that are follow-up visits is stable. Source: [Rodgers_2009]_
+    - `Validation workbook Model 4 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model4_VV.ipynb>`_  Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. It is difficult to properly V&V appointments as everyone gets a follow-up right now, but accounting for that it appeared stable. Check with: [Rodgers_2009]_ 
   * - 5.0
-    - Adding medications for SBP and LDL-C  
+    - Adding medications for SBP 
     - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
   * - 6.0
-    - Adding in the outreach intervention 
+    - Adding medications for LDL-C 
+    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+  * - 7.0
+    - Adding Heart Failure (might change)
+    -  
+  * - 8.0
+    - Adding Outreach Intervention (might change)
+    -  
+  * - 9.0
+    - Adding Polypill Intervention (might change)
+    -  
+  * - 10.0
+    - Scenarios 
+    -  
+  * - 11.0
+    - BMI  
+    -  
+  * - 12.0
+    - FPG 
+    -  
+  * - 13.0
+    - Lifestyle Intervention  
     -  
 
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
     .. image:: Model3_VV_Angina.png
 
-  
+
 .. _uscvd4.7:
 
-4.7 Desired outputs
--------------------
-
-Outputs:
-
-#. Total population 
-#. Person-time 
-#. YLLs and YLDs
-#. Deaths 
-#. Transitions for each cause 
-#. Total exposure value * person time for all risk factors 
-#. Person time at or below target values for SBP and LDL-C 
-#. Healthcare appointments 
-#. Missed appointments 
-#. Person time on medication 
-#. Medication effect - exposure levels stratified by medication time 
-#. Numbers of interventions 
-
-
-Stratifications for All: 
-
-#. Year 
-#. Age-group 
-#. Sex 
-#. State (Alabama, Alaska, etc)
-#. Scenario 
-#. Race (note: not included in minimum viable model, to be added later)
-
-.. _uscvd4.8:
-
-4.8 Output meta-table shell
----------------------------
+4.7 Model Outputs
+-----------------
 
 .. list-table:: Model Outputs 
   :widths: 5 15 15 
@@ -981,7 +971,7 @@ Stratifications for All:
 
   * - Output 
     - Notes
-    - Additional Stratifications Needed 
+    - Additional Stratifications Needed* 
   * - Population  
     - 
     -  
@@ -1002,28 +992,28 @@ Stratifications for All:
     - i.e., transition from susceptible to acute MI, stratified by cause 
   * - Mean SBP 
     - sum of SBP * person time
-    - Split by medication category
+    - Only needed for V&V 
   * - Mean LDL-C
     - sum of LDL-C * person time
-    - Split by medication category
+    - Only needed for V&V 
   * - Mean BMI 
     - sum of BMI * person time *NOTE: NOT IN CURRENT MODEL*
-    - 
+    - Only needed for V&V 
   * - Mean FPG 
     - sum of FPG * person time *NOTE: NOT IN CURRENT MODEL*
-    - 
+    - Only needed for V&V 
   * - Population achieving target LDL-C
-    - sum of person time at or below 1.81 LDL-C 
+    - sum of person time at or below 1.81 LDL-C; can be included only in final models 
     - 
   * - Population achieving target SBP
-    - sum of person time at or below 130 SBP  
+    - sum of person time at or below 130 SBP; can be included only in final models 
     - 
   * - Healthcare appointments 
     - sum of healthcare appointments 
-    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc.
+    - Split by type of appointment - follow-up vs emergency vs screening as well as usual age/sex/state/etc. Only needed for V&V 
   * - Missed follow-up appointments 
     - sum of missed follow-up appointments 
-    - Split by age/sex/state/etc. 
+    - Only needed for V&V 
   * - Population on SBP medication 
     - sum of person time on SBP medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
@@ -1034,6 +1024,15 @@ Stratifications for All:
     - sum of interventions given 
     - Split by intervention type 
 
+
+Stratifications for All (not included above): 
+
+#. Year 
+#. Age-group 
+#. Sex 
+#. State (Alabama, Alaska, etc)
+#. Scenario 
+#. Race (note: not included in minimum viable model, to be added later)
 
 
 .. _uscvd5.0:
@@ -1087,6 +1086,8 @@ Some limitations of this analysis include:
 #. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 #. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
 #. To create "untreated" SBP and LDL-C values, we addded an approximate treatment value to those simulants who were initialized to be on medication. This method did not create a blanket population "PAF" from medication, which is different than other simulations. This should be checked in V&V for possible side effects.  
+#. During initialization of the model, we "take measurements" from the raw GBD values rather than the treatment adjusted values. This is only for simulants initialized in the emergency state. Since treatment effects have not been applied yet, this is necessary and with the burn-in period it is unlikely to affect the outcomes. 
+#. Maximum and minimum threshold values are enforced on the raw GDB data for SBP and LDL-C. These are not enforced for the "real" values with treatment adjustments. They are also not enforced for measured values EXCEPT that measurements cannot be negative (you cannot test and show -2 LDL-C for example). 
 
 .. _uscvd7.0:
 

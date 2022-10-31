@@ -191,8 +191,8 @@ as a single PUMA or collection of PUMAs.
 
 .. _census_prl_age_sex_etc:
 
-2.3.1 Components 1-5: Age, sex, race/ethnicity, geographic location, household id, and relationship
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.1 Components 1-5: Age, sex, race/ethnicity, nativity, geographic location, household id, and relationship
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 These attributes will be designed to follow closely the data available
 in the American Communities Survey Public Use Microdata Sample.
@@ -213,6 +213,10 @@ race/ethnicity into the following partition:
 * Latino
 
 This is basically compatible with the surname data we will use in Section (12).
+
+"Nativity" means whether or not someone was born in the United States.
+The PUMS has more information on the specific country of birth, but we do not use this level of granularity.
+The :code:`NATIVITY` column in PUMS provides the binary categorization.
 
 For initialization on simulation start, for the population living in households, we will sample households from
 ACS PUMS rows in the specified PUMAs with replacement, and with
@@ -337,7 +341,7 @@ We perturb the PUMA and age attributes of the sampled households, as described i
 :ref:`perturbation section below <census_prl_perturbation>`.
 
 .. _census_prl_gq_init:
-
+    
 Initializing people living in group quarters
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -380,6 +384,84 @@ I will also verify that the household
 relationships are logical --- every household should have a reference
 person, and at most one spouse/partner.
 
+.. _census_prl_parents_init:
+
+Initializing parent/guardian for all simulants
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We want to initialize all simulants who could be claimed as a 
+dependent on tax forms to have a guardian. This will 
+improve tracking for names, and dependent status on tax forms. 
+
+This person will be listed as ["Guardian"]. By design, most will be 
+parents, but some may be a grandparent or other relative. 
+
+There are two groups that need to have parents/guardians initialized 
+and we will address those separately: children under the age of 18, and 
+those who are below 24 and in GQ for college (defined above). 
+
+Note: "N/A" for the purposes of this simulation means that a parent/
+guardian cannot be identified. For tax purposes, no one will claim 
+this person as a dependent. 
+
+**For simulant under 18:**
+
+- Child is a biological or adopted child to reference person 
+    * Assign reference person 
+- Child is foster child 
+    * Assign reference person 
+- Child is step child 
+    * If there is a spouse / partner of reference person assign them 
+    * Otherwise assign the reference person 
+- Child is grandchild of reference person 
+    * If there is a child (biological, adopted, foster) of reference person, assign them (if multiple, assign at random) 
+    * Otherwise assign reference person 
+- Child is brother/sister to reference person 
+    * If there is a parent of the reference person, assign them 
+    * Otherwise assign the reference person 
+- Child is other relative to reference person 
+    * Assign a relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random. 
+    * If there is not a relative of the appropriate age available, assign the reference person 
+- Child is non-relative (roommate or other nonrelative) to reference person 
+    * Assign another non-relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple with the same race/ethnicity, assign at random.  
+    * If there is not a non-relative of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
+    * If there are not any other non-relatives in the house, make "N/A"
+- Child is the reference person 
+    * Assign a parent, if available 
+    * Otherwise, assign another relative who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random.
+    * If there are no other relatives in the house, make "N/A"
+
+Once the parent/guardian is assigned, if there is a spouse or unmarried partner 
+for that simulant (reference person and spouse/unmarried partner ONLY), then 
+include both as parents/guardians. Otherwise only include the one as a parent/guardian. 
+
+(note to software engineers: if any of these rules turn out to be surprisingly hard to implement, please be in touch with research --- we have some flexibility in just how we do this!)
+
+**For a simulant who is below 24 and in GQ at college:**
+
+Simulant will be randomly assigned to a parent/guardian based on the below rules: 
+
+- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state parent/guardians can be ignored. 
+- Match to a person 20 to 45 years older than the child 
+- If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a parent of any race
+- Assign to reference people source2_ 
+    * 23% female reference people without a listed spouse 
+    * 5% male reference people without a listed spouse 
+    * Remainder to people with spouses, include both parents 
+
+
+.. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
+
+.. _source2: https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
+
+
+**Limitations**
+
+#. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
+#. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
+#. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
+#. We assign GQ college folks to "parents" instead of "parents/guardians". Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
+
 .. _census_prl_fertility:
 
 2.3.2 Component 6: Fertility
@@ -399,6 +481,10 @@ from the parent.  (This approach identifies only one parent, and that
 might be sufficient for now, although as I learn more about the
 specific challenges of Census PRL, I will find out if we need to
 revisit this and keep track of dad as well as moms).
+
+The nativity of children born in the sim is set according to where their
+parent is currently living; if their parent lives in the US they were born
+in the US, otherwise they were born outside the US.
 
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
@@ -491,6 +577,40 @@ GBD has state-level all-cause mortality, does FBD forecast at the US
 state level yet? Not necessary right now, but good to know for the
 future.
 
+When a simulant who is the reference person in a non-GQ household dies,
+the oldest remaining simulant in their household is assigned to be the reference person.
+All other simulants in the household are assigned a new relationship with these steps:
+
+#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+   the simulant is assigned 'Biological child.'
+#. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
+   column in the CSV data file below, from the row where the
+   :code:`relationship_to_old_reference_person` column matches this simulant's current relationship
+   attribute and the :code:`new_reference_person_relationship_to_old_reference_person` column
+   matches the previous relationship attribute of the new reference person.
+#. If there is no such row in the file (which would only happen with very strange combinations,
+   e.g. a person having two spouses), the simulant is assigned 'Other nonrelative.'
+
+:download:`reference_person_update_relationship_mapping.csv`
+
+Assumptions/limitations in the creation of this file:
+
+* There is not always sufficient information to uniquely determine a new relationship. We err
+  toward the most likely scenario.
+* We assume that any children of people with current partners or spouses are also children of
+  the partner or spouse, unless told otherwise.
+* For some combinations, we rely on the parent tracking in step 1, and assume that
+  after step 1 has been applied, simulants will primarily not have children relationships
+  in situations where other relationships are possible.
+* We use Census' definition that a relative
+  "is someone related... by birth, marriage, or adoption" [Census_ACS_Instructions]_ and that this is a transitive property
+  (the relative of my relative is my relative).
+  Data quality note: these instructions are only available on the ACS website and as tooltips for
+  those taking ACS online, so different ACS respondents may have substantially different interpretations
+  of the relationship categories.
+
+More notes on the assumptions and specifically where they were used are included in the CSV.
+
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
 simulants are dying at the expected rates.
@@ -537,12 +657,15 @@ per person year and individual move rate (also in moves per person
 year).  On the research side, I will also develop a migrates-to
 probability file, with the probability that an individual moves a
 different household or to each type GQ, also stratified by age, sex,
-and race/ethnicity.  To keep things simple, we will for now not have the
+and race/ethnicity.
+Rates of domestic migration are only applied to simulants who currently live
+in the US.
+
+To keep things simple, we will for now not have the
 reference person ever move in a non-household migration, and when a
 non-reference person moves to another household, we will update their
 relationship to the reference person to be 36 - Other non-relative
 (for simplicity, for now).
-
 This will prevent toddlers from moving out of their parents houses. It
 will still have a mother moving out of a house and leaving an
 infant. We could add functionality such that children move with their
@@ -678,9 +801,142 @@ This could be done by assigning unique (or practically unique, with very low pro
 2.3.6 Component 10: International Emigration (Out-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-.. todo::
+Simulants may leave the US to live in other countries.
+As with immigration, there are three types of emigration events that can occur:
 
-    Describe this component.
+#. Household moves, when an entire household moves out of the US as a unit.
+#. GQ person moves, when a GQ person moves out of the US individually.
+#. Non-reference-person moves, when a single non-GQ person leaves their household to move out of the US.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We use the Net International Migration (NIM) estimates from the Census
+Bureau's Population and Housing Unit Estimates (PopEst) program to determine the
+number of emigrants per year. [Census_PopEst]_
+Specifically, we use the 2018-2019 annual estimates, in the assumption that this
+(pre-COVID) year's emigration can be applied to each future year in the simulation.
+
+We subtract out immigration, which we estimate from the ACS PUMS'
+migration question as described in the previous section, to isolate emigration.
+Specifically, these three quantities are related by the equation
+:math:`\text{NIM} = \text{immigration} - \text{emigration}`.
+
+The NIM estimates are made by the PopEst team by combining information
+about immigration from ACS with information about emigration from demographic analysis
+(for those born outside the US) and analysis of foreign censuses (for those born in
+the US). [Census_PopEst_Methodology]_
+Without access to the source data, we cannot replicate these methods, which is why we
+use the published NIM values instead of directly estimating emigration.
+
+The NIM values are not published fully stratified.
+Out of the available stratifications, we chose to use the values stratified
+by (broad categories of) race/ethnicity, because these are most likely to have
+PRL implications.
+
+Inspired by the methodology of the PopEst team at the Census Bureau,
+we further stratify emigration by assuming that **emigrants** have the same
+characteristics as **immigrants**.
+There are clear reasons why this assumption would not be correct
+(e.g. the fact that the US is one of the wealthiest countries in the world means
+it is unlikely to have symmetric characteristics of incoming and outgoing migration)
+but it does likely capture some of the ways in which people with different characteristics
+have different propensities for international migration, regardless of origin/destination.
+
+First, we distribute emigration by move type, replicating the distribution of
+move type in each broad race/ethnicity group (non-Hispanic White alone, Hispanic, all other)
+found in ACS PUMS recent immigrants.
+
+Then, we distribute emigration within each race/ethnicity and move type by further demographics,
+according to the distributions of these demographics in a resample of the corresponding ACS immigrant population,
+with perturbation as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+Note that in the case of household moves, these are the demographics **of the immigrant's household's reference person**,
+while for the other two types they are demographics of the immigrant themselves.
+
+Finally, we calculate the rates of people emigrating per year of person-time "at risk":
+
+* The "at risk" population for household moves is people living in non-GQ households.
+* The "at risk" population for GQ person moves is people living in GQ.
+* The "at risk" population for non-reference-person moves is people living in non-GQ households who
+  are not the reference person in their household.
+
+In order to mitigate the sampling noise in ACS PUMS stratified by all of these demographic characteristics,
+we calculate the denominator for the rate from a resample of the "at risk" population, with perturbation.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+Emigration events are modeled as happening to an at-risk population at a certain rate.
+They are constant across time in the simulation.
+
+Households and individuals selected to have emigration events should remain in the simulation, but their
+location attributes (US state, PUMA, and address) should be set to placeholder values that signify they are
+no longer in the US.
+Emigrating simulants should also terminate employment -- their employer ID and income are set
+to those used for unemployment.
+In the future, we may want some of these simulants to continue employment in the US or
+re-enter through the immigration component, but for now
+they will remain unemployed and outside the US permanently.
+All other simulant attributes should be unchanged by the emigration event.
+
+.. note::
+
+  Because simulants outside the US remain in the population table, it is important for all components
+  to carefully define whether or not they act on these simulants.
+  For example, the at-risk population for emigration in each type of move defined below is specified
+  to be **in the US**.
+  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
+
+Household moves
+'''''''''''''''
+
+The at-risk population for household moves is all simulants living in non-GQ households in the US.
+This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
+**of the simulant's household's reference person**, as well as US state.
+On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
+a number of **simulants** to emigrate as part of household moves.
+Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
+This means that in practice we will generally overshoot the desired number by a few, but this should have
+minimal effect.
+
+GQ person moves
+'''''''''''''''
+
+The at-risk population for GQ person moves is all simulants living in GQ in the US.
+This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
+and US state.
+On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
+should be applied to sample simulants to emigrate. 
+
+Non-reference-person moves
+''''''''''''''''''''''''''
+
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
+and US state.
+On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
+should be applied to sample simulants to emigrate.
+The simulant is removed from the household (they may be given a blank or placeholder household ID) and the
+rest of the household is unaffected by this event.
+
+Simulation inputs
+^^^^^^^^^^^^^^^^^
+
+:download:`Household emigration rates <household_emigration_rates.csv>`
+
+:download:`GQ person emigration rates <group_quarters_person_emigration_rates.csv>`
+
+:download:`Non-reference-person emigration rates <non_reference_person_emigration_rates.csv>`
+
+Limitations
+^^^^^^^^^^^
+
+#. We assume that emigration is either whole-household or totally independent at the individual level.
+   In reality, it is likely that subfamilies emigrate together more frequently than would be expected under this assumption.
+#. We assume that relationship does not affect emigration rates.
+   In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
+   even after accounting for demographics.
+#. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
 2.3.7 Component 11: Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -831,9 +1087,13 @@ North Carolina, filename VR_Snapshot_20220101.txt; see
 2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
 for computation details.)
 
-For now, assign all simulants within the same household the same last name. 
-This is an oversimplification as some might not be related, but will work 
-for the simple model. 
+For now, assign all simulants within the same household who are 
+relatives of the reference person the same last name. 
+This excludes "roommate/housemate" and "other nonrelative" to the 
+reference person. This is an oversimplification as some relatives might have 
+different last names, but works for the initial model. 
+
+This will not be applied to anyone in a group quarter. 
 	
 **First and middle names**
 
@@ -888,14 +1148,32 @@ sources described above to create conditional samplers for first name
 and last name based on soundex.  Perhaps measure of success is to look
 at entropy of character n-gram distribution.
 
-To simulate naming after a parent or family member, have 5% of children 
-born in the simulation be named after a relative that matches their 
-sex. To do this: 
+To simulate naming after a parent or family member, we would like ~5% of 
+children to have the same name as a relative. This can be separated into two 
+groups: 
 
-#. If there is a tracked parent of the same sex, assign the same first name 
-#. If there is a relative of the same sex, assign the same first name. Note that this might be a relative of the reference person (i.e., a male child has a tracked mother, but that tracked mother has a tracked father) 
+**People born in the simulation**
+
+For 5% of simulants, they will be assigned a name based on these steps: 
+
+#. Female simulants will have the same first name as their mother (who is known) 
+#. Male simulants, if their mother is the reference person and has an opposite-sex spouse, they will receive that spouse's first name 
+#. Otherwise, if the mother is the reference person or is related to the reference person, the new simulant will be assigned the first name of a randomly selected male in the household who is related to the reference person, if one exists 
 #. If none of these are available, assign a random name 
 
+**People initialized in the simulation**
+
+For 5% of simulants, they will be assigned a name based on these steps: 
+
+#. For anyone who is the reference person, assign the first name of any "parent" relationship of the same sex in the house, if not available then any "child" relationship name, then randomly assign any other relative of the same sex first name if available 
+#. For anyone who has a child relationship attribute ("biological child", "adopted child") and is the same sex as the reference person, they are assigned the same first name as the reference person 
+#. For anyone who has a "parent" relationship attribute and is the same sex as the reference person, they are assigned the same first name as the reference person 
+#. For anyone who has a child relationship attribute ("biological child", "adopted child") and is the opposite sex as the reference person: if there is someone in the household with relationship "opposite-sex spouse", they are assigned the same first name as the spouse 
+#. For anyone else, if they have a relative relationship attribute (any except "roommate/housemate" and "other nonrelative"), they are assigned the same first name as another randomly-selected person in the household who also has a relative relationship attribute and the same sex. If there is no such person, skip to the next step.
+    #. If there are 2 or more simulants in this step that are selected for matched naming, beginning naming with the oldest simulant first 
+#. For anyone else, they will be assigned a random name 
+
+Note that for same sex couples, whoever is the reference person will pass their name instead of their spouse. 
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 names; we can also look at the
@@ -1016,6 +1294,7 @@ Census
 
 **Who to Sample** 
 
+Simulants currently living in the US are eligible for sampling.
 Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
 probability, simulants will be randomly selected for inclusion. We decided 
@@ -1186,6 +1465,7 @@ There are two types of sampling plans:
 
 **Who to Sample** 
 
+Simulants currently living in the US are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
@@ -1341,6 +1621,406 @@ To create this survey:
 Note/limitations: 
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
+
+
+Taxes
+^^^^^
+
+Taxes, as we all know, can contain many different forms and processes. 
+For this model, we will split the tax information into two main sections: 
+W2/1099 forms from employers; and 1040 forms from simulants. We will look 
+at these separately, starting with W2 and 1099 forms. 
+
+
+W2 and 1099 Forms
+'''''''''''''''''
+
+**When to Sample** 
+
+- Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
+- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. Jobs can be tracked for complete time steps, so through the last day of the time step containing Jan 1st. 
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - DOB 
+  * - Mailing Address 
+  * - Social Security Number 
+  * - Wages (income from this job)
+  * - Employer ID 
+  * - Employer Name 
+  * - Employer Address 
+  * - Employer Zip Code 
+  * - Type of Tax Form (W2 or 1099)
+
+If a simulant does not have a social security number but is 
+employed, they will need this number to be filled in. If there 
+is a person in their household who has a SSN, use this number 
+instead. If there are multiple people with a SSN, choose at random. 
+If there is not a person in their household with a SSN 
+then fill in a random number. This is designed to reflect 
+undocumented immigrants who might use fake or no longer 
+valid SSNs to obtain employment. 
+
+For this observer, a new row should be made for each **employment**, not 
+each simulant. This means that a simulant can have multiple rows of 
+data, or just one row of data. 
+
+Note that "wages" is used per the census team's request, but is the same 
+value as "income" in our simulation. 
+
+Here is an example: 
+
+.. image:: W2_example.PNG
+
+**Who to Sample** 
+
+Everyone who has had an employer listed within the current calendar year 
+will receive either a W2 or a 1099 form. For those with multiple jobs during 
+the year, they will be duplicated and receive multiple forms. We currently 
+will not model persistence from year to year on which type of form. The type 
+of form is selected per job, not per person. For a person with multiple jobs, 
+the form type is randomly selected each time. 
+
+
+The rate of the the types of forms are below. This data is 
+from a review of 2016 tax data by [Lim_2019]_ . 
+
+.. list-table:: Percent W2 versus 1099  
+  :widths: 10 10 
+  :header-rows: 1
+
+  * - Form Type 
+    - Percent Receiving 
+  * - W2 
+    - 94.65% 
+  * - 1099 
+    - 5.35%
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some additional tax specific errors include: SSN randomly being filled 
+for those who are missing one, mailing address being different than the 
+home address, and issues with employer names, addresses, or IDs. 
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of how tax documents are compiled. 
+#. Errors are made in W2s and 1099s by companies frequently, due to employees moving or changing information without communicating changes. These W2s can be reissued which leads to duplicates, or employees might not adjust them leading to different information between W2/1099s and 1040 forms. This is not currently modeled. 
+#. 1099 forms are often used by self-employed people or those with small businesses. These can contain errors related in employer information. 
+#. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
+#. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
+#. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model. 
+#. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
+
+
+1040 Form
+'''''''''
+
+**When to Sample** 
+
+- Sample compiled on the time step containing April 15th of each year 
+- Sample on a single time step for now 
+
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20 20 
+  :header-rows: 1
+
+  * - Simulant Attribute 
+    - Notes 
+  * - Unique simulant ID (for PRL tracking)
+    -  
+  * - First name
+    - 
+  * - Middle initial 
+    - 
+  * - Last name
+    - 
+  * - Age
+    -  
+  * - DOB
+    -  
+  * - Mailing Address
+    -  
+  * - Social Security Number or ITIN
+    -
+  * - Income 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer ID
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Zip Code 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Type of tax form (W2 or 1099)
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Joint Filer 
+    - This row through 'dependent' are to be included if there is a joint filer ONLY 
+  * - First name 
+    - 
+  * - Middle initial 
+    - 
+  * - Last name 
+    - 
+  * - Age
+    - 
+  * - DOB
+    -  
+  * - Mailing Address
+    -  
+  * - Social Security Number or ITIN
+    -
+  * - Income 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer ID
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Zip Code 
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Type of tax form (W2 or 1099)
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Dependent
+    - This columns through the end are to be included for each dependent on the tax filing 
+  * - First name 
+    - 
+  * - Middle initial 
+    - 
+  * - Last name 
+    - 
+  * - Age 
+    -  
+  * - Social Security Number or ITIN
+    -
+
+If a simulant does not have a SSN but is filing taxes, please 
+include an Individual Taxpayer Identification Number (ITIN) instead. 
+This is a 9 digit number that starts with 
+a 9. It can be randomly generated. This applies for all types of 
+filers (primary, joint, dependents). Do **NOT** include the fake 
+SSN from the employer tax forms. 
+
+For now, we will randomly assign ITIN's, but not track them over time. 
+Since this makes them unhelpful for PRL work, we can also allow duplicates. 
+This might be refined later if it is important for PRL. 
+
+This is designed to reflect undocumented immigrants, who primarily 
+file taxes under the ITIN system. 
+
+
+For this observer, we will have one row for each tax form filed. This 
+can be a bit complicated, so here are some examples: 
+
+- A single adult will have 1 row, regardless of the number of jobs they had 
+- Joint filers (a married couple) will have 1 row, regardless of the number of jobs 
+- A married couple with unemployed children will have 1 row for the whole family 
+- A married couple with an employed child might have 2 rows: one for the parents and child as a dependent, and a second for the child as an individual filing their own taxes 
+
+Here is a photo showing how this might look. Note that the three tables 
+are just 2 really long rows for two simulants. 
+
+.. image:: 1044_example.PNG
+
+.. todo::
+
+    Define a maximum number of dependents that a simulant can have 
+
+
+**Who to Sample** 
+
+.. todo::
+
+    Need to allow dependents (and possibly joint filing) with people outside the household. Key cases are college students, divorced parents, etc. 
+
+    Also need to address complex family structures 
+
+
+Not everyone who receives a W2 or 1099 will end up filing taxes. 
+However, those who do not are concentrated in low incomes for whom 
+taxes are not required. Currently, we will chose to have all those 
+who are legally required to file taxes, file taxes. This is a 
+limitation and is listed below. 
+
+For simulants that receive below the minimum income, 42.14% will 
+still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
+income is based on the household structure and is listed in the table below. 
+We will not model persistence year to year. 
+
+**In the current model, no one will be low income, this will be changed later.** 
+
+.. list-table:: Minimum Income  
+  :widths: 20 20 
+  :header-rows: 0
+
+  * - Simulant Type 
+    - Minimum Income 
+  * - Single filing, under 65 
+    - $12,550 
+  * - Single filing, over 65 
+    - $14,250
+  * - Married joint filing, both under 65 
+    - $25,100
+  * - Married joint filing, one under 65 
+    - $26,450
+  * - Married joint filing, both over 65 
+    - $27,800
+  * - Married separate filing 
+    - $5
+
+
+Based on the household structure, the following rules can be applied 
+for who files taxes: 
+
+- Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately. 
+    * The only spouses we will recognize are [Reference person, Opp-sex spouse] and [Reference person, Same-sex spouse]. 
+    * The reference person will submit the form, the spouse will be listed as the joint filer. 
+    * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
+- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
+- All simulants eligible to be dependents will be assigned to a relative within the household 
+    * If there someone listed as the dependent's parents and they are filing taxes, they will be assigned to their parent 
+    * If there is not a parent, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
+- A simulant eligble to be a dependent must: 
+    * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
+    * The dependent's income must be below $4300 
+- For simulants outside of the household, they will be claimed as a dependent by their parent until age 19 OR age 24 if they are in group quarters for college 
+    * For simulants born in the simulation, they should have at least one parent/guardian tracked 
+    * For simulants not born in the simulantion, information on initializing parent/guardians is being added shortly 
+    * For simulatns with more than one parent/guardian tracked, assign the dependent randomly 
+
+
+**Data Errors/Noise** 
+In the future, we will add a noise function designed to replicate 
+missed or incorrect data. This includes incorrect name spelling, 
+addresses, age, and person swaps. 
+
+Some additional tax specific errors include: SSN randomly being filled 
+for those who are missing one, mailing address being different than the 
+home address, and issues with employer names, addresses, or IDs. 
+
+Furthermore, there are often complications with people being claimed as 
+dependents in different households, or claiming people from group quarters.
+
+These are not currently modeled. 
+
+**Limitations and Possible Future Adds** 
+
+#. Sampling on a single time step is not representative of how tax documents are compiled. 
+#. In reality, there are other dependents that live outside of the home. This can include divorced parents, college students, elderly parents, etc. These relationships are not modeled and oversimplifed in this data. 
+#. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year. 
+#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses. 
+#. As the reference person in a household is random, they might not be the one who should be claiming dependents. 
+#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both. 
+#. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
+
+
+Social Security Observer
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Social security information is kept and tracked for a range 
+of different actions. For simplicity, we will limit this 
+section to only creation and dates of death. Others could be 
+added later (not in the minimum viable model), if desired. 
+
+**When to Sample** 
+
+- A sample of qualifying events is taken on every time step 
+- At initialization, an observer including everyone's SSN creation will be generated 
+
+**What to Sample** 
+
+.. list-table:: Simulant Attributes to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - DOB 
+  * - Social Security Number 
+  * - Type of event 
+  * - Date of event 
+
+Currently, we will only track 2 types of events: 
+
+#. Creation of a SSN 
+#. Date of death recorded 
+
+The creation of a SSN can be triggered by a birth or by immigration into 
+the US. Both will be listed as "Creation" and are not differentiated. This 
+event is only recorded for simulates that receive a SSN. 
+The date of event is either the date of birth or the date of immigration. 
+
+At initialization, a record of all SSNs creation will be generated. 
+Everyone who starts in the sim with a SSN will have a creation record made 
+with their date of birth. These records will match the structure of the 
+ones created on time steps. 
+
+The date of death is a recording of anyone who has died and has a SSN. The 
+date of the event is the date of death. This will be listed as "Date 
+of Death". 
+
+Here is an example: 
+
+.. image:: SSA_example.png
+
+Note that the top row is a simulate that received a SSN at birth. The 
+third row indicates someone who immigrated at age 5 and received their 
+SSN then. 
+
+**Who to Sample** 
+
+100% of simulants with a SSN and a qualifying event in that time step 
+will be recorded. 
+
+**Data Errors/Noise** 
+
+.. todo::
+
+  - The omission rate (currently 0%) should be parameterizable. 
+  - Additional noise functions on names and dates should be parameterizable. 
+
+
+**Items NOT Included in the Minimum Viable Model** 
+
+There are a significant number of other possible "events" that 
+could be included in the observer. These are either not implemented 
+in the larger simulation at this time, or more difficult and so 
+have not been included. These are: 
+
+#. Name changes - either first names (trans folks or others) or last names (commonly marriage or divorce). Not included in larger simulation 
+#. Sex-coding changes - not included in larger simulation 
+#. Correction of incorrect information - we would need to have noise functions in place and then add events to "correct" the intentional mistakes. This would be quite challenging to add. 
+#. Receipt of social security benefits - this could be an easy add here if we add it in employment 
+#. Receipt of disability benefits - similarly, could be an easy add if it is added in employment 
+#. New employment - it's unclear what percent of new jobs are actually recorded. Also this leads to complications with the tax observer where simulants can "borrow" a SSN. 
+#. Change of address - only applies if you tell USPS that you moved, which not everyone does. This would be more complex and so is not included right now. 
+
+**Limitations**
+
+#. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
+#. There are errors in SSN data, which are not modeled here. 
 
 
 For inspiration, here is the list of files that Census Bureau
@@ -1676,10 +2356,22 @@ To Come (TK)
 +++++++++++++++
 .. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html. 
 
+.. [Cilke_1998] Cilke, Jim. n.d. “A PROFILE OF NON-FILERS,” 38. 
+
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
 
 .. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
 
+.. [Lim_2019] Lim, Katherine, Alicia Miller, Max Risch, and Eleanor Wilking. n.d. “Independent Contractors in the U.S.: New Trends from 15 Years of Administrative Tax Data,” 71. 
+
+.. [Nolo] https://www.nolo.com/legal-encyclopedia/should-married-people-always-file-jointly.html#:~:text=The%20vast%20majority%20of%20married,had%20no%20income%20or%20deductions. 
+
 .. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
+
+.. [Census_PopEst] Bureau, US Census. n.d. “National Population by Characteristics: 2010-2019, Components of Change” Census.Gov. Accessed October 14, 2022. https://www.census.gov/data/tables/time-series/demo/popest/2010s-national-detail.html.
+
+.. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
+
+.. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
