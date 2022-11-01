@@ -633,12 +633,11 @@ similar and therefore are not modeled individually.
 
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
-initial LDL-C levels will see a higher total reduction. The full efficacy data is here: 
-/share/scratch/projects/cvd_gbd/cvd_re/simulation_science/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl_new.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
-For each draw, a parameter value for efficacy will be selected based on the mean and 95% confidence 
-interval provided in the table above. Assume a normal distribution for the parameter value. 
-This average value for efficacy by category will be used for all simulants. This accounts 
+For each input draw, a parameter value for efficacy will be selected based on the mean and 
+standard deviation provided in the table above. Assume a normal distribution for the parameter value. 
+This average value for efficacy by category will be used for all simulants in that draw. This accounts 
 for parameter uncertainity only. Variation in the simulant response is assumed 
 to not affect the population measures used as outputs from this simulation. 
 
