@@ -1417,7 +1417,7 @@ There are two types of sampling plans:
   :widths: 20
   :header-rows: 0
 
-  * - Household number (random indicator for who is in the same household)
+  * - Household number (random indicator which is the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
   * - First name
   * - Middle initial 
