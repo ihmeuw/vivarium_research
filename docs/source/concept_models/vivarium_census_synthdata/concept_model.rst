@@ -404,31 +404,20 @@ Note: "N/A" for the purposes of this simulation means that a parent/
 guardian cannot be identified. For tax purposes, no one will claim 
 this person as a dependent. 
 
-**For simulant under 18:**
+**For simulant under 18 and NOT living in GQ:**
 
-- Child is a biological or adopted child to reference person 
+- Child is a biological, adopted, foster or step child to reference person 
     * Assign reference person 
-- Child is foster child 
-    * Assign reference person 
-- Child is step child 
-    * If there is a spouse / partner of reference person assign them 
-    * Otherwise assign the reference person 
-- Child is grandchild of reference person 
-    * If there is a child (biological, adopted, foster) of reference person, assign them (if multiple, assign at random) 
-    * Otherwise assign reference person 
-- Child is brother/sister to reference person 
-    * If there is a parent of the reference person, assign them 
-    * Otherwise assign the reference person 
-- Child is other relative to reference person 
-    * Assign a relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random. 
+- Child is any other relative to reference person (NOT roommate/housemate or other nonrelative)
+    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a relative of the appropriate age available, assign the reference person 
 - Child is non-relative (roommate or other nonrelative) to reference person 
-    * Assign another non-relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple with the same race/ethnicity, assign at random.  
+    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a non-relative of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
     * If there are not any other non-relatives in the house, make "N/A"
 - Child is the reference person 
     * Assign a parent, if available 
-    * Otherwise, assign another relative who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random.
+    * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
 
 Once the parent/guardian is assigned, if there is a spouse or unmarried partner 
@@ -576,6 +565,40 @@ https://vivarium-research.readthedocs.io/en/latest/model_design/cause.html#all-c
 GBD has state-level all-cause mortality, does FBD forecast at the US
 state level yet? Not necessary right now, but good to know for the
 future.
+
+When a simulant who is the reference person in a non-GQ household dies,
+the oldest remaining simulant in their household is assigned to be the reference person.
+All other simulants in the household are assigned a new relationship with these steps:
+
+#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+   the simulant is assigned 'Biological child.'
+#. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
+   column in the CSV data file below, from the row where the
+   :code:`relationship_to_old_reference_person` column matches this simulant's current relationship
+   attribute and the :code:`new_reference_person_relationship_to_old_reference_person` column
+   matches the previous relationship attribute of the new reference person.
+#. If there is no such row in the file (which would only happen with very strange combinations,
+   e.g. a person having two spouses), the simulant is assigned 'Other nonrelative.'
+
+:download:`reference_person_update_relationship_mapping.csv`
+
+Assumptions/limitations in the creation of this file:
+
+* There is not always sufficient information to uniquely determine a new relationship. We err
+  toward the most likely scenario.
+* We assume that any children of people with current partners or spouses are also children of
+  the partner or spouse, unless told otherwise.
+* For some combinations, we rely on the parent tracking in step 1, and assume that
+  after step 1 has been applied, simulants will primarily not have children relationships
+  in situations where other relationships are possible.
+* We use Census' definition that a relative
+  "is someone related... by birth, marriage, or adoption" [Census_ACS_Instructions]_ and that this is a transitive property
+  (the relative of my relative is my relative).
+  Data quality note: these instructions are only available on the ACS website and as tooltips for
+  those taking ACS online, so different ACS respondents may have substantially different interpretations
+  of the relationship categories.
+
+More notes on the assumptions and specifically where they were used are included in the CSV.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -1893,6 +1916,94 @@ for who files taxes:
 #. Currently mailing addresses are the same as home addresses. This is not true, especially for rural populations. We plan to add this to the model later. 
 
 
+Social Security Observer
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Social security information is kept and tracked for a range 
+of different actions. For simplicity, we will limit this 
+section to only creation and dates of death. Others could be 
+added later (not in the minimum viable model), if desired. 
+
+**When to Sample** 
+
+- A sample of qualifying events is taken on every time step 
+- At initialization, an observer including everyone's SSN creation will be generated 
+
+**What to Sample** 
+
+.. list-table:: Simulant Attributes to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - DOB 
+  * - Social Security Number 
+  * - Type of event 
+  * - Date of event 
+
+Currently, we will only track 2 types of events: 
+
+#. Creation of a SSN 
+#. Date of death recorded 
+
+The creation of a SSN can be triggered by a birth or by immigration into 
+the US. Both will be listed as "Creation" and are not differentiated. This 
+event is only recorded for simulates that receive a SSN. 
+The date of event is either the date of birth or the date of immigration. 
+
+At initialization, a record of all SSNs creation will be generated. 
+Everyone who starts in the sim with a SSN will have a creation record made 
+with their date of birth. These records will match the structure of the 
+ones created on time steps. 
+
+The date of death is a recording of anyone who has died and has a SSN. The 
+date of the event is the date of death. This will be listed as "Date 
+of Death". 
+
+Here is an example: 
+
+.. image:: SSA_example.png
+
+Note that the top row is a simulate that received a SSN at birth. The 
+third row indicates someone who immigrated at age 5 and received their 
+SSN then. 
+
+**Who to Sample** 
+
+100% of simulants with a SSN and a qualifying event in that time step 
+will be recorded. 
+
+**Data Errors/Noise** 
+
+.. todo::
+
+  - The omission rate (currently 0%) should be parameterizable. 
+  - Additional noise functions on names and dates should be parameterizable. 
+
+
+**Items NOT Included in the Minimum Viable Model** 
+
+There are a significant number of other possible "events" that 
+could be included in the observer. These are either not implemented 
+in the larger simulation at this time, or more difficult and so 
+have not been included. These are: 
+
+#. Name changes - either first names (trans folks or others) or last names (commonly marriage or divorce). Not included in larger simulation 
+#. Sex-coding changes - not included in larger simulation 
+#. Correction of incorrect information - we would need to have noise functions in place and then add events to "correct" the intentional mistakes. This would be quite challenging to add. 
+#. Receipt of social security benefits - this could be an easy add here if we add it in employment 
+#. Receipt of disability benefits - similarly, could be an easy add if it is added in employment 
+#. New employment - it's unclear what percent of new jobs are actually recorded. Also this leads to complications with the tax observer where simulants can "borrow" a SSN. 
+#. Change of address - only applies if you tell USPS that you moved, which not everyone does. This would be more complex and so is not included right now. 
+
+**Limitations**
+
+#. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
+#. There are errors in SSN data, which are not modeled here. 
+
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
@@ -2244,3 +2355,5 @@ To Come (TK)
 .. [Census_PopEst] Bureau, US Census. n.d. “National Population by Characteristics: 2010-2019, Components of Change” Census.Gov. Accessed October 14, 2022. https://www.census.gov/data/tables/time-series/demo/popest/2010s-national-detail.html.
 
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
+
+.. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
