@@ -136,6 +136,6 @@ reviewers when a pull request contains any changes that:
     `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_
     that outlines the requested code changes. The research team member should
     then post a slack message in the project-specific channel that tags the
-    engineers and links to the new JIRA ticket.
-
-**TODO:** Post more details on best practice for making tickets when available.
+    engineers and links to the new JIRA ticket. `More information on how to 
+    make engineering JIRA tickets as a research team member can be found
+    here <https://hub.ihme.washington.edu/display/SSE/RT+Ticket+Creation>`_.
