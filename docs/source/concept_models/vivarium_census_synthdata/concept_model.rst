@@ -1372,10 +1372,9 @@ duplicates at this time.
 **Data Errors/Noise** 
 
 .. todo::
-    Engineers: these things are not yet defined and might be edited later - they should be parameterizable 
-
-    - We currently have net undercounts, might want to have omissions and duplicates instead. Having a perfect census for now should be fine. 
-    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
+    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
+    - We currently have net undercounts, might want to have omissions and duplicates instead with a noise function  
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses 
 
 **Limitations and Possible Future Adds** 
 
@@ -1543,12 +1542,12 @@ survey iterations.
 **Data Errors/Noise** 
 
 .. todo::
-    Engineers: these things are not yet defined and might be edited later - they should be parameterizable 
 
-    - Omission rates by survey, oversampling might be needed to avoid rerunning 
     - Creation of a noise function for misrecording data (names, addresses, birthdays) 
-    - Include person swaps or duplicates 
-    
+    - Possible changes to omission rates by survey 
+    - To avoid rerunning, please oversample by 2x 
+    - Might include person swaps or duplicates in the noise function 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses
 
 **Limitations and Possible Future Adds** 
 
@@ -1675,15 +1674,12 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age, and person swaps. 
 
-Some additional tax specific errors include: SSN randomly being filled 
-for those who are missing one, mailing address being different than the 
-home address, and issues with employer names, addresses, or IDs. 
+.. todo::
 
-These are not currently modeled. 
+    - Addition of a noise function for misrecording data (names, addresses, birthdays, employer information) 
+    - Further refine "sharing" of SSN's with noise function 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses 
 
 **Limitations and Possible Future Adds** 
 
@@ -1880,12 +1876,11 @@ for who files taxes:
 **Data Errors/Noise** 
 
 .. todo::
-    Engineers: these things are not yet defined and might be edited later - they should be parameterizable 
 
-    - Omission rates, oversampling might be needed to avoid rerunning 
-    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
-    - Further refine "sharing" of SSN's 
+    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
     - Include person swaps or duplicates - especially relevant for taxes if dependents should be double claimed sometimes 
+    - Further refine "sharing" of SSN's with noise function 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses 
 
 **Limitations and Possible Future Adds** 
 
