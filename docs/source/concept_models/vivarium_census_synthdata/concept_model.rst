@@ -404,31 +404,20 @@ Note: "N/A" for the purposes of this simulation means that a parent/
 guardian cannot be identified. For tax purposes, no one will claim 
 this person as a dependent. 
 
-**For simulant under 18:**
+**For simulant under 18 and NOT living in GQ:**
 
-- Child is a biological or adopted child to reference person 
+- Child is a biological, adopted, foster or step child to reference person 
     * Assign reference person 
-- Child is foster child 
-    * Assign reference person 
-- Child is step child 
-    * If there is a spouse / partner of reference person assign them 
-    * Otherwise assign the reference person 
-- Child is grandchild of reference person 
-    * If there is a child (biological, adopted, foster) of reference person, assign them (if multiple, assign at random) 
-    * Otherwise assign reference person 
-- Child is brother/sister to reference person 
-    * If there is a parent of the reference person, assign them 
-    * Otherwise assign the reference person 
-- Child is other relative to reference person 
-    * Assign a relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random. 
+- Child is any other relative to reference person (NOT roommate/housemate or other nonrelative)
+    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a relative of the appropriate age available, assign the reference person 
 - Child is non-relative (roommate or other nonrelative) to reference person 
-    * Assign another non-relative of the reference person who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple with the same race/ethnicity, assign at random.  
+    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a non-relative of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
     * If there are not any other non-relatives in the house, make "N/A"
 - Child is the reference person 
     * Assign a parent, if available 
-    * Otherwise, assign another relative who is between 20 and 45 years older than the child. If there are multiple, select one of the same race/ethnicity. If there are multiple of the same race/ethnicity, assign at random.
+    * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
 
 Once the parent/guardian is assigned, if there is a spouse or unmarried partner 
