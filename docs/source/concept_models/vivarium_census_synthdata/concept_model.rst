@@ -627,7 +627,7 @@ College is likely
 to be the tough one in Census applications -- Census will have SSN for
 most military and incarcerated, Medicare for most nursing home, but
 people living in dorms, especially who don't file their own tax
-returns might not have a protected identification key [PIK].
+returns might not have a protected identification key (PIK).
 
 Data sources
 ^^^^^^^^^^^^
@@ -671,7 +671,7 @@ We do not consider subsets of households that move together, or people who join
 an existing household and become the reference person of that household.
 
 The one situation in ACS PUMS that is not explainable by these types is when the
-reference person moved but there are others in the same household who did not.
+reference person moved in the last year but there are others in the same household who did not.
 In this situation, we act as though the reference person established the household
 in the last year, even though we know this cannot be the case.
 
@@ -683,7 +683,7 @@ in complex ways in the real world.
 Given data availability, sample size, computational, and simulation complexity constraints, we
 chose to model the following relationships:
 
-* People move in each of the above types depending on their demographics (age, sex, race/ethnicity).
+* Households/people move in each of the above types depending on their demographics (age, sex, race/ethnicity).
 * People who move into GQ, move into a GQ category (institutional or non) that depends on their demographics.
 * People who join an existing household, join with a relationship that depends on their demographics.
 * People who move, are more likely to move to certain PUMAs (primarily close by) depending on the MIGPUMA they currently live in.
@@ -711,30 +711,39 @@ Relationship
 ''''''''''''
 
 In household moves, relationships are unchanged.
-In individual moves that start a new household, the relationship is always "reference person."
-Therefore, there are two move types that require a relationship attribute: GQ moves (where the relationship attribute
-represents institutional vs non-institutional), and non-reference person moves.
+In new-household moves, the relationship in the new household is always "reference person."
+Therefore, there are two move types that require a choice of relationship attribute:
+GQ moves (where the relationship attribute represents institutional vs non-institutional),
+and non-reference person moves.
 
 For each of these move types, we calculate **the proportion of movers of that type** who
-have each relationship, stratified by individual demographics.
+have each relationship, stratified by individual demographics -- age group, sex, and race/ethnicity.
 
-To address sample size issues, particularly for the less-common relationships in the smallest
-race/ethnicity groups, we:
+To address sample size issues, which are present especially for the less-common relationships in the smallest
+race/ethnicity groups, we perform a smoothing procedure (described below) in each demographic group
+(e.g. 0-15 year old females of NHOPI race/ethnicity)
+*twice*: first using information from the distribution in the same group without stratification by race/ethnicity
+(e.g. all 0-15 year old females),
+and then using information from the distribution in the group stratified only by age
+(e.g. all 0-15 year olds).
+We refer to these groups, which are less stratified and have larger sample size, as the "reference group"
+in the smoothing procedure description below.
+We do not include a third smoothing pass with the fully unconditional distribution (all people regardless of age),
+because there are logical relationships between age and relationship -- for example,
+children should never be spouses.
 
-* Re-distribute demographic + relationship combinations having less than **30** sample size according
-  to the relationship distribution among those relationships in the demographic group one step
-  less stratified.
-  For example, since we are stratifying by age group, sex, and race/ethnicity, we first use
-  the relationship distribution stratified only by age group and sex.
+Our smoothing procedure is as follows:
+
+* Take the total probability of all demographic + relationship combinations which have less than **30** sample size,
+  and re-distribute this probability according
+  to the proportions among the same set of relationships in the reference group.
   We now consider our "sample size" for those re-distributed relationships to be the sample size
-  in the less-stratified demographic + relationship combinations we used to re-distribute them.
-* When any fully-stratified group had less than 5% of its proportion re-distributed, we re-distribute
-  the difference using the relationship distribution among all relationships in the demographic group
-  one step less stratified, such that all fully-stratified groups had at least 5% re-distributed, between this step and
+  in the corresponding relationships in the reference group.
+* When any age/sex/race group had less than 5% probability re-distributed in the previous step, we re-distribute
+  the difference (5% - the amount re-distributed), taken proportionally from *all* relationships,
+  according to the proportions among *all* relationships in the reference group.
+  After this step, all age/sex/race groups have had at least 5% re-distributed, between this step and
   the previous.
-* We repeat this process with the next step less stratified (age group and sex -> age group only).
-* We do not fill any values with the fully un-stratified relationship distribution, because there are
-  some logical relationships between age and relationship that we want to preserve.
 
 Location
 ''''''''
@@ -743,13 +752,20 @@ We calculate the **proportions of movers from each MIGPUMA** who now live in eac
 PUMA.
 
 In practice, nearly all combinations will have very small or 0 sample size.
-To address this, we apply nearly the same procedure described in the Relationship section
-above, filling in values with the unconditional distribution
-among all movers (from any MIGPUMA), and using the same constants (sample size minimum of 30,
+To address this, we apply the same smoothing procedure described in the Relationship section
+above, using the unconditional distribution
+among all movers (from any MIGPUMA), and the same constants (sample size minimum of 30,
 5% minimum re-distribution).
 
+.. todo::
+
+  Determine whether we will include a smoothing pass using the *state-level* distribution,
+  which would make a lot of sense!
+  I haven't included one for now due to some technical challenges in implementing it
+  with hierarchical (state -> PUMA) instead of fully-stratified (age/sex/race) categories.
+
 Finally, we replicate the destination distribution of each MIGPUMA identically
-into each of its component PUMAs.
+in each of its component PUMAs.
 We do not model any affinity for staying in the same PUMA within a MIGPUMA due to lack of
 data on this affinity.
 
@@ -766,20 +782,21 @@ They are constant across time in the simulation.
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is non-GQ households **with more than one person** in the US (or equivalently, their reference people).
+The at-risk population for household moves is non-GQ households **with more than one person** in the US
+(or, equivalently, the reference people of such households).
 This at-risk population should be stratified by age group, sex, and race/ethnicity
 **of the household's reference person**.
 On each time step, within each stratum, the corresponding household migration rate **per household-year** should be applied to determine
 the households that should move.
 
-A new state and PUMA should be selected for the household according to the weights
-in the PUMA to PUMA flows input file **where the source_ST and source_PUMA columns
-match the household's current state and PUMA**, respectively.
+A new state and PUMA should be selected for the household according to the proportions
+in the "Destination PUMA proportions by source PUMA" input file **where the state and PUMA columns
+match the household's current state and PUMA**.
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the sources and destinations in the simulation catchment area.)
 The household should be assigned a new address, with the same procedure used at initialization.
 
-All simulants in the household that are employed should change jobs,
+All simulants in the household that are of working age should change jobs,
 with the same procedure used for a spontaneous employment change event.
 
 All other attributes of the household and simulants (including relationship to reference person)
@@ -791,29 +808,31 @@ Individual moves
 The following applies to all three types of individual moves.
 Additional details are in the following subsections for each type.
 
-The at-risk population is all simulants in the US.
+The at-risk population for individual moves is all simulants in the US.
 This at-risk population should be stratified by age group, sex, and race/ethnicity.
 On each time step, within each stratum, the corresponding migration rate **per person-year** should be applied to determine
 the simulants that should move with that move type.
 
-If the selected simulant is the reference person in a non-GQ household that they are
-leaving, the reference person of that household should be updated using the same
-procedure as if the moving simulant had died.
+If a simulant selected to move is currently the reference person in a non-GQ household,
+the reference person of that household should be updated using the same
+procedure as if the moving simulant had died (as described in the Mortality component).
 
-A new state and PUMA should be selected for the simulant according to the weights
-in the PUMA to PUMA flows input file **where the source_ST and source_PUMA columns
-match the simulant's current state and PUMA**, respectively.
+A new state and PUMA should be selected for the simulant according to the proportions
+in the "Destination PUMA proportions by source PUMA" input file **where the state and PUMA columns
+match the simulant's current state and PUMA**.
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the sources and destinations in the simulation catchment area.)
 
-If the simulant is employed and not moving into military GQ, they should change jobs,
+If the simulant is of working age and not moving into military GQ, they should change jobs,
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
 New-household moves
 """""""""""""""""""
 
-Simulants selected for a new-household move should be assigned a new household_id not shared
+In addition to the above logic common to all individual moves:
+
+The simulant should be assigned a new household ID not shared
 by any other simulants.
 Their address should also be assigned at random, in the same manner as at initialization.
 
@@ -822,50 +841,64 @@ Their relationship attribute should be set to "reference person."
 GQ person moves
 """""""""""""""
 
+In addition to the above logic common to all individual moves:
+
 An institutional/non-institutional "relationship" attribute should be sampled
-for the simulant according to the weights in the GQ person relationship input file
+for the simulant according to the proportions in the "Relationship proportions for GQ person moves" input file
 **where the age, sex, and race/ethnicity columns match those attributes of the simulant**.
 
-Then, a GQ type ("household" and corresponding address) should be assigned according to the institutional/non-institutional status,
-as is done at initialization.
+Then, a GQ type (household ID and corresponding address) should be assigned according to the
+institutional/non-institutional status, as is done at initialization.
 
 Non-reference person moves
 """"""""""""""""""""""""""
 
+In addition to the above logic common to all individual moves:
+
 For this move type, state and PUMA should be selected such that there is at least one
 non-GQ household already in the simulation in that state and PUMA.
 
-The simulant selected should be added to a random non-GQ household in their new state
-and PUMA.
+The simulant selected should be added to (given the same household ID as) a random non-GQ household
+in their new state and PUMA.
 
-A relationship attribute should be sampled for the simulant according to the weights in
-the non-reference person relationship input file
+A relationship attribute should be sampled for the simulant according to the proportions in
+the "Relationship proportions for non-reference person moves" input file
 **where the age, sex, and race/ethnicity columns match those attributes of the simulant**.
 
-The following post-processing rules should be applied after sampling:
+The following post-processing rules should be applied to the relationship after sampling:
 
 * If the sampled relationship is one of the four spouse or partner relationships, and there
-  is already a simulant in the household with one of those four relationships, the moving
+  is already a simulant in the household the simulant is joining with one of those four relationships, the moving
   simulant's relationship is updated to "Other relative."
-* If the sampled relationship is "Parent" and there are already >=2 simulants in the household
+* If the sampled relationship is "Parent" and there are already >=2 simulants in the household the simulant is joining
   with the "Parent" relationship, the moving simulant's relationship is updated to "Other relative."
+
+.. note::
+
+  These post-processing rules prevent only the **most** illogical situations:
+  counts of a single relationship in a single household that are impossible.
+  See the Limitations section for some of the strange situations that can still result.
 
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
 
-.. note::
+.. todo::
 
-  These files are not finalized!
+  The numbers in these files are not finalized!
 
 :download:`Household domestic migration rates <household_domestic_migration_rates.csv>`
 
 :download:`Individual domestic migration rates by type <individual_domestic_migration_rates.csv>`
 
-:download:`Relationship proportions for non-reference person moves <non_reference_person_move_relationship_proportions.csv>`
-
 :download:`Relationship proportions for GQ person moves <gq_person_move_relationship_proportions.csv>`
 
-Destination PUMA proportions by (source) PUMA can be found at :code:`/mnt/team/simulation_science/priv/users/zmbc/prl/puma_to_puma_proportions.csv`.
+:download:`Relationship proportions for non-reference person moves <non_reference_person_move_relationship_proportions.csv>`
+
+Destination PUMA proportions by source PUMA: :code:`/mnt/team/simulation_science/priv/users/zmbc/prl/puma_to_puma_proportions.csv`.
+
+.. todo::
+
+  Move this last (large) file somewhere more appropriate.
 
 Limitations
 ^^^^^^^^^^^
@@ -873,9 +906,13 @@ Limitations
 #. We assume that domestic migration does not change over time.
    In effect, we replay the average yearly domestic migration between 2016-2020
    in each future year of the simulation.
+#. In real life, people probably tend to move close to home, far below the granularity
+   of a MIGPUMA.
+   We do not have data to inform this.
 #. We assume that 100% of people who move change jobs.
    A more accurate rate cannot be
-   calculated from the ACS (it does not ask about job changes).
+   calculated from the ACS (it does not ask about job changes),
+   but other data sources probably exist about this question.
 #. We do not include those moving from Puerto Rico in domestic migration.
    We also do not include those moving from Puerto Rico in international immigration,
    so these moves are effectively missed.
@@ -885,9 +922,14 @@ Limitations
 #. We choose the household that people move into at random.
    In reality, certain households are probably much more likely to have someone
    move into them, and this will be highly correlated with the relationship of that person.
-#. Our approach will sometimes create impossible situations, such as someone
-   moving with relationship 'child' or 'grandchild' into a household where the reference
+#. Selected relationships for non-reference-person movers may not be logically consistent with age,
+   such as someone moving with a child or grandchild relationship into a household where the reference
    person is younger than them.
+#. Selected relationships for non-reference-person movers may not be logically consistent with previous
+   relationships or tracked parent IDs in the simulation.
+   For example, someone may move out of a household where they have two parents (according to
+   relationship and/or tracked parent IDs), into
+   a different household and still be assigned the "Biological child" relationship.
 #. We do not have information about the sorts of living arrangements that people
    move out of.
    Current living arrangement will be correlated with moving only through demographics.
@@ -908,7 +950,7 @@ can use an interactive simulation in a Jupyter Notebook to check that
 simulants are moving at the expected rates.
 
 We can also check that relationship distributions look reasonable, and
-check that people are preferentially moving along more common PUMA -> PUMA
+check that people are preferentially moving along more common PUMA-to-PUMA
 flows (perhaps by checking a few of the largest).
 
 .. _census_prl_international_immigration:
