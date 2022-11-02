@@ -1,0 +1,3137 @@
+,age_start,age_end,sex,race_ethnicity,relationship,proportion
+0,0,15,Female,AIAN,Adopted child,0.006823133017940309
+1,0,15,Female,AIAN,Biological child,0.16742685727540235
+2,0,15,Female,AIAN,Child-in-law,0.0
+3,0,15,Female,AIAN,Foster child,0.09783880220667474
+4,0,15,Female,AIAN,Grandchild,0.41025313001778
+5,0,15,Female,AIAN,Opp-sex partner,0.0
+6,0,15,Female,AIAN,Opp-sex spouse,0.0
+7,0,15,Female,AIAN,Other nonrelative,0.11024402579758966
+8,0,15,Female,AIAN,Other relative,0.15350118346951552
+9,0,15,Female,AIAN,Parent,0.0
+10,0,15,Female,AIAN,Parent-in-law,0.0
+11,0,15,Female,AIAN,Roommate,0.005128943543851763
+12,0,15,Female,AIAN,Same-sex partner,0.0
+13,0,15,Female,AIAN,Same-sex spouse,0.0
+14,0,15,Female,AIAN,Sibling,0.005168932096663508
+15,0,15,Female,AIAN,Stepchild,0.04361499257458204
+16,0,15,Female,Asian,Adopted child,0.006284353675638378
+17,0,15,Female,Asian,Biological child,0.3089238138332659
+18,0,15,Female,Asian,Child-in-law,0.0
+19,0,15,Female,Asian,Foster child,0.038106320814605486
+20,0,15,Female,Asian,Grandchild,0.3066562477960243
+21,0,15,Female,Asian,Opp-sex partner,0.0
+22,0,15,Female,Asian,Opp-sex spouse,0.0
+23,0,15,Female,Asian,Other nonrelative,0.07815304075637784
+24,0,15,Female,Asian,Other relative,0.21220229270806085
+25,0,15,Female,Asian,Parent,0.0
+26,0,15,Female,Asian,Parent-in-law,0.0
+27,0,15,Female,Asian,Roommate,0.004726062980499762
+28,0,15,Female,Asian,Same-sex partner,0.0
+29,0,15,Female,Asian,Same-sex spouse,0.0
+30,0,15,Female,Asian,Sibling,0.004761470675594094
+31,0,15,Female,Asian,Stepchild,0.04018639675993338
+32,0,15,Female,Black,Adopted child,0.009822710419676152
+33,0,15,Female,Black,Biological child,0.17180963579524558
+34,0,15,Female,Black,Child-in-law,0.0
+35,0,15,Female,Black,Foster child,0.07314576644126093
+36,0,15,Female,Black,Grandchild,0.4660913909322004
+37,0,15,Female,Black,Opp-sex partner,0.0
+38,0,15,Female,Black,Opp-sex spouse,0.0
+39,0,15,Female,Black,Other nonrelative,0.078904459217644
+40,0,15,Female,Black,Other relative,0.14367301006078056
+41,0,15,Female,Black,Parent,0.0
+42,0,15,Female,Black,Parent-in-law,0.0
+43,0,15,Female,Black,Roommate,0.005816228184906708
+44,0,15,Female,Black,Same-sex partner,0.0
+45,0,15,Female,Black,Same-sex spouse,0.0
+46,0,15,Female,Black,Sibling,0.005864031344424326
+47,0,15,Female,Black,Stepchild,0.04487276760386123
+48,0,15,Female,Latino,Adopted child,0.009097914850799426
+49,0,15,Female,Latino,Biological child,0.20739988893205186
+50,0,15,Female,Latino,Child-in-law,0.0
+51,0,15,Female,Latino,Foster child,0.054852753362602445
+52,0,15,Female,Latino,Grandchild,0.4145048373167403
+53,0,15,Female,Latino,Opp-sex partner,0.0
+54,0,15,Female,Latino,Opp-sex spouse,0.0
+55,0,15,Female,Latino,Other nonrelative,0.09114358568513958
+56,0,15,Female,Latino,Other relative,0.14009494570542005
+57,0,15,Female,Latino,Parent,0.0
+58,0,15,Female,Latino,Parent-in-law,0.0
+59,0,15,Female,Latino,Roommate,0.00919267178729458
+60,0,15,Female,Latino,Same-sex partner,0.0
+61,0,15,Female,Latino,Same-sex spouse,0.0
+62,0,15,Female,Latino,Sibling,0.017130974333748012
+63,0,15,Female,Latino,Stepchild,0.05658242802620364
+64,0,15,Female,Multiracial or Other,Adopted child,0.011497735919364649
+65,0,15,Female,Multiracial or Other,Biological child,0.171499873676896
+66,0,15,Female,Multiracial or Other,Child-in-law,0.0
+67,0,15,Female,Multiracial or Other,Foster child,0.08541750592288083
+68,0,15,Female,Multiracial or Other,Grandchild,0.4357730934260509
+69,0,15,Female,Multiracial or Other,Opp-sex partner,0.0
+70,0,15,Female,Multiracial or Other,Opp-sex spouse,0.0
+71,0,15,Female,Multiracial or Other,Other nonrelative,0.10899328814733086
+72,0,15,Female,Multiracial or Other,Other relative,0.11102750731595035
+73,0,15,Female,Multiracial or Other,Parent,0.0
+74,0,15,Female,Multiracial or Other,Parent-in-law,0.0
+75,0,15,Female,Multiracial or Other,Roommate,0.008624449964581102
+76,0,15,Female,Multiracial or Other,Same-sex partner,0.0
+77,0,15,Female,Multiracial or Other,Same-sex spouse,0.0
+78,0,15,Female,Multiracial or Other,Sibling,0.008704183342584815
+79,0,15,Female,Multiracial or Other,Stepchild,0.058462362284360456
+80,0,15,Female,NHOPI,Adopted child,0.010049357606130177
+81,0,15,Female,NHOPI,Biological child,0.17842984938013817
+82,0,15,Female,NHOPI,Child-in-law,0.0
+83,0,15,Female,NHOPI,Foster child,0.060889232107097506
+84,0,15,Female,NHOPI,Grandchild,0.44093238592707956
+85,0,15,Female,NHOPI,Opp-sex partner,0.0
+86,0,15,Female,NHOPI,Opp-sex spouse,0.0
+87,0,15,Female,NHOPI,Other nonrelative,0.11250548690527758
+88,0,15,Female,NHOPI,Other relative,0.11789795106406645
+89,0,15,Female,NHOPI,Parent,0.0
+90,0,15,Female,NHOPI,Parent-in-law,0.0
+91,0,15,Female,NHOPI,Roommate,0.007541402741037559
+92,0,15,Female,NHOPI,Same-sex partner,0.0
+93,0,15,Female,NHOPI,Same-sex spouse,0.0
+94,0,15,Female,NHOPI,Sibling,0.007608821587928094
+95,0,15,Female,NHOPI,Stepchild,0.06414551268124484
+96,0,15,Female,White,Adopted child,0.009718508406992446
+97,0,15,Female,White,Biological child,0.16391427264591252
+98,0,15,Female,White,Child-in-law,0.0
+99,0,15,Female,White,Foster child,0.05765771981696795
+100,0,15,Female,White,Grandchild,0.45092597994131955
+101,0,15,Female,White,Opp-sex partner,0.0
+102,0,15,Female,White,Opp-sex spouse,0.0
+103,0,15,Female,White,Other nonrelative,0.13451058488756393
+104,0,15,Female,White,Other relative,0.09614276428031339
+105,0,15,Female,White,Parent,0.0
+106,0,15,Female,White,Parent-in-law,0.0
+107,0,15,Female,White,Roommate,0.0075449585071406715
+108,0,15,Female,White,Same-sex partner,0.0
+109,0,15,Female,White,Same-sex spouse,0.0
+110,0,15,Female,White,Sibling,0.004035894057040002
+111,0,15,Female,White,Stepchild,0.07554931745674938
+112,0,15,Male,AIAN,Adopted child,0.007618631257626931
+113,0,15,Male,AIAN,Biological child,0.16602776439856004
+114,0,15,Male,AIAN,Child-in-law,0.0
+115,0,15,Male,AIAN,Foster child,0.08792346965774306
+116,0,15,Male,AIAN,Grandchild,0.3808639904220026
+117,0,15,Male,AIAN,Opp-sex partner,0.0
+118,0,15,Male,AIAN,Opp-sex spouse,0.0
+119,0,15,Male,AIAN,Other nonrelative,0.08676090556581115
+120,0,15,Male,AIAN,Other relative,0.20390909916618707
+121,0,15,Male,AIAN,Parent,0.0
+122,0,15,Male,AIAN,Parent-in-law,0.0
+123,0,15,Male,AIAN,Roommate,0.006506109013630398
+124,0,15,Male,AIAN,Same-sex partner,0.0
+125,0,15,Male,AIAN,Same-sex spouse,0.0
+126,0,15,Male,AIAN,Sibling,0.006027526636629338
+127,0,15,Male,AIAN,Stepchild,0.05436250388180941
+128,0,15,Male,Asian,Adopted child,0.005445347253131599
+129,0,15,Male,Asian,Biological child,0.3969015717235455
+130,0,15,Male,Asian,Child-in-law,0.0
+131,0,15,Male,Asian,Foster child,0.03461467845827424
+132,0,15,Male,Asian,Grandchild,0.2324534596632865
+133,0,15,Male,Asian,Opp-sex partner,0.0
+134,0,15,Male,Asian,Opp-sex spouse,0.0
+135,0,15,Male,Asian,Other nonrelative,0.09636980256485125
+136,0,15,Male,Asian,Other relative,0.18646731844253728
+137,0,15,Male,Asian,Parent,0.0
+138,0,15,Male,Asian,Parent-in-law,0.0
+139,0,15,Male,Asian,Roommate,0.00464255221029712
+140,0,15,Male,Asian,Same-sex partner,0.0
+141,0,15,Male,Asian,Same-sex spouse,0.0
+142,0,15,Male,Asian,Sibling,0.004305613370412852
+143,0,15,Male,Asian,Stepchild,0.038799656313663604
+144,0,15,Male,Black,Adopted child,0.010380164436576654
+145,0,15,Male,Black,Biological child,0.17594034407647638
+146,0,15,Male,Black,Child-in-law,0.0
+147,0,15,Male,Black,Foster child,0.0754406340622358
+148,0,15,Male,Black,Grandchild,0.468123836531563
+149,0,15,Male,Black,Opp-sex partner,0.0
+150,0,15,Male,Black,Opp-sex spouse,0.0
+151,0,15,Male,Black,Other nonrelative,0.08591025408386094
+152,0,15,Male,Black,Other relative,0.12476059348462092
+153,0,15,Male,Black,Parent,0.0
+154,0,15,Male,Black,Parent-in-law,0.0
+155,0,15,Male,Black,Roommate,0.006625284184531796
+156,0,15,Male,Black,Same-sex partner,0.0
+157,0,15,Male,Black,Same-sex spouse,0.0
+158,0,15,Male,Black,Sibling,0.006137643649114109
+159,0,15,Male,Black,Stepchild,0.046681245491020304
+160,0,15,Male,Latino,Adopted child,0.0077177512709651255
+161,0,15,Male,Latino,Biological child,0.2280766874468128
+162,0,15,Male,Latino,Child-in-law,0.0
+163,0,15,Male,Latino,Foster child,0.050867899311471544
+164,0,15,Male,Latino,Grandchild,0.40214809345584274
+165,0,15,Male,Latino,Opp-sex partner,0.0
+166,0,15,Male,Latino,Opp-sex spouse,0.0
+167,0,15,Male,Latino,Other nonrelative,0.09636891785197516
+168,0,15,Male,Latino,Other relative,0.1320527887241511
+169,0,15,Male,Latino,Parent,0.0
+170,0,15,Male,Latino,Parent-in-law,0.0
+171,0,15,Male,Latino,Roommate,0.011255308927232819
+172,0,15,Male,Latino,Same-sex partner,0.0
+173,0,15,Male,Latino,Same-sex spouse,0.0
+174,0,15,Male,Latino,Sibling,0.012305643453482814
+175,0,15,Male,Latino,Stepchild,0.05920690955806581
+176,0,15,Male,Multiracial or Other,Adopted child,0.009575429053641204
+177,0,15,Male,Multiracial or Other,Biological child,0.21125573642134454
+178,0,15,Male,Multiracial or Other,Child-in-law,0.0
+179,0,15,Male,Multiracial or Other,Foster child,0.05234801963063867
+180,0,15,Male,Multiracial or Other,Grandchild,0.46681043249813464
+181,0,15,Male,Multiracial or Other,Opp-sex partner,0.0
+182,0,15,Male,Multiracial or Other,Opp-sex spouse,0.0
+183,0,15,Male,Multiracial or Other,Other nonrelative,0.09013797866578263
+184,0,15,Male,Multiracial or Other,Other relative,0.08798339707464646
+185,0,15,Male,Multiracial or Other,Parent,0.0
+186,0,15,Male,Multiracial or Other,Parent-in-law,0.0
+187,0,15,Male,Multiracial or Other,Roommate,0.008184032302978287
+188,0,15,Male,Multiracial or Other,Same-sex partner,0.0
+189,0,15,Male,Multiracial or Other,Same-sex spouse,0.0
+190,0,15,Male,Multiracial or Other,Sibling,0.007577915852806624
+191,0,15,Male,Multiracial or Other,Stepchild,0.0661270585000269
+192,0,15,Male,NHOPI,Adopted child,0.009504038900085379
+193,0,15,Male,NHOPI,Biological child,0.18854082627655636
+194,0,15,Male,NHOPI,Child-in-law,0.0
+195,0,15,Male,NHOPI,Foster child,0.06047285600304213
+196,0,15,Male,NHOPI,Grandchild,0.43894315995237276
+197,0,15,Male,NHOPI,Opp-sex partner,0.0
+198,0,15,Male,NHOPI,Opp-sex spouse,0.0
+199,0,15,Male,NHOPI,Other nonrelative,0.10824423066668082
+200,0,15,Male,NHOPI,Other relative,0.11078684505252055
+201,0,15,Male,NHOPI,Parent,0.0
+202,0,15,Male,NHOPI,Parent-in-law,0.0
+203,0,15,Male,NHOPI,Roommate,0.008122816370741737
+204,0,15,Male,NHOPI,Same-sex partner,0.0
+205,0,15,Male,NHOPI,Same-sex spouse,0.0
+206,0,15,Male,NHOPI,Sibling,0.007521352765685597
+207,0,15,Male,NHOPI,Stepchild,0.06786387401231458
+208,0,15,Male,White,Adopted child,0.008852281746086831
+209,0,15,Male,White,Biological child,0.16217202937737957
+210,0,15,Male,White,Child-in-law,0.0
+211,0,15,Male,White,Foster child,0.0627789100607625
+212,0,15,Male,White,Grandchild,0.4524751211706181
+213,0,15,Male,White,Opp-sex partner,0.0
+214,0,15,Male,White,Opp-sex spouse,0.0
+215,0,15,Male,White,Other nonrelative,0.1247200822741629
+216,0,15,Male,White,Other relative,0.094552271497322
+217,0,15,Male,White,Parent,0.0
+218,0,15,Male,White,Parent-in-law,0.0
+219,0,15,Male,White,Roommate,0.008306319164406105
+220,0,15,Male,White,Same-sex partner,0.0
+221,0,15,Male,White,Same-sex spouse,0.0
+222,0,15,Male,White,Sibling,0.005011780204959611
+223,0,15,Male,White,Stepchild,0.08113120450430224
+224,15,18,Female,AIAN,Adopted child,0.019948093268265292
+225,15,18,Female,AIAN,Biological child,0.25068549263828344
+226,15,18,Female,AIAN,Child-in-law,0.008417842185193364
+227,15,18,Female,AIAN,Foster child,0.04429610635627878
+228,15,18,Female,AIAN,Grandchild,0.2410479970952473
+229,15,18,Female,AIAN,Opp-sex partner,0.005504652191160574
+230,15,18,Female,AIAN,Opp-sex spouse,0.0019318213350110695
+231,15,18,Female,AIAN,Other nonrelative,0.1552659712301101
+232,15,18,Female,AIAN,Other relative,0.12718533118955536
+233,15,18,Female,AIAN,Parent,0.0
+234,15,18,Female,AIAN,Parent-in-law,0.0
+235,15,18,Female,AIAN,Roommate,0.023097358611592785
+236,15,18,Female,AIAN,Same-sex partner,6.924090806491288e-05
+237,15,18,Female,AIAN,Same-sex spouse,4.154454483894773e-05
+238,15,18,Female,AIAN,Sibling,0.029971845779087528
+239,15,18,Female,AIAN,Stepchild,0.09253670266731044
+240,15,18,Female,Asian,Adopted child,0.01544686553261949
+241,15,18,Female,Asian,Biological child,0.3602335299379086
+242,15,18,Female,Asian,Child-in-law,0.006528466291924108
+243,15,18,Female,Asian,Foster child,0.03429526538407514
+244,15,18,Female,Asian,Grandchild,0.18720332485936866
+245,15,18,Female,Asian,Opp-sex partner,0.004252565190749773
+246,15,18,Female,Asian,Opp-sex spouse,0.0014924096707159583
+247,15,18,Female,Asian,Other nonrelative,0.17889932060302988
+248,15,18,Female,Asian,Other relative,0.09860954483841695
+249,15,18,Female,Asian,Parent,0.0
+250,15,18,Female,Asian,Parent-in-law,0.0
+251,15,18,Female,Asian,Roommate,0.017915503366979346
+252,15,18,Female,Asian,Same-sex partner,5.3491386047166964e-05
+253,15,18,Female,Asian,Same-sex spouse,3.209483162830018e-05
+254,15,18,Female,Asian,Sibling,0.023254338288605257
+255,15,18,Female,Asian,Stepchild,0.07178327981793135
+256,15,18,Female,Black,Adopted child,0.016734349448911636
+257,15,18,Female,Black,Biological child,0.24078282750835586
+258,15,18,Female,Black,Child-in-law,0.0070688829237117255
+259,15,18,Female,Black,Foster child,0.0711810687021235
+260,15,18,Female,Black,Grandchild,0.2791323366494297
+261,15,18,Female,Black,Opp-sex partner,0.004610699611660278
+262,15,18,Female,Black,Opp-sex spouse,0.0016180945806958716
+263,15,18,Female,Black,Other nonrelative,0.12443303819269558
+264,15,18,Female,Black,Other relative,0.15183519175774635
+265,15,18,Female,Black,Parent,0.0
+266,15,18,Female,Black,Parent-in-law,0.0
+267,15,18,Female,Black,Roommate,0.019397665016824616
+268,15,18,Female,Black,Same-sex partner,5.799622153031798e-05
+269,15,18,Female,Black,Same-sex spouse,3.4797732918190784e-05
+270,15,18,Female,Black,Sibling,0.025175740841928355
+271,15,18,Female,Black,Stepchild,0.05793731081146798
+272,15,18,Female,Latino,Adopted child,0.02805956490989018
+273,15,18,Female,Latino,Biological child,0.24963881950897532
+274,15,18,Female,Latino,Child-in-law,0.011822621294414273
+275,15,18,Female,Latino,Foster child,0.04661964564696647
+276,15,18,Female,Latino,Grandchild,0.2051198531486472
+277,15,18,Female,Latino,Opp-sex partner,0.007760970316029103
+278,15,18,Female,Latino,Opp-sex spouse,0.002723661280719648
+279,15,18,Female,Latino,Other nonrelative,0.11477318785294412
+280,15,18,Female,Latino,Other relative,0.18607909401253345
+281,15,18,Female,Latino,Parent,0.0
+282,15,18,Female,Latino,Parent-in-law,0.0
+283,15,18,Female,Latino,Roommate,0.032435404617270625
+284,15,18,Female,Latino,Same-sex partner,9.762226812615224e-05
+285,15,18,Female,Latino,Same-sex spouse,5.8573360875691346e-05
+286,15,18,Female,Latino,Sibling,0.045055913286945914
+287,15,18,Female,Latino,Stepchild,0.06975506849566178
+288,15,18,Female,Multiracial or Other,Adopted child,0.017694917825677028
+289,15,18,Female,Multiracial or Other,Biological child,0.2640406468786648
+290,15,18,Female,Multiracial or Other,Child-in-law,0.0074720782804690205
+291,15,18,Female,Multiracial or Other,Foster child,0.039289994966508424
+292,15,18,Female,Multiracial or Other,Grandchild,0.2799588886715766
+293,15,18,Female,Multiracial or Other,Opp-sex partner,0.004877896886249809
+294,15,18,Female,Multiracial or Other,Opp-sex spouse,0.0017118656997027637
+295,15,18,Female,Multiracial or Other,Other nonrelative,0.1427134552650545
+296,15,18,Female,Multiracial or Other,Other relative,0.11288116689837445
+297,15,18,Female,Multiracial or Other,Parent,0.0
+298,15,18,Female,Multiracial or Other,Parent-in-law,0.0
+299,15,18,Female,Multiracial or Other,Roommate,0.020503479863918216
+300,15,18,Female,Multiracial or Other,Same-sex partner,6.135719353773346e-05
+301,15,18,Female,Multiracial or Other,Same-sex spouse,3.6814316122640086e-05
+302,15,18,Female,Multiracial or Other,Sibling,0.02660926584444983
+303,15,18,Female,Multiracial or Other,Stepchild,0.08214817140969415
+304,15,18,Female,NHOPI,Adopted child,0.019948093268265292
+305,15,18,Female,NHOPI,Biological child,0.25068549263828344
+306,15,18,Female,NHOPI,Child-in-law,0.008417842185193364
+307,15,18,Female,NHOPI,Foster child,0.04429610635627878
+308,15,18,Female,NHOPI,Grandchild,0.2410479970952473
+309,15,18,Female,NHOPI,Opp-sex partner,0.005504652191160574
+310,15,18,Female,NHOPI,Opp-sex spouse,0.0019318213350110695
+311,15,18,Female,NHOPI,Other nonrelative,0.1552659712301101
+312,15,18,Female,NHOPI,Other relative,0.12718533118955536
+313,15,18,Female,NHOPI,Parent,0.0
+314,15,18,Female,NHOPI,Parent-in-law,0.0
+315,15,18,Female,NHOPI,Roommate,0.023097358611592785
+316,15,18,Female,NHOPI,Same-sex partner,6.924090806491288e-05
+317,15,18,Female,NHOPI,Same-sex spouse,4.154454483894773e-05
+318,15,18,Female,NHOPI,Sibling,0.029971845779087528
+319,15,18,Female,NHOPI,Stepchild,0.09253670266731044
+320,15,18,Female,White,Adopted child,0.014497425181146177
+321,15,18,Female,White,Biological child,0.24708540951173935
+322,15,18,Female,White,Child-in-law,0.008160033962629574
+323,15,18,Female,White,Foster child,0.04005838329746366
+324,15,18,Female,White,Grandchild,0.24696267853991427
+325,15,18,Female,White,Opp-sex partner,0.00533380358968812
+326,15,18,Female,White,Opp-sex spouse,0.0018718631465697933
+327,15,18,Female,White,Other nonrelative,0.18034064280230244
+328,15,18,Female,White,Other relative,0.09742974661586945
+329,15,18,Female,White,Parent,0.0
+330,15,18,Female,White,Parent-in-law,0.0
+331,15,18,Female,White,Roommate,0.02603749679786784
+332,15,18,Female,White,Same-sex partner,6.709186905268076e-05
+333,15,18,Female,White,Same-sex spouse,4.0255121431608455e-05
+334,15,18,Female,White,Sibling,0.022190356799400894
+335,15,18,Female,White,Stepchild,0.10992481276492404
+336,15,18,Male,AIAN,Adopted child,0.014757957505961344
+337,15,18,Male,AIAN,Biological child,0.2679228389050295
+338,15,18,Male,AIAN,Child-in-law,0.006753120833926047
+339,15,18,Male,AIAN,Foster child,0.031844461060743
+340,15,18,Male,AIAN,Grandchild,0.26955980448811184
+341,15,18,Male,AIAN,Opp-sex partner,0.003251805610521627
+342,15,18,Male,AIAN,Opp-sex spouse,0.0011411997048245712
+343,15,18,Male,AIAN,Other nonrelative,0.14853353128277044
+344,15,18,Male,AIAN,Other relative,0.11463852771167998
+345,15,18,Male,AIAN,Parent,0.0
+346,15,18,Male,AIAN,Parent-in-law,0.0
+347,15,18,Male,AIAN,Roommate,0.02208953417707355
+348,15,18,Male,AIAN,Same-sex partner,4.090321522668714e-05
+349,15,18,Male,AIAN,Same-sex spouse,2.4541929136012284e-05
+350,15,18,Male,AIAN,Sibling,0.029769275024956326
+351,15,18,Male,AIAN,Stepchild,0.08967249855003903
+352,15,18,Male,Asian,Adopted child,0.008236060720006233
+353,15,18,Male,Asian,Biological child,0.4284739414498172
+354,15,18,Male,Asian,Child-in-law,0.003774373449604766
+355,15,18,Male,Asian,Foster child,0.01778604154460543
+356,15,18,Male,Asian,Grandchild,0.1490156379937325
+357,15,18,Male,Asian,Opp-sex partner,0.0018174602619235548
+358,15,18,Male,Asian,Opp-sex spouse,0.0006378256768260022
+359,15,18,Male,Asian,Other nonrelative,0.24810542622908174
+360,15,18,Male,Asian,Other relative,0.06365739921650056
+361,15,18,Male,Asian,Parent,0.0
+362,15,18,Male,Asian,Parent-in-law,0.0
+363,15,18,Male,Asian,Roommate,0.012249827887721486
+364,15,18,Male,Asian,Same-sex partner,2.286113537010761e-05
+365,15,18,Male,Asian,Same-sex spouse,1.3716681222064566e-05
+366,15,18,Male,Asian,Sibling,0.01649535456399971
+367,15,18,Male,Asian,Stepchild,0.04971407318958855
+368,15,18,Male,Black,Adopted child,0.011265432454259263
+369,15,18,Male,Black,Biological child,0.2625915356830873
+370,15,18,Male,Black,Child-in-law,0.005157977319740953
+371,15,18,Male,Black,Foster child,0.04460822748558469
+372,15,18,Male,Black,Grandchild,0.3344953669129658
+373,15,18,Male,Black,Opp-sex partner,0.002483701980129653
+374,15,18,Male,Black,Opp-sex spouse,0.0008716388081209725
+375,15,18,Male,Black,Other nonrelative,0.09998833849906717
+376,15,18,Male,Black,Other relative,0.14619871529372322
+377,15,18,Male,Black,Parent,0.0
+378,15,18,Male,Black,Parent-in-law,0.0
+379,15,18,Male,Black,Roommate,0.01682032145189664
+380,15,18,Male,Black,Same-sex partner,3.124153434125349e-05
+381,15,18,Male,Black,Same-sex spouse,1.8744920604752097e-05
+382,15,18,Male,Black,Sibling,0.022661027296577443
+383,15,18,Male,Black,Stepchild,0.052807730359900905
+384,15,18,Male,Latino,Adopted child,0.019991566652022726
+385,15,18,Male,Latino,Biological child,0.2772390226248302
+386,15,18,Male,Latino,Child-in-law,0.009143478418357899
+387,15,18,Male,Latino,Foster child,0.027019370028985044
+388,15,18,Male,Latino,Grandchild,0.20167793345761328
+389,15,18,Male,Latino,Opp-sex partner,0.0044028257677737916
+390,15,18,Male,Latino,Opp-sex spouse,0.0015451426279357078
+391,15,18,Male,Latino,Other nonrelative,0.13631133131756193
+392,15,18,Male,Latino,Other relative,0.15943910868216848
+393,15,18,Male,Latino,Parent,0.0
+394,15,18,Male,Latino,Parent-in-law,0.0
+395,15,18,Male,Latino,Roommate,0.029985437182154163
+396,15,18,Male,Latino,Same-sex partner,5.538145619841247e-05
+397,15,18,Male,Latino,Same-sex spouse,3.3228873719047484e-05
+398,15,18,Male,Latino,Sibling,0.060627622162630304
+399,15,18,Male,Latino,Stepchild,0.0725285507480489
+400,15,18,Male,Multiracial or Other,Adopted child,0.014249949910373082
+401,15,18,Male,Multiracial or Other,Biological child,0.30594024228168554
+402,15,18,Male,Multiracial or Other,Child-in-law,0.006521097904197002
+403,15,18,Male,Multiracial or Other,Foster child,0.030749412702326288
+404,15,18,Male,Multiracial or Other,Grandchild,0.253814710038406
+405,15,18,Male,Multiracial or Other,Opp-sex partner,0.0031400804565939527
+406,15,18,Male,Multiracial or Other,Opp-sex spouse,0.001101990499861274
+407,15,18,Male,Multiracial or Other,Other nonrelative,0.13713330843507196
+408,15,18,Male,Multiracial or Other,Other relative,0.11066750310157322
+409,15,18,Male,Multiracial or Other,Parent,0.0
+410,15,18,Male,Multiracial or Other,Parent-in-law,0.0
+411,15,18,Male,Multiracial or Other,Roommate,0.021323100735950062
+412,15,18,Male,Multiracial or Other,Same-sex partner,3.949786737854029e-05
+413,15,18,Male,Multiracial or Other,Same-sex spouse,2.3698720427124172e-05
+414,15,18,Male,Multiracial or Other,Sibling,0.028735345298298083
+415,15,18,Male,Multiracial or Other,Stepchild,0.08656006204785786
+416,15,18,Male,NHOPI,Adopted child,0.014757957505961344
+417,15,18,Male,NHOPI,Biological child,0.2679228389050295
+418,15,18,Male,NHOPI,Child-in-law,0.006753120833926047
+419,15,18,Male,NHOPI,Foster child,0.031844461060743
+420,15,18,Male,NHOPI,Grandchild,0.26955980448811184
+421,15,18,Male,NHOPI,Opp-sex partner,0.003251805610521627
+422,15,18,Male,NHOPI,Opp-sex spouse,0.0011411997048245712
+423,15,18,Male,NHOPI,Other nonrelative,0.14853353128277044
+424,15,18,Male,NHOPI,Other relative,0.11463852771167998
+425,15,18,Male,NHOPI,Parent,0.0
+426,15,18,Male,NHOPI,Parent-in-law,0.0
+427,15,18,Male,NHOPI,Roommate,0.02208953417707355
+428,15,18,Male,NHOPI,Same-sex partner,4.090321522668714e-05
+429,15,18,Male,NHOPI,Same-sex spouse,2.4541929136012284e-05
+430,15,18,Male,NHOPI,Sibling,0.029769275024956326
+431,15,18,Male,NHOPI,Stepchild,0.08967249855003903
+432,15,18,Male,White,Adopted child,0.015115238779459809
+433,15,18,Male,White,Biological child,0.2529221046012713
+434,15,18,Male,White,Child-in-law,0.007880008457281255
+435,15,18,Male,White,Foster child,0.02873628690520718
+436,15,18,Male,White,Grandchild,0.2930472009363377
+437,15,18,Male,White,Opp-sex partner,0.003794431692028223
+438,15,18,Male,White,Opp-sex spouse,0.0013316307447495273
+439,15,18,Male,White,Other nonrelative,0.16374847388421204
+440,15,18,Male,White,Other relative,0.0868829178738281
+441,15,18,Male,White,Parent,0.0
+442,15,18,Male,White,Parent-in-law,0.0
+443,15,18,Male,White,Roommate,0.019734126033842312
+444,15,18,Male,White,Same-sex partner,4.77287005286569e-05
+445,15,18,Male,White,Same-sex spouse,2.863722031719414e-05
+446,15,18,Male,White,Sibling,0.014260647230577003
+447,15,18,Male,White,Stepchild,0.11247056694035959
+448,18,19,Female,AIAN,Adopted child,0.010659629490093046
+449,18,19,Female,AIAN,Biological child,0.15188736271492695
+450,18,19,Female,AIAN,Child-in-law,0.02920111924431454
+451,18,19,Female,AIAN,Foster child,0.007652055760872681
+452,18,19,Female,AIAN,Grandchild,0.15487609579394734
+453,18,19,Female,AIAN,Opp-sex partner,0.040573991135083566
+454,18,19,Female,AIAN,Opp-sex spouse,0.011561170018404352
+455,18,19,Female,AIAN,Other nonrelative,0.19830497538199351
+456,18,19,Female,AIAN,Other relative,0.10499927319721868
+457,18,19,Female,AIAN,Parent,0.0
+458,18,19,Female,AIAN,Parent-in-law,0.0
+459,18,19,Female,AIAN,Roommate,0.18882244726126318
+460,18,19,Female,AIAN,Same-sex partner,0.0024042471649506026
+461,18,19,Female,AIAN,Same-sex spouse,0.0003913890733640515
+462,18,19,Female,AIAN,Sibling,0.057194439116608986
+463,18,19,Female,AIAN,Stepchild,0.04147180464695844
+464,18,19,Female,Asian,Adopted child,0.010659629490093046
+465,18,19,Female,Asian,Biological child,0.15188736271492695
+466,18,19,Female,Asian,Child-in-law,0.02920111924431454
+467,18,19,Female,Asian,Foster child,0.007652055760872681
+468,18,19,Female,Asian,Grandchild,0.15487609579394734
+469,18,19,Female,Asian,Opp-sex partner,0.040573991135083566
+470,18,19,Female,Asian,Opp-sex spouse,0.011561170018404352
+471,18,19,Female,Asian,Other nonrelative,0.19830497538199351
+472,18,19,Female,Asian,Other relative,0.10499927319721868
+473,18,19,Female,Asian,Parent,0.0
+474,18,19,Female,Asian,Parent-in-law,0.0
+475,18,19,Female,Asian,Roommate,0.18882244726126318
+476,18,19,Female,Asian,Same-sex partner,0.0024042471649506026
+477,18,19,Female,Asian,Same-sex spouse,0.0003913890733640515
+478,18,19,Female,Asian,Sibling,0.057194439116608986
+479,18,19,Female,Asian,Stepchild,0.04147180464695844
+480,18,19,Female,Black,Adopted child,0.009011752175816404
+481,18,19,Female,Black,Biological child,0.16612378511880596
+482,18,19,Female,Black,Child-in-law,0.024650801993878316
+483,18,19,Female,Black,Foster child,0.006474905568661446
+484,18,19,Female,Black,Grandchild,0.2829177300193131
+485,18,19,Female,Black,Opp-sex partner,0.034239571309375536
+486,18,19,Female,Black,Opp-sex spouse,0.009747084748907767
+487,18,19,Female,Black,Other nonrelative,0.13247583003954735
+488,18,19,Female,Black,Other relative,0.08893173551521509
+489,18,19,Female,Black,Parent,0.0
+490,18,19,Female,Black,Parent-in-law,0.0
+491,18,19,Female,Black,Roommate,0.15953363413273253
+492,18,19,Female,Black,Same-sex partner,0.0020343909980867388
+493,18,19,Female,Black,Same-sex spouse,0.0003311799299210969
+494,18,19,Female,Black,Sibling,0.04839012495509583
+495,18,19,Female,Black,Stepchild,0.03513747349464282
+496,18,19,Female,Latino,Adopted child,0.008600397327596711
+497,18,19,Female,Latino,Biological child,0.1431191354370334
+498,18,19,Female,Latino,Child-in-law,0.06809130887752368
+499,18,19,Female,Latino,Foster child,0.0061810576506609255
+500,18,19,Female,Latino,Grandchild,0.1312673078787612
+501,18,19,Female,Latino,Opp-sex partner,0.03265832111075187
+502,18,19,Female,Latino,Opp-sex spouse,0.009294236734208594
+503,18,19,Female,Latino,Other nonrelative,0.17915078381159863
+504,18,19,Female,Latino,Other relative,0.13903981309262642
+505,18,19,Female,Latino,Parent,0.0
+506,18,19,Female,Latino,Parent-in-law,0.0
+507,18,19,Female,Latino,Roommate,0.1732357033722004
+508,18,19,Female,Latino,Same-sex partner,0.001942065086481147
+509,18,19,Female,Latino,Same-sex spouse,0.00031615013035739595
+510,18,19,Female,Latino,Sibling,0.07354745773097993
+511,18,19,Female,Latino,Stepchild,0.03355626175921974
+512,18,19,Female,Multiracial or Other,Adopted child,0.010659629490093046
+513,18,19,Female,Multiracial or Other,Biological child,0.15188736271492695
+514,18,19,Female,Multiracial or Other,Child-in-law,0.02920111924431454
+515,18,19,Female,Multiracial or Other,Foster child,0.007652055760872681
+516,18,19,Female,Multiracial or Other,Grandchild,0.15487609579394734
+517,18,19,Female,Multiracial or Other,Opp-sex partner,0.040573991135083566
+518,18,19,Female,Multiracial or Other,Opp-sex spouse,0.011561170018404352
+519,18,19,Female,Multiracial or Other,Other nonrelative,0.19830497538199351
+520,18,19,Female,Multiracial or Other,Other relative,0.10499927319721868
+521,18,19,Female,Multiracial or Other,Parent,0.0
+522,18,19,Female,Multiracial or Other,Parent-in-law,0.0
+523,18,19,Female,Multiracial or Other,Roommate,0.18882244726126318
+524,18,19,Female,Multiracial or Other,Same-sex partner,0.0024042471649506026
+525,18,19,Female,Multiracial or Other,Same-sex spouse,0.0003913890733640515
+526,18,19,Female,Multiracial or Other,Sibling,0.057194439116608986
+527,18,19,Female,Multiracial or Other,Stepchild,0.04147180464695844
+528,18,19,Female,NHOPI,Adopted child,0.010659629490093046
+529,18,19,Female,NHOPI,Biological child,0.15188736271492695
+530,18,19,Female,NHOPI,Child-in-law,0.02920111924431454
+531,18,19,Female,NHOPI,Foster child,0.007652055760872681
+532,18,19,Female,NHOPI,Grandchild,0.15487609579394734
+533,18,19,Female,NHOPI,Opp-sex partner,0.040573991135083566
+534,18,19,Female,NHOPI,Opp-sex spouse,0.011561170018404352
+535,18,19,Female,NHOPI,Other nonrelative,0.19830497538199351
+536,18,19,Female,NHOPI,Other relative,0.10499927319721868
+537,18,19,Female,NHOPI,Parent,0.0
+538,18,19,Female,NHOPI,Parent-in-law,0.0
+539,18,19,Female,NHOPI,Roommate,0.18882244726126318
+540,18,19,Female,NHOPI,Same-sex partner,0.0024042471649506026
+541,18,19,Female,NHOPI,Same-sex spouse,0.0003913890733640515
+542,18,19,Female,NHOPI,Sibling,0.057194439116608986
+543,18,19,Female,NHOPI,Stepchild,0.04147180464695844
+544,18,19,Female,White,Adopted child,0.008938359339496809
+545,18,19,Female,White,Biological child,0.141843810049758
+546,18,19,Female,White,Child-in-law,0.02255150726682633
+547,18,19,Female,White,Foster child,0.0064224779858480996
+548,18,19,Female,White,Grandchild,0.13751539468453466
+549,18,19,Female,White,Opp-sex partner,0.052830259413007966
+550,18,19,Female,White,Opp-sex spouse,0.016898838394509657
+551,18,19,Female,White,Other nonrelative,0.22629384063727148
+552,18,19,Female,White,Other relative,0.08662908331696798
+553,18,19,Female,White,Parent,0.0
+554,18,19,Female,White,Parent-in-law,0.0
+555,18,19,Female,White,Roommate,0.20875389477730993
+556,18,19,Female,White,Same-sex partner,0.002017918448580666
+557,18,19,Female,White,Same-sex spouse,0.0003284983520945271
+558,18,19,Female,White,Sibling,0.054140287335777186
+559,18,19,Female,White,Stepchild,0.03483582999801669
+560,18,19,Male,AIAN,Adopted child,0.007621787217035179
+561,18,19,Male,AIAN,Biological child,0.20419804398734992
+562,18,19,Male,AIAN,Child-in-law,0.014031900736106639
+563,18,19,Male,AIAN,Foster child,0.006029456774500167
+564,18,19,Male,AIAN,Grandchild,0.18010773821365508
+565,18,19,Male,AIAN,Opp-sex partner,0.016259488524535976
+566,18,19,Male,AIAN,Opp-sex spouse,0.005677004186429176
+567,18,19,Male,AIAN,Other nonrelative,0.19438213832290424
+568,18,19,Male,AIAN,Other relative,0.13045327082127006
+569,18,19,Male,AIAN,Parent,0.0
+570,18,19,Male,AIAN,Parent-in-law,0.0
+571,18,19,Male,AIAN,Roommate,0.12738949537183472
+572,18,19,Male,AIAN,Same-sex partner,0.0018944326608815766
+573,18,19,Male,AIAN,Same-sex spouse,0.00030839601456211704
+574,18,19,Male,AIAN,Sibling,0.05688487032598118
+575,18,19,Male,AIAN,Stepchild,0.05476197684295397
+576,18,19,Male,Asian,Adopted child,0.007621787217035179
+577,18,19,Male,Asian,Biological child,0.20419804398734992
+578,18,19,Male,Asian,Child-in-law,0.014031900736106639
+579,18,19,Male,Asian,Foster child,0.006029456774500167
+580,18,19,Male,Asian,Grandchild,0.18010773821365508
+581,18,19,Male,Asian,Opp-sex partner,0.016259488524535976
+582,18,19,Male,Asian,Opp-sex spouse,0.005677004186429176
+583,18,19,Male,Asian,Other nonrelative,0.19438213832290424
+584,18,19,Male,Asian,Other relative,0.13045327082127006
+585,18,19,Male,Asian,Parent,0.0
+586,18,19,Male,Asian,Parent-in-law,0.0
+587,18,19,Male,Asian,Roommate,0.12738949537183472
+588,18,19,Male,Asian,Same-sex partner,0.0018944326608815766
+589,18,19,Male,Asian,Same-sex spouse,0.00030839601456211704
+590,18,19,Male,Asian,Sibling,0.05688487032598118
+591,18,19,Male,Asian,Stepchild,0.05476197684295397
+592,18,19,Male,Black,Adopted child,0.005566742713156472
+593,18,19,Male,Black,Biological child,0.16733276339868325
+594,18,19,Male,Black,Child-in-law,0.01031019869807591
+595,18,19,Male,Black,Foster child,0.00440374857077118
+596,18,19,Male,Black,Grandchild,0.23496272953695566
+597,18,19,Male,Black,Opp-sex partner,0.011999493692098993
+598,18,19,Male,Black,Opp-sex spouse,0.004146326942417124
+599,18,19,Male,Black,Other nonrelative,0.16470851661220381
+600,18,19,Male,Black,Other relative,0.22096139368575646
+601,18,19,Male,Black,Parent,0.0
+602,18,19,Male,Black,Parent-in-law,0.0
+603,18,19,Male,Black,Roommate,0.09300697322943074
+604,18,19,Male,Black,Same-sex partner,0.0013836412524030537
+605,18,19,Male,Black,Same-sex spouse,0.00022524392480979943
+606,18,19,Male,Black,Sibling,0.041320106661496596
+607,18,19,Male,Black,Stepchild,0.03967212108174091
+608,18,19,Male,Latino,Adopted child,0.008674165501767625
+609,18,19,Male,Latino,Biological child,0.26153240051473103
+610,18,19,Male,Latino,Child-in-law,0.015937897022512575
+611,18,19,Male,Latino,Foster child,0.006861974030300071
+612,18,19,Male,Latino,Grandchild,0.11075249196652022
+613,18,19,Male,Latino,Opp-sex partner,0.018441274080634906
+614,18,19,Male,Latino,Opp-sex spouse,0.006460856550449545
+615,18,19,Male,Latino,Other nonrelative,0.15274902573145402
+616,18,19,Male,Latino,Other relative,0.1707000925366776
+617,18,19,Male,Latino,Parent,0.0
+618,18,19,Male,Latino,Parent-in-law,0.0
+619,18,19,Male,Latino,Roommate,0.09819224825177145
+620,18,19,Male,Latino,Same-sex partner,0.0021560064541965777
+621,18,19,Male,Latino,Same-sex spouse,0.0003509777948692103
+622,18,19,Male,Latino,Sibling,0.08470185912020384
+623,18,19,Male,Latino,Stepchild,0.06248873044391123
+624,18,19,Male,Multiracial or Other,Adopted child,0.006247036709228851
+625,18,19,Male,Multiracial or Other,Biological child,0.30327743528075346
+626,18,19,Male,Multiracial or Other,Child-in-law,0.01154217860499166
+627,18,19,Male,Multiracial or Other,Foster child,0.004941916736119933
+628,18,19,Male,Multiracial or Other,Grandchild,0.19333747761925058
+629,18,19,Male,Multiracial or Other,Opp-sex partner,0.013409629610121161
+630,18,19,Male,Multiracial or Other,Opp-sex spouse,0.004653036425866576
+631,18,19,Male,Multiracial or Other,Other nonrelative,0.15881764286627542
+632,18,19,Male,Multiracial or Other,Other relative,0.10643893822064654
+633,18,19,Male,Multiracial or Other,Parent,0.0
+634,18,19,Male,Multiracial or Other,Parent-in-law,0.0
+635,18,19,Male,Multiracial or Other,Roommate,0.10438885198787803
+636,18,19,Male,Multiracial or Other,Same-sex partner,0.0015527316676117956
+637,18,19,Male,Multiracial or Other,Same-sex spouse,0.0002527702714716876
+638,18,19,Male,Multiracial or Other,Sibling,0.04647274563262821
+639,18,19,Male,Multiracial or Other,Stepchild,0.04466760836715603
+640,18,19,Male,NHOPI,Adopted child,0.007621787217035179
+641,18,19,Male,NHOPI,Biological child,0.20419804398734992
+642,18,19,Male,NHOPI,Child-in-law,0.014031900736106639
+643,18,19,Male,NHOPI,Foster child,0.006029456774500167
+644,18,19,Male,NHOPI,Grandchild,0.18010773821365508
+645,18,19,Male,NHOPI,Opp-sex partner,0.016259488524535976
+646,18,19,Male,NHOPI,Opp-sex spouse,0.005677004186429176
+647,18,19,Male,NHOPI,Other nonrelative,0.19438213832290424
+648,18,19,Male,NHOPI,Other relative,0.13045327082127006
+649,18,19,Male,NHOPI,Parent,0.0
+650,18,19,Male,NHOPI,Parent-in-law,0.0
+651,18,19,Male,NHOPI,Roommate,0.12738949537183472
+652,18,19,Male,NHOPI,Same-sex partner,0.0018944326608815766
+653,18,19,Male,NHOPI,Same-sex spouse,0.00030839601456211704
+654,18,19,Male,NHOPI,Sibling,0.05688487032598118
+655,18,19,Male,NHOPI,Stepchild,0.05476197684295397
+656,18,19,Male,White,Adopted child,0.007275371981703621
+657,18,19,Male,White,Biological child,0.18147887633806722
+658,18,19,Male,White,Child-in-law,0.01340451609846166
+659,18,19,Male,White,Foster child,0.005755414003692873
+660,18,19,Male,White,Grandchild,0.19451267773912526
+661,18,19,Male,White,Opp-sex partner,0.015541340695159262
+662,18,19,Male,White,Opp-sex spouse,0.005418980617255711
+663,18,19,Male,White,Other nonrelative,0.22447180704623146
+664,18,19,Male,White,Other relative,0.09383454273880489
+665,18,19,Male,White,Parent,0.0
+666,18,19,Male,White,Parent-in-law,0.0
+667,18,19,Male,White,Roommate,0.14992758232460762
+668,18,19,Male,White,Same-sex partner,0.0018083294520997442
+669,18,19,Male,White,Same-sex spouse,0.00029437921313251646
+670,18,19,Male,White,Sibling,0.05468873521467506
+671,18,19,Male,White,Stepchild,0.051587446536983064
+672,19,20,Female,AIAN,Adopted child,0.012769263104936009
+673,19,20,Female,AIAN,Biological child,0.27055044419744667
+674,19,20,Female,AIAN,Child-in-law,0.018858342232036633
+675,19,20,Female,AIAN,Foster child,0.0014540033601202608
+676,19,20,Female,AIAN,Grandchild,0.08144725127472685
+677,19,20,Female,AIAN,Opp-sex partner,0.05295449477004412
+678,19,20,Female,AIAN,Opp-sex spouse,0.01923262780006625
+679,19,20,Female,AIAN,Other nonrelative,0.1303018420627994
+680,19,20,Female,AIAN,Other relative,0.05991904962704228
+681,19,20,Female,AIAN,Parent,0.0
+682,19,20,Female,AIAN,Parent-in-law,0.0
+683,19,20,Female,AIAN,Roommate,0.2859171076886713
+684,19,20,Female,AIAN,Same-sex partner,0.0037225989641633188
+685,19,20,Female,AIAN,Same-sex spouse,0.0001051086766351996
+686,19,20,Female,AIAN,Sibling,0.029298115256462146
+687,19,20,Female,AIAN,Stepchild,0.03346975098484939
+688,19,20,Female,Asian,Adopted child,0.010941509399441936
+689,19,20,Female,Asian,Biological child,0.26061243696513675
+690,19,20,Female,Asian,Child-in-law,0.016153744114551023
+691,19,20,Female,Asian,Foster child,0.0012478451106503815
+692,19,20,Female,Asian,Grandchild,0.06996178468915236
+693,19,20,Female,Asian,Opp-sex partner,0.04533164005967045
+694,19,20,Female,Asian,Opp-sex spouse,0.016447346165455946
+695,19,20,Female,Asian,Other nonrelative,0.11181114715979415
+696,19,20,Female,Asian,Other relative,0.05142908172177284
+697,19,20,Female,Asian,Parent,0.0
+698,19,20,Female,Asian,Parent-in-law,0.0
+699,19,20,Female,Asian,Roommate,0.35889106747275357
+700,19,20,Female,Asian,Same-sex partner,0.003194784168833808
+701,19,20,Female,Asian,Same-sex spouse,9.020567064942518e-05
+702,19,20,Female,Asian,Sibling,0.025173809667503495
+703,19,20,Female,Asian,Stepchild,0.028713597634633947
+704,19,20,Female,Black,Adopted child,0.009037558024757014
+705,19,20,Female,Black,Biological child,0.3644918864757078
+706,19,20,Female,Black,Child-in-law,0.013336392339594648
+707,19,20,Female,Black,Foster child,0.0010330926551709867
+708,19,20,Female,Black,Grandchild,0.14663983784009085
+709,19,20,Female,Black,Opp-sex partner,0.03739098606028193
+710,19,20,Female,Black,Opp-sex spouse,0.013545942054708921
+711,19,20,Female,Black,Other nonrelative,0.09254961983132103
+712,19,20,Female,Black,Other relative,0.06766524745256701
+713,19,20,Female,Black,Parent,0.0
+714,19,20,Female,Black,Parent-in-law,0.0
+715,19,20,Female,Black,Roommate,0.20695304110933121
+716,19,20,Female,Black,Same-sex partner,0.002644966135226924
+717,19,20,Female,Black,Same-sex spouse,7.468139675934845e-05
+718,19,20,Female,Black,Sibling,0.020877578157653728
+719,19,20,Female,Black,Stepchild,0.023759170466828537
+720,19,20,Female,Latino,Adopted child,0.011941851687250973
+721,19,20,Female,Latino,Biological child,0.3108967651438223
+722,19,20,Female,Latino,Child-in-law,0.049772923380428845
+723,19,20,Female,Latino,Foster child,0.001360676907721142
+724,19,20,Female,Latino,Grandchild,0.0597052829388255
+725,19,20,Female,Latino,Opp-sex partner,0.05483200278345298
+726,19,20,Female,Latino,Opp-sex spouse,0.017971750853661962
+727,19,20,Female,Latino,Other nonrelative,0.14564941373412302
+728,19,20,Female,Latino,Other relative,0.08573803832418098
+729,19,20,Female,Latino,Parent,0.0
+730,19,20,Female,Latino,Parent-in-law,0.0
+731,19,20,Female,Latino,Roommate,0.19980152950132304
+732,19,20,Female,Latino,Same-sex partner,0.0034836607577197923
+733,19,20,Female,Latino,Same-sex spouse,9.836218610032354e-05
+734,19,20,Female,Latino,Sibling,0.027431069198874773
+735,19,20,Female,Latino,Stepchild,0.031316672602514375
+736,19,20,Female,Multiracial or Other,Adopted child,0.014532109060354934
+737,19,20,Female,Multiracial or Other,Biological child,0.3158943308267943
+738,19,20,Female,Multiracial or Other,Child-in-law,0.021466892938112082
+739,19,20,Female,Multiracial or Other,Foster child,0.0016528407874408244
+740,19,20,Female,Multiracial or Other,Grandchild,0.09252487171505797
+741,19,20,Female,Multiracial or Other,Opp-sex partner,0.060306637018843215
+742,19,20,Female,Multiracial or Other,Opp-sex spouse,0.02191899217001315
+743,19,20,Female,Multiracial or Other,Other nonrelative,0.14813591691427225
+744,19,20,Female,Multiracial or Other,Other relative,0.06810753387937543
+745,19,20,Female,Multiracial or Other,Parent,0.0
+746,19,20,Female,Multiracial or Other,Parent-in-law,0.0
+747,19,20,Female,Multiracial or Other,Roommate,0.1797757443130165
+748,19,20,Female,Multiracial or Other,Same-sex partner,0.004231670690737051
+749,19,20,Female,Multiracial or Other,Same-sex spouse,0.00011948246656198732
+750,19,20,Female,Multiracial or Other,Sibling,0.033275968994450046
+751,19,20,Female,Multiracial or Other,Stepchild,0.038057008224970226
+752,19,20,Female,NHOPI,Adopted child,0.012769263104936009
+753,19,20,Female,NHOPI,Biological child,0.27055044419744667
+754,19,20,Female,NHOPI,Child-in-law,0.018858342232036633
+755,19,20,Female,NHOPI,Foster child,0.0014540033601202608
+756,19,20,Female,NHOPI,Grandchild,0.08144725127472685
+757,19,20,Female,NHOPI,Opp-sex partner,0.05295449477004412
+758,19,20,Female,NHOPI,Opp-sex spouse,0.01923262780006625
+759,19,20,Female,NHOPI,Other nonrelative,0.1303018420627994
+760,19,20,Female,NHOPI,Other relative,0.05991904962704228
+761,19,20,Female,NHOPI,Parent,0.0
+762,19,20,Female,NHOPI,Parent-in-law,0.0
+763,19,20,Female,NHOPI,Roommate,0.2859171076886713
+764,19,20,Female,NHOPI,Same-sex partner,0.0037225989641633188
+765,19,20,Female,NHOPI,Same-sex spouse,0.0001051086766351996
+766,19,20,Female,NHOPI,Sibling,0.029298115256462146
+767,19,20,Female,NHOPI,Stepchild,0.03346975098484939
+768,19,20,Female,White,Adopted child,0.01194336856545317
+769,19,20,Female,White,Biological child,0.23835615273159716
+770,19,20,Female,White,Child-in-law,0.01118687454762177
+771,19,20,Female,White,Foster child,0.0014821708534245486
+772,19,20,Female,White,Grandchild,0.07098476764234053
+773,19,20,Female,White,Opp-sex partner,0.060043274303622655
+774,19,20,Female,White,Opp-sex spouse,0.02282597040054871
+775,19,20,Female,White,Other nonrelative,0.13978227787959488
+776,19,20,Female,White,Other relative,0.0479543949653261
+777,19,20,Female,White,Parent,0.0
+778,19,20,Female,White,Parent-in-law,0.0
+779,19,20,Female,White,Roommate,0.33042734445545213
+780,19,20,Female,White,Same-sex partner,0.0037947145343700797
+781,19,20,Female,White,Same-sex spouse,0.0001071448809704493
+782,19,20,Female,White,Sibling,0.025117674925567855
+783,19,20,Female,White,Stepchild,0.035993869314109916
+784,19,20,Male,AIAN,Adopted child,0.008612649492672547
+785,19,20,Male,AIAN,Biological child,0.32853253967982204
+786,19,20,Male,AIAN,Child-in-law,0.01128567141021342
+787,19,20,Male,AIAN,Foster child,0.0008338256880819712
+788,19,20,Male,AIAN,Grandchild,0.10189345670925772
+789,19,20,Male,AIAN,Opp-sex partner,0.023991700033727404
+790,19,20,Male,AIAN,Opp-sex spouse,0.006637955703616417
+791,19,20,Male,AIAN,Other nonrelative,0.13149138724287887
+792,19,20,Male,AIAN,Other relative,0.0639862804603841
+793,19,20,Male,AIAN,Parent,0.0
+794,19,20,Male,AIAN,Parent-in-law,0.0
+795,19,20,Male,AIAN,Roommate,0.249931675663437
+796,19,20,Male,AIAN,Same-sex partner,0.0021347946833423963
+797,19,20,Male,AIAN,Same-sex spouse,6.0276555764961785e-05
+798,19,20,Male,AIAN,Sibling,0.03862053460902728
+799,19,20,Male,AIAN,Stepchild,0.03198725206777382
+800,19,20,Male,Asian,Adopted child,0.00553338629433344
+801,19,20,Male,Asian,Biological child,0.307771139016171
+802,19,20,Male,Asian,Child-in-law,0.007271275628752504
+803,19,20,Male,Asian,Foster child,0.0005441979967424769
+804,19,20,Male,Asian,Grandchild,0.06479081166698905
+805,19,20,Male,Asian,Opp-sex partner,0.015582009343730023
+806,19,20,Male,Asian,Opp-sex spouse,0.004332275016236043
+807,19,20,Male,Asian,Other nonrelative,0.08385470919483373
+808,19,20,Male,Asian,Other relative,0.04077162676327394
+809,19,20,Male,Asian,Parent,0.0
+810,19,20,Male,Asian,Parent-in-law,0.0
+811,19,20,Male,Asian,Roommate,0.4231575401559672
+812,19,20,Male,Asian,Same-sex partner,0.0013932780037081486
+813,19,20,Male,Asian,Same-sex spouse,3.933961422234772e-05
+814,19,20,Male,Asian,Sibling,0.02454237075841436
+815,19,20,Male,Asian,Stepchild,0.020416040546625727
+816,19,20,Male,Black,Adopted child,0.007602386748328391
+817,19,20,Male,Black,Biological child,0.41691773133679844
+818,19,20,Male,Black,Child-in-law,0.00996860158566281
+819,19,20,Male,Black,Foster child,0.000738801574556201
+820,19,20,Male,Black,Grandchild,0.13487273382286805
+821,19,20,Male,Black,Opp-sex partner,0.02123257242041099
+822,19,20,Male,Black,Opp-sex spouse,0.0058814836191326495
+823,19,20,Male,Black,Other nonrelative,0.10580058431403537
+824,19,20,Male,Black,Other relative,0.08953054958647383
+825,19,20,Male,Black,Parent,0.0
+826,19,20,Male,Black,Parent-in-law,0.0
+827,19,20,Male,Black,Roommate,0.14331698360877426
+828,19,20,Male,Black,Same-sex partner,0.0018915100553396713
+829,19,20,Male,Black,Same-sex spouse,5.340734273900249e-05
+830,19,20,Male,Black,Sibling,0.03400173129407459
+831,19,20,Male,Black,Stepchild,0.028190922690805753
+832,19,20,Male,Latino,Adopted child,0.00798617765638844
+833,19,20,Male,Latino,Biological child,0.4000882193867338
+834,19,20,Male,Latino,Child-in-law,0.010468945725154312
+835,19,20,Male,Latino,Foster child,0.0007749003358436929
+836,19,20,Male,Latino,Grandchild,0.09861628980636461
+837,19,20,Male,Latino,Opp-sex partner,0.022280740322393036
+838,19,20,Male,Latino,Opp-sex spouse,0.00616886020371952
+839,19,20,Male,Latino,Other nonrelative,0.11364796543029011
+840,19,20,Male,Latino,Other relative,0.07849625469044616
+841,19,20,Male,Latino,Parent,0.0
+842,19,20,Male,Latino,Parent-in-law,0.0
+843,19,20,Male,Latino,Roommate,0.1829149820848923
+844,19,20,Male,Latino,Same-sex partner,0.0019839315827323467
+845,19,20,Male,Latino,Same-sex spouse,5.6016891747736845e-05
+846,19,20,Male,Latino,Sibling,0.04688359490853116
+847,19,20,Male,Latino,Stepchild,0.029633120974762794
+848,19,20,Male,Multiracial or Other,Adopted child,0.0063736316044859746
+849,19,20,Male,Multiracial or Other,Biological child,0.3833897360188339
+850,19,20,Male,Multiracial or Other,Child-in-law,0.008366689647091781
+851,19,20,Male,Multiracial or Other,Foster child,0.0006232281126291882
+852,19,20,Male,Multiracial or Other,Grandchild,0.16122694045045877
+853,19,20,Male,Multiracial or Other,Opp-sex partner,0.017876755797501497
+854,19,20,Male,Multiracial or Other,Opp-sex spouse,0.004961421390599229
+855,19,20,Male,Multiracial or Other,Other nonrelative,0.09685352453849454
+856,19,20,Male,Multiracial or Other,Other relative,0.04710630916295793
+857,19,20,Male,Multiracial or Other,Parent,0.0
+858,19,20,Male,Multiracial or Other,Parent-in-law,0.0
+859,19,20,Male,Multiracial or Other,Roommate,0.2196236251997464
+860,19,20,Male,Multiracial or Other,Same-sex partner,0.0015956141437795481
+861,19,20,Male,Multiracial or Other,Same-sex spouse,4.505263464789312e-05
+862,19,20,Male,Multiracial or Other,Sibling,0.02838394934198958
+863,19,20,Male,Multiracial or Other,Stepchild,0.02357352195678377
+864,19,20,Male,NHOPI,Adopted child,0.008612649492672547
+865,19,20,Male,NHOPI,Biological child,0.32853253967982204
+866,19,20,Male,NHOPI,Child-in-law,0.01128567141021342
+867,19,20,Male,NHOPI,Foster child,0.0008338256880819712
+868,19,20,Male,NHOPI,Grandchild,0.10189345670925772
+869,19,20,Male,NHOPI,Opp-sex partner,0.023991700033727404
+870,19,20,Male,NHOPI,Opp-sex spouse,0.006637955703616417
+871,19,20,Male,NHOPI,Other nonrelative,0.13149138724287887
+872,19,20,Male,NHOPI,Other relative,0.0639862804603841
+873,19,20,Male,NHOPI,Parent,0.0
+874,19,20,Male,NHOPI,Parent-in-law,0.0
+875,19,20,Male,NHOPI,Roommate,0.249931675663437
+876,19,20,Male,NHOPI,Same-sex partner,0.0021347946833423963
+877,19,20,Male,NHOPI,Same-sex spouse,6.0276555764961785e-05
+878,19,20,Male,NHOPI,Sibling,0.03862053460902728
+879,19,20,Male,NHOPI,Stepchild,0.03198725206777382
+880,19,20,Male,White,Adopted child,0.009305370762106689
+881,19,20,Male,White,Biological child,0.283310072414118
+882,19,20,Male,White,Child-in-law,0.010281284693560669
+883,19,20,Male,White,Foster child,0.000761360974651651
+884,19,20,Male,White,Grandchild,0.09772300485911663
+885,19,20,Male,White,Opp-sex partner,0.0281352555848108
+886,19,20,Male,White,Opp-sex spouse,0.006061075469892512
+887,19,20,Male,White,Other nonrelative,0.148349665714795
+888,19,20,Male,White,Other relative,0.05529033574363451
+889,19,20,Male,White,Parent,0.0
+890,19,20,Male,White,Parent-in-law,0.0
+891,19,20,Male,White,Roommate,0.2847604295395958
+892,19,20,Male,White,Same-sex partner,0.0019492675555840466
+893,19,20,Male,White,Same-sex spouse,5.503814274590249e-05
+894,19,20,Male,White,Sibling,0.03538389243636089
+895,19,20,Male,White,Stepchild,0.038633946109026915
+896,20,21,Female,AIAN,Adopted child,0.009765311635092432
+897,20,21,Female,AIAN,Biological child,0.243166677389656
+898,20,21,Female,AIAN,Child-in-law,0.018339786787104826
+899,20,21,Female,AIAN,Foster child,0.0006695728109481929
+900,20,21,Female,AIAN,Grandchild,0.05734224951311455
+901,20,21,Female,AIAN,Opp-sex partner,0.06738836175709564
+902,20,21,Female,AIAN,Opp-sex spouse,0.02374096542965707
+903,20,21,Female,AIAN,Other nonrelative,0.12033201210784673
+904,20,21,Female,AIAN,Other relative,0.050363398850283125
+905,20,21,Female,AIAN,Parent,0.0
+906,20,21,Female,AIAN,Parent-in-law,0.0
+907,20,21,Female,AIAN,Roommate,0.3554186763958867
+908,20,21,Female,AIAN,Same-sex partner,0.004872475312424185
+909,20,21,Female,AIAN,Same-sex spouse,0.0005240135042203249
+910,20,21,Female,AIAN,Sibling,0.02651042337789916
+911,20,21,Female,AIAN,Stepchild,0.02156607512877106
+912,20,21,Female,Asian,Adopted child,0.005803670220952587
+913,20,21,Female,Asian,Biological child,0.19747424405284236
+914,20,21,Female,Asian,Child-in-law,0.010782168360035316
+915,20,21,Female,Asian,Foster child,0.000395150836271265
+916,20,21,Female,Asian,Grandchild,0.03419715616472755
+917,20,21,Female,Asian,Opp-sex partner,0.03965422217291945
+918,20,21,Female,Asian,Opp-sex spouse,0.013907939119095901
+919,20,21,Female,Asian,Other nonrelative,0.1338830976709295
+920,20,21,Female,Asian,Other relative,0.029883035529308554
+921,20,21,Female,Asian,Parent,0.0
+922,20,21,Female,Asian,Parent-in-law,0.0
+923,20,21,Female,Asian,Roommate,0.5021925245657668
+924,20,21,Female,Asian,Same-sex partner,0.0028612897426015214
+925,20,21,Female,Asian,Same-sex spouse,0.00030924848056012043
+926,20,21,Female,Asian,Sibling,0.015803911865926487
+927,20,21,Female,Asian,Stepchild,0.012852341218062592
+928,20,21,Female,Black,Adopted child,0.008560511856094005
+929,20,21,Female,Black,Biological child,0.30691566093182254
+930,20,21,Female,Black,Child-in-law,0.0160413920790978
+931,20,21,Female,Black,Foster child,0.0005861166199743092
+932,20,21,Female,Black,Grandchild,0.11824277244201951
+933,20,21,Female,Black,Opp-sex partner,0.05895395863924255
+934,20,21,Female,Black,Opp-sex spouse,0.020750582310594283
+935,20,21,Female,Black,Other nonrelative,0.0929873802096357
+936,20,21,Female,Black,Other relative,0.08711719229190176
+937,20,21,Female,Black,Parent,0.0
+938,20,21,Female,Black,Parent-in-law,0.0
+939,20,21,Female,Black,Roommate,0.2429544067484335
+940,20,21,Female,Black,Same-sex partner,0.004260841072877358
+941,20,21,Female,Black,Same-sex spouse,0.0004586999634581551
+942,20,21,Female,Black,Sibling,0.023254398434997017
+943,20,21,Female,Black,Stepchild,0.018916086399851484
+944,20,21,Female,Latino,Adopted child,0.010605307032714064
+945,20,21,Female,Latino,Biological child,0.32369838914367277
+946,20,21,Female,Latino,Child-in-law,0.0423646507984257
+947,20,21,Female,Latino,Foster child,0.0007277590859748138
+948,20,21,Female,Latino,Grandchild,0.05221613651965941
+949,20,21,Female,Latino,Opp-sex partner,0.05597945444002884
+950,20,21,Female,Latino,Opp-sex spouse,0.025825882556118493
+951,20,21,Female,Latino,Other nonrelative,0.12344318450866618
+952,20,21,Female,Latino,Other relative,0.07535114572236135
+953,20,21,Female,Latino,Parent,0.0
+954,20,21,Female,Latino,Parent-in-law,0.0
+955,20,21,Female,Latino,Roommate,0.22323928441298627
+956,20,21,Female,Latino,Same-sex partner,0.005298911217336498
+957,20,21,Female,Latino,Same-sex spouse,0.0005695505890237673
+958,20,21,Female,Latino,Sibling,0.03726667687209146
+959,20,21,Female,Latino,Stepchild,0.023413667100940345
+960,20,21,Female,Multiracial or Other,Adopted child,0.008968134681896528
+961,20,21,Female,Multiracial or Other,Biological child,0.31861698802514854
+962,20,21,Female,Multiracial or Other,Child-in-law,0.01681901355789657
+963,20,21,Female,Multiracial or Other,Foster child,0.000614352555886772
+964,20,21,Female,Multiracial or Other,Grandchild,0.05268490320232186
+965,20,21,Female,Multiracial or Other,Opp-sex partner,0.06180759077625076
+966,20,21,Female,Multiracial or Other,Opp-sex spouse,0.021762325927547795
+967,20,21,Female,Multiracial or Other,Other nonrelative,0.12514008684410904
+968,20,21,Female,Multiracial or Other,Other relative,0.04624226028648242
+969,20,21,Female,Multiracial or Other,Parent,0.0
+970,20,21,Female,Multiracial or Other,Parent-in-law,0.0
+971,20,21,Female,Multiracial or Other,Roommate,0.29822708900049655
+972,20,21,Female,Multiracial or Other,Same-sex partner,0.004467776775564222
+973,20,21,Female,Multiracial or Other,Same-sex spouse,0.0004807976524331259
+974,20,21,Female,Multiracial or Other,Sibling,0.024356017222386096
+975,20,21,Female,Multiracial or Other,Stepchild,0.019812663491579702
+976,20,21,Female,NHOPI,Adopted child,0.009765311635092432
+977,20,21,Female,NHOPI,Biological child,0.243166677389656
+978,20,21,Female,NHOPI,Child-in-law,0.018339786787104826
+979,20,21,Female,NHOPI,Foster child,0.0006695728109481929
+980,20,21,Female,NHOPI,Grandchild,0.05734224951311455
+981,20,21,Female,NHOPI,Opp-sex partner,0.06738836175709564
+982,20,21,Female,NHOPI,Opp-sex spouse,0.02374096542965707
+983,20,21,Female,NHOPI,Other nonrelative,0.12033201210784673
+984,20,21,Female,NHOPI,Other relative,0.050363398850283125
+985,20,21,Female,NHOPI,Parent,0.0
+986,20,21,Female,NHOPI,Parent-in-law,0.0
+987,20,21,Female,NHOPI,Roommate,0.3554186763958867
+988,20,21,Female,NHOPI,Same-sex partner,0.004872475312424185
+989,20,21,Female,NHOPI,Same-sex spouse,0.0005240135042203249
+990,20,21,Female,NHOPI,Sibling,0.02651042337789916
+991,20,21,Female,NHOPI,Stepchild,0.02156607512877106
+992,20,21,Female,White,Adopted child,0.008119491136529282
+993,20,21,Female,White,Biological child,0.2086871436613124
+994,20,21,Female,White,Child-in-law,0.01615663882885672
+995,20,21,Female,White,Foster child,0.0004947792400239572
+996,20,21,Female,White,Grandchild,0.05185657163623551
+997,20,21,Female,White,Opp-sex partner,0.08046971811687145
+998,20,21,Female,White,Opp-sex spouse,0.02605018166414156
+999,20,21,Female,White,Other nonrelative,0.1228485829063429
+1000,20,21,Female,White,Other relative,0.03867423386159429
+1001,20,21,Female,White,Parent,0.0
+1002,20,21,Female,White,Parent-in-law,0.0
+1003,20,21,Female,White,Roommate,0.40287863218927134
+1004,20,21,Female,White,Same-sex partner,0.0035914470867905606
+1005,20,21,Female,White,Same-sex spouse,0.000387218535670923
+1006,20,21,Female,White,Sibling,0.020293785730823338
+1007,20,21,Female,White,Stepchild,0.019491575405535665
+1008,20,21,Male,AIAN,Adopted child,0.010721660469327125
+1009,20,21,Male,AIAN,Biological child,0.2785027531087744
+1010,20,21,Male,AIAN,Child-in-law,0.008842643668842218
+1011,20,21,Male,AIAN,Foster child,0.00036286268617866996
+1012,20,21,Male,AIAN,Grandchild,0.07428604837580229
+1013,20,21,Male,AIAN,Opp-sex partner,0.03593825283338178
+1014,20,21,Male,AIAN,Opp-sex spouse,0.006673082070406996
+1015,20,21,Male,AIAN,Other nonrelative,0.12719400570318729
+1016,20,21,Male,AIAN,Other relative,0.050614234873647176
+1017,20,21,Male,AIAN,Parent,0.0
+1018,20,21,Male,AIAN,Parent-in-law,0.0
+1019,20,21,Male,AIAN,Roommate,0.3435309258600016
+1020,20,21,Male,AIAN,Same-sex partner,0.002218589793211977
+1021,20,21,Male,AIAN,Same-sex spouse,0.000283979493531133
+1022,20,21,Male,AIAN,Sibling,0.033758216393412865
+1023,20,21,Male,AIAN,Stepchild,0.02707274467029436
+1024,20,21,Male,Asian,Adopted child,0.007143640342730647
+1025,20,21,Male,Asian,Biological child,0.22060216797247958
+1026,20,21,Male,Asian,Child-in-law,0.005984344646819898
+1027,20,21,Male,Asian,Foster child,0.0002457112705464309
+1028,20,21,Male,Asian,Grandchild,0.04940245039664496
+1029,20,21,Male,Asian,Opp-sex partner,0.02425716790706924
+1030,20,21,Male,Asian,Opp-sex spouse,0.004605262437055356
+1031,20,21,Male,Asian,Other nonrelative,0.08478735717025908
+1032,20,21,Male,Asian,Other relative,0.033761720721429536
+1033,20,21,Male,Asian,Parent,0.0
+1034,20,21,Male,Asian,Parent-in-law,0.0
+1035,20,21,Male,Asian,Roommate,0.5270510641562013
+1036,20,21,Male,Asian,Same-sex partner,0.0015023107574170373
+1037,20,21,Male,Asian,Same-sex spouse,0.00019229577694938074
+1038,20,21,Male,Asian,Sibling,0.022454298847913803
+1039,20,21,Male,Asian,Stepchild,0.018010207596483682
+1040,20,21,Male,Black,Adopted child,0.01183803833306305
+1041,20,21,Male,Black,Biological child,0.3447605579730774
+1042,20,21,Male,Black,Child-in-law,0.009734463644453887
+1043,20,21,Male,Black,Foster child,0.00039941518887685125
+1044,20,21,Male,Black,Grandchild,0.11441733818758118
+1045,20,21,Male,Black,Opp-sex partner,0.039582875096767986
+1046,20,21,Male,Black,Opp-sex spouse,0.007318266232073707
+1047,20,21,Male,Black,Other nonrelative,0.1421336304650082
+1048,20,21,Male,Black,Other relative,0.07567548378867948
+1049,20,21,Male,Black,Parent,0.0
+1050,20,21,Male,Black,Parent-in-law,0.0
+1051,20,21,Male,Black,Roommate,0.18419977288010408
+1052,20,21,Male,Black,Same-sex partner,0.0024420765624264
+1053,20,21,Male,Black,Same-sex spouse,0.00031258579999057925
+1054,20,21,Male,Black,Sibling,0.037285150159166086
+1055,20,21,Male,Black,Stepchild,0.029900345688731084
+1056,20,21,Male,Latino,Adopted child,0.01191276524561948
+1057,20,21,Male,Latino,Biological child,0.34841045414461175
+1058,20,21,Male,Latino,Child-in-law,0.009794159378420386
+1059,20,21,Male,Latino,Foster child,0.0004018619030006013
+1060,20,21,Male,Latino,Grandchild,0.058321216936179886
+1061,20,21,Male,Latino,Opp-sex partner,0.0343555206055695
+1062,20,21,Male,Latino,Opp-sex spouse,0.007361452947966242
+1063,20,21,Male,Latino,Other nonrelative,0.12428774523434168
+1064,20,21,Male,Latino,Other relative,0.06971696799431465
+1065,20,21,Male,Latino,Parent,0.0
+1066,20,21,Male,Latino,Parent-in-law,0.0
+1067,20,21,Male,Latino,Roommate,0.2530096730326574
+1068,20,21,Male,Latino,Same-sex partner,0.002457036091715633
+1069,20,21,Male,Latino,Same-sex spouse,0.000314500619739601
+1070,20,21,Male,Latino,Sibling,0.04956702924289024
+1071,20,21,Male,Latino,Stepchild,0.03008961662297292
+1072,20,21,Male,Multiracial or Other,Adopted child,0.010107232656298145
+1073,20,21,Male,Multiracial or Other,Biological child,0.3461100851874028
+1074,20,21,Male,Multiracial or Other,Child-in-law,0.008351807630961994
+1075,20,21,Male,Multiracial or Other,Foster child,0.00034274507785824805
+1076,20,21,Male,Multiracial or Other,Grandchild,0.07001296680227909
+1077,20,21,Male,Multiracial or Other,Opp-sex partner,0.03393234099864382
+1078,20,21,Male,Multiracial or Other,Opp-sex spouse,0.006317988843585083
+1079,20,21,Male,Multiracial or Other,Other nonrelative,0.11991181482195666
+1080,20,21,Male,Multiracial or Other,Other relative,0.04772027279095441
+1081,20,21,Male,Multiracial or Other,Parent,0.0
+1082,20,21,Male,Multiracial or Other,Parent-in-law,0.0
+1083,20,21,Male,Multiracial or Other,Roommate,0.2974953458064744
+1084,20,21,Male,Multiracial or Other,Same-sex partner,0.0020955881119050493
+1085,20,21,Male,Multiracial or Other,Same-sex spouse,0.00026823527832384625
+1086,20,21,Male,Multiracial or Other,Sibling,0.03181707578074838
+1087,20,21,Male,Multiracial or Other,Stepchild,0.025516500212607974
+1088,20,21,Male,NHOPI,Adopted child,0.010721660469327125
+1089,20,21,Male,NHOPI,Biological child,0.2785027531087744
+1090,20,21,Male,NHOPI,Child-in-law,0.008842643668842218
+1091,20,21,Male,NHOPI,Foster child,0.00036286268617866996
+1092,20,21,Male,NHOPI,Grandchild,0.07428604837580229
+1093,20,21,Male,NHOPI,Opp-sex partner,0.03593825283338178
+1094,20,21,Male,NHOPI,Opp-sex spouse,0.006673082070406996
+1095,20,21,Male,NHOPI,Other nonrelative,0.12719400570318729
+1096,20,21,Male,NHOPI,Other relative,0.050614234873647176
+1097,20,21,Male,NHOPI,Parent,0.0
+1098,20,21,Male,NHOPI,Parent-in-law,0.0
+1099,20,21,Male,NHOPI,Roommate,0.3435309258600016
+1100,20,21,Male,NHOPI,Same-sex partner,0.002218589793211977
+1101,20,21,Male,NHOPI,Same-sex spouse,0.000283979493531133
+1102,20,21,Male,NHOPI,Sibling,0.033758216393412865
+1103,20,21,Male,NHOPI,Stepchild,0.02707274467029436
+1104,20,21,Male,White,Adopted child,0.009702167222412128
+1105,20,21,Male,White,Biological child,0.24449284742887162
+1106,20,21,Male,White,Child-in-law,0.007843198950277288
+1107,20,21,Male,White,Foster child,0.000404352719866104
+1108,20,21,Male,White,Grandchild,0.07150175289719868
+1109,20,21,Male,White,Opp-sex partner,0.03794798038933568
+1110,20,21,Male,White,Opp-sex spouse,0.0064325260652711835
+1111,20,21,Male,White,Other nonrelative,0.1289376284868241
+1112,20,21,Male,White,Other relative,0.04274013939660634
+1113,20,21,Male,White,Parent,0.0
+1114,20,21,Male,White,Parent-in-law,0.0
+1115,20,21,Male,White,Roommate,0.3928754480067023
+1116,20,21,Male,White,Same-sex partner,0.002472265270920473
+1117,20,21,Male,White,Same-sex spouse,0.0003164499546778205
+1118,20,21,Male,White,Sibling,0.027613969296738036
+1119,20,21,Male,White,Stepchild,0.02671927391429811
+1120,21,22,Female,AIAN,Adopted child,0.009447863453332709
+1121,21,22,Female,AIAN,Biological child,0.2544416850942922
+1122,21,22,Female,AIAN,Child-in-law,0.02322176950281179
+1123,21,22,Female,AIAN,Foster child,0.0
+1124,21,22,Female,AIAN,Grandchild,0.0498121003585244
+1125,21,22,Female,AIAN,Opp-sex partner,0.07452726494132378
+1126,21,22,Female,AIAN,Opp-sex spouse,0.030361665733694688
+1127,21,22,Female,AIAN,Other nonrelative,0.11876008794954188
+1128,21,22,Female,AIAN,Other relative,0.03801043405997183
+1129,21,22,Female,AIAN,Parent,0.0
+1130,21,22,Female,AIAN,Parent-in-law,0.0
+1131,21,22,Female,AIAN,Roommate,0.3413186078108239
+1132,21,22,Female,AIAN,Same-sex partner,0.005467147537583819
+1133,21,22,Female,AIAN,Same-sex spouse,7.385891154671811e-05
+1134,21,22,Female,AIAN,Sibling,0.028780979465894536
+1135,21,22,Female,AIAN,Stepchild,0.02577653518065763
+1136,21,22,Female,Asian,Adopted child,0.006113689909068239
+1137,21,22,Female,Asian,Biological child,0.24049011680795782
+1138,21,22,Female,Asian,Child-in-law,0.014967187429423962
+1139,21,22,Female,Asian,Foster child,0.0
+1140,21,22,Female,Asian,Grandchild,0.032453024761907964
+1141,21,22,Female,Asian,Opp-sex partner,0.04799901389439988
+1142,21,22,Female,Asian,Opp-sex spouse,0.019504370040519588
+1143,21,22,Female,Asian,Other nonrelative,0.0902991256802687
+1144,21,22,Female,Asian,Other relative,0.024725176341467755
+1145,21,22,Female,Asian,Parent,0.0
+1146,21,22,Female,Asian,Parent-in-law,0.0
+1147,21,22,Female,Asian,Roommate,0.4844366395793269
+1148,21,22,Female,Asian,Same-sex partner,0.0035264643187126483
+1149,21,22,Female,Asian,Same-sex spouse,4.721739548436288e-05
+1150,21,22,Female,Asian,Sibling,0.01868223519307428
+1151,21,22,Female,Asian,Stepchild,0.016755738648387853
+1152,21,22,Female,Black,Adopted child,0.007967262320494458
+1153,21,22,Female,Black,Biological child,0.38473494397179253
+1154,21,22,Female,Black,Child-in-law,0.019556170395744015
+1155,21,22,Female,Black,Foster child,0.0
+1156,21,22,Female,Black,Grandchild,0.08355368410296778
+1157,21,22,Female,Black,Opp-sex partner,0.06274690677398101
+1158,21,22,Female,Black,Opp-sex spouse,0.02554028373784048
+1159,21,22,Female,Black,Other nonrelative,0.10951591396798269
+1160,21,22,Female,Black,Other relative,0.04669470325524514
+1161,21,22,Female,Black,Parent,0.0
+1162,21,22,Female,Black,Parent-in-law,0.0
+1163,21,22,Female,Black,Roommate,0.20895562115838756
+1164,21,22,Female,Black,Same-sex partner,0.004605351433164802
+1165,21,22,Female,Black,Same-sex spouse,6.20282559685415e-05
+1166,21,22,Female,Black,Sibling,0.024296446188211127
+1167,21,22,Female,Black,Stepchild,0.02177068443821979
+1168,21,22,Female,Latino,Adopted child,0.009979503013475473
+1169,21,22,Female,Latino,Biological child,0.2512748774436369
+1170,21,22,Female,Latino,Child-in-law,0.053444058976637225
+1171,21,22,Female,Latino,Foster child,0.0
+1172,21,22,Female,Latino,Grandchild,0.048560918376193064
+1173,21,22,Female,Latino,Opp-sex partner,0.06240973118434909
+1174,21,22,Female,Latino,Opp-sex spouse,0.031531329405756175
+1175,21,22,Female,Latino,Other nonrelative,0.13183977133380537
+1176,21,22,Female,Latino,Other relative,0.06093529898454497
+1177,21,22,Female,Latino,Parent,0.0
+1178,21,22,Female,Latino,Parent-in-law,0.0
+1179,21,22,Female,Latino,Roommate,0.2672545326275532
+1180,21,22,Female,Latino,Same-sex partner,0.005776592729572962
+1181,21,22,Female,Latino,Same-sex spouse,7.810694593270868e-05
+1182,21,22,Female,Latino,Sibling,0.04970036267012571
+1183,21,22,Female,Latino,Stepchild,0.027214916308417048
+1184,21,22,Female,Multiracial or Other,Adopted child,0.009554820077245287
+1185,21,22,Female,Multiracial or Other,Biological child,0.34368461136105627
+1186,21,22,Female,Multiracial or Other,Child-in-law,0.02348656742600005
+1187,21,22,Female,Multiracial or Other,Foster child,0.0
+1188,21,22,Female,Multiracial or Other,Grandchild,0.050368960430906905
+1189,21,22,Female,Multiracial or Other,Opp-sex partner,0.07537826208692465
+1190,21,22,Female,Multiracial or Other,Opp-sex spouse,0.03070995584997312
+1191,21,22,Female,Multiracial or Other,Other nonrelative,0.0985682436493497
+1192,21,22,Female,Multiracial or Other,Other relative,0.03843661053074686
+1193,21,22,Female,Multiracial or Other,Parent,0.0
+1194,21,22,Female,Multiracial or Other,Parent-in-law,0.0
+1195,21,22,Female,Multiracial or Other,Roommate,0.26903700401436836
+1196,21,22,Female,Multiracial or Other,Same-sex partner,0.0055294025229227625
+1197,21,22,Female,Multiracial or Other,Same-sex spouse,7.471354210899638e-05
+1198,21,22,Female,Multiracial or Other,Sibling,0.0291049360863699
+1199,21,22,Female,Multiracial or Other,Stepchild,0.0260659124220271
+1200,21,22,Female,NHOPI,Adopted child,0.009447863453332709
+1201,21,22,Female,NHOPI,Biological child,0.2544416850942922
+1202,21,22,Female,NHOPI,Child-in-law,0.02322176950281179
+1203,21,22,Female,NHOPI,Foster child,0.0
+1204,21,22,Female,NHOPI,Grandchild,0.0498121003585244
+1205,21,22,Female,NHOPI,Opp-sex partner,0.07452726494132378
+1206,21,22,Female,NHOPI,Opp-sex spouse,0.030361665733694688
+1207,21,22,Female,NHOPI,Other nonrelative,0.11876008794954188
+1208,21,22,Female,NHOPI,Other relative,0.03801043405997183
+1209,21,22,Female,NHOPI,Parent,0.0
+1210,21,22,Female,NHOPI,Parent-in-law,0.0
+1211,21,22,Female,NHOPI,Roommate,0.3413186078108239
+1212,21,22,Female,NHOPI,Same-sex partner,0.005467147537583819
+1213,21,22,Female,NHOPI,Same-sex spouse,7.385891154671811e-05
+1214,21,22,Female,NHOPI,Sibling,0.028780979465894536
+1215,21,22,Female,NHOPI,Stepchild,0.02577653518065763
+1216,21,22,Female,White,Adopted child,0.007040428320940689
+1217,21,22,Female,White,Biological child,0.22869475700374853
+1218,21,22,Female,White,Child-in-law,0.019558654138415836
+1219,21,22,Female,White,Foster child,0.0
+1220,21,22,Female,White,Grandchild,0.04652624913875062
+1221,21,22,Female,White,Opp-sex partner,0.08247115497718306
+1222,21,22,Female,White,Opp-sex spouse,0.03192361441996599
+1223,21,22,Female,White,Other nonrelative,0.1199818569591243
+1224,21,22,Female,White,Other relative,0.0300619297779083
+1225,21,22,Female,White,Parent,0.0
+1226,21,22,Female,White,Parent-in-law,0.0
+1227,21,22,Female,White,Roommate,0.3766775426731834
+1228,21,22,Female,White,Same-sex partner,0.0063310997384784995
+1229,21,22,Female,White,Same-sex spouse,8.571916580605543e-05
+1230,21,22,Female,White,Sibling,0.023213158553017355
+1231,21,22,Female,White,Stepchild,0.027433835133477292
+1232,21,22,Male,AIAN,Adopted child,0.008362981462460343
+1233,21,22,Male,AIAN,Biological child,0.27252723632549614
+1234,21,22,Male,AIAN,Child-in-law,0.01398587997851414
+1235,21,22,Male,AIAN,Foster child,0.0
+1236,21,22,Male,AIAN,Grandchild,0.0683267853929195
+1237,21,22,Male,AIAN,Opp-sex partner,0.0408891842181883
+1238,21,22,Male,AIAN,Opp-sex spouse,0.01114879561668672
+1239,21,22,Male,AIAN,Other nonrelative,0.1203958468751397
+1240,21,22,Male,AIAN,Other relative,0.04784182371004148
+1241,21,22,Male,AIAN,Parent,0.0
+1242,21,22,Male,AIAN,Parent-in-law,0.0
+1243,21,22,Male,AIAN,Roommate,0.3498634461024585
+1244,21,22,Male,AIAN,Same-sex partner,0.0035631335360531333
+1245,21,22,Male,AIAN,Same-sex spouse,3.0215744271813913e-05
+1246,21,22,Male,AIAN,Sibling,0.03188752227080652
+1247,21,22,Male,AIAN,Stepchild,0.03117714876696367
+1248,21,22,Male,Asian,Adopted child,0.0037327345228826475
+1249,21,22,Male,Asian,Biological child,0.28161461466865984
+1250,21,22,Male,Asian,Child-in-law,0.0063532141264101
+1251,21,22,Male,Asian,Foster child,0.0
+1252,21,22,Male,Asian,Grandchild,0.03008841480545687
+1253,21,22,Male,Asian,Opp-sex partner,0.01867331717209241
+1254,21,22,Male,Asian,Opp-sex spouse,0.005241290801225326
+1255,21,22,Male,Asian,Other nonrelative,0.13728912710094923
+1256,21,22,Male,Asian,Other relative,0.02111439370170519
+1257,21,22,Male,Asian,Parent,0.0
+1258,21,22,Male,Asian,Parent-in-law,0.0
+1259,21,22,Male,Asian,Roommate,0.46636767429387055
+1260,21,22,Male,Asian,Same-sex partner,0.0016122926886445704
+1261,21,22,Male,Asian,Same-sex spouse,1.3672410275524733e-05
+1262,21,22,Male,Asian,Sibling,0.014124590861101963
+1263,21,22,Male,Asian,Stepchild,0.013774662846725738
+1264,21,22,Male,Black,Adopted child,0.007202869349010129
+1265,21,22,Male,Black,Biological child,0.32578898626101843
+1266,21,22,Male,Black,Child-in-law,0.012073506012283576
+1267,21,22,Male,Black,Foster child,0.0
+1268,21,22,Male,Black,Grandchild,0.14094691406645032
+1269,21,22,Male,Black,Opp-sex partner,0.03532296791657901
+1270,21,22,Male,Black,Opp-sex spouse,0.00966865744893305
+1271,21,22,Male,Black,Other nonrelative,0.10644312948405713
+1272,21,22,Male,Black,Other relative,0.08085966191317932
+1273,21,22,Male,Black,Parent,0.0
+1274,21,22,Male,Black,Parent-in-law,0.0
+1275,21,22,Male,Black,Roommate,0.22433893376482217
+1276,21,22,Male,Black,Same-sex partner,0.003074348118284161
+1277,21,22,Male,Black,Same-sex spouse,2.607079291434709e-05
+1278,21,22,Male,Black,Sibling,0.027437008734257105
+1279,21,22,Male,Black,Stepchild,0.026816946138211187
+1280,21,22,Male,Latino,Adopted child,0.012520924622463101
+1281,21,22,Male,Latino,Biological child,0.30742276361390924
+1282,21,22,Male,Latino,Child-in-law,0.020840013679236664
+1283,21,22,Male,Latino,Foster child,0.0
+1284,21,22,Male,Latino,Grandchild,0.06832035022860501
+1285,21,22,Male,Latino,Opp-sex partner,0.03567407648285185
+1286,21,22,Male,Latino,Opp-sex spouse,0.01645378402626255
+1287,21,22,Male,Latino,Other nonrelative,0.12047120655054998
+1288,21,22,Male,Latino,Other relative,0.08560723892183733
+1289,21,22,Male,Latino,Parent,0.0
+1290,21,22,Male,Latino,Parent-in-law,0.0
+1291,21,22,Male,Latino,Roommate,0.25167618425254196
+1292,21,22,Male,Latino,Same-sex partner,0.005314986803878586
+1293,21,22,Male,Latino,Same-sex spouse,4.5071642824802106e-05
+1294,21,22,Male,Latino,Sibling,0.037759104134783186
+1295,21,22,Male,Latino,Stepchild,0.03789429504025561
+1296,21,22,Male,Multiracial or Other,Adopted child,0.007931519275819166
+1297,21,22,Male,Multiracial or Other,Biological child,0.30371722966898035
+1298,21,22,Male,Multiracial or Other,Child-in-law,0.013274640653065937
+1299,21,22,Male,Multiracial or Other,Foster child,0.0
+1300,21,22,Male,Multiracial or Other,Grandchild,0.06476360931678957
+1301,21,22,Male,Multiracial or Other,Opp-sex partner,0.038819028248723644
+1302,21,22,Male,Multiracial or Other,Opp-sex spouse,0.010598310564060005
+1303,21,22,Male,Multiracial or Other,Other nonrelative,0.11416040525594177
+1304,21,22,Male,Multiracial or Other,Other relative,0.045351273984794264
+1305,21,22,Male,Multiracial or Other,Parent,0.0
+1306,21,22,Male,Multiracial or Other,Parent-in-law,0.0
+1307,21,22,Male,Multiracial or Other,Roommate,0.33818612057978426
+1308,21,22,Male,Multiracial or Other,Same-sex partner,0.003381347238976526
+1309,21,22,Male,Multiracial or Other,Same-sex spouse,2.8674177499474784e-05
+1310,21,22,Male,Multiracial or Other,Sibling,0.030232313275632482
+1311,21,22,Male,Multiracial or Other,Stepchild,0.02955552775993247
+1312,21,22,Male,NHOPI,Adopted child,0.008362981462460343
+1313,21,22,Male,NHOPI,Biological child,0.27252723632549614
+1314,21,22,Male,NHOPI,Child-in-law,0.01398587997851414
+1315,21,22,Male,NHOPI,Foster child,0.0
+1316,21,22,Male,NHOPI,Grandchild,0.0683267853929195
+1317,21,22,Male,NHOPI,Opp-sex partner,0.0408891842181883
+1318,21,22,Male,NHOPI,Opp-sex spouse,0.01114879561668672
+1319,21,22,Male,NHOPI,Other nonrelative,0.1203958468751397
+1320,21,22,Male,NHOPI,Other relative,0.04784182371004148
+1321,21,22,Male,NHOPI,Parent,0.0
+1322,21,22,Male,NHOPI,Parent-in-law,0.0
+1323,21,22,Male,NHOPI,Roommate,0.3498634461024585
+1324,21,22,Male,NHOPI,Same-sex partner,0.0035631335360531333
+1325,21,22,Male,NHOPI,Same-sex spouse,3.0215744271813913e-05
+1326,21,22,Male,NHOPI,Sibling,0.03188752227080652
+1327,21,22,Male,NHOPI,Stepchild,0.03117714876696367
+1328,21,22,Male,White,Adopted child,0.0076143542019403865
+1329,21,22,Male,White,Biological child,0.25034301136703097
+1330,21,22,Male,White,Child-in-law,0.014255452635527969
+1331,21,22,Male,White,Foster child,0.0
+1332,21,22,Male,White,Grandchild,0.05937347056970123
+1333,21,22,Male,White,Opp-sex partner,0.04424678575495911
+1334,21,22,Male,White,Opp-sex spouse,0.010235686891518344
+1335,21,22,Male,White,Other nonrelative,0.12371180080947505
+1336,21,22,Male,White,Other relative,0.03453384105317092
+1337,21,22,Male,White,Parent,0.0
+1338,21,22,Male,White,Parent-in-law,0.0
+1339,21,22,Male,White,Roommate,0.39001817330044275
+1340,21,22,Male,White,Same-sex partner,0.0029904238724979297
+1341,21,22,Male,White,Same-sex spouse,2.5359106550863072e-05
+1342,21,22,Male,White,Sibling,0.031297303262902365
+1343,21,22,Male,White,Stepchild,0.03135433717428209
+1344,22,25,Female,AIAN,Adopted child,0.008100123503326659
+1345,22,25,Female,AIAN,Biological child,0.3852411772408808
+1346,22,25,Female,AIAN,Child-in-law,0.021480669587001747
+1347,22,25,Female,AIAN,Foster child,0.0
+1348,22,25,Female,AIAN,Grandchild,0.0319887809356772
+1349,22,25,Female,AIAN,Opp-sex partner,0.09810944466444568
+1350,22,25,Female,AIAN,Opp-sex spouse,0.03824768589158887
+1351,22,25,Female,AIAN,Other nonrelative,0.09000808315870834
+1352,22,25,Female,AIAN,Other relative,0.039761092698161825
+1353,22,25,Female,AIAN,Parent,0.0
+1354,22,25,Female,AIAN,Parent-in-law,0.0
+1355,22,25,Female,AIAN,Roommate,0.23289134680103943
+1356,22,25,Female,AIAN,Same-sex partner,0.005208484245372759
+1357,22,25,Female,AIAN,Same-sex spouse,0.0007461885796020851
+1358,22,25,Female,AIAN,Sibling,0.02538181976812096
+1359,22,25,Female,AIAN,Stepchild,0.02283510292607362
+1360,22,25,Female,Asian,Adopted child,0.018138911258333158
+1361,22,25,Female,Asian,Biological child,0.2662420323873719
+1362,22,25,Female,Asian,Child-in-law,0.02327592084629203
+1363,22,25,Female,Asian,Foster child,0.0
+1364,22,25,Female,Asian,Grandchild,0.013258640869534169
+1365,22,25,Female,Asian,Opp-sex partner,0.07751883675906657
+1366,22,25,Female,Asian,Opp-sex spouse,0.027947205036228807
+1367,22,25,Female,Asian,Other nonrelative,0.09405169262371135
+1368,22,25,Female,Asian,Other relative,0.042433588321630925
+1369,22,25,Female,Asian,Parent,0.0
+1370,22,25,Female,Asian,Parent-in-law,0.0
+1371,22,25,Female,Asian,Roommate,0.38457399624692573
+1372,22,25,Female,Asian,Same-sex partner,0.002107447005107839
+1373,22,25,Female,Asian,Same-sex spouse,0.0002957719998511315
+1374,22,25,Female,Asian,Sibling,0.04083191610906285
+1375,22,25,Female,Asian,Stepchild,0.009324040536883618
+1376,22,25,Female,Black,Adopted child,0.01648071711737638
+1377,22,25,Female,Black,Biological child,0.3593742914466349
+1378,22,25,Female,Black,Child-in-law,0.01549487895409199
+1379,22,25,Female,Black,Foster child,0.0
+1380,22,25,Female,Black,Grandchild,0.07555933069635341
+1381,22,25,Female,Black,Opp-sex partner,0.06047234336228967
+1382,22,25,Female,Black,Opp-sex spouse,0.021775902506848348
+1383,22,25,Female,Black,Other nonrelative,0.10952012589336028
+1384,22,25,Female,Black,Other relative,0.06758210458529765
+1385,22,25,Female,Black,Parent,0.0
+1386,22,25,Female,Black,Parent-in-law,0.0
+1387,22,25,Female,Black,Roommate,0.19304694612852824
+1388,22,25,Female,Black,Same-sex partner,0.0037513664296662716
+1389,22,25,Female,Black,Same-sex spouse,0.00053454649525535
+1390,22,25,Female,Black,Sibling,0.03824945009087053
+1391,22,25,Female,Black,Stepchild,0.03815799629342694
+1392,22,25,Female,Latino,Adopted child,0.008175771125662729
+1393,22,25,Female,Latino,Biological child,0.35039777719830556
+1394,22,25,Female,Latino,Child-in-law,0.03963340426837905
+1395,22,25,Female,Latino,Foster child,0.0
+1396,22,25,Female,Latino,Grandchild,0.03526216238351826
+1397,22,25,Female,Latino,Opp-sex partner,0.09637551293215472
+1398,22,25,Female,Latino,Opp-sex spouse,0.03950097386163753
+1399,22,25,Female,Latino,Other nonrelative,0.09683789854093884
+1400,22,25,Female,Latino,Other relative,0.06199821438124828
+1401,22,25,Female,Latino,Parent,0.0
+1402,22,25,Female,Latino,Parent-in-law,0.0
+1403,22,25,Female,Latino,Roommate,0.1970600624797242
+1404,22,25,Female,Latino,Same-sex partner,0.0052572727285812556
+1405,22,25,Female,Latino,Same-sex spouse,0.0007532749631632905
+1406,22,25,Female,Latino,Sibling,0.04121371713623801
+1407,22,25,Female,Latino,Stepchild,0.027533958000448198
+1408,22,25,Female,Multiracial or Other,Adopted child,0.008219825667107317
+1409,22,25,Female,Multiracial or Other,Biological child,0.3440314558709847
+1410,22,25,Female,Multiracial or Other,Child-in-law,0.02179780949494298
+1411,22,25,Female,Multiracial or Other,Foster child,0.0
+1412,22,25,Female,Multiracial or Other,Grandchild,0.05676377849885389
+1413,22,25,Female,Multiracial or Other,Opp-sex partner,0.08444089783252023
+1414,22,25,Female,Multiracial or Other,Opp-sex spouse,0.0357687208318996
+1415,22,25,Female,Multiracial or Other,Other nonrelative,0.08249740209570927
+1416,22,25,Female,Multiracial or Other,Other relative,0.07099000488841026
+1417,22,25,Female,Multiracial or Other,Parent,0.0
+1418,22,25,Female,Multiracial or Other,Parent-in-law,0.0
+1419,22,25,Female,Multiracial or Other,Roommate,0.24052236646811984
+1420,22,25,Female,Multiracial or Other,Same-sex partner,0.005285685442528906
+1421,22,25,Female,Multiracial or Other,Same-sex spouse,0.0007574018262108944
+1422,22,25,Female,Multiracial or Other,Sibling,0.025753186428766252
+1423,22,25,Female,Multiracial or Other,Stepchild,0.023171464653945782
+1424,22,25,Female,NHOPI,Adopted child,0.009160419589492918
+1425,22,25,Female,NHOPI,Biological child,0.3049296384778067
+1426,22,25,Female,NHOPI,Child-in-law,0.024289826857237583
+1427,22,25,Female,NHOPI,Foster child,0.0
+1428,22,25,Female,NHOPI,Grandchild,0.036119097171280035
+1429,22,25,Female,NHOPI,Opp-sex partner,0.11103586027727345
+1430,22,25,Female,NHOPI,Opp-sex spouse,0.04332833741631282
+1431,22,25,Female,NHOPI,Other nonrelative,0.10175587853612068
+1432,22,25,Female,NHOPI,Other relative,0.044949851007100194
+1433,22,25,Female,NHOPI,Parent,0.0
+1434,22,25,Female,NHOPI,Parent-in-law,0.0
+1435,22,25,Female,NHOPI,Roommate,0.2632074326818519
+1436,22,25,Female,NHOPI,Same-sex partner,0.005892315884048941
+1437,22,25,Female,NHOPI,Same-sex spouse,0.0008455131098385845
+1438,22,25,Female,NHOPI,Sibling,0.028671306027255872
+1439,22,25,Female,NHOPI,Stepchild,0.025814522964380245
+1440,22,25,Female,White,Adopted child,0.007062194410350405
+1441,22,25,Female,White,Biological child,0.2862467040903251
+1442,22,25,Female,White,Child-in-law,0.02259069667236735
+1443,22,25,Female,White,Foster child,0.0
+1444,22,25,Female,White,Grandchild,0.03090952810307175
+1445,22,25,Female,White,Opp-sex partner,0.12746584702767022
+1446,22,25,Female,White,Opp-sex spouse,0.049475154858535486
+1447,22,25,Female,White,Other nonrelative,0.10333980211457627
+1448,22,25,Female,White,Other relative,0.03539023012661124
+1449,22,25,Female,White,Parent,0.0
+1450,22,25,Female,White,Parent-in-law,0.0
+1451,22,25,Female,White,Roommate,0.28187732213632566
+1452,22,25,Female,White,Same-sex partner,0.006435463888099787
+1453,22,25,Female,White,Same-sex spouse,0.0006770621357163022
+1454,22,25,Female,White,Sibling,0.023732733117432285
+1455,22,25,Female,White,Stepchild,0.024797261318918084
+1456,22,25,Male,AIAN,Adopted child,0.008949103913987743
+1457,22,25,Male,AIAN,Biological child,0.27120660952847403
+1458,22,25,Male,AIAN,Child-in-law,0.024551059926393923
+1459,22,25,Male,AIAN,Foster child,0.0
+1460,22,25,Male,AIAN,Grandchild,0.053045721615906295
+1461,22,25,Male,AIAN,Opp-sex partner,0.0822871995815459
+1462,22,25,Male,AIAN,Opp-sex spouse,0.019238223027579365
+1463,22,25,Male,AIAN,Other nonrelative,0.11005367434569742
+1464,22,25,Male,AIAN,Other relative,0.0488751301346377
+1465,22,25,Male,AIAN,Parent,0.0
+1466,22,25,Male,AIAN,Parent-in-law,0.0
+1467,22,25,Male,AIAN,Roommate,0.30984643824357866
+1468,22,25,Male,AIAN,Same-sex partner,0.005118152176784723
+1469,22,25,Male,AIAN,Same-sex spouse,0.0003118811677544842
+1470,22,25,Male,AIAN,Sibling,0.03828462537966986
+1471,22,25,Male,AIAN,Stepchild,0.02823218095798987
+1472,22,25,Male,Asian,Adopted child,0.004975999343419557
+1473,22,25,Male,Asian,Biological child,0.27518338749812404
+1474,22,25,Male,Asian,Child-in-law,0.013641279000457363
+1475,22,25,Male,Asian,Foster child,0.0
+1476,22,25,Male,Asian,Grandchild,0.02928059797887453
+1477,22,25,Male,Asian,Opp-sex partner,0.03441096963089043
+1478,22,25,Male,Asian,Opp-sex spouse,0.010976088952757297
+1479,22,25,Male,Asian,Other nonrelative,0.09234965048638405
+1480,22,25,Male,Asian,Other relative,0.04104688395985612
+1481,22,25,Male,Asian,Parent,0.0
+1482,22,25,Male,Asian,Parent-in-law,0.0
+1483,22,25,Male,Asian,Roommate,0.4402666021979069
+1484,22,25,Male,Asian,Same-sex partner,0.0028535744420300235
+1485,22,25,Male,Asian,Same-sex spouse,0.00017962835622369516
+1486,22,25,Male,Asian,Sibling,0.03917371391091361
+1487,22,25,Male,Asian,Stepchild,0.01566162424216241
+1488,22,25,Male,Black,Adopted child,0.008752418956998347
+1489,22,25,Male,Black,Biological child,0.3396424896893652
+1490,22,25,Male,Black,Child-in-law,0.01897376030630482
+1491,22,25,Male,Black,Foster child,0.0
+1492,22,25,Male,Black,Grandchild,0.08116846140919509
+1493,22,25,Male,Black,Opp-sex partner,0.08116029755371479
+1494,22,25,Male,Black,Opp-sex spouse,0.018829213522745074
+1495,22,25,Male,Black,Other nonrelative,0.10054814669848057
+1496,22,25,Male,Black,Other relative,0.07469760085245761
+1497,22,25,Male,Black,Parent,0.0
+1498,22,25,Male,Black,Parent-in-law,0.0
+1499,22,25,Male,Black,Roommate,0.2052717783659526
+1500,22,25,Male,Black,Same-sex partner,0.005006046298932103
+1501,22,25,Male,Black,Same-sex spouse,0.00030533411137768636
+1502,22,25,Male,Black,Sibling,0.038080947494217456
+1503,22,25,Male,Black,Stepchild,0.027563504740258583
+1504,22,25,Male,Latino,Adopted child,0.010284765863729292
+1505,22,25,Male,Latino,Biological child,0.32711701418054334
+1506,22,25,Male,Latino,Child-in-law,0.03604870577728058
+1507,22,25,Male,Latino,Foster child,0.0
+1508,22,25,Male,Latino,Grandchild,0.039957042562214266
+1509,22,25,Male,Latino,Opp-sex partner,0.0681242242124708
+1510,22,25,Male,Latino,Opp-sex spouse,0.017932041697039887
+1511,22,25,Male,Latino,Other nonrelative,0.10381059731831098
+1512,22,25,Male,Latino,Other relative,0.07117630495022831
+1513,22,25,Male,Latino,Parent,0.0
+1514,22,25,Male,Latino,Parent-in-law,0.0
+1515,22,25,Male,Latino,Roommate,0.2318952919587933
+1516,22,25,Male,Latino,Same-sex partner,0.0034832592991227472
+1517,22,25,Male,Latino,Same-sex spouse,0.00021640236006748798
+1518,22,25,Male,Latino,Sibling,0.055752659681695294
+1519,22,25,Male,Latino,Stepchild,0.03420169013850373
+1520,22,25,Male,Multiracial or Other,Adopted child,0.008047548097815922
+1521,22,25,Male,Multiracial or Other,Biological child,0.33080014764623805
+1522,22,25,Male,Multiracial or Other,Child-in-law,0.022075470304755644
+1523,22,25,Male,Multiracial or Other,Foster child,0.0
+1524,22,25,Male,Multiracial or Other,Grandchild,0.0751968412956163
+1525,22,25,Male,Multiracial or Other,Opp-sex partner,0.08058284108452947
+1526,22,25,Male,Multiracial or Other,Opp-sex spouse,0.017363423339955938
+1527,22,25,Male,Multiracial or Other,Other nonrelative,0.08970350153112981
+1528,22,25,Male,Multiracial or Other,Other relative,0.05873797381285275
+1529,22,25,Male,Multiracial or Other,Parent,0.0
+1530,22,25,Male,Multiracial or Other,Parent-in-law,0.0
+1531,22,25,Male,Multiracial or Other,Roommate,0.252826795919939
+1532,22,25,Male,Multiracial or Other,Same-sex partner,0.004604286207083526
+1533,22,25,Male,Multiracial or Other,Same-sex spouse,0.0002818710602175208
+1534,22,25,Male,Multiracial or Other,Sibling,0.034399562792886584
+1535,22,25,Male,Multiracial or Other,Stepchild,0.025379736906979443
+1536,22,25,Male,NHOPI,Adopted child,0.00844689208313315
+1537,22,25,Male,NHOPI,Biological child,0.3121815206141503
+1538,22,25,Male,NHOPI,Child-in-law,0.02317203227894075
+1539,22,25,Male,NHOPI,Foster child,0.0
+1540,22,25,Male,NHOPI,Grandchild,0.0500417417422928
+1541,22,25,Male,NHOPI,Opp-sex partner,0.07770934668599902
+1542,22,25,Male,NHOPI,Opp-sex spouse,0.018193865518423512
+1543,22,25,Male,NHOPI,Other nonrelative,0.10386135004843422
+1544,22,25,Male,NHOPI,Other relative,0.046124744007117094
+1545,22,25,Male,NHOPI,Parent,0.0
+1546,22,25,Male,NHOPI,Parent-in-law,0.0
+1547,22,25,Male,NHOPI,Roommate,0.2923777628991546
+1548,22,25,Male,NHOPI,Same-sex partner,0.004831903045106496
+1549,22,25,Male,NHOPI,Same-sex spouse,0.00029516403183756773
+1550,22,25,Male,NHOPI,Sibling,0.03612045056277181
+1551,22,25,Male,NHOPI,Stepchild,0.026643226482638564
+1552,22,25,Male,White,Adopted child,0.005882064667843207
+1553,22,25,Male,White,Biological child,0.3066869040362664
+1554,22,25,Male,White,Child-in-law,0.020854212443924342
+1555,22,25,Male,White,Foster child,0.0
+1556,22,25,Male,White,Grandchild,0.04839670663196099
+1557,22,25,Male,White,Opp-sex partner,0.0829719337212099
+1558,22,25,Male,White,Opp-sex spouse,0.020576946537105973
+1559,22,25,Male,White,Other nonrelative,0.10624920184768223
+1560,22,25,Male,White,Other relative,0.03401194797293524
+1561,22,25,Male,White,Parent,0.0
+1562,22,25,Male,White,Parent-in-law,0.0
+1563,22,25,Male,White,Roommate,0.3133038699262817
+1564,22,25,Male,White,Same-sex partner,0.004205707699789691
+1565,22,25,Male,White,Same-sex spouse,0.00027873712856717246
+1566,22,25,Male,White,Sibling,0.03080697659611695
+1567,22,25,Male,White,Stepchild,0.025774790790316204
+1568,25,30,Female,AIAN,Adopted child,0.009473566980357371
+1569,25,30,Female,AIAN,Biological child,0.3084324842641625
+1570,25,30,Female,AIAN,Child-in-law,0.0404657987244953
+1571,25,30,Female,AIAN,Foster child,0.0
+1572,25,30,Female,AIAN,Grandchild,0.03132778881194081
+1573,25,30,Female,AIAN,Opp-sex partner,0.14655331848857855
+1574,25,30,Female,AIAN,Opp-sex spouse,0.05729325821728889
+1575,25,30,Female,AIAN,Other nonrelative,0.1000937707792224
+1576,25,30,Female,AIAN,Other relative,0.04667580321804968
+1577,25,30,Female,AIAN,Parent,0.0
+1578,25,30,Female,AIAN,Parent-in-law,0.0
+1579,25,30,Female,AIAN,Roommate,0.1912018017319057
+1580,25,30,Female,AIAN,Same-sex partner,0.008635443806172368
+1581,25,30,Female,AIAN,Same-sex spouse,0.0018389247850891265
+1582,25,30,Female,AIAN,Sibling,0.03521094267247888
+1583,25,30,Female,AIAN,Stepchild,0.022797097520258505
+1584,25,30,Female,Asian,Adopted child,0.004843641751742519
+1585,25,30,Female,Asian,Biological child,0.1931181033906417
+1586,25,30,Female,Asian,Child-in-law,0.040095519350850296
+1587,25,30,Female,Asian,Foster child,0.0
+1588,25,30,Female,Asian,Grandchild,0.01610767146939484
+1589,25,30,Female,Asian,Opp-sex partner,0.12207115221557317
+1590,25,30,Female,Asian,Opp-sex spouse,0.11855534807860765
+1591,25,30,Female,Asian,Other nonrelative,0.10062786161956909
+1592,25,30,Female,Asian,Other relative,0.042357639300489844
+1593,25,30,Female,Asian,Parent,0.0
+1594,25,30,Female,Asian,Parent-in-law,0.0
+1595,25,30,Female,Asian,Roommate,0.30587642929655845
+1596,25,30,Female,Asian,Same-sex partner,0.004392921914132492
+1597,25,30,Female,Asian,Same-sex spouse,0.0009331155370033336
+1598,25,30,Female,Asian,Sibling,0.03929496750857931
+1599,25,30,Female,Asian,Stepchild,0.011725628566857216
+1600,25,30,Female,Black,Adopted child,0.01403349097896727
+1601,25,30,Female,Black,Biological child,0.3557634598484523
+1602,25,30,Female,Black,Child-in-law,0.03296902034329406
+1603,25,30,Female,Black,Foster child,0.0
+1604,25,30,Female,Black,Grandchild,0.06609251681779393
+1605,25,30,Female,Black,Opp-sex partner,0.08594041363845269
+1606,25,30,Female,Black,Opp-sex spouse,0.03240456833935893
+1607,25,30,Female,Black,Other nonrelative,0.10092828234118886
+1608,25,30,Female,Black,Other relative,0.07402120818903114
+1609,25,30,Female,Black,Parent,0.0
+1610,25,30,Female,Black,Parent-in-law,0.0
+1611,25,30,Female,Black,Roommate,0.13350312716843385
+1612,25,30,Female,Black,Same-sex partner,0.012813821735599142
+1613,25,30,Female,Black,Same-sex spouse,0.0027310388311176633
+1614,25,30,Female,Black,Sibling,0.051996812396156646
+1615,25,30,Female,Black,Stepchild,0.03680223937215339
+1616,25,30,Female,Latino,Adopted child,0.009307921404817237
+1617,25,30,Female,Latino,Biological child,0.30193414567419
+1618,25,30,Female,Latino,Child-in-law,0.05551006026631204
+1619,25,30,Female,Latino,Foster child,0.0
+1620,25,30,Female,Latino,Grandchild,0.028575858017341096
+1621,25,30,Female,Latino,Opp-sex partner,0.12662467960981785
+1622,25,30,Female,Latino,Opp-sex spouse,0.06080405540334631
+1623,25,30,Female,Latino,Other nonrelative,0.1093516855752667
+1624,25,30,Female,Latino,Other relative,0.06290538896203421
+1625,25,30,Female,Latino,Parent,0.0
+1626,25,30,Female,Latino,Parent-in-law,0.0
+1627,25,30,Female,Latino,Roommate,0.15603800900251735
+1628,25,30,Female,Latino,Same-sex partner,0.01088236696212663
+1629,25,30,Female,Latino,Same-sex spouse,0.0023138252811907324
+1630,25,30,Female,Latino,Sibling,0.05342885129146356
+1631,25,30,Female,Latino,Stepchild,0.022323152549576213
+1632,25,30,Female,Multiracial or Other,Adopted child,0.011370991043869207
+1633,25,30,Female,Multiracial or Other,Biological child,0.25270129632348615
+1634,25,30,Female,Multiracial or Other,Child-in-law,0.02638690658687338
+1635,25,30,Female,Multiracial or Other,Foster child,0.0
+1636,25,30,Female,Multiracial or Other,Grandchild,0.03756525820275003
+1637,25,30,Female,Multiracial or Other,Opp-sex partner,0.17532988971937838
+1638,25,30,Female,Multiracial or Other,Opp-sex spouse,0.05114163693925166
+1639,25,30,Female,Multiracial or Other,Other nonrelative,0.10147247078898601
+1640,25,30,Female,Multiracial or Other,Other relative,0.03209636796629029
+1641,25,30,Female,Multiracial or Other,Parent,0.0
+1642,25,30,Female,Multiracial or Other,Parent-in-law,0.0
+1643,25,30,Female,Multiracial or Other,Roommate,0.23671561827543278
+1644,25,30,Female,Multiracial or Other,Same-sex partner,0.010374103229478116
+1645,25,30,Female,Multiracial or Other,Same-sex spouse,0.0022101412042328404
+1646,25,30,Female,Multiracial or Other,Sibling,0.035300941234401424
+1647,25,30,Female,Multiracial or Other,Stepchild,0.027334378485569605
+1648,25,30,Female,NHOPI,Adopted child,0.009912316279839153
+1649,25,30,Female,NHOPI,Biological child,0.2765026351079884
+1650,25,30,Female,NHOPI,Child-in-law,0.04234261540563456
+1651,25,30,Female,NHOPI,Foster child,0.0
+1652,25,30,Female,NHOPI,Grandchild,0.03277010493851686
+1653,25,30,Female,NHOPI,Opp-sex partner,0.15335356750402973
+1654,25,30,Female,NHOPI,Opp-sex spouse,0.059969834742709754
+1655,25,30,Female,NHOPI,Other nonrelative,0.1047062480948064
+1656,25,30,Female,NHOPI,Other relative,0.04882832361242058
+1657,25,30,Female,NHOPI,Parent,0.0
+1658,25,30,Female,NHOPI,Parent-in-law,0.0
+1659,25,30,Female,NHOPI,Roommate,0.19997273813654085
+1660,25,30,Female,NHOPI,Same-sex partner,0.009037481294092124
+1661,25,30,Female,NHOPI,Same-sex spouse,0.0019247627097721258
+1662,25,30,Female,NHOPI,Sibling,0.03683310020506131
+1663,25,30,Female,NHOPI,Stepchild,0.023846271968588066
+1664,25,30,Female,White,Adopted child,0.008768339187247265
+1665,25,30,Female,White,Biological child,0.26576738037044223
+1666,25,30,Female,White,Child-in-law,0.04198283578478747
+1667,25,30,Female,White,Foster child,0.0
+1668,25,30,Female,White,Grandchild,0.02977763178065644
+1669,25,30,Female,White,Opp-sex partner,0.1756051449973822
+1670,25,30,Female,White,Opp-sex spouse,0.05906339869822451
+1671,25,30,Female,White,Other nonrelative,0.10475744547890459
+1672,25,30,Female,White,Other relative,0.0414025377541176
+1673,25,30,Female,White,Parent,0.0
+1674,25,30,Female,White,Parent-in-law,0.0
+1675,25,30,Female,White,Roommate,0.21044916693760377
+1676,25,30,Female,White,Same-sex partner,0.007623984694090053
+1677,25,30,Female,White,Same-sex spouse,0.0021824699908618785
+1678,25,30,Female,White,Sibling,0.029516964131000148
+1679,25,30,Female,White,Stepchild,0.023102700194681716
+1680,25,30,Male,AIAN,Adopted child,0.009143036157821026
+1681,25,30,Male,AIAN,Biological child,0.276209726448994
+1682,25,30,Male,AIAN,Child-in-law,0.036835746945923384
+1683,25,30,Male,AIAN,Foster child,0.0
+1684,25,30,Male,AIAN,Grandchild,0.03721118519152451
+1685,25,30,Male,AIAN,Opp-sex partner,0.13091546160908346
+1686,25,30,Male,AIAN,Opp-sex spouse,0.03644085483895134
+1687,25,30,Male,AIAN,Other nonrelative,0.09143410228343696
+1688,25,30,Male,AIAN,Other relative,0.05251903728028386
+1689,25,30,Male,AIAN,Parent,0.0
+1690,25,30,Male,AIAN,Parent-in-law,0.0
+1691,25,30,Male,AIAN,Roommate,0.2530859329967398
+1692,25,30,Male,AIAN,Same-sex partner,0.006620786262946183
+1693,25,30,Male,AIAN,Same-sex spouse,0.0012277385735375073
+1694,25,30,Male,AIAN,Sibling,0.040958120039475146
+1695,25,30,Male,AIAN,Stepchild,0.027398271371282763
+1696,25,30,Male,Asian,Adopted child,0.0037920188833119534
+1697,25,30,Male,Asian,Biological child,0.2175192902014039
+1698,25,30,Male,Asian,Child-in-law,0.015312434503524217
+1699,25,30,Male,Asian,Foster child,0.0
+1700,25,30,Male,Asian,Grandchild,0.015322937256640138
+1701,25,30,Male,Asian,Opp-sex partner,0.06876773452953944
+1702,25,30,Male,Asian,Opp-sex spouse,0.037431688278140154
+1703,25,30,Male,Asian,Other nonrelative,0.11014977810719456
+1704,25,30,Male,Asian,Other relative,0.06314683726717102
+1705,25,30,Male,Asian,Parent,0.0
+1706,25,30,Male,Asian,Parent-in-law,0.0
+1707,25,30,Male,Asian,Roommate,0.4060901096879577
+1708,25,30,Male,Asian,Same-sex partner,0.0027729897358886716
+1709,25,30,Male,Asian,Same-sex spouse,0.0005178361665731598
+1710,25,30,Male,Asian,Sibling,0.047898304506229894
+1711,25,30,Male,Asian,Stepchild,0.011278040876425104
+1712,25,30,Male,Black,Adopted child,0.012479434989465988
+1713,25,30,Male,Black,Biological child,0.3102054493613061
+1714,25,30,Male,Black,Child-in-law,0.02216184000344108
+1715,25,30,Male,Black,Foster child,0.0
+1716,25,30,Male,Black,Grandchild,0.062045076432017274
+1717,25,30,Male,Black,Opp-sex partner,0.10285719545807968
+1718,25,30,Male,Black,Opp-sex spouse,0.03913684758080415
+1719,25,30,Male,Black,Other nonrelative,0.10164765290424173
+1720,25,30,Male,Black,Other relative,0.07041255932145492
+1721,25,30,Male,Black,Parent,0.0
+1722,25,30,Male,Black,Parent-in-law,0.0
+1723,25,30,Male,Black,Roommate,0.1956851173948317
+1724,25,30,Male,Black,Same-sex partner,0.0075472662458701085
+1725,25,30,Male,Black,Same-sex spouse,0.0013986702871022943
+1726,25,30,Male,Black,Sibling,0.03694818471476768
+1727,25,30,Male,Black,Stepchild,0.037474705306617236
+1728,25,30,Male,Latino,Adopted child,0.008508518223484451
+1729,25,30,Male,Latino,Biological child,0.27680666115901814
+1730,25,30,Male,Latino,Child-in-law,0.05718638586814049
+1731,25,30,Male,Latino,Foster child,0.0
+1732,25,30,Male,Latino,Grandchild,0.023856586971425307
+1733,25,30,Male,Latino,Opp-sex partner,0.11667451014665595
+1734,25,30,Male,Latino,Opp-sex spouse,0.03359030775956568
+1735,25,30,Male,Latino,Other nonrelative,0.10687968737994064
+1736,25,30,Male,Latino,Other relative,0.07503104779968132
+1737,25,30,Male,Latino,Parent,0.0
+1738,25,30,Male,Latino,Parent-in-law,0.0
+1739,25,30,Male,Latino,Roommate,0.21728996227902733
+1740,25,30,Male,Latino,Same-sex partner,0.0066166499886703735
+1741,25,30,Male,Latino,Same-sex spouse,0.0011725241312520842
+1742,25,30,Male,Latino,Sibling,0.050252726009363924
+1743,25,30,Male,Latino,Stepchild,0.02613443228377422
+1744,25,30,Male,Multiracial or Other,Adopted child,0.0069240742128317085
+1745,25,30,Male,Multiracial or Other,Biological child,0.3127772705315814
+1746,25,30,Male,Multiracial or Other,Child-in-law,0.02791045111867339
+1747,25,30,Male,Multiracial or Other,Foster child,0.0
+1748,25,30,Male,Multiracial or Other,Grandchild,0.046377352703218765
+1749,25,30,Male,Multiracial or Other,Opp-sex partner,0.11805420448369797
+1750,25,30,Male,Multiracial or Other,Opp-sex spouse,0.03600463097130027
+1751,25,30,Male,Multiracial or Other,Other nonrelative,0.10925583109191517
+1752,25,30,Male,Multiracial or Other,Other relative,0.0595290133642285
+1753,25,30,Male,Multiracial or Other,Parent,0.0
+1754,25,30,Male,Multiracial or Other,Parent-in-law,0.0
+1755,25,30,Male,Multiracial or Other,Roommate,0.22509404117232631
+1756,25,30,Male,Multiracial or Other,Same-sex partner,0.005025180356261305
+1757,25,30,Male,Multiracial or Other,Same-sex spouse,0.0009333559225785724
+1758,25,30,Male,Multiracial or Other,Sibling,0.03140106579827787
+1759,25,30,Male,Multiracial or Other,Stepchild,0.020713528273108628
+1760,25,30,Male,NHOPI,Adopted child,0.008743968174832424
+1761,25,30,Male,NHOPI,Biological child,0.2849144394724244
+1762,25,30,Male,NHOPI,Child-in-law,0.03523058203948605
+1763,25,30,Male,NHOPI,Foster child,0.0
+1764,25,30,Male,NHOPI,Grandchild,0.035578804339183936
+1765,25,30,Male,NHOPI,Opp-sex partner,0.12521376304634518
+1766,25,30,Male,NHOPI,Opp-sex spouse,0.03487251829361573
+1767,25,30,Male,NHOPI,Other nonrelative,0.11040242412931547
+1768,25,30,Male,NHOPI,Other relative,0.05021792807485292
+1769,25,30,Male,NHOPI,Parent,0.0
+1770,25,30,Male,NHOPI,Parent-in-law,0.0
+1771,25,30,Male,NHOPI,Roommate,0.24195869724896796
+1772,25,30,Male,NHOPI,Same-sex partner,0.006333825387955837
+1773,25,30,Male,NHOPI,Same-sex spouse,0.0011747954842062963
+1774,25,30,Male,NHOPI,Sibling,0.03916219681731845
+1775,25,30,Male,NHOPI,Stepchild,0.0261960574914953
+1776,25,30,Male,White,Adopted child,0.00800818392409783
+1777,25,30,Male,White,Biological child,0.28753820697184
+1778,25,30,Male,White,Child-in-law,0.03443778437378178
+1779,25,30,Male,White,Foster child,0.0
+1780,25,30,Male,White,Grandchild,0.03518010009839119
+1781,25,30,Male,White,Opp-sex partner,0.13893252961558472
+1782,25,30,Male,White,Opp-sex spouse,0.03385695163707144
+1783,25,30,Male,White,Other nonrelative,0.11344066887918289
+1784,25,30,Male,White,Other relative,0.03651924011522386
+1785,25,30,Male,White,Parent,0.0
+1786,25,30,Male,White,Parent-in-law,0.0
+1787,25,30,Male,White,Roommate,0.24417913962701354
+1788,25,30,Male,White,Same-sex partner,0.005877689226380626
+1789,25,30,Male,White,Same-sex spouse,0.00115872960999429
+1790,25,30,Male,White,Sibling,0.035485394306042604
+1791,25,30,Male,White,Stepchild,0.02538538161539513
+1792,30,40,Female,AIAN,Adopted child,0.008559569662079701
+1793,30,40,Female,AIAN,Biological child,0.27349908265567235
+1794,30,40,Female,AIAN,Child-in-law,0.044421699259203605
+1795,30,40,Female,AIAN,Foster child,0.0
+1796,30,40,Female,AIAN,Grandchild,0.02378688339461751
+1797,30,40,Female,AIAN,Opp-sex partner,0.18281282289650636
+1798,30,40,Female,AIAN,Opp-sex spouse,0.09198242754757494
+1799,30,40,Female,AIAN,Other nonrelative,0.10166515320718636
+1800,30,40,Female,AIAN,Other relative,0.05359033154888854
+1801,30,40,Female,AIAN,Parent,0.0016348321664685554
+1802,30,40,Female,AIAN,Parent-in-law,1.3343318583406583e-06
+1803,30,40,Female,AIAN,Roommate,0.13278304924976966
+1804,30,40,Female,AIAN,Same-sex partner,0.010901699638779535
+1805,30,40,Female,AIAN,Same-sex spouse,0.004731247031644482
+1806,30,40,Female,AIAN,Sibling,0.04150630672941648
+1807,30,40,Female,AIAN,Stepchild,0.028123560680333542
+1808,30,40,Female,Asian,Adopted child,0.003524671625400682
+1809,30,40,Female,Asian,Biological child,0.17201163597383318
+1810,30,40,Female,Asian,Child-in-law,0.05769927735746751
+1811,30,40,Female,Asian,Foster child,0.0
+1812,30,40,Female,Asian,Grandchild,0.009801658742379909
+1813,30,40,Female,Asian,Opp-sex partner,0.14524064855853416
+1814,30,40,Female,Asian,Opp-sex spouse,0.21717749017101776
+1815,30,40,Female,Asian,Other nonrelative,0.09057257395511951
+1816,30,40,Female,Asian,Other relative,0.06517507184345653
+1817,30,40,Female,Asian,Parent,0.0006510888795953203
+1818,30,40,Female,Asian,Parent-in-law,1.3343318583406583e-06
+1819,30,40,Female,Asian,Roommate,0.1750451112762962
+1820,30,40,Female,Asian,Same-sex partner,0.004444391330793744
+1821,30,40,Female,Asian,Same-sex spouse,0.0019211723887880454
+1822,30,40,Female,Asian,Sibling,0.04521668135029022
+1823,30,40,Female,Asian,Stepchild,0.0115171922151688
+1824,30,40,Female,Black,Adopted child,0.008841679776875897
+1825,30,40,Female,Black,Biological child,0.3585382857832063
+1826,30,40,Female,Black,Child-in-law,0.02468597624258307
+1827,30,40,Female,Black,Foster child,0.0
+1828,30,40,Female,Black,Grandchild,0.03303234315791548
+1829,30,40,Female,Black,Opp-sex partner,0.0993358540934907
+1830,30,40,Female,Black,Opp-sex spouse,0.06265701670079574
+1831,30,40,Female,Black,Other nonrelative,0.1072647125990542
+1832,30,40,Female,Black,Other relative,0.08862916901392476
+1833,30,40,Female,Black,Parent,0.001689952236342473
+1834,30,40,Female,Black,Parent-in-law,1.3343318583406583e-06
+1835,30,40,Female,Black,Roommate,0.10212226775947848
+1836,30,40,Female,Black,Same-sex partner,0.01427348740417301
+1837,30,40,Female,Black,Same-sex spouse,0.004888698180467549
+1838,30,40,Female,Black,Sibling,0.056386738909817664
+1839,30,40,Female,Black,Stepchild,0.03765248381001632
+1840,30,40,Female,Latino,Adopted child,0.010898345567188066
+1841,30,40,Female,Latino,Biological child,0.2502267185095445
+1842,30,40,Female,Latino,Child-in-law,0.05336725121087022
+1843,30,40,Female,Latino,Foster child,0.0
+1844,30,40,Female,Latino,Grandchild,0.020636119424611705
+1845,30,40,Female,Latino,Opp-sex partner,0.13575500768474108
+1846,30,40,Female,Latino,Opp-sex spouse,0.11043755359975424
+1847,30,40,Female,Latino,Other nonrelative,0.10795977147874516
+1848,30,40,Female,Latino,Other relative,0.0760635330319297
+1849,30,40,Female,Latino,Parent,0.0020917937731168576
+1850,30,40,Female,Latino,Parent-in-law,1.3343318584461266e-06
+1851,30,40,Female,Latino,Roommate,0.13627708012394948
+1852,30,40,Female,Latino,Same-sex partner,0.007200349878123055
+1853,30,40,Female,Latino,Same-sex spouse,0.006036563409134336
+1854,30,40,Female,Latino,Sibling,0.06156027104611009
+1855,30,40,Female,Latino,Stepchild,0.02148830693032308
+1856,30,40,Female,Multiracial or Other,Adopted child,0.008270593674064115
+1857,30,40,Female,Multiracial or Other,Biological child,0.25332365670272083
+1858,30,40,Female,Multiracial or Other,Child-in-law,0.04293300863989882
+1859,30,40,Female,Multiracial or Other,Foster child,0.0
+1860,30,40,Female,Multiracial or Other,Grandchild,0.022984206938796777
+1861,30,40,Female,Multiracial or Other,Opp-sex partner,0.19253624625500348
+1862,30,40,Female,Multiracial or Other,Opp-sex spouse,0.0803203712759085
+1863,30,40,Female,Multiracial or Other,Other nonrelative,0.09621815131554623
+1864,30,40,Female,Multiracial or Other,Other relative,0.04826046010583353
+1865,30,40,Female,Multiracial or Other,Parent,0.0015783706083184322
+1866,30,40,Female,Multiracial or Other,Parent-in-law,1.3343318583406583e-06
+1867,30,40,Female,Multiracial or Other,Roommate,0.17119468790957568
+1868,30,40,Female,Multiracial or Other,Same-sex partner,0.010531084973968518
+1869,30,40,Female,Multiracial or Other,Same-sex spouse,0.00456996390527305
+1870,30,40,Female,Multiracial or Other,Sibling,0.04010741865458667
+1871,30,40,Female,Multiracial or Other,Stepchild,0.02717044470864703
+1872,30,40,Female,NHOPI,Adopted child,0.008609895985625123
+1873,30,40,Female,NHOPI,Biological child,0.2902556689904823
+1874,30,40,Female,NHOPI,Child-in-law,0.044680960681859
+1875,30,40,Female,NHOPI,Foster child,0.0
+1876,30,40,Female,NHOPI,Grandchild,0.023926672708239474
+1877,30,40,Female,NHOPI,Opp-sex partner,0.16287010382545844
+1878,30,40,Female,NHOPI,Opp-sex spouse,0.09252647713711235
+1879,30,40,Female,NHOPI,Other nonrelative,0.1022594097349858
+1880,30,40,Female,NHOPI,Other relative,0.053903728770949705
+1881,30,40,Female,NHOPI,Parent,0.001644665172535442
+1882,30,40,Female,NHOPI,Parent-in-law,1.3343318583406583e-06
+1883,30,40,Female,NHOPI,Roommate,0.1335560255467782
+1884,30,40,Female,NHOPI,Same-sex partner,0.010966243664253899
+1885,30,40,Female,NHOPI,Same-sex spouse,0.004759335132859827
+1886,30,40,Female,NHOPI,Sibling,0.04174992867995003
+1887,30,40,Female,NHOPI,Stepchild,0.028289549637052044
+1888,30,40,Female,White,Adopted child,0.008422283487310403
+1889,30,40,Female,White,Biological child,0.30066285227754974
+1890,30,40,Female,White,Child-in-law,0.045530402282782406
+1891,30,40,Female,White,Foster child,0.0
+1892,30,40,Female,White,Grandchild,0.02438766762282967
+1893,30,40,Female,White,Opp-sex partner,0.18295162513506835
+1894,30,40,Female,White,Opp-sex spouse,0.08227647126036065
+1895,30,40,Female,White,Other nonrelative,0.10123200851462082
+1896,30,40,Female,White,Other relative,0.03985218019387646
+1897,30,40,Female,White,Parent,0.0010674065217271243
+1898,30,40,Female,White,Parent-in-law,1.3343318584461266e-06
+1899,30,40,Female,White,Roommate,0.13371481368852597
+1900,30,40,Female,White,Same-sex partner,0.011707949754844137
+1901,30,40,Female,White,Same-sex spouse,0.0047389839089905395
+1902,30,40,Female,White,Sibling,0.033191375591484315
+1903,30,40,Female,White,Stepchild,0.030262645428170906
+1904,30,40,Male,AIAN,Adopted child,0.00825776364813428
+1905,30,40,Male,AIAN,Biological child,0.26818656965830434
+1906,30,40,Male,AIAN,Child-in-law,0.05448245492065541
+1907,30,40,Male,AIAN,Foster child,0.0
+1908,30,40,Male,AIAN,Grandchild,0.0233519367849636
+1909,30,40,Male,AIAN,Opp-sex partner,0.14361768270776964
+1910,30,40,Male,AIAN,Opp-sex spouse,0.06912327869051424
+1911,30,40,Male,AIAN,Other nonrelative,0.11922660124081565
+1912,30,40,Male,AIAN,Other relative,0.06194259169240726
+1913,30,40,Male,AIAN,Parent,0.00027785870612418427
+1914,30,40,Male,AIAN,Parent-in-law,8.57423201154667e-06
+1915,30,40,Male,AIAN,Roommate,0.17494923594003178
+1916,30,40,Male,AIAN,Same-sex partner,0.007806781883675965
+1917,30,40,Male,AIAN,Same-sex spouse,0.0029240697627771184
+1918,30,40,Male,AIAN,Sibling,0.04256503123033412
+1919,30,40,Male,AIAN,Stepchild,0.023279568901480856
+1920,30,40,Male,Asian,Adopted child,0.005578019093307164
+1921,30,40,Male,Asian,Biological child,0.2091794553686313
+1922,30,40,Male,Asian,Child-in-law,0.039347060135057475
+1923,30,40,Male,Asian,Foster child,0.0
+1924,30,40,Male,Asian,Grandchild,0.015770722792886813
+1925,30,40,Male,Asian,Opp-sex partner,0.08704211562428145
+1926,30,40,Male,Asian,Opp-sex spouse,0.10987469145399985
+1927,30,40,Male,Asian,Other nonrelative,0.10382225490554443
+1928,30,40,Male,Asian,Other relative,0.08197110447250237
+1929,30,40,Male,Asian,Parent,0.00019770741332187923
+1930,30,40,Male,Asian,Parent-in-law,6.1009037862103525e-06
+1931,30,40,Male,Asian,Roommate,0.2626269659425969
+1932,30,40,Male,Asian,Same-sex partner,0.0052950496420457885
+1933,30,40,Male,Asian,Same-sex spouse,0.0019882837767986852
+1934,30,40,Male,Asian,Sibling,0.06154461316297651
+1935,30,40,Male,Asian,Stepchild,0.015755855312263138
+1936,30,40,Male,Black,Adopted child,0.0070339952237794025
+1937,30,40,Male,Black,Biological child,0.3008086738124717
+1938,30,40,Male,Black,Child-in-law,0.029476096483507366
+1939,30,40,Male,Black,Foster child,0.0
+1940,30,40,Male,Black,Grandchild,0.03550307134455141
+1941,30,40,Male,Black,Opp-sex partner,0.16951773087416816
+1942,30,40,Male,Black,Opp-sex spouse,0.05694690540702126
+1943,30,40,Male,Black,Other nonrelative,0.11115435101763772
+1944,30,40,Male,Black,Other relative,0.07697078692528567
+1945,30,40,Male,Black,Parent,0.00024125573051734356
+1946,30,40,Male,Black,Parent-in-law,7.4447284248360595e-06
+1947,30,40,Male,Black,Roommate,0.13507986182633228
+1948,30,40,Male,Black,Same-sex partner,0.00665974023402449
+1949,30,40,Male,Black,Same-sex spouse,0.002496721065002407
+1950,30,40,Male,Black,Sibling,0.047221755594896345
+1951,30,40,Male,Black,Stepchild,0.020881609732379555
+1952,30,40,Male,Latino,Adopted child,0.008532327547814378
+1953,30,40,Male,Latino,Biological child,0.2222837785439764
+1954,30,40,Male,Latino,Child-in-law,0.05878357832284841
+1955,30,40,Male,Latino,Foster child,0.0
+1956,30,40,Male,Latino,Grandchild,0.020412655935746534
+1957,30,40,Male,Latino,Opp-sex partner,0.1429117088203336
+1958,30,40,Male,Latino,Opp-sex spouse,0.07205370166878372
+1959,30,40,Male,Latino,Other nonrelative,0.11949283374862284
+1960,30,40,Male,Latino,Other relative,0.09613239728063644
+1961,30,40,Male,Latino,Parent,0.00028607092656338844
+1962,30,40,Male,Latino,Parent-in-law,8.827646721338891e-06
+1963,30,40,Male,Latino,Roommate,0.1745256539605541
+1964,30,40,Male,Latino,Same-sex partner,0.011205933616373521
+1965,30,40,Male,Latino,Same-sex spouse,0.00301994944319728
+1966,30,40,Male,Latino,Sibling,0.05290119343121335
+1967,30,40,Male,Latino,Stepchild,0.017449389106614623
+1968,30,40,Male,Multiracial or Other,Adopted child,0.007354822672731721
+1969,30,40,Male,Multiracial or Other,Biological child,0.2765498425915438
+1970,30,40,Male,Multiracial or Other,Child-in-law,0.044135582963195065
+1971,30,40,Male,Multiracial or Other,Foster child,0.0
+1972,30,40,Male,Multiracial or Other,Grandchild,0.020797443766790682
+1973,30,40,Male,Multiracial or Other,Opp-sex partner,0.2013989008349506
+1974,30,40,Male,Multiracial or Other,Opp-sex spouse,0.04784191335904324
+1975,30,40,Male,Multiracial or Other,Other nonrelative,0.09935554565228553
+1976,30,40,Male,Multiracial or Other,Other relative,0.04089706932270244
+1977,30,40,Male,Multiracial or Other,Parent,0.00025085169558028734
+1978,30,40,Male,Multiracial or Other,Parent-in-law,7.740843065158335e-06
+1979,30,40,Male,Multiracial or Other,Roommate,0.1864887876299142
+1980,30,40,Male,Multiracial or Other,Same-sex partner,0.006960452720513667
+1981,30,40,Male,Multiracial or Other,Same-sex spouse,0.0026087563075154565
+1982,30,40,Male,Multiracial or Other,Sibling,0.044607838977368204
+1983,30,40,Male,Multiracial or Other,Stepchild,0.02074445066279988
+1984,30,40,Male,NHOPI,Adopted child,0.007999006924650236
+1985,30,40,Male,NHOPI,Biological child,0.2674141825504148
+1986,30,40,Male,NHOPI,Child-in-law,0.052766276194048306
+1987,30,40,Male,NHOPI,Foster child,0.0
+1988,30,40,Male,NHOPI,Grandchild,0.02261989309493458
+1989,30,40,Male,NHOPI,Opp-sex partner,0.16287030450485285
+1990,30,40,Male,NHOPI,Opp-sex spouse,0.06697244152183296
+1991,30,40,Male,NHOPI,Other nonrelative,0.11547432085683251
+1992,30,40,Male,NHOPI,Other relative,0.0599937188684521
+1993,30,40,Male,NHOPI,Parent,0.00027011927923703137
+1994,30,40,Male,NHOPI,Parent-in-law,8.335406880988431e-06
+1995,30,40,Male,NHOPI,Roommate,0.16943105376371054
+1996,30,40,Male,NHOPI,Same-sex partner,0.007564248465171916
+1997,30,40,Male,NHOPI,Same-sex spouse,0.0028337100616322502
+1998,30,40,Male,NHOPI,Sibling,0.04122931104580962
+1999,30,40,Male,NHOPI,Stepchild,0.022553077461539207
+2000,30,40,Male,White,Adopted child,0.0077839682555347475
+2001,30,40,Male,White,Biological child,0.2775383234466169
+2002,30,40,Male,White,Child-in-law,0.058016006899141784
+2003,30,40,Male,White,Foster child,0.0
+2004,30,40,Male,White,Grandchild,0.02189894457759904
+2005,30,40,Male,White,Opp-sex partner,0.1720128099988806
+2006,30,40,Male,White,Opp-sex spouse,0.06561320980146448
+2007,30,40,Male,White,Other nonrelative,0.1168712723608168
+2008,30,40,Male,White,Other relative,0.043730511302026764
+2009,30,40,Male,White,Parent,0.00024853483008015903
+2010,30,40,Male,White,Parent-in-law,7.669348662068554e-06
+2011,30,40,Male,White,Roommate,0.1679064694677914
+2012,30,40,Male,White,Same-sex partner,0.0068396393900756166
+2013,30,40,Male,White,Same-sex spouse,0.0021151689435832182
+2014,30,40,Male,White,Sibling,0.03409095481624125
+2015,30,40,Male,White,Stepchild,0.02532651656148509
+2016,40,50,Female,AIAN,Adopted child,0.008964389188774404
+2017,40,50,Female,AIAN,Biological child,0.18880029021192118
+2018,40,50,Female,AIAN,Child-in-law,0.03322282207923206
+2019,40,50,Female,AIAN,Foster child,0.0
+2020,40,50,Female,AIAN,Grandchild,0.008983463866979442
+2021,40,50,Female,AIAN,Opp-sex partner,0.16534626314820475
+2022,40,50,Female,AIAN,Opp-sex spouse,0.12861772939756144
+2023,40,50,Female,AIAN,Other nonrelative,0.13914864286584266
+2024,40,50,Female,AIAN,Other relative,0.07241342461730252
+2025,40,50,Female,AIAN,Parent,0.04022788710503865
+2026,40,50,Female,AIAN,Parent-in-law,0.009645354087830313
+2027,40,50,Female,AIAN,Roommate,0.10702207081281728
+2028,40,50,Female,AIAN,Same-sex partner,0.009746065210780799
+2029,40,50,Female,AIAN,Same-sex spouse,0.005964728953045917
+2030,40,50,Female,AIAN,Sibling,0.06426268452909187
+2031,40,50,Female,AIAN,Stepchild,0.01763418392557686
+2032,40,50,Female,Asian,Adopted child,0.006145089195245739
+2033,40,50,Female,Asian,Biological child,0.11275201446079475
+2034,40,50,Female,Asian,Child-in-law,0.022963513950170513
+2035,40,50,Female,Asian,Foster child,0.0
+2036,40,50,Female,Asian,Grandchild,0.006177750861371396
+2037,40,50,Female,Asian,Opp-sex partner,0.11949135328048055
+2038,40,50,Female,Asian,Opp-sex spouse,0.2377045003195867
+2039,40,50,Female,Asian,Other nonrelative,0.12136686608262189
+2040,40,50,Female,Asian,Other relative,0.09807330946641381
+2041,40,50,Female,Asian,Parent,0.02741422524690054
+2042,40,50,Female,Asian,Parent-in-law,0.006579223813743717
+2043,40,50,Female,Asian,Roommate,0.15569936330700007
+2044,40,50,Female,Asian,Same-sex partner,0.0066708769447471235
+2045,40,50,Female,Asian,Same-sex spouse,0.004077269881073112
+2046,40,50,Female,Asian,Sibling,0.06274639587816405
+2047,40,50,Female,Asian,Stepchild,0.012138247311686038
+2048,40,50,Female,Black,Adopted child,0.0076515334102627095
+2049,40,50,Female,Black,Biological child,0.29773411526256754
+2050,40,50,Female,Black,Child-in-law,0.019829436785176766
+2051,40,50,Female,Black,Foster child,0.0
+2052,40,50,Female,Black,Grandchild,0.007676935104267803
+2053,40,50,Female,Black,Opp-sex partner,0.09593047081006337
+2054,40,50,Female,Black,Opp-sex spouse,0.091333368275099
+2055,40,50,Female,Black,Other nonrelative,0.11571764107048377
+2056,40,50,Female,Black,Other relative,0.10789719850587276
+2057,40,50,Female,Black,Parent,0.04062093215065382
+2058,40,50,Female,Black,Parent-in-law,0.008217557522284261
+2059,40,50,Female,Black,Roommate,0.09400065064265352
+2060,40,50,Female,Black,Same-sex partner,0.008314050634701376
+2061,40,50,Female,Black,Same-sex spouse,0.005085801008154755
+2062,40,50,Female,Black,Sibling,0.08491540278330449
+2063,40,50,Female,Black,Stepchild,0.01507490603445406
+2064,40,50,Female,Latino,Adopted child,0.006938400998392605
+2065,40,50,Female,Latino,Biological child,0.17462968989962807
+2066,40,50,Female,Latino,Child-in-law,0.039064115379506506
+2067,40,50,Female,Latino,Foster child,0.0
+2068,40,50,Female,Latino,Grandchild,0.006967239475105507
+2069,40,50,Female,Latino,Opp-sex partner,0.1321951051729888
+2070,40,50,Female,Latino,Opp-sex spouse,0.1278815932983548
+2071,40,50,Female,Latino,Other nonrelative,0.1304170332782986
+2072,40,50,Female,Latino,Other relative,0.0993269690128774
+2073,40,50,Female,Latino,Parent,0.07908637450574017
+2074,40,50,Female,Latino,Parent-in-law,0.00744199022455565
+2075,40,50,Female,Latino,Roommate,0.08893120641190597
+2076,40,50,Female,Latino,Same-sex partner,0.0075361921485008945
+2077,40,50,Female,Latino,Same-sex spouse,0.004608374610328463
+2078,40,50,Female,Latino,Sibling,0.08129098815467069
+2079,40,50,Female,Latino,Stepchild,0.013684727429145834
+2080,40,50,Female,Multiracial or Other,Adopted child,0.007609837461101464
+2081,40,50,Female,Multiracial or Other,Biological child,0.2552727990726599
+2082,40,50,Female,Multiracial or Other,Child-in-law,0.02829366818186478
+2083,40,50,Female,Multiracial or Other,Foster child,0.0
+2084,40,50,Female,Multiracial or Other,Grandchild,0.007635440099439864
+2085,40,50,Female,Multiracial or Other,Opp-sex partner,0.16065515359860408
+2086,40,50,Female,Multiracial or Other,Opp-sex spouse,0.10572961585906837
+2087,40,50,Female,Multiracial or Other,Other nonrelative,0.15701651444947157
+2088,40,50,Female,Multiracial or Other,Other relative,0.06151553917132982
+2089,40,50,Female,Multiracial or Other,Parent,0.03407147670259902
+2090,40,50,Female,Multiracial or Other,Parent-in-law,0.008172211084401268
+2091,40,50,Female,Multiracial or Other,Roommate,0.09109439208408793
+2092,40,50,Female,Multiracial or Other,Same-sex partner,0.00826857023392951
+2093,40,50,Female,Multiracial or Other,Same-sex spouse,0.005057886491186161
+2094,40,50,Female,Multiracial or Other,Sibling,0.05461327145862495
+2095,40,50,Female,Multiracial or Other,Stepchild,0.014993624051631294
+2096,40,50,Female,NHOPI,Adopted child,0.008430737895753136
+2097,40,50,Female,NHOPI,Biological child,0.23685976834535932
+2098,40,50,Female,NHOPI,Child-in-law,0.03128088859888438
+2099,40,50,Female,NHOPI,Foster child,0.0
+2100,40,50,Female,NHOPI,Grandchild,0.008452384387418516
+2101,40,50,Female,NHOPI,Opp-sex partner,0.15555236885564014
+2102,40,50,Female,NHOPI,Opp-sex spouse,0.12095629709919824
+2103,40,50,Female,NHOPI,Other nonrelative,0.13090662367880693
+2104,40,50,Female,NHOPI,Other relative,0.06811999636304748
+2105,40,50,Female,NHOPI,Parent,0.0378024526941464
+2106,40,50,Female,NHOPI,Parent-in-law,0.009064981516946138
+2107,40,50,Female,NHOPI,Roommate,0.10074706028736759
+2108,40,50,Female,NHOPI,Same-sex partner,0.00916397809758973
+2109,40,50,Female,NHOPI,Same-sex spouse,0.005607461199846538
+2110,40,50,Female,NHOPI,Sibling,0.06046111559912751
+2111,40,50,Female,NHOPI,Stepchild,0.01659388538086793
+2112,40,50,Female,White,Adopted child,0.0091742919589521
+2113,40,50,Female,White,Biological child,0.24637949513757243
+2114,40,50,Female,White,Child-in-law,0.03091799515665752
+2115,40,50,Female,White,Foster child,0.0
+2116,40,50,Female,White,Grandchild,0.0084407053347688
+2117,40,50,Female,White,Opp-sex partner,0.17763553073796873
+2118,40,50,Female,White,Opp-sex spouse,0.11758300882780587
+2119,40,50,Female,White,Other nonrelative,0.13368851008597005
+2120,40,50,Female,White,Other relative,0.04953409801984874
+2121,40,50,Female,White,Parent,0.027525087289969035
+2122,40,50,Female,White,Parent-in-law,0.010606796401336525
+2123,40,50,Female,White,Roommate,0.10291942791801108
+2124,40,50,Female,White,Same-sex partner,0.010766978692188123
+2125,40,50,Female,White,Same-sex spouse,0.00669045017054446
+2126,40,50,Female,White,Sibling,0.04922544671324049
+2127,40,50,Female,White,Stepchild,0.018912177555165964
+2128,40,50,Male,AIAN,Adopted child,0.0066146413379913555
+2129,40,50,Male,AIAN,Biological child,0.26698607762968873
+2130,40,50,Male,AIAN,Child-in-law,0.04533406045350012
+2131,40,50,Male,AIAN,Foster child,0.0
+2132,40,50,Male,AIAN,Grandchild,0.00878318797284319
+2133,40,50,Male,AIAN,Opp-sex partner,0.15059241075624696
+2134,40,50,Male,AIAN,Opp-sex spouse,0.09211403562300848
+2135,40,50,Male,AIAN,Other nonrelative,0.12680278916093607
+2136,40,50,Male,AIAN,Other relative,0.06351668364266996
+2137,40,50,Male,AIAN,Parent,0.011863971109347938
+2138,40,50,Male,AIAN,Parent-in-law,0.0035237333835310544
+2139,40,50,Male,AIAN,Roommate,0.13477479748830432
+2140,40,50,Male,AIAN,Same-sex partner,0.006085784793255671
+2141,40,50,Male,AIAN,Same-sex spouse,0.0031305145395525364
+2142,40,50,Male,AIAN,Sibling,0.06136388960773592
+2143,40,50,Male,AIAN,Stepchild,0.018513422501387697
+2144,40,50,Male,Asian,Adopted child,0.007708243888888291
+2145,40,50,Male,Asian,Biological child,0.1705657786193708
+2146,40,50,Male,Asian,Child-in-law,0.052935679560508576
+2147,40,50,Male,Asian,Foster child,0.0
+2148,40,50,Male,Asian,Grandchild,0.010246339795023441
+2149,40,50,Male,Asian,Opp-sex partner,0.0758574369159572
+2150,40,50,Male,Asian,Opp-sex spouse,0.0996133540470916
+2151,40,50,Male,Asian,Other nonrelative,0.132624571489883
+2152,40,50,Male,Asian,Other relative,0.09847545807173634
+2153,40,50,Male,Asian,Parent,0.013734285360194031
+2154,40,50,Male,Asian,Parent-in-law,0.00408793074426894
+2155,40,50,Male,Asian,Roommate,0.18982928405209953
+2156,40,50,Male,Asian,Same-sex partner,0.0070862947796308555
+2157,40,50,Male,Asian,Same-sex spouse,0.003641583315487605
+2158,40,50,Male,Asian,Sibling,0.11199135630843218
+2159,40,50,Male,Asian,Stepchild,0.021602403051427625
+2160,40,50,Male,Black,Adopted child,0.0033177641151564507
+2161,40,50,Male,Black,Biological child,0.29325345071842157
+2162,40,50,Male,Black,Child-in-law,0.0283347420668981
+2163,40,50,Male,Black,Foster child,0.0
+2164,40,50,Male,Black,Grandchild,0.01234633498377227
+2165,40,50,Male,Black,Opp-sex partner,0.15373995448570066
+2166,40,50,Male,Black,Opp-sex spouse,0.09777688114442368
+2167,40,50,Male,Black,Other nonrelative,0.11331463824722394
+2168,40,50,Male,Black,Other relative,0.08885932779046629
+2169,40,50,Male,Black,Parent,0.006225545661180589
+2170,40,50,Male,Black,Parent-in-law,0.001822850895396108
+2171,40,50,Male,Black,Roommate,0.10648633797110832
+2172,40,50,Male,Black,Same-sex partner,0.003069553180963033
+2173,40,50,Male,Black,Same-sex spouse,0.0015897984857169646
+2174,40,50,Male,Black,Sibling,0.07804695863711118
+2175,40,50,Male,Black,Stepchild,0.011815861616460727
+2176,40,50,Male,Latino,Adopted child,0.005898378413112914
+2177,40,50,Male,Latino,Biological child,0.16118263288209586
+2178,40,50,Male,Latino,Child-in-law,0.03666733046342082
+2179,40,50,Male,Latino,Foster child,0.0
+2180,40,50,Male,Latino,Grandchild,0.007824886071630073
+2181,40,50,Male,Latino,Opp-sex partner,0.12910143336590882
+2182,40,50,Male,Latino,Opp-sex spouse,0.09803828180073042
+2183,40,50,Male,Latino,Other nonrelative,0.13922756893440363
+2184,40,50,Male,Latino,Other relative,0.09276288665017308
+2185,40,50,Male,Latino,Parent,0.022024089611694272
+2186,40,50,Male,Latino,Parent-in-law,0.0031542082288216265
+2187,40,50,Male,Latino,Roommate,0.19721965801672128
+2188,40,50,Male,Latino,Same-sex partner,0.005430493518904285
+2189,40,50,Male,Latino,Same-sex spouse,0.00279578633691158
+2190,40,50,Male,Latino,Sibling,0.08218209342611765
+2191,40,50,Male,Latino,Stepchild,0.01649027227935358
+2192,40,50,Male,Multiracial or Other,Adopted child,0.0054497242609653955
+2193,40,50,Male,Multiracial or Other,Biological child,0.2368903574467084
+2194,40,50,Male,Multiracial or Other,Child-in-law,0.03723673487252174
+2195,40,50,Male,Multiracial or Other,Foster child,0.0
+2196,40,50,Male,Multiracial or Other,Grandchild,0.0072246230787310715
+2197,40,50,Male,Multiracial or Other,Opp-sex partner,0.1893022830900663
+2198,40,50,Male,Multiracial or Other,Opp-sex spouse,0.08289724396342753
+2199,40,50,Male,Multiracial or Other,Other nonrelative,0.16858033638054792
+2200,40,50,Male,Multiracial or Other,Other relative,0.05227568459114474
+2201,40,50,Male,Multiracial or Other,Parent,0.009871692462568374
+2202,40,50,Male,Multiracial or Other,Parent-in-law,0.0029227443498117288
+2203,40,50,Male,Multiracial or Other,Roommate,0.13403843855962866
+2204,40,50,Male,Multiracial or Other,Same-sex partner,0.0050200309067934
+2205,40,50,Male,Multiracial or Other,Same-sex spouse,0.0025861186398417804
+2206,40,50,Male,Multiracial or Other,Sibling,0.05048097985546847
+2207,40,50,Male,Multiracial or Other,Stepchild,0.015223007541774391
+2208,40,50,Male,NHOPI,Adopted child,0.0067558111567048084
+2209,40,50,Male,NHOPI,Biological child,0.2512532900474198
+2210,40,50,Male,NHOPI,Child-in-law,0.0463153302853828
+2211,40,50,Male,NHOPI,Foster child,0.0
+2212,40,50,Male,NHOPI,Grandchild,0.008972061780167465
+2213,40,50,Male,NHOPI,Opp-sex partner,0.15382523602004353
+2214,40,50,Male,NHOPI,Opp-sex spouse,0.09407809258921056
+2215,40,50,Male,NHOPI,Other nonrelative,0.12952495111662643
+2216,40,50,Male,NHOPI,Other relative,0.06487891777036707
+2217,40,50,Male,NHOPI,Parent,0.012105404273080576
+2218,40,50,Male,NHOPI,Parent-in-law,0.003596563900494143
+2219,40,50,Male,NHOPI,Roommate,0.13768801816682785
+2220,40,50,Male,NHOPI,Same-sex partner,0.006214937576670214
+2221,40,50,Male,NHOPI,Same-sex spouse,0.003196486849501601
+2222,40,50,Male,NHOPI,Sibling,0.06268272888574251
+2223,40,50,Male,NHOPI,Stepchild,0.01891216958176061
+2224,40,50,Male,White,Adopted child,0.008195633024842287
+2225,40,50,Male,White,Biological child,0.27187953250662006
+2226,40,50,Male,White,Child-in-law,0.0550775519539731
+2227,40,50,Male,White,Foster child,0.0
+2228,40,50,Male,White,Grandchild,0.00966593332368694
+2229,40,50,Male,White,Opp-sex partner,0.16449932980225568
+2230,40,50,Male,White,Opp-sex spouse,0.09145195708327394
+2231,40,50,Male,White,Other nonrelative,0.1288539596013429
+2232,40,50,Male,White,Other relative,0.04789660890082527
+2233,40,50,Male,White,Parent,0.009661705354176625
+2234,40,50,Male,White,Parent-in-law,0.002855679325124698
+2235,40,50,Male,White,Roommate,0.1269113120806025
+2236,40,50,Male,White,Same-sex partner,0.006057154490992967
+2237,40,50,Male,White,Same-sex spouse,0.0032649361366807374
+2238,40,50,Male,White,Sibling,0.05049075716570428
+2239,40,50,Male,White,Stepchild,0.023237949249897905
+2240,50,60,Female,AIAN,Adopted child,0.003344716708863207
+2241,50,60,Female,AIAN,Biological child,0.26862422431829697
+2242,50,60,Female,AIAN,Child-in-law,0.01462584346657714
+2243,50,60,Female,AIAN,Foster child,0.0
+2244,50,60,Female,AIAN,Grandchild,0.0010078859776064411
+2245,50,60,Female,AIAN,Opp-sex partner,0.09437197344641492
+2246,50,60,Female,AIAN,Opp-sex spouse,0.13177847376134505
+2247,50,60,Female,AIAN,Other nonrelative,0.11003986522444496
+2248,50,60,Female,AIAN,Other relative,0.0624107779500212
+2249,50,60,Female,AIAN,Parent,0.10494392865412515
+2250,50,60,Female,AIAN,Parent-in-law,0.028947224645100994
+2251,50,60,Female,AIAN,Roommate,0.0921463781607907
+2252,50,60,Female,AIAN,Same-sex partner,0.003825576140845316
+2253,50,60,Female,AIAN,Same-sex spouse,0.0049852363798040394
+2254,50,60,Female,AIAN,Sibling,0.07171771913081817
+2255,50,60,Female,AIAN,Stepchild,0.007230176034945741
+2256,50,60,Female,Asian,Adopted child,0.0037495970478015586
+2257,50,60,Female,Asian,Biological child,0.05705078126119259
+2258,50,60,Female,Asian,Child-in-law,0.01639178761664345
+2259,50,60,Female,Asian,Foster child,0.0
+2260,50,60,Female,Asian,Grandchild,0.0011326440104566197
+2261,50,60,Female,Asian,Opp-sex partner,0.0660472134342497
+2262,50,60,Female,Asian,Opp-sex spouse,0.23555576052131283
+2263,50,60,Female,Asian,Other nonrelative,0.13829539532608132
+2264,50,60,Female,Asian,Other relative,0.06639172564391582
+2265,50,60,Female,Asian,Parent,0.17247469574111746
+2266,50,60,Female,Asian,Parent-in-law,0.061100552886416915
+2267,50,60,Female,Asian,Roommate,0.09677152350928492
+2268,50,60,Female,Asian,Same-sex partner,0.0042877193799320465
+2269,50,60,Female,Asian,Same-sex spouse,0.005598417499109609
+2270,50,60,Female,Asian,Sibling,0.06703961308123908
+2271,50,60,Female,Asian,Stepchild,0.008112573041246011
+2272,50,60,Female,Black,Adopted child,0.0025718510066766727
+2273,50,60,Female,Black,Biological child,0.18276705660429665
+2274,50,60,Female,Black,Child-in-law,0.01125487801352929
+2275,50,60,Female,Black,Foster child,0.0
+2276,50,60,Female,Black,Grandchild,0.0007697385205086176
+2277,50,60,Female,Black,Opp-sex partner,0.08310165169432404
+2278,50,60,Female,Black,Opp-sex spouse,0.11953347046798019
+2279,50,60,Female,Black,Other nonrelative,0.11302110484915874
+2280,50,60,Female,Black,Other relative,0.09732973094590315
+2281,50,60,Female,Black,Parent,0.16353731833128768
+2282,50,60,Female,Black,Parent-in-law,0.02206764094890644
+2283,50,60,Female,Black,Roommate,0.08142889858852326
+2284,50,60,Female,Black,Same-sex partner,0.0029434027718568045
+2285,50,60,Female,Black,Same-sex spouse,0.0038147504954597795
+2286,50,60,Female,Black,Sibling,0.11031271587579235
+2287,50,60,Female,Black,Stepchild,0.005545790885796339
+2288,50,60,Female,Latino,Adopted child,0.0027700309102059047
+2289,50,60,Female,Latino,Biological child,0.10942978833580455
+2290,50,60,Female,Latino,Child-in-law,0.01211926829392808
+2291,50,60,Female,Latino,Foster child,0.0
+2292,50,60,Female,Latino,Grandchild,0.0008308048148955372
+2293,50,60,Female,Latino,Opp-sex partner,0.07392142702525516
+2294,50,60,Female,Latino,Opp-sex spouse,0.14701214745764868
+2295,50,60,Female,Latino,Other nonrelative,0.11499818182995748
+2296,50,60,Female,Latino,Other relative,0.0880847258208531
+2297,50,60,Female,Latino,Parent,0.19823837559540897
+2298,50,60,Female,Latino,Parent-in-law,0.04369089903733754
+2299,50,60,Female,Latino,Roommate,0.11002910693067992
+2300,50,60,Female,Latino,Same-sex partner,0.0031696115829738547
+2301,50,60,Female,Latino,Same-sex spouse,0.004114889050679671
+2302,50,60,Female,Latino,Sibling,0.08561303871194617
+2303,50,60,Female,Latino,Stepchild,0.005977704602425384
+2304,50,60,Female,Multiracial or Other,Adopted child,0.0031471457666184433
+2305,50,60,Female,Multiracial or Other,Biological child,0.20839217618431488
+2306,50,60,Female,Multiracial or Other,Child-in-law,0.013764109240055944
+2307,50,60,Female,Multiracial or Other,Foster child,0.0
+2308,50,60,Female,Multiracial or Other,Grandchild,0.000947007337305889
+2309,50,60,Female,Multiracial or Other,Opp-sex partner,0.08875696363479071
+2310,50,60,Female,Multiracial or Other,Opp-sex spouse,0.13275682353559493
+2311,50,60,Female,Multiracial or Other,Other nonrelative,0.12603918086165217
+2312,50,60,Female,Multiracial or Other,Other relative,0.058687317185249374
+2313,50,60,Female,Multiracial or Other,Parent,0.09856120603711675
+2314,50,60,Female,Multiracial or Other,Parent-in-law,0.027188567650404435
+2315,50,60,Female,Multiracial or Other,Roommate,0.1592215350854623
+2316,50,60,Female,Multiracial or Other,Same-sex partner,0.0036000624134859627
+2317,50,60,Female,Multiracial or Other,Same-sex spouse,0.004686020121605902
+2318,50,60,Female,Multiracial or Other,Sibling,0.06745229542672937
+2319,50,60,Female,Multiracial or Other,Stepchild,0.006799589519612963
+2320,50,60,Female,NHOPI,Adopted child,0.0037805166924238433
+2321,50,60,Female,NHOPI,Biological child,0.17214888313533683
+2322,50,60,Female,NHOPI,Child-in-law,0.01652664811921921
+2323,50,60,Female,NHOPI,Foster child,0.0
+2324,50,60,Female,NHOPI,Grandchild,0.0011421714520117993
+2325,50,60,Female,NHOPI,Opp-sex partner,0.10675750480725775
+2326,50,60,Female,NHOPI,Opp-sex spouse,0.1492441326105512
+2327,50,60,Female,NHOPI,Other nonrelative,0.1244342364390229
+2328,50,60,Female,NHOPI,Other relative,0.0706239496166826
+2329,50,60,Female,NHOPI,Parent,0.11902287167063966
+2330,50,60,Female,NHOPI,Parent-in-law,0.0328264519313871
+2331,50,60,Female,NHOPI,Roommate,0.10421807034633046
+2332,50,60,Female,NHOPI,Same-sex partner,0.004323012041582481
+2333,50,60,Female,NHOPI,Same-sex spouse,0.005645244523071316
+2334,50,60,Female,NHOPI,Sibling,0.08112634724074899
+2335,50,60,Female,NHOPI,Stepchild,0.008179959373733874
+2336,50,60,Female,White,Adopted child,0.004167849779044534
+2337,50,60,Female,White,Biological child,0.1898237960418481
+2338,50,60,Female,White,Child-in-law,0.017616780287687994
+2339,50,60,Female,White,Foster child,0.0
+2340,50,60,Female,White,Grandchild,0.00137732656820558
+2341,50,60,Female,White,Opp-sex partner,0.12284610666515956
+2342,50,60,Female,White,Opp-sex spouse,0.1477695596968927
+2343,50,60,Female,White,Other nonrelative,0.12768051845438236
+2344,50,60,Female,White,Other relative,0.06280701778607417
+2345,50,60,Female,White,Parent,0.09172045346878248
+2346,50,60,Female,White,Parent-in-law,0.031594461277512254
+2347,50,60,Female,White,Roommate,0.10712792675358918
+2348,50,60,Female,White,Same-sex partner,0.005008109765589308
+2349,50,60,Female,White,Same-sex spouse,0.006201917747793471
+2350,50,60,Female,White,Sibling,0.07557889110099587
+2351,50,60,Female,White,Stepchild,0.008679284606442423
+2352,50,60,Male,AIAN,Adopted child,0.005263798378717837
+2353,50,60,Male,AIAN,Biological child,0.19361364370945455
+2354,50,60,Male,AIAN,Child-in-law,0.024439149141979418
+2355,50,60,Male,AIAN,Foster child,0.0
+2356,50,60,Male,AIAN,Grandchild,0.0007213488858002831
+2357,50,60,Male,AIAN,Opp-sex partner,0.12244501681063973
+2358,50,60,Male,AIAN,Opp-sex spouse,0.12111454306736569
+2359,50,60,Male,AIAN,Other nonrelative,0.15662047590411565
+2360,50,60,Male,AIAN,Other relative,0.07447323850211339
+2361,50,60,Male,AIAN,Parent,0.046866115621251855
+2362,50,60,Male,AIAN,Parent-in-law,0.014164935814339759
+2363,50,60,Male,AIAN,Roommate,0.12590534011025403
+2364,50,60,Male,AIAN,Same-sex partner,0.0063176004109664
+2365,50,60,Male,AIAN,Same-sex spouse,0.004793502078285486
+2366,50,60,Male,AIAN,Sibling,0.09413814948328005
+2367,50,60,Male,AIAN,Stepchild,0.009123142081435848
+2368,50,60,Male,Asian,Adopted child,0.0028541781072389904
+2369,50,60,Male,Asian,Biological child,0.08220848850149202
+2370,50,60,Male,Asian,Child-in-law,0.013239130541828136
+2371,50,60,Male,Asian,Foster child,0.0
+2372,50,60,Male,Asian,Grandchild,0.0003987140721334097
+2373,50,60,Male,Asian,Opp-sex partner,0.0666215920485559
+2374,50,60,Male,Asian,Opp-sex spouse,0.15562525140638026
+2375,50,60,Male,Asian,Other nonrelative,0.12779773080951715
+2376,50,60,Male,Asian,Other relative,0.1078899324702879
+2377,50,60,Male,Asian,Parent,0.16137953210684594
+2378,50,60,Male,Asian,Parent-in-law,0.007955708709215407
+2379,50,60,Male,Asian,Roommate,0.1412573542312227
+2380,50,60,Male,Asian,Same-sex partner,0.0034229758959354586
+2381,50,60,Male,Asian,Same-sex spouse,0.00262591628308219
+2382,50,60,Male,Asian,Sibling,0.12175690813214214
+2383,50,60,Male,Asian,Stepchild,0.004966586684122315
+2384,50,60,Male,Black,Adopted child,0.002667300549156609
+2385,50,60,Male,Black,Biological child,0.19660372543308127
+2386,50,60,Male,Black,Child-in-law,0.017883800011433148
+2387,50,60,Male,Black,Foster child,0.0
+2388,50,60,Male,Black,Grandchild,0.0003736922050960845
+2389,50,60,Male,Black,Opp-sex partner,0.11534196549121284
+2390,50,60,Male,Black,Opp-sex spouse,0.14839523618740655
+2391,50,60,Male,Black,Other nonrelative,0.14617023665039575
+2392,50,60,Male,Black,Other relative,0.0980590184166745
+2393,50,60,Male,Black,Parent,0.034951105172334226
+2394,50,60,Male,Black,Parent-in-law,0.007474153619731088
+2395,50,60,Male,Black,Roommate,0.10207759313722511
+2396,50,60,Male,Black,Same-sex partner,0.003198483941699059
+2397,50,60,Male,Black,Same-sex spouse,0.0024578096662027146
+2398,50,60,Male,Black,Sibling,0.1197016535442494
+2399,50,60,Male,Black,Stepchild,0.004644225974101685
+2400,50,60,Male,Latino,Adopted child,0.0065252568829182464
+2401,50,60,Male,Latino,Biological child,0.11300034824450256
+2402,50,60,Male,Latino,Child-in-law,0.02336895184211558
+2403,50,60,Male,Latino,Foster child,0.0
+2404,50,60,Male,Latino,Grandchild,0.0008902512275337113
+2405,50,60,Male,Latino,Opp-sex partner,0.09475430202029475
+2406,50,60,Male,Latino,Opp-sex spouse,0.10737386697163329
+2407,50,60,Male,Latino,Other nonrelative,0.1843579567968783
+2408,50,60,Male,Latino,Other relative,0.09548172718118925
+2409,50,60,Male,Latino,Parent,0.07549778806787207
+2410,50,60,Male,Latino,Parent-in-law,0.017415524808450628
+2411,50,60,Male,Latino,Roommate,0.16143606252223397
+2412,50,60,Male,Latino,Same-sex partner,0.00783296311258979
+2413,50,60,Male,Latino,Same-sex spouse,0.005928253407932011
+2414,50,60,Male,Latino,Sibling,0.09483760954501609
+2415,50,60,Male,Latino,Stepchild,0.011299137368839706
+2416,50,60,Male,Multiracial or Other,Adopted child,0.00527405953443434
+2417,50,60,Male,Multiracial or Other,Biological child,0.20084320509524983
+2418,50,60,Male,Multiracial or Other,Child-in-law,0.024486843434546806
+2419,50,60,Male,Multiracial or Other,Foster child,0.0
+2420,50,60,Male,Multiracial or Other,Grandchild,0.0007227227979122463
+2421,50,60,Male,Multiracial or Other,Opp-sex partner,0.10147474985665351
+2422,50,60,Male,Multiracial or Other,Opp-sex spouse,0.1213474221474838
+2423,50,60,Male,Multiracial or Other,Other nonrelative,0.169344501066671
+2424,50,60,Male,Multiracial or Other,Other relative,0.07461752916709072
+2425,50,60,Male,Multiracial or Other,Parent,0.04695306134452639
+2426,50,60,Male,Multiracial or Other,Parent-in-law,0.01419137726736382
+2427,50,60,Male,Multiracial or Other,Roommate,0.1261500645803214
+2428,50,60,Male,Multiracial or Other,Same-sex partner,0.006329926914481947
+2429,50,60,Male,Multiracial or Other,Same-sex spouse,0.004802732552105799
+2430,50,60,Male,Multiracial or Other,Sibling,0.09432096183417349
+2431,50,60,Male,Multiracial or Other,Stepchild,0.009140842406984801
+2432,50,60,Male,NHOPI,Adopted child,0.005263798378717837
+2433,50,60,Male,NHOPI,Biological child,0.19361364370945455
+2434,50,60,Male,NHOPI,Child-in-law,0.024439149141979418
+2435,50,60,Male,NHOPI,Foster child,0.0
+2436,50,60,Male,NHOPI,Grandchild,0.0007213488858002831
+2437,50,60,Male,NHOPI,Opp-sex partner,0.12244501681063973
+2438,50,60,Male,NHOPI,Opp-sex spouse,0.12111454306736569
+2439,50,60,Male,NHOPI,Other nonrelative,0.15662047590411565
+2440,50,60,Male,NHOPI,Other relative,0.07447323850211339
+2441,50,60,Male,NHOPI,Parent,0.046866115621251855
+2442,50,60,Male,NHOPI,Parent-in-law,0.014164935814339759
+2443,50,60,Male,NHOPI,Roommate,0.12590534011025403
+2444,50,60,Male,NHOPI,Same-sex partner,0.0063176004109664
+2445,50,60,Male,NHOPI,Same-sex spouse,0.004793502078285486
+2446,50,60,Male,NHOPI,Sibling,0.09413814948328005
+2447,50,60,Male,NHOPI,Stepchild,0.009123142081435848
+2448,50,60,Male,White,Adopted child,0.007007645702812134
+2449,50,60,Male,White,Biological child,0.2142491119858078
+2450,50,60,Male,White,Child-in-law,0.026225217324715704
+2451,50,60,Male,White,Foster child,0.0
+2452,50,60,Male,White,Grandchild,0.0005741593712930163
+2453,50,60,Male,White,Opp-sex partner,0.13534135011803206
+2454,50,60,Male,White,Opp-sex spouse,0.11441422743971322
+2455,50,60,Male,White,Other nonrelative,0.15427641038658194
+2456,50,60,Male,White,Other relative,0.0620913070372314
+2457,50,60,Male,White,Parent,0.038845102917326686
+2458,50,60,Male,White,Parent-in-law,0.013808250563393527
+2459,50,60,Male,White,Roommate,0.12467331416178927
+2460,50,60,Male,White,Same-sex partner,0.006910965102622897
+2461,50,60,Male,White,Same-sex spouse,0.004699544297214715
+2462,50,60,Male,White,Sibling,0.08654465445353089
+2463,50,60,Male,White,Stepchild,0.010338739137934734
+2464,60,70,Female,AIAN,Adopted child,0.0012215342092248586
+2465,60,70,Female,AIAN,Biological child,0.08014146093201568
+2466,60,70,Female,AIAN,Child-in-law,0.007329369221508775
+2467,60,70,Female,AIAN,Foster child,0.0
+2468,60,70,Female,AIAN,Grandchild,0.0
+2469,60,70,Female,AIAN,Opp-sex partner,0.059066384083454326
+2470,60,70,Female,AIAN,Opp-sex spouse,0.17023407819862413
+2471,60,70,Female,AIAN,Other nonrelative,0.12296997641574399
+2472,60,70,Female,AIAN,Other relative,0.07119230948863634
+2473,60,70,Female,AIAN,Parent,0.2232551084044822
+2474,60,70,Female,AIAN,Parent-in-law,0.08329159801594548
+2475,60,70,Female,AIAN,Roommate,0.07936259755195266
+2476,60,70,Female,AIAN,Same-sex partner,0.0024050651319404994
+2477,60,70,Female,AIAN,Same-sex spouse,0.00448254762268223
+2478,60,70,Female,AIAN,Sibling,0.09303922557973009
+2479,60,70,Female,AIAN,Stepchild,0.0020087451440586566
+2480,60,70,Female,Asian,Adopted child,0.0004059979916794525
+2481,60,70,Female,Asian,Biological child,0.02503502820438707
+2482,60,70,Female,Asian,Child-in-law,0.002402336338677079
+2483,60,70,Female,Asian,Foster child,0.0
+2484,60,70,Female,Asian,Grandchild,0.0
+2485,60,70,Female,Asian,Opp-sex partner,0.018838939901272132
+2486,60,70,Female,Asian,Opp-sex spouse,0.1355577438256519
+2487,60,70,Female,Asian,Other nonrelative,0.1009115597455292
+2488,60,70,Female,Asian,Other relative,0.07359213869413085
+2489,60,70,Female,Asian,Parent,0.3180832959111629
+2490,60,70,Female,Asian,Parent-in-law,0.17207334985358705
+2491,60,70,Female,Asian,Roommate,0.09320558811181616
+2492,60,70,Female,Asian,Same-sex partner,0.0007993649347288774
+2493,60,70,Female,Asian,Same-sex spouse,0.0013680949049854959
+2494,60,70,Female,Asian,Sibling,0.057058920440518926
+2495,60,70,Female,Asian,Stepchild,0.0006676411418728773
+2496,60,70,Female,Black,Adopted child,0.000946517192186912
+2497,60,70,Female,Black,Biological child,0.08584512152572621
+2498,60,70,Female,Black,Child-in-law,0.005667867463654825
+2499,60,70,Female,Black,Foster child,0.0
+2500,60,70,Female,Black,Grandchild,0.0
+2501,60,70,Female,Black,Opp-sex partner,0.03656824059912572
+2502,60,70,Female,Black,Opp-sex spouse,0.14962870557537195
+2503,60,70,Female,Black,Other nonrelative,0.09126497198578391
+2504,60,70,Female,Black,Other relative,0.06446743979589127
+2505,60,70,Female,Black,Parent,0.29828288967527533
+2506,60,70,Female,Black,Parent-in-law,0.05671554827080331
+2507,60,70,Female,Black,Roommate,0.07984356774646288
+2508,60,70,Female,Black,Same-sex partner,0.00186358718283912
+2509,60,70,Female,Black,Same-sex spouse,0.0034322980539368427
+2510,60,70,Female,Black,Sibling,0.12391674999467882
+2511,60,70,Female,Black,Stepchild,0.001556494938262922
+2512,60,70,Female,Latino,Adopted child,0.0008839599834807299
+2513,60,70,Female,Latino,Biological child,0.04484577291659077
+2514,60,70,Female,Latino,Child-in-law,0.005289930644821761
+2515,60,70,Female,Latino,Foster child,0.0
+2516,60,70,Female,Latino,Grandchild,0.0
+2517,60,70,Female,Latino,Opp-sex partner,0.0381477346401691
+2518,60,70,Female,Latino,Opp-sex spouse,0.1665932292512657
+2519,60,70,Female,Latino,Other nonrelative,0.1055912737902513
+2520,60,70,Female,Latino,Other relative,0.11060165077927088
+2521,60,70,Female,Latino,Parent,0.27413449513243393
+2522,60,70,Female,Latino,Parent-in-law,0.11240076489487029
+2523,60,70,Female,Latino,Roommate,0.0637892074825528
+2524,60,70,Female,Latino,Same-sex partner,0.0017404189896976147
+2525,60,70,Female,Latino,Same-sex spouse,0.003193399372407174
+2526,60,70,Female,Latino,Sibling,0.07133453903824181
+2527,60,70,Female,Latino,Stepchild,0.001453623083946089
+2528,60,70,Female,Multiracial or Other,Adopted child,0.0011333988899826924
+2529,60,70,Female,Multiracial or Other,Biological child,0.07418616302190795
+2530,60,70,Female,Multiracial or Other,Child-in-law,0.00679690444112414
+2531,60,70,Female,Multiracial or Other,Foster child,0.0
+2532,60,70,Female,Multiracial or Other,Grandchild,0.0
+2533,60,70,Female,Multiracial or Other,Opp-sex partner,0.0547190259775368
+2534,60,70,Female,Multiracial or Other,Opp-sex spouse,0.10770323336792008
+2535,60,70,Female,Multiracial or Other,Other nonrelative,0.11384184393086902
+2536,60,70,Female,Multiracial or Other,Other relative,0.06588759090141018
+2537,60,70,Female,Multiracial or Other,Parent,0.33085706057103964
+2538,60,70,Female,Multiracial or Other,Parent-in-law,0.077016342694225
+2539,60,70,Female,Multiracial or Other,Roommate,0.07349917896548208
+2540,60,70,Female,Multiracial or Other,Same-sex partner,0.0022315364811659236
+2541,60,70,Female,Multiracial or Other,Same-sex spouse,0.004145973266430671
+2542,60,70,Female,Multiracial or Other,Sibling,0.08611793598293427
+2543,60,70,Female,Multiracial or Other,Stepchild,0.001863811507971539
+2544,60,70,Female,NHOPI,Adopted child,0.0012215342092248586
+2545,60,70,Female,NHOPI,Biological child,0.08014146093201568
+2546,60,70,Female,NHOPI,Child-in-law,0.007329369221508775
+2547,60,70,Female,NHOPI,Foster child,0.0
+2548,60,70,Female,NHOPI,Grandchild,0.0
+2549,60,70,Female,NHOPI,Opp-sex partner,0.059066384083454326
+2550,60,70,Female,NHOPI,Opp-sex spouse,0.17023407819862413
+2551,60,70,Female,NHOPI,Other nonrelative,0.12296997641574399
+2552,60,70,Female,NHOPI,Other relative,0.07119230948863634
+2553,60,70,Female,NHOPI,Parent,0.2232551084044822
+2554,60,70,Female,NHOPI,Parent-in-law,0.08329159801594548
+2555,60,70,Female,NHOPI,Roommate,0.07936259755195266
+2556,60,70,Female,NHOPI,Same-sex partner,0.0024050651319404994
+2557,60,70,Female,NHOPI,Same-sex spouse,0.00448254762268223
+2558,60,70,Female,NHOPI,Sibling,0.09303922557973009
+2559,60,70,Female,NHOPI,Stepchild,0.0020087451440586566
+2560,60,70,Female,White,Adopted child,0.001391858451390178
+2561,60,70,Female,White,Biological child,0.09222632070232784
+2562,60,70,Female,White,Child-in-law,0.009644419940110519
+2563,60,70,Female,White,Foster child,0.0
+2564,60,70,Female,White,Grandchild,0.0
+2565,60,70,Female,White,Opp-sex partner,0.07180942125543772
+2566,60,70,Female,White,Opp-sex spouse,0.17840377748114522
+2567,60,70,Female,White,Other nonrelative,0.13529202254501335
+2568,60,70,Female,White,Other relative,0.0635274228407191
+2569,60,70,Female,White,Parent,0.1879436842566319
+2570,60,70,Female,White,Parent-in-law,0.07296414511059862
+2571,60,70,Female,White,Roommate,0.07970882947042009
+2572,60,70,Female,White,Same-sex partner,0.002740414639848217
+2573,60,70,Female,White,Same-sex spouse,0.005049980349604564
+2574,60,70,Female,White,Sibling,0.09700886905891101
+2575,60,70,Female,White,Stepchild,0.002288833897841626
+2576,60,70,Male,AIAN,Adopted child,0.0026976250505126257
+2577,60,70,Male,AIAN,Biological child,0.09597960838631071
+2578,60,70,Male,AIAN,Child-in-law,0.015835064168191162
+2579,60,70,Male,AIAN,Foster child,0.0
+2580,60,70,Male,AIAN,Grandchild,0.0
+2581,60,70,Male,AIAN,Opp-sex partner,0.09499171906359477
+2582,60,70,Male,AIAN,Opp-sex spouse,0.15872339629577936
+2583,60,70,Male,AIAN,Other nonrelative,0.15291879849230774
+2584,60,70,Male,AIAN,Other relative,0.07690021858459806
+2585,60,70,Male,AIAN,Parent,0.1157110413344405
+2586,60,70,Male,AIAN,Parent-in-law,0.04999503381895161
+2587,60,70,Male,AIAN,Roommate,0.11474901489302947
+2588,60,70,Male,AIAN,Same-sex partner,0.006663548883092427
+2589,60,70,Male,AIAN,Same-sex spouse,0.003353691985880309
+2590,60,70,Male,AIAN,Sibling,0.10704514451580159
+2591,60,70,Male,AIAN,Stepchild,0.004436094527509651
+2592,60,70,Male,Asian,Adopted child,0.001582641216712586
+2593,60,70,Male,Asian,Biological child,0.0566518904940671
+2594,60,70,Male,Asian,Child-in-law,0.009275798977636222
+2595,60,70,Male,Asian,Foster child,0.0
+2596,60,70,Male,Asian,Grandchild,0.0
+2597,60,70,Male,Asian,Opp-sex partner,0.055825362274643534
+2598,60,70,Male,Asian,Opp-sex spouse,0.09257460475653428
+2599,60,70,Male,Asian,Other nonrelative,0.12035922244468465
+2600,60,70,Male,Asian,Other relative,0.10999246044331314
+2601,60,70,Male,Asian,Parent,0.31323771341790213
+2602,60,70,Male,Asian,Parent-in-law,0.10125007772975254
+2603,60,70,Male,Asian,Roommate,0.06753276093605401
+2604,60,70,Male,Asian,Same-sex partner,0.0038878750342187323
+2605,60,70,Male,Asian,Same-sex spouse,0.0019997366367868457
+2606,60,70,Male,Asian,Sibling,0.06322729008132237
+2607,60,70,Male,Asian,Stepchild,0.002602565556371808
+2608,60,70,Male,Black,Adopted child,0.0012934124864104365
+2609,60,70,Male,Black,Biological child,0.09973427896729964
+2610,60,70,Male,Black,Child-in-law,0.007574312019555495
+2611,60,70,Male,Black,Foster child,0.0
+2612,60,70,Male,Black,Grandchild,0.0
+2613,60,70,Male,Black,Opp-sex partner,0.09527311292013851
+2614,60,70,Male,Black,Opp-sex spouse,0.16083888713141387
+2615,60,70,Male,Black,Other nonrelative,0.144117171041242
+2616,60,70,Male,Black,Other relative,0.11870432609609563
+2617,60,70,Male,Black,Parent,0.07468097032939164
+2618,60,70,Male,Black,Parent-in-law,0.024824645239389015
+2619,60,70,Male,Black,Roommate,0.10917971900291489
+2620,60,70,Male,Black,Same-sex partner,0.0031678570686020364
+2621,60,70,Male,Black,Same-sex spouse,0.0016485233462070355
+2622,60,70,Male,Black,Sibling,0.1568358393736871
+2623,60,70,Male,Black,Stepchild,0.0021269449776527174
+2624,60,70,Male,Latino,Adopted child,0.001625048627272613
+2625,60,70,Male,Latino,Biological child,0.069743971359097
+2626,60,70,Male,Latino,Child-in-law,0.009525275000441612
+2627,60,70,Male,Latino,Foster child,0.0
+2628,60,70,Male,Latino,Grandchild,0.0
+2629,60,70,Male,Latino,Opp-sex partner,0.056370483224132996
+2630,60,70,Male,Latino,Opp-sex spouse,0.1073391496962504
+2631,60,70,Male,Latino,Other nonrelative,0.13456660249095567
+2632,60,70,Male,Latino,Other relative,0.10431887059446003
+2633,60,70,Male,Latino,Parent,0.17674183665611914
+2634,60,70,Male,Latino,Parent-in-law,0.09240020120151744
+2635,60,70,Male,Latino,Roommate,0.13151300289267176
+2636,60,70,Male,Latino,Same-sex partner,0.0039934456785424965
+2637,60,70,Male,Latino,Same-sex spouse,0.0020512325487520413
+2638,60,70,Male,Latino,Sibling,0.1071385778427162
+2639,60,70,Male,Latino,Stepchild,0.0026723021870705193
+2640,60,70,Male,Multiracial or Other,Adopted child,0.0026976250505126257
+2641,60,70,Male,Multiracial or Other,Biological child,0.09597960838631071
+2642,60,70,Male,Multiracial or Other,Child-in-law,0.015835064168191162
+2643,60,70,Male,Multiracial or Other,Foster child,0.0
+2644,60,70,Male,Multiracial or Other,Grandchild,0.0
+2645,60,70,Male,Multiracial or Other,Opp-sex partner,0.09499171906359477
+2646,60,70,Male,Multiracial or Other,Opp-sex spouse,0.15872339629577936
+2647,60,70,Male,Multiracial or Other,Other nonrelative,0.15291879849230774
+2648,60,70,Male,Multiracial or Other,Other relative,0.07690021858459806
+2649,60,70,Male,Multiracial or Other,Parent,0.1157110413344405
+2650,60,70,Male,Multiracial or Other,Parent-in-law,0.04999503381895161
+2651,60,70,Male,Multiracial or Other,Roommate,0.11474901489302947
+2652,60,70,Male,Multiracial or Other,Same-sex partner,0.006663548883092427
+2653,60,70,Male,Multiracial or Other,Same-sex spouse,0.003353691985880309
+2654,60,70,Male,Multiracial or Other,Sibling,0.10704514451580159
+2655,60,70,Male,Multiracial or Other,Stepchild,0.004436094527509651
+2656,60,70,Male,NHOPI,Adopted child,0.0026976250505126257
+2657,60,70,Male,NHOPI,Biological child,0.09597960838631071
+2658,60,70,Male,NHOPI,Child-in-law,0.015835064168191162
+2659,60,70,Male,NHOPI,Foster child,0.0
+2660,60,70,Male,NHOPI,Grandchild,0.0
+2661,60,70,Male,NHOPI,Opp-sex partner,0.09499171906359477
+2662,60,70,Male,NHOPI,Opp-sex spouse,0.15872339629577936
+2663,60,70,Male,NHOPI,Other nonrelative,0.15291879849230774
+2664,60,70,Male,NHOPI,Other relative,0.07690021858459806
+2665,60,70,Male,NHOPI,Parent,0.1157110413344405
+2666,60,70,Male,NHOPI,Parent-in-law,0.04999503381895161
+2667,60,70,Male,NHOPI,Roommate,0.11474901489302947
+2668,60,70,Male,NHOPI,Same-sex partner,0.006663548883092427
+2669,60,70,Male,NHOPI,Same-sex spouse,0.003353691985880309
+2670,60,70,Male,NHOPI,Sibling,0.10704514451580159
+2671,60,70,Male,NHOPI,Stepchild,0.004436094527509651
+2672,60,70,Male,White,Adopted child,0.0032156412849093986
+2673,60,70,Male,White,Biological child,0.10844284159585349
+2674,60,70,Male,White,Child-in-law,0.019846630856115034
+2675,60,70,Male,White,Foster child,0.0
+2676,60,70,Male,White,Grandchild,0.0
+2677,60,70,Male,White,Opp-sex partner,0.1094326699619859
+2678,60,70,Male,White,Opp-sex spouse,0.17050831902044192
+2679,60,70,Male,White,Other nonrelative,0.15889578202951385
+2680,60,70,Male,White,Other relative,0.05926858876949638
+2681,60,70,Male,White,Parent,0.09663860466407212
+2682,60,70,Male,White,Parent-in-law,0.04414338925226335
+2683,60,70,Male,White,Roommate,0.11107353610950318
+2684,60,70,Male,White,Same-sex partner,0.008232248633919472
+2685,60,70,Male,White,Same-sex spouse,0.003982743689152207
+2686,60,70,Male,White,Sibling,0.1010310606864782
+2687,60,70,Male,White,Stepchild,0.005287943446295454
+2688,70,80,Female,AIAN,Adopted child,9.048179905433827e-05
+2689,70,80,Female,AIAN,Biological child,0.013670090954833816
+2690,70,80,Female,AIAN,Child-in-law,0.002599843692827986
+2691,70,80,Female,AIAN,Foster child,0.0
+2692,70,80,Female,AIAN,Grandchild,0.0
+2693,70,80,Female,AIAN,Opp-sex partner,0.031065970764954935
+2694,70,80,Female,AIAN,Opp-sex spouse,0.19166440249619815
+2695,70,80,Female,AIAN,Other nonrelative,0.0872974564549045
+2696,70,80,Female,AIAN,Other relative,0.07587307784607043
+2697,70,80,Female,AIAN,Parent,0.34528157106689206
+2698,70,80,Female,AIAN,Parent-in-law,0.14139137836191337
+2699,70,80,Female,AIAN,Roommate,0.042110844437932005
+2700,70,80,Female,AIAN,Same-sex partner,0.0011370546081161843
+2701,70,80,Female,AIAN,Same-sex spouse,0.0031608308469648835
+2702,70,80,Female,AIAN,Sibling,0.06444587247154378
+2703,70,80,Female,AIAN,Stepchild,0.00021112419779345596
+2704,70,80,Female,Asian,Adopted child,5.737514094105262e-05
+2705,70,80,Female,Asian,Biological child,0.008350155769038189
+2706,70,80,Female,Asian,Child-in-law,0.001648579049706245
+2707,70,80,Female,Asian,Foster child,0.0
+2708,70,80,Female,Asian,Grandchild,0.0
+2709,70,80,Female,Asian,Opp-sex partner,0.01928526272623557
+2710,70,80,Female,Asian,Opp-sex spouse,0.08704577227253832
+2711,70,80,Female,Asian,Other nonrelative,0.05372825502767506
+2712,70,80,Female,Asian,Other relative,0.10518597957535504
+2713,70,80,Female,Asian,Parent,0.49720626152638847
+2714,70,80,Female,Asian,Parent-in-law,0.15909482824884785
+2715,70,80,Female,Asian,Roommate,0.026040316516866075
+2716,70,80,Female,Asian,Same-sex partner,0.0007210142711592278
+2717,70,80,Female,Asian,Same-sex spouse,0.0020043049235407714
+2718,70,80,Female,Asian,Sibling,0.03949801962284567
+2719,70,80,Female,Asian,Stepchild,0.0001338753288624561
+2720,70,80,Female,Black,Adopted child,8.263703210571774e-05
+2721,70,80,Female,Black,Biological child,0.012409534478071853
+2722,70,80,Female,Black,Child-in-law,0.0023744373891709564
+2723,70,80,Female,Black,Foster child,0.0
+2724,70,80,Female,Black,Grandchild,0.0
+2725,70,80,Female,Black,Opp-sex partner,0.028274513628994014
+2726,70,80,Female,Black,Opp-sex spouse,0.14764061537092535
+2727,70,80,Female,Black,Other nonrelative,0.07748757905007883
+2728,70,80,Female,Black,Other relative,0.11483804757897415
+2729,70,80,Female,Black,Parent,0.39278157737906094
+2730,70,80,Female,Black,Parent-in-law,0.10894776448157428
+2731,70,80,Female,Black,Roommate,0.038302915592404355
+2732,70,80,Female,Black,Same-sex partner,0.0010384720367951862
+2733,70,80,Female,Black,Same-sex spouse,0.002886786988226406
+2734,70,80,Female,Black,Sibling,0.07274229925203787
+2735,70,80,Female,Black,Stepchild,0.00019281974158000807
+2736,70,80,Female,Latino,Adopted child,6.345675392993812e-05
+2737,70,80,Female,Latino,Biological child,0.009327436090065701
+2738,70,80,Female,Latino,Child-in-law,0.0018233240629202218
+2739,70,80,Female,Latino,Foster child,0.0
+2740,70,80,Female,Latino,Grandchild,0.0
+2741,70,80,Female,Latino,Opp-sex partner,0.0214493777372763
+2742,70,80,Female,Latino,Opp-sex spouse,0.1298300883965826
+2743,70,80,Female,Latino,Other nonrelative,0.0971098182907443
+2744,70,80,Female,Latino,Other relative,0.0919285625944669
+2745,70,80,Female,Latino,Parent,0.3918686049868663
+2746,70,80,Female,Latino,Parent-in-law,0.16887951558415842
+2747,70,80,Female,Latino,Roommate,0.028992477546453236
+2748,70,80,Female,Latino,Same-sex partner,0.0007974398743862224
+2749,70,80,Female,Latino,Same-sex spouse,0.0022167559372858383
+2750,70,80,Female,Latino,Sibling,0.05556507638569405
+2751,70,80,Female,Latino,Stepchild,0.00014806575916985565
+2752,70,80,Female,Multiracial or Other,Adopted child,8.006451934348224e-05
+2753,70,80,Female,Multiracial or Other,Biological child,0.011996160258826532
+2754,70,80,Female,Multiracial or Other,Child-in-law,0.0023005205224693893
+2755,70,80,Female,Multiracial or Other,Foster child,0.0
+2756,70,80,Female,Multiracial or Other,Grandchild,0.0
+2757,70,80,Female,Multiracial or Other,Opp-sex partner,0.027359114356485636
+2758,70,80,Female,Multiracial or Other,Opp-sex spouse,0.16817936874335615
+2759,70,80,Female,Multiracial or Other,Other nonrelative,0.0767347885066299
+2760,70,80,Female,Multiracial or Other,Other relative,0.06662250741948693
+2761,70,80,Female,Multiracial or Other,Parent,0.4250563927660413
+2762,70,80,Female,Multiracial or Other,Parent-in-law,0.12403105877577089
+2763,70,80,Female,Multiracial or Other,Roommate,0.03705418489101978
+2764,70,80,Female,Multiracial or Other,Same-sex partner,0.0010061441264164269
+2765,70,80,Female,Multiracial or Other,Same-sex spouse,0.0027969205423989795
+2766,70,80,Female,Multiracial or Other,Sibling,0.05659595735995308
+2767,70,80,Female,Multiracial or Other,Stepchild,0.00018681721180145854
+2768,70,80,Female,NHOPI,Adopted child,9.048179905433827e-05
+2769,70,80,Female,NHOPI,Biological child,0.013670090954833816
+2770,70,80,Female,NHOPI,Child-in-law,0.002599843692827986
+2771,70,80,Female,NHOPI,Foster child,0.0
+2772,70,80,Female,NHOPI,Grandchild,0.0
+2773,70,80,Female,NHOPI,Opp-sex partner,0.031065970764954935
+2774,70,80,Female,NHOPI,Opp-sex spouse,0.19166440249619815
+2775,70,80,Female,NHOPI,Other nonrelative,0.0872974564549045
+2776,70,80,Female,NHOPI,Other relative,0.07587307784607043
+2777,70,80,Female,NHOPI,Parent,0.34528157106689206
+2778,70,80,Female,NHOPI,Parent-in-law,0.14139137836191337
+2779,70,80,Female,NHOPI,Roommate,0.042110844437932005
+2780,70,80,Female,NHOPI,Same-sex partner,0.0011370546081161843
+2781,70,80,Female,NHOPI,Same-sex spouse,0.0031608308469648835
+2782,70,80,Female,NHOPI,Sibling,0.06444587247154378
+2783,70,80,Female,NHOPI,Stepchild,0.00021112419779345596
+2784,70,80,Female,White,Adopted child,9.335641053486425e-05
+2785,70,80,Female,White,Biological child,0.014703870433630889
+2786,70,80,Female,White,Child-in-law,0.0026824408627017663
+2787,70,80,Female,White,Foster child,0.0
+2788,70,80,Female,White,Grandchild,0.0
+2789,70,80,Female,White,Opp-sex partner,0.039121825106840674
+2790,70,80,Female,White,Opp-sex spouse,0.22056544545816695
+2791,70,80,Female,White,Other nonrelative,0.08510765542441691
+2792,70,80,Female,White,Other relative,0.06550030344350989
+2793,70,80,Female,White,Parent,0.31501221778631155
+2794,70,80,Female,White,Parent-in-law,0.14148254391508228
+2795,70,80,Female,White,Roommate,0.042845246827655684
+2796,70,80,Female,White,Same-sex partner,0.0011731788923881274
+2797,70,80,Female,White,Same-sex spouse,0.0032612506080179245
+2798,70,80,Female,White,Sibling,0.06823283320616111
+2799,70,80,Female,White,Stepchild,0.00021783162458134995
+2800,70,80,Male,AIAN,Adopted child,0.00032783128563629635
+2801,70,80,Male,AIAN,Biological child,0.011841479508373675
+2802,70,80,Male,AIAN,Child-in-law,0.011788047725901595
+2803,70,80,Male,AIAN,Foster child,0.0
+2804,70,80,Male,AIAN,Grandchild,0.0
+2805,70,80,Male,AIAN,Opp-sex partner,0.06789748768218207
+2806,70,80,Male,AIAN,Opp-sex spouse,0.15956220117944725
+2807,70,80,Male,AIAN,Other nonrelative,0.1291892477453645
+2808,70,80,Male,AIAN,Other relative,0.08268743758361392
+2809,70,80,Male,AIAN,Parent,0.2656032348868338
+2810,70,80,Male,AIAN,Parent-in-law,0.1028115712620436
+2811,70,80,Male,AIAN,Roommate,0.07858799120907402
+2812,70,80,Male,AIAN,Same-sex partner,0.004119746489496125
+2813,70,80,Male,AIAN,Same-sex spouse,0.011452239578227953
+2814,70,80,Male,AIAN,Sibling,0.07336654419732043
+2815,70,80,Male,AIAN,Stepchild,0.0007649396664846915
+2816,70,80,Male,Asian,Adopted child,0.0001622533802116703
+2817,70,80,Male,Asian,Biological child,0.006020474334995493
+2818,70,80,Male,Asian,Child-in-law,0.005798823000262611
+2819,70,80,Male,Asian,Foster child,0.0
+2820,70,80,Male,Asian,Grandchild,0.0
+2821,70,80,Male,Asian,Opp-sex partner,0.033746966168210775
+2822,70,80,Male,Asian,Opp-sex spouse,0.0812470147378182
+2823,70,80,Male,Asian,Other nonrelative,0.0646715821371794
+2824,70,80,Male,Asian,Other relative,0.041719957587106796
+2825,70,80,Male,Asian,Parent,0.4896188441009605
+2826,70,80,Male,Asian,Parent-in-law,0.1927972964470307
+2827,70,80,Male,Asian,Roommate,0.03916106015078251
+2828,70,80,Male,Asian,Same-sex partner,0.00203898414465999
+2829,70,80,Male,Asian,Same-sex spouse,0.005668051415394348
+2830,70,80,Male,Asian,Sibling,0.036970101174893015
+2831,70,80,Male,Asian,Stepchild,0.0003785912204938973
+2832,70,80,Male,Black,Adopted child,0.00026316916740977436
+2833,70,80,Male,Black,Biological child,0.009568120786444102
+2834,70,80,Male,Black,Child-in-law,0.009449138780394334
+2835,70,80,Male,Black,Foster child,0.0
+2836,70,80,Male,Black,Grandchild,0.0
+2837,70,80,Male,Black,Opp-sex partner,0.05456079036779166
+2838,70,80,Male,Black,Opp-sex spouse,0.18930362320661218
+2839,70,80,Male,Black,Other nonrelative,0.14551801113186924
+2840,70,80,Male,Black,Other relative,0.06668807540710091
+2841,70,80,Male,Black,Parent,0.1917241801511104
+2842,70,80,Male,Black,Parent-in-law,0.08321822421928014
+2843,70,80,Male,Black,Roommate,0.06319063974868087
+2844,70,80,Male,Black,Same-sex partner,0.003307159203782831
+2845,70,80,Male,Black,Same-sex spouse,0.009193376248181449
+2846,70,80,Male,Black,Sibling,0.17340143019071927
+2847,70,80,Male,Black,Stepchild,0.0006140613906228068
+2848,70,80,Male,Latino,Adopted child,0.00026800405725395566
+2849,70,80,Male,Latino,Biological child,0.009738098301171316
+2850,70,80,Male,Latino,Child-in-law,0.009624023878871192
+2851,70,80,Male,Latino,Foster child,0.0
+2852,70,80,Male,Latino,Grandchild,0.0
+2853,70,80,Male,Latino,Opp-sex partner,0.055557991933795146
+2854,70,80,Male,Latino,Opp-sex spouse,0.12290039846203685
+2855,70,80,Male,Latino,Other nonrelative,0.12913976601337598
+2856,70,80,Male,Latino,Other relative,0.06788434763947931
+2857,70,80,Male,Latino,Parent,0.33293885802301143
+2858,70,80,Male,Latino,Parent-in-law,0.13403588460801
+2859,70,80,Male,Latino,Roommate,0.06434191575184005
+2860,70,80,Male,Latino,Same-sex partner,0.0033679176528247094
+2861,70,80,Male,Latino,Same-sex spouse,0.009362275066738184
+2862,70,80,Male,Latino,Sibling,0.06021517581133268
+2863,70,80,Male,Latino,Stepchild,0.00062534280025923
+2864,70,80,Male,Multiracial or Other,Adopted child,0.00032783128563629635
+2865,70,80,Male,Multiracial or Other,Biological child,0.011841479508373675
+2866,70,80,Male,Multiracial or Other,Child-in-law,0.011788047725901595
+2867,70,80,Male,Multiracial or Other,Foster child,0.0
+2868,70,80,Male,Multiracial or Other,Grandchild,0.0
+2869,70,80,Male,Multiracial or Other,Opp-sex partner,0.06789748768218207
+2870,70,80,Male,Multiracial or Other,Opp-sex spouse,0.15956220117944725
+2871,70,80,Male,Multiracial or Other,Other nonrelative,0.1291892477453645
+2872,70,80,Male,Multiracial or Other,Other relative,0.08268743758361392
+2873,70,80,Male,Multiracial or Other,Parent,0.2656032348868338
+2874,70,80,Male,Multiracial or Other,Parent-in-law,0.1028115712620436
+2875,70,80,Male,Multiracial or Other,Roommate,0.07858799120907402
+2876,70,80,Male,Multiracial or Other,Same-sex partner,0.004119746489496125
+2877,70,80,Male,Multiracial or Other,Same-sex spouse,0.011452239578227953
+2878,70,80,Male,Multiracial or Other,Sibling,0.07336654419732043
+2879,70,80,Male,Multiracial or Other,Stepchild,0.0007649396664846915
+2880,70,80,Male,NHOPI,Adopted child,0.00032783128563629635
+2881,70,80,Male,NHOPI,Biological child,0.011841479508373675
+2882,70,80,Male,NHOPI,Child-in-law,0.011788047725901595
+2883,70,80,Male,NHOPI,Foster child,0.0
+2884,70,80,Male,NHOPI,Grandchild,0.0
+2885,70,80,Male,NHOPI,Opp-sex partner,0.06789748768218207
+2886,70,80,Male,NHOPI,Opp-sex spouse,0.15956220117944725
+2887,70,80,Male,NHOPI,Other nonrelative,0.1291892477453645
+2888,70,80,Male,NHOPI,Other relative,0.08268743758361392
+2889,70,80,Male,NHOPI,Parent,0.2656032348868338
+2890,70,80,Male,NHOPI,Parent-in-law,0.1028115712620436
+2891,70,80,Male,NHOPI,Roommate,0.07858799120907402
+2892,70,80,Male,NHOPI,Same-sex partner,0.004119746489496125
+2893,70,80,Male,NHOPI,Same-sex spouse,0.011452239578227953
+2894,70,80,Male,NHOPI,Sibling,0.07336654419732043
+2895,70,80,Male,NHOPI,Stepchild,0.0007649396664846915
+2896,70,80,Male,White,Adopted child,0.0003318834091138196
+2897,70,80,Male,White,Biological child,0.011983946979250712
+2898,70,80,Male,White,Child-in-law,0.011934616962285299
+2899,70,80,Male,White,Foster child,0.0
+2900,70,80,Male,White,Grandchild,0.0
+2901,70,80,Male,White,Opp-sex partner,0.08506868046235401
+2902,70,80,Male,White,Opp-sex spouse,0.1667510147198776
+2903,70,80,Male,White,Other nonrelative,0.13101920038797396
+2904,70,80,Male,White,Other relative,0.0837276982578651
+2905,70,80,Male,White,Parent,0.24566243767153126
+2906,70,80,Male,White,Parent-in-law,0.09358309403676186
+2907,70,80,Male,White,Roommate,0.08863520033525403
+2908,70,80,Male,White,Same-sex partner,0.004170668174530333
+2909,70,80,Male,White,Same-sex spouse,0.011593793758376098
+2910,70,80,Male,White,Sibling,0.06476337022356028
+2911,70,80,Male,White,Stepchild,0.000774394621265579
+2912,80,100,Female,AIAN,Adopted child,0.0
+2913,80,100,Female,AIAN,Biological child,0.00014143393311564942
+2914,80,100,Female,AIAN,Child-in-law,0.0005455308848746479
+2915,80,100,Female,AIAN,Foster child,0.0
+2916,80,100,Female,AIAN,Grandchild,0.0
+2917,80,100,Female,AIAN,Opp-sex partner,0.00763612558265423
+2918,80,100,Female,AIAN,Opp-sex spouse,0.07734868838229318
+2919,80,100,Female,AIAN,Other nonrelative,0.05549645902239647
+2920,80,100,Female,AIAN,Other relative,0.08471218998607133
+2921,80,100,Female,AIAN,Parent,0.5109127505296375
+2922,80,100,Female,AIAN,Parent-in-law,0.20920153702101976
+2923,80,100,Female,AIAN,Roommate,0.024784054006074283
+2924,80,100,Female,AIAN,Same-sex partner,0.0006061454276384975
+2925,80,100,Female,AIAN,Same-sex spouse,0.0018857857748753259
+2926,80,100,Female,AIAN,Sibling,0.026729299449349188
+2927,80,100,Female,AIAN,Stepchild,0.0
+2928,80,100,Female,Asian,Adopted child,0.0
+2929,80,100,Female,Asian,Biological child,0.00015181819073768884
+2930,80,100,Female,Asian,Child-in-law,0.0005855844499882285
+2931,80,100,Female,Asian,Foster child,0.0
+2932,80,100,Female,Asian,Grandchild,0.0
+2933,80,100,Female,Asian,Opp-sex partner,0.008166244314924732
+2934,80,100,Female,Asian,Opp-sex spouse,0.08302224261764855
+2935,80,100,Female,Asian,Other nonrelative,0.05953913212157731
+2936,80,100,Female,Asian,Other relative,0.09099312771721896
+2937,80,100,Female,Asian,Parent,0.4295615438882787
+2938,80,100,Female,Asian,Parent-in-law,0.27000025024980057
+2939,80,100,Female,Asian,Roommate,0.02660045498408468
+2940,80,100,Female,Asian,Same-sex partner,0.0006506493888758094
+2941,80,100,Female,Asian,Same-sex spouse,0.002024242543169185
+2942,80,100,Female,Asian,Sibling,0.028704709533695597
+2943,80,100,Female,Asian,Stepchild,0.0
+2944,80,100,Female,Black,Adopted child,0.0
+2945,80,100,Female,Black,Biological child,9.201284332207369e-05
+2946,80,100,Female,Black,Child-in-law,0.0003549066813851414
+2947,80,100,Female,Black,Foster child,0.0
+2948,80,100,Female,Black,Grandchild,0.0
+2949,80,100,Female,Black,Opp-sex partner,0.005113181954721569
+2950,80,100,Female,Black,Opp-sex spouse,0.050346930838965145
+2951,80,100,Female,Black,Other nonrelative,0.03625645537843438
+2952,80,100,Female,Black,Other relative,0.15854625600537936
+2953,80,100,Female,Black,Parent,0.5931049235553261
+2954,80,100,Female,Black,Parent-in-law,0.1210969131858462
+2955,80,100,Female,Black,Roommate,0.016139382125483673
+2956,80,100,Female,Black,Same-sex partner,0.00039434075709460155
+2957,80,100,Female,Black,Same-sex spouse,0.0012268379109609826
+2958,80,100,Female,Black,Sibling,0.01732785876308062
+2959,80,100,Female,Black,Stepchild,0.0
+2960,80,100,Female,Latino,Adopted child,0.0
+2961,80,100,Female,Latino,Biological child,0.00011306399954919776
+2962,80,100,Female,Latino,Child-in-law,0.00043610399826119134
+2963,80,100,Female,Latino,Foster child,0.0
+2964,80,100,Female,Latino,Grandchild,0.0
+2965,80,100,Female,Latino,Opp-sex partner,0.0061878392973356445
+2966,80,100,Female,Latino,Opp-sex spouse,0.06184846172517642
+2967,80,100,Female,Latino,Other nonrelative,0.04445182650729788
+2968,80,100,Female,Latino,Other relative,0.09558546118906533
+2969,80,100,Female,Latino,Parent,0.5645193794340105
+2970,80,100,Female,Latino,Parent-in-law,0.1837117116627126
+2971,80,100,Female,Latino,Roommate,0.019821622312096044
+2972,80,100,Female,Latino,Same-sex partner,0.0004845599980679904
+2973,80,100,Female,Latino,Same-sex spouse,0.0015075199939893035
+2974,80,100,Female,Latino,Sibling,0.021332449882437852
+2975,80,100,Female,Latino,Stepchild,0.0
+2976,80,100,Female,Multiracial or Other,Adopted child,0.0
+2977,80,100,Female,Multiracial or Other,Biological child,0.00014143393311564942
+2978,80,100,Female,Multiracial or Other,Child-in-law,0.0005455308848746479
+2979,80,100,Female,Multiracial or Other,Foster child,0.0
+2980,80,100,Female,Multiracial or Other,Grandchild,0.0
+2981,80,100,Female,Multiracial or Other,Opp-sex partner,0.00763612558265423
+2982,80,100,Female,Multiracial or Other,Opp-sex spouse,0.07734868838229318
+2983,80,100,Female,Multiracial or Other,Other nonrelative,0.05549645902239647
+2984,80,100,Female,Multiracial or Other,Other relative,0.08471218998607133
+2985,80,100,Female,Multiracial or Other,Parent,0.5109127505296375
+2986,80,100,Female,Multiracial or Other,Parent-in-law,0.20920153702101976
+2987,80,100,Female,Multiracial or Other,Roommate,0.024784054006074283
+2988,80,100,Female,Multiracial or Other,Same-sex partner,0.0006061454276384975
+2989,80,100,Female,Multiracial or Other,Same-sex spouse,0.0018857857748753259
+2990,80,100,Female,Multiracial or Other,Sibling,0.026729299449349188
+2991,80,100,Female,Multiracial or Other,Stepchild,0.0
+2992,80,100,Female,NHOPI,Adopted child,0.0
+2993,80,100,Female,NHOPI,Biological child,0.00014143393311564942
+2994,80,100,Female,NHOPI,Child-in-law,0.0005455308848746479
+2995,80,100,Female,NHOPI,Foster child,0.0
+2996,80,100,Female,NHOPI,Grandchild,0.0
+2997,80,100,Female,NHOPI,Opp-sex partner,0.00763612558265423
+2998,80,100,Female,NHOPI,Opp-sex spouse,0.07734868838229318
+2999,80,100,Female,NHOPI,Other nonrelative,0.05549645902239647
+3000,80,100,Female,NHOPI,Other relative,0.08471218998607133
+3001,80,100,Female,NHOPI,Parent,0.5109127505296375
+3002,80,100,Female,NHOPI,Parent-in-law,0.20920153702101976
+3003,80,100,Female,NHOPI,Roommate,0.024784054006074283
+3004,80,100,Female,NHOPI,Same-sex partner,0.0006061454276384975
+3005,80,100,Female,NHOPI,Same-sex spouse,0.0018857857748753259
+3006,80,100,Female,NHOPI,Sibling,0.026729299449349188
+3007,80,100,Female,NHOPI,Stepchild,0.0
+3008,80,100,Female,White,Adopted child,0.0
+3009,80,100,Female,White,Biological child,0.00014909427216336761
+3010,80,100,Female,White,Child-in-law,0.0005750779069158465
+3011,80,100,Female,White,Foster child,0.0
+3012,80,100,Female,White,Grandchild,0.0
+3013,80,100,Female,White,Opp-sex partner,0.00840319817526022
+3014,80,100,Female,White,Opp-sex spouse,0.08936236821558326
+3015,80,100,Female,White,Other nonrelative,0.05457097642113413
+3016,80,100,Female,White,Other relative,0.06681699799911853
+3017,80,100,Female,White,Parent,0.5038215121767031
+3018,80,100,Female,White,Parent-in-law,0.2200130882584271
+3019,80,100,Female,White,Roommate,0.026940902932297166
+3020,80,100,Female,White,Same-sex partner,0.0006389754521287184
+3021,80,100,Female,White,Same-sex spouse,0.0019879236288449014
+3022,80,100,Female,White,Sibling,0.02671988456142356
+3023,80,100,Female,White,Stepchild,0.0
+3024,80,100,Male,AIAN,Adopted child,0.0
+3025,80,100,Male,AIAN,Biological child,0.0001931602100001676
+3026,80,100,Male,AIAN,Child-in-law,0.0007450465242863607
+3027,80,100,Male,AIAN,Foster child,0.0
+3028,80,100,Male,AIAN,Grandchild,0.0
+3029,80,100,Male,AIAN,Opp-sex partner,0.03730338460523908
+3030,80,100,Male,AIAN,Opp-sex spouse,0.1104637369706326
+3031,80,100,Male,AIAN,Other nonrelative,0.10390995769224147
+3032,80,100,Male,AIAN,Other relative,0.06177617640303053
+3033,80,100,Male,AIAN,Parent,0.4161488202315144
+3034,80,100,Male,AIAN,Parent-in-law,0.20418376524275503
+3035,80,100,Male,AIAN,Roommate,0.03673108341959393
+3036,80,100,Male,AIAN,Same-sex partner,0.0008278294714292898
+3037,80,100,Male,AIAN,Same-sex spouse,0.0025754694666689014
+3038,80,100,Male,AIAN,Sibling,0.025141569762608222
+3039,80,100,Male,AIAN,Stepchild,0.0
+3040,80,100,Male,Asian,Adopted child,0.0
+3041,80,100,Male,Asian,Biological child,0.00022921529359842474
+3042,80,100,Male,Asian,Child-in-law,0.0008841161324510669
+3043,80,100,Male,Asian,Foster child,0.0
+3044,80,100,Male,Asian,Grandchild,0.0
+3045,80,100,Male,Asian,Opp-sex partner,0.04440176053056679
+3046,80,100,Male,Asian,Opp-sex spouse,0.13110709382085245
+3047,80,100,Male,Asian,Other nonrelative,0.1234473050512029
+3048,80,100,Male,Asian,Other relative,0.07303567412692963
+3049,80,100,Male,Asian,Parent,0.307591416733579
+3050,80,100,Male,Asian,Parent-in-law,0.24188584087792397
+3051,80,100,Male,Asian,Roommate,0.04360178974550497
+3052,80,100,Male,Asian,Same-sex partner,0.0009823512582789633
+3053,80,100,Male,Asian,Same-sex spouse,0.003056203914645664
+3054,80,100,Male,Asian,Sibling,0.029777232514466165
+3055,80,100,Male,Asian,Stepchild,0.0
+3056,80,100,Male,Black,Adopted child,0.0
+3057,80,100,Male,Black,Biological child,0.00016114924952992688
+3058,80,100,Male,Black,Child-in-law,0.0006215756767582895
+3059,80,100,Male,Black,Foster child,0.0
+3060,80,100,Male,Black,Grandchild,0.0
+3061,80,100,Male,Black,Opp-sex partner,0.031001180682639046
+3062,80,100,Male,Black,Opp-sex spouse,0.09213584164065258
+3063,80,100,Male,Black,Other nonrelative,0.08656400033629509
+3064,80,100,Male,Black,Other relative,0.05177963832327559
+3065,80,100,Male,Black,Parent,0.5125298113587046
+3066,80,100,Male,Black,Parent-in-law,0.17071060318641204
+3067,80,100,Male,Black,Roommate,0.030631028801781122
+3068,80,100,Male,Black,Same-sex partner,0.0006906396408425439
+3069,80,100,Male,Black,Same-sex spouse,0.0021486566603990255
+3070,80,100,Male,Black,Sibling,0.02102587444271019
+3071,80,100,Male,Black,Stepchild,0.0
+3072,80,100,Male,Latino,Adopted child,0.0
+3073,80,100,Male,Latino,Biological child,0.00015247784739091325
+3074,80,100,Male,Latino,Child-in-law,0.0005881288399363796
+3075,80,100,Male,Latino,Foster child,0.0
+3076,80,100,Male,Latino,Grandchild,0.0
+3077,80,100,Male,Latino,Opp-sex partner,0.029293982937386984
+3078,80,100,Male,Latino,Opp-sex spouse,0.08717102441904767
+3079,80,100,Male,Latino,Other nonrelative,0.08186517628155587
+3080,80,100,Male,Latino,Other relative,0.049071696734144875
+3081,80,100,Male,Latino,Parent,0.44451989163097927
+3082,80,100,Male,Latino,Parent-in-law,0.2557615321945414
+3083,80,100,Male,Latino,Roommate,0.02897859363361989
+3084,80,100,Male,Latino,Same-sex partner,0.0006534764888181997
+3085,80,100,Male,Latino,Same-sex spouse,0.002033037965212177
+3086,80,100,Male,Latino,Sibling,0.019910981027366305
+3087,80,100,Male,Latino,Stepchild,0.0
+3088,80,100,Male,Multiracial or Other,Adopted child,0.0
+3089,80,100,Male,Multiracial or Other,Biological child,0.0001931602100001676
+3090,80,100,Male,Multiracial or Other,Child-in-law,0.0007450465242863607
+3091,80,100,Male,Multiracial or Other,Foster child,0.0
+3092,80,100,Male,Multiracial or Other,Grandchild,0.0
+3093,80,100,Male,Multiracial or Other,Opp-sex partner,0.03730338460523908
+3094,80,100,Male,Multiracial or Other,Opp-sex spouse,0.1104637369706326
+3095,80,100,Male,Multiracial or Other,Other nonrelative,0.10390995769224147
+3096,80,100,Male,Multiracial or Other,Other relative,0.06177617640303053
+3097,80,100,Male,Multiracial or Other,Parent,0.4161488202315144
+3098,80,100,Male,Multiracial or Other,Parent-in-law,0.20418376524275503
+3099,80,100,Male,Multiracial or Other,Roommate,0.03673108341959393
+3100,80,100,Male,Multiracial or Other,Same-sex partner,0.0008278294714292898
+3101,80,100,Male,Multiracial or Other,Same-sex spouse,0.0025754694666689014
+3102,80,100,Male,Multiracial or Other,Sibling,0.025141569762608222
+3103,80,100,Male,Multiracial or Other,Stepchild,0.0
+3104,80,100,Male,NHOPI,Adopted child,0.0
+3105,80,100,Male,NHOPI,Biological child,0.0001931602100001676
+3106,80,100,Male,NHOPI,Child-in-law,0.0007450465242863607
+3107,80,100,Male,NHOPI,Foster child,0.0
+3108,80,100,Male,NHOPI,Grandchild,0.0
+3109,80,100,Male,NHOPI,Opp-sex partner,0.03730338460523908
+3110,80,100,Male,NHOPI,Opp-sex spouse,0.1104637369706326
+3111,80,100,Male,NHOPI,Other nonrelative,0.10390995769224147
+3112,80,100,Male,NHOPI,Other relative,0.06177617640303053
+3113,80,100,Male,NHOPI,Parent,0.4161488202315144
+3114,80,100,Male,NHOPI,Parent-in-law,0.20418376524275503
+3115,80,100,Male,NHOPI,Roommate,0.03673108341959393
+3116,80,100,Male,NHOPI,Same-sex partner,0.0008278294714292898
+3117,80,100,Male,NHOPI,Same-sex spouse,0.0025754694666689014
+3118,80,100,Male,NHOPI,Sibling,0.025141569762608222
+3119,80,100,Male,NHOPI,Stepchild,0.0
+3120,80,100,Male,White,Adopted child,0.0
+3121,80,100,Male,White,Biological child,0.00025852263527843843
+3122,80,100,Male,White,Child-in-law,0.0009971587360739767
+3123,80,100,Male,White,Foster child,0.0
+3124,80,100,Male,White,Grandchild,0.0
+3125,80,100,Male,White,Opp-sex partner,0.0456547612473163
+3126,80,100,Male,White,Opp-sex spouse,0.12139004740350602
+3127,80,100,Male,White,Other nonrelative,0.1029704061227728
+3128,80,100,Male,White,Other relative,0.057885828972773765
+3129,80,100,Male,White,Parent,0.4128453138240893
+3130,80,100,Male,White,Parent-in-law,0.1904327093059287
+3131,80,100,Male,White,Roommate,0.03372741455153181
+3132,80,100,Male,White,Same-sex partner,0.0011079541511933076
+3133,80,100,Male,White,Same-sex spouse,0.003446968470379179
+3134,80,100,Male,White,Sibling,0.029282914579156414
+3135,80,100,Male,White,Stepchild,0.0
