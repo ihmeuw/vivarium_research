@@ -1374,7 +1374,7 @@ duplicates at this time.
 .. todo::
     - Addition of a noise function for misrecording data (names, addresses, birthdays) 
     - We currently have net undercounts, might want to have omissions and duplicates instead with a noise function  
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
 
 **Limitations and Possible Future Adds** 
 
@@ -1547,7 +1547,7 @@ survey iterations.
     - Possible changes to omission rates by survey 
     - To avoid rerunning, please oversample by 2x 
     - Might include person swaps or duplicates in the noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
 
 **Limitations and Possible Future Adds** 
 
@@ -1679,7 +1679,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
     - Addition of a noise function for misrecording data (names, addresses, birthdays, employer information) 
     - Further refine "sharing" of SSN's with noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) addresses; type of group quarter 
 
 **Limitations and Possible Future Adds** 
 
@@ -1880,7 +1880,7 @@ for who files taxes:
     - Addition of a noise function for misrecording data (names, addresses, birthdays) 
     - Include person swaps or duplicates - especially relevant for taxes if dependents should be double claimed sometimes 
     - Further refine "sharing" of SSN's with noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) address; ; type of group quarter  
 
 **Limitations and Possible Future Adds** 
 
