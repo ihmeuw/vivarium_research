@@ -1393,15 +1393,11 @@ duplicates at this time.
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age or DOB, and person swaps. 
 
-Some errors may be introduced within the simulation, such as 
-duplicate people or swapped people. Others may be introduced 
-at the time of sampling, such as name and address misspellings. 
-
-These are not currently modeled. 
+.. todo::
+    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
+    - We currently have net undercounts, might want to have omissions and duplicates instead with a noise function  
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
 
 **Limitations and Possible Future Adds** 
 
@@ -1443,6 +1439,7 @@ There are two types of sampling plans:
   :widths: 20
   :header-rows: 0
 
+  * - Household number (random indicator which is the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
   * - First name
   * - Middle initial 
@@ -1451,6 +1448,11 @@ There are two types of sampling plans:
   * - DOB 
   * - Home Address 
   * - Home Zip Code 
+
+Here is an example: 
+
+.. image:: survey_example.png
+
 
 **Who to Sample** 
 
@@ -1561,15 +1563,14 @@ survey iterations.
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age, and person swaps. 
 
-Some errors may be introduced within the simulation, such as 
-duplicate people or swapped people. Others may be introduced 
-at the time of sampling, such as name and address misspellings. 
+.. todo::
 
-These are not currently modeled. 
+    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
+    - Possible changes to omission rates by survey 
+    - To avoid rerunning, please oversample by 2x 
+    - Might include person swaps or duplicates in the noise function 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
 
 **Limitations and Possible Future Adds** 
 
@@ -1696,15 +1697,12 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age, and person swaps. 
 
-Some additional tax specific errors include: SSN randomly being filled 
-for those who are missing one, mailing address being different than the 
-home address, and issues with employer names, addresses, or IDs. 
+.. todo::
 
-These are not currently modeled. 
+    - Addition of a noise function for misrecording data (names, addresses, birthdays, employer information) 
+    - Further refine "sharing" of SSN's with noise function 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) addresses; type of group quarter 
 
 **Limitations and Possible Future Adds** 
 
@@ -1899,18 +1897,13 @@ for who files taxes:
 
 
 **Data Errors/Noise** 
-In the future, we will add a noise function designed to replicate 
-missed or incorrect data. This includes incorrect name spelling, 
-addresses, age, and person swaps. 
 
-Some additional tax specific errors include: SSN randomly being filled 
-for those who are missing one, mailing address being different than the 
-home address, and issues with employer names, addresses, or IDs. 
+.. todo::
 
-Furthermore, there are often complications with people being claimed as 
-dependents in different households, or claiming people from group quarters.
-
-These are not currently modeled. 
+    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
+    - Include person swaps or duplicates - especially relevant for taxes if dependents should be double claimed sometimes 
+    - Further refine "sharing" of SSN's with noise function 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) address; ; type of group quarter  
 
 **Limitations and Possible Future Adds** 
 
