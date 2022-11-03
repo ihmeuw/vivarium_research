@@ -94,7 +94,13 @@ are assumed to be adherent. This means that the new adherence rates for simulant
     - Percent of Simulants 
     - Notes
   * - Change from Primary Non-adherence to Adherent 
-    - 53.48%
+    - 46.53% 
+    - 
+  * - Change from Primary Non-adherence to Secondary Non-adherent 
+    - 6.95%
+    - 
+  * - Remain in Primary Non-adherence 
+    - 46.52%
     - 
 
 
@@ -108,7 +114,13 @@ are assumed to be adherent. This means that the new adherence rates for simulant
     - Percent of Simulants 
     - Notes
   * - Change from Primary Non-adherence to Adherent 
-    - 50.625%
+    - 44.55% 
+    - 
+  * - Change from Primary Non-adherence to Secondary Non-adherent 
+    - 6.08%
+    - 
+  * - Remain in Primary Non-adherence 
+    - 49.37%
     - 
 
 
