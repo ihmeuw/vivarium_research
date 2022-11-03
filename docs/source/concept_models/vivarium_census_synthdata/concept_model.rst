@@ -394,7 +394,9 @@ dependent on tax forms to have a guardian. This will
 improve tracking for names, and dependent status on tax forms. 
 
 This person will be listed as ["Guardian"]. By design, most will be 
-parents, but some may be a grandparent or other relative. 
+parents, but some may be a grandparent or other relative. This will 
+include new columns in the state table to indicate the simulant ID of 
+the guardian or guardians associated with that simulant. 
 
 There are two groups that need to have parents/guardians initialized 
 and we will address those separately: children under the age of 18, and 
@@ -1884,16 +1886,13 @@ for who files taxes:
     * The reference person will submit the form, the spouse will be listed as the joint filer. 
     * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
 - All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
-- All simulants eligible to be dependents will be assigned to a relative within the household 
-    * If there someone listed as the dependent's parents and they are filing taxes, they will be assigned to their parent 
-    * If there is not a parent, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
-- A simulant eligble to be a dependent must: 
-    * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
-    * The dependent's income must be below $4300 
-- For simulants outside of the household, they will be claimed as a dependent by their parent until age 19 OR age 24 if they are in group quarters for college 
-    * For simulants born in the simulation, they should have at least one parent/guardian tracked 
-    * For simulants not born in the simulantion, information on initializing parent/guardians is being added shortly 
-    * For simulatns with more than one parent/guardian tracked, assign the dependent randomly 
+- All simulants eligible to be dependents will be claimed. To be eligible, the simulant must either: 
+    * Be under the age of 19 
+    * OR be less than 24, in GQ in college, and earn less than $10,000 
+    * OR be any age, but NOT "housemate/roommate" or "other nonrelative" to whoever is claiming them and earn less than $4300 
+- An eligible simulant will be claimed by: 
+    * The defined "guardian" from initialization OR "parent" from birth (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one)
+    * If there is not a parent/guardian tracked, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
 
 
 **Data Errors/Noise** 
