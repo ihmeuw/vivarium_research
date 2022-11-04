@@ -146,25 +146,22 @@ interventions by subgroups.
 **Baseline** is assumed to have no one enrolled in any intervention. 
 
 **Medical Outreach 50% Coverage** assumes 50% of eligible simulants are enrolled in the outreach intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
-the remainder of the simulation. 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
 
 **Medical Outreach 100% Coverage** assumes all eligible simulants are enrolled in the intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024). 
 
 **Polypill 50% Coverage** assumes 50% of eligible simulants receive the polypill intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
-the remainder of the simulation. 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
 
 **Polypill 100% Coverage** assumes all eligible simulants receive the polypill intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024).
 
 **Lifestyle Modification 50% Coverage** assumes 50% of eligible simulants are enrolled in the lifestyle modification 
-intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% 
-coverage for the remainder of the simulation. 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
 
 **Lifestyle Modification 100% Coverage** assumes all eligible simulants are enrolled in the lifestyle modeification 
-intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024). 
 
 .. _uscvd3.2:
 
@@ -633,7 +630,7 @@ similar and therefore are not modeled individually.
 
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
-initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl_new.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
 For each input draw, a parameter value for efficacy will be selected based on the mean and 
 standard deviation provided in the table above. Assume a normal distribution for the parameter value. 

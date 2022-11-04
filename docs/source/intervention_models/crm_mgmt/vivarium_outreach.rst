@@ -48,10 +48,16 @@ impact of an outreach intervention on risk factors and CVD.
     - 
 
 
-Baseline Coverage Data
-++++++++++++++++++++++++
+Baseline Coverage and Scenarios
++++++++++++++++++++++++++++++++
 
-Assume there is no coverage today. 
+**Baseline** is assumed to have no one enrolled in any intervention. 
+
+**Medical Outreach 50% Coverage** assumes 50% of eligible simulants are enrolled in the outreach intervention. Scales 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
+
+**Medical Outreach 100% Coverage** assumes all eligible simulants are enrolled in the intervention. Scales 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024). 
 
 
 Vivarium Modeling Strategy
@@ -80,42 +86,42 @@ are assumed to be adherent. This means that the new adherence rates for simulant
 
 **LDL-C Treatments**
 
-.. list-table:: Adherence Score Values 
+.. list-table:: Adherence Changes 
   :widths: 10 10 10 
   :header-rows: 1
 
   * - Category
     - Percent of Simulants 
     - Notes
-  * - Primary Non-adherence
-    - 13.37%
-    - [Cheen_2019]_ [Derose-2013]_
-  * - Secondary Non-adherence
-    - 9.75%
+  * - Change from Primary Non-adherence to Adherent 
+    - 46.53% 
     - 
-  * - Adherent
-    - 76.88%
-    - Medicare Part D Data
+  * - Change from Primary Non-adherence to Secondary Non-adherent 
+    - 6.95%
+    - 
+  * - Remain in Primary Non-adherence 
+    - 46.52%
+    - 
 
 
 **Blood Pressure Treatments**
 
-.. list-table:: Adherence Score Values 
+.. list-table:: Adherence Changes 
   :widths: 10 10 10 
   :header-rows: 1
 
   * - Category
     - Percent of Simulants 
     - Notes
-  * - Primary Non-adherence
-    - 8.1%
-    - [Cheen_2019]_ [Derose-2013]_
-  * - Secondary Non-adherence
-    - 10.08%
+  * - Change from Primary Non-adherence to Adherent 
+    - 44.55% 
     - 
-  * - Adherent
-    - 81.82%
-    - Medicare Part D Data
+  * - Change from Primary Non-adherence to Secondary Non-adherent 
+    - 6.08%
+    - 
+  * - Remain in Primary Non-adherence 
+    - 49.37%
+    - 
 
 
 Assumptions and Limitations
