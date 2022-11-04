@@ -384,7 +384,7 @@ I will also verify that the household
 relationships are logical --- every household should have a reference
 person, and at most one spouse/partner.
 
-.. _census_prl_parents_init:
+.. _census_prl_guardians_init:
 
 Initializing Guardian(s) for All Simulants
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -510,6 +510,10 @@ Relationship -- the sim knows a parent-child dyad when the new
 simulant is initialized, and to come up with a consistent value for
 the "reference person" relationship field, we use the following
 mapping:
+
+In addition, tracked mothers will be assigned as "guardians" based on the 
+documentation included :ref:`here
+<census_prl_guardians_init>`) 
 
 +--------------------------------------------------+----------------------------------------+
 | Parent relationship to reference person          | Child relationship to reference person |
@@ -1912,11 +1916,11 @@ for who files taxes:
 - Simulants eligible to be dependents must qualify as ONE of the following: 
     * Be under the age of 19 (less than or equal to 18)
     * OR be less than 24, in GQ in college, and earn less than $10,000 
-    * OR be any age, but be either a relative (NOT "housemate/roommate" or "other nonrelative") of the reference person, or be the reference person and earn less than $4300 
+    * OR be any age, but earn less than $4300 
 - An eligible simulant will be claimed in the below order of options: 
     * The defined "guardian" (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one) 
-    * If there is not a "guardian" they will be randomly assigned to any relative (reference person OR relative of the reference person (NOT roommate or non-relative)) or a relative of themselves (if they are the reference person) 
-    *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's but there might be other cases
+    * Otherwise, if they are the reference person or a relative of the reference person (NOT roommate or non-relative) they will be randomly assigned to someone else in the household who is the reference person or a relative of the reference person (NOT roommate or non-relative) 
+    *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
 
 **Data Errors/Noise** 
