@@ -386,27 +386,31 @@ person, and at most one spouse/partner.
 
 .. _census_prl_parents_init:
 
-Initializing parent/guardian for all simulants
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Initializing Guardian(s) for All Simulants
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We want to initialize all simulants who could be claimed as a 
-dependent on tax forms to have a guardian. This will 
-improve tracking for names, and dependent status on tax forms. 
+To help with the development of observers, it is useful to have 
+simulants receive a "guardian". Please note that this is 
+distinct from "parents" and "tracked mothers". This concept is 
+used in the tax observer to define who claims dependents and is used 
+to create noise in other observers; however it has limited use as 
+an independent concept in the model. There are a maximum of 2 guardians 
+per simulant. 
 
 This person will be listed as ["Guardian"]. By design, most will be 
-parents, but some may be a grandparent or other relative. This will 
-include new columns in the state table to indicate the simulant ID of 
-the guardian or guardians associated with that simulant. 
+parents, but some may be a grandparent or other relative. 
 
-There are two groups that need to have parents/guardians initialized 
+There are two groups that need to have guardians initialized 
 and we will address those separately: children under the age of 18, and 
 those who are below 24 and in GQ for college (defined above). 
 
-Note: "N/A" for the purposes of this simulation means that a parent/
+Note: "N/A" for the purposes of this simulation means that a 
 guardian cannot be identified. For tax purposes, no one will claim 
 this person as a dependent. 
 
 **For simulant under 18 and NOT living in GQ:**
+
+"Assign" in this context means "assign as the guardian". 
 
 - Child is a biological, adopted, foster or step child to reference person 
     * Assign reference person 
@@ -418,23 +422,21 @@ this person as a dependent.
     * If there is not a non-relative of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
     * If there are not any other non-relatives in the house, make "N/A"
 - Child is the reference person 
-    * Assign a parent, if available 
+    * If someone has a defined [parent] relationship, assign them as guardian 
     * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
 
-Once the parent/guardian is assigned, if there is a spouse or unmarried partner 
-for that simulant (reference person and spouse/unmarried partner ONLY), then 
-include both as parents/guardians. Otherwise only include the one as a parent/guardian. 
-
-(note to software engineers: if any of these rules turn out to be surprisingly hard to implement, please be in touch with research --- we have some flexibility in just how we do this!)
+Once a guardian is assigned, if there is a spouse or unmarried partner 
+for the guardian simulant (reference person and spouse/unmarried partner ONLY), then 
+include both as guardians. Otherwise only include the one as a guardian. 
 
 **For a simulant who is below 24 and in GQ at college:**
 
-Simulant will be randomly assigned to a parent/guardian based on the below rules: 
+Simulant will be randomly assigned to a guardian based on the below rules: 
 
-- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state parent/guardians can be ignored. 
+- 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
 - Match to a person 20 to 45 years older than the child 
-- If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a parent of any race
+- If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people source2_ 
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
@@ -451,7 +453,28 @@ Simulant will be randomly assigned to a parent/guardian based on the below rules
 #. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
 #. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
-#. We assign GQ college folks to "parents" instead of "parents/guardians". Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
+#. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
+
+Guardian(s) on Time Steps
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For those who had a guardian initialized at the start of the 
+simulation, that assignment will not change. If the guardian 
+moves, they will remain as the guardian. If they die, the 
+simulant will not have a living guardian. 
+
+A person cannot "age out" of their guardian when they become 
+an adult or have their own children. Therefore it is possible 
+to both HAVE a guardian and BE a guardian. 
+
+However, for simulants born in the simulation, they receive a 
+tracked mother (term for the person that births them, regardless 
+of gender). 
+
+The tracked mother will be assigned as a guardian. In addition, if 
+the tracked mother has a spouse or unmarried partner (reference person 
+and spouse/unmarried partner ONLY), the spouse/partner will 
+also be assigned as a guardian. 
 
 .. _census_prl_fertility:
 
@@ -1886,13 +1909,14 @@ for who files taxes:
     * The reference person will submit the form, the spouse will be listed as the joint filer. 
     * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
 - All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
-- All simulants eligible to be dependents will be claimed. To be eligible, the simulant must either: 
-    * Be under the age of 19 
+- Simulants eligible to be dependents must qualify as ONE of the following: 
+    * Be under the age of 19 (less than or equal to 18)
     * OR be less than 24, in GQ in college, and earn less than $10,000 
-    * OR be any age, but NOT "housemate/roommate" or "other nonrelative" to whoever is claiming them and earn less than $4300 
-- An eligible simulant will be claimed by: 
-    * The defined "guardian" from initialization OR "parent" from birth (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one)
-    * If there is not a parent/guardian tracked, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
+    * OR be any age, but be either a relative (NOT "housemate/roommate" or "other nonrelative") of the reference person, or be the reference person and earn less than $4300 
+- An eligible simulant will be claimed in the below order of options: 
+    * The defined "guardian" (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one) 
+    * If there is not a "guardian" they will be randomly assigned to any relative (reference person OR relative of the reference person (NOT roommate or non-relative)) or a relative of themselves (if they are the reference person) 
+    *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's but there might be other cases
 
 
 **Data Errors/Noise** 
