@@ -107,7 +107,7 @@ Additionally, a study protocol for a prospectiv matched cohort study of acute ma
 
 .. note::
 
-   Given the limitations associated with the cross-sectional nature of the [Abitew-et-al-2020]_ study and the study location of Nigeria rather than Ethiopia for the [Adegok-et-al-2020]_ study, we decided to use the Jimma University study reported in [Stobaugh-et-al-2019]_ as the main data source to inform differential relapse rates by x-factor exposure status in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+   Given the limitations associated with the cross-sectional nature of the [Abitew-et-al-2020]_ study and the study location of Nigeria rather than Ethiopia for the [Adegok-et-al-2020]_ study, we decided to use the study conducted by [Girma-et-al-2022]_ as the main data source to inform differential relapse rates by x-factor exposure status in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
 
 Additional literature on relapse rates
 +++++++++++++++++++++++++++++++++++++++
@@ -123,8 +123,6 @@ Vivarium Modeling Strategy
 
 Wasting Incidence Rates
 ++++++++++++++++++++++++
-
-Given the evidence from the Tsineal et al. 2015/Jimma University study reported in [Stobaugh-et-al-2019]_ that children who have recently recovered from SAM experience future episodes of SAM at ~10 times the rate of children who were at a healthy weight without a recent SAM episode, we selected the following risk effects values. We make the assumption that applied in a compound manner equally from the transition from mild child wasting to MAM (i2) and from MAM to SAM (i1).
 
 .. list-table:: X-factor risk effects
    :header-rows: 1
