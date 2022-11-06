@@ -103,7 +103,7 @@ Zone, Amhara Region, Ethiopia of children discharged from community management o
 
 [Adegok-et-al-2020]_ performed a prospective matched cohort study of SAM recurrance in Northern Nigeria. The study recruited children discharged from OTP treatment and matched community controls and followed them for 6 months. At the end of follow-up 24% of the OTP discharged children relapsed to SAM and 0.6% of community controls developed SAM.
 
-Additionally, a study protocol for a prospectiv matched cohort study of acute malnutrition relapse (similar to [Girma-et-al-2022]_) conducted in Mali, Somalia, and South Sudan has been published by [King-et-al-2022]_, with data collection expected to conclude in January of 2023.
+Additionally, a study protocol for a prospective matched cohort study of acute malnutrition relapse (similar to [Girma-et-al-2022]_) conducted in Mali, Somalia, and South Sudan has been published by [King-et-al-2022]_, with data collection expected to conclude in January of 2023.
 
 .. note::
 
