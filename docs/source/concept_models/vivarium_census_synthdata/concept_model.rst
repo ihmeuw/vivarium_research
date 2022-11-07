@@ -436,7 +436,7 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 
 - 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
 - Match to a person 20 to 45 years older than the child 
-- If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
+- If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people source2_ 
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
@@ -506,14 +506,14 @@ Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 Multiparity --- make twins with probability 4%.  See Section (16) for
 additional details.
 
+In addition, tracked mothers will be assigned as "guardians" based on the 
+documentation included :ref:`here
+<census_prl_guardians_init>`) 
+
 Relationship -- the sim knows a parent-child dyad when the new
 simulant is initialized, and to come up with a consistent value for
 the "reference person" relationship field, we use the following
 mapping:
-
-In addition, tracked mothers will be assigned as "guardians" based on the 
-documentation included :ref:`here
-<census_prl_guardians_init>`) 
 
 +--------------------------------------------------+----------------------------------------+
 | Parent relationship to reference person          | Child relationship to reference person |
