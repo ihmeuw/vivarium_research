@@ -128,7 +128,7 @@ Simulated scenarios will involve some change of coverage/efficacy parameter valu
 
   * - Intervention
     - Baseline
-    - Scale-up target
+    - Target
     - Zero coverage (*)
   * - 1: SAM treatment
     - Baseline values for :math:`C_{SAM}` and :math:`E_{SAM}`, :ref:`defined here <wasting-treatment-baseline-parameters>`
@@ -155,7 +155,13 @@ Simulated scenarios will involve some change of coverage/efficacy parameter valu
 
   (*) in the table above indicates a change from phase I
 
-For scenarios that feature a scale-up of one of the above interventions, intervention parameters should scale between the baseline and the scale-up values according to :ref:`the algorithm described here <ciff_scale_up_algorithm>` that was used for phase I of the acute malnutrition simulation. For scenarios that feature "zero coverage" of one or more of the above interventions, intervention coverage should immediately change from the baseline to the zero coverage values at the date that the intervention scale-up would have occured according to the algorithm linked above. Intervention parameters should remain at the zero coverage values for the remainder of the simulation.
+.. note::
+
+  Model versions 1 through 3.0.1 scaled between the baseline value and the target value accordingly:
+    
+    For scenarios that feature a scale-up of one of the above interventions, intervention parameters should scale between the baseline and the scale-up values according to :ref:`the algorithm described here <ciff_scale_up_algorithm>` that was used for phase I of the acute malnutrition simulation. For scenarios that feature "zero coverage" of one or more of the above interventions, intervention coverage should immediately change from the baseline to the zero coverage values at the date that the intervention scale-up would have occured according to the algorithm linked above. Intervention parameters should remain at the zero coverage values for the remainder of the simulation.
+
+For model versions 3.0.2 onward, intervention parameters should be set to the value specified in the table below at initialization and remain at this level for the duration of the simulation.
 
 .. list-table:: Scenarios
   :header-rows: 1
@@ -176,44 +182,44 @@ For scenarios that feature a scale-up of one of the above interventions, interve
     - Baseline (0%)
     - 
   * - 3: SAM treatment scale-up, baseline MAM treatment
-    - Scale-up to target
+    - Target
     - Baseline
     - Baseline (0%)
     - 
   * - 4: SAM treatment scale-up, zero MAM treatment
-    - Scale-up to target
+    - Target
     - Zero coverage
     - Zero coverage
-    - Note: SAM treatment scale-up should still start from baseline. For this scenario we will primarily assess target coverage impact.
+    - 
   * - 5: MAM treatment scale-up
     - Baseline
-    - Scale-up :math:`C_{MAM}` to baseline :math:`C_{SAM}`. No change in :math:`E_{MAM}` (keep at baseline value).
+    - SAM treatment baseline 
     - Baseline (0%)
-    - 
+    - TODO: confirm implemented change in :math:`E_{MAM}`
   * - 6: Full scale-up to SAM baseline
     - Baseline
-    - Scale-up :math:`C_{MAM}` to baseline :math:`C_{SAM}`. No change in :math:`E_{MAM}` (keep at baseline value).
-    - Scale-up 3a to baseline :math:`C_{SAM}`
-    - 
+    - SAM treatment baseline
+    - 3a to baseline :math:`C_{SAM}`
+    - TODO: confirm implemented change in :math:`E_{MAM}`
   * - 7: MAM and SAM treatment scale-up
-    - Scale-up to target
-    - Scale-up to target
+    - Target
+    - Target
     - Baseline (0%)
     - 
   * - 8: Full scale-up to target
-    - Scale-up to target
-    - Scale-up to target
-    - Scale-up 3a to target
+    - Target
+    - Target
+    - 3a to target
     - 
   * - 9: SQ-LNS to mildly wasted
-    - Scale-up to target
-    - Scale-up to target
-    - Scale-up 3b to target
+    - Target
+    - Target
+    - 3b to target
     - [Second wave that requires x-factor inclusion]
   * - 10: SQ-LNS to SAM and MAM treatment
-    - Scale-up to target
-    - Scale-up to target
-    - Scale-up 3c to target
+    - Target
+    - Target
+    - 3c to target
     - [Second wave that requires x-factor inclusion]
 
 .. note::
