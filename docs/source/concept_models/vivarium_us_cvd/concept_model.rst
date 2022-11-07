@@ -417,7 +417,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - For 50% scenario, assignment is random 
   * - F (polypill intervention scenarios)
     - If simulant is prescribed two drugs at half dose or higher on SBP ladder and is eligible, either 50% or 100% are enrolled depending on scenario  
-    - For 50% scenario, assignment is random 
+    - 
 
 
 **LDL-C Treatment Ramp**
@@ -454,7 +454,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
+    - 
 
 
 
@@ -926,18 +926,18 @@ Code is below for reference
     - `Validation workbook Model 4 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model4_VV.ipynb>`_  Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. It is difficult to properly V&V appointments as everyone gets a follow-up right now, but accounting for that it appeared stable. Check with: [Rodgers_2009]_ 
   * - 5.0
     - Adding medications for SBP 
-    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+    - `Current validation workbook Model 5 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model5_VV.ipynb>`_ V&V was largely successful for Model 5. However, it does appear that we are overmedicating the population, resulting in "curing" SBP over time. The average decrease is ~2-3 mmHg in exposure to SBP by age/sex group. To account for this, we are exploring adding a discontinuation rate to SBP medication. Comparison literature: [Gu_2012]_ [Derington_2020]_ 
   * - 6.0
     - Adding medications for LDL-C 
-    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+    - The validation workbook Model 6 is split into two halves. `Causes and risk effects <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV.ipynb>`_ and `medications and helathcare appointments <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV-Copy1.ipynb>`_. V&V for this model is quite concerning. Exposure to LDL-C changes quite drastically over time, with younger populations increasing in exposure and older populations decreasing. In addition, huge percents of the population are ending up on high intensity statins very quickly, which is not realistic. This will need additional work to fix the LDL-C treatment. Comparison literature: [Gu_2012]_ [Derington_2020]_
   * - 7.0
-    - Adding Heart Failure (might change)
-    -  
-  * - 8.0
     - Adding Outreach Intervention (might change)
     -  
-  * - 9.0
+  * - 8.0
     - Adding Polypill Intervention (might change)
+    -  
+  * - 9.0
+    - Adding Heart Failure (might change)
     -  
   * - 10.0
     - Scenarios 
@@ -1017,7 +1017,7 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - sum of person time on LDL-C medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
   * - Number of interventions 
-    - sum of interventions given 
+    - sum of person-time in interventions 
     - Split by intervention type 
 
 
