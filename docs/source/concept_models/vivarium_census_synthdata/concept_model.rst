@@ -124,22 +124,21 @@ of domestic (:ref:`8 <census_prl_domestic_migration>`) and international (:ref:`
 by household and individual simulants, as well as changes to geographic
 location and household id.
 
-On top of this, we will layer attributes relevant to PRL: mailing
-addresses for each household (11); first, middle, and last names for
-each simulant (12); date of birth (13); intended-to-be-unique
+On top of this, we will layer attributes relevant to PRL: residential (11)
+and mailing addresses for each household (12); first, middle, and last names for
+each simulant (13); date of birth (14); intended-to-be-unique
 identification number modeling SSN that is missing for some and not
-actually unique for others (14); and periodic survey, census, and registry
-observations with realistic noise (15).
+actually unique for others (15); and periodic survey, census, and registry
+observations with realistic noise (16).
 
 Additional components we might want: time-dependent changes to
-observers of sex, based on gender assigned at birth (17); multiple
-households for individuals, leading to double counting in census (18);
-twins and multiparous births in fertility model (16).  To capture an
+observers of sex, based on gender assigned at birth (18); multiple
+households for individuals, leading to double counting in census (19);
+twins and multiparous births in fertility model (17).  To capture an
 additional dimension of heterogeneity and also to enable a periodic
 observer that simulates tax returns we will also need a component
-representing income (19), which will look a lot like a risk factor
+representing income (20), which will look a lot like a risk factor
 exposure.
-
 
 .. _census_prl_components:
 
@@ -674,7 +673,7 @@ When the simulation only includes part of the US, there is no domestic
 migration into or out of this region.
 
 Note that each housing unit in C should be associated with a unique
-mailing address, as described in Section (8).
+mailing address, as described in Section (12).
 
 We might also want to think about the change
 in relationship type when people move, and also change surnames
@@ -927,99 +926,147 @@ Limitations
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
-2.3.7 Component 11: Address
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.7 Component 11: Residential Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each household id should be associated with a residential address, and
-(in a future, more complicated model) when people move, they should
-often move into previously vacated households, so that there are
-distinct households which have had the same residential address at
-different times.  We hypothesize that this will present a relevant
-challenge for PRL methods in practice.
+Background
+^^^^^^^^^^
 
-It is not clear how important it is to have housing unit address
-correspond to geography, and I am trying to gauge how much effort to
-put into having geographically realistic addresses.  This is also a
-sensitive area for privacy and personal information --- even if the
-data is synthetic, it might refer to a real location.  The risks of
-this are unclear.
-
-A generator that can generate street address and zip code is the
-Python package faker: https://github.com/joke2k/faker
-
-.. sourcecode:: python
-
-    # addresses stay with households, can start with faker python library
-    import faker
-    fake = faker.Faker()
-
-    def my_fake_address():
-        orig_address = fake.unique.address()
-        address = orig_address.split('\n')[0]
-        return address
-
-    address_dict = {hh_id: my_fake_address() for hh_id in df_population.household_id.unique()}
-
-    zip_dict = {hh_id: provider.postcode_in_state('FL') for hh_id in df_population.household_id.unique()}
-
-    df_population['address'] = df_population.household_id.map(address_dict)
-    df_population['zip'] = df_population.household_id.map(zip_dict)
+A generator that can generate street address and zip code based on structure alone is the
+Python package faker: https://github.com/joke2k/faker.
 
 Some additional libraries that function similarly to ``faker`` are https://github.com/ropensci/charlatan
-and https://github.com/paulhendricks/generator
+and https://github.com/paulhendricks/generator.
 
-It would be cool to have geographically plausible addresses, for
-example by reversing the process of libpostal, based on the PUMA
-geocoords. (it turns out that libpostal is an address parser, and does
-not map the parsed value to a lat/lon coordinate; an updated attempt
-has packaged libpostal training data conveniently:
-https://github.com/GRAAL-Research/deepparse-address-data)
+In order to make addresses internally consistent, it's necessary to use real address
+data to generate them.
+Such data has already been collected by address parsing libraries such as libpostal.
+For our purposes, we will use the training data of libpostal, as repackaged by the
+deepparse project: https://github.com/GRAAL-Research/deepparse-address-data.
 
-It would be responsible to avoid putting real addresses in the
-synthetic database, perhaps by checking the synthetic data against
-libpostal and rejecting the generated addresses that seem real.
-Census Bureau might appreciate this and might even be able to provide
-USPS data on what real addresses are and we can avoid them (although
-there is an obscure potential privacy issue with that, too!).  We
-could potentially use business addresses as residential addresses as a
-backup plan.
+In order to make addresses consistent with arbitrary geographic entities like PUMAs,
+we'd need to do geocoding/reverse geocoding.
+It is not clear how important it is to have housing unit address
+correspond to geography, so we have not pursued this more complicated approach.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For street addresses, the simulation will use a pre-processed (?) version deepparse address data
+for the US only.
+
+.. todo::
+
+  Document the pre-processing of the deepparse address data.
+
+To make PUMA correspond to ZIP code, we use a crosswalk generated by the
+`GeoCorr 2014 tool <https://mcdc.missouri.edu/applications/geocorr2014.html>`
+which allows us to map 2010 Census-based PUMAs (used for ACS 2016-2020) to
+2010 ZCTAs.
+We use the weighting variable of housing units, which means that the
+calculated crosswalk is the proportion of housing units in each PUMA that
+belong to each ZCTA.
+
+ZCTAs are technically a bit different than ZIP codes.
+For example, they rely on the most common ZIP code within each Census block.
+They may not include some ZIP codes at all if very few addresses use them (e.g.
+ZIP codes that are designated for a single organization). <cite> https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html
+
+Some ZIP codes have changed since 2010, and more will change in the future.
+For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+Each household id should be associated with a residential address.
+
+Whenever a new household is initialized or moves such that it needs a new address,
+the following process will be used to generate one:
+
+#. A street number, street name, and unit will each be independently sampled from the
+   deepparse address data and concatenated with spaces.
+#. Then, a municipality (city) and province (state) **combination** will be sampled
+   from the deepparse address data filtered to the household's US state.
+   The combination will be separated by a comma and appended to the result of the previous step.
+#. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
+   the weights in the :code:`proportion` column, filtered to the household's state and
+   PUMA.
+
+Simulation inputs
+^^^^^^^^^^^^^^^^^
+
+:download:`PUMA to ZIP <puma_to_zip.csv>`
+
+Limitations
+^^^^^^^^^^^
+
+#. We never re-use previously vacated addresses, so there are no
+   distinct households which have had the same residential address at
+   different times.
+   We hypothesize that this will present a relevant
+   challenge for PRL methods in practice.
+#. While the city and state of the address correspond with each other and with the
+   US state attribute of the simulant, and the ZIP code and PUMA attributes
+   correspond with each other, the city does not correspond with the ZIP
+   code and PUMA attributes.
+#. The street name, number, and unit are completely independent of each other
+   and of the city, state, and PUMA.
+   This may lead to some implausible combinations, such as an apartment unit
+   number 500 in a rural town.
+   We think this is not likely to be important to PRL.
+   Making the correspondence better would be difficult without using real addresses,
+   which would present some privacy questions.
+   (If we went this route, perhaps using business addresses would be safer.)
+#. We use 2010 ZIPs for all years of the simulation.
+   We do not simulate any PRL difficulty arising from changing ZIP codes.
+
+**Verification and validation strategy**: to verify this approach, we
+can manually inspect a sample of 10-100 addresses; features to
+examine: does everyone in a household have the same address?  does the
+zip code match the PUMA?  does the street conform to typical
+expectations?
+
+2.3.8 Component 12: Mailing Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
+^^^^^^^^^^
 
 A relevant disparity in linkage accuracy might arise from the
 challenging nature of linking rural addresses; there is some
 information in `this report
 <https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_
 which shows (p. 31) how people in rural counties are hard to match
-(presumably due mostly to address issues).  According to `this page
+(presumably due mostly to address issues).
+According to `this page
 from 2010 Decennial Census
 <https://www.census.gov/newsroom/blogs/director/2010/02/the-four-principal-ways-we-conduct-the-census.html>`_
 there is 9% of the US population where the mail is not delivered to
-the residence uniformly.  For these households, we might want to
+the residence uniformly.
+For these households, we might want to
 capture different addresses in the decennial census simulated output
-and the tax return simulated output.  We can (in a future, more
-complicated model) represent this by maintaining a *mailing address*
+and the tax return simulated output. We can represent this by maintaining a *mailing address*
 for each household that is sometimes different from residential
-address for the household's housing unit.  A simple distinction would
+address for the household's housing unit.
+A simple distinction would
 be to make the mailing address a P.O. Box for 9% of the households,
 although it would be great to have this vary with location, age, sex,
-race/ethnicity, and income.  When households move, this would always
+race/ethnicity, and income.
+When households move, this would always
 result in a new residential address (because of the new housing unit),
 but sometimes not make a change to the PO Box (especially if the move
-was not far, e.g. within the same PUMA).  For our minimal model, we
-will not include this, however, and I will try to get more info about
-how important this challenge to matching is in Census Bureau
-applications.  I believe that I will learn it is important, however,
-because decennial census will know a residential address but IRS and
-Medicare will know a mailing address, which will making linking hard
-for the population without mail delivery to residence.
+was not far, e.g. within the same PUMA).
 
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
 
-**Verification and validation strategy**: to verify this approach, we
-can manually inspect a sample of 10-100 addresses; features to
-examine: does everyone in a household have the same address?  does the
-zip code match the state?  does the street conform to typical
-expectations?
+.. todo::
 
-2.3.8 Component 12: Names
+  We plan to include a mailing address, which can be different from a residential address,
+  in the first full run of the simulation.
+  This needs to be worked out and documented.
+
+2.3.9 Component 13: Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Last names**
@@ -1177,8 +1224,8 @@ names (by race/ethnicity). This likely creates some strange last
 names, so have a careful look at this in validation, and decide if
 refinement is needed.
 
-2.3.9 Component 13: Date of Birth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.10 Component 14: Date of Birth
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To create a date-of-birth column in the synthetic output data, each
 simulant should have a uniformly random date of birth which is
@@ -1209,7 +1256,7 @@ visual inspection and quantitatively using an appropriate statistical
 test (would that be a Chi-Square test?).
 
 
-2.3.10 Component 14: Social Security Number
+2.3.11 Component 15: Social Security Number
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Eventually, this should be missing for some and not actually unique
@@ -1253,7 +1300,7 @@ can manually inspect a sample of 10-100 SSNs, confirm that the
 expected number are missing and that the duplication count follows the
 intended distribution.
 
-2.3.11 Component 15: Periodic observations of attributes through survey, census, and registry
+2.3.12 Component 16: Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Census
@@ -2081,7 +2128,7 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
 
-2.3.12 Twins and multiparous births (16)
+2.3.13 Twins and multiparous births (17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There is a lot we can potentially add to the model to represent how
@@ -2102,15 +2149,15 @@ simulants added to the same household, with the same date of birth,
 and the same last name.
 
 
-2.3.13 Additional Components (17-18)
+2.3.14 Additional Components (18-19)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 We don't need these components for our minimal model, but we might
 eventually want: time-dependent changes to observers of sex, based on
-gender assigned at birth (17); multiple households for individuals,
-leading to double counting in census (18).
+gender assigned at birth (18); multiple households for individuals,
+leading to double counting in census (19).
 
-2.3.14 Income (19)
+2.3.15 Income (20)
 ~~~~~~~~~~~~~~~~~~
 
 Individual income will be implemented as a risk exposure.  Average
@@ -2123,7 +2170,7 @@ that this value is normally distributed, but we could use the GBD
 ensemble risk exposure machinery if that assumption seems like a
 limitation.
 
-2.3.15 Employment (20)
+2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
 
 To represent businesses and employment dynamics we will use another
@@ -2176,7 +2223,7 @@ employer_address and employer_zipcode.
 
 .. _census_prl_perturbation:
 
-2.3.16 Perturbation
+2.3.17 Perturbation
 ~~~~~~~~~~~~~~~~~~~
 
 When we sample from the ACS PUMS to generate new simulants, we are using the
