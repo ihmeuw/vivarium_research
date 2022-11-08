@@ -952,7 +952,7 @@ correspond to geography, so we have not pursued this more complicated approach.
 Data sources and analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For street addresses, the simulation will use a pre-processed (?) version deepparse address data
+For street addresses, the simulation will use a pre-processed (?) version of the deepparse address data
 for the US only.
 
 .. todo::
@@ -970,7 +970,7 @@ belong to each ZCTA.
 ZCTAs are technically a bit different than ZIP codes.
 For example, they rely on the most common ZIP code within each Census block.
 They may not include some ZIP codes at all if very few addresses use them (e.g.
-ZIP codes that are designated for a single organization). <cite> https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html
+ZIP codes that are designated for a single organization). [Census_ZCTAs]_
 
 Some ZIP codes have changed since 2010, and more will change in the future.
 For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
@@ -1018,7 +1018,7 @@ Limitations
    which would present some privacy questions.
    (If we went this route, perhaps using business addresses would be safer.)
 #. We use 2010 ZIPs for all years of the simulation.
-   We do not simulate any PRL difficulty arising from changing ZIP codes.
+   We do not simulate any PRL difficulty arising from ZIP codes changing over time.
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 addresses; features to
@@ -1037,22 +1037,18 @@ challenging nature of linking rural addresses; there is some
 information in `this report
 <https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_
 which shows (p. 31) how people in rural counties are hard to match
-(presumably due mostly to address issues).
-According to `this page
+(presumably due mostly to address issues).  According to `this page
 from 2010 Decennial Census
 <https://www.census.gov/newsroom/blogs/director/2010/02/the-four-principal-ways-we-conduct-the-census.html>`_
 there is 9% of the US population where the mail is not delivered to
-the residence uniformly.
-For these households, we might want to
+the residence uniformly.  For these households, we might want to
 capture different addresses in the decennial census simulated output
 and the tax return simulated output. We can represent this by maintaining a *mailing address*
 for each household that is sometimes different from residential
-address for the household's housing unit.
-A simple distinction would
+address for the household's housing unit.  A simple distinction would
 be to make the mailing address a P.O. Box for 9% of the households,
 although it would be great to have this vary with location, age, sex,
-race/ethnicity, and income.
-When households move, this would always
+race/ethnicity, and income.  When households move, this would always
 result in a new residential address (because of the new housing unit),
 but sometimes not make a change to the PO Box (especially if the move
 was not far, e.g. within the same PUMA).
@@ -2404,3 +2400,5 @@ To Come (TK)
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
+
+.. [Census_ZCTAs] Bureau, US Census. n.d. “ZIP Code Tabulation Areas (ZCTAs)” Census.Gov. Accessed November 8, 2022. https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html.
