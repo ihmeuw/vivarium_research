@@ -1612,6 +1612,119 @@ Note/limitations:
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
 
+Women, Infants, and Children (WIC)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+WIC is a government benefits program designed to support mothers and young 
+children. The main qualifications are income and presence of young children 
+in the home. 
+
+
+**When to Sample** 
+
+- Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Household number (random indicator which is the same for simulants in the same household)
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - DOB 
+  * - Home Address 
+  * - Home Zip Code 
+
+Here is an example: 
+
+.. image:: survey_example.png
+
+**Who to Sample** 
+
+Selection for the observer will be in 2 steps: 
+
+#. Eligibilty for WIC 
+#. Covered by WIC 
+
+Please note that multiple people in the same household can be selected and selection 
+should be independent (e.g., having one child in the household on WIC does not mean a 
+second child is or is not on WIC). Inclusion is at the simulant level. Do not include 
+others in the household on the observer. 
+
+**Eligibility for WIC**
+
+Eligibility for WIC is based on income and age/children in the house. 
+To qualify you must be both: 
+
+- A child under the age of 5 (0-4 years old)
+- OR a tracked mother OR guardian of a child under the age of 1 
+
+And also: 
+
+- Have a total household income less than the limits below (based on number of people in the household)
+
+.. list-table:: Income Maxs  
+  :widths: 10 10
+  :header-rows: 1
+
+  * - Number of people in household 
+    - Maximum Income 
+  * - 1 
+    - $25,142
+  * - 2
+    - $33,874
+  * - 3 
+    - $42,606
+  * - 4 
+    - $51,338
+  * - +1 person 
+    - +$8,732 
+
+Source: [WIC_eligibility]_
+
+**Covered by WIC**
+
+Once someone is found to be eligible, the are then randomly assigned to be 
+covered or not covered by WIC. This is a random sample based on the age of 
+the participant. 
+
+.. list-table:: Coverage Rate by Age 
+  :widths: 10 10 
+  :header-rows: 0
+
+  * - Infants (less than age 1)
+    - 98.4% 
+  * - Children Age 1
+    - 64.9% 
+  * - Children Age 2
+    - 48.5% 
+  * - Children Age 3
+    - 43.7% 
+  * - Children Age 4
+    - 24.5% 
+  * - Tracked Mothers and Guardians with Children 
+    - 84.7% 
+
+Source: [Coverage]_
+
+**Data Errors/Noise** 
+
+.. todo::
+
+    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses
+
+**Limitations and Possible Future Adds** 
+
+#. Currently the model does not track pregnant people, therefore they are not included despite being eligible 
+#. It is unclear if having one child on WIC would increase or decrease the chance of having multiple children on WIC. This could probably be improved upon with more data. 
+#. Selection for WIC is random after eligibility. In practice, lower income individuals are more likely to sign up for WIC and the selection is therefore biased. 
+#. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here 
 
 Taxes
 ^^^^^
@@ -2357,3 +2470,7 @@ To Come (TK)
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
+
+.. [Coverage] https://www.fns.usda.gov/wic/2019-eligibility-coverage-rates 
+
+.. [WIC_eligibility] https://fns-prod.azureedge.us/sites/default/files/resource-files/WIC-Policy-Memo-2022-5-IEGs.pdf#page=3 
