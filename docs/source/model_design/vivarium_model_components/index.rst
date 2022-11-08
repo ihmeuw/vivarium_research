@@ -21,16 +21,16 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_causation_vs_association:
+.. _vivarium_model_components:
 
-=========================================================
-When to Use Causal Effects Versus Non-Causal Associations
-=========================================================
+================================================
+Types of Vivarium model components
+================================================
 
-.. contents::
-   :local:
-   :depth: 1
+The purpose of this page is to describe the general types of model components that comprise Vivarium models. 
 
-.. todo:: 
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-  Bivariate versus multivariate correlations, etc.
+   */index

@@ -21,16 +21,16 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_gbd_disease_state_incompatibilities:
+.. _vivarium_overview:
 
-=========================================================
-Disease State Incompatibilities with GBD 
-=========================================================
+================================================
+Overview of Vivarium Simulation Models
+================================================
 
-.. contents::
-   :local:
-   :depth: 1
+The purpose of this page is to document information relevant to the Vivarium framework from a research perspective. Vivarium framework documentation maintained by the engineers :ref:`can be found elsewhere <software>`.
 
-.. todo:: 
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-  This section
+   */index

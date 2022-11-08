@@ -21,16 +21,16 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_delayed_or_scaled_effects:
+.. _general_reference_materials:
 
-=========================================================
-Delayed or Scaled Up Intervention Effects
-=========================================================
+=====================================================
+Relevant reference material not specific to Vivarium
+=====================================================
 
-.. contents::
-   :local:
-   :depth: 1
+The purpose of this page is to document information that may be relevant to designing Vivarium simulation models as a whole, but is not specific to the Vivarium simulation framework.
 
-.. todo:: 
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-  This section
+   */index

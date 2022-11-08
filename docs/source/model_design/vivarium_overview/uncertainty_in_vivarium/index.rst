@@ -21,11 +21,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_output_tables:
+.. _vivarium_best_practices_uncertainty:
 
-=========================================================
-Output Table Shells
-=========================================================
+========================================
+Uncertainty in Vivarium
+========================================
 
 .. contents::
    :local:
@@ -33,12 +33,11 @@ Output Table Shells
 
 .. todo:: 
 
-  What stratifying variables are needed?
+  Outline types of uncertainty in vivarium simulations:
 
-    - Intervention effect modifiers
+    - Parameter
+    - Heterogeneity
+    - Stochastic
+    - Structural
 
-    - Subgroup analyses
-
-    - Others
-
-  Communicating outputs needed for validation versus results
+  Link to existing page on monte carlo uncertainty
