@@ -21,16 +21,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_model_components:
+.. _risk_mediation:
 
-================================================
-Types of Vivarium model components
-================================================
+=================================
+Risk factor mediation
+=================================
 
-The purpose of this page is to describe the general types of model components that comprise Vivarium models. 
-
-.. toctree::
-   :maxdepth: 1
-   :glob:
-
-   */index
+.. contents::
+  :local:
