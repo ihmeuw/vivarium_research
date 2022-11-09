@@ -146,25 +146,22 @@ interventions by subgroups.
 **Baseline** is assumed to have no one enrolled in any intervention. 
 
 **Medical Outreach 50% Coverage** assumes 50% of eligible simulants are enrolled in the outreach intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
-the remainder of the simulation. 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
 
 **Medical Outreach 100% Coverage** assumes all eligible simulants are enrolled in the intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024). 
 
 **Polypill 50% Coverage** assumes 50% of eligible simulants receive the polypill intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% coverage for 
-the remainder of the simulation. 
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
 
 **Polypill 100% Coverage** assumes all eligible simulants receive the polypill intervention. Scales 
-linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1.
+linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024).
 
 **Lifestyle Modification 50% Coverage** assumes 50% of eligible simulants are enrolled in the lifestyle modification 
-intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 50% at year 1. Remain at 50% 
-coverage for the remainder of the simulation. 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 50% at year 1 (Jan 1, 2024). Remain at 50% coverage for the remainder of the simulation. 
 
 **Lifestyle Modification 100% Coverage** assumes all eligible simulants are enrolled in the lifestyle modeification 
-intervention. Scales linearly over 1 year such that there is 0% coverage at baseline and 100% at year 1. 
+intervention. Scales linearly over 1 year such that there is 0% coverage at baseline (Jan 1, 2023) and 100% at year 1 (Jan 1, 2024). 
 
 .. _uscvd3.2:
 
@@ -420,7 +417,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - For 50% scenario, assignment is random 
   * - F (polypill intervention scenarios)
     - If simulant is prescribed two drugs at half dose or higher on SBP ladder and is eligible, either 50% or 100% are enrolled depending on scenario  
-    - For 50% scenario, assignment is random 
+    - 
 
 
 **LDL-C Treatment Ramp**
@@ -457,7 +454,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - Theraputic inertia should be redrawn everytime a simulant visits the doctor [Morales_2018]_ 
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
-    - For 50% scenario, assignment is random 
+    - 
 
 
 
@@ -633,7 +630,7 @@ similar and therefore are not modeled individually.
 
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
-initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl_new.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
 For each input draw, a parameter value for efficacy will be selected based on the mean and 
 standard deviation provided in the table above. Assume a normal distribution for the parameter value. 
@@ -929,18 +926,18 @@ Code is below for reference
     - `Validation workbook Model 4 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model4_VV.ipynb>`_  Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. It is difficult to properly V&V appointments as everyone gets a follow-up right now, but accounting for that it appeared stable. Check with: [Rodgers_2009]_ 
   * - 5.0
     - Adding medications for SBP 
-    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+    - `Current validation workbook Model 5 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model5_VV.ipynb>`_ V&V was largely successful for Model 5. However, it does appear that we are overmedicating the population, resulting in "curing" SBP over time. The average decrease is ~2-3 mmHg in exposure to SBP by age/sex group. To account for this, we are exploring adding a discontinuation rate to SBP medication. Comparison literature: [Gu_2012]_ [Derington_2020]_ 
   * - 6.0
     - Adding medications for LDL-C 
-    - Planned V&V: rate of medication per simulant with risk factor might increase but should be in line with published data [Gu_2012]_; total percent of population that is medicated; types of medication used over time (combo vs mono) should be stable [Derington_2020]_
+    - The validation workbook Model 6 is split into two halves. `Causes and risk effects <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV.ipynb>`_ and `medications and helathcare appointments <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV-Copy1.ipynb>`_. V&V for this model is quite concerning. Exposure to LDL-C changes quite drastically over time, with younger populations increasing in exposure and older populations decreasing. In addition, huge percents of the population are ending up on high intensity statins very quickly, which is not realistic. This will need additional work to fix the LDL-C treatment. Comparison literature: [Gu_2012]_ [Derington_2020]_
   * - 7.0
-    - Adding Heart Failure (might change)
-    -  
-  * - 8.0
     - Adding Outreach Intervention (might change)
     -  
-  * - 9.0
+  * - 8.0
     - Adding Polypill Intervention (might change)
+    -  
+  * - 9.0
+    - Adding Heart Failure (might change)
     -  
   * - 10.0
     - Scenarios 
@@ -1020,7 +1017,7 @@ Model 3 V&V for the relative risk with angina showed a lot of variability:
     - sum of person time on LDL-C medication 
     - Split by primary non-adherent, secondary non-adherent, and adherent; and split by medication category 
   * - Number of interventions 
-    - sum of interventions given 
+    - sum of person-time in interventions 
     - Split by intervention type 
 
 
