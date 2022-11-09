@@ -478,6 +478,8 @@ in the US, otherwise they were born outside the US.
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
+SSN or ITIN -- see the section for the SSN or ITIN component.
+
 Multiparity --- make twins with probability 4%.  See Section (16) for
 additional details.
 
@@ -530,17 +532,12 @@ mapping:
 
 After initializing a newborn during the sim, we make sure the parent doesn't have
 another child for at least 9 months.
-However, when we initialize a household at the start of the sim that includes a
+Note that when we initialize a household at the start of the sim that includes a
 reference person who likely recently gave birth (e.g. an age 32 female
 reference person and an age 0 biological child) we currently don't
 mark the reference person as having had a child, and so they are
 eligible to give birth again the next month. We could make this more
 complicated in the future.
-
-Simulants initialized at the start of the sim with the "biological son or daughter" or "father or mother"
-relationship to the reference person are assigned the same last name as
-the reference person. Simulants initialized with all other relationships
-have independently sampled last names. We could make this more complicated in the future.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -1209,49 +1206,161 @@ visual inspection and quantitatively using an appropriate statistical
 test (would that be a Chi-Square test?).
 
 
-2.3.10 Component 14: Social Security Number
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.10 Component 14: Social Security Number (SSN) and Individual Taxpayer Identification Number (ITIN)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Eventually, this should be missing for some and not actually unique
+Background
+^^^^^^^^^^
+
+Ideally, SSN should be missing for some and not actually unique
 for others.  I need to do some research into how we represent this,
 and how important it is.  According to `this report
 <https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_,
 "There were 308.7 million persons in the 2010 Census, and 279.2
 million were assigned a protected identification key"
 
-There is a python library that includes a detailed SSN generation
-module:
-https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222
-
-Zeb found some documentation from SSA confirming that ``faker`` has an
-accurate algorithm for SSN generation:
+The ``faker`` Python library has `an SSN generation module <https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222>`_,
+which is based on the SSA's algorithm for generating SSNs: 
 https://www.ssa.gov/kc/SSAFactSheet--IssuingSSNs.pdf
 
-In this investigation, he also noted that before 2011, SSNs
-corresponded to location: https://www.ssa.gov/employer/stateweb.htm We
+Before 2011, SSNs
+corresponded to location: https://www.ssa.gov/employer/stateweb.htm.
+We
 might want to integrate this in the future, although I'm not sure if
 any PRL methods rely on the link between SSN and location.
 
-It is also possible that it will be annoying to Census Bureau if we
-have realistic SSN values, even if they are randomly generated, and we
-may wish to change to numeric format for this to a synthetic SSN-like
-(SSSN) value
+ITINs are used to file taxes by those who do not have an SSN.
+In our simulation, we will initialize them right away;
+this is equivalent to waiting until tax time to initialize them.
 
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-.. sourcecode:: python
+The two non-trivial values are the SSN coverage among the foreign-born population
+of the US, and the SSN coverage among new foreign-born immigrants to the US.
 
-    # give everyone a unique fake ssn (for now)
-    df_population['ssn'] = [fake.unique.ssn() for _ in range(len(df_population))]
+For both calculations, we make the simplifying assumption that undocumented immigrants
+do not have SSNs, and documented immigrants do have SSNs.
+In reality, both parts of this are not quite right:
 
-As a simple mechanism to capture some of the complexity in SSNs, we
-will have 10% of newborn simulants not receive a SSN.  We will also
-have 10% of simulants initialized at the beginning of the simulation
-not receive a SSN.
+* Documented immigrants may not be authorized to work in the US.
+* Undocumented immigrants may have erroneously received an SSN, especially before
+  a reform to the process in 2001.
 
-**Verification and validation strategy**: to verify this approach, we
-can manually inspect a sample of 10-100 SSNs, confirm that the
-expected number are missing and that the duplication count follows the
-intended distribution.
+For population initialization coverage, we use the ACS PUMS to estimate the
+foreign-born population of the United States,
+and a DHS report estimating the undocumented population in 2018. [DHS_Unauthorized]_
+
+For coverage at immigration, we use the ACS PUMS to estimate the
+foreign-born population who entered in the last year,
+and a demographic modeling analysis estimating the yearly inflow of undocumented immigrants
+in 2017 (the most recent year reported).
+We assume that all undocumented immigrants are foreign-born. [Fazel-Zarandi_2018]_
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+At all times in the simulation, all simulants have either an SSN **or** an ITIN.
+A simulant should never have both.
+
+SSN/ITIN should remain constant for a given simulant for their entire lifespan.
+
+We never switch someone who has an ITIN to have an SSN.
+
+.. note::
+
+  An SSN and an ITIN should not be treated like the same thing.
+  Logic in the taxes observer depends on which one a simulant has.
+
+SSN generation
+''''''''''''''
+
+**SSNs should be unique**.
+The same SSN should not be assigned to two different simulants.
+
+Following the `SSA algorithm <https://www.ssa.gov/kc/SSAFactSheet--IssuingSSNs.pdf>`_,
+the steps to generate an SSN are as follows:
+
+#. Generate a zero-padded integer between 1 and 899 (inclusive) to use as
+   the first three digits.
+   666 is not allowed; this can be never sampled or assigned to another arbitrary
+   number.
+#. Append a dash.
+#. Generate a zero-padded integer between 1 and 99 (inclusive) to use as
+   the next two digits.
+#. Append a dash.
+#. Generate a zero-padded integer between 1 and 9999 (inclusive) to use as
+   the last four digits.
+
+ITIN generation
+'''''''''''''''
+
+**ITINs should be unique**.
+The same ITIN should not be assigned to two different simulants.
+
+ITIN generation is similar to SSN generation, using these steps:
+
+#. Generate a zero-padded integer between **900 and 999** (inclusive) to use as
+   the first three digits.
+#. Append a dash.
+#. Generate a zero-padded integer between **50 and 65, 70 and 88, 90 and 92, or 94 and 99** (inclusive) to use as
+   the next two digits.
+#. Append a dash.
+#. Generate a zero-padded integer between 1 and 9999 (inclusive) to use as
+   the last four digits.
+
+Population initialization
+'''''''''''''''''''''''''
+
+At population initialization, we follow these rules to initialize an SSN or ITIN for every simulant:
+
+#. If the ACS person sampled was born in the United States (according to the :code:`NATIVITY` column),
+   the new simulant is assigned an SSN.
+#. Otherwise, the simulant is assigned an SSN **74.3%** of the time, and an ITIN the remainder of the time.
+
+Fertility
+'''''''''
+
+When a simulant is born during the sim to a parent who lives in the United States,
+they are **always** assigned an SSN.
+
+If a simulant is born during the sim to a parent who lives outside the United States,
+they are assigned an SSN **if and only if** their parent has one.
+If their parent has an ITIN (i.e. does not have an SSN), the newborn is assigned an ITIN.
+
+Immigration
+'''''''''''
+
+When new simulants are created via immigration into the US, we follow these rules to initialize an SSN or ITIN for every simulant:
+
+#. If the ACS person sampled was born in the United States (according to the :code:`NATIVITY` column),
+   the new simulant is assigned an SSN.
+#. Otherwise, the simulant is assigned an SSN **62.5%** of the time, and an ITIN the remainder of the time.
+
+Limitations
+^^^^^^^^^^^
+
+#. We assume that all people born in the US have an SSN.
+   In reality, some people, especially the very old, may not have one.
+   We think this is a minor issue.
+#. We do not correlate having an SSN with any other characteristics, e.g. demographics or
+   location, among the foreign-born population.
+#. We calculated SSN assignment percentages at population initialization and immigration
+   using the assumption that all documented immigrants to the US have an SSN, and all undocumented
+   immigrants do not.
+#. We do not allow those with ITINs to switch to SSNs during their life, which can happen in real life
+   at e.g. naturalization.
+#. We never expire ITINs; in real life they expire after three years of non-use.
+   This means tax-to-tax matching with ITINs may be unrealistically easy.
+
+Verification and validation strategy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To verify this approach, we
+can manually inspect a sample of 10-100 SSNs,
+confirm that none are missing among US-born people,
+and confirm that the
+expected number are missing among foreign-born people.
 
 2.3.11 Component 15: Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1656,9 +1765,14 @@ employed, they will need this number to be filled in. If there
 is a person in their household who has a SSN, use this number 
 instead. If there are multiple people with a SSN, choose at random. 
 If there is not a person in their household with a SSN 
-then fill in a random number. This is designed to reflect 
+then fill in a new randomly generated SSN. This is designed to reflect 
 undocumented immigrants who might use fake or no longer 
 valid SSNs to obtain employment. 
+
+.. note::
+
+  Even if the simulant has an ITIN, it should not be included here!
+  Instead, the described process should be used to fill an SSN.
 
 For this observer, a new row should be made for each **employment**, not 
 each simulant. This means that a simulant can have multiple rows of 
@@ -1746,7 +1860,9 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -  
   * - Mailing Address
     -  
-  * - Social Security Number or ITIN
+  * - Social Security Number (if present)
+    -
+  * - ITIN (if present)
     -
   * - Income 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -1774,7 +1890,9 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -  
   * - Mailing Address
     -  
-  * - Social Security Number or ITIN
+  * - Social Security Number (if present)
+    -
+  * - ITIN (if present)
     -
   * - Income 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -1798,23 +1916,16 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Age 
     -  
-  * - Social Security Number or ITIN
+  * - Social Security Number (if present)
+    -
+  * - ITIN (if present)
     -
 
-If a simulant does not have a SSN but is filing taxes, please 
-include an Individual Taxpayer Identification Number (ITIN) instead. 
-This is a 9 digit number that starts with 
-a 9. It can be randomly generated. This applies for all types of 
-filers (primary, joint, dependents). Do **NOT** include the fake 
-SSN from the employer tax forms. 
-
-For now, we will randomly assign ITIN's, but not track them over time. 
-Since this makes them unhelpful for PRL work, we can also allow duplicates. 
-This might be refined later if it is important for PRL. 
-
+If a simulant does not have an SSN,
+do **NOT** include a random SSN.
+Leave the field blank. 
 This is designed to reflect undocumented immigrants, who primarily 
-file taxes under the ITIN system. 
-
+file taxes under the ITIN system.
 
 For this observer, we will have one row for each tax form filed. This 
 can be a bit complicated, so here are some examples: 
@@ -2357,3 +2468,7 @@ To Come (TK)
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
+
+.. [DHS_Unauthorized] Baker, Bryan. January 2021. Estimates of the Unauthorized Immigrant Population Residing in the United States: January 2015-January 2018. `https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf <https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf>`_
+
+.. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
