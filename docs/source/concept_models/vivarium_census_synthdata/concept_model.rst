@@ -1212,9 +1212,25 @@ test (would that be a Chi-Square test?).
 Background
 ^^^^^^^^^^
 
-Ideally, SSN should be missing for some and not actually unique
-for others.  I need to do some research into how we represent this,
-and how important it is.  According to `this report
+Social Security Numbers (SSNs) and Individual Taxpayer Identification Numbers (ITINs)
+are as close as it gets to a unique identifier for individuals in the US.
+One of the key challenges of PRL (in Census Bureau applications) is that these are reported on taxes but not
+in the census itself.
+It is quite a bit easier to link taxes-to-taxes than taxes-to-census because of the
+presence of this identifier.
+
+Not everyone in the United States has an SSN -- only those with legal authorization to
+work in the US.
+People not eligible for an SSN may still file taxes; they will generally use an ITIN to do so.
+In some cases people may file taxes with someone else's SSN (identity theft) or a non-existent
+SSN, but this should be much less common than using the ITIN system.
+
+On the other hand, use of another person's SSN or a non-existent SSN will be fairly common in
+*employer*-filed tax documents.
+We do not handle that in this component; see the tax observer.
+
+SSNs are used to assign protected identification keys (PIKs).
+According to `this report
 <https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_,
 "There were 308.7 million persons in the 2010 Census, and 279.2
 million were assigned a protected identification key"
@@ -1229,9 +1245,11 @@ We
 might want to integrate this in the future, although I'm not sure if
 any PRL methods rely on the link between SSN and location.
 
-ITINs are used to file taxes by those who do not have an SSN.
-In our simulation, we will initialize them right away;
-this is equivalent to waiting until tax time to initialize them.
+.. note::
+
+  In real life, people only get ITINs when they need them, i.e. when they file taxes for the first time.
+  In our simulation, we will initialize them right away and only observe them when the simulant files taxes,
+  which is essentially equivalent.
 
 Data sources and analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -1253,9 +1271,9 @@ and a DHS report estimating the undocumented population in 2018. [DHS_Unauthoriz
 
 For coverage at immigration, we use the ACS PUMS to estimate the
 foreign-born population who entered in the last year,
-and a demographic modeling analysis estimating the yearly inflow of undocumented immigrants
+and a demographic modeling analysis [Fazel-Zarandi_2018]_ estimating the yearly inflow of undocumented immigrants
 in 2017 (the most recent year reported).
-We assume that all undocumented immigrants are foreign-born. [Fazel-Zarandi_2018]_
+We assume that all undocumented immigrants are foreign-born.
 
 Simulation strategy
 ^^^^^^^^^^^^^^^^^^^
@@ -1263,7 +1281,7 @@ Simulation strategy
 At all times in the simulation, all simulants have either an SSN **or** an ITIN.
 A simulant should never have both.
 
-SSN/ITIN should remain constant for a given simulant for their entire lifespan.
+SSN and ITIN should remain constant for a given simulant for their entire lifespan.
 
 We never switch someone who has an ITIN to have an SSN.
 
