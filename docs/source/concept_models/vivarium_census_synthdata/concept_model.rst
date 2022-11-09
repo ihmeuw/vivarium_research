@@ -1958,7 +1958,7 @@ can be a bit complicated, so here are some examples:
 Here is a photo showing how this might look. Note that the three tables 
 are just 2 really long rows for two simulants. 
 
-.. image:: 1044_example.PNG
+.. image:: 1044_example.png
 
 .. todo::
 
