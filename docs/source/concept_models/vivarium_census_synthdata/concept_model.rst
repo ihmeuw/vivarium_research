@@ -2264,6 +2264,8 @@ move into their old address.
 Limitations
 ^^^^^^^^^^^
 
+#. We do not model retirement; simulants are equally likely to be employed
+   no matter their age (as long as they are at least 18).
 #. We only allow each simulant to have one employer at a time.
 #. We do not model most business dynamics, e.g. new businesses opening,
    existing businesses closing, businesses changing their names,
