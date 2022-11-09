@@ -1309,6 +1309,8 @@ ITIN generation is similar to SSN generation, using these steps:
 #. Generate a zero-padded integer between 1 and 9999 (inclusive) to use as
    the last four digits.
 
+Slides from the IRS on the ITIN format can be found here: https://www.irs.gov/pub/irs-pdf/p4757.pdf
+
 Population initialization
 '''''''''''''''''''''''''
 
