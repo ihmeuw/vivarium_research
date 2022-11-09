@@ -1652,7 +1652,7 @@ Selection for the observer will be in 2 steps:
 #. Covered by WIC 
 
 Please note that multiple people in the same household can be selected and selection 
-should be independent. This applied to siblings (e.g., having one child in the household 
+should be independent. This applies to siblings (e.g., having one child in the household 
 on WIC does not mean a second child is or is not on WIC) or parent/child groups (a mother 
 being on WIC does not mean her infant is or is not on WIC). Inclusion is at the simulant 
 level. Do not include others in the household on the observer. 
