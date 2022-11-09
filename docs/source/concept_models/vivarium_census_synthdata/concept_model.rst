@@ -426,6 +426,10 @@ this person as a dependent.
     * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
 
+This can be seen visually in the flowchart below: 
+
+.. image:: minors_gen_pop.drawio.svg 
+
 Once a guardian is assigned, if there is a spouse or unmarried partner 
 for the guardian simulant (reference person and spouse/unmarried partner ONLY), then 
 include both as guardians. Otherwise only include the one as a guardian. 
