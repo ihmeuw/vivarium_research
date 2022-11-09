@@ -1652,9 +1652,10 @@ Selection for the observer will be in 2 steps:
 #. Covered by WIC 
 
 Please note that multiple people in the same household can be selected and selection 
-should be independent (e.g., having one child in the household on WIC does not mean a 
-second child is or is not on WIC). Inclusion is at the simulant level. Do not include 
-others in the household on the observer. 
+should be independent. This applied to siblings (e.g., having one child in the household 
+on WIC does not mean a second child is or is not on WIC) or parent/child groups (a mother 
+being on WIC does not mean her infant is or is not on WIC). Inclusion is at the simulant 
+level. Do not include others in the household on the observer. 
 
 **Eligibility for WIC**
 
@@ -1666,30 +1667,18 @@ To qualify you must be both:
 
 And also: 
 
-- Have a total household income less than the limits below (based on number of people in the household)
+- Have a total household income less than the limit below (based on number of people in the household)
 
-.. list-table:: Income Maxs  
-  :widths: 10 10
-  :header-rows: 1
+Max income = $16,410 + ($8,732 * number of people in the household) 
 
-  * - Number of people in household 
-    - Maximum Income 
-  * - 1 
-    - $25,142
-  * - 2
-    - $33,874
-  * - 3 
-    - $42,606
-  * - 4 
-    - $51,338
-  * - +1 person 
-    - +$8,732 
+For example, a one person household would have a maximum income of $25,142 and 
+a two person household would have a maximum income of $33,874. 
 
 Source: [WIC_eligibility]_
 
 **Covered by WIC**
 
-Once someone is found to be eligible, the are then randomly assigned to be 
+Once someone is found to be eligible, they are then randomly assigned to be 
 covered or not covered by WIC. This is a random sample based on the age of 
 the participant. 
 
@@ -1722,9 +1711,10 @@ Source: [Coverage]_
 **Limitations and Possible Future Adds** 
 
 #. Currently the model does not track pregnant people, therefore they are not included despite being eligible 
-#. It is unclear if having one child on WIC would increase or decrease the chance of having multiple children on WIC. This could probably be improved upon with more data. 
+#. It is unclear if having one family member on WIC would increase or decrease the chance of having multiple family members on WIC. This could probably be improved upon with more data. 
 #. Selection for WIC is random after eligibility. In practice, lower income individuals are more likely to sign up for WIC and the selection is therefore biased. 
 #. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here 
+#. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life 
 
 Taxes
 ^^^^^
