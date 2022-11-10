@@ -1651,11 +1651,21 @@ Selection for the observer will be in 2 steps:
 #. Eligibilty for WIC 
 #. Covered by WIC 
 
-Please note that multiple people in the same household can be selected and selection 
-should be independent. This applies to siblings (e.g., having one child in the household 
-on WIC does not mean a second child is or is not on WIC) or parent/child groups (a mother 
-being on WIC does not mean her infant is or is not on WIC). Inclusion is at the simulant 
-level. Do not include others in the household on the observer. 
+Please note that multiple people in the same household can be selected. Selection is 
+usually independent, with one exception. If a tracked mother or guardian is selected 
+for WIC benefits, their infant must also be enrolled in WIC. In all other cases, 
+selection is independent. 
+
+The main examples of independence are siblings (e.g., having one child in the household 
+on WIC does not mean a second child is or is not on WIC) and infant to tracked mother or 
+guardian (an infant being on WIC does not mean their tracked mother or guardian is or is 
+not on WIC). Inclusion is at the simulant level. Do not include others in the household 
+on the observer. 
+
+To account for these interdependencies, it will likely to easiest to first select 
+tracked mothers/guardians on WIC and then assign their infants to WIC. After, additional 
+infants can be selected to reach the higher coverage rate for this group. Other children 
+can be selected independently.  
 
 **Eligibility for WIC**
 
