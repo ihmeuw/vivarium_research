@@ -6,7 +6,7 @@ Heart Failure
 
 In the GBD, heart failure is considered an impairment and the fatal and nonfatal burden is 
 assigned to the causes identified as etiologies for the impairment. For this project, we 
-are modeling HF due to :ref:`ischemic heart disease <2019_cause_ihd>` as part of the cause. 
+are modeling HF due to :ref:`ischemic heart disease <2019_cause_ihd>` as part of the IHD cause. 
 The remainder of heart failure is modeled as a separate "cause". This document describes the 
 overall heart failure modeling process and provides details for the simulation inputs for 
 the residual category. Residual in this case refers to all heart failure that is NOT a 
