@@ -256,7 +256,7 @@ States Data
      - 
    * - HF
      - prevalence
-     - :math:`\sum\limits_{s\in sequelae} \text{prevalence}_s`
+     - :math:`\text{prevalence_m2412} \times \text{propHF_RESID}`
      - Proportion of prevalence from the overall HF envelope due to the residual category
    * - HF
      - emr
@@ -264,7 +264,7 @@ States Data
      - Excess mortality rate of the overall HF envelope
    * - HF
      - disabilty weights
-     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{s\in sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s` 
+     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{r\in rei_groups} \text{disability_weight}_r \cdot \text{prevalence}_r` 
      - 
 
 Transition Data
@@ -312,26 +312,26 @@ Data Sources
      - demography
      - Mid-year population for given age/sex/year/location
      - 
-   * - sequelae_RESID
+   * - rei_RESID
      - gbd_mapping
-     - List of HF sequelae for all etiologies other than IHD
+     - List of HF rei groups 
      - 
-   * - prevalence_s{`sid`}
+   * - prevalence_r{`rei_id`}
      - como
-     - Prevalence of sequela with id `sid`
+     - Prevalence of rei_ids: 379, 217, 218, 219
      - 
-   * - disability_weight_s{`sid`}
+   * - disability_weight_r{`rei_id`}
      - YLD appendix
-     - Disability weight of sequela with id `sid`
+     - Disability weight of rei_ids: 379, 217, 218, 219 
      - 
    * - emr_m2412
      - dismod-mr 2.1
      - excess mortality rate of heart failure
      - This is the EMR value for the overall HF envelope
-   * - sequelae
-     - sequelae definition
-     - List of HF sequelae for all etiologies other than IHD 
-     - In /share/scratch/etc 
+   * - Rei IDs 
+     - Impariment definition
+     - LList of HF rei’s for the combined etiologies 
+     - 379, 217, 218, 219 for treated, mild, moderate, and severe 
 
 
 Validation Criteria
