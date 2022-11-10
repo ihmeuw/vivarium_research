@@ -1653,8 +1653,8 @@ Selection for the observer will be in 2 steps:
 
 Please note that multiple people in the same household can be selected. Selection is 
 usually independent, with one exception. If a tracked mother or guardian is selected 
-for WIC benefits, their infant must also be enrolled in WIC. In all other cases, 
-selection is independent. 
+for WIC benefits, their infant (infant is defined as a less than 1 year old child) 
+must also be enrolled in WIC. In all other cases, selection is independent. 
 
 The main examples of independence are siblings (e.g., having one child in the household 
 on WIC does not mean a second child is or is not on WIC) and infant to tracked mother or 
