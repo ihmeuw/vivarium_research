@@ -93,6 +93,8 @@ Some parameter values may not be independent from other parameter values. Exampl
 
 - Varying parameter values for younger age groups may have implications for older age groups that could cause lack of validation with respect to these parameters in the older age groups.
 
+- Varying incidence and/or remission rates may make them no longer compatible with prevalence (and other possibilities for similar discontinuities)
+
 There are not guarantees that the simulation results using the average value for all parameters approximates the average simulation result across many randomly sampled draws.
 
 Selecting the "average" value for a parameter may be challenging in the case of skewed parameter distributions such as relative risks where the mean and median values differ.
