@@ -1639,10 +1639,11 @@ in the home.
   * - DOB 
   * - Home Address 
   * - Home Zip Code 
+  * - Race/ethnicity 
 
 Here is an example: 
 
-.. image:: survey_example.png
+.. image:: WIC_example.png
 
 **Who to Sample** 
 
@@ -1662,10 +1663,16 @@ guardian (an infant being on WIC does not mean their tracked mother or guardian 
 not on WIC). Inclusion is at the simulant level. Do not include others in the household 
 on the observer. 
 
-To account for these interdependencies, it will likely to easiest to first select 
-tracked mothers/guardians on WIC and then assign their infants to WIC. After, additional 
-infants can be selected to reach the higher coverage rate for this group. Other children 
-can be selected independently.  
+To account for these interdependencies, please follow the below steps: 
+
+#. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity 
+#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare by possible to have multiple infants for the same tracked mother or guardian) 
+#. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
+#. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met 
+
+Note: for Hispanic simulants, the rate of tracked mothers/guardians is higher than infants. 
+For this group, you can select the infants associated with the tracked mothers/guardians and 
+stop. This will leads to overselecting infants, which is known and okay. 
 
 **Eligibility for WIC**
 
@@ -1692,22 +1699,45 @@ Once someone is found to be eligible, they are then randomly assigned to be
 covered or not covered by WIC. This is a random sample based on the age of 
 the participant. 
 
-.. list-table:: Coverage Rate by Age 
-  :widths: 10 10 
-  :header-rows: 0
+.. list-table:: Coverage Rate by Age and Race/Ethnicity
+  :widths: 10 10 10 10 10 
+  :header-rows: 1
 
+  * - Age Bucket 
+    - Hispanic 
+    - Black only (Not hispanic)
+    - White only (Not hispanic)
+    - Other (include all other race groups here)
   * - Infants (less than age 1)
     - 98.4% 
+    - 98.4% 
+    - 77.98%
+    - 98.4% 
   * - Children Age 1
-    - 64.9% 
+    - 76.1%
+    - 69.6% 
+    - 51.4% 
+    - 67.6% 
   * - Children Age 2
-    - 48.5% 
+    - 56.8% 
+    - 52.0% 
+    - 38.4% 
+    - 50.5% 
   * - Children Age 3
-    - 43.7% 
+    - 51.2% 
+    - 46.9% 
+    - 34.6% 
+    - 45.5% 
   * - Children Age 4
-    - 24.5% 
+    - 28.7% 
+    - 26.3% 
+    - 19.4% 
+    - 25.5% 
   * - Tracked Mothers and Guardians with Children 
-    - 84.7% 
+    - 99.3% 
+    - 90.9% 
+    - 67.1% 
+    - 88.2% 
 
 Source: [Coverage]_
 
