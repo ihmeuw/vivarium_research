@@ -34,6 +34,14 @@ Custom parameterized draws
    :local:
    :depth: 2
 
+.. note::
+
+  The status of this proposed vivarium feature as of November 2022 is as follows:
+
+    - Shared proposal at a research team meeting 
+    - Researchers are planning to implement a test run with a custom-built artifact to see how it affects cause model V&V for the wasting paper model. Will share and link to results when available.
+    - Pending results of the above test, will revisit plan for engineering implementation.
+
 Motivation behind custom parameterized draw feature
 ---------------------------------------------------
 
