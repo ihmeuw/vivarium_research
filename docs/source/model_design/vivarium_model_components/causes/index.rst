@@ -14,7 +14,7 @@ This chapter does not include :ref:`PAF of 1 <models_risk_attributable_cause>`
 causes, like
 :ref:`protein-energy malnutrition <2017_cause_pem>`. It also does not include
 things that are sometimes considered diseases but are deemed
-:ref:`risk factors <models_risk>` by the :term:`Global Burden of Disease`
+:ref:`risk factors <models_risk_factors>` by the :term:`Global Burden of Disease`
 (GBD), such as :ref:`obesity <2017_risk_bmi_adults>`.
 :ref:`Unsafe water <2017_risk_unsafe_water>` would not fit into the cause model
 paradigm either---it is a cause of
