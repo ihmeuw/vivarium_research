@@ -126,9 +126,9 @@ location and household id.
 
 On top of this, we will layer attributes relevant to PRL: mailing
 addresses for each household (11); first, middle, and last names for
-each simulant (12); date of birth (13); intended-to-be-unique
-identification number modeling SSN that is missing for some and not
-actually unique for others (14); and periodic survey, census, and registry
+each simulant (12); date of birth (13);
+Social Security Number and Individual Taxpayer Identification Number (14);
+and periodic survey, census, and registry
 observations with realistic noise (15).
 
 Additional components we might want: time-dependent changes to
