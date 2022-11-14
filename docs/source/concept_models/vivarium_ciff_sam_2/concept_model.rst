@@ -193,14 +193,14 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - 
   * - 5: MAM treatment scale-up
     - Baseline
-    - SAM treatment baseline 
+    - :math:`C_{MAM}` to baseline :math:`C_{SAM}`, :math:`E_{MAM}` to target :math:`E_{MAM}` 
     - Baseline (0%)
-    - TODO: confirm implemented change in :math:`E_{MAM}`
+    - 
   * - 6: Full scale-up to SAM baseline
     - Baseline
-    - SAM treatment baseline
+    - :math:`C_{MAM}` to baseline :math:`C_{SAM}`, :math:`E_{MAM}` to target :math:`E_{MAM}`
     - 3a to baseline :math:`C_{SAM}`
-    - TODO: confirm implemented change in :math:`E_{MAM}`
+    - 
   * - 7: MAM and SAM treatment scale-up
     - Target
     - Target
@@ -445,18 +445,12 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - 50 draws, 200,000 population size
     - Count data results stratified by random seed for optimization
     - No x-factor component. V&V zero coverage implementation before moving on.
-  * - 3.0.1: Additional seeds for subset of draws and with mortality hazard observer
-    - Rerun model 3.0 for a subset of draws with different random seeds and same population size, plus model 3.0 bugfixes
+  * - 3.0.1: Updates and larger population size
+    - Model 3.0 bugfixes, implement mortality hazard rate observer, remove intervention scale-up, subset of draws and larger population size
     - 4, 7, 8
-    - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 200,000 population size (using different random seeds than model 3.0 so that results can be combined with like draws from model 3.0 for a total population size of 400,000)
+    - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
     - Count data results stratified by random seed for optimization
     - No x-factor component. V&V zero coverage implementation before moving on    
-  * - 3.0.2: Remove intervention scale-up
-    - 
-    - 4, 7, 8
-    - Set intervention parameters to scenario-specific target/ending values at simulation initialization and hold constant for duration of simulation. Draws and population size TBD.
-    - Count data results stratified by random seed for optimization
-    - No x-factor component. V&V intervention coverage change before moving on. 
   * - 3.1: All wave 1 scenarios
     - Full wave 1 scenarios
     - 1 through 8
@@ -480,7 +474,7 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
        * `Intervention scale-ups look as expected <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_2.0/intervention_coverage_verification.ipynb>`_
        * Cap of 2 years applied to entire simulation rather than to the SQ-LNS intervention eligibility
    * - 3.0
-     - Description
+     - Subset of scenarios stratified by random seed
      - * Simulation age end parameter fixed (now equal to 5 years instead of 2 years as desired)
        * SQ-LNS `coverage <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/intervention_coverage_verification.ipynb>`_ and `effects <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/intervention_effect_verification.ipynb>`_ in the 2_to_4 age group (this age group should be ineligible for SQ-LNS)
        * `Scenario 4 has baseline levels of MAM treatment coverage rather than zero percent coverage as desired <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/intervention_coverage_verification.ipynb>`_
@@ -497,18 +491,18 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
    * - Simulants over two years of age covered by SQ-LNS intervention
      - There has been confusion over the "age end" parameter. SQ-LNS eligibility should end at two years of age. Simulation age end parameter was set to 2 years instead of SQ-LNS eligibility parameter. Simulation age end parameter was fixed to be 5 years again, but SQ-LNS eligibility age end has not been updated to 2 years.
      - Hussain to implement update
-     - Next model run
+     - For next model run (3.0.1)
    * - MAM treatment coverage equal to baseline rather than zero percent in scenario 4
      - Unknown
      - Hussain to investigate and update
-     - For next model run
+     - For next model run (3.0.1)
    * - Simulation population size appears to be too small to observe deaths averted without substantial stochastic uncertainty
      - Differences in deaths between scenarios are rare events and subject to stochastic uncertainty, especially at small population sizes
      - #. May not report deaths as an outcome for paper since primary outcome is incident wasting cases
        #. Consider removing intervention coverage *scale-up* and just report differences between scenarios at taret coverage 
        #. Implement mortality hazard rate observer to measure *expected* rather than *observed* differences in deaths between scenarios (this method may be useful for other simulations in the future as well)
        #. Run subset of draws for larger population size in attempt to observe point of stability
-     - Implement points 3 and 4 for model 3.0.1. Implement point 2 for model 3.0.2.
+     - Implement points 2, 3, and 4 for model 3.0.1
 
 Assumptions and Limitations
 ----------------------------

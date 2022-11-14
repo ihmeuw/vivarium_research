@@ -124,22 +124,21 @@ of domestic (:ref:`8 <census_prl_domestic_migration>`) and international (:ref:`
 by household and individual simulants, as well as changes to geographic
 location and household id.
 
-On top of this, we will layer attributes relevant to PRL: mailing
-addresses for each household (11); first, middle, and last names for
-each simulant (12); date of birth (13);
-Social Security Number and Individual Taxpayer Identification Number (14);
+On top of this, we will layer attributes relevant to PRL: residential (11)
+and mailing addresses for each household (12); first, middle, and last names for
+each simulant (13); date of birth (14);
+Social Security Number and Individual Taxpayer Identification Number (15);
 and periodic survey, census, and registry
-observations with realistic noise (15).
+observations with realistic noise (16).
 
 Additional components we might want: time-dependent changes to
-observers of sex, based on gender assigned at birth (17); multiple
-households for individuals, leading to double counting in census (18);
-twins and multiparous births in fertility model (16).  To capture an
+observers of sex, based on gender assigned at birth (18); multiple
+households for individuals, leading to double counting in census (19);
+twins and multiparous births in fertility model (17).  To capture an
 additional dimension of heterogeneity and also to enable a periodic
 observer that simulates tax returns we will also need a component
-representing income (19), which will look a lot like a risk factor
+representing income (20), which will look a lot like a risk factor
 exposure.
-
 
 .. _census_prl_components:
 
@@ -384,27 +383,33 @@ I will also verify that the household
 relationships are logical --- every household should have a reference
 person, and at most one spouse/partner.
 
-.. _census_prl_parents_init:
+.. _census_prl_guardians_init:
 
-Initializing parent/guardian for all simulants
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Initializing Guardian(s) for All Simulants
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-We want to initialize all simulants who could be claimed as a 
-dependent on tax forms to have a guardian. This will 
-improve tracking for names, and dependent status on tax forms. 
+To help with the development of observers, it is useful to have 
+simulants receive a "guardian". Please note that this is 
+distinct from "parents" and "tracked mothers". This concept is 
+used in the tax observer to define who claims dependents and is used 
+to create noise in other observers; however it has limited use as 
+an independent concept in the model. There are a maximum of 2 guardians 
+per simulant. 
 
 This person will be listed as ["Guardian"]. By design, most will be 
 parents, but some may be a grandparent or other relative. 
 
-There are two groups that need to have parents/guardians initialized 
+There are two groups that need to have guardians initialized 
 and we will address those separately: children under the age of 18, and 
 those who are below 24 and in GQ for college (defined above). 
 
-Note: "N/A" for the purposes of this simulation means that a parent/
+Note: "N/A" for the purposes of this simulation means that a 
 guardian cannot be identified. For tax purposes, no one will claim 
 this person as a dependent. 
 
 **For simulant under 18 and NOT living in GQ:**
+
+"Assign" in this context means "assign as the guardian". 
 
 - Child is a biological, adopted, foster or step child to reference person 
     * Assign reference person 
@@ -413,26 +418,28 @@ this person as a dependent.
     * If there is not a relative of the appropriate age available, assign the reference person 
 - Child is non-relative (roommate or other nonrelative) to reference person 
     * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
-    * If there is not a non-relative of the appropriate age available, assign to a non-relative of any age (select at random if multiple) 
-    * If there are not any other non-relatives in the house, make "N/A"
+    * If there is not a non-relative of the appropriate age available, assign to a non-relative who is older than 18 (select at random if multiple) 
+    * If there are no non-relatives 18 or older, make "N/A"
 - Child is the reference person 
-    * Assign a parent, if available 
+    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian 
     * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
 
-Once the parent/guardian is assigned, if there is a spouse or unmarried partner 
-for that simulant (reference person and spouse/unmarried partner ONLY), then 
-include both as parents/guardians. Otherwise only include the one as a parent/guardian. 
+This can be seen visually in the flowchart below: 
 
-(note to software engineers: if any of these rules turn out to be surprisingly hard to implement, please be in touch with research --- we have some flexibility in just how we do this!)
+.. image:: minors_gen_pop.drawio.svg 
+
+Once a guardian is assigned, if there is a spouse or unmarried partner 
+for the guardian simulant (reference person and spouse/unmarried partner ONLY), then 
+include both as guardians. Otherwise only include the one as a guardian. 
 
 **For a simulant who is below 24 and in GQ at college:**
 
-Simulant will be randomly assigned to a parent/guardian based on the below rules: 
+Simulant will be randomly assigned to a guardian based on the below rules: 
 
-- 78.5% will be assigned to a parent/guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state parent/guardians can be ignored. 
+- 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
 - Match to a person 20 to 45 years older than the child 
-- If child is not "Multiracial or Some Other Race", match parent's race. If child is "Multiracial or Some Other Race", then assign to a parent of any race
+- If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people source2_ 
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
@@ -449,7 +456,28 @@ Simulant will be randomly assigned to a parent/guardian based on the below rules
 #. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
 #. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
-#. We assign GQ college folks to "parents" instead of "parents/guardians". Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
+#. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
+
+Guardian(s) on Time Steps
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For those who had a guardian initialized at the start of the 
+simulation, that assignment will not change. If the guardian 
+moves, they will remain as the guardian. If they die, the 
+simulant will not have a living guardian. 
+
+A person cannot "age out" of their guardian when they become 
+an adult or have their own children. Therefore it is possible 
+to both HAVE a guardian and BE a guardian. 
+
+However, for simulants born in the simulation, they receive a 
+tracked mother (term for the person that births them, regardless 
+of gender). 
+
+The tracked mother will be assigned as a guardian. In addition, if 
+the tracked mother has a spouse or unmarried partner (reference person 
+and spouse/unmarried partner ONLY), the spouse/partner will 
+also be assigned as a guardian. 
 
 .. _census_prl_fertility:
 
@@ -482,6 +510,10 @@ SSN or ITIN -- see the section for the SSN or ITIN component.
 
 Multiparity --- make twins with probability 4%.  See Section (16) for
 additional details.
+
+In addition, tracked mothers will be assigned as "guardians" based on the 
+documentation included :ref:`here
+<census_prl_guardians_init>`) 
 
 Relationship -- the sim knows a parent-child dyad when the new
 simulant is initialized, and to come up with a consistent value for
@@ -671,7 +703,7 @@ When the simulation only includes part of the US, there is no domestic
 migration into or out of this region.
 
 Note that each housing unit in C should be associated with a unique
-mailing address, as described in Section (8).
+mailing address, as described in Section (12).
 
 We might also want to think about the change
 in relationship type when people move, and also change surnames
@@ -924,62 +956,111 @@ Limitations
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
-2.3.7 Component 11: Address
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.7 Component 11: Residential Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each household id should be associated with a residential address, and
-(in a future, more complicated model) when people move, they should
-often move into previously vacated households, so that there are
-distinct households which have had the same residential address at
-different times.  We hypothesize that this will present a relevant
-challenge for PRL methods in practice.
+Background
+^^^^^^^^^^
 
-It is not clear how important it is to have housing unit address
-correspond to geography, and I am trying to gauge how much effort to
-put into having geographically realistic addresses.  This is also a
-sensitive area for privacy and personal information --- even if the
-data is synthetic, it might refer to a real location.  The risks of
-this are unclear.
-
-A generator that can generate street address and zip code is the
-Python package faker: https://github.com/joke2k/faker
-
-.. sourcecode:: python
-
-    # addresses stay with households, can start with faker python library
-    import faker
-    fake = faker.Faker()
-
-    def my_fake_address():
-        orig_address = fake.unique.address()
-        address = orig_address.split('\n')[0]
-        return address
-
-    address_dict = {hh_id: my_fake_address() for hh_id in df_population.household_id.unique()}
-
-    zip_dict = {hh_id: provider.postcode_in_state('FL') for hh_id in df_population.household_id.unique()}
-
-    df_population['address'] = df_population.household_id.map(address_dict)
-    df_population['zip'] = df_population.household_id.map(zip_dict)
+A generator that can generate street address and zip code based on structure alone is the
+Python package faker: https://github.com/joke2k/faker.
 
 Some additional libraries that function similarly to ``faker`` are https://github.com/ropensci/charlatan
-and https://github.com/paulhendricks/generator
+and https://github.com/paulhendricks/generator.
 
-It would be cool to have geographically plausible addresses, for
-example by reversing the process of libpostal, based on the PUMA
-geocoords. (it turns out that libpostal is an address parser, and does
-not map the parsed value to a lat/lon coordinate; an updated attempt
-has packaged libpostal training data conveniently:
-https://github.com/GRAAL-Research/deepparse-address-data)
+In order to make addresses internally consistent, it's necessary to use real address
+data to generate them.
+Such data has already been collected by address parsing libraries such as libpostal.
+For our purposes, we will use the training data of libpostal, as repackaged by the
+deepparse project: https://github.com/GRAAL-Research/deepparse-address-data.
 
-It would be responsible to avoid putting real addresses in the
-synthetic database, perhaps by checking the synthetic data against
-libpostal and rejecting the generated addresses that seem real.
-Census Bureau might appreciate this and might even be able to provide
-USPS data on what real addresses are and we can avoid them (although
-there is an obscure potential privacy issue with that, too!).  We
-could potentially use business addresses as residential addresses as a
-backup plan.
+In order to make addresses consistent with arbitrary geographic entities like PUMAs,
+we'd need to do geocoding/reverse geocoding.
+It is not clear how important it is to have housing unit address
+correspond to geography, so we have not pursued this more complicated approach.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For street addresses, the simulation will use a pre-processed (?) version of the deepparse address data
+for the US only.
+
+.. todo::
+
+  Document the pre-processing of the deepparse address data.
+
+To make PUMA correspond to ZIP code, we use a crosswalk generated by the
+`GeoCorr 2014 tool <https://mcdc.missouri.edu/applications/geocorr2014.html>`
+which allows us to map 2010 Census-based PUMAs (used for ACS 2016-2020) to
+2010 ZCTAs.
+We use the weighting variable of housing units, which means that the
+calculated crosswalk is the proportion of housing units in each PUMA that
+belong to each ZCTA.
+
+ZCTAs are technically a bit different than ZIP codes.
+For example, they rely on the most common ZIP code within each Census block.
+They may not include some ZIP codes at all if very few addresses use them (e.g.
+ZIP codes that are designated for a single organization). [Census_ZCTAs]_
+
+Some ZIP codes have changed since 2010, and more will change in the future.
+For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+Each household id should be associated with a residential address.
+
+Whenever a new household is initialized or moves such that it needs a new address,
+the following process will be used to generate one:
+
+#. A street number, street name, and unit will each be independently sampled from the
+   deepparse address data and concatenated with spaces.
+#. Then, a municipality (city) and province (state) **combination** will be sampled
+   from the deepparse address data filtered to the household's US state.
+   The combination will be separated by a comma and appended to the result of the previous step.
+#. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
+   the weights in the :code:`proportion` column, filtered to the household's state and
+   PUMA.
+
+Simulation inputs
+^^^^^^^^^^^^^^^^^
+
+:download:`PUMA to ZIP <puma_to_zip.csv>`
+
+Limitations
+^^^^^^^^^^^
+
+#. We never re-use previously vacated addresses, so there are no
+   distinct households which have had the same residential address at
+   different times.
+   We hypothesize that this will present a relevant
+   challenge for PRL methods in practice.
+#. While the city and state of the address correspond with each other and with the
+   US state attribute of the simulant, and the ZIP code and PUMA attributes
+   correspond with each other, the city does not correspond with the ZIP
+   code and PUMA attributes.
+#. The street name, number, and unit are completely independent of each other
+   and of the city, state, and PUMA.
+   This may lead to some implausible combinations, such as an apartment unit
+   number 500 in a rural town.
+   We think this is not likely to be important to PRL.
+   Making the correspondence better would be difficult without using real addresses,
+   which would present some privacy questions.
+   (If we went this route, perhaps using business addresses would be safer.)
+#. We use 2010 ZIPs for all years of the simulation.
+   We do not simulate any PRL difficulty arising from ZIP codes changing over time.
+
+**Verification and validation strategy**: to verify this approach, we
+can manually inspect a sample of 10-100 addresses; features to
+examine: does everyone in a household have the same address?  does the
+zip code match the PUMA?  does the street conform to typical
+expectations?
+
+2.3.8 Component 12: Mailing Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
+^^^^^^^^^^
 
 A relevant disparity in linkage accuracy might arise from the
 challenging nature of linking rural addresses; there is some
@@ -992,8 +1073,7 @@ from 2010 Decennial Census
 there is 9% of the US population where the mail is not delivered to
 the residence uniformly.  For these households, we might want to
 capture different addresses in the decennial census simulated output
-and the tax return simulated output.  We can (in a future, more
-complicated model) represent this by maintaining a *mailing address*
+and the tax return simulated output. We can represent this by maintaining a *mailing address*
 for each household that is sometimes different from residential
 address for the household's housing unit.  A simple distinction would
 be to make the mailing address a P.O. Box for 9% of the households,
@@ -1001,22 +1081,18 @@ although it would be great to have this vary with location, age, sex,
 race/ethnicity, and income.  When households move, this would always
 result in a new residential address (because of the new housing unit),
 but sometimes not make a change to the PO Box (especially if the move
-was not far, e.g. within the same PUMA).  For our minimal model, we
-will not include this, however, and I will try to get more info about
-how important this challenge to matching is in Census Bureau
-applications.  I believe that I will learn it is important, however,
-because decennial census will know a residential address but IRS and
-Medicare will know a mailing address, which will making linking hard
-for the population without mail delivery to residence.
+was not far, e.g. within the same PUMA).
 
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
 
-**Verification and validation strategy**: to verify this approach, we
-can manually inspect a sample of 10-100 addresses; features to
-examine: does everyone in a household have the same address?  does the
-zip code match the state?  does the street conform to typical
-expectations?
+.. todo::
 
-2.3.8 Component 12: Names
+  We plan to include a mailing address, which can be different from a residential address,
+  in the first full run of the simulation.
+  This needs to be worked out and documented.
+
+2.3.9 Component 13: Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Last names**
@@ -1174,8 +1250,8 @@ names (by race/ethnicity). This likely creates some strange last
 names, so have a careful look at this in validation, and decide if
 refinement is needed.
 
-2.3.9 Component 13: Date of Birth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.10 Component 14: Date of Birth
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To create a date-of-birth column in the synthetic output data, each
 simulant should have a uniformly random date of birth which is
@@ -1206,7 +1282,7 @@ visual inspection and quantitatively using an appropriate statistical
 test (would that be a Chi-Square test?).
 
 
-2.3.10 Component 14: Social Security Number (SSN) and Individual Taxpayer Identification Number (ITIN)
+2.3.11 Component 15: Social Security Number (SSN) and Individual Taxpayer Identification Number (ITIN)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background
@@ -1382,7 +1458,7 @@ confirm that none are missing among US-born people,
 and confirm that the
 expected number are missing among foreign-born people.
 
-2.3.11 Component 15: Periodic observations of attributes through survey, census, and registry
+2.3.12 Component 16: Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Census
@@ -2015,16 +2091,14 @@ for who files taxes:
     * The reference person will submit the form, the spouse will be listed as the joint filer. 
     * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
 - All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
-- All simulants eligible to be dependents will be assigned to a relative within the household 
-    * If there someone listed as the dependent's parents and they are filing taxes, they will be assigned to their parent 
-    * If there is not a parent, they will randomly be assigned to a tax-filing relative (not housemate or other non-relative) in the household 
-- A simulant eligble to be a dependent must: 
-    * Not be a "housemate/roommate" or "other nonrelative" to whoever is claiming them 
-    * The dependent's income must be below $4300 
-- For simulants outside of the household, they will be claimed as a dependent by their parent until age 19 OR age 24 if they are in group quarters for college 
-    * For simulants born in the simulation, they should have at least one parent/guardian tracked 
-    * For simulants not born in the simulantion, information on initializing parent/guardians is being added shortly 
-    * For simulatns with more than one parent/guardian tracked, assign the dependent randomly 
+- Simulants eligible to be dependents must qualify as ONE of the following: 
+    * Be under the age of 19 (less than or equal to 18)
+    * OR be less than 24, in GQ in college, and earn less than $10,000 
+    * OR be any age, but earn less than $4300 
+- An eligible simulant will be claimed in the below order of options: 
+    * The defined "guardian" (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one) 
+    * Otherwise, if they are the reference person or a relative of the reference person (NOT roommate or non-relative) they will be randomly assigned to someone else in the household who is the reference person or a relative of the reference person (NOT roommate or non-relative) 
+    *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
 
 **Data Errors/Noise** 
@@ -2212,7 +2286,7 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
 
-2.3.12 Twins and multiparous births (16)
+2.3.13 Twins and multiparous births (17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There is a lot we can potentially add to the model to represent how
@@ -2233,15 +2307,15 @@ simulants added to the same household, with the same date of birth,
 and the same last name.
 
 
-2.3.13 Additional Components (17-18)
+2.3.14 Additional Components (18-19)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 We don't need these components for our minimal model, but we might
 eventually want: time-dependent changes to observers of sex, based on
-gender assigned at birth (17); multiple households for individuals,
-leading to double counting in census (18).
+gender assigned at birth (18); multiple households for individuals,
+leading to double counting in census (19).
 
-2.3.14 Income (19)
+2.3.15 Income (20)
 ~~~~~~~~~~~~~~~~~~
 
 Individual income will be implemented as a risk exposure.  Average
@@ -2254,7 +2328,7 @@ that this value is normally distributed, but we could use the GBD
 ensemble risk exposure machinery if that assumption seems like a
 limitation.
 
-2.3.15 Employment (20)
+2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
 
 To represent businesses and employment dynamics we will use another
@@ -2307,7 +2381,7 @@ employer_address and employer_zipcode.
 
 .. _census_prl_perturbation:
 
-2.3.16 Perturbation
+2.3.17 Perturbation
 ~~~~~~~~~~~~~~~~~~~
 
 When we sample from the ACS PUMS to generate new simulants, we are using the
@@ -2488,6 +2562,8 @@ To Come (TK)
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
+
+.. [Census_ZCTAs] Bureau, US Census. n.d. “ZIP Code Tabulation Areas (ZCTAs)” Census.Gov. Accessed November 8, 2022. https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html.
 
 .. [DHS_Unauthorized] Baker, Bryan. January 2021. Estimates of the Unauthorized Immigrant Population Residing in the United States: January 2015-January 2018. `https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf <https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf>`_
 
