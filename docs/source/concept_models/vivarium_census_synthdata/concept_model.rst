@@ -124,22 +124,21 @@ of domestic (:ref:`8 <census_prl_domestic_migration>`) and international (:ref:`
 by household and individual simulants, as well as changes to geographic
 location and household id.
 
-On top of this, we will layer attributes relevant to PRL: mailing
-addresses for each household (11); first, middle, and last names for
-each simulant (12); date of birth (13); intended-to-be-unique
-identification number modeling SSN that is missing for some and not
-actually unique for others (14); and periodic survey, census, and registry
-observations with realistic noise (15).
+On top of this, we will layer attributes relevant to PRL: residential (11)
+and mailing addresses for each household (12); first, middle, and last names for
+each simulant (13); date of birth (14);
+Social Security Number and Individual Taxpayer Identification Number (15);
+and periodic survey, census, and registry
+observations with realistic noise (16).
 
 Additional components we might want: time-dependent changes to
-observers of sex, based on gender assigned at birth (17); multiple
-households for individuals, leading to double counting in census (18);
-twins and multiparous births in fertility model (16).  To capture an
+observers of sex, based on gender assigned at birth (18); multiple
+households for individuals, leading to double counting in census (19);
+twins and multiparous births in fertility model (17).  To capture an
 additional dimension of heterogeneity and also to enable a periodic
 observer that simulates tax returns we will also need a component
-representing income (19), which will look a lot like a risk factor
+representing income (20), which will look a lot like a risk factor
 exposure.
-
 
 .. _census_prl_components:
 
@@ -507,6 +506,8 @@ in the US, otherwise they were born outside the US.
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
+SSN or ITIN -- see the section for the SSN or ITIN component.
+
 Multiparity --- make twins with probability 4%.  See Section (16) for
 additional details.
 
@@ -563,17 +564,12 @@ mapping:
 
 After initializing a newborn during the sim, we make sure the parent doesn't have
 another child for at least 9 months.
-However, when we initialize a household at the start of the sim that includes a
+Note that when we initialize a household at the start of the sim that includes a
 reference person who likely recently gave birth (e.g. an age 32 female
 reference person and an age 0 biological child) we currently don't
 mark the reference person as having had a child, and so they are
 eligible to give birth again the next month. We could make this more
 complicated in the future.
-
-Simulants initialized at the start of the sim with the "biological son or daughter" or "father or mother"
-relationship to the reference person are assigned the same last name as
-the reference person. Simulants initialized with all other relationships
-have independently sampled last names. We could make this more complicated in the future.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -707,7 +703,7 @@ When the simulation only includes part of the US, there is no domestic
 migration into or out of this region.
 
 Note that each housing unit in C should be associated with a unique
-mailing address, as described in Section (8).
+mailing address, as described in Section (12).
 
 We might also want to think about the change
 in relationship type when people move, and also change surnames
@@ -960,62 +956,111 @@ Limitations
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
-2.3.7 Component 11: Address
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.7 Component 11: Residential Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Each household id should be associated with a residential address, and
-(in a future, more complicated model) when people move, they should
-often move into previously vacated households, so that there are
-distinct households which have had the same residential address at
-different times.  We hypothesize that this will present a relevant
-challenge for PRL methods in practice.
+Background
+^^^^^^^^^^
 
-It is not clear how important it is to have housing unit address
-correspond to geography, and I am trying to gauge how much effort to
-put into having geographically realistic addresses.  This is also a
-sensitive area for privacy and personal information --- even if the
-data is synthetic, it might refer to a real location.  The risks of
-this are unclear.
-
-A generator that can generate street address and zip code is the
-Python package faker: https://github.com/joke2k/faker
-
-.. sourcecode:: python
-
-    # addresses stay with households, can start with faker python library
-    import faker
-    fake = faker.Faker()
-
-    def my_fake_address():
-        orig_address = fake.unique.address()
-        address = orig_address.split('\n')[0]
-        return address
-
-    address_dict = {hh_id: my_fake_address() for hh_id in df_population.household_id.unique()}
-
-    zip_dict = {hh_id: provider.postcode_in_state('FL') for hh_id in df_population.household_id.unique()}
-
-    df_population['address'] = df_population.household_id.map(address_dict)
-    df_population['zip'] = df_population.household_id.map(zip_dict)
+A generator that can generate street address and zip code based on structure alone is the
+Python package faker: https://github.com/joke2k/faker.
 
 Some additional libraries that function similarly to ``faker`` are https://github.com/ropensci/charlatan
-and https://github.com/paulhendricks/generator
+and https://github.com/paulhendricks/generator.
 
-It would be cool to have geographically plausible addresses, for
-example by reversing the process of libpostal, based on the PUMA
-geocoords. (it turns out that libpostal is an address parser, and does
-not map the parsed value to a lat/lon coordinate; an updated attempt
-has packaged libpostal training data conveniently:
-https://github.com/GRAAL-Research/deepparse-address-data)
+In order to make addresses internally consistent, it's necessary to use real address
+data to generate them.
+Such data has already been collected by address parsing libraries such as libpostal.
+For our purposes, we will use the training data of libpostal, as repackaged by the
+deepparse project: https://github.com/GRAAL-Research/deepparse-address-data.
 
-It would be responsible to avoid putting real addresses in the
-synthetic database, perhaps by checking the synthetic data against
-libpostal and rejecting the generated addresses that seem real.
-Census Bureau might appreciate this and might even be able to provide
-USPS data on what real addresses are and we can avoid them (although
-there is an obscure potential privacy issue with that, too!).  We
-could potentially use business addresses as residential addresses as a
-backup plan.
+In order to make addresses consistent with arbitrary geographic entities like PUMAs,
+we'd need to do geocoding/reverse geocoding.
+It is not clear how important it is to have housing unit address
+correspond to geography, so we have not pursued this more complicated approach.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+For street addresses, the simulation will use a pre-processed (?) version of the deepparse address data
+for the US only.
+
+.. todo::
+
+  Document the pre-processing of the deepparse address data.
+
+To make PUMA correspond to ZIP code, we use a crosswalk generated by the
+`GeoCorr 2014 tool <https://mcdc.missouri.edu/applications/geocorr2014.html>`
+which allows us to map 2010 Census-based PUMAs (used for ACS 2016-2020) to
+2010 ZCTAs.
+We use the weighting variable of housing units, which means that the
+calculated crosswalk is the proportion of housing units in each PUMA that
+belong to each ZCTA.
+
+ZCTAs are technically a bit different than ZIP codes.
+For example, they rely on the most common ZIP code within each Census block.
+They may not include some ZIP codes at all if very few addresses use them (e.g.
+ZIP codes that are designated for a single organization). [Census_ZCTAs]_
+
+Some ZIP codes have changed since 2010, and more will change in the future.
+For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+Each household id should be associated with a residential address.
+
+Whenever a new household is initialized or moves such that it needs a new address,
+the following process will be used to generate one:
+
+#. A street number, street name, and unit will each be independently sampled from the
+   deepparse address data and concatenated with spaces.
+#. Then, a municipality (city) and province (state) **combination** will be sampled
+   from the deepparse address data filtered to the household's US state.
+   The combination will be separated by a comma and appended to the result of the previous step.
+#. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
+   the weights in the :code:`proportion` column, filtered to the household's state and
+   PUMA.
+
+Simulation inputs
+^^^^^^^^^^^^^^^^^
+
+:download:`PUMA to ZIP <puma_to_zip.csv>`
+
+Limitations
+^^^^^^^^^^^
+
+#. We never re-use previously vacated addresses, so there are no
+   distinct households which have had the same residential address at
+   different times.
+   We hypothesize that this will present a relevant
+   challenge for PRL methods in practice.
+#. While the city and state of the address correspond with each other and with the
+   US state attribute of the simulant, and the ZIP code and PUMA attributes
+   correspond with each other, the city does not correspond with the ZIP
+   code and PUMA attributes.
+#. The street name, number, and unit are completely independent of each other
+   and of the city, state, and PUMA.
+   This may lead to some implausible combinations, such as an apartment unit
+   number 500 in a rural town.
+   We think this is not likely to be important to PRL.
+   Making the correspondence better would be difficult without using real addresses,
+   which would present some privacy questions.
+   (If we went this route, perhaps using business addresses would be safer.)
+#. We use 2010 ZIPs for all years of the simulation.
+   We do not simulate any PRL difficulty arising from ZIP codes changing over time.
+
+**Verification and validation strategy**: to verify this approach, we
+can manually inspect a sample of 10-100 addresses; features to
+examine: does everyone in a household have the same address?  does the
+zip code match the PUMA?  does the street conform to typical
+expectations?
+
+2.3.8 Component 12: Mailing Address
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Background
+^^^^^^^^^^
 
 A relevant disparity in linkage accuracy might arise from the
 challenging nature of linking rural addresses; there is some
@@ -1028,8 +1073,7 @@ from 2010 Decennial Census
 there is 9% of the US population where the mail is not delivered to
 the residence uniformly.  For these households, we might want to
 capture different addresses in the decennial census simulated output
-and the tax return simulated output.  We can (in a future, more
-complicated model) represent this by maintaining a *mailing address*
+and the tax return simulated output. We can represent this by maintaining a *mailing address*
 for each household that is sometimes different from residential
 address for the household's housing unit.  A simple distinction would
 be to make the mailing address a P.O. Box for 9% of the households,
@@ -1037,22 +1081,18 @@ although it would be great to have this vary with location, age, sex,
 race/ethnicity, and income.  When households move, this would always
 result in a new residential address (because of the new housing unit),
 but sometimes not make a change to the PO Box (especially if the move
-was not far, e.g. within the same PUMA).  For our minimal model, we
-will not include this, however, and I will try to get more info about
-how important this challenge to matching is in Census Bureau
-applications.  I believe that I will learn it is important, however,
-because decennial census will know a residential address but IRS and
-Medicare will know a mailing address, which will making linking hard
-for the population without mail delivery to residence.
+was not far, e.g. within the same PUMA).
 
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
 
-**Verification and validation strategy**: to verify this approach, we
-can manually inspect a sample of 10-100 addresses; features to
-examine: does everyone in a household have the same address?  does the
-zip code match the state?  does the street conform to typical
-expectations?
+.. todo::
 
-2.3.8 Component 12: Names
+  We plan to include a mailing address, which can be different from a residential address,
+  in the first full run of the simulation.
+  This needs to be worked out and documented.
+
+2.3.9 Component 13: Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Last names**
@@ -1210,8 +1250,8 @@ names (by race/ethnicity). This likely creates some strange last
 names, so have a careful look at this in validation, and decide if
 refinement is needed.
 
-2.3.9 Component 13: Date of Birth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.10 Component 14: Date of Birth
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 To create a date-of-birth column in the synthetic output data, each
 simulant should have a uniformly random date of birth which is
@@ -1242,51 +1282,183 @@ visual inspection and quantitatively using an appropriate statistical
 test (would that be a Chi-Square test?).
 
 
-2.3.10 Component 14: Social Security Number
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.11 Component 15: Social Security Number (SSN) and Individual Taxpayer Identification Number (ITIN)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Eventually, this should be missing for some and not actually unique
-for others.  I need to do some research into how we represent this,
-and how important it is.  According to `this report
+Background
+^^^^^^^^^^
+
+Social Security Numbers (SSNs) and Individual Taxpayer Identification Numbers (ITINs)
+are as close as it gets to a unique identifier for individuals in the US.
+One of the key challenges of PRL (in Census Bureau applications) is that these are reported on taxes but not
+in the census itself.
+It is quite a bit easier to link taxes-to-taxes than taxes-to-census because of the
+presence of this identifier.
+
+Not everyone in the United States has an SSN -- only those with legal authorization to
+work in the US.
+People not eligible for an SSN may still file taxes; they will generally use an ITIN to do so.
+In some cases people may file taxes with someone else's SSN (identity theft) or a non-existent
+SSN, but this should be much less common than using the ITIN system.
+
+On the other hand, use of another person's SSN or a non-existent SSN will be fairly common in
+*employer*-filed tax documents.
+We do not handle that in this component; see the tax observer.
+
+SSNs are used to assign protected identification keys (PIKs).
+According to `this report
 <https://www.census.gov/content/dam/Census/library/publications/2012/dec/2010_cpex_247.pdf>`_,
 "There were 308.7 million persons in the 2010 Census, and 279.2
 million were assigned a protected identification key"
 
-There is a python library that includes a detailed SSN generation
-module:
-https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222
-
-Zeb found some documentation from SSA confirming that ``faker`` has an
-accurate algorithm for SSN generation:
+The ``faker`` Python library has `an SSN generation module <https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222>`_,
+which is based on the SSA's algorithm for generating SSNs: 
 https://www.ssa.gov/kc/SSAFactSheet--IssuingSSNs.pdf
 
-In this investigation, he also noted that before 2011, SSNs
-corresponded to location: https://www.ssa.gov/employer/stateweb.htm We
+Before 2011, SSNs
+corresponded to location: https://www.ssa.gov/employer/stateweb.htm.
+We
 might want to integrate this in the future, although I'm not sure if
 any PRL methods rely on the link between SSN and location.
 
-It is also possible that it will be annoying to Census Bureau if we
-have realistic SSN values, even if they are randomly generated, and we
-may wish to change to numeric format for this to a synthetic SSN-like
-(SSSN) value
+.. note::
 
+  In real life, people only get ITINs when they need them, i.e. when they file taxes for the first time.
+  In our simulation, we will initialize them right away and only observe them when the simulant files taxes,
+  which is essentially equivalent.
 
-.. sourcecode:: python
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-    # give everyone a unique fake ssn (for now)
-    df_population['ssn'] = [fake.unique.ssn() for _ in range(len(df_population))]
+The two non-trivial values are the SSN coverage among the foreign-born population
+of the US, and the SSN coverage among new foreign-born immigrants to the US.
 
-As a simple mechanism to capture some of the complexity in SSNs, we
-will have 10% of newborn simulants not receive a SSN.  We will also
-have 10% of simulants initialized at the beginning of the simulation
-not receive a SSN.
+For both calculations, we make the simplifying assumption that undocumented immigrants
+do not have SSNs, and documented immigrants do have SSNs.
+In reality, both parts of this are not quite right:
 
-**Verification and validation strategy**: to verify this approach, we
-can manually inspect a sample of 10-100 SSNs, confirm that the
-expected number are missing and that the duplication count follows the
-intended distribution.
+* Documented immigrants may not be authorized to work in the US.
+* Undocumented immigrants may have erroneously received an SSN, especially before
+  a reform to the process in 2001.
 
-2.3.11 Component 15: Periodic observations of attributes through survey, census, and registry
+For population initialization coverage, we use the ACS PUMS to estimate the
+foreign-born population of the United States,
+and a DHS report estimating the undocumented population in 2018. [DHS_Unauthorized]_
+
+For coverage at immigration, we use the ACS PUMS to estimate the
+foreign-born population who entered in the last year,
+and a demographic modeling analysis [Fazel-Zarandi_2018]_ estimating the yearly inflow of undocumented immigrants
+in 2017 (the most recent year reported).
+We assume that all undocumented immigrants are foreign-born.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+At all times in the simulation, all simulants have either an SSN **or** an ITIN.
+A simulant should never have both.
+
+SSN and ITIN should remain constant for a given simulant for their entire lifespan.
+
+We never switch someone who has an ITIN to have an SSN.
+
+.. note::
+
+  An SSN and an ITIN should not be treated like the same thing.
+  Logic in the taxes observer depends on which one a simulant has.
+
+SSN generation
+''''''''''''''
+
+**SSNs should be unique**.
+The same SSN should not be assigned to two different simulants.
+
+Following the `SSA algorithm <https://www.ssa.gov/kc/SSAFactSheet--IssuingSSNs.pdf>`_,
+the steps to generate an SSN are as follows:
+
+#. Generate a zero-padded integer between 1 and 899 (inclusive) to use as
+   the first three digits.
+   666 is not allowed; this can be never sampled or assigned to another arbitrary
+   number.
+#. Append a dash.
+#. Generate a zero-padded integer between 1 and 99 (inclusive) to use as
+   the next two digits.
+#. Append a dash.
+#. Generate a zero-padded integer between 1 and 9999 (inclusive) to use as
+   the last four digits.
+
+ITIN generation
+'''''''''''''''
+
+**ITINs should be unique**.
+The same ITIN should not be assigned to two different simulants.
+
+ITIN generation is similar to SSN generation, using these steps:
+
+#. Generate a zero-padded integer between **900 and 999** (inclusive) to use as
+   the first three digits.
+#. Append a dash.
+#. Generate a zero-padded integer between **50 and 65, 70 and 88, 90 and 92, or 94 and 99** (inclusive) to use as
+   the next two digits.
+#. Append a dash.
+#. Generate a zero-padded integer between 1 and 9999 (inclusive) to use as
+   the last four digits.
+
+Slides from the IRS on the ITIN format can be found here: https://www.irs.gov/pub/irs-pdf/p4757.pdf
+
+Population initialization
+'''''''''''''''''''''''''
+
+At population initialization, we follow these rules to initialize an SSN or ITIN for every simulant:
+
+#. If the ACS person sampled was born in the United States (according to the :code:`NATIVITY` column),
+   the new simulant is assigned an SSN.
+#. Otherwise, the simulant is assigned an SSN **74.3%** of the time, and an ITIN the remainder of the time.
+
+Fertility
+'''''''''
+
+When a simulant is born during the sim to a parent who lives in the United States,
+they are **always** assigned an SSN.
+
+If a simulant is born during the sim to a parent who lives outside the United States,
+they are assigned an SSN **if and only if** their parent has one.
+If their parent has an ITIN (i.e. does not have an SSN), the newborn is assigned an ITIN.
+
+Immigration
+'''''''''''
+
+When new simulants are created via immigration into the US, we follow these rules to initialize an SSN or ITIN for every simulant:
+
+#. If the ACS person sampled was born in the United States (according to the :code:`NATIVITY` column),
+   the new simulant is assigned an SSN.
+#. Otherwise, the simulant is assigned an SSN **62.5%** of the time, and an ITIN the remainder of the time.
+
+Limitations
+^^^^^^^^^^^
+
+#. We assume that all people born in the US have an SSN.
+   In reality, some people, especially the very old, may not have one.
+   We think this is a minor issue.
+#. We do not correlate having an SSN with any other characteristics, e.g. demographics or
+   location, among the foreign-born population.
+#. We calculated SSN assignment percentages at population initialization and immigration
+   using the assumption that all documented immigrants to the US have an SSN, and all undocumented
+   immigrants do not.
+#. We do not allow those with ITINs to switch to SSNs during their life, which can happen in real life
+   at e.g. naturalization.
+#. We never expire ITINs; in real life they expire after three years of non-use.
+   This means tax-to-tax matching with ITINs may be unrealistically easy.
+
+Verification and validation strategy
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To verify this approach, we
+can manually inspect a sample of 10-100 SSNs,
+confirm that none are missing among US-born people,
+and confirm that the
+expected number are missing among foreign-born people.
+
+2.3.12 Component 16: Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Census
@@ -1689,9 +1861,14 @@ employed, they will need this number to be filled in. If there
 is a person in their household who has a SSN, use this number 
 instead. If there are multiple people with a SSN, choose at random. 
 If there is not a person in their household with a SSN 
-then fill in a random number. This is designed to reflect 
+then fill in a new randomly generated SSN. This is designed to reflect 
 undocumented immigrants who might use fake or no longer 
 valid SSNs to obtain employment. 
+
+.. note::
+
+  Even if the simulant has an ITIN, it should not be included here!
+  Instead, the described process should be used to fill an SSN.
 
 For this observer, a new row should be made for each **employment**, not 
 each simulant. This means that a simulant can have multiple rows of 
@@ -1779,7 +1956,9 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -  
   * - Mailing Address
     -  
-  * - Social Security Number or ITIN
+  * - Social Security Number (if present)
+    -
+  * - ITIN (if present)
     -
   * - Income 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -1807,7 +1986,9 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -  
   * - Mailing Address
     -  
-  * - Social Security Number or ITIN
+  * - Social Security Number (if present)
+    -
+  * - ITIN (if present)
     -
   * - Income 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -1831,23 +2012,16 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Age 
     -  
-  * - Social Security Number or ITIN
+  * - Social Security Number (if present)
+    -
+  * - ITIN (if present)
     -
 
-If a simulant does not have a SSN but is filing taxes, please 
-include an Individual Taxpayer Identification Number (ITIN) instead. 
-This is a 9 digit number that starts with 
-a 9. It can be randomly generated. This applies for all types of 
-filers (primary, joint, dependents). Do **NOT** include the fake 
-SSN from the employer tax forms. 
-
-For now, we will randomly assign ITIN's, but not track them over time. 
-Since this makes them unhelpful for PRL work, we can also allow duplicates. 
-This might be refined later if it is important for PRL. 
-
+If a simulant does not have an SSN,
+do **NOT** include a random SSN.
+Leave the field blank. 
 This is designed to reflect undocumented immigrants, who primarily 
-file taxes under the ITIN system. 
-
+file taxes under the ITIN system.
 
 For this observer, we will have one row for each tax form filed. This 
 can be a bit complicated, so here are some examples: 
@@ -1860,7 +2034,7 @@ can be a bit complicated, so here are some examples:
 Here is a photo showing how this might look. Note that the three tables 
 are just 2 really long rows for two simulants. 
 
-.. image:: 1044_example.PNG
+.. image:: 1044_example.png
 
 .. todo::
 
@@ -2112,7 +2286,7 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
 
-2.3.12 Twins and multiparous births (16)
+2.3.13 Twins and multiparous births (17)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There is a lot we can potentially add to the model to represent how
@@ -2133,15 +2307,15 @@ simulants added to the same household, with the same date of birth,
 and the same last name.
 
 
-2.3.13 Additional Components (17-18)
+2.3.14 Additional Components (18-19)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
 
 We don't need these components for our minimal model, but we might
 eventually want: time-dependent changes to observers of sex, based on
-gender assigned at birth (17); multiple households for individuals,
-leading to double counting in census (18).
+gender assigned at birth (18); multiple households for individuals,
+leading to double counting in census (19).
 
-2.3.14 Income (19)
+2.3.15 Income (20)
 ~~~~~~~~~~~~~~~~~~
 
 Individual income will be implemented as a risk exposure.  Average
@@ -2154,7 +2328,7 @@ that this value is normally distributed, but we could use the GBD
 ensemble risk exposure machinery if that assumption seems like a
 limitation.
 
-2.3.15 Employment (20)
+2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
 
 To represent businesses and employment dynamics we will use another
@@ -2207,7 +2381,7 @@ employer_address and employer_zipcode.
 
 .. _census_prl_perturbation:
 
-2.3.16 Perturbation
+2.3.17 Perturbation
 ~~~~~~~~~~~~~~~~~~~
 
 When we sample from the ACS PUMS to generate new simulants, we are using the
@@ -2388,3 +2562,9 @@ To Come (TK)
 .. [Census_PopEst_Methodology] Bureau, US Census. n.d. “Methodology for the United States Population Estimates: Vintage 2019” Census.Gov. Accessed October 14, 2022. https://www2.census.gov/programs-surveys/popest/technical-documentation/methodology/2010-2019/natstcopr-methv2.pdf.
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
+
+.. [Census_ZCTAs] Bureau, US Census. n.d. “ZIP Code Tabulation Areas (ZCTAs)” Census.Gov. Accessed November 8, 2022. https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html.
+
+.. [DHS_Unauthorized] Baker, Bryan. January 2021. Estimates of the Unauthorized Immigrant Population Residing in the United States: January 2015-January 2018. `https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf <https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf>`_
+
+.. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
