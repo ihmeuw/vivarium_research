@@ -1645,6 +1645,10 @@ Here is an example:
 
 .. image:: WIC_example.png
 
+Note: for household number, if a tracked mother/guardian is in the sim along with their 
+infant, please assign them the same household number even if they do not live together 
+currently. 
+
 **Who to Sample** 
 
 Selection for the observer will be in 2 steps: 
@@ -1666,13 +1670,13 @@ on the observer.
 To account for these interdependencies, please follow the below steps: 
 
 #. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity 
-#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare by possible to have multiple infants for the same tracked mother or guardian) 
+#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian) 
 #. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
 #. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met 
 
 Note: for Hispanic simulants, the rate of tracked mothers/guardians is higher than infants. 
-For this group, you can select the infants associated with the tracked mothers/guardians and 
-stop. This will leads to overselecting infants, which is known and okay. 
+For this group, select the infants associated with the tracked mothers/guardians and 
+stop. This will leads to overselecting infants, which is a known limitation. 
 
 **Eligibility for WIC**
 
@@ -1751,10 +1755,11 @@ Source: [Coverage]_
 **Limitations and Possible Future Adds** 
 
 #. Currently the model does not track pregnant people, therefore they are not included despite being eligible 
-#. It is unclear if having one family member on WIC would increase or decrease the chance of having multiple family members on WIC. This could probably be improved upon with more data. 
+#. It is unclear if having one family member on WIC would increase or decrease the chance of having multiple family members on WIC. This could probably be improved upon with more data. Currently, a parent on WIC means that the infant will also be on WIC, but siblings are not affected. 
 #. Selection for WIC is random after eligibility. In practice, lower income individuals are more likely to sign up for WIC and the selection is therefore biased. 
 #. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here 
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life 
+#. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
 
 Taxes
 ^^^^^
