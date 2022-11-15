@@ -21,22 +21,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_model_limitations:
+.. _risk_exposure:
 
-=========================================================
-How to Evaluate Model Limitations
-=========================================================
+=================================
+Risk exposure
+=================================
 
 .. contents::
-   :local:
-   :depth: 1
-
-.. todo:: 
-
-  Potential biases:
-
-    GBD vs. reality
-
-    Model vs. GBD
-
-    Model vs. reality
+  :local:

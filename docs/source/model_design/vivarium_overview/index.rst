@@ -21,16 +21,16 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_causation_vs_association:
+.. _vivarium_overview:
 
-=========================================================
-When to Use Causal Effects Versus Non-Causal Associations
-=========================================================
+================================================
+Overview of Vivarium Simulation Models
+================================================
 
-.. contents::
-   :local:
-   :depth: 1
+The purpose of this page is to document information relevant to the Vivarium framework from a research perspective. Vivarium framework documentation maintained by the engineers :ref:`can be found elsewhere <software>`.
 
-.. todo:: 
+.. toctree::
+   :maxdepth: 1
+   :glob:
 
-  Bivariate versus multivariate correlations, etc.
+   */index
