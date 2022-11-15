@@ -1630,7 +1630,7 @@ in the home.
   :widths: 20
   :header-rows: 0
 
-  * - Household number (random indicator which is the same for simulants in the same household)
+  * - Household number (arbitrary indicator which is the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
   * - First name
   * - Middle initial 
