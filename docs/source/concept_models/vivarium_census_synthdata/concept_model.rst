@@ -739,40 +739,131 @@ per person-year, stratified by demographics.
 Relationship
 ''''''''''''
 
+We use ACS data to inform movers' relationships to the reference person
+(or their GQ type if they are in GQ) **after** moving.
+
 In household moves, relationships are unchanged.
 In new-household moves, the relationship in the new household is always "reference person."
-Therefore, there are two move types that require a choice of relationship attribute:
+Therefore, there are two move types that require a choice of post-move relationship attribute:
 GQ moves (where the relationship attribute represents institutional vs non-institutional),
 and non-reference person moves.
 
 For each of these move types, we calculate **the proportion of movers of that type** who
-have each relationship, stratified by individual demographics -- age group, sex, and race/ethnicity.
+have each relationship after moving, stratified by individual demographics -- age group, sex, and race/ethnicity.
+We consider these to represent probabilities that future movers, with the same demographics and move type,
+will have that relationship in their post-move living arrangement.
 
 To address sample size issues, which are present especially for the less-common relationships in the smallest
-race/ethnicity groups, we perform a smoothing procedure (described below) in each demographic group
-(e.g. 0-15 year old females of NHOPI race/ethnicity)
-*twice*: first using information from the distribution in the same group without stratification by race/ethnicity
-(e.g. all 0-15 year old females),
-and then using information from the distribution in the group stratified only by age
-(e.g. all 0-15 year olds).
-We refer to these groups, which are less stratified and have larger sample size, as the "reference group"
-in the smoothing procedure description below.
-We do not include a third smoothing pass with the fully unconditional distribution (all people regardless of age),
-because there are logical relationships between age and relationship -- for example,
-children should never be spouses.
+race/ethnicity groups, we perform a smoothing procedure on these probabilities for each move type
+in each demographic group, defined by an age group,
+a sex, and a race/ethnicity.
+There are two "passes" in this smoothing procedure -- the first uses the corresponding group by move type, age, and sex only, and the second
+uses the corresponding group by move type and age only.
+The general goal is to inform each relationship's proportion using the most specific group for which
+we have sufficient sample size.
 
-Our smoothing procedure is as follows:
+.. note:: 
 
-* Take the total probability of all demographic + relationship combinations which have less than **30** sample size,
-  and re-distribute this probability according
-  to the proportions among the same set of relationships in the reference group.
-  We now consider our "sample size" for those re-distributed relationships to be the sample size
-  in the corresponding relationships in the reference group.
-* When any age/sex/race group had less than 5% probability re-distributed in the previous step, we re-distribute
-  the difference (5% - the amount re-distributed), taken proportionally from *all* relationships,
-  according to the proportions among *all* relationships in the reference group.
-  After this step, all age/sex/race groups have had at least 5% re-distributed, between this step and
-  the previous.
+  We never smooth using a group that is not age-specific,
+  because there are logical relationships between age and relationship -- for example,
+  children should never be spouses.
+
+  We never smooth using a group that is not move-type-specific,
+  because the set of relationships appropriate after a GQ person move (institutionalized GQ person,
+  noninstitutionalized GQ person) is disjoint from the set of relationships appropriate after
+  a non-reference-person move.
+
+To make this more concrete, we'll consider non-reference-person moves among
+the group of 0-15 year old females with NHOPI race/ethnicity.
+Let's imagine that there are 65 ACS respondents in this group;
+after the move:
+
+* 30 of them have the relationship "Biological child"
+* 30 of them have the relationship "Adopted child"
+* 3 have the relationship "Other relative"
+* 2 have the relationship "Stepchild"
+
+.. note::
+
+  This information is not sufficient to calculate the probabilities,
+  because those are calculated using the survey weights.
+  The list above is of the actual number of ACS respondents,
+  which is what we use in smoothing since it represents the quality of the information
+  about a group in ACS.
+
+Based on this and our arbitrarily chosen sample size cutoff of **30**,
+we "trust" the probabilities of biological and adopted children among non-reference-person movers in this group.
+However, we don't believe that all of the rest of the probability should be
+on "Other relative" and "Stepchild," with no possibility of any other
+relationship.
+This is likely an artifact of small sample size.
+
+Our first pass uses the corresponding group by age and sex only: 0-15 year old female
+non-reference-person movers (of any race/ethnicity).
+We calculate the probabilities in *this* group of the relationships we don't "trust" in
+the fully-stratified group -- that is, all relationships other than "Biological child" and "Adopted child."
+Then, we re-distribute the probabilities in the original group for these relationships
+according to the probabilities in the larger group.
+Specifically, without changing our originally calculated probabilities of "Biological child" and "Adopted child",
+we find the probabilities for the rest of the relationships that satisfy these two conditions:
+
+#. The sum of probabilities across all relationships (including "Biological child" and "Adopted child") is 1.
+#. The probabilities of the *smoothed* (not "Biological child" or "Adopted child") relationships
+   are proportional to those probabilities in the larger group, i.e.
+   :math:`P_\text{smoothed}(\cdot|\text{0-15,F,NHOPI}) \propto P_\text{raw}(\cdot|\text{0-15,F})`.
+   In other words,
+   :math:`P_\text{smoothed}(a|\text{0-15,F,NHOPI}) / P_\text{smoothed}(b|\text{0-15,F,NHOPI}) = P_\text{ACS}(a|\text{0-15,F}) / P_\text{ACS}(b|\text{0-15,F})`
+   where :math:`a` and :math:`b` are any two relationships other than "Biological child" or "Adopted child."
+
+After this smoothing, the quality of our evidence for the smoothed relationships is improved.
+Imagine that in the larger group of non-reference-person movers who are 0-15 years old and female,
+there are 550 ACS respondents:
+
+* 250 have the relationship "Biological child"
+* 250 have the relationship "Adopted child"
+* 32 have the relationship "Other relative"
+* 14 have the relationship "Stepchild"
+* 14 have the relationship "Foster child"
+
+After this smoothing pass, we consider our sample size for the smoothed relationships to be that of
+the smoothed relationships **in the larger group we smoothed from.**
+For example, we now consider our sample size for the smoothed probability of the relationship "Other relative"
+among 0-15 year old female non-reference-person movers with NHOPI race/ethnicity to be 32.
+
+The second pass repeats this exact procedure, smoothing the output of the first pass using the
+even larger group of all 0-15 year old non-reference-person movers (regardless of sex and race/ethnicity).
+**In our example, "Other relative" will not be smoothed again in this second pass,** because it now has
+sufficient sample size (>30).
+
+The only additional case is what happens when very little probability is eligible for smoothing according
+to sample size.
+
+Imagine we now turn to smoothing the relationship probabilities of non-reference-person moves among
+0-15 year old **males** with NHOPI race/ethnicity.
+In this group, there are 60 ACS respondents:
+
+* 30 of them have the relationship "Biological child"
+* 30 of them have the relationship "Adopted child"
+
+If we used only the sample size criterion to smooth, 100% of the probability in this group
+would already be accounted for and smoothing would have no effect.
+This is undesirable because we want non-zero probabilities of other relationships in this group.
+
+To account for this, we add an additional step in *each* pass if sample-size-based smoothing
+in that pass re-distributes less than **5%** probability.
+In this case, we re-distribute the difference (5% minus the total probability already re-distributed by sample-size-based smoothing)
+according to the probabilities of *all* relationships in the larger group.
+That is, for each relationship :math:`r`,
+
+.. math::
+
+  \begin{multline}
+  P_\text{smoothed}(r|\text{0-15,M,NHOPI}) = \\
+  (1 - (0.05 - \text{already re-distributed})) * P_\text{after sample-size-based smoothing}(r|\text{0-15,M,NHOPI}) + \\
+  (0.05 - \text{already re-distributed}) * P_\text{ACS}(a|\text{0-15,M})
+  \end{multline}
+
+This ensures that for all groups, each pass re-distributes **at least** 5% probability.
 
 Location
 ''''''''
@@ -782,18 +873,16 @@ PUMA.
 
 In practice, nearly all combinations will have very small or 0 sample size.
 To address this, we apply the same smoothing procedure described in the Relationship section
-above, using the unconditional distribution
-among all movers (from any MIGPUMA), and the same constants (sample size minimum of 30,
-5% minimum re-distribution).
+above, with these adaptations:
 
-.. todo::
+* Instead of probabilities of relationships conditional on move type and demographics, we calculate probabilities
+  of destination PUMAs (the PUMAs that people move to) conditional on source location.
+* The initial probabilities are the ACS probabilities of each destination PUMA conditional
+  on source MIGPUMA.
+* The two passes use (1) the corresponding group stratified only by source **state**,
+  and (2) the entire universe of ACS movers.
 
-  Determine whether we will include a smoothing pass using the *state-level* distribution,
-  which would make a lot of sense!
-  I haven't included one for now due to some technical challenges in implementing it
-  with hierarchical (state -> PUMA) instead of fully-stratified (age/sex/race) categories.
-
-Finally, we replicate the destination distribution of each MIGPUMA identically
+Finally, after smoothing, we replicate the destination distribution of each MIGPUMA identically
 in each of its component PUMAs.
 We do not model any affinity for staying in the same PUMA within a MIGPUMA due to lack of
 data on this affinity.
