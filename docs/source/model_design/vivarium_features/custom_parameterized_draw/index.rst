@@ -114,7 +114,7 @@ Our simulations contain a high number of parameters, so running multiple values 
 
 Identifying reasonable upper and lower bounds for each parameter may be difficult. For instance,
 
-- Selecting upper and lower 95% uncertainty intervals may bias our assessment of influential parameters towards parameters with more parameter uncertainty.
+- Selecting upper and lower 95% uncertainty intervals will favor parameters with greater parameter uncertainty as more influential parameters. These values may be appropriate if the aim is to assess how input parameter uncertainty influences output uncertainty. However, if the goal is to assess parameter influence across a range of plausible values (across locations or subpopulations, for example), the upper and lower uncertainty bounds specific to a given population may not be the most appropriate parameter values to select.
 
 - Varying parameter values by some constant scalar value could test parameter values in implausible ranges.
 
