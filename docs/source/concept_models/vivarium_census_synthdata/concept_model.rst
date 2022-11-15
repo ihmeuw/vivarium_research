@@ -1000,10 +1000,6 @@ The following post-processing rules should be applied to the relationship after 
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-  The numbers in these files are not finalized!
-
 :download:`Household domestic migration rates <household_domestic_migration_rates.csv>`
 
 :download:`Individual domestic migration rates by type <individual_domestic_migration_rates.csv>`
@@ -1012,11 +1008,7 @@ Simulation inputs
 
 :download:`Relationship proportions for non-reference person moves <non_reference_person_move_relationship_proportions.csv>`
 
-Destination PUMA proportions by source PUMA: :code:`/mnt/team/simulation_science/priv/users/zmbc/prl/puma_to_puma_proportions.csv`.
-
-.. todo::
-
-  Move this last (large) file somewhere more appropriate.
+Destination PUMA proportions by source PUMA (200MB): :code:`J:\Project\simulation_science\prl\data\puma_to_puma_proportions_2022_11_15.csv`
 
 Limitations
 ^^^^^^^^^^^
