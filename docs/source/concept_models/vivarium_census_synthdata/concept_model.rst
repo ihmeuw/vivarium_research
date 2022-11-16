@@ -1645,10 +1645,6 @@ Here is an example:
 
 .. image:: WIC_example.png
 
-Note: for household number, if a tracked mother/guardian is in the sim along with their 
-infant, please assign them the same household number even if they do not live together 
-currently. 
-
 **Who to Sample** 
 
 Selection for the observer will be in 2 steps: 
