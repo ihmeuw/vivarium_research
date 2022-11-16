@@ -1817,6 +1817,151 @@ Note/limitations:
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
 
+Women, Infants, and Children (WIC)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+WIC is a government benefits program designed to support mothers and young 
+children. The main qualifications are income and presence of young children 
+in the home. 
+
+
+**When to Sample** 
+
+- Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
+
+**What to Sample** 
+
+.. list-table:: Simulant Attribute to Sample 
+  :widths: 20
+  :header-rows: 0
+
+  * - Household number (arbitrary indicator which is the same for simulants in the same household)
+  * - Unique simulant ID (for PRL tracking)
+  * - First name
+  * - Middle initial 
+  * - Last name
+  * - Age 
+  * - DOB 
+  * - Home Address 
+  * - Home Zip Code 
+  * - Race/ethnicity 
+
+Here is an example: 
+
+.. image:: WIC_example.png
+
+**Who to Sample** 
+
+Selection for the observer will be in 2 steps: 
+
+#. Eligibilty for WIC 
+#. Covered by WIC 
+
+Please note that multiple people in the same household can be selected. Selection is 
+usually independent, with one exception. If a tracked mother or guardian is selected 
+for WIC benefits, their infant (infant is defined as a less than 1 year old child) 
+must also be enrolled in WIC. In all other cases, selection is independent. 
+
+The main examples of independence are siblings (e.g., having one child in the household 
+on WIC does not mean a second child is or is not on WIC) and infant to tracked mother or 
+guardian (an infant being on WIC does not mean their tracked mother or guardian is or is 
+not on WIC). Inclusion is at the simulant level. Do not include others in the household 
+on the observer. 
+
+To account for these interdependencies, please follow the below steps: 
+
+#. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity 
+#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian) 
+#. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
+#. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met 
+
+Note: for Hispanic simulants, the rate of tracked mothers/guardians is higher than infants. 
+For this group, select the infants associated with the tracked mothers/guardians and 
+stop. This will leads to overselecting infants, which is a known limitation. 
+
+**Eligibility for WIC**
+
+Eligibility for WIC is based on income and age/children in the house. 
+To qualify you must be both: 
+
+- A child under the age of 5 (0-4 years old)
+- OR a tracked mother OR guardian of a child under the age of 1 
+
+And also: 
+
+- Have a total household income less than the limit below (based on number of people in the household)
+
+Max income = $16,410 + ($8,732 * number of people in the household) 
+
+For example, a one person household would have a maximum income of $25,142 and 
+a two person household would have a maximum income of $33,874. 
+
+Source: [WIC_eligibility]_
+
+**Covered by WIC**
+
+Once someone is found to be eligible, they are then randomly assigned to be 
+covered or not covered by WIC. This is a random sample based on the age of 
+the participant. 
+
+.. list-table:: Coverage Rate by Age and Race/Ethnicity
+  :widths: 10 10 10 10 10 
+  :header-rows: 1
+
+  * - Age Bucket 
+    - Hispanic 
+    - Black only (Not hispanic)
+    - White only (Not hispanic)
+    - Other (include all other race groups here)
+  * - Infants (less than age 1)
+    - 98.4% 
+    - 98.4% 
+    - 77.98%
+    - 98.4% 
+  * - Children Age 1
+    - 76.1%
+    - 69.6% 
+    - 51.4% 
+    - 67.6% 
+  * - Children Age 2
+    - 56.8% 
+    - 52.0% 
+    - 38.4% 
+    - 50.5% 
+  * - Children Age 3
+    - 51.2% 
+    - 46.9% 
+    - 34.6% 
+    - 45.5% 
+  * - Children Age 4
+    - 28.7% 
+    - 26.3% 
+    - 19.4% 
+    - 25.5% 
+  * - Tracked Mothers and Guardians with Children 
+    - 99.3% 
+    - 90.9% 
+    - 67.1% 
+    - 88.2% 
+
+Source: [Coverage]_
+
+**Data Errors/Noise** 
+
+.. todo::
+
+    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
+    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses
+
+**Limitations and Possible Future Adds** 
+
+#. Currently the model does not track pregnant people, therefore they are not included despite being eligible 
+#. It is unclear if having one family member on WIC would increase or decrease the chance of having multiple family members on WIC. This could probably be improved upon with more data. Currently, a parent on WIC means that the infant will also be on WIC, but siblings are not affected. 
+#. Selection for WIC is random after eligibility. In practice, lower income individuals are more likely to sign up for WIC and the selection is therefore biased. 
+#. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here 
+#. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life 
+#. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
+#. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data. 
 
 Taxes
 ^^^^^
@@ -2563,8 +2708,13 @@ To Come (TK)
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
 
+.. [Coverage] https://www.fns.usda.gov/wic/2019-eligibility-coverage-rates 
+
+.. [WIC_eligibility] https://fns-prod.azureedge.us/sites/default/files/resource-files/WIC-Policy-Memo-2022-5-IEGs.pdf#page=3 
+
 .. [Census_ZCTAs] Bureau, US Census. n.d. “ZIP Code Tabulation Areas (ZCTAs)” Census.Gov. Accessed November 8, 2022. https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html.
 
 .. [DHS_Unauthorized] Baker, Bryan. January 2021. Estimates of the Unauthorized Immigrant Population Residing in the United States: January 2015-January 2018. `https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf <https://www.dhs.gov/sites/default/files/publications/immigration-statistics/Pop_Estimate/UnauthImmigrant/unauthorized_immigrant_population_estimates_2015_-_2018.pdf>`_
 
 .. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
+
