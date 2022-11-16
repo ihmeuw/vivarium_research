@@ -1,0 +1,12 @@
+Validation outcome,Standard strata,Additional strata,Measure,Metric,Numerator,Denominator,Notes
+Wasting exposure incidence,"age, sex, year, scenario","effectively covered for SAM/MAM; not effectively covered for SAM/MAM; not covered for SAM/MAM
+",incidence,rate per person year,transition counts from source to sink,person-time in source,This should be the same among the coverage stratas
+Wasting exposure recovery,"age, sex, year, scenario","effectively covered for SAM/MAM; not effectively covered for SAM/MAM; not covered for SAM/MAM
+",recovery rate,rate per person year,transition counts from source to sink,person-time in source,Differential among coverage stata
+Wasting exposure prevalence,"age, sex, year, scenario","effectively covered for SAM/MAM; not effectively covered for SAM/MAM; not covered for SAM/MAM
+",prevalence,proportion,person time in exposure state,total person time,Differential between scenario
+Wasting durations,"age, sex, year, scenario","effectively covered for SAM/MAM; not effectively covered for SAM/MAM; not covered for SAM/MAM
+",duration,time in days,,,Differential among coverage stata
+"Prevalence of {cause} for cause in [measles, diarrhea, lri, pem]","age, sex, year, scenario",none,prevalence,proportion,person-time in cause state,total person time,Sanity check
+Cause remission rates,"age, sex, year, scenario",none,remission,rate per person year,transition counts from source to sink,person-time in source,Sanity check
+Cause incidence rates,"age, sex, year, scenario",none,incidence,rate per person year,transition counts from source to sink,person-time in source,Sanity check

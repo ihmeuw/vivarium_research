@@ -1,0 +1,9 @@
+Validation outcome ,standard strata,additional strata,Measure,Metric,Numerator,Denominator,Notes
+Wasting exposure incidence ,"age, sex, year, location ",sq-lns treatment ,incidence,rate per person year,transition counts from source to sink,person-time in source,
+Wasting exposure recovery,"age, sex, year, location ",sq-lns treatment ,recovery rate,rate per person year,transition counts from source to sink,person-time in source,
+Wasting exposure prevalence,"age, sex, year, location ",sq-lns treatment ,prevalence,proportion,person time in exposure state,total person time,
+Wasting durations,"age, sex, year, location ",sq-lns treatment ,duration,time in days,,,
+Stunting exposure prevalence ,"age, sex, year, location ",sq-lns treatment ,prevalence,proportion,person time in exposure state,total person time,
+"Prevalence of {cause} for cause in [measles, diarrhea, lri, pem]","age, sex, year, location ",none,prevalence,proportion,person-time in cause state,total person time,
+Cause remission rates,"age, sex, year, location ",none,remission,rate per person year,transition counts from source to sink,person-time in source,
+Cause incidence rates,"age, sex, year, location ",none,incidence,rate per person year,transition counts from source to sink,person-time in source,

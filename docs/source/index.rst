@@ -13,16 +13,11 @@ To get started adding new documentation, check out our
    :glob:
 
    model_design/index
+   models/index
 
 .. toctree::
    :maxdepth: 1
    :glob:
 
-   concept_models/index
-   intervention_models/index
-   gbd2017_models/index
-   gbd2019_models/index
-   gbd2020_models/index
-   other_models/index
    contributing/index
    glossary/index
