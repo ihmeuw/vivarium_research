@@ -21,11 +21,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_delayed_or_scaled_effects:
+.. _vivarium_best_practices_uncertainty:
 
-=========================================================
-Delayed or Scaled Up Intervention Effects
-=========================================================
+========================================
+Uncertainty in Vivarium
+========================================
 
 .. contents::
    :local:
@@ -33,4 +33,11 @@ Delayed or Scaled Up Intervention Effects
 
 .. todo:: 
 
-  This section
+  Outline types of uncertainty in vivarium simulations:
+
+    - Parameter
+    - Heterogeneity
+    - Stochastic
+    - Structural
+
+  Link to existing page on monte carlo uncertainty
