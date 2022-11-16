@@ -1,4 +1,4 @@
-.. _model_design:
+.. _models:
 
 =====================
 Vivarium Models

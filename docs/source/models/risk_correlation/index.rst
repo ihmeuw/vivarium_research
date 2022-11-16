@@ -8,5 +8,4 @@ Risk Correlation Models
    :maxdepth: 1
    :glob:
 
-   *
    */index
