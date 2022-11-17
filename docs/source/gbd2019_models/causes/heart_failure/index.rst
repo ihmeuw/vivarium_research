@@ -203,9 +203,13 @@ The relative risks can be utilized by SBP group based on this tables:
      - 1.76 (1.43, 2.17) 
      - 
 
+
+The relative risk for heart failure is 1.14 (1.12, 1.16). The relative risk 
+for heart failure is per 1-unit increase in BMI. **Please note that this is different than the other relative risks for BMI.**
+
 .. todo::
   
-  Add in heart failure due to BMI and FPG 
+  Add in heart failure due to FPG 
 
 
 Assumptions and Limitations

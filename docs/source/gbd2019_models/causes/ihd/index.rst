@@ -267,6 +267,9 @@ Definitions
    * - HF
      - **H**\ eart **F**\ailure
      - Simulant that experiences symptoms of heart failure as a result of IHD 
+   * - AMI_HF
+     - **A**\ cute **M**\ yocardial **I**\ nfarction (AMI) with Heart Failure 
+     - Simulant that experiences acute MI symptoms while also having heart failure 
    * - S2
      - **S**\ usceptible
      - Susceptible to IHD; S2 used in the angina cause diagram, currently do not model natural history for IHD so do not track how people enter the angina state (e.g. as first clinical diagnosis of stable coronary artery disease or following an AMI)
@@ -292,17 +295,29 @@ States Data
      - Post-CoDCorrect CSMR
    * - S1
      - prevalence
-     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040)}`
-     - Simulants without prevalent AMI or PostMI; may have other forms of acute or chronic IHD
+     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040 + prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)}`
+     - Simulants without prevalent AMI, PostMI or heart failure; may have other forms of acute or chronic IHD
    * - AMI
      - prevalence
-     - :math:`\sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
+     - :math:`\text{1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
      - There are two acute sequelae
-   * - AMI
+   * - AMI 
      - excess mortality rate
      - emr_m24694
      -
    * - AMI
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_s378 + prevalence_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     -
+   * - AMI_HF
+     - prevalence
+     - :math:`\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`     
+     - There are two acute sequelae
+   * - AMI_HF
+     - excess mortality rate
+     - emr_m24694
+     -
+   * - AMI_HF
      - disability weight
      - :math:`\frac{1}{\text{prevalence_s378 + prevalence_s379}} \cdot \sum\limits_{s\in acute-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      -
@@ -367,11 +382,11 @@ Transition Data
      - 
    * - 2
      - AMI
-     - P
+     - P or HF
      - 28 days
      - duration-based transition from acute state then progress into post state
    * - 3
-     - P
+     - P or HF
      - AMI
      - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379})}`
      - current assumption is that rates 1 and 3 are equal
@@ -384,11 +399,6 @@ Transition Data
      - S1
      - HF
      - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)})}` 
-     - 
-   * - 6
-     - AMI
-     - HF
-     - Restricted to simulants who were previously in the HF state. This is also a duration based progression based on AMI. 
      - 
 
 
