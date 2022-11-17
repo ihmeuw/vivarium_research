@@ -421,7 +421,7 @@ this person as a dependent.
     * If there is not a non-relative of the appropriate age available, assign to a non-relative who is older than 18 (select at random if multiple) 
     * If there are no non-relatives 18 or older, make "N/A"
 - Child is the reference person 
-    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian. If there are >2, assign 2 at random. 
+    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian. If there is >1, assign one at random. 
     * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
 
