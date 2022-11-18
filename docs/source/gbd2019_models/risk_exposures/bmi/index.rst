@@ -168,7 +168,7 @@ The quantity of interest is exposure to the mean BMI level; we assume full rever
 Data Description
 ++++++++++++++++
 
-The rei_id for BMI is 108
+The rei_id for BMI is 370
 
 .. list-table:: ID Table 
 	:widths: 10, 5, 15

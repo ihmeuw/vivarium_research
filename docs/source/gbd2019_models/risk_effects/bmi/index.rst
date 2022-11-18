@@ -233,7 +233,7 @@ myocardial infarction and stable angina. These are arrows
 1, 3, and 4 on the IHD cause diagram. They should be 
 applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)/5} 
+incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)/5} 
 
 The association was evaluated at the cause level, but the 
 associations should be applied to the incidence rates for 
@@ -268,7 +268,7 @@ The relative risks apply to the incidence rates of acute
 ischemic stroke. These are arrows 1 and 3 on in the ischemic 
 stroke cause model. They should be applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)/5} 
+incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)/5} 
 
 The relative risk for GBD 2019 is for a 5-unit increase in BMI. 
 
