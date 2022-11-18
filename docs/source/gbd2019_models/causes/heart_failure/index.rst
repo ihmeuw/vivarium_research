@@ -254,6 +254,10 @@ States Data
      - Measure
      - Value
      - Notes
+   * - All
+     - cause-specific mortality rate
+     - :math:`\text{prevalence_m2412} \times \text{propHF_RESID} \cdot \text{emr_m2412}`
+     - Researcher created based on prevalence and EMR of the modelable entity 
    * - S
      - prevalence
      - :math:`\text{1−(prevalence_m2412} \times \text{propHF_RESID)}` 

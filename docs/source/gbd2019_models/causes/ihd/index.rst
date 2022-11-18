@@ -299,7 +299,7 @@ States Data
      - Simulants without prevalent AMI, PostMI or heart failure; may have other forms of acute or chronic IHD
    * - AMI
      - prevalence
-     - :math:`\text{1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
+     - :math:`\text{(1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385))} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
      - There are two acute sequelae
    * - AMI 
      - excess mortality rate
@@ -477,6 +477,11 @@ Data Sources
      - model assumption
      - {s5726, s383, s384, s385}
      -
+
+Assumptions
++++++++++++
+
+#. To find the prevalence of AMI with and without HF, we assume it is distributed according to the prevalence of HF in the population. This is likely not true, but with the burn in, will have an opportunity to correct itself. 
 
 Validation Criteria
 +++++++++++++++++++
