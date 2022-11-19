@@ -2477,37 +2477,6 @@ Therefore, it matters that we get approximately right the number
 and characteristics of people who fall above and below these thresholds.
 The actual income values, in between the thresholds, are not too consequential.
 
-Data sources and analysis
-^^^^^^^^^^^^^^^^^^^^^^^^^
-
-The primary data source for this component is the ACS PUMS, which reports
-respondent income.
-We subset the PUMS to only those who are employed; as discussed in the next
-section, in our simulation, unemployed people have 0 income.
-
-Distribution parameters
-'''''''''''''''''''''''
-
-It is fairly typical to approximate the income distribution with a log-normal
-distribution, though it has some known bias near the lower end of the income range. [Income_Lognormal]_
-Sometimes thicker Pareto upper tails are used because this fits a little better at high incomes, but we haven't done that here for simplicity.
-
-There are multiple methods to fit a lognormal distribution to observed values:
-using the mean and standard deviation of the log of the values,
-maximum likelihood estimation (MLE) which is implemented by SciPy's :code:`fit` method,
-or using the mean and median of the values.
-To avoid bounds issues with incomes at or below 0, and because of the presence of top-
-and bottom-coding in the ACS PUMS data, we have chosen to use the mean and median method.
-The mean can be fairly reliably calculated even in the presence of top-coding, because top-coded
-values are assigned to the mean of all top-coded values in the PUMS data.
-
-Propensity components
-'''''''''''''''''''''
-
-.. todo::
-
-  Fill in the sources and math used to calculate the variance of each component of the propensity.
-
 Simulation strategy
 ^^^^^^^^^^^^^^^^^^^
 
@@ -2526,17 +2495,15 @@ For employed simulants, income values are sampled from a log-normal distribution
 specific to the simulant's age group, sex, and race/ethnicity.
 **Note that this means that a simulant's income in dollars should change when they
 age into a new age group, even though their propensity/quantile does not.**
-Details about the distributions are in the "distribution parameters" section below.
 
 Propensities/quantiles within the distribution are updated when a simulant
 changes employment (see employment component for when this occurs), but in a way that retains
 some autocorrelation for each individual.
-Details are in the "propensities" section below.
 
 Distribution parameters
 '''''''''''''''''''''''
 
-As stated above, each combination of age group, sex, and race/ethnicity has
+Each combination of age group, sex, and race/ethnicity has
 a lognormal distribution of income.
 This can be implemented with :code:`scipy.stats.lognorm`, which has two required parameters:
 :code:`s` (the shape parameter) and :code:`scale` (in our case, :code:`loc` should remain at its default value of 0).
@@ -2567,20 +2534,144 @@ component changes each time the simulant changes jobs, and has no autocorrelatio
 
 By the time a simulant is employed for the first time (it does not matter if this happens at initialization,
 working age, or first employment event), the simulant-specific component should be randomly drawn from a normal
-distribution with mean 0 and variance 0.835594.
+distribution with mean 0 and variance 0.812309.
 
 At each job change event (either at any employment change, or only at the employment changes that do
 not result in unemployment), the job-specific component should be randomly drawn from a normal distribution
-with mean 0 and variance 0.164406.
+with mean 0 and variance 0.187691.
 
-.. todo::
-
-  These variances are preliminary and may change.
-
-See the data sources and analysis section above for how these variances were calculated.
+See the data sources and analysis section for how these variances were calculated.
 
 A simulant's propensity/quantile within the corresponding log-normal income distribution is always equal
 to the probit function of the sum of their simulant-specific component and their job-specific component.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The primary data source for this component is the ACS PUMS, which reports
+respondent income.
+We subset the PUMS to only those who are employed; as discussed in the previous
+section, in our simulation, unemployed people have 0 income.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+It is fairly typical to approximate the income distribution with a log-normal
+distribution, though it has some known bias near the lower end of the income range. [Income_Lognormal]_
+Sometimes thicker Pareto upper tails are used because this fits a little better at high incomes, but we haven't done that here for simplicity.
+
+There are multiple methods to fit a lognormal distribution to observed values:
+using the mean and standard deviation of the log of the values,
+maximum likelihood estimation (MLE) which is implemented by SciPy's :code:`fit` method,
+or using the mean and median of the values.
+To avoid bounds issues with incomes at or below 0, and because of the presence of top-
+and bottom-coding in the ACS PUMS data, we have chosen to use the mean and median method.
+The mean can be fairly reliably calculated even in the presence of top-coding, because top-coded
+values are assigned to the mean of all top-coded values in the PUMS data.
+
+Propensity components
+'''''''''''''''''''''
+
+We have chosen to model income among the employed **in each demographic group** as follows:
+
+.. math::
+
+  log(income) \sim Normal(\mu_\text{log(income)}, \sigma_\text{log(income)}^2)
+
+We want to break down the variance using two normally distributed components of income propensity:
+
+.. math::
+
+  job \sim Normal(0, \sigma_\text{job}^2)
+
+.. math::
+
+  simulant \sim Normal(0, 1-\sigma_\text{job}^2)
+
+.. math::
+
+  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+
+We inform the variance contributions of the job- and simulant-specific
+components with a measured variance of 1-year change in log(earnings)
+for people who were employed in both years.
+This value -- **0.09** -- comes from 2015 IRS data that linked tax
+returns. [IRS_Volatility]_
+
+We assume that this value has not changed since 2015, and is the same for income as for earnings.
+In reality, the volatility is probably lower for income.
+
+.. note::
+
+  It is pretty hard to tell from the graph we extracted this value from
+  whether it refers to individual or to household earnings -- we think
+  individual, but if we are wrong, we are additionally extrapolating
+  from household to individual.
+
+In our model of income,
+
+.. math::
+
+  log(income_\text{j2}) - log(income_\text{j1}) = job_\text{j2} * \sigma_\text{log(income)} - job_\text{j1} * \sigma_\text{log(income)} \sim Normal(0, 2\sigma_\text{job}^2\sigma_\text{log(income)}^2)
+
+where :math:`\text{j1}` and :math:`\text{j2}` are the jobs before and after a job change event for that simulant.
+
+To translate this into year-over-year volatility, we need to incorporate the rate at which simulants change jobs.
+(We also ignore age-up events and assume that a simulant does not change demographic groups.)
+Specifically, we need to know: **given how we have modeled employment, what proportion of people who are employed at two time points a year apart
+are in the same job at both time points?**
+
+.. note::
+
+  Answering this question **given how we have modeled employment** ensures
+  that year-over-year income volatility in the simulation roughly equals
+  the IRS value, even if our rate of job changes isn't very accurate.
+  If we were to add more complexity to our employment model such that
+  (a) we had more confidence in its accuracy and (b) it was no longer
+  straightforward to answer this question, we could look for an empirical
+  value instead.
+
+We break this down into two sub-questions:
+
+1. Of those employed at time t1, what proportion are employed at time t2? This can be approximated by a recurrence which uses the 28-day timestep of the sim and assumes that each employment change has a 42% chance of resulting in unemployment if currently employed, and a 100% chance of resulting in employment if currently unemployed. Specifically,
+
+.. math::
+
+  \text{employed}(0) = 1
+
+.. math::
+
+  \text{employed}(t) = \text{employed}(t - 1) + (1 - \text{employed}(t - 1)) * 0.5 * 1 * \frac{28}{365} - \text{employed}(t - 1) * 0.5 * 0.42 * \frac{28}{365}
+
+2. Of those employed at time t1, what proportion are in the same job at time t2? Similarly, if we break the transition rate into 28-day timesteps, :math:`\text{same_job}(t) = 1 - (1 - 0.5 * \frac{28}{365})^{t}`
+
+This implies:
+
+.. math::
+
+  log(income_\text{t2}) - log(income_\text{t1}) \sim Normal(0, 2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2\sigma_\text{log(income)}^2)
+
+where t2 is one year after t1.
+
+We assume that the IRS value for variance of the 1-year change is equal for all demographic groups. In reality, there is evidence of differential volatility by race and other factors.
+
+Because we need to calculate a *single* simulant-specific/job-specific split (the simulant-specific component needs to follow a single simulant through many age groups), we use :math:`E(\sigma_\text{log(income)}^2)` from ACS PUMS across demographics to solve the equation:
+
+.. math::
+
+  2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2E(\sigma_\text{log(income)}^2) = 0.09
+
+.. math::
+
+  \sigma_\text{job}^2 \approx 0.187691
+
+.. note::
+
+  If we want to refine this calculation in a future version of the model,
+  there are other sources we could use to inform the variance split,
+  which may also have more information on volatility by demographics. [Volatility_PSID_review]_ [Volatility_CPS]_
+  In the literature, the values we are interested in are referred to as
+  "gross volatility."
 
 2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -2828,3 +2919,9 @@ To Come (TK)
 .. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
 
 .. [Income_Lognormal] Schield, Milo. 2018. Statistical Literacy and the Lognormal Distribution. `http://www.statlit.org/pdf/2018-Schield-ASA.pdf <http://www.statlit.org/pdf/2018-Schield-ASA.pdf>`_
+
+.. [IRS_Volatility] Lamadon T, Mogstad M, Setzler B. Income volatility, taxation and the functioning of the U.S. labor market. IRS.gov. Accessed November 19th, 2022. https://www.irs.gov/pub/irs-soi/19rpincomevolatilitytaxationandlabor.pdf
+
+.. [Volatility_PSID_review] Moffitt R, Zhang S. The PSID and Income Volatility: Its Record of Seminal Research and Some New Findings. Ann Am Acad Pol Soc Sci. 2018 Nov;680(1):48-81. doi: 10.1177/0002716218791766. Epub 2018 Nov 14. PMID: 31666745; PMCID: PMC6820686. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6820686/
+
+.. [Volatility_CPS] Ziliak JP, Hardy B, Bollinger C. Earnings volatility in America: Evidence from matched CPS. Labour Economics. 2011 Dec; 18(6). https://doi.org/10.1016/j.labeco.2011.06.015
