@@ -35,11 +35,6 @@ Scope
 
 This cause model document is reliant on a list of modeled causes to be specified in a concept model when this cause is included in a given vivarium simulation.
 
-Assumptions and Limitations
-+++++++++++++++++++++++++++
-
-This modeling strategy is limited in that it introduces potential incompatibilities with GBD YLD estimates as adjusted for comorbidities. 
-
 Cause Model Diagram
 +++++++++++++++++++
 
@@ -148,3 +143,10 @@ Validation Criteria
 +++++++++++++++++++
 
 Our simulation should replicate GBD estimates of all-cause mortality, YLL, and YLD rates in the baseline scenario. Additionally, we should continue to meet all modeled cause-specific verification and validation criteria.
+
+Assumptions and Limitations
++++++++++++++++++++++++++++
+
+1. This modeling strategy is limited in that it introduces potential incompatibilities with GBD YLD estimates as adjusted for comorbidities due to the fact that disability weights are not additive across multiple conditions.
+
+2. We assume that all simulants have the same morbidity and mortality rates due to other causes with no individual-level heterogeneity. When modeled interventions avert deaths in the alternative scenario relative to the baseline scenario, it is possible that these simulants experience *greater* than average background morbidity and mortality rates due to their vulnerable status in the baseline scenario, which could cause us to slightly overestimate the impact of our interventions on DALYs by underestimating the magnitude of DALYs experienced in the alternative scenario following the averted deaths.
