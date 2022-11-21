@@ -417,16 +417,18 @@ this person as a dependent.
 - Child is a biological, adopted, foster or step child to reference person 
     * Assign reference person 
 - Child is any other relative to reference person (NOT roommate/housemate or other nonrelative)
-    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
+    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a relative of the appropriate age available, assign the reference person 
 - Child is non-relative (roommate or other nonrelative) to reference person 
-    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
+    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a non-relative of the appropriate age available, assign to a non-relative who is older than 18 (select at random if multiple) 
     * If there are no non-relatives 18 or older, make "N/A"
 - Child is the reference person 
-    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian 
-    * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
+    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian. If there is >1, assign one at random. 
+    * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
+- Child is the spouse of the reference person 
+    * Make "N/A"
 
 This can be seen visually in the flowchart below: 
 
@@ -434,14 +436,15 @@ This can be seen visually in the flowchart below:
 
 Once a guardian is assigned, if there is a spouse or unmarried partner 
 for the guardian simulant (reference person and spouse/unmarried partner ONLY), then 
-include both as guardians. Otherwise only include the one as a guardian. 
+include both as guardians. Otherwise only include the one as a guardian. If 
+there are multiple spouse/unmarried partner options, select one at random. 
 
 **For a simulant who is below 24 and in GQ at college:**
 
 Simulant will be randomly assigned to a guardian based on the below rules: 
 
 - 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
-- Match to a person 20 to 45 years older than the child 
+- Match to a person 18 to 45 years older than the child 
 - If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people source2_ 
     * 23% female reference people without a listed spouse 
@@ -457,7 +460,7 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 **Limitations**
 
 #. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
-#. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
+#. We have "parents" fall between 18-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
 #. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
 
@@ -480,7 +483,8 @@ of gender).
 The tracked mother will be assigned as a guardian. In addition, if 
 the tracked mother has a spouse or unmarried partner (reference person 
 and spouse/unmarried partner ONLY), the spouse/partner will 
-also be assigned as a guardian. 
+also be assigned as a guardian. If there are multiple spouse/unmarried 
+partner options, select one at random. 
 
 .. _census_prl_fertility:
 
