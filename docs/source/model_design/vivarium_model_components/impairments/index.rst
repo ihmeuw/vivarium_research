@@ -24,7 +24,7 @@
 .. _impairments:
 
 =================================
-Impairments
+Modeling Impairments
 =================================
 
 .. contents::
