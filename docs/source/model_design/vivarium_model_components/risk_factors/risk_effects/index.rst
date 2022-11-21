@@ -394,7 +394,7 @@ Ratio measures and difference measures tell us very different things. Ratio meas
 Difference measures relating to the whole population tend to be more useful and thus more widely used. These population difference measures, also called measures of impact. It is important to realise that ratios and differences can result in very different interpretations. For example, if an association between a risk factor and disease outcome is very strong in a particular group (high relative risks), but the outcome is relatively uncommon in this group, a big increase in risk will result in a modest increase in cases. Alternatively, if the outcome is common among a group, a small relative risk can lead to a large increase in cases. Ratio measures are most useful for determining which risk factors are most strongly associated with disease, whereas difference measures are more useful for estimating the public health importance of different risk factors.
 
 References
-----------
+++++++++++
 
 .. [Measure_of_effect] Measures of Effect: Relative Risks, Odds Ratios, Risk Difference, and 'Number Needed to Treat'
    Retrived 19 March 2020.
