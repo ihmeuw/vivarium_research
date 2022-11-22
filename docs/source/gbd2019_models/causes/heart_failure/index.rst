@@ -207,10 +207,6 @@ The relative risks can be utilized by SBP group based on this tables:
 The relative risk for heart failure is 1.14 (1.12, 1.16). The relative risk 
 for heart failure is per 1-unit increase in BMI. **Please note that this is different than the other relative risks for BMI.**
 
-.. todo::
-  
-  Add in heart failure due to FPG 
-
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
@@ -340,6 +336,23 @@ Data Sources
      - Impariment definition
      - LList of HF rei’s for the combined etiologies 
      - 379, 217, 218, 219 for treated, mild, moderate, and severe 
+
+Post Processing
++++++++++++++++
+
+While heart failure will operate as a single cause as shown above, there is a 
+desire to have separate counts for incidence, prevalence, and deaths separated 
+into two categories: heart failure from hypertensive heart disease, and heart 
+failure from other causes. 
+
+As these causes are identical in all capacities, we think it is easier to make 
+this designation in post processing rather than in the model itself. The rates of 
+each group (HHD vs other) can be found in this `cvs file <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_. Note that this is different than the above proportions 
+file. It is designed to give the percent of heart failure to assign to HHD in post 
+processing. 
+
+In all outcome tables that are separated by cause, the heart failure cause should be 
+split in two causes. 
 
 
 Validation Criteria
