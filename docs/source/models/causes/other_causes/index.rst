@@ -15,7 +15,7 @@ Disease Overview
 
 Modeling YLDs and YLLs due to causes other than those specifically modeled in a vivarium simulation is critical to accurate estimation of intervention impact. 
 
-  For instance, let's say that a simulant without :ref:`small quantity lipid-based nutrient supplementation <lipid_based_nutrient_supplements>` coverage in the baseline scenario dies due to protein energy malnutrition at age 1 in the baseline scenario, accumulative (approximately) 80 YLLs. 
+  For instance, let's say that a simulant without :ref:`small quantity lipid-based nutrient supplementation <lipid_based_nutrient_supplements>` coverage in the baseline scenario dies due to protein energy malnutrition at age 1 in the baseline scenario, accumulating (approximately) 80 YLLs. 
 
   Now in the alternative scenario, this simulant is covered by SQ-LNS and their death at age 1 is prevented by this intervention. If we stopped observing this simulant at that instant, we would conclude that this resulted in 80 YLLs averted! 
 
@@ -23,7 +23,7 @@ Modeling YLDs and YLLs due to causes other than those specifically modeled in a 
 
   In fact, it's possible that this simulant then dies of an asthma attack at age 10 in the alternative scenario, accumulating (approximately) 70 YLLs. This dramatically changes our estimation of total DALYs averted due to the intervention for this simulant to from 80 to just under 9.25!
 
-This example demonstrates that it is important to estimate morbidity and mortality from all causes even when they are not directly affected by the intervetion we are modeling. Ideally we would observe all simulated individuals affected by an intervention until death for completely accurate accounting; however, this may not always be necessary as we may be specifically interested in particular age groups of interest. Additionally, sometimes YLDs accumulated following an averted death may be dwarfed by YLLs averted due to that averted death. In this case, it may be an acceptable limitation to exclude YLDs due to other causes; however, this is less likely to be an accetable limitation when modeling older ages.
+This example demonstrates that it is important to estimate morbidity and mortality from all causes even when they are not directly affected by the intervention we are modeling. Ideally we would observe all simulated individuals affected by an intervention until death for completely accurate accounting; however, this may not always be necessary as we may be specifically interested in particular age groups of interest. Additionally, sometimes YLDs accumulated following an averted death may be dwarfed by YLLs averted due to that averted death. In this case, it may be an acceptable limitation to exclude YLDs due to other causes; however, this is less likely to be an acceptable limitation when modeling older ages.
 
 Therefore, this cause model document exists to model both morbidity and mortality due to unmodeled causes in vivarium simulations.
 
