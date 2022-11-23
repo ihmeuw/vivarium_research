@@ -936,7 +936,7 @@ Code is below for reference
   * - 8.0
     - Adding Polypill Intervention
     - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios is less visually apparent in this model, which is expected as this only affects SBP and works for fewer simulants. We are planning to review findings with the team to discuss if we should adjust the intervention or not. 
-   * - 9.0
+  * - 9.0
     - Adding BMI
     -  
   * - 10.0
