@@ -931,24 +931,21 @@ Code is below for reference
     - Adding medications for LDL-C 
     - The validation workbook Model 6 is split into two halves. `Causes and risk effects <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV.ipynb>`_ and `medications and helathcare appointments <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV-Copy1.ipynb>`_. V&V for this model is quite concerning. Exposure to LDL-C changes quite drastically over time, with younger populations increasing in exposure and older populations decreasing. In addition, huge percents of the population are ending up on high intensity statins very quickly, which is not realistic. This will need additional work to fix the LDL-C treatment. Comparison literature: [Gu_2012]_ [Derington_2020]_
   * - 7.0
-    - Adding Outreach Intervention (might change)
-    -  
+    - Adding Outreach Intervention 
+    - `Validation workbook for Model 7 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model7_VV.ipynb>`_. V&V worked well for this model. In the incidence of MI and stroke, there is a clear difference between scenarios that is in line with back of the envelope expectations. We do not visually see a separation in ACMR, but that was also expected. 
   * - 8.0
-    - Adding Polypill Intervention (might change)
-    -  
-  * - 9.0
-    - Adding Heart Failure (might change)
+    - Adding Polypill Intervention
+    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios is less visually apparent in this model, which is expected as this only affects SBP and works for fewer simulants. We are planning to review findings with the team to discuss if we should adjust the intervention or not. 
+   * - 9.0
+    - Adding BMI
     -  
   * - 10.0
-    - Scenarios 
+    - Adding Heart Failure  
     -  
   * - 11.0
-    - BMI  
-    -  
-  * - 12.0
     - FPG 
     -  
-  * - 13.0
+  * - 12.0
     - Lifestyle Intervention  
     -  
 
