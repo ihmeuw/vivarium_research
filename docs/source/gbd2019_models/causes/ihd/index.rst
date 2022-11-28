@@ -1,8 +1,13 @@
 .. _2019_cause_ihd:
 
-======================
-Ischemic Heart Disease
-======================
+========================================
+Ischemic Heart Disease and Heart Failure
+========================================
+
+In the GBD, IHD and heart failure are separated. IHD is a cause and heart failure is 
+considered an impairment, without deaths directly attributed to it. For this project, 
+we are modeling HF in two parts: due to ischemic heart disease and residual, both of which are 
+represented on this page. 
 
 .. contents::
    :local:
@@ -33,6 +38,8 @@ Ischemic Heart Disease
 Disease Overview
 ----------------
 
+**Ischemic Heart Disease** 
+
 Ischemic heart disease (IHD) is a non-communicable cardiovascular disease which occurs when the arteries of the heart cannot deliver enough oxygen-rich blood to the heart. IHD is also referred to as coronary artery disease or coronary heart disease and is often caused by the buildup of plaque, a waxy substance, inside the lining of larger coronary arteries. This buildup can partially or totally block blood flow in the large arteries of the heart. Some types of this condition may be caused by disease or injury affecting how the arteries work in the heart.
 
 Symptoms of coronary heart disease may be different from person to person even if they have the same type of coronary heart disease. Acute coronary events may cause symptoms such as angina, cold sweats, dizziness, nausea, neck pain, shortness of breath, sleep disturbances, or weakness. Chronic ischemic heart disease can cause signs and symptoms such as angina, anxiety or nervousness, fatigue, or neck pain. Symptoms may get worse as the buildup of plaque continues to narrow the coronary arteries. However, because many people have no symptoms, they do not know they have coronary heart disease until they have chest pain, a heart attack, or sudden cardiac arrest. 
@@ -40,6 +47,17 @@ Symptoms of coronary heart disease may be different from person to person even i
 Coronary microvascular disease is another type of coronary heart disease. It occurs when the heart’s tiny blood vessels do not work normally.
 
 [NIH_IHD]_
+
+**Heart Failure** 
+
+Heart failure is a condition in which the heart can't pump enough blood to meet the body's needs. In some cases, the heart can't fill with enough blood, while in others, the heart can't pump blood to the rest of the body with enough force. Some people have both problems. 
+
+Heart failure develops over time as the heart's pumping action grows weaker. It can affect one or both sides of your heart. Right-side heart failure occurs if the heart can't pump enough blood to the lungs to pick up oxygen. Left-side heart failure occurs if the heart can't pump enough oxygen-rich blood to the rest of the body. Left-sided and right-sided heart failure may have different causes. Right-side heart failure may cause fluid to build up in the feet, ankles, legs, liver, abdomen, and the veins in the neck. Right-side and left-side heart failure also may cause shortness of breath and fatigue (tiredness). 
+
+The leading causes of heart failure are diseases that damage the heart. Examples include ischemic heart disease, high blood pressure, and chronic obstructive pulmonary disease. 
+
+[NHLBI]_
+[AHA_IHD]_
 
 GBD 2019 Modeling Strategy
 --------------------------
@@ -64,11 +82,62 @@ GBD 2019 Non-Fatal Modeling Strategy
 [Framingham]_
 [Cardiology]_
 
+3. Heart Failure: 
+Heart failure was diagnosed clinically using structured criteria such as the Framingham or European Society of Cardiology criteria. Previous iterations of GBD modelled symptomatic (i.e., NYHA Class II and above) episodes of HF only. Beginning in GBD 2016, we used ACC/AHA Stage C and above to capture both persons who are currently symptomatic and those who have been diagnosed with heart failure but are currently asymptomatic. 
+
+Framingham Criteria: Must fulfill two major criteria or one major and two minor criteria.
+
+Major criteria: Paroxysmal nocturnal dyspnoea, neck vein distention, rales, radiographic cardiomegaly, acute pulmonary oedema, S3 gallop, increased central venous pressure (>16 cm H\ :sub:`2`\O at right atrium), hepatojugular reflux; weight loss >4.5 kg in 5 days in response to treatment
+
+Minor criteria: bilateral ankle oedema, nocturnal cough, dyspnoea on ordinary exertion, hepatomegaly, pleural effusion, decrease in vital capacity by one-third from maximum recorded, tachycardia (heart rate>120 beats/min).  
+[Framingham]_
+
+European Society of Cardiology: Typical signs (elevated jugular venous pressure, pulmonary crackles and peripheral oedema) and symptoms (eg, breathlessness, ankle swelling, and fatigue) caused by a structural and/or functional cardiac abnormality, resulting in a reduced cardiac output and/or elevated intracardiac pressures at rest or during stress. 
+[Cardiology]_
+
 **Input data:**\
+
+**Ischemic Heart Disease** 
 
 Other than inpatient hospital and inpatient claims data, we did not include any data from sources other than the literature for myocardial infarction. 
 
 The primary input for the asymptomatic ischaemic heart disease following myocardial infarction model are 28-day survivors calculated from the excess mortality estimates for the myocardial infarction model. We included data for excess mortality and standardised mortality ratio to inform the estimates of survival after myocardial infarction.
+
+**Heart Failure** 
+
+We used literature data plus inpatient hospital data and claims to model the overall heart failure envelope. Additionally, we used the following data sources to estimate the proportion of heart failure attributable to each etiology: Vital Registry data from Mexico, Brazil, Taiwan, Colombia, and the US; Inpatient admissions from Friuli Venezia, Italy; and Linked Vital Registry data from Friuli Venezia, Italy. 
+
+**Modelling strategy:**\
+
+To estimate the burden of heart failure due to each of the underlying causes 
+of heart failure, we first estimated the overall prevalence of heart failure 
+and then the proportion of heart failure that could be attributed to each cause. 
+The latter process includes an initial assessment of the fraction of heart 
+failure cases attributable to each of six high‐level parent cause groupings, 
+followed by further division into the detailed causes within each of these groupings. 
+
+Etiological fraction estimation:
+
+To estimate the proportion of heart failure attributable to each cause, we used Equation 1 to calculate the prevalence of heart failure due to each etiology, which was then scaled into a proportion. 
+
+Equation 1:
+:math:`\text{Prevalence}_{HF due to aetiology} = \frac{\text{Cause Specific Mortality Rate}_{HF due to aetiology}}{\text{Excess Mortaltiy Rate}_{HF due to aetiology}}`
+
+First, we calculated the Cause Specific Mortality Rate (CSMR) for heart failure due to each etiology. We used age-, sex-, and location-specific CSMR (post CoDCorrect) for each etiology, multiplied by the fraction of deaths that also involved heart failure (Equation 2). This fraction was a modeled quantity, informed by person-level vital registry (VR) data from the United States, Mexico, Brazil, Taiwan, and Colombia, data sources which contained the underly­­ing cause of death as well as all codes in the causal chain. From these sources, we calculated the fraction of underlying deaths from each etiology in which heart failure was coded in the causal chain. These data were modeled in MR-BRT to generate age- and sex-specific estimates of this proportion. For Hypertensive Heart Disease, Alcoholic Cardiomyopathy, and Other Cardiomyopathy, we set the proportion to be 1, as all deaths due to these causes involve heart failure.  
+
+Equation 2: 
+:math:`\text{CSMR}_{HF due to aetiology} = \text{CSMR}_{aetiology} \times \text{Proportion deaths with HF}_{aetiology}`
+
+Next, we estimated the Excess Mortality Rate (EMR) for heart failure due to each etiology. We used uniquely identified person-level hospital discharge data for the entire Italian region of Friuli Venezia Giulia, linked to all death records from the region. Inpatient data contained all primary and non-primary diagnoses associated with the visit, and mortality data contained the underlying cause of death as well as all codes in the causal chain. We identified patients with heart failure due to each etiology as individuals with hospital coded heart failure concurrent or after a hospital code of the etiology. Excess Mortality Rate for heart failure due to each etiology was calculated by subtracting the background mortality rate from the mortality rate of persons with heart failure due to that etiology. We modelled this quantity in MR-BRT to generate age- and sex-specific estimates of this value. Due to small number of deaths in younger ages, we assumed equal EMR across etiologies for ages under 45. 
+
+We calculated the prevalence of Heart Failure due to each etiology using Equation 1. These were scaled to sum to one, generating the estimated proportions of Heart Failure due to each etiology.
+
+These proportions, along with literature data, were used to inform DisMod models for the six broadest and mutually exclusive and collectively exhaustive cause groupings: ischemic heart disease, hypertensive heart disease, cardiomyopathy and myocarditis, rheumatic heart disease, cardiopulmonary disease, and other cardiovascular and circulatory diseases. An exception to this approach was made for sub-Saharan Africa, where we excluded the proportion estimates generated from death data, relying instead on published literature to determine the proportions of heart failure etiologies. This decision was based on expert opinion that local patterns differed significantly from what would have been determined from death data. The THESUS‐HF study, a large-scale, prospective, echocardiographic study of heart failure etiologies in multiple African countries, provided these proportions.  
+[THESUS]_
+
+The results of these six proportion models were scaled to sum to one.  
+
+For heart failure due to cardiopulmonary disease, heart failure due to cardiomyopathy and myocarditis, and heart failure due to other causes, we calculated the proportion for each sub-cause according to the proportion of that cause within each larger aggregate group. 
 
 **Severity split inputs:**\
 
@@ -101,7 +170,7 @@ Asymptomatic ischaemic heart disease following myocardial infarction was all ass
      - 
      - 0.0
 
-Heart failure was split into medically managed, mild, moderate, and severe groups. Disability weights were established for these severities and are in the table below. 
+Heart failure from IHD was split into medically managed, mild, moderate, and severe groups. Disability weights were established for these severities and are in the table below. 
 
 .. list-table:: Severity distribution for heart failure from IHD 
    :widths: 15 25 12
@@ -123,6 +192,28 @@ Heart failure was split into medically managed, mild, moderate, and severe group
      - Has chest pain that occurs with minimal physical activity, such as walking only a short distance. After a brief rest, the pain goes away. The person avoids most physical activities because of the pain.
      - 0.167 (0.11–0.24)
 
+Residual heart failure was split into: treated (same as controlled or medically managed); mild; moderate; and severe heart failure based on an analysis of MEPS data. 
+
+.. list-table:: Severity levels for Heart Failure in GBD 2019 and the associated disability weight (DW)
+   :widths: 15 25 12
+   :header-rows: 1
+
+   * - Severity level
+     - Lay description
+     - DW (95% CI)
+   * - Treated (also seen as controlled, medically managed)
+     - Has been diagnosed with clinical heart failure, a chronic disease that requires medication every day and causes some worry but minimal interference with daily activities. 
+     - 0.049 (0.031-0.072)
+   * - Mild
+     - Is short of breath and easily tires with moderate physical activity, such as walking uphill or more than a quarter‐mile on level ground. The person feels comfortable at rest or during activities requiring less effort.  
+     - 0.041 (0.026-0.062)
+   * - Moderate
+     - Is short of breath and easily tires with minimal physical activity, such as walking only a short distance. The person feels comfortable at rest but avoids moderate activity.  
+     - 0.072 (0.047-0.103)
+   * - Severe
+     - Is short of breath and feels tired when at rest. The person avoids any physical activity, for fear of worsening the breathing problems.  
+     - 0.179 (0.122-0.251)
+
 [endemic]_
 
 [GBD-2019-Capstone-Appendix-IHD]_
@@ -135,6 +226,10 @@ GBD 2019 Fatal Modeling Strategy
 Vital registration and verbal autopsy data were used to model ischaemic heart disease.
 
 [GBD-2019-Capstone-Appendix-IHD]_
+
+In GBD, heart failure is an impairment; deaths coded to heart failure by the reporting organization are reassigned to the underlying etiology by a process of redistribution. No estimates of mortality due to heart failure are produced by CODEm or CoDCorrect.
+
+For this simulation, as simulants will be assigned to the heart failure state with an associated EMR, there will be deaths due to heart failure. This does not have a direct GBD comparison and should be validated carefully to ensure it matches expectations. 
 
 Cause Hierarchy
 +++++++++++++++
@@ -186,17 +281,19 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-The aspects of the disease this cause model is designed to simulate are the states, transitions, and sequelae. The Vivarium model of IHD has been of a similar design to GBD 2019 by modeling IHD using MI sequelae to estimate the prevalence of IHD. Like GBD 2019, Vivarium's design includes several states:
+The aspects of the disease this cause model is designed to simulate are the states, transitions, and sequelae. The Vivarium model of IHD has been of a similar design to GBD 2019 by modeling IHD using MI sequelae to estimate the prevalence of IHD. In addition, the full heart failure cause model is included here. Like GBD 2019, Vivarium's design includes several states:
 
   a) Acute myocardial infarction ('Acute MI' or AMI) is captured by two GBD sequelae and simulants should have myocardial infarction at the GBD IHD cause-level incidence rate. Vivarium's design of 'Acute MI' is modeled exactly after GBD 2019's 'Acute MI' case definition and informed by the GBD 2019 "Myocardial infarction due to ischemic heart disease - EMR comparison" DisMod model and sequelae.
   b) Post-MI is a state entered by survivors of AMI. Vivarium's design of 'Post MI' is modeled after part B of GBD 2019's 'Chronic IHD' case definition, which is captured in GBD as the "Asymptomatic Ischemic Heart Disease following myocardial infarction" DisMod model and sequelae.
-  c) Angina, or stable coronary artery disease, is not included in this model, as the disability associated with angina is assumed ot be included in heart failure. 
-  d) Heart failure due to IHD, also known as ischemic cardiomyopathy is modeled in GBD as part of IHD. For this simulation, it is a state that can be entered based on the incidence of heart failure due to IHD. It is included in the same cause model as myocardial infarction as these patients are also elgible for AMI. 
+  c) Heart failure due to IHD, also known as ischemic cardiomyopathy is modeled in GBD as part of IHD. For this simulation, it is a state that can be entered based on the incidence of heart failure due to IHD. It is included in the same cause model as myocardial infarction as these patients are also elgible for AMI. 
+  d) Heart failure residual, is a state that can be entered based on the incidence of heart failure NOT due to IHD. It is included in the same cause model as myocardial infarction and heart failure from IHD to enforce mutual exclusivity. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
 The risk factor of BMI, SBP, LDL cholesterol, smoking, FPG, physical inactivity, total alcohol intake, processed meats, and sugar sweetened beverage could all affect the transition rates 1, 3, and 4, listed below, through the measures of incidence described in the table.
+
+The excess mortality for all simulants with HF will be the EMR of the HF envelope, undifferentiated by etiology.  
 
 Cause Model Diagram
 +++++++++++++++++++
@@ -231,12 +328,15 @@ Definitions
      - Simulant that experiences angina and asymptomatic ischemic heart
        disease following myocardial infarction; survival to 28 days following
        incident MI
-   * - HF
-     - **H**\ eart **F**\ailure
+   * - HF_IHD
+     - **H**\ eart **F**\ailure IHD 
      - Simulant that experiences symptoms of heart failure as a result of IHD 
    * - AMI_HF
      - **A**\ cute **M**\ yocardial **I**\ nfarction (AMI) with Heart Failure 
      - Simulant that experiences acute MI symptoms while also having heart failure 
+   * - HF_Resid 
+     - **H**\ eart **F**\ailure **R**\esidual 
+     - Simulant that experiences symptoms of heart failure NOT as a result of IHD 
 
 
 States Data
@@ -252,11 +352,11 @@ States Data
      - Notes
    * - All
      - cause-specific mortality rate
-     - :math:`[\sum\limits_{s\in hf-sequelae} \text{prevalence}_s \cdot emr_m2412] + [\sum\limits_{s\in acute-sequelae} \text{prevalence}_s \cdot emr_m24694] + [\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s \cdot emr_m15755]` 
+     - :math:`[\text{prevalence_m2412} \cdot emr_m2412] + [\sum\limits_{s\in acute-sequelae} \text{prevalence}_s \cdot emr_m24694] + [\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s \cdot emr_m15755]` 
      - Tested the CSMR in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/HF_CSMR.ipynb>`_ and found that the summed value was different than the IHD GBD value. Using the summed value will affect validation with GBD. 
    * - S1
      - prevalence
-     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040 + prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)}`
+     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040 + prevalence_m2412)}`
      - Simulants without prevalent AMI, PostMI or heart failure
    * - AMI
      - prevalence
@@ -294,22 +394,41 @@ States Data
      - disability weight
      - :math:`\frac{1}{\text{prevalence_s1040}} \cdot \sum\limits_{s\in post-AMI-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      - this is zero, per the GBD estimates
-   * - HF
+   * - HF_IHD
      - prevalence
      - :math:`\text{1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)}`
      - this is the prevalence generated from the sum of IHD HF sequela 
-   * - HF
+   * - HF_IHD
      - excess mortality rate
      - emr_m2412
      - Excess mortality rate of the overall HF envelope
-   * - HF
+   * - HF_IHD
      - disability weight
      - :math:`\frac{1}{\text{prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - 
+   * - HF_Resid
+     - prevalence
+     - :math:`\text{prevalence_m2412} \times \text{propHF_RESID}`
+     - Proportion of prevalence from the overall HF envelope due to the residual category
+   * - HF_Resid
+     - excess mortality rate
+     - emr_m2412
+     - Excess mortality rate of the overall HF envelope
+   * - HF_Resid
+     - disability weight
+     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{r\in rei_groups} \text{disability_weight}_r \cdot \text{prevalence}_r` 
      - 
 
 
 Transition Data
 """""""""""""""
+
+.. list-table:: State Data
+   :widths: 5 10 10 20
+   :header-rows: 1
+
+   * - State
+     - Measure
 
 .. list-table:: Transition Data
    :widths: 10 10 10 10 10
@@ -321,25 +440,25 @@ Transition Data
      - Value
      - Notes
    * - 1
-     - S1
+     - S1, P or HF_IHD
      - AMI
      - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379})}`
      - 
    * - 2
      - AMI
-     - P or HF
+     - P or HF_IHD
      - 28 days
      - duration-based transition from acute state then progress into post state
    * - 3
-     - P or HF
-     - AMI
-     - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379})}`
-     - current assumption is that rates 1 and 3 are equal
-   * - 4
-     - S1
-     - HF
+     - S1 or P 
+     - HF_IHD
      - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)})}` 
      - 
+   * - 4
+     - S1  
+     - HF_Resid
+     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_RESID}}{1-\text{prevalence_m2412} \times \text{propHF_RESID}}`
+     -  
 
 
 Data Sources
@@ -353,14 +472,6 @@ Data Sources
      - Source
      - Description
      - Notes
-   * - prevalence_c493
-     - como
-     - prevalence of ischemic heart disease
-     -
-   * - deaths_c493
-     - codcorrect
-     - Count of deaths due to ischemic heart disease
-     -
    * - population
      - demography
      - Mid-year population for given sex/age/year/location
@@ -385,6 +496,18 @@ Data Sources
      - CVD team
      - Proportion of HF that is due to IHD 
      - `Proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
+   * - propHF_RESID
+     - CVD team
+     - Proportion of HF that is due to the residual category
+     - `Same proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
+   * - prevalence_m2412
+     - como
+     - Prevalence of HF
+     - All HF-related sequelae
+   * - incidence_m2412
+     - como
+     - Incidence of overall HF
+     -
    * - emr_m15755
      - dismod-mr
      - excess-mortality rate of post-MI ischemic heart disease
@@ -405,10 +528,44 @@ Data Sources
      - model assumption
      - {s1040}
      -
-   * - Heart Failure sequelae
+   * - Heart Failure from IHD sequelae
      - model assumption
      - {s5726, s383, s384, s385}
      -
+   * - rei_RESID
+     - gbd_mapping
+     - List of HF rei groups 
+     - 
+   * - prevalence_r{`rei_id`}
+     - como
+     - Prevalence of rei_ids: 379, 217, 218, 219
+     - 
+   * - disability_weight_r{`rei_id`}
+     - YLD appendix
+     - Disability weight of rei_ids: 379, 217, 218, 219 
+     - 
+   * - Rei IDs 
+     - Impariment definition
+     - LList of HF rei’s for the combined etiologies 
+     - 379, 217, 218, 219 for treated, mild, moderate, and severe 
+
+Post Processing
++++++++++++++++
+
+While heart failure residual will operate as a single box in the cause model as 
+shown above, there is a desire to have separate counts for incidence, prevalence,
+and deaths separated into two categories: residual heart failure from hypertensive 
+heart disease, and residual heart failure from other causes. 
+
+As these causes are identical in all capacities, we think it is easier to make 
+this designation in post processing rather than in the model itself. The rates of 
+each group (HHD vs other) can be found in this `cvs file <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_. Note that this is different than the above proportions 
+file. It is designed to give the percent of heart failure to assign to HHD in post 
+processing from the residual heart failure cause ONLY. The IHD heart failure cause 
+will not be adjusted in post processing. 
+
+In all outcome tables that are separated by cause, the residual heart failure cause should be 
+split in two causes. 
 
 Assumptions
 +++++++++++
@@ -442,3 +599,15 @@ References
    Appendix_ to: `GBD 2019 Diseases and Injuries Collaborators. Global burden of 369 diseases and injuries in 204 countries and territories, 1990–2019: a systematic analysis for the Global Burden of Disease Study 2019. The Lancet. 17 Oct 2020;396:1204-1222`
 
 .. _Appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30925-9/attachment/deb36c39-0e91-4057-9594-cc60654cf57f/mmc1.pdf
+
+.. [NHLBI] Heart Failure. National Health Lung and Blood Institute, U.S. Department of Health.
+   Retrieved 13 August 2021.
+   https://www.nhlbi.nih.gov/health-topics/heart-failure#:~:text=Heart%20failure%20is%20a%20condition,Some%20people%20have%20both%20problems
+
+.. [AHA_IHD] What is Heart Failure? www.heart.org, American Heart Association.
+   Retrieved 13 August 2021.
+   https://www.heart.org/en/health-topics/heart-failure/what-is-heart-failure
+
+.. [THESUS] Damasceno, A., Mayosi, B. M., Sani, M., Ogah, O. S., Mondo, C., Ojji, D., ... & Sliwa, K. (2012). 
+   The causes, treatment, and outcome of acute heart failure in 1006 Africans from 9 countries: results of the sub-Saharan Africa survey of heart failure. Archives of internal medicine, 172(18), 1386-1394.
+   https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1356531
