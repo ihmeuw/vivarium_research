@@ -423,13 +423,6 @@ States Data
 Transition Data
 """""""""""""""
 
-.. list-table:: State Data
-   :widths: 5 10 10 20
-   :header-rows: 1
-
-   * - State
-     - Measure
-
 .. list-table:: Transition Data
    :widths: 10 10 10 10 10
    :header-rows: 1
