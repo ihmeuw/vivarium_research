@@ -384,7 +384,7 @@ States Data
      -
    * - P
      - prevalence
-     - :math:`\sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
+     - :math:`\text{(1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385))} \cdot \sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
      - this is the prevalence generated after exclusivity adjustment 
    * - P
      - excess mortality rate
