@@ -164,11 +164,15 @@ Assumptions and Limitations
 
 The quantity of interest is exposure to the mean BMI level; we assume full reversibility of risk and do not account for duration of exposure to BMI values above the range of the TMREL. 
 
+The values for BMI drawn from GBD include some negative values. To adjust for this, 
+we are implementing a minimum BMI of 5. This is below any documented BMI value and 
+so should include all possible BMIs. 
+
 
 Data Description
 ++++++++++++++++
 
-The rei_id for BMI is 108
+The rei_id for BMI is 370
 
 .. list-table:: ID Table 
 	:widths: 10, 5, 15

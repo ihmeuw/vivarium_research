@@ -1,0 +1,393 @@
+age_start,age_end,sex,race_ethnicity,relationship,proportion
+0,15,Female,AIAN,Institutionalized GQ pop,0.512871
+0,15,Female,AIAN,Noninstitutionalized GQ pop,0.487129
+0,15,Female,Asian,Institutionalized GQ pop,0.536789
+0,15,Female,Asian,Noninstitutionalized GQ pop,0.463211
+0,15,Female,Black,Institutionalized GQ pop,0.371048
+0,15,Female,Black,Noninstitutionalized GQ pop,0.628952
+0,15,Female,Latino,Institutionalized GQ pop,0.491789
+0,15,Female,Latino,Noninstitutionalized GQ pop,0.508211
+0,15,Female,Multiracial or Other,Institutionalized GQ pop,0.302317
+0,15,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.697683
+0,15,Female,NHOPI,Institutionalized GQ pop,0.536789
+0,15,Female,NHOPI,Noninstitutionalized GQ pop,0.463211
+0,15,Female,White,Institutionalized GQ pop,0.784241
+0,15,Female,White,Noninstitutionalized GQ pop,0.215759
+0,15,Male,AIAN,Institutionalized GQ pop,0.839917
+0,15,Male,AIAN,Noninstitutionalized GQ pop,0.160083
+0,15,Male,Asian,Institutionalized GQ pop,0.704103
+0,15,Male,Asian,Noninstitutionalized GQ pop,0.295897
+0,15,Male,Black,Institutionalized GQ pop,0.604733
+0,15,Male,Black,Noninstitutionalized GQ pop,0.395267
+0,15,Male,Latino,Institutionalized GQ pop,0.598939
+0,15,Male,Latino,Noninstitutionalized GQ pop,0.401061
+0,15,Male,Multiracial or Other,Institutionalized GQ pop,0.485808
+0,15,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.514192
+0,15,Male,NHOPI,Institutionalized GQ pop,0.704103
+0,15,Male,NHOPI,Noninstitutionalized GQ pop,0.295897
+0,15,Male,White,Institutionalized GQ pop,0.853863
+0,15,Male,White,Noninstitutionalized GQ pop,0.146137
+15,18,Female,AIAN,Institutionalized GQ pop,0.710769
+15,18,Female,AIAN,Noninstitutionalized GQ pop,0.289231
+15,18,Female,Asian,Institutionalized GQ pop,0.106143
+15,18,Female,Asian,Noninstitutionalized GQ pop,0.893857
+15,18,Female,Black,Institutionalized GQ pop,0.478326
+15,18,Female,Black,Noninstitutionalized GQ pop,0.521674
+15,18,Female,Latino,Institutionalized GQ pop,0.557855
+15,18,Female,Latino,Noninstitutionalized GQ pop,0.442145
+15,18,Female,Multiracial or Other,Institutionalized GQ pop,0.443049
+15,18,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.556951
+15,18,Female,NHOPI,Institutionalized GQ pop,0.476009
+15,18,Female,NHOPI,Noninstitutionalized GQ pop,0.523991
+15,18,Female,White,Institutionalized GQ pop,0.485291
+15,18,Female,White,Noninstitutionalized GQ pop,0.514709
+15,18,Male,AIAN,Institutionalized GQ pop,0.838050
+15,18,Male,AIAN,Noninstitutionalized GQ pop,0.161950
+15,18,Male,Asian,Institutionalized GQ pop,0.145646
+15,18,Male,Asian,Noninstitutionalized GQ pop,0.854354
+15,18,Male,Black,Institutionalized GQ pop,0.854959
+15,18,Male,Black,Noninstitutionalized GQ pop,0.145041
+15,18,Male,Latino,Institutionalized GQ pop,0.866393
+15,18,Male,Latino,Noninstitutionalized GQ pop,0.133607
+15,18,Male,Multiracial or Other,Institutionalized GQ pop,0.777189
+15,18,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.222811
+15,18,Male,NHOPI,Institutionalized GQ pop,0.804197
+15,18,Male,NHOPI,Noninstitutionalized GQ pop,0.195803
+15,18,Male,White,Institutionalized GQ pop,0.752459
+15,18,Male,White,Noninstitutionalized GQ pop,0.247541
+18,19,Female,AIAN,Institutionalized GQ pop,0.024546
+18,19,Female,AIAN,Noninstitutionalized GQ pop,0.975454
+18,19,Female,Asian,Institutionalized GQ pop,0.000342
+18,19,Female,Asian,Noninstitutionalized GQ pop,0.999658
+18,19,Female,Black,Institutionalized GQ pop,0.012871
+18,19,Female,Black,Noninstitutionalized GQ pop,0.987129
+18,19,Female,Latino,Institutionalized GQ pop,0.012494
+18,19,Female,Latino,Noninstitutionalized GQ pop,0.987506
+18,19,Female,Multiracial or Other,Institutionalized GQ pop,0.010010
+18,19,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.989990
+18,19,Female,NHOPI,Institutionalized GQ pop,0.000342
+18,19,Female,NHOPI,Noninstitutionalized GQ pop,0.999658
+18,19,Female,White,Institutionalized GQ pop,0.005129
+18,19,Female,White,Noninstitutionalized GQ pop,0.994871
+18,19,Male,AIAN,Institutionalized GQ pop,0.240925
+18,19,Male,AIAN,Noninstitutionalized GQ pop,0.759075
+18,19,Male,Asian,Institutionalized GQ pop,0.005593
+18,19,Male,Asian,Noninstitutionalized GQ pop,0.994407
+18,19,Male,Black,Institutionalized GQ pop,0.185201
+18,19,Male,Black,Noninstitutionalized GQ pop,0.814799
+18,19,Male,Latino,Institutionalized GQ pop,0.107476
+18,19,Male,Latino,Noninstitutionalized GQ pop,0.892524
+18,19,Male,Multiracial or Other,Institutionalized GQ pop,0.057687
+18,19,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.942313
+18,19,Male,NHOPI,Institutionalized GQ pop,0.002692
+18,19,Male,NHOPI,Noninstitutionalized GQ pop,0.997308
+18,19,Male,White,Institutionalized GQ pop,0.020103
+18,19,Male,White,Noninstitutionalized GQ pop,0.979897
+19,20,Female,AIAN,Institutionalized GQ pop,0.146744
+19,20,Female,AIAN,Noninstitutionalized GQ pop,0.853256
+19,20,Female,Asian,Institutionalized GQ pop,0.001935
+19,20,Female,Asian,Noninstitutionalized GQ pop,0.998065
+19,20,Female,Black,Institutionalized GQ pop,0.018974
+19,20,Female,Black,Noninstitutionalized GQ pop,0.981026
+19,20,Female,Latino,Institutionalized GQ pop,0.013055
+19,20,Female,Latino,Noninstitutionalized GQ pop,0.986945
+19,20,Female,Multiracial or Other,Institutionalized GQ pop,0.015466
+19,20,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.984534
+19,20,Female,NHOPI,Institutionalized GQ pop,0.008754
+19,20,Female,NHOPI,Noninstitutionalized GQ pop,0.991246
+19,20,Female,White,Institutionalized GQ pop,0.005468
+19,20,Female,White,Noninstitutionalized GQ pop,0.994532
+19,20,Male,AIAN,Institutionalized GQ pop,0.114637
+19,20,Male,AIAN,Noninstitutionalized GQ pop,0.885363
+19,20,Male,Asian,Institutionalized GQ pop,0.007867
+19,20,Male,Asian,Noninstitutionalized GQ pop,0.992133
+19,20,Male,Black,Institutionalized GQ pop,0.213021
+19,20,Male,Black,Noninstitutionalized GQ pop,0.786979
+19,20,Male,Latino,Institutionalized GQ pop,0.106175
+19,20,Male,Latino,Noninstitutionalized GQ pop,0.893825
+19,20,Male,Multiracial or Other,Institutionalized GQ pop,0.056450
+19,20,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.943550
+19,20,Male,NHOPI,Institutionalized GQ pop,0.054348
+19,20,Male,NHOPI,Noninstitutionalized GQ pop,0.945652
+19,20,Male,White,Institutionalized GQ pop,0.025879
+19,20,Male,White,Noninstitutionalized GQ pop,0.974121
+20,21,Female,AIAN,Institutionalized GQ pop,0.031464
+20,21,Female,AIAN,Noninstitutionalized GQ pop,0.968536
+20,21,Female,Asian,Institutionalized GQ pop,0.001222
+20,21,Female,Asian,Noninstitutionalized GQ pop,0.998778
+20,21,Female,Black,Institutionalized GQ pop,0.039620
+20,21,Female,Black,Noninstitutionalized GQ pop,0.960380
+20,21,Female,Latino,Institutionalized GQ pop,0.041656
+20,21,Female,Latino,Noninstitutionalized GQ pop,0.958344
+20,21,Female,Multiracial or Other,Institutionalized GQ pop,0.017155
+20,21,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.982845
+20,21,Female,NHOPI,Institutionalized GQ pop,0.024440
+20,21,Female,NHOPI,Noninstitutionalized GQ pop,0.975560
+20,21,Female,White,Institutionalized GQ pop,0.020016
+20,21,Female,White,Noninstitutionalized GQ pop,0.979984
+20,21,Male,AIAN,Institutionalized GQ pop,0.331333
+20,21,Male,AIAN,Noninstitutionalized GQ pop,0.668667
+20,21,Male,Asian,Institutionalized GQ pop,0.020932
+20,21,Male,Asian,Noninstitutionalized GQ pop,0.979068
+20,21,Male,Black,Institutionalized GQ pop,0.349692
+20,21,Male,Black,Noninstitutionalized GQ pop,0.650308
+20,21,Male,Latino,Institutionalized GQ pop,0.176694
+20,21,Male,Latino,Noninstitutionalized GQ pop,0.823306
+20,21,Male,Multiracial or Other,Institutionalized GQ pop,0.168129
+20,21,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.831871
+20,21,Male,NHOPI,Institutionalized GQ pop,0.138921
+20,21,Male,NHOPI,Noninstitutionalized GQ pop,0.861079
+20,21,Male,White,Institutionalized GQ pop,0.070357
+20,21,Male,White,Noninstitutionalized GQ pop,0.929643
+21,22,Female,AIAN,Institutionalized GQ pop,0.064357
+21,22,Female,AIAN,Noninstitutionalized GQ pop,0.935643
+21,22,Female,Asian,Institutionalized GQ pop,0.005204
+21,22,Female,Asian,Noninstitutionalized GQ pop,0.994796
+21,22,Female,Black,Institutionalized GQ pop,0.099812
+21,22,Female,Black,Noninstitutionalized GQ pop,0.900188
+21,22,Female,Latino,Institutionalized GQ pop,0.088946
+21,22,Female,Latino,Noninstitutionalized GQ pop,0.911054
+21,22,Female,Multiracial or Other,Institutionalized GQ pop,0.069238
+21,22,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.930762
+21,22,Female,NHOPI,Institutionalized GQ pop,0.064357
+21,22,Female,NHOPI,Noninstitutionalized GQ pop,0.935643
+21,22,Female,White,Institutionalized GQ pop,0.052739
+21,22,Female,White,Noninstitutionalized GQ pop,0.947261
+21,22,Male,AIAN,Institutionalized GQ pop,0.262637
+21,22,Male,AIAN,Noninstitutionalized GQ pop,0.737363
+21,22,Male,Asian,Institutionalized GQ pop,0.041417
+21,22,Male,Asian,Noninstitutionalized GQ pop,0.958583
+21,22,Male,Black,Institutionalized GQ pop,0.498925
+21,22,Male,Black,Noninstitutionalized GQ pop,0.501075
+21,22,Male,Latino,Institutionalized GQ pop,0.357022
+21,22,Male,Latino,Noninstitutionalized GQ pop,0.642978
+21,22,Male,Multiracial or Other,Institutionalized GQ pop,0.332896
+21,22,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.667104
+21,22,Male,NHOPI,Institutionalized GQ pop,0.262637
+21,22,Male,NHOPI,Noninstitutionalized GQ pop,0.737363
+21,22,Male,White,Institutionalized GQ pop,0.147227
+21,22,Male,White,Noninstitutionalized GQ pop,0.852773
+22,25,Female,AIAN,Institutionalized GQ pop,0.446262
+22,25,Female,AIAN,Noninstitutionalized GQ pop,0.553738
+22,25,Female,Asian,Institutionalized GQ pop,0.018250
+22,25,Female,Asian,Noninstitutionalized GQ pop,0.981750
+22,25,Female,Black,Institutionalized GQ pop,0.220570
+22,25,Female,Black,Noninstitutionalized GQ pop,0.779430
+22,25,Female,Latino,Institutionalized GQ pop,0.253530
+22,25,Female,Latino,Noninstitutionalized GQ pop,0.746470
+22,25,Female,Multiracial or Other,Institutionalized GQ pop,0.230312
+22,25,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.769688
+22,25,Female,NHOPI,Institutionalized GQ pop,0.204785
+22,25,Female,NHOPI,Noninstitutionalized GQ pop,0.795215
+22,25,Female,White,Institutionalized GQ pop,0.202570
+22,25,Female,White,Noninstitutionalized GQ pop,0.797430
+22,25,Male,AIAN,Institutionalized GQ pop,0.597709
+22,25,Male,AIAN,Noninstitutionalized GQ pop,0.402291
+22,25,Male,Asian,Institutionalized GQ pop,0.147368
+22,25,Male,Asian,Noninstitutionalized GQ pop,0.852632
+22,25,Male,Black,Institutionalized GQ pop,0.702326
+22,25,Male,Black,Noninstitutionalized GQ pop,0.297674
+22,25,Male,Latino,Institutionalized GQ pop,0.603813
+22,25,Male,Latino,Noninstitutionalized GQ pop,0.396187
+22,25,Male,Multiracial or Other,Institutionalized GQ pop,0.494616
+22,25,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.505384
+22,25,Male,NHOPI,Institutionalized GQ pop,0.523215
+22,25,Male,NHOPI,Noninstitutionalized GQ pop,0.476785
+22,25,Male,White,Institutionalized GQ pop,0.380388
+22,25,Male,White,Noninstitutionalized GQ pop,0.619612
+25,30,Female,AIAN,Institutionalized GQ pop,0.528402
+25,30,Female,AIAN,Noninstitutionalized GQ pop,0.471598
+25,30,Female,Asian,Institutionalized GQ pop,0.077907
+25,30,Female,Asian,Noninstitutionalized GQ pop,0.922093
+25,30,Female,Black,Institutionalized GQ pop,0.393766
+25,30,Female,Black,Noninstitutionalized GQ pop,0.606234
+25,30,Female,Latino,Institutionalized GQ pop,0.483923
+25,30,Female,Latino,Noninstitutionalized GQ pop,0.516077
+25,30,Female,Multiracial or Other,Institutionalized GQ pop,0.424570
+25,30,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.575430
+25,30,Female,NHOPI,Institutionalized GQ pop,0.474832
+25,30,Female,NHOPI,Noninstitutionalized GQ pop,0.525168
+25,30,Female,White,Institutionalized GQ pop,0.539477
+25,30,Female,White,Noninstitutionalized GQ pop,0.460523
+25,30,Male,AIAN,Institutionalized GQ pop,0.758550
+25,30,Male,AIAN,Noninstitutionalized GQ pop,0.241450
+25,30,Male,Asian,Institutionalized GQ pop,0.288820
+25,30,Male,Asian,Noninstitutionalized GQ pop,0.711180
+25,30,Male,Black,Institutionalized GQ pop,0.861966
+25,30,Male,Black,Noninstitutionalized GQ pop,0.138034
+25,30,Male,Latino,Institutionalized GQ pop,0.783476
+25,30,Male,Latino,Noninstitutionalized GQ pop,0.216524
+25,30,Male,Multiracial or Other,Institutionalized GQ pop,0.653542
+25,30,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.346458
+25,30,Male,NHOPI,Institutionalized GQ pop,0.753982
+25,30,Male,NHOPI,Noninstitutionalized GQ pop,0.246018
+25,30,Male,White,Institutionalized GQ pop,0.685765
+25,30,Male,White,Noninstitutionalized GQ pop,0.314235
+30,40,Female,AIAN,Institutionalized GQ pop,0.715619
+30,40,Female,AIAN,Noninstitutionalized GQ pop,0.284381
+30,40,Female,Asian,Institutionalized GQ pop,0.363424
+30,40,Female,Asian,Noninstitutionalized GQ pop,0.636576
+30,40,Female,Black,Institutionalized GQ pop,0.442141
+30,40,Female,Black,Noninstitutionalized GQ pop,0.557859
+30,40,Female,Latino,Institutionalized GQ pop,0.531131
+30,40,Female,Latino,Noninstitutionalized GQ pop,0.468869
+30,40,Female,Multiracial or Other,Institutionalized GQ pop,0.497908
+30,40,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.502092
+30,40,Female,NHOPI,Institutionalized GQ pop,0.081260
+30,40,Female,NHOPI,Noninstitutionalized GQ pop,0.918740
+30,40,Female,White,Institutionalized GQ pop,0.645870
+30,40,Female,White,Noninstitutionalized GQ pop,0.354130
+30,40,Male,AIAN,Institutionalized GQ pop,0.893690
+30,40,Male,AIAN,Noninstitutionalized GQ pop,0.106310
+30,40,Male,Asian,Institutionalized GQ pop,0.527024
+30,40,Male,Asian,Noninstitutionalized GQ pop,0.472976
+30,40,Male,Black,Institutionalized GQ pop,0.854296
+30,40,Male,Black,Noninstitutionalized GQ pop,0.145704
+30,40,Male,Latino,Institutionalized GQ pop,0.857089
+30,40,Male,Latino,Noninstitutionalized GQ pop,0.142911
+30,40,Male,Multiracial or Other,Institutionalized GQ pop,0.793307
+30,40,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.206693
+30,40,Male,NHOPI,Institutionalized GQ pop,0.789675
+30,40,Male,NHOPI,Noninstitutionalized GQ pop,0.210325
+30,40,Male,White,Institutionalized GQ pop,0.787008
+30,40,Male,White,Noninstitutionalized GQ pop,0.212992
+40,50,Female,AIAN,Institutionalized GQ pop,0.530497
+40,50,Female,AIAN,Noninstitutionalized GQ pop,0.469503
+40,50,Female,Asian,Institutionalized GQ pop,0.310954
+40,50,Female,Asian,Noninstitutionalized GQ pop,0.689046
+40,50,Female,Black,Institutionalized GQ pop,0.481130
+40,50,Female,Black,Noninstitutionalized GQ pop,0.518870
+40,50,Female,Latino,Institutionalized GQ pop,0.564197
+40,50,Female,Latino,Noninstitutionalized GQ pop,0.435803
+40,50,Female,Multiracial or Other,Institutionalized GQ pop,0.428246
+40,50,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.571754
+40,50,Female,NHOPI,Institutionalized GQ pop,0.230380
+40,50,Female,NHOPI,Noninstitutionalized GQ pop,0.769620
+40,50,Female,White,Institutionalized GQ pop,0.643242
+40,50,Female,White,Noninstitutionalized GQ pop,0.356758
+40,50,Male,AIAN,Institutionalized GQ pop,0.833470
+40,50,Male,AIAN,Noninstitutionalized GQ pop,0.166530
+40,50,Male,Asian,Institutionalized GQ pop,0.729846
+40,50,Male,Asian,Noninstitutionalized GQ pop,0.270154
+40,50,Male,Black,Institutionalized GQ pop,0.803226
+40,50,Male,Black,Noninstitutionalized GQ pop,0.196774
+40,50,Male,Latino,Institutionalized GQ pop,0.831959
+40,50,Male,Latino,Noninstitutionalized GQ pop,0.168041
+40,50,Male,Multiracial or Other,Institutionalized GQ pop,0.759795
+40,50,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.240205
+40,50,Male,NHOPI,Institutionalized GQ pop,0.690550
+40,50,Male,NHOPI,Noninstitutionalized GQ pop,0.309450
+40,50,Male,White,Institutionalized GQ pop,0.779030
+40,50,Male,White,Noninstitutionalized GQ pop,0.220970
+50,60,Female,AIAN,Institutionalized GQ pop,0.655144
+50,60,Female,AIAN,Noninstitutionalized GQ pop,0.344856
+50,60,Female,Asian,Institutionalized GQ pop,0.445143
+50,60,Female,Asian,Noninstitutionalized GQ pop,0.554857
+50,60,Female,Black,Institutionalized GQ pop,0.452767
+50,60,Female,Black,Noninstitutionalized GQ pop,0.547233
+50,60,Female,Latino,Institutionalized GQ pop,0.477206
+50,60,Female,Latino,Noninstitutionalized GQ pop,0.522794
+50,60,Female,Multiracial or Other,Institutionalized GQ pop,0.542529
+50,60,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.457471
+50,60,Female,NHOPI,Institutionalized GQ pop,0.538358
+50,60,Female,NHOPI,Noninstitutionalized GQ pop,0.461642
+50,60,Female,White,Institutionalized GQ pop,0.592388
+50,60,Female,White,Noninstitutionalized GQ pop,0.407612
+50,60,Male,AIAN,Institutionalized GQ pop,0.768462
+50,60,Male,AIAN,Noninstitutionalized GQ pop,0.231538
+50,60,Male,Asian,Institutionalized GQ pop,0.522285
+50,60,Male,Asian,Noninstitutionalized GQ pop,0.477715
+50,60,Male,Black,Institutionalized GQ pop,0.652659
+50,60,Male,Black,Noninstitutionalized GQ pop,0.347341
+50,60,Male,Latino,Institutionalized GQ pop,0.705265
+50,60,Male,Latino,Noninstitutionalized GQ pop,0.294735
+50,60,Male,Multiracial or Other,Institutionalized GQ pop,0.711424
+50,60,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.288576
+50,60,Male,NHOPI,Institutionalized GQ pop,0.507326
+50,60,Male,NHOPI,Noninstitutionalized GQ pop,0.492674
+50,60,Male,White,Institutionalized GQ pop,0.634837
+50,60,Male,White,Noninstitutionalized GQ pop,0.365163
+60,70,Female,AIAN,Institutionalized GQ pop,0.473441
+60,70,Female,AIAN,Noninstitutionalized GQ pop,0.526559
+60,70,Female,Asian,Institutionalized GQ pop,0.550294
+60,70,Female,Asian,Noninstitutionalized GQ pop,0.449706
+60,70,Female,Black,Institutionalized GQ pop,0.714700
+60,70,Female,Black,Noninstitutionalized GQ pop,0.285300
+60,70,Female,Latino,Institutionalized GQ pop,0.800875
+60,70,Female,Latino,Noninstitutionalized GQ pop,0.199125
+60,70,Female,Multiracial or Other,Institutionalized GQ pop,0.677133
+60,70,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.322867
+60,70,Female,NHOPI,Institutionalized GQ pop,0.766517
+60,70,Female,NHOPI,Noninstitutionalized GQ pop,0.233483
+60,70,Female,White,Institutionalized GQ pop,0.792574
+60,70,Female,White,Noninstitutionalized GQ pop,0.207426
+60,70,Male,AIAN,Institutionalized GQ pop,0.808376
+60,70,Male,AIAN,Noninstitutionalized GQ pop,0.191624
+60,70,Male,Asian,Institutionalized GQ pop,0.481555
+60,70,Male,Asian,Noninstitutionalized GQ pop,0.518445
+60,70,Male,Black,Institutionalized GQ pop,0.661270
+60,70,Male,Black,Noninstitutionalized GQ pop,0.338730
+60,70,Male,Latino,Institutionalized GQ pop,0.712877
+60,70,Male,Latino,Noninstitutionalized GQ pop,0.287123
+60,70,Male,Multiracial or Other,Institutionalized GQ pop,0.652349
+60,70,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.347651
+60,70,Male,NHOPI,Institutionalized GQ pop,0.695771
+60,70,Male,NHOPI,Noninstitutionalized GQ pop,0.304229
+60,70,Male,White,Institutionalized GQ pop,0.720819
+60,70,Male,White,Noninstitutionalized GQ pop,0.279181
+70,80,Female,AIAN,Institutionalized GQ pop,0.798005
+70,80,Female,AIAN,Noninstitutionalized GQ pop,0.201995
+70,80,Female,Asian,Institutionalized GQ pop,0.941176
+70,80,Female,Asian,Noninstitutionalized GQ pop,0.058824
+70,80,Female,Black,Institutionalized GQ pop,0.917296
+70,80,Female,Black,Noninstitutionalized GQ pop,0.082704
+70,80,Female,Latino,Institutionalized GQ pop,0.831449
+70,80,Female,Latino,Noninstitutionalized GQ pop,0.168551
+70,80,Female,Multiracial or Other,Institutionalized GQ pop,0.847630
+70,80,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.152370
+70,80,Female,NHOPI,Institutionalized GQ pop,0.909531
+70,80,Female,NHOPI,Noninstitutionalized GQ pop,0.090469
+70,80,Female,White,Institutionalized GQ pop,0.917079
+70,80,Female,White,Noninstitutionalized GQ pop,0.082921
+70,80,Male,AIAN,Institutionalized GQ pop,0.993586
+70,80,Male,AIAN,Noninstitutionalized GQ pop,0.006414
+70,80,Male,Asian,Institutionalized GQ pop,0.837349
+70,80,Male,Asian,Noninstitutionalized GQ pop,0.162651
+70,80,Male,Black,Institutionalized GQ pop,0.840932
+70,80,Male,Black,Noninstitutionalized GQ pop,0.159068
+70,80,Male,Latino,Institutionalized GQ pop,0.841755
+70,80,Male,Latino,Noninstitutionalized GQ pop,0.158245
+70,80,Male,Multiracial or Other,Institutionalized GQ pop,0.912671
+70,80,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.087329
+70,80,Male,NHOPI,Institutionalized GQ pop,0.871729
+70,80,Male,NHOPI,Noninstitutionalized GQ pop,0.128271
+70,80,Male,White,Institutionalized GQ pop,0.882221
+70,80,Male,White,Noninstitutionalized GQ pop,0.117779
+80,100,Female,AIAN,Institutionalized GQ pop,0.996251
+80,100,Female,AIAN,Noninstitutionalized GQ pop,0.003749
+80,100,Female,Asian,Institutionalized GQ pop,0.858116
+80,100,Female,Asian,Noninstitutionalized GQ pop,0.141884
+80,100,Female,Black,Institutionalized GQ pop,0.947673
+80,100,Female,Black,Noninstitutionalized GQ pop,0.052327
+80,100,Female,Latino,Institutionalized GQ pop,0.879934
+80,100,Female,Latino,Noninstitutionalized GQ pop,0.120066
+80,100,Female,Multiracial or Other,Institutionalized GQ pop,0.979824
+80,100,Female,Multiracial or Other,Noninstitutionalized GQ pop,0.020176
+80,100,Female,NHOPI,Institutionalized GQ pop,0.925023
+80,100,Female,NHOPI,Noninstitutionalized GQ pop,0.074977
+80,100,Female,White,Institutionalized GQ pop,0.926252
+80,100,Female,White,Noninstitutionalized GQ pop,0.073748
+80,100,Male,AIAN,Institutionalized GQ pop,0.996066
+80,100,Male,AIAN,Noninstitutionalized GQ pop,0.003934
+80,100,Male,Asian,Institutionalized GQ pop,0.680684
+80,100,Male,Asian,Noninstitutionalized GQ pop,0.319316
+80,100,Male,Black,Institutionalized GQ pop,0.946366
+80,100,Male,Black,Noninstitutionalized GQ pop,0.053634
+80,100,Male,Latino,Institutionalized GQ pop,0.860224
+80,100,Male,Latino,Noninstitutionalized GQ pop,0.139776
+80,100,Male,Multiracial or Other,Institutionalized GQ pop,0.850649
+80,100,Male,Multiracial or Other,Noninstitutionalized GQ pop,0.149351
+80,100,Male,NHOPI,Institutionalized GQ pop,0.921327
+80,100,Male,NHOPI,Noninstitutionalized GQ pop,0.078673
+80,100,Male,White,Institutionalized GQ pop,0.927992
+80,100,Male,White,Noninstitutionalized GQ pop,0.072008
