@@ -3005,53 +3005,147 @@ Because we need to calculate a *single* simulant-specific/job-specific split (th
 2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
 
-To represent businesses and employment dynamics we will use another
-directed tripartite graph (analogous to our migration component),
-showing arcs from simulants (part A) to employers (part B) as well as
-arcs from employers to their addresses (part C).
+.. note::
 
-This construct allows us to represent businesses that employ one or
-more people, as well as individuals who are employed by multiple
-businesses.  We will also be able to add business dynamics in the
-future, e.g. new businesses arriving, old businesses closing down, and
-even merges, as well as name changes and address changes.  All of this
-will go into our simulated tax return data, which we must make a
-scheme for before we access restricted tax data (since even the schema
-of this data is restricted information).
+  Employment is one of the less-developed parts of our model.
+  We have included the aspects that seem particularly relevant to person linkage.
+  With this employment model, business linkage in the resulting data
+  is likely missing key real-life challenges.
 
-To keep things simple for starters, we will give everyone age 18 and over a
-random edge to an employer, chosen from a skewed distribution to
-ensure that there are a few large employers and a "fat tail" of small
-employers. We will change employers randomly at the rate of 50 changes
-per 100 person years, and change employer addresses at a rate of 10
-changes per 100 person years.  For now, we will have distinct
-addresses for businesses and households, but eventually we might want
-to intentionally include duplicates, e.g. if someone operates a
-business out of their home.
+We consider all simulants age 18 and over to be working-age; all such
+simulants either have an employer or are considered unemployed.
+We only allow a single employer at a time for each simulant.
 
-To keep things simple, for now when businesses move to a new address,
-it will be a totally new address. No household or business will ever
+Each employer has a single street address.
+
+Initialization
+^^^^^^^^^^^^^^
+
+We initialize working-age simulants to be unemployed with probability 42.4%,
+regardless of demographics.
+We initialize working-age simulants to be employed by the military with probability 3%,
+regardless of demographics.
+We consider the military to be a single employer, which has the same street address
+as the military group quarters "household."
+
+.. todo::
+
+  Source or update these numbers.
+
+To employ the rest of the simulants (those with civilian jobs),
+we generate employers with an initial size attribute chosen from a skewed distribution to
+ensure that there are a few large employers and many small employers.
+Specifically, we use a log-normal distribution with :math:`\mu=4` and :math:`\sigma=1`,
+which means that the mean employer has ~90 employees and the median has ~55 employees.
+Each one has a street address, generated in the same way that residential
+addresses are generated, but without any restriction on state/PUMA/ZIP.
+
+.. todo::
+
+  This business size distribution doesn't seem plausible!
+
+.. todo::
+
+  Document how we name businesses.
+
+We generate the number of employers needed to (in expectation) employ our starting
+non-military employed population, that is:
+
+.. math::
+
+  \text{num_employers}=
+  \frac{E(\text{num_simulants_needing_employer})}{E(\text{employer_size})}=
+  \frac{\text{num_simulants_working_age} * (1 - 0.424 - 0.03)}{e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}}}
+
+where :math:`\text{num_simulants_working_age}` is the actual (not expected) number of working-age
+simulants in the initialized population.
+
+In order to give individual simulants employers such that the size attribute is (roughly)
+accurate at the population level, we select each simulant's employer from the categorical
+distribution where the probability of each employer is proportional to its initial size attribute.
+
+Finally, we set all working-age simulants living in military group quarters to be employed by the
+military.
+This is in addition to the 3% assigned across the entire working-age population regardless of
+living situation.
+
+Updating employer over time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Working-age simulants (including those who are unemployed) change employment randomly
+at the rate of 50 changes per 100 person-years.
+This rate includes those who change from employed to unemployed.
+
+If a simulant selected for an employment change lives in military group quarters,
+no employment change occurs;
+they remain employed by the military.
+This means that in practice, the actual rate of employment changes will be a bit
+less than 50 per 100 person-years.
+
+When an employed simulant changes employment, they have a 42.4% chance of
+becoming unemployed and a 3% chance of becoming employed by the
+military.
+Otherwise, they sample a new non-military employer with probability
+proportional to the employer's initial size attribute, as at initialization.
+
+In the rare case that they receive the same employer they already had,
+this whole procedure is repeated (or an equivalent mechanism
+to prevent job "changes" that don't change employment and redistribute
+the probability of such "changes" among all other options).
+
+The same procedure is done for an unemployed simulant selected for an employment change,
+except that instead of not being allowed to "change" to the same employer,
+they are not allowed to "change" to remain unemployed.
+
+This approach to selecting a new employer ensures that at the population level,
+the number of simulants employed by an employer will remain **roughly** (see note)
+proportional to the initial size attribute sampled for that employer.
+However, the actual head counts may change over time due to increases or decreases
+in the total size of the working-age population.
+
+.. note::
+
+  Due to the re-allocation of employment changes that do not really "change" anything
+  (i.e. from an employer to itself, or from unemployment to unemployment),
+  the proportion unemployed, and proportions employed by each employer, will move toward
+  an equilibrium which is slightly different from the initial size attribute proportions.
+  The largest employers will become smaller than intended, because more employment changes to them
+  will be re-allocated away;
+  the same effect will reduce unemployment.
+
+  For now we think this effect is small enough to not be too important.
+  If we wanted to fix this in the future, changing our re-allocation strategy would be
+  the simplest way.
+  We might want to allow non-changes, for example, and just increase the employment change
+  rate accordingly.
+
+Business address changes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Businesses (employers) change addresses at a rate of 10
+changes per 100 business-years.
+When businesses move to a new address,
+it will be a random new address, without state/PUMA/ZIP restrictions.
+No household or business will ever
 move into their old address.
 
-We have also included a special "employer" to indicate individuals who
-are *not* currently employed.  We assume that 58% of the population is
-employed, which leads to a lot of individuals switching to being
-unemployed.  We might need to refine this in the future.
+Limitations
+^^^^^^^^^^^
 
-The data we will extract from this network for our simulated tax
-return is a list of businesses and their unique ID numbers and for
-each simulant who files a tax return, a list of the businesses that
-they worked for during the calendar year.  We should also extract a
-list of "dependents" from the household structure and perhaps
-something about spouses, but let's leave thinking that through for
-later.
-
-There is an additional piece of complexity that we need to develop
-further, because some group quarters types are also employers.  For
-now, we will have a special employer called "Military" and for
-simulants living in military group quarters we will set their employer
-to Military, and ensure that their address and zip code match their
-employer_address and employer_zipcode.
+#. We do not model retirement; simulants are equally likely to be employed
+   no matter their age (as long as they are at least 18).
+#. We only allow each simulant to have one employer at a time.
+#. We do not model most business dynamics, e.g. new businesses opening,
+   existing businesses closing, businesses changing their names,
+   or businesses merging or splitting.
+   The only business event we **do** model is changing address.
+#. Businesses change addresses completely at random.
+   There is no bias toward local moves.
+#. Simulant residential address is completely unrelated to the address
+   of their employer.
+#. Businesses never share addresses with households (except by coincidence).
+#. Business addresses that are vacated are not re-used (except by coincidence).
+   This likely makes business linking easier than it is in reality.
 
 .. _census_prl_perturbation:
 
