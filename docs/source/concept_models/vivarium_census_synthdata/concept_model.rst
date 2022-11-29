@@ -1004,10 +1004,6 @@ The following post-processing rules should be applied to the relationship after 
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-  The numbers in these files are not finalized!
-
 :download:`Household domestic migration rates <household_domestic_migration_rates.csv>`
 
 :download:`Individual domestic migration rates by type <individual_domestic_migration_rates.csv>`
@@ -1016,11 +1012,7 @@ Simulation inputs
 
 :download:`Relationship proportions for non-reference person moves <non_reference_person_move_relationship_proportions.csv>`
 
-Destination PUMA proportions by source PUMA: :code:`/mnt/team/simulation_science/priv/users/zmbc/prl/puma_to_puma_proportions.csv`.
-
-.. todo::
-
-  Move this last (large) file somewhere more appropriate.
+Destination PUMA proportions by source PUMA (200MB): :code:`J:\Project\simulation_science\prl\data\puma_to_puma_proportions_2022_11_15.csv`
 
 Limitations
 ^^^^^^^^^^^
@@ -2357,7 +2349,12 @@ each simulant. This means that a simulant can have multiple rows of
 data, or just one row of data. 
 
 Note that "wages" is used per the census team's request, but is the same 
-value as "income" in our simulation. 
+value as "income" in our simulation.
+In reality, the income data we used to sample simulants' income values
+includes non-wage income, but we attribute it all to wages here.
+This is likely to be a benign assumption from a PRL standpoint because
+the continuous wage value won't be used for linking and there is no
+income/wage cutoff for this observer.
 
 Here is an example: 
 
@@ -2542,8 +2539,6 @@ For simulants that receive below the minimum income, 42.14% will
 still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
 income is based on the household structure and is listed in the table below. 
 We will not model persistence year to year. 
-
-**In the current model, no one will be low income, this will be changed later.** 
 
 .. list-table:: Minimum Income  
   :widths: 20 20 
@@ -2800,15 +2795,212 @@ leading to double counting in census (19).
 2.3.15 Income (20)
 ~~~~~~~~~~~~~~~~~~
 
-Individual income will be implemented as a risk exposure.  Average
-income is basically equal to GDP per capita, so we could potentially
-use that GBD covariate as the mean, but I think it will be easier to
-make our own estimate of the mean and standard deviation of
-log(income) for individuals stratified by age group, sex, and
-race/ethnicity from ACS data. I think is it pretty common to assume
-that this value is normally distributed, but we could use the GBD
-ensemble risk exposure machinery if that assumption seems like a
-limitation.
+Background/Importance
+^^^^^^^^^^^^^^^^^^^^^
+
+Income is important to PRL primarily because it affects which
+datasets a person will show up in -- in our simulation, the taxes and
+WIC observers will only record people above/below a certain income threshold.
+
+Therefore, it matters that we get approximately right the number
+and characteristics of people who fall above and below these thresholds.
+The actual income values, in between the thresholds, are not too consequential.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+We implement income as a continuous value, measured in 2020 US dollars
+per year.
+It can be thought of as similar to a continuous risk exposure.
+
+When a simulant is unemployed, they have 0 income.
+This is a simplifying assumption, because in real life people may have
+other sources of income: Social Security, capital gains, etc.
+As previously mentioned, the actual continuous income value in the output
+is not overly important for PRL, so the key assumption here is
+that **no unemployed people are above any observer's income threshold.**
+
+For employed simulants, income values are sampled from a log-normal distribution
+specific to the simulant's age group, sex, and race/ethnicity.
+**Note that this means that a simulant's income in dollars should change when they
+age into a new age group, even though their propensity/quantile does not.**
+
+Propensities/quantiles within the distribution are updated when a simulant
+changes employment (see employment component for when this occurs), but in a way that retains
+some autocorrelation for each individual.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+Each combination of age group, sex, and race/ethnicity has
+a lognormal distribution of income.
+This can be implemented with :code:`scipy.stats.lognorm`, which has two required parameters:
+:code:`s` (the shape parameter) and :code:`scale` (in our case, :code:`loc` should remain at its default value of 0).
+The SciPy docs explain how to interpret these:
+
+  Suppose a normally distributed random variable X has mean mu and standard deviation sigma. Then Y = exp(X) is lognormally distributed with s = sigma and scale = exp(mu).
+
+The CSV file below contains the :code:`s` and :code:`scale` parameters for each age group, sex, and race/ethnicity,
+in columns of the same names.
+
+:download:`income_scipy_lognorm_distribution_parameters.csv`
+
+.. todo::
+
+  The values in this file are preliminary and may change, but the schema will not.
+
+Propensities
+''''''''''''
+
+We want each individual simulant's income to be autocorrelated between jobs (employers),
+but we don't want this autocorrelation to be 1.
+
+To do this, we model the propensity/quantile of a simulant within their demographic-specific
+income distribution as being composed of two parts: the **simulant-specific** component, and the
+**job-specific** component.
+The simulant-specific component never changes throughout a simulant's life, while the job-specific
+component changes each time the simulant changes jobs, and has no autocorrelation.
+
+By the time a simulant is employed for the first time (it does not matter if this happens at initialization,
+working age, or first employment event), the simulant-specific component should be randomly drawn from a normal
+distribution with mean 0 and variance 0.812309.
+
+At each job change event (either at any employment change, or only at the employment changes that do
+not result in unemployment), the job-specific component should be randomly drawn from a normal distribution
+with mean 0 and variance 0.187691.
+
+See the data sources and analysis section for how these variances were calculated.
+
+A simulant's propensity/quantile within the corresponding log-normal income distribution is always equal
+to the probit function of the sum of their simulant-specific component and their job-specific component.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The primary data source for this component is the ACS PUMS, which reports
+respondent income.
+We subset the PUMS to only those who are employed; as discussed in the previous
+section, in our simulation, unemployed people have 0 income.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+It is fairly typical to approximate the income distribution with a log-normal
+distribution, though it has some known bias near the lower end of the income range. [Income_Lognormal]_
+Sometimes thicker Pareto upper tails are used because this fits a little better at high incomes, but we haven't done that here for simplicity.
+
+There are multiple methods to fit a lognormal distribution to observed values:
+using the mean and standard deviation of the log of the values,
+maximum likelihood estimation (MLE) which is implemented by SciPy's :code:`fit` method,
+or using the mean and median of the values.
+To avoid bounds issues with incomes at or below 0, and because of the presence of top-
+and bottom-coding in the ACS PUMS data, we have chosen to use the mean and median method.
+The mean can be fairly reliably calculated even in the presence of top-coding, because top-coded
+values are assigned to the mean of all top-coded values in the PUMS data.
+
+Propensity components
+'''''''''''''''''''''
+
+We have chosen to model income among the employed **in each demographic group** as follows:
+
+.. math::
+
+  log(income) \sim Normal(\mu_\text{log(income)}, \sigma_\text{log(income)}^2)
+
+We want to break down the variance using two normally distributed components of income propensity:
+
+.. math::
+
+  job \sim Normal(0, \sigma_\text{job}^2)
+
+.. math::
+
+  simulant \sim Normal(0, 1-\sigma_\text{job}^2)
+
+.. math::
+
+  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+
+We inform the variance contributions of the job- and simulant-specific
+components with a measured variance of 1-year change in log(earnings)
+for people who were employed in both years.
+This value -- **0.09** -- comes from 2015 IRS data that linked tax
+returns. [IRS_Volatility]_
+
+We assume that this value has not changed since 2015, and is the same for income as for earnings.
+In reality, the volatility is probably lower for income.
+
+.. note::
+
+  It is pretty hard to tell from the graph we extracted this value from
+  whether it refers to individual or to household earnings -- we think
+  individual, but if we are wrong, we are additionally extrapolating
+  from household to individual.
+
+In our model of income,
+
+.. math::
+
+  log(income_\text{j2}) - log(income_\text{j1}) = job_\text{j2} * \sigma_\text{log(income)} - job_\text{j1} * \sigma_\text{log(income)} \sim Normal(0, 2\sigma_\text{job}^2\sigma_\text{log(income)}^2)
+
+where :math:`\text{j1}` and :math:`\text{j2}` are the jobs before and after a job change event for that simulant.
+
+To translate this into year-over-year volatility, we need to incorporate the rate at which simulants change jobs.
+(We also ignore age-up events and assume that a simulant does not change demographic groups.)
+Specifically, we need to know: **given how we have modeled employment, what proportion of people who are employed at two time points a year apart
+are in the same job at both time points?**
+
+.. note::
+
+  Answering this question **given how we have modeled employment** ensures
+  that year-over-year income volatility in the simulation roughly equals
+  the IRS value, even if our rate of job changes isn't very accurate.
+  If we were to add more complexity to our employment model such that
+  (a) we had more confidence in its accuracy and (b) it was no longer
+  straightforward to answer this question, we could look for an empirical
+  value instead.
+
+We break this down into two sub-questions:
+
+1. Of those employed at time t1, what proportion are employed at time t2? This can be approximated by a recurrence which uses the 28-day timestep of the sim and assumes that each employment change has a 42% chance of resulting in unemployment if currently employed, and a 100% chance of resulting in employment if currently unemployed. Specifically,
+
+.. math::
+
+  \text{employed}(0) = 1
+
+.. math::
+
+  \text{employed}(t) = \text{employed}(t - 1) + (1 - \text{employed}(t - 1)) * 0.5 * 1 * \frac{28}{365} - \text{employed}(t - 1) * 0.5 * 0.42 * \frac{28}{365}
+
+2. Of those employed at time t1, what proportion are in the same job at time t2? Similarly, if we break the transition rate into 28-day timesteps, :math:`\text{same_job}(t) = 1 - (1 - 0.5 * \frac{28}{365})^{t}`
+
+This implies:
+
+.. math::
+
+  log(income_\text{t2}) - log(income_\text{t1}) \sim Normal(0, 2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2\sigma_\text{log(income)}^2)
+
+where t2 is one year after t1.
+
+We assume that the IRS value for variance of the 1-year change is equal for all demographic groups. In reality, there is evidence of differential volatility by race and other factors.
+
+Because we need to calculate a *single* simulant-specific/job-specific split (the simulant-specific component needs to follow a single simulant through many age groups), we use :math:`E(\sigma_\text{log(income)}^2)` from ACS PUMS across demographics to solve the equation:
+
+.. math::
+
+  2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2E(\sigma_\text{log(income)}^2) = 0.09
+
+.. math::
+
+  \sigma_\text{job}^2 \approx 0.187691
+
+.. note::
+
+  If we want to refine this calculation in a future version of the model,
+  there are other sources we could use to inform the variance split,
+  which may also have more information on volatility by demographics. [Volatility_PSID_review]_ [Volatility_CPS]_
+  In the literature, the values we are interested in are referred to as
+  "gross volatility."
 
 2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -3055,3 +3247,10 @@ To Come (TK)
 
 .. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
 
+.. [Income_Lognormal] Schield, Milo. 2018. Statistical Literacy and the Lognormal Distribution. `http://www.statlit.org/pdf/2018-Schield-ASA.pdf <http://www.statlit.org/pdf/2018-Schield-ASA.pdf>`_
+
+.. [IRS_Volatility] Lamadon T, Mogstad M, Setzler B. Income volatility, taxation and the functioning of the U.S. labor market. IRS.gov. Accessed November 19th, 2022. https://www.irs.gov/pub/irs-soi/19rpincomevolatilitytaxationandlabor.pdf
+
+.. [Volatility_PSID_review] Moffitt R, Zhang S. The PSID and Income Volatility: Its Record of Seminal Research and Some New Findings. Ann Am Acad Pol Soc Sci. 2018 Nov;680(1):48-81. doi: 10.1177/0002716218791766. Epub 2018 Nov 14. PMID: 31666745; PMCID: PMC6820686. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6820686/
+
+.. [Volatility_CPS] Ziliak JP, Hardy B, Bollinger C. Earnings volatility in America: Evidence from matched CPS. Labour Economics. 2011 Dec; 18(6). https://doi.org/10.1016/j.labeco.2011.06.015
