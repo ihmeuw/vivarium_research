@@ -46,7 +46,55 @@ Differential relapse rate literature overview
 
 [Stobaugh-et-al-2019]_ conducted a systematic literature review on relapse of SAM following treatment and found that "the proportion of children who relapsed after SAM treatment varied greatly from 0% to 37% across varying lengths of time following discharge" (p. 1). Generally, relapse was defined as presenting with SAM at least once following SAM treatment, but some studies defined relapse as inclusive of MAM as well. Additionally, no standard length of follow-up was used and the period ranged from 1 week to 18 months. [Stobaugh-et-al-2019]_ reported that relapse tended to occur more frequently in the first 6 months following discharge.
 
-According to [Stobaugh-et-al-2019]_, an unpublished longitudinal study in Ethiopia (Tsineal et al. 2015/Jimma University) reported the probability of experiencing a new episode of SAM or MAM was 26% for 6 months and 7.5% for 12 months (we are interpreting the latter probability as the probability of a new episode in 6-12 months). Tsineal et al. 2015 also reportedly found a relapse rate of 15% for SAM and 44% for MAM over 12 months. Further, this study was the only one identified by [Stobaugh-et-al-2019]_ that included a true control group of non-malnourished counterparts: Tsineal et al. 2015 reportedly followed children after SAM treatement as well as non-wasted matched community controls for one year. They reportedly found that 15% of the SAM-treated group developd SAM in the year of follow-up while only 1.2% of control children did in the same period for respective incidence rates of 1.27 and 0.09 per 100 person months.
+[Stobaugh-et-al-2019]_ discussed an unpublished longitudinal study in Ethiopia (Tsineal et al. 2015/Jimma University) that was reportedly the first to prospectively examine the risk of acute malnutrition among post-SAM children relative to community controls without a recent history of acute malnutirtion. Notably, this study appears to have since been published by [Girma-et-al-2022]_.
+
+[Girma-et-al-2022]_ conducted a prospective matched cohort study of acute malnutrition relapse in Jimma Zone, Ethiopia between September 2013 and September 2015. Inclusion criteria for the post-SAM children were aged 6-59 months at the time of admission into the CMAM program and successful discharge from the program according to the current national guideline (MUAC>11cm, weight gain of 20%, absence of odedema, and clinically stable for two consecutive weeks). Controls were eligible if they were apparently healthy with no history of an acute malnutrition episode and were matched 1:1 to a post-SAM child by age and sex by asking the case's caretaker to indicate neighboring households with children of the same age and sex. Post-SAM and control children were followed concurrently each month for 12 months. The relevant results of this study are summarized below:
+
+.. list-table:: Girma et al. 2022 results
+   :header-rows: 1
+
+   *  - Outcome
+      - Group
+      - No. episodes
+      - Person-time
+      - Incidence rate
+      - Incidence rate ratio
+   *  - Acute malnutrition
+      - Post-SAM
+      - 48
+      - 1297
+      - 3.7
+      - 5.5 (4.7, 15.9)
+   *  - Acute malnutrition
+      - Control
+      - 14
+      - 2105
+      - 0.7
+      - 1
+   *  - Moderate acute malnutrition
+      - Post-SAM
+      - 34
+      - 1345
+      - 2.5
+      - 4.1 (2.1, 8.4)
+   *  - Moderate acute malnutrition
+      - Control
+      - 13
+      - 2105
+      - 0.6
+      - 1
+   *  - Severe acute malnutrition
+      - Post-SAM
+      - 26
+      - 2044
+      - 1.27
+      - 14.1 (3.5, 122.5)
+   *  - Severe acute malnutrition
+      - Control
+      - 2
+      - 2216
+      - 0.09
+      - 1
 
 Since the time of this review, two additional studies were identified that compared wasting episode relapse rates betwen children who were recently treated for acute malnutrition and children who were not. 
 
@@ -55,9 +103,11 @@ Zone, Amhara Region, Ethiopia of children discharged from community management o
 
 [Adegok-et-al-2020]_ performed a prospective matched cohort study of SAM recurrance in Northern Nigeria. The study recruited children discharged from OTP treatment and matched community controls and followed them for 6 months. At the end of follow-up 24% of the OTP discharged children relapsed to SAM and 0.6% of community controls developed SAM.
 
+Additionally, a study protocol for a prospective matched cohort study of acute malnutrition relapse (similar to [Girma-et-al-2022]_) conducted in Mali, Somalia, and South Sudan has been published by [King-et-al-2022]_, with data collection expected to conclude in January of 2023.
+
 .. note::
 
-   Given the limitations associated with the cross-sectional nature of the [Abitew-et-al-2020]_ study and the study location of Nigeria rather than Ethiopia for the [Adegok-et-al-2020]_ study, we decided to use the Jimma University study reported in [Stobaugh-et-al-2019]_ as the main data source to inform differential relapse rates by x-factor exposure status in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+   Given the limitations associated with the cross-sectional nature of the [Abitew-et-al-2020]_ study and the study location of Nigeria rather than Ethiopia for the [Adegok-et-al-2020]_ study, we decided to use the study conducted by [Girma-et-al-2022]_ as the main data source to inform differential relapse rates by x-factor exposure status in the :ref:`acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
 
 Additional literature on relapse rates
 +++++++++++++++++++++++++++++++++++++++
@@ -74,8 +124,6 @@ Vivarium Modeling Strategy
 Wasting Incidence Rates
 ++++++++++++++++++++++++
 
-Given the evidence from the Tsineal et al. 2015/Jimma University study reported in [Stobaugh-et-al-2019]_ that children who have recently recovered from SAM experience future episodes of SAM at ~10 times the rate of children who were at a healthy weight without a recent SAM episode, we selected the following risk effects values. We make the assumption that applied in a compound manner equally from the transition from mild child wasting to MAM (i2) and from MAM to SAM (i1).
-
 .. list-table:: X-factor risk effects
    :header-rows: 1
 
@@ -87,8 +135,8 @@ Given the evidence from the Tsineal et al. 2015/Jimma University study reported 
    * - i1
      - Exposed (cat1)
      - Relative risk (RR)
-     - :math:`\sqrt{10}`
-     - 
+     - 3.44 (TODO: implement monte carlo uncertainty estimation about this parameter)
+     - Derived from [Girma-et-al-2022]_ as :math:`RR_\text{SAM} / RR_\text{MAM}`. This value was updated from its previous value of :math:`\sqrt{10}` following the publication of [Girma-et-al-2022]_
    * - i1
      - Unexposed (cat2)
      - Relative risk (RR)
@@ -97,8 +145,8 @@ Given the evidence from the Tsineal et al. 2015/Jimma University study reported 
    * - i2
      - Exposed (cat1)
      - Relative risk (RR)
-     - :math:`\sqrt{10}`
-     - 
+     - 4.1 (95% CI: 2.1, 8.4, lognormal distribution of uncertainty)
+     - [Girma-et-al-2022]_. This value was updated from its previous value of :math:`\sqrt{10}` following the publication of [Girma-et-al-2022]_
    * - i2
      - Unexposed (cat2)
      - Relative risk (RR)
@@ -114,10 +162,6 @@ Given the evidence from the Tsineal et al. 2015/Jimma University study reported 
      - Relative risk (RR)
      - :math:`1`
      - 
-
-.. todo::
-   
-   Incorporate uncertainty about x-factor risk effect values?
 
 For each incidence rate :math:`i(n)` in the dynamic wasting exposure model (i1, i2, and i3), the simulant-specific rate should be determined as follows:
 
@@ -133,7 +177,11 @@ Where:
 
 - :math:`p_\text{cat1|source wasting state}` is the :ref:`x-factor risk exposure <2019_risk_exposure_x_factor>` among the source state for the relevant transition. Values shown in the table below:
 
-.. list-table:: X-factor risk effects
+.. todo::
+
+   The values in the table below will need to be re-estimated via the calibration process due to the update in the risk effect values assoicated with the publication of [Girma-et-al-2022]_
+
+.. list-table:: X-factor risk exposure by wasting state at initialization
    :header-rows: 1
 
    * - Transition
@@ -179,9 +227,8 @@ Assumptions and Limitations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 - We assume wasting recovery rates are not affected by the x-factor
-- In the absence of more detailed evidence, we assume that the increased risk of SAM incidence observed in the Jimma university study attributable to the "x-factor" risk is applied in a compound manner equally from the transition from mild child wasting to MAM (i2) and from MAM to SAM (i1).
-- We are limited in that few studies have evaluated the epidemiology of SAM relapse and even fewer with a true control population that we are using to inform this risk factor in our simulation.
 - We do not model a direct causal effect of an episode of wasting on future episodes of wasting
+- We are generalizing the effect of the post-SAM recovery state on acute malnutrition incidence to our "x-factor" risk factor that is not necessarily specific to the post-SAM recovery state, but rather is modeled as a constant "vulnerability" risk factor among a subset of modeled children.
 
 References
 ----------
@@ -201,6 +248,14 @@ References
 .. [Chang-et-al-2013]
    Chang CY, Trehan I, Wang RJ, Thakwalakwa C, Maleta K, Deitchler M, Manary MJ. Children successfully treated for moderate acute malnutrition remain at risk for malnutrition and death in the subsequent year after recovery. J Nutr. 2013 Feb;143(2):215-20. doi: 10.3945/jn.112.168047. Epub 2012 Dec 19. PMID: 23256140; PMCID: PMC3735907.
    `Chang et al 2013 available here <https://pubmed.ncbi.nlm.nih.gov/23256140/>`_
+
+.. [Girma-et-al-2022]
+   Girma T, James PT, Abdissa A, Luo H, Getu Y, Fantaye Y, Sadler K, Bahwere P. Nutrition status and morbidity of Ethiopian children after recovery from severe acute malnutrition: Prospective matched cohort study. PLoS One. 2022 Mar 10;17(3):e0264719. doi: 10.1371/journal.pone.0264719. PMID: 35271590; PMCID: PMC8912152.
+   `Girma et al 2022 available here <https://pubmed.ncbi.nlm.nih.gov/35271590/>`_
+
+.. [King-et-al-2022]
+   King S, D'Mello-Guyett L, Yakowenko E, Riems B, Gallandat K, Mama Chabi S, Mohamud FA, Ayoub K, Olad AH, Aliou B, Marshak A, Trehan I, Cumming O, Stobaugh H. A multi-country, prospective cohort study to measure rate and risk of relapse among children recovered from severe acute malnutrition in Mali, Somalia, and South Sudan: a study protocol. BMC Nutr. 2022 Aug 24;8(1):90. doi: 10.1186/s40795-022-00576-x. PMID: 36002905; PMCID: PMC9404649.
+   `King et al 2022 available here <https://pubmed.ncbi.nlm.nih.gov/36002905/>`_
 
 .. [Lambebo-et-al-2021]
    Lambebo A, Temiru D, Belachew T. Frequency of relapse for severe acute malnutrition and associated factors among under five children admitted to health facilities in Hadiya Zone, South Ethiopia. PLoS One. 2021 Mar 25;16(3):e0249232. doi: 10.1371/journal.pone.0249232. PMID: 33765081; PMCID: PMC7993841.

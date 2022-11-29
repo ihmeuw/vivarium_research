@@ -9,9 +9,7 @@ Vivarium Research
 Here you'll find a variety of useful information about working on ``vivarium``
 research projects.
 
-The hosted documentation can be found at
-`https://vivarium-research.readthedocs.io/en/latest/
- <https://vivarium-research.readthedocs.io/en/latest/>`_.
+The hosted documentation can be found at https://vivarium-research.readthedocs.io/en/latest/.
 
 .. contents::
 
@@ -108,14 +106,16 @@ button and add your docs to the main branch.
 Protocol for adding reviewers
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:underline:`From the research team:`
+From the research team:
+'''''''''''''''''''''''
 
 For pull requests that are project-specific, you should request review from 
 all members of the research team involved with that project. For more general 
 pull requests that apply to overall Vivarium protocols and/or framework, etc., 
 you should request review from all members of the research team.
 
-:underline:`From the engineering team:`
+From the engineering team:
+''''''''''''''''''''''''''
 
 Always tag engineers working on a given project for pull requests related to 
 that project. This will allow the engineering team members to stay informed of 
@@ -127,18 +127,15 @@ strategy.
 Engineering team members on a given project should be tagged as **required** 
 reviewers when a pull request contains any changes that:
 
-- Were requested by engineering, or
+* Were requested by engineering, or
+* Affects modeling strategy that has already been implemented and therefore
+  requires code changes by the engineers
 
-- Affects modeling strategy that has already been implemented and therefore 
-requires code changes by the engineers
-
-   - In this case, the research team member who made the pull request is 
-   responsible for making a ticket on the 
-   `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_ 
-   that outlines the requested code changes. The research team member should 
-   then post a slack message in the project-specific channel that tags the 
-   engineers and links to the new JIRA ticket. 
-
-.. todo::
-
-   Post more details on best practice for making tickets when available.
+  * In this case, the research team member who made the pull request is
+    responsible for making a ticket on the
+    `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_
+    that outlines the requested code changes. The research team member should
+    then post a slack message in the project-specific channel that tags the
+    engineers and links to the new JIRA ticket. `More information on how to 
+    make engineering JIRA tickets as a research team member can be found
+    here <https://hub.ihme.washington.edu/display/SSE/RT+Ticket+Creation>`_.

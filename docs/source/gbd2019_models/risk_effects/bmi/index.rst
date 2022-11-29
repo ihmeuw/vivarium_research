@@ -57,7 +57,7 @@ GBD 2019 Modeling Strategy
 Risk exposure
 +++++++++++++
 
-:ref:`See risk exposure documentation for SBP <2019_risk_bmi>`
+:ref:`See risk exposure documentation for BMI <2019_risk_bmi>`
 
 Relative risks
 ++++++++++++++
@@ -233,7 +233,7 @@ myocardial infarction and stable angina. These are arrows
 1, 3, and 4 on the IHD cause diagram. They should be 
 applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)/5} 
+incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)/5} 
 
 The association was evaluated at the cause level, but the 
 associations should be applied to the incidence rates for 
@@ -268,7 +268,7 @@ The relative risks apply to the incidence rates of acute
 ischemic stroke. These are arrows 1 and 3 on in the ischemic 
 stroke cause model. They should be applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r108`\)*RR^{max((BMI_i - TMREL),0)/5} 
+incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)/5} 
 
 The relative risk for GBD 2019 is for a 5-unit increase in BMI. 
 
@@ -345,6 +345,13 @@ modeling the effects separately should capture the needed
 information. However, this limits the future scenarios we can run, 
 and any additional scenarios should be assessed to see if mediation 
 would be needed. 
+
+In GBD relative risks and PAFs for BMI, there are occasional values less than 
+1 and 0 respectively. These are isolated in older (80+) and the youngest age group. 
+For elderly people, this likely shows a real protective effect. The rate of these 
+values is low: 45 per 1,000. For the purpose of this model, these values are reset to 
+1 and 0 for the RRs and PAFs. This might be a slight oversimplification but is unlikely 
+to affect the model significantly. 
 
 
 Validation Criteria
