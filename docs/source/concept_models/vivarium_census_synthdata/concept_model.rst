@@ -417,16 +417,18 @@ this person as a dependent.
 - Child is a biological, adopted, foster or step child to reference person 
     * Assign reference person 
 - Child is any other relative to reference person (NOT roommate/housemate or other nonrelative)
-    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
+    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a relative of the appropriate age available, assign the reference person 
 - Child is non-relative (roommate or other nonrelative) to reference person 
-    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random. 
+    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random. 
     * If there is not a non-relative of the appropriate age available, assign to a non-relative who is older than 18 (select at random if multiple) 
     * If there are no non-relatives 18 or older, make "N/A"
 - Child is the reference person 
-    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian 
-    * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 20 and 45 years older than the child. If there are multiple, assign at random.
+    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian. If there is >1, assign one at random. 
+    * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
+- Child is the spouse of the reference person 
+    * Make "N/A"
 
 This can be seen visually in the flowchart below: 
 
@@ -434,14 +436,15 @@ This can be seen visually in the flowchart below:
 
 Once a guardian is assigned, if there is a spouse or unmarried partner 
 for the guardian simulant (reference person and spouse/unmarried partner ONLY), then 
-include both as guardians. Otherwise only include the one as a guardian. 
+include both as guardians. Otherwise only include the one as a guardian. If 
+there are multiple spouse/unmarried partner options, select one at random. 
 
 **For a simulant who is below 24 and in GQ at college:**
 
 Simulant will be randomly assigned to a guardian based on the below rules: 
 
 - 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
-- Match to a person 20 to 45 years older than the child 
+- Match to a person 18 to 45 years older than the child 
 - If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people source2_ 
     * 23% female reference people without a listed spouse 
@@ -457,7 +460,7 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 **Limitations**
 
 #. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
-#. We have "parents" fall between 20-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
+#. We have "parents" fall between 18-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
 #. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
 
@@ -480,7 +483,8 @@ of gender).
 The tracked mother will be assigned as a guardian. In addition, if 
 the tracked mother has a spouse or unmarried partner (reference person 
 and spouse/unmarried partner ONLY), the spouse/partner will 
-also be assigned as a guardian. 
+also be assigned as a guardian. If there are multiple spouse/unmarried 
+partner options, select one at random. 
 
 .. _census_prl_fertility:
 
@@ -2345,7 +2349,12 @@ each simulant. This means that a simulant can have multiple rows of
 data, or just one row of data. 
 
 Note that "wages" is used per the census team's request, but is the same 
-value as "income" in our simulation. 
+value as "income" in our simulation.
+In reality, the income data we used to sample simulants' income values
+includes non-wage income, but we attribute it all to wages here.
+This is likely to be a benign assumption from a PRL standpoint because
+the continuous wage value won't be used for linking and there is no
+income/wage cutoff for this observer.
 
 Here is an example: 
 
@@ -2530,8 +2539,6 @@ For simulants that receive below the minimum income, 42.14% will
 still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
 income is based on the household structure and is listed in the table below. 
 We will not model persistence year to year. 
-
-**In the current model, no one will be low income, this will be changed later.** 
 
 .. list-table:: Minimum Income  
   :widths: 20 20 
@@ -2788,15 +2795,121 @@ leading to double counting in census (19).
 2.3.15 Income (20)
 ~~~~~~~~~~~~~~~~~~
 
-Individual income will be implemented as a risk exposure.  Average
-income is basically equal to GDP per capita, so we could potentially
-use that GBD covariate as the mean, but I think it will be easier to
-make our own estimate of the mean and standard deviation of
-log(income) for individuals stratified by age group, sex, and
-race/ethnicity from ACS data. I think is it pretty common to assume
-that this value is normally distributed, but we could use the GBD
-ensemble risk exposure machinery if that assumption seems like a
-limitation.
+Background/Importance
+^^^^^^^^^^^^^^^^^^^^^
+
+Income is important to PRL primarily because it affects which
+datasets a person will show up in -- in our simulation, the taxes and
+WIC observers will only record people above/below a certain income threshold.
+
+Therefore, it matters that we get approximately right the number
+and characteristics of people who fall above and below these thresholds.
+The actual income values, in between the thresholds, are not too consequential.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The primary data source for this component is the ACS PUMS, which reports
+respondent income.
+We subset the PUMS to only those who are employed; as discussed in the next
+section, in our simulation, unemployed people have 0 income.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+It is fairly typical to approximate the income distribution with a log-normal
+distribution, though it has some known bias near the lower end of the income range. [Income_Lognormal]_
+Sometimes thicker Pareto upper tails are used because this fits a little better at high incomes, but we haven't done that here for simplicity.
+
+There are multiple methods to fit a lognormal distribution to observed values:
+using the mean and standard deviation of the log of the values,
+maximum likelihood estimation (MLE) which is implemented by SciPy's :code:`fit` method,
+or using the mean and median of the values.
+To avoid bounds issues with incomes at or below 0, and because of the presence of top-
+and bottom-coding in the ACS PUMS data, we have chosen to use the mean and median method.
+The mean can be fairly reliably calculated even in the presence of top-coding, because top-coded
+values are assigned to the mean of all top-coded values in the PUMS data.
+
+Propensity components
+'''''''''''''''''''''
+
+.. todo::
+
+  Fill in the sources and math used to calculate the variance of each component of the propensity.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+We implement income as a continuous value, measured in 2020 US dollars
+per year.
+It can be thought of as similar to a continuous risk exposure.
+
+When a simulant is unemployed, they have 0 income.
+This is a simplifying assumption, because in real life people may have
+other sources of income: Social Security, capital gains, etc.
+As previously mentioned, the actual continuous income value in the output
+is not overly important for PRL, so the key assumption here is
+that **no unemployed people are above any observer's income threshold.**
+
+For employed simulants, income values are sampled from a log-normal distribution
+specific to the simulant's age group, sex, and race/ethnicity.
+**Note that this means that a simulant's income in dollars should change when they
+age into a new age group, even though their propensity/quantile does not.**
+Details about the distributions are in the "distribution parameters" section below.
+
+Propensities/quantiles within the distribution are updated when a simulant
+changes employment (see employment component for when this occurs), but in a way that retains
+some autocorrelation for each individual.
+Details are in the "propensities" section below.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+As stated above, each combination of age group, sex, and race/ethnicity has
+a lognormal distribution of income.
+This can be implemented with :code:`scipy.stats.lognorm`, which has two required parameters:
+:code:`s` (the shape parameter) and :code:`scale` (in our case, :code:`loc` should remain at its default value of 0).
+The SciPy docs explain how to interpret these:
+
+  Suppose a normally distributed random variable X has mean mu and standard deviation sigma. Then Y = exp(X) is lognormally distributed with s = sigma and scale = exp(mu).
+
+The CSV file below contains the :code:`s` and :code:`scale` parameters for each age group, sex, and race/ethnicity,
+in columns of the same names.
+
+:download:`income_scipy_lognorm_distribution_parameters.csv`
+
+.. todo::
+
+  The values in this file are preliminary and may change, but the schema will not.
+
+Propensities
+''''''''''''
+
+We want each individual simulant's income to be autocorrelated between jobs (employers),
+but we don't want this autocorrelation to be 1.
+
+To do this, we model the propensity/quantile of a simulant within their demographic-specific
+income distribution as being composed of two parts: the **simulant-specific** component, and the
+**job-specific** component.
+The simulant-specific component never changes throughout a simulant's life, while the job-specific
+component changes each time the simulant changes jobs, and has no autocorrelation.
+
+By the time a simulant is employed for the first time (it does not matter if this happens at initialization,
+working age, or first employment event), the simulant-specific component should be randomly drawn from a normal
+distribution with mean 0 and variance 0.835594.
+
+At each job change event (either at any employment change, or only at the employment changes that do
+not result in unemployment), the job-specific component should be randomly drawn from a normal distribution
+with mean 0 and variance 0.164406.
+
+.. todo::
+
+  These variances are preliminary and may change.
+
+See the data sources and analysis section above for how these variances were calculated.
+
+A simulant's propensity/quantile within the corresponding log-normal income distribution is always equal
+to the probit function of the sum of their simulant-specific component and their job-specific component.
 
 2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -3043,3 +3156,4 @@ To Come (TK)
 
 .. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
 
+.. [Income_Lognormal] Schield, Milo. 2018. Statistical Literacy and the Lognormal Distribution. `http://www.statlit.org/pdf/2018-Schield-ASA.pdf <http://www.statlit.org/pdf/2018-Schield-ASA.pdf>`_
