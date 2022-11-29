@@ -6,10 +6,11 @@ Heart Failure
 
 In the GBD, heart failure is considered an impairment and the fatal and nonfatal burden is 
 assigned to the causes identified as etiologies for the impairment. For this project, we 
-are modeling HF as a separate cause, independent of other causes and therefore, heart 
-failure can overlap with other causes in the model, such as IHD and simulants 
-can carry multiple heart diseases simultaneously. This document describes the overall heart 
-failure modeling process and provides details for the simulation inputs. 
+are modeling HF due to :ref:`ischemic heart disease <2019_cause_ihd>` as part of the IHD cause. 
+The remainder of heart failure is modeled as a separate "cause". This document describes the 
+overall heart failure modeling process and provides details for the simulation inputs for 
+the residual category. Residual in this case refers to all heart failure that is NOT a 
+result of IHD. 
 
 .. contents::
    :local:
@@ -65,10 +66,35 @@ We used literature data plus inpatient hospital data and claims to model the ove
 
 **Modelling strategy:**\
 
-In GBD, heart failure is estimated based on 6 possible underlying causes. However, the GBD first estimates the overall prevalence of heart failure, and this information is utilized here to create a separate cause for heart failure that is independent of other causes in the model. 
+To estimate the burden of heart failure due to each of the underlying causes 
+of heart failure, we first estimated the overall prevalence of heart failure 
+and then the proportion of heart failure that could be attributed to each cause. 
+The latter process includes an initial assessment of the fraction of heart 
+failure cases attributable to each of six high‐level parent cause groupings, 
+followed by further division into the detailed causes within each of these groupings. 
 
-A simplifying assumption is made that the mortality associated with heart failure from any cause is the same. This allows us to model heart failure as a single cause. 
+Etiological fraction estimation:
 
+To estimate the proportion of heart failure attributable to each cause, we used Equation 1 to calculate the prevalence of heart failure due to each etiology, which was then scaled into a proportion. 
+
+Equation 1:
+:math:`\text{Prevalence}_{HF due to aetiology} = \frac{\text{Cause Specific Mortality Rate}_{HF due to aetiology}}{\text{Excess Mortaltiy Rate}_{HF due to aetiology}}`
+
+First, we calculated the Cause Specific Mortality Rate (CSMR) for heart failure due to each etiology. We used age-, sex-, and location-specific CSMR (post CoDCorrect) for each etiology, multiplied by the fraction of deaths that also involved heart failure (Equation 2). This fraction was a modeled quantity, informed by person-level vital registry (VR) data from the United States, Mexico, Brazil, Taiwan, and Colombia, data sources which contained the underly­­ing cause of death as well as all codes in the causal chain. From these sources, we calculated the fraction of underlying deaths from each etiology in which heart failure was coded in the causal chain. These data were modeled in MR-BRT to generate age- and sex-specific estimates of this proportion. For Hypertensive Heart Disease, Alcoholic Cardiomyopathy, and Other Cardiomyopathy, we set the proportion to be 1, as all deaths due to these causes involve heart failure.  
+
+Equation 2: 
+:math:`\text{CSMR}_{HF due to aetiology} = \text{CSMR}_{aetiology} \times \text{Proportion deaths with HF}_{aetiology}`
+
+Next, we estimated the Excess Mortality Rate (EMR) for heart failure due to each etiology. We used uniquely identified person-level hospital discharge data for the entire Italian region of Friuli Venezia Giulia, linked to all death records from the region. Inpatient data contained all primary and non-primary diagnoses associated with the visit, and mortality data contained the underlying cause of death as well as all codes in the causal chain. We identified patients with heart failure due to each etiology as individuals with hospital coded heart failure concurrent or after a hospital code of the etiology. Excess Mortality Rate for heart failure due to each etiology was calculated by subtracting the background mortality rate from the mortality rate of persons with heart failure due to that etiology. We modelled this quantity in MR-BRT to generate age- and sex-specific estimates of this value. Due to small number of deaths in younger ages, we assumed equal EMR across etiologies for ages under 45. 
+
+We calculated the prevalence of Heart Failure due to each etiology using Equation 1. These were scaled to sum to one, generating the estimated proportions of Heart Failure due to each etiology.
+
+These proportions, along with literature data, were used to inform DisMod models for the six broadest and mutually exclusive and collectively exhaustive cause groupings: ischemic heart disease, hypertensive heart disease, cardiomyopathy and myocarditis, rheumatic heart disease, cardiopulmonary disease, and other cardiovascular and circulatory diseases. An exception to this approach was made for sub-Saharan Africa, where we excluded the proportion estimates generated from death data, relying instead on published literature to determine the proportions of heart failure etiologies. This decision was based on expert opinion that local patterns differed significantly from what would have been determined from death data. The THESUS‐HF study, a large-scale, prospective, echocardiographic study of heart failure etiologies in multiple African countries, provided these proportions.  
+[THESUS-HF]_
+
+The results of these six proportion models were scaled to sum to one.  
+
+For heart failure due to cardiopulmonary disease, heart failure due to cardiomyopathy and myocarditis, and heart failure due to other causes, we calculated the proportion for each sub-cause according to the proportion of that cause within each larger aggregate group. 
 
 **Severity splits and disability weights:**\
 
@@ -142,9 +168,12 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-Heart failure incidence rate will be from the heart failure envelope DisMod model, which represents 
-heart failure from any cause. Individuals will then experience the EMR from the heart failure envelope 
-model once they are in this state. They will receive the HF disability weights while in this state.  
+Heart failure incidence rate will be from the heart failure envelope DisMod model 
+multiplied by the proportion of incidence that is due to all causes other than 
+ischemic heart disease. Heart failure due to IHD is included in IHD instead. 
+Individuals will then experience the EMR from the heart failure envelope model 
+once they are in this state. They will receive the HF disability weights while 
+in this state.  
 
 Heart failure incidence should be modified by SBP levels as per the following age-specific 
 pooled cohort analysis_. LDL-C level is assumed not to affect heart failure in this simulation. 
@@ -174,6 +203,9 @@ The relative risks can be utilized by SBP group based on this tables:
      - 1.76 (1.43, 2.17) 
      - 
 
+
+The relative risk for heart failure is 1.14 (1.12, 1.16). The relative risk 
+for heart failure is per 1-unit increase in BMI. **Please note that this is different than the other relative risks for BMI.**
 
 
 Assumptions and Limitations
@@ -218,21 +250,25 @@ States Data
      - Measure
      - Value
      - Notes
+   * - All
+     - cause-specific mortality rate
+     - :math:`\text{prevalence_m2412} \times \text{propHF_RESID} \cdot \text{emr_m2412}`
+     - Researcher created based on prevalence and EMR of the modelable entity 
    * - S
      - prevalence
-     - :math:`\text{1−prevalence_m2412}`
+     - :math:`\text{1−(prevalence_m2412} \times \text{propHF_RESID)}` 
      - 
    * - HF
      - prevalence
-     - prevalence_m2412
-     - Proportion of prevalence from the overall HF envelope
+     - :math:`\text{prevalence_m2412} \times \text{propHF_RESID}`
+     - Proportion of prevalence from the overall HF envelope due to the residual category
    * - HF
      - emr
      - emr_m2412
      - Excess mortality rate of the overall HF envelope
    * - HF
      - disabilty weights
-     - :math:`\frac{1}{\text{prevalence_m2412}} \cdot \sum\limits_{rei\in rei} \text{disability_weight}_rei \cdot \text{prevalence}_rei`
+     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{r\in rei_groups} \text{disability_weight}_r \cdot \text{prevalence}_r` 
      - 
 
 Transition Data
@@ -250,7 +286,7 @@ Transition Data
    * - 1
      - S
      - HF
-     - :math:`\text{incidence_m2412}`
+     - :math:`\text{incidence_m2412} \times \text{propHF_RESID}`
      - 
 
 Data Sources
@@ -272,32 +308,57 @@ Data Sources
      - como
      - Incidence of overall HF
      -
+   * - propHF_RESID
+     - CVD team
+     - Proportion of HF that is due to the residual category
+     - `Proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
    * - population
      - demography
      - Mid-year population for given age/sex/year/location
      - 
-   * - prevalence_rei{`rei_id`}
-     - como
-     - Prevalence of `rei_ids`: 379, 217, 218, 219
+   * - rei_RESID
+     - gbd_mapping
+     - List of HF rei groups 
      - 
-   * - disability_weight_rei{`rei_id`}
+   * - prevalence_r{`rei_id`}
+     - como
+     - Prevalence of rei_ids: 379, 217, 218, 219
+     - 
+   * - disability_weight_r{`rei_id`}
      - YLD appendix
-     - Disability weight of `rei_ids`
+     - Disability weight of rei_ids: 379, 217, 218, 219 
      - 
    * - emr_m2412
      - dismod-mr 2.1
      - excess mortality rate of heart failure
      - This is the EMR value for the overall HF envelope
-   * - Rei IDs
-     - Impairment defintions 
-     - List of HF rei's for the combined etiologies 
+   * - Rei IDs 
+     - Impariment definition
+     - LList of HF rei’s for the combined etiologies 
      - 379, 217, 218, 219 for treated, mild, moderate, and severe 
+
+Post Processing
++++++++++++++++
+
+While heart failure will operate as a single cause as shown above, there is a 
+desire to have separate counts for incidence, prevalence, and deaths separated 
+into two categories: heart failure from hypertensive heart disease, and heart 
+failure from other causes. 
+
+As these causes are identical in all capacities, we think it is easier to make 
+this designation in post processing rather than in the model itself. The rates of 
+each group (HHD vs other) can be found in this `cvs file <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_. Note that this is different than the above proportions 
+file. It is designed to give the percent of heart failure to assign to HHD in post 
+processing. 
+
+In all outcome tables that are separated by cause, the heart failure cause should be 
+split in two causes. 
 
 
 Validation Criteria
 +++++++++++++++++++
 
-1. Comparison with HF prevalence from GBD 2019 for the sum of all causes
+1. Comparison with HF prevalence from GBD 2019 for all causes except for IHD 
 2. Comparison of heart failure deaths with cause-specific mortality estimates from the HF DisMod envelope 
 
 References
@@ -314,3 +375,7 @@ References
 .. [Framingham-HF] McKee et al. N Engl J Med 1971; 285:1441-1446.
 
 .. [Cardiology-HF] Eur Heart J 2016; 37 (27): 2129-2200.
+
+.. [THESUS-HF] Damasceno, A., Mayosi, B. M., Sani, M., Ogah, O. S., Mondo, C., Ojji, D., ... & Sliwa, K. (2012). 
+   The causes, treatment, and outcome of acute heart failure in 1006 Africans from 9 countries: results of the sub-Saharan Africa survey of heart failure. Archives of internal medicine, 172(18), 1386-1394.
+   https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/1356531
