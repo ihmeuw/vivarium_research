@@ -2173,9 +2173,9 @@ Each employer has a single street address.
 Initialization
 ^^^^^^^^^^^^^^
 
-We initialize 58% of the working-age population to be unemployed,
+We initialize working-age simulants to be unemployed with probability 42.4%,
 regardless of demographics.
-We initialize 3% of the working-age population to be employed by the military,
+We initialize working-age simulants to be employed by the military with probability 3%,
 regardless of demographics.
 We consider the military to be a single employer, which has the same street address
 as the military group quarters "household."
@@ -2184,7 +2184,8 @@ as the military group quarters "household."
 
   Source or update these numbers.
 
-We generate (non-military) employers with an initial size attribute chosen from a skewed distribution to
+To employ the rest of the simulants (those with civilian jobs),
+we generate employers with an initial size attribute chosen from a skewed distribution to
 ensure that there are a few large employers and many small employers.
 Specifically, we use a log-normal distribution with :math:`\mu=4` and :math:`\sigma=1`,
 which means that the mean employer has ~90 employees and the median has ~55 employees.
@@ -2205,12 +2206,15 @@ non-military employed population, that is:
 .. math::
 
   \text{num_employers}=
-  \frac{\text{num_simulants}}{E(\text{employer_size})}=
-  \frac{\text{num_simulants}}{e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}}}
+  \frac{E(\text{num_simulants_needing_employer})}{E(\text{employer_size})}=
+  \frac{\text{num_simulants_working_age} * (1 - 0.424 - 0.03)}{e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}}}
+
+where :math:`\text{num_simulants_working_age}` is the actual (not expected) number of working-age
+simulants in the initialized population.
 
 In order to give individual simulants employers such that the size attribute is (roughly)
 accurate at the population level, we select each simulant's employer from the categorical
-distribution where the probability of each employer is proportional to its size.
+distribution where the probability of each employer is proportional to its initial size attribute.
 
 Finally, we set all working-age simulants living in military group quarters to be employed by the
 military.
@@ -2230,26 +2234,42 @@ they remain employed by the military.
 This means that in practice, the actual rate of employment changes will be a bit
 less than 50 per 100 person-years.
 
-When an employed simulant changes employment, they have a 58% chance of
+When an employed simulant changes employment, they have a 42.4% chance of
 becoming unemployed and a 3% chance of becoming employed by the
 military.
 Otherwise, they sample a new non-military employer with probability
-proportional to employer size, as at initialization.
+proportional to the employer's initial size attribute, as at initialization.
 
 In the rare case that they receive the same employer they already had,
 this whole procedure is repeated (or an equivalent mechanism
 to prevent job "changes" that don't change employment and redistribute
-the probability among all other options).
+the probability of such "changes" among all other options).
 
 The same procedure is done for an unemployed simulant selected for an employment change,
 except that instead of not being allowed to "change" to the same employer,
 they are not allowed to "change" to remain unemployed.
 
 This approach to selecting a new employer ensures that at the population level,
-the *relative* sizes of different employers will remain roughly constant (and
-continue to be proportional to the initial size sampled for those employers).
+the number of simulants employed by an employer will remain **roughly** (see note)
+proportional to the initial size attribute sampled for that employer.
 However, the actual head counts may change over time due to increases or decreases
 in the total size of the working-age population.
+
+.. note::
+
+  Due to the re-allocation of employment changes that do not really "change" anything
+  (i.e. from an employer to itself, or from unemployment to unemployment),
+  the proportion unemployed, and proportions employed by each employer, will move toward
+  an equilibrium which is slightly different from the initial size attribute proportions.
+  The largest employers will become smaller than intended, because more employment changes to them
+  will be re-allocated away;
+  the same effect will reduce unemployment.
+
+  For now we think this effect is small enough to not be too important.
+  If we wanted to fix this in the future, changing our re-allocation strategy would be
+  the simplest way.
+  We might want to allow non-changes, for example, and just increase the employment change
+  rate accordingly.
 
 Business address changes
 ^^^^^^^^^^^^^^^^^^^^^^^^
