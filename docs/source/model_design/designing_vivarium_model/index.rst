@@ -21,13 +21,13 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_outline:
+.. _designing_vivarium_models:
 
 ================================================
-Vivarium Model Considerations and Best Practices
+Considerations in the design of Vivarium models
 ================================================
 
-The purpose of this page is to document information that is relevant to designing Vivarium simulation models as a whole, rather than information specific to particular sub-components of Vivarium simulations. This page is arranged in no particular order and topics can be added as they are encountered. The sections may be filled in as simulation science team members investigate the issues in their own projects and can include text from or links to existing documents that may address the topic.
+The purpose of this page is to document information that is relevant to designing Vivarium simulation models as a whole, rather than information specific to particular sub-components of Vivarium simulations. Topics may be added as they are encountered.
 
 .. toctree::
    :maxdepth: 1

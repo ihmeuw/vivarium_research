@@ -21,24 +21,11 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _vivarium_best_practices_output_tables:
+.. _impairments:
 
-=========================================================
-Output Table Shells
-=========================================================
+=================================
+Impairments
+=================================
 
 .. contents::
-   :local:
-   :depth: 1
-
-.. todo:: 
-
-  What stratifying variables are needed?
-
-    - Intervention effect modifiers
-
-    - Subgroup analyses
-
-    - Others
-
-  Communicating outputs needed for validation versus results
+  :local:
