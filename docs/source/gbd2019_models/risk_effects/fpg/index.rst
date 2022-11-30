@@ -195,12 +195,9 @@ The relative risks apply to the incidence rates of acute
 myocardial infarction. These are arrows labeled 1 on the IHD cause diagram. They should be 
 applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r105`\)*RR^{max((BMI_i - TMREL),0)} 
+incidence(i) = incidence*(1-PAF\ :sub:`r105`\)*RR^{max((FPG_i - TMREL),0)} 
 
-The association was evaluated at the cause level, but the 
-associations should be applied to the incidence rates for 
-both nonfatal components of ischemic heart disease. The 
-relative risk for GBD 2019 is for a 1-unit increase in FPG.
+The relative risk for GBD 2019 is for a 1-unit increase in FPG.
 
 PAFs and relative risks can be pulled using the following code::
 
@@ -218,9 +215,9 @@ The relative risks apply to the incidence rates of acute
 ischemic stroke. These are arrows 1 and 3 on in the ischemic 
 stroke cause model. They should be applied using the formula: 
 
-incidence(i) = incidence*(1-PAF\ :sub:`r105`\)*RR^{max((BMI_i - TMREL),0)} 
+incidence(i) = incidence*(1-PAF\ :sub:`r105`\)*RR^{max((FPG_i - TMREL),0)} 
 
-The relative risk for GBD 2019 is for a 1-unit increase in BMI. 
+The relative risk for GBD 2019 is for a 1-unit increase in FPG. 
 
 PAFs and relative risks can be pulled using the following code:: 
 
@@ -233,8 +230,8 @@ Assumptions and Limitations
 
 The quantity of interest is exposure to the mean FPG level; we assume full reversibility of risk and do not account for duration of exposure to FPG values above the range of the TMREL. 
 
-We are not including diabetes as a cause in our model, which is a PAF of 
-1 cause with FPG. This means that while FPG affects IHD and stroke, we will 
+We are not including diabetes as a cause in our model, which is a PAF-of-one 
+cause with FPG. This means that while FPG affects IHD and stroke, we will 
 be missing any YLLs and YLDs associated directly with diabetes. 
 
 We are not including an effect of FPG on heart failure for this model, based 
