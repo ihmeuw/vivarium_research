@@ -1004,10 +1004,6 @@ The following post-processing rules should be applied to the relationship after 
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
 
-.. todo::
-
-  The numbers in these files are not finalized!
-
 :download:`Household domestic migration rates <household_domestic_migration_rates.csv>`
 
 :download:`Individual domestic migration rates by type <individual_domestic_migration_rates.csv>`
@@ -1016,11 +1012,7 @@ Simulation inputs
 
 :download:`Relationship proportions for non-reference person moves <non_reference_person_move_relationship_proportions.csv>`
 
-Destination PUMA proportions by source PUMA: :code:`/mnt/team/simulation_science/priv/users/zmbc/prl/puma_to_puma_proportions.csv`.
-
-.. todo::
-
-  Move this last (large) file somewhere more appropriate.
+Destination PUMA proportions by source PUMA (200MB): :code:`J:\Project\simulation_science\prl\data\puma_to_puma_proportions_2022_11_15.csv`
 
 Limitations
 ^^^^^^^^^^^
@@ -2357,7 +2349,12 @@ each simulant. This means that a simulant can have multiple rows of
 data, or just one row of data. 
 
 Note that "wages" is used per the census team's request, but is the same 
-value as "income" in our simulation. 
+value as "income" in our simulation.
+In reality, the income data we used to sample simulants' income values
+includes non-wage income, but we attribute it all to wages here.
+This is likely to be a benign assumption from a PRL standpoint because
+the continuous wage value won't be used for linking and there is no
+income/wage cutoff for this observer.
 
 Here is an example: 
 
@@ -2542,8 +2539,6 @@ For simulants that receive below the minimum income, 42.14% will
 still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
 income is based on the household structure and is listed in the table below. 
 We will not model persistence year to year. 
-
-**In the current model, no one will be low income, this will be changed later.** 
 
 .. list-table:: Minimum Income  
   :widths: 20 20 
@@ -2800,66 +2795,357 @@ leading to double counting in census (19).
 2.3.15 Income (20)
 ~~~~~~~~~~~~~~~~~~
 
-Individual income will be implemented as a risk exposure.  Average
-income is basically equal to GDP per capita, so we could potentially
-use that GBD covariate as the mean, but I think it will be easier to
-make our own estimate of the mean and standard deviation of
-log(income) for individuals stratified by age group, sex, and
-race/ethnicity from ACS data. I think is it pretty common to assume
-that this value is normally distributed, but we could use the GBD
-ensemble risk exposure machinery if that assumption seems like a
-limitation.
+Background/Importance
+^^^^^^^^^^^^^^^^^^^^^
+
+Income is important to PRL primarily because it affects which
+datasets a person will show up in -- in our simulation, the taxes and
+WIC observers will only record people above/below a certain income threshold.
+
+Therefore, it matters that we get approximately right the number
+and characteristics of people who fall above and below these thresholds.
+The actual income values, in between the thresholds, are not too consequential.
+
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
+
+We implement income as a continuous value, measured in 2020 US dollars
+per year.
+It can be thought of as similar to a continuous risk exposure.
+
+When a simulant is unemployed, they have 0 income.
+This is a simplifying assumption, because in real life people may have
+other sources of income: Social Security, capital gains, etc.
+As previously mentioned, the actual continuous income value in the output
+is not overly important for PRL, so the key assumption here is
+that **no unemployed people are above any observer's income threshold.**
+
+For employed simulants, income values are sampled from a log-normal distribution
+specific to the simulant's age group, sex, and race/ethnicity.
+**Note that this means that a simulant's income in dollars should change when they
+age into a new age group, even though their propensity/quantile does not.**
+
+Propensities/quantiles within the distribution are updated when a simulant
+changes employment (see employment component for when this occurs), but in a way that retains
+some autocorrelation for each individual.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+Each combination of age group, sex, and race/ethnicity has
+a lognormal distribution of income.
+This can be implemented with :code:`scipy.stats.lognorm`, which has two required parameters:
+:code:`s` (the shape parameter) and :code:`scale` (in our case, :code:`loc` should remain at its default value of 0).
+The SciPy docs explain how to interpret these:
+
+  Suppose a normally distributed random variable X has mean mu and standard deviation sigma. Then Y = exp(X) is lognormally distributed with s = sigma and scale = exp(mu).
+
+The CSV file below contains the :code:`s` and :code:`scale` parameters for each age group, sex, and race/ethnicity,
+in columns of the same names.
+
+:download:`income_scipy_lognorm_distribution_parameters.csv`
+
+.. todo::
+
+  The values in this file are preliminary and may change, but the schema will not.
+
+Propensities
+''''''''''''
+
+We want each individual simulant's income to be autocorrelated between jobs (employers),
+but we don't want this autocorrelation to be 1.
+
+To do this, we model the propensity/quantile of a simulant within their demographic-specific
+income distribution as being composed of two parts: the **simulant-specific** component, and the
+**job-specific** component.
+The simulant-specific component never changes throughout a simulant's life, while the job-specific
+component changes each time the simulant changes jobs, and has no autocorrelation.
+
+By the time a simulant is employed for the first time (it does not matter if this happens at initialization,
+working age, or first employment event), the simulant-specific component should be randomly drawn from a normal
+distribution with mean 0 and variance 0.812309.
+
+At each job change event (either at any employment change, or only at the employment changes that do
+not result in unemployment), the job-specific component should be randomly drawn from a normal distribution
+with mean 0 and variance 0.187691.
+
+See the data sources and analysis section for how these variances were calculated.
+
+A simulant's propensity/quantile within the corresponding log-normal income distribution is always equal
+to the probit function of the sum of their simulant-specific component and their job-specific component.
+
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The primary data source for this component is the ACS PUMS, which reports
+respondent income.
+We subset the PUMS to only those who are employed; as discussed in the previous
+section, in our simulation, unemployed people have 0 income.
+
+Distribution parameters
+'''''''''''''''''''''''
+
+It is fairly typical to approximate the income distribution with a log-normal
+distribution, though it has some known bias near the lower end of the income range. [Income_Lognormal]_
+Sometimes thicker Pareto upper tails are used because this fits a little better at high incomes, but we haven't done that here for simplicity.
+
+There are multiple methods to fit a lognormal distribution to observed values:
+using the mean and standard deviation of the log of the values,
+maximum likelihood estimation (MLE) which is implemented by SciPy's :code:`fit` method,
+or using the mean and median of the values.
+To avoid bounds issues with incomes at or below 0, and because of the presence of top-
+and bottom-coding in the ACS PUMS data, we have chosen to use the mean and median method.
+The mean can be fairly reliably calculated even in the presence of top-coding, because top-coded
+values are assigned to the mean of all top-coded values in the PUMS data.
+
+Propensity components
+'''''''''''''''''''''
+
+We have chosen to model income among the employed **in each demographic group** as follows:
+
+.. math::
+
+  log(income) \sim Normal(\mu_\text{log(income)}, \sigma_\text{log(income)}^2)
+
+We want to break down the variance using two normally distributed components of income propensity:
+
+.. math::
+
+  job \sim Normal(0, \sigma_\text{job}^2)
+
+.. math::
+
+  simulant \sim Normal(0, 1-\sigma_\text{job}^2)
+
+.. math::
+
+  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+
+We inform the variance contributions of the job- and simulant-specific
+components with a measured variance of 1-year change in log(earnings)
+for people who were employed in both years.
+This value -- **0.09** -- comes from 2015 IRS data that linked tax
+returns. [IRS_Volatility]_
+
+We assume that this value has not changed since 2015, and is the same for income as for earnings.
+In reality, the volatility is probably lower for income.
+
+.. note::
+
+  It is pretty hard to tell from the graph we extracted this value from
+  whether it refers to individual or to household earnings -- we think
+  individual, but if we are wrong, we are additionally extrapolating
+  from household to individual.
+
+In our model of income,
+
+.. math::
+
+  log(income_\text{j2}) - log(income_\text{j1}) = job_\text{j2} * \sigma_\text{log(income)} - job_\text{j1} * \sigma_\text{log(income)} \sim Normal(0, 2\sigma_\text{job}^2\sigma_\text{log(income)}^2)
+
+where :math:`\text{j1}` and :math:`\text{j2}` are the jobs before and after a job change event for that simulant.
+
+To translate this into year-over-year volatility, we need to incorporate the rate at which simulants change jobs.
+(We also ignore age-up events and assume that a simulant does not change demographic groups.)
+Specifically, we need to know: **given how we have modeled employment, what proportion of people who are employed at two time points a year apart
+are in the same job at both time points?**
+
+.. note::
+
+  Answering this question **given how we have modeled employment** ensures
+  that year-over-year income volatility in the simulation roughly equals
+  the IRS value, even if our rate of job changes isn't very accurate.
+  If we were to add more complexity to our employment model such that
+  (a) we had more confidence in its accuracy and (b) it was no longer
+  straightforward to answer this question, we could look for an empirical
+  value instead.
+
+We break this down into two sub-questions:
+
+1. Of those employed at time t1, what proportion are employed at time t2? This can be approximated by a recurrence which uses the 28-day timestep of the sim and assumes that each employment change has a 42% chance of resulting in unemployment if currently employed, and a 100% chance of resulting in employment if currently unemployed. Specifically,
+
+.. math::
+
+  \text{employed}(0) = 1
+
+.. math::
+
+  \text{employed}(t) = \text{employed}(t - 1) + (1 - \text{employed}(t - 1)) * 0.5 * 1 * \frac{28}{365} - \text{employed}(t - 1) * 0.5 * 0.42 * \frac{28}{365}
+
+2. Of those employed at time t1, what proportion are in the same job at time t2? Similarly, if we break the transition rate into 28-day timesteps, :math:`\text{same_job}(t) = 1 - (1 - 0.5 * \frac{28}{365})^{t}`
+
+This implies:
+
+.. math::
+
+  log(income_\text{t2}) - log(income_\text{t1}) \sim Normal(0, 2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2\sigma_\text{log(income)}^2)
+
+where t2 is one year after t1.
+
+We assume that the IRS value for variance of the 1-year change is equal for all demographic groups. In reality, there is evidence of differential volatility by race and other factors.
+
+Because we need to calculate a *single* simulant-specific/job-specific split (the simulant-specific component needs to follow a single simulant through many age groups), we use :math:`E(\sigma_\text{log(income)}^2)` from ACS PUMS across demographics to solve the equation:
+
+.. math::
+
+  2 * \frac{\text{same_job}(12)}{\text{employed}(12)} * \sigma_\text{job}^2E(\sigma_\text{log(income)}^2) = 0.09
+
+.. math::
+
+  \sigma_\text{job}^2 \approx 0.187691
+
+.. note::
+
+  If we want to refine this calculation in a future version of the model,
+  there are other sources we could use to inform the variance split,
+  which may also have more information on volatility by demographics. [Volatility_PSID_review]_ [Volatility_CPS]_
+  In the literature, the values we are interested in are referred to as
+  "gross volatility."
 
 2.3.16 Employment (21)
 ~~~~~~~~~~~~~~~~~~~~~~
 
-To represent businesses and employment dynamics we will use another
-directed tripartite graph (analogous to our migration component),
-showing arcs from simulants (part A) to employers (part B) as well as
-arcs from employers to their addresses (part C).
+.. note::
 
-This construct allows us to represent businesses that employ one or
-more people, as well as individuals who are employed by multiple
-businesses.  We will also be able to add business dynamics in the
-future, e.g. new businesses arriving, old businesses closing down, and
-even merges, as well as name changes and address changes.  All of this
-will go into our simulated tax return data, which we must make a
-scheme for before we access restricted tax data (since even the schema
-of this data is restricted information).
+  Employment is one of the less-developed parts of our model.
+  We have included the aspects that seem particularly relevant to person linkage.
+  With this employment model, business linkage in the resulting data
+  is likely missing key real-life challenges.
 
-To keep things simple for starters, we will give everyone age 18 and over a
-random edge to an employer, chosen from a skewed distribution to
-ensure that there are a few large employers and a "fat tail" of small
-employers. We will change employers randomly at the rate of 50 changes
-per 100 person years, and change employer addresses at a rate of 10
-changes per 100 person years.  For now, we will have distinct
-addresses for businesses and households, but eventually we might want
-to intentionally include duplicates, e.g. if someone operates a
-business out of their home.
+We consider all simulants age 18 and over to be working-age; all such
+simulants either have an employer or are considered unemployed.
+We only allow a single employer at a time for each simulant.
 
-To keep things simple, for now when businesses move to a new address,
-it will be a totally new address. No household or business will ever
+Each employer has a single street address.
+
+Initialization
+^^^^^^^^^^^^^^
+
+We initialize working-age simulants to be unemployed with probability 42.4%,
+regardless of demographics.
+We initialize working-age simulants to be employed by the military with probability 3%,
+regardless of demographics.
+We consider the military to be a single employer, which has the same street address
+as the military group quarters "household."
+
+.. todo::
+
+  Source or update these numbers.
+
+To employ the rest of the simulants (those with civilian jobs),
+we generate employers with an initial size attribute chosen from a skewed distribution to
+ensure that there are a few large employers and many small employers.
+Specifically, we use a log-normal distribution with :math:`\mu=4` and :math:`\sigma=1`,
+which means that the mean employer has ~90 employees and the median has ~55 employees.
+Each one has a street address, generated in the same way that residential
+addresses are generated, but without any restriction on state/PUMA/ZIP.
+
+.. todo::
+
+  This business size distribution doesn't seem plausible!
+
+.. todo::
+
+  Document how we name businesses.
+
+We generate the number of employers needed to (in expectation) employ our starting
+non-military employed population, that is:
+
+.. math::
+
+  \text{num_employers}=
+  \frac{E(\text{num_simulants_needing_employer})}{E(\text{employer_size})}=
+  \frac{\text{num_simulants_working_age} * (1 - 0.424 - 0.03)}{e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}}}
+
+where :math:`\text{num_simulants_working_age}` is the actual (not expected) number of working-age
+simulants in the initialized population.
+
+In order to give individual simulants employers such that the size attribute is (roughly)
+accurate at the population level, we select each simulant's employer from the categorical
+distribution where the probability of each employer is proportional to its initial size attribute.
+
+Finally, we set all working-age simulants living in military group quarters to be employed by the
+military.
+This is in addition to the 3% assigned across the entire working-age population regardless of
+living situation.
+
+Updating employer over time
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Working-age simulants (including those who are unemployed) change employment randomly
+at the rate of 50 changes per 100 person-years.
+This rate includes those who change from employed to unemployed.
+
+If a simulant selected for an employment change lives in military group quarters,
+no employment change occurs;
+they remain employed by the military.
+This means that in practice, the actual rate of employment changes will be a bit
+less than 50 per 100 person-years.
+
+When an employed simulant changes employment, they have a 42.4% chance of
+becoming unemployed and a 3% chance of becoming employed by the
+military.
+Otherwise, they sample a new non-military employer with probability
+proportional to the employer's initial size attribute, as at initialization.
+
+In the rare case that they receive the same employer they already had,
+this whole procedure is repeated (or an equivalent mechanism
+to prevent job "changes" that don't change employment and redistribute
+the probability of such "changes" among all other options).
+
+The same procedure is done for an unemployed simulant selected for an employment change,
+except that instead of not being allowed to "change" to the same employer,
+they are not allowed to "change" to remain unemployed.
+
+This approach to selecting a new employer ensures that at the population level,
+the number of simulants employed by an employer will remain **roughly** (see note)
+proportional to the initial size attribute sampled for that employer.
+However, the actual head counts may change over time due to increases or decreases
+in the total size of the working-age population.
+
+.. note::
+
+  Due to the re-allocation of employment changes that do not really "change" anything
+  (i.e. from an employer to itself, or from unemployment to unemployment),
+  the proportion unemployed, and proportions employed by each employer, will move toward
+  an equilibrium which is slightly different from the initial size attribute proportions.
+  The largest employers will become smaller than intended, because more employment changes to them
+  will be re-allocated away;
+  the same effect will reduce unemployment.
+
+  For now we think this effect is small enough to not be too important.
+  If we wanted to fix this in the future, changing our re-allocation strategy would be
+  the simplest way.
+  We might want to allow non-changes, for example, and just increase the employment change
+  rate accordingly.
+
+Business address changes
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Businesses (employers) change addresses at a rate of 10
+changes per 100 business-years.
+When businesses move to a new address,
+it will be a random new address, without state/PUMA/ZIP restrictions.
+No household or business will ever
 move into their old address.
 
-We have also included a special "employer" to indicate individuals who
-are *not* currently employed.  We assume that 58% of the population is
-employed, which leads to a lot of individuals switching to being
-unemployed.  We might need to refine this in the future.
+Limitations
+^^^^^^^^^^^
 
-The data we will extract from this network for our simulated tax
-return is a list of businesses and their unique ID numbers and for
-each simulant who files a tax return, a list of the businesses that
-they worked for during the calendar year.  We should also extract a
-list of "dependents" from the household structure and perhaps
-something about spouses, but let's leave thinking that through for
-later.
-
-There is an additional piece of complexity that we need to develop
-further, because some group quarters types are also employers.  For
-now, we will have a special employer called "Military" and for
-simulants living in military group quarters we will set their employer
-to Military, and ensure that their address and zip code match their
-employer_address and employer_zipcode.
+#. We do not model retirement; simulants are equally likely to be employed
+   no matter their age (as long as they are at least 18).
+#. We only allow each simulant to have one employer at a time.
+#. We do not model most business dynamics, e.g. new businesses opening,
+   existing businesses closing, businesses changing their names,
+   or businesses merging or splitting.
+   The only business event we **do** model is changing address.
+#. Businesses change addresses completely at random.
+   There is no bias toward local moves.
+#. Simulant residential address is completely unrelated to the address
+   of their employer.
+#. Businesses never share addresses with households (except by coincidence).
+#. Business addresses that are vacated are not re-used (except by coincidence).
+   This likely makes business linking easier than it is in reality.
 
 .. _census_prl_perturbation:
 
@@ -3055,3 +3341,10 @@ To Come (TK)
 
 .. [Fazel-Zarandi_2018] Fazel-Zarandi MM, Feinstein JS, Kaplan EH. The number of undocumented immigrants in the United States: Estimates based on demographic modeling with data from 1990 to 2016. PLoS One. 2018 Sep 21;13(9):e0201193. doi: 10.1371/journal.pone.0201193. PMID: 30240392; PMCID: PMC6150478. `https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/ <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6150478/>`_
 
+.. [Income_Lognormal] Schield, Milo. 2018. Statistical Literacy and the Lognormal Distribution. `http://www.statlit.org/pdf/2018-Schield-ASA.pdf <http://www.statlit.org/pdf/2018-Schield-ASA.pdf>`_
+
+.. [IRS_Volatility] Lamadon T, Mogstad M, Setzler B. Income volatility, taxation and the functioning of the U.S. labor market. IRS.gov. Accessed November 19th, 2022. https://www.irs.gov/pub/irs-soi/19rpincomevolatilitytaxationandlabor.pdf
+
+.. [Volatility_PSID_review] Moffitt R, Zhang S. The PSID and Income Volatility: Its Record of Seminal Research and Some New Findings. Ann Am Acad Pol Soc Sci. 2018 Nov;680(1):48-81. doi: 10.1177/0002716218791766. Epub 2018 Nov 14. PMID: 31666745; PMCID: PMC6820686. https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6820686/
+
+.. [Volatility_CPS] Ziliak JP, Hardy B, Bollinger C. Earnings volatility in America: Evidence from matched CPS. Labour Economics. 2011 Dec; 18(6). https://doi.org/10.1016/j.labeco.2011.06.015
