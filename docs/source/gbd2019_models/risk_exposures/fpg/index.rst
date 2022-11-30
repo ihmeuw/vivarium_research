@@ -1,7 +1,7 @@
 .. _2019_risk_exposure_fpg:
 
 ======================
-Fasting Plasma Glucose 
+Fasting Plasma Glucose
 ======================
 
 
