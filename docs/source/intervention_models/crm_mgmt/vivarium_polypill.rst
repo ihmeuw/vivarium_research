@@ -41,8 +41,8 @@ intervention will assess the impact of a polypill on SBP and CVD.
 
 Please note that as the polypill only includes hypertension medications, LDL-C adherence will
 NOT be affected. For those assigned to the polypill, adherence will be redrawn to have the 
-different percentages listed below. This adherence will then determine if the simulant 
-receives the benefit from their SBP medication. 
+different percentages listed below. In addition, the polypill will place simulants on more medications 
+which have higher efficacy. 
 
 
 .. list-table:: Affected Outcome #1 Effect Size
@@ -56,6 +56,9 @@ receives the benefit from their SBP medication.
     - [Thom-2013]_ 
     - 
 
+In addition, simulants on the polypill intervention will be assigned to either 
+three drugs at half dose or three drugs at standard dose. This will "skip" steps 
+on the treatment ladder for many simulants, causing higher benefit faster. 
 
 Baseline Coverage Data
 ++++++++++++++++++++++++
@@ -69,8 +72,7 @@ Vivarium Modeling Strategy
 Eligibility and Initiation
 ++++++++++++++++++++++++++
 
-- SBP >=130 mmHg 
-- Simulant has 2 or more hypertension drugs (e.g., simulant is in treatment category "two drugs at half dose" or above on the treatment ladder)
+- SBP >=140 mmHg 
 - Enrollment in the intervention only happens during interactions with healthcare, as shown :ref:`here <us_cvd_concept_model>`
 
 
@@ -83,8 +85,11 @@ simulants exposure to SBP. Adherence for LDL-C medications does not change.
 The 1.33 odds ratio listed above will decrease the number of simulants that are non-adherent compared to 
 those who are not receiving the intervention. The the new adherence rates for simulants with the intervention are: 
 
+In addition, the intervention will affect the treatment that simulants are assigned. 
+All simulants will be assigned to either three drugs at half dose or three drugs at 
+standard dose. 
 
-**Blood Pressure Treatments**
+**Blood Pressure Adherence**
 
 .. list-table:: Adherence Score Values 
   :widths: 10 10 10 
@@ -106,6 +111,18 @@ those who are not receiving the intervention. The the new adherence rates for si
 
 Please note that the intervention works on the overall level of adherence (% adherent in the table above). 
 The percents for primary and secondary nonadherence are now arbitrary.  
+
+**Blood Pressure Treatment Assignment**
+
+Any simulant on 'three drugs at half dose' or lower on the ladder will be 
+assigned to 'three drugs at half dose' when they are put on the polypill intervention. 
+Use the efficacy normally assigned for this regimen. 
+
+Any simulant at 'three drugs at standard dose' on the ladder will continue 
+with the regimen they have while on the polypill intervention. 
+
+Simulants on the polypill intervention can move up the ladder to three 
+drugs at standard dose based on the usual treatment ramp shown :ref:`here <us_cvd_concept_model>`. 
 
 Assumptions and Limitations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~

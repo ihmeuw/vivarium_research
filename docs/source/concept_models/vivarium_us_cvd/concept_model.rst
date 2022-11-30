@@ -416,7 +416,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
   * - F (polypill intervention scenarios)
-    - If simulant is prescribed two drugs at half dose or higher on SBP ladder and is eligible, either 50% or 100% are enrolled depending on scenario  
+    - If simulant has a measured SBP of 140+ and is eligible, either 50% or 100% are enrolled depending on scenario  
     - 
 
 
