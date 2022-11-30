@@ -1423,7 +1423,7 @@ Limitations
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 addresses; features to
 examine: does everyone in a household have the same address?  does the
-zip code match the PUMA?  does the street conform to typical
+ZIP code match the PUMA?  does the street conform to typical
 expectations?
 
 2.3.8 Component 12: Mailing Address
@@ -1928,7 +1928,8 @@ Census
   * - Last name
   * - Age 
   * - Date of Birth 
-  * - Home Address 
+  * - Physical Address
+  * - Physical ZIP Code
   * - Relationship to Person 1 (Head of Household)
   * - Sex (binary)
   * - Race/Ethnicity 
@@ -2098,8 +2099,8 @@ There are two types of sampling plans:
   * - Last name
   * - Age 
   * - DOB 
-  * - Home Address 
-  * - Home Zip Code 
+  * - Physical Address
+  * - Physical ZIP Code 
 
 Here is an example: 
 
@@ -2289,8 +2290,8 @@ in the home.
   * - Last name
   * - Age 
   * - DOB 
-  * - Home Address 
-  * - Home Zip Code 
+  * - Physical Address
+  * - Physical ZIP Code
   * - Race/ethnicity 
 
 Here is an example: 
@@ -2566,7 +2567,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Zip Code 
+  * - Employer ZIP Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -2598,7 +2599,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Zip Code 
+  * - Employer ZIP Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
