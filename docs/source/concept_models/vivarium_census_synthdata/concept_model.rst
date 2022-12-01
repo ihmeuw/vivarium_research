@@ -444,7 +444,7 @@ there are multiple spouse/unmarried partner options, select one at random.
 Simulant will be randomly assigned to a guardian based on the below rules: 
 
 - 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
-- Match to a person 18 to 45 years older than the child 
+- Match to a person aged 35 to 65 years old 
 - If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people source2_ 
     * 23% female reference people without a listed spouse 
@@ -460,9 +460,10 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 **Limitations**
 
 #. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
-#. We have "parents" fall between 18-45 older than the child. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
+#. We have "parents" fall at set ages. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
 #. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
+#. For GQ college folks, we select only reference people to be guardians, making some simulants ineligible and oversimplifying. 
 
 Guardian(s) on Time Steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^
