@@ -226,11 +226,11 @@ be unaffected.
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
-:ref:`See ischemic heart disease documentation <2019_cause_ihd>`
+:ref:`See ischemic heart disease documentation (combined with HF) <2019_cause_ihd>`
 
 The relative risks apply to the incidence rates of acute 
-myocardial infarction and stable angina. These are arrows 
-1, 3, and 4 on the IHD cause diagram. They should be 
+myocardial infarction. These are arrows labeled 
+1 on the IHD cause diagram. They should be 
 applied using the formula: 
 
 incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)/5} 
@@ -293,13 +293,14 @@ The mediation matrix is found on this `Hub page <https://hub.ihme.washington.edu
 Risk Outcome Pair #10: Heart failure
 ++++++++++++++++++++++++++++++++++++
 
-:ref:`See heart failure documentation <2019_cause_heart_failure>`
+:ref:`See heart failure documentation (combined with IHD) <2019_cause_ihd>`
 
 In GBD, heart failure is an impairment and does not 
 have a mortality associated with it. For our model, 
 heart failure is a cause that simulants can have and 
 die from. However, the effect of BMI is for incidence 
-rather than for mortality. Below are the relative risks, 
+rather than for mortality. This is applied to arrows 3 
+and 4 in the cause model. Below are the relative risks, 
 these are from the literature analysis_. [Kenchaiah_2008]_
 
 .. _analysis: https://www.ahajournals.org/doi/full/10.1161/CIRCULATIONAHA.108.807289

@@ -92,7 +92,7 @@ No changes have been made to the TMREL used for systolic blood pressure since GB
 Vivarium Modeling Strategy
 --------------------------
 
-The risk-outcome pairs listed below are standard GBD relationships. The relative risks stored in the database are not location- or year-specific. They are age- and sex-specific. Exposure to SBP affects the likelihood of both morbidity and mortality from: ischemic heart disease, ischemic stroke, intracerebral hemorrhage, subarachnoid hemorrhage, hypertensive heart disease, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic kidney disease, and heart failure. We will model this in Vivarium such that exposure to SBP will impact the incidence rates of: ischemic heart disease, ischemic stroke, intracerebral hemorrhage, subarachnoid hemorrhage, hypertensive heart disease, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic kidney disease, and heart failure. The excess mortality rate for all outcomes will be unaffected. 
+The risk-outcome pairs listed below are standard GBD relationships. The relative risks stored in the database are not location- or year-specific. They are age- and sex-specific. Exposure to SBP affects the likelihood of both morbidity and mortality from: ischemic heart disease, ischemic stroke, intracerebral hemorrhage, subarachnoid hemorrhage, hypertensive heart disease, atrial fibrillation and flutter, aortic aneurysm, peripheral arterial disease, chronic kidney disease, and heart failure. We will model this in Vivarium such that exposure to SBP will impact the incidence rates of ischemic heart disease, ischemic stroke, and heart failure. The excess mortality rate for all outcomes will be unaffected. 
 
 .. list-table:: Entities affected by SBP in GBD
    :widths: 5 5 5 5 5
@@ -183,9 +183,9 @@ The risk-outcome pairs listed below are standard GBD relationships. The relative
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
-:ref:`See ischemic heart disease documentation <2019_cause_ihd>`
+:ref:`See ischemic heart disease documentation (combined with HF) <2019_cause_ihd>`
 
-The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg.
+The relative risks apply to the incidence rates of acute myocardial infarction. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((SBP_i - TMREL),0)/10}. The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. The relative risk for GBD 2019 is for a 10-unit increase in mm Hg.
 
 PAFs and relative risks can be pulled using the following code: 
 
@@ -301,7 +301,7 @@ pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[107, 589], source='
 Risk Outcome Pair #10: Heart failure
 ++++++++++++++++++++++++++++++++++++
 
-:ref:`See heart failure documentation <2019_cause_heart_failure>`
+:ref:`See heart failure documentation (combined with IHD) <2019_cause_ihd>`
 
 In GBD, heart failure is an impairment and does not have a mortality associated with it. For our model, 
 heart failure is a cause that simulants can have and die from. However, the effect of SBP is for incidence 
