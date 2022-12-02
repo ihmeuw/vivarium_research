@@ -3100,23 +3100,36 @@ Because we need to calculate a *single* simulant-specific/job-specific split (th
 
 We consider all simulants age 18 and over to be working-age; all such
 simulants either have an employer or are considered unemployed.
+**This is quite different from how "unemployment" is typically defined; the category we call "unemployed" in our simulation includes those who are not looking for work or are out of the labor force altogether.**
 We only allow a single employer at a time for each simulant.
 
 Each employer has a single street address.
 
+Data sources and analysis
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Our primary data source is ACS PUMS.
+
+We calculate the proportion not employed among the working-age
+(18 and older) population, and the proportion employed by the
+military **and not living in non-institutional group quarters.**
+This latter number will be applied to the whole population,
+in addition to all military GQ simulants being assigned to the military
+employer.
+This is slightly incorrect because the simulants chosen by
+this proportion may also live in military GQ and be set to
+the military employer anyway, but this effect should be
+vanishingly small.
+
 Initialization
 ^^^^^^^^^^^^^^
 
-We initialize working-age simulants to be unemployed with probability 42.4%,
+We initialize working-age simulants to be unemployed with probability 38.86%,
 regardless of demographics.
-We initialize working-age simulants to be employed by the military with probability 3%,
+We initialize working-age simulants to be employed by the military with probability 0.32%,
 regardless of demographics.
 We consider the military to be a single employer, which has the same street address
 as the military group quarters "household."
-
-.. todo::
-
-  Source or update these numbers.
 
 To employ the rest of the simulants (those with civilian jobs),
 we generate employers with an initial size attribute chosen from a skewed distribution to
@@ -3140,19 +3153,32 @@ non-military employed population, that is:
 .. math::
 
   \text{num_employers}=
-  \frac{E(\text{num_simulants_needing_employer})}{E(\text{employer_size})}=
-  \frac{\text{num_simulants_working_age} * (1 - 0.424 - 0.03)}{e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}}}
+  \frac{E(\text{num_simulants_needing_employer})}{E(\text{employer_size})}
+
+.. math::
+
+  E(\text{num_simulants_needing_employer}) = \text{num_simulants_working_age} * (1 - 0.3886 - 0.0032)
+
+.. math::
+
+  E(\text{employer_size}) = e^{\mu_\text{size}+\frac{1}{2}*\sigma_\text{size}} \approx 90.017131
 
 where :math:`\text{num_simulants_working_age}` is the actual (not expected) number of working-age
 simulants in the initialized population.
 
-In order to give individual simulants employers such that the size attribute is (roughly)
+.. note::
+
+  While the approximate value for expected employer size is given above, we should avoid hard-coding
+  it into the simulation to ensure flexibility on the distribution parameters
+  in the future.
+
+In order to assign individual simulants to employers such that the size attribute is (roughly)
 accurate at the population level, we select each simulant's employer from the categorical
 distribution where the probability of each employer is proportional to its initial size attribute.
 
 Finally, we set all working-age simulants living in military group quarters to be employed by the
 military.
-This is in addition to the 3% assigned across the entire working-age population regardless of
+This is in addition to the 0.32% assigned across the entire working-age population regardless of
 living situation.
 
 Updating employer over time
@@ -3168,8 +3194,8 @@ they remain employed by the military.
 This means that in practice, the actual rate of employment changes will be a bit
 less than 50 per 100 person-years.
 
-When an employed simulant changes employment, they have a 42.4% chance of
-becoming unemployed and a 3% chance of becoming employed by the
+When an employed simulant changes employment, they have a 38.86% chance of
+becoming unemployed and a 0.32% chance of becoming employed by the
 military.
 Otherwise, they sample a new non-military employer with probability
 proportional to the employer's initial size attribute, as at initialization.
