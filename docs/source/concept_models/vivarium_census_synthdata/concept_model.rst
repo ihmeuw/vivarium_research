@@ -1445,7 +1445,7 @@ or have mailing addresses that cannot be "verified," [TEA_2000_2020]_
 it sends people to physically deliver the forms to the household units instead of relying on
 postal delivery.
 This is called "Update Leave" enumeration (there are also "Update Enumerate" and "Remote Alaska"
-enumeration types, but these are vanishingly small so we ignore them here).
+enumeration types, but we ignore them here).
 Update Leave enumeration is not only used in areas with mailing vs residential address discrepancies:
 it is also used for everyone in Puerto Rico,
 in areas affected by natural disasters,
