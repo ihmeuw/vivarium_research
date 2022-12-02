@@ -127,8 +127,8 @@ of domestic (:ref:`8 <census_prl_domestic_migration>`) and international (:ref:`
 by household and individual simulants, as well as changes to geographic
 location and household id.
 
-On top of this, we will layer attributes relevant to PRL: residential (11)
-and mailing addresses for each household (12); first, middle, and last names for
+On top of this, we will layer attributes relevant to PRL: physical (11)
+and mailing addresses for each household and GQ type (12); first, middle, and last names for
 each simulant (13); date of birth (14);
 Social Security Number and Individual Taxpayer Identification Number (15);
 and periodic survey, census, and registry
@@ -917,7 +917,7 @@ in the "Destination PUMA proportions by source PUMA" input file **where the stat
 match the household's current state and PUMA**.
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the sources and destinations in the simulation catchment area.)
-The household should be assigned new residential and mailing addresses, with the same procedure used at initialization.
+The household should be assigned new physical and mailing addresses, with the same procedure used at initialization.
 
 All simulants in the household that are of working age should change jobs,
 with the same procedure used for a spontaneous employment change event.
@@ -957,7 +957,7 @@ In addition to the above logic common to all individual moves:
 
 The simulant should be assigned a new household ID not shared
 by any other simulants.
-The new household's residential and mailing addresses should also be assigned at random,
+The new household's physical and mailing addresses should also be assigned at random,
 in the same manner as at initialization.
 
 Their relationship attribute should be set to "reference person."
@@ -971,7 +971,7 @@ An institutional/non-institutional "relationship" attribute should be sampled
 for the simulant according to the proportions in the "Relationship proportions for GQ person moves" input file
 **where the age, sex, and race/ethnicity columns match those attributes of the simulant**.
 
-Then, a GQ type (household ID and corresponding residential and mailing addresses) should be assigned according to the
+Then, a GQ type (household ID and corresponding physical and mailing addresses) should be assigned according to the
 institutional/non-institutional status, as is done at initialization.
 
 Non-reference person moves
@@ -1057,7 +1057,7 @@ Limitations
    moved somewhere else in the country moves within the catchment area instead.
 #. When a household moves, we will create a new address for them. No
    one will move back into that old address.
-#. We assume that mailing address as well as residential address changes on every
+#. We assume that mailing address as well as physical address changes on every
    move event.
    In real life, some short moves may allow someone to continue to use the same PO box.
 
@@ -1124,7 +1124,7 @@ We perturb the PUMA and age attributes of the sampled household (in the case of 
 or person (in the case of a GQ person or non-reference-person move), as described in the
 :ref:`perturbation section below <census_prl_perturbation>`.
 
-Added residential households are assigned a new household ID and new residential/mailing addresses, as is done at population initialization.
+Added residential households are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
 Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
 their institutional/non-institutional status, as well as the corresponding shared addresses, as is done at population initialization.
 
@@ -1222,7 +1222,7 @@ Emigration events are modeled as happening to an at-risk population at a certain
 They are constant across time in the simulation.
 
 Households and individuals selected to have emigration events should remain in the simulation, but their
-location attributes (US state, PUMA, and residential and mailing addresses) should be set to placeholder values that signify they are
+location attributes (US state, PUMA, and physical and mailing addresses) should be set to placeholder values that signify they are
 no longer in the US.
 Emigrating simulants should also terminate employment -- their employer ID and income are set
 to those used for unemployment.
@@ -1290,19 +1290,19 @@ Limitations
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
-2.3.7 Component 11: Residential Address
+2.3.7 Component 11: Physical Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background
 ^^^^^^^^^^
 
-A generator that can generate street address and zip code based on structure alone is the
-Python package faker: https://github.com/joke2k/faker.
+The Python package faker (https://github.com/joke2k/faker) can generate structurally valid but
+meaningless street addresses and ZIP codes.
 
 Some additional libraries that function similarly to ``faker`` are https://github.com/ropensci/charlatan
 and https://github.com/paulhendricks/generator.
 
-In order to make addresses internally consistent, it's necessary to use real address
+In order to make addresses internally consistent (e.g. city with state), it's necessary to use real address
 data to generate them.
 Such data has already been collected by address parsing libraries such as libpostal.
 For our purposes, we will use the training data of libpostal, as repackaged by the
@@ -1324,7 +1324,7 @@ for the US only.
   Document the pre-processing of the deepparse address data.
 
 To make PUMA correspond to ZIP code, we use a crosswalk generated by the
-`GeoCorr 2014 tool <https://mcdc.missouri.edu/applications/geocorr2014.html>`
+`GeoCorr 2014 tool <https://mcdc.missouri.edu/applications/geocorr2014.html>`_
 which allows us to map 2010 Census-based PUMAs (used for ACS 2016-2020) to
 2010 ZCTAs.
 We use the weighting variable of housing units, which means that the
@@ -1342,9 +1342,12 @@ For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
 Simulation strategy
 ^^^^^^^^^^^^^^^^^^^
 
-Each household id should be associated with a residential address.
+Residential households
+''''''''''''''''''''''
 
-Whenever a new household is initialized or moves such that it needs a new address,
+Each household should be associated with a physical address.
+
+Whenever a new household is initialized or moves such that it needs a new physical address,
 the following process will be used to generate one:
 
 #. A street number, street name, and unit will each be independently sampled from the
@@ -1353,8 +1356,36 @@ the following process will be used to generate one:
    from the deepparse address data filtered to the household's US state.
    The combination will be separated by a comma and appended to the result of the previous step.
 #. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
-   the weights in the :code:`proportion` column, filtered to the household's state and
-   PUMA.
+   the weights in the :code:`proportion` column, filtered to the household's US state and
+   PUMA (the state and PUMA values of the household members, which should all be the same).
+
+Group quarters
+''''''''''''''
+
+Each group quarters **type** (e.g. college, carceral, ...) should be associated with a physical address.
+
+When a group quarters type is initialized, its physical address and ZIP code are generated using the following
+steps:
+
+#. A street number, street name, and unit will each be independently sampled from the
+   deepparse address data and concatenated with spaces.
+#. Then, a municipality (city) and province (state) **combination** will be sampled
+   from the deepparse address data, **without filtering by anything.**
+   The combination will be separated by a comma and appended to the result of the previous step.
+#. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
+   the weights in the :code:`proportion` column, **filtered to the US state sampled in the previous step.**
+
+.. note::
+  Because the proportions sum to the same value (1) for each PUMA, sampling ZIP like this without filtering
+  on PUMA assumes that each PUMA is equally likely to contain GQ housing.
+  PUMAs are created to have roughly equal population, so this is reasonable.
+
+.. note::
+  **Simulants' PUMA attribute will not correspond with their physical address when they are in GQ.**
+  This is a result of using a single physical address for an entire GQ type.
+
+The physical address for each GQ type is fixed for the duration of the simulation.
+(See the domestic migration section, where household moves are only applied to residential households.)
 
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
@@ -1365,7 +1396,7 @@ Limitations
 ^^^^^^^^^^^
 
 #. We never re-use previously vacated addresses, so there are no
-   distinct households which have had the same residential address at
+   distinct households which have had the same physical address at
    different times.
    We hypothesize that this will present a relevant
    challenge for PRL methods in practice.
@@ -1383,14 +1414,17 @@ Limitations
    (If we went this route, perhaps using business addresses would be safer.)
 #. We use 2010 ZIPs for all years of the simulation.
    We do not simulate any PRL difficulty arising from ZIP codes changing over time.
-#. We assign all households a residential ZIP.
+#. We assign all households a physical ZIP.
    As discussed in the next section on mailing addresses, not all households receive
-   mail delivery and it is unclear if these households would have a residential ZIP in practice.
+   mail delivery and it is unclear if these households would have a physical ZIP in practice.
+#. We use a single physical address for each GQ **type**, so e.g. everyone in the US who is in college has
+   the same address.
+   This will make PRL more difficult than it would be in reality.
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 addresses; features to
 examine: does everyone in a household have the same address?  does the
-zip code match the PUMA?  does the street conform to typical
+ZIP code match the PUMA?  does the street conform to typical
 expectations?
 
 2.3.8 Component 12: Mailing Address
@@ -1415,7 +1449,7 @@ Data sources and analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
 There are no readily available data sources for exactly what we want -- i.e. the proportion
-of households that have a mailing address different from their residential address.
+of households that have a mailing address different from their physical address.
 
 Existing art: address-based sampling
 ''''''''''''''''''''''''''''''''''''
@@ -1446,14 +1480,14 @@ it sends people to physically deliver the forms to the household units instead o
 postal delivery.
 This is called "Update Leave" enumeration (there are also "Update Enumerate" and "Remote Alaska"
 enumeration types, but these are vanishingly small so we ignore them here).
-Update Leave enumeration is not only used in areas with mailing vs residential address discrepancies:
+Update Leave enumeration is not only used in areas with mailing vs physical address discrepancies:
 it is also used for everyone in Puerto Rico,
 in areas affected by natural disasters,
 and possibly other locations evaluated on a case-by-case basis. [Census_Rural_Remote]_
 We believe that the plan for enumeration type by area published in March 2020 did not reflect any natural disasters, [Update_Leave_2020]_
 but overall it is likely that Update Leave includes slightly more households
 (even outside Puerto Rico) than actually have a different mailing address
-from their residential address.
+from their physical address.
 
 In the 2020 Census plan, 6.8 million housing units were in Update Leave enumeration areas, including all 1.6 million
 in Puerto Rico. [Update_Leave_2020]_ [Census_PR]_
@@ -1478,18 +1512,18 @@ Residential households
 
 Each household should be associated 1-to-1 with a mailing address.
 For each household, there is a 96.50% probability that the mailing address is
-the same as the residential address and the mailing ZIP code is the same as the residential ZIP code.
+the same as the physical address and the mailing ZIP code is the same as the physical ZIP code.
 
 Otherwise, the mailing address is a PO box, which should be "PO Box"
 followed by a random integer between 1 and 20,000 -- e.g. "PO Box 12345." [PO_Box_Format]_
-Additionally, a mailing ZIP should be generated (independent of residential ZIP)
-based on PUMA using the same procedure described in the residential address section.
+Additionally, a mailing ZIP should be generated (independent of physical ZIP)
+based on PUMA using the same procedure described in the physical address section.
 
 Group quarters
 ''''''''''''''
 
 Each GQ type should be associated 1-to-1 with a mailing address.
-This address should **always** be identical to the residential address for that GQ type.
+This address should **always** be identical to the physical address for that GQ type.
 
 Limitations
 ^^^^^^^^^^^
@@ -1499,7 +1533,7 @@ Limitations
    in a realistic way.
 #. We do not include other unusual mailing addresses besides PO boxes, e.g. Rural Route addresses.
    The specific format likely does not matter much for PRL purposes.
-#. We assign mailing ZIP using the same ZCTA data used for residential ZIP --
+#. We assign mailing ZIP using the same ZCTA data used for physical ZIP --
    ZIP codes that would actually be used by PO boxes may not appear as ZCTAs at all or not be covered by the right PUMA.
    This may make it too likely that ZIP is the same between a residence and a PO box,
    but independently sampling the two ZIP values will bias us in the other direction,
@@ -1895,7 +1929,8 @@ Census
   * - Last name
   * - Age 
   * - Date of Birth 
-  * - Home Address 
+  * - Physical Address
+  * - Physical ZIP Code
   * - Relationship to Person 1 (Head of Household)
   * - Sex (binary)
   * - Race/Ethnicity 
@@ -2065,8 +2100,8 @@ There are two types of sampling plans:
   * - Last name
   * - Age 
   * - DOB 
-  * - Home Address 
-  * - Home Zip Code 
+  * - Physical Address
+  * - Physical ZIP Code 
 
 Here is an example: 
 
@@ -2256,8 +2291,8 @@ in the home.
   * - Last name
   * - Age 
   * - DOB 
-  * - Home Address 
-  * - Home Zip Code 
+  * - Physical Address
+  * - Physical ZIP Code
   * - Race/ethnicity 
 
 Here is an example: 
@@ -2533,7 +2568,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Zip Code 
+  * - Employer ZIP Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -2565,7 +2600,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Zip Code 
+  * - Employer ZIP Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
@@ -3136,8 +3171,8 @@ we generate employers with an initial size attribute chosen from a skewed distri
 ensure that there are a few large employers and many small employers.
 Specifically, we use a log-normal distribution with :math:`\mu=4` and :math:`\sigma=1`,
 which means that the mean employer has ~90 employees and the median has ~55 employees.
-Each one has a street address, generated in the same way that residential
-addresses are generated, but without any restriction on state/PUMA/ZIP.
+Each one has a street address, generated in the same way that physical
+addresses are generated for GQ types.
 
 .. todo::
 
@@ -3253,7 +3288,7 @@ Limitations
    The only business event we **do** model is changing address.
 #. Businesses change addresses completely at random.
    There is no bias toward local moves.
-#. Simulant residential address is completely unrelated to the address
+#. Simulant physical address is completely unrelated to the address
    of their employer.
 #. Businesses never share addresses with households (except by coincidence).
 #. Business addresses that are vacated are not re-used (except by coincidence).
