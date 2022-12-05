@@ -12,13 +12,13 @@ There are models of things that you might consider causes which are outside of
 the scope of this chapter, because they do not fit into the Markov approach.
 This chapter does not include :ref:`PAF of 1 <models_risk_attributable_cause>`
 causes, like
-:ref:`protein-energy malnutrition <2017_cause_pem>`. It also does not include
+protein energy malnutrition. It also does not include
 things that are sometimes considered diseases but are deemed
 :ref:`risk factors <models_risk_factors>` by the :term:`Global Burden of Disease`
-(GBD), such as :ref:`obesity <2017_risk_bmi_adults>`.
-:ref:`Unsafe water <2017_risk_unsafe_water>` would not fit into the cause model
+(GBD), such as :ref:`obesity <2019_risk_bmi>`.
+Unsafe water would not fit into the cause model
 paradigm either---it is a cause of
-:ref:`diarrheal disease <2017_cause_diarrhea>`, but it is a risk factor in the
+:ref:`diarrheal disease <diarrheal_diseases>`, but it is a risk factor in the
 GBD taxonomy.  :ref:`Latent tuberculosis <2017_cause_latent_tb>` infection
 (LTBI) does fit into this chapter, but just barely.
 
@@ -621,7 +621,7 @@ within the entire population, as discussed above.
 
 Remission within GBD
 """"""""""""""""""""
-Most nonfatal models in GBD are run using DisMod (:ref:`2017_cause_models`). 
+Most nonfatal models in GBD are run using DisMod (:ref:`cause_models`). 
 DisMod estimates compartmental models of disease, and thus produces estimates of 
 measures (prevalence, incidence, remission, excess mortality rate, etc.) that 
 are internally consistent for any given model. DisMod estimates remission rates 
