@@ -1,0 +1,3137 @@
+age_start,age_end,sex,race_ethnicity,relationship,proportion
+0,15,Female,AIAN,Adopted child,0.006823
+0,15,Female,AIAN,Biological child,0.167427
+0,15,Female,AIAN,Child-in-law,0.000000
+0,15,Female,AIAN,Foster child,0.097839
+0,15,Female,AIAN,Grandchild,0.410253
+0,15,Female,AIAN,Opp-sex partner,0.000000
+0,15,Female,AIAN,Opp-sex spouse,0.000000
+0,15,Female,AIAN,Other nonrelative,0.110244
+0,15,Female,AIAN,Other relative,0.153501
+0,15,Female,AIAN,Parent,0.000000
+0,15,Female,AIAN,Parent-in-law,0.000000
+0,15,Female,AIAN,Roommate,0.005129
+0,15,Female,AIAN,Same-sex partner,0.000000
+0,15,Female,AIAN,Same-sex spouse,0.000000
+0,15,Female,AIAN,Sibling,0.005169
+0,15,Female,AIAN,Stepchild,0.043615
+0,15,Female,Asian,Adopted child,0.006284
+0,15,Female,Asian,Biological child,0.308924
+0,15,Female,Asian,Child-in-law,0.000000
+0,15,Female,Asian,Foster child,0.038106
+0,15,Female,Asian,Grandchild,0.306656
+0,15,Female,Asian,Opp-sex partner,0.000000
+0,15,Female,Asian,Opp-sex spouse,0.000000
+0,15,Female,Asian,Other nonrelative,0.078153
+0,15,Female,Asian,Other relative,0.212202
+0,15,Female,Asian,Parent,0.000000
+0,15,Female,Asian,Parent-in-law,0.000000
+0,15,Female,Asian,Roommate,0.004726
+0,15,Female,Asian,Same-sex partner,0.000000
+0,15,Female,Asian,Same-sex spouse,0.000000
+0,15,Female,Asian,Sibling,0.004761
+0,15,Female,Asian,Stepchild,0.040186
+0,15,Female,Black,Adopted child,0.009823
+0,15,Female,Black,Biological child,0.171810
+0,15,Female,Black,Child-in-law,0.000000
+0,15,Female,Black,Foster child,0.073146
+0,15,Female,Black,Grandchild,0.466091
+0,15,Female,Black,Opp-sex partner,0.000000
+0,15,Female,Black,Opp-sex spouse,0.000000
+0,15,Female,Black,Other nonrelative,0.078904
+0,15,Female,Black,Other relative,0.143673
+0,15,Female,Black,Parent,0.000000
+0,15,Female,Black,Parent-in-law,0.000000
+0,15,Female,Black,Roommate,0.005816
+0,15,Female,Black,Same-sex partner,0.000000
+0,15,Female,Black,Same-sex spouse,0.000000
+0,15,Female,Black,Sibling,0.005864
+0,15,Female,Black,Stepchild,0.044873
+0,15,Female,Latino,Adopted child,0.009098
+0,15,Female,Latino,Biological child,0.207400
+0,15,Female,Latino,Child-in-law,0.000000
+0,15,Female,Latino,Foster child,0.054853
+0,15,Female,Latino,Grandchild,0.414505
+0,15,Female,Latino,Opp-sex partner,0.000000
+0,15,Female,Latino,Opp-sex spouse,0.000000
+0,15,Female,Latino,Other nonrelative,0.091144
+0,15,Female,Latino,Other relative,0.140095
+0,15,Female,Latino,Parent,0.000000
+0,15,Female,Latino,Parent-in-law,0.000000
+0,15,Female,Latino,Roommate,0.009193
+0,15,Female,Latino,Same-sex partner,0.000000
+0,15,Female,Latino,Same-sex spouse,0.000000
+0,15,Female,Latino,Sibling,0.017131
+0,15,Female,Latino,Stepchild,0.056582
+0,15,Female,Multiracial or Other,Adopted child,0.011498
+0,15,Female,Multiracial or Other,Biological child,0.171500
+0,15,Female,Multiracial or Other,Child-in-law,0.000000
+0,15,Female,Multiracial or Other,Foster child,0.085418
+0,15,Female,Multiracial or Other,Grandchild,0.435773
+0,15,Female,Multiracial or Other,Opp-sex partner,0.000000
+0,15,Female,Multiracial or Other,Opp-sex spouse,0.000000
+0,15,Female,Multiracial or Other,Other nonrelative,0.108993
+0,15,Female,Multiracial or Other,Other relative,0.111028
+0,15,Female,Multiracial or Other,Parent,0.000000
+0,15,Female,Multiracial or Other,Parent-in-law,0.000000
+0,15,Female,Multiracial or Other,Roommate,0.008624
+0,15,Female,Multiracial or Other,Same-sex partner,0.000000
+0,15,Female,Multiracial or Other,Same-sex spouse,0.000000
+0,15,Female,Multiracial or Other,Sibling,0.008704
+0,15,Female,Multiracial or Other,Stepchild,0.058462
+0,15,Female,NHOPI,Adopted child,0.010049
+0,15,Female,NHOPI,Biological child,0.178430
+0,15,Female,NHOPI,Child-in-law,0.000000
+0,15,Female,NHOPI,Foster child,0.060889
+0,15,Female,NHOPI,Grandchild,0.440932
+0,15,Female,NHOPI,Opp-sex partner,0.000000
+0,15,Female,NHOPI,Opp-sex spouse,0.000000
+0,15,Female,NHOPI,Other nonrelative,0.112505
+0,15,Female,NHOPI,Other relative,0.117898
+0,15,Female,NHOPI,Parent,0.000000
+0,15,Female,NHOPI,Parent-in-law,0.000000
+0,15,Female,NHOPI,Roommate,0.007541
+0,15,Female,NHOPI,Same-sex partner,0.000000
+0,15,Female,NHOPI,Same-sex spouse,0.000000
+0,15,Female,NHOPI,Sibling,0.007609
+0,15,Female,NHOPI,Stepchild,0.064146
+0,15,Female,White,Adopted child,0.009719
+0,15,Female,White,Biological child,0.163914
+0,15,Female,White,Child-in-law,0.000000
+0,15,Female,White,Foster child,0.057658
+0,15,Female,White,Grandchild,0.450926
+0,15,Female,White,Opp-sex partner,0.000000
+0,15,Female,White,Opp-sex spouse,0.000000
+0,15,Female,White,Other nonrelative,0.134511
+0,15,Female,White,Other relative,0.096143
+0,15,Female,White,Parent,0.000000
+0,15,Female,White,Parent-in-law,0.000000
+0,15,Female,White,Roommate,0.007545
+0,15,Female,White,Same-sex partner,0.000000
+0,15,Female,White,Same-sex spouse,0.000000
+0,15,Female,White,Sibling,0.004036
+0,15,Female,White,Stepchild,0.075549
+0,15,Male,AIAN,Adopted child,0.007619
+0,15,Male,AIAN,Biological child,0.166028
+0,15,Male,AIAN,Child-in-law,0.000000
+0,15,Male,AIAN,Foster child,0.087923
+0,15,Male,AIAN,Grandchild,0.380864
+0,15,Male,AIAN,Opp-sex partner,0.000000
+0,15,Male,AIAN,Opp-sex spouse,0.000000
+0,15,Male,AIAN,Other nonrelative,0.086761
+0,15,Male,AIAN,Other relative,0.203909
+0,15,Male,AIAN,Parent,0.000000
+0,15,Male,AIAN,Parent-in-law,0.000000
+0,15,Male,AIAN,Roommate,0.006506
+0,15,Male,AIAN,Same-sex partner,0.000000
+0,15,Male,AIAN,Same-sex spouse,0.000000
+0,15,Male,AIAN,Sibling,0.006028
+0,15,Male,AIAN,Stepchild,0.054363
+0,15,Male,Asian,Adopted child,0.005445
+0,15,Male,Asian,Biological child,0.396902
+0,15,Male,Asian,Child-in-law,0.000000
+0,15,Male,Asian,Foster child,0.034615
+0,15,Male,Asian,Grandchild,0.232453
+0,15,Male,Asian,Opp-sex partner,0.000000
+0,15,Male,Asian,Opp-sex spouse,0.000000
+0,15,Male,Asian,Other nonrelative,0.096370
+0,15,Male,Asian,Other relative,0.186467
+0,15,Male,Asian,Parent,0.000000
+0,15,Male,Asian,Parent-in-law,0.000000
+0,15,Male,Asian,Roommate,0.004643
+0,15,Male,Asian,Same-sex partner,0.000000
+0,15,Male,Asian,Same-sex spouse,0.000000
+0,15,Male,Asian,Sibling,0.004306
+0,15,Male,Asian,Stepchild,0.038800
+0,15,Male,Black,Adopted child,0.010380
+0,15,Male,Black,Biological child,0.175940
+0,15,Male,Black,Child-in-law,0.000000
+0,15,Male,Black,Foster child,0.075441
+0,15,Male,Black,Grandchild,0.468124
+0,15,Male,Black,Opp-sex partner,0.000000
+0,15,Male,Black,Opp-sex spouse,0.000000
+0,15,Male,Black,Other nonrelative,0.085910
+0,15,Male,Black,Other relative,0.124761
+0,15,Male,Black,Parent,0.000000
+0,15,Male,Black,Parent-in-law,0.000000
+0,15,Male,Black,Roommate,0.006625
+0,15,Male,Black,Same-sex partner,0.000000
+0,15,Male,Black,Same-sex spouse,0.000000
+0,15,Male,Black,Sibling,0.006138
+0,15,Male,Black,Stepchild,0.046681
+0,15,Male,Latino,Adopted child,0.007718
+0,15,Male,Latino,Biological child,0.228077
+0,15,Male,Latino,Child-in-law,0.000000
+0,15,Male,Latino,Foster child,0.050868
+0,15,Male,Latino,Grandchild,0.402148
+0,15,Male,Latino,Opp-sex partner,0.000000
+0,15,Male,Latino,Opp-sex spouse,0.000000
+0,15,Male,Latino,Other nonrelative,0.096369
+0,15,Male,Latino,Other relative,0.132053
+0,15,Male,Latino,Parent,0.000000
+0,15,Male,Latino,Parent-in-law,0.000000
+0,15,Male,Latino,Roommate,0.011255
+0,15,Male,Latino,Same-sex partner,0.000000
+0,15,Male,Latino,Same-sex spouse,0.000000
+0,15,Male,Latino,Sibling,0.012306
+0,15,Male,Latino,Stepchild,0.059207
+0,15,Male,Multiracial or Other,Adopted child,0.009575
+0,15,Male,Multiracial or Other,Biological child,0.211256
+0,15,Male,Multiracial or Other,Child-in-law,0.000000
+0,15,Male,Multiracial or Other,Foster child,0.052348
+0,15,Male,Multiracial or Other,Grandchild,0.466810
+0,15,Male,Multiracial or Other,Opp-sex partner,0.000000
+0,15,Male,Multiracial or Other,Opp-sex spouse,0.000000
+0,15,Male,Multiracial or Other,Other nonrelative,0.090138
+0,15,Male,Multiracial or Other,Other relative,0.087983
+0,15,Male,Multiracial or Other,Parent,0.000000
+0,15,Male,Multiracial or Other,Parent-in-law,0.000000
+0,15,Male,Multiracial or Other,Roommate,0.008184
+0,15,Male,Multiracial or Other,Same-sex partner,0.000000
+0,15,Male,Multiracial or Other,Same-sex spouse,0.000000
+0,15,Male,Multiracial or Other,Sibling,0.007578
+0,15,Male,Multiracial or Other,Stepchild,0.066127
+0,15,Male,NHOPI,Adopted child,0.009504
+0,15,Male,NHOPI,Biological child,0.188541
+0,15,Male,NHOPI,Child-in-law,0.000000
+0,15,Male,NHOPI,Foster child,0.060473
+0,15,Male,NHOPI,Grandchild,0.438943
+0,15,Male,NHOPI,Opp-sex partner,0.000000
+0,15,Male,NHOPI,Opp-sex spouse,0.000000
+0,15,Male,NHOPI,Other nonrelative,0.108244
+0,15,Male,NHOPI,Other relative,0.110787
+0,15,Male,NHOPI,Parent,0.000000
+0,15,Male,NHOPI,Parent-in-law,0.000000
+0,15,Male,NHOPI,Roommate,0.008123
+0,15,Male,NHOPI,Same-sex partner,0.000000
+0,15,Male,NHOPI,Same-sex spouse,0.000000
+0,15,Male,NHOPI,Sibling,0.007521
+0,15,Male,NHOPI,Stepchild,0.067864
+0,15,Male,White,Adopted child,0.008852
+0,15,Male,White,Biological child,0.162172
+0,15,Male,White,Child-in-law,0.000000
+0,15,Male,White,Foster child,0.062779
+0,15,Male,White,Grandchild,0.452475
+0,15,Male,White,Opp-sex partner,0.000000
+0,15,Male,White,Opp-sex spouse,0.000000
+0,15,Male,White,Other nonrelative,0.124720
+0,15,Male,White,Other relative,0.094552
+0,15,Male,White,Parent,0.000000
+0,15,Male,White,Parent-in-law,0.000000
+0,15,Male,White,Roommate,0.008306
+0,15,Male,White,Same-sex partner,0.000000
+0,15,Male,White,Same-sex spouse,0.000000
+0,15,Male,White,Sibling,0.005012
+0,15,Male,White,Stepchild,0.081131
+15,18,Female,AIAN,Adopted child,0.019948
+15,18,Female,AIAN,Biological child,0.250685
+15,18,Female,AIAN,Child-in-law,0.008418
+15,18,Female,AIAN,Foster child,0.044296
+15,18,Female,AIAN,Grandchild,0.241048
+15,18,Female,AIAN,Opp-sex partner,0.005505
+15,18,Female,AIAN,Opp-sex spouse,0.001932
+15,18,Female,AIAN,Other nonrelative,0.155266
+15,18,Female,AIAN,Other relative,0.127185
+15,18,Female,AIAN,Parent,0.000000
+15,18,Female,AIAN,Parent-in-law,0.000000
+15,18,Female,AIAN,Roommate,0.023097
+15,18,Female,AIAN,Same-sex partner,0.000069
+15,18,Female,AIAN,Same-sex spouse,0.000042
+15,18,Female,AIAN,Sibling,0.029972
+15,18,Female,AIAN,Stepchild,0.092537
+15,18,Female,Asian,Adopted child,0.015447
+15,18,Female,Asian,Biological child,0.360234
+15,18,Female,Asian,Child-in-law,0.006528
+15,18,Female,Asian,Foster child,0.034295
+15,18,Female,Asian,Grandchild,0.187203
+15,18,Female,Asian,Opp-sex partner,0.004253
+15,18,Female,Asian,Opp-sex spouse,0.001492
+15,18,Female,Asian,Other nonrelative,0.178899
+15,18,Female,Asian,Other relative,0.098610
+15,18,Female,Asian,Parent,0.000000
+15,18,Female,Asian,Parent-in-law,0.000000
+15,18,Female,Asian,Roommate,0.017916
+15,18,Female,Asian,Same-sex partner,0.000053
+15,18,Female,Asian,Same-sex spouse,0.000032
+15,18,Female,Asian,Sibling,0.023254
+15,18,Female,Asian,Stepchild,0.071783
+15,18,Female,Black,Adopted child,0.016734
+15,18,Female,Black,Biological child,0.240783
+15,18,Female,Black,Child-in-law,0.007069
+15,18,Female,Black,Foster child,0.071181
+15,18,Female,Black,Grandchild,0.279132
+15,18,Female,Black,Opp-sex partner,0.004611
+15,18,Female,Black,Opp-sex spouse,0.001618
+15,18,Female,Black,Other nonrelative,0.124433
+15,18,Female,Black,Other relative,0.151835
+15,18,Female,Black,Parent,0.000000
+15,18,Female,Black,Parent-in-law,0.000000
+15,18,Female,Black,Roommate,0.019398
+15,18,Female,Black,Same-sex partner,0.000058
+15,18,Female,Black,Same-sex spouse,0.000035
+15,18,Female,Black,Sibling,0.025176
+15,18,Female,Black,Stepchild,0.057937
+15,18,Female,Latino,Adopted child,0.028060
+15,18,Female,Latino,Biological child,0.249639
+15,18,Female,Latino,Child-in-law,0.011823
+15,18,Female,Latino,Foster child,0.046620
+15,18,Female,Latino,Grandchild,0.205120
+15,18,Female,Latino,Opp-sex partner,0.007761
+15,18,Female,Latino,Opp-sex spouse,0.002724
+15,18,Female,Latino,Other nonrelative,0.114773
+15,18,Female,Latino,Other relative,0.186079
+15,18,Female,Latino,Parent,0.000000
+15,18,Female,Latino,Parent-in-law,0.000000
+15,18,Female,Latino,Roommate,0.032435
+15,18,Female,Latino,Same-sex partner,0.000098
+15,18,Female,Latino,Same-sex spouse,0.000059
+15,18,Female,Latino,Sibling,0.045056
+15,18,Female,Latino,Stepchild,0.069755
+15,18,Female,Multiracial or Other,Adopted child,0.017695
+15,18,Female,Multiracial or Other,Biological child,0.264041
+15,18,Female,Multiracial or Other,Child-in-law,0.007472
+15,18,Female,Multiracial or Other,Foster child,0.039290
+15,18,Female,Multiracial or Other,Grandchild,0.279959
+15,18,Female,Multiracial or Other,Opp-sex partner,0.004878
+15,18,Female,Multiracial or Other,Opp-sex spouse,0.001712
+15,18,Female,Multiracial or Other,Other nonrelative,0.142713
+15,18,Female,Multiracial or Other,Other relative,0.112881
+15,18,Female,Multiracial or Other,Parent,0.000000
+15,18,Female,Multiracial or Other,Parent-in-law,0.000000
+15,18,Female,Multiracial or Other,Roommate,0.020503
+15,18,Female,Multiracial or Other,Same-sex partner,0.000061
+15,18,Female,Multiracial or Other,Same-sex spouse,0.000037
+15,18,Female,Multiracial or Other,Sibling,0.026609
+15,18,Female,Multiracial or Other,Stepchild,0.082148
+15,18,Female,NHOPI,Adopted child,0.019948
+15,18,Female,NHOPI,Biological child,0.250685
+15,18,Female,NHOPI,Child-in-law,0.008418
+15,18,Female,NHOPI,Foster child,0.044296
+15,18,Female,NHOPI,Grandchild,0.241048
+15,18,Female,NHOPI,Opp-sex partner,0.005505
+15,18,Female,NHOPI,Opp-sex spouse,0.001932
+15,18,Female,NHOPI,Other nonrelative,0.155266
+15,18,Female,NHOPI,Other relative,0.127185
+15,18,Female,NHOPI,Parent,0.000000
+15,18,Female,NHOPI,Parent-in-law,0.000000
+15,18,Female,NHOPI,Roommate,0.023097
+15,18,Female,NHOPI,Same-sex partner,0.000069
+15,18,Female,NHOPI,Same-sex spouse,0.000042
+15,18,Female,NHOPI,Sibling,0.029972
+15,18,Female,NHOPI,Stepchild,0.092537
+15,18,Female,White,Adopted child,0.014497
+15,18,Female,White,Biological child,0.247085
+15,18,Female,White,Child-in-law,0.008160
+15,18,Female,White,Foster child,0.040058
+15,18,Female,White,Grandchild,0.246963
+15,18,Female,White,Opp-sex partner,0.005334
+15,18,Female,White,Opp-sex spouse,0.001872
+15,18,Female,White,Other nonrelative,0.180341
+15,18,Female,White,Other relative,0.097430
+15,18,Female,White,Parent,0.000000
+15,18,Female,White,Parent-in-law,0.000000
+15,18,Female,White,Roommate,0.026037
+15,18,Female,White,Same-sex partner,0.000067
+15,18,Female,White,Same-sex spouse,0.000040
+15,18,Female,White,Sibling,0.022190
+15,18,Female,White,Stepchild,0.109925
+15,18,Male,AIAN,Adopted child,0.014758
+15,18,Male,AIAN,Biological child,0.267923
+15,18,Male,AIAN,Child-in-law,0.006753
+15,18,Male,AIAN,Foster child,0.031844
+15,18,Male,AIAN,Grandchild,0.269560
+15,18,Male,AIAN,Opp-sex partner,0.003252
+15,18,Male,AIAN,Opp-sex spouse,0.001141
+15,18,Male,AIAN,Other nonrelative,0.148534
+15,18,Male,AIAN,Other relative,0.114639
+15,18,Male,AIAN,Parent,0.000000
+15,18,Male,AIAN,Parent-in-law,0.000000
+15,18,Male,AIAN,Roommate,0.022090
+15,18,Male,AIAN,Same-sex partner,0.000041
+15,18,Male,AIAN,Same-sex spouse,0.000025
+15,18,Male,AIAN,Sibling,0.029769
+15,18,Male,AIAN,Stepchild,0.089672
+15,18,Male,Asian,Adopted child,0.008236
+15,18,Male,Asian,Biological child,0.428474
+15,18,Male,Asian,Child-in-law,0.003774
+15,18,Male,Asian,Foster child,0.017786
+15,18,Male,Asian,Grandchild,0.149016
+15,18,Male,Asian,Opp-sex partner,0.001817
+15,18,Male,Asian,Opp-sex spouse,0.000638
+15,18,Male,Asian,Other nonrelative,0.248105
+15,18,Male,Asian,Other relative,0.063657
+15,18,Male,Asian,Parent,0.000000
+15,18,Male,Asian,Parent-in-law,0.000000
+15,18,Male,Asian,Roommate,0.012250
+15,18,Male,Asian,Same-sex partner,0.000023
+15,18,Male,Asian,Same-sex spouse,0.000014
+15,18,Male,Asian,Sibling,0.016495
+15,18,Male,Asian,Stepchild,0.049714
+15,18,Male,Black,Adopted child,0.011265
+15,18,Male,Black,Biological child,0.262592
+15,18,Male,Black,Child-in-law,0.005158
+15,18,Male,Black,Foster child,0.044608
+15,18,Male,Black,Grandchild,0.334495
+15,18,Male,Black,Opp-sex partner,0.002484
+15,18,Male,Black,Opp-sex spouse,0.000872
+15,18,Male,Black,Other nonrelative,0.099988
+15,18,Male,Black,Other relative,0.146199
+15,18,Male,Black,Parent,0.000000
+15,18,Male,Black,Parent-in-law,0.000000
+15,18,Male,Black,Roommate,0.016820
+15,18,Male,Black,Same-sex partner,0.000031
+15,18,Male,Black,Same-sex spouse,0.000019
+15,18,Male,Black,Sibling,0.022661
+15,18,Male,Black,Stepchild,0.052808
+15,18,Male,Latino,Adopted child,0.019992
+15,18,Male,Latino,Biological child,0.277239
+15,18,Male,Latino,Child-in-law,0.009143
+15,18,Male,Latino,Foster child,0.027019
+15,18,Male,Latino,Grandchild,0.201678
+15,18,Male,Latino,Opp-sex partner,0.004403
+15,18,Male,Latino,Opp-sex spouse,0.001545
+15,18,Male,Latino,Other nonrelative,0.136311
+15,18,Male,Latino,Other relative,0.159439
+15,18,Male,Latino,Parent,0.000000
+15,18,Male,Latino,Parent-in-law,0.000000
+15,18,Male,Latino,Roommate,0.029985
+15,18,Male,Latino,Same-sex partner,0.000055
+15,18,Male,Latino,Same-sex spouse,0.000033
+15,18,Male,Latino,Sibling,0.060628
+15,18,Male,Latino,Stepchild,0.072529
+15,18,Male,Multiracial or Other,Adopted child,0.014250
+15,18,Male,Multiracial or Other,Biological child,0.305940
+15,18,Male,Multiracial or Other,Child-in-law,0.006521
+15,18,Male,Multiracial or Other,Foster child,0.030749
+15,18,Male,Multiracial or Other,Grandchild,0.253815
+15,18,Male,Multiracial or Other,Opp-sex partner,0.003140
+15,18,Male,Multiracial or Other,Opp-sex spouse,0.001102
+15,18,Male,Multiracial or Other,Other nonrelative,0.137133
+15,18,Male,Multiracial or Other,Other relative,0.110668
+15,18,Male,Multiracial or Other,Parent,0.000000
+15,18,Male,Multiracial or Other,Parent-in-law,0.000000
+15,18,Male,Multiracial or Other,Roommate,0.021323
+15,18,Male,Multiracial or Other,Same-sex partner,0.000039
+15,18,Male,Multiracial or Other,Same-sex spouse,0.000024
+15,18,Male,Multiracial or Other,Sibling,0.028735
+15,18,Male,Multiracial or Other,Stepchild,0.086560
+15,18,Male,NHOPI,Adopted child,0.014758
+15,18,Male,NHOPI,Biological child,0.267923
+15,18,Male,NHOPI,Child-in-law,0.006753
+15,18,Male,NHOPI,Foster child,0.031844
+15,18,Male,NHOPI,Grandchild,0.269560
+15,18,Male,NHOPI,Opp-sex partner,0.003252
+15,18,Male,NHOPI,Opp-sex spouse,0.001141
+15,18,Male,NHOPI,Other nonrelative,0.148534
+15,18,Male,NHOPI,Other relative,0.114639
+15,18,Male,NHOPI,Parent,0.000000
+15,18,Male,NHOPI,Parent-in-law,0.000000
+15,18,Male,NHOPI,Roommate,0.022090
+15,18,Male,NHOPI,Same-sex partner,0.000041
+15,18,Male,NHOPI,Same-sex spouse,0.000025
+15,18,Male,NHOPI,Sibling,0.029769
+15,18,Male,NHOPI,Stepchild,0.089672
+15,18,Male,White,Adopted child,0.015115
+15,18,Male,White,Biological child,0.252922
+15,18,Male,White,Child-in-law,0.007880
+15,18,Male,White,Foster child,0.028736
+15,18,Male,White,Grandchild,0.293047
+15,18,Male,White,Opp-sex partner,0.003794
+15,18,Male,White,Opp-sex spouse,0.001332
+15,18,Male,White,Other nonrelative,0.163748
+15,18,Male,White,Other relative,0.086883
+15,18,Male,White,Parent,0.000000
+15,18,Male,White,Parent-in-law,0.000000
+15,18,Male,White,Roommate,0.019734
+15,18,Male,White,Same-sex partner,0.000048
+15,18,Male,White,Same-sex spouse,0.000029
+15,18,Male,White,Sibling,0.014261
+15,18,Male,White,Stepchild,0.112471
+18,19,Female,AIAN,Adopted child,0.010660
+18,19,Female,AIAN,Biological child,0.151887
+18,19,Female,AIAN,Child-in-law,0.029201
+18,19,Female,AIAN,Foster child,0.007652
+18,19,Female,AIAN,Grandchild,0.154876
+18,19,Female,AIAN,Opp-sex partner,0.040574
+18,19,Female,AIAN,Opp-sex spouse,0.011561
+18,19,Female,AIAN,Other nonrelative,0.198305
+18,19,Female,AIAN,Other relative,0.104999
+18,19,Female,AIAN,Parent,0.000000
+18,19,Female,AIAN,Parent-in-law,0.000000
+18,19,Female,AIAN,Roommate,0.188822
+18,19,Female,AIAN,Same-sex partner,0.002404
+18,19,Female,AIAN,Same-sex spouse,0.000391
+18,19,Female,AIAN,Sibling,0.057194
+18,19,Female,AIAN,Stepchild,0.041472
+18,19,Female,Asian,Adopted child,0.010660
+18,19,Female,Asian,Biological child,0.151887
+18,19,Female,Asian,Child-in-law,0.029201
+18,19,Female,Asian,Foster child,0.007652
+18,19,Female,Asian,Grandchild,0.154876
+18,19,Female,Asian,Opp-sex partner,0.040574
+18,19,Female,Asian,Opp-sex spouse,0.011561
+18,19,Female,Asian,Other nonrelative,0.198305
+18,19,Female,Asian,Other relative,0.104999
+18,19,Female,Asian,Parent,0.000000
+18,19,Female,Asian,Parent-in-law,0.000000
+18,19,Female,Asian,Roommate,0.188822
+18,19,Female,Asian,Same-sex partner,0.002404
+18,19,Female,Asian,Same-sex spouse,0.000391
+18,19,Female,Asian,Sibling,0.057194
+18,19,Female,Asian,Stepchild,0.041472
+18,19,Female,Black,Adopted child,0.009012
+18,19,Female,Black,Biological child,0.166124
+18,19,Female,Black,Child-in-law,0.024651
+18,19,Female,Black,Foster child,0.006475
+18,19,Female,Black,Grandchild,0.282918
+18,19,Female,Black,Opp-sex partner,0.034240
+18,19,Female,Black,Opp-sex spouse,0.009747
+18,19,Female,Black,Other nonrelative,0.132476
+18,19,Female,Black,Other relative,0.088932
+18,19,Female,Black,Parent,0.000000
+18,19,Female,Black,Parent-in-law,0.000000
+18,19,Female,Black,Roommate,0.159534
+18,19,Female,Black,Same-sex partner,0.002034
+18,19,Female,Black,Same-sex spouse,0.000331
+18,19,Female,Black,Sibling,0.048390
+18,19,Female,Black,Stepchild,0.035137
+18,19,Female,Latino,Adopted child,0.008600
+18,19,Female,Latino,Biological child,0.143119
+18,19,Female,Latino,Child-in-law,0.068091
+18,19,Female,Latino,Foster child,0.006181
+18,19,Female,Latino,Grandchild,0.131267
+18,19,Female,Latino,Opp-sex partner,0.032658
+18,19,Female,Latino,Opp-sex spouse,0.009294
+18,19,Female,Latino,Other nonrelative,0.179151
+18,19,Female,Latino,Other relative,0.139040
+18,19,Female,Latino,Parent,0.000000
+18,19,Female,Latino,Parent-in-law,0.000000
+18,19,Female,Latino,Roommate,0.173236
+18,19,Female,Latino,Same-sex partner,0.001942
+18,19,Female,Latino,Same-sex spouse,0.000316
+18,19,Female,Latino,Sibling,0.073547
+18,19,Female,Latino,Stepchild,0.033556
+18,19,Female,Multiracial or Other,Adopted child,0.010660
+18,19,Female,Multiracial or Other,Biological child,0.151887
+18,19,Female,Multiracial or Other,Child-in-law,0.029201
+18,19,Female,Multiracial or Other,Foster child,0.007652
+18,19,Female,Multiracial or Other,Grandchild,0.154876
+18,19,Female,Multiracial or Other,Opp-sex partner,0.040574
+18,19,Female,Multiracial or Other,Opp-sex spouse,0.011561
+18,19,Female,Multiracial or Other,Other nonrelative,0.198305
+18,19,Female,Multiracial or Other,Other relative,0.104999
+18,19,Female,Multiracial or Other,Parent,0.000000
+18,19,Female,Multiracial or Other,Parent-in-law,0.000000
+18,19,Female,Multiracial or Other,Roommate,0.188822
+18,19,Female,Multiracial or Other,Same-sex partner,0.002404
+18,19,Female,Multiracial or Other,Same-sex spouse,0.000391
+18,19,Female,Multiracial or Other,Sibling,0.057194
+18,19,Female,Multiracial or Other,Stepchild,0.041472
+18,19,Female,NHOPI,Adopted child,0.010660
+18,19,Female,NHOPI,Biological child,0.151887
+18,19,Female,NHOPI,Child-in-law,0.029201
+18,19,Female,NHOPI,Foster child,0.007652
+18,19,Female,NHOPI,Grandchild,0.154876
+18,19,Female,NHOPI,Opp-sex partner,0.040574
+18,19,Female,NHOPI,Opp-sex spouse,0.011561
+18,19,Female,NHOPI,Other nonrelative,0.198305
+18,19,Female,NHOPI,Other relative,0.104999
+18,19,Female,NHOPI,Parent,0.000000
+18,19,Female,NHOPI,Parent-in-law,0.000000
+18,19,Female,NHOPI,Roommate,0.188822
+18,19,Female,NHOPI,Same-sex partner,0.002404
+18,19,Female,NHOPI,Same-sex spouse,0.000391
+18,19,Female,NHOPI,Sibling,0.057194
+18,19,Female,NHOPI,Stepchild,0.041472
+18,19,Female,White,Adopted child,0.008938
+18,19,Female,White,Biological child,0.141844
+18,19,Female,White,Child-in-law,0.022552
+18,19,Female,White,Foster child,0.006422
+18,19,Female,White,Grandchild,0.137515
+18,19,Female,White,Opp-sex partner,0.052830
+18,19,Female,White,Opp-sex spouse,0.016899
+18,19,Female,White,Other nonrelative,0.226294
+18,19,Female,White,Other relative,0.086629
+18,19,Female,White,Parent,0.000000
+18,19,Female,White,Parent-in-law,0.000000
+18,19,Female,White,Roommate,0.208754
+18,19,Female,White,Same-sex partner,0.002018
+18,19,Female,White,Same-sex spouse,0.000328
+18,19,Female,White,Sibling,0.054140
+18,19,Female,White,Stepchild,0.034836
+18,19,Male,AIAN,Adopted child,0.007622
+18,19,Male,AIAN,Biological child,0.204198
+18,19,Male,AIAN,Child-in-law,0.014032
+18,19,Male,AIAN,Foster child,0.006029
+18,19,Male,AIAN,Grandchild,0.180108
+18,19,Male,AIAN,Opp-sex partner,0.016259
+18,19,Male,AIAN,Opp-sex spouse,0.005677
+18,19,Male,AIAN,Other nonrelative,0.194382
+18,19,Male,AIAN,Other relative,0.130453
+18,19,Male,AIAN,Parent,0.000000
+18,19,Male,AIAN,Parent-in-law,0.000000
+18,19,Male,AIAN,Roommate,0.127389
+18,19,Male,AIAN,Same-sex partner,0.001894
+18,19,Male,AIAN,Same-sex spouse,0.000308
+18,19,Male,AIAN,Sibling,0.056885
+18,19,Male,AIAN,Stepchild,0.054762
+18,19,Male,Asian,Adopted child,0.007622
+18,19,Male,Asian,Biological child,0.204198
+18,19,Male,Asian,Child-in-law,0.014032
+18,19,Male,Asian,Foster child,0.006029
+18,19,Male,Asian,Grandchild,0.180108
+18,19,Male,Asian,Opp-sex partner,0.016259
+18,19,Male,Asian,Opp-sex spouse,0.005677
+18,19,Male,Asian,Other nonrelative,0.194382
+18,19,Male,Asian,Other relative,0.130453
+18,19,Male,Asian,Parent,0.000000
+18,19,Male,Asian,Parent-in-law,0.000000
+18,19,Male,Asian,Roommate,0.127389
+18,19,Male,Asian,Same-sex partner,0.001894
+18,19,Male,Asian,Same-sex spouse,0.000308
+18,19,Male,Asian,Sibling,0.056885
+18,19,Male,Asian,Stepchild,0.054762
+18,19,Male,Black,Adopted child,0.005567
+18,19,Male,Black,Biological child,0.167333
+18,19,Male,Black,Child-in-law,0.010310
+18,19,Male,Black,Foster child,0.004404
+18,19,Male,Black,Grandchild,0.234963
+18,19,Male,Black,Opp-sex partner,0.011999
+18,19,Male,Black,Opp-sex spouse,0.004146
+18,19,Male,Black,Other nonrelative,0.164709
+18,19,Male,Black,Other relative,0.220961
+18,19,Male,Black,Parent,0.000000
+18,19,Male,Black,Parent-in-law,0.000000
+18,19,Male,Black,Roommate,0.093007
+18,19,Male,Black,Same-sex partner,0.001384
+18,19,Male,Black,Same-sex spouse,0.000225
+18,19,Male,Black,Sibling,0.041320
+18,19,Male,Black,Stepchild,0.039672
+18,19,Male,Latino,Adopted child,0.008674
+18,19,Male,Latino,Biological child,0.261532
+18,19,Male,Latino,Child-in-law,0.015938
+18,19,Male,Latino,Foster child,0.006862
+18,19,Male,Latino,Grandchild,0.110752
+18,19,Male,Latino,Opp-sex partner,0.018441
+18,19,Male,Latino,Opp-sex spouse,0.006461
+18,19,Male,Latino,Other nonrelative,0.152749
+18,19,Male,Latino,Other relative,0.170700
+18,19,Male,Latino,Parent,0.000000
+18,19,Male,Latino,Parent-in-law,0.000000
+18,19,Male,Latino,Roommate,0.098192
+18,19,Male,Latino,Same-sex partner,0.002156
+18,19,Male,Latino,Same-sex spouse,0.000351
+18,19,Male,Latino,Sibling,0.084702
+18,19,Male,Latino,Stepchild,0.062489
+18,19,Male,Multiracial or Other,Adopted child,0.006247
+18,19,Male,Multiracial or Other,Biological child,0.303277
+18,19,Male,Multiracial or Other,Child-in-law,0.011542
+18,19,Male,Multiracial or Other,Foster child,0.004942
+18,19,Male,Multiracial or Other,Grandchild,0.193337
+18,19,Male,Multiracial or Other,Opp-sex partner,0.013410
+18,19,Male,Multiracial or Other,Opp-sex spouse,0.004653
+18,19,Male,Multiracial or Other,Other nonrelative,0.158818
+18,19,Male,Multiracial or Other,Other relative,0.106439
+18,19,Male,Multiracial or Other,Parent,0.000000
+18,19,Male,Multiracial or Other,Parent-in-law,0.000000
+18,19,Male,Multiracial or Other,Roommate,0.104389
+18,19,Male,Multiracial or Other,Same-sex partner,0.001553
+18,19,Male,Multiracial or Other,Same-sex spouse,0.000253
+18,19,Male,Multiracial or Other,Sibling,0.046473
+18,19,Male,Multiracial or Other,Stepchild,0.044668
+18,19,Male,NHOPI,Adopted child,0.007622
+18,19,Male,NHOPI,Biological child,0.204198
+18,19,Male,NHOPI,Child-in-law,0.014032
+18,19,Male,NHOPI,Foster child,0.006029
+18,19,Male,NHOPI,Grandchild,0.180108
+18,19,Male,NHOPI,Opp-sex partner,0.016259
+18,19,Male,NHOPI,Opp-sex spouse,0.005677
+18,19,Male,NHOPI,Other nonrelative,0.194382
+18,19,Male,NHOPI,Other relative,0.130453
+18,19,Male,NHOPI,Parent,0.000000
+18,19,Male,NHOPI,Parent-in-law,0.000000
+18,19,Male,NHOPI,Roommate,0.127389
+18,19,Male,NHOPI,Same-sex partner,0.001894
+18,19,Male,NHOPI,Same-sex spouse,0.000308
+18,19,Male,NHOPI,Sibling,0.056885
+18,19,Male,NHOPI,Stepchild,0.054762
+18,19,Male,White,Adopted child,0.007275
+18,19,Male,White,Biological child,0.181479
+18,19,Male,White,Child-in-law,0.013405
+18,19,Male,White,Foster child,0.005755
+18,19,Male,White,Grandchild,0.194513
+18,19,Male,White,Opp-sex partner,0.015541
+18,19,Male,White,Opp-sex spouse,0.005419
+18,19,Male,White,Other nonrelative,0.224472
+18,19,Male,White,Other relative,0.093835
+18,19,Male,White,Parent,0.000000
+18,19,Male,White,Parent-in-law,0.000000
+18,19,Male,White,Roommate,0.149928
+18,19,Male,White,Same-sex partner,0.001808
+18,19,Male,White,Same-sex spouse,0.000294
+18,19,Male,White,Sibling,0.054689
+18,19,Male,White,Stepchild,0.051587
+19,20,Female,AIAN,Adopted child,0.012769
+19,20,Female,AIAN,Biological child,0.270550
+19,20,Female,AIAN,Child-in-law,0.018858
+19,20,Female,AIAN,Foster child,0.001454
+19,20,Female,AIAN,Grandchild,0.081447
+19,20,Female,AIAN,Opp-sex partner,0.052954
+19,20,Female,AIAN,Opp-sex spouse,0.019233
+19,20,Female,AIAN,Other nonrelative,0.130302
+19,20,Female,AIAN,Other relative,0.059919
+19,20,Female,AIAN,Parent,0.000000
+19,20,Female,AIAN,Parent-in-law,0.000000
+19,20,Female,AIAN,Roommate,0.285917
+19,20,Female,AIAN,Same-sex partner,0.003723
+19,20,Female,AIAN,Same-sex spouse,0.000105
+19,20,Female,AIAN,Sibling,0.029298
+19,20,Female,AIAN,Stepchild,0.033470
+19,20,Female,Asian,Adopted child,0.010942
+19,20,Female,Asian,Biological child,0.260612
+19,20,Female,Asian,Child-in-law,0.016154
+19,20,Female,Asian,Foster child,0.001248
+19,20,Female,Asian,Grandchild,0.069962
+19,20,Female,Asian,Opp-sex partner,0.045332
+19,20,Female,Asian,Opp-sex spouse,0.016447
+19,20,Female,Asian,Other nonrelative,0.111811
+19,20,Female,Asian,Other relative,0.051429
+19,20,Female,Asian,Parent,0.000000
+19,20,Female,Asian,Parent-in-law,0.000000
+19,20,Female,Asian,Roommate,0.358891
+19,20,Female,Asian,Same-sex partner,0.003195
+19,20,Female,Asian,Same-sex spouse,0.000090
+19,20,Female,Asian,Sibling,0.025174
+19,20,Female,Asian,Stepchild,0.028714
+19,20,Female,Black,Adopted child,0.009038
+19,20,Female,Black,Biological child,0.364492
+19,20,Female,Black,Child-in-law,0.013336
+19,20,Female,Black,Foster child,0.001033
+19,20,Female,Black,Grandchild,0.146640
+19,20,Female,Black,Opp-sex partner,0.037391
+19,20,Female,Black,Opp-sex spouse,0.013546
+19,20,Female,Black,Other nonrelative,0.092550
+19,20,Female,Black,Other relative,0.067665
+19,20,Female,Black,Parent,0.000000
+19,20,Female,Black,Parent-in-law,0.000000
+19,20,Female,Black,Roommate,0.206953
+19,20,Female,Black,Same-sex partner,0.002645
+19,20,Female,Black,Same-sex spouse,0.000075
+19,20,Female,Black,Sibling,0.020878
+19,20,Female,Black,Stepchild,0.023759
+19,20,Female,Latino,Adopted child,0.011942
+19,20,Female,Latino,Biological child,0.310897
+19,20,Female,Latino,Child-in-law,0.049773
+19,20,Female,Latino,Foster child,0.001361
+19,20,Female,Latino,Grandchild,0.059705
+19,20,Female,Latino,Opp-sex partner,0.054832
+19,20,Female,Latino,Opp-sex spouse,0.017972
+19,20,Female,Latino,Other nonrelative,0.145649
+19,20,Female,Latino,Other relative,0.085738
+19,20,Female,Latino,Parent,0.000000
+19,20,Female,Latino,Parent-in-law,0.000000
+19,20,Female,Latino,Roommate,0.199802
+19,20,Female,Latino,Same-sex partner,0.003484
+19,20,Female,Latino,Same-sex spouse,0.000098
+19,20,Female,Latino,Sibling,0.027431
+19,20,Female,Latino,Stepchild,0.031317
+19,20,Female,Multiracial or Other,Adopted child,0.014532
+19,20,Female,Multiracial or Other,Biological child,0.315894
+19,20,Female,Multiracial or Other,Child-in-law,0.021467
+19,20,Female,Multiracial or Other,Foster child,0.001653
+19,20,Female,Multiracial or Other,Grandchild,0.092525
+19,20,Female,Multiracial or Other,Opp-sex partner,0.060307
+19,20,Female,Multiracial or Other,Opp-sex spouse,0.021919
+19,20,Female,Multiracial or Other,Other nonrelative,0.148136
+19,20,Female,Multiracial or Other,Other relative,0.068108
+19,20,Female,Multiracial or Other,Parent,0.000000
+19,20,Female,Multiracial or Other,Parent-in-law,0.000000
+19,20,Female,Multiracial or Other,Roommate,0.179776
+19,20,Female,Multiracial or Other,Same-sex partner,0.004232
+19,20,Female,Multiracial or Other,Same-sex spouse,0.000119
+19,20,Female,Multiracial or Other,Sibling,0.033276
+19,20,Female,Multiracial or Other,Stepchild,0.038057
+19,20,Female,NHOPI,Adopted child,0.012769
+19,20,Female,NHOPI,Biological child,0.270550
+19,20,Female,NHOPI,Child-in-law,0.018858
+19,20,Female,NHOPI,Foster child,0.001454
+19,20,Female,NHOPI,Grandchild,0.081447
+19,20,Female,NHOPI,Opp-sex partner,0.052954
+19,20,Female,NHOPI,Opp-sex spouse,0.019233
+19,20,Female,NHOPI,Other nonrelative,0.130302
+19,20,Female,NHOPI,Other relative,0.059919
+19,20,Female,NHOPI,Parent,0.000000
+19,20,Female,NHOPI,Parent-in-law,0.000000
+19,20,Female,NHOPI,Roommate,0.285917
+19,20,Female,NHOPI,Same-sex partner,0.003723
+19,20,Female,NHOPI,Same-sex spouse,0.000105
+19,20,Female,NHOPI,Sibling,0.029298
+19,20,Female,NHOPI,Stepchild,0.033470
+19,20,Female,White,Adopted child,0.011943
+19,20,Female,White,Biological child,0.238356
+19,20,Female,White,Child-in-law,0.011187
+19,20,Female,White,Foster child,0.001482
+19,20,Female,White,Grandchild,0.070985
+19,20,Female,White,Opp-sex partner,0.060043
+19,20,Female,White,Opp-sex spouse,0.022826
+19,20,Female,White,Other nonrelative,0.139782
+19,20,Female,White,Other relative,0.047954
+19,20,Female,White,Parent,0.000000
+19,20,Female,White,Parent-in-law,0.000000
+19,20,Female,White,Roommate,0.330427
+19,20,Female,White,Same-sex partner,0.003795
+19,20,Female,White,Same-sex spouse,0.000107
+19,20,Female,White,Sibling,0.025118
+19,20,Female,White,Stepchild,0.035994
+19,20,Male,AIAN,Adopted child,0.008613
+19,20,Male,AIAN,Biological child,0.328533
+19,20,Male,AIAN,Child-in-law,0.011286
+19,20,Male,AIAN,Foster child,0.000834
+19,20,Male,AIAN,Grandchild,0.101893
+19,20,Male,AIAN,Opp-sex partner,0.023992
+19,20,Male,AIAN,Opp-sex spouse,0.006638
+19,20,Male,AIAN,Other nonrelative,0.131491
+19,20,Male,AIAN,Other relative,0.063986
+19,20,Male,AIAN,Parent,0.000000
+19,20,Male,AIAN,Parent-in-law,0.000000
+19,20,Male,AIAN,Roommate,0.249932
+19,20,Male,AIAN,Same-sex partner,0.002135
+19,20,Male,AIAN,Same-sex spouse,0.000060
+19,20,Male,AIAN,Sibling,0.038621
+19,20,Male,AIAN,Stepchild,0.031987
+19,20,Male,Asian,Adopted child,0.005533
+19,20,Male,Asian,Biological child,0.307771
+19,20,Male,Asian,Child-in-law,0.007271
+19,20,Male,Asian,Foster child,0.000544
+19,20,Male,Asian,Grandchild,0.064791
+19,20,Male,Asian,Opp-sex partner,0.015582
+19,20,Male,Asian,Opp-sex spouse,0.004332
+19,20,Male,Asian,Other nonrelative,0.083855
+19,20,Male,Asian,Other relative,0.040772
+19,20,Male,Asian,Parent,0.000000
+19,20,Male,Asian,Parent-in-law,0.000000
+19,20,Male,Asian,Roommate,0.423158
+19,20,Male,Asian,Same-sex partner,0.001393
+19,20,Male,Asian,Same-sex spouse,0.000039
+19,20,Male,Asian,Sibling,0.024542
+19,20,Male,Asian,Stepchild,0.020416
+19,20,Male,Black,Adopted child,0.007602
+19,20,Male,Black,Biological child,0.416918
+19,20,Male,Black,Child-in-law,0.009969
+19,20,Male,Black,Foster child,0.000739
+19,20,Male,Black,Grandchild,0.134873
+19,20,Male,Black,Opp-sex partner,0.021233
+19,20,Male,Black,Opp-sex spouse,0.005881
+19,20,Male,Black,Other nonrelative,0.105801
+19,20,Male,Black,Other relative,0.089531
+19,20,Male,Black,Parent,0.000000
+19,20,Male,Black,Parent-in-law,0.000000
+19,20,Male,Black,Roommate,0.143317
+19,20,Male,Black,Same-sex partner,0.001892
+19,20,Male,Black,Same-sex spouse,0.000053
+19,20,Male,Black,Sibling,0.034002
+19,20,Male,Black,Stepchild,0.028191
+19,20,Male,Latino,Adopted child,0.007986
+19,20,Male,Latino,Biological child,0.400088
+19,20,Male,Latino,Child-in-law,0.010469
+19,20,Male,Latino,Foster child,0.000775
+19,20,Male,Latino,Grandchild,0.098616
+19,20,Male,Latino,Opp-sex partner,0.022281
+19,20,Male,Latino,Opp-sex spouse,0.006169
+19,20,Male,Latino,Other nonrelative,0.113648
+19,20,Male,Latino,Other relative,0.078496
+19,20,Male,Latino,Parent,0.000000
+19,20,Male,Latino,Parent-in-law,0.000000
+19,20,Male,Latino,Roommate,0.182915
+19,20,Male,Latino,Same-sex partner,0.001984
+19,20,Male,Latino,Same-sex spouse,0.000056
+19,20,Male,Latino,Sibling,0.046884
+19,20,Male,Latino,Stepchild,0.029633
+19,20,Male,Multiracial or Other,Adopted child,0.006374
+19,20,Male,Multiracial or Other,Biological child,0.383390
+19,20,Male,Multiracial or Other,Child-in-law,0.008367
+19,20,Male,Multiracial or Other,Foster child,0.000623
+19,20,Male,Multiracial or Other,Grandchild,0.161227
+19,20,Male,Multiracial or Other,Opp-sex partner,0.017877
+19,20,Male,Multiracial or Other,Opp-sex spouse,0.004961
+19,20,Male,Multiracial or Other,Other nonrelative,0.096854
+19,20,Male,Multiracial or Other,Other relative,0.047106
+19,20,Male,Multiracial or Other,Parent,0.000000
+19,20,Male,Multiracial or Other,Parent-in-law,0.000000
+19,20,Male,Multiracial or Other,Roommate,0.219624
+19,20,Male,Multiracial or Other,Same-sex partner,0.001596
+19,20,Male,Multiracial or Other,Same-sex spouse,0.000045
+19,20,Male,Multiracial or Other,Sibling,0.028384
+19,20,Male,Multiracial or Other,Stepchild,0.023574
+19,20,Male,NHOPI,Adopted child,0.008613
+19,20,Male,NHOPI,Biological child,0.328533
+19,20,Male,NHOPI,Child-in-law,0.011286
+19,20,Male,NHOPI,Foster child,0.000834
+19,20,Male,NHOPI,Grandchild,0.101893
+19,20,Male,NHOPI,Opp-sex partner,0.023992
+19,20,Male,NHOPI,Opp-sex spouse,0.006638
+19,20,Male,NHOPI,Other nonrelative,0.131491
+19,20,Male,NHOPI,Other relative,0.063986
+19,20,Male,NHOPI,Parent,0.000000
+19,20,Male,NHOPI,Parent-in-law,0.000000
+19,20,Male,NHOPI,Roommate,0.249932
+19,20,Male,NHOPI,Same-sex partner,0.002135
+19,20,Male,NHOPI,Same-sex spouse,0.000060
+19,20,Male,NHOPI,Sibling,0.038621
+19,20,Male,NHOPI,Stepchild,0.031987
+19,20,Male,White,Adopted child,0.009305
+19,20,Male,White,Biological child,0.283310
+19,20,Male,White,Child-in-law,0.010281
+19,20,Male,White,Foster child,0.000761
+19,20,Male,White,Grandchild,0.097723
+19,20,Male,White,Opp-sex partner,0.028135
+19,20,Male,White,Opp-sex spouse,0.006061
+19,20,Male,White,Other nonrelative,0.148350
+19,20,Male,White,Other relative,0.055290
+19,20,Male,White,Parent,0.000000
+19,20,Male,White,Parent-in-law,0.000000
+19,20,Male,White,Roommate,0.284760
+19,20,Male,White,Same-sex partner,0.001949
+19,20,Male,White,Same-sex spouse,0.000055
+19,20,Male,White,Sibling,0.035384
+19,20,Male,White,Stepchild,0.038634
+20,21,Female,AIAN,Adopted child,0.009765
+20,21,Female,AIAN,Biological child,0.243167
+20,21,Female,AIAN,Child-in-law,0.018340
+20,21,Female,AIAN,Foster child,0.000670
+20,21,Female,AIAN,Grandchild,0.057342
+20,21,Female,AIAN,Opp-sex partner,0.067388
+20,21,Female,AIAN,Opp-sex spouse,0.023741
+20,21,Female,AIAN,Other nonrelative,0.120332
+20,21,Female,AIAN,Other relative,0.050363
+20,21,Female,AIAN,Parent,0.000000
+20,21,Female,AIAN,Parent-in-law,0.000000
+20,21,Female,AIAN,Roommate,0.355419
+20,21,Female,AIAN,Same-sex partner,0.004872
+20,21,Female,AIAN,Same-sex spouse,0.000524
+20,21,Female,AIAN,Sibling,0.026510
+20,21,Female,AIAN,Stepchild,0.021566
+20,21,Female,Asian,Adopted child,0.005804
+20,21,Female,Asian,Biological child,0.197474
+20,21,Female,Asian,Child-in-law,0.010782
+20,21,Female,Asian,Foster child,0.000395
+20,21,Female,Asian,Grandchild,0.034197
+20,21,Female,Asian,Opp-sex partner,0.039654
+20,21,Female,Asian,Opp-sex spouse,0.013908
+20,21,Female,Asian,Other nonrelative,0.133883
+20,21,Female,Asian,Other relative,0.029883
+20,21,Female,Asian,Parent,0.000000
+20,21,Female,Asian,Parent-in-law,0.000000
+20,21,Female,Asian,Roommate,0.502193
+20,21,Female,Asian,Same-sex partner,0.002861
+20,21,Female,Asian,Same-sex spouse,0.000309
+20,21,Female,Asian,Sibling,0.015804
+20,21,Female,Asian,Stepchild,0.012852
+20,21,Female,Black,Adopted child,0.008561
+20,21,Female,Black,Biological child,0.306916
+20,21,Female,Black,Child-in-law,0.016041
+20,21,Female,Black,Foster child,0.000586
+20,21,Female,Black,Grandchild,0.118243
+20,21,Female,Black,Opp-sex partner,0.058954
+20,21,Female,Black,Opp-sex spouse,0.020751
+20,21,Female,Black,Other nonrelative,0.092987
+20,21,Female,Black,Other relative,0.087117
+20,21,Female,Black,Parent,0.000000
+20,21,Female,Black,Parent-in-law,0.000000
+20,21,Female,Black,Roommate,0.242954
+20,21,Female,Black,Same-sex partner,0.004261
+20,21,Female,Black,Same-sex spouse,0.000459
+20,21,Female,Black,Sibling,0.023254
+20,21,Female,Black,Stepchild,0.018916
+20,21,Female,Latino,Adopted child,0.010605
+20,21,Female,Latino,Biological child,0.323698
+20,21,Female,Latino,Child-in-law,0.042365
+20,21,Female,Latino,Foster child,0.000728
+20,21,Female,Latino,Grandchild,0.052216
+20,21,Female,Latino,Opp-sex partner,0.055979
+20,21,Female,Latino,Opp-sex spouse,0.025826
+20,21,Female,Latino,Other nonrelative,0.123443
+20,21,Female,Latino,Other relative,0.075351
+20,21,Female,Latino,Parent,0.000000
+20,21,Female,Latino,Parent-in-law,0.000000
+20,21,Female,Latino,Roommate,0.223239
+20,21,Female,Latino,Same-sex partner,0.005299
+20,21,Female,Latino,Same-sex spouse,0.000570
+20,21,Female,Latino,Sibling,0.037267
+20,21,Female,Latino,Stepchild,0.023414
+20,21,Female,Multiracial or Other,Adopted child,0.008968
+20,21,Female,Multiracial or Other,Biological child,0.318617
+20,21,Female,Multiracial or Other,Child-in-law,0.016819
+20,21,Female,Multiracial or Other,Foster child,0.000614
+20,21,Female,Multiracial or Other,Grandchild,0.052685
+20,21,Female,Multiracial or Other,Opp-sex partner,0.061808
+20,21,Female,Multiracial or Other,Opp-sex spouse,0.021762
+20,21,Female,Multiracial or Other,Other nonrelative,0.125140
+20,21,Female,Multiracial or Other,Other relative,0.046242
+20,21,Female,Multiracial or Other,Parent,0.000000
+20,21,Female,Multiracial or Other,Parent-in-law,0.000000
+20,21,Female,Multiracial or Other,Roommate,0.298227
+20,21,Female,Multiracial or Other,Same-sex partner,0.004468
+20,21,Female,Multiracial or Other,Same-sex spouse,0.000481
+20,21,Female,Multiracial or Other,Sibling,0.024356
+20,21,Female,Multiracial or Other,Stepchild,0.019813
+20,21,Female,NHOPI,Adopted child,0.009765
+20,21,Female,NHOPI,Biological child,0.243167
+20,21,Female,NHOPI,Child-in-law,0.018340
+20,21,Female,NHOPI,Foster child,0.000670
+20,21,Female,NHOPI,Grandchild,0.057342
+20,21,Female,NHOPI,Opp-sex partner,0.067388
+20,21,Female,NHOPI,Opp-sex spouse,0.023741
+20,21,Female,NHOPI,Other nonrelative,0.120332
+20,21,Female,NHOPI,Other relative,0.050363
+20,21,Female,NHOPI,Parent,0.000000
+20,21,Female,NHOPI,Parent-in-law,0.000000
+20,21,Female,NHOPI,Roommate,0.355419
+20,21,Female,NHOPI,Same-sex partner,0.004872
+20,21,Female,NHOPI,Same-sex spouse,0.000524
+20,21,Female,NHOPI,Sibling,0.026510
+20,21,Female,NHOPI,Stepchild,0.021566
+20,21,Female,White,Adopted child,0.008119
+20,21,Female,White,Biological child,0.208687
+20,21,Female,White,Child-in-law,0.016157
+20,21,Female,White,Foster child,0.000495
+20,21,Female,White,Grandchild,0.051857
+20,21,Female,White,Opp-sex partner,0.080470
+20,21,Female,White,Opp-sex spouse,0.026050
+20,21,Female,White,Other nonrelative,0.122849
+20,21,Female,White,Other relative,0.038674
+20,21,Female,White,Parent,0.000000
+20,21,Female,White,Parent-in-law,0.000000
+20,21,Female,White,Roommate,0.402879
+20,21,Female,White,Same-sex partner,0.003591
+20,21,Female,White,Same-sex spouse,0.000387
+20,21,Female,White,Sibling,0.020294
+20,21,Female,White,Stepchild,0.019492
+20,21,Male,AIAN,Adopted child,0.010722
+20,21,Male,AIAN,Biological child,0.278503
+20,21,Male,AIAN,Child-in-law,0.008843
+20,21,Male,AIAN,Foster child,0.000363
+20,21,Male,AIAN,Grandchild,0.074286
+20,21,Male,AIAN,Opp-sex partner,0.035938
+20,21,Male,AIAN,Opp-sex spouse,0.006673
+20,21,Male,AIAN,Other nonrelative,0.127194
+20,21,Male,AIAN,Other relative,0.050614
+20,21,Male,AIAN,Parent,0.000000
+20,21,Male,AIAN,Parent-in-law,0.000000
+20,21,Male,AIAN,Roommate,0.343531
+20,21,Male,AIAN,Same-sex partner,0.002219
+20,21,Male,AIAN,Same-sex spouse,0.000284
+20,21,Male,AIAN,Sibling,0.033758
+20,21,Male,AIAN,Stepchild,0.027073
+20,21,Male,Asian,Adopted child,0.007144
+20,21,Male,Asian,Biological child,0.220602
+20,21,Male,Asian,Child-in-law,0.005984
+20,21,Male,Asian,Foster child,0.000246
+20,21,Male,Asian,Grandchild,0.049402
+20,21,Male,Asian,Opp-sex partner,0.024257
+20,21,Male,Asian,Opp-sex spouse,0.004605
+20,21,Male,Asian,Other nonrelative,0.084787
+20,21,Male,Asian,Other relative,0.033762
+20,21,Male,Asian,Parent,0.000000
+20,21,Male,Asian,Parent-in-law,0.000000
+20,21,Male,Asian,Roommate,0.527051
+20,21,Male,Asian,Same-sex partner,0.001502
+20,21,Male,Asian,Same-sex spouse,0.000192
+20,21,Male,Asian,Sibling,0.022454
+20,21,Male,Asian,Stepchild,0.018010
+20,21,Male,Black,Adopted child,0.011838
+20,21,Male,Black,Biological child,0.344761
+20,21,Male,Black,Child-in-law,0.009734
+20,21,Male,Black,Foster child,0.000399
+20,21,Male,Black,Grandchild,0.114417
+20,21,Male,Black,Opp-sex partner,0.039583
+20,21,Male,Black,Opp-sex spouse,0.007318
+20,21,Male,Black,Other nonrelative,0.142134
+20,21,Male,Black,Other relative,0.075675
+20,21,Male,Black,Parent,0.000000
+20,21,Male,Black,Parent-in-law,0.000000
+20,21,Male,Black,Roommate,0.184200
+20,21,Male,Black,Same-sex partner,0.002442
+20,21,Male,Black,Same-sex spouse,0.000313
+20,21,Male,Black,Sibling,0.037285
+20,21,Male,Black,Stepchild,0.029900
+20,21,Male,Latino,Adopted child,0.011913
+20,21,Male,Latino,Biological child,0.348410
+20,21,Male,Latino,Child-in-law,0.009794
+20,21,Male,Latino,Foster child,0.000402
+20,21,Male,Latino,Grandchild,0.058321
+20,21,Male,Latino,Opp-sex partner,0.034356
+20,21,Male,Latino,Opp-sex spouse,0.007361
+20,21,Male,Latino,Other nonrelative,0.124288
+20,21,Male,Latino,Other relative,0.069717
+20,21,Male,Latino,Parent,0.000000
+20,21,Male,Latino,Parent-in-law,0.000000
+20,21,Male,Latino,Roommate,0.253010
+20,21,Male,Latino,Same-sex partner,0.002457
+20,21,Male,Latino,Same-sex spouse,0.000315
+20,21,Male,Latino,Sibling,0.049567
+20,21,Male,Latino,Stepchild,0.030090
+20,21,Male,Multiracial or Other,Adopted child,0.010107
+20,21,Male,Multiracial or Other,Biological child,0.346110
+20,21,Male,Multiracial or Other,Child-in-law,0.008352
+20,21,Male,Multiracial or Other,Foster child,0.000343
+20,21,Male,Multiracial or Other,Grandchild,0.070013
+20,21,Male,Multiracial or Other,Opp-sex partner,0.033932
+20,21,Male,Multiracial or Other,Opp-sex spouse,0.006318
+20,21,Male,Multiracial or Other,Other nonrelative,0.119912
+20,21,Male,Multiracial or Other,Other relative,0.047720
+20,21,Male,Multiracial or Other,Parent,0.000000
+20,21,Male,Multiracial or Other,Parent-in-law,0.000000
+20,21,Male,Multiracial or Other,Roommate,0.297495
+20,21,Male,Multiracial or Other,Same-sex partner,0.002096
+20,21,Male,Multiracial or Other,Same-sex spouse,0.000268
+20,21,Male,Multiracial or Other,Sibling,0.031817
+20,21,Male,Multiracial or Other,Stepchild,0.025517
+20,21,Male,NHOPI,Adopted child,0.010722
+20,21,Male,NHOPI,Biological child,0.278503
+20,21,Male,NHOPI,Child-in-law,0.008843
+20,21,Male,NHOPI,Foster child,0.000363
+20,21,Male,NHOPI,Grandchild,0.074286
+20,21,Male,NHOPI,Opp-sex partner,0.035938
+20,21,Male,NHOPI,Opp-sex spouse,0.006673
+20,21,Male,NHOPI,Other nonrelative,0.127194
+20,21,Male,NHOPI,Other relative,0.050614
+20,21,Male,NHOPI,Parent,0.000000
+20,21,Male,NHOPI,Parent-in-law,0.000000
+20,21,Male,NHOPI,Roommate,0.343531
+20,21,Male,NHOPI,Same-sex partner,0.002219
+20,21,Male,NHOPI,Same-sex spouse,0.000284
+20,21,Male,NHOPI,Sibling,0.033758
+20,21,Male,NHOPI,Stepchild,0.027073
+20,21,Male,White,Adopted child,0.009702
+20,21,Male,White,Biological child,0.244493
+20,21,Male,White,Child-in-law,0.007843
+20,21,Male,White,Foster child,0.000404
+20,21,Male,White,Grandchild,0.071502
+20,21,Male,White,Opp-sex partner,0.037948
+20,21,Male,White,Opp-sex spouse,0.006433
+20,21,Male,White,Other nonrelative,0.128938
+20,21,Male,White,Other relative,0.042740
+20,21,Male,White,Parent,0.000000
+20,21,Male,White,Parent-in-law,0.000000
+20,21,Male,White,Roommate,0.392875
+20,21,Male,White,Same-sex partner,0.002472
+20,21,Male,White,Same-sex spouse,0.000316
+20,21,Male,White,Sibling,0.027614
+20,21,Male,White,Stepchild,0.026719
+21,22,Female,AIAN,Adopted child,0.009448
+21,22,Female,AIAN,Biological child,0.254442
+21,22,Female,AIAN,Child-in-law,0.023222
+21,22,Female,AIAN,Foster child,0.000000
+21,22,Female,AIAN,Grandchild,0.049812
+21,22,Female,AIAN,Opp-sex partner,0.074527
+21,22,Female,AIAN,Opp-sex spouse,0.030362
+21,22,Female,AIAN,Other nonrelative,0.118760
+21,22,Female,AIAN,Other relative,0.038010
+21,22,Female,AIAN,Parent,0.000000
+21,22,Female,AIAN,Parent-in-law,0.000000
+21,22,Female,AIAN,Roommate,0.341319
+21,22,Female,AIAN,Same-sex partner,0.005467
+21,22,Female,AIAN,Same-sex spouse,0.000074
+21,22,Female,AIAN,Sibling,0.028781
+21,22,Female,AIAN,Stepchild,0.025777
+21,22,Female,Asian,Adopted child,0.006114
+21,22,Female,Asian,Biological child,0.240490
+21,22,Female,Asian,Child-in-law,0.014967
+21,22,Female,Asian,Foster child,0.000000
+21,22,Female,Asian,Grandchild,0.032453
+21,22,Female,Asian,Opp-sex partner,0.047999
+21,22,Female,Asian,Opp-sex spouse,0.019504
+21,22,Female,Asian,Other nonrelative,0.090299
+21,22,Female,Asian,Other relative,0.024725
+21,22,Female,Asian,Parent,0.000000
+21,22,Female,Asian,Parent-in-law,0.000000
+21,22,Female,Asian,Roommate,0.484437
+21,22,Female,Asian,Same-sex partner,0.003526
+21,22,Female,Asian,Same-sex spouse,0.000047
+21,22,Female,Asian,Sibling,0.018682
+21,22,Female,Asian,Stepchild,0.016756
+21,22,Female,Black,Adopted child,0.007967
+21,22,Female,Black,Biological child,0.384735
+21,22,Female,Black,Child-in-law,0.019556
+21,22,Female,Black,Foster child,0.000000
+21,22,Female,Black,Grandchild,0.083554
+21,22,Female,Black,Opp-sex partner,0.062747
+21,22,Female,Black,Opp-sex spouse,0.025540
+21,22,Female,Black,Other nonrelative,0.109516
+21,22,Female,Black,Other relative,0.046695
+21,22,Female,Black,Parent,0.000000
+21,22,Female,Black,Parent-in-law,0.000000
+21,22,Female,Black,Roommate,0.208956
+21,22,Female,Black,Same-sex partner,0.004605
+21,22,Female,Black,Same-sex spouse,0.000062
+21,22,Female,Black,Sibling,0.024296
+21,22,Female,Black,Stepchild,0.021771
+21,22,Female,Latino,Adopted child,0.009980
+21,22,Female,Latino,Biological child,0.251275
+21,22,Female,Latino,Child-in-law,0.053444
+21,22,Female,Latino,Foster child,0.000000
+21,22,Female,Latino,Grandchild,0.048561
+21,22,Female,Latino,Opp-sex partner,0.062410
+21,22,Female,Latino,Opp-sex spouse,0.031531
+21,22,Female,Latino,Other nonrelative,0.131840
+21,22,Female,Latino,Other relative,0.060935
+21,22,Female,Latino,Parent,0.000000
+21,22,Female,Latino,Parent-in-law,0.000000
+21,22,Female,Latino,Roommate,0.267255
+21,22,Female,Latino,Same-sex partner,0.005777
+21,22,Female,Latino,Same-sex spouse,0.000078
+21,22,Female,Latino,Sibling,0.049700
+21,22,Female,Latino,Stepchild,0.027215
+21,22,Female,Multiracial or Other,Adopted child,0.009555
+21,22,Female,Multiracial or Other,Biological child,0.343685
+21,22,Female,Multiracial or Other,Child-in-law,0.023487
+21,22,Female,Multiracial or Other,Foster child,0.000000
+21,22,Female,Multiracial or Other,Grandchild,0.050369
+21,22,Female,Multiracial or Other,Opp-sex partner,0.075378
+21,22,Female,Multiracial or Other,Opp-sex spouse,0.030710
+21,22,Female,Multiracial or Other,Other nonrelative,0.098568
+21,22,Female,Multiracial or Other,Other relative,0.038437
+21,22,Female,Multiracial or Other,Parent,0.000000
+21,22,Female,Multiracial or Other,Parent-in-law,0.000000
+21,22,Female,Multiracial or Other,Roommate,0.269037
+21,22,Female,Multiracial or Other,Same-sex partner,0.005529
+21,22,Female,Multiracial or Other,Same-sex spouse,0.000075
+21,22,Female,Multiracial or Other,Sibling,0.029105
+21,22,Female,Multiracial or Other,Stepchild,0.026066
+21,22,Female,NHOPI,Adopted child,0.009448
+21,22,Female,NHOPI,Biological child,0.254442
+21,22,Female,NHOPI,Child-in-law,0.023222
+21,22,Female,NHOPI,Foster child,0.000000
+21,22,Female,NHOPI,Grandchild,0.049812
+21,22,Female,NHOPI,Opp-sex partner,0.074527
+21,22,Female,NHOPI,Opp-sex spouse,0.030362
+21,22,Female,NHOPI,Other nonrelative,0.118760
+21,22,Female,NHOPI,Other relative,0.038010
+21,22,Female,NHOPI,Parent,0.000000
+21,22,Female,NHOPI,Parent-in-law,0.000000
+21,22,Female,NHOPI,Roommate,0.341319
+21,22,Female,NHOPI,Same-sex partner,0.005467
+21,22,Female,NHOPI,Same-sex spouse,0.000074
+21,22,Female,NHOPI,Sibling,0.028781
+21,22,Female,NHOPI,Stepchild,0.025777
+21,22,Female,White,Adopted child,0.007040
+21,22,Female,White,Biological child,0.228695
+21,22,Female,White,Child-in-law,0.019559
+21,22,Female,White,Foster child,0.000000
+21,22,Female,White,Grandchild,0.046526
+21,22,Female,White,Opp-sex partner,0.082471
+21,22,Female,White,Opp-sex spouse,0.031924
+21,22,Female,White,Other nonrelative,0.119982
+21,22,Female,White,Other relative,0.030062
+21,22,Female,White,Parent,0.000000
+21,22,Female,White,Parent-in-law,0.000000
+21,22,Female,White,Roommate,0.376678
+21,22,Female,White,Same-sex partner,0.006331
+21,22,Female,White,Same-sex spouse,0.000086
+21,22,Female,White,Sibling,0.023213
+21,22,Female,White,Stepchild,0.027434
+21,22,Male,AIAN,Adopted child,0.008363
+21,22,Male,AIAN,Biological child,0.272527
+21,22,Male,AIAN,Child-in-law,0.013986
+21,22,Male,AIAN,Foster child,0.000000
+21,22,Male,AIAN,Grandchild,0.068327
+21,22,Male,AIAN,Opp-sex partner,0.040889
+21,22,Male,AIAN,Opp-sex spouse,0.011149
+21,22,Male,AIAN,Other nonrelative,0.120396
+21,22,Male,AIAN,Other relative,0.047842
+21,22,Male,AIAN,Parent,0.000000
+21,22,Male,AIAN,Parent-in-law,0.000000
+21,22,Male,AIAN,Roommate,0.349863
+21,22,Male,AIAN,Same-sex partner,0.003563
+21,22,Male,AIAN,Same-sex spouse,0.000030
+21,22,Male,AIAN,Sibling,0.031888
+21,22,Male,AIAN,Stepchild,0.031177
+21,22,Male,Asian,Adopted child,0.003733
+21,22,Male,Asian,Biological child,0.281615
+21,22,Male,Asian,Child-in-law,0.006353
+21,22,Male,Asian,Foster child,0.000000
+21,22,Male,Asian,Grandchild,0.030088
+21,22,Male,Asian,Opp-sex partner,0.018673
+21,22,Male,Asian,Opp-sex spouse,0.005241
+21,22,Male,Asian,Other nonrelative,0.137289
+21,22,Male,Asian,Other relative,0.021114
+21,22,Male,Asian,Parent,0.000000
+21,22,Male,Asian,Parent-in-law,0.000000
+21,22,Male,Asian,Roommate,0.466368
+21,22,Male,Asian,Same-sex partner,0.001612
+21,22,Male,Asian,Same-sex spouse,0.000014
+21,22,Male,Asian,Sibling,0.014125
+21,22,Male,Asian,Stepchild,0.013775
+21,22,Male,Black,Adopted child,0.007203
+21,22,Male,Black,Biological child,0.325789
+21,22,Male,Black,Child-in-law,0.012074
+21,22,Male,Black,Foster child,0.000000
+21,22,Male,Black,Grandchild,0.140947
+21,22,Male,Black,Opp-sex partner,0.035323
+21,22,Male,Black,Opp-sex spouse,0.009669
+21,22,Male,Black,Other nonrelative,0.106443
+21,22,Male,Black,Other relative,0.080860
+21,22,Male,Black,Parent,0.000000
+21,22,Male,Black,Parent-in-law,0.000000
+21,22,Male,Black,Roommate,0.224339
+21,22,Male,Black,Same-sex partner,0.003074
+21,22,Male,Black,Same-sex spouse,0.000026
+21,22,Male,Black,Sibling,0.027437
+21,22,Male,Black,Stepchild,0.026817
+21,22,Male,Latino,Adopted child,0.012521
+21,22,Male,Latino,Biological child,0.307423
+21,22,Male,Latino,Child-in-law,0.020840
+21,22,Male,Latino,Foster child,0.000000
+21,22,Male,Latino,Grandchild,0.068320
+21,22,Male,Latino,Opp-sex partner,0.035674
+21,22,Male,Latino,Opp-sex spouse,0.016454
+21,22,Male,Latino,Other nonrelative,0.120471
+21,22,Male,Latino,Other relative,0.085607
+21,22,Male,Latino,Parent,0.000000
+21,22,Male,Latino,Parent-in-law,0.000000
+21,22,Male,Latino,Roommate,0.251676
+21,22,Male,Latino,Same-sex partner,0.005315
+21,22,Male,Latino,Same-sex spouse,0.000045
+21,22,Male,Latino,Sibling,0.037759
+21,22,Male,Latino,Stepchild,0.037894
+21,22,Male,Multiracial or Other,Adopted child,0.007932
+21,22,Male,Multiracial or Other,Biological child,0.303717
+21,22,Male,Multiracial or Other,Child-in-law,0.013275
+21,22,Male,Multiracial or Other,Foster child,0.000000
+21,22,Male,Multiracial or Other,Grandchild,0.064764
+21,22,Male,Multiracial or Other,Opp-sex partner,0.038819
+21,22,Male,Multiracial or Other,Opp-sex spouse,0.010598
+21,22,Male,Multiracial or Other,Other nonrelative,0.114160
+21,22,Male,Multiracial or Other,Other relative,0.045351
+21,22,Male,Multiracial or Other,Parent,0.000000
+21,22,Male,Multiracial or Other,Parent-in-law,0.000000
+21,22,Male,Multiracial or Other,Roommate,0.338186
+21,22,Male,Multiracial or Other,Same-sex partner,0.003381
+21,22,Male,Multiracial or Other,Same-sex spouse,0.000029
+21,22,Male,Multiracial or Other,Sibling,0.030232
+21,22,Male,Multiracial or Other,Stepchild,0.029556
+21,22,Male,NHOPI,Adopted child,0.008363
+21,22,Male,NHOPI,Biological child,0.272527
+21,22,Male,NHOPI,Child-in-law,0.013986
+21,22,Male,NHOPI,Foster child,0.000000
+21,22,Male,NHOPI,Grandchild,0.068327
+21,22,Male,NHOPI,Opp-sex partner,0.040889
+21,22,Male,NHOPI,Opp-sex spouse,0.011149
+21,22,Male,NHOPI,Other nonrelative,0.120396
+21,22,Male,NHOPI,Other relative,0.047842
+21,22,Male,NHOPI,Parent,0.000000
+21,22,Male,NHOPI,Parent-in-law,0.000000
+21,22,Male,NHOPI,Roommate,0.349863
+21,22,Male,NHOPI,Same-sex partner,0.003563
+21,22,Male,NHOPI,Same-sex spouse,0.000030
+21,22,Male,NHOPI,Sibling,0.031888
+21,22,Male,NHOPI,Stepchild,0.031177
+21,22,Male,White,Adopted child,0.007614
+21,22,Male,White,Biological child,0.250343
+21,22,Male,White,Child-in-law,0.014255
+21,22,Male,White,Foster child,0.000000
+21,22,Male,White,Grandchild,0.059373
+21,22,Male,White,Opp-sex partner,0.044247
+21,22,Male,White,Opp-sex spouse,0.010236
+21,22,Male,White,Other nonrelative,0.123712
+21,22,Male,White,Other relative,0.034534
+21,22,Male,White,Parent,0.000000
+21,22,Male,White,Parent-in-law,0.000000
+21,22,Male,White,Roommate,0.390018
+21,22,Male,White,Same-sex partner,0.002990
+21,22,Male,White,Same-sex spouse,0.000025
+21,22,Male,White,Sibling,0.031297
+21,22,Male,White,Stepchild,0.031354
+22,25,Female,AIAN,Adopted child,0.008100
+22,25,Female,AIAN,Biological child,0.385241
+22,25,Female,AIAN,Child-in-law,0.021481
+22,25,Female,AIAN,Foster child,0.000000
+22,25,Female,AIAN,Grandchild,0.031989
+22,25,Female,AIAN,Opp-sex partner,0.098109
+22,25,Female,AIAN,Opp-sex spouse,0.038248
+22,25,Female,AIAN,Other nonrelative,0.090008
+22,25,Female,AIAN,Other relative,0.039761
+22,25,Female,AIAN,Parent,0.000000
+22,25,Female,AIAN,Parent-in-law,0.000000
+22,25,Female,AIAN,Roommate,0.232891
+22,25,Female,AIAN,Same-sex partner,0.005208
+22,25,Female,AIAN,Same-sex spouse,0.000746
+22,25,Female,AIAN,Sibling,0.025382
+22,25,Female,AIAN,Stepchild,0.022835
+22,25,Female,Asian,Adopted child,0.018139
+22,25,Female,Asian,Biological child,0.266242
+22,25,Female,Asian,Child-in-law,0.023276
+22,25,Female,Asian,Foster child,0.000000
+22,25,Female,Asian,Grandchild,0.013259
+22,25,Female,Asian,Opp-sex partner,0.077519
+22,25,Female,Asian,Opp-sex spouse,0.027947
+22,25,Female,Asian,Other nonrelative,0.094052
+22,25,Female,Asian,Other relative,0.042434
+22,25,Female,Asian,Parent,0.000000
+22,25,Female,Asian,Parent-in-law,0.000000
+22,25,Female,Asian,Roommate,0.384574
+22,25,Female,Asian,Same-sex partner,0.002107
+22,25,Female,Asian,Same-sex spouse,0.000296
+22,25,Female,Asian,Sibling,0.040832
+22,25,Female,Asian,Stepchild,0.009324
+22,25,Female,Black,Adopted child,0.016481
+22,25,Female,Black,Biological child,0.359374
+22,25,Female,Black,Child-in-law,0.015495
+22,25,Female,Black,Foster child,0.000000
+22,25,Female,Black,Grandchild,0.075559
+22,25,Female,Black,Opp-sex partner,0.060472
+22,25,Female,Black,Opp-sex spouse,0.021776
+22,25,Female,Black,Other nonrelative,0.109520
+22,25,Female,Black,Other relative,0.067582
+22,25,Female,Black,Parent,0.000000
+22,25,Female,Black,Parent-in-law,0.000000
+22,25,Female,Black,Roommate,0.193047
+22,25,Female,Black,Same-sex partner,0.003751
+22,25,Female,Black,Same-sex spouse,0.000535
+22,25,Female,Black,Sibling,0.038249
+22,25,Female,Black,Stepchild,0.038158
+22,25,Female,Latino,Adopted child,0.008176
+22,25,Female,Latino,Biological child,0.350398
+22,25,Female,Latino,Child-in-law,0.039633
+22,25,Female,Latino,Foster child,0.000000
+22,25,Female,Latino,Grandchild,0.035262
+22,25,Female,Latino,Opp-sex partner,0.096376
+22,25,Female,Latino,Opp-sex spouse,0.039501
+22,25,Female,Latino,Other nonrelative,0.096838
+22,25,Female,Latino,Other relative,0.061998
+22,25,Female,Latino,Parent,0.000000
+22,25,Female,Latino,Parent-in-law,0.000000
+22,25,Female,Latino,Roommate,0.197060
+22,25,Female,Latino,Same-sex partner,0.005257
+22,25,Female,Latino,Same-sex spouse,0.000753
+22,25,Female,Latino,Sibling,0.041214
+22,25,Female,Latino,Stepchild,0.027534
+22,25,Female,Multiracial or Other,Adopted child,0.008220
+22,25,Female,Multiracial or Other,Biological child,0.344031
+22,25,Female,Multiracial or Other,Child-in-law,0.021798
+22,25,Female,Multiracial or Other,Foster child,0.000000
+22,25,Female,Multiracial or Other,Grandchild,0.056764
+22,25,Female,Multiracial or Other,Opp-sex partner,0.084441
+22,25,Female,Multiracial or Other,Opp-sex spouse,0.035769
+22,25,Female,Multiracial or Other,Other nonrelative,0.082497
+22,25,Female,Multiracial or Other,Other relative,0.070990
+22,25,Female,Multiracial or Other,Parent,0.000000
+22,25,Female,Multiracial or Other,Parent-in-law,0.000000
+22,25,Female,Multiracial or Other,Roommate,0.240522
+22,25,Female,Multiracial or Other,Same-sex partner,0.005286
+22,25,Female,Multiracial or Other,Same-sex spouse,0.000757
+22,25,Female,Multiracial or Other,Sibling,0.025753
+22,25,Female,Multiracial or Other,Stepchild,0.023171
+22,25,Female,NHOPI,Adopted child,0.009160
+22,25,Female,NHOPI,Biological child,0.304930
+22,25,Female,NHOPI,Child-in-law,0.024290
+22,25,Female,NHOPI,Foster child,0.000000
+22,25,Female,NHOPI,Grandchild,0.036119
+22,25,Female,NHOPI,Opp-sex partner,0.111036
+22,25,Female,NHOPI,Opp-sex spouse,0.043328
+22,25,Female,NHOPI,Other nonrelative,0.101756
+22,25,Female,NHOPI,Other relative,0.044950
+22,25,Female,NHOPI,Parent,0.000000
+22,25,Female,NHOPI,Parent-in-law,0.000000
+22,25,Female,NHOPI,Roommate,0.263207
+22,25,Female,NHOPI,Same-sex partner,0.005892
+22,25,Female,NHOPI,Same-sex spouse,0.000846
+22,25,Female,NHOPI,Sibling,0.028671
+22,25,Female,NHOPI,Stepchild,0.025815
+22,25,Female,White,Adopted child,0.007062
+22,25,Female,White,Biological child,0.286247
+22,25,Female,White,Child-in-law,0.022591
+22,25,Female,White,Foster child,0.000000
+22,25,Female,White,Grandchild,0.030910
+22,25,Female,White,Opp-sex partner,0.127466
+22,25,Female,White,Opp-sex spouse,0.049475
+22,25,Female,White,Other nonrelative,0.103340
+22,25,Female,White,Other relative,0.035390
+22,25,Female,White,Parent,0.000000
+22,25,Female,White,Parent-in-law,0.000000
+22,25,Female,White,Roommate,0.281877
+22,25,Female,White,Same-sex partner,0.006435
+22,25,Female,White,Same-sex spouse,0.000677
+22,25,Female,White,Sibling,0.023733
+22,25,Female,White,Stepchild,0.024797
+22,25,Male,AIAN,Adopted child,0.008949
+22,25,Male,AIAN,Biological child,0.271207
+22,25,Male,AIAN,Child-in-law,0.024551
+22,25,Male,AIAN,Foster child,0.000000
+22,25,Male,AIAN,Grandchild,0.053046
+22,25,Male,AIAN,Opp-sex partner,0.082287
+22,25,Male,AIAN,Opp-sex spouse,0.019238
+22,25,Male,AIAN,Other nonrelative,0.110054
+22,25,Male,AIAN,Other relative,0.048875
+22,25,Male,AIAN,Parent,0.000000
+22,25,Male,AIAN,Parent-in-law,0.000000
+22,25,Male,AIAN,Roommate,0.309846
+22,25,Male,AIAN,Same-sex partner,0.005118
+22,25,Male,AIAN,Same-sex spouse,0.000312
+22,25,Male,AIAN,Sibling,0.038285
+22,25,Male,AIAN,Stepchild,0.028232
+22,25,Male,Asian,Adopted child,0.004976
+22,25,Male,Asian,Biological child,0.275183
+22,25,Male,Asian,Child-in-law,0.013641
+22,25,Male,Asian,Foster child,0.000000
+22,25,Male,Asian,Grandchild,0.029281
+22,25,Male,Asian,Opp-sex partner,0.034411
+22,25,Male,Asian,Opp-sex spouse,0.010976
+22,25,Male,Asian,Other nonrelative,0.092350
+22,25,Male,Asian,Other relative,0.041047
+22,25,Male,Asian,Parent,0.000000
+22,25,Male,Asian,Parent-in-law,0.000000
+22,25,Male,Asian,Roommate,0.440267
+22,25,Male,Asian,Same-sex partner,0.002854
+22,25,Male,Asian,Same-sex spouse,0.000180
+22,25,Male,Asian,Sibling,0.039174
+22,25,Male,Asian,Stepchild,0.015662
+22,25,Male,Black,Adopted child,0.008752
+22,25,Male,Black,Biological child,0.339642
+22,25,Male,Black,Child-in-law,0.018974
+22,25,Male,Black,Foster child,0.000000
+22,25,Male,Black,Grandchild,0.081168
+22,25,Male,Black,Opp-sex partner,0.081160
+22,25,Male,Black,Opp-sex spouse,0.018829
+22,25,Male,Black,Other nonrelative,0.100548
+22,25,Male,Black,Other relative,0.074698
+22,25,Male,Black,Parent,0.000000
+22,25,Male,Black,Parent-in-law,0.000000
+22,25,Male,Black,Roommate,0.205272
+22,25,Male,Black,Same-sex partner,0.005006
+22,25,Male,Black,Same-sex spouse,0.000305
+22,25,Male,Black,Sibling,0.038081
+22,25,Male,Black,Stepchild,0.027564
+22,25,Male,Latino,Adopted child,0.010285
+22,25,Male,Latino,Biological child,0.327117
+22,25,Male,Latino,Child-in-law,0.036049
+22,25,Male,Latino,Foster child,0.000000
+22,25,Male,Latino,Grandchild,0.039957
+22,25,Male,Latino,Opp-sex partner,0.068124
+22,25,Male,Latino,Opp-sex spouse,0.017932
+22,25,Male,Latino,Other nonrelative,0.103811
+22,25,Male,Latino,Other relative,0.071176
+22,25,Male,Latino,Parent,0.000000
+22,25,Male,Latino,Parent-in-law,0.000000
+22,25,Male,Latino,Roommate,0.231895
+22,25,Male,Latino,Same-sex partner,0.003483
+22,25,Male,Latino,Same-sex spouse,0.000216
+22,25,Male,Latino,Sibling,0.055753
+22,25,Male,Latino,Stepchild,0.034202
+22,25,Male,Multiracial or Other,Adopted child,0.008048
+22,25,Male,Multiracial or Other,Biological child,0.330800
+22,25,Male,Multiracial or Other,Child-in-law,0.022075
+22,25,Male,Multiracial or Other,Foster child,0.000000
+22,25,Male,Multiracial or Other,Grandchild,0.075197
+22,25,Male,Multiracial or Other,Opp-sex partner,0.080583
+22,25,Male,Multiracial or Other,Opp-sex spouse,0.017363
+22,25,Male,Multiracial or Other,Other nonrelative,0.089704
+22,25,Male,Multiracial or Other,Other relative,0.058738
+22,25,Male,Multiracial or Other,Parent,0.000000
+22,25,Male,Multiracial or Other,Parent-in-law,0.000000
+22,25,Male,Multiracial or Other,Roommate,0.252827
+22,25,Male,Multiracial or Other,Same-sex partner,0.004604
+22,25,Male,Multiracial or Other,Same-sex spouse,0.000282
+22,25,Male,Multiracial or Other,Sibling,0.034400
+22,25,Male,Multiracial or Other,Stepchild,0.025380
+22,25,Male,NHOPI,Adopted child,0.008447
+22,25,Male,NHOPI,Biological child,0.312182
+22,25,Male,NHOPI,Child-in-law,0.023172
+22,25,Male,NHOPI,Foster child,0.000000
+22,25,Male,NHOPI,Grandchild,0.050042
+22,25,Male,NHOPI,Opp-sex partner,0.077709
+22,25,Male,NHOPI,Opp-sex spouse,0.018194
+22,25,Male,NHOPI,Other nonrelative,0.103861
+22,25,Male,NHOPI,Other relative,0.046125
+22,25,Male,NHOPI,Parent,0.000000
+22,25,Male,NHOPI,Parent-in-law,0.000000
+22,25,Male,NHOPI,Roommate,0.292378
+22,25,Male,NHOPI,Same-sex partner,0.004832
+22,25,Male,NHOPI,Same-sex spouse,0.000295
+22,25,Male,NHOPI,Sibling,0.036120
+22,25,Male,NHOPI,Stepchild,0.026643
+22,25,Male,White,Adopted child,0.005882
+22,25,Male,White,Biological child,0.306687
+22,25,Male,White,Child-in-law,0.020854
+22,25,Male,White,Foster child,0.000000
+22,25,Male,White,Grandchild,0.048397
+22,25,Male,White,Opp-sex partner,0.082972
+22,25,Male,White,Opp-sex spouse,0.020577
+22,25,Male,White,Other nonrelative,0.106249
+22,25,Male,White,Other relative,0.034012
+22,25,Male,White,Parent,0.000000
+22,25,Male,White,Parent-in-law,0.000000
+22,25,Male,White,Roommate,0.313304
+22,25,Male,White,Same-sex partner,0.004206
+22,25,Male,White,Same-sex spouse,0.000279
+22,25,Male,White,Sibling,0.030807
+22,25,Male,White,Stepchild,0.025775
+25,30,Female,AIAN,Adopted child,0.009474
+25,30,Female,AIAN,Biological child,0.308432
+25,30,Female,AIAN,Child-in-law,0.040466
+25,30,Female,AIAN,Foster child,0.000000
+25,30,Female,AIAN,Grandchild,0.031328
+25,30,Female,AIAN,Opp-sex partner,0.146553
+25,30,Female,AIAN,Opp-sex spouse,0.057293
+25,30,Female,AIAN,Other nonrelative,0.100094
+25,30,Female,AIAN,Other relative,0.046676
+25,30,Female,AIAN,Parent,0.000000
+25,30,Female,AIAN,Parent-in-law,0.000000
+25,30,Female,AIAN,Roommate,0.191202
+25,30,Female,AIAN,Same-sex partner,0.008635
+25,30,Female,AIAN,Same-sex spouse,0.001839
+25,30,Female,AIAN,Sibling,0.035211
+25,30,Female,AIAN,Stepchild,0.022797
+25,30,Female,Asian,Adopted child,0.004844
+25,30,Female,Asian,Biological child,0.193118
+25,30,Female,Asian,Child-in-law,0.040096
+25,30,Female,Asian,Foster child,0.000000
+25,30,Female,Asian,Grandchild,0.016108
+25,30,Female,Asian,Opp-sex partner,0.122071
+25,30,Female,Asian,Opp-sex spouse,0.118555
+25,30,Female,Asian,Other nonrelative,0.100628
+25,30,Female,Asian,Other relative,0.042358
+25,30,Female,Asian,Parent,0.000000
+25,30,Female,Asian,Parent-in-law,0.000000
+25,30,Female,Asian,Roommate,0.305876
+25,30,Female,Asian,Same-sex partner,0.004393
+25,30,Female,Asian,Same-sex spouse,0.000933
+25,30,Female,Asian,Sibling,0.039295
+25,30,Female,Asian,Stepchild,0.011726
+25,30,Female,Black,Adopted child,0.014033
+25,30,Female,Black,Biological child,0.355763
+25,30,Female,Black,Child-in-law,0.032969
+25,30,Female,Black,Foster child,0.000000
+25,30,Female,Black,Grandchild,0.066093
+25,30,Female,Black,Opp-sex partner,0.085940
+25,30,Female,Black,Opp-sex spouse,0.032405
+25,30,Female,Black,Other nonrelative,0.100928
+25,30,Female,Black,Other relative,0.074021
+25,30,Female,Black,Parent,0.000000
+25,30,Female,Black,Parent-in-law,0.000000
+25,30,Female,Black,Roommate,0.133503
+25,30,Female,Black,Same-sex partner,0.012814
+25,30,Female,Black,Same-sex spouse,0.002731
+25,30,Female,Black,Sibling,0.051997
+25,30,Female,Black,Stepchild,0.036802
+25,30,Female,Latino,Adopted child,0.009308
+25,30,Female,Latino,Biological child,0.301934
+25,30,Female,Latino,Child-in-law,0.055510
+25,30,Female,Latino,Foster child,0.000000
+25,30,Female,Latino,Grandchild,0.028576
+25,30,Female,Latino,Opp-sex partner,0.126625
+25,30,Female,Latino,Opp-sex spouse,0.060804
+25,30,Female,Latino,Other nonrelative,0.109352
+25,30,Female,Latino,Other relative,0.062905
+25,30,Female,Latino,Parent,0.000000
+25,30,Female,Latino,Parent-in-law,0.000000
+25,30,Female,Latino,Roommate,0.156038
+25,30,Female,Latino,Same-sex partner,0.010882
+25,30,Female,Latino,Same-sex spouse,0.002314
+25,30,Female,Latino,Sibling,0.053429
+25,30,Female,Latino,Stepchild,0.022323
+25,30,Female,Multiracial or Other,Adopted child,0.011371
+25,30,Female,Multiracial or Other,Biological child,0.252701
+25,30,Female,Multiracial or Other,Child-in-law,0.026387
+25,30,Female,Multiracial or Other,Foster child,0.000000
+25,30,Female,Multiracial or Other,Grandchild,0.037565
+25,30,Female,Multiracial or Other,Opp-sex partner,0.175330
+25,30,Female,Multiracial or Other,Opp-sex spouse,0.051142
+25,30,Female,Multiracial or Other,Other nonrelative,0.101472
+25,30,Female,Multiracial or Other,Other relative,0.032096
+25,30,Female,Multiracial or Other,Parent,0.000000
+25,30,Female,Multiracial or Other,Parent-in-law,0.000000
+25,30,Female,Multiracial or Other,Roommate,0.236716
+25,30,Female,Multiracial or Other,Same-sex partner,0.010374
+25,30,Female,Multiracial or Other,Same-sex spouse,0.002210
+25,30,Female,Multiracial or Other,Sibling,0.035301
+25,30,Female,Multiracial or Other,Stepchild,0.027334
+25,30,Female,NHOPI,Adopted child,0.009912
+25,30,Female,NHOPI,Biological child,0.276503
+25,30,Female,NHOPI,Child-in-law,0.042343
+25,30,Female,NHOPI,Foster child,0.000000
+25,30,Female,NHOPI,Grandchild,0.032770
+25,30,Female,NHOPI,Opp-sex partner,0.153354
+25,30,Female,NHOPI,Opp-sex spouse,0.059970
+25,30,Female,NHOPI,Other nonrelative,0.104706
+25,30,Female,NHOPI,Other relative,0.048828
+25,30,Female,NHOPI,Parent,0.000000
+25,30,Female,NHOPI,Parent-in-law,0.000000
+25,30,Female,NHOPI,Roommate,0.199973
+25,30,Female,NHOPI,Same-sex partner,0.009037
+25,30,Female,NHOPI,Same-sex spouse,0.001925
+25,30,Female,NHOPI,Sibling,0.036833
+25,30,Female,NHOPI,Stepchild,0.023846
+25,30,Female,White,Adopted child,0.008768
+25,30,Female,White,Biological child,0.265767
+25,30,Female,White,Child-in-law,0.041983
+25,30,Female,White,Foster child,0.000000
+25,30,Female,White,Grandchild,0.029778
+25,30,Female,White,Opp-sex partner,0.175605
+25,30,Female,White,Opp-sex spouse,0.059063
+25,30,Female,White,Other nonrelative,0.104757
+25,30,Female,White,Other relative,0.041403
+25,30,Female,White,Parent,0.000000
+25,30,Female,White,Parent-in-law,0.000000
+25,30,Female,White,Roommate,0.210449
+25,30,Female,White,Same-sex partner,0.007624
+25,30,Female,White,Same-sex spouse,0.002182
+25,30,Female,White,Sibling,0.029517
+25,30,Female,White,Stepchild,0.023103
+25,30,Male,AIAN,Adopted child,0.009143
+25,30,Male,AIAN,Biological child,0.276210
+25,30,Male,AIAN,Child-in-law,0.036836
+25,30,Male,AIAN,Foster child,0.000000
+25,30,Male,AIAN,Grandchild,0.037211
+25,30,Male,AIAN,Opp-sex partner,0.130915
+25,30,Male,AIAN,Opp-sex spouse,0.036441
+25,30,Male,AIAN,Other nonrelative,0.091434
+25,30,Male,AIAN,Other relative,0.052519
+25,30,Male,AIAN,Parent,0.000000
+25,30,Male,AIAN,Parent-in-law,0.000000
+25,30,Male,AIAN,Roommate,0.253086
+25,30,Male,AIAN,Same-sex partner,0.006621
+25,30,Male,AIAN,Same-sex spouse,0.001228
+25,30,Male,AIAN,Sibling,0.040958
+25,30,Male,AIAN,Stepchild,0.027398
+25,30,Male,Asian,Adopted child,0.003792
+25,30,Male,Asian,Biological child,0.217519
+25,30,Male,Asian,Child-in-law,0.015312
+25,30,Male,Asian,Foster child,0.000000
+25,30,Male,Asian,Grandchild,0.015323
+25,30,Male,Asian,Opp-sex partner,0.068768
+25,30,Male,Asian,Opp-sex spouse,0.037432
+25,30,Male,Asian,Other nonrelative,0.110150
+25,30,Male,Asian,Other relative,0.063147
+25,30,Male,Asian,Parent,0.000000
+25,30,Male,Asian,Parent-in-law,0.000000
+25,30,Male,Asian,Roommate,0.406090
+25,30,Male,Asian,Same-sex partner,0.002773
+25,30,Male,Asian,Same-sex spouse,0.000518
+25,30,Male,Asian,Sibling,0.047898
+25,30,Male,Asian,Stepchild,0.011278
+25,30,Male,Black,Adopted child,0.012479
+25,30,Male,Black,Biological child,0.310205
+25,30,Male,Black,Child-in-law,0.022162
+25,30,Male,Black,Foster child,0.000000
+25,30,Male,Black,Grandchild,0.062045
+25,30,Male,Black,Opp-sex partner,0.102857
+25,30,Male,Black,Opp-sex spouse,0.039137
+25,30,Male,Black,Other nonrelative,0.101648
+25,30,Male,Black,Other relative,0.070413
+25,30,Male,Black,Parent,0.000000
+25,30,Male,Black,Parent-in-law,0.000000
+25,30,Male,Black,Roommate,0.195685
+25,30,Male,Black,Same-sex partner,0.007547
+25,30,Male,Black,Same-sex spouse,0.001399
+25,30,Male,Black,Sibling,0.036948
+25,30,Male,Black,Stepchild,0.037475
+25,30,Male,Latino,Adopted child,0.008509
+25,30,Male,Latino,Biological child,0.276807
+25,30,Male,Latino,Child-in-law,0.057186
+25,30,Male,Latino,Foster child,0.000000
+25,30,Male,Latino,Grandchild,0.023857
+25,30,Male,Latino,Opp-sex partner,0.116675
+25,30,Male,Latino,Opp-sex spouse,0.033590
+25,30,Male,Latino,Other nonrelative,0.106880
+25,30,Male,Latino,Other relative,0.075031
+25,30,Male,Latino,Parent,0.000000
+25,30,Male,Latino,Parent-in-law,0.000000
+25,30,Male,Latino,Roommate,0.217290
+25,30,Male,Latino,Same-sex partner,0.006617
+25,30,Male,Latino,Same-sex spouse,0.001173
+25,30,Male,Latino,Sibling,0.050253
+25,30,Male,Latino,Stepchild,0.026134
+25,30,Male,Multiracial or Other,Adopted child,0.006924
+25,30,Male,Multiracial or Other,Biological child,0.312777
+25,30,Male,Multiracial or Other,Child-in-law,0.027910
+25,30,Male,Multiracial or Other,Foster child,0.000000
+25,30,Male,Multiracial or Other,Grandchild,0.046377
+25,30,Male,Multiracial or Other,Opp-sex partner,0.118054
+25,30,Male,Multiracial or Other,Opp-sex spouse,0.036005
+25,30,Male,Multiracial or Other,Other nonrelative,0.109256
+25,30,Male,Multiracial or Other,Other relative,0.059529
+25,30,Male,Multiracial or Other,Parent,0.000000
+25,30,Male,Multiracial or Other,Parent-in-law,0.000000
+25,30,Male,Multiracial or Other,Roommate,0.225094
+25,30,Male,Multiracial or Other,Same-sex partner,0.005025
+25,30,Male,Multiracial or Other,Same-sex spouse,0.000933
+25,30,Male,Multiracial or Other,Sibling,0.031401
+25,30,Male,Multiracial or Other,Stepchild,0.020714
+25,30,Male,NHOPI,Adopted child,0.008744
+25,30,Male,NHOPI,Biological child,0.284914
+25,30,Male,NHOPI,Child-in-law,0.035231
+25,30,Male,NHOPI,Foster child,0.000000
+25,30,Male,NHOPI,Grandchild,0.035579
+25,30,Male,NHOPI,Opp-sex partner,0.125214
+25,30,Male,NHOPI,Opp-sex spouse,0.034873
+25,30,Male,NHOPI,Other nonrelative,0.110402
+25,30,Male,NHOPI,Other relative,0.050218
+25,30,Male,NHOPI,Parent,0.000000
+25,30,Male,NHOPI,Parent-in-law,0.000000
+25,30,Male,NHOPI,Roommate,0.241959
+25,30,Male,NHOPI,Same-sex partner,0.006334
+25,30,Male,NHOPI,Same-sex spouse,0.001175
+25,30,Male,NHOPI,Sibling,0.039162
+25,30,Male,NHOPI,Stepchild,0.026196
+25,30,Male,White,Adopted child,0.008008
+25,30,Male,White,Biological child,0.287538
+25,30,Male,White,Child-in-law,0.034438
+25,30,Male,White,Foster child,0.000000
+25,30,Male,White,Grandchild,0.035180
+25,30,Male,White,Opp-sex partner,0.138933
+25,30,Male,White,Opp-sex spouse,0.033857
+25,30,Male,White,Other nonrelative,0.113441
+25,30,Male,White,Other relative,0.036519
+25,30,Male,White,Parent,0.000000
+25,30,Male,White,Parent-in-law,0.000000
+25,30,Male,White,Roommate,0.244179
+25,30,Male,White,Same-sex partner,0.005878
+25,30,Male,White,Same-sex spouse,0.001159
+25,30,Male,White,Sibling,0.035485
+25,30,Male,White,Stepchild,0.025385
+30,40,Female,AIAN,Adopted child,0.008560
+30,40,Female,AIAN,Biological child,0.273499
+30,40,Female,AIAN,Child-in-law,0.044422
+30,40,Female,AIAN,Foster child,0.000000
+30,40,Female,AIAN,Grandchild,0.023787
+30,40,Female,AIAN,Opp-sex partner,0.182813
+30,40,Female,AIAN,Opp-sex spouse,0.091982
+30,40,Female,AIAN,Other nonrelative,0.101665
+30,40,Female,AIAN,Other relative,0.053590
+30,40,Female,AIAN,Parent,0.001635
+30,40,Female,AIAN,Parent-in-law,0.000001
+30,40,Female,AIAN,Roommate,0.132783
+30,40,Female,AIAN,Same-sex partner,0.010902
+30,40,Female,AIAN,Same-sex spouse,0.004731
+30,40,Female,AIAN,Sibling,0.041506
+30,40,Female,AIAN,Stepchild,0.028124
+30,40,Female,Asian,Adopted child,0.003525
+30,40,Female,Asian,Biological child,0.172012
+30,40,Female,Asian,Child-in-law,0.057699
+30,40,Female,Asian,Foster child,0.000000
+30,40,Female,Asian,Grandchild,0.009802
+30,40,Female,Asian,Opp-sex partner,0.145241
+30,40,Female,Asian,Opp-sex spouse,0.217177
+30,40,Female,Asian,Other nonrelative,0.090573
+30,40,Female,Asian,Other relative,0.065175
+30,40,Female,Asian,Parent,0.000651
+30,40,Female,Asian,Parent-in-law,0.000001
+30,40,Female,Asian,Roommate,0.175045
+30,40,Female,Asian,Same-sex partner,0.004444
+30,40,Female,Asian,Same-sex spouse,0.001921
+30,40,Female,Asian,Sibling,0.045217
+30,40,Female,Asian,Stepchild,0.011517
+30,40,Female,Black,Adopted child,0.008842
+30,40,Female,Black,Biological child,0.358538
+30,40,Female,Black,Child-in-law,0.024686
+30,40,Female,Black,Foster child,0.000000
+30,40,Female,Black,Grandchild,0.033032
+30,40,Female,Black,Opp-sex partner,0.099336
+30,40,Female,Black,Opp-sex spouse,0.062657
+30,40,Female,Black,Other nonrelative,0.107265
+30,40,Female,Black,Other relative,0.088629
+30,40,Female,Black,Parent,0.001690
+30,40,Female,Black,Parent-in-law,0.000001
+30,40,Female,Black,Roommate,0.102122
+30,40,Female,Black,Same-sex partner,0.014273
+30,40,Female,Black,Same-sex spouse,0.004889
+30,40,Female,Black,Sibling,0.056387
+30,40,Female,Black,Stepchild,0.037652
+30,40,Female,Latino,Adopted child,0.010898
+30,40,Female,Latino,Biological child,0.250227
+30,40,Female,Latino,Child-in-law,0.053367
+30,40,Female,Latino,Foster child,0.000000
+30,40,Female,Latino,Grandchild,0.020636
+30,40,Female,Latino,Opp-sex partner,0.135755
+30,40,Female,Latino,Opp-sex spouse,0.110438
+30,40,Female,Latino,Other nonrelative,0.107960
+30,40,Female,Latino,Other relative,0.076064
+30,40,Female,Latino,Parent,0.002092
+30,40,Female,Latino,Parent-in-law,0.000001
+30,40,Female,Latino,Roommate,0.136277
+30,40,Female,Latino,Same-sex partner,0.007200
+30,40,Female,Latino,Same-sex spouse,0.006037
+30,40,Female,Latino,Sibling,0.061560
+30,40,Female,Latino,Stepchild,0.021488
+30,40,Female,Multiracial or Other,Adopted child,0.008271
+30,40,Female,Multiracial or Other,Biological child,0.253324
+30,40,Female,Multiracial or Other,Child-in-law,0.042933
+30,40,Female,Multiracial or Other,Foster child,0.000000
+30,40,Female,Multiracial or Other,Grandchild,0.022984
+30,40,Female,Multiracial or Other,Opp-sex partner,0.192536
+30,40,Female,Multiracial or Other,Opp-sex spouse,0.080320
+30,40,Female,Multiracial or Other,Other nonrelative,0.096218
+30,40,Female,Multiracial or Other,Other relative,0.048260
+30,40,Female,Multiracial or Other,Parent,0.001578
+30,40,Female,Multiracial or Other,Parent-in-law,0.000001
+30,40,Female,Multiracial or Other,Roommate,0.171195
+30,40,Female,Multiracial or Other,Same-sex partner,0.010531
+30,40,Female,Multiracial or Other,Same-sex spouse,0.004570
+30,40,Female,Multiracial or Other,Sibling,0.040107
+30,40,Female,Multiracial or Other,Stepchild,0.027170
+30,40,Female,NHOPI,Adopted child,0.008610
+30,40,Female,NHOPI,Biological child,0.290256
+30,40,Female,NHOPI,Child-in-law,0.044681
+30,40,Female,NHOPI,Foster child,0.000000
+30,40,Female,NHOPI,Grandchild,0.023927
+30,40,Female,NHOPI,Opp-sex partner,0.162870
+30,40,Female,NHOPI,Opp-sex spouse,0.092526
+30,40,Female,NHOPI,Other nonrelative,0.102259
+30,40,Female,NHOPI,Other relative,0.053904
+30,40,Female,NHOPI,Parent,0.001645
+30,40,Female,NHOPI,Parent-in-law,0.000001
+30,40,Female,NHOPI,Roommate,0.133556
+30,40,Female,NHOPI,Same-sex partner,0.010966
+30,40,Female,NHOPI,Same-sex spouse,0.004759
+30,40,Female,NHOPI,Sibling,0.041750
+30,40,Female,NHOPI,Stepchild,0.028290
+30,40,Female,White,Adopted child,0.008422
+30,40,Female,White,Biological child,0.300663
+30,40,Female,White,Child-in-law,0.045530
+30,40,Female,White,Foster child,0.000000
+30,40,Female,White,Grandchild,0.024388
+30,40,Female,White,Opp-sex partner,0.182952
+30,40,Female,White,Opp-sex spouse,0.082276
+30,40,Female,White,Other nonrelative,0.101232
+30,40,Female,White,Other relative,0.039852
+30,40,Female,White,Parent,0.001067
+30,40,Female,White,Parent-in-law,0.000001
+30,40,Female,White,Roommate,0.133715
+30,40,Female,White,Same-sex partner,0.011708
+30,40,Female,White,Same-sex spouse,0.004739
+30,40,Female,White,Sibling,0.033191
+30,40,Female,White,Stepchild,0.030263
+30,40,Male,AIAN,Adopted child,0.008258
+30,40,Male,AIAN,Biological child,0.268187
+30,40,Male,AIAN,Child-in-law,0.054482
+30,40,Male,AIAN,Foster child,0.000000
+30,40,Male,AIAN,Grandchild,0.023352
+30,40,Male,AIAN,Opp-sex partner,0.143618
+30,40,Male,AIAN,Opp-sex spouse,0.069123
+30,40,Male,AIAN,Other nonrelative,0.119227
+30,40,Male,AIAN,Other relative,0.061943
+30,40,Male,AIAN,Parent,0.000278
+30,40,Male,AIAN,Parent-in-law,0.000009
+30,40,Male,AIAN,Roommate,0.174949
+30,40,Male,AIAN,Same-sex partner,0.007807
+30,40,Male,AIAN,Same-sex spouse,0.002924
+30,40,Male,AIAN,Sibling,0.042565
+30,40,Male,AIAN,Stepchild,0.023280
+30,40,Male,Asian,Adopted child,0.005578
+30,40,Male,Asian,Biological child,0.209179
+30,40,Male,Asian,Child-in-law,0.039347
+30,40,Male,Asian,Foster child,0.000000
+30,40,Male,Asian,Grandchild,0.015771
+30,40,Male,Asian,Opp-sex partner,0.087042
+30,40,Male,Asian,Opp-sex spouse,0.109875
+30,40,Male,Asian,Other nonrelative,0.103822
+30,40,Male,Asian,Other relative,0.081971
+30,40,Male,Asian,Parent,0.000198
+30,40,Male,Asian,Parent-in-law,0.000006
+30,40,Male,Asian,Roommate,0.262627
+30,40,Male,Asian,Same-sex partner,0.005295
+30,40,Male,Asian,Same-sex spouse,0.001988
+30,40,Male,Asian,Sibling,0.061545
+30,40,Male,Asian,Stepchild,0.015756
+30,40,Male,Black,Adopted child,0.007034
+30,40,Male,Black,Biological child,0.300809
+30,40,Male,Black,Child-in-law,0.029476
+30,40,Male,Black,Foster child,0.000000
+30,40,Male,Black,Grandchild,0.035503
+30,40,Male,Black,Opp-sex partner,0.169518
+30,40,Male,Black,Opp-sex spouse,0.056947
+30,40,Male,Black,Other nonrelative,0.111154
+30,40,Male,Black,Other relative,0.076971
+30,40,Male,Black,Parent,0.000241
+30,40,Male,Black,Parent-in-law,0.000007
+30,40,Male,Black,Roommate,0.135080
+30,40,Male,Black,Same-sex partner,0.006660
+30,40,Male,Black,Same-sex spouse,0.002497
+30,40,Male,Black,Sibling,0.047222
+30,40,Male,Black,Stepchild,0.020882
+30,40,Male,Latino,Adopted child,0.008532
+30,40,Male,Latino,Biological child,0.222284
+30,40,Male,Latino,Child-in-law,0.058784
+30,40,Male,Latino,Foster child,0.000000
+30,40,Male,Latino,Grandchild,0.020413
+30,40,Male,Latino,Opp-sex partner,0.142912
+30,40,Male,Latino,Opp-sex spouse,0.072054
+30,40,Male,Latino,Other nonrelative,0.119493
+30,40,Male,Latino,Other relative,0.096132
+30,40,Male,Latino,Parent,0.000286
+30,40,Male,Latino,Parent-in-law,0.000009
+30,40,Male,Latino,Roommate,0.174526
+30,40,Male,Latino,Same-sex partner,0.011206
+30,40,Male,Latino,Same-sex spouse,0.003020
+30,40,Male,Latino,Sibling,0.052901
+30,40,Male,Latino,Stepchild,0.017449
+30,40,Male,Multiracial or Other,Adopted child,0.007355
+30,40,Male,Multiracial or Other,Biological child,0.276550
+30,40,Male,Multiracial or Other,Child-in-law,0.044136
+30,40,Male,Multiracial or Other,Foster child,0.000000
+30,40,Male,Multiracial or Other,Grandchild,0.020797
+30,40,Male,Multiracial or Other,Opp-sex partner,0.201399
+30,40,Male,Multiracial or Other,Opp-sex spouse,0.047842
+30,40,Male,Multiracial or Other,Other nonrelative,0.099356
+30,40,Male,Multiracial or Other,Other relative,0.040897
+30,40,Male,Multiracial or Other,Parent,0.000251
+30,40,Male,Multiracial or Other,Parent-in-law,0.000008
+30,40,Male,Multiracial or Other,Roommate,0.186489
+30,40,Male,Multiracial or Other,Same-sex partner,0.006960
+30,40,Male,Multiracial or Other,Same-sex spouse,0.002609
+30,40,Male,Multiracial or Other,Sibling,0.044608
+30,40,Male,Multiracial or Other,Stepchild,0.020744
+30,40,Male,NHOPI,Adopted child,0.007999
+30,40,Male,NHOPI,Biological child,0.267414
+30,40,Male,NHOPI,Child-in-law,0.052766
+30,40,Male,NHOPI,Foster child,0.000000
+30,40,Male,NHOPI,Grandchild,0.022620
+30,40,Male,NHOPI,Opp-sex partner,0.162870
+30,40,Male,NHOPI,Opp-sex spouse,0.066972
+30,40,Male,NHOPI,Other nonrelative,0.115474
+30,40,Male,NHOPI,Other relative,0.059994
+30,40,Male,NHOPI,Parent,0.000270
+30,40,Male,NHOPI,Parent-in-law,0.000008
+30,40,Male,NHOPI,Roommate,0.169431
+30,40,Male,NHOPI,Same-sex partner,0.007564
+30,40,Male,NHOPI,Same-sex spouse,0.002834
+30,40,Male,NHOPI,Sibling,0.041229
+30,40,Male,NHOPI,Stepchild,0.022553
+30,40,Male,White,Adopted child,0.007784
+30,40,Male,White,Biological child,0.277538
+30,40,Male,White,Child-in-law,0.058016
+30,40,Male,White,Foster child,0.000000
+30,40,Male,White,Grandchild,0.021899
+30,40,Male,White,Opp-sex partner,0.172013
+30,40,Male,White,Opp-sex spouse,0.065613
+30,40,Male,White,Other nonrelative,0.116871
+30,40,Male,White,Other relative,0.043731
+30,40,Male,White,Parent,0.000249
+30,40,Male,White,Parent-in-law,0.000008
+30,40,Male,White,Roommate,0.167906
+30,40,Male,White,Same-sex partner,0.006840
+30,40,Male,White,Same-sex spouse,0.002115
+30,40,Male,White,Sibling,0.034091
+30,40,Male,White,Stepchild,0.025327
+40,50,Female,AIAN,Adopted child,0.008964
+40,50,Female,AIAN,Biological child,0.188800
+40,50,Female,AIAN,Child-in-law,0.033223
+40,50,Female,AIAN,Foster child,0.000000
+40,50,Female,AIAN,Grandchild,0.008983
+40,50,Female,AIAN,Opp-sex partner,0.165346
+40,50,Female,AIAN,Opp-sex spouse,0.128618
+40,50,Female,AIAN,Other nonrelative,0.139149
+40,50,Female,AIAN,Other relative,0.072413
+40,50,Female,AIAN,Parent,0.040228
+40,50,Female,AIAN,Parent-in-law,0.009645
+40,50,Female,AIAN,Roommate,0.107022
+40,50,Female,AIAN,Same-sex partner,0.009746
+40,50,Female,AIAN,Same-sex spouse,0.005965
+40,50,Female,AIAN,Sibling,0.064263
+40,50,Female,AIAN,Stepchild,0.017634
+40,50,Female,Asian,Adopted child,0.006145
+40,50,Female,Asian,Biological child,0.112752
+40,50,Female,Asian,Child-in-law,0.022964
+40,50,Female,Asian,Foster child,0.000000
+40,50,Female,Asian,Grandchild,0.006178
+40,50,Female,Asian,Opp-sex partner,0.119491
+40,50,Female,Asian,Opp-sex spouse,0.237705
+40,50,Female,Asian,Other nonrelative,0.121367
+40,50,Female,Asian,Other relative,0.098073
+40,50,Female,Asian,Parent,0.027414
+40,50,Female,Asian,Parent-in-law,0.006579
+40,50,Female,Asian,Roommate,0.155699
+40,50,Female,Asian,Same-sex partner,0.006671
+40,50,Female,Asian,Same-sex spouse,0.004077
+40,50,Female,Asian,Sibling,0.062746
+40,50,Female,Asian,Stepchild,0.012138
+40,50,Female,Black,Adopted child,0.007652
+40,50,Female,Black,Biological child,0.297734
+40,50,Female,Black,Child-in-law,0.019829
+40,50,Female,Black,Foster child,0.000000
+40,50,Female,Black,Grandchild,0.007677
+40,50,Female,Black,Opp-sex partner,0.095930
+40,50,Female,Black,Opp-sex spouse,0.091333
+40,50,Female,Black,Other nonrelative,0.115718
+40,50,Female,Black,Other relative,0.107897
+40,50,Female,Black,Parent,0.040621
+40,50,Female,Black,Parent-in-law,0.008218
+40,50,Female,Black,Roommate,0.094001
+40,50,Female,Black,Same-sex partner,0.008314
+40,50,Female,Black,Same-sex spouse,0.005086
+40,50,Female,Black,Sibling,0.084915
+40,50,Female,Black,Stepchild,0.015075
+40,50,Female,Latino,Adopted child,0.006938
+40,50,Female,Latino,Biological child,0.174630
+40,50,Female,Latino,Child-in-law,0.039064
+40,50,Female,Latino,Foster child,0.000000
+40,50,Female,Latino,Grandchild,0.006967
+40,50,Female,Latino,Opp-sex partner,0.132195
+40,50,Female,Latino,Opp-sex spouse,0.127882
+40,50,Female,Latino,Other nonrelative,0.130417
+40,50,Female,Latino,Other relative,0.099327
+40,50,Female,Latino,Parent,0.079086
+40,50,Female,Latino,Parent-in-law,0.007442
+40,50,Female,Latino,Roommate,0.088931
+40,50,Female,Latino,Same-sex partner,0.007536
+40,50,Female,Latino,Same-sex spouse,0.004608
+40,50,Female,Latino,Sibling,0.081291
+40,50,Female,Latino,Stepchild,0.013685
+40,50,Female,Multiracial or Other,Adopted child,0.007610
+40,50,Female,Multiracial or Other,Biological child,0.255273
+40,50,Female,Multiracial or Other,Child-in-law,0.028294
+40,50,Female,Multiracial or Other,Foster child,0.000000
+40,50,Female,Multiracial or Other,Grandchild,0.007635
+40,50,Female,Multiracial or Other,Opp-sex partner,0.160655
+40,50,Female,Multiracial or Other,Opp-sex spouse,0.105730
+40,50,Female,Multiracial or Other,Other nonrelative,0.157017
+40,50,Female,Multiracial or Other,Other relative,0.061516
+40,50,Female,Multiracial or Other,Parent,0.034071
+40,50,Female,Multiracial or Other,Parent-in-law,0.008172
+40,50,Female,Multiracial or Other,Roommate,0.091094
+40,50,Female,Multiracial or Other,Same-sex partner,0.008269
+40,50,Female,Multiracial or Other,Same-sex spouse,0.005058
+40,50,Female,Multiracial or Other,Sibling,0.054613
+40,50,Female,Multiracial or Other,Stepchild,0.014994
+40,50,Female,NHOPI,Adopted child,0.008431
+40,50,Female,NHOPI,Biological child,0.236860
+40,50,Female,NHOPI,Child-in-law,0.031281
+40,50,Female,NHOPI,Foster child,0.000000
+40,50,Female,NHOPI,Grandchild,0.008452
+40,50,Female,NHOPI,Opp-sex partner,0.155552
+40,50,Female,NHOPI,Opp-sex spouse,0.120956
+40,50,Female,NHOPI,Other nonrelative,0.130907
+40,50,Female,NHOPI,Other relative,0.068120
+40,50,Female,NHOPI,Parent,0.037802
+40,50,Female,NHOPI,Parent-in-law,0.009065
+40,50,Female,NHOPI,Roommate,0.100747
+40,50,Female,NHOPI,Same-sex partner,0.009164
+40,50,Female,NHOPI,Same-sex spouse,0.005607
+40,50,Female,NHOPI,Sibling,0.060461
+40,50,Female,NHOPI,Stepchild,0.016594
+40,50,Female,White,Adopted child,0.009174
+40,50,Female,White,Biological child,0.246379
+40,50,Female,White,Child-in-law,0.030918
+40,50,Female,White,Foster child,0.000000
+40,50,Female,White,Grandchild,0.008441
+40,50,Female,White,Opp-sex partner,0.177636
+40,50,Female,White,Opp-sex spouse,0.117583
+40,50,Female,White,Other nonrelative,0.133689
+40,50,Female,White,Other relative,0.049534
+40,50,Female,White,Parent,0.027525
+40,50,Female,White,Parent-in-law,0.010607
+40,50,Female,White,Roommate,0.102919
+40,50,Female,White,Same-sex partner,0.010767
+40,50,Female,White,Same-sex spouse,0.006690
+40,50,Female,White,Sibling,0.049225
+40,50,Female,White,Stepchild,0.018912
+40,50,Male,AIAN,Adopted child,0.006615
+40,50,Male,AIAN,Biological child,0.266986
+40,50,Male,AIAN,Child-in-law,0.045334
+40,50,Male,AIAN,Foster child,0.000000
+40,50,Male,AIAN,Grandchild,0.008783
+40,50,Male,AIAN,Opp-sex partner,0.150592
+40,50,Male,AIAN,Opp-sex spouse,0.092114
+40,50,Male,AIAN,Other nonrelative,0.126803
+40,50,Male,AIAN,Other relative,0.063517
+40,50,Male,AIAN,Parent,0.011864
+40,50,Male,AIAN,Parent-in-law,0.003524
+40,50,Male,AIAN,Roommate,0.134775
+40,50,Male,AIAN,Same-sex partner,0.006086
+40,50,Male,AIAN,Same-sex spouse,0.003131
+40,50,Male,AIAN,Sibling,0.061364
+40,50,Male,AIAN,Stepchild,0.018513
+40,50,Male,Asian,Adopted child,0.007708
+40,50,Male,Asian,Biological child,0.170566
+40,50,Male,Asian,Child-in-law,0.052936
+40,50,Male,Asian,Foster child,0.000000
+40,50,Male,Asian,Grandchild,0.010246
+40,50,Male,Asian,Opp-sex partner,0.075857
+40,50,Male,Asian,Opp-sex spouse,0.099613
+40,50,Male,Asian,Other nonrelative,0.132625
+40,50,Male,Asian,Other relative,0.098475
+40,50,Male,Asian,Parent,0.013734
+40,50,Male,Asian,Parent-in-law,0.004088
+40,50,Male,Asian,Roommate,0.189829
+40,50,Male,Asian,Same-sex partner,0.007086
+40,50,Male,Asian,Same-sex spouse,0.003642
+40,50,Male,Asian,Sibling,0.111991
+40,50,Male,Asian,Stepchild,0.021602
+40,50,Male,Black,Adopted child,0.003318
+40,50,Male,Black,Biological child,0.293253
+40,50,Male,Black,Child-in-law,0.028335
+40,50,Male,Black,Foster child,0.000000
+40,50,Male,Black,Grandchild,0.012346
+40,50,Male,Black,Opp-sex partner,0.153740
+40,50,Male,Black,Opp-sex spouse,0.097777
+40,50,Male,Black,Other nonrelative,0.113315
+40,50,Male,Black,Other relative,0.088859
+40,50,Male,Black,Parent,0.006226
+40,50,Male,Black,Parent-in-law,0.001823
+40,50,Male,Black,Roommate,0.106486
+40,50,Male,Black,Same-sex partner,0.003070
+40,50,Male,Black,Same-sex spouse,0.001590
+40,50,Male,Black,Sibling,0.078047
+40,50,Male,Black,Stepchild,0.011816
+40,50,Male,Latino,Adopted child,0.005898
+40,50,Male,Latino,Biological child,0.161183
+40,50,Male,Latino,Child-in-law,0.036667
+40,50,Male,Latino,Foster child,0.000000
+40,50,Male,Latino,Grandchild,0.007825
+40,50,Male,Latino,Opp-sex partner,0.129101
+40,50,Male,Latino,Opp-sex spouse,0.098038
+40,50,Male,Latino,Other nonrelative,0.139228
+40,50,Male,Latino,Other relative,0.092763
+40,50,Male,Latino,Parent,0.022024
+40,50,Male,Latino,Parent-in-law,0.003154
+40,50,Male,Latino,Roommate,0.197220
+40,50,Male,Latino,Same-sex partner,0.005430
+40,50,Male,Latino,Same-sex spouse,0.002796
+40,50,Male,Latino,Sibling,0.082182
+40,50,Male,Latino,Stepchild,0.016490
+40,50,Male,Multiracial or Other,Adopted child,0.005450
+40,50,Male,Multiracial or Other,Biological child,0.236890
+40,50,Male,Multiracial or Other,Child-in-law,0.037237
+40,50,Male,Multiracial or Other,Foster child,0.000000
+40,50,Male,Multiracial or Other,Grandchild,0.007225
+40,50,Male,Multiracial or Other,Opp-sex partner,0.189302
+40,50,Male,Multiracial or Other,Opp-sex spouse,0.082897
+40,50,Male,Multiracial or Other,Other nonrelative,0.168580
+40,50,Male,Multiracial or Other,Other relative,0.052276
+40,50,Male,Multiracial or Other,Parent,0.009872
+40,50,Male,Multiracial or Other,Parent-in-law,0.002923
+40,50,Male,Multiracial or Other,Roommate,0.134038
+40,50,Male,Multiracial or Other,Same-sex partner,0.005020
+40,50,Male,Multiracial or Other,Same-sex spouse,0.002586
+40,50,Male,Multiracial or Other,Sibling,0.050481
+40,50,Male,Multiracial or Other,Stepchild,0.015223
+40,50,Male,NHOPI,Adopted child,0.006756
+40,50,Male,NHOPI,Biological child,0.251253
+40,50,Male,NHOPI,Child-in-law,0.046315
+40,50,Male,NHOPI,Foster child,0.000000
+40,50,Male,NHOPI,Grandchild,0.008972
+40,50,Male,NHOPI,Opp-sex partner,0.153825
+40,50,Male,NHOPI,Opp-sex spouse,0.094078
+40,50,Male,NHOPI,Other nonrelative,0.129525
+40,50,Male,NHOPI,Other relative,0.064879
+40,50,Male,NHOPI,Parent,0.012105
+40,50,Male,NHOPI,Parent-in-law,0.003597
+40,50,Male,NHOPI,Roommate,0.137688
+40,50,Male,NHOPI,Same-sex partner,0.006215
+40,50,Male,NHOPI,Same-sex spouse,0.003196
+40,50,Male,NHOPI,Sibling,0.062683
+40,50,Male,NHOPI,Stepchild,0.018912
+40,50,Male,White,Adopted child,0.008196
+40,50,Male,White,Biological child,0.271880
+40,50,Male,White,Child-in-law,0.055078
+40,50,Male,White,Foster child,0.000000
+40,50,Male,White,Grandchild,0.009666
+40,50,Male,White,Opp-sex partner,0.164499
+40,50,Male,White,Opp-sex spouse,0.091452
+40,50,Male,White,Other nonrelative,0.128854
+40,50,Male,White,Other relative,0.047897
+40,50,Male,White,Parent,0.009662
+40,50,Male,White,Parent-in-law,0.002856
+40,50,Male,White,Roommate,0.126911
+40,50,Male,White,Same-sex partner,0.006057
+40,50,Male,White,Same-sex spouse,0.003265
+40,50,Male,White,Sibling,0.050491
+40,50,Male,White,Stepchild,0.023238
+50,60,Female,AIAN,Adopted child,0.003345
+50,60,Female,AIAN,Biological child,0.268624
+50,60,Female,AIAN,Child-in-law,0.014626
+50,60,Female,AIAN,Foster child,0.000000
+50,60,Female,AIAN,Grandchild,0.001008
+50,60,Female,AIAN,Opp-sex partner,0.094372
+50,60,Female,AIAN,Opp-sex spouse,0.131778
+50,60,Female,AIAN,Other nonrelative,0.110040
+50,60,Female,AIAN,Other relative,0.062411
+50,60,Female,AIAN,Parent,0.104944
+50,60,Female,AIAN,Parent-in-law,0.028947
+50,60,Female,AIAN,Roommate,0.092146
+50,60,Female,AIAN,Same-sex partner,0.003826
+50,60,Female,AIAN,Same-sex spouse,0.004985
+50,60,Female,AIAN,Sibling,0.071718
+50,60,Female,AIAN,Stepchild,0.007230
+50,60,Female,Asian,Adopted child,0.003750
+50,60,Female,Asian,Biological child,0.057051
+50,60,Female,Asian,Child-in-law,0.016392
+50,60,Female,Asian,Foster child,0.000000
+50,60,Female,Asian,Grandchild,0.001133
+50,60,Female,Asian,Opp-sex partner,0.066047
+50,60,Female,Asian,Opp-sex spouse,0.235556
+50,60,Female,Asian,Other nonrelative,0.138295
+50,60,Female,Asian,Other relative,0.066392
+50,60,Female,Asian,Parent,0.172475
+50,60,Female,Asian,Parent-in-law,0.061101
+50,60,Female,Asian,Roommate,0.096772
+50,60,Female,Asian,Same-sex partner,0.004288
+50,60,Female,Asian,Same-sex spouse,0.005598
+50,60,Female,Asian,Sibling,0.067040
+50,60,Female,Asian,Stepchild,0.008113
+50,60,Female,Black,Adopted child,0.002572
+50,60,Female,Black,Biological child,0.182767
+50,60,Female,Black,Child-in-law,0.011255
+50,60,Female,Black,Foster child,0.000000
+50,60,Female,Black,Grandchild,0.000770
+50,60,Female,Black,Opp-sex partner,0.083102
+50,60,Female,Black,Opp-sex spouse,0.119533
+50,60,Female,Black,Other nonrelative,0.113021
+50,60,Female,Black,Other relative,0.097330
+50,60,Female,Black,Parent,0.163537
+50,60,Female,Black,Parent-in-law,0.022068
+50,60,Female,Black,Roommate,0.081429
+50,60,Female,Black,Same-sex partner,0.002943
+50,60,Female,Black,Same-sex spouse,0.003815
+50,60,Female,Black,Sibling,0.110313
+50,60,Female,Black,Stepchild,0.005546
+50,60,Female,Latino,Adopted child,0.002770
+50,60,Female,Latino,Biological child,0.109430
+50,60,Female,Latino,Child-in-law,0.012119
+50,60,Female,Latino,Foster child,0.000000
+50,60,Female,Latino,Grandchild,0.000831
+50,60,Female,Latino,Opp-sex partner,0.073921
+50,60,Female,Latino,Opp-sex spouse,0.147012
+50,60,Female,Latino,Other nonrelative,0.114998
+50,60,Female,Latino,Other relative,0.088085
+50,60,Female,Latino,Parent,0.198238
+50,60,Female,Latino,Parent-in-law,0.043691
+50,60,Female,Latino,Roommate,0.110029
+50,60,Female,Latino,Same-sex partner,0.003170
+50,60,Female,Latino,Same-sex spouse,0.004115
+50,60,Female,Latino,Sibling,0.085613
+50,60,Female,Latino,Stepchild,0.005978
+50,60,Female,Multiracial or Other,Adopted child,0.003147
+50,60,Female,Multiracial or Other,Biological child,0.208392
+50,60,Female,Multiracial or Other,Child-in-law,0.013764
+50,60,Female,Multiracial or Other,Foster child,0.000000
+50,60,Female,Multiracial or Other,Grandchild,0.000947
+50,60,Female,Multiracial or Other,Opp-sex partner,0.088757
+50,60,Female,Multiracial or Other,Opp-sex spouse,0.132757
+50,60,Female,Multiracial or Other,Other nonrelative,0.126039
+50,60,Female,Multiracial or Other,Other relative,0.058687
+50,60,Female,Multiracial or Other,Parent,0.098561
+50,60,Female,Multiracial or Other,Parent-in-law,0.027189
+50,60,Female,Multiracial or Other,Roommate,0.159222
+50,60,Female,Multiracial or Other,Same-sex partner,0.003600
+50,60,Female,Multiracial or Other,Same-sex spouse,0.004686
+50,60,Female,Multiracial or Other,Sibling,0.067452
+50,60,Female,Multiracial or Other,Stepchild,0.006800
+50,60,Female,NHOPI,Adopted child,0.003781
+50,60,Female,NHOPI,Biological child,0.172149
+50,60,Female,NHOPI,Child-in-law,0.016527
+50,60,Female,NHOPI,Foster child,0.000000
+50,60,Female,NHOPI,Grandchild,0.001142
+50,60,Female,NHOPI,Opp-sex partner,0.106758
+50,60,Female,NHOPI,Opp-sex spouse,0.149244
+50,60,Female,NHOPI,Other nonrelative,0.124434
+50,60,Female,NHOPI,Other relative,0.070624
+50,60,Female,NHOPI,Parent,0.119023
+50,60,Female,NHOPI,Parent-in-law,0.032826
+50,60,Female,NHOPI,Roommate,0.104218
+50,60,Female,NHOPI,Same-sex partner,0.004323
+50,60,Female,NHOPI,Same-sex spouse,0.005645
+50,60,Female,NHOPI,Sibling,0.081126
+50,60,Female,NHOPI,Stepchild,0.008180
+50,60,Female,White,Adopted child,0.004168
+50,60,Female,White,Biological child,0.189824
+50,60,Female,White,Child-in-law,0.017617
+50,60,Female,White,Foster child,0.000000
+50,60,Female,White,Grandchild,0.001377
+50,60,Female,White,Opp-sex partner,0.122846
+50,60,Female,White,Opp-sex spouse,0.147770
+50,60,Female,White,Other nonrelative,0.127681
+50,60,Female,White,Other relative,0.062807
+50,60,Female,White,Parent,0.091720
+50,60,Female,White,Parent-in-law,0.031594
+50,60,Female,White,Roommate,0.107128
+50,60,Female,White,Same-sex partner,0.005008
+50,60,Female,White,Same-sex spouse,0.006202
+50,60,Female,White,Sibling,0.075579
+50,60,Female,White,Stepchild,0.008679
+50,60,Male,AIAN,Adopted child,0.005264
+50,60,Male,AIAN,Biological child,0.193614
+50,60,Male,AIAN,Child-in-law,0.024439
+50,60,Male,AIAN,Foster child,0.000000
+50,60,Male,AIAN,Grandchild,0.000721
+50,60,Male,AIAN,Opp-sex partner,0.122445
+50,60,Male,AIAN,Opp-sex spouse,0.121115
+50,60,Male,AIAN,Other nonrelative,0.156620
+50,60,Male,AIAN,Other relative,0.074473
+50,60,Male,AIAN,Parent,0.046866
+50,60,Male,AIAN,Parent-in-law,0.014165
+50,60,Male,AIAN,Roommate,0.125905
+50,60,Male,AIAN,Same-sex partner,0.006318
+50,60,Male,AIAN,Same-sex spouse,0.004794
+50,60,Male,AIAN,Sibling,0.094138
+50,60,Male,AIAN,Stepchild,0.009123
+50,60,Male,Asian,Adopted child,0.002854
+50,60,Male,Asian,Biological child,0.082208
+50,60,Male,Asian,Child-in-law,0.013239
+50,60,Male,Asian,Foster child,0.000000
+50,60,Male,Asian,Grandchild,0.000399
+50,60,Male,Asian,Opp-sex partner,0.066622
+50,60,Male,Asian,Opp-sex spouse,0.155625
+50,60,Male,Asian,Other nonrelative,0.127798
+50,60,Male,Asian,Other relative,0.107890
+50,60,Male,Asian,Parent,0.161380
+50,60,Male,Asian,Parent-in-law,0.007956
+50,60,Male,Asian,Roommate,0.141257
+50,60,Male,Asian,Same-sex partner,0.003423
+50,60,Male,Asian,Same-sex spouse,0.002626
+50,60,Male,Asian,Sibling,0.121757
+50,60,Male,Asian,Stepchild,0.004967
+50,60,Male,Black,Adopted child,0.002667
+50,60,Male,Black,Biological child,0.196604
+50,60,Male,Black,Child-in-law,0.017884
+50,60,Male,Black,Foster child,0.000000
+50,60,Male,Black,Grandchild,0.000374
+50,60,Male,Black,Opp-sex partner,0.115342
+50,60,Male,Black,Opp-sex spouse,0.148395
+50,60,Male,Black,Other nonrelative,0.146170
+50,60,Male,Black,Other relative,0.098059
+50,60,Male,Black,Parent,0.034951
+50,60,Male,Black,Parent-in-law,0.007474
+50,60,Male,Black,Roommate,0.102078
+50,60,Male,Black,Same-sex partner,0.003198
+50,60,Male,Black,Same-sex spouse,0.002458
+50,60,Male,Black,Sibling,0.119702
+50,60,Male,Black,Stepchild,0.004644
+50,60,Male,Latino,Adopted child,0.006525
+50,60,Male,Latino,Biological child,0.113000
+50,60,Male,Latino,Child-in-law,0.023369
+50,60,Male,Latino,Foster child,0.000000
+50,60,Male,Latino,Grandchild,0.000890
+50,60,Male,Latino,Opp-sex partner,0.094754
+50,60,Male,Latino,Opp-sex spouse,0.107374
+50,60,Male,Latino,Other nonrelative,0.184358
+50,60,Male,Latino,Other relative,0.095482
+50,60,Male,Latino,Parent,0.075498
+50,60,Male,Latino,Parent-in-law,0.017416
+50,60,Male,Latino,Roommate,0.161436
+50,60,Male,Latino,Same-sex partner,0.007833
+50,60,Male,Latino,Same-sex spouse,0.005928
+50,60,Male,Latino,Sibling,0.094838
+50,60,Male,Latino,Stepchild,0.011299
+50,60,Male,Multiracial or Other,Adopted child,0.005274
+50,60,Male,Multiracial or Other,Biological child,0.200843
+50,60,Male,Multiracial or Other,Child-in-law,0.024487
+50,60,Male,Multiracial or Other,Foster child,0.000000
+50,60,Male,Multiracial or Other,Grandchild,0.000723
+50,60,Male,Multiracial or Other,Opp-sex partner,0.101475
+50,60,Male,Multiracial or Other,Opp-sex spouse,0.121347
+50,60,Male,Multiracial or Other,Other nonrelative,0.169345
+50,60,Male,Multiracial or Other,Other relative,0.074618
+50,60,Male,Multiracial or Other,Parent,0.046953
+50,60,Male,Multiracial or Other,Parent-in-law,0.014191
+50,60,Male,Multiracial or Other,Roommate,0.126150
+50,60,Male,Multiracial or Other,Same-sex partner,0.006330
+50,60,Male,Multiracial or Other,Same-sex spouse,0.004803
+50,60,Male,Multiracial or Other,Sibling,0.094321
+50,60,Male,Multiracial or Other,Stepchild,0.009141
+50,60,Male,NHOPI,Adopted child,0.005264
+50,60,Male,NHOPI,Biological child,0.193614
+50,60,Male,NHOPI,Child-in-law,0.024439
+50,60,Male,NHOPI,Foster child,0.000000
+50,60,Male,NHOPI,Grandchild,0.000721
+50,60,Male,NHOPI,Opp-sex partner,0.122445
+50,60,Male,NHOPI,Opp-sex spouse,0.121115
+50,60,Male,NHOPI,Other nonrelative,0.156620
+50,60,Male,NHOPI,Other relative,0.074473
+50,60,Male,NHOPI,Parent,0.046866
+50,60,Male,NHOPI,Parent-in-law,0.014165
+50,60,Male,NHOPI,Roommate,0.125905
+50,60,Male,NHOPI,Same-sex partner,0.006318
+50,60,Male,NHOPI,Same-sex spouse,0.004794
+50,60,Male,NHOPI,Sibling,0.094138
+50,60,Male,NHOPI,Stepchild,0.009123
+50,60,Male,White,Adopted child,0.007008
+50,60,Male,White,Biological child,0.214249
+50,60,Male,White,Child-in-law,0.026225
+50,60,Male,White,Foster child,0.000000
+50,60,Male,White,Grandchild,0.000574
+50,60,Male,White,Opp-sex partner,0.135341
+50,60,Male,White,Opp-sex spouse,0.114414
+50,60,Male,White,Other nonrelative,0.154276
+50,60,Male,White,Other relative,0.062091
+50,60,Male,White,Parent,0.038845
+50,60,Male,White,Parent-in-law,0.013808
+50,60,Male,White,Roommate,0.124673
+50,60,Male,White,Same-sex partner,0.006911
+50,60,Male,White,Same-sex spouse,0.004700
+50,60,Male,White,Sibling,0.086545
+50,60,Male,White,Stepchild,0.010339
+60,70,Female,AIAN,Adopted child,0.001222
+60,70,Female,AIAN,Biological child,0.080141
+60,70,Female,AIAN,Child-in-law,0.007329
+60,70,Female,AIAN,Foster child,0.000000
+60,70,Female,AIAN,Grandchild,0.000000
+60,70,Female,AIAN,Opp-sex partner,0.059066
+60,70,Female,AIAN,Opp-sex spouse,0.170234
+60,70,Female,AIAN,Other nonrelative,0.122970
+60,70,Female,AIAN,Other relative,0.071192
+60,70,Female,AIAN,Parent,0.223255
+60,70,Female,AIAN,Parent-in-law,0.083292
+60,70,Female,AIAN,Roommate,0.079363
+60,70,Female,AIAN,Same-sex partner,0.002405
+60,70,Female,AIAN,Same-sex spouse,0.004483
+60,70,Female,AIAN,Sibling,0.093039
+60,70,Female,AIAN,Stepchild,0.002009
+60,70,Female,Asian,Adopted child,0.000406
+60,70,Female,Asian,Biological child,0.025035
+60,70,Female,Asian,Child-in-law,0.002402
+60,70,Female,Asian,Foster child,0.000000
+60,70,Female,Asian,Grandchild,0.000000
+60,70,Female,Asian,Opp-sex partner,0.018839
+60,70,Female,Asian,Opp-sex spouse,0.135558
+60,70,Female,Asian,Other nonrelative,0.100912
+60,70,Female,Asian,Other relative,0.073592
+60,70,Female,Asian,Parent,0.318083
+60,70,Female,Asian,Parent-in-law,0.172073
+60,70,Female,Asian,Roommate,0.093206
+60,70,Female,Asian,Same-sex partner,0.000799
+60,70,Female,Asian,Same-sex spouse,0.001368
+60,70,Female,Asian,Sibling,0.057059
+60,70,Female,Asian,Stepchild,0.000668
+60,70,Female,Black,Adopted child,0.000947
+60,70,Female,Black,Biological child,0.085845
+60,70,Female,Black,Child-in-law,0.005668
+60,70,Female,Black,Foster child,0.000000
+60,70,Female,Black,Grandchild,0.000000
+60,70,Female,Black,Opp-sex partner,0.036568
+60,70,Female,Black,Opp-sex spouse,0.149629
+60,70,Female,Black,Other nonrelative,0.091265
+60,70,Female,Black,Other relative,0.064467
+60,70,Female,Black,Parent,0.298283
+60,70,Female,Black,Parent-in-law,0.056716
+60,70,Female,Black,Roommate,0.079844
+60,70,Female,Black,Same-sex partner,0.001864
+60,70,Female,Black,Same-sex spouse,0.003432
+60,70,Female,Black,Sibling,0.123917
+60,70,Female,Black,Stepchild,0.001556
+60,70,Female,Latino,Adopted child,0.000884
+60,70,Female,Latino,Biological child,0.044846
+60,70,Female,Latino,Child-in-law,0.005290
+60,70,Female,Latino,Foster child,0.000000
+60,70,Female,Latino,Grandchild,0.000000
+60,70,Female,Latino,Opp-sex partner,0.038148
+60,70,Female,Latino,Opp-sex spouse,0.166593
+60,70,Female,Latino,Other nonrelative,0.105591
+60,70,Female,Latino,Other relative,0.110602
+60,70,Female,Latino,Parent,0.274134
+60,70,Female,Latino,Parent-in-law,0.112401
+60,70,Female,Latino,Roommate,0.063789
+60,70,Female,Latino,Same-sex partner,0.001740
+60,70,Female,Latino,Same-sex spouse,0.003193
+60,70,Female,Latino,Sibling,0.071335
+60,70,Female,Latino,Stepchild,0.001454
+60,70,Female,Multiracial or Other,Adopted child,0.001133
+60,70,Female,Multiracial or Other,Biological child,0.074186
+60,70,Female,Multiracial or Other,Child-in-law,0.006797
+60,70,Female,Multiracial or Other,Foster child,0.000000
+60,70,Female,Multiracial or Other,Grandchild,0.000000
+60,70,Female,Multiracial or Other,Opp-sex partner,0.054719
+60,70,Female,Multiracial or Other,Opp-sex spouse,0.107703
+60,70,Female,Multiracial or Other,Other nonrelative,0.113842
+60,70,Female,Multiracial or Other,Other relative,0.065888
+60,70,Female,Multiracial or Other,Parent,0.330857
+60,70,Female,Multiracial or Other,Parent-in-law,0.077016
+60,70,Female,Multiracial or Other,Roommate,0.073499
+60,70,Female,Multiracial or Other,Same-sex partner,0.002232
+60,70,Female,Multiracial or Other,Same-sex spouse,0.004146
+60,70,Female,Multiracial or Other,Sibling,0.086118
+60,70,Female,Multiracial or Other,Stepchild,0.001864
+60,70,Female,NHOPI,Adopted child,0.001222
+60,70,Female,NHOPI,Biological child,0.080141
+60,70,Female,NHOPI,Child-in-law,0.007329
+60,70,Female,NHOPI,Foster child,0.000000
+60,70,Female,NHOPI,Grandchild,0.000000
+60,70,Female,NHOPI,Opp-sex partner,0.059066
+60,70,Female,NHOPI,Opp-sex spouse,0.170234
+60,70,Female,NHOPI,Other nonrelative,0.122970
+60,70,Female,NHOPI,Other relative,0.071192
+60,70,Female,NHOPI,Parent,0.223255
+60,70,Female,NHOPI,Parent-in-law,0.083292
+60,70,Female,NHOPI,Roommate,0.079363
+60,70,Female,NHOPI,Same-sex partner,0.002405
+60,70,Female,NHOPI,Same-sex spouse,0.004483
+60,70,Female,NHOPI,Sibling,0.093039
+60,70,Female,NHOPI,Stepchild,0.002009
+60,70,Female,White,Adopted child,0.001392
+60,70,Female,White,Biological child,0.092226
+60,70,Female,White,Child-in-law,0.009644
+60,70,Female,White,Foster child,0.000000
+60,70,Female,White,Grandchild,0.000000
+60,70,Female,White,Opp-sex partner,0.071809
+60,70,Female,White,Opp-sex spouse,0.178404
+60,70,Female,White,Other nonrelative,0.135292
+60,70,Female,White,Other relative,0.063527
+60,70,Female,White,Parent,0.187944
+60,70,Female,White,Parent-in-law,0.072964
+60,70,Female,White,Roommate,0.079709
+60,70,Female,White,Same-sex partner,0.002740
+60,70,Female,White,Same-sex spouse,0.005050
+60,70,Female,White,Sibling,0.097009
+60,70,Female,White,Stepchild,0.002289
+60,70,Male,AIAN,Adopted child,0.002698
+60,70,Male,AIAN,Biological child,0.095980
+60,70,Male,AIAN,Child-in-law,0.015835
+60,70,Male,AIAN,Foster child,0.000000
+60,70,Male,AIAN,Grandchild,0.000000
+60,70,Male,AIAN,Opp-sex partner,0.094992
+60,70,Male,AIAN,Opp-sex spouse,0.158723
+60,70,Male,AIAN,Other nonrelative,0.152919
+60,70,Male,AIAN,Other relative,0.076900
+60,70,Male,AIAN,Parent,0.115711
+60,70,Male,AIAN,Parent-in-law,0.049995
+60,70,Male,AIAN,Roommate,0.114749
+60,70,Male,AIAN,Same-sex partner,0.006664
+60,70,Male,AIAN,Same-sex spouse,0.003354
+60,70,Male,AIAN,Sibling,0.107045
+60,70,Male,AIAN,Stepchild,0.004436
+60,70,Male,Asian,Adopted child,0.001583
+60,70,Male,Asian,Biological child,0.056652
+60,70,Male,Asian,Child-in-law,0.009276
+60,70,Male,Asian,Foster child,0.000000
+60,70,Male,Asian,Grandchild,0.000000
+60,70,Male,Asian,Opp-sex partner,0.055825
+60,70,Male,Asian,Opp-sex spouse,0.092575
+60,70,Male,Asian,Other nonrelative,0.120359
+60,70,Male,Asian,Other relative,0.109992
+60,70,Male,Asian,Parent,0.313238
+60,70,Male,Asian,Parent-in-law,0.101250
+60,70,Male,Asian,Roommate,0.067533
+60,70,Male,Asian,Same-sex partner,0.003888
+60,70,Male,Asian,Same-sex spouse,0.002000
+60,70,Male,Asian,Sibling,0.063227
+60,70,Male,Asian,Stepchild,0.002603
+60,70,Male,Black,Adopted child,0.001293
+60,70,Male,Black,Biological child,0.099734
+60,70,Male,Black,Child-in-law,0.007574
+60,70,Male,Black,Foster child,0.000000
+60,70,Male,Black,Grandchild,0.000000
+60,70,Male,Black,Opp-sex partner,0.095273
+60,70,Male,Black,Opp-sex spouse,0.160839
+60,70,Male,Black,Other nonrelative,0.144117
+60,70,Male,Black,Other relative,0.118704
+60,70,Male,Black,Parent,0.074681
+60,70,Male,Black,Parent-in-law,0.024825
+60,70,Male,Black,Roommate,0.109180
+60,70,Male,Black,Same-sex partner,0.003168
+60,70,Male,Black,Same-sex spouse,0.001649
+60,70,Male,Black,Sibling,0.156836
+60,70,Male,Black,Stepchild,0.002127
+60,70,Male,Latino,Adopted child,0.001625
+60,70,Male,Latino,Biological child,0.069744
+60,70,Male,Latino,Child-in-law,0.009525
+60,70,Male,Latino,Foster child,0.000000
+60,70,Male,Latino,Grandchild,0.000000
+60,70,Male,Latino,Opp-sex partner,0.056370
+60,70,Male,Latino,Opp-sex spouse,0.107339
+60,70,Male,Latino,Other nonrelative,0.134567
+60,70,Male,Latino,Other relative,0.104319
+60,70,Male,Latino,Parent,0.176742
+60,70,Male,Latino,Parent-in-law,0.092400
+60,70,Male,Latino,Roommate,0.131513
+60,70,Male,Latino,Same-sex partner,0.003993
+60,70,Male,Latino,Same-sex spouse,0.002051
+60,70,Male,Latino,Sibling,0.107139
+60,70,Male,Latino,Stepchild,0.002672
+60,70,Male,Multiracial or Other,Adopted child,0.002698
+60,70,Male,Multiracial or Other,Biological child,0.095980
+60,70,Male,Multiracial or Other,Child-in-law,0.015835
+60,70,Male,Multiracial or Other,Foster child,0.000000
+60,70,Male,Multiracial or Other,Grandchild,0.000000
+60,70,Male,Multiracial or Other,Opp-sex partner,0.094992
+60,70,Male,Multiracial or Other,Opp-sex spouse,0.158723
+60,70,Male,Multiracial or Other,Other nonrelative,0.152919
+60,70,Male,Multiracial or Other,Other relative,0.076900
+60,70,Male,Multiracial or Other,Parent,0.115711
+60,70,Male,Multiracial or Other,Parent-in-law,0.049995
+60,70,Male,Multiracial or Other,Roommate,0.114749
+60,70,Male,Multiracial or Other,Same-sex partner,0.006664
+60,70,Male,Multiracial or Other,Same-sex spouse,0.003354
+60,70,Male,Multiracial or Other,Sibling,0.107045
+60,70,Male,Multiracial or Other,Stepchild,0.004436
+60,70,Male,NHOPI,Adopted child,0.002698
+60,70,Male,NHOPI,Biological child,0.095980
+60,70,Male,NHOPI,Child-in-law,0.015835
+60,70,Male,NHOPI,Foster child,0.000000
+60,70,Male,NHOPI,Grandchild,0.000000
+60,70,Male,NHOPI,Opp-sex partner,0.094992
+60,70,Male,NHOPI,Opp-sex spouse,0.158723
+60,70,Male,NHOPI,Other nonrelative,0.152919
+60,70,Male,NHOPI,Other relative,0.076900
+60,70,Male,NHOPI,Parent,0.115711
+60,70,Male,NHOPI,Parent-in-law,0.049995
+60,70,Male,NHOPI,Roommate,0.114749
+60,70,Male,NHOPI,Same-sex partner,0.006664
+60,70,Male,NHOPI,Same-sex spouse,0.003354
+60,70,Male,NHOPI,Sibling,0.107045
+60,70,Male,NHOPI,Stepchild,0.004436
+60,70,Male,White,Adopted child,0.003216
+60,70,Male,White,Biological child,0.108443
+60,70,Male,White,Child-in-law,0.019847
+60,70,Male,White,Foster child,0.000000
+60,70,Male,White,Grandchild,0.000000
+60,70,Male,White,Opp-sex partner,0.109433
+60,70,Male,White,Opp-sex spouse,0.170508
+60,70,Male,White,Other nonrelative,0.158896
+60,70,Male,White,Other relative,0.059269
+60,70,Male,White,Parent,0.096639
+60,70,Male,White,Parent-in-law,0.044143
+60,70,Male,White,Roommate,0.111074
+60,70,Male,White,Same-sex partner,0.008232
+60,70,Male,White,Same-sex spouse,0.003983
+60,70,Male,White,Sibling,0.101031
+60,70,Male,White,Stepchild,0.005288
+70,80,Female,AIAN,Adopted child,0.000090
+70,80,Female,AIAN,Biological child,0.013670
+70,80,Female,AIAN,Child-in-law,0.002600
+70,80,Female,AIAN,Foster child,0.000000
+70,80,Female,AIAN,Grandchild,0.000000
+70,80,Female,AIAN,Opp-sex partner,0.031066
+70,80,Female,AIAN,Opp-sex spouse,0.191664
+70,80,Female,AIAN,Other nonrelative,0.087297
+70,80,Female,AIAN,Other relative,0.075873
+70,80,Female,AIAN,Parent,0.345282
+70,80,Female,AIAN,Parent-in-law,0.141391
+70,80,Female,AIAN,Roommate,0.042111
+70,80,Female,AIAN,Same-sex partner,0.001137
+70,80,Female,AIAN,Same-sex spouse,0.003161
+70,80,Female,AIAN,Sibling,0.064446
+70,80,Female,AIAN,Stepchild,0.000211
+70,80,Female,Asian,Adopted child,0.000057
+70,80,Female,Asian,Biological child,0.008350
+70,80,Female,Asian,Child-in-law,0.001649
+70,80,Female,Asian,Foster child,0.000000
+70,80,Female,Asian,Grandchild,0.000000
+70,80,Female,Asian,Opp-sex partner,0.019285
+70,80,Female,Asian,Opp-sex spouse,0.087046
+70,80,Female,Asian,Other nonrelative,0.053728
+70,80,Female,Asian,Other relative,0.105186
+70,80,Female,Asian,Parent,0.497206
+70,80,Female,Asian,Parent-in-law,0.159095
+70,80,Female,Asian,Roommate,0.026040
+70,80,Female,Asian,Same-sex partner,0.000721
+70,80,Female,Asian,Same-sex spouse,0.002004
+70,80,Female,Asian,Sibling,0.039498
+70,80,Female,Asian,Stepchild,0.000134
+70,80,Female,Black,Adopted child,0.000083
+70,80,Female,Black,Biological child,0.012410
+70,80,Female,Black,Child-in-law,0.002374
+70,80,Female,Black,Foster child,0.000000
+70,80,Female,Black,Grandchild,0.000000
+70,80,Female,Black,Opp-sex partner,0.028275
+70,80,Female,Black,Opp-sex spouse,0.147641
+70,80,Female,Black,Other nonrelative,0.077488
+70,80,Female,Black,Other relative,0.114838
+70,80,Female,Black,Parent,0.392782
+70,80,Female,Black,Parent-in-law,0.108948
+70,80,Female,Black,Roommate,0.038303
+70,80,Female,Black,Same-sex partner,0.001038
+70,80,Female,Black,Same-sex spouse,0.002887
+70,80,Female,Black,Sibling,0.072742
+70,80,Female,Black,Stepchild,0.000193
+70,80,Female,Latino,Adopted child,0.000063
+70,80,Female,Latino,Biological child,0.009327
+70,80,Female,Latino,Child-in-law,0.001823
+70,80,Female,Latino,Foster child,0.000000
+70,80,Female,Latino,Grandchild,0.000000
+70,80,Female,Latino,Opp-sex partner,0.021449
+70,80,Female,Latino,Opp-sex spouse,0.129830
+70,80,Female,Latino,Other nonrelative,0.097110
+70,80,Female,Latino,Other relative,0.091929
+70,80,Female,Latino,Parent,0.391869
+70,80,Female,Latino,Parent-in-law,0.168880
+70,80,Female,Latino,Roommate,0.028992
+70,80,Female,Latino,Same-sex partner,0.000797
+70,80,Female,Latino,Same-sex spouse,0.002217
+70,80,Female,Latino,Sibling,0.055565
+70,80,Female,Latino,Stepchild,0.000148
+70,80,Female,Multiracial or Other,Adopted child,0.000080
+70,80,Female,Multiracial or Other,Biological child,0.011996
+70,80,Female,Multiracial or Other,Child-in-law,0.002301
+70,80,Female,Multiracial or Other,Foster child,0.000000
+70,80,Female,Multiracial or Other,Grandchild,0.000000
+70,80,Female,Multiracial or Other,Opp-sex partner,0.027359
+70,80,Female,Multiracial or Other,Opp-sex spouse,0.168179
+70,80,Female,Multiracial or Other,Other nonrelative,0.076735
+70,80,Female,Multiracial or Other,Other relative,0.066623
+70,80,Female,Multiracial or Other,Parent,0.425056
+70,80,Female,Multiracial or Other,Parent-in-law,0.124031
+70,80,Female,Multiracial or Other,Roommate,0.037054
+70,80,Female,Multiracial or Other,Same-sex partner,0.001006
+70,80,Female,Multiracial or Other,Same-sex spouse,0.002797
+70,80,Female,Multiracial or Other,Sibling,0.056596
+70,80,Female,Multiracial or Other,Stepchild,0.000187
+70,80,Female,NHOPI,Adopted child,0.000090
+70,80,Female,NHOPI,Biological child,0.013670
+70,80,Female,NHOPI,Child-in-law,0.002600
+70,80,Female,NHOPI,Foster child,0.000000
+70,80,Female,NHOPI,Grandchild,0.000000
+70,80,Female,NHOPI,Opp-sex partner,0.031066
+70,80,Female,NHOPI,Opp-sex spouse,0.191664
+70,80,Female,NHOPI,Other nonrelative,0.087297
+70,80,Female,NHOPI,Other relative,0.075873
+70,80,Female,NHOPI,Parent,0.345282
+70,80,Female,NHOPI,Parent-in-law,0.141391
+70,80,Female,NHOPI,Roommate,0.042111
+70,80,Female,NHOPI,Same-sex partner,0.001137
+70,80,Female,NHOPI,Same-sex spouse,0.003161
+70,80,Female,NHOPI,Sibling,0.064446
+70,80,Female,NHOPI,Stepchild,0.000211
+70,80,Female,White,Adopted child,0.000093
+70,80,Female,White,Biological child,0.014704
+70,80,Female,White,Child-in-law,0.002682
+70,80,Female,White,Foster child,0.000000
+70,80,Female,White,Grandchild,0.000000
+70,80,Female,White,Opp-sex partner,0.039122
+70,80,Female,White,Opp-sex spouse,0.220565
+70,80,Female,White,Other nonrelative,0.085108
+70,80,Female,White,Other relative,0.065500
+70,80,Female,White,Parent,0.315012
+70,80,Female,White,Parent-in-law,0.141483
+70,80,Female,White,Roommate,0.042845
+70,80,Female,White,Same-sex partner,0.001173
+70,80,Female,White,Same-sex spouse,0.003261
+70,80,Female,White,Sibling,0.068233
+70,80,Female,White,Stepchild,0.000218
+70,80,Male,AIAN,Adopted child,0.000328
+70,80,Male,AIAN,Biological child,0.011841
+70,80,Male,AIAN,Child-in-law,0.011788
+70,80,Male,AIAN,Foster child,0.000000
+70,80,Male,AIAN,Grandchild,0.000000
+70,80,Male,AIAN,Opp-sex partner,0.067897
+70,80,Male,AIAN,Opp-sex spouse,0.159562
+70,80,Male,AIAN,Other nonrelative,0.129189
+70,80,Male,AIAN,Other relative,0.082687
+70,80,Male,AIAN,Parent,0.265603
+70,80,Male,AIAN,Parent-in-law,0.102812
+70,80,Male,AIAN,Roommate,0.078588
+70,80,Male,AIAN,Same-sex partner,0.004120
+70,80,Male,AIAN,Same-sex spouse,0.011452
+70,80,Male,AIAN,Sibling,0.073367
+70,80,Male,AIAN,Stepchild,0.000765
+70,80,Male,Asian,Adopted child,0.000162
+70,80,Male,Asian,Biological child,0.006020
+70,80,Male,Asian,Child-in-law,0.005799
+70,80,Male,Asian,Foster child,0.000000
+70,80,Male,Asian,Grandchild,0.000000
+70,80,Male,Asian,Opp-sex partner,0.033747
+70,80,Male,Asian,Opp-sex spouse,0.081247
+70,80,Male,Asian,Other nonrelative,0.064672
+70,80,Male,Asian,Other relative,0.041720
+70,80,Male,Asian,Parent,0.489619
+70,80,Male,Asian,Parent-in-law,0.192797
+70,80,Male,Asian,Roommate,0.039161
+70,80,Male,Asian,Same-sex partner,0.002039
+70,80,Male,Asian,Same-sex spouse,0.005668
+70,80,Male,Asian,Sibling,0.036970
+70,80,Male,Asian,Stepchild,0.000379
+70,80,Male,Black,Adopted child,0.000263
+70,80,Male,Black,Biological child,0.009568
+70,80,Male,Black,Child-in-law,0.009449
+70,80,Male,Black,Foster child,0.000000
+70,80,Male,Black,Grandchild,0.000000
+70,80,Male,Black,Opp-sex partner,0.054561
+70,80,Male,Black,Opp-sex spouse,0.189304
+70,80,Male,Black,Other nonrelative,0.145518
+70,80,Male,Black,Other relative,0.066688
+70,80,Male,Black,Parent,0.191724
+70,80,Male,Black,Parent-in-law,0.083218
+70,80,Male,Black,Roommate,0.063191
+70,80,Male,Black,Same-sex partner,0.003307
+70,80,Male,Black,Same-sex spouse,0.009193
+70,80,Male,Black,Sibling,0.173401
+70,80,Male,Black,Stepchild,0.000614
+70,80,Male,Latino,Adopted child,0.000268
+70,80,Male,Latino,Biological child,0.009738
+70,80,Male,Latino,Child-in-law,0.009624
+70,80,Male,Latino,Foster child,0.000000
+70,80,Male,Latino,Grandchild,0.000000
+70,80,Male,Latino,Opp-sex partner,0.055558
+70,80,Male,Latino,Opp-sex spouse,0.122900
+70,80,Male,Latino,Other nonrelative,0.129140
+70,80,Male,Latino,Other relative,0.067884
+70,80,Male,Latino,Parent,0.332939
+70,80,Male,Latino,Parent-in-law,0.134036
+70,80,Male,Latino,Roommate,0.064342
+70,80,Male,Latino,Same-sex partner,0.003368
+70,80,Male,Latino,Same-sex spouse,0.009362
+70,80,Male,Latino,Sibling,0.060215
+70,80,Male,Latino,Stepchild,0.000625
+70,80,Male,Multiracial or Other,Adopted child,0.000328
+70,80,Male,Multiracial or Other,Biological child,0.011841
+70,80,Male,Multiracial or Other,Child-in-law,0.011788
+70,80,Male,Multiracial or Other,Foster child,0.000000
+70,80,Male,Multiracial or Other,Grandchild,0.000000
+70,80,Male,Multiracial or Other,Opp-sex partner,0.067897
+70,80,Male,Multiracial or Other,Opp-sex spouse,0.159562
+70,80,Male,Multiracial or Other,Other nonrelative,0.129189
+70,80,Male,Multiracial or Other,Other relative,0.082687
+70,80,Male,Multiracial or Other,Parent,0.265603
+70,80,Male,Multiracial or Other,Parent-in-law,0.102812
+70,80,Male,Multiracial or Other,Roommate,0.078588
+70,80,Male,Multiracial or Other,Same-sex partner,0.004120
+70,80,Male,Multiracial or Other,Same-sex spouse,0.011452
+70,80,Male,Multiracial or Other,Sibling,0.073367
+70,80,Male,Multiracial or Other,Stepchild,0.000765
+70,80,Male,NHOPI,Adopted child,0.000328
+70,80,Male,NHOPI,Biological child,0.011841
+70,80,Male,NHOPI,Child-in-law,0.011788
+70,80,Male,NHOPI,Foster child,0.000000
+70,80,Male,NHOPI,Grandchild,0.000000
+70,80,Male,NHOPI,Opp-sex partner,0.067897
+70,80,Male,NHOPI,Opp-sex spouse,0.159562
+70,80,Male,NHOPI,Other nonrelative,0.129189
+70,80,Male,NHOPI,Other relative,0.082687
+70,80,Male,NHOPI,Parent,0.265603
+70,80,Male,NHOPI,Parent-in-law,0.102812
+70,80,Male,NHOPI,Roommate,0.078588
+70,80,Male,NHOPI,Same-sex partner,0.004120
+70,80,Male,NHOPI,Same-sex spouse,0.011452
+70,80,Male,NHOPI,Sibling,0.073367
+70,80,Male,NHOPI,Stepchild,0.000765
+70,80,Male,White,Adopted child,0.000332
+70,80,Male,White,Biological child,0.011984
+70,80,Male,White,Child-in-law,0.011935
+70,80,Male,White,Foster child,0.000000
+70,80,Male,White,Grandchild,0.000000
+70,80,Male,White,Opp-sex partner,0.085069
+70,80,Male,White,Opp-sex spouse,0.166751
+70,80,Male,White,Other nonrelative,0.131019
+70,80,Male,White,Other relative,0.083728
+70,80,Male,White,Parent,0.245662
+70,80,Male,White,Parent-in-law,0.093583
+70,80,Male,White,Roommate,0.088635
+70,80,Male,White,Same-sex partner,0.004171
+70,80,Male,White,Same-sex spouse,0.011594
+70,80,Male,White,Sibling,0.064763
+70,80,Male,White,Stepchild,0.000774
+80,100,Female,AIAN,Adopted child,0.000000
+80,100,Female,AIAN,Biological child,0.000141
+80,100,Female,AIAN,Child-in-law,0.000546
+80,100,Female,AIAN,Foster child,0.000000
+80,100,Female,AIAN,Grandchild,0.000000
+80,100,Female,AIAN,Opp-sex partner,0.007636
+80,100,Female,AIAN,Opp-sex spouse,0.077349
+80,100,Female,AIAN,Other nonrelative,0.055496
+80,100,Female,AIAN,Other relative,0.084712
+80,100,Female,AIAN,Parent,0.510913
+80,100,Female,AIAN,Parent-in-law,0.209202
+80,100,Female,AIAN,Roommate,0.024784
+80,100,Female,AIAN,Same-sex partner,0.000606
+80,100,Female,AIAN,Same-sex spouse,0.001886
+80,100,Female,AIAN,Sibling,0.026729
+80,100,Female,AIAN,Stepchild,0.000000
+80,100,Female,Asian,Adopted child,0.000000
+80,100,Female,Asian,Biological child,0.000152
+80,100,Female,Asian,Child-in-law,0.000586
+80,100,Female,Asian,Foster child,0.000000
+80,100,Female,Asian,Grandchild,0.000000
+80,100,Female,Asian,Opp-sex partner,0.008166
+80,100,Female,Asian,Opp-sex spouse,0.083022
+80,100,Female,Asian,Other nonrelative,0.059539
+80,100,Female,Asian,Other relative,0.090993
+80,100,Female,Asian,Parent,0.429562
+80,100,Female,Asian,Parent-in-law,0.270000
+80,100,Female,Asian,Roommate,0.026600
+80,100,Female,Asian,Same-sex partner,0.000651
+80,100,Female,Asian,Same-sex spouse,0.002024
+80,100,Female,Asian,Sibling,0.028705
+80,100,Female,Asian,Stepchild,0.000000
+80,100,Female,Black,Adopted child,0.000000
+80,100,Female,Black,Biological child,0.000092
+80,100,Female,Black,Child-in-law,0.000355
+80,100,Female,Black,Foster child,0.000000
+80,100,Female,Black,Grandchild,0.000000
+80,100,Female,Black,Opp-sex partner,0.005113
+80,100,Female,Black,Opp-sex spouse,0.050347
+80,100,Female,Black,Other nonrelative,0.036256
+80,100,Female,Black,Other relative,0.158546
+80,100,Female,Black,Parent,0.593105
+80,100,Female,Black,Parent-in-law,0.121097
+80,100,Female,Black,Roommate,0.016139
+80,100,Female,Black,Same-sex partner,0.000394
+80,100,Female,Black,Same-sex spouse,0.001227
+80,100,Female,Black,Sibling,0.017328
+80,100,Female,Black,Stepchild,0.000000
+80,100,Female,Latino,Adopted child,0.000000
+80,100,Female,Latino,Biological child,0.000113
+80,100,Female,Latino,Child-in-law,0.000436
+80,100,Female,Latino,Foster child,0.000000
+80,100,Female,Latino,Grandchild,0.000000
+80,100,Female,Latino,Opp-sex partner,0.006188
+80,100,Female,Latino,Opp-sex spouse,0.061848
+80,100,Female,Latino,Other nonrelative,0.044452
+80,100,Female,Latino,Other relative,0.095585
+80,100,Female,Latino,Parent,0.564519
+80,100,Female,Latino,Parent-in-law,0.183712
+80,100,Female,Latino,Roommate,0.019822
+80,100,Female,Latino,Same-sex partner,0.000485
+80,100,Female,Latino,Same-sex spouse,0.001508
+80,100,Female,Latino,Sibling,0.021332
+80,100,Female,Latino,Stepchild,0.000000
+80,100,Female,Multiracial or Other,Adopted child,0.000000
+80,100,Female,Multiracial or Other,Biological child,0.000141
+80,100,Female,Multiracial or Other,Child-in-law,0.000546
+80,100,Female,Multiracial or Other,Foster child,0.000000
+80,100,Female,Multiracial or Other,Grandchild,0.000000
+80,100,Female,Multiracial or Other,Opp-sex partner,0.007636
+80,100,Female,Multiracial or Other,Opp-sex spouse,0.077349
+80,100,Female,Multiracial or Other,Other nonrelative,0.055496
+80,100,Female,Multiracial or Other,Other relative,0.084712
+80,100,Female,Multiracial or Other,Parent,0.510913
+80,100,Female,Multiracial or Other,Parent-in-law,0.209202
+80,100,Female,Multiracial or Other,Roommate,0.024784
+80,100,Female,Multiracial or Other,Same-sex partner,0.000606
+80,100,Female,Multiracial or Other,Same-sex spouse,0.001886
+80,100,Female,Multiracial or Other,Sibling,0.026729
+80,100,Female,Multiracial or Other,Stepchild,0.000000
+80,100,Female,NHOPI,Adopted child,0.000000
+80,100,Female,NHOPI,Biological child,0.000141
+80,100,Female,NHOPI,Child-in-law,0.000546
+80,100,Female,NHOPI,Foster child,0.000000
+80,100,Female,NHOPI,Grandchild,0.000000
+80,100,Female,NHOPI,Opp-sex partner,0.007636
+80,100,Female,NHOPI,Opp-sex spouse,0.077349
+80,100,Female,NHOPI,Other nonrelative,0.055496
+80,100,Female,NHOPI,Other relative,0.084712
+80,100,Female,NHOPI,Parent,0.510913
+80,100,Female,NHOPI,Parent-in-law,0.209202
+80,100,Female,NHOPI,Roommate,0.024784
+80,100,Female,NHOPI,Same-sex partner,0.000606
+80,100,Female,NHOPI,Same-sex spouse,0.001886
+80,100,Female,NHOPI,Sibling,0.026729
+80,100,Female,NHOPI,Stepchild,0.000000
+80,100,Female,White,Adopted child,0.000000
+80,100,Female,White,Biological child,0.000149
+80,100,Female,White,Child-in-law,0.000575
+80,100,Female,White,Foster child,0.000000
+80,100,Female,White,Grandchild,0.000000
+80,100,Female,White,Opp-sex partner,0.008403
+80,100,Female,White,Opp-sex spouse,0.089362
+80,100,Female,White,Other nonrelative,0.054571
+80,100,Female,White,Other relative,0.066817
+80,100,Female,White,Parent,0.503822
+80,100,Female,White,Parent-in-law,0.220013
+80,100,Female,White,Roommate,0.026941
+80,100,Female,White,Same-sex partner,0.000639
+80,100,Female,White,Same-sex spouse,0.001988
+80,100,Female,White,Sibling,0.026720
+80,100,Female,White,Stepchild,0.000000
+80,100,Male,AIAN,Adopted child,0.000000
+80,100,Male,AIAN,Biological child,0.000193
+80,100,Male,AIAN,Child-in-law,0.000745
+80,100,Male,AIAN,Foster child,0.000000
+80,100,Male,AIAN,Grandchild,0.000000
+80,100,Male,AIAN,Opp-sex partner,0.037303
+80,100,Male,AIAN,Opp-sex spouse,0.110464
+80,100,Male,AIAN,Other nonrelative,0.103910
+80,100,Male,AIAN,Other relative,0.061776
+80,100,Male,AIAN,Parent,0.416149
+80,100,Male,AIAN,Parent-in-law,0.204184
+80,100,Male,AIAN,Roommate,0.036731
+80,100,Male,AIAN,Same-sex partner,0.000828
+80,100,Male,AIAN,Same-sex spouse,0.002575
+80,100,Male,AIAN,Sibling,0.025142
+80,100,Male,AIAN,Stepchild,0.000000
+80,100,Male,Asian,Adopted child,0.000000
+80,100,Male,Asian,Biological child,0.000229
+80,100,Male,Asian,Child-in-law,0.000884
+80,100,Male,Asian,Foster child,0.000000
+80,100,Male,Asian,Grandchild,0.000000
+80,100,Male,Asian,Opp-sex partner,0.044402
+80,100,Male,Asian,Opp-sex spouse,0.131107
+80,100,Male,Asian,Other nonrelative,0.123447
+80,100,Male,Asian,Other relative,0.073036
+80,100,Male,Asian,Parent,0.307591
+80,100,Male,Asian,Parent-in-law,0.241886
+80,100,Male,Asian,Roommate,0.043602
+80,100,Male,Asian,Same-sex partner,0.000982
+80,100,Male,Asian,Same-sex spouse,0.003056
+80,100,Male,Asian,Sibling,0.029777
+80,100,Male,Asian,Stepchild,0.000000
+80,100,Male,Black,Adopted child,0.000000
+80,100,Male,Black,Biological child,0.000161
+80,100,Male,Black,Child-in-law,0.000622
+80,100,Male,Black,Foster child,0.000000
+80,100,Male,Black,Grandchild,0.000000
+80,100,Male,Black,Opp-sex partner,0.031001
+80,100,Male,Black,Opp-sex spouse,0.092136
+80,100,Male,Black,Other nonrelative,0.086564
+80,100,Male,Black,Other relative,0.051780
+80,100,Male,Black,Parent,0.512530
+80,100,Male,Black,Parent-in-law,0.170711
+80,100,Male,Black,Roommate,0.030631
+80,100,Male,Black,Same-sex partner,0.000691
+80,100,Male,Black,Same-sex spouse,0.002149
+80,100,Male,Black,Sibling,0.021026
+80,100,Male,Black,Stepchild,0.000000
+80,100,Male,Latino,Adopted child,0.000000
+80,100,Male,Latino,Biological child,0.000152
+80,100,Male,Latino,Child-in-law,0.000588
+80,100,Male,Latino,Foster child,0.000000
+80,100,Male,Latino,Grandchild,0.000000
+80,100,Male,Latino,Opp-sex partner,0.029294
+80,100,Male,Latino,Opp-sex spouse,0.087171
+80,100,Male,Latino,Other nonrelative,0.081865
+80,100,Male,Latino,Other relative,0.049072
+80,100,Male,Latino,Parent,0.444520
+80,100,Male,Latino,Parent-in-law,0.255762
+80,100,Male,Latino,Roommate,0.028979
+80,100,Male,Latino,Same-sex partner,0.000653
+80,100,Male,Latino,Same-sex spouse,0.002033
+80,100,Male,Latino,Sibling,0.019911
+80,100,Male,Latino,Stepchild,0.000000
+80,100,Male,Multiracial or Other,Adopted child,0.000000
+80,100,Male,Multiracial or Other,Biological child,0.000193
+80,100,Male,Multiracial or Other,Child-in-law,0.000745
+80,100,Male,Multiracial or Other,Foster child,0.000000
+80,100,Male,Multiracial or Other,Grandchild,0.000000
+80,100,Male,Multiracial or Other,Opp-sex partner,0.037303
+80,100,Male,Multiracial or Other,Opp-sex spouse,0.110464
+80,100,Male,Multiracial or Other,Other nonrelative,0.103910
+80,100,Male,Multiracial or Other,Other relative,0.061776
+80,100,Male,Multiracial or Other,Parent,0.416149
+80,100,Male,Multiracial or Other,Parent-in-law,0.204184
+80,100,Male,Multiracial or Other,Roommate,0.036731
+80,100,Male,Multiracial or Other,Same-sex partner,0.000828
+80,100,Male,Multiracial or Other,Same-sex spouse,0.002575
+80,100,Male,Multiracial or Other,Sibling,0.025142
+80,100,Male,Multiracial or Other,Stepchild,0.000000
+80,100,Male,NHOPI,Adopted child,0.000000
+80,100,Male,NHOPI,Biological child,0.000193
+80,100,Male,NHOPI,Child-in-law,0.000745
+80,100,Male,NHOPI,Foster child,0.000000
+80,100,Male,NHOPI,Grandchild,0.000000
+80,100,Male,NHOPI,Opp-sex partner,0.037303
+80,100,Male,NHOPI,Opp-sex spouse,0.110464
+80,100,Male,NHOPI,Other nonrelative,0.103910
+80,100,Male,NHOPI,Other relative,0.061776
+80,100,Male,NHOPI,Parent,0.416149
+80,100,Male,NHOPI,Parent-in-law,0.204184
+80,100,Male,NHOPI,Roommate,0.036731
+80,100,Male,NHOPI,Same-sex partner,0.000828
+80,100,Male,NHOPI,Same-sex spouse,0.002575
+80,100,Male,NHOPI,Sibling,0.025142
+80,100,Male,NHOPI,Stepchild,0.000000
+80,100,Male,White,Adopted child,0.000000
+80,100,Male,White,Biological child,0.000259
+80,100,Male,White,Child-in-law,0.000997
+80,100,Male,White,Foster child,0.000000
+80,100,Male,White,Grandchild,0.000000
+80,100,Male,White,Opp-sex partner,0.045655
+80,100,Male,White,Opp-sex spouse,0.121390
+80,100,Male,White,Other nonrelative,0.102970
+80,100,Male,White,Other relative,0.057886
+80,100,Male,White,Parent,0.412845
+80,100,Male,White,Parent-in-law,0.190433
+80,100,Male,White,Roommate,0.033727
+80,100,Male,White,Same-sex partner,0.001108
+80,100,Male,White,Same-sex spouse,0.003447
+80,100,Male,White,Sibling,0.029283
+80,100,Male,White,Stepchild,0.000000

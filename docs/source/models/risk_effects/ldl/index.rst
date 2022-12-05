@@ -82,7 +82,7 @@ For GBD 2017, we reviewed the literature to select a TMREL for LDL. A meta-analy
 Vivarium Modeling Strategy
 --------------------------
 
-The risk-outcome pairs listed below are standard GBD relationships. The relative risks stored in the database are not location- or year-specific. They are age- and sex-specific. The LDL risk factor affects the likelihood of both morbidity and mortality from ischemic stroke and ischemic heart disease. We will model this in Vivarium such that exposure to LDL will impact the incidence rate of ischemic stroke and the incidence of acute myocardial infarction and stable angina. The excess mortality rate for both outcomes will be unaffected. 
+The risk-outcome pairs listed below are standard GBD relationships. The relative risks stored in the database are not location- or year-specific. They are age- and sex-specific. The LDL risk factor affects the likelihood of both morbidity and mortality from ischemic stroke and ischemic heart disease. We will model this in Vivarium such that exposure to LDL will impact the incidence rate of ischemic stroke and acute myocardial infarction. The excess mortality rate for both outcomes will be unaffected. 
 
 .. list-table:: Entities affected by LDL-C in GBD
    :widths: 5 5 5 5 5
@@ -133,7 +133,7 @@ The risk-outcome pairs listed below are standard GBD relationships. The relative
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
-:ref:`See ischemic heart disease documentation <2019_cause_ihd>`
+:ref:`See ischemic heart disease documentation (combined with HF) <2019_cause_ihd>`
 
 The relative risks apply to the incidence rates of acute myocardial infarction and stable angina. They should be applied using the formula incidence(i) = incidence*(1-PAF\ :sub:`r107`\)*RR^{max((LDL-C_i - TMREL),0)}. The association was evaluated at the cause level, but the associations should be applied to the incidence rates for both nonfatal components of ischemic heart disease. 
 
