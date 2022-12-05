@@ -12,7 +12,7 @@ There are models of things that you might consider causes which are outside of
 the scope of this chapter, because they do not fit into the Markov approach.
 This chapter does not include :ref:`PAF of 1 <models_risk_attributable_cause>`
 causes, like
-:ref:`protein-energy malnutrition <2017_cause_pem>`. It also does not include
+protein energy malnutrition. It also does not include
 things that are sometimes considered diseases but are deemed
 :ref:`risk factors <models_risk_factors>` by the :term:`Global Burden of Disease`
 (GBD), such as :ref:`obesity <2019_risk_bmi>`.

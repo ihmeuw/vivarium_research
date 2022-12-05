@@ -276,7 +276,7 @@ a "propensity" for vitamin A deficiency, and the simulant's vitamin A status is
 determined by comparing this propensity to the overall VAD exposure/prevalence
 in the population. Such propensity/exposure models have been used in Vivarium
 for other risk factors and risk-attributable causes, such as child stunting,
-:ref:`child wasting/PEM <2017_cause_pem>`, and :ref:`iron deficiency anemia
+:ref:`child wasting/PEM <2020_risk_exposure_static_wasting>`, and :ref:`iron deficiency anemia
 <2017_cause_iron_deficiency>`.
 
 .. todo::
