@@ -1,8 +1,8 @@
 .. _2017_cause_ischemic_stroke:
 
-===============
-Ischemic Stroke
-===============
+=========================
+Ischemic Stroke: GBD 2017
+=========================
 
 
 Disease Description

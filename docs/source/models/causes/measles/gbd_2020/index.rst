@@ -1,8 +1,8 @@
 .. _2020_cause_measles:
 
-=======
-Measles
-=======
+=================
+Measles: GBD 2020
+=================
 
 .. todo::
   Need to update all below to GBD 2020

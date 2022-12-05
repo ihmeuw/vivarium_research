@@ -1,8 +1,8 @@
 .. _2017_cause_ischemic_heart_disease:
 
-======================
-Ischemic Heart Disease
-======================
+================================
+Ischemic Heart Disease: GBD 2017
+================================
 
 
 Disease Description

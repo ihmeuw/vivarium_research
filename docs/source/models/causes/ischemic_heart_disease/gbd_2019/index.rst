@@ -1,8 +1,8 @@
 .. _2019_cause_ihd:
 
-========================================
-Ischemic Heart Disease and Heart Failure
-========================================
+===================================================
+Ischemic Heart Disease and Heart Failure: GBD 2019
+===================================================
 
 In the GBD, IHD and heart failure are separated. IHD is a cause and heart failure is 
 considered an impairment, without deaths directly attributed to it. For this project, 
