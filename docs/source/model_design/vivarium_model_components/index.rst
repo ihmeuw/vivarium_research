@@ -33,4 +33,21 @@ The purpose of this page is to describe the general types of model components th
    :maxdepth: 1
    :glob:
 
-   */index
+   causes/index
+   impairments/index
+   interventions/index
+   intervention_features/index
+   risk_factors/index
+
+Sub-components of risk factors can be found here:
+
+  .. toctree::
+     :maxdepth: 1
+     :glob:
+
+     risk_factors/risk_exposure/index
+     risk_factors/risk_attributable_causes/index
+     risk_factors/risk_correlation/index
+     risk_factors/risk_effects/index
+     risk_factors/risk_mediation/index
+     risk_factors/population_attributable_fraction/index
