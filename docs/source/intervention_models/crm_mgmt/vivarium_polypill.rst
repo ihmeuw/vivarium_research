@@ -116,6 +116,7 @@ The percents for primary and secondary nonadherence are now arbitrary.
 
 Any simulant on 'three drugs at half dose' or lower on the ladder will be 
 assigned to 'three drugs at half dose' when they are put on the polypill intervention. 
+Those who were on 'three drugs at half dose' will continue on the same regimen. 
 Use the efficacy normally assigned for this regimen. 
 
 Any simulant at 'three drugs at standard dose' on the ladder will continue 
