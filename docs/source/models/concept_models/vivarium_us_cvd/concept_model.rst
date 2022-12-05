@@ -201,7 +201,7 @@ intervention. Scales linearly over 1 year such that there is 0% coverage at base
 4.1.1 Cause Models
 ~~~~~~~~~~~~~~~~~~
 * :ref:`Hypertensive Heart Disease <2019_cause_hhd>`
-* :ref:`Ischemic Heart Disease <2019_cause_ihd>`
+* :ref:`Ischemic Heart Disease and Heart Failure <2019_cause_ihd>`
 * :ref:`Ischemic Stroke <2019_cause_Ischemic_Stroke>`
 * :ref:`Intracerebral Hemorrhage <2019_cause_ich>`
 * :ref:`Subarachnoid Hemorrhage <2019_cause_sah>`
@@ -209,7 +209,6 @@ intervention. Scales linearly over 1 year such that there is 0% coverage at base
 * :ref:`Peripheral Arterial Disease <2019_cause_pad>`
 * :ref:`Aortic Aneurysm <2019_cause_Aortic_Aneurysm>`
 * :ref:`Atrial Fibrillation and Flutter <2019_cause_afib>`
-* :ref:`Heart Failure <2019_cause_Heart_Failure>`
 * :ref:`Chronic Obstructive Pulmonary Disease <2019_cause_copd>`
 
 .. todo::
@@ -233,9 +232,7 @@ intervention. Scales linearly over 1 year such that there is 0% coverage at base
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 * :ref:`Systolic Blood Pressure <2019_risk_effect_sbp>`
 * :ref:`High LDL Cholesterol <2019_risk_effect_ldl>`
-
-.. todo::
-  Create risk effect models for BMI and FPG 
+* :ref:`Body Mass Index <2019_risk_effect_bmi>`
 
 .. _4.1.4:
 
@@ -416,7 +413,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is eligible, either 50% or 100% enrolled depending on scenario  
     - For 50% scenario, assignment is random 
   * - F (polypill intervention scenarios)
-    - If simulant is prescribed two drugs at half dose or higher on SBP ladder and is eligible, either 50% or 100% are enrolled depending on scenario  
+    - If simulant has a measured SBP of 140+ and is eligible, either 50% or 100% are enrolled depending on scenario  
     - 
 
 
@@ -920,7 +917,7 @@ Code is below for reference
     - `Validation workbook Model 2 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model2_VV_SBP.ipynb>`_ `And interactive sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model2_VV.ipynb>`_ Cause model is identical to Model 1 with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. 
   * - 3.0
     - Adding angina as a cause    
-    - `Validation workbook Model 3 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd>`_ Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. Seems that angina relative risk is highly susceptible to low n-size and leads to high variation. 
+    - `Validation workbook Model 3 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd>`_ Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. Outstanding issue with individual simulant outliers in SBP and incidence. Seems that angina relative risk is highly susceptible to low n-size and leads to high variation. NOTE: Angina has since been removed as a cause. 
   * - 4.0
     - Adding in healthcare system visits 
     - `Validation workbook Model 4 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model4_VV.ipynb>`_  Cause model is identical to prior models with same pieces correct and the same discrepancies. Risk factors match for exposure, standard deviation and relative risk. It is difficult to properly V&V appointments as everyone gets a follow-up right now, but accounting for that it appeared stable. Check with: [Rodgers_2009]_ 
@@ -931,24 +928,21 @@ Code is below for reference
     - Adding medications for LDL-C 
     - The validation workbook Model 6 is split into two halves. `Causes and risk effects <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV.ipynb>`_ and `medications and helathcare appointments <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/76057dd6e432511c2e3ae9ef77284881be7bf776/Model6_VV-Copy1.ipynb>`_. V&V for this model is quite concerning. Exposure to LDL-C changes quite drastically over time, with younger populations increasing in exposure and older populations decreasing. In addition, huge percents of the population are ending up on high intensity statins very quickly, which is not realistic. This will need additional work to fix the LDL-C treatment. Comparison literature: [Gu_2012]_ [Derington_2020]_
   * - 7.0
-    - Adding Outreach Intervention (might change)
-    -  
+    - Adding Outreach Intervention 
+    - `Validation workbook for Model 7 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model7_VV.ipynb>`_. V&V worked well for this model. In the incidence of MI and stroke, there is a clear difference between scenarios that is in line with back of the envelope expectations. We do not visually see a separation in ACMR, but that was also expected. 
   * - 8.0
-    - Adding Polypill Intervention (might change)
-    -  
+    - Adding Polypill Intervention
+    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios is less visually apparent in this model, which is expected as this only affects SBP and works for fewer simulants. We are planning to review findings with the team to discuss if we should adjust the intervention or not. 
   * - 9.0
-    - Adding Heart Failure (might change)
+    - Adding BMI
     -  
   * - 10.0
-    - Scenarios 
+    - Adding Heart Failure  
     -  
   * - 11.0
-    - BMI  
-    -  
-  * - 12.0
     - FPG 
     -  
-  * - 13.0
+  * - 12.0
     - Lifestyle Intervention  
     -  
 
@@ -1079,7 +1073,7 @@ Some limitations of this analysis include:
 
 #. There are many lifestyle factors that contribute significantly to heart disease but aren't included here 
 #. Simulants do not have a natural biologic variation in SBP or LDL-C as they might in real life due to stress, seasons, or other factors. This might lead to "jumps" for individual simulants in exposure values at age group jumps 
-#. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and angina. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
+#. Counter to GBD, simulants can experience multiple causes of heart disease simultaneously, such as myocaridal infarction and ischemic stroke. Since categories are no longer mutually exclusive, there might be an understimation of overall heart disease compared with GBD 
 #. Current documentation does not include enough information to have interventions run concurrently. This decision was made by the sim science team and Greg as it allows for multiple simplifying assumptions and removes the need for risk mediation. 
 #. To create "untreated" SBP and LDL-C values, we addded an approximate treatment value to those simulants who were initialized to be on medication. This method did not create a blanket population "PAF" from medication, which is different than other simulations. This should be checked in V&V for possible side effects.  
 #. During initialization of the model, we "take measurements" from the raw GBD values rather than the treatment adjusted values. This is only for simulants initialized in the emergency state. Since treatment effects have not been applied yet, this is necessary and with the burn-in period it is unlikely to affect the outcomes. 

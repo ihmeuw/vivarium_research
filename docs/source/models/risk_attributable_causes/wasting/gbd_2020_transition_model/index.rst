@@ -35,9 +35,9 @@
 
 .. _2020_risk_exposure_wasting_state_exposure:
 
-=======
-Wasting
-=======
+=====================================================
+Wasting dynamic transition model (GBD 2020)
+=====================================================
 
 .. contents::
   :local:

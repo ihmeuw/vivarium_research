@@ -31,9 +31,9 @@
 
 .. _2020_risk_exposure_static_wasting:
 
-===========================================================
-Static Child Wasting Model and Protein Energy Malnutrition
-===========================================================
+======================================================================
+Static Child Wasting Model and Protein Energy Malnutrition (GBD 2020)
+======================================================================
 
 .. contents::
   :local:

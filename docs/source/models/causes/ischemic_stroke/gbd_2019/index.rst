@@ -1,8 +1,8 @@
 .. _2019_cause_ischemic_stroke:
 
-===============
-Ischemic Stroke
-===============
+==========================
+Ischemic Stroke: GBD 2019
+==========================
 
 Disease Overview
 ----------------
