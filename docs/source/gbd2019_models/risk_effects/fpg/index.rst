@@ -72,7 +72,7 @@ RRs were reported per 1 mmol/L increase in FPG above the TMREL value
 Where RR(x) is the RR at exposure level x and RR\ :sub:`0`\  is the 
 increase in RR for each 1 mmol/L above the TMREL. GBD used 
 DisMod-MR 2.1 to pool effect sizes from included studies and generate 
-a dose-response curve for each of the outcomes associated with high SBP. 
+a dose-response curve for each of the outcomes associated with high FPG. 
 The tool enabled GBD to incorporate random effects across studies and 
 include data with different age ranges. RRs were used universally for 
 all countries and the meta-regression only helped to pool the three 
@@ -84,7 +84,10 @@ ages taking into account the uncertainty of the data points.
 Theoretical minimum-risk exposure level
 +++++++++++++++++++++++++++++++++++++++
 
-The theoretical minimum-risk exposure level (TMREL) for FPG is 4.8-5.4 mmol/L for those risk-outcome pairs where risk is assessed on a continuous basis. This was calculated by taking the person-year 
+The theoretical minimum-risk exposure level (TMREL) for FPG is 4.8-5.4 mmol/L for those risk-outcome pairs where risk is assessed on a continuous basis. To include the uncertainty 
+in the TMREL, we took a random draw from the uniform distribution of 
+the interval between 20–25 mmol/L each time the population 
+attributable burden was calculated. This was calculated by taking the person-year 
 weighted average of the levels of FPG that were associated with the lowest risk of mortality in the pooled analyses of prospective cohort studies. The TMREL is no diabetes for those outcomes where risk 
 is assessed on a categorical basis. The risk-outcome pairs are listed below, along with whether they are continuous or categorical.  
 
