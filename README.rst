@@ -9,8 +9,7 @@ Vivarium Research
 Here you'll find a variety of useful information about working on ``vivarium``
 research projects.
 
-The hosted documentation can be found
-`here <https://vivarium-research.readthedocs.io/en/latest/>`_.
+The hosted documentation can be found at https://vivarium-research.readthedocs.io/en/latest/.
 
 .. contents::
 
@@ -92,7 +91,9 @@ GitHub itself.  Open up the
 `vivarium_research repository <https://github.com/ihmeuw/vivarium_research>`_
 in your browser.  Click on the ``Branches`` tab right above the directory tree.
 You should see a listing for your branch with a button that says
-``Make pull request``.  Click that.  **Add reviewers**, then click the
+``Make pull request``.  Click that.  
+
+**Add reviewers and relevant labels**, then click the
 ``Create Pull Request`` button and notify the people you tagged that you
 have a documentation PR for review.
 
@@ -100,4 +101,41 @@ People should respond with either approval, changes, or comments.  You should
 respond to all the feedback and make updates to your pull request if necessary
 and re-request reviews. Once everyone has responded and is happy (or has, at
 least, marked your PR as approved), you can click the ``Merge Pull Request``
-button and add your docs to the master branch.
+button and add your docs to the main branch.
+
+Protocol for adding reviewers
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+From the research team:
+'''''''''''''''''''''''
+
+For pull requests that are project-specific, you should request review from 
+all members of the research team involved with that project. For more general 
+pull requests that apply to overall Vivarium protocols and/or framework, etc., 
+you should request review from all members of the research team.
+
+From the engineering team:
+''''''''''''''''''''''''''
+
+Always tag engineers working on a given project for pull requests related to 
+that project. This will allow the engineering team members to stay informed of 
+project development and ask clarifying questions as necessary. The only 
+potential exception is for pull requests that only contain information on 
+research background and do not contain any information related to modeling 
+strategy.
+
+Engineering team members on a given project should be tagged as **required** 
+reviewers when a pull request contains any changes that:
+
+* Were requested by engineering, or
+* Affects modeling strategy that has already been implemented and therefore
+  requires code changes by the engineers
+
+  * In this case, the research team member who made the pull request is
+    responsible for making a ticket on the
+    `engineering JIRA board <https://jira.ihme.washington.edu/secure/RapidBoard.jspa?rapidView=305&view=planning.nodetail&selectedIssue=MIC-3449&epics=visible&issueLimit=100&selectedEpic=MIC-3420>`_
+    that outlines the requested code changes. The research team member should
+    then post a slack message in the project-specific channel that tags the
+    engineers and links to the new JIRA ticket. `More information on how to 
+    make engineering JIRA tickets as a research team member can be found
+    here <https://hub.ihme.washington.edu/display/SSE/RT+Ticket+Creation>`_.
