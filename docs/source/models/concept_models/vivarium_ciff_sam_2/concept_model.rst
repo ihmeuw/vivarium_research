@@ -485,7 +485,8 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
        * `MAM coverage now zero for the zero coverage scenario (success!) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/intervention_coverage_verification.ipynb>`_
        * `Scale-up removed as desired (success!) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/intervention_coverage_verification.ipynb>`_
        * `Mortality hazard rate observer implemented as expected <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/Mortality%20hazard%20observer.ipynb>`_
-       * Appears to have smaller population size than desired (requested 400,000... seem to have just 100,000? Need confirmation from engineers)
+       * Decided on 35 draws for run 3.1 (`based on analysis in this notebook <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/number_of_draws_analysis.ipynb>`_)
+       * `Decided on 260,000 population size based on stability of SAM cases averted at this level <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/population_size_analysis.ipynb>`_ and plan to use mortality hazard observer for expected deaths averted rather than observed (note that this will not apply to DALYs)
 
 
 .. list-table:: Outstanding verification and validation issues
