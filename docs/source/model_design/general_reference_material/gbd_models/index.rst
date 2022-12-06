@@ -21,11 +21,16 @@
   https://docutils.sourceforge.io/docs/ref/rst/restructuredtext.html#sections
   And then add it to the list of decorators above.
 
-.. _impairments:
+.. _gbd_modeling:
 
-=================================
-Modeling Impairments
-=================================
+=====================================================
+Global burden of disease modeling process
+=====================================================
 
-.. contents::
-  :local:
+The purpose of this page is to document information on the GBD modeling process to serve as a reference to Vivarium modelers.
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   */index
