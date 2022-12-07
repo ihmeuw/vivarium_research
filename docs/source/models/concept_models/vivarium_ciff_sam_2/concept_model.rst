@@ -454,7 +454,7 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
   * - 3.1: All wave 1 scenarios
     - Full wave 1 scenarios
     - 1 through 8
-    - Draws and seeds TBD
+    - 35 draws and population size of 260,000 per draw
     - Default
     - No x-factor component. May be run for additional locations depending on computational resource requirements.
 
@@ -479,6 +479,14 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
        * SQ-LNS `coverage <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/intervention_coverage_verification.ipynb>`_ and `effects <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/intervention_effect_verification.ipynb>`_ in the 2_to_4 age group (this age group should be ineligible for SQ-LNS)
        * `Scenario 4 has baseline levels of MAM treatment coverage rather than zero percent coverage as desired <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/intervention_coverage_verification.ipynb>`_
        * Appears that population size of 200,000 is not sufficient to observe deaths averted between scenarios with minimal impact of stochastic uncertainty, particularly for early years in the scale-up. `See investigation notebook here <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/population_size_analysis.ipynb>`_
+   * - 3.0.1
+     - Bugfixes, scale-up removal, increased population size for subset of draws
+     - * SQ-LNS `coverage (shown here) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/intervention_coverage_verification.ipynb>`_ and `effects (shown here) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/intervention_effect_verification.ipynb>`_ no longer present for simulants over 2 years of age (success!)
+       * `MAM coverage now zero for the zero coverage scenario (success!) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/intervention_coverage_verification.ipynb>`_
+       * `Scale-up removed as desired (success!) <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/intervention_coverage_verification.ipynb>`_
+       * `Mortality hazard rate observer implemented as expected <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/Mortality%20hazard%20observer.ipynb>`_
+       * Decided on 35 draws for run 3.1 (`based on analysis in this notebook <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/number_of_draws_analysis.ipynb>`_)
+       * `Decided on 260,000 population size based on stability of SAM cases averted at this level <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/population_size_analysis.ipynb>`_ and plan to use mortality hazard observer for expected deaths averted rather than observed (note that this will not apply to DALYs)
 
 
 .. list-table:: Outstanding verification and validation issues
@@ -488,21 +496,10 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
      - Explanation
      - Action plan
      - Timeline
-   * - Simulants over two years of age covered by SQ-LNS intervention
-     - There has been confusion over the "age end" parameter. SQ-LNS eligibility should end at two years of age. Simulation age end parameter was set to 2 years instead of SQ-LNS eligibility parameter. Simulation age end parameter was fixed to be 5 years again, but SQ-LNS eligibility age end has not been updated to 2 years.
-     - Hussain to implement update
-     - For next model run (3.0.1)
-   * - MAM treatment coverage equal to baseline rather than zero percent in scenario 4
-     - Unknown
-     - Hussain to investigate and update
-     - For next model run (3.0.1)
-   * - Simulation population size appears to be too small to observe deaths averted without substantial stochastic uncertainty
-     - Differences in deaths between scenarios are rare events and subject to stochastic uncertainty, especially at small population sizes
-     - #. May not report deaths as an outcome for paper since primary outcome is incident wasting cases
-       #. Consider removing intervention coverage *scale-up* and just report differences between scenarios at taret coverage 
-       #. Implement mortality hazard rate observer to measure *expected* rather than *observed* differences in deaths between scenarios (this method may be useful for other simulations in the future as well)
-       #. Run subset of draws for larger population size in attempt to observe point of stability
-     - Implement points 2, 3, and 4 for model 3.0.1
+   * - Simulants aged 0-6 months included in outputs
+     - Not an issue, but not needed for sim. Can be removed to save computation time/resources
+     - Exclude simulants 0-6 months of age from observers
+     - For next model run
 
 Assumptions and Limitations
 ----------------------------
