@@ -90,7 +90,7 @@ risk factor.
 
 .. note::
 
-  For information regarding the definition of **causal relationships**, see the causal relationship section on the :ref:`General Epidemiology Research Considerations and Best Practices <general_research>` page.
+  For information regarding the definition of **causal relationships**, see the :ref:`Causal Diagrams Page <general_dags>` page.
 
 .. todo:: 
 

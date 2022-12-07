@@ -184,7 +184,7 @@ to the TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
   Add formal mathematical definitions of TMREL and TMRED.
 
 As discussed in the :ref:`causality section <causal_relationships>` of 
-the :ref:`general research page <general_research>`,
+the causal diagrams page,
 counterfactual analysis is used to describe the causal relationship between a
 risk factor and an outcome. **The TMRED is a particular choice of counterfactual
 exposure distribution** used for the causal attribution of disease burden to a
