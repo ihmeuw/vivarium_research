@@ -1148,6 +1148,13 @@ All added simulants should receive a unique simulant ID for PRL tracking, even i
 All added simulants should have a unique seed for common random numbers.
 This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
 
+V&V strategy
+^^^^^^^^^^^^
+
+To verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+simulants are immigrating at the expected rates for each move type.
+
 .. _census_prl_international_emigration:
 
 2.3.6 Component 10: International Emigration (Out-Migration)
@@ -1289,6 +1296,17 @@ Limitations
    In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
+
+V&V strategy
+^^^^^^^^^^^^
+
+To verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+there are simulants outside the US, check that the number of simulants who
+move out of the US each year is approximately correct,
+and check that the characteristics of simulants who move out of the US are
+similar to the characteristics of simulants who move into the US,
+for each broad race/ethnicity category.
 
 2.3.7 Component 11: Physical Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
