@@ -445,7 +445,7 @@ Transition Data
    * - 3
      - S1 or P 
      - HF_IHD
-     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_m2412)})}` 
+     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_m2412 + prevalence of AMI)}}` 
      - 
    * - 4
      - S1  
