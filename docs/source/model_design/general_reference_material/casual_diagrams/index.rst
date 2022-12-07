@@ -177,6 +177,8 @@ For our purposes, the two approaches shown in this section for representing non-
 
   Dashed lines will represent non-causal associations as described above in all causal diagram DAGs in the Vivarium Research repository. 
 
+.. _causal_relationships:
+
 Causal Relationships
 --------------------
 
