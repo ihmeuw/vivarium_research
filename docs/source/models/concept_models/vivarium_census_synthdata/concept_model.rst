@@ -2807,6 +2807,206 @@ have not been included. These are:
 #. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
 #. There are errors in SSN data, which are not modeled here. 
 
+Noise Functions
+^^^^^^^^^^^^^^^
+
+In order to have a realistic challenge with PRL, it is essential to have 
+noise added to the data. Noise is generally divided into two types: 
+
+#. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
+#. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
+
+To begin, we will start with defining column based noise. Some general rules 
+for all column based noise include: 
+
+- The amount of each type of noise is individually configurable for each observer up to the max listed in the table below. This means that the end user can select that: census first names have 5% typographic errors. The minimum noise is 0 for all column noise. 
+- Simulants are selected for noise at random. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry across observers (e.g., there are not "messy" simulants who make errors on all forms). 
+- As noise functions for certain data types are common across observers, the table below is organized by data type (first name). Below the table, there is further information and defintion on each noise type. 
+
+.. list-table:: Type of Noise Included and Maximum Level by Data Included
+  :widths: 20 20 20 20 20 
+  :header-rows: 0
+
+  * - Data in Observer
+    - Observers Present 
+    - Maximum Noise Level 
+    - Types of Noise 
+    - Notes
+  * - First Name
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 5%
+    - OCR, phonetic, typographic, fake names
+    - 
+  * - Middle Initial
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 5%
+    - OCR, phonetic, typographic
+    - 
+  * - Last Name
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 5%
+    - OCR, phonetic, typographic, fake names
+    - The list of fake names will be different than the first names 
+  * - Age
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 5%
+    - Miswriting, swaps with household 
+    - 
+  * - Date of Birth 
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 5%
+    - Miswriting, swaps with household, swap month and day 
+    - 
+  * - Home Address OR Mailing Address OR Employer Address 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - Miswriting
+    - Noise for all types of addresses will work in the same way 
+  * - Zip Code 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - Miswriting
+    - Applies to home, mailing, and employer addresses 
+  * - Relationship to head of household 
+    - Census 
+    - 5%
+    - Incorrect select 
+    - 
+  * - Sex 
+    - Census 
+    - 5%
+    - Incorrect select 
+    - 
+  * - Race/Ethnicity 
+    - Census, WIC
+    - 5%
+    - Incorrect select 
+    - 
+  * - SSN
+    - Taxes (both), SSA
+    - 5%
+    - Miswriting, "borrowed" SSN, swaps with household
+    - Note that not all types of noise apply to all observers, details below 
+  * - ITIN
+    - Taxes 1040
+    - 5%
+    - Miswriting, swaps with household
+    - Note that not all types of noise apply to all observers 
+  * - Income / Wages
+    - Taxes (both)
+    - 5%
+    - Miswriting
+    - Note that wages and income are on separate tax forms and noise is applied to each separately 
+  * - Employer ID 
+    - Taxes (both)
+    - 5%
+    - Miswriting
+    - 
+  * - Employer Name 
+    - Taxes (both)
+    - 5%
+    - OCR, typographic 
+    - 
+  * - Type of Tax Form  
+    - Taxes (both)
+    - 5%
+    - Incorrect select 
+    - 
+  * - Type of SSA Event 
+    - SSA 
+    - 5%
+    - Incorrect select 
+    - 
+  * - Date of SSA Event 
+    - SSA 
+    - 5%
+    - Miswriting, month and day swap 
+    - 
+
+The below section further describes types of noise including any code 
+available and information for implimentation. Software engineering team - 
+please alert the research team if any of the below looks to be particularly 
+challenging for further discussion. 
+
+**OCR - Optical Character Recognition**
+
+**Phonetic**
+
+**Typographic** 
+
+**Fake Names - First Names**
+
+**Fake Names - Last Names**
+
+**Miswriting (Numeric) - Age, Date of Birth, Zip Code, SSN, ITIN, Wages/Income, Employer ID, Date of SSA Event** 
+
+For all numeric miswriting, first select the sample to have noise added. 
+Once the sample is selected, change 1 digit of the number at random to any 
+other random number. 
+
+For example: if the correct SSN is 123456789, a miswriting might look like 123416789. 
+Please confirm that the new digit is an actual error. 
+
+Limitation: this might lead to illogical data, especially for age and dates (e.g., a 
+person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect 
+but still possible birthday/age. However, since the main goal is noise for PRL, we 
+think this is still acceptable. 
+
+**Miswriting - Addresses**
+
+Street number - numeric (need some guards here)
+Street name - same as names 
+
+Limitation: we use street name as a string 
+Look at working paper here for details 
+Carra 01 - best docs on how PVS works 
+Might split into directional, name, and st/pl/etc
+
+Unit - numeric 
+PO Box - numeric 
+City - same as names 
+State - Incorrect select 
+Zip - numeric 
+
+**Copy from within Household** 
+
+Swaps within household is meant to account for recording correct data to the incorrect 
+individual. Examples might be a parent switching their children's birthdays on a survey. 
+
+However, since not all simulants have others in their households and since 
+swaps will create 2 incorrect records, sampling is more complex for this noise type. 
+
+##Zeb thinks this is hard and we should quit 
+Probability that you copy from someone else 
+
+Say whos eligible - more than 1 person household 
+Pick people 
+Copy from a friend 
+
+**Month and Day Swap**
+
+Month and day swaps apply to dates. For this, select the sample to have noise added. 
+For those selected, swap the month and day to be in the incorrect position (e.g., December 8, 2022 
+would be listed in MM/DD/YYYY format as 08/12/2022). 
+
+**Incorrect Select** 
+
+Incorrect select applies to a range of data types. For this, select the sample to 
+have noise added. For those selected, randomly select a different option from the 
+others available. Note that for relationship to head of household, this includes 
+the full list of options, not just those seen in the household. 
+
+Limitations: 
+- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
+- Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups) however, we are not including this complexity. 
+
+**"Borrowed" SSN**
+
+Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
+It will NOT be individually configurable by the end user. No further action is 
+needed in the noise functions for this component. 
+
+**Old Abie Work, to be deleted later** 
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
