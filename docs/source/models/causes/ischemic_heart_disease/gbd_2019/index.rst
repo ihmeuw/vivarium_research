@@ -565,6 +565,8 @@ Assumptions
 
 #. To find the prevalence of AMI with and without HF, we assume it is distributed according to the prevalence of HF in the population. This is likely not true, but with the burn in, will have an opportunity to correct itself. 
 #. We calculate a new IHD CSMR based on the EMRs and prevalences used. This is different than the GBD value which might lead to effects on the ACMR as well. 
+#. Angina is no longer included in the model. This decision was made with input from Greg, who felt that the pain associated with angina was now being covered by heart failure, and post MI. The angina cause is spread across multiple states in the state table, as it overlaps with other causes. 
+#. AMI with heart failure and AMI without heart failure have the same disability weights in the model. This is an oversimplification as AMI with heart failure might well experience some additional disability. However, AMI disabilty weights are already high and the time in the state is only 28 days maximum, so it will be unlikely to impact the model significantly. 
 
 Validation Criteria
 +++++++++++++++++++
