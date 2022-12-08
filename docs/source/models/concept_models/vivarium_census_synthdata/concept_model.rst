@@ -1114,9 +1114,9 @@ and non-reference-person moves.
 
 #. A **household move** is when an entire non-GQ household (which may be a single-person household) enters from outside the country as a unit,
    preserving relationships within the unit.
-#. A **GQ person move** is when a person enters from outside the country and joins an existing GQ type.
+#. A **GQ person move** is when an individual enters from outside the country and joins an existing GQ type.
    These moves have no relationship structure, because GQ people do not have tracked relationships in PUMS or our simulation.
-#. A **non-reference-person move** is when a non-GQ person enters from outside the country and joins an existing non-GQ household,
+#. A **non-reference-person move** is when an individual enters from outside the country and joins an existing non-GQ household,
    with some relationship other than "reference person."
    Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
 
