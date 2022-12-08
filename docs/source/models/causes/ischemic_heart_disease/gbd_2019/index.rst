@@ -488,11 +488,11 @@ Data Sources
    * - propHF_IHD
      - CVD team
      - Proportion of HF that is due to IHD 
-     - `Proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
+     - Proportion file here /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_2022_10_28.csv
    * - propHF_RESID
      - CVD team
      - Proportion of HF that is due to the residual category
-     - `Same proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
+     - Proportion file here /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_2022_10_28.csv
    * - prevalence_m2412
      - como
      - Prevalence of HF
@@ -552,7 +552,8 @@ heart disease, and residual heart failure from other causes.
 
 As these causes are identical in all capacities, we think it is easier to make 
 this designation in post processing rather than in the model itself. The rates of 
-each group (HHD vs other) can be found in this `cvs file <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_. Note that this is different than the above proportions 
+each group (HHD vs other) can be found in this cvs file /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_hhd_perc.csv 
+. Note that this is different than the above proportions 
 file. It is designed to give the percent of heart failure to assign to HHD in post 
 processing from the residual heart failure cause ONLY. The IHD heart failure cause 
 will not be adjusted in post processing. 

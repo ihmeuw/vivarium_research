@@ -597,7 +597,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `at this link <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is at this file path: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/drug_efficacy_sbp.csv [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
@@ -627,7 +627,7 @@ similar and therefore are not modeled individually.
 
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
-initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+initial LDL-C levels will see a higher total reduction. The full efficacy data is file path: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
 For each input draw, a parameter value for efficacy will be selected based on the mean and 
 standard deviation provided in the table above. Assume a normal distribution for the parameter value. 
