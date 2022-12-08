@@ -1077,76 +1077,144 @@ flows (perhaps by checking a few of the largest).
 2.3.5 Component 9: International Immigration (In-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Background/Importance
+^^^^^^^^^^^^^^^^^^^^^
+
 New simulants are added by migration into the US from other countries.
-We simulate three kinds of immigration: household moves, GQ person moves,
-and non-reference-person moves.
+This may be a PRL challenge, especially when a 1-to-1 match is generally expected;
+people who have newly immigrated to the country will not have a true match in
+a data set collected before their immigration.
 
-#. A **household move** is when an entire household (which may be a single-person residential household) enters from outside the country as a unit,
-   preserving relationships within the unit.
-#. A **GQ person move** is when a GQ person enters from outside the country and joins an existing GQ type.
-   These moves have no relationship structure, because GQ people do not have tracked relationships in PUMS or our simulation.
-#. A **non-reference-person move** is when a non-GQ person enters from outside the country and joins an existing non-GQ household.
-   Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
 
-The number of simulants who move to the US each year in each move type is informed by the ACS' "residence one year ago" question.
-A value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
-while any other value indicates that they lived within the US.
-We refer to respondents who were not living in the United States one year ago as "recent immigrants."
-Our assumption is that the number and characteristics of recent immigrants per year
-in the 2016-2020 ACS PUMS will be replicated in each future year.
+Simulants immigrating to the US are sampled from the 2016-2020
+ACS PUMS, like at population initialization.
+Instead of sampling from the full PUMS, they are sampled from the subset who had immigrated to the US in
+the year before they were surveyed.
+This is informed by the ACS' "residence one year ago" question;
+a value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago
+(which we call being a "recent immigrant"), while any other value indicates that they lived within the US (not a recent immigrant).
+Our assumption is that the **number (per year) and characteristics** of recent immigrants
+in the 2016-2020 ACS PUMS will be replicated in all future years of the simulation.
 
 .. note::
 
     All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
 
-We also assume that the proportions of recent immigrants by move type will remain constant.
-Though in reality not all moves into the US follow one of these patterns, we assume that any new immigrant in a household
-where the reference person is also a new immigrant was part of a household move, while any new immigrant in a household where the
-reference person is not a new immigrant moved to the US in a non-reference-person move.
-We assume that new immigrants living in GQ immigrated directly into GQ and not into a household first, and vice versa.
+Move type
+'''''''''
 
-Specifically, the yearly rate at which simulants are added to the population by each move type is given by
+We simulate three kinds of immigration: household moves, GQ person moves,
+and non-reference-person moves.
+
+.. note::
+
+  These move types are not defined identically to those used in the domestic migration section!
+
+#. A **household move** is when an entire non-GQ household (which may be a single-person household) enters from outside the country as a unit,
+   preserving relationships within the unit.
+#. A **GQ person move** is when an individual enters from outside the country and joins an existing GQ type.
+   These moves have no relationship structure, because GQ people do not have tracked relationships in PUMS or our simulation.
+#. A **non-reference-person move** is when an individual enters from outside the country and joins an existing non-GQ household,
+   with some relationship other than "reference person."
+   Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
+
+Though in reality, immigration can be much more complicated than these three types, we assign all recent immigrants
+in ACS PUMS to one of the three types:
+
+#. Any recent immigrant living in a non-GQ household where the reference person is a recent immigrant,
+   including the reference person themselves, is considered to have entered the US in a household move.
+#. Any recent immigrant living in GQ is considered to have entered the US in a GQ person move.
+#. Any recent immigrant living in a non-GQ household where the reference person is **not** a recent immigrant
+   is considered to have entered the US in a non-reference-person move.
+
+.. note::
+
+  These rules are clearly incorrect in two cases, which we ignore for simplicity.
+
+  When a recent immigrant is living with a recent immigrant reference person who immigrated from a different country,
+  it isn't possible that they immigrated together as a household, but we assign them both to that move type.
+
+  When a household has a recent immigrant reference person but also has other household members who have not moved at all
+  (internationally or domestically) in the last year, it is clear that the reference person must have joined an existing
+  household, but we consider it to be a household move.
+
+We assume that all recent immigrants are still living in the place they initially moved to in the US (have not moved domestically
+since immigrating).
+
+Immigration rate
+''''''''''''''''
+
+The yearly rate at which simulants are added to the population **by each move type** is given by
 the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
-Since immigration is likely unaffected by US population change over time, the number of immigrants for a move type
+Since immigration is likely unaffected by US population change over time, the number of immigrants in a year for a move type
 is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
-At each time step:
+This is then divided by the number of time steps in a year to get the number of simulants to add per time step in that move type.
 
-#. ACS PUMS households with reference people who are recent immigrants,
-   after removing any household members who are not recent immigrants,
-   are sampled using household weights.
-   This sampling continues with replacement until the desired number of simulants added in household moves is reached.
-#. ACS PUMS GQ people who are recent immigrants are sampled using person weights with replacement until the desired number
-   of simulants added in GQ person moves is reached.
-#. ACS PUMS recent immigrants living in non-GQ households where the reference person is not a recent immigrant are sampled using person weights.
-   This sampling continues with replacement until the desired number of simulants added in non-reference-person moves is reached.
+Sampling new simulants
+''''''''''''''''''''''
 
-We perturb the PUMA and age attributes of the sampled household (in the case of a household move)
-or person (in the case of a GQ person or non-reference-person move), as described in the
-:ref:`perturbation section below <census_prl_perturbation>`.
+The following subsections explain the sampling rules for each move type.
+All attributes not explicitly described below (e.g. names) are set
+using the same method as population initialization for those attributes.
 
-Added residential households are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
-Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
+.. note::
+
+  All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
+  All added simulants should have a unique seed for common random numbers.
+  This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
+
+Household moves
+"""""""""""""""
+
+PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**.
+In households that are selected, household members who are not recent immigrants are excluded.
+This sampling continues until the desired number of **simulants** added in household moves is reached.
+
+Sampled households may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+They are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
+
+GQ person moves
+"""""""""""""""
+
+PUMS recent immigrants consistent with GQ person moves are sampled using person weights with replacement until the
+desired number of simulants added in GQ person moves is reached.
+
+Sampled individuals may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+They are assigned a household ID for a randomly-selected GQ type matching
 their institutional/non-institutional status, as well as the corresponding shared addresses, as is done at population initialization.
 
+Non-reference-person moves
+""""""""""""""""""""""""""
+
+PUMS recent immigrants consistent with non-reference-person moves are sampled using person weights with replacement until the
+desired number of simulants added in non-reference-person moves is reached.
+
+Sampled individuals may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+
 Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
-If there is no such household in the simulation, their PUMA is perturbed using the PUMA replacement process described in the
+If there is no such household in the simulation, their PUMA is perturbed with 100% probability using the PUMA replacement process described in the
 :ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
 Then, they are matched in the new PUMA.
-The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
+
+The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
 
-.. todo::
+Limitations
+^^^^^^^^^^^
 
-    In the future, we may want to make some households more likely than others to receive non-reference-person immigrants.
-    Also, the current approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. We assume that immigration does not change over long-run time or seasonally.
+#. All households are equally likely to receive non-reference-person immigrants.
+#. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
 
-All attributes of newly added households and simulants that are not sampled from the ACS PUMS (e.g. addresses, names) are set
-using the same method as population initialization for those attributes.
+V&V strategy
+^^^^^^^^^^^^
 
-All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
-All added simulants should have a unique seed for common random numbers.
-This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
+To verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+simulants are immigrating at the expected rates for each move type.
 
 .. _census_prl_international_emigration:
 
@@ -1289,6 +1357,17 @@ Limitations
    In reality, people with certain relationships (e.g. boarder) likely emigrate more than others (e.g. spouse),
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
+
+V&V strategy
+^^^^^^^^^^^^
+
+To verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+there are simulants outside the US, check that the number of simulants who
+move out of the US each year is approximately correct,
+and check that the characteristics of simulants who move out of the US are
+similar to the characteristics of simulants who move into the US,
+for each broad race/ethnicity category.
 
 2.3.7 Component 11: Physical Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3369,8 +3448,8 @@ When sampling for immigration, there are three cases:
 
 The details of the initial sampling are described in the immigration component documentation;
 here, we only consider how to perturb the PUMA values of an already-sampled entity (Row A),
-which has already been selected according to the 50% probability to have a perturbed
-PUMA.
+**which has already been selected according to the 50% probability to have a perturbed
+PUMA.**
 
 **80% of the time** (this probability is constant) we sample a new PUMA value from the same "immigration subset"
 of the same entity type in the ACS PUMS data.
