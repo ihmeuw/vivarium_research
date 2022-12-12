@@ -950,8 +950,8 @@ If the simulant is of working age and not moving into military GQ, they should c
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
-New-household moves
-"""""""""""""""""""
+*New-household moves*
+"""""""""""""""""""""
 
 In addition to the above logic common to all individual moves:
 
@@ -962,8 +962,8 @@ in the same manner as at initialization.
 
 Their relationship attribute should be set to "reference person."
 
-GQ person moves
-"""""""""""""""
+*GQ person moves*
+"""""""""""""""""
 
 In addition to the above logic common to all individual moves:
 
@@ -974,8 +974,8 @@ for the simulant according to the proportions in the "Relationship proportions f
 Then, a GQ type (household ID and corresponding physical and mailing addresses) should be assigned according to the
 institutional/non-institutional status, as is done at initialization.
 
-Non-reference person moves
-""""""""""""""""""""""""""
+*Non-reference person moves*
+""""""""""""""""""""""""""""
 
 In addition to the above logic common to all individual moves:
 
@@ -1165,8 +1165,8 @@ using the same method as population initialization for those attributes.
   All added simulants should have a unique seed for common random numbers.
   This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
 
-Household moves
-"""""""""""""""
+*Household moves*
+"""""""""""""""""
 
 PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**.
 In households that are selected, household members who are not recent immigrants are excluded.
@@ -1175,8 +1175,8 @@ This sampling continues until the desired number of **simulants** added in house
 Sampled households may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
 They are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
 
-GQ person moves
-"""""""""""""""
+*GQ person moves*
+"""""""""""""""""
 
 PUMS recent immigrants consistent with GQ person moves are sampled using person weights with replacement until the
 desired number of simulants added in GQ person moves is reached.
@@ -1185,8 +1185,8 @@ Sampled individuals may have age and/or PUMA perturbed, as described in the :ref
 They are assigned a household ID for a randomly-selected GQ type matching
 their institutional/non-institutional status, as well as the corresponding shared addresses, as is done at population initialization.
 
-Non-reference-person moves
-""""""""""""""""""""""""""
+*Non-reference-person moves*
+""""""""""""""""""""""""""""
 
 PUMS recent immigrants consistent with non-reference-person moves are sampled using person weights with replacement until the
 desired number of simulants added in non-reference-person moves is reached.
