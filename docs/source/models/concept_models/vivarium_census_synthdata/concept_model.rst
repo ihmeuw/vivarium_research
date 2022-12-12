@@ -2949,14 +2949,12 @@ for all column based noise include:
     - 
 
 The below section further describes types of noise including any code 
-available and information for implimentation. Software engineering team - 
-please alert the research team if any of the below looks to be particularly 
-challenging for further discussion. 
+available and information for implimentation. **Software engineering team - please alert the research team if any of the below looks to be particularly challenging for further discussion.**
 
-**OCR - Optical Character Recognition - First Names, Last Names, Street Names, and Cities**
+**OCR**
 
 Optical character recognition is when a character is misread for another character that 
-looks similar. Some common examples might be 'S' and '5' or 'l' and 'I'. In order to emulate 
+looks similar. A common examples is 'S' and '5'. In order to emulate 
 that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
 
 Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
@@ -2964,11 +2962,15 @@ will be determined at the character level as XX errors per character. We think t
 error per selected string, but obviously will not be exact. To implement this, select the strings 
 eligible for noise and then apply the OCR noise function to all strings. 
 
+.. todo::
+
+  Include character based noise level (applies to phonetic and typographic too)
+
 Limitations: 
 
 - The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
 
-**Phonetic - First Names, Last Names, Street Names, and Cities**
+**Phonetic**
 
 Phoentic errors are when a character is misheard. This could similar sounding letters when 
 spoken 't' and 'd' for example; or letter that make the same sounds within a word 'o' and 'ou'. 
@@ -2985,7 +2987,7 @@ Limitations:
 - Certain observers might be more likely to include phonetic errors, such as the census where large amounts of data are gathered over the phone or in person. However, we do not include that level of specificity in the design of the noise function. The amount of noise can always be changed at the observer level when extracting data to account for this. 
 
 
-**Typographic - First Names, Last Names, Street Names, and Cities** 
+**Typographic** 
 
 Typographic errors occur due to mistyping information. The commonality of errors are therefore 
 based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
@@ -3000,7 +3002,7 @@ Limitations:
 
 - The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
 
-**Fake Names - First and Last Names**
+**Fake Names**
 
 For a variety of reasons, some repondents might choose to use a fake name rather 
 than their real name on official forms. To account for this, first select the sample 
@@ -3013,7 +3015,7 @@ Limitations:
 - Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL. 
 - Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here. 
 
-**Miswriting (Numeric) - Age; Date of Birth; Address Components: Street Number, Unit, PO Box, Zip Code; SSN; ITIN; Wages/Income; Employer ID; Date of SSA Event** 
+**Miswriting** 
 
 For all numeric miswriting, first select the sample to have noise added. 
 Once the sample is selected, change 1 digit of the number at random to any 
