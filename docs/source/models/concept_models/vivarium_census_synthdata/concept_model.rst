@@ -2850,17 +2850,42 @@ for all column based noise include:
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 5%
-    - Miswriting, swaps with household 
+    - Miswriting, Copy from within Household 
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 5%
-    - Miswriting, swaps with household, swap month and day 
+    - Miswriting, Copy from within Household, swap month and day 
     - 
-  * - Home Address OR Mailing Address OR Employer Address 
+  * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 5%
     - Miswriting
+    - Noise for all types of addresses will work in the same way 
+  * - Street Name for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - OCR, phonetic, typographic
+    - Noise for all types of addresses will work in the same way 
+  * - Unit Number for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - Miswriting
+    - Noise for all types of addresses will work in the same way 
+  * - PO Box for Mailing Address 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - Miswriting
+    - 
+  * - City Name for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - OCR, phonetic, typographic
+    - Noise for all types of addresses will work in the same way 
+  * - State for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 5%
+    - Incorrect Select
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
@@ -2885,12 +2910,12 @@ for all column based noise include:
   * - SSN
     - Taxes (both), SSA
     - 5%
-    - Miswriting, "borrowed" SSN, swaps with household
+    - Miswriting, "borrowed" SSN, Copy from within Household
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 5%
-    - Miswriting, swaps with household
+    - Miswriting, Copy from within Household
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
@@ -2928,17 +2953,67 @@ available and information for implimentation. Software engineering team -
 please alert the research team if any of the below looks to be particularly 
 challenging for further discussion. 
 
-**OCR - Optical Character Recognition**
+**OCR - Optical Character Recognition - First Names, Last Names, Street Names, and Cities**
 
-**Phonetic**
+Optical character recognition is when a character is misread for another character that 
+looks similar. Some common examples might be 'S' and '5' or 'l' and 'I'. In order to emulate 
+that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
 
-**Typographic** 
+Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
+will be determined at the character level as XX errors per character. We think this approximates to 1 
+error per selected string, but obviously will not be exact. To implement this, select the strings 
+eligible for noise and then apply the OCR noise function to all strings. 
 
-**Fake Names - First Names**
+Limitations: 
 
-**Fake Names - Last Names**
+- The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
 
-**Miswriting (Numeric) - Age, Date of Birth, Zip Code, SSN, ITIN, Wages/Income, Employer ID, Date of SSA Event** 
+**Phonetic - First Names, Last Names, Street Names, and Cities**
+
+Phoentic errors are when a character is misheard. This could similar sounding letters when 
+spoken 't' and 'd' for example; or letter that make the same sounds within a word 'o' and 'ou'. 
+In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+
+Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
+will be determined at the character level as XX errors per character. We think this approximates to 1 
+error per selected string, but obviously will not be exact. To implement this, select the strings 
+eligible for noise and then apply the OCR noise function to all strings. 
+
+Limitations: 
+
+- The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
+- Certain observers might be more likely to include phonetic errors, such as the census where large amounts of data are gathered over the phone or in person. However, we do not include that level of specificity in the design of the noise function. The amount of noise can always be changed at the observer level when extracting data to account for this. 
+
+
+**Typographic - First Names, Last Names, Street Names, and Cities** 
+
+Typographic errors occur due to mistyping information. The commonality of errors are therefore 
+based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
+and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+
+Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
+will be determined at the character level as XX errors per character. We think this approximates to 1 
+error per selected string, but obviously will not be exact. To implement this, select the strings 
+eligible for noise and then apply the OCR noise function to all strings. 
+
+Limitations: 
+
+- The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
+
+**Fake Names - First and Last Names**
+
+For a variety of reasons, some repondents might choose to use a fake name rather 
+than their real name on official forms. To account for this, first select the sample 
+to have noise added. Then for everyone selected, replace their name with a random 
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+Please note that the list is separated into first and last names. 
+
+Limitations: 
+
+- Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL. 
+- Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here. 
+
+**Miswriting (Numeric) - Age; Date of Birth; Address Components: Street Number, Unit, PO Box, Zip Code; SSN; ITIN; Wages/Income; Employer ID; Date of SSA Event** 
 
 For all numeric miswriting, first select the sample to have noise added. 
 Once the sample is selected, change 1 digit of the number at random to any 
@@ -2947,41 +3022,25 @@ other random number.
 For example: if the correct SSN is 123456789, a miswriting might look like 123416789. 
 Please confirm that the new digit is an actual error. 
 
-Limitation: this might lead to illogical data, especially for age and dates (e.g., a 
-person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect 
-but still possible birthday/age. However, since the main goal is noise for PRL, we 
-think this is still acceptable. 
+Limitations: 
 
-**Miswriting - Addresses**
-
-Street number - numeric (need some guards here)
-Street name - same as names 
-
-Limitation: we use street name as a string 
-Look at working paper here for details 
-Carra 01 - best docs on how PVS works 
-Might split into directional, name, and st/pl/etc
-
-Unit - numeric 
-PO Box - numeric 
-City - same as names 
-State - Incorrect select 
-Zip - numeric 
+- This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
 
 **Copy from within Household** 
 
-Swaps within household is meant to account for recording correct data to the incorrect 
-individual. Examples might be a parent switching their children's birthdays on a survey. 
+To allow for confusion between household members, noise will be included to copy data 
+for another person in the household. 
 
-However, since not all simulants have others in their households and since 
-swaps will create 2 incorrect records, sampling is more complex for this noise type. 
+To do this, first determine who is eligible for copying. This is essentially simulants 
+with at least one other person in their household. Note that GQ is not eligible for this 
+type of noise. 
 
-##Zeb thinks this is hard and we should quit 
-Probability that you copy from someone else 
+From the eligble simulants, select the sample to have noise added. For those individuals, 
+copy the relevant piece of data from another person in the household. 
 
-Say whos eligible - more than 1 person household 
-Pick people 
-Copy from a friend 
+Limitations: 
+
+- This oversimplifies some swapping of ages or birthdays between family members. However, it allows up better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenege. 
 
 **Month and Day Swap**
 
@@ -2997,8 +3056,9 @@ others available. Note that for relationship to head of household, this includes
 the full list of options, not just those seen in the household. 
 
 Limitations: 
+
 - For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
-- Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups) however, we are not including this complexity. 
+- Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
 
 **"Borrowed" SSN**
 
