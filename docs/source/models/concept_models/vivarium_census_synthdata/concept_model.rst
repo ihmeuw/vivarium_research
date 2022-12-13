@@ -2811,7 +2811,7 @@ Noise Functions
 ^^^^^^^^^^^^^^^
 
 In order to have a realistic challenge with PRL, it is essential to have 
-noise added to the data. Noise is generally divided into two types: 
+noise added to the data. We currently divide noise into two types: 
 
 #. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
 #. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
@@ -2819,133 +2819,135 @@ noise added to the data. Noise is generally divided into two types:
 To begin, we will start with defining column based noise. Some general rules 
 for all column based noise include: 
 
-- The amount of each type of noise is individually configurable for each observer up to the max listed in the table below. This means that the end user can select that: census first names have 5% typographic errors. The minimum noise is 0 for all column noise. 
-- Simulants are selected for noise at random. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry across observers (e.g., there are not "messy" simulants who make errors on all forms). 
-- As noise functions for certain data types are common across observers, the table below is organized by data type (first name). Below the table, there is further information and defintion on each noise type. 
+- "Noise level" is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for phonetic changes to first names means 1% of rows will be selected for this noise type. 
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can select that: in the census first names have 2% typographic errors. The minimum noise is 0% and the maximum if 5% for all column noise. 
+- Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
+- As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
+- The order of different noise types should not matter, but will go in the order they are listed in the table below. 
 
-.. list-table:: Type of Noise Included and Maximum Level by Data Included
+.. list-table:: Type of Noise Included and Default Level by Data Included
   :widths: 20 20 20 20 20 
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
-    - Maximum Noise Level 
+    - Default Noise Level 
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 5%
-    - OCR, phonetic, typographic, fake names, nicknames 
+    - 1%
+    - Nicknames, OCR, phonetic, typographic, fake names 
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 5%
+    - 1%
     - OCR, phonetic, typographic
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 5%
+    - 1%
     - OCR, phonetic, typographic, fake names
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 5%
-    - Miswriting, Copy from within Household 
+    - 1%
+    - Copy from within Household, Numeric miswriting 
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 5%
-    - Miswriting, Copy from within Household, swap month and day 
+    - 1%
+    - Copy from within Household, Numeric miswriting, swap month and day 
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
-    - Miswriting
+    - 1%
+    - Numeric miswriting
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
+    - 1%
     - OCR, phonetic, typographic
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
-    - Miswriting
+    - 1%
+    - Numeric miswriting
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
-    - Miswriting
+    - 1%
+    - Numeric miswriting
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
+    - 1%
     - OCR, phonetic, typographic
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
+    - 1%
     - Incorrect Select
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 5%
-    - Miswriting
+    - 1%
+    - Numeric miswriting
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
-    - 5%
+    - 1%
     - Incorrect select 
     - 
   * - Sex 
     - Census 
-    - 5%
+    - 1%
     - Incorrect select 
     - 
   * - Race/Ethnicity 
     - Census, WIC
-    - 5%
+    - 1%
     - Incorrect select 
     - 
   * - SSN
     - Taxes (both), SSA
-    - 5%
-    - Miswriting, "borrowed" SSN, Copy from within Household
+    - 1%
+    - "Borrowed" SSN, Copy from within Household, Numeric miswriting 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
-    - 5%
-    - Miswriting, Copy from within Household
+    - 1%
+    - Copy from within Household, Numeric miswriting 
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
-    - 5%
-    - Miswriting
+    - 1%
+    - Numeric miswriting
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
-    - 5%
-    - Miswriting
+    - 1%
+    - Numeric miswriting
     - 
   * - Employer Name 
     - Taxes (both)
-    - 5%
+    - 1%
     - OCR, typographic 
     - 
   * - Type of Tax Form  
     - Taxes (both)
-    - 5%
+    - 1%
     - Incorrect select 
     - 
   * - Type of SSA Event 
     - SSA 
-    - 5%
+    - 1%
     - Incorrect select 
     - 
   * - Date of SSA Event 
     - SSA 
-    - 5%
-    - Miswriting, month and day swap 
+    - 1%
+    - Numeric miswriting, month and day swap 
     - 
 
 The below section further describes types of noise including any code 
@@ -2972,14 +2974,14 @@ Limitations:
 
 **Phonetic**
 
-Phoentic errors are when a character is misheard. This could similar sounding letters when 
-spoken 't' and 'd' for example; or letter that make the same sounds within a word 'o' and 'ou'. 
+Phonetic errors are when a character is misheard. This could similar sounding letters when 
+spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
 In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
 
 Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
 will be determined at the character level as XX errors per character. We think this approximates to 1 
 error per selected string, but obviously will not be exact. To implement this, select the strings 
-eligible for noise and then apply the OCR noise function to all strings. 
+eligible for noise and then apply the OCR noise function to these strings.
 
 Limitations: 
 
@@ -3007,7 +3009,7 @@ Limitations:
 For a variety of reasons, some repondents might choose to use a fake name rather 
 than their real name on official forms. To account for this, first select the sample 
 to have noise added. Then for everyone selected, replace their name with a random 
-selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/2022_04_20c_prl_fake_names.ipynb>`_. 
 Please note that the list is separated into first and last names. 
 
 Limitations: 
@@ -3019,19 +3021,23 @@ Limitations:
 
 Many people choose to use nicknames instead of their "real" names. A common example is an 
 Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
-which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/carltonnorthern/nicknames/blob/master/names.csv>`_. 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. 
 
 Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
 name with any of the nicknames included in the csv. If there are multiple options, 
 select at random. 
 
+Limitations: 
+
+- The list of nicknames above is hand-curated and almost definitely misses some nicknames. It is also likely that it misses nicknames in a bias way based on language of origin, personal history, etc. 
+
 .. note::
 
   If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach. 
 
 
-**Miswriting** 
+**Numeric Miswriting** 
 
 For all numeric miswriting, first select the sample to have noise added. 
 Once the sample is selected, change 1 digit of the number at random to any 
@@ -3049,7 +3055,7 @@ Limitations:
 To allow for confusion between household members, noise will be included to copy data 
 for another person in the household. 
 
-To do this, first determine who is eligible for copying. This is essentially simulants 
+To do this, first determine who is eligible for copying. This is simulants 
 with at least one other person in their household. Note that GQ is not eligible for this 
 type of noise. 
 
@@ -3058,7 +3064,7 @@ copy the relevant piece of data from another person in the household.
 
 Limitations: 
 
-- This oversimplifies some swapping of ages or birthdays between family members. However, it allows up better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenege. 
+- This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge. 
 
 **Month and Day Swap**
 
@@ -3070,7 +3076,9 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 
 Incorrect select applies to a range of data types. For this, select the sample to 
 have noise added. For those selected, randomly select a different option from the 
-others available. Note that for relationship to head of household, this includes 
+correct one. This is randomly chosen from the original list of options 
+(e.g., for state, if WA is the true answer randomly pick any other state). 
+Note that for relationship to head of household, this includes 
 the full list of options, not just those seen in the household. 
 
 Limitations: 
@@ -3083,6 +3091,11 @@ Limitations:
 Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
 It will NOT be individually configurable by the end user. No further action is 
 needed in the noise functions for this component. 
+
+.. todo::
+
+  Row based noise to be added 
+
 
 **Old Abie Work, to be deleted later** 
 
