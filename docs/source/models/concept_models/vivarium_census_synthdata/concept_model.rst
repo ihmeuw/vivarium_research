@@ -2006,16 +2006,24 @@ Census
   * - Last name
   * - Age 
   * - Date of Birth 
-  * - Physical Address
-  * - Physical ZIP Code
+  * - Physical Address Street Number 
+  * - Physical Address Street Name
+  * - Physical Address Unit 
+  * - Physical Address City
+  * - Physical Address State 
+  * - Physical Address ZIP Code
   * - Relationship to Person 1 (Head of Household)
   * - Sex (binary)
   * - Race/Ethnicity 
+  * - Tracked Guardian(s) (for noise functions ONLY)
+  * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Type of GQ (for noise functions ONLY)
 
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling.
-Based on race/ethnicity, age, and sex, simulants will be assigned a 
+Simulants currently living in the US are eligible for sampling. Note 
+that this means they must be listed as 'alive' at the time the census 
+is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
 probability, simulants will be randomly selected for inclusion. We decided 
 to use additive effects rather than multiplicitive which is often used 
@@ -2123,13 +2131,6 @@ they have a 0% chance of being missed. We are not including
 duplicates at this time. 
 
 
-**Data Errors/Noise** 
-
-.. todo::
-    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
-    - We currently have net undercounts, might want to have omissions and duplicates instead with a noise function  
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of the true census. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
@@ -2177,8 +2178,16 @@ There are two types of sampling plans:
   * - Last name
   * - Age 
   * - DOB 
-  * - Physical Address
-  * - Physical ZIP Code 
+  * - Physical Address Street Number 
+  * - Physical Address Street Name
+  * - Physical Address Unit 
+  * - Physical Address City
+  * - Physical Address State 
+  * - Physical Address ZIP Code
+  * - Tracked Guardian(s) (for noise functions ONLY)
+  * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Type of GQ (for noise functions ONLY)
+
 
 Here is an example: 
 
@@ -2293,16 +2302,6 @@ For longitudinal surveys, assume that non-response is independent between
 survey iterations. 
 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
-    - Possible changes to omission rates by survey 
-    - To avoid rerunning, please oversample by 2x 
-    - Might include person swaps or duplicates in the noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the survey leading to additional noise not modeled here 
@@ -2316,9 +2315,8 @@ survey iterations.
 
 The ACS will be used for V&V testing. It is defined as: 
 
-- Sample rate of 12,000 households nationwide  
-- Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly)
+- To appoximate a monthly sample rate of 12,000 households nationwide with using 8 day timesteps, we will sample (12,000 * 12)/(365.25/28) = 11039 households every 28 days 
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for duplication 
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
@@ -2331,9 +2329,8 @@ added here.
 
 To create this survey: 
 
-- Sample rate of 60,000 households nationwide 
-- Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly)  
+- To appoximate a monthly sample rate of 60,000 households nationwide with using 8 day timesteps, we will sample (60,000 * 12)/(365.25/28) = 55195 households every 28 days  
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for duplication 
 - **Not** longitudinal (independent samples) 
 - This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
 
@@ -2368,9 +2365,15 @@ in the home.
   * - Last name
   * - Age 
   * - DOB 
-  * - Physical Address
-  * - Physical ZIP Code
+  * - Physical Address Street Number 
+  * - Physical Address Street Name
+  * - Physical Address Unit 
+  * - Physical Address City
+  * - Physical Address State 
+  * - Physical Address ZIP Code
   * - Race/ethnicity 
+  * - Tracked Guardian(s) (for noise functions ONLY)
+  * - Tracked Guardian Address(es) (for noise functions ONLY)
 
 Here is an example: 
 
@@ -2472,12 +2475,6 @@ the participant.
 
 Source: [Coverage]_
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses
 
 **Limitations and Possible Future Adds** 
 
@@ -2518,8 +2515,13 @@ W2 and 1099 Forms
   * - Last name
   * - Age 
   * - DOB 
-  * - Mailing Address
-  * - Mailing ZIP Code
+  * - Mailing Address Street Number 
+  * - Mailing Address Street Name
+  * - Mailing Address Unit
+  * - Mailing Address PO Box 
+  * - Mailing Address City
+  * - Mailing Address State 
+  * - Mailing Address ZIP Code
   * - Social Security Number 
   * - Wages (income from this job)
   * - Employer ID 
@@ -2527,6 +2529,9 @@ W2 and 1099 Forms
   * - Employer Address 
   * - Employer ZIP Code 
   * - Type of Tax Form (W2 or 1099)
+  * - Tracked Dependent(s) (for noise functions ONLY)
+  * - Tracked Dependent Address(es) (for noise functions ONLY)
+  * - Type of GQ (for noise functions ONLY)
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2583,14 +2588,6 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 5.35%
 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Addition of a noise function for misrecording data (names, addresses, birthdays, employer information) 
-    - Further refine "sharing" of SSN's with noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) addresses; type of group quarter 
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of how tax documents are compiled. 
@@ -2629,10 +2626,20 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -  
   * - DOB
     -  
-  * - Mailing Address
-    -  
-  * - Mailing ZIP Code
-    - 
+  * - Mailing Address Street Number 
+    -
+  * - Mailing Address Street Name
+    -
+  * - Mailing Address Unit
+    -
+  * - Mailing Address PO Box 
+    -
+  * - Mailing Address City
+    -
+  * - Mailing Address State 
+    -
+  * - Mailing Address ZIP Code
+    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2643,12 +2650,26 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Name
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Address 
+  * - Employer Address Street Number
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer ZIP Code 
+  * - Employer Address Street Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address Unit
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address City
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address State
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address ZIP Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Tracked Dependent(s) (for noise functions ONLY)
+    - 
+  * - Tracked Dependent Address(es) (for noise functions ONLY)
+    - 
+  * - Type of GQ (for noise functions ONLY)
+    - 
   * - Joint Filer 
     - This row through 'dependent' are to be included if there is a joint filer ONLY 
   * - First name 
@@ -2661,10 +2682,20 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - DOB
     -  
-  * - Mailing Address
-    -  
-  * - Mailing ZIP Code
-    - 
+  * - Mailing Address Street Number 
+    -
+  * - Mailing Address Street Name
+    -
+  * - Mailing Address Unit
+    -
+  * - Mailing Address PO Box 
+    -
+  * - Mailing Address City
+    -
+  * - Mailing Address State 
+    -
+  * - Mailing Address ZIP Code
+    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2681,6 +2712,12 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Tracked Dependent(s) (for noise functions ONLY)
+    - 
+  * - Tracked Dependent Address(es) (for noise functions ONLY)
+    - 
+  * - Type of GQ (for noise functions ONLY)
+    - 
   * - Dependent
     - This columns through the end are to be included for each dependent on the tax filing 
   * - First name 
@@ -2778,15 +2815,6 @@ for who files taxes:
     *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
-    - Include person swaps or duplicates - especially relevant for taxes if dependents should be double claimed sometimes 
-    - Further refine "sharing" of SSN's with noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) address; type of group quarter  
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of how tax documents are compiled. 
@@ -2855,13 +2883,6 @@ SSN then.
 
 100% of simulants with a SSN and a qualifying event in that time step 
 will be recorded. 
-
-**Data Errors/Noise** 
-
-.. todo::
-
-  - The omission rate (currently 0%) should be parameterizable. 
-  - Additional noise functions on names and dates should be parameterizable. 
 
 
 **Items NOT Included in the Minimum Viable Model** 
