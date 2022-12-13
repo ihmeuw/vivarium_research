@@ -2835,7 +2835,7 @@ for all column based noise include:
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 5%
-    - OCR, phonetic, typographic, fake names
+    - OCR, phonetic, typographic, fake names, nicknames 
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
@@ -3014,6 +3014,22 @@ Limitations:
 
 - Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL. 
 - Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here. 
+
+**Nicknames**
+
+Many people choose to use nicknames instead of their "real" names. A common example is an 
+Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/carltonnorthern/nicknames/blob/master/names.csv>`_. 
+
+Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
+determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
+name with any of the nicknames included in the csv. If there are multiple options, 
+select at random. 
+
+.. note::
+
+  If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach. 
+
 
 **Miswriting** 
 
