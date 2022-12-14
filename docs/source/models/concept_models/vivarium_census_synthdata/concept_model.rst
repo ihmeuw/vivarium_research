@@ -2184,6 +2184,7 @@ There are two types of sampling plans:
   * - Physical Address City
   * - Physical Address State 
   * - Physical Address ZIP Code
+  * - Sex (binary)
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
@@ -2371,6 +2372,7 @@ in the home.
   * - Physical Address City
   * - Physical Address State 
   * - Physical Address ZIP Code
+  * - Sex (binary)
   * - Race/ethnicity 
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
