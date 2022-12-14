@@ -2206,7 +2206,7 @@ step process.
 predetermined by the researcher. The selection should be stratified by state, 
 but no other variables. This will be a random sample. 
 
-**Step 2:** Households will be chosen to be non-responders and removed from 
+**Step 2:** Simulants will be chosen to be non-responders and removed from 
 the sample. This step will vary significantly based on the mode of the survey. 
 There are three possible modes: mail/online (assumed to be the same for this 
 model), telephone, and personal visits. 
