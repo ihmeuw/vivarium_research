@@ -2315,8 +2315,8 @@ survey iterations.
 
 The ACS will be used for V&V testing. It is defined as: 
 
-- To appoximate a monthly sample rate of 12,000 households nationwide with using 8 day timesteps, we will sample (12,000 * 12)/(365.25/28) = 11039 households every 28 days 
-- Note: to avoid rerunning the simulation, please oversample by 2x to allow for duplication 
+- To appoximate a monthly sample rate of 12,000 households nationwide using 28 day timesteps, we will sample (12,000 * 12)/(365.25/28) = 11039 households every 28 days 
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion  
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
@@ -2329,8 +2329,8 @@ added here.
 
 To create this survey: 
 
-- To appoximate a monthly sample rate of 60,000 households nationwide with using 8 day timesteps, we will sample (60,000 * 12)/(365.25/28) = 55195 households every 28 days  
-- Note: to avoid rerunning the simulation, please oversample by 2x to allow for duplication 
+- To appoximate a monthly sample rate of 60,000 households nationwide using 28 day timesteps, we will sample (60,000 * 12)/(365.25/28) = 55195 households every 28 days  
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion 
 - **Not** longitudinal (independent samples) 
 - This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
 
@@ -2515,10 +2515,10 @@ W2 and 1099 Forms
   * - Last name
   * - Age 
   * - DOB 
-  * - Mailing Address Street Number 
-  * - Mailing Address Street Name
-  * - Mailing Address Unit
-  * - Mailing Address PO Box 
+  * - Mailing Address Street Number (blank for PO boxes)
+  * - Mailing Address Street Name (blank for PO boxes)
+  * - Mailing Address Unit (blank for PO boxes)
+  * - Mailing Address PO Box (blank for not PO boxes)
   * - Mailing Address City
   * - Mailing Address State 
   * - Mailing Address ZIP Code
@@ -2626,13 +2626,13 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -  
   * - DOB
     -  
-  * - Mailing Address Street Number 
+  * - Mailing Address Street Number (blank for PO boxes)
     -
-  * - Mailing Address Street Name
+  * - Mailing Address Street Name (blank for PO boxes)
     -
-  * - Mailing Address Unit
+  * - Mailing Address Unit (blank for PO boxes)
     -
-  * - Mailing Address PO Box 
+  * - Mailing Address PO Box (blank for not PO boxes)
     -
   * - Mailing Address City
     -
@@ -2682,13 +2682,13 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - DOB
     -  
-  * - Mailing Address Street Number 
+  * - Mailing Address Street Number (blank for PO boxes)
     -
-  * - Mailing Address Street Name
+  * - Mailing Address Street Name (blank for PO boxes)
     -
-  * - Mailing Address Unit
+  * - Mailing Address Unit (blank for PO boxes)
     -
-  * - Mailing Address PO Box 
+  * - Mailing Address PO Box (blank for not PO boxes)
     -
   * - Mailing Address City
     -
