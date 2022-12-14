@@ -2951,7 +2951,7 @@ for all column based noise include:
     - 
 
 The below section further describes types of noise including any code 
-available and information for implimentation. **Software engineering team - please alert the research team if any of the below looks to be particularly challenging for further discussion.**
+available and information for implementation. **Software engineering team - please alert the research team if any of the below looks to be particularly challenging for further discussion.**
 
 **OCR**
 
@@ -3021,7 +3021,7 @@ Limitations:
 
 Many people choose to use nicknames instead of their "real" names. A common example is an 
 Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
-which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
 
 Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
@@ -3076,9 +3076,7 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 
 Incorrect select applies to a range of data types. For this, select the sample to 
 have noise added. For those selected, randomly select a different option from the 
-correct one. This is randomly chosen from the original list of options 
-(e.g., for state, if WA is the true answer randomly pick any other state). 
-Note that for relationship to head of household, this includes 
+correct one. This is randomly chosen from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes 
 the full list of options, not just those seen in the household. 
 
 Limitations: 
@@ -3094,7 +3092,7 @@ needed in the noise functions for this component.
 
 .. todo::
 
-  Row based noise to be added 
+  Row based noise and data formatting noise to be added 
 
 
 **Old Abie Work, to be deleted later** 
