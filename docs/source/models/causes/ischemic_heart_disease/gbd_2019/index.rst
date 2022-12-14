@@ -552,7 +552,7 @@ heart disease, and residual heart failure from other causes.
 
 As these causes are identical in all capacities, we think it is easier to make 
 this designation in post processing rather than in the model itself. The rates of 
-each group (HHD vs other) can be found in this cvs file /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_hhd_perc.csv 
+each group (HHD vs other) can be found in this csv file /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_hhd_perc.csv 
 . Note that this is different than the above proportions 
 file. It is designed to give the percent of heart failure to assign to HHD in post 
 processing from the residual heart failure cause ONLY. The IHD heart failure cause 

@@ -257,7 +257,9 @@ all is 370. The cause_id for IHD is 493. The med_ids are 105 for FPG,
 107 for SBP and 367 for LDL-C. The csv has data for individual draws 
 that will be used. 
 
-RR_adjusted = (1 - (MF for SBP + MF for LDL-C + MF for FPG)) * (RR_unadjusted - 1) + 1
+:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * \prod_{m=1}^{n} (1 - MF_m)`
+
+Where :math:`MF_m` is the mediation factor for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on IHD. 
@@ -290,7 +292,9 @@ all is 370. The cause_id for ischemic stroke is 495. The med_ids are 105 for FPG
 107 for SBP and 367 for LDL-C. The csv has data for individual draws 
 that will be used. 
 
-RR_adjusted = (1 - (MF for SBP + MF for LDL-C + MF for FPG)) * (RR_unadjusted - 1) + 1
+:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * \prod_{m=1}^{n} (1 - MF_m)`
+
+Where :math:`MF_m` is the mediation factor for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on ischemic stroke. 
