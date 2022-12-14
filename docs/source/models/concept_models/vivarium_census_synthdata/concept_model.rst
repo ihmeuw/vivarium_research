@@ -2819,139 +2819,200 @@ noise added to the data. We currently divide noise into two types:
 To begin, we will start with defining column based noise. Some general rules 
 for all column based noise include: 
 
-- "Noise level" is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for phonetic changes to first names means 1% of rows will be selected for this noise type. 
-- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can select that: in the census first names have 2% typographic errors. The minimum noise is 0% and the maximum if 5% for all column noise. 
+- "Rows with error" is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected for this noise type. 
+- "Errors per row" is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. For example a zip code 12345 could have 1 error (12335) or 2 errors (12333)
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can select that: in the census sex has 2% incorrect selections. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
 - The order of different noise types should not matter, but will go in the order they are listed in the table below. 
 
 .. list-table:: Type of Noise Included and Default Level by Data Included
-  :widths: 20 20 20 20 20 
+  :widths: 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
-    - Default Noise Level 
+    - Default Noise Level: Rows with Errors
+    - Default Noise Level: Errors per Row
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
+    - 1 
     - Nicknames, OCR, phonetic, typographic, fake names 
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
+    - 1 
     - OCR, phonetic, typographic
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
+    - 1 
     - OCR, phonetic, typographic, fake names
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
+    - 1 
     - Copy from within Household, Numeric miswriting 
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
+    - 1 
     - Copy from within Household, Numeric miswriting, swap month and day 
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - 1 
     - Numeric miswriting
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - 1 
     - OCR, phonetic, typographic
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - 1 
     - Numeric miswriting
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - 1 
     - Numeric miswriting
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - 1 
     - OCR, phonetic, typographic
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - N/A
     - Incorrect Select
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - 1
     - Numeric miswriting
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 1%
+    - N/A
     - Incorrect select 
     - 
   * - Sex 
     - Census, Household Surveys, WIC 
     - 1%
+    - N/A
     - Incorrect select 
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 1%
+    - N/A
     - Incorrect select 
     - 
   * - SSN
     - Taxes (both), SSA
     - 1%
+    - 1
     - "Borrowed" SSN, Copy from within Household, Numeric miswriting 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
+    - 1
     - Copy from within Household, Numeric miswriting 
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
+    - 1
     - Numeric miswriting
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
+    - 1
     - Numeric miswriting
     - 
   * - Employer Name 
     - Taxes (both)
     - 1%
+    - 1
     - OCR, typographic 
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 1%
+    - N/A
     - Incorrect select 
     - 
   * - Type of SSA Event 
     - SSA 
     - 1%
+    - N/A
     - Incorrect select 
     - 
   * - Date of SSA Event 
     - SSA 
     - 1%
+    - N/A
     - Numeric miswriting, month and day swap 
     - 
 
 The below section further describes types of noise including any code 
 available and information for implementation. **Software engineering team - please alert the research team if any of the below looks to be particularly challenging for further discussion.**
+
+**Converting from Noise Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
+
+For simplicity for the end user, they will input two values for noise level: 
+
+#. Rows with Errors 
+#. Errors per Row 
+
+For types of noise others than those listed above, the only parameter is rows with error 
+and can be followed exactly. For noise types above, the functions we will use take different parameters: 
+
+#. Rows Eligible for Errors 
+#. Error Rate per Character OR per Token 
+
+These parameters, while related are different in key ways and therefore we need to 
+provide a way to convert between them. 
+
+Starting with #1 from both lists, we will calculate the number of rows eligible 
+for errors to approximate the user inputted rows with errors given. To calculate 
+this we can: 
+
+#. Compute the average length of strings in the column 
+#. Probability of at least 1 error = 1 - ((1 - (user defined errors per row / average string length))^(average string length))
+#. Rows eligible for errors = User defined rows with errors / probability of at least 1 error 
+
+Next, once a row is selected to receive noise, we define how much noise it should receive. 
+The default value here is 1 error per row, but can be changed. To calculate the error rate 
+per character/token, we can use this equation: 
+
+Error rate per Character/Token = (user defined errors per row)/(average string length)
+
+This approach has a number of assumptions and limitations: 
+
+- We assume that there are a similar number of tokens and characters in each string. This is approximately true for longer strings. While it is incorrect for short strings, we feel it is still reasonable overall. 
+- The user defined values for errors will not be exact, but rather approximated with this method. 
+- While the user provides an overall rate of errors per rows, in reality the number of expected errors per string is a function of the length of the string. 
 
 **OCR**
 
@@ -2959,18 +3020,9 @@ Optical character recognition is when a character is misread for another charact
 looks similar. A common examples is 'S' and '5'. In order to emulate 
 that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
 
-Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
-will be determined at the character level as XX errors per character. We think this approximates to 1 
-error per selected string, but obviously will not be exact. To implement this, select the strings 
-eligible for noise and then apply the OCR noise function to all strings. 
-
-.. todo::
-
-  Include character based noise level (applies to phonetic and typographic too)
-
-Limitations: 
-
-- The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
+To implement this, use the math defined above to calculate the rate of rows eligible for 
+noise and error rate per character/token based on user inputs. Then select the strings 
+eligible for noise and apply the OCR noise function to all strings. 
 
 **Phonetic**
 
@@ -2978,14 +3030,12 @@ Phonetic errors are when a character is misheard. This could similar sounding le
 spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
 In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
 
-Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
-will be determined at the character level as XX errors per character. We think this approximates to 1 
-error per selected string, but obviously will not be exact. To implement this, select the strings 
-eligible for noise and then apply the OCR noise function to these strings.
+To implement this, use the math defined above to calculate the rate of rows eligible for 
+noise and error rate per character/token based on user inputs. Then select the strings 
+eligible for noise and apply the phonetic noise function to all strings. 
 
 Limitations: 
 
-- The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
 - Certain observers might be more likely to include phonetic errors, such as the census where large amounts of data are gathered over the phone or in person. However, we do not include that level of specificity in the design of the noise function. The amount of noise can always be changed at the observer level when extracting data to account for this. 
 
 
@@ -2995,14 +3045,15 @@ Typographic errors occur due to mistyping information. The commonality of errors
 based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
 and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
 
-Currently, the user defined rate will be a rate 'eligible' for noise. The actual rate of noise 
-will be determined at the character level as XX errors per character. We think this approximates to 1 
-error per selected string, but obviously will not be exact. To implement this, select the strings 
-eligible for noise and then apply the OCR noise function to all strings. 
+To implement this, use the math defined above to calculate the rate of rows eligible for 
+noise and error rate per character/token based on user inputs. Then select the strings 
+eligible for noise and apply the OCR noise function to all strings. 
 
-Limitations: 
+.. todo::
 
-- The result of having parameters at the character level is that we cannot tell exactly how many data points have noise in them. With the current settings, it is likely similar to the user selected value, but we will always have fewer errors than expected. This could be improved at a later time. 
+  Add other "keyboard errors", likely ones that swap letters (teh instead of the). This would ideally be in the same typographic function. 
+
+  The typographic function has another parameter defining the probability that a corrupted token contains the original token. We need to include that in the noise parameter definition. 
 
 **Fake Names**
 
@@ -3039,16 +3090,19 @@ Limitations:
 
 **Numeric Miswriting** 
 
-For all numeric miswriting, first select the sample to have noise added. 
-Once the sample is selected, change 1 digit of the number at random to any 
-other random number. 
-
-For example: if the correct SSN is 123456789, a miswriting might look like 123416789. 
-Please confirm that the new digit is an actual error. 
+To implement this, use the math defined above to calculate the rate of rows eligible for 
+noise and error rate per character/token based on user inputs. Then select the strings 
+eligible for noise. Once the sample is selected, change digits of the number at random to any 
+other random number. Please confirm that the new digit is an actual error. 
 
 Limitations: 
 
 - This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
+
+.. todo::
+
+  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. 
+
 
 **Copy from within Household** 
 
