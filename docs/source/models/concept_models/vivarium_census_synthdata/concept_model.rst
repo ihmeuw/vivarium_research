@@ -2852,7 +2852,7 @@ added later (not in the minimum viable model), if desired.
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event 
+  * - Date of event (stored as a string in MM/DD/YYYY format)
 
 Currently, we will only track 2 types of events: 
 
