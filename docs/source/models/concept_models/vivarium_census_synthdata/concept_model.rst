@@ -2005,7 +2005,7 @@ Census
   * - Middle initial 
   * - Last name
   * - Age 
-  * - Date of Birth 
+  * - Date of Birth (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2177,7 +2177,7 @@ There are two types of sampling plans:
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB 
+  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2365,7 +2365,7 @@ in the home.
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB 
+  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2516,7 +2516,7 @@ W2 and 1099 Forms
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB 
+  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
   * - Mailing Address Unit (blank for PO boxes)
@@ -2626,7 +2626,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Age
     -  
-  * - DOB
+  * - DOB (stored as a string in MM/DD/YYYY format)
     -  
   * - Mailing Address Street Number (blank for PO boxes)
     -
@@ -2682,7 +2682,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Age
     - 
-  * - DOB
+  * - DOB (stored as a string in MM/DD/YYYY format)
     -  
   * - Mailing Address Street Number (blank for PO boxes)
     -
@@ -2849,10 +2849,10 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial 
   * - Last name
-  * - DOB 
+  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event 
+  * - Date of event (stored as a string in MM/DD/YYYY format)
 
 Currently, we will only track 2 types of events: 
 
