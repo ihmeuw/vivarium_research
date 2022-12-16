@@ -450,6 +450,7 @@ Simulant will be randomly assigned to a guardian based on the below rules:
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
     * Remainder to people with spouses, include both parents 
+- If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run. 
 
 
 .. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
