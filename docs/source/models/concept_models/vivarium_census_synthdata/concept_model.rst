@@ -2816,6 +2816,9 @@ noise added to the data. We currently divide noise into two types:
 #. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
 #. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
 
+Column Noise
+''''''''''''
+
 To begin, we will start with defining column based noise. Some general rules 
 for all column based noise include: 
 
@@ -3133,7 +3136,83 @@ needed in the noise functions for this component.
 
 .. todo::
 
-  Row based noise and data formatting noise to be added 
+  Duplicates, improper inclusion, and data formatting noise to be added 
+
+Row Noise
+'''''''''
+
+Row based noise is defined as the inclusion or exclusion of entire rows of 
+data – which in practice is including or excluding simulants. This falls 
+into three buckets:  
+
+#. **Omissions:** not including simulants that should be included  
+
+#. **Duplicates:** including some simulants multiple times in the data. This could be identical rows of data, or the same simulant but with some differences in their data.  
+
+#. **Improper inclusion:** including simulants in the dataset that don’t qualify for inclusion. This only applies to observers which are not meant to include everyone. An example is a simulant being included in WIC that is above the maximum income level.  
+
+**Omissions:**  
+
+It is assumed that in any dataset, there are people missed. This 
+is important in PRL as the user will try to find a match for someone 
+that doesn’t exist. For simplicity, we will have pseudo-people end 
+users input one value: the overall omission rate. This value can 
+range from 0% (indicating NO omission or a perfect response) up 
+to 10% omission and will be defined at the observer level.  
+
+For the census and household surveys, where non-response is built 
+into the observer, the default omission rate will the equal to the 
+expected omission rate of that survey. For the census and ACS survey, 
+this is 1.45%. For the CPS survey, this is 29.05%. The other observers’ 
+default rate is 0%.  
+
+The process for omitting simulants from the data will be divided into 
+two groups based on observer:  
+
+#. Simple omission will be used for: WIC, taxes and SSA  
+
+#. Targeted omission will be used for: census, household surveys  
+
+**Simple Omission:** 
+
+For simple omission, rows will be randomly removed at the rate specified 
+by the user. Removal will be entirely at random and not correlated to the 
+omission of others in the household or any other simulant attribute. The 
+default is set to 0% as we do not expect people to be "missing" from 
+administrative data. 
+
+**Targeted Omission:**  
+
+For the census and for household surveys, individuals are found to not 
+respond at different rates based on their age, sex, and race/ethnicity. 
+In order to preserve this underlying data structure while allowing for 
+a variable overall omission rate, the noise function must be more complex.  
+
+Census:  
+
+In the census observer, there is currently a net undercount applied only 
+to omissions and not duplicates. Therefore, we calculated the existing net 
+omission rate from the census to be 1.45% based on the population in the 
+simulation. We will need this value for further calculations.  
+
+Currently, an individual probability of omission is found for each simulant 
+based on their age, sex and race/ethnicity. To allow for higher or lower rates 
+of omission, we will then scale this individual omission risk based on the new 
+omission rate.  
+
+New individual omission risk = old individual omission risk * (user-inputted omission rate/ 1.45%)  
+
+Household surveys:  
+
+In general, the same logic as is outlined for the census can be applied to all household surveys. This is:  
+
+#. Find the overall omission rate at the default level  
+
+#. Calculate the simulant level omission rate based on the specific survey and simulant characteristics  
+
+#. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate  
+
+For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.  
 
 
 **Old Abie Work, to be deleted later** 
