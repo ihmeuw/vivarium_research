@@ -58,6 +58,11 @@ Risk exposure distributions can be:
 
  - Continuous
 
+Generally, risk exposure distributions should be mutually exclusive and collectively exhaustive.
+In other words, the prevalence of all risk exposure categories for a categorical distribution and 
+the risk exposure distribution's probability density function across all possible exposure values 
+for a continuous distribution should sum to one.
+
 See the table for examples of each of these risk exposure distributions. 
 
 .. list-table:: Risk exposure distributions
@@ -72,10 +77,13 @@ See the table for examples of each of these risk exposure distributions.
       * Deficient
   * - Unordered polytomous
     - Tobacco use
-    - * Chewing tobacco
+    - * None
+      * Chewing tobacco
       * Cigarettes
       * Cigars
       * Other
+      * Chewing tobacco AND cigarettes
+      * Etc.
   * - Ordered polytomous
     - Child stunting
     - * No child stunting
