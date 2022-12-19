@@ -3272,6 +3272,12 @@ in the end dataset. Select the guardian at random.
 
     Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time. 
 
+.. note:: 
+
+    The research team discussed having improper inclusion as a form of noise in the model. Some examples of this are deceased simulants in the census observer, or high income simulants on WIC. However, the decision was made to not include this in the minimum model. 
+
+    If it is relevant for a case study later, we can add this to the simulation at that time. 
+
 **Old Abie Work, to be deleted later** 
 
 For inspiration, here is the list of files that Census Bureau
