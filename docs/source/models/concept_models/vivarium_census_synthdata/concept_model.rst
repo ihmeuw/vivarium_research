@@ -1701,7 +1701,9 @@ years to be increase predictive validity.
 Use middle names from same distribution as first names (?). It would
 be nice to get some of the national/ethnic challenges right, like
 people from South America with many names getting their middle names
-used as different last names.
+used as different last names. For the minimum model, assume all 
+simulants have exactly 1 middle name. This could be an area for 
+further complexity in future versions. 
 
 We might want to eventually include nicknames and suffixes like Jr. and III.
 
