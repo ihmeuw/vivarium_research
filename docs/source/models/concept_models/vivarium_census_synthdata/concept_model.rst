@@ -3214,6 +3214,63 @@ In general, the same logic as is outlined for the census can be applied to all h
 
 For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.  
 
+**Duplicates:** 
+
+Duplication is most relevant for the census, which has a significant 
+amount of known duplicates. Often, the first PRL task is to match within 
+the same dataset in order to remove duplicates.  
+
+As a simplifying assumption in our initial model, we will be including 
+duplicates in the census only and limiting it to guardian-based duplication. 
+In later models, we might choose to include other forms of duplication with 
+more parameters.  
+
+**Guardian based duplication** 
+
+A known PRL challenge is children being reported multiple 
+times at different addresses. This can occur when family structures are 
+complex and children might spend time at multiple households. A related 
+challenge occurs with college students, who often are counted both at their 
+university and at their guardian’s home address.  
+
+To facilitate this type of error, we have simulants assigned to guardians 
+within the simulation. Sometimes, those guardians may move and live at 
+different addresses than their dependents. In this case, there is an 
+opportunity for duplication. Since this mechanism occurs within the 
+simulation, there is a natural maximum that we will impose in the 
+noise function.  
+
+Guardian based duplication is further divided here into two types: simulants 
+younger than 18 (<18), and those at college GQ less than 24 (<24).  
+
+For simulants younger than 18, an average percent who have a 
+guardian living at a different address will be calculated from the sim. 
+We will use 10% as a placeholder value. The user can then pick a rate of 
+duplication between 0 and 10%.  
+
+Based on this rate, the simulant will be duplicated, but with their address 
+changed to the guardian’s address instead of their “correct” address. 
+
+.. todo:: 
+
+    Find the maximum noise level from the simulation. If it is above ~25% or has a significant amount of variation over time or across ages, reconsider how to define the noise parameter.  
+
+For college GQ simulants aged less than 24, all are assigned to a guardian who 
+by definition lives at a different address. This means that theoretically 
+the maximum noise level is 100% for this group, however, that would add 
+significantly to the dataset and so it not allowed here. The default rate 
+will be set to 5%, with a minimum of 0% and a maximum of 25%.  
+
+To create duplicates, the college student will be included in the final 
+dataset twice, once at their college GQ and once at their guardian's home. 
+
+For either group, if a simulant has more than 1 guardian living at a 
+different address only duplicate them once, for a maximum of 2 occurences 
+in the end dataset. Select the guardian at random. 
+
+.. note:: 
+
+    Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time. 
 
 **Old Abie Work, to be deleted later** 
 
