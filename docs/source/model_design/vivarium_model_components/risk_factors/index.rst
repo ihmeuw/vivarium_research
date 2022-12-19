@@ -99,5 +99,41 @@ risk factor.
 References
 ----------
 
+.. [WHO-Global-Health-Risks-Annex]
+  `Annex A: Data and methods
+  <https://www.who.int/healthinfo/global_burden_disease/GlobalHealthRisks_report_annex.pdf>`_
+  in :title:`Global Health Risks: Mortality and burden of disease attributable
+  to selected major risks`. World Health Organization. 2009.
+  https://www.who.int/healthinfo/global_burden_disease/global_health_risks/en/
+
+.. [Comparative-quantification-health-risks-2003]
+  Murray, C.J., Ezzati, M., Lopez, A.D. et al. Comparative quantification of
+  health risks: Conceptual framework and methodological issues. :title:`Popul
+  Health Metrics` 1, 1 (2003). https://doi.org/10.1186/1478-7954-1-1
+
+.. [Estimating-Attributable-Burden]
+  `Chapter 25: Estimating attributable burden of disease from exposure and
+  hazard data
+  <http://www9.who.int/publications/cra/chapters/volume2/2129-2140.pdf>`_ by
+  Stephen Vander Hoorn, Majid Ezzati, Anthony Rodgers, Alan D. Lopez and
+  Christopher J.L. Murray. In :title:`Comparative Quantification of Health
+  Risks: Global and Regional Burden of Disease Attribution to Selected Major
+  Risk Factors`. World Health Organization. 2004.
+  http://www9.who.int/publications/cra/en/
+
+.. [GBD-2017-Risk-Appendix-Modeling-Risk-Factors]
+  `Supplementary appendix 1 <Risk appendix on ScienceDirect_>`_ to the **GBD
+  2017 Risk Factors Capstone**: GBD 2017 Risk Factor Collaborators. Global,
+  regional, and national comparative risk assessment of 84 behavioural,
+  environmental and occupational, and metabolic risks or clusters of risks for
+  195 countries and territories, 1990–2017: a systematic analysis for the Global
+  Burden of Disease Study 2017. :title:`The Lancet`. 8 Nov 2018; 392: 1923-94.
+  doi: http://dx.doi.org/10.1016/S0140-6736(18)32225-6.
+.. _Risk appendix on ScienceDirect: https://ars.els-cdn.com/content/image/1-s2.0-S0140673618322256-mmc1.pdf
+
+.. [ICRP]
+  `Radon: Units of Measure <http://icrpaedia.org/Radon:_Units_of_Measure>`_.
+  International Commission on Radiological Protection.
+
 .. [Zheng-et-al-2022]
   Zheng, P., Afshin, A., Biryukov, S. et al. The Burden of Proof studies: assessing the evidence of risk. Nat Med 28, 2038–2044 (2022). https://doi.org/10.1038/s41591-022-01973-2
