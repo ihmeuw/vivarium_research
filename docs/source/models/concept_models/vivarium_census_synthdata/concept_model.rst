@@ -3158,7 +3158,7 @@ is important in PRL as the user will try to find a match for someone
 that doesn’t exist. For simplicity, we will have pseudo-people end 
 users input one value: the overall omission rate. This value can 
 range from 0% (indicating NO omission or a perfect response) up 
-to 10% omission and will be defined at the observer level.  
+to 50% omission and will be defined at the observer level.  
 
 For the census and household surveys, where non-response is built 
 into the observer, the default omission rate will the equal to the 
