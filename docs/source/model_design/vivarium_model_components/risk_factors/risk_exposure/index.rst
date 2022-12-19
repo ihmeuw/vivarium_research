@@ -71,12 +71,11 @@ See the table for examples of each of these risk exposure distributions.
     - * Not deficient
       * Deficient
   * - Unordered polytomous
-    - Unsafe water source
-    - * Unimproved source, no household water treatment
-      * Unimproved source, boil or filter household treatment
-      * Basic piped, chlorine/solar household treatment
-      * High-quality, piped water
-      * Etc.
+    - Tobacco use
+    - * Chewing tobacco
+      * Cigarettes
+      * Cigars
+      * Other
   * - Ordered polytomous
     - Child stunting
     - * No child stunting
