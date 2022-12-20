@@ -429,11 +429,13 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
 
 4. Update SQ-LNS parameters based on collaborator feedback and new data
 
-  * SQ-LNS effects on stunting persist until five years of age
+  * SQ-LNS effects on stunting persist until five years of age (use new SQ-LNS coverage definition)
 
   * Updated effect sizes and effect size application strategy for SQ-LNS effects on stunting
 
   * SQ-LNS effects on wasting apply to additional transition rates, introduce sensitivity analysis (new scenarios)
+
+  * Stratify mortality hazard first moment observer by intervention coverage
 
 5. SQ-LNS utilization algorithms and targeted scenarios
 
