@@ -163,9 +163,15 @@ Vivarium Modeling Strategy
 Utilization algorithms
 ++++++++++++++++++++++++
 
-We will consider two concepts of SQ-LNS services, including:
+We will consider two concepts of SQ-LNS services, including coverage and utilization:
 
-- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in 
+- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in the concept model document.
+
+Possible coverage values include:
+
+- **Uncovered:** Not supplemented by SQ-LNS currently or in the past. Simulants aged 6 months to 5 years are eligible for this category.
+- **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 2 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
+- **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 2. Simulants aged 2 to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
 
 - **Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
 
@@ -212,7 +218,7 @@ Wasting
 
 Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, it is not known whether SQ-LNS reduces wasting prevalence through a reduction of wasting incidence or duration. Therefore, we will run a sensitivity analysis in which SQ-LNS affects wasting incidence rates and another in which SQ-LNS affects wasting recovery rates. Additionally, due to the multicompartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we `solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%20.ipynb>`_. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
 
-Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2020_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. The SQ-LNS effects on wasting transition rates should apply to simulants covered by SQ-LNS from the start of coverage (at six months of age) until they are 2 years of age, at which point SQ-LNS should no longer affect their transition rates.
+Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2020_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. The SQ-LNS effects on wasting transition rates should apply to simulants covered by SQ-LNS from the start of coverage (at six months of age) until they are 2 years of age, at which point SQ-LNS should no longer affect their transition rates. In other words, the :code:`covered` SQ-LNS coverage state affects wasting transitions rates, but the :code:`received` and :code:`uncovered` states do not.
 
 .. note::
 
@@ -255,7 +261,7 @@ Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic 
     - Relative risk
     - 1.28 (1.12, 1.465)
     - Recovery effects
-    - 
+    - Apply this effect to both r1 and t1 transition rates
 
 Stunting
 ~~~~~~~~~
@@ -264,7 +270,9 @@ Stunting
 
   These values changed in the December, but not August, 2022 update
 
-**We will apply the SQ-LNS prevalence ratios on the** :ref:`stunting risk exposure distribution <2020_risk_exposure_child_stunting>` **among simulants covered by SQ-LNS from the start of supplementation (six months of age) until they turn five years of age.** The application of the SQ-LNS effect on stunting through five years of age (beyond the duration of supplementation) was advised by collaborators, with the rationale that height gains achieved during SQ-LNS supplementation will persist throughout life (unlike wasting-associated weight gains). Additionally, as suggested by the observed prevalence ratios from the meta-analysis, we will assume that SQ-LNS results in decreases to the prevalence of moderate and severe stunting, no change to the prevalence of mild stunting, and increases to the stunting TMREL category that are equal to the sum of the decreases in prevalence of moderate and severe stunting. The figure below demonstrates how to apply the effects summarized in the table to the stunting risk exposure distribution of simulants affected by SQ-LNS.
+**We will apply the SQ-LNS prevalence ratios on the** :ref:`stunting risk exposure distribution <2020_risk_exposure_child_stunting>` **among simulants covered by SQ-LNS from the start of supplementation (six months of age) until they turn five years of age.** In other words, both the :code:`covered` and :code:`received` SQ-LNS coverage states affect stunting, but the :code:`uncovered` state does not. The application of the SQ-LNS effect on stunting through five years of age (beyond the duration of supplementation) was advised by collaborators, with the rationale that height gains achieved during SQ-LNS supplementation will persist throughout life (unlike wasting-associated weight gains). 
+
+Additionally, as suggested by the observed prevalence ratios from the meta-analysis, we will assume that SQ-LNS results in decreases to the prevalence of moderate and severe stunting, no change to the prevalence of mild stunting, and increases to the stunting TMREL category that are equal to the sum of the decreases in prevalence of moderate and severe stunting. The figure below demonstrates how to apply the effects summarized in the table to the stunting risk exposure distribution of simulants affected by SQ-LNS.
 
 .. list-table:: Stunting outcome effect sizes
   :header-rows: 1
