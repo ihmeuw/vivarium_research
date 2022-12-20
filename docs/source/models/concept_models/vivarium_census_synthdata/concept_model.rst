@@ -3241,19 +3241,20 @@ simulation, there is a natural maximum that we will impose in the
 noise function.  
 
 Guardian based duplication is further divided here into two types: simulants 
-younger than 18 (<18), and those at college GQ less than 24 (<24).  
+younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).  
 
-For simulants younger than 18, an average percent who have a 
-guardian living at a different address will be calculated from the sim. 
-We will use 10% as a placeholder value. The user can then pick a rate of 
-duplication between 0 and 10%.  
+For simulants younger than 18 and not in college GQ, the maximum duplication rate will 
+be calculated based on those who have a guardian living at a different address in the sim. 
 
-Based on this rate, the simulant will be duplicated, but with their address 
-changed to the guardian’s address instead of their “correct” address. 
+The user can then pick a rate of duplication between 0 and 100%. If the value selected 
+is higher than the calculated maximum rate in the sim, a warning will be issued to users 
+explaining that the selected rate is greater than the maximum available. 
 
-.. todo:: 
+A default value of 5% will be selected. 
 
-    Find the maximum noise level from the simulation. If it is above ~25% or has a significant amount of variation over time or across ages, reconsider how to define the noise parameter.  
+.. note:: 
+
+    If finding the maximum rate proves too difficult to implement, we can reassess this approach 
 
 For college GQ simulants aged less than 24, all are assigned to a guardian who 
 by definition lives at a different address. This means that theoretically 
