@@ -450,6 +450,7 @@ Simulant will be randomly assigned to a guardian based on the below rules:
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
     * Remainder to people with spouses, include both parents 
+- If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run. 
 
 
 .. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
@@ -1700,7 +1701,9 @@ years to be increase predictive validity.
 Use middle names from same distribution as first names (?). It would
 be nice to get some of the national/ethnic challenges right, like
 people from South America with many names getting their middle names
-used as different last names.
+used as different last names. For the minimum model, assume all 
+simulants have exactly 1 middle name. This could be an area for 
+further complexity in future versions. 
 
 We might want to eventually include nicknames and suffixes like Jr. and III.
 
