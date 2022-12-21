@@ -196,30 +196,50 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - :math:`C_{MAM}` to baseline :math:`C_{SAM}`, :math:`E_{MAM}` to target :math:`E_{MAM}` 
     - Baseline (0%)
     - 
-  * - 6: Full scale-up to SAM baseline
+  * - 6_incidence: Full scale-up to SAM baseline, 
     - Baseline
     - :math:`C_{MAM}` to baseline :math:`C_{SAM}`, :math:`E_{MAM}` to target :math:`E_{MAM}`
-    - 3a to baseline :math:`C_{SAM}`
+    - 3a to baseline :math:`C_{SAM}`, using SQ-LNS incidence sensitivity analysis effects
+    - 
+  * - 6_recovery: Full scale-up to SAM baseline
+    - Baseline
+    - :math:`C_{MAM}` to baseline :math:`C_{SAM}`, :math:`E_{MAM}` to target :math:`E_{MAM}`
+    - 3a to baseline :math:`C_{SAM}`, using SQ-LNS recovery sensitivity analysis effects
     - 
   * - 7: MAM and SAM treatment scale-up
     - Target
     - Target
     - Baseline (0%)
     - 
-  * - 8: Full scale-up to target
+  * - 8_incidence: Full scale-up to target
     - Target
     - Target
-    - 3a to target
+    - 3a to target, using SQ-LNS incidence sensitivity analysis effects
     - 
-  * - 9: SQ-LNS to mildly wasted
+  * - 8_recovery: Full scale-up to target
     - Target
     - Target
-    - 3b to target
+    - 3a to target, using SQ-LNS recovery sensitivity analysis effects
+    - 
+  * - 9_incidence: SQ-LNS to mildly wasted
+    - Target
+    - Target
+    - 3b to target, using SQ-LNS incidence sensitivity analysis effects
     - [Second wave that requires x-factor inclusion]
-  * - 10: SQ-LNS to SAM and MAM treatment
+  * - 9_recovery: SQ-LNS to mildly wasted
     - Target
     - Target
-    - 3c to target
+    - 3b to target, using SQ-LNS recovery sensitivity analysis effects
+    - [Second wave that requires x-factor inclusion]
+  * - 10_incidence: SQ-LNS to SAM and MAM treatment
+    - Target
+    - Target
+    - 3c to target, using SQ-LNS incidence sensitivity analysis effects
+    - [Second wave that requires x-factor inclusion]
+  * - 10_recovery: SQ-LNS to SAM and MAM treatment
+    - Target
+    - Target
+    - 3c to target, using SQ-LNS recovery sensitivity analysis effects
     - [Second wave that requires x-factor inclusion]
 
 .. note::
@@ -407,7 +427,17 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
 
   * Assess computational resource requirements and joint decision about additional locations
 
-4. SQ-LNS utilization algorithms and targeted scenarios
+4. Update SQ-LNS parameters based on collaborator feedback and new data
+
+  * SQ-LNS effects on stunting persist until five years of age (use new SQ-LNS coverage definition)
+
+  * Updated effect sizes and effect size application strategy for SQ-LNS effects on stunting
+
+  * SQ-LNS effects on wasting apply to additional transition rates, introduce sensitivity analysis (new scenarios)
+
+  * Stratify mortality hazard first moment observer by intervention coverage
+
+5. SQ-LNS utilization algorithms and targeted scenarios
 
   * SQ-LNS targeting implementation (new code!)
 
@@ -450,8 +480,14 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - 4, 7, 8
     - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
     - Count data results stratified by random seed for optimization
-    - No x-factor component. V&V zero coverage implementation before moving on    
-  * - 3.1: All wave 1 scenarios
+    - No x-factor component. V&V zero coverage implementation before moving on
+  * - 3.1: SQ-LNS updates
+    - `Update SQ-LNS intervention in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1097>`_ (step #4 in the model development priorities list above), ensure mortality first hazard observer is stratified by intervention coverage, remove children under 6 months from observers
+    - 7, 8_incidence, 8_recovery
+    - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
+    - Count data results stratified by random seed for optimization
+    - No x-factor component. V&V SQ-LNS updates before moving on
+  * - 4.0: All wave 1 scenarios
     - Full wave 1 scenarios
     - 1 through 8
     - 35 draws and population size of 250,000 per draw
