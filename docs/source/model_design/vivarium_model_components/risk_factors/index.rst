@@ -24,7 +24,7 @@ See the following pages for more information on these risk factor sub-components
 Risk factors in GBD
 ^^^^^^^^^^^^^^^^^^^
 
-The Global Burden of Disease study estimates models risk factors and their effects on specific outcomes that meet the burden of proof for causality. The effort to assess the quality of evidence on causality is described in publications such as [Zheng-et-al-2022]_ and summarized on the `Burden of Proof Data Visualization webpage <https://vizhub.healthdata.org/burden-of-proof/>`_. The `GBD 2019 risk factors capstone publication can be found here <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30752-2/fulltext>`_ and can also be explored one the `GBD compare data visualization webpage <https://vizhub.healthdata.org/gbd-compare/>`_
+The Global Burden of Disease study models risk factors and their effects on specific outcomes that meet the burden of proof for causality. The effort to assess the quality of evidence on causality is described in publications such as [Zheng-et-al-2022]_ and summarized on the `Burden of Proof Data Visualization webpage <https://vizhub.healthdata.org/burden-of-proof/>`_. The `GBD 2019 risk factors capstone publication can be found here <https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(20)30752-2/fulltext>`_ and can also be explored one the `GBD compare data visualization webpage <https://vizhub.healthdata.org/gbd-compare/>`_
 
 The GBD categorizes risk factors it models into environmental/occupational, behavioral, and metabolic risks. For example:
 
