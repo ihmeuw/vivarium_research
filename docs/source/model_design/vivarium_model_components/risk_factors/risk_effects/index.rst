@@ -29,9 +29,9 @@ The measure of risk effect in GBD is usually reported in relative terms, namely
 relative risk. It describes the relative relationship between the risk of
 disease Y in the presence of agent X versus in absence of X. Mathematically,
 it's calculated by dividing the rate of some outcome (such as incidence or mortality
-rate) population exposed to a risk by the outcome rate in unexposed population.
+rate) among the population exposed to a risk by the outcome rate in the unexposed population.
 For example, if there are A incident cases and B person-years in exposed group;
-C incident cases and D person-years in unexposed group, then the relative risk
+C incident cases and D person-years in the unexposed group, then the relative risk
 (rate ratio) equals :math:`\frac{AD}{BC}`. The "unexposed" or "reference" group
 in the GBD-estimated relative risks is always the TMREL for that risk. For GBD 
 risk factors with continuous risk exposures, the GBD-estimated relative risks
@@ -43,8 +43,9 @@ exposure, so it is important to clarify this with the GBD modeler.
 
     Determine if there is a data source that documents these units
 
-The GBD-estimated relative risks are adjusted for confounding and therefore
-assumed to represent the *causal* effect size between the risk and outcome.
+The GBD-estimated relative risks are assumed to represent the *causal* effect of the 
+risk on the outcome, as they are calculated in the absense of confounding factors and 
+the evidence is assessed to ensure it meets criteria for causality.
 See the :ref:`causality documentation page <general_dags>` for more information 
 on the topic. GBD has begun to quantify the quality of evidence for causality between
 risk-outcome pairs they model in an effort termed "the burden of proof," summarized
