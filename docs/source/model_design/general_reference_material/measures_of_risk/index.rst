@@ -7,7 +7,7 @@
 Measures of excess risk in epidemiology
 ============================================
 
-The purpose of this page is to provide reference material on measures of occurance and excess risk and their definitions. These measures are used in modeling :ref:`causes <models_cause>` and :ref:`risk effects <models_risk_effect>` in vivarium. The information on this page is not a comprehensive source on these topics and may be supplemented with general epidemiology references such as text books, etc.
+The purpose of this page is to provide reference material on measures of occurance and excess risk and their definitions. These measures are used in modeling :ref:`causes <models_cause>` and :ref:`risk effects <models_risk_effect>` in vivarium. The information on this page is not a comprehensive source on these topics and may be supplemented with general epidemiology references such as text books, [Measure_of_effect]_, etc.
 
 .. contents::
 	:local:

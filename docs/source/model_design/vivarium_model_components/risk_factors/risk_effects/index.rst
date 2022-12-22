@@ -10,17 +10,40 @@ Risk Effects
 What is a risk effect?
 ++++++++++++++++++++++
 
-In epidemiological studies, risk effect is used to study the relationship
-between risk exposures and outcomes. We are not only interested in whether
-a link between a given risk exposure (e.g. smoking) and certain outcome
-(e.g. lung cancer) is statistically meaningful, but also the magnitude of
-this relationship. The effect of exposure can be measured both in relative
-and absolute terms. The risk ratio, the rate ratio, and the odds ratio are
-relative measures of effect. Risk difference is an absolute measure of effect
-and it is calculated by subtracting the risk of the outcome in exposed group
-from unexposed [Measure_of_effect]_. See the 
+A risk effect is a measure how some variable (the risk factor) causally impacts
+some outcome variable. 
+
+Generally, we will use risk effects models to represent 
+associations between two variables that are assumed to be causal and 
+:ref:`risk correlation models <2017_risk_models>` to represent *non-causal* 
+associations between two variables (see the :ref:`causality <general_dags>`
+documentation page for more information on causality. It is important to note
+that for any two variables that are causally related to one another, there is 
+likely also additional non-causal correlation between them through additional
+variables and shared common causes.
+
+There are several attributes of a risk effect that are important to consider, 
+including the 
+
+- direction (ex: positive or negative association), 
+- shape (ex: linear, U-shaped, etc.), 
+- magnitude (ex: large or small), 
+- and statisical certainty 
+
+of the association between the risk factor and the outcome. 
+
+The risk effect may be measured in both absolute (ex: risk difference) or 
+relative terms (ex: relative risk). See the 
 :ref:`measures of excess risk page <excess_risk_measures>` for more 
 information on such measures.
+
+Risk effects are typically estimated in epidemiologic studies that assess
+how different levels of :ref:`risk exposures <risk_exposure>` affect some 
+outcome variable such as an incidence or mortality rate.
+There are several factors that may bias the quantification of a risk effect
+in epidemiologic studies (including influence by confounding), 
+and causal inference from such studies may be inhibited by such limitations.
+See the page on :ref:`causality <general_dags>` for more information on the topic.
 
 Risk effect in GBD
 ^^^^^^^^^^^^^^^^^^
