@@ -3099,7 +3099,7 @@ The last step is combining these two components, which is done with this equatio
 The sum of the two components has a standard normal distribution,
 which means that the probit function (which is the inverse
 of the standard normal's CDF) of that sum is uniformly distributed between 0 and 1.
-More details on this can be found in he data sources and analysis section.
+More details on this can be found in the data sources and analysis section.
 
 Data sources and analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^
