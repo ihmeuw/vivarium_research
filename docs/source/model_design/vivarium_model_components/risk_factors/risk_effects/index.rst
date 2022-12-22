@@ -10,7 +10,7 @@ Risk Effects
 What is a risk effect?
 ++++++++++++++++++++++
 
-A risk effect is a measure how some variable (the risk factor) causally impacts
+A risk effect is a measure of how some variable (the risk factor) causally impacts
 some outcome variable. 
 
 Generally, we will use risk effects models to represent 
