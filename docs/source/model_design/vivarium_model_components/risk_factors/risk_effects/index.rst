@@ -144,7 +144,7 @@ distribution of possible mediator exposure level to each measurement of
 associated risk factor (e.g. there is X% chance you will observe a SBP
 >= 100 mm Hg for given BMI of 25 in adults).
 
-In general, we would model the risk-outcomes that is directly correlated
+In general, we would model the risk-outcomes that are directly causally related
 (e.g. BMI -> IHD), but sometimes we consider add mediator to account for
 indirect relationship between a risk-cause pair. (e.g. BMI -> SBP -> IHD)
 In the example shown above, the direct effect is determined by risk effect
