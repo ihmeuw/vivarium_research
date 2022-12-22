@@ -25,7 +25,7 @@ information on such measures.
 Risk effect in GBD
 ^^^^^^^^^^^^^^^^^^
 
-The measure of risk effect in GBD is usually reported in relative term, namely
+The measure of risk effect in GBD is usually reported in relative terms, namely
 relative risk. It describes the relative relationship between the risk of
 disease Y in the presence of agent X versus in absence of X. Mathematically,
 it's calculated by dividing the rate of some outcome (such as incidence or mortality
