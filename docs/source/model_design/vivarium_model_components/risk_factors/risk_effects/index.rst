@@ -17,7 +17,7 @@ Generally, we will use risk effects models to represent
 associations between two variables that are assumed to be causal and 
 :ref:`risk correlation models <2017_risk_models>` to represent *non-causal* 
 associations between two variables (see the :ref:`causality <general_dags>`
-documentation page for more information on causality. It is important to note
+documentation page for more information on causality). It is important to note
 that for any two variables that are causally related to one another, there is 
 likely also additional non-causal correlation between them through additional
 variables and shared common causes.
