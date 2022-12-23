@@ -2910,6 +2910,479 @@ have not been included. These are:
 #. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
 #. There are errors in SSN data, which are not modeled here. 
 
+Noise Functions
+^^^^^^^^^^^^^^^
+
+In order to have a realistic challenge with PRL, it is essential to have 
+noise added to the data. We currently divide noise into two types: 
+
+#. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
+#. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
+
+Column Noise
+''''''''''''
+
+To begin, we will start with defining column based noise. Some general rules 
+for all column based noise include: 
+
+- Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
+- Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, sex has 2% incorrect selections. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
+- Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
+- As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
+- The order of different noise types should not matter, but will go in the order they are listed in the table below. 
+
+.. list-table:: Type of Noise Included and Default Level by Data Included
+  :widths: 20 20 20 20 20 20
+  :header-rows: 0
+
+  * - Data in Observer
+    - Observers Present 
+    - Default Noise Level: Rows Eligible for Errors
+    - Default Noise Level: Token Noise Level 
+    - Types of Noise 
+    - Notes
+  * - First Name
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 1%
+    - 0.1 
+    - Nicknames, OCR, phonetic, typographic, fake names 
+    - 
+  * - Middle Initial
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 1%
+    - 0.1 
+    - OCR, phonetic, typographic
+    - 
+  * - Last Name
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 1%
+    - 0.1 
+    - OCR, phonetic, typographic, fake names
+    - The list of fake names will be different than the first names 
+  * - Age
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 1%
+    - 0.1 
+    - Copy from within Household, Numeric miswriting 
+    - 
+  * - Date of Birth 
+    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 1%
+    - 0.1 
+    - Copy from within Household, Numeric miswriting, swap month and day 
+    - 
+  * - Street Number for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - 0.1 
+    - Numeric miswriting
+    - Noise for all types of addresses will work in the same way 
+  * - Street Name for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - 0.1 
+    - OCR, phonetic, typographic
+    - Noise for all types of addresses will work in the same way 
+  * - Unit Number for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - 0.1 
+    - Numeric miswriting
+    - Noise for all types of addresses will work in the same way 
+  * - PO Box for Mailing Address 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - 0.1 
+    - Numeric miswriting
+    - 
+  * - City Name for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - 0.1 
+    - OCR, phonetic, typographic
+    - Noise for all types of addresses will work in the same way 
+  * - State for any Address (Home OR Mailing OR Employer) 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - N/A
+    - Incorrect Select
+    - Noise for all types of addresses will work in the same way 
+  * - Zip Code 
+    - Census, Household Surveys, WIC, Taxes (both) 
+    - 1%
+    - 0.1 
+    - Numeric miswriting
+    - Applies to home, mailing, and employer addresses 
+  * - Relationship to head of household 
+    - Census 
+    - 1%
+    - N/A
+    - Incorrect select 
+    - 
+  * - Sex 
+    - Census, Household Surveys, WIC 
+    - 1%
+    - N/A
+    - Incorrect select 
+    - 
+  * - Race/Ethnicity 
+    - Census, WIC
+    - 1%
+    - N/A
+    - Incorrect select 
+    - 
+  * - SSN
+    - Taxes (both), SSA
+    - 1%
+    - 0.1 
+    - "Borrowed" SSN, Copy from within Household, Numeric miswriting 
+    - Note that not all types of noise apply to all observers, details below 
+  * - ITIN
+    - Taxes 1040
+    - 1%
+    - 0.1 
+    - Copy from within Household, Numeric miswriting 
+    - Note that not all types of noise apply to all observers 
+  * - Income / Wages
+    - Taxes (both)
+    - 1%
+    - 0.1 
+    - Numeric miswriting
+    - Note that wages and income are on separate tax forms and noise is applied to each separately 
+  * - Employer ID 
+    - Taxes (both)
+    - 1%
+    - 0.1 
+    - Numeric miswriting
+    - 
+  * - Employer Name 
+    - Taxes (both)
+    - 1%
+    - 0.1 
+    - OCR, typographic 
+    - 
+  * - Type of Tax Form  
+    - Taxes (both)
+    - 1%
+    - N/A
+    - Incorrect select 
+    - 
+  * - Type of SSA Event 
+    - SSA 
+    - 1%
+    - N/A
+    - Incorrect select 
+    - 
+  * - Date of SSA Event 
+    - SSA 
+    - 1%
+    - N/A
+    - Numeric miswriting, month and day swap 
+    - 
+
+The below section further describes types of noise including any code 
+available and information for implementation. **Software engineering team - please alert the research team if any of the below looks to be particularly challenging for further discussion.**
+
+**Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
+
+Currently, the user will input values that are directly used in the noise functions: 
+rows eligible for errors, and noise level at the token level. These are 
+then directly plugged into noise functions. 
+
+One limitation of this strategy is that since there is a random probability of a 
+particular character/token receiving noise, not all rows that are selected to be 
+eligble for noise will actually receive noise. Another limitation is that token 
+error rate is not very intuitive for the end user. 
+
+At some point in the future, we might make this more user friendly. However, for the 
+sake of a minimum functional model, this is satisfactory. 
+
+One function has an additional parameter. The typographic function needs an input for 
+the probability that a corrupted token contains the original token. For simplicity, 
+we will use 0.1 and the user will not be able to edit this value. 
+
+.. todo::
+
+  Validate the default noise levels for token level noise 
+
+  Define that "tokens" are characters for some functions; see if starting noise level needs to change based on if it is a token or character noise level 
+
+
+
+**OCR**
+
+Optical character recognition is when a character is misread for another character that 
+looks similar. A common examples is 'S' and '5'. In order to emulate 
+that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+
+To implement this, select the strings eligible for noise and apply 
+the OCR noise function to all strings with the user defined token 
+error rate. 
+
+**Phonetic**
+
+Phonetic errors are when a character is misheard. This could similar sounding letters when 
+spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
+In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+
+To implement this, select the strings eligible for noise and apply 
+the phonetic noise function to all strings with the user defined token 
+error rate. 
+
+Limitations: 
+
+- Certain observers might be more likely to include phonetic errors, such as the census where large amounts of data are gathered over the phone or in person. However, we do not include that level of specificity in the design of the noise function. The amount of noise can always be changed at the observer level when extracting data to account for this. 
+
+
+**Typographic** 
+
+Typographic errors occur due to mistyping information. The commonality of errors are therefore 
+based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
+and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+
+To implement this, select the strings eligible for noise and apply 
+the typographic noise function to all strings with the user defined token 
+error rate and standard parameter for including the original token. 
+
+.. todo::
+
+  Add other "keyboard errors", likely ones that swap letters (teh instead of the). This would ideally be in the same typographic function. 
+
+**Fake Names**
+
+For a variety of reasons, some repondents might choose to use a fake name rather 
+than their real name on official forms. To account for this, first select the sample 
+to have noise added. Then for everyone selected, replace their name with a random 
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/2022_04_20c_prl_fake_names.ipynb>`_. 
+Please note that the list is separated into first and last names. 
+
+Limitations: 
+
+- Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL. 
+- Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here. 
+
+**Nicknames**
+
+Many people choose to use nicknames instead of their "real" names. A common example is an 
+Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
+
+Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
+determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
+name with any of the nicknames included in the csv. If there are multiple options, 
+select at random. 
+
+Limitations: 
+
+- The list of nicknames above is hand-curated and almost definitely misses some nicknames. It is also likely that it misses nicknames in a bias way based on language of origin, personal history, etc. 
+
+.. note::
+
+  If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach. 
+
+
+**Numeric Miswriting** 
+
+To implement this, select the strings eligible for noise and apply 
+the numeric miswriting noise function to all strings with the user defined 
+character error rate. 
+
+Limitations: 
+
+- This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
+
+.. todo::
+
+  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. In addition to the noise functions above, current work done by Nathaniel includes: this `corruption module <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/corruption.py>`_ which has a more robust system for zipcodes and a function to swap months and days in dates. 
+
+
+**Copy from within Household** 
+
+To allow for confusion between household members, noise will be included to copy data 
+for another person in the household. 
+
+To do this, first determine who is eligible for copying. This is simulants 
+with at least one other person in their household. Note that GQ is not eligible for this 
+type of noise. 
+
+From the eligble simulants, select the sample to have noise added. For those individuals, 
+copy the relevant piece of data from another person in the household. 
+
+Limitations: 
+
+- This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge. 
+
+**Month and Day Swap**
+
+Month and day swaps apply to dates. For this, select the sample to have noise added. 
+For those selected, swap the month and day to be in the incorrect position (e.g., December 8, 2022 
+would be listed in MM/DD/YYYY format as 08/12/2022). 
+
+**Incorrect Select** 
+
+Incorrect select applies to a range of data types. For this, select the sample to 
+have noise added. For those selected, randomly select a different option from the 
+correct one. This is randomly chosen from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes 
+the full list of options, not just those seen in the household. 
+
+Limitations: 
+
+- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
+- Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
+
+**"Borrowed" SSN**
+
+Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
+It will NOT be individually configurable by the end user. No further action is 
+needed in the noise functions for this component. 
+
+.. todo::
+
+  Duplicates, improper inclusion, and data formatting noise to be added 
+
+Row Noise
+'''''''''
+
+Row based noise is defined as the inclusion or exclusion of entire rows of 
+data – which in practice is including or excluding simulants. This falls 
+into three buckets:  
+
+#. **Omissions:** not including simulants that should be included  
+
+#. **Duplicates:** including some simulants multiple times in the data. This could be identical rows of data, or the same simulant but with some differences in their data.  
+
+#. **Improper inclusion:** including simulants in the dataset that don’t qualify for inclusion. This only applies to observers which are not meant to include everyone. An example is a simulant being included in WIC that is above the maximum income level.  
+
+**Omissions:**  
+
+It is assumed that in any dataset, there are people missed. This 
+is important in PRL as the user will try to find a match for someone 
+that doesn’t exist. For simplicity, we will have pseudo-people end 
+users input one value: the overall omission rate. This value can 
+range from 0% (indicating NO omission or a perfect response) up 
+to 50% omission and will be defined at the observer level.  
+
+For the census and household surveys, where non-response is built 
+into the observer, the default omission rate will the equal to the 
+expected omission rate of that survey. For the census and ACS survey, 
+this is 1.45%. For the CPS survey, this is 29.05%. The other observers’ 
+default rate is 0%.  
+
+The process for omitting simulants from the data will be divided into 
+two groups based on observer:  
+
+#. Simple omission will be used for: WIC, taxes and SSA  
+
+#. Targeted omission will be used for: census, household surveys  
+
+**Simple Omission:** 
+
+For simple omission, rows will be randomly removed at the rate specified 
+by the user. Removal will be entirely at random and not correlated to the 
+omission of others in the household or any other simulant attribute. The 
+default is set to 0% as we do not expect people to be "missing" from 
+administrative data. 
+
+**Targeted Omission:**  
+
+For the census and for household surveys, individuals are found to not 
+respond at different rates based on their age, sex, and race/ethnicity. 
+In order to preserve this underlying data structure while allowing for 
+a variable overall omission rate, the noise function must be more complex.  
+
+Census:  
+
+In the census observer, there is currently a net undercount applied only 
+to omissions and not duplicates. Therefore, we calculated the existing net 
+omission rate from the census to be 1.45% based on the population in the 
+simulation. We will need this value for further calculations.  
+
+Currently, an individual probability of omission is found for each simulant 
+based on their age, sex and race/ethnicity. To allow for higher or lower rates 
+of omission, we will then scale this individual omission risk based on the new 
+omission rate.  
+
+New individual omission risk = old individual omission risk * (user-inputted omission rate/ 1.45%)  
+
+Household surveys:  
+
+In general, the same logic as is outlined for the census can be applied to all household surveys. This is:  
+
+#. Find the overall omission rate at the default level  
+
+#. Calculate the simulant level omission rate based on the specific survey and simulant characteristics  
+
+#. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate  
+
+For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.  
+
+**Duplicates:** 
+
+Duplication is most relevant for the census, which has a significant 
+amount of known duplicates. Often, the first PRL task is to match within 
+the same dataset in order to remove duplicates.  
+
+As a simplifying assumption in our initial model, we will be including 
+duplicates in the census only and limiting it to guardian-based duplication. 
+In later models, we might choose to include other forms of duplication with 
+more parameters.  
+
+**Guardian based duplication** 
+
+A known PRL challenge is children being reported multiple 
+times at different addresses. This can occur when family structures are 
+complex and children might spend time at multiple households. A related 
+challenge occurs with college students, who often are counted both at their 
+university and at their guardian’s home address.  
+
+To facilitate this type of error, we have simulants assigned to guardians 
+within the simulation. Sometimes, those guardians may move and live at 
+different addresses than their dependents. In this case, there is an 
+opportunity for duplication. Since this mechanism occurs within the 
+simulation, there is a natural maximum that we will impose in the 
+noise function.  
+
+Guardian based duplication is further divided here into two types: simulants 
+younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).  
+
+For simulants younger than 18 and not in college GQ, the maximum duplication rate will 
+be calculated based on those who have a guardian living at a different address in the sim. 
+
+The user can then pick a rate of duplication between 0 and 100%. If the value selected 
+is higher than the calculated maximum rate in the sim, a warning will be issued to users 
+explaining that the selected rate is greater than the maximum available. 
+
+A default value of 5% will be selected. 
+
+.. note:: 
+
+    If finding the maximum rate proves too difficult to implement, we can reassess this approach 
+
+For college GQ simulants aged less than 24, all are assigned to a guardian who 
+by definition lives at a different address. This means that theoretically 
+the maximum noise level is 100% for this group, however, that would add 
+significantly to the dataset and so it not allowed here. The default rate 
+will be set to 5%, with a minimum of 0% and a maximum of 25%.  
+
+To create duplicates, the college student will be included in the final 
+dataset twice, once at their college GQ and once at their guardian's home. 
+
+For either group, if a simulant has more than 1 guardian living at a 
+different address only duplicate them once, for a maximum of 2 occurences 
+in the end dataset. Select the guardian at random. 
+
+.. note:: 
+
+    Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time. 
+
+.. note:: 
+
+    The research team discussed having improper inclusion as a form of noise in the model. Some examples of this are deceased simulants in the census observer, or high income simulants on WIC. However, the decision was made to not include this in the minimum model. 
+
+    If it is relevant for a case study later, we can add this to the simulation at that time. 
+
+**Old Abie Work, to be deleted later** 
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
