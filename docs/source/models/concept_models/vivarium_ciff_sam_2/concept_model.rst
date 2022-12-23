@@ -454,7 +454,7 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
   * - 3.1: All wave 1 scenarios
     - Full wave 1 scenarios
     - 1 through 8
-    - 35 draws and population size of 260,000 per draw
+    - 35 draws and population size of 250,000 per draw
     - Default
     - No x-factor component. May be run for additional locations depending on computational resource requirements.
 

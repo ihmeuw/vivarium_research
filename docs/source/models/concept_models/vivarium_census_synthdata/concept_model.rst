@@ -450,6 +450,7 @@ Simulant will be randomly assigned to a guardian based on the below rules:
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
     * Remainder to people with spouses, include both parents 
+- If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run. 
 
 
 .. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
@@ -950,8 +951,8 @@ If the simulant is of working age and not moving into military GQ, they should c
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
-New-household moves
-"""""""""""""""""""
+*New-household moves*
+"""""""""""""""""""""
 
 In addition to the above logic common to all individual moves:
 
@@ -962,8 +963,8 @@ in the same manner as at initialization.
 
 Their relationship attribute should be set to "reference person."
 
-GQ person moves
-"""""""""""""""
+*GQ person moves*
+"""""""""""""""""
 
 In addition to the above logic common to all individual moves:
 
@@ -974,8 +975,8 @@ for the simulant according to the proportions in the "Relationship proportions f
 Then, a GQ type (household ID and corresponding physical and mailing addresses) should be assigned according to the
 institutional/non-institutional status, as is done at initialization.
 
-Non-reference person moves
-""""""""""""""""""""""""""
+*Non-reference person moves*
+""""""""""""""""""""""""""""
 
 In addition to the above logic common to all individual moves:
 
@@ -1077,76 +1078,144 @@ flows (perhaps by checking a few of the largest).
 2.3.5 Component 9: International Immigration (In-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+Background/Importance
+^^^^^^^^^^^^^^^^^^^^^
+
 New simulants are added by migration into the US from other countries.
-We simulate three kinds of immigration: household moves, GQ person moves,
-and non-reference-person moves.
+This may be a PRL challenge, especially when a 1-to-1 match is generally expected;
+people who have newly immigrated to the country will not have a true match in
+a data set collected before their immigration.
 
-#. A **household move** is when an entire household (which may be a single-person residential household) enters from outside the country as a unit,
-   preserving relationships within the unit.
-#. A **GQ person move** is when a GQ person enters from outside the country and joins an existing GQ type.
-   These moves have no relationship structure, because GQ people do not have tracked relationships in PUMS or our simulation.
-#. A **non-reference-person move** is when a non-GQ person enters from outside the country and joins an existing non-GQ household.
-   Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
+Simulation strategy
+^^^^^^^^^^^^^^^^^^^
 
-The number of simulants who move to the US each year in each move type is informed by the ACS' "residence one year ago" question.
-A value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago,
-while any other value indicates that they lived within the US.
-We refer to respondents who were not living in the United States one year ago as "recent immigrants."
-Our assumption is that the number and characteristics of recent immigrants per year
-in the 2016-2020 ACS PUMS will be replicated in each future year.
+Simulants immigrating to the US are sampled from the 2016-2020
+ACS PUMS, like at population initialization.
+Instead of sampling from the full PUMS, they are sampled from the subset who had immigrated to the US in
+the year before they were surveyed.
+This is informed by the ACS' "residence one year ago" question;
+a value of 2 for variable :code:`MIG` indicates that a respondent lived outside the US one year ago
+(which we call being a "recent immigrant"), while any other value indicates that they lived within the US (not a recent immigrant).
+Our assumption is that the **number (per year) and characteristics** of recent immigrants
+in the 2016-2020 ACS PUMS will be replicated in all future years of the simulation.
 
 .. note::
 
     All ACS PUMS data used in this component should be subset to the simulation's catchment area, e.g. Florida.
 
-We also assume that the proportions of recent immigrants by move type will remain constant.
-Though in reality not all moves into the US follow one of these patterns, we assume that any new immigrant in a household
-where the reference person is also a new immigrant was part of a household move, while any new immigrant in a household where the
-reference person is not a new immigrant moved to the US in a non-reference-person move.
-We assume that new immigrants living in GQ immigrated directly into GQ and not into a household first, and vice versa.
+Move type
+'''''''''
 
-Specifically, the yearly rate at which simulants are added to the population by each move type is given by
+We simulate three kinds of immigration: household moves, GQ person moves,
+and non-reference-person moves.
+
+.. note::
+
+  These move types are not defined identically to those used in the domestic migration section!
+
+#. A **household move** is when an entire non-GQ household (which may be a single-person household) enters from outside the country as a unit,
+   preserving relationships within the unit.
+#. A **GQ person move** is when an individual enters from outside the country and joins an existing GQ type.
+   These moves have no relationship structure, because GQ people do not have tracked relationships in PUMS or our simulation.
+#. A **non-reference-person move** is when an individual enters from outside the country and joins an existing non-GQ household,
+   with some relationship other than "reference person."
+   Non-reference-person moves are independent, single-person events that do not preserve relationship structure.
+
+Though in reality, immigration can be much more complicated than these three types, we assign all recent immigrants
+in ACS PUMS to one of the three types:
+
+#. Any recent immigrant living in a non-GQ household where the reference person is a recent immigrant,
+   including the reference person themselves, is considered to have entered the US in a household move.
+#. Any recent immigrant living in GQ is considered to have entered the US in a GQ person move.
+#. Any recent immigrant living in a non-GQ household where the reference person is **not** a recent immigrant
+   is considered to have entered the US in a non-reference-person move.
+
+.. note::
+
+  These rules are clearly incorrect in two cases, which we ignore for simplicity.
+
+  When a recent immigrant is living with a recent immigrant reference person who immigrated from a different country,
+  it isn't possible that they immigrated together as a household, but we assign them both to that move type.
+
+  When a household has a recent immigrant reference person but also has other household members who have not moved at all
+  (internationally or domestically) in the last year, it is clear that the reference person must have joined an existing
+  household, but we consider it to be a household move.
+
+We assume that all recent immigrants are still living in the place they initially moved to in the US (have not moved domestically
+since immigrating).
+
+Immigration rate
+''''''''''''''''
+
+The yearly rate at which simulants are added to the population **by each move type** is given by
 the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
-Since immigration is likely unaffected by US population change over time, the number of immigrants for a move type
+Since immigration is likely unaffected by US population change over time, the number of immigrants in a year for a move type
 is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
-At each time step:
+This is then divided by the number of time steps in a year to get the number of simulants to add per time step in that move type.
 
-#. ACS PUMS households with reference people who are recent immigrants,
-   after removing any household members who are not recent immigrants,
-   are sampled using household weights.
-   This sampling continues with replacement until the desired number of simulants added in household moves is reached.
-#. ACS PUMS GQ people who are recent immigrants are sampled using person weights with replacement until the desired number
-   of simulants added in GQ person moves is reached.
-#. ACS PUMS recent immigrants living in non-GQ households where the reference person is not a recent immigrant are sampled using person weights.
-   This sampling continues with replacement until the desired number of simulants added in non-reference-person moves is reached.
+Sampling new simulants
+''''''''''''''''''''''
 
-We perturb the PUMA and age attributes of the sampled household (in the case of a household move)
-or person (in the case of a GQ person or non-reference-person move), as described in the
-:ref:`perturbation section below <census_prl_perturbation>`.
+The following subsections explain the sampling rules for each move type.
+All attributes not explicitly described below (e.g. names) are set
+using the same method as population initialization for those attributes.
 
-Added residential households are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
-Added GQ people (who all enter in "household" moves) should be assigned a household ID for a randomly-selected GQ type matching
+.. note::
+
+  All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
+  All added simulants should have a unique seed for common random numbers.
+  This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
+
+*Household moves*
+"""""""""""""""""
+
+PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**.
+In households that are selected, household members who are not recent immigrants are excluded.
+This sampling continues until the desired number of **simulants** added in household moves is reached.
+
+Sampled households may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+They are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
+
+*GQ person moves*
+"""""""""""""""""
+
+PUMS recent immigrants consistent with GQ person moves are sampled using person weights with replacement until the
+desired number of simulants added in GQ person moves is reached.
+
+Sampled individuals may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+They are assigned a household ID for a randomly-selected GQ type matching
 their institutional/non-institutional status, as well as the corresponding shared addresses, as is done at population initialization.
 
+*Non-reference-person moves*
+""""""""""""""""""""""""""""
+
+PUMS recent immigrants consistent with non-reference-person moves are sampled using person weights with replacement until the
+desired number of simulants added in non-reference-person moves is reached.
+
+Sampled individuals may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+
 Simulants added by a non-reference-person move join a randomly-selected existing non-GQ household matching their PUMA.
-If there is no such household in the simulation, their PUMA is perturbed using the PUMA replacement process described in the
+If there is no such household in the simulation, their PUMA is perturbed with 100% probability using the PUMA replacement process described in the
 :ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
 Then, they are matched in the new PUMA.
-The simulants' relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
+
+The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
 These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
 
-.. todo::
+Limitations
+^^^^^^^^^^^
 
-    In the future, we may want to make some households more likely than others to receive non-reference-person immigrants.
-    Also, the current approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. We assume that immigration does not change over long-run time or seasonally.
+#. All households are equally likely to receive non-reference-person immigrants.
+#. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
 
-All attributes of newly added households and simulants that are not sampled from the ACS PUMS (e.g. addresses, names) are set
-using the same method as population initialization for those attributes.
+V&V strategy
+^^^^^^^^^^^^
 
-All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
-All added simulants should have a unique seed for common random numbers.
-This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
+To verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+simulants are immigrating at the expected rates for each move type.
 
 .. _census_prl_international_emigration:
 
@@ -1290,6 +1359,17 @@ Limitations
    even after accounting for demographics.
 #. We use a single GQ person emigration rate, even though emigration likely varies by GQ type.
 
+V&V strategy
+^^^^^^^^^^^^
+
+To verify this approach, we
+can use an interactive simulation in a Jupyter Notebook to check that
+there are simulants outside the US, check that the number of simulants who
+move out of the US each year is approximately correct,
+and check that the characteristics of simulants who move out of the US are
+similar to the characteristics of simulants who move into the US,
+for each broad race/ethnicity category.
+
 2.3.7 Component 11: Physical Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -1316,12 +1396,8 @@ correspond to geography, so we have not pursued this more complicated approach.
 Data sources and analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For street addresses, the simulation will use a pre-processed (?) version of the deepparse address data
-for the US only.
-
-.. todo::
-
-  Document the pre-processing of the deepparse address data.
+We base our street addresses on the deepparse address data for the US.
+We preprocess this data on the research side to get it into a tabular format.
 
 To make PUMA correspond to ZIP code, we use a crosswalk generated by the
 `GeoCorr 2014 tool <https://mcdc.missouri.edu/applications/geocorr2014.html>`_
@@ -1389,6 +1465,8 @@ The physical address for each GQ type is fixed for the duration of the simulatio
 
 Simulation inputs
 ^^^^^^^^^^^^^^^^^
+
+The compressed CSV form of the deepparse address data can be found at :code:`J:\Project\simulation_science\prl\data\deepparse_address_data_usa.csv.bz2`.
 
 :download:`PUMA to ZIP <puma_to_zip.csv>`
 
@@ -1623,7 +1701,9 @@ years to be increase predictive validity.
 Use middle names from same distribution as first names (?). It would
 be nice to get some of the national/ethnic challenges right, like
 people from South America with many names getting their middle names
-used as different last names.
+used as different last names. For the minimum model, assume all 
+simulants have exactly 1 middle name. This could be an area for 
+further complexity in future versions. 
 
 We might want to eventually include nicknames and suffixes like Jr. and III.
 
@@ -1928,17 +2008,25 @@ Census
   * - Middle initial 
   * - Last name
   * - Age 
-  * - Date of Birth 
-  * - Physical Address
-  * - Physical ZIP Code
+  * - Date of Birth (stored as a string in MM/DD/YYYY format)
+  * - Physical Address Street Number 
+  * - Physical Address Street Name
+  * - Physical Address Unit 
+  * - Physical Address City
+  * - Physical Address State 
+  * - Physical Address ZIP Code
   * - Relationship to Person 1 (Head of Household)
   * - Sex (binary)
   * - Race/Ethnicity 
+  * - Tracked Guardian(s) (for noise functions ONLY)
+  * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Type of GQ (for noise functions ONLY)
 
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling.
-Based on race/ethnicity, age, and sex, simulants will be assigned a 
+Simulants currently living in the US are eligible for sampling. Note 
+that this means they must be listed as 'alive' at the time the census 
+is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
 probability, simulants will be randomly selected for inclusion. We decided 
 to use additive effects rather than multiplicitive which is often used 
@@ -2046,13 +2134,6 @@ they have a 0% chance of being missed. We are not including
 duplicates at this time. 
 
 
-**Data Errors/Noise** 
-
-.. todo::
-    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
-    - We currently have net undercounts, might want to have omissions and duplicates instead with a noise function  
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of the true census. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
@@ -2099,9 +2180,18 @@ There are two types of sampling plans:
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB 
-  * - Physical Address
-  * - Physical ZIP Code 
+  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - Physical Address Street Number 
+  * - Physical Address Street Name
+  * - Physical Address Unit 
+  * - Physical Address City
+  * - Physical Address State 
+  * - Physical Address ZIP Code
+  * - Sex (binary)
+  * - Tracked Guardian(s) (for noise functions ONLY)
+  * - Tracked Guardian Address(es) (for noise functions ONLY)
+  * - Type of GQ (for noise functions ONLY)
+
 
 Here is an example: 
 
@@ -2119,7 +2209,7 @@ step process.
 predetermined by the researcher. The selection should be stratified by state, 
 but no other variables. This will be a random sample. 
 
-**Step 2:** Households will be chosen to be non-responders and removed from 
+**Step 2:** Simulants will be chosen to be non-responders and removed from 
 the sample. This step will vary significantly based on the mode of the survey. 
 There are three possible modes: mail/online (assumed to be the same for this 
 model), telephone, and personal visits. 
@@ -2216,16 +2306,6 @@ For longitudinal surveys, assume that non-response is independent between
 survey iterations. 
 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Creation of a noise function for misrecording data (names, addresses, birthdays) 
-    - Possible changes to omission rates by survey 
-    - To avoid rerunning, please oversample by 2x 
-    - Might include person swaps or duplicates in the noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses; type of group quarter 
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the survey leading to additional noise not modeled here 
@@ -2239,9 +2319,8 @@ survey iterations.
 
 The ACS will be used for V&V testing. It is defined as: 
 
-- Sample rate of 12,000 households nationwide  
-- Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly)
+- To appoximate a monthly sample rate of 12,000 households nationwide using 28 day timesteps, we will sample (12,000 * 12)/(365.25/28) = 11039 households every 28 days 
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion  
 - **Not** longitudinal (independent samples) 
 - Includes mail/online, telephone, and personal visits 
 
@@ -2254,9 +2333,8 @@ added here.
 
 To create this survey: 
 
-- Sample rate of 60,000 households nationwide 
-- Sample will be stratified by state to ensure an even distribution 
-- Sample at each time step (approximates monthly)  
+- To appoximate a monthly sample rate of 60,000 households nationwide using 28 day timesteps, we will sample (60,000 * 12)/(365.25/28) = 55195 households every 28 days  
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion 
 - **Not** longitudinal (independent samples) 
 - This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
 
@@ -2290,10 +2368,17 @@ in the home.
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB 
-  * - Physical Address
-  * - Physical ZIP Code
+  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - Physical Address Street Number 
+  * - Physical Address Street Name
+  * - Physical Address Unit 
+  * - Physical Address City
+  * - Physical Address State 
+  * - Physical Address ZIP Code
+  * - Sex (binary)
   * - Race/ethnicity 
+  * - Tracked Guardian(s) (for noise functions ONLY)
+  * - Tracked Guardian Address(es) (for noise functions ONLY)
 
 Here is an example: 
 
@@ -2395,12 +2480,6 @@ the participant.
 
 Source: [Coverage]_
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked guardian(s) and the tracked guardian(s) addresses
 
 **Limitations and Possible Future Adds** 
 
@@ -2440,9 +2519,14 @@ W2 and 1099 Forms
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB 
-  * - Mailing Address
-  * - Mailing ZIP Code
+  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - Mailing Address Street Number (blank for PO boxes)
+  * - Mailing Address Street Name (blank for PO boxes)
+  * - Mailing Address Unit (blank for PO boxes)
+  * - Mailing Address PO Box (blank for not PO boxes)
+  * - Mailing Address City
+  * - Mailing Address State 
+  * - Mailing Address ZIP Code
   * - Social Security Number 
   * - Wages (income from this job)
   * - Employer ID 
@@ -2450,6 +2534,9 @@ W2 and 1099 Forms
   * - Employer Address 
   * - Employer ZIP Code 
   * - Type of Tax Form (W2 or 1099)
+  * - Tracked Dependent(s) (for noise functions ONLY)
+  * - Tracked Dependent Address(es) (for noise functions ONLY)
+  * - Type of GQ (for noise functions ONLY)
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2506,14 +2593,6 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 5.35%
 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Addition of a noise function for misrecording data (names, addresses, birthdays, employer information) 
-    - Further refine "sharing" of SSN's with noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) addresses; type of group quarter 
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of how tax documents are compiled. 
@@ -2550,12 +2629,22 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Age
     -  
-  * - DOB
+  * - DOB (stored as a string in MM/DD/YYYY format)
     -  
-  * - Mailing Address
-    -  
-  * - Mailing ZIP Code
-    - 
+  * - Mailing Address Street Number (blank for PO boxes)
+    -
+  * - Mailing Address Street Name (blank for PO boxes)
+    -
+  * - Mailing Address Unit (blank for PO boxes)
+    -
+  * - Mailing Address PO Box (blank for not PO boxes)
+    -
+  * - Mailing Address City
+    -
+  * - Mailing Address State 
+    -
+  * - Mailing Address ZIP Code
+    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2566,12 +2655,26 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Name
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Address 
+  * - Employer Address Street Number
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer ZIP Code 
+  * - Employer Address Street Name
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address Unit
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address City
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address State
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Employer Address ZIP Code 
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Tracked Dependent(s) (for noise functions ONLY)
+    - 
+  * - Tracked Dependent Address(es) (for noise functions ONLY)
+    - 
+  * - Type of GQ (for noise functions ONLY)
+    - 
   * - Joint Filer 
     - This row through 'dependent' are to be included if there is a joint filer ONLY 
   * - First name 
@@ -2582,12 +2685,22 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Age
     - 
-  * - DOB
+  * - DOB (stored as a string in MM/DD/YYYY format)
     -  
-  * - Mailing Address
-    -  
-  * - Mailing ZIP Code
-    - 
+  * - Mailing Address Street Number (blank for PO boxes)
+    -
+  * - Mailing Address Street Name (blank for PO boxes)
+    -
+  * - Mailing Address Unit (blank for PO boxes)
+    -
+  * - Mailing Address PO Box (blank for not PO boxes)
+    -
+  * - Mailing Address City
+    -
+  * - Mailing Address State 
+    -
+  * - Mailing Address ZIP Code
+    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2604,6 +2717,12 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
     - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Tracked Dependent(s) (for noise functions ONLY)
+    - 
+  * - Tracked Dependent Address(es) (for noise functions ONLY)
+    - 
+  * - Type of GQ (for noise functions ONLY)
+    - 
   * - Dependent
     - This columns through the end are to be included for each dependent on the tax filing 
   * - First name 
@@ -2701,15 +2820,6 @@ for who files taxes:
     *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-    - Addition of a noise function for misrecording data (names, addresses, birthdays) 
-    - Include person swaps or duplicates - especially relevant for taxes if dependents should be double claimed sometimes 
-    - Further refine "sharing" of SSN's with noise function 
-    - To create these noise functions, in addition to the above survey outputs, please include: tracked dependent(s) and the tracked dependent(s) address; type of group quarter  
-
 **Limitations and Possible Future Adds** 
 
 #. Sampling on a single time step is not representative of how tax documents are compiled. 
@@ -2742,10 +2852,10 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial 
   * - Last name
-  * - DOB 
+  * - DOB (stored as a string in MM/DD/YYYY format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event 
+  * - Date of event (stored as a string in MM/DD/YYYY format)
 
 Currently, we will only track 2 types of events: 
 
@@ -2779,13 +2889,6 @@ SSN then.
 100% of simulants with a SSN and a qualifying event in that time step 
 will be recorded. 
 
-**Data Errors/Noise** 
-
-.. todo::
-
-  - The omission rate (currently 0%) should be parameterizable. 
-  - Additional noise functions on names and dates should be parameterizable. 
-
 
 **Items NOT Included in the Minimum Viable Model** 
 
@@ -2815,6 +2918,9 @@ noise added to the data. We currently divide noise into two types:
 
 #. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
 #. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
+
+Column Noise
+''''''''''''
 
 To begin, we will start with defining column based noise. Some general rules 
 for all column based noise include: 
@@ -3133,8 +3239,148 @@ needed in the noise functions for this component.
 
 .. todo::
 
-  Row based noise and data formatting noise to be added 
+  Duplicates, improper inclusion, and data formatting noise to be added 
 
+Row Noise
+'''''''''
+
+Row based noise is defined as the inclusion or exclusion of entire rows of 
+data – which in practice is including or excluding simulants. This falls 
+into three buckets:  
+
+#. **Omissions:** not including simulants that should be included  
+
+#. **Duplicates:** including some simulants multiple times in the data. This could be identical rows of data, or the same simulant but with some differences in their data.  
+
+#. **Improper inclusion:** including simulants in the dataset that don’t qualify for inclusion. This only applies to observers which are not meant to include everyone. An example is a simulant being included in WIC that is above the maximum income level.  
+
+**Omissions:**  
+
+It is assumed that in any dataset, there are people missed. This 
+is important in PRL as the user will try to find a match for someone 
+that doesn’t exist. For simplicity, we will have pseudo-people end 
+users input one value: the overall omission rate. This value can 
+range from 0% (indicating NO omission or a perfect response) up 
+to 50% omission and will be defined at the observer level.  
+
+For the census and household surveys, where non-response is built 
+into the observer, the default omission rate will the equal to the 
+expected omission rate of that survey. For the census and ACS survey, 
+this is 1.45%. For the CPS survey, this is 29.05%. The other observers’ 
+default rate is 0%.  
+
+The process for omitting simulants from the data will be divided into 
+two groups based on observer:  
+
+#. Simple omission will be used for: WIC, taxes and SSA  
+
+#. Targeted omission will be used for: census, household surveys  
+
+**Simple Omission:** 
+
+For simple omission, rows will be randomly removed at the rate specified 
+by the user. Removal will be entirely at random and not correlated to the 
+omission of others in the household or any other simulant attribute. The 
+default is set to 0% as we do not expect people to be "missing" from 
+administrative data. 
+
+**Targeted Omission:**  
+
+For the census and for household surveys, individuals are found to not 
+respond at different rates based on their age, sex, and race/ethnicity. 
+In order to preserve this underlying data structure while allowing for 
+a variable overall omission rate, the noise function must be more complex.  
+
+Census:  
+
+In the census observer, there is currently a net undercount applied only 
+to omissions and not duplicates. Therefore, we calculated the existing net 
+omission rate from the census to be 1.45% based on the population in the 
+simulation. We will need this value for further calculations.  
+
+Currently, an individual probability of omission is found for each simulant 
+based on their age, sex and race/ethnicity. To allow for higher or lower rates 
+of omission, we will then scale this individual omission risk based on the new 
+omission rate.  
+
+New individual omission risk = old individual omission risk * (user-inputted omission rate/ 1.45%)  
+
+Household surveys:  
+
+In general, the same logic as is outlined for the census can be applied to all household surveys. This is:  
+
+#. Find the overall omission rate at the default level  
+
+#. Calculate the simulant level omission rate based on the specific survey and simulant characteristics  
+
+#. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate  
+
+For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.  
+
+**Duplicates:** 
+
+Duplication is most relevant for the census, which has a significant 
+amount of known duplicates. Often, the first PRL task is to match within 
+the same dataset in order to remove duplicates.  
+
+As a simplifying assumption in our initial model, we will be including 
+duplicates in the census only and limiting it to guardian-based duplication. 
+In later models, we might choose to include other forms of duplication with 
+more parameters.  
+
+**Guardian based duplication** 
+
+A known PRL challenge is children being reported multiple 
+times at different addresses. This can occur when family structures are 
+complex and children might spend time at multiple households. A related 
+challenge occurs with college students, who often are counted both at their 
+university and at their guardian’s home address.  
+
+To facilitate this type of error, we have simulants assigned to guardians 
+within the simulation. Sometimes, those guardians may move and live at 
+different addresses than their dependents. In this case, there is an 
+opportunity for duplication. Since this mechanism occurs within the 
+simulation, there is a natural maximum that we will impose in the 
+noise function.  
+
+Guardian based duplication is further divided here into two types: simulants 
+younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).  
+
+For simulants younger than 18 and not in college GQ, the maximum duplication rate will 
+be calculated based on those who have a guardian living at a different address in the sim. 
+
+The user can then pick a rate of duplication between 0 and 100%. If the value selected 
+is higher than the calculated maximum rate in the sim, a warning will be issued to users 
+explaining that the selected rate is greater than the maximum available. 
+
+A default value of 5% will be selected. 
+
+.. note:: 
+
+    If finding the maximum rate proves too difficult to implement, we can reassess this approach 
+
+For college GQ simulants aged less than 24, all are assigned to a guardian who 
+by definition lives at a different address. This means that theoretically 
+the maximum noise level is 100% for this group, however, that would add 
+significantly to the dataset and so it not allowed here. The default rate 
+will be set to 5%, with a minimum of 0% and a maximum of 25%.  
+
+To create duplicates, the college student will be included in the final 
+dataset twice, once at their college GQ and once at their guardian's home. 
+
+For either group, if a simulant has more than 1 guardian living at a 
+different address only duplicate them once, for a maximum of 2 occurences 
+in the end dataset. Select the guardian at random. 
+
+.. note:: 
+
+    Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time. 
+
+.. note:: 
+
+    The research team discussed having improper inclusion as a form of noise in the model. Some examples of this are deceased simulants in the census observer, or high income simulants on WIC. However, the decision was made to not include this in the minimum model. 
+
+    If it is relevant for a case study later, we can add this to the simulation at that time. 
 
 **Old Abie Work, to be deleted later** 
 
@@ -3699,8 +3945,8 @@ When sampling for immigration, there are three cases:
 
 The details of the initial sampling are described in the immigration component documentation;
 here, we only consider how to perturb the PUMA values of an already-sampled entity (Row A),
-which has already been selected according to the 50% probability to have a perturbed
-PUMA.
+**which has already been selected according to the 50% probability to have a perturbed
+PUMA.**
 
 **80% of the time** (this probability is constant) we sample a new PUMA value from the same "immigration subset"
 of the same entity type in the ACS PUMS data.

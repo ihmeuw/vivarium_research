@@ -597,7 +597,7 @@ is assumed that different medications have a similar impact and therefore are no
   * - Three Drugs at Standard Dose 
 
 
-Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is `at this link <https://github.com/ihmeuw/vivarium_nih_us_cvd/blob/main/src/vivarium_nih_us_cvd/data/drug_efficacy_sbp.csv>`_ [Law_2009]_
+Decrease in SBP is dependent on a simulant's starting SBP value. Full efficacy data is at this file path: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/drug_efficacy_sbp.csv [Law_2009]_
 
 Due to lack of data, the same efficacy value for SBP will be used for all simulants. 
 **Please note that this is intentionally different than for LDL-C medication.** 
@@ -627,7 +627,7 @@ similar and therefore are not modeled individually.
 
 
 LDL-C treatment efficacy is a **percent reduction** in LDL-C level. This means that simulants with higher 
-initial LDL-C levels will see a higher total reduction. `The full efficacy data is here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data/drug_efficacy_ldl.csv>`_ [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
+initial LDL-C levels will see a higher total reduction. The full efficacy data is file path: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/drug_efficacy_ldl.csv [Law_2003]_ [Goff_2014]_ [Descamps_2015]_
 
 For each input draw, a parameter value for efficacy will be selected based on the mean and 
 standard deviation provided in the table above. Assume a normal distribution for the parameter value. 
@@ -818,11 +818,11 @@ a non-adherent simulant is assigned to medication:
 
 These covariate values are calculated for each simulant and are then plugged into the below equations to provide the individual probabilities. 
 
- :math:`SBP_{i} = exp((-6.75) + (0.025 * SBP_{level}) + (-0.0045 * LDL_{level}) + (0.05 * age_{(yrs)}) + (0.16 * sex))` 
+ :math:`SBP_{i} = exp((-6.75) + (0.025 * SBP_{level}) + (-0.173 * LDL_{level}) + (0.05 * age_{(yrs)}) + (0.158 * sex))` 
 
- :math:`LDL_{i} = exp((-4.23) + (-0.0026 * SBP_{level}) + (-0.005 * LDL_{level}) + (0.062 * age_{(yrs)}) + (-0.19 * sex))` 
+ :math:`LDL_{i} = exp((-4.23) + (-0.0026 * SBP_{level}) + (-0.196 * LDL_{level}) + (0.062 * age_{(yrs)}) + (-0.19 * sex))` 
 
- :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.014 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
+ :math:`Both_{i} = exp((-6.26) + (0.018 * SBP_{level}) + (-0.524 * LDL_{level}) + (0.069 * age_{(yrs)}) + (0.13 * sex))` 
 
 Where sex = 1 for men and 2 for women 
 and SBP and LDL level refer to the raw values from GBD 
@@ -861,6 +861,7 @@ Code is below for reference
   data[,tx:=ifelse(sbptx==0 & choltx==0, "none", ifelse(sbptx==1 & choltx==0, "bponly", 
       ifelse(sbptx==0 & choltx==1, "cholonly", ifelse(sbptx==1 & choltx==1, "both", NA))))]
   data[,tx2:=factor(tx, levels=c("none", "bponly", "cholonly", "both"))]
+  data$ldl <- data$lbdldl * 0.02586
 
   meds <- multinom(tx2 ~ bpsys + lbdldl + sex_id + age_year, data=data)
 
@@ -872,24 +873,24 @@ Code is below for reference
   converged
 
   summary(meds)
-  Call: multinom(formula = tx2 ~ bpsys + lbdldl + sex_id + age_year, 
+  Call: multinom(formula = tx2 ~ bpsys + ldl + sex_id + age_year, 
     data = data)
 
   Coefficients:
-           (Intercept)        bpsys       lbdldl     sex_id   age_year
-  bponly     -6.746432  0.024905946 -0.004474287  0.1578084 0.05006270
-  cholonly   -4.234380 -0.002564668 -0.005063271 -0.1900133 0.06173726
-  both       -6.262507  0.018470096 -0.013548739  0.1326292 0.06909707
+           (Intercept)        bpsys        ldl     sex_id   age_year
+  bponly     -6.746073  0.024903737 -0.1729900  0.1577051 0.05006258
+  cholonly   -4.234099 -0.002565917 -0.1957560 -0.1899843 0.06173408
+  both       -6.261919  0.018468094 -0.5239551  0.1326455 0.06909274
 
   Std. Errors:
-           (Intercept)       bpsys       lbdldl     sex_id    age_year
-  bponly     0.1863489 0.001265926 0.0006439986 0.04686429 0.001632670
-  cholonly   0.2665387 0.001872484 0.0009045871 0.06485975 0.002270549
-  both       0.2067298 0.001371421 0.0007557389 0.05139671 0.001875866
+           (Intercept)       bpsys        ldl     sex_id    age_year
+  bponly     0.1863466 0.001265914 0.02490310 0.04686404 0.001632663
+  cholonly   0.2665264 0.001872415 0.03497859 0.06485717 0.002270436
+  both       0.2067255 0.001371409 0.02922430 0.05139634 0.001875815
 
   Residual Deviance: 29807.44 
   AIC: 29837.44 
-
+ 
 
 .. _uscvd4.6:
 
