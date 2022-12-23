@@ -3100,7 +3100,7 @@ sake of a minimum functional model, this is satisfactory.
 
 One function has an additional parameter. The typographic function needs an input for 
 the probability that a corrupted token contains the original token. For simplicity, 
-we will use 0.5 and the user will not be able to edit this value. 
+we will use 0.1 and the user will not be able to edit this value. 
 
 .. todo::
 
@@ -3194,7 +3194,7 @@ Limitations:
 
 .. todo::
 
-  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. 
+  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. In addition to the noise functions above, current work done by Nathaniel includes: this `corruption module <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/corruption.py>`_ which has a more robust system for zipcodes and a function to swap months and days in dates. 
 
 
 **Copy from within Household** 
