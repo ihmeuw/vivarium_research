@@ -3069,10 +3069,6 @@ in columns of the same names.
 
 :download:`income_scipy_lognorm_distribution_parameters.csv`
 
-.. todo::
-
-  The values in this file are preliminary and may change, but the schema will not.
-
 Propensities
 ''''''''''''
 
@@ -3095,8 +3091,15 @@ with mean 0 and variance 0.187691.
 
 See the data sources and analysis section for how these variances were calculated.
 
-A simulant's propensity/quantile within the corresponding log-normal income distribution is always equal
-to the probit function of the sum of their simulant-specific component and their job-specific component.
+The last step is combining these two components, which is done with this equation:
+
+.. math::
+  \text{income_propensity} = \text{probit}(\text{simulant_component} + \text{job_component})
+
+The sum of the two components has a standard normal distribution,
+which means that the probit function (which is the inverse
+of the standard normal's CDF) of that sum is uniformly distributed between 0 and 1.
+More details on this can be found in the data sources and analysis section.
 
 Data sources and analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^^
