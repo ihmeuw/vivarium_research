@@ -345,6 +345,14 @@ The MF is the mediation factor. This can be found in the table below.
 
 This mediation factor is calculated in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risk_mediation.ipynb>`_ 
 
+For this new RR, a PAF then had to be calculated. The calculations for the PAF 
+can be found in `this workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_calculations.ipynb>`_. 
+
+For BMI, the PAF values are unique to the age/sex level since there are specific 
+mediation factors at the age/sex level. In addition, it is important to match the 
+PAF to the TMREL being used in that draw. Therefore, a csv file with the needed 
+information on PAFs can be found here. NEED TO ADD LINK. 
+
 Assumptions and Limitations
 +++++++++++++++++++++++++++
 
