@@ -2919,6 +2919,23 @@ noise added to the data. We currently divide noise into two types:
 #. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
 #. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
 
+As there are multiple noise functions that will independently select data, 
+the order to apply noise is: 
+
+#. Omissions 
+#. Duplications 
+#. Column noise is divided in a few parts, for strings: 
+    #. Nicknames 
+    #. Fake names
+    #. Phonetic 
+    #. OCR 
+    #. Typographic 
+#. Column noise for numeric data: 
+    #. Copy from within the household 
+    #. Month and day swaps (applies to dates only)
+    #. Numeric miswriting 
+#. Selection type data only has one column noise type 
+
 Column Noise
 ''''''''''''
 
@@ -3239,7 +3256,7 @@ needed in the noise functions for this component.
 
 .. todo::
 
-  Duplicates, improper inclusion, and data formatting noise to be added 
+  Improper inclusion, and data formatting noise to be added 
 
 Row Noise
 '''''''''
