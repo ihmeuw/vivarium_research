@@ -356,11 +356,11 @@ States Data
      - Tested the CSMR in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/HF_CSMR.ipynb>`_ and found that the summed value was different than the IHD GBD value. Using the summed value will affect validation with GBD. 
    * - S1
      - prevalence
-     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + prevalence_s1040 + prevalence_m2412)}`
+     - :math:`\text{1−(prevalence_s378 + prevalence_s379 + ((1 - prevalence_m2412} \times \text{propHF_IHD)} \times \text{prevalence_s1040) + prevalence_m2412)}`
      - Simulants without prevalent AMI, PostMI or heart failure
    * - AMI
      - prevalence
-     - :math:`\text{(1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385))} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
+     - :math:`\text{(1−(prevalence_m2412} \times \text{propHF_IHD))} \times \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
      - There are two acute sequelae
    * - AMI 
      - excess mortality rate
@@ -372,7 +372,7 @@ States Data
      -
    * - AMI_HF
      - prevalence
-     - :math:`\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`     
+     - :math:`\text{(prevalence_m2412} \times \text{propHF_IHD)} \cdot \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`     
      - There are two acute sequelae
    * - AMI_HF
      - excess mortality rate
@@ -384,7 +384,7 @@ States Data
      -
    * - P
      - prevalence
-     - :math:`\text{(1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385))} \cdot \sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
+     - :math:`\text{(1−(prevalence_m2412} \times \text{propHF_IHD))} \cdot \sum\limits_{s\in post-mi-sequelae} \text{prevalence}_s`
      - this is the prevalence generated after exclusivity adjustment 
    * - P
      - excess mortality rate
@@ -396,7 +396,7 @@ States Data
      - this is zero, per the GBD estimates
    * - HF_IHD
      - prevalence
-     - :math:`\text{1−(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)}`
+     - :math:`\text{prevalence_m2412} \times \text{propHF_IHD}`
      - this is the prevalence generated from the sum of IHD HF sequela 
    * - HF_IHD
      - excess mortality rate
@@ -404,7 +404,7 @@ States Data
      - Excess mortality rate of the overall HF envelope
    * - HF_IHD
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
+     - :math:`\frac{1}{\text{prevalence_m2412} \times \text{propHF_IHD}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s`
      - 
    * - HF_Resid
      - prevalence
@@ -435,7 +435,7 @@ Transition Data
    * - 1
      - S1, P or HF_IHD
      - AMI
-     - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379})}`
+     - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379 + prevalence_m2412} \times \text{propHF_RESID)}}`
      - 
    * - 2
      - AMI
@@ -445,13 +445,13 @@ Transition Data
    * - 3
      - S1 or P 
      - HF_IHD
-     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_s5726 + prevalence_s383 + prevalence_s384 + prevalence_s385)})}` 
+     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_IHD}}{1-\text{(prevalence_m2412 + prevalence of AMI)}}` 
      - 
    * - 4
      - S1  
      - HF_Resid
-     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_RESID}}{1-\text{prevalence_m2412} \times \text{propHF_RESID}}`
-     -  
+     - :math:`\frac{\text{incidence_m2412} \times \text{propHF_RESID}}{\text{prevalence of S1}}`
+     - Prevalence of S1 is defined above 
 
 
 Data Sources
@@ -488,11 +488,11 @@ Data Sources
    * - propHF_IHD
      - CVD team
      - Proportion of HF that is due to IHD 
-     - `Proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
+     - Proportion file here /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_2022_10_28.csv
    * - propHF_RESID
      - CVD team
      - Proportion of HF that is due to the residual category
-     - `Same proportion file here <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_  
+     - Proportion file here /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_2022_10_28.csv
    * - prevalence_m2412
      - como
      - Prevalence of HF
@@ -552,7 +552,8 @@ heart disease, and residual heart failure from other causes.
 
 As these causes are identical in all capacities, we think it is easier to make 
 this designation in post processing rather than in the model itself. The rates of 
-each group (HHD vs other) can be found in this `cvs file <https://github.com/ihmeuw/vivarium_nih_us_cvd/tree/main/src/vivarium_nih_us_cvd/data>`_. Note that this is different than the above proportions 
+each group (HHD vs other) can be found in this csv file /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/hf_props_hhd_perc.csv 
+. Note that this is different than the above proportions 
 file. It is designed to give the percent of heart failure to assign to HHD in post 
 processing from the residual heart failure cause ONLY. The IHD heart failure cause 
 will not be adjusted in post processing. 
@@ -565,6 +566,8 @@ Assumptions
 
 #. To find the prevalence of AMI with and without HF, we assume it is distributed according to the prevalence of HF in the population. This is likely not true, but with the burn in, will have an opportunity to correct itself. 
 #. We calculate a new IHD CSMR based on the EMRs and prevalences used. This is different than the GBD value which might lead to effects on the ACMR as well. 
+#. Angina is no longer included in the model. This decision was made with input from Greg, who felt that the pain associated with angina was now being covered by heart failure, and post MI. The angina cause is spread across multiple states in the state table, as it overlaps with other causes. 
+#. AMI with heart failure and AMI without heart failure have the same disability weights in the model. This is an oversimplification as AMI with heart failure might well experience some additional disability. However, AMI disabilty weights are already high and the time in the state is only 28 days maximum, so it will be unlikely to impact the model significantly. 
 
 Validation Criteria
 +++++++++++++++++++

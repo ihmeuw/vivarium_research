@@ -33,10 +33,7 @@ Risk exposure
 What is a risk exposure?
 ++++++++++++++++++++++++
 
-A **risk exposure** is any attribute whose measure is causally related to the
-measure of an outcome, such as a disease or another risk exposure.
-
-A **risk exposure**, together with a **risk effect**, constitute a **risk factor**.
+A **risk exposure** is a quantification of the amount of risk present in a population or individual.
 
 We will first consider a risk exposure in the context of an individual. An
 exposure will have different possible measures which fall along a distribution,
@@ -60,6 +57,42 @@ Risk exposure distributions can be:
   - Ordered polytomous
 
  - Continuous
+
+Generally, risk exposure distributions should be mutually exclusive and collectively exhaustive.
+In other words, the prevalence of all risk exposure categories for a categorical distribution and 
+the risk exposure distribution's probability density function across all possible exposure values 
+for a continuous distribution should sum to one.
+
+See the table for examples of each of these risk exposure distributions. 
+
+.. list-table:: Risk exposure distributions
+  :header-rows: 1
+
+  * - Distribution
+    - Example
+    - Possible exposure values
+  * - Dichotomous
+    - Zinc deficiency
+    - * Not deficient
+      * Deficient
+  * - Unordered polytomous
+    - Tobacco use
+    - * None
+      * Chewing tobacco
+      * Cigarettes
+      * Cigars
+      * Other
+      * Chewing tobacco AND cigarettes
+      * Etc.
+  * - Ordered polytomous
+    - Child stunting
+    - * No child stunting
+      * Mild child stunting
+      * Moderate child stunting
+      * Severe child stunting
+  * - Continuous
+    - Systolic blood pressure
+    - Any point value within possible systolic blood pressure range
 
 After identifying an attribute of interest, the manner in which the risk
 exposure is defined will be subject to the data access and the particular
@@ -86,7 +119,7 @@ account for any gaps within the attribute of interest and the data available.
 Risk exposures in GBD
 ---------------------
 
-GBD estimates always pertain to the mid-year or yearly average measurements of
+GBD estimates pertain to the mid-year or yearly average measurements of
 a population with a specific location, year, sex, and age, or an aggregation of
 some such populations. Thus, in the context of GBD, a risk exposure is a
 *distribution of individual exposure values* within a location-year-sex-age-
@@ -115,11 +148,42 @@ the GBD modeler what the entity captured by their exposure model is.
   IPV", "recent experience of IPV", or some other attribute that incorporates a
   time component.
 
+While GBD estimates risk exposure during the modeling process, it does not publish
+risk exposure estimates as part of its final results. Rather, GBD publishes estimates
+of risk factor **summary exposure values (SEVs)**, which can be explored in the 
+advanced options of GBD compare. The SEV is a measure of *risk-weighted prevalence* 
+and is equal to zero when no excess risk exists for a population and equal to one 
+when the entire population is at the highest level of risk. 
+
+While the SEV can be useful for assessing trends in risk exposure over time or 
+comparing risk exposures across demographic groups, it is less useful for our 
+purposes. To obtain GBD estimated risk exposures, we must instead use 
+:code:`get_draws()`. 
+
+  Categorical risk exposures can typically be obtained using 
+  :code:`source='exposure'` with a specified risk factor :code:`rei_id`. 
+
+  Continuous risk exposures can be more complicated to obtain. Continous exposures in GBD 
+  are typically estimated according to an 
+  :ref:`ensemble distribution <vivarium_best_practices_ensemble_distributions>` and require data 
+  the specifies the 1) mean, 2) variance, and 3) ensemble weights of the distribution. 
+  Distribution mean and variance are typically estimated as modelable entities and can 
+  be obtained using :code:`get_draws()` using :code:`source='epi'` with the specified 
+  modelable entity IDs (ask the GBD modeler when in doubt for which one to use!). 
+  Ensemble distribution weights for continuous risk exposures in GBD 2019 can be found 
+  here: :code:`/ihme/epi/risk/ensemble/_weights/gbd_2019/`.
+
 .. todo::
 
-  Discuss ensemble distributions (how are these parameterized in GBD?)
+  Update file path to future GBD rounds when available.
 
-  Discuss GBD SEVs and how these are not really useful to us but are what GBD reports
+.. note::
+
+  Sometimes GBD estimates the underlying continuous distribution of a risk exposure and then 
+  converts the risk exposure into a categorical distribution for use in downstream modeling 
+  steps (this is done for child growth failure risk exposures, for example). Keep this in 
+  mind in case the standard GBD risk exposure is categorical but you would prefer continuous 
+  for your modeling purposes and ask the GBD modeler if this is the case.
 
 Risk exposures in Vivarium
 --------------------------
@@ -164,11 +228,17 @@ the former we push the complexity of quantifying different types of smoking
 histories to another part of the model, and in the former we wrap this
 complexity into the exposure component.
 
+Useful resources related to risk exposure models in Vivarium include:
+
+* :ref:`Existing risk exposure modeling strategy documents <risk_exposure_models>`
+* :ref:`The Vivarium risk exposure model document template <risk_exposure_model_template>`
+
 Theoretical Minimum Risk Exposure Level/Distribution (TMREL/D)
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 The **theoretical minimum risk exposure level (TMREL)** is the level of risk
 exposure that would minimize the risk of an adverse outcome for an individual.
+
 For example, the TMREL for smoking would be "has never smoked." The
 corresponding concept on the population level is the **theoretical minimum risk
 exposure distribution (TMRED)**, which is the distribution of risk exposure that
@@ -184,7 +254,7 @@ to the TMREL category "has never smoked." [WHO-Global-Health-Risks-Annex]_,
   Add formal mathematical definitions of TMREL and TMRED.
 
 As discussed in the :ref:`causality section <causal_relationships>` of 
-the :ref:`general research page <general_research>`,
+the causal diagrams page,
 counterfactual analysis is used to describe the causal relationship between a
 risk factor and an outcome. **The TMRED is a particular choice of counterfactual
 exposure distribution** used for the causal attribution of disease burden to a

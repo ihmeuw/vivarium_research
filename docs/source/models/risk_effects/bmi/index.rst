@@ -223,6 +223,8 @@ be unaffected.
      - [95, 125 years)
 
 
+Mediation data is here: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
+
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
 
@@ -246,18 +248,21 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-**Mediation with FPG**
+Mediation
+^^^^^^^^^
 
-The relative risks are then adjusted to account for mediation through FPG. 
-To find the new relative risk, this equation can be used: 
+Mediation for IHD is included for FPG, SBP and LDL-C. Data for the 
+mediation factors can be found in the csv file above. The rei_id for 
+all is 370. The cause_id for IHD is 493. The med_ids are 105 for FPG, 
+107 for SBP and 367 for LDL-C. The csv has data for individual draws 
+that will be used. 
 
-RR_adjusted = (1 - 0.149278039) * (RR_unadjusted - 1) + 1
+:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * \prod_{m=1}^{n} (1 - MF_m)`
+
+Where :math:`MF_m` is the mediation factor for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on IHD. 
-
-The mediation matrix is found on this `Hub page <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2021+Risk+factors+mediation>`_ 
-
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -278,17 +283,21 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[370, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
-**Mediation with FPG**
+Mediation
+^^^^^^^^^
 
-The relative risks are then adjusted to account for mediation through FPG. 
-To find the new relative risk, this equation can be used: 
+Mediation for ischemic stroke is included for FPG, SBP and LDL-C. Data for the 
+mediation factors can be found in the csv file above. The rei_id for 
+all is 370. The cause_id for ischemic stroke is 495. The med_ids are 105 for FPG, 
+107 for SBP and 367 for LDL-C. The csv has data for individual draws 
+that will be used. 
 
-RR_adjusted = (1 - 0.216637902) * (RR_unadjusted - 1) + 1
+:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * \prod_{m=1}^{n} (1 - MF_m)`
+
+Where :math:`MF_m` is the mediation factor for each mediator :math:`m` in SBP, LDL-C, and FPG.
 
 where the RR_unadjusted is from the get_draws code above and the 
 RR_adjusted is what is used to find the risk of BMI on ischemic stroke. 
-
-The mediation matrix is found on this `Hub page <https://hub.ihme.washington.edu/pages/viewpage.action?spaceKey=GBD2020&title=GBD+2021+Risk+factors+mediation>`_ 
 
 Risk Outcome Pair #10: Heart failure
 ++++++++++++++++++++++++++++++++++++
@@ -315,12 +324,14 @@ incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)}
 The relative risk for heart failure is per 1-unit increase in BMI. 
 **Please note that this is different than the other relative risks.** 
 
-**Mediation with FPG**
+Mediation
+^^^^^^^^^
 
-The relative risks are then adjusted to account for mediation through FPG. 
-To find the new relative risk, this equation can be used: 
+Mediation for heart failure is included for SBP only. LDL-C and FPG do 
+not have a direct effect on heart failure, so they are not needed as mediation 
+factors here. Data for the mediation factors can be found in the csv file here. 
 
-RR_adjusted = (1 - MF) * (RR_unadjusted - 1) + 1
+RR_adjusted = (1 - MF for SBP) * (RR_unadjusted - 1) + 1
 
 where the RR_unadjusted is 1.14 (1.12, 1.16) and the 
 RR_adjusted is what is used to find the risk of BMI on heart failure. 
@@ -329,7 +340,7 @@ The MF is the mediation factor. This can be found in the table below.
 
 .. csv-table:: Mediation Factor 
   :file: heart_failure_MF.csv
-  :widths: 40 30 30 
+  :widths: 40 30 30 30 30
   :header-rows: 1 
 
 This mediation factor is calculated in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risk_mediation.ipynb>`_ 
