@@ -168,6 +168,9 @@ The values for BMI drawn from GBD include some negative values. To adjust for th
 we are implementing a minimum BMI of 5. This is below any documented BMI value and 
 so should include all possible BMIs. 
 
+The presence of very high BMI values causes problems in modeling. To limit extreme 
+BMI values, we are setting an upper limit of 80. This is based on NHANES data, which 
+only includes 3 BMI values over 80 in 78,000 records. 
 
 Data Description
 ++++++++++++++++
