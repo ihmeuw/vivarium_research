@@ -53,7 +53,7 @@
 .. _{vivarium_census_prl_synth_data}:
 
 ==================================
-Vivarium Census PRL Synthetic Data
+Vivarium Census PRL Simulated Data
 ==================================
 
 .. contents::
@@ -82,7 +82,7 @@ Probabilistic Record Linkage (PRL) typically uses sensitive data
 containing information such as name, address, date of birth, and
 sometimes even social security number, and the restrictions on access
 to such data has been a barrier to developing and testing new methods
-and software for PRL.  By simulating realistic, but synthetic, data
+and software for PRL.  By simulating realistic, but simulated, data
 which includes these attributes, we can make PRL research and
 development easier for ourselves and others.
 
@@ -96,7 +96,7 @@ package for producing synthetic data
 who developed `synthetic data for testing splink
 <http://github.com/moj-analytical-services/splink_synthetic_data>`_.
 
-The unique elements of our work will rely on Vivarium: our synthetic
+The unique elements of our work will rely on Vivarium: our simulated
 data will be informed by the United States Census Bureau (USCB) needs
 and publicly released USCB data (such as the American Community
 Survey [ACS]).  By using Vivarium, we will represent some realistic
@@ -1781,7 +1781,7 @@ refinement is needed.
 2.3.10 Component 14: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To create a date-of-birth column in the synthetic output data, each
+To create a date-of-birth column in the simulated output data, each
 simulant should have a uniformly random date of birth which is
 consistent with their age.
 
