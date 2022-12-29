@@ -3890,6 +3890,15 @@ Limitations
 #. Business addresses that are vacated are not re-used (except by coincidence).
    This likely makes business linking easier than it is in reality.
 
+Speaking of the names for employers, we will generate names for
+employers based on a conditional random model that Abie developed and
+Jim refactored into the vivarium model.  It should have more details
+documented at some point.  Jim will ensure that all employer names are
+unique for now, although it would be interesting one day to add some
+duplicates.  Businesses can have the same name in real life but
+if/when we do have duplicate names we need to prevent duplicates for
+the names of the largest employers.
+
 .. _census_prl_perturbation:
 
 2.3.17 Perturbation
