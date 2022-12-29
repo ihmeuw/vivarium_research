@@ -3897,7 +3897,7 @@ documented at some point.  Jim will ensure that all employer names are
 unique for now, although it would be interesting one day to add some
 duplicates.  Businesses can have the same name in real life but
 if/when we do have duplicate names we need to prevent duplicates for
-certain most common names.
+the names of the largest employers.
 
 .. _census_prl_perturbation:
 
