@@ -920,7 +920,7 @@ match the household's current state and PUMA**.
 be filtered to only the sources and destinations in the simulation catchment area.)
 The household should be assigned new physical and mailing addresses, with the same procedure used at initialization.
 
-All simulants in the household that are of working age should change jobs,
+All simulants in the household that are of working age should change employment,
 with the same procedure used for a spontaneous employment change event.
 
 All other attributes of the household and simulants (including relationship to reference person)
@@ -949,7 +949,7 @@ match the simulant's current state and PUMA**.
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the sources and destinations in the simulation catchment area.)
 
-If the simulant is of working age and not moving into military GQ, they should change jobs,
+If the simulant is of working age and not moving into military GQ, they should change employment,
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
@@ -1028,9 +1028,10 @@ Limitations
 #. In real life, people probably tend to move close to home, far below the granularity
    of a MIGPUMA.
    We do not have data to inform this.
-#. We assume that 100% of people who move change jobs.
+#. We assume that 100% of people who move change employment.
+   Notably, this means that all unemployed people who move become employed.
    A more accurate rate cannot be
-   calculated from the ACS (it does not ask about job changes),
+   calculated from the ACS, as it does not ask about employment changes,
    but other data sources probably exist about this question.
 #. We do not include those moving from Puerto Rico in domestic migration.
    We also do not include those moving from Puerto Rico in international immigration,
