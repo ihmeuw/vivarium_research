@@ -36,7 +36,14 @@ Small quantity lipid based nutrient supplements (SQ-LNS)
 
 .. note::
 
-  This page underwent a revision in August of 2021 to reflect desired modeling strategy of the :ref:`phase II acute malnutrition simulation <2020_concept_model_vivarium_ciff_sam>` updated from the strategy used for the :ref:`phase I acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
+  This page underwent a revision in December of 2022 to reflect an a desired modeling strategy update of the :ref:`phase II acute malnutrition simulation <2020_concept_model_vivarium_ciff_sam>` in response to updated effect size data and feedback obtained from collaborators. `The pull request associated with these updates can be found here <https://github.com/ihmeuw/vivarium_research/pull/1097>`_. A summary of the associated changes to the modeling strategy includes:
+
+  - Data changes to effect of SQ-LNS on moderate and severe stunting
+  - Change to how stunting effects are applied (increases in stunting TMREL category rather than mild stunting category)
+  - SQ-LNS effects on stunting will persist until 5 years of age instead of ceasing at 2 years of age
+  - SQ-LNS impacts on each wasting transition rate (including remission rates) rather than only the transition rate between mild and moderate wasting
+
+  Prior to the update in December of 2022, this page underwent a revision in August of 2022 to reflect desired modeling strategy of the :ref:`phase II acute malnutrition simulation <2020_concept_model_vivarium_ciff_sam>` updated from the strategy used for the :ref:`phase I acute malnutrition simulation <2019_concept_model_vivarium_ciff_sam>`.
 
   The PRs associated with these updates are listed below.
 
@@ -139,6 +146,8 @@ There have been several recent meta-analyses on the effects of SQ-LNS, outlined 
 
     - Increased prevalence of walking without support at 12 months
 
+Note, we have received data directly from the [Dewey-et-al-2021b]_ authors on the 4-category severity-specific prevalence ratios of SQ-LNS wasting and stunting. This data can be found at :code:`J:\Project\simulation_science\ciff_malnutrition\Data\sqlns_effects\ipd_list request_20220727.xlsx` and will be what we use to inform our analysis.
+
 .. _`sqlns-baseline-parameters`:
 
 Baseline Coverage Data
@@ -154,9 +163,15 @@ Vivarium Modeling Strategy
 Utilization algorithms
 ++++++++++++++++++++++++
 
-We will consider two concepts of SQ-LNS services, including:
+We will consider two concepts of SQ-LNS services, including coverage and utilization:
 
-- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in 
+- **Coverage:** *access* to the intervention (such as living in an area where SQ-LNS products are available and in use). This will be determined by coverage scale-up algorithms in the concept model document.
+
+Possible coverage values include:
+
+- **Uncovered:** Not supplemented by SQ-LNS currently or in the past. Simulants aged 6 months to 5 years are eligible for this category.
+- **Covered:** Actively receiving SQ-LNS supplementation. Simulants aged 6 months to 2 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on wasting and stunting.
+- **Received:** No longer actively receiving SQ-LNS supplementation, but did receive SQ-LNS supplementation before the age of 2. Simulants aged 2 to 5 years are eligible for this category. Simulants in this category are subject to the SQ-LNS effects on stunting, but not wasting.
 
 - **Utilization:** *use* of the intervention (actually taking the supplements and receiving the effects). This will be determined by the utilization algorithms below.
 
@@ -166,7 +181,7 @@ There are various SQ-LNS utilization algorithms that may be desired under differ
 - **Targeted to AM treatment:** Covered simulants who transition from MAM or SAM to mild wasting will receive intervention effects starting at that timestep.
 - **Targeted to mild wasting:** Covered simulants who are initialized into or transition into the mild wasting state will receive intervention effects starting at that timestep.
 
-All effects will persist until 24 months of age.
+SQ-LNS effects on wasting will persist until 24 months of age and effects on stunting will persist until five years of age.
 
 .. list-table:: SQ-LNS Utilization Restrictions
   :widths: 15 15 15
@@ -197,29 +212,17 @@ Affected Outcomes
 Wasting
 ~~~~~~~
 
-**Research background**
+.. note::
 
-For the outcome moderate wasting, [DAS_Cochrane_Review_2019]_ compared prevalence of **moderate wasting** at 18 or 24 months between intervention and control children. LNS plus complementary feeding reduced the prevalence of moderate wasting by 18% (RR 0.82, 95% CI 0.74 to 0.91; eight studies; 13,172 participants; moderate-quality evidence). There was *no impact* of LNS plus complementary feeding on **severe wasting** (RR 1.27, 95% CI 0.66 to 2.46; three studies, 2329 participants)
+  These values changed in both the December and August, 2022 updates
 
-[Dewey-et-al-2021b]_ found a prevalence ratio of wasting (not severity-specific) equal to  0.86 (95% CI: 0.80, 0.93). Given that the review by Dewey et al. contained more data than the review by Das et al., we will use the effect size from Dewey et al. for our purposes. [Dewey-et-al-2021b]_ also found effect modification by child sex, with greater impacts among females than males, which we plan to incorporate into our simulation (shown in the table below). Possible mechanisms for sex differences in childhood nutrition are discussed by [Thompson-2021]_.
+Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, it is not known whether SQ-LNS reduces wasting prevalence through a reduction of wasting incidence or duration. Therefore, we will run a sensitivity analysis in which SQ-LNS affects wasting incidence rates and another in which SQ-LNS affects wasting recovery rates. Additionally, due to the multicompartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we `solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%20.ipynb>`_. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
 
-We will apply the relative risk ratio as a relative rate ratio on the incidence of MAM from MILD (i2) starting from the age-start of the intervention starts (6 months). This is because we assume that the intervention does not affect the duration of disease and hence:
-
-| Prevalence_intervention
-| = PR x (prevalence_baseline_6mo)
-| = PR x (incidence_baseline_6mo) x Duration_baseline
-
-.. important::
-
-  Note that when we apply this incidence reduction to the incidence of MAM from Mild, we will inadvertently reduce SAM prevalence. This is because less people will be transitioning into SAM. Although the Das 2019 Cochrane Review says the intervention has no effect on SAM (in fact, it seems like it may increase SAM prevalence based on the mean prevalence RR!), we are assuming 'an absence of evidence is not evidence of absence' - quote Abie. Logically, it should reduce SAM prevalence. We should discuss this in our methods in the manuscript and see how much of SAM prevalence is decreased.
-
-**Modeling details**
+Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2020_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. The SQ-LNS effects on wasting transition rates should apply to simulants covered by SQ-LNS from the start of coverage (at six months of age) until they are 2 years of age, at which point SQ-LNS should no longer affect their transition rates. In other words, the :code:`covered` SQ-LNS coverage state affects wasting transitions rates, but the :code:`received` and :code:`uncovered` states do not.
 
 .. note::
 
-  These values *did* change since the 2021 implementation
-
-The intervention effect in the table below should be applied to the :code:`i2` transition rate in the :ref:`dynamic wasting transition model <2020_risk_exposure_wasting_state_exposure>` between mild and moderate wasting states. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure.
+  Lognormal distributions of uncertainty should be used for all effect sizes in the table below and the uncertainty intervals.
 
 .. list-table:: Wasting outcome effect sizes
   :header-rows: 1
@@ -227,36 +230,49 @@ The intervention effect in the table below should be applied to the :code:`i2` t
   * - Outcome
     - Effect size measure
     - Effect size
+    - Sensitivity analysis
     - Note
-  * - i2 incidence rate from mild to moderate wasting
+  * - i3 rate from wasting TMREL to mild wasting
     - Relative risk
-    - 0.91 (0.88, 0.95), lognormal distribution of uncertainty
-    - **Male**-specific effect size from [Dewey-et-al-2021b]_
-  * - i2 incidence rate from mild to moderate wasting
+    - 0.88 (0.825, 0.957)
+    - Incidence effects
+    - 
+  * - i2 rate from mild wasting to MAM
     - Relative risk
-    - 0.84 (0.80, 0.88), lognormal distribution of uncertainty
-    - **Female**-specific effect size from [Dewey-et-al-2021b]_
+    - 0.895 (0.82, 0.96)
+    - Incidence effects
+    - 
+  * - i1 rate from MAM to SAM
+    - Relative risk
+    - 0.771 (0.655, 0.885)
+    - Incidence effects
+    - 
+  * - r4 rate from mild wasting to wasting TMREL
+    - Relative risk
+    - 1.125 (1.045, 1.187)
+    - Recovery effects
+    - 
+  * - r3 rate from MAM to mild wasting
+    - Relative risk
+    - 1.086 (1.025, 1.165)
+    - Recovery effects
+    - 
+  * - r1 (SAM to MAM) and t1 (SAM to mild) rates 
+    - Relative risk
+    - 1.28 (1.12, 1.465)
+    - Recovery effects
+    - Apply this effect to both r1 and t1 transition rates
 
 Stunting
 ~~~~~~~~~
 
-**Research background**
-
-In the [DAS_Cochrane_Review_2019]_ LNS plus complementary feeding reduced the prevalence of **moderate stunting** by 7% (risk ratio (RR) 0.93, 95% confidence interval (CI) 0.88 to 0.98; nine studies, 13,372 participants; moderate-quality evidence), **severe stunting** by 15% (RR 0.85, 95% CI 0.74 to 0.98; five studies, 6151 participants; moderate-quality evidence),
-
-[Dewey-et-al-2021b]_ found a stunting prevalence ratio equal to 0.88 (95% CI: 0.85, 0.91).
-
-Given that the result from [Dewey-et-al-2021b]_ is similar in magnitude to the severity-specific estimates from [DAS_Cochrane_Review_2019]_, we will use the severity-specific findings from [DAS_Cochrane_Review_2019]_ for use in our model.
-
-**Modeling details**
-
 .. note:: 
 
-  These values have not changed since the 2021 implementation
+  These values changed in the December, but not August, 2022 update
 
-We will apply the relative risk ratio on the propensity of :ref:`child stunting risk exposure <2020_risk_exposure_child_stunting>` starting from the age-start of the intervention starts. See below example for male, age 6mo-11mo, 2020 stunting prevalence.
+**We will apply the SQ-LNS prevalence ratios on the** :ref:`stunting risk exposure distribution <2020_risk_exposure_child_stunting>` **among simulants covered by SQ-LNS from the start of supplementation (six months of age) until they turn five years of age.** In other words, both the :code:`covered` and :code:`received` SQ-LNS coverage states affect stunting, but the :code:`uncovered` state does not. The application of the SQ-LNS effect on stunting through five years of age (beyond the duration of supplementation) was advised by collaborators, with the rationale that height gains achieved during SQ-LNS supplementation will persist throughout life (unlike wasting-associated weight gains). 
 
-.. image:: viviarium_strategy_stunting.svg
+Additionally, as suggested by the observed prevalence ratios from the meta-analysis, we will assume that SQ-LNS results in decreases to the prevalence of moderate and severe stunting, no change to the prevalence of mild stunting, and increases to the stunting TMREL category that are equal to the sum of the decreases in prevalence of moderate and severe stunting. The figure below demonstrates how to apply the effects summarized in the table to the stunting risk exposure distribution of simulants affected by SQ-LNS.
 
 .. list-table:: Stunting outcome effect sizes
   :header-rows: 1
@@ -267,12 +283,14 @@ We will apply the relative risk ratio on the propensity of :ref:`child stunting 
     - Note
   * - Moderate (cat2) stunting exposure
     - Prevalence ratio
-    - 0.93 (95% CI: 0.88, 0.98), lognormal distribution of uncertainty
+    - 0.89 (0.86, 0.93), lognormal distribution of uncertainty
     - 
   * - Severe (cat1) stunting exposure
     - Prevalence ratio
-    - 0.85 (95% CI: 0.74, 0.98), lognormal distribution of uncertainty
+    - 0.83 (0.78, 0.90), lognormal distribution of uncertainty
     - 
+
+.. image:: viviarium_strategy_stunting.svg
 
 Mortality
 ~~~~~~~~~~
@@ -297,19 +315,17 @@ Cost Model
 Assumptions and Limitations
 ++++++++++++++++++++++++++++
 
+- We assume a constant effect of SQ-LNS wasting transition rates. This means that wasting prevalence ratios will equal 1 at the start of supplementation and progress towards the measured prevalence ratios until they reach a level of stability at some later point. We make this assumption in the absence of measured prevalence ratios as mutliple follow-up points.
+
+- We assume that these effect generalize from the populations included in the meta-analysis of SQ-LNS trials to our simulated populations.
+
 Validation and Verification Criteria
 +++++++++++++++++++++++++++++++++++++
 
 - verification: coverage of SQ-LNS as a function of time and eligible populations in baseline and intervention scenario
 - verification: prevalence of stunting in supplemented vs non-supplemented group
-- verification: incidence of moderate wasting from mild in supplemented vs non-supplemented group
-- validation: check that the prevalence of moderate wasting in supplemented vs non-supplemented group agrees with the prevalence RR that we applied to the incidence instead.
-- validation: check to see how much of SAM prevalence decreases from reduction in MAM incidence from MILD.
-
-.. csv-table:: SQ-LNS intervention output table shell for v & v (Ethiopia)
-   :file: sqlns_vv_output_shell.csv
-   :widths: 20, 20, 10, 10, 10, 20, 20, 10
-   :header-rows: 1
+- verification: wasting transition rates in supplemented vs non-supplemented group
+- validation: check that the wasting prevalence ratios replicate the desired values
 
 References
 -----------
@@ -358,13 +374,6 @@ References
     E, Humphrey JH, Dewey KG. Lipid-based nutrient supplements and
     all-cause mortality in children 6–24 months of age: a meta-analysis of
     randomized controlled trials. Am J Clin Nutr 2020;111:207–18.
-
-.. [Thompson-2021]
-
-  View `Thompson 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9205267/pdf/nihms-1803160.pdf>`_
-
-    Thompson AL. Greater male vulnerability to stunting? Evaluating sex differences in growth, pathways and biocultural mechanisms. Ann Hum Biol. 2021 Sep;48(6):466-473. doi: 10.1080/03014460.2021.1998622. PMID: 35105202; PMCID: PMC9205267.
-
 .. [Wessells-et-al-2021]
 
   View `Wessels et al 2021 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8560313/pdf/nqab276.pdf>`_
