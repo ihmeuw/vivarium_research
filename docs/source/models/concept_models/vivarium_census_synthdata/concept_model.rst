@@ -1300,14 +1300,16 @@ in the simulation; they will not be returned by any future observers.
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is all simulants living in non-GQ households.
-This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
-**of the simulant's household's reference person**, as well as US state.
-On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
-a number of **simulants** to emigrate as part of household moves.
-Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
-This means that in practice we will generally overshoot the desired number by a few, but this should have
-minimal effect.
+The household move emigration rates are calculated as person-moves per year of person-time,
+stratified by demographics **of the simulant's household's reference person**.
+However, we cannot apply these rates to all simulants independently, because we want to sample
+at the household level for this move type.
+
+Instead, we apply these rates to an at-risk population of non-GQ **reference people only**,
+stratified by age group, sex, race/ethnicity, nativity (born in or outside the US), and US state.
+We then emigrate all members of households where the reference person was selected for this event.
+This ensures that the same number of simulants emigrate in each stratum, in expectation, as if we had applied the
+rate to the whole stratum, while also emigrating households as indivisible units.
 
 GQ person moves
 '''''''''''''''
