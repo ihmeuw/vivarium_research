@@ -934,8 +934,10 @@ Additional details are in the following subsections for each type.
 
 The at-risk population for individual moves is all simulants in the US.
 This at-risk population should be stratified by age group, sex, and race/ethnicity.
-On each time step, within each stratum, the corresponding migration rate **per person-year** should be applied to determine
-the simulants that should move with that move type.
+On each time step, within each stratum, the corresponding migration rates **per person-year** should be applied to determine
+the simulants that should move with each move type.
+Simulants can only have a single individual migration event per time step -- they
+cannot do both a new-household move and a GQ person move in the same time step.
 
 If a simulant selected to move is currently the reference person in a non-GQ household,
 the reference person of that household should be updated using the same
