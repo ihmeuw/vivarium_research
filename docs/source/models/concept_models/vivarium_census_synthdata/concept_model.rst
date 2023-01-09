@@ -3587,11 +3587,10 @@ See the data sources and analysis section for how these variances were calculate
 The last step is combining these two components, which is done with this equation:
 
 .. math::
-  \text{income_propensity} = \text{probit}(\text{simulant_component} + \text{job_component})
+  \text{income_propensity} = \Phi(\text{simulant_component} + \text{job_component})
 
 The sum of the two components has a standard normal distribution,
-which means that the probit function (which is the inverse
-of the standard normal's CDF) of that sum is uniformly distributed between 0 and 1.
+which means that the standard normal's CDF of that sum is uniformly distributed between 0 and 1.
 More details on this can be found in the data sources and analysis section.
 
 Data sources and analysis
@@ -3639,7 +3638,7 @@ We want to break down the variance using two normally distributed components of 
 
 .. math::
 
-  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+  log(income) = F_\text{log(income)}(\Phi(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
 
 We inform the variance contributions of the job- and simulant-specific
 components with a measured variance of 1-year change in log(earnings)
