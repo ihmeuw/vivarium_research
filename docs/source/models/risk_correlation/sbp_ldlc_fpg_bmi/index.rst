@@ -68,12 +68,6 @@ between 1 and 0 with the same correlation between variables.
 The calculations are done `in this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Correlation_Testing.ipynb>`_. This code can be used to generate propensity 
 values for any number of simulants. 
 
-Causation
-+++++++++
-
-We are not currently modeling a direct causal relationship between changes in 
-any risk exposure values. 
-
 Assumptions and Limitations
 ++++++++++++++++++++++++++++++
 
