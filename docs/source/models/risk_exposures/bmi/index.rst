@@ -32,6 +32,25 @@ To estimate the mean BMI for adults in each country, age, and sex, over the time
 
 We used the standard GBD ensemble approach to estimate the distribution of BMI. 
 
+**BMI Standard Deviation:**\
+
+The GBD estimates for BMI standard deviation have a significant amount of 
+between draw variation. This high variation causes problems in the model 
+as it leads to extreme values for BMI when one of these draws is selected. 
+
+Interestingly, there is a jump in standard deviation values after 15 to 25 
+and higher. After conferring with the GBD modeling team, the decision was 
+made to remove and replace values over 15. More specifically, within each 
+age/sex group, a random sample of 50 values was selected from the "reasonable" 
+standard deviations. The average of this sample was then found and this value 
+was used to replace the outlier. 
+
+Full details and code for implementation is found in `this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/BMI_standard_deviation.ipynb>`_. 
+
+.. note::
+
+  Software engineers, if this code is difficult to implement or the data needs to be structured differently, please let me know and I can adjust it. 
+
 **Theoretical minimum risk exposure level:**\
 
 For adults (ages 20+), the theoretical minimum risk exposure level (TMREL) of BMI (20–25 kg/m\ :sup:`2`\) was determined based on the BMI level that was associated with the lowest risk of all-cause mortality in prospective cohort studies. This is the same for all risk-outcome pairs. These are listed below: 
@@ -195,6 +214,11 @@ The rei_id for BMI is 370
 	  - Must be accessed with get_draws; adult values
 
 The exposure and standard deviation values should be used to represent the distribution of mean BMI values that the simulants will be assigned in the model. 
+
+.. note::
+
+  The standard deviation values must be filtered to exclude values over 15 using the code above 
+
 
 Validation Criteria
 +++++++++++++++++++
