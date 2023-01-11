@@ -41,14 +41,12 @@ consider the correlation between modeled risk factors will cause biased model re
 important to consider the expected magnitude of that bias, as small biases may be acceptable model
 limitations.
 
-The :download:`Jupyter notebook linked here <bias_quantification.ipynb>`
+The `Jupyter notebook linked here <https://github.com/ihmeuw/vivarium_research/blob/af1dd1706c617a12364f7bd8e9a9015c03411d43/docs/source/model_design/vivarium_model_components/risk_factors/risk_correlation/bias_quantification.ipynb>`_
 outlines situations in which failing to consider correlation between
 modeled risk factors may lead to biased results and contains fuctions that may aid in quantifying
 the expected magnitude of that bias.
 
 .. todo::
-
-  Update link to github rendered version
 
   Link to future page on residual confounding?
 
