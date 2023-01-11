@@ -53,7 +53,7 @@
 .. _{vivarium_census_prl_synth_data}:
 
 ==================================
-Vivarium Census PRL Synthetic Data
+Vivarium Census PRL Simulated Data
 ==================================
 
 .. contents::
@@ -82,7 +82,7 @@ Probabilistic Record Linkage (PRL) typically uses sensitive data
 containing information such as name, address, date of birth, and
 sometimes even social security number, and the restrictions on access
 to such data has been a barrier to developing and testing new methods
-and software for PRL.  By simulating realistic, but synthetic, data
+and software for PRL.  By simulating realistic, but simulated, data
 which includes these attributes, we can make PRL research and
 development easier for ourselves and others.
 
@@ -96,7 +96,7 @@ package for producing synthetic data
 who developed `synthetic data for testing splink
 <http://github.com/moj-analytical-services/splink_synthetic_data>`_.
 
-The unique elements of our work will rely on Vivarium: our synthetic
+The unique elements of our work will rely on Vivarium: our simulated
 data will be informed by the United States Census Bureau (USCB) needs
 and publicly released USCB data (such as the American Community
 Survey [ACS]).  By using Vivarium, we will represent some realistic
@@ -920,7 +920,7 @@ match the household's current state and PUMA**.
 be filtered to only the sources and destinations in the simulation catchment area.)
 The household should be assigned new physical and mailing addresses, with the same procedure used at initialization.
 
-All simulants in the household that are of working age should change jobs,
+All simulants in the household that are of working age should change employment,
 with the same procedure used for a spontaneous employment change event.
 
 All other attributes of the household and simulants (including relationship to reference person)
@@ -934,8 +934,10 @@ Additional details are in the following subsections for each type.
 
 The at-risk population for individual moves is all simulants in the US.
 This at-risk population should be stratified by age group, sex, and race/ethnicity.
-On each time step, within each stratum, the corresponding migration rate **per person-year** should be applied to determine
-the simulants that should move with that move type.
+On each time step, within each stratum, the corresponding migration rates **per person-year** should be applied to determine
+the simulants that should move with each move type.
+Simulants can only have a single individual migration event per time step -- they
+cannot do both a new-household move and a GQ person move in the same time step.
 
 If a simulant selected to move is currently the reference person in a non-GQ household,
 the reference person of that household should be updated using the same
@@ -947,7 +949,7 @@ match the simulant's current state and PUMA**.
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the sources and destinations in the simulation catchment area.)
 
-If the simulant is of working age and not moving into military GQ, they should change jobs,
+If the simulant is of working age and not moving into military GQ, they should change employment,
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
@@ -1026,9 +1028,10 @@ Limitations
 #. In real life, people probably tend to move close to home, far below the granularity
    of a MIGPUMA.
    We do not have data to inform this.
-#. We assume that 100% of people who move change jobs.
+#. We assume that 100% of people who move change employment.
+   Notably, this means that all unemployed people who move become employed.
    A more accurate rate cannot be
-   calculated from the ACS (it does not ask about job changes),
+   calculated from the ACS, as it does not ask about employment changes,
    but other data sources probably exist about this question.
 #. We do not include those moving from Puerto Rico in domestic migration.
    We also do not include those moving from Puerto Rico in international immigration,
@@ -1781,7 +1784,7 @@ refinement is needed.
 2.3.10 Component 14: Date of Birth
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-To create a date-of-birth column in the synthetic output data, each
+To create a date-of-birth column in the simulated output data, each
 simulant should have a uniformly random date of birth which is
 consistent with their age.
 
@@ -3584,11 +3587,10 @@ See the data sources and analysis section for how these variances were calculate
 The last step is combining these two components, which is done with this equation:
 
 .. math::
-  \text{income_propensity} = \text{probit}(\text{simulant_component} + \text{job_component})
+  \text{income_propensity} = \Phi(\text{simulant_component} + \text{job_component})
 
 The sum of the two components has a standard normal distribution,
-which means that the probit function (which is the inverse
-of the standard normal's CDF) of that sum is uniformly distributed between 0 and 1.
+which means that the standard normal's CDF of that sum is uniformly distributed between 0 and 1.
 More details on this can be found in the data sources and analysis section.
 
 Data sources and analysis
@@ -3636,7 +3638,7 @@ We want to break down the variance using two normally distributed components of 
 
 .. math::
 
-  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+  log(income) = F_\text{log(income)}(\Phi(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
 
 We inform the variance contributions of the job- and simulant-specific
 components with a measured variance of 1-year change in log(earnings)
@@ -3889,6 +3891,15 @@ Limitations
 #. Businesses never share addresses with households (except by coincidence).
 #. Business addresses that are vacated are not re-used (except by coincidence).
    This likely makes business linking easier than it is in reality.
+
+Speaking of the names for employers, we will generate names for
+employers based on a conditional random model that Abie developed and
+Jim refactored into the vivarium model.  It should have more details
+documented at some point.  Jim will ensure that all employer names are
+unique for now, although it would be interesting one day to add some
+duplicates.  Businesses can have the same name in real life but
+if/when we do have duplicate names we need to prevent duplicates for
+the names of the largest employers.
 
 .. _census_prl_perturbation:
 
