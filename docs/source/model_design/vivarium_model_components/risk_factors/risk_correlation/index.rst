@@ -29,6 +29,29 @@ of the risks.
   which results are biased by the omission of a risk correlation and
   how to assess size/acceptability of the bias.
 
+When modeling risk correlation may be important
+------------------------------------------------
+
+There are certain situations in which correlation between modeled risk factors is important to include
+in our simulations to avoid biased results. Assessing whether failure to consider correlation between
+modeled risk factors will result in bias depends on the independent (most often intervention coverage) 
+and dependent variables (most often DALYs averted) in the research question at hand and how the 
+correlated risks relate to those variables. Further, in addition to assessing whether failing to 
+consider the correlation between modeled risk factors will cause biased model results, it is also
+important to consider the expected magnitude of that bias, as small biases may be acceptable model
+limitations.
+
+The :download:`Jupyter notebook linked here <bias_quantification.ipynb>`
+outlines situations in which failing to consider correlation between
+modeled risk factors may lead to biased results and contains fuctions that may aid in quantifying
+the expected magnitude of that bias.
+
+.. todo::
+
+  Update link to github rendered version
+
+  Link to future page on residual confounding?
+
 Risk exposure correlation
 -------------------------
 
