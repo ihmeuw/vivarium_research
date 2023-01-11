@@ -73,7 +73,7 @@ Assumptions and Limitations
 
 #. We assign a correlation at initialization that does not change over time. For SBP and BMI which we model to change over time, this means that as simulants age, they will retain their original correlation and increasly differ from the true correlation. 
 
-#. To calculate the correlation, we limited the population to only untreated individuals. However, as our simulants receive treatments their risk exposure values will change and likely make validation more challenging. 
+#. To calculate the correlation, we included both treated and untreated individuals. This is due to how we initialize the population in the sim, which generates exposures for individuals including any relevant treatment effects. As treatment is also derived from NHANES, we feel this is a reasonable approach. However it likely includes some bias still.  
 
 Validation Criteria
 +++++++++++++++++++++
