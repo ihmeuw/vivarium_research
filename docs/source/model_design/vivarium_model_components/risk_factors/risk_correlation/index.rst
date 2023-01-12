@@ -43,7 +43,7 @@ limitations.
 
 The `Jupyter notebook linked here <https://github.com/ihmeuw/vivarium_research/blob/af1dd1706c617a12364f7bd8e9a9015c03411d43/docs/source/model_design/vivarium_model_components/risk_factors/risk_correlation/bias_quantification.ipynb>`_
 outlines situations in which failing to consider correlation between
-modeled risk factors may lead to biased results and contains fuctions that may aid in quantifying
+modeled risk factors may lead to biased results and contains functions that may aid in quantifying
 the expected magnitude of that bias.
 
 .. todo::
