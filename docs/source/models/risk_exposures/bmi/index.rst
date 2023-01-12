@@ -45,11 +45,13 @@ age/sex group, a random sample of 50 values was selected from the "reasonable"
 standard deviations. The average of this sample was then found and this value 
 was used to replace the outlier. 
 
-Full details and code for implementation is found in `this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/BMI_standard_deviation.ipynb>`_. 
+Full details and code for implementation is found in `this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/BMI_standard_deviation.ipynb>`_. From this 
+a csv file was created for all draws which is saved here: 
+/ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/bmi_standard_deviations_adjusted.csv 
 
 .. note::
 
-  Software engineers, if this code is difficult to implement or the data needs to be structured differently, please let me know and I can adjust it. 
+  Software engineers, if this code or csv are difficult to implement or the data needs to be structured differently, please let me know and I can adjust it. 
 
 **Theoretical minimum risk exposure level:**\
 
