@@ -237,32 +237,32 @@ Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic 
     - 12_to_23_months effect
     - Note
   * - i3 rate from wasting TMREL to mild wasting
-    - Incidence
+    - Incidence effects
     - 0.73 (0.60, 0.905)
     - 0.905 (0.87, 0.965)
     - 
   * - i2 rate from mild wasting to MAM
-    - Incidence
+    - Incidence effects
     - 0.72 (0.58, 0.89)
     - 0.90 (0.84, 0.965)
     - 
   * - i1 rate from MAM to SAM
-    - Incidence
+    - Incidence effects
     - 0.56 (0.347, 0.80)
     - 0.78 (0.67, 0.89) 
     - 
   * - r4 rate from mild wasting to wasting TMREL
-    - Recovery
+    - Recovery effects
     - 1.29 (1.10, 1.45)
     - 1.10 (1.03, 1.15)
     - 
   * - r3 rate from MAM to mild wasting
-    - Recovery
+    - Recovery effects
     - 1.15 (1.085, 1.40)
     - 1.08 (1.02, 1.13)
     - 
   * - r1 (SAM to MAM) and t1 (SAM to mild) rates 
-    - Recovery
+    - Recovery effects
     - 1.49 (1.205, 1.77)
     - 1.25 (1.10, 1.45)
     - Apply this effect to both r1 and t1 transition rates

@@ -493,7 +493,7 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - Count data results stratified by random seed for optimization
     - No x-factor component. V&V SQ-LNS updates before moving on
   * - 3.1.1
-    - Updated age-specific SQLNS effects on wasting, additional stratifications, updated initialization age start value (from 0.5 to 0)
+    - Updated age-specific SQLNS effects on wasting, additional stratifications, updated initialization age start value (from 0.5 to 0). All changes included in `pull request #1114 <https://github.com/ihmeuw/vivarium_research/pull/1114>`_
     - 7, 8_incidence, 8_recovery
     - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
     - Count data results stratified by random seed for optimization
