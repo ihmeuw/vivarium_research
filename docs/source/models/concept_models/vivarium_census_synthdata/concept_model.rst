@@ -2947,6 +2947,7 @@ for all column based noise include:
 
 - Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
 - Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
+- A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
 - The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, sex has 2% incorrect selections. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
@@ -2966,139 +2967,139 @@ for all column based noise include:
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Nicknames, OCR, phonetic, typographic, fake names 
+    - Nicknames, OCR, phonetic, typographic, fake names, missing data
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - OCR, phonetic, typographic, missing data
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic, fake names
+    - OCR, phonetic, typographic, fake names, missing data
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting 
+    - Copy from within Household, Numeric miswriting, missing data
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting, swap month and day 
+    - Copy from within Household, Numeric miswriting, swap month and day, missing data 
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Numeric miswriting, missing data
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - N/A
-    - Incorrect Select
+    - Incorrect Select, missing data
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Numeric miswriting, missing data
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 1%
     - N/A
-    - Incorrect select 
+    - Incorrect select, missing data
     - 
   * - Sex 
     - Census, Household Surveys, WIC 
     - 1%
     - N/A
-    - Incorrect select 
+    - Incorrect select, missing data
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 1%
     - N/A
-    - Incorrect select 
+    - Incorrect select, missing data
     - 
   * - SSN
     - Taxes (both), SSA
     - 1%
     - 0.1 
-    - "Borrowed" SSN, Copy from within Household, Numeric miswriting 
+    - "Borrowed" SSN, Copy from within Household, Numeric miswriting, missing data 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting 
+    - Copy from within Household, Numeric miswriting, missing data
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Numeric miswriting, missing data
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Numeric miswriting, missing data
     - 
   * - Employer Name 
     - Taxes (both)
     - 1%
     - 0.1 
-    - OCR, typographic 
+    - OCR, typographic, missing data
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 1%
     - N/A
-    - Incorrect select 
+    - Incorrect select, missing data
     - 
   * - Type of SSA Event 
     - SSA 
     - 1%
     - N/A
-    - Incorrect select 
+    - Incorrect select, missing data
     - 
   * - Date of SSA Event 
     - SSA 
     - 1%
     - N/A
-    - Numeric miswriting, month and day swap 
+    - Numeric miswriting, month and day swap, missing data 
     - 
 
 The below section further describes types of noise including any code 
@@ -3118,9 +3119,33 @@ error rate is not very intuitive for the end user.
 At some point in the future, we might make this more user friendly. However, for the 
 sake of a minimum functional model, this is satisfactory. 
 
-One function has an additional parameter. The typographic function needs an input for 
-the probability that a corrupted token contains the original token. For simplicity, 
-we will use 0.1 and the user will not be able to edit this value. 
+A few functions have additional parameters that allow the user more control. These 
+inputs will not be specified in the main settings for pseudopeople listed above. We 
+imagine that a yaml file (or similar file type) will be available for users to download 
+and adjust the additional inputs if desired. The table below outlines these inputs, 
+their purpose, and the default value for the yaml file. 
+
+.. list-table:: Additional Inputs and Default Values
+  :widths: 20 20 20 20
+  :header-rows: 0
+
+  * - Noise Function Affected
+    - Observer Data Affected 
+    - Additional Inputs 
+    - Default Input Value 
+  * - Typographic Noise
+    - First name, middle initial, last name, street name, city name, employer name 
+    - Probability that a corrupted token contains the original token
+    - 0.1 
+  * - Numeric miswriting 
+    - Age 
+    - Numeric errors possible (note: inputted as a list of values)
+    - [1, -1] 
+  * - Numeric miswriting 
+    - Zip code 
+    - Separate error rates for first 2 digits, middle digit, and last 2 digits 
+    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
+
 
 .. todo::
 
@@ -3134,7 +3159,7 @@ we will use 0.1 and the user will not be able to edit this value.
 
 Optical character recognition is when a character is misread for another character that 
 looks similar. A common examples is 'S' and '5'. In order to emulate 
-that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the OCR noise function to all strings with the user defined token 
@@ -3144,7 +3169,7 @@ error rate.
 
 Phonetic errors are when a character is misheard. This could similar sounding letters when 
 spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
-In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the phonetic noise function to all strings with the user defined token 
@@ -3159,11 +3184,11 @@ Limitations:
 
 Typographic errors occur due to mistyping information. The commonality of errors are therefore 
 based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
-and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the typographic noise function to all strings with the user defined token 
-error rate and standard parameter for including the original token. 
+error rate and rate for including the original token. 
 
 .. todo::
 
@@ -3174,7 +3199,7 @@ error rate and standard parameter for including the original token.
 For a variety of reasons, some repondents might choose to use a fake name rather 
 than their real name on official forms. To account for this, first select the sample 
 to have noise added. Then for everyone selected, replace their name with a random 
-selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/2022_04_20c_prl_fake_names.ipynb>`_. 
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/fake_names.py>`_. 
 Please note that the list is separated into first and last names. 
 
 Limitations: 
@@ -3186,7 +3211,7 @@ Limitations:
 
 Many people choose to use nicknames instead of their "real" names. A common example is an 
 Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
-which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
 
 Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
@@ -3211,10 +3236,6 @@ character error rate.
 Limitations: 
 
 - This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
-
-.. todo::
-
-  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. In addition to the noise functions above, current work done by Nathaniel includes: this `corruption module <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/corruption.py>`_ which has a more robust system for zipcodes and a function to swap months and days in dates. 
 
 
 **Copy from within Household** 
@@ -3242,20 +3263,31 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select** 
 
 Incorrect select applies to a range of data types. For this, select the sample to 
-have noise added. For those selected, randomly select a different option from the 
-correct one. This is randomly chosen from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes 
-the full list of options, not just those seen in the household. 
+have noise added. For those selected, randomly select a new option. This is chosen 
+from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household. 
 
 Limitations: 
 
 - For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
+- The current version of the function does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This is especially important for sex as there are only 2 options to select. 
 
 **"Borrowed" SSN**
 
 Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
 It will NOT be individually configurable by the end user. No further action is 
 needed in the noise functions for this component. 
+
+**Missing Data**
+
+All data types have a probability of being missing. This could mean that the 
+input was left blank, that an answer was refused, or that the answer was illegible 
+or unintelligible. The function will remove the real data and replace it with N/A. 
+
+Limitations: 
+
+- Some users would likely have a significant amount of missing data instead of missed data being spread across all users. This could be due to privacy concerns, how the response was submitted, or user errors. We will not include this simulant level variation. 
+- With current versions of the census and many other forms online, there is less opportunity for missing data. It might be replaced with fake names or similar approaches, as outlined separately above. However, in mail-in forms or in person recording there is still an opportunity for missing data. We include it here despite these limitations. 
 
 .. todo::
 
