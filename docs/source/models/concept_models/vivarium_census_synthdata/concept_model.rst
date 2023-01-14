@@ -356,26 +356,31 @@ is reached.
 To generate individuals living in group quarters, we will
 use a weighted sample of people in group quarters from the appropriate
 geography from ACS (sampled with replacement, analogously to
-household).  This will provide each simulant residing in GQ with an
-age, sex, race/ethnicity, and geographic location matching the joint
-distribution from ACS.  It does not identify *which* group quarters
-the individual resides in, however, and only provides information on
-whether it is Institutional or Non-institutional GQ (in the TYPE
-variable: 2 = Institutional; 3 = Non-institutional).
+household). This will provide each simulant residing in GQ with an
+age, sex, and race/ethnicity matching the joint
+distribution from ACS.
 
-We perturb the PUMA and age attributes of the sampled GQ people, as described in the
+We perturb the age attribute of the sampled GQ people, as described in the
 :ref:`perturbation section below <census_prl_perturbation>`.
 
-The final step for initializing GQ simulants is to give each
-a (somewhat inappropriately named) household_id.  Eventually we shall
-accomplish this so that the distribution of GQ sizes match what is
-found in census, but as a simple stand-in for now we will include 6
-special "household_id" values for the six broad types of GQs that we
-wish to represent, and assign simulants to one of the categories
-consistent with their GQ TYPE uniformly at random.  The GQ subtypes of
-non-institutional are college, military, other non-institutional; and
-subtypes of institutional are carceral, nursing homes, and other
-institutional.
+In the future, we may want to model the geographic locations and sizes of
+different group quarters establishments.
+For now, we initialize six GQ "households," one for each of the six
+types of GQ that we wish to represent.
+These can be split into two categories: institutional and non-institutional.
+The types of institutional GQ that we model are carceral, nursing homes, and other institutional;
+the types of non-institutional GQ that we model are college, military, and other non-institutional.
+Each GQ type, being a single "household," is assigned a single US state and PUMA combination
+(sampled uniformly at random) and a single address.
+All simulants living in the same GQ type will therefore have the same address, state, and PUMA,
+which is a limitation of this approach.
+
+ACS does not identify which type of group quarters
+each individual resides in, however, and only provides information on
+whether it is institutional or non-institutional GQ (in the TYPE
+variable: 2 = Institutional; 3 = Non-institutional).
+We choose a GQ type/"household" uniformly at random for each simulant out of the
+three types consistent with their institutional/non-institutional status.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -943,12 +948,6 @@ If a simulant selected to move is currently the reference person in a non-GQ hou
 the reference person of that household should be updated using the same
 procedure as if the moving simulant had died (as described in the Mortality component).
 
-A new state and PUMA should be selected for the simulant according to the proportions
-in the "Destination PUMA proportions by source PUMA" input file **where the state and PUMA columns
-match the simulant's current state and PUMA**.
-(If the simulation's catchment area is only certain states/PUMAs, this file should
-be filtered to only the sources and destinations in the simulation catchment area.)
-
 If the simulant is of working age and not moving into military GQ, they should change employment,
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
@@ -963,6 +962,12 @@ by any other simulants.
 The new household's physical and mailing addresses should also be assigned at random,
 in the same manner as at initialization.
 
+A new state and PUMA should be selected for the simulant according to the proportions
+in the "Destination PUMA proportions by source PUMA" input file **where the state and PUMA columns
+match the simulant's current state and PUMA**.
+(If the simulation's catchment area is only certain states/PUMAs, this file should
+be filtered to only the destinations in the simulation catchment area.)
+
 Their relationship attribute should be set to "reference person."
 
 *GQ person moves*
@@ -974,7 +979,7 @@ An institutional/non-institutional "relationship" attribute should be sampled
 for the simulant according to the proportions in the "Relationship proportions for GQ person moves" input file
 **where the age, sex, and race/ethnicity columns match those attributes of the simulant**.
 
-Then, a GQ type (household ID and corresponding physical and mailing addresses) should be assigned according to the
+Then, a GQ type "household" should be randomly assigned according to the
 institutional/non-institutional status, as is done at initialization.
 
 *Non-reference person moves*
@@ -982,8 +987,14 @@ institutional/non-institutional status, as is done at initialization.
 
 In addition to the above logic common to all individual moves:
 
-For this move type, state and PUMA should be selected such that there is at least one
-non-GQ household already in the simulation in that state and PUMA.
+A new state and PUMA should be selected for the simulant according to the proportions
+in the "Destination PUMA proportions by source PUMA" input file where **both**:
+
+* The state and PUMA columns match the simulant's current state and PUMA.
+* There is at least one non-GQ household already in the simulation in the destination PUMA.
+
+(If the simulation's catchment area is only certain states/PUMAs, this file should
+be filtered to only the destinations in the simulation catchment area.)
 
 The simulant selected should be added to (given the same household ID as) a random non-GQ household
 in their new state and PUMA.
@@ -1185,9 +1196,9 @@ They are assigned a new household ID and new physical/mailing addresses, as is d
 PUMS recent immigrants consistent with GQ person moves are sampled using person weights with replacement until the
 desired number of simulants added in GQ person moves is reached.
 
-Sampled individuals may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
-They are assigned a household ID for a randomly-selected GQ type matching
-their institutional/non-institutional status, as well as the corresponding shared addresses, as is done at population initialization.
+Sampled individuals may have age perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+They are assigned to a randomly-selected GQ type "household" matching
+their institutional/non-institutional status, as is done at population initialization.
 
 *Non-reference-person moves*
 """"""""""""""""""""""""""""
@@ -1330,7 +1341,12 @@ The at-risk population for GQ person moves is all simulants living in GQ in the 
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
-should be applied to sample simulants to emigrate. 
+should be applied to sample simulants to emigrate.
+
+.. note::
+  Currently, GQ people are clustered in only six households, in at most six unique states,
+  so emigration rates stratified by state applied to this population will not replicate the national
+  rate.
 
 Non-reference-person moves
 ''''''''''''''''''''''''''
@@ -1421,10 +1437,8 @@ For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
 Simulation strategy
 ^^^^^^^^^^^^^^^^^^^
 
-Residential households
-''''''''''''''''''''''
-
-Each household should be associated with a physical address.
+Each household, which includes both residential households and group quarters "households" (one per GQ type),
+should be associated with a physical address.
 
 Whenever a new household is initialized or moves such that it needs a new physical address,
 the following process will be used to generate one:
@@ -1437,31 +1451,6 @@ the following process will be used to generate one:
 #. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
    the weights in the :code:`proportion` column, filtered to the household's US state and
    PUMA (the state and PUMA values of the household members, which should all be the same).
-
-Group quarters
-''''''''''''''
-
-Each group quarters **type** (e.g. college, carceral, ...) should be associated with a physical address.
-
-When a group quarters type is initialized, its physical address and ZIP code are generated using the following
-steps:
-
-#. A street number, street name, and unit will each be independently sampled from the
-   deepparse address data and concatenated with spaces.
-#. Then, a municipality (city) and province (state) **combination** will be sampled
-   from the deepparse address data, **without filtering by anything.**
-   The combination will be separated by a comma and appended to the result of the previous step.
-#. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
-   the weights in the :code:`proportion` column, **filtered to the US state sampled in the previous step.**
-
-.. note::
-  Because the proportions sum to the same value (1) for each PUMA, sampling ZIP like this without filtering
-  on PUMA assumes that each PUMA is equally likely to contain GQ housing.
-  PUMAs are created to have roughly equal population, so this is reasonable.
-
-.. note::
-  **Simulants' PUMA attribute will not correspond with their physical address when they are in GQ.**
-  This is a result of using a single physical address for an entire GQ type.
 
 The physical address for each GQ type is fixed for the duration of the simulation.
 (See the domestic migration section, where household moves are only applied to residential households.)
@@ -3921,7 +3910,7 @@ would make matching unrealistically difficult.
 
 To decrease similarity without assuming total independence between attributes,
 we perturb values at sampling time.
-Specifically, we perturb the age and PUMA columns.
+Specifically, we perturb age, as well as state and PUMA.
 These are the columns with many possible values, where sampling noise is
 likely to be a significant concern even at the substantial sample size (>15 million)
 of the ACS PUMS.
@@ -3933,73 +3922,66 @@ The perturbation process is similar no matter the entity type being sampled.
 All perturbation is performed completely at random; perturbation probabilities are constant
 across age, sex, race/ethnicity, etc.
 
-PUMA
-^^^^
+State and PUMA
+^^^^^^^^^^^^^^
 
 .. note::
 
-  For the purposes of this section, "PUMA" refers to the unique geographic area.
-  However, the "PUMA" column in the ACS data contains a PUMA code, which is only unique
+  The "PUMA" column in the ACS data contains a PUMA code, which is only unique
   **in combination with state.**
-  Since the simulation stores the PUMA code and state (which together identify the PUMA) separately,
-  "PUMA" in this section refers to the combination of both.
+  The two columns together are what identifies the PUMA geographically.
+  That is why the operations in this section operate on both.
 
-**50% of the time,** we replace the PUMA with the PUMA value of
+**50% of the time,** we replace the state and PUMA of the sampled row with the state and PUMA values of
 another row in the data.
 How we select this replacement value depends on what we are currently sampling.
 
 Population initialization
 '''''''''''''''''''''''''
 
-When sampling households or GQ people from the entire ACS dataset for population initialization,
+When sampling households from the entire ACS dataset for population initialization,
 all replacement values should be sampled from the same full ACS dataset, using the appropriate weights.
 
-For example, imagine we have just sampled a GQ person (Row A) to initialize as a new simulant, and this row
-was randomly determined (according to the 50% probability) to have a perturbed PUMA.
-Because Row A was selected for PUMA perturbation, we do not use Row A's PUMA value.
-Instead, we sample another GQ person (Row B) from the full ACS dataset, using person weighting.
-We assign Row B's PUMA value to the new simulant, which is now a combination of Row A's other attributes
-with Row B's PUMA.
-
-If initializing a household, the process works similarly, except that Row A and Row B are households (not individuals),
-and Row B is sampled using household weights.
-All simulants in the new household are assigned Row B's PUMA value.
+For example, imagine we have just sampled a household (Household A) to initialize into the simulated population, and this household
+was randomly determined (according to the 50% probability) to have a perturbed state and PUMA.
+We do not use Household A's state and PUMA values.
+Instead, we sample another household (Household B) from the full ACS dataset, using household weighting.
+We assign Household B's state and PUMA values to the newly created household, which is now a combination of Household A's people
+with Household B's state and PUMA.
 
 International immigration
 '''''''''''''''''''''''''
 
-When sampling for immigration, there are three cases:
+When sampling for immigration, there are two cases:
 
 #. We are sampling households to add in household moves.
-#. We are sampling GQ people to add in GQ person moves.
 #. We are sampling people in non-GQ households to add in non-reference-person moves.
 
+Simulants added in the third type of immigration, GQ person moves, will have a state and PUMA combination
+set by their GQ type (because each GQ type is a single "household") and therefore are not
+eligible for perturbation.
+
 The details of the initial sampling are described in the immigration component documentation;
-here, we only consider how to perturb the PUMA values of an already-sampled entity (Row A),
-**which has already been selected according to the 50% probability to have a perturbed
+here, we only consider how to perturb the state and PUMA values of an already-sampled entity (Row A),
+**which has already been selected according to the 50% probability to have a perturbed state and
 PUMA.**
 
-**80% of the time** (this probability is constant) we sample a new PUMA value from the same "immigration subset"
+**80% of the time** (this probability is constant) we sample a new state and PUMA combination from the same "immigration subset"
 of the same entity type in the ACS PUMS data.
 Specifically:
 
-#. If performing a household move, we sample the PUMA of another household with a recent
+#. If performing a household move, we sample the state and PUMA of another household with a recent
    immigrant reference person, using household weights.
-#. If performing a GQ person move, we sample the PUMA of another GQ person who is a recent
-   immigrant, using person weights.
-#. If performing a non-reference-person move, we sample the PUMA of another non-GQ person
+#. If performing a non-reference-person move, we sample the state and PUMA of another non-GQ person
    who is a recent immigrant and resides in a household where the reference person is not a
    recent immigrant, using person weights.
 
-**The remaining 20% of the time**, we sample a new PUMA value from the same entity type, but without
+**The remaining 20% of the time**, we sample a new state and PUMA combination from the same entity type, but without
 regard to immigration characteristics.
 Specifically:
 
-#. If performing a household move, we sample the PUMA of any household in the full ACS data, using household weights.
-#. If performing a GQ person move, we sample the PUMA of any GQ person in the full ACS data, using person weights.
-#. If performing a non-reference-person move, we sample the PUMA of any non-GQ person in the full ACS data, using person weights.
-
-As in population initialization, if creating a new household, the entire household is assigned the replacement PUMA value.
+#. If performing a household move, we sample the state and PUMA of any household in the full ACS data, using household weights.
+#. If performing a non-reference-person move, we sample the state and PUMA of any non-GQ person in the full ACS data, using person weights.
 
 By including the 20% probability of sampling from the full dataset, we ensure that immigration may
 occur in any PUMA, even if no ACS respondents were recent immigrants to that PUMA.
