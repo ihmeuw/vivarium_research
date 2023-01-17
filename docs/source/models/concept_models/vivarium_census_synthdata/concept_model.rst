@@ -608,7 +608,8 @@ When a simulant who is the reference person in a non-GQ household dies,
 the oldest remaining simulant in their household is assigned to be the reference person.
 All other simulants in the household are assigned a new relationship with these steps:
 
-#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+#. If the new reference person is this simulant's tracked parent
+   (i.e. this simulant was born during the simulation from a fertility event on the new reference person),
    the simulant is assigned 'Biological child.'
 #. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
    column in the CSV data file below, from the row where the
