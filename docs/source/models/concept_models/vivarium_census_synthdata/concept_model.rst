@@ -3289,8 +3289,6 @@ Limitations:
   The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. Ideally this will be corrected in the final version of the function but is recorded here for completeness of documentation. 
 
 
-
-
 **"Borrowed" SSN**
 
 Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
