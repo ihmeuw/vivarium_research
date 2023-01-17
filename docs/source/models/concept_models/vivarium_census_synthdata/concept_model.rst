@@ -2555,7 +2555,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  Please save age as an integer, wages as a float, and all other data as strings. This will make the data compatible with existing noise functions. 
+  Please save age and wages as an integer, and all other data as strings. This will make the data compatible with existing noise functions. 
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2759,7 +2759,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 .. note::
 
-  Please save all ages as integers, all incomes as floats, and all other data as strings. This will make the data compatible with existing noise functions. 
+  Please save all ages and incomes as integers, and all other data as strings. This will make the data compatible with existing noise functions. 
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
