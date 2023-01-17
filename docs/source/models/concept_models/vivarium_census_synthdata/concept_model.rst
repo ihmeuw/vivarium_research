@@ -2985,7 +2985,7 @@ for all column based noise include:
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting, missing data
+    - Copy from within Household, Age miswriting, missing data
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
@@ -3033,7 +3033,7 @@ for all column based noise include:
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting, missing data
+    - Zip code miswriting, missing data
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
@@ -3137,11 +3137,11 @@ their purpose, and the default value for the yaml file.
     - First name, middle initial, last name, street name, city name, employer name 
     - Probability that a corrupted token contains the original token
     - 0.1 
-  * - Numeric miswriting 
+  * - Age miswriting 
     - Age 
     - Numeric errors possible (note: inputted as a list of values)
     - [1, -1] 
-  * - Numeric miswriting 
+  * - Zip code miswriting 
     - Zip code 
     - Separate error rates for first 2 digits, middle digit, and last 2 digits 
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
@@ -3237,6 +3237,19 @@ Limitations:
 
 - This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
 
+**Age Miswriting** 
+
+To implement this, select the strings eligible for noise and apply 
+the age miswriting noise function to all strings with the user defined. 
+This will age or subtract years from the true age. It is designed to 
+have someone get an age incorrect but still a reasonable value. 
+
+**Zip code Miswriting** 
+
+To implement this, select the strings eligible for noise and apply 
+the zip code miswriting noise function to all strings with the user defined. 
+This code is similar to the numeric miswriting above, but has different 
+inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
 
 **Copy from within Household** 
 
@@ -3270,7 +3283,13 @@ Limitations:
 
 - For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
-- The current version of the function does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This is especially important for sex as there are only 2 options to select. 
+
+.. note::
+  
+  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. Ideally this will be corrected in the final version of the function but is recorded here for completeness of documentation. 
+
+
+
 
 **"Borrowed" SSN**
 
