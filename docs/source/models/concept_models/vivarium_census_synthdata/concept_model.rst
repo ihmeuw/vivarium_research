@@ -448,19 +448,13 @@ there are multiple spouse/unmarried partner options, select one at random.
 
 Simulant will be randomly assigned to a guardian based on the below rules: 
 
-- 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
-- Match to a person aged 35 to 65 years old 
+- Match to a person aged 35 to 65 years old anywhere in the US
 - If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
-- Assign to reference people source2_ 
+- Assign to reference people, according to statistics in [NCES_Family_Characteristics]_
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
     * Remainder to people with spouses, include both parents 
 - If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run. 
-
-
-.. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
-
-.. _source2: https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
 
 
 **Limitations**
@@ -470,6 +464,9 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
 #. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
 #. For GQ college folks, we select only reference people to be guardians, making some simulants ineligible and oversimplifying. 
+#. Because each GQ type has only a single location (state and PUMA), we allow college students' guardians to be anywhere in the US.
+   In reality, 78.5% of college students should have a guardian in the same state where they go to college. [Own_State_Enrollment]_
+   This could be included in a future version with multiple college locations.
 
 Guardian(s) on Time Steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -4102,3 +4099,7 @@ To Come (TK)
 .. [LACS_Link] USPS. nd. LACSLink®. USPS.Gov. Accessed November 30, 2022. https://postalpro.usps.com/address-quality/lacslink
 
 .. [TEA_2020_Map] Bureau, US Census. February 28, 2019. “2020 Type of Enumeration Area Viewer Released” Census.Gov. Accessed November 30, 2022. https://www.census.gov/newsroom/press-releases/2019/tea-viewer.html
+
+.. [Own_State_Enrollment] Statista. October 26, 2020. "Share of first year college students in the United States who enrolled in the state were they lived in Fall 2016" Accessed January 17, 2023. https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
+
+.. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
