@@ -2538,7 +2538,6 @@ W2 and 1099 Forms
   * - Employer Address 
   * - Employer ZIP Code 
   * - Type of Tax Form (W2 or 1099)
-  * - Type of GQ (for noise functions ONLY)
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
