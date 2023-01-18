@@ -324,6 +324,24 @@ incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)}
 The relative risk for heart failure is per 1-unit increase in BMI. 
 **Please note that this is different than the other relative risks.** 
 
+The PAF for heart failure for the unmediated and uncorrelated runs will be 
+calculated at initialization. To do this, first the simulant level relative risk 
+will be found based on their BMI exposure using the below formula: 
+
+Simulant_RR(i) = RR^{max((BMI_i - TMREL),0)}
+
+Then, the individual PAF can be found using this formula: 
+
+PAF(i) = (Simulant_RR(i) - 1) / Simulant_RR(i)
+
+Finally, this PAF can be averaged to find the population PAF for any age/sex group. 
+
+An example of this calculation can be found in the `workbook here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_BMI_to_HF.ipynb>`_
+
+.. todo:: 
+
+  This will need to be adjusted to account for mediation and correlation when they are added to the model. A simpler solution is included here to allow for runs without correlation and mediation. 
+
 Mediation
 ^^^^^^^^^
 
@@ -345,13 +363,6 @@ The MF is the mediation factor. This can be found in the table below.
 
 This mediation factor is calculated in this `workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/risk_mediation.ipynb>`_ 
 
-For this new RR, a PAF then had to be calculated. The calculations for the PAF 
-can be found in `this workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_calculations.ipynb>`_. 
-
-For BMI, the PAF values are unique to the age/sex level since there are specific 
-mediation factors at the age/sex level. In addition, it is important to match the 
-PAF to the TMREL being used in that draw. Therefore, a csv file with the needed 
-information on PAFs can be found here. NEED TO ADD LINK. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
