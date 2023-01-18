@@ -328,13 +328,12 @@ The PAF for heart failure for the unmediated and uncorrelated runs will be
 calculated at initialization. To do this, first the simulant level relative risk 
 will be found based on their BMI exposure using the below formula: 
 
-Simulant_RR(i) = RR^{max((BMI_i - TMREL),0)}
+:math:`RR\text{simulant} = RR^{max((BMI_i - TMREL),0)}`
 
-Then, the individual PAF can be found using this formula: 
+The RR can then be averaged for each age/sex group. Finally, the PAF for 
+each age/sex group can be found as: 
 
-PAF(i) = (Simulant_RR(i) - 1) / Simulant_RR(i)
-
-Finally, this PAF can be averaged to find the population PAF for any age/sex group. 
+:math:`PAF(i) = (RR\text{mean}(i) - 1) / RR\text{mean}(i)`
 
 An example of this calculation can be found in the `workbook here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_BMI_to_HF.ipynb>`_
 
