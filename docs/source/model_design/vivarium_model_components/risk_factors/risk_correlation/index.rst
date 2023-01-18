@@ -91,11 +91,12 @@ By default, Vivarium uses GBD-calculated PAFs for each risk-outcome pair and com
 a multiplicative approach (described below).
 This is correct when risks are all independent, but it has two problems in the presence of correlated risks:
 
-* The GBD approach to calculating PAFs is biased in the presence of any confounding.
+* The GBD approach to calculating PAFs is biased in the presence of any confounding,
+  **even though the relative risks are adjusted for confounding**.
+  This issue is explained in more detail :ref:`on the PAFs page <pafs>`.
   If we are choosing to model correlated risk exposures with effects on the same outcome,
   that means we believe there is **at least** one confounding variable in each PAF calculation.
-  If risks (with RR > 1) are positively correlated, the GBD approach will underestimate the PAF of each;
-  this issue is explained in more detail :ref:`on the PAFs page <pafs>`.
+  If risks (with RR > 1) are positively correlated, the GBD approach will underestimate the PAF of each.
 * The multiplicative approach to combining PAFs (which is also used within GBD to calculate joint PAFs, e.g. for higher-level causes)
   does not take into account the fact that positively correlated risks will have more overlap in their attributable
   burden than uncorrelated risks.
@@ -171,21 +172,30 @@ and a 50% reduction in this decreased incidence has less absolute effect than a 
 .. todo::
   Add a generalized version of this example showing that the multiplicative approach is always an overestimate of PAF.
 
-Proof that biases do not cancel out
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Total bias
+^^^^^^^^^^
 
-Since the bias discussed in the previous section causes an overestimate of the joint PAF,
+Since the bias discussed in the previous section causes an overestimate of the joint PAF (for positively-correlated, RR > 1 risks),
 and the :ref:`bias in the GBD calculation method for individual PAFs in the presence of confounders <pafs>`
 causes an underestimate of each PAF (for positively-correlated, RR > 1 risks),
 it is reasonable to wonder if these factors cancel each other out and lead to accurate PAFs.
 
-They do not, as the bias in the calculation of the individual PAFs is always greater,
-leading to an overall underestimate.
+Anecdotally, bias in the GBD calculation method for individual PAFs is typically
+on the order of 10%-20%, as reported on :ref:`the PAFs page <pafs>`.
+In the example above of bias from multiplicative combination, we found a
+6.7% overestimated PAF.
+
+Proof that biases do not cancel out, given some assumptions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 If we assume that there is no effect modification/there are no interaction effects,
 as we typically do, **and** we assume that there are no *additional* confounders besides
 r1 and r2,
-the true population attributable fraction for the combined effect of two risk factors,
+these effects **do not** cancel out.
+Under these conditions, the bias in the calculation of the individual PAFs is always greater,
+leading to an overall underestimate.
+
+In this situation, the true population attributable fraction for the combined effect of two risk factors,
 :math:`r1` and :math:`r2`, on an outcome :math:`O` such as a mortality rate is:
 
 .. math::
@@ -245,7 +255,7 @@ and no *additional* confounders:
   Is this usually/always calculated within the simulation, or is it sometimes done on the research side?
   Is there shared code or components that implement this on the engineering side?
   If the latter were true, we could simplify this section to "tell engineering to use the correlation-corrected
-  joint PAF calculation" and put the mathematical details elsewhere.
+  joint PAF calculation" and put the mathematical details in the documentation for that shared code.
 
 For two categorical risks, the value is:
 
