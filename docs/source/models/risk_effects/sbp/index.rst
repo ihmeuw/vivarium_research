@@ -331,6 +331,17 @@ The relative risks can be utilized by SBP group based on this tables:
      - 1.76 (1.43, 2.17) 
      - 
 
+The PAFs were then calculated for SBP to Heart Failure based on the relative 
+risks above. The calculations can be found in `this workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_calculations.ipynb>`_. 
+
+For the Alabama population, the PAF is 0.205025 with a confidence interval of 
+(0.125341, 0.282451). Note that this is for the Alabama population ONLY. 
+
+.. todo:: 
+
+  The PAF either needs to be calculated at the national level, since the RR is at a national level. Or it needs to be calculated at the state level based on the exposure in each state. 
+
+  The Alabama value is provided for now so that a minimum model can be made for one state. 
 
 Validation and Verification Criteria
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
