@@ -2011,6 +2011,11 @@ Census
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+
+
 **Who to Sample** 
 
 All living simulants are eligible for sampling; note 
@@ -2181,6 +2186,9 @@ There are two types of sampling plans:
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 Here is an example: 
 
@@ -2357,7 +2365,7 @@ in the home.
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in MMDDYYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2372,6 +2380,10 @@ in the home.
 Here is an example: 
 
 .. image:: WIC_example.png
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 **Who to Sample** 
 
@@ -2526,6 +2538,10 @@ W2 and 1099 Forms
   * - Tracked Dependent(s) (for noise functions ONLY)
   * - Tracked Dependent Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and wages as integers and all other data as strings. 
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2727,6 +2743,10 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - ITIN (if present)
     -
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and income as integers and all other data as strings. 
+
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
 Leave the field blank. 
@@ -2841,10 +2861,14 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial 
   * - Last name
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in YYYYMMDD format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event (stored as a string in MM/DD/YYYY format)
+  * - Date of event (stored as a string in YYYYMMDD format)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have all data as strings. 
 
 Currently, we will only track 2 types of events: 
 
