@@ -2187,6 +2187,7 @@ Here is an example:
 
 **Who to Sample** 
 
+All living simulants are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
