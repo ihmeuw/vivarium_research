@@ -607,7 +607,8 @@ When a simulant who is the reference person in a non-GQ household dies,
 the oldest remaining simulant in their household is assigned to be the reference person.
 All other simulants in the household are assigned a new relationship with these steps:
 
-#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+#. If the new reference person is this simulant's tracked parent
+   (i.e. this simulant was born during the simulation from a fertility event on the new reference person),
    the simulant is assigned 'Biological child.'
 #. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
    column in the CSV data file below, from the row where the
@@ -915,7 +916,7 @@ match the household's current state and PUMA**.
 be filtered to only the sources and destinations in the simulation catchment area.)
 The household should be assigned new physical and mailing addresses, with the same procedure used at initialization.
 
-All simulants in the household that are of working age should change jobs,
+All simulants in the household that are of working age should change employment,
 with the same procedure used for a spontaneous employment change event.
 
 All other attributes of the household and simulants (including relationship to reference person)
@@ -944,7 +945,7 @@ match the simulant's current state and PUMA**.
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the sources and destinations in the simulation catchment area.)
 
-If the simulant is of working age and not moving into military GQ, they should change jobs,
+If the simulant is of working age and not moving into military GQ, they should change employment,
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
@@ -1023,9 +1024,10 @@ Limitations
 #. In real life, people probably tend to move close to home, far below the granularity
    of a MIGPUMA.
    We do not have data to inform this.
-#. We assume that 100% of people who move change jobs.
+#. We assume that 100% of people who move change employment.
+   Notably, this means that all unemployed people who move become employed.
    A more accurate rate cannot be
-   calculated from the ACS (it does not ask about job changes),
+   calculated from the ACS, as it does not ask about employment changes,
    but other data sources probably exist about this question.
 #. We do not include those moving from Puerto Rico in domestic migration.
    We also do not include those moving from Puerto Rico in international immigration,
@@ -3571,11 +3573,10 @@ See the data sources and analysis section for how these variances were calculate
 The last step is combining these two components, which is done with this equation:
 
 .. math::
-  \text{income_propensity} = \text{probit}(\text{simulant_component} + \text{job_component})
+  \text{income_propensity} = \Phi(\text{simulant_component} + \text{job_component})
 
 The sum of the two components has a standard normal distribution,
-which means that the probit function (which is the inverse
-of the standard normal's CDF) of that sum is uniformly distributed between 0 and 1.
+which means that the standard normal's CDF of that sum is uniformly distributed between 0 and 1.
 More details on this can be found in the data sources and analysis section.
 
 Data sources and analysis
@@ -3623,7 +3624,7 @@ We want to break down the variance using two normally distributed components of 
 
 .. math::
 
-  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+  log(income) = F_\text{log(income)}(\Phi(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
 
 We inform the variance contributions of the job- and simulant-specific
 components with a measured variance of 1-year change in log(earnings)
