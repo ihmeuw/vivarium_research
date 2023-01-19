@@ -2027,7 +2027,7 @@ Census
 
 .. note::
 
-  Please save age as an integer and all other data as strings. This will make the data compatible with existing noise functions. 
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 
 **Who to Sample** 
@@ -2202,7 +2202,7 @@ There are two types of sampling plans:
 
 .. note::
 
-  Please save age as an integer and all other data as strings. This will make the data compatible with existing noise functions. 
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 Here is an example: 
 
@@ -2397,7 +2397,7 @@ Here is an example:
 
 .. note::
 
-  Please save age as an integer and all other data as strings. This will make the data compatible with existing noise functions. 
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 **Who to Sample** 
 
@@ -2555,7 +2555,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  Please save age and wages as an integer, and all other data as strings. This will make the data compatible with existing noise functions. 
+  In the final version of the observers, following the noise functions, please have age and wages as integers and all other data as strings. 
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2759,7 +2759,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 .. note::
 
-  Please save all ages and incomes as integers, and all other data as strings. This will make the data compatible with existing noise functions. 
+  In the final version of the observers, following the noise functions, please have age and income as integers and all other data as strings. 
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
@@ -2882,7 +2882,7 @@ added later (not in the minimum viable model), if desired.
 
 .. note::
 
-  Please save all data as strings. This will make the data compatible with existing noise functions. 
+  In the final version of the observers, following the noise functions, please have all data as strings. 
 
 Currently, we will only track 2 types of events: 
 
