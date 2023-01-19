@@ -2948,84 +2948,96 @@ for all column based noise include:
 - Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
 - Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
 - A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
-- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, sex has 2% incorrect selections. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
 - The order of different noise types should not matter, but will go in the order they are listed in the table below. 
 
 .. list-table:: Type of Noise Included and Default Level by Data Included
-  :widths: 20 20 20 20 20 20
+  :widths: 20 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
     - Default Noise Level: Rows Eligible for Errors
     - Default Noise Level: Token Noise Level 
+    - Additional parameters (defined in detail below)
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
+    - Typographic: inclusion of original token 
     - Nicknames, OCR, phonetic, typographic, fake names, missing data
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
+    - Typographic: inclusion of original token 
     - OCR, phonetic, typographic, missing data
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
+    - Typographic: inclusion of original token 
     - OCR, phonetic, typographic, fake names, missing data
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
+    - Age miswriting: possible perturbations 
     - Copy from within Household, Age miswriting, missing data
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
+    - N/A
     - Copy from within Household, Numeric miswriting, swap month and day, missing data 
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
+    - N/A
     - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
+    - Typographic: inclusion of original token 
     - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
+    - N/A
     - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
+    - N/A
     - Numeric miswriting, missing data
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
+    - Typographic: inclusion of original token 
     - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
+    - N/A
     - N/A
     - Incorrect Select, missing data
     - Noise for all types of addresses will work in the same way 
@@ -3033,11 +3045,13 @@ for all column based noise include:
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
+    - Zip code miswriting: digit level probabilities 
     - Zip code miswriting, missing data
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 1%
+    - N/A
     - N/A
     - Incorrect select, missing data
     - 
@@ -3045,11 +3059,13 @@ for all column based noise include:
     - Census, Household Surveys, WIC 
     - 1%
     - N/A
+    - N/A
     - Incorrect select, missing data
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 1%
+    - N/A
     - N/A
     - Incorrect select, missing data
     - 
@@ -3057,35 +3073,41 @@ for all column based noise include:
     - Taxes (both), SSA
     - 1%
     - 0.1 
+    - N/A
     - "Borrowed" SSN, Copy from within Household, Numeric miswriting, missing data 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
     - 0.1 
+    - N/A
     - Copy from within Household, Numeric miswriting, missing data
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
     - 0.1 
+    - N/A
     - Numeric miswriting, missing data
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
     - 0.1 
+    - N/A
     - Numeric miswriting, missing data
     - 
   * - Employer Name 
     - Taxes (both)
     - 1%
     - 0.1 
+    - Typographic: inclusion of original token 
     - OCR, typographic, missing data
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 1%
+    - N/A
     - N/A
     - Incorrect select, missing data
     - 
@@ -3093,11 +3115,13 @@ for all column based noise include:
     - SSA 
     - 1%
     - N/A
+    - N/A
     - Incorrect select, missing data
     - 
   * - Date of SSA Event 
     - SSA 
     - 1%
+    - N/A
     - N/A
     - Numeric miswriting, month and day swap, missing data 
     - 
@@ -3107,42 +3131,37 @@ available and information for implementation. **Software engineering team - plea
 
 **Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
 
-Currently, the user will input values that are directly used in the noise functions: 
-rows eligible for errors, and noise level at the token level. These are 
-then directly plugged into noise functions. 
+The user will have the opportunity to change all parameters used in the noise 
+functions from their default values. These are then directly plugged into noise functions. 
 
-One limitation of this strategy is that since there is a random probability of a 
-particular character/token receiving noise, not all rows that are selected to be 
-eligble for noise will actually receive noise. Another limitation is that token 
-error rate is not very intuitive for the end user. 
+The exact method for how a user will input the parameters has not been finalized. We 
+anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{column}_{noise_function}_{param}`. 
+
+One limitation of having a row probability and then token probability is that since 
+there is a random probability of a particular character/token receiving noise, not 
+all rows that are selected to be eligble for noise will actually receive noise. 
+Another limitation is that token error rate is not very intuitive for the end user. 
 
 At some point in the future, we might make this more user friendly. However, for the 
 sake of a minimum functional model, this is satisfactory. 
 
-A few functions have additional parameters that allow the user more control. These 
-inputs will not be specified in the main settings for pseudopeople listed above. We 
-imagine that a yaml file (or similar file type) will be available for users to download 
-and adjust the additional inputs if desired. The table below outlines these inputs, 
-their purpose, and the default value for the yaml file. 
+Some functions have additional parameters, as listed in the table above. These parameters 
+are explained in more depth in the table below.  
 
 .. list-table:: Additional Inputs and Default Values
-  :widths: 20 20 20 20
+  :widths: 20 20 20
   :header-rows: 0
 
   * - Noise Function Affected
-    - Observer Data Affected 
     - Additional Inputs 
     - Default Input Value 
   * - Typographic Noise
-    - First name, middle initial, last name, street name, city name, employer name 
     - Probability that a corrupted token contains the original token
     - 0.1 
   * - Age miswriting 
-    - Age 
-    - Numeric errors possible (note: inputted as a list of values)
+    - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
     - [1, -1] 
   * - Zip code miswriting 
-    - Zip code 
     - Separate error rates for first 2 digits, middle digit, and last 2 digits 
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
 
@@ -3239,10 +3258,17 @@ Limitations:
 
 **Age Miswriting** 
 
-To implement this, select the strings eligible for noise and apply 
-the age miswriting noise function to all strings with the user defined. 
-This will age or subtract years from the true age. It is designed to 
-have someone get an age incorrect but still a reasonable value. 
+To implement this, first select the strings eligible for noise. For each 
+selected string, the age will be adjusted. The adjustment value will be 
+randomly selected from the user inputted list of possible perturbations. 
+
+For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2] 
+then 28 will be adjusted to either: 26, 27, 29, or 30, with an equal chance 
+of each option. 
+
+If the resulting age is negative (e.g., the correct age is 1 and a perturbation 
+of -2 is applied to make the answer -1), then reselect from the remaining 
+perturbation options until the final answer is 0 or higher. 
 
 **Zip code Miswriting** 
 
@@ -3279,6 +3305,9 @@ Incorrect select applies to a range of data types. For this, select the sample t
 have noise added. For those selected, randomly select a new option. This is chosen 
 from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household. 
 
+Please ensure that the new selection is in fact an incorrect selection and that the original 
+response was not randomly selected. 
+
 Limitations: 
 
 - For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
@@ -3286,7 +3315,7 @@ Limitations:
 
 .. note::
   
-  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. Ideally this will be corrected in the final version of the function but is recorded here for completeness of documentation. 
+  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This will need to be corrected in the final version. 
 
 
 **"Borrowed" SSN**
