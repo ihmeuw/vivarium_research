@@ -2948,7 +2948,7 @@ for all column based noise include:
 - Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
 - Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
 - A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
-- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For token noise level, the minimum is 0 and maximum is 1. 
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
 - The order of different noise types should not matter, but will go in the order they are listed in the table below. 
@@ -3139,7 +3139,7 @@ anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{
 
 One limitation of having a row probability and then token probability is that since 
 there is a random probability of a particular character/token receiving noise, not 
-all rows that are selected to be eligble for noise will actually receive noise. 
+all rows that are selected to be eligible for noise will actually receive noise. 
 Another limitation is that token error rate is not very intuitive for the end user. 
 
 At some point in the future, we might make this more user friendly. However, for the 
