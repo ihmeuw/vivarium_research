@@ -216,7 +216,9 @@ Wasting
 
   These values changed in both the December and August, 2022 updates
 
-Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, it is not known whether SQ-LNS reduces wasting prevalence through a reduction of wasting incidence or duration. Therefore, we will run a sensitivity analysis in which SQ-LNS affects wasting incidence rates and another in which SQ-LNS affects wasting recovery rates. Additionally, due to the multicompartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we `solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%20.ipynb>`_. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
+Since the effect of SQ-LNS on child wasting was measured in prevalence ratios, it is not known whether SQ-LNS reduces wasting prevalence through a reduction of wasting incidence or duration. Therefore, we will run a sensitivity analysis in which SQ-LNS affects wasting incidence rates and another in which SQ-LNS affects wasting recovery rates. There is some evidence from [Huybregts-et-al-2019-sqlns]_ that SQ-LNS affects the incidence of acute malnutrition and some evidence that it may affect time to recovery, although it appears that the pathway through incidence is the primary route by which SQ-LNS impacts wasting prevalence from this limited evidence. 
+
+Additionally, due to the multi-compartment transition model of child wasting used in our simulation, we cannot apply the observed prevalence ratios directly to wasting transition rates to replicate the intended prevalence ratios. Rather, we `solved for specific transition rate ratios (separately for incidence and recovery rates) that resulted in the intended prevalence ratios of SQ-LNS <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/misc_investigations/Prevalence%20ratio%20nano%20sim%2C%20age-specific.ipynb>`_. Due to the finding by [Huybregts-et-al-2019-sqlns]_ that "the difference between study arms in the probability of developing the first AM episode mainly occurred during the first 4 months of follow-up and then remained constant" (p. 19), we decided to implement age-specific effects such that for those who begin SQ-LNS supplementation at six months of age, the prevalence ratios from the meta-analysis are achieved at 12 months of age and maintained through 23 months of age. Notably, these values were calibrated to the child population in Ethiopia and the calibration may not hold for all other populations and should be tested before applying to different locations. 
 
 Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic wasting transition model document <2020_risk_exposure_wasting_state_exposure>`. The intervention effect should apply immediately upon coverage of the intervention and should be applied *multiplicatively* to the affected measure. The SQ-LNS effects on wasting transition rates should apply to simulants covered by SQ-LNS from the start of coverage (at six months of age) until they are 2 years of age, at which point SQ-LNS should no longer affect their transition rates. In other words, the :code:`covered` SQ-LNS coverage state affects wasting transitions rates, but the :code:`received` and :code:`uncovered` states do not.
 
@@ -224,43 +226,45 @@ Wasting transition rates affected by SQ-LNS are documented on the :ref:`dynamic 
 
   Lognormal distributions of uncertainty should be used for all effect sizes in the table below and the uncertainty intervals.
 
+  The same percentile should be sampled from within each uncertainty interval for ALL of the effect samples (across age groups and measures) for each draw of the simulation.
+
 .. list-table:: Wasting outcome effect sizes
   :header-rows: 1
 
   * - Outcome
-    - Effect size measure
-    - Effect size
-    - Sensitivity analysis
+    - Sensitivity analysis 
+    - 6-11_months effect
+    - 12_to_23_months effect
     - Note
   * - i3 rate from wasting TMREL to mild wasting
-    - Relative risk
-    - 0.88 (0.825, 0.957)
     - Incidence effects
+    - 0.73 (0.60, 0.905)
+    - 0.905 (0.87, 0.965)
     - 
   * - i2 rate from mild wasting to MAM
-    - Relative risk
-    - 0.895 (0.82, 0.96)
     - Incidence effects
+    - 0.72 (0.58, 0.89)
+    - 0.90 (0.84, 0.965)
     - 
   * - i1 rate from MAM to SAM
-    - Relative risk
-    - 0.771 (0.655, 0.885)
     - Incidence effects
+    - 0.56 (0.347, 0.80)
+    - 0.78 (0.67, 0.89) 
     - 
   * - r4 rate from mild wasting to wasting TMREL
-    - Relative risk
-    - 1.125 (1.045, 1.187)
     - Recovery effects
+    - 1.29 (1.10, 1.45)
+    - 1.10 (1.03, 1.15)
     - 
   * - r3 rate from MAM to mild wasting
-    - Relative risk
-    - 1.086 (1.025, 1.165)
     - Recovery effects
+    - 1.15 (1.085, 1.40)
+    - 1.08 (1.02, 1.13)
     - 
   * - r1 (SAM to MAM) and t1 (SAM to mild) rates 
-    - Relative risk
-    - 1.28 (1.12, 1.465)
     - Recovery effects
+    - 1.49 (1.205, 1.77)
+    - 1.25 (1.10, 1.45)
     - Apply this effect to both r1 and t1 transition rates
 
 Stunting
@@ -354,6 +358,12 @@ References
     nutrient supplementation on child growth: an individual participant
     data meta-analysis of randomized controlled trials. Am J Clin Nutr
     2021;114(Suppl 11):15S–42S.
+
+.. [Huybregts-et-al-2019-sqlns]
+
+  View `Huybregts et al. 2019 <https://pubmed.ncbi.nlm.nih.gov/31454356/>`_
+
+    Huybregts L, Le Port A, Becquey E, Zongrone A, Barba FM, Rawat R, Leroy JL, Ruel MT. Impact on child acute malnutrition of integrating small-quantity lipid-based nutrient supplements into community-level screening for acute malnutrition: A cluster-randomized controlled trial in Mali. PLoS Med. 2019 Aug 27;16(8):e1002892. doi: 10.1371/journal.pmed.1002892. PMID: 31454356; PMCID: PMC6711497.
 
 .. [Prado-et-al-2021]
 

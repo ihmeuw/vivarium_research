@@ -508,9 +508,8 @@ might be sufficient for now, although as I learn more about the
 specific challenges of Census PRL, I will find out if we need to
 revisit this and keep track of dad as well as moms).
 
-The nativity of children born in the sim is set according to where their
-parent is currently living; if their parent lives in the US they were born
-in the US, otherwise they were born outside the US.
+The nativity of children born in the sim is set to reflect that they were born
+in the US.
 
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
@@ -608,7 +607,8 @@ When a simulant who is the reference person in a non-GQ household dies,
 the oldest remaining simulant in their household is assigned to be the reference person.
 All other simulants in the household are assigned a new relationship with these steps:
 
-#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+#. If the new reference person is this simulant's tracked parent
+   (i.e. this simulant was born during the simulation from a fertility event on the new reference person),
    the simulant is assigned 'Biological child.'
 #. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
    column in the CSV data file below, from the row where the
@@ -899,14 +899,10 @@ Simulation strategy
 Domestic migration events are modeled as happening to an at-risk population at a certain rate.
 They are constant across time in the simulation.
 
-.. note::
-
-  All of these events only apply to those currently living in the US!
-
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is non-GQ households **with more than one person** in the US
+The at-risk population for household moves is non-GQ households **with more than one person**
 (or, equivalently, the reference people of such households).
 This at-risk population should be stratified by age group, sex, and race/ethnicity
 **of the household's reference person**.
@@ -932,7 +928,7 @@ Individual moves
 The following applies to all three types of individual moves.
 Additional details are in the following subsections for each type.
 
-The at-risk population for individual moves is all simulants in the US.
+The at-risk population for individual moves is all simulants.
 This at-risk population should be stratified by age group, sex, and race/ethnicity.
 On each time step, within each stratum, the corresponding migration rates **per person-year** should be applied to determine
 the simulants that should move with each move type.
@@ -1212,6 +1208,8 @@ Limitations
 #. We assume that immigration does not change over long-run time or seasonally.
 #. All households are equally likely to receive non-reference-person immigrants.
 #. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. We never move simulants who previously emigrated back into the US.
+   We may want to add this in a future model iteration.
 
 V&V strategy
 ^^^^^^^^^^^^
@@ -1293,40 +1291,32 @@ Simulation strategy
 Emigration events are modeled as happening to an at-risk population at a certain rate.
 They are constant across time in the simulation.
 
-Households and individuals selected to have emigration events should remain in the simulation, but their
-location attributes (US state, PUMA, and physical and mailing addresses) should be set to placeholder values that signify they are
-no longer in the US.
-Emigrating simulants should also terminate employment -- their employer ID and income are set
-to those used for unemployment.
-In the future, we may want some of these simulants to continue employment in the US or
-re-enter through the immigration component, but for now
-they will remain unemployed and outside the US permanently.
-All other simulant attributes should be unchanged by the emigration event.
+Households and individuals selected to have emigration events should no longer be tracked
+in the simulation; they will not be returned by any future observers.
 
-.. note::
-
-  Because simulants outside the US remain in the population table, it is important for all components
-  to carefully define whether or not they act on these simulants.
-  For example, the at-risk population for emigration in each type of move defined below is specified
-  to be **in the US**.
-  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
+.. todo::
+  In a future version of the model, we may want simulants to leave and later re-enter the US.
+  In that case, we would need to continue to track simulants living abroad so that aging, mortality, fertility,
+  etc would apply to them there.
 
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is all simulants living in non-GQ households in the US.
-This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
-**of the simulant's household's reference person**, as well as US state.
-On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
-a number of **simulants** to emigrate as part of household moves.
-Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
-This means that in practice we will generally overshoot the desired number by a few, but this should have
-minimal effect.
+The household move emigration rates are calculated as person-moves per year of person-time,
+stratified by demographics **of the simulant's household's reference person**.
+However, we cannot apply these rates to all simulants independently, because we want to sample
+at the household level for this move type.
+
+Instead, we apply these rates to an at-risk population of non-GQ **reference people only**,
+stratified by age group, sex, race/ethnicity, nativity (born in or outside the US), and US state.
+We then emigrate all members of households where the reference person was selected for this event.
+This ensures that the same number of simulants emigrate in each stratum, in expectation, as if we had applied the
+rate to the whole stratum, while also emigrating households as indivisible units.
 
 GQ person moves
 '''''''''''''''
 
-The at-risk population for GQ person moves is all simulants living in GQ in the US.
+The at-risk population for GQ person moves is all simulants living in GQ.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
@@ -1335,7 +1325,7 @@ should be applied to sample simulants to emigrate.
 Non-reference-person moves
 ''''''''''''''''''''''''''
 
-The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households, except for those who are a household reference person.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
@@ -1948,12 +1938,8 @@ At population initialization, we follow these rules to initialize an SSN or ITIN
 Fertility
 '''''''''
 
-When a simulant is born during the sim to a parent who lives in the United States,
+When a simulant is born during the sim,
 they are **always** assigned an SSN.
-
-If a simulant is born during the sim to a parent who lives outside the United States,
-they are assigned an SSN **if and only if** their parent has one.
-If their parent has an ITIN (i.e. does not have an SSN), the newborn is assigned an ITIN.
 
 Immigration
 '''''''''''
@@ -2025,9 +2011,14 @@ Census
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+
+
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling. Note 
+All living simulants are eligible for sampling; note 
 that this means they must be listed as 'alive' at the time the census 
 is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
@@ -2195,6 +2186,9 @@ There are two types of sampling plans:
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 Here is an example: 
 
@@ -2203,7 +2197,7 @@ Here is an example:
 
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling.
+All living simulants are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
@@ -2371,7 +2365,7 @@ in the home.
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in MMDDYYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2386,6 +2380,10 @@ in the home.
 Here is an example: 
 
 .. image:: WIC_example.png
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 **Who to Sample** 
 
@@ -2540,6 +2538,10 @@ W2 and 1099 Forms
   * - Tracked Dependent(s) (for noise functions ONLY)
   * - Tracked Dependent Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and wages as integers and all other data as strings. 
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2741,6 +2743,10 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - ITIN (if present)
     -
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and income as integers and all other data as strings. 
+
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
 Leave the field blank. 
@@ -2855,10 +2861,14 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial 
   * - Last name
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in YYYYMMDD format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event (stored as a string in MM/DD/YYYY format)
+  * - Date of event (stored as a string in YYYYMMDD format)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have all data as strings. 
 
 Currently, we will only track 2 types of events: 
 
