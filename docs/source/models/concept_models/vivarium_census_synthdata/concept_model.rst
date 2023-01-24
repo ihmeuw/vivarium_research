@@ -510,9 +510,8 @@ might be sufficient for now, although as I learn more about the
 specific challenges of Census PRL, I will find out if we need to
 revisit this and keep track of dad as well as moms).
 
-The nativity of children born in the sim is set according to where their
-parent is currently living; if their parent lives in the US they were born
-in the US, otherwise they were born outside the US.
+The nativity of children born in the sim is set to reflect that they were born
+in the US.
 
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
@@ -610,7 +609,8 @@ When a simulant who is the reference person in a non-GQ household dies,
 the oldest remaining simulant in their household is assigned to be the reference person.
 All other simulants in the household are assigned a new relationship with these steps:
 
-#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+#. If the new reference person is this simulant's tracked parent
+   (i.e. this simulant was born during the simulation from a fertility event on the new reference person),
    the simulant is assigned 'Biological child.'
 #. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
    column in the CSV data file below, from the row where the
@@ -901,14 +901,10 @@ Simulation strategy
 Domestic migration events are modeled as happening to an at-risk population at a certain rate.
 They are constant across time in the simulation.
 
-.. note::
-
-  All of these events only apply to those currently living in the US!
-
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is non-GQ households **with more than one person** in the US
+The at-risk population for household moves is non-GQ households **with more than one person**
 (or, equivalently, the reference people of such households).
 This at-risk population should be stratified by age group, sex, and race/ethnicity
 **of the household's reference person**.
@@ -934,7 +930,7 @@ Individual moves
 The following applies to all three types of individual moves.
 Additional details are in the following subsections for each type.
 
-The at-risk population for individual moves is all simulants in the US.
+The at-risk population for individual moves is all simulants.
 This at-risk population should be stratified by age group, sex, and race/ethnicity.
 On each time step, within each stratum, the corresponding migration rates **per person-year** should be applied to determine
 the simulants that should move with each move type.
@@ -1220,6 +1216,8 @@ Limitations
 #. We assume that immigration does not change over long-run time or seasonally.
 #. All households are equally likely to receive non-reference-person immigrants.
 #. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. We never move simulants who previously emigrated back into the US.
+   We may want to add this in a future model iteration.
 
 V&V strategy
 ^^^^^^^^^^^^
@@ -1301,40 +1299,32 @@ Simulation strategy
 Emigration events are modeled as happening to an at-risk population at a certain rate.
 They are constant across time in the simulation.
 
-Households and individuals selected to have emigration events should remain in the simulation, but their
-location attributes (US state, PUMA, and physical and mailing addresses) should be set to placeholder values that signify they are
-no longer in the US.
-Emigrating simulants should also terminate employment -- their employer ID and income are set
-to those used for unemployment.
-In the future, we may want some of these simulants to continue employment in the US or
-re-enter through the immigration component, but for now
-they will remain unemployed and outside the US permanently.
-All other simulant attributes should be unchanged by the emigration event.
+Households and individuals selected to have emigration events should no longer be tracked
+in the simulation; they will not be returned by any future observers.
 
-.. note::
-
-  Because simulants outside the US remain in the population table, it is important for all components
-  to carefully define whether or not they act on these simulants.
-  For example, the at-risk population for emigration in each type of move defined below is specified
-  to be **in the US**.
-  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
+.. todo::
+  In a future version of the model, we may want simulants to leave and later re-enter the US.
+  In that case, we would need to continue to track simulants living abroad so that aging, mortality, fertility,
+  etc would apply to them there.
 
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is all simulants living in non-GQ households in the US.
-This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
-**of the simulant's household's reference person**, as well as US state.
-On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
-a number of **simulants** to emigrate as part of household moves.
-Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
-This means that in practice we will generally overshoot the desired number by a few, but this should have
-minimal effect.
+The household move emigration rates are calculated as person-moves per year of person-time,
+stratified by demographics **of the simulant's household's reference person**.
+However, we cannot apply these rates to all simulants independently, because we want to sample
+at the household level for this move type.
+
+Instead, we apply these rates to an at-risk population of non-GQ **reference people only**,
+stratified by age group, sex, race/ethnicity, nativity (born in or outside the US), and US state.
+We then emigrate all members of households where the reference person was selected for this event.
+This ensures that the same number of simulants emigrate in each stratum, in expectation, as if we had applied the
+rate to the whole stratum, while also emigrating households as indivisible units.
 
 GQ person moves
 '''''''''''''''
 
-The at-risk population for GQ person moves is all simulants living in GQ in the US.
+The at-risk population for GQ person moves is all simulants living in GQ.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
@@ -1348,7 +1338,7 @@ should be applied to sample simulants to emigrate.
 Non-reference-person moves
 ''''''''''''''''''''''''''
 
-The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households, except for those who are a household reference person.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
@@ -1934,12 +1924,8 @@ At population initialization, we follow these rules to initialize an SSN or ITIN
 Fertility
 '''''''''
 
-When a simulant is born during the sim to a parent who lives in the United States,
+When a simulant is born during the sim,
 they are **always** assigned an SSN.
-
-If a simulant is born during the sim to a parent who lives outside the United States,
-they are assigned an SSN **if and only if** their parent has one.
-If their parent has an ITIN (i.e. does not have an SSN), the newborn is assigned an ITIN.
 
 Immigration
 '''''''''''
@@ -2011,9 +1997,14 @@ Census
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+
+
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling. Note 
+All living simulants are eligible for sampling; note 
 that this means they must be listed as 'alive' at the time the census 
 is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
@@ -2181,6 +2172,9 @@ There are two types of sampling plans:
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 Here is an example: 
 
@@ -2189,7 +2183,7 @@ Here is an example:
 
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling.
+All living simulants are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
@@ -2357,7 +2351,7 @@ in the home.
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in MMDDYYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2372,6 +2366,10 @@ in the home.
 Here is an example: 
 
 .. image:: WIC_example.png
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 **Who to Sample** 
 
@@ -2526,6 +2524,10 @@ W2 and 1099 Forms
   * - Tracked Dependent(s) (for noise functions ONLY)
   * - Tracked Dependent Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and wages as integers and all other data as strings. 
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2727,6 +2729,10 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - ITIN (if present)
     -
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and income as integers and all other data as strings. 
+
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
 Leave the field blank. 
@@ -2841,10 +2847,14 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial 
   * - Last name
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in YYYYMMDD format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event (stored as a string in MM/DD/YYYY format)
+  * - Date of event (stored as a string in YYYYMMDD format)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have all data as strings. 
 
 Currently, we will only track 2 types of events: 
 
@@ -2933,158 +2943,183 @@ for all column based noise include:
 
 - Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
 - Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
-- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, sex has 2% incorrect selections. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
+- A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For token noise level, the minimum is 0 and maximum is 1. 
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
 - The order of different noise types should not matter, but will go in the order they are listed in the table below. 
 
 .. list-table:: Type of Noise Included and Default Level by Data Included
-  :widths: 20 20 20 20 20 20
+  :widths: 20 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
     - Default Noise Level: Rows Eligible for Errors
     - Default Noise Level: Token Noise Level 
+    - Additional parameters (defined in detail below)
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Nicknames, OCR, phonetic, typographic, fake names 
+    - Typographic: inclusion of original token 
+    - Nicknames, OCR, phonetic, typographic, fake names, missing data
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, missing data
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic, fake names
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, fake names, missing data
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting 
+    - Age miswriting: possible perturbations 
+    - Copy from within Household, Age miswriting, missing data
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting, swap month and day 
+    - N/A
+    - Copy from within Household, Numeric miswriting, swap month and day, missing data 
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - N/A
-    - Incorrect Select
+    - N/A
+    - Incorrect Select, missing data
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Zip code miswriting: digit level probabilities 
+    - Zip code miswriting, missing data
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Sex 
     - Census, Household Surveys, WIC 
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - SSN
     - Taxes (both), SSA
     - 1%
     - 0.1 
-    - "Borrowed" SSN, Copy from within Household, Numeric miswriting 
+    - N/A
+    - "Borrowed" SSN, Copy from within Household, Numeric miswriting, missing data 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting 
+    - N/A
+    - Copy from within Household, Numeric miswriting, missing data
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - 
   * - Employer Name 
     - Taxes (both)
     - 1%
     - 0.1 
-    - OCR, typographic 
+    - Typographic: inclusion of original token 
+    - OCR, typographic, missing data
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Type of SSA Event 
     - SSA 
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Date of SSA Event 
     - SSA 
     - 1%
     - N/A
-    - Numeric miswriting, month and day swap 
+    - N/A
+    - Numeric miswriting, month and day swap, missing data 
     - 
 
 The below section further describes types of noise including any code 
@@ -3092,21 +3127,40 @@ available and information for implementation. **Software engineering team - plea
 
 **Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
 
-Currently, the user will input values that are directly used in the noise functions: 
-rows eligible for errors, and noise level at the token level. These are 
-then directly plugged into noise functions. 
+The user will have the opportunity to change all parameters used in the noise 
+functions from their default values. These are then directly plugged into noise functions. 
 
-One limitation of this strategy is that since there is a random probability of a 
-particular character/token receiving noise, not all rows that are selected to be 
-eligble for noise will actually receive noise. Another limitation is that token 
-error rate is not very intuitive for the end user. 
+The exact method for how a user will input the parameters has not been finalized. We 
+anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{column}_{noise_function}_{param}`. 
+
+One limitation of having a row probability and then token probability is that since 
+there is a random probability of a particular character/token receiving noise, not 
+all rows that are selected to be eligible for noise will actually receive noise. 
+Another limitation is that token error rate is not very intuitive for the end user. 
 
 At some point in the future, we might make this more user friendly. However, for the 
 sake of a minimum functional model, this is satisfactory. 
 
-One function has an additional parameter. The typographic function needs an input for 
-the probability that a corrupted token contains the original token. For simplicity, 
-we will use 0.1 and the user will not be able to edit this value. 
+Some functions have additional parameters, as listed in the table above. These parameters 
+are explained in more depth in the table below.  
+
+.. list-table:: Additional Inputs and Default Values
+  :widths: 20 20 20
+  :header-rows: 0
+
+  * - Noise Function Affected
+    - Additional Inputs 
+    - Default Input Value 
+  * - Typographic Noise
+    - Probability that a corrupted token contains the original token
+    - 0.1 
+  * - Age miswriting 
+    - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
+    - [1, -1] 
+  * - Zip code miswriting 
+    - Separate error rates for first 2 digits, middle digit, and last 2 digits 
+    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
+
 
 .. todo::
 
@@ -3120,7 +3174,7 @@ we will use 0.1 and the user will not be able to edit this value.
 
 Optical character recognition is when a character is misread for another character that 
 looks similar. A common examples is 'S' and '5'. In order to emulate 
-that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the OCR noise function to all strings with the user defined token 
@@ -3130,7 +3184,7 @@ error rate.
 
 Phonetic errors are when a character is misheard. This could similar sounding letters when 
 spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
-In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the phonetic noise function to all strings with the user defined token 
@@ -3145,11 +3199,11 @@ Limitations:
 
 Typographic errors occur due to mistyping information. The commonality of errors are therefore 
 based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
-and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the typographic noise function to all strings with the user defined token 
-error rate and standard parameter for including the original token. 
+error rate and rate for including the original token. 
 
 .. todo::
 
@@ -3160,7 +3214,7 @@ error rate and standard parameter for including the original token.
 For a variety of reasons, some repondents might choose to use a fake name rather 
 than their real name on official forms. To account for this, first select the sample 
 to have noise added. Then for everyone selected, replace their name with a random 
-selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/2022_04_20c_prl_fake_names.ipynb>`_. 
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/fake_names.py>`_. 
 Please note that the list is separated into first and last names. 
 
 Limitations: 
@@ -3172,7 +3226,7 @@ Limitations:
 
 Many people choose to use nicknames instead of their "real" names. A common example is an 
 Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
-which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
 
 Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
@@ -3198,10 +3252,26 @@ Limitations:
 
 - This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
 
-.. todo::
+**Age Miswriting** 
 
-  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. In addition to the noise functions above, current work done by Nathaniel includes: this `corruption module <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/corruption.py>`_ which has a more robust system for zipcodes and a function to swap months and days in dates. 
+To implement this, first select the strings eligible for noise. For each 
+selected string, the age will be adjusted. The adjustment value will be 
+randomly selected from the user inputted list of possible perturbations. 
 
+For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2] 
+then 28 will be adjusted to either: 26, 27, 29, or 30, with an equal chance 
+of each option. 
+
+If the resulting age is negative (e.g., the correct age is 1 and a perturbation 
+of -2 is applied to make the answer -1), then reselect from the remaining 
+perturbation options until the final answer is 0 or higher. 
+
+**Zip code Miswriting** 
+
+To implement this, select the strings eligible for noise and apply 
+the zip code miswriting noise function to all strings with the user defined. 
+This code is similar to the numeric miswriting above, but has different 
+inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
 
 **Copy from within Household** 
 
@@ -3228,20 +3298,38 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select** 
 
 Incorrect select applies to a range of data types. For this, select the sample to 
-have noise added. For those selected, randomly select a different option from the 
-correct one. This is randomly chosen from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes 
-the full list of options, not just those seen in the household. 
+have noise added. For those selected, randomly select a new option. This is chosen 
+from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household. 
+
+Please ensure that the new selection is in fact an incorrect selection and that the original 
+response was not randomly selected. 
 
 Limitations: 
 
 - For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
 
+.. note::
+  
+  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This will need to be corrected in the final version. 
+
+
 **"Borrowed" SSN**
 
 Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
 It will NOT be individually configurable by the end user. No further action is 
 needed in the noise functions for this component. 
+
+**Missing Data**
+
+All data types have a probability of being missing. This could mean that the 
+input was left blank, that an answer was refused, or that the answer was illegible 
+or unintelligible. The function will remove the real data and replace it with N/A. 
+
+Limitations: 
+
+- Some users would likely have a significant amount of missing data instead of missed data being spread across all users. This could be due to privacy concerns, how the response was submitted, or user errors. We will not include this simulant level variation. 
+- With current versions of the census and many other forms online, there is less opportunity for missing data. It might be replaced with fake names or similar approaches, as outlined separately above. However, in mail-in forms or in person recording there is still an opportunity for missing data. We include it here despite these limitations. 
 
 .. todo::
 

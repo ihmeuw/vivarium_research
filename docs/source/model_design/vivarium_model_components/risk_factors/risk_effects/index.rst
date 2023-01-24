@@ -15,7 +15,7 @@ some outcome variable.
 
 Generally, we will use risk effects models to represent 
 associations between two variables that are assumed to be causal and 
-:ref:`risk correlation models <2017_risk_models>` to represent *non-causal* 
+:ref:`risk correlation models <risk_correlation>` to represent *non-causal* 
 associations between two variables (see the :ref:`causality <general_dags>`
 documentation page for more information on causality). It is important to note
 that for any two variables that are causally related to one another, there is 
@@ -90,7 +90,7 @@ Finally, it is important to note that because the GBD relative risks represent
 the *causal* impact between and risk and an outcome, they cannot represent
 the non-causal association between a given risk and an outcome or other risk factors.
 Desired correlation between two variables will need to be accounted for separately; see
-the :ref:`risk correlation page <2017_risk_models>` for more details.
+the :ref:`risk correlation page <risk_correlation>` for more details.
 
 Risk effect in vivarium
 ^^^^^^^^^^^^^^^^^^^^^^^
