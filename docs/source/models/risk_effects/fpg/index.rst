@@ -86,7 +86,7 @@ Theoretical minimum-risk exposure level
 
 The theoretical minimum-risk exposure level (TMREL) for FPG is 4.8-5.4 mmol/L for those risk-outcome pairs where risk is assessed on a continuous basis. To include the uncertainty 
 in the TMREL, we took a random draw from the uniform distribution of 
-the interval between 20–25 mmol/L each time the population 
+the interval between 4.8-5.4 mmol/L each time the population 
 attributable burden was calculated. This was calculated by taking the person-year 
 weighted average of the levels of FPG that were associated with the lowest risk of mortality in the pooled analyses of prospective cohort studies. The TMREL is no diabetes for those outcomes where risk 
 is assessed on a categorical basis. The risk-outcome pairs are listed below, along with whether they are continuous or categorical.  
