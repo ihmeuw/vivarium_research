@@ -2521,9 +2521,6 @@ W2 and 1099 Forms
   * - Employer Address 
   * - Employer ZIP Code 
   * - Type of Tax Form (W2 or 1099)
-  * - Tracked Dependent(s) (for noise functions ONLY)
-  * - Tracked Dependent Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
 
 .. note::
 
