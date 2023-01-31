@@ -1610,42 +1610,17 @@ Note: RAND used something like this for their BISG project
 https://www.rand.org/pubs/external_publications/EP20090611.html
 https://www.rand.org/health-care/tools-methods/bisg.html
 
-.. sourcecode:: python
-
-    # last name can be race/ethnicity specific
-    df_census_names = pd.read_csv('/home/j/Project/simulation_science/prl/data/Names_2010Census.csv', na_values=['(S)'])
-
-    # fill missing values with equal amounts of what is left
-    n_missing = df_census_names.filter(like='pct').isnull().sum(axis=1)
-    pct_total = df_census_names.filter(like='pct').sum(axis=1)
-
-    pct_fill = (100 - pct_total) / n_missing
-    for col in df_census_names.filter(like='pct').columns:
-        df_census_names[col] = df_census_names[col].fillna(pct_fill)
-
-    def random_last_name(race_eth):
-        p = df_census_names['count'].copy()
-
-        if race_eth == 1:
-            p *= .01 * df_census_names.pctwhite
-        elif race_eth == 2:
-            p *= .01 * df_census_names.pctblack
-        elif race_eth == 3:
-            p *= .01 * df_census_names.pcthispanic
-        else:
-            p *= .01 * (100 - (df_census_names.pctwhite + df_census_names.pctblack + df_census_names.pcthispanic))
-
-        # make zero probabilities go away
-        s_name_pr = pd.Series(np.array(p), index=df_census_names.name)
-        s_name_pr = s_name_pr[s_name_pr > 0]
-        s_name_pr /= s_name_pr.sum()
-        return np.random.choice(s_name_pr.index, p=s_name_pr).capitalize()
-
-    # should everyone in a household have the same last name?  seems overly normative, but what is smarter?
-    for hh_id, dfg in df_population.groupby(['household_id']):
-        last_name = random_last_name(dfg.race_eth.value_counts().iloc[0])  # HACK: use most common race/eth in household
-        df_population.loc[dfg.index, 'last_name'] = last_name
-        # TODO: for rows with relshipp value of 22, 24, 31, 32, 34, 35, 36, give different last name
+Last names should be sampled from the data at :code:`J:\Project\simulation_science\prl\data\Names_2010Census.csv`.
+We ignore the "All other names" row (about 10% of the population) and only assign names that are explicitly listed
+in that dataset.
+The "count" column contains the weight associated with each name;
+however, we want to stratify this sampling by race/ethnicity, so a separate set of weights should be
+calculated for each race/ethnicity category.
+The sampling weights for Hispanic simulants should be the "count" column multiplied by the
+"pcthispanic" column, and so on for the other race/ethnicity categories.
+The simulation's Asian and NHOPI categories both use the "pctapi" column, since those are combined in the name data.
+For some names, the percentage with some race/ethnicities is suppressed -- in this case, the total percentage
+suppressed for that name should be evenly divided among the race/ethnicities that were suppressed.
 
 Last names sometimes also include spaces or hyphens, and I have come
 up with race/ethnicity specific space and hyphen probabilities from an
@@ -1653,14 +1628,30 @@ analysis of voter registration data (from publicly available data from
 North Carolina, filename VR_Snapshot_20220101.txt; see
 2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
 for computation details.)
+Last names selected for a space/hyphen should be constructed by sampling two last
+names from the Census data and concatenating them with a space/hyphen.
 
-For now, assign all simulants within the same household who are 
-relatives of the reference person the same last name. 
+For now, assign all simulants initialized into the same household who are 
+relatives of the reference person (including the reference person themselves) the same last name.
 This excludes "roommate/housemate" and "other nonrelative" to the 
-reference person. This is an oversimplification as some relatives might have 
-different last names, but works for the initial model. 
+reference person.
+Simulants initialized into group quarters will not be assigned matching last names.
+Immigrating simulants are assigned the same last name
+as the reference person when they join a household with a relative relationship.
+Simulants born during the simulation inherit the last name of their biological mother.
 
-This will not be applied to anyone in a group quarter. 
+The race/ethnicity used to sample last name is the race/ethnicity of
+the oldest simulant (i.e. the simulant with the earliest date of birth, not the simulant who lives to be the oldest),
+out of those with that last name, **ever observed by any observer**.
+
+.. note::
+  We only consider observed simulants in determining the race/ethnicity to use because
+  last name sampling happens outside the simulation, based on observer outputs.
+  This is a limitation of our approach, but it is unlikely to make much difference.
+
+.. note::
+  In a future version of the model, we might want to have matching last names even between
+  households, e.g. for college simulants with guardians.
 	
 **First and middle names**
 
