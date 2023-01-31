@@ -1648,6 +1648,10 @@ out of those with that last name, **ever observed by any observer**.
   We only consider observed simulants in determining the race/ethnicity to use because
   last name sampling happens outside the simulation, based on observer outputs.
   This is a limitation of our approach, but it is unlikely to make much difference.
+
+.. note::
+  In a future version of the model, we might want to have matching last names even between
+  households, e.g. for college simulants with guardians.
 	
 **First and middle names**
 
