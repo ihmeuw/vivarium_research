@@ -140,7 +140,9 @@ The quantity of interest is exposure to the mean fasting plasma glucose level re
 level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and 
 do not account for duration of exposure to elevated FPG.
 
-
+Due to challenges with the GBD ensemble distribution providing negative and unrealistically high 
+values, we imposed a maximum of 30 and minimum of 1 mmol/L. As we need to update to GBD 2021 we are 
+using this as a solution until updating. 
 
 Data Description Tables
 +++++++++++++++++++++++
