@@ -126,9 +126,9 @@ To make this more clear, an example is below for BMI:
     - 0 mmHg
     - [Orchard_2013]_
 
-.. image:: bmi.PNG
-.. image:: fpg.PNG
-.. image:: sbp.PNG
+.. image:: bmi.png
+.. image:: fpg.png
+.. image:: sbp.png
 
 
 Assumptions and Limitations
