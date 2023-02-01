@@ -115,7 +115,8 @@ year ago, to help PRL researchers in the cancer surveillance space.
 
 All simulants have :ref:`demographic characteristics informed by ACS data <census_prl_age_sex_etc>`.
 They also have :ref:`names <census_prl_names>` and
-identification numbers (Social Security Number/Individual Taxpayer Identification Number).
+:ref:`identification numbers <census_prl_ssn_itin>`
+(Social Security Number/Individual Taxpayer Identification Number).
 Simulants have :ref:`employers <census_prl_employment>` and :ref:`income <census_prl_income>`.
 
 Simulants live in either residential households or group quarters (GQ),
