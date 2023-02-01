@@ -339,9 +339,7 @@ Individual intervention pages:
 ------------------------------
 
 Within this model, simulants move through the healthcare system. The initialization parameters for screening visits 
-are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication are handled. 
-Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathway for both 
-conditions at each visit. 
+are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication, as well as the lifestyle intervention are handled. Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathways for all conditions at each visit. 
 
 First, it is determined if the simulant will have a healthcare interaction in that time step. 
 
@@ -453,6 +451,26 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
 
+**Lifestyle Intervention Ramp**
+
+.. image:: lifestyle_ramp.svg
+
+.. list-table:: Lifestyle Intervention Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - Simulant is age 35+, BMI 25+ AND has not had their FPG tested in 3 years 
+    - 
+  * - B
+    - Eligible simulants will have their FPG measured 71% of the time 
+    - [Mehta_2017]_ 
+  * - C
+    - If simulant is eligible, either 8.55%, 50% or 100% depending on scenario 
+    - 
 
 
 .. _uscvd4.4:
@@ -1109,9 +1127,6 @@ Some limitations of this analysis include:
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
 
-.. [Ely-2017] Ely, Elizabeth K., et al. "A national effort to prevent type 2 diabetes: participant-level evaluation of CDC’s National Diabetes Prevention Program." Diabetes care 40.10 (2017): 1331-1341.
-  https://care.diabetesjournals.org/content/40/10/1331
-
 .. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
   https://doi.org/10.1007/s11606-010-1253-9 
 
@@ -1138,9 +1153,6 @@ Some limitations of this analysis include:
 
 .. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
   https://doi.org/10.1136/bmj.m149.
-
-.. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
-  https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
 
 .. [Morales_2018] Morales, Clotilde, Núria Plana, Anna Arnau, Laia Matas, Marta Mauri, Àlex Vila, Lluís Vila, et al. 2018. “Causas de no consecución del objetivo terapéutico del colesterol de las lipoproteínas de baja densidad en pacientes de alto y muy alto riesgo vascular controlados en Unidades de Lípidos y Riesgo Vascular. Estudio EROMOT.” Clín. investig. arterioscler. (Ed. impr.), 1–9.
 
