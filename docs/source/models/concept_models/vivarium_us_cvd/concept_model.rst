@@ -933,15 +933,15 @@ Code is below for reference
     - `Validation workbook for Model 7 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model7_VV.ipynb>`_. V&V worked well for this model. In the incidence of MI and stroke, there is a clear difference between scenarios that is in line with back of the envelope expectations. We do not visually see a separation in ACMR, but that was also expected. 
   * - 8.0
     - Adding Polypill Intervention
-    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios is less visually apparent in this model, which is expected as this only affects SBP and works for fewer simulants. We are planning to review findings with the team to discuss if we should adjust the intervention or not. 
+    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios was less visually apparent in this model. Following discussion with Greg, we had the intervention change efficacy and have higher enrollment. This lead to better scenario differentiation. 
   * - 9.0
     - Adding BMI
-    -  
-  * - 10.0
-    - Adding Heart Failure  
-    -  
+    - `Validation workbook for Model 9 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model9_VV.ipynb>`_ and `interactive sim for Model 9 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model9_VV.ipynb>`_. We had significant issues with BMI validation. The standard deviation for BMI has a lot of variation. After discussing with the GBD modeling team, we removed all standard deviations over 15. However, we still see significant variation between draws, which is leading to higher exposure values than expected and higher incidence and CSMR rates. The interactive sim shows that the model is working as expected, and we believe the issues is with the input data. Currently, we are considering using data from Greg's team, using a mean draw, or ignoring until GBD 2021 is available.  
+  * - 10.0 
+    - Adding FPG 
+    - `Validation workbook for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model10_VV.ipynb>`_. FPG validation largely worked as expected. We found that FPG levels remained stable over time and matched the artifact. In the `interactive sim for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model10_VV.ipynb>`_, we additionally saw that standard deviation matched the expected outputs. There were some high RRs for FPG -> MI in older populations. This appears to be a result of a cluster of higher exposure values in these groups, also visible on exposure graphs. Therefore, we think that FPG is validating as expected.  
   * - 11.0
-    - FPG 
+    - Adding Heart Failure  
     -  
   * - 12.0
     - Lifestyle Intervention  
