@@ -86,7 +86,10 @@ Existing models that utilize dynamic transition models of child wasting include:
   * - Population size per draw
     - 100,000
     - Needs to be refined based on test runs
-  * - Age start
+  * - Age start (initialization)
+    - Zero
+    - 
+  * - Age start (observation)
     - Six months
     - Change from :ref:`phase I <2019_concept_model_vivarium_ciff_sam>`
   * - Age end
@@ -355,7 +358,7 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - Include strata
     - Exclude strata
   * - Stunting state person time
-    - 
+    - * SQ-LNS coverage/utilization 
     - 
   * - Wasting transition counts
     - * MAM treatment coverage* 
@@ -367,7 +370,9 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
       * SAM treatment coverage*
     - 
   * - Deaths and YLLs (cause-specific)
-    - 
+    - * SQ-LNS coverage/utilization 
+      * MAM treatment coverage*
+      * SAM treatment coverage*
     - 
   * - YLDs (cause-specific)
     - 
@@ -487,6 +492,12 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
     - Count data results stratified by random seed for optimization
     - No x-factor component. V&V SQ-LNS updates before moving on
+  * - 3.1.1
+    - Updated age-specific SQLNS effects on wasting, additional stratifications, updated initialization age start value (from 0.5 to 0). All changes included in `pull request #1114 <https://github.com/ihmeuw/vivarium_research/pull/1114>`_
+    - 7, 8_incidence, 8_recovery
+    - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
+    - Count data results stratified by random seed for optimization
+    - No x-factor component
   * - 4.0: All wave 1 scenarios
     - Full wave 1 scenarios
     - 1 through 8
@@ -523,7 +534,11 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
        * `Mortality hazard rate observer implemented as expected <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/Mortality%20hazard%20observer.ipynb>`_
        * Decided on 35 draws for run 3.1 (`based on analysis in this notebook <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0/number_of_draws_analysis.ipynb>`_)
        * `Decided on 260,000 population size based on stability of SAM cases averted at this level <https://github.com/ihmeuw/vivarium_research_wasting/blob/main/verification_and_validation/model_3.0.1/population_size_analysis.ipynb>`_ and plan to use mortality hazard observer for expected deaths averted rather than observed (note that this will not apply to DALYs)
-
+   * - 3.1
+     - `Updated SQ-LNS intervention in accordance with this PR <https://github.com/ihmeuw/vivarium_research/pull/1097>`_, mortality first hazard observer is stratified by intervention coverage, removed children under 6 months from observers
+     - * SQ-LNS intervention updates implemented correctly, although wasting prevalence ratios imperfectly validated (perhaps an issue with few draws). Will update values and random sampling instructions for SQ-LNS effects on wasting for next round implementation.
+       * Simulants under six months of age successfully removed from observation, but identified a bug where simulants 0-6 months not present at initialization and simulants born into simulation at age zero, resulting in a missing age cohort over time. Will update by setting age start to zero.
+       * Mortality first hazard stratified by intervention status successfully.
 
 .. list-table:: Outstanding verification and validation issues
    :header-rows: 1
@@ -532,9 +547,9 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
      - Explanation
      - Action plan
      - Timeline
-   * - Simulants aged 0-6 months included in outputs
-     - Not an issue, but not needed for sim. Can be removed to save computation time/resources
-     - Exclude simulants 0-6 months of age from observers
+   * - Simulants aged 0-6 months not present at initialization, resulting in missing age cohort over time
+     - Discrepancy between age start and entrance age
+     - Set age start value to 0 (instead of six months)
      - For next model run
 
 Assumptions and Limitations

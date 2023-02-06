@@ -112,11 +112,12 @@ By default, Vivarium uses GBD-calculated PAFs for each risk-outcome pair and com
 a multiplicative approach (described below).
 This is correct when risks are all independent, but it has two problems in the presence of correlated risks:
 
-* The GBD approach to calculating PAFs is biased in the presence of any confounding.
+* The GBD approach to calculating PAFs is biased in the presence of any confounding,
+  **even though the relative risks are adjusted for confounding**.
+  This issue is explained in more detail :ref:`on the PAFs page <pafs>`.
   If we are choosing to model correlated risk exposures with effects on the same outcome,
   that means we believe there is **at least** one confounding variable in each PAF calculation.
-  If risks (with RR > 1) are positively correlated, the GBD approach will underestimate the PAF of each;
-  this issue is explained in more detail :ref:`on the PAFs page <pafs>`.
+  If risks (with RR > 1) are positively correlated, the GBD approach will underestimate the PAF of each.
 * The multiplicative approach to combining PAFs (which is also used within GBD to calculate joint PAFs, e.g. for higher-level causes)
   does not take into account the fact that positively correlated risks will have more overlap in their attributable
   burden than uncorrelated risks.
@@ -158,24 +159,40 @@ Example
 
 To see why, let's consider the extreme case of two perfectly correlated dichotomous risk exposures.
 50% of the population is exposed to both r1 and r2, and 50% is exposed to neither.
-Each risk exposure has an RR of 2 on the incidence rate of disease X, which is 0.01 per person-year
-when you are not exposed to either risk -- i.e., :math:`E(X|r1=tmrel,r2=tmrel) = 0.01`.
-Because half of the population has a rate of 0.01/person-year and the other half has a rate
-of 0.01 * 2 * 2 = 0.04/person-year (applying both relative risks), the population rate is 0.025.
+Each risk exposure has an RR of 2 on the incidence rate of disease X.
+
+In this example, we assume that there are no *additional* confounders besides r1 and r2 --
+if there are other risk factors on the incidence of disease X, they are uncorrelated with r1 and r2.
+We also assume no effect modification/there are no interaction effects, which is a common assumption
+in our simulations.
+This means that the incidence rate of disease X for a specific simulant is :math:`X = X_{unexposed} * RR_{r1} * RR_{r2}`,
+where :math:`RR_{r1}` and :math:`RR_{r2}` are the relative risks of the simulant's r1 and r2 exposures respectively,
+and :math:`X_{unexposed}` is the incidence rate when unexposed to both risks.
+
+For this example, suppose :math:`X_{unexposed}` is 0.01 per person-year.
+Because half of the population is unexposed to both risks and has a rate of 0.01/person-year and the other half
+is exposed to both risks and has a rate of 0.01 * 2 * 2 = 0.04/person-year, the population rate is 0.025.
+
+If you were to set everyone to be unexposed to r1, the first group would be unaffected, since they were already
+unexposed to both risks.
+The second group would now only be exposed to r2 and have a rate of 0.01 * 1 * 2 = 0.02/person-year.
+Therefore, the population rate would be 0.015.
 
 The **true** PAF (not using the GBD approach to PAF calculation, which we consider a separate source of bias)
 of r1 on X is:
 
 .. math::
-  PAF_{r1 \rightarrow X} = \frac{0.025 - E(X|r1=\text{tmrel})}{0.025} = \frac{0.025 - (0.01 * 0.5 + 0.02 * 0.5)}{0.025} = 0.4
+  PAF_{r1 \rightarrow X} = \frac{0.025 - 0.015}{0.025} = 0.4
 
 The PAF of r2 on X is the same, because the situation is symmetrical between the two risks.
 
-The true joint PAF is :math:`\frac{0.025 - 0.01}{0.025} = 0.6`.
+If you were to set everyone to be unexposed to both risks, the population rate would be 0.01, since
+everyone would now have the :math:`X_{unexposed}` rate.
+Therefore, the true joint PAF is :math:`\frac{0.025 - 0.01}{0.025} = 0.6`.
 However, when we calculate the multiplicative PAF using the individual PAFs:
 
 .. math::
-  PAF_{r1,r2 \rightarrow O} = 1 - (1 - 0.4) * (1 - 0.4) = 0.64
+  PAF_{r1,r2 \rightarrow X} = 1 - (1 - 0.4) * (1 - 0.4) = 0.64
 
 This discrepancy is because the risk effects are multiplicative (relative risks) and not additive (risk differences).
 Setting one risk to its TMREL at a time, we eliminate 40% of the incidence.
@@ -183,7 +200,7 @@ However, when we set r2 to its TMREL *having already set r1 to its TMREL* we do 
 much of the incidence.
 The incidence among those exposed to r2 has already been *disproportionately* decreased,
 because that group is identical to those exposed to r1,
-and a 50% reduction in this decreased incidence has less absolute effect than a 50% reduction in the original incidence.
+and a 40% reduction in this decreased incidence has less absolute effect than a 40% reduction in the original incidence.
 
 .. note::
   Even if we use additive risk differences, this problem does not entirely go away, at least if we enforce that a rate
@@ -192,21 +209,30 @@ and a 50% reduction in this decreased incidence has less absolute effect than a 
 .. todo::
   Add a generalized version of this example showing that the multiplicative approach is always an overestimate of PAF.
 
-Proof that biases do not cancel out
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Total bias
+^^^^^^^^^^
 
-Since the bias discussed in the previous section causes an overestimate of the joint PAF,
+Since the bias discussed in the previous section causes an overestimate of the joint PAF (for positively-correlated, RR > 1 risks),
 and the :ref:`bias in the GBD calculation method for individual PAFs in the presence of confounders <pafs>`
 causes an underestimate of each PAF (for positively-correlated, RR > 1 risks),
 it is reasonable to wonder if these factors cancel each other out and lead to accurate PAFs.
 
-They do not, as the bias in the calculation of the individual PAFs is always greater,
-leading to an overall underestimate.
+Anecdotally, bias in the GBD calculation method for individual PAFs is typically
+on the order of 10%-20%, as reported on :ref:`the PAFs page <pafs>`.
+In the example above of bias from multiplicative combination, we found a
+6.7% overestimated PAF.
+
+Proof that biases do not cancel out, given some assumptions
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 If we assume that there is no effect modification/there are no interaction effects,
 as we typically do, **and** we assume that there are no *additional* confounders besides
 r1 and r2,
-the true population attributable fraction for the combined effect of two risk factors,
+these effects **do not** cancel out.
+Under these conditions, the bias in the calculation of the individual PAFs is always greater,
+leading to an overall underestimate.
+
+In this situation, the true population attributable fraction for the combined effect of two risk factors,
 :math:`r1` and :math:`r2`, on an outcome :math:`O` such as a mortality rate is:
 
 .. math::
@@ -266,7 +292,7 @@ and no *additional* confounders:
   Is this usually/always calculated within the simulation, or is it sometimes done on the research side?
   Is there shared code or components that implement this on the engineering side?
   If the latter were true, we could simplify this section to "tell engineering to use the correlation-corrected
-  joint PAF calculation" and put the mathematical details elsewhere.
+  joint PAF calculation" and put the mathematical details in the documentation for that shared code.
 
 For two categorical risks, the value is:
 

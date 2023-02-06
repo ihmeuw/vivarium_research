@@ -339,9 +339,7 @@ Individual intervention pages:
 ------------------------------
 
 Within this model, simulants move through the healthcare system. The initialization parameters for screening visits 
-are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication are handled. 
-Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathway for both 
-conditions at each visit. 
+are listed separately. Below are diagrams for how blood pressure and LDL-C measurement and medication, as well as the lifestyle intervention are handled. Regardless of visit type (screening, follow-up, or emergency), simulants will move through the same pathways for all conditions at each visit. 
 
 First, it is determined if the simulant will have a healthcare interaction in that time step. 
 
@@ -453,6 +451,26 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
 
+**Lifestyle Intervention Ramp**
+
+.. image:: lifestyle_ramp.svg
+
+.. list-table:: Lifestyle Intervention Inputs
+  :widths: 3 15 15
+  :header-rows: 1
+
+  * - ID
+    - Decision Information 
+    - Notes
+  * - A
+    - Simulant is age 35+, BMI 25+ AND has not had their FPG tested in 3 years 
+    - 
+  * - B
+    - Eligible simulants will have their FPG measured 71% of the time 
+    - [Mehta_2017]_ 
+  * - C
+    - If simulant is eligible, either 8.55%, 50% or 100% depending on scenario 
+    - 
 
 
 .. _uscvd4.4:
@@ -933,15 +951,15 @@ Code is below for reference
     - `Validation workbook for Model 7 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model7_VV.ipynb>`_. V&V worked well for this model. In the incidence of MI and stroke, there is a clear difference between scenarios that is in line with back of the envelope expectations. We do not visually see a separation in ACMR, but that was also expected. 
   * - 8.0
     - Adding Polypill Intervention
-    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios is less visually apparent in this model, which is expected as this only affects SBP and works for fewer simulants. We are planning to review findings with the team to discuss if we should adjust the intervention or not. 
+    - `Validation workbook for Model 8 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model8_VV.ipynb>`_. The change between scenarios was less visually apparent in this model. Following discussion with Greg, we had the intervention change efficacy and have higher enrollment. This lead to better scenario differentiation. 
   * - 9.0
     - Adding BMI
-    -  
-  * - 10.0
-    - Adding Heart Failure  
-    -  
+    - `Validation workbook for Model 9 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model9_VV.ipynb>`_ and `interactive sim for Model 9 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model9_VV.ipynb>`_. We had significant issues with BMI validation. The standard deviation for BMI has a lot of variation. After discussing with the GBD modeling team, we removed all standard deviations over 15. However, we still see significant variation between draws, which is leading to higher exposure values than expected and higher incidence and CSMR rates. The interactive sim shows that the model is working as expected, and we believe the issues is with the input data. Currently, we are considering using data from Greg's team, using a mean draw, or ignoring until GBD 2021 is available.  
+  * - 10.0 
+    - Adding FPG 
+    - `Validation workbook for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model10_VV.ipynb>`_. FPG validation largely worked as expected. We found that FPG levels remained stable over time and matched the artifact. In the `interactive sim for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model10_VV.ipynb>`_, we additionally saw that standard deviation matched the expected outputs. There were some high RRs for FPG -> MI in older populations. This appears to be a result of a cluster of higher exposure values in these groups, also visible on exposure graphs. Therefore, we think that FPG is validating as expected.  
   * - 11.0
-    - FPG 
+    - Adding Heart Failure  
     -  
   * - 12.0
     - Lifestyle Intervention  
@@ -1109,9 +1127,6 @@ Some limitations of this analysis include:
 .. [Descamps_2015] Descamps, Olivier, Joanne E. Tomassini, Jianxin Lin, Adam B. Polis, Arvind Shah, Philippe Brudi, Mary E. Hanson, and Andrew M. Tershakovec. 2015. “Variability of the LDL-C Lowering Response to Ezetimibe and Ezetimibe + Statin Therapy in Hypercholesterolemic Patients.” Atherosclerosis 240 (2): 482–89. 
   https://doi.org/10.1016/j.atherosclerosis.2015.03.004.
 
-.. [Ely-2017] Ely, Elizabeth K., et al. "A national effort to prevent type 2 diabetes: participant-level evaluation of CDC’s National Diabetes Prevention Program." Diabetes care 40.10 (2017): 1331-1341.
-  https://care.diabetesjournals.org/content/40/10/1331
-
 .. [Fischer_2010] Fischer, Michael A., Margaret R. Stedman, Joyce Lii, Christine Vogeli, William H. Shrank, M. Alan Brookhart, and Joel S. Weissman. 2010. “Primary Medication Non-Adherence: Analysis of 195,930 Electronic Prescriptions.” Journal of General Internal Medicine 25 (4): 284–90. 
   https://doi.org/10.1007/s11606-010-1253-9 
 
@@ -1138,9 +1153,6 @@ Some limitations of this analysis include:
 
 .. [McCormack_2020] McCormack, James P., and Daniel T. Holmes. 2020. “Your Results May Vary: The Imprecision of Medical Measurements.” BMJ 368 (February): m149. 
   https://doi.org/10.1136/bmj.m149.
-
-.. [Metz-et-al-2000] Metz, Jill A., et al. "A randomized trial of improved weight loss with a prepared meal plan in overweight and obese patients: impact on cardiovascular risk reduction." Archives of internal medicine 160.14 (2000): 2150-2158.
-  https://jamanetwork.com/journals/jamainternalmedicine/fullarticle/485403
 
 .. [Morales_2018] Morales, Clotilde, Núria Plana, Anna Arnau, Laia Matas, Marta Mauri, Àlex Vila, Lluís Vila, et al. 2018. “Causas de no consecución del objetivo terapéutico del colesterol de las lipoproteínas de baja densidad en pacientes de alto y muy alto riesgo vascular controlados en Unidades de Lípidos y Riesgo Vascular. Estudio EROMOT.” Clín. investig. arterioscler. (Ed. impr.), 1–9.
 

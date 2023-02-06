@@ -356,26 +356,31 @@ is reached.
 To generate individuals living in group quarters, we will
 use a weighted sample of people in group quarters from the appropriate
 geography from ACS (sampled with replacement, analogously to
-household).  This will provide each simulant residing in GQ with an
-age, sex, race/ethnicity, and geographic location matching the joint
-distribution from ACS.  It does not identify *which* group quarters
-the individual resides in, however, and only provides information on
-whether it is Institutional or Non-institutional GQ (in the TYPE
-variable: 2 = Institutional; 3 = Non-institutional).
+household). This will provide each simulant residing in GQ with an
+age, sex, and race/ethnicity matching the joint
+distribution from ACS.
 
-We perturb the PUMA and age attributes of the sampled GQ people, as described in the
+We perturb the age attribute of the sampled GQ people, as described in the
 :ref:`perturbation section below <census_prl_perturbation>`.
 
-The final step for initializing GQ simulants is to give each
-a (somewhat inappropriately named) household_id.  Eventually we shall
-accomplish this so that the distribution of GQ sizes match what is
-found in census, but as a simple stand-in for now we will include 6
-special "household_id" values for the six broad types of GQs that we
-wish to represent, and assign simulants to one of the categories
-consistent with their GQ TYPE uniformly at random.  The GQ subtypes of
-non-institutional are college, military, other non-institutional; and
-subtypes of institutional are carceral, nursing homes, and other
-institutional.
+In the future, we may want to model the geographic locations and sizes of
+different group quarters establishments.
+For now, we initialize six GQ "households," one for each of the six
+types of GQ that we wish to represent.
+These can be split into two categories: institutional and non-institutional.
+The types of institutional GQ that we model are carceral, nursing homes, and other institutional;
+the types of non-institutional GQ that we model are college, military, and other non-institutional.
+Each GQ type, being a single "household," is assigned a single US state and PUMA combination
+(sampled uniformly at random) and a single address.
+All simulants living in the same GQ type will therefore have the same address, state, and PUMA,
+which is a limitation of this approach.
+
+ACS does not identify which type of group quarters
+each individual resides in, however, and only provides information on
+whether it is institutional or non-institutional GQ (in the TYPE
+variable: 2 = Institutional; 3 = Non-institutional).
+We choose a GQ type/"household" uniformly at random for each simulant out of the
+three types consistent with their institutional/non-institutional status.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -443,19 +448,13 @@ there are multiple spouse/unmarried partner options, select one at random.
 
 Simulant will be randomly assigned to a guardian based on the below rules: 
 
-- 78.5% will be assigned to a guardian within their state. The remainder will be assigned out of state source1_. For early versions with only one state, the out of state guardians can be ignored. 
-- Match to a person aged 35 to 65 years old 
+- Match to a person aged 35 to 65 years old anywhere in the US
 - If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
-- Assign to reference people source2_ 
+- Assign to reference people, according to statistics in [NCES_Family_Characteristics]_
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
     * Remainder to people with spouses, include both parents 
 - If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run. 
-
-
-.. _source1: https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
-
-.. _source2: https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
 
 
 **Limitations**
@@ -465,6 +464,9 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 #. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
 #. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
 #. For GQ college folks, we select only reference people to be guardians, making some simulants ineligible and oversimplifying. 
+#. Because each GQ type has only a single location (state and PUMA), we allow college students' guardians to be anywhere in the US.
+   In reality, 78.5% of college students should have a guardian in the same state where they go to college. [Own_State_Enrollment]_
+   This could be included in a future version with multiple college locations.
 
 Guardian(s) on Time Steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -508,9 +510,8 @@ might be sufficient for now, although as I learn more about the
 specific challenges of Census PRL, I will find out if we need to
 revisit this and keep track of dad as well as moms).
 
-The nativity of children born in the sim is set according to where their
-parent is currently living; if their parent lives in the US they were born
-in the US, otherwise they were born outside the US.
+The nativity of children born in the sim is set to reflect that they were born
+in the US.
 
 Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
@@ -608,7 +609,8 @@ When a simulant who is the reference person in a non-GQ household dies,
 the oldest remaining simulant in their household is assigned to be the reference person.
 All other simulants in the household are assigned a new relationship with these steps:
 
-#. If the new reference person is this simulant's tracked parent (i.e. :code:`parent_ids`),
+#. If the new reference person is this simulant's tracked parent
+   (i.e. this simulant was born during the simulation from a fertility event on the new reference person),
    the simulant is assigned 'Biological child.'
 #. Otherwise, the simulant is assigned the value in the :code:`relationship_to_new_reference_person`
    column in the CSV data file below, from the row where the
@@ -899,14 +901,10 @@ Simulation strategy
 Domestic migration events are modeled as happening to an at-risk population at a certain rate.
 They are constant across time in the simulation.
 
-.. note::
-
-  All of these events only apply to those currently living in the US!
-
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is non-GQ households **with more than one person** in the US
+The at-risk population for household moves is non-GQ households **with more than one person**
 (or, equivalently, the reference people of such households).
 This at-risk population should be stratified by age group, sex, and race/ethnicity
 **of the household's reference person**.
@@ -920,7 +918,7 @@ match the household's current state and PUMA**.
 be filtered to only the sources and destinations in the simulation catchment area.)
 The household should be assigned new physical and mailing addresses, with the same procedure used at initialization.
 
-All simulants in the household that are of working age should change jobs,
+All simulants in the household that are of working age should change employment,
 with the same procedure used for a spontaneous employment change event.
 
 All other attributes of the household and simulants (including relationship to reference person)
@@ -932,22 +930,18 @@ Individual moves
 The following applies to all three types of individual moves.
 Additional details are in the following subsections for each type.
 
-The at-risk population for individual moves is all simulants in the US.
+The at-risk population for individual moves is all simulants.
 This at-risk population should be stratified by age group, sex, and race/ethnicity.
-On each time step, within each stratum, the corresponding migration rate **per person-year** should be applied to determine
-the simulants that should move with that move type.
+On each time step, within each stratum, the corresponding migration rates **per person-year** should be applied to determine
+the simulants that should move with each move type.
+Simulants can only have a single individual migration event per time step -- they
+cannot do both a new-household move and a GQ person move in the same time step.
 
 If a simulant selected to move is currently the reference person in a non-GQ household,
 the reference person of that household should be updated using the same
 procedure as if the moving simulant had died (as described in the Mortality component).
 
-A new state and PUMA should be selected for the simulant according to the proportions
-in the "Destination PUMA proportions by source PUMA" input file **where the state and PUMA columns
-match the simulant's current state and PUMA**.
-(If the simulation's catchment area is only certain states/PUMAs, this file should
-be filtered to only the sources and destinations in the simulation catchment area.)
-
-If the simulant is of working age and not moving into military GQ, they should change jobs,
+If the simulant is of working age and not moving into military GQ, they should change employment,
 with the same procedure used for a spontaneous employment change event.
 If the simulant is moving into military GQ, they should be assigned the military employer.
 
@@ -961,6 +955,12 @@ by any other simulants.
 The new household's physical and mailing addresses should also be assigned at random,
 in the same manner as at initialization.
 
+A new state and PUMA should be selected for the simulant according to the proportions
+in the "Destination PUMA proportions by source PUMA" input file **where the state and PUMA columns
+match the simulant's current state and PUMA**.
+(If the simulation's catchment area is only certain states/PUMAs, this file should
+be filtered to only the destinations in the simulation catchment area.)
+
 Their relationship attribute should be set to "reference person."
 
 *GQ person moves*
@@ -972,7 +972,7 @@ An institutional/non-institutional "relationship" attribute should be sampled
 for the simulant according to the proportions in the "Relationship proportions for GQ person moves" input file
 **where the age, sex, and race/ethnicity columns match those attributes of the simulant**.
 
-Then, a GQ type (household ID and corresponding physical and mailing addresses) should be assigned according to the
+Then, a GQ type "household" should be randomly assigned according to the
 institutional/non-institutional status, as is done at initialization.
 
 *Non-reference person moves*
@@ -980,8 +980,14 @@ institutional/non-institutional status, as is done at initialization.
 
 In addition to the above logic common to all individual moves:
 
-For this move type, state and PUMA should be selected such that there is at least one
-non-GQ household already in the simulation in that state and PUMA.
+A new state and PUMA should be selected for the simulant according to the proportions
+in the "Destination PUMA proportions by source PUMA" input file where **both**:
+
+* The state and PUMA columns match the simulant's current state and PUMA.
+* There is at least one non-GQ household already in the simulation in the destination PUMA.
+
+(If the simulation's catchment area is only certain states/PUMAs, this file should
+be filtered to only the destinations in the simulation catchment area.)
 
 The simulant selected should be added to (given the same household ID as) a random non-GQ household
 in their new state and PUMA.
@@ -1026,9 +1032,10 @@ Limitations
 #. In real life, people probably tend to move close to home, far below the granularity
    of a MIGPUMA.
    We do not have data to inform this.
-#. We assume that 100% of people who move change jobs.
+#. We assume that 100% of people who move change employment.
+   Notably, this means that all unemployed people who move become employed.
    A more accurate rate cannot be
-   calculated from the ACS (it does not ask about job changes),
+   calculated from the ACS, as it does not ask about employment changes,
    but other data sources probably exist about this question.
 #. We do not include those moving from Puerto Rico in domestic migration.
    We also do not include those moving from Puerto Rico in international immigration,
@@ -1182,9 +1189,9 @@ They are assigned a new household ID and new physical/mailing addresses, as is d
 PUMS recent immigrants consistent with GQ person moves are sampled using person weights with replacement until the
 desired number of simulants added in GQ person moves is reached.
 
-Sampled individuals may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
-They are assigned a household ID for a randomly-selected GQ type matching
-their institutional/non-institutional status, as well as the corresponding shared addresses, as is done at population initialization.
+Sampled individuals may have age perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
+They are assigned to a randomly-selected GQ type "household" matching
+their institutional/non-institutional status, as is done at population initialization.
 
 *Non-reference-person moves*
 """"""""""""""""""""""""""""
@@ -1209,6 +1216,8 @@ Limitations
 #. We assume that immigration does not change over long-run time or seasonally.
 #. All households are equally likely to receive non-reference-person immigrants.
 #. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. We never move simulants who previously emigrated back into the US.
+   We may want to add this in a future model iteration.
 
 V&V strategy
 ^^^^^^^^^^^^
@@ -1290,49 +1299,46 @@ Simulation strategy
 Emigration events are modeled as happening to an at-risk population at a certain rate.
 They are constant across time in the simulation.
 
-Households and individuals selected to have emigration events should remain in the simulation, but their
-location attributes (US state, PUMA, and physical and mailing addresses) should be set to placeholder values that signify they are
-no longer in the US.
-Emigrating simulants should also terminate employment -- their employer ID and income are set
-to those used for unemployment.
-In the future, we may want some of these simulants to continue employment in the US or
-re-enter through the immigration component, but for now
-they will remain unemployed and outside the US permanently.
-All other simulant attributes should be unchanged by the emigration event.
+Households and individuals selected to have emigration events should no longer be tracked
+in the simulation; they will not be returned by any future observers.
 
-.. note::
-
-  Because simulants outside the US remain in the population table, it is important for all components
-  to carefully define whether or not they act on these simulants.
-  For example, the at-risk population for emigration in each type of move defined below is specified
-  to be **in the US**.
-  Certain observers will only observe simulants in the US, for example Census observers and household surveys.
+.. todo::
+  In a future version of the model, we may want simulants to leave and later re-enter the US.
+  In that case, we would need to continue to track simulants living abroad so that aging, mortality, fertility,
+  etc would apply to them there.
 
 Household moves
 '''''''''''''''
 
-The at-risk population for household moves is all simulants living in non-GQ households in the US.
-This at-risk population should be stratified by age group, sex, race/ethnicity, and nativity (born in or outside the US)
-**of the simulant's household's reference person**, as well as US state.
-On each time step, within each stratum, the corresponding household move emigration rate **per year of person-time** should be applied to determine
-a number of **simulants** to emigrate as part of household moves.
-Then, households within the stratum should be sampled at random for emigration until **at least** the desired number of simulants is reached.
-This means that in practice we will generally overshoot the desired number by a few, but this should have
-minimal effect.
+The household move emigration rates are calculated as person-moves per year of person-time,
+stratified by demographics **of the simulant's household's reference person**.
+However, we cannot apply these rates to all simulants independently, because we want to sample
+at the household level for this move type.
+
+Instead, we apply these rates to an at-risk population of non-GQ **reference people only**,
+stratified by age group, sex, race/ethnicity, nativity (born in or outside the US), and US state.
+We then emigrate all members of households where the reference person was selected for this event.
+This ensures that the same number of simulants emigrate in each stratum, in expectation, as if we had applied the
+rate to the whole stratum, while also emigrating households as indivisible units.
 
 GQ person moves
 '''''''''''''''
 
-The at-risk population for GQ person moves is all simulants living in GQ in the US.
+The at-risk population for GQ person moves is all simulants living in GQ.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding GQ person move emigration rate **per year of person-time**
-should be applied to sample simulants to emigrate. 
+should be applied to sample simulants to emigrate.
+
+.. note::
+  Currently, GQ people are clustered in only six households, in at most six unique states,
+  so emigration rates stratified by state applied to this population will not replicate the national
+  rate.
 
 Non-reference-person moves
 ''''''''''''''''''''''''''
 
-The at-risk population for non-reference-person moves is all simulants living in non-GQ households in the US, except for those who are a household reference person.
+The at-risk population for non-reference-person moves is all simulants living in non-GQ households, except for those who are a household reference person.
 This at-risk population should be stratified by age group, sex, race/ethnicity, nativity (born in or outside the US),
 and US state.
 On each time step, within each stratum, the corresponding non-reference-person move emigration rate **per year of person-time**
@@ -1418,10 +1424,8 @@ For now, we ignore these issues and use 2010 ZCTA/ZIPs for all years.
 Simulation strategy
 ^^^^^^^^^^^^^^^^^^^
 
-Residential households
-''''''''''''''''''''''
-
-Each household should be associated with a physical address.
+Each household, which includes both residential households and group quarters "households" (one per GQ type),
+should be associated with a physical address.
 
 Whenever a new household is initialized or moves such that it needs a new physical address,
 the following process will be used to generate one:
@@ -1434,31 +1438,6 @@ the following process will be used to generate one:
 #. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
    the weights in the :code:`proportion` column, filtered to the household's US state and
    PUMA (the state and PUMA values of the household members, which should all be the same).
-
-Group quarters
-''''''''''''''
-
-Each group quarters **type** (e.g. college, carceral, ...) should be associated with a physical address.
-
-When a group quarters type is initialized, its physical address and ZIP code are generated using the following
-steps:
-
-#. A street number, street name, and unit will each be independently sampled from the
-   deepparse address data and concatenated with spaces.
-#. Then, a municipality (city) and province (state) **combination** will be sampled
-   from the deepparse address data, **without filtering by anything.**
-   The combination will be separated by a comma and appended to the result of the previous step.
-#. Finally, a ZIP code will be sampled from the "PUMA to ZIP" input file below according to
-   the weights in the :code:`proportion` column, **filtered to the US state sampled in the previous step.**
-
-.. note::
-  Because the proportions sum to the same value (1) for each PUMA, sampling ZIP like this without filtering
-  on PUMA assumes that each PUMA is equally likely to contain GQ housing.
-  PUMAs are created to have roughly equal population, so this is reasonable.
-
-.. note::
-  **Simulants' PUMA attribute will not correspond with their physical address when they are in GQ.**
-  This is a result of using a single physical address for an entire GQ type.
 
 The physical address for each GQ type is fixed for the duration of the simulation.
 (See the domestic migration section, where household moves are only applied to residential households.)
@@ -1631,42 +1610,17 @@ Note: RAND used something like this for their BISG project
 https://www.rand.org/pubs/external_publications/EP20090611.html
 https://www.rand.org/health-care/tools-methods/bisg.html
 
-.. sourcecode:: python
-
-    # last name can be race/ethnicity specific
-    df_census_names = pd.read_csv('/home/j/Project/simulation_science/prl/data/Names_2010Census.csv', na_values=['(S)'])
-
-    # fill missing values with equal amounts of what is left
-    n_missing = df_census_names.filter(like='pct').isnull().sum(axis=1)
-    pct_total = df_census_names.filter(like='pct').sum(axis=1)
-
-    pct_fill = (100 - pct_total) / n_missing
-    for col in df_census_names.filter(like='pct').columns:
-        df_census_names[col] = df_census_names[col].fillna(pct_fill)
-
-    def random_last_name(race_eth):
-        p = df_census_names['count'].copy()
-
-        if race_eth == 1:
-            p *= .01 * df_census_names.pctwhite
-        elif race_eth == 2:
-            p *= .01 * df_census_names.pctblack
-        elif race_eth == 3:
-            p *= .01 * df_census_names.pcthispanic
-        else:
-            p *= .01 * (100 - (df_census_names.pctwhite + df_census_names.pctblack + df_census_names.pcthispanic))
-
-        # make zero probabilities go away
-        s_name_pr = pd.Series(np.array(p), index=df_census_names.name)
-        s_name_pr = s_name_pr[s_name_pr > 0]
-        s_name_pr /= s_name_pr.sum()
-        return np.random.choice(s_name_pr.index, p=s_name_pr).capitalize()
-
-    # should everyone in a household have the same last name?  seems overly normative, but what is smarter?
-    for hh_id, dfg in df_population.groupby(['household_id']):
-        last_name = random_last_name(dfg.race_eth.value_counts().iloc[0])  # HACK: use most common race/eth in household
-        df_population.loc[dfg.index, 'last_name'] = last_name
-        # TODO: for rows with relshipp value of 22, 24, 31, 32, 34, 35, 36, give different last name
+Last names should be sampled from the data at :code:`J:\Project\simulation_science\prl\data\Names_2010Census.csv`.
+We ignore the "All other names" row (about 10% of the population) and only assign names that are explicitly listed
+in that dataset.
+The "count" column contains the weight associated with each name;
+however, we want to stratify this sampling by race/ethnicity, so a separate set of weights should be
+calculated for each race/ethnicity category.
+The sampling weights for Hispanic simulants should be the "count" column multiplied by the
+"pcthispanic" column, and so on for the other race/ethnicity categories.
+The simulation's Asian and NHOPI categories both use the "pctapi" column, since those are combined in the name data.
+For some names, the percentage with some race/ethnicities is suppressed -- in this case, the total percentage
+suppressed for that name should be evenly divided among the race/ethnicities that were suppressed.
 
 Last names sometimes also include spaces or hyphens, and I have come
 up with race/ethnicity specific space and hyphen probabilities from an
@@ -1674,14 +1628,30 @@ analysis of voter registration data (from publicly available data from
 North Carolina, filename VR_Snapshot_20220101.txt; see
 2022_06_02b_prl_code_for_probs_of_spaces_and_hyphens_in_last_and_first_names.ipynb
 for computation details.)
+Last names selected for a space/hyphen should be constructed by sampling two last
+names from the Census data and concatenating them with a space/hyphen.
 
-For now, assign all simulants within the same household who are 
-relatives of the reference person the same last name. 
+For now, assign all simulants initialized into the same household who are 
+relatives of the reference person (including the reference person themselves) the same last name.
 This excludes "roommate/housemate" and "other nonrelative" to the 
-reference person. This is an oversimplification as some relatives might have 
-different last names, but works for the initial model. 
+reference person.
+Simulants initialized into group quarters will not be assigned matching last names.
+Immigrating simulants are assigned the same last name
+as the reference person when they join a household with a relative relationship.
+Simulants born during the simulation inherit the last name of their biological mother.
 
-This will not be applied to anyone in a group quarter. 
+The race/ethnicity used to sample last name is the race/ethnicity of
+the oldest simulant (i.e. the simulant with the earliest date of birth, not the simulant who lives to be the oldest),
+out of those with that last name, **ever observed by any observer**.
+
+.. note::
+  We only consider observed simulants in determining the race/ethnicity to use because
+  last name sampling happens outside the simulation, based on observer outputs.
+  This is a limitation of our approach, but it is unlikely to make much difference.
+
+.. note::
+  In a future version of the model, we might want to have matching last names even between
+  households, e.g. for college simulants with guardians.
 	
 **First and middle names**
 
@@ -1945,12 +1915,8 @@ At population initialization, we follow these rules to initialize an SSN or ITIN
 Fertility
 '''''''''
 
-When a simulant is born during the sim to a parent who lives in the United States,
+When a simulant is born during the sim,
 they are **always** assigned an SSN.
-
-If a simulant is born during the sim to a parent who lives outside the United States,
-they are assigned an SSN **if and only if** their parent has one.
-If their parent has an ITIN (i.e. does not have an SSN), the newborn is assigned an ITIN.
 
 Immigration
 '''''''''''
@@ -2022,9 +1988,14 @@ Census
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+
+
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling. Note 
+All living simulants are eligible for sampling; note 
 that this means they must be listed as 'alive' at the time the census 
 is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a 
 probability of being missed in the census. Based on this 
@@ -2192,6 +2163,9 @@ There are two types of sampling plans:
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 Here is an example: 
 
@@ -2200,7 +2174,7 @@ Here is an example:
 
 **Who to Sample** 
 
-Simulants currently living in the US are eligible for sampling.
+All living simulants are eligible for sampling.
 For surveys, there is a much more significant amount of non-response bias 
 compared to the annual census. Participation will be determined in a two 
 step process. 
@@ -2368,7 +2342,7 @@ in the home.
   * - Middle initial 
   * - Last name
   * - Age 
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in MMDDYYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
   * - Physical Address Unit 
@@ -2383,6 +2357,10 @@ in the home.
 Here is an example: 
 
 .. image:: WIC_example.png
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
 
 **Who to Sample** 
 
@@ -2534,9 +2512,10 @@ W2 and 1099 Forms
   * - Employer Address 
   * - Employer ZIP Code 
   * - Type of Tax Form (W2 or 1099)
-  * - Tracked Dependent(s) (for noise functions ONLY)
-  * - Tracked Dependent Address(es) (for noise functions ONLY)
-  * - Type of GQ (for noise functions ONLY)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and wages as integers and all other data as strings. 
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2738,6 +2717,10 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - ITIN (if present)
     -
 
+.. note::
+
+  In the final version of the observers, following the noise functions, please have age and income as integers and all other data as strings. 
+
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
 Leave the field blank. 
@@ -2852,10 +2835,14 @@ added later (not in the minimum viable model), if desired.
   * - First name
   * - Middle initial 
   * - Last name
-  * - DOB (stored as a string in MM/DD/YYYY format)
+  * - DOB (stored as a string in YYYYMMDD format)
   * - Social Security Number 
   * - Type of event 
-  * - Date of event (stored as a string in MM/DD/YYYY format)
+  * - Date of event (stored as a string in YYYYMMDD format)
+
+.. note::
+
+  In the final version of the observers, following the noise functions, please have all data as strings. 
 
 Currently, we will only track 2 types of events: 
 
@@ -2944,158 +2931,183 @@ for all column based noise include:
 
 - Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
 - Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
-- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, sex has 2% incorrect selections. The minimum noise is 0% and the maximum if 5% for all column noise. For errors per row, the minimum is 0 and maximum is 5. 
+- A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
+- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For token noise level, the minimum is 0 and maximum is 1. 
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
 - The order of different noise types should not matter, but will go in the order they are listed in the table below. 
 
 .. list-table:: Type of Noise Included and Default Level by Data Included
-  :widths: 20 20 20 20 20 20
+  :widths: 20 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
     - Default Noise Level: Rows Eligible for Errors
     - Default Noise Level: Token Noise Level 
+    - Additional parameters (defined in detail below)
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Nicknames, OCR, phonetic, typographic, fake names 
+    - Typographic: inclusion of original token 
+    - Nicknames, OCR, phonetic, typographic, fake names, missing data
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, missing data
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic, fake names
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, fake names, missing data
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting 
+    - Age miswriting: possible perturbations 
+    - Copy from within Household, Age miswriting, missing data
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting, swap month and day 
+    - N/A
+    - Copy from within Household, Numeric miswriting, swap month and day, missing data 
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - OCR, phonetic, typographic
+    - Typographic: inclusion of original token 
+    - OCR, phonetic, typographic, missing data
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - N/A
-    - Incorrect Select
+    - N/A
+    - Incorrect Select, missing data
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - Zip code miswriting: digit level probabilities 
+    - Zip code miswriting, missing data
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Sex 
     - Census, Household Surveys, WIC 
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - SSN
     - Taxes (both), SSA
     - 1%
     - 0.1 
-    - "Borrowed" SSN, Copy from within Household, Numeric miswriting 
+    - N/A
+    - "Borrowed" SSN, Copy from within Household, Numeric miswriting, missing data 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
     - 0.1 
-    - Copy from within Household, Numeric miswriting 
+    - N/A
+    - Copy from within Household, Numeric miswriting, missing data
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
     - 0.1 
-    - Numeric miswriting
+    - N/A
+    - Numeric miswriting, missing data
     - 
   * - Employer Name 
     - Taxes (both)
     - 1%
     - 0.1 
-    - OCR, typographic 
+    - Typographic: inclusion of original token 
+    - OCR, typographic, missing data
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Type of SSA Event 
     - SSA 
     - 1%
     - N/A
-    - Incorrect select 
+    - N/A
+    - Incorrect select, missing data
     - 
   * - Date of SSA Event 
     - SSA 
     - 1%
     - N/A
-    - Numeric miswriting, month and day swap 
+    - N/A
+    - Numeric miswriting, month and day swap, missing data 
     - 
 
 The below section further describes types of noise including any code 
@@ -3103,21 +3115,40 @@ available and information for implementation. **Software engineering team - plea
 
 **Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
 
-Currently, the user will input values that are directly used in the noise functions: 
-rows eligible for errors, and noise level at the token level. These are 
-then directly plugged into noise functions. 
+The user will have the opportunity to change all parameters used in the noise 
+functions from their default values. These are then directly plugged into noise functions. 
 
-One limitation of this strategy is that since there is a random probability of a 
-particular character/token receiving noise, not all rows that are selected to be 
-eligble for noise will actually receive noise. Another limitation is that token 
-error rate is not very intuitive for the end user. 
+The exact method for how a user will input the parameters has not been finalized. We 
+anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{column}_{noise_function}_{param}`. 
+
+One limitation of having a row probability and then token probability is that since 
+there is a random probability of a particular character/token receiving noise, not 
+all rows that are selected to be eligible for noise will actually receive noise. 
+Another limitation is that token error rate is not very intuitive for the end user. 
 
 At some point in the future, we might make this more user friendly. However, for the 
 sake of a minimum functional model, this is satisfactory. 
 
-One function has an additional parameter. The typographic function needs an input for 
-the probability that a corrupted token contains the original token. For simplicity, 
-we will use 0.1 and the user will not be able to edit this value. 
+Some functions have additional parameters, as listed in the table above. These parameters 
+are explained in more depth in the table below.  
+
+.. list-table:: Additional Inputs and Default Values
+  :widths: 20 20 20
+  :header-rows: 0
+
+  * - Noise Function Affected
+    - Additional Inputs 
+    - Default Input Value 
+  * - Typographic Noise
+    - Probability that a corrupted token contains the original token
+    - 0.1 
+  * - Age miswriting 
+    - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
+    - [1, -1] 
+  * - Zip code miswriting 
+    - Separate error rates for first 2 digits, middle digit, and last 2 digits 
+    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
+
 
 .. todo::
 
@@ -3131,7 +3162,7 @@ we will use 0.1 and the user will not be able to edit this value.
 
 Optical character recognition is when a character is misread for another character that 
 looks similar. A common examples is 'S' and '5'. In order to emulate 
-that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the OCR noise function to all strings with the user defined token 
@@ -3141,7 +3172,7 @@ error rate.
 
 Phonetic errors are when a character is misheard. This could similar sounding letters when 
 spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
-In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the phonetic noise function to all strings with the user defined token 
@@ -3156,11 +3187,11 @@ Limitations:
 
 Typographic errors occur due to mistyping information. The commonality of errors are therefore 
 based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
-and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/noise>`_. 
+and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
 
 To implement this, select the strings eligible for noise and apply 
 the typographic noise function to all strings with the user defined token 
-error rate and standard parameter for including the original token. 
+error rate and rate for including the original token. 
 
 .. todo::
 
@@ -3171,7 +3202,7 @@ error rate and standard parameter for including the original token.
 For a variety of reasons, some repondents might choose to use a fake name rather 
 than their real name on official forms. To account for this, first select the sample 
 to have noise added. Then for everyone selected, replace their name with a random 
-selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/2022_04_20c_prl_fake_names.ipynb>`_. 
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/fake_names.py>`_. 
 Please note that the list is separated into first and last names. 
 
 Limitations: 
@@ -3183,7 +3214,7 @@ Limitations:
 
 Many people choose to use nicknames instead of their "real" names. A common example is an 
 Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
-which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
 
 Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
 determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
@@ -3209,10 +3240,26 @@ Limitations:
 
 - This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
 
-.. todo::
+**Age Miswriting** 
 
-  Decide if any numerical strings need to be further refined in approach. Example is zip code where there would be an option to separate the first 3 and last 2 digits. In addition to the noise functions above, current work done by Nathaniel includes: this `corruption module <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/corruption.py>`_ which has a more robust system for zipcodes and a function to swap months and days in dates. 
+To implement this, first select the strings eligible for noise. For each 
+selected string, the age will be adjusted. The adjustment value will be 
+randomly selected from the user inputted list of possible perturbations. 
 
+For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2] 
+then 28 will be adjusted to either: 26, 27, 29, or 30, with an equal chance 
+of each option. 
+
+If the resulting age is negative (e.g., the correct age is 1 and a perturbation 
+of -2 is applied to make the answer -1), then reselect from the remaining 
+perturbation options until the final answer is 0 or higher. 
+
+**Zip code Miswriting** 
+
+To implement this, select the strings eligible for noise and apply 
+the zip code miswriting noise function to all strings with the user defined. 
+This code is similar to the numeric miswriting above, but has different 
+inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
 
 **Copy from within Household** 
 
@@ -3239,20 +3286,38 @@ would be listed in MM/DD/YYYY format as 08/12/2022).
 **Incorrect Select** 
 
 Incorrect select applies to a range of data types. For this, select the sample to 
-have noise added. For those selected, randomly select a different option from the 
-correct one. This is randomly chosen from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes 
-the full list of options, not just those seen in the household. 
+have noise added. For those selected, randomly select a new option. This is chosen 
+from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household. 
+
+Please ensure that the new selection is in fact an incorrect selection and that the original 
+response was not randomly selected. 
 
 Limitations: 
 
 - For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
 - Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
 
+.. note::
+  
+  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This will need to be corrected in the final version. 
+
+
 **"Borrowed" SSN**
 
 Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
 It will NOT be individually configurable by the end user. No further action is 
 needed in the noise functions for this component. 
+
+**Missing Data**
+
+All data types have a probability of being missing. This could mean that the 
+input was left blank, that an answer was refused, or that the answer was illegible 
+or unintelligible. The function will remove the real data and replace it with N/A. 
+
+Limitations: 
+
+- Some users would likely have a significant amount of missing data instead of missed data being spread across all users. This could be due to privacy concerns, how the response was submitted, or user errors. We will not include this simulant level variation. 
+- With current versions of the census and many other forms online, there is less opportunity for missing data. It might be replaced with fake names or similar approaches, as outlined separately above. However, in mail-in forms or in person recording there is still an opportunity for missing data. We include it here despite these limitations. 
 
 .. todo::
 
@@ -3584,11 +3649,10 @@ See the data sources and analysis section for how these variances were calculate
 The last step is combining these two components, which is done with this equation:
 
 .. math::
-  \text{income_propensity} = \text{probit}(\text{simulant_component} + \text{job_component})
+  \text{income_propensity} = \Phi(\text{simulant_component} + \text{job_component})
 
 The sum of the two components has a standard normal distribution,
-which means that the probit function (which is the inverse
-of the standard normal's CDF) of that sum is uniformly distributed between 0 and 1.
+which means that the standard normal's CDF of that sum is uniformly distributed between 0 and 1.
 More details on this can be found in the data sources and analysis section.
 
 Data sources and analysis
@@ -3636,7 +3700,7 @@ We want to break down the variance using two normally distributed components of 
 
 .. math::
 
-  log(income) = F_\text{log(income)}(probit(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
+  log(income) = F_\text{log(income)}(\Phi(job + simulant)) = (job + simulant) * \sigma_\text{log(income)} + \mu_\text{log(income)}
 
 We inform the variance contributions of the job- and simulant-specific
 components with a measured variance of 1-year change in log(earnings)
@@ -3919,7 +3983,7 @@ would make matching unrealistically difficult.
 
 To decrease similarity without assuming total independence between attributes,
 we perturb values at sampling time.
-Specifically, we perturb the age and PUMA columns.
+Specifically, we perturb age, as well as state and PUMA.
 These are the columns with many possible values, where sampling noise is
 likely to be a significant concern even at the substantial sample size (>15 million)
 of the ACS PUMS.
@@ -3931,73 +3995,66 @@ The perturbation process is similar no matter the entity type being sampled.
 All perturbation is performed completely at random; perturbation probabilities are constant
 across age, sex, race/ethnicity, etc.
 
-PUMA
-^^^^
+State and PUMA
+^^^^^^^^^^^^^^
 
 .. note::
 
-  For the purposes of this section, "PUMA" refers to the unique geographic area.
-  However, the "PUMA" column in the ACS data contains a PUMA code, which is only unique
+  The "PUMA" column in the ACS data contains a PUMA code, which is only unique
   **in combination with state.**
-  Since the simulation stores the PUMA code and state (which together identify the PUMA) separately,
-  "PUMA" in this section refers to the combination of both.
+  The two columns together are what identifies the PUMA geographically.
+  That is why the operations in this section operate on both.
 
-**50% of the time,** we replace the PUMA with the PUMA value of
+**50% of the time,** we replace the state and PUMA of the sampled row with the state and PUMA values of
 another row in the data.
 How we select this replacement value depends on what we are currently sampling.
 
 Population initialization
 '''''''''''''''''''''''''
 
-When sampling households or GQ people from the entire ACS dataset for population initialization,
+When sampling households from the entire ACS dataset for population initialization,
 all replacement values should be sampled from the same full ACS dataset, using the appropriate weights.
 
-For example, imagine we have just sampled a GQ person (Row A) to initialize as a new simulant, and this row
-was randomly determined (according to the 50% probability) to have a perturbed PUMA.
-Because Row A was selected for PUMA perturbation, we do not use Row A's PUMA value.
-Instead, we sample another GQ person (Row B) from the full ACS dataset, using person weighting.
-We assign Row B's PUMA value to the new simulant, which is now a combination of Row A's other attributes
-with Row B's PUMA.
-
-If initializing a household, the process works similarly, except that Row A and Row B are households (not individuals),
-and Row B is sampled using household weights.
-All simulants in the new household are assigned Row B's PUMA value.
+For example, imagine we have just sampled a household (Household A) to initialize into the simulated population, and this household
+was randomly determined (according to the 50% probability) to have a perturbed state and PUMA.
+We do not use Household A's state and PUMA values.
+Instead, we sample another household (Household B) from the full ACS dataset, using household weighting.
+We assign Household B's state and PUMA values to the newly created household, which is now a combination of Household A's people
+with Household B's state and PUMA.
 
 International immigration
 '''''''''''''''''''''''''
 
-When sampling for immigration, there are three cases:
+When sampling for immigration, there are two cases:
 
 #. We are sampling households to add in household moves.
-#. We are sampling GQ people to add in GQ person moves.
 #. We are sampling people in non-GQ households to add in non-reference-person moves.
 
+Simulants added in the third type of immigration, GQ person moves, will have a state and PUMA combination
+set by their GQ type (because each GQ type is a single "household") and therefore are not
+eligible for perturbation.
+
 The details of the initial sampling are described in the immigration component documentation;
-here, we only consider how to perturb the PUMA values of an already-sampled entity (Row A),
-**which has already been selected according to the 50% probability to have a perturbed
+here, we only consider how to perturb the state and PUMA values of an already-sampled entity (Row A),
+**which has already been selected according to the 50% probability to have a perturbed state and
 PUMA.**
 
-**80% of the time** (this probability is constant) we sample a new PUMA value from the same "immigration subset"
+**80% of the time** (this probability is constant) we sample a new state and PUMA combination from the same "immigration subset"
 of the same entity type in the ACS PUMS data.
 Specifically:
 
-#. If performing a household move, we sample the PUMA of another household with a recent
+#. If performing a household move, we sample the state and PUMA of another household with a recent
    immigrant reference person, using household weights.
-#. If performing a GQ person move, we sample the PUMA of another GQ person who is a recent
-   immigrant, using person weights.
-#. If performing a non-reference-person move, we sample the PUMA of another non-GQ person
+#. If performing a non-reference-person move, we sample the state and PUMA of another non-GQ person
    who is a recent immigrant and resides in a household where the reference person is not a
    recent immigrant, using person weights.
 
-**The remaining 20% of the time**, we sample a new PUMA value from the same entity type, but without
+**The remaining 20% of the time**, we sample a new state and PUMA combination from the same entity type, but without
 regard to immigration characteristics.
 Specifically:
 
-#. If performing a household move, we sample the PUMA of any household in the full ACS data, using household weights.
-#. If performing a GQ person move, we sample the PUMA of any GQ person in the full ACS data, using person weights.
-#. If performing a non-reference-person move, we sample the PUMA of any non-GQ person in the full ACS data, using person weights.
-
-As in population initialization, if creating a new household, the entire household is assigned the replacement PUMA value.
+#. If performing a household move, we sample the state and PUMA of any household in the full ACS data, using household weights.
+#. If performing a non-reference-person move, we sample the state and PUMA of any non-GQ person in the full ACS data, using person weights.
 
 By including the 20% probability of sampling from the full dataset, we ensure that immigration may
 occur in any PUMA, even if no ACS respondents were recent immigrants to that PUMA.
@@ -4118,3 +4175,7 @@ To Come (TK)
 .. [LACS_Link] USPS. nd. LACSLink®. USPS.Gov. Accessed November 30, 2022. https://postalpro.usps.com/address-quality/lacslink
 
 .. [TEA_2020_Map] Bureau, US Census. February 28, 2019. “2020 Type of Enumeration Area Viewer Released” Census.Gov. Accessed November 30, 2022. https://www.census.gov/newsroom/press-releases/2019/tea-viewer.html
+
+.. [Own_State_Enrollment] Statista. October 26, 2020. "Share of first year college students in the United States who enrolled in the state were they lived in Fall 2016" Accessed January 17, 2023. https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
+
+.. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
