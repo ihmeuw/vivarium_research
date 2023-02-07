@@ -1990,7 +1990,8 @@ Census
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
+
 
 
 **Who to Sample** 
@@ -2165,7 +2166,8 @@ There are two types of sampling plans:
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
+
 
 Here is an example: 
 
@@ -2360,7 +2362,8 @@ Here is an example:
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have age as an integer and all other data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
+
 
 **Who to Sample** 
 
@@ -2515,7 +2518,8 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have age and wages as integers and all other data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
+
 
 If a simulant does not have a social security number but is 
 employed, they will need this number to be filled in. If there 
@@ -2719,7 +2723,8 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have age and income as integers and all other data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise. 
+
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
@@ -2906,22 +2911,26 @@ noise added to the data. We currently divide noise into two types:
 #. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
 #. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
 
-As there are multiple noise functions that will independently select data, 
-the order to apply noise is: 
+As there are multiple noise functions that will independently select 
+data. Noise should be added in the order below. Note that not all 
+noise functions apply to add data types, but this ordering should 
+be able to be used for all data. 
 
+#. "Borrowed" SSN (happens in simulation NOT noise functions)
+#. Missing Data 
 #. Omissions 
 #. Duplications 
-#. Column noise is divided in a few parts, for strings: 
-    #. Nicknames 
-    #. Fake names
-    #. Phonetic 
-    #. OCR 
-    #. Typographic 
-#. Column noise for numeric data: 
-    #. Copy from within the household 
-    #. Month and day swaps (applies to dates only)
-    #. Numeric miswriting 
-#. Selection type data only has one column noise type 
+#. Incorrect Selection 
+#. Copy from Within Household 
+#. Month and day swaps (applies to dates only)
+#. Zip Code Miswriting (applies to Zip Code only)
+#. Age Miswriting (applies to age only)
+#. Numeric miswriting 
+#. Nicknames 
+#. Fake names
+#. Phonetic 
+#. OCR 
+#. Typographic 
 
 Column Noise
 ''''''''''''
@@ -2930,6 +2939,7 @@ To begin, we will start with defining column based noise. Some general rules
 for all column based noise include: 
 
 - Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
+- Note that selection for column noise is applied to NON-MISSING values only. This means if we select 5% for noise, that 5% is AFTER missing data has been removed, meaning it might be a smaller percent of the full sample. 
 - Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
 - A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
 - The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For token noise level, the minimum is 0 and maximum is 1. 
@@ -2953,161 +2963,161 @@ for all column based noise include:
     - 1%
     - 0.1 
     - Typographic: inclusion of original token 
-    - Nicknames, OCR, phonetic, typographic, fake names, missing data
+    - Missing data, nicknames, fake names, phonetic, OCR, typographic
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
     - Typographic: inclusion of original token 
-    - OCR, phonetic, typographic, missing data
+    - Missing data, phonetic, OCR, typographic
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
     - Typographic: inclusion of original token 
-    - OCR, phonetic, typographic, fake names, missing data
+    - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
     - Age miswriting: possible perturbations 
-    - Copy from within Household, Age miswriting, missing data
+    - Missing data, Copy from within Household, Age miswriting, OCR, typographic 
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
     - N/A
-    - Copy from within Household, Numeric miswriting, swap month and day, missing data 
+    - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic  
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - N/A
-    - Numeric miswriting, missing data
+    - Missing data, numeric miswriting, OCR, typographic 
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - Typographic: inclusion of original token 
-    - OCR, phonetic, typographic, missing data
+    - Missing data, phonetic, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - N/A
-    - Numeric miswriting, missing data
+    - Missing data, numeric miswriting, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - N/A
-    - Numeric miswriting, missing data
+    - Missing data, numeric miswriting, OCR, typographic
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - Typographic: inclusion of original token 
-    - OCR, phonetic, typographic, missing data
+    - Missing data, phonetic, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - N/A
     - N/A
-    - Incorrect Select, missing data
+    - Missing data, incorrect select
     - Noise for all types of addresses will work in the same way 
   * - Zip Code 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - Zip code miswriting: digit level probabilities 
-    - Zip code miswriting, missing data
+    - Missing data, zip code miswriting, OCR, typographic 
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 1%
     - N/A
     - N/A
-    - Incorrect select, missing data
+    - Missing data, incorrect select
     - 
   * - Sex 
     - Census, Household Surveys, WIC 
     - 1%
     - N/A
     - N/A
-    - Incorrect select, missing data
+    - Missing data, incorrect select
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 1%
     - N/A
     - N/A
-    - Incorrect select, missing data
+    - Missing data, incorrect select
     - 
   * - SSN
     - Taxes (both), SSA
     - 1%
     - 0.1 
     - N/A
-    - "Borrowed" SSN, Copy from within Household, Numeric miswriting, missing data 
+    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
     - 0.1 
     - N/A
-    - Copy from within Household, Numeric miswriting, missing data
+    - Missing data, copy from within household, numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
     - 0.1 
     - N/A
-    - Numeric miswriting, missing data
+    - Missing data, numeric miswriting, OCR, typographic 
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
     - 0.1 
     - N/A
-    - Numeric miswriting, missing data
+    - Missing data, numeric miswriting, OCR, typographic
     - 
   * - Employer Name 
     - Taxes (both)
     - 1%
     - 0.1 
     - Typographic: inclusion of original token 
-    - OCR, typographic, missing data
+    - Missing data, OCR, typographic
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 1%
     - N/A
     - N/A
-    - Incorrect select, missing data
+    - Missing data, incorrect select
     - 
   * - Type of SSA Event 
     - SSA 
     - 1%
     - N/A
     - N/A
-    - Incorrect select, missing data
+    - Missing data, incorrect select
     - 
   * - Date of SSA Event 
     - SSA 
     - 1%
     - N/A
     - N/A
-    - Numeric miswriting, month and day swap, missing data 
+    - Missing data, month and day swap, numeric miswriting, OCR, typographic 
     - 
 
 The below section further describes types of noise including any code 
@@ -3140,7 +3150,7 @@ are explained in more depth in the table below.
     - Additional Inputs 
     - Default Input Value 
   * - Typographic Noise
-    - Probability that a corrupted token contains the original token
+    - Probability that a corrupted token contains the original token (e.g., if typically e -> r, the probability that e -> er)
     - 0.1 
   * - Age miswriting 
     - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
