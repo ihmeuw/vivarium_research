@@ -29,6 +29,55 @@ of the risks.
   which results are biased by the omission of a risk correlation and
   how to assess size/acceptability of the bias.
 
+When modeling risk correlation may be important
+------------------------------------------------
+
+There are certain situations in which correlation between modeled risk factors is important to include
+in our simulations to avoid biased results. Assessing whether failure to consider correlation between
+modeled risk factors will result in bias depends on the independent (most often intervention coverage) 
+and dependent variables (most often DALYs averted) in the research question at hand and how the 
+correlated risks relate to those variables. Further, in addition to assessing whether failing to 
+consider the correlation between modeled risk factors will cause biased model results, it is also
+important to consider the expected magnitude of that bias, as small biases may be acceptable model
+limitations.
+
+There are three common situations in which modeling correlation between two risk factors may be 
+important in our simulations, including:
+
+1. When there is correlation between two factors that each influence eligibility for the intervention. 
+In this situation, modeling the correlation between these risks will influence the proportion of the 
+population who is eligible to receive the intervention.
+
+.. image:: correlated_risks_1.png
+    :align: center
+
+2. When a risk that influences intervention eligibility is correlated with a risk affected by the 
+intervention. In this situation, modeling the correlation between these risks will influence the risk 
+profile of the population who receives the intervention, thereby influencing the potential impact of 
+the intervention (given that the intervention will presumably have a greater impact when delivered to 
+a higher-risk population).
+
+.. image:: correlated_risks_2.png
+    :align: center
+
+3. When there is correlation between two risks that affect the same outcome. In this situation, the 
+correlation between these risks will influence the PAF calculation of these risks on the outcome, as 
+discussed later on this page. If an intervention affects R1 and/or R2 in this situation, the 
+estimation of the impact of the intervention on the outcome will also be affected.
+
+.. image:: correlated_risks_3.png
+    :align: center
+
+The `Jupyter notebook linked here <https://github.com/ihmeuw/vivarium_research/blob/af1dd1706c617a12364f7bd8e9a9015c03411d43/docs/source/model_design/vivarium_model_components/risk_factors/risk_correlation/bias_quantification.ipynb>`_
+contains more details on each of these situations and provides functions to estimate
+the potential magnitude of bias associated with failing to consider the correlation between
+risk factors may have that can be applied/adapted to specific research questions in order
+to aid in determining whether to model risk-risk correlation in a vivarium simulation.
+
+.. todo::
+
+  Link to future page on residual confounding?
+
 Risk exposure correlation
 -------------------------
 
