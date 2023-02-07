@@ -1990,7 +1990,7 @@ Census
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded to the nearest whole number.
 
 
 
@@ -2166,7 +2166,7 @@ There are two types of sampling plans:
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded to the nearest whole number.
 
 
 Here is an example: 
@@ -2362,7 +2362,7 @@ Here is an example:
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded to the nearest whole number.
 
 
 **Who to Sample** 
@@ -2518,7 +2518,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age and wages must be rounded to the nearest whole number.
 
 
 If a simulant does not have a social security number but is 
@@ -2723,7 +2723,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age and income must be rounded to the nearest whole number. 
 
 
 If a simulant does not have an SSN,
@@ -2925,12 +2925,12 @@ be able to be used for all data.
 #. Month and day swaps (applies to dates only)
 #. Zip Code Miswriting (applies to Zip Code only)
 #. Age Miswriting (applies to age only)
+#. Numeric miswriting 
 #. Nicknames 
 #. Fake names
 #. Phonetic 
 #. OCR 
 #. Typographic 
-#. Numeric miswriting 
 
 Column Noise
 ''''''''''''
@@ -2991,14 +2991,14 @@ for all column based noise include:
     - 1%
     - 0.1 
     - N/A
-    - Missing data, copy from within household, swap month and day, OCR, typographic, numeric miswriting  
+    - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic  
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - N/A
-    - Missing data, OCR, typographic, numeric miswriting 
+    - Missing data, numeric miswriting, OCR, typographic 
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
@@ -3012,14 +3012,14 @@ for all column based noise include:
     - 1%
     - 0.1 
     - N/A
-    - Missing data, OCR, typographic, numeric miswriting 
+    - Missing data, numeric miswriting, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 1%
     - 0.1 
     - N/A
-    - Missing data, OCR, typographic, numeric miswriting 
+    - Missing data, numeric miswriting, OCR, typographic
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
@@ -3068,28 +3068,28 @@ for all column based noise include:
     - 1%
     - 0.1 
     - N/A
-    - "Borrowed" SSN, missing data, copy from within household, OCR, typographic, numeric miswriting 
+    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 1%
     - 0.1 
     - N/A
-    - Missing data, copy from within household, OCR, typographic, numeric miswriting
+    - Missing data, copy from within household, numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 1%
     - 0.1 
     - N/A
-    - Missing data, OCR, typographic, numeric miswriting 
+    - Missing data, numeric miswriting, OCR, typographic 
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 1%
     - 0.1 
     - N/A
-    - Missing data, OCR, typographic, numeric miswriting 
+    - Missing data, numeric miswriting, OCR, typographic
     - 
   * - Employer Name 
     - Taxes (both)
@@ -3117,7 +3117,7 @@ for all column based noise include:
     - 1%
     - N/A
     - N/A
-    - Missing data, month and day swap, OCR, typographic, numeric miswriting 
+    - Missing data, month and day swap, numeric miswriting, OCR, typographic 
     - 
 
 The below section further describes types of noise including any code 
