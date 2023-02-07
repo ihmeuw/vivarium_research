@@ -1990,7 +1990,7 @@ Census
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded to the nearest whole number.
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
 
 
@@ -2166,7 +2166,7 @@ There are two types of sampling plans:
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded to the nearest whole number.
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
 
 Here is an example: 
@@ -2362,7 +2362,7 @@ Here is an example:
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded to the nearest whole number.
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
 
 **Who to Sample** 
@@ -2518,7 +2518,7 @@ W2 and 1099 Forms
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age and wages must be rounded to the nearest whole number.
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have a social security number but is 
@@ -2723,7 +2723,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age and income must be rounded to the nearest whole number. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise. 
 
 
 If a simulant does not have an SSN,
