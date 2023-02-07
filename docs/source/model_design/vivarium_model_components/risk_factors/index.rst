@@ -20,6 +20,7 @@ See the following pages for more information on these risk factor sub-components
    risk_attributable_causes/index
    risk_correlation/index
    risk_mediation/index
+   residual_confounding/index
    
 Risk factors in GBD
 ^^^^^^^^^^^^^^^^^^^
