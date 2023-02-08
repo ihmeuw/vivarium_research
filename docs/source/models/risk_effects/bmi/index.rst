@@ -335,15 +335,14 @@ To do this, follow the below steps:
 #. Initialize a population of 100,000 
 #. Truncate the exposure of BMI at 40.8* 
 #. Find the simulant level RR with this equation: :math:`RR\text{simulant} = RR^{max((BMI_i - TMREL),0)}` 
-#. Find the median** RR for each age/sex group 
-#. Find the PAF for each age/sex group with this equation: :math:`PAF(i) = (RR\text{median}(i) - 1) / RR\text{median}(i)`
+#. Find the mean RR for each age/sex group 
+#. Find the PAF for each age/sex group with this equation: :math:`PAF(i) = (RR\text{mean}(i) - 1) / RR\text{mean}(i)`
 
 An example of this calculation can be found in the `workbook here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_BMI_to_HF.ipynb>`_
 
 Notes: 
 
 - (*) We truncate the exposures of BMI as this calculation is based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. 
-- (**) As we are having trouble with high outlier values in BMI, we are choosing to use a median here instead of the mean. If we improve the quality of the BMI data in the future, we can reassess this decision. 
 
 .. todo:: 
 
