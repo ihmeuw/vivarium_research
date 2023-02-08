@@ -20,8 +20,8 @@ Therefore, if we are interested in the effect of a given risk factor (R1) on an 
 there are often many other risk factors (R2, R3, ... RN) that may be correlated with R1 
 and also have an effect on the outcome (as shown in the figure below). Notably, these 
 "other" risk factors (R2 through RN) meet the definitions of confounding factors in the 
-association between R1 and the outcome (see this page for more information on 
-cofounding).
+association between R1 and the outcome (see :ref:`this page <general_dags>` for more 
+information on confounding).
 
 .. image:: diagram.png
     :align: center
@@ -67,8 +67,8 @@ exposure and outcome of interest) will always be present to some degree.
 Therefore, we will represent residual confounding moving forward as the "RC" variable 
 in the diagram below. Here, R1 through RN represent a group of *modeled* risk factors 
 that affect outcome O with *modeled* correlation between them. RC represents the 
-aggregate impact of all other unmodeled (including unknown) factors that are associated 
-with risks R1 through RN and have an influence on outcome O. 
+aggregate impact of all other unmodeled (including known and unknown) factors that are 
+associated with risks R1 through RN and have an influence on outcome O. 
 
 .. image:: rc_diagram.png
     :align: center
@@ -96,7 +96,7 @@ section.
 risk exposure for the purposes of targeting an intervention to that group. The 
 influence of this type of bias is described in the following section.
 
-Therefore, we should carefully evaluate these potenial biases (See the 
+Therefore, we should carefully evaluate these potential biases (See the 
 `The potential impact of residual confounding`_ section) and consider incorporating the 
 influence of such residual confounding in our model (See the 
 `Modeling the influence of residual confounding`_) in order to minimize such biases.
