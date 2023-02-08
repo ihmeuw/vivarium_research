@@ -333,7 +333,7 @@ and discussed in more detail afterward.
      -
    * - `Severity Splits`_
      -
-     - Transition Rates
+     - Transition rates
      -
    * - `Restrictions`_
      - List of groups that are not included in a cause.
@@ -347,13 +347,15 @@ and discussed in more detail afterward.
      - Rate at which an individual accrues years lived with disability due to
        the state in the cause model.
    * - `Cause-specific Mortality`_
-     -
-     -
-     -
+     - Measure of deaths due to a particular cause per person-year in the overall
+       age-, sex-, time-, and location-specific population.
+     - Mortality impacts
+     - Used to determine a simulant's mortality hazard rate. 
    * - `Excess Mortality`_
-     -
-     -
-     -
+     - Measure of deaths due to a particular condition per person-year in the 
+       age-, sex-, time-, and location-specific population with that condition.
+     - Mortality impacts
+     - Used to determine a simulant's mortality hazard rate.
 
 Cause Model Initialization
 ++++++++++++++++++++++++++
