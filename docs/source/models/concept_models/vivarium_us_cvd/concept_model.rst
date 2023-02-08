@@ -693,6 +693,10 @@ Where adherence score = 0 for primary or secondary nonadherent; and adherence sc
     - 
     - All simulants will be assigned a follow-up from a uniform distribution of 0-3 months 
     - Burn in period will allow the distribution of follow-up appointments to reach equilibrium prior to time start 
+  * - Last FPG Test 
+    - 
+    - Simulants who are not eligible for FPG testing (age is <35 OR BMI <25) will never have had an FPG test. Among those eligible, 29% will never have had an FPG test and 71% will have their last test date selected from a uniform distirbution between 0-3 years prior to time start. 
+    - For our model, it only matters if the simulant has been tested within 3 years. So for eligible simulants who have not had a test in the past 3 years, it does not matter if they were tested 3.1 years ago or never, it will have the same outcome in the simulation.  
 
 
 Creation of "Untreated" SBP Values on Initializaiton
