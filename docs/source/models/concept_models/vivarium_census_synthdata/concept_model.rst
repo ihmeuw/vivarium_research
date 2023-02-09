@@ -1227,16 +1227,17 @@ If there is no such household in the simulation, their PUMA is perturbed with 10
 :ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
 Then, they are matched in the new PUMA.
 
-The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
+The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" and "Parent-in-law" become "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
-These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
+These changes are necessary to avoid impossible situations (more than two parents or parents-in-law, more than one spouse/partner).
 
 Limitations
 ^^^^^^^^^^^
 
 #. We assume that immigration does not change over long-run time or seasonally.
 #. All households are equally likely to receive non-reference-person immigrants.
-#. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. This approach to relationships can create some impossible situations, e.g. grandchildren of 10-year-olds
+   or children older than their parent.
 #. We never move simulants who previously emigrated back into the US.
    We may want to add this in a future model iteration.
 
