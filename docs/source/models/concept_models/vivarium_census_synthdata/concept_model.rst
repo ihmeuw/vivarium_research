@@ -1155,11 +1155,38 @@ since immigrating).
 Immigration rate
 ''''''''''''''''
 
-The yearly rate at which simulants are added to the population **by each move type** is given by
-the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
-Since immigration is likely unaffected by US population change over time, the number of immigrants in a year for a move type
-is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
-This is then divided by the number of time steps in a year to get the number of simulants to add per time step in that move type.
+From the simulation's perspective, immigration is not an event happening to an "at-risk population," because
+the people who are "at-risk" for immigrating are those who live outside the US and are not present in
+the simulation.
+
+For this reason, the term "immigration rate" here refers to a rate *over time*, not a rate
+*over person-time at risk*.
+
+The yearly rate at which immigration events of each move type occur is given by
+the weighted number of "recent immigration" events of that type in the ACS PUMS:
+the weights of each row in the ACS PUMS are the number of people/households in the full population
+represented by that person/household,
+and the question asked (residence one year ago) defines the denominator as one year.
+
+Each *household* that immigrates is considered one household immigration event,
+while each *person* that immigrates is considered one event for the other two move types;
+PUMS household weights are used in the former case and PUMS person weights in the latter
+to determine the number of events.
+
+To transform these rates into events per time step, we:
+
+#. Rescale the rates proportionally to the ratio between the total PUMS person weight
+   (which is the total population of our simulation's catchment area) and our simulation's configured
+   population size.
+   One way to think about this is that our simulation is like a 1:1,000 scale model
+   (with the ratio determined by the configured size of our simulated population)
+   and immigration is scaled down accordingly.
+#. Rescale the rates to a time step, instead of year, denominator.
+
+We do not model the seasonal or random fluctuation of immigration rates between time steps.
+However, since these rates are not integers and we want to avoid bias due to rounding,
+we stochastically round each rate to an integer number of events on each time step.
+[Stochastic_Rounding]_
 
 Sampling new simulants
 ''''''''''''''''''''''
@@ -1168,18 +1195,12 @@ The following subsections explain the sampling rules for each move type.
 All attributes not explicitly described below (e.g. names) are set
 using the same method as population initialization for those attributes.
 
-.. note::
-
-  All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
-  All added simulants should have a unique seed for common random numbers.
-  This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
-
 *Household moves*
 """""""""""""""""
 
-PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**.
+PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**
+until the desired number of household immigration events is reached.
 In households that are selected, household members who are not recent immigrants are excluded.
-This sampling continues until the desired number of **simulants** added in household moves is reached.
 
 Sampled households may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
 They are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
@@ -1207,16 +1228,17 @@ If there is no such household in the simulation, their PUMA is perturbed with 10
 :ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
 Then, they are matched in the new PUMA.
 
-The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
+The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" and "Parent-in-law" become "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
-These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
+These changes are necessary to avoid impossible situations (more than two parents or parents-in-law, more than one spouse/partner).
 
 Limitations
 ^^^^^^^^^^^
 
 #. We assume that immigration does not change over long-run time or seasonally.
 #. All households are equally likely to receive non-reference-person immigrants.
-#. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. This approach to relationships can create some impossible situations, e.g. grandchildren of 10-year-olds
+   or children older than their parent.
 #. We never move simulants who previously emigrated back into the US.
    We may want to add this in a future model iteration.
 
@@ -4145,6 +4167,8 @@ To Come (TK)
 .. [Own_State_Enrollment] Statista. October 26, 2020. "Share of first year college students in the United States who enrolled in the state were they lived in Fall 2016" Accessed January 17, 2023. https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
 
 .. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
+
+.. [Stochastic_Rounding] Croci M, Fasi M, et al. Stochastic rounding: implementation, error analysis and applications. Royal Society Open Science. 2022 Mar; 9(3). https://doi.org/10.1098%2Frsos.211631
 
 .. [PUMS] Bureau, US Census. n.d. “PUMS Documentation” Census.Gov. Accessed February 10, 2023. https://www.census.gov/programs-surveys/acs/microdata/documentation.2020.html#list-tab-UOL17N02SF1Q45VNXM
 
