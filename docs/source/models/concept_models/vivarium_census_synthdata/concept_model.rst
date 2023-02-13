@@ -201,6 +201,9 @@ In order to make this computationally feasible, we will split this population in
 This independence allows these shards to be run in parallel.
 The size of each shard is to be determined based on computational constraints.
 
+.. todo::
+  Define exactly the full population size at which we will run the simulation.
+
 .. _census_prl_models:
 
 2.3 Components
