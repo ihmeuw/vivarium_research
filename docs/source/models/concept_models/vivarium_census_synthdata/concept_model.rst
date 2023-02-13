@@ -158,20 +158,18 @@ except in the case of some young simulants who are assigned :ref:`guardians <cen
 
 .. _census_prl_age-sex-etc:
 
-2.2 Demographics
-----------------
+2.2 Demographics and Simulation Parameters
+------------------------------------------
 
 .. _census_prl_pop_descr:
 
 2.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - cohort type: open
-  - cohort length: 20 years
-  - age and sex structure: USA population from ACS 2019
-  - time step: 28 days
-  - fertility: as described below
-  - stratifications: none --- see below for details on custom observers to capture census-, survey-, and registry-style data generation
+Unlike most of our health-related simulations, this simulation does not use a population structure derived from the
+Global Burden of Disease (GBD) study.
+The construction of a custom population is described in the "Components" section of this document, primarily in the
+:ref:`section on the initialization of demographic factors <census_prl_age_sex_etc>`.
 
 
 .. _census_prl_location:
@@ -179,44 +177,95 @@ except in the case of some young simulants who are assigned :ref:`guardians <cen
 2.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We will begin with a model of a simple random sample of households in
-Florida, but design with a plan to make a whole-USA-scale data product
-eventually, as well as an idea of doing more focused geographies, such
-as a single PUMA or collection of PUMAs.
+Our model is primarily intended to simulate the entire United States.
+However, each component also describes how to run for subsets of the United States, e.g.
+a single state, if any change needs to be made at all in this case.
+The changes are mostly using a subset of the relevant US-level input data,
+though the few inputs from GBD may also change by location.
+Some inputs which have been custom-calculated for use in the simulation,
+such as domestic migration rates, have only been provided here at the United States level
+and are used unchanged if running in a subset of the United States.
 
+We have used single-state runs so far as a form of small-scale testing.
+We may want to generate final simulation outputs at the state level, or other smaller
+geographic areas, in the future; the specifics are to be determined.
+
+.. _census_prl_population_size:
+
+2.2.3 Population size
+~~~~~~~~~~~~~~~~~~~~~
+
+Our final data outputs will be at the scale of the real United States population.
+In order to make this computationally feasible, we will split this population into some number of independent
+"shards," such that simulants can only interact with other simulants within their shard.
+This independence allows these shards to be run in parallel.
+The size of each shard is to be determined based on computational constraints.
+
+.. todo::
+  Define exactly the full population size at which we will run the simulation.
 
 .. _census_prl_models:
 
 2.3 Components
 --------------
-  
 
 .. _census_prl_age_sex_etc:
 
-2.3.1 Age, date of birth, sex, race/ethnicity, nativity, geographic location, household id, and relationship
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.1 Age, date of birth, sex, race/ethnicity, nativity, US state, PUMA, household ID, and relationship
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-These attributes will be designed to follow closely the data available
-in the American Communities Survey Public Use Microdata Sample.
+These attributes are initialized by sampling from
+the 2016-2020 American Communities Survey (ACS) Public Use Microdata Sample (PUMS) [PUMS]_
+and creating simulants based on the rows sampled.
 
-This data includes age in years, sex of male/female, OMB
-race/ethnicity, and geographic location encoded at the PUMA, which is
-smaller than state but sometimes larger than county.
+The PUMS provides a households file as well as a persons file.
+The meanings for numeric codes in the PUMS files can be found in the PUMS' data dictionary. [PUMS_Data_Dictionary]_
 
-To match the target of the US Counties BoD team, we will aggregate
-race/ethnicity into the following partition:
+As described in the next section, some sampling is done at the household level and some at the person
+level, but the result of sampling is a set of PUMS person rows that we map one-to-one to
+simulants in our initial population.
+Each PUMS-informed attribute of a new simulant is set based on the corresponding person row.
+How these attributes are generated from PUMS columns is described below.
 
-* Non-Latino White alone
-* Non-Latino Black alone
-* Non-Latino American Indian and Alaskan Native (AIAN) alone
-* Non-Latino Asian alone
-* Non-Latino Native Hawaiian and Other Pacific Islander (NHOPI) alone
-* Non-Latino Multiracial or Some Other Race
-* Latino
+Sampling from the PUMS allows us to replicate not only the univariate distribution of each attribute
+but also joint distributions of arbitrary complexity between the attributes,
+while also preserving structure within sampled household units.
+However, by creating multiple simulants who are based on the same PUMS person row,
+we risk making them more similar to one another than would be expected
+in the real population.
+We address this issue through the use of :ref:`perturbation <census_prl_perturbation>`
+of age, as well as state and PUMA.
 
-This is basically compatible with the surname data we will use in Section (12).
+Sampling approach
+^^^^^^^^^^^^^^^^^
 
-Age is reported in the PUMS in integer years, but simulants are assigned a uniform-randomly
+ACS PUMS data used for sampling should be subset to the simulated area.
+For example, if running the simulation in Florida only, the PUMS should be filtered to
+only those rows where the :code:`ST` column is 12 (the code for Florida).
+
+We use a two-step process to sample ACS PUMS:
+
+#. First, we sample, with replacement, entire non-GQ ("residential") households using the ACS household weights.
+   Each sampled household creates a simulant for each person contained within it in the PUMS person file.
+#. Then, we sample, with replacement, GQ individuals from the persons file using the ACS person weights for those individuals.
+
+Our target is that 3% of the population should be living in GQ.
+We do not exactly hit this target, because when sampling household units we cannot guarantee
+an exact number of people sampled.
+Instead, we sample as many non-GQ households as we can without *exceeding* 97% of the simulated population size,
+then fill in the rest of the population size with GQ individuals.
+The largest household size in the PUMS data is 17, so the number
+of simulants initialized in households may be less than the target by 1-16.
+
+.. todo::
+  We should use a data source, e.g. the person weights in ACS PUMS, to refine this 3% value.
+
+Age and date of birth
+^^^^^^^^^^^^^^^^^^^^^
+
+Age is reported in the PUMS (:code:`AGEP` column) in floored integer years, but our simulation uses precise ages,
+including fractional years.
+Simulants are assigned a uniform-randomly
 chosen precise age consistent with the age in PUMS.
 Their date of birth is defined to be consistent with that precise age.
 
@@ -224,152 +273,73 @@ Their date of birth is defined to be consistent with that precise age.
   Date of birth, in reality, is not evenly spread throughout the year.
   We do not model this.
 
+We perturb the age attribute as described in the
+:ref:`perturbation section <census_prl_perturbation>`.
+
+Sex
+^^^
+
+Sex in PUMS (:code:`SEX` column) is binary (male/female) and initialized as-is for the simulant.
+
+Race/ethnicity
+^^^^^^^^^^^^^^
+
+We map separate PUMS indicators of race and ethnicity to a single composite "race/ethnicity"
+indicator, with the following exhaustive and mutually exclusive categories:
+
+* White
+* Black
+* Latino
+* American Indian and Alaskan Native (AIAN)
+* Asian
+* Native Hawaiian and Other Pacific Islander (NHOPI)
+* Multiracial or Some Other Race
+
+This combination of race and ethnicity into a single indicator is similar to what the US Counties BoD team
+within IHME does.
+However, because we use ACS data and aren't limited by the categories present on death certificates,
+we separate NHOPI from Asian and include a Multiracial or Some Other Race category, unlike in their
+life expectancy work. [Life_Expectancy_Race_Ethnicity]_
+
+To assign the race/ethnicity indicator, the steps are, in order:
+
+* If the PUMS person has a value in the :code:`HISP` column indicating that they are "Spanish/Hispanic/Latino",
+  they are assigned to our "Latino" category, regardless of the values in other race-related columns.
+* If the PUMS person has a value of "Two or More Races" or "Some Other Race alone" in the :code:`RAC1P` column,
+  they are assigned to our "Multiracial or Some Other Race" category.
+* If the PUMS person has any of the three values of :code:`RAC1P` indicating American Indian and Alaskan Native
+  race, they are assigned to our AIAN category.
+* Otherwise, they are assigned to a category matching their :code:`RAC1P` value; a value of "White alone"
+  indicates the "White" category, and so on.
+
+Nativity
+^^^^^^^^
+
 "Nativity" means whether or not someone was born in the United States.
 The PUMS has more information on the specific country of birth, but we do not use this level of granularity.
 The :code:`NATIVITY` column in PUMS provides the binary categorization.
 
-For initialization on simulation start, for the population living in households, we will sample households from
-ACS PUMS rows in the specified PUMAs with replacement, and with
-sampling weights given by ACS data; here is sample code for a nanosim
-initial population:
+US state and PUMA
+^^^^^^^^^^^^^^^^^
 
-.. sourcecode:: python
+We perturb the state and PUMA attributes from PUMS (:code:`ST` and :code:`PUMA` columns),
+as described in the :ref:`perturbation section <census_prl_perturbation>`, before assigning them.
 
-    # load some ACS data
-    columns = ['household_id', 'location', 'fips code', 'puma', 
-               'weight', 'age', 'sex', 'race_eth', 'relshipp',
-              ]
-    acs = pd.read_csv('/home/j/Project/Models/VEHSS/prepped/acs_2019_pums.csv', low_memory=False, usecols=columns)
-    acs_hh_only = acs[acs.household_id.str.contains('HU')]  # subset of rows for "household" sample, meaning those _not_ in group quarters
+Household ID
+^^^^^^^^^^^^
 
-    # sample households to initialize population table
-    n_households = 3
+Non-GQ households
+'''''''''''''''''
 
-    p = acs_hh_only.query(location_str).groupby('household_id').weight.mean() # FIXME: load and use household weights here, instead of this
-    p /= p.sum()
+Each non-GQ PUMS household sampled is given a unique household ID,
+which is shared between the simulants generated from the persons in that household.
+Note that because households are sampled with replacement, there may be multiple unique
+household IDs in the simulation that were based on the same household unit in the PUMS file.
 
-    resampled_households = np.random.choice(a=p.index, p=p,
-                                            size=n_households, replace=True)
+GQ individuals
+''''''''''''''
 
-    g = acs.groupby('household_id')
-    def household(i, hh_id):
-        dfg = g.get_group(hh_id).copy()
-        dfg['household_id'] = i
-        return dfg
-    df_population = pd.concat([household(i, hh_id) for i, hh_id in enumerate(resampled_households)])
-
-Note that this approach will not initialize any simulants living in
-Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>` below for details on
-how we will address this.
-    
-In the code above, there is a location string filter which we can use
-to focus our simulation on a single state or PUMA.  For our initial
-model, please focus on Florida, with
-
-.. sourcecode:: python
-
-    location_str = 'location == "FL"'  # restrict to subset of ACS data, e.g. specific state or PUMA
-
-Here is a small example of what the code in this section will load from ACS:
-
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-|         | household_id  | puma  | age  | relshipp  | sex  | race_eth  | location  | fips code   |
-+=========+===============+=======+======+===========+======+===========+===========+=============+
-| 801679  | 0             | 1110  | 5    | 25        | 1    | 2         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 801678  | 0             | 1110  | 39   | 20        | 2    | 2         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 782698  | 1             | 7301  | 67   | 20        | 2    | 1         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 782699  | 1             | 7301  | 82   | 36        | 1    | 1         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 801484  | 2             | 12703 | 82   | 20        | 1    | 1         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-
-The relationship field will be relevant to Last Name generation, and
-for easy reference, here are the meanings of the relationship codes
-from ACS:
-
-+-------+--------------------------------------------------+
-| Code  | Meaning                                          |
-+=======+==================================================+
-| 20    | Reference person                                 |
-+-------+--------------------------------------------------+
-| 21    | Opposite-sex husband/wife/spouse                 |
-+-------+--------------------------------------------------+
-| 22    | Opposite-sex unmarried partner                   |
-+-------+--------------------------------------------------+
-| 23    | Same-sex husband/wife/spouse                     |
-+-------+--------------------------------------------------+
-| 24    | Same-sex unmarried partner                       |
-+-------+--------------------------------------------------+
-| 25    | Biological son or daughter                       |
-+-------+--------------------------------------------------+
-| 26    | Adopted son or daughter                          |
-+-------+--------------------------------------------------+
-| 27    | Stepson or stepdaughter                          |
-+-------+--------------------------------------------------+
-| 28    | Brother or sister                                |
-+-------+--------------------------------------------------+
-| 29    | Father or mother                                 |
-+-------+--------------------------------------------------+
-| 30    | Grandchild                                       |
-+-------+--------------------------------------------------+
-| 31    | Parent-in-law                                    |
-+-------+--------------------------------------------------+
-| 32    | Son-in-law or daughter-in-law                    |
-+-------+--------------------------------------------------+
-| 33    | Other relative                                   |
-+-------+--------------------------------------------------+
-| 34    | Roommate or housemate                            |
-+-------+--------------------------------------------------+
-| 35    | Foster child                                     |
-+-------+--------------------------------------------------+
-| 36    | Other nonrelative                                |
-+-------+--------------------------------------------------+
-| 37    | Institutionalized group quarters population      |
-+-------+--------------------------------------------------+
-| 38    | Noninstitutionalized group quarters population   |
-+-------+--------------------------------------------------+
-
-We need to choose how many people living in households to initialize (M)
-out of our total simulated population (N).
-Ideally, M would be
-sampled from a Binomial distribution, with a probability p_HH of each
-simulant being in a household (not GQ), and p_HH would itself be sampled from a Beta
-distribution based on the weighted fraction of the population not in GQ
-for this geography, with a concentration parameter appropriate to the
-sample size from which the weighted fraction was calculated.  But for
-now, to keep things simple, we will use M = 0.97*N.
-
-It's not straightforward to sample exactly M people while preserving household structure. Instead, we approximate
-M by sampling households until we have exceeded M, and then remove
-the last household. The largest household size in ACS is 17, so the number
-of simulants initialized in households will underestimate M by 1-16.
-
-We perturb the PUMA and age attributes of the sampled households, as described in the
-:ref:`perturbation section below <census_prl_perturbation>`.
-
-.. _census_prl_gq_init:
-    
-Initializing people living in group quarters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To initialize approximately N simulants total, including simulants
-residing in group quarters when initializing our simulation, we will
-first initialize approximately M individuals into households as described above.
-Then, we initialize individuals in group quarters until the total population N
-is reached.
-
-To generate individuals living in group quarters, we will
-use a weighted sample of people in group quarters from the appropriate
-geography from ACS (sampled with replacement, analogously to
-household). This will provide each simulant residing in GQ with an
-age, sex, and race/ethnicity matching the joint
-distribution from ACS.
-
-We perturb the age attribute of the sampled GQ people, as described in the
-:ref:`perturbation section below <census_prl_perturbation>`.
+PUMS does not provide any information about GQ household structure.
 
 In the future, we may want to model the geographic locations and sizes of
 different group quarters establishments.
@@ -389,6 +359,19 @@ whether it is institutional or non-institutional GQ (in the TYPE
 variable: 2 = Institutional; 3 = Non-institutional).
 We choose a GQ type/"household" uniformly at random for each simulant out of the
 three types consistent with their institutional/non-institutional status.
+
+Relationship
+^^^^^^^^^^^^
+
+Non-GQ people have a relationship to the reference person of their household, set based on the PUMS'
+:code:`RELSHIPP` column.
+We map the numeric :code:`RELSHIPP` codes to the relationship values
+listed in the PUMS data dictionary, [PUMS_Data_Dictionary]_ except that we abbreviate some relationships,
+and replace gender-binary terms such as "husband/wife" and "son or daughter"
+with gender-neutral terms such as "spouse" and "child".
+
+We perturb the PUMA and age attributes of the sampled households, as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -4186,3 +4169,9 @@ To Come (TK)
 .. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
 
 .. [Stochastic_Rounding] Croci M, Fasi M, et al. Stochastic rounding: implementation, error analysis and applications. Royal Society Open Science. 2022 Mar; 9(3). https://doi.org/10.1098%2Frsos.211631
+
+.. [PUMS] Bureau, US Census. n.d. “PUMS Documentation” Census.Gov. Accessed February 10, 2023. https://www.census.gov/programs-surveys/acs/microdata/documentation.2020.html#list-tab-UOL17N02SF1Q45VNXM
+
+.. [PUMS_Data_Dictionary] Bureau, US Census. March 31, 2022. “2016-2020 ACS PUMS Data Dictionary” Census.Gov. Accessed February 10, 2023. https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2016-2020.pdf
+
+.. [Life_Expectancy_Race_Ethnicity] GBD US Health Disparities Collaborators. Life expectancy by county, race, and ethnicity in the USA, 2000–19: a systematic analysis of health disparities. The Lancet. 2022 Jul; 400(10345):25-38. https://doi.org/10.1016/S0140-6736(22)00876-5
