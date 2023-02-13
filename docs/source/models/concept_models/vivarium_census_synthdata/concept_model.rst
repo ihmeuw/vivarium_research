@@ -281,7 +281,7 @@ Sex in PUMS (:code:`SEX` column) is binary (male/female) and initialized as-is f
 Race/ethnicity
 ^^^^^^^^^^^^^^
 
-We map separate PUMS indicators of race and ethnicity to a single composite
+We map separate PUMS indicators of race and ethnicity to a single composite "race/ethnicity"
 indicator, with the following exhaustive and mutually exclusive categories:
 
 * White
@@ -291,10 +291,14 @@ indicator, with the following exhaustive and mutually exclusive categories:
 * Asian
 * Native Hawaiian and Other Pacific Islander (NHOPI)
 * Multiracial or Some Other Race
-  
-This composite indicator has the same categories used within IHME by the US Counties BoD team.
 
-To assign the composite indicator, the steps are, in order:
+This combination of race and ethnicity into a single indicator is similar to what the US Counties BoD team
+within IHME does.
+However, because we use ACS data and aren't limited by the categories present on death certificates,
+we separate NHOPI from Asian and include a Multiracial or Some Other Race category, unlike in their
+life expectancy work. [Life_Expectancy_Race_Ethnicity]_
+
+To assign the race/ethnicity indicator, the steps are, in order:
 
 * If the PUMS person has a value in the :code:`HISP` column indicating that they are "Spanish/Hispanic/Latino",
   they are assigned to our "Latino" category, regardless of the values in other race-related columns.
@@ -4142,3 +4146,5 @@ To Come (TK)
 .. [PUMS] Bureau, US Census. n.d. “PUMS Documentation” Census.Gov. Accessed February 10, 2023. https://www.census.gov/programs-surveys/acs/microdata/documentation.2020.html#list-tab-UOL17N02SF1Q45VNXM
 
 .. [PUMS_Data_Dictionary] Bureau, US Census. March 31, 2022. “2016-2020 ACS PUMS Data Dictionary” Census.Gov. Accessed February 10, 2023. https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2016-2020.pdf
+
+.. [Life_Expectancy_Race_Ethnicity] GBD US Health Disparities Collaborators. Life expectancy by county, race, and ethnicity in the USA, 2000–19: a systematic analysis of health disparities. The Lancet. 2022 Jul; 400(10345):25-38. https://doi.org/10.1016/S0140-6736(22)00876-5
