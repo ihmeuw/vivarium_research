@@ -324,18 +324,25 @@ incidence(i) = incidence*(1-PAF\ :sub:`r370`\)*RR^{max((BMI_i - TMREL),0)}
 The relative risk for heart failure is per 1-unit increase in BMI. 
 **Please note that this is different than the other relative risks.** 
 
+**PAF Calculations**
+
 The PAF for heart failure for the unmediated and uncorrelated runs will be 
-calculated at initialization. To do this, first the simulant level relative risk 
-will be found based on their BMI exposure using the below formula: 
+calculated once, based on an initialized population and then saved to the 
+artifact for future use. 
 
-:math:`RR\text{simulant} = RR^{max((BMI_i - TMREL),0)}`
+To do this, follow the below steps: 
 
-The RR can then be averaged for each age/sex group. Finally, the PAF for 
-each age/sex group can be found as: 
-
-:math:`PAF(i) = (RR\text{mean}(i) - 1) / RR\text{mean}(i)`
+#. Initialize a population of 100,000 
+#. Truncate the exposure of BMI at 40.8* 
+#. Find the simulant level RR with this equation: :math:`RR\text{simulant} = RR^{max((BMI_i - TMREL),0)}` 
+#. Find the mean RR for each age/sex group 
+#. Find the PAF for each age/sex group with this equation: :math:`PAF(i) = (RR\text{mean}(i) - 1) / RR\text{mean}(i)`
 
 An example of this calculation can be found in the `workbook here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_BMI_to_HF.ipynb>`_
+
+Notes: 
+
+- (*) We truncate the exposures of BMI as this calculation is based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. 
 
 .. todo:: 
 

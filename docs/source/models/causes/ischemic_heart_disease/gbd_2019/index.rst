@@ -416,7 +416,7 @@ States Data
      - Excess mortality rate of the overall HF envelope
    * - HF_Resid
      - disability weight
-     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{r\in rei_groups} \text{disability_weight}_r \cdot \text{prevalence}_r` 
+     - :math:`\frac{1}{\text{prevalence_m2412} \cdot \text{propHF_RESID}} \cdot \sum\limits_{s\in hf-sequelae} \text{disability_weight}_s \cdot \text{prevalence}_s` 
      - 
 
 
@@ -525,22 +525,10 @@ Data Sources
      - model assumption
      - {s5726, s383, s384, s385}
      -
-   * - rei_RESID
-     - gbd_mapping
-     - List of HF rei groups 
-     - 
-   * - prevalence_r{`rei_id`}
-     - como
-     - Prevalence of rei_ids: 379, 217, 218, 219
-     - 
-   * - disability_weight_r{`rei_id`}
-     - YLD appendix
-     - Disability weight of rei_ids: 379, 217, 218, 219 
-     - 
-   * - Rei IDs 
-     - Impariment definition
-     - LList of HF rei’s for the combined etiologies 
-     - 379, 217, 218, 219 for treated, mild, moderate, and severe 
+   * - Heart Failure Residual sequelae 
+     - model assumption 
+     - List of HF sequelae’s for all etiologies other than IHD 
+     - /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/HF_sequela.csv 
 
 Post Processing
 +++++++++++++++
