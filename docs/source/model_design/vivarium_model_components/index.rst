@@ -51,3 +51,4 @@ Sub-components of risk factors can be found here:
      risk_factors/risk_effects/index
      risk_factors/risk_mediation/index
      risk_factors/population_attributable_fraction/index
+     risk_factors/residual_confounding/index
