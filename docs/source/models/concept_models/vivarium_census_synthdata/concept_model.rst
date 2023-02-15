@@ -58,6 +58,7 @@ Vivarium Census PRL Simulated Data
 
 .. contents::
   :local:
+  :depth: 3
 
 +----------------------------------------------------+
 | List of abbreviations                              |
@@ -80,9 +81,9 @@ Vivarium Census PRL Simulated Data
 
 Probabilistic Record Linkage (PRL) typically uses sensitive data
 containing information such as name, address, date of birth, and
-sometimes even social security number, and the restrictions on access
+sometimes even Social Security Number, and the restrictions on access
 to such data has been a barrier to developing and testing new methods
-and software for PRL.  By simulating realistic, but simulated, data
+and software for PRL.  By creating realistic, but simulated, data
 which includes these attributes, we can make PRL research and
 development easier for ourselves and others.
 
@@ -112,36 +113,35 @@ year ago, to help PRL researchers in the cancer surveillance space.
 1.1 Project overview
 --------------------
 
-All simulants will have age and sex (:ref:`1
-<census_prl_age_sex_etc>`), following our standard approach.  We will
-also include attributes capturing race/ethnicity (:ref:`2
-<census_prl_age_sex_etc>`), geographic location (:ref:`3
-<census_prl_age_sex_etc>`), and household id (:ref:`4
-<census_prl_age_sex_etc>`). To better name individuals we will also
-include an attribute for their relationship to a reference person
-(:ref:`5 <census_prl_age_sex_etc>`). Due to the complex interplay of
-these attributes we will need an enhanced fertility model (:ref:`6
-<census_prl_fertility>`).  We can use our standard mortality model
-(:ref:`7 <census_prl_mortality>`), but will need totally new models
-of domestic (:ref:`8 <census_prl_domestic_migration>`) and international (:ref:`9 <census_prl_international_immigration>`; :ref:`10 <census_prl_international_emigration>`) migration that account for moves
-by household and individual simulants, as well as changes to geographic
-location and household id.
+All simulants have :ref:`demographic characteristics informed by ACS data <census_prl_age_sex_etc>`.
+They also have :ref:`names <census_prl_names>` and
+:ref:`identification numbers <census_prl_ssn_itin>`
+(Social Security Number/Individual Taxpayer Identification Number).
+Simulants have :ref:`employers <census_prl_employment>` and :ref:`income <census_prl_income>`.
 
-On top of this, we will layer attributes relevant to PRL: physical (11)
-and mailing addresses for each household and GQ type (12); first, middle, and last names for
-each simulant (13); date of birth (14);
-Social Security Number and Individual Taxpayer Identification Number (15);
-and periodic survey, census, and registry
-observations with realistic noise (16).
+Simulants live in either residential households or group quarters (GQ),
+with residential household structure informed by ACS data.
+Residential households and GQs have geographic locations as well as :ref:`physical <census_prl_physical_address>`
+and :ref:`mailing <census_prl_mailing_address>` street addresses,
+which may be different: some residential households will receive mail at a PO box.
 
-Additional components we might want: time-dependent changes to
-observers of sex, based on gender assigned at birth (18); multiple
-households for individuals, leading to double counting in census (19);
-twins and multiparous births in fertility model (17).  To capture an
-additional dimension of heterogeneity and also to enable a periodic
-observer that simulates tax returns we will also need a component
-representing income (20), which will look a lot like a risk factor
-exposure.
+During the simulation, there is both :ref:`fertility <census_prl_fertility>`
+and :ref:`mortality <census_prl_mortality>`.
+There is also migration: :ref:`within the US <census_prl_domestic_migration>`,
+:ref:`into the US <census_prl_international_immigration>`,
+and :ref:`out of the US <census_prl_international_emigration>`.
+
+Our simulated data are the results of :ref:`periodic simulated censuses,
+surveys, and administrative data collections <census_prl_observers>`.
+These observations build on the modeled population dynamics (for example, using
+income to determine tax filing).
+Simulated data collection is subject to :ref:`various kinds of omission, duplication,
+and data noise <census_prl_noise>`, which help create realistic PRL challenges.
+
+Among other simplifications,
+our simulation does not currently include gender (only biological sex),
+and does not model people having ties to multiple households (e.g. moving back and forth),
+except in the case of some young simulants who are assigned :ref:`guardians <census_prl_guardians_init>`.
 
 .. _census_prl_components:
 
@@ -158,20 +158,18 @@ exposure.
 
 .. _census_prl_age-sex-etc:
 
-2.2 Demographics
-----------------
+2.2 Demographics and Simulation Parameters
+------------------------------------------
 
 .. _census_prl_pop_descr:
 
 2.2.1 Population description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-  - cohort type: open
-  - cohort length: 20 years
-  - age and sex structure: USA population from ACS 2019
-  - time step: 28 days
-  - fertility: as described below
-  - stratifications: none --- see below for details on custom observers to capture census-, survey-, and registry-style data generation
+Unlike most of our health-related simulations, this simulation does not use a population structure derived from the
+Global Burden of Disease (GBD) study.
+The construction of a custom population is described in the "Components" section of this document, primarily in the
+:ref:`section on the initialization of demographic factors <census_prl_age_sex_etc>`.
 
 
 .. _census_prl_location:
@@ -179,189 +177,169 @@ exposure.
 2.2.2 Location description
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-We will begin with a model of a simple random sample of households in
-Florida, but design with a plan to make a whole-USA-scale data product
-eventually, as well as an idea of doing more focused geographies, such
-as a single PUMA or collection of PUMAs.
+Our model is primarily intended to simulate the entire United States.
+However, each component also describes how to run for subsets of the United States, e.g.
+a single state, if any change needs to be made at all in this case.
+The changes are mostly using a subset of the relevant US-level input data,
+though the few inputs from GBD may also change by location.
+Some inputs which have been custom-calculated for use in the simulation,
+such as domestic migration rates, have only been provided here at the United States level
+and are used unchanged if running in a subset of the United States.
 
+We have used single-state runs so far as a form of small-scale testing.
+We may want to generate final simulation outputs at the state level, or other smaller
+geographic areas, in the future; the specifics are to be determined.
+
+.. _census_prl_population_size:
+
+2.2.3 Population size
+~~~~~~~~~~~~~~~~~~~~~
+
+Our final data outputs will be at the scale of the real United States population.
+In order to make this computationally feasible, we will split this population into some number of independent
+"shards," such that simulants can only interact with other simulants within their shard.
+This independence allows these shards to be run in parallel.
+The size of each shard is to be determined based on computational constraints.
+
+.. todo::
+  Define exactly the full population size at which we will run the simulation.
 
 .. _census_prl_models:
 
 2.3 Components
 --------------
-  
 
 .. _census_prl_age_sex_etc:
 
-2.3.1 Components 1-5: Age, sex, race/ethnicity, nativity, geographic location, household id, and relationship
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2.3.1 Age, date of birth, sex, race/ethnicity, nativity, US state, PUMA, household ID, and relationship
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-These attributes will be designed to follow closely the data available
-in the American Communities Survey Public Use Microdata Sample.
+These attributes are initialized by sampling from
+the 2016-2020 American Communities Survey (ACS) Public Use Microdata Sample (PUMS) [PUMS]_
+and creating simulants based on the rows sampled.
 
-This data includes age in years, sex of male/female, OMB
-race/ethnicity, and geographic location encoded at the PUMA, which is
-smaller than state but sometimes larger than county.
+The PUMS provides a households file as well as a persons file.
+The meanings for numeric codes in the PUMS files can be found in the PUMS' data dictionary. [PUMS_Data_Dictionary]_
 
-To match the target of the US Counties BoD team, we will aggregate
-race/ethnicity into the following partition:
+As described in the next section, some sampling is done at the household level and some at the person
+level, but the result of sampling is a set of PUMS person rows that we map one-to-one to
+simulants in our initial population.
+Each PUMS-informed attribute of a new simulant is set based on the corresponding person row.
+How these attributes are generated from PUMS columns is described below.
 
-* Non-Latino White alone
-* Non-Latino Black alone
-* Non-Latino American Indian and Alaskan Native (AIAN) alone
-* Non-Latino Asian alone
-* Non-Latino Native Hawaiian and Other Pacific Islander (NHOPI) alone
-* Non-Latino Multiracial or Some Other Race
+Sampling from the PUMS allows us to replicate not only the univariate distribution of each attribute
+but also joint distributions of arbitrary complexity between the attributes,
+while also preserving structure within sampled household units.
+However, by creating multiple simulants who are based on the same PUMS person row,
+we risk making them more similar to one another than would be expected
+in the real population.
+We address this issue through the use of :ref:`perturbation <census_prl_perturbation>`
+of age, as well as state and PUMA.
+
+Sampling approach
+^^^^^^^^^^^^^^^^^
+
+ACS PUMS data used for sampling should be subset to the simulated area.
+For example, if running the simulation in Florida only, the PUMS should be filtered to
+only those rows where the :code:`ST` column is 12 (the code for Florida).
+
+We use a two-step process to sample ACS PUMS:
+
+#. First, we sample, with replacement, entire non-GQ ("residential") households using the ACS household weights.
+   Each sampled household creates a simulant for each person contained within it in the PUMS person file.
+#. Then, we sample, with replacement, GQ individuals from the persons file using the ACS person weights for those individuals.
+
+Our target is that 3% of the population should be living in GQ.
+We do not exactly hit this target, because when sampling household units we cannot guarantee
+an exact number of people sampled.
+Instead, we sample as many non-GQ households as we can without *exceeding* 97% of the simulated population size,
+then fill in the rest of the population size with GQ individuals.
+The largest household size in the PUMS data is 17, so the number
+of simulants initialized in households may be less than the target by 1-16.
+
+.. todo::
+  We should use a data source, e.g. the person weights in ACS PUMS, to refine this 3% value.
+
+Age and date of birth
+^^^^^^^^^^^^^^^^^^^^^
+
+Age is reported in the PUMS (:code:`AGEP` column) in floored integer years, but our simulation uses precise ages,
+including fractional years.
+Simulants are assigned a uniform-randomly
+chosen precise age consistent with the age in PUMS.
+Their date of birth is defined to be consistent with that precise age.
+
+.. note::
+  Date of birth, in reality, is not evenly spread throughout the year.
+  We do not model this.
+
+We perturb the age attribute as described in the
+:ref:`perturbation section <census_prl_perturbation>`.
+
+Sex
+^^^
+
+Sex in PUMS (:code:`SEX` column) is binary (male/female) and initialized as-is for the simulant.
+
+Race/ethnicity
+^^^^^^^^^^^^^^
+
+We map separate PUMS indicators of race and ethnicity to a single composite "race/ethnicity"
+indicator, with the following exhaustive and mutually exclusive categories:
+
+* White
+* Black
 * Latino
+* American Indian and Alaskan Native (AIAN)
+* Asian
+* Native Hawaiian and Other Pacific Islander (NHOPI)
+* Multiracial or Some Other Race
 
-This is basically compatible with the surname data we will use in Section (12).
+This combination of race and ethnicity into a single indicator is similar to what the US Counties BoD team
+within IHME does.
+However, because we use ACS data and aren't limited by the categories present on death certificates,
+we separate NHOPI from Asian and include a Multiracial or Some Other Race category, unlike in their
+life expectancy work. [Life_Expectancy_Race_Ethnicity]_
+
+To assign the race/ethnicity indicator, the steps are, in order:
+
+* If the PUMS person has a value in the :code:`HISP` column indicating that they are "Spanish/Hispanic/Latino",
+  they are assigned to our "Latino" category, regardless of the values in other race-related columns.
+* If the PUMS person has a value of "Two or More Races" or "Some Other Race alone" in the :code:`RAC1P` column,
+  they are assigned to our "Multiracial or Some Other Race" category.
+* If the PUMS person has any of the three values of :code:`RAC1P` indicating American Indian and Alaskan Native
+  race, they are assigned to our AIAN category.
+* Otherwise, they are assigned to a category matching their :code:`RAC1P` value; a value of "White alone"
+  indicates the "White" category, and so on.
+
+Nativity
+^^^^^^^^
 
 "Nativity" means whether or not someone was born in the United States.
 The PUMS has more information on the specific country of birth, but we do not use this level of granularity.
 The :code:`NATIVITY` column in PUMS provides the binary categorization.
 
-For initialization on simulation start, for the population living in households, we will sample households from
-ACS PUMS rows in the specified PUMAs with replacement, and with
-sampling weights given by ACS data; here is sample code for a nanosim
-initial population:
+US state and PUMA
+^^^^^^^^^^^^^^^^^
 
-.. sourcecode:: python
+We perturb the state and PUMA attributes from PUMS (:code:`ST` and :code:`PUMA` columns),
+as described in the :ref:`perturbation section <census_prl_perturbation>`, before assigning them.
 
-    # load some ACS data
-    columns = ['household_id', 'location', 'fips code', 'puma', 
-               'weight', 'age', 'sex', 'race_eth', 'relshipp',
-              ]
-    acs = pd.read_csv('/home/j/Project/Models/VEHSS/prepped/acs_2019_pums.csv', low_memory=False, usecols=columns)
-    acs_hh_only = acs[acs.household_id.str.contains('HU')]  # subset of rows for "household" sample, meaning those _not_ in group quarters
+Household ID
+^^^^^^^^^^^^
 
-    # sample households to initialize population table
-    n_households = 3
+Non-GQ households
+'''''''''''''''''
 
-    p = acs_hh_only.query(location_str).groupby('household_id').weight.mean() # FIXME: load and use household weights here, instead of this
-    p /= p.sum()
+Each non-GQ PUMS household sampled is given a unique household ID,
+which is shared between the simulants generated from the persons in that household.
+Note that because households are sampled with replacement, there may be multiple unique
+household IDs in the simulation that were based on the same household unit in the PUMS file.
 
-    resampled_households = np.random.choice(a=p.index, p=p,
-                                            size=n_households, replace=True)
+GQ individuals
+''''''''''''''
 
-    g = acs.groupby('household_id')
-    def household(i, hh_id):
-        dfg = g.get_group(hh_id).copy()
-        dfg['household_id'] = i
-        return dfg
-    df_population = pd.concat([household(i, hh_id) for i, hh_id in enumerate(resampled_households)])
-
-Note that this approach will not initialize any simulants living in
-Group Quarters, see :ref:`Group Quarters Initialization <census_prl_gq_init>` below for details on
-how we will address this.
-    
-In the code above, there is a location string filter which we can use
-to focus our simulation on a single state or PUMA.  For our initial
-model, please focus on Florida, with
-
-.. sourcecode:: python
-
-    location_str = 'location == "FL"'  # restrict to subset of ACS data, e.g. specific state or PUMA
-
-Here is a small example of what the code in this section will load from ACS:
-
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-|         | household_id  | puma  | age  | relshipp  | sex  | race_eth  | location  | fips code   |
-+=========+===============+=======+======+===========+======+===========+===========+=============+
-| 801679  | 0             | 1110  | 5    | 25        | 1    | 2         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 801678  | 0             | 1110  | 39   | 20        | 2    | 2         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 782698  | 1             | 7301  | 67   | 20        | 2    | 1         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 782699  | 1             | 7301  | 82   | 36        | 1    | 1         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-| 801484  | 2             | 12703 | 82   | 20        | 1    | 1         | FL        | 12          |
-+---------+---------------+-------+------+-----------+------+-----------+-----------+-------------+
-
-The relationship field will be relevant to Last Name generation, and
-for easy reference, here are the meanings of the relationship codes
-from ACS:
-
-+-------+--------------------------------------------------+
-| Code  | Meaning                                          |
-+=======+==================================================+
-| 20    | Reference person                                 |
-+-------+--------------------------------------------------+
-| 21    | Opposite-sex husband/wife/spouse                 |
-+-------+--------------------------------------------------+
-| 22    | Opposite-sex unmarried partner                   |
-+-------+--------------------------------------------------+
-| 23    | Same-sex husband/wife/spouse                     |
-+-------+--------------------------------------------------+
-| 24    | Same-sex unmarried partner                       |
-+-------+--------------------------------------------------+
-| 25    | Biological son or daughter                       |
-+-------+--------------------------------------------------+
-| 26    | Adopted son or daughter                          |
-+-------+--------------------------------------------------+
-| 27    | Stepson or stepdaughter                          |
-+-------+--------------------------------------------------+
-| 28    | Brother or sister                                |
-+-------+--------------------------------------------------+
-| 29    | Father or mother                                 |
-+-------+--------------------------------------------------+
-| 30    | Grandchild                                       |
-+-------+--------------------------------------------------+
-| 31    | Parent-in-law                                    |
-+-------+--------------------------------------------------+
-| 32    | Son-in-law or daughter-in-law                    |
-+-------+--------------------------------------------------+
-| 33    | Other relative                                   |
-+-------+--------------------------------------------------+
-| 34    | Roommate or housemate                            |
-+-------+--------------------------------------------------+
-| 35    | Foster child                                     |
-+-------+--------------------------------------------------+
-| 36    | Other nonrelative                                |
-+-------+--------------------------------------------------+
-| 37    | Institutionalized group quarters population      |
-+-------+--------------------------------------------------+
-| 38    | Noninstitutionalized group quarters population   |
-+-------+--------------------------------------------------+
-
-We need to choose how many people living in households to initialize (M)
-out of our total simulated population (N).
-Ideally, M would be
-sampled from a Binomial distribution, with a probability p_HH of each
-simulant being in a household (not GQ), and p_HH would itself be sampled from a Beta
-distribution based on the weighted fraction of the population not in GQ
-for this geography, with a concentration parameter appropriate to the
-sample size from which the weighted fraction was calculated.  But for
-now, to keep things simple, we will use M = 0.97*N.
-
-It's not straightforward to sample exactly M people while preserving household structure. Instead, we approximate
-M by sampling households until we have exceeded M, and then remove
-the last household. The largest household size in ACS is 17, so the number
-of simulants initialized in households will underestimate M by 1-16.
-
-We perturb the PUMA and age attributes of the sampled households, as described in the
-:ref:`perturbation section below <census_prl_perturbation>`.
-
-.. _census_prl_gq_init:
-    
-Initializing people living in group quarters
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-To initialize approximately N simulants total, including simulants
-residing in group quarters when initializing our simulation, we will
-first initialize approximately M individuals into households as described above.
-Then, we initialize individuals in group quarters until the total population N
-is reached.
-
-To generate individuals living in group quarters, we will
-use a weighted sample of people in group quarters from the appropriate
-geography from ACS (sampled with replacement, analogously to
-household). This will provide each simulant residing in GQ with an
-age, sex, and race/ethnicity matching the joint
-distribution from ACS.
-
-We perturb the age attribute of the sampled GQ people, as described in the
-:ref:`perturbation section below <census_prl_perturbation>`.
+PUMS does not provide any information about GQ household structure.
 
 In the future, we may want to model the geographic locations and sizes of
 different group quarters establishments.
@@ -381,6 +359,19 @@ whether it is institutional or non-institutional GQ (in the TYPE
 variable: 2 = Institutional; 3 = Non-institutional).
 We choose a GQ type/"household" uniformly at random for each simulant out of the
 three types consistent with their institutional/non-institutional status.
+
+Relationship
+^^^^^^^^^^^^
+
+Non-GQ people have a relationship to the reference person of their household, set based on the PUMS'
+:code:`RELSHIPP` column.
+We map the numeric :code:`RELSHIPP` codes to the relationship values
+listed in the PUMS data dictionary, [PUMS_Data_Dictionary]_ except that we abbreviate some relationships,
+and replace gender-binary terms such as "husband/wife" and "son or daughter"
+with gender-neutral terms such as "spouse" and "child".
+
+We perturb the PUMA and age attributes of the sampled households, as described in the
+:ref:`perturbation section below <census_prl_perturbation>`.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -492,43 +483,47 @@ partner options, select one at random.
 
 .. _census_prl_fertility:
 
-2.3.2 Component 6: Fertility
+2.3.2 Fertility
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-This component will follow the basic approach of the age-specific
+This component follows the basic approach of the age-specific
 fertility model that we have had for a long time, but never used
-seriously. But because of the data and the application, we will also
-propagate information from the household.  Each simulant will have a
-probability of adding a newborn simulant at each time step, derived
-from the age-specific fertility rate for USA.
-
-The race/ethnicity of the simulants added by the fertility model will
-be derived from the race/ethnicity of parent; the household id
-and surname will also be derived
-from the parent.  (This approach identifies only one parent, and that
-might be sufficient for now, although as I learn more about the
-specific challenges of Census PRL, I will find out if we need to
-revisit this and keep track of dad as well as moms).
-
-The nativity of children born in the sim is set to reflect that they were born
-in the US.
-
-Code for pulling GBD ASFR appears in `recent Maternal IV Iron model
+seriously.
+Each female simulant has a
+probability of having a birth event at each time step, derived
+from the age-specific fertility rate for the USA.
+Code for pulling GBD ASFR appears in `the recent Maternal IV Iron model
 <https://github.com/ihmeuw/vivarium_gates_iv_iron/blob/67bbb175ee42dce4536092d2623ee4d83b15b080/src/vivarium_gates_iv_iron/data/loader.py#L166>`_.
 
-SSN or ITIN -- see the section for the SSN or ITIN component.
+.. note::
+  In this version of the model, only one female parent is identified;
+  this represents the simulant who gave birth.
+  In a future version of the model, we may wish to identify the other
+  biological parent.
 
-Multiparity --- make twins with probability 4%.  See Section (16) for
-additional details.
+The birth event is considered to occur at a randomly chosen time
+during the timestep, which informs the date of birth and age of
+the simulants born.
+**4\%** of birth events will be the birth of twins (two newborn simulants),
+while the rest will add a single newborn simulant.
+The inclusion of twins creates the PRL challenge of simulants
+with the same last name, at the same address, with the same date of birth.
 
-In addition, tracked mothers will be assigned as "guardians" based on the 
-documentation included :ref:`here
-<census_prl_guardians_init>`) 
+.. note::
+  We have not yet found a data source for the probability of twins.
+  Also, an additional PRL challenge is not captured here: twins may
+  be more likely to have similar *first* names (e.g. first initial).
 
-Relationship -- the sim knows a parent-child dyad when the new
-simulant is initialized, and to come up with a consistent value for
-the "reference person" relationship field, we use the following
-mapping:
+We copy the household, race/ethnicity, and last name attributes from parent to newborn.
+The nativity of children born in the sim is set to reflect that they were born in the US;
+therefore, all children born in the simulation are assigned an SSN.
+
+.. note::
+  This approach does not consider situations such as adoption at birth,
+  since all newborn simulants are placed in the same household as their parent.
+
+Additionally, newborns are assigned a relationship to the reference person
+which is based on that of their parent, using the following mapping:
 
 +--------------------------------------------------+----------------------------------------+
 | Parent relationship to reference person          | Child relationship to reference person |
@@ -572,14 +567,20 @@ mapping:
 | Noninstitutionalized group quarters population   | Noninstitutionalized GQ population     |
 +--------------------------------------------------+----------------------------------------+
 
+Newborns are always assigned (at least) one guardian: the simulant who gave birth to them.
+In addition, a second guardian may be assigned; the logic for doing so is included in the
+:ref:`guardian assignment section <census_prl_guardians_init>`.
+
 After initializing a newborn during the sim, we make sure the parent doesn't have
 another child for at least 9 months.
-Note that when we initialize a household at the start of the sim that includes a
-reference person who likely recently gave birth (e.g. an age 32 female
-reference person and an age 0 biological child) we currently don't
-mark the reference person as having had a child, and so they are
-eligible to give birth again the next month. We could make this more
-complicated in the future.
+
+.. note::
+  When we initialize a household at the start of the sim that includes a
+  reference person who likely recently gave birth (e.g. an age 32 female
+  reference person and an age 0 biological child) we currently don't
+  mark the reference person as having had a child, and so they are
+  eligible to give birth again the next month. We could make this more
+  complicated in the future.
 
 **Verification and validation strategy**: to verify this approach, we
 can use an interactive simulation in a Jupyter Notebook to check that
@@ -588,7 +589,7 @@ attributes that match the parent.
 
 .. _census_prl_mortality:
 
-2.3.3 Component 7: Mortality
+2.3.3 Mortality
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This component will use the standard approach from our Vivarium Public
@@ -646,7 +647,7 @@ simulants are dying at the expected rates.
 
 .. _census_prl_domestic_migration:
 
-2.3.4 Component 8: Domestic Migration
+2.3.4 Domestic Migration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background/Importance
@@ -1082,7 +1083,7 @@ flows (perhaps by checking a few of the largest).
 
 .. _census_prl_international_immigration:
 
-2.3.5 Component 9: International Immigration (In-Migration)
+2.3.5 International Immigration (In-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background/Importance
@@ -1154,11 +1155,38 @@ since immigrating).
 Immigration rate
 ''''''''''''''''
 
-The yearly rate at which simulants are added to the population **by each move type** is given by
-the (weighted) proportion of ACS PUMS persons in the simulation catchment area that are recent immigrants consistent with that move type.
-Since immigration is likely unaffected by US population change over time, the number of immigrants in a year for a move type
-is the rate multiplied by the simulation's **initial/configured** population size, not current population size.
-This is then divided by the number of time steps in a year to get the number of simulants to add per time step in that move type.
+From the simulation's perspective, immigration is not an event happening to an "at-risk population," because
+the people who are "at-risk" for immigrating are those who live outside the US and are not present in
+the simulation.
+
+For this reason, the term "immigration rate" here refers to a rate *over time*, not a rate
+*over person-time at risk*.
+
+The yearly rate at which immigration events of each move type occur is given by
+the weighted number of "recent immigration" events of that type in the ACS PUMS:
+the weights of each row in the ACS PUMS are the number of people/households in the full population
+represented by that person/household,
+and the question asked (residence one year ago) defines the denominator as one year.
+
+Each *household* that immigrates is considered one household immigration event,
+while each *person* that immigrates is considered one event for the other two move types;
+PUMS household weights are used in the former case and PUMS person weights in the latter
+to determine the number of events.
+
+To transform these rates into events per time step, we:
+
+#. Rescale the rates proportionally to the ratio between the total PUMS person weight
+   (which is the total population of our simulation's catchment area) and our simulation's configured
+   population size.
+   One way to think about this is that our simulation is like a 1:1,000 scale model
+   (with the ratio determined by the configured size of our simulated population)
+   and immigration is scaled down accordingly.
+#. Rescale the rates to a time step, instead of year, denominator.
+
+We do not model the seasonal or random fluctuation of immigration rates between time steps.
+However, since these rates are not integers and we want to avoid bias due to rounding,
+we stochastically round each rate to an integer number of events on each time step.
+[Stochastic_Rounding]_
 
 Sampling new simulants
 ''''''''''''''''''''''
@@ -1167,18 +1195,12 @@ The following subsections explain the sampling rules for each move type.
 All attributes not explicitly described below (e.g. names) are set
 using the same method as population initialization for those attributes.
 
-.. note::
-
-  All added simulants should receive a unique simulant ID for PRL tracking, even if they are sampled from the same ACS person.
-  All added simulants should have a unique seed for common random numbers.
-  This could be done by assigning unique (or practically unique, with very low probability of collision) precise ages or date-times of entry.
-
 *Household moves*
 """""""""""""""""
 
-PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**.
+PUMS households with reference people who are recent immigrants are sampled with replacement **using household weights**
+until the desired number of household immigration events is reached.
 In households that are selected, household members who are not recent immigrants are excluded.
-This sampling continues until the desired number of **simulants** added in household moves is reached.
 
 Sampled households may have age and/or PUMA perturbed, as described in the :ref:`perturbation section below <census_prl_perturbation>`.
 They are assigned a new household ID and new physical/mailing addresses, as is done at population initialization.
@@ -1206,16 +1228,17 @@ If there is no such household in the simulation, their PUMA is perturbed with 10
 :ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
 Then, they are matched in the new PUMA.
 
-The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" becomes "Other relative" and
+The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" and "Parent-in-law" become "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
-These changes are necessary to avoid impossible situations (more than two parents, more than one spouse/partner).
+These changes are necessary to avoid impossible situations (more than two parents or parents-in-law, more than one spouse/partner).
 
 Limitations
 ^^^^^^^^^^^
 
 #. We assume that immigration does not change over long-run time or seasonally.
 #. All households are equally likely to receive non-reference-person immigrants.
-#. This approach to relationships may create some implausible situations, e.g. grandchildren of 20-year-olds.
+#. This approach to relationships can create some impossible situations, e.g. grandchildren of 10-year-olds
+   or children older than their parent.
 #. We never move simulants who previously emigrated back into the US.
    We may want to add this in a future model iteration.
 
@@ -1228,7 +1251,7 @@ simulants are immigrating at the expected rates for each move type.
 
 .. _census_prl_international_emigration:
 
-2.3.6 Component 10: International Emigration (Out-Migration)
+2.3.6 International Emigration (Out-Migration)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Simulants may leave the US to live in other countries.
@@ -1376,7 +1399,9 @@ and check that the characteristics of simulants who move out of the US are
 similar to the characteristics of simulants who move into the US,
 for each broad race/ethnicity category.
 
-2.3.7 Component 11: Physical Address
+.. _census_prl_physical_address:
+
+2.3.7 Physical Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background
@@ -1484,7 +1509,9 @@ examine: does everyone in a household have the same address?  does the
 ZIP code match the PUMA?  does the street conform to typical
 expectations?
 
-2.3.8 Component 12: Mailing Address
+.. _census_prl_mailing_address:
+
+2.3.8 Mailing Address
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background
@@ -1548,7 +1575,7 @@ from their physical address.
 
 In the 2020 Census plan, 6.8 million housing units were in Update Leave enumeration areas, including all 1.6 million
 in Puerto Rico. [Update_Leave_2020]_ [Census_PR]_
-Outside of Puerto Rico, that works out to 3.50% of households.
+Outside of Puerto Rico, that works out to **3.50%** of households -- this number informs our simulation strategy below.
 
 Unfortunately, geographic data about *where* Update Leave is used is
 not available in an easy-to-use format.
@@ -1597,7 +1624,9 @@ Limitations
    so it is hard to know the overall direction of bias.
 #. We assume group quarters always receive mail at their physical location.
 
-2.3.9 Component 13: Names
+.. _census_prl_names:
+
+2.3.9 Names
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Last names**
@@ -1748,39 +1777,9 @@ names (by race/ethnicity). This likely creates some strange last
 names, so have a careful look at this in validation, and decide if
 refinement is needed.
 
-2.3.10 Component 14: Date of Birth
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _census_prl_ssn_itin:
 
-To create a date-of-birth column in the simulated output data, each
-simulant should have a uniformly random date of birth which is
-consistent with their age.
-
-.. sourcecode:: python
-
-    # random date of birth for 2019 ACS data
-
-    data_date = pd.Timestamp('2019-06-01')
-    age = 365.25 * df_population.age
-    age += np.random.uniform(low=0, high=365, size=len(df_population))
-    dob = data_date - pd.to_timedelta(np.round(age), unit='days')
-    df_population['dob'] = dob
-
-We could enhance this by using an empirical distribution of
-birthdates, since they are not uniformly distributed.  There might
-even be relevant determinants of date of birth (parents' educational
-attainment, perhaps?) that we could introduce in this model.  But we
-will keep this simple for now, on the assumption that it does not make
-a difference in how well PRL methods perform.
-
-
-**Verification and validation strategy**: to verify this approach, we
-can bin DOB by day of week, month, and year, and see if the DOBs are
-uniformly distributed across bins.  We can assess this manually by
-visual inspection and quantitatively using an appropriate statistical
-test (would that be a Chi-Square test?).
-
-
-2.3.11 Component 15: Social Security Number (SSN) and Individual Taxpayer Identification Number (ITIN)
+2.3.10 Social Security Number (SSN) and Individual Taxpayer Identification Number (ITIN)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Background
@@ -1952,7 +1951,9 @@ confirm that none are missing among US-born people,
 and confirm that the
 expected number are missing among foreign-born people.
 
-2.3.12 Component 16: Periodic observations of attributes through survey, census, and registry
+.. _census_prl_observers:
+
+2.3.11 Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Census
@@ -2900,7 +2901,9 @@ have not been included. These are:
 **Limitations**
 
 #. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
-#. There are errors in SSN data, which are not modeled here. 
+#. There are errors in SSN data, which are not modeled here.
+
+.. _census_prl_noise:
 
 Noise Functions
 ^^^^^^^^^^^^^^^
@@ -3552,37 +3555,10 @@ work: Exact match for 96.11% of DOB, 2 of 3 fields exactly match for
 transposed for 0.18%. For future flexibility, I make all of these
 values configurable options.
 
-2.3.13 Twins and multiparous births (17)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+.. _census_prl_income:
 
-There is a lot we can potentially add to the model to represent how
-hard it is to link twins and other multiples.  Individuals with the
-same day of birth and last name will be a challenge, and if they have
-the same address and same first letter of their first name, that is
-even harder. For now, we will take a simple approach to this model,
-with the plan to develop more complexity in the future if we determine
-that it is an important part of the record linkage challenges we wish
-to address.
-
-I was planning to identify the twin rate from ACS, but I'm actually
-not sure how to do it, because I can only tell if two kids have the
-same age, not the same date of birth.  So for a simple model, until we
-find something better let us (1) select each birth to be twins with
-probablity 4\%; (2) ensure that for these births there are two
-simulants added to the same household, with the same date of birth,
-and the same last name.
-
-
-2.3.14 Additional Components (18-19)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
-
-We don't need these components for our minimal model, but we might
-eventually want: time-dependent changes to observers of sex, based on
-gender assigned at birth (18); multiple households for individuals,
-leading to double counting in census (19).
-
-2.3.15 Income (20)
-~~~~~~~~~~~~~~~~~~
+2.3.12 Income
+~~~~~~~~~~~~~
 
 Background/Importance
 ^^^^^^^^^^^^^^^^^^^^^
@@ -3793,8 +3769,10 @@ Because we need to calculate a *single* simulant-specific/job-specific split (th
   In the literature, the values we are interested in are referred to as
   "gross volatility."
 
-2.3.16 Employment (21)
-~~~~~~~~~~~~~~~~~~~~~~
+.. _census_prl_employment:
+
+2.3.13 Employment
+~~~~~~~~~~~~~~~~~
 
 .. note::
 
@@ -3975,7 +3953,7 @@ the names of the largest employers.
 
 .. _census_prl_perturbation:
 
-2.3.17 Perturbation
+2.3.14 Perturbation
 ~~~~~~~~~~~~~~~~~~~
 
 When we sample from the ACS PUMS to generate new simulants, we are using the
@@ -4081,7 +4059,7 @@ After sampling a household to add to the simulation, whether at population initi
 from international immigration in a household move, the following steps are **always** performed.
 
 #. An age shift is generated by taking a random draw from a normal distribution with mean 0
-   and standard deviation 10 years.
+   and standard deviation 1 year.
 #. The age shift is added to the age values of all individuals in the household.
 #. If any age values in the household exceed 99 years, they are set to 99 years.
 #. Any individuals with negative age values are set to have age 0.
@@ -4104,7 +4082,7 @@ and individual non-GQ simulants can be added in non-reference-person moves.
 In all these cases, the following steps are **always** performed after sampling an individual:
 
 #. An age shift is generated by taking a random draw from a truncated normal distribution with
-   mean 0, standard deviation 10 years, and truncation such that the age shift cannot be less than
+   mean 0, standard deviation 1 year, and truncation such that the age shift cannot be less than
    or equal to -1 times the individual's age.
    Equivalently, this can be thought of as repeating draws from a normal distribution until the first
    draw that is greater than this lower bound.
@@ -4189,3 +4167,11 @@ To Come (TK)
 .. [Own_State_Enrollment] Statista. October 26, 2020. "Share of first year college students in the United States who enrolled in the state were they lived in Fall 2016" Accessed January 17, 2023. https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
 
 .. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
+
+.. [Stochastic_Rounding] Croci M, Fasi M, et al. Stochastic rounding: implementation, error analysis and applications. Royal Society Open Science. 2022 Mar; 9(3). https://doi.org/10.1098%2Frsos.211631
+
+.. [PUMS] Bureau, US Census. n.d. “PUMS Documentation” Census.Gov. Accessed February 10, 2023. https://www.census.gov/programs-surveys/acs/microdata/documentation.2020.html#list-tab-UOL17N02SF1Q45VNXM
+
+.. [PUMS_Data_Dictionary] Bureau, US Census. March 31, 2022. “2016-2020 ACS PUMS Data Dictionary” Census.Gov. Accessed February 10, 2023. https://www2.census.gov/programs-surveys/acs/tech_docs/pums/data_dict/PUMS_Data_Dictionary_2016-2020.pdf
+
+.. [Life_Expectancy_Race_Ethnicity] GBD US Health Disparities Collaborators. Life expectancy by county, race, and ethnicity in the USA, 2000–19: a systematic analysis of health disparities. The Lancet. 2022 Jul; 400(10345):25-38. https://doi.org/10.1016/S0140-6736(22)00876-5
