@@ -2920,9 +2920,9 @@ noise functions apply to add data types, but this ordering should
 be able to be used for all data. 
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
-#. Missing Data 
 #. Omissions 
 #. Duplications 
+#. Missing Data 
 #. Incorrect Selection 
 #. Copy from Within Household 
 #. Month and day swaps (applies to dates only)
