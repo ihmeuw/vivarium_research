@@ -433,7 +433,7 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - LDL-C measreument error pulled from a normal distribution with mean=0 and SD=0.08 mmol/L 
     - Measurements have a minimum value of 0 enforced [McCormack_2020]_
   * - C
-    - If simulant is in the acute or post MI or stroke states 
+    - If simulant is in: AMI, Post MI, HF_IHD, AMI_HF, HF_Resid, acute ischemic stroke, or chronic ischemic stroke 
     - 
   * - D
     - 19.4% will not start medication. Of those that start medication, 42% will receive high intensity statin; 52% medium intensity; and 6% low intensity 
