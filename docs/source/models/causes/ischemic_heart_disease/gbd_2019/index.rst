@@ -434,7 +434,7 @@ Transition Data
      - Notes
    * - 1
      - S1, P or HF_IHD
-     - AMI
+     - AMI or AMI_HF 
      - :math:`\frac{\text{incidence_m24694}}{1-\text{(prevalence_s378 + prevalence_s379 + prevalence_m2412} \times \text{propHF_RESID)}}`
      - 
    * - 2
@@ -556,6 +556,8 @@ Assumptions
 #. We calculate a new IHD CSMR based on the EMRs and prevalences used. This is different than the GBD value which might lead to effects on the ACMR as well. 
 #. Angina is no longer included in the model. This decision was made with input from Greg, who felt that the pain associated with angina was now being covered by heart failure, and post MI. The angina cause is spread across multiple states in the state table, as it overlaps with other causes. 
 #. AMI with heart failure and AMI without heart failure have the same disability weights in the model. This is an oversimplification as AMI with heart failure might well experience some additional disability. However, AMI disabilty weights are already high and the time in the state is only 28 days maximum, so it will be unlikely to impact the model significantly. 
+#. We do not separate heart failure from IHD into those who are post MI and those who are not post MI. This decision was made following discussions with Greg. The disability weight for heart failure is greater than for post MI, there is a significant overlap in symptoms, and it was decided that being post MI did not meaningfully increase the disability experienced by a patient. 
+#. We found several residual heart failure sequelae to be missing or not able to be pulled into vivarium. The list of missing sequelae can be `found here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/all_missing_hf_sequelae.csv>`_ We alerted Greg to this issue and decided that they contributed a very small amount to the overall heart failure envelop and the missingness was acceptable. We might undercount YLDs as a result of this assumption. 
 
 Validation Criteria
 +++++++++++++++++++

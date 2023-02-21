@@ -188,6 +188,7 @@ be unaffected.
      - 235
      - [95, 125 years) 
 
+Mediation data is here: /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/mediation_matrix_draw_gbd_2021_edited.csv
 
 Risk Outcome Pair #1: Ischemic heart disease
 ++++++++++++++++++++++++++++++++++++++++++++
@@ -208,6 +209,19 @@ PAFs and relative risks can be pulled using the following code::
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[105, 493], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
 
+Mediation
+^^^^^^^^^
+
+Mediation for IHD is included for LDL-C. Data for the 
+mediation factor can be found in the csv file above. The rei_id for 
+FPG is 105. The cause_id for IHD is 493. The med_id is 367 for LDL-C. 
+The csv has data for individual draws that will be used. 
+
+:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * (1 - MF_LDL)`
+
+Where :math:`MF` is the mediation factor for LDL-C, :math:`RR_unadjusted` 
+is from the get_draws code above and the :math:`RR_adjusted` is what is used to 
+find the risk of FPG on IHD. 
 
 Risk Outcome Pair #2: Ischemic stroke
 +++++++++++++++++++++++++++++++++++++
@@ -227,6 +241,20 @@ PAFs and relative risks can be pulled using the following code::
   rrs = get_draws(gbd_id_type='rei_id', gbd_id=105, source='rr', year_id=2019, gbd_round_id=6, status='best', decomp_step='step4') 
 
   pafs = get_draws(gbd_id_type=['rei_id', 'cause_id'], gbd_id=[105, 495], source='burdenator', measure_id=2, metric_id=2, year_id=2019, gbd_round_id=6, status='best', decomp_step='step5') 
+
+Mediation
+^^^^^^^^^
+
+Mediation for ischemic stroke is included for LDL-C. Data for the 
+mediation factor can be found in the csv file above. The rei_id for 
+FPG is 105. The cause_id for IHD is 495. The med_id is 367 for LDL-C. 
+The csv has data for individual draws that will be used. 
+
+:math:`RR_\text{adjusted} = 1 + (RR_\text{unadjusted} - 1) * (1 - MF)`
+
+Where :math:`MF` is the mediation factor for LDL-C, :math:`RR_unadjusted` 
+is from the get_draws code above and the :math:`RR_adjusted` is what is used to 
+find the risk of FPG on ischemic stroke. 
 
 Assumptions and Limitations
 +++++++++++++++++++++++++++
