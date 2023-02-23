@@ -68,6 +68,38 @@ between 1 and 0 with the same correlation between variables.
 The calculations are done `in this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Correlation_Testing.ipynb>`_. This code can be used to generate propensity 
 values for any number of simulants. 
 
+Joint PAF Calculations
+++++++++++++++++++++++
+
+As the risks are now correlated, we will need adjust the PAF values to account for this. More 
+information on why this is necessary can be found on `Vivarium here <https://vivarium-research.readthedocs.io/en/latest/model_design/vivarium_model_components/risk_factors/risk_correlation/index.html#pafs-for-correlated-risks>`_. 
+
+We will be calculating the joint PAFs in a similar approach to the uncorrelated and 
+unmediated PAF for BMI to heart failure. Therefore, we will initialize a large 
+population once and then save the calculated PAF values to the artifact for future use.
+
+As a proof of concept, the research team has done this calculation in `a notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/PAF_interactive.ipynb>`_. However, at the 
+time this workbook was made, the risks in the interactive sim were not correlated 
+and mediation was not included in the model. Therefore, we expect that this calculation 
+will be made significantly simpler by redoing it after correlation and mediation are 
+included on initialization. 
+
+To calculate the PAFs, we will follow the below steps: 
+
+#. Initialize a population of 100,000 once correlation and mediation are included in the model 
+#. Create BMI values to be used for heart failure calculations **ONLY** by truncating the exposure of BMI at 40.8 
+#. Find the simulant level RR for each risk factor and cause pair with this equation: :math:`RR\text{simulant} = RR^{max((risk_i - TMREL),0)/scalar}`  
+#. Find the joint RR for each cause by multiplying the relative risks for all relevant risk factors 
+#. Find the mean joint RR for each age/sex group 
+#. Find the PAF for each age/sex group with this equation: :math:`PAF(i) = (RR\text{mean}(i) - 1) / RR\text{mean}(i)`
+
+Notes: 
+
+- We truncate the exposures of BMI for heart failure based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ for only BMI to heart failure which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. This is not true for RR values found in GBD 
+- SBP's effect on heart failure is categorical and therefore the exponential equation in step 3 is not applicable 
+- In step 4, MI and stroke use all 4 risks (SBP, LDL-C, FPG, and BMI) while heart failure only includes SBP and BMI
+- The final PAFs found above represent ALL risks impact on a particular cause 
+
 Assumptions and Limitations
 ++++++++++++++++++++++++++++++
 
