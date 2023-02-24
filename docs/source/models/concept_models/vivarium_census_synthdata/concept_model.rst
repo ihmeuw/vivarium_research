@@ -2535,7 +2535,7 @@ Please reselect or regenerate a new SSN for each observation.
 If a simulant has had multiple jobs within the prior year, please 
 reselect or regenerate a SSN for each job. This can overlap with 
 the prior selection (for example, if there is only one person in the 
-house to select an SSN from) but should be randomly rechoosen each 
+house to select an SSN from) but should be randomly rechosen each 
 time. 
 
 While this likely adds more variation than should be expected to the 
