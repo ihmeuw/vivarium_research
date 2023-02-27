@@ -2533,13 +2533,15 @@ valid SSNs to obtain employment.
 
 Please reselect or regenerate a new SSN for each observation. 
 If a simulant has had multiple jobs within the prior year, please 
-reselect or regenerate a SSN for each job. This can overlap with 
+reselect or regenerate a SSN for each job (note: prior year refers to 
+the taxed year - so if taxes are filed in 2025, it would include all 
+jobs from 2024). This can overlap with 
 the prior selection (for example, if there is only one person in the 
 house to select an SSN from) but should be randomly rechosen each 
 time. 
 
 While this likely adds more variation than should be expected to the 
-SSN's in the model, we think it is better to have more variation than 
+SSNs in the model, we think it is better to have more variation than 
 less variation as it makes PRL more challenging. 
 
 .. note::
