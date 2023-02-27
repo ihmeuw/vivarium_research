@@ -2598,6 +2598,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 #. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
 #. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
 #. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model.
+#. GQ simulants can "borrow" an SSN from anyone else in their GQ. This adds more variation than would be expected in real life. As it will increase the PRL challenge, we have accepted this as a reasonable limitation. 
 
 1040 Form
 '''''''''
