@@ -328,13 +328,14 @@ and discussed in more detail afterward.
      - Transition rates
      - Amount of time a simulant remains in a given state
    * - `Progression <Progression Transitions_>`_
-     -
+     - Transition from a lower severity state to a higher severity state
+       within a given cause model.
      - Transition rates
-     -
+     - Used to determine prevalence of a given condition by severity.
    * - `Severity Splits`_
-     -
+     - Separation of a cause into different states by severity.
      - Transition rates
-     -
+     - Used to determine prevalence of a given condition by severity.
    * - `Restrictions`_
      - List of groups that are not included in a cause.
      - General
