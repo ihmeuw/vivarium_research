@@ -2531,6 +2531,19 @@ then fill in a new randomly generated SSN. This is designed to reflect
 undocumented immigrants who might use fake or no longer 
 valid SSNs to obtain employment. 
 
+Please reselect or regenerate a new SSN for each observation. 
+If a simulant has had multiple jobs within the prior year, please 
+reselect or regenerate a SSN for each job (note: prior year refers to 
+the taxed year - so if taxes are filed in 2025, it would include all 
+jobs from 2024). This can overlap with 
+the prior selection (for example, if there is only one person in the 
+house to select an SSN from) but should be randomly rechosen each 
+time. 
+
+While this likely adds more variation than should be expected to the 
+SSNs in the model, we think it is better to have more variation than 
+less variation as it makes PRL more challenging. 
+
 .. note::
 
   Even if the simulant has an ITIN, it should not be included here!
@@ -2585,6 +2598,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
 #. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
 #. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
 #. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model.
+#. GQ simulants can "borrow" an SSN from anyone else in their GQ. This adds more variation than would be expected in real life. As it will increase the PRL challenge, we have accepted this as a reasonable limitation. 
 
 1040 Form
 '''''''''
