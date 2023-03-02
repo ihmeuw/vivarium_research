@@ -445,7 +445,8 @@ Simulant will be randomly assigned to a guardian based on the below rules:
     * 23% female reference people without a listed spouse 
     * 5% male reference people without a listed spouse 
     * Remainder to people with spouses, include both parents 
-- If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run. 
+- If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run.
+- If there are no simulants of the correct age, do not assign a guardian. This would only happen with extremely small population sizes.
 
 
 **Limitations**
@@ -990,8 +991,14 @@ in the "Destination PUMA proportions by source PUMA" input file where **both**:
 (If the simulation's catchment area is only certain states/PUMAs, this file should
 be filtered to only the destinations in the simulation catchment area.)
 
-The simulant selected should be added to (given the same household ID as) a random non-GQ household
+The simulant selected should be added to (given the same household ID as) a random non-GQ household,
+which is not already their household,
 in their new state and PUMA.
+
+.. note::
+  In the rare case where it is not possible to meet these requirements because there are no non-GQ
+  households (except for the simulant's own) present in the simulation, the move is not performed.
+  This would only happen with extremely small population sizes.
 
 A relationship attribute should be sampled for the simulant according to the proportions in
 the "Relationship proportions for non-reference person moves" input file
@@ -1227,6 +1234,11 @@ Simulants added by a non-reference-person move join a randomly-selected existing
 If there is no such household in the simulation, their PUMA is perturbed with 100% probability using the PUMA replacement process described in the
 :ref:`perturbation section <census_prl_perturbation>`, but ensuring that their new PUMA has existing non-GQ households.
 Then, they are matched in the new PUMA.
+
+.. note::
+  In the rare case where it is not possible to meet these requirements because there are no non-GQ households in *any* PUMA in the simulation,
+  a new household is created and the immigrant is assigned as the reference person of that new household.
+  This would only happen with extremely small population sizes.
 
 The simulant's relationship attribute is unchanged from sampling, except that "Father or mother" and "Parent-in-law" become "Other relative" and
 all spouse/partner relationships (same-sex or opposite-sex, married or unmarried) become "Other nonrelative."
