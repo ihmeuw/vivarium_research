@@ -845,6 +845,24 @@ For less common diseases and their sequelae, GBD may not currently estimate dise
 Incidence- vs. Prevalence-Based YLDs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. Incidence-based YLDs are calculated by adding together YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival) and YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival). 
+
+
+*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year of incidence. 
+
+.. list-table:: Incidence vs. Prevalence-based YLDs (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_)
+   :widths: 30 30 30 
+   :header-rows: 1
+
+   * - Measure
+     - Advantages
+     - Disadvantages
+   * - Incidence-based YLDs
+     - YLDs and YLLs are measured consistently; Provide a more valid data source for policies or interventions focused on disease prevention.
+     - Data on disease duration are required; Incorporation of comorbidities can be relatively difficult.
+   * - Prevalence-based YLDs
+     - Does not require data on disease duration; Incorporation of comorbidities is easier.
+     - YLD and YLL measurements are measured using different methods; For diseases with a short duration, YLDs may be underestimated.
 
 
 Restrictions
