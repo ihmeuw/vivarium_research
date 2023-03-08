@@ -1995,7 +1995,7 @@ Census
   * - Physical Address State 
   * - Physical Address ZIP Code
   * - Relationship to Person 1 (Head of Household)
-  * - Sex (binary)
+  * - Sex (binary; "Male" or "Female")
   * - Race/Ethnicity 
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
@@ -2159,7 +2159,7 @@ There are two types of sampling plans:
   :widths: 20
   :header-rows: 0
 
-  * - Household number (random indicator which is the same for simulants in the same household)
+  * - Household ID (arbitrary indicator which is only the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
   * - First name
   * - Middle initial 
@@ -2172,7 +2172,7 @@ There are two types of sampling plans:
   * - Physical Address City
   * - Physical Address State 
   * - Physical Address ZIP Code
-  * - Sex (binary)
+  * - Sex (binary; "Male" or "Female")
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
@@ -2351,7 +2351,7 @@ in the home.
   :widths: 20
   :header-rows: 0
 
-  * - Household number (arbitrary indicator which is the same for simulants in the same household)
+  * - Household ID (arbitrary indicator which is only the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
   * - First name
   * - Middle initial 
@@ -2364,7 +2364,7 @@ in the home.
   * - Physical Address City
   * - Physical Address State 
   * - Physical Address ZIP Code
-  * - Sex (binary)
+  * - Sex (binary; "Male" or "Female")
   * - Race/ethnicity 
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
@@ -2716,17 +2716,17 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - ITIN (if present)
     -
   * - Income 
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer ID
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer Address 
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Employer ZIP Code 
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Type of tax form (W2 or 1099)
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
   * - Tracked Dependent(s) (for noise functions ONLY)
     - 
   * - Tracked Dependent Address(es) (for noise functions ONLY)
@@ -2734,7 +2734,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - Type of GQ (for noise functions ONLY)
     - 
   * - Dependent
-    - This columns through the end are to be included for each dependent on the tax filing 
+    - This columns through the end are to be included for each dependent on the tax filing, up to 4 dependents
   * - First name 
     - 
   * - Middle initial 
@@ -2772,10 +2772,13 @@ are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
 
-.. todo::
+If a simulant had more than 4 employments in the tax year,
+the 4 with the highest income values are included on the 1040; other employment information
+is omitted.
 
-    Define a maximum number of dependents that a simulant can have 
-
+If a simulant has more than 4 dependents,
+4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
+This can be uniformly at random (preferred), or in another way if that is easier computationally.
 
 **Who to Sample** 
 
