@@ -151,8 +151,8 @@ To account for this, we are instead using standard deviations derived from NHANE
 
 .. image:: FPG_SD.png
 
-To create these new standard deviation draws, NHANES data was bootstrapped to a subset of the original 
-dataset, and then standard deviations were calculated by age/sex. The full workbook can be `found here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/fpg_std_nhanes.R>`_
+To create these new standard deviation draws, we bootstrapped the NHANES data to a random resampling of the original 
+dataset, and then calculated the standard deviations by age/sex. The full workbook can be `found here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/fpg_std_nhanes.R>`_
 
 Data Description Tables
 +++++++++++++++++++++++
