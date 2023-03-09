@@ -25,12 +25,12 @@ Computing References and Resources
 
 .. _computing_interfaces:
 
-1.0 Interfaces and how they interact:
-+++++++++++++++++++++++++++++++++++++
+1.0 Interfaces and how they interact
+++++++++++++++++++++++++++++++++++++
 
 There are many different computing systems used at IHME and on Sim Science 
 in particular. Many of these systems have their own trainings and in-depth 
-resources available on the Hub or IHEM Learn. Here, we seek to give an 
+resources available on the Hub or IHME Learn. Here, we seek to give an 
 overview of how these systems interact and helpful links to other sources 
 of information. 
 
@@ -54,6 +54,7 @@ however Bitvise is also used at IHME. For Mac users, the Terminal app comes inst
 on your computer but some perfer to use iTerm2. 
 
 Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
+
 Link to download `iTerm2 <https://iterm2.com/>`_
 
 **GitHub:** GitHub is an internet hosting service we use to control versioning for 
@@ -87,6 +88,7 @@ although the common practice on the Sim Science team is to use separate terminal
 GitHub on our local machine and for cluster access. 
 
 Link to download `Git and Git Bash <https://git-scm.com/>`_
+
 Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
 
 **Anaconda:** Anaconda aims to simplify package management and deployment for Python 
@@ -102,6 +104,7 @@ created by Git and so works well with their system. In addition to these, there 
 If you have a prior favorite text editor, please use that! 
 
 Link to download `Sublime Text <https://www.sublimetext.com/3>`_ 
+
 Link to download `Atom <https://github.blog/2022-06-08-sunsetting-atom/>`_
 
 **Python:** 
@@ -134,5 +137,200 @@ to write code and store code that is online and can integrate well with GitHub a
 You can code in multiple languages in Juptyer including Python and R. This is more commonly 
 used by the Sim Science team than PyCharm. Information on installing and using Juptyer is 
 in the Accessing the Cluster section below. 
+
+.. _cluster_access:
+
+2.0 How to Access the Cluster
++++++++++++++++++++++++++++++
+
+For this section, we will review cluster set up for a first-time user. Multiple other teams 
+have versions of this information available on the Hub and there is duplicated information 
+with the IHME Learn training for the Cluster. This will be a high-level overview focused on 
+Sim Science specific tasks. 
+
+Some Hub pages on accessing the cluster: 
+
+- `Science and Engineering <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=72807457>`_
+- `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_
+
+.. _cluster_access_putty:
+
+Accessing the Cluster from PuTTY
+--------------------------------
+
+These instructions are for PuTTY, if you are using a different terminal search for similar 
+information on the Hub or ask a team member for help. 
+
+For your first time on PuTTY, you will set up and save the instructions for a slurm session. To do this: 
+
+#. Open up PuTTY 
+#. Under “Host Name” enter: gen-slurm-slogin-p01.cluster.ihme.washington.edu 
+#. Under “Port” enter: 22 
+#. Select SSH connection type 
+#. Under “Saved Sessions” enter: slurm (or any other name you choose!) 
+#. Hit “Save” 
+
+.. image:: putty_1.png
+
+Next and for all future times accessing the cluster, you can simply select slurm from the list of saved sessions and hit “Open”. 
+
+.. image:: putty_2.png
+
+Once you open a PuTTY terminal, you will have to enter your username and IHME 
+password. After that you are connected to the cluster and can enter command 
+lines from your trainings!  
+
+.. image:: putty_3.png
+
+.. _cluster_access_command:
+
+Command Line and JobMon 
+-----------------------
+
+Once you have accessed the cluster, you can do a number of things! These are best 
+covered through a few different trainings: 
+
+#. You can move files, check permissions, and explore directories using the command line. More information on this can be found in Module 1 within the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_.
+#. You can start jobs on the cluster, simple tasks are covered in Module 3 within the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. 
+#. More complex jobs are handled through Jobmon. While currently the Sim Science research team does not use Jobmon frequently, it might be helpful to understand this process with Module 4 within the IHME Learn training `Computational Infrastructure Level 2  <https://ihme.brightspace.com/d2l/home/7090>`_.
+
+If you need help applying any of these trainings to a practical situation, please ask! 
+
+.. _cluster_access_jupyter:
+
+Accessing Juptyer or RStudio from the Cluster
+---------------------------------------------
+
+The other most common task for a Sim Science researcher on the cluster is to 
+start a Juptyer session. Information on how to do this can be found on the Hub 
+page below. You will also need to update your Bash files in order to complete 
+this, which is covered in depth in the section :ref:`Your Bash Files <cluster_access_bash>`. 
+
+.. todo::
+
+  Add central comp link to this!   
+
+Once you have started a session, you will be able to create code, test simulation 
+results, or do quick calculations. Once you have finished coding, you’ll want to 
+follow the same steps as outlined above in the :ref:`Contributing New Documentation <contributing>` 
+section to save the information on GitHub. All of the same Git commands work on 
+the terminal used for cluster access the same way as for GitHub. 
+
+You will need to make sure that you have cloned your repository and are in the 
+appropriate working directory while logged into the cluster. Then you can add, 
+check the status, commit, and push information in a similar way. For many projects, 
+you will create a new GitHub repository that is research team specific to not 
+disturb the engineers coding workflow. 
+
+One difference in uploading to GitHub is that the cluster will require a password 
+to push information. This is **NOT** your GitHub password, but instead is a unique 
+token that you will need to create. `This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ has information on creating a token. Many Sim Science users set their token to 
+never expire and save the token where they can reference it later. However, this 
+might compromise security in some cases, so regenerating a token periodically is 
+best practice. 
+
+.. _cluster_access_other:
+
+Other Useful Cluster Tips
+-------------------------
+
+#. If you get tired of typing long commands, one option is to make an alias. An alias is a shortcut command for commonly typed things. More information on how to do was written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ 
+#. When your computer falls asleep, it will stop access to the cluster and cut off any jobs that were currently running. This can be problematic if a notebook needs to run overnight. There are a few different options to account for this including: screen, MOSH, or tmux. If you need to use these, ask a teammate. 
+
+.. _cluster_access_files:
+
+File Systems and Storage 
+------------------------
+
+.. todo::
+
+  Add in information following RT meeting 
+
+.. _cluster_access_bash:
+
+Your Bash Files 
+---------------
+
+Bash files contain commands you would enter into a command line, but 
+specifically ones you will use very often. For example, every time you 
+want to open a Juptyer session, the cluster needs certain information 
+and requirements. To find this information, it looks in your Bash files 
+rather than asking you to enter the same information every time. 
+
+However, Bash files can be confusing since it is less obvious when the 
+information is being used or what it is used for. Therefore, we have 
+provided a copy-and-paste formatting for information to be added to 
+your Bash files. If you would like more information and what this 
+code means and why we need it, this `Hub page <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=83205636#UsingtheCluster&Bash-Bash>`_ has a number of helpful links. 
+
+
+.. todo::
+
+  Confirm and paste in bash files 
+
+.. _conda_environments:
+
+3.0 Conda Environments
+++++++++++++++++++++++
+
+Your environment is a “space” in which you can run code that has some 
+preset information. Environments are helpful as you can preinstall packages 
+into them for easier ability to run programs. GBD has a common environment 
+that you can use, but usually each project will also create its own environment 
+as well. Below are some common questions on environments. 
+
+**What is an environment again?**
+It’s a directory that contains a specific collection of conda packages that 
+you have installed. Basically, it is a shortcut to have all the relevant 
+packages you need for a project in one place. 
+
+**What are the advantages to having separate environments?**
+Over time, Python versioning updates with new information and bug fixes. 
+It can therefore be helpful to create new environments to ensure you have 
+the latest python package versions. 
+
+While you can uninstall and reinstall new versions of packages in existing 
+environments, this can sometimes cause errors in existing code. Therefore, 
+it is helpful to have code exist within environments that have correct 
+versioning and to create new environments with new projects and install the 
+latest versions of packages. 
+
+**How and when should I make a new one?**
+In general, our team has a new environment for each project. When you are 
+starting a new project, you can see if the engineering team has set up an 
+environment for that work. If not, it is best practice to consider setting one up. 
+
+**How do you make a new environment?** 
+
+.. todo::
+
+  Find instructions on the vivarium CVD page and include here. Also note that you need to install conda first. 
+
+**How do I install new information to an existing environment?**
+Once you have made a new environment, you can add some commonly used packages 
+using :code:`-pip install package`. Common ones include numpy, pandas, or 
+matplotlib among many others. If :code: `import` in Python fails, try 
+installing the package to the environment and reloading the page. 
+
+**When should I use the GBD environment vs a project specific one?**
+In general, it is best practice to use your project’s environment for project 
+work. Since this is the same environment used by the engineers on that project 
+it ensures consistency. You can use the GBD environment if you choose and it 
+can be helpful for some more general tasks. 
+
+**I installed a package to this environment on the cluster - why won't it work?** 
+Your local machine and the cluster are different and don’t "speak" between environments. 
+So if you install a package to an environment while on the cluster, it might not 
+show on your local machine. 
+
+**What is Python vs Conda Vs Anaconda?**
+Python is the name of a programming language. It is the name for the syntax 
+used in code. 
+
+Anaconda is a software you can use to interface with Python. It is specifically 
+designed for improved user interface and has tools tailored for data science. 
+
+Conda is package manager that we use to create and maintain environments. It is 
+designed to allow for easier package installation and control across team members. 
 
 
