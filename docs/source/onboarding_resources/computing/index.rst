@@ -242,9 +242,32 @@ Other Useful Cluster Tips
 File Systems and Storage 
 ------------------------
 
-.. todo::
+The cluster can be confusing with where to store code and data. Our 
+team has created some best practices to use for data storage. 
 
-  Add in information following RT meeting 
+For code, please create a new directory under :code:`/ihme/code` with your 
+username. For example, this might be :code:`/ihme/code/lutzes`. 
+You should clone GitHub respositories to this location and have 
+all Jupyter notebooks and other code stored here. 
+
+For data files, there are two locations based on the size of the 
+data file. 
+
+#. For small data files, store these on GitHub in the same location as your code. A "small" file is something without thousands of rows of data. Examples might include: a list of nicknames, disease severity proportions by age/sex group, or drug efficacy data. 
+#. For large files, store these in a shared location on the cluster. Considering making a new folder for each project for data storage. 
+#. When you deciding where to store data, please also consider any data restrictions that might exist. 
+
+Regardless of where you store data, it is important to track updates 
+to data files carefully. Engineers might copy and paste a file into a 
+new location, so updating the file might not actually change what is 
+being used in the sim. Therefore, follow these steps: 
+
+#. Use the naming conventions below to ensure consistency. 
+#. Always version up rather than replacing a data file (e.g., create a new file with the current date rather than just replacing with a different file of the same name). 
+#. Include the exact file name and location in the docs. This means if you version up a data file, you will need to update the docs to reflect the new name. This ensures the engineers are aware of any changes. 
+
+For consistency, please use this naming convention for all files: :code:`FILENAME_20230309.ext`. 
+For example, this might be :code:`heart_failure_proportions_20230310.csv` 
 
 .. _cluster_access_bash:
 
