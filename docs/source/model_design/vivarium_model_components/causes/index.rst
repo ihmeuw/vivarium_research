@@ -834,7 +834,7 @@ In order to compute **years lived with disability (YLDs)** for a particular heal
 YLD Uncertainty
 ^^^^^^^^^^^^^^^
 
-The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, we take the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. We assume no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 75th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
+The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, we take the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. We assume no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 975th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
 
 
 Residual YLDs
