@@ -840,7 +840,7 @@ The uncertainty ranges reported around YLDs incorporate uncertainty in prevalenc
 Residual YLDs
 ^^^^^^^^^^^^^
 
-For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, we estimate YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
+For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, we estimate YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
 
 Incidence- vs. Prevalence-Based YLDs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
