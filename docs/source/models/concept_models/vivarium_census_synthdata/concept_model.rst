@@ -2484,7 +2484,7 @@ Source: [Coverage]_
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life 
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
 #. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data. 
-#. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at a the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028. 
+#. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028. 
 
 Taxes
 ^^^^^
