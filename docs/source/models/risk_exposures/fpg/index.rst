@@ -144,6 +144,16 @@ Due to challenges with the GBD ensemble distribution providing negative and unre
 values, we imposed a maximum of 30 and minimum of 1 mmol/L. As we need to update to GBD 2021 we are 
 using this as a solution until updating. 
 
+Another noticed issue with GBD data is striations in the standard deviation values. The graph below 
+visually shows this issue. After speaking with GBD modelers, it seems that these are known issues 
+and will not be addressed in GBD 2021. These striations are causing higher than expected FPG exposures. 
+To account for this, we are instead using standard deviations derived from NHANES data. 
+
+.. image:: FPG_SD.png
+
+To create these new standard deviation draws, we bootstrapped the NHANES data to a random resampling of the original 
+dataset, and then calculated the standard deviations by age/sex. The full workbook can be `found here <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/fpg_std_nhanes.R>`_
+
 Data Description Tables
 +++++++++++++++++++++++
 
@@ -161,7 +171,7 @@ The rei_id for FPG is 105.
      - 8909 
      -
    * - Standard deviation 
-     - 18705 
+     - /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/fpg_std_nhanes_draw_level.csv
      -
    * - Relative risk, continuous 
      - 9056 
@@ -178,7 +188,7 @@ Validation Criteria
 +++++++++++++++++++
 
 1. Does the mean in the model match the mean in GBD? 
-2. Does the standard deviation in the model match the std in GBD? 
+2. Does the standard deviation in the model match the std in the artifact? 
 
 
 References
