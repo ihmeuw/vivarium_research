@@ -198,10 +198,10 @@ The rei_id for BMI is 370
 	  - Notes
 	* - Mean exposure
 	  - 23873
-	  - Must use either gbd_round_id=7 and decomp_step='usa_re' **or** release_id=8 
+	  - Must use either gbd_round_id=7 and decomp_step=usa_re **or** release_id=8 
 	* - Standard deviation
 	  - 27050
-    - Must use either gbd_round_id=7 and decomp_step='usa_re' **or** release_id=8 
+    - Must use either gbd_round_id=7 and decomp_step=usa_re **or** release_id=8 
 	* - Relative risk
 	  - 9031
 	  - Must be accessed with get_draws; adult values
