@@ -332,8 +332,8 @@ artifact for future use.
 
 To do this, follow the below steps: 
 
-#. Initialize a population of 100,000 
-#. Truncate the exposure of BMI at 40.8* 
+#. Initialize a population of 100,000*
+#. Truncate the exposure of BMI at 40.8** 
 #. Find the simulant level RR with this equation: :math:`RR\text{simulant} = RR^{max((BMI_i - TMREL),0)}` 
 #. Find the mean RR for each age/sex group 
 #. Find the PAF for each age/sex group with this equation: :math:`PAF(i) = (RR\text{mean}(i) - 1) / RR\text{mean}(i)`
@@ -342,7 +342,8 @@ An example of this calculation can be found in the `workbook here <https://githu
 
 Notes: 
 
-- (*) We truncate the exposures of BMI as this calculation is based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. 
+- (*) The population of 100,000 was determined by testing the standard deviation across draws to see where variation stabilized. This testing was completed `in this workbook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/heart_failure_pafs_pop_profiling.ipynb>`_. We found that the standard deviation was comparable for 10,000, 100,000 and 1,000,000 for most age/sex groups. However, for some groups 100,000 was significantly better than 10,000 so we will use 100,000. 
+- (**) We truncate the exposures of BMI as this calculation is based on literature values that have limited applicability in our model. 40.8 is 3 standard deviations above the mean BMI exposure for obese individuals in the paper being used. [Kenchaiah_2008]_ Without this truncation, there would be RR's that are 2000+ which makes mean PAF values very close to 1. We do not want to assume a continued relationship in BMI to RR for values 40 BMI units above the max used in the paper. 
 
 .. todo:: 
 
