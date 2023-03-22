@@ -73,6 +73,15 @@ Vivarium Modeling Strategy
 
 Mean SBP is a continuous exposure modelled in GBD using an ensemble distribution. SBP will be a target of medication interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
+For the purposes of our project, we will be using data from the US Health 
+Disparities team, which includes US based results instead of global and 
+includes race/ethnicity specific estimates. For Phase 1 of the work, we 
+will not be using race/ethnicity specific results, but we will for Phase 2. 
+
+For this model, we will use the US Health Disparities team's ensemble distribution. 
+This is based on NHANES data and therefore is more US specific than the GBD model. 
+The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_sbp/ensemble/weights.csv`
+
 Restrictions
 ++++++++++++
 
@@ -112,6 +121,11 @@ randomly drawn numbers. These values are set to 50 as the minimum and 300 as the
 effects only about 0.05% of simulants. Simulants that had values outside of the max and min are 
 reassigned to the max or min value automatically. 
 
+.. todo::
+
+  Assess if these max and min values are still needed based on exposures from the US Health Disparities data.  
+
+
 Data Description
 ++++++++++++++++
 
@@ -125,10 +139,10 @@ The rei_id for SBP is 107
 	  - ME_ID
 	  - Notes
 	* - Mean exposure
-	  - 2547
+	  - 23871
 	  - 
 	* - Standard deviation
-	  - 15788
+	  - 27049
 	  - 
 	* - Relative risk
 	  - 9030

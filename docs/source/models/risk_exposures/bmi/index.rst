@@ -189,22 +189,23 @@ Data Description
 
 The rei_id for BMI is 370
 
-.. list-table:: ID Table 
-	:widths: 10, 5, 15
-	:header-rows: 1
+.. list-table:: ID Table
+   :widths: 10 5 15
+   :header-rows: 1
 
-	* - Component
-	  - ME_ID
-	  - Notes
-	* - Mean exposure
-	  - 23873
-	  - Must use either gbd_round_id=7 and decomp_step=usa_re **or** release_id=8 
-	* - Standard deviation
-	  - 27050
-    - Must use either gbd_round_id=7 and decomp_step=usa_re **or** release_id=8 
-	* - Relative risk
-	  - 9031
-	  - Must be accessed with get_draws; adult values
+   * - Component
+     - ME_ID
+     - Notes
+   * - Mean exposure
+     - 23873
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8 
+   * - Standard deviation
+     - 27050
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8 
+   * - Relative risk 
+     - 9031
+     - Must be accessed with get_draws; adult values 
+
 
 The exposure and standard deviation values should be used to represent the distribution of mean BMI values that the simulants will be assigned in the model. 
 
