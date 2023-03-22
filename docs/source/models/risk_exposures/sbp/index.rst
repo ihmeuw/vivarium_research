@@ -140,10 +140,10 @@ The rei_id for SBP is 107
 	  - Notes
 	* - Mean exposure
 	  - 23871
-	  - 
+	  - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8
 	* - Standard deviation
 	  - 27049
-	  - 
+	  - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8
 	* - Relative risk
 	  - 9030
 	  - Must be accessed with get_draws
@@ -153,9 +153,9 @@ The exposure values should be used to represent the distribution of mean blood p
 Validation Criteria
 +++++++++++++++++++
 
-Does the mean in the model match the mean in GBD? 
+Does the mean in the model match the expected mean? 
 
-Does the standard deviation in the model match the standard deviation in GBD? 
+Does the standard deviation in the model match the expected standard deviation? 
 
 References
 ----------

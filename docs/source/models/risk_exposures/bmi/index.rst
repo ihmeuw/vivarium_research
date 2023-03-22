@@ -28,12 +28,6 @@ After adjusting for self-report bias and splitting aggregated data into five-yea
 
 To estimate the mean BMI for adults in each country, age, and sex, over the time period 1980–2019, we first used a nested hierarchical mixed-effects model, fit using restricted maximum likelihood on data from sources containing estimates of all three indicators (prevalence of overweight, prevalence of obesity, and mean BMI), in order to characterise the relationship between overweight, obesity, and mean BMI. We applied 1000 draws of the regression coefficients to the 1000 draws of overweight prevalence and obesity prevalence produced through ST-GPR to estimate 1000 draws of mean BMI for each country, year, age, and sex. This approach ensured that overweight prevalence, obesity prevalence, and mean BMI were correlated at the draw level and uncertainty was propagated. 
 
-**Estimating BMI distribution:**\
-
-For this model, we will use the US Health Disparities team's ensemble distribution. 
-This is based on NHANES data and therefore is more US specific than the GBD model. 
-The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_bmi/ensemble/weights.csv`
-
 **Theoretical minimum risk exposure level:**\
 
 For adults (ages 20+), the theoretical minimum risk exposure level (TMREL) of BMI (20–25 kg/m\ :sup:`2`\) was determined based on the BMI level that was associated with the lowest risk of all-cause mortality in prospective cohort studies. This is the same for all risk-outcome pairs. These are listed below: 
@@ -137,6 +131,10 @@ Disparities team, which includes US based results instead of global and
 includes race/ethnicity specific estimates. For Phase 1 of the work, we 
 will not be using race/ethnicity specific results, but we will for Phase 2. 
 
+For this model, we will use the US Health Disparities team's ensemble distribution. 
+This is based on NHANES data and therefore is more US specific than the GBD model. 
+The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_bmi/ensemble/weights.csv`
+
 Restrictions
 ++++++++++++
 
@@ -213,9 +211,9 @@ The exposure and standard deviation values should be used to represent the distr
 Validation Criteria
 +++++++++++++++++++
 
-Does the mean in the model match the mean in GBD? 
+Does the mean in the model match the expected mean? 
 
-Does the standard deviation in the model match the standard deviation of the GBD model? 
+Does the standard deviation in the model match the expected standard deviation? 
 
 References
 ----------
