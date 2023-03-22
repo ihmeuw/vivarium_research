@@ -58,7 +58,6 @@ Vivarium Census PRL Simulated Data
 
 .. contents::
   :local:
-  :depth: 3
 
 +----------------------------------------------------+
 | List of abbreviations                              |
