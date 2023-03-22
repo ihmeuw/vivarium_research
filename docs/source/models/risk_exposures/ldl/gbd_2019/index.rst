@@ -58,7 +58,11 @@ Vivarium Modeling Strategy
 Scope
 +++++
 
-We will model LDL-C as a continuous risk factor in the Vivarium simulation using an ensemble distribution, similar to the GBD approach.
+We will model LDL-C as a continuous risk factor in the Vivarium simulation using an ensemble distribution, similar to the GBD approach but using data from the US Health Disparities team.
+
+For this model, we will use the US Health Disparities team's ensemble distribution. 
+This is based on NHANES data and therefore is more US specific than the GBD model. 
+The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_ldl/ensemble/weights.csv`
 
 
 Restrictions
@@ -109,6 +113,11 @@ The minimum is set at 0 as LDL-C is by definition always positive. The maximum o
 standard deviations above the mean for average LDL-C, as well as ~3.5 standard deviations above the mean for those 
 with genetic hyperlipidemia. This is designed to be inclusive of all possible values seen in real patients. [Huijgen_2012]_
 
+.. todo::
+
+  Assess if these max and min values are still needed based on exposures from the US Health Disparities data.  
+
+
 Data Description Tables
 +++++++++++++++++++++++
 
@@ -122,11 +131,11 @@ The rei_id for LDL is 367.
      - ME_ID
      - Notes
    * - Mean exposure 
-     - 18822 
-     -
+     - 26955 
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8
    * - Standard deviation 
-     - 18823 
-     -
+     - 27057 
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8
    * - Relative risk 
      - 18824 
      - Must be accessed with get_draws 
@@ -136,8 +145,8 @@ The rei_id for LDL is 367.
 Validation Criteria
 +++++++++++++++++++
 
-1. Does the mean in the model match the mean in GBD? 
-2. Does the standard deviation in the model match the standard deviation in GBD? 
+1. Does the mean in the model match the expected mean? 
+2. Does the standard deviation in the model match the expected standard deviation? 
 
 References
 ----------

@@ -11,10 +11,10 @@ Risk Exposure Overview
 Body mass index (BMI) is a person’s weight in kilograms divided by the square of height in meters (weight (kg) / [height (m)]\ :sup:`2`\). BMI is an inexpensive and easy screening method; values are frequently divided into categories: underweight (<18.5 kg/m\ :sup:`2`\), healthy weight (18.5 to 24.9 kg/m\ :sup:`2`\), overweight (25.0 to 29.9 kg/m\ :sup:`2`\), and obese (>=30.0 kg/m\ :sup:`2`\). BMI does not measure body fat directly, but it is moderately correlated with more direct measures of body fat. BMI has also been shown to be correlated with various metabolic and disease outcomes. BMI can be a screening tool, but it does not diagnose the body fatness or health of an individual.
 [CDC-BMI]_
 
-Risk Exposures Description in GBD
----------------------------------
+Risk Exposures Description
+--------------------------
 
-In GBD, BMI is modeled as a continuous variable using ST-GPR based on measured and self-reported height and weight measurements and sources reporting tabulated BMI categories.  
+BMI is modeled as a continuous variable using ST-GPR based on measured and self-reported height and weight measurements and sources reporting tabulated BMI categories.  
 
 **Self-report bias adjustment:**\
 
@@ -27,31 +27,6 @@ After adjusting for self-report bias and splitting aggregated data into five-yea
 **Estimating mean BMI:**\
 
 To estimate the mean BMI for adults in each country, age, and sex, over the time period 1980–2019, we first used a nested hierarchical mixed-effects model, fit using restricted maximum likelihood on data from sources containing estimates of all three indicators (prevalence of overweight, prevalence of obesity, and mean BMI), in order to characterise the relationship between overweight, obesity, and mean BMI. We applied 1000 draws of the regression coefficients to the 1000 draws of overweight prevalence and obesity prevalence produced through ST-GPR to estimate 1000 draws of mean BMI for each country, year, age, and sex. This approach ensured that overweight prevalence, obesity prevalence, and mean BMI were correlated at the draw level and uncertainty was propagated. 
-
-**Estimating BMI distribution:**\
-
-We used the standard GBD ensemble approach to estimate the distribution of BMI. 
-
-**BMI Standard Deviation:**\
-
-The GBD estimates for BMI standard deviation have a significant amount of 
-between draw variation. This high variation causes problems in the model 
-as it leads to extreme values for BMI when one of these draws is selected. 
-
-Interestingly, there is a jump in standard deviation values after 15 to 25 
-and higher. After conferring with the GBD modeling team, the decision was 
-made to remove and replace values over 15. More specifically, within each 
-age/sex group, a random sample of 50 values was selected from the "reasonable" 
-standard deviations. The average of this sample was then found and this value 
-was used to replace the outlier. 
-
-Full details and code for implementation is found in `this notebook <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/BMI_standard_deviation.ipynb>`_. From this 
-a csv file was created for all draws which is saved here: 
-/ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/bmi_standard_deviations_adjusted.csv 
-
-.. note::
-
-  Software engineers, if this code or csv are difficult to implement or the data needs to be structured differently, please let me know and I can adjust it. 
 
 **Theoretical minimum risk exposure level:**\
 
@@ -151,6 +126,15 @@ Vivarium Modeling Strategy
 
 Mean BMI is a continuous exposure modelled in GBD using an ensemble distribution. BMI will be a target of lifestyle interventions in the simulation; the outcomes affected are described in the overall concept model document.  
 
+For the purposes of our project, we will be using data from the US Health 
+Disparities team, which includes US based results instead of global and 
+includes race/ethnicity specific estimates. For Phase 1 of the work, we 
+will not be using race/ethnicity specific results, but we will for Phase 2. 
+
+For this model, we will use the US Health Disparities team's ensemble distribution. 
+This is based on NHANES data and therefore is more US specific than the GBD model. 
+The ensemble weights can be found here :code:`/mnt/team/cvd/priv/usa_re/risks/metab_bmi/ensemble/weights.csv`
+
 Restrictions
 ++++++++++++
 
@@ -193,41 +177,43 @@ The presence of very high BMI values causes problems in modeling. To limit extre
 BMI values, we are setting an upper limit of 80. This is based on NHANES data, which 
 only includes 3 BMI values over 80 in 78,000 records. 
 
+.. todo::
+
+  Assess if these max and min values are still needed based on exposures from the US Health Disparities data.  
+
+
 Data Description
 ++++++++++++++++
 
 The rei_id for BMI is 370
 
-.. list-table:: ID Table 
-	:widths: 10, 5, 15
-	:header-rows: 1
+.. list-table:: ID Table
+   :widths: 10 5 15
+   :header-rows: 1
 
-	* - Component
-	  - ME_ID
-	  - Notes
-	* - Mean exposure
-	  - 2548
-	  - 
-	* - Standard deviation
-	  - 18706
-	  - 
-	* - Relative risk
-	  - 9031
-	  - Must be accessed with get_draws; adult values
+   * - Component
+     - ME_ID
+     - Notes
+   * - Mean exposure
+     - 23873
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8 
+   * - Standard deviation
+     - 27050
+     - Must use either gbd_round_id=7 and decomp_step=usa_re or release_id=8 
+   * - Relative risk 
+     - 9031
+     - Must be accessed with get_draws; adult values 
+
 
 The exposure and standard deviation values should be used to represent the distribution of mean BMI values that the simulants will be assigned in the model. 
-
-.. note::
-
-  The standard deviation values must be filtered to exclude values over 15 using the code above 
 
 
 Validation Criteria
 +++++++++++++++++++
 
-Does the mean in the model match the mean in GBD? 
+Does the mean in the model match the expected mean? 
 
-Does the standard deviation in the model match the standard deviation of the GBD model? 
+Does the standard deviation in the model match the expected standard deviation? 
 
 References
 ----------
