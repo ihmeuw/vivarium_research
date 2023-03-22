@@ -831,24 +831,25 @@ Disability weights (DWs) represent the magnitude of health loss associated with 
 
 In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
 
+If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Total YLDs for multiple diseases are calculated by adding together YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival), YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival), and so on. 
+
 YLD Uncertainty
 ^^^^^^^^^^^^^^^
 
-The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, we take the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. We assume no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 975th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
+The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, GBD takes the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. GBD assumes no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 975th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
 
 
 Residual YLDs
 ^^^^^^^^^^^^^
 
-For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, we estimate YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
+For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, GBD estimates YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
 
 Incidence- vs. Prevalence-Based YLDs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. Incidence-based YLDs are calculated by adding together YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival) and YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival). 
+*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. An incident case of an incurable disease would accrue as many incidence-based YLDs as years left of that person's life expectancy.
 
-
-*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year of incidence. 
+*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year of incidence. An incident case of an incurable disease would only accrue YLDs from the first year in which the disease is experienced. 
 
 .. list-table:: Incidence vs. Prevalence-based YLDs (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_)
    :widths: 30 30 30 
@@ -863,6 +864,8 @@ Incidence- vs. Prevalence-Based YLDs
    * - Prevalence-based YLDs
      - Does not require data on disease duration; Incorporation of comorbidities is easier.
      - YLD and YLL measurements are measured using different methods; For diseases with a short duration, YLDs may be underestimated.
+
+
 
 
 Restrictions
