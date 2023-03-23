@@ -831,7 +831,7 @@ Disability weights (DWs) represent the magnitude of health loss associated with 
 
 In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
 
-If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Total YLDs for multiple diseases are calculated by adding together YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival), YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival), and so on. 
+If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Total YLDs for multiple diseases are calculated by multiplying YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival), YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival), and so on. 
 
 YLD Uncertainty
 ^^^^^^^^^^^^^^^
@@ -866,7 +866,11 @@ Incidence- vs. Prevalence-Based YLDs
      - YLD and YLL measurements are measured using different methods; For diseases with a short duration, YLDs may be underestimated.
 
 
+YLDs in Vivarium 
+^^^^^^^^^^^^^^^^
+DWs and YLDs in Vivarium apply to the duration of the condition. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. To calculate the YLDs here, we would multiply 0.05 by 1/52 (0.019).
 
+Another important note is that DWs and YLDs must always be less than 1, because '1' is essentially death. For this reason, if an individual experiences multiple conditions at once, the total amount of YLDs is calculated by multiplying the YLDs of each individual condition together. For instance, let's say an individual has lived with three health conditions, with respective YLDs of 0.3, 0.4, and 0.5. The total YLDs here would be (0.3) * (0.4) * (0.5). 
 
 Restrictions
 ++++++++++++
