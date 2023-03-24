@@ -3275,7 +3275,7 @@ Limitations:
 **Numeric Miswriting**
 
 To implement this, select the strings eligible for noise,
-and then select, for each each digit character (0-9) in the string, whether to change that character, according to the per-character error probability.
+and then select, for each each digit character (0-9) in each eligible string, whether to change that character, according to the per-character error probability.
 The digits that are changed should be changed to a *different* digit character, selected uniformly at random.
 Non-digit characters are not affected by this noise function.
 
