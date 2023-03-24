@@ -3276,8 +3276,12 @@ Limitations:
 
 To implement this, select the strings eligible for noise,
 and then select, for each each digit character (0-9) in each eligible string, whether to change that character, according to the per-character error probability.
-The digits that are changed should be changed to a *different* digit character, selected uniformly at random.
+The digits that are changed should be replaced with a digit character selected uniformly at random.
 Non-digit characters are not affected by this noise function.
+
+.. todo::
+  In the future, we could make the character-level noise probability for this function more intuitive by
+  preventing the digit from ever being replaced by the same digit it already was.
 
 Limitations:
 
