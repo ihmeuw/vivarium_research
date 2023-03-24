@@ -3272,15 +3272,16 @@ Limitations:
   If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach. 
 
 
-**Numeric Miswriting** 
+**Numeric Miswriting**
 
-To implement this, select the strings eligible for noise and apply 
-the numeric miswriting noise function to all strings with the user defined 
-character error rate. 
+To implement this, select the strings eligible for noise,
+and then select, for each each digit character (0-9) in the string, whether to change that character, according to the per-character error probability.
+The digits that are changed should be changed to a *different* digit character, selected uniformly at random.
+Non-digit characters are not affected by this noise function.
 
-Limitations: 
+Limitations:
 
-- This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
+- This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable.
 
 **Age Miswriting** 
 
@@ -3301,7 +3302,7 @@ perturbation options until the final answer is 0 or higher.
 To implement this, select the strings eligible for noise and apply 
 the zip code miswriting noise function to all strings with the user defined. 
 This code is similar to the numeric miswriting above, but has different 
-inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
+per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
 
 **Copy from within Household** 
 
