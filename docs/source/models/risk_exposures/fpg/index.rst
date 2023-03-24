@@ -172,7 +172,7 @@ The rei_id for FPG is 105.
      -
    * - Standard deviation 
      - /ihme/costeffectiveness/artifacts/vivarium_nih_us_cvd/raw_data/fpg_std_nhanes_draw_level.csv
-     -
+     - Due to limited sample size in older age groups, please use the 80-85 age group for all simulants 80+ 
    * - Relative risk, continuous 
      - 9056 
      - Must be accessed with get_draws 
