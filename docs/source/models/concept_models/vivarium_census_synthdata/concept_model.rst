@@ -3182,7 +3182,7 @@ are explained in more depth in the table below.
     - Additional Inputs 
     - Default Input Value 
   * - Typographic Noise
-    - Probability that a corrupted token contains the original token (e.g., if typically e -> r, the probability that e -> er)
+    - Probability that a corrupted token is inserted before the original token (e.g., if typically e -> r, the probability that e -> re)
     - 0.1 
   * - Age miswriting 
     - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
@@ -3202,23 +3202,57 @@ are explained in more depth in the table below.
 
 **OCR**
 
-Optical character recognition is when a character is misread for another character that 
-looks similar. A common examples is 'S' and '5'. In order to emulate 
-that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
+Optical character recognition is when a string is misread for another string that 
+is visually similar. Some common examples are 'S' instead of '5' and 'm' instead of 'iii'.
 
-To implement this, select the strings eligible for noise and apply 
-the OCR noise function to all strings with the user defined token 
-error rate. 
+.. todo::
+  Both of these examples seem like they might be backward, though they come from the CSV below.
+  Are we interpreting the CSV backward? Should it be commutative?
+
+We have compiled `a list of possible OCR substitutions in a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/ocr-variations-upper-lower.csv>`,
+where the first column is the real string (which we call a "token") and the second column is what it could be misread as (a "corruption").
+The same token can be associated with multiple corruptions.
+
+.. todo::
+  Where does this list come from?
+
+To implement this, we first select the rows to noise, as in other noise functions.
+For those rows, each token in the relevant string which is a corruption-eligible token in the CSV is selected to be corrupted or not,
+according to the token noise probability.
+Each token selected for corruption is replaced with its corruption from the second column of the CSV
+(choosing uniformly at random in the case of multiple corruption options for a single token),
+**unless a token with any overlapping characters (in the original string) has already been corrupted**.
+Tokens are corrupted in the order of the location of their first character in the original string, from beginning to end,
+breaking ties (e.g. 'l' and 'l>' are both corruption-eligible tokens and may start on the same 'l') by corrupting longer tokens first.
+Note that in an example :code:`abcd` where :code:`ab`, :code:`bc`, **and** :code:`cd` have **all** been selected to be corrupted,
+the corruption of :code:`ab` prevents the corruption of :code:`bc` from occurring, which then allows :code:`cd` to be corrupted
+even though it overlapped with :code:`bc`.
+
+.. note::
+  A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L46-L70>`.
+
+As noted above, this approach does not guarantee that all strings selected for noise are actually changed;
+in addition to the case where each token is independently selected to not be corrupted,
+a string with no corruption-eligible tokens will never be affected by the OCR noise function.
 
 **Phonetic**
 
 Phonetic errors are when a character is misheard. This could similar sounding letters when 
-spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
-In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
+spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'.
 
-To implement this, select the strings eligible for noise and apply 
-the phonetic noise function to all strings with the user defined token 
-error rate. 
+This is implemented just like the OCR noise function, except with a different CSV of substitutions with slightly different structure:
+in `the phonetic substitutions CSV <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/phonetic-variations.csv>`
+the second column is the real string (token) and the third column is what it could be misheard as (corruption).
+
+.. todo::
+  Where does this list come from?
+
+.. todo::
+  The CSV file also includes further fields that describe where in the string the corruptions may occur.
+  We currently ignore these, but may want to respect them in a future version.
+
+.. note::
+  A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L85-L101>`.
 
 Limitations: 
 
@@ -3227,17 +3261,30 @@ Limitations:
 
 **Typographic** 
 
-Typographic errors occur due to mistyping information. The commonality of errors are therefore 
-based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
-and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
+Typographic errors occur due to mistyping information.
+We define the probability of one character replacing, or being inserted before, another character according to the proximity of
+the keys on a keyboard (assuming QWERTY layout).
 
-To implement this, select the strings eligible for noise and apply 
-the typographic noise function to all strings with the user defined token 
-error rate and rate for including the original token. 
+We have created `a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/qwerty-keyboard.csv>`
+of a QWERTY keyboard layout (left-justified, which is not exactly accurate to most keyboards' half-key-offset layout) and accompanying number pad.
+Note that as in the other CSVs, there are comments prefixed by :code:`#`, but also that the empty comment on line 6 serves a purpose: the preceding
+rows (letters) and following rows (numbers) should not be considered adjacent.
+
+First, rows are selected for typographic noise, as in other noise functions.
+Within strings that are selected, each character that is present in the CSV (any alphanumeric character) is
+selected to be corrupted or not according to the token noise probability (for typographic errors, individual characters are the "tokens").
+For each character selected for corruption, a second random choice is made: either the corruption character will be inserted before the original character,
+or it will replace the original character.
+This second selection is according to the extra "probability that a corrupted token is inserted before the original token" parameter to the typographic noise function.
+The corruption character to insert or replace with is uniformly selected from those that are either directly or diagonally adjacent to the original character in the CSV.
+For example, if 'q' was the original character, one of 'w', 'a', and 's' would be selected.
+
+.. note::
+  A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L124-L142>`.
 
 .. todo::
 
-  Add other "keyboard errors", likely ones that swap letters (teh instead of the). This would ideally be in the same typographic function. 
+  Add other "keyboard errors", such as skipping a letter or swapping letters (teh instead of the). This would ideally be in the same typographic function. 
 
 **Fake Names**
 
