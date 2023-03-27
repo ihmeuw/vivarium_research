@@ -2981,90 +2981,78 @@ for all column based noise include:
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
 
 .. list-table:: Types of Noise and Default Parameters for each Column
-  :widths: 20 20 20 20 20 20 20
+  :widths: 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
     - Default Row-Level Noise Probability
     - Default Token Noise Probability 
-    - Additional parameters (defined in detail below)
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, phonetic, OCR, typographic
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 0.01
     - 0.1 
-    - Age miswriting: possible perturbations 
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic 
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 0.01
     - 0.1 
-    - N/A
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic  
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic 
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, phonetic, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
     - Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, phonetic, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
-    - N/A
     - N/A
     - Missing data, incorrect select
     - Noise for all types of addresses will work in the same way 
@@ -3072,13 +3060,11 @@ for all column based noise include:
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
     - 0.1 
-    - Zip code miswriting: digit level probabilities 
     - Missing data, zip code miswriting, OCR, typographic 
     - Applies to home, mailing, and employer addresses 
   * - Relationship to head of household 
     - Census 
     - 0.01
-    - N/A
     - N/A
     - Missing data, incorrect select
     - 
@@ -3086,13 +3072,11 @@ for all column based noise include:
     - Census, Household Surveys, WIC 
     - 0.01
     - N/A
-    - N/A
     - Missing data, incorrect select
     - 
   * - Race/Ethnicity 
     - Census, WIC
     - 0.01
-    - N/A
     - N/A
     - Missing data, incorrect select
     - 
@@ -3100,41 +3084,35 @@ for all column based noise include:
     - Taxes (both), SSA
     - 0.01
     - 0.1 
-    - N/A
     - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
     - 0.01
     - 0.1 
-    - N/A
     - Missing data, copy from within household, numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
     - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic 
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
     - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic
     - 
   * - Employer Name 
     - Taxes (both)
     - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, OCR, typographic
     - 
   * - Type of Tax Form  
     - Taxes (both)
     - 0.01
-    - N/A
     - N/A
     - Missing data, incorrect select
     - 
@@ -3142,13 +3120,11 @@ for all column based noise include:
     - SSA 
     - 0.01
     - N/A
-    - N/A
     - Missing data, incorrect select
     - 
   * - Date of SSA Event 
     - SSA 
     - 0.01
-    - N/A
     - N/A
     - Missing data, month and day swap, numeric miswriting, OCR, typographic 
     - 
