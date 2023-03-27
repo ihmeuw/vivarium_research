@@ -3147,8 +3147,10 @@ Another limitation is that token error probability is not very intuitive for the
 At some point in the future, we might make this more user friendly. However, for the 
 sake of a minimum functional model, this is satisfactory. 
 
-Some functions have additional parameters, as listed in the table above. These parameters 
-are explained in more depth in the table below.  
+Some functions have additional parameters. These parameters
+are explained in more depth in the table below
+and are (separately) configurable for each observer column affected
+by that noise function.
 
 .. list-table:: Additional Inputs and Default Values
   :widths: 20 20 20
