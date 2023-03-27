@@ -1985,7 +1985,7 @@ Census
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - Date of Birth (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2164,7 +2164,7 @@ There are two types of sampling plans:
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2512,7 +2512,7 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2637,7 +2637,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Last name
     - 
-  * - Age
+  * - Age (floored to integer years **before** noise is applied)
     -  
   * - DOB (stored as a string in MM/DD/YYYY format)
     -  
@@ -3015,7 +3015,7 @@ for all column based noise include:
     - Census, Household Surveys, WIC, Taxes (both), SSA  
     - 1%
     - 0.1 
-    - Age miswriting: possible perturbations 
+    - Age miswriting: possible perturbations, associated probabilities
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic 
     - 
   * - Date of Birth 
@@ -3189,7 +3189,7 @@ are explained in more depth in the table below.
     - [1, -1] 
   * - Age miswriting
     - Probabilities associated with possible age perturbations (must be same length as possible perturbations; probabilities must sum to 1)
-    - [0.5, 0.5]
+    - None, null, or equivalent (which means uniform choice -- see age miswriting section below)
   * - Zip code miswriting 
     - Separate error rates for first 2 digits, middle digit, and last 2 digits 
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
@@ -3287,15 +3287,27 @@ Limitations:
 
 **Age Miswriting** 
 
+.. note::
+  Age should be an integer (rounded down/floored from the exact number with fractional part) **before**
+  noise functions are applied.
+  Therefore, this noise function acts on integers.
+
 To implement this, first select the rows for noise according to the row noise probability.
 For each selected row, the age will be adjusted. The adjustment value will be 
 randomly selected from the configured list of possible perturbations,
-according to the configured probabilities of selection. 
+according to the configured probabilities of selection.
+If the probabilities of selection are a none/null value (which is the default), the choice
+is uniform among the list of possible perturbations.
 
 For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2]
 with configured probabilities of [0.2, 0.3, 0.3, 0.2]
 then 28 will be adjusted to either: 26, 27, 29, or 30, with a 0.2 probability for each of
 26 and 30 and a 0.3 probability for each of 27 and 29.
+
+.. note::
+  The probabilities are supplied as a list that must align with the order of the possible perturbations.
+  The first element in the probabilities is the probability of the first element in the perturbations,
+  and so on.
 
 If the age after adding the chosen perturbation is negative, flip the sign to be positive (e.g. a -2 becomes 2).
 If after this sign flip, the resulting age is equal to the original age value, subtract 1 from the age.
