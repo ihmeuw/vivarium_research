@@ -3309,9 +3309,9 @@ then 28 will be adjusted to either: 26, 27, 29, or 30, with a 0.2 probability fo
   The first element in the probabilities is the probability of the first element in the perturbations,
   and so on.
 
-If the age after adding the chosen perturbation is negative, flip the sign to be positive (e.g. a -2 becomes 2).
-If after this sign flip, the resulting age is equal to the original age value, subtract 1 from the age.
-(This will never result in a negative value because a flip from a negative value will never result in 0.)
+If the age after adding the chosen perturbation is negative, reflect the sign to be positive (e.g. a -2 becomes 2).
+If this reflection is performed and the resulting age is equal to the original age value, subtract 1 from the age.
+(This will never result in a negative value because reflecting a negative value will never result in 0.)
 
 **Zip code Miswriting** 
 
