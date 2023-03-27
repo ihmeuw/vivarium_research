@@ -149,6 +149,3 @@ References
 
 .. [CDC-LDL-Definition]
 	`LDL & HDL: Good & Bad Cholesterol.` Centers for Disease Control and Prevention, Centers for Disease Control and Prevention, 31 Jan. 2020, www.cdc.gov/cholesterol/ldl_hdl.htm. 
-
-.. [Huijgen_2012] 
-  Huijgen, Roeland, et al. “Discriminative Ability of LDL-Cholesterol to Identify Patients with Familial Hypercholesterolemia.” Circulation: Cardiovascular Genetics, vol. 5, no. 3, 2012, pp. 354–359., https://doi.org/10.1161/circgenetics.111.962456. 
