@@ -101,22 +101,18 @@ Assumptions and Limitations
 As described above, LDL-C is a calculated value; there is measurement error inherent in the lipid panel 
 assays used to obtain values for the input into the formula. 
 
-Due to the nature of the GBD distributions, some simulants received LDL-C exposures that are impossible in 
-real life. To account for this, resistrictions have been created for the possible range of LDL-C values a 
-simulant can have. This range is designed to include all values seen in real life, while removing values 
-that are provided by pure math. **The minimum LDL-C value is 0 mmol/L nad the maximum is 10 mmol/L.**
+The values for LDL-C generated include exposures outside of a reasonably expected 
+range. These values lead to extreme relative risks which cause the model to fail. 
 
-Any simulant whose exposure is found to be above 10 mmol/L will be assigned 10 mmol/L, and any simulant below 
-0 will be reassigned to 0 mmol/L. This reassignment occurs in approximately 0.05% of simulants. 
+In addition to model failures, we do not think relative risks continue in a log 
+linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
+risk associated with a single risk factor probably exists. 
 
-The minimum is set at 0 as LDL-C is by definition always positive. The maximum of 10 was selected to include ~5 
-standard deviations above the mean for average LDL-C, as well as ~3.5 standard deviations above the mean for those 
-with genetic hyperlipidemia. This is designed to be inclusive of all possible values seen in real patients. [Huijgen_2012]_
+To account for this and allow our model to run, we implemented maximum and minimum 
+exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
+that 0.5% or fewer participants had values more extreme than the maximum. 
 
-.. todo::
-
-  Assess if these max and min values are still needed based on exposures from the US Health Disparities data.  
-
+The minimum LDL-C is 0 and the maximum is 5.5 mmol/L. 
 
 Data Description Tables
 +++++++++++++++++++++++
