@@ -140,9 +140,18 @@ The quantity of interest is exposure to the mean fasting plasma glucose level re
 level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and 
 do not account for duration of exposure to elevated FPG.
 
-Due to challenges with the GBD ensemble distribution providing negative and unrealistically high 
-values, we imposed a maximum of 30 and minimum of 1 mmol/L. As we need to update to GBD 2021 we are 
-using this as a solution until updating. 
+The values for FPG generated include exposures outside of a reasonably expected 
+range. These values lead to extreme relative risks which cause the model to fail. 
+
+In addition to model failures, we do not think relative risks continue in a log 
+linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
+risk associated with a single risk factor probably exists. 
+
+To account for this and allow our model to run, we implemented maximum and minimum 
+exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
+that 0.5% or fewer participants had values more extreme than the maximum. 
+
+The minimum FPG is 1 and the maximum is 16 mmol/L. 
 
 Another noticed issue with GBD data is striations in the standard deviation values. The graph below 
 visually shows this issue. After speaking with GBD modelers, it seems that these are known issues 
