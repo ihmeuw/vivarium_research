@@ -3158,7 +3158,7 @@ available and information for implementation. **Software engineering team - plea
 
 **Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
 
-The user will have the opportunity to change all parameters to the noise 
+The user will have the opportunity to change all parameters of the noise 
 functions from their default values.
 
 The exact method for how a user will input the parameters has not been finalized. We 
