@@ -2973,7 +2973,7 @@ To begin, we will start with defining column based noise. Some general rules
 for all column based noise include: 
 
 - The row noise probability is the probability of selecting a row to have a particular type of noise added. For example, 0.01 row noise probability for incorrect selection on the "type of tax form" column means each row will have 0.01 (1%) probability to have the wrong value selected. In the case of OCR, phonetic, typographic, and numeric miswriting, it is not the case that every row selected will actually have any noise applied -- this is explained further below. 
-- Note that selection for column noise is applied to non-missing values in that column only; or equivalently, all noise functions have no effect on missing values, so it does not matter whether or not noise is applied for these values.
+- Note that column noise is applied only to non-missing values in that column; or equivalently, all noise functions have no effect on missing values, so it does not matter whether or not noise is applied for these values.
 - Token noise probability is a noise parameter that only applies to certain noise types and defines the probability of each *token* having an error, once a string is selected for noise. This parameter is also elaborated on below. 
 - A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
 - The parameters of each type of noise are individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 0.02 row noise probability for typographic noise.
