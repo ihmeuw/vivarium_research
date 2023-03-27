@@ -3275,13 +3275,14 @@ Limitations:
 **Numeric Miswriting**
 
 To implement this, select the strings eligible for noise,
-and then select, for each each digit character (0-9) in each eligible string, whether to change that character, according to the per-character error probability.
+and then select, for each digit character (0-9) in each eligible string, whether to change that character, according to the per-character error probability.
 The digits that are changed should be replaced with a digit character selected uniformly at random.
 Non-digit characters are not affected by this noise function.
 
 .. todo::
-  In the future, we could make the character-level noise probability for this function more intuitive by
-  preventing the digit from ever being replaced by the same digit it already was.
+  We would prefer to select the digit replacement only from the *other* digits (e.g. a 9 could not be replaced with a 9).
+  This would make the character-level noise probability for this function more intuitive.
+  However, this is not critical and we can stick to selecting *any* digit if it is easier to implement.
 
 Limitations:
 
