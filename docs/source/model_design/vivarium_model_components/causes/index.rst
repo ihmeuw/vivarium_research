@@ -833,6 +833,9 @@ In order to compute **years lived with disability (YLDs)** for a particular heal
 
 If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Total YLDs for multiple diseases are calculated by multiplying YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival), YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival), and so on. 
 
+.. math::
+    DW_\text{overall} = 1 - \prod_{i = 1}^{n} 1 - DW_{i}
+
 YLD Uncertainty
 ^^^^^^^^^^^^^^^
 
