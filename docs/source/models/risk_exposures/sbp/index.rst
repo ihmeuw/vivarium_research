@@ -116,15 +116,18 @@ Assumptions and Limitations
 
 The quantity of interest is exposure to the mean blood pressure level regardless of whether that level is naturally occurring or occurs via use of medication; we assume full reversibility of risk and do not account for duration of exposure to elevated SBP. 
 
-We assume a maximum and minimum systolic blood pressure limit to account for high variation in 
-randomly drawn numbers. These values are set to 50 as the minimum and 300 as the maximum. This 
-effects only about 0.05% of simulants. Simulants that had values outside of the max and min are 
-reassigned to the max or min value automatically. 
+The values for SBP generated include exposures outside of a reasonably expected 
+range. These values lead to extreme relative risks which cause the model to fail. 
 
-.. todo::
+In addition to model failures, we do not think relative risks continue in a log 
+linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
+risk associated with a single risk factor probably exists. 
 
-  Assess if these max and min values are still needed based on exposures from the US Health Disparities data.  
+To account for this and allow our model to run, we implemented maximum and minimum 
+exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
+that 0.5% or fewer participants had values more extreme than the maximum. 
 
+The minimum SBP is 50 and the maximum is 200 mmHg. 
 
 Data Description
 ++++++++++++++++
