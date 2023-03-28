@@ -1985,7 +1985,7 @@ Census
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - Date of Birth (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2164,7 +2164,7 @@ There are two types of sampling plans:
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2512,7 +2512,7 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2637,7 +2637,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Last name
     - 
-  * - Age
+  * - Age (floored to integer years **before** noise is applied)
     -  
   * - DOB (stored as a string in MM/DD/YYYY format)
     -  
@@ -3157,7 +3157,7 @@ by that noise function.
   :header-rows: 0
 
   * - Noise Function Affected
-    - Additional Inputs 
+    - Additional Input
     - Default Input Value 
   * - Typographic Noise
     - Probability that a corrupted token contains the original token (e.g., if typically e -> r, the probability that e -> er)
@@ -3165,6 +3165,9 @@ by that noise function.
   * - Age miswriting 
     - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
     - [1, -1] 
+  * - Age miswriting
+    - Probabilities associated with possible age perturbations (must be same length as possible perturbations; probabilities must sum to 1)
+    - None, null, or equivalent (which means uniform choice -- see age miswriting section below)
   * - Zip code miswriting 
     - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits 
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
@@ -3262,17 +3265,31 @@ Limitations:
 
 **Age Miswriting** 
 
-To implement this, first select the strings eligible for noise. For each 
-selected string, the age will be adjusted. The adjustment value will be 
-randomly selected from the user inputted list of possible perturbations. 
+.. note::
+  Age should be an integer (rounded down/floored from the exact number with fractional part) **before**
+  noise functions are applied.
+  Therefore, this noise function acts on integers.
 
-For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2] 
-then 28 will be adjusted to either: 26, 27, 29, or 30, with an equal chance 
-of each option. 
+To implement this, first select the rows for noise according to the row noise probability.
+For each selected row, the age will be adjusted. The adjustment value will be 
+randomly selected from the configured list of possible perturbations,
+according to the configured probabilities of selection.
+If the probabilities of selection are a none/null value (which is the default), the choice
+is uniform among the list of possible perturbations.
 
-If the resulting age is negative (e.g., the correct age is 1 and a perturbation 
-of -2 is applied to make the answer -1), then reselect from the remaining 
-perturbation options until the final answer is 0 or higher. 
+For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2]
+with configured probabilities of [0.2, 0.3, 0.3, 0.2]
+then 28 will be adjusted to either: 26, 27, 29, or 30, with a 0.2 probability for each of
+26 and 30 and a 0.3 probability for each of 27 and 29.
+
+.. note::
+  The probabilities are supplied as a list that must align with the order of the possible perturbations.
+  The first element in the probabilities is the probability of the first element in the perturbations,
+  and so on.
+
+If the age after adding the chosen perturbation is negative, reflect the sign to be positive (e.g. a -2 becomes 2).
+If this reflection is performed and the resulting age is equal to the original age value, subtract 1 from the age.
+(This will never result in a negative value because reflecting a negative value will never result in 0.)
 
 **Zip code Miswriting** 
 
