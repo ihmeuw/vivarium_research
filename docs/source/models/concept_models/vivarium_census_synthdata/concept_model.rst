@@ -3190,12 +3190,10 @@ is visually similar. Some common examples are 'S' instead of '5' and 'm' instead
   Both of these examples seem like they might be backward, though they come from the CSV below.
   Are we interpreting the CSV backward? Should it be commutative?
 
-We have compiled `a list of possible OCR substitutions in a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/ocr-variations-upper-lower.csv>`,
-where the first column is the real string (which we call a "token") and the second column is what it could be misread as (a "corruption").
+The possible OCR substitutions are given by `a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/ocr-variations-upper-lower.csv>`,
+which originated from the GeCO project.
+In the file, the first column is the real string (which we call a "token") and the second column is what it could be misread as (a "corruption").
 The same token can be associated with multiple corruptions.
-
-.. todo::
-  Where does this list come from?
 
 To implement this, we first select the rows to noise, as in other noise functions.
 For those rows, each token in the relevant string which is a corruption-eligible token in the CSV is selected to be corrupted or not,
@@ -3224,9 +3222,7 @@ spoken like 't' and 'd' for example; or letters that make the same sounds within
 This is implemented just like the OCR noise function, except with a different CSV of substitutions with slightly different structure:
 in `the phonetic substitutions CSV <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/phonetic-variations.csv>`
 the second column is the real string (token) and the third column is what it could be misheard as (corruption).
-
-.. todo::
-  Where does this list come from?
+This file also originated from the GeCO project.
 
 .. todo::
   The CSV file also includes further fields that describe where in the string the corruptions may occur.
@@ -3246,10 +3242,11 @@ Typographic errors occur due to mistyping information.
 We define the probability of one character replacing, or being inserted before, another character according to the proximity of
 the keys on a keyboard (assuming QWERTY layout).
 
-We have created `a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/qwerty-keyboard.csv>`
+We use `a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/qwerty-keyboard.csv>`
 of a QWERTY keyboard layout (left-justified, which is not exactly accurate to most keyboards' half-key-offset layout) and accompanying number pad.
-Note that as in the other CSVs, there are comments prefixed by :code:`#`, but also that the empty comment on line 6 serves a purpose: the preceding
-rows (letters) and following rows (numbers) should not be considered adjacent.
+This CSV also originates from GeCO; however, we have made some changes to include capital letters and have a complete numberpad.
+Note that as in the other CSVs, there are comments prefixed by :code:`#`, but also that the empty comment lines serve a purpose: the preceding
+rows and following rows should not be considered adjacent.
 
 First, rows are selected for typographic noise, as in other noise functions.
 Within strings that are selected, each character that is present in the CSV (any alphanumeric character) is
