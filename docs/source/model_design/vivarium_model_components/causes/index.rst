@@ -871,9 +871,17 @@ Incidence- vs. Prevalence-Based YLDs
 
 YLDs in Vivarium 
 ^^^^^^^^^^^^^^^^
-DWs and YLDs in Vivarium apply to the duration of the condition. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. To calculate the YLDs here, we would multiply 0.05 by 1/52 (0.019).
+DWs and YLDs in Vivarium apply to the duration of the condition. A DW determines the rate at which an individual accrues YLDs over the course of 1 year. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. Because DWs are weighted to one year of disability, we would multiply 0.05 by 1/52 (0.019) to calculate the YLDs accumulated. 
 
 Another important note is that DWs and YLDs must always be less than 1, because '1' is essentially death. For this reason, if an individual experiences multiple conditions at once, the total amount of YLDs is calculated by multiplying the YLDs of each individual condition together. For instance, let's say an individual has lived with three health conditions, with respective YLDs of 0.3, 0.4, and 0.5. The total YLDs here would be :code:`1 - ((1-0.3) * (1-0.4) * (1-0.5))`. 
+
+In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`DW * time_step` for each timestep that they are infected, where timestep is defined in a fraction of one year. Therefore, choosing an appropriate timestep duration is important for getting YLDs correct! If we had month-long timesteps, then a case of the flu (which should really only be 1 week) would accrue YLDs for the flu over an entire month.
+
+.. todo::
+  Investigate how GBD calculates all-cause YLDs, and why all-cause YLDs is different value than summed total of specific-cause YLDs. 
+
+.. todo::
+  Investigate how GBD uses COMO calculations in GBD. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
 
 Restrictions
 ++++++++++++
