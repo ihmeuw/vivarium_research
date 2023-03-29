@@ -492,7 +492,13 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
     - Count data results stratified by random seed for optimization
     - No x-factor component. V&V SQ-LNS updates before moving on
-  * - 3.1.1
+  * - 3.1.1: Run-time test
+    - Remove lots of stratification and record runtime for planning purposes in the nutrition optimization model
+    - 1
+    - 1 draw, population size 250,000
+    - :download:`See modifications to defaults in this PNG file <stratification_details_for_test_run.PNG>`
+    - Don't need results, only runtime statistics.
+  * - 3.1.2
     - Updated age-specific SQLNS effects on wasting, additional stratifications, updated initialization age start value (from 0.5 to 0). All changes included in `pull request #1114 <https://github.com/ihmeuw/vivarium_research/pull/1114>`_
     - 7, 8_incidence, 8_recovery
     - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size
