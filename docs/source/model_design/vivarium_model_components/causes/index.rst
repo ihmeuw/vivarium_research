@@ -831,24 +831,28 @@ Disability weights (DWs) represent the magnitude of health loss associated with 
 
 In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
 
+If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Overall DW for multiple diseases is calculated with the equation below, and then this overall DW is multiplied by the time spent with that combination of diseases.
+
+.. math::
+    DW_\text{overall} = 1 - \prod_{i = 1}^{n} 1 - DW_{i}
+
 YLD Uncertainty
 ^^^^^^^^^^^^^^^
 
-The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, we take the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. We assume no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 975th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
+The uncertainty ranges reported around YLDs incorporate uncertainty in prevalence and uncertainty in the DW. To do this, GBD takes the 1000 samples of comorbidity-corrected YLDs and 1000 samples of the DW to generate 1000 samples of the YLD distribution. GBD assumes no correlation in the uncertainty in prevalence and DWs. The 95% uncertainty interval is reported as the 25th and 975th values of the distribution. UIs for YLDs at different points in time (1990, 1995, 2000, 2005, 2010, and 2016) for a given disease or sequela are correlated because of the shared uncertainty in the DW. For this reason, changes in YLDs over time can be significant even if the UIs of the two estimates of YLDs largely overlap because significance is determined by the uncertainty around the prevalence estimates.
 
 
 Residual YLDs
 ^^^^^^^^^^^^^
 
-For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, we estimate YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
+For less common diseases and their sequelae, GBD may not currently estimate disease prevalence and YLDs, and have thus been included in residual categories. For these residual categories, GBD estimates YLDs by multiplying the residual YLL estimates by the ratio of YLDs to YLLs from the estimates of Level 3 causes in the same disease category that were explicitly modelled. This scaling is done for each country-sex-year. 
 
 Incidence- vs. Prevalence-Based YLDs
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. Incidence-based YLDs are calculated by adding together YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival) and YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival). 
+*Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. An incident case of an incurable disease would accrue as many incidence-based YLDs as years left of that person's life expectancy. 
 
-
-*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year of incidence. 
+*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year(s) in which we observe the individual. An incident case of an incurable disease would only accrue YLDs for the duration of observation. For another example of how prevalence-based YLDs work, imagine we are evaluating DALYs among children 0-5 years old, and there was a baby with a birth defect. We would only count YLDs accumulated in the first 5 years of their life, not the YLDs that they will accumulate over the entire course of their life.
 
 .. list-table:: Incidence vs. Prevalence-based YLDs (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_)
    :widths: 30 30 30 
@@ -864,6 +868,20 @@ Incidence- vs. Prevalence-Based YLDs
      - Does not require data on disease duration; Incorporation of comorbidities is easier.
      - YLD and YLL measurements are measured using different methods; For diseases with a short duration, YLDs may be underestimated.
 
+
+YLDs in Vivarium 
+^^^^^^^^^^^^^^^^
+DWs and YLDs in Vivarium apply to the duration of the condition. A DW determines the rate at which an individual accrues YLDs over the course of 1 year. Remember, YLDs are a product of the DW associated with the condition and the time between onset and survival. To illustrate an example, let's say an individual contracted the flu with a disability weight of 0.05 and recovered after 1 week. Because DWs are weighted to one year of disability, we would multiply 0.05 by 1/52 (0.019) to calculate the YLDs accumulated. 
+
+Another important note is that DWs must always be less than 1, because '1' is essentially death. For this reason, if an individual experiences multiple conditions at once, the overall DW is calculated multiplicatively (see equation used for GBD above). For instance, let's say an individual has lived with three health conditions, with respective DWs of 0.3, 0.4, and 0.5. The total overall DW here would be :code:`1 - ((1-0.3) * (1-0.4) * (1-0.5)) = 0.79`. 
+
+In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`DW * time_step` for each timestep that they are infected, where timestep is defined in a fraction of one year. Therefore, choosing an appropriate timestep duration is important for getting YLDs correct! If we had month-long timesteps, then a case of the flu (which should really only be 1 week) would accrue YLDs for the flu over an entire month.
+
+.. todo::
+  Investigate how GBD calculates all-cause YLDs, and whether all-cause YLDs is different than summed total of specific-cause YLDs. 
+
+.. todo::
+  Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
 
 Restrictions
 ++++++++++++
