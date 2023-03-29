@@ -878,7 +878,7 @@ Another important note is that DWs must always be less than 1, because '1' is es
 In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`DW * time_step` for each timestep that they are infected, where timestep is defined in a fraction of one year. Therefore, choosing an appropriate timestep duration is important for getting YLDs correct! If we had month-long timesteps, then a case of the flu (which should really only be 1 week) would accrue YLDs for the flu over an entire month.
 
 .. todo::
-  Investigate how GBD calculates all-cause YLDs, and why all-cause YLDs is different value than summed total of specific-cause YLDs. 
+  Investigate how GBD calculates all-cause YLDs, and whether all-cause YLDs is different than summed total of specific-cause YLDs. 
 
 .. todo::
   Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
