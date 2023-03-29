@@ -881,7 +881,7 @@ In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`D
   Investigate how GBD calculates all-cause YLDs, and why all-cause YLDs is different value than summed total of specific-cause YLDs. 
 
 .. todo::
-  Investigate how GBD uses COMO calculations in GBD. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
+  Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
 
 Restrictions
 ++++++++++++
