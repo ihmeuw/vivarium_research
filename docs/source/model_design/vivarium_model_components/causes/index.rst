@@ -831,7 +831,7 @@ Disability weights (DWs) represent the magnitude of health loss associated with 
 
 In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
 
-If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Total YLDs for multiple diseases are calculated by multiplying YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival), YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival), and so on. 
+If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Overall DW for multiple diseases is calculated with the equation below, and then this overall DW is multiplied by the time spent with that combination of diseases.
 
 .. math::
     DW_\text{overall} = 1 - \prod_{i = 1}^{n} 1 - DW_{i}
