@@ -496,7 +496,7 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - Remove lots of stratification and record runtime for planning purposes in the nutrition optimization model
     - 1
     - 1 draw, population size 250,000
-    - :download:`See modifications to defaults in this PNG file <stratification_details_for_test_run.PNG>`
+    - :download:`See modifications to defaults in this PNG file <stratification_details_for_test_run.png>`
     - Don't need results, only runtime statistics.
   * - 3.1.2
     - Updated age-specific SQLNS effects on wasting, additional stratifications, updated initialization age start value (from 0.5 to 0). All changes included in `pull request #1114 <https://github.com/ihmeuw/vivarium_research/pull/1114>`_
