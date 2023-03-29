@@ -852,7 +852,7 @@ Incidence- vs. Prevalence-Based YLDs
 
 *Incidence-based YLDs* provide a measure of the disease burden experienced by an individual over the course of their lifetime. An incident case of an incurable disease would accrue as many incidence-based YLDs as years left of that person's life expectancy. 
 
-*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year(s) of incidence in which we observe the individual. An incident case of an incurable disease would only accrue YLDs for the duration of observation. For another example of how prevalence-based YLDs work, imagine we are evaluating DALYs among children 0-5 years old, and there was a baby with a birth defect. We would only count YLDs accumulated in the first 5 years of their life, not the YLDs that they will accumulate over the entire course of their life.
+*Prevalence-based YLDs*, on the other hand, are what we tend to use in Vivarium models. Prevalence-based YLDs reflect the burden of disease in the year(s) in which we observe the individual. An incident case of an incurable disease would only accrue YLDs for the duration of observation. For another example of how prevalence-based YLDs work, imagine we are evaluating DALYs among children 0-5 years old, and there was a baby with a birth defect. We would only count YLDs accumulated in the first 5 years of their life, not the YLDs that they will accumulate over the entire course of their life.
 
 .. list-table:: Incidence vs. Prevalence-based YLDs (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_)
    :widths: 30 30 30 
