@@ -831,7 +831,7 @@ Disability weights (DWs) represent the magnitude of health loss associated with 
 
 In order to compute **years lived with disability (YLDs)** for a particular health outcome in a given population, the number of people living with that outcome is mulitplied by the DW for the health state associated with that sequela. Ultimately, YLDs are used to indicate burden of disease: DALYs are calculated as the sum of YLLs and YLDs. The DALY-based estimation of the burden of disease is important because it simultaneously considers the reduced health state due to disability before death and the decline in life expectancy due to death. It thus moves away from conventional measurements of the burden of disease that use readily available data on mortality, prevalence, and incidence (`Kim et al., 2022 <https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8841194/>`_). 
 
-If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Total YLDs for multiple diseases are calculated by multiplying YLD 1 (i.e., the product of the DW associated with disease 1 and the time between onset and survival), YLD 2 (i.e., the product of the DW associated with disease 2 and the time between onset and survival), and so on. 
+If an individual is living with multiple diseases at once, YLDs can be calculated to include the sum health burden of all the given diseases. Overall DW for multiple diseases is calculated with the equation below, and then this overall DW is multiplied by the time spent with that combination of diseases.
 
 .. math::
     DW_\text{overall} = 1 - \prod_{i = 1}^{n} 1 - DW_{i}
@@ -878,10 +878,10 @@ Another important note is that DWs must always be less than 1, because '1' is es
 In Vivarium, in each timestep, a simulant will accumulate YLDs equal to :code:`DW * time_step` for each timestep that they are infected, where timestep is defined in a fraction of one year. Therefore, choosing an appropriate timestep duration is important for getting YLDs correct! If we had month-long timesteps, then a case of the flu (which should really only be 1 week) would accrue YLDs for the flu over an entire month.
 
 .. todo::
-  Investigate how GBD calculates all-cause YLDs, and why all-cause YLDs is different value than summed total of specific-cause YLDs. 
+  Investigate how GBD calculates all-cause YLDs, and whether all-cause YLDs is different than summed total of specific-cause YLDs. 
 
 .. todo::
-  Investigate how GBD uses COMO calculations in GBD. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
+  Investigate how GBD uses COMO calculations. (What assumptions do they make when calculating comorbidities? See GBD Methods Appendix.) 
 
 Restrictions
 ++++++++++++
