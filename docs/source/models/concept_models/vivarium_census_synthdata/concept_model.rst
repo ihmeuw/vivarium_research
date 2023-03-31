@@ -3056,12 +3056,12 @@ for all column based noise include:
     - N/A
     - Missing data, incorrect select
     - Noise for all types of addresses will work in the same way 
-  * - Zip Code 
+  * - Zip Code for any Address (Home OR Mailing OR Employer)
     - Census, Household Surveys, WIC, Taxes (both) 
     - 0.01
     - 0.1 
     - Missing data, zip code miswriting, OCR, typographic 
-    - Applies to home, mailing, and employer addresses 
+    - 
   * - Relationship to head of household 
     - Census 
     - 0.01
