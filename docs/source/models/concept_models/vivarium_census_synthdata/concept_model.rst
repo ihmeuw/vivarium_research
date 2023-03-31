@@ -3169,6 +3169,7 @@ by that noise function.
     - [-1, 1]
     - May be list of options, in which case the perturbation will be selected uniformly at random, or a dictionary where the keys are
       the integer perturbations and the values are the probability of that perturbation.
+      **May not contain zero.**
   * - Zip code miswriting 
     - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits 
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36
@@ -3333,8 +3334,9 @@ then 28 will be adjusted to either 26, 27, 29, or 30, with a 0.2 probability for
 26 and 30 and a 0.3 probability for each of 27 and 29.
 
 If the age after adding the chosen perturbation is negative, reflect the sign to be positive (e.g. a -2 becomes 2).
-If this reflection is performed and the resulting age is equal to the original age value, subtract 1 from the age.
-(This will never result in a negative value because reflecting a negative value will never result in 0.)
+
+If the resulting age is equal to the original age value, subtract 1 from the age.
+(This will never result in a negative value because reflecting a negative value will never result in 0, and a perturbation of 0 is not permitted.)
 
 **Zip code Miswriting** 
 
