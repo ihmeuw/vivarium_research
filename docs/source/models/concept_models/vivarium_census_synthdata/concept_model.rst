@@ -3153,24 +3153,26 @@ and are (separately) configurable for each observer column affected
 by that noise function.
 
 .. list-table:: Additional Inputs and Default Values
-  :widths: 20 20 20
+  :widths: 20 20 20 20
   :header-rows: 0
 
   * - Noise Function Affected
     - Additional Input
-    - Default Input Value 
+    - Default Input Value
+    - Notes
   * - Typographic Noise
     - Probability that a corrupted token is inserted before the original token (e.g., if typically e -> r, the probability that e -> re)
-    - 0.1 
+    - 0.1
+    - 
   * - Age miswriting 
-    - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
-    - [1, -1] 
-  * - Age miswriting
-    - Probabilities associated with possible age perturbations (must be same length as possible perturbations; probabilities must sum to 1)
-    - None, null, or equivalent (which means uniform choice -- see age miswriting section below)
+    - Possible perturbations of age (e.g., for [-1, 1] and age of 7, the possible "incorrect" results will be 6 and 8)
+    - [-1, 1]
+    - May be list of options, in which case the perturbation will be selected uniformly at random, or a dictionary where the keys are
+      the integer perturbations and the values are the probability of that perturbation.
   * - Zip code miswriting 
     - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits 
-    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
+    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36
+    - 
 
 
 .. todo::
@@ -3322,20 +3324,13 @@ Limitations:
 
 To implement this, first select the rows for noise according to the row noise probability.
 For each selected row, the age will be adjusted. The adjustment value will be 
-randomly selected from the configured list of possible perturbations,
-according to the configured probabilities of selection.
-If the probabilities of selection are a none/null value (which is the default), the choice
-is uniform among the list of possible perturbations.
+randomly selected from the configured possible perturbations,
+according to the configured probabilities of selection (or uniform if a list without probabilities is configured).
 
-For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2]
-with configured probabilities of [0.2, 0.3, 0.3, 0.2]
-then 28 will be adjusted to either: 26, 27, 29, or 30, with a 0.2 probability for each of
+For example, if the correct age is 28 and the possible perturbations parameter is
+:code:`{-2: 0.2, -1: 0.3, 1: 0.3, 2: 0.2}`
+then 28 will be adjusted to either 26, 27, 29, or 30, with a 0.2 probability for each of
 26 and 30 and a 0.3 probability for each of 27 and 29.
-
-.. note::
-  The probabilities are supplied as a list that must align with the order of the possible perturbations.
-  The first element in the probabilities is the probability of the first element in the perturbations,
-  and so on.
 
 If the age after adding the chosen perturbation is negative, reflect the sign to be positive (e.g. a -2 becomes 2).
 If this reflection is performed and the resulting age is equal to the original age value, subtract 1 from the age.
