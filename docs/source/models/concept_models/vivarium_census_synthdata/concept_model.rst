@@ -3169,7 +3169,7 @@ by that noise function.
     - [-1, 1]
     - May be list of options, in which case the perturbation will be selected uniformly at random, or a dictionary where the keys are
       the integer perturbations and the values are the probability of that perturbation.
-      **May not contain zero.**
+      **May not contain a perturbation option of zero (no change to age).**
   * - Zip code miswriting 
     - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits 
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36
