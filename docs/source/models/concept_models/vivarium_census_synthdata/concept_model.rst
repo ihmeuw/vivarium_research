@@ -2117,6 +2117,17 @@ Please note that for simulants with a net undercount less than 0,
 they have a 0% chance of being missed. We are not including 
 duplicates at this time. 
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a Census year for which to get data
+from this observer.
+They should receive the data observed in that year in the simulation.
+For example, if they request 2020 data, they will receive the data observed in April 2020.
+This must be a year in which a Census was actually performed -- otherwise they will
+get an error.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2329,6 +2340,21 @@ To create this survey:
 
 [Household_Rates_2022]_
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive all the data observed in that year in the simulation.
+For example, if they request 2023 data, they will receive the data observed in
+January 2023, February 2023, and so on to December 2023.
+
+.. todo::
+  In a future version, we may want to allow single-month date subsetting, or
+  five-year subsets to replicate the 5-year ACS data files.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
 Note/limitations: 
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
@@ -2473,6 +2499,19 @@ the participant.
 
 Source: [Coverage]_
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a year of 2023, they should recieve the data recorded
+in January 2024.
+This is because the real WIC data would be updated continuously, and we approximate
+the state of that data at the end of the year by observing at the start of the next.
+See the final limitation below for more about this approximation.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2601,6 +2640,16 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - 1099 
     - 5.35%
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a **tax** year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a tax year of 2023, they should recieve the data recorded
+in January 2024.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2837,6 +2886,16 @@ for who files taxes:
     * Otherwise, if they are the reference person or a relative of the reference person (NOT roommate or non-relative) they will be randomly assigned to someone else in the household who is the reference person or a relative of the reference person (NOT roommate or non-relative) 
     *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a **tax** year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a tax year of 2023, they should recieve the data recorded
+in April 2024.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2909,8 +2968,23 @@ SSN then.
 **Who to Sample** 
 
 100% of simulants with a SSN and a qualifying event in that time step 
-will be recorded. 
+will be recorded.
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive all the events captured by this observer with a
+"date of event" in the supplied year **or any previous year**.
+For example, if they request 2023 SSA data, they will receive all
+rows with a "date of event" on December 31st 2023 or earlier.
+
+.. todo::
+  If we add a lag to recording SSA events in the future, we will
+  want to do this subsetting by date of recording, not date of event.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Items NOT Included in the Minimum Viable Model** 
 
