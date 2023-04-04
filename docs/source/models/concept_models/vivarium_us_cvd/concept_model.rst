@@ -288,8 +288,8 @@ Individual intervention pages:
      - Closed
      - 
    * - Age start
-     - 7 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
@@ -316,8 +316,8 @@ Individual intervention pages:
      - Closed
      - 
    * - Age start
-     - 7 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
