@@ -37,7 +37,7 @@ Nutrition Optimization
 
 .. contents::
   :local:
-  :depth:1
+  :depth: 1
 
 1.0 Overview
 ++++++++++++
