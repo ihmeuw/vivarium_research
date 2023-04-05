@@ -58,7 +58,6 @@ Vivarium Census PRL Simulated Data
 
 .. contents::
   :local:
-  :depth: 3
 
 +----------------------------------------------------+
 | List of abbreviations                              |
@@ -1986,7 +1985,7 @@ Census
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - Date of Birth (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2118,6 +2117,17 @@ Please note that for simulants with a net undercount less than 0,
 they have a 0% chance of being missed. We are not including 
 duplicates at this time. 
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a Census year for which to get data
+from this observer.
+They should receive the data observed in that year in the simulation.
+For example, if they request 2020 data, they will receive the data observed in April 2020.
+This must be a year in which a Census was actually performed -- otherwise they will
+get an error.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2161,10 +2171,11 @@ There are two types of sampling plans:
 
   * - Household ID (arbitrary indicator which is only the same for simulants in the same household)
   * - Unique simulant ID (for PRL tracking)
+  * - Survey date
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2329,6 +2340,21 @@ To create this survey:
 
 [Household_Rates_2022]_
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive all the data observed in that year in the simulation.
+For example, if they request 2023 data, they will receive the data observed in
+January 2023, February 2023, and so on to December 2023.
+
+.. todo::
+  In a future version, we may want to allow single-month date subsetting, or
+  five-year subsets to replicate the 5-year ACS data files.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
 Note/limitations: 
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
@@ -2356,7 +2382,6 @@ in the home.
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
   * - DOB (stored as a string in MMDDYYYY format)
   * - Physical Address Street Number 
   * - Physical Address Street Name
@@ -2474,6 +2499,19 @@ the participant.
 
 Source: [Coverage]_
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a year of 2023, they should recieve the data recorded
+in January 2024.
+This is because the real WIC data would be updated continuously, and we approximate
+the state of that data at the end of the year by observing at the start of the next.
+See the final limitation below for more about this approximation.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2484,6 +2522,7 @@ Source: [Coverage]_
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life 
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
 #. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data. 
+#. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028. 
 
 Taxes
 ^^^^^
@@ -2512,7 +2551,7 @@ W2 and 1099 Forms
   * - First name
   * - Middle initial 
   * - Last name
-  * - Age 
+  * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
   * - Mailing Address Street Number (blank for PO boxes)
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2601,6 +2640,16 @@ from a review of 2016 tax data by [Lim_2019]_ .
   * - 1099 
     - 5.35%
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a **tax** year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a tax year of 2023, they should recieve the data recorded
+in January 2024.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2637,7 +2686,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     - 
   * - Last name
     - 
-  * - Age
+  * - Age (floored to integer years **before** noise is applied)
     -  
   * - DOB (stored as a string in MM/DD/YYYY format)
     -  
@@ -2837,6 +2886,16 @@ for who files taxes:
     * Otherwise, if they are the reference person or a relative of the reference person (NOT roommate or non-relative) they will be randomly assigned to someone else in the household who is the reference person or a relative of the reference person (NOT roommate or non-relative) 
     *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a **tax** year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a tax year of 2023, they should recieve the data recorded
+in April 2024.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Limitations and Possible Future Adds** 
 
@@ -2909,8 +2968,23 @@ SSN then.
 **Who to Sample** 
 
 100% of simulants with a SSN and a qualifying event in that time step 
-will be recorded. 
+will be recorded.
 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive all the events captured by this observer with a
+"date of event" in the supplied year **or any previous year**.
+For example, if they request 2023 SSA data, they will receive all
+rows with a "date of event" on December 31st 2023 or earlier.
+
+.. todo::
+  If we add a lag to recording SSA events in the future, we will
+  want to do this subsetting by date of recording, not date of event.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
 
 **Items NOT Included in the Minimum Viable Model** 
 
@@ -2943,26 +3017,28 @@ noise added to the data. We currently divide noise into two types:
 #. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
 #. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
 
-As there are multiple noise functions that will independently select 
-data. Noise should be added in the order below. Note that not all 
-noise functions apply to add data types, but this ordering should 
-be able to be used for all data. 
+Noise should be added in the order below.
 
 #. "Borrowed" SSN (happens in simulation NOT noise functions)
-#. Omissions 
-#. Duplications 
-#. Missing Data 
-#. Incorrect Selection 
-#. Copy from Within Household 
+#. Omissions
+#. Duplications
+#. Missing Data
+#. Incorrect Selection
+#. Copy from Within Household
 #. Month and day swaps (applies to dates only)
 #. Zip Code Miswriting (applies to Zip Code only)
 #. Age Miswriting (applies to age only)
-#. Numeric miswriting 
-#. Nicknames 
+#. Numeric miswriting
+#. Nicknames
 #. Fake names
-#. Phonetic 
-#. OCR 
-#. Typographic 
+#. Phonetic
+#. OCR
+#. Typographic
+
+.. note::
+
+  Not all noise functions apply to all observers and columns, but the subset of noise functions
+  applied should always be applied in the order they appear in this list.
 
 Column Noise
 ''''''''''''
@@ -2970,184 +3046,159 @@ Column Noise
 To begin, we will start with defining column based noise. Some general rules 
 for all column based noise include: 
 
-- Rows eligible for errors is the probability of selecting a row to have a particular type of noise added. For example, 1% noise level for incorrect selection to type of tax form means 1% of rows will be selected to have the wrong value selected. This is somewhat more complicated for: OCR, phonetic, typographic, and numeric miswriting which is elaborated on below. 
-- Note that selection for column noise is applied to NON-MISSING values only. This means if we select 5% for noise, that 5% is AFTER missing data has been removed, meaning it might be a smaller percent of the full sample. 
-- Token noise level is a noise parameter that only applies to certian noise types and defines the amount of errors expected once a string is selected for noise. This parameter is also elaborated on below. 
+- The row-level noise probability is the probability of selecting a row to have a particular type of noise added. For example, 0.01 row-level noise probability for incorrect selection on the "type of tax form" column means each row will have 0.01 (1%) probability to have the wrong value selected. In the case of OCR, phonetic, typographic, and numeric miswriting, it is not the case that every row selected will actually have any noise applied -- this is explained further below.
+- Note that column noise is applied only to non-missing values in that column; or equivalently, all noise functions have no effect on missing values, so it does not matter whether or not noise is applied for these values.
+- Token noise probability is a noise parameter that only applies to certain noise types and defines the probability of each *token* having an error, once a string is selected for noise. This parameter is also elaborated on below. 
 - A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
-- The amount of each type of noise is individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 2% error rate for typographic noise. The minimum noise is 0% and the maximum if 5% for all column noise. For token noise level, the minimum is 0 and maximum is 1. 
+- The parameters of each type of noise are individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 0.02 row-level noise probability for typographic noise.
 - Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
 - As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
-- The order of different noise types should not matter, but will go in the order they are listed in the table below. 
 
-.. list-table:: Type of Noise Included and Default Level by Data Included
-  :widths: 20 20 20 20 20 20 20
+.. list-table:: Types of Noise and Default Parameters for each Column
+  :widths: 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
     - Observers Present 
-    - Default Noise Level: Rows Eligible for Errors
-    - Default Noise Level: Token Noise Level 
-    - Additional parameters (defined in detail below)
+    - Default Row-Level Noise Probability
+    - Default Token Noise Probability 
     - Types of Noise 
     - Notes
   * - First Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 1%
+    - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
     - 
   * - Middle Initial
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 1%
+    - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, phonetic, OCR, typographic
     - 
   * - Last Name
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 1%
+    - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names 
   * - Age
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 1%
+    - 0.01
     - 0.1 
-    - Age miswriting: possible perturbations 
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic 
     - 
   * - Date of Birth 
     - Census, Household Surveys, WIC, Taxes (both), SSA  
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic  
     - 
   * - Street Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic 
     - Noise for all types of addresses will work in the same way 
   * - Street Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, phonetic, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - Unit Number for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - PO Box for Mailing Address 
-    - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - Household Surveys, WIC, Taxes (both) 
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic
     - 
   * - City Name for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, phonetic, OCR, typographic
     - Noise for all types of addresses will work in the same way 
   * - State for any Address (Home OR Mailing OR Employer) 
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, incorrect select
     - Noise for all types of addresses will work in the same way 
-  * - Zip Code 
+  * - Zip Code for any Address (Home OR Mailing OR Employer)
     - Census, Household Surveys, WIC, Taxes (both) 
-    - 1%
+    - 0.01
     - 0.1 
-    - Zip code miswriting: digit level probabilities 
     - Missing data, zip code miswriting, OCR, typographic 
-    - Applies to home, mailing, and employer addresses 
+    - 
   * - Relationship to head of household 
     - Census 
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, incorrect select
     - 
   * - Sex 
     - Census, Household Surveys, WIC 
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, incorrect select
     - 
   * - Race/Ethnicity 
     - Census, WIC
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, incorrect select
     - 
   * - SSN
     - Taxes (both), SSA
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic 
     - Note that not all types of noise apply to all observers, details below 
   * - ITIN
     - Taxes 1040
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, copy from within household, numeric miswriting, OCR, typographic
     - Note that not all types of noise apply to all observers 
   * - Income / Wages
     - Taxes (both)
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic 
     - Note that wages and income are on separate tax forms and noise is applied to each separately 
   * - Employer ID 
     - Taxes (both)
-    - 1%
+    - 0.01
     - 0.1 
-    - N/A
     - Missing data, numeric miswriting, OCR, typographic
     - 
   * - Employer Name 
     - Taxes (both)
-    - 1%
+    - 0.01
     - 0.1 
-    - Typographic: inclusion of original token 
     - Missing data, OCR, typographic
     - 
   * - Type of Tax Form  
     - Taxes (both)
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, incorrect select
     - 
   * - Type of SSA Event 
     - SSA 
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, incorrect select
     - 
   * - Date of SSA Event 
     - SSA 
-    - 1%
-    - N/A
+    - 0.01
     - N/A
     - Missing data, month and day swap, numeric miswriting, OCR, typographic 
     - 
@@ -3157,39 +3208,46 @@ available and information for implementation. **Software engineering team - plea
 
 **Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
 
-The user will have the opportunity to change all parameters used in the noise 
-functions from their default values. These are then directly plugged into noise functions. 
+The user will have the opportunity to change all parameters of the noise 
+functions from their default values.
 
 The exact method for how a user will input the parameters has not been finalized. We 
 anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{column}_{noise_function}_{param}`. 
 
-One limitation of having a row probability and then token probability is that since 
-there is a random probability of a particular character/token receiving noise, not 
-all rows that are selected to be eligible for noise will actually receive noise. 
-Another limitation is that token error rate is not very intuitive for the end user. 
+One limitation of having a row probability and then token probability is that
+not all rows that are selected for noise will actually receive any noise. 
+Another limitation is that token error probability is not very intuitive for the end user.
 
 At some point in the future, we might make this more user friendly. However, for the 
 sake of a minimum functional model, this is satisfactory. 
 
-Some functions have additional parameters, as listed in the table above. These parameters 
-are explained in more depth in the table below.  
+Some functions have additional parameters. These parameters
+are explained in more depth in the table below
+and are (separately) configurable for each observer column affected
+by that noise function.
 
 .. list-table:: Additional Inputs and Default Values
-  :widths: 20 20 20
+  :widths: 20 20 20 20
   :header-rows: 0
 
   * - Noise Function Affected
-    - Additional Inputs 
-    - Default Input Value 
+    - Additional Input
+    - Default Input Value
+    - Notes
   * - Typographic Noise
-    - Probability that a corrupted token contains the original token (e.g., if typically e -> r, the probability that e -> er)
-    - 0.1 
+    - Probability that a corrupted token is inserted before the original token (e.g., if typically e -> r, the probability that e -> re)
+    - 0.1
+    - 
   * - Age miswriting 
-    - Possible perturbations of age (e.g., for [1, -1] and age of 7, the possible "incorrect" results will be 6 and 8)
-    - [1, -1] 
+    - Possible perturbations of age (e.g., for [-1, 1] and age of 7, the possible "incorrect" results will be 6 and 8)
+    - [-1, 1]
+    - May be list of options, in which case the perturbation will be selected uniformly at random, or a dictionary where the keys are
+      the integer perturbations and the values are the probability of that perturbation.
+      **May not contain a perturbation option of zero (no change to age).**
   * - Zip code miswriting 
-    - Separate error rates for first 2 digits, middle digit, and last 2 digits 
-    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36 
+    - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits 
+    - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36
+    - 
 
 
 .. todo::
@@ -3202,23 +3260,53 @@ are explained in more depth in the table below.
 
 **OCR**
 
-Optical character recognition is when a character is misread for another character that 
-looks similar. A common examples is 'S' and '5'. In order to emulate 
-that, there is a `GeCo like corrupter and related list of possible changes in the ocr_variations_upper_lower csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
+Optical character recognition is when a string is misread for another string that 
+is visually similar. Some common examples are 'S' instead of '5' and 'm' instead of 'iii'.
 
-To implement this, select the strings eligible for noise and apply 
-the OCR noise function to all strings with the user defined token 
-error rate. 
+.. todo::
+  Both of these examples seem like they might be backward, though they come from the CSV below.
+  Are we interpreting the CSV backward? Should it be commutative?
+
+The possible OCR substitutions are given by `a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/ocr-variations-upper-lower.csv>`,
+which originated from the GeCO project.
+In the file, the first column is the real string (which we call a "token") and the second column is what it could be misread as (a "corruption").
+The same token can be associated with multiple corruptions.
+
+To implement this, we first select the rows to noise, as in other noise functions.
+For those rows, each token in the relevant string which is a corruption-eligible token in the CSV is selected to be corrupted or not,
+according to the token noise probability.
+Each token selected for corruption is replaced with its corruption from the second column of the CSV
+(choosing uniformly at random in the case of multiple corruption options for a single token),
+**unless a token with any overlapping characters (in the original string) has already been corrupted**.
+Tokens are corrupted in the order of the location of their first character in the original string, from beginning to end,
+breaking ties (e.g. 'l' and 'l>' are both corruption-eligible tokens and may start on the same 'l') by corrupting longer tokens first.
+Note that in an example :code:`abcd` where :code:`ab`, :code:`bc`, **and** :code:`cd` have **all** been selected to be corrupted,
+the corruption of :code:`ab` prevents the corruption of :code:`bc` from occurring, which then allows :code:`cd` to be corrupted
+even though it overlapped with :code:`bc`.
+
+.. note::
+  A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L46-L70>`.
+
+As noted above, this approach does not guarantee that all strings selected for noise are actually changed;
+in addition to the case where each token is independently selected to not be corrupted,
+a string with no corruption-eligible tokens will never be affected by the OCR noise function.
 
 **Phonetic**
 
 Phonetic errors are when a character is misheard. This could similar sounding letters when 
-spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'. 
-In order to emulate that, there is a `GeCo like corrupter and related list of possible changes in the phonetic_variations csv found here <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
+spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'.
 
-To implement this, select the strings eligible for noise and apply 
-the phonetic noise function to all strings with the user defined token 
-error rate. 
+This is implemented just like the OCR noise function, except with a different CSV of substitutions with slightly different structure:
+in `the phonetic substitutions CSV <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/phonetic-variations.csv>`
+the second column is the real string (token) and the third column is what it could be misheard as (corruption).
+This file also originated from the GeCO project.
+
+.. todo::
+  The CSV file also includes further fields that describe where in the string the corruptions may occur.
+  We currently ignore these, but may want to respect them in a future version.
+
+.. note::
+  A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L85-L101>`.
 
 Limitations: 
 
@@ -3227,17 +3315,31 @@ Limitations:
 
 **Typographic** 
 
-Typographic errors occur due to mistyping information. The commonality of errors are therefore 
-based on the QWERTY keyboard layout. These errors can include added characters, missed characters, 
-and replaced characters. In order to emulate that, there is a `GeCo like corrupter and related layout of the QWERTY keyboard csv found on github <https://github.com/ihmeuw/vivarium_research_prl/tree/main/src/vivarium_research_prl/noise>`_. 
+Typographic errors occur due to mistyping information.
+We define the probability of one character replacing, or being inserted before, another character according to the proximity of
+the keys on a keyboard (assuming QWERTY layout).
 
-To implement this, select the strings eligible for noise and apply 
-the typographic noise function to all strings with the user defined token 
-error rate and rate for including the original token. 
+We use `a CSV file <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/qwerty-keyboard.csv>`
+of a QWERTY keyboard layout (left-justified, which is not exactly accurate to most keyboards' half-key-offset layout) and accompanying number pad.
+This CSV also originates from GeCO; however, we have made some changes to include capital letters and have a complete numberpad.
+Note that as in the other CSVs, there are comments prefixed by :code:`#`, but also that the empty comment lines serve a purpose: the preceding
+rows and following rows should not be considered adjacent.
+
+First, rows are selected for typographic noise, as in other noise functions.
+Within strings that are selected, each character that is present in the CSV (any alphanumeric character) is
+selected to be corrupted or not according to the token noise probability (for typographic errors, individual characters are the "tokens").
+For each character selected for corruption, a second random choice is made: either the corruption character will be inserted before the original character,
+or it will replace the original character.
+This second selection is according to the extra "probability that a corrupted token is inserted before the original token" parameter to the typographic noise function.
+The corruption character to insert or replace with is uniformly selected from those that are either directly or diagonally adjacent to the original character in the CSV.
+For example, if 'q' was the original character, one of 'w', 'a', and 's' would be selected.
+
+.. note::
+  A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L124-L142>`.
 
 .. todo::
 
-  Add other "keyboard errors", likely ones that swap letters (teh instead of the). This would ideally be in the same typographic function. 
+  Add other "keyboard errors", such as skipping a letter or swapping letters (teh instead of the). This would ideally be in the same typographic function. 
 
 **Fake Names**
 
@@ -3272,36 +3374,50 @@ Limitations:
   If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach. 
 
 
-**Numeric Miswriting** 
+**Numeric Miswriting**
 
-To implement this, select the strings eligible for noise and apply 
-the numeric miswriting noise function to all strings with the user defined 
-character error rate. 
+To implement this, select the strings eligible for noise,
+and then select, for each digit character (0-9) in each eligible string, whether to change that character, according to the per-character error probability.
+The digits that are changed should be replaced with a digit character selected uniformly at random.
+Non-digit characters are not affected by this noise function.
 
-Limitations: 
+.. todo::
+  We would prefer to select the digit replacement only from the *other* digits (e.g. a 9 could not be replaced with a 9).
+  This would make the character-level noise probability for this function more intuitive.
+  However, this is not critical and we can stick to selecting *any* digit if it is easier to implement.
 
-- This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable. 
+Limitations:
+
+- This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable.
 
 **Age Miswriting** 
 
-To implement this, first select the strings eligible for noise. For each 
-selected string, the age will be adjusted. The adjustment value will be 
-randomly selected from the user inputted list of possible perturbations. 
+.. note::
+  Age should be an integer (rounded down/floored from the exact number with fractional part) **before**
+  noise functions are applied.
+  Therefore, this noise function acts on integers.
 
-For example, if the correct age is 28 and the possible perturbations are [-2, -1, 1, 2] 
-then 28 will be adjusted to either: 26, 27, 29, or 30, with an equal chance 
-of each option. 
+To implement this, first select the rows for noise according to the row noise probability.
+For each selected row, the age will be adjusted. The adjustment value will be 
+randomly selected from the configured possible perturbations,
+according to the configured probabilities of selection (or uniform if a list without probabilities is configured).
 
-If the resulting age is negative (e.g., the correct age is 1 and a perturbation 
-of -2 is applied to make the answer -1), then reselect from the remaining 
-perturbation options until the final answer is 0 or higher. 
+For example, if the correct age is 28 and the possible perturbations parameter is
+:code:`{-2: 0.2, -1: 0.3, 1: 0.3, 2: 0.2}`
+then 28 will be adjusted to either 26, 27, 29, or 30, with a 0.2 probability for each of
+26 and 30 and a 0.3 probability for each of 27 and 29.
+
+If the age after adding the chosen perturbation is negative, reflect the sign to be positive (e.g. a -2 becomes 2).
+
+If the resulting age is equal to the original age value, subtract 1 from the age.
+(This will never result in a negative value because reflecting a negative value will never result in 0, and a perturbation of 0 is not permitted.)
 
 **Zip code Miswriting** 
 
 To implement this, select the strings eligible for noise and apply 
 the zip code miswriting noise function to all strings with the user defined. 
 This code is similar to the numeric miswriting above, but has different 
-inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
+per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
 
 **Copy from within Household** 
 
