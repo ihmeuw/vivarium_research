@@ -451,6 +451,10 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
 
+Notes: 
+ - We added an additional stratificaiton to LDL-C treatment assignment for simulants over 75. In ACC/AHA guidelines, stain use in older populations is based on clinical assessment, which is difficult to include in a simulation model. 
+ - Here, we set guidelines for use based on LDL-C level that will result in treatment levels approximately aligned to NHANES statin use in older adults. We do this by setting the LDL-C level for treatment equal to the 65th percentile in exposures, as NHANES has about 35% of older adults on statins. Overtime, this will lead to about the correct number of simulants on treatment. 
+
 **Lifestyle Intervention Ramp**
 
 .. image:: lifestyle_ramp.svg
