@@ -43,20 +43,16 @@ This document seeks to add in Sim Science specific information and common practi
 computationally intensive tasks.These computers can all access a shared 
 file system.For researchers on sim science, 
 the most common task we use the cluster for is opening Jupyter notebooks 
-to run code. We will go into more depth on this task below. 
+to run code. We will go into more depth on how to access the cluster and 
+other tasks below. 
 
 For general information on the cluster, please see the Module 3 within the 
 IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_.
 
-**How to Access the cluster:** The cluster can be accessed from most terminals 
-on your computer. Some of the most popular ones used are: PuTTY or Bitvise for 
-Windows users and Terminal or iTerm2 for Mac users. For Windows users, most researchers use PuTTY, 
-however Bitvise is also used at IHME. For Mac users, the Terminal app comes installed 
-on your computer but some perfer to use iTerm2. 
-
-Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
-
-Link to download `iTerm2 <https://iterm2.com/>`_
+**Terminals:** You will need to use a terminal for both accessing the cluster 
+and updating Vivarium documents. There are many options for terminals you can 
+use. In section 2, we will review how to use terminals and how to select one 
+for different applications. 
 
 **GitHub:** GitHub is an internet hosting service we use to control versioning for 
 code and documentation. It uses **Git** to track changes and allows for multiple 
@@ -77,27 +73,11 @@ We will see an example of how to clone and make edits using Git in the next sect
 It is worth noting that you can use Git and GitHub from BOTH the cluster and from 
 terminals on your local computer. 
 
-**How to Access GitHub:** Similar to the cluster, Git commands are written into a 
-terminal to access the repositories and push edits. On our team, most Windows folks use 
-Git Bash which automatically installs with downloading Git. However, some prefer 
-the Windows Subsystem for Linux (WSL) for it's user interface and tools. 
-
-For Mac users, the Terminal app which comes installed on your machine can be used for 
-Git as well. 
-
-It is worth noting here that these applications can also be used to access the cluster, 
-although the common practice on the Sim Science team is to use separate terminals for 
-GitHub on our local machine and for cluster access. 
-
-Link to download `Git and Git Bash <https://git-scm.com/>`_
-
-Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
-
-**Anaconda:** Anaconda aims to simplify package management and deployment for Python 
+**Miniconda:** Miniconda aims to simplify package management and deployment for Python 
 and R programming. On Sim Science, we use it for updating Vivarium documents. An 
 example of this will be in the next section. 
 
-Link to download `Anaconda <https://www.anaconda.com/products/distribution>`_ 
+Link to download `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ 
 
 **Text Editors:** For updating Vivarium documents, a text editor is needed. Most of 
 the Sim Science team uses Sublime Text. Others on the team prefer Atom, which was 
@@ -140,9 +120,48 @@ You can code in multiple languages in Jupyter including Python and R. This is mo
 used by the Sim Science team than PyCharm. Information on installing and using Jupyter is 
 in the Accessing the Cluster section below. 
 
+.. _terminal_access:
+
+2.0 How to Access a Terminal
+++++++++++++++++++++++++++++
+
+.. todo::
+
+  - Build out this section with terminal options, Linux vs Unix vs Windows 
+  - Link to the command line training here and explain that it is Linux based 
+  - The below section needs to be reworked a bit but was pasted as a starting point 
+  - Git comes with windows but is not Linux based 
+  - Seems that some terminals require Git tokens and others don't. Figure out which 
+  - How to install conda (needed for a lot of things)
+
+
+**How to Access GitHub:** Similar to the cluster, Git commands are written into a 
+terminal to access the repositories and push edits. On our team, most Windows folks use 
+Git Bash which automatically installs with downloading Git. However, some prefer 
+the Windows Subsystem for Linux (WSL) for it's user interface and tools. 
+
+For Mac users, the Terminal app which comes installed on your machine can be used for 
+Git as well. 
+
+It is worth noting here that these applications can also be used to access the cluster, 
+although the common practice on the Sim Science team is to use separate terminals for 
+GitHub on our local machine and for cluster access. 
+
+Link to download `Git and Git Bash <https://git-scm.com/>`_
+
+Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
+
+One difference in uploading to GitHub is that the cluster will require a password 
+to push information. This is **NOT** your GitHub password, but instead is a unique 
+token that you will need to create. `This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ has information on creating a token. Many Sim Science users set their token to 
+never expire and save the token where they can reference it later. However, this 
+might compromise security in some cases, so regenerating a token periodically is 
+best practice. 
+
+
 .. _cluster_access:
 
-2.0 How to Access the Cluster
+3.0 How to Access the Cluster
 +++++++++++++++++++++++++++++
 
 For this section, we will review cluster set up for a first-time user. Multiple other teams 
@@ -156,6 +175,26 @@ Some Hub pages on accessing the cluster:
 - `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_
 
 .. _cluster_access_putty:
+
+The cluster can be accessed from most terminals 
+on your computer. Some of the most popular ones used are: PuTTY or Bitvise for 
+Windows users and Terminal or iTerm2 for Mac users. For Windows users, most researchers use PuTTY, 
+however Bitvise is also used at IHME. For Mac users, the Terminal app comes installed 
+on your computer but some perfer to use iTerm2. 
+
+Terminals most commonly used to access the cluster: 
+
+Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
+
+Link to download `iTerm2 <https://iterm2.com/>`_
+
+Other information from Zeb to integrate: 
+
+The cluster is accessed through the SSH ("Secure Shell") protocol, so what is needed is an SSH "client" -- an application that can make SSH connections. Both Mac and Windows (at least, in recent versions of Windows 10) include command-line SSH clients by default.
+
+PuTTY and Bitvise are both SSH clients with graphical user interfaces for Windows. For Mac, it looks like some exist (e.g. Termius) but I didn't see anything super popular.
+
+We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too.
 
 Accessing the Cluster from PuTTY
 --------------------------------
@@ -221,16 +260,12 @@ the cluster the same way as on your local machine.
 
 You will need to make sure that you have cloned your repository and are in the 
 appropriate working directory while logged into the cluster. Then you can add, 
-check the status, commit, and push information in a similar way. For many projects, 
-you will create a new GitHub repository that is research team specific to not 
-disturb the engineers coding workflow. 
-
-One difference in uploading to GitHub is that the cluster will require a password 
-to push information. This is **NOT** your GitHub password, but instead is a unique 
-token that you will need to create. `This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ has information on creating a token. Many Sim Science users set their token to 
-never expire and save the token where they can reference it later. However, this 
-might compromise security in some cases, so regenerating a token periodically is 
-best practice. 
+check the status, commit, and push information in a similar way.
+Researchers will generally create a new GitHub repository with a name starting 
+with :code:`vivarium_research`, e.g. :code:`vivarium_research_ciff_sam`.
+This will store code written by researchers, but not the simulation code itself, which is managed by
+the engineers in a different repository. Having separate repositories ensures that 
+researchers do not disturb engineering workflow. 
 
 .. _cluster_access_other:
 
@@ -296,14 +331,15 @@ your Bash files.
 
 .. _conda_environments:
 
-3.0 Conda Environments
+4.0 Conda Environments
 ++++++++++++++++++++++
 
-Your environment is a “space” in which you can run code that has some 
-preset information. Environments are helpful as you can preinstall packages 
-into them for easier ability to run programs. GBD has a common environment 
-that you can use, but usually each project will also create its own environment 
-as well. Below are some common questions on environments. 
+A conda environment is a "workspace" in which you can run code with certain 
+packages installed. You can install a package in a conda environment without 
+affecting any other conda environments: they are **isolated** from one another.
+
+This allows you to have multiple projects that each have their own separate set 
+of packages and package versions. Below are some common questions on environments.
 
 **What is an environment again?**
 It’s a "workspace" that contains a specific collection of packages that 
@@ -321,28 +357,45 @@ it is helpful to keep environments that work with existing code
 and to create new environments for new projects and install the 
 latest versions of packages in those. 
 
-**How and when should I make a new one?**
-In general, our team has a new environment for each project. When you are 
-starting a new project, you can see if the engineering team has set up an 
-environment for that work. If not, it is best practice to consider setting one up. 
+**What environments are available for me to use?**
+The Central Computation team maintains an environment, which anyone at IHME can use,
+that includes all the packages necessary for accessing GBD results (plus some other 
+common packages). However, this environment is read-only. Read-only means you can 
+use it, but you can't change it. So if you want any packages not included there, 
+you will need to make your own environment.
+
+Another option is to use the engineering team's environment for a particular 
+project. Since engineering uses a similar set of packages to us - most of the 
+time these environments have everything you need to run your code. 
+
+.. todo::
+
+  Confirm with the team - I forgot how we decided this works exactly to not disturb engineering  
+
+Another common option is to make a make your own environment for a project. 
+It is common practice for each researcher to make a new environment for each 
+project they work on. They may even make multiple if they want to use different 
+versions in different parts of a project.
 
 **How do you make a new environment?** 
 
 .. todo::
 
-  Find instructions on the vivarium CVD page and include here. Also note that you need to install conda first. 
+  - Find instructions on the vivarium CVD page and include here. 
 
 **How do I install new information to an existing environment?**
 Once you have made a new environment, you can add some commonly used packages 
-using :code:`pip install package`. Common ones include numpy, pandas, or 
-matplotlib among many others. If :code: `import` in Python fails, try 
+using :code:`pip install package`. A list of common packages to install is provided 
+below. If :code: `import` in Python fails, try 
 installing the package to the environment and reloading the page. 
 
-**When should I use the GBD environment vs a project specific one?**
-In general, it is best practice to use your project’s environment for project 
-work. Since this is the same environment used by the engineers on that project 
-it ensures consistency. You can use the GBD environment if you choose and it 
-can be helpful for some more general tasks. 
+.. todo::
+
+  Make a list of common packages to install 
+
+**When should I use the GBD environment vs making my own?**
+In general, it is best practice to use your own environment for project 
+work. However, the GBD environment is helpful for small tasks and non-project work. 
 
 **I installed a package to this environment on the cluster - why won't it work?** 
 Your local machine and the cluster are different and don’t "speak" between environments. 
@@ -353,10 +406,10 @@ show on your local machine.
 Python is the name of a programming language. It is the name for the syntax 
 used in code. 
 
-Anaconda is a software you can use to interface with Python. It is specifically 
-designed for improved user interface and has tools tailored for data science. 
-
 Conda is a package manager that we use to create and maintain environments. It is 
 designed to allow for easier package installation and control across team members. 
+
+Anaconda is a software you can use to install Python and conda, and create conda 
+environments, on Windows. It is specifically designed for data science. 
 
 
