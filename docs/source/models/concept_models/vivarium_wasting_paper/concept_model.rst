@@ -33,7 +33,7 @@
 .. _2020_concept_model_vivarium_ciff_sam:
 
 ===================================
-Vivarium Acute Malnutrition Phase 2
+Vivarium wasting paper simulation
 ===================================
 
 .. contents::
