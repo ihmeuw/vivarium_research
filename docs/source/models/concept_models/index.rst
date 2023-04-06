@@ -9,3 +9,5 @@ Simulation Concept Models
    :glob:
 
    */concept_model*
+
+To view a list of :ref:`archived concept models, click here. <archived_concept_models>`
