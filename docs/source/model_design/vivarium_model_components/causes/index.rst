@@ -889,7 +889,7 @@ Restrictions
 
 For each cause we model, we use a restrictions table which describes any restrictions on the effects of the given cause (such as being only fatal or only nonfatal), as well as restrictions on the age and sex of simulants to which different aspects of the cause model apply. If a cause is labeled as 'YLL only', this for example signifies that the cause is only fatal, whereas 'YLD only' implies that the cause is only non-fatal. Please note that in the restrictions table, the age group start and end values for YLLs and YLDs are inclusive (i.e., 'YLL age group start' at 10 to 14 years old means that the cause model does apply to 10 to 14 year-old individuals). 
 
-As an example, please see the following table, which describes any restrictions for `Maternal Disorders in GBD 2019 <https://vivarium-research.readthedocs.io/en/latest/models/causes/maternal_disorders/index.html>`_. By looking at this table, we can see that this cause only applies to people reported as 'Female' by GBD. We can also see that this cause is only fatal (i.e., 'YLL only') depending on the sub-cause: the fatal sub-causes here are indirect maternal deaths, late maternal deaths, and maternal deaths aggrevated by HIV/AIDS. In terms of restrictions by age group, we can see from this table that individuals younger than 10 years old and older than 54 years old do not apply to this cause model (see note below table).
+As an example, please see the following table, which describes any restrictions for `Maternal Disorders in GBD 2019 <https://vivarium-research.readthedocs.io/en/latest/models/causes/maternal_disorders/index.html>`_. By looking at this table, we can see that this cause only applies to people reported as 'Female' by GBD. We can also see that this cause is only fatal (i.e., 'YLL only') depending on the sub-cause: the fatal sub-causes here are indirect maternal deaths, late maternal deaths, and maternal deaths aggravated by HIV/AIDS. In terms of restrictions by age group, we can see from this table that individuals younger than 10 years old and older than 54 years old do not apply to this cause model (see note below table).
 
 .. list-table:: GBD 2019 Cause Restrictions
    :widths: 15 15 20
@@ -906,7 +906,7 @@ As an example, please see the following table, which describes any restrictions 
      -
    * - YLL only
      - False
-     - False for maternal disorders (c_366), True for subcauses including indirect maternal deaths (c_375), late maternal deaths (c_376), and maternal deaths aggrevated by HIV/AIDs (c_741)
+     - False for maternal disorders (c_366), True for subcauses including indirect maternal deaths (c_375), late maternal deaths (c_376), and maternal deaths aggravated by HIV/AIDs (c_741)
    * - YLD only
      - False
      -
