@@ -164,7 +164,7 @@ on the ages and sexes to which the cause applies.
      -
    * - YLL only
      - False
-     - False for maternal disorders (c_366), True for subcauses including indirect aternal deaths (c_375), late maternal deaths (c_376), and maternal deaths aggrevated by HIV/AIDs (c_741)
+     - False for maternal disorders (c_366), True for subcauses including indirect maternal deaths (c_375), late maternal deaths (c_376), and maternal deaths aggrevated by HIV/AIDs (c_741)
    * - YLD only
      - False
      -
