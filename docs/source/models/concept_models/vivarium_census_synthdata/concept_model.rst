@@ -3094,7 +3094,7 @@ for all column based noise include:
     - Missing data, fake names, phonetic, OCR, typographic
     - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, WIC, Taxes (both), SSA
+    - Census, Household Surveys, Taxes (both)
     - 0.01
     - 0.1
     - Missing data, Copy from within Household, Age miswriting, OCR, typographic
@@ -3124,7 +3124,7 @@ for all column based noise include:
     - Missing data, numeric miswriting, OCR, typographic
     - Noise for all types of addresses will work in the same way
   * - PO Box for Mailing Address
-    - Household Surveys, WIC, Taxes (both)
+    - Taxes (both)
     - 0.01
     - 0.1
     - Missing data, numeric miswriting, OCR, typographic
@@ -3160,7 +3160,7 @@ for all column based noise include:
     - Missing data, incorrect select
     -
   * - Race/Ethnicity
-    - Census, WIC
+    - Census, Household Surveys, WIC
     - 0.01
     - N/A
     - Missing data, incorrect select
