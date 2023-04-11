@@ -3160,7 +3160,7 @@ for all column based noise include:
     - Missing data, incorrect select
     -
   * - Race/Ethnicity
-    - Census, WIC
+    - Census, Household Surveys, WIC
     - 0.01
     - N/A
     - Missing data, incorrect select
