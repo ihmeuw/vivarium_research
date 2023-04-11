@@ -3124,7 +3124,7 @@ for all column based noise include:
     - Missing data, numeric miswriting, OCR, typographic
     - Noise for all types of addresses will work in the same way
   * - PO Box for Mailing Address
-    - Household Surveys, WIC, Taxes (both)
+    - Taxes (both)
     - 0.01
     - 0.1
     - Missing data, numeric miswriting, OCR, typographic
