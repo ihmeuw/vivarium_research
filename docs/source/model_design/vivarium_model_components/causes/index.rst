@@ -915,13 +915,13 @@ As an example, please see the following table, which describes any restrictions 
      -
    * - YLL age group end
      - 50 to 54 (ID=15)
-     - (See the AgeGroupNote_ for how to handle births that occur in the 55-59 age group)
+     - (See note below for how to handle births that occur in the 55-59 age group)
    * - YLD age group start
      - 10 to 14 (ID=7)
      -
    * - YLD age group end
      - 50 to 54 (ID=15)
-     - (See the AgeGroupNote_ for how to handle births that occur in the 55-59 age group)
+     - (See note below for how to handle births that occur in the 55-59 age group)
 
 .. note::
 
