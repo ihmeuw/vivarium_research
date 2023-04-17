@@ -364,24 +364,41 @@ common packages). However, this environment is read-only. Read-only means you ca
 use it, but you can't change it. So if you want any packages not included there, 
 you will need to make your own environment.
 
-Another option is to use the engineering team's environment for a particular 
-project. Since engineering uses a similar set of packages to us - most of the 
-time these environments have everything you need to run your code. 
+Another option is to copy the engineering team's environment for a particular 
+project. For this option, you will technically make your own environment, but rather 
+than selecting packages by yourself, you will just install everything the engineering 
+team is using. However, since you are making your own environment you can also add 
+new packages or update as needed. 
 
-.. todo::
+If you are not familiar with environments, we recommend this option as it is straightforward 
+but still allows you to make a personal environment. 
 
-  Confirm with the team - I forgot how we decided this works exactly to not disturb engineering  
+Instructions for how to do this are found in the readme section of the engineering GitHub page 
+for your project. For example, these are the `CVD environment instructions <https://github.com/ihmeuw/vivarium_nih_us_cvd>`_. If you are having trouble locating these for your projects, ask an engineering team member. 
 
 Another common option is to make a make your own environment for a project. 
-It is common practice for each researcher to make a new environment for each 
+If you are familiar with environments, this is a recommended approach. It is 
+common practice for each researcher to make a new environment for each 
 project they work on. They may even make multiple if they want to use different 
 versions in different parts of a project.
 
 **How do you make a new environment?** 
+Before you can make a new environment, ensure that you have git and conda installed. 
+Instructions for this can be found above if needed. 
 
-.. todo::
+Once these are installed, navigate in your preferred terminal. Ensure that you are 
+in the right location to have this environment on your local machine or on the cluster 
+as needed. Then, follow the below code: 
 
-  - Find instructions on the vivarium CVD page and include here. 
+.. code-block:: python 
+  :linenos:
+
+  conda create --name=INSERT_NAME_HERE python=3.8
+  //conda will download python and base dependencies
+  conda activate ENVIRONMENT_NAME 
+  (ENVIRONMENT_NAME) pip install packages 
+
+From here, repeat the pip install line for all packages you wish to include. 
 
 **How do I install new information to an existing environment?**
 Once you have made a new environment, you can add some commonly used packages 
@@ -389,9 +406,27 @@ using :code:`pip install package`. A list of common packages to install is provi
 below. If :code: `import` in Python fails, try 
 installing the package to the environment and reloading the page. 
 
-.. todo::
+**Common Packages:**
 
-  Make a list of common packages to install 
+Packages for data manipulation and statistics: 
+
+- NumPy
+- Pandas 
+- SciPy
+- Math 
+- warnings  
+- pyreadstat
+- random 
+- risk_distributions 
+
+Packages for visualization: 
+
+- Matplotlib 
+- Seaborn 
+
+Packages for accessing GBD data: 
+
+- db_queries 
 
 **When should I use the GBD environment vs making my own?**
 In general, it is best practice to use your own environment for project 
