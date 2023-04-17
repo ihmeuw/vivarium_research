@@ -288,8 +288,8 @@ Individual intervention pages:
      - Closed
      - 
    * - Age start
-     - 7 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
@@ -316,8 +316,8 @@ Individual intervention pages:
      - Closed
      - 
    * - Age start
-     - 7 years
-     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 7-25 will be modeled but not observed. 
+     - 5 years
+     - Minimum age at initialization was chosen to have youngest simulants be 25 at the end. Ages 5-25 will be modeled but not observed. 
    * - Age end
      - 125 years
      - Maximum age at initialization
@@ -450,6 +450,10 @@ The probability of missing a follow-up appointment is 8.68% for all simulants. [
   * - H
     - If simulant is eligible, either 50% or 100% depending on scenario  
     - 
+
+Notes: 
+ - We added an additional stratificaiton to LDL-C treatment assignment for simulants over 75. In ACC/AHA guidelines, stain use in older populations is based on clinical assessment, which is difficult to include in a simulation model. 
+ - Here, we set guidelines for use based on LDL-C level that will result in treatment levels approximately aligned to NHANES statin use in older adults. We do this by setting the LDL-C level for treatment equal to the 65th percentile in exposures, as NHANES has about 35% of older adults on statins. Overtime, this will lead to about the correct number of simulants on treatment. 
 
 **Lifestyle Intervention Ramp**
 
@@ -964,10 +968,40 @@ Code is below for reference
     - `Validation workbook for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model10_VV.ipynb>`_. FPG validation largely worked as expected. We found that FPG levels remained stable over time and matched the artifact. In the `interactive sim for Model 10 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model10_VV.ipynb>`_, we additionally saw that standard deviation matched the expected outputs. There were some high RRs for FPG -> MI in older populations. This appears to be a result of a cluster of higher exposure values in these groups, also visible on exposure graphs. Therefore, we think that FPG is validating as expected.  
   * - 11.0
     - Adding Heart Failure  
-    -  
+    - After heart failure was added, the model would not run due to transition rates summing to greater than 1. This was causes by very high risk individuals who would have an 100% chance of a cardiac event on that time step. To fix this, we updated the model to include the US Health Disparities team risk factor data for SBP, BMI and LDL-C. In addition, we set new maximum exposure values for all 4 risks. 
+  * - 11.1
+    - Changes in Risk Factors
+    - With the new changes in risk factors and heart failure, we re-ran the model as a cause only model. The `validation workbook for model 11 <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model11_VV.ipynb>`_. As this included only causes, we checked heart failure which appeared to validate as expected. 
   * - 12.0
+    - LDL-C Ramp Update 
+    - This run included risks and medications but was still only the baseline scenario. The validation workbooks for `causes <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model12_cause_VV.ipynb>`_, `risks <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Model12_risks_VV.ipynb>`_, and the `interactive sim <https://github.com/ihmeuw/vivarium_research_nih_us_cvd/blob/main/Interactive_Model12_VV.ipynb>`_ are here. There were a number of possible V&V issues identified, which are being tracked with next steps in this `document <https://uwnetid.sharepoint.com/:w:/r/sites/ihme_simulation_science_team/Shared%20Documents/Research/GBD_CVD/V%20and%20V%20Questions.docx?d=w18c68f6abf2045cca0b79147de851454&csf=1&web=1&e=aev52f>`_. 
+  * - 12.1
+    - V&V Follow-up 
+    - To follow-up on some of the issues above, we are completing a model run with risks and risk effects but not medication. In addition, we will record results starting in 2021. 
+  * - 13.0
     - Lifestyle Intervention  
-    -  
+    - Planned full run with all scenarios 
+  * - 14.0
+    - New LDL-C Ramp Updates 
+    - 
+  * - 15.0
+    - Add New Observer 
+    - 
+  * - 16.0
+    - Results Management Updates 
+    - 
+  * - 17.0
+    - Test Runs for Timing on 3-5 States 
+    - Research team to specify further which states are needed 
+  * - 18.0
+    - Add Risk Correlation, Medication and PAF Recalculations 
+    - 
+  * - 19.0
+    - Update to GBD 2021 
+    - 
+  * - 20.0
+    - Final Runs 
+    - Research team to specify this further 
 
 Model 3 V&V for the relative risk with angina showed a lot of variability: 
     .. image:: Model3_VV_Angina.png
