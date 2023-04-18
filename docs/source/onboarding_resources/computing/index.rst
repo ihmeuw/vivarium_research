@@ -390,43 +390,65 @@ Once these are installed, navigate in your preferred terminal. Ensure that you a
 in the right location to have this environment on your local machine or on the cluster 
 as needed. Then, follow the below code: 
 
-.. code-block:: python 
+.. code-block:: bash 
   :linenos:
 
-  conda create --name=INSERT_NAME_HERE python=3.8
-  //conda will download python and base dependencies
-  conda activate ENVIRONMENT_NAME 
-  (ENVIRONMENT_NAME) pip install packages 
+  $ conda create --name=INSERT_NAME_HERE python=3.8
+  $ #conda will download python and base dependencies
+  $ conda activate ENVIRONMENT_NAME 
+  (ENVIRONMENT_NAME) $ pip install packages 
 
 From here, repeat the pip install line for all packages you wish to include. 
 
 **How do I install new information to an existing environment?**
 Once you have made a new environment, you can add some commonly used packages 
 using :code:`pip install package`. A list of common packages to install is provided 
-below. If :code: `import` in Python fails, try 
-installing the package to the environment and reloading the page. 
+below. You can also include multiple packages in a single command. For convenience, 
+a code snippet you can copy and paste is included here with some common packages. 
+
+.. code-block:: bash 
+  :linenos:
+
+  $ pip install numpy pandas scipy risk_distributions statsmodels matplotlib seaborn dv_queries get_draws gbd_mapping 
 
 **Common Packages:**
 
 Packages for data manipulation and statistics: 
 
-- NumPy
-- Pandas 
-- SciPy
-- Math 
-- warnings  
-- pyreadstat
-- random 
+- NumPy (usually imported as np)
+- Pandas (usually imported as pd)
+- SciPy 
 - risk_distributions 
+- statsmodels (usually imported as sm or smf)
 
 Packages for visualization: 
 
-- Matplotlib 
-- Seaborn 
+- Matplotlib (usually imported as plt)
+- Seaborn (usually imported as sns)
 
-Packages for accessing GBD data: 
+Packages for accessing GBD data (`shared function information <https://hub.ihme.washington.edu/display/SF/Shared+Functions+Home>`_):
 
 - db_queries 
+- get_draws 
+- gbd_mapping (`further information <https://vivarium.readthedocs.io/projects/gbd-mapping/en/latest/gbd_mapping.html>`_)
+
+**Trouble Shooting:**
+
+Packages usually have to be in your environment before you can :code:`import` 
+them in Python. If an :code:`import` command fails, try installing the package 
+to the environment and reloading the page. 
+
+However, there are some common packages that do not require a pip install and come 
+pre-loaded into Python. A partial list is included below for clarity. These do still need 
+to be imported at the start of a notebook. 
+
+- math 
+- warnings 
+- random 
+
+Some packages have dependencies on other python packages or are not able to be 
+installed using the pip command. If you attempt to install a package and find errors, 
+ask a friend for help. 
 
 **When should I use the GBD environment vs making my own?**
 In general, it is best practice to use your own environment for project 
