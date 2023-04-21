@@ -81,15 +81,15 @@ sequela prevalence.
   accounted for through its stratified adjustments).
 
   As reported in the GBD 2019 methods appendix, "[they] tested the contribution 
-  of dependent and independent comorbidity in the US MEPS data and found that **
-  independent comorbidity was the dominant factor** even though well-known 
+  of dependent and independent comorbidity in the US MEPS data and found that 
+  **independent comorbidity was the dominant factor** even though well-known 
   examples of dependent comorbidity exist, such as clustering of conditions 
-  like ddiabetes and stroke or anxiety and alcohol use disorders" (p. 475).
+  like diabetes and stroke or anxiety and alcohol use disorders" (p. 475).
 
 Once this population has been initialized, the comorbidity correction is 
 performed as follows:
 
-For each simulant, the overall disability weight is calcualted as the 
+For each simulant, the overall disability weight is calculated as the 
 multiplicative combination of each of the sequela that the simulant possesses 
 according to the following equation:
 
@@ -158,7 +158,7 @@ default, vivarium models morbidity due to modeled causes only. Among the
 modeled causes, a partial comorbidity adjustment is performed.
 
 Specifically, for a simulant that possesses multiple causes of disability 
-simultaneously, the YLDs accured for that simulant in a given timestep are 
+simultaneously, the YLDs accrued for that simulant in a given timestep are 
 equal to:
 
 .. math::
