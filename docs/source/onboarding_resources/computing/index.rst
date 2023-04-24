@@ -127,29 +127,56 @@ in the Accessing the Cluster section below.
 
 .. todo::
 
-  - Build out this section with terminal options, Linux vs Unix vs Windows 
-  - Link to the command line training here and explain that it is Linux based 
-  - The below section needs to be reworked a bit but was pasted as a starting point 
-  - Git comes with windows but is not Linux based 
-  - Seems that some terminals require Git tokens and others don't. Figure out which 
-  - How to install conda (needed for a lot of things)
+  - What are the Unix options? Should we add anything else to the "other options"? 
+  - What terminals require Git tokens in which situations? 
+  - Check conda install below? 
 
+A lot of work you will do requires you to access a terminal. A terminal is a way for you, a 
+user, to communicate with a computer or computing system. There are many options for 
+terminals. This section is written for someone not familiar with terminals, so if 
+you have familiarity or favorite software please feel free to use those! 
 
-**How to Access GitHub:** Similar to the cluster, Git commands are written into a 
-terminal to access the repositories and push edits. On our team, most Windows folks use 
-Git Bash which automatically installs with downloading Git. However, some prefer 
+Writing code into a terminal is called using the command line. IHME has a helpful training 
+on the command line in Module 1 of the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. However, different terminals "speak" different 
+languages which means they require slightly different command line prompts in order to accomplish 
+the same tasks. 
+
+Some of the common languages are Linux, Unix, and Windows. The most common of these at IHME 
+is Linux and the command line trainings are Linux-based. For this reason, we recommend using a 
+terminal that works in Linux.
+
+**Recommended Terminals for Windows Users:** 
+
+For updating Vivarium docs and interacting with GitHub, we recommend using Git Bash. This 
+installs automatically when you download Git. However, some prefer 
 the Windows Subsystem for Linux (WSL) for it's user interface and tools. 
-
-For Mac users, the Terminal app which comes installed on your machine can be used for 
-Git as well. 
-
-It is worth noting here that these applications can also be used to access the cluster, 
-although the common practice on the Sim Science team is to use separate terminals for 
-GitHub on our local machine and for cluster access. 
 
 Link to download `Git and Git Bash <https://git-scm.com/>`_
 
 Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
+
+For accessing the cluster, we recommend using PuTTy or Bitvise. How to access the cluster 
+is included in more depth in Section 3. 
+
+**Recommended Terminals for Mac Users:** 
+
+For updating Vivarium docs and interacting with GitHub, we recommend using the Terminal app 
+which comes pre-installed on your computer. 
+
+For accessing the cluster, we recommend using iTerm2. How to access the cluster 
+is included in more depth in Section 3. 
+
+**Other Options:**
+
+Most terminals can also be used to access the cluster, although the common practice on 
+the Sim Science team is to use separate terminals for GitHub on our local machine and 
+for cluster access. 
+
+Git comes pre-installed on Window's machines and can be used for updating Vivarium docs 
+but is not Linux based. Therefore the command line trainings will not be applicable if 
+you use this option. 
+
+**Git Tokens for Different Terminals:**
 
 One difference in uploading to GitHub is that the cluster will require a password 
 to push information. This is **NOT** your GitHub password, but instead is a unique 
@@ -158,6 +185,17 @@ never expire and save the token where they can reference it later. However, this
 might compromise security in some cases, so regenerating a token periodically is 
 best practice. 
 
+**How to Install Conda:**
+
+Conda is an open-source, cross-platform, language-agnostic package manager and 
+environment management system. In order to accomplish most tasks at IHME, you will 
+need to install it. 
+
+Check with team: 
+
+- Install miniconda on local machine (used for vivarium docs as well)
+- For cluster have the conda initialize in your bashrc file 
+- Should we include another way? 
 
 .. _cluster_access:
 
