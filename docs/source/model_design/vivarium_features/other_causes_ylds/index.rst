@@ -51,7 +51,7 @@ Disability weight estimation
 
 The GBD study relies on disability weights (DWs) to estimate years lived with 
 disability (YLDs). DWs represent the magnitude of health loss associated with a 
-specifc health outcome and are measured on a scale from 0 to 1; 0 implies a 
+specific health outcome and are measured on a scale from 0 to 1; 0 implies a 
 state equivalent to full health and 1 equivalent to death.
 
 Disability weights have been estimated through a series of surveys, described 
