@@ -61,7 +61,7 @@ disability weight values for all of the health states included in the GBD study.
 Comorbidity correction
 ~~~~~~~~~~~~~~~~~~~~~~
 
-The disability weights estimated through the process described above considers 
+The disability weights estimated through the process described above consider
 each health state individually and must be corrected for the simultaneous 
 presence of multiple disability-causing health states within a given 
 individual. The GBD study performs this comorbidity correct (termed "COMO") 
