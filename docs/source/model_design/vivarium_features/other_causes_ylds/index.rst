@@ -100,7 +100,7 @@ according to the following equation:
 Where: :math:`DW_k` is the *Kth* disease sequelae that the simulant possesses.
 
 Once this overall disability weight is computed for each individual simulant, 
-it is the disaggregated into its component parts once more to obtain 
+it is then disaggregated into its component parts once more to obtain 
 cause-specific disability weights adjusted for comorbidity according to the 
 following formula:
 
