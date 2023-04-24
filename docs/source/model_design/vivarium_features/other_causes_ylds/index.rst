@@ -80,7 +80,7 @@ sequela prevalence.
   states (beyond correlation induced by location, age, and sex, which is 
   accounted for through its stratified adjustments).
 
-  As reported in the GBD 2019 methods appendix, "[they] tested the contribution 
+  As reported in the GBD 2019 methods appendix, "[GBD] tested the contribution 
   of dependent and independent comorbidity in the US MEPS data and found that 
   **independent comorbidity was the dominant factor** even though well-known 
   examples of dependent comorbidity exist, such as clustering of conditions 
