@@ -97,7 +97,8 @@ according to the following equation:
 
   DW_\text{overall} = 1 - \prod_{k=i}^j (1 - DW_k)
 
-Where: :math:`DW_k` is the *Kth* disease sequelae that the simulant possesses.
+Where: :math:`DW_k` is the disability weight for the :math:`k`-*th* disease 
+sequelae that the simulant possesses.
 
 Once this overall disability weight is computed for each individual simulant, 
 it is then disaggregated into its component parts once more to obtain 
@@ -109,7 +110,7 @@ following formula:
   ADW_k = \frac{DW_k}{\sum_{k=i}^j DW_k} \times DW_\text{overall}
 
 Where: :math:`ADW_k` is the comorbidity-adjusted disability weight for sequela 
-*K* among a given simulant.
+:math:`k` among a given simulant.
 
 Then, cause-specific YLDs per capita in an age-sex-location-year are computed 
 as the sum of the adjusted DWs for each sequela across all *n* simulants in the 
