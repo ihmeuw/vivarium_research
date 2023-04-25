@@ -125,12 +125,6 @@ in the Accessing the Cluster section below.
 2.0 How to Access a Terminal
 ++++++++++++++++++++++++++++
 
-.. todo::
-
-  - What are the Unix options? Should we add anything else to the "other options"? 
-  - What terminals require Git tokens in which situations? 
-  - Check conda install below? 
-
 A lot of work you will do requires you to access a terminal. A terminal is a way for you, a 
 user, to communicate with a computer or computing system. There are many options for 
 terminals. This section is written for someone not familiar with terminals, so if 
@@ -141,9 +135,10 @@ on the command line in Module 1 of the IHME Learn training `Computational Infras
 languages which means they require slightly different command line prompts in order to accomplish 
 the same tasks. 
 
-Some of the common languages are Linux, Unix, and Windows. The most common of these at IHME 
-is Linux and the command line trainings are Linux-based. For this reason, we recommend using a 
-terminal that works in Linux.
+Some of the common languages are Linux, Mac, and Windows. Linux and Mac languages are both derived 
+from a parent language Unix and so are very similar. Linux/Mac is most common language at IHME 
+and the command line trainings are Linux-based. For this reason, we recommend using a 
+terminal that works in Linux or Mac depending on your computer type.
 
 **Recommended Terminals for Windows Users:** 
 
@@ -173,17 +168,23 @@ the Sim Science team is to use separate terminals for GitHub on our local machin
 for cluster access. 
 
 Git comes pre-installed on Window's machines and can be used for updating Vivarium docs 
-but is not Linux based. Therefore the command line trainings will not be applicable if 
-you use this option. 
+but is not Linux based. Command Prompt is the Windows version of Terminal for Mac and is 
+pre-installed on Windows computers. It is also not Linux based. Therefore the command line 
+trainings will not be applicable if you use these option. 
 
-**Git Tokens for Different Terminals:**
+**Git Tokens:**
 
-One difference in uploading to GitHub is that the cluster will require a password 
-to push information. This is **NOT** your GitHub password, but instead is a unique 
-token that you will need to create. `This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ has information on creating a token. Many Sim Science users set their token to 
+"Pushing" things to GitHub will create a prompt asking for a username and password. 
+Counterintuitively, the username is your GitHub username, but the password is **NOT** 
+your GitHub password, but instead is a unique token that you will need to create. 
+`This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ 
+has information on creating a token. Many Sim Science users set their token to 
 never expire and save the token where they can reference it later. However, this 
 might compromise security in some cases, so regenerating a token periodically is 
 best practice. 
+
+There are also ways to set up terminals so that you do not have to enter this information 
+every time. This is covered is in aliases section below. 
 
 **How to Install Conda:**
 
@@ -191,11 +192,7 @@ Conda is an open-source, cross-platform, language-agnostic package manager and
 environment management system. In order to accomplish most tasks at IHME, you will 
 need to install it. 
 
-Check with team: 
-
-- Install miniconda on local machine (used for vivarium docs as well)
-- For cluster have the conda initialize in your bashrc file 
-- Should we include another way? 
+Link to download `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ 
 
 .. _cluster_access:
 
