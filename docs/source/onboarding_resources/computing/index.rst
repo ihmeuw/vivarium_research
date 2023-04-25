@@ -192,7 +192,18 @@ Conda is an open-source, cross-platform, language-agnostic package manager and
 environment management system. In order to accomplish most tasks at IHME, you will 
 need to install it. 
 
+For your local computer, you can use this link to install Miniconda. We recommend installing 
+Miniconda3 in 64 bit. 
+
 Link to download `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ 
+
+On the cluster, you can use the central comp version of conda. This is simplest and 
+recommended. To do this, log into the cluster and then enter the code 
+:code:`/ihme/code/central_comp/miniconda/bin/conda init`. This adds information on how to 
+access conda to your bashrc file. You will need to restart the terminal for the 
+changes to take effect. 
+
+There are other ways to install conda, but the above is simplest. 
 
 .. _cluster_access:
 
