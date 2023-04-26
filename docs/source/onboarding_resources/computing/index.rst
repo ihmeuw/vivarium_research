@@ -131,20 +131,24 @@ terminals. This section is written for someone not familiar with terminals, so i
 you have familiarity or favorite software please feel free to use those! 
 
 Writing code into a terminal is called using the command line. IHME has a helpful training 
-on the command line in Module 1 of the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. However, different terminals "speak" different 
-languages which means they require slightly different command line prompts in order to accomplish 
-the same tasks. 
+on the command line in Module 1 of the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. Command lines technically interact with an 
+operating system on your computer. 
 
-Some of the common languages are Linux, Mac, and Windows. Linux and Mac languages are both derived 
-from a parent language Unix and so are very similar. Linux/Mac is most common language at IHME 
-and the command line trainings are Linux-based. For this reason, we recommend using a 
-terminal that works in Linux or Mac depending on your computer type.
+Operating systems are things like Windows or Mac that help a computer run and provide some basic 
+infrastructure. Opening and saving files all happen through your operating system. You can change or 
+install multiple operating systems, but that is quite uncommon. 
+
+Some operating systems require different command lines to accomplish the same task. The IHME 
+cluster uses the operating system Linux, and so the trainings provided are designed for Linux. 
+Linux and Mac are very similar, but Windows is quite different. Therefore, we recommend for 
+Windows users to install a terminal that can accept command lines written for a Linux while 
+still allowing you to still "speak" with your Windows computer. 
 
 **Recommended Terminals for Windows Users:** 
 
 For updating Vivarium docs and interacting with GitHub, we recommend using Git Bash. This 
-installs automatically when you download Git. However, some prefer 
-the Windows Subsystem for Linux (WSL) for it's user interface and tools. 
+installs automatically with Git for Windows. However, some prefer 
+the Windows Subsystem for Linux (WSL) for its user interface and tools. 
 
 Link to download `Git and Git Bash <https://git-scm.com/>`_
 
@@ -155,11 +159,8 @@ is included in more depth in Section 3.
 
 **Recommended Terminals for Mac Users:** 
 
-For updating Vivarium docs and interacting with GitHub, we recommend using the Terminal app 
-which comes pre-installed on your computer. 
-
-For accessing the cluster, we recommend using iTerm2. How to access the cluster 
-is included in more depth in Section 3. 
+Since Mac is similar to Linux and is the base operating system on Mac computers, the 
+pre-installed Terminal app can be used for all your terminal needs. 
 
 **Other Options:**
 
@@ -167,10 +168,12 @@ Most terminals can also be used to access the cluster, although the common pract
 the Sim Science team is to use separate terminals for GitHub on our local machine and 
 for cluster access. 
 
-Git comes pre-installed on Window's machines and can be used for updating Vivarium docs 
-but is not Linux based. Command Prompt is the Windows version of Terminal for Mac and is 
-pre-installed on Windows computers. It is also not Linux based. Therefore the command line 
-trainings will not be applicable if you use these option. 
+Git can be used for updating Vivarium docs from Command Prompt.
+Command Prompt is the terminal that is pre-installed on Windows computers,
+but it is not Linux based. Therefore the command line
+trainings will not be applicable if you use this option.
+
+For Mac users, there are other terminal options such as iTerm2. 
 
 **Git Tokens:**
 
@@ -184,7 +187,7 @@ might compromise security in some cases, so regenerating a token periodically is
 best practice. 
 
 There are also ways to set up terminals so that you do not have to enter this information 
-every time. This is covered is in aliases section below. 
+every time. This is covered in the aliases section below. 
 
 **How to Install Conda:**
 
@@ -197,7 +200,7 @@ Miniconda3 in 64 bit.
 
 Link to download `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ 
 
-On the cluster, you can use the central comp version of conda. This is simplest and 
+On the cluster, you can use the version of conda provided by the Central Comp team. This is simplest and 
 recommended. To do this, log into the cluster and then enter the code 
 :code:`/ihme/code/central_comp/miniconda/bin/conda init`. This adds information on how to 
 access conda to your bashrc file. You will need to restart the terminal for the 
@@ -240,7 +243,7 @@ The cluster is accessed through the SSH ("Secure Shell") protocol, so what is ne
 
 PuTTY and Bitvise are both SSH clients with graphical user interfaces for Windows. For Mac, it looks like some exist (e.g. Termius) but I didn't see anything super popular.
 
-We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too.
+We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too. Include the link to the IHME training video on how to do this. 
 
 Accessing the Cluster from PuTTY
 --------------------------------
