@@ -224,33 +224,37 @@ Some Hub pages on accessing the cluster:
 - `Science and Engineering <https://hub.ihme.washington.edu/pages/viewpage.action?pageId=72807457>`_
 - `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_
 
-.. _cluster_access_putty:
+The cluster is accessed through the Secure Shell protocol or SSH for short. 
+To access the SSH, an SSH "client" is needed. The client is an application 
+that can make SSH connections. 
 
-The cluster can be accessed from most terminals 
-on your computer. Some of the most popular ones used are: PuTTY or Bitvise for 
-Windows users and Terminal or iTerm2 for Mac users. For Windows users, most researchers use PuTTY, 
-however Bitvise is also used at IHME. For Mac users, the Terminal app comes installed 
-on your computer but some perfer to use iTerm2. 
+Both Mac and Windows include command-line SSH clients by default. This means 
+that most terminals can be used to access the cluster. As mentioned above, 
+feel free to use any terminal you are familiar with! 
 
-Terminals most commonly used to access the cluster: 
+Here is a video from IHME on how to access the cluster from a terminal using 
+the command line. NEED LINK 
+
+For new users, there are some SSH clients that come with a graphical user 
+interface (e.g., you can "click" on things rather than type commands only) 
+which are more intuitive and we recommend if you are new to this type of 
+computing work. 
+
+As mentioned above, for Windows users this is PuTTY or Bitvise and for 
+Windows users this is iTerm2. 
 
 Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
 
 Link to download `iTerm2 <https://iterm2.com/>`_
 
-Other information from Zeb to integrate: 
-
-The cluster is accessed through the SSH ("Secure Shell") protocol, so what is needed is an SSH "client" -- an application that can make SSH connections. Both Mac and Windows (at least, in recent versions of Windows 10) include command-line SSH clients by default.
-
-PuTTY and Bitvise are both SSH clients with graphical user interfaces for Windows. For Mac, it looks like some exist (e.g. Termius) but I didn't see anything super popular.
-
-We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too. Include the link to the IHME training video on how to do this. 
+.. _cluster_access_putty:
 
 Accessing the Cluster from PuTTY
 --------------------------------
 
-These instructions are for PuTTY, if you are using a different SSH client search for similar 
-information on the Hub or ask a team member for help. 
+We provide step by step instructions for accessing the cluster for the 
+first time. These instructions are for PuTTY, if you are using a different 
+SSH client search for similar information on the Hub or ask a team member for help. 
 
 For your first time on PuTTY, you will set up and save the instructions for a slurm session. To do this: 
 
@@ -273,9 +277,27 @@ lines from your trainings!
 
 .. image:: putty_3.png
 
+.. _cluster_access_bash:
+
+Your Bash Configuration Files 
+-----------------------------
+
+Bash files contain commands you would enter into a command line, but 
+specifically ones you will use very often. For example, every time you 
+want to open a Jupyter session, the cluster needs certain information 
+and requirements. To find this information, it looks in your Bash files 
+rather than asking you to enter the same information every time. 
+
+However, Bash files can be confusing since it is less obvious when the 
+information is being used or what it is used for. Therefore, we have 
+provided a copy-and-paste formatting for information to be added to 
+your Bash files. 
+
 .. todo::
 
-  Add information for not entering your username/password every time 
+  - Confirm and paste in bash files 
+  - Get Zeb's help in explaining Bash files better 
+  - Moving up since this is needed for a lot of things below 
 
 
 .. _cluster_access_command:
@@ -319,11 +341,29 @@ researchers do not disturb engineering workflow.
 
 .. _cluster_access_other:
 
-Other Useful Cluster Tips
--------------------------
+Aliases and Other Cluster Tips
+------------------------------
 
-#. If you get tired of typing long commands, one option is to make an alias. An alias is a shortcut command for commonly typed things. More information on how to do was written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ 
-#. When your computer falls asleep, it will stop access to the cluster and cut off any interactive jobs (i.e. :code:`srun` sessions) that were currently running. This can be problematic if a command needs to run overnight. There are a few different options to account for this including: screen, MOSH, or tmux. If you need to use these, ask a teammate.
+.. todo::
+
+  Add information for not entering your username/password every time 
+
+**Aliases:**
+
+Often, it can be annoying to type the same information repeatedly everytime you 
+access the cluster. To help account for this you can create aliases. These are 
+short-hand commands for commonly typed things. 
+
+Here is a Hub page written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ on how to set up aliases. 
+
+An example of how to do this - NEED HELP WITH THIS!! 
+
+**Long Cluster Jobs:**
+When your computer falls asleep, it will stop access to the cluster and cut 
+off any interactive jobs (i.e. :code:`srun` sessions) that were currently 
+running. This can be problematic if a command needs to run overnight. There 
+are a few different options to account for this including: screen, MOSH, or 
+tmux. If you need to use these, ask a teammate.
 
 .. _cluster_access_files:
 
@@ -356,28 +396,6 @@ being used in the sim. Therefore, follow these steps:
 
 For consistency, please use this naming convention for all files: :code:`FILENAME_20230309.ext`. 
 For example, this might be :code:`heart_failure_proportions_20230310.csv` 
-
-.. _cluster_access_bash:
-
-Your Bash Configuration Files 
------------------------------
-
-Bash files contain commands you would enter into a command line, but 
-specifically ones you will use very often. For example, every time you 
-want to open a Jupyter session, the cluster needs certain information 
-and requirements. To find this information, it looks in your Bash files 
-rather than asking you to enter the same information every time. 
-
-However, Bash files can be confusing since it is less obvious when the 
-information is being used or what it is used for. Therefore, we have 
-provided a copy-and-paste formatting for information to be added to 
-your Bash files. 
-
-.. todo::
-
-  - Confirm and paste in bash files 
-  - Get Zeb's help in explaining Bash files better 
-
 
 .. _conda_environments:
 
