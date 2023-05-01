@@ -125,39 +125,89 @@ in the Accessing the Cluster section below.
 2.0 How to Access a Terminal
 ++++++++++++++++++++++++++++
 
-.. todo::
+A lot of work you will do requires you to access a terminal. A terminal is a way for you, a 
+user, to communicate with a computer or computing system. There are many options for 
+terminals. This section is written for someone not familiar with terminals, so if 
+you have familiarity or favorite software please feel free to use those! 
 
-  - Build out this section with terminal options, Linux vs Unix vs Windows 
-  - Link to the command line training here and explain that it is Linux based 
-  - The below section needs to be reworked a bit but was pasted as a starting point 
-  - Git comes with windows but is not Linux based 
-  - Seems that some terminals require Git tokens and others don't. Figure out which 
-  - How to install conda (needed for a lot of things)
+Writing code into a terminal is called using the command line. IHME has a helpful training 
+on the command line in Module 1 of the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. Command lines technically interact with an 
+operating system on your computer. 
 
+Operating systems are things like Windows or macOS (for Mac computers) that help a computer run and provide some basic 
+infrastructure. Opening and saving files all happen through your operating system. You can change or 
+install multiple operating systems, but that is quite uncommon. 
 
-**How to Access GitHub:** Similar to the cluster, Git commands are written into a 
-terminal to access the repositories and push edits. On our team, most Windows folks use 
-Git Bash which automatically installs with downloading Git. However, some prefer 
-the Windows Subsystem for Linux (WSL) for it's user interface and tools. 
+Some operating systems require different command lines to accomplish the same task. The IHME 
+cluster uses the operating system Linux, and so the trainings provided are designed for Linux. 
+Linux and macOS are very similar (they are both `Unix like <https://en.wikipedia.org/wiki/Unix-like>`_), but Windows is quite different. Therefore, we recommend for 
+Windows users to install a terminal that can accept command lines written for Linux while 
+still allowing you to "speak" with your Windows computer. 
 
-For Mac users, the Terminal app which comes installed on your machine can be used for 
-Git as well. 
+**Recommended Terminals for Windows Users:** 
 
-It is worth noting here that these applications can also be used to access the cluster, 
-although the common practice on the Sim Science team is to use separate terminals for 
-GitHub on our local machine and for cluster access. 
+For updating Vivarium docs and interacting with GitHub, we recommend using Git Bash. This 
+installs automatically with Git for Windows. However, some prefer 
+the Windows Subsystem for Linux (WSL) for its user interface and tools. 
 
 Link to download `Git and Git Bash <https://git-scm.com/>`_
 
 Link to download `WSL <https://learn.microsoft.com/en-us/windows/wsl/install>`_
 
-One difference in uploading to GitHub is that the cluster will require a password 
-to push information. This is **NOT** your GitHub password, but instead is a unique 
-token that you will need to create. `This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ has information on creating a token. Many Sim Science users set their token to 
+For accessing the cluster, we recommend using PuTTy or Bitvise. How to access the cluster 
+is included in more depth in Section 3. 
+
+**Recommended Terminals for Mac Users:** 
+
+Since macOS is similar to Linux and is the base operating system on Mac computers, the 
+pre-installed Terminal app can be used for all your terminal needs. 
+
+**Other Options:**
+
+Most terminals can also be used to access the cluster, although the common practice for 
+Windows users on the Sim Science team is to use separate terminals for working on our local machine and 
+for cluster access. 
+
+Git can be used for updating Vivarium docs from Command Prompt.
+Command Prompt is the terminal that is pre-installed on Windows computers,
+but it is not Linux based. Therefore the command line
+trainings will not be applicable if you use this option.
+
+For Mac users, there are other terminal options such as iTerm2 which provides more 
+features than Terminal. 
+
+**Git Tokens:**
+
+"Pushing" things to GitHub will create a prompt asking for a username and password. 
+Counterintuitively, the username is your GitHub username, but the password is **NOT** 
+your GitHub password, but instead is a unique token that you will need to create. 
+`This website <https://techglimpse.com/git-push-github-token-based-passwordless/>`_ 
+has information on creating a token. Many Sim Science users set their token to 
 never expire and save the token where they can reference it later. However, this 
 might compromise security in some cases, so regenerating a token periodically is 
 best practice. 
 
+There are also ways to set up terminals so that you do not have to enter this information 
+every time. This is covered in the aliases section below. 
+
+**How to Install Conda:**
+
+Conda is an open-source, cross-platform, language-agnostic package manager and 
+environment management system. In order to accomplish most tasks at IHME, you will 
+need to install it. 
+
+For your local computer, you can use this link to install Miniconda. We recommend installing 
+Miniconda3 in 64 bit. 
+
+Link to download `Miniconda <https://docs.conda.io/en/latest/miniconda.html>`_ 
+
+On the cluster, you can use the version of conda provided by the Central Comp team. This is simplest and 
+recommended. To do this, log into the cluster and then enter the code 
+:code:`/ihme/code/central_comp/miniconda/bin/conda init`. This adds information on how to 
+access conda to your bashrc file. You will need to restart the terminal for the 
+changes to take effect. 
+
+There are other ways to install conda, but the above is simplest. 
 
 .. _cluster_access:
 
@@ -194,7 +244,7 @@ The cluster is accessed through the SSH ("Secure Shell") protocol, so what is ne
 
 PuTTY and Bitvise are both SSH clients with graphical user interfaces for Windows. For Mac, it looks like some exist (e.g. Termius) but I didn't see anything super popular.
 
-We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too.
+We should note that you can also just run ssh commands from a terminal without installing anything instead of using a graphical client. I do this, and I am guessing that Nathaniel does too. Include the link to the IHME training video on how to do this. 
 
 Accessing the Cluster from PuTTY
 --------------------------------
