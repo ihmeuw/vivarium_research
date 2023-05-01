@@ -34,7 +34,7 @@
 .. _2019_concept_model_vivarium_ciff_sam:
 
 ===================================
-Vivarium acute malnutrition Phase 1
+Vivarium Acute Malnutrition Phase 1
 ===================================
 
 .. contents::
