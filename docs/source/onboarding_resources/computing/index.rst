@@ -235,17 +235,15 @@ feel free to use any terminal you are familiar with!
 Here is a video from IHME on how to access the cluster from a terminal using 
 the command line. NEED LINK 
 
-For new users, there are some SSH clients that come with a graphical user 
+Mac users will need to use the above method for cluster access. 
+For Windows users, there are some SSH clients that come with a graphical user 
 interface (e.g., you can "click" on things rather than type commands only) 
 which are more intuitive and we recommend if you are new to this type of 
 computing work. 
 
-As mentioned above, for Windows users this is PuTTY or Bitvise and for 
-Windows users this is iTerm2. 
+As mentioned above, for Windows users this is PuTTY or Bitvise 
 
 Link to download `PuTTY or Bitvise <https://www.putty.org/>`_
-
-Link to download `iTerm2 <https://iterm2.com/>`_
 
 .. _cluster_access_putty:
 
@@ -356,7 +354,27 @@ short-hand commands for commonly typed things.
 
 Here is a Hub page written by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ on how to set up aliases. 
 
-An example of how to do this - NEED HELP WITH THIS!! 
+Here, we provide a few copy and paste aliases you can add to your bashrc file. Be 
+sure to update the names to match your project and username. Also, note that once 
+you include these you will need to restart your cluster connection for them to take 
+effect. 
+
+The aliases below are: 
+
+#. Starting a Juptyer notebook in your project's repository 
+#. Starting an srun session (note: you can change the memory or other parameters before saving)
+#. Checking on your current jobs on the cluster 
+
+.. code-block:: bash 
+  :linenos:
+
+  $ alias jupyter="sh /ihme/singularity-images/rstudio/shells/jpy_rstudio_sbatch_script.sh -e <INSERT_ENVIRONMENT_NAME> -c /ihme/code/central_comp/miniconda/bin/activate -t lab -d /ihme/code/<INSERT_USERNAME>/<INSERT_PROJECT_REPO> -A proj_simscience -p i.q" 
+  $ alias srun="srun --mem=5G -c 1 -A proj_simscience -p all.q --pty bash" 
+  $ alias squeue="squeue -u <INSERT_USERNAME>" 
+
+If you ever forget what you made an alias you can enter the command :code:`type <ALIAS_NAME>` 
+and the full alias code will be displayed. This is usefull if you want to change the parameters 
+slightly. 
 
 **Long Cluster Jobs:**
 When your computer falls asleep, it will stop access to the cluster and cut 
