@@ -134,15 +134,15 @@ Writing code into a terminal is called using the command line. IHME has a helpfu
 on the command line in Module 1 of the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_. Command lines technically interact with an 
 operating system on your computer. 
 
-Operating systems are things like Windows or Mac that help a computer run and provide some basic 
+Operating systems are things like Windows or macOS (for Mac computers) that help a computer run and provide some basic 
 infrastructure. Opening and saving files all happen through your operating system. You can change or 
 install multiple operating systems, but that is quite uncommon. 
 
 Some operating systems require different command lines to accomplish the same task. The IHME 
 cluster uses the operating system Linux, and so the trainings provided are designed for Linux. 
-Linux and Mac are very similar, but Windows is quite different. Therefore, we recommend for 
-Windows users to install a terminal that can accept command lines written for a Linux while 
-still allowing you to still "speak" with your Windows computer. 
+Linux and macOS are very similar (they are both `Unix like <https://en.wikipedia.org/wiki/Unix-like>`_), but Windows is quite different. Therefore, we recommend for 
+Windows users to install a terminal that can accept command lines written for Linux while 
+still allowing you to "speak" with your Windows computer. 
 
 **Recommended Terminals for Windows Users:** 
 
@@ -159,13 +159,13 @@ is included in more depth in Section 3.
 
 **Recommended Terminals for Mac Users:** 
 
-Since Mac is similar to Linux and is the base operating system on Mac computers, the 
+Since macOS is similar to Linux and is the base operating system on Mac computers, the 
 pre-installed Terminal app can be used for all your terminal needs. 
 
 **Other Options:**
 
-Most terminals can also be used to access the cluster, although the common practice on 
-the Sim Science team is to use separate terminals for GitHub on our local machine and 
+Most terminals can also be used to access the cluster, although the common practice for 
+Windows users on the Sim Science team is to use separate terminals for working on our local machine and 
 for cluster access. 
 
 Git can be used for updating Vivarium docs from Command Prompt.
@@ -173,7 +173,8 @@ Command Prompt is the terminal that is pre-installed on Windows computers,
 but it is not Linux based. Therefore the command line
 trainings will not be applicable if you use this option.
 
-For Mac users, there are other terminal options such as iTerm2. 
+For Mac users, there are other terminal options such as iTerm2 which provides more 
+features than Terminal. 
 
 **Git Tokens:**
 
