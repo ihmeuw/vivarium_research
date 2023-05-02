@@ -232,10 +232,10 @@ Both Mac and Windows include command-line SSH clients by default. This means
 that most terminals can be used to access the cluster. As mentioned above, 
 feel free to use any terminal you are familiar with! 
 
-Here is a video from IHME on how to access the cluster from a terminal using 
-the command line. NEED LINK 
+IHME Learn provides information on accessing the cluster from the command line in 
+Module 3 within the IHME Learn training `Computational Infrastructure Level 1 <https://ihme.brightspace.com/d2l/home/7028>`_.
 
-Mac users will need to use the above method for cluster access. 
+Mac users have to use the above method for cluster access. 
 For Windows users, there are some SSH clients that come with a graphical user 
 interface (e.g., you can "click" on things rather than type commands only) 
 which are more intuitive and we recommend if you are new to this type of 
@@ -342,10 +342,6 @@ researchers do not disturb engineering workflow.
 Aliases and Other Cluster Tips
 ------------------------------
 
-.. todo::
-
-  Add information for not entering your username/password every time 
-
 **Aliases:**
 
 Often, it can be annoying to type the same information repeatedly everytime you 
@@ -372,9 +368,8 @@ The aliases below are:
   $ alias srun="srun --mem=5G -c 1 -A proj_simscience -p all.q --pty bash" 
   $ alias squeue="squeue -u <INSERT_USERNAME>" 
 
-If you ever forget what you made an alias you can enter the command :code:`type <ALIAS_NAME>` 
-and the full alias code will be displayed. This is usefull if you want to change the parameters 
-slightly. 
+If you ever forget what settings you included in an alias you can enter the command :code:`type <ALIAS_NAME>` 
+into the terminal and the full alias code will be displayed. This is usefull if you want to change the parameters. 
 
 **Setting up Easier Cluster Access:**
 
