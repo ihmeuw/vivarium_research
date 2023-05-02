@@ -376,6 +376,26 @@ If you ever forget what you made an alias you can enter the command :code:`type 
 and the full alias code will be displayed. This is usefull if you want to change the parameters 
 slightly. 
 
+**Setting up Easier Cluster Access:**
+
+There are ways to configure access so that getting on the cluster is fewer steps. 
+
+For those using PuTTY, you can configure settings such that you do not need to type 
+your username and password every time you access the cluster. This 
+`Hub page <https://hub.ihme.washington.edu/display/IHD/PuTTY>`_ 
+does a very good job of outlining the steps. However, note that for step 2 of 
+"Configure PuTTY Itself", this author needed to enter "gen-slurm-slogin-p01.cluster.ihme.washington.edu" 
+instead of "cluster-submit1.ihme.washington.edu", which is listed on the page. 
+
+For those using command line to access the cluster, you can do two things for 
+easier access: 
+
+#. Set up an alias to allow for a shorter command line to access the cluster 
+#. Configure your computer to not need your username and password everytime 
+
+For both of these, this Hub page by the `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_ has a good step by step guide to configuring your 
+setup. If you need help with this process, reach out to someone on the team. 
+
 **Long Cluster Jobs:**
 When your computer falls asleep, it will stop access to the cluster and cut 
 off any interactive jobs (i.e. :code:`srun` sessions) that were currently 
