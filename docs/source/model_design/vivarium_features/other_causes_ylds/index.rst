@@ -64,7 +64,7 @@ Comorbidity correction
 The disability weights estimated through the process described above consider
 each health state individually and must be corrected for the simultaneous 
 presence of multiple disability-causing health states within a given 
-individual. The GBD study performs this comorbidity correct (termed "COMO") 
+individual. The GBD study performs this comorbidity correction (termed "COMO") 
 using a microsimulation. 
 
 The microsimulation is performed at the age-, sex-, location-, and 
