@@ -120,7 +120,7 @@ microsimulation as:
   
   \text{YLD rate}_k = \frac{\sum_{simulant=1}^n ADW_k}{n}
 
-The implication of the COMO correction for GBD YLDs attributable to a parent 
+The implication of the COMO adjustment for GBD YLDs attributable to a parent 
 cause should be exactly equal to the sum of YLDs attributed to each of its 
 sub-causes. Additionally, the YLDs attributable to a given sequela after the 
 COMO adjustment will be less than the product of the disability weight and the 
