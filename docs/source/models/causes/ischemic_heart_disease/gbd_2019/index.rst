@@ -320,6 +320,12 @@ Definitions
    * - S1
      - **S**\ usceptible
      - Susceptible to IHD; S1 used in the AMI cause diagram, currently do not model natural history for IHD so do not track how people enter the AMI state (e.g. as first clinical event or following a diagnosis of angina)
+   * - T1
+     - **T**\ ransition
+     - Transition from susceptible to IHD; due to high incidence rates, we use a transition state to first determine if a simulant will have an event on that time step and then have the simulant experience either MI or HF; this happens within a single time step so no person time will occur in this state 
+   * - T2
+     - **T**\ ransition
+     - Transition from post MI to other IHD; due to high incidence rates, we use a transition state to first determine if a simulant will have an event on that time step and then have the simulant experience either MI or HF; this happens within a single time step so no person time will occur in this state 
    * - AMI
      - **A**\ cute **M**\ yocardial **I**\ nfarction (AMI)
      - Simulant that experiences acute MI symptoms
@@ -358,6 +364,14 @@ States Data
      - prevalence
      - :math:`\text{1−(prevalence_s378 + prevalence_s379 + ((1 - prevalence_m2412} \times \text{propHF_IHD)} \times \text{prevalence_s1040) + prevalence_m2412)}`
      - Simulants without prevalent AMI, PostMI or heart failure
+   * - T1
+     - prevalence
+     - 0 
+     - No prevalent simulants exist in the T1 state 
+   * - T2
+     - prevalence
+     - 0 
+     - No prevalent simulants exist in the T2 state 
    * - AMI
      - prevalence
      - :math:`\text{(1−(prevalence_m2412} \times \text{propHF_IHD))} \times \sum\limits_{s\in acute-sequelae} \text{prevalence}_s`
@@ -453,6 +467,8 @@ Transition Data
      - :math:`\frac{\text{incidence_m2412} \times \text{propHF_RESID}}{\text{prevalence of S1}}`
      - Prevalence of S1 is defined above 
 
+.. note::
+  The above table includes individual incidences for causes. However, the cause model diagram uses combinations of these to find the probability of transition. The first transition to T1 or T2 will include the sum of all possible incidences converted into a rate. Once a simulant is in T1 or T2 they **will** have an event that time step. The event is determined based on the proportion of the incidences. 
 
 Data Sources
 """"""""""""

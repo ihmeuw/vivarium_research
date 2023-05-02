@@ -170,13 +170,11 @@ Assumptions and Limitations
 The quantity of interest is exposure to the mean BMI level; we assume full reversibility of risk and do not account for duration of exposure to BMI values above the range of the TMREL. 
 
 The values for BMI generated include exposures outside of a reasonably expected 
-range. These values lead to extreme relative risks which cause the model to fail. 
-
-In addition to model failures, we do not think relative risks continue in a log 
+range. In addition, we do not think relative risks continue in a log 
 linear pattern indefinitely, as is implemented in this model. A natural ceiling of 
 risk associated with a single risk factor probably exists. 
 
-To account for this and allow our model to run, we implemented maximum and minimum 
+To account for this, we implemented maximum and minimum 
 exposures based on NHANES. The maximum was set to include 99.5% of NHANES data, meaning 
 that 0.5% or fewer participants had values more extreme than the maximum. 
 
