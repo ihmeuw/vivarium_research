@@ -56,7 +56,7 @@ state equivalent to full health and 1 equivalent to death.
 
 Disability weights have been estimated through a series of surveys, described 
 in detail in the GBD methods appendix along with a complete listing of 
-disability weight values for all of the health states included in the GBD study.
+disability weight values for all health states included in the GBD study.
 
 Comorbidity correction
 ~~~~~~~~~~~~~~~~~~~~~~
