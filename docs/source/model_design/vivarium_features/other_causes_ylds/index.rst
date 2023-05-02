@@ -64,10 +64,16 @@ Comorbidity correction
 The disability weights estimated through the process described above consider
 each health state individually and must be corrected for the simultaneous 
 presence of multiple disability-causing health states within a given 
-individual. The GBD study performs this comorbidity correction (termed "COMO") 
-using a microsimulation. 
+individual. This correction accounts for the assumption that disabiliy weights 
+from comorbid conditions scale multiplicatively rather than additively. So in 
+effect, the reduction in health due to a newly acquired cause of disability is 
+quantified as greater for an individual who was previously in perfect health 
+than for an individual who was already subject to some non-zero baseline level 
+of morbidity.
 
-The microsimulation is performed at the age-, sex-, location-, and 
+The GBD study performs this comorbidity correction (termed "COMO") 
+using a microsimulation, described below. The microsimulation is performed at 
+the age-, sex-, location-, and 
 year-specific level. For GBD 2019, the population size of each microsimulation 
 was 40,000. In this microsimulation, each simulant is exposed to an independent 
 probability of having any of the sequelae including in GBD using the estimated 
@@ -191,7 +197,7 @@ background morbidity, including:
 
   - Only observe a subset of total YLDs within our simulation. While we can calculate YLDs averted between scenarios, we cannot accurately calculate percent reduction in all-cause YLDs or DALYs relative to baseline because we do not model YLDs due to all causes at baseline.
 
-  - Causes us to overestimate impact of a death averted in our simulation. Death averted some number of YLLs averted, but really this person should then start accruing YLDs overtime, which will decrease the number of DALYs averted relative to baseline. 
+  - Causes us to overestimate impact of a death averted in our simulation. An averted death in the alterantive relative to baseline scenario result in some number of YLLs averted, but really this person should then start accruing YLDs overtime, which will decrease the number of DALYs averted relative to baseline. 
 
 Proposal
 --------------
