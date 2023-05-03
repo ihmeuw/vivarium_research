@@ -3579,7 +3579,7 @@ duplicates in the census only and limiting it to guardian-based duplication.
 In later models, we might choose to include other forms of duplication with
 more parameters.
 
-**Guardian based duplication**
+**Guardian-based duplication**
 
 A known PRL challenge is children being reported multiple
 times at different addresses. This can occur when family structures are
@@ -3594,11 +3594,13 @@ opportunity for duplication. Since this mechanism occurs within the
 simulation, there is a natural maximum that we will impose in the
 noise function.
 
-Guardian based duplication is further divided here into two types: simulants
-younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).
+Guardian-based duplication is further divided here into three types: Simulants
+younger than 18  (<18) and not in GQ; simulants 18-23 (18 <= age < 24) and not
+in GQ; and simulants under 24 (<24) and in GQ.
 
-For simulants younger than 18 and not in college GQ, the maximum duplication rate will
-be calculated based on those who have a guardian living at a different address in the sim.
+For simulants younger than 18 and not in GQ, the maximum duplication rate will
+be calculated based on those who have a guardian living at a different address
+in the sim.
 
 The user can then pick a rate of duplication between 0 and 100%. If the value selected
 is higher than the calculated maximum rate in the sim, a warning will be issued to users
