@@ -382,6 +382,8 @@ does a very good job of outlining the steps. However, note that for step 2 of
 "Configure PuTTY Itself", this author needed to enter "gen-slurm-slogin-p01.cluster.ihme.washington.edu" 
 instead of "cluster-submit1.ihme.washington.edu", which is listed on the page. 
 
+A similar procedure can be used for Bitvise, instructions are on `this webpage <https://www.bitvise.com/getting-started-public-key-bitvise>`_. 
+
 For those using command line to access the cluster, you can do two things for 
 easier access: 
 
