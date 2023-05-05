@@ -3594,19 +3594,24 @@ opportunity for duplication. Since this mechanism occurs within the
 simulation, there is a natural maximum that we will impose in the
 noise function.
 
-Guardian-based duplication is further divided here into three types: Simulants
-younger than 18  (<18) and not in GQ; simulants 18-23 (18 <= age < 24) and not
-in GQ; and simulants under 24 (<24) and in GQ.
+Guardian-based duplication is applied to three mutually exclusive categories of
+simulants based on age and GQ status: Simulants younger than 18  (<18) and not
+in GQ; simulants 18-23 (18 <= age < 24) and not in GQ; and simulants under 24
+(<24) and in GQ.
 
-For simulants younger than 18 and not in GQ, the maximum duplication rate will
+For each of the three categories of simulants, the maximum duplication rate will
 be calculated based on those who have a guardian living at a different address
-in the sim.
+in the sim. Note that all simulants in *college* GQ are initialized with a
+guardian living at a different address, but this is not true for simulants in
+other types of GQ, so all three maximum duplication rates will be less than
+100%.
 
-The user can then pick a rate of duplication between 0 and 100%. If the value selected
-is higher than the calculated maximum rate in the sim, a warning will be issued to users
-explaining that the selected rate is greater than the maximum available.
+The user can then pick a rate of duplication between 0 and 100% **for each of
+the three categories of simulants**. If the value selected is higher than the
+calculated maximum rate in the sim, a warning will be issued to users explaining
+that the selected rate is greater than the maximum available.
 
-A default value of 5% will be selected.
+A default value of 5% will be selected for each of the three categories.
 
 .. note::
 
