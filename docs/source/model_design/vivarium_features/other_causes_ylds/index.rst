@@ -92,7 +92,7 @@ sequela prevalence.
 .. note::
 
   The COMO adjustment is run and maintained by IHME central computation. `The 
-  repository can be found here (as on May, 2023) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
+  repository can be found here (as of May, 2023) <https://stash.ihme.washington.edu/projects/CCGMAC/repos/como/browse>`_.
 
   According to correspondence with a central computation representative: the COMO
   adjustment ensures that no simulant may simultaneously possess mutually exclusive
