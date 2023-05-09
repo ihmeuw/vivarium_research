@@ -4,6 +4,10 @@
 Maternal disorders: GBD 2021
 ==============================
 
+.. note::
+
+  This page is an update from the previously developed :ref:`GBD 2019 maternal disorders cause model document <2019_cause_maternal_disorders>`. There were no major updates from the 2019 to 2021 version.
+
 .. contents::
    :local:
    :depth: 1
