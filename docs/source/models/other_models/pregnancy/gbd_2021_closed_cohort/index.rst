@@ -95,7 +95,7 @@ GBD has estimated the prevalence of pregnancy (as an intermediate variable for t
 
    (ASFR + (SBR * ASFR)) * 46/52
 
-Where :math:`ASFR` is the age-specific fertility rate, :math:`SBR` is the stillbirth to live birth ratio, and :math:`46/52` is the proportion of the year spent pregnant (40 weeks) and postpartum (6 weeks) [GBD-2019-Risk-Factors-Appendix-pregnancy]_.
+Where :math:`ASFR` is the age-specific fertility rate, :math:`SBR` is the stillbirth to live birth ratio, and :math:`46/52` is the proportion of the year spent pregnant (40 weeks) and postpartum (6 weeks).
 
 .. todo::
 
@@ -299,7 +299,7 @@ For pregnancies that result in live birth or stillbirth outcomes, infant sex sho
 
   Fill in table
 
-.. _sex_ratio_table:
+.. _sex_ratio_table_21:
 
 .. list-table:: Probability of male birth
     :header-rows: 1
@@ -399,14 +399,3 @@ The following should validate:
 References
 -----------
 
-.. [GBD-2019-Risk-Factors-Appendix-pregnancy]
-
- `Supplementary appendix 1 to the GBD 2019 Risk Factors Capstone <2019_risk_factors_methods_appendix_>`_:
-
-   **(GBD 2019 Risk Factors Capstone)** GBD 2019 Risk Factors Collaborators.
-   :title:`Global burden of 87 risk factors in 204 countries and territories,
-   1990–2019: a systematic analysis for the Global Burden of Disease Study
-   2019`. Lancet 2020; **396:** 1223–49. DOI:
-   https://doi.org/10.1016/S0140-6736(20)30752-2
-
-.. _2019_risk_factors_methods_appendix: https://www.thelancet.com/cms/10.1016/S0140-6736(20)30752-2/attachment/54711c7c-216e-485e-9943-8c6e25648e1e/mmc1.pdf
