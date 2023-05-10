@@ -3609,9 +3609,14 @@ other types of GQ, so all three maximum duplication rates will be less than
 The user can then pick a rate of duplication between 0 and 100% **for each of
 the three categories of simulants**. If the value selected is higher than the
 calculated maximum rate in the sim, a warning will be issued to users explaining
-that the selected rate is greater than the maximum available.
+that the selected rate is greater than the maximum available, and the actual
+rate of duplication should be set to the maximum. More precisely, the
+conditional probabiity of duplication, given that a row is eligible for
+guardian-based duplication, should be set to 1.
 
-A default value of 5% will be selected for each of the three categories.
+A default duplication rate of 5% will be selected for each of the three
+categories of simulants; that is, each row corresponding to a simulant <24 is
+duplicated with probability 0.05.
 
 .. note::
 
