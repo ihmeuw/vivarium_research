@@ -3626,18 +3626,11 @@ should be set to 1.
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-For college GQ simulants aged less than 24, all are assigned to a guardian who
-by definition lives at a different address. This means that theoretically
-the maximum noise level is 100% for this group, however, that would add
-significantly to the dataset and so it not allowed here. The default rate
-will be set to 5%, with a minimum of 0% and a maximum of 25%.
-
-To create duplicates, the college student will be included in the final
-dataset twice, once at their college GQ and once at their guardian's home.
-
-For either group, if a simulant has more than 1 guardian living at a
-different address only duplicate them once, for a maximum of 2 occurences
-in the end dataset. Select the guardian at random.
+To create guardian-based duplicates, each duplicated simulant will be included
+in the final dataset twice, once at their address of residence and once at their
+guardian's address. If a simulant has more than 1 guardian living at a different
+address, only duplicate them once, for a maximum of 2 occurences in the end
+dataset. Select the guardian at random.
 
 .. note::
 
