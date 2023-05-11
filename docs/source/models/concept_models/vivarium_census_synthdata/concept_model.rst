@@ -3607,16 +3607,20 @@ other types of GQ, so all three maximum duplication rates will be less than
 100%.
 
 The user can then pick a rate of duplication between 0 and 100% **for each of
-the three categories of simulants**. If the value selected is higher than the
-calculated maximum rate in the sim, a warning will be issued to users explaining
-that the selected rate is greater than the maximum available, and the actual
-rate of duplication should be set to the maximum. More precisely, the
-conditional probabiity of duplication, given that a row is eligible for
-guardian-based duplication, should be set to 1.
+the three categories of simulants**. A default duplication rate of 5% will be
+selected for each of the three categories of simulants. That is, each simulant
+under 24 is duplicated at a guardian's address with default probability 0.05.
+The duplicated row should have the same simulant-specific attributes as the
+original, such as name and birth date, but different address-specific attributes
+such as address fields and relation to reference person.
 
-A default duplication rate of 5% will be selected for each of the three
-categories of simulants; that is, each row corresponding to a simulant <24 is
-duplicated with probability 0.05.
+If the user selects a duplication rate that is higher than the calculated
+maximum rate in the sim, a warning should be issued explaining that the selected
+rate is greater than the maximum available, and the actual rate of duplication
+should be set to the maximum for the specified simulant category. More
+precisely, the conditional probabiity that a row in the spceified category is
+duplicated, given that the row is eligible for guardian-based duplication,
+should be set to 1.
 
 .. note::
 
