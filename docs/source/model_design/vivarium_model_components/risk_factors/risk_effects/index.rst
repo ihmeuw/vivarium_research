@@ -252,7 +252,7 @@ risks with age and outcome restrictions. See the table below for details.
   Birth in our models, the relative risks likely must be handled differently for
   this cause.
 
-  .. todo::
+.. todo::
 
     Follow up about assumptions that GBD uses to apply relative risk to YLLs and
     YLDs.
