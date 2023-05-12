@@ -3609,7 +3609,7 @@ other types of GQ, so all three maximum duplication rates will be less than
 The user can then pick a rate of duplication between 0 and 100% **for each of
 the three categories of simulants**. A default duplication rate of 5% will be
 selected for each of the three categories of simulants. That is, each simulant
-under 24 is duplicated at a guardian's address with default probability 0.05.
+under 24 is duplicated at a guardian's address with default probability 0.05, and there should be three user parameters for overriding this probability, one for each simulant category.
 The duplicated row should have the same simulant-specific attributes as the
 original, such as name and birth date, but different address-specific attributes
 such as address fields and relation to reference person.
@@ -3631,6 +3631,21 @@ in the final dataset twice, once at their address of residence and once at their
 guardian's address. If a simulant has more than 1 guardian living at a different
 address, only duplicate them once, for a maximum of 2 occurences in the end
 dataset. Select the guardian at random.
+
+.. note::
+
+  Currently, the order in which simulants appear in each dataset is an
+  implementation detail that has not been specified by the research team.
+  However, we may want to reassess this for duplicated rows. For example, if
+  simulants in the census dataset are grouped together by household, then it
+  would make sense to use the same strategy for rows subject to guraddian-based
+  duplication (i.e., the duplicate row should appear with rows for the
+  guardian's household, not the duplicated simulant's household). If that is
+  **not** the strategy currently used for ordering rows in the census, then some
+  further specification may be necessary. For example, it is probabably
+  undesirable for duplicated rows to always appear right after the original row,
+  or for all duplicated rows to appear at the end of the dataset, so we would
+  need a strategy to address this.
 
 .. note::
 
