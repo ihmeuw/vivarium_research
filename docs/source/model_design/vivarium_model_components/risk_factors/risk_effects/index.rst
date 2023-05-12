@@ -191,7 +191,7 @@ the questions: Who does this apply to? For which population groups (e.g., age or
 is this risk effect not valid? 
 
 It is worth noting that although risk effect and risk exposure both are related to risk factors,
-restrictions for these two elements function differently. Risk exposure restrictions does
+restrictions for these two elements function differently. Risk exposure restrictions do
 not include outcome restrictions (i.e., YLL only or YLD only), however risk effect
 restrictions do. Due to the nature of the relationship between risk exposure and risk 
 effects, risk effects restrictions will always be within restrictions for risk exposure. 
