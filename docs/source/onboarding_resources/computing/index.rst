@@ -353,7 +353,8 @@ Here is a Hub page written by the `Cost Effectiveness team <https://hub.ihme.was
 Here, we provide a few copy and paste aliases you can add to your bashrc file. Be 
 sure to update the names to match your project and username. Also, note that once 
 you include these you will need to restart your cluster connection for them to take 
-effect. 
+effect. The alias names themselves are arbitrary. While examples are provided, please 
+name these whatever is short and clear for your use. 
 
 The aliases below are: 
 
@@ -364,9 +365,9 @@ The aliases below are:
 .. code-block:: bash 
   :linenos:
 
-  $ alias jupyter="sh /ihme/singularity-images/rstudio/shells/jpy_rstudio_sbatch_script.sh -e <INSERT_ENVIRONMENT_NAME> -c /ihme/code/central_comp/miniconda/bin/activate -t lab -d /ihme/code/<INSERT_USERNAME>/<INSERT_PROJECT_REPO> -A proj_simscience -p i.q" 
-  $ alias srun="srun --mem=5G -c 1 -A proj_simscience -p all.q --pty bash" 
-  $ alias squeue="squeue -u <INSERT_USERNAME>" 
+  $ alias jupyter_<PROJECT_NAME>="sh /ihme/singularity-images/rstudio/shells/jpy_rstudio_sbatch_script.sh -e <INSERT_ENVIRONMENT_NAME> -c /ihme/code/central_comp/miniconda/bin/activate -t lab -d /ihme/code/<INSERT_USERNAME>/<INSERT_PROJECT_REPO> -A proj_simscience -p i.q" 
+  $ alias srun_5G="srun --mem=5G -c 1 -A proj_simscience -p all.q --pty bash" 
+  $ alias squeue_<USERNAME>="squeue -u <INSERT_USERNAME>" 
 
 If you ever forget what settings you included in an alias you can enter the command :code:`type <ALIAS_NAME>` 
 into the terminal and the full alias code will be displayed. 
