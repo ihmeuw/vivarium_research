@@ -225,7 +225,7 @@ Some Hub pages on accessing the cluster:
 - `Cost Effectiveness team <https://hub.ihme.washington.edu/display/CE/Setting+up+cluster+access>`_
 
 The cluster is accessed through the Secure Shell protocol or SSH for short. 
-To access the SSH, an SSH "client" is needed. The client is an application 
+To access the cluster, an SSH "client" is needed. The client is an application 
 that can make SSH connections. 
 
 Both Mac and Windows include command-line SSH clients by default. This means 
@@ -357,7 +357,7 @@ effect.
 
 The aliases below are: 
 
-#. Starting a Juptyer notebook in your project's repository 
+#. Starting a Jupyter notebook in your project's repository 
 #. Starting an srun session (note: you can change the memory or other parameters before saving)
 #. Checking on your current jobs on the cluster 
 
@@ -369,7 +369,10 @@ The aliases below are:
   $ alias squeue="squeue -u <INSERT_USERNAME>" 
 
 If you ever forget what settings you included in an alias you can enter the command :code:`type <ALIAS_NAME>` 
-into the terminal and the full alias code will be displayed. This is usefull if you want to change the parameters. 
+into the terminal and the full alias code will be displayed. 
+
+This is useful if you want to change the parameters of a command as well - simply display the alias code, copy 
+and paste the command into the terminal, and then make needed adjustments before running. 
 
 **Setting up Easier Cluster Access:**
 
