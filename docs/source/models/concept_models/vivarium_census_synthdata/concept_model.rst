@@ -3640,7 +3640,7 @@ dataset. Select the guardian at random.
   implementation detail that has not been specified by the research team.
   However, we may want to reassess this for duplicated rows. For example, if
   simulants in the census dataset are grouped together by household, then it
-  would make sense to use the same strategy for rows subject to guraddian-based
+  would make sense to use the same strategy for rows subject to guardian-based
   duplication (i.e., the duplicate row should appear with rows for the
   guardian's household, not the duplicated simulant's household). If that is
   **not** the strategy currently used for ordering rows in the census, then some
