@@ -3609,11 +3609,11 @@ other types of GQ, so all three maximum duplication rates will be less than
 The user can then pick a rate of duplication between 0 and 100% **for each of
 the three categories of simulants**. A default duplication rate of 5% will be
 selected for each of the three categories of simulants. That is, each simulant
-under 24 is duplicated at a guardian's address with default probability 0.05,
+under 24 is duplicated at a guardian's household with default probability 0.05,
 and there should be three user parameters for overriding this probability, one
 for each simulant category. The duplicated row should have the same
 simulant-specific attributes as the original, such as name and birth date, but
-different address-specific attributes such as address fields and relation to
+different household-specific attributes such as address fields and relation to
 reference person.
 
 If the user selects a duplication rate that is higher than the calculated
