@@ -46,9 +46,15 @@ This document is the overall page for the Nutrition Optimization simulation and 
 
 Documents that contain information specific to the subcomponents of this simulation can be found here:
 
+.. toctree::
+   :maxdepth: 2
+   :glob:
+
+   */concept_model*
+
 .. todo::
 
-  Link subpages
+  Link child component page
 
 .. _nutritionoptimization2.0:
 
