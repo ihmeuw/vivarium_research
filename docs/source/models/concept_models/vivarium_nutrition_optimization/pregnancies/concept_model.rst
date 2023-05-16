@@ -65,7 +65,7 @@ Documents that contain information specific to the overall model and the child s
 2.1 Concept model diagram
 -------------------------
 
-.. image:: nutrition_optimization_pregnancy_concept_model_diagram.PNG
+.. image:: nutrition_optimization_pregnancy_concept_model_diagram.png
 
 2.2 Submodels
 -------------
@@ -109,10 +109,10 @@ Documents that contain information specific to the overall model and the child s
 +---------------------+--------------------------------------+---------------------+
 |Interventions        |Antenatal supplementation, including  |Change from IV iron! |
 |                     |IFA, MMS, and BEP and their effects   |New effects on       |
-|                     |on:                                   |gestational age and  |
-|                     | * Antenatal hemoglobin               |birth outcomes (no   |
-|                     | * LBWSG                              |changes to hemoglobin|
-|                     | * Birth outcomes                     |effects). Also,      |
+|                     |on antenatal hemoglobin, LBWSG, and   |gestational age and  |
+|                     |birth outcomes                        |birth outcomes (no   |
+|                     |                                      |changes to hemoglobin|
+|                     |                                      |effects). Also,      |
 |                     |                                      |coverage algorithm is|
 |                     |                                      |updated              |
 +---------------------+--------------------------------------+---------------------+
