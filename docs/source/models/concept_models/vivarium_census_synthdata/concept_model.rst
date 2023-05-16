@@ -3611,11 +3611,7 @@ the three categories of simulants**. A default duplication rate of 5% will be
 selected for each of the three categories of simulants. That is, each simulant
 under 24 is duplicated at a guardian's household with default probability 0.05,
 and there should be three user parameters for overriding this probability, one
-for each simulant category. The duplicated row should have the same
-simulant-specific attributes as the original, such as name and birth date, but
-different household-specific attributes such as address fields and relation to
-reference person.
-
+for each simulant category.
 If the user selects a duplication rate that is higher than the calculated
 maximum rate in the sim, a warning should be issued explaining that the selected
 rate is greater than the maximum available, and the actual rate of duplication
@@ -3627,6 +3623,16 @@ should be set to 1.
 .. note::
 
     If finding the maximum rate proves too difficult to implement, we can reassess this approach
+
+The duplicated row should have the same simulant-specific attributes as the
+original, such as name and birth date, but different household-specific
+attributes such as address fields and relation to reference person.
+
+.. todo::
+
+  Be more explicit about what the fields in the duplicated row should look like.
+  In particular, specify how the relation to reference person should be defined
+  when a simulant is duplicated at a guardian's household.
 
 To create guardian-based duplicates, each duplicated simulant will be included
 in the final dataset twice, once at their address of residence and once at their
