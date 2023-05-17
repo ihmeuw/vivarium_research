@@ -1,7 +1,7 @@
 .. _maternal_supplementation_intervention:
 
 =================================================================================================================
-Maternal Prenatal Supplementation: Iron-Folic Acid/Targeted Balanced Energy Protein and Multiple Micronutrients
+Antenatal Supplementation: Iron-Folic Acid, Multiple Micronutrients, and Balanced Energy Proteins
 =================================================================================================================
 
 .. contents::
@@ -130,7 +130,7 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
     - 0.106
-    - DHS 2019
+    - DHS 2019. Don't use this value for Nutrition optimization! Will be provided on concept model document.
   * - India
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
@@ -145,7 +145,7 @@ Given the low utilization of MMS and BEP relative to IFA, we assume that baselin
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
     - 0.294
-    - DHS 2017
+    - DHS 2017. Don't use this value for Nutrition optimization! Will be provided on concept model document.
   * - Tanzania
     - Pregnant population
     - Proportion who took antenatal iron for 90+ days
@@ -169,13 +169,31 @@ Vivarium Modeling Strategy
 
 The maternal supplementation intervention is administered to mothers and impacts both the mother and infant. To model the impact of the intervention on either child or maternal outcomes, simulant attributes for maternal nourishment exposure (BMI/x-factor) and maternal ANC attendance exposure are required. Additionally, to model the impact on child growth, child growth exposures are required. To model the impact on maternal mortality, a maternal hemoglobin exposure value is required. This intervention model requires the additional simulant attribute of maternal supplement regimen.
 
+Coverage algorithms
++++++++++++++++++++
+
+Individual product coverage algorithms
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For use in the :ref:`nutrition optimization simulation <2021_concept_model_vivarium_nutrition_optimization>`.
+
+For our purposes, each individual antenatal supplementation product (IFA, MMS, and BEP) are mutually exclusive; in other words, a given simulant can only be covered by one of these three products for any given pregnancy. We do not consider changing antenatal supplementation products during a single pregnancy. Supplementation product coverage may depend on other simulant characteristics, such as antenatal care visit attendance or pre-pregnancy body mass index (BMI) exposure.
+
+.. note::
+
+  Although the supplementation products are mutually exclusive, it is important to remember that iron and folic acid (the nutrients present in IFA) are also present in MMS and BEP products. Similarly, the micronutrients present in MMS are assumed to also be present in BEP products. However, BEP contains additional macronutrients that are not provided with MMS or IFA, and likewise, MMS contains micronutrients that are not provided with IFA.
+
+  Therefore, the intervention impacts of each intervention product "stack" upon one another such that the effect of BEP includes the effect of IFA relative to no supplementation, MMS relative to IFA, AND BEP relative to MMS. Specific instructions and details are provided in the following sections. 
+
+Targeted intervention package coverage algorithm
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+For use in the :ref:`Balanced energy protein simulation <2017_concept_model_vivarium_gates_bep>` and the :ref:`IV iron simulation <2019_concept_model_vivarium_iv_iron>`.
+
 For the implementation of the intervention in an alterative scenarios, we will model BEP supplementation among undernourished mothers and MMS supplementation among adequately nourished mothers rather than IFA supplementation alone, as demonstrated in the following decision tree. The :ref:`maternal body mass index risk exposure <2019_risk_exposure_maternal_bmi>` should be used to determine maternal nourishment status for this intervention model (exposed=undernourished).
 
 .. image:: coverage_decision_tree.svg
 
-.. note::
-
-  This decision tree assumes a complete transition from IFA to targeted BEP/MMS. Alternative intervention implementations may be considered. 
 
 .. list-table:: Modeled Outcomes
   :widths: 15 15 15 15 15 15 15
