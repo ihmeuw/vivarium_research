@@ -46,6 +46,10 @@ Anemia due to maternal hemorrhage is estimated as part of the :ref:`GBD 2019 ane
 
 [GBD-2019-Capstone-Appendix-Maternal-Hemorrhage]_
 
+.. note::
+
+  There were no major relevant modeling updates from GBD 2019 to 2021
+
 Cause Hierarchy
 +++++++++++++++
 
@@ -178,24 +182,24 @@ The following table defines the parameters used in the calculation of maternal d
      - 
    * - deaths_c367
      - count of deaths due to maternal hemorrhage
-     - codcorrect, decomp_step='step5'
+     - codcorrect, decomp_step='step5' for GBD 2019, 'step3' and eventually iterative' for GBD 2021
      - 
    * - population
      - population count
-     - get_population, decomp_step='step5'
+     - get_population, decomp_step='step5' for GBD 2019, 'iterative' for GBD 2021
      - Specific to a/s/l/y demographic group
    * - incidence_rate_c367
      - incidence rate of maternal hemorrhage
-     - como, decomp_step='step5'
+     - como, decomp_step='step5' for GBD 2019, 'iterative' for GBD 2021
      - 
    * - incidence_p
      - Pregnancy incidence rate
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
-     - 
+     - Use equations from this linked document, not the closed cohort pregnancy page
    * - prevalence_np
      - Prevalence of non-pregnant state
      - Defined on the :ref:`pregnancy model document <other_models_pregnancy>`
-     - 
+     - Use equations from this linked document, not the closed cohort pregnancy page
 
 Disability adjusted life years
 """""""""""""""""""""""""""""""""""
