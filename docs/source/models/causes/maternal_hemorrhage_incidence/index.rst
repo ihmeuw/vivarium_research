@@ -182,7 +182,7 @@ The following table defines the parameters used in the calculation of maternal d
      - 
    * - deaths_c367
      - count of deaths due to maternal hemorrhage
-     - codcorrect, decomp_step='step5' for GBD 2019, 'step3' and eventually iterative' for GBD 2021
+     - codcorrect, decomp_step='step5' for GBD 2019, 'step3' and eventually 'iterative' for GBD 2021
      - 
    * - population
      - population count
