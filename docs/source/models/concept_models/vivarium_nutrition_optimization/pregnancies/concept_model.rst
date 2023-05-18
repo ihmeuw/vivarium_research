@@ -107,7 +107,7 @@ Documents that contain information specific to the overall model and the child s
 |                     |<2021_cause_maternal_disorders>`           |                     |
 |                     +-------------------------------------------+---------------------+
 |                     |:ref:`Maternal hemorrhage incidence        |                     |
-|                     |<2019_cause_maternal_hemorrhage_incidence>`|
+|                     |<2019_cause_maternal_hemorrhage_incidence>`|                     |
 +---------------------+-------------------------------------------+---------------------+
 |Interventions        |Antenatal supplementation, including       |Change from IV iron! |
 |                     |IFA, MMS, and BEP and their effects        |New effects on       |
