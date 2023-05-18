@@ -94,10 +94,10 @@ Documents that contain information specific to the overall model and the child s
 +---------------------+--------------------------------------+---------------------+
 |Risk correlation     |Hgb/BMI/LBWSG                         |                     |
 +---------------------+--------------------------------------+---------------------+
-|Risk effects         |Hemoglobin, including effects on:     |                     |
-|                     | - Maternal disorders                 |                     |
-|                     | - Maternal hemorrhage incidence      |                     |
-|                     | - Birth outcomes                     |                     |
+|Risk effects         |Hemoglobin, including effects on:     |Do not include birth |
+|                     | - Maternal disorders                 |outcome (stillbirth) |
+|                     | - Maternal hemorrhage incidence      |risk effect (change  |
+|                     |                                      |from IV iron)        |
 |                     +--------------------------------------+---------------------+
 |                     |Maternal hemorrhage effect on         |                     |
 |                     |hemoglobin                            |                     |

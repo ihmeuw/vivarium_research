@@ -466,6 +466,64 @@ In the baseline scenario, the exposure distribution of birthweight (mean birthwe
 
 If birthweight exposures are stratified by supplementation regimen and maternal nourishment strata, then birthweight differences between regimens should match the effect sizes within a given maternal nourishment exposure strata.
 
+Birth outcomes
+++++++++++++++++++
+
+Antenatal supplementation interventions will affect the risk of stillbirth for full term pregnancies (NOTE: not necessary to apply to partial term pregnancies), as described in the :ref:`pregnancy model document <other_models_pregnancy>`. Notably, it is assumed that increased risk of stillbirth will result in decreased risk of live birth and vise versa, with no impact on the risk of abortion/miscarriage or ectopic pregnancy.
+
+The observed effect of each antenatal supplementation product on the risk of stillbirth is summarized below:
+
+.. list-table:: Stillbirth effects
+  :header-rows: 1
+
+  * - Supplementation product
+    - Stillbirth RR
+    - Source
+  * - IFA
+    - 1
+    - Lack of evidence
+  * - MMS
+    - 0.91 (95% CI: 0.71, 0.93), lognormal distribution of uncertainty
+    - [Oh-et-al-2020]_
+  * - BEP
+    - 0.39 (95% CI: 0.19, 0.80), lognormal distribution of uncertainty
+    - [Lassi-et-al-2020-antenatal-supplementation]_
+
+Because there is no effect of IFA on stillbirths and we assume there is no baseline coverage of MMS or BEP, there is no differentiation in stillbirth rate due to baseline coverage of antenatal supplementation products in our modeled populations. Therefore, we can simply apply the relative risk of stillbirth directly to the baseline stillbirth rate without accounting for calibration of baseline coverage (in other words, the PAF of antenatal supplementation on stillbirths is equal to 0).
+
+The relative risk for this risk factor will apply to the probability of experiencing still birth such that:
+
+.. math::
+
+  \text{stillbirth probability}_\text{no supplementation} = \text{stillbirth probability}_{overall} 
+
+  \text{stillbirth probability}_\text{supplement} = \text{stillbirth probability}_{overall} * RR_\text{supplement}
+
+And the probabilities of experiencing the remaining birth outcomes are as follows:
+
+.. math:: 
+
+  \text{other probability}_\text{no supplementation} = \text{other probability}_{overall}
+
+  \text{other probability}_\text{supplement} = \text{other probability}_{overall} 
+
+  \text{live birth probability}_\text{no supplementation} =  \text{live birth probability}_{overall}
+
+  \text{live birth probability}_\text{supplement} = 1 - \text{stillbirth probability}_\text{supplement} - \text{other probability}_{overall}
+
+Where, :math:`\text{stillbirth probability}_{overall}`, :math:`\text{live birth probability}_{overall}`, and :math:`\text{other probability}_{overall}` are defined on the :ref:`closed cohort pregnancy model document <other_models_pregnancy>` and :math:`RR_\text{supplement}` is the supplementation product-specific relative risk of stillbirth, as defined in the table above.
+
+Validation and verification criteria
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- The rate of each birth outcome should continue to validate to input data in the baseline scenario
+- Birth outcome rates stratified by the intervention coverage should verify to the magnitude of the risk effect
+
+Assumptions and limitations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- There is an observed association between severe anemia during pregnancy and stillbirth, as shown in [Young-et-al-2019]_. Therefore, there should hypothetically be some effect of IFA on stillbirth given that it improves hemoglobin concentration during pregnancy; however, we do not consider this effect due to lack of evidence that shows a direct effect of IFA on stillbirth outcomes.
+
 Child Growth Failure (CGF)
 +++++++++++++++++++++++++++
 
@@ -626,6 +684,9 @@ References
 
 .. [Keats-et-al-2019-maternal-supplementation]
   Keats  EC, Haider  BA, Tam  E, Bhutta  ZA. Multiple‐micronutrient supplementation for women during pregnancy. Cochrane Database of Systematic Reviews 2019, Issue 3. Art. No.: CD004905. DOI: 10.1002/14651858.CD004905.pub6. Accessed 30 August 2021. `https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full <https://www.cochranelibrary.com/cdsr/doi/10.1002/14651858.CD004905.pub6/full>`_
+
+.. [Lassi-et-al-2020-antenatal-supplementation]
+  Lassi ZS, Padhani ZA, Rabbani A, Rind F, Salam RA, Das JK, Bhutta ZA. Impact of Dietary Interventions during Pregnancy on Maternal, Neonatal, and Child Outcomes in Low- and Middle-Income Countries. Nutrients. 2020 Feb 19;12(2):531. doi: 10.3390/nu12020531. PMID: 32092933; PMCID: PMC7071393.
 
 .. [McGovern-et-al-2019-maternal-supplementation]
   McGovern, M. E. (2019). How much does birth weight matter for child health in developing countries? Estimates from siblings and twins. Health economics, 28(1), 3-22. `https://pubmed.ncbi.nlm.nih.gov/30239053 <https://pubmed.ncbi.nlm.nih.gov/30239053/>`_.
