@@ -1,0 +1,91 @@
+<mxfile host="app.diagrams.net" modified="2023-05-16T20:48:39.914Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="_avlhs4ke_l7_HKrvPX9" version="21.2.8" type="device">
+  <diagram name="Page-1" id="b5MoC5XsGQxj7lWjR4zo">
+    <mxGraphModel dx="904" dy="1564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-11" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-1" target="ETDC4T5YuzkmSh1A_NZL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-1" value="Iron folic acid (IFA)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-12" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-2" target="ETDC4T5YuzkmSh1A_NZL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-2" value="Multiple micronutrient supplementation (MMS)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-13" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-3" target="ETDC4T5YuzkmSh1A_NZL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-3" value="Balanced energy protein (BEP)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-14" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-4" target="ETDC4T5YuzkmSh1A_NZL-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;endArrow=none;endFill=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-4" target="ETDC4T5YuzkmSh1A_NZL-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-4" target="ETDC4T5YuzkmSh1A_NZL-10">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="175" />
+              <mxPoint x="420" y="80" />
+              <mxPoint x="740" y="80" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-4" value="Antenatal&lt;br&gt;hemoglobin" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="160" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;dashed=1;endArrow=none;endFill=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-5" target="ETDC4T5YuzkmSh1A_NZL-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-5" value="Pre-pregnancy/first trimester body mass index (BMI)" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-21" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-6" target="ETDC4T5YuzkmSh1A_NZL-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-6" value="Maternal disorders" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="480" y="100" width="140" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-16" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-7" target="ETDC4T5YuzkmSh1A_NZL-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-7" value="Maternal hemorrhage" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="200" width="100" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-8" value="All other&lt;br&gt;maternal disorders" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="500" y="130" width="100" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-23" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-9" target="ETDC4T5YuzkmSh1A_NZL-10">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-9" value="Postpartum hemoglobin" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="280" y="260" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-10" value="Morbidity and mortality" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="680" y="105" width="120" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-15" style="rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.25;entryDx=0;entryDy=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="ETDC4T5YuzkmSh1A_NZL-4" target="ETDC4T5YuzkmSh1A_NZL-7">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-24" value="&lt;b&gt;Interventions&lt;/b&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="110" y="-2" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-25" value="&lt;b&gt;Risk factors&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="285" y="-2" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-26" value="&lt;b&gt;Causes&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="505" y="-2" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="ETDC4T5YuzkmSh1A_NZL-27" value="&lt;b&gt;Outcomes&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="700" y="-2" width="80" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
