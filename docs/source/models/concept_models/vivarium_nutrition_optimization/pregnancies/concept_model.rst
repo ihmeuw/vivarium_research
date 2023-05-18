@@ -81,8 +81,9 @@ Documents that contain information specific to the overall model and the child s
 +---------------------+--------------------------------------+---------------------+
 | Category            | Model                                | Note                |
 +=====================+======================================+=====================+
-|Demography           |Population structure at               |Change from IV iron  |
+|Demography           |:ref:`Population structure at         |Change from IV iron  |
 |                     |initialization                        |due to closed cohort |
+|                     |<other_models_pregnancy_demography>`  |                     |
 |                     +--------------------------------------+                     |
 |                     |Pregnancy model                       |                     |
 +---------------------+--------------------------------------+---------------------+
