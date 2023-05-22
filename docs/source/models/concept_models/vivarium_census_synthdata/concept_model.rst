@@ -2417,7 +2417,7 @@ Eligibility for WIC is based on income and age/children in the house.
 To qualify you must be both: 
 
 - A child under the age of 5 (0-4 years old)
-- OR a tracked mother OR guardian of a child under the age of 1 **living in the same household**
+- OR a tracked mother OR guardian of a child under the age of 1 **living in the same household as that child**
 
 And also: 
 
