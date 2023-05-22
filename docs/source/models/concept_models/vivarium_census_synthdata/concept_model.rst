@@ -25,7 +25,7 @@
 
   Section Level 1 (#.0)
   +++++++++++++++++++++
-  
+
   Section Level 2 (#.#)
   ---------------------
 
@@ -149,7 +149,7 @@ except in the case of some young simulants who are assigned :ref:`guardians <cen
 
 .. _census_prl_concept_model:
 
-2.1 Vivarium concept model 
+2.1 Vivarium concept model
 --------------------------
 
 .. note:: vivarium concept model diagram to come (TK)
@@ -386,75 +386,75 @@ person, and at most one spouse/partner.
 Initializing Guardian(s) for All Simulants
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To help with the development of observers, it is useful to have 
-simulants receive a "guardian". Please note that this is 
-distinct from "parents" and "tracked mothers". This concept is 
-used in the tax observer to define who claims dependents and is used 
-to create noise in other observers; however it has limited use as 
-an independent concept in the model. There are a maximum of 2 guardians 
-per simulant. 
+To help with the development of observers, it is useful to have
+simulants receive a "guardian". Please note that this is
+distinct from "parents" and "tracked mothers". This concept is
+used in the tax observer to define who claims dependents and is used
+to create noise in other observers; however it has limited use as
+an independent concept in the model. There are a maximum of 2 guardians
+per simulant.
 
-This person will be listed as ["Guardian"]. By design, most will be 
-parents, but some may be a grandparent or other relative. 
+This person will be listed as ["Guardian"]. By design, most will be
+parents, but some may be a grandparent or other relative.
 
-There are two groups that need to have guardians initialized 
-and we will address those separately: children under the age of 18, and 
-those who are below 24 and in GQ for college (defined above). 
+There are two groups that need to have guardians initialized
+and we will address those separately: children under the age of 18, and
+those who are below 24 and in GQ for college (defined above).
 
-Note: "N/A" for the purposes of this simulation means that a 
-guardian cannot be identified. For tax purposes, no one will claim 
-this person as a dependent. 
+Note: "N/A" for the purposes of this simulation means that a
+guardian cannot be identified. For tax purposes, no one will claim
+this person as a dependent.
 
 **For simulant under 18 and NOT living in GQ:**
 
-"Assign" in this context means "assign as the guardian". 
+"Assign" in this context means "assign as the guardian".
 
-- Child is a biological, adopted, foster or step child to reference person 
-    * Assign reference person 
+- Child is a biological, adopted, foster or step child to reference person
+    * Assign reference person
 - Child is any other relative to reference person (NOT roommate/housemate or other nonrelative)
-    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random. 
-    * If there is not a relative of the appropriate age available, assign the reference person 
-- Child is non-relative (roommate or other nonrelative) to reference person 
-    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random. 
-    * If there is not a non-relative of the appropriate age available, assign to a non-relative who is older than 18 (select at random if multiple) 
+    * Assign a relative of the reference person (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random.
+    * If there is not a relative of the appropriate age available, assign the reference person
+- Child is non-relative (roommate or other nonrelative) to reference person
+    * Assign another non-relative of the reference person (roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random.
+    * If there is not a non-relative of the appropriate age available, assign to a non-relative who is older than 18 (select at random if multiple)
     * If there are no non-relatives 18 or older, make "N/A"
-- Child is the reference person 
-    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian. If there is >1, assign one at random. 
+- Child is the reference person
+    * If someone has a defined parent (or parent-in-law) relationship, assign them as guardian. If there is >1, assign one at random.
     * Otherwise, assign another relative (anyone who is NOT a roommate/housemate or other nonrelative in the same house) who is between 18 and 45 years older than the child. If there are multiple, assign at random.
     * If there are no other relatives in the house, make "N/A"
-- Child is the spouse of the reference person 
+- Child is the spouse of the reference person
     * Make "N/A"
 
-This can be seen visually in the flowchart below: 
+This can be seen visually in the flowchart below:
 
-.. image:: minors_gen_pop.drawio.svg 
+.. image:: minors_gen_pop.drawio.svg
 
-Once a guardian is assigned, if there is a spouse or unmarried partner 
-for the guardian simulant (reference person and spouse/unmarried partner ONLY), then 
-include both as guardians. Otherwise only include the one as a guardian. If 
-there are multiple spouse/unmarried partner options, select one at random. 
+Once a guardian is assigned, if there is a spouse or unmarried partner
+for the guardian simulant (reference person and spouse/unmarried partner ONLY), then
+include both as guardians. Otherwise only include the one as a guardian. If
+there are multiple spouse/unmarried partner options, select one at random.
 
 **For a simulant who is below 24 and in GQ at college:**
 
-Simulant will be randomly assigned to a guardian based on the below rules: 
+Simulant will be randomly assigned to a guardian based on the below rules:
 
 - Match to a person aged 35 to 65 years old anywhere in the US
 - If child is not "Multiracial or Some Other Race", match guardian's race. If child is "Multiracial or Some Other Race", then assign to a guardian of any race
 - Assign to reference people, according to statistics in [NCES_Family_Characteristics]_
-    * 23% female reference people without a listed spouse 
-    * 5% male reference people without a listed spouse 
-    * Remainder to people with spouses, include both parents 
+    * 23% female reference people without a listed spouse
+    * 5% male reference people without a listed spouse
+    * Remainder to people with spouses, include both parents
 - If there are no simulants matching the desired race/spousal status, find any simulant of the correct age to assign. We expect this to happen never or almost never when the full population is run.
 - If there are no simulants of the correct age, do not assign a guardian. This would only happen with extremely small population sizes.
 
 
 **Limitations**
 
-#. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point. 
-#. We have "parents" fall at set ages. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others. 
-#. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this. 
-#. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included. 
-#. For GQ college folks, we select only reference people to be guardians, making some simulants ineligible and oversimplifying. 
+#. The foster care system is complex. We have the foster kid assigned within the house they are currently living. If we model the foster care system in more detail, we might improve this at some point.
+#. We have "parents" fall at set ages. This is an oversimplification. Some parents (especially men) fall outside of this range. Also some age gaps are more common than others.
+#. The only people who are seen as "in college" are in GQ in college. Plenty of people attend college from home, but we do not track education so are not accounting for this.
+#. We assign GQ college folks to "guardians" within an age limit. Some are likely supported by a grandparent or other person outside of our qualifications, but this is not included.
+#. For GQ college folks, we select only reference people to be guardians, making some simulants ineligible and oversimplifying.
 #. Because each GQ type has only a single location (state and PUMA), we allow college students' guardians to be anywhere in the US.
    In reality, 78.5% of college students should have a guardian in the same state where they go to college. [Own_State_Enrollment]_
    This could be included in a future version with multiple college locations.
@@ -462,24 +462,24 @@ Simulant will be randomly assigned to a guardian based on the below rules:
 Guardian(s) on Time Steps
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-For those who had a guardian initialized at the start of the 
-simulation, that assignment will not change. If the guardian 
-moves, they will remain as the guardian. If they die, the 
-simulant will not have a living guardian. 
+For those who had a guardian initialized at the start of the
+simulation, that assignment will not change. If the guardian
+moves, they will remain as the guardian. If they die, the
+simulant will not have a living guardian.
 
-A person cannot "age out" of their guardian when they become 
-an adult or have their own children. Therefore it is possible 
-to both HAVE a guardian and BE a guardian. 
+A person cannot "age out" of their guardian when they become
+an adult or have their own children. Therefore it is possible
+to both HAVE a guardian and BE a guardian.
 
-However, for simulants born in the simulation, they receive a 
-tracked mother (term for the person that births them, regardless 
-of gender). 
+However, for simulants born in the simulation, they receive a
+tracked mother (term for the person that births them, regardless
+of gender).
 
-The tracked mother will be assigned as a guardian. In addition, if 
-the tracked mother has a spouse or unmarried partner (reference person 
-and spouse/unmarried partner ONLY), the spouse/partner will 
-also be assigned as a guardian. If there are multiple spouse/unmarried 
-partner options, select one at random. 
+The tracked mother will be assigned as a guardian. In addition, if
+the tracked mother has a spouse or unmarried partner (reference person
+and spouse/unmarried partner ONLY), the spouse/partner will
+also be assigned as a guardian. If there are multiple spouse/unmarried
+partner options, select one at random.
 
 .. _census_prl_fertility:
 
@@ -771,7 +771,7 @@ uses the corresponding group by move type and age only.
 The general goal is to inform each relationship's proportion using the most specific group for which
 we have sufficient sample size.
 
-.. note:: 
+.. note::
 
   We never smooth using a group that is not age-specific,
   because there are logical relationships between age and relationship -- for example,
@@ -1596,7 +1596,7 @@ but not as a data file. [TEA_2020_Map]_
 .. note::
   The use of Update Leave has been decreasing rapidly since 2000, for reasons that are not immediately clear. [TEA_2000_2020]_
   It could be that the Census Bureau is changing its thresholds and policies
-  for designating an area Update Leave, or 
+  for designating an area Update Leave, or
   rural addresses are being converted to city-style addresses to improve 911 services. [LACS_Link]_
 
 Simulation strategy
@@ -1671,9 +1671,9 @@ for computation details.)
 Last names selected for a space/hyphen should be constructed by sampling two last
 names from the Census data and concatenating them with a space/hyphen.
 
-For now, assign all simulants initialized into the same household who are 
+For now, assign all simulants initialized into the same household who are
 relatives of the reference person (including the reference person themselves) the same last name.
-This excludes "roommate/housemate" and "other nonrelative" to the 
+This excludes "roommate/housemate" and "other nonrelative" to the
 reference person.
 Simulants initialized into group quarters will not be assigned matching last names.
 Immigrating simulants are assigned the same last name
@@ -1692,7 +1692,7 @@ out of those with that last name, **ever observed by any observer**.
 .. note::
   In a future version of the model, we might want to have matching last names even between
   households, e.g. for college simulants with guardians.
-	
+
 **First and middle names**
 
 First names from babies:
@@ -1711,9 +1711,9 @@ years to be increase predictive validity.
 Use middle names from same distribution as first names (?). It would
 be nice to get some of the national/ethnic challenges right, like
 people from South America with many names getting their middle names
-used as different last names. For the minimum model, assume all 
-simulants have exactly 1 middle name. This could be an area for 
-further complexity in future versions. 
+used as different last names. For the minimum model, assume all
+simulants have exactly 1 middle name. This could be an area for
+further complexity in future versions.
 
 We might want to eventually include nicknames and suffixes like Jr. and III.
 
@@ -1737,7 +1737,7 @@ We might want to eventually include nicknames and suffixes like Jr. and III.
 Note that if someone is born after 2020, their first name is sampled
 from first names in 2020, while for individuals born earlier their
 name is sampled from first names of birth year.
-	
+
 It could be valuable to include correlation between first and last
 names.  There will be a little from the strategy described above, but
 we could develop a strategy to more explicitly model it.  One approach
@@ -1748,32 +1748,32 @@ sources described above to create conditional samplers for first name
 and last name based on soundex.  Perhaps measure of success is to look
 at entropy of character n-gram distribution.
 
-To simulate naming after a parent or family member, we would like ~5% of 
-children to have the same name as a relative. This can be separated into two 
-groups: 
+To simulate naming after a parent or family member, we would like ~5% of
+children to have the same name as a relative. This can be separated into two
+groups:
 
 **People born in the simulation**
 
-For 5% of simulants, they will be assigned a name based on these steps: 
+For 5% of simulants, they will be assigned a name based on these steps:
 
-#. Female simulants will have the same first name as their mother (who is known) 
-#. Male simulants, if their mother is the reference person and has an opposite-sex spouse, they will receive that spouse's first name 
-#. Otherwise, if the mother is the reference person or is related to the reference person, the new simulant will be assigned the first name of a randomly selected male in the household who is related to the reference person, if one exists 
-#. If none of these are available, assign a random name 
+#. Female simulants will have the same first name as their mother (who is known)
+#. Male simulants, if their mother is the reference person and has an opposite-sex spouse, they will receive that spouse's first name
+#. Otherwise, if the mother is the reference person or is related to the reference person, the new simulant will be assigned the first name of a randomly selected male in the household who is related to the reference person, if one exists
+#. If none of these are available, assign a random name
 
 **People initialized in the simulation**
 
-For 5% of simulants, they will be assigned a name based on these steps: 
+For 5% of simulants, they will be assigned a name based on these steps:
 
-#. For anyone who is the reference person, assign the first name of any "parent" relationship of the same sex in the house, if not available then any "child" relationship name, then randomly assign any other relative of the same sex first name if available 
-#. For anyone who has a child relationship attribute ("biological child", "adopted child") and is the same sex as the reference person, they are assigned the same first name as the reference person 
-#. For anyone who has a "parent" relationship attribute and is the same sex as the reference person, they are assigned the same first name as the reference person 
-#. For anyone who has a child relationship attribute ("biological child", "adopted child") and is the opposite sex as the reference person: if there is someone in the household with relationship "opposite-sex spouse", they are assigned the same first name as the spouse 
+#. For anyone who is the reference person, assign the first name of any "parent" relationship of the same sex in the house, if not available then any "child" relationship name, then randomly assign any other relative of the same sex first name if available
+#. For anyone who has a child relationship attribute ("biological child", "adopted child") and is the same sex as the reference person, they are assigned the same first name as the reference person
+#. For anyone who has a "parent" relationship attribute and is the same sex as the reference person, they are assigned the same first name as the reference person
+#. For anyone who has a child relationship attribute ("biological child", "adopted child") and is the opposite sex as the reference person: if there is someone in the household with relationship "opposite-sex spouse", they are assigned the same first name as the spouse
 #. For anyone else, if they have a relative relationship attribute (any except "roommate/housemate" and "other nonrelative"), they are assigned the same first name as another randomly-selected person in the household who also has a relative relationship attribute and the same sex. If there is no such person, skip to the next step.
-    #. If there are 2 or more simulants in this step that are selected for matched naming, beginning naming with the oldest simulant first 
-#. For anyone else, they will be assigned a random name 
+    #. If there are 2 or more simulants in this step that are selected for matched naming, beginning naming with the oldest simulant first
+#. For anyone else, they will be assigned a random name
 
-Note that for same sex couples, whoever is the reference person will pass their name instead of their spouse. 
+Note that for same sex couples, whoever is the reference person will pass their name instead of their spouse.
 
 **Verification and validation strategy**: to verify this approach, we
 can manually inspect a sample of 10-100 names; we can also look at the
@@ -1820,7 +1820,7 @@ According to `this report
 million were assigned a protected identification key"
 
 The ``faker`` Python library has `an SSN generation module <https://github.com/joke2k/faker/blob/master/faker/providers/ssn/en_US/__init__.py#L219-L222>`_,
-which is based on the SSA's algorithm for generating SSNs: 
+which is based on the SSA's algorithm for generating SSNs:
 https://www.ssa.gov/kc/SSAFactSheet--IssuingSSNs.pdf
 
 Before 2011, SSNs
@@ -1967,17 +1967,27 @@ expected number are missing among foreign-born people.
 2.3.11 Periodic observations of attributes through survey, census, and registry
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The following sections describe the simulated datasets that can be generated by :code:`pseudopeople`,
+and the noise functions that can be applied.
+Observers should be implemented so that it is possible to generate these datasets.
+The simulant attributes to sample (listed in the "What to Sample" section for each dataset),
+except for those marked "for noise functions only," should be the columns present in :code:`pseudopeople` outputs.
+In those outputs, the columns should be **in the order they are listed here**.
+
+.. todo::
+  Move this documentation to the :code:`pseudopeople` repository.
+
 Census
 ^^^^^^
 
-**When to Sample** 
+**When to Sample**
 
 - The sample will be taken on the first time step that hits April of each decade (2010, 2020, 2030)
-- The sample will be taken on a single time step 
+- The sample will be taken on a single time step
 
-**What to Sample** 
+**What to Sample**
 
-.. list-table:: Simulant Attribute to Sample 
+.. list-table:: Simulant Attribute to Sample
   :widths: 20
   :header-rows: 0
 
@@ -1985,19 +1995,19 @@ Census
   * - Unique household ID consistent between observers (for PRL tracking)
   * - Census household ID (arbitrary identifier which is the same for simulants in the same household but **different from other observers and between timesteps for the same household**)
   * - First name
-  * - Middle initial 
+  * - Middle initial
   * - Last name
   * - Age (floored to integer years **before** noise is applied)
   * - Date of Birth (stored as a string in MM/DD/YYYY format)
-  * - Physical Address Street Number 
+  * - Physical Address Street Number
   * - Physical Address Street Name
-  * - Physical Address Unit 
+  * - Physical Address Unit
   * - Physical Address City
-  * - Physical Address State 
+  * - Physical Address State
   * - Physical Address ZIP Code
   * - Relationship to Person 1 (Head of Household)
   * - Sex (binary; "Male" or "Female")
-  * - Race/Ethnicity 
+  * - Race/Ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
@@ -2008,155 +2018,166 @@ Census
 
 
 
-**Who to Sample** 
+**Who to Sample**
 
-All living simulants are eligible for sampling; note 
-that this means they must be listed as 'alive' at the time the census 
-is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a 
-probability of being missed in the census. Based on this 
-probability, simulants will be randomly selected for inclusion. We decided 
-to use additive effects rather than multiplicitive which is often used 
-in simulations. 
-All "Percent Omitted" data below is from the Census Post-Enumeration Survey. [Census_PES]_ 
+All living simulants are eligible for sampling; note
+that this means they must be listed as 'alive' at the time the census
+is taken. Based on race/ethnicity, age, and sex, simulants will be assigned a
+probability of being missed in the census. Based on this
+probability, simulants will be randomly selected for inclusion. We decided
+to use additive effects rather than multiplicitive which is often used
+in simulations.
+All "Percent Omitted" data below is from the Census Post-Enumeration Survey. [Census_PES]_
 
-.. list-table:: Simulant Omission by Race/Ethnicity 
-  :widths: 20 10 10 
+.. list-table:: Simulant Omission by Race/Ethnicity
+  :widths: 20 10 10
   :header-rows: 1
 
-  * - Race/Ethnicity  
-    - Percent Omitted 
+  * - Race/Ethnicity
+    - Percent Omitted
     - Additive Risk Effect on Omission (% points)
-  * - US Total (all races) 
+  * - US Total (all races)
     - 0.24
     - 0 (reference)
-  * - White 
+  * - White
     - -1.64
     - -1.88
-  * - Black 
+  * - Black
     - 3.3
     - 3.06
-  * - Asian 
+  * - Asian
     - -2.62
-    - -2.86 
-  * - American Indian and Alaskan Native 
+    - -2.86
+  * - American Indian and Alaskan Native
     - 0.91
     - 0.67
-  * - Native Hawaiian and Pacific Islander  
+  * - Native Hawaiian and Pacific Islander
     - -1.28
-    - -1.52 
-  * - Other Races or Multiracial  
+    - -1.52
+  * - Other Races or Multiracial
     - 4.34
     - 4.1
-  * - Hispanic/Latino 
+  * - Hispanic/Latino
     - 4.99
-    - 4.75 
+    - 4.75
 
 
-.. list-table:: Simulant Omission by Age/Sex 
-  :widths: 20 10 10 
+.. list-table:: Simulant Omission by Age/Sex
+  :widths: 20 10 10
   :header-rows: 1
 
   * - Age/Sex
-    - Percent Omitted 
+    - Percent Omitted
     - Additive Risk Effect on Omission (% points)
-  * - US Total (all ages and sexes) 
+  * - US Total (all ages and sexes)
     - 0.24
     - 0 (reference)
-  * - 0-4, all sexes 
+  * - 0-4, all sexes
     - 2.79
     - 2.55
-  * - 5-9, all sexes 
+  * - 5-9, all sexes
     - 0.1
     - -0.14
-  * - 10-17, all sexes 
+  * - 10-17, all sexes
     - 0.21
     - -0.03
-  * - 18-29, male 
+  * - 18-29, male
     - 2.25
     - 2.01
-  * - 18-29, female 
+  * - 18-29, female
     - 0.98
     - 0.74
-  * - 30-49, male 
+  * - 30-49, male
     - 3.05
     - 2.81
-  * - 30-49, female 
+  * - 30-49, female
     - -0.1
     - -0.34
-  * - 50+, male 
+  * - 50+, male
     - -0.55
     - -0.79
-  * - 50+, female 
+  * - 50+, female
     - -2.63
     - -2.87
 
-Using the tables above, a probability of omission is calculated for 
-each simulant. The table below includes a few examples of this 
-process. 
+Using the tables above, a probability of omission is calculated for
+each simulant. The table below includes a few examples of this
+process.
 
-.. list-table:: Calculating Simulant Omission 
+.. list-table:: Calculating Simulant Omission
   :widths: 10 10 10 20
   :header-rows: 1
 
-  * - Simulant 
-    - Race/Ethnicity 
+  * - Simulant
+    - Race/Ethnicity
     - Age/Sex
     - Probability of Omission (%)
   * - 1
-    - White 
-    - 0-4, female 
-    - 0.24 + (-1.88) + (2.55) = **0.91%** 
+    - White
+    - 0-4, female
+    - 0.24 + (-1.88) + (2.55) = **0.91%**
   * - 2
-    - Black 
-    - 30-49, male 
-    - 0.24 + (3.06) + (2.81) = **6.11%** 
+    - Black
+    - 30-49, male
+    - 0.24 + (3.06) + (2.81) = **6.11%**
   * - 3
-    - Asian 
-    - 50+, female 
-    - 0.24 + (-2.86) + (-2.87) = -5.49 is < 0 so **0%** 
+    - Asian
+    - 50+, female
+    - 0.24 + (-2.86) + (-2.87) = -5.49 is < 0 so **0%**
 
-Please note that for simulants with a net undercount less than 0, 
-they have a 0% chance of being missed. We are not including 
-duplicates at this time. 
+Please note that for simulants with a net undercount less than 0,
+they have a 0% chance of being missed. We are not including
+duplicates at this time.
 
+**Date Subsetting Options**
 
-**Limitations and Possible Future Adds** 
+The end user of pseudopeople should supply a Census year for which to get data
+from this observer.
+They should receive the data observed in that year in the simulation.
+For example, if they request 2020 data, they will receive the data observed in April 2020.
+This must be a year in which a Census was actually performed -- otherwise they will
+get an error.
 
-#. Sampling on a single time step is not representative of the true census. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here 
-#. Our model will underestimate total census coverage as we are not including net overcounts for certain population segments 
-#. Here we model a net undercount rather than modeling duplications and omissions separately. In reality, simulants are both duplicated and omitted within each race/age/sex group which leads to additional noise in the data 
-#. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, and having a SSN (as a proxy for citizenship) [Elliot_2021]_. These are not currently included in our model 
-#. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_ 
-#. It is assumed that race and age/sex are independent, do not have interaction, and combine additively 
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
+**Limitations and Possible Future Adds**
+
+#. Sampling on a single time step is not representative of the true census. People might move houses, change names, have babies, or have loved ones die during the census leading to additional noise in the census not modeled here
+#. Our model will underestimate total census coverage as we are not including net overcounts for certain population segments
+#. Here we model a net undercount rather than modeling duplications and omissions separately. In reality, simulants are both duplicated and omitted within each race/age/sex group which leads to additional noise in the data
+#. There are multiple other factors that contribute to omission rate including: tenure in a home, state/geography, and having a SSN (as a proxy for citizenship) [Elliot_2021]_. These are not currently included in our model
+#. There is some evidence that young children are missed in the post enumeration survey and therefore are missed more than accounted for here [OHare_2019]_
+#. It is assumed that race and age/sex are independent, do not have interaction, and combine additively
 
 Household Surveys
 ^^^^^^^^^^^^^^^^^
 
-There are many different types of household surveys that we might want to include 
-in the model. Therefore, this documentation reflects a general framework for 
-household surveys. The research team would then be responsible for providing the 
-additional inputs for an individual survey. 
+There are many different types of household surveys that we might want to include
+in the model. Therefore, this documentation reflects a general framework for
+household surveys. The research team would then be responsible for providing the
+additional inputs for an individual survey.
 
-**When to Sample** 
+**When to Sample**
 
-There are two types of sampling plans: 
+There are two types of sampling plans:
 
 1. A new random sample of the population at a defined time interval (e.g., sample 5% of the households each month for a year)
 
-- The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps 
-- The total duration of the survey will be specified 
-- Each subsequent sample is assumed to be independent of the prior samples 
+- The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps
+- The total duration of the survey will be specified
+- Each subsequent sample is assumed to be independent of the prior samples
 
-2. A longitudinal sample will sample the **same** population on defined time steps (e.g., sample the same 5% of households each month for 6 months) 
+2. A longitudinal sample will sample the **same** population on defined time steps (e.g., sample the same 5% of households each month for 6 months)
 
-- The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps 
-- The total duration of the survey will be specified 
-- The sample will be taken and kept the same for all households 
+- The sample will be taken at set time intervals (monthly, annually) that the research team will communicate in terms of time steps
+- The total duration of the survey will be specified
+- The sample will be taken and kept the same for all households
 
 
-**What to Sample** 
+**What to Sample**
 
-.. list-table:: Simulant Attribute to Sample 
+.. list-table:: Simulant Attribute to Sample
   :widths: 20
   :header-rows: 0
 
@@ -2165,17 +2186,18 @@ There are two types of sampling plans:
   * - Survey household ID (arbitrary identifier which is the same for simulants in the same household but **different from other observers and between timesteps for the same household**)
   * - Survey date
   * - First name
-  * - Middle initial 
+  * - Middle initial
   * - Last name
   * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
-  * - Physical Address Street Number 
+  * - Physical Address Street Number
   * - Physical Address Street Name
-  * - Physical Address Unit 
+  * - Physical Address Unit
   * - Physical Address City
-  * - Physical Address State 
+  * - Physical Address State
   * - Physical Address ZIP Code
   * - Sex (binary; "Male" or "Female")
+  * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
   * - Type of GQ (for noise functions ONLY)
@@ -2185,172 +2207,187 @@ There are two types of sampling plans:
   In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
 
-Here is an example: 
+Here is an example:
 
 .. image:: survey_example.png
 
 
-**Who to Sample** 
+**Who to Sample**
 
 All living simulants are eligible for sampling.
-For surveys, there is a much more significant amount of non-response bias 
-compared to the annual census. Participation will be determined in a two 
-step process. 
+For surveys, there is a much more significant amount of non-response bias
+compared to the annual census. Participation will be determined in a two
+step process.
 
-**Step 1:** Households will be randomly selected for participation at a rate 
-predetermined by the researcher. The selection should be stratified by state, 
-but no other variables. This will be a random sample. 
+**Step 1:** Households will be randomly selected for participation at a rate
+predetermined by the researcher. The selection should be stratified by state,
+but no other variables. This will be a random sample.
 
-**Step 2:** Simulants will be chosen to be non-responders and removed from 
-the sample. This step will vary significantly based on the mode of the survey. 
-There are three possible modes: mail/online (assumed to be the same for this 
-model), telephone, and personal visits. 
+**Step 2:** Simulants will be chosen to be non-responders and removed from
+the sample. This step will vary significantly based on the mode of the survey.
+There are three possible modes: mail/online (assumed to be the same for this
+model), telephone, and personal visits.
 
-The below table includes the percent of responses for each mode of survey by 
-race/ethnicity. These will be used to find the non-response based on the mode 
-of the survey. 
+The below table includes the percent of responses for each mode of survey by
+race/ethnicity. These will be used to find the non-response based on the mode
+of the survey.
 
-This data is based on the ACS which uses all of these methods and tracks 
-the percent of respondents to each. [Jackson_2007]_ Since the ACS has an order to 
-their survey modes (mail -> telephone -> personal visit), this data should 
-not be used out of that order (e.g., we can **not** assume that a telephone only 
-interview would have an 11.9% response rate for white people). 
+This data is based on the ACS which uses all of these methods and tracks
+the percent of respondents to each. [Jackson_2007]_ Since the ACS has an order to
+their survey modes (mail -> telephone -> personal visit), this data should
+not be used out of that order (e.g., we can **not** assume that a telephone only
+interview would have an 11.9% response rate for white people).
 
-The data for modes below is for respondents. We assume that the non-response 
-bias for ACS matches the census. Therefore, we will apply an additional omission 
-rate using the rates in the simulant omission tables in the decennial census 
-section above. 
+The data for modes below is for respondents. We assume that the non-response
+bias for ACS matches the census. Therefore, we will apply an additional omission
+rate using the rates in the simulant omission tables in the decennial census
+section above.
 
-This data is available as a csv here: J:\Project\simulation_science\prl\data\survey_mode_percent.csv 
+This data is available as a csv here: J:\Project\simulation_science\prl\data\survey_mode_percent.csv
 
-.. list-table:: Simulant Response by Race/Ethnicity 
-  :widths: 20 10 10 10 
+.. list-table:: Simulant Response by Race/Ethnicity
+  :widths: 20 10 10 10
   :header-rows: 1
 
-  * - Race/Ethnicity  
-    - Mail/Online Percent of Response 
+  * - Race/Ethnicity
+    - Mail/Online Percent of Response
     - Telephone Percent of Response
-    - Personal Visit Percent of Response 
-  * - White 
+    - Personal Visit Percent of Response
+  * - White
     - 62.5%
     - 11.9%
-    - 25.6% 
-  * - Black 
+    - 25.6%
+  * - Black
     - 29.7%
     - 15.1%
-    - 55.2% 
-  * - Asian 
+    - 55.2%
+  * - Asian
     - 52.7%
     - 9.7%
-    - 37.6%  
-  * - American Indian and Alaskan Native 
-    - 40.1% 
-    - 18.0% 
-    - 41.9% 
-  * - Native Hawaiian and Pacific Islander  
+    - 37.6%
+  * - American Indian and Alaskan Native
+    - 40.1%
+    - 18.0%
+    - 41.9%
+  * - Native Hawaiian and Pacific Islander
     - 30.0%
     - 14.2%
-    - 55.8% 
-  * - Other Races or Multiracial  
-    - 22.9% 
-    - 16.7% 
-    - 60.3% 
-  * - Hispanic/Latino 
-    - 25.9% 
-    - 15.1% 
-    - 58.8% 
+    - 55.8%
+  * - Other Races or Multiracial
+    - 22.9%
+    - 16.7%
+    - 60.3%
+  * - Hispanic/Latino
+    - 25.9%
+    - 15.1%
+    - 58.8%
 
 
-.. list-table:: Calculating Simulant Non-Response 
-  :widths: 5 10 10 10 10 10 10 
+.. list-table:: Calculating Simulant Non-Response
+  :widths: 5 10 10 10 10 10 10
   :header-rows: 1
 
   * - Sim
-    - Race/Ethnicity 
-    - Age and Sex 
-    - Survey Modes Used 
-    - Census Omission Rate (%) 
+    - Race/Ethnicity
+    - Age and Sex
+    - Survey Modes Used
+    - Census Omission Rate (%)
     - Probability of Non-Response (%)
     - Overall Missed Respondents (%)
   * - 1
-    - White 
+    - White
     - 30-49, female
-    - Mail/Online Only 
-    - 0%  
-    - 100% - 62.5% = 37.5% non-response 
+    - Mail/Online Only
+    - 0%
+    - 100% - 62.5% = 37.5% non-response
     - 37.5%  + 0% = **37.5%**
   * - 2
-    - Black 
-    - 18-29, male 
+    - Black
+    - 18-29, male
     - Mail/Online and Telephone
     - 5.31%
-    - 100% - (29.7% + 15.1%) = 55.2% non-response 
+    - 100% - (29.7% + 15.1%) = 55.2% non-response
     - 55.2% + 5.31% = **60.51%**
   * - 3
-    - Asian 
-    - 50+, female 
-    - Mail/Online, Telephone, and Personal Visits 
-    - 0% 
-    - 100% - (52.7% + 9.7% + 37.6%) = 0% 
-    - 0% + 0% = **0%** 
+    - Asian
+    - 50+, female
+    - Mail/Online, Telephone, and Personal Visits
+    - 0%
+    - 100% - (52.7% + 9.7% + 37.6%) = 0%
+    - 0% + 0% = **0%**
 
-For longitudinal surveys, assume that non-response is independent between 
-survey iterations. 
+For longitudinal surveys, assume that non-response is independent between
+survey iterations.
 
 
-**Limitations and Possible Future Adds** 
+**Limitations and Possible Future Adds**
 
-#. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the survey leading to additional noise not modeled here 
-#. Our model does not include an option for double counting or duplicating people 
-#. There are multiple other factors that contribute to non-response including: tenure in a home, state/geography, age, and having a SSN (as a proxy for citizenship) based on ACS data [Jackson_2007]_. These are not currently included in our model 
-#. Simulants who do not respond to one time point in a longitudinal survey are probably more likely to not respond moving forward. We assume independence here. 
-#. The ACS data is for a survey that has an unusually high response rate. This data was used as it could give an estimate for mail only or mail and telephone only data. However, this has limitations. Other surveys might have lower response rates and should be handled separately. 
-#. By replicating the census omission rate for the ACS observer, we are limiting the non-response rate below what we might expect. This will lead to overcounting in the ACS. 
+#. Sampling on a single time step is not representative of most surveys. People might move houses, change names, have babies, or have loved ones die during the survey leading to additional noise not modeled here
+#. Our model does not include an option for double counting or duplicating people
+#. There are multiple other factors that contribute to non-response including: tenure in a home, state/geography, age, and having a SSN (as a proxy for citizenship) based on ACS data [Jackson_2007]_. These are not currently included in our model
+#. Simulants who do not respond to one time point in a longitudinal survey are probably more likely to not respond moving forward. We assume independence here.
+#. The ACS data is for a survey that has an unusually high response rate. This data was used as it could give an estimate for mail only or mail and telephone only data. However, this has limitations. Other surveys might have lower response rates and should be handled separately.
+#. By replicating the census omission rate for the ACS observer, we are limiting the non-response rate below what we might expect. This will lead to overcounting in the ACS.
 
-**Initial Survey - American Community Survey (ACS)** 
+**Initial Survey - American Community Survey (ACS)**
 
-The ACS will be used for V&V testing. It is defined as: 
+The ACS will be used for V&V testing. It is defined as:
 
-- To appoximate a monthly sample rate of 12,000 households nationwide using 28 day timesteps, we will sample (12,000 * 12)/(365.25/28) = 11039 households every 28 days 
-- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion  
-- **Not** longitudinal (independent samples) 
-- Includes mail/online, telephone, and personal visits 
+- To appoximate a monthly sample rate of 12,000 households nationwide using 28 day timesteps, we will sample (12,000 * 12)/(365.25/28) = 11039 households every 28 days
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion
+- **Not** longitudinal (independent samples)
+- Includes mail/online, telephone, and personal visits
 
-**Survey - Current Population Survey (CPS)** 
+**Survey - Current Population Survey (CPS)**
 
-The CPS is a survey run by the Census Bureau and gathers data about the 
-labor force, employment and unemployment, demographics, earnings, and 
-more information. It is an important survey and therefore is being 
-added here. 
+The CPS is a survey run by the Census Bureau and gathers data about the
+labor force, employment and unemployment, demographics, earnings, and
+more information. It is an important survey and therefore is being
+added here.
 
-To create this survey: 
+To create this survey:
 
-- To appoximate a monthly sample rate of 60,000 households nationwide using 28 day timesteps, we will sample (60,000 * 12)/(365.25/28) = 55195 households every 28 days  
-- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion 
-- **Not** longitudinal (independent samples) 
-- This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex 
+- To appoximate a monthly sample rate of 60,000 households nationwide using 28 day timesteps, we will sample (60,000 * 12)/(365.25/28) = 55195 households every 28 days
+- Note: to avoid rerunning the simulation, please oversample by 2x to allow for improper inclusion
+- **Not** longitudinal (independent samples)
+- This survey utilizes personal visits and phone calls. As this does not fit into the framework above, we will use the values for mail/online, telephone, and personal visits and then apply an overall non-response rate of 27.6%. This additional risk of non-response will be added to all simulants regardless of race/ethnicity, age, or sex
 
 [Household_Rates_2022]_
 
-Note/limitations: 
+**Date Subsetting Options**
+
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive all the data observed in that year in the simulation.
+For example, if they request 2023 data, they will receive the data observed in
+January 2023, February 2023, and so on to December 2023.
+
+.. todo::
+  In a future version, we may want to allow single-month date subsetting, or
+  five-year subsets to replicate the 5-year ACS data files.
+
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
+Note/limitations:
 
 - Applying a uniform non-response rate limits the impact of race/ethnicity, age, and sex to affect the sampled population. This might make some aspects of PRL easier as it is less likely the same simulants will be missing from each sample.
 
 Women, Infants, and Children (WIC)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-WIC is a government benefits program designed to support mothers and young 
-children. The main qualifications are income and presence of young children 
-in the home. 
+WIC is a government benefits program designed to support mothers and young
+children. The main qualifications are income and presence of young children
+in the home.
 
 
-**When to Sample** 
+**When to Sample**
 
 - Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
 
-**What to Sample** 
+**What to Sample**
 
-.. list-table:: Simulant Attribute to Sample 
+.. list-table:: Simulant Attribute to Sample
   :widths: 20
   :header-rows: 0
 
@@ -2359,21 +2396,21 @@ in the home.
   * - WIC participant ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
   * - WIC family ID (arbitrary identifier which is the same for simulants in the same household **across time** but **different from other observers for the same household**)
   * - First name
-  * - Middle initial 
+  * - Middle initial
   * - Last name
   * - DOB (stored as a string in MMDDYYYY format)
-  * - Physical Address Street Number 
+  * - Physical Address Street Number
   * - Physical Address Street Name
-  * - Physical Address Unit 
+  * - Physical Address Unit
   * - Physical Address City
-  * - Physical Address State 
+  * - Physical Address State
   * - Physical Address ZIP Code
   * - Sex (binary; "Male" or "Female")
-  * - Race/ethnicity 
+  * - Race/ethnicity
   * - Tracked Guardian(s) (for noise functions ONLY)
   * - Tracked Guardian Address(es) (for noise functions ONLY)
 
-Here is an example: 
+Here is an example:
 
 .. image:: WIC_example.png
 
@@ -2382,110 +2419,123 @@ Here is an example:
   In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
 
-**Who to Sample** 
+**Who to Sample**
 
-Selection for the observer will be in 2 steps: 
+Selection for the observer will be in 2 steps:
 
-#. Eligibilty for WIC 
-#. Covered by WIC 
+#. Eligibilty for WIC
+#. Covered by WIC
 
-Please note that multiple people in the same household can be selected. Selection is 
-usually independent, with one exception. If a tracked mother or guardian is selected 
-for WIC benefits, their infant (infant is defined as a less than 1 year old child) 
-must also be enrolled in WIC. In all other cases, selection is independent. 
+Please note that multiple people in the same household can be selected. Selection is
+usually independent, with one exception. If a tracked mother or guardian is selected
+for WIC benefits, their infant (infant is defined as a less than 1 year old child)
+must also be enrolled in WIC. In all other cases, selection is independent.
 
-The main examples of independence are siblings (e.g., having one child in the household 
-on WIC does not mean a second child is or is not on WIC) and infant to tracked mother or 
-guardian (an infant being on WIC does not mean their tracked mother or guardian is or is 
-not on WIC). Inclusion is at the simulant level. Do not include others in the household 
-on the observer. 
+The main examples of independence are siblings (e.g., having one child in the household
+on WIC does not mean a second child is or is not on WIC) and infant to tracked mother or
+guardian (an infant being on WIC does not mean their tracked mother or guardian is or is
+not on WIC). Inclusion is at the simulant level. Do not include others in the household
+on the observer.
 
-To account for these interdependencies, please follow the below steps: 
+To account for these interdependencies, please follow the below steps:
 
 #. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity 
 #. Enroll ALL infants of these tracked mothers or guardians **who live in the same household as their tracked mother/guardian** (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian) 
 #. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
-#. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met 
+#. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met
 
-Note: for Hispanic simulants, the rate of tracked mothers/guardians is higher than infants. 
-For this group, select the infants associated with the tracked mothers/guardians and 
-stop. This will leads to overselecting infants, which is a known limitation. 
+Note: for Hispanic simulants, the rate of tracked mothers/guardians is higher than infants.
+For this group, select the infants associated with the tracked mothers/guardians and
+stop. This will leads to overselecting infants, which is a known limitation.
 
 **Eligibility for WIC**
 
-Eligibility for WIC is based on income and age/children in the house. 
-To qualify you must be both: 
+Eligibility for WIC is based on income and age/children in the house.
+To qualify you must be both:
 
 - A child under the age of 5 (0-4 years old)
 - OR a tracked mother OR guardian of a child under the age of 1 **living in the same household as that child**
 
-And also: 
+And also:
 
 - Have a total household income less than the limit below (based on number of people in the household)
 
-Max income = $16,410 + ($8,732 * number of people in the household) 
+Max income = $16,410 + ($8,732 * number of people in the household)
 
-For example, a one person household would have a maximum income of $25,142 and 
-a two person household would have a maximum income of $33,874. 
+For example, a one person household would have a maximum income of $25,142 and
+a two person household would have a maximum income of $33,874.
 
 Source: [WIC_eligibility]_
 
 **Covered by WIC**
 
-Once someone is found to be eligible, they are then randomly assigned to be 
-covered or not covered by WIC. This is a random sample based on the age of 
-the participant. 
+Once someone is found to be eligible, they are then randomly assigned to be
+covered or not covered by WIC. This is a random sample based on the age of
+the participant.
 
 .. list-table:: Coverage Rate by Age and Race/Ethnicity
-  :widths: 10 10 10 10 10 
+  :widths: 10 10 10 10 10
   :header-rows: 1
 
-  * - Age Bucket 
-    - Hispanic 
+  * - Age Bucket
+    - Hispanic
     - Black only (Not hispanic)
     - White only (Not hispanic)
     - Other (include all other race groups here)
   * - Infants (less than age 1)
-    - 98.4% 
-    - 98.4% 
+    - 98.4%
+    - 98.4%
     - 77.98%
-    - 98.4% 
+    - 98.4%
   * - Children Age 1
     - 76.1%
-    - 69.6% 
-    - 51.4% 
-    - 67.6% 
+    - 69.6%
+    - 51.4%
+    - 67.6%
   * - Children Age 2
-    - 56.8% 
-    - 52.0% 
-    - 38.4% 
-    - 50.5% 
+    - 56.8%
+    - 52.0%
+    - 38.4%
+    - 50.5%
   * - Children Age 3
-    - 51.2% 
-    - 46.9% 
-    - 34.6% 
-    - 45.5% 
+    - 51.2%
+    - 46.9%
+    - 34.6%
+    - 45.5%
   * - Children Age 4
-    - 28.7% 
-    - 26.3% 
-    - 19.4% 
-    - 25.5% 
-  * - Tracked Mothers and Guardians with Children 
-    - 99.3% 
-    - 90.9% 
-    - 67.1% 
-    - 88.2% 
+    - 28.7%
+    - 26.3%
+    - 19.4%
+    - 25.5%
+  * - Tracked Mothers and Guardians with Children
+    - 99.3%
+    - 90.9%
+    - 67.1%
+    - 88.2%
 
 Source: [Coverage]_
 
+**Date Subsetting Options**
 
-**Limitations and Possible Future Adds** 
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a year of 2023, they should recieve the data recorded
+in January 2024.
+This is because the real WIC data would be updated continuously, and we approximate
+the state of that data at the end of the year by observing at the start of the next.
+See the final limitation below for more about this approximation.
 
-#. Currently the model does not track pregnant people, therefore they are not included despite being eligible 
-#. It is unclear if having one family member on WIC would increase or decrease the chance of having multiple family members on WIC. This could probably be improved upon with more data. Currently, a parent on WIC means that the infant will also be on WIC, but siblings are not affected. 
-#. Selection for WIC is random after eligibility. In practice, lower income individuals are more likely to sign up for WIC and the selection is therefore biased. 
-#. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here 
-#. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life 
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
+**Limitations and Possible Future Adds**
+
+#. Currently the model does not track pregnant people, therefore they are not included despite being eligible
+#. It is unclear if having one family member on WIC would increase or decrease the chance of having multiple family members on WIC. This could probably be improved upon with more data. Currently, a parent on WIC means that the infant will also be on WIC, but siblings are not affected.
+#. Selection for WIC is random after eligibility. In practice, lower income individuals are more likely to sign up for WIC and the selection is therefore biased.
+#. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here
+#. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
 #. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028.
 #. We use household as the proxy for WIC family ID, which causes two issues:
@@ -2500,30 +2550,30 @@ Source: [Coverage]_
 Taxes
 ^^^^^
 
-Taxes, as we all know, can contain many different forms and processes. 
-For this model, we will split the tax information into two main sections: 
-W2/1099 forms from employers; and 1040 forms from simulants. We will look 
-at these separately, starting with W2 and 1099 forms. 
+Taxes, as we all know, can contain many different forms and processes.
+For this model, we will split the tax information into two main sections:
+W2/1099 forms from employers; and 1040 forms from simulants. We will look
+at these separately, starting with W2 and 1099 forms.
 
 
 W2 and 1099 Forms
 '''''''''''''''''
 
-**When to Sample** 
+**When to Sample**
 
 - Sample compiled on the time step containing Jan 1st of each year (the time step might end on Jan 2nd, Jan 15th, Jan 27th, etc.)
-- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. Jobs can be tracked for complete time steps, so through the last day of the time step containing Jan 1st. 
+- However, we will want to track every job a simulant has had for any time step within a calendar year, which might require additional observers. If a simulant changes jobs in March of 2020, their tax documents on Jan 1st of 2021 will need to include both their current job, and their job from February of 2020. Jobs can be tracked for complete time steps, so through the last day of the time step containing Jan 1st.
 
-**What to Sample** 
+**What to Sample**
 
-.. list-table:: Simulant Attribute to Sample 
+.. list-table:: Simulant Attribute to Sample
   :widths: 20
   :header-rows: 0
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
   * - First name
-  * - Middle initial 
+  * - Middle initial
   * - Last name
   * - Age (floored to integer years **before** noise is applied)
   * - DOB (stored as a string in MM/DD/YYYY format)
@@ -2532,14 +2582,14 @@ W2 and 1099 Forms
   * - Mailing Address Unit (blank for PO boxes)
   * - Mailing Address PO Box (blank for not PO boxes)
   * - Mailing Address City
-  * - Mailing Address State 
+  * - Mailing Address State
   * - Mailing Address ZIP Code
-  * - Social Security Number 
+  * - Social Security Number
   * - Wages (income from this job)
-  * - Employer ID 
-  * - Employer Name 
-  * - Employer Address 
-  * - Employer ZIP Code 
+  * - Employer ID
+  * - Employer Name
+  * - Employer Address
+  * - Employer ZIP Code
   * - Type of Tax Form (W2 or 1099)
 
 .. note::
@@ -2547,38 +2597,38 @@ W2 and 1099 Forms
   In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Wages must be rounded to the nearest whole number before applying noise.
 
 
-If a simulant does not have a social security number but is 
-employed, they will need this number to be filled in. If there 
-is a person in their household who has a SSN, use this number 
-instead. If there are multiple people with a SSN, choose at random. 
-If there is not a person in their household with a SSN 
-then fill in a new randomly generated SSN. This is designed to reflect 
-undocumented immigrants who might use fake or no longer 
-valid SSNs to obtain employment. 
+If a simulant does not have a social security number but is
+employed, they will need this number to be filled in. If there
+is a person in their household who has a SSN, use this number
+instead. If there are multiple people with a SSN, choose at random.
+If there is not a person in their household with a SSN
+then fill in a new randomly generated SSN. This is designed to reflect
+undocumented immigrants who might use fake or no longer
+valid SSNs to obtain employment.
 
-Please reselect or regenerate a new SSN for each observation. 
-If a simulant has had multiple jobs within the prior year, please 
-reselect or regenerate a SSN for each job (note: prior year refers to 
-the taxed year - so if taxes are filed in 2025, it would include all 
-jobs from 2024). This can overlap with 
-the prior selection (for example, if there is only one person in the 
-house to select an SSN from) but should be randomly rechosen each 
-time. 
+Please reselect or regenerate a new SSN for each observation.
+If a simulant has had multiple jobs within the prior year, please
+reselect or regenerate a SSN for each job (note: prior year refers to
+the taxed year - so if taxes are filed in 2025, it would include all
+jobs from 2024). This can overlap with
+the prior selection (for example, if there is only one person in the
+house to select an SSN from) but should be randomly rechosen each
+time.
 
-While this likely adds more variation than should be expected to the 
-SSNs in the model, we think it is better to have more variation than 
-less variation as it makes PRL more challenging. 
+While this likely adds more variation than should be expected to the
+SSNs in the model, we think it is better to have more variation than
+less variation as it makes PRL more challenging.
 
 .. note::
 
   Even if the simulant has an ITIN, it should not be included here!
   Instead, the described process should be used to fill an SSN.
 
-For this observer, a new row should be made for each **employment**, not 
-each simulant. This means that a simulant can have multiple rows of 
-data, or just one row of data. 
+For this observer, a new row should be made for each **employment**, not
+each simulant. This means that a simulant can have multiple rows of
+data, or just one row of data.
 
-Note that "wages" is used per the census team's request, but is the same 
+Note that "wages" is used per the census team's request, but is the same
 value as "income" in our simulation.
 In reality, the income data we used to sample simulants' income values
 includes non-wage income, but we attribute it all to wages here.
@@ -2586,76 +2636,86 @@ This is likely to be a benign assumption from a PRL standpoint because
 the continuous wage value won't be used for linking and there is no
 income/wage cutoff for this observer.
 
-Here is an example: 
+Here is an example:
 
 .. image:: W2_example.PNG
 
-**Who to Sample** 
+**Who to Sample**
 
-Everyone who has had an employer listed within the current calendar year 
-will receive either a W2 or a 1099 form. For those with multiple jobs during 
-the year, they will be duplicated and receive multiple forms. We currently 
-will not model persistence from year to year on which type of form. The type 
-of form is selected per job, not per person. For a person with multiple jobs, 
-the form type is randomly selected each time. 
+Everyone who has had an employer listed within the current calendar year
+will receive either a W2 or a 1099 form. For those with multiple jobs during
+the year, they will be duplicated and receive multiple forms. We currently
+will not model persistence from year to year on which type of form. The type
+of form is selected per job, not per person. For a person with multiple jobs,
+the form type is randomly selected each time.
 
 
-The rate of the the types of forms are below. This data is 
-from a review of 2016 tax data by [Lim_2019]_ . 
+The rate of the the types of forms are below. This data is
+from a review of 2016 tax data by [Lim_2019]_ .
 
-.. list-table:: Percent W2 versus 1099  
-  :widths: 10 10 
+.. list-table:: Percent W2 versus 1099
+  :widths: 10 10
   :header-rows: 1
 
-  * - Form Type 
-    - Percent Receiving 
-  * - W2 
-    - 94.65% 
-  * - 1099 
+  * - Form Type
+    - Percent Receiving
+  * - W2
+    - 94.65%
+  * - 1099
     - 5.35%
 
+**Date Subsetting Options**
 
-**Limitations and Possible Future Adds** 
+The end user of pseudopeople should supply a **tax** year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a tax year of 2023, they should recieve the data recorded
+in January 2024.
 
-#. Sampling on a single time step is not representative of how tax documents are compiled. 
-#. Errors are made in W2s and 1099s by companies frequently, due to employees moving or changing information without communicating changes. These W2s can be reissued which leads to duplicates, or employees might not adjust them leading to different information between W2/1099s and 1040 forms. This is not currently modeled. 
-#. 1099 forms are often used by self-employed people or those with small businesses. These can contain errors related in employer information. 
-#. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099. 
-#. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model. 
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
+**Limitations and Possible Future Adds**
+
+#. Sampling on a single time step is not representative of how tax documents are compiled.
+#. Errors are made in W2s and 1099s by companies frequently, due to employees moving or changing information without communicating changes. These W2s can be reissued which leads to duplicates, or employees might not adjust them leading to different information between W2/1099s and 1040 forms. This is not currently modeled.
+#. 1099 forms are often used by self-employed people or those with small businesses. These can contain errors related in employer information.
+#. There are some employed people who do not receive a W2 or 1099, often for "under the table" work. This phenomenon might be easiest to include in the simulation as these individuals would not have a listed employer despite having an income. I chose to have all those that have an employer listed receive a W2/1099.
+#. Many workers might have multiple jobs simultaneously and receive multiple forms. This is not included in the current model.
 #. Elderly people can still have to file taxes based on social security payments, but would likely not have an employer in our model.
-#. GQ simulants can "borrow" an SSN from anyone else in their GQ. This adds more variation than would be expected in real life. As it will increase the PRL challenge, we have accepted this as a reasonable limitation. 
+#. GQ simulants can "borrow" an SSN from anyone else in their GQ. This adds more variation than would be expected in real life. As it will increase the PRL challenge, we have accepted this as a reasonable limitation.
 
 1040 Form
 '''''''''
 
-**When to Sample** 
+**When to Sample**
 
-- Sample compiled on the time step containing April 15th of each year 
-- Sample on a single time step for now 
+- Sample compiled on the time step containing April 15th of each year
+- Sample on a single time step for now
 
 
-**What to Sample** 
+**What to Sample**
 
-.. list-table:: Simulant Attribute to Sample 
-  :widths: 20 20 
+.. list-table:: Simulant Attribute to Sample
+  :widths: 20 20
   :header-rows: 1
 
-  * - Simulant Attribute 
-    - Notes 
+  * - Simulant Attribute
+    - Notes
   * - Unique simulant ID (for PRL tracking)
     -  
   * - Unique household ID consistent between observers (for PRL tracking)
     -
   * - First name
-    - 
-  * - Middle initial 
-    - 
+    -
+  * - Middle initial
+    -
   * - Last name
-    - 
+    -
   * - Age (floored to integer years **before** noise is applied)
-    -  
+    -
   * - DOB (stored as a string in MM/DD/YYYY format)
-    -  
+    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2666,7 +2726,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -
   * - Mailing Address City
     -
-  * - Mailing Address State 
+  * - Mailing Address State
     -
   * - Mailing Address ZIP Code
     -
@@ -2674,44 +2734,44 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -
   * - ITIN (if present)
     -
-  * - Income 
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Income
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer ID
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Address Street Number
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Address Street Name
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Address Unit
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Address City
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Address State
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Address ZIP Code 
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+  * - Employer Address ZIP Code
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Type of tax form (W2 or 1099)
-    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Tracked Dependent(s) (for noise functions ONLY)
-    - 
+    -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
-    - 
+    -
   * - Type of GQ (for noise functions ONLY)
-    - 
-  * - Joint Filer 
-    - This row through 'dependent' are to be included if there is a joint filer ONLY 
-  * - First name 
-    - 
-  * - Middle initial 
-    - 
-  * - Last name 
-    - 
+    -
+  * - Joint Filer
+    - This row through 'dependent' are to be included if there is a joint filer ONLY
+  * - First name
+    -
+  * - Middle initial
+    -
+  * - Last name
+    -
   * - Age
-    - 
+    -
   * - DOB (stored as a string in MM/DD/YYYY format)
-    -  
+    -
   * - Mailing Address Street Number (blank for PO boxes)
     -
   * - Mailing Address Street Name (blank for PO boxes)
@@ -2722,7 +2782,7 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -
   * - Mailing Address City
     -
-  * - Mailing Address State 
+  * - Mailing Address State
     -
   * - Mailing Address ZIP Code
     -
@@ -2730,34 +2790,34 @@ from a review of 2016 tax data by [Lim_2019]_ .
     -
   * - ITIN (if present)
     -
-  * - Income 
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+  * - Income
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer ID
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Employer Name
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer Address 
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
-  * - Employer ZIP Code 
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+  * - Employer Address
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
+  * - Employer ZIP Code
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Type of tax form (W2 or 1099)
-    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)  
+    - Can have multiple columns (up to 4) if simulant has multiple jobs in the prior year (multiple W2/1099 forms)
   * - Tracked Dependent(s) (for noise functions ONLY)
-    - 
+    -
   * - Tracked Dependent Address(es) (for noise functions ONLY)
-    - 
+    -
   * - Type of GQ (for noise functions ONLY)
-    - 
+    -
   * - Dependent
     - This columns through the end are to be included for each dependent on the tax filing, up to 4 dependents
-  * - First name 
-    - 
-  * - Middle initial 
-    - 
-  * - Last name 
-    - 
-  * - Age 
-    -  
+  * - First name
+    -
+  * - Middle initial
+    -
+  * - Last name
+    -
+  * - Age
+    -
   * - Social Security Number (if present)
     -
   * - ITIN (if present)
@@ -2765,25 +2825,25 @@ from a review of 2016 tax data by [Lim_2019]_ .
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise. 
+  In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise. Income must be rounded to the nearest whole number before applying noise.
 
 
 If a simulant does not have an SSN,
 do **NOT** include a random SSN.
-Leave the field blank. 
-This is designed to reflect undocumented immigrants, who primarily 
+Leave the field blank.
+This is designed to reflect undocumented immigrants, who primarily
 file taxes under the ITIN system.
 
-For this observer, we will have one row for each tax form filed. This 
-can be a bit complicated, so here are some examples: 
+For this observer, we will have one row for each tax form filed. This
+can be a bit complicated, so here are some examples:
 
-- A single adult will have 1 row, regardless of the number of jobs they had 
-- Joint filers (a married couple) will have 1 row, regardless of the number of jobs 
-- A married couple with unemployed children will have 1 row for the whole family 
-- A married couple with an employed child might have 2 rows: one for the parents and child as a dependent, and a second for the child as an individual filing their own taxes 
+- A single adult will have 1 row, regardless of the number of jobs they had
+- Joint filers (a married couple) will have 1 row, regardless of the number of jobs
+- A married couple with unemployed children will have 1 row for the whole family
+- A married couple with an employed child might have 2 rows: one for the parents and child as a dependent, and a second for the child as an individual filing their own taxes
 
-Here is a photo showing how this might look. Note that the three tables 
-are just 2 really long rows for two simulants. 
+Here is a photo showing how this might look. Note that the three tables
+are just 2 really long rows for two simulants.
 
 .. image:: 1044_example.png
 
@@ -2795,99 +2855,109 @@ If a simulant has more than 4 dependents,
 4 of their dependents are chosen to be included on the 1040 and the rest are omitted.
 This can be uniformly at random (preferred), or in another way if that is easier computationally.
 
-**Who to Sample** 
+**Who to Sample**
 
 .. todo::
 
-    Need to allow dependents (and possibly joint filing) with people outside the household. Key cases are college students, divorced parents, etc. 
+    Need to allow dependents (and possibly joint filing) with people outside the household. Key cases are college students, divorced parents, etc.
 
-    Also need to address complex family structures 
+    Also need to address complex family structures
 
 
-Not everyone who receives a W2 or 1099 will end up filing taxes. 
-However, those who do not are concentrated in low incomes for whom 
-taxes are not required. Currently, we will chose to have all those 
-who are legally required to file taxes, file taxes. This is a 
-limitation and is listed below. 
+Not everyone who receives a W2 or 1099 will end up filing taxes.
+However, those who do not are concentrated in low incomes for whom
+taxes are not required. Currently, we will chose to have all those
+who are legally required to file taxes, file taxes. This is a
+limitation and is listed below.
 
-For simulants that receive below the minimum income, 42.14% will 
-still file taxes. [Cilke_1998]_ The remainder will not. The minimum 
-income is based on the household structure and is listed in the table below. 
-We will not model persistence year to year. 
+For simulants that receive below the minimum income, 42.14% will
+still file taxes. [Cilke_1998]_ The remainder will not. The minimum
+income is based on the household structure and is listed in the table below.
+We will not model persistence year to year.
 
-.. list-table:: Minimum Income  
-  :widths: 20 20 
+.. list-table:: Minimum Income
+  :widths: 20 20
   :header-rows: 0
 
-  * - Simulant Type 
-    - Minimum Income 
-  * - Single filing, under 65 
-    - $12,550 
-  * - Single filing, over 65 
+  * - Simulant Type
+    - Minimum Income
+  * - Single filing, under 65
+    - $12,550
+  * - Single filing, over 65
     - $14,250
-  * - Married joint filing, both under 65 
+  * - Married joint filing, both under 65
     - $25,100
-  * - Married joint filing, one under 65 
+  * - Married joint filing, one under 65
     - $26,450
-  * - Married joint filing, both over 65 
+  * - Married joint filing, both over 65
     - $27,800
-  * - Married separate filing 
+  * - Married separate filing
     - $5
 
 
-Based on the household structure, the following rules can be applied 
-for who files taxes: 
+Based on the household structure, the following rules can be applied
+for who files taxes:
 
-- Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately. 
-    * The only spouses we will recognize are [Reference person, Opp-sex spouse] and [Reference person, Same-sex spouse]. 
-    * The reference person will submit the form, the spouse will be listed as the joint filer. 
-    * There does not need to be persistence in who files jointly, it can be re-drawn each year. 
-- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes. 
-- Simulants eligible to be dependents must qualify as ONE of the following: 
+- Assume that 95% of spouses file jointly, this can be randomly assigned. [Nolo]_ Others will file separately.
+    * The only spouses we will recognize are [Reference person, Opp-sex spouse] and [Reference person, Same-sex spouse].
+    * The reference person will submit the form, the spouse will be listed as the joint filer.
+    * There does not need to be persistence in who files jointly, it can be re-drawn each year.
+- All other non-married simulants in a household with a W2 or 1099 will file separately, based on the income rules above (e.g., a low-income earner in a house with other earners will be randomly assigned to file or not file, independent of others in the household). Please note that simulants can BOTH be claimed as a dependent AND file their own taxes.
+- Simulants eligible to be dependents must qualify as ONE of the following:
     * Be under the age of 19 (less than or equal to 18)
-    * OR be less than 24, in GQ in college, and earn less than $10,000 
-    * OR be any age, but earn less than $4300 
-- An eligible simulant will be claimed in the below order of options: 
-    * The defined "guardian" (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one) 
-    * Otherwise, if they are the reference person or a relative of the reference person (NOT roommate or non-relative) they will be randomly assigned to someone else in the household who is the reference person or a relative of the reference person (NOT roommate or non-relative) 
+    * OR be less than 24, in GQ in college, and earn less than $10,000
+    * OR be any age, but earn less than $4300
+- An eligible simulant will be claimed in the below order of options:
+    * The defined "guardian" (Note: if there are two parents/guardians and they are not filing jointly, assign the simulant randomly to one)
+    * Otherwise, if they are the reference person or a relative of the reference person (NOT roommate or non-relative) they will be randomly assigned to someone else in the household who is the reference person or a relative of the reference person (NOT roommate or non-relative)
     *  If there is no one found to claim them, they will remain unclaimed. This is most common for sims in GQ's or non-relatives in households but there might be other cases
 
+**Date Subsetting Options**
 
-**Limitations and Possible Future Adds** 
+The end user of pseudopeople should supply a **tax** year for which to get data
+from this observer.
+They should receive the data observed in the **next** year in the simulation.
+For example, if they request a tax year of 2023, they should recieve the data recorded
+in April 2024.
 
-#. Sampling on a single time step is not representative of how tax documents are compiled. 
-#. In reality, there are other dependents that live outside of the home. This can include divorced parents, college students, elderly parents, etc. These relationships are not modeled and oversimplifed in this data. 
-#. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year. 
-#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses. 
-#. As the reference person in a household is random, they might not be the one who should be claiming dependents. 
-#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both. 
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
+**Limitations and Possible Future Adds**
+
+#. Sampling on a single time step is not representative of how tax documents are compiled.
+#. In reality, there are other dependents that live outside of the home. This can include divorced parents, college students, elderly parents, etc. These relationships are not modeled and oversimplifed in this data.
+#. There are additional people who file taxes that are not included, mainly those living abroad, and those who have died in the past year.
+#. The system for having the head of household claim all dependents does not work well for complex family structures. To see this, imagine two siblings living together with their spouses and children. In the current model, one person will claim all of the children as dependents, when more accurately, each sibling would claim their children only. This is a limitation of our model. Also, the other married couple would not file jointly since our model would not identify them as spouses.
+#. As the reference person in a household is random, they might not be the one who should be claiming dependents.
+#. Not everyone files income taxes who are meant to. This might be modeled either in the above step of W2 and 1099, in this step, or both.
 
 Social Security Observer
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Social security information is kept and tracked for a range 
-of different actions. For simplicity, we will limit this 
-section to only creation and dates of death. Others could be 
-added later (not in the minimum viable model), if desired. 
+Social security information is kept and tracked for a range
+of different actions. For simplicity, we will limit this
+section to only creation and dates of death. Others could be
+added later (not in the minimum viable model), if desired.
 
-**When to Sample** 
+**When to Sample**
 
-- A sample of qualifying events is taken on every time step 
-- At initialization, an observer including everyone's SSN creation will be generated 
+- A sample of qualifying events is taken on every time step
+- At initialization, an observer including everyone's SSN creation will be generated
 
-**What to Sample** 
+**What to Sample**
 
-.. list-table:: Simulant Attributes to Sample 
+.. list-table:: Simulant Attributes to Sample
   :widths: 20
   :header-rows: 0
 
   * - Unique simulant ID (for PRL tracking)
   * - First name
-  * - Middle initial 
+  * - Middle initial
   * - Last name
   * - DOB (stored as a string in YYYYMMDD format)
-  * - Social Security Number 
-  * - Type of event 
+  * - Social Security Number
+  * - Type of event
   * - Date of event (stored as a string in YYYYMMDD format)
 
 .. note::
@@ -2897,59 +2967,74 @@ added later (not in the minimum viable model), if desired.
 
 .. note::
 
-  In the final version of the observers, following the noise functions, please have all data as strings. 
+  In the final version of the observers, following the noise functions, please have all data as strings.
 
-Currently, we will only track 2 types of events: 
+Currently, we will only track 2 types of events:
 
-#. Creation of a SSN 
-#. Date of death recorded 
+#. Creation of a SSN
+#. Date of death recorded
 
-The creation of a SSN can be triggered by a birth or by immigration into 
-the US. Both will be listed as "Creation" and are not differentiated. This 
-event is only recorded for simulates that receive a SSN. 
-The date of event is either the date of birth or the date of immigration. 
+The creation of a SSN can be triggered by a birth or by immigration into
+the US. Both will be listed as "Creation" and are not differentiated. This
+event is only recorded for simulates that receive a SSN.
+The date of event is either the date of birth or the date of immigration.
 
-At initialization, a record of all SSNs creation will be generated. 
-Everyone who starts in the sim with a SSN will have a creation record made 
-with their date of birth. These records will match the structure of the 
-ones created on time steps. 
+At initialization, a record of all SSNs creation will be generated.
+Everyone who starts in the sim with a SSN will have a creation record made
+with their date of birth. These records will match the structure of the
+ones created on time steps.
 
-The date of death is a recording of anyone who has died and has a SSN. The 
-date of the event is the date of death. This will be listed as "Date 
-of Death". 
+The date of death is a recording of anyone who has died and has a SSN. The
+date of the event is the date of death. This will be listed as "Date
+of Death".
 
-Here is an example: 
+Here is an example:
 
 .. image:: SSA_example.png
 
-Note that the top row is a simulate that received a SSN at birth. The 
-third row indicates someone who immigrated at age 5 and received their 
-SSN then. 
+Note that the top row is a simulate that received a SSN at birth. The
+third row indicates someone who immigrated at age 5 and received their
+SSN then.
 
-**Who to Sample** 
+**Who to Sample**
 
-100% of simulants with a SSN and a qualifying event in that time step 
-will be recorded. 
+100% of simulants with a SSN and a qualifying event in that time step
+will be recorded.
 
+**Date Subsetting Options**
 
-**Items NOT Included in the Minimum Viable Model** 
+The end user of pseudopeople should supply a year for which to get data
+from this observer.
+They should receive all the events captured by this observer with a
+"date of event" in the supplied year **or any previous year**.
+For example, if they request 2023 SSA data, they will receive all
+rows with a "date of event" on December 31st 2023 or earlier.
 
-There are a significant number of other possible "events" that 
-could be included in the observer. These are either not implemented 
-in the larger simulation at this time, or more difficult and so 
-have not been included. These are: 
+.. todo::
+  If we add a lag to recording SSA events in the future, we will
+  want to do this subsetting by date of recording, not date of event.
 
-#. Name changes - either first names (trans folks or others) or last names (commonly marriage or divorce). Not included in larger simulation 
-#. Sex-coding changes - not included in larger simulation 
-#. Correction of incorrect information - we would need to have noise functions in place and then add events to "correct" the intentional mistakes. This would be quite challenging to add. 
-#. Receipt of social security benefits - this could be an easy add here if we add it in employment 
-#. Receipt of disability benefits - similarly, could be an easy add if it is added in employment 
-#. New employment - it's unclear what percent of new jobs are actually recorded. Also this leads to complications with the tax observer where simulants can "borrow" a SSN. 
-#. Change of address - only applies if you tell USPS that you moved, which not everyone does. This would be more complex and so is not included right now. 
+.. todo::
+  Move information about date subsetting to the pseudopeople documentation.
+
+**Items NOT Included in the Minimum Viable Model**
+
+There are a significant number of other possible "events" that
+could be included in the observer. These are either not implemented
+in the larger simulation at this time, or more difficult and so
+have not been included. These are:
+
+#. Name changes - either first names (trans folks or others) or last names (commonly marriage or divorce). Not included in larger simulation
+#. Sex-coding changes - not included in larger simulation
+#. Correction of incorrect information - we would need to have noise functions in place and then add events to "correct" the intentional mistakes. This would be quite challenging to add.
+#. Receipt of social security benefits - this could be an easy add here if we add it in employment
+#. Receipt of disability benefits - similarly, could be an easy add if it is added in employment
+#. New employment - it's unclear what percent of new jobs are actually recorded. Also this leads to complications with the tax observer where simulants can "borrow" a SSN.
+#. Change of address - only applies if you tell USPS that you moved, which not everyone does. This would be more complex and so is not included right now.
 
 **Limitations**
 
-#. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still. 
+#. We sample 100% of events. This is likely unrealistic, but the percent is probably very high still.
 #. There are errors in SSN data, which are not modeled here.
 
 .. _census_prl_noise:
@@ -2957,11 +3042,11 @@ have not been included. These are:
 Noise Functions
 ^^^^^^^^^^^^^^^
 
-In order to have a realistic challenge with PRL, it is essential to have 
-noise added to the data. We currently divide noise into two types: 
+In order to have a realistic challenge with PRL, it is essential to have
+noise added to the data. We currently divide noise into two types:
 
-#. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses 
-#. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission 
+#. **Column based noise:** errors in individual data entry, such as miswriting or incorrectly selecting responses
+#. **Row based noise:** errors in the inclusion or exclusion of entire rows of data, such as duplication or omission
 
 Noise should be added in the order below.
 
@@ -2989,183 +3074,183 @@ Noise should be added in the order below.
 Column Noise
 ''''''''''''
 
-To begin, we will start with defining column based noise. Some general rules 
-for all column based noise include: 
+To begin, we will start with defining column based noise. Some general rules
+for all column based noise include:
 
 - The row-level noise probability is the probability of selecting a row to have a particular type of noise added. For example, 0.01 row-level noise probability for incorrect selection on the "type of tax form" column means each row will have 0.01 (1%) probability to have the wrong value selected. In the case of OCR, phonetic, typographic, and numeric miswriting, it is not the case that every row selected will actually have any noise applied -- this is explained further below.
 - Note that column noise is applied only to non-missing values in that column; or equivalently, all noise functions have no effect on missing values, so it does not matter whether or not noise is applied for these values.
-- Token noise probability is a noise parameter that only applies to certain noise types and defines the probability of each *token* having an error, once a string is selected for noise. This parameter is also elaborated on below. 
-- A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions. 
+- Token noise probability is a noise parameter that only applies to certain noise types and defines the probability of each *token* having an error, once a string is selected for noise. This parameter is also elaborated on below.
+- A few noise types have additional parameters which can be specified by the user separately. This is elaborated on in the section on notes about inputs to the functions.
 - The parameters of each type of noise are individually configurable for each column in each observer. This means that the end user can can specify, for example, that in the census, first names have a 0.02 row-level noise probability for typographic noise.
-- Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms). 
-- As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type. 
+- Simulants are selected for noise at random. This is true for each type of noise, each column, and each observer. Selection is not based on any attributes and simulants do not have a higher or lower propensity for noise that would carry with them (e.g., there are not "messy" simulants who are more likely to make errors on all fields/forms).
+- As noise functions for certain columns are common across observers, the table below is organized by column (e.g., first name). Below the table, there is further information and definition on each noise type.
 
 .. list-table:: Types of Noise and Default Parameters for each Column
   :widths: 20 20 20 20 20 20
   :header-rows: 0
 
   * - Data in Observer
-    - Observers Present 
+    - Observers Present
     - Default Row-Level Noise Probability
-    - Default Token Noise Probability 
-    - Types of Noise 
+    - Default Token Noise Probability
+    - Types of Noise
     - Notes
   * - First Name
-    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, nicknames, fake names, phonetic, OCR, typographic
-    - 
+    -
   * - Middle Initial
-    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, phonetic, OCR, typographic
-    - 
+    -
   * - Last Name
-    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, fake names, phonetic, OCR, typographic
-    - The list of fake names will be different than the first names 
+    - The list of fake names will be different than the first names
   * - Age
-    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - Census, Household Surveys, Taxes (both)
     - 0.01
-    - 0.1 
-    - Missing data, Copy from within Household, Age miswriting, OCR, typographic 
-    - 
-  * - Date of Birth 
-    - Census, Household Surveys, WIC, Taxes (both), SSA  
+    - 0.1
+    - Missing data, Copy from within Household, Age miswriting, OCR, typographic
+    -
+  * - Date of Birth
+    - Census, Household Surveys, WIC, Taxes (both), SSA
     - 0.01
-    - 0.1 
-    - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic  
-    - 
-  * - Street Number for any Address (Home OR Mailing OR Employer) 
-    - Census, Household Surveys, WIC, Taxes (both) 
+    - 0.1
+    - Missing data, copy from within household, swap month and day, numeric miswriting, OCR, typographic
+    -
+  * - Street Number for any Address (Home OR Mailing OR Employer)
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
-    - 0.1 
-    - Missing data, numeric miswriting, OCR, typographic 
-    - Noise for all types of addresses will work in the same way 
-  * - Street Name for any Address (Home OR Mailing OR Employer) 
-    - Census, Household Surveys, WIC, Taxes (both) 
-    - 0.01
-    - 0.1 
-    - Missing data, phonetic, OCR, typographic
-    - Noise for all types of addresses will work in the same way 
-  * - Unit Number for any Address (Home OR Mailing OR Employer) 
-    - Census, Household Surveys, WIC, Taxes (both) 
-    - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, numeric miswriting, OCR, typographic
-    - Noise for all types of addresses will work in the same way 
-  * - PO Box for Mailing Address 
-    - Household Surveys, WIC, Taxes (both) 
+    - Noise for all types of addresses will work in the same way
+  * - Street Name for any Address (Home OR Mailing OR Employer)
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
-    - 0.1 
-    - Missing data, numeric miswriting, OCR, typographic
-    - 
-  * - City Name for any Address (Home OR Mailing OR Employer) 
-    - Census, Household Surveys, WIC, Taxes (both) 
-    - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, phonetic, OCR, typographic
-    - Noise for all types of addresses will work in the same way 
-  * - State for any Address (Home OR Mailing OR Employer) 
-    - Census, Household Surveys, WIC, Taxes (both) 
+    - Noise for all types of addresses will work in the same way
+  * - Unit Number for any Address (Home OR Mailing OR Employer)
+    - Census, Household Surveys, WIC, Taxes (both)
+    - 0.01
+    - 0.1
+    - Missing data, numeric miswriting, OCR, typographic
+    - Noise for all types of addresses will work in the same way
+  * - PO Box for Mailing Address
+    - Taxes (both)
+    - 0.01
+    - 0.1
+    - Missing data, numeric miswriting, OCR, typographic
+    -
+  * - City Name for any Address (Home OR Mailing OR Employer)
+    - Census, Household Surveys, WIC, Taxes (both)
+    - 0.01
+    - 0.1
+    - Missing data, phonetic, OCR, typographic
+    - Noise for all types of addresses will work in the same way
+  * - State for any Address (Home OR Mailing OR Employer)
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
     - N/A
     - Missing data, incorrect select
-    - Noise for all types of addresses will work in the same way 
-  * - Zip Code 
-    - Census, Household Surveys, WIC, Taxes (both) 
+    - Noise for all types of addresses will work in the same way
+  * - Zip Code for any Address (Home OR Mailing OR Employer)
+    - Census, Household Surveys, WIC, Taxes (both)
     - 0.01
-    - 0.1 
-    - Missing data, zip code miswriting, OCR, typographic 
-    - Applies to home, mailing, and employer addresses 
-  * - Relationship to head of household 
-    - Census 
-    - 0.01
-    - N/A
-    - Missing data, incorrect select
-    - 
-  * - Sex 
-    - Census, Household Surveys, WIC 
+    - 0.1
+    - Missing data, zip code miswriting, OCR, typographic
+    -
+  * - Relationship to head of household
+    - Census
     - 0.01
     - N/A
     - Missing data, incorrect select
-    - 
-  * - Race/Ethnicity 
-    - Census, WIC
+    -
+  * - Sex
+    - Census, Household Surveys, WIC
     - 0.01
     - N/A
     - Missing data, incorrect select
-    - 
+    -
+  * - Race/Ethnicity
+    - Census, Household Surveys, WIC
+    - 0.01
+    - N/A
+    - Missing data, incorrect select
+    -
   * - SSN
     - Taxes (both), SSA
     - 0.01
-    - 0.1 
-    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic 
-    - Note that not all types of noise apply to all observers, details below 
+    - 0.1
+    - "Borrowed" SSN, missing data, copy from within household, numeric miswriting, OCR, typographic
+    - Note that not all types of noise apply to all observers, details below
   * - ITIN
     - Taxes 1040
     - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, copy from within household, numeric miswriting, OCR, typographic
-    - Note that not all types of noise apply to all observers 
+    - Note that not all types of noise apply to all observers
   * - Income / Wages
     - Taxes (both)
     - 0.01
-    - 0.1 
-    - Missing data, numeric miswriting, OCR, typographic 
-    - Note that wages and income are on separate tax forms and noise is applied to each separately 
-  * - Employer ID 
-    - Taxes (both)
-    - 0.01
-    - 0.1 
+    - 0.1
     - Missing data, numeric miswriting, OCR, typographic
-    - 
-  * - Employer Name 
+    - Note that wages and income are on separate tax forms and noise is applied to each separately
+  * - Employer ID
     - Taxes (both)
     - 0.01
-    - 0.1 
+    - 0.1
+    - Missing data, numeric miswriting, OCR, typographic
+    -
+  * - Employer Name
+    - Taxes (both)
+    - 0.01
+    - 0.1
     - Missing data, OCR, typographic
-    - 
-  * - Type of Tax Form  
+    -
+  * - Type of Tax Form
     - Taxes (both)
     - 0.01
     - N/A
     - Missing data, incorrect select
-    - 
-  * - Type of SSA Event 
-    - SSA 
+    -
+  * - Type of SSA Event
+    - SSA
     - 0.01
     - N/A
     - Missing data, incorrect select
-    - 
-  * - Date of SSA Event 
-    - SSA 
+    -
+  * - Date of SSA Event
+    - SSA
     - 0.01
     - N/A
-    - Missing data, month and day swap, numeric miswriting, OCR, typographic 
-    - 
+    - Missing data, month and day swap, numeric miswriting, OCR, typographic
+    -
 
-The below section further describes types of noise including any code 
+The below section further describes types of noise including any code
 available and information for implementation. **Software engineering team - please alert the research team if any of the below looks to be particularly challenging for further discussion.**
 
-**Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting** 
+**Notes on Inputs to Noise Function Parameters for OCR, Phonetic, Typographic and Numeric Miswriting**
 
-The user will have the opportunity to change all parameters of the noise 
+The user will have the opportunity to change all parameters of the noise
 functions from their default values.
 
-The exact method for how a user will input the parameters has not been finalized. We 
-anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{column}_{noise_function}_{param}`. 
+The exact method for how a user will input the parameters has not been finalized. We
+anticipate a nested parameter dictionary with the levels as: :code:`{observer}_{column}_{noise_function}_{param}`.
 
 One limitation of having a row probability and then token probability is that
-not all rows that are selected for noise will actually receive any noise. 
+not all rows that are selected for noise will actually receive any noise.
 Another limitation is that token error probability is not very intuitive for the end user.
 
-At some point in the future, we might make this more user friendly. However, for the 
-sake of a minimum functional model, this is satisfactory. 
+At some point in the future, we might make this more user friendly. However, for the
+sake of a minimum functional model, this is satisfactory.
 
 Some functions have additional parameters. These parameters
 are explained in more depth in the table below
@@ -3183,29 +3268,30 @@ by that noise function.
   * - Typographic Noise
     - Probability that a corrupted token is inserted before the original token (e.g., if typically e -> r, the probability that e -> re)
     - 0.1
-    - 
-  * - Age miswriting 
+    -
+  * - Age miswriting
     - Possible perturbations of age (e.g., for [-1, 1] and age of 7, the possible "incorrect" results will be 6 and 8)
     - [-1, 1]
     - May be list of options, in which case the perturbation will be selected uniformly at random, or a dictionary where the keys are
       the integer perturbations and the values are the probability of that perturbation.
-  * - Zip code miswriting 
-    - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits 
+      **May not contain a perturbation option of zero (no change to age).**
+  * - Zip code miswriting
+    - Separate character-level error probabilities for first 2 digits, middle digit, and last 2 digits
     - First 2 digits: 0.04, middle digit: 0.2, last 2 digits: 0.36
-    - 
+    -
 
 
 .. todo::
 
-  Validate the default noise levels for token level noise 
+  Validate the default noise levels for token level noise
 
-  Define that "tokens" are characters for some functions; see if starting noise level needs to change based on if it is a token or character noise level 
+  Define that "tokens" are characters for some functions; see if starting noise level needs to change based on if it is a token or character noise level
 
 
 
 **OCR**
 
-Optical character recognition is when a string is misread for another string that 
+Optical character recognition is when a string is misread for another string that
 is visually similar. Some common examples are 'S' instead of '5' and 'm' instead of 'iii'.
 
 .. todo::
@@ -3238,7 +3324,7 @@ a string with no corruption-eligible tokens will never be affected by the OCR no
 
 **Phonetic**
 
-Phonetic errors are when a character is misheard. This could similar sounding letters when 
+Phonetic errors are when a character is misheard. This could similar sounding letters when
 spoken like 't' and 'd' for example; or letters that make the same sounds within a word like 'o' and 'ou'.
 
 This is implemented just like the OCR noise function, except with a different CSV of substitutions with slightly different structure:
@@ -3253,12 +3339,12 @@ This file also originated from the GeCO project.
 .. note::
   A Python implementation of this algorithm can be found `here <https://github.com/ihmeuw/vivarium_research_prl/blob/976b75f5fc62e1a2468a580a4d56e95fad00d7ce/src/vivarium_research_prl/noise/corruption.py#L85-L101>`.
 
-Limitations: 
+Limitations:
 
-- Certain observers might be more likely to include phonetic errors, such as the census where large amounts of data are gathered over the phone or in person. However, we do not include that level of specificity in the design of the noise function. The amount of noise can always be changed at the observer level when extracting data to account for this. 
+- Certain observers might be more likely to include phonetic errors, such as the census where large amounts of data are gathered over the phone or in person. However, we do not include that level of specificity in the design of the noise function. The amount of noise can always be changed at the observer level when extracting data to account for this.
 
 
-**Typographic** 
+**Typographic**
 
 Typographic errors occur due to mistyping information.
 We define the probability of one character replacing, or being inserted before, another character according to the proximity of
@@ -3284,39 +3370,39 @@ For example, if 'q' was the original character, one of 'w', 'a', and 's' would b
 
 .. todo::
 
-  Add other "keyboard errors", such as skipping a letter or swapping letters (teh instead of the). This would ideally be in the same typographic function. 
+  Add other "keyboard errors", such as skipping a letter or swapping letters (teh instead of the). This would ideally be in the same typographic function.
 
 **Fake Names**
 
-For a variety of reasons, some repondents might choose to use a fake name rather 
-than their real name on official forms. To account for this, first select the sample 
-to have noise added. Then for everyone selected, replace their name with a random 
-selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/fake_names.py>`_. 
-Please note that the list is separated into first and last names. 
+For a variety of reasons, some repondents might choose to use a fake name rather
+than their real name on official forms. To account for this, first select the sample
+to have noise added. Then for everyone selected, replace their name with a random
+selection from the `list of fake names here <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/fake_names.py>`_.
+Please note that the list is separated into first and last names.
 
-Limitations: 
+Limitations:
 
-- Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL. 
-- Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here. 
+- Many of the fake first names include some information about the simulant (daughter, child f, minor) all specify something about the simulant. We will not try to match this information, which might lead to illogical information (an older man being labeled as 'daughter') but will not impact PRL.
+- Someone who is likely to use a fake name might well do so across multiple observers. This would likely increase PRL challenges but will not be included here.
 
 **Nicknames**
 
-Many people choose to use nicknames instead of their "real" names. A common example is an 
-Alexander who chooses to go by Alex. These individuals might write their nicknames on forms 
-which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_. 
+Many people choose to use nicknames instead of their "real" names. A common example is an
+Alexander who chooses to go by Alex. These individuals might write their nicknames on forms
+which should be recorded. Here is a list of 1080 names and their `relevant nicknames <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/nicknames.csv>`_. This was obtained from this `github repo <https://github.com/carltonnorthern/nicknames>`_.
 
-Only those simulants with names in the csv above are eligible to recieve a nickname. First, 
-determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their 
-name with any of the nicknames included in the csv. If there are multiple options, 
-select at random. 
+Only those simulants with names in the csv above are eligible to recieve a nickname. First,
+determine who is eligible for a nickname. Then select simulants for noise. Lastly, replace their
+name with any of the nicknames included in the csv. If there are multiple options,
+select at random.
 
-Limitations: 
+Limitations:
 
-- The list of nicknames above is hand-curated and almost definitely misses some nicknames. It is also likely that it misses nicknames in a bias way based on language of origin, personal history, etc. 
+- The list of nicknames above is hand-curated and almost definitely misses some nicknames. It is also likely that it misses nicknames in a bias way based on language of origin, personal history, etc.
 
 .. note::
 
-  If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach. 
+  If the process of determining elgibility prior to selecting simulants for noise is challenging, we can work on finding a simpler approach.
 
 
 **Numeric Miswriting**
@@ -3335,7 +3421,7 @@ Limitations:
 
 - This might lead to illogical data, especially for age and dates (e.g., a person who's birthday is 12/87/2000). It is more likely that someone lists an incorrect but still possible birthday/age. However, since the main goal is noise for PRL, we think this is still acceptable.
 
-**Age Miswriting** 
+**Age Miswriting**
 
 .. note::
   Age should be an integer (rounded down/floored from the exact number with fractional part) **before**
@@ -3343,7 +3429,7 @@ Limitations:
   Therefore, this noise function acts on integers.
 
 To implement this, first select the rows for noise according to the row noise probability.
-For each selected row, the age will be adjusted. The adjustment value will be 
+For each selected row, the age will be adjusted. The adjustment value will be
 randomly selected from the configured possible perturbations,
 according to the configured probabilities of selection (or uniform if a list without probabilities is configured).
 
@@ -3353,220 +3439,221 @@ then 28 will be adjusted to either 26, 27, 29, or 30, with a 0.2 probability for
 26 and 30 and a 0.3 probability for each of 27 and 29.
 
 If the age after adding the chosen perturbation is negative, reflect the sign to be positive (e.g. a -2 becomes 2).
-If this reflection is performed and the resulting age is equal to the original age value, subtract 1 from the age.
-(This will never result in a negative value because reflecting a negative value will never result in 0.)
 
-**Zip code Miswriting** 
+If the resulting age is equal to the original age value, subtract 1 from the age.
+(This will never result in a negative value because reflecting a negative value will never result in 0, and a perturbation of 0 is not permitted.)
 
-To implement this, select the strings eligible for noise and apply 
-the zip code miswriting noise function to all strings with the user defined. 
-This code is similar to the numeric miswriting above, but has different 
-per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip. 
+**Zip code Miswriting**
 
-**Copy from within Household** 
+To implement this, select the strings eligible for noise and apply
+the zip code miswriting noise function to all strings with the user defined.
+This code is similar to the numeric miswriting above, but has different
+per-character error probability inputs for the first 2 digits, the middle digit and the last 2 digits of zip.
 
-To allow for confusion between household members, noise will be included to copy data 
-for another person in the household. 
+**Copy from within Household**
 
-To do this, first determine who is eligible for copying. This is simulants 
-with at least one other person in their household. Note that GQ is not eligible for this 
-type of noise. 
+To allow for confusion between household members, noise will be included to copy data
+for another person in the household.
 
-From the eligble simulants, select the sample to have noise added. For those individuals, 
-copy the relevant piece of data from another person in the household. 
+To do this, first determine who is eligible for copying. This is simulants
+with at least one other person in their household. Note that GQ is not eligible for this
+type of noise.
 
-Limitations: 
+From the eligble simulants, select the sample to have noise added. For those individuals,
+copy the relevant piece of data from another person in the household.
 
-- This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge. 
+Limitations:
+
+- This oversimplifies some swapping of ages or birthdays between family members. However, it allows better control over the percent of simulants to receive incorrect information and will likely pose a similar PRL challenge.
 
 **Month and Day Swap**
 
-Month and day swaps apply to dates. For this, select the sample to have noise added. 
-For those selected, swap the month and day to be in the incorrect position (e.g., December 8, 2022 
-would be listed in MM/DD/YYYY format as 08/12/2022). 
+Month and day swaps apply to dates. For this, select the sample to have noise added.
+For those selected, swap the month and day to be in the incorrect position (e.g., December 8, 2022
+would be listed in MM/DD/YYYY format as 08/12/2022).
 
-**Incorrect Select** 
+**Incorrect Select**
 
-Incorrect select applies to a range of data types. For this, select the sample to 
-have noise added. For those selected, randomly select a new option. This is chosen 
-from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household. 
+Incorrect select applies to a range of data types. For this, select the sample to
+have noise added. For those selected, randomly select a new option. This is chosen
+from the list of options in `this csv <https://github.com/ihmeuw/vivarium_research_prl/blob/main/src/vivarium_research_prl/noise/incorrect_select_options.csv>`_. Note that for relationship to head of household, this includes the full list of options, not just those seen in the household.
 
-Please ensure that the new selection is in fact an incorrect selection and that the original 
-response was not randomly selected. 
+Please ensure that the new selection is in fact an incorrect selection and that the original
+response was not randomly selected.
 
-Limitations: 
+Limitations:
 
-- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways. 
-- Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity. 
+- For single person homes, incorrectly selecting relationship to head of household does not make as much sense. However, we continue with it here anyways.
+- Incorrect selection likely takes place in a logical way, and might persist across observers (e.g., trans or nonbinary people "incorrectly" selecting a sex; confusion with different race/ethnicity groups; selecting a state from a prior address) however, we are not including this complexity.
 
 .. note::
-  
-  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This will need to be corrected in the final version. 
+
+  The current version of the function written by Nathaniel on the research team does not enforce that the new selection is different than the original selection. This means that some rows designated for incorrect selection will not actually be incorrect. This will need to be corrected in the final version.
 
 
 **"Borrowed" SSN**
 
-Borrowing SSNs is defined in the simulation NOT in noise functions separately. 
-It will NOT be individually configurable by the end user. No further action is 
-needed in the noise functions for this component. 
+Borrowing SSNs is defined in the simulation NOT in noise functions separately.
+It will NOT be individually configurable by the end user. No further action is
+needed in the noise functions for this component.
 
 **Missing Data**
 
-All data types have a probability of being missing. This could mean that the 
-input was left blank, that an answer was refused, or that the answer was illegible 
-or unintelligible. The function will remove the real data and replace it with N/A. 
+All data types have a probability of being missing. This could mean that the
+input was left blank, that an answer was refused, or that the answer was illegible
+or unintelligible. The function will remove the real data and replace it with N/A.
 
-Limitations: 
+Limitations:
 
-- Some users would likely have a significant amount of missing data instead of missed data being spread across all users. This could be due to privacy concerns, how the response was submitted, or user errors. We will not include this simulant level variation. 
-- With current versions of the census and many other forms online, there is less opportunity for missing data. It might be replaced with fake names or similar approaches, as outlined separately above. However, in mail-in forms or in person recording there is still an opportunity for missing data. We include it here despite these limitations. 
+- Some users would likely have a significant amount of missing data instead of missed data being spread across all users. This could be due to privacy concerns, how the response was submitted, or user errors. We will not include this simulant level variation.
+- With current versions of the census and many other forms online, there is less opportunity for missing data. It might be replaced with fake names or similar approaches, as outlined separately above. However, in mail-in forms or in person recording there is still an opportunity for missing data. We include it here despite these limitations.
 
 .. todo::
 
-  Improper inclusion, and data formatting noise to be added 
+  Improper inclusion, and data formatting noise to be added
 
 Row Noise
 '''''''''
 
-Row based noise is defined as the inclusion or exclusion of entire rows of 
-data – which in practice is including or excluding simulants. This falls 
-into three buckets:  
+Row based noise is defined as the inclusion or exclusion of entire rows of
+data – which in practice is including or excluding simulants. This falls
+into three buckets:
 
-#. **Omissions:** not including simulants that should be included  
+#. **Omissions:** not including simulants that should be included
 
-#. **Duplicates:** including some simulants multiple times in the data. This could be identical rows of data, or the same simulant but with some differences in their data.  
+#. **Duplicates:** including some simulants multiple times in the data. This could be identical rows of data, or the same simulant but with some differences in their data.
 
-#. **Improper inclusion:** including simulants in the dataset that don’t qualify for inclusion. This only applies to observers which are not meant to include everyone. An example is a simulant being included in WIC that is above the maximum income level.  
+#. **Improper inclusion:** including simulants in the dataset that don’t qualify for inclusion. This only applies to observers which are not meant to include everyone. An example is a simulant being included in WIC that is above the maximum income level.
 
-**Omissions:**  
+**Omissions:**
 
-It is assumed that in any dataset, there are people missed. This 
-is important in PRL as the user will try to find a match for someone 
-that doesn’t exist. For simplicity, we will have pseudo-people end 
-users input one value: the overall omission rate. This value can 
-range from 0% (indicating NO omission or a perfect response) up 
-to 50% omission and will be defined at the observer level.  
+It is assumed that in any dataset, there are people missed. This
+is important in PRL as the user will try to find a match for someone
+that doesn’t exist. For simplicity, we will have pseudo-people end
+users input one value: the overall omission rate. This value can
+range from 0% (indicating NO omission or a perfect response) up
+to 50% omission and will be defined at the observer level.
 
-For the census and household surveys, where non-response is built 
-into the observer, the default omission rate will the equal to the 
-expected omission rate of that survey. For the census and ACS survey, 
-this is 1.45%. For the CPS survey, this is 29.05%. The other observers’ 
-default rate is 0%.  
+For the census and household surveys, where non-response is built
+into the observer, the default omission rate will the equal to the
+expected omission rate of that survey. For the census and ACS survey,
+this is 1.45%. For the CPS survey, this is 29.05%. The other observers’
+default rate is 0%.
 
-The process for omitting simulants from the data will be divided into 
-two groups based on observer:  
+The process for omitting simulants from the data will be divided into
+two groups based on observer:
 
-#. Simple omission will be used for: WIC, taxes and SSA  
+#. Simple omission will be used for: WIC, taxes and SSA
 
-#. Targeted omission will be used for: census, household surveys  
+#. Targeted omission will be used for: census, household surveys
 
-**Simple Omission:** 
+**Simple Omission:**
 
-For simple omission, rows will be randomly removed at the rate specified 
-by the user. Removal will be entirely at random and not correlated to the 
-omission of others in the household or any other simulant attribute. The 
-default is set to 0% as we do not expect people to be "missing" from 
-administrative data. 
+For simple omission, rows will be randomly removed at the rate specified
+by the user. Removal will be entirely at random and not correlated to the
+omission of others in the household or any other simulant attribute. The
+default is set to 0% as we do not expect people to be "missing" from
+administrative data.
 
-**Targeted Omission:**  
+**Targeted Omission:**
 
-For the census and for household surveys, individuals are found to not 
-respond at different rates based on their age, sex, and race/ethnicity. 
-In order to preserve this underlying data structure while allowing for 
-a variable overall omission rate, the noise function must be more complex.  
+For the census and for household surveys, individuals are found to not
+respond at different rates based on their age, sex, and race/ethnicity.
+In order to preserve this underlying data structure while allowing for
+a variable overall omission rate, the noise function must be more complex.
 
-Census:  
+Census:
 
-In the census observer, there is currently a net undercount applied only 
-to omissions and not duplicates. Therefore, we calculated the existing net 
-omission rate from the census to be 1.45% based on the population in the 
-simulation. We will need this value for further calculations.  
+In the census observer, there is currently a net undercount applied only
+to omissions and not duplicates. Therefore, we calculated the existing net
+omission rate from the census to be 1.45% based on the population in the
+simulation. We will need this value for further calculations.
 
-Currently, an individual probability of omission is found for each simulant 
-based on their age, sex and race/ethnicity. To allow for higher or lower rates 
-of omission, we will then scale this individual omission risk based on the new 
-omission rate.  
+Currently, an individual probability of omission is found for each simulant
+based on their age, sex and race/ethnicity. To allow for higher or lower rates
+of omission, we will then scale this individual omission risk based on the new
+omission rate.
 
-New individual omission risk = old individual omission risk * (user-inputted omission rate/ 1.45%)  
+New individual omission risk = old individual omission risk * (user-inputted omission rate/ 1.45%)
 
-Household surveys:  
+Household surveys:
 
-In general, the same logic as is outlined for the census can be applied to all household surveys. This is:  
+In general, the same logic as is outlined for the census can be applied to all household surveys. This is:
 
-#. Find the overall omission rate at the default level  
+#. Find the overall omission rate at the default level
 
-#. Calculate the simulant level omission rate based on the specific survey and simulant characteristics  
+#. Calculate the simulant level omission rate based on the specific survey and simulant characteristics
 
-#. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate  
+#. Scale the simulant level omission rate based on the ratio of the user-inputted omission rate and the default omission rate
 
-For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.  
+For the two surveys currently outlined in the model, the default rates are 1.45% for ACS, and 29.05% for CPS.
 
-**Duplicates:** 
+**Duplicates:**
 
-Duplication is most relevant for the census, which has a significant 
-amount of known duplicates. Often, the first PRL task is to match within 
-the same dataset in order to remove duplicates.  
+Duplication is most relevant for the census, which has a significant
+amount of known duplicates. Often, the first PRL task is to match within
+the same dataset in order to remove duplicates.
 
-As a simplifying assumption in our initial model, we will be including 
-duplicates in the census only and limiting it to guardian-based duplication. 
-In later models, we might choose to include other forms of duplication with 
-more parameters.  
+As a simplifying assumption in our initial model, we will be including
+duplicates in the census only and limiting it to guardian-based duplication.
+In later models, we might choose to include other forms of duplication with
+more parameters.
 
-**Guardian based duplication** 
+**Guardian based duplication**
 
-A known PRL challenge is children being reported multiple 
-times at different addresses. This can occur when family structures are 
-complex and children might spend time at multiple households. A related 
-challenge occurs with college students, who often are counted both at their 
-university and at their guardian’s home address.  
+A known PRL challenge is children being reported multiple
+times at different addresses. This can occur when family structures are
+complex and children might spend time at multiple households. A related
+challenge occurs with college students, who often are counted both at their
+university and at their guardian’s home address.
 
-To facilitate this type of error, we have simulants assigned to guardians 
-within the simulation. Sometimes, those guardians may move and live at 
-different addresses than their dependents. In this case, there is an 
-opportunity for duplication. Since this mechanism occurs within the 
-simulation, there is a natural maximum that we will impose in the 
-noise function.  
+To facilitate this type of error, we have simulants assigned to guardians
+within the simulation. Sometimes, those guardians may move and live at
+different addresses than their dependents. In this case, there is an
+opportunity for duplication. Since this mechanism occurs within the
+simulation, there is a natural maximum that we will impose in the
+noise function.
 
-Guardian based duplication is further divided here into two types: simulants 
-younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).  
+Guardian based duplication is further divided here into two types: simulants
+younger than 18 and not in college GQ (<18), and those at college GQ less than 24 (<24).
 
-For simulants younger than 18 and not in college GQ, the maximum duplication rate will 
-be calculated based on those who have a guardian living at a different address in the sim. 
+For simulants younger than 18 and not in college GQ, the maximum duplication rate will
+be calculated based on those who have a guardian living at a different address in the sim.
 
-The user can then pick a rate of duplication between 0 and 100%. If the value selected 
-is higher than the calculated maximum rate in the sim, a warning will be issued to users 
-explaining that the selected rate is greater than the maximum available. 
+The user can then pick a rate of duplication between 0 and 100%. If the value selected
+is higher than the calculated maximum rate in the sim, a warning will be issued to users
+explaining that the selected rate is greater than the maximum available.
 
-A default value of 5% will be selected. 
+A default value of 5% will be selected.
 
-.. note:: 
+.. note::
 
-    If finding the maximum rate proves too difficult to implement, we can reassess this approach 
+    If finding the maximum rate proves too difficult to implement, we can reassess this approach
 
-For college GQ simulants aged less than 24, all are assigned to a guardian who 
-by definition lives at a different address. This means that theoretically 
-the maximum noise level is 100% for this group, however, that would add 
-significantly to the dataset and so it not allowed here. The default rate 
-will be set to 5%, with a minimum of 0% and a maximum of 25%.  
+For college GQ simulants aged less than 24, all are assigned to a guardian who
+by definition lives at a different address. This means that theoretically
+the maximum noise level is 100% for this group, however, that would add
+significantly to the dataset and so it not allowed here. The default rate
+will be set to 5%, with a minimum of 0% and a maximum of 25%.
 
-To create duplicates, the college student will be included in the final 
-dataset twice, once at their college GQ and once at their guardian's home. 
+To create duplicates, the college student will be included in the final
+dataset twice, once at their college GQ and once at their guardian's home.
 
-For either group, if a simulant has more than 1 guardian living at a 
-different address only duplicate them once, for a maximum of 2 occurences 
-in the end dataset. Select the guardian at random. 
+For either group, if a simulant has more than 1 guardian living at a
+different address only duplicate them once, for a maximum of 2 occurences
+in the end dataset. Select the guardian at random.
 
-.. note:: 
+.. note::
 
-    Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time. 
+    Currently, we have not included a more general duplication for other types of simulants. There are known rates for duplication that could be added at a later time.
 
-.. note:: 
+.. note::
 
-    The research team discussed having improper inclusion as a form of noise in the model. Some examples of this are deceased simulants in the census observer, or high income simulants on WIC. However, the decision was made to not include this in the minimum model. 
+    The research team discussed having improper inclusion as a form of noise in the model. Some examples of this are deceased simulants in the census observer, or high income simulants on WIC. However, the decision was made to not include this in the minimum model.
 
-    If it is relevant for a case study later, we can add this to the simulation at that time. 
+    If it is relevant for a case study later, we can add this to the simulation at that time.
 
-**Old Abie Work, to be deleted later** 
+**Old Abie Work, to be deleted later**
 
 For inspiration, here is the list of files that Census Bureau
 routinely links:
@@ -4195,19 +4282,19 @@ To Come (TK)
 
 4.0 References
 +++++++++++++++
-.. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html. 
+.. [Census_PES] Bureau, US Census. n.d. “Detailed Coverage Estimates for the 2020 Census Released Today.” Census.Gov. Accessed September 29, 2022. https://www.census.gov/library/stories/2022/03/who-was-undercounted-overcounted-in-2020-census.html.
 
-.. [Cilke_1998] Cilke, Jim. n.d. “A PROFILE OF NON-FILERS,” 38. 
+.. [Cilke_1998] Cilke, Jim. n.d. “A PROFILE OF NON-FILERS,” 38.
 
 .. [Elliot_2021] Elliott, D. et al., 2021. Simulating the 2020 Census: Miscounts and the Fairness of Outcomes, Urban Institute. United States of America. Retrieved from https://policycommons.net/artifacts/1865120/simulating-the-2020-census/2613504/ on 29 Sep 2022. CID: 20.500.12592/5fgxqv.
 
-.. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9. 
+.. [Jackson_2007] Jackson, Geoffrey. n.d. “Response Profile of the 2005 ACS,” 9.
 
-.. [Lim_2019] Lim, Katherine, Alicia Miller, Max Risch, and Eleanor Wilking. n.d. “Independent Contractors in the U.S.: New Trends from 15 Years of Administrative Tax Data,” 71. 
+.. [Lim_2019] Lim, Katherine, Alicia Miller, Max Risch, and Eleanor Wilking. n.d. “Independent Contractors in the U.S.: New Trends from 15 Years of Administrative Tax Data,” 71.
 
-.. [Nolo] https://www.nolo.com/legal-encyclopedia/should-married-people-always-file-jointly.html#:~:text=The%20vast%20majority%20of%20married,had%20no%20income%20or%20deductions. 
+.. [Nolo] https://www.nolo.com/legal-encyclopedia/should-married-people-always-file-jointly.html#:~:text=The%20vast%20majority%20of%20married,had%20no%20income%20or%20deductions.
 
-.. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm. 
+.. [Household_Rates_2022] “Household and Establishment Survey Response Rates: U.S. Bureau of Labor Statistics.” n.d. Accessed October 11, 2022. https://www.bls.gov/osmr/response-rates/home.htm.
 
 .. [OHare_2019] O’Hare, William P. 2019. “Who Is Missing? Undercounts and Omissions in the U.S. Census.” In Differential Undercounts in the U.S. Census: Who Is Missed?, edited by William P. O’Hare, 1–12. SpringerBriefs in Population Studies. Cham: Springer International Publishing. https://doi.org/10.1007/978-3-030-10973-8_1
 
@@ -4217,9 +4304,9 @@ To Come (TK)
 
 .. [Census_ACS_Instructions] Bureau, US Census. n.d. “Get Help Responding to the ACS.” Census.Gov. Accessed October 25, 2022. https://www.census.gov/programs-surveys/acs/respond/get-help.html#par_textimage_254354997
 
-.. [Coverage] https://www.fns.usda.gov/wic/2019-eligibility-coverage-rates 
+.. [Coverage] https://www.fns.usda.gov/wic/2019-eligibility-coverage-rates
 
-.. [WIC_eligibility] https://fns-prod.azureedge.us/sites/default/files/resource-files/WIC-Policy-Memo-2022-5-IEGs.pdf#page=3 
+.. [WIC_eligibility] https://fns-prod.azureedge.us/sites/default/files/resource-files/WIC-Policy-Memo-2022-5-IEGs.pdf#page=3
 
 .. [Census_ZCTAs] Bureau, US Census. n.d. “ZIP Code Tabulation Areas (ZCTAs)” Census.Gov. Accessed November 8, 2022. https://www.census.gov/programs-surveys/geography/guidance/geo-areas/zctas.html.
 
@@ -4253,9 +4340,9 @@ To Come (TK)
 
 .. [TEA_2020_Map] Bureau, US Census. February 28, 2019. “2020 Type of Enumeration Area Viewer Released” Census.Gov. Accessed November 30, 2022. https://www.census.gov/newsroom/press-releases/2019/tea-viewer.html
 
-.. [Own_State_Enrollment] Statista. October 26, 2020. "Share of first year college students in the United States who enrolled in the state were they lived in Fall 2016" Accessed January 17, 2023. https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/ 
+.. [Own_State_Enrollment] Statista. October 26, 2020. "Share of first year college students in the United States who enrolled in the state were they lived in Fall 2016" Accessed January 17, 2023. https://www.statista.com/statistics/236069/share-of-us-students-who-enrolled-in-a-college-in-their-own-state/
 
-.. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics 
+.. [NCES_Family_Characteristics] National Center for Education Statistics. May 2022. "Characteristics of Children's Families" Accessed January 17, 2023. https://nces.ed.gov/programs/coe/indicator/cce/family-characteristics
 
 .. [Stochastic_Rounding] Croci M, Fasi M, et al. Stochastic rounding: implementation, error analysis and applications. Royal Society Open Science. 2022 Mar; 9(3). https://doi.org/10.1098%2Frsos.211631
 

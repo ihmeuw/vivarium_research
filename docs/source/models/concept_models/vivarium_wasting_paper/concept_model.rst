@@ -33,7 +33,7 @@
 .. _2020_concept_model_vivarium_ciff_sam:
 
 ===================================
-Vivarium Acute Malnutrition Phase 2
+Vivarium wasting paper simulation
 ===================================
 
 .. contents::
@@ -250,6 +250,56 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
   We may add/remove scenarios based on results of existing list
 
   Additional scenarios to consider include one in which SQ-LNS coverage is scaled-up to baseline coverage of CMAM screenings (:math:`C_{SAM}`) and coverage of MAM and SAM treatment are increased by some magnitude as well. There is some evidence to suggest that administering SQ-LNS at CMAM screenings may increase screening coverage [Huybregts-et-al-2019]_; however, we chose not to model this scenario as the paper ultimately did not find an impact on *treatment* coverage. As more evidence on this topic becomes available, we may consider including this scenario in our model.
+
+
+2.2.1 Scenarios for emulator inputs
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+This section refers to a subset of scenarios intended for use in building and testing the separate Nutrition Intervention Optimization simulation.
+
+.. _emulatorscenarios:
+
+Note, for all emulator input scenarios, use baseline values for :math:`E_{SAM}` and :math:`E_{MAM}` parameters. Additionally, use the SQ-LNS incidence sensitivity analysis effects.
+
+.. list-table:: Emulator input scenarios
+  :header-rows: 1
+
+  * - Scenario
+    - SQ-LNS coverage
+    - MAM treatment coverage
+    - SAM treatment coverage
+  * - E1
+    - 0
+    - 0
+    - 0
+  * - E2
+    - 0.7
+    - 0
+    - 0
+  * - E3
+    - 0
+    - 0.7
+    - 0
+  * - E4
+    - 0
+    - 0
+    - 0.7
+  * - E5
+    - 0.7
+    - 0.7
+    - 0
+  * - E6
+    - 0.7
+    - 0
+    - 0.7
+  * - E7
+    - 0
+    - 0.7
+    - 0.7
+  * - E8
+    - 0.7
+    - 0.7
+    - 0.7
 
 2.3 Modelling components
 ------------------------------
@@ -498,7 +548,13 @@ For model versions 3.0.2 onward, intervention parameters should be set to the va
     - 1 draw, population size 250,000
     - :download:`See modifications to defaults in this PNG file <stratification_details_for_test_run.png>`
     - Don't need results, only runtime statistics.
-  * - 3.1.2
+  * - 3.1.2: Emulator runs
+    - Run select scenarios with little stratification to use in building and testing emulator for nutrition optimization project
+    - E1 through E8, :ref:`defined here <emulatorscenarios>`
+    - 2 draws, population size 100,000 per draw
+    - Same stratifications and outputs as run 3.1.1
+    - 
+  * - 3.1.3
     - Updated age-specific SQLNS effects on wasting, additional stratifications, updated initialization age start value (from 0.5 to 0). All changes included in `pull request #1114 <https://github.com/ihmeuw/vivarium_research/pull/1114>`_
     - 7, 8_incidence, 8_recovery
     - Draw numbers :code:`[432, 78, 394, 100, 254, 440]`, 400,000 population size

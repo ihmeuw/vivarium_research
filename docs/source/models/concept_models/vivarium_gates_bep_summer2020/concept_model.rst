@@ -33,9 +33,9 @@
 
 .. _2017_concept_model_vivarium_gates_bep_sum2020:
 
-======================================
-Vivarium Gates Balanced Energy Protein 
-======================================
+====================================================
+Vivarium Gates Balanced Energy Protein: Summer 2020 
+====================================================
 
 .. contents::
   :local:
