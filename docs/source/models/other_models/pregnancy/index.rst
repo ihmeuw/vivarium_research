@@ -192,22 +192,22 @@ We will model pregnancy as a characteristic of women of reproductive age in our 
   * - ASFR
     - Covariate
     - 13
-    - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
+    - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2021
     - Assume normal distribution of uncertainty truncated at 0 and 1. Regional-level estimates available. Age-shifting based on assumption of 40 week duration of pregnancy for live births.
   * - SBR
     - Covariate
     - 2267
-    - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2020
+    - get_covariate_estimates: decomp_step='step4' or 'iterative' for GBD 2019, 'step3' or 'iterative' for GBD 2021
     - No uncertainty in this estimate: use mean_value as point value for this parameter. Regional-level estimates not available. Age-shifting based on assumption of 40 week duration of preganncy for stillbirths.
   * - incidence_c995
     - Incidence rate of abortion and miscarriage cause
     - c995
-    - como; decomp_step='step5'
+    - como; decomp_step='step5' for GBD 2019, 'iterative' for GBD 2021
     - Abortion defined as elective or medically-indicated termination of pregnancy at any gestational age and miscarriage defined as spontaneous loss of pregnancy before 24 weeks gestation. Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome.
   * - incidence_c374
     - Incidence rate of ectopic pregnancy
     - c374
-    - como; decomp_step='step5'
+    - como; decomp_step='step5' for GBD 2019, 'iterative' for GBD 2021
     - Age shifting based on assumption of average pregnancy duration of abortion/miscarriage of 15 weeks, given an assumed uniform distribution between six and 24 weeks for this birth outcome.
 
 .. note::
