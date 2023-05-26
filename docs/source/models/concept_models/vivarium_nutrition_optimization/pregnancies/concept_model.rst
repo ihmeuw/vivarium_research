@@ -85,7 +85,8 @@ Documents that contain information specific to the overall model and the child s
 |                     |initialization                             |due to closed cohort |
 |                     |<other_models_pregnancy_demography>`       |                     |
 |                     +-------------------------------------------+                     |
-|                     |Pregnancy model                            |                     |
+|                     |:ref:`Pregnancy model (closed cohort)      |                     |
+|                     |<other_models_pregnancy_closed_cohort>`    |                     |
 +---------------------+-------------------------------------------+---------------------+
 |Risk exposure        |Hemoglobin/anemia                          |                     |
 |                     +-------------------------------------------+---------------------+
@@ -114,11 +115,11 @@ Documents that contain information specific to the overall model and the child s
 |                     |causes <other_causes>`                     |r192. Change from    |
 |                     |                                           |IV iron!             |
 +---------------------+-------------------------------------------+---------------------+
-|Interventions        |Antenatal supplementation, including       |Change from IV iron! |
+|Interventions        |:ref:`Antenatal supplementation, including |Change from IV iron! |
 |                     |IFA, MMS, and BEP and their effects        |New effects on       |
 |                     |on antenatal hemoglobin, LBWSG, and        |gestational age and  |
 |                     |birth outcomes                             |birth outcomes (no   |
-|                     |                                           |changes to hemoglobin|
+|                     |<maternal_supplementation_intervention>`   |changes to hemoglobin|
 |                     |                                           |effects). Also,      |
 |                     |                                           |coverage algorithm is|
 |                     |                                           |updated              |
@@ -189,10 +190,14 @@ Documents that contain information specific to the overall model and the child s
     - IFA coverage
     - MMS coverage
     - BEP coverage
-  * - 0: Baseline
+  * - Baseline
     - Baseline
     - Baseline
     - Baseline
+  * - 0: Zero coverage
+    - 0
+    - 0
+    - 0
   * - 1: IFA
     - 1
     - 0
