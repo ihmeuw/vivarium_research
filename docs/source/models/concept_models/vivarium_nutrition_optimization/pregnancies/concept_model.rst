@@ -312,13 +312,20 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
     - Output modifications
     - Stratificaction modifications
     - Note
-  * - 0
-    - Demography 
+  * - 0.0
+    - Standard demography 
     - Baseline
     - None
-    - Person-time only
+    - Person-time and deaths
     - Age only
-    - Note custom demography model that will need V&V
+    - 
+  * - 0.1
+    - Pregnancy demography 
+    - Baseline
+    - None
+    - Person-time and deaths
+    - Age only
+    - 
   * - 1
     - Pregnancy 
     - Baseline
@@ -338,7 +345,7 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
   * - Model
     - Description
     - V&V summary
-  * - 0: Demography
+  * - 0.0: Standard demography
     - 
     - 
 
