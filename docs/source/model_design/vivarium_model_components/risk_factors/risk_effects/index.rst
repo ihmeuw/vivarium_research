@@ -182,3 +182,77 @@ the appropriate one in our model.
 
 .. image:: mediation_example_bmi.svg
 
+
+Restrictions
+^^^^^^^^^^^^
+
+As with cause models, risk effects models may include restrictions, which answer
+the questions: Who does this apply to? For which population groups (e.g., age or sex group)
+is this risk effect not valid? 
+
+It is worth noting that although risk effect and risk exposure both are related to risk factors,
+restrictions for these two elements function differently. Risk exposure restrictions do
+not include outcome restrictions (i.e., YLL only or YLD only), however risk effect
+restrictions do. Due to the nature of the relationship between risk exposure and risk 
+effects, risk effects restrictions will always be within restrictions for risk exposure. 
+To illustrate, if a risk exposure restriction for a given risk factor is male only, then 
+the risk effects model will also be restricted to male only. 
+
+For example, GBD 2019 modeled low-birthweight and short gestation (LBWSG) relative
+risks with age and outcome restrictions. See the table below for details. 
+
+.. list-table:: Age, Sex, and Outcome Restrictions for LBWSG Relative Risks in GBD 2019
+  :widths: 15 15 20
+  :header-rows: 1
+
+  * - Restriction Type
+    - Value
+    - Notes
+  * - Male only
+    - False
+    -
+  * - Female only
+    - False
+    -
+  * - YLL only
+    - True
+    - Except for Neonatal preterm birth; see :ref:`note <note_on_preterm_birth_DALYs>` below
+  * - YLD only
+    - False
+    -
+  * - Age group start
+    - Early neonatal (0-7 days, age_group_id = 2)
+    -
+  * - Age group end
+    - Late neonatal (7-28 days, age_group_id = 3)
+    - Except for Neonatal preterm birth; see :ref:`note <note_on_preterm_birth_DALYs>` below
+
+.. _note_on_preterm_birth_DALYs:
+
+.. note::
+
+  GBD attributes 100% of the DALYs due to Neonatal Preterm Birth to the LBWSG
+  risk factor. In particular, the attribution includes YLDs as well as YLLs, and
+  the age restrictions for the LBWSG-attributable DALYs are the same as the age
+  restrictions for Neonatal Preterm Birth.
+
+  * **YLLs due to Neonatal preterm birth**, 100% attributable to LBWSG:
+
+    - Age group start = 2 (Early neonatal, 0-7 days)
+    - Age group end = 5 (1 to 4)
+
+  * **YLDs due to Neonatal preterm birth**, 100% attributable to LBWSG:
+
+    - Age group start = 2 (Early neonatal, 0-7 days)
+    - Age group end = 235 (95+)
+
+  Note that this attribution of DALYs is **not** based on the relative risks for
+  all-cause mortality, but instead is based on the logic that all preterm births
+  are due to short gestation by definition. Thus, if we include Neonatal Preterm
+  Birth in our models, the relative risks likely must be handled differently for
+  this cause.
+
+.. todo::
+
+    Follow up about assumptions that GBD uses to apply relative risk to YLLs and
+    YLDs.
