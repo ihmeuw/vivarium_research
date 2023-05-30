@@ -320,14 +320,14 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
     - Age only
     - 
   * - 0.1
-    - Pregnancy demography 
+    - Pregnancy demography (:ref:`docs here <other_models_pregnancy_demography>`)
     - Baseline
     - None
     - Person-time and deaths
     - Age only
     - 
   * - 1
-    - Pregnancy 
+    - Pregnancy (:ref:`docs here <other_models_pregnancy_closed_cohort>`)
     - Baseline
     - None
     - Person-time, birth outcomes
