@@ -85,7 +85,8 @@ Documents that contain information specific to the overall model and the child s
 |                     |initialization                             |due to closed cohort |
 |                     |<other_models_pregnancy_demography>`       |                     |
 |                     +-------------------------------------------+                     |
-|                     |Pregnancy model                            |                     |
+|                     |:ref:`Pregnancy model (closed cohort)      |                     |
+|                     |<other_models_pregnancy_closed_cohort>`    |                     |
 +---------------------+-------------------------------------------+---------------------+
 |Risk exposure        |Hemoglobin/anemia                          |                     |
 |                     +-------------------------------------------+---------------------+
@@ -109,12 +110,16 @@ Documents that contain information specific to the overall model and the child s
 |                     +-------------------------------------------+---------------------+
 |                     |:ref:`Maternal hemorrhage incidence        |                     |
 |                     |<2019_cause_maternal_hemorrhage_incidence>`|                     |
+|                     +-------------------------------------------+---------------------+
+|                     |:ref:`Background morbidity due to other    |Modeled causes: c366,|
+|                     |causes <other_causes>`                     |r192. Change from    |
+|                     |                                           |IV iron!             |
 +---------------------+-------------------------------------------+---------------------+
-|Interventions        |Antenatal supplementation, including       |Change from IV iron! |
+|Interventions        |:ref:`Antenatal supplementation, including |Change from IV iron! |
 |                     |IFA, MMS, and BEP and their effects        |New effects on       |
 |                     |on antenatal hemoglobin, LBWSG, and        |gestational age and  |
 |                     |birth outcomes                             |birth outcomes (no   |
-|                     |                                           |changes to hemoglobin|
+|                     |<maternal_supplementation_intervention>`   |changes to hemoglobin|
 |                     |                                           |effects). Also,      |
 |                     |                                           |coverage algorithm is|
 |                     |                                           |updated              |
@@ -138,6 +143,9 @@ Documents that contain information specific to the overall model and the child s
   * - Cohort type
     - Closed
     - Change from IV iron!
+  * - Sex
+    - Female only!
+    - 
   * - Age start (initialization)
     - 10
     -
@@ -182,10 +190,14 @@ Documents that contain information specific to the overall model and the child s
     - IFA coverage
     - MMS coverage
     - BEP coverage
-  * - 0: Baseline
+  * - Baseline
     - Baseline
     - Baseline
     - Baseline
+  * - 0: Zero coverage
+    - 0
+    - 0
+    - 0
   * - 1: IFA
     - 1
     - 0
@@ -232,9 +244,9 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
     - 
   * - IFA
     - Minimum
-    - 
-    - 
-    - 
+    - 0
+    - 0
+    - 0
   * - IFA 
     - Maximum
     - 
@@ -242,14 +254,14 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
     - 
   * - MMS
     - Baseline
-    - 
-    - 
-    - 
+    - 0
+    - 0
+    - 0
   * - MMS
     - Minimum
-    - 
-    - 
-    - 
+    - 0
+    - 0
+    - 0
   * - MMS 
     - Maximum
     - 
@@ -257,19 +269,23 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
     - 
   * - BEP
     - Baseline
-    - 
-    - 
-    - 
+    - 0
+    - 0
+    - 0
   * - BEP
     - Minimum
-    - 
-    - 
-    - 
+    - 0
+    - 0
+    - 0
   * - BEP 
     - Maximum
     - 
     - 
     - 
+
+.. todo::
+
+  Fill in coverage levels (need to seek 2021 estimates and adjust for ANC values)
 
 2.5 Outputs
 ------------
@@ -293,14 +309,28 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
     - Description
     - Scenarios
     - Specification modifications
+    - Output modifications
     - Stratificaction modifications
     - Note
-  * - 
-    - 
-    - 
-    - 
-    - 
-    - 
+  * - 0
+    - Demography 
+    - Baseline
+    - None
+    - Person-time only
+    - Age only
+    - Note custom demography model that will need V&V
+  * - 1
+    - Pregnancy 
+    - Baseline
+    - None
+    - Person-time, birth outcomes
+    - Age and pregnancy status
+    - Note closed cohort change from IV iron pregnancy model. Custom observer exit at the end of postpartum period? (Bonus ask)
+
+.. todo::
+
+  Detail additional logical model builds with engineers, with the following in mind: https://blog.crisp.se/2016/01/25/henrikkniberg/making-sense-of-mvp
+
 
 .. list-table:: Verification and validation tracking
   :header-rows: 1
@@ -308,7 +338,7 @@ Where 0 represents the minimum intervention coverage and 1 represents the maximu
   * - Model
     - Description
     - V&V summary
-  * - 
+  * - 0: Demography
     - 
     - 
 
