@@ -70,6 +70,8 @@ Documents that contain information specific to the overall model and the child s
 
 - Why is our hemoglobin distribution not exactly matching anemia impairment prevalence for GBD 2021? Following-up with Will G.
 
+- Has the health systems team updated their iron supplementation coverage estimates? Waiting to hear back from Nat H.
+
 **Notes/reminders:**
 
 - BMGF would like to assume that those who take BEP also take MMS. This does not change our health impact model at all, but will change our costing assumptions (add product price of MMS to that of BEP).
