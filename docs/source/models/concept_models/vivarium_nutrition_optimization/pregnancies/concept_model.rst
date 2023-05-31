@@ -66,7 +66,7 @@ Documents that contain information specific to the overall model and the child s
 
 - Should we include background mortality among pregnant individuals? If we do, we may want to model maternal death while pregnant as a birth outcome for ease of common random numbers in the child sim. We are currently including background mortality as of model 0.0 (but it should be easy to exclude at a future date).
 
-- For stillbirths that become livebirths due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birthweights than others. Ask Nick K.! GBD may be estimating these outcomes directly?
+- For stillbirths that become livebirths due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birthweights than others. Ask Nick K.! GBD may be estimating these outcomes directly? Current assumption is that they will have randomly sampled exposure. 
 
 - Why is our hemoglobin distribution not exactly matching anemia impairment prevalence for GBD 2021? Following-up with Will G.
 
