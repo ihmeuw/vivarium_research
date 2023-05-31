@@ -59,6 +59,21 @@ Documents that contain information specific to the overall model and the child s
 
   List modeling aims and objectives
 
+1.2 Outstanding research questions/notes
+-----------------------------------------
+
+**Questions:**
+
+- Should we include background mortality among pregnant individuals? If we do, we may want to model maternal death while pregnant as a birth outcome for ease of common random numbers in the child sim. We are currently including background mortality as of model 0.0 (but it should be easy to exclude at a future date).
+
+- For stillbirths that become livebirths due to intervention impact, what should their LWBSG exposure be? Hypothetically near-stillbirths should have lower birthweights than others. Ask Nick K.! GBD may be estimating these outcomes directly?
+
+- Why is our hemoglobin distribution not exactly matching anemia impairment prevalence for GBD 2021? Following-up with Will G.
+
+**Notes/reminders:**
+
+- BMGF would like to assume that those who take BEP also take MMS. This does not change our health impact model at all, but will change our costing assumptions (add product price of MMS to that of BEP).
+
 2.0 Model design
 ++++++++++++++++
 
