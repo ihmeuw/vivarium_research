@@ -183,6 +183,8 @@ Documents that contain information specific to the overall model and the child s
 
   Scenarios subject to change, but will follow similar structure
 
+  Note that while IFA must be included in the model for baseline calibration, it will *not* be included as a scale-up intervention to include in the optimization process. Therefore, we will not "zero" out IFA coverage in the "zero coverage" scenario and we will not scale-up IFA coverage to its maximum value independently. IFA coverage may only remain at its baseline coverage level *or* be reduced to zero when it is replaced with MMS or BEP.
+
 .. list-table:: Scenarios
   :header-rows: 1
 
@@ -190,96 +192,48 @@ Documents that contain information specific to the overall model and the child s
     - IFA coverage
     - MMS coverage
     - BEP coverage
-  * - Baseline
+  * - Baseline/zero coverage
     - Baseline
-    - Baseline
-    - Baseline
-  * - 0: Zero coverage
     - 0
     - 0
+  * - 1: MMS
     - 0
-  * - 1: IFA
-    - 1
+    - ANC1
     - 0
-    - 0
-  * - 2: MMS
-    - 0
-    - 1
-    - 0
-  * - 3: Universal BEP
+  * - 2: Universal BEP
     - 0
     - 0
-    - 1
-  * - 4: Targeted BEP/none
+    - ANC1
+  * - 3: Targeted BEP/none
+    - Baseline for adequate BMI pregnancies
     - 0
+    - ANC1 for low BMI pregnancies
+  * - 4: Targeted BEP/MMS
     - 0
-    - 1 for low BMI pregnancies
-  * - 5: Targeted BEP/IFA
-    - 1 for adequate BMI pregnancies
-    - 0
-    - 1 for low BMI pregnancies
-  * - 6: Targeted BEP/MMS
-    - 0
-    - 1 for adequate BMI pregnancies
-    - 1 for low BMI pregnancies
+    - ANC1 for adequate BMI pregnancies
+    - ANC1 for low BMI pregnancies
 
-Where 0 represents the minimum intervention coverage and 1 represents the maximum intervention coverage, as defined below:
+Where: 
 
-.. todo::
+- **0** represents the minimum intervention coverage (no coverage), 
 
-  Complete intervetion coverage table
+- **ANC1** represents the maximum intervention coverage equal to the proportion of pregnancies that attend at least one antenatal care visit which can be pulled with :code:`get_covariate_estimates(covariate_id=7, decomp_step='iterative')`
 
-.. list-table:: Intervention coverage
+- **Baseline** represents location-specific baseline IFA coverage, defined in the table below
+
+.. list-table:: Baseline IFA coverage
   :header-rows: 1
 
-  * - Intervention
-    - Coverage level
-    - Ethiopia
-    - Nigeria
-    - Pakistan
-  * - IFA
-    - Baseline
+  * - Location
+    - Value
+    - Note
+  * - Ethiopia
     - 
     - 
-    - 
-  * - IFA
-    - Minimum
-    - 0
-    - 0
-    - 0
-  * - IFA 
-    - Maximum
+  * - Nigeria
     - 
     - 
-    - 
-  * - MMS
-    - Baseline
-    - 0
-    - 0
-    - 0
-  * - MMS
-    - Minimum
-    - 0
-    - 0
-    - 0
-  * - MMS 
-    - Maximum
-    - 
-    - 
-    - 
-  * - BEP
-    - Baseline
-    - 0
-    - 0
-    - 0
-  * - BEP
-    - Minimum
-    - 0
-    - 0
-    - 0
-  * - BEP 
-    - Maximum
-    - 
+  * - Pakistan
     - 
     - 
 
