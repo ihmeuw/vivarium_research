@@ -2391,6 +2391,8 @@ in the home.
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
+  * - WIC participant ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
+  * - WIC family ID (arbitrary identifier which is the same for simulants in the same household **across time** but **different from other observers for the same household**)
   * - First name
   * - Middle initial
   * - Last name
@@ -2414,6 +2416,33 @@ Here is an example:
 
   In the final version of the observers, following the noise functions, please have all data as strings. Age must be rounded down to a whole number before applying noise.
 
+**Generating WIC IDs**
+
+To generate the WIC family ID for simulated households observed in WIC,
+sort them by when the household was first observed in WIC (it does not matter how ties are broken),
+then assign them consecutive integers.
+Zero-pad these integers to 9 digits before noising.
+
+.. note::
+  The `actual process <https://web.archive.org/web/20230601182852/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=family-id-number.html>`_ for generating WIC family IDs involves using the year in combination with
+  a consecutive integer.
+  Our approach is simpler, while still capturing that these
+  numbers are likely to be similar and easy to mistake for one another.
+  In fact, we will tend to overstate how much this is the case by not changing
+  the prefix every year.
+
+To generate the WIC participant ID for simulants observed in WIC,
+sort them by when they were first observed in WIC (it does not matter how ties are broken),
+then assign them consecutive integers.
+Zero-pad these integers to 11 digits before noising.
+
+.. note::
+  The `actual process <https://web.archive.org/web/20230601183736/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=client-id-number.html>`_ for generating WIC client IDs involves using the clinic number, local agency number, and year in combination with
+  a consecutive integer.
+  Our approach is simpler, while still capturing that these
+  numbers are likely to be similar and easy to mistake for one another.
+  In fact, we will tend to overstate how much this is the case by essentially having a single
+  clinic, local agency, and year (all with IDs of 0).
 
 **Who to Sample**
 
@@ -2436,7 +2465,7 @@ on the observer.
 To account for these interdependencies, please follow the below steps:
 
 #. Randomly select tracked mothers or guardians to enroll based on the coverage rate by race/ethnicity
-#. Enroll ALL infants of these tracked mothers or guardians (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
+#. Enroll ALL infants of these tracked mothers or guardians **who live in the same household as their tracked mother/guardian** (as infants are defined as less than 1 year old, it should be rare but possible to have multiple infants for the same tracked mother or guardian)
 #. Calculate the current coverage rate for infants (will be slightly higher than the coverage rate for tracked mothers/guardians)
 #. Enroll more infants randomly, among those eligible but not already enrolled, until the overall infant coverage is met
 
@@ -2450,7 +2479,7 @@ Eligibility for WIC is based on income and age/children in the house.
 To qualify you must be both:
 
 - A child under the age of 5 (0-4 years old)
-- OR a tracked mother OR guardian of a child under the age of 1
+- OR a tracked mother OR guardian of a child under the age of 1 **living in the same household as that child**
 
 And also:
 
@@ -2533,8 +2562,15 @@ See the final limitation below for more about this approximation.
 #. Some states use different income cutoffs, but the ones listed are used in the majority of cases and so are implemented here
 #. Year over year WIC inclusion is independent - this is likely an oversimplification and will lead to higher rates of churn than are found in real life
 #. The creation of race/ethnicity specific coverage by participate category is imperfect. We do not have granular data which includes this breakdown, so it is based on the overall coverage by race/ethnicity which is an assumption. Also, for infants this would lead to over 100% selection, so it is not changed (remains at 98.4% for most race/ethnicity groups)
-#. We use a household ID. There will be cases in which a tracked mother/guardian does not live in the same household as their infant, this might be confusing in the resulting data.
 #. Real WIC data includes dates of starting and ending eligibility. We assume that data is then rolled up over some time period, say a year, to include everyone eligible for that year. For our data, we approximate this by having everyone eligible at the first time point in the new year included in the dataset. This will exclude simulants who were eligible for some part of the prior year, but are not at the time of observation. Therefore, data sampled in Jan 2029 is the approximation of data from all of 2028.
+#. We use household as the proxy for WIC family ID, which causes two issues:
+     * Our use of household means that WIC family ID only stays the same over time for participants who either
+       do not move, or move as part of a household unit.
+       The other cases should be relatively rare.
+       In reality, it is not clear in what conditions WIC family ID remains constant over time.
+       For example, would the WIC family ID of an infant be the same before and after they moved to their
+       grandparents' house?
+     * Two families that participate in WIC and live in the same household, whether at the same time or at different times, will have the same family ID in our data.
 
 Taxes
 ^^^^^
