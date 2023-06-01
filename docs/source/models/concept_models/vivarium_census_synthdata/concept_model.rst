@@ -2391,7 +2391,7 @@ in the home.
 
   * - Unique simulant ID (for PRL tracking)
   * - Unique household ID consistent between observers (for PRL tracking)
-  * - WIC participant ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
+  * - WIC client ID (arbitrary identifier which is the same for the same simulant **across time** but **different from other observers for the same simulant**)
   * - WIC family ID (arbitrary identifier which is the same for simulants in the same household **across time** but **different from other observers for the same household**)
   * - First name
   * - Middle initial
@@ -2424,20 +2424,20 @@ then assign them consecutive integers.
 Zero-pad these integers to 9 digits before noising.
 
 .. note::
-  The `actual process <https://web.archive.org/web/20230601182852/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=family-id-number.html>`_ for generating WIC family IDs involves using the year in combination with
+  The `actual process for generating WIC family IDs <https://web.archive.org/web/20230601182852/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=family-id-number.html>`_  involves using the year in combination with
   a consecutive integer.
   Our approach is simpler, while still capturing that these
   numbers are likely to be similar and easy to mistake for one another.
   In fact, we will tend to overstate how much this is the case by not changing
   the prefix every year.
 
-To generate the WIC participant ID for simulants observed in WIC,
+To generate the WIC client ID for simulants observed in WIC,
 sort them by when they were first observed in WIC (it does not matter how ties are broken),
 then assign them consecutive integers.
 Zero-pad these integers to 11 digits before noising.
 
 .. note::
-  The `actual process <https://web.archive.org/web/20230601183736/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=client-id-number.html>`_ for generating WIC client IDs involves using the clinic number, local agency number, and year in combination with
+  The `actual process for generating WIC client IDs <https://web.archive.org/web/20230601183736/https://www.wichands.com/Content/Docs/Help/ClinicUserManual/Module1/index.html?page=client-id-number.html>`_ involves using the clinic number, local agency number, and year in combination with
   a consecutive integer.
   Our approach is simpler, while still capturing that these
   numbers are likely to be similar and easy to mistake for one another.
